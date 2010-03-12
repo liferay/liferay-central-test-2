@@ -88,7 +88,9 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 			List<Group> userGroups = new ArrayList<Group>();
 			//List<Group> userGroups = UserUtil.getGroups(userId);
 
-			if (GroupLocalServiceUtil.hasUserGroup(userId, groupId)) {
+			if (group.isCommunity() &&
+				GroupLocalServiceUtil.hasUserGroup(userId, groupId)) {
+
 				userGroups.add(group);
 			}
 
@@ -141,7 +143,9 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 				roles.addAll(userGroupGroupRoles);
 
 				if ((group != null) &&
-					(group.isCommunity() || group.isOrganization())) {
+					((group.isCommunity() && userGroups.contains(group)) ||
+					 (group.isOrganization() &&
+						userOrgGroups.contains(group)))) {
 
 					addRequiredMemberRole(group, roles);
 					addTeamRoles(userId, group, roles);
