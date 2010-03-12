@@ -843,6 +843,8 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			serviceContext.setAddGuestPermissions(true);
 			serviceContext.setAssetCategoryIds(assetCategoryIds);
 			serviceContext.setAssetTagNames(assetTagNames);
+			serviceContext.setCreateDate(fileShortcut.getCreateDate());
+			serviceContext.setModifiedDate(fileShortcut.getModifiedDate());
 			serviceContext.setScopeGroupId(context.getGroupId());
 
 			if (context.getDataStrategy().equals(

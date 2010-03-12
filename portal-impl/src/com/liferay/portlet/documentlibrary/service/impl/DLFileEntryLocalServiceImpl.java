@@ -161,8 +161,8 @@ public class DLFileEntryLocalServiceImpl
 		fileEntry.setUserName(user.getFullName());
 		fileEntry.setVersionUserId(user.getUserId());
 		fileEntry.setVersionUserName(user.getFullName());
-		fileEntry.setCreateDate(now);
-		fileEntry.setModifiedDate(now);
+		fileEntry.setCreateDate(serviceContext.getCreateDate(now));
+		fileEntry.setModifiedDate(serviceContext.getModifiedDate(now));
 		fileEntry.setFolderId(folderId);
 		fileEntry.setName(name);
 		fileEntry.setTitle(title);
@@ -838,7 +838,8 @@ public class DLFileEntryLocalServiceImpl
 				newFileVersion.setStatus(fileVersion.getStatus());
 				newFileVersion.setStatusByUserId(userId);
 				newFileVersion.setStatusByUserName(user.getFullName());
-				newFileVersion.setStatusDate(now);
+				newFileVersion.setStatusDate(
+					serviceContext.getModifiedDate(now));
 
 				dlFileVersionPersistence.update(newFileVersion, false);
 
@@ -987,7 +988,7 @@ public class DLFileEntryLocalServiceImpl
 
 		fileEntry.setVersionUserId(user.getUserId());
 		fileEntry.setVersionUserName(user.getFullName());
-		fileEntry.setModifiedDate(now);
+		fileEntry.setModifiedDate(serviceContext.getModifiedDate(now));
 		fileEntry.setVersion(version);
 		fileEntry.setSize((int)size);
 		fileEntry.setExpandoBridgeAttributes(serviceContext);
