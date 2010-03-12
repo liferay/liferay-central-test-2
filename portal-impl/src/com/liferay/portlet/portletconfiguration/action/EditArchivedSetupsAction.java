@@ -19,7 +19,6 @@ import com.liferay.portal.PortletItemNameException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.PortletPreferencesServiceUtil;
@@ -134,7 +133,8 @@ public class EditArchivedSetupsAction extends EditConfigurationAction {
 	private void restoreSetup(ActionRequest actionRequest, Portlet portlet)
 		throws Exception {
 
-		Layout layout = (Layout)actionRequest.getAttribute(WebKeys.LAYOUT);
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		String name = ParamUtil.getString(actionRequest, "name");
 
@@ -143,7 +143,8 @@ public class EditArchivedSetupsAction extends EditConfigurationAction {
 				actionRequest, portlet.getPortletId());
 
 		PortletPreferencesServiceUtil.restoreArchivedPreferences(
-			layout.getGroupId(), name, portlet.getRootPortletId(), setup);
+			themeDisplay.getScopeGroupId(), name, portlet.getRootPortletId(),
+			setup);
 	}
 
 	protected void updateSetup(ActionRequest actionRequest, Portlet portlet)
@@ -159,7 +160,7 @@ public class EditArchivedSetupsAction extends EditConfigurationAction {
 				actionRequest, portlet.getPortletId());
 
 		PortletPreferencesServiceUtil.updateArchivePreferences(
-			themeDisplay.getUserId(), themeDisplay.getLayout().getGroupId(),
+			themeDisplay.getUserId(), themeDisplay.getScopeGroupId(),
 			name, portlet.getRootPortletId(), setup);
 	}
 
