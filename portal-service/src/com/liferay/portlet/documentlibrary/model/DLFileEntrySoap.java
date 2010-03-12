@@ -240,11 +240,11 @@ public class DLFileEntrySoap implements Serializable {
 		_pendingVersion = pendingVersion;
 	}
 
-	public int getSize() {
+	public long getSize() {
 		return _size;
 	}
 
-	public void setSize(int size) {
+	public void setSize(long size) {
 		_size = size;
 	}
 
@@ -280,7 +280,7 @@ public class DLFileEntrySoap implements Serializable {
 	private String _description;
 	private String _version;
 	private String _pendingVersion;
-	private int _size;
+	private long _size;
 	private int _readCount;
 	private String _extraSettings;
 }

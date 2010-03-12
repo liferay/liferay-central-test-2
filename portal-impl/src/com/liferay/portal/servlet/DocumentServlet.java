@@ -209,14 +209,14 @@ public class DocumentServlet extends HttpServlet {
 
 		if (!converted) {
 			if (DLUtil.compareVersions(version, fileEntry.getVersion()) >= 0) {
-				contentLength = fileEntry.getSize();
+				contentLength = (int)fileEntry.getSize();
 			}
 			else {
 				DLFileVersion fileVersion =
 					DLFileVersionLocalServiceUtil.getFileVersion(
 						groupId, folderId, name, version);
 
-				contentLength = fileVersion.getSize();
+				contentLength = (int)fileVersion.getSize();
 			}
 		}
 

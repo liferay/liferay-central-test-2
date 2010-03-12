@@ -188,11 +188,11 @@ public class DLFileVersionSoap implements Serializable {
 		_version = version;
 	}
 
-	public int getSize() {
+	public long getSize() {
 		return _size;
 	}
 
-	public void setSize(int size) {
+	public void setSize(long size) {
 		_size = size;
 	}
 
@@ -238,7 +238,7 @@ public class DLFileVersionSoap implements Serializable {
 	private String _name;
 	private String _description;
 	private String _version;
-	private int _size;
+	private long _size;
 	private int _status;
 	private long _statusByUserId;
 	private String _statusByUserName;

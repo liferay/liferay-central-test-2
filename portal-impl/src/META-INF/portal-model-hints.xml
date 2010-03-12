@@ -1012,7 +1012,7 @@
 		</field>
 		<field name="version" type="String" />
 		<field name="pendingVersion" type="String" />
-		<field name="size" type="int" />
+		<field name="size" type="long" />
 		<field name="readCount" type="int" />
 		<field name="extraSettings" type="String">
 			<hint-collection name="CLOB" />
@@ -1063,7 +1063,7 @@
 			<hint-collection name="TEXTAREA" />
 		</field>
 		<field name="version" type="String" />
-		<field name="size" type="int" />
+		<field name="size" type="long" />
 		<field name="status" type="int" />
 		<field name="statusByUserId" type="long" />
 		<field name="statusByUserName" type="String" />

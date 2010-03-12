@@ -175,7 +175,7 @@ public class DLFileEntryLocalServiceImpl
 			fileEntry.setVersion(StringPool.BLANK);
 		}
 
-		fileEntry.setSize((int)size);
+		fileEntry.setSize(size);
 		fileEntry.setReadCount(DLFileEntryConstants.DEFAULT_READ_COUNT);
 		fileEntry.setExtraSettings(extraSettings);
 		fileEntry.setExpandoBridgeAttributes(serviceContext);
@@ -1014,7 +1014,7 @@ public class DLFileEntryLocalServiceImpl
 			fileEntry.setPendingVersion(StringPool.BLANK);
 		}
 
-		fileEntry.setSize((int)size);
+		fileEntry.setSize(size);
 		fileEntry.setExpandoBridgeAttributes(serviceContext);
 
 		dlFileEntryPersistence.update(fileEntry, false);

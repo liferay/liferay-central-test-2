@@ -45,7 +45,7 @@ public class HeadMethodImpl implements Method {
 			}
 			else {
 				if (!resource.isCollection()) {
-					response.setContentLength(resource.getSize());
+					response.setContentLength((int)resource.getSize());
 				}
 
 				status = HttpServletResponse.SC_OK;

@@ -92,9 +92,9 @@ public interface DLFileVersionModel extends BaseModel<DLFileVersion> {
 
 	public void setVersion(String version);
 
-	public int getSize();
+	public long getSize();
 
-	public void setSize(int size);
+	public void setSize(long size);
 
 	public int getStatus();
 

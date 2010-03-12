@@ -71,13 +71,13 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion> {
 			{ "name", new Integer(Types.VARCHAR) },
 			{ "description", new Integer(Types.VARCHAR) },
 			{ "version", new Integer(Types.VARCHAR) },
-			{ "size_", new Integer(Types.INTEGER) },
+			{ "size_", new Integer(Types.BIGINT) },
 			{ "status", new Integer(Types.INTEGER) },
 			{ "statusByUserId", new Integer(Types.BIGINT) },
 			{ "statusByUserName", new Integer(Types.VARCHAR) },
 			{ "statusDate", new Integer(Types.TIMESTAMP) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table DLFileVersion (fileVersionId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,folderId LONG,name VARCHAR(255) null,description STRING null,version VARCHAR(75) null,size_ INTEGER,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table DLFileVersion (fileVersionId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,folderId LONG,name VARCHAR(255) null,description STRING null,version VARCHAR(75) null,size_ LONG,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table DLFileVersion";
 	public static final String ORDER_BY_JPQL = " ORDER BY dlFileVersion.folderId DESC, dlFileVersion.name DESC, dlFileVersion.createDate DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY DLFileVersion.folderId DESC, DLFileVersion.name DESC, DLFileVersion.createDate DESC";
@@ -265,11 +265,11 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion> {
 		return GetterUtil.getString(_originalVersion);
 	}
 
-	public int getSize() {
+	public long getSize() {
 		return _size;
 	}
 
-	public void setSize(int size) {
+	public void setSize(long size) {
 		_size = size;
 	}
 
@@ -578,7 +578,7 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion> {
 	private String _description;
 	private String _version;
 	private String _originalVersion;
-	private int _size;
+	private long _size;
 	private int _status;
 	private long _statusByUserId;
 	private String _statusByUserUuid;

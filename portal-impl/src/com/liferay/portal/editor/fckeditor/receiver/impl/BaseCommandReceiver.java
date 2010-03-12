@@ -281,7 +281,7 @@ public abstract class BaseCommandReceiver implements CommandReceiver {
 		return getSize(0);
 	}
 
-	protected String getSize(int size) {
+	protected String getSize(long size) {
 		return String.valueOf(Math.ceil(size / 1000));
 	}
 

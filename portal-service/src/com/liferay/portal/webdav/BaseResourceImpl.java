@@ -63,7 +63,7 @@ public class BaseResourceImpl implements Resource {
 
 	public BaseResourceImpl(
 		String parentPath, String name, String displayName, Date createDate,
-		Date modifiedDate, int size) {
+		Date modifiedDate, long size) {
 
 		_href = parentPath;
 
@@ -118,7 +118,7 @@ public class BaseResourceImpl implements Resource {
 		return _modifiedDateFormatter.format(_modifiedDate);
 	}
 
-	public int getSize() {
+	public long getSize() {
 		return _size;
 	}
 
@@ -169,7 +169,7 @@ public class BaseResourceImpl implements Resource {
 	private String _displayName;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private int _size;
+	private long _size;
 	private Object _model;
 	private String _className;
 	private long _primaryKey = -1;

@@ -36,7 +36,7 @@ public interface Resource {
 
  	public String getModifiedDate();
 
- 	public int getSize();
+ 	public long getSize();
 
 	public Object getModel();
 

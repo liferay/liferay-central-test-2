@@ -76,11 +76,11 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 			{ "description", new Integer(Types.VARCHAR) },
 			{ "version", new Integer(Types.VARCHAR) },
 			{ "pendingVersion", new Integer(Types.VARCHAR) },
-			{ "size_", new Integer(Types.INTEGER) },
+			{ "size_", new Integer(Types.BIGINT) },
 			{ "readCount", new Integer(Types.INTEGER) },
 			{ "extraSettings", new Integer(Types.CLOB) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table DLFileEntry (uuid_ VARCHAR(75) null,fileEntryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,versionUserId LONG,versionUserName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,folderId LONG,name VARCHAR(255) null,title VARCHAR(255) null,description STRING null,version VARCHAR(75) null,pendingVersion VARCHAR(75) null,size_ INTEGER,readCount INTEGER,extraSettings TEXT null)";
+	public static final String TABLE_SQL_CREATE = "create table DLFileEntry (uuid_ VARCHAR(75) null,fileEntryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,versionUserId LONG,versionUserName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,folderId LONG,name VARCHAR(255) null,title VARCHAR(255) null,description STRING null,version VARCHAR(75) null,pendingVersion VARCHAR(75) null,size_ LONG,readCount INTEGER,extraSettings TEXT null)";
 	public static final String TABLE_SQL_DROP = "drop table DLFileEntry";
 	public static final String ORDER_BY_JPQL = " ORDER BY dlFileEntry.folderId ASC, dlFileEntry.name ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY DLFileEntry.folderId ASC, DLFileEntry.name ASC";
@@ -337,11 +337,11 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 		_pendingVersion = pendingVersion;
 	}
 
-	public int getSize() {
+	public long getSize() {
 		return _size;
 	}
 
-	public void setSize(int size) {
+	public void setSize(long size) {
 		_size = size;
 	}
 
@@ -652,7 +652,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 	private String _description;
 	private String _version;
 	private String _pendingVersion;
-	private int _size;
+	private long _size;
 	private int _readCount;
 	private String _extraSettings;
 	private transient ExpandoBridge _expandoBridge;

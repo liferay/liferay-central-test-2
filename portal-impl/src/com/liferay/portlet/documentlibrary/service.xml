@@ -31,7 +31,7 @@
 		<column name="description" type="String" />
 		<column name="version" type="String" />
 		<column name="pendingVersion" type="String" />
-		<column name="size" type="int" />
+		<column name="size" type="long" />
 		<column name="readCount" type="int" />
 		<column name="extraSettings" type="String" />
 
@@ -221,7 +221,7 @@
 		<column name="name" type="String" />
 		<column name="description" type="String" />
 		<column name="version" type="String" />
-		<column name="size" type="int" />
+		<column name="size" type="long" />
 		<column name="status" type="int" />
 		<column name="statusByUserId" type="long" />
 		<column name="statusByUserName" type="String" />

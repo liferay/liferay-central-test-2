@@ -375,7 +375,7 @@ create table DLFileEntry (
 	description STRING null,
 	version VARCHAR(75) null,
 	pendingVersion VARCHAR(75) null,
-	size_ INTEGER,
+	size_ LONG,
 	readCount INTEGER,
 	extraSettings TEXT null
 );
@@ -419,7 +419,7 @@ create table DLFileVersion (
 	name VARCHAR(255) null,
 	description STRING null,
 	version VARCHAR(75) null,
-	size_ INTEGER,
+	size_ LONG,
 	status INTEGER,
 	statusByUserId LONG,
 	statusByUserName VARCHAR(75) null,

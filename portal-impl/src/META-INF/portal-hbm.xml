@@ -1137,7 +1137,7 @@
 		<property name="description" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="version" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="pendingVersion" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="size" column="size_" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="size" column="size_" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="readCount" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="extraSettings" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
@@ -1187,7 +1187,7 @@
 		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="description" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="version" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="size" column="size_" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="size" column="size_" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="status" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="statusByUserId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="statusByUserName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
