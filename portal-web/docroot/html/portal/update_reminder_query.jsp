@@ -51,7 +51,7 @@
 
 		<c:if test="<%= PropsValues.USERS_REMINDER_QUERIES_CUSTOM_QUESTION_ENABLED %>">
 			<div class="aui-helper-hidden" id="customQuestionContainer">
-				<aui:input model="<%= User.class %>" bean="<%= user %>" label="" name="reminderQueryQuestion" fieldParam="reminderQueryCustomQuestion" />
+				<aui:input bean="<%= user %>" label="" model="<%= User.class %>" name="reminderQueryQuestion" fieldParam="reminderQueryCustomQuestion" />
 			</div>
 		</c:if>
 
