@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
@@ -10,64 +10,98 @@
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
- *
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
  */
 
 package com.liferay.portal.kernel.workflow.comparator;
 
+import com.liferay.portal.kernel.util.OrderByComparator;
+
 /**
- * <a href="WorkflowComparatorFactoryUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="WorkflowComparatorFactoryUtil.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author Michael C. Han
  */
 public class WorkflowComparatorFactoryUtil {
 
-	public static WorkflowDefinitionComparatorFactory getWorkflowDefinitionComparatorFactory() {
-		return _workflowDefinitionComparatorFactory;
+	public static OrderByComparator getDefinitionNameComparator(
+		boolean ascending) {
+
+		return getWorkflowComparatorFactory().getDefinitionNameComparator(
+			ascending);
 	}
 
-	public static WorkflowInstanceComparatorFactory getWorkflowInstanceComparatorFactory() {
-		return _workflowInstanceComparatorFactory;
+	public static OrderByComparator getInstanceEndDateComparator(
+		boolean ascending) {
+
+		return getWorkflowComparatorFactory().getInstanceEndDateComparator(
+			ascending);
 	}
 
-	public static WorkflowLogComparatorFactory getWorkflowLogComparatorFactory() {
-		return _workflowLogComparatorFactory;
+	public static OrderByComparator getInstanceStartDateComparator(
+		boolean ascending) {
+
+		return getWorkflowComparatorFactory().getInstanceStartDateComparator(
+			ascending);
 	}
 
-	public static WorkflowTaskComparatorFactory getWorkflowTaskComparatorFactory() {
-		return _workflowTaskComparatorFactory;
+	public static OrderByComparator getInstanceStateComparator(
+		boolean ascending) {
+
+		return getWorkflowComparatorFactory().getInstanceStateComparator(
+			ascending);
 	}
 
-	public void setWorkflowDefinitionComparatorFactory(
-		WorkflowDefinitionComparatorFactory workflowDefinitionComparatorFactory) {
-		_workflowDefinitionComparatorFactory = workflowDefinitionComparatorFactory;
+	public static OrderByComparator getLogCreateDateComparator(
+		boolean ascending) {
+
+		return getWorkflowComparatorFactory().getLogCreateDateComparator(
+			ascending);
 	}
 
-	public void setWorkflowInstanceComparatorFactory(
-		WorkflowInstanceComparatorFactory workflowInstanceComparatorFactory) {
-		_workflowInstanceComparatorFactory = workflowInstanceComparatorFactory;
+	public static OrderByComparator getLogUserIdComparator(boolean ascending) {
+		return getWorkflowComparatorFactory().getLogUserIdComparator(
+			ascending);
 	}
 
-	public void setWorkflowLogComparatorFactory(
-		WorkflowLogComparatorFactory workflowLogComparatorFactory) {
-		_workflowLogComparatorFactory = workflowLogComparatorFactory;
+	public static OrderByComparator getTaskCompletionDateComparator(
+		boolean ascending) {
+
+		return getWorkflowComparatorFactory().getTaskCompletionDateComparator(
+			ascending);
 	}
 
-	public void setWorkflowTaskComparatorFactory(
-		WorkflowTaskComparatorFactory workflowTaskComparatorFactory) {
-		_workflowTaskComparatorFactory = workflowTaskComparatorFactory;
+	public static OrderByComparator getTaskCreateDateComparator(
+		boolean ascending) {
+
+		return getWorkflowComparatorFactory().getTaskCreateDateComparator(
+			ascending);
 	}
 
-	private static WorkflowLogComparatorFactory _workflowLogComparatorFactory;
-	private static WorkflowDefinitionComparatorFactory _workflowDefinitionComparatorFactory;
-	private static WorkflowInstanceComparatorFactory _workflowInstanceComparatorFactory;
-	private static WorkflowTaskComparatorFactory _workflowTaskComparatorFactory;
+	public static OrderByComparator getTaskDueDateComparator(boolean ascending) {
+		return getWorkflowComparatorFactory().getTaskDueDateComparator(
+			ascending);
+	}
+
+	public static OrderByComparator getTaskNameComparator(boolean ascending) {
+		return getWorkflowComparatorFactory().getTaskNameComparator(ascending);
+	}
+
+	public static OrderByComparator getTaskUserIdComparator(boolean ascending) {
+		return getWorkflowComparatorFactory().getTaskUserIdComparator(
+			ascending);
+	}
+
+	public static WorkflowComparatorFactory getWorkflowComparatorFactory() {
+		return _workflowComparatorFactory;
+	}
+
+	public void setWorkflowComparatorFactory(
+		WorkflowComparatorFactory workflowComparatorFactory) {
+
+		_workflowComparatorFactory = workflowComparatorFactory;
+	}
+
+	private static WorkflowComparatorFactory _workflowComparatorFactory;
+
 }

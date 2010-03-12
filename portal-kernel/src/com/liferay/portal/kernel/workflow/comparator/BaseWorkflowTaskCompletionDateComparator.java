@@ -20,8 +20,8 @@ import com.liferay.portal.kernel.workflow.WorkflowTask;
 import java.util.Date;
 
 /**
- * <a href="BaseWorkflowTaskCompletionDateComparator.java.html"><b><i>View Source
- * </i></b></a>
+ * <a href="BaseWorkflowTaskCompletionDateComparator.java.html"><b><i>View
+ * Source</i></b></a>
  *
  * @author Shuyang Zhou
  */

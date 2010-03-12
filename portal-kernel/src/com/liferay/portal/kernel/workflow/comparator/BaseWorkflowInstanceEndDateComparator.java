@@ -20,8 +20,8 @@ import com.liferay.portal.kernel.workflow.WorkflowInstance;
 import java.util.Date;
 
 /**
- * <a href="BaseWorkflowInstanceEndDateComparator.java.html"><b><i>View Source</i>
- * </b></a>
+ * <a href="BaseWorkflowInstanceEndDateComparator.java.html"><b><i>View Source
+ * </i></b></a>
  *
  * @author Shuyang Zhou
  */
