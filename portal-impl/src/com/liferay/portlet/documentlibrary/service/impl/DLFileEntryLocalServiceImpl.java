@@ -945,10 +945,6 @@ public class DLFileEntryLocalServiceImpl
 			fileEntry, majorVersion, serviceContext.getStatus());
 
 		if (is == null) {
-			fileEntry.setVersion(version);
-
-			dlFileEntryPersistence.update(fileEntry, false);
-
 			int fetchFailures = 0;
 
 			while (is == null) {
@@ -975,6 +971,21 @@ public class DLFileEntryLocalServiceImpl
 					}
 				}
 			}
+
+			if (serviceContext.getStatus() != StatusConstants.DRAFT) {
+				if (Validator.isNotNull(fileEntry.getPendingVersion())) {
+					updateFileVersion(
+						user, fileEntry, serviceContext.getModifiedDate(now),
+						version, versionDescription,
+						serviceContext.getStatus());
+
+					fileEntry.setPendingVersion(StringPool.BLANK);
+				}
+
+				fileEntry.setVersion(version);
+			}
+
+			dlFileEntryPersistence.update(fileEntry, false);
 
 			dlLocalService.updateFile(
 				user.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
@@ -1033,14 +1044,6 @@ public class DLFileEntryLocalServiceImpl
 		}
 
 		// File
-
-		try {
-			dlService.deleteFile(
-				user.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
-				fileEntry.getRepositoryId(), name, version);
-		}
-		catch (NoSuchFileException nsfe) {
-		}
 
 		dlLocalService.updateFile(
 			user.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
@@ -1292,6 +1295,15 @@ public class DLFileEntryLocalServiceImpl
 		fileVersion.setStatusDate(modifiedDate);
 
 		dlFileVersionPersistence.update(fileVersion, false);
+
+		try {
+			dlService.deleteFile(
+				user.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
+				fileEntry.getRepositoryId(), fileEntry.getName(),
+				fileEntry.getPendingVersion());
+		}
+		catch (NoSuchFileException nsfe) {
+		}
 	}
 
 	protected void validate(
