@@ -14,21 +14,10 @@
 
 package com.liferay.portal.upgrade;
 
+import com.liferay.portal.convert.ConvertPermissionAlgorithm;
+import com.liferay.portal.convert.ConvertProcess;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.util.ReleaseInfo;
-import com.liferay.portal.upgrade.v5_2_7_to_6_0_0.UpgradeSchema;
-import com.liferay.portal.upgrade.v6_0_0.UpgradeAsset;
-import com.liferay.portal.upgrade.v6_0_0.UpgradeAssetPublisher;
-import com.liferay.portal.upgrade.v6_0_0.UpgradeBlogs;
-import com.liferay.portal.upgrade.v6_0_0.UpgradeDocumentLibrary;
-import com.liferay.portal.upgrade.v6_0_0.UpgradeExpando;
-import com.liferay.portal.upgrade.v6_0_0.UpgradeJournal;
-import com.liferay.portal.upgrade.v6_0_0.UpgradePolls;
-import com.liferay.portal.upgrade.v6_0_0.UpgradePortletId;
-import com.liferay.portal.upgrade.v6_0_0.UpgradeResourceAction;
-import com.liferay.portal.upgrade.v6_0_0.UpgradeShopping;
-import com.liferay.portal.convert.ConvertProcess;
-import com.liferay.portal.convert.ConvertPermissionAlgorithm;
 
 /**
  * <a href="UpgradeProcess_ConvertPermissionAlgorithm.java.html"><b><i>View
