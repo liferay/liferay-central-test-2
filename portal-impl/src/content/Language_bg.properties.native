@@ -7,7 +7,7 @@ lang.line.begin=left
 lang.line.end=right
 
 ##
-## Portlet titles
+## Portlet descriptions and titles
 ##
 
 javax.portlet.title.100=Покана
@@ -1571,8 +1571,7 @@ get-quote=Вземи цитат
 get-the-api-key-and-canvas-page-url-from-facebook=Вземи API ключ и URL на страница от Facebook.
 get=Вземи
 gifts=Подаръци
-give-x-permission-to-community-members=Give {0} permission to Community Members
-give-x-permission-to-guest-members=Give {0} permission to Guest Members
+give-x-permission-to-users-with-the-x-role=Give {0} permission to users with the {1} role. (Automatic Copy)
 global-tags-are-injected-to-all-pages-that-you-visit=Вкарани са глобални маркери във всички страници, които сте посетили. Те се използват за персонализиране на съдържание, така че маркираното съдържание, което ви интересесува да бъде извлечено автоматично.
 go-to-paypal-and-set-up-ipn-to-post-to-x=Отидете в PayPal и настройте IPN, за да пратите на {0}.
 go-to-the-latest-version=Отиване да последната версия.
@@ -3956,6 +3955,7 @@ x-needs-to-approve-you-as-her-friend={0} трябва да ви одобри з�
 x-needs-to-approve-you-as-his-friend={0} трябва да ви одобри за негов приятел.
 x-of-the-emails-in-this-folder-have-been-downloaded={0}% от писмата в тази папка са свалени. Приключването на операцията може да отнеме известно време.
 x-people-are-planning-to-attend-this-meetup=<strong>{0}</strong> хора планират да участват в тази среща.
+x-role={0} Role (Automatic Copy)
 x-search-provider={0} Search Provider (Automatic Copy)
 x-search={0} Search (Automatic Copy)
 x-users-were-successfully-notified={0} потребители са успешно уведомени.

@@ -7,7 +7,7 @@ lang.line.begin=left
 lang.line.end=right
 
 ##
-## Portlet titles
+## Portlet descriptions and titles
 ##
 
 javax.portlet.title.100=Kutse
@@ -1646,8 +1646,7 @@ get-quote=Hangi tsitaat
 get-the-api-key-and-canvas-page-url-from-facebook=Get the API key and canvas page URL from Facebook.
 get=Hangi
 gifts=Kingitused
-give-x-permission-to-community-members=Give {0} permission to Community Members (Automatic Copy)
-give-x-permission-to-guest-members=Give {0} permission to Guest Members (Automatic Copy)
+give-x-permission-to-users-with-the-x-role=Give {0} permission to users with the {1} role. (Automatic Copy)
 global-tags-are-injected-to-all-pages-that-you-visit=Kõik lehed, mida külastad, sisaldavad globaalseid silte. Neid kasutatakse sisu personaliseerimiseks, tuues automaatselt sinuni sildistatud sisu, millest huvitatud oled. 
 global=Globaalne
 go-to-category=Mine kategooria juurde
@@ -4180,6 +4179,7 @@ x-needs-to-approve-you-as-her-friend={0} peab sind oma sõbraks kinnitama.
 x-needs-to-approve-you-as-his-friend={0} peab sind oma sõbraks kinnitama.
 x-of-the-emails-in-this-folder-have-been-downloaded={0}% selle kausta e-kirjadest on alla laetud. Allalaadimise lõpuni võib veel aega minna.
 x-people-are-planning-to-attend-this-meetup=<b>{0}</b> inimest plaanib sellest kohtumisest osa võtta. 
+x-role={0} Role (Automatic Copy)
 x-search-provider={0} Search Provider (Automatic Copy)
 x-search={0} Search (Automatic Copy)
 x-users-were-successfully-notified={0} kasutaja teavitamine oli edukas. 

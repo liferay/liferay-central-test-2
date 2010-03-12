@@ -7,7 +7,7 @@ lang.line.begin=left
 lang.line.end=right
 
 ##
-## Portlet titles
+## Portlet descriptions and titles
 ##
 
 javax.portlet.title.100=Pozvánka
@@ -1729,8 +1729,7 @@ get-quote=Získej citát
 get-the-api-key-and-canvas-page-url-from-facebook=Získat klíč k API a URL stránky z Facebooku.
 get=Získat
 gifts=Dárky
-give-x-permission-to-community-members=Přidělit {0} právo členům komunity
-give-x-permission-to-guest-members=Přidělit {0} právo hostům
+give-x-permission-to-users-with-the-x-role=Give {0} permission to users with the {1} role. (Automatic Copy)
 global-tags-are-injected-to-all-pages-that-you-visit=Globální štítky jsou přiřazovány všem stránkám, které navštívíte. Jsou používány pro přizpůsobování obsahu tak, že oštítkovaný obsah, o který se zajímáte, je vám automaticky předkládán.
 global=Globální
 go-to-category=Přejít do kategorie
@@ -4379,6 +4378,7 @@ x-needs-to-approve-you-as-her-friend=Uživatelka {0} vás musí potvrdit jako sv
 x-needs-to-approve-you-as-his-friend=Uživatel {0} vás musí potvrdit jako svého přítele.
 x-of-the-emails-in-this-folder-have-been-downloaded=Z emailů v této složce bylo již staženo {0}%. Dokončení bude trvat ještě nějaký čas.
 x-people-are-planning-to-attend-this-meetup=Tohoto setkání se plánuje zúčastnit následující počet účastníků:  <strong>{0}</strong>.
+x-role={0} Role (Automatic Copy)
 x-search-provider={0} Search Provider (Automatic Copy)
 x-search={0} Search (Automatic Copy)
 x-users-were-successfully-notified={0} uživatelů bylo úspěšně notifikováno.

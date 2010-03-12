@@ -7,7 +7,7 @@ lang.line.begin=esquerra
 lang.line.end=dreta
 
 ##
-## Portlet titles
+## Portlet descriptions and titles
 ##
 
 javax.portlet.title.100=Invitació
@@ -1614,8 +1614,7 @@ get-quote=Obté la cita
 get-the-api-key-and-canvas-page-url-from-facebook=Obté la clau de l'API i la pàgina URL per al Facebook.
 get=Obté
 gifts=Regals
-give-x-permission-to-community-members=Give {0} permission to Community Members
-give-x-permission-to-guest-members=Give {0} permission to Guest Members
+give-x-permission-to-users-with-the-x-role=Give {0} permission to users with the {1} role. (Automatic Copy)
 global-tags-are-injected-to-all-pages-that-you-visit=Els etiquetes globals s'injectaran en totes les pàgines que visiteu. S'utilitzaran per a personalitzar el contingut que recupereu.
 go-to-paypal-and-set-up-ipn-to-post-to-x=Ves a PayPal i estableix l'IPN per a enviar a {0}.
 go-to-the-latest-version=Ves a l'ultima versió.
@@ -4084,6 +4083,7 @@ x-needs-to-approve-you-as-her-friend={0} us ha d'aprovar com a amic seu.
 x-needs-to-approve-you-as-his-friend={0} us ha d'aprovar com a amic seu.
 x-of-the-emails-in-this-folder-have-been-downloaded={0}% dels correus d'aquesta carpeta s'han de descarregar. Això pot trigar estona en finalitzar.
 x-people-are-planning-to-attend-this-meetup=<strong>{0}</strong> gent que està planificant assistir a aquest encontre.
+x-role={0} Role (Automatic Copy)
 x-search-provider={0} Search Provider (Automatic Copy)
 x-search={0} Search (Automatic Copy)
 x-users-were-successfully-notified={0} usuaris han estat notificats correctament.

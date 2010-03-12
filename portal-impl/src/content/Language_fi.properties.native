@@ -7,7 +7,7 @@ lang.line.begin=left
 lang.line.end=right
 
 ##
-## Portlet titles
+## Portlet descriptions and titles
 ##
 
 javax.portlet.title.100=Kutsu
@@ -1614,8 +1614,7 @@ get-quote=Hae noteeraus
 get-the-api-key-and-canvas-page-url-from-facebook=Hanki API-avain ja canvas sivun URL Facebookista.
 get=Get
 gifts=Lahjat
-give-x-permission-to-community-members=Give {0} permission to Community Members
-give-x-permission-to-guest-members=Give {0} permission to Guest Members
+give-x-permission-to-users-with-the-x-role=Give {0} permission to users with the {1} role. (Automatic Copy)
 global-tags-are-injected-to-all-pages-that-you-visit=Globaalit tagit lisätään kaikkiin sivuihin tässä yhteisössä. Niitä käytetään personalisoimaan lisältöä niin, että tagitettu sisältö joka sinua kiinnostaa haetaan automaattisesti.
 go-to-paypal-and-set-up-ipn-to-post-to-x=Mene PayPal:iin ja aseta IPN lähettääksesi {0}:lle.
 go-to-the-latest-version=Siirry viimeisimpään versioon.
@@ -4083,6 +4082,7 @@ x-needs-to-approve-you-as-her-friend={0} täytyy hyväksyä sinut ystäväkseen.
 x-needs-to-approve-you-as-his-friend={0} täytyy hyväksyä sinut ystäväkseen.
 x-of-the-emails-in-this-folder-have-been-downloaded={0}% tämän kansion sähköposteista ladattu. Tämä voi kestää jonkin aikaa valmistua.
 x-people-are-planning-to-attend-this-meetup=<strong>{0}</strong> ihmistä suunnittelee osallistuvan tapaamiseen.
+x-role={0} Role (Automatic Copy)
 x-search-provider={0} Search Provider (Automatic Copy)
 x-search={0} Search (Automatic Copy)
 x-users-were-successfully-notified={0} käyttäjää tiedotettiin onnistuneesti.

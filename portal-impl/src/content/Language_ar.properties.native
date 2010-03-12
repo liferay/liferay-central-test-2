@@ -7,7 +7,7 @@ lang.line.begin=right
 lang.line.end=left
 
 ##
-## Portlet titles
+## Portlet descriptions and titles
 ##
 
 javax.portlet.title.100=دعوة
@@ -1092,8 +1092,7 @@ get-map=أحصل على الخريطة
 get-password=أحصل على كلمة السر
 get-quote=أحصل على إقتباس
 gifts=هدايا
-give-x-permission-to-community-members=Give {0} permission to Community Members
-give-x-permission-to-guest-members=Give {0} permission to Guest Members
+give-x-permission-to-users-with-the-x-role=Give {0} permission to users with the {1} role. (Automatic Copy)
 global-tags-are-injected-to-all-pages-that-you-visit=سيتم إضافة التصنيفات العامة لجميع الصفحات التي ستزورها. هذه الخاصية تساعد على جلب المحتويات المهتم بها تلقائياً.
 go-to-paypal-and-set-up-ipn-to-post-to-x=إذهب إلى PayPal و أنشئ IPN لإرسال إلى {0}.
 go=إذهب
@@ -2596,6 +2595,7 @@ x-needs-to-approve-you-as-her-friend={0} needs to approve you as her friend.
 x-needs-to-approve-you-as-his-friend={0} needs to approve you as his friend.
 x-of-the-emails-in-this-folder-have-been-downloaded={0}% of the emails in this folder have been downloaded. This may take a while to finish.
 x-people-are-planning-to-attend-this-meetup=<strong>{0}</strong> people are planning to attend this meetup.
+x-role={0} Role (Automatic Copy)
 x-search-provider={0} Search Provider (Automatic Copy)
 x-search={0} Search (Automatic Copy)
 x-users-were-successfully-notified={0} من المستخدمين تم إعلامهم بنجاح
