@@ -212,6 +212,19 @@
 
 									<liferay-ui:icon image="quote" label="<%= true %>" message="reply-with-quote" url="<%= quoteURL %>" />
 								</li>
+								<li>
+
+									<%
+									String taglibQuickReplyURL = "javascript:" + renderResponse.getNamespace() + "addQuickReply('reply', '" + message.getMessageId() + "');";
+									%>
+
+									<liferay-ui:icon
+										image="bottom"
+										label="<%= true %>"
+										message="quick-reply"
+										url="<%= taglibQuickReplyURL %>"
+									/>
+								</li>
 							</c:if>
 						</ul>
 					</c:if>

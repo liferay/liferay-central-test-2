@@ -73,6 +73,13 @@ MBThread thread = messageDisplay.getThread();
 	</c:otherwise>
 </c:choose>
 
+<c:if test="<%= MBCategoryPermission.contains(permissionChecker, scopeGroupId, message.getCategoryId(), ActionKeys.REPLY_TO_MESSAGE) && !thread.isLocked() %>">
+<div class="aui-helper-hidden" id="<portlet:namespace />quick-reply">
+
+	<%@ include file="/html/portlet/message_boards/edit_message_quick.jspf" %>
+</div>
+</c:if>
+
 <aui:script>
 	function <portlet:namespace />addAnswerFlag(messageId) {
 		Liferay.Service.MB.MBMessageFlag.addAnswerFlag(
@@ -95,6 +102,19 @@ MBThread thread = messageDisplay.getThread();
 		}
 
 		AUI().one('#<portlet:namespace />addAnswerFlag_' + messageId).remove();
+	}
+
+	function <portlet:namespace />addQuickReply(cmd, messageId) {
+		var replyBox = AUI().one('#<portlet:namespace />quick-reply');
+
+		if(cmd == 'reply') {
+			replyBox.show();
+			replyBox.one('#<portlet:namespace />parentMessageId').val(messageId);
+			replyBox.one('textarea').focus();
+		}
+		else {
+			replyBox.hide();
+		}
 	}
 
 	function <portlet:namespace />deleteAnswerFlag(messageId) {
