@@ -223,6 +223,8 @@ public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 		serviceContext.setAddCommunityPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
 		serviceContext.setAssetTagNames(assetTagNames);
+		serviceContext.setCreateDate(entry.getCreateDate());
+		serviceContext.setModifiedDate(entry.getModifiedDate());
 		serviceContext.setScopeGroupId(context.getGroupId());
 		serviceContext.setStatus(status);
 
