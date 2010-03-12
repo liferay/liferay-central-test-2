@@ -32,8 +32,8 @@ public abstract class BaseWorkflowLogCreateDateComparator
 		this(false);
 	}
 
-	public BaseWorkflowLogCreateDateComparator(boolean asc) {
-		_asc = asc;
+	public BaseWorkflowLogCreateDateComparator(boolean ascending) {
+		_ascending = ascending;
 	}
 
 	public int compare(Object obj1, Object obj2) {
@@ -52,7 +52,7 @@ public abstract class BaseWorkflowLogCreateDateComparator
 			value = workflowLogId1.compareTo(workflowLogId2);
 		}
 
-		if (_asc) {
+		if (_ascending) {
 			return value;
 		}
 		else {
@@ -61,9 +61,9 @@ public abstract class BaseWorkflowLogCreateDateComparator
 	}
 
 	public boolean isAscending() {
-		return _asc;
+		return _ascending;
 	}
 
-	private boolean _asc;
+	private boolean _ascending;
 
 }

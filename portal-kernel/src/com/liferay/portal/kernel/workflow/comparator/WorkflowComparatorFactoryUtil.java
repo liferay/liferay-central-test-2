@@ -78,7 +78,9 @@ public class WorkflowComparatorFactoryUtil {
 			ascending);
 	}
 
-	public static OrderByComparator getTaskDueDateComparator(boolean ascending) {
+	public static OrderByComparator getTaskDueDateComparator(
+		boolean ascending) {
+
 		return getWorkflowComparatorFactory().getTaskDueDateComparator(
 			ascending);
 	}

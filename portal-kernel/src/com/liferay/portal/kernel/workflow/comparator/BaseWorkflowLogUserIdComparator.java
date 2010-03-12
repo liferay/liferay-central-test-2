@@ -30,8 +30,8 @@ public abstract class BaseWorkflowLogUserIdComparator
 		this(false);
 	}
 
-	public BaseWorkflowLogUserIdComparator(boolean asc) {
-		_asc = asc;
+	public BaseWorkflowLogUserIdComparator(boolean ascending) {
+		_ascending = ascending;
 	}
 
 	public int compare(Object obj1, Object obj2) {
@@ -50,7 +50,7 @@ public abstract class BaseWorkflowLogUserIdComparator
 			value = workflowLogId1.compareTo(workflowLogId2);
 		}
 
-		if (_asc) {
+		if (_ascending) {
 			return value;
 		}
 		else {
@@ -59,9 +59,9 @@ public abstract class BaseWorkflowLogUserIdComparator
 	}
 
 	public boolean isAscending() {
-		return _asc;
+		return _ascending;
 	}
 
-	private boolean _asc;
+	private boolean _ascending;
 
 }

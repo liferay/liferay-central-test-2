@@ -32,8 +32,8 @@ public abstract class BaseWorkflowInstanceStartDateComparator
 		this(false);
 	}
 
-	public BaseWorkflowInstanceStartDateComparator(boolean asc) {
-		_asc = asc;
+	public BaseWorkflowInstanceStartDateComparator(boolean ascending) {
+		_ascending = ascending;
 	}
 
 	public int compare(Object obj1, Object obj2) {
@@ -54,7 +54,7 @@ public abstract class BaseWorkflowInstanceStartDateComparator
 			value = workflowInstanceId1.compareTo(workflowInstanceId2);
 		}
 
-		if (_asc) {
+		if (_ascending) {
 			return value;
 		}
 		else {
@@ -63,9 +63,9 @@ public abstract class BaseWorkflowInstanceStartDateComparator
 	}
 
 	public boolean isAscending() {
-		return _asc;
+		return _ascending;
 	}
 
-	private boolean _asc;
+	private boolean _ascending;
 
 }

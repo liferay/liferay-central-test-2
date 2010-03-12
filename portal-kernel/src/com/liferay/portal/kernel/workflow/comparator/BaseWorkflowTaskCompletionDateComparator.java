@@ -32,8 +32,8 @@ public abstract class BaseWorkflowTaskCompletionDateComparator
 		this(false);
 	}
 
-	public BaseWorkflowTaskCompletionDateComparator(boolean asc) {
-		_asc = asc;
+	public BaseWorkflowTaskCompletionDateComparator(boolean ascending) {
+		_ascending = ascending;
 	}
 
 	public int compare(Object obj1, Object obj2) {
@@ -52,7 +52,7 @@ public abstract class BaseWorkflowTaskCompletionDateComparator
 			value = workflowTaskId1.compareTo(workflowTaskId2);
 		}
 
-		if (_asc) {
+		if (_ascending) {
 			return value;
 		}
 		else {
@@ -61,9 +61,9 @@ public abstract class BaseWorkflowTaskCompletionDateComparator
 	}
 
 	public boolean isAscending() {
-		return _asc;
+		return _ascending;
 	}
 
-	private boolean _asc;
+	private boolean _ascending;
 
 }

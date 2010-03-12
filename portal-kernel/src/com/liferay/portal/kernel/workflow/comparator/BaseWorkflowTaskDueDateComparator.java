@@ -37,8 +37,8 @@ public class BaseWorkflowTaskDueDateComparator extends OrderByComparator {
 		this(false);
 	}
 
-	public BaseWorkflowTaskDueDateComparator(boolean asc) {
-		_asc = asc;
+	public BaseWorkflowTaskDueDateComparator(boolean ascending) {
+		_ascending = ascending;
 	}
 
 	public int compare(Object obj1, Object obj2) {
@@ -57,7 +57,7 @@ public class BaseWorkflowTaskDueDateComparator extends OrderByComparator {
 			value = workflowTaskId1.compareTo(workflowTaskId2);
 		}
 
-		if (_asc) {
+		if (_ascending) {
 			return value;
 		}
 		else {
@@ -66,7 +66,7 @@ public class BaseWorkflowTaskDueDateComparator extends OrderByComparator {
 	}
 
 	public String getOrderBy() {
-		if (_asc) {
+		if (_ascending) {
 			return ORDER_BY_ASC;
 		}
 		else {
@@ -79,9 +79,9 @@ public class BaseWorkflowTaskDueDateComparator extends OrderByComparator {
 	}
 
 	public boolean isAscending() {
-		return _asc;
+		return _ascending;
 	}
 
-	private boolean _asc;
+	private boolean _ascending;
 
 }

@@ -30,8 +30,8 @@ public abstract class BaseWorkflowInstanceStateComparator
 		this(false);
 	}
 
-	public BaseWorkflowInstanceStateComparator(boolean asc) {
-		_asc = asc;
+	public BaseWorkflowInstanceStateComparator(boolean ascending) {
+		_ascending = ascending;
 	}
 
 	public int compare(Object obj1, Object obj2) {
@@ -52,7 +52,7 @@ public abstract class BaseWorkflowInstanceStateComparator
 			value = workflowInstanceId1.compareTo(workflowInstanceId2);
 		}
 
-		if (_asc) {
+		if (_ascending) {
 			return value;
 		}
 		else {
@@ -61,9 +61,9 @@ public abstract class BaseWorkflowInstanceStateComparator
 	}
 
 	public boolean isAscending() {
-		return _asc;
+		return _ascending;
 	}
 
-	private boolean _asc;
+	private boolean _ascending;
 
 }

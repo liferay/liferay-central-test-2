@@ -29,8 +29,8 @@ public class BaseWorkflowTaskNameComparator extends OrderByComparator {
 		this(false);
 	}
 
-	public BaseWorkflowTaskNameComparator(boolean asc) {
-		_asc = asc;
+	public BaseWorkflowTaskNameComparator(boolean ascending) {
+		_ascending = ascending;
 	}
 
 	public int compare(Object obj1, Object obj2) {
@@ -49,7 +49,7 @@ public class BaseWorkflowTaskNameComparator extends OrderByComparator {
 			value = workflowTaskId1.compareTo(workflowTaskId2);
 		}
 
-		if (_asc) {
+		if (_ascending) {
 			return value;
 		}
 		else {
@@ -58,9 +58,9 @@ public class BaseWorkflowTaskNameComparator extends OrderByComparator {
 	}
 
 	public boolean isAscending() {
-		return _asc;
+		return _ascending;
 	}
 
-	private boolean _asc;
+	private boolean _ascending;
 
 }
