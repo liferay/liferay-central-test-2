@@ -7,7 +7,7 @@ lang.line.begin=left
 lang.line.end=right
 
 ##
-## Portlet titles
+## Portlet descriptions and titles
 ##
 
 javax.portlet.title.100=Davet
@@ -1630,8 +1630,7 @@ get-quote=Alıntı Yap
 get-the-api-key-and-canvas-page-url-from-facebook=Facebook'tan API anahtarını ve taslak sayfası URL'sini al.
 get=Al
 gifts=Hediyeler
-give-x-permission-to-community-members=Give {0} permission to Community Members
-give-x-permission-to-guest-members=Give {0} permission to Guest Members
+give-x-permission-to-users-with-the-x-role=Give {0} permission to users with the {1} role. (Automatic Copy)
 global-tags-are-injected-to-all-pages-that-you-visit=Global etiketler ziyaret ettiğiniz tüm sayfalara işleniyor. Bu bilgiler, ziyaret ettiğiniz konudaki sayfaların otomatik getirilmesi için sayfanızı kişiselleştirilmesinde kullanılır.
 go-to-paypal-and-set-up-ipn-to-post-to-x=PayPal'a gidin ve {0}'a gönderilmesi için IPN alın.
 go-to-the-latest-version=Son haline gidin.
@@ -4133,6 +4132,7 @@ x-needs-to-approve-you-as-her-friend={0} sizi arkadaşı olarak onaylaması gere
 x-needs-to-approve-you-as-his-friend={0} sizi arkadaşı olarak onaylaması gerekiyor.
 x-of-the-emails-in-this-folder-have-been-downloaded=Bu dizindeki e-postalar %{0} oranında indirildi. Tümünün indirilmesi biraz zaman alabilir.
 x-people-are-planning-to-attend-this-meetup=<strong>{0}</strong> kişi bu toplantıya katılmayı planlıyor.
+x-role={0} Role (Automatic Copy)
 x-search-provider={0} Search Provider (Automatic Copy)
 x-search={0} Search (Automatic Copy)
 x-users-were-successfully-notified={0} kullanıcı başarıyla uyarıldı.

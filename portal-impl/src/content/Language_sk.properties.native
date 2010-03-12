@@ -7,7 +7,7 @@ lang.line.begin=left
 lang.line.end=right
 
 ##
-## Portlet titles
+## Portlet descriptions and titles
 ##
 
 javax.portlet.title.100=Pozvanie
@@ -1481,8 +1481,7 @@ get-password=Získať heslo
 get-quote=Získať kótu
 get-the-api-key-and-canvas-page-url-from-facebook=Získajte kľúč API a canvas page URL zo služby Facebook.
 gifts=Darčeky
-give-x-permission-to-community-members=Give {0} permission to Community Members
-give-x-permission-to-guest-members=Give {0} permission to Guest Members
+give-x-permission-to-users-with-the-x-role=Give {0} permission to users with the {1} role. (Automatic Copy)
 global-tags-are-injected-to-all-pages-that-you-visit=Globálne značky sú vkladané do všetkých stránok, ktoré navštívite. Používajú sa na personalizáciu obsahú, takže označkovaný obsah, ktorý Vás zaujíma je automaticky získavaný pre Vás.
 go-to-paypal-and-set-up-ipn-to-post-to-x=Choďte na stránky služby PayPal a nastavte IPN pre posielanie na {0}.
 go-to-the-latest-version=Choďte na poslednú verziu.
@@ -3691,6 +3690,7 @@ x-needs-to-approve-you-as-her-friend={0} Vás musí potvrdiť ako svojho priate�
 x-needs-to-approve-you-as-his-friend={0} Vás musí potvrdiť ako svojho priateľa.
 x-of-the-emails-in-this-folder-have-been-downloaded={0}% e-mailov v tejto záložke bolo stiahnutých. Sťahovanie môže chvíľu trvať.
 x-people-are-planning-to-attend-this-meetup=<strong>{0}</strong> ľudí plánuje prísť na toto stretnutie.
+x-role={0} Role (Automatic Copy)
 x-search-provider={0} Search Provider (Automatic Copy)
 x-search={0} Search (Automatic Copy)
 x-users-were-successfully-notified={0} používatelia boli úspešne notifikovaný.

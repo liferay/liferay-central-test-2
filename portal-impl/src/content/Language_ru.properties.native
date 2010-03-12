@@ -7,7 +7,7 @@ lang.line.begin=left
 lang.line.end=right
 
 ##
-## Portlet titles
+## Portlet descriptions and titles
 ##
 
 javax.portlet.title.100=Приглашение
@@ -1597,8 +1597,7 @@ get-quote=Получить цитату
 get-the-api-key-and-canvas-page-url-from-facebook=Получить ключ API и URL страницы обрамления с Facebook.
 get=Получить
 gifts=Подарки
-give-x-permission-to-community-members=Give {0} permission to Community Members
-give-x-permission-to-guest-members=Give {0} permission to Guest Members
+give-x-permission-to-users-with-the-x-role=Give {0} permission to users with the {1} role. (Automatic Copy)
 global-tags-are-injected-to-all-pages-that-you-visit=Глобальные теги вставляются во все страницы, которые вы посещаете. Они используются для персонализации контента, так, чтобы помеченный контент автоматически предоставлялся вам.
 go-to-paypal-and-set-up-ipn-to-post-to-x=Сходите на PayPal и настройте IPN, чтобы написать в {0}.
 go-to-the-latest-version=Отправиться к последней версии.
@@ -4005,6 +4004,7 @@ x-needs-to-approve-you-as-her-friend={0} должна подтвердить, ч
 x-needs-to-approve-you-as-his-friend={0} должен подтвердить, что вы ее друг.
 x-of-the-emails-in-this-folder-have-been-downloaded=Загружено {0}% писем из этой папки. Завершение может потребовать некоторого времени.
 x-people-are-planning-to-attend-this-meetup=<strong>{0}</strong> людей собирается посетить эту встречу.
+x-role={0} Role (Automatic Copy)
 x-search-provider={0} Search Provider (Automatic Copy)
 x-search={0} Search (Automatic Copy)
 x-users-were-successfully-notified=Пользователи {0} успешно уведомлены.
