@@ -1355,6 +1355,7 @@ public class HookHotDeployListener
 	private static final String[] _PROPS_VALUES_BOOLEAN = new String[] {
 		"auth.forward.by.last.path",
 		"captcha.check.portal.create_account",
+		"dl.webdav.auto.unlock",
 		"field.enable.com.liferay.portal.model.Contact.birthday",
 		"field.enable.com.liferay.portal.model.Contact.male",
 		"field.enable.com.liferay.portal.model.Organization.status",

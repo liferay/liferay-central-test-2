@@ -25,6 +25,7 @@ captcha.check.portal.create_account
 control.panel.entry.class.default
 default.landing.page.path
 dl.hook.impl
+dl.webdav.auto.unlock
 field.enable.com.liferay.portal.model.Contact.birthday
 field.enable.com.liferay.portal.model.Contact.male
 field.enable.com.liferay.portal.model.Organization.status
