@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
@@ -10,47 +10,37 @@
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
- *
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.util.collections;
+package com.liferay.portal.kernel.util;
 
 /**
- * <a href="IntPrimitiveList.java.html"><b><i>View Source</i></b></a>
+ * <a href="PrimitiveIntList.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael C. Han
  */
-public class IntPrimitiveList {
+public class PrimitiveIntList {
 
-	public IntPrimitiveList() {
+	public PrimitiveIntList() {
 		_elements = new int[10];
 	}
 
-	public IntPrimitiveList(int capacity) {
+	public PrimitiveIntList(int capacity) {
 		_elements = new int[capacity];
 	}
 
-
 	public void addAll(int[] values) {
-		checkCapacity(_numElements + values.length);
+		_checkCapacity(_elementsSize + values.length);
 
-		System.arraycopy(values, 0, _elements, _numElements, values.length);
+		System.arraycopy(values, 0, _elements, _elementsSize, values.length);
 
-		_numElements += values.length;
+		_elementsSize += values.length;
 	}
 
 	public void add(int value) {
-		checkCapacity(_numElements + 1);
+		_checkCapacity(_elementsSize + 1);
 
-		_elements[_numElements++] = value;
+		_elements[_elementsSize++] = value;
 	}
 
 	public int[] getArray() {
@@ -60,27 +50,25 @@ public class IntPrimitiveList {
 	}
 
 	public int size() {
-		return _numElements;
+		return _elementsSize;
 	}
 
 	private void trim() {
 		int oldSize = _elements.length;
 
-		if (_numElements < oldSize) {
-
+		if (_elementsSize < oldSize) {
 			int[] previousElements = _elements;
 
-			_elements = new int[_numElements];
+			_elements = new int[_elementsSize];
 
-			System.arraycopy(previousElements, 0, _elements, 0, _numElements);
+			System.arraycopy(previousElements, 0, _elements, 0, _elementsSize);
 		}
 	}
 
-	private void checkCapacity(int minSize) {
+	private void _checkCapacity(int minSize) {
 		int oldSize = _elements.length;
 
 		if (minSize > oldSize) {
-
 			int[] previousElements = _elements;
 
 			int newCapacity = (oldSize * 3) / 2 + 1;
@@ -88,12 +76,14 @@ public class IntPrimitiveList {
 			if (newCapacity < minSize) {
 				newCapacity = minSize;
 			}
+
 			_elements = new int[newCapacity];
 
-			System.arraycopy(previousElements, 0, _elements, 0, _numElements);
+			System.arraycopy(previousElements, 0, _elements, 0, _elementsSize);
 		}
 	}
 
 	private int[] _elements;
-	private int _numElements;
+	private int _elementsSize;
+
 }
