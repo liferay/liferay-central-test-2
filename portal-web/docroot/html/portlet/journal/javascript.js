@@ -226,6 +226,7 @@ AUI().add(
 						fieldInstance.set('variableName', variableName);
 
 						var randomInstanceId = instance.generateInstanceId();
+
 						fieldInstance.set('instanceId', randomInstanceId)
 
 						instance.createNestedList(
