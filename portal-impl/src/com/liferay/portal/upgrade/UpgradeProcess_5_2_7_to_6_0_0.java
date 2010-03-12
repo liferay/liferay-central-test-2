@@ -16,20 +16,17 @@ package com.liferay.portal.upgrade;
 
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.util.ReleaseInfo;
+import com.liferay.portal.upgrade.v5_2_7_to_6_0_0.UpgradeSchema;
 import com.liferay.portal.upgrade.v6_0_0.UpgradeAsset;
 import com.liferay.portal.upgrade.v6_0_0.UpgradeAssetPublisher;
 import com.liferay.portal.upgrade.v6_0_0.UpgradeBlogs;
 import com.liferay.portal.upgrade.v6_0_0.UpgradeDocumentLibrary;
 import com.liferay.portal.upgrade.v6_0_0.UpgradeExpando;
-//import com.liferay.portal.upgrade.v6_0_0.UpgradeGroup;
 import com.liferay.portal.upgrade.v6_0_0.UpgradeJournal;
 import com.liferay.portal.upgrade.v6_0_0.UpgradePolls;
 import com.liferay.portal.upgrade.v6_0_0.UpgradePortletId;
 import com.liferay.portal.upgrade.v6_0_0.UpgradeResourceAction;
-import com.liferay.portal.upgrade.v5_2_7_to_6_0_0.UpgradeSchema;
 import com.liferay.portal.upgrade.v6_0_0.UpgradeShopping;
-//import com.liferay.portal.upgrade.v6_0_0.UpgradeSocial;
-//import com.liferay.portal.upgrade.v6_0_0.UpgradeWiki;
 
 /**
  * <a href="UpgradeProcess_5_2_7_to_6_0_0.java.html"><b><i>View Source</i></b></a>
@@ -47,33 +44,13 @@ public class UpgradeProcess_5_2_7_to_6_0_0 extends UpgradeProcess {
 		upgrade(UpgradeAsset.class);
 		upgrade(UpgradeAssetPublisher.class);
 		upgrade(UpgradeBlogs.class);
-
-		// 5.2.7 to 5.2.8 - Very Different
 		upgrade(UpgradeDocumentLibrary.class);
-
 		upgrade(UpgradeExpando.class);
-
-		// 5.2.5 to 5.2.6
-		//upgrade(UpgradeGroup.class);
-
-		// 5.2.7 to 5.2.8
 		upgrade(UpgradeJournal.class);
-
 		upgrade(UpgradePolls.class);
-
-		// 5.2.3 to 5.2.4 - Has changes - may be alright to keep
 		upgrade(UpgradePortletId.class);
-
-		// 5.2.7 to 5.2.8
 		upgrade(UpgradeResourceAction.class);
-
 		upgrade(UpgradeShopping.class);
-
-		// 5.2.4 to 5.2.5
-		//upgrade(UpgradeSocial.class);
-
-		// 5.2.5 to 5.2.6
-		//upgrade(UpgradeWiki.class);
 	}
 
 }

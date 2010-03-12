@@ -172,22 +172,6 @@ create table LayoutSetPrototype (
 	active_ BOOLEAN
 );
 
-## update-5.2.5-5.2.6.sql
-##
-##create table Lock_ (
-##	uuid_ VARCHAR(75) null,
-##	lockId LONG not null primary key,
-##	companyId LONG,
-##	userId LONG,
-##	userName VARCHAR(75) null,
-##	createDate DATE null,
-##	className VARCHAR(75) null,
-##	key_ VARCHAR(200) null,
-##	owner VARCHAR(75) null,
-##	inheritable BOOLEAN,
-##	expirationDate DATE null
-##);
-
 alter table MBMessage add allowPingbacks BOOLEAN;
 alter table MBMessage add status INTEGER;
 alter table MBMessage add statusByUserId LONG;
@@ -206,26 +190,9 @@ COMMIT_TRANSACTION;
 
 update MBThread set status = 1;
 
-## update-5.2.6-5.2.7.sql
-##
-##alter table Release_ add servletContextName VARCHAR(75);
-
 COMMIT_TRANSACTION;
 
-## update-5.2.6-5.2.7.sql
-##
-##update Release_ set servletContextName = 'portal';
-
 alter table ShoppingItem add groupId LONG;
-
-## update-5.2.4-5.2.5.sql
-##
-##create table UserGroupGroupRole (
-##	userGroupId LONG not null,
-##	groupId LONG not null,
-##	roleId LONG not null,
-##	primary key (userGroupId, groupId, roleId)
-##);
 
 alter table WikiPage add status INTEGER;
 alter table WikiPage add statusByUserId LONG;
