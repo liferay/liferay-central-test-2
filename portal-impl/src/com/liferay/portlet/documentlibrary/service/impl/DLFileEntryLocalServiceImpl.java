@@ -981,8 +981,8 @@ public class DLFileEntryLocalServiceImpl
 		}
 
 		addFileVersion(
-			user, fileEntry, now, version, versionDescription,
-			serviceContext.getStatus());
+			user, fileEntry, serviceContext.getModifiedDate(now), version,
+			versionDescription, serviceContext.getStatus());
 
 		// File entry
 
