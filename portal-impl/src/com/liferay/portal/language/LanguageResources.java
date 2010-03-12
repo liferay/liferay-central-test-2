@@ -51,7 +51,7 @@ public class LanguageResources {
 	}
 
 	private LanguageResources() {
-		_cache = new ConcurrentHashMap<String, ResourceValue>(10000);
+		_cache = new ConcurrentHashMap<String, String>(10000);
 	}
 
 	private void _clearCache() {
@@ -65,40 +65,27 @@ public class LanguageResources {
 	private String _getMessage(Locale locale, String key) {
 		String cacheKey = _getCacheKey(locale, key);
 
-		ResourceValue resourceValue = _cache.get(cacheKey);
+		String cacheValue = _cache.get(cacheKey);
 
-		if (resourceValue == null) {
-			String value = _messageResources.getMessage(locale, key);
+		if (cacheValue == null) {
+			cacheValue = _messageResources.getMessage(locale, key);
 
-			resourceValue = new ResourceValue(value);
-
-			_cache.put(cacheKey, resourceValue);
+			if (cacheValue == null) {
+				return null;
+			}
+			_cache.put(cacheKey, cacheValue);
 		}
 
-		return resourceValue.getValue();
+		return cacheValue;
 	}
 
 	private void _init(MessageResources messageResources) {
 		_messageResources = messageResources;
 	}
 
-	private class ResourceValue {
-
-		private ResourceValue(String value) {
-			_value = value;
-		}
-
-		public String getValue() {
-			return _value;
-		}
-
-		private String _value;
-
-	}
-
 	private static LanguageResources _instance = new LanguageResources();
 
-	private Map<String, ResourceValue> _cache;
+	private Map<String, String> _cache;
 	private MessageResources _messageResources;
 
 }
