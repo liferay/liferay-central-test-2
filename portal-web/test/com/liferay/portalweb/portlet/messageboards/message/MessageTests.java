@@ -32,6 +32,7 @@ import com.liferay.portalweb.portlet.messageboards.message.editcategorymessagesu
 import com.liferay.portalweb.portlet.messageboards.message.editcategorymessagesubjectnull.EditCategoryMessageSubjectNullTests;
 import com.liferay.portalweb.portlet.messageboards.message.movecategorymessagetocategory.MoveCategoryMessageToCategoryTests;
 import com.liferay.portalweb.portlet.messageboards.message.movecategorymessagetocategoryexplanation.MoveCategoryMessageToCategoryExplanationTests;
+import com.liferay.portalweb.portlet.messageboards.message.ratecategorymessage.RateCategoryMessageTests;
 import com.liferay.portalweb.portlet.messageboards.message.searchcategorymessage.SearchCategoryMessageTests;
 import com.liferay.portalweb.portlet.messageboards.message.splitthreadcategorymessagereply.SplitThreadCategoryMessageReplyTests;
 import com.liferay.portalweb.portlet.messageboards.message.splitthreadcategorymessagereplybackbutton.SplitThreadCategoryMessageReplyBackButtonTests;
@@ -71,6 +72,7 @@ public class MessageTests extends BaseTests {
 		testSuite.addTest(MoveCategoryMessageToCategoryTests.suite());
 		testSuite.addTest(
 			MoveCategoryMessageToCategoryExplanationTests.suite());
+		testSuite.addTest(RateCategoryMessageTests.suite());
 		testSuite.addTest(SearchCategoryMessageTests.suite());
 		testSuite.addTest(SplitThreadCategoryMessageReplyTests.suite());
 		testSuite.addTest(
