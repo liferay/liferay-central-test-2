@@ -17,27 +17,22 @@ package com.liferay.portal.kernel.workflow.comparator;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.workflow.WorkflowInstance;
 
+import java.util.Date;
+
 /**
- * <a href="WorkflowInstanceStateComparator.java.html"><b><i>View Source</i></b>
- * </a>
+ * <a href="BaseWorkflowInstanceStartDateComparator.java.html"><b><i>View Source</i>
+ * </b></a>
  *
- * @author Brian Wing Shun Chan
+ * @author Shuyang Zhou
  */
-public class WorkflowInstanceStateComparator extends OrderByComparator {
+public abstract class BaseWorkflowInstanceStartDateComparator
+	extends OrderByComparator {
 
-	public static String ORDER_BY_ASC = "state ASC, workflowInstanceId ASC";
-
-	public static String ORDER_BY_DESC = "state DESC, workflowInstanceId DESC";
-
-	public static String[] ORDER_BY_FIELDS = {
-		"state", "workflowInstanceId"
-	};
-
-	public WorkflowInstanceStateComparator() {
+	public BaseWorkflowInstanceStartDateComparator() {
 		this(false);
 	}
 
-	public WorkflowInstanceStateComparator(boolean asc) {
+	public BaseWorkflowInstanceStartDateComparator(boolean asc) {
 		_asc = asc;
 	}
 
@@ -45,10 +40,10 @@ public class WorkflowInstanceStateComparator extends OrderByComparator {
 		WorkflowInstance workflowInstance1 = (WorkflowInstance)obj1;
 		WorkflowInstance workflowInstance2 = (WorkflowInstance)obj2;
 
-		String state1 = workflowInstance1.getState();
-		String state2 = workflowInstance2.getState();
+		Date startDate1 = workflowInstance1.getStartDate();
+		Date startDate2 = workflowInstance2.getStartDate();
 
-		int value = state1.compareTo(state2);
+		int value = startDate1.compareTo(startDate2);
 
 		if (value == 0) {
 			Long workflowInstanceId1 =
@@ -65,19 +60,6 @@ public class WorkflowInstanceStateComparator extends OrderByComparator {
 		else {
 			return -value;
 		}
-	}
-
-	public String getOrderBy() {
-		if (_asc) {
-			return ORDER_BY_ASC;
-		}
-		else {
-			return ORDER_BY_DESC;
-		}
-	}
-
-	public String[] getOrderByFields() {
-		return ORDER_BY_FIELDS;
 	}
 
 	public boolean isAscending() {

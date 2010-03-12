@@ -17,31 +17,18 @@ package com.liferay.portal.kernel.workflow.comparator;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.workflow.WorkflowTask;
 
-import java.util.Date;
-
 /**
- * <a href="WorkflowTaskCompletionDateComparator.java.html"><b><i>View Source
- * </i></b></a>
+ * <a href="BaseWorkflowTaskNameComparator.java.html"><b><i>View Source</i></b></a>
  *
  * @author Shuyang Zhou
  */
-public class WorkflowTaskCompletionDateComparator extends OrderByComparator {
+public class BaseWorkflowTaskNameComparator extends OrderByComparator {
 
-	public static String ORDER_BY_ASC =
-		"completionDate ASC, workflowTaskId ASC";
-
-	public static String ORDER_BY_DESC =
-		"completionDate DESC, workflowTaskId DESC";
-
-	public static String[] ORDER_BY_FIELDS = {
-		"completionDate", "workflowTaskId"
-	};
-
-	public WorkflowTaskCompletionDateComparator() {
+	public BaseWorkflowTaskNameComparator() {
 		this(false);
 	}
 
-	public WorkflowTaskCompletionDateComparator(boolean asc) {
+	public BaseWorkflowTaskNameComparator(boolean asc) {
 		_asc = asc;
 	}
 
@@ -49,10 +36,10 @@ public class WorkflowTaskCompletionDateComparator extends OrderByComparator {
 		WorkflowTask workflowTask1 = (WorkflowTask)obj1;
 		WorkflowTask workflowTask2 = (WorkflowTask)obj2;
 
-		Date completionDate1 = workflowTask1.getCompletionDate();
-		Date completionDate2 = workflowTask2.getCompletionDate();
+		String name1 = workflowTask1.getName();
+		String name2 = workflowTask2.getName();
 
-		int value = completionDate1.compareTo(completionDate2);
+		int value = name1.compareTo(name2);
 
 		if (value == 0) {
 			Long workflowTaskId1 = workflowTask1.getWorkflowTaskId();
@@ -67,19 +54,6 @@ public class WorkflowTaskCompletionDateComparator extends OrderByComparator {
 		else {
 			return -value;
 		}
-	}
-
-	public String getOrderBy() {
-		if (_asc) {
-			return ORDER_BY_ASC;
-		}
-		else {
-			return ORDER_BY_DESC;
-		}
-	}
-
-	public String[] getOrderByFields() {
-		return ORDER_BY_FIELDS;
 	}
 
 	public boolean isAscending() {

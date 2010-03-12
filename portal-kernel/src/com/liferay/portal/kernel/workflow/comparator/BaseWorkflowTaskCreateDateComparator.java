@@ -20,24 +20,19 @@ import com.liferay.portal.kernel.workflow.WorkflowTask;
 import java.util.Date;
 
 /**
- * <a href="WorkflowTaskCreateDateComparator.java.html"><b><i>View Source</i>
+ * <a href="BaseWorkflowTaskCreateDateComparator.java.html"><b><i>View Source</i>
  * </b></a>
  *
  * @author Shuyang Zhou
  */
-public class WorkflowTaskCreateDateComparator extends OrderByComparator {
+public abstract class BaseWorkflowTaskCreateDateComparator
+	extends OrderByComparator {
 
-	public static String ORDER_BY_ASC = "createDate ASC, workflowTaskId ASC";
-
-	public static String ORDER_BY_DESC = "createDate DESC, workflowTaskId DESC";
-
-	public static String[] ORDER_BY_FIELDS = {"createDate", "workflowTaskId"};
-
-	public WorkflowTaskCreateDateComparator() {
+	public BaseWorkflowTaskCreateDateComparator() {
 		this(false);
 	}
 
-	public WorkflowTaskCreateDateComparator(boolean asc) {
+	public BaseWorkflowTaskCreateDateComparator(boolean asc) {
 		_asc = asc;
 	}
 
@@ -63,19 +58,6 @@ public class WorkflowTaskCreateDateComparator extends OrderByComparator {
 		else {
 			return -value;
 		}
-	}
-
-	public String getOrderBy() {
-		if (_asc) {
-			return ORDER_BY_ASC;
-		}
-		else {
-			return ORDER_BY_DESC;
-		}
-	}
-
-	public String[] getOrderByFields() {
-		return ORDER_BY_FIELDS;
 	}
 
 	public boolean isAscending() {

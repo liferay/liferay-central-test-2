@@ -20,24 +20,19 @@ import com.liferay.portal.kernel.workflow.WorkflowTask;
 import java.util.Date;
 
 /**
- * <a href="WorkflowTaskDueDateComparator.java.html"><b><i>View Source</i></b>
- * </a>
+ * <a href="BaseWorkflowTaskCompletionDateComparator.java.html"><b><i>View Source
+ * </i></b></a>
  *
  * @author Shuyang Zhou
  */
-public class WorkflowTaskDueDateComparator extends OrderByComparator {
+public abstract class BaseWorkflowTaskCompletionDateComparator
+	extends OrderByComparator {
 
-	public static String ORDER_BY_ASC = "dueDate ASC, workflowTaskId ASC";
-
-	public static String ORDER_BY_DESC = "dueDate DESC, workflowTaskId DESC";
-
-	public static String[] ORDER_BY_FIELDS = {"dueDate", "workflowTaskId"};
-
-	public WorkflowTaskDueDateComparator() {
+	public BaseWorkflowTaskCompletionDateComparator() {
 		this(false);
 	}
 
-	public WorkflowTaskDueDateComparator(boolean asc) {
+	public BaseWorkflowTaskCompletionDateComparator(boolean asc) {
 		_asc = asc;
 	}
 
@@ -45,10 +40,10 @@ public class WorkflowTaskDueDateComparator extends OrderByComparator {
 		WorkflowTask workflowTask1 = (WorkflowTask)obj1;
 		WorkflowTask workflowTask2 = (WorkflowTask)obj2;
 
-		Date dueDate1 = workflowTask1.getDueDate();
-		Date dueDate2 = workflowTask2.getDueDate();
+		Date completionDate1 = workflowTask1.getCompletionDate();
+		Date completionDate2 = workflowTask2.getCompletionDate();
 
-		int value = dueDate1.compareTo(dueDate2);
+		int value = completionDate1.compareTo(completionDate2);
 
 		if (value == 0) {
 			Long workflowTaskId1 = workflowTask1.getWorkflowTaskId();
@@ -63,19 +58,6 @@ public class WorkflowTaskDueDateComparator extends OrderByComparator {
 		else {
 			return -value;
 		}
-	}
-
-	public String getOrderBy() {
-		if (_asc) {
-			return ORDER_BY_ASC;
-		}
-		else {
-			return ORDER_BY_DESC;
-		}
-	}
-
-	public String[] getOrderByFields() {
-		return ORDER_BY_FIELDS;
 	}
 
 	public boolean isAscending() {

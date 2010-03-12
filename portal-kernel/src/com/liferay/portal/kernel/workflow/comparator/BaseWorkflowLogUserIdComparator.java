@@ -23,21 +23,54 @@
 
 package com.liferay.portal.kernel.workflow.comparator;
 
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.workflow.WorkflowLog;
+
 /**
- * <a href="WorkflowLogComparatorFactoryUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="BaseWorkflowLogUserIdComparator.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael C. Han
  */
-public class WorkflowLogComparatorFactoryUtil {
-	
-	public static WorkflowLogComparatorFactory getComparatorFactory() {
-		return _comparatorFactory;
+public abstract class BaseWorkflowLogUserIdComparator
+	extends OrderByComparator {
+
+	public BaseWorkflowLogUserIdComparator() {
+		this(false);
 	}
 
-	public void setWorkflowLogComparatorFactory(
-		WorkflowLogComparatorFactory comparatorFactory) {
-		_comparatorFactory = comparatorFactory;
+	public BaseWorkflowLogUserIdComparator(boolean asc) {
+		_asc = asc;
 	}
 
-	private static WorkflowLogComparatorFactory _comparatorFactory;
+	public int compare(Object obj1, Object obj2) {
+		WorkflowLog workflowLog1 = (WorkflowLog)obj1;
+		WorkflowLog workflowLog2 = (WorkflowLog)obj2;
+
+		Long userId1 = workflowLog1.getUserId();
+		Long userId2 = workflowLog2.getUserId();
+
+		int value = userId1.compareTo(userId2);
+
+		if (value == 0) {
+			Long workflowLogId1 = workflowLog1.getWorkflowLogId();
+			Long workflowLogId2 = workflowLog2.getWorkflowLogId();
+
+			value = workflowLogId1.compareTo(workflowLogId2);
+		}
+
+		if (_asc) {
+			return value;
+		}
+		else {
+			return -value;
+		}
+	}
+
+
+	public boolean isAscending() {
+		return _asc;
+	}
+
+	private boolean _asc;
+
 }

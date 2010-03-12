@@ -17,24 +17,27 @@ package com.liferay.portal.kernel.workflow.comparator;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.workflow.WorkflowTask;
 
+import java.util.Date;
+
 /**
- * <a href="WorkflowTaskNameComparator.java.html"><b><i>View Source</i></b></a>
+ * <a href="BaseWorkflowTaskDueDateComparator.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author Shuyang Zhou
  */
-public class WorkflowTaskNameComparator extends OrderByComparator {
+public class BaseWorkflowTaskDueDateComparator extends OrderByComparator {
 
-	public static String ORDER_BY_ASC = "name ASC, workflowTaskId ASC";
+	public static String ORDER_BY_ASC = "dueDate ASC, workflowTaskId ASC";
 
-	public static String ORDER_BY_DESC = "name DESC, workflowTaskId DESC";
+	public static String ORDER_BY_DESC = "dueDate DESC, workflowTaskId DESC";
 
-	public static String[] ORDER_BY_FIELDS = {"name", "workflowTaskId"};
+	public static String[] ORDER_BY_FIELDS = {"dueDate", "workflowTaskId"};
 
-	public WorkflowTaskNameComparator() {
+	public BaseWorkflowTaskDueDateComparator() {
 		this(false);
 	}
 
-	public WorkflowTaskNameComparator(boolean asc) {
+	public BaseWorkflowTaskDueDateComparator(boolean asc) {
 		_asc = asc;
 	}
 
@@ -42,10 +45,10 @@ public class WorkflowTaskNameComparator extends OrderByComparator {
 		WorkflowTask workflowTask1 = (WorkflowTask)obj1;
 		WorkflowTask workflowTask2 = (WorkflowTask)obj2;
 
-		String name1 = workflowTask1.getName();
-		String name2 = workflowTask2.getName();
+		Date dueDate1 = workflowTask1.getDueDate();
+		Date dueDate2 = workflowTask2.getDueDate();
 
-		int value = name1.compareTo(name2);
+		int value = dueDate1.compareTo(dueDate2);
 
 		if (value == 0) {
 			Long workflowTaskId1 = workflowTask1.getWorkflowTaskId();

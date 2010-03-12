@@ -20,27 +20,19 @@ import com.liferay.portal.kernel.workflow.WorkflowInstance;
 import java.util.Date;
 
 /**
- * <a href="WorkflowInstanceStartDateComparator.java.html"><b><i>View Source</i>
+ * <a href="BaseWorkflowInstanceEndDateComparator.java.html"><b><i>View Source</i>
  * </b></a>
  *
  * @author Shuyang Zhou
  */
-public class WorkflowInstanceStartDateComparator extends OrderByComparator {
+public abstract class BaseWorkflowInstanceEndDateComparator
+	extends OrderByComparator {
 
-	public static String ORDER_BY_ASC = "startDate ASC, workflowInstanceId ASC";
-
-	public static String ORDER_BY_DESC =
-		"startDate DESC, workflowInstanceId DESC";
-
-	public static String[] ORDER_BY_FIELDS = {
-		"startDate", "workflowInstanceId"
-	};
-
-	public WorkflowInstanceStartDateComparator() {
+	public BaseWorkflowInstanceEndDateComparator() {
 		this(false);
 	}
 
-	public WorkflowInstanceStartDateComparator(boolean asc) {
+	public BaseWorkflowInstanceEndDateComparator(boolean asc) {
 		_asc = asc;
 	}
 
@@ -48,10 +40,10 @@ public class WorkflowInstanceStartDateComparator extends OrderByComparator {
 		WorkflowInstance workflowInstance1 = (WorkflowInstance)obj1;
 		WorkflowInstance workflowInstance2 = (WorkflowInstance)obj2;
 
-		Date startDate1 = workflowInstance1.getStartDate();
-		Date startDate2 = workflowInstance2.getStartDate();
+		Date endDate1 = workflowInstance1.getEndDate();
+		Date endDate2 = workflowInstance2.getEndDate();
 
-		int value = startDate1.compareTo(startDate2);
+		int value = endDate1.compareTo(endDate2);
 
 		if (value == 0) {
 			Long workflowInstanceId1 =
@@ -68,19 +60,6 @@ public class WorkflowInstanceStartDateComparator extends OrderByComparator {
 		else {
 			return -value;
 		}
-	}
-
-	public String getOrderBy() {
-		if (_asc) {
-			return ORDER_BY_ASC;
-		}
-		else {
-			return ORDER_BY_DESC;
-		}
-	}
-
-	public String[] getOrderByFields() {
-		return ORDER_BY_FIELDS;
 	}
 
 	public boolean isAscending() {

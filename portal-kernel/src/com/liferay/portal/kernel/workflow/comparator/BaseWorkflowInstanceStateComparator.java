@@ -17,28 +17,20 @@ package com.liferay.portal.kernel.workflow.comparator;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.workflow.WorkflowInstance;
 
-import java.util.Date;
-
 /**
- * <a href="WorkflowInstanceEndDateComparator.java.html"><b><i>View Source</i>
- * </b></a>
+ * <a href="BaseWorkflowInstanceStateComparator.java.html"><b><i>View Source</i></b>
+ * </a>
  *
- * @author Shuyang Zhou
+ * @author Brian Wing Shun Chan
  */
-public class WorkflowInstanceEndDateComparator extends OrderByComparator {
+public abstract class BaseWorkflowInstanceStateComparator
+	extends OrderByComparator {
 
-	public static String ORDER_BY_ASC = "endDate ASC, workflowInstanceId ASC";
-
-	public static String ORDER_BY_DESC =
-		"endDate DESC, workflowInstanceId DESC";
-
-	public static String[] ORDER_BY_FIELDS = {"endDate", "workflowInstanceId"};
-
-	public WorkflowInstanceEndDateComparator() {
+	public BaseWorkflowInstanceStateComparator() {
 		this(false);
 	}
 
-	public WorkflowInstanceEndDateComparator(boolean asc) {
+	public BaseWorkflowInstanceStateComparator(boolean asc) {
 		_asc = asc;
 	}
 
@@ -46,10 +38,10 @@ public class WorkflowInstanceEndDateComparator extends OrderByComparator {
 		WorkflowInstance workflowInstance1 = (WorkflowInstance)obj1;
 		WorkflowInstance workflowInstance2 = (WorkflowInstance)obj2;
 
-		Date endDate1 = workflowInstance1.getEndDate();
-		Date endDate2 = workflowInstance2.getEndDate();
+		String state1 = workflowInstance1.getState();
+		String state2 = workflowInstance2.getState();
 
-		int value = endDate1.compareTo(endDate2);
+		int value = state1.compareTo(state2);
 
 		if (value == 0) {
 			Long workflowInstanceId1 =
@@ -66,19 +58,6 @@ public class WorkflowInstanceEndDateComparator extends OrderByComparator {
 		else {
 			return -value;
 		}
-	}
-
-	public String getOrderBy() {
-		if (_asc) {
-			return ORDER_BY_ASC;
-		}
-		else {
-			return ORDER_BY_DESC;
-		}
-	}
-
-	public String[] getOrderByFields() {
-		return ORDER_BY_FIELDS;
 	}
 
 	public boolean isAscending() {

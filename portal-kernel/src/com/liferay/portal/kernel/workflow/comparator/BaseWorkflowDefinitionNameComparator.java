@@ -18,24 +18,19 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.workflow.WorkflowDefinition;
 
 /**
- * <a href="WorkflowDefinitionNameComparator.java.html"><b><i>View Source</i>
+ * <a href="BaseWorkflowDefinitionNameComparator.java.html"><b><i>View Source</i>
  * </b></a>
  *
  * @author Shuyang Zhou
  */
-public class WorkflowDefinitionNameComparator extends OrderByComparator {
+public abstract class BaseWorkflowDefinitionNameComparator
+	extends OrderByComparator {
 
-	public static String ORDER_BY_ASC = "name ASC, version ASC";
-
-	public static String ORDER_BY_DESC = "name DESC, version DESC";
-
-	public static String[] ORDER_BY_FIELDS = {"name", "version"};
-
-	public WorkflowDefinitionNameComparator() {
+	public BaseWorkflowDefinitionNameComparator() {
 		this(false);
 	}
 
-	public WorkflowDefinitionNameComparator(boolean asc) {
+	public BaseWorkflowDefinitionNameComparator(boolean asc) {
 		_asc = asc;
 	}
 
@@ -61,19 +56,6 @@ public class WorkflowDefinitionNameComparator extends OrderByComparator {
 		else {
 			return -value;
 		}
-	}
-
-	public String getOrderBy() {
-		if (_asc) {
-			return ORDER_BY_ASC;
-		}
-		else {
-			return ORDER_BY_DESC;
-		}
-	}
-
-	public String[] getOrderByFields() {
-		return ORDER_BY_FIELDS;
 	}
 
 	public boolean isAscending() {

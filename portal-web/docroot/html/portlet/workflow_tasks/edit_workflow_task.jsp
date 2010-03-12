@@ -1,3 +1,5 @@
+<%@ page
+	import="com.liferay.portal.kernel.workflow.comparator.WorkflowComparatorFactoryUtil" %>
 <%
 /**
  * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
@@ -119,7 +121,7 @@ long classPK = ((Number)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS
 	<liferay-ui:panel defaultState="closed" title='<%= LanguageUtil.get(pageContext, "activities") %>'>
 
 		<%
-		List<WorkflowLog> workflowLogs = WorkflowLogManagerUtil.getWorkflowLogs(company.getCompanyId(), workflowTask.getWorkflowTaskId(), QueryUtil.ALL_POS, QueryUtil.ALL_POS, WorkflowLogComparatorFactoryUtil.getComparatorFactory().getCreateDateComparator(true));
+		List<WorkflowLog> workflowLogs = WorkflowLogManagerUtil.getWorkflowLogs(company.getCompanyId(), workflowTask.getWorkflowTaskId(), QueryUtil.ALL_POS, QueryUtil.ALL_POS, WorkflowComparatorFactoryUtil.getWorkflowLogComparatorFactory().getCreateDateComparator(true));
 
 		for (WorkflowLog workflowLog : workflowLogs) {
 			User curUser = UserLocalServiceUtil.getUser(workflowLog.getUserId());
