@@ -59,7 +59,7 @@ boolean quote = ParamUtil.getBoolean(request, "quote");
 	<portlet:param name="struts_action" value="/message_boards/edit_message" />
 </portlet:actionURL>
 
-<aui:form action="<%= editMessageURL %>" method="post" name="fm2" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveMessage();" %>'>
+<aui:form action="<%= editMessageURL %>" method="post" name="addQuickReplyFm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveMessage();" %>'>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.ADD %>" />
 	<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
 	<aui:input name="messageId" type="hidden" value="<%= messageId %>" />
@@ -103,8 +103,8 @@ boolean quote = ParamUtil.getBoolean(request, "quote");
 
 <aui:script>
 	function <portlet:namespace />saveMessage() {
-		document.<portlet:namespace />fm2.<portlet:namespace /><%= Constants.CMD %>.value;
-		document.<portlet:namespace />fm2.<portlet:namespace />body.value = <portlet:namespace />getHTML();
-		submitForm(document.<portlet:namespace />fm2);
+		document.<portlet:namespace />addQuickReplyFm.<portlet:namespace /><%= Constants.CMD %>.value;
+		document.<portlet:namespace />addQuickReplyFm.<portlet:namespace />body.value = <portlet:namespace />getHTML();
+		submitForm(document.<portlet:namespace />addQuickReplyFm);
 	}
 </aui:script>

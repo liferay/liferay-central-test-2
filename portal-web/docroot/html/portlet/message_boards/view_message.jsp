@@ -74,10 +74,9 @@ MBThread thread = messageDisplay.getThread();
 </c:choose>
 
 <c:if test="<%= MBCategoryPermission.contains(permissionChecker, scopeGroupId, message.getCategoryId(), ActionKeys.REPLY_TO_MESSAGE) && !thread.isLocked() %>">
-<div class="aui-helper-hidden" id="<portlet:namespace />quick-reply">
-
-	<%@ include file="/html/portlet/message_boards/edit_message_quick.jspf" %>
-</div>
+	<div class="aui-helper-hidden" id="<portlet:namespace />addQuickReplyDiv">
+		<%@ include file="/html/portlet/message_boards/edit_message_quick.jspf" %>
+	</div>
 </c:if>
 
 <aui:script>
@@ -105,15 +104,15 @@ MBThread thread = messageDisplay.getThread();
 	}
 
 	function <portlet:namespace />addQuickReply(cmd, messageId) {
-		var replyBox = AUI().one('#<portlet:namespace />quick-reply');
+		var addQuickReplyDiv = AUI().one('#<portlet:namespace />addQuickReplyDiv');
 
-		if(cmd == 'reply') {
-			replyBox.show();
-			replyBox.one('#<portlet:namespace />parentMessageId').val(messageId);
-			replyBox.one('textarea').focus();
+		if (cmd == 'reply') {
+			addQuickReplyDiv.show();
+			addQuickReplyDiv.one('#<portlet:namespace />parentMessageId').val(messageId);
+			addQuickReplyDiv.one('textarea').focus();
 		}
 		else {
-			replyBox.hide();
+			addQuickReplyDiv.hide();
 		}
 	}
 
