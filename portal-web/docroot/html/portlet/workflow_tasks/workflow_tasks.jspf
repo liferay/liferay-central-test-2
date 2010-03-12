@@ -142,7 +142,7 @@
 			Map<String, Serializable> workflowInstanceContext = workflowInstance.getContext();
 
 			String className = (String)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_NAME);
-			long classPK = (Long)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_PK);
+			long classPK = ((Number)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_PK)).longValue();
 
 			WorkflowHandler workflowHandler = WorkflowHandlerRegistryUtil.getWorkflowHandler(className);
 
@@ -158,7 +158,7 @@
 		>
 
 			<%
-			List<WorkflowLog> workflowLogs = WorkflowLogManagerUtil.getWorkflowLogs(company.getCompanyId(), workflowTask.getWorkflowTaskId(), 0, 1, new WorkflowLogCreateDateComparator(false));
+			List<WorkflowLog> workflowLogs = WorkflowLogManagerUtil.getWorkflowLogs(company.getCompanyId(), workflowTask.getWorkflowTaskId(), 0, 1, WorkflowLogComparatorFactoryUtil.getComparatorFactory().getCreateDateComparator(false));
 
 			if (workflowLogs.isEmpty()) {
 				buffer.append(LanguageUtil.get(pageContext, "never"));
@@ -200,10 +200,10 @@
 
 			Map<String, Serializable> workflowInstanceContext = workflowInstance.getContext();
 
-			long companyId = (Long)workflowInstanceContext.get(ContextConstants.COMPANY_ID);
-			long groupId = (Long)workflowInstanceContext.get(ContextConstants.GROUP_ID);
+			long companyId = ((Number)workflowInstanceContext.get(ContextConstants.COMPANY_ID)).longValue();
+			long groupId = ((Number)workflowInstanceContext.get(ContextConstants.GROUP_ID)).longValue();
 			String className = (String)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_NAME);
-			long classPK = (Long)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_PK);
+			long classPK = ((Number)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_PK)).longValue();
 
 			String state = WorkflowInstanceLinkLocalServiceUtil.getState(companyId, groupId, className, classPK);
 

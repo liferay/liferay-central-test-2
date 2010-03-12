@@ -25,10 +25,10 @@ WorkflowInstance workflowInstance = WorkflowInstanceManagerUtil.getWorkflowInsta
 
 Map<String, Serializable> workflowInstanceContext = workflowInstance.getContext();
 
-long companyId = (Long)workflowInstanceContext.get(ContextConstants.COMPANY_ID);
-long groupId = (Long)workflowInstanceContext.get(ContextConstants.GROUP_ID);
+long companyId = ((Number)workflowInstanceContext.get(ContextConstants.COMPANY_ID)).longValue();
+long groupId = ((Number)workflowInstanceContext.get(ContextConstants.GROUP_ID)).longValue();
 String className = (String)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_NAME);
-long classPK = (Long)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_PK);
+long classPK = ((Number)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_PK)).longValue();
 %>
 
 <h3 class="task-title"><%= workflowTask.getName() %></h3>
@@ -119,7 +119,7 @@ long classPK = (Long)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_PK
 	<liferay-ui:panel defaultState="closed" title='<%= LanguageUtil.get(pageContext, "activities") %>'>
 
 		<%
-		List<WorkflowLog> workflowLogs = WorkflowLogManagerUtil.getWorkflowLogs(company.getCompanyId(), workflowTask.getWorkflowTaskId(), QueryUtil.ALL_POS, QueryUtil.ALL_POS, new WorkflowLogCreateDateComparator(true));
+		List<WorkflowLog> workflowLogs = WorkflowLogManagerUtil.getWorkflowLogs(company.getCompanyId(), workflowTask.getWorkflowTaskId(), QueryUtil.ALL_POS, QueryUtil.ALL_POS, WorkflowLogComparatorFactoryUtil.getComparatorFactory().getCreateDateComparator(true));
 
 		for (WorkflowLog workflowLog : workflowLogs) {
 			User curUser = UserLocalServiceUtil.getUser(workflowLog.getUserId());
