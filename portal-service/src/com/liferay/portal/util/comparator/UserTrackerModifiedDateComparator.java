@@ -34,15 +34,15 @@ public class UserTrackerModifiedDateComparator
 		this(false);
 	}
 
-	public UserTrackerModifiedDateComparator(boolean asc) {
-		_asc = asc;
+	public UserTrackerModifiedDateComparator(boolean ascending) {
+		_ascending = ascending;
 	}
 
 	public int compare(UserTracker userTracker1, UserTracker userTracker2) {
 		int value = DateUtil.compareTo(
 			userTracker1.getModifiedDate(), userTracker2.getModifiedDate());
 
-		if (_asc) {
+		if (_ascending) {
 			return value;
 		}
 		else {
@@ -50,6 +50,6 @@ public class UserTrackerModifiedDateComparator
 		}
 	}
 
-	private boolean _asc;
+	private boolean _ascending;
 
 }

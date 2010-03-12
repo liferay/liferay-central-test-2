@@ -34,8 +34,8 @@ public class RoleNameComparator extends OrderByComparator {
 		this(false);
 	}
 
-	public RoleNameComparator(boolean asc) {
-		_asc = asc;
+	public RoleNameComparator(boolean ascending) {
+		_ascending = ascending;
 	}
 
 	public int compare(Object obj1, Object obj2) {
@@ -44,7 +44,7 @@ public class RoleNameComparator extends OrderByComparator {
 
 		int value = role1.getName().compareTo(role2.getName());
 
-		if (_asc) {
+		if (_ascending) {
 			return value;
 		}
 		else {
@@ -53,7 +53,7 @@ public class RoleNameComparator extends OrderByComparator {
 	}
 
 	public String getOrderBy() {
-		if (_asc) {
+		if (_ascending) {
 			return ORDER_BY_ASC;
 		}
 		else {
@@ -66,9 +66,9 @@ public class RoleNameComparator extends OrderByComparator {
 	}
 
 	public boolean isAscending() {
-		return _asc;
+		return _ascending;
 	}
 
-	private boolean _asc;
+	private boolean _ascending;
 
 }

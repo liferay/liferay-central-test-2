@@ -35,8 +35,8 @@ public class PasswordPolicyDescriptionComparator extends OrderByComparator {
 		this(false);
 	}
 
-	public PasswordPolicyDescriptionComparator(boolean asc) {
-		_asc = asc;
+	public PasswordPolicyDescriptionComparator(boolean ascending) {
+		_ascending = ascending;
 	}
 
 	public int compare(Object obj1, Object obj2) {
@@ -46,7 +46,7 @@ public class PasswordPolicyDescriptionComparator extends OrderByComparator {
 		int value = passwordPolicy1.getDescription().compareTo(
 			passwordPolicy2.getDescription());
 
-		if (_asc) {
+		if (_ascending) {
 			return value;
 		}
 		else {
@@ -55,7 +55,7 @@ public class PasswordPolicyDescriptionComparator extends OrderByComparator {
 	}
 
 	public String getOrderBy() {
-		if (_asc) {
+		if (_ascending) {
 			return ORDER_BY_ASC;
 		}
 		else {
@@ -68,9 +68,9 @@ public class PasswordPolicyDescriptionComparator extends OrderByComparator {
 	}
 
 	public boolean isAscending() {
-		return _asc;
+		return _ascending;
 	}
 
-	private boolean _asc;
+	private boolean _ascending;
 
 }

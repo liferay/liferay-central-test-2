@@ -27,13 +27,13 @@ public class KeyValuePairComparator implements Comparator<KeyValuePair> {
 		this(true);
 	}
 
-	public KeyValuePairComparator(boolean asc) {
-		this(true, asc);
+	public KeyValuePairComparator(boolean ascending) {
+		this(true, ascending);
 	}
 
-	public KeyValuePairComparator(boolean byKey, boolean asc) {
+	public KeyValuePairComparator(boolean byKey, boolean ascending) {
 		_byKey = byKey;
-		_asc = asc;
+		_ascending = ascending;
 	}
 
 	public int compare(KeyValuePair kvp1, KeyValuePair kvp2) {
@@ -41,7 +41,7 @@ public class KeyValuePairComparator implements Comparator<KeyValuePair> {
 			String key1 = kvp1.getKey();
 			String key2 = kvp2.getKey();
 
-			if (_asc) {
+			if (_ascending) {
 				return key1.compareTo(key2);
 			}
 			else {
@@ -52,7 +52,7 @@ public class KeyValuePairComparator implements Comparator<KeyValuePair> {
 			String value1 = kvp1.getValue();
 			String value2 = kvp2.getValue();
 
-			if (_asc) {
+			if (_ascending) {
 				return value1.compareTo(value2);
 			}
 			else {
@@ -62,6 +62,6 @@ public class KeyValuePairComparator implements Comparator<KeyValuePair> {
 	}
 
 	private boolean _byKey;
-	private boolean _asc;
+	private boolean _ascending;
 
 }

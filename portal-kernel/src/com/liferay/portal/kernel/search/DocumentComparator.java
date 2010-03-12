@@ -29,18 +29,20 @@ public class DocumentComparator implements Comparator<Document> {
 		this(true, false);
 	}
 
-	public DocumentComparator(boolean asc, boolean caseSensitive) {
-		_asc = asc;
+	public DocumentComparator(boolean ascending, boolean caseSensitive) {
+		_ascending = ascending;
 		_caseSensitive = caseSensitive;
 	}
 
 	public void addOrderBy(String name) {
-		addOrderBy(name, _asc, _caseSensitive);
+		addOrderBy(name, _ascending, _caseSensitive);
 	}
 
-	public void addOrderBy(String name, boolean asc, boolean caseSensitive) {
+	public void addOrderBy(
+		String name, boolean ascending, boolean caseSensitive) {
+
 		DocumentComparatorOrderBy orderBy = new DocumentComparatorOrderBy(
-			name, asc, caseSensitive);
+			name, ascending, caseSensitive);
 
 		_columns.add(orderBy);
 	}
@@ -76,7 +78,7 @@ public class DocumentComparator implements Comparator<Document> {
 		return 0;
 	}
 
-	private boolean _asc;
+	private boolean _ascending;
 	private boolean _caseSensitive;
 	private List<DocumentComparatorOrderBy> _columns =
 		new ArrayList<DocumentComparatorOrderBy>();

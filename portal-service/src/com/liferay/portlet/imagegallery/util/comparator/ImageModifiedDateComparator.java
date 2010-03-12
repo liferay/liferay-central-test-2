@@ -35,8 +35,8 @@ public class ImageModifiedDateComparator extends OrderByComparator {
 		this(false);
 	}
 
-	public ImageModifiedDateComparator(boolean asc) {
-		_asc = asc;
+	public ImageModifiedDateComparator(boolean ascending) {
+		_ascending = ascending;
 	}
 
 	public int compare(Object obj1, Object obj2) {
@@ -46,7 +46,7 @@ public class ImageModifiedDateComparator extends OrderByComparator {
 		int value = DateUtil.compareTo(
 			image1.getModifiedDate(), image2.getModifiedDate());
 
-		if (_asc) {
+		if (_ascending) {
 			return value;
 		}
 		else {
@@ -55,7 +55,7 @@ public class ImageModifiedDateComparator extends OrderByComparator {
 	}
 
 	public String getOrderBy() {
-		if (_asc) {
+		if (_ascending) {
 			return ORDER_BY_ASC;
 		}
 		else {
@@ -68,9 +68,9 @@ public class ImageModifiedDateComparator extends OrderByComparator {
 	}
 
 	public boolean isAscending() {
-		return _asc;
+		return _ascending;
 	}
 
-	private boolean _asc;
+	private boolean _ascending;
 
 }

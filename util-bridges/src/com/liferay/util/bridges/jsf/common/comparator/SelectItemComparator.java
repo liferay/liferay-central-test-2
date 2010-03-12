@@ -29,14 +29,14 @@ public class SelectItemComparator implements Comparator<SelectItem> {
 		this(true);
 	}
 
-	public SelectItemComparator(boolean asc) {
-		_asc = asc;
+	public SelectItemComparator(boolean ascending) {
+		_ascending = ascending;
 	}
 
 	public int compare(SelectItem selectItem1, SelectItem selectItem2) {
 		int value = selectItem1.getLabel().compareTo(selectItem2.getLabel());
 
-		if (_asc) {
+		if (_ascending) {
 			return value;
 		}
 		else {
@@ -44,6 +44,6 @@ public class SelectItemComparator implements Comparator<SelectItem> {
 		}
 	}
 
-	private boolean _asc;
+	private boolean _ascending;
 
 }

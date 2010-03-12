@@ -34,8 +34,8 @@ public class ReviewUserNameComparator extends OrderByComparator {
 		this(false);
 	}
 
-	public ReviewUserNameComparator(boolean asc) {
-		_asc = asc;
+	public ReviewUserNameComparator(boolean ascending) {
+		_ascending = ascending;
 	}
 
 	public int compare(Object obj1, Object obj2) {
@@ -55,7 +55,7 @@ public class ReviewUserNameComparator extends OrderByComparator {
 			value = review1.getUserName().compareTo(review2.getUserName());
 		}
 
-		if (_asc) {
+		if (_ascending) {
 			return value;
 		}
 		else {
@@ -64,7 +64,7 @@ public class ReviewUserNameComparator extends OrderByComparator {
 	}
 
 	public String getOrderBy() {
-		if (_asc) {
+		if (_ascending) {
 			return ORDER_BY_ASC;
 		}
 		else {
@@ -77,9 +77,9 @@ public class ReviewUserNameComparator extends OrderByComparator {
 	}
 
 	public boolean isAscending() {
-		return _asc;
+		return _ascending;
 	}
 
-	private boolean _asc;
+	private boolean _ascending;
 
 }

@@ -29,8 +29,8 @@ public class StringComparator implements Comparator<String>, Serializable {
 		this(true, false);
 	}
 
-	public StringComparator(boolean asc, boolean caseSensitive) {
-		_asc = asc;
+	public StringComparator(boolean ascending, boolean caseSensitive) {
+		_ascending = ascending;
 		_caseSensitive = caseSensitive;
 	}
 
@@ -43,7 +43,7 @@ public class StringComparator implements Comparator<String>, Serializable {
 			s2 = StringPool.BLANK;
 		}
 
-		if (!_asc) {
+		if (!_ascending) {
 			String temp = s1;
 
 			s1 = s2;
@@ -58,7 +58,7 @@ public class StringComparator implements Comparator<String>, Serializable {
 		}
 	}
 
-	private boolean _asc;
+	private boolean _ascending;
 	private boolean _caseSensitive;
 
 }

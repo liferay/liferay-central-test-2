@@ -34,8 +34,8 @@ public class EntryPriorityComparator extends OrderByComparator {
 		this(false);
 	}
 
-	public EntryPriorityComparator(boolean asc) {
-		_asc = asc;
+	public EntryPriorityComparator(boolean ascending) {
+		_ascending = ascending;
 	}
 
 	public int compare(Object obj1, Object obj2) {
@@ -51,7 +51,7 @@ public class EntryPriorityComparator extends OrderByComparator {
 			value = 1;
 		}
 
-		if (_asc) {
+		if (_ascending) {
 			return value;
 		}
 		else {
@@ -60,7 +60,7 @@ public class EntryPriorityComparator extends OrderByComparator {
 	}
 
 	public String getOrderBy() {
-		if (_asc) {
+		if (_ascending) {
 			return ORDER_BY_ASC;
 		}
 		else {
@@ -73,9 +73,9 @@ public class EntryPriorityComparator extends OrderByComparator {
 	}
 
 	public boolean isAscending() {
-		return _asc;
+		return _ascending;
 	}
 
-	private boolean _asc;
+	private boolean _ascending;
 
 }

@@ -40,8 +40,8 @@ public class ThreadLastPostDateComparator extends OrderByComparator {
 		this(false);
 	}
 
-	public ThreadLastPostDateComparator(boolean asc) {
-		_asc = asc;
+	public ThreadLastPostDateComparator(boolean ascending) {
+		_ascending = ascending;
 	}
 
 	public int compare(Object obj1, Object obj2) {
@@ -71,7 +71,7 @@ public class ThreadLastPostDateComparator extends OrderByComparator {
 			}
 		}
 
-		if (_asc) {
+		if (_ascending) {
 			return value;
 		}
 		else {
@@ -80,7 +80,7 @@ public class ThreadLastPostDateComparator extends OrderByComparator {
 	}
 
 	public String getOrderBy() {
-		if (_asc) {
+		if (_ascending) {
 			return ORDER_BY_ASC;
 		}
 		else {
@@ -93,9 +93,9 @@ public class ThreadLastPostDateComparator extends OrderByComparator {
 	}
 
 	public boolean isAscending() {
-		return _asc;
+		return _ascending;
 	}
 
-	private boolean _asc;
+	private boolean _ascending;
 
 }

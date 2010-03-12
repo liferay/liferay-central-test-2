@@ -36,8 +36,8 @@ public class FileRankCreateDateComparator extends OrderByComparator {
 		this(false);
 	}
 
-	public FileRankCreateDateComparator(boolean asc) {
-		_asc = asc;
+	public FileRankCreateDateComparator(boolean ascending) {
+		_ascending = ascending;
 	}
 
 	public int compare(Object obj1, Object obj2) {
@@ -47,7 +47,7 @@ public class FileRankCreateDateComparator extends OrderByComparator {
 		int value = DateUtil.compareTo(
 			fileRank1.getCreateDate(), fileRank2.getCreateDate());
 
-		if (_asc) {
+		if (_ascending) {
 			return value;
 		}
 		else {
@@ -56,7 +56,7 @@ public class FileRankCreateDateComparator extends OrderByComparator {
 	}
 
 	public String getOrderBy() {
-		if (_asc) {
+		if (_ascending) {
 			return ORDER_BY_ASC;
 		}
 		else {
@@ -69,9 +69,9 @@ public class FileRankCreateDateComparator extends OrderByComparator {
 	}
 
 	public boolean isAscending() {
-		return _asc;
+		return _ascending;
 	}
 
-	private boolean _asc;
+	private boolean _ascending;
 
 }

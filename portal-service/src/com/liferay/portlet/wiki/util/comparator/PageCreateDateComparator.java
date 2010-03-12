@@ -35,8 +35,8 @@ public class PageCreateDateComparator extends OrderByComparator {
 		this(false);
 	}
 
-	public PageCreateDateComparator(boolean asc) {
-		_asc = asc;
+	public PageCreateDateComparator(boolean ascending) {
+		_ascending = ascending;
 	}
 
 	public int compare(Object obj1, Object obj2) {
@@ -46,7 +46,7 @@ public class PageCreateDateComparator extends OrderByComparator {
 		int value = DateUtil.compareTo(
 			page1.getCreateDate(), page2.getCreateDate());
 
-		if (_asc) {
+		if (_ascending) {
 			return value;
 		}
 		else {
@@ -55,7 +55,7 @@ public class PageCreateDateComparator extends OrderByComparator {
 	}
 
 	public String getOrderBy() {
-		if (_asc) {
+		if (_ascending) {
 			return ORDER_BY_ASC;
 		}
 		else {
@@ -68,9 +68,9 @@ public class PageCreateDateComparator extends OrderByComparator {
 	}
 
 	public boolean isAscending() {
-		return _asc;
+		return _ascending;
 	}
 
-	private boolean _asc;
+	private boolean _ascending;
 
 }

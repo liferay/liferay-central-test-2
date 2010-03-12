@@ -34,8 +34,8 @@ public class EntryVisitsComparator extends OrderByComparator {
 		this(false);
 	}
 
-	public EntryVisitsComparator(boolean asc) {
-		_asc = asc;
+	public EntryVisitsComparator(boolean ascending) {
+		_ascending = ascending;
 	}
 
 	public int compare(Object obj1, Object obj2) {
@@ -51,7 +51,7 @@ public class EntryVisitsComparator extends OrderByComparator {
 			value = 1;
 		}
 
-		if (_asc) {
+		if (_ascending) {
 			return value;
 		}
 		else {
@@ -60,7 +60,7 @@ public class EntryVisitsComparator extends OrderByComparator {
 	}
 
 	public String getOrderBy() {
-		if (_asc) {
+		if (_ascending) {
 			return ORDER_BY_ASC;
 		}
 		else {
@@ -73,9 +73,9 @@ public class EntryVisitsComparator extends OrderByComparator {
 	}
 
 	public boolean isAscending() {
-		return _asc;
+		return _ascending;
 	}
 
-	private boolean _asc;
+	private boolean _ascending;
 
 }

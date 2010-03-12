@@ -34,8 +34,8 @@ public class LayoutComparator extends OrderByComparator {
 		this(false);
 	}
 
-	public LayoutComparator(boolean asc) {
-		_asc = asc;
+	public LayoutComparator(boolean ascending) {
+		_ascending = ascending;
 	}
 
 	public int compare(Object obj1, Object obj2) {
@@ -48,7 +48,7 @@ public class LayoutComparator extends OrderByComparator {
 		int value = groupId1.compareTo(groupId2);
 
 		if (value != 0) {
-			if (_asc) {
+			if (_ascending) {
 				return value;
 			}
 			else {
@@ -61,7 +61,7 @@ public class LayoutComparator extends OrderByComparator {
 
 		value = layoutId1.compareTo(layoutId2);
 
-		if (_asc) {
+		if (_ascending) {
 			return value;
 		}
 		else {
@@ -70,7 +70,7 @@ public class LayoutComparator extends OrderByComparator {
 	}
 
 	public String getOrderBy() {
-		if (_asc) {
+		if (_ascending) {
 			return ORDER_BY_ASC;
 		}
 		else {
@@ -83,9 +83,9 @@ public class LayoutComparator extends OrderByComparator {
 	}
 
 	public boolean isAscending() {
-		return _asc;
+		return _ascending;
 	}
 
-	private boolean _asc;
+	private boolean _ascending;
 
 }

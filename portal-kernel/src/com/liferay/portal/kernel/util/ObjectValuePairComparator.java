@@ -28,13 +28,13 @@ public class ObjectValuePairComparator<K, V>
 		this(true);
 	}
 
-	public ObjectValuePairComparator(boolean asc) {
-		this(true, asc);
+	public ObjectValuePairComparator(boolean ascending) {
+		this(true, ascending);
 	}
 
-	public ObjectValuePairComparator(boolean byKey, boolean asc) {
+	public ObjectValuePairComparator(boolean byKey, boolean ascending) {
 		_byKey = byKey;
-		_asc = asc;
+		_ascending = ascending;
 	}
 
 	public int compare(ObjectValuePair<K, V> ovp1, ObjectValuePair<K, V> ovp2) {
@@ -42,7 +42,7 @@ public class ObjectValuePairComparator<K, V>
 			Comparable key1 = (Comparable)ovp1.getKey();
 			Comparable key2 = (Comparable)ovp2.getKey();
 
-			if (_asc) {
+			if (_ascending) {
 				return key1.compareTo(key2);
 			}
 			else {
@@ -53,7 +53,7 @@ public class ObjectValuePairComparator<K, V>
 			Comparable value1 = (Comparable)ovp1.getValue();
 			Comparable value2 = (Comparable)ovp2.getValue();
 
-			if (_asc) {
+			if (_ascending) {
 				return value1.compareTo(value2);
 			}
 			else {
@@ -63,6 +63,6 @@ public class ObjectValuePairComparator<K, V>
 	}
 
 	private boolean _byKey;
-	private boolean _asc;
+	private boolean _ascending;
 
 }

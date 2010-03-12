@@ -36,8 +36,8 @@ public class StatsUserLastPostDateComparator extends OrderByComparator {
 		this(false);
 	}
 
-	public StatsUserLastPostDateComparator(boolean asc) {
-		_asc = asc;
+	public StatsUserLastPostDateComparator(boolean ascending) {
+		_ascending = ascending;
 	}
 
 	public int compare(Object obj1, Object obj2) {
@@ -47,7 +47,7 @@ public class StatsUserLastPostDateComparator extends OrderByComparator {
 		int value = DateUtil.compareTo(
 			statsUser1.getLastPostDate(), statsUser2.getLastPostDate());
 
-		if (_asc) {
+		if (_ascending) {
 			return value;
 		}
 		else {
@@ -56,7 +56,7 @@ public class StatsUserLastPostDateComparator extends OrderByComparator {
 	}
 
 	public String getOrderBy() {
-		if (_asc) {
+		if (_ascending) {
 			return ORDER_BY_ASC;
 		}
 		else {
@@ -69,9 +69,9 @@ public class StatsUserLastPostDateComparator extends OrderByComparator {
 	}
 
 	public boolean isAscending() {
-		return _asc;
+		return _ascending;
 	}
 
-	private boolean _asc;
+	private boolean _ascending;
 
 }

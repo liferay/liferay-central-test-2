@@ -27,8 +27,8 @@ public class ContactJobTitleComparator extends UserJobTitleComparator {
 		super();
 	}
 
-	public ContactJobTitleComparator(boolean asc) {
-		super(asc);
+	public ContactJobTitleComparator(boolean ascending) {
+		super(ascending);
 	}
 
 }

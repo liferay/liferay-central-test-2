@@ -36,8 +36,8 @@ public class FileEntryModifiedDateComparator extends OrderByComparator {
 		this(false);
 	}
 
-	public FileEntryModifiedDateComparator(boolean asc) {
-		_asc = asc;
+	public FileEntryModifiedDateComparator(boolean ascending) {
+		_ascending = ascending;
 	}
 
 	public int compare(Object obj1, Object obj2) {
@@ -47,7 +47,7 @@ public class FileEntryModifiedDateComparator extends OrderByComparator {
 		int value = DateUtil.compareTo(
 			fileEntry1.getModifiedDate(), fileEntry2.getModifiedDate());
 
-		if (_asc) {
+		if (_ascending) {
 			return value;
 		}
 		else {
@@ -56,7 +56,7 @@ public class FileEntryModifiedDateComparator extends OrderByComparator {
 	}
 
 	public String getOrderBy() {
-		if (_asc) {
+		if (_ascending) {
 			return ORDER_BY_ASC;
 		}
 		else {
@@ -69,9 +69,9 @@ public class FileEntryModifiedDateComparator extends OrderByComparator {
 	}
 
 	public boolean isAscending() {
-		return _asc;
+		return _ascending;
 	}
 
-	private boolean _asc;
+	private boolean _ascending;
 
 }

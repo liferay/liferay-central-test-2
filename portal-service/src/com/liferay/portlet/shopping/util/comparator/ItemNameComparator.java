@@ -34,8 +34,8 @@ public class ItemNameComparator extends OrderByComparator {
 		this(false);
 	}
 
-	public ItemNameComparator(boolean asc) {
-		_asc = asc;
+	public ItemNameComparator(boolean ascending) {
+		_ascending = ascending;
 	}
 
 	public int compare(Object obj1, Object obj2) {
@@ -52,7 +52,7 @@ public class ItemNameComparator extends OrderByComparator {
 				item2.getName().toLowerCase());
 		}
 
-		if (_asc) {
+		if (_ascending) {
 			return value;
 		}
 		else {
@@ -61,7 +61,7 @@ public class ItemNameComparator extends OrderByComparator {
 	}
 
 	public String getOrderBy() {
-		if (_asc) {
+		if (_ascending) {
 			return ORDER_BY_ASC;
 		}
 		else {
@@ -74,9 +74,9 @@ public class ItemNameComparator extends OrderByComparator {
 	}
 
 	public boolean isAscending() {
-		return _asc;
+		return _ascending;
 	}
 
-	private boolean _asc;
+	private boolean _ascending;
 
 }

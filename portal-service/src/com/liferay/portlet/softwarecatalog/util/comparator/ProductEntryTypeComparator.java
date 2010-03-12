@@ -34,8 +34,8 @@ public class ProductEntryTypeComparator extends OrderByComparator {
 		this(false);
 	}
 
-	public ProductEntryTypeComparator(boolean asc) {
-		_asc = asc;
+	public ProductEntryTypeComparator(boolean ascending) {
+		_ascending = ascending;
 	}
 
 	public int compare(Object obj1, Object obj2) {
@@ -45,7 +45,7 @@ public class ProductEntryTypeComparator extends OrderByComparator {
 		int value = productEntry1.getType().toLowerCase().compareTo(
 			productEntry2.getType().toLowerCase());
 
-		if (_asc) {
+		if (_ascending) {
 			return value;
 		}
 		else {
@@ -54,7 +54,7 @@ public class ProductEntryTypeComparator extends OrderByComparator {
 	}
 
 	public String getOrderBy() {
-		if (_asc) {
+		if (_ascending) {
 			return ORDER_BY_ASC;
 		}
 		else {
@@ -67,9 +67,9 @@ public class ProductEntryTypeComparator extends OrderByComparator {
 	}
 
 	public boolean isAscending() {
-		return _asc;
+		return _ascending;
 	}
 
-	private boolean _asc;
+	private boolean _ascending;
 
 }

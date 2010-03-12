@@ -38,8 +38,8 @@ public class UserFirstNameComparator extends OrderByComparator {
 		this(false);
 	}
 
-	public UserFirstNameComparator(boolean asc) {
-		_asc = asc;
+	public UserFirstNameComparator(boolean ascending) {
+		_ascending = ascending;
 	}
 
 	public int compare(Object obj1, Object obj2) {
@@ -56,7 +56,7 @@ public class UserFirstNameComparator extends OrderByComparator {
 			value = user1.getLastName().compareTo(user2.getLastName());
 		}
 
-		if (_asc) {
+		if (_ascending) {
 			return value;
 		}
 		else {
@@ -65,7 +65,7 @@ public class UserFirstNameComparator extends OrderByComparator {
 	}
 
 	public String getOrderBy() {
-		if (_asc) {
+		if (_ascending) {
 			return ORDER_BY_ASC;
 		}
 		else {
@@ -78,9 +78,9 @@ public class UserFirstNameComparator extends OrderByComparator {
 	}
 
 	public boolean isAscending() {
-		return _asc;
+		return _ascending;
 	}
 
-	private boolean _asc;
+	private boolean _ascending;
 
 }

@@ -40,16 +40,16 @@ public class PropertyComparator implements Comparator<Object> {
 	}
 
 	public PropertyComparator(
-		String propertyName, boolean asc, boolean caseSensitive) {
+		String propertyName, boolean ascending, boolean caseSensitive) {
 
-		this(new String[] {propertyName}, asc, caseSensitive);
+		this(new String[] {propertyName}, ascending, caseSensitive);
 	}
 
 	public PropertyComparator(
-		String[] propertyNames, boolean asc, boolean caseSensitive) {
+		String[] propertyNames, boolean ascending, boolean caseSensitive) {
 
 		_propertyNames = propertyNames;
-		_asc = asc;
+		_ascending = ascending;
 		_caseSensitive = caseSensitive;
 	}
 
@@ -61,7 +61,7 @@ public class PropertyComparator implements Comparator<Object> {
 				Object property2 = PropertyUtils.getProperty(
 					obj2, propertyName);
 
-				if (!_asc) {
+				if (!_ascending) {
 					Object temp = property1;
 
 					property1 = property2;
@@ -111,7 +111,7 @@ public class PropertyComparator implements Comparator<Object> {
 	private static Log _log = LogFactoryUtil.getLog(PropertyComparator.class);
 
 	private String[] _propertyNames;
-	private boolean _asc;
+	private boolean _ascending;
 	private boolean _caseSensitive;
 
 }

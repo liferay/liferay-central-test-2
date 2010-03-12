@@ -35,8 +35,8 @@ public class EntryCreateDateComparator extends OrderByComparator {
 		this(false);
 	}
 
-	public EntryCreateDateComparator(boolean asc) {
-		_asc = asc;
+	public EntryCreateDateComparator(boolean ascending) {
+		_ascending = ascending;
 	}
 
 	public int compare(Object obj1, Object obj2) {
@@ -46,7 +46,7 @@ public class EntryCreateDateComparator extends OrderByComparator {
 		int value = DateUtil.compareTo(
 			entry1.getCreateDate(), entry2.getCreateDate());
 
-		if (_asc) {
+		if (_ascending) {
 			return value;
 		}
 		else {
@@ -55,7 +55,7 @@ public class EntryCreateDateComparator extends OrderByComparator {
 	}
 
 	public String getOrderBy() {
-		if (_asc) {
+		if (_ascending) {
 			return ORDER_BY_ASC;
 		}
 		else {
@@ -68,9 +68,9 @@ public class EntryCreateDateComparator extends OrderByComparator {
 	}
 
 	public boolean isAscending() {
-		return _asc;
+		return _ascending;
 	}
 
-	private boolean _asc;
+	private boolean _ascending;
 
 }

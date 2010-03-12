@@ -34,8 +34,8 @@ public class FileEntryTitleComparator extends OrderByComparator {
 		this(false);
 	}
 
-	public FileEntryTitleComparator(boolean asc) {
-		_asc = asc;
+	public FileEntryTitleComparator(boolean ascending) {
+		_ascending = ascending;
 	}
 
 	public int compare(Object obj1, Object obj2) {
@@ -45,7 +45,7 @@ public class FileEntryTitleComparator extends OrderByComparator {
 		int value = fileEntry1.getTitle().toLowerCase().compareTo(
 			fileEntry2.getTitle().toLowerCase());
 
-		if (_asc) {
+		if (_ascending) {
 			return value;
 		}
 		else {
@@ -54,7 +54,7 @@ public class FileEntryTitleComparator extends OrderByComparator {
 	}
 
 	public String getOrderBy() {
-		if (_asc) {
+		if (_ascending) {
 			return ORDER_BY_ASC;
 		}
 		else {
@@ -67,9 +67,9 @@ public class FileEntryTitleComparator extends OrderByComparator {
 	}
 
 	public boolean isAscending() {
-		return _asc;
+		return _ascending;
 	}
 
-	private boolean _asc;
+	private boolean _ascending;
 
 }

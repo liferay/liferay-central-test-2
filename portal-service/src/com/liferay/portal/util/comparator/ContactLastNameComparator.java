@@ -27,8 +27,8 @@ public class ContactLastNameComparator extends UserLastNameComparator {
 		super();
 	}
 
-	public ContactLastNameComparator(boolean asc) {
-		super(asc);
+	public ContactLastNameComparator(boolean ascending) {
+		super(ascending);
 	}
 
 }
