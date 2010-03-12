@@ -477,6 +477,8 @@ public interface PropsKeys {
 
 	public static final String DL_LAYOUTS_SYNC_PUBLIC_FOLDER = "dl.layouts.sync.public.folder";
 
+	public static final String DL_WEBDAV_WEB_UNLOCK_ENABLED = "dl.webdav.web.unlock.enabled";
+
 	public static final String DOCKBAR_ADD_PORTLETS = "dockbar.add.portlets";
 
 	public static final String EDITOR_WYSIWYG_DEFAULT = "editor.wysiwyg.default";

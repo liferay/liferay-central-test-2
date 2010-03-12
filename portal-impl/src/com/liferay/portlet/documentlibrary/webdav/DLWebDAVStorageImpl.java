@@ -41,11 +41,15 @@ import com.liferay.portlet.documentlibrary.DuplicateFolderNameException;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
+import com.liferay.portlet.documentlibrary.model.DLFileVersion;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLFileVersionLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFolderServiceUtil;
+import com.liferay.portal.kernel.workflow.StatusConstants;
+import com.liferay.portal.util.PropsValues;
 
 import java.io.File;
 import java.io.InputStream;
@@ -623,6 +627,8 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 				isAddCommunityPermissions(groupId));
 			serviceContext.setAddGuestPermissions(true);
 
+			serviceContext.setStatus(StatusConstants.DRAFT);
+
 			try {
 				DLFileEntry entry = DLFileEntryServiceUtil.getFileEntryByTitle(
 					groupId, parentFolderId, name);
@@ -717,6 +723,12 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			if (resource instanceof DLFileEntryResourceImpl) {
 				DLFileEntry fileEntry = (DLFileEntry)resource.getModel();
 
+				if (PropsValues.DL_WEBDAV_WEB_UNLOCK_ENABLED) {
+					return true;
+				}
+
+				approveFileEntry(fileEntry);
+
 				DLFileEntryServiceUtil.unlockFileEntry(
 					fileEntry.getGroupId(), fileEntry.getFolderId(),
 					fileEntry.getName(), token);
@@ -745,6 +757,33 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		}
 
 		return false;
+	}
+
+	protected void approveFileEntry(DLFileEntry fileEntry) throws Exception {
+		DLFileVersion fileVersion =
+			DLFileVersionLocalServiceUtil.getLatestFileVersion(
+				fileEntry.getGroupId(), fileEntry.getFolderId(),
+				fileEntry.getName());
+
+		if (fileVersion.getStatus() != StatusConstants.DRAFT) {
+			return;
+		}
+
+		ServiceContext serviceContext = new ServiceContext();
+
+		serviceContext.setAddCommunityPermissions(
+			isAddCommunityPermissions(fileEntry.getGroupId()));
+		serviceContext.setAddGuestPermissions(true);
+
+		serviceContext.setStatus(StatusConstants.APPROVED);
+
+		String[] assetTagNames = AssetTagLocalServiceUtil.getTagNames(
+			DLFileEntry.class.getName(), fileEntry.getFileEntryId());
+
+		serviceContext.setAssetTagNames(assetTagNames);
+
+		DLFileEntryLocalServiceUtil.updateWorkflowStatus(
+			fileEntry.getUserId(), fileEntry.getFileEntryId(), serviceContext);
 	}
 
 	protected boolean deleteResource(
