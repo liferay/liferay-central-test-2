@@ -258,7 +258,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 						<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="assetSourcePanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "source") %>'>
 							<aui:fieldset label="scope">
 								<aui:select label="" name="defaultScope">
-									<aui:option label="<%= themeDisplay.getScopeGroup().getDescriptiveName() %>" selected="<%= defaultScope %>" value="<%= true %>" />
+									<aui:option label="<%= HtmlUtil.escape(themeDisplay.getScopeGroup().getDescriptiveName()) %>" selected="<%= defaultScope %>" value="<%= true %>" />
 									<aui:option label='<%= LanguageUtil.get(pageContext,"select") + "..." %>' selected="<%= !defaultScope %>" value="<%= false %>" />
 								</aui:select>
 
@@ -283,7 +283,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 								for (long groupId : groupIds) {
 									Group group = GroupLocalServiceUtil.getGroup(groupId);
 
-									scopesLeftList.add(new KeyValuePair(_getKey(group), group.getDescriptiveName()));
+									scopesLeftList.add(new KeyValuePair(_getKey(group), HtmlUtil.escape(group.getDescriptiveName())));
 								}
 
 								// Right list
@@ -294,7 +294,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 
 								for (Group group : groups) {
 									if (Arrays.binarySearch(groupIds, group.getGroupId()) < 0) {
-										scopesRightList.add(new KeyValuePair(_getKey(group), group.getDescriptiveName()));
+										scopesRightList.add(new KeyValuePair(_getKey(group), HtmlUtil.escape(group.getDescriptiveName())));
 									}
 								}
 

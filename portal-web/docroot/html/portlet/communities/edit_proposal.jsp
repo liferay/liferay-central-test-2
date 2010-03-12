@@ -93,7 +93,7 @@ portletURL.setParameter("proposalId", String.valueOf(proposalId));
 
 	<aui:fieldset>
 		<aui:field-wrapper label="user">
-			<%= PortalUtil.getUserName(proposal.getUserId(), proposal.getUserName()) %>
+			<%= HtmlUtil.escape(PortalUtil.getUserName(proposal.getUserId(), proposal.getUserName())) %>
 		</aui:field-wrapper>
 
 		<aui:field-wrapper label="name">
@@ -157,7 +157,7 @@ portletURL.setParameter("proposalId", String.valueOf(proposalId));
 							List<TasksReview> reviews = TasksReviewLocalServiceUtil.getReviews(proposal.getProposalId(), i);
 
 							for (TasksReview curReview : reviews) {
-								leftList.add(new KeyValuePair(String.valueOf(curReview.getUserId()), PortalUtil.getUserName(curReview.getUserId(), curReview.getUserName())));
+								leftList.add(new KeyValuePair(String.valueOf(curReview.getUserId()), HtmlUtil.escape(PortalUtil.getUserName(curReview.getUserId(), curReview.getUserName()))));
 							}
 						}
 						else {
@@ -166,7 +166,7 @@ portletURL.setParameter("proposalId", String.valueOf(proposalId));
 							for (long reviewUserId : reviewUserIds) {
 								User reviewUser = UserLocalServiceUtil.getUserById(reviewUserId);
 
-								leftList.add(new KeyValuePair(String.valueOf(reviewUser.getUserId()), PortalUtil.getUserName(reviewUser.getUserId(), reviewUser.getFullName())));
+								leftList.add(new KeyValuePair(String.valueOf(reviewUser.getUserId()), HtmlUtil.escape(PortalUtil.getUserName(reviewUser.getUserId(), reviewUser.getFullName()))));
 							}
 						}
 
@@ -192,7 +192,7 @@ portletURL.setParameter("proposalId", String.valueOf(proposalId));
 						List<User> reviewers = UserLocalServiceUtil.search(company.getCompanyId(), null, null, userParams, QueryUtil.ALL_POS, QueryUtil.ALL_POS, (OrderByComparator)null);
 
 						for (User reviewer : reviewers) {
-							KeyValuePair kvp = new KeyValuePair(String.valueOf(reviewer.getUserId()), reviewer.getFullName());
+							KeyValuePair kvp = new KeyValuePair(String.valueOf(reviewer.getUserId()), HtmlUtil.escape(reviewer.getFullName()));
 
 							if (!leftList.contains(kvp)) {
 								rightList.add(kvp);
@@ -356,7 +356,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	// User
 
-	row.addText(PortalUtil.getUserName(curReview.getUserId(), curReview.getUserName()));
+	row.addText(HtmlUtil.escape(PortalUtil.getUserName(curReview.getUserId(), curReview.getUserName())));
 
 	// Stage
 

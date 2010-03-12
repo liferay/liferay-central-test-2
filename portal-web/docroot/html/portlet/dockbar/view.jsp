@@ -208,7 +208,7 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 
 		<li class="user-avatar <%= themeDisplay.isImpersonated() ? "impersonating-user has-submenu" : "" %>" id="<portlet:namespace />userAvatar">
 			<span class="user-links <%= themeDisplay.isImpersonated() ? "menu-button": "" %>">
-				<a href="<%= HtmlUtil.escape(themeDisplay.getURLMyAccount().toString()) %>"><img alt="<%= user.getFullName() %>" src="<%= themeDisplay.getPathImage() %>/user_<%= user.isFemale() ? "female" : "male" %>_portrait?img_id=<%= user.getPortraitId() %>&t=<%= ImageServletTokenUtil.getToken(user.getPortraitId()) %>" /></a> <a href="<%= HtmlUtil.escape(themeDisplay.getURLMyAccount().toString()) %>"><%= user.getFullName() %></a>
+				<a href="<%= HtmlUtil.escape(themeDisplay.getURLMyAccount().toString()) %>"><img alt="<%= HtmlUtil.escape(user.getFullName()) %>" src="<%= themeDisplay.getPathImage() %>/user_<%= user.isFemale() ? "female" : "male" %>_portrait?img_id=<%= user.getPortraitId() %>&t=<%= ImageServletTokenUtil.getToken(user.getPortraitId()) %>" /></a> <a href="<%= HtmlUtil.escape(themeDisplay.getURLMyAccount().toString()) %>"><%= HtmlUtil.escape(user.getFullName()) %></a>
 
 				<c:if test="<%= themeDisplay.isShowSignOutIcon() %>">
 					<span class="sign-out">(<a href="<%= themeDisplay.getURLSignOut() %>"><liferay-ui:message key="sign-out" /></a>)</span>
@@ -221,7 +221,7 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 						<div class="notice-message portlet-msg-info">
 							<c:choose>
 								<c:when test="<%= themeDisplay.isSignedIn() %>">
-									<%= LanguageUtil.format(pageContext, "you-are-impersonating-x", new Object[] {user.getFullName()}) %>
+									<%= LanguageUtil.format(pageContext, "you-are-impersonating-x", new Object[] {HtmlUtil.escape(user.getFullName())}) %>
 								</c:when>
 								<c:otherwise>
 									<liferay-ui:message key="you-are-impersonating-the-guest-user" />
@@ -231,7 +231,7 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 
 						<ul>
 							<li>
-								<a href="<%= PortalUtil.getLayoutURL(layout, themeDisplay, false) %>"><liferay-ui:message key="be-yourself-again" /> (<%= realUser.getFullName() %>)</a>
+								<a href="<%= PortalUtil.getLayoutURL(layout, themeDisplay, false) %>"><liferay-ui:message key="be-yourself-again" /> (<%= HtmlUtil.escape(realUser.getFullName()) %>)</a>
 							</li>
 
 							<%
@@ -247,7 +247,7 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 
 								if (locale.getLanguage().equals(realUserLocale.getLanguage()) && locale.getCountry().equals(realUserLocale.getCountry())) {
 									doAsUserLanguageId = userLocale.getLanguage() + "_" + userLocale.getCountry();
-									changeLanguageMessage = LanguageUtil.format(realUserLocale, "use-x's-preferred-language-(x)", new String[] {user.getFullName(), userLocale.getDisplayLanguage(realUserLocale)});
+									changeLanguageMessage = LanguageUtil.format(realUserLocale, "use-x's-preferred-language-(x)", new String[] {HtmlUtil.escape(user.getFullName()), userLocale.getDisplayLanguage(realUserLocale)});
 								}
 								else {
 									doAsUserLanguageId = realUserLocale.getLanguage() + "_" + realUserLocale.getCountry();

@@ -90,7 +90,7 @@ int count = 0;
 		<liferay-ui:message key="created-by" />
 	</th>
 	<td>
-		<%= initialPage.getUserName() %> (<%= dateFormatDateTime.format(initialPage.getCreateDate()) %>)
+		<%= HtmlUtil.escape(initialPage.getUserName()) %> (<%= dateFormatDateTime.format(initialPage.getCreateDate()) %>)
 	</td>
 </tr>
 <tr class="portlet-section-body<%= MathUtil.isOdd(count++) ? "-alternate" : "" %> results-row <%= MathUtil.isOdd(count) ? "alt" : "" %>">
@@ -98,7 +98,7 @@ int count = 0;
 		<liferay-ui:message key="last-changed-by" />
 	</th>
 	<td>
-		<%= wikiPage.getUserName() %> (<%= dateFormatDateTime.format(wikiPage.getCreateDate()) %>)
+		<%= HtmlUtil.escape(wikiPage.getUserName()) %> (<%= dateFormatDateTime.format(wikiPage.getCreateDate()) %>)
 	</td>
 </tr>
 <tr class="portlet-section-body<%= MathUtil.isOdd(count++) ? "-alternate" : "" %> results-row <%= MathUtil.isOdd(count) ? "alt" : "" %>">

@@ -74,7 +74,7 @@ userTracker = userTracker.toEscapedModel();
 				</aui:field-wrapper>
 
 				<aui:field-wrapper label="name">
-					<%= (user2 != null) ? user2.getFullName() : LanguageUtil.get(pageContext, "not-available") %>
+					<%= (user2 != null) ? HtmlUtil.escape(user2.getFullName()) : LanguageUtil.get(pageContext, "not-available") %>
 				</aui:field-wrapper>
 
 				<aui:field-wrapper label="email-address">

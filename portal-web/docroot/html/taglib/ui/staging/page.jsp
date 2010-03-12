@@ -138,7 +138,7 @@
 									JSONObject jsonReviewer = JSONFactoryUtil.createJSONObject();
 
 									jsonReviewer.put("userId", reviewer.getUserId());
-									jsonReviewer.put("fullName", reviewer.getFullName());
+									jsonReviewer.put("fullName", HtmlUtil.escape(reviewer.getFullName()));
 
 									jsonReviewers.put(jsonReviewer);
 								}

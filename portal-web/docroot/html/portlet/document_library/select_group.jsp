@@ -52,11 +52,9 @@
 	for (int i = 0; i < results.size(); i++) {
 		Group group = results.get(i);
 
-		group = group.toEscapedModel();
-
 		ResultRow row = new ResultRow(group, group.getGroupId(), i);
 
-		String groupName = group.getDescriptiveName();
+		String groupName = HtmlUtil.escape(group.getDescriptiveName());
 
 		if (group.isUser()) {
 			groupName = LanguageUtil.get(pageContext, "my-community");

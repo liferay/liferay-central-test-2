@@ -94,7 +94,7 @@ else {
 
 						// User
 
-						row.addText(user2.getFullName(), rowHREF);
+						row.addText(HtmlUtil.escape(user2.getFullName()), rowHREF);
 
 						// Type
 

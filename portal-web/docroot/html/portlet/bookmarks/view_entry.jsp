@@ -67,7 +67,7 @@ request.setAttribute("view_entry.jsp-entry", entry);
 		</div>
 
 		<div class="entry-author">
-			<%= LanguageUtil.format(pageContext, "created-by-x", PortalUtil.getUserName(entry.getUserId(), themeDisplay.getScopeGroupName())) %>
+			<%= LanguageUtil.format(pageContext, "created-by-x", HtmlUtil.escape(PortalUtil.getUserName(entry.getUserId(), themeDisplay.getScopeGroupName()))) %>
 		</div>
 
 		<div class="entry-date">

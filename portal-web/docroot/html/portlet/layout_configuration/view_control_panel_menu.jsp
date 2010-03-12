@@ -37,7 +37,7 @@
 				String title = null;
 
 				if (category.equals(PortletCategoryKeys.MY)) {
-					title = StringUtil.shorten(user.getFullName(), 25);
+					title = HtmlUtil.escape(StringUtil.shorten(user.getFullName(), 25));
 				}
 				else {
 					title = LanguageUtil.get(pageContext, "category." + category);

@@ -149,7 +149,7 @@ double version = ParamUtil.getDouble(request, "version");
 
 			rowTextEntry = (TextSearchEntry)rowTextEntry.clone();
 
-			rowTextEntry.setName(PortalUtil.getUserName(article.getUserId(), article.getUserName()));
+			rowTextEntry.setName(HtmlUtil.escape(PortalUtil.getUserName(article.getUserId(), article.getUserName())));
 
 			row.addText(rowTextEntry);
 

@@ -31,8 +31,6 @@ if (portletName.equals(PortletKeys.LAYOUT_MANAGEMENT) || portletName.equals(Port
 
 Group selGroup = (Group)request.getAttribute(WebKeys.GROUP);
 
-selGroup = selGroup.toEscapedModel();
-
 Group liveGroup = null;
 Group stagingGroup = null;
 
@@ -325,7 +323,7 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 						<liferay-ui:message key='<%= "edit-pages-for-" + (organization.isRoot() ? "organization" : "location" ) %>' />: <%= HtmlUtil.escape(organization.getName()) %>
 					</c:when>
 					<c:when test="<%= liveGroup.isUser() %>">
-						<liferay-ui:message key="edit-pages-for-user" />: <%= selUser.getFullName() %>
+						<liferay-ui:message key="edit-pages-for-user" />: <%= HtmlUtil.escape(selUser.getFullName()) %>
 					</c:when>
 					<c:when test="<%= liveGroup.isUserGroup() %>">
 						<liferay-ui:message key="edit-pages-for-user-group" />: <%= HtmlUtil.escape(group.getDescriptiveName()) %>

@@ -188,7 +188,7 @@ while (rolesItr.hasNext()) {
 		<liferay-ui:search-container-column-text
 			href="<%= editGroupURL %>"
 			name="name"
-			value="<%= group.getDescriptiveName() %>"
+			value="<%= HtmlUtil.escape(group.getDescriptiveName()) %>"
 		/>
 
 		<portlet:renderURL var="editRoleURL">

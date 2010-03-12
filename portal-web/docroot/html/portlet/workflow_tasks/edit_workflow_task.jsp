@@ -53,7 +53,7 @@ long classPK = ((Number)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS
 	</aui:field-wrapper>
 
 	<aui:field-wrapper inlineLabel="left" label="assignee">
-		<%= PortalUtil.getUserName(workflowTask.getAssigneeUserId(), StringPool.BLANK) %>
+		<%= HtmlUtil.escape(PortalUtil.getUserName(workflowTask.getAssigneeUserId(), StringPool.BLANK)) %>
 	</aui:field-wrapper>
 
 	<%
@@ -101,7 +101,7 @@ long classPK = ((Number)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS
 				for (long pooledActorId : pooledActorsIds) {
 				%>
 
-					<aui:option label="<%= PortalUtil.getUserName(pooledActorId, StringPool.BLANK) %>" selected="<%= workflowTask.getAssigneeUserId() == pooledActorId %>" value="<%= String.valueOf(pooledActorId) %>" />
+					<aui:option label="<%= HtmlUtil.escape(PortalUtil.getUserName(pooledActorId, StringPool.BLANK)) %>" selected="<%= workflowTask.getAssigneeUserId() == pooledActorId %>" value="<%= String.valueOf(pooledActorId) %>" />
 
 				<%
 				}
@@ -133,19 +133,19 @@ long classPK = ((Number)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS
 				<c:choose>
 					<c:when test="<%= workflowLog.getType() == WorkflowLog.TRANSITION %>">
 						<div>
-							<%= LanguageUtil.format(pageContext, "x-changed-the-state-from-x-to-x", new Object[] {curUser.getFullName(), workflowLog.getPreviousState(), workflowLog.getState()}) %>
+							<%= LanguageUtil.format(pageContext, "x-changed-the-state-from-x-to-x", new Object[] {HtmlUtil.escape(curUser.getFullName()), workflowLog.getPreviousState(), workflowLog.getState()}) %>
 						</div>
 					</c:when>
 					<c:otherwise>
 						<c:choose>
 							<c:when test="<%= workflowLog.getPreviousUserId() == 0 %>">
 								<div>
-									<%= LanguageUtil.format(pageContext, curUser.isMale() ? "x-assigned-the-task-to-himself" : "x-assigned-the-task-to-herself", curUser.getFullName()) %>
+									<%= LanguageUtil.format(pageContext, curUser.isMale() ? "x-assigned-the-task-to-himself" : "x-assigned-the-task-to-herself", HtmlUtil.escape(curUser.getFullName())) %>
 								</div>
 							</c:when>
 							<c:otherwise>
 								<div>
-									<%= LanguageUtil.format(pageContext, "x-assigned-the-task-to-x", new Object[] {PortalUtil.getUserName(workflowLog.getPreviousUserId(), StringPool.BLANK), curUser.getFullName()}) %>
+									<%= LanguageUtil.format(pageContext, "x-assigned-the-task-to-x", new Object[] {HtmlUtil.escape(PortalUtil.getUserName(workflowLog.getPreviousUserId(), StringPool.BLANK)), curUser.getFullName()}) %>
 								</div>
 							</c:otherwise>
 						</c:choose>

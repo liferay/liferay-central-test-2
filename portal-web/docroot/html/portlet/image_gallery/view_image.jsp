@@ -88,7 +88,7 @@ if (portletDisplay.isWebDAVEnabled()) {
 		</div>
 
 		<div class="image-author">
-			<%= LanguageUtil.format(pageContext, "last-updated-by-x", PortalUtil.getUserName(image.getUserId(), themeDisplay.getScopeGroupName())) %>
+			<%= LanguageUtil.format(pageContext, "last-updated-by-x", HtmlUtil.escape(PortalUtil.getUserName(image.getUserId(), themeDisplay.getScopeGroupName()))) %>
 		</div>
 
 		<div class="image-date">

@@ -223,7 +223,7 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 					<td align="center" class="lfr-top">
 						<liferay-ui:user-display
 							userId="<%= message.getUserId() %>"
-							userName="<%= message.getUserName() %>"
+							userName="<%= HtmlUtil.escape(message.getUserName()) %>"
 							displayStyle="<%= 2 %>"
 						/>
 					</td>
@@ -258,7 +258,7 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 									sb.append("message_");
 									sb.append(parentMessage.getMessageId());
 									sb.append("\">");
-									sb.append(parentMessage.getUserName());
+									sb.append(HtmlUtil.escape(parentMessage.getUserName()));
 									sb.append("</a>");
 									%>
 

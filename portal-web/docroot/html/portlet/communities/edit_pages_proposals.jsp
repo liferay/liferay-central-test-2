@@ -84,7 +84,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	// User
 
-	row.addText(PortalUtil.getUserName(proposal.getUserId(), proposal.getUserName()), rowURL);
+	row.addText(HtmlUtil.escape(PortalUtil.getUserName(proposal.getUserId(), proposal.getUserName())), rowURL);
 
 	// Due date
 

@@ -56,10 +56,6 @@ else if (toFolderId > 0) {
 	}
 }
 
-if (toGroup != null) {
-	toGroup = toGroup.toEscapedModel();
-}
-
 toFileEntry = toFileEntry.toEscapedModel();
 
 String extension = null;
@@ -146,7 +142,7 @@ request.setAttribute("view_file_shortcut.jsp-fileShortcut", fileShortcut);
 		</div>
 
 		<div class="file-entry-author">
-			<%= LanguageUtil.format(pageContext, "last-updated-by-x", PortalUtil.getUserName(toFileEntry.getUserId(), toFileEntry.getUserName())) %>
+			<%= LanguageUtil.format(pageContext, "last-updated-by-x", HtmlUtil.escape(PortalUtil.getUserName(toFileEntry.getUserId(), toFileEntry.getUserName()))) %>
 		</div>
 
 		<div class="file-entry-date">
@@ -175,7 +171,7 @@ request.setAttribute("view_file_shortcut.jsp-fileShortcut", fileShortcut);
 		<div class="file-entry-field">
 			<label><liferay-ui:message key="community" /></label>
 
-			<%= toGroup.getDescriptiveName() %>
+			<%= HtmlUtil.escape(toGroup.getDescriptiveName()) %>
 		</div>
 	</aui:column>
 

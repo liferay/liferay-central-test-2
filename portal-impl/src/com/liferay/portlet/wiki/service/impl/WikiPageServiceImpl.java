@@ -314,8 +314,8 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 		StringBundler link = new StringBundler(7);
 
 		for (WikiPage page : pages) {
-			String author = PortalUtil.getUserName(
-				page.getUserId(), page.getUserName());
+			String author = HtmlUtil.escape(
+				PortalUtil.getUserName(page.getUserId(), page.getUserName()));
 
 			String title =
 				page.getTitle() + StringPool.SPACE + page.getVersion();

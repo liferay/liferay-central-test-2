@@ -64,12 +64,12 @@ if (treeWalker.isOdd()) {
 						<liferay-ui:message key="anonymous" />
 					</c:when>
 					<c:otherwise>
-						<%= message.getUserName() %>
+						<%= HtmlUtil.escape(message.getUserName()) %>
 					</c:otherwise>
 				</c:choose>
 			</c:when>
 			<c:otherwise>
-				<%= PortalUtil.getUserName(message.getUserId(), message.getUserName()) %>
+				<%= HtmlUtil.escape(PortalUtil.getUserName(message.getUserId(), message.getUserName())) %>
 			</c:otherwise>
 		</c:choose>
 

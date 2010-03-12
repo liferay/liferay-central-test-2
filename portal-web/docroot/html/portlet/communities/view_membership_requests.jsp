@@ -99,7 +99,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	StringBundler sb = new StringBundler(4);
 
-	sb.append(user2.getFullName());
+	sb.append(HtmlUtil.escape(user2.getFullName()));
 	sb.append(" (");
 	sb.append(user2.getEmailAddress());
 	sb.append(")");
@@ -120,7 +120,7 @@ for (int i = 0; i < results.size(); i++) {
 
 		User user3 = UserLocalServiceUtil.getUserById(membershipRequest.getReplierUserId());
 
-		row.addText(user3.getFullName());
+		row.addText(HtmlUtil.escape(user3.getFullName()));
 
 		// Reply comments
 

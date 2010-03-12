@@ -124,7 +124,7 @@ int userIdsPos = ParamUtil.getInteger(request, "userIdsPos");
 		User user2 = UserLocalServiceUtil.getUserById(userIdsArray[userIdsPos]);
 		%>
 
-		<liferay-ui:tabs names="<%= user2.getFullName() %>" />
+		<liferay-ui:tabs names="<%= HtmlUtil.escape(user2.getFullName()) %>" />
 
 		<%
 		List permissions = PermissionLocalServiceUtil.getUserPermissions(user2.getUserId(), resource.getResourceId());

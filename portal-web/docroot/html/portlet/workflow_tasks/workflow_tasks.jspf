@@ -89,7 +89,7 @@
 					User assigneeUser = UserLocalServiceUtil.getUser(workflowTask.getAssigneeUserId());
 
 					buffer.append("<img alt=\"");
-					buffer.append(assigneeUser.getFullName());
+					buffer.append(HtmlUtil.escape(assigneeUser.getFullName()));
 					buffer.append("\" class=\"user-avatar\" src=\"");
 					buffer.append(themeDisplay.getPathImage());
 					buffer.append("/user_");
@@ -106,7 +106,7 @@
 					buffer.append("&t=");
 					buffer.append(ImageServletTokenUtil.getToken(assigneeUser.getPortraitId()));
 					buffer.append("\" title=\"");
-					buffer.append(assigneeUser.getFullName());
+					buffer.append(HtmlUtil.escape(assigneeUser.getFullName()));
 					buffer.append("\" />");
 				}
 				%>

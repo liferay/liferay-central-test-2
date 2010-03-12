@@ -196,7 +196,7 @@ type = ParamUtil.getString(request, "type", type);
 
 		// Author
 
-		row.addText(PortalUtil.getUserName(curArticle.getUserId(), curArticle.getUserName()), rowHREF);
+		row.addText(HtmlUtil.escape(PortalUtil.getUserName(curArticle.getUserId(), curArticle.getUserName())), rowHREF);
 
 		// Add result row
 

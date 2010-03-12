@@ -384,7 +384,7 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 					row.addText(LanguageUtil.get(pageContext, "anonymous"), rowURL);
 				}
 				else {
-					row.addText(PortalUtil.getUserName(message.getUserId(), message.getUserName()), rowURL);
+					row.addText(HtmlUtil.escape(PortalUtil.getUserName(message.getUserId(), message.getUserName())), rowURL);
 				}
 
 				// Number of posts
@@ -407,7 +407,7 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 					sb.append(": ");
 					sb.append(dateFormatDateTime.format(thread.getLastPostDate()));
 
-					String lastPostByUserName = PortalUtil.getUserName(thread.getLastPostByUserId(), StringPool.BLANK);
+					String lastPostByUserName = HtmlUtil.escape(PortalUtil.getUserName(thread.getLastPostByUserId(), StringPool.BLANK));
 
 					if (Validator.isNotNull(lastPostByUserName)) {
 						sb.append("<br />");
@@ -460,7 +460,7 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 
 		<c:if test='<%= topLink.equals("recent-posts") && (groupThreadsUserId > 0) %>'>
 			<div class="portlet-msg-info">
-				<liferay-ui:message key="filter-by-user" />: <%= PortalUtil.getUserName(groupThreadsUserId, StringPool.BLANK) %>
+				<liferay-ui:message key="filter-by-user" />: <%= HtmlUtil.escape(PortalUtil.getUserName(groupThreadsUserId, StringPool.BLANK)) %>
 			</div>
 		</c:if>
 
@@ -658,7 +658,7 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 				row.addText(LanguageUtil.get(pageContext, "anonymous"), rowURL);
 			}
 			else {
-				row.addText(PortalUtil.getUserName(message.getUserId(), message.getUserName()), rowURL);
+				row.addText(HtmlUtil.escape(PortalUtil.getUserName(message.getUserId(), message.getUserName())), rowURL);
 			}
 
 			// Number of posts
@@ -681,7 +681,7 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 				sb.append(": ");
 				sb.append(dateFormatDateTime.format(thread.getLastPostDate()));
 
-				String lastPostByUserName = PortalUtil.getUserName(thread.getLastPostByUserId(), StringPool.BLANK);
+				String lastPostByUserName = HtmlUtil.escape(PortalUtil.getUserName(thread.getLastPostByUserId(), StringPool.BLANK));
 
 				if (Validator.isNotNull(lastPostByUserName)) {
 					sb.append("<br />");
@@ -844,11 +844,11 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 
 			// Banned user
 
-			row.addText(PortalUtil.getUserName(ban.getBanUserId(), StringPool.BLANK));
+			row.addText(HtmlUtil.escape(PortalUtil.getUserName(ban.getBanUserId(), StringPool.BLANK)));
 
 			// Banned by
 
-			row.addText(PortalUtil.getUserName(ban.getUserId(), StringPool.BLANK));
+			row.addText(HtmlUtil.escape(PortalUtil.getUserName(ban.getUserId(), StringPool.BLANK)));
 
 			// Ban date
 

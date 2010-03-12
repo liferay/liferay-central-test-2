@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.mail.MailMessage;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageListener;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
@@ -92,7 +93,7 @@ public class FlagsRequestMessageListener implements MessageListener {
 
 		Group group = layout.getGroup();
 
-		String groupName = group.getDescriptiveName();
+		String groupName = HtmlUtil.escape(group.getDescriptiveName());
 
 		// Reporter user
 
@@ -122,10 +123,10 @@ public class FlagsRequestMessageListener implements MessageListener {
 			flagsRequest.getReportedUserId());
 
 		if (reportedUser.isDefaultUser()) {
-			reportedUserName = group.getDescriptiveName();
+			reportedUserName = HtmlUtil.escape(group.getDescriptiveName());
 		}
 		else {
-			reportedUserName = reportedUser.getFullName();
+			reportedUserName = HtmlUtil.escape(reportedUser.getFullName());
 			reportedEmailAddress = reportedUser.getEmailAddress();
 			reportedURL = reportedUser.getDisplayURL(
 				serviceContext.getPortalURL(), serviceContext.getPathMain());

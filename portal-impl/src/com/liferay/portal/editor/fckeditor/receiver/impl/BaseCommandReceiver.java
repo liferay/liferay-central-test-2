@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -267,7 +268,8 @@ public abstract class BaseCommandReceiver implements CommandReceiver {
 
 			folderEl.setAttribute(
 				"name",
-				group.getGroupId() + " - " + group.getDescriptiveName());
+				group.getGroupId() + " - " +
+					HtmlUtil.escape(group.getDescriptiveName()));
 		}
 	}
 

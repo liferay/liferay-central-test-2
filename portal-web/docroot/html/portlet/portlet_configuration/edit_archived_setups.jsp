@@ -87,7 +87,7 @@ portletURL.setParameter("portletResource", portletResource);
 
 		// User
 
-		row.addText(PortalUtil.getUserName(portletItem.getUserId(), portletItem.getUserName()));
+		row.addText(HtmlUtil.escape(PortalUtil.getUserName(portletItem.getUserId(), portletItem.getUserName())));
 
 		// Date
 

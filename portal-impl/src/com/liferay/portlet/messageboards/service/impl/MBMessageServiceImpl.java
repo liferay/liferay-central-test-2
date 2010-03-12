@@ -593,8 +593,9 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 		while (itr.hasNext()) {
 			MBMessage message = itr.next();
 
-			String author = PortalUtil.getUserName(
-				message.getUserId(), message.getUserName());
+			String author = HtmlUtil.escape(
+				PortalUtil.getUserName(
+					message.getUserId(), message.getUserName()));
 
 			String value = null;
 

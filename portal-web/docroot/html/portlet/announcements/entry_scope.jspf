@@ -63,10 +63,10 @@ scopeName = HtmlUtil.escape(scopeName);
 	<c:when test="<%= showScopeName %>">
 		<c:choose>
 			<c:when test="<%= scopeName.equals(scopeClassName) %>">
-				<%= HtmlUtil.escape(scopeName) %>
+				<%= scopeName %>
 			</c:when>
 			<c:otherwise>
-				<liferay-ui:message key="<%= scopeClassName %>" /> &raquo; <%= HtmlUtil.escape(scopeName) %>
+				<liferay-ui:message key="<%= scopeClassName %>" /> &raquo; <%= scopeName %>
 			</c:otherwise>
 		</c:choose>
 	</c:when>

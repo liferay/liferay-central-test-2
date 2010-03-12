@@ -127,7 +127,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 				// Author
 
-				row.addText(PortalUtil.getUserName(article.getUserId(), article.getUserName()), rowURL);
+				row.addText(HtmlUtil.escape(PortalUtil.getUserName(article.getUserId(), article.getUserName())), rowURL);
 
 				// Action
 

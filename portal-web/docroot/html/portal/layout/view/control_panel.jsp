@@ -89,13 +89,13 @@ request.setAttribute("control_panel.jsp-ppid", ppid);
 		}
 		else if (category.equals(PortletCategoryKeys.MY)) {
 			panelCategory += " panel-manage-my";
-			categoryTitle = HtmlUtil.escape(user.getFullName());
+			categoryTitle = user.getFullName();
 		}
 		else if (category.equals(PortletCategoryKeys.PORTAL)) {
 			panelCategory += " panel-manage-portal";
 
 			if (CompanyLocalServiceUtil.getCompaniesCount(false) > 1) {
-				categoryTitle += " " + HtmlUtil.escape(company.getName());
+				categoryTitle += " " + company.getName();
 			}
 		}
 		else if (category.equals(PortletCategoryKeys.SERVER)) {
@@ -140,7 +140,7 @@ request.setAttribute("control_panel.jsp-ppid", ppid);
 										curGroupName = LanguageUtil.get(pageContext, "my-community");
 									}
 									else {
-										curGroupName = HtmlUtil.escape(curGroup.getDescriptiveName());
+										curGroupName = curGroup.getDescriptiveName();
 									}
 
 									PortalUtil.addPortletBreadcrumbEntry(request, curGroupName, null);
@@ -170,7 +170,7 @@ request.setAttribute("control_panel.jsp-ppid", ppid);
 									<h2>
 										<liferay-ui:message key="content-for" />
 
-										<a href="javascript:;" class="lfr-group-selector"><%= curGroupName %></a>
+										<a href="javascript:;" class="lfr-group-selector"><%= HtmlUtil.escape(curGroupName) %></a>
 
 										<c:if test="<%= !scopeLayouts.isEmpty() %>">
 											<span class="nobr lfr-title-scope-selector">
@@ -210,7 +210,7 @@ request.setAttribute("control_panel.jsp-ppid", ppid);
 														</c:if>
 
 														<li>
-															<a href="<%= HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", group.getGroupId()) %>"><%= (group.isUser() && (group.getClassPK() == user.getUserId())) ? LanguageUtil.get(pageContext, "my-community") : group.getDescriptiveName() %></a>
+															<a href="<%= HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", group.getGroupId()) %>"><%= (group.isUser() && (group.getClassPK() == user.getUserId())) ? LanguageUtil.get(pageContext, "my-community") : HtmlUtil.escape(group.getDescriptiveName()) %></a>
 														</li>
 
 													<%

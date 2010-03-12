@@ -20,7 +20,7 @@
 	<c:when test="<%= themeDisplay.isSignedIn() %>">
 
 		<%
-		String signedInAs = user.getFullName();
+		String signedInAs = HtmlUtil.escape(user.getFullName());
 
 		if (themeDisplay.isShowMyAccountIcon()) {
 			signedInAs = "<a href=\"" + HtmlUtil.escape(themeDisplay.getURLMyAccount().toString()) + "\">" + signedInAs + "</a>";

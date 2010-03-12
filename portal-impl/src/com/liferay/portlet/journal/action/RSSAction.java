@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -134,8 +135,9 @@ public class RSSAction extends PortletAction {
 		while (itr.hasNext()) {
 			JournalArticle article = itr.next();
 
-			String author = PortalUtil.getUserName(
-				article.getUserId(), article.getUserName());
+			String author = HtmlUtil.escape(
+				PortalUtil.getUserName(
+					article.getUserId(), article.getUserName()));
 			String link = getEntryURL(
 				resourceRequest, feed, article, layout, themeDisplay);
 

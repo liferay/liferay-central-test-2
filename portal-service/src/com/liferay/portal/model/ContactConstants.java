@@ -45,7 +45,7 @@ public class ContactConstants {
 			sb.append(lastName);
 		}
 
-		return HtmlUtil.escape(sb.toString());
+		return sb.toString();
 	}
 
 }

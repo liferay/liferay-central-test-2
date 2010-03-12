@@ -66,7 +66,7 @@ MembershipRequest membershipRequest = (MembershipRequest)request.getAttribute(We
 		</c:if>
 
 		<aui:field-wrapper label="user-name">
-			<%= PortalUtil.getUserName(membershipRequest.getUserId(), StringPool.BLANK) %>
+			<%= HtmlUtil.escape(PortalUtil.getUserName(membershipRequest.getUserId(), StringPool.BLANK)) %>
 		</aui:field-wrapper>
 
 		<aui:field-wrapper label="user-comments">

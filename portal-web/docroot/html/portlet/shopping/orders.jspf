@@ -94,7 +94,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	// Customer
 
-	row.addText(PortalUtil.getUserName(order.getUserId(), order.getBillingFirstName() + StringPool.SPACE + order.getBillingLastName()));
+	row.addText(HtmlUtil.escape(PortalUtil.getUserName(order.getUserId(), order.getBillingFirstName() + StringPool.SPACE + order.getBillingLastName())));
 
 	// Action
 

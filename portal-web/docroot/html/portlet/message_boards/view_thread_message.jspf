@@ -27,7 +27,7 @@
 				<c:otherwise>
 					<liferay-ui:user-display
 						userId="<%= message.getUserId() %>"
-						userName="<%= message.getUserName() %>"
+						userName="<%= HtmlUtil.escape(message.getUserName()) %>"
 						displayStyle="<%= 2 %>"
 					>
 
@@ -150,7 +150,7 @@
 						parentMessageURL.setParameter("struts_action", "/message_boards/view_message");
 						parentMessageURL.setParameter("messageId", String.valueOf(parentMessage.getMessageId()));
 
-						String author = parentMessage.isAnonymous() ? LanguageUtil.get(pageContext, "anonymous") : PortalUtil.getUserName(parentMessage.getUserId(), parentMessage.getUserName());
+						String author = parentMessage.isAnonymous() ? LanguageUtil.get(pageContext, "anonymous") : HtmlUtil.escape(PortalUtil.getUserName(parentMessage.getUserId(), parentMessage.getUserName()));
 						%>
 
 						<%= LanguageUtil.format(pageContext, "posted-as-a-reply-to", author) %>

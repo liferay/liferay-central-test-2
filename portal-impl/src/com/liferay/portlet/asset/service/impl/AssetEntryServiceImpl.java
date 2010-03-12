@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
@@ -123,7 +124,7 @@ public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 			Group group = groupPersistence.findByPrimaryKey(groupId);
 
 			if ((groupIds.length == 1) || !group.isCompany()) {
-				name = group.getDescriptiveName();
+				name = HtmlUtil.escape(group.getDescriptiveName());
 
 				break;
 			}
@@ -198,8 +199,8 @@ public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 		syndFeed.setEntries(entries);
 
 		for (AssetEntry entry : assetEntries) {
-			String author = PortalUtil.getUserName(
-				entry.getUserId(), entry.getUserName());
+			String author = HtmlUtil.escape(
+				PortalUtil.getUserName(entry.getUserId(), entry.getUserName()));
 
 			String link = tagURL.concat("entryId=").concat(
 				String.valueOf(entry.getEntryId()));

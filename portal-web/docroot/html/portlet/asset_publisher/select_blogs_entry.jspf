@@ -116,7 +116,7 @@ portletURL.setParameter("typeSelection", BlogsEntry.class.getName());
 
 				// User name
 
-				row.addText(entry.getUserName(), rowHREF);
+				row.addText(HtmlUtil.escape(entry.getUserName()), rowHREF);
 
 				// Modified date
 
@@ -189,7 +189,7 @@ portletURL.setParameter("typeSelection", BlogsEntry.class.getName());
 
 			// User name
 
-			row.addText(entry.getUserName(), rowHREF);
+			row.addText(HtmlUtil.escape(entry.getUserName()), rowHREF);
 
 			// Modified date
 

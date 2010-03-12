@@ -85,7 +85,7 @@ String portletURLString = (String)request.getAttribute("view.jsp-portletURLStrin
 				<liferay-ui:search-container-column-text
 					href="<%= rowURL %>"
 					name="user-id"
-					value='<%= ((user2 != null) ? user2.getFullName() : LanguageUtil.get(pageContext, "not-available")) %>'
+					value='<%= ((user2 != null) ? HtmlUtil.escape(user2.getFullName()) : LanguageUtil.get(pageContext, "not-available")) %>'
 				/>
 
 				<liferay-ui:search-container-column-text

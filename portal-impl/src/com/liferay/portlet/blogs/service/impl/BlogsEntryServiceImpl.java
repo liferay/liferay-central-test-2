@@ -197,7 +197,7 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 
 		Group group = groupPersistence.findByPrimaryKey(groupId);
 
-		String name = group.getDescriptiveName();
+		String name = HtmlUtil.escape(group.getDescriptiveName());
 		String description = name;
 		List<BlogsEntry> blogsEntries = getGroupEntries(groupId, status, max);
 
@@ -294,8 +294,8 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 		syndFeed.setEntries(entries);
 
 		for (BlogsEntry entry : blogsEntries) {
-			String author = PortalUtil.getUserName(
-				entry.getUserId(), entry.getUserName());
+			String author = HtmlUtil.escape(
+				PortalUtil.getUserName(entry.getUserId(), entry.getUserName()));
 
 			StringBundler link = new StringBundler(4);
 

@@ -59,9 +59,7 @@ if (Validator.isNotNull(structureId)) {
 					for (int i = 0; i < myPlaces.size(); i++) {
 						Group group = myPlaces.get(i);
 
-						group = group.toEscapedModel();
-
-						String groupName = group.getDescriptiveName();
+						String groupName = HtmlUtil.escape(group.getDescriptiveName());
 
 						if (group.isUser()) {
 							groupName = LanguageUtil.get(pageContext, "my-community");

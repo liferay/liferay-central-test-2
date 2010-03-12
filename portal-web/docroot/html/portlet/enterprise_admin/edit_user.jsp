@@ -225,9 +225,9 @@ String taglibOnSubmit = renderResponse.getNamespace() + "saveUser('" + ((selUser
 					<div class="user-info">
 						<p class="float-container">
 							<c:if test="<%= selUser != null %>">
-								<img alt="<%= selUser.getFullName() %>" class="avatar" src="<%= themeDisplay.getPathImage() %>/user_<%= selUser.isFemale() ? "female" : "male" %>_portrait?img_id=<%= selUser.getPortraitId() %>&t=<%= ImageServletTokenUtil.getToken(selUser.getPortraitId()) %>" />
+								<img alt="<%= HtmlUtil.escape(selUser.getFullName()) %>" class="avatar" src="<%= themeDisplay.getPathImage() %>/user_<%= selUser.isFemale() ? "female" : "male" %>_portrait?img_id=<%= selUser.getPortraitId() %>&t=<%= ImageServletTokenUtil.getToken(selUser.getPortraitId()) %>" />
 
-								<span><%= selUser.getFullName() %></span>
+								<span><%= HtmlUtil.escape(selUser.getFullName()) %></span>
 							</c:if>
 						</p>
 					</div>
@@ -264,7 +264,7 @@ String taglibOnSubmit = renderResponse.getNamespace() + "saveUser('" + ((selUser
 
 <%
 if (selUser != null) {
-	PortalUtil.setPageSubtitle(selUser.getFullName(), request);
+	PortalUtil.setPageSubtitle(HtmlUtil.escape(selUser.getFullName()), request);
 }
 %>
 

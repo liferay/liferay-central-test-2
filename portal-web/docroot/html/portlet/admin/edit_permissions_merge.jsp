@@ -122,7 +122,7 @@ List<Group> groups = new ArrayList<Group>(mvp.keySet());
 		<liferay-ui:search-container-column-text
 			href="<%= editGroupURL %>"
 			name="name"
-			value="<%= group.getDescriptiveName() %>"
+			value="<%= HtmlUtil.escape(group.getDescriptiveName()) %>"
 		/>
 
 		<liferay-ui:search-container-column-text
