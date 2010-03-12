@@ -46,7 +46,7 @@ public class EditEventTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Test Event"),
 			selenium.getText(
-				"//tr[@class='portlet-section-body results-row last']/td[2]/a"));
+				"//table[@class='taglib-search-iterator']/tbody/tr[3]/td[2]/a"));
 		selenium.clickAt("//td[4]/ul/li/strong/a", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -69,6 +69,24 @@ public class EditEventTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible(
+							"//span[@class='aui-icon-search aui-icon']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.type("_8_title", RuntimeVariables.replace("Test Event Edited"));
 		selenium.type("_8_description",
 			RuntimeVariables.replace("This is a Test Event. Edited."));
@@ -78,6 +96,6 @@ public class EditEventTest extends BaseTestCase {
 				"Your request processed successfully."));
 		assertEquals(RuntimeVariables.replace("Test Event Edited"),
 			selenium.getText(
-				"//tr[@class='portlet-section-body results-row last']/td[2]/a"));
+				"//table[@class='taglib-search-iterator']/tbody/tr[3]/td[2]/a"));
 	}
 }

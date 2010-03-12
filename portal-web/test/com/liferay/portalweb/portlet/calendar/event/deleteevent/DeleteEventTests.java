@@ -33,7 +33,8 @@ public class DeleteEventTests extends BaseTests {
 		testSuite.addTestSuite(AddPortletTest.class);
 		testSuite.addTestSuite(AddEventTest.class);
 		testSuite.addTestSuite(DeleteEventTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownEventTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

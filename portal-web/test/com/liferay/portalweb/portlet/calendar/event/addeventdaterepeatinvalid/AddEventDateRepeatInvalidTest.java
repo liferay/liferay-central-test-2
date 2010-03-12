@@ -48,6 +48,24 @@ public class AddEventDateRepeatInvalidTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Add Event']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible(
+							"//span[@class='aui-icon-search aui-icon']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.type("_8_title",
 			RuntimeVariables.replace("Invalid End Date Test Event"));
 
@@ -68,23 +86,6 @@ public class AddEventDateRepeatInvalidTest extends BaseTestCase {
 		}
 
 		selenium.type("_8_dailyInterval", RuntimeVariables.replace("1"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible("_8_endDateMonth")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.select("_8_endDateMonth",
 			RuntimeVariables.replace("label=February"));
 		Thread.sleep(5000);

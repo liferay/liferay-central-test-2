@@ -49,21 +49,21 @@ public class ViewEventTypeVacationTest extends BaseTestCase {
 		selenium.select("//select", RuntimeVariables.replace("label=Vacation"));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Off to Yosemite."),
-			selenium.getText("//div[@class='event-title']/a"));
+			selenium.getText("//div[@class='event-title']"));
 		selenium.clickAt("link=Week", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.select("//select", RuntimeVariables.replace("label=Vacation"));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Off to Yosemite."),
 			selenium.getText(
-				"//tr[@class='portlet-section-alternate results-row alt']/td/a"));
+				"//tr[@class='portlet-section-alternate results-row alt']/td[1]/a"));
 		selenium.clickAt("link=Month", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.select("//select", RuntimeVariables.replace("label=Vacation"));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Off to Yosemite."),
 			selenium.getText(
-				"//tr[@class='portlet-section-alternate results-row alt']/td/a"));
+				"//tr[@class='portlet-section-alternate results-row alt']/td[1]/a"));
 		selenium.clickAt("link=Events", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Off to Yosemite."),

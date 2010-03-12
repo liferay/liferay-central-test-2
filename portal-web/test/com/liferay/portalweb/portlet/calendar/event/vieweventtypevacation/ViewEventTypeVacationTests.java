@@ -33,7 +33,8 @@ public class ViewEventTypeVacationTests extends BaseTests {
 		testSuite.addTestSuite(AddPortletTest.class);
 		testSuite.addTestSuite(AddEventTypeVacationTest.class);
 		testSuite.addTestSuite(ViewEventTypeVacationTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownEventTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

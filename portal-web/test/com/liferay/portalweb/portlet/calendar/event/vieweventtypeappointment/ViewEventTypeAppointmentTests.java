@@ -34,7 +34,8 @@ public class ViewEventTypeAppointmentTests extends BaseTests {
 		testSuite.addTestSuite(AddPortletTest.class);
 		testSuite.addTestSuite(AddEventTypeAppointmentTest.class);
 		testSuite.addTestSuite(ViewEventTypeAppointmentTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownEventTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

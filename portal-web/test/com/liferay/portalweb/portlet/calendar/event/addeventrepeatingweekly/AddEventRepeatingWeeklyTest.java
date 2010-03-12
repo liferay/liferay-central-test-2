@@ -44,8 +44,6 @@ public class AddEventRepeatingWeeklyTest extends BaseTestCase {
 
 		selenium.clickAt("link=Calendar Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=Events", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("//input[@value='Add Event']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
@@ -56,7 +54,8 @@ public class AddEventRepeatingWeeklyTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("_8_startDateMonth")) {
+				if (selenium.isVisible(
+							"//span[@class='aui-icon-search aui-icon']")) {
 					break;
 				}
 			}
@@ -72,7 +71,7 @@ public class AddEventRepeatingWeeklyTest extends BaseTestCase {
 		selenium.select("_8_startDateYear",
 			RuntimeVariables.replace("label=2010"));
 		selenium.type("_8_title",
-			RuntimeVariables.replace("Weekly Day Event Test"));
+			RuntimeVariables.replace("Weekly Repeating Event"));
 		selenium.clickAt("//input[@name='_8_recurrenceType' and @value='4']",
 			RuntimeVariables.replace(""));
 
@@ -93,7 +92,8 @@ public class AddEventRepeatingWeeklyTest extends BaseTestCase {
 		}
 
 		selenium.type("_8_weeklyInterval", RuntimeVariables.replace("1"));
-		selenium.clickAt("_8_weeklyDayPos5", RuntimeVariables.replace(""));
+		selenium.clickAt("_8_weeklyDayPos5Checkbox",
+			RuntimeVariables.replace(""));
 		selenium.click("//input[@name='_8_endDateType' and @value='2']");
 		selenium.select("_8_endDateMonth",
 			RuntimeVariables.replace("label=January"));
@@ -103,6 +103,152 @@ public class AddEventRepeatingWeeklyTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
+		selenium.open("/web/guest/home/");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Calendar Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("link=Calendar Test Page", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("link=Events", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("link=Weekly Repeating Event",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		assertEquals(RuntimeVariables.replace("Weekly Repeating Event"),
+			selenium.getText("//div[@class='aui-layout event']/div[1]/h3"));
+		assertEquals(RuntimeVariables.replace("1/1/10"),
+			selenium.getText("//dl[@class='property-list']/dd[1]"));
+		assertEquals(RuntimeVariables.replace("1/1/11"),
+			selenium.getText("//dl[@class='property-list']/dd[2]"));
+		assertEquals(RuntimeVariables.replace(
+				"Recur every 1 week(s) on: Thursday,"),
+			selenium.getText("//dl[@class='property-list']/dd[5]"));
+		selenium.open("/web/guest/home/");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Calendar Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("link=Calendar Test Page", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("link=Events", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("//td[5]/ul/li/strong/a", RuntimeVariables.replace(""));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent(
+							"//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace(
+				"//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a"));
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible(
+							"//span[@class='aui-icon-search aui-icon']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		assertEquals("January", selenium.getSelectedLabel("_8_startDateMonth"));
+		assertEquals("1", selenium.getSelectedLabel("_8_startDateDay"));
+		assertEquals("2010", selenium.getSelectedLabel("_8_startDateYear"));
+		assertEquals("Weekly Repeating Event", selenium.getValue("_8_title"));
+		assertTrue(selenium.isChecked(
+				"//input[@name='_8_recurrenceType' and @value='4']"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_8_weeklyInterval")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		assertEquals("1", selenium.getValue("_8_weeklyInterval"));
+		assertTrue(selenium.isChecked("_8_weeklyDayPos5Checkbox"));
+		assertTrue(selenium.isChecked(
+				"//input[@name='_8_endDateType' and @value='2']"));
+		assertEquals("January", selenium.getSelectedLabel("_8_endDateMonth"));
+		assertEquals("1", selenium.getSelectedLabel("_8_endDateDay"));
+		assertEquals("2011", selenium.getSelectedLabel("_8_endDateYear"));
+		selenium.open("/web/guest/home/");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Calendar Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("link=Calendar Test Page", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Year", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.select("//select", RuntimeVariables.replace("label=2010"));
@@ -114,7 +260,7 @@ public class AddEventRepeatingWeeklyTest extends BaseTestCase {
 
 			try {
 				if (selenium.isElementPresent(
-							"//a[contains(@href, 'javascript:_8_updateCalendar(10, 1, 2010);')]")) {
+							"//a[contains(@href, 'javascript:_8_updateCalendar(10, 4, 2010);')]")) {
 					break;
 				}
 			}
@@ -124,11 +270,10 @@ public class AddEventRepeatingWeeklyTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//a[contains(@href, 'javascript:_8_updateCalendar(10, 1, 2010);')]",
+		selenium.clickAt("//a[contains(@href, 'javascript:_8_updateCalendar(10, 4, 2010);')]",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertEquals(RuntimeVariables.replace("Weekly Day Event Test"),
-			selenium.getText("//div[@class='event-title']/a"));
+		assertTrue(selenium.isElementPresent("link=Weekly Repeating Event"));
 		selenium.clickAt("link=Year", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.select("//select", RuntimeVariables.replace("label=2010"));
@@ -140,7 +285,7 @@ public class AddEventRepeatingWeeklyTest extends BaseTestCase {
 
 			try {
 				if (selenium.isElementPresent(
-							"//a[contains(@href, 'javascript:_8_updateCalendar(10, 8, 2010);')]")) {
+							"//a[contains(@href, 'javascript:_8_updateCalendar(10, 11, 2010);')]")) {
 					break;
 				}
 			}
@@ -150,11 +295,10 @@ public class AddEventRepeatingWeeklyTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//a[contains(@href, 'javascript:_8_updateCalendar(10, 8, 2010);')]",
+		selenium.clickAt("//a[contains(@href, 'javascript:_8_updateCalendar(10, 11, 2010);')]",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertEquals(RuntimeVariables.replace("Weekly Day Event Test"),
-			selenium.getText("//div[@class='event-title']/a"));
+		assertTrue(selenium.isElementPresent("link=Weekly Repeating Event"));
 		selenium.clickAt("link=Year", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.select("//select", RuntimeVariables.replace("label=2010"));
@@ -176,9 +320,9 @@ public class AddEventRepeatingWeeklyTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//a[contains(@href, 'javascript:_8_updateCalendar(10, 9, 2010);')]",
+		selenium.clickAt("//a[contains(@href, 'javascript:_8_updateCalendar(10, 12, 2010);')]",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertFalse(selenium.isElementPresent("link=Weekly Day Event Test"));
+		assertFalse(selenium.isElementPresent("link=Weekly Repeating Event"));
 	}
 }

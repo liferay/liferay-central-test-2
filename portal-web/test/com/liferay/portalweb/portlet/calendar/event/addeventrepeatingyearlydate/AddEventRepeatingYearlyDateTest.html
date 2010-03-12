@@ -30,7 +30,7 @@
 </tr>
 <tr>
 	<td>waitForVisible</td>
-	<td>_8_startDateMonth</td>
+	<td>//span[@class='aui-icon-search aui-icon']</td>
 	<td></td>
 </tr>
 <tr>
@@ -71,12 +71,12 @@
 <tr>
 	<td>select</td>
 	<td>_8_yearlyMonth0</td>
-	<td>label=January</td>
+	<td>label=February</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>_8_yearlyDay0</td>
-	<td>1</td>
+	<td>4</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -85,7 +85,7 @@
 </tr>
 <tr>
 	<td>clickAt</td>
-	<td>//input[@name='_8_endDateType' and @value='2']</td>
+	<td>//fieldset[2]/div/div/div/span[2]/span/span/input</td>
 	<td></td>
 </tr>
 <tr>
@@ -114,6 +114,176 @@
 	<td></td>
 </tr>
 <tr>
+	<td>open</td>
+	<td>/web/guest/home/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Calendar Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>link=Calendar Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>link=Events</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>link=Yearly Date Repeating Event</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@class='aui-layout event']/div[1]/h3</td>
+	<td>Yearly Date Repeating Event</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//dl[@class='property-list']/dd[1]</td>
+	<td>1/1/10</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//dl[@class='property-list']/dd[2]</td>
+	<td>1/1/13</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//dl[@class='property-list']/dd[5]</td>
+	<td>The Fourth of February of every 1 year(s)</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/web/guest/home/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Calendar Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>link=Calendar Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>link=Events</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>//td[5]/ul/li/strong/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>//span[@class='aui-icon-search aui-icon']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>_8_startDateMonth</td>
+	<td>January</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>_8_startDateDay</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>_8_startDateYear</td>
+	<td>2010</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>_8_title</td>
+	<td>Yearly Date Repeating Event</td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>//input[@name='_8_recurrenceType' and @value='6']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>_8_yearlyType</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>_8_yearlyType</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>_8_yearlyMonth0</td>
+	<td>February</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>_8_yearlyDay0</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>_8_yearlyInterval0</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>//fieldset[2]/div/div/div/span[2]/span/span/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>_8_endDateMonth</td>
+	<td>January</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>_8_endDateDay</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>_8_endDateYear</td>
+	<td>2013</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/web/guest/home/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Calendar Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>link=Calendar Test Page</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAtAndWait</td>
 	<td>link=Year</td>
 	<td></td>
@@ -125,18 +295,18 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//a[contains(@href, 'javascript:_8_updateCalendar(0, 1, 2010);')]</td>
+	<td>//a[contains(@href, 'javascript:_8_updateCalendar(1, 4, 2010);')]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>//a[contains(@href, 'javascript:_8_updateCalendar(0, 1, 2010);')]</td>
+	<td>//a[contains(@href, 'javascript:_8_updateCalendar(1, 4, 2010);')]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>//div[@class='event-title']/a</td>
-	<td>Yearly Date Repeating Event</td>
+	<td>assertElementPresent</td>
+	<td>link=Yearly Date Repeating Event</td>
+	<td></td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
@@ -150,18 +320,18 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//a[contains(@href, 'javascript:_8_updateCalendar(0, 1, 2011);')]</td>
+	<td>//a[contains(@href, 'javascript:_8_updateCalendar(1, 4, 2011);')]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>//a[contains(@href, 'javascript:_8_updateCalendar(0, 1, 2011);')]</td>
+	<td>//a[contains(@href, 'javascript:_8_updateCalendar(1, 4, 2011);')]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>//div[@class='event-title']/a</td>
-	<td>Yearly Date Repeating Event</td>
+	<td>assertElementPresent</td>
+	<td>link=Yearly Date Repeating Event</td>
+	<td></td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
@@ -175,12 +345,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//a[contains(@href, 'javascript:_8_updateCalendar(1, 1, 2011);')]</td>
+	<td>//a[contains(@href, 'javascript:_8_updateCalendar(2, 4, 2011);')]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>//a[contains(@href, 'javascript:_8_updateCalendar(1, 1, 2011);')]</td>
+	<td>//a[contains(@href, 'javascript:_8_updateCalendar(2, 4, 2011);')]</td>
 	<td></td>
 </tr>
 <tr>

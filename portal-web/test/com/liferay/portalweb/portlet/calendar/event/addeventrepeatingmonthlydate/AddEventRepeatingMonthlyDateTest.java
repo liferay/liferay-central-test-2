@@ -55,7 +55,8 @@ public class AddEventRepeatingMonthlyDateTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("_8_startDateMonth")) {
+				if (selenium.isVisible(
+							"//span[@class='aui-icon-search aui-icon']")) {
 					break;
 				}
 			}
@@ -97,7 +98,8 @@ public class AddEventRepeatingMonthlyDateTest extends BaseTestCase {
 		selenium.select("_8_monthlyDay1",
 			RuntimeVariables.replace("label=Thursday"));
 		selenium.type("_8_monthlyInterval1", RuntimeVariables.replace("1"));
-		selenium.click("//input[@name='_8_endDateType' and @value='2']");
+		selenium.clickAt("//fieldset[2]/div/div/div/span[2]/span/span/input",
+			RuntimeVariables.replace(""));
 		selenium.select("_8_endDateMonth",
 			RuntimeVariables.replace("label=January"));
 		selenium.select("_8_endDateDay", RuntimeVariables.replace("label=1"));
@@ -106,6 +108,156 @@ public class AddEventRepeatingMonthlyDateTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
+		selenium.open("/web/guest/home/");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Calendar Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("link=Calendar Test Page", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("link=Events", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("link=Monthly Date Repeating Event",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		assertEquals(RuntimeVariables.replace("Monthly Date Repeating Event"),
+			selenium.getText("//div[@class='aui-layout event']/div[1]/h3"));
+		assertEquals(RuntimeVariables.replace("1/1/10"),
+			selenium.getText("//dl[@class='property-list']/dd[1]"));
+		assertEquals(RuntimeVariables.replace("1/1/11"),
+			selenium.getText("//dl[@class='property-list']/dd[2]"));
+		assertEquals(RuntimeVariables.replace(
+				"The First Thursday of every 1 month(s)"),
+			selenium.getText("//dl[@class='property-list']/dd[5]"));
+		selenium.open("/web/guest/home/");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Calendar Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("link=Calendar Test Page", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("link=Events", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("//td[5]/ul/li/strong/a", RuntimeVariables.replace(""));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent(
+							"//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace(
+				"//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a"));
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible(
+							"//span[@class='aui-icon-search aui-icon']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		assertEquals("January", selenium.getSelectedLabel("_8_startDateMonth"));
+		assertEquals("1", selenium.getSelectedLabel("_8_startDateDay"));
+		assertEquals("2010", selenium.getSelectedLabel("_8_startDateYear"));
+		assertEquals("Monthly Date Repeating Event",
+			selenium.getValue("_8_title"));
+		assertTrue(selenium.isChecked(
+				"//input[@name='_8_recurrenceType' and @value='5']"));
+		assertTrue(selenium.isChecked(
+				"//input[@name='_8_monthlyType' and @value='1']"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_8_monthlyPos")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		assertEquals("First", selenium.getSelectedLabel("_8_monthlyPos"));
+		assertEquals("Thursday", selenium.getSelectedLabel("_8_monthlyDay1"));
+		assertEquals("1", selenium.getValue("_8_monthlyInterval1"));
+		assertTrue(selenium.isChecked(
+				"//fieldset[2]/div/div/div/span[2]/span/span/input"));
+		assertEquals("January", selenium.getSelectedLabel("_8_endDateMonth"));
+		assertEquals("1", selenium.getSelectedLabel("_8_endDateDay"));
+		assertEquals("2011", selenium.getSelectedLabel("_8_endDateYear"));
+		selenium.open("/web/guest/home/");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Calendar Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("link=Calendar Test Page", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Year", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.select("//select", RuntimeVariables.replace("label=2010"));
@@ -130,8 +282,8 @@ public class AddEventRepeatingMonthlyDateTest extends BaseTestCase {
 		selenium.clickAt("//a[contains(@href, 'javascript:_8_updateCalendar(1, 4, 2010);')]",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertEquals(RuntimeVariables.replace("Monthly Date Repeating Event"),
-			selenium.getText("//div[@class='event-title']/a"));
+		assertTrue(selenium.isElementPresent(
+				"link=Monthly Date Repeating Event"));
 		selenium.clickAt("link=Year", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.select("//select", RuntimeVariables.replace("label=2010"));
@@ -156,8 +308,8 @@ public class AddEventRepeatingMonthlyDateTest extends BaseTestCase {
 		selenium.clickAt("//a[contains(@href, 'javascript:_8_updateCalendar(2, 4, 2010);')]",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertEquals(RuntimeVariables.replace("Monthly Date Repeating Event"),
-			selenium.getText("//div[@class='event-title']/a"));
+		assertTrue(selenium.isElementPresent(
+				"link=Monthly Date Repeating Event"));
 		selenium.clickAt("link=Year", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.select("//select", RuntimeVariables.replace("label=2010"));

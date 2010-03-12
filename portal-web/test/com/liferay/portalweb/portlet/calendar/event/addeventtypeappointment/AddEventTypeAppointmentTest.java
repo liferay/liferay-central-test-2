@@ -47,6 +47,24 @@ public class AddEventTypeAppointmentTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Add Event']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible(
+							"//span[@class='aui-icon-search aui-icon']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.type("_8_title", RuntimeVariables.replace("Test Event"));
 		selenium.type("_8_description",
 			RuntimeVariables.replace("This is a Test Event."));
@@ -59,6 +77,6 @@ public class AddEventTypeAppointmentTest extends BaseTestCase {
 				"Your request processed successfully."));
 		assertEquals(RuntimeVariables.replace("Test Event"),
 			selenium.getText(
-				"//tr[@class='portlet-section-body results-row last']/td[2]/a"));
+				"//table[@class='taglib-search-iterator']/tbody/tr[3]/td[2]/a"));
 	}
 }
