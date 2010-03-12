@@ -201,7 +201,8 @@ public class DLFileEntryLocalServiceImpl
 
 		addFileVersion(
 			user, fileEntry, serviceContext.getModifiedDate(now),
-			fileEntry.getVersion(), null, serviceContext.getStatus());
+			DLFileEntryConstants.DEFAULT_VERSION, null,
+			serviceContext.getStatus());
 
 		// Folder
 
@@ -450,12 +451,16 @@ public class DLFileEntryLocalServiceImpl
 							groupId, folderId, name);
 
 					fileEntry.setVersion(fileVersion.getVersion());
-
-					dlFileEntryPersistence.update(fileEntry, false);
 				}
 				catch (NoSuchFileVersionException nsfve) {
 				}
 			}
+
+			if (version.equals(fileEntry.getPendingVersion())) {
+				fileEntry.setPendingVersion(StringPool.BLANK);
+			}
+
+			dlFileEntryPersistence.update(fileEntry, false);
 		}
 		else {
 			deleteFileEntry(fileEntry);
@@ -936,7 +941,8 @@ public class DLFileEntryLocalServiceImpl
 
 		// File version
 
-		String version = getNextVersion(fileEntry, majorVersion);
+		String version = getNextVersion(
+			fileEntry, majorVersion, serviceContext.getStatus());
 
 		if (is == null) {
 			fileEntry.setVersion(version);
@@ -980,16 +986,34 @@ public class DLFileEntryLocalServiceImpl
 			return fileEntry;
 		}
 
-		addFileVersion(
-			user, fileEntry, serviceContext.getModifiedDate(now), version,
-			versionDescription, serviceContext.getStatus());
+		if (Validator.isNotNull(fileEntry.getPendingVersion())) {
+			updateFileVersion(
+				user, fileEntry, serviceContext.getModifiedDate(now), version,
+				versionDescription, serviceContext.getStatus());
+		}
+		else {
+			addFileVersion(
+				user, fileEntry, serviceContext.getModifiedDate(now), version,
+				versionDescription, serviceContext.getStatus());
+		}
 
 		// File entry
 
 		fileEntry.setVersionUserId(user.getUserId());
 		fileEntry.setVersionUserName(user.getFullName());
 		fileEntry.setModifiedDate(serviceContext.getModifiedDate(now));
-		fileEntry.setVersion(version);
+
+		if (serviceContext.getStatus() == StatusConstants.DRAFT) {
+			fileEntry.setPendingVersion(version);
+		}
+		else if (serviceContext.getStatus() == StatusConstants.APPROVED) {
+			fileEntry.setVersion(version);
+			fileEntry.setPendingVersion(StringPool.BLANK);
+		}
+		else {
+			fileEntry.setPendingVersion(StringPool.BLANK);
+		}
+
 		fileEntry.setSize((int)size);
 		fileEntry.setExpandoBridgeAttributes(serviceContext);
 
@@ -1074,6 +1098,7 @@ public class DLFileEntryLocalServiceImpl
 				fileEntry.getVersion(), fileVersion.getVersion()) < 0)) {
 
 			fileEntry.setVersion(fileVersion.getVersion());
+			fileEntry.setPendingVersion(StringPool.BLANK);
 
 			dlFileEntryPersistence.update(fileEntry, false);
 		}
@@ -1214,17 +1239,20 @@ public class DLFileEntryLocalServiceImpl
 	}
 
 	protected String getNextVersion(
-		DLFileEntry fileEntry, boolean majorVersion) {
+		DLFileEntry fileEntry, boolean majorVersion, int status) {
 
-		String version = fileEntry.getVersion();
+		if ((status == StatusConstants.DRAFT) &&
+			Validator.isNotNull(fileEntry.getPendingVersion())) {
 
-		if (DLUtil.compareVersions(
-				fileEntry.getVersion(), fileEntry.getPendingVersion()) < 0) {
-
-			version = fileEntry.getPendingVersion();
+			return fileEntry.getPendingVersion();
 		}
 
-		int[] versionParts = StringUtil.split(version, StringPool.PERIOD, 0);
+		if (Validator.isNull(fileEntry.getVersion())) {
+			return DLFileEntryConstants.DEFAULT_VERSION;
+		}
+
+		int[] versionParts = StringUtil.split(
+			fileEntry.getVersion(), StringPool.PERIOD, 0);
 
 		if (majorVersion) {
 			versionParts[0]++;
@@ -1235,6 +1263,27 @@ public class DLFileEntryLocalServiceImpl
 		}
 
 		return versionParts[0] + StringPool.PERIOD + versionParts[1];
+	}
+
+	protected void updateFileVersion(
+			User user, DLFileEntry fileEntry, Date modifiedDate, String version,
+			String description, int status)
+		throws PortalException, SystemException {
+
+		DLFileVersion fileVersion =
+			dlFileVersionLocalService.getFileVersion(
+				fileEntry.getGroupId(), fileEntry.getFolderId(),
+				fileEntry.getName(), fileEntry.getPendingVersion());
+
+		fileVersion.setDescription(description);
+		fileVersion.setVersion(version);
+		fileVersion.setSize(fileEntry.getSize());
+		fileVersion.setStatus(status);
+		fileVersion.setStatusByUserId(user.getUserId());
+		fileVersion.setStatusByUserName(user.getFullName());
+		fileVersion.setStatusDate(modifiedDate);
+
+		dlFileVersionPersistence.update(fileVersion, false);
 	}
 
 	protected void validate(
