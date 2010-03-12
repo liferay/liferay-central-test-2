@@ -14,7 +14,6 @@
 
 package com.liferay.taglib.aui;
 
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.taglib.util.IncludeTag;
 import com.liferay.util.TextFormatter;
 

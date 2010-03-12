@@ -14,7 +14,6 @@
 
 package com.liferay.portal.model;
 
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 
