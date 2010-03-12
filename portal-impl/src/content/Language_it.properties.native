@@ -12,7 +12,7 @@ lang.line.end=right
 
 javax.portlet.description.122=Le categorie descrivono un insieme dei termini di vocabolario per etichettare gli articoli soddisfatti. I coordinatori possono generare le categorie e popolarli con i termini di vocabolario da che gli utenti possono scegliere quando etichetta il soddisfare. (Automatic Translation)
 javax.portlet.description.126=Le organizzazioni rappresentano una gerarchia degli utenti, quali un reparto o una filiale. I coordinatori possono dirigere l'insieme dei membri dell'utente, definiscono i ruoli ed installano gli attributi di un'organizzazione. (Automatic Translation)
-javax.portlet.description.127=I gruppi di utenti sono uno shortcup ad un gruppo allentato di utenti, senza riguardo all'insieme dei membri di organizzazione o della comunità. I coordinatori possono definire un gruppo di utenti ed assegnare il gruppo di utenti come membri di una comunità se voluti. (Automatic Translation)
+javax.portlet.description.127=I gruppi di utenti sono una scorciatoia ad un gruppo allentato di utenti, senza riguardo all'insieme dei membri di organizzazione o della comunità. I coordinatori possono definire un gruppo di utenti ed assegnare il gruppo di utenti come membri di una comunità se voluti. (Automatic Translation)
 javax.portlet.description.129=Le politiche di parola d'accesso definiscono le misure di sicurezza di livello imprenditoriale che comprendono il bloccaggio dell'utente e la scadenza di parola d'accesso. I coordinatori possono definire le politiche o il delegato ad un assistente di LDAP. (Automatic Translation)
 javax.portlet.description.134=Le Comunità sono un insieme degli utenti senza la gerarchia. I coordinatori possono creare le comunità, gestire l'insieme dei membri dell'utente, definire i ruoli e fissare gli attributi di una comunità. (Automatic Translation)
 javax.portlet.description.137=Le regolazioni della gestione di assistente controllano i ceppi, nascondenti, l'indirizzamento di ricerca ed altre caratteristiche avanzate. I coordinatori avanzati possono controllare la prestazione di sistema, alterare le regolazioni dettagliate dell'assistente, reindex le ricerche e modificare nascondere. (Automatic Translation)
@@ -3109,6 +3109,7 @@ question=Domanda
 questions=Domande
 quick-add=Aggiunta Veloce
 quick-links=Collegamenti rapidi
+quick-reply=Risposta rapida (Automatic Translation)
 quote-without-title=Citazione senza titolo
 quote=Citazione
 radio-buttons=Pulsanti di scelta

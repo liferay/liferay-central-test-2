@@ -12,7 +12,7 @@ lang.line.end=right
 
 javax.portlet.description.122=类别描述一套词汇量期限标记美满的项目。 管理员能创造类别和居住于他们与用户能选择从，当标记内容时的词汇量期限。 (Automatic Translation)
 javax.portlet.description.126=组织代表用户阶层，例如部门或辅助者。 管理员能处理用户会员资格，定义了角色，并且设定组织的属性。 (Automatic Translation)
-javax.portlet.description.127=不管社区或组织会员资格，用户群是shortcup对一个宽松小组用户。 如果需要管理员能定义用户群和分配用户群作为社区的成员。 (Automatic Translation)
+javax.portlet.description.127=不管社区或组织会员资格，用户群是捷径对一个宽松小组用户。 如果需要管理员能定义用户群和分配用户群作为社区的成员。 (Automatic Translation)
 javax.portlet.description.129=密码政策定义了企业水平包括用户停工和密码失效的安全措施。 管理员能定义政策或代表到LDAP服务器。 (Automatic Translation)
 javax.portlet.description.134=公共是一套用户没有阶层。 管理员能创建社区，处理用户会员资格，定义角色和设置社区的属性。 (Automatic Translation)
 javax.portlet.description.137=服务器管理设置控制日志，贮藏，查寻索引和其他先进特点。 先进的管理员能监测系统性能，修改详细的服务器设置，重新编目查寻和修改贮藏。 (Automatic Translation)
@@ -3110,6 +3110,7 @@ question=问题
 questions=问题
 quick-add=快速添加
 quick-links=快速链接
+quick-reply=快的回复 (Automatic Translation)
 quote-without-title=没有标题的引用
 quote=引用
 radio-buttons=单选按钮

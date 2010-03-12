@@ -12,7 +12,7 @@ lang.line.end=right
 
 javax.portlet.description.122=類別描述一套詞彙量期限標記美滿的項目。 管理員能創造類別和居住於他們與用戶能選擇從，當標記內容时的詞彙量期限。 (Automatic Translation)
 javax.portlet.description.126=组织代表用戶階層，例如部門或輔助者。 管理員能處理用戶會員資格，定义了角色，並且設定組織的屬性。 (Automatic Translation)
-javax.portlet.description.127=不管社區或組織會員資格，用户群是shortcup對一個寬鬆小組用戶。 如果需要管理員能定義用户群和分配用户群作為社區的成員。 (Automatic Translation)
+javax.portlet.description.127=不管社區或組織會員資格，用户群是捷徑對一個寬鬆小組用戶。 如果需要管理員能定義用户群和分配用户群作為社區的成員。 (Automatic Translation)
 javax.portlet.description.129=密碼政策定义了企業水平包括用戶停工和密碼失效的安全措施。 管理員能定義政策或代表到LDAP服務器。 (Automatic Translation)
 javax.portlet.description.134=公共是一套用戶沒有階層。 管理員能创建社區，處理用戶會員資格，定義角色和設置社區的屬性。 (Automatic Translation)
 javax.portlet.description.137=服务器管理設置控制日誌，貯藏，查尋索引和其他先进特点。 先進的管理員能監測系统性能，修改詳細的服務器設置，重新編目查尋和修改貯藏。 (Automatic Translation)
@@ -3110,6 +3110,7 @@ question=問題
 questions=問題
 quick-add=快速新增
 quick-links=快的鏈接
+quick-reply=快的回復 (Automatic Translation)
 quote-without-title=沒有標題的行情
 quote=行情
 radio-buttons=单选按钮
