@@ -105,14 +105,6 @@ public class DLFileRankLocalServiceUtil {
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileRank addFileRank(
 		long groupId, long companyId, long userId, long folderId,
-		java.lang.String name)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService()
-				   .addFileRank(groupId, companyId, userId, folderId, name);
-	}
-
-	public static com.liferay.portlet.documentlibrary.model.DLFileRank addFileRank(
-		long groupId, long companyId, long userId, long folderId,
 		java.lang.String name,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -141,14 +133,6 @@ public class DLFileRankLocalServiceUtil {
 		long groupId, long userId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getFileRanks(groupId, userId, start, end);
-	}
-
-	public static com.liferay.portlet.documentlibrary.model.DLFileRank updateFileRank(
-		long groupId, long companyId, long userId, long folderId,
-		java.lang.String name)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService()
-				   .updateFileRank(groupId, companyId, userId, folderId, name);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileRank updateFileRank(

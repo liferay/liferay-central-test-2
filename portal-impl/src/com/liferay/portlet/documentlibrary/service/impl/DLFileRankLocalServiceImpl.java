@@ -35,15 +35,6 @@ public class DLFileRankLocalServiceImpl extends DLFileRankLocalServiceBaseImpl {
 
 	public DLFileRank addFileRank(
 			long groupId, long companyId, long userId, long folderId,
-			String name)
-		throws SystemException {
-
-		return addFileRank(
-			groupId, companyId, userId, folderId, name, new ServiceContext());
-	}
-
-	public DLFileRank addFileRank(
-			long groupId, long companyId, long userId, long folderId,
 			String name, ServiceContext serviceContext)
 		throws SystemException {
 
@@ -103,15 +94,6 @@ public class DLFileRankLocalServiceImpl extends DLFileRankLocalServiceBaseImpl {
 
 		return dlFileRankPersistence.findByG_U(
 			groupId, userId, start, end, new FileRankCreateDateComparator());
-	}
-
-	public DLFileRank updateFileRank(
-			long groupId, long companyId, long userId, long folderId,
-			String name)
-		throws SystemException {
-
-		return updateFileRank(
-			groupId, companyId, userId, folderId, name, new ServiceContext());
 	}
 
 	public DLFileRank updateFileRank(
