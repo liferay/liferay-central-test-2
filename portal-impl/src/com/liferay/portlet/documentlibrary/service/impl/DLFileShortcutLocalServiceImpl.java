@@ -244,7 +244,6 @@ public class DLFileShortcutLocalServiceImpl
 
 		fileShortcut.setModifiedDate(
 			serviceContext.getModifiedDate(new Date()));
-
 		fileShortcut.setFolderId(folderId);
 		fileShortcut.setToFolderId(toFolderId);
 		fileShortcut.setToName(toName);
