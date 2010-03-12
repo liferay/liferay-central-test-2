@@ -3236,9 +3236,13 @@ AUI().add(
 					var instance = this;
 
 					var fieldLabel = instance.getFieldLabelElement();
+					var input = fieldLabel.get('parentNode').one('.aui-field-input');
 
-					fieldLabel.attr('for', value);
-					fieldLabel.get('parentNode').one('input').attr('id', value);
+					if (input) {
+						input.attr('id', value);
+
+						fieldLabel.setAttribute('for', value);
+					}
 
 					instance.setAttribute('name', value);
 
