@@ -1034,6 +1034,14 @@ public class DLFileEntryLocalServiceImpl
 
 		// File
 
+		try {
+			dlService.deleteFile(
+				user.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
+				fileEntry.getRepositoryId(), name, version);
+		}
+		catch (NoSuchFileException nsfe) {
+		}
+
 		dlLocalService.updateFile(
 			user.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
 			fileEntry.getGroupId(), fileEntry.getRepositoryId(), name, false,
