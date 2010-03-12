@@ -128,8 +128,8 @@ public class JournalTemplateLocalServiceImpl
 		template.setCompanyId(user.getCompanyId());
 		template.setUserId(user.getUserId());
 		template.setUserName(user.getFullName());
-		template.setCreateDate(now);
-		template.setModifiedDate(now);
+		template.setCreateDate(serviceContext.getCreateDate(now));
+		template.setModifiedDate(serviceContext.getModifiedDate(now));
 		template.setTemplateId(templateId);
 		template.setStructureId(structureId);
 		template.setName(name);
@@ -561,6 +561,7 @@ public class JournalTemplateLocalServiceImpl
 		template.setCacheable(cacheable);
 		template.setSmallImage(smallImage);
 		template.setSmallImageURL(smallImageURL);
+		template.setModifiedDate(serviceContext.getModifiedDate(null));
 
 		journalTemplatePersistence.update(template, false);
 

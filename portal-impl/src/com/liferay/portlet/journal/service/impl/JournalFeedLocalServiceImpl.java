@@ -101,8 +101,8 @@ public class JournalFeedLocalServiceImpl
 		feed.setCompanyId(user.getCompanyId());
 		feed.setUserId(user.getUserId());
 		feed.setUserName(user.getFullName());
-		feed.setCreateDate(now);
-		feed.setModifiedDate(now);
+		feed.setCreateDate(serviceContext.getCreateDate(now));
+		feed.setModifiedDate(serviceContext.getModifiedDate(now));
 		feed.setFeedId(feedId);
 		feed.setName(name);
 		feed.setDescription(description);
@@ -312,7 +312,7 @@ public class JournalFeedLocalServiceImpl
 			feed.getCompanyId(), groupId, name, description, structureId,
 			targetLayoutFriendlyUrl, contentField);
 
-		feed.setModifiedDate(new Date());
+		feed.setModifiedDate(serviceContext.getModifiedDate(null));
 		feed.setName(name);
 		feed.setDescription(description);
 		feed.setType(type);

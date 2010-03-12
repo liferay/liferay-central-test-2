@@ -818,6 +818,8 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		serviceContext.setAddGuestPermissions(addGuestPermissions);
 		serviceContext.setAssetCategoryIds(assetCategoryIds);
 		serviceContext.setAssetTagNames(assetTagNames);
+		serviceContext.setCreateDate(article.getCreateDate());
+		serviceContext.setModifiedDate(article.getModifiedDate());
 		serviceContext.setScopeGroupId(groupId);
 
 		JournalArticle existingArticle = null;
@@ -1001,6 +1003,8 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		serviceContext.setAddCommunityPermissions(addCommunityPermissions);
 		serviceContext.setAddGuestPermissions(addGuestPermissions);
+		serviceContext.setCreateDate(feed.getCreateDate());
+		serviceContext.setModifiedDate(feed.getModifiedDate());
 
 		JournalFeed existingFeed = null;
 
@@ -1107,6 +1111,8 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		serviceContext.setAddCommunityPermissions(addCommunityPermissions);
 		serviceContext.setAddGuestPermissions(addGuestPermissions);
+		serviceContext.setCreateDate(structure.getCreateDate());
+		serviceContext.setModifiedDate(structure.getModifiedDate());
 
 		JournalStructure existingStructure = null;
 
@@ -1212,6 +1218,8 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		serviceContext.setAddCommunityPermissions(addCommunityPermissions);
 		serviceContext.setAddGuestPermissions(addGuestPermissions);
+		serviceContext.setCreateDate(template.getCreateDate());
+		serviceContext.setModifiedDate(template.getModifiedDate());
 
 		File smallFile = null;
 

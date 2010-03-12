@@ -106,8 +106,8 @@ public class JournalStructureLocalServiceImpl
 		structure.setCompanyId(user.getCompanyId());
 		structure.setUserId(user.getUserId());
 		structure.setUserName(user.getFullName());
-		structure.setCreateDate(now);
-		structure.setModifiedDate(now);
+		structure.setCreateDate(serviceContext.getCreateDate(now));
+		structure.setModifiedDate(serviceContext.getModifiedDate(now));
 		structure.setStructureId(structureId);
 		structure.setParentStructureId(parentStructureId);
 		structure.setName(name);
@@ -435,7 +435,7 @@ public class JournalStructureLocalServiceImpl
 		JournalStructure structure = journalStructurePersistence.findByG_S(
 			groupId, structureId);
 
-		structure.setModifiedDate(new Date());
+		structure.setModifiedDate(serviceContext.getModifiedDate(null));
 		structure.setParentStructureId(parentStructureId);
 		structure.setName(name);
 		structure.setDescription(description);

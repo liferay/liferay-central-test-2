@@ -261,8 +261,8 @@ public class JournalArticleLocalServiceImpl
 		article.setCompanyId(user.getCompanyId());
 		article.setUserId(user.getUserId());
 		article.setUserName(user.getFullName());
-		article.setCreateDate(now);
-		article.setModifiedDate(now);
+		article.setCreateDate(serviceContext.getCreateDate(now));
+		article.setModifiedDate(serviceContext.getModifiedDate(now));
 		article.setArticleId(articleId);
 		article.setVersion(version);
 		article.setTitle(title);
@@ -1689,7 +1689,7 @@ public class JournalArticleLocalServiceImpl
 			article.setCompanyId(user.getCompanyId());
 			article.setUserId(user.getUserId());
 			article.setUserName(user.getFullName());
-			article.setCreateDate(now);
+			article.setCreateDate(serviceContext.getModifiedDate(now));
 			article.setArticleId(articleId);
 			article.setVersion(MathUtil.format(latestVersion + 0.1, 1, 1));
 			article.setSmallImageId(oldArticle.getSmallImageId());
@@ -1708,7 +1708,7 @@ public class JournalArticleLocalServiceImpl
 			status = StatusConstants.PENDING;
 		}
 
-		article.setModifiedDate(now);
+		article.setModifiedDate(serviceContext.getModifiedDate(now));
 		article.setTitle(title);
 		article.setUrlTitle(
 			getUniqueUrlTitle(article.getId(), groupId, articleId, title));
@@ -1859,11 +1859,11 @@ public class JournalArticleLocalServiceImpl
 
 		// Article
 
-		article.setModifiedDate(now);
+		article.setModifiedDate(serviceContext.getModifiedDate(now));
 		article.setStatus(status);
 		article.setStatusByUserId(user.getUserId());
 		article.setStatusByUserName(user.getFullName());
-		article.setStatusDate(now);
+		article.setStatusDate(serviceContext.getModifiedDate(now));
 
 		if ((article.getExpirationDate() != null) &&
 			(article.getExpirationDate().before(now))) {
