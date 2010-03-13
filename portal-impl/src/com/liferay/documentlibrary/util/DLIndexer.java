@@ -29,7 +29,7 @@ import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
 import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
-import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
+import com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
@@ -84,7 +84,8 @@ public class DLIndexer extends BaseIndexer {
 		String portletId = fileModel.getPortletId();
 		long groupId = getParentGroupId(fileModel.getGroupId());
 		long scopeGroupId = fileModel.getGroupId();
-		long folderId = DLFolderConstants.DEFAULT_PARENT_FOLDER_ID;
+		long folderId = DLFileEntryImpl.getFolderId(
+			groupId, fileModel.getRepositoryId());
 		long repositoryId = fileModel.getRepositoryId();
 		String fileName = fileModel.getFileName();
 		long fileEntryId = fileModel.getFileEntryId();
@@ -115,8 +116,6 @@ public class DLIndexer extends BaseIndexer {
 
 			return null;
 		}
-
-		folderId = fileEntry.getFolderId();
 
 		if (properties == null) {
 			properties = fileEntry.getLuceneProperties();

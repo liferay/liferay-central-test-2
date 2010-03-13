@@ -32,6 +32,10 @@
 		<priority value="INFO" />
 	</category>
 
+	<category name="com.liferay.documentlibrary.util.DLIndexer">
+		<priority value="ERROR" />
+	</category>
+
 	<category name="com.liferay.documentlibrary.util.HookFactory">
 		<priority value="ERROR" />
 	</category>

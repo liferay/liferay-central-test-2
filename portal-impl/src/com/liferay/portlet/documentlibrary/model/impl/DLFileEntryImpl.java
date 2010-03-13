@@ -43,6 +43,15 @@ import java.util.Map;
 public class DLFileEntryImpl
 	extends DLFileEntryModelImpl implements DLFileEntry {
 
+	public static long getFolderId(long groupId, long repositoryId) {
+		if (groupId != repositoryId) {
+			return repositoryId;
+		}
+		else {
+			return DLFolderConstants.DEFAULT_PARENT_FOLDER_ID;
+		}
+	}
+
 	public static long getRepositoryId(long groupId, long folderId) {
 		if (folderId == DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 			return groupId;

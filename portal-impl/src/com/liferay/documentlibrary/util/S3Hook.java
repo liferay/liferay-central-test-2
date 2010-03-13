@@ -324,6 +324,10 @@ public class S3Hook extends BaseHook {
 
 					Document document = indexer.getDocument(fileModel);
 
+					if (document == null) {
+						continue;
+					}
+
 					SearchEngineUtil.updateDocument(
 						companyId, document.get(Field.UID), document);
 				}
