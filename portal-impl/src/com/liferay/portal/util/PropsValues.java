@@ -939,9 +939,6 @@ public class PropsValues {
 	public static final boolean LDAP_IMPORT_ENABLED = GetterUtil.getBoolean(
 		PropsUtil.get(PropsKeys.LDAP_IMPORT_ENABLED));
 
-	public static final long LDAP_IMPORT_INTERVAL = GetterUtil.getLong(
-		PropsUtil.get(PropsKeys.LDAP_IMPORT_INTERVAL));
-
 	public static final int LDAP_PAGE_SIZE = GetterUtil.getInteger(
 		PropsUtil.get(PropsKeys.LDAP_PAGE_SIZE));
 
