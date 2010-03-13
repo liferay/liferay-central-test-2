@@ -23,7 +23,7 @@ String path = (String)request.getAttribute("liferay-ui:webdav:path");
 %>
 
 <div class="taglib-webdav" id="<%= randomNamespace %>webdav">
-	<a class="show-webdav" href="javascript:;"><liferay-ui:message key="access-from-my-desktop" /></a>
+	<a class="show-webdav" href="javascript:;"><liferay-ui:message key="access-from-desktop" /></a>
 
 	<table class="lfr-table">
 		<tr>

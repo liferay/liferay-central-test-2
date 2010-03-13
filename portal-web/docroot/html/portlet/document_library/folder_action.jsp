@@ -130,7 +130,7 @@ if (row == null) {
 	</c:if>
 
 	<c:if test="<%= portletDisplay.isWebDAVEnabled() && DLFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.VIEW) %>">
-		<liferay-ui:icon cssClass='<%= randomNamespace + "-webdav-action" %>' image="desktop" message="access-from-my-desktop" url="javascript:;" />
+		<liferay-ui:icon cssClass='<%= randomNamespace + "-webdav-action" %>' image="desktop" message="access-from-desktop" url="javascript:;" />
 	</c:if>
 </liferay-ui:icon-menu>
 
@@ -194,7 +194,7 @@ if (row == null) {
 					centered: true,
 					destroyOnClose: true,
 					modal: true,
-					title: '<liferay-ui:message key="access-from-my-desktop" />',
+					title: '<liferay-ui:message key="access-from-desktop" />',
 					width: 500
 				}
 			)
