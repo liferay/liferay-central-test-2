@@ -88,7 +88,7 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 			List<Group> userGroups = new ArrayList<Group>();
 			//List<Group> userGroups = UserUtil.getGroups(userId);
 
-			if (group.isCommunity() &&
+			if ((group != null) && group.isCommunity() &&
 				GroupLocalServiceUtil.hasUserGroup(userId, groupId)) {
 
 				userGroups.add(group);
