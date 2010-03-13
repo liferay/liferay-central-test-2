@@ -14,6 +14,8 @@
 
 package com.liferay.portal.kernel.messaging;
 
+import com.liferay.portal.kernel.util.ThreadLocalRegistry;
+
 import java.util.Set;
 import java.util.concurrent.ThreadPoolExecutor;
 
@@ -57,7 +59,12 @@ public class ParallelDestination extends BaseDestination {
 			Runnable runnable = new Runnable() {
 
 				public void run() {
-					messageListener.receive(message);
+					try {
+						messageListener.receive(message);
+					}
+					finally {
+						ThreadLocalRegistry.resetThreadLocals();						
+					}
 				}
 
 			};
