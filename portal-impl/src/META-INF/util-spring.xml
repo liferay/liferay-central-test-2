@@ -25,26 +25,25 @@
 	<bean id="com.liferay.portal.kernel.cache.key.CacheKeyGeneratorUtil" class="com.liferay.portal.kernel.cache.key.CacheKeyGeneratorUtil">
 		<property name="cacheKeyGenerators">
 			<map>
-				<entry key="com.liferay.portal.kernel.dao.orm.FinderCache">
-					<bean class="com.liferay.portal.kernel.cache.key.JavaMD5CacheKeyGenerator">
-						<property name="maxLengthTrigger" value="200"/>
-					</bean>
-				</entry>
 				<entry key="com.liferay.portal.kernel.dao.orm.EntityCache">
-					<bean class="com.liferay.portal.kernel.cache.key.JavaMD5CacheKeyGenerator">
-						<property name="maxLengthTrigger" value="200"/>
+					<bean class="com.liferay.portal.cache.key.JavaMD5CacheKeyGenerator">
+						<property name="maxLength" value="200" />
 					</bean>						
 				</entry>
+				<entry key="com.liferay.portal.kernel.dao.orm.FinderCache">
+					<bean class="com.liferay.portal.cache.key.JavaMD5CacheKeyGenerator">
+						<property name="maxLength" value="200" />
+					</bean>
+				</entry>
 				<entry key="com.liferay.portal.language.LanguageResources">
-					<bean class="com.liferay.portal.kernel.cache.key.HashCodeCacheKeyGenerator"/>
+					<bean class="com.liferay.portal.cache.key.HashCodeCacheKeyGenerator" />
 				</entry>
 			</map>
 		</property>
-		<property name="defaultKeyGenerator">
-			<bean class="com.liferay.portal.kernel.cache.key.JavaMD5CacheKeyGenerator"/>
+		<property name="defaultCacheKeyGenerator">
+			<bean class="com.liferay.portal.cache.key.JavaMD5CacheKeyGenerator" />
 		</property>
 	</bean>
-	
 	<bean id="com.liferay.portal.kernel.cache.MultiVMPool" class="com.liferay.portal.cache.MultiVMPoolImpl">
 		<property name="portalCacheManager" ref="com.liferay.portal.kernel.cache.MultiVMPortalCacheManager" />
 	</bean>

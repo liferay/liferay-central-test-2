@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
@@ -10,18 +10,11 @@
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
- *
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.cache.key;
+package com.liferay.portal.cache.key;
+
+import com.liferay.portal.kernel.cache.key.CacheKeyGenerator;
 
 /**
  * <a href="HashCodeCacheKeyGenerator.java.html"><b><i>View Source</i></b></a>
@@ -29,7 +22,9 @@ package com.liferay.portal.kernel.cache.key;
  * @author Michael C. Han
  */
 public class HashCodeCacheKeyGenerator implements CacheKeyGenerator {
-	public String getCacheKey(String proposedKey) {
-		return String.valueOf(proposedKey.hashCode());
+
+	public String getCacheKey(String key) {
+		return String.valueOf(key.hashCode());
 	}
+
 }

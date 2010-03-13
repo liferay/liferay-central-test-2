@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
@@ -10,15 +10,6 @@
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
- *
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
  */
 
 package com.liferay.portal.kernel.cache.key;
@@ -33,19 +24,19 @@ import java.util.Map;
  */
 public class CacheKeyGeneratorUtil {
 
-	public static String getCacheKey(String proposedKey, String cacheName) {
+	public static String getCacheKey(String key, String cacheName) {
 		CacheKeyGenerator cacheKeyGenerator = _cacheKeyGenerators.get(
 			cacheName);
 
 		if (cacheKeyGenerator == null) {
-			cacheKeyGenerator = _defaultKeyGenerator;
+			cacheKeyGenerator = _defaultCacheKeyGenerator;
 		}
 
 		if (cacheKeyGenerator != null) {
-			return cacheKeyGenerator.getCacheKey(proposedKey);
+			return cacheKeyGenerator.getCacheKey(key);
 		}
 
-		return proposedKey;
+		return key;
 	}
 
 	public void setCacheKeyGenerators(
@@ -54,11 +45,14 @@ public class CacheKeyGeneratorUtil {
 		_cacheKeyGenerators = cacheKeyGenerators;
 	}
 
-	public void setDefaultKeyGenerator(CacheKeyGenerator defaultKeyGenerator) {
-		_defaultKeyGenerator = defaultKeyGenerator;
+	public void setDefaultCacheKeyGenerator(
+		CacheKeyGenerator defaultCacheKeyGenerator) {
+
+		_defaultCacheKeyGenerator = defaultCacheKeyGenerator;
 	}
 
 	private static Map<String, CacheKeyGenerator> _cacheKeyGenerators =
 		new HashMap<String, CacheKeyGenerator>();
-	private static CacheKeyGenerator _defaultKeyGenerator;
+	private static CacheKeyGenerator _defaultCacheKeyGenerator;
+
 }
