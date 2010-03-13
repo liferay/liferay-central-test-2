@@ -145,7 +145,7 @@ public class LockWrapper implements Lock {
 		_lock.setExpirationDate(expirationDate);
 	}
 
-	public Lock toEscapedModel() {
+	public com.liferay.portal.model.Lock toEscapedModel() {
 		return _lock.toEscapedModel();
 	}
 
@@ -190,7 +190,7 @@ public class LockWrapper implements Lock {
 		return _lock.clone();
 	}
 
-	public int compareTo(Lock lock) {
+	public int compareTo(com.liferay.portal.model.Lock lock) {
 		return _lock.compareTo(lock);
 	}
 
