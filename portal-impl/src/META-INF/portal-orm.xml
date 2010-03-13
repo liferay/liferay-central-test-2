@@ -1325,7 +1325,6 @@
 			<basic name="title" />
 			<basic name="description" />
 			<basic name="version" />
-			<basic name="pendingVersion" />
 			<basic name="size">
 				<column name="SIZE_" />
 			</basic>

@@ -182,14 +182,6 @@ public class DLFileEntryWrapper implements DLFileEntry {
 		_dlFileEntry.setVersion(version);
 	}
 
-	public java.lang.String getPendingVersion() {
-		return _dlFileEntry.getPendingVersion();
-	}
-
-	public void setPendingVersion(java.lang.String pendingVersion) {
-		_dlFileEntry.setPendingVersion(pendingVersion);
-	}
-
 	public long getSize() {
 		return _dlFileEntry.getSize();
 	}

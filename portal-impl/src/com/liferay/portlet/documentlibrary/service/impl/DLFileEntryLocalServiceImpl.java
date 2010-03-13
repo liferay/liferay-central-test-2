@@ -449,10 +449,6 @@ public class DLFileEntryLocalServiceImpl
 				}
 			}
 
-			if (version.equals(fileEntry.getPendingVersion())) {
-				fileEntry.setPendingVersion(StringPool.BLANK);
-			}
-
 			dlFileEntryPersistence.update(fileEntry, false);
 		}
 		else {
@@ -963,13 +959,6 @@ public class DLFileEntryLocalServiceImpl
 
 		if (serviceContext.getStatus() == StatusConstants.APPROVED) {
 			fileEntry.setVersion(version);
-			fileEntry.setPendingVersion(StringPool.BLANK);
-		}
-		else if (serviceContext.getStatus() == StatusConstants.DRAFT) {
-			fileEntry.setPendingVersion(version);
-		}
-		else {
-			fileEntry.setPendingVersion(StringPool.BLANK);
 		}
 
 		// File entry
@@ -1029,8 +1018,7 @@ public class DLFileEntryLocalServiceImpl
 		try {
 			dlService.deleteFile(
 				user.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
-				fileEntry.getRepositoryId(), fileEntry.getName(),
-				fileEntry.getPendingVersion());
+				fileEntry.getRepositoryId(), fileEntry.getName(), version);
 		}
 		catch (NoSuchFileException nsfe) {
 		}
@@ -1099,7 +1087,6 @@ public class DLFileEntryLocalServiceImpl
 				fileEntry.getVersion(), fileVersion.getVersion()) < 0)) {
 
 			fileEntry.setVersion(fileVersion.getVersion());
-			fileEntry.setPendingVersion(StringPool.BLANK);
 
 			dlFileEntryPersistence.update(fileEntry, false);
 		}
@@ -1122,7 +1109,6 @@ public class DLFileEntryLocalServiceImpl
 				}
 			}
 
-			fileEntry.setPendingVersion(fileVersion.getVersion());
 			fileEntry.setVersion(newVersion);
 
 			dlFileEntryPersistence.update(fileEntry, false);
@@ -1267,7 +1253,7 @@ public class DLFileEntryLocalServiceImpl
 	protected void updateFileVersion(
 			User user, DLFileVersion fileVersion, Date modifiedDate,
 			String version, String description, long size, int status)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		fileVersion.setDescription(description);
 		fileVersion.setVersion(version);

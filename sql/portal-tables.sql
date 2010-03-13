@@ -374,7 +374,6 @@ create table DLFileEntry (
 	title VARCHAR(255) null,
 	description STRING null,
 	version VARCHAR(75) null,
-	pendingVersion VARCHAR(75) null,
 	size_ LONG,
 	readCount INTEGER,
 	extraSettings TEXT null

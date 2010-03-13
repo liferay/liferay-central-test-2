@@ -1011,7 +1011,6 @@
 			<hint-collection name="TEXTAREA" />
 		</field>
 		<field name="version" type="String" />
-		<field name="pendingVersion" type="String" />
 		<field name="size" type="long" />
 		<field name="readCount" type="int" />
 		<field name="extraSettings" type="String">

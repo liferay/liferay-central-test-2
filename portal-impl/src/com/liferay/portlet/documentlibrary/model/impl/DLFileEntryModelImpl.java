@@ -75,12 +75,11 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 			{ "title", new Integer(Types.VARCHAR) },
 			{ "description", new Integer(Types.VARCHAR) },
 			{ "version", new Integer(Types.VARCHAR) },
-			{ "pendingVersion", new Integer(Types.VARCHAR) },
 			{ "size_", new Integer(Types.BIGINT) },
 			{ "readCount", new Integer(Types.INTEGER) },
 			{ "extraSettings", new Integer(Types.CLOB) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table DLFileEntry (uuid_ VARCHAR(75) null,fileEntryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,versionUserId LONG,versionUserName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,folderId LONG,name VARCHAR(255) null,title VARCHAR(255) null,description STRING null,version VARCHAR(75) null,pendingVersion VARCHAR(75) null,size_ LONG,readCount INTEGER,extraSettings TEXT null)";
+	public static final String TABLE_SQL_CREATE = "create table DLFileEntry (uuid_ VARCHAR(75) null,fileEntryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,versionUserId LONG,versionUserName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,folderId LONG,name VARCHAR(255) null,title VARCHAR(255) null,description STRING null,version VARCHAR(75) null,size_ LONG,readCount INTEGER,extraSettings TEXT null)";
 	public static final String TABLE_SQL_DROP = "drop table DLFileEntry";
 	public static final String ORDER_BY_JPQL = " ORDER BY dlFileEntry.folderId ASC, dlFileEntry.name ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY DLFileEntry.folderId ASC, DLFileEntry.name ASC";
@@ -112,7 +111,6 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 		model.setTitle(soapModel.getTitle());
 		model.setDescription(soapModel.getDescription());
 		model.setVersion(soapModel.getVersion());
-		model.setPendingVersion(soapModel.getPendingVersion());
 		model.setSize(soapModel.getSize());
 		model.setReadCount(soapModel.getReadCount());
 		model.setExtraSettings(soapModel.getExtraSettings());
@@ -329,14 +327,6 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 		_version = version;
 	}
 
-	public String getPendingVersion() {
-		return GetterUtil.getString(_pendingVersion);
-	}
-
-	public void setPendingVersion(String pendingVersion) {
-		_pendingVersion = pendingVersion;
-	}
-
 	public long getSize() {
 		return _size;
 	}
@@ -386,7 +376,6 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 			model.setTitle(HtmlUtil.escape(getTitle()));
 			model.setDescription(HtmlUtil.escape(getDescription()));
 			model.setVersion(HtmlUtil.escape(getVersion()));
-			model.setPendingVersion(HtmlUtil.escape(getPendingVersion()));
 			model.setSize(getSize());
 			model.setReadCount(getReadCount());
 			model.setExtraSettings(HtmlUtil.escape(getExtraSettings()));
@@ -430,7 +419,6 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 		clone.setTitle(getTitle());
 		clone.setDescription(getDescription());
 		clone.setVersion(getVersion());
-		clone.setPendingVersion(getPendingVersion());
 		clone.setSize(getSize());
 		clone.setReadCount(getReadCount());
 		clone.setExtraSettings(getExtraSettings());
@@ -493,7 +481,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(39);
+		StringBundler sb = new StringBundler(37);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
@@ -525,8 +513,6 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 		sb.append(getDescription());
 		sb.append(", version=");
 		sb.append(getVersion());
-		sb.append(", pendingVersion=");
-		sb.append(getPendingVersion());
 		sb.append(", size=");
 		sb.append(getSize());
 		sb.append(", readCount=");
@@ -539,7 +525,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(61);
+		StringBundler sb = new StringBundler(58);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portlet.documentlibrary.model.DLFileEntry");
@@ -606,10 +592,6 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 		sb.append(getVersion());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>pendingVersion</column-name><column-value><![CDATA[");
-		sb.append(getPendingVersion());
-		sb.append("]]></column-value></column>");
-		sb.append(
 			"<column><column-name>size</column-name><column-value><![CDATA[");
 		sb.append(getSize());
 		sb.append("]]></column-value></column>");
@@ -651,7 +633,6 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 	private String _originalTitle;
 	private String _description;
 	private String _version;
-	private String _pendingVersion;
 	private long _size;
 	private int _readCount;
 	private String _extraSettings;
