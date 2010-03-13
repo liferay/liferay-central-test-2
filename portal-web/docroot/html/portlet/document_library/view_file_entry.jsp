@@ -273,7 +273,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 
 			for (int i = 0; i < comparableFileExtensions.length; i++) {
 				if (StringPool.STAR.equals(comparableFileExtensions[i]) ||
-					StringUtil.endsWith(name, comparableFileExtensions[i])) {
+					StringUtil.endsWith(title, comparableFileExtensions[i])) {
 
 					comparableFileEntry = true;
 
@@ -375,21 +375,21 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 				DLFileVersion fileVersion = (DLFileVersion)results.get(0);
 			%>
 
-			<portlet:actionURL var="compareVersionsURL">
-				<portlet:param name="struts_action" value="/document_library/compare_versions" />
-			</portlet:actionURL>
+				<portlet:actionURL var="compareVersionsURL">
+					<portlet:param name="struts_action" value="/document_library/compare_versions" />
+				</portlet:actionURL>
 
-			<aui:form action="<%= compareVersionsURL %>" method="post" name="fm1" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "compare();" %>'>
-				<aui:input name="backURL" type="hidden" value="<%= currentURL %>" />
-				<aui:input name="fileEntryId" type="hidden" value="<%= fileEntryId %>" />
-				<aui:input name="folderId" type="hidden" value="<%= folderId %>" />
-				<aui:input name="name" type="hidden" value="<%= name %>" />
-				<aui:input name="title" type="hidden" value="<%= title %>" />
-				<aui:input name="sourceVersion" type="hidden" value="<%= fileVersion.getVersion() %>" />
-				<aui:input name="targetVersion" type="hidden" value="<%= fileEntry.getVersion() %>" />
+				<aui:form action="<%= compareVersionsURL %>" method="post" name="fm1" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "compare();" %>'>
+					<aui:input name="backURL" type="hidden" value="<%= currentURL %>" />
+					<aui:input name="fileEntryId" type="hidden" value="<%= fileEntryId %>" />
+					<aui:input name="folderId" type="hidden" value="<%= folderId %>" />
+					<aui:input name="name" type="hidden" value="<%= name %>" />
+					<aui:input name="title" type="hidden" value="<%= title %>" />
+					<aui:input name="sourceVersion" type="hidden" value="<%= fileVersion.getVersion() %>" />
+					<aui:input name="targetVersion" type="hidden" value="<%= fileEntry.getVersion() %>" />
 
-				<aui:button type="submit" value="compare-versions" />
-			</aui:form>
+					<aui:button type="submit" value="compare-versions" />
+				</aui:form>
 
 			<%
 			}
