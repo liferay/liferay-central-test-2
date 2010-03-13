@@ -1476,22 +1476,6 @@
 		</licenses>
 	</library>
 	<library>
-		<file-name>portal/friki.jar</file-name>
-		<version>2.1.1</version>
-		<project-name>Friki</project-name>
-		<project-url>http://sourceforge.net/projects/friki</project-url>
-		<licenses>
-			<license>
-				<license-name>Apache License 2.0</license-name>
-				<copyright-notice>None</copyright-notice>
-			</license>
-			<license>
-				<license-name>JRegEx License</license-name>
-				<copyright-notice>Copyright (c) 2001, Sergey A. Samokhodkin</copyright-notice>
-			</license>
-		</licenses>
-	</library>
-	<library>
 		<file-name>portal/gif89.jar</file-name>
 		<version></version>
 		<project-name>Gif89Encoder</project-name>
