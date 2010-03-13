@@ -26,10 +26,14 @@
 		<property name="cacheKeyGenerators">
 			<map>
 				<entry key="com.liferay.portal.kernel.dao.orm.FinderCache">
-					<bean class="com.liferay.portal.kernel.cache.key.JavaMD5CacheKeyGenerator"/>
+					<bean class="com.liferay.portal.kernel.cache.key.JavaMD5CacheKeyGenerator">
+						<property name="maxLengthTrigger" value="200"/>
+					</bean>
 				</entry>
 				<entry key="com.liferay.portal.kernel.dao.orm.EntityCache">
-					<bean class="com.liferay.portal.kernel.cache.key.JavaMD5CacheKeyGenerator"/>
+					<bean class="com.liferay.portal.kernel.cache.key.JavaMD5CacheKeyGenerator">
+						<property name="maxLengthTrigger" value="200"/>
+					</bean>						
 				</entry>
 				<entry key="com.liferay.portal.language.LanguageResources">
 					<bean class="com.liferay.portal.kernel.cache.key.HashCodeCacheKeyGenerator"/>

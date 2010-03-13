@@ -37,7 +37,9 @@ public class JavaMD5CacheKeyGenerator implements CacheKeyGenerator {
 
 	public String getCacheKey(String proposedKey) {
 
-		if (proposedKey.length() < _maxLengthTrigger) {
+		if ((_maxLengthTrigger > -1) &&
+			(proposedKey.length() < _maxLengthTrigger)) {
+			
 			return proposedKey;
 		}
 
@@ -74,5 +76,5 @@ public class JavaMD5CacheKeyGenerator implements CacheKeyGenerator {
 		'c', 'd', 'e', 'f'
 	};
 
-	private int _maxLengthTrigger;
+	private int _maxLengthTrigger = -1;
 }
