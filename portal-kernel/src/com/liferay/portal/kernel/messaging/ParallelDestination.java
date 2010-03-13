@@ -63,7 +63,7 @@ public class ParallelDestination extends BaseDestination {
 						messageListener.receive(message);
 					}
 					finally {
-						ThreadLocalRegistry.resetThreadLocals();						
+						ThreadLocalRegistry.resetThreadLocals();
 					}
 				}
 
