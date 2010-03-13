@@ -296,11 +296,7 @@
 						<copy
 							file="tools/servers/geronimo/bin/setenv.bat"
 							tofile="${app.server.bin.dir}/setenv.bat"
-						>
-							<filterset>
-								<filter token="java.version" value="${java.version}" />
-							</filterset>
-						</copy>
+						/>
 					</then>
 				</if>
 
