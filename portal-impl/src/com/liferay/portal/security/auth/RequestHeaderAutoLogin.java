@@ -17,12 +17,14 @@ package com.liferay.portal.security.auth;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
+import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
-import com.liferay.portal.security.ldap.LDAPSettingsUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PrefsPropsUtil;
+import com.liferay.portal.util.PropsValues;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -52,7 +54,10 @@ public class RequestHeaderAutoLogin extends CASAutoLogin {
 
 			User user = null;
 
-			if (LDAPSettingsUtil.isImportEnabled(companyId)) {
+			if (PrefsPropsUtil.getBoolean(
+					companyId, PropsKeys.REQUEST_HEADER_AUTH_IMPORT_FROM_LDAP,
+					PropsValues.REQUEST_HEADER_AUTH_IMPORT_FROM_LDAP)) {
+
 				try {
 					user = importLDAPUser(
 						companyId, StringPool.BLANK, screenName);
