@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.servlet.filters.threadlocalcache;
+package com.liferay.portal.servlet.filters.threadlocal;
 
 import com.liferay.portal.kernel.util.ThreadLocalRegistry;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
@@ -22,11 +22,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * <a href="ThreadLocalCacheFilter.java.html"><b><i>View Source</i></b></a>
+ * <a href="ThreadLocalFilter.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class ThreadLocalCacheFilter extends BasePortalFilter {
+public class ThreadLocalFilter extends BasePortalFilter {
 
 	protected void processFilter(
 			HttpServletRequest request, HttpServletResponse response,
@@ -35,7 +35,7 @@ public class ThreadLocalCacheFilter extends BasePortalFilter {
 
 		try {
 			processFilter(
-				ThreadLocalCacheFilter.class, request, response, filterChain);
+				ThreadLocalFilter.class, request, response, filterChain);
 		}
 		finally {
 			ThreadLocalRegistry.resetThreadLocals();

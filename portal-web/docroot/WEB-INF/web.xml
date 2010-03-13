@@ -170,8 +170,8 @@
 		<filter-class>com.liferay.portal.servlet.filters.strip.StripFilter</filter-class>
 	</filter>
 	<filter>
-		<filter-name>Thread Local Cache Filter</filter-name>
-		<filter-class>com.liferay.portal.servlet.filters.threadlocalcache.ThreadLocalCacheFilter</filter-class>
+		<filter-name>Thread Local Filter</filter-name>
+		<filter-class>com.liferay.portal.servlet.filters.threadlocal.ThreadLocalFilter</filter-class>
 	</filter>
 	<filter>
 		<filter-name>Virtual Host Filter</filter-name>
@@ -202,7 +202,7 @@
 		<filter-class>com.liferay.portal.servlet.filters.validhtml.ValidHtmlFilter</filter-class>
 	</filter>
 	<filter-mapping>
-		<filter-name>Thread Local Cache Filter</filter-name>
+		<filter-name>Thread Local Filter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 	<filter-mapping>
