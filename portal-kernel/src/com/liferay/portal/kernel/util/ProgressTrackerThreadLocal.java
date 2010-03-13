@@ -30,6 +30,6 @@ public class ProgressTrackerThreadLocal {
 	}
 
 	private static ThreadLocal<ProgressTracker> _progressTracker =
-		new ThreadLocal<ProgressTracker>();
+		new AutoResetThreadLocal<ProgressTracker>();
 
 }
