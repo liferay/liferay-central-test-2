@@ -47,6 +47,11 @@ public class DefaultWorkflowDestinationEventListener
 				"Un-registering default workflow engine: " +
 				_workflowEngineName);
 		}
+
+		if (!isProceed(destinationName, messageListener)) {
+			return;
+		}
+
 		MessageBusUtil.unregisterMessageListener(
 			DestinationNames.WORKFLOW_DEFINITION,
 			_workflowDefinitionManagerListener);
@@ -55,7 +60,8 @@ public class DefaultWorkflowDestinationEventListener
 			DestinationNames.WORKFLOW_ENGINE, _workflowEngineManagerListener);
 
 		MessageBusUtil.unregisterMessageListener(
-			DestinationNames.WORKFLOW_INSTANCE, _workflowInstanceManagerListener);
+			DestinationNames.WORKFLOW_INSTANCE,
+			_workflowInstanceManagerListener);
 
 		MessageBusUtil.unregisterMessageListener(
 			DestinationNames.WORKFLOW_LOG, _workflowLogManagerListener);
@@ -68,11 +74,16 @@ public class DefaultWorkflowDestinationEventListener
 	public void messageListenerUnregistered(
 		String destinationName, MessageListener messageListener) {
 
+		if (!isProceed(destinationName, messageListener)) {
+			return;
+		}
+
 		if (_log.isInfoEnabled()) {
 			_log.info(
 				"Registering default workflow engine: " +
 				_workflowEngineName);
 		}
+
 		MessageBusUtil.registerMessageListener(
 			DestinationNames.WORKFLOW_DEFINITION,
 			_workflowDefinitionManagerListener);
@@ -118,6 +129,16 @@ public class DefaultWorkflowDestinationEventListener
 	public void setWorkflowLogManagerListener(
 		MessageListener workflowLogManagerListener) {
 		_workflowLogManagerListener = workflowLogManagerListener;
+	}
+
+	protected boolean isProceed(
+		String destinationName, MessageListener messageListener) {
+
+		if (messageListener.equals(_workflowEngineManagerListener)) {
+			return false;
+		}
+		
+		return true;
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
