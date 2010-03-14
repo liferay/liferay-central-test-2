@@ -122,7 +122,15 @@ long classPK = ((Number)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS
 		List<WorkflowLog> workflowLogs = WorkflowLogManagerUtil.getWorkflowLogs(company.getCompanyId(), workflowTask.getWorkflowTaskId(), QueryUtil.ALL_POS, QueryUtil.ALL_POS, WorkflowComparatorFactoryUtil.getLogCreateDateComparator(true));
 
 		for (WorkflowLog workflowLog : workflowLogs) {
-			User curUser = UserLocalServiceUtil.getUser(workflowLog.getUserId());
+
+			Role curRole = null;
+			User curUser = null;
+			if (workflowLog.getRoleId() != 0) {
+				curRole = RoleLocalServiceUtil.getRole(workflowLog.getRoleId());
+			}
+			else if (workflowLog.getUserId() != 0) {
+				curUser = UserLocalServiceUtil.getUser(workflowLog.getUserId());
+			}
 		%>
 
 			<div class="activity">
@@ -132,20 +140,41 @@ long classPK = ((Number)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS
 
 				<c:choose>
 					<c:when test="<%= workflowLog.getType() == WorkflowLog.TRANSITION %>">
+						<%
+							String displayName = null;
+							if (curRole == null) {
+								displayName = curUser.getFullName();
+							}
+							else {
+								displayName = curRole.getDescriptiveName();
+							}
+						%>
 						<div>
-							<%= LanguageUtil.format(pageContext, "x-changed-the-state-from-x-to-x", new Object[] {HtmlUtil.escape(curUser.getFullName()), workflowLog.getPreviousState(), workflowLog.getState()}) %>
+							<%= LanguageUtil.format(pageContext, "x-changed-the-state-from-x-to-x", new Object[] {HtmlUtil.escape(displayName), workflowLog.getPreviousState(), workflowLog.getState()}) %>
 						</div>
 					</c:when>
 					<c:otherwise>
 						<c:choose>
-							<c:when test="<%= workflowLog.getPreviousUserId() == 0 %>">
+							<c:when test="<%= (workflowLog.getPreviousUserId() == 0) && (curUser != null) %>">
 								<div>
 									<%= LanguageUtil.format(pageContext, curUser.isMale() ? "x-assigned-the-task-to-himself" : "x-assigned-the-task-to-herself", HtmlUtil.escape(curUser.getFullName())) %>
 								</div>
 							</c:when>
 							<c:otherwise>
+								<%
+									String name = null;
+									String fullName = null;
+									if (curRole == null) {
+										name = PortalUtil.getUserName(workflowLog.getPreviousUserId(), StringPool.BLANK);
+										fullName = curUser.getFullName();
+									}
+									else {
+										name = curRole.getName();
+										fullName = curRole.getDescriptiveName();
+									}
+								%>
 								<div>
-									<%= LanguageUtil.format(pageContext, "x-assigned-the-task-to-x", new Object[] {HtmlUtil.escape(PortalUtil.getUserName(workflowLog.getPreviousUserId(), StringPool.BLANK)), curUser.getFullName()}) %>
+									<%= LanguageUtil.format(pageContext, "x-assigned-the-task-to-x", new Object[] {HtmlUtil.escape(name), fullName}) %>
 								</div>
 							</c:otherwise>
 						</c:choose>

@@ -35,12 +35,20 @@ public class DefaultWorkflowLog implements Serializable, WorkflowLog {
 		return _createDate;
 	}
 
+	public long getPreviousRoleId() {
+		return _previousRoleId;
+	}
+
 	public String getPreviousState() {
 		return _previousState;
 	}
 
 	public long getPreviousUserId() {
 		return _previousUserId;
+	}
+
+	public long getRoleId() {
+		return _roleId;
 	}
 
 	public String getState() {
@@ -71,12 +79,20 @@ public class DefaultWorkflowLog implements Serializable, WorkflowLog {
 		_createDate = createDate;
 	}
 
+	public void setPreviousRoleId(long previousRoleId) {
+		_previousRoleId = previousRoleId;
+	}
+
 	public void setPreviousState(String previousState) {
 		_previousState = previousState;
 	}
 
 	public void setPreviousUserId(long previousUserId) {
 		_previousUserId = previousUserId;
+	}
+
+	public void setRoleId(long roleId) {
+		_roleId = roleId;
 	}
 
 	public void setState(String state) {
@@ -101,11 +117,13 @@ public class DefaultWorkflowLog implements Serializable, WorkflowLog {
 
 	private String _comment;
 	private Date _createDate;
+	private long _previousRoleId;
 	private String _previousState;
 	private long _previousUserId;
 	private String _state;
 	private int _type;
 	private long _userId;
+	private long _roleId;
 	private long _workflowLogId;
 	private long _workflowTaskId;
 
