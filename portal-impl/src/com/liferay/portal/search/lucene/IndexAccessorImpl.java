@@ -66,10 +66,10 @@ public class IndexAccessorImpl implements IndexAccessor {
 	public IndexAccessorImpl(long companyId) {
 		_companyId = companyId;
 
+		_initDialect();
 		_checkLuceneDir();
 		_initIndexWriter();
 		_initCommitScheduler();
-		_initDialect();
 	}
 
 	public void addDocument(Document document) throws IOException {
