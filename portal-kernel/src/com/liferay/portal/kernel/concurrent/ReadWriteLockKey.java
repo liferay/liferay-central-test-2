@@ -19,9 +19,10 @@ import com.liferay.portal.kernel.util.Validator;
 /**
  * <a href="ReadWriteLockKey.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
  * Represents a key that is used by ReadWriteLockRegistry. T must also be
- * immutable and properly implement the equals and hashCode methods. <a
- * href="ReadWriteLockKey.java.html"><b><i>View Source</i></b></a>
+ * immutable and properly implement the equals and hashCode methods.
+ * </p>
  *
  * @author Shuyang Zhou
  * @see	   ReadWriteLockRegistry
