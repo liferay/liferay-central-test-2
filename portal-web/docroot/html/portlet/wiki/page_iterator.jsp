@@ -134,7 +134,7 @@ if (type.equals("history")) {
 }
 
 int total = 0;
-List<WikiPage> results = new ArrayList<WikiPage>();
+List<WikiPage> results = null;
 
 if (type.equals("all_pages")) {
 	total = WikiPageLocalServiceUtil.getPagesCount(node.getNodeId(), true);
@@ -145,6 +145,8 @@ else if (type.equals("categorized_pages") || type.equals("tagged_pages")) {
 
 	total = AssetEntryLocalServiceUtil.getEntriesCount(assetEntryQuery);
 	List<AssetEntry> assetEntries = AssetEntryLocalServiceUtil.getEntries(assetEntryQuery);
+
+	results = new ArrayList<WikiPage>();
 
 	for (AssetEntry assetEntry : assetEntries) {
 		WikiPageResource pageResource = WikiPageResourceLocalServiceUtil.getPageResource(assetEntry.getClassPK());
