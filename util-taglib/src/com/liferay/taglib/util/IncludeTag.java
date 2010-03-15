@@ -82,7 +82,7 @@ public class IncludeTag
 		String page = getStartPage();
 
 		if (Validator.isNull(page)) {
-			return SKIP_BODY;
+			return EVAL_BODY_BUFFERED;
 		}
 
 		_callSetAttributes();
