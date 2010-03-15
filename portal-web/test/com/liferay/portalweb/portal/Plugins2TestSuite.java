@@ -57,6 +57,7 @@ import com.liferay.portalweb.plugins.webform.WebFormTests;
 import com.liferay.portalweb.plugins.westminstercatechism.WestminsterCatechismTests;
 import com.liferay.portalweb.plugins.widgetconsumer.WidgetConsumerTests;
 import com.liferay.portalweb.plugins.workflow.WorkflowTests;
+import com.liferay.portalweb.plugins.wsrp.WSRPTests;
 import com.liferay.portalweb.portal.login.LoginTests;
 
 import junit.framework.Test;
@@ -117,6 +118,7 @@ public class Plugins2TestSuite extends BaseTests {
 		testSuite.addTest(WestminsterCatechismTests.suite());
 		testSuite.addTest(WidgetConsumerTests.suite());
 		testSuite.addTest(WorkflowTests.suite());
+		testSuite.addTest(WSRPTests.suite());
 
 		testSuite.addTestSuite(StopSeleniumTest.class);
 
