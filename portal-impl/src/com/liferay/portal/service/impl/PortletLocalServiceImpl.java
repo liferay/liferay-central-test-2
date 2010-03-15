@@ -156,6 +156,17 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		}
 	}
 
+	public void clearCaches() {
+
+		// Refresh security path to portlet id mapping for all portlets
+
+		_portletIdsByStrutsPath.clear();
+
+		// Refresh company portlets
+
+		_companyPortletsPool.removeAll();
+	}
+
 	public Portlet deployRemotePortlet(Portlet portlet, String categoryName)
 		throws SystemException {
 
@@ -163,7 +174,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 		portletsPool.put(portlet.getPortletId(), portlet);
 
-		_clearCaches();
+		clearCaches();
 
 		PortletCategory newPortletCategory = new PortletCategory();
 
@@ -206,7 +217,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 		_portletAppsPool.remove(portletApp.getServletContextName());
 
-		_clearCaches();
+		clearCaches();
 	}
 
 	public void destroyPortlet(Portlet portlet) {
@@ -220,7 +231,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			_portletAppsPool.remove(portletApp.getServletContextName());
 		}
 
-		_clearCaches();
+		clearCaches();
 	}
 
 	public List<CustomAttributesDisplay> getCustomAttributesDisplays() {
@@ -659,7 +670,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			_log.error(e, e);
 		}
 
-		_clearCaches();
+		clearCaches();
 
 		return portlets;
 	}
@@ -698,17 +709,6 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		_updateCompanyPortletsPool(companyId);
 
 		return portlet;
-	}
-
-	private void _clearCaches() {
-
-		// Refresh security path to portlet id mapping for all portlets
-
-		_portletIdsByStrutsPath.clear();
-
-		// Refresh company portlets
-
-		_companyPortletsPool.removeAll();
 	}
 
 	private String _encodeKey(long companyId) {

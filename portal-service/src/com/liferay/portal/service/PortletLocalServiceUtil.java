@@ -111,6 +111,10 @@ public class PortletLocalServiceUtil {
 		getService().checkPortlets(companyId);
 	}
 
+	public static void clearCaches() {
+		getService().clearCaches();
+	}
+
 	public static com.liferay.portal.model.Portlet deployRemotePortlet(
 		com.liferay.portal.model.Portlet portlet, java.lang.String categoryName)
 		throws com.liferay.portal.kernel.exception.SystemException {

@@ -110,6 +110,10 @@ public class PortletLocalServiceWrapper implements PortletLocalService {
 		_portletLocalService.checkPortlets(companyId);
 	}
 
+	public void clearCaches() {
+		_portletLocalService.clearCaches();
+	}
+
 	public com.liferay.portal.model.Portlet deployRemotePortlet(
 		com.liferay.portal.model.Portlet portlet, java.lang.String categoryName)
 		throws com.liferay.portal.kernel.exception.SystemException {
