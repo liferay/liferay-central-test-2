@@ -26,7 +26,7 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 public class LockRegistry {
 
-	public static Lock allocateLock(String groupName, String lockKey) {
+	public static Lock allocateLock(String groupName, String key) {
 		ConcurrentHashMap<String, Lock> lockGroup = _lockGroupMap.get(
 			groupName);
 
@@ -41,12 +41,12 @@ public class LockRegistry {
 			}
 		}
 
-		Lock lock = lockGroup.get(lockKey);
+		Lock lock = lockGroup.get(key);
 
 		if (lock == null) {
 			lock = new ReentrantLock();
 
-			Lock oldLock = lockGroup.putIfAbsent(lockKey, lock);
+			Lock oldLock = lockGroup.putIfAbsent(key, lock);
 
 			if (oldLock != null) {
 				lock = oldLock;
@@ -92,20 +92,18 @@ public class LockRegistry {
 		return lockGroup;
 	}
 
-	public static Lock freeLock(String groupName, String lockKey) {
-		return freeLock(groupName, lockKey, false);
+	public static Lock freeLock(String groupName, String key) {
+		return freeLock(groupName, key, false);
 	}
 
-	public static Lock freeLock(
-		String groupName, String lockKey, boolean unlock) {
-
+	public static Lock freeLock(String groupName, String key, boolean unlock) {
 		Map<String, Lock> lockGroup = _lockGroupMap.get(groupName);
 
 		if (lockGroup == null) {
 			return null;
 		}
 
-		Lock lock = lockGroup.remove(lockKey);
+		Lock lock = lockGroup.remove(key);
 
 		if (lock == null) {
 			return null;
