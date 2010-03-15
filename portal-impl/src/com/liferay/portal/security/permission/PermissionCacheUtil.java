@@ -158,11 +158,10 @@ public class PermissionCacheUtil {
 		return sb.toString();
 	}
 
-	private static PortalCache _portalCache = MultiVMPoolUtil.getCache(
-		CACHE_NAME, PropsValues.PERMISSIONS_OBJECT_BLOCKING_CACHE);
-
 	private static ThreadLocal<LRUMap> _localCache;
 	private static boolean _localCacheAvailable;
+	private static PortalCache _portalCache = MultiVMPoolUtil.getCache(
+		CACHE_NAME, PropsValues.PERMISSIONS_OBJECT_BLOCKING_CACHE);
 
 	static {
 		if (PropsValues.PERMISSIONS_THREAD_LOCAL_CACHE_MAX_SIZE > 0) {
