@@ -202,7 +202,7 @@ public class PortletPreferencesLocalServiceImpl
 
 		DB db = DBFactoryUtil.getDB();
 
-		if (db.getType().equals(DB.TYPE_HYPERSONIC)) {
+		if (!db.getType().equals(DB.TYPE_HYPERSONIC)) {
 			return doGetPreferences(
 				companyId, ownerId, ownerType, plid, portletId,
 				defaultPreferences);

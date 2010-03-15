@@ -362,7 +362,7 @@ public class ResourcePermissionLocalServiceImpl
 
 		DB db = DBFactoryUtil.getDB();
 
-		if (db.getType().equals(DB.TYPE_HYPERSONIC)) {
+		if (!db.getType().equals(DB.TYPE_HYPERSONIC)) {
 			doUpdateResourcePermission(
 				companyId, name, scope, primKey, roleId, actionIds, operator);
 
