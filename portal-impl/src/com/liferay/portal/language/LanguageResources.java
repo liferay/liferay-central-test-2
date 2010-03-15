@@ -54,12 +54,12 @@ public class LanguageResources {
 	}
 
 	private LanguageResources() {
-		_cache = new ConcurrentHashMap<String, String>(10000);
-		_nullKeySet = new ConcurrentHashSet<String>(10000);
+		_cacheValues = new ConcurrentHashMap<String, String>(10000);
+		_nullCacheKeys = new ConcurrentHashSet<String>(10000);
 	}
 
 	private void _clearCache() {
-		_cache.clear();
+		_cacheValues.clear();
 	}
 
 	private String _getCacheKey(Locale locale, String key) {
@@ -70,21 +70,22 @@ public class LanguageResources {
 	private String _getMessage(Locale locale, String key) {
 		String cacheKey = _getCacheKey(locale, key);
 
-		String cacheValue = _cache.get(cacheKey);
+		String cacheValue = _cacheValues.get(cacheKey);
 
 		if (cacheValue == null) {
-			if (_nullKeySet.contains(cacheKey)) {
+			if (_nullCacheKeys.contains(cacheKey)) {
 				return null;
 			}
 
 			cacheValue = _messageResources.getMessage(locale, key);
 
 			if (cacheValue == null) {
-				_nullKeySet.add(cacheKey);
+				_nullCacheKeys.add(cacheKey);
+
 				return null;
 			}
 
-			_cache.put(cacheKey, cacheValue);
+			_cacheValues.put(cacheKey, cacheValue);
 		}
 
 		return cacheValue;
@@ -96,8 +97,8 @@ public class LanguageResources {
 
 	private static LanguageResources _instance = new LanguageResources();
 
-	private Map<String, String> _cache;
-	private Set<String> _nullKeySet;
+	private Map<String, String> _cacheValues;
+	private Set<String> _nullCacheKeys;
 	private MessageResources _messageResources;
 
 }
