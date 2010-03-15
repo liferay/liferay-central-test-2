@@ -208,7 +208,7 @@ public class PortletPreferencesLocalServiceImpl
 				defaultPreferences);
 		}
 
-		StringBundler sb = new StringBundler(9);
+		StringBundler sb = new StringBundler(7);
 
 		sb.append(ownerId);
 		sb.append(StringPool.POUND);
@@ -217,7 +217,6 @@ public class PortletPreferencesLocalServiceImpl
 		sb.append(plid);
 		sb.append(StringPool.POUND);
 		sb.append(portletId);
-		sb.append(StringPool.POUND);
 
 		String groupName = getClass().getName();
 		String key = sb.toString();
