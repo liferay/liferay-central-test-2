@@ -44,9 +44,9 @@ public interface WorkflowLog {
 
 	public int getType();
 
-	public long getUserId();
-
 	public long getRoleId();
+
+	public long getUserId();
 
 	public long getWorkflowLogId();
 
