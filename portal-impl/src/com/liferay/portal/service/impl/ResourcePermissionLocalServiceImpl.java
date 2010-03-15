@@ -15,9 +15,14 @@
 package com.liferay.portal.service.impl;
 
 import com.liferay.portal.NoSuchResourcePermissionException;
+import com.liferay.portal.kernel.concurrent.LockRegistry;
+import com.liferay.portal.kernel.dao.db.DB;
+import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
+import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.ResourceAction;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.ResourcePermission;
@@ -32,6 +37,7 @@ import com.liferay.portal.util.PortalUtil;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.locks.Lock;
 
 /**
  * <a href="ResourcePermissionLocalServiceImpl.java.html"><b><i>View Source</i>
@@ -292,7 +298,7 @@ public class ResourcePermissionLocalServiceImpl
 			ResourcePermissionConstants.OPERATOR_SET);
 	}
 
-	protected void updateResourcePermission(
+	protected void doUpdateResourcePermission(
 			long companyId, String name, int scope, String primKey, long roleId,
 			String[] actionIds, int operator)
 		throws PortalException, SystemException {
@@ -347,6 +353,50 @@ public class ResourcePermissionLocalServiceImpl
 		PermissionCacheUtil.clearCache();
 
 		SearchEngineUtil.updatePermissionFields(name, primKey);
+	}
+
+	protected void updateResourcePermission(
+			long companyId, String name, int scope, String primKey, long roleId,
+			String[] actionIds, int operator)
+		throws PortalException, SystemException {
+
+		DB db = DBFactoryUtil.getDB();
+
+		if (db.getType().equals(DB.TYPE_HYPERSONIC)) {
+			doUpdateResourcePermission(
+				companyId, name, scope, primKey, roleId, actionIds, operator);
+
+			return;
+		}
+
+		StringBundler sb = new StringBundler(9);
+
+		sb.append(companyId);
+		sb.append(StringPool.POUND);
+		sb.append(name);
+		sb.append(StringPool.POUND);
+		sb.append(scope);
+		sb.append(StringPool.POUND);
+		sb.append(primKey);
+		sb.append(StringPool.POUND);
+		sb.append(roleId);
+
+		String groupName = getClass().getName();
+		String key = sb.toString();
+
+		Lock lock = LockRegistry.allocateLock(groupName, key);
+
+		lock.lock();
+
+		try {
+			doUpdateResourcePermission(
+				companyId, name, scope, primKey, roleId, actionIds, operator);
+		}
+		finally {
+			lock.unlock();
+
+			LockRegistry.freeLock(groupName, key);
+		}
 	}
 
 }

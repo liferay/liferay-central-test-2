@@ -14,10 +14,14 @@
 
 package com.liferay.portal.service.impl;
 
+import com.liferay.portal.kernel.concurrent.LockRegistry;
+import com.liferay.portal.kernel.dao.db.DB;
+import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Portlet;
@@ -31,6 +35,7 @@ import com.liferay.portlet.PortletPreferencesThreadLocal;
 
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.locks.Lock;
 
 /**
  * <a href="PortletPreferencesLocalServiceImpl.java.html"><b><i>View Source</i>
@@ -195,43 +200,42 @@ public class PortletPreferencesLocalServiceImpl
 			String portletId, String defaultPreferences)
 		throws SystemException {
 
-		Map<String, PortletPreferencesImpl> preferencesPool =
-			PortletPreferencesLocalUtil.getPreferencesPool(
-				ownerId, ownerType);
+		DB db = DBFactoryUtil.getDB();
 
-		String key = encodeKey(plid, portletId);
-
-		PortletPreferencesImpl preferences = preferencesPool.get(key);
-
-		if (preferences == null) {
-			Portlet portlet = portletLocalService.getPortletById(
-				companyId, portletId);
-
-			PortletPreferences portletPreferences =
-				portletPreferencesPersistence.fetchByO_O_P_P(
-					ownerId, ownerType, plid, portletId);
-
-			if (portletPreferences == null) {
-				if ((portlet != null) && portlet.isUndeployedPortlet() &&
-					PortletPreferencesThreadLocal.isStrict()) {
-
-					return new PortletPreferencesImpl();
-				}
-
-				portletPreferences =
-					portletPreferencesLocalService.addPortletPreferences(
-						companyId, ownerId, ownerType, plid, portletId, portlet,
-						defaultPreferences);
-			}
-
-			preferences = PortletPreferencesSerializer.fromXML(
+		if (db.getType().equals(DB.TYPE_HYPERSONIC)) {
+			return doGetPreferences(
 				companyId, ownerId, ownerType, plid, portletId,
-				portletPreferences.getPreferences());
-
-			preferencesPool.put(key, preferences);
+				defaultPreferences);
 		}
 
-		return (PortletPreferencesImpl)preferences.clone();
+		StringBundler sb = new StringBundler(9);
+
+		sb.append(ownerId);
+		sb.append(StringPool.POUND);
+		sb.append(ownerType);
+		sb.append(StringPool.POUND);
+		sb.append(plid);
+		sb.append(StringPool.POUND);
+		sb.append(portletId);
+		sb.append(StringPool.POUND);
+
+		String groupName = getClass().getName();
+		String key = sb.toString();
+
+		Lock lock = LockRegistry.allocateLock(groupName, key);
+
+		lock.lock();
+
+		try {
+			return doGetPreferences(
+				companyId, ownerId, ownerType, plid, portletId,
+				defaultPreferences);
+		}
+		finally {
+			lock.unlock();
+
+			LockRegistry.freeLock(groupName, key);
+		}
 	}
 
 	public PortletPreferences updatePreferences(
@@ -275,6 +279,50 @@ public class PortletPreferencesLocalServiceImpl
 		PortletPreferencesLocalUtil.clearPreferencesPool(ownerId, ownerType);
 
 		return portletPreferences;
+	}
+
+	protected javax.portlet.PortletPreferences doGetPreferences(
+			long companyId, long ownerId, int ownerType, long plid,
+			String portletId, String defaultPreferences)
+		throws SystemException {
+
+		Map<String, PortletPreferencesImpl> preferencesPool =
+			PortletPreferencesLocalUtil.getPreferencesPool(
+				ownerId, ownerType);
+
+		String key = encodeKey(plid, portletId);
+
+		PortletPreferencesImpl preferences = preferencesPool.get(key);
+
+		if (preferences == null) {
+			Portlet portlet = portletLocalService.getPortletById(
+				companyId, portletId);
+
+			PortletPreferences portletPreferences =
+				portletPreferencesPersistence.fetchByO_O_P_P(
+					ownerId, ownerType, plid, portletId);
+
+			if (portletPreferences == null) {
+				if ((portlet != null) && portlet.isUndeployedPortlet() &&
+					PortletPreferencesThreadLocal.isStrict()) {
+
+					return new PortletPreferencesImpl();
+				}
+
+				portletPreferences =
+					portletPreferencesLocalService.addPortletPreferences(
+						companyId, ownerId, ownerType, plid, portletId, portlet,
+						defaultPreferences);
+			}
+
+			preferences = PortletPreferencesSerializer.fromXML(
+				companyId, ownerId, ownerType, plid, portletId,
+				portletPreferences.getPreferences());
+
+			preferencesPool.put(key, preferences);
+		}
+
+		return (PortletPreferencesImpl)preferences.clone();
 	}
 
 	protected String encodeKey(long plid, String portletId) {
