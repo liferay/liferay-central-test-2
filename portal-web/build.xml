@@ -224,7 +224,7 @@
 			<arg line="docroot ${jspc.classes.dir}" />
 		</java>
 
-		<move file="docroot/WEB-INF/web.xml.bak" tofile="docroot/WEB-INF/web.xml" overwrite="yes" />
+		<move file="docroot/WEB-INF/web.xml.bak" tofile="docroot/WEB-INF/web.xml" overwrite="true" />
 	</target>
 
 	<target name="compile-tomcat">
@@ -388,7 +388,7 @@
 
 				<!-- JavaScript -->
 
-				<copy todir="docroot/html/js/aui" overwrite="yes">
+				<copy todir="docroot/html/js/aui" overwrite="true">
 					<fileset dir="docroot/html/ALLOY_ZIP/build/" />
 				</copy>
 
@@ -468,7 +468,7 @@
 				<copy
 					file="docroot/html/ALLOY_ZIP/build/aui-skins/tmp/alloy.css"
 					tofile="docroot/html/portal/aui/css.jspf"
-					overwrite="yes"
+					overwrite="true"
 				/>
 
 				<!-- Images -->
@@ -497,12 +497,12 @@
 
 				<unzip src="third-party/${ckeditor.file}" dest="docroot/html/js/editor" />
 
-				<copy todir="docroot/html/js/editor/ckeditor" overwrite="yes">
+				<copy todir="docroot/html/js/editor/ckeditor" overwrite="true">
 					<fileset dir="docroot/html/js/editor/_ckeditor" />
 				</copy>
 			</then>
 			<else>
-				<copy todir="docroot/html/js/editor/ckeditor" overwrite="no">
+				<copy todir="docroot/html/js/editor/ckeditor" overwrite="false">
 					<fileset dir="docroot/html/js/editor/_ckeditor" />
 				</copy>
 			</else>
@@ -522,12 +522,12 @@
 
 				<unzip src="third-party/${codepress.file}" dest="docroot/html/js/editor" />
 
-				<copy todir="docroot/html/js/editor/codepress" overwrite="yes">
+				<copy todir="docroot/html/js/editor/codepress" overwrite="true">
 					<fileset dir="docroot/html/js/editor/_codepress" />
 				</copy>
 			</then>
 			<else>
-				<copy todir="docroot/html/js/editor/codepress" overwrite="no">
+				<copy todir="docroot/html/js/editor/codepress" overwrite="false">
 					<fileset dir="docroot/html/js/editor/_codepress" />
 				</copy>
 			</else>
@@ -657,7 +657,7 @@
 					<fileset dir="docroot/html/js/editor/fckeditor/editor/filemanager/browser/default" />
 				</copy>
 
-				<copy todir="docroot/html/js/editor/fckeditor" overwrite="yes">
+				<copy todir="docroot/html/js/editor/fckeditor" overwrite="true">
 					<fileset dir="docroot/html/js/editor/_fckeditor" />
 				</copy>
 
@@ -689,7 +689,7 @@
 				</replace>
 			</then>
 			<else>
-				<copy todir="docroot/html/js/editor/fckeditor" overwrite="no">
+				<copy todir="docroot/html/js/editor/fckeditor" overwrite="false">
 					<fileset dir="docroot/html/js/editor/_fckeditor" />
 				</copy>
 			</else>
@@ -731,14 +731,14 @@
 					<jvmarg value="-Dthumbnail.overwrite=false" />
 				</java>
 
-				<copy todir="@{module.name}" overwrite="yes">
+				<copy todir="@{module.name}" overwrite="true">
 					<fileset
 						dir="docroot/html/themes/_unstyled"
 						excludes="templates/init.vm"
 					/>
 				</copy>
 
-				<copy todir="@{module.name}" overwrite="yes">
+				<copy todir="@{module.name}" overwrite="true">
 					<fileset
 						dir="docroot/html/themes/_styled"
 					/>
@@ -747,7 +747,7 @@
 				<if>
 					<available file="@{module.name}/_diffs" />
 					<then>
-						<copy todir="@{module.name}" overwrite="yes">
+						<copy todir="@{module.name}" overwrite="true">
 							<fileset
 								dir="@{module.name}/_diffs"
 							/>

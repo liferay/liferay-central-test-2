@@ -644,7 +644,7 @@ set JAVA_OPTS=-Dfile.encoding=UTF8 -Djonas.felix.configuration.file="%JONAS_ROOT
 						<copy
 							file="tools/servers/tomcat/conf/Catalina/localhost/ROOT.xml"
 							tofile="${app.server.dir}/conf/Catalina/localhost/${app.server.tomcat.portal.context}.xml"
-							overwrite="yes"
+							overwrite="true"
 						/>
 					</then>
 				</if>
@@ -745,7 +745,7 @@ set JAVA_OPTS=-Dfile.encoding=UTF8 -Djonas.felix.configuration.file="%JONAS_ROOT
 	</target>
 
 	<target name="deploy-properties">
-		<copy todir="${app.server.classes.portal.dir}" overwrite="yes">
+		<copy todir="${app.server.classes.portal.dir}" overwrite="true">
 			<fileset dir="portal-impl/src" includes="portal-*.properties,system-*.properties" />
 		</copy>
 	</target>

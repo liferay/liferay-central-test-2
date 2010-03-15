@@ -643,7 +643,7 @@ app.server.glassfish.zip.url=http://download.java.net/glassfish/v3-prelude/relea
 		<copy
 			file="dist/liferay-portal-${lp.version}.war"
 			tofile="dist/liferay-portal-${lp.version}-servlet23.war"
-			overwrite="yes"
+			overwrite="true"
 		/>
 
 		<zip
@@ -672,7 +672,7 @@ app.server.glassfish.zip.url=http://download.java.net/glassfish/v3-prelude/relea
 		<copy
 			file="dist/liferay-portal-${lp.version}-servlet23.war"
 			tofile="dist/liferay-portal-${lp.version}-servlet23-with-dependencies.war"
-			overwrite="yes"
+			overwrite="true"
 		/>
 
 		<zip
@@ -734,7 +734,7 @@ app.server.glassfish.zip.url=http://download.java.net/glassfish/v3-prelude/relea
 		<copy
 			file="dist/liferay-portal-${lp.version}.war"
 			tofile="dist/liferay-portal-${lp.version}-with-dependencies.war"
-			overwrite="yes"
+			overwrite="true"
 		/>
 
 		<zip

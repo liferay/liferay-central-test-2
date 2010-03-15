@@ -279,7 +279,7 @@ ECJ was automatically installed. Please rerun your task.
 		<if>
 			<equals arg1="${test.suite.classes.available}" arg2="$${test.suite.classes.available}" />
 			<then>
-				<junit dir="${project.dir}" fork="on" forkmode="once" haltonfailure="no" printsummary="on">
+				<junit dir="${project.dir}" fork="on" forkmode="once" printsummary="on">
 					<jvmarg value="-Xmx256m" />
 					<jvmarg value="-Duser.timezone=GMT" />
 					<jvmarg value="-Dexternal-properties=${test.properties}" />
@@ -292,7 +292,7 @@ ECJ was automatically installed. Please rerun your task.
 				</junit>
 			</then>
 			<else>
-				<junit dir="${project.dir}" fork="on" forkmode="once" haltonfailure="no" printsummary="on">
+				<junit dir="${project.dir}" fork="on" forkmode="once" printsummary="on">
 					<jvmarg value="-Xmx256m" />
 					<jvmarg value="-Duser.timezone=GMT" />
 					<jvmarg value="-Dexternal-properties=${test.properties}" />
@@ -308,7 +308,7 @@ ECJ was automatically installed. Please rerun your task.
 	</target>
 
 	<target name="test-class" depends="compile,compile-test" if="class">
-		<junit dir="${project.dir}" fork="on" forkmode="once" haltonfailure="no" outputtoformatters="false" printsummary="on" showoutput="true">
+		<junit dir="${project.dir}" fork="on" forkmode="once" outputtoformatters="false" printsummary="on" showoutput="true">
 			<jvmarg value="-Xmx512m" />
 			<jvmarg value="-XX:MaxPermSize=128m" />
 			<jvmarg value="-Duser.timezone=GMT" />

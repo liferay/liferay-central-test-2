@@ -529,7 +529,7 @@ ${exception.message}
 
 		<unzip src="${project.dir}/lib/development/selenium-server.jar" dest="${tstamp.value}" />
 
-		<copy file="${project.dir}/tools/selenium/user-extensions.js" todir="${tstamp.value}/core/scripts" overwrite="yes" />
+		<copy file="${project.dir}/tools/selenium/user-extensions.js" todir="${tstamp.value}/core/scripts" overwrite="true" />
 
 		<zip basedir="${tstamp.value}" destfile="${project.dir}/lib/development/selenium-server.jar.new" />
 
@@ -998,7 +998,7 @@ ${exception.message}
 	</target>
 
 	<target name="format-source">
-		<copy todir="classes" overwrite="yes">
+		<copy todir="classes" overwrite="true">
 			<fileset dir="src" includes="com/liferay/portal/tools/dependencies/*.properties" />
 		</copy>
 
