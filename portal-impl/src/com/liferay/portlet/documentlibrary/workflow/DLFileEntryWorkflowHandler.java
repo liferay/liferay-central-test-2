@@ -16,13 +16,19 @@ package com.liferay.portlet.documentlibrary.workflow;
 
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.workflow.BaseWorkflowHandler;
+import com.liferay.portlet.asset.AssetRendererFactoryRegistryUtil;
+import com.liferay.portlet.asset.model.AssetRenderer;
+import com.liferay.portlet.asset.model.AssetRendererFactory;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
+import com.liferay.portlet.documentlibrary.model.DLFileVersion;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLFileVersionLocalServiceUtil;
 
 /**
  * <a href="DLFileEntryWorkflowHandler.java.html"><b><i>View Source</i></b></a>
  *
  * @author Bruno Farache
+ * @author Marcellus Tavares
  */
 public class DLFileEntryWorkflowHandler extends BaseWorkflowHandler {
 
@@ -46,6 +52,31 @@ public class DLFileEntryWorkflowHandler extends BaseWorkflowHandler {
 
 		return DLFileEntryLocalServiceUtil.updateWorkflowStatus(
 			userId, classPK, serviceContext);
+	}
+
+	protected AssetRenderer getAssetRenderer(long classPK) throws Exception {
+		AssetRendererFactory assetRendererFactory =
+			AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(
+				getClassName());
+
+		if (assetRendererFactory != null) {
+			DLFileEntry fileEntry = getFileEntry(classPK);
+
+			return assetRendererFactory.getAssetRenderer(
+				fileEntry.getFileEntryId());
+		}
+		else {
+			return null;
+		}
+	}
+
+	protected DLFileEntry getFileEntry(long classPK) throws Exception {
+		DLFileVersion fileVersion =
+			DLFileVersionLocalServiceUtil.getDLFileVersion(classPK);
+
+		return DLFileEntryLocalServiceUtil.getFileEntry(
+			fileVersion.getGroupId(), fileVersion.getFolderId(),
+			fileVersion.getName());
 	}
 
 }

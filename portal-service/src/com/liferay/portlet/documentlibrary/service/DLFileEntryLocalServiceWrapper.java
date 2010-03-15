@@ -418,12 +418,12 @@ public class DLFileEntryLocalServiceWrapper implements DLFileEntryLocalService {
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry updateWorkflowStatus(
-		long userId, long fileEntryId,
+		long userId, long fileVersionId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _dlFileEntryLocalService.updateWorkflowStatus(userId,
-			fileEntryId, serviceContext);
+			fileVersionId, serviceContext);
 	}
 
 	public DLFileEntryLocalService getWrappedDLFileEntryLocalService() {
