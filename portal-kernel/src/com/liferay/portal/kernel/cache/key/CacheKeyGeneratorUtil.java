@@ -24,7 +24,7 @@ import java.util.Map;
  */
 public class CacheKeyGeneratorUtil {
 
-	public static String getCacheKey(String key, String cacheName) {
+	public static String getCacheKey(String cacheName, String key) {
 		CacheKeyGenerator cacheKeyGenerator = _cacheKeyGenerators.get(
 			cacheName);
 
