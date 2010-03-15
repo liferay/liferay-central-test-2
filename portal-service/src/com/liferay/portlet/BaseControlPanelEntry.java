@@ -81,6 +81,6 @@ public abstract class BaseControlPanelEntry implements ControlPanelEntry {
 		_active = active;
 	}
 
-	private boolean _active;
+	private boolean _active = true;
 
 }
