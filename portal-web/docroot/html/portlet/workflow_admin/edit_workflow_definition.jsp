@@ -55,6 +55,8 @@ portletURL.setParameter("tabs1", tabs1);
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= workflowDefinition == null ? Constants.ADD : Constants.UPDATE %>" />
 	<aui:input name="tabs1" type="hidden" value="workflow-definitions" />
 
+	<liferay-ui:error exception="<%= WorkflowDefinitionFileException.class %>" message="please-enter-a-valid-file" />
+
 	<aui:fieldset>
 		<aui:input name="name" value="<%= name %>" />
 

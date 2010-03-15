@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.workflow.WorkflowDefinition;
+import com.liferay.portal.kernel.workflow.WorkflowDefinitionFileException;
 import com.liferay.portal.kernel.workflow.WorkflowDefinitionManagerUtil;
 import com.liferay.portal.kernel.workflow.WorkflowException;
 import com.liferay.portal.struts.PortletAction;
@@ -28,6 +29,7 @@ import com.liferay.portal.util.WebKeys;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -65,7 +67,12 @@ public class EditWorkflowDefinitionAction extends PortletAction {
 			sendRedirect(actionRequest, actionResponse);
 		}
 		catch (Exception e) {
-			if (e instanceof WorkflowException) {
+			if (e instanceof FileNotFoundException ||
+				e instanceof WorkflowDefinitionFileException) {
+
+				SessionErrors.add(actionRequest, e.getClass().getName());
+			}
+			else if (e instanceof WorkflowException) {
 				SessionErrors.add(actionRequest, e.getClass().getName());
 
 				setForward(actionRequest, "portlet.workflow_admin.error");
@@ -124,6 +131,10 @@ public class EditWorkflowDefinitionAction extends PortletAction {
 
 		String name = ParamUtil.getString(actionRequest, "name");
 		File file = uploadRequest.getFile("file");
+
+		if (!file.exists()) {
+			throw new WorkflowDefinitionFileException();
+		}
 
 		WorkflowDefinition workflowDefinition =
 			WorkflowDefinitionManagerUtil.deployWorkflowDefinition(

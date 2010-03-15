@@ -18,6 +18,7 @@
 
 <%@ page import="com.liferay.portal.NoSuchWorkflowDefinitionLinkException" %>
 <%@ page import="com.liferay.portal.kernel.workflow.WorkflowDefinition" %>
+<%@ page import="com.liferay.portal.kernel.workflow.WorkflowDefinitionFileException" %>
 <%@ page import="com.liferay.portal.kernel.workflow.WorkflowDefinitionManagerUtil" %>
 <%@ page import="com.liferay.portal.kernel.workflow.WorkflowEngineManagerUtil" %>
 <%@ page import="com.liferay.portal.kernel.workflow.WorkflowHandler" %>
