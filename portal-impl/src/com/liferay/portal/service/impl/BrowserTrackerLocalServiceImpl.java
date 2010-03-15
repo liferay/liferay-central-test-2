@@ -85,7 +85,8 @@ public class BrowserTrackerLocalServiceImpl
 				_log.warn("Add failed, fetch {userId=" + userId + "}");
 			}
 
-			browserTracker = browserTrackerPersistence.fetchByUserId(userId);
+			browserTracker = browserTrackerPersistence.fetchByUserId(
+				userId, false);
 
 			if (browserTracker == null) {
 				throw se;
