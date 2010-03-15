@@ -64,7 +64,7 @@ public class LanguageResources {
 
 	private String _getCacheKey(Locale locale, String key) {
 		return String.valueOf(locale).concat(StringPool.POUND).concat(
-			CacheKeyGeneratorUtil.getCacheKey(key, getClass().getName()));
+			CacheKeyGeneratorUtil.getCacheKey(getClass().getName(), key));
 	}
 
 	private String _getMessage(Locale locale, String key) {
