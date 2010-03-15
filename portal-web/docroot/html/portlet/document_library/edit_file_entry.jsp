@@ -76,15 +76,11 @@ int status = StatusConstants.APPROVED;
 
 if (fileEntry == null) {
 	if (WorkflowDefinitionLinkLocalServiceUtil.hasWorkflowDefinitionLink(company.getCompanyId(), scopeGroupId, DLFileEntry.class.getName())) {
-		status = StatusConstants.DRAFT;
+		status = StatusConstants.PENDING;
 	}
 }
-else {
-	DLFileVersion latestVersion = DLFileVersionLocalServiceUtil.getLatestFileVersion(scopeGroupId, folderId, name);
-
-	if (WorkflowInstanceLinkLocalServiceUtil.hasWorkflowInstanceLink(company.getCompanyId(), fileEntry.getGroupId(), DLFileEntry.class.getName(), latestVersion.getFileVersionId())) {
-		status = StatusConstants.DRAFT;
-	}
+else if (WorkflowInstanceLinkLocalServiceUtil.hasWorkflowInstanceLink(company.getCompanyId(), fileEntry.getGroupId(), DLFileEntry.class.getName(), fileEntry.getFileEntryId())) {
+	status = StatusConstants.PENDING;
 }
 
 PortletURL portletURL = renderResponse.createRenderURL();
