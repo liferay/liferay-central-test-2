@@ -15,6 +15,7 @@
 package com.liferay.portal.servlet;
 
 import com.liferay.portal.kernel.util.ConcurrentHashSet;
+import com.liferay.portal.kernel.util.ServletSpecificationDetector;
 import com.liferay.portal.util.PropsValues;
 
 import java.util.Set;
@@ -40,8 +41,14 @@ import javax.servlet.http.HttpSessionListener;
 public class SharedSessionAttributeListener
 	implements HttpSessionAttributeListener, HttpSessionListener {
 
+	public SharedSessionAttributeListener() {
+		if (_DISABLED) {
+			_sessionIds = new ConcurrentHashSet<String>();
+		}
+	}
+
 	public void attributeAdded(HttpSessionBindingEvent event) {
-		if (PropsValues.SESSION_DISABLED) {
+		if (PropsValues.SESSION_DISABLED || _DISABLED) {
 			return;
 		}
 
@@ -66,7 +73,7 @@ public class SharedSessionAttributeListener
 	}
 
 	public void attributeRemoved(HttpSessionBindingEvent event) {
-		if (PropsValues.SESSION_DISABLED) {
+		if (PropsValues.SESSION_DISABLED || _DISABLED) {
 			return;
 		}
 
@@ -83,7 +90,7 @@ public class SharedSessionAttributeListener
 	}
 
 	public void attributeReplaced(HttpSessionBindingEvent event) {
-		if (PropsValues.SESSION_DISABLED) {
+		if (PropsValues.SESSION_DISABLED || _DISABLED) {
 			return;
 		}
 
@@ -102,7 +109,7 @@ public class SharedSessionAttributeListener
 	}
 
 	public void sessionCreated(HttpSessionEvent event) {
-		if (PropsValues.SESSION_DISABLED) {
+		if (PropsValues.SESSION_DISABLED || _DISABLED) {
 			return;
 		}
 
@@ -114,7 +121,7 @@ public class SharedSessionAttributeListener
 	}
 
 	public void sessionDestroyed(HttpSessionEvent event) {
-		if (PropsValues.SESSION_DISABLED) {
+		if (PropsValues.SESSION_DISABLED || _DISABLED) {
 			return;
 		}
 
@@ -123,6 +130,9 @@ public class SharedSessionAttributeListener
 		_sessionIds.remove(session.getId());
 	}
 
-	private Set<String> _sessionIds = new ConcurrentHashSet<String>();
+	private static final boolean _DISABLED =
+		ServletSpecificationDetector.is2_5Plus();
+
+	private Set<String> _sessionIds;
 
 }

@@ -16,7 +16,11 @@ package com.liferay.portal.servlet;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.ServletSpecificationDetector;
+import com.liferay.portal.util.PropsValues;
 
+import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,6 +31,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Brian Wing Shun Chan
  * @author Brian Myunghun Kim
+ * @author Shuyang Zhou
  */
 public class SharedSessionUtil {
 
@@ -35,16 +40,42 @@ public class SharedSessionUtil {
 
 		HttpSession session = request.getSession();
 
-		SharedSessionAttributeCache cache =
-			SharedSessionAttributeCache.getInstance(session);
+		if (ServletSpecificationDetector.is2_5Plus()) {
+			Enumeration<String> enumeration = session.getAttributeNames();
+			Map<String, Object> map = new HashMap<String, Object>();
 
-		Map<String, Object> values = cache.getValues();
+			while (enumeration.hasMoreElements()) {
+				String attrName = enumeration.nextElement();
+				Object attrValue = session.getAttribute(attrName);
 
-		if (_log.isDebugEnabled()) {
-			_log.debug("Shared session attributes " + values);
+				if (attrValue != null) {
+					for (String sharedName :
+						PropsValues.SHARED_SESSION_ATTRIBUTES) {
+						if (attrName.startsWith(sharedName)) {
+							map.put(attrName, attrValue);
+
+							if (_log.isDebugEnabled()) {
+								_log.debug("Sharing " + attrName);
+							}
+							break;
+						}
+					}
+				}
+			}
+			return map;
 		}
+		else {
+			SharedSessionAttributeCache cache =
+				SharedSessionAttributeCache.getInstance(session);
 
-		return values;
+			Map<String, Object> values = cache.getValues();
+
+			if (_log.isDebugEnabled()) {
+				_log.debug("Shared session attributes " + values);
+			}
+
+			return values;
+		}
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(SharedSessionUtil.class);
