@@ -16,7 +16,7 @@ package com.liferay.portal.servlet;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.ServletSpecificationDetector;
+import com.liferay.portal.kernel.servlet.ServletVersionDetector;
 import com.liferay.portal.util.PropsValues;
 
 import java.util.Enumeration;
@@ -40,35 +40,45 @@ public class SharedSessionUtil {
 
 		HttpSession session = request.getSession();
 
-		if (ServletSpecificationDetector.is2_5Plus()) {
-			Enumeration<String> enumeration = session.getAttributeNames();
-			Map<String, Object> map = new HashMap<String, Object>();
+		if (ServletVersionDetector.is2_5()) {
+			Map<String, Object> attributes = new HashMap<String, Object>();
 
-			while (enumeration.hasMoreElements()) {
-				String attrName = enumeration.nextElement();
-				Object attrValue = session.getAttribute(attrName);
+			Enumeration<String> enu = session.getAttributeNames();
 
-				if (attrValue != null) {
-					for (String sharedName :
+			while (enu.hasMoreElements()) {
+				String name = enu.nextElement();
+
+				Object value = session.getAttribute(name);
+
+				if (value == null) {
+					continue;
+				}
+
+				for (String sharedName :
 						PropsValues.SHARED_SESSION_ATTRIBUTES) {
-						if (attrName.startsWith(sharedName)) {
-							map.put(attrName, attrValue);
 
-							if (_log.isDebugEnabled()) {
-								_log.debug("Sharing " + attrName);
-							}
-							break;
-						}
+					if (!name.startsWith(sharedName)) {
+						continue;
 					}
+
+					if (_log.isDebugEnabled()) {
+						_log.debug("Sharing " + name);
+					}
+
+					attributes.put(name, value);
+
+					break;
 				}
 			}
-			return map;
+
+			return attributes;
 		}
 		else {
-			SharedSessionAttributeCache cache =
+			SharedSessionAttributeCache sharedSessionAttributeCache =
 				SharedSessionAttributeCache.getInstance(session);
 
-			Map<String, Object> values = cache.getValues();
+			Map<String, Object> values =
+				sharedSessionAttributeCache.getValues();
 
 			if (_log.isDebugEnabled()) {
 				_log.debug("Shared session attributes " + values);

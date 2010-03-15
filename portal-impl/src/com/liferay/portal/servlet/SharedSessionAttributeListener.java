@@ -14,8 +14,8 @@
 
 package com.liferay.portal.servlet;
 
+import com.liferay.portal.kernel.servlet.ServletVersionDetector;
 import com.liferay.portal.kernel.util.ConcurrentHashSet;
-import com.liferay.portal.kernel.util.ServletSpecificationDetector;
 import com.liferay.portal.util.PropsValues;
 
 import java.util.Set;
@@ -42,13 +42,15 @@ public class SharedSessionAttributeListener
 	implements HttpSessionAttributeListener, HttpSessionListener {
 
 	public SharedSessionAttributeListener() {
-		if (_DISABLED) {
-			_sessionIds = new ConcurrentHashSet<String>();
+		if (ServletVersionDetector.is2_5()) {
+			return;
 		}
+
+		_sessionIds = new ConcurrentHashSet<String>();
 	}
 
 	public void attributeAdded(HttpSessionBindingEvent event) {
-		if (PropsValues.SESSION_DISABLED || _DISABLED) {
+		if (PropsValues.SESSION_DISABLED || ServletVersionDetector.is2_5()) {
 			return;
 		}
 
@@ -73,7 +75,7 @@ public class SharedSessionAttributeListener
 	}
 
 	public void attributeRemoved(HttpSessionBindingEvent event) {
-		if (PropsValues.SESSION_DISABLED || _DISABLED) {
+		if (PropsValues.SESSION_DISABLED || ServletVersionDetector.is2_5()) {
 			return;
 		}
 
@@ -90,7 +92,7 @@ public class SharedSessionAttributeListener
 	}
 
 	public void attributeReplaced(HttpSessionBindingEvent event) {
-		if (PropsValues.SESSION_DISABLED || _DISABLED) {
+		if (PropsValues.SESSION_DISABLED || ServletVersionDetector.is2_5()) {
 			return;
 		}
 
@@ -109,7 +111,7 @@ public class SharedSessionAttributeListener
 	}
 
 	public void sessionCreated(HttpSessionEvent event) {
-		if (PropsValues.SESSION_DISABLED || _DISABLED) {
+		if (PropsValues.SESSION_DISABLED || ServletVersionDetector.is2_5()) {
 			return;
 		}
 
@@ -121,7 +123,7 @@ public class SharedSessionAttributeListener
 	}
 
 	public void sessionDestroyed(HttpSessionEvent event) {
-		if (PropsValues.SESSION_DISABLED || _DISABLED) {
+		if (PropsValues.SESSION_DISABLED || ServletVersionDetector.is2_5()) {
 			return;
 		}
 
@@ -129,9 +131,6 @@ public class SharedSessionAttributeListener
 
 		_sessionIds.remove(session.getId());
 	}
-
-	private static final boolean _DISABLED =
-		ServletSpecificationDetector.is2_5Plus();
 
 	private Set<String> _sessionIds;
 

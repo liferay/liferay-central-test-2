@@ -12,33 +12,32 @@
  * details.
  */
 
-package com.liferay.portal.kernel.util;
+package com.liferay.portal.kernel.servlet;
 
 import javax.servlet.ServletContext;
 
 /**
- * <a href="ServletSpecificationDetector.java.html"><b><i>View Source</i></b>
- * </a>
+ * <a href="ServletVersionDetector.java.html"><b><i>View Source</i></b></a>
  *
  * @author Shuyang Zhou
+ * @author Brian Wing Shun Chan
  */
-public class ServletSpecificationDetector {
+public class ServletVersionDetector {
 
-	public static boolean is2_5Plus() {
-		return _IS_2_5_PLUS;
+	public static boolean is2_5() {
+		return _2_5;
 	}
 
 	static {
 		try {
-			Class<ServletContext> clazz = ServletContext.class;
-			clazz.getMethod("getContextPath");
-			_IS_2_5_PLUS = true;
+			ServletContext.class.getMethod("getContextPath");
+
+			_2_5 = true;
 		}
-		catch (Exception ex) {
-			_IS_2_5_PLUS = false;
+		catch (Exception e) {
 		}
 	}
 
-	private static boolean _IS_2_5_PLUS;
+	private static boolean _2_5;
 
 }
