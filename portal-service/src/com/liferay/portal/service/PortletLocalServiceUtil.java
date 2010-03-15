@@ -111,8 +111,8 @@ public class PortletLocalServiceUtil {
 		getService().checkPortlets(companyId);
 	}
 
-	public static void clearCaches() {
-		getService().clearCaches();
+	public static void clearCache() {
+		getService().clearCache();
 	}
 
 	public static com.liferay.portal.model.Portlet deployRemotePortlet(

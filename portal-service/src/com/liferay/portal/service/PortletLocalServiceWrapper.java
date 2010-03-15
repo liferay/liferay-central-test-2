@@ -110,8 +110,8 @@ public class PortletLocalServiceWrapper implements PortletLocalService {
 		_portletLocalService.checkPortlets(companyId);
 	}
 
-	public void clearCaches() {
-		_portletLocalService.clearCaches();
+	public void clearCache() {
+		_portletLocalService.clearCache();
 	}
 
 	public com.liferay.portal.model.Portlet deployRemotePortlet(

@@ -156,7 +156,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		}
 	}
 
-	public void clearCaches() {
+	public void clearCache() {
 
 		// Refresh security path to portlet id mapping for all portlets
 
@@ -174,7 +174,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 		portletsPool.put(portlet.getPortletId(), portlet);
 
-		clearCaches();
+		clearCache();
 
 		PortletCategory newPortletCategory = new PortletCategory();
 
@@ -217,7 +217,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 		_portletAppsPool.remove(portletApp.getServletContextName());
 
-		clearCaches();
+		clearCache();
 	}
 
 	public void destroyPortlet(Portlet portlet) {
@@ -231,7 +231,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			_portletAppsPool.remove(portletApp.getServletContextName());
 		}
 
-		clearCaches();
+		clearCache();
 	}
 
 	public List<CustomAttributesDisplay> getCustomAttributesDisplays() {
@@ -670,7 +670,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			_log.error(e, e);
 		}
 
-		clearCaches();
+		clearCache();
 
 		return portlets;
 	}
