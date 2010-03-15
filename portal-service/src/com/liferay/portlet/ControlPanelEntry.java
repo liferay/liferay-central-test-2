@@ -25,8 +25,6 @@ import com.liferay.portal.theme.ThemeDisplay;
  */
 public interface ControlPanelEntry {
 
-	public boolean isActive();
-
 	public boolean isVisible(
 			PermissionChecker permissionChecker, Portlet portlet)
 		throws Exception;
@@ -34,7 +32,5 @@ public interface ControlPanelEntry {
 	public boolean isVisible(
 			Portlet portlet, String category, ThemeDisplay themeDisplay)
 		throws Exception;
-
-	public void setActive(boolean active);
 
 }

@@ -30,17 +30,9 @@ import com.liferay.portal.util.PortletCategoryKeys;
  */
 public abstract class BaseControlPanelEntry implements ControlPanelEntry {
 
-	public boolean isActive() {
-		return _active;
-	}
-
 	public boolean isVisible(
 			Portlet portlet, String category, ThemeDisplay themeDisplay)
 		throws Exception {
-
-		if (!_active) {
-			return false;
-		}
 
 		PermissionChecker permissionChecker =
 			themeDisplay.getPermissionChecker();
@@ -76,11 +68,5 @@ public abstract class BaseControlPanelEntry implements ControlPanelEntry {
 
 		return isVisible(themeDisplay.getPermissionChecker(), portlet);
 	}
-
-	public void setActive(boolean active) {
-		_active = active;
-	}
-
-	private boolean _active = true;
 
 }
