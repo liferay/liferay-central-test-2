@@ -502,7 +502,7 @@
 				</copy>
 			</then>
 			<else>
-				<copy todir="docroot/html/js/editor/ckeditor" overwrite="false">
+				<copy todir="docroot/html/js/editor/ckeditor">
 					<fileset dir="docroot/html/js/editor/_ckeditor" />
 				</copy>
 			</else>
@@ -527,7 +527,7 @@
 				</copy>
 			</then>
 			<else>
-				<copy todir="docroot/html/js/editor/codepress" overwrite="false">
+				<copy todir="docroot/html/js/editor/codepress">
 					<fileset dir="docroot/html/js/editor/_codepress" />
 				</copy>
 			</else>
@@ -689,7 +689,7 @@
 				</replace>
 			</then>
 			<else>
-				<copy todir="docroot/html/js/editor/fckeditor" overwrite="false">
+				<copy todir="docroot/html/js/editor/fckeditor">
 					<fileset dir="docroot/html/js/editor/_fckeditor" />
 				</copy>
 			</else>
