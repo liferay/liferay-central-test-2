@@ -32,7 +32,7 @@ public class CacheUtil {
 	public static String CACHE_NAME = CacheUtil.class.getName();
 
 	public static void clearCache() {
-		_cache.removeAll();
+		_portalCache.removeAll();
 	}
 
 	public static void clearCache(long companyId) {
@@ -48,7 +48,7 @@ public class CacheUtil {
 
 		key = _encodeKey(companyId, key);
 
-		CacheResponseData data = (CacheResponseData)_cache.get(key);
+		CacheResponseData data = (CacheResponseData)_portalCache.get(key);
 
 		return data;
 	}
@@ -59,7 +59,7 @@ public class CacheUtil {
 		if (data != null) {
 			key = _encodeKey(companyId, key);
 
-			_cache.put(key, data);
+			_portalCache.put(key, data);
 		}
 	}
 
@@ -75,6 +75,7 @@ public class CacheUtil {
 		return sb.toString();
 	}
 
-	private static PortalCache _cache = MultiVMPoolUtil.getCache(CACHE_NAME);
+	private static PortalCache _portalCache = MultiVMPoolUtil.getCache(
+		CACHE_NAME);
 
 }

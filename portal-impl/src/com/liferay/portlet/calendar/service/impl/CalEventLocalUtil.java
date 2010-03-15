@@ -36,19 +36,19 @@ public class CalEventLocalUtil {
 	protected static void clearEventsPool(long groupId) {
 		String key = _encodeKey(groupId);
 
-		_cache.remove(key);
+		_portalCache.remove(key);
 	}
 
 	protected static Map<String, List<CalEvent>> getEventsPool(long groupId) {
 		String key = _encodeKey(groupId);
 
 		Map <String, List<CalEvent>> eventsPool =
-			(Map<String, List<CalEvent>>)_cache.get(key);
+			(Map<String, List<CalEvent>>)_portalCache.get(key);
 
 		if (eventsPool == null) {
 			eventsPool = new ConcurrentHashMap<String, List<CalEvent>>();
 
-			_cache.put(key, eventsPool);
+			_portalCache.put(key, eventsPool);
 		}
 
 		return eventsPool;
@@ -59,6 +59,7 @@ public class CalEventLocalUtil {
 			String.valueOf(groupId));
 	}
 
-	private static PortalCache _cache = MultiVMPoolUtil.getCache(CACHE_NAME);
+	private static PortalCache _portalCache = MultiVMPoolUtil.getCache(
+		CACHE_NAME);
 
 }

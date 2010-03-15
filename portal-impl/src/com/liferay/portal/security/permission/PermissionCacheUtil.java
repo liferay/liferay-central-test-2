@@ -38,7 +38,7 @@ public class PermissionCacheUtil {
 	public static void clearCache() {
 		clearLocalCache();
 
-		_cache.removeAll();
+		_portalCache.removeAll();
 	}
 
 	public static void clearLocalCache() {
@@ -61,7 +61,7 @@ public class PermissionCacheUtil {
 		}
 
 		if (bag == null) {
-			bag = (PermissionCheckerBag)_cache.get(key);
+			bag = (PermissionCheckerBag)_portalCache.get(key);
 		}
 
 		return bag;
@@ -82,7 +82,7 @@ public class PermissionCacheUtil {
 		}
 
 		if (value == null) {
-			value = (Boolean)_cache.get(key);
+			value = (Boolean)_portalCache.get(key);
 		}
 
 		return value;
@@ -100,7 +100,7 @@ public class PermissionCacheUtil {
 				localCache.put(key, bag);
 			}
 
-			_cache.put(key, bag);
+			_portalCache.put(key, bag);
 		}
 
 		return bag;
@@ -119,7 +119,7 @@ public class PermissionCacheUtil {
 				localCache.put(key, value);
 			}
 
-			_cache.put(key, value);
+			_portalCache.put(key, value);
 		}
 
 		return value;
@@ -158,7 +158,7 @@ public class PermissionCacheUtil {
 		return sb.toString();
 	}
 
-	private static PortalCache _cache = MultiVMPoolUtil.getCache(
+	private static PortalCache _portalCache = MultiVMPoolUtil.getCache(
 		CACHE_NAME, PropsValues.PERMISSIONS_OBJECT_BLOCKING_CACHE);
 
 	private static ThreadLocal<LRUMap> _localCache;

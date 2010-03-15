@@ -44,7 +44,7 @@ import org.apache.commons.lang.time.StopWatch;
 public class JournalContentImpl implements JournalContent {
 
 	public void clearCache() {
-		cache.removeAll();
+		portalCache.removeAll();
 	}
 
 	public void clearCache(
@@ -172,8 +172,8 @@ public class JournalContentImpl implements JournalContent {
 		String key = encodeKey(
 			groupId, articleId, templateId, viewMode, languageId, page, secure);
 
-		JournalArticleDisplay articleDisplay = (JournalArticleDisplay)cache.get(
-			key);
+		JournalArticleDisplay articleDisplay =
+			(JournalArticleDisplay)portalCache.get(key);
 
 		boolean lifecycleRender = isLifecycleRender(themeDisplay, xmlRequest);
 
@@ -185,7 +185,7 @@ public class JournalContentImpl implements JournalContent {
 			if ((articleDisplay != null) && (articleDisplay.isCacheable()) &&
 				(lifecycleRender)) {
 
-				cache.put(key, articleDisplay);
+				portalCache.put(key, articleDisplay);
 			}
 		}
 
@@ -290,7 +290,8 @@ public class JournalContentImpl implements JournalContent {
 		}
 	}
 
-	protected static PortalCache cache = MultiVMPoolUtil.getCache(CACHE_NAME);
+	protected static PortalCache portalCache = MultiVMPoolUtil.getCache(
+		CACHE_NAME);
 
 	protected static Pattern lifecycleRenderPhasePatern = Pattern.compile(
 		"<lifecycle>\\s*RENDER_PHASE\\s*</lifecycle>");

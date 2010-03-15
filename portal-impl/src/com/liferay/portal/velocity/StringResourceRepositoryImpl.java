@@ -37,7 +37,7 @@ public class StringResourceRepositoryImpl implements StringResourceRepository {
 	}
 
 	public StringResource getStringResource(String key) {
-		Object resource = _cache.get(key);
+		Object resource = _portalCache.get(key);
 
 		if ((resource != null) && (resource instanceof StringResource)) {
 			return (StringResource)resource;
@@ -47,22 +47,23 @@ public class StringResourceRepositoryImpl implements StringResourceRepository {
 	}
 
 	public void putStringResource(String key, String body) {
-		_cache.put(key , new StringResource(body, getEncoding()));
+		_portalCache.put(key , new StringResource(body, getEncoding()));
 	}
 
 	public void putStringResource(String key, String body, String encoding) {
-		_cache.put(key , new StringResource(body, encoding));
+		_portalCache.put(key , new StringResource(body, encoding));
 	}
 
 	public void removeStringResource(String key) {
-		_cache.remove(key);
+		_portalCache.remove(key);
 	}
 
 	public void setEncoding(String encoding) {
 		_encoding = encoding;
 	}
 
-	private static PortalCache _cache = MultiVMPoolUtil.getCache(CACHE_NAME);
+	private static PortalCache _portalCache = MultiVMPoolUtil.getCache(
+		CACHE_NAME);
 
 	private String _encoding = StringPool.UTF8;
 

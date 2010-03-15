@@ -31,18 +31,18 @@ public class ImageServletTokenImpl implements ImageServletToken {
 	public static final String CACHE_NAME = ImageServletToken.class.getName();
 
 	public void afterPropertiesSet() {
-		_cache = _multiVMPool.getCache(CACHE_NAME);
+		_portalCache = _multiVMPool.getCache(CACHE_NAME);
 	}
 
 	public String getToken(long imageId) {
 		String key = _encodeKey(imageId);
 
-		String token = (String)_cache.get(key);
+		String token = (String)_portalCache.get(key);
 
 		if (token == null) {
 			token = _createToken(imageId);
 
-			_cache.put(key, token);
+			_portalCache.put(key, token);
 		}
 
 		return token;
@@ -51,7 +51,7 @@ public class ImageServletTokenImpl implements ImageServletToken {
 	public void resetToken(long imageId) {
 		String key = _encodeKey(imageId);
 
-		_cache.remove(key);
+		_portalCache.remove(key);
 
 		// Journal content
 
@@ -76,6 +76,6 @@ public class ImageServletTokenImpl implements ImageServletToken {
 	}
 
 	private MultiVMPool _multiVMPool;
-	private PortalCache _cache;
+	private PortalCache _portalCache;
 
 }

@@ -41,7 +41,7 @@ public class WikiCacheUtil {
 	public static final String CACHE_NAME = WikiCacheUtil.class.getName();
 
 	public static void clearCache(long nodeId) {
-		_cache.removeAll();
+		_portalCache.removeAll();
 	}
 
 	public static void clearCache(long nodeId, String title) {
@@ -62,13 +62,13 @@ public class WikiCacheUtil {
 
 		String key = _encodeKey(nodeId, title, viewPageURL.toString());
 
-		WikiPageDisplay pageDisplay = (WikiPageDisplay)_cache.get(key);
+		WikiPageDisplay pageDisplay = (WikiPageDisplay)_portalCache.get(key);
 
 		if (pageDisplay == null) {
 			pageDisplay = _getPageDisplay(
 				nodeId, title, viewPageURL, editPageURL, attachmentURLPrefix);
 
-			_cache.put(key, pageDisplay);
+			_portalCache.put(key, pageDisplay);
 		}
 
 		if (_log.isDebugEnabled()) {
@@ -87,12 +87,13 @@ public class WikiCacheUtil {
 		String key = _encodeKey(
 			page.getNodeId(), page.getTitle(), _OUTGOING_LINKS);
 
-		Map<String, Boolean> links = (Map<String, Boolean>)_cache.get(key);
+		Map<String, Boolean> links = (Map<String, Boolean>)_portalCache.get(
+			key);
 
 		if (links == null) {
 			links = WikiUtil.getLinks(page);
 
-			_cache.put(key, links);
+			_portalCache.put(key, links);
 		}
 
 		return links;
@@ -145,6 +146,7 @@ public class WikiCacheUtil {
 
 	private static Log _log = LogFactoryUtil.getLog(WikiUtil.class);
 
-	private static PortalCache _cache = MultiVMPoolUtil.getCache(CACHE_NAME);
+	private static PortalCache _portalCache = MultiVMPoolUtil.getCache(
+		CACHE_NAME);
 
 }
