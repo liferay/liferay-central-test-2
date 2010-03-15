@@ -36,8 +36,18 @@ import java.util.List;
  */
 public class ClassLoaderProxy {
 
+	/**
+	 * @deprecated
+	 */
 	public ClassLoaderProxy(Object obj, ClassLoader classLoader) {
+		this(obj, obj.getClass().getName(), classLoader);
+	}
+
+	public ClassLoaderProxy(
+		Object obj, String className, ClassLoader classLoader) {
+
 		_obj = obj;
+		_className = className;
 		_classLoader = classLoader;
 	}
 
@@ -53,8 +63,7 @@ public class ClassLoaderProxy {
 		try {
 			currentThread.setContextClassLoader(_classLoader);
 
-			Class<?> classObj = Class.forName(
-				_obj.getClass().getName(), true, _classLoader);
+			Class<?> classObj = Class.forName(_className, true, _classLoader);
 
 			List<Class<?>> parameterTypes = new ArrayList<Class<?>>();
 
@@ -180,5 +189,6 @@ public class ClassLoaderProxy {
 
 	private Object _obj;
 	private ClassLoader _classLoader;
+	private String _className;
 
 }

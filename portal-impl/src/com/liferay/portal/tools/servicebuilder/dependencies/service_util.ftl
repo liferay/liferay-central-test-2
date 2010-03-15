@@ -84,7 +84,7 @@ public class ${entity.name}${sessionTypeName}ServiceUtil {
 				Object obj = PortletBeanLocatorUtil.locate(ClpSerializer.SERVLET_CONTEXT_NAME, ${entity.name}${sessionTypeName}Service.class.getName());
 				ClassLoader portletClassLoader = (ClassLoader)PortletBeanLocatorUtil.locate(ClpSerializer.SERVLET_CONTEXT_NAME, "portletClassLoader");
 
-				ClassLoaderProxy classLoaderProxy = new ClassLoaderProxy(obj, portletClassLoader);
+				ClassLoaderProxy classLoaderProxy = new ClassLoaderProxy(obj, ${entity.name}${sessionTypeName}Service.class.getName(), portletClassLoader);
 
 				_service = new ${entity.name}${sessionTypeName}ServiceClp(classLoaderProxy);
 
