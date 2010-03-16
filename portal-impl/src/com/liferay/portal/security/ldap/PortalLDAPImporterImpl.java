@@ -14,6 +14,7 @@
 
 package com.liferay.portal.security.ldap;
 
+import com.liferay.portal.NoSuchRoleException;
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.NoSuchUserGroupException;
 import com.liferay.portal.kernel.log.Log;
@@ -30,11 +31,15 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.Contact;
+import com.liferay.portal.model.Role;
+import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.security.auth.ScreenNameGenerator;
 import com.liferay.portal.security.auth.ScreenNameGeneratorFactory;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
+import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.UserGroupLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
@@ -286,6 +291,43 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 		return user;
 	}
 
+	protected void doImportRoleFromLDAPGroup(
+		long companyId, LDAPGroup ldapGroup, UserGroup userGroup)
+		throws Exception {
+
+		if (!PropsValues.LDAP_IMPORT_CREATE_ROLE_PER_GROUP_ENABLED) {
+			return;
+		}
+
+		Role role = null;
+
+		try {
+			role = RoleLocalServiceUtil.getRole(
+				companyId, ldapGroup.getGroupName());
+		}
+		catch (NoSuchRoleException e) {
+			User defaultUser = UserLocalServiceUtil.getDefaultUser(
+				companyId);
+
+			role = RoleLocalServiceUtil.addRole(
+				defaultUser.getUserId(), companyId,
+				ldapGroup.getGroupName(), null,
+				"Automatically imported via LDAP import",
+				RoleConstants.TYPE_REGULAR);
+		}
+
+		long userGroupGroupId = userGroup.getGroup().getGroupId();
+
+		if (GroupLocalServiceUtil.hasRoleGroup(
+				role.getRoleId(), userGroupGroupId)) {
+
+			return;
+		}
+
+		GroupLocalServiceUtil.addRoleGroups(
+			role.getRoleId(), new long[] { userGroupGroupId });
+	}
+
 	protected User findLiferayUser(long companyId, LDAPUser ldapUser)
 		throws Exception {
 
@@ -464,6 +506,8 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 			}
 		}
 
+		doImportRoleFromLDAPGroup(companyId, ldapGroup, userGroup);
+		
 		if (!importGroupMembership || (userGroup == null)) {
 			return userGroup;
 		}
