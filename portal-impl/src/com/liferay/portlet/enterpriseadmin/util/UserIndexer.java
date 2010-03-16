@@ -27,10 +27,10 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ContactConstants;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.User;
 import com.liferay.portal.search.BaseIndexer;
+import com.liferay.portal.security.auth.FullNameGeneratorFactory;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PortletKeys;
@@ -72,7 +72,7 @@ public class UserIndexer extends BaseIndexer {
 		String middleName = document.get("middleName");
 		String lastName = document.get("lastName");
 
-		String title = ContactConstants.getFullName(
+		String title = FullNameGeneratorFactory.getInstance().getFullName(
 			firstName, middleName, lastName);
 
 		String content = null;

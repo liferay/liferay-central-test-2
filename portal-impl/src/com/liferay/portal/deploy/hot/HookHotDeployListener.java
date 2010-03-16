@@ -63,6 +63,8 @@ import com.liferay.portal.security.auth.AutoLogin;
 import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portal.security.auth.EmailAddressGenerator;
 import com.liferay.portal.security.auth.EmailAddressGeneratorFactory;
+import com.liferay.portal.security.auth.FullNameGenerator;
+import com.liferay.portal.security.auth.FullNameGeneratorFactory;
 import com.liferay.portal.security.auth.FullNameValidator;
 import com.liferay.portal.security.auth.FullNameValidatorFactory;
 import com.liferay.portal.security.auth.ScreenNameGenerator;
@@ -223,6 +225,10 @@ public class HookHotDeployListener
 				PropsKeys.USERS_EMAIL_ADDRESS_GENERATOR)) {
 
 			EmailAddressGeneratorFactory.setInstance(null);
+		}
+
+		if (portalProperties.containsKey(PropsKeys.USERS_FULL_NAME_GENERATOR)) {
+			FullNameGeneratorFactory.setInstance(null);
 		}
 
 		if (portalProperties.containsKey(PropsKeys.USERS_FULL_NAME_VALIDATOR)) {
@@ -1097,6 +1103,18 @@ public class HookHotDeployListener
 					emailAddressGeneratorClassName);
 
 			EmailAddressGeneratorFactory.setInstance(emailAddressGenerator);
+		}
+
+		if (portalProperties.containsKey(PropsKeys.USERS_FULL_NAME_GENERATOR)) {
+			String fullNameGeneratorClassName = portalProperties.getProperty(
+				PropsKeys.USERS_FULL_NAME_GENERATOR);
+
+			FullNameGenerator fullNameGenerator =
+				(FullNameGenerator)newInstance(
+					portletClassLoader, FullNameValidator.class,
+					fullNameGeneratorClassName);
+
+			FullNameGeneratorFactory.setInstance(fullNameGenerator);
 		}
 
 		if (portalProperties.containsKey(PropsKeys.USERS_FULL_NAME_VALIDATOR)) {

@@ -24,11 +24,11 @@ import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Contact;
-import com.liferay.portal.model.ContactConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroupRole;
 import com.liferay.portal.model.impl.ContactImpl;
 import com.liferay.portal.model.impl.UserImpl;
+import com.liferay.portal.security.auth.FullNameGeneratorFactory;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.util.ldap.LDAPUtil;
@@ -106,7 +106,9 @@ public class BaseLDAPToPortalConverter implements LDAPToPortalConverter {
 			String fullName = LDAPUtil.getAttributeValue(
 				attributes, userMappings, UserConverterKeys.FULL_NAME);
 
-			String[] names = LDAPUtil.splitFullName(fullName);
+
+			String[] names =
+				FullNameGeneratorFactory.getInstance().splitFullName(fullName);
 
 			firstName = names[0];
 			middleName = names[1];
@@ -142,7 +144,7 @@ public class BaseLDAPToPortalConverter implements LDAPToPortalConverter {
 
 			throw new UserScreenNameException(
 				"Screen name cannot be null for " +
-					ContactConstants.getFullName(
+					FullNameGeneratorFactory.getInstance().getFullName(
 						firstName, middleName, lastName));
 		}
 
@@ -152,7 +154,7 @@ public class BaseLDAPToPortalConverter implements LDAPToPortalConverter {
 
 			throw new UserEmailAddressException(
 				"Email address cannot be null for " +
-					ContactConstants.getFullName(
+					FullNameGeneratorFactory.getInstance().getFullName(
 						firstName, middleName, lastName));
 		}
 

@@ -79,38 +79,4 @@ public class LDAPUtil {
 		return baseURL + StringPool.SLASH + baseDN;
 	}
 
-	public static String[] splitFullName(String fullName) {
-		String firstName = StringPool.BLANK;
-		String lastName = StringPool.BLANK;
-		String middleName = StringPool.BLANK;
-
-		if (Validator.isNotNull(fullName)) {
-			String[] name = StringUtil.split(fullName, " ");
-
-			firstName = name[0];
-			lastName = name[name.length - 1];
-			middleName = StringPool.BLANK;
-
-			if (name.length > 2) {
-				for (int i = 1; i < name.length - 1; i++) {
-					if (Validator.isNull(name[i].trim())) {
-						continue;
-					}
-
-					if (i != 1) {
-						middleName += " ";
-					}
-
-					middleName += name[i].trim();
-				}
-			}
-		}
-		else {
-			firstName = GetterUtil.getString(firstName, lastName);
-			lastName = firstName;
-		}
-
-		return new String[] {firstName, middleName, lastName};
-	}
-
 }
