@@ -77,6 +77,8 @@ public class AddCategoryMessageReply1Test extends BaseTestCase {
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("RE: T\u00e9st M\u00e9ssag\u00e9"),
+			selenium.getText("//form/div[2]"));
+		assertEquals(RuntimeVariables.replace("RE: T\u00e9st M\u00e9ssag\u00e9"),
 			selenium.getText("//a/strong"));
 		assertEquals(RuntimeVariables.replace(
 				"This is a t\u00e9st1 r\u00e9ply1 m\u00e9ssag\u00e91."),

@@ -12,19 +12,18 @@
  * details.
  */
 
-package com.liferay.portalweb.portlet.messageboards.message.editcategorymessagesubjectnull;
+package com.liferay.portalweb.portlet.messageboards.message.addmessage;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="EditCategoryMessageSubjectNullTest.java.html"><b><i>View Source</i>
- * </b></a>
+ * <a href="AddPortletTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class EditCategoryMessageSubjectNullTest extends BaseTestCase {
-	public void testEditCategoryMessageSubjectNull() throws Exception {
+public class AddPortletTest extends BaseTestCase {
+	public void testAddPortlet() throws Exception {
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
@@ -47,11 +46,7 @@ public class EditCategoryMessageSubjectNullTest extends BaseTestCase {
 		selenium.clickAt("link=M\u00e9ssag\u00e9 Boards T\u00e9st Pag\u00e9",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		assertEquals(RuntimeVariables.replace("T\u00e9st M\u00e9ssag\u00e9"),
-			selenium.getText("//td[1]/a"));
-		selenium.clickAt("//td[7]/ul/li/strong/a", RuntimeVariables.replace(""));
+		selenium.clickAt("_145_addApplication", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -59,8 +54,8 @@ public class EditCategoryMessageSubjectNullTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a")) {
+				if (selenium.isVisible(
+							"//input[@id='layout_configuration_content']")) {
 					break;
 				}
 			}
@@ -70,9 +65,10 @@ public class EditCategoryMessageSubjectNullTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a"));
-		selenium.waitForPageToLoad("30000");
+		selenium.type("//input[@id='layout_configuration_content']",
+			RuntimeVariables.replace(""));
+		selenium.typeKeys("//input[@id='layout_configuration_content']",
+			RuntimeVariables.replace("m"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -80,7 +76,8 @@ public class EditCategoryMessageSubjectNullTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("//div[@class='lfr-toolbar']")) {
+				if (selenium.isVisible(
+							"//div[@id=\"Collaboration-MessageBoards\"]/p/a")) {
 					break;
 				}
 			}
@@ -90,11 +87,25 @@ public class EditCategoryMessageSubjectNullTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("_19_subject", RuntimeVariables.replace(""));
-		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"You have entered invalid data. Please try again."));
-		assertTrue(selenium.isTextPresent("Please enter a valid subject."));
+		selenium.clickAt("//div[@id=\"Collaboration-MessageBoards\"]/p/a",
+			RuntimeVariables.replace(""));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("//td[1]/div[1]/div")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		assertTrue(selenium.isElementPresent("//td[1]/div[1]/div"));
 	}
 }

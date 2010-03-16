@@ -40,12 +40,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Edit</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAtAndWait</td>
-	<td>link=Edit</td>
+	<td>clickAndWait</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a</td>
 	<td></td>
 </tr>
 <tr>
@@ -65,8 +65,18 @@
 </tr>
 <tr>
 	<td>assertText</td>
+	<td>//form/div[2]</td>
+	<td>Tést Méssagé Editéd</td>
+</tr>
+<tr>
+	<td>assertText</td>
 	<td>//a/strong</td>
 	<td>Tést Méssagé Editéd</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//td[2]/div[2]</td>
+	<td>This is a tést méssagé.</td>
 </tr>
 <tr>
 	<td>open</td>

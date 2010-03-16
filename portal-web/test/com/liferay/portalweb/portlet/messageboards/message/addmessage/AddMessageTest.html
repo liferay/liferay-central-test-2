@@ -1,12 +1,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>AddCategoryMessageReply3Test</title>
+<title>AddMessageTest</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">AddCategoryMessageReply3Test</td></tr>
+<tr><td rowspan="1" colspan="3">AddMessageTest</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
@@ -25,17 +25,7 @@
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>//a/strong</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAtAndWait</td>
-	<td>link=Tést Méssagé</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAtAndWait</td>
-	<td>//div[6]/table/tbody/tr[1]/td[2]/div[1]/ul/li[1]/span/a/span</td>
+	<td>//input[@value='Post New Thread']</td>
 	<td></td>
 </tr>
 <tr>
@@ -45,8 +35,13 @@
 </tr>
 <tr>
 	<td>type</td>
+	<td>_19_subject</td>
+	<td>Tést Méssagé</td>
+</tr>
+<tr>
+	<td>type</td>
 	<td>_19_textArea</td>
-	<td>This is a tést3 réply3 méssagé3.</td>
+	<td>This is a tést méssagé.</td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
@@ -56,17 +51,17 @@
 <tr>
 	<td>assertText</td>
 	<td>//form/div[2]</td>
-	<td>RE: Tést Méssagé</td>
+	<td>Tést Méssagé</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>//a/strong</td>
-	<td>RE: Tést Méssagé</td>
+	<td>Tést Méssagé</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[7]/table/tbody/tr[1]/td[2]/div[2]</td>
-	<td>This is a tést3 réply3 méssagé3.</td>
+	<td>//td[2]/div[2]</td>
+	<td>This is a tést méssagé.</td>
 </tr>
 
 </tbody></table>

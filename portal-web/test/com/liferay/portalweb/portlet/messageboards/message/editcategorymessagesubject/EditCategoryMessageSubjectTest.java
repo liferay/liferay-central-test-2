@@ -59,7 +59,8 @@ public class EditCategoryMessageSubjectTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Edit")) {
+				if (selenium.isElementPresent(
+							"//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a")) {
 					break;
 				}
 			}
@@ -69,7 +70,8 @@ public class EditCategoryMessageSubjectTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("link=Edit", RuntimeVariables.replace(""));
+		selenium.click(RuntimeVariables.replace(
+				"//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -94,7 +96,13 @@ public class EditCategoryMessageSubjectTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace(
 				"T\u00e9st M\u00e9ssag\u00e9 Edit\u00e9d"),
+			selenium.getText("//form/div[2]"));
+		assertEquals(RuntimeVariables.replace(
+				"T\u00e9st M\u00e9ssag\u00e9 Edit\u00e9d"),
 			selenium.getText("//a/strong"));
+		assertEquals(RuntimeVariables.replace(
+				"This is a t\u00e9st m\u00e9ssag\u00e9."),
+			selenium.getText("//td[2]/div[2]"));
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
