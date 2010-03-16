@@ -1084,6 +1084,23 @@
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portlet.asset.model.impl.AssetLinkModelImpl">
+		<attributes>
+			<id name="linkId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="entryId1" />
+			<basic name="entryId2" />
+			<basic name="typeId" />
+			<basic name="weight" />
+			<transient name="primaryKey" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portlet.asset.model.impl.AssetTagModelImpl">
 		<attributes>
 			<id name="tagId" />
@@ -2839,6 +2856,10 @@
 	</entity>
 	<entity class="com.liferay.portlet.asset.model.impl.AssetEntryImpl" name="AssetEntry">
 		<table name="AssetEntry" />
+		<attributes />
+	</entity>
+	<entity class="com.liferay.portlet.asset.model.impl.AssetLinkImpl" name="AssetLink">
+		<table name="AssetLink" />
 		<attributes />
 	</entity>
 	<entity class="com.liferay.portlet.asset.model.impl.AssetTagImpl" name="AssetTag">

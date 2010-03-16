@@ -20,21 +20,19 @@ import com.liferay.counter.service.CounterService;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.service.GroupLocalService;
-import com.liferay.portal.service.GroupService;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceService;
 import com.liferay.portal.service.UserLocalService;
 import com.liferay.portal.service.UserService;
-import com.liferay.portal.service.base.PrincipalBean;
-import com.liferay.portal.service.persistence.GroupFinder;
-import com.liferay.portal.service.persistence.GroupPersistence;
 import com.liferay.portal.service.persistence.ResourceFinder;
 import com.liferay.portal.service.persistence.ResourcePersistence;
 import com.liferay.portal.service.persistence.UserFinder;
 import com.liferay.portal.service.persistence.UserPersistence;
 
+import com.liferay.portlet.asset.model.AssetLink;
 import com.liferay.portlet.asset.service.AssetCategoryLocalService;
 import com.liferay.portlet.asset.service.AssetCategoryPropertyLocalService;
 import com.liferay.portlet.asset.service.AssetCategoryPropertyService;
@@ -64,14 +62,75 @@ import com.liferay.portlet.asset.service.persistence.AssetTagPropertyPersistence
 import com.liferay.portlet.asset.service.persistence.AssetTagStatsPersistence;
 import com.liferay.portlet.asset.service.persistence.AssetVocabularyPersistence;
 
+import java.util.List;
+
 /**
- * <a href="AssetVocabularyServiceBaseImpl.java.html"><b><i>View Source</i></b>
+ * <a href="AssetLinkLocalServiceBaseImpl.java.html"><b><i>View Source</i></b>
  * </a>
  *
  * @author Brian Wing Shun Chan
  */
-public abstract class AssetVocabularyServiceBaseImpl extends PrincipalBean
-	implements AssetVocabularyService {
+public abstract class AssetLinkLocalServiceBaseImpl
+	implements AssetLinkLocalService {
+	public AssetLink addAssetLink(AssetLink assetLink)
+		throws SystemException {
+		assetLink.setNew(true);
+
+		return assetLinkPersistence.update(assetLink, false);
+	}
+
+	public AssetLink createAssetLink(long linkId) {
+		return assetLinkPersistence.create(linkId);
+	}
+
+	public void deleteAssetLink(long linkId)
+		throws PortalException, SystemException {
+		assetLinkPersistence.remove(linkId);
+	}
+
+	public void deleteAssetLink(AssetLink assetLink) throws SystemException {
+		assetLinkPersistence.remove(assetLink);
+	}
+
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return assetLinkPersistence.findWithDynamicQuery(dynamicQuery);
+	}
+
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end) throws SystemException {
+		return assetLinkPersistence.findWithDynamicQuery(dynamicQuery, start,
+			end);
+	}
+
+	public AssetLink getAssetLink(long linkId)
+		throws PortalException, SystemException {
+		return assetLinkPersistence.findByPrimaryKey(linkId);
+	}
+
+	public List<AssetLink> getAssetLinks(int start, int end)
+		throws SystemException {
+		return assetLinkPersistence.findAll(start, end);
+	}
+
+	public int getAssetLinksCount() throws SystemException {
+		return assetLinkPersistence.countAll();
+	}
+
+	public AssetLink updateAssetLink(AssetLink assetLink)
+		throws SystemException {
+		assetLink.setNew(false);
+
+		return assetLinkPersistence.update(assetLink, true);
+	}
+
+	public AssetLink updateAssetLink(AssetLink assetLink, boolean merge)
+		throws SystemException {
+		assetLink.setNew(false);
+
+		return assetLinkPersistence.update(assetLink, merge);
+	}
+
 	public AssetCategoryLocalService getAssetCategoryLocalService() {
 		return assetCategoryLocalService;
 	}
@@ -334,38 +393,6 @@ public abstract class AssetVocabularyServiceBaseImpl extends PrincipalBean
 		this.counterService = counterService;
 	}
 
-	public GroupLocalService getGroupLocalService() {
-		return groupLocalService;
-	}
-
-	public void setGroupLocalService(GroupLocalService groupLocalService) {
-		this.groupLocalService = groupLocalService;
-	}
-
-	public GroupService getGroupService() {
-		return groupService;
-	}
-
-	public void setGroupService(GroupService groupService) {
-		this.groupService = groupService;
-	}
-
-	public GroupPersistence getGroupPersistence() {
-		return groupPersistence;
-	}
-
-	public void setGroupPersistence(GroupPersistence groupPersistence) {
-		this.groupPersistence = groupPersistence;
-	}
-
-	public GroupFinder getGroupFinder() {
-		return groupFinder;
-	}
-
-	public void setGroupFinder(GroupFinder groupFinder) {
-		this.groupFinder = groupFinder;
-	}
-
 	public ResourceLocalService getResourceLocalService() {
 		return resourceLocalService;
 	}
@@ -502,14 +529,6 @@ public abstract class AssetVocabularyServiceBaseImpl extends PrincipalBean
 	protected CounterLocalService counterLocalService;
 	@BeanReference(name = "com.liferay.counter.service.CounterService")
 	protected CounterService counterService;
-	@BeanReference(name = "com.liferay.portal.service.GroupLocalService")
-	protected GroupLocalService groupLocalService;
-	@BeanReference(name = "com.liferay.portal.service.GroupService")
-	protected GroupService groupService;
-	@BeanReference(name = "com.liferay.portal.service.persistence.GroupPersistence")
-	protected GroupPersistence groupPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.GroupFinder")
-	protected GroupFinder groupFinder;
 	@BeanReference(name = "com.liferay.portal.service.ResourceLocalService")
 	protected ResourceLocalService resourceLocalService;
 	@BeanReference(name = "com.liferay.portal.service.ResourceService")

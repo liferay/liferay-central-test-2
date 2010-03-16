@@ -65,6 +65,7 @@
 	<import class="com.liferay.portlet.asset.model.AssetCategory" />
 	<import class="com.liferay.portlet.asset.model.AssetCategoryProperty" />
 	<import class="com.liferay.portlet.asset.model.AssetEntry" />
+	<import class="com.liferay.portlet.asset.model.AssetLink" />
 	<import class="com.liferay.portlet.asset.model.AssetTag" />
 	<import class="com.liferay.portlet.asset.model.AssetTagProperty" />
 	<import class="com.liferay.portlet.asset.model.AssetTagPropertyKey" />
@@ -964,6 +965,20 @@
 		<property name="width" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="priority" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
 		<property name="viewCount" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+	</class>
+	<class name="com.liferay.portlet.asset.model.impl.AssetLinkImpl" table="AssetLink">
+		<cache usage="read-write" />
+		<id name="linkId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+		<property name="entryId1" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="entryId2" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="typeId" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="weight" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 	</class>
 	<class name="com.liferay.portlet.asset.model.impl.AssetTagImpl" table="AssetTag">
 		<cache usage="read-write" />

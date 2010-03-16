@@ -38,6 +38,19 @@ create index IX_B2A61B55 on AssetEntries_AssetTags (tagId);
 create unique index IX_1E9D371D on AssetEntry (classNameId, classPK);
 create index IX_7306C60 on AssetEntry (companyId);
 
+create index IX_69B130A on AssetLink (assetId1);
+create index IX_6BB7B925 on AssetLink (assetId1, assetId2);
+create index IX_B822704E on AssetLink (assetId1, assetId2, typeId);
+create index IX_2BD41533 on AssetLink (assetId1, typeId);
+create index IX_69B16CB on AssetLink (assetId2);
+create index IX_C0B8C7F4 on AssetLink (assetId2, typeId);
+create index IX_128516C8 on AssetLink (entryId1);
+create index IX_56E0AB21 on AssetLink (entryId1, entryId2);
+create index IX_5B27A64A on AssetLink (entryId1, entryId2, typeId);
+create index IX_85D57AF1 on AssetLink (entryId1, typeId);
+create index IX_12851A89 on AssetLink (entryId2);
+create index IX_1ABA2DB2 on AssetLink (entryId2, typeId);
+
 create index IX_7C9E46BA on AssetTag (groupId);
 
 create index IX_DFF1F063 on AssetTagProperty (companyId);

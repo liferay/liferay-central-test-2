@@ -103,7 +103,8 @@ public class AssetEntryLocalServiceWrapper implements AssetEntryLocalService {
 	}
 
 	public void deleteEntry(com.liferay.portlet.asset.model.AssetEntry entry)
-		throws com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_assetEntryLocalService.deleteEntry(entry);
 	}
 
@@ -114,8 +115,23 @@ public class AssetEntryLocalServiceWrapper implements AssetEntryLocalService {
 	}
 
 	public void deleteEntry(java.lang.String className, long classPK)
-		throws com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_assetEntryLocalService.deleteEntry(className, classPK);
+	}
+
+	public java.util.List<com.liferay.portlet.asset.model.AssetEntry> getAncestorEntries(
+		long entryId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _assetEntryLocalService.getAncestorEntries(entryId);
+	}
+
+	public java.util.List<com.liferay.portlet.asset.model.AssetEntry> getChildEntries(
+		long entryId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _assetEntryLocalService.getChildEntries(entryId);
 	}
 
 	public java.util.List<com.liferay.portlet.asset.model.AssetEntry> getCompanyEntries(
@@ -159,6 +175,25 @@ public class AssetEntryLocalServiceWrapper implements AssetEntryLocalService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _assetEntryLocalService.getEntry(className, classPK);
+	}
+
+	public com.liferay.portlet.asset.model.AssetEntry getNextEntry(long entryId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _assetEntryLocalService.getNextEntry(entryId);
+	}
+
+	public com.liferay.portlet.asset.model.AssetEntry getParentEntry(
+		long entryId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _assetEntryLocalService.getParentEntry(entryId);
+	}
+
+	public com.liferay.portlet.asset.model.AssetEntry getPrevious(long entryId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _assetEntryLocalService.getPrevious(entryId);
 	}
 
 	public java.util.List<com.liferay.portlet.asset.model.AssetEntry> getTopViewedEntries(
