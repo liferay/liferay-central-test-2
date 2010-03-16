@@ -50,6 +50,7 @@ import com.liferay.portalweb.plugins.suntourlisting.SunTourListingTests;
 import com.liferay.portalweb.plugins.suntourmap.SunTourMapTests;
 import com.liferay.portalweb.plugins.suntourweather.SunTourWeatherTests;
 import com.liferay.portalweb.plugins.sunyoutube.SunYoutubeTests;
+import com.liferay.portalweb.plugins.testclp.TestCLPTests;
 import com.liferay.portalweb.plugins.todayinchristianhistory.TodayinChristianHistoryTests;
 import com.liferay.portalweb.plugins.twitter.TwitterTests;
 import com.liferay.portalweb.plugins.weather.WeatherTests;
@@ -111,6 +112,7 @@ public class Plugins2TestSuite extends BaseTests {
 		testSuite.addTest(SunTourMapTests.suite());
 		testSuite.addTest(SunTourWeatherTests.suite());
 		testSuite.addTest(SunYoutubeTests.suite());
+		testSuite.addTest(TestCLPTests.suite());
 		testSuite.addTest(TodayinChristianHistoryTests.suite());
 		testSuite.addTest(TwitterTests.suite());
 		testSuite.addTest(WeatherTests.suite());
