@@ -110,7 +110,8 @@ public class WikiNodeServiceImpl extends WikiNodeServiceBaseImpl {
 		WikiNodePermission.check(
 			getPermissionChecker(), nodeId, ActionKeys.UPDATE);
 
-		return wikiNodeLocalService.updateNode(nodeId, name, description);
+		return wikiNodeLocalService.updateNode(
+			nodeId, name, description, new ServiceContext());
 	}
 
 }

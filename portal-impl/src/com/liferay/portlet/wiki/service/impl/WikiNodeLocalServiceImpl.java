@@ -82,8 +82,8 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 		node.setCompanyId(user.getCompanyId());
 		node.setUserId(user.getUserId());
 		node.setUserName(user.getFullName());
-		node.setCreateDate(now);
-		node.setModifiedDate(now);
+		node.setCreateDate(serviceContext.getCreateDate(now));
+		node.setModifiedDate(serviceContext.getModifiedDate(now));
 		node.setName(name);
 		node.setDescription(description);
 
@@ -276,14 +276,16 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 			userId, WikiNode.class.getName(), nodeId);
 	}
 
-	public WikiNode updateNode(long nodeId, String name, String description)
+	public WikiNode updateNode(
+			long nodeId, String name, String description,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		WikiNode node = wikiNodePersistence.findByPrimaryKey(nodeId);
 
 		validate(nodeId, node.getGroupId(), name);
 
-		node.setModifiedDate(new Date());
+		node.setModifiedDate(serviceContext.getModifiedDate(null));
 		node.setName(name);
 		node.setDescription(description);
 

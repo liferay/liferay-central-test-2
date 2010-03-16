@@ -152,8 +152,8 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		page.setCompanyId(user.getCompanyId());
 		page.setUserId(user.getUserId());
 		page.setUserName(user.getFullName());
-		page.setCreateDate(now);
-		page.setModifiedDate(now);
+		page.setCreateDate(serviceContext.getCreateDate(now));
+		page.setModifiedDate(serviceContext.getModifiedDate(now));
 		page.setNodeId(nodeId);
 		page.setTitle(title);
 		page.setVersion(version);
@@ -185,7 +185,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		// Node
 
-		node.setLastPostDate(now);
+		node.setLastPostDate(serviceContext.getModifiedDate(now));
 
 		wikiNodePersistence.update(node, false);
 
@@ -965,7 +965,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			page.setHead(false);
 		}
 
-		page.setModifiedDate(now);
+		page.setModifiedDate(serviceContext.getModifiedDate(now));
 
 		wikiPagePersistence.update(page, false);
 
@@ -980,8 +980,8 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		page.setCompanyId(user.getCompanyId());
 		page.setUserId(user.getUserId());
 		page.setUserName(user.getFullName());
-		page.setCreateDate(now);
-		page.setModifiedDate(now);
+		page.setCreateDate(serviceContext.getModifiedDate(now));
+		page.setModifiedDate(serviceContext.getModifiedDate(now));
 		page.setNodeId(nodeId);
 		page.setTitle(title);
 		page.setVersion(newVersion);
@@ -1015,7 +1015,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		WikiNode node = wikiNodePersistence.findByPrimaryKey(nodeId);
 
-		node.setLastPostDate(now);
+		node.setLastPostDate(serviceContext.getModifiedDate(now));
 
 		wikiNodePersistence.update(node, false);
 

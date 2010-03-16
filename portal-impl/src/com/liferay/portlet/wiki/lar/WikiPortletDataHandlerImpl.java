@@ -101,6 +101,8 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		serviceContext.setAddCommunityPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
+		serviceContext.setCreateDate(node.getCreateDate());
+		serviceContext.setModifiedDate(node.getModifiedDate());
 		serviceContext.setScopeGroupId(context.getGroupId());
 
 		WikiNode existingNode = null;
@@ -130,7 +132,7 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 			else {
 				existingNode = WikiNodeLocalServiceUtil.updateNode(
 					existingNode.getNodeId(), node.getName(),
-					node.getDescription());
+					node.getDescription(), serviceContext);
 			}
 		}
 		else {
@@ -180,6 +182,8 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 		serviceContext.setAddGuestPermissions(true);
 		serviceContext.setAssetCategoryIds(assetCategoryIds);
 		serviceContext.setAssetTagNames(assetTagNames);
+		serviceContext.setCreateDate(page.getCreateDate());
+		serviceContext.setModifiedDate(page.getModifiedDate());
 
 		WikiPage existingPage = null;
 
