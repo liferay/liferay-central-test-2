@@ -257,6 +257,7 @@
 		<!-- References -->
 
 		<reference package-path="com.liferay.portal" entity="User" />
+		<reference package-path="com.liferay.portal" entity="WorkflowInstanceLink" />
 		<reference package-path="com.liferay.portlet.asset" entity="AssetEntry" />
 	</entity>
 	<entity name="DLFolder" uuid="true" local-service="true" remote-service="true">

@@ -416,12 +416,12 @@ public class DLFileEntryLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry updateWorkflowStatus(
-		long userId, long fileEntryId,
+		long userId, long fileVersionId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .updateWorkflowStatus(userId, fileEntryId, serviceContext);
+				   .updateWorkflowStatus(userId, fileVersionId, serviceContext);
 	}
 
 	public static DLFileEntryLocalService getService() {

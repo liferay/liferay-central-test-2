@@ -105,6 +105,21 @@ public class DLFileVersionLocalServiceWrapper
 			merge);
 	}
 
+	public void deleteFileVersion(
+		com.liferay.portlet.documentlibrary.model.DLFileVersion fileVersion)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_dlFileVersionLocalService.deleteFileVersion(fileVersion);
+	}
+
+	public void deleteFileVersion(long groupId, long folderId,
+		java.lang.String name, java.lang.String version)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_dlFileVersionLocalService.deleteFileVersion(groupId, folderId, name,
+			version);
+	}
+
 	public com.liferay.portlet.documentlibrary.model.DLFileVersion getFileVersion(
 		long groupId, long folderId, java.lang.String name,
 		java.lang.String version)

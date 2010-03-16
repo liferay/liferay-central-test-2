@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.workflow.StatusConstants;
 import com.liferay.portlet.documentlibrary.NoSuchFileVersionException;
+import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileVersion;
 import com.liferay.portlet.documentlibrary.service.base.DLFileVersionLocalServiceBaseImpl;
 import com.liferay.portlet.documentlibrary.util.comparator.FileVersionVersionComparator;
@@ -33,6 +34,26 @@ import java.util.List;
  */
 public class DLFileVersionLocalServiceImpl
 	extends DLFileVersionLocalServiceBaseImpl {
+
+	public void deleteFileVersion(DLFileVersion fileVersion)
+		throws SystemException, PortalException {
+
+		dlFileVersionPersistence.remove(fileVersion);
+
+		workflowInstanceLinkLocalService.deleteWorkflowInstanceLink(
+			fileVersion.getCompanyId(), fileVersion.getGroupId(),
+			DLFileEntry.class.getName(), fileVersion.getFileVersionId());
+	}
+
+	public void deleteFileVersion(
+			long groupId, long folderId, String name, String version)
+		throws PortalException, SystemException {
+
+		DLFileVersion fileVersion = getFileVersion(
+			groupId, folderId, name, version);
+
+		deleteFileVersion(fileVersion);
+	}
 
 	public DLFileVersion getFileVersion(
 			long groupId, long folderId, String name, String version)
