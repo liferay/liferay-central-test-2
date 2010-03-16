@@ -21,6 +21,8 @@ import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 import com.liferay.portal.kernel.portlet.PortletModeFactory;
 import com.liferay.portal.kernel.portlet.WindowStateFactory;
+import com.liferay.portal.kernel.security.auth.AuthTokenUtil;
+import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -73,6 +75,9 @@ public class ActionURLTag extends ParamAndPropertyAncestorTagImpl {
 
 			return StringPool.BLANK;
 		}
+
+		portletURL.setParameter(
+			Constants.AUTHENTICATION_TOKEN, AuthTokenUtil.getToken(request));
 
 		if (Validator.isNotNull(windowState)) {
 			portletURL.setWindowState(
