@@ -33,7 +33,6 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.StatusConstants;
-import com.liferay.portal.kernel.workflow.WorkflowHandlerRegistryUtil;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
@@ -229,18 +228,9 @@ public class DLFileEntryLocalServiceImpl
 			fileEntryId, fileEntry.getLuceneProperties(),
 			fileEntry.getModifiedDate(), serviceContext, is);
 
-		// Workflow
+		// Status
 
-		if (serviceContext.isStartWorkflow()) {
-			try {
-				WorkflowHandlerRegistryUtil.startWorkflowInstance(
-					user.getCompanyId(), groupId, userId,
-					DLFileEntry.class.getName(), fileEntryId, fileEntry);
-			}
-			catch (Exception e) {
-				throw new SystemException(e);
-			}
-		}
+		fileEntry = updateWorkflowStatus(userId, fileEntryId, serviceContext);
 
 		return fileEntry;
 	}
@@ -769,8 +759,6 @@ public class DLFileEntryLocalServiceImpl
 		fileEntry.setExtraSettings(extraSettings);
 		fileEntry.setExpandoBridgeAttributes(serviceContext);
 
-		dlFileEntryPersistence.update(fileEntry, false);
-
 		// Move file entry
 
 		if (folderId != newFolderId) {
@@ -1030,19 +1018,10 @@ public class DLFileEntryLocalServiceImpl
 			fileEntry.getLuceneProperties(), fileEntry.getModifiedDate(),
 			serviceContext, is);
 
-		// Workflow
+		// Status
 
-		if (serviceContext.isStartWorkflow()) {
-			try {
-				WorkflowHandlerRegistryUtil.startWorkflowInstance(
-					user.getCompanyId(), groupId, userId,
-					DLFileEntry.class.getName(), fileEntry.getFileEntryId(),
-					fileEntry);
-			}
-			catch (Exception e) {
-				throw new SystemException(e);
-			}
-		}
+		fileEntry = updateWorkflowStatus(
+			userId, fileEntry.getFileEntryId(), serviceContext);
 
 		return fileEntry;
 	}
@@ -1070,14 +1049,6 @@ public class DLFileEntryLocalServiceImpl
 		fileVersion.setStatusByUserName(user.getFullName());
 		fileVersion.setStatusDate(new Date());
 
-		if (fileVersion.isApproved() &&
-			(DLUtil.compareVersions(
-				fileVersion.getVersion(),
-				DLFileEntryConstants.DEFAULT_VERSION) < 0)) {
-
-			fileVersion.setVersion(DLFileEntryConstants.DEFAULT_VERSION);
-		}
-
 		dlFileVersionPersistence.update(fileVersion, false);
 
 		// File entry
@@ -1091,22 +1062,17 @@ public class DLFileEntryLocalServiceImpl
 			dlFileEntryPersistence.update(fileEntry, false);
 		}
 		else if (!fileVersion.isApproved() &&
-				 (DLUtil.compareVersions(
-					fileEntry.getVersion(), fileVersion.getVersion()) == 0)) {
+				 fileEntry.getVersion().equals(fileVersion.getVersion())) {
 
 			String newVersion = DLFileEntryConstants.DEFAULT_VERSION;
 
-			if (DLUtil.compareVersions(
-					fileVersion.getVersion(), newVersion) > 1) {
+			List<DLFileVersion> approvedFileVersions =
+				dlFileVersionPersistence.findByG_F_N_S(
+					fileEntry.getGroupId(), fileEntry.getFolderId(),
+					fileEntry.getName(), StatusConstants.APPROVED);
 
-				List<DLFileVersion> approvedFileVersions =
-					dlFileVersionPersistence.findByG_F_N_S(
-						fileEntry.getGroupId(), fileEntry.getFolderId(),
-						fileEntry.getName(), StatusConstants.APPROVED);
-
-				if (!approvedFileVersions.isEmpty()) {
-					newVersion = approvedFileVersions.get(0).getVersion();
-				}
+			if (!approvedFileVersions.isEmpty()) {
+				newVersion = approvedFileVersions.get(0).getVersion();
 			}
 
 			fileEntry.setVersion(newVersion);
@@ -1117,8 +1083,7 @@ public class DLFileEntryLocalServiceImpl
 		// Asset
 
 		if (fileVersion.isApproved() &&
-			(DLUtil.compareVersions(
-				fileEntry.getVersion(), fileVersion.getVersion()) == 0)) {
+			fileEntry.getVersion().equals(fileVersion.getVersion())) {
 
 			assetEntryLocalService.updateVisible(
 				DLFileEntry.class.getName(), fileEntry.getFileEntryId(),
@@ -1132,10 +1097,7 @@ public class DLFileEntryLocalServiceImpl
 
 		// Social
 
-		if (fileVersion.isApproved() &&
-			(DLUtil.compareVersions(
-				fileEntry.getVersion(), fileVersion.getVersion()) == 0)) {
-
+		if (fileVersion.isApproved()) {
 			if (fileVersion.getVersion().equals(
 					DLFileEntryConstants.DEFAULT_VERSION)) {
 
@@ -1158,13 +1120,12 @@ public class DLFileEntryLocalServiceImpl
 
 		Indexer indexer = IndexerRegistryUtil.getIndexer(DLFileEntry.class);
 
-		if (fileVersion.isApproved() &&
-			(DLUtil.compareVersions(
-				fileEntry.getVersion(), fileVersion.getVersion()) == 0)) {
-
+		if (fileVersion.isApproved()) {
 			indexer.reindex(fileEntry);
 		}
-		else if (Validator.isNull(fileEntry.getVersion())) {
+		else if (fileVersion.getVersion().equals(
+					DLFileEntryConstants.DEFAULT_VERSION)) {
+
 			indexer.delete(fileEntry);
 		}
 
