@@ -926,6 +926,10 @@ public class DLFileEntryLocalServiceImpl
 				dlFileVersionLocalService.getLatestFileVersion(
 					groupId, folderId, name);
 
+			if (size == 0) {
+				size = fileVersion.getSize();
+			}
+
 			if (fileVersion.getStatus() == StatusConstants.DRAFT) {
 				updateFileVersion(
 					user, fileVersion, serviceContext.getModifiedDate(now),
