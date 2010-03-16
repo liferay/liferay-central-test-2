@@ -751,6 +751,13 @@ public class GroupFinderImpl
 							qPos.add(valueLong);
 						}
 					}
+					else if (value instanceof Integer) {
+						Integer valueInteger = (Integer)value;
+
+						if (Validator.isNotNull(valueInteger)) {
+							qPos.add(valueInteger);
+						}
+					}
 					else if (value instanceof String) {
 						String valueString = (String)value;
 
