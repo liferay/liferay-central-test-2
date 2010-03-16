@@ -329,11 +329,13 @@ public class PollsQuestionLocalServiceImpl
 			throw new QuestionChoiceException();
 		}
 
-		for (PollsChoice choice : choices) {
-			String choiceDescription = choice.getDescription(locale);
+		if (choices != null) {
+			for (PollsChoice choice : choices) {
+				String choiceDescription = choice.getDescription(locale);
 
-			if (Validator.isNull(choiceDescription)) {
-				throw new QuestionChoiceException();
+				if (Validator.isNull(choiceDescription)) {
+					throw new QuestionChoiceException();
+				}
 			}
 		}
 	}
