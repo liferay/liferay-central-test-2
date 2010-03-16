@@ -28,7 +28,7 @@ long companyId = BeanParamUtil.getLong(company2, request, "companyId");
 	<portlet:param name="struts_action" value="/admin/edit_instance" />
 </portlet:actionURL>
 
-<aui:form method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "saveCompany(); return false;" %>'>
+<aui:form action="<%= editInstanceURL %>" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "saveCompany(); return false;" %>'>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 	<aui:input name="companyId" type="hidden" value="<%= companyId %>" />
