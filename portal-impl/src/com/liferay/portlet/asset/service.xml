@@ -179,6 +179,59 @@
 		<reference package-path="com.liferay.portlet.wiki" entity="WikiPage" />
 		<reference package-path="com.liferay.portlet.wiki" entity="WikiPageResource" />
 	</entity>
+	<entity name="AssetLink" local-service="true" remote-service="false">
+
+		<!-- PK fields -->
+
+		<column name="linkId" type="long" primary="true" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="entryId1" type="long" />
+		<column name="entryId2" type="long" />
+		<column name="typeId" type="int" />
+		<column name="weight" type="int" />
+
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="weight" />
+		</order>
+
+		<!-- Finder methods -->
+
+		<finder name="E1" return-type="Collection">
+			<finder-column name="entryId1" />
+		</finder>
+
+		<finder name="E2" return-type="Collection">
+			<finder-column name="entryId2" />
+		</finder>
+		<finder name="E_E" return-type="Collection">
+			<finder-column name="entryId1" />
+			<finder-column name="entryId2" />
+		</finder>
+		<finder name="E1_T" return-type="Collection">
+			<finder-column name="entryId1" />
+			<finder-column name="typeId" />
+		</finder>
+		<finder name="E2_T" return-type="Collection">
+			<finder-column name="entryId2" />
+			<finder-column name="typeId" />
+		</finder>
+		<finder name="E_E_T" return-type="Collection">
+			<finder-column name="entryId1" />
+			<finder-column name="entryId2" />
+			<finder-column name="typeId" />
+		</finder>
+	</entity>
 	<entity name="AssetTag" local-service="true" remote-service="true">
 
 		<!-- PK fields -->
@@ -352,6 +405,7 @@
 	</entity>
 	<exceptions>
 		<exception>AssetCategory</exception>
+		<exception>AssetLink</exception>
 		<exception>AssetTag</exception>
 		<exception>DuplicateCategory</exception>
 		<exception>DuplicateTag</exception>

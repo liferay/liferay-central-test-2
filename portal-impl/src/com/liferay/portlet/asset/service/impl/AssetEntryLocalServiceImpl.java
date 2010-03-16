@@ -45,6 +45,8 @@ import com.liferay.portlet.asset.NoSuchTagException;
 import com.liferay.portlet.asset.model.AssetCategory;
 import com.liferay.portlet.asset.model.AssetEntry;
 import com.liferay.portlet.asset.model.AssetEntryDisplay;
+import com.liferay.portlet.asset.model.AssetLink;
+import com.liferay.portlet.asset.model.AssetLinkConstants;
 import com.liferay.portlet.asset.model.AssetRendererFactory;
 import com.liferay.portlet.asset.model.AssetTag;
 import com.liferay.portlet.asset.service.base.AssetEntryLocalServiceBaseImpl;
@@ -72,7 +74,11 @@ import java.util.List;
  */
 public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 
-	public void deleteEntry(AssetEntry entry) throws SystemException {
+	public void deleteEntry(AssetEntry entry)
+		throws PortalException, SystemException {
+
+		assetLinkLocalService.deleteLinks(entry.getEntryId());
+
 		assetEntryPersistence.remove(entry);
 	}
 
@@ -85,7 +91,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 	}
 
 	public void deleteEntry(String className, long classPK)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
@@ -95,6 +101,39 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 		if (entry != null) {
 			deleteEntry(entry);
 		}
+	}
+
+	public List<AssetEntry> getAncestorEntries(long entryId)
+		throws PortalException, SystemException {
+
+		List<AssetEntry> ancestorEntries = new ArrayList<AssetEntry>();
+
+		AssetEntry parentEntry = getParentEntry(entryId);
+
+		while (parentEntry != null) {
+			ancestorEntries.add(parentEntry);
+
+			parentEntry = getParentEntry(parentEntry.getEntryId());
+		}
+
+		return ancestorEntries;
+	}
+
+	public List<AssetEntry> getChildEntries(long entryId)
+		throws PortalException, SystemException {
+
+		List<AssetLink> links = assetLinkLocalService.getLinks(
+			entryId, AssetLinkConstants.TYPE_CHILD);
+
+		List<AssetEntry> childEntries = new ArrayList<AssetEntry>();
+
+		for (AssetLink link : links) {
+			AssetEntry curAsset = getEntry(link.getEntryId2());
+
+			childEntries.add(curAsset);
+		}
+
+		return childEntries;
 	}
 
 	public List<AssetEntry> getCompanyEntries(
@@ -140,6 +179,89 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 		long classNameId = PortalUtil.getClassNameId(className);
 
 		return assetEntryPersistence.findByC_C(classNameId, classPK);
+	}
+
+	public AssetEntry getNextEntry(long entryId)
+		throws PortalException, SystemException {
+
+		AssetEntry parentEntry = getParentEntry(entryId);
+
+		if (parentEntry == null) {
+			List<AssetEntry> childEntries = getChildEntries(entryId);
+
+			if (!childEntries.isEmpty()) {
+				return childEntries.get(0);
+			}
+			else {
+				return null;
+			}
+		}
+
+		List<AssetLink> links = assetLinkLocalService.getLinks(
+			parentEntry.getEntryId(), AssetLinkConstants.TYPE_CHILD);
+
+		for (int i = 0; i < links.size(); i++) {
+			AssetLink link = links.get(i);
+
+			if (link.getEntryId2() == entryId) {
+				if ((i + 1) < links.size()) {
+					AssetLink nextAssetLink = links.get(i + 1);
+
+					return getEntry(nextAssetLink.getEntryId2());
+				}
+				else {
+					return null;
+				}
+			}
+		}
+
+		return null;
+	}
+
+	public AssetEntry getParentEntry(long entryId)
+		throws PortalException, SystemException {
+
+		List<AssetLink> parentLinks =
+			assetLinkLocalService.getReverseLinks(
+				entryId, AssetLinkConstants.TYPE_CHILD);
+
+		if (parentLinks.isEmpty()) {
+			return null;
+		}
+
+		AssetLink parentLink = parentLinks.get(0);
+
+		 return getEntry(parentLink.getEntryId1());
+	}
+
+	public AssetEntry getPrevious(long entryId)
+		throws PortalException, SystemException {
+
+		AssetEntry parentEntry = getParentEntry(entryId);
+
+		if (parentEntry == null) {
+			return null;
+		}
+
+		List<AssetLink> links = assetLinkLocalService.getLinks(
+			parentEntry.getEntryId(), AssetLinkConstants.TYPE_CHILD);
+
+		for (int i = 0; i < links.size(); i++) {
+			AssetLink link = links.get(i);
+
+			if (link.getEntryId2() == entryId) {
+				if (i > 0) {
+					AssetLink nextAssetLink = links.get(i - 1);
+
+					return getEntry(nextAssetLink.getEntryId2());
+				}
+				else {
+					return null;
+				}
+			}
+		}
+
+		return null;
 	}
 
 	public List<AssetEntry> getTopViewedEntries(
