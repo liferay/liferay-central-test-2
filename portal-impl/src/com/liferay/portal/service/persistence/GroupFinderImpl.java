@@ -744,18 +744,18 @@ public class GroupFinderImpl
 				else {
 					Object value = entry.getValue();
 
-					if (value instanceof Long) {
-						Long valueLong = (Long)value;
-
-						if (Validator.isNotNull(valueLong)) {
-							qPos.add(valueLong);
-						}
-					}
-					else if (value instanceof Integer) {
+					if (value instanceof Integer) {
 						Integer valueInteger = (Integer)value;
 
 						if (Validator.isNotNull(valueInteger)) {
 							qPos.add(valueInteger);
+						}
+					}
+					else if (value instanceof Long) {
+						Long valueLong = (Long)value;
+
+						if (Validator.isNotNull(valueLong)) {
+							qPos.add(valueLong);
 						}
 					}
 					else if (value instanceof String) {
