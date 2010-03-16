@@ -83,6 +83,8 @@ public class UpdateReminderQueryAction extends Action {
 			HttpServletRequest request, HttpServletResponse response)
 		throws Exception {
 
+		AuthTokenUtil.check(request);
+
 		long userId = PortalUtil.getUserId(request);
 		String question = ParamUtil.getString(request, "reminderQueryQuestion");
 		String answer = ParamUtil.getString(request, "reminderQueryAnswer");
@@ -91,8 +93,6 @@ public class UpdateReminderQueryAction extends Action {
 			question = ParamUtil.getString(
 				request, "reminderQueryCustomQuestion");
 		}
-
-		AuthTokenUtil.check(request);
 
 		UserServiceUtil.updateReminderQuery(userId, question, answer);
 	}

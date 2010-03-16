@@ -84,14 +84,14 @@ public class UpdatePasswordAction extends Action {
 			HttpServletRequest request, HttpServletResponse response)
 		throws Exception {
 
+		AuthTokenUtil.check(request);
+
 		HttpSession session = request.getSession();
 
 		long userId = PortalUtil.getUserId(request);
 		String password1 = ParamUtil.getString(request, "password1");
 		String password2 = ParamUtil.getString(request, "password2");
 		boolean passwordReset = false;
-
-		AuthTokenUtil.check(request);
 
 		UserServiceUtil.updatePassword(
 			userId, password1, password2, passwordReset);
