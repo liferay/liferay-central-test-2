@@ -193,6 +193,9 @@ public class EditLDAPServerAction extends PortletAction {
 		PropsKeys.LDAP_SERVER_NAME,
 		PropsKeys.LDAP_USER_DEFAULT_OBJECT_CLASSES,
 		PropsKeys.LDAP_USER_MAPPINGS,
+		PropsKeys.LDAP_USER_CUSTOM_MAPPINGS,
+		PropsKeys.LDAP_CONTACT_MAPPINGS,
+		PropsKeys.LDAP_CONTACT_CUSTOM_MAPPINGS,
 		PropsKeys.LDAP_USERS_DN
 	};
 

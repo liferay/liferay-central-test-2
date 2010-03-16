@@ -204,6 +204,12 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 
 		<aui:input name='<%= "settings(" + PropsKeys.LDAP_USER_MAPPINGS + postfix + ")" %>' type="hidden" />
 
+		<aui:input name='<%= "settings(" + PropsKeys.LDAP_USER_CUSTOM_MAPPINGS + postfix + ")" %>' type="hidden" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.LDAP_USER_CUSTOM_MAPPINGS + postfix, PropsUtil.get(PropsKeys.LDAP_USER_CUSTOM_MAPPINGS))%>" />
+
+		<aui:input name='<%= "settings(" + PropsKeys.LDAP_CONTACT_MAPPINGS + postfix + ")" %>' type="hidden" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.LDAP_CONTACT_MAPPINGS + postfix, PropsUtil.get(PropsKeys.LDAP_CONTACT_MAPPINGS))%>" />
+
+		<aui:input name='<%= "settings(" + PropsKeys.LDAP_CONTACT_CUSTOM_MAPPINGS + postfix + ")" %>' type="hidden" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.LDAP_CONTACT_CUSTOM_MAPPINGS + postfix, PropsUtil.get(PropsKeys.LDAP_CONTACT_CUSTOM_MAPPINGS))%>" />
+		
 		<aui:button-row>
 			<%
 			String taglibOnClick = renderResponse.getNamespace() + "testSettings('ldapUsers');";
