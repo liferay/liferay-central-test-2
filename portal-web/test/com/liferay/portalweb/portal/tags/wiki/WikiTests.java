@@ -12,32 +12,29 @@
  * details.
  */
 
-package com.liferay.portalweb.portal;
+package com.liferay.portalweb.portal.tags.wiki;
 
-import com.liferay.portalweb.portal.login.LoginTests;
-import com.liferay.portalweb.portal.tags.blogs.BlogsTests;
-import com.liferay.portalweb.portal.tags.tagsadmin.TagsAdminTests;
-import com.liferay.portalweb.portal.tags.wiki.WikiTests;
+import com.liferay.portalweb.portal.BaseTests;
+import com.liferay.portalweb.portal.tags.wiki.addfrontpagetag.AddFrontPageTagTests;
+import com.liferay.portalweb.portal.tags.wiki.addwikipagetag.AddWikiPageTagTests;
+import com.liferay.portalweb.portal.tags.wiki.addwikipagetagmultiple.AddWikiPageTagMultipleTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * <a href="TagsTestSuite.java.html"><b><i>View Source</i></b></a>
+ * <a href="WikiTests.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class TagsTestSuite extends BaseTests {
+public class WikiTests extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(LoginTests.suite());
-		testSuite.addTest(BlogsTests.suite());
-		testSuite.addTest(TagsAdminTests.suite());
-		testSuite.addTest(WikiTests.suite());
-
-		testSuite.addTestSuite(StopSeleniumTest.class);
+		testSuite.addTest(AddFrontPageTagTests.suite());
+		testSuite.addTest(AddWikiPageTagTests.suite());
+		testSuite.addTest(AddWikiPageTagMultipleTests.suite());
 
 		return testSuite;
 	}

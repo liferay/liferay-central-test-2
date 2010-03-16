@@ -12,32 +12,31 @@
  * details.
  */
 
-package com.liferay.portalweb.portal;
+package com.liferay.portalweb.portal.tags.wiki.addfrontpagetag;
 
-import com.liferay.portalweb.portal.login.LoginTests;
-import com.liferay.portalweb.portal.tags.blogs.BlogsTests;
-import com.liferay.portalweb.portal.tags.tagsadmin.TagsAdminTests;
-import com.liferay.portalweb.portal.tags.wiki.WikiTests;
+import com.liferay.portalweb.portal.BaseTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * <a href="TagsTestSuite.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddFrontPageTagTests.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class TagsTestSuite extends BaseTests {
+public class AddFrontPageTagTests extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(LoginTests.suite());
-		testSuite.addTest(BlogsTests.suite());
-		testSuite.addTest(TagsAdminTests.suite());
-		testSuite.addTest(WikiTests.suite());
-
-		testSuite.addTestSuite(StopSeleniumTest.class);
+		testSuite.addTestSuite(AddPageWikiTest.class);
+		testSuite.addTestSuite(AddPortletWikiTest.class);
+		testSuite.addTestSuite(AddFrontPageTest.class);
+		testSuite.addTestSuite(AddFrontPageTagTest.class);
+		testSuite.addTestSuite(ViewFrontPageTagTest.class);
+		testSuite.addTestSuite(TearDownTagTest.class);
+		testSuite.addTestSuite(TearDownWikiNodeTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}
