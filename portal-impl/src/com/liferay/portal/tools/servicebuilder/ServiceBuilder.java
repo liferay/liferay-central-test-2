@@ -405,7 +405,7 @@ public class ServiceBuilder {
 		boolean autoNamespaceTables, String beanLocatorUtil, String propsUtil,
 		String pluginName, String testDir) {
 
-		new ServiceBuilder(
+		this(
 			fileName, hbmFileName, ormFileName, modelHintsFileName,
 			springFileName, springBaseFileName, springDynamicDataSourceFileName,
 			springHibernateFileName, springInfrastructureFileName,
