@@ -16,6 +16,7 @@ package com.liferay.portal.action;
 
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.UserPasswordException;
+import com.liferay.portal.kernel.security.auth.AuthTokenUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -89,6 +90,8 @@ public class UpdatePasswordAction extends Action {
 		String password1 = ParamUtil.getString(request, "password1");
 		String password2 = ParamUtil.getString(request, "password2");
 		boolean passwordReset = false;
+
+		AuthTokenUtil.check(request);
 
 		UserServiceUtil.updatePassword(
 			userId, password1, password2, passwordReset);

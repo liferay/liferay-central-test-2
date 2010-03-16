@@ -137,6 +137,13 @@ public class PropsValues {
 	public static final String[] AUTH_PIPELINE_PRE =
 		PropsUtil.getArray(PropsKeys.AUTH_PIPELINE_PRE);
 
+	public static final boolean AUTH_TOKEN_DEFAULT_CHECK_PORTLET_ACTION =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsKeys.AUTH_TOKEN_DEFAULT_CHECK_PORTLET_ACTION));
+
+	public static final String AUTH_TOKEN_IMPL = PropsUtil.get(
+		PropsKeys.AUTH_TOKEN_IMPL);
+
 	public static final int AUTO_DEPLOY_BLACKLIST_THRESHOLD =
 		GetterUtil.getInteger(
 			PropsUtil.get(PropsKeys.AUTO_DEPLOY_BLACKLIST_THRESHOLD));

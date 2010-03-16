@@ -129,6 +129,11 @@
 			<bean class="com.liferay.portal.search.IndexerRegistryImpl" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.kernel.security.auth.AuthTokenUtil" class="com.liferay.portal.kernel.security.auth.AuthTokenUtil">
+		<property name="authToken">
+			<bean class="com.liferay.portal.security.auth.AuthTokenImpl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.kernel.servlet.BrowserSnifferUtil" class="com.liferay.portal.kernel.servlet.BrowserSnifferUtil">
 		<property name="browserSniffer">
 			<bean class="com.liferay.portal.servlet.BrowserSnifferImpl" />
