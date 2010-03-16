@@ -31,6 +31,7 @@ import com.liferay.portalweb.portlet.calendar.event.addeventtitlenull.AddEventTi
 import com.liferay.portalweb.portlet.calendar.event.addeventtypeappointment.AddEventTypeAppointmentTests;
 import com.liferay.portalweb.portlet.calendar.event.addeventtypeconcert.AddEventTypeConcertTests;
 import com.liferay.portalweb.portlet.calendar.event.addeventtypevacation.AddEventTypeVacationTests;
+import com.liferay.portalweb.portlet.calendar.event.asserteventselectfieldenabled.AssertEventSelectFieldEnabledTests;
 import com.liferay.portalweb.portlet.calendar.event.deleteevent.DeleteEventTests;
 import com.liferay.portalweb.portlet.calendar.event.editevent.EditEventTests;
 import com.liferay.portalweb.portlet.calendar.event.vieweventtypeappointment.ViewEventTypeAppointmentTests;
@@ -66,6 +67,7 @@ public class EventTests extends BaseTests {
 		testSuite.addTest(AddEventTypeAppointmentTests.suite());
 		testSuite.addTest(AddEventTypeConcertTests.suite());
 		testSuite.addTest(AddEventTypeVacationTests.suite());
+		testSuite.addTest(AssertEventSelectFieldEnabledTests.suite());
 		testSuite.addTest(DeleteEventTests.suite());
 		testSuite.addTest(EditEventTests.suite());
 		testSuite.addTest(ViewEventTypeAppointmentTests.suite());
