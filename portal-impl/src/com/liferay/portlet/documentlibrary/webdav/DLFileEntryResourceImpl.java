@@ -15,12 +15,16 @@
 package com.liferay.portlet.documentlibrary.webdav;
 
 import com.liferay.portal.kernel.util.MimeTypesUtil;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.webdav.BaseResourceImpl;
 import com.liferay.portal.webdav.WebDAVException;
 import com.liferay.portal.webdav.WebDAVRequest;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
+import com.liferay.portlet.documentlibrary.model.DLFileVersion;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLFileVersionLocalServiceUtil;
 
 import java.io.InputStream;
 
@@ -69,10 +73,21 @@ public class DLFileEntryResourceImpl extends BaseResourceImpl {
 
 	public InputStream getContentAsStream() throws WebDAVException {
 		try {
+			String version = StringPool.BLANK;
+
+			if (!PropsValues.DL_WEBDAV_AUTO_UNLOCK) {
+				DLFileVersion fileVersion =
+					DLFileVersionLocalServiceUtil.getLatestFileVersion(
+						_fileEntry.getGroupId(), _fileEntry.getFolderId(),
+						_fileEntry.getName());
+
+				version = fileVersion.getVersion();
+			}
+
 			return DLFileEntryLocalServiceUtil.getFileAsStream(
 				_webDavRequest.getCompanyId(), _webDavRequest.getUserId(),
 				_fileEntry.getGroupId(), _fileEntry.getFolderId(),
-				_fileEntry.getName());
+				_fileEntry.getName(), version);
 		}
 		catch (Exception e) {
 			throw new WebDAVException(e);
