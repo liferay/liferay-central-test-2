@@ -148,6 +148,11 @@ List<WorkflowDefinition> workflowDefinitions = WorkflowDefinitionManagerUtil.get
 					value="<%= String.valueOf(workflowDefinition.getVersion()) %>"
 				/>
 
+				<liferay-ui:search-container-column-text
+					name="active"
+					value='<%= workflowDefinition.isActive() ? LanguageUtil.get(locale, "yes") : LanguageUtil.get(locale, "no")  %>'
+				/>
+
 				<liferay-ui:search-container-column-jsp
 					align="right"
 					path="/html/portlet/workflow_admin/workflow_definition_action.jsp"

@@ -44,6 +44,14 @@ public class DefaultWorkflowDefinition
 		return _version;
 	}
 
+	public boolean isActive() {
+		return _active;
+	}
+
+	public void setActive(boolean active) {
+		_active = active;
+	}
+
 	public void setInputStream(InputStream inputStream) {
 		_inputStream = inputStream;
 	}
@@ -60,6 +68,7 @@ public class DefaultWorkflowDefinition
 		_version = version;
 	}
 
+	private boolean _active;
 	private InputStream _inputStream;
 	private String _name;
 	private Map<String, Object> _optionalAttributes;
