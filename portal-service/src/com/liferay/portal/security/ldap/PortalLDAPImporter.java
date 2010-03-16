@@ -20,7 +20,7 @@ import javax.naming.directory.Attributes;
 import javax.naming.ldap.LdapContext;
 
 /**
- * <a href="PortalLDAPImporter.java.html}"><b><i>View Source</i></b></a>
+ * <a href="PortalLDAPImporter.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael C. Han
  */
