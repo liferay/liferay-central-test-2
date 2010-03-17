@@ -273,7 +273,7 @@
 	</category>
 
 	<category name="com.liferay.portal.model.ModelHintsImpl">
-		<priority value="DEBUG" />
+		<priority value="ERROR" />
 	</category>
 
 	<category name="com.liferay.portal.plugin.PluginPackageUtil">
