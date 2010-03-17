@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 
 	import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 	import com.liferay.portal.kernel.exception.PortalException;
+	import com.liferay.portal.kernel.util.OrderByComparator;
 
 	import java.util.List;
 </#if>
@@ -76,6 +77,14 @@ import com.liferay.portal.kernel.exception.SystemException;
 
 	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start, int end) throws SystemException {
 		return ${entity.varName}Persistence.findWithDynamicQuery(dynamicQuery, start, end);
+	}
+
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start, int end, OrderByComparator orderByComparator) throws SystemException {
+		return ${entity.varName}Persistence.findWithDynamicQuery(dynamicQuery, start, end, orderByComparator);
+	}
+
+	public int dynamicQueryCount(DynamicQuery dynamicQuery) throws SystemException {
+		return ${entity.varName}Persistence.countWithDynamicQuery(dynamicQuery);
 	}
 
 	public ${entity.name} get${entity.name}(${entity.PKClassName} ${entity.PKVarName}) ${serviceBuilder.getServiceBaseThrowsExceptions(methods, "get" + entity.name, [entity.PKClassName], ["PortalException", "SystemException"])} {

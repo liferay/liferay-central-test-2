@@ -25,7 +25,6 @@ import com.liferay.portal.kernel.dao.jdbc.MappingSqlQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.jdbc.RowMapper;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
-import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
@@ -735,7 +734,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 				${finderCol.type} ${finderCol.name},
 			</#list>
 
-			int start, int end, OrderByComparator obc) throws SystemException {
+			int start, int end, OrderByComparator orderByComparator) throws SystemException {
 				Object[] finderArgs = new Object[] {
 					<#list finderColsList as finderCol>
 						<#if finderCol.isPrimitiveType()>
@@ -755,7 +754,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 						,
 					</#list>
 
-					String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+					String.valueOf(start), String.valueOf(end), String.valueOf(orderByComparator)
 				};
 
 				List<${entity.name}> list = (List<${entity.name}>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_${finder.name?upper_case}, finderArgs, this);
@@ -768,8 +767,8 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 						StringBundler query = null;
 
-						if (obc != null) {
-							query = new StringBundler(${finderColsList?size + 2} + (obc.getOrderByFields().length * 3));
+						if (orderByComparator != null) {
+							query = new StringBundler(${finderColsList?size + 2} + (orderByComparator.getOrderByFields().length * 3));
 						}
 						else {
 							query = new StringBundler(<#if entity.getOrder()??>${finderColsList?size + 2}<#else>${finderColsList?size + 1}</#if>);
@@ -779,8 +778,8 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 						<#include "persistence_impl_finder_col.ftl">
 
-						if (obc != null) {
-							appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+						if (orderByComparator != null) {
+							appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 						}
 
 						<#if entity.getOrder()??>
@@ -846,14 +845,14 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 				${finderCol.type} ${finderCol.name},
 			</#list>
 
-			OrderByComparator obc) throws ${noSuchEntity}Exception, SystemException {
+			OrderByComparator orderByComparator) throws ${noSuchEntity}Exception, SystemException {
 				List<${entity.name}> list = findBy${finder.name}(
 
 				<#list finderColsList as finderCol>
 					${finderCol.name},
 				</#list>
 
-				0, 1, obc);
+				0, 1, orderByComparator);
 
 				if (list.isEmpty()) {
 					StringBundler msg = new StringBundler(${(finderColsList?size * 2) + 2});
@@ -882,7 +881,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 				${finderCol.type} ${finderCol.name},
 			</#list>
 
-			OrderByComparator obc) throws ${noSuchEntity}Exception, SystemException {
+			OrderByComparator orderByComparator) throws ${noSuchEntity}Exception, SystemException {
 				int count = countBy${finder.name}(
 
 				<#list finderColsList as finderCol>
@@ -901,7 +900,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 					${finderCol.name},
 				</#list>
 
-				count - 1, count, obc);
+				count - 1, count, orderByComparator);
 
 				if (list.isEmpty()) {
 					StringBundler msg = new StringBundler(${(finderColsList?size * 2) + 2});
@@ -930,7 +929,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 				${finderCol.type} ${finderCol.name},
 			</#list>
 
-			OrderByComparator obc) throws ${noSuchEntity}Exception, SystemException {
+			OrderByComparator orderByComparator) throws ${noSuchEntity}Exception, SystemException {
 				${entity.name} ${entity.varName} = findByPrimaryKey(${entity.PKVarName});
 
 				int count = countBy${finder.name}(
@@ -952,8 +951,8 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 					StringBundler query = null;
 
-					if (obc != null) {
-						query = new StringBundler(${finderColsList?size + 2} + (obc.getOrderByFields().length * 3));
+					if (orderByComparator != null) {
+						query = new StringBundler(${finderColsList?size + 2} + (orderByComparator.getOrderByFields().length * 3));
 					}
 					else {
 						query = new StringBundler(<#if entity.getOrder()??>${finderColsList?size + 2}<#else>${finderColsList?size + 1}</#if>);
@@ -963,8 +962,8 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 					<#include "persistence_impl_finder_col.ftl">
 
-					if (obc != null) {
-						appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+					if (orderByComparator != null) {
+						appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 					}
 
 					<#if entity.getOrder()??>
@@ -1004,7 +1003,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 					</#list>
 
-					Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, ${entity.varName});
+					Object[] objArray = QueryUtil.getPrevAndNext(q, count, orderByComparator, ${entity.varName});
 
 					${entity.name}[] array = new ${entity.name}Impl[3];
 
@@ -1231,44 +1230,6 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 		</#if>
 	</#list>
 
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery, int start, int end) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.setLimit(start, end);
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
 	public List<${entity.name}> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -1277,8 +1238,8 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 		return findAll(start, end, null);
 	}
 
-	public List<${entity.name}> findAll(int start, int end, OrderByComparator obc) throws SystemException {
-		Object[] finderArgs = new Object[] {String.valueOf(start), String.valueOf(end), String.valueOf(obc)};
+	public List<${entity.name}> findAll(int start, int end, OrderByComparator orderByComparator) throws SystemException {
+		Object[] finderArgs = new Object[] {String.valueOf(start), String.valueOf(end), String.valueOf(orderByComparator)};
 
 		List<${entity.name}> list = (List<${entity.name}>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL, finderArgs, this);
 
@@ -1291,12 +1252,12 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 				StringBundler query = null;
 				String sql = null;
 
-				if (obc != null) {
-					query = new StringBundler(2 + (obc.getOrderByFields().length * 3));
+				if (orderByComparator != null) {
+					query = new StringBundler(2 + (orderByComparator.getOrderByFields().length * 3));
 
 					query.append(_SQL_SELECT_${entity.alias?upper_case});
 
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 
 					sql = query.toString();
 				}
@@ -1311,7 +1272,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 				Query q = session.createQuery(sql);
 
-				if (obc == null) {
+				if (orderByComparator == null) {
 					list = (List<${entity.name}>)QueryUtil.list(q, getDialect(), start, end, false);
 
 					Collections.sort(list);
@@ -1569,7 +1530,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 					.class.getName(), "java.lang.Integer", "java.lang.Integer", "com.liferay.portal.kernel.util.OrderByComparator"
 				});
 
-			public List<${tempEntity.packagePath}.model.${tempEntity.name}> get${tempEntity.names}(${entity.PKClassName} pk, int start, int end, OrderByComparator obc) throws SystemException {
+			public List<${tempEntity.packagePath}.model.${tempEntity.name}> get${tempEntity.names}(${entity.PKClassName} pk, int start, int end, OrderByComparator orderByComparator) throws SystemException {
 				Object[] finderArgs = new Object[] {
 					<#if entity.hasPrimitivePK()>
 						<#if entity.PKClassName == "boolean">
@@ -1585,7 +1546,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 						)
 					</#if>
 
-					, String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+					, String.valueOf(start), String.valueOf(end), String.valueOf(orderByComparator)
 				};
 
 				List<${tempEntity.packagePath}.model.${tempEntity.name}> list = (List<${tempEntity.packagePath}.model.${tempEntity.name}>)FinderCacheUtil.getResult(FINDER_PATH_GET_${tempEntity.names?upper_case}, finderArgs, this);
@@ -1598,8 +1559,8 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 						String sql = null;
 
-						if (obc != null) {
-							sql = _SQL_GET${tempEntity.names?upper_case}.concat(ORDER_BY_CLAUSE).concat(obc.getOrderBy());
+						if (orderByComparator != null) {
+							sql = _SQL_GET${tempEntity.names?upper_case}.concat(ORDER_BY_CLAUSE).concat(orderByComparator.getOrderBy());
 						}
 
 						<#if tempEntity.getOrder()??>

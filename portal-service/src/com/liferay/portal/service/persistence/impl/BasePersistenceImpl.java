@@ -18,6 +18,8 @@ import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.kernel.dao.orm.Dialect;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.ORMException;
+import com.liferay.portal.kernel.dao.orm.OrderFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.SessionFactory;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -55,6 +57,26 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 		_sessionFactory.closeSession(session);
 	}
 
+	public int countWithDynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.rowCount());
+
+		List<Object> results = findWithDynamicQuery(dynamicQuery);
+
+		if (results.isEmpty()) {
+			return 0;
+		}
+		else {
+			return ((Integer)results.get(0));
+		}
+	}
+
+	@SuppressWarnings("unused")
+	public T fetchByPrimaryKey(Serializable primaryKey) throws SystemException {
+		throw new UnsupportedOperationException();
+	}
+
 	@SuppressWarnings("unused")
 	public T findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
@@ -62,24 +84,57 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 		throw new UnsupportedOperationException();
 	}
 
-	@SuppressWarnings("unused")
 	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 
-		throw new UnsupportedOperationException();
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			dynamicQuery.compile(session);
+
+			return dynamicQuery.list();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
 	}
 
-	@SuppressWarnings("unused")
 	public List<Object> findWithDynamicQuery(
 			DynamicQuery dynamicQuery, int start, int end)
 		throws SystemException {
 
-		throw new UnsupportedOperationException();
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			dynamicQuery.setLimit(start, end);
+
+			dynamicQuery.compile(session);
+
+			return dynamicQuery.list();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
 	}
 
-	@SuppressWarnings("unused")
-	public T fetchByPrimaryKey(Serializable primaryKey) throws SystemException {
-		throw new UnsupportedOperationException();
+	public List<Object> findWithDynamicQuery(
+			DynamicQuery dynamicQuery, int start, int end,
+			OrderByComparator orderByComparator)
+		throws SystemException {
+
+		OrderFactoryUtil.addOrderByComparator(dynamicQuery, orderByComparator);
+
+		return findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
 	public DataSource getDataSource() {
@@ -197,18 +252,19 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 	}
 
 	protected void appendOrderByComparator(
-		StringBundler query, String entityAlias, OrderByComparator obc) {
+		StringBundler query, String entityAlias,
+		OrderByComparator orderByComparator) {
 
 		query.append(ORDER_BY_CLAUSE);
 
-		String[] orderByFields = obc.getOrderByFields();
+		String[] orderByFields = orderByComparator.getOrderByFields();
 
 		for (int i = 0; i < orderByFields.length; i++) {
 			query.append(entityAlias);
 			query.append(orderByFields[i]);
 
 			if ((i + 1) < orderByFields.length) {
-				if (obc.isAscending()) {
+				if (orderByComparator.isAscending()) {
 					query.append(ORDER_BY_ASC_HAS_NEXT);
 				}
 				else {
@@ -216,7 +272,7 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 				}
 			}
 			else {
-				if (obc.isAscending()) {
+				if (orderByComparator.isAscending()) {
 					query.append(ORDER_BY_ASC);
 				}
 				else {
@@ -225,8 +281,6 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 			}
 		}
 	}
-
-	protected ModelListener<T>[] listeners = new ModelListener[0];
 
 	protected static final String ORDER_BY_ASC = " ASC";
 
@@ -237,6 +291,8 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 	protected static final String ORDER_BY_DESC = " DESC";
 
 	protected static final String ORDER_BY_DESC_HAS_NEXT = " DESC, ";
+
+	protected ModelListener<T>[] listeners = new ModelListener[0];
 
 	private static Log _log = LogFactoryUtil.getLog(BasePersistenceImpl.class);
 

@@ -17,6 +17,7 @@ package com.liferay.portal.service.persistence;
 import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.ModelListener;
 
@@ -33,6 +34,11 @@ public interface BasePersistence<T extends BaseModel<T>> {
 
 	public void clearCache();
 
+	public int countWithDynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException;
+
+	public T fetchByPrimaryKey(Serializable primaryKey) throws SystemException;
+
 	public T findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException;
 
@@ -43,7 +49,10 @@ public interface BasePersistence<T extends BaseModel<T>> {
 			DynamicQuery dynamicQuery, int start, int end)
 		throws SystemException;
 
-	public T fetchByPrimaryKey(Serializable primaryKey) throws SystemException;
+	public List<Object> findWithDynamicQuery(
+			DynamicQuery dynamicQuery, int start, int end,
+			OrderByComparator orderByComparator)
+		throws SystemException;
 
 	public ModelListener<T>[] getListeners();
 
