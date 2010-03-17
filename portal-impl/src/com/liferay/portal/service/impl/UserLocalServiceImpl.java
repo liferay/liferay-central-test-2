@@ -84,6 +84,7 @@ import com.liferay.portal.security.auth.AuthPipeline;
 import com.liferay.portal.security.auth.Authenticator;
 import com.liferay.portal.security.auth.EmailAddressGenerator;
 import com.liferay.portal.security.auth.EmailAddressGeneratorFactory;
+import com.liferay.portal.security.auth.FullNameGenerator;
 import com.liferay.portal.security.auth.FullNameGeneratorFactory;
 import com.liferay.portal.security.auth.FullNameValidator;
 import com.liferay.portal.security.auth.FullNameValidatorFactory;
@@ -2311,7 +2312,10 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		User defaultUser = getDefaultUser(companyId);
 
-		String fullName = FullNameGeneratorFactory.getInstance().getFullName(
+		FullNameGenerator fullNameGenerator =
+			FullNameGeneratorFactory.getInstance();
+
+		String fullName = fullNameGenerator.getFullName(
 			firstName, middleName, lastName);
 
 		String greeting = LanguageUtil.format(

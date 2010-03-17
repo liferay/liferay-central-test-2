@@ -14,8 +14,7 @@
 
 package com.liferay.portal.model;
 
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.security.auth.FullNameGeneratorFactory;
 
 /**
  * <a href="ContactConstants.java.html"><b><i>View Source</i></b></a>
@@ -29,22 +28,11 @@ public class ContactConstants {
 	public static String getFullName(
 		String firstName, String middleName, String lastName) {
 
-		StringBuilder sb = new StringBuilder();
+		FullNameGeneratorFactory fullNameGeneratorFactory =
+			FullNameGeneratorFactory.getInstance();
 
-		if (Validator.isNull(middleName)) {
-			sb.append(firstName);
-			sb.append(StringPool.SPACE);
-			sb.append(lastName);
-		}
-		else {
-			sb.append(firstName);
-			sb.append(StringPool.SPACE);
-			sb.append(middleName);
-			sb.append(StringPool.SPACE);
-			sb.append(lastName);
-		}
-
-		return sb.toString();
+		return fullNameGeneratorFactory.getFullName(
+			firstName, middleName, lastName);
 	}
 
 }

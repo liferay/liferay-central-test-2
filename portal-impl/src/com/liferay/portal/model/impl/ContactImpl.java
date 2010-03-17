@@ -15,6 +15,7 @@
 package com.liferay.portal.model.impl;
 
 import com.liferay.portal.model.Contact;
+import com.liferay.portal.security.auth.FullNameGenerator;
 import com.liferay.portal.security.auth.FullNameGeneratorFactory;
 
 /**
@@ -28,7 +29,10 @@ public class ContactImpl extends ContactModelImpl implements Contact {
 	}
 
 	public String getFullName() {
-		return FullNameGeneratorFactory.getInstance().getFullName(
+		FullNameGenerator fullNameGenerator =
+			FullNameGeneratorFactory.getInstance();
+
+		return fullNameGenerator.getFullName(
 			getFirstName(), getMiddleName(), getLastName());
 	}
 

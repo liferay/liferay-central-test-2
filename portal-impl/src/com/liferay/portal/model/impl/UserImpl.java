@@ -38,6 +38,7 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.security.auth.EmailAddressGenerator;
 import com.liferay.portal.security.auth.EmailAddressGeneratorFactory;
+import com.liferay.portal.security.auth.FullNameGenerator;
 import com.liferay.portal.security.auth.FullNameGeneratorFactory;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.ContactLocalServiceUtil;
@@ -138,7 +139,10 @@ public class UserImpl extends UserModelImpl implements User {
 	}
 
 	public String getFullName() {
-		return FullNameGeneratorFactory.getInstance().getFullName(
+		FullNameGenerator fullNameGenerator =
+			FullNameGeneratorFactory.getInstance();
+
+		return fullNameGenerator.getFullName(
 			getFirstName(), getMiddleName(), getLastName());
 	}
 

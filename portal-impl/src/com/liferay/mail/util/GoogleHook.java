@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.User;
+import com.liferay.portal.security.auth.FullNameGenerator;
 import com.liferay.portal.security.auth.FullNameGeneratorFactory;
 import com.liferay.portal.service.UserLocalServiceUtil;
 
@@ -49,10 +50,13 @@ public class GoogleHook implements Hook {
 
 			googleApps.addUser(userId, password, firstName, lastName);
 			googleApps.addNickname(userId, nickname);
+
+			FullNameGenerator fullNameGenerator =
+				FullNameGeneratorFactory.getInstance();
+
 			googleApps.addSendAs(
 				userId,
-				FullNameGeneratorFactory.getInstance().getFullName(
-					firstName, middleName, lastName),
+				fullNameGenerator.getFullName(firstName, middleName, lastName),
 				emailAddress);
 		}
 		catch (Exception e) {

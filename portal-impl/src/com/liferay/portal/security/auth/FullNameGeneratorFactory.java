@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
@@ -10,15 +10,6 @@
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
- *
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
  */
 
 package com.liferay.portal.security.auth;
@@ -26,7 +17,6 @@ package com.liferay.portal.security.auth;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
-
 import com.liferay.portal.util.PropsValues;
 
 /**
@@ -35,6 +25,7 @@ import com.liferay.portal.util.PropsValues;
  * @author Michael C. Han
  */
 public class FullNameGeneratorFactory {
+
 	public static FullNameGenerator getInstance() {
 		if (_fullNameGenerator == null) {
 			if (_log.isDebugEnabled()) {
@@ -71,6 +62,6 @@ public class FullNameGeneratorFactory {
 	private static Log _log = LogFactoryUtil.getLog(
 		FullNameValidatorFactory.class);
 
-	private static FullNameGenerator _fullNameGenerator = null;
+	private static FullNameGenerator _fullNameGenerator;
 
 }

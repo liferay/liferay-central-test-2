@@ -66,6 +66,7 @@ theme.images.fast.load
 upgrade.processes
 users.email.address.generator
 users.email.address.required
+users.full.name.generator
 users.full.name.validator
 users.screen.name.always.autogenerate
 users.screen.name.generator

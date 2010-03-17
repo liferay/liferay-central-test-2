@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.User;
 import com.liferay.portal.search.BaseIndexer;
+import com.liferay.portal.security.auth.FullNameGenerator;
 import com.liferay.portal.security.auth.FullNameGeneratorFactory;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
@@ -72,7 +73,10 @@ public class UserIndexer extends BaseIndexer {
 		String middleName = document.get("middleName");
 		String lastName = document.get("lastName");
 
-		String title = FullNameGeneratorFactory.getInstance().getFullName(
+		FullNameGenerator fullNameGenerator =
+			FullNameGeneratorFactory.getInstance();
+
+		String title = fullNameGenerator.getFullName(
 			firstName, middleName, lastName);
 
 		String content = null;

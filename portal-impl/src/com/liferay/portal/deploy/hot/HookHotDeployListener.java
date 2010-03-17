@@ -1111,7 +1111,7 @@ public class HookHotDeployListener
 
 			FullNameGenerator fullNameGenerator =
 				(FullNameGenerator)newInstance(
-					portletClassLoader, FullNameValidator.class,
+					portletClassLoader, FullNameGenerator.class,
 					fullNameGeneratorClassName);
 
 			FullNameGeneratorFactory.setInstance(fullNameGenerator);
