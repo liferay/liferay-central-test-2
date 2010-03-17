@@ -22,6 +22,12 @@ themeDisplay.setIncludeServiceJs(true);
 String redirect = ParamUtil.getString(request, "redirect");
 String backURL = ParamUtil.getString(request, "backURL", redirect);
 
+if (Validator.equals(StringPool.BLANK, backURL)) {
+	PortletURL portletURL = new PortletURLImpl(request, PortletKeys.MY_ACCOUNT, plid, PortletRequest.RENDER_PHASE);
+
+	backURL = portletURL.toString();
+}
+
 User selUser = PortalUtil.getSelectedUser(request);
 
 Contact selContact = null;
