@@ -83,10 +83,12 @@ public class WikiNodeServiceWrapper implements WikiNodeService {
 	}
 
 	public com.liferay.portlet.wiki.model.WikiNode updateNode(long nodeId,
-		java.lang.String name, java.lang.String description)
+		java.lang.String name, java.lang.String description,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _wikiNodeService.updateNode(nodeId, name, description);
+		return _wikiNodeService.updateNode(nodeId, name, description,
+			serviceContext);
 	}
 
 	public WikiNodeService getWrappedWikiNodeService() {

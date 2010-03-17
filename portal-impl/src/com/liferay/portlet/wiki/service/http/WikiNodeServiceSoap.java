@@ -152,11 +152,12 @@ public class WikiNodeServiceSoap {
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiNodeSoap updateNode(
-		long nodeId, java.lang.String name, java.lang.String description)
+		long nodeId, java.lang.String name, java.lang.String description,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
 			com.liferay.portlet.wiki.model.WikiNode returnValue = WikiNodeServiceUtil.updateNode(nodeId,
-					name, description);
+					name, description, serviceContext);
 
 			return com.liferay.portlet.wiki.model.WikiNodeSoap.toSoapModel(returnValue);
 		}

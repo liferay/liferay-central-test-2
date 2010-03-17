@@ -174,7 +174,8 @@ public class EditNodeAction extends PortletAction {
 
 			String oldName = getNodeName(nodeId);
 
-			WikiNodeServiceUtil.updateNode(nodeId, name, description);
+			WikiNodeServiceUtil.updateNode(
+				nodeId, name, description, serviceContext);
 
 			updatePreferences(actionRequest, oldName, name);
 		}

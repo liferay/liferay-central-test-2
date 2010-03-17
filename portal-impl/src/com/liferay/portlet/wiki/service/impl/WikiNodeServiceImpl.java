@@ -104,14 +104,16 @@ public class WikiNodeServiceImpl extends WikiNodeServiceBaseImpl {
 		wikiNodeLocalService.unsubscribeNode(getUserId(), nodeId);
 	}
 
-	public WikiNode updateNode(long nodeId, String name, String description)
+	public WikiNode updateNode(
+			long nodeId, String name, String description,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		WikiNodePermission.check(
 			getPermissionChecker(), nodeId, ActionKeys.UPDATE);
 
 		return wikiNodeLocalService.updateNode(
-			nodeId, name, description, new ServiceContext());
+			nodeId, name, description, serviceContext);
 	}
 
 }
