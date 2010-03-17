@@ -70,10 +70,10 @@ public class AssetLinkPersistenceTest extends BasePersistenceTestCase {
 		newAssetLink.setCompanyId(nextLong());
 		newAssetLink.setUserId(nextLong());
 		newAssetLink.setUserName(randomString());
-		newAssetLink.setModifiedDate(nextDate());
+		newAssetLink.setCreateDate(nextDate());
 		newAssetLink.setEntryId1(nextLong());
 		newAssetLink.setEntryId2(nextLong());
-		newAssetLink.setTypeId(nextInt());
+		newAssetLink.setType(nextInt());
 		newAssetLink.setWeight(nextInt());
 
 		_persistence.update(newAssetLink, false);
@@ -85,11 +85,11 @@ public class AssetLinkPersistenceTest extends BasePersistenceTestCase {
 			newAssetLink.getCompanyId());
 		assertEquals(existingAssetLink.getUserId(), newAssetLink.getUserId());
 		assertEquals(existingAssetLink.getUserName(), newAssetLink.getUserName());
-		assertEquals(Time.getShortTimestamp(existingAssetLink.getModifiedDate()),
-			Time.getShortTimestamp(newAssetLink.getModifiedDate()));
+		assertEquals(Time.getShortTimestamp(existingAssetLink.getCreateDate()),
+			Time.getShortTimestamp(newAssetLink.getCreateDate()));
 		assertEquals(existingAssetLink.getEntryId1(), newAssetLink.getEntryId1());
 		assertEquals(existingAssetLink.getEntryId2(), newAssetLink.getEntryId2());
-		assertEquals(existingAssetLink.getTypeId(), newAssetLink.getTypeId());
+		assertEquals(existingAssetLink.getType(), newAssetLink.getType());
 		assertEquals(existingAssetLink.getWeight(), newAssetLink.getWeight());
 	}
 
@@ -167,10 +167,10 @@ public class AssetLinkPersistenceTest extends BasePersistenceTestCase {
 		assetLink.setCompanyId(nextLong());
 		assetLink.setUserId(nextLong());
 		assetLink.setUserName(randomString());
-		assetLink.setModifiedDate(nextDate());
+		assetLink.setCreateDate(nextDate());
 		assetLink.setEntryId1(nextLong());
 		assetLink.setEntryId2(nextLong());
-		assetLink.setTypeId(nextInt());
+		assetLink.setType(nextInt());
 		assetLink.setWeight(nextInt());
 
 		_persistence.update(assetLink, false);

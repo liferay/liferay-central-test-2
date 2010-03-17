@@ -103,7 +103,7 @@ public interface AssetLinkLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portlet.asset.model.AssetLink addLink(long userId,
-		long entryId1, long entryId2, int typeId, int weight)
+		long entryId1, long entryId2, int type, int weight)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -112,12 +112,10 @@ public interface AssetLinkLocalService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public void deleteLinks(long entryId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public void deleteLinks(long linkId1, long linkId2)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
+	public void deleteLinks(long entryId1, long entryId2)
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.asset.model.AssetLink> getLinks(

@@ -45,10 +45,10 @@ public class AssetLinkSoap implements Serializable {
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
 		soapModel.setUserName(model.getUserName());
-		soapModel.setModifiedDate(model.getModifiedDate());
+		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setEntryId1(model.getEntryId1());
 		soapModel.setEntryId2(model.getEntryId2());
-		soapModel.setTypeId(model.getTypeId());
+		soapModel.setType(model.getType());
 		soapModel.setWeight(model.getWeight());
 
 		return soapModel;
@@ -134,12 +134,12 @@ public class AssetLinkSoap implements Serializable {
 		_userName = userName;
 	}
 
-	public Date getModifiedDate() {
-		return _modifiedDate;
+	public Date getCreateDate() {
+		return _createDate;
 	}
 
-	public void setModifiedDate(Date modifiedDate) {
-		_modifiedDate = modifiedDate;
+	public void setCreateDate(Date createDate) {
+		_createDate = createDate;
 	}
 
 	public long getEntryId1() {
@@ -158,12 +158,12 @@ public class AssetLinkSoap implements Serializable {
 		_entryId2 = entryId2;
 	}
 
-	public int getTypeId() {
-		return _typeId;
+	public int getType() {
+		return _type;
 	}
 
-	public void setTypeId(int typeId) {
-		_typeId = typeId;
+	public void setType(int type) {
+		_type = type;
 	}
 
 	public int getWeight() {
@@ -178,9 +178,9 @@ public class AssetLinkSoap implements Serializable {
 	private long _companyId;
 	private long _userId;
 	private String _userName;
-	private Date _modifiedDate;
+	private Date _createDate;
 	private long _entryId1;
 	private long _entryId2;
-	private int _typeId;
+	private int _type;
 	private int _weight;
 }

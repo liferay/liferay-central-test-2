@@ -68,9 +68,9 @@ public interface AssetLinkModel extends BaseModel<AssetLink> {
 
 	public void setUserName(String userName);
 
-	public Date getModifiedDate();
+	public Date getCreateDate();
 
-	public void setModifiedDate(Date modifiedDate);
+	public void setCreateDate(Date createDate);
 
 	public long getEntryId1();
 
@@ -80,9 +80,9 @@ public interface AssetLinkModel extends BaseModel<AssetLink> {
 
 	public void setEntryId2(long entryId2);
 
-	public int getTypeId();
+	public int getType();
 
-	public void setTypeId(int typeId);
+	public void setType(int type);
 
 	public int getWeight();
 

@@ -1090,12 +1090,14 @@
 			<basic name="companyId" />
 			<basic name="userId" />
 			<basic name="userName" />
-			<basic name="modifiedDate">
+			<basic name="createDate">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
 			<basic name="entryId1" />
 			<basic name="entryId2" />
-			<basic name="typeId" />
+			<basic name="type">
+				<column name="TYPE_" />
+			</basic>
 			<basic name="weight" />
 			<transient name="primaryKey" />
 			<transient name="userUuid" />

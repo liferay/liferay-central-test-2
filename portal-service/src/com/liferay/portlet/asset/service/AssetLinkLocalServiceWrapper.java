@@ -117,11 +117,11 @@ public class AssetLinkLocalServiceWrapper implements AssetLinkLocalService {
 	}
 
 	public com.liferay.portlet.asset.model.AssetLink addLink(long userId,
-		long entryId1, long entryId2, int typeId, int weight)
+		long entryId1, long entryId2, int type, int weight)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _assetLinkLocalService.addLink(userId, entryId1, entryId2,
-			typeId, weight);
+		return _assetLinkLocalService.addLink(userId, entryId1, entryId2, type,
+			weight);
 	}
 
 	public void deleteLink(long linkId)
@@ -131,15 +131,13 @@ public class AssetLinkLocalServiceWrapper implements AssetLinkLocalService {
 	}
 
 	public void deleteLinks(long entryId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		_assetLinkLocalService.deleteLinks(entryId);
 	}
 
-	public void deleteLinks(long linkId1, long linkId2)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		_assetLinkLocalService.deleteLinks(linkId1, linkId2);
+	public void deleteLinks(long entryId1, long entryId2)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		_assetLinkLocalService.deleteLinks(entryId1, entryId2);
 	}
 
 	public java.util.List<com.liferay.portlet.asset.model.AssetLink> getLinks(

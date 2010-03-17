@@ -31,23 +31,23 @@ import java.util.List;
 public class AssetLinkLocalServiceImpl extends AssetLinkLocalServiceBaseImpl {
 
 	public AssetLink addLink(
-			long userId, long entryId1, long entryId2, int typeId, int weight)
+			long userId, long entryId1, long entryId2, int type, int weight)
 		throws PortalException, SystemException {
 
-		Date now = new Date();
 		User user = userLocalService.getUser(userId);
+		Date now = new Date();
 
 		long linkId = counterLocalService.increment();
 
 		AssetLink link = assetLinkPersistence.create(linkId);
 
 		link.setCompanyId(user.getCompanyId());
-		link.setUserId(userId);
+		link.setUserId(user.getUserId());
 		link.setUserName(user.getFullName());
-		link.setModifiedDate(now);
+		link.setCreateDate(now);
 		link.setEntryId1(entryId1);
 		link.setEntryId2(entryId2);
-		link.setTypeId(typeId);
+		link.setType(type);
 		link.setWeight(weight);
 
 		assetLinkPersistence.update(link, false);
@@ -61,17 +61,15 @@ public class AssetLinkLocalServiceImpl extends AssetLinkLocalServiceBaseImpl {
 		assetLinkPersistence.remove(linkId);
 	}
 
-	public void deleteLinks(long entryId)
-		throws PortalException, SystemException {
-
-		assetLinkPersistence.removeByE2(entryId);
+	public void deleteLinks(long entryId) throws SystemException {
 		assetLinkPersistence.removeByE1(entryId);
+		assetLinkPersistence.removeByE2(entryId);
 	}
 
-	public void deleteLinks(long linkId1, long linkId2)
-		throws PortalException, SystemException {
+	public void deleteLinks(long entryId1, long entryId2)
+		throws SystemException {
 
-		assetLinkPersistence.removeByE_E(linkId1, linkId2);
+		assetLinkPersistence.removeByE_E(entryId1, entryId2);
 	}
 
 	public List<AssetLink> getLinks(long entryId, int typeId)

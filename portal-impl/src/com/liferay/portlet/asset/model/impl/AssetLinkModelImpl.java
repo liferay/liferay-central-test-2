@@ -64,13 +64,13 @@ public class AssetLinkModelImpl extends BaseModelImpl<AssetLink> {
 			{ "companyId", new Integer(Types.BIGINT) },
 			{ "userId", new Integer(Types.BIGINT) },
 			{ "userName", new Integer(Types.VARCHAR) },
-			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
+			{ "createDate", new Integer(Types.TIMESTAMP) },
 			{ "entryId1", new Integer(Types.BIGINT) },
 			{ "entryId2", new Integer(Types.BIGINT) },
-			{ "typeId", new Integer(Types.INTEGER) },
+			{ "type_", new Integer(Types.INTEGER) },
 			{ "weight", new Integer(Types.INTEGER) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table AssetLink (linkId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,modifiedDate DATE null,entryId1 LONG,entryId2 LONG,typeId INTEGER,weight INTEGER)";
+	public static final String TABLE_SQL_CREATE = "create table AssetLink (linkId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,entryId1 LONG,entryId2 LONG,type_ INTEGER,weight INTEGER)";
 	public static final String TABLE_SQL_DROP = "drop table AssetLink";
 	public static final String ORDER_BY_JPQL = " ORDER BY assetLink.weight ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY AssetLink.weight ASC";
@@ -91,10 +91,10 @@ public class AssetLinkModelImpl extends BaseModelImpl<AssetLink> {
 		model.setCompanyId(soapModel.getCompanyId());
 		model.setUserId(soapModel.getUserId());
 		model.setUserName(soapModel.getUserName());
-		model.setModifiedDate(soapModel.getModifiedDate());
+		model.setCreateDate(soapModel.getCreateDate());
 		model.setEntryId1(soapModel.getEntryId1());
 		model.setEntryId2(soapModel.getEntryId2());
-		model.setTypeId(soapModel.getTypeId());
+		model.setType(soapModel.getType());
 		model.setWeight(soapModel.getWeight());
 
 		return model;
@@ -168,12 +168,12 @@ public class AssetLinkModelImpl extends BaseModelImpl<AssetLink> {
 		_userName = userName;
 	}
 
-	public Date getModifiedDate() {
-		return _modifiedDate;
+	public Date getCreateDate() {
+		return _createDate;
 	}
 
-	public void setModifiedDate(Date modifiedDate) {
-		_modifiedDate = modifiedDate;
+	public void setCreateDate(Date createDate) {
+		_createDate = createDate;
 	}
 
 	public long getEntryId1() {
@@ -192,12 +192,12 @@ public class AssetLinkModelImpl extends BaseModelImpl<AssetLink> {
 		_entryId2 = entryId2;
 	}
 
-	public int getTypeId() {
-		return _typeId;
+	public int getType() {
+		return _type;
 	}
 
-	public void setTypeId(int typeId) {
-		_typeId = typeId;
+	public void setType(int type) {
+		_type = type;
 	}
 
 	public int getWeight() {
@@ -222,10 +222,10 @@ public class AssetLinkModelImpl extends BaseModelImpl<AssetLink> {
 			model.setCompanyId(getCompanyId());
 			model.setUserId(getUserId());
 			model.setUserName(HtmlUtil.escape(getUserName()));
-			model.setModifiedDate(getModifiedDate());
+			model.setCreateDate(getCreateDate());
 			model.setEntryId1(getEntryId1());
 			model.setEntryId2(getEntryId2());
-			model.setTypeId(getTypeId());
+			model.setType(getType());
 			model.setWeight(getWeight());
 
 			model = (AssetLink)Proxy.newProxyInstance(AssetLink.class.getClassLoader(),
@@ -256,10 +256,10 @@ public class AssetLinkModelImpl extends BaseModelImpl<AssetLink> {
 		clone.setCompanyId(getCompanyId());
 		clone.setUserId(getUserId());
 		clone.setUserName(getUserName());
-		clone.setModifiedDate(getModifiedDate());
+		clone.setCreateDate(getCreateDate());
 		clone.setEntryId1(getEntryId1());
 		clone.setEntryId2(getEntryId2());
-		clone.setTypeId(getTypeId());
+		clone.setType(getType());
 		clone.setWeight(getWeight());
 
 		return clone;
@@ -324,14 +324,14 @@ public class AssetLinkModelImpl extends BaseModelImpl<AssetLink> {
 		sb.append(getUserId());
 		sb.append(", userName=");
 		sb.append(getUserName());
-		sb.append(", modifiedDate=");
-		sb.append(getModifiedDate());
+		sb.append(", createDate=");
+		sb.append(getCreateDate());
 		sb.append(", entryId1=");
 		sb.append(getEntryId1());
 		sb.append(", entryId2=");
 		sb.append(getEntryId2());
-		sb.append(", typeId=");
-		sb.append(getTypeId());
+		sb.append(", type=");
+		sb.append(getType());
 		sb.append(", weight=");
 		sb.append(getWeight());
 		sb.append("}");
@@ -363,8 +363,8 @@ public class AssetLinkModelImpl extends BaseModelImpl<AssetLink> {
 		sb.append(getUserName());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>modifiedDate</column-name><column-value><![CDATA[");
-		sb.append(getModifiedDate());
+			"<column><column-name>createDate</column-name><column-value><![CDATA[");
+		sb.append(getCreateDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>entryId1</column-name><column-value><![CDATA[");
@@ -375,8 +375,8 @@ public class AssetLinkModelImpl extends BaseModelImpl<AssetLink> {
 		sb.append(getEntryId2());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>typeId</column-name><column-value><![CDATA[");
-		sb.append(getTypeId());
+			"<column><column-name>type</column-name><column-value><![CDATA[");
+		sb.append(getType());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>weight</column-name><column-value><![CDATA[");
@@ -393,10 +393,10 @@ public class AssetLinkModelImpl extends BaseModelImpl<AssetLink> {
 	private long _userId;
 	private String _userUuid;
 	private String _userName;
-	private Date _modifiedDate;
+	private Date _createDate;
 	private long _entryId1;
 	private long _entryId2;
-	private int _typeId;
+	private int _type;
 	private int _weight;
 	private transient ExpandoBridge _expandoBridge;
 }

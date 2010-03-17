@@ -119,8 +119,7 @@ public class AssetEntryLocalServiceUtil {
 
 	public static void deleteEntry(
 		com.liferay.portlet.asset.model.AssetEntry entry)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteEntry(entry);
 	}
 
@@ -131,8 +130,7 @@ public class AssetEntryLocalServiceUtil {
 	}
 
 	public static void deleteEntry(java.lang.String className, long classPK)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteEntry(className, classPK);
 	}
 
@@ -208,11 +206,11 @@ public class AssetEntryLocalServiceUtil {
 		return getService().getParentEntry(entryId);
 	}
 
-	public static com.liferay.portlet.asset.model.AssetEntry getPrevious(
+	public static com.liferay.portlet.asset.model.AssetEntry getPreviousEntry(
 		long entryId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getService().getPrevious(entryId);
+		return getService().getPreviousEntry(entryId);
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetEntry> getTopViewedEntries(

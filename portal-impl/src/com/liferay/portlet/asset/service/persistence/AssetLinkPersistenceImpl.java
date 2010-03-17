@@ -339,10 +339,10 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 		assetLinkImpl.setCompanyId(assetLink.getCompanyId());
 		assetLinkImpl.setUserId(assetLink.getUserId());
 		assetLinkImpl.setUserName(assetLink.getUserName());
-		assetLinkImpl.setModifiedDate(assetLink.getModifiedDate());
+		assetLinkImpl.setCreateDate(assetLink.getCreateDate());
 		assetLinkImpl.setEntryId1(assetLink.getEntryId1());
 		assetLinkImpl.setEntryId2(assetLink.getEntryId2());
-		assetLinkImpl.setTypeId(assetLink.getTypeId());
+		assetLinkImpl.setType(assetLink.getType());
 		assetLinkImpl.setWeight(assetLink.getWeight());
 
 		return assetLinkImpl;
@@ -1132,11 +1132,9 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 		}
 	}
 
-	public List<AssetLink> findByE1_T(long entryId1, int typeId)
+	public List<AssetLink> findByE1_T(long entryId1, int type)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(entryId1), new Integer(typeId)
-			};
+		Object[] finderArgs = new Object[] { new Long(entryId1), new Integer(type) };
 
 		List<AssetLink> list = (List<AssetLink>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_E1_T,
 				finderArgs, this);
@@ -1153,7 +1151,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 
 				query.append(_FINDER_COLUMN_E1_T_ENTRYID1_2);
 
-				query.append(_FINDER_COLUMN_E1_T_TYPEID_2);
+				query.append(_FINDER_COLUMN_E1_T_TYPE_2);
 
 				query.append(AssetLinkModelImpl.ORDER_BY_JPQL);
 
@@ -1165,7 +1163,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 
 				qPos.add(entryId1);
 
-				qPos.add(typeId);
+				qPos.add(type);
 
 				list = q.list();
 			}
@@ -1189,15 +1187,15 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 		return list;
 	}
 
-	public List<AssetLink> findByE1_T(long entryId1, int typeId, int start,
+	public List<AssetLink> findByE1_T(long entryId1, int type, int start,
 		int end) throws SystemException {
-		return findByE1_T(entryId1, typeId, start, end, null);
+		return findByE1_T(entryId1, type, start, end, null);
 	}
 
-	public List<AssetLink> findByE1_T(long entryId1, int typeId, int start,
+	public List<AssetLink> findByE1_T(long entryId1, int type, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(entryId1), new Integer(typeId),
+				new Long(entryId1), new Integer(type),
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1226,7 +1224,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 
 				query.append(_FINDER_COLUMN_E1_T_ENTRYID1_2);
 
-				query.append(_FINDER_COLUMN_E1_T_TYPEID_2);
+				query.append(_FINDER_COLUMN_E1_T_TYPE_2);
 
 				if (orderByComparator != null) {
 					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
@@ -1245,7 +1243,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 
 				qPos.add(entryId1);
 
-				qPos.add(typeId);
+				qPos.add(type);
 
 				list = (List<AssetLink>)QueryUtil.list(q, getDialect(), start,
 						end);
@@ -1270,10 +1268,10 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 		return list;
 	}
 
-	public AssetLink findByE1_T_First(long entryId1, int typeId,
+	public AssetLink findByE1_T_First(long entryId1, int type,
 		OrderByComparator orderByComparator)
 		throws NoSuchLinkException, SystemException {
-		List<AssetLink> list = findByE1_T(entryId1, typeId, 0, 1,
+		List<AssetLink> list = findByE1_T(entryId1, type, 0, 1,
 				orderByComparator);
 
 		if (list.isEmpty()) {
@@ -1284,8 +1282,8 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 			msg.append("entryId1=");
 			msg.append(entryId1);
 
-			msg.append(", typeId=");
-			msg.append(typeId);
+			msg.append(", type=");
+			msg.append(type);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -1296,12 +1294,12 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 		}
 	}
 
-	public AssetLink findByE1_T_Last(long entryId1, int typeId,
+	public AssetLink findByE1_T_Last(long entryId1, int type,
 		OrderByComparator orderByComparator)
 		throws NoSuchLinkException, SystemException {
-		int count = countByE1_T(entryId1, typeId);
+		int count = countByE1_T(entryId1, type);
 
-		List<AssetLink> list = findByE1_T(entryId1, typeId, count - 1, count,
+		List<AssetLink> list = findByE1_T(entryId1, type, count - 1, count,
 				orderByComparator);
 
 		if (list.isEmpty()) {
@@ -1312,8 +1310,8 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 			msg.append("entryId1=");
 			msg.append(entryId1);
 
-			msg.append(", typeId=");
-			msg.append(typeId);
+			msg.append(", type=");
+			msg.append(type);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -1325,11 +1323,11 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	}
 
 	public AssetLink[] findByE1_T_PrevAndNext(long linkId, long entryId1,
-		int typeId, OrderByComparator orderByComparator)
+		int type, OrderByComparator orderByComparator)
 		throws NoSuchLinkException, SystemException {
 		AssetLink assetLink = findByPrimaryKey(linkId);
 
-		int count = countByE1_T(entryId1, typeId);
+		int count = countByE1_T(entryId1, type);
 
 		Session session = null;
 
@@ -1350,7 +1348,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 
 			query.append(_FINDER_COLUMN_E1_T_ENTRYID1_2);
 
-			query.append(_FINDER_COLUMN_E1_T_TYPEID_2);
+			query.append(_FINDER_COLUMN_E1_T_TYPE_2);
 
 			if (orderByComparator != null) {
 				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
@@ -1369,7 +1367,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 
 			qPos.add(entryId1);
 
-			qPos.add(typeId);
+			qPos.add(type);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
 					orderByComparator, assetLink);
@@ -1390,11 +1388,9 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 		}
 	}
 
-	public List<AssetLink> findByE2_T(long entryId2, int typeId)
+	public List<AssetLink> findByE2_T(long entryId2, int type)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(entryId2), new Integer(typeId)
-			};
+		Object[] finderArgs = new Object[] { new Long(entryId2), new Integer(type) };
 
 		List<AssetLink> list = (List<AssetLink>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_E2_T,
 				finderArgs, this);
@@ -1411,7 +1407,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 
 				query.append(_FINDER_COLUMN_E2_T_ENTRYID2_2);
 
-				query.append(_FINDER_COLUMN_E2_T_TYPEID_2);
+				query.append(_FINDER_COLUMN_E2_T_TYPE_2);
 
 				query.append(AssetLinkModelImpl.ORDER_BY_JPQL);
 
@@ -1423,7 +1419,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 
 				qPos.add(entryId2);
 
-				qPos.add(typeId);
+				qPos.add(type);
 
 				list = q.list();
 			}
@@ -1447,15 +1443,15 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 		return list;
 	}
 
-	public List<AssetLink> findByE2_T(long entryId2, int typeId, int start,
+	public List<AssetLink> findByE2_T(long entryId2, int type, int start,
 		int end) throws SystemException {
-		return findByE2_T(entryId2, typeId, start, end, null);
+		return findByE2_T(entryId2, type, start, end, null);
 	}
 
-	public List<AssetLink> findByE2_T(long entryId2, int typeId, int start,
+	public List<AssetLink> findByE2_T(long entryId2, int type, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(entryId2), new Integer(typeId),
+				new Long(entryId2), new Integer(type),
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1484,7 +1480,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 
 				query.append(_FINDER_COLUMN_E2_T_ENTRYID2_2);
 
-				query.append(_FINDER_COLUMN_E2_T_TYPEID_2);
+				query.append(_FINDER_COLUMN_E2_T_TYPE_2);
 
 				if (orderByComparator != null) {
 					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
@@ -1503,7 +1499,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 
 				qPos.add(entryId2);
 
-				qPos.add(typeId);
+				qPos.add(type);
 
 				list = (List<AssetLink>)QueryUtil.list(q, getDialect(), start,
 						end);
@@ -1528,10 +1524,10 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 		return list;
 	}
 
-	public AssetLink findByE2_T_First(long entryId2, int typeId,
+	public AssetLink findByE2_T_First(long entryId2, int type,
 		OrderByComparator orderByComparator)
 		throws NoSuchLinkException, SystemException {
-		List<AssetLink> list = findByE2_T(entryId2, typeId, 0, 1,
+		List<AssetLink> list = findByE2_T(entryId2, type, 0, 1,
 				orderByComparator);
 
 		if (list.isEmpty()) {
@@ -1542,8 +1538,8 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 			msg.append("entryId2=");
 			msg.append(entryId2);
 
-			msg.append(", typeId=");
-			msg.append(typeId);
+			msg.append(", type=");
+			msg.append(type);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -1554,12 +1550,12 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 		}
 	}
 
-	public AssetLink findByE2_T_Last(long entryId2, int typeId,
+	public AssetLink findByE2_T_Last(long entryId2, int type,
 		OrderByComparator orderByComparator)
 		throws NoSuchLinkException, SystemException {
-		int count = countByE2_T(entryId2, typeId);
+		int count = countByE2_T(entryId2, type);
 
-		List<AssetLink> list = findByE2_T(entryId2, typeId, count - 1, count,
+		List<AssetLink> list = findByE2_T(entryId2, type, count - 1, count,
 				orderByComparator);
 
 		if (list.isEmpty()) {
@@ -1570,8 +1566,8 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 			msg.append("entryId2=");
 			msg.append(entryId2);
 
-			msg.append(", typeId=");
-			msg.append(typeId);
+			msg.append(", type=");
+			msg.append(type);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -1583,11 +1579,11 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	}
 
 	public AssetLink[] findByE2_T_PrevAndNext(long linkId, long entryId2,
-		int typeId, OrderByComparator orderByComparator)
+		int type, OrderByComparator orderByComparator)
 		throws NoSuchLinkException, SystemException {
 		AssetLink assetLink = findByPrimaryKey(linkId);
 
-		int count = countByE2_T(entryId2, typeId);
+		int count = countByE2_T(entryId2, type);
 
 		Session session = null;
 
@@ -1608,7 +1604,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 
 			query.append(_FINDER_COLUMN_E2_T_ENTRYID2_2);
 
-			query.append(_FINDER_COLUMN_E2_T_TYPEID_2);
+			query.append(_FINDER_COLUMN_E2_T_TYPE_2);
 
 			if (orderByComparator != null) {
 				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
@@ -1627,7 +1623,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 
 			qPos.add(entryId2);
 
-			qPos.add(typeId);
+			qPos.add(type);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
 					orderByComparator, assetLink);
@@ -1648,10 +1644,10 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 		}
 	}
 
-	public List<AssetLink> findByE_E_T(long entryId1, long entryId2, int typeId)
+	public List<AssetLink> findByE_E_T(long entryId1, long entryId2, int type)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(entryId1), new Long(entryId2), new Integer(typeId)
+				new Long(entryId1), new Long(entryId2), new Integer(type)
 			};
 
 		List<AssetLink> list = (List<AssetLink>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_E_E_T,
@@ -1671,7 +1667,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 
 				query.append(_FINDER_COLUMN_E_E_T_ENTRYID2_2);
 
-				query.append(_FINDER_COLUMN_E_E_T_TYPEID_2);
+				query.append(_FINDER_COLUMN_E_E_T_TYPE_2);
 
 				query.append(AssetLinkModelImpl.ORDER_BY_JPQL);
 
@@ -1685,7 +1681,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 
 				qPos.add(entryId2);
 
-				qPos.add(typeId);
+				qPos.add(type);
 
 				list = q.list();
 			}
@@ -1709,16 +1705,16 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 		return list;
 	}
 
-	public List<AssetLink> findByE_E_T(long entryId1, long entryId2,
-		int typeId, int start, int end) throws SystemException {
-		return findByE_E_T(entryId1, entryId2, typeId, start, end, null);
+	public List<AssetLink> findByE_E_T(long entryId1, long entryId2, int type,
+		int start, int end) throws SystemException {
+		return findByE_E_T(entryId1, entryId2, type, start, end, null);
 	}
 
-	public List<AssetLink> findByE_E_T(long entryId1, long entryId2,
-		int typeId, int start, int end, OrderByComparator orderByComparator)
+	public List<AssetLink> findByE_E_T(long entryId1, long entryId2, int type,
+		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(entryId1), new Long(entryId2), new Integer(typeId),
+				new Long(entryId1), new Long(entryId2), new Integer(type),
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -1749,7 +1745,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 
 				query.append(_FINDER_COLUMN_E_E_T_ENTRYID2_2);
 
-				query.append(_FINDER_COLUMN_E_E_T_TYPEID_2);
+				query.append(_FINDER_COLUMN_E_E_T_TYPE_2);
 
 				if (orderByComparator != null) {
 					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
@@ -1770,7 +1766,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 
 				qPos.add(entryId2);
 
-				qPos.add(typeId);
+				qPos.add(type);
 
 				list = (List<AssetLink>)QueryUtil.list(q, getDialect(), start,
 						end);
@@ -1795,10 +1791,10 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 		return list;
 	}
 
-	public AssetLink findByE_E_T_First(long entryId1, long entryId2,
-		int typeId, OrderByComparator orderByComparator)
+	public AssetLink findByE_E_T_First(long entryId1, long entryId2, int type,
+		OrderByComparator orderByComparator)
 		throws NoSuchLinkException, SystemException {
-		List<AssetLink> list = findByE_E_T(entryId1, entryId2, typeId, 0, 1,
+		List<AssetLink> list = findByE_E_T(entryId1, entryId2, type, 0, 1,
 				orderByComparator);
 
 		if (list.isEmpty()) {
@@ -1812,8 +1808,8 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 			msg.append(", entryId2=");
 			msg.append(entryId2);
 
-			msg.append(", typeId=");
-			msg.append(typeId);
+			msg.append(", type=");
+			msg.append(type);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -1824,13 +1820,13 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 		}
 	}
 
-	public AssetLink findByE_E_T_Last(long entryId1, long entryId2, int typeId,
+	public AssetLink findByE_E_T_Last(long entryId1, long entryId2, int type,
 		OrderByComparator orderByComparator)
 		throws NoSuchLinkException, SystemException {
-		int count = countByE_E_T(entryId1, entryId2, typeId);
+		int count = countByE_E_T(entryId1, entryId2, type);
 
-		List<AssetLink> list = findByE_E_T(entryId1, entryId2, typeId,
-				count - 1, count, orderByComparator);
+		List<AssetLink> list = findByE_E_T(entryId1, entryId2, type, count - 1,
+				count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(8);
@@ -1843,8 +1839,8 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 			msg.append(", entryId2=");
 			msg.append(entryId2);
 
-			msg.append(", typeId=");
-			msg.append(typeId);
+			msg.append(", type=");
+			msg.append(type);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -1856,11 +1852,11 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	}
 
 	public AssetLink[] findByE_E_T_PrevAndNext(long linkId, long entryId1,
-		long entryId2, int typeId, OrderByComparator orderByComparator)
+		long entryId2, int type, OrderByComparator orderByComparator)
 		throws NoSuchLinkException, SystemException {
 		AssetLink assetLink = findByPrimaryKey(linkId);
 
-		int count = countByE_E_T(entryId1, entryId2, typeId);
+		int count = countByE_E_T(entryId1, entryId2, type);
 
 		Session session = null;
 
@@ -1883,7 +1879,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 
 			query.append(_FINDER_COLUMN_E_E_T_ENTRYID2_2);
 
-			query.append(_FINDER_COLUMN_E_E_T_TYPEID_2);
+			query.append(_FINDER_COLUMN_E_E_T_TYPE_2);
 
 			if (orderByComparator != null) {
 				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
@@ -1904,7 +1900,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 
 			qPos.add(entryId2);
 
-			qPos.add(typeId);
+			qPos.add(type);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
 					orderByComparator, assetLink);
@@ -2020,23 +2016,21 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 		}
 	}
 
-	public void removeByE1_T(long entryId1, int typeId)
-		throws SystemException {
-		for (AssetLink assetLink : findByE1_T(entryId1, typeId)) {
+	public void removeByE1_T(long entryId1, int type) throws SystemException {
+		for (AssetLink assetLink : findByE1_T(entryId1, type)) {
 			remove(assetLink);
 		}
 	}
 
-	public void removeByE2_T(long entryId2, int typeId)
-		throws SystemException {
-		for (AssetLink assetLink : findByE2_T(entryId2, typeId)) {
+	public void removeByE2_T(long entryId2, int type) throws SystemException {
+		for (AssetLink assetLink : findByE2_T(entryId2, type)) {
 			remove(assetLink);
 		}
 	}
 
-	public void removeByE_E_T(long entryId1, long entryId2, int typeId)
+	public void removeByE_E_T(long entryId1, long entryId2, int type)
 		throws SystemException {
-		for (AssetLink assetLink : findByE_E_T(entryId1, entryId2, typeId)) {
+		for (AssetLink assetLink : findByE_E_T(entryId1, entryId2, type)) {
 			remove(assetLink);
 		}
 	}
@@ -2192,10 +2186,8 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 		return count.intValue();
 	}
 
-	public int countByE1_T(long entryId1, int typeId) throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(entryId1), new Integer(typeId)
-			};
+	public int countByE1_T(long entryId1, int type) throws SystemException {
+		Object[] finderArgs = new Object[] { new Long(entryId1), new Integer(type) };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_E1_T,
 				finderArgs, this);
@@ -2212,7 +2204,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 
 				query.append(_FINDER_COLUMN_E1_T_ENTRYID1_2);
 
-				query.append(_FINDER_COLUMN_E1_T_TYPEID_2);
+				query.append(_FINDER_COLUMN_E1_T_TYPE_2);
 
 				String sql = query.toString();
 
@@ -2222,7 +2214,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 
 				qPos.add(entryId1);
 
-				qPos.add(typeId);
+				qPos.add(type);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -2244,10 +2236,8 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 		return count.intValue();
 	}
 
-	public int countByE2_T(long entryId2, int typeId) throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(entryId2), new Integer(typeId)
-			};
+	public int countByE2_T(long entryId2, int type) throws SystemException {
+		Object[] finderArgs = new Object[] { new Long(entryId2), new Integer(type) };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_E2_T,
 				finderArgs, this);
@@ -2264,7 +2254,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 
 				query.append(_FINDER_COLUMN_E2_T_ENTRYID2_2);
 
-				query.append(_FINDER_COLUMN_E2_T_TYPEID_2);
+				query.append(_FINDER_COLUMN_E2_T_TYPE_2);
 
 				String sql = query.toString();
 
@@ -2274,7 +2264,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 
 				qPos.add(entryId2);
 
-				qPos.add(typeId);
+				qPos.add(type);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -2296,10 +2286,10 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 		return count.intValue();
 	}
 
-	public int countByE_E_T(long entryId1, long entryId2, int typeId)
+	public int countByE_E_T(long entryId1, long entryId2, int type)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(entryId1), new Long(entryId2), new Integer(typeId)
+				new Long(entryId1), new Long(entryId2), new Integer(type)
 			};
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_E_E_T,
@@ -2319,7 +2309,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 
 				query.append(_FINDER_COLUMN_E_E_T_ENTRYID2_2);
 
-				query.append(_FINDER_COLUMN_E_E_T_TYPEID_2);
+				query.append(_FINDER_COLUMN_E_E_T_TYPE_2);
 
 				String sql = query.toString();
 
@@ -2331,7 +2321,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 
 				qPos.add(entryId2);
 
-				qPos.add(typeId);
+				qPos.add(type);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -2438,12 +2428,12 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	private static final String _FINDER_COLUMN_E_E_ENTRYID1_2 = "assetLink.entryId1 = ? AND ";
 	private static final String _FINDER_COLUMN_E_E_ENTRYID2_2 = "assetLink.entryId2 = ?";
 	private static final String _FINDER_COLUMN_E1_T_ENTRYID1_2 = "assetLink.entryId1 = ? AND ";
-	private static final String _FINDER_COLUMN_E1_T_TYPEID_2 = "assetLink.typeId = ?";
+	private static final String _FINDER_COLUMN_E1_T_TYPE_2 = "assetLink.type = ?";
 	private static final String _FINDER_COLUMN_E2_T_ENTRYID2_2 = "assetLink.entryId2 = ? AND ";
-	private static final String _FINDER_COLUMN_E2_T_TYPEID_2 = "assetLink.typeId = ?";
+	private static final String _FINDER_COLUMN_E2_T_TYPE_2 = "assetLink.type = ?";
 	private static final String _FINDER_COLUMN_E_E_T_ENTRYID1_2 = "assetLink.entryId1 = ? AND ";
 	private static final String _FINDER_COLUMN_E_E_T_ENTRYID2_2 = "assetLink.entryId2 = ? AND ";
-	private static final String _FINDER_COLUMN_E_E_T_TYPEID_2 = "assetLink.typeId = ?";
+	private static final String _FINDER_COLUMN_E_E_T_TYPE_2 = "assetLink.type = ?";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "assetLink.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No AssetLink exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No AssetLink exists with the key {";

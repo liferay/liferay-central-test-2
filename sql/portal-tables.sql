@@ -148,10 +148,10 @@ create table AssetLink (
 	companyId LONG,
 	userId LONG,
 	userName VARCHAR(75) null,
-	modifiedDate DATE null,
+	createDate DATE null,
 	entryId1 LONG,
 	entryId2 LONG,
-	typeId INTEGER,
+	type_ INTEGER,
 	weight INTEGER
 );
 

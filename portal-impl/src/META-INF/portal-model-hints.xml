@@ -842,10 +842,10 @@
 		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
-		<field name="modifiedDate" type="Date" />
+		<field name="createDate" type="Date" />
 		<field name="entryId1" type="long" />
 		<field name="entryId2" type="long" />
-		<field name="typeId" type="int" />
+		<field name="type" type="int" />
 		<field name="weight" type="int" />
 	</model>
 	<model name="com.liferay.portlet.asset.model.AssetTag">

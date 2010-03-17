@@ -85,12 +85,12 @@ public class AssetLinkWrapper implements AssetLink {
 		_assetLink.setUserName(userName);
 	}
 
-	public java.util.Date getModifiedDate() {
-		return _assetLink.getModifiedDate();
+	public java.util.Date getCreateDate() {
+		return _assetLink.getCreateDate();
 	}
 
-	public void setModifiedDate(java.util.Date modifiedDate) {
-		_assetLink.setModifiedDate(modifiedDate);
+	public void setCreateDate(java.util.Date createDate) {
+		_assetLink.setCreateDate(createDate);
 	}
 
 	public long getEntryId1() {
@@ -109,12 +109,12 @@ public class AssetLinkWrapper implements AssetLink {
 		_assetLink.setEntryId2(entryId2);
 	}
 
-	public int getTypeId() {
-		return _assetLink.getTypeId();
+	public int getType() {
+		return _assetLink.getType();
 	}
 
-	public void setTypeId(int typeId) {
-		_assetLink.setTypeId(typeId);
+	public void setType(int type) {
+		_assetLink.setType(type);
 	}
 
 	public int getWeight() {
@@ -125,7 +125,7 @@ public class AssetLinkWrapper implements AssetLink {
 		_assetLink.setWeight(weight);
 	}
 
-	public AssetLink toEscapedModel() {
+	public com.liferay.portlet.asset.model.AssetLink toEscapedModel() {
 		return _assetLink.toEscapedModel();
 	}
 
@@ -170,7 +170,7 @@ public class AssetLinkWrapper implements AssetLink {
 		return _assetLink.clone();
 	}
 
-	public int compareTo(AssetLink assetLink) {
+	public int compareTo(com.liferay.portlet.asset.model.AssetLink assetLink) {
 		return _assetLink.compareTo(assetLink);
 	}
 
