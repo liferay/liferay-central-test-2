@@ -127,31 +127,34 @@ public class AssetLinkUtil {
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetLink> findByE1(
 		long entryId1, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByE1(entryId1, start, end, obc);
+		return getPersistence().findByE1(entryId1, start, end, orderByComparator);
 	}
 
 	public static com.liferay.portlet.asset.model.AssetLink findByE1_First(
-		long entryId1, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long entryId1,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.asset.NoSuchLinkException {
-		return getPersistence().findByE1_First(entryId1, obc);
+		return getPersistence().findByE1_First(entryId1, orderByComparator);
 	}
 
 	public static com.liferay.portlet.asset.model.AssetLink findByE1_Last(
-		long entryId1, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long entryId1,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.asset.NoSuchLinkException {
-		return getPersistence().findByE1_Last(entryId1, obc);
+		return getPersistence().findByE1_Last(entryId1, orderByComparator);
 	}
 
 	public static com.liferay.portlet.asset.model.AssetLink[] findByE1_PrevAndNext(
 		long linkId, long entryId1,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.asset.NoSuchLinkException {
-		return getPersistence().findByE1_PrevAndNext(linkId, entryId1, obc);
+		return getPersistence()
+				   .findByE1_PrevAndNext(linkId, entryId1, orderByComparator);
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetLink> findByE2(
@@ -168,31 +171,34 @@ public class AssetLinkUtil {
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetLink> findByE2(
 		long entryId2, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByE2(entryId2, start, end, obc);
+		return getPersistence().findByE2(entryId2, start, end, orderByComparator);
 	}
 
 	public static com.liferay.portlet.asset.model.AssetLink findByE2_First(
-		long entryId2, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long entryId2,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.asset.NoSuchLinkException {
-		return getPersistence().findByE2_First(entryId2, obc);
+		return getPersistence().findByE2_First(entryId2, orderByComparator);
 	}
 
 	public static com.liferay.portlet.asset.model.AssetLink findByE2_Last(
-		long entryId2, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long entryId2,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.asset.NoSuchLinkException {
-		return getPersistence().findByE2_Last(entryId2, obc);
+		return getPersistence().findByE2_Last(entryId2, orderByComparator);
 	}
 
 	public static com.liferay.portlet.asset.model.AssetLink[] findByE2_PrevAndNext(
 		long linkId, long entryId2,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.asset.NoSuchLinkException {
-		return getPersistence().findByE2_PrevAndNext(linkId, entryId2, obc);
+		return getPersistence()
+				   .findByE2_PrevAndNext(linkId, entryId2, orderByComparator);
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetLink> findByE_E(
@@ -209,34 +215,38 @@ public class AssetLinkUtil {
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetLink> findByE_E(
 		long entryId1, long entryId2, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByE_E(entryId1, entryId2, start, end, obc);
+		return getPersistence()
+				   .findByE_E(entryId1, entryId2, start, end, orderByComparator);
 	}
 
 	public static com.liferay.portlet.asset.model.AssetLink findByE_E_First(
 		long entryId1, long entryId2,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.asset.NoSuchLinkException {
-		return getPersistence().findByE_E_First(entryId1, entryId2, obc);
+		return getPersistence()
+				   .findByE_E_First(entryId1, entryId2, orderByComparator);
 	}
 
 	public static com.liferay.portlet.asset.model.AssetLink findByE_E_Last(
 		long entryId1, long entryId2,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.asset.NoSuchLinkException {
-		return getPersistence().findByE_E_Last(entryId1, entryId2, obc);
+		return getPersistence()
+				   .findByE_E_Last(entryId1, entryId2, orderByComparator);
 	}
 
 	public static com.liferay.portlet.asset.model.AssetLink[] findByE_E_PrevAndNext(
 		long linkId, long entryId1, long entryId2,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.asset.NoSuchLinkException {
 		return getPersistence()
-				   .findByE_E_PrevAndNext(linkId, entryId1, entryId2, obc);
+				   .findByE_E_PrevAndNext(linkId, entryId1, entryId2,
+			orderByComparator);
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetLink> findByE1_T(
@@ -253,34 +263,38 @@ public class AssetLinkUtil {
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetLink> findByE1_T(
 		long entryId1, int typeId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByE1_T(entryId1, typeId, start, end, obc);
+		return getPersistence()
+				   .findByE1_T(entryId1, typeId, start, end, orderByComparator);
 	}
 
 	public static com.liferay.portlet.asset.model.AssetLink findByE1_T_First(
 		long entryId1, int typeId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.asset.NoSuchLinkException {
-		return getPersistence().findByE1_T_First(entryId1, typeId, obc);
+		return getPersistence()
+				   .findByE1_T_First(entryId1, typeId, orderByComparator);
 	}
 
 	public static com.liferay.portlet.asset.model.AssetLink findByE1_T_Last(
 		long entryId1, int typeId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.asset.NoSuchLinkException {
-		return getPersistence().findByE1_T_Last(entryId1, typeId, obc);
+		return getPersistence()
+				   .findByE1_T_Last(entryId1, typeId, orderByComparator);
 	}
 
 	public static com.liferay.portlet.asset.model.AssetLink[] findByE1_T_PrevAndNext(
 		long linkId, long entryId1, int typeId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.asset.NoSuchLinkException {
 		return getPersistence()
-				   .findByE1_T_PrevAndNext(linkId, entryId1, typeId, obc);
+				   .findByE1_T_PrevAndNext(linkId, entryId1, typeId,
+			orderByComparator);
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetLink> findByE2_T(
@@ -297,34 +311,38 @@ public class AssetLinkUtil {
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetLink> findByE2_T(
 		long entryId2, int typeId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByE2_T(entryId2, typeId, start, end, obc);
+		return getPersistence()
+				   .findByE2_T(entryId2, typeId, start, end, orderByComparator);
 	}
 
 	public static com.liferay.portlet.asset.model.AssetLink findByE2_T_First(
 		long entryId2, int typeId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.asset.NoSuchLinkException {
-		return getPersistence().findByE2_T_First(entryId2, typeId, obc);
+		return getPersistence()
+				   .findByE2_T_First(entryId2, typeId, orderByComparator);
 	}
 
 	public static com.liferay.portlet.asset.model.AssetLink findByE2_T_Last(
 		long entryId2, int typeId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.asset.NoSuchLinkException {
-		return getPersistence().findByE2_T_Last(entryId2, typeId, obc);
+		return getPersistence()
+				   .findByE2_T_Last(entryId2, typeId, orderByComparator);
 	}
 
 	public static com.liferay.portlet.asset.model.AssetLink[] findByE2_T_PrevAndNext(
 		long linkId, long entryId2, int typeId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.asset.NoSuchLinkException {
 		return getPersistence()
-				   .findByE2_T_PrevAndNext(linkId, entryId2, typeId, obc);
+				   .findByE2_T_PrevAndNext(linkId, entryId2, typeId,
+			orderByComparator);
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetLink> findByE_E_T(
@@ -342,37 +360,41 @@ public class AssetLinkUtil {
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetLink> findByE_E_T(
 		long entryId1, long entryId2, int typeId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .findByE_E_T(entryId1, entryId2, typeId, start, end, obc);
+				   .findByE_E_T(entryId1, entryId2, typeId, start, end,
+			orderByComparator);
 	}
 
 	public static com.liferay.portlet.asset.model.AssetLink findByE_E_T_First(
 		long entryId1, long entryId2, int typeId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.asset.NoSuchLinkException {
 		return getPersistence()
-				   .findByE_E_T_First(entryId1, entryId2, typeId, obc);
+				   .findByE_E_T_First(entryId1, entryId2, typeId,
+			orderByComparator);
 	}
 
 	public static com.liferay.portlet.asset.model.AssetLink findByE_E_T_Last(
 		long entryId1, long entryId2, int typeId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.asset.NoSuchLinkException {
-		return getPersistence().findByE_E_T_Last(entryId1, entryId2, typeId, obc);
+		return getPersistence()
+				   .findByE_E_T_Last(entryId1, entryId2, typeId,
+			orderByComparator);
 	}
 
 	public static com.liferay.portlet.asset.model.AssetLink[] findByE_E_T_PrevAndNext(
 		long linkId, long entryId1, long entryId2, int typeId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.asset.NoSuchLinkException {
 		return getPersistence()
 				   .findByE_E_T_PrevAndNext(linkId, entryId1, entryId2, typeId,
-			obc);
+			orderByComparator);
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetLink> findAll()
@@ -387,9 +409,10 @@ public class AssetLinkUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetLink> findAll(
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findAll(start, end, obc);
+		return getPersistence().findAll(start, end, orderByComparator);
 	}
 
 	public static void removeByE1(long entryId1)

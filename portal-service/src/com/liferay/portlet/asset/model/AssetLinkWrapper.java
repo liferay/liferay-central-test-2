@@ -125,7 +125,7 @@ public class AssetLinkWrapper implements AssetLink {
 		_assetLink.setWeight(weight);
 	}
 
-	public com.liferay.portlet.asset.model.AssetLink toEscapedModel() {
+	public AssetLink toEscapedModel() {
 		return _assetLink.toEscapedModel();
 	}
 
@@ -170,7 +170,7 @@ public class AssetLinkWrapper implements AssetLink {
 		return _assetLink.clone();
 	}
 
-	public int compareTo(com.liferay.portlet.asset.model.AssetLink assetLink) {
+	public int compareTo(AssetLink assetLink) {
 		return _assetLink.compareTo(assetLink);
 	}
 

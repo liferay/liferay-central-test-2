@@ -17,7 +17,6 @@ package com.liferay.portlet.asset.service.persistence;
 import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
-import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
@@ -459,11 +458,12 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	}
 
 	public List<AssetLink> findByE1(long entryId1, int start, int end,
-		OrderByComparator obc) throws SystemException {
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(entryId1),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<AssetLink> list = (List<AssetLink>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_E1,
@@ -477,9 +477,9 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(3);
@@ -489,8 +489,9 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 
 				query.append(_FINDER_COLUMN_E1_ENTRYID1_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -528,9 +529,10 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 		return list;
 	}
 
-	public AssetLink findByE1_First(long entryId1, OrderByComparator obc)
+	public AssetLink findByE1_First(long entryId1,
+		OrderByComparator orderByComparator)
 		throws NoSuchLinkException, SystemException {
-		List<AssetLink> list = findByE1(entryId1, 0, 1, obc);
+		List<AssetLink> list = findByE1(entryId1, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -549,11 +551,13 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 		}
 	}
 
-	public AssetLink findByE1_Last(long entryId1, OrderByComparator obc)
+	public AssetLink findByE1_Last(long entryId1,
+		OrderByComparator orderByComparator)
 		throws NoSuchLinkException, SystemException {
 		int count = countByE1(entryId1);
 
-		List<AssetLink> list = findByE1(entryId1, count - 1, count, obc);
+		List<AssetLink> list = findByE1(entryId1, count - 1, count,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -573,7 +577,8 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	}
 
 	public AssetLink[] findByE1_PrevAndNext(long linkId, long entryId1,
-		OrderByComparator obc) throws NoSuchLinkException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchLinkException, SystemException {
 		AssetLink assetLink = findByPrimaryKey(linkId);
 
 		int count = countByE1(entryId1);
@@ -585,9 +590,9 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(3);
@@ -597,8 +602,9 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 
 			query.append(_FINDER_COLUMN_E1_ENTRYID1_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -613,8 +619,8 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 
 			qPos.add(entryId1);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					assetLink);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, assetLink);
 
 			AssetLink[] array = new AssetLinkImpl[3];
 
@@ -688,11 +694,12 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	}
 
 	public List<AssetLink> findByE2(long entryId2, int start, int end,
-		OrderByComparator obc) throws SystemException {
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(entryId2),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<AssetLink> list = (List<AssetLink>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_E2,
@@ -706,9 +713,9 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(3);
@@ -718,8 +725,9 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 
 				query.append(_FINDER_COLUMN_E2_ENTRYID2_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -757,9 +765,10 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 		return list;
 	}
 
-	public AssetLink findByE2_First(long entryId2, OrderByComparator obc)
+	public AssetLink findByE2_First(long entryId2,
+		OrderByComparator orderByComparator)
 		throws NoSuchLinkException, SystemException {
-		List<AssetLink> list = findByE2(entryId2, 0, 1, obc);
+		List<AssetLink> list = findByE2(entryId2, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -778,11 +787,13 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 		}
 	}
 
-	public AssetLink findByE2_Last(long entryId2, OrderByComparator obc)
+	public AssetLink findByE2_Last(long entryId2,
+		OrderByComparator orderByComparator)
 		throws NoSuchLinkException, SystemException {
 		int count = countByE2(entryId2);
 
-		List<AssetLink> list = findByE2(entryId2, count - 1, count, obc);
+		List<AssetLink> list = findByE2(entryId2, count - 1, count,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -802,7 +813,8 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	}
 
 	public AssetLink[] findByE2_PrevAndNext(long linkId, long entryId2,
-		OrderByComparator obc) throws NoSuchLinkException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchLinkException, SystemException {
 		AssetLink assetLink = findByPrimaryKey(linkId);
 
 		int count = countByE2(entryId2);
@@ -814,9 +826,9 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(3);
@@ -826,8 +838,9 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 
 			query.append(_FINDER_COLUMN_E2_ENTRYID2_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -842,8 +855,8 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 
 			qPos.add(entryId2);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					assetLink);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, assetLink);
 
 			AssetLink[] array = new AssetLinkImpl[3];
 
@@ -924,11 +937,12 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	}
 
 	public List<AssetLink> findByE_E(long entryId1, long entryId2, int start,
-		int end, OrderByComparator obc) throws SystemException {
+		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(entryId1), new Long(entryId2),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<AssetLink> list = (List<AssetLink>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_E_E,
@@ -942,9 +956,9 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(4 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(4);
@@ -956,8 +970,9 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 
 				query.append(_FINDER_COLUMN_E_E_ENTRYID2_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -998,8 +1013,10 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	}
 
 	public AssetLink findByE_E_First(long entryId1, long entryId2,
-		OrderByComparator obc) throws NoSuchLinkException, SystemException {
-		List<AssetLink> list = findByE_E(entryId1, entryId2, 0, 1, obc);
+		OrderByComparator orderByComparator)
+		throws NoSuchLinkException, SystemException {
+		List<AssetLink> list = findByE_E(entryId1, entryId2, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -1022,11 +1039,12 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	}
 
 	public AssetLink findByE_E_Last(long entryId1, long entryId2,
-		OrderByComparator obc) throws NoSuchLinkException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchLinkException, SystemException {
 		int count = countByE_E(entryId1, entryId2);
 
 		List<AssetLink> list = findByE_E(entryId1, entryId2, count - 1, count,
-				obc);
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -1049,7 +1067,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	}
 
 	public AssetLink[] findByE_E_PrevAndNext(long linkId, long entryId1,
-		long entryId2, OrderByComparator obc)
+		long entryId2, OrderByComparator orderByComparator)
 		throws NoSuchLinkException, SystemException {
 		AssetLink assetLink = findByPrimaryKey(linkId);
 
@@ -1062,9 +1080,9 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(4 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(4);
@@ -1076,8 +1094,9 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 
 			query.append(_FINDER_COLUMN_E_E_ENTRYID2_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -1094,8 +1113,8 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 
 			qPos.add(entryId2);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					assetLink);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, assetLink);
 
 			AssetLink[] array = new AssetLinkImpl[3];
 
@@ -1176,11 +1195,12 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	}
 
 	public List<AssetLink> findByE1_T(long entryId1, int typeId, int start,
-		int end, OrderByComparator obc) throws SystemException {
+		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(entryId1), new Integer(typeId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<AssetLink> list = (List<AssetLink>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_E1_T,
@@ -1194,9 +1214,9 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(4 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(4);
@@ -1208,8 +1228,9 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 
 				query.append(_FINDER_COLUMN_E1_T_TYPEID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -1250,8 +1271,10 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	}
 
 	public AssetLink findByE1_T_First(long entryId1, int typeId,
-		OrderByComparator obc) throws NoSuchLinkException, SystemException {
-		List<AssetLink> list = findByE1_T(entryId1, typeId, 0, 1, obc);
+		OrderByComparator orderByComparator)
+		throws NoSuchLinkException, SystemException {
+		List<AssetLink> list = findByE1_T(entryId1, typeId, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -1274,11 +1297,12 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	}
 
 	public AssetLink findByE1_T_Last(long entryId1, int typeId,
-		OrderByComparator obc) throws NoSuchLinkException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchLinkException, SystemException {
 		int count = countByE1_T(entryId1, typeId);
 
 		List<AssetLink> list = findByE1_T(entryId1, typeId, count - 1, count,
-				obc);
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -1301,7 +1325,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	}
 
 	public AssetLink[] findByE1_T_PrevAndNext(long linkId, long entryId1,
-		int typeId, OrderByComparator obc)
+		int typeId, OrderByComparator orderByComparator)
 		throws NoSuchLinkException, SystemException {
 		AssetLink assetLink = findByPrimaryKey(linkId);
 
@@ -1314,9 +1338,9 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(4 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(4);
@@ -1328,8 +1352,9 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 
 			query.append(_FINDER_COLUMN_E1_T_TYPEID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -1346,8 +1371,8 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 
 			qPos.add(typeId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					assetLink);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, assetLink);
 
 			AssetLink[] array = new AssetLinkImpl[3];
 
@@ -1428,11 +1453,12 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	}
 
 	public List<AssetLink> findByE2_T(long entryId2, int typeId, int start,
-		int end, OrderByComparator obc) throws SystemException {
+		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(entryId2), new Integer(typeId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<AssetLink> list = (List<AssetLink>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_E2_T,
@@ -1446,9 +1472,9 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(4 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(4);
@@ -1460,8 +1486,9 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 
 				query.append(_FINDER_COLUMN_E2_T_TYPEID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -1502,8 +1529,10 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	}
 
 	public AssetLink findByE2_T_First(long entryId2, int typeId,
-		OrderByComparator obc) throws NoSuchLinkException, SystemException {
-		List<AssetLink> list = findByE2_T(entryId2, typeId, 0, 1, obc);
+		OrderByComparator orderByComparator)
+		throws NoSuchLinkException, SystemException {
+		List<AssetLink> list = findByE2_T(entryId2, typeId, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -1526,11 +1555,12 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	}
 
 	public AssetLink findByE2_T_Last(long entryId2, int typeId,
-		OrderByComparator obc) throws NoSuchLinkException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchLinkException, SystemException {
 		int count = countByE2_T(entryId2, typeId);
 
 		List<AssetLink> list = findByE2_T(entryId2, typeId, count - 1, count,
-				obc);
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -1553,7 +1583,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	}
 
 	public AssetLink[] findByE2_T_PrevAndNext(long linkId, long entryId2,
-		int typeId, OrderByComparator obc)
+		int typeId, OrderByComparator orderByComparator)
 		throws NoSuchLinkException, SystemException {
 		AssetLink assetLink = findByPrimaryKey(linkId);
 
@@ -1566,9 +1596,9 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(4 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(4);
@@ -1580,8 +1610,9 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 
 			query.append(_FINDER_COLUMN_E2_T_TYPEID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -1598,8 +1629,8 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 
 			qPos.add(typeId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					assetLink);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, assetLink);
 
 			AssetLink[] array = new AssetLinkImpl[3];
 
@@ -1684,12 +1715,13 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	}
 
 	public List<AssetLink> findByE_E_T(long entryId1, long entryId2,
-		int typeId, int start, int end, OrderByComparator obc)
+		int typeId, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(entryId1), new Long(entryId2), new Integer(typeId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<AssetLink> list = (List<AssetLink>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_E_E_T,
@@ -1703,9 +1735,9 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(5 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(5);
@@ -1719,8 +1751,9 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 
 				query.append(_FINDER_COLUMN_E_E_T_TYPEID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -1763,9 +1796,10 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	}
 
 	public AssetLink findByE_E_T_First(long entryId1, long entryId2,
-		int typeId, OrderByComparator obc)
+		int typeId, OrderByComparator orderByComparator)
 		throws NoSuchLinkException, SystemException {
-		List<AssetLink> list = findByE_E_T(entryId1, entryId2, typeId, 0, 1, obc);
+		List<AssetLink> list = findByE_E_T(entryId1, entryId2, typeId, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(8);
@@ -1791,11 +1825,12 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	}
 
 	public AssetLink findByE_E_T_Last(long entryId1, long entryId2, int typeId,
-		OrderByComparator obc) throws NoSuchLinkException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchLinkException, SystemException {
 		int count = countByE_E_T(entryId1, entryId2, typeId);
 
 		List<AssetLink> list = findByE_E_T(entryId1, entryId2, typeId,
-				count - 1, count, obc);
+				count - 1, count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(8);
@@ -1821,7 +1856,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	}
 
 	public AssetLink[] findByE_E_T_PrevAndNext(long linkId, long entryId1,
-		long entryId2, int typeId, OrderByComparator obc)
+		long entryId2, int typeId, OrderByComparator orderByComparator)
 		throws NoSuchLinkException, SystemException {
 		AssetLink assetLink = findByPrimaryKey(linkId);
 
@@ -1834,9 +1869,9 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(5 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(5);
@@ -1850,8 +1885,9 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 
 			query.append(_FINDER_COLUMN_E_E_T_TYPEID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -1870,8 +1906,8 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 
 			qPos.add(typeId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					assetLink);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, assetLink);
 
 			AssetLink[] array = new AssetLinkImpl[3];
 
@@ -1880,46 +1916,6 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 			array[2] = (AssetLink)objArray[2];
 
 			return array;
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.setLimit(start, end);
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
 		}
 		catch (Exception e) {
 			throw processException(e);
@@ -1938,10 +1934,11 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 		return findAll(start, end, null);
 	}
 
-	public List<AssetLink> findAll(int start, int end, OrderByComparator obc)
-		throws SystemException {
+	public List<AssetLink> findAll(int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<AssetLink> list = (List<AssetLink>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
@@ -1956,13 +1953,14 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 				StringBundler query = null;
 				String sql = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(2 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 
 					query.append(_SQL_SELECT_ASSETLINK);
 
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 
 					sql = query.toString();
 				}
@@ -1973,7 +1971,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 
 				Query q = session.createQuery(sql);
 
-				if (obc == null) {
+				if (orderByComparator == null) {
 					list = (List<AssetLink>)QueryUtil.list(q, getDialect(),
 							start, end, false);
 

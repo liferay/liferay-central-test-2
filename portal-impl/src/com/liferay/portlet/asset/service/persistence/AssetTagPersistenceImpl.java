@@ -22,7 +22,6 @@ import com.liferay.portal.kernel.dao.jdbc.MappingSqlQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.jdbc.RowMapper;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
-import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
@@ -389,11 +388,12 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 	}
 
 	public List<AssetTag> findByGroupId(long groupId, int start, int end,
-		OrderByComparator obc) throws SystemException {
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<AssetTag> list = (List<AssetTag>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
@@ -407,9 +407,9 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(3);
@@ -419,8 +419,9 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 
 				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -458,9 +459,10 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 		return list;
 	}
 
-	public AssetTag findByGroupId_First(long groupId, OrderByComparator obc)
+	public AssetTag findByGroupId_First(long groupId,
+		OrderByComparator orderByComparator)
 		throws NoSuchTagException, SystemException {
-		List<AssetTag> list = findByGroupId(groupId, 0, 1, obc);
+		List<AssetTag> list = findByGroupId(groupId, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -479,11 +481,13 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 		}
 	}
 
-	public AssetTag findByGroupId_Last(long groupId, OrderByComparator obc)
+	public AssetTag findByGroupId_Last(long groupId,
+		OrderByComparator orderByComparator)
 		throws NoSuchTagException, SystemException {
 		int count = countByGroupId(groupId);
 
-		List<AssetTag> list = findByGroupId(groupId, count - 1, count, obc);
+		List<AssetTag> list = findByGroupId(groupId, count - 1, count,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -503,7 +507,8 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 	}
 
 	public AssetTag[] findByGroupId_PrevAndNext(long tagId, long groupId,
-		OrderByComparator obc) throws NoSuchTagException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchTagException, SystemException {
 		AssetTag assetTag = findByPrimaryKey(tagId);
 
 		int count = countByGroupId(groupId);
@@ -515,9 +520,9 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(3);
@@ -527,8 +532,9 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -543,7 +549,8 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 
 			qPos.add(groupId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, assetTag);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, assetTag);
 
 			AssetTag[] array = new AssetTagImpl[3];
 
@@ -561,46 +568,6 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 		}
 	}
 
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.setLimit(start, end);
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
 	public List<AssetTag> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -609,10 +576,11 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 		return findAll(start, end, null);
 	}
 
-	public List<AssetTag> findAll(int start, int end, OrderByComparator obc)
-		throws SystemException {
+	public List<AssetTag> findAll(int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<AssetTag> list = (List<AssetTag>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
@@ -627,13 +595,14 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 				StringBundler query = null;
 				String sql = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(2 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 
 					query.append(_SQL_SELECT_ASSETTAG);
 
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 
 					sql = query.toString();
 				}
@@ -644,7 +613,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 
 				Query q = session.createQuery(sql);
 
-				if (obc == null) {
+				if (orderByComparator == null) {
 					list = (List<AssetTag>)QueryUtil.list(q, getDialect(),
 							start, end, false);
 
@@ -786,11 +755,11 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 			});
 
 	public List<com.liferay.portlet.asset.model.AssetEntry> getAssetEntries(
-		long pk, int start, int end, OrderByComparator obc)
+		long pk, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(pk), String.valueOf(start), String.valueOf(end),
-				String.valueOf(obc)
+				String.valueOf(orderByComparator)
 			};
 
 		List<com.liferay.portlet.asset.model.AssetEntry> list = (List<com.liferay.portlet.asset.model.AssetEntry>)FinderCacheUtil.getResult(FINDER_PATH_GET_ASSETENTRIES,
@@ -804,9 +773,9 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 
 				String sql = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					sql = _SQL_GETASSETENTRIES.concat(ORDER_BY_CLAUSE)
-											  .concat(obc.getOrderBy());
+											  .concat(orderByComparator.getOrderBy());
 				}
 
 				sql = _SQL_GETASSETENTRIES;

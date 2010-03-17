@@ -22,7 +22,6 @@ import com.liferay.portal.kernel.dao.jdbc.MappingSqlQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.jdbc.RowMapper;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
-import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
@@ -571,11 +570,12 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 	}
 
 	public List<AssetCategory> findByUuid(String uuid, int start, int end,
-		OrderByComparator obc) throws SystemException {
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				uuid,
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<AssetCategory> list = (List<AssetCategory>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_UUID,
@@ -589,9 +589,9 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(3);
@@ -611,8 +611,9 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 					}
 				}
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -652,9 +653,10 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 		return list;
 	}
 
-	public AssetCategory findByUuid_First(String uuid, OrderByComparator obc)
+	public AssetCategory findByUuid_First(String uuid,
+		OrderByComparator orderByComparator)
 		throws NoSuchCategoryException, SystemException {
-		List<AssetCategory> list = findByUuid(uuid, 0, 1, obc);
+		List<AssetCategory> list = findByUuid(uuid, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -673,11 +675,13 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 		}
 	}
 
-	public AssetCategory findByUuid_Last(String uuid, OrderByComparator obc)
+	public AssetCategory findByUuid_Last(String uuid,
+		OrderByComparator orderByComparator)
 		throws NoSuchCategoryException, SystemException {
 		int count = countByUuid(uuid);
 
-		List<AssetCategory> list = findByUuid(uuid, count - 1, count, obc);
+		List<AssetCategory> list = findByUuid(uuid, count - 1, count,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -697,7 +701,8 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 	}
 
 	public AssetCategory[] findByUuid_PrevAndNext(long categoryId, String uuid,
-		OrderByComparator obc) throws NoSuchCategoryException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchCategoryException, SystemException {
 		AssetCategory assetCategory = findByPrimaryKey(categoryId);
 
 		int count = countByUuid(uuid);
@@ -709,9 +714,9 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(3);
@@ -731,8 +736,9 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 				}
 			}
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -749,8 +755,8 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 				qPos.add(uuid);
 			}
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					assetCategory);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, assetCategory);
 
 			AssetCategory[] array = new AssetCategoryImpl[3];
 
@@ -953,11 +959,13 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 	}
 
 	public List<AssetCategory> findByParentCategoryId(long parentCategoryId,
-		int start, int end, OrderByComparator obc) throws SystemException {
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(parentCategoryId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<AssetCategory> list = (List<AssetCategory>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_PARENTCATEGORYID,
@@ -971,9 +979,9 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(3);
@@ -983,8 +991,9 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 
 				query.append(_FINDER_COLUMN_PARENTCATEGORYID_PARENTCATEGORYID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -1023,9 +1032,10 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 	}
 
 	public AssetCategory findByParentCategoryId_First(long parentCategoryId,
-		OrderByComparator obc) throws NoSuchCategoryException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchCategoryException, SystemException {
 		List<AssetCategory> list = findByParentCategoryId(parentCategoryId, 0,
-				1, obc);
+				1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -1045,11 +1055,12 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 	}
 
 	public AssetCategory findByParentCategoryId_Last(long parentCategoryId,
-		OrderByComparator obc) throws NoSuchCategoryException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchCategoryException, SystemException {
 		int count = countByParentCategoryId(parentCategoryId);
 
 		List<AssetCategory> list = findByParentCategoryId(parentCategoryId,
-				count - 1, count, obc);
+				count - 1, count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -1069,7 +1080,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 	}
 
 	public AssetCategory[] findByParentCategoryId_PrevAndNext(long categoryId,
-		long parentCategoryId, OrderByComparator obc)
+		long parentCategoryId, OrderByComparator orderByComparator)
 		throws NoSuchCategoryException, SystemException {
 		AssetCategory assetCategory = findByPrimaryKey(categoryId);
 
@@ -1082,9 +1093,9 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(3);
@@ -1094,8 +1105,9 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 
 			query.append(_FINDER_COLUMN_PARENTCATEGORYID_PARENTCATEGORYID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -1110,8 +1122,8 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 
 			qPos.add(parentCategoryId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					assetCategory);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, assetCategory);
 
 			AssetCategory[] array = new AssetCategoryImpl[3];
 
@@ -1186,11 +1198,12 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 	}
 
 	public List<AssetCategory> findByVocabularyId(long vocabularyId, int start,
-		int end, OrderByComparator obc) throws SystemException {
+		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(vocabularyId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<AssetCategory> list = (List<AssetCategory>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_VOCABULARYID,
@@ -1204,9 +1217,9 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(3);
@@ -1216,8 +1229,9 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 
 				query.append(_FINDER_COLUMN_VOCABULARYID_VOCABULARYID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -1256,8 +1270,10 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 	}
 
 	public AssetCategory findByVocabularyId_First(long vocabularyId,
-		OrderByComparator obc) throws NoSuchCategoryException, SystemException {
-		List<AssetCategory> list = findByVocabularyId(vocabularyId, 0, 1, obc);
+		OrderByComparator orderByComparator)
+		throws NoSuchCategoryException, SystemException {
+		List<AssetCategory> list = findByVocabularyId(vocabularyId, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -1277,11 +1293,12 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 	}
 
 	public AssetCategory findByVocabularyId_Last(long vocabularyId,
-		OrderByComparator obc) throws NoSuchCategoryException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchCategoryException, SystemException {
 		int count = countByVocabularyId(vocabularyId);
 
 		List<AssetCategory> list = findByVocabularyId(vocabularyId, count - 1,
-				count, obc);
+				count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -1301,7 +1318,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 	}
 
 	public AssetCategory[] findByVocabularyId_PrevAndNext(long categoryId,
-		long vocabularyId, OrderByComparator obc)
+		long vocabularyId, OrderByComparator orderByComparator)
 		throws NoSuchCategoryException, SystemException {
 		AssetCategory assetCategory = findByPrimaryKey(categoryId);
 
@@ -1314,9 +1331,9 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(3);
@@ -1326,8 +1343,9 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 
 			query.append(_FINDER_COLUMN_VOCABULARYID_VOCABULARYID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -1342,8 +1360,8 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 
 			qPos.add(vocabularyId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					assetCategory);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, assetCategory);
 
 			AssetCategory[] array = new AssetCategoryImpl[3];
 
@@ -1434,13 +1452,15 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 	}
 
 	public List<AssetCategory> findByP_N(long parentCategoryId, String name,
-		int start, int end, OrderByComparator obc) throws SystemException {
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(parentCategoryId),
 				
 				name,
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<AssetCategory> list = (List<AssetCategory>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_P_N,
@@ -1454,9 +1474,9 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(4 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(4);
@@ -1478,8 +1498,9 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 					}
 				}
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -1522,8 +1543,10 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 	}
 
 	public AssetCategory findByP_N_First(long parentCategoryId, String name,
-		OrderByComparator obc) throws NoSuchCategoryException, SystemException {
-		List<AssetCategory> list = findByP_N(parentCategoryId, name, 0, 1, obc);
+		OrderByComparator orderByComparator)
+		throws NoSuchCategoryException, SystemException {
+		List<AssetCategory> list = findByP_N(parentCategoryId, name, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -1546,11 +1569,12 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 	}
 
 	public AssetCategory findByP_N_Last(long parentCategoryId, String name,
-		OrderByComparator obc) throws NoSuchCategoryException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchCategoryException, SystemException {
 		int count = countByP_N(parentCategoryId, name);
 
 		List<AssetCategory> list = findByP_N(parentCategoryId, name, count - 1,
-				count, obc);
+				count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -1573,7 +1597,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 	}
 
 	public AssetCategory[] findByP_N_PrevAndNext(long categoryId,
-		long parentCategoryId, String name, OrderByComparator obc)
+		long parentCategoryId, String name, OrderByComparator orderByComparator)
 		throws NoSuchCategoryException, SystemException {
 		AssetCategory assetCategory = findByPrimaryKey(categoryId);
 
@@ -1586,9 +1610,9 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(4 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(4);
@@ -1610,8 +1634,9 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 				}
 			}
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -1630,8 +1655,8 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 				qPos.add(name);
 			}
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					assetCategory);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, assetCategory);
 
 			AssetCategory[] array = new AssetCategoryImpl[3];
 
@@ -1712,12 +1737,13 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 	}
 
 	public List<AssetCategory> findByP_V(long parentCategoryId,
-		long vocabularyId, int start, int end, OrderByComparator obc)
-		throws SystemException {
+		long vocabularyId, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(parentCategoryId), new Long(vocabularyId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<AssetCategory> list = (List<AssetCategory>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_P_V,
@@ -1731,9 +1757,9 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(4 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(4);
@@ -1745,8 +1771,9 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 
 				query.append(_FINDER_COLUMN_P_V_VOCABULARYID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -1787,10 +1814,10 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 	}
 
 	public AssetCategory findByP_V_First(long parentCategoryId,
-		long vocabularyId, OrderByComparator obc)
+		long vocabularyId, OrderByComparator orderByComparator)
 		throws NoSuchCategoryException, SystemException {
 		List<AssetCategory> list = findByP_V(parentCategoryId, vocabularyId, 0,
-				1, obc);
+				1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -1813,12 +1840,12 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 	}
 
 	public AssetCategory findByP_V_Last(long parentCategoryId,
-		long vocabularyId, OrderByComparator obc)
+		long vocabularyId, OrderByComparator orderByComparator)
 		throws NoSuchCategoryException, SystemException {
 		int count = countByP_V(parentCategoryId, vocabularyId);
 
 		List<AssetCategory> list = findByP_V(parentCategoryId, vocabularyId,
-				count - 1, count, obc);
+				count - 1, count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -1841,7 +1868,8 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 	}
 
 	public AssetCategory[] findByP_V_PrevAndNext(long categoryId,
-		long parentCategoryId, long vocabularyId, OrderByComparator obc)
+		long parentCategoryId, long vocabularyId,
+		OrderByComparator orderByComparator)
 		throws NoSuchCategoryException, SystemException {
 		AssetCategory assetCategory = findByPrimaryKey(categoryId);
 
@@ -1854,9 +1882,9 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(4 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(4);
@@ -1868,8 +1896,9 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 
 			query.append(_FINDER_COLUMN_P_V_VOCABULARYID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -1886,8 +1915,8 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 
 			qPos.add(vocabularyId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					assetCategory);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, assetCategory);
 
 			AssetCategory[] array = new AssetCategoryImpl[3];
 
@@ -1978,11 +2007,13 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 	}
 
 	public List<AssetCategory> findByN_V(String name, long vocabularyId,
-		int start, int end, OrderByComparator obc) throws SystemException {
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
 		Object[] finderArgs = new Object[] {
 				name, new Long(vocabularyId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<AssetCategory> list = (List<AssetCategory>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_N_V,
@@ -1996,9 +2027,9 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(4 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(4);
@@ -2020,8 +2051,9 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 
 				query.append(_FINDER_COLUMN_N_V_VOCABULARYID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -2064,8 +2096,10 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 	}
 
 	public AssetCategory findByN_V_First(String name, long vocabularyId,
-		OrderByComparator obc) throws NoSuchCategoryException, SystemException {
-		List<AssetCategory> list = findByN_V(name, vocabularyId, 0, 1, obc);
+		OrderByComparator orderByComparator)
+		throws NoSuchCategoryException, SystemException {
+		List<AssetCategory> list = findByN_V(name, vocabularyId, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -2088,11 +2122,12 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 	}
 
 	public AssetCategory findByN_V_Last(String name, long vocabularyId,
-		OrderByComparator obc) throws NoSuchCategoryException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchCategoryException, SystemException {
 		int count = countByN_V(name, vocabularyId);
 
 		List<AssetCategory> list = findByN_V(name, vocabularyId, count - 1,
-				count, obc);
+				count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -2115,7 +2150,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 	}
 
 	public AssetCategory[] findByN_V_PrevAndNext(long categoryId, String name,
-		long vocabularyId, OrderByComparator obc)
+		long vocabularyId, OrderByComparator orderByComparator)
 		throws NoSuchCategoryException, SystemException {
 		AssetCategory assetCategory = findByPrimaryKey(categoryId);
 
@@ -2128,9 +2163,9 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(4 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(4);
@@ -2152,8 +2187,9 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 
 			query.append(_FINDER_COLUMN_N_V_VOCABULARYID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -2172,8 +2208,8 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 
 			qPos.add(vocabularyId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					assetCategory);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, assetCategory);
 
 			AssetCategory[] array = new AssetCategoryImpl[3];
 
@@ -2182,46 +2218,6 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 			array[2] = (AssetCategory)objArray[2];
 
 			return array;
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.setLimit(start, end);
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
 		}
 		catch (Exception e) {
 			throw processException(e);
@@ -2240,10 +2236,11 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 		return findAll(start, end, null);
 	}
 
-	public List<AssetCategory> findAll(int start, int end, OrderByComparator obc)
-		throws SystemException {
+	public List<AssetCategory> findAll(int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<AssetCategory> list = (List<AssetCategory>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
@@ -2258,13 +2255,14 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 				StringBundler query = null;
 				String sql = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(2 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 
 					query.append(_SQL_SELECT_ASSETCATEGORY);
 
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 
 					sql = query.toString();
 				}
@@ -2275,7 +2273,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 
 				Query q = session.createQuery(sql);
 
-				if (obc == null) {
+				if (orderByComparator == null) {
 					list = (List<AssetCategory>)QueryUtil.list(q, getDialect(),
 							start, end, false);
 
@@ -2808,11 +2806,11 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 			});
 
 	public List<com.liferay.portlet.asset.model.AssetEntry> getAssetEntries(
-		long pk, int start, int end, OrderByComparator obc)
+		long pk, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(pk), String.valueOf(start), String.valueOf(end),
-				String.valueOf(obc)
+				String.valueOf(orderByComparator)
 			};
 
 		List<com.liferay.portlet.asset.model.AssetEntry> list = (List<com.liferay.portlet.asset.model.AssetEntry>)FinderCacheUtil.getResult(FINDER_PATH_GET_ASSETENTRIES,
@@ -2826,9 +2824,9 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 
 				String sql = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					sql = _SQL_GETASSETENTRIES.concat(ORDER_BY_CLAUSE)
-											  .concat(obc.getOrderBy());
+											  .concat(orderByComparator.getOrderBy());
 				}
 
 				sql = _SQL_GETASSETENTRIES;
