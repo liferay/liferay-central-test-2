@@ -87,6 +87,8 @@ import java.util.Set;
  * @author Raymond Augé
  * @author Bruno Farache
  * @author Alex Chow
+ * @author Zsigmond Rab
+ * @author Douglas Wong
  */
 public class PortletDataContextImpl implements PortletDataContext {
 
@@ -208,6 +210,18 @@ public class PortletDataContextImpl implements PortletDataContext {
 		String className, long classPK, List<MBMessage> messages) {
 
 		_commentsMap.put(getPrimaryKeyString(className, classPK), messages);
+	}
+
+	public void addDataPermissions(Class<?> classObj, long classPK) {
+		addDataPermissions(classObj, Long.toString(classPK));
+	}
+
+	public void addDataPermissions(Class<?> classObj, String classPK) {
+		String key = getPrimaryKeyString(classObj, classPK);
+
+		if (!_dataPermissionIds.contains(key)) {
+			_dataPermissionIds.add(key);
+		}
 	}
 
 	public boolean addPrimaryKey(Class<?> classObj, String primaryKey) {
@@ -350,6 +364,10 @@ public class PortletDataContextImpl implements PortletDataContext {
 		return _companyId;
 	}
 
+	public Set<String> getDataPermissionIds() {
+		return _dataPermissionIds;
+	}
+
 	public String getDataStrategy() {
 		return _dataStrategy;
 	}
@@ -489,6 +507,11 @@ public class PortletDataContextImpl implements PortletDataContext {
 
 	public boolean hasNotUniquePerLayout(String dataKey) {
 		return _notUniquePerLayout.contains(dataKey);
+	}
+
+	public boolean hasPermissionParameter() {
+		return MapUtil.getBoolean(
+			getParameterMap(), PortletDataHandlerKeys.PERMISSIONS);
 	}
 
 	public boolean hasPrimaryKey(Class<?> classObj, String primaryKey) {
@@ -720,6 +743,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 	private Map<String, List<MBMessage>> _commentsMap =
 		new HashMap<String, List<MBMessage>>();
 	private long _companyId;
+	private Set<String> _dataPermissionIds = new HashSet<String>();
 	private String _dataStrategy;
 	private Date _endDate;
 	private long _groupId;
