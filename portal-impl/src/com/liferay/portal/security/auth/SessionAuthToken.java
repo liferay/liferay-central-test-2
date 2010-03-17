@@ -14,9 +14,6 @@
 
 package com.liferay.portal.security.auth;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.WebKeys;
@@ -35,40 +32,30 @@ public class SessionAuthToken implements AuthToken {
 	public void check(HttpServletRequest request) throws PrincipalException {
 		HttpSession session = request.getSession();
 
-		String authenticationToken = (String)session.getAttribute(
+		String sessionAuthenticationToken = (String)session.getAttribute(
 			WebKeys.AUTHENTICATION_TOKEN);
+		String requestAuthenticationToken = ParamUtil.getString(
+			request, "p_auth");
 
-		if (!authenticationToken.equals(
-				ParamUtil.getString(request, Constants.AUTHENTICATION_TOKEN))) {
-
-			String strutsAction = ParamUtil.getString(request, "struts_action");
-
-			if (_log.isWarnEnabled()) {
-				_log.warn(
-					"Authentication token does not validate for action: " +
-						strutsAction);
-			}
-
-			throw new PrincipalException();
+		if (!sessionAuthenticationToken.equals(requestAuthenticationToken)) {
+			throw new PrincipalException("Invalid authentication token");
 		}
 	}
 
 	public String getToken(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 
-		String authenticationToken = (String)session.getAttribute(
+		String sessionAuthenticationToken = (String)session.getAttribute(
 			WebKeys.AUTHENTICATION_TOKEN);
 
-		if (Validator.isNull(authenticationToken)) {
-			authenticationToken = PwdGenerator.getPassword();
+		if (Validator.isNull(sessionAuthenticationToken)) {
+			sessionAuthenticationToken = PwdGenerator.getPassword();
 
 			session.setAttribute(
-				WebKeys.AUTHENTICATION_TOKEN, authenticationToken);
+				WebKeys.AUTHENTICATION_TOKEN, sessionAuthenticationToken);
 		}
 
-		return authenticationToken;
+		return sessionAuthenticationToken;
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(SessionAuthToken.class);
 
 }

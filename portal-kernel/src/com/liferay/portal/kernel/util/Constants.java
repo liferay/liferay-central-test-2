@@ -29,8 +29,6 @@ public interface Constants {
 
 	public static final String ASSIGN = "assign";
 
-	public static final String AUTHENTICATION_TOKEN = "authenticationToken";
-
 	public static final String CANCEL = "cancel";
 
 	public static final String CHECKOUT = "checkout";

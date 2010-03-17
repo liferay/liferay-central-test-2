@@ -131,7 +131,7 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 			Properties contactExpandoMappings =
 				LDAPSettingsUtil.getContactExpandoMappings(
 					ldapServerId, companyId);
-			
+
 			if (importMethod.equals(_IMPORT_BY_USER)) {
 				List<SearchResult> searchResults = PortalLDAPUtil.getUsers(
 					ldapServerId, companyId, ldapContext, 0);
@@ -192,7 +192,7 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 						importUsersAndMembershipFromLDAPGroup(
 							ldapServerId, companyId, ldapContext,
 							userMappings, userExpandoMappings,
-							contactMappings, contactExpandoMappings, 
+							contactMappings, contactExpandoMappings,
 							userGroup.getUserGroupId(),
 							usersAttribute);
 					}
@@ -234,7 +234,6 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 		Properties groupMappings = LDAPSettingsUtil.getGroupMappings(
 			ldapServerId, companyId);
 
-		
 		User user = addUserFromLdap(
 			companyId, userMappings, userExpandoMappings,
 			contactMappings, contactExpandoMappings, attributes, password);
@@ -560,7 +559,7 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 	protected Attribute getUsersInUserGroup(
 			long ldapServerId, long companyId, LdapContext ldapContext,
 			Attributes attributes, UserGroup userGroup,
-			Properties groupMappings) 
+			Properties groupMappings)
 		throws Exception {
 
 		Attribute attribute = attributes.get(groupMappings.getProperty("user"));

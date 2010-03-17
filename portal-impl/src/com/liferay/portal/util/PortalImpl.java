@@ -406,6 +406,7 @@ public class PortalImpl implements Portal {
 
 		_reservedParams = new HashSet<String>();
 
+		_reservedParams.add("p_auth");
 		_reservedParams.add("p_l_id");
 		_reservedParams.add("p_l_reset");
 		_reservedParams.add("p_p_id");

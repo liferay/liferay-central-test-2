@@ -48,6 +48,7 @@ import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletPreferencesIds;
 import com.liferay.portal.model.PublicRenderParameter;
 import com.liferay.portal.model.User;
+import com.liferay.portal.security.auth.AuthTokenUtil;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
@@ -713,6 +714,10 @@ public class LayoutAction extends Action {
 
 						request = uploadRequest;
 					}
+				}
+
+				if (PropsValues.AUTH_TOKEN_CHECK_ENABLED) {
+					AuthTokenUtil.check(request);
 				}
 
 				ActionRequestImpl actionRequestImpl =

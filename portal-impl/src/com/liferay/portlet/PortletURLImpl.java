@@ -40,6 +40,7 @@ import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletApp;
 import com.liferay.portal.model.PublicRenderParameter;
+import com.liferay.portal.security.auth.AuthTokenUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.theme.PortletDisplay;
@@ -613,6 +614,21 @@ public class PortletURLImpl
 		writer.write(toString);
 	}
 
+	protected void addAuthToken(StringBundler sb, Key key) {
+		if (!PropsValues.AUTH_TOKEN_CHECK_ENABLED ||
+			isParameterIncludedInPath("p_auth")) {
+
+			return;
+		}
+
+		sb.append("p_auth");
+		sb.append(StringPool.EQUAL);
+		sb.append(processValue(key, AuthTokenUtil.getToken(_request)));
+		sb.append(StringPool.AMPERSAND);
+
+		addParameterIncludedInPath("p_auth");
+	}
+
 	protected String generateToString() {
 		StringBundler sb = new StringBundler(32);
 
@@ -665,6 +681,8 @@ public class PortletURLImpl
 			sb.append(portalURL);
 			sb.append(themeDisplay.getPathMain());
 			sb.append("/portal/layout?");
+
+			addAuthToken(sb, key);
 
 			sb.append("p_l_id");
 			sb.append(StringPool.EQUAL);
@@ -728,6 +746,8 @@ public class PortletURLImpl
 
 			sb.append(StringPool.QUESTION);
 		}
+
+		addAuthToken(sb, key);
 
 		if (!isParameterIncludedInPath("p_p_id")) {
 			sb.append("p_p_id");
