@@ -30,14 +30,12 @@ import javax.servlet.http.HttpSession;
 public class SessionAuthToken implements AuthToken {
 
 	public void check(HttpServletRequest request) throws PrincipalException {
-		HttpSession session = request.getSession();
-
-		String sessionAuthenticationToken = (String)session.getAttribute(
-			WebKeys.AUTHENTICATION_TOKEN);
 		String requestAuthenticationToken = ParamUtil.getString(
 			request, "p_auth");
 
-		if (!sessionAuthenticationToken.equals(requestAuthenticationToken)) {
+		String sessionAuthenticationToken = getToken(request);
+
+		if (!requestAuthenticationToken.equals(sessionAuthenticationToken)) {
 			throw new PrincipalException("Invalid authentication token");
 		}
 	}
