@@ -74,6 +74,21 @@ public class WorkflowDefinitionLinkLocalServiceUtil {
 		return getService().dynamicQuery(dynamicQuery, start, end);
 	}
 
+	public static java.util.List<Object> dynamicQuery(
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
+		int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .dynamicQuery(dynamicQuery, start, end, orderByComparator);
+	}
+
+	public static int dynamicQueryCount(
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().dynamicQueryCount(dynamicQuery);
+	}
+
 	public static com.liferay.portal.model.WorkflowDefinitionLink getWorkflowDefinitionLink(
 		long workflowDefinitionLinkId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -137,6 +152,14 @@ public class WorkflowDefinitionLinkLocalServiceUtil {
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .hasWorkflowDefinitionLink(companyId, groupId, className);
+	}
+
+	public static int searchCount(java.lang.String workflowDefinitionName,
+		int workflowDefinitionVersion)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .searchCount(workflowDefinitionName,
+			workflowDefinitionVersion);
 	}
 
 	public static com.liferay.portal.model.WorkflowDefinitionLink updateWorkflowDefinitionLink(

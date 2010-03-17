@@ -27,6 +27,7 @@ import java.util.List;
  * @author Micha Kiener
  * @author Shuyang Zhou
  * @author Brian Wing Shun Chan
+ * @author Marcellus Tavares
  */
 public class WorkflowDefinitionManagerUtil {
 
@@ -87,6 +88,15 @@ public class WorkflowDefinitionManagerUtil {
 
 		_workflowDefinitionManager.undeployWorkflowDefinition(
 			companyId, userId, name, version);
+	}
+
+	public static WorkflowDefinition updateActive(
+			long companyId, long userId, String name, int version,
+			boolean active)
+		throws WorkflowException {
+
+		return _workflowDefinitionManager.updateActive(
+			companyId, userId, name, version, active);
 	}
 
 	public void setWorkflowDefinitionManager(

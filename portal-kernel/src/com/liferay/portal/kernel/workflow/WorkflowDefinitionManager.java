@@ -29,6 +29,7 @@ import java.util.List;
  * @author Micha Kiener
  * @author Shuyang Zhou
  * @author Brian Wing Shun Chan
+ * @author Marcellus Tavares
  */
 public interface WorkflowDefinitionManager {
 
@@ -59,6 +60,11 @@ public interface WorkflowDefinitionManager {
 
 	public void undeployWorkflowDefinition(
 			long companyId, long userId, String name, int version)
+		throws WorkflowException;
+
+	public WorkflowDefinition updateActive(
+			long companyId, long userId, String name, int version,
+			boolean active)
 		throws WorkflowException;
 
 }

@@ -30,6 +30,7 @@ import java.util.List;
  * @author Micha Kiener
  * @author Shuyang Zhou
  * @author Brian Wing Shun Chan
+ * @author Marcellus Tavares
  */
 public class WorkflowDefinitionManagerProxyBean
 	extends BaseProxyBean implements WorkflowDefinitionManager {
@@ -70,6 +71,12 @@ public class WorkflowDefinitionManagerProxyBean
 
 	public void undeployWorkflowDefinition(
 		long companyId, long userId, String name, int version) {
+
+		throw new UnsupportedOperationException();
+	}
+
+	public WorkflowDefinition updateActive(
+		long companyId, long userId, String name, int version, boolean active) {
 
 		throw new UnsupportedOperationException();
 	}

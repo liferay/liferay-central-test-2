@@ -68,22 +68,24 @@ public interface WorkflowDefinitionLinkPersistence extends BasePersistence<Workf
 
 	public java.util.List<com.liferay.portal.model.WorkflowDefinitionLink> findByCompanyId(
 		long companyId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.WorkflowDefinitionLink findByCompanyId_First(
-		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long companyId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchWorkflowDefinitionLinkException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.WorkflowDefinitionLink findByCompanyId_Last(
-		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long companyId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchWorkflowDefinitionLinkException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.WorkflowDefinitionLink[] findByCompanyId_PrevAndNext(
 		long workflowDefinitionLinkId, long companyId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchWorkflowDefinitionLinkException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -101,6 +103,40 @@ public interface WorkflowDefinitionLinkPersistence extends BasePersistence<Workf
 		boolean retrieveFromCache)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	public java.util.List<com.liferay.portal.model.WorkflowDefinitionLink> findByW_W(
+		java.lang.String workflowDefinitionName, int workflowDefinitionVersion)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portal.model.WorkflowDefinitionLink> findByW_W(
+		java.lang.String workflowDefinitionName, int workflowDefinitionVersion,
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portal.model.WorkflowDefinitionLink> findByW_W(
+		java.lang.String workflowDefinitionName, int workflowDefinitionVersion,
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.portal.model.WorkflowDefinitionLink findByW_W_First(
+		java.lang.String workflowDefinitionName, int workflowDefinitionVersion,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.NoSuchWorkflowDefinitionLinkException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.portal.model.WorkflowDefinitionLink findByW_W_Last(
+		java.lang.String workflowDefinitionName, int workflowDefinitionVersion,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.NoSuchWorkflowDefinitionLinkException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.portal.model.WorkflowDefinitionLink[] findByW_W_PrevAndNext(
+		long workflowDefinitionLinkId, java.lang.String workflowDefinitionName,
+		int workflowDefinitionVersion,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.NoSuchWorkflowDefinitionLinkException,
+			com.liferay.portal.kernel.exception.SystemException;
+
 	public java.util.List<com.liferay.portal.model.WorkflowDefinitionLink> findAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
 
@@ -109,7 +145,8 @@ public interface WorkflowDefinitionLinkPersistence extends BasePersistence<Workf
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portal.model.WorkflowDefinitionLink> findAll(
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void removeByCompanyId(long companyId)
@@ -119,6 +156,10 @@ public interface WorkflowDefinitionLinkPersistence extends BasePersistence<Workf
 		throws com.liferay.portal.NoSuchWorkflowDefinitionLinkException,
 			com.liferay.portal.kernel.exception.SystemException;
 
+	public void removeByW_W(java.lang.String workflowDefinitionName,
+		int workflowDefinitionVersion)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public void removeAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
 
@@ -126,6 +167,10 @@ public interface WorkflowDefinitionLinkPersistence extends BasePersistence<Workf
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countByG_C_C(long groupId, long companyId, long classNameId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public int countByW_W(java.lang.String workflowDefinitionName,
+		int workflowDefinitionVersion)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countAll()
