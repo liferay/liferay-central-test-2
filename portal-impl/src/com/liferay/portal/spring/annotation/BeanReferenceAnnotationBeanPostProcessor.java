@@ -85,10 +85,10 @@ public class BeanReferenceAnnotationBeanPostProcessor
 
 			String referencedBeanName = beanReference.name();
 
-			Class referencedBeanClass = beanReference.referencedBeanType();
+			Class<?> referencedBeanType = beanReference.type();
 
-			if (!Object.class.equals(referencedBeanClass)) {
-				referencedBeanName = referencedBeanClass.getName();
+			if (!Object.class.equals(referencedBeanType)) {
+				referencedBeanName = referencedBeanType.getName();
 			}
 
 			Object referencedBean = _beans.get(referencedBeanName);
