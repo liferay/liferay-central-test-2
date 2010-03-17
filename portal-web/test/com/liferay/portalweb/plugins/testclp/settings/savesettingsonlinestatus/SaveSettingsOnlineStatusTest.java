@@ -25,93 +25,114 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class SaveSettingsOnlineStatusTest extends BaseTestCase {
 	public void testSaveSettingsOnlineStatus() throws Exception {
-		selenium.open("/web/guest/home/");
+		int label = 1;
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+		while (label >= 1) {
+			switch (label) {
+			case 1:
+				selenium.open("/web/guest/home/");
 
-			try {
-				if (selenium.isElementPresent("link=Test CLP Test Page")) {
-					break;
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isElementPresent("link=Test CLP Test Page")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
-		}
+				selenium.clickAt("link=Test CLP Test Page",
+					RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
+				assertEquals(RuntimeVariables.replace("true"),
+					selenium.getText(
+						"//div[@class='portlet-body']/table/tbody/tr[2]/td[4]"));
+				selenium.clickAt("//ul[@class='chat-tabs']/li[2]/div[1]/span",
+					RuntimeVariables.replace(""));
 
-		selenium.clickAt("link=Test CLP Test Page", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		assertEquals(RuntimeVariables.replace(""),
-			selenium.getText(
-				"//div[@class='portlet-body']/table/tbody/tr[2]/td[7]"));
-		selenium.clickAt("//ul[@class='chat-tabs']/li[2]/div[1]/span",
-			RuntimeVariables.replace(""));
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+					try {
+						if (selenium.isVisible("onlineStatus")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
 
-			try {
-				if (selenium.isVisible("statusMessage")) {
-					break;
+					Thread.sleep(1000);
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
-		}
+				boolean onlineStatusChecked = selenium.isChecked("onlineStatus");
 
-		selenium.type("statusMessage",
-			RuntimeVariables.replace("status message."));
-		selenium.clickAt("saveSettings", RuntimeVariables.replace(""));
+				if (!onlineStatusChecked) {
+					label = 2;
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (!selenium.isElementPresent(
-							"//li[@class='chat-settings saved']")) {
-					break;
+					continue;
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
-		}
+				selenium.clickAt("onlineStatus", RuntimeVariables.replace(""));
 
-		assertFalse(selenium.isElementPresent(
-				"//li[@class='chat-settings saved']"));
-		selenium.open("/web/guest/home/");
+			case 2:
+				selenium.clickAt("saveSettings", RuntimeVariables.replace(""));
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
 
-			try {
-				if (selenium.isElementPresent("link=Test CLP Test Page")) {
-					break;
+					try {
+						if (!selenium.isElementPresent(
+									"//li[@class='chat-settings saved']")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
+				assertFalse(selenium.isElementPresent(
+						"//li[@class='chat-settings saved']"));
+				selenium.open("/web/guest/home/");
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isElementPresent("link=Test CLP Test Page")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+				selenium.clickAt("link=Test CLP Test Page",
+					RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
+				assertEquals(RuntimeVariables.replace("false"),
+					selenium.getText(
+						"//div[@class='portlet-body']/table/tbody/tr[2]/td[4]"));
+
+			case 100:
+				label = -1;
+			}
 		}
-
-		selenium.clickAt("link=Test CLP Test Page", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		assertEquals(RuntimeVariables.replace("status message."),
-			selenium.getText(
-				"//div[@class='portlet-body']/table/tbody/tr[2]/td[7]"));
 	}
 }
