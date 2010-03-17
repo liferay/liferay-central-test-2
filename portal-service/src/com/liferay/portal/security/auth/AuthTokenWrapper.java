@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.kernel.security.auth;
+package com.liferay.portal.security.auth;
 
 import com.liferay.portal.kernel.exception.PortalException;
 

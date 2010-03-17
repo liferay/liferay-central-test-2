@@ -12,21 +12,37 @@
  * details.
  */
 
-package com.liferay.portal.kernel.security.auth;
+package com.liferay.portal.security.auth;
 
 import com.liferay.portal.kernel.exception.PortalException;
 
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * <a href="AuthToken.java.html"><b><i>View Source</i></b></a>
+ * <a href="AuthTokenUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Amos Fong
  */
-public interface AuthToken {
+public class AuthTokenUtil {
 
-	public void check(HttpServletRequest request) throws PortalException;
+	public static void check(HttpServletRequest request)
+		throws PortalException {
 
-	public String getToken(HttpServletRequest request);
+		getAuthToken().check(request);
+	}
+
+	public static AuthToken getAuthToken() {
+		return _authToken;
+	}
+
+	public static String getToken(HttpServletRequest request) {
+		return getAuthToken().getToken(request);
+	}
+
+	public void setAuthToken(AuthToken authToken) {
+		_authToken = authToken;
+	}
+
+	private static AuthToken _authToken;
 
 }

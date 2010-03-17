@@ -17,12 +17,12 @@ package com.liferay.portal.struts;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.LiferayPortletURL;
-import com.liferay.portal.kernel.security.auth.AuthTokenUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
+import com.liferay.portal.security.auth.AuthTokenUtil;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
@@ -168,7 +168,7 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 				}
 			}
 
-			if (action.isCheckTokenOnProcessAction()) {
+			if (action.isCheckAuthTokenOnProcessAction()) {
 				AuthTokenUtil.check(request);
 			}
 

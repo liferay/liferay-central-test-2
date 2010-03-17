@@ -14,8 +14,6 @@
 
 package com.liferay.portal.security.auth;
 
-import com.liferay.portal.kernel.security.auth.AuthToken;
-import com.liferay.portal.kernel.security.auth.AuthTokenWrapper;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.util.PropsValues;
 

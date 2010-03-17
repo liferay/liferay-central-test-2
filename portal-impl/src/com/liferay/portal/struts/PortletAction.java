@@ -203,12 +203,12 @@ public class PortletAction extends Action {
 		return getResources();
 	}
 
-	protected boolean isCheckMethodOnProcessAction() {
-		return _CHECK_METHOD_ON_PROCESS_ACTION;
+	protected boolean isCheckAuthTokenOnProcessAction() {
+		return PropsValues.AUTH_TOKEN_DEFAULT_CHECK_PORTLET_ACTION;
 	}
 
-	protected boolean isCheckTokenOnProcessAction() {
-		return PropsValues.AUTH_TOKEN_DEFAULT_CHECK_PORTLET_ACTION;
+	protected boolean isCheckMethodOnProcessAction() {
+		return _CHECK_METHOD_ON_PROCESS_ACTION;
 	}
 
 	protected void sendRedirect(
