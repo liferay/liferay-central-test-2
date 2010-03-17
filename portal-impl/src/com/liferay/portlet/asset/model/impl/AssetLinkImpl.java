@@ -22,6 +22,7 @@ import com.liferay.portlet.asset.model.AssetLink;
  * @author Brian Wing Shun Chan
  */
 public class AssetLinkImpl extends AssetLinkModelImpl implements AssetLink {
+
 	public AssetLinkImpl() {
 	}
 

@@ -190,13 +190,13 @@
 		<column name="companyId" type="long" />
 		<column name="userId" type="long" />
 		<column name="userName" type="String" />
-		<column name="modifiedDate" type="Date" />
+		<column name="createDate" type="Date" />
 
 		<!-- Other fields -->
 
 		<column name="entryId1" type="long" />
 		<column name="entryId2" type="long" />
-		<column name="typeId" type="int" />
+		<column name="type" type="int" />
 		<column name="weight" type="int" />
 
 		<!-- Order -->
@@ -220,16 +220,16 @@
 		</finder>
 		<finder name="E1_T" return-type="Collection">
 			<finder-column name="entryId1" />
-			<finder-column name="typeId" />
+			<finder-column name="type" />
 		</finder>
 		<finder name="E2_T" return-type="Collection">
 			<finder-column name="entryId2" />
-			<finder-column name="typeId" />
+			<finder-column name="type" />
 		</finder>
 		<finder name="E_E_T" return-type="Collection">
 			<finder-column name="entryId1" />
 			<finder-column name="entryId2" />
-			<finder-column name="typeId" />
+			<finder-column name="type" />
 		</finder>
 	</entity>
 	<entity name="AssetTag" local-service="true" remote-service="true">

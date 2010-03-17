@@ -21,8 +21,8 @@ package com.liferay.portlet.asset.model;
  */
 public interface AssetLinkConstants {
 
-	public static final int TYPE_RELATED = 0;
-
 	public static final int TYPE_CHILD = 1;
+
+	public static final int TYPE_RELATED = 0;
 
 }
