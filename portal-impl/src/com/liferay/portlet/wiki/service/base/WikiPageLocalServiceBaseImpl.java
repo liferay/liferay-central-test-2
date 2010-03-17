@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.service.CompanyLocalService;
 import com.liferay.portal.service.CompanyService;
 import com.liferay.portal.service.GroupLocalService;
@@ -120,6 +121,17 @@ public abstract class WikiPageLocalServiceBaseImpl
 	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
 		int end) throws SystemException {
 		return wikiPagePersistence.findWithDynamicQuery(dynamicQuery, start, end);
+	}
+
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end, OrderByComparator orderByComparator) throws SystemException {
+		return wikiPagePersistence.findWithDynamicQuery(dynamicQuery, start,
+			end, orderByComparator);
+	}
+
+	public int dynamicQueryCount(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return wikiPagePersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
 	public WikiPage getWikiPage(long pageId)

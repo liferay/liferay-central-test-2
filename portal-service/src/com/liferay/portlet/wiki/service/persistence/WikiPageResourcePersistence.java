@@ -81,7 +81,8 @@ public interface WikiPageResourcePersistence extends BasePersistence<WikiPageRes
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portlet.wiki.model.WikiPageResource> findAll(
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void removeByN_T(long nodeId, java.lang.String title)

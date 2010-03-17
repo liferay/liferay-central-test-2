@@ -126,33 +126,34 @@ public class WikiPageUtil {
 
 	public static java.util.List<com.liferay.portlet.wiki.model.WikiPage> findByUuid(
 		java.lang.String uuid, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByUuid(uuid, start, end, obc);
+		return getPersistence().findByUuid(uuid, start, end, orderByComparator);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPage findByUuid_First(
 		java.lang.String uuid,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.wiki.NoSuchPageException {
-		return getPersistence().findByUuid_First(uuid, obc);
+		return getPersistence().findByUuid_First(uuid, orderByComparator);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPage findByUuid_Last(
 		java.lang.String uuid,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.wiki.NoSuchPageException {
-		return getPersistence().findByUuid_Last(uuid, obc);
+		return getPersistence().findByUuid_Last(uuid, orderByComparator);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPage[] findByUuid_PrevAndNext(
 		long pageId, java.lang.String uuid,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.wiki.NoSuchPageException {
-		return getPersistence().findByUuid_PrevAndNext(pageId, uuid, obc);
+		return getPersistence()
+				   .findByUuid_PrevAndNext(pageId, uuid, orderByComparator);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPage findByUUID_G(
@@ -187,31 +188,35 @@ public class WikiPageUtil {
 
 	public static java.util.List<com.liferay.portlet.wiki.model.WikiPage> findByNodeId(
 		long nodeId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByNodeId(nodeId, start, end, obc);
+		return getPersistence()
+				   .findByNodeId(nodeId, start, end, orderByComparator);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPage findByNodeId_First(
-		long nodeId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long nodeId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.wiki.NoSuchPageException {
-		return getPersistence().findByNodeId_First(nodeId, obc);
+		return getPersistence().findByNodeId_First(nodeId, orderByComparator);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPage findByNodeId_Last(
-		long nodeId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long nodeId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.wiki.NoSuchPageException {
-		return getPersistence().findByNodeId_Last(nodeId, obc);
+		return getPersistence().findByNodeId_Last(nodeId, orderByComparator);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPage[] findByNodeId_PrevAndNext(
 		long pageId, long nodeId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.wiki.NoSuchPageException {
-		return getPersistence().findByNodeId_PrevAndNext(pageId, nodeId, obc);
+		return getPersistence()
+				   .findByNodeId_PrevAndNext(pageId, nodeId, orderByComparator);
 	}
 
 	public static java.util.List<com.liferay.portlet.wiki.model.WikiPage> findByFormat(
@@ -228,33 +233,35 @@ public class WikiPageUtil {
 
 	public static java.util.List<com.liferay.portlet.wiki.model.WikiPage> findByFormat(
 		java.lang.String format, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByFormat(format, start, end, obc);
+		return getPersistence()
+				   .findByFormat(format, start, end, orderByComparator);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPage findByFormat_First(
 		java.lang.String format,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.wiki.NoSuchPageException {
-		return getPersistence().findByFormat_First(format, obc);
+		return getPersistence().findByFormat_First(format, orderByComparator);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPage findByFormat_Last(
 		java.lang.String format,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.wiki.NoSuchPageException {
-		return getPersistence().findByFormat_Last(format, obc);
+		return getPersistence().findByFormat_Last(format, orderByComparator);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPage[] findByFormat_PrevAndNext(
 		long pageId, java.lang.String format,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.wiki.NoSuchPageException {
-		return getPersistence().findByFormat_PrevAndNext(pageId, format, obc);
+		return getPersistence()
+				   .findByFormat_PrevAndNext(pageId, format, orderByComparator);
 	}
 
 	public static java.util.List<com.liferay.portlet.wiki.model.WikiPage> findByN_T(
@@ -271,33 +278,36 @@ public class WikiPageUtil {
 
 	public static java.util.List<com.liferay.portlet.wiki.model.WikiPage> findByN_T(
 		long nodeId, java.lang.String title, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByN_T(nodeId, title, start, end, obc);
+		return getPersistence()
+				   .findByN_T(nodeId, title, start, end, orderByComparator);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPage findByN_T_First(
 		long nodeId, java.lang.String title,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.wiki.NoSuchPageException {
-		return getPersistence().findByN_T_First(nodeId, title, obc);
+		return getPersistence().findByN_T_First(nodeId, title, orderByComparator);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPage findByN_T_Last(
 		long nodeId, java.lang.String title,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.wiki.NoSuchPageException {
-		return getPersistence().findByN_T_Last(nodeId, title, obc);
+		return getPersistence().findByN_T_Last(nodeId, title, orderByComparator);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPage[] findByN_T_PrevAndNext(
 		long pageId, long nodeId, java.lang.String title,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.wiki.NoSuchPageException {
-		return getPersistence().findByN_T_PrevAndNext(pageId, nodeId, title, obc);
+		return getPersistence()
+				   .findByN_T_PrevAndNext(pageId, nodeId, title,
+			orderByComparator);
 	}
 
 	public static java.util.List<com.liferay.portlet.wiki.model.WikiPage> findByN_H(
@@ -314,33 +324,36 @@ public class WikiPageUtil {
 
 	public static java.util.List<com.liferay.portlet.wiki.model.WikiPage> findByN_H(
 		long nodeId, boolean head, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByN_H(nodeId, head, start, end, obc);
+		return getPersistence()
+				   .findByN_H(nodeId, head, start, end, orderByComparator);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPage findByN_H_First(
 		long nodeId, boolean head,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.wiki.NoSuchPageException {
-		return getPersistence().findByN_H_First(nodeId, head, obc);
+		return getPersistence().findByN_H_First(nodeId, head, orderByComparator);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPage findByN_H_Last(
 		long nodeId, boolean head,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.wiki.NoSuchPageException {
-		return getPersistence().findByN_H_Last(nodeId, head, obc);
+		return getPersistence().findByN_H_Last(nodeId, head, orderByComparator);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPage[] findByN_H_PrevAndNext(
 		long pageId, long nodeId, boolean head,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.wiki.NoSuchPageException {
-		return getPersistence().findByN_H_PrevAndNext(pageId, nodeId, head, obc);
+		return getPersistence()
+				   .findByN_H_PrevAndNext(pageId, nodeId, head,
+			orderByComparator);
 	}
 
 	public static java.util.List<com.liferay.portlet.wiki.model.WikiPage> findByN_P(
@@ -357,34 +370,38 @@ public class WikiPageUtil {
 
 	public static java.util.List<com.liferay.portlet.wiki.model.WikiPage> findByN_P(
 		long nodeId, java.lang.String parentTitle, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByN_P(nodeId, parentTitle, start, end, obc);
+		return getPersistence()
+				   .findByN_P(nodeId, parentTitle, start, end, orderByComparator);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPage findByN_P_First(
 		long nodeId, java.lang.String parentTitle,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.wiki.NoSuchPageException {
-		return getPersistence().findByN_P_First(nodeId, parentTitle, obc);
+		return getPersistence()
+				   .findByN_P_First(nodeId, parentTitle, orderByComparator);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPage findByN_P_Last(
 		long nodeId, java.lang.String parentTitle,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.wiki.NoSuchPageException {
-		return getPersistence().findByN_P_Last(nodeId, parentTitle, obc);
+		return getPersistence()
+				   .findByN_P_Last(nodeId, parentTitle, orderByComparator);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPage[] findByN_P_PrevAndNext(
 		long pageId, long nodeId, java.lang.String parentTitle,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.wiki.NoSuchPageException {
 		return getPersistence()
-				   .findByN_P_PrevAndNext(pageId, nodeId, parentTitle, obc);
+				   .findByN_P_PrevAndNext(pageId, nodeId, parentTitle,
+			orderByComparator);
 	}
 
 	public static java.util.List<com.liferay.portlet.wiki.model.WikiPage> findByN_R(
@@ -401,34 +418,39 @@ public class WikiPageUtil {
 
 	public static java.util.List<com.liferay.portlet.wiki.model.WikiPage> findByN_R(
 		long nodeId, java.lang.String redirectTitle, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByN_R(nodeId, redirectTitle, start, end, obc);
+		return getPersistence()
+				   .findByN_R(nodeId, redirectTitle, start, end,
+			orderByComparator);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPage findByN_R_First(
 		long nodeId, java.lang.String redirectTitle,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.wiki.NoSuchPageException {
-		return getPersistence().findByN_R_First(nodeId, redirectTitle, obc);
+		return getPersistence()
+				   .findByN_R_First(nodeId, redirectTitle, orderByComparator);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPage findByN_R_Last(
 		long nodeId, java.lang.String redirectTitle,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.wiki.NoSuchPageException {
-		return getPersistence().findByN_R_Last(nodeId, redirectTitle, obc);
+		return getPersistence()
+				   .findByN_R_Last(nodeId, redirectTitle, orderByComparator);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPage[] findByN_R_PrevAndNext(
 		long pageId, long nodeId, java.lang.String redirectTitle,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.wiki.NoSuchPageException {
 		return getPersistence()
-				   .findByN_R_PrevAndNext(pageId, nodeId, redirectTitle, obc);
+				   .findByN_R_PrevAndNext(pageId, nodeId, redirectTitle,
+			orderByComparator);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPage findByN_T_V(
@@ -466,34 +488,39 @@ public class WikiPageUtil {
 
 	public static java.util.List<com.liferay.portlet.wiki.model.WikiPage> findByN_T_H(
 		long nodeId, java.lang.String title, boolean head, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByN_T_H(nodeId, title, head, start, end, obc);
+		return getPersistence()
+				   .findByN_T_H(nodeId, title, head, start, end,
+			orderByComparator);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPage findByN_T_H_First(
 		long nodeId, java.lang.String title, boolean head,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.wiki.NoSuchPageException {
-		return getPersistence().findByN_T_H_First(nodeId, title, head, obc);
+		return getPersistence()
+				   .findByN_T_H_First(nodeId, title, head, orderByComparator);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPage findByN_T_H_Last(
 		long nodeId, java.lang.String title, boolean head,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.wiki.NoSuchPageException {
-		return getPersistence().findByN_T_H_Last(nodeId, title, head, obc);
+		return getPersistence()
+				   .findByN_T_H_Last(nodeId, title, head, orderByComparator);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPage[] findByN_T_H_PrevAndNext(
 		long pageId, long nodeId, java.lang.String title, boolean head,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.wiki.NoSuchPageException {
 		return getPersistence()
-				   .findByN_T_H_PrevAndNext(pageId, nodeId, title, head, obc);
+				   .findByN_T_H_PrevAndNext(pageId, nodeId, title, head,
+			orderByComparator);
 	}
 
 	public static java.util.List<com.liferay.portlet.wiki.model.WikiPage> findByN_H_P(
@@ -511,36 +538,42 @@ public class WikiPageUtil {
 
 	public static java.util.List<com.liferay.portlet.wiki.model.WikiPage> findByN_H_P(
 		long nodeId, boolean head, java.lang.String parentTitle, int start,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .findByN_H_P(nodeId, head, parentTitle, start, end, obc);
+				   .findByN_H_P(nodeId, head, parentTitle, start, end,
+			orderByComparator);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPage findByN_H_P_First(
 		long nodeId, boolean head, java.lang.String parentTitle,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.wiki.NoSuchPageException {
-		return getPersistence().findByN_H_P_First(nodeId, head, parentTitle, obc);
+		return getPersistence()
+				   .findByN_H_P_First(nodeId, head, parentTitle,
+			orderByComparator);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPage findByN_H_P_Last(
 		long nodeId, boolean head, java.lang.String parentTitle,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.wiki.NoSuchPageException {
-		return getPersistence().findByN_H_P_Last(nodeId, head, parentTitle, obc);
+		return getPersistence()
+				   .findByN_H_P_Last(nodeId, head, parentTitle,
+			orderByComparator);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPage[] findByN_H_P_PrevAndNext(
 		long pageId, long nodeId, boolean head, java.lang.String parentTitle,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.wiki.NoSuchPageException {
 		return getPersistence()
 				   .findByN_H_P_PrevAndNext(pageId, nodeId, head, parentTitle,
-			obc);
+			orderByComparator);
 	}
 
 	public static java.util.List<com.liferay.portlet.wiki.model.WikiPage> findAll()
@@ -555,9 +588,10 @@ public class WikiPageUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.wiki.model.WikiPage> findAll(
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findAll(start, end, obc);
+		return getPersistence().findAll(start, end, orderByComparator);
 	}
 
 	public static void removeByUuid(java.lang.String uuid)

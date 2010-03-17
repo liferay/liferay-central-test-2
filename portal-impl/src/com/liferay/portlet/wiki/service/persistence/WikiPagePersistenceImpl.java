@@ -17,7 +17,6 @@ package com.liferay.portlet.wiki.service.persistence;
 import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
-import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
@@ -652,11 +651,12 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	}
 
 	public List<WikiPage> findByUuid(String uuid, int start, int end,
-		OrderByComparator obc) throws SystemException {
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				uuid,
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<WikiPage> list = (List<WikiPage>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_UUID,
@@ -670,9 +670,9 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(3);
@@ -692,8 +692,9 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 					}
 				}
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -733,9 +734,10 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		return list;
 	}
 
-	public WikiPage findByUuid_First(String uuid, OrderByComparator obc)
+	public WikiPage findByUuid_First(String uuid,
+		OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
-		List<WikiPage> list = findByUuid(uuid, 0, 1, obc);
+		List<WikiPage> list = findByUuid(uuid, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -754,11 +756,13 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		}
 	}
 
-	public WikiPage findByUuid_Last(String uuid, OrderByComparator obc)
+	public WikiPage findByUuid_Last(String uuid,
+		OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
 		int count = countByUuid(uuid);
 
-		List<WikiPage> list = findByUuid(uuid, count - 1, count, obc);
+		List<WikiPage> list = findByUuid(uuid, count - 1, count,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -778,7 +782,8 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	}
 
 	public WikiPage[] findByUuid_PrevAndNext(long pageId, String uuid,
-		OrderByComparator obc) throws NoSuchPageException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchPageException, SystemException {
 		WikiPage wikiPage = findByPrimaryKey(pageId);
 
 		int count = countByUuid(uuid);
@@ -790,9 +795,9 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(3);
@@ -812,8 +817,9 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 				}
 			}
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -830,7 +836,8 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 				qPos.add(uuid);
 			}
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, wikiPage);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, wikiPage);
 
 			WikiPage[] array = new WikiPageImpl[3];
 
@@ -1032,11 +1039,12 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	}
 
 	public List<WikiPage> findByNodeId(long nodeId, int start, int end,
-		OrderByComparator obc) throws SystemException {
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(nodeId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<WikiPage> list = (List<WikiPage>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_NODEID,
@@ -1050,9 +1058,9 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(3);
@@ -1062,8 +1070,9 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 
 				query.append(_FINDER_COLUMN_NODEID_NODEID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -1101,9 +1110,10 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		return list;
 	}
 
-	public WikiPage findByNodeId_First(long nodeId, OrderByComparator obc)
+	public WikiPage findByNodeId_First(long nodeId,
+		OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
-		List<WikiPage> list = findByNodeId(nodeId, 0, 1, obc);
+		List<WikiPage> list = findByNodeId(nodeId, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -1122,11 +1132,13 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		}
 	}
 
-	public WikiPage findByNodeId_Last(long nodeId, OrderByComparator obc)
+	public WikiPage findByNodeId_Last(long nodeId,
+		OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
 		int count = countByNodeId(nodeId);
 
-		List<WikiPage> list = findByNodeId(nodeId, count - 1, count, obc);
+		List<WikiPage> list = findByNodeId(nodeId, count - 1, count,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -1146,7 +1158,8 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	}
 
 	public WikiPage[] findByNodeId_PrevAndNext(long pageId, long nodeId,
-		OrderByComparator obc) throws NoSuchPageException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchPageException, SystemException {
 		WikiPage wikiPage = findByPrimaryKey(pageId);
 
 		int count = countByNodeId(nodeId);
@@ -1158,9 +1171,9 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(3);
@@ -1170,8 +1183,9 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 
 			query.append(_FINDER_COLUMN_NODEID_NODEID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -1186,7 +1200,8 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 
 			qPos.add(nodeId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, wikiPage);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, wikiPage);
 
 			WikiPage[] array = new WikiPageImpl[3];
 
@@ -1272,11 +1287,12 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	}
 
 	public List<WikiPage> findByFormat(String format, int start, int end,
-		OrderByComparator obc) throws SystemException {
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				format,
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<WikiPage> list = (List<WikiPage>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_FORMAT,
@@ -1290,9 +1306,9 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(3);
@@ -1312,8 +1328,9 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 					}
 				}
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -1353,9 +1370,10 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		return list;
 	}
 
-	public WikiPage findByFormat_First(String format, OrderByComparator obc)
+	public WikiPage findByFormat_First(String format,
+		OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
-		List<WikiPage> list = findByFormat(format, 0, 1, obc);
+		List<WikiPage> list = findByFormat(format, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -1374,11 +1392,13 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		}
 	}
 
-	public WikiPage findByFormat_Last(String format, OrderByComparator obc)
+	public WikiPage findByFormat_Last(String format,
+		OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
 		int count = countByFormat(format);
 
-		List<WikiPage> list = findByFormat(format, count - 1, count, obc);
+		List<WikiPage> list = findByFormat(format, count - 1, count,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -1398,7 +1418,8 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	}
 
 	public WikiPage[] findByFormat_PrevAndNext(long pageId, String format,
-		OrderByComparator obc) throws NoSuchPageException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchPageException, SystemException {
 		WikiPage wikiPage = findByPrimaryKey(pageId);
 
 		int count = countByFormat(format);
@@ -1410,9 +1431,9 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(3);
@@ -1432,8 +1453,9 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 				}
 			}
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -1450,7 +1472,8 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 				qPos.add(format);
 			}
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, wikiPage);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, wikiPage);
 
 			WikiPage[] array = new WikiPageImpl[3];
 
@@ -1541,13 +1564,14 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	}
 
 	public List<WikiPage> findByN_T(long nodeId, String title, int start,
-		int end, OrderByComparator obc) throws SystemException {
+		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(nodeId),
 				
 				title,
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<WikiPage> list = (List<WikiPage>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_N_T,
@@ -1561,9 +1585,9 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(4 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(4);
@@ -1585,8 +1609,9 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 					}
 				}
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -1629,8 +1654,9 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	}
 
 	public WikiPage findByN_T_First(long nodeId, String title,
-		OrderByComparator obc) throws NoSuchPageException, SystemException {
-		List<WikiPage> list = findByN_T(nodeId, title, 0, 1, obc);
+		OrderByComparator orderByComparator)
+		throws NoSuchPageException, SystemException {
+		List<WikiPage> list = findByN_T(nodeId, title, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -1653,10 +1679,12 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	}
 
 	public WikiPage findByN_T_Last(long nodeId, String title,
-		OrderByComparator obc) throws NoSuchPageException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchPageException, SystemException {
 		int count = countByN_T(nodeId, title);
 
-		List<WikiPage> list = findByN_T(nodeId, title, count - 1, count, obc);
+		List<WikiPage> list = findByN_T(nodeId, title, count - 1, count,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -1679,7 +1707,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	}
 
 	public WikiPage[] findByN_T_PrevAndNext(long pageId, long nodeId,
-		String title, OrderByComparator obc)
+		String title, OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
 		WikiPage wikiPage = findByPrimaryKey(pageId);
 
@@ -1692,9 +1720,9 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(4 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(4);
@@ -1716,8 +1744,9 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 				}
 			}
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -1736,7 +1765,8 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 				qPos.add(title);
 			}
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, wikiPage);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, wikiPage);
 
 			WikiPage[] array = new WikiPageImpl[3];
 
@@ -1817,11 +1847,12 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	}
 
 	public List<WikiPage> findByN_H(long nodeId, boolean head, int start,
-		int end, OrderByComparator obc) throws SystemException {
+		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(nodeId), Boolean.valueOf(head),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<WikiPage> list = (List<WikiPage>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_N_H,
@@ -1835,9 +1866,9 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(4 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(4);
@@ -1849,8 +1880,9 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 
 				query.append(_FINDER_COLUMN_N_H_HEAD_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -1891,8 +1923,9 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	}
 
 	public WikiPage findByN_H_First(long nodeId, boolean head,
-		OrderByComparator obc) throws NoSuchPageException, SystemException {
-		List<WikiPage> list = findByN_H(nodeId, head, 0, 1, obc);
+		OrderByComparator orderByComparator)
+		throws NoSuchPageException, SystemException {
+		List<WikiPage> list = findByN_H(nodeId, head, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -1915,10 +1948,12 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	}
 
 	public WikiPage findByN_H_Last(long nodeId, boolean head,
-		OrderByComparator obc) throws NoSuchPageException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchPageException, SystemException {
 		int count = countByN_H(nodeId, head);
 
-		List<WikiPage> list = findByN_H(nodeId, head, count - 1, count, obc);
+		List<WikiPage> list = findByN_H(nodeId, head, count - 1, count,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -1941,7 +1976,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	}
 
 	public WikiPage[] findByN_H_PrevAndNext(long pageId, long nodeId,
-		boolean head, OrderByComparator obc)
+		boolean head, OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
 		WikiPage wikiPage = findByPrimaryKey(pageId);
 
@@ -1954,9 +1989,9 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(4 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(4);
@@ -1968,8 +2003,9 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 
 			query.append(_FINDER_COLUMN_N_H_HEAD_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -1986,7 +2022,8 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 
 			qPos.add(head);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, wikiPage);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, wikiPage);
 
 			WikiPage[] array = new WikiPageImpl[3];
 
@@ -2077,13 +2114,14 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	}
 
 	public List<WikiPage> findByN_P(long nodeId, String parentTitle, int start,
-		int end, OrderByComparator obc) throws SystemException {
+		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(nodeId),
 				
 				parentTitle,
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<WikiPage> list = (List<WikiPage>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_N_P,
@@ -2097,9 +2135,9 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(4 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(4);
@@ -2121,8 +2159,9 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 					}
 				}
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -2165,8 +2204,10 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	}
 
 	public WikiPage findByN_P_First(long nodeId, String parentTitle,
-		OrderByComparator obc) throws NoSuchPageException, SystemException {
-		List<WikiPage> list = findByN_P(nodeId, parentTitle, 0, 1, obc);
+		OrderByComparator orderByComparator)
+		throws NoSuchPageException, SystemException {
+		List<WikiPage> list = findByN_P(nodeId, parentTitle, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -2189,11 +2230,12 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	}
 
 	public WikiPage findByN_P_Last(long nodeId, String parentTitle,
-		OrderByComparator obc) throws NoSuchPageException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchPageException, SystemException {
 		int count = countByN_P(nodeId, parentTitle);
 
 		List<WikiPage> list = findByN_P(nodeId, parentTitle, count - 1, count,
-				obc);
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -2216,7 +2258,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	}
 
 	public WikiPage[] findByN_P_PrevAndNext(long pageId, long nodeId,
-		String parentTitle, OrderByComparator obc)
+		String parentTitle, OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
 		WikiPage wikiPage = findByPrimaryKey(pageId);
 
@@ -2229,9 +2271,9 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(4 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(4);
@@ -2253,8 +2295,9 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 				}
 			}
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -2273,7 +2316,8 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 				qPos.add(parentTitle);
 			}
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, wikiPage);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, wikiPage);
 
 			WikiPage[] array = new WikiPageImpl[3];
 
@@ -2364,13 +2408,15 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	}
 
 	public List<WikiPage> findByN_R(long nodeId, String redirectTitle,
-		int start, int end, OrderByComparator obc) throws SystemException {
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(nodeId),
 				
 				redirectTitle,
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<WikiPage> list = (List<WikiPage>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_N_R,
@@ -2384,9 +2430,9 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(4 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(4);
@@ -2408,8 +2454,9 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 					}
 				}
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -2452,8 +2499,10 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	}
 
 	public WikiPage findByN_R_First(long nodeId, String redirectTitle,
-		OrderByComparator obc) throws NoSuchPageException, SystemException {
-		List<WikiPage> list = findByN_R(nodeId, redirectTitle, 0, 1, obc);
+		OrderByComparator orderByComparator)
+		throws NoSuchPageException, SystemException {
+		List<WikiPage> list = findByN_R(nodeId, redirectTitle, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -2476,11 +2525,12 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	}
 
 	public WikiPage findByN_R_Last(long nodeId, String redirectTitle,
-		OrderByComparator obc) throws NoSuchPageException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchPageException, SystemException {
 		int count = countByN_R(nodeId, redirectTitle);
 
 		List<WikiPage> list = findByN_R(nodeId, redirectTitle, count - 1,
-				count, obc);
+				count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -2503,7 +2553,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	}
 
 	public WikiPage[] findByN_R_PrevAndNext(long pageId, long nodeId,
-		String redirectTitle, OrderByComparator obc)
+		String redirectTitle, OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
 		WikiPage wikiPage = findByPrimaryKey(pageId);
 
@@ -2516,9 +2566,9 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(4 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(4);
@@ -2540,8 +2590,9 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 				}
 			}
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -2560,7 +2611,8 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 				qPos.add(redirectTitle);
 			}
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, wikiPage);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, wikiPage);
 
 			WikiPage[] array = new WikiPageImpl[3];
 
@@ -2799,13 +2851,15 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	}
 
 	public List<WikiPage> findByN_T_H(long nodeId, String title, boolean head,
-		int start, int end, OrderByComparator obc) throws SystemException {
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(nodeId),
 				
 				title, Boolean.valueOf(head),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<WikiPage> list = (List<WikiPage>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_N_T_H,
@@ -2819,9 +2873,9 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(5 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(5);
@@ -2845,8 +2899,9 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 
 				query.append(_FINDER_COLUMN_N_T_H_HEAD_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -2891,8 +2946,10 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	}
 
 	public WikiPage findByN_T_H_First(long nodeId, String title, boolean head,
-		OrderByComparator obc) throws NoSuchPageException, SystemException {
-		List<WikiPage> list = findByN_T_H(nodeId, title, head, 0, 1, obc);
+		OrderByComparator orderByComparator)
+		throws NoSuchPageException, SystemException {
+		List<WikiPage> list = findByN_T_H(nodeId, title, head, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(8);
@@ -2918,11 +2975,12 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	}
 
 	public WikiPage findByN_T_H_Last(long nodeId, String title, boolean head,
-		OrderByComparator obc) throws NoSuchPageException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchPageException, SystemException {
 		int count = countByN_T_H(nodeId, title, head);
 
 		List<WikiPage> list = findByN_T_H(nodeId, title, head, count - 1,
-				count, obc);
+				count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(8);
@@ -2948,7 +3006,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	}
 
 	public WikiPage[] findByN_T_H_PrevAndNext(long pageId, long nodeId,
-		String title, boolean head, OrderByComparator obc)
+		String title, boolean head, OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
 		WikiPage wikiPage = findByPrimaryKey(pageId);
 
@@ -2961,9 +3019,9 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(5 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(5);
@@ -2987,8 +3045,9 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 
 			query.append(_FINDER_COLUMN_N_T_H_HEAD_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -3009,7 +3068,8 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 
 			qPos.add(head);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, wikiPage);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, wikiPage);
 
 			WikiPage[] array = new WikiPageImpl[3];
 
@@ -3108,14 +3168,15 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	}
 
 	public List<WikiPage> findByN_H_P(long nodeId, boolean head,
-		String parentTitle, int start, int end, OrderByComparator obc)
-		throws SystemException {
+		String parentTitle, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(nodeId), Boolean.valueOf(head),
 				
 				parentTitle,
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<WikiPage> list = (List<WikiPage>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_N_H_P,
@@ -3129,9 +3190,9 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(5 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(5);
@@ -3155,8 +3216,9 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 					}
 				}
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -3201,9 +3263,10 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	}
 
 	public WikiPage findByN_H_P_First(long nodeId, boolean head,
-		String parentTitle, OrderByComparator obc)
+		String parentTitle, OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
-		List<WikiPage> list = findByN_H_P(nodeId, head, parentTitle, 0, 1, obc);
+		List<WikiPage> list = findByN_H_P(nodeId, head, parentTitle, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(8);
@@ -3229,12 +3292,12 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	}
 
 	public WikiPage findByN_H_P_Last(long nodeId, boolean head,
-		String parentTitle, OrderByComparator obc)
+		String parentTitle, OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
 		int count = countByN_H_P(nodeId, head, parentTitle);
 
 		List<WikiPage> list = findByN_H_P(nodeId, head, parentTitle, count - 1,
-				count, obc);
+				count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(8);
@@ -3260,7 +3323,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	}
 
 	public WikiPage[] findByN_H_P_PrevAndNext(long pageId, long nodeId,
-		boolean head, String parentTitle, OrderByComparator obc)
+		boolean head, String parentTitle, OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
 		WikiPage wikiPage = findByPrimaryKey(pageId);
 
@@ -3273,9 +3336,9 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(5 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(5);
@@ -3299,8 +3362,9 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 				}
 			}
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -3321,7 +3385,8 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 				qPos.add(parentTitle);
 			}
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, wikiPage);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, wikiPage);
 
 			WikiPage[] array = new WikiPageImpl[3];
 
@@ -3339,46 +3404,6 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		}
 	}
 
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.setLimit(start, end);
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
 	public List<WikiPage> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -3387,10 +3412,11 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		return findAll(start, end, null);
 	}
 
-	public List<WikiPage> findAll(int start, int end, OrderByComparator obc)
-		throws SystemException {
+	public List<WikiPage> findAll(int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<WikiPage> list = (List<WikiPage>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
@@ -3405,13 +3431,14 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 				StringBundler query = null;
 				String sql = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(2 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 
 					query.append(_SQL_SELECT_WIKIPAGE);
 
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 
 					sql = query.toString();
 				}
@@ -3422,7 +3449,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 
 				Query q = session.createQuery(sql);
 
-				if (obc == null) {
+				if (orderByComparator == null) {
 					list = (List<WikiPage>)QueryUtil.list(q, getDialect(),
 							start, end, false);
 

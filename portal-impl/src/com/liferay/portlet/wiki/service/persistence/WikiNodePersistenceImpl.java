@@ -17,7 +17,6 @@ package com.liferay.portlet.wiki.service.persistence;
 import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
-import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
@@ -508,11 +507,12 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	}
 
 	public List<WikiNode> findByUuid(String uuid, int start, int end,
-		OrderByComparator obc) throws SystemException {
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				uuid,
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<WikiNode> list = (List<WikiNode>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_UUID,
@@ -526,9 +526,9 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(3);
@@ -548,8 +548,9 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 					}
 				}
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -589,9 +590,10 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 		return list;
 	}
 
-	public WikiNode findByUuid_First(String uuid, OrderByComparator obc)
+	public WikiNode findByUuid_First(String uuid,
+		OrderByComparator orderByComparator)
 		throws NoSuchNodeException, SystemException {
-		List<WikiNode> list = findByUuid(uuid, 0, 1, obc);
+		List<WikiNode> list = findByUuid(uuid, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -610,11 +612,13 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 		}
 	}
 
-	public WikiNode findByUuid_Last(String uuid, OrderByComparator obc)
+	public WikiNode findByUuid_Last(String uuid,
+		OrderByComparator orderByComparator)
 		throws NoSuchNodeException, SystemException {
 		int count = countByUuid(uuid);
 
-		List<WikiNode> list = findByUuid(uuid, count - 1, count, obc);
+		List<WikiNode> list = findByUuid(uuid, count - 1, count,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -634,7 +638,8 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	}
 
 	public WikiNode[] findByUuid_PrevAndNext(long nodeId, String uuid,
-		OrderByComparator obc) throws NoSuchNodeException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchNodeException, SystemException {
 		WikiNode wikiNode = findByPrimaryKey(nodeId);
 
 		int count = countByUuid(uuid);
@@ -646,9 +651,9 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(3);
@@ -668,8 +673,9 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 				}
 			}
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -686,7 +692,8 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 				qPos.add(uuid);
 			}
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, wikiNode);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, wikiNode);
 
 			WikiNode[] array = new WikiNodeImpl[3];
 
@@ -888,11 +895,12 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	}
 
 	public List<WikiNode> findByGroupId(long groupId, int start, int end,
-		OrderByComparator obc) throws SystemException {
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<WikiNode> list = (List<WikiNode>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
@@ -906,9 +914,9 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(3);
@@ -918,8 +926,9 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 
 				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -957,9 +966,10 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 		return list;
 	}
 
-	public WikiNode findByGroupId_First(long groupId, OrderByComparator obc)
+	public WikiNode findByGroupId_First(long groupId,
+		OrderByComparator orderByComparator)
 		throws NoSuchNodeException, SystemException {
-		List<WikiNode> list = findByGroupId(groupId, 0, 1, obc);
+		List<WikiNode> list = findByGroupId(groupId, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -978,11 +988,13 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 		}
 	}
 
-	public WikiNode findByGroupId_Last(long groupId, OrderByComparator obc)
+	public WikiNode findByGroupId_Last(long groupId,
+		OrderByComparator orderByComparator)
 		throws NoSuchNodeException, SystemException {
 		int count = countByGroupId(groupId);
 
-		List<WikiNode> list = findByGroupId(groupId, count - 1, count, obc);
+		List<WikiNode> list = findByGroupId(groupId, count - 1, count,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -1002,7 +1014,8 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	}
 
 	public WikiNode[] findByGroupId_PrevAndNext(long nodeId, long groupId,
-		OrderByComparator obc) throws NoSuchNodeException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchNodeException, SystemException {
 		WikiNode wikiNode = findByPrimaryKey(nodeId);
 
 		int count = countByGroupId(groupId);
@@ -1014,9 +1027,9 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(3);
@@ -1026,8 +1039,9 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -1042,7 +1056,8 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 
 			qPos.add(groupId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, wikiNode);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, wikiNode);
 
 			WikiNode[] array = new WikiNodeImpl[3];
 
@@ -1117,11 +1132,12 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	}
 
 	public List<WikiNode> findByCompanyId(long companyId, int start, int end,
-		OrderByComparator obc) throws SystemException {
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(companyId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<WikiNode> list = (List<WikiNode>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
@@ -1135,9 +1151,9 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(3);
@@ -1147,8 +1163,9 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 
 				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -1186,9 +1203,10 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 		return list;
 	}
 
-	public WikiNode findByCompanyId_First(long companyId, OrderByComparator obc)
+	public WikiNode findByCompanyId_First(long companyId,
+		OrderByComparator orderByComparator)
 		throws NoSuchNodeException, SystemException {
-		List<WikiNode> list = findByCompanyId(companyId, 0, 1, obc);
+		List<WikiNode> list = findByCompanyId(companyId, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -1207,11 +1225,13 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 		}
 	}
 
-	public WikiNode findByCompanyId_Last(long companyId, OrderByComparator obc)
+	public WikiNode findByCompanyId_Last(long companyId,
+		OrderByComparator orderByComparator)
 		throws NoSuchNodeException, SystemException {
 		int count = countByCompanyId(companyId);
 
-		List<WikiNode> list = findByCompanyId(companyId, count - 1, count, obc);
+		List<WikiNode> list = findByCompanyId(companyId, count - 1, count,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -1231,7 +1251,8 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	}
 
 	public WikiNode[] findByCompanyId_PrevAndNext(long nodeId, long companyId,
-		OrderByComparator obc) throws NoSuchNodeException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchNodeException, SystemException {
 		WikiNode wikiNode = findByPrimaryKey(nodeId);
 
 		int count = countByCompanyId(companyId);
@@ -1243,9 +1264,9 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(3);
@@ -1255,8 +1276,9 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 
 			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -1271,7 +1293,8 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 
 			qPos.add(companyId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, wikiNode);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, wikiNode);
 
 			WikiNode[] array = new WikiNodeImpl[3];
 
@@ -1417,46 +1440,6 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 		}
 	}
 
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.setLimit(start, end);
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
 	public List<WikiNode> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -1465,10 +1448,11 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 		return findAll(start, end, null);
 	}
 
-	public List<WikiNode> findAll(int start, int end, OrderByComparator obc)
-		throws SystemException {
+	public List<WikiNode> findAll(int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<WikiNode> list = (List<WikiNode>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
@@ -1483,13 +1467,14 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 				StringBundler query = null;
 				String sql = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(2 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 
 					query.append(_SQL_SELECT_WIKINODE);
 
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 
 					sql = query.toString();
 				}
@@ -1500,7 +1485,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 
 				Query q = session.createQuery(sql);
 
-				if (obc == null) {
+				if (orderByComparator == null) {
 					list = (List<WikiNode>)QueryUtil.list(q, getDialect(),
 							start, end, false);
 
