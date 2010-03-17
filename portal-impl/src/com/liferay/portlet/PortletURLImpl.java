@@ -615,9 +615,7 @@ public class PortletURLImpl
 	}
 
 	protected void addAuthToken(StringBundler sb, Key key) {
-		if (!PropsValues.AUTH_TOKEN_CHECK_ENABLED ||
-			isParameterIncludedInPath("p_auth")) {
-
+		if (!PropsValues.AUTH_TOKEN_CHECK_ENABLED) {
 			return;
 		}
 
@@ -625,8 +623,6 @@ public class PortletURLImpl
 		sb.append(StringPool.EQUAL);
 		sb.append(processValue(key, AuthTokenUtil.getToken(_request)));
 		sb.append(StringPool.AMPERSAND);
-
-		addParameterIncludedInPath("p_auth");
 	}
 
 	protected String generateToString() {
@@ -745,9 +741,9 @@ public class PortletURLImpl
 			}
 
 			sb.append(StringPool.QUESTION);
-		}
 
-		addAuthToken(sb, key);
+			addAuthToken(sb, key);
+		}
 
 		if (!isParameterIncludedInPath("p_p_id")) {
 			sb.append("p_p_id");
