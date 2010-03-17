@@ -18,7 +18,6 @@ import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.NoSuchOrgGroupPermissionException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
-import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
@@ -389,11 +388,12 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 	}
 
 	public List<OrgGroupPermission> findByGroupId(long groupId, int start,
-		int end, OrderByComparator obc) throws SystemException {
+		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<OrgGroupPermission> list = (List<OrgGroupPermission>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
@@ -407,9 +407,9 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(2);
@@ -419,8 +419,9 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 
 				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				String sql = query.toString();
@@ -455,9 +456,10 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 	}
 
 	public OrgGroupPermission findByGroupId_First(long groupId,
-		OrderByComparator obc)
+		OrderByComparator orderByComparator)
 		throws NoSuchOrgGroupPermissionException, SystemException {
-		List<OrgGroupPermission> list = findByGroupId(groupId, 0, 1, obc);
+		List<OrgGroupPermission> list = findByGroupId(groupId, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -477,12 +479,12 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 	}
 
 	public OrgGroupPermission findByGroupId_Last(long groupId,
-		OrderByComparator obc)
+		OrderByComparator orderByComparator)
 		throws NoSuchOrgGroupPermissionException, SystemException {
 		int count = countByGroupId(groupId);
 
 		List<OrgGroupPermission> list = findByGroupId(groupId, count - 1,
-				count, obc);
+				count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -503,7 +505,7 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 
 	public OrgGroupPermission[] findByGroupId_PrevAndNext(
 		OrgGroupPermissionPK orgGroupPermissionPK, long groupId,
-		OrderByComparator obc)
+		OrderByComparator orderByComparator)
 		throws NoSuchOrgGroupPermissionException, SystemException {
 		OrgGroupPermission orgGroupPermission = findByPrimaryKey(orgGroupPermissionPK);
 
@@ -516,9 +518,9 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(2);
@@ -528,8 +530,9 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			String sql = query.toString();
@@ -540,8 +543,8 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 
 			qPos.add(groupId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					orgGroupPermission);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, orgGroupPermission);
 
 			OrgGroupPermission[] array = new OrgGroupPermissionImpl[3];
 
@@ -614,11 +617,13 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 	}
 
 	public List<OrgGroupPermission> findByPermissionId(long permissionId,
-		int start, int end, OrderByComparator obc) throws SystemException {
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(permissionId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<OrgGroupPermission> list = (List<OrgGroupPermission>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_PERMISSIONID,
@@ -632,9 +637,9 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(2);
@@ -644,8 +649,9 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 
 				query.append(_FINDER_COLUMN_PERMISSIONID_PERMISSIONID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				String sql = query.toString();
@@ -680,10 +686,10 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 	}
 
 	public OrgGroupPermission findByPermissionId_First(long permissionId,
-		OrderByComparator obc)
+		OrderByComparator orderByComparator)
 		throws NoSuchOrgGroupPermissionException, SystemException {
 		List<OrgGroupPermission> list = findByPermissionId(permissionId, 0, 1,
-				obc);
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -703,12 +709,12 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 	}
 
 	public OrgGroupPermission findByPermissionId_Last(long permissionId,
-		OrderByComparator obc)
+		OrderByComparator orderByComparator)
 		throws NoSuchOrgGroupPermissionException, SystemException {
 		int count = countByPermissionId(permissionId);
 
 		List<OrgGroupPermission> list = findByPermissionId(permissionId,
-				count - 1, count, obc);
+				count - 1, count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -729,7 +735,7 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 
 	public OrgGroupPermission[] findByPermissionId_PrevAndNext(
 		OrgGroupPermissionPK orgGroupPermissionPK, long permissionId,
-		OrderByComparator obc)
+		OrderByComparator orderByComparator)
 		throws NoSuchOrgGroupPermissionException, SystemException {
 		OrgGroupPermission orgGroupPermission = findByPrimaryKey(orgGroupPermissionPK);
 
@@ -742,9 +748,9 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(2);
@@ -754,8 +760,9 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 
 			query.append(_FINDER_COLUMN_PERMISSIONID_PERMISSIONID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			String sql = query.toString();
@@ -766,8 +773,8 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 
 			qPos.add(permissionId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					orgGroupPermission);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, orgGroupPermission);
 
 			OrgGroupPermission[] array = new OrgGroupPermissionImpl[3];
 
@@ -776,46 +783,6 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 			array[2] = (OrgGroupPermission)objArray[2];
 
 			return array;
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.setLimit(start, end);
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
 		}
 		catch (Exception e) {
 			throw processException(e);
@@ -835,9 +802,10 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 	}
 
 	public List<OrgGroupPermission> findAll(int start, int end,
-		OrderByComparator obc) throws SystemException {
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<OrgGroupPermission> list = (List<OrgGroupPermission>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
@@ -852,13 +820,14 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 				StringBundler query = null;
 				String sql = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(2 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 
 					query.append(_SQL_SELECT_ORGGROUPPERMISSION);
 
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 
 					sql = query.toString();
 				}
@@ -867,7 +836,7 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 
 				Query q = session.createQuery(sql);
 
-				if (obc == null) {
+				if (orderByComparator == null) {
 					list = (List<OrgGroupPermission>)QueryUtil.list(q,
 							getDialect(), start, end, false);
 

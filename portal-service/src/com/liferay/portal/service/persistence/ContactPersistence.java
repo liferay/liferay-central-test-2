@@ -62,22 +62,24 @@ public interface ContactPersistence extends BasePersistence<Contact> {
 
 	public java.util.List<com.liferay.portal.model.Contact> findByCompanyId(
 		long companyId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.Contact findByCompanyId_First(
-		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long companyId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchContactException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.Contact findByCompanyId_Last(
-		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long companyId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchContactException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.Contact[] findByCompanyId_PrevAndNext(
 		long contactId, long companyId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchContactException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -88,7 +90,8 @@ public interface ContactPersistence extends BasePersistence<Contact> {
 		int end) throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Contact> findAll(int start,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void removeByCompanyId(long companyId)

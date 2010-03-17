@@ -74,7 +74,8 @@ public interface ClassNamePersistence extends BasePersistence<ClassName> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portal.model.ClassName> findAll(
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void removeByValue(java.lang.String value)

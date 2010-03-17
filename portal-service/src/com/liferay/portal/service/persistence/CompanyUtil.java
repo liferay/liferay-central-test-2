@@ -199,31 +199,36 @@ public class CompanyUtil {
 
 	public static java.util.List<com.liferay.portal.model.Company> findBySystem(
 		boolean system, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findBySystem(system, start, end, obc);
+		return getPersistence()
+				   .findBySystem(system, start, end, orderByComparator);
 	}
 
 	public static com.liferay.portal.model.Company findBySystem_First(
-		boolean system, com.liferay.portal.kernel.util.OrderByComparator obc)
+		boolean system,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchCompanyException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findBySystem_First(system, obc);
+		return getPersistence().findBySystem_First(system, orderByComparator);
 	}
 
 	public static com.liferay.portal.model.Company findBySystem_Last(
-		boolean system, com.liferay.portal.kernel.util.OrderByComparator obc)
+		boolean system,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchCompanyException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findBySystem_Last(system, obc);
+		return getPersistence().findBySystem_Last(system, orderByComparator);
 	}
 
 	public static com.liferay.portal.model.Company[] findBySystem_PrevAndNext(
 		long companyId, boolean system,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchCompanyException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findBySystem_PrevAndNext(companyId, system, obc);
+		return getPersistence()
+				   .findBySystem_PrevAndNext(companyId, system,
+			orderByComparator);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Company> findAll()
@@ -238,9 +243,10 @@ public class CompanyUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.Company> findAll(
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findAll(start, end, obc);
+		return getPersistence().findAll(start, end, orderByComparator);
 	}
 
 	public static void removeByWebId(java.lang.String webId)

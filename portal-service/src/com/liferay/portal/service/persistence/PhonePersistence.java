@@ -62,22 +62,23 @@ public interface PhonePersistence extends BasePersistence<Phone> {
 
 	public java.util.List<com.liferay.portal.model.Phone> findByCompanyId(
 		long companyId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.Phone findByCompanyId_First(
-		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long companyId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchPhoneException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.Phone findByCompanyId_Last(long companyId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchPhoneException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.Phone[] findByCompanyId_PrevAndNext(
 		long phoneId, long companyId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchPhoneException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -90,22 +91,22 @@ public interface PhonePersistence extends BasePersistence<Phone> {
 
 	public java.util.List<com.liferay.portal.model.Phone> findByUserId(
 		long userId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.Phone findByUserId_First(long userId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchPhoneException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.Phone findByUserId_Last(long userId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchPhoneException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.Phone[] findByUserId_PrevAndNext(
 		long phoneId, long userId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchPhoneException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -119,22 +120,24 @@ public interface PhonePersistence extends BasePersistence<Phone> {
 
 	public java.util.List<com.liferay.portal.model.Phone> findByC_C(
 		long companyId, long classNameId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.Phone findByC_C_First(long companyId,
-		long classNameId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long classNameId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchPhoneException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.Phone findByC_C_Last(long companyId,
-		long classNameId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long classNameId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchPhoneException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.Phone[] findByC_C_PrevAndNext(
 		long phoneId, long companyId, long classNameId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchPhoneException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -148,24 +151,24 @@ public interface PhonePersistence extends BasePersistence<Phone> {
 
 	public java.util.List<com.liferay.portal.model.Phone> findByC_C_C(
 		long companyId, long classNameId, long classPK, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.Phone findByC_C_C_First(long companyId,
 		long classNameId, long classPK,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchPhoneException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.Phone findByC_C_C_Last(long companyId,
 		long classNameId, long classPK,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchPhoneException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.Phone[] findByC_C_C_PrevAndNext(
 		long phoneId, long companyId, long classNameId, long classPK,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchPhoneException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -180,24 +183,26 @@ public interface PhonePersistence extends BasePersistence<Phone> {
 
 	public java.util.List<com.liferay.portal.model.Phone> findByC_C_C_P(
 		long companyId, long classNameId, long classPK, boolean primary,
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.Phone findByC_C_C_P_First(long companyId,
 		long classNameId, long classPK, boolean primary,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchPhoneException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.Phone findByC_C_C_P_Last(long companyId,
 		long classNameId, long classPK, boolean primary,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchPhoneException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.Phone[] findByC_C_C_P_PrevAndNext(
 		long phoneId, long companyId, long classNameId, long classPK,
-		boolean primary, com.liferay.portal.kernel.util.OrderByComparator obc)
+		boolean primary,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchPhoneException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -208,7 +213,8 @@ public interface PhonePersistence extends BasePersistence<Phone> {
 		int end) throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Phone> findAll(int start,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void removeByCompanyId(long companyId)

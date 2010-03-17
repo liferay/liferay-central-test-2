@@ -18,7 +18,6 @@ import com.liferay.portal.NoSuchAddressException;
 import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
-import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
@@ -476,11 +475,12 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 	}
 
 	public List<Address> findByCompanyId(long companyId, int start, int end,
-		OrderByComparator obc) throws SystemException {
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(companyId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<Address> list = (List<Address>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
@@ -494,9 +494,9 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(3);
@@ -506,8 +506,9 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 
 				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -544,9 +545,10 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 		return list;
 	}
 
-	public Address findByCompanyId_First(long companyId, OrderByComparator obc)
+	public Address findByCompanyId_First(long companyId,
+		OrderByComparator orderByComparator)
 		throws NoSuchAddressException, SystemException {
-		List<Address> list = findByCompanyId(companyId, 0, 1, obc);
+		List<Address> list = findByCompanyId(companyId, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -565,11 +567,13 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 		}
 	}
 
-	public Address findByCompanyId_Last(long companyId, OrderByComparator obc)
+	public Address findByCompanyId_Last(long companyId,
+		OrderByComparator orderByComparator)
 		throws NoSuchAddressException, SystemException {
 		int count = countByCompanyId(companyId);
 
-		List<Address> list = findByCompanyId(companyId, count - 1, count, obc);
+		List<Address> list = findByCompanyId(companyId, count - 1, count,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -589,7 +593,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 	}
 
 	public Address[] findByCompanyId_PrevAndNext(long addressId,
-		long companyId, OrderByComparator obc)
+		long companyId, OrderByComparator orderByComparator)
 		throws NoSuchAddressException, SystemException {
 		Address address = findByPrimaryKey(addressId);
 
@@ -602,9 +606,9 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(3);
@@ -614,8 +618,9 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 
 			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -630,7 +635,8 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 
 			qPos.add(companyId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, address);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, address);
 
 			Address[] array = new AddressImpl[3];
 
@@ -704,11 +710,12 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 	}
 
 	public List<Address> findByUserId(long userId, int start, int end,
-		OrderByComparator obc) throws SystemException {
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(userId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<Address> list = (List<Address>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_USERID,
@@ -722,9 +729,9 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(3);
@@ -734,8 +741,9 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 
 				query.append(_FINDER_COLUMN_USERID_USERID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -772,9 +780,10 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 		return list;
 	}
 
-	public Address findByUserId_First(long userId, OrderByComparator obc)
+	public Address findByUserId_First(long userId,
+		OrderByComparator orderByComparator)
 		throws NoSuchAddressException, SystemException {
-		List<Address> list = findByUserId(userId, 0, 1, obc);
+		List<Address> list = findByUserId(userId, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -793,11 +802,13 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 		}
 	}
 
-	public Address findByUserId_Last(long userId, OrderByComparator obc)
+	public Address findByUserId_Last(long userId,
+		OrderByComparator orderByComparator)
 		throws NoSuchAddressException, SystemException {
 		int count = countByUserId(userId);
 
-		List<Address> list = findByUserId(userId, count - 1, count, obc);
+		List<Address> list = findByUserId(userId, count - 1, count,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -817,7 +828,8 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 	}
 
 	public Address[] findByUserId_PrevAndNext(long addressId, long userId,
-		OrderByComparator obc) throws NoSuchAddressException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchAddressException, SystemException {
 		Address address = findByPrimaryKey(addressId);
 
 		int count = countByUserId(userId);
@@ -829,9 +841,9 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(3);
@@ -841,8 +853,9 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 
 			query.append(_FINDER_COLUMN_USERID_USERID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -857,7 +870,8 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 
 			qPos.add(userId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, address);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, address);
 
 			Address[] array = new AddressImpl[3];
 
@@ -938,11 +952,12 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 	}
 
 	public List<Address> findByC_C(long companyId, long classNameId, int start,
-		int end, OrderByComparator obc) throws SystemException {
+		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Long(classNameId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<Address> list = (List<Address>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_C_C,
@@ -956,9 +971,9 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(4 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(4);
@@ -970,8 +985,9 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 
 				query.append(_FINDER_COLUMN_C_C_CLASSNAMEID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -1011,8 +1027,10 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 	}
 
 	public Address findByC_C_First(long companyId, long classNameId,
-		OrderByComparator obc) throws NoSuchAddressException, SystemException {
-		List<Address> list = findByC_C(companyId, classNameId, 0, 1, obc);
+		OrderByComparator orderByComparator)
+		throws NoSuchAddressException, SystemException {
+		List<Address> list = findByC_C(companyId, classNameId, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -1035,11 +1053,12 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 	}
 
 	public Address findByC_C_Last(long companyId, long classNameId,
-		OrderByComparator obc) throws NoSuchAddressException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchAddressException, SystemException {
 		int count = countByC_C(companyId, classNameId);
 
 		List<Address> list = findByC_C(companyId, classNameId, count - 1,
-				count, obc);
+				count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -1062,7 +1081,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 	}
 
 	public Address[] findByC_C_PrevAndNext(long addressId, long companyId,
-		long classNameId, OrderByComparator obc)
+		long classNameId, OrderByComparator orderByComparator)
 		throws NoSuchAddressException, SystemException {
 		Address address = findByPrimaryKey(addressId);
 
@@ -1075,9 +1094,9 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(4 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(4);
@@ -1089,8 +1108,9 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 
 			query.append(_FINDER_COLUMN_C_C_CLASSNAMEID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -1107,7 +1127,8 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 
 			qPos.add(classNameId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, address);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, address);
 
 			Address[] array = new AddressImpl[3];
 
@@ -1192,12 +1213,13 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 	}
 
 	public List<Address> findByC_C_C(long companyId, long classNameId,
-		long classPK, int start, int end, OrderByComparator obc)
+		long classPK, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Long(classNameId), new Long(classPK),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<Address> list = (List<Address>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_C_C_C,
@@ -1211,9 +1233,9 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(5 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(5);
@@ -1227,8 +1249,9 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 
 				query.append(_FINDER_COLUMN_C_C_C_CLASSPK_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -1270,10 +1293,10 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 	}
 
 	public Address findByC_C_C_First(long companyId, long classNameId,
-		long classPK, OrderByComparator obc)
+		long classPK, OrderByComparator orderByComparator)
 		throws NoSuchAddressException, SystemException {
 		List<Address> list = findByC_C_C(companyId, classNameId, classPK, 0, 1,
-				obc);
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(8);
@@ -1299,12 +1322,12 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 	}
 
 	public Address findByC_C_C_Last(long companyId, long classNameId,
-		long classPK, OrderByComparator obc)
+		long classPK, OrderByComparator orderByComparator)
 		throws NoSuchAddressException, SystemException {
 		int count = countByC_C_C(companyId, classNameId, classPK);
 
 		List<Address> list = findByC_C_C(companyId, classNameId, classPK,
-				count - 1, count, obc);
+				count - 1, count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(8);
@@ -1330,7 +1353,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 	}
 
 	public Address[] findByC_C_C_PrevAndNext(long addressId, long companyId,
-		long classNameId, long classPK, OrderByComparator obc)
+		long classNameId, long classPK, OrderByComparator orderByComparator)
 		throws NoSuchAddressException, SystemException {
 		Address address = findByPrimaryKey(addressId);
 
@@ -1343,9 +1366,9 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(5 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(5);
@@ -1359,8 +1382,9 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 
 			query.append(_FINDER_COLUMN_C_C_C_CLASSPK_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -1379,7 +1403,8 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 
 			qPos.add(classPK);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, address);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, address);
 
 			Address[] array = new AddressImpl[3];
 
@@ -1471,13 +1496,14 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 	}
 
 	public List<Address> findByC_C_C_M(long companyId, long classNameId,
-		long classPK, boolean mailing, int start, int end, OrderByComparator obc)
-		throws SystemException {
+		long classPK, boolean mailing, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Long(classNameId), new Long(classPK),
 				Boolean.valueOf(mailing),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<Address> list = (List<Address>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_C_C_C_M,
@@ -1491,9 +1517,9 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(6 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(6);
@@ -1509,8 +1535,9 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 
 				query.append(_FINDER_COLUMN_C_C_C_M_MAILING_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -1554,10 +1581,10 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 	}
 
 	public Address findByC_C_C_M_First(long companyId, long classNameId,
-		long classPK, boolean mailing, OrderByComparator obc)
+		long classPK, boolean mailing, OrderByComparator orderByComparator)
 		throws NoSuchAddressException, SystemException {
 		List<Address> list = findByC_C_C_M(companyId, classNameId, classPK,
-				mailing, 0, 1, obc);
+				mailing, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(10);
@@ -1586,12 +1613,12 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 	}
 
 	public Address findByC_C_C_M_Last(long companyId, long classNameId,
-		long classPK, boolean mailing, OrderByComparator obc)
+		long classPK, boolean mailing, OrderByComparator orderByComparator)
 		throws NoSuchAddressException, SystemException {
 		int count = countByC_C_C_M(companyId, classNameId, classPK, mailing);
 
 		List<Address> list = findByC_C_C_M(companyId, classNameId, classPK,
-				mailing, count - 1, count, obc);
+				mailing, count - 1, count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(10);
@@ -1620,7 +1647,8 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 	}
 
 	public Address[] findByC_C_C_M_PrevAndNext(long addressId, long companyId,
-		long classNameId, long classPK, boolean mailing, OrderByComparator obc)
+		long classNameId, long classPK, boolean mailing,
+		OrderByComparator orderByComparator)
 		throws NoSuchAddressException, SystemException {
 		Address address = findByPrimaryKey(addressId);
 
@@ -1633,9 +1661,9 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(6 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(6);
@@ -1651,8 +1679,9 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 
 			query.append(_FINDER_COLUMN_C_C_C_M_MAILING_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -1673,7 +1702,8 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 
 			qPos.add(mailing);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, address);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, address);
 
 			Address[] array = new AddressImpl[3];
 
@@ -1765,13 +1795,14 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 	}
 
 	public List<Address> findByC_C_C_P(long companyId, long classNameId,
-		long classPK, boolean primary, int start, int end, OrderByComparator obc)
-		throws SystemException {
+		long classPK, boolean primary, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Long(classNameId), new Long(classPK),
 				Boolean.valueOf(primary),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<Address> list = (List<Address>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_C_C_C_P,
@@ -1785,9 +1816,9 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(6 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(6);
@@ -1803,8 +1834,9 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 
 				query.append(_FINDER_COLUMN_C_C_C_P_PRIMARY_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -1848,10 +1880,10 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 	}
 
 	public Address findByC_C_C_P_First(long companyId, long classNameId,
-		long classPK, boolean primary, OrderByComparator obc)
+		long classPK, boolean primary, OrderByComparator orderByComparator)
 		throws NoSuchAddressException, SystemException {
 		List<Address> list = findByC_C_C_P(companyId, classNameId, classPK,
-				primary, 0, 1, obc);
+				primary, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(10);
@@ -1880,12 +1912,12 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 	}
 
 	public Address findByC_C_C_P_Last(long companyId, long classNameId,
-		long classPK, boolean primary, OrderByComparator obc)
+		long classPK, boolean primary, OrderByComparator orderByComparator)
 		throws NoSuchAddressException, SystemException {
 		int count = countByC_C_C_P(companyId, classNameId, classPK, primary);
 
 		List<Address> list = findByC_C_C_P(companyId, classNameId, classPK,
-				primary, count - 1, count, obc);
+				primary, count - 1, count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(10);
@@ -1914,7 +1946,8 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 	}
 
 	public Address[] findByC_C_C_P_PrevAndNext(long addressId, long companyId,
-		long classNameId, long classPK, boolean primary, OrderByComparator obc)
+		long classNameId, long classPK, boolean primary,
+		OrderByComparator orderByComparator)
 		throws NoSuchAddressException, SystemException {
 		Address address = findByPrimaryKey(addressId);
 
@@ -1927,9 +1960,9 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(6 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(6);
@@ -1945,8 +1978,9 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 
 			query.append(_FINDER_COLUMN_C_C_C_P_PRIMARY_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -1967,7 +2001,8 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 
 			qPos.add(primary);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, address);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, address);
 
 			Address[] array = new AddressImpl[3];
 
@@ -1985,46 +2020,6 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 		}
 	}
 
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.setLimit(start, end);
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
 	public List<Address> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -2033,10 +2028,11 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 		return findAll(start, end, null);
 	}
 
-	public List<Address> findAll(int start, int end, OrderByComparator obc)
-		throws SystemException {
+	public List<Address> findAll(int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<Address> list = (List<Address>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
@@ -2051,13 +2047,14 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 				StringBundler query = null;
 				String sql = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(2 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 
 					query.append(_SQL_SELECT_ADDRESS);
 
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 
 					sql = query.toString();
 				}
@@ -2068,7 +2065,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 
 				Query q = session.createQuery(sql);
 
-				if (obc == null) {
+				if (orderByComparator == null) {
 					list = (List<Address>)QueryUtil.list(q, getDialect(),
 							start, end, false);
 

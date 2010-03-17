@@ -18,7 +18,6 @@ import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.NoSuchUserIdMapperException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
-import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
@@ -467,11 +466,12 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 	}
 
 	public List<UserIdMapper> findByUserId(long userId, int start, int end,
-		OrderByComparator obc) throws SystemException {
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(userId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<UserIdMapper> list = (List<UserIdMapper>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_USERID,
@@ -485,9 +485,9 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(2);
@@ -497,8 +497,9 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 
 				query.append(_FINDER_COLUMN_USERID_USERID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				String sql = query.toString();
@@ -532,9 +533,10 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 		return list;
 	}
 
-	public UserIdMapper findByUserId_First(long userId, OrderByComparator obc)
+	public UserIdMapper findByUserId_First(long userId,
+		OrderByComparator orderByComparator)
 		throws NoSuchUserIdMapperException, SystemException {
-		List<UserIdMapper> list = findByUserId(userId, 0, 1, obc);
+		List<UserIdMapper> list = findByUserId(userId, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -553,11 +555,13 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 		}
 	}
 
-	public UserIdMapper findByUserId_Last(long userId, OrderByComparator obc)
+	public UserIdMapper findByUserId_Last(long userId,
+		OrderByComparator orderByComparator)
 		throws NoSuchUserIdMapperException, SystemException {
 		int count = countByUserId(userId);
 
-		List<UserIdMapper> list = findByUserId(userId, count - 1, count, obc);
+		List<UserIdMapper> list = findByUserId(userId, count - 1, count,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -577,7 +581,7 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 	}
 
 	public UserIdMapper[] findByUserId_PrevAndNext(long userIdMapperId,
-		long userId, OrderByComparator obc)
+		long userId, OrderByComparator orderByComparator)
 		throws NoSuchUserIdMapperException, SystemException {
 		UserIdMapper userIdMapper = findByPrimaryKey(userIdMapperId);
 
@@ -590,9 +594,9 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(2);
@@ -602,8 +606,9 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 
 			query.append(_FINDER_COLUMN_USERID_USERID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			String sql = query.toString();
@@ -614,8 +619,8 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 
 			qPos.add(userId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					userIdMapper);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, userIdMapper);
 
 			UserIdMapper[] array = new UserIdMapperImpl[3];
 
@@ -899,46 +904,6 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 		}
 	}
 
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.setLimit(start, end);
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
 	public List<UserIdMapper> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -948,10 +913,11 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 		return findAll(start, end, null);
 	}
 
-	public List<UserIdMapper> findAll(int start, int end, OrderByComparator obc)
-		throws SystemException {
+	public List<UserIdMapper> findAll(int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<UserIdMapper> list = (List<UserIdMapper>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
@@ -966,13 +932,14 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 				StringBundler query = null;
 				String sql = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(2 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 
 					query.append(_SQL_SELECT_USERIDMAPPER);
 
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 
 					sql = query.toString();
 				}
@@ -981,7 +948,7 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 
 				Query q = session.createQuery(sql);
 
-				if (obc == null) {
+				if (orderByComparator == null) {
 					list = (List<UserIdMapper>)QueryUtil.list(q, getDialect(),
 							start, end, false);
 

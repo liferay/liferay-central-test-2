@@ -18,7 +18,6 @@ import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
-import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
@@ -622,11 +621,12 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 	}
 
 	public List<Layout> findByGroupId(long groupId, int start, int end,
-		OrderByComparator obc) throws SystemException {
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<Layout> list = (List<Layout>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
@@ -640,9 +640,9 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(3);
@@ -652,8 +652,9 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 
 				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -690,9 +691,10 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		return list;
 	}
 
-	public Layout findByGroupId_First(long groupId, OrderByComparator obc)
+	public Layout findByGroupId_First(long groupId,
+		OrderByComparator orderByComparator)
 		throws NoSuchLayoutException, SystemException {
-		List<Layout> list = findByGroupId(groupId, 0, 1, obc);
+		List<Layout> list = findByGroupId(groupId, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -711,11 +713,13 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		}
 	}
 
-	public Layout findByGroupId_Last(long groupId, OrderByComparator obc)
+	public Layout findByGroupId_Last(long groupId,
+		OrderByComparator orderByComparator)
 		throws NoSuchLayoutException, SystemException {
 		int count = countByGroupId(groupId);
 
-		List<Layout> list = findByGroupId(groupId, count - 1, count, obc);
+		List<Layout> list = findByGroupId(groupId, count - 1, count,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -735,7 +739,8 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 	}
 
 	public Layout[] findByGroupId_PrevAndNext(long plid, long groupId,
-		OrderByComparator obc) throws NoSuchLayoutException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchLayoutException, SystemException {
 		Layout layout = findByPrimaryKey(plid);
 
 		int count = countByGroupId(groupId);
@@ -747,9 +752,9 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(3);
@@ -759,8 +764,9 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -775,7 +781,8 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 
 			qPos.add(groupId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, layout);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, layout);
 
 			Layout[] array = new LayoutImpl[3];
 
@@ -850,11 +857,12 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 	}
 
 	public List<Layout> findByCompanyId(long companyId, int start, int end,
-		OrderByComparator obc) throws SystemException {
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(companyId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<Layout> list = (List<Layout>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
@@ -868,9 +876,9 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(3);
@@ -880,8 +888,9 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 
 				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -918,9 +927,10 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		return list;
 	}
 
-	public Layout findByCompanyId_First(long companyId, OrderByComparator obc)
+	public Layout findByCompanyId_First(long companyId,
+		OrderByComparator orderByComparator)
 		throws NoSuchLayoutException, SystemException {
-		List<Layout> list = findByCompanyId(companyId, 0, 1, obc);
+		List<Layout> list = findByCompanyId(companyId, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -939,11 +949,13 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		}
 	}
 
-	public Layout findByCompanyId_Last(long companyId, OrderByComparator obc)
+	public Layout findByCompanyId_Last(long companyId,
+		OrderByComparator orderByComparator)
 		throws NoSuchLayoutException, SystemException {
 		int count = countByCompanyId(companyId);
 
-		List<Layout> list = findByCompanyId(companyId, count - 1, count, obc);
+		List<Layout> list = findByCompanyId(companyId, count - 1, count,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -963,7 +975,8 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 	}
 
 	public Layout[] findByCompanyId_PrevAndNext(long plid, long companyId,
-		OrderByComparator obc) throws NoSuchLayoutException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchLayoutException, SystemException {
 		Layout layout = findByPrimaryKey(plid);
 
 		int count = countByCompanyId(companyId);
@@ -975,9 +988,9 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(3);
@@ -987,8 +1000,9 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 
 			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -1003,7 +1017,8 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 
 			qPos.add(companyId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, layout);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, layout);
 
 			Layout[] array = new LayoutImpl[3];
 
@@ -1297,11 +1312,13 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 	}
 
 	public List<Layout> findByG_P(long groupId, boolean privateLayout,
-		int start, int end, OrderByComparator obc) throws SystemException {
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), Boolean.valueOf(privateLayout),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<Layout> list = (List<Layout>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_G_P,
@@ -1315,9 +1332,9 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(4 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(4);
@@ -1329,8 +1346,9 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 
 				query.append(_FINDER_COLUMN_G_P_PRIVATELAYOUT_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -1370,8 +1388,10 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 	}
 
 	public Layout findByG_P_First(long groupId, boolean privateLayout,
-		OrderByComparator obc) throws NoSuchLayoutException, SystemException {
-		List<Layout> list = findByG_P(groupId, privateLayout, 0, 1, obc);
+		OrderByComparator orderByComparator)
+		throws NoSuchLayoutException, SystemException {
+		List<Layout> list = findByG_P(groupId, privateLayout, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -1394,11 +1414,12 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 	}
 
 	public Layout findByG_P_Last(long groupId, boolean privateLayout,
-		OrderByComparator obc) throws NoSuchLayoutException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchLayoutException, SystemException {
 		int count = countByG_P(groupId, privateLayout);
 
 		List<Layout> list = findByG_P(groupId, privateLayout, count - 1, count,
-				obc);
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -1421,7 +1442,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 	}
 
 	public Layout[] findByG_P_PrevAndNext(long plid, long groupId,
-		boolean privateLayout, OrderByComparator obc)
+		boolean privateLayout, OrderByComparator orderByComparator)
 		throws NoSuchLayoutException, SystemException {
 		Layout layout = findByPrimaryKey(plid);
 
@@ -1434,9 +1455,9 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(4 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(4);
@@ -1448,8 +1469,9 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 
 			query.append(_FINDER_COLUMN_G_P_PRIVATELAYOUT_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -1466,7 +1488,8 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 
 			qPos.add(privateLayout);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, layout);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, layout);
 
 			Layout[] array = new LayoutImpl[3];
 
@@ -1679,13 +1702,14 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 	}
 
 	public List<Layout> findByG_P_P(long groupId, boolean privateLayout,
-		long parentLayoutId, int start, int end, OrderByComparator obc)
-		throws SystemException {
+		long parentLayoutId, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), Boolean.valueOf(privateLayout),
 				new Long(parentLayoutId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<Layout> list = (List<Layout>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_G_P_P,
@@ -1699,9 +1723,9 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(5 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(5);
@@ -1715,8 +1739,9 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 
 				query.append(_FINDER_COLUMN_G_P_P_PARENTLAYOUTID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -1758,10 +1783,10 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 	}
 
 	public Layout findByG_P_P_First(long groupId, boolean privateLayout,
-		long parentLayoutId, OrderByComparator obc)
+		long parentLayoutId, OrderByComparator orderByComparator)
 		throws NoSuchLayoutException, SystemException {
 		List<Layout> list = findByG_P_P(groupId, privateLayout, parentLayoutId,
-				0, 1, obc);
+				0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(8);
@@ -1787,12 +1812,12 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 	}
 
 	public Layout findByG_P_P_Last(long groupId, boolean privateLayout,
-		long parentLayoutId, OrderByComparator obc)
+		long parentLayoutId, OrderByComparator orderByComparator)
 		throws NoSuchLayoutException, SystemException {
 		int count = countByG_P_P(groupId, privateLayout, parentLayoutId);
 
 		List<Layout> list = findByG_P_P(groupId, privateLayout, parentLayoutId,
-				count - 1, count, obc);
+				count - 1, count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(8);
@@ -1818,7 +1843,8 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 	}
 
 	public Layout[] findByG_P_P_PrevAndNext(long plid, long groupId,
-		boolean privateLayout, long parentLayoutId, OrderByComparator obc)
+		boolean privateLayout, long parentLayoutId,
+		OrderByComparator orderByComparator)
 		throws NoSuchLayoutException, SystemException {
 		Layout layout = findByPrimaryKey(plid);
 
@@ -1831,9 +1857,9 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(5 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(5);
@@ -1847,8 +1873,9 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 
 			query.append(_FINDER_COLUMN_G_P_P_PARENTLAYOUTID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -1867,7 +1894,8 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 
 			qPos.add(parentLayoutId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, layout);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, layout);
 
 			Layout[] array = new LayoutImpl[3];
 
@@ -2107,14 +2135,15 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 	}
 
 	public List<Layout> findByG_P_T(long groupId, boolean privateLayout,
-		String type, int start, int end, OrderByComparator obc)
+		String type, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), Boolean.valueOf(privateLayout),
 				
 				type,
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<Layout> list = (List<Layout>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_G_P_T,
@@ -2128,9 +2157,9 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(5 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(5);
@@ -2154,8 +2183,9 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 					}
 				}
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -2199,9 +2229,10 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 	}
 
 	public Layout findByG_P_T_First(long groupId, boolean privateLayout,
-		String type, OrderByComparator obc)
+		String type, OrderByComparator orderByComparator)
 		throws NoSuchLayoutException, SystemException {
-		List<Layout> list = findByG_P_T(groupId, privateLayout, type, 0, 1, obc);
+		List<Layout> list = findByG_P_T(groupId, privateLayout, type, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(8);
@@ -2227,12 +2258,12 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 	}
 
 	public Layout findByG_P_T_Last(long groupId, boolean privateLayout,
-		String type, OrderByComparator obc)
+		String type, OrderByComparator orderByComparator)
 		throws NoSuchLayoutException, SystemException {
 		int count = countByG_P_T(groupId, privateLayout, type);
 
 		List<Layout> list = findByG_P_T(groupId, privateLayout, type,
-				count - 1, count, obc);
+				count - 1, count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(8);
@@ -2258,7 +2289,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 	}
 
 	public Layout[] findByG_P_T_PrevAndNext(long plid, long groupId,
-		boolean privateLayout, String type, OrderByComparator obc)
+		boolean privateLayout, String type, OrderByComparator orderByComparator)
 		throws NoSuchLayoutException, SystemException {
 		Layout layout = findByPrimaryKey(plid);
 
@@ -2271,9 +2302,9 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(5 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(5);
@@ -2297,8 +2328,9 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 				}
 			}
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -2319,7 +2351,8 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 				qPos.add(type);
 			}
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, layout);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, layout);
 
 			Layout[] array = new LayoutImpl[3];
 
@@ -2337,46 +2370,6 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		}
 	}
 
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.setLimit(start, end);
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
 	public List<Layout> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -2385,10 +2378,11 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		return findAll(start, end, null);
 	}
 
-	public List<Layout> findAll(int start, int end, OrderByComparator obc)
-		throws SystemException {
+	public List<Layout> findAll(int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<Layout> list = (List<Layout>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
@@ -2403,13 +2397,14 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 				StringBundler query = null;
 				String sql = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(2 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 
 					query.append(_SQL_SELECT_LAYOUT);
 
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 
 					sql = query.toString();
 				}
@@ -2420,7 +2415,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 
 				Query q = session.createQuery(sql);
 
-				if (obc == null) {
+				if (orderByComparator == null) {
 					list = (List<Layout>)QueryUtil.list(q, getDialect(), start,
 							end, false);
 

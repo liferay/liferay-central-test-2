@@ -64,22 +64,24 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 
 	public java.util.List<com.liferay.portal.model.Organization> findByCompanyId(
 		long companyId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.Organization findByCompanyId_First(
-		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long companyId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchOrganizationException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.Organization findByCompanyId_Last(
-		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long companyId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchOrganizationException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.Organization[] findByCompanyId_PrevAndNext(
 		long organizationId, long companyId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchOrganizationException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -93,22 +95,24 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 
 	public java.util.List<com.liferay.portal.model.Organization> findByLocations(
 		long companyId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.Organization findByLocations_First(
-		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long companyId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchOrganizationException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.Organization findByLocations_Last(
-		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long companyId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchOrganizationException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.Organization[] findByLocations_PrevAndNext(
 		long organizationId, long companyId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchOrganizationException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -122,24 +126,24 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 
 	public java.util.List<com.liferay.portal.model.Organization> findByC_P(
 		long companyId, long parentOrganizationId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.Organization findByC_P_First(
 		long companyId, long parentOrganizationId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchOrganizationException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.Organization findByC_P_Last(
 		long companyId, long parentOrganizationId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchOrganizationException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.Organization[] findByC_P_PrevAndNext(
 		long organizationId, long companyId, long parentOrganizationId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchOrganizationException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -164,7 +168,8 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Organization> findAll(
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void removeByCompanyId(long companyId)
@@ -206,7 +211,8 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Group> getGroups(long pk,
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int getGroupsSize(long pk)
@@ -262,7 +268,8 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portal.model.User> getUsers(long pk,
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int getUsersSize(long pk)

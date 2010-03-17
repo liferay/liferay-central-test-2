@@ -18,7 +18,6 @@ import com.liferay.portal.NoSuchCountryException;
 import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
-import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
@@ -805,11 +804,12 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 	}
 
 	public List<Country> findByActive(boolean active, int start, int end,
-		OrderByComparator obc) throws SystemException {
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				Boolean.valueOf(active),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<Country> list = (List<Country>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_ACTIVE,
@@ -823,9 +823,9 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(3);
@@ -835,8 +835,9 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 
 				query.append(_FINDER_COLUMN_ACTIVE_ACTIVE_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -873,9 +874,10 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 		return list;
 	}
 
-	public Country findByActive_First(boolean active, OrderByComparator obc)
+	public Country findByActive_First(boolean active,
+		OrderByComparator orderByComparator)
 		throws NoSuchCountryException, SystemException {
-		List<Country> list = findByActive(active, 0, 1, obc);
+		List<Country> list = findByActive(active, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -894,11 +896,13 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 		}
 	}
 
-	public Country findByActive_Last(boolean active, OrderByComparator obc)
+	public Country findByActive_Last(boolean active,
+		OrderByComparator orderByComparator)
 		throws NoSuchCountryException, SystemException {
 		int count = countByActive(active);
 
-		List<Country> list = findByActive(active, count - 1, count, obc);
+		List<Country> list = findByActive(active, count - 1, count,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -918,7 +922,8 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 	}
 
 	public Country[] findByActive_PrevAndNext(long countryId, boolean active,
-		OrderByComparator obc) throws NoSuchCountryException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchCountryException, SystemException {
 		Country country = findByPrimaryKey(countryId);
 
 		int count = countByActive(active);
@@ -930,9 +935,9 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(3);
@@ -942,8 +947,9 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 
 			query.append(_FINDER_COLUMN_ACTIVE_ACTIVE_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -958,7 +964,8 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 
 			qPos.add(active);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, country);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, country);
 
 			Country[] array = new CountryImpl[3];
 
@@ -976,46 +983,6 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 		}
 	}
 
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.setLimit(start, end);
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
 	public List<Country> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -1024,10 +991,11 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 		return findAll(start, end, null);
 	}
 
-	public List<Country> findAll(int start, int end, OrderByComparator obc)
-		throws SystemException {
+	public List<Country> findAll(int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<Country> list = (List<Country>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
@@ -1042,13 +1010,14 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 				StringBundler query = null;
 				String sql = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(2 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 
 					query.append(_SQL_SELECT_COUNTRY);
 
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 
 					sql = query.toString();
 				}
@@ -1059,7 +1028,7 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 
 				Query q = session.createQuery(sql);
 
-				if (obc == null) {
+				if (orderByComparator == null) {
 					list = (List<Country>)QueryUtil.list(q, getDialect(),
 							start, end, false);
 

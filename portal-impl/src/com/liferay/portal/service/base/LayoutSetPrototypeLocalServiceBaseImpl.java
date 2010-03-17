@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.LayoutSetPrototype;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountService;
@@ -217,6 +218,17 @@ public abstract class LayoutSetPrototypeLocalServiceBaseImpl
 		int end) throws SystemException {
 		return layoutSetPrototypePersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
+	}
+
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end, OrderByComparator orderByComparator) throws SystemException {
+		return layoutSetPrototypePersistence.findWithDynamicQuery(dynamicQuery,
+			start, end, orderByComparator);
+	}
+
+	public int dynamicQueryCount(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return layoutSetPrototypePersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
 	public LayoutSetPrototype getLayoutSetPrototype(long layoutSetPrototypeId)

@@ -61,22 +61,22 @@ public interface TeamPersistence extends BasePersistence<Team> {
 
 	public java.util.List<com.liferay.portal.model.Team> findByGroupId(
 		long groupId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.Team findByGroupId_First(long groupId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchTeamException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.Team findByGroupId_Last(long groupId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchTeamException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.Team[] findByGroupId_PrevAndNext(
 		long teamId, long groupId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchTeamException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -100,7 +100,8 @@ public interface TeamPersistence extends BasePersistence<Team> {
 		int end) throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Team> findAll(int start,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void removeByGroupId(long groupId)
@@ -130,7 +131,8 @@ public interface TeamPersistence extends BasePersistence<Team> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portal.model.User> getUsers(long pk,
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int getUsersSize(long pk)

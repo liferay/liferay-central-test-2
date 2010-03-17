@@ -65,24 +65,24 @@ public interface ResourceActionPersistence extends BasePersistence<ResourceActio
 
 	public java.util.List<com.liferay.portal.model.ResourceAction> findByName(
 		java.lang.String name, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.ResourceAction findByName_First(
 		java.lang.String name,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchResourceActionException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.ResourceAction findByName_Last(
 		java.lang.String name,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchResourceActionException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.ResourceAction[] findByName_PrevAndNext(
 		long resourceActionId, java.lang.String name,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchResourceActionException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -108,7 +108,8 @@ public interface ResourceActionPersistence extends BasePersistence<ResourceActio
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portal.model.ResourceAction> findAll(
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void removeByName(java.lang.String name)

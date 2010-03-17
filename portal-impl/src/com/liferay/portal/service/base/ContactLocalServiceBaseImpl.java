@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountService;
@@ -211,6 +212,17 @@ public abstract class ContactLocalServiceBaseImpl implements ContactLocalService
 	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
 		int end) throws SystemException {
 		return contactPersistence.findWithDynamicQuery(dynamicQuery, start, end);
+	}
+
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end, OrderByComparator orderByComparator) throws SystemException {
+		return contactPersistence.findWithDynamicQuery(dynamicQuery, start,
+			end, orderByComparator);
+	}
+
+	public int dynamicQueryCount(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return contactPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
 	public Contact getContact(long contactId)

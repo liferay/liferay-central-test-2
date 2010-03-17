@@ -95,22 +95,22 @@ public interface CountryPersistence extends BasePersistence<Country> {
 
 	public java.util.List<com.liferay.portal.model.Country> findByActive(
 		boolean active, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.Country findByActive_First(boolean active,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchCountryException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.Country findByActive_Last(boolean active,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchCountryException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.Country[] findByActive_PrevAndNext(
 		long countryId, boolean active,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchCountryException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -121,7 +121,8 @@ public interface CountryPersistence extends BasePersistence<Country> {
 		int end) throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Country> findAll(int start,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void removeByName(java.lang.String name)

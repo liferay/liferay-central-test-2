@@ -23,7 +23,6 @@ import com.liferay.portal.kernel.dao.jdbc.MappingSqlQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.jdbc.RowMapper;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
-import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
@@ -528,11 +527,12 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	public List<Role> findByCompanyId(long companyId, int start, int end,
-		OrderByComparator obc) throws SystemException {
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(companyId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<Role> list = (List<Role>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
@@ -546,9 +546,9 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(3);
@@ -558,8 +558,9 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 
 				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -596,9 +597,10 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		return list;
 	}
 
-	public Role findByCompanyId_First(long companyId, OrderByComparator obc)
+	public Role findByCompanyId_First(long companyId,
+		OrderByComparator orderByComparator)
 		throws NoSuchRoleException, SystemException {
-		List<Role> list = findByCompanyId(companyId, 0, 1, obc);
+		List<Role> list = findByCompanyId(companyId, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -617,11 +619,13 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		}
 	}
 
-	public Role findByCompanyId_Last(long companyId, OrderByComparator obc)
+	public Role findByCompanyId_Last(long companyId,
+		OrderByComparator orderByComparator)
 		throws NoSuchRoleException, SystemException {
 		int count = countByCompanyId(companyId);
 
-		List<Role> list = findByCompanyId(companyId, count - 1, count, obc);
+		List<Role> list = findByCompanyId(companyId, count - 1, count,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -641,7 +645,8 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	public Role[] findByCompanyId_PrevAndNext(long roleId, long companyId,
-		OrderByComparator obc) throws NoSuchRoleException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchRoleException, SystemException {
 		Role role = findByPrimaryKey(roleId);
 
 		int count = countByCompanyId(companyId);
@@ -653,9 +658,9 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(3);
@@ -665,8 +670,9 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 
 			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -681,7 +687,8 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 
 			qPos.add(companyId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, role);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, role);
 
 			Role[] array = new RoleImpl[3];
 
@@ -767,11 +774,12 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	public List<Role> findBySubtype(String subtype, int start, int end,
-		OrderByComparator obc) throws SystemException {
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				subtype,
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<Role> list = (List<Role>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_SUBTYPE,
@@ -785,9 +793,9 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(3);
@@ -807,8 +815,9 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 					}
 				}
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -847,9 +856,10 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		return list;
 	}
 
-	public Role findBySubtype_First(String subtype, OrderByComparator obc)
+	public Role findBySubtype_First(String subtype,
+		OrderByComparator orderByComparator)
 		throws NoSuchRoleException, SystemException {
-		List<Role> list = findBySubtype(subtype, 0, 1, obc);
+		List<Role> list = findBySubtype(subtype, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -868,11 +878,13 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		}
 	}
 
-	public Role findBySubtype_Last(String subtype, OrderByComparator obc)
+	public Role findBySubtype_Last(String subtype,
+		OrderByComparator orderByComparator)
 		throws NoSuchRoleException, SystemException {
 		int count = countBySubtype(subtype);
 
-		List<Role> list = findBySubtype(subtype, count - 1, count, obc);
+		List<Role> list = findBySubtype(subtype, count - 1, count,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -892,7 +904,8 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	public Role[] findBySubtype_PrevAndNext(long roleId, String subtype,
-		OrderByComparator obc) throws NoSuchRoleException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchRoleException, SystemException {
 		Role role = findByPrimaryKey(roleId);
 
 		int count = countBySubtype(subtype);
@@ -904,9 +917,9 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(3);
@@ -926,8 +939,9 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 				}
 			}
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -944,7 +958,8 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 				qPos.add(subtype);
 			}
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, role);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, role);
 
 			Role[] array = new RoleImpl[3];
 
@@ -1163,13 +1178,14 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	public List<Role> findByT_S(int type, String subtype, int start, int end,
-		OrderByComparator obc) throws SystemException {
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Integer(type),
 				
 				subtype,
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<Role> list = (List<Role>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_T_S,
@@ -1183,9 +1199,9 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(4 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(4);
@@ -1207,8 +1223,9 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 					}
 				}
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -1249,9 +1266,10 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		return list;
 	}
 
-	public Role findByT_S_First(int type, String subtype, OrderByComparator obc)
+	public Role findByT_S_First(int type, String subtype,
+		OrderByComparator orderByComparator)
 		throws NoSuchRoleException, SystemException {
-		List<Role> list = findByT_S(type, subtype, 0, 1, obc);
+		List<Role> list = findByT_S(type, subtype, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -1273,11 +1291,13 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		}
 	}
 
-	public Role findByT_S_Last(int type, String subtype, OrderByComparator obc)
+	public Role findByT_S_Last(int type, String subtype,
+		OrderByComparator orderByComparator)
 		throws NoSuchRoleException, SystemException {
 		int count = countByT_S(type, subtype);
 
-		List<Role> list = findByT_S(type, subtype, count - 1, count, obc);
+		List<Role> list = findByT_S(type, subtype, count - 1, count,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -1300,7 +1320,8 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	public Role[] findByT_S_PrevAndNext(long roleId, int type, String subtype,
-		OrderByComparator obc) throws NoSuchRoleException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchRoleException, SystemException {
 		Role role = findByPrimaryKey(roleId);
 
 		int count = countByT_S(type, subtype);
@@ -1312,9 +1333,9 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(4 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(4);
@@ -1336,8 +1357,9 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 				}
 			}
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -1356,7 +1378,8 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 				qPos.add(subtype);
 			}
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, role);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, role);
 
 			Role[] array = new RoleImpl[3];
 
@@ -1499,46 +1522,6 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		}
 	}
 
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.setLimit(start, end);
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
 	public List<Role> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -1547,10 +1530,11 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		return findAll(start, end, null);
 	}
 
-	public List<Role> findAll(int start, int end, OrderByComparator obc)
-		throws SystemException {
+	public List<Role> findAll(int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<Role> list = (List<Role>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
@@ -1565,13 +1549,14 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 				StringBundler query = null;
 				String sql = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(2 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 
 					query.append(_SQL_SELECT_ROLE);
 
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 
 					sql = query.toString();
 				}
@@ -1582,7 +1567,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 
 				Query q = session.createQuery(sql);
 
-				if (obc == null) {
+				if (orderByComparator == null) {
 					list = (List<Role>)QueryUtil.list(q, getDialect(), start,
 							end, false);
 
@@ -1989,10 +1974,10 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			});
 
 	public List<com.liferay.portal.model.Group> getGroups(long pk, int start,
-		int end, OrderByComparator obc) throws SystemException {
+		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(pk), String.valueOf(start), String.valueOf(end),
-				String.valueOf(obc)
+				String.valueOf(orderByComparator)
 			};
 
 		List<com.liferay.portal.model.Group> list = (List<com.liferay.portal.model.Group>)FinderCacheUtil.getResult(FINDER_PATH_GET_GROUPS,
@@ -2006,9 +1991,9 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 
 				String sql = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					sql = _SQL_GETGROUPS.concat(ORDER_BY_CLAUSE)
-										.concat(obc.getOrderBy());
+										.concat(orderByComparator.getOrderBy());
 				}
 
 				else {
@@ -2322,10 +2307,11 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			});
 
 	public List<com.liferay.portal.model.Permission> getPermissions(long pk,
-		int start, int end, OrderByComparator obc) throws SystemException {
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(pk), String.valueOf(start), String.valueOf(end),
-				String.valueOf(obc)
+				String.valueOf(orderByComparator)
 			};
 
 		List<com.liferay.portal.model.Permission> list = (List<com.liferay.portal.model.Permission>)FinderCacheUtil.getResult(FINDER_PATH_GET_PERMISSIONS,
@@ -2339,9 +2325,9 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 
 				String sql = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					sql = _SQL_GETPERMISSIONS.concat(ORDER_BY_CLAUSE)
-											 .concat(obc.getOrderBy());
+											 .concat(orderByComparator.getOrderBy());
 				}
 
 				sql = _SQL_GETPERMISSIONS;
@@ -2663,10 +2649,10 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			});
 
 	public List<com.liferay.portal.model.User> getUsers(long pk, int start,
-		int end, OrderByComparator obc) throws SystemException {
+		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(pk), String.valueOf(start), String.valueOf(end),
-				String.valueOf(obc)
+				String.valueOf(orderByComparator)
 			};
 
 		List<com.liferay.portal.model.User> list = (List<com.liferay.portal.model.User>)FinderCacheUtil.getResult(FINDER_PATH_GET_USERS,
@@ -2680,9 +2666,9 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 
 				String sql = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					sql = _SQL_GETUSERS.concat(ORDER_BY_CLAUSE)
-									   .concat(obc.getOrderBy());
+									   .concat(orderByComparator.getOrderBy());
 				}
 
 				sql = _SQL_GETUSERS;

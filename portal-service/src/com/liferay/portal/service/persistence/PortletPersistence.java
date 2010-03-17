@@ -62,22 +62,24 @@ public interface PortletPersistence extends BasePersistence<Portlet> {
 
 	public java.util.List<com.liferay.portal.model.Portlet> findByCompanyId(
 		long companyId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.Portlet findByCompanyId_First(
-		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long companyId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchPortletException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.Portlet findByCompanyId_Last(
-		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long companyId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchPortletException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.Portlet[] findByCompanyId_PrevAndNext(
 		long id, long companyId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchPortletException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -101,7 +103,8 @@ public interface PortletPersistence extends BasePersistence<Portlet> {
 		int end) throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Portlet> findAll(int start,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void removeByCompanyId(long companyId)

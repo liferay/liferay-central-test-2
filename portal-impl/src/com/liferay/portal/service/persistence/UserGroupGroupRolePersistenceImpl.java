@@ -18,7 +18,6 @@ import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.NoSuchUserGroupGroupRoleException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
-import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
@@ -440,11 +439,13 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 	}
 
 	public List<UserGroupGroupRole> findByUserGroupId(long userGroupId,
-		int start, int end, OrderByComparator obc) throws SystemException {
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(userGroupId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<UserGroupGroupRole> list = (List<UserGroupGroupRole>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_USERGROUPID,
@@ -458,9 +459,9 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(2);
@@ -470,8 +471,9 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 
 				query.append(_FINDER_COLUMN_USERGROUPID_USERGROUPID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				String sql = query.toString();
@@ -506,9 +508,10 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 	}
 
 	public UserGroupGroupRole findByUserGroupId_First(long userGroupId,
-		OrderByComparator obc)
+		OrderByComparator orderByComparator)
 		throws NoSuchUserGroupGroupRoleException, SystemException {
-		List<UserGroupGroupRole> list = findByUserGroupId(userGroupId, 0, 1, obc);
+		List<UserGroupGroupRole> list = findByUserGroupId(userGroupId, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -528,12 +531,12 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 	}
 
 	public UserGroupGroupRole findByUserGroupId_Last(long userGroupId,
-		OrderByComparator obc)
+		OrderByComparator orderByComparator)
 		throws NoSuchUserGroupGroupRoleException, SystemException {
 		int count = countByUserGroupId(userGroupId);
 
 		List<UserGroupGroupRole> list = findByUserGroupId(userGroupId,
-				count - 1, count, obc);
+				count - 1, count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -554,7 +557,7 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 
 	public UserGroupGroupRole[] findByUserGroupId_PrevAndNext(
 		UserGroupGroupRolePK userGroupGroupRolePK, long userGroupId,
-		OrderByComparator obc)
+		OrderByComparator orderByComparator)
 		throws NoSuchUserGroupGroupRoleException, SystemException {
 		UserGroupGroupRole userGroupGroupRole = findByPrimaryKey(userGroupGroupRolePK);
 
@@ -567,9 +570,9 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(2);
@@ -579,8 +582,9 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 
 			query.append(_FINDER_COLUMN_USERGROUPID_USERGROUPID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			String sql = query.toString();
@@ -591,8 +595,8 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 
 			qPos.add(userGroupId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					userGroupGroupRole);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, userGroupGroupRole);
 
 			UserGroupGroupRole[] array = new UserGroupGroupRoleImpl[3];
 
@@ -665,11 +669,12 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 	}
 
 	public List<UserGroupGroupRole> findByGroupId(long groupId, int start,
-		int end, OrderByComparator obc) throws SystemException {
+		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<UserGroupGroupRole> list = (List<UserGroupGroupRole>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
@@ -683,9 +688,9 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(2);
@@ -695,8 +700,9 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 
 				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				String sql = query.toString();
@@ -731,9 +737,10 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 	}
 
 	public UserGroupGroupRole findByGroupId_First(long groupId,
-		OrderByComparator obc)
+		OrderByComparator orderByComparator)
 		throws NoSuchUserGroupGroupRoleException, SystemException {
-		List<UserGroupGroupRole> list = findByGroupId(groupId, 0, 1, obc);
+		List<UserGroupGroupRole> list = findByGroupId(groupId, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -753,12 +760,12 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 	}
 
 	public UserGroupGroupRole findByGroupId_Last(long groupId,
-		OrderByComparator obc)
+		OrderByComparator orderByComparator)
 		throws NoSuchUserGroupGroupRoleException, SystemException {
 		int count = countByGroupId(groupId);
 
 		List<UserGroupGroupRole> list = findByGroupId(groupId, count - 1,
-				count, obc);
+				count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -779,7 +786,7 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 
 	public UserGroupGroupRole[] findByGroupId_PrevAndNext(
 		UserGroupGroupRolePK userGroupGroupRolePK, long groupId,
-		OrderByComparator obc)
+		OrderByComparator orderByComparator)
 		throws NoSuchUserGroupGroupRoleException, SystemException {
 		UserGroupGroupRole userGroupGroupRole = findByPrimaryKey(userGroupGroupRolePK);
 
@@ -792,9 +799,9 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(2);
@@ -804,8 +811,9 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			String sql = query.toString();
@@ -816,8 +824,8 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 
 			qPos.add(groupId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					userGroupGroupRole);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, userGroupGroupRole);
 
 			UserGroupGroupRole[] array = new UserGroupGroupRoleImpl[3];
 
@@ -890,11 +898,12 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 	}
 
 	public List<UserGroupGroupRole> findByRoleId(long roleId, int start,
-		int end, OrderByComparator obc) throws SystemException {
+		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(roleId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<UserGroupGroupRole> list = (List<UserGroupGroupRole>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_ROLEID,
@@ -908,9 +917,9 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(2);
@@ -920,8 +929,9 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 
 				query.append(_FINDER_COLUMN_ROLEID_ROLEID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				String sql = query.toString();
@@ -956,9 +966,10 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 	}
 
 	public UserGroupGroupRole findByRoleId_First(long roleId,
-		OrderByComparator obc)
+		OrderByComparator orderByComparator)
 		throws NoSuchUserGroupGroupRoleException, SystemException {
-		List<UserGroupGroupRole> list = findByRoleId(roleId, 0, 1, obc);
+		List<UserGroupGroupRole> list = findByRoleId(roleId, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -978,12 +989,12 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 	}
 
 	public UserGroupGroupRole findByRoleId_Last(long roleId,
-		OrderByComparator obc)
+		OrderByComparator orderByComparator)
 		throws NoSuchUserGroupGroupRoleException, SystemException {
 		int count = countByRoleId(roleId);
 
 		List<UserGroupGroupRole> list = findByRoleId(roleId, count - 1, count,
-				obc);
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -1004,7 +1015,7 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 
 	public UserGroupGroupRole[] findByRoleId_PrevAndNext(
 		UserGroupGroupRolePK userGroupGroupRolePK, long roleId,
-		OrderByComparator obc)
+		OrderByComparator orderByComparator)
 		throws NoSuchUserGroupGroupRoleException, SystemException {
 		UserGroupGroupRole userGroupGroupRole = findByPrimaryKey(userGroupGroupRolePK);
 
@@ -1017,9 +1028,9 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(2);
@@ -1029,8 +1040,9 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 
 			query.append(_FINDER_COLUMN_ROLEID_ROLEID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			String sql = query.toString();
@@ -1041,8 +1053,8 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 
 			qPos.add(roleId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					userGroupGroupRole);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, userGroupGroupRole);
 
 			UserGroupGroupRole[] array = new UserGroupGroupRoleImpl[3];
 
@@ -1121,11 +1133,13 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 	}
 
 	public List<UserGroupGroupRole> findByU_G(long userGroupId, long groupId,
-		int start, int end, OrderByComparator obc) throws SystemException {
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(userGroupId), new Long(groupId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<UserGroupGroupRole> list = (List<UserGroupGroupRole>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_U_G,
@@ -1139,9 +1153,9 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(4 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(3);
@@ -1153,8 +1167,9 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 
 				query.append(_FINDER_COLUMN_U_G_GROUPID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				String sql = query.toString();
@@ -1191,10 +1206,10 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 	}
 
 	public UserGroupGroupRole findByU_G_First(long userGroupId, long groupId,
-		OrderByComparator obc)
+		OrderByComparator orderByComparator)
 		throws NoSuchUserGroupGroupRoleException, SystemException {
 		List<UserGroupGroupRole> list = findByU_G(userGroupId, groupId, 0, 1,
-				obc);
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -1217,12 +1232,12 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 	}
 
 	public UserGroupGroupRole findByU_G_Last(long userGroupId, long groupId,
-		OrderByComparator obc)
+		OrderByComparator orderByComparator)
 		throws NoSuchUserGroupGroupRoleException, SystemException {
 		int count = countByU_G(userGroupId, groupId);
 
 		List<UserGroupGroupRole> list = findByU_G(userGroupId, groupId,
-				count - 1, count, obc);
+				count - 1, count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -1246,7 +1261,7 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 
 	public UserGroupGroupRole[] findByU_G_PrevAndNext(
 		UserGroupGroupRolePK userGroupGroupRolePK, long userGroupId,
-		long groupId, OrderByComparator obc)
+		long groupId, OrderByComparator orderByComparator)
 		throws NoSuchUserGroupGroupRoleException, SystemException {
 		UserGroupGroupRole userGroupGroupRole = findByPrimaryKey(userGroupGroupRolePK);
 
@@ -1259,9 +1274,9 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(4 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(3);
@@ -1273,8 +1288,9 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 
 			query.append(_FINDER_COLUMN_U_G_GROUPID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			String sql = query.toString();
@@ -1287,8 +1303,8 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 
 			qPos.add(groupId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					userGroupGroupRole);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, userGroupGroupRole);
 
 			UserGroupGroupRole[] array = new UserGroupGroupRoleImpl[3];
 
@@ -1365,11 +1381,13 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 	}
 
 	public List<UserGroupGroupRole> findByG_R(long groupId, long roleId,
-		int start, int end, OrderByComparator obc) throws SystemException {
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Long(roleId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<UserGroupGroupRole> list = (List<UserGroupGroupRole>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_G_R,
@@ -1383,9 +1401,9 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(4 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(3);
@@ -1397,8 +1415,9 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 
 				query.append(_FINDER_COLUMN_G_R_ROLEID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				String sql = query.toString();
@@ -1435,9 +1454,10 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 	}
 
 	public UserGroupGroupRole findByG_R_First(long groupId, long roleId,
-		OrderByComparator obc)
+		OrderByComparator orderByComparator)
 		throws NoSuchUserGroupGroupRoleException, SystemException {
-		List<UserGroupGroupRole> list = findByG_R(groupId, roleId, 0, 1, obc);
+		List<UserGroupGroupRole> list = findByG_R(groupId, roleId, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -1460,12 +1480,12 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 	}
 
 	public UserGroupGroupRole findByG_R_Last(long groupId, long roleId,
-		OrderByComparator obc)
+		OrderByComparator orderByComparator)
 		throws NoSuchUserGroupGroupRoleException, SystemException {
 		int count = countByG_R(groupId, roleId);
 
 		List<UserGroupGroupRole> list = findByG_R(groupId, roleId, count - 1,
-				count, obc);
+				count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -1489,7 +1509,7 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 
 	public UserGroupGroupRole[] findByG_R_PrevAndNext(
 		UserGroupGroupRolePK userGroupGroupRolePK, long groupId, long roleId,
-		OrderByComparator obc)
+		OrderByComparator orderByComparator)
 		throws NoSuchUserGroupGroupRoleException, SystemException {
 		UserGroupGroupRole userGroupGroupRole = findByPrimaryKey(userGroupGroupRolePK);
 
@@ -1502,9 +1522,9 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(4 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(3);
@@ -1516,8 +1536,9 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 
 			query.append(_FINDER_COLUMN_G_R_ROLEID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			String sql = query.toString();
@@ -1530,8 +1551,8 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 
 			qPos.add(roleId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					userGroupGroupRole);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, userGroupGroupRole);
 
 			UserGroupGroupRole[] array = new UserGroupGroupRoleImpl[3];
 
@@ -1540,46 +1561,6 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 			array[2] = (UserGroupGroupRole)objArray[2];
 
 			return array;
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.setLimit(start, end);
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
 		}
 		catch (Exception e) {
 			throw processException(e);
@@ -1599,9 +1580,10 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 	}
 
 	public List<UserGroupGroupRole> findAll(int start, int end,
-		OrderByComparator obc) throws SystemException {
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<UserGroupGroupRole> list = (List<UserGroupGroupRole>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
@@ -1616,13 +1598,14 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 				StringBundler query = null;
 				String sql = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(2 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 
 					query.append(_SQL_SELECT_USERGROUPGROUPROLE);
 
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 
 					sql = query.toString();
 				}
@@ -1631,7 +1614,7 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 
 				Query q = session.createQuery(sql);
 
-				if (obc == null) {
+				if (orderByComparator == null) {
 					list = (List<UserGroupGroupRole>)QueryUtil.list(q,
 							getDialect(), start, end, false);
 

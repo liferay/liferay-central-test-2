@@ -127,32 +127,38 @@ public class PermissionUtil {
 
 	public static java.util.List<com.liferay.portal.model.Permission> findByResourceId(
 		long resourceId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByResourceId(resourceId, start, end, obc);
+		return getPersistence()
+				   .findByResourceId(resourceId, start, end, orderByComparator);
 	}
 
 	public static com.liferay.portal.model.Permission findByResourceId_First(
-		long resourceId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long resourceId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchPermissionException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByResourceId_First(resourceId, obc);
+		return getPersistence()
+				   .findByResourceId_First(resourceId, orderByComparator);
 	}
 
 	public static com.liferay.portal.model.Permission findByResourceId_Last(
-		long resourceId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long resourceId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchPermissionException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByResourceId_Last(resourceId, obc);
+		return getPersistence()
+				   .findByResourceId_Last(resourceId, orderByComparator);
 	}
 
 	public static com.liferay.portal.model.Permission[] findByResourceId_PrevAndNext(
 		long permissionId, long resourceId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchPermissionException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .findByResourceId_PrevAndNext(permissionId, resourceId, obc);
+				   .findByResourceId_PrevAndNext(permissionId, resourceId,
+			orderByComparator);
 	}
 
 	public static com.liferay.portal.model.Permission findByA_R(
@@ -187,9 +193,10 @@ public class PermissionUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.Permission> findAll(
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findAll(start, end, obc);
+		return getPersistence().findAll(start, end, orderByComparator);
 	}
 
 	public static void removeByResourceId(long resourceId)
@@ -236,9 +243,9 @@ public class PermissionUtil {
 
 	public static java.util.List<com.liferay.portal.model.Group> getGroups(
 		long pk, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().getGroups(pk, start, end, obc);
+		return getPersistence().getGroups(pk, start, end, orderByComparator);
 	}
 
 	public static int getGroupsSize(long pk)
@@ -327,9 +334,9 @@ public class PermissionUtil {
 
 	public static java.util.List<com.liferay.portal.model.Role> getRoles(
 		long pk, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().getRoles(pk, start, end, obc);
+		return getPersistence().getRoles(pk, start, end, orderByComparator);
 	}
 
 	public static int getRolesSize(long pk)
@@ -418,9 +425,9 @@ public class PermissionUtil {
 
 	public static java.util.List<com.liferay.portal.model.User> getUsers(
 		long pk, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().getUsers(pk, start, end, obc);
+		return getPersistence().getUsers(pk, start, end, orderByComparator);
 	}
 
 	public static int getUsersSize(long pk)

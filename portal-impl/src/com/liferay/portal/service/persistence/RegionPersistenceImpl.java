@@ -18,7 +18,6 @@ import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.NoSuchRegionException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
-import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
@@ -394,11 +393,12 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 	}
 
 	public List<Region> findByCountryId(long countryId, int start, int end,
-		OrderByComparator obc) throws SystemException {
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(countryId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<Region> list = (List<Region>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_COUNTRYID,
@@ -412,9 +412,9 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(3);
@@ -424,8 +424,9 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 
 				query.append(_FINDER_COLUMN_COUNTRYID_COUNTRYID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -462,9 +463,10 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 		return list;
 	}
 
-	public Region findByCountryId_First(long countryId, OrderByComparator obc)
+	public Region findByCountryId_First(long countryId,
+		OrderByComparator orderByComparator)
 		throws NoSuchRegionException, SystemException {
-		List<Region> list = findByCountryId(countryId, 0, 1, obc);
+		List<Region> list = findByCountryId(countryId, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -483,11 +485,13 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 		}
 	}
 
-	public Region findByCountryId_Last(long countryId, OrderByComparator obc)
+	public Region findByCountryId_Last(long countryId,
+		OrderByComparator orderByComparator)
 		throws NoSuchRegionException, SystemException {
 		int count = countByCountryId(countryId);
 
-		List<Region> list = findByCountryId(countryId, count - 1, count, obc);
+		List<Region> list = findByCountryId(countryId, count - 1, count,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -507,7 +511,8 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 	}
 
 	public Region[] findByCountryId_PrevAndNext(long regionId, long countryId,
-		OrderByComparator obc) throws NoSuchRegionException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchRegionException, SystemException {
 		Region region = findByPrimaryKey(regionId);
 
 		int count = countByCountryId(countryId);
@@ -519,9 +524,9 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(3);
@@ -531,8 +536,9 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 
 			query.append(_FINDER_COLUMN_COUNTRYID_COUNTRYID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -547,7 +553,8 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 
 			qPos.add(countryId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, region);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, region);
 
 			Region[] array = new RegionImpl[3];
 
@@ -621,11 +628,12 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 	}
 
 	public List<Region> findByActive(boolean active, int start, int end,
-		OrderByComparator obc) throws SystemException {
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				Boolean.valueOf(active),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<Region> list = (List<Region>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_ACTIVE,
@@ -639,9 +647,9 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(3);
@@ -651,8 +659,9 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 
 				query.append(_FINDER_COLUMN_ACTIVE_ACTIVE_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -689,9 +698,10 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 		return list;
 	}
 
-	public Region findByActive_First(boolean active, OrderByComparator obc)
+	public Region findByActive_First(boolean active,
+		OrderByComparator orderByComparator)
 		throws NoSuchRegionException, SystemException {
-		List<Region> list = findByActive(active, 0, 1, obc);
+		List<Region> list = findByActive(active, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -710,11 +720,13 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 		}
 	}
 
-	public Region findByActive_Last(boolean active, OrderByComparator obc)
+	public Region findByActive_Last(boolean active,
+		OrderByComparator orderByComparator)
 		throws NoSuchRegionException, SystemException {
 		int count = countByActive(active);
 
-		List<Region> list = findByActive(active, count - 1, count, obc);
+		List<Region> list = findByActive(active, count - 1, count,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -734,7 +746,8 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 	}
 
 	public Region[] findByActive_PrevAndNext(long regionId, boolean active,
-		OrderByComparator obc) throws NoSuchRegionException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchRegionException, SystemException {
 		Region region = findByPrimaryKey(regionId);
 
 		int count = countByActive(active);
@@ -746,9 +759,9 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(3);
@@ -758,8 +771,9 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 
 			query.append(_FINDER_COLUMN_ACTIVE_ACTIVE_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -774,7 +788,8 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 
 			qPos.add(active);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, region);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, region);
 
 			Region[] array = new RegionImpl[3];
 
@@ -855,11 +870,12 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 	}
 
 	public List<Region> findByC_A(long countryId, boolean active, int start,
-		int end, OrderByComparator obc) throws SystemException {
+		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(countryId), Boolean.valueOf(active),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<Region> list = (List<Region>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_C_A,
@@ -873,9 +889,9 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(4 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(4);
@@ -887,8 +903,9 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 
 				query.append(_FINDER_COLUMN_C_A_ACTIVE_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -928,8 +945,9 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 	}
 
 	public Region findByC_A_First(long countryId, boolean active,
-		OrderByComparator obc) throws NoSuchRegionException, SystemException {
-		List<Region> list = findByC_A(countryId, active, 0, 1, obc);
+		OrderByComparator orderByComparator)
+		throws NoSuchRegionException, SystemException {
+		List<Region> list = findByC_A(countryId, active, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -952,10 +970,12 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 	}
 
 	public Region findByC_A_Last(long countryId, boolean active,
-		OrderByComparator obc) throws NoSuchRegionException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchRegionException, SystemException {
 		int count = countByC_A(countryId, active);
 
-		List<Region> list = findByC_A(countryId, active, count - 1, count, obc);
+		List<Region> list = findByC_A(countryId, active, count - 1, count,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -978,7 +998,7 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 	}
 
 	public Region[] findByC_A_PrevAndNext(long regionId, long countryId,
-		boolean active, OrderByComparator obc)
+		boolean active, OrderByComparator orderByComparator)
 		throws NoSuchRegionException, SystemException {
 		Region region = findByPrimaryKey(regionId);
 
@@ -991,9 +1011,9 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(4 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(4);
@@ -1005,8 +1025,9 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 
 			query.append(_FINDER_COLUMN_C_A_ACTIVE_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -1023,7 +1044,8 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 
 			qPos.add(active);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, region);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, region);
 
 			Region[] array = new RegionImpl[3];
 
@@ -1041,46 +1063,6 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 		}
 	}
 
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.setLimit(start, end);
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
 	public List<Region> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -1089,10 +1071,11 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 		return findAll(start, end, null);
 	}
 
-	public List<Region> findAll(int start, int end, OrderByComparator obc)
-		throws SystemException {
+	public List<Region> findAll(int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<Region> list = (List<Region>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
@@ -1107,13 +1090,14 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 				StringBundler query = null;
 				String sql = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(2 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 
 					query.append(_SQL_SELECT_REGION);
 
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 
 					sql = query.toString();
 				}
@@ -1124,7 +1108,7 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 
 				Query q = session.createQuery(sql);
 
-				if (obc == null) {
+				if (orderByComparator == null) {
 					list = (List<Region>)QueryUtil.list(q, getDialect(), start,
 							end, false);
 

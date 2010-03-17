@@ -123,31 +123,35 @@ public class LayoutUtil {
 
 	public static java.util.List<com.liferay.portal.model.Layout> findByGroupId(
 		long groupId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByGroupId(groupId, start, end, obc);
+		return getPersistence()
+				   .findByGroupId(groupId, start, end, orderByComparator);
 	}
 
 	public static com.liferay.portal.model.Layout findByGroupId_First(
-		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long groupId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchLayoutException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByGroupId_First(groupId, obc);
+		return getPersistence().findByGroupId_First(groupId, orderByComparator);
 	}
 
 	public static com.liferay.portal.model.Layout findByGroupId_Last(
-		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long groupId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchLayoutException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByGroupId_Last(groupId, obc);
+		return getPersistence().findByGroupId_Last(groupId, orderByComparator);
 	}
 
 	public static com.liferay.portal.model.Layout[] findByGroupId_PrevAndNext(
 		long plid, long groupId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchLayoutException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByGroupId_PrevAndNext(plid, groupId, obc);
+		return getPersistence()
+				   .findByGroupId_PrevAndNext(plid, groupId, orderByComparator);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Layout> findByCompanyId(
@@ -164,31 +168,38 @@ public class LayoutUtil {
 
 	public static java.util.List<com.liferay.portal.model.Layout> findByCompanyId(
 		long companyId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByCompanyId(companyId, start, end, obc);
+		return getPersistence()
+				   .findByCompanyId(companyId, start, end, orderByComparator);
 	}
 
 	public static com.liferay.portal.model.Layout findByCompanyId_First(
-		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long companyId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchLayoutException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByCompanyId_First(companyId, obc);
+		return getPersistence()
+				   .findByCompanyId_First(companyId, orderByComparator);
 	}
 
 	public static com.liferay.portal.model.Layout findByCompanyId_Last(
-		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long companyId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchLayoutException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByCompanyId_Last(companyId, obc);
+		return getPersistence()
+				   .findByCompanyId_Last(companyId, orderByComparator);
 	}
 
 	public static com.liferay.portal.model.Layout[] findByCompanyId_PrevAndNext(
 		long plid, long companyId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchLayoutException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByCompanyId_PrevAndNext(plid, companyId, obc);
+		return getPersistence()
+				   .findByCompanyId_PrevAndNext(plid, companyId,
+			orderByComparator);
 	}
 
 	public static com.liferay.portal.model.Layout findByDLFolderId(
@@ -244,35 +255,39 @@ public class LayoutUtil {
 
 	public static java.util.List<com.liferay.portal.model.Layout> findByG_P(
 		long groupId, boolean privateLayout, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .findByG_P(groupId, privateLayout, start, end, obc);
+				   .findByG_P(groupId, privateLayout, start, end,
+			orderByComparator);
 	}
 
 	public static com.liferay.portal.model.Layout findByG_P_First(
 		long groupId, boolean privateLayout,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchLayoutException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByG_P_First(groupId, privateLayout, obc);
+		return getPersistence()
+				   .findByG_P_First(groupId, privateLayout, orderByComparator);
 	}
 
 	public static com.liferay.portal.model.Layout findByG_P_Last(long groupId,
 		boolean privateLayout,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchLayoutException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByG_P_Last(groupId, privateLayout, obc);
+		return getPersistence()
+				   .findByG_P_Last(groupId, privateLayout, orderByComparator);
 	}
 
 	public static com.liferay.portal.model.Layout[] findByG_P_PrevAndNext(
 		long plid, long groupId, boolean privateLayout,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchLayoutException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .findByG_P_PrevAndNext(plid, groupId, privateLayout, obc);
+				   .findByG_P_PrevAndNext(plid, groupId, privateLayout,
+			orderByComparator);
 	}
 
 	public static com.liferay.portal.model.Layout findByG_P_L(long groupId,
@@ -313,40 +328,42 @@ public class LayoutUtil {
 
 	public static java.util.List<com.liferay.portal.model.Layout> findByG_P_P(
 		long groupId, boolean privateLayout, long parentLayoutId, int start,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
 				   .findByG_P_P(groupId, privateLayout, parentLayoutId, start,
-			end, obc);
+			end, orderByComparator);
 	}
 
 	public static com.liferay.portal.model.Layout findByG_P_P_First(
 		long groupId, boolean privateLayout, long parentLayoutId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchLayoutException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
 				   .findByG_P_P_First(groupId, privateLayout, parentLayoutId,
-			obc);
+			orderByComparator);
 	}
 
 	public static com.liferay.portal.model.Layout findByG_P_P_Last(
 		long groupId, boolean privateLayout, long parentLayoutId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchLayoutException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .findByG_P_P_Last(groupId, privateLayout, parentLayoutId, obc);
+				   .findByG_P_P_Last(groupId, privateLayout, parentLayoutId,
+			orderByComparator);
 	}
 
 	public static com.liferay.portal.model.Layout[] findByG_P_P_PrevAndNext(
 		long plid, long groupId, boolean privateLayout, long parentLayoutId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchLayoutException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
 				   .findByG_P_P_PrevAndNext(plid, groupId, privateLayout,
-			parentLayoutId, obc);
+			parentLayoutId, orderByComparator);
 	}
 
 	public static com.liferay.portal.model.Layout findByG_P_F(long groupId,
@@ -386,38 +403,42 @@ public class LayoutUtil {
 
 	public static java.util.List<com.liferay.portal.model.Layout> findByG_P_T(
 		long groupId, boolean privateLayout, java.lang.String type, int start,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .findByG_P_T(groupId, privateLayout, type, start, end, obc);
+				   .findByG_P_T(groupId, privateLayout, type, start, end,
+			orderByComparator);
 	}
 
 	public static com.liferay.portal.model.Layout findByG_P_T_First(
 		long groupId, boolean privateLayout, java.lang.String type,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchLayoutException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .findByG_P_T_First(groupId, privateLayout, type, obc);
+				   .findByG_P_T_First(groupId, privateLayout, type,
+			orderByComparator);
 	}
 
 	public static com.liferay.portal.model.Layout findByG_P_T_Last(
 		long groupId, boolean privateLayout, java.lang.String type,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchLayoutException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .findByG_P_T_Last(groupId, privateLayout, type, obc);
+				   .findByG_P_T_Last(groupId, privateLayout, type,
+			orderByComparator);
 	}
 
 	public static com.liferay.portal.model.Layout[] findByG_P_T_PrevAndNext(
 		long plid, long groupId, boolean privateLayout, java.lang.String type,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchLayoutException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
 				   .findByG_P_T_PrevAndNext(plid, groupId, privateLayout, type,
-			obc);
+			orderByComparator);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Layout> findAll()
@@ -432,9 +453,10 @@ public class LayoutUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.Layout> findAll(
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findAll(start, end, obc);
+		return getPersistence().findAll(start, end, orderByComparator);
 	}
 
 	public static void removeByGroupId(long groupId)

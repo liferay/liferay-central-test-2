@@ -18,7 +18,6 @@ import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.NoSuchPasswordPolicyRelException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
-import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
@@ -468,12 +467,13 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 	}
 
 	public List<PasswordPolicyRel> findByPasswordPolicyId(
-		long passwordPolicyId, int start, int end, OrderByComparator obc)
-		throws SystemException {
+		long passwordPolicyId, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(passwordPolicyId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<PasswordPolicyRel> list = (List<PasswordPolicyRel>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_PASSWORDPOLICYID,
@@ -487,9 +487,9 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(2);
@@ -499,8 +499,9 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 
 				query.append(_FINDER_COLUMN_PASSWORDPOLICYID_PASSWORDPOLICYID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				String sql = query.toString();
@@ -535,10 +536,10 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 	}
 
 	public PasswordPolicyRel findByPasswordPolicyId_First(
-		long passwordPolicyId, OrderByComparator obc)
+		long passwordPolicyId, OrderByComparator orderByComparator)
 		throws NoSuchPasswordPolicyRelException, SystemException {
 		List<PasswordPolicyRel> list = findByPasswordPolicyId(passwordPolicyId,
-				0, 1, obc);
+				0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -558,12 +559,12 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 	}
 
 	public PasswordPolicyRel findByPasswordPolicyId_Last(
-		long passwordPolicyId, OrderByComparator obc)
+		long passwordPolicyId, OrderByComparator orderByComparator)
 		throws NoSuchPasswordPolicyRelException, SystemException {
 		int count = countByPasswordPolicyId(passwordPolicyId);
 
 		List<PasswordPolicyRel> list = findByPasswordPolicyId(passwordPolicyId,
-				count - 1, count, obc);
+				count - 1, count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -583,7 +584,8 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 	}
 
 	public PasswordPolicyRel[] findByPasswordPolicyId_PrevAndNext(
-		long passwordPolicyRelId, long passwordPolicyId, OrderByComparator obc)
+		long passwordPolicyRelId, long passwordPolicyId,
+		OrderByComparator orderByComparator)
 		throws NoSuchPasswordPolicyRelException, SystemException {
 		PasswordPolicyRel passwordPolicyRel = findByPrimaryKey(passwordPolicyRelId);
 
@@ -596,9 +598,9 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(2);
@@ -608,8 +610,9 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 
 			query.append(_FINDER_COLUMN_PASSWORDPOLICYID_PASSWORDPOLICYID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			String sql = query.toString();
@@ -620,8 +623,8 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 
 			qPos.add(passwordPolicyId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					passwordPolicyRel);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, passwordPolicyRel);
 
 			PasswordPolicyRel[] array = new PasswordPolicyRelImpl[3];
 
@@ -881,46 +884,6 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 		}
 	}
 
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.setLimit(start, end);
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
 	public List<PasswordPolicyRel> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -931,9 +894,10 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 	}
 
 	public List<PasswordPolicyRel> findAll(int start, int end,
-		OrderByComparator obc) throws SystemException {
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<PasswordPolicyRel> list = (List<PasswordPolicyRel>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
@@ -948,13 +912,14 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 				StringBundler query = null;
 				String sql = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(2 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 
 					query.append(_SQL_SELECT_PASSWORDPOLICYREL);
 
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 
 					sql = query.toString();
 				}
@@ -963,7 +928,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 
 				Query q = session.createQuery(sql);
 
-				if (obc == null) {
+				if (orderByComparator == null) {
 					list = (List<PasswordPolicyRel>)QueryUtil.list(q,
 							getDialect(), start, end, false);
 

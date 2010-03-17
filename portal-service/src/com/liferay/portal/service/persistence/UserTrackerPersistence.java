@@ -64,22 +64,24 @@ public interface UserTrackerPersistence extends BasePersistence<UserTracker> {
 
 	public java.util.List<com.liferay.portal.model.UserTracker> findByCompanyId(
 		long companyId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.UserTracker findByCompanyId_First(
-		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long companyId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchUserTrackerException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.UserTracker findByCompanyId_Last(
-		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long companyId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchUserTrackerException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.UserTracker[] findByCompanyId_PrevAndNext(
 		long userTrackerId, long companyId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchUserTrackerException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -92,22 +94,23 @@ public interface UserTrackerPersistence extends BasePersistence<UserTracker> {
 
 	public java.util.List<com.liferay.portal.model.UserTracker> findByUserId(
 		long userId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.UserTracker findByUserId_First(
-		long userId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long userId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchUserTrackerException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.UserTracker findByUserId_Last(long userId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchUserTrackerException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.UserTracker[] findByUserId_PrevAndNext(
 		long userTrackerId, long userId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchUserTrackerException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -121,24 +124,24 @@ public interface UserTrackerPersistence extends BasePersistence<UserTracker> {
 
 	public java.util.List<com.liferay.portal.model.UserTracker> findBySessionId(
 		java.lang.String sessionId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.UserTracker findBySessionId_First(
 		java.lang.String sessionId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchUserTrackerException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.UserTracker findBySessionId_Last(
 		java.lang.String sessionId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchUserTrackerException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.UserTracker[] findBySessionId_PrevAndNext(
 		long userTrackerId, java.lang.String sessionId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchUserTrackerException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -150,7 +153,8 @@ public interface UserTrackerPersistence extends BasePersistence<UserTracker> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portal.model.UserTracker> findAll(
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void removeByCompanyId(long companyId)

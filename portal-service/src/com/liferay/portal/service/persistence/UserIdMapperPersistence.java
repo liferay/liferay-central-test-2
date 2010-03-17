@@ -63,22 +63,24 @@ public interface UserIdMapperPersistence extends BasePersistence<UserIdMapper> {
 
 	public java.util.List<com.liferay.portal.model.UserIdMapper> findByUserId(
 		long userId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.UserIdMapper findByUserId_First(
-		long userId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long userId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchUserIdMapperException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.UserIdMapper findByUserId_Last(
-		long userId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long userId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchUserIdMapperException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.UserIdMapper[] findByUserId_PrevAndNext(
 		long userIdMapperId, long userId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchUserIdMapperException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -117,7 +119,8 @@ public interface UserIdMapperPersistence extends BasePersistence<UserIdMapper> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portal.model.UserIdMapper> findAll(
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void removeByUserId(long userId)

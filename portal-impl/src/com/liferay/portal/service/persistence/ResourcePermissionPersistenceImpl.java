@@ -18,7 +18,6 @@ import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.NoSuchResourcePermissionException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
-import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
@@ -525,11 +524,12 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	}
 
 	public List<ResourcePermission> findByRoleId(long roleId, int start,
-		int end, OrderByComparator obc) throws SystemException {
+		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(roleId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<ResourcePermission> list = (List<ResourcePermission>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_ROLEID,
@@ -543,9 +543,9 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(2);
@@ -555,8 +555,9 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 
 				query.append(_FINDER_COLUMN_ROLEID_ROLEID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				String sql = query.toString();
@@ -591,9 +592,10 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	}
 
 	public ResourcePermission findByRoleId_First(long roleId,
-		OrderByComparator obc)
+		OrderByComparator orderByComparator)
 		throws NoSuchResourcePermissionException, SystemException {
-		List<ResourcePermission> list = findByRoleId(roleId, 0, 1, obc);
+		List<ResourcePermission> list = findByRoleId(roleId, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -613,12 +615,12 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	}
 
 	public ResourcePermission findByRoleId_Last(long roleId,
-		OrderByComparator obc)
+		OrderByComparator orderByComparator)
 		throws NoSuchResourcePermissionException, SystemException {
 		int count = countByRoleId(roleId);
 
 		List<ResourcePermission> list = findByRoleId(roleId, count - 1, count,
-				obc);
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -638,7 +640,8 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	}
 
 	public ResourcePermission[] findByRoleId_PrevAndNext(
-		long resourcePermissionId, long roleId, OrderByComparator obc)
+		long resourcePermissionId, long roleId,
+		OrderByComparator orderByComparator)
 		throws NoSuchResourcePermissionException, SystemException {
 		ResourcePermission resourcePermission = findByPrimaryKey(resourcePermissionId);
 
@@ -651,9 +654,9 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(2);
@@ -663,8 +666,9 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 
 			query.append(_FINDER_COLUMN_ROLEID_ROLEID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			String sql = query.toString();
@@ -675,8 +679,8 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 
 			qPos.add(roleId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					resourcePermission);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, resourcePermission);
 
 			ResourcePermission[] array = new ResourcePermissionImpl[3];
 
@@ -753,11 +757,13 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	}
 
 	public List<ResourcePermission> findByR_S(long roleId, int scope,
-		int start, int end, OrderByComparator obc) throws SystemException {
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(roleId), new Integer(scope),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<ResourcePermission> list = (List<ResourcePermission>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_R_S,
@@ -771,9 +777,9 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(4 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(3);
@@ -785,8 +791,9 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 
 				query.append(_FINDER_COLUMN_R_S_SCOPE_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				String sql = query.toString();
@@ -823,9 +830,10 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	}
 
 	public ResourcePermission findByR_S_First(long roleId, int scope,
-		OrderByComparator obc)
+		OrderByComparator orderByComparator)
 		throws NoSuchResourcePermissionException, SystemException {
-		List<ResourcePermission> list = findByR_S(roleId, scope, 0, 1, obc);
+		List<ResourcePermission> list = findByR_S(roleId, scope, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -848,12 +856,12 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	}
 
 	public ResourcePermission findByR_S_Last(long roleId, int scope,
-		OrderByComparator obc)
+		OrderByComparator orderByComparator)
 		throws NoSuchResourcePermissionException, SystemException {
 		int count = countByR_S(roleId, scope);
 
 		List<ResourcePermission> list = findByR_S(roleId, scope, count - 1,
-				count, obc);
+				count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -876,7 +884,8 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	}
 
 	public ResourcePermission[] findByR_S_PrevAndNext(
-		long resourcePermissionId, long roleId, int scope, OrderByComparator obc)
+		long resourcePermissionId, long roleId, int scope,
+		OrderByComparator orderByComparator)
 		throws NoSuchResourcePermissionException, SystemException {
 		ResourcePermission resourcePermission = findByPrimaryKey(resourcePermissionId);
 
@@ -889,9 +898,9 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(4 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(3);
@@ -903,8 +912,9 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 
 			query.append(_FINDER_COLUMN_R_S_SCOPE_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			String sql = query.toString();
@@ -917,8 +927,8 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 
 			qPos.add(scope);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					resourcePermission);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, resourcePermission);
 
 			ResourcePermission[] array = new ResourcePermissionImpl[3];
 
@@ -1015,14 +1025,15 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	}
 
 	public List<ResourcePermission> findByC_N_S(long companyId, String name,
-		int scope, int start, int end, OrderByComparator obc)
+		int scope, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(companyId),
 				
 				name, new Integer(scope),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<ResourcePermission> list = (List<ResourcePermission>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_C_N_S,
@@ -1036,9 +1047,9 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(5 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(4);
@@ -1062,8 +1073,9 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 
 				query.append(_FINDER_COLUMN_C_N_S_SCOPE_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				String sql = query.toString();
@@ -1104,10 +1116,10 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	}
 
 	public ResourcePermission findByC_N_S_First(long companyId, String name,
-		int scope, OrderByComparator obc)
+		int scope, OrderByComparator orderByComparator)
 		throws NoSuchResourcePermissionException, SystemException {
 		List<ResourcePermission> list = findByC_N_S(companyId, name, scope, 0,
-				1, obc);
+				1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(8);
@@ -1133,12 +1145,12 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	}
 
 	public ResourcePermission findByC_N_S_Last(long companyId, String name,
-		int scope, OrderByComparator obc)
+		int scope, OrderByComparator orderByComparator)
 		throws NoSuchResourcePermissionException, SystemException {
 		int count = countByC_N_S(companyId, name, scope);
 
 		List<ResourcePermission> list = findByC_N_S(companyId, name, scope,
-				count - 1, count, obc);
+				count - 1, count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(8);
@@ -1165,7 +1177,7 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 
 	public ResourcePermission[] findByC_N_S_PrevAndNext(
 		long resourcePermissionId, long companyId, String name, int scope,
-		OrderByComparator obc)
+		OrderByComparator orderByComparator)
 		throws NoSuchResourcePermissionException, SystemException {
 		ResourcePermission resourcePermission = findByPrimaryKey(resourcePermissionId);
 
@@ -1178,9 +1190,9 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(5 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(4);
@@ -1204,8 +1216,9 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 
 			query.append(_FINDER_COLUMN_C_N_S_SCOPE_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			String sql = query.toString();
@@ -1222,8 +1235,8 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 
 			qPos.add(scope);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					resourcePermission);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, resourcePermission);
 
 			ResourcePermission[] array = new ResourcePermissionImpl[3];
 
@@ -1339,8 +1352,8 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	}
 
 	public List<ResourcePermission> findByC_N_S_P(long companyId, String name,
-		int scope, String primKey, int start, int end, OrderByComparator obc)
-		throws SystemException {
+		int scope, String primKey, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(companyId),
 				
@@ -1348,7 +1361,8 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 				
 				primKey,
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<ResourcePermission> list = (List<ResourcePermission>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_C_N_S_P,
@@ -1362,9 +1376,9 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(6 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(5);
@@ -1400,8 +1414,9 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 					}
 				}
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				String sql = query.toString();
@@ -1446,10 +1461,10 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	}
 
 	public ResourcePermission findByC_N_S_P_First(long companyId, String name,
-		int scope, String primKey, OrderByComparator obc)
+		int scope, String primKey, OrderByComparator orderByComparator)
 		throws NoSuchResourcePermissionException, SystemException {
 		List<ResourcePermission> list = findByC_N_S_P(companyId, name, scope,
-				primKey, 0, 1, obc);
+				primKey, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(10);
@@ -1478,12 +1493,12 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	}
 
 	public ResourcePermission findByC_N_S_P_Last(long companyId, String name,
-		int scope, String primKey, OrderByComparator obc)
+		int scope, String primKey, OrderByComparator orderByComparator)
 		throws NoSuchResourcePermissionException, SystemException {
 		int count = countByC_N_S_P(companyId, name, scope, primKey);
 
 		List<ResourcePermission> list = findByC_N_S_P(companyId, name, scope,
-				primKey, count - 1, count, obc);
+				primKey, count - 1, count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(10);
@@ -1513,7 +1528,7 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 
 	public ResourcePermission[] findByC_N_S_P_PrevAndNext(
 		long resourcePermissionId, long companyId, String name, int scope,
-		String primKey, OrderByComparator obc)
+		String primKey, OrderByComparator orderByComparator)
 		throws NoSuchResourcePermissionException, SystemException {
 		ResourcePermission resourcePermission = findByPrimaryKey(resourcePermissionId);
 
@@ -1526,9 +1541,9 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(6 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(5);
@@ -1564,8 +1579,9 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 				}
 			}
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			String sql = query.toString();
@@ -1586,8 +1602,8 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 				qPos.add(primKey);
 			}
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					resourcePermission);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, resourcePermission);
 
 			ResourcePermission[] array = new ResourcePermissionImpl[3];
 
@@ -1777,46 +1793,6 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 		}
 	}
 
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.setLimit(start, end);
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
 	public List<ResourcePermission> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -1827,9 +1803,10 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	}
 
 	public List<ResourcePermission> findAll(int start, int end,
-		OrderByComparator obc) throws SystemException {
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<ResourcePermission> list = (List<ResourcePermission>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
@@ -1844,13 +1821,14 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 				StringBundler query = null;
 				String sql = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(2 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 
 					query.append(_SQL_SELECT_RESOURCEPERMISSION);
 
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 
 					sql = query.toString();
 				}
@@ -1859,7 +1837,7 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 
 				Query q = session.createQuery(sql);
 
-				if (obc == null) {
+				if (orderByComparator == null) {
 					list = (List<ResourcePermission>)QueryUtil.list(q,
 							getDialect(), start, end, false);
 

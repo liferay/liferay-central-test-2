@@ -67,22 +67,24 @@ public interface UserTrackerPathPersistence extends BasePersistence<UserTrackerP
 
 	public java.util.List<com.liferay.portal.model.UserTrackerPath> findByUserTrackerId(
 		long userTrackerId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.UserTrackerPath findByUserTrackerId_First(
-		long userTrackerId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long userTrackerId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchUserTrackerPathException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.UserTrackerPath findByUserTrackerId_Last(
-		long userTrackerId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long userTrackerId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchUserTrackerPathException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.UserTrackerPath[] findByUserTrackerId_PrevAndNext(
 		long userTrackerPathId, long userTrackerId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchUserTrackerPathException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -94,7 +96,8 @@ public interface UserTrackerPathPersistence extends BasePersistence<UserTrackerP
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portal.model.UserTrackerPath> findAll(
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void removeByUserTrackerId(long userTrackerId)

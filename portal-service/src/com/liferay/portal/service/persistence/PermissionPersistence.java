@@ -64,22 +64,24 @@ public interface PermissionPersistence extends BasePersistence<Permission> {
 
 	public java.util.List<com.liferay.portal.model.Permission> findByResourceId(
 		long resourceId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.Permission findByResourceId_First(
-		long resourceId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long resourceId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchPermissionException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.Permission findByResourceId_Last(
-		long resourceId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long resourceId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchPermissionException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.Permission[] findByResourceId_PrevAndNext(
 		long permissionId, long resourceId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchPermissionException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -104,7 +106,8 @@ public interface PermissionPersistence extends BasePersistence<Permission> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Permission> findAll(
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void removeByResourceId(long resourceId)
@@ -134,7 +137,8 @@ public interface PermissionPersistence extends BasePersistence<Permission> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Group> getGroups(long pk,
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int getGroupsSize(long pk)
@@ -190,7 +194,8 @@ public interface PermissionPersistence extends BasePersistence<Permission> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Role> getRoles(long pk,
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int getRolesSize(long pk)
@@ -246,7 +251,8 @@ public interface PermissionPersistence extends BasePersistence<Permission> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portal.model.User> getUsers(long pk,
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int getUsersSize(long pk)

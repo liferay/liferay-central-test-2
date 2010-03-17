@@ -123,33 +123,34 @@ public class UserUtil {
 
 	public static java.util.List<com.liferay.portal.model.User> findByUuid(
 		java.lang.String uuid, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByUuid(uuid, start, end, obc);
+		return getPersistence().findByUuid(uuid, start, end, orderByComparator);
 	}
 
 	public static com.liferay.portal.model.User findByUuid_First(
 		java.lang.String uuid,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchUserException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByUuid_First(uuid, obc);
+		return getPersistence().findByUuid_First(uuid, orderByComparator);
 	}
 
 	public static com.liferay.portal.model.User findByUuid_Last(
 		java.lang.String uuid,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchUserException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByUuid_Last(uuid, obc);
+		return getPersistence().findByUuid_Last(uuid, orderByComparator);
 	}
 
 	public static com.liferay.portal.model.User[] findByUuid_PrevAndNext(
 		long userId, java.lang.String uuid,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchUserException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByUuid_PrevAndNext(userId, uuid, obc);
+		return getPersistence()
+				   .findByUuid_PrevAndNext(userId, uuid, orderByComparator);
 	}
 
 	public static java.util.List<com.liferay.portal.model.User> findByCompanyId(
@@ -166,32 +167,38 @@ public class UserUtil {
 
 	public static java.util.List<com.liferay.portal.model.User> findByCompanyId(
 		long companyId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByCompanyId(companyId, start, end, obc);
+		return getPersistence()
+				   .findByCompanyId(companyId, start, end, orderByComparator);
 	}
 
 	public static com.liferay.portal.model.User findByCompanyId_First(
-		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long companyId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchUserException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByCompanyId_First(companyId, obc);
+		return getPersistence()
+				   .findByCompanyId_First(companyId, orderByComparator);
 	}
 
 	public static com.liferay.portal.model.User findByCompanyId_Last(
-		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long companyId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchUserException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByCompanyId_Last(companyId, obc);
+		return getPersistence()
+				   .findByCompanyId_Last(companyId, orderByComparator);
 	}
 
 	public static com.liferay.portal.model.User[] findByCompanyId_PrevAndNext(
 		long userId, long companyId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchUserException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .findByCompanyId_PrevAndNext(userId, companyId, obc);
+				   .findByCompanyId_PrevAndNext(userId, companyId,
+			orderByComparator);
 	}
 
 	public static com.liferay.portal.model.User findByContactId(long contactId)
@@ -225,34 +232,39 @@ public class UserUtil {
 
 	public static java.util.List<com.liferay.portal.model.User> findByEmailAddress(
 		java.lang.String emailAddress, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByEmailAddress(emailAddress, start, end, obc);
+		return getPersistence()
+				   .findByEmailAddress(emailAddress, start, end,
+			orderByComparator);
 	}
 
 	public static com.liferay.portal.model.User findByEmailAddress_First(
 		java.lang.String emailAddress,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchUserException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByEmailAddress_First(emailAddress, obc);
+		return getPersistence()
+				   .findByEmailAddress_First(emailAddress, orderByComparator);
 	}
 
 	public static com.liferay.portal.model.User findByEmailAddress_Last(
 		java.lang.String emailAddress,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchUserException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByEmailAddress_Last(emailAddress, obc);
+		return getPersistence()
+				   .findByEmailAddress_Last(emailAddress, orderByComparator);
 	}
 
 	public static com.liferay.portal.model.User[] findByEmailAddress_PrevAndNext(
 		long userId, java.lang.String emailAddress,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchUserException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .findByEmailAddress_PrevAndNext(userId, emailAddress, obc);
+				   .findByEmailAddress_PrevAndNext(userId, emailAddress,
+			orderByComparator);
 	}
 
 	public static com.liferay.portal.model.User findByOpenId(
@@ -383,9 +395,10 @@ public class UserUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.User> findAll(
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findAll(start, end, obc);
+		return getPersistence().findAll(start, end, orderByComparator);
 	}
 
 	public static void removeByUuid(java.lang.String uuid)
@@ -519,9 +532,9 @@ public class UserUtil {
 
 	public static java.util.List<com.liferay.portal.model.Group> getGroups(
 		long pk, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().getGroups(pk, start, end, obc);
+		return getPersistence().getGroups(pk, start, end, orderByComparator);
 	}
 
 	public static int getGroupsSize(long pk)
@@ -610,9 +623,10 @@ public class UserUtil {
 
 	public static java.util.List<com.liferay.portal.model.Organization> getOrganizations(
 		long pk, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().getOrganizations(pk, start, end, obc);
+		return getPersistence()
+				   .getOrganizations(pk, start, end, orderByComparator);
 	}
 
 	public static int getOrganizationsSize(long pk)
@@ -703,9 +717,9 @@ public class UserUtil {
 
 	public static java.util.List<com.liferay.portal.model.Permission> getPermissions(
 		long pk, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().getPermissions(pk, start, end, obc);
+		return getPersistence().getPermissions(pk, start, end, orderByComparator);
 	}
 
 	public static int getPermissionsSize(long pk)
@@ -796,9 +810,9 @@ public class UserUtil {
 
 	public static java.util.List<com.liferay.portal.model.Role> getRoles(
 		long pk, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().getRoles(pk, start, end, obc);
+		return getPersistence().getRoles(pk, start, end, orderByComparator);
 	}
 
 	public static int getRolesSize(long pk)
@@ -887,9 +901,9 @@ public class UserUtil {
 
 	public static java.util.List<com.liferay.portal.model.Team> getTeams(
 		long pk, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().getTeams(pk, start, end, obc);
+		return getPersistence().getTeams(pk, start, end, orderByComparator);
 	}
 
 	public static int getTeamsSize(long pk)
@@ -978,9 +992,9 @@ public class UserUtil {
 
 	public static java.util.List<com.liferay.portal.model.UserGroup> getUserGroups(
 		long pk, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().getUserGroups(pk, start, end, obc);
+		return getPersistence().getUserGroups(pk, start, end, orderByComparator);
 	}
 
 	public static int getUserGroupsSize(long pk)

@@ -68,24 +68,24 @@ public interface ServiceComponentPersistence extends BasePersistence<ServiceComp
 
 	public java.util.List<com.liferay.portal.model.ServiceComponent> findByBuildNamespace(
 		java.lang.String buildNamespace, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.ServiceComponent findByBuildNamespace_First(
 		java.lang.String buildNamespace,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchServiceComponentException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.ServiceComponent findByBuildNamespace_Last(
 		java.lang.String buildNamespace,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchServiceComponentException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.ServiceComponent[] findByBuildNamespace_PrevAndNext(
 		long serviceComponentId, java.lang.String buildNamespace,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchServiceComponentException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -111,7 +111,8 @@ public interface ServiceComponentPersistence extends BasePersistence<ServiceComp
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portal.model.ServiceComponent> findAll(
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void removeByBuildNamespace(java.lang.String buildNamespace)

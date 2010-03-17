@@ -61,22 +61,22 @@ public interface ResourcePersistence extends BasePersistence<Resource> {
 
 	public java.util.List<com.liferay.portal.model.Resource> findByCodeId(
 		long codeId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.Resource findByCodeId_First(long codeId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchResourceException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.Resource findByCodeId_Last(long codeId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchResourceException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.Resource[] findByCodeId_PrevAndNext(
 		long resourceId, long codeId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchResourceException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -101,7 +101,8 @@ public interface ResourcePersistence extends BasePersistence<Resource> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Resource> findAll(
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void removeByCodeId(long codeId)

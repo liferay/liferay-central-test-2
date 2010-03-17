@@ -18,7 +18,6 @@ import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.NoSuchPortletItemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
-import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
@@ -477,11 +476,13 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 	}
 
 	public List<PortletItem> findByG_C(long groupId, long classNameId,
-		int start, int end, OrderByComparator obc) throws SystemException {
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Long(classNameId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<PortletItem> list = (List<PortletItem>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_G_C,
@@ -495,9 +496,9 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(4 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(3);
@@ -509,8 +510,9 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 
 				query.append(_FINDER_COLUMN_G_C_CLASSNAMEID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				String sql = query.toString();
@@ -547,9 +549,10 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 	}
 
 	public PortletItem findByG_C_First(long groupId, long classNameId,
-		OrderByComparator obc)
+		OrderByComparator orderByComparator)
 		throws NoSuchPortletItemException, SystemException {
-		List<PortletItem> list = findByG_C(groupId, classNameId, 0, 1, obc);
+		List<PortletItem> list = findByG_C(groupId, classNameId, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -572,12 +575,12 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 	}
 
 	public PortletItem findByG_C_Last(long groupId, long classNameId,
-		OrderByComparator obc)
+		OrderByComparator orderByComparator)
 		throws NoSuchPortletItemException, SystemException {
 		int count = countByG_C(groupId, classNameId);
 
 		List<PortletItem> list = findByG_C(groupId, classNameId, count - 1,
-				count, obc);
+				count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -600,7 +603,7 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 	}
 
 	public PortletItem[] findByG_C_PrevAndNext(long portletItemId,
-		long groupId, long classNameId, OrderByComparator obc)
+		long groupId, long classNameId, OrderByComparator orderByComparator)
 		throws NoSuchPortletItemException, SystemException {
 		PortletItem portletItem = findByPrimaryKey(portletItemId);
 
@@ -613,9 +616,9 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(4 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(3);
@@ -627,8 +630,9 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 
 			query.append(_FINDER_COLUMN_G_C_CLASSNAMEID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			String sql = query.toString();
@@ -641,8 +645,8 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 
 			qPos.add(classNameId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					portletItem);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, portletItem);
 
 			PortletItem[] array = new PortletItemImpl[3];
 
@@ -739,14 +743,15 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 	}
 
 	public List<PortletItem> findByG_P_C(long groupId, String portletId,
-		long classNameId, int start, int end, OrderByComparator obc)
-		throws SystemException {
+		long classNameId, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
 				portletId, new Long(classNameId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<PortletItem> list = (List<PortletItem>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_G_P_C,
@@ -760,9 +765,9 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(5 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(4);
@@ -786,8 +791,9 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 
 				query.append(_FINDER_COLUMN_G_P_C_CLASSNAMEID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				String sql = query.toString();
@@ -828,10 +834,10 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 	}
 
 	public PortletItem findByG_P_C_First(long groupId, String portletId,
-		long classNameId, OrderByComparator obc)
+		long classNameId, OrderByComparator orderByComparator)
 		throws NoSuchPortletItemException, SystemException {
 		List<PortletItem> list = findByG_P_C(groupId, portletId, classNameId,
-				0, 1, obc);
+				0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(8);
@@ -857,12 +863,12 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 	}
 
 	public PortletItem findByG_P_C_Last(long groupId, String portletId,
-		long classNameId, OrderByComparator obc)
+		long classNameId, OrderByComparator orderByComparator)
 		throws NoSuchPortletItemException, SystemException {
 		int count = countByG_P_C(groupId, portletId, classNameId);
 
 		List<PortletItem> list = findByG_P_C(groupId, portletId, classNameId,
-				count - 1, count, obc);
+				count - 1, count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(8);
@@ -888,7 +894,8 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 	}
 
 	public PortletItem[] findByG_P_C_PrevAndNext(long portletItemId,
-		long groupId, String portletId, long classNameId, OrderByComparator obc)
+		long groupId, String portletId, long classNameId,
+		OrderByComparator orderByComparator)
 		throws NoSuchPortletItemException, SystemException {
 		PortletItem portletItem = findByPrimaryKey(portletItemId);
 
@@ -901,9 +908,9 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(5 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(4);
@@ -927,8 +934,9 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 
 			query.append(_FINDER_COLUMN_G_P_C_CLASSNAMEID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			String sql = query.toString();
@@ -945,8 +953,8 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 
 			qPos.add(classNameId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					portletItem);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, portletItem);
 
 			PortletItem[] array = new PortletItemImpl[3];
 
@@ -1128,46 +1136,6 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 		}
 	}
 
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.setLimit(start, end);
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
 	public List<PortletItem> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -1177,10 +1145,11 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 		return findAll(start, end, null);
 	}
 
-	public List<PortletItem> findAll(int start, int end, OrderByComparator obc)
-		throws SystemException {
+	public List<PortletItem> findAll(int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<PortletItem> list = (List<PortletItem>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
@@ -1195,13 +1164,14 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 				StringBundler query = null;
 				String sql = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(2 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 
 					query.append(_SQL_SELECT_PORTLETITEM);
 
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 
 					sql = query.toString();
 				}
@@ -1210,7 +1180,7 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 
 				Query q = session.createQuery(sql);
 
-				if (obc == null) {
+				if (orderByComparator == null) {
 					list = (List<PortletItem>)QueryUtil.list(q, getDialect(),
 							start, end, false);
 

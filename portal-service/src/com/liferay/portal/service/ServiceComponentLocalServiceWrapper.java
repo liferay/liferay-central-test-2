@@ -74,6 +74,21 @@ public class ServiceComponentLocalServiceWrapper
 			end);
 	}
 
+	public java.util.List<Object> dynamicQuery(
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
+		int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _serviceComponentLocalService.dynamicQuery(dynamicQuery, start,
+			end, orderByComparator);
+	}
+
+	public int dynamicQueryCount(
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _serviceComponentLocalService.dynamicQueryCount(dynamicQuery);
+	}
+
 	public com.liferay.portal.model.ServiceComponent getServiceComponent(
 		long serviceComponentId)
 		throws com.liferay.portal.kernel.exception.PortalException,

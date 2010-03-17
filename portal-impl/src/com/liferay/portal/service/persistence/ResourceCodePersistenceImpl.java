@@ -18,7 +18,6 @@ import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.NoSuchResourceCodeException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
-import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
@@ -442,11 +441,12 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 	}
 
 	public List<ResourceCode> findByCompanyId(long companyId, int start,
-		int end, OrderByComparator obc) throws SystemException {
+		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(companyId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<ResourceCode> list = (List<ResourceCode>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
@@ -460,9 +460,9 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(2);
@@ -472,8 +472,9 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 
 				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				String sql = query.toString();
@@ -508,9 +509,10 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 	}
 
 	public ResourceCode findByCompanyId_First(long companyId,
-		OrderByComparator obc)
+		OrderByComparator orderByComparator)
 		throws NoSuchResourceCodeException, SystemException {
-		List<ResourceCode> list = findByCompanyId(companyId, 0, 1, obc);
+		List<ResourceCode> list = findByCompanyId(companyId, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -530,12 +532,12 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 	}
 
 	public ResourceCode findByCompanyId_Last(long companyId,
-		OrderByComparator obc)
+		OrderByComparator orderByComparator)
 		throws NoSuchResourceCodeException, SystemException {
 		int count = countByCompanyId(companyId);
 
 		List<ResourceCode> list = findByCompanyId(companyId, count - 1, count,
-				obc);
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -555,7 +557,7 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 	}
 
 	public ResourceCode[] findByCompanyId_PrevAndNext(long codeId,
-		long companyId, OrderByComparator obc)
+		long companyId, OrderByComparator orderByComparator)
 		throws NoSuchResourceCodeException, SystemException {
 		ResourceCode resourceCode = findByPrimaryKey(codeId);
 
@@ -568,9 +570,9 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(2);
@@ -580,8 +582,9 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 
 			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			String sql = query.toString();
@@ -592,8 +595,8 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 
 			qPos.add(companyId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					resourceCode);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, resourceCode);
 
 			ResourceCode[] array = new ResourceCodeImpl[3];
 
@@ -677,11 +680,12 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 	}
 
 	public List<ResourceCode> findByName(String name, int start, int end,
-		OrderByComparator obc) throws SystemException {
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				name,
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<ResourceCode> list = (List<ResourceCode>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_NAME,
@@ -695,9 +699,9 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(2);
@@ -717,8 +721,9 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 					}
 				}
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				String sql = query.toString();
@@ -754,9 +759,10 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 		return list;
 	}
 
-	public ResourceCode findByName_First(String name, OrderByComparator obc)
+	public ResourceCode findByName_First(String name,
+		OrderByComparator orderByComparator)
 		throws NoSuchResourceCodeException, SystemException {
-		List<ResourceCode> list = findByName(name, 0, 1, obc);
+		List<ResourceCode> list = findByName(name, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -775,11 +781,13 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 		}
 	}
 
-	public ResourceCode findByName_Last(String name, OrderByComparator obc)
+	public ResourceCode findByName_Last(String name,
+		OrderByComparator orderByComparator)
 		throws NoSuchResourceCodeException, SystemException {
 		int count = countByName(name);
 
-		List<ResourceCode> list = findByName(name, count - 1, count, obc);
+		List<ResourceCode> list = findByName(name, count - 1, count,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -799,7 +807,7 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 	}
 
 	public ResourceCode[] findByName_PrevAndNext(long codeId, String name,
-		OrderByComparator obc)
+		OrderByComparator orderByComparator)
 		throws NoSuchResourceCodeException, SystemException {
 		ResourceCode resourceCode = findByPrimaryKey(codeId);
 
@@ -812,9 +820,9 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(2);
@@ -834,8 +842,9 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 				}
 			}
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			String sql = query.toString();
@@ -848,8 +857,8 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 				qPos.add(name);
 			}
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					resourceCode);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, resourceCode);
 
 			ResourceCode[] array = new ResourceCodeImpl[3];
 
@@ -1005,46 +1014,6 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 		}
 	}
 
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.setLimit(start, end);
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
 	public List<ResourceCode> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -1054,10 +1023,11 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 		return findAll(start, end, null);
 	}
 
-	public List<ResourceCode> findAll(int start, int end, OrderByComparator obc)
-		throws SystemException {
+	public List<ResourceCode> findAll(int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<ResourceCode> list = (List<ResourceCode>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
@@ -1072,13 +1042,14 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 				StringBundler query = null;
 				String sql = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(2 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 
 					query.append(_SQL_SELECT_RESOURCECODE);
 
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 
 					sql = query.toString();
 				}
@@ -1087,7 +1058,7 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 
 				Query q = session.createQuery(sql);
 
-				if (obc == null) {
+				if (orderByComparator == null) {
 					list = (List<ResourceCode>)QueryUtil.list(q, getDialect(),
 							start, end, false);
 

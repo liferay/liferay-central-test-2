@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.ResourcePermission;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountService;
@@ -217,6 +218,17 @@ public abstract class ResourcePermissionLocalServiceBaseImpl
 		int end) throws SystemException {
 		return resourcePermissionPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
+	}
+
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end, OrderByComparator orderByComparator) throws SystemException {
+		return resourcePermissionPersistence.findWithDynamicQuery(dynamicQuery,
+			start, end, orderByComparator);
+	}
+
+	public int dynamicQueryCount(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return resourcePermissionPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
 	public ResourcePermission getResourcePermission(long resourcePermissionId)

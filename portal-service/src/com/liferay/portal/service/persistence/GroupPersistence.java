@@ -62,22 +62,23 @@ public interface GroupPersistence extends BasePersistence<Group> {
 
 	public java.util.List<com.liferay.portal.model.Group> findByCompanyId(
 		long companyId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.Group findByCompanyId_First(
-		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long companyId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchGroupException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.Group findByCompanyId_Last(long companyId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchGroupException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.Group[] findByCompanyId_PrevAndNext(
 		long groupId, long companyId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchGroupException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -128,22 +129,24 @@ public interface GroupPersistence extends BasePersistence<Group> {
 
 	public java.util.List<com.liferay.portal.model.Group> findByT_A(int type,
 		boolean active, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.Group findByT_A_First(int type,
-		boolean active, com.liferay.portal.kernel.util.OrderByComparator obc)
+		boolean active,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchGroupException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.Group findByT_A_Last(int type,
-		boolean active, com.liferay.portal.kernel.util.OrderByComparator obc)
+		boolean active,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchGroupException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.Group[] findByT_A_PrevAndNext(
 		long groupId, int type, boolean active,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchGroupException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -194,7 +197,8 @@ public interface GroupPersistence extends BasePersistence<Group> {
 		int end) throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Group> findAll(int start,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void removeByCompanyId(long companyId)
@@ -270,7 +274,7 @@ public interface GroupPersistence extends BasePersistence<Group> {
 
 	public java.util.List<com.liferay.portal.model.Organization> getOrganizations(
 		long pk, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int getOrganizationsSize(long pk)
@@ -329,7 +333,7 @@ public interface GroupPersistence extends BasePersistence<Group> {
 
 	public java.util.List<com.liferay.portal.model.Permission> getPermissions(
 		long pk, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int getPermissionsSize(long pk)
@@ -387,7 +391,8 @@ public interface GroupPersistence extends BasePersistence<Group> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Role> getRoles(long pk,
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int getRolesSize(long pk)
@@ -444,7 +449,7 @@ public interface GroupPersistence extends BasePersistence<Group> {
 
 	public java.util.List<com.liferay.portal.model.UserGroup> getUserGroups(
 		long pk, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int getUserGroupsSize(long pk)
@@ -502,7 +507,8 @@ public interface GroupPersistence extends BasePersistence<Group> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portal.model.User> getUsers(long pk,
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int getUsersSize(long pk)

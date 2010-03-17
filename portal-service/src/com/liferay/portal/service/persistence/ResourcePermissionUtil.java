@@ -130,32 +130,36 @@ public class ResourcePermissionUtil {
 
 	public static java.util.List<com.liferay.portal.model.ResourcePermission> findByRoleId(
 		long roleId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByRoleId(roleId, start, end, obc);
+		return getPersistence()
+				   .findByRoleId(roleId, start, end, orderByComparator);
 	}
 
 	public static com.liferay.portal.model.ResourcePermission findByRoleId_First(
-		long roleId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long roleId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchResourcePermissionException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByRoleId_First(roleId, obc);
+		return getPersistence().findByRoleId_First(roleId, orderByComparator);
 	}
 
 	public static com.liferay.portal.model.ResourcePermission findByRoleId_Last(
-		long roleId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long roleId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchResourcePermissionException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByRoleId_Last(roleId, obc);
+		return getPersistence().findByRoleId_Last(roleId, orderByComparator);
 	}
 
 	public static com.liferay.portal.model.ResourcePermission[] findByRoleId_PrevAndNext(
 		long resourcePermissionId, long roleId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchResourcePermissionException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .findByRoleId_PrevAndNext(resourcePermissionId, roleId, obc);
+				   .findByRoleId_PrevAndNext(resourcePermissionId, roleId,
+			orderByComparator);
 	}
 
 	public static java.util.List<com.liferay.portal.model.ResourcePermission> findByR_S(
@@ -172,35 +176,36 @@ public class ResourcePermissionUtil {
 
 	public static java.util.List<com.liferay.portal.model.ResourcePermission> findByR_S(
 		long roleId, int scope, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByR_S(roleId, scope, start, end, obc);
+		return getPersistence()
+				   .findByR_S(roleId, scope, start, end, orderByComparator);
 	}
 
 	public static com.liferay.portal.model.ResourcePermission findByR_S_First(
 		long roleId, int scope,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchResourcePermissionException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByR_S_First(roleId, scope, obc);
+		return getPersistence().findByR_S_First(roleId, scope, orderByComparator);
 	}
 
 	public static com.liferay.portal.model.ResourcePermission findByR_S_Last(
 		long roleId, int scope,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchResourcePermissionException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByR_S_Last(roleId, scope, obc);
+		return getPersistence().findByR_S_Last(roleId, scope, orderByComparator);
 	}
 
 	public static com.liferay.portal.model.ResourcePermission[] findByR_S_PrevAndNext(
 		long resourcePermissionId, long roleId, int scope,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchResourcePermissionException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
 				   .findByR_S_PrevAndNext(resourcePermissionId, roleId, scope,
-			obc);
+			orderByComparator);
 	}
 
 	public static java.util.List<com.liferay.portal.model.ResourcePermission> findByC_N_S(
@@ -217,36 +222,40 @@ public class ResourcePermissionUtil {
 
 	public static java.util.List<com.liferay.portal.model.ResourcePermission> findByC_N_S(
 		long companyId, java.lang.String name, int scope, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .findByC_N_S(companyId, name, scope, start, end, obc);
+				   .findByC_N_S(companyId, name, scope, start, end,
+			orderByComparator);
 	}
 
 	public static com.liferay.portal.model.ResourcePermission findByC_N_S_First(
 		long companyId, java.lang.String name, int scope,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchResourcePermissionException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByC_N_S_First(companyId, name, scope, obc);
+		return getPersistence()
+				   .findByC_N_S_First(companyId, name, scope, orderByComparator);
 	}
 
 	public static com.liferay.portal.model.ResourcePermission findByC_N_S_Last(
 		long companyId, java.lang.String name, int scope,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchResourcePermissionException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByC_N_S_Last(companyId, name, scope, obc);
+		return getPersistence()
+				   .findByC_N_S_Last(companyId, name, scope, orderByComparator);
 	}
 
 	public static com.liferay.portal.model.ResourcePermission[] findByC_N_S_PrevAndNext(
 		long resourcePermissionId, long companyId, java.lang.String name,
-		int scope, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int scope,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchResourcePermissionException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
 				   .findByC_N_S_PrevAndNext(resourcePermissionId, companyId,
-			name, scope, obc);
+			name, scope, orderByComparator);
 	}
 
 	public static java.util.List<com.liferay.portal.model.ResourcePermission> findByC_N_S_P(
@@ -267,42 +276,44 @@ public class ResourcePermissionUtil {
 	public static java.util.List<com.liferay.portal.model.ResourcePermission> findByC_N_S_P(
 		long companyId, java.lang.String name, int scope,
 		java.lang.String primKey, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
 				   .findByC_N_S_P(companyId, name, scope, primKey, start, end,
-			obc);
+			orderByComparator);
 	}
 
 	public static com.liferay.portal.model.ResourcePermission findByC_N_S_P_First(
 		long companyId, java.lang.String name, int scope,
 		java.lang.String primKey,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchResourcePermissionException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .findByC_N_S_P_First(companyId, name, scope, primKey, obc);
+				   .findByC_N_S_P_First(companyId, name, scope, primKey,
+			orderByComparator);
 	}
 
 	public static com.liferay.portal.model.ResourcePermission findByC_N_S_P_Last(
 		long companyId, java.lang.String name, int scope,
 		java.lang.String primKey,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchResourcePermissionException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .findByC_N_S_P_Last(companyId, name, scope, primKey, obc);
+				   .findByC_N_S_P_Last(companyId, name, scope, primKey,
+			orderByComparator);
 	}
 
 	public static com.liferay.portal.model.ResourcePermission[] findByC_N_S_P_PrevAndNext(
 		long resourcePermissionId, long companyId, java.lang.String name,
 		int scope, java.lang.String primKey,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchResourcePermissionException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
 				   .findByC_N_S_P_PrevAndNext(resourcePermissionId, companyId,
-			name, scope, primKey, obc);
+			name, scope, primKey, orderByComparator);
 	}
 
 	public static com.liferay.portal.model.ResourcePermission findByC_N_S_P_R(
@@ -343,9 +354,10 @@ public class ResourcePermissionUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.ResourcePermission> findAll(
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findAll(start, end, obc);
+		return getPersistence().findAll(start, end, orderByComparator);
 	}
 
 	public static void removeByRoleId(long roleId)

@@ -74,6 +74,21 @@ public class PasswordPolicyRelLocalServiceWrapper
 			end);
 	}
 
+	public java.util.List<Object> dynamicQuery(
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
+		int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _passwordPolicyRelLocalService.dynamicQuery(dynamicQuery, start,
+			end, orderByComparator);
+	}
+
+	public int dynamicQueryCount(
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _passwordPolicyRelLocalService.dynamicQueryCount(dynamicQuery);
+	}
+
 	public com.liferay.portal.model.PasswordPolicyRel getPasswordPolicyRel(
 		long passwordPolicyRelId)
 		throws com.liferay.portal.kernel.exception.PortalException,

@@ -61,24 +61,24 @@ public interface UserPersistence extends BasePersistence<User> {
 
 	public java.util.List<com.liferay.portal.model.User> findByUuid(
 		java.lang.String uuid, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.User findByUuid_First(
 		java.lang.String uuid,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchUserException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.User findByUuid_Last(
 		java.lang.String uuid,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchUserException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.User[] findByUuid_PrevAndNext(long userId,
 		java.lang.String uuid,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchUserException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -92,22 +92,22 @@ public interface UserPersistence extends BasePersistence<User> {
 
 	public java.util.List<com.liferay.portal.model.User> findByCompanyId(
 		long companyId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.User findByCompanyId_First(long companyId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchUserException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.User findByCompanyId_Last(long companyId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchUserException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.User[] findByCompanyId_PrevAndNext(
 		long userId, long companyId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchUserException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -132,24 +132,24 @@ public interface UserPersistence extends BasePersistence<User> {
 
 	public java.util.List<com.liferay.portal.model.User> findByEmailAddress(
 		java.lang.String emailAddress, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.User findByEmailAddress_First(
 		java.lang.String emailAddress,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchUserException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.User findByEmailAddress_Last(
 		java.lang.String emailAddress,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchUserException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.User[] findByEmailAddress_PrevAndNext(
 		long userId, java.lang.String emailAddress,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchUserException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -232,7 +232,8 @@ public interface UserPersistence extends BasePersistence<User> {
 		int end) throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portal.model.User> findAll(int start,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void removeByUuid(java.lang.String uuid)
@@ -316,7 +317,8 @@ public interface UserPersistence extends BasePersistence<User> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Group> getGroups(long pk,
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int getGroupsSize(long pk)
@@ -373,7 +375,7 @@ public interface UserPersistence extends BasePersistence<User> {
 
 	public java.util.List<com.liferay.portal.model.Organization> getOrganizations(
 		long pk, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int getOrganizationsSize(long pk)
@@ -432,7 +434,7 @@ public interface UserPersistence extends BasePersistence<User> {
 
 	public java.util.List<com.liferay.portal.model.Permission> getPermissions(
 		long pk, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int getPermissionsSize(long pk)
@@ -490,7 +492,8 @@ public interface UserPersistence extends BasePersistence<User> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Role> getRoles(long pk,
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int getRolesSize(long pk)
@@ -546,7 +549,8 @@ public interface UserPersistence extends BasePersistence<User> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Team> getTeams(long pk,
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int getTeamsSize(long pk)
@@ -603,7 +607,7 @@ public interface UserPersistence extends BasePersistence<User> {
 
 	public java.util.List<com.liferay.portal.model.UserGroup> getUserGroups(
 		long pk, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int getUserGroupsSize(long pk)

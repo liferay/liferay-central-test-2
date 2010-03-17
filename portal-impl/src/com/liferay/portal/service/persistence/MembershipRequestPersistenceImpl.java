@@ -18,7 +18,6 @@ import com.liferay.portal.NoSuchMembershipRequestException;
 import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
-import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
@@ -414,11 +413,12 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 	}
 
 	public List<MembershipRequest> findByGroupId(long groupId, int start,
-		int end, OrderByComparator obc) throws SystemException {
+		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<MembershipRequest> list = (List<MembershipRequest>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
@@ -432,9 +432,9 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(3);
@@ -444,8 +444,9 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 
 				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -484,9 +485,10 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 	}
 
 	public MembershipRequest findByGroupId_First(long groupId,
-		OrderByComparator obc)
+		OrderByComparator orderByComparator)
 		throws NoSuchMembershipRequestException, SystemException {
-		List<MembershipRequest> list = findByGroupId(groupId, 0, 1, obc);
+		List<MembershipRequest> list = findByGroupId(groupId, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -506,12 +508,12 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 	}
 
 	public MembershipRequest findByGroupId_Last(long groupId,
-		OrderByComparator obc)
+		OrderByComparator orderByComparator)
 		throws NoSuchMembershipRequestException, SystemException {
 		int count = countByGroupId(groupId);
 
 		List<MembershipRequest> list = findByGroupId(groupId, count - 1, count,
-				obc);
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -531,7 +533,8 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 	}
 
 	public MembershipRequest[] findByGroupId_PrevAndNext(
-		long membershipRequestId, long groupId, OrderByComparator obc)
+		long membershipRequestId, long groupId,
+		OrderByComparator orderByComparator)
 		throws NoSuchMembershipRequestException, SystemException {
 		MembershipRequest membershipRequest = findByPrimaryKey(membershipRequestId);
 
@@ -544,9 +547,9 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(3);
@@ -556,8 +559,9 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -572,8 +576,8 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 
 			qPos.add(groupId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					membershipRequest);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, membershipRequest);
 
 			MembershipRequest[] array = new MembershipRequestImpl[3];
 
@@ -648,11 +652,12 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 	}
 
 	public List<MembershipRequest> findByUserId(long userId, int start,
-		int end, OrderByComparator obc) throws SystemException {
+		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(userId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<MembershipRequest> list = (List<MembershipRequest>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_USERID,
@@ -666,9 +671,9 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(3);
@@ -678,8 +683,9 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 
 				query.append(_FINDER_COLUMN_USERID_USERID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -718,9 +724,10 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 	}
 
 	public MembershipRequest findByUserId_First(long userId,
-		OrderByComparator obc)
+		OrderByComparator orderByComparator)
 		throws NoSuchMembershipRequestException, SystemException {
-		List<MembershipRequest> list = findByUserId(userId, 0, 1, obc);
+		List<MembershipRequest> list = findByUserId(userId, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -740,12 +747,12 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 	}
 
 	public MembershipRequest findByUserId_Last(long userId,
-		OrderByComparator obc)
+		OrderByComparator orderByComparator)
 		throws NoSuchMembershipRequestException, SystemException {
 		int count = countByUserId(userId);
 
 		List<MembershipRequest> list = findByUserId(userId, count - 1, count,
-				obc);
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -765,7 +772,8 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 	}
 
 	public MembershipRequest[] findByUserId_PrevAndNext(
-		long membershipRequestId, long userId, OrderByComparator obc)
+		long membershipRequestId, long userId,
+		OrderByComparator orderByComparator)
 		throws NoSuchMembershipRequestException, SystemException {
 		MembershipRequest membershipRequest = findByPrimaryKey(membershipRequestId);
 
@@ -778,9 +786,9 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(3);
@@ -790,8 +798,9 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 
 			query.append(_FINDER_COLUMN_USERID_USERID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -806,8 +815,8 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 
 			qPos.add(userId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					membershipRequest);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, membershipRequest);
 
 			MembershipRequest[] array = new MembershipRequestImpl[3];
 
@@ -888,11 +897,13 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 	}
 
 	public List<MembershipRequest> findByG_S(long groupId, int statusId,
-		int start, int end, OrderByComparator obc) throws SystemException {
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Integer(statusId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<MembershipRequest> list = (List<MembershipRequest>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_G_S,
@@ -906,9 +917,9 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(4 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(4);
@@ -920,8 +931,9 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 
 				query.append(_FINDER_COLUMN_G_S_STATUSID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -962,9 +974,10 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 	}
 
 	public MembershipRequest findByG_S_First(long groupId, int statusId,
-		OrderByComparator obc)
+		OrderByComparator orderByComparator)
 		throws NoSuchMembershipRequestException, SystemException {
-		List<MembershipRequest> list = findByG_S(groupId, statusId, 0, 1, obc);
+		List<MembershipRequest> list = findByG_S(groupId, statusId, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -987,12 +1000,12 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 	}
 
 	public MembershipRequest findByG_S_Last(long groupId, int statusId,
-		OrderByComparator obc)
+		OrderByComparator orderByComparator)
 		throws NoSuchMembershipRequestException, SystemException {
 		int count = countByG_S(groupId, statusId);
 
 		List<MembershipRequest> list = findByG_S(groupId, statusId, count - 1,
-				count, obc);
+				count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -1015,7 +1028,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 	}
 
 	public MembershipRequest[] findByG_S_PrevAndNext(long membershipRequestId,
-		long groupId, int statusId, OrderByComparator obc)
+		long groupId, int statusId, OrderByComparator orderByComparator)
 		throws NoSuchMembershipRequestException, SystemException {
 		MembershipRequest membershipRequest = findByPrimaryKey(membershipRequestId);
 
@@ -1028,9 +1041,9 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(4 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(4);
@@ -1042,8 +1055,9 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 
 			query.append(_FINDER_COLUMN_G_S_STATUSID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -1060,8 +1074,8 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 
 			qPos.add(statusId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					membershipRequest);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, membershipRequest);
 
 			MembershipRequest[] array = new MembershipRequestImpl[3];
 
@@ -1070,46 +1084,6 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 			array[2] = (MembershipRequest)objArray[2];
 
 			return array;
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.setLimit(start, end);
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
 		}
 		catch (Exception e) {
 			throw processException(e);
@@ -1129,9 +1103,10 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 	}
 
 	public List<MembershipRequest> findAll(int start, int end,
-		OrderByComparator obc) throws SystemException {
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<MembershipRequest> list = (List<MembershipRequest>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
@@ -1146,13 +1121,14 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 				StringBundler query = null;
 				String sql = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(2 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 
 					query.append(_SQL_SELECT_MEMBERSHIPREQUEST);
 
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 
 					sql = query.toString();
 				}
@@ -1163,7 +1139,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 
 				Query q = session.createQuery(sql);
 
-				if (obc == null) {
+				if (orderByComparator == null) {
 					list = (List<MembershipRequest>)QueryUtil.list(q,
 							getDialect(), start, end, false);
 

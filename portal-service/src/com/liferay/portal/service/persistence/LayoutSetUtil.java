@@ -126,32 +126,36 @@ public class LayoutSetUtil {
 
 	public static java.util.List<com.liferay.portal.model.LayoutSet> findByGroupId(
 		long groupId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByGroupId(groupId, start, end, obc);
+		return getPersistence()
+				   .findByGroupId(groupId, start, end, orderByComparator);
 	}
 
 	public static com.liferay.portal.model.LayoutSet findByGroupId_First(
-		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long groupId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchLayoutSetException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByGroupId_First(groupId, obc);
+		return getPersistence().findByGroupId_First(groupId, orderByComparator);
 	}
 
 	public static com.liferay.portal.model.LayoutSet findByGroupId_Last(
-		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long groupId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchLayoutSetException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByGroupId_Last(groupId, obc);
+		return getPersistence().findByGroupId_Last(groupId, orderByComparator);
 	}
 
 	public static com.liferay.portal.model.LayoutSet[] findByGroupId_PrevAndNext(
 		long layoutSetId, long groupId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchLayoutSetException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .findByGroupId_PrevAndNext(layoutSetId, groupId, obc);
+				   .findByGroupId_PrevAndNext(layoutSetId, groupId,
+			orderByComparator);
 	}
 
 	public static com.liferay.portal.model.LayoutSet findByVirtualHost(
@@ -206,9 +210,10 @@ public class LayoutSetUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.LayoutSet> findAll(
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findAll(start, end, obc);
+		return getPersistence().findAll(start, end, orderByComparator);
 	}
 
 	public static void removeByGroupId(long groupId)

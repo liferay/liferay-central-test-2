@@ -65,22 +65,24 @@ public interface PluginSettingPersistence extends BasePersistence<PluginSetting>
 
 	public java.util.List<com.liferay.portal.model.PluginSetting> findByCompanyId(
 		long companyId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.PluginSetting findByCompanyId_First(
-		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long companyId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchPluginSettingException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.PluginSetting findByCompanyId_Last(
-		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long companyId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchPluginSettingException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.PluginSetting[] findByCompanyId_PrevAndNext(
 		long pluginSettingId, long companyId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchPluginSettingException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -106,7 +108,8 @@ public interface PluginSettingPersistence extends BasePersistence<PluginSetting>
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portal.model.PluginSetting> findAll(
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void removeByCompanyId(long companyId)

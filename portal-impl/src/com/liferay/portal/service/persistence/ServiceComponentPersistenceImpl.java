@@ -18,7 +18,6 @@ import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.NoSuchServiceComponentException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
-import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
@@ -436,11 +435,13 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 	}
 
 	public List<ServiceComponent> findByBuildNamespace(String buildNamespace,
-		int start, int end, OrderByComparator obc) throws SystemException {
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
 		Object[] finderArgs = new Object[] {
 				buildNamespace,
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<ServiceComponent> list = (List<ServiceComponent>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_BUILDNAMESPACE,
@@ -454,9 +455,9 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(3);
@@ -476,8 +477,9 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 					}
 				}
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -518,10 +520,10 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 	}
 
 	public ServiceComponent findByBuildNamespace_First(String buildNamespace,
-		OrderByComparator obc)
+		OrderByComparator orderByComparator)
 		throws NoSuchServiceComponentException, SystemException {
 		List<ServiceComponent> list = findByBuildNamespace(buildNamespace, 0,
-				1, obc);
+				1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -541,12 +543,12 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 	}
 
 	public ServiceComponent findByBuildNamespace_Last(String buildNamespace,
-		OrderByComparator obc)
+		OrderByComparator orderByComparator)
 		throws NoSuchServiceComponentException, SystemException {
 		int count = countByBuildNamespace(buildNamespace);
 
 		List<ServiceComponent> list = findByBuildNamespace(buildNamespace,
-				count - 1, count, obc);
+				count - 1, count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -566,7 +568,8 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 	}
 
 	public ServiceComponent[] findByBuildNamespace_PrevAndNext(
-		long serviceComponentId, String buildNamespace, OrderByComparator obc)
+		long serviceComponentId, String buildNamespace,
+		OrderByComparator orderByComparator)
 		throws NoSuchServiceComponentException, SystemException {
 		ServiceComponent serviceComponent = findByPrimaryKey(serviceComponentId);
 
@@ -579,9 +582,9 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(3);
@@ -601,8 +604,9 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 				}
 			}
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -619,8 +623,8 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 				qPos.add(buildNamespace);
 			}
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					serviceComponent);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, serviceComponent);
 
 			ServiceComponent[] array = new ServiceComponentImpl[3];
 
@@ -769,46 +773,6 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 		}
 	}
 
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.setLimit(start, end);
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
 	public List<ServiceComponent> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -819,9 +783,10 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 	}
 
 	public List<ServiceComponent> findAll(int start, int end,
-		OrderByComparator obc) throws SystemException {
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<ServiceComponent> list = (List<ServiceComponent>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
@@ -836,13 +801,14 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 				StringBundler query = null;
 				String sql = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(2 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 
 					query.append(_SQL_SELECT_SERVICECOMPONENT);
 
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 
 					sql = query.toString();
 				}
@@ -853,7 +819,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 
 				Query q = session.createQuery(sql);
 
-				if (obc == null) {
+				if (orderByComparator == null) {
 					list = (List<ServiceComponent>)QueryUtil.list(q,
 							getDialect(), start, end, false);
 

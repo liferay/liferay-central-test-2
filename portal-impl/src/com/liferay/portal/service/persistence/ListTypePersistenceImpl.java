@@ -18,7 +18,6 @@ import com.liferay.portal.NoSuchListTypeException;
 import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
-import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
@@ -371,11 +370,12 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl<ListType>
 	}
 
 	public List<ListType> findByType(String type, int start, int end,
-		OrderByComparator obc) throws SystemException {
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				type,
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<ListType> list = (List<ListType>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_TYPE,
@@ -389,9 +389,9 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl<ListType>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(3);
@@ -411,8 +411,9 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl<ListType>
 					}
 				}
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -452,9 +453,10 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl<ListType>
 		return list;
 	}
 
-	public ListType findByType_First(String type, OrderByComparator obc)
+	public ListType findByType_First(String type,
+		OrderByComparator orderByComparator)
 		throws NoSuchListTypeException, SystemException {
-		List<ListType> list = findByType(type, 0, 1, obc);
+		List<ListType> list = findByType(type, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -473,11 +475,13 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl<ListType>
 		}
 	}
 
-	public ListType findByType_Last(String type, OrderByComparator obc)
+	public ListType findByType_Last(String type,
+		OrderByComparator orderByComparator)
 		throws NoSuchListTypeException, SystemException {
 		int count = countByType(type);
 
-		List<ListType> list = findByType(type, count - 1, count, obc);
+		List<ListType> list = findByType(type, count - 1, count,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -497,7 +501,8 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl<ListType>
 	}
 
 	public ListType[] findByType_PrevAndNext(int listTypeId, String type,
-		OrderByComparator obc) throws NoSuchListTypeException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchListTypeException, SystemException {
 		ListType listType = findByPrimaryKey(listTypeId);
 
 		int count = countByType(type);
@@ -509,9 +514,9 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl<ListType>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(3);
@@ -531,8 +536,9 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl<ListType>
 				}
 			}
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -549,7 +555,8 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl<ListType>
 				qPos.add(type);
 			}
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, listType);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, listType);
 
 			ListType[] array = new ListTypeImpl[3];
 
@@ -567,46 +574,6 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl<ListType>
 		}
 	}
 
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.setLimit(start, end);
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
 	public List<ListType> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -615,10 +582,11 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl<ListType>
 		return findAll(start, end, null);
 	}
 
-	public List<ListType> findAll(int start, int end, OrderByComparator obc)
-		throws SystemException {
+	public List<ListType> findAll(int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<ListType> list = (List<ListType>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
@@ -633,13 +601,14 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl<ListType>
 				StringBundler query = null;
 				String sql = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(2 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 
 					query.append(_SQL_SELECT_LISTTYPE);
 
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 
 					sql = query.toString();
 				}
@@ -650,7 +619,7 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl<ListType>
 
 				Query q = session.createQuery(sql);
 
-				if (obc == null) {
+				if (orderByComparator == null) {
 					list = (List<ListType>)QueryUtil.list(q, getDialect(),
 							start, end, false);
 

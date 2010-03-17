@@ -68,22 +68,24 @@ public interface LayoutSetPrototypePersistence extends BasePersistence<LayoutSet
 
 	public java.util.List<com.liferay.portal.model.LayoutSetPrototype> findByCompanyId(
 		long companyId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.LayoutSetPrototype findByCompanyId_First(
-		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long companyId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchLayoutSetPrototypeException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.LayoutSetPrototype findByCompanyId_Last(
-		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long companyId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchLayoutSetPrototypeException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.LayoutSetPrototype[] findByCompanyId_PrevAndNext(
 		long layoutSetPrototypeId, long companyId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchLayoutSetPrototypeException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -97,24 +99,24 @@ public interface LayoutSetPrototypePersistence extends BasePersistence<LayoutSet
 
 	public java.util.List<com.liferay.portal.model.LayoutSetPrototype> findByC_A(
 		long companyId, boolean active, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.LayoutSetPrototype findByC_A_First(
 		long companyId, boolean active,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchLayoutSetPrototypeException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.LayoutSetPrototype findByC_A_Last(
 		long companyId, boolean active,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchLayoutSetPrototypeException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.LayoutSetPrototype[] findByC_A_PrevAndNext(
 		long layoutSetPrototypeId, long companyId, boolean active,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchLayoutSetPrototypeException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -126,7 +128,8 @@ public interface LayoutSetPrototypePersistence extends BasePersistence<LayoutSet
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portal.model.LayoutSetPrototype> findAll(
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void removeByCompanyId(long companyId)

@@ -125,33 +125,34 @@ public class ListTypeUtil {
 
 	public static java.util.List<com.liferay.portal.model.ListType> findByType(
 		java.lang.String type, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByType(type, start, end, obc);
+		return getPersistence().findByType(type, start, end, orderByComparator);
 	}
 
 	public static com.liferay.portal.model.ListType findByType_First(
 		java.lang.String type,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchListTypeException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByType_First(type, obc);
+		return getPersistence().findByType_First(type, orderByComparator);
 	}
 
 	public static com.liferay.portal.model.ListType findByType_Last(
 		java.lang.String type,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchListTypeException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByType_Last(type, obc);
+		return getPersistence().findByType_Last(type, orderByComparator);
 	}
 
 	public static com.liferay.portal.model.ListType[] findByType_PrevAndNext(
 		int listTypeId, java.lang.String type,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchListTypeException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByType_PrevAndNext(listTypeId, type, obc);
+		return getPersistence()
+				   .findByType_PrevAndNext(listTypeId, type, orderByComparator);
 	}
 
 	public static java.util.List<com.liferay.portal.model.ListType> findAll()
@@ -166,9 +167,10 @@ public class ListTypeUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.ListType> findAll(
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findAll(start, end, obc);
+		return getPersistence().findAll(start, end, orderByComparator);
 	}
 
 	public static void removeByType(java.lang.String type)

@@ -23,7 +23,6 @@ import com.liferay.portal.kernel.dao.jdbc.MappingSqlQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.jdbc.RowMapper;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
-import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
@@ -503,11 +502,12 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 	}
 
 	public List<Organization> findByCompanyId(long companyId, int start,
-		int end, OrderByComparator obc) throws SystemException {
+		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(companyId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<Organization> list = (List<Organization>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
@@ -521,9 +521,9 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(3);
@@ -533,8 +533,9 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 
 				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -573,9 +574,10 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 	}
 
 	public Organization findByCompanyId_First(long companyId,
-		OrderByComparator obc)
+		OrderByComparator orderByComparator)
 		throws NoSuchOrganizationException, SystemException {
-		List<Organization> list = findByCompanyId(companyId, 0, 1, obc);
+		List<Organization> list = findByCompanyId(companyId, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -595,12 +597,12 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 	}
 
 	public Organization findByCompanyId_Last(long companyId,
-		OrderByComparator obc)
+		OrderByComparator orderByComparator)
 		throws NoSuchOrganizationException, SystemException {
 		int count = countByCompanyId(companyId);
 
 		List<Organization> list = findByCompanyId(companyId, count - 1, count,
-				obc);
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -620,7 +622,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 	}
 
 	public Organization[] findByCompanyId_PrevAndNext(long organizationId,
-		long companyId, OrderByComparator obc)
+		long companyId, OrderByComparator orderByComparator)
 		throws NoSuchOrganizationException, SystemException {
 		Organization organization = findByPrimaryKey(organizationId);
 
@@ -633,9 +635,9 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(3);
@@ -645,8 +647,9 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 
 			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -661,8 +664,8 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 
 			qPos.add(companyId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					organization);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, organization);
 
 			Organization[] array = new OrganizationImpl[3];
 
@@ -737,11 +740,12 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 	}
 
 	public List<Organization> findByLocations(long companyId, int start,
-		int end, OrderByComparator obc) throws SystemException {
+		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(companyId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<Organization> list = (List<Organization>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_LOCATIONS,
@@ -755,9 +759,9 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(3);
@@ -767,8 +771,9 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 
 				query.append(_FINDER_COLUMN_LOCATIONS_COMPANYID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -807,9 +812,10 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 	}
 
 	public Organization findByLocations_First(long companyId,
-		OrderByComparator obc)
+		OrderByComparator orderByComparator)
 		throws NoSuchOrganizationException, SystemException {
-		List<Organization> list = findByLocations(companyId, 0, 1, obc);
+		List<Organization> list = findByLocations(companyId, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -829,12 +835,12 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 	}
 
 	public Organization findByLocations_Last(long companyId,
-		OrderByComparator obc)
+		OrderByComparator orderByComparator)
 		throws NoSuchOrganizationException, SystemException {
 		int count = countByLocations(companyId);
 
 		List<Organization> list = findByLocations(companyId, count - 1, count,
-				obc);
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -854,7 +860,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 	}
 
 	public Organization[] findByLocations_PrevAndNext(long organizationId,
-		long companyId, OrderByComparator obc)
+		long companyId, OrderByComparator orderByComparator)
 		throws NoSuchOrganizationException, SystemException {
 		Organization organization = findByPrimaryKey(organizationId);
 
@@ -867,9 +873,9 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(3);
@@ -879,8 +885,9 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 
 			query.append(_FINDER_COLUMN_LOCATIONS_COMPANYID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -895,8 +902,8 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 
 			qPos.add(companyId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					organization);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, organization);
 
 			Organization[] array = new OrganizationImpl[3];
 
@@ -978,12 +985,13 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 	}
 
 	public List<Organization> findByC_P(long companyId,
-		long parentOrganizationId, int start, int end, OrderByComparator obc)
-		throws SystemException {
+		long parentOrganizationId, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Long(parentOrganizationId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<Organization> list = (List<Organization>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_C_P,
@@ -997,9 +1005,9 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(4 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(4);
@@ -1011,8 +1019,9 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 
 				query.append(_FINDER_COLUMN_C_P_PARENTORGANIZATIONID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -1053,10 +1062,10 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 	}
 
 	public Organization findByC_P_First(long companyId,
-		long parentOrganizationId, OrderByComparator obc)
+		long parentOrganizationId, OrderByComparator orderByComparator)
 		throws NoSuchOrganizationException, SystemException {
 		List<Organization> list = findByC_P(companyId, parentOrganizationId, 0,
-				1, obc);
+				1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -1079,12 +1088,12 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 	}
 
 	public Organization findByC_P_Last(long companyId,
-		long parentOrganizationId, OrderByComparator obc)
+		long parentOrganizationId, OrderByComparator orderByComparator)
 		throws NoSuchOrganizationException, SystemException {
 		int count = countByC_P(companyId, parentOrganizationId);
 
 		List<Organization> list = findByC_P(companyId, parentOrganizationId,
-				count - 1, count, obc);
+				count - 1, count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -1107,7 +1116,8 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 	}
 
 	public Organization[] findByC_P_PrevAndNext(long organizationId,
-		long companyId, long parentOrganizationId, OrderByComparator obc)
+		long companyId, long parentOrganizationId,
+		OrderByComparator orderByComparator)
 		throws NoSuchOrganizationException, SystemException {
 		Organization organization = findByPrimaryKey(organizationId);
 
@@ -1120,9 +1130,9 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(4 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(4);
@@ -1134,8 +1144,9 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 
 			query.append(_FINDER_COLUMN_C_P_PARENTORGANIZATIONID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -1152,8 +1163,8 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 
 			qPos.add(parentOrganizationId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					organization);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, organization);
 
 			Organization[] array = new OrganizationImpl[3];
 
@@ -1299,46 +1310,6 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		}
 	}
 
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.setLimit(start, end);
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
 	public List<Organization> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -1348,10 +1319,11 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		return findAll(start, end, null);
 	}
 
-	public List<Organization> findAll(int start, int end, OrderByComparator obc)
-		throws SystemException {
+	public List<Organization> findAll(int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<Organization> list = (List<Organization>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
@@ -1366,13 +1338,14 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 				StringBundler query = null;
 				String sql = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(2 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 
 					query.append(_SQL_SELECT_ORGANIZATION);
 
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 
 					sql = query.toString();
 				}
@@ -1383,7 +1356,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 
 				Query q = session.createQuery(sql);
 
-				if (obc == null) {
+				if (orderByComparator == null) {
 					list = (List<Organization>)QueryUtil.list(q, getDialect(),
 							start, end, false);
 
@@ -1707,10 +1680,10 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 			});
 
 	public List<com.liferay.portal.model.Group> getGroups(long pk, int start,
-		int end, OrderByComparator obc) throws SystemException {
+		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(pk), String.valueOf(start), String.valueOf(end),
-				String.valueOf(obc)
+				String.valueOf(orderByComparator)
 			};
 
 		List<com.liferay.portal.model.Group> list = (List<com.liferay.portal.model.Group>)FinderCacheUtil.getResult(FINDER_PATH_GET_GROUPS,
@@ -1724,9 +1697,9 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 
 				String sql = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					sql = _SQL_GETGROUPS.concat(ORDER_BY_CLAUSE)
-										.concat(obc.getOrderBy());
+										.concat(orderByComparator.getOrderBy());
 				}
 
 				else {
@@ -2040,10 +2013,10 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 			});
 
 	public List<com.liferay.portal.model.User> getUsers(long pk, int start,
-		int end, OrderByComparator obc) throws SystemException {
+		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(pk), String.valueOf(start), String.valueOf(end),
-				String.valueOf(obc)
+				String.valueOf(orderByComparator)
 			};
 
 		List<com.liferay.portal.model.User> list = (List<com.liferay.portal.model.User>)FinderCacheUtil.getResult(FINDER_PATH_GET_USERS,
@@ -2057,9 +2030,9 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 
 				String sql = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					sql = _SQL_GETUSERS.concat(ORDER_BY_CLAUSE)
-									   .concat(obc.getOrderBy());
+									   .concat(orderByComparator.getOrderBy());
 				}
 
 				sql = _SQL_GETUSERS;

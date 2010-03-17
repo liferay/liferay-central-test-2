@@ -23,7 +23,6 @@ import com.liferay.portal.kernel.dao.jdbc.MappingSqlQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.jdbc.RowMapper;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
-import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
@@ -428,11 +427,12 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	}
 
 	public List<Team> findByGroupId(long groupId, int start, int end,
-		OrderByComparator obc) throws SystemException {
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<Team> list = (List<Team>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
@@ -446,9 +446,9 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(3);
@@ -458,8 +458,9 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 
 				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -496,9 +497,10 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 		return list;
 	}
 
-	public Team findByGroupId_First(long groupId, OrderByComparator obc)
+	public Team findByGroupId_First(long groupId,
+		OrderByComparator orderByComparator)
 		throws NoSuchTeamException, SystemException {
-		List<Team> list = findByGroupId(groupId, 0, 1, obc);
+		List<Team> list = findByGroupId(groupId, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -517,11 +519,13 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 		}
 	}
 
-	public Team findByGroupId_Last(long groupId, OrderByComparator obc)
+	public Team findByGroupId_Last(long groupId,
+		OrderByComparator orderByComparator)
 		throws NoSuchTeamException, SystemException {
 		int count = countByGroupId(groupId);
 
-		List<Team> list = findByGroupId(groupId, count - 1, count, obc);
+		List<Team> list = findByGroupId(groupId, count - 1, count,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -541,7 +545,8 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	}
 
 	public Team[] findByGroupId_PrevAndNext(long teamId, long groupId,
-		OrderByComparator obc) throws NoSuchTeamException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchTeamException, SystemException {
 		Team team = findByPrimaryKey(teamId);
 
 		int count = countByGroupId(groupId);
@@ -553,9 +558,9 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(3);
@@ -565,8 +570,9 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -581,7 +587,8 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 
 			qPos.add(groupId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, team);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, team);
 
 			Team[] array = new TeamImpl[3];
 
@@ -726,46 +733,6 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 		}
 	}
 
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.setLimit(start, end);
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
 	public List<Team> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -774,10 +741,11 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 		return findAll(start, end, null);
 	}
 
-	public List<Team> findAll(int start, int end, OrderByComparator obc)
-		throws SystemException {
+	public List<Team> findAll(int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<Team> list = (List<Team>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
@@ -792,13 +760,14 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 				StringBundler query = null;
 				String sql = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(2 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 
 					query.append(_SQL_SELECT_TEAM);
 
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 
 					sql = query.toString();
 				}
@@ -809,7 +778,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 
 				Query q = session.createQuery(sql);
 
-				if (obc == null) {
+				if (orderByComparator == null) {
 					list = (List<Team>)QueryUtil.list(q, getDialect(), start,
 							end, false);
 
@@ -1019,10 +988,10 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 			});
 
 	public List<com.liferay.portal.model.User> getUsers(long pk, int start,
-		int end, OrderByComparator obc) throws SystemException {
+		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(pk), String.valueOf(start), String.valueOf(end),
-				String.valueOf(obc)
+				String.valueOf(orderByComparator)
 			};
 
 		List<com.liferay.portal.model.User> list = (List<com.liferay.portal.model.User>)FinderCacheUtil.getResult(FINDER_PATH_GET_USERS,
@@ -1036,9 +1005,9 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 
 				String sql = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					sql = _SQL_GETUSERS.concat(ORDER_BY_CLAUSE)
-									   .concat(obc.getOrderBy());
+									   .concat(orderByComparator.getOrderBy());
 				}
 
 				sql = _SQL_GETUSERS;

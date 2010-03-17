@@ -129,32 +129,38 @@ public class PluginSettingUtil {
 
 	public static java.util.List<com.liferay.portal.model.PluginSetting> findByCompanyId(
 		long companyId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByCompanyId(companyId, start, end, obc);
+		return getPersistence()
+				   .findByCompanyId(companyId, start, end, orderByComparator);
 	}
 
 	public static com.liferay.portal.model.PluginSetting findByCompanyId_First(
-		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long companyId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchPluginSettingException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByCompanyId_First(companyId, obc);
+		return getPersistence()
+				   .findByCompanyId_First(companyId, orderByComparator);
 	}
 
 	public static com.liferay.portal.model.PluginSetting findByCompanyId_Last(
-		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long companyId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchPluginSettingException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByCompanyId_Last(companyId, obc);
+		return getPersistence()
+				   .findByCompanyId_Last(companyId, orderByComparator);
 	}
 
 	public static com.liferay.portal.model.PluginSetting[] findByCompanyId_PrevAndNext(
 		long pluginSettingId, long companyId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchPluginSettingException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .findByCompanyId_PrevAndNext(pluginSettingId, companyId, obc);
+				   .findByCompanyId_PrevAndNext(pluginSettingId, companyId,
+			orderByComparator);
 	}
 
 	public static com.liferay.portal.model.PluginSetting findByC_I_T(
@@ -191,9 +197,10 @@ public class PluginSettingUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.PluginSetting> findAll(
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findAll(start, end, obc);
+		return getPersistence().findAll(start, end, orderByComparator);
 	}
 
 	public static void removeByCompanyId(long companyId)

@@ -18,7 +18,6 @@ import com.liferay.portal.NoSuchLockException;
 import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
-import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
@@ -446,11 +445,12 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 	}
 
 	public List<Lock> findByUuid(String uuid, int start, int end,
-		OrderByComparator obc) throws SystemException {
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				uuid,
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<Lock> list = (List<Lock>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_UUID,
@@ -464,9 +464,9 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(2);
@@ -486,8 +486,9 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 					}
 				}
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				String sql = query.toString();
@@ -522,9 +523,10 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 		return list;
 	}
 
-	public Lock findByUuid_First(String uuid, OrderByComparator obc)
+	public Lock findByUuid_First(String uuid,
+		OrderByComparator orderByComparator)
 		throws NoSuchLockException, SystemException {
-		List<Lock> list = findByUuid(uuid, 0, 1, obc);
+		List<Lock> list = findByUuid(uuid, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -543,11 +545,11 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 		}
 	}
 
-	public Lock findByUuid_Last(String uuid, OrderByComparator obc)
+	public Lock findByUuid_Last(String uuid, OrderByComparator orderByComparator)
 		throws NoSuchLockException, SystemException {
 		int count = countByUuid(uuid);
 
-		List<Lock> list = findByUuid(uuid, count - 1, count, obc);
+		List<Lock> list = findByUuid(uuid, count - 1, count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -567,7 +569,8 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 	}
 
 	public Lock[] findByUuid_PrevAndNext(long lockId, String uuid,
-		OrderByComparator obc) throws NoSuchLockException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchLockException, SystemException {
 		Lock lock = findByPrimaryKey(lockId);
 
 		int count = countByUuid(uuid);
@@ -579,9 +582,9 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(2);
@@ -601,8 +604,9 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 				}
 			}
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			String sql = query.toString();
@@ -615,7 +619,8 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 				qPos.add(uuid);
 			}
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, lock);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, lock);
 
 			Lock[] array = new LockImpl[3];
 
@@ -695,11 +700,12 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 	}
 
 	public List<Lock> findByExpirationDate(Date expirationDate, int start,
-		int end, OrderByComparator obc) throws SystemException {
+		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				expirationDate,
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<Lock> list = (List<Lock>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_EXPIRATIONDATE,
@@ -713,9 +719,9 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(2);
@@ -730,8 +736,9 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 					query.append(_FINDER_COLUMN_EXPIRATIONDATE_EXPIRATIONDATE_2);
 				}
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				String sql = query.toString();
@@ -767,8 +774,10 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 	}
 
 	public Lock findByExpirationDate_First(Date expirationDate,
-		OrderByComparator obc) throws NoSuchLockException, SystemException {
-		List<Lock> list = findByExpirationDate(expirationDate, 0, 1, obc);
+		OrderByComparator orderByComparator)
+		throws NoSuchLockException, SystemException {
+		List<Lock> list = findByExpirationDate(expirationDate, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -788,11 +797,12 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 	}
 
 	public Lock findByExpirationDate_Last(Date expirationDate,
-		OrderByComparator obc) throws NoSuchLockException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchLockException, SystemException {
 		int count = countByExpirationDate(expirationDate);
 
 		List<Lock> list = findByExpirationDate(expirationDate, count - 1,
-				count, obc);
+				count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -812,7 +822,7 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 	}
 
 	public Lock[] findByExpirationDate_PrevAndNext(long lockId,
-		Date expirationDate, OrderByComparator obc)
+		Date expirationDate, OrderByComparator orderByComparator)
 		throws NoSuchLockException, SystemException {
 		Lock lock = findByPrimaryKey(lockId);
 
@@ -825,9 +835,9 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(2);
@@ -842,8 +852,9 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 				query.append(_FINDER_COLUMN_EXPIRATIONDATE_EXPIRATIONDATE_2);
 			}
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			String sql = query.toString();
@@ -856,7 +867,8 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 				qPos.add(CalendarUtil.getTimestamp(expirationDate));
 			}
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, lock);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, lock);
 
 			Lock[] array = new LockImpl[3];
 
@@ -1013,46 +1025,6 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 		}
 	}
 
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.setLimit(start, end);
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
 	public List<Lock> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -1061,10 +1033,11 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 		return findAll(start, end, null);
 	}
 
-	public List<Lock> findAll(int start, int end, OrderByComparator obc)
-		throws SystemException {
+	public List<Lock> findAll(int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<Lock> list = (List<Lock>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
@@ -1079,13 +1052,14 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 				StringBundler query = null;
 				String sql = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(2 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 
 					query.append(_SQL_SELECT_LOCK);
 
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 
 					sql = query.toString();
 				}
@@ -1094,7 +1068,7 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 
 				Query q = session.createQuery(sql);
 
-				if (obc == null) {
+				if (orderByComparator == null) {
 					list = (List<Lock>)QueryUtil.list(q, getDialect(), start,
 							end, false);
 

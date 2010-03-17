@@ -18,7 +18,6 @@ import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.NoSuchWebsiteException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
-import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
@@ -445,11 +444,12 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 	}
 
 	public List<Website> findByCompanyId(long companyId, int start, int end,
-		OrderByComparator obc) throws SystemException {
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(companyId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<Website> list = (List<Website>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
@@ -463,9 +463,9 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(3);
@@ -475,8 +475,9 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 
 				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -513,9 +514,10 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 		return list;
 	}
 
-	public Website findByCompanyId_First(long companyId, OrderByComparator obc)
+	public Website findByCompanyId_First(long companyId,
+		OrderByComparator orderByComparator)
 		throws NoSuchWebsiteException, SystemException {
-		List<Website> list = findByCompanyId(companyId, 0, 1, obc);
+		List<Website> list = findByCompanyId(companyId, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -534,11 +536,13 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 		}
 	}
 
-	public Website findByCompanyId_Last(long companyId, OrderByComparator obc)
+	public Website findByCompanyId_Last(long companyId,
+		OrderByComparator orderByComparator)
 		throws NoSuchWebsiteException, SystemException {
 		int count = countByCompanyId(companyId);
 
-		List<Website> list = findByCompanyId(companyId, count - 1, count, obc);
+		List<Website> list = findByCompanyId(companyId, count - 1, count,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -558,7 +562,7 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 	}
 
 	public Website[] findByCompanyId_PrevAndNext(long websiteId,
-		long companyId, OrderByComparator obc)
+		long companyId, OrderByComparator orderByComparator)
 		throws NoSuchWebsiteException, SystemException {
 		Website website = findByPrimaryKey(websiteId);
 
@@ -571,9 +575,9 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(3);
@@ -583,8 +587,9 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 
 			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -599,7 +604,8 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 
 			qPos.add(companyId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, website);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, website);
 
 			Website[] array = new WebsiteImpl[3];
 
@@ -673,11 +679,12 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 	}
 
 	public List<Website> findByUserId(long userId, int start, int end,
-		OrderByComparator obc) throws SystemException {
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(userId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<Website> list = (List<Website>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_USERID,
@@ -691,9 +698,9 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(3);
@@ -703,8 +710,9 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 
 				query.append(_FINDER_COLUMN_USERID_USERID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -741,9 +749,10 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 		return list;
 	}
 
-	public Website findByUserId_First(long userId, OrderByComparator obc)
+	public Website findByUserId_First(long userId,
+		OrderByComparator orderByComparator)
 		throws NoSuchWebsiteException, SystemException {
-		List<Website> list = findByUserId(userId, 0, 1, obc);
+		List<Website> list = findByUserId(userId, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -762,11 +771,13 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 		}
 	}
 
-	public Website findByUserId_Last(long userId, OrderByComparator obc)
+	public Website findByUserId_Last(long userId,
+		OrderByComparator orderByComparator)
 		throws NoSuchWebsiteException, SystemException {
 		int count = countByUserId(userId);
 
-		List<Website> list = findByUserId(userId, count - 1, count, obc);
+		List<Website> list = findByUserId(userId, count - 1, count,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -786,7 +797,8 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 	}
 
 	public Website[] findByUserId_PrevAndNext(long websiteId, long userId,
-		OrderByComparator obc) throws NoSuchWebsiteException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchWebsiteException, SystemException {
 		Website website = findByPrimaryKey(websiteId);
 
 		int count = countByUserId(userId);
@@ -798,9 +810,9 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(3);
@@ -810,8 +822,9 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 
 			query.append(_FINDER_COLUMN_USERID_USERID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -826,7 +839,8 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 
 			qPos.add(userId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, website);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, website);
 
 			Website[] array = new WebsiteImpl[3];
 
@@ -907,11 +921,12 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 	}
 
 	public List<Website> findByC_C(long companyId, long classNameId, int start,
-		int end, OrderByComparator obc) throws SystemException {
+		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Long(classNameId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<Website> list = (List<Website>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_C_C,
@@ -925,9 +940,9 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(4 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(4);
@@ -939,8 +954,9 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 
 				query.append(_FINDER_COLUMN_C_C_CLASSNAMEID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -980,8 +996,10 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 	}
 
 	public Website findByC_C_First(long companyId, long classNameId,
-		OrderByComparator obc) throws NoSuchWebsiteException, SystemException {
-		List<Website> list = findByC_C(companyId, classNameId, 0, 1, obc);
+		OrderByComparator orderByComparator)
+		throws NoSuchWebsiteException, SystemException {
+		List<Website> list = findByC_C(companyId, classNameId, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -1004,11 +1022,12 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 	}
 
 	public Website findByC_C_Last(long companyId, long classNameId,
-		OrderByComparator obc) throws NoSuchWebsiteException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchWebsiteException, SystemException {
 		int count = countByC_C(companyId, classNameId);
 
 		List<Website> list = findByC_C(companyId, classNameId, count - 1,
-				count, obc);
+				count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -1031,7 +1050,7 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 	}
 
 	public Website[] findByC_C_PrevAndNext(long websiteId, long companyId,
-		long classNameId, OrderByComparator obc)
+		long classNameId, OrderByComparator orderByComparator)
 		throws NoSuchWebsiteException, SystemException {
 		Website website = findByPrimaryKey(websiteId);
 
@@ -1044,9 +1063,9 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(4 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(4);
@@ -1058,8 +1077,9 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 
 			query.append(_FINDER_COLUMN_C_C_CLASSNAMEID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -1076,7 +1096,8 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 
 			qPos.add(classNameId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, website);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, website);
 
 			Website[] array = new WebsiteImpl[3];
 
@@ -1161,12 +1182,13 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 	}
 
 	public List<Website> findByC_C_C(long companyId, long classNameId,
-		long classPK, int start, int end, OrderByComparator obc)
+		long classPK, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Long(classNameId), new Long(classPK),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<Website> list = (List<Website>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_C_C_C,
@@ -1180,9 +1202,9 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(5 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(5);
@@ -1196,8 +1218,9 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 
 				query.append(_FINDER_COLUMN_C_C_C_CLASSPK_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -1239,10 +1262,10 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 	}
 
 	public Website findByC_C_C_First(long companyId, long classNameId,
-		long classPK, OrderByComparator obc)
+		long classPK, OrderByComparator orderByComparator)
 		throws NoSuchWebsiteException, SystemException {
 		List<Website> list = findByC_C_C(companyId, classNameId, classPK, 0, 1,
-				obc);
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(8);
@@ -1268,12 +1291,12 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 	}
 
 	public Website findByC_C_C_Last(long companyId, long classNameId,
-		long classPK, OrderByComparator obc)
+		long classPK, OrderByComparator orderByComparator)
 		throws NoSuchWebsiteException, SystemException {
 		int count = countByC_C_C(companyId, classNameId, classPK);
 
 		List<Website> list = findByC_C_C(companyId, classNameId, classPK,
-				count - 1, count, obc);
+				count - 1, count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(8);
@@ -1299,7 +1322,7 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 	}
 
 	public Website[] findByC_C_C_PrevAndNext(long websiteId, long companyId,
-		long classNameId, long classPK, OrderByComparator obc)
+		long classNameId, long classPK, OrderByComparator orderByComparator)
 		throws NoSuchWebsiteException, SystemException {
 		Website website = findByPrimaryKey(websiteId);
 
@@ -1312,9 +1335,9 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(5 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(5);
@@ -1328,8 +1351,9 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 
 			query.append(_FINDER_COLUMN_C_C_C_CLASSPK_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -1348,7 +1372,8 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 
 			qPos.add(classPK);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, website);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, website);
 
 			Website[] array = new WebsiteImpl[3];
 
@@ -1440,13 +1465,14 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 	}
 
 	public List<Website> findByC_C_C_P(long companyId, long classNameId,
-		long classPK, boolean primary, int start, int end, OrderByComparator obc)
-		throws SystemException {
+		long classPK, boolean primary, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Long(classNameId), new Long(classPK),
 				Boolean.valueOf(primary),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<Website> list = (List<Website>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_C_C_C_P,
@@ -1460,9 +1486,9 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(6 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(6);
@@ -1478,8 +1504,9 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 
 				query.append(_FINDER_COLUMN_C_C_C_P_PRIMARY_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -1523,10 +1550,10 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 	}
 
 	public Website findByC_C_C_P_First(long companyId, long classNameId,
-		long classPK, boolean primary, OrderByComparator obc)
+		long classPK, boolean primary, OrderByComparator orderByComparator)
 		throws NoSuchWebsiteException, SystemException {
 		List<Website> list = findByC_C_C_P(companyId, classNameId, classPK,
-				primary, 0, 1, obc);
+				primary, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(10);
@@ -1555,12 +1582,12 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 	}
 
 	public Website findByC_C_C_P_Last(long companyId, long classNameId,
-		long classPK, boolean primary, OrderByComparator obc)
+		long classPK, boolean primary, OrderByComparator orderByComparator)
 		throws NoSuchWebsiteException, SystemException {
 		int count = countByC_C_C_P(companyId, classNameId, classPK, primary);
 
 		List<Website> list = findByC_C_C_P(companyId, classNameId, classPK,
-				primary, count - 1, count, obc);
+				primary, count - 1, count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(10);
@@ -1589,7 +1616,8 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 	}
 
 	public Website[] findByC_C_C_P_PrevAndNext(long websiteId, long companyId,
-		long classNameId, long classPK, boolean primary, OrderByComparator obc)
+		long classNameId, long classPK, boolean primary,
+		OrderByComparator orderByComparator)
 		throws NoSuchWebsiteException, SystemException {
 		Website website = findByPrimaryKey(websiteId);
 
@@ -1602,9 +1630,9 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(6 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(6);
@@ -1620,8 +1648,9 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 
 			query.append(_FINDER_COLUMN_C_C_C_P_PRIMARY_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -1642,7 +1671,8 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 
 			qPos.add(primary);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, website);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, website);
 
 			Website[] array = new WebsiteImpl[3];
 
@@ -1660,46 +1690,6 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 		}
 	}
 
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.setLimit(start, end);
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
 	public List<Website> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -1708,10 +1698,11 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 		return findAll(start, end, null);
 	}
 
-	public List<Website> findAll(int start, int end, OrderByComparator obc)
-		throws SystemException {
+	public List<Website> findAll(int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<Website> list = (List<Website>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
@@ -1726,13 +1717,14 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 				StringBundler query = null;
 				String sql = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(2 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 
 					query.append(_SQL_SELECT_WEBSITE);
 
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 
 					sql = query.toString();
 				}
@@ -1743,7 +1735,7 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 
 				Query q = session.createQuery(sql);
 
-				if (obc == null) {
+				if (orderByComparator == null) {
 					list = (List<Website>)QueryUtil.list(q, getDialect(),
 							start, end, false);
 

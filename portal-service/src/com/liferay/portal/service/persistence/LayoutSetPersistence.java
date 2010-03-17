@@ -63,22 +63,23 @@ public interface LayoutSetPersistence extends BasePersistence<LayoutSet> {
 
 	public java.util.List<com.liferay.portal.model.LayoutSet> findByGroupId(
 		long groupId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.LayoutSet findByGroupId_First(
-		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long groupId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchLayoutSetException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.LayoutSet findByGroupId_Last(long groupId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchLayoutSetException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.LayoutSet[] findByGroupId_PrevAndNext(
 		long layoutSetId, long groupId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchLayoutSetException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -116,7 +117,8 @@ public interface LayoutSetPersistence extends BasePersistence<LayoutSet> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portal.model.LayoutSet> findAll(
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void removeByGroupId(long groupId)

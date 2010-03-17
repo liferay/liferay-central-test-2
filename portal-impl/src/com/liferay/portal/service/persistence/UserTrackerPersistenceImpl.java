@@ -18,7 +18,6 @@ import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.NoSuchUserTrackerException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
-import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
@@ -397,11 +396,12 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	}
 
 	public List<UserTracker> findByCompanyId(long companyId, int start,
-		int end, OrderByComparator obc) throws SystemException {
+		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(companyId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<UserTracker> list = (List<UserTracker>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
@@ -415,9 +415,9 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(2);
@@ -427,8 +427,9 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 
 				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				String sql = query.toString();
@@ -463,9 +464,10 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	}
 
 	public UserTracker findByCompanyId_First(long companyId,
-		OrderByComparator obc)
+		OrderByComparator orderByComparator)
 		throws NoSuchUserTrackerException, SystemException {
-		List<UserTracker> list = findByCompanyId(companyId, 0, 1, obc);
+		List<UserTracker> list = findByCompanyId(companyId, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -485,12 +487,12 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	}
 
 	public UserTracker findByCompanyId_Last(long companyId,
-		OrderByComparator obc)
+		OrderByComparator orderByComparator)
 		throws NoSuchUserTrackerException, SystemException {
 		int count = countByCompanyId(companyId);
 
 		List<UserTracker> list = findByCompanyId(companyId, count - 1, count,
-				obc);
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -510,7 +512,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	}
 
 	public UserTracker[] findByCompanyId_PrevAndNext(long userTrackerId,
-		long companyId, OrderByComparator obc)
+		long companyId, OrderByComparator orderByComparator)
 		throws NoSuchUserTrackerException, SystemException {
 		UserTracker userTracker = findByPrimaryKey(userTrackerId);
 
@@ -523,9 +525,9 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(2);
@@ -535,8 +537,9 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 
 			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			String sql = query.toString();
@@ -547,8 +550,8 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 
 			qPos.add(companyId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					userTracker);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, userTracker);
 
 			UserTracker[] array = new UserTrackerImpl[3];
 
@@ -621,11 +624,12 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	}
 
 	public List<UserTracker> findByUserId(long userId, int start, int end,
-		OrderByComparator obc) throws SystemException {
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(userId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<UserTracker> list = (List<UserTracker>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_USERID,
@@ -639,9 +643,9 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(2);
@@ -651,8 +655,9 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 
 				query.append(_FINDER_COLUMN_USERID_USERID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				String sql = query.toString();
@@ -686,9 +691,10 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 		return list;
 	}
 
-	public UserTracker findByUserId_First(long userId, OrderByComparator obc)
+	public UserTracker findByUserId_First(long userId,
+		OrderByComparator orderByComparator)
 		throws NoSuchUserTrackerException, SystemException {
-		List<UserTracker> list = findByUserId(userId, 0, 1, obc);
+		List<UserTracker> list = findByUserId(userId, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -707,11 +713,13 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 		}
 	}
 
-	public UserTracker findByUserId_Last(long userId, OrderByComparator obc)
+	public UserTracker findByUserId_Last(long userId,
+		OrderByComparator orderByComparator)
 		throws NoSuchUserTrackerException, SystemException {
 		int count = countByUserId(userId);
 
-		List<UserTracker> list = findByUserId(userId, count - 1, count, obc);
+		List<UserTracker> list = findByUserId(userId, count - 1, count,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -731,7 +739,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	}
 
 	public UserTracker[] findByUserId_PrevAndNext(long userTrackerId,
-		long userId, OrderByComparator obc)
+		long userId, OrderByComparator orderByComparator)
 		throws NoSuchUserTrackerException, SystemException {
 		UserTracker userTracker = findByPrimaryKey(userTrackerId);
 
@@ -744,9 +752,9 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(2);
@@ -756,8 +764,9 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 
 			query.append(_FINDER_COLUMN_USERID_USERID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			String sql = query.toString();
@@ -768,8 +777,8 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 
 			qPos.add(userId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					userTracker);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, userTracker);
 
 			UserTracker[] array = new UserTrackerImpl[3];
 
@@ -854,11 +863,12 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	}
 
 	public List<UserTracker> findBySessionId(String sessionId, int start,
-		int end, OrderByComparator obc) throws SystemException {
+		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				sessionId,
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<UserTracker> list = (List<UserTracker>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_SESSIONID,
@@ -872,9 +882,9 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(2);
@@ -894,8 +904,9 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 					}
 				}
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				String sql = query.toString();
@@ -932,9 +943,10 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	}
 
 	public UserTracker findBySessionId_First(String sessionId,
-		OrderByComparator obc)
+		OrderByComparator orderByComparator)
 		throws NoSuchUserTrackerException, SystemException {
-		List<UserTracker> list = findBySessionId(sessionId, 0, 1, obc);
+		List<UserTracker> list = findBySessionId(sessionId, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -954,12 +966,12 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	}
 
 	public UserTracker findBySessionId_Last(String sessionId,
-		OrderByComparator obc)
+		OrderByComparator orderByComparator)
 		throws NoSuchUserTrackerException, SystemException {
 		int count = countBySessionId(sessionId);
 
 		List<UserTracker> list = findBySessionId(sessionId, count - 1, count,
-				obc);
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -979,7 +991,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	}
 
 	public UserTracker[] findBySessionId_PrevAndNext(long userTrackerId,
-		String sessionId, OrderByComparator obc)
+		String sessionId, OrderByComparator orderByComparator)
 		throws NoSuchUserTrackerException, SystemException {
 		UserTracker userTracker = findByPrimaryKey(userTrackerId);
 
@@ -992,9 +1004,9 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(2);
@@ -1014,8 +1026,9 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 				}
 			}
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			String sql = query.toString();
@@ -1028,8 +1041,8 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 				qPos.add(sessionId);
 			}
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					userTracker);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, userTracker);
 
 			UserTracker[] array = new UserTrackerImpl[3];
 
@@ -1038,46 +1051,6 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 			array[2] = (UserTracker)objArray[2];
 
 			return array;
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.setLimit(start, end);
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
 		}
 		catch (Exception e) {
 			throw processException(e);
@@ -1096,10 +1069,11 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 		return findAll(start, end, null);
 	}
 
-	public List<UserTracker> findAll(int start, int end, OrderByComparator obc)
-		throws SystemException {
+	public List<UserTracker> findAll(int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<UserTracker> list = (List<UserTracker>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
@@ -1114,13 +1088,14 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 				StringBundler query = null;
 				String sql = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(2 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 
 					query.append(_SQL_SELECT_USERTRACKER);
 
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 
 					sql = query.toString();
 				}
@@ -1129,7 +1104,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 
 				Query q = session.createQuery(sql);
 
-				if (obc == null) {
+				if (orderByComparator == null) {
 					list = (List<UserTracker>)QueryUtil.list(q, getDialect(),
 							start, end, false);
 

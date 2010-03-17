@@ -129,32 +129,38 @@ public class OrganizationUtil {
 
 	public static java.util.List<com.liferay.portal.model.Organization> findByCompanyId(
 		long companyId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByCompanyId(companyId, start, end, obc);
+		return getPersistence()
+				   .findByCompanyId(companyId, start, end, orderByComparator);
 	}
 
 	public static com.liferay.portal.model.Organization findByCompanyId_First(
-		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long companyId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchOrganizationException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByCompanyId_First(companyId, obc);
+		return getPersistence()
+				   .findByCompanyId_First(companyId, orderByComparator);
 	}
 
 	public static com.liferay.portal.model.Organization findByCompanyId_Last(
-		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long companyId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchOrganizationException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByCompanyId_Last(companyId, obc);
+		return getPersistence()
+				   .findByCompanyId_Last(companyId, orderByComparator);
 	}
 
 	public static com.liferay.portal.model.Organization[] findByCompanyId_PrevAndNext(
 		long organizationId, long companyId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchOrganizationException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .findByCompanyId_PrevAndNext(organizationId, companyId, obc);
+				   .findByCompanyId_PrevAndNext(organizationId, companyId,
+			orderByComparator);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Organization> findByLocations(
@@ -171,32 +177,38 @@ public class OrganizationUtil {
 
 	public static java.util.List<com.liferay.portal.model.Organization> findByLocations(
 		long companyId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByLocations(companyId, start, end, obc);
+		return getPersistence()
+				   .findByLocations(companyId, start, end, orderByComparator);
 	}
 
 	public static com.liferay.portal.model.Organization findByLocations_First(
-		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long companyId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchOrganizationException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByLocations_First(companyId, obc);
+		return getPersistence()
+				   .findByLocations_First(companyId, orderByComparator);
 	}
 
 	public static com.liferay.portal.model.Organization findByLocations_Last(
-		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long companyId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchOrganizationException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByLocations_Last(companyId, obc);
+		return getPersistence()
+				   .findByLocations_Last(companyId, orderByComparator);
 	}
 
 	public static com.liferay.portal.model.Organization[] findByLocations_PrevAndNext(
 		long organizationId, long companyId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchOrganizationException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .findByLocations_PrevAndNext(organizationId, companyId, obc);
+				   .findByLocations_PrevAndNext(organizationId, companyId,
+			orderByComparator);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Organization> findByC_P(
@@ -214,38 +226,41 @@ public class OrganizationUtil {
 
 	public static java.util.List<com.liferay.portal.model.Organization> findByC_P(
 		long companyId, long parentOrganizationId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .findByC_P(companyId, parentOrganizationId, start, end, obc);
+				   .findByC_P(companyId, parentOrganizationId, start, end,
+			orderByComparator);
 	}
 
 	public static com.liferay.portal.model.Organization findByC_P_First(
 		long companyId, long parentOrganizationId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchOrganizationException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .findByC_P_First(companyId, parentOrganizationId, obc);
+				   .findByC_P_First(companyId, parentOrganizationId,
+			orderByComparator);
 	}
 
 	public static com.liferay.portal.model.Organization findByC_P_Last(
 		long companyId, long parentOrganizationId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchOrganizationException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .findByC_P_Last(companyId, parentOrganizationId, obc);
+				   .findByC_P_Last(companyId, parentOrganizationId,
+			orderByComparator);
 	}
 
 	public static com.liferay.portal.model.Organization[] findByC_P_PrevAndNext(
 		long organizationId, long companyId, long parentOrganizationId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchOrganizationException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
 				   .findByC_P_PrevAndNext(organizationId, companyId,
-			parentOrganizationId, obc);
+			parentOrganizationId, orderByComparator);
 	}
 
 	public static com.liferay.portal.model.Organization findByC_N(
@@ -279,9 +294,10 @@ public class OrganizationUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.Organization> findAll(
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findAll(start, end, obc);
+		return getPersistence().findAll(start, end, orderByComparator);
 	}
 
 	public static void removeByCompanyId(long companyId)
@@ -348,9 +364,9 @@ public class OrganizationUtil {
 
 	public static java.util.List<com.liferay.portal.model.Group> getGroups(
 		long pk, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().getGroups(pk, start, end, obc);
+		return getPersistence().getGroups(pk, start, end, orderByComparator);
 	}
 
 	public static int getGroupsSize(long pk)
@@ -439,9 +455,9 @@ public class OrganizationUtil {
 
 	public static java.util.List<com.liferay.portal.model.User> getUsers(
 		long pk, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().getUsers(pk, start, end, obc);
+		return getPersistence().getUsers(pk, start, end, orderByComparator);
 	}
 
 	public static int getUsersSize(long pk)

@@ -62,22 +62,24 @@ public interface ResourceCodePersistence extends BasePersistence<ResourceCode> {
 
 	public java.util.List<com.liferay.portal.model.ResourceCode> findByCompanyId(
 		long companyId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.ResourceCode findByCompanyId_First(
-		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long companyId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchResourceCodeException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.ResourceCode findByCompanyId_Last(
-		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long companyId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchResourceCodeException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.ResourceCode[] findByCompanyId_PrevAndNext(
 		long codeId, long companyId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchResourceCodeException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -91,24 +93,24 @@ public interface ResourceCodePersistence extends BasePersistence<ResourceCode> {
 
 	public java.util.List<com.liferay.portal.model.ResourceCode> findByName(
 		java.lang.String name, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.ResourceCode findByName_First(
 		java.lang.String name,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchResourceCodeException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.ResourceCode findByName_Last(
 		java.lang.String name,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchResourceCodeException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.ResourceCode[] findByName_PrevAndNext(
 		long codeId, java.lang.String name,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchResourceCodeException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -133,7 +135,8 @@ public interface ResourceCodePersistence extends BasePersistence<ResourceCode> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portal.model.ResourceCode> findAll(
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void removeByCompanyId(long companyId)

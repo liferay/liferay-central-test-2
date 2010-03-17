@@ -69,6 +69,21 @@ public class WebsiteLocalServiceWrapper implements WebsiteLocalService {
 		return _websiteLocalService.dynamicQuery(dynamicQuery, start, end);
 	}
 
+	public java.util.List<Object> dynamicQuery(
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
+		int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _websiteLocalService.dynamicQuery(dynamicQuery, start, end,
+			orderByComparator);
+	}
+
+	public int dynamicQueryCount(
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _websiteLocalService.dynamicQueryCount(dynamicQuery);
+	}
+
 	public com.liferay.portal.model.Website getWebsite(long websiteId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {

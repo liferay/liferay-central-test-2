@@ -124,31 +124,36 @@ public class ResourceUtil {
 
 	public static java.util.List<com.liferay.portal.model.Resource> findByCodeId(
 		long codeId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByCodeId(codeId, start, end, obc);
+		return getPersistence()
+				   .findByCodeId(codeId, start, end, orderByComparator);
 	}
 
 	public static com.liferay.portal.model.Resource findByCodeId_First(
-		long codeId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long codeId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchResourceException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByCodeId_First(codeId, obc);
+		return getPersistence().findByCodeId_First(codeId, orderByComparator);
 	}
 
 	public static com.liferay.portal.model.Resource findByCodeId_Last(
-		long codeId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long codeId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchResourceException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByCodeId_Last(codeId, obc);
+		return getPersistence().findByCodeId_Last(codeId, orderByComparator);
 	}
 
 	public static com.liferay.portal.model.Resource[] findByCodeId_PrevAndNext(
 		long resourceId, long codeId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchResourceException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByCodeId_PrevAndNext(resourceId, codeId, obc);
+		return getPersistence()
+				   .findByCodeId_PrevAndNext(resourceId, codeId,
+			orderByComparator);
 	}
 
 	public static com.liferay.portal.model.Resource findByC_P(long codeId,
@@ -182,9 +187,10 @@ public class ResourceUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.Resource> findAll(
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findAll(start, end, obc);
+		return getPersistence().findAll(start, end, orderByComparator);
 	}
 
 	public static void removeByCodeId(long codeId)

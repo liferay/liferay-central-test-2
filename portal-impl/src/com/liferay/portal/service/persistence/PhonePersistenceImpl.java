@@ -18,7 +18,6 @@ import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.NoSuchPhoneException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
-import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
@@ -443,11 +442,12 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 	}
 
 	public List<Phone> findByCompanyId(long companyId, int start, int end,
-		OrderByComparator obc) throws SystemException {
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(companyId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<Phone> list = (List<Phone>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
@@ -461,9 +461,9 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(3);
@@ -473,8 +473,9 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 
 				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -511,9 +512,10 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 		return list;
 	}
 
-	public Phone findByCompanyId_First(long companyId, OrderByComparator obc)
+	public Phone findByCompanyId_First(long companyId,
+		OrderByComparator orderByComparator)
 		throws NoSuchPhoneException, SystemException {
-		List<Phone> list = findByCompanyId(companyId, 0, 1, obc);
+		List<Phone> list = findByCompanyId(companyId, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -532,11 +534,13 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 		}
 	}
 
-	public Phone findByCompanyId_Last(long companyId, OrderByComparator obc)
+	public Phone findByCompanyId_Last(long companyId,
+		OrderByComparator orderByComparator)
 		throws NoSuchPhoneException, SystemException {
 		int count = countByCompanyId(companyId);
 
-		List<Phone> list = findByCompanyId(companyId, count - 1, count, obc);
+		List<Phone> list = findByCompanyId(companyId, count - 1, count,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -556,7 +560,8 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 	}
 
 	public Phone[] findByCompanyId_PrevAndNext(long phoneId, long companyId,
-		OrderByComparator obc) throws NoSuchPhoneException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchPhoneException, SystemException {
 		Phone phone = findByPrimaryKey(phoneId);
 
 		int count = countByCompanyId(companyId);
@@ -568,9 +573,9 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(3);
@@ -580,8 +585,9 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 
 			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -596,7 +602,8 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 
 			qPos.add(companyId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, phone);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, phone);
 
 			Phone[] array = new PhoneImpl[3];
 
@@ -670,11 +677,12 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 	}
 
 	public List<Phone> findByUserId(long userId, int start, int end,
-		OrderByComparator obc) throws SystemException {
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(userId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<Phone> list = (List<Phone>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_USERID,
@@ -688,9 +696,9 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(3);
@@ -700,8 +708,9 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 
 				query.append(_FINDER_COLUMN_USERID_USERID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -738,9 +747,10 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 		return list;
 	}
 
-	public Phone findByUserId_First(long userId, OrderByComparator obc)
+	public Phone findByUserId_First(long userId,
+		OrderByComparator orderByComparator)
 		throws NoSuchPhoneException, SystemException {
-		List<Phone> list = findByUserId(userId, 0, 1, obc);
+		List<Phone> list = findByUserId(userId, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -759,11 +769,13 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 		}
 	}
 
-	public Phone findByUserId_Last(long userId, OrderByComparator obc)
+	public Phone findByUserId_Last(long userId,
+		OrderByComparator orderByComparator)
 		throws NoSuchPhoneException, SystemException {
 		int count = countByUserId(userId);
 
-		List<Phone> list = findByUserId(userId, count - 1, count, obc);
+		List<Phone> list = findByUserId(userId, count - 1, count,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -783,7 +795,8 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 	}
 
 	public Phone[] findByUserId_PrevAndNext(long phoneId, long userId,
-		OrderByComparator obc) throws NoSuchPhoneException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchPhoneException, SystemException {
 		Phone phone = findByPrimaryKey(phoneId);
 
 		int count = countByUserId(userId);
@@ -795,9 +808,9 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(3);
@@ -807,8 +820,9 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 
 			query.append(_FINDER_COLUMN_USERID_USERID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -823,7 +837,8 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 
 			qPos.add(userId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, phone);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, phone);
 
 			Phone[] array = new PhoneImpl[3];
 
@@ -904,11 +919,12 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 	}
 
 	public List<Phone> findByC_C(long companyId, long classNameId, int start,
-		int end, OrderByComparator obc) throws SystemException {
+		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Long(classNameId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<Phone> list = (List<Phone>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_C_C,
@@ -922,9 +938,9 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(4 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(4);
@@ -936,8 +952,9 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 
 				query.append(_FINDER_COLUMN_C_C_CLASSNAMEID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -977,8 +994,10 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 	}
 
 	public Phone findByC_C_First(long companyId, long classNameId,
-		OrderByComparator obc) throws NoSuchPhoneException, SystemException {
-		List<Phone> list = findByC_C(companyId, classNameId, 0, 1, obc);
+		OrderByComparator orderByComparator)
+		throws NoSuchPhoneException, SystemException {
+		List<Phone> list = findByC_C(companyId, classNameId, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -1001,11 +1020,12 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 	}
 
 	public Phone findByC_C_Last(long companyId, long classNameId,
-		OrderByComparator obc) throws NoSuchPhoneException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchPhoneException, SystemException {
 		int count = countByC_C(companyId, classNameId);
 
 		List<Phone> list = findByC_C(companyId, classNameId, count - 1, count,
-				obc);
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -1028,7 +1048,7 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 	}
 
 	public Phone[] findByC_C_PrevAndNext(long phoneId, long companyId,
-		long classNameId, OrderByComparator obc)
+		long classNameId, OrderByComparator orderByComparator)
 		throws NoSuchPhoneException, SystemException {
 		Phone phone = findByPrimaryKey(phoneId);
 
@@ -1041,9 +1061,9 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(4 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(4);
@@ -1055,8 +1075,9 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 
 			query.append(_FINDER_COLUMN_C_C_CLASSNAMEID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -1073,7 +1094,8 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 
 			qPos.add(classNameId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, phone);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, phone);
 
 			Phone[] array = new PhoneImpl[3];
 
@@ -1158,12 +1180,13 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 	}
 
 	public List<Phone> findByC_C_C(long companyId, long classNameId,
-		long classPK, int start, int end, OrderByComparator obc)
+		long classPK, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Long(classNameId), new Long(classPK),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<Phone> list = (List<Phone>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_C_C_C,
@@ -1177,9 +1200,9 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(5 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(5);
@@ -1193,8 +1216,9 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 
 				query.append(_FINDER_COLUMN_C_C_C_CLASSPK_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -1236,10 +1260,10 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 	}
 
 	public Phone findByC_C_C_First(long companyId, long classNameId,
-		long classPK, OrderByComparator obc)
+		long classPK, OrderByComparator orderByComparator)
 		throws NoSuchPhoneException, SystemException {
 		List<Phone> list = findByC_C_C(companyId, classNameId, classPK, 0, 1,
-				obc);
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(8);
@@ -1265,12 +1289,12 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 	}
 
 	public Phone findByC_C_C_Last(long companyId, long classNameId,
-		long classPK, OrderByComparator obc)
+		long classPK, OrderByComparator orderByComparator)
 		throws NoSuchPhoneException, SystemException {
 		int count = countByC_C_C(companyId, classNameId, classPK);
 
 		List<Phone> list = findByC_C_C(companyId, classNameId, classPK,
-				count - 1, count, obc);
+				count - 1, count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(8);
@@ -1296,7 +1320,7 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 	}
 
 	public Phone[] findByC_C_C_PrevAndNext(long phoneId, long companyId,
-		long classNameId, long classPK, OrderByComparator obc)
+		long classNameId, long classPK, OrderByComparator orderByComparator)
 		throws NoSuchPhoneException, SystemException {
 		Phone phone = findByPrimaryKey(phoneId);
 
@@ -1309,9 +1333,9 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(5 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(5);
@@ -1325,8 +1349,9 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 
 			query.append(_FINDER_COLUMN_C_C_C_CLASSPK_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -1345,7 +1370,8 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 
 			qPos.add(classPK);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, phone);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, phone);
 
 			Phone[] array = new PhoneImpl[3];
 
@@ -1437,13 +1463,14 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 	}
 
 	public List<Phone> findByC_C_C_P(long companyId, long classNameId,
-		long classPK, boolean primary, int start, int end, OrderByComparator obc)
-		throws SystemException {
+		long classPK, boolean primary, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Long(classNameId), new Long(classPK),
 				Boolean.valueOf(primary),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<Phone> list = (List<Phone>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_C_C_C_P,
@@ -1457,9 +1484,9 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(6 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(6);
@@ -1475,8 +1502,9 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 
 				query.append(_FINDER_COLUMN_C_C_C_P_PRIMARY_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -1520,10 +1548,10 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 	}
 
 	public Phone findByC_C_C_P_First(long companyId, long classNameId,
-		long classPK, boolean primary, OrderByComparator obc)
+		long classPK, boolean primary, OrderByComparator orderByComparator)
 		throws NoSuchPhoneException, SystemException {
 		List<Phone> list = findByC_C_C_P(companyId, classNameId, classPK,
-				primary, 0, 1, obc);
+				primary, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(10);
@@ -1552,12 +1580,12 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 	}
 
 	public Phone findByC_C_C_P_Last(long companyId, long classNameId,
-		long classPK, boolean primary, OrderByComparator obc)
+		long classPK, boolean primary, OrderByComparator orderByComparator)
 		throws NoSuchPhoneException, SystemException {
 		int count = countByC_C_C_P(companyId, classNameId, classPK, primary);
 
 		List<Phone> list = findByC_C_C_P(companyId, classNameId, classPK,
-				primary, count - 1, count, obc);
+				primary, count - 1, count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(10);
@@ -1586,7 +1614,8 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 	}
 
 	public Phone[] findByC_C_C_P_PrevAndNext(long phoneId, long companyId,
-		long classNameId, long classPK, boolean primary, OrderByComparator obc)
+		long classNameId, long classPK, boolean primary,
+		OrderByComparator orderByComparator)
 		throws NoSuchPhoneException, SystemException {
 		Phone phone = findByPrimaryKey(phoneId);
 
@@ -1599,9 +1628,9 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(6 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(6);
@@ -1617,8 +1646,9 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 
 			query.append(_FINDER_COLUMN_C_C_C_P_PRIMARY_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -1639,7 +1669,8 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 
 			qPos.add(primary);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, phone);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, phone);
 
 			Phone[] array = new PhoneImpl[3];
 
@@ -1657,46 +1688,6 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 		}
 	}
 
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.setLimit(start, end);
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
 	public List<Phone> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -1705,10 +1696,11 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 		return findAll(start, end, null);
 	}
 
-	public List<Phone> findAll(int start, int end, OrderByComparator obc)
-		throws SystemException {
+	public List<Phone> findAll(int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<Phone> list = (List<Phone>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
@@ -1723,13 +1715,14 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 				StringBundler query = null;
 				String sql = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(2 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 
 					query.append(_SQL_SELECT_PHONE);
 
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 
 					sql = query.toString();
 				}
@@ -1740,7 +1733,7 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 
 				Query q = session.createQuery(sql);
 
-				if (obc == null) {
+				if (orderByComparator == null) {
 					list = (List<Phone>)QueryUtil.list(q, getDialect(), start,
 							end, false);
 

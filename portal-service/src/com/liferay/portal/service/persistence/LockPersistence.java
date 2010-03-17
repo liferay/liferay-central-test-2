@@ -61,24 +61,24 @@ public interface LockPersistence extends BasePersistence<Lock> {
 
 	public java.util.List<com.liferay.portal.model.Lock> findByUuid(
 		java.lang.String uuid, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.Lock findByUuid_First(
 		java.lang.String uuid,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchLockException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.Lock findByUuid_Last(
 		java.lang.String uuid,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchLockException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.Lock[] findByUuid_PrevAndNext(long lockId,
 		java.lang.String uuid,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchLockException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -92,24 +92,24 @@ public interface LockPersistence extends BasePersistence<Lock> {
 
 	public java.util.List<com.liferay.portal.model.Lock> findByExpirationDate(
 		java.util.Date expirationDate, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.Lock findByExpirationDate_First(
 		java.util.Date expirationDate,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchLockException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.Lock findByExpirationDate_Last(
 		java.util.Date expirationDate,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchLockException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.Lock[] findByExpirationDate_PrevAndNext(
 		long lockId, java.util.Date expirationDate,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchLockException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -134,7 +134,8 @@ public interface LockPersistence extends BasePersistence<Lock> {
 		int end) throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Lock> findAll(int start,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void removeByUuid(java.lang.String uuid)

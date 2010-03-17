@@ -68,24 +68,24 @@ public interface PasswordPolicyRelPersistence extends BasePersistence<PasswordPo
 
 	public java.util.List<com.liferay.portal.model.PasswordPolicyRel> findByPasswordPolicyId(
 		long passwordPolicyId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.PasswordPolicyRel findByPasswordPolicyId_First(
 		long passwordPolicyId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchPasswordPolicyRelException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.PasswordPolicyRel findByPasswordPolicyId_Last(
 		long passwordPolicyId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchPasswordPolicyRelException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.PasswordPolicyRel[] findByPasswordPolicyId_PrevAndNext(
 		long passwordPolicyRelId, long passwordPolicyId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchPasswordPolicyRelException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -124,7 +124,8 @@ public interface PasswordPolicyRelPersistence extends BasePersistence<PasswordPo
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portal.model.PasswordPolicyRel> findAll(
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void removeByPasswordPolicyId(long passwordPolicyId)

@@ -62,24 +62,24 @@ public interface ListTypePersistence extends BasePersistence<ListType> {
 
 	public java.util.List<com.liferay.portal.model.ListType> findByType(
 		java.lang.String type, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.ListType findByType_First(
 		java.lang.String type,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchListTypeException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.ListType findByType_Last(
 		java.lang.String type,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchListTypeException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.ListType[] findByType_PrevAndNext(
 		int listTypeId, java.lang.String type,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchListTypeException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -91,7 +91,8 @@ public interface ListTypePersistence extends BasePersistence<ListType> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portal.model.ListType> findAll(
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void removeByType(java.lang.String type)

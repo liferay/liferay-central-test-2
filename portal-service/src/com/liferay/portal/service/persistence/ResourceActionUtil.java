@@ -129,34 +129,35 @@ public class ResourceActionUtil {
 
 	public static java.util.List<com.liferay.portal.model.ResourceAction> findByName(
 		java.lang.String name, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByName(name, start, end, obc);
+		return getPersistence().findByName(name, start, end, orderByComparator);
 	}
 
 	public static com.liferay.portal.model.ResourceAction findByName_First(
 		java.lang.String name,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchResourceActionException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByName_First(name, obc);
+		return getPersistence().findByName_First(name, orderByComparator);
 	}
 
 	public static com.liferay.portal.model.ResourceAction findByName_Last(
 		java.lang.String name,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchResourceActionException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByName_Last(name, obc);
+		return getPersistence().findByName_Last(name, orderByComparator);
 	}
 
 	public static com.liferay.portal.model.ResourceAction[] findByName_PrevAndNext(
 		long resourceActionId, java.lang.String name,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchResourceActionException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .findByName_PrevAndNext(resourceActionId, name, obc);
+				   .findByName_PrevAndNext(resourceActionId, name,
+			orderByComparator);
 	}
 
 	public static com.liferay.portal.model.ResourceAction findByN_A(
@@ -191,9 +192,10 @@ public class ResourceActionUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.ResourceAction> findAll(
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findAll(start, end, obc);
+		return getPersistence().findAll(start, end, orderByComparator);
 	}
 
 	public static void removeByName(java.lang.String name)

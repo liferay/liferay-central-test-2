@@ -18,7 +18,6 @@ import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.NoSuchResourceActionException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
-import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
@@ -435,11 +434,12 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 	}
 
 	public List<ResourceAction> findByName(String name, int start, int end,
-		OrderByComparator obc) throws SystemException {
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				name,
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<ResourceAction> list = (List<ResourceAction>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_NAME,
@@ -453,9 +453,9 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(3);
@@ -475,8 +475,9 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 					}
 				}
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -516,9 +517,10 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 		return list;
 	}
 
-	public ResourceAction findByName_First(String name, OrderByComparator obc)
+	public ResourceAction findByName_First(String name,
+		OrderByComparator orderByComparator)
 		throws NoSuchResourceActionException, SystemException {
-		List<ResourceAction> list = findByName(name, 0, 1, obc);
+		List<ResourceAction> list = findByName(name, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -537,11 +539,13 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 		}
 	}
 
-	public ResourceAction findByName_Last(String name, OrderByComparator obc)
+	public ResourceAction findByName_Last(String name,
+		OrderByComparator orderByComparator)
 		throws NoSuchResourceActionException, SystemException {
 		int count = countByName(name);
 
-		List<ResourceAction> list = findByName(name, count - 1, count, obc);
+		List<ResourceAction> list = findByName(name, count - 1, count,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -561,7 +565,7 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 	}
 
 	public ResourceAction[] findByName_PrevAndNext(long resourceActionId,
-		String name, OrderByComparator obc)
+		String name, OrderByComparator orderByComparator)
 		throws NoSuchResourceActionException, SystemException {
 		ResourceAction resourceAction = findByPrimaryKey(resourceActionId);
 
@@ -574,9 +578,9 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(3);
@@ -596,8 +600,9 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 				}
 			}
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -614,8 +619,8 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 				qPos.add(name);
 			}
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					resourceAction);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, resourceAction);
 
 			ResourceAction[] array = new ResourceActionImpl[3];
 
@@ -774,46 +779,6 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 		}
 	}
 
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.setLimit(start, end);
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
 	public List<ResourceAction> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -824,9 +789,10 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 	}
 
 	public List<ResourceAction> findAll(int start, int end,
-		OrderByComparator obc) throws SystemException {
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<ResourceAction> list = (List<ResourceAction>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
@@ -841,13 +807,14 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 				StringBundler query = null;
 				String sql = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(2 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 
 					query.append(_SQL_SELECT_RESOURCEACTION);
 
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 
 					sql = query.toString();
 				}
@@ -858,7 +825,7 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 
 				Query q = session.createQuery(sql);
 
-				if (obc == null) {
+				if (orderByComparator == null) {
 					list = (List<ResourceAction>)QueryUtil.list(q,
 							getDialect(), start, end, false);
 

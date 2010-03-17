@@ -18,7 +18,6 @@ import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.NoSuchSubscriptionException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
-import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
@@ -472,11 +471,12 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	}
 
 	public List<Subscription> findByUserId(long userId, int start, int end,
-		OrderByComparator obc) throws SystemException {
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(userId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<Subscription> list = (List<Subscription>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_USERID,
@@ -490,9 +490,9 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(2);
@@ -502,8 +502,9 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 
 				query.append(_FINDER_COLUMN_USERID_USERID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				String sql = query.toString();
@@ -537,9 +538,10 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 		return list;
 	}
 
-	public Subscription findByUserId_First(long userId, OrderByComparator obc)
+	public Subscription findByUserId_First(long userId,
+		OrderByComparator orderByComparator)
 		throws NoSuchSubscriptionException, SystemException {
-		List<Subscription> list = findByUserId(userId, 0, 1, obc);
+		List<Subscription> list = findByUserId(userId, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -558,11 +560,13 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 		}
 	}
 
-	public Subscription findByUserId_Last(long userId, OrderByComparator obc)
+	public Subscription findByUserId_Last(long userId,
+		OrderByComparator orderByComparator)
 		throws NoSuchSubscriptionException, SystemException {
 		int count = countByUserId(userId);
 
-		List<Subscription> list = findByUserId(userId, count - 1, count, obc);
+		List<Subscription> list = findByUserId(userId, count - 1, count,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -582,7 +586,7 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	}
 
 	public Subscription[] findByUserId_PrevAndNext(long subscriptionId,
-		long userId, OrderByComparator obc)
+		long userId, OrderByComparator orderByComparator)
 		throws NoSuchSubscriptionException, SystemException {
 		Subscription subscription = findByPrimaryKey(subscriptionId);
 
@@ -595,9 +599,9 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(2);
@@ -607,8 +611,9 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 
 			query.append(_FINDER_COLUMN_USERID_USERID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			String sql = query.toString();
@@ -619,8 +624,8 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 
 			qPos.add(userId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					subscription);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, subscription);
 
 			Subscription[] array = new SubscriptionImpl[3];
 
@@ -699,11 +704,13 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	}
 
 	public List<Subscription> findByU_C(long userId, long classNameId,
-		int start, int end, OrderByComparator obc) throws SystemException {
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(userId), new Long(classNameId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<Subscription> list = (List<Subscription>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_U_C,
@@ -717,9 +724,9 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(4 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(3);
@@ -731,8 +738,9 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 
 				query.append(_FINDER_COLUMN_U_C_CLASSNAMEID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				String sql = query.toString();
@@ -769,9 +777,10 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	}
 
 	public Subscription findByU_C_First(long userId, long classNameId,
-		OrderByComparator obc)
+		OrderByComparator orderByComparator)
 		throws NoSuchSubscriptionException, SystemException {
-		List<Subscription> list = findByU_C(userId, classNameId, 0, 1, obc);
+		List<Subscription> list = findByU_C(userId, classNameId, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -794,12 +803,12 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	}
 
 	public Subscription findByU_C_Last(long userId, long classNameId,
-		OrderByComparator obc)
+		OrderByComparator orderByComparator)
 		throws NoSuchSubscriptionException, SystemException {
 		int count = countByU_C(userId, classNameId);
 
 		List<Subscription> list = findByU_C(userId, classNameId, count - 1,
-				count, obc);
+				count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -822,7 +831,7 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	}
 
 	public Subscription[] findByU_C_PrevAndNext(long subscriptionId,
-		long userId, long classNameId, OrderByComparator obc)
+		long userId, long classNameId, OrderByComparator orderByComparator)
 		throws NoSuchSubscriptionException, SystemException {
 		Subscription subscription = findByPrimaryKey(subscriptionId);
 
@@ -835,9 +844,9 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(4 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(3);
@@ -849,8 +858,9 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 
 			query.append(_FINDER_COLUMN_U_C_CLASSNAMEID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			String sql = query.toString();
@@ -863,8 +873,8 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 
 			qPos.add(classNameId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					subscription);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, subscription);
 
 			Subscription[] array = new SubscriptionImpl[3];
 
@@ -947,12 +957,13 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	}
 
 	public List<Subscription> findByC_C_C(long companyId, long classNameId,
-		long classPK, int start, int end, OrderByComparator obc)
+		long classPK, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Long(classNameId), new Long(classPK),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<Subscription> list = (List<Subscription>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_C_C_C,
@@ -966,9 +977,9 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(5 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(4);
@@ -982,8 +993,9 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 
 				query.append(_FINDER_COLUMN_C_C_C_CLASSPK_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				String sql = query.toString();
@@ -1022,10 +1034,10 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	}
 
 	public Subscription findByC_C_C_First(long companyId, long classNameId,
-		long classPK, OrderByComparator obc)
+		long classPK, OrderByComparator orderByComparator)
 		throws NoSuchSubscriptionException, SystemException {
 		List<Subscription> list = findByC_C_C(companyId, classNameId, classPK,
-				0, 1, obc);
+				0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(8);
@@ -1051,12 +1063,12 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	}
 
 	public Subscription findByC_C_C_Last(long companyId, long classNameId,
-		long classPK, OrderByComparator obc)
+		long classPK, OrderByComparator orderByComparator)
 		throws NoSuchSubscriptionException, SystemException {
 		int count = countByC_C_C(companyId, classNameId, classPK);
 
 		List<Subscription> list = findByC_C_C(companyId, classNameId, classPK,
-				count - 1, count, obc);
+				count - 1, count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(8);
@@ -1082,7 +1094,8 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	}
 
 	public Subscription[] findByC_C_C_PrevAndNext(long subscriptionId,
-		long companyId, long classNameId, long classPK, OrderByComparator obc)
+		long companyId, long classNameId, long classPK,
+		OrderByComparator orderByComparator)
 		throws NoSuchSubscriptionException, SystemException {
 		Subscription subscription = findByPrimaryKey(subscriptionId);
 
@@ -1095,9 +1108,9 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(5 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(4);
@@ -1111,8 +1124,9 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 
 			query.append(_FINDER_COLUMN_C_C_C_CLASSPK_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			String sql = query.toString();
@@ -1127,8 +1141,8 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 
 			qPos.add(classPK);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					subscription);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, subscription);
 
 			Subscription[] array = new SubscriptionImpl[3];
 
@@ -1281,46 +1295,6 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 		}
 	}
 
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.setLimit(start, end);
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
 	public List<Subscription> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -1330,10 +1304,11 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 		return findAll(start, end, null);
 	}
 
-	public List<Subscription> findAll(int start, int end, OrderByComparator obc)
-		throws SystemException {
+	public List<Subscription> findAll(int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<Subscription> list = (List<Subscription>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
@@ -1348,13 +1323,14 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 				StringBundler query = null;
 				String sql = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(2 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 
 					query.append(_SQL_SELECT_SUBSCRIPTION);
 
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 
 					sql = query.toString();
 				}
@@ -1363,7 +1339,7 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 
 				Query q = session.createQuery(sql);
 
-				if (obc == null) {
+				if (orderByComparator == null) {
 					list = (List<Subscription>)QueryUtil.list(q, getDialect(),
 							start, end, false);
 

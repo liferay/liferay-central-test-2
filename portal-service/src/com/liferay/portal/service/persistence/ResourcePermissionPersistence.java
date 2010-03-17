@@ -67,22 +67,24 @@ public interface ResourcePermissionPersistence extends BasePersistence<ResourceP
 
 	public java.util.List<com.liferay.portal.model.ResourcePermission> findByRoleId(
 		long roleId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.ResourcePermission findByRoleId_First(
-		long roleId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long roleId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchResourcePermissionException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.ResourcePermission findByRoleId_Last(
-		long roleId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long roleId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchResourcePermissionException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.ResourcePermission[] findByRoleId_PrevAndNext(
 		long resourcePermissionId, long roleId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchResourcePermissionException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -96,24 +98,24 @@ public interface ResourcePermissionPersistence extends BasePersistence<ResourceP
 
 	public java.util.List<com.liferay.portal.model.ResourcePermission> findByR_S(
 		long roleId, int scope, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.ResourcePermission findByR_S_First(
 		long roleId, int scope,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchResourcePermissionException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.ResourcePermission findByR_S_Last(
 		long roleId, int scope,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchResourcePermissionException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.ResourcePermission[] findByR_S_PrevAndNext(
 		long resourcePermissionId, long roleId, int scope,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchResourcePermissionException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -127,24 +129,25 @@ public interface ResourcePermissionPersistence extends BasePersistence<ResourceP
 
 	public java.util.List<com.liferay.portal.model.ResourcePermission> findByC_N_S(
 		long companyId, java.lang.String name, int scope, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.ResourcePermission findByC_N_S_First(
 		long companyId, java.lang.String name, int scope,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchResourcePermissionException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.ResourcePermission findByC_N_S_Last(
 		long companyId, java.lang.String name, int scope,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchResourcePermissionException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.ResourcePermission[] findByC_N_S_PrevAndNext(
 		long resourcePermissionId, long companyId, java.lang.String name,
-		int scope, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int scope,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchResourcePermissionException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -161,27 +164,27 @@ public interface ResourcePermissionPersistence extends BasePersistence<ResourceP
 	public java.util.List<com.liferay.portal.model.ResourcePermission> findByC_N_S_P(
 		long companyId, java.lang.String name, int scope,
 		java.lang.String primKey, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.ResourcePermission findByC_N_S_P_First(
 		long companyId, java.lang.String name, int scope,
 		java.lang.String primKey,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchResourcePermissionException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.ResourcePermission findByC_N_S_P_Last(
 		long companyId, java.lang.String name, int scope,
 		java.lang.String primKey,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchResourcePermissionException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.ResourcePermission[] findByC_N_S_P_PrevAndNext(
 		long resourcePermissionId, long companyId, java.lang.String name,
 		int scope, java.lang.String primKey,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchResourcePermissionException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -209,7 +212,8 @@ public interface ResourcePermissionPersistence extends BasePersistence<ResourceP
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portal.model.ResourcePermission> findAll(
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void removeByRoleId(long roleId)

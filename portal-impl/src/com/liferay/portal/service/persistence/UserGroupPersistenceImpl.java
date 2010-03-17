@@ -23,7 +23,6 @@ import com.liferay.portal.kernel.dao.jdbc.MappingSqlQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.jdbc.RowMapper;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
-import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
@@ -452,11 +451,12 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 	}
 
 	public List<UserGroup> findByCompanyId(long companyId, int start, int end,
-		OrderByComparator obc) throws SystemException {
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(companyId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<UserGroup> list = (List<UserGroup>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
@@ -470,9 +470,9 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(3);
@@ -482,8 +482,9 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 
 				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -521,9 +522,11 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 		return list;
 	}
 
-	public UserGroup findByCompanyId_First(long companyId, OrderByComparator obc)
+	public UserGroup findByCompanyId_First(long companyId,
+		OrderByComparator orderByComparator)
 		throws NoSuchUserGroupException, SystemException {
-		List<UserGroup> list = findByCompanyId(companyId, 0, 1, obc);
+		List<UserGroup> list = findByCompanyId(companyId, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -542,11 +545,13 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 		}
 	}
 
-	public UserGroup findByCompanyId_Last(long companyId, OrderByComparator obc)
+	public UserGroup findByCompanyId_Last(long companyId,
+		OrderByComparator orderByComparator)
 		throws NoSuchUserGroupException, SystemException {
 		int count = countByCompanyId(companyId);
 
-		List<UserGroup> list = findByCompanyId(companyId, count - 1, count, obc);
+		List<UserGroup> list = findByCompanyId(companyId, count - 1, count,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -566,7 +571,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 	}
 
 	public UserGroup[] findByCompanyId_PrevAndNext(long userGroupId,
-		long companyId, OrderByComparator obc)
+		long companyId, OrderByComparator orderByComparator)
 		throws NoSuchUserGroupException, SystemException {
 		UserGroup userGroup = findByPrimaryKey(userGroupId);
 
@@ -579,9 +584,9 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(3);
@@ -591,8 +596,9 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 
 			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -607,8 +613,8 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 
 			qPos.add(companyId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					userGroup);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, userGroup);
 
 			UserGroup[] array = new UserGroupImpl[3];
 
@@ -689,11 +695,13 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 	}
 
 	public List<UserGroup> findByC_P(long companyId, long parentUserGroupId,
-		int start, int end, OrderByComparator obc) throws SystemException {
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Long(parentUserGroupId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<UserGroup> list = (List<UserGroup>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_C_P,
@@ -707,9 +715,9 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(4 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(4);
@@ -721,8 +729,9 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 
 				query.append(_FINDER_COLUMN_C_P_PARENTUSERGROUPID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -763,8 +772,10 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 	}
 
 	public UserGroup findByC_P_First(long companyId, long parentUserGroupId,
-		OrderByComparator obc) throws NoSuchUserGroupException, SystemException {
-		List<UserGroup> list = findByC_P(companyId, parentUserGroupId, 0, 1, obc);
+		OrderByComparator orderByComparator)
+		throws NoSuchUserGroupException, SystemException {
+		List<UserGroup> list = findByC_P(companyId, parentUserGroupId, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -787,11 +798,12 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 	}
 
 	public UserGroup findByC_P_Last(long companyId, long parentUserGroupId,
-		OrderByComparator obc) throws NoSuchUserGroupException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchUserGroupException, SystemException {
 		int count = countByC_P(companyId, parentUserGroupId);
 
 		List<UserGroup> list = findByC_P(companyId, parentUserGroupId,
-				count - 1, count, obc);
+				count - 1, count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -814,7 +826,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 	}
 
 	public UserGroup[] findByC_P_PrevAndNext(long userGroupId, long companyId,
-		long parentUserGroupId, OrderByComparator obc)
+		long parentUserGroupId, OrderByComparator orderByComparator)
 		throws NoSuchUserGroupException, SystemException {
 		UserGroup userGroup = findByPrimaryKey(userGroupId);
 
@@ -827,9 +839,9 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(4 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(4);
@@ -841,8 +853,9 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 
 			query.append(_FINDER_COLUMN_C_P_PARENTUSERGROUPID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -859,8 +872,8 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 
 			qPos.add(parentUserGroupId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					userGroup);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, userGroup);
 
 			UserGroup[] array = new UserGroupImpl[3];
 
@@ -1006,46 +1019,6 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 		}
 	}
 
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.setLimit(start, end);
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
 	public List<UserGroup> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -1055,10 +1028,11 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 		return findAll(start, end, null);
 	}
 
-	public List<UserGroup> findAll(int start, int end, OrderByComparator obc)
-		throws SystemException {
+	public List<UserGroup> findAll(int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<UserGroup> list = (List<UserGroup>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
@@ -1073,13 +1047,14 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 				StringBundler query = null;
 				String sql = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(2 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 
 					query.append(_SQL_SELECT_USERGROUP);
 
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 
 					sql = query.toString();
 				}
@@ -1090,7 +1065,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 
 				Query q = session.createQuery(sql);
 
-				if (obc == null) {
+				if (orderByComparator == null) {
 					list = (List<UserGroup>)QueryUtil.list(q, getDialect(),
 							start, end, false);
 
@@ -1361,10 +1336,10 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 			});
 
 	public List<com.liferay.portal.model.User> getUsers(long pk, int start,
-		int end, OrderByComparator obc) throws SystemException {
+		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(pk), String.valueOf(start), String.valueOf(end),
-				String.valueOf(obc)
+				String.valueOf(orderByComparator)
 			};
 
 		List<com.liferay.portal.model.User> list = (List<com.liferay.portal.model.User>)FinderCacheUtil.getResult(FINDER_PATH_GET_USERS,
@@ -1378,9 +1353,9 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 
 				String sql = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					sql = _SQL_GETUSERS.concat(ORDER_BY_CLAUSE)
-									   .concat(obc.getOrderBy());
+									   .concat(orderByComparator.getOrderBy());
 				}
 
 				sql = _SQL_GETUSERS;

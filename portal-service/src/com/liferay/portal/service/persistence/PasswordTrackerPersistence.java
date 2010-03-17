@@ -66,22 +66,24 @@ public interface PasswordTrackerPersistence extends BasePersistence<PasswordTrac
 
 	public java.util.List<com.liferay.portal.model.PasswordTracker> findByUserId(
 		long userId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.PasswordTracker findByUserId_First(
-		long userId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long userId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchPasswordTrackerException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.PasswordTracker findByUserId_Last(
-		long userId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long userId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchPasswordTrackerException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.PasswordTracker[] findByUserId_PrevAndNext(
 		long passwordTrackerId, long userId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchPasswordTrackerException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -93,7 +95,8 @@ public interface PasswordTrackerPersistence extends BasePersistence<PasswordTrac
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portal.model.PasswordTracker> findAll(
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void removeByUserId(long userId)

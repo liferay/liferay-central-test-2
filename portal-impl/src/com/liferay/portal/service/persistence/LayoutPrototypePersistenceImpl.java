@@ -18,7 +18,6 @@ import com.liferay.portal.NoSuchLayoutPrototypeException;
 import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
-import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
@@ -389,11 +388,12 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	}
 
 	public List<LayoutPrototype> findByCompanyId(long companyId, int start,
-		int end, OrderByComparator obc) throws SystemException {
+		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(companyId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<LayoutPrototype> list = (List<LayoutPrototype>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
@@ -407,9 +407,9 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(2);
@@ -419,8 +419,9 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 
 				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				String sql = query.toString();
@@ -455,9 +456,10 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	}
 
 	public LayoutPrototype findByCompanyId_First(long companyId,
-		OrderByComparator obc)
+		OrderByComparator orderByComparator)
 		throws NoSuchLayoutPrototypeException, SystemException {
-		List<LayoutPrototype> list = findByCompanyId(companyId, 0, 1, obc);
+		List<LayoutPrototype> list = findByCompanyId(companyId, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -477,12 +479,12 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	}
 
 	public LayoutPrototype findByCompanyId_Last(long companyId,
-		OrderByComparator obc)
+		OrderByComparator orderByComparator)
 		throws NoSuchLayoutPrototypeException, SystemException {
 		int count = countByCompanyId(companyId);
 
 		List<LayoutPrototype> list = findByCompanyId(companyId, count - 1,
-				count, obc);
+				count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -502,7 +504,8 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	}
 
 	public LayoutPrototype[] findByCompanyId_PrevAndNext(
-		long layoutPrototypeId, long companyId, OrderByComparator obc)
+		long layoutPrototypeId, long companyId,
+		OrderByComparator orderByComparator)
 		throws NoSuchLayoutPrototypeException, SystemException {
 		LayoutPrototype layoutPrototype = findByPrimaryKey(layoutPrototypeId);
 
@@ -515,9 +518,9 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(2);
@@ -527,8 +530,9 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 
 			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			String sql = query.toString();
@@ -539,8 +543,8 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 
 			qPos.add(companyId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					layoutPrototype);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, layoutPrototype);
 
 			LayoutPrototype[] array = new LayoutPrototypeImpl[3];
 
@@ -619,11 +623,13 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	}
 
 	public List<LayoutPrototype> findByC_A(long companyId, boolean active,
-		int start, int end, OrderByComparator obc) throws SystemException {
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), Boolean.valueOf(active),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<LayoutPrototype> list = (List<LayoutPrototype>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_C_A,
@@ -637,9 +643,9 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(4 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(3);
@@ -651,8 +657,9 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 
 				query.append(_FINDER_COLUMN_C_A_ACTIVE_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				String sql = query.toString();
@@ -689,9 +696,10 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	}
 
 	public LayoutPrototype findByC_A_First(long companyId, boolean active,
-		OrderByComparator obc)
+		OrderByComparator orderByComparator)
 		throws NoSuchLayoutPrototypeException, SystemException {
-		List<LayoutPrototype> list = findByC_A(companyId, active, 0, 1, obc);
+		List<LayoutPrototype> list = findByC_A(companyId, active, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -714,12 +722,12 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	}
 
 	public LayoutPrototype findByC_A_Last(long companyId, boolean active,
-		OrderByComparator obc)
+		OrderByComparator orderByComparator)
 		throws NoSuchLayoutPrototypeException, SystemException {
 		int count = countByC_A(companyId, active);
 
 		List<LayoutPrototype> list = findByC_A(companyId, active, count - 1,
-				count, obc);
+				count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -742,7 +750,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	}
 
 	public LayoutPrototype[] findByC_A_PrevAndNext(long layoutPrototypeId,
-		long companyId, boolean active, OrderByComparator obc)
+		long companyId, boolean active, OrderByComparator orderByComparator)
 		throws NoSuchLayoutPrototypeException, SystemException {
 		LayoutPrototype layoutPrototype = findByPrimaryKey(layoutPrototypeId);
 
@@ -755,9 +763,9 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(4 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(3);
@@ -769,8 +777,9 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 
 			query.append(_FINDER_COLUMN_C_A_ACTIVE_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			String sql = query.toString();
@@ -783,8 +792,8 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 
 			qPos.add(active);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					layoutPrototype);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, layoutPrototype);
 
 			LayoutPrototype[] array = new LayoutPrototypeImpl[3];
 
@@ -793,46 +802,6 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 			array[2] = (LayoutPrototype)objArray[2];
 
 			return array;
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.setLimit(start, end);
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
 		}
 		catch (Exception e) {
 			throw processException(e);
@@ -852,9 +821,10 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	}
 
 	public List<LayoutPrototype> findAll(int start, int end,
-		OrderByComparator obc) throws SystemException {
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<LayoutPrototype> list = (List<LayoutPrototype>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
@@ -869,13 +839,14 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 				StringBundler query = null;
 				String sql = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(2 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 
 					query.append(_SQL_SELECT_LAYOUTPROTOTYPE);
 
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 
 					sql = query.toString();
 				}
@@ -884,7 +855,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 
 				Query q = session.createQuery(sql);
 
-				if (obc == null) {
+				if (orderByComparator == null) {
 					list = (List<LayoutPrototype>)QueryUtil.list(q,
 							getDialect(), start, end, false);
 

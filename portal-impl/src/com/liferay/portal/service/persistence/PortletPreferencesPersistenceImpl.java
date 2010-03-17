@@ -18,7 +18,6 @@ import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.NoSuchPortletPreferencesException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
-import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
@@ -486,11 +485,12 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 	}
 
 	public List<PortletPreferences> findByPlid(long plid, int start, int end,
-		OrderByComparator obc) throws SystemException {
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(plid),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<PortletPreferences> list = (List<PortletPreferences>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_PLID,
@@ -504,9 +504,9 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(2);
@@ -516,8 +516,9 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 
 				query.append(_FINDER_COLUMN_PLID_PLID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				String sql = query.toString();
@@ -551,9 +552,10 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 		return list;
 	}
 
-	public PortletPreferences findByPlid_First(long plid, OrderByComparator obc)
+	public PortletPreferences findByPlid_First(long plid,
+		OrderByComparator orderByComparator)
 		throws NoSuchPortletPreferencesException, SystemException {
-		List<PortletPreferences> list = findByPlid(plid, 0, 1, obc);
+		List<PortletPreferences> list = findByPlid(plid, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -572,11 +574,13 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 		}
 	}
 
-	public PortletPreferences findByPlid_Last(long plid, OrderByComparator obc)
+	public PortletPreferences findByPlid_Last(long plid,
+		OrderByComparator orderByComparator)
 		throws NoSuchPortletPreferencesException, SystemException {
 		int count = countByPlid(plid);
 
-		List<PortletPreferences> list = findByPlid(plid, count - 1, count, obc);
+		List<PortletPreferences> list = findByPlid(plid, count - 1, count,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -596,7 +600,8 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 	}
 
 	public PortletPreferences[] findByPlid_PrevAndNext(
-		long portletPreferencesId, long plid, OrderByComparator obc)
+		long portletPreferencesId, long plid,
+		OrderByComparator orderByComparator)
 		throws NoSuchPortletPreferencesException, SystemException {
 		PortletPreferences portletPreferences = findByPrimaryKey(portletPreferencesId);
 
@@ -609,9 +614,9 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(2);
@@ -621,8 +626,9 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 
 			query.append(_FINDER_COLUMN_PLID_PLID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			String sql = query.toString();
@@ -633,8 +639,8 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 
 			qPos.add(plid);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					portletPreferences);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, portletPreferences);
 
 			PortletPreferences[] array = new PortletPreferencesImpl[3];
 
@@ -723,13 +729,15 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 	}
 
 	public List<PortletPreferences> findByP_P(long plid, String portletId,
-		int start, int end, OrderByComparator obc) throws SystemException {
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(plid),
 				
 				portletId,
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<PortletPreferences> list = (List<PortletPreferences>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_P_P,
@@ -743,9 +751,9 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(4 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(3);
@@ -767,8 +775,9 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 					}
 				}
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				String sql = query.toString();
@@ -807,9 +816,10 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 	}
 
 	public PortletPreferences findByP_P_First(long plid, String portletId,
-		OrderByComparator obc)
+		OrderByComparator orderByComparator)
 		throws NoSuchPortletPreferencesException, SystemException {
-		List<PortletPreferences> list = findByP_P(plid, portletId, 0, 1, obc);
+		List<PortletPreferences> list = findByP_P(plid, portletId, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -832,12 +842,12 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 	}
 
 	public PortletPreferences findByP_P_Last(long plid, String portletId,
-		OrderByComparator obc)
+		OrderByComparator orderByComparator)
 		throws NoSuchPortletPreferencesException, SystemException {
 		int count = countByP_P(plid, portletId);
 
 		List<PortletPreferences> list = findByP_P(plid, portletId, count - 1,
-				count, obc);
+				count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -861,7 +871,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 
 	public PortletPreferences[] findByP_P_PrevAndNext(
 		long portletPreferencesId, long plid, String portletId,
-		OrderByComparator obc)
+		OrderByComparator orderByComparator)
 		throws NoSuchPortletPreferencesException, SystemException {
 		PortletPreferences portletPreferences = findByPrimaryKey(portletPreferencesId);
 
@@ -874,9 +884,9 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(4 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(3);
@@ -898,8 +908,9 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 				}
 			}
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			String sql = query.toString();
@@ -914,8 +925,8 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 				qPos.add(portletId);
 			}
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					portletPreferences);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, portletPreferences);
 
 			PortletPreferences[] array = new PortletPreferencesImpl[3];
 
@@ -998,12 +1009,13 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 	}
 
 	public List<PortletPreferences> findByO_O_P(long ownerId, int ownerType,
-		long plid, int start, int end, OrderByComparator obc)
+		long plid, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(ownerId), new Integer(ownerType), new Long(plid),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<PortletPreferences> list = (List<PortletPreferences>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_O_O_P,
@@ -1017,9 +1029,9 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(5 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(4);
@@ -1033,8 +1045,9 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 
 				query.append(_FINDER_COLUMN_O_O_P_PLID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				String sql = query.toString();
@@ -1073,10 +1086,10 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 	}
 
 	public PortletPreferences findByO_O_P_First(long ownerId, int ownerType,
-		long plid, OrderByComparator obc)
+		long plid, OrderByComparator orderByComparator)
 		throws NoSuchPortletPreferencesException, SystemException {
 		List<PortletPreferences> list = findByO_O_P(ownerId, ownerType, plid,
-				0, 1, obc);
+				0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(8);
@@ -1102,12 +1115,12 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 	}
 
 	public PortletPreferences findByO_O_P_Last(long ownerId, int ownerType,
-		long plid, OrderByComparator obc)
+		long plid, OrderByComparator orderByComparator)
 		throws NoSuchPortletPreferencesException, SystemException {
 		int count = countByO_O_P(ownerId, ownerType, plid);
 
 		List<PortletPreferences> list = findByO_O_P(ownerId, ownerType, plid,
-				count - 1, count, obc);
+				count - 1, count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(8);
@@ -1134,7 +1147,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 
 	public PortletPreferences[] findByO_O_P_PrevAndNext(
 		long portletPreferencesId, long ownerId, int ownerType, long plid,
-		OrderByComparator obc)
+		OrderByComparator orderByComparator)
 		throws NoSuchPortletPreferencesException, SystemException {
 		PortletPreferences portletPreferences = findByPrimaryKey(portletPreferencesId);
 
@@ -1147,9 +1160,9 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(5 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(4);
@@ -1163,8 +1176,9 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 
 			query.append(_FINDER_COLUMN_O_O_P_PLID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			String sql = query.toString();
@@ -1179,8 +1193,8 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 
 			qPos.add(plid);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					portletPreferences);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, portletPreferences);
 
 			PortletPreferences[] array = new PortletPreferencesImpl[3];
 
@@ -1347,46 +1361,6 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 		}
 	}
 
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.setLimit(start, end);
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
 	public List<PortletPreferences> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -1397,9 +1371,10 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 	}
 
 	public List<PortletPreferences> findAll(int start, int end,
-		OrderByComparator obc) throws SystemException {
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<PortletPreferences> list = (List<PortletPreferences>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
@@ -1414,13 +1389,14 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 				StringBundler query = null;
 				String sql = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(2 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 
 					query.append(_SQL_SELECT_PORTLETPREFERENCES);
 
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 
 					sql = query.toString();
 				}
@@ -1429,7 +1405,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 
 				Query q = session.createQuery(sql);
 
-				if (obc == null) {
+				if (orderByComparator == null) {
 					list = (List<PortletPreferences>)QueryUtil.list(q,
 							getDialect(), start, end, false);
 

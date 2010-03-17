@@ -18,7 +18,6 @@ import com.liferay.portal.NoSuchEmailAddressException;
 import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
-import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
@@ -451,11 +450,12 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 	}
 
 	public List<EmailAddress> findByCompanyId(long companyId, int start,
-		int end, OrderByComparator obc) throws SystemException {
+		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(companyId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<EmailAddress> list = (List<EmailAddress>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
@@ -469,9 +469,9 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(3);
@@ -481,8 +481,9 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 
 				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -521,9 +522,10 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 	}
 
 	public EmailAddress findByCompanyId_First(long companyId,
-		OrderByComparator obc)
+		OrderByComparator orderByComparator)
 		throws NoSuchEmailAddressException, SystemException {
-		List<EmailAddress> list = findByCompanyId(companyId, 0, 1, obc);
+		List<EmailAddress> list = findByCompanyId(companyId, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -543,12 +545,12 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 	}
 
 	public EmailAddress findByCompanyId_Last(long companyId,
-		OrderByComparator obc)
+		OrderByComparator orderByComparator)
 		throws NoSuchEmailAddressException, SystemException {
 		int count = countByCompanyId(companyId);
 
 		List<EmailAddress> list = findByCompanyId(companyId, count - 1, count,
-				obc);
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -568,7 +570,7 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 	}
 
 	public EmailAddress[] findByCompanyId_PrevAndNext(long emailAddressId,
-		long companyId, OrderByComparator obc)
+		long companyId, OrderByComparator orderByComparator)
 		throws NoSuchEmailAddressException, SystemException {
 		EmailAddress emailAddress = findByPrimaryKey(emailAddressId);
 
@@ -581,9 +583,9 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(3);
@@ -593,8 +595,9 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 
 			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -609,8 +612,8 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 
 			qPos.add(companyId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					emailAddress);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, emailAddress);
 
 			EmailAddress[] array = new EmailAddressImpl[3];
 
@@ -685,11 +688,12 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 	}
 
 	public List<EmailAddress> findByUserId(long userId, int start, int end,
-		OrderByComparator obc) throws SystemException {
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(userId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<EmailAddress> list = (List<EmailAddress>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_USERID,
@@ -703,9 +707,9 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(3);
@@ -715,8 +719,9 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 
 				query.append(_FINDER_COLUMN_USERID_USERID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -754,9 +759,10 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 		return list;
 	}
 
-	public EmailAddress findByUserId_First(long userId, OrderByComparator obc)
+	public EmailAddress findByUserId_First(long userId,
+		OrderByComparator orderByComparator)
 		throws NoSuchEmailAddressException, SystemException {
-		List<EmailAddress> list = findByUserId(userId, 0, 1, obc);
+		List<EmailAddress> list = findByUserId(userId, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -775,11 +781,13 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 		}
 	}
 
-	public EmailAddress findByUserId_Last(long userId, OrderByComparator obc)
+	public EmailAddress findByUserId_Last(long userId,
+		OrderByComparator orderByComparator)
 		throws NoSuchEmailAddressException, SystemException {
 		int count = countByUserId(userId);
 
-		List<EmailAddress> list = findByUserId(userId, count - 1, count, obc);
+		List<EmailAddress> list = findByUserId(userId, count - 1, count,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -799,7 +807,7 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 	}
 
 	public EmailAddress[] findByUserId_PrevAndNext(long emailAddressId,
-		long userId, OrderByComparator obc)
+		long userId, OrderByComparator orderByComparator)
 		throws NoSuchEmailAddressException, SystemException {
 		EmailAddress emailAddress = findByPrimaryKey(emailAddressId);
 
@@ -812,9 +820,9 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(3);
@@ -824,8 +832,9 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 
 			query.append(_FINDER_COLUMN_USERID_USERID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -840,8 +849,8 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 
 			qPos.add(userId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					emailAddress);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, emailAddress);
 
 			EmailAddress[] array = new EmailAddressImpl[3];
 
@@ -922,11 +931,13 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 	}
 
 	public List<EmailAddress> findByC_C(long companyId, long classNameId,
-		int start, int end, OrderByComparator obc) throws SystemException {
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Long(classNameId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<EmailAddress> list = (List<EmailAddress>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_C_C,
@@ -940,9 +951,9 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(4 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(4);
@@ -954,8 +965,9 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 
 				query.append(_FINDER_COLUMN_C_C_CLASSNAMEID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -996,9 +1008,10 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 	}
 
 	public EmailAddress findByC_C_First(long companyId, long classNameId,
-		OrderByComparator obc)
+		OrderByComparator orderByComparator)
 		throws NoSuchEmailAddressException, SystemException {
-		List<EmailAddress> list = findByC_C(companyId, classNameId, 0, 1, obc);
+		List<EmailAddress> list = findByC_C(companyId, classNameId, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -1021,12 +1034,12 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 	}
 
 	public EmailAddress findByC_C_Last(long companyId, long classNameId,
-		OrderByComparator obc)
+		OrderByComparator orderByComparator)
 		throws NoSuchEmailAddressException, SystemException {
 		int count = countByC_C(companyId, classNameId);
 
 		List<EmailAddress> list = findByC_C(companyId, classNameId, count - 1,
-				count, obc);
+				count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -1049,7 +1062,7 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 	}
 
 	public EmailAddress[] findByC_C_PrevAndNext(long emailAddressId,
-		long companyId, long classNameId, OrderByComparator obc)
+		long companyId, long classNameId, OrderByComparator orderByComparator)
 		throws NoSuchEmailAddressException, SystemException {
 		EmailAddress emailAddress = findByPrimaryKey(emailAddressId);
 
@@ -1062,9 +1075,9 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(4 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(4);
@@ -1076,8 +1089,9 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 
 			query.append(_FINDER_COLUMN_C_C_CLASSNAMEID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -1094,8 +1108,8 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 
 			qPos.add(classNameId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					emailAddress);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, emailAddress);
 
 			EmailAddress[] array = new EmailAddressImpl[3];
 
@@ -1180,12 +1194,13 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 	}
 
 	public List<EmailAddress> findByC_C_C(long companyId, long classNameId,
-		long classPK, int start, int end, OrderByComparator obc)
+		long classPK, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Long(classNameId), new Long(classPK),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<EmailAddress> list = (List<EmailAddress>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_C_C_C,
@@ -1199,9 +1214,9 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(5 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(5);
@@ -1215,8 +1230,9 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 
 				query.append(_FINDER_COLUMN_C_C_C_CLASSPK_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -1259,10 +1275,10 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 	}
 
 	public EmailAddress findByC_C_C_First(long companyId, long classNameId,
-		long classPK, OrderByComparator obc)
+		long classPK, OrderByComparator orderByComparator)
 		throws NoSuchEmailAddressException, SystemException {
 		List<EmailAddress> list = findByC_C_C(companyId, classNameId, classPK,
-				0, 1, obc);
+				0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(8);
@@ -1288,12 +1304,12 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 	}
 
 	public EmailAddress findByC_C_C_Last(long companyId, long classNameId,
-		long classPK, OrderByComparator obc)
+		long classPK, OrderByComparator orderByComparator)
 		throws NoSuchEmailAddressException, SystemException {
 		int count = countByC_C_C(companyId, classNameId, classPK);
 
 		List<EmailAddress> list = findByC_C_C(companyId, classNameId, classPK,
-				count - 1, count, obc);
+				count - 1, count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(8);
@@ -1319,7 +1335,8 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 	}
 
 	public EmailAddress[] findByC_C_C_PrevAndNext(long emailAddressId,
-		long companyId, long classNameId, long classPK, OrderByComparator obc)
+		long companyId, long classNameId, long classPK,
+		OrderByComparator orderByComparator)
 		throws NoSuchEmailAddressException, SystemException {
 		EmailAddress emailAddress = findByPrimaryKey(emailAddressId);
 
@@ -1332,9 +1349,9 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(5 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(5);
@@ -1348,8 +1365,9 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 
 			query.append(_FINDER_COLUMN_C_C_C_CLASSPK_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -1368,8 +1386,8 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 
 			qPos.add(classPK);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					emailAddress);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, emailAddress);
 
 			EmailAddress[] array = new EmailAddressImpl[3];
 
@@ -1461,13 +1479,14 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 	}
 
 	public List<EmailAddress> findByC_C_C_P(long companyId, long classNameId,
-		long classPK, boolean primary, int start, int end, OrderByComparator obc)
-		throws SystemException {
+		long classPK, boolean primary, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Long(classNameId), new Long(classPK),
 				Boolean.valueOf(primary),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<EmailAddress> list = (List<EmailAddress>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_C_C_C_P,
@@ -1481,9 +1500,9 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(6 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(6);
@@ -1499,8 +1518,9 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 
 				query.append(_FINDER_COLUMN_C_C_C_P_PRIMARY_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -1545,10 +1565,10 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 	}
 
 	public EmailAddress findByC_C_C_P_First(long companyId, long classNameId,
-		long classPK, boolean primary, OrderByComparator obc)
+		long classPK, boolean primary, OrderByComparator orderByComparator)
 		throws NoSuchEmailAddressException, SystemException {
 		List<EmailAddress> list = findByC_C_C_P(companyId, classNameId,
-				classPK, primary, 0, 1, obc);
+				classPK, primary, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(10);
@@ -1577,12 +1597,12 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 	}
 
 	public EmailAddress findByC_C_C_P_Last(long companyId, long classNameId,
-		long classPK, boolean primary, OrderByComparator obc)
+		long classPK, boolean primary, OrderByComparator orderByComparator)
 		throws NoSuchEmailAddressException, SystemException {
 		int count = countByC_C_C_P(companyId, classNameId, classPK, primary);
 
 		List<EmailAddress> list = findByC_C_C_P(companyId, classNameId,
-				classPK, primary, count - 1, count, obc);
+				classPK, primary, count - 1, count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(10);
@@ -1612,7 +1632,7 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 
 	public EmailAddress[] findByC_C_C_P_PrevAndNext(long emailAddressId,
 		long companyId, long classNameId, long classPK, boolean primary,
-		OrderByComparator obc)
+		OrderByComparator orderByComparator)
 		throws NoSuchEmailAddressException, SystemException {
 		EmailAddress emailAddress = findByPrimaryKey(emailAddressId);
 
@@ -1625,9 +1645,9 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(6 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(6);
@@ -1643,8 +1663,9 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 
 			query.append(_FINDER_COLUMN_C_C_C_P_PRIMARY_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -1665,8 +1686,8 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 
 			qPos.add(primary);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					emailAddress);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, emailAddress);
 
 			EmailAddress[] array = new EmailAddressImpl[3];
 
@@ -1675,46 +1696,6 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 			array[2] = (EmailAddress)objArray[2];
 
 			return array;
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.setLimit(start, end);
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
 		}
 		catch (Exception e) {
 			throw processException(e);
@@ -1733,10 +1714,11 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 		return findAll(start, end, null);
 	}
 
-	public List<EmailAddress> findAll(int start, int end, OrderByComparator obc)
-		throws SystemException {
+	public List<EmailAddress> findAll(int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<EmailAddress> list = (List<EmailAddress>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
@@ -1751,13 +1733,14 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 				StringBundler query = null;
 				String sql = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(2 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 
 					query.append(_SQL_SELECT_EMAILADDRESS);
 
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 
 					sql = query.toString();
 				}
@@ -1768,7 +1751,7 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 
 				Query q = session.createQuery(sql);
 
-				if (obc == null) {
+				if (orderByComparator == null) {
 					list = (List<EmailAddress>)QueryUtil.list(q, getDialect(),
 							start, end, false);
 

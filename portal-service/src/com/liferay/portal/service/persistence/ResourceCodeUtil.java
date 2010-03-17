@@ -126,32 +126,38 @@ public class ResourceCodeUtil {
 
 	public static java.util.List<com.liferay.portal.model.ResourceCode> findByCompanyId(
 		long companyId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByCompanyId(companyId, start, end, obc);
+		return getPersistence()
+				   .findByCompanyId(companyId, start, end, orderByComparator);
 	}
 
 	public static com.liferay.portal.model.ResourceCode findByCompanyId_First(
-		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long companyId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchResourceCodeException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByCompanyId_First(companyId, obc);
+		return getPersistence()
+				   .findByCompanyId_First(companyId, orderByComparator);
 	}
 
 	public static com.liferay.portal.model.ResourceCode findByCompanyId_Last(
-		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long companyId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchResourceCodeException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByCompanyId_Last(companyId, obc);
+		return getPersistence()
+				   .findByCompanyId_Last(companyId, orderByComparator);
 	}
 
 	public static com.liferay.portal.model.ResourceCode[] findByCompanyId_PrevAndNext(
 		long codeId, long companyId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchResourceCodeException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .findByCompanyId_PrevAndNext(codeId, companyId, obc);
+				   .findByCompanyId_PrevAndNext(codeId, companyId,
+			orderByComparator);
 	}
 
 	public static java.util.List<com.liferay.portal.model.ResourceCode> findByName(
@@ -168,33 +174,34 @@ public class ResourceCodeUtil {
 
 	public static java.util.List<com.liferay.portal.model.ResourceCode> findByName(
 		java.lang.String name, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByName(name, start, end, obc);
+		return getPersistence().findByName(name, start, end, orderByComparator);
 	}
 
 	public static com.liferay.portal.model.ResourceCode findByName_First(
 		java.lang.String name,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchResourceCodeException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByName_First(name, obc);
+		return getPersistence().findByName_First(name, orderByComparator);
 	}
 
 	public static com.liferay.portal.model.ResourceCode findByName_Last(
 		java.lang.String name,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchResourceCodeException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByName_Last(name, obc);
+		return getPersistence().findByName_Last(name, orderByComparator);
 	}
 
 	public static com.liferay.portal.model.ResourceCode[] findByName_PrevAndNext(
 		long codeId, java.lang.String name,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchResourceCodeException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByName_PrevAndNext(codeId, name, obc);
+		return getPersistence()
+				   .findByName_PrevAndNext(codeId, name, orderByComparator);
 	}
 
 	public static com.liferay.portal.model.ResourceCode findByC_N_S(
@@ -230,9 +237,10 @@ public class ResourceCodeUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.ResourceCode> findAll(
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findAll(start, end, obc);
+		return getPersistence().findAll(start, end, orderByComparator);
 	}
 
 	public static void removeByCompanyId(long companyId)
