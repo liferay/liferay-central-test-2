@@ -123,6 +123,14 @@ public class WorkflowDefinitionLinkLocalServiceImpl
 		}
 	}
 
+	public int searchCount(
+			String workflowDefinitionName, int workflowDefinitionVersion)
+		throws SystemException{
+
+		return workflowDefinitionLinkPersistence.countByW_W(
+			workflowDefinitionName, workflowDefinitionVersion);
+	}
+
 	public WorkflowDefinitionLink updateWorkflowDefinitionLink(
 			long userId, long companyId, long groupId, String className,
 			String workflowDefinitionName, int workflowDefinitionVersion)

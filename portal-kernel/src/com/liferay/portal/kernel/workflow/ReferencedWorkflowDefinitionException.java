@@ -1,4 +1,3 @@
-<%
 /**
  * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
  *
@@ -12,11 +11,31 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-%>
 
-<%@ include file="/html/portlet/workflow_admin/init.jsp" %>
+package com.liferay.portal.kernel.workflow;
 
-<liferay-ui:tabs names="error" backURL="javascript:history.go(-1);" />
+/**
+ * <a href="WorkflowDefinitionFileException.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * @author Marcellus Tavares
+ */
+public class ReferencedWorkflowDefinitionException extends WorkflowException {
 
-<liferay-ui:error exception="<%= ReferencedWorkflowDefinitionException.class %>" message="you-cannot-deactivate-this-workflow-definition-version" />
-<liferay-ui:error exception="<%= PrincipalException.class %>" message="you-do-not-have-the-required-permissions" />
+	public ReferencedWorkflowDefinitionException() {
+		super();
+	}
+
+	public ReferencedWorkflowDefinitionException(String msg) {
+		super(msg);
+	}
+
+	public ReferencedWorkflowDefinitionException(String msg, Throwable cause) {
+		super(msg, cause);
+	}
+
+	public ReferencedWorkflowDefinitionException(Throwable cause) {
+		super(cause);
+	}
+
+}

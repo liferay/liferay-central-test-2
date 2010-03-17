@@ -1933,6 +1933,10 @@
 			<finder-column name="companyId" />
 			<finder-column name="classNameId" />
 		</finder>
+		<finder name="W_W" return-type="Collection">
+			<finder-column name="workflowDefinitionName" />
+			<finder-column name="workflowDefinitionVersion" />
+		</finder>
 	</entity>
 	<entity name="WorkflowInstanceLink" local-service="true" remote-service="false">
 

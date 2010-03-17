@@ -18,10 +18,12 @@ import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.workflow.ReferencedWorkflowDefinitionException;
 import com.liferay.portal.kernel.workflow.WorkflowDefinition;
 import com.liferay.portal.kernel.workflow.WorkflowDefinitionFileException;
 import com.liferay.portal.kernel.workflow.WorkflowDefinitionManagerUtil;
 import com.liferay.portal.kernel.workflow.WorkflowException;
+import com.liferay.portal.service.WorkflowDefinitionLinkLocalServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
@@ -60,7 +62,10 @@ public class EditWorkflowDefinitionAction extends PortletAction {
 			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
 				updateWorkflowDefinition(actionRequest);
 			}
-			else if (cmd.equals(Constants.DELETE)) {
+			else if (cmd.equals(Constants.DEACTIVATE) ||
+					 cmd.equals(Constants.DELETE) ||
+					 cmd.equals(Constants.RESTORE)) {
+
 				deleteWorkflowDefinition(actionRequest);
 			}
 
@@ -109,15 +114,38 @@ public class EditWorkflowDefinitionAction extends PortletAction {
 	protected void deleteWorkflowDefinition(ActionRequest actionRequest)
 		throws Exception {
 
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
+
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		String name = ParamUtil.getString(actionRequest, "name");
 		int version = ParamUtil.getInteger(actionRequest, "version");
 
-		WorkflowDefinitionManagerUtil.undeployWorkflowDefinition(
-			themeDisplay.getCompanyId(), themeDisplay.getUserId(),
-			name, version);
+		if (cmd.equals(Constants.DEACTIVATE) ||
+			cmd.equals(Constants.RESTORE)) {
+
+			boolean active = !cmd.equals(Constants.DEACTIVATE);
+
+			if (!active) {
+				int references = 
+					WorkflowDefinitionLinkLocalServiceUtil.searchCount(
+						name, version);
+
+				if (references >= 1) {
+					throw new ReferencedWorkflowDefinitionException();
+				}
+			}
+
+			WorkflowDefinitionManagerUtil.updateActive(
+				themeDisplay.getCompanyId(), themeDisplay.getUserId(), name,
+				version, active);
+		}
+		else {
+			WorkflowDefinitionManagerUtil.undeployWorkflowDefinition(
+				themeDisplay.getCompanyId(), themeDisplay.getUserId(), name,
+				version);
+		}
 	}
 
 	protected void updateWorkflowDefinition(ActionRequest actionRequest)
