@@ -23,8 +23,8 @@
 	<xs:group name="nodes">
 		<xs:choice>
 			<xs:element ref="state" />
-			<xs:element ref="fork" />
 			<xs:element ref="task" />
+			<xs:element ref="fork" />
 			<xs:element ref="join" />
 		</xs:choice>
 	</xs:group>
@@ -81,8 +81,15 @@
 		<xs:complexType>
 			<xs:simpleContent>
 				<xs:extension base="xs:string">
-					<xs:attribute name="execution-order" type="xs:integer" use="optional" default="0" />
 					<xs:attribute name="name" type="xs:string" use="required" />
+					<xs:attribute name="type" use="required">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:enumeration value="onEntry" />
+								<xs:enumeration value="onExit" />
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
 					<xs:attribute name="language" use="required">
 						<xs:simpleType>
 							<xs:restriction base="xs:string">
@@ -93,14 +100,7 @@
 							</xs:restriction>
 						</xs:simpleType>
 					</xs:attribute>
-					<xs:attribute name="type" use="required">
-						<xs:simpleType>
-							<xs:restriction base="xs:string">
-								<xs:enumeration value="onEntry" />
-								<xs:enumeration value="onExit" />
-							</xs:restriction>
-						</xs:simpleType>
-					</xs:attribute>
+					<xs:attribute name="execution-order" type="xs:integer" use="optional" default="0" />
 				</xs:extension>
 			</xs:simpleContent>
 		</xs:complexType>
@@ -135,7 +135,7 @@
 		<xs:complexType>
 			<xs:simpleContent>
 				<xs:extension base="xs:string">
-					<xs:attribute name="roleId" type="xs:long" use="optional" />
+					<xs:attribute name="role-id" type="xs:long" use="optional" />
 					<xs:attribute name="name" type="xs:string" use="optional" />
 					<xs:attribute name="default" type="xs:string" use="optional" default="true" />
 				</xs:extension>
@@ -146,9 +146,9 @@
 		<xs:complexType>
 			<xs:simpleContent>
 				<xs:extension base="xs:string">
-					<xs:attribute name="email" type="xs:string" use="optional" />
-					<xs:attribute name="userId" type="xs:long" use="optional" />
-					<xs:attribute name="screenName" type="xs:string" use="required" />
+					<xs:attribute name="user-id" type="xs:long" use="optional" />
+					<xs:attribute name="screen-name" type="xs:string" use="required" />
+					<xs:attribute name="email-address" type="xs:string" use="optional" />
 					<xs:attribute name="default" type="xs:string" use="optional" default="true" />
 				</xs:extension>
 			</xs:simpleContent>
