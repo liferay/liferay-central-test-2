@@ -35,4 +35,5 @@ public @interface BeanReference {
 	public String name() default StringPool.BLANK;
 
 	public Class referencedBeanType() default Object.class;
+
 }
