@@ -27,7 +27,6 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletConfigImpl;
 
@@ -201,10 +200,6 @@ public class PortletAction extends Action {
 
 	protected MessageResources getResources(PortletRequest portletRequest) {
 		return getResources();
-	}
-
-	protected boolean isCheckAuthTokenOnProcessAction() {
-		return PropsValues.AUTH_TOKEN_DEFAULT_CHECK_PORTLET_ACTION;
 	}
 
 	protected boolean isCheckMethodOnProcessAction() {

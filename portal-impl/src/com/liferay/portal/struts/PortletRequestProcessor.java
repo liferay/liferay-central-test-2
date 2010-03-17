@@ -22,7 +22,6 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
-import com.liferay.portal.security.auth.AuthTokenUtil;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
@@ -166,10 +165,6 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 
 					throw new PrincipalException(currentURL);
 				}
-			}
-
-			if (action.isCheckAuthTokenOnProcessAction()) {
-				AuthTokenUtil.check(request);
 			}
 
 			action.processAction(

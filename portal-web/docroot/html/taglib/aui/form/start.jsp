@@ -25,4 +25,3 @@ String name = GetterUtil.getString((String)request.getAttribute("aui:form:name")
 %>
 
 <form action="<%= action %>" class="aui-form <%= cssClass %> <%= inlineLabels ? "inline-labels" : StringPool.BLANK %>" id="<%= namespace + name %>" name="<%= namespace + name %>" <%= _buildDynamicAttributes(dynamicAttributes) %>>
-	<aui:input name="<%= Constants.AUTHENTICATION_TOKEN %>" type="hidden" value="<%= AuthTokenUtil.getToken(request) %>" />

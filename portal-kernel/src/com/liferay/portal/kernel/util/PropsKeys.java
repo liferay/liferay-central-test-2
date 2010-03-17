@@ -121,8 +121,6 @@ public interface PropsKeys {
 
 	public static final String AUTH_PUBLIC_PATHS = "auth.public.paths";
 
-	public static final String AUTH_TOKEN_DEFAULT_CHECK_PORTLET_ACTION = "auth.token.default.check.portlet.action";
-
 	public static final String AUTH_TOKEN_IMPL = "auth.token.impl";
 
 	public static final String AUTO_DEPLOY_BLACKLIST_THRESHOLD = "auto.deploy.blacklist.threshold";
