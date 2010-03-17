@@ -861,7 +861,7 @@ public interface PropsKeys {
 
 	public static final String LDAP_GROUPS_DN = "ldap.groups.dn";
 
-	public static final String LDAP_IMPORT_CREATE_ROLE_PER_GROUP_ENABLED = "ldap.import.create.role.per.group.enabled";
+	public static final String LDAP_IMPORT_CREATE_ROLE_PER_GROUP = "ldap.import.create.role.per.group";
 
 	public static final String LDAP_IMPORT_ENABLED = "ldap.import.enabled";
 

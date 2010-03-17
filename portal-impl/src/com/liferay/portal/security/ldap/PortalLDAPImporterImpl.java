@@ -404,7 +404,7 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 		long companyId, LDAPGroup ldapGroup, UserGroup userGroup)
 		throws Exception {
 
-		if (!PropsValues.LDAP_IMPORT_CREATE_ROLE_PER_GROUP_ENABLED) {
+		if (!PropsValues.LDAP_IMPORT_CREATE_ROLE_PER_GROUP) {
 			return;
 		}
 
