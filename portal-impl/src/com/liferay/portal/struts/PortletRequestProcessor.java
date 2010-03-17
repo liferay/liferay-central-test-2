@@ -433,17 +433,7 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 			ActionMapping mapping, boolean action)
 		throws IOException, ServletException {
 
-		User user = null;
-
-		try {
-			user = PortalUtil.getUser(request);
-		}
-		catch (Exception e) {
-		}
-
-		if (user == null) {
-			return true;
-		}
+		long companyId = PortalUtil.getCompanyId(request);
 
 		String path = mapping.getPath();
 
@@ -453,7 +443,7 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 					JavaConstants.JAVAX_PORTLET_CONFIG);
 
 			Portlet portlet = PortletLocalServiceUtil.getPortletById(
-				user.getCompanyId(), portletConfig.getPortletId());
+				companyId, portletConfig.getPortletId());
 
 			if (portlet == null) {
 				return false;
