@@ -198,8 +198,7 @@ public class CASAutoLogin implements AutoLogin {
 						ldapServerId, companyId, binding));
 
 				return PortalLDAPImporterUtil.importLDAPUser(
-					ldapServerId, companyId, ctx, attrs, StringPool.BLANK,
-					true);
+					ldapServerId, companyId, ctx, attrs, StringPool.BLANK);
 			}
 			else {
 				return null;

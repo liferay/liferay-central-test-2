@@ -44,13 +44,11 @@ public class PortalLDAPImporterUtil {
 
 	public static User importLDAPUser(
 			long ldapServerId, long companyId, LdapContext ldapContext,
-			Attributes attributes, String password,
-			boolean importGroupMembership)
+			Attributes attributes, String password)
 		throws Exception {
 
 		return _portalLDAPImporter.importLDAPUser(
-			ldapServerId, companyId, ldapContext, attributes, password,
-			importGroupMembership);
+			ldapServerId, companyId, ldapContext, attributes, password);
 	}
 
 	public void setPortalLDAPImporter(PortalLDAPImporter portalLDAPImporter) {

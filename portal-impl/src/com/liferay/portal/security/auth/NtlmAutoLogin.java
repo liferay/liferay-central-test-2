@@ -104,7 +104,7 @@ public class NtlmAutoLogin implements AutoLogin {
 
 		User user = PortalLDAPImporterUtil.importLDAPUser(
 			ldapServerId, companyId, ctx, result.getAttributes(),
-			StringPool.BLANK, false);
+			StringPool.BLANK);
 
 		ctx.close();
 

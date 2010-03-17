@@ -334,8 +334,18 @@ public class PortalLDAPUtil {
 
 		Properties userMappings = LDAPSettingsUtil.getUserMappings(
 			ldapServerId, companyId);
+		Properties userExpandoMappings =
+			LDAPSettingsUtil.getUserExpandoMappings(
+				ldapServerId, companyId);
+
+		PropertiesUtil.merge(userMappings, userExpandoMappings);
+
 		Properties contactMappings = LDAPSettingsUtil.getContactMappings(
 			ldapServerId, companyId);
+		Properties contactExpandoMappings =
+			LDAPSettingsUtil.getContactExpandoMappings(ldapServerId, companyId);
+
+		PropertiesUtil.merge(contactMappings, contactExpandoMappings);
 
 		PropertiesUtil.merge(userMappings, contactMappings);
 

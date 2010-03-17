@@ -35,8 +35,7 @@ public interface PortalLDAPImporter {
 
 	public User importLDAPUser(
 			long ldapServerId, long companyId, LdapContext ldapContext,
-			Attributes attributes, String password,
-			boolean importGroupMembership)
+			Attributes attributes, String password)
 		throws Exception;
 
 }

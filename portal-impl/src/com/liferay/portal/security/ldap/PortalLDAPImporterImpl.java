@@ -19,7 +19,6 @@ import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.NoSuchUserGroupException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.log.LogUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.DateFormatFactoryUtil;
@@ -45,6 +44,8 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.model.ExpandoTableConstants;
+import com.liferay.portlet.expando.service.ExpandoValueLocalServiceUtil;
 import com.liferay.portlet.expando.util.ExpandoConverterUtil;
 import com.liferay.util.ldap.LDAPUtil;
 
@@ -114,22 +115,44 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 			String importMethod = PrefsPropsUtil.getString(
 				companyId, PropsKeys.LDAP_IMPORT_METHOD);
 
+			Properties userMappings = LDAPSettingsUtil.getUserMappings(
+				ldapServerId, companyId);
+
+			Properties groupMappings = LDAPSettingsUtil.getGroupMappings(
+				ldapServerId, companyId);
+
+			Properties userExpandoMappings =
+				LDAPSettingsUtil.getUserExpandoMappings(
+					ldapServerId, companyId);
+
+			Properties contactMappings = LDAPSettingsUtil.getContactMappings(
+				ldapServerId, companyId);
+
+			Properties contactExpandoMappings =
+				LDAPSettingsUtil.getContactExpandoMappings(
+					ldapServerId, companyId);
+			
 			if (importMethod.equals(_IMPORT_BY_USER)) {
 				List<SearchResult> searchResults = PortalLDAPUtil.getUsers(
 					ldapServerId, companyId, ldapContext, 0);
 
 				// Loop through all LDAP users
-
 				for (SearchResult searchResult : searchResults) {
-					Attributes attributes = PortalLDAPUtil.getUserAttributes(
-						ldapServerId, companyId, ldapContext,
-						PortalLDAPUtil.getNameInNamespace(
-							ldapServerId, companyId, searchResult));
-
 					try {
-						importLDAPUser(
-							ldapServerId, companyId, ldapContext, attributes,
-							StringPool.BLANK, true);
+						Attributes userAttributes =
+							PortalLDAPUtil.getUserAttributes(
+								ldapServerId, companyId, ldapContext,
+								PortalLDAPUtil.getNameInNamespace(
+									ldapServerId, companyId, searchResult));
+
+						User user = addUserFromLdap(
+							companyId, userMappings, userExpandoMappings,
+							contactMappings, contactExpandoMappings,
+							userAttributes, StringPool.BLANK);
+
+						importGroupsAndMembershipFromLDAPUser(
+							ldapServerId, companyId, ldapContext,
+							userAttributes, user, userMappings, groupMappings);
 					}
 					catch (Exception e) {
 						_log.error("Unable to import user " + searchResult, e);
@@ -141,16 +164,42 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 					ldapServerId, companyId, ldapContext, 0);
 
 				// Loop through all LDAP groups
-
 				for (SearchResult searchResult : searchResults) {
-					Attributes attributes = PortalLDAPUtil.getGroupAttributes(
-						ldapServerId, companyId, ldapContext,
-						PortalLDAPUtil.getNameInNamespace(
-							ldapServerId, companyId, searchResult),
-						true);
+					try {
+						Attributes attributes =
+							PortalLDAPUtil.getGroupAttributes(
+								ldapServerId, companyId, ldapContext,
+								PortalLDAPUtil.getNameInNamespace(
+									ldapServerId, companyId, searchResult),
+								true);
 
-					importLDAPGroup(
-						ldapServerId, companyId, ldapContext, attributes, true);
+						UserGroup userGroup = addUserGroupFromLdap(
+							companyId, attributes, groupMappings);
+
+						Attribute usersAttribute = getUsersInUserGroup(
+							ldapServerId, companyId, ldapContext,
+							attributes, userGroup, groupMappings);
+
+						if (usersAttribute == null) {
+							if (_log.isInfoEnabled()) {
+								_log.info(
+									"No users found in : " +
+									userGroup.getName());
+							}
+							continue;
+						}
+
+						importUsersAndMembershipFromLDAPGroup(
+							ldapServerId, companyId, ldapContext,
+							userMappings, userExpandoMappings,
+							contactMappings, contactExpandoMappings, 
+							userGroup.getUserGroupId(),
+							usersAttribute);
+					}
+					catch (Exception e) {
+						_log.error(
+							"Unable to import group: " + searchResult, e);
+					}
 				}
 			}
 		}
@@ -166,20 +215,35 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 
 	public User importLDAPUser(
 			long ldapServerId, long companyId, LdapContext ldapContext,
-			Attributes attributes, String password,
-			boolean importGroupMembership)
+			Attributes attributes, String password)
 		throws Exception {
 
-		LDAPUserTransactionThreadLocal.setOriginatesFromLDAP(true);
+		Properties userMappings = LDAPSettingsUtil.getUserMappings(
+			ldapServerId, companyId);
 
-		try {
-			return doImportLDAPUser(
-				ldapServerId, companyId, ldapContext, attributes, password,
-				importGroupMembership);
-		}
-		finally {
-			LDAPUserTransactionThreadLocal.setOriginatesFromLDAP(false);
-		}
+		Properties userExpandoMappings =
+			LDAPSettingsUtil.getUserExpandoMappings(
+				ldapServerId, companyId);
+
+		Properties contactMappings = LDAPSettingsUtil.getContactMappings(
+			ldapServerId, companyId);
+
+		Properties contactExpandoMappings =
+			LDAPSettingsUtil.getContactExpandoMappings(ldapServerId, companyId);
+
+		Properties groupMappings = LDAPSettingsUtil.getGroupMappings(
+			ldapServerId, companyId);
+
+		
+		User user = addUserFromLdap(
+			companyId, userMappings, userExpandoMappings,
+			contactMappings, contactExpandoMappings, attributes, password);
+
+		importGroupsAndMembershipFromLDAPUser(
+			ldapServerId, companyId, ldapContext, attributes,
+			user, userMappings, groupMappings);
+
+		return user;
 	}
 
 	public void setLDAPToPortalConverter(
@@ -188,69 +252,122 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 		_ldapToPortalConverter = ldapToPortalConverter;
 	}
 
-	protected User createLiferayUser(
-		long companyId, LDAPUser ldapUser, String password) {
+	protected User addUserFromLdap(
+			long companyId, Properties userMappings,
+			Properties userExpandoMappings, Properties contactMappings,
+			Properties contactExpandoMappings,
+			Attributes attributes, String password)
+		throws Exception {
+
+		LDAPUserTransactionThreadLocal.setOriginatesFromLDAP(true);
 
 		try {
-			if (_log.isDebugEnabled()) {
-				_log.debug(
-					"Adding user to portal " + ldapUser.getEmailAddress());
-			}
-
-			Calendar birthdayCal = CalendarFactoryUtil.getCalendar();
-
-			birthdayCal.setTime(ldapUser.getBirthday());
-
-			int birthdayMonth = birthdayCal.get(Calendar.MONTH);
-			int birthdayDay = birthdayCal.get(Calendar.DAY_OF_MONTH);
-			int birthdayYear = birthdayCal.get(Calendar.YEAR);
-
-			return UserLocalServiceUtil.addUser(
-				ldapUser.getCreatorUserId(), companyId,
-				ldapUser.isAutoPassword(), password, password,
-				ldapUser.isAutoScreenName(), ldapUser.getScreenName(),
-				ldapUser.getEmailAddress(), ldapUser.getOpenId(),
-				ldapUser.getLocale(), ldapUser.getFirstName(),
-				ldapUser.getMiddleName(), ldapUser.getLastName(),
-				ldapUser.getPrefixId(), ldapUser.getSuffixId(),
-				ldapUser.isMale(), birthdayMonth, birthdayDay, birthdayYear,
-				ldapUser.getJobTitle(), ldapUser.getGroupIds(),
-				ldapUser.getOrganizationIds(), ldapUser.getRoleIds(),
-				ldapUser.getUserGroupIds(), ldapUser.isSendEmail(),
-				ldapUser.getServiceContext());
-
+			return doAddLdapUser(
+				companyId, userMappings, userExpandoMappings,
+				contactMappings, contactExpandoMappings, attributes, password);
 		}
-		catch (Exception e) {
-			_log.error(
-				"Unable to add user with screen name " +
-					ldapUser.getScreenName() + " and email address " +
-						ldapUser.getEmailAddress(),
-				e);
-
-			return null;
+		finally {
+			LDAPUserTransactionThreadLocal.setOriginatesFromLDAP(false);
 		}
 	}
 
-	protected User doImportLDAPUser(
-			long ldapServerId, long companyId, LdapContext ldapContext,
-			Attributes attributes, String password,
-			boolean importGroupMembership)
+	protected UserGroup addUserGroupFromLdap(
+		long companyId, Attributes attributes, Properties groupMappings)
+		throws Exception {
+
+		AttributesTransformer attributesTransformer =
+			AttributesTransformerFactory.getInstance();
+
+		attributes = attributesTransformer.transformGroup(attributes);
+
+		LDAPGroup ldapGroup = _ldapToPortalConverter.importLDAPGroup(
+			companyId, attributes, groupMappings);
+
+		UserGroup userGroup = null;
+
+		try {
+			userGroup = UserGroupLocalServiceUtil.getUserGroup(
+				companyId, ldapGroup.getGroupName());
+
+			UserGroupLocalServiceUtil.updateUserGroup(
+				companyId, userGroup.getUserGroupId(), ldapGroup.getGroupName(),
+				ldapGroup.getDescription());
+		}
+		catch (NoSuchUserGroupException nsuge) {
+			if (_log.isDebugEnabled()) {
+				_log.debug(
+					"Adding user group to portal " + ldapGroup.getGroupName());
+			}
+
+			long defaultUserId = UserLocalServiceUtil.getDefaultUserId(
+				companyId);
+
+			try {
+				userGroup = UserGroupLocalServiceUtil.addUserGroup(
+					defaultUserId, companyId, ldapGroup.getGroupName(),
+					ldapGroup.getDescription());
+			}
+			catch (Exception e) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						"Unable to create user group " +
+						ldapGroup.getGroupName());
+				}
+
+				if (_log.isDebugEnabled()) {
+					_log.debug(e, e);
+				}
+			}
+		}
+
+		doImportRoleFromLDAPGroup(companyId, ldapGroup, userGroup);
+
+		return userGroup;
+	}
+
+	protected User createLiferayUser(
+			long companyId, LDAPUser ldapUser, String password)
+		throws Exception {
+
+		if (_log.isDebugEnabled()) {
+			_log.debug(
+				"Adding user to portal " + ldapUser.getEmailAddress());
+		}
+
+		Calendar birthdayCal = CalendarFactoryUtil.getCalendar();
+
+		birthdayCal.setTime(ldapUser.getBirthday());
+
+		int birthdayMonth = birthdayCal.get(Calendar.MONTH);
+		int birthdayDay = birthdayCal.get(Calendar.DAY_OF_MONTH);
+		int birthdayYear = birthdayCal.get(Calendar.YEAR);
+
+		return UserLocalServiceUtil.addUser(
+			ldapUser.getCreatorUserId(), companyId,
+			ldapUser.isAutoPassword(), password, password,
+			ldapUser.isAutoScreenName(), ldapUser.getScreenName(),
+			ldapUser.getEmailAddress(), ldapUser.getOpenId(),
+			ldapUser.getLocale(), ldapUser.getFirstName(),
+			ldapUser.getMiddleName(), ldapUser.getLastName(),
+			ldapUser.getPrefixId(), ldapUser.getSuffixId(),
+			ldapUser.isMale(), birthdayMonth, birthdayDay, birthdayYear,
+			ldapUser.getJobTitle(), ldapUser.getGroupIds(),
+			ldapUser.getOrganizationIds(), ldapUser.getRoleIds(),
+			ldapUser.getUserGroupIds(), ldapUser.isSendEmail(),
+			ldapUser.getServiceContext());
+	}
+
+	protected User doAddLdapUser(
+			long companyId, Properties userMappings,
+			Properties userExpandoMappings, Properties contactMappings,
+			Properties contactExpandoMappings,
+			Attributes attributes, String password)
 		throws Exception {
 
 		AttributesTransformer attributesTransformer =
 			AttributesTransformerFactory.getInstance();
 
 		attributes = attributesTransformer.transformUser(attributes);
-
-		Properties userMappings = LDAPSettingsUtil.getUserMappings(
-			ldapServerId, companyId);
-		Properties userExpandoMappings =
-			LDAPSettingsUtil.getUserExpandoMappings(
-				ldapServerId, companyId);
-		Properties contactMappings = LDAPSettingsUtil.getContactMappings(
-			ldapServerId, companyId);
-		Properties contactExpandoMappings =
-			LDAPSettingsUtil.getContactExpandoMappings(ldapServerId, companyId);
 
 		LDAPUser ldapUser = _ldapToPortalConverter.importLDAPUser(
 			companyId, attributes, userMappings, userExpandoMappings,
@@ -279,14 +396,6 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 		}
 
 		updateExpandoAttributes(user, ldapUser);
-
-		if (!importGroupMembership || (user == null)) {
-			return user;
-		}
-
-		importGroupsAndMembershipFromLDAPUser(
-			ldapServerId, companyId, ldapContext, attributes, ldapUser,
-			user, userMappings);
 
 		return user;
 	}
@@ -355,8 +464,8 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 
 	protected void importGroupsAndMembershipFromLDAPUser(
 			long ldapServerId, long companyId, LdapContext ldapContext,
-			Attributes attributes, LDAPUser ldapUser, User user,
-			Properties userMappings)
+			Attributes attributes, User user,
+			Properties userMappings, Properties groupMappings)
 		throws Exception {
 
 		String userMappingsGroup = userMappings.getProperty("group");
@@ -373,16 +482,13 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 
 		attribute.clear();
 
-		Properties groupMappings = LDAPSettingsUtil.getGroupMappings(
-			ldapServerId, companyId);
-
 		String postfix = LDAPSettingsUtil.getPropertyPostfix(ldapServerId);
 
 		String baseDN = PrefsPropsUtil.getString(
 			companyId, PropsKeys.LDAP_BASE_DN + postfix);
 
 		Binding binding = PortalLDAPUtil.getUser(
-			ldapServerId, companyId, ldapUser.getScreenName());
+			ldapServerId, companyId, user.getScreenName());
 
 		String fullUserDN = PortalLDAPUtil.getNameInNamespace(
 			ldapServerId, companyId, binding);
@@ -431,8 +537,8 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 				continue;
 			}
 
-			UserGroup userGroup = importLDAPGroup(
-				ldapServerId, companyId, ldapContext, groupAttributes, false);
+			UserGroup userGroup = addUserGroupFromLdap(
+				companyId, groupAttributes, groupMappings);
 
 			if (userGroup != null) {
 				if (_log.isDebugEnabled()) {
@@ -451,71 +557,16 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 				newUserGroupIds.toArray(new Long[newUserGroupIds.size()])));
 	}
 
-	protected UserGroup importLDAPGroup(
+	protected Attribute getUsersInUserGroup(
 			long ldapServerId, long companyId, LdapContext ldapContext,
-			Attributes attributes, boolean importGroupMembership)
+			Attributes attributes, UserGroup userGroup,
+			Properties groupMappings) 
 		throws Exception {
-
-		AttributesTransformer attributesTransformer =
-			AttributesTransformerFactory.getInstance();
-
-		attributes = attributesTransformer.transformGroup(attributes);
-
-		Properties groupMappings = LDAPSettingsUtil.getGroupMappings(
-			ldapServerId, companyId);
-
-		LogUtil.debug(_log, groupMappings);
-
-		LDAPGroup ldapGroup = _ldapToPortalConverter.importLDAPGroup(
-			companyId, attributes, groupMappings);
-
-		UserGroup userGroup = null;
-
-		try {
-			userGroup = UserGroupLocalServiceUtil.getUserGroup(
-				companyId, ldapGroup.getGroupName());
-
-			UserGroupLocalServiceUtil.updateUserGroup(
-				companyId, userGroup.getUserGroupId(), ldapGroup.getGroupName(),
-				ldapGroup.getDescription());
-		}
-		catch (NoSuchUserGroupException nsuge) {
-			if (_log.isDebugEnabled()) {
-				_log.debug(
-					"Adding user group to portal " + ldapGroup.getGroupName());
-			}
-
-			long defaultUserId = UserLocalServiceUtil.getDefaultUserId(
-				companyId);
-
-			try {
-				userGroup = UserGroupLocalServiceUtil.addUserGroup(
-					defaultUserId, companyId, ldapGroup.getGroupName(),
-					ldapGroup.getDescription());
-			}
-			catch (Exception e) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(
-						"Unable to create user group " +
-							ldapGroup.getGroupName());
-				}
-
-				if (_log.isDebugEnabled()) {
-					_log.debug(e, e);
-				}
-			}
-		}
-
-		doImportRoleFromLDAPGroup(companyId, ldapGroup, userGroup);
-		
-		if (!importGroupMembership || (userGroup == null)) {
-			return userGroup;
-		}
 
 		Attribute attribute = attributes.get(groupMappings.getProperty("user"));
 
 		if (attribute == null) {
-			return userGroup;
+			return null;
 		}
 
 		String postfix = LDAPSettingsUtil.getPropertyPostfix(ldapServerId);
@@ -533,23 +584,17 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 		sb.append("(");
 		sb.append(groupMappings.getProperty("groupName"));
 		sb.append("=");
-		sb.append(
-			LDAPUtil.getAttributeValue(
-				attributes, groupMappings.getProperty("groupName")));
+		sb.append(userGroup.getName());
 		sb.append("))");
 
-		attribute = PortalLDAPUtil.getMultivaluedAttribute(
+		return PortalLDAPUtil.getMultivaluedAttribute(
 			companyId, ldapContext, baseDN, sb.toString(), attribute);
-
-		importUsersAndMembershipFromLDAPGroup(
-			ldapServerId, companyId, ldapContext, userGroup.getUserGroupId(),
-			attribute);
-
-		return userGroup;
 	}
 
 	protected void importUsersAndMembershipFromLDAPGroup(
 			long ldapServerId, long companyId, LdapContext ldapContext,
+			Properties userMappings, Properties userExpandoMappings,
+			Properties contactMappings, Properties contactExpandoMappings,
 			long userGroupId, Attribute attribute)
 		throws Exception {
 
@@ -572,9 +617,10 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 			}
 
 			try {
-				User user = importLDAPUser(
-					ldapServerId, companyId, ldapContext, userAttributes,
-					StringPool.BLANK, false);
+				User user = addUserFromLdap(
+					companyId, userMappings,
+					userExpandoMappings, contactMappings,
+					contactExpandoMappings, userAttributes, StringPool.BLANK);
 
 				if (user != null) {
 					if (_log.isDebugEnabled()) {
@@ -613,7 +659,15 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 			Serializable value = ExpandoConverterUtil.getAttributeFromString(
 				type, expandoAttribute.getValue());
 
-			expandoBridge.setAttribute(name, value);
+			try {
+				ExpandoValueLocalServiceUtil.addValue(
+					expandoBridge.getCompanyId(), expandoBridge.getClassName(),
+					ExpandoTableConstants.DEFAULT_TABLE_NAME,
+					name, expandoBridge.getClassPK(), value);
+			}
+			catch (Exception e) {
+				_log.error(e, e);
+			}
 		}
 	}
 
@@ -691,58 +745,47 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 					companyId, user.getUserId(), ldapUser.getEmailAddress()));
 		}
 
-		try {
-			Calendar birthdayCal = CalendarFactoryUtil.getCalendar();
+		Calendar birthdayCal = CalendarFactoryUtil.getCalendar();
 
-			birthdayCal.setTime(user.getContact().getBirthday());
+		birthdayCal.setTime(user.getContact().getBirthday());
 
-			int birthdayMonth = birthdayCal.get(Calendar.MONTH);
-			int birthdayDay = birthdayCal.get(Calendar.DAY_OF_MONTH);
-			int birthdayYear = birthdayCal.get(Calendar.YEAR);
+		int birthdayMonth = birthdayCal.get(Calendar.MONTH);
+		int birthdayDay = birthdayCal.get(Calendar.DAY_OF_MONTH);
+		int birthdayYear = birthdayCal.get(Calendar.YEAR);
 
-			if (ldapUser.isUpdatePassword()) {
-				UserLocalServiceUtil.updatePassword(
-					user.getUserId(), password, password,
-					ldapUser.isPasswordReset(), true);
-			}
-
-			user = UserLocalServiceUtil.updateUser(
-				user.getUserId(), password, StringPool.BLANK,
-				StringPool.BLANK, ldapUser.isPasswordReset(),
-				ldapUser.getReminderQueryQuestion(),
-				ldapUser.getReminderQueryAnswer(), ldapUser.getScreenName(),
-				ldapUser.getEmailAddress(), ldapUser.getOpenId(),
-				ldapUser.getLanguageId(), ldapUser.getTimeZoneId(),
-				ldapUser.getGreeting(), ldapUser.getComments(),
-				ldapUser.getFirstName(), ldapUser.getMiddleName(),
-				ldapUser.getLastName(), ldapUser.getPrefixId(),
-				ldapUser.getSuffixId(), ldapUser.isMale(), birthdayMonth,
-				birthdayDay, birthdayYear, ldapUser.getSmsSn(),
-				ldapUser.getAimSn(), ldapUser.getFacebookSn(),
-				ldapUser.getIcqSn(), ldapUser.getJabberSn(),
-				ldapUser.getMsnSn(), ldapUser.getMySpaceSn(),
-				ldapUser.getSkypeSn(), ldapUser.getTwitterSn(),
-				ldapUser.getYmSn(), ldapUser.getJobTitle(),
-				ldapUser.getGroupIds(), ldapUser.getOrganizationIds(),
-				ldapUser.getRoleIds(), ldapUser.getUserGroupRoles(),
-				ldapUser.getUserGroupIds(), ldapUser.getServiceContext());
-
-			if (ldapUserModifiedDate != null) {
-				user = UserLocalServiceUtil.updateModifiedDate(
-					user.getUserId(), ldapUserModifiedDate);
-			}
-
-			return user;
+		if (ldapUser.isUpdatePassword()) {
+			UserLocalServiceUtil.updatePassword(
+				user.getUserId(), password, password,
+				ldapUser.isPasswordReset(), true);
 		}
-		catch (Exception e) {
-			_log.error(
-				"Unable to update user with screen name " +
-					ldapUser.getScreenName() + " and email address " +
-						ldapUser.getEmailAddress(),
-				e);
 
-			return null;
+		user = UserLocalServiceUtil.updateUser(
+			user.getUserId(), password, StringPool.BLANK,
+			StringPool.BLANK, ldapUser.isPasswordReset(),
+			ldapUser.getReminderQueryQuestion(),
+			ldapUser.getReminderQueryAnswer(), ldapUser.getScreenName(),
+			ldapUser.getEmailAddress(), ldapUser.getOpenId(),
+			ldapUser.getLanguageId(), ldapUser.getTimeZoneId(),
+			ldapUser.getGreeting(), ldapUser.getComments(),
+			ldapUser.getFirstName(), ldapUser.getMiddleName(),
+			ldapUser.getLastName(), ldapUser.getPrefixId(),
+			ldapUser.getSuffixId(), ldapUser.isMale(), birthdayMonth,
+			birthdayDay, birthdayYear, ldapUser.getSmsSn(),
+			ldapUser.getAimSn(), ldapUser.getFacebookSn(),
+			ldapUser.getIcqSn(), ldapUser.getJabberSn(),
+			ldapUser.getMsnSn(), ldapUser.getMySpaceSn(),
+			ldapUser.getSkypeSn(), ldapUser.getTwitterSn(),
+			ldapUser.getYmSn(), ldapUser.getJobTitle(),
+			ldapUser.getGroupIds(), ldapUser.getOrganizationIds(),
+			ldapUser.getRoleIds(), ldapUser.getUserGroupRoles(),
+			ldapUser.getUserGroupIds(), ldapUser.getServiceContext());
+
+		if (ldapUserModifiedDate != null) {
+			user = UserLocalServiceUtil.updateModifiedDate(
+				user.getUserId(), ldapUserModifiedDate);
 		}
+
+		return user;
 	}
 
 	private static final String _IMPORT_BY_GROUP = "group";
