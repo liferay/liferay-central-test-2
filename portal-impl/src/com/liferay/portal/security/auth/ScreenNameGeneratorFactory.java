@@ -63,6 +63,6 @@ public class ScreenNameGeneratorFactory {
 	private static Log _log = LogFactoryUtil.getLog(
 		ScreenNameGeneratorFactory.class);
 
-	private static ScreenNameGenerator _screenNameGenerator = null;
+	private static ScreenNameGenerator _screenNameGenerator;
 
 }

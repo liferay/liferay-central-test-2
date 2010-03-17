@@ -60,6 +60,6 @@ public class HookFactory {
 
 	private static Log _log = LogFactoryUtil.getLog(HookFactory.class);
 
-	private static Hook _hook = null;
+	private static Hook _hook;
 
 }
