@@ -25,17 +25,17 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[2]/ul/li[2]/ul/li[1]/a</td>
+	<td>//nav[@id='navigation']/ul/li[2]/ul/li[1]</td>
 	<td>Child1 Test1 Page1</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[2]/ul/li[2]/ul/li[2]/a</td>
+	<td>//nav[@id='navigation']/ul/li[2]/ul/li[2]</td>
 	<td>Child2 Test2 Page2</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[2]/ul/li[2]/ul/li[3]/a</td>
+	<td>//nav[@id='navigation']/ul/li[2]/ul/li[3]</td>
 	<td>Child3 Test3 Page3</td>
 </tr>
 <tr>
@@ -50,7 +50,17 @@
 </tr>
 <tr>
 	<td>waitForVisible</td>
-	<td>link=Guest</td>
+	<td>//div[@id='_88_layoutsTreeOutput']/ul/li</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>//div[@id='_88_treeExpandAll']/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>//div[@id='_88_layoutsTreeOutput']/ul/li/ul/li/div/div[3]/a</td>
 	<td></td>
 </tr>
 <tr>
@@ -100,17 +110,17 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[2]/ul/li[2]/ul/li[1]/a</td>
+	<td>//nav[@id='navigation']/ul/li[2]/ul/li[1]</td>
 	<td>Child2 Test2 Page2</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[2]/ul/li[2]/ul/li[2]/a</td>
+	<td>//nav[@id='navigation']/ul/li[2]/ul/li[2]</td>
 	<td>Child1 Test1 Page1</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[2]/ul/li[2]/ul/li[3]/a</td>
+	<td>//nav[@id='navigation']/ul/li[2]/ul/li[3]</td>
 	<td>Child3 Test3 Page3</td>
 </tr>
 

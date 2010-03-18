@@ -43,8 +43,8 @@ public class AddPage1Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"//li[@class='first manage-page']/a"));
+		selenium.clickAt("//li[@class='first manage-page']/a",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -53,7 +53,8 @@ public class AddPage1Test extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("link=Guest")) {
+				if (selenium.isVisible(
+							"//div[@id='_88_layoutsTreeOutput']/ul/li")) {
 					break;
 				}
 			}
@@ -63,47 +64,36 @@ public class AddPage1Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("link=Guest", RuntimeVariables.replace(""));
+		selenium.clickAt("//div[@id='_88_treeExpandAll']/a",
+			RuntimeVariables.replace(""));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible(
+							"//div[@id='_88_layoutsTreeOutput']/ul/li/ul/li/div/div[3]/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("//div[@id='_88_layoutsTreeOutput']/ul/li/div/div[3]/a",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible("//ul[@class='aui-tree-container']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_88_name_en_US")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.type("_88_name_en_US",
 			RuntimeVariables.replace("Manage1 Pages1 Test1 Page1"));
 		selenium.clickAt("//input[@value='Add Page']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("link=Manage1 Pages1 Test1 Page1"));
+		assertTrue(selenium.isPartialText("//nav[@id='navigation']/ul/li[2]",
+				"Manage1 Pages1 Test1 Page1"));
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 
@@ -113,8 +103,9 @@ public class AddPage1Test extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible(
-							"//ul[@class='aui-tree-container']/li[2]/div/div[3]/a")) {
+				if (RuntimeVariables.replace("Manage1 Pages1 Test1 Page1")
+										.equals(selenium.getText(
+								"//div[@id='_88_layoutsTreeOutput']/ul/li/ul/li[2]/div/div[3]/a"))) {
 					break;
 				}
 			}
@@ -126,6 +117,6 @@ public class AddPage1Test extends BaseTestCase {
 
 		assertEquals(RuntimeVariables.replace("Manage1 Pages1 Test1 Page1"),
 			selenium.getText(
-				"//ul[@class='aui-tree-container']/li[2]/div/div[3]/a"));
+				"//div[@id='_88_layoutsTreeOutput']/ul/li/ul/li[2]/div/div[3]/a"));
 	}
 }

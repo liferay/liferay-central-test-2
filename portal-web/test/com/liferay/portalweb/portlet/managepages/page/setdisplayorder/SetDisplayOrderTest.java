@@ -46,11 +46,11 @@ public class SetDisplayOrderTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Child1 Test1 Page1"),
-			selenium.getText("//div[2]/ul/li[2]/ul/li[1]/a"));
+			selenium.getText("//nav[@id='navigation']/ul/li[2]/ul/li[1]"));
 		assertEquals(RuntimeVariables.replace("Child2 Test2 Page2"),
-			selenium.getText("//div[2]/ul/li[2]/ul/li[2]/a"));
+			selenium.getText("//nav[@id='navigation']/ul/li[2]/ul/li[2]"));
 		assertEquals(RuntimeVariables.replace("Child3 Test3 Page3"),
-			selenium.getText("//div[2]/ul/li[2]/ul/li[3]/a"));
+			selenium.getText("//nav[@id='navigation']/ul/li[2]/ul/li[3]"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -79,7 +79,28 @@ public class SetDisplayOrderTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("link=Guest")) {
+				if (selenium.isVisible(
+							"//div[@id='_88_layoutsTreeOutput']/ul/li")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("//div[@id='_88_treeExpandAll']/a",
+			RuntimeVariables.replace(""));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible(
+							"//div[@id='_88_layoutsTreeOutput']/ul/li/ul/li/div/div[3]/a")) {
 					break;
 				}
 			}
@@ -137,10 +158,10 @@ public class SetDisplayOrderTest extends BaseTestCase {
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 		assertEquals(RuntimeVariables.replace("Child2 Test2 Page2"),
-			selenium.getText("//div[2]/ul/li[2]/ul/li[1]/a"));
+			selenium.getText("//nav[@id='navigation']/ul/li[2]/ul/li[1]"));
 		assertEquals(RuntimeVariables.replace("Child1 Test1 Page1"),
-			selenium.getText("//div[2]/ul/li[2]/ul/li[2]/a"));
+			selenium.getText("//nav[@id='navigation']/ul/li[2]/ul/li[2]"));
 		assertEquals(RuntimeVariables.replace("Child3 Test3 Page3"),
-			selenium.getText("//div[2]/ul/li[2]/ul/li[3]/a"));
+			selenium.getText("//nav[@id='navigation']/ul/li[2]/ul/li[3]"));
 	}
 }

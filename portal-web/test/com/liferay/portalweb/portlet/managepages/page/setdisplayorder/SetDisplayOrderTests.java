@@ -30,11 +30,11 @@ public class SetDisplayOrderTests extends BaseTests {
 		TestSuite testSuite = new TestSuite();
 
 		testSuite.addTestSuite(AddPageTest.class);
-		testSuite.addTestSuite(AddPageChild1Test.class);
-		testSuite.addTestSuite(AddPageChild2Test.class);
-		testSuite.addTestSuite(AddPageChild3Test.class);
+		testSuite.addTestSuite(AddChildPage1Test.class);
+		testSuite.addTestSuite(AddChildPage2Test.class);
+		testSuite.addTestSuite(AddChildPage3Test.class);
 		testSuite.addTestSuite(SetDisplayOrderTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

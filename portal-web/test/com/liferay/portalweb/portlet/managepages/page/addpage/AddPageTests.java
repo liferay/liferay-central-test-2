@@ -30,7 +30,7 @@ public class AddPageTests extends BaseTests {
 		TestSuite testSuite = new TestSuite();
 
 		testSuite.addTestSuite(AddPageTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

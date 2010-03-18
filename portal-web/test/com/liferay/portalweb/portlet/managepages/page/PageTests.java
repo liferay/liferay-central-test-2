@@ -15,10 +15,18 @@
 package com.liferay.portalweb.portlet.managepages.page;
 
 import com.liferay.portalweb.portal.BaseTests;
+import com.liferay.portalweb.portlet.managepages.page.addchildpage.AddChildPageTests;
+import com.liferay.portalweb.portlet.managepages.page.addchildpagemultiple.AddChildPageMultipleTests;
 import com.liferay.portalweb.portlet.managepages.page.addpage.AddPageTests;
-import com.liferay.portalweb.portlet.managepages.page.addpagechild.AddPageChildTests;
-import com.liferay.portalweb.portlet.managepages.page.addpagechildmultiple.AddPageChildMultipleTests;
 import com.liferay.portalweb.portlet.managepages.page.addpagemultiple.AddPageMultipleTests;
+import com.liferay.portalweb.portlet.managepages.page.copypagechildpage.CopyPageChildPageTests;
+import com.liferay.portalweb.portlet.managepages.page.copypagepage.CopyPagePageTests;
+import com.liferay.portalweb.portlet.managepages.page.savepagetypeembedded.SavePageTypeEmbeddedTests;
+import com.liferay.portalweb.portlet.managepages.page.savepagetypelinktopage.SavePageTypeLinkToPageTests;
+import com.liferay.portalweb.portlet.managepages.page.savepagetypepanel.SavePageTypePanelTests;
+import com.liferay.portalweb.portlet.managepages.page.savepagetypeportlet.SavePageTypePortletTests;
+import com.liferay.portalweb.portlet.managepages.page.savepagetypeurl.SavePageTypeURLTests;
+import com.liferay.portalweb.portlet.managepages.page.savepagetypewebcontent.SavePageTypeWebContentTests;
 import com.liferay.portalweb.portlet.managepages.page.setdisplayorder.SetDisplayOrderTests;
 
 import junit.framework.Test;
@@ -34,10 +42,18 @@ public class PageTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
+		testSuite.addTest(AddChildPageTests.suite());
+		testSuite.addTest(AddChildPageMultipleTests.suite());
 		testSuite.addTest(AddPageTests.suite());
-		testSuite.addTest(AddPageChildTests.suite());
-		testSuite.addTest(AddPageChildMultipleTests.suite());
 		testSuite.addTest(AddPageMultipleTests.suite());
+		testSuite.addTest(CopyPageChildPageTests.suite());
+		testSuite.addTest(CopyPagePageTests.suite());
+		testSuite.addTest(SavePageTypeEmbeddedTests.suite());
+		testSuite.addTest(SavePageTypeLinkToPageTests.suite());
+		testSuite.addTest(SavePageTypePanelTests.suite());
+		testSuite.addTest(SavePageTypePortletTests.suite());
+		testSuite.addTest(SavePageTypeURLTests.suite());
+		testSuite.addTest(SavePageTypeWebContentTests.suite());
 		testSuite.addTest(SetDisplayOrderTests.suite());
 
 		return testSuite;

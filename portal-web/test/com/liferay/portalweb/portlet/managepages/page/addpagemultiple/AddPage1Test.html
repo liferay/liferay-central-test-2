@@ -19,28 +19,28 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
+	<td>clickAtAndWait</td>
 	<td>//li[@class='first manage-page']/a</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForVisible</td>
-	<td>link=Guest</td>
+	<td>//div[@id='_88_layoutsTreeOutput']/ul/li</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAtAndWait</td>
-	<td>link=Guest</td>
+	<td>clickAt</td>
+	<td>//div[@id='_88_treeExpandAll']/a</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForVisible</td>
-	<td>//ul[@class='aui-tree-container']</td>
+	<td>//div[@id='_88_layoutsTreeOutput']/ul/li/ul/li/div/div[3]/a</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>_88_name_en_US</td>
+	<td>clickAtAndWait</td>
+	<td>//div[@id='_88_layoutsTreeOutput']/ul/li/div/div[3]/a</td>
 	<td></td>
 </tr>
 <tr>
@@ -54,9 +54,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
-	<td>link=Manage1 Pages1 Test1 Page1</td>
-	<td></td>
+	<td>assertPartialText</td>
+	<td>//nav[@id='navigation']/ul/li[2]</td>
+	<td>Manage1 Pages1 Test1 Page1</td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
@@ -64,13 +64,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForVisible</td>
-	<td>//ul[@class='aui-tree-container']/li[2]/div/div[3]/a</td>
-	<td></td>
+	<td>waitForText</td>
+	<td>//div[@id='_88_layoutsTreeOutput']/ul/li/ul/li[2]/div/div[3]/a</td>
+	<td>Manage1 Pages1 Test1 Page1</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//ul[@class='aui-tree-container']/li[2]/div/div[3]/a</td>
+	<td>//div[@id='_88_layoutsTreeOutput']/ul/li/ul/li[2]/div/div[3]/a</td>
 	<td>Manage1 Pages1 Test1 Page1</td>
 </tr>
 

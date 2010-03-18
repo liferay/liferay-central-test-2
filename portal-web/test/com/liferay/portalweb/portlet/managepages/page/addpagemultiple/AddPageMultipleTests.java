@@ -32,7 +32,7 @@ public class AddPageMultipleTests extends BaseTests {
 		testSuite.addTestSuite(AddPage1Test.class);
 		testSuite.addTestSuite(AddPage2Test.class);
 		testSuite.addTestSuite(AddPage3Test.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}
