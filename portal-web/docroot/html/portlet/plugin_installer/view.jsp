@@ -20,7 +20,7 @@
 	<c:when test="<%= permissionChecker.isOmniadmin() %>">
 
 		<%
-		String uploadProgressId = DeterminateKeyGenerator.generate("portlet_plugin_installer_view");
+		String uploadProgressId = PortalUtil.generateRandomKey(request, "portlet_plugin_installer_view");
 
 		String tabs1Names = "browse-repository,upload-file,download-file,configuration";
 		String tabs1 = ParamUtil.getString(request, "tabs1");

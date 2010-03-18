@@ -17,7 +17,7 @@
 <%@ include file="/html/taglib/init.jsp" %>
 
 <%
-String randomNamespace = DeterminateKeyGenerator.generate("taglib_ui_webdav_page") + StringPool.UNDERLINE;
+String randomNamespace = PortalUtil.generateRandomKey(request, "taglib_ui_webdav_page") + StringPool.UNDERLINE;
 
 String path = (String)request.getAttribute("liferay-ui:webdav:path");
 %>

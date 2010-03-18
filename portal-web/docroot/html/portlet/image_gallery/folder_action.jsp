@@ -17,7 +17,7 @@
 <%@ include file="/html/portlet/image_gallery/init.jsp" %>
 
 <%
-String randomNamespace = DeterminateKeyGenerator.generate("portlet_image_gallery_folder_action") + StringPool.UNDERLINE;
+String randomNamespace = PortalUtil.generateRandomKey(request, "portlet_image_gallery_folder_action") + StringPool.UNDERLINE;
 
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 

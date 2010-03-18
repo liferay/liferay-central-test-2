@@ -17,7 +17,7 @@
 <%@ include file="/html/portlet/document_library/init.jsp" %>
 
 <%
-String randomNamespace = DeterminateKeyGenerator.generate("portlet_document_library_folder_action") + StringPool.UNDERLINE;
+String randomNamespace = PortalUtil.generateRandomKey(request, "portlet_document_library_folder_action") + StringPool.UNDERLINE;
 
 String redirect = currentURL;
 

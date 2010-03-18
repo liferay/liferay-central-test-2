@@ -38,7 +38,7 @@ List updatablePackageIds = new ArrayList();
 			<c:otherwise>
 
 				<%
-				String uploadProgressId = DeterminateKeyGenerator.generate("portlet_update_manager_view");
+				String uploadProgressId = PortalUtil.generateRandomKey(request, "portlet_update_manager_view");
 
 				PortletURL pluginInstallerURL = ((RenderResponseImpl)renderResponse).createRenderURL(PortletKeys.PLUGIN_INSTALLER);
 

@@ -20,7 +20,7 @@
 <%@ page import="com.liferay.portal.servlet.taglib.ui.InputPermissionsParamsTagUtil" %>
 
 <%
-String randomNamespace = DeterminateKeyGenerator.generate("taglib_ui_input_permissions_page") + StringPool.UNDERLINE;
+String randomNamespace = PortalUtil.generateRandomKey(request, "taglib_ui_input_permissions_page") + StringPool.UNDERLINE;
 
 String formName = namespace + request.getAttribute("liferay-ui:input-permissions:formName");
 String modelName = (String)request.getAttribute("liferay-ui:input-permissions:modelName");

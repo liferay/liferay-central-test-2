@@ -19,7 +19,7 @@
 <c:if test="<%= typesArray.length > 0 %>">
 
 	<%
-	String randomNamespace = DeterminateKeyGenerator.generate("taglib_ui_social_bookmarks_page") + StringPool.UNDERLINE;
+	String randomNamespace = PortalUtil.generateRandomKey(request, "taglib_ui_social_bookmarks_page") + StringPool.UNDERLINE;
 	%>
 
 	<div class="taglib-social-bookmarks" id="<%= randomNamespace %>socialBookmarks">

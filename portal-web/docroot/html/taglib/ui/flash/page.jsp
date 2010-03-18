@@ -17,7 +17,7 @@
 <%@ include file="/html/taglib/init.jsp" %>
 
 <%
-String randomNamespace = DeterminateKeyGenerator.generate("taglib_ui_flash_page") + StringPool.UNDERLINE;
+String randomNamespace = PortalUtil.generateRandomKey(request, "taglib_ui_flash_page") + StringPool.UNDERLINE;
 
 String align = (String)request.getAttribute("liferay-ui:flash:align");
 String allowScriptAccess = (String)request.getAttribute("liferay-ui:flash:allowScriptAccess");

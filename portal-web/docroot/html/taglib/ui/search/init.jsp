@@ -19,5 +19,5 @@
 <%
 namespace = PortalUtil.getPortletNamespace(PortletKeys.SEARCH);
 
-String randomNamespace = DeterminateKeyGenerator.generate("taglib_ui_search_init");
+String randomNamespace = PortalUtil.generateRandomKey(request, "taglib_ui_search_init");
 %>
