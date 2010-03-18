@@ -109,6 +109,15 @@ public class WorkflowDefinitionLinkLocalServiceImpl
 		return workflowDefinitionLink;
 	}
 
+	public int getWorkflowDefinitionLinksCount(
+			long companyId, String workflowDefinitionName,
+			int workflowDefinitionVersion)
+		throws SystemException{
+
+		return workflowDefinitionLinkPersistence.countByC_W_W(
+			companyId, workflowDefinitionName, workflowDefinitionVersion);
+	}
+
 	public boolean hasWorkflowDefinitionLink(
 			long companyId, long groupId, String className)
 		throws PortalException, SystemException {
@@ -121,15 +130,6 @@ public class WorkflowDefinitionLinkLocalServiceImpl
 		catch (NoSuchWorkflowDefinitionLinkException nswdle) {
 			return false;
 		}
-	}
-
-	public int getWorkflowDefinitionLinksCount(
-			long companyId, String workflowDefinitionName,
-			int workflowDefinitionVersion)
-		throws SystemException{
-
-		return workflowDefinitionLinkPersistence.countByC_W_W(
-			companyId, workflowDefinitionName, workflowDefinitionVersion);
 	}
 
 	public WorkflowDefinitionLink updateWorkflowDefinitionLink(

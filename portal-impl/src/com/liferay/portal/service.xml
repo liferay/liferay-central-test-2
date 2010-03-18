@@ -1933,7 +1933,8 @@
 			<finder-column name="companyId" />
 			<finder-column name="classNameId" />
 		</finder>
-		<finder name="W_W" return-type="Collection">
+		<finder name="C_W_W" return-type="Collection">
+			<finder-column name="companyId" />
 			<finder-column name="workflowDefinitionName" />
 			<finder-column name="workflowDefinitionVersion" />
 		</finder>

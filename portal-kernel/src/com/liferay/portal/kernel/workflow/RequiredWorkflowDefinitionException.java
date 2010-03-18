@@ -15,8 +15,8 @@
 package com.liferay.portal.kernel.workflow;
 
 /**
- * <a href="WorkflowDefinitionFileException.java.html"><b><i>View Source</i></b>
- * </a>
+ * <a href="RequiredWorkflowDefinitionException.java.html"><b><i>View Source</i>
+ * </b></a>
  *
  * @author Marcellus Tavares
  */
