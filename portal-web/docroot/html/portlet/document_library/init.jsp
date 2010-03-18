@@ -111,7 +111,6 @@ if (!portletId.equals(PortletKeys.DOCUMENT_LIBRARY)) {
 	folderColumns = ArrayUtil.remove(folderColumns, "action");
 }
 
-boolean showFileEntriesSearch = PrefsParamUtil.getBoolean(preferences, request, "showFileEntriesSearch", true);
 int fileEntriesPerPage = PrefsParamUtil.getInteger(preferences, request, "fileEntriesPerPage", SearchContainer.DEFAULT_DELTA);
 
 String defaultFileEntryColumns = "name,size,downloads,locked";
@@ -145,6 +144,9 @@ if (portletConfig.getPortletName().equals(PortletKeys.DOCUMENT_LIBRARY)) {
 	showAddFolderButton = true;
 	showDeleteFileEntryButton = true;
 	showFolderMenu = true;
+	showTabs = true;
+}
+else if (portletConfig.getPortletName().equals(PortletKeys.DOCUMENT_LIBRARY_DISPLAY)) {
 	showTabs = true;
 }
 

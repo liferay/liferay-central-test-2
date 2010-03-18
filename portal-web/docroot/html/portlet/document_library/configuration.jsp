@@ -109,8 +109,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="documentsListingPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "documents-listing") %>'>
 			<aui:fieldset>
-				<aui:input inlineLabel="left" label="show-search" name="showFileEntriesSearch" type="checkbox" value="<%= showFileEntriesSearch %>" />
-
 				<aui:input label="documents-per-page" name="fileEntriesPerPage" size="2" type="text" value="<%= fileEntriesPerPage %>" />
 
 				<aui:field-wrapper label="show-columns">

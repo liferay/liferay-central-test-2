@@ -84,6 +84,43 @@
 			</div>
 		</div>
 	</c:when>
+	<c:when test="<%= showTabs && portletName.equals(PortletKeys.DOCUMENT_LIBRARY_DISPLAY) %>">
+
+		<%
+		long folderId = GetterUtil.getLong((String)request.getAttribute("view.jsp-folderId"));
+		%>
+
+		<div class="top-links-container">
+			<div class="top-links">
+				<liferay-portlet:renderURL varImpl="searchURL">
+					<portlet:param name="struts_action" value="/document_library/search" />
+				</liferay-portlet:renderURL>
+
+				<c:if test="<%= showFoldersSearch %>">
+					<div class="folder-search">
+						<aui:form action="<%= searchURL %>" method="get" name="searchFm">
+							<liferay-portlet:renderURLParams varImpl="searchURL" />
+							<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
+							<aui:input name="breadcrumbsFolderId" type="hidden" value="<%= folderId %>" />
+							<aui:input name="searchFolderIds" type="hidden" value="<%= folderId %>" />
+
+							<span class="aui-search-bar">
+								<aui:input id="keywords1" inlineField="<%= true %>" label="" name="keywords" size="30" type="text" />
+
+								<aui:button type="submit" value="search" />
+							</span>
+						</aui:form>
+					</div>
+
+					<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
+						<aui:script>
+							Liferay.Util.focusFormField(document.<portlet:namespace />searchFm.<portlet:namespace />keywords);
+						</aui:script>
+					</c:if>
+				</c:if>
+			</div>
+		</div>
+	</c:when>
 	<c:when test="<%= showTabs && showSubfolders %>">
 		<liferay-ui:tabs names="document-home" />
 	</c:when>
