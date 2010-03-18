@@ -17,7 +17,7 @@
 </#if>
 
 <div id="wrapper">
-	<a href="#main-content" id="skip-to-content"><@liferay.language key="go-to-content" /></a>
+	<a href="#main-content" id="skip-to-content"><@liferay.language key="skip-to-content" /></a>
 
 	<header id="banner" role="banner">
 		<hgroup id="heading">
