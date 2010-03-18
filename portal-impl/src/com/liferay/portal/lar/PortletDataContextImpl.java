@@ -14,8 +14,12 @@
 
 package com.liferay.portal.lar;
 
+import com.liferay.portal.NoSuchRoleException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.KeyValuePair;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -23,7 +27,19 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.workflow.StatusConstants;
 import com.liferay.portal.kernel.zip.ZipReader;
 import com.liferay.portal.kernel.zip.ZipWriter;
+import com.liferay.portal.model.Group;
+import com.liferay.portal.model.Resource;
+import com.liferay.portal.model.ResourceConstants;
+import com.liferay.portal.model.Role;
+import com.liferay.portal.model.RoleConstants;
+import com.liferay.portal.security.permission.ResourceActionsUtil;
+import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.service.PermissionLocalServiceUtil;
+import com.liferay.portal.service.ResourceLocalServiceUtil;
+import com.liferay.portal.service.ResourcePermissionLocalServiceUtil;
+import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.asset.model.AssetCategory;
 import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
 import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
@@ -67,6 +83,7 @@ import com.thoughtworks.xstream.XStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -208,6 +225,59 @@ public class PortletDataContextImpl implements PortletDataContext {
 		String className, long classPK, List<MBMessage> messages) {
 
 		_commentsMap.put(getPrimaryKeyString(className, classPK), messages);
+	}
+
+	public void addPermissions(Class<?> classObj, long classPK)
+		throws PortalException, SystemException {
+
+		if ((PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM != 5) ||
+			(PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM != 6) ||
+			(!MapUtil.getBoolean(
+				_parameterMap, PortletDataHandlerKeys.PERMISSIONS))) {
+
+			return;
+		}
+
+		List<KeyValuePair> permissions = new ArrayList<KeyValuePair>();
+
+		Group group = GroupLocalServiceUtil.getGroup(_groupId);
+
+		List<Role> roles = RoleLocalServiceUtil.getRoles(_companyId);
+
+		for (Role role : roles) {
+			int type = role.getType();
+
+			if ((type == RoleConstants.TYPE_REGULAR) ||
+				((type == RoleConstants.TYPE_COMMUNITY) &&
+				 (group.isCommunity())) ||
+				((type == RoleConstants.TYPE_ORGANIZATION) &&
+				 (group.isOrganization()))) {
+
+				String name = role.getName();
+				String actionIds = getActionIds(
+					role, classObj.getName(), String.valueOf(classPK));
+
+				KeyValuePair permission = new KeyValuePair(name, actionIds);
+
+				permissions.add(permission);
+			}
+		}
+
+		_permissionsMap.put(
+			getPrimaryKeyString(classObj, classPK), permissions);
+	}
+
+	public void addPermissions(
+		String className, long classPK, List<KeyValuePair> permissions) {
+
+		if ((PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM != 5) ||
+			(PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM != 6)) {
+
+			return;
+		}
+
+		_permissionsMap.put(
+			getPrimaryKeyString(className, classPK), permissions);
 	}
 
 	public boolean addPrimaryKey(Class<?> classObj, String primaryKey) {
@@ -386,6 +456,10 @@ public class PortletDataContextImpl implements PortletDataContext {
 		return _parameterMap;
 	}
 
+	public Map<String, List<KeyValuePair>> getPermissions() {
+		return _permissionsMap;
+	}
+
 	public long getPlid() {
 		return _plid;
 	}
@@ -561,6 +635,61 @@ public class PortletDataContextImpl implements PortletDataContext {
 		}
 	}
 
+	public void importPermissions(
+			Class<?> classObj, long classPK, long newClassPK)
+		throws PortalException, SystemException {
+
+		if ((PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM != 5) ||
+			(PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM != 6) ||
+			(!MapUtil.getBoolean(
+				_parameterMap, PortletDataHandlerKeys.PERMISSIONS))) {
+
+			return;
+		}
+
+		List<KeyValuePair> permissions = _permissionsMap.get(
+			getPrimaryKeyString(classObj, classPK));
+
+		if (permissions == null) {
+			return;
+		}
+
+		for (KeyValuePair permission : permissions) {
+			String roleName = permission.getKey();
+
+			Role role = null;
+
+			try {
+				role = RoleLocalServiceUtil.getRole(_companyId, roleName);
+			}
+			catch (NoSuchRoleException nsre) {
+				if (_log.isWarnEnabled()) {
+					_log.warn("Role " + roleName + " does not exist");
+				}
+
+				continue;
+			}
+
+			String[] actionIds = StringUtil.split(permission.getValue());
+
+			if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5) {
+				Resource resource = ResourceLocalServiceUtil.getResource(
+					_companyId, classObj.getName(),
+					ResourceConstants.SCOPE_INDIVIDUAL,
+					String.valueOf(newClassPK));
+
+				PermissionLocalServiceUtil.setRolePermissions(
+					role.getRoleId(), actionIds, resource.getResourceId());
+			}
+			else if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
+				ResourcePermissionLocalServiceUtil.setResourcePermissions(
+					_companyId, classObj.getName(),
+					ResourceConstants.SCOPE_INDIVIDUAL,
+					String.valueOf(newClassPK), role.getRoleId(), actionIds);
+			}
+		}
+	}
+
 	public void importRatingsEntries(
 			Class<?> classObj, long classPK, long newClassPK)
 		throws PortalException, SystemException {
@@ -643,6 +772,39 @@ public class PortletDataContextImpl implements PortletDataContext {
 		return _xStream.toXML(object);
 	}
 
+	protected String getActionIds(
+			Role role, String className, String primKey)
+		throws PortalException, SystemException {
+
+		List<String> allActionIds = ResourceActionsUtil.getModelResourceActions(
+			className);
+
+		List<String> actionIds = new ArrayList<String>(allActionIds.size());
+
+		for (String actionId : allActionIds) {
+			if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5) {
+				if (PermissionLocalServiceUtil.hasRolePermission(
+						role.getRoleId(), role.getCompanyId(), className,
+						ResourceConstants.SCOPE_INDIVIDUAL, primKey,
+						actionId)) {
+
+					actionIds.add(actionId);
+				}
+			}
+			else if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
+				if (ResourcePermissionLocalServiceUtil.hasResourcePermission(
+						role.getCompanyId(), className,
+						ResourceConstants.SCOPE_INDIVIDUAL, primKey,
+						role.getRoleId(), actionId)) {
+
+					actionIds.add(actionId);
+				}
+			}
+		}
+
+		return StringUtil.merge(actionIds);
+	}
+
 	protected String getPrimaryKeyString(Class<?> classObj, long classPK) {
 		return getPrimaryKeyString(classObj.getName(), String.valueOf(classPK));
 	}
@@ -711,6 +873,9 @@ public class PortletDataContextImpl implements PortletDataContext {
 		}
 	}
 
+	private static Log _log = LogFactoryUtil.getLog(
+		PortletDataContextImpl.class);
+
 	private Map<String, long[]> _assetCategoryIdsMap =
 		new HashMap<String, long[]>();
 	private Map<String, String[]> _assetCategoryUuidsMap =
@@ -728,6 +893,8 @@ public class PortletDataContextImpl implements PortletDataContext {
 	private Set<String> _notUniquePerLayout = new HashSet<String>();
 	private long _oldPlid;
 	private Map<String, String[]> _parameterMap;
+	private Map<String, List<KeyValuePair>> _permissionsMap =
+		new HashMap<String, List<KeyValuePair>>();
 	private long _plid;
 	private Set<String> _primaryKeys;
 	private boolean _privateLayout;
