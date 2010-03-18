@@ -32,7 +32,6 @@
 <%@ page import="com.liferay.portal.UserEmailAddressException" %>
 <%@ page import="com.liferay.portal.UserPasswordException" %>
 <%@ page import="com.liferay.portal.UserReminderQueryException" %>
-<%@ page import="com.liferay.portal.security.auth.AuthTokenUtil" %>
 <%@ page import="com.liferay.portal.service.permission.GroupPermissionUtil" %>
 <%@ page import="com.liferay.portal.service.permission.OrganizationPermissionUtil" %>
 <%@ page import="com.liferay.portal.struts.PortletRequestProcessor" %>
