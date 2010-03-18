@@ -145,7 +145,6 @@ public class EditWorkflowDefinitionAction extends PortletAction {
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		String name = ParamUtil.getString(actionRequest, "name");
 		File file = uploadRequest.getFile("file");
 
 		if (!file.exists()) {
