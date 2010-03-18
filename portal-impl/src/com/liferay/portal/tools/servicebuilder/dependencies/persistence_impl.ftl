@@ -63,6 +63,12 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+<#list referenceList as tempEntity>
+	<#if tempEntity.hasColumns()>
+		import ${tempEntity.packagePath}.service.persistence.${tempEntity.name}Persistence;
+	</#if>
+</#list>
+
 /**
  * <a href="${entity.name}PersistenceImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -2141,8 +2147,8 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 	<#list referenceList as tempEntity>
 		<#if tempEntity.hasColumns()>
-			@BeanReference(name="${tempEntity.packagePath}.service.persistence.${tempEntity.name}Persistence")
-			protected ${tempEntity.packagePath}.service.persistence.${tempEntity.name}Persistence ${tempEntity.varName}Persistence;
+			@BeanReference(type = ${tempEntity.name}Persistence.class)
+			protected ${tempEntity.name}Persistence ${tempEntity.varName}Persistence;
 		</#if>
 	</#list>
 

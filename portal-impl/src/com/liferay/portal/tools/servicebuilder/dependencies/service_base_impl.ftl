@@ -167,22 +167,22 @@ protected void runSQL(String sql) throws SystemException {
 
 <#list referenceList as tempEntity>
 	<#if tempEntity.hasLocalService()>
-		@BeanReference(name="${tempEntity.packagePath}.service.${tempEntity.name}LocalService")
+		@BeanReference(type = ${tempEntity.name}LocalService.class)
 		protected ${tempEntity.name}LocalService ${tempEntity.varName}LocalService;
 	</#if>
 
 	<#if tempEntity.hasRemoteService()>
-		@BeanReference(name="${tempEntity.packagePath}.service.${tempEntity.name}Service")
+		@BeanReference(type = ${tempEntity.name}Service.class)
 		protected ${tempEntity.name}Service ${tempEntity.varName}Service;
 	</#if>
 
 	<#if tempEntity.hasColumns()>
-		@BeanReference(name="${tempEntity.packagePath}.service.persistence.${tempEntity.name}Persistence")
+		@BeanReference(type = ${tempEntity.name}Persistence.class)
 		protected ${tempEntity.name}Persistence ${tempEntity.varName}Persistence;
 	</#if>
 
 	<#if tempEntity.hasFinderClass()>
-		@BeanReference(name="${tempEntity.packagePath}.service.persistence.${tempEntity.name}Finder")
+		@BeanReference(type = ${tempEntity.name}Finder.class)
 		protected ${tempEntity.name}Finder ${tempEntity.varName}Finder;
 	</#if>
 </#list>
