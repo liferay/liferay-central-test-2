@@ -17,9 +17,10 @@
 <%@ include file="/html/portlet/asset_publisher/init.jsp" %>
 
 <%
-String randomNamespace = DeterminateKeyGenerator.generate("portlet_asset_publisher_edit_query_rule") + StringPool.UNDERLINE;
-
 int index = ParamUtil.getInteger(request, "index", GetterUtil.getInteger((String)request.getAttribute("configuration.jsp-index")));
+request.setAttribute(WebKeys.AJAX_REQUEST_SUFFIX, String.valueOf(index));
+
+String randomNamespace = DeterminateKeyGenerator.generate("portlet_asset_publisher_edit_query_rule" + index) + StringPool.UNDERLINE;
 int queryLogicIndex = GetterUtil.getInteger((String)request.getAttribute("configuration.jsp-queryLogicIndex"));
 
 boolean queryContains = true;
