@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 
 import java.io.Serializable;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -38,9 +39,21 @@ public interface WorkflowTaskManager {
 			long roleId, String comment, Map<String, Serializable> context)
 		throws WorkflowException;
 
+	public WorkflowTask assignWorkflowTaskToRole(
+			long companyId, long userId, long workflowTaskId,
+			long roleId, String comment, Date dueDate,
+			Map<String, Serializable> context)
+		throws WorkflowException;
+
 	public WorkflowTask assignWorkflowTaskToUser(
 			long companyId, long userId, long workflowTaskId,
 			long assigneeUserId, String comment,
+			Map<String, Serializable> context)
+		throws WorkflowException;
+
+	public WorkflowTask assignWorkflowTaskToUser(
+			long companyId, long userId, long workflowTaskId,
+			long assigneeUserId, String comment, Date dueDate,
 			Map<String, Serializable> context)
 		throws WorkflowException;
 
@@ -103,6 +116,11 @@ public interface WorkflowTaskManager {
 			long companyId, long workflowInstanceId,
 			Boolean completed, int start, int end,
 			OrderByComparator orderByComparator)
+		throws WorkflowException;
+
+	public WorkflowTask updateDueDate(
+			long companyId, long userId, long workflowTaskId,
+			String comment, Date dueDate)
 		throws WorkflowException;
 
 }

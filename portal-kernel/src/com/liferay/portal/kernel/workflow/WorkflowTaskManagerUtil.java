@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 
 import java.io.Serializable;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -39,6 +40,16 @@ public class WorkflowTaskManagerUtil {
 			companyId, userId, workflowTaskId, roleId, comment, context);
 	}
 
+	public static WorkflowTask assignWorkflowTaskToRole(
+			long companyId, long userId, long workflowTaskId, long roleId,
+			String comment, Date dueDate, Map<String, Serializable> context)
+		throws WorkflowException {
+
+		return _workflowTaskManager.assignWorkflowTaskToRole(
+			companyId, userId, workflowTaskId, roleId,
+			comment, dueDate, context);
+	}
+
 	public static WorkflowTask assignWorkflowTaskToUser(
 			long companyId, long userId, long workflowTaskId,
 			long assigneeUserId, String comment,
@@ -48,6 +59,17 @@ public class WorkflowTaskManagerUtil {
 		return _workflowTaskManager.assignWorkflowTaskToUser(
 			companyId, userId, workflowTaskId, assigneeUserId, comment,
 			context);
+	}
+
+	public static WorkflowTask assignWorkflowTaskToUser(
+			long companyId, long userId, long workflowTaskId,
+			long assigneeUserId, String comment, Date dueDate,
+			Map<String, Serializable> context)
+		throws WorkflowException {
+
+		return _workflowTaskManager.assignWorkflowTaskToRole(
+			companyId, userId, workflowTaskId, assigneeUserId,
+			comment, dueDate, context);
 	}
 
 	public static WorkflowTask completeWorkflowTask(
@@ -170,6 +192,15 @@ public class WorkflowTaskManagerUtil {
 		return _workflowTaskManager.getWorkflowTasksByWorkflowInstance(
 			companyId, workflowInstanceId,
 			completed, start, end, orderByComparator);
+	}
+
+	public static WorkflowTask updateDueDate(
+			long companyId, long userId, long workflowTaskId,
+			String comment, Date dueDate)
+		throws WorkflowException {
+
+		return _workflowTaskManager.updateDueDate(
+			companyId, userId, workflowTaskId, comment, dueDate);
 	}
 
 	public void setWorkflowTaskManager(
