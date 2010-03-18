@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.PluginSetting;
 import com.liferay.portal.model.PluginSettingSoap;
 import com.liferay.portal.service.ServiceContext;
@@ -143,7 +144,12 @@ public class PluginSettingModelImpl extends BaseModelImpl<PluginSetting> {
 	}
 
 	public String getPluginId() {
-		return GetterUtil.getString(_pluginId);
+		if (_pluginId == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _pluginId;
+		}
 	}
 
 	public void setPluginId(String pluginId) {
@@ -159,7 +165,12 @@ public class PluginSettingModelImpl extends BaseModelImpl<PluginSetting> {
 	}
 
 	public String getPluginType() {
-		return GetterUtil.getString(_pluginType);
+		if (_pluginType == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _pluginType;
+		}
 	}
 
 	public void setPluginType(String pluginType) {
@@ -175,7 +186,12 @@ public class PluginSettingModelImpl extends BaseModelImpl<PluginSetting> {
 	}
 
 	public String getRoles() {
-		return GetterUtil.getString(_roles);
+		if (_roles == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _roles;
+		}
 	}
 
 	public void setRoles(String roles) {

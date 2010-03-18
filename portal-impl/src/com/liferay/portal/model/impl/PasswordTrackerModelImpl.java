@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.PasswordTracker;
 import com.liferay.portal.model.PasswordTrackerSoap;
 import com.liferay.portal.service.ServiceContext;
@@ -152,7 +153,12 @@ public class PasswordTrackerModelImpl extends BaseModelImpl<PasswordTracker> {
 	}
 
 	public String getPassword() {
-		return GetterUtil.getString(_password);
+		if (_password == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _password;
+		}
 	}
 
 	public void setPassword(String password) {

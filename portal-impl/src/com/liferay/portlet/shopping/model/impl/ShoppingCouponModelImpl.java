@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
@@ -188,7 +189,12 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon> {
 	}
 
 	public String getUserName() {
-		return GetterUtil.getString(_userName);
+		if (_userName == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _userName;
+		}
 	}
 
 	public void setUserName(String userName) {
@@ -212,7 +218,12 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon> {
 	}
 
 	public String getCode() {
-		return GetterUtil.getString(_code);
+		if (_code == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _code;
+		}
 	}
 
 	public void setCode(String code) {
@@ -228,7 +239,12 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon> {
 	}
 
 	public String getName() {
-		return GetterUtil.getString(_name);
+		if (_name == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _name;
+		}
 	}
 
 	public void setName(String name) {
@@ -236,7 +252,12 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon> {
 	}
 
 	public String getDescription() {
-		return GetterUtil.getString(_description);
+		if (_description == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _description;
+		}
 	}
 
 	public void setDescription(String description) {
@@ -272,7 +293,12 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon> {
 	}
 
 	public String getLimitCategories() {
-		return GetterUtil.getString(_limitCategories);
+		if (_limitCategories == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _limitCategories;
+		}
 	}
 
 	public void setLimitCategories(String limitCategories) {
@@ -280,7 +306,12 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon> {
 	}
 
 	public String getLimitSkus() {
-		return GetterUtil.getString(_limitSkus);
+		if (_limitSkus == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _limitSkus;
+		}
 	}
 
 	public void setLimitSkus(String limitSkus) {
@@ -304,7 +335,12 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon> {
 	}
 
 	public String getDiscountType() {
-		return GetterUtil.getString(_discountType);
+		if (_discountType == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _discountType;
+		}
 	}
 
 	public void setDiscountType(String discountType) {

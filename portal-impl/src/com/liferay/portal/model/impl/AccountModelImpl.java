@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Account;
 import com.liferay.portal.model.AccountSoap;
 import com.liferay.portal.service.ServiceContext;
@@ -172,7 +173,12 @@ public class AccountModelImpl extends BaseModelImpl<Account> {
 	}
 
 	public String getUserName() {
-		return GetterUtil.getString(_userName);
+		if (_userName == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _userName;
+		}
 	}
 
 	public void setUserName(String userName) {
@@ -204,7 +210,12 @@ public class AccountModelImpl extends BaseModelImpl<Account> {
 	}
 
 	public String getName() {
-		return GetterUtil.getString(_name);
+		if (_name == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _name;
+		}
 	}
 
 	public void setName(String name) {
@@ -212,7 +223,12 @@ public class AccountModelImpl extends BaseModelImpl<Account> {
 	}
 
 	public String getLegalName() {
-		return GetterUtil.getString(_legalName);
+		if (_legalName == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _legalName;
+		}
 	}
 
 	public void setLegalName(String legalName) {
@@ -220,7 +236,12 @@ public class AccountModelImpl extends BaseModelImpl<Account> {
 	}
 
 	public String getLegalId() {
-		return GetterUtil.getString(_legalId);
+		if (_legalId == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _legalId;
+		}
 	}
 
 	public void setLegalId(String legalId) {
@@ -228,7 +249,12 @@ public class AccountModelImpl extends BaseModelImpl<Account> {
 	}
 
 	public String getLegalType() {
-		return GetterUtil.getString(_legalType);
+		if (_legalType == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _legalType;
+		}
 	}
 
 	public void setLegalType(String legalType) {
@@ -236,7 +262,12 @@ public class AccountModelImpl extends BaseModelImpl<Account> {
 	}
 
 	public String getSicCode() {
-		return GetterUtil.getString(_sicCode);
+		if (_sicCode == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _sicCode;
+		}
 	}
 
 	public void setSicCode(String sicCode) {
@@ -244,7 +275,12 @@ public class AccountModelImpl extends BaseModelImpl<Account> {
 	}
 
 	public String getTickerSymbol() {
-		return GetterUtil.getString(_tickerSymbol);
+		if (_tickerSymbol == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _tickerSymbol;
+		}
 	}
 
 	public void setTickerSymbol(String tickerSymbol) {
@@ -252,7 +288,12 @@ public class AccountModelImpl extends BaseModelImpl<Account> {
 	}
 
 	public String getIndustry() {
-		return GetterUtil.getString(_industry);
+		if (_industry == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _industry;
+		}
 	}
 
 	public void setIndustry(String industry) {
@@ -260,7 +301,12 @@ public class AccountModelImpl extends BaseModelImpl<Account> {
 	}
 
 	public String getType() {
-		return GetterUtil.getString(_type);
+		if (_type == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _type;
+		}
 	}
 
 	public void setType(String type) {
@@ -268,7 +314,12 @@ public class AccountModelImpl extends BaseModelImpl<Account> {
 	}
 
 	public String getSize() {
-		return GetterUtil.getString(_size);
+		if (_size == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _size;
+		}
 	}
 
 	public void setSize(String size) {

@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
@@ -173,7 +174,12 @@ public class SCProductVersionModelImpl extends BaseModelImpl<SCProductVersion> {
 	}
 
 	public String getUserName() {
-		return GetterUtil.getString(_userName);
+		if (_userName == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _userName;
+		}
 	}
 
 	public void setUserName(String userName) {
@@ -205,7 +211,12 @@ public class SCProductVersionModelImpl extends BaseModelImpl<SCProductVersion> {
 	}
 
 	public String getVersion() {
-		return GetterUtil.getString(_version);
+		if (_version == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _version;
+		}
 	}
 
 	public void setVersion(String version) {
@@ -213,7 +224,12 @@ public class SCProductVersionModelImpl extends BaseModelImpl<SCProductVersion> {
 	}
 
 	public String getChangeLog() {
-		return GetterUtil.getString(_changeLog);
+		if (_changeLog == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _changeLog;
+		}
 	}
 
 	public void setChangeLog(String changeLog) {
@@ -221,7 +237,12 @@ public class SCProductVersionModelImpl extends BaseModelImpl<SCProductVersion> {
 	}
 
 	public String getDownloadPageURL() {
-		return GetterUtil.getString(_downloadPageURL);
+		if (_downloadPageURL == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _downloadPageURL;
+		}
 	}
 
 	public void setDownloadPageURL(String downloadPageURL) {
@@ -229,7 +250,12 @@ public class SCProductVersionModelImpl extends BaseModelImpl<SCProductVersion> {
 	}
 
 	public String getDirectDownloadURL() {
-		return GetterUtil.getString(_directDownloadURL);
+		if (_directDownloadURL == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _directDownloadURL;
+		}
 	}
 
 	public void setDirectDownloadURL(String directDownloadURL) {

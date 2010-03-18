@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.ServiceComponent;
 import com.liferay.portal.model.ServiceComponentSoap;
 import com.liferay.portal.service.ServiceContext;
@@ -126,7 +127,12 @@ public class ServiceComponentModelImpl extends BaseModelImpl<ServiceComponent> {
 	}
 
 	public String getBuildNamespace() {
-		return GetterUtil.getString(_buildNamespace);
+		if (_buildNamespace == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _buildNamespace;
+		}
 	}
 
 	public void setBuildNamespace(String buildNamespace) {
@@ -168,7 +174,12 @@ public class ServiceComponentModelImpl extends BaseModelImpl<ServiceComponent> {
 	}
 
 	public String getData() {
-		return GetterUtil.getString(_data);
+		if (_data == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _data;
+		}
 	}
 
 	public void setData(String data) {

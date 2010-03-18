@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.model.ImageSoap;
 import com.liferay.portal.service.ServiceContext;
@@ -138,7 +139,12 @@ public class ImageModelImpl extends BaseModelImpl<Image> {
 	}
 
 	public String getText() {
-		return GetterUtil.getString(_text);
+		if (_text == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _text;
+		}
 	}
 
 	public void setText(String text) {
@@ -146,7 +152,12 @@ public class ImageModelImpl extends BaseModelImpl<Image> {
 	}
 
 	public String getType() {
-		return GetterUtil.getString(_type);
+		if (_type == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _type;
+		}
 	}
 
 	public void setType(String type) {

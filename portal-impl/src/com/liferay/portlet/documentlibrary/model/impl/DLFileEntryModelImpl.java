@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
@@ -147,7 +148,12 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 	}
 
 	public String getUuid() {
-		return GetterUtil.getString(_uuid);
+		if (_uuid == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _uuid;
+		}
 	}
 
 	public void setUuid(String uuid) {
@@ -213,7 +219,12 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 	}
 
 	public String getUserName() {
-		return GetterUtil.getString(_userName);
+		if (_userName == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _userName;
+		}
 	}
 
 	public void setUserName(String userName) {
@@ -238,7 +249,12 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 	}
 
 	public String getVersionUserName() {
-		return GetterUtil.getString(_versionUserName);
+		if (_versionUserName == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _versionUserName;
+		}
 	}
 
 	public void setVersionUserName(String versionUserName) {
@@ -280,7 +296,12 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 	}
 
 	public String getName() {
-		return GetterUtil.getString(_name);
+		if (_name == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _name;
+		}
 	}
 
 	public void setName(String name) {
@@ -296,7 +317,12 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 	}
 
 	public String getTitle() {
-		return GetterUtil.getString(_title);
+		if (_title == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _title;
+		}
 	}
 
 	public void setTitle(String title) {
@@ -312,7 +338,12 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 	}
 
 	public String getDescription() {
-		return GetterUtil.getString(_description);
+		if (_description == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _description;
+		}
 	}
 
 	public void setDescription(String description) {
@@ -320,7 +351,12 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 	}
 
 	public String getVersion() {
-		return GetterUtil.getString(_version);
+		if (_version == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _version;
+		}
 	}
 
 	public void setVersion(String version) {
@@ -344,7 +380,12 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 	}
 
 	public String getExtraSettings() {
-		return GetterUtil.getString(_extraSettings);
+		if (_extraSettings == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _extraSettings;
+		}
 	}
 
 	public void setExtraSettings(String extraSettings) {

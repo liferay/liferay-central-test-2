@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.ContactSoap;
 import com.liferay.portal.service.ServiceContext;
@@ -200,7 +201,12 @@ public class ContactModelImpl extends BaseModelImpl<Contact> {
 	}
 
 	public String getUserName() {
-		return GetterUtil.getString(_userName);
+		if (_userName == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _userName;
+		}
 	}
 
 	public void setUserName(String userName) {
@@ -240,7 +246,12 @@ public class ContactModelImpl extends BaseModelImpl<Contact> {
 	}
 
 	public String getFirstName() {
-		return GetterUtil.getString(_firstName);
+		if (_firstName == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _firstName;
+		}
 	}
 
 	public void setFirstName(String firstName) {
@@ -248,7 +259,12 @@ public class ContactModelImpl extends BaseModelImpl<Contact> {
 	}
 
 	public String getMiddleName() {
-		return GetterUtil.getString(_middleName);
+		if (_middleName == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _middleName;
+		}
 	}
 
 	public void setMiddleName(String middleName) {
@@ -256,7 +272,12 @@ public class ContactModelImpl extends BaseModelImpl<Contact> {
 	}
 
 	public String getLastName() {
-		return GetterUtil.getString(_lastName);
+		if (_lastName == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _lastName;
+		}
 	}
 
 	public void setLastName(String lastName) {
@@ -300,7 +321,12 @@ public class ContactModelImpl extends BaseModelImpl<Contact> {
 	}
 
 	public String getSmsSn() {
-		return GetterUtil.getString(_smsSn);
+		if (_smsSn == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _smsSn;
+		}
 	}
 
 	public void setSmsSn(String smsSn) {
@@ -308,7 +334,12 @@ public class ContactModelImpl extends BaseModelImpl<Contact> {
 	}
 
 	public String getAimSn() {
-		return GetterUtil.getString(_aimSn);
+		if (_aimSn == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _aimSn;
+		}
 	}
 
 	public void setAimSn(String aimSn) {
@@ -316,7 +347,12 @@ public class ContactModelImpl extends BaseModelImpl<Contact> {
 	}
 
 	public String getFacebookSn() {
-		return GetterUtil.getString(_facebookSn);
+		if (_facebookSn == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _facebookSn;
+		}
 	}
 
 	public void setFacebookSn(String facebookSn) {
@@ -324,7 +360,12 @@ public class ContactModelImpl extends BaseModelImpl<Contact> {
 	}
 
 	public String getIcqSn() {
-		return GetterUtil.getString(_icqSn);
+		if (_icqSn == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _icqSn;
+		}
 	}
 
 	public void setIcqSn(String icqSn) {
@@ -332,7 +373,12 @@ public class ContactModelImpl extends BaseModelImpl<Contact> {
 	}
 
 	public String getJabberSn() {
-		return GetterUtil.getString(_jabberSn);
+		if (_jabberSn == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _jabberSn;
+		}
 	}
 
 	public void setJabberSn(String jabberSn) {
@@ -340,7 +386,12 @@ public class ContactModelImpl extends BaseModelImpl<Contact> {
 	}
 
 	public String getMsnSn() {
-		return GetterUtil.getString(_msnSn);
+		if (_msnSn == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _msnSn;
+		}
 	}
 
 	public void setMsnSn(String msnSn) {
@@ -348,7 +399,12 @@ public class ContactModelImpl extends BaseModelImpl<Contact> {
 	}
 
 	public String getMySpaceSn() {
-		return GetterUtil.getString(_mySpaceSn);
+		if (_mySpaceSn == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _mySpaceSn;
+		}
 	}
 
 	public void setMySpaceSn(String mySpaceSn) {
@@ -356,7 +412,12 @@ public class ContactModelImpl extends BaseModelImpl<Contact> {
 	}
 
 	public String getSkypeSn() {
-		return GetterUtil.getString(_skypeSn);
+		if (_skypeSn == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _skypeSn;
+		}
 	}
 
 	public void setSkypeSn(String skypeSn) {
@@ -364,7 +425,12 @@ public class ContactModelImpl extends BaseModelImpl<Contact> {
 	}
 
 	public String getTwitterSn() {
-		return GetterUtil.getString(_twitterSn);
+		if (_twitterSn == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _twitterSn;
+		}
 	}
 
 	public void setTwitterSn(String twitterSn) {
@@ -372,7 +438,12 @@ public class ContactModelImpl extends BaseModelImpl<Contact> {
 	}
 
 	public String getYmSn() {
-		return GetterUtil.getString(_ymSn);
+		if (_ymSn == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _ymSn;
+		}
 	}
 
 	public void setYmSn(String ymSn) {
@@ -380,7 +451,12 @@ public class ContactModelImpl extends BaseModelImpl<Contact> {
 	}
 
 	public String getEmployeeStatusId() {
-		return GetterUtil.getString(_employeeStatusId);
+		if (_employeeStatusId == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _employeeStatusId;
+		}
 	}
 
 	public void setEmployeeStatusId(String employeeStatusId) {
@@ -388,7 +464,12 @@ public class ContactModelImpl extends BaseModelImpl<Contact> {
 	}
 
 	public String getEmployeeNumber() {
-		return GetterUtil.getString(_employeeNumber);
+		if (_employeeNumber == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _employeeNumber;
+		}
 	}
 
 	public void setEmployeeNumber(String employeeNumber) {
@@ -396,7 +477,12 @@ public class ContactModelImpl extends BaseModelImpl<Contact> {
 	}
 
 	public String getJobTitle() {
-		return GetterUtil.getString(_jobTitle);
+		if (_jobTitle == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _jobTitle;
+		}
 	}
 
 	public void setJobTitle(String jobTitle) {
@@ -404,7 +490,12 @@ public class ContactModelImpl extends BaseModelImpl<Contact> {
 	}
 
 	public String getJobClass() {
-		return GetterUtil.getString(_jobClass);
+		if (_jobClass == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _jobClass;
+		}
 	}
 
 	public void setJobClass(String jobClass) {
@@ -412,7 +503,12 @@ public class ContactModelImpl extends BaseModelImpl<Contact> {
 	}
 
 	public String getHoursOfOperation() {
-		return GetterUtil.getString(_hoursOfOperation);
+		if (_hoursOfOperation == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _hoursOfOperation;
+		}
 	}
 
 	public void setHoursOfOperation(String hoursOfOperation) {

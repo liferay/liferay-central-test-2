@@ -148,7 +148,12 @@ public class AnnouncementsEntryModelImpl extends BaseModelImpl<AnnouncementsEntr
 	}
 
 	public String getUuid() {
-		return GetterUtil.getString(_uuid);
+		if (_uuid == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _uuid;
+		}
 	}
 
 	public void setUuid(String uuid) {
@@ -188,7 +193,12 @@ public class AnnouncementsEntryModelImpl extends BaseModelImpl<AnnouncementsEntr
 	}
 
 	public String getUserName() {
-		return GetterUtil.getString(_userName);
+		if (_userName == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _userName;
+		}
 	}
 
 	public void setUserName(String userName) {
@@ -236,7 +246,12 @@ public class AnnouncementsEntryModelImpl extends BaseModelImpl<AnnouncementsEntr
 	}
 
 	public String getTitle() {
-		return GetterUtil.getString(_title);
+		if (_title == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _title;
+		}
 	}
 
 	public void setTitle(String title) {
@@ -244,7 +259,12 @@ public class AnnouncementsEntryModelImpl extends BaseModelImpl<AnnouncementsEntr
 	}
 
 	public String getContent() {
-		return GetterUtil.getString(_content);
+		if (_content == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _content;
+		}
 	}
 
 	public void setContent(String content) {
@@ -252,7 +272,12 @@ public class AnnouncementsEntryModelImpl extends BaseModelImpl<AnnouncementsEntr
 	}
 
 	public String getUrl() {
-		return GetterUtil.getString(_url);
+		if (_url == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _url;
+		}
 	}
 
 	public void setUrl(String url) {
@@ -260,7 +285,12 @@ public class AnnouncementsEntryModelImpl extends BaseModelImpl<AnnouncementsEntr
 	}
 
 	public String getType() {
-		return GetterUtil.getString(_type);
+		if (_type == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _type;
+		}
 	}
 
 	public void setType(String type) {

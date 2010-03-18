@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Lock;
 import com.liferay.portal.model.LockSoap;
 import com.liferay.portal.service.ServiceContext;
@@ -130,7 +131,12 @@ public class LockModelImpl extends BaseModelImpl<Lock> {
 	}
 
 	public String getUuid() {
-		return GetterUtil.getString(_uuid);
+		if (_uuid == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _uuid;
+		}
 	}
 
 	public void setUuid(String uuid) {
@@ -170,7 +176,12 @@ public class LockModelImpl extends BaseModelImpl<Lock> {
 	}
 
 	public String getUserName() {
-		return GetterUtil.getString(_userName);
+		if (_userName == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _userName;
+		}
 	}
 
 	public void setUserName(String userName) {
@@ -186,7 +197,12 @@ public class LockModelImpl extends BaseModelImpl<Lock> {
 	}
 
 	public String getClassName() {
-		return GetterUtil.getString(_className);
+		if (_className == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _className;
+		}
 	}
 
 	public void setClassName(String className) {
@@ -202,7 +218,12 @@ public class LockModelImpl extends BaseModelImpl<Lock> {
 	}
 
 	public String getKey() {
-		return GetterUtil.getString(_key);
+		if (_key == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _key;
+		}
 	}
 
 	public void setKey(String key) {
@@ -218,7 +239,12 @@ public class LockModelImpl extends BaseModelImpl<Lock> {
 	}
 
 	public String getOwner() {
-		return GetterUtil.getString(_owner);
+		if (_owner == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _owner;
+		}
 	}
 
 	public void setOwner(String owner) {

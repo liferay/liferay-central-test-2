@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.service.ServiceContext;
@@ -143,7 +144,12 @@ public class PollsQuestionModelImpl extends BaseModelImpl<PollsQuestion> {
 	}
 
 	public String getUuid() {
-		return GetterUtil.getString(_uuid);
+		if (_uuid == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _uuid;
+		}
 	}
 
 	public void setUuid(String uuid) {
@@ -209,7 +215,12 @@ public class PollsQuestionModelImpl extends BaseModelImpl<PollsQuestion> {
 	}
 
 	public String getUserName() {
-		return GetterUtil.getString(_userName);
+		if (_userName == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _userName;
+		}
 	}
 
 	public void setUserName(String userName) {
@@ -233,7 +244,12 @@ public class PollsQuestionModelImpl extends BaseModelImpl<PollsQuestion> {
 	}
 
 	public String getTitle() {
-		return GetterUtil.getString(_title);
+		if (_title == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _title;
+		}
 	}
 
 	public String getTitle(Locale locale) {
@@ -307,7 +323,12 @@ public class PollsQuestionModelImpl extends BaseModelImpl<PollsQuestion> {
 	}
 
 	public String getDescription() {
-		return GetterUtil.getString(_description);
+		if (_description == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _description;
+		}
 	}
 
 	public String getDescription(Locale locale) {

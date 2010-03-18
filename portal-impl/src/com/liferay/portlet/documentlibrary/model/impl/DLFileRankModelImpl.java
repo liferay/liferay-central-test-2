@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
@@ -212,7 +213,12 @@ public class DLFileRankModelImpl extends BaseModelImpl<DLFileRank> {
 	}
 
 	public String getName() {
-		return GetterUtil.getString(_name);
+		if (_name == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _name;
+		}
 	}
 
 	public void setName(String name) {

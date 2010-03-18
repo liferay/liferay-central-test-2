@@ -179,7 +179,12 @@ public class PortletItemModelImpl extends BaseModelImpl<PortletItem> {
 	}
 
 	public String getUserName() {
-		return GetterUtil.getString(_userName);
+		if (_userName == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _userName;
+		}
 	}
 
 	public void setUserName(String userName) {
@@ -203,7 +208,12 @@ public class PortletItemModelImpl extends BaseModelImpl<PortletItem> {
 	}
 
 	public String getName() {
-		return GetterUtil.getString(_name);
+		if (_name == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _name;
+		}
 	}
 
 	public void setName(String name) {
@@ -219,7 +229,12 @@ public class PortletItemModelImpl extends BaseModelImpl<PortletItem> {
 	}
 
 	public String getPortletId() {
-		return GetterUtil.getString(_portletId);
+		if (_portletId == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _portletId;
+		}
 	}
 
 	public void setPortletId(String portletId) {

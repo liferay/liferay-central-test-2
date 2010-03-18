@@ -227,7 +227,12 @@ public class ExpandoValueModelImpl extends BaseModelImpl<ExpandoValue> {
 	}
 
 	public String getData() {
-		return GetterUtil.getString(_data);
+		if (_data == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _data;
+		}
 	}
 
 	public void setData(String data) {

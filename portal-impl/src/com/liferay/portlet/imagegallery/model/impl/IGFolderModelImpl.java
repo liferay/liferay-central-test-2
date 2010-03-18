@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
@@ -131,7 +132,12 @@ public class IGFolderModelImpl extends BaseModelImpl<IGFolder> {
 	}
 
 	public String getUuid() {
-		return GetterUtil.getString(_uuid);
+		if (_uuid == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _uuid;
+		}
 	}
 
 	public void setUuid(String uuid) {
@@ -231,7 +237,12 @@ public class IGFolderModelImpl extends BaseModelImpl<IGFolder> {
 	}
 
 	public String getName() {
-		return GetterUtil.getString(_name);
+		if (_name == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _name;
+		}
 	}
 
 	public void setName(String name) {
@@ -247,7 +258,12 @@ public class IGFolderModelImpl extends BaseModelImpl<IGFolder> {
 	}
 
 	public String getDescription() {
-		return GetterUtil.getString(_description);
+		if (_description == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _description;
+		}
 	}
 
 	public void setDescription(String description) {

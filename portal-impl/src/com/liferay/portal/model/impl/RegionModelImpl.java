@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Region;
 import com.liferay.portal.model.RegionSoap;
 import com.liferay.portal.service.ServiceContext;
@@ -133,7 +134,12 @@ public class RegionModelImpl extends BaseModelImpl<Region> {
 	}
 
 	public String getRegionCode() {
-		return GetterUtil.getString(_regionCode);
+		if (_regionCode == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _regionCode;
+		}
 	}
 
 	public void setRegionCode(String regionCode) {
@@ -141,7 +147,12 @@ public class RegionModelImpl extends BaseModelImpl<Region> {
 	}
 
 	public String getName() {
-		return GetterUtil.getString(_name);
+		if (_name == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _name;
+		}
 	}
 
 	public void setName(String name) {

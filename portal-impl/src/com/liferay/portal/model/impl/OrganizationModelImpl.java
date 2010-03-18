@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.OrganizationSoap;
 import com.liferay.portal.service.ServiceContext;
@@ -195,7 +196,12 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization> {
 	}
 
 	public String getName() {
-		return GetterUtil.getString(_name);
+		if (_name == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _name;
+		}
 	}
 
 	public void setName(String name) {
@@ -211,7 +217,12 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization> {
 	}
 
 	public String getType() {
-		return GetterUtil.getString(_type);
+		if (_type == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _type;
+		}
 	}
 
 	public void setType(String type) {
@@ -255,7 +266,12 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization> {
 	}
 
 	public String getComments() {
-		return GetterUtil.getString(_comments);
+		if (_comments == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _comments;
+		}
 	}
 
 	public void setComments(String comments) {

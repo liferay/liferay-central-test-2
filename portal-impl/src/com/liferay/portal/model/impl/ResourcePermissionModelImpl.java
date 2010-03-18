@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.ResourcePermission;
 import com.liferay.portal.model.ResourcePermissionSoap;
 import com.liferay.portal.service.ServiceContext;
@@ -146,7 +147,12 @@ public class ResourcePermissionModelImpl extends BaseModelImpl<ResourcePermissio
 	}
 
 	public String getName() {
-		return GetterUtil.getString(_name);
+		if (_name == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _name;
+		}
 	}
 
 	public void setName(String name) {
@@ -180,7 +186,12 @@ public class ResourcePermissionModelImpl extends BaseModelImpl<ResourcePermissio
 	}
 
 	public String getPrimKey() {
-		return GetterUtil.getString(_primKey);
+		if (_primKey == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _primKey;
+		}
 	}
 
 	public void setPrimKey(String primKey) {

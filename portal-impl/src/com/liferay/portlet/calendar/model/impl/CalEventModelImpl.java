@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
@@ -156,7 +157,12 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent> {
 	}
 
 	public String getUuid() {
-		return GetterUtil.getString(_uuid);
+		if (_uuid == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _uuid;
+		}
 	}
 
 	public void setUuid(String uuid) {
@@ -222,7 +228,12 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent> {
 	}
 
 	public String getUserName() {
-		return GetterUtil.getString(_userName);
+		if (_userName == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _userName;
+		}
 	}
 
 	public void setUserName(String userName) {
@@ -246,7 +257,12 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent> {
 	}
 
 	public String getTitle() {
-		return GetterUtil.getString(_title);
+		if (_title == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _title;
+		}
 	}
 
 	public void setTitle(String title) {
@@ -254,7 +270,12 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent> {
 	}
 
 	public String getDescription() {
-		return GetterUtil.getString(_description);
+		if (_description == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _description;
+		}
 	}
 
 	public void setDescription(String description) {
@@ -318,7 +339,12 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent> {
 	}
 
 	public String getType() {
-		return GetterUtil.getString(_type);
+		if (_type == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _type;
+		}
 	}
 
 	public void setType(String type) {
@@ -338,7 +364,12 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent> {
 	}
 
 	public String getRecurrence() {
-		return GetterUtil.getString(_recurrence);
+		if (_recurrence == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _recurrence;
+		}
 	}
 
 	public void setRecurrence(String recurrence) {

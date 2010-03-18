@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
@@ -139,7 +140,12 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut> {
 	}
 
 	public String getUuid() {
-		return GetterUtil.getString(_uuid);
+		if (_uuid == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _uuid;
+		}
 	}
 
 	public void setUuid(String uuid) {
@@ -205,7 +211,12 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut> {
 	}
 
 	public String getUserName() {
-		return GetterUtil.getString(_userName);
+		if (_userName == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _userName;
+		}
 	}
 
 	public void setUserName(String userName) {
@@ -245,7 +256,12 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut> {
 	}
 
 	public String getToName() {
-		return GetterUtil.getString(_toName);
+		if (_toName == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _toName;
+		}
 	}
 
 	public void setToName(String toName) {
@@ -278,7 +294,12 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut> {
 	}
 
 	public String getStatusByUserName() {
-		return GetterUtil.getString(_statusByUserName);
+		if (_statusByUserName == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _statusByUserName;
+		}
 	}
 
 	public void setStatusByUserName(String statusByUserName) {

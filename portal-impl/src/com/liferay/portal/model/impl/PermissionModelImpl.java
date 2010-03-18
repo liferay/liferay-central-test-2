@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Permission;
 import com.liferay.portal.model.PermissionSoap;
 import com.liferay.portal.service.ServiceContext;
@@ -135,7 +136,12 @@ public class PermissionModelImpl extends BaseModelImpl<Permission> {
 	}
 
 	public String getActionId() {
-		return GetterUtil.getString(_actionId);
+		if (_actionId == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _actionId;
+		}
 	}
 
 	public void setActionId(String actionId) {

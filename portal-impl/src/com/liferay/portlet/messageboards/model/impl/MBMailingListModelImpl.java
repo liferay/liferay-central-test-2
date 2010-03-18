@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
@@ -159,7 +160,12 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList> {
 	}
 
 	public String getUuid() {
-		return GetterUtil.getString(_uuid);
+		if (_uuid == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _uuid;
+		}
 	}
 
 	public void setUuid(String uuid) {
@@ -225,7 +231,12 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList> {
 	}
 
 	public String getUserName() {
-		return GetterUtil.getString(_userName);
+		if (_userName == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _userName;
+		}
 	}
 
 	public void setUserName(String userName) {
@@ -267,7 +278,12 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList> {
 	}
 
 	public String getEmailAddress() {
-		return GetterUtil.getString(_emailAddress);
+		if (_emailAddress == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _emailAddress;
+		}
 	}
 
 	public void setEmailAddress(String emailAddress) {
@@ -275,7 +291,12 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList> {
 	}
 
 	public String getInProtocol() {
-		return GetterUtil.getString(_inProtocol);
+		if (_inProtocol == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _inProtocol;
+		}
 	}
 
 	public void setInProtocol(String inProtocol) {
@@ -283,7 +304,12 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList> {
 	}
 
 	public String getInServerName() {
-		return GetterUtil.getString(_inServerName);
+		if (_inServerName == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _inServerName;
+		}
 	}
 
 	public void setInServerName(String inServerName) {
@@ -311,7 +337,12 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList> {
 	}
 
 	public String getInUserName() {
-		return GetterUtil.getString(_inUserName);
+		if (_inUserName == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _inUserName;
+		}
 	}
 
 	public void setInUserName(String inUserName) {
@@ -319,7 +350,12 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList> {
 	}
 
 	public String getInPassword() {
-		return GetterUtil.getString(_inPassword);
+		if (_inPassword == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _inPassword;
+		}
 	}
 
 	public void setInPassword(String inPassword) {
@@ -335,7 +371,12 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList> {
 	}
 
 	public String getOutEmailAddress() {
-		return GetterUtil.getString(_outEmailAddress);
+		if (_outEmailAddress == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _outEmailAddress;
+		}
 	}
 
 	public void setOutEmailAddress(String outEmailAddress) {
@@ -355,7 +396,12 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList> {
 	}
 
 	public String getOutServerName() {
-		return GetterUtil.getString(_outServerName);
+		if (_outServerName == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _outServerName;
+		}
 	}
 
 	public void setOutServerName(String outServerName) {
@@ -383,7 +429,12 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList> {
 	}
 
 	public String getOutUserName() {
-		return GetterUtil.getString(_outUserName);
+		if (_outUserName == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _outUserName;
+		}
 	}
 
 	public void setOutUserName(String outUserName) {
@@ -391,7 +442,12 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList> {
 	}
 
 	public String getOutPassword() {
-		return GetterUtil.getString(_outPassword);
+		if (_outPassword == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _outPassword;
+		}
 	}
 
 	public void setOutPassword(String outPassword) {

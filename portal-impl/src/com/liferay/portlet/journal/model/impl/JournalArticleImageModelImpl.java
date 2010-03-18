@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.service.ServiceContext;
 
@@ -149,7 +150,12 @@ public class JournalArticleImageModelImpl extends BaseModelImpl<JournalArticleIm
 	}
 
 	public String getArticleId() {
-		return GetterUtil.getString(_articleId);
+		if (_articleId == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _articleId;
+		}
 	}
 
 	public void setArticleId(String articleId) {
@@ -183,7 +189,12 @@ public class JournalArticleImageModelImpl extends BaseModelImpl<JournalArticleIm
 	}
 
 	public String getElInstanceId() {
-		return GetterUtil.getString(_elInstanceId);
+		if (_elInstanceId == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _elInstanceId;
+		}
 	}
 
 	public void setElInstanceId(String elInstanceId) {
@@ -199,7 +210,12 @@ public class JournalArticleImageModelImpl extends BaseModelImpl<JournalArticleIm
 	}
 
 	public String getElName() {
-		return GetterUtil.getString(_elName);
+		if (_elName == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _elName;
+		}
 	}
 
 	public void setElName(String elName) {
@@ -215,7 +231,12 @@ public class JournalArticleImageModelImpl extends BaseModelImpl<JournalArticleIm
 	}
 
 	public String getLanguageId() {
-		return GetterUtil.getString(_languageId);
+		if (_languageId == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _languageId;
+		}
 	}
 
 	public void setLanguageId(String languageId) {

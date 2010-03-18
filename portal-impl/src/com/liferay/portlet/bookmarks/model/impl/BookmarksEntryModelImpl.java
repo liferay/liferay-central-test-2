@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
@@ -137,7 +138,12 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry> {
 	}
 
 	public String getUuid() {
-		return GetterUtil.getString(_uuid);
+		if (_uuid == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _uuid;
+		}
 	}
 
 	public void setUuid(String uuid) {
@@ -227,7 +233,12 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry> {
 	}
 
 	public String getName() {
-		return GetterUtil.getString(_name);
+		if (_name == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _name;
+		}
 	}
 
 	public void setName(String name) {
@@ -235,7 +246,12 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry> {
 	}
 
 	public String getUrl() {
-		return GetterUtil.getString(_url);
+		if (_url == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _url;
+		}
 	}
 
 	public void setUrl(String url) {
@@ -243,7 +259,12 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry> {
 	}
 
 	public String getComments() {
-		return GetterUtil.getString(_comments);
+		if (_comments == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _comments;
+		}
 	}
 
 	public void setComments(String comments) {

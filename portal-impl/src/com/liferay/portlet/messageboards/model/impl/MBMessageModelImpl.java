@@ -159,7 +159,12 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage> {
 	}
 
 	public String getUuid() {
-		return GetterUtil.getString(_uuid);
+		if (_uuid == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _uuid;
+		}
 	}
 
 	public void setUuid(String uuid) {
@@ -225,7 +230,12 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage> {
 	}
 
 	public String getUserName() {
-		return GetterUtil.getString(_userName);
+		if (_userName == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _userName;
+		}
 	}
 
 	public void setUserName(String userName) {
@@ -297,7 +307,12 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage> {
 	}
 
 	public String getSubject() {
-		return GetterUtil.getString(_subject);
+		if (_subject == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _subject;
+		}
 	}
 
 	public void setSubject(String subject) {
@@ -305,7 +320,12 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage> {
 	}
 
 	public String getBody() {
-		return GetterUtil.getString(_body);
+		if (_body == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _body;
+		}
 	}
 
 	public void setBody(String body) {
@@ -382,7 +402,12 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage> {
 	}
 
 	public String getStatusByUserName() {
-		return GetterUtil.getString(_statusByUserName);
+		if (_statusByUserName == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _statusByUserName;
+		}
 	}
 
 	public void setStatusByUserName(String statusByUserName) {

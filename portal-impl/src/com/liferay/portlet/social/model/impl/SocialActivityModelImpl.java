@@ -291,7 +291,12 @@ public class SocialActivityModelImpl extends BaseModelImpl<SocialActivity> {
 	}
 
 	public String getExtraData() {
-		return GetterUtil.getString(_extraData);
+		if (_extraData == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _extraData;
+		}
 	}
 
 	public void setExtraData(String extraData) {

@@ -283,7 +283,12 @@ public class GroupModelImpl extends BaseModelImpl<Group> {
 	}
 
 	public String getName() {
-		return GetterUtil.getString(_name);
+		if (_name == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _name;
+		}
 	}
 
 	public void setName(String name) {
@@ -299,7 +304,12 @@ public class GroupModelImpl extends BaseModelImpl<Group> {
 	}
 
 	public String getDescription() {
-		return GetterUtil.getString(_description);
+		if (_description == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _description;
+		}
 	}
 
 	public void setDescription(String description) {
@@ -315,7 +325,12 @@ public class GroupModelImpl extends BaseModelImpl<Group> {
 	}
 
 	public String getTypeSettings() {
-		return GetterUtil.getString(_typeSettings);
+		if (_typeSettings == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _typeSettings;
+		}
 	}
 
 	public void setTypeSettings(String typeSettings) {
@@ -323,7 +338,12 @@ public class GroupModelImpl extends BaseModelImpl<Group> {
 	}
 
 	public String getFriendlyURL() {
-		return GetterUtil.getString(_friendlyURL);
+		if (_friendlyURL == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _friendlyURL;
+		}
 	}
 
 	public void setFriendlyURL(String friendlyURL) {

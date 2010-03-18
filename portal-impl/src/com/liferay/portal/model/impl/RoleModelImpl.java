@@ -216,7 +216,12 @@ public class RoleModelImpl extends BaseModelImpl<Role> {
 	}
 
 	public String getName() {
-		return GetterUtil.getString(_name);
+		if (_name == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _name;
+		}
 	}
 
 	public void setName(String name) {
@@ -232,7 +237,12 @@ public class RoleModelImpl extends BaseModelImpl<Role> {
 	}
 
 	public String getTitle() {
-		return GetterUtil.getString(_title);
+		if (_title == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _title;
+		}
 	}
 
 	public String getTitle(Locale locale) {
@@ -306,7 +316,12 @@ public class RoleModelImpl extends BaseModelImpl<Role> {
 	}
 
 	public String getDescription() {
-		return GetterUtil.getString(_description);
+		if (_description == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _description;
+		}
 	}
 
 	public void setDescription(String description) {
@@ -322,7 +337,12 @@ public class RoleModelImpl extends BaseModelImpl<Role> {
 	}
 
 	public String getSubtype() {
-		return GetterUtil.getString(_subtype);
+		if (_subtype == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _subtype;
+		}
 	}
 
 	public void setSubtype(String subtype) {

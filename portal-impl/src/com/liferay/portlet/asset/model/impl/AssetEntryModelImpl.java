@@ -217,7 +217,12 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry> {
 	}
 
 	public String getUserName() {
-		return GetterUtil.getString(_userName);
+		if (_userName == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _userName;
+		}
 	}
 
 	public void setUserName(String userName) {
@@ -329,7 +334,12 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry> {
 	}
 
 	public String getMimeType() {
-		return GetterUtil.getString(_mimeType);
+		if (_mimeType == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _mimeType;
+		}
 	}
 
 	public void setMimeType(String mimeType) {
@@ -337,7 +347,12 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry> {
 	}
 
 	public String getTitle() {
-		return GetterUtil.getString(_title);
+		if (_title == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _title;
+		}
 	}
 
 	public void setTitle(String title) {
@@ -345,7 +360,12 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry> {
 	}
 
 	public String getDescription() {
-		return GetterUtil.getString(_description);
+		if (_description == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _description;
+		}
 	}
 
 	public void setDescription(String description) {
@@ -353,7 +373,12 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry> {
 	}
 
 	public String getSummary() {
-		return GetterUtil.getString(_summary);
+		if (_summary == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _summary;
+		}
 	}
 
 	public void setSummary(String summary) {
@@ -361,7 +386,12 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry> {
 	}
 
 	public String getUrl() {
-		return GetterUtil.getString(_url);
+		if (_url == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _url;
+		}
 	}
 
 	public void setUrl(String url) {

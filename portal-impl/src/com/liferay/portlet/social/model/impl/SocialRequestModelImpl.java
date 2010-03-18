@@ -137,7 +137,12 @@ public class SocialRequestModelImpl extends BaseModelImpl<SocialRequest> {
 	}
 
 	public String getUuid() {
-		return GetterUtil.getString(_uuid);
+		if (_uuid == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _uuid;
+		}
 	}
 
 	public void setUuid(String uuid) {
@@ -291,7 +296,12 @@ public class SocialRequestModelImpl extends BaseModelImpl<SocialRequest> {
 	}
 
 	public String getExtraData() {
-		return GetterUtil.getString(_extraData);
+		if (_extraData == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _extraData;
+		}
 	}
 
 	public void setExtraData(String extraData) {

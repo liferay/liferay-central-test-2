@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserSoap;
 import com.liferay.portal.service.ServiceContext;
@@ -228,7 +229,12 @@ public class UserModelImpl extends BaseModelImpl<User> {
 	}
 
 	public String getUuid() {
-		return GetterUtil.getString(_uuid);
+		if (_uuid == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _uuid;
+		}
 	}
 
 	public void setUuid(String uuid) {
@@ -336,7 +342,12 @@ public class UserModelImpl extends BaseModelImpl<User> {
 	}
 
 	public String getPassword() {
-		return GetterUtil.getString(_password);
+		if (_password == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _password;
+		}
 	}
 
 	public void setPassword(String password) {
@@ -376,7 +387,12 @@ public class UserModelImpl extends BaseModelImpl<User> {
 	}
 
 	public String getReminderQueryQuestion() {
-		return GetterUtil.getString(_reminderQueryQuestion);
+		if (_reminderQueryQuestion == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _reminderQueryQuestion;
+		}
 	}
 
 	public void setReminderQueryQuestion(String reminderQueryQuestion) {
@@ -384,7 +400,12 @@ public class UserModelImpl extends BaseModelImpl<User> {
 	}
 
 	public String getReminderQueryAnswer() {
-		return GetterUtil.getString(_reminderQueryAnswer);
+		if (_reminderQueryAnswer == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _reminderQueryAnswer;
+		}
 	}
 
 	public void setReminderQueryAnswer(String reminderQueryAnswer) {
@@ -400,7 +421,12 @@ public class UserModelImpl extends BaseModelImpl<User> {
 	}
 
 	public String getScreenName() {
-		return GetterUtil.getString(_screenName);
+		if (_screenName == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _screenName;
+		}
 	}
 
 	public void setScreenName(String screenName) {
@@ -416,7 +442,12 @@ public class UserModelImpl extends BaseModelImpl<User> {
 	}
 
 	public String getEmailAddress() {
-		return GetterUtil.getString(_emailAddress);
+		if (_emailAddress == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _emailAddress;
+		}
 	}
 
 	public void setEmailAddress(String emailAddress) {
@@ -432,7 +463,12 @@ public class UserModelImpl extends BaseModelImpl<User> {
 	}
 
 	public String getOpenId() {
-		return GetterUtil.getString(_openId);
+		if (_openId == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _openId;
+		}
 	}
 
 	public void setOpenId(String openId) {
@@ -466,7 +502,12 @@ public class UserModelImpl extends BaseModelImpl<User> {
 	}
 
 	public String getLanguageId() {
-		return GetterUtil.getString(_languageId);
+		if (_languageId == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _languageId;
+		}
 	}
 
 	public void setLanguageId(String languageId) {
@@ -474,7 +515,12 @@ public class UserModelImpl extends BaseModelImpl<User> {
 	}
 
 	public String getTimeZoneId() {
-		return GetterUtil.getString(_timeZoneId);
+		if (_timeZoneId == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _timeZoneId;
+		}
 	}
 
 	public void setTimeZoneId(String timeZoneId) {
@@ -482,7 +528,12 @@ public class UserModelImpl extends BaseModelImpl<User> {
 	}
 
 	public String getGreeting() {
-		return GetterUtil.getString(_greeting);
+		if (_greeting == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _greeting;
+		}
 	}
 
 	public void setGreeting(String greeting) {
@@ -490,7 +541,12 @@ public class UserModelImpl extends BaseModelImpl<User> {
 	}
 
 	public String getComments() {
-		return GetterUtil.getString(_comments);
+		if (_comments == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _comments;
+		}
 	}
 
 	public void setComments(String comments) {
@@ -498,7 +554,12 @@ public class UserModelImpl extends BaseModelImpl<User> {
 	}
 
 	public String getFirstName() {
-		return GetterUtil.getString(_firstName);
+		if (_firstName == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _firstName;
+		}
 	}
 
 	public void setFirstName(String firstName) {
@@ -506,7 +567,12 @@ public class UserModelImpl extends BaseModelImpl<User> {
 	}
 
 	public String getMiddleName() {
-		return GetterUtil.getString(_middleName);
+		if (_middleName == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _middleName;
+		}
 	}
 
 	public void setMiddleName(String middleName) {
@@ -514,7 +580,12 @@ public class UserModelImpl extends BaseModelImpl<User> {
 	}
 
 	public String getLastName() {
-		return GetterUtil.getString(_lastName);
+		if (_lastName == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _lastName;
+		}
 	}
 
 	public void setLastName(String lastName) {
@@ -522,7 +593,12 @@ public class UserModelImpl extends BaseModelImpl<User> {
 	}
 
 	public String getJobTitle() {
-		return GetterUtil.getString(_jobTitle);
+		if (_jobTitle == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _jobTitle;
+		}
 	}
 
 	public void setJobTitle(String jobTitle) {
@@ -538,7 +614,12 @@ public class UserModelImpl extends BaseModelImpl<User> {
 	}
 
 	public String getLoginIP() {
-		return GetterUtil.getString(_loginIP);
+		if (_loginIP == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _loginIP;
+		}
 	}
 
 	public void setLoginIP(String loginIP) {
@@ -554,7 +635,12 @@ public class UserModelImpl extends BaseModelImpl<User> {
 	}
 
 	public String getLastLoginIP() {
-		return GetterUtil.getString(_lastLoginIP);
+		if (_lastLoginIP == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _lastLoginIP;
+		}
 	}
 
 	public void setLastLoginIP(String lastLoginIP) {

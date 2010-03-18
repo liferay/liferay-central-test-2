@@ -127,7 +127,12 @@ public class ClassNameModelImpl extends BaseModelImpl<ClassName> {
 	}
 
 	public String getValue() {
-		return GetterUtil.getString(_value);
+		if (_value == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _value;
+		}
 	}
 
 	public void setValue(String value) {

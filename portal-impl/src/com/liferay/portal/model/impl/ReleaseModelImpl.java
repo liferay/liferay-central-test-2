@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Release;
 import com.liferay.portal.model.ReleaseSoap;
 import com.liferay.portal.service.ServiceContext;
@@ -146,7 +147,12 @@ public class ReleaseModelImpl extends BaseModelImpl<Release> {
 	}
 
 	public String getServletContextName() {
-		return GetterUtil.getString(_servletContextName);
+		if (_servletContextName == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _servletContextName;
+		}
 	}
 
 	public void setServletContextName(String servletContextName) {
@@ -190,7 +196,12 @@ public class ReleaseModelImpl extends BaseModelImpl<Release> {
 	}
 
 	public String getTestString() {
-		return GetterUtil.getString(_testString);
+		if (_testString == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _testString;
+		}
 	}
 
 	public void setTestString(String testString) {

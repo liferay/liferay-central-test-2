@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.UserTracker;
 import com.liferay.portal.model.UserTrackerSoap;
 import com.liferay.portal.service.ServiceContext;
@@ -164,7 +165,12 @@ public class UserTrackerModelImpl extends BaseModelImpl<UserTracker> {
 	}
 
 	public String getSessionId() {
-		return GetterUtil.getString(_sessionId);
+		if (_sessionId == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _sessionId;
+		}
 	}
 
 	public void setSessionId(String sessionId) {
@@ -172,7 +178,12 @@ public class UserTrackerModelImpl extends BaseModelImpl<UserTracker> {
 	}
 
 	public String getRemoteAddr() {
-		return GetterUtil.getString(_remoteAddr);
+		if (_remoteAddr == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _remoteAddr;
+		}
 	}
 
 	public void setRemoteAddr(String remoteAddr) {
@@ -180,7 +191,12 @@ public class UserTrackerModelImpl extends BaseModelImpl<UserTracker> {
 	}
 
 	public String getRemoteHost() {
-		return GetterUtil.getString(_remoteHost);
+		if (_remoteHost == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _remoteHost;
+		}
 	}
 
 	public void setRemoteHost(String remoteHost) {
@@ -188,7 +204,12 @@ public class UserTrackerModelImpl extends BaseModelImpl<UserTracker> {
 	}
 
 	public String getUserAgent() {
-		return GetterUtil.getString(_userAgent);
+		if (_userAgent == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _userAgent;
+		}
 	}
 
 	public void setUserAgent(String userAgent) {

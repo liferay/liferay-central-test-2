@@ -168,7 +168,12 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> {
 	}
 
 	public String getUserName() {
-		return GetterUtil.getString(_userName);
+		if (_userName == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _userName;
+		}
 	}
 
 	public void setUserName(String userName) {
@@ -216,7 +221,12 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> {
 	}
 
 	public String getNumber() {
-		return GetterUtil.getString(_number);
+		if (_number == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _number;
+		}
 	}
 
 	public void setNumber(String number) {
@@ -224,7 +234,12 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> {
 	}
 
 	public String getExtension() {
-		return GetterUtil.getString(_extension);
+		if (_extension == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _extension;
+		}
 	}
 
 	public void setExtension(String extension) {

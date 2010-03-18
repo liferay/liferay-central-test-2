@@ -180,7 +180,12 @@ public class AddressModelImpl extends BaseModelImpl<Address> {
 	}
 
 	public String getUserName() {
-		return GetterUtil.getString(_userName);
+		if (_userName == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _userName;
+		}
 	}
 
 	public void setUserName(String userName) {
@@ -228,7 +233,12 @@ public class AddressModelImpl extends BaseModelImpl<Address> {
 	}
 
 	public String getStreet1() {
-		return GetterUtil.getString(_street1);
+		if (_street1 == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _street1;
+		}
 	}
 
 	public void setStreet1(String street1) {
@@ -236,7 +246,12 @@ public class AddressModelImpl extends BaseModelImpl<Address> {
 	}
 
 	public String getStreet2() {
-		return GetterUtil.getString(_street2);
+		if (_street2 == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _street2;
+		}
 	}
 
 	public void setStreet2(String street2) {
@@ -244,7 +259,12 @@ public class AddressModelImpl extends BaseModelImpl<Address> {
 	}
 
 	public String getStreet3() {
-		return GetterUtil.getString(_street3);
+		if (_street3 == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _street3;
+		}
 	}
 
 	public void setStreet3(String street3) {
@@ -252,7 +272,12 @@ public class AddressModelImpl extends BaseModelImpl<Address> {
 	}
 
 	public String getCity() {
-		return GetterUtil.getString(_city);
+		if (_city == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _city;
+		}
 	}
 
 	public void setCity(String city) {
@@ -260,7 +285,12 @@ public class AddressModelImpl extends BaseModelImpl<Address> {
 	}
 
 	public String getZip() {
-		return GetterUtil.getString(_zip);
+		if (_zip == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _zip;
+		}
 	}
 
 	public void setZip(String zip) {

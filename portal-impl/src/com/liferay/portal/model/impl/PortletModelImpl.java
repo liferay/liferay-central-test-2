@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletSoap;
 import com.liferay.portal.service.ServiceContext;
@@ -141,7 +142,12 @@ public class PortletModelImpl extends BaseModelImpl<Portlet> {
 	}
 
 	public String getPortletId() {
-		return GetterUtil.getString(_portletId);
+		if (_portletId == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _portletId;
+		}
 	}
 
 	public void setPortletId(String portletId) {
@@ -157,7 +163,12 @@ public class PortletModelImpl extends BaseModelImpl<Portlet> {
 	}
 
 	public String getRoles() {
-		return GetterUtil.getString(_roles);
+		if (_roles == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _roles;
+		}
 	}
 
 	public void setRoles(String roles) {

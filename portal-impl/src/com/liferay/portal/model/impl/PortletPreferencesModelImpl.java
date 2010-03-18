@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.PortletPreferences;
 import com.liferay.portal.model.PortletPreferencesSoap;
 import com.liferay.portal.service.ServiceContext;
@@ -180,7 +181,12 @@ public class PortletPreferencesModelImpl extends BaseModelImpl<PortletPreference
 	}
 
 	public String getPortletId() {
-		return GetterUtil.getString(_portletId);
+		if (_portletId == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _portletId;
+		}
 	}
 
 	public void setPortletId(String portletId) {
@@ -196,7 +202,12 @@ public class PortletPreferencesModelImpl extends BaseModelImpl<PortletPreference
 	}
 
 	public String getPreferences() {
-		return GetterUtil.getString(_preferences);
+		if (_preferences == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _preferences;
+		}
 	}
 
 	public void setPreferences(String preferences) {

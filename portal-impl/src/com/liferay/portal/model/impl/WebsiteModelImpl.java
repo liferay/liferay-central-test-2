@@ -166,7 +166,12 @@ public class WebsiteModelImpl extends BaseModelImpl<Website> {
 	}
 
 	public String getUserName() {
-		return GetterUtil.getString(_userName);
+		if (_userName == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _userName;
+		}
 	}
 
 	public void setUserName(String userName) {
@@ -214,7 +219,12 @@ public class WebsiteModelImpl extends BaseModelImpl<Website> {
 	}
 
 	public String getUrl() {
-		return GetterUtil.getString(_url);
+		if (_url == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _url;
+		}
 	}
 
 	public void setUrl(String url) {

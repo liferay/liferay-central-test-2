@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
@@ -157,7 +158,12 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage> {
 	}
 
 	public String getUuid() {
-		return GetterUtil.getString(_uuid);
+		if (_uuid == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _uuid;
+		}
 	}
 
 	public void setUuid(String uuid) {
@@ -231,7 +237,12 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage> {
 	}
 
 	public String getUserName() {
-		return GetterUtil.getString(_userName);
+		if (_userName == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _userName;
+		}
 	}
 
 	public void setUserName(String userName) {
@@ -273,7 +284,12 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage> {
 	}
 
 	public String getTitle() {
-		return GetterUtil.getString(_title);
+		if (_title == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _title;
+		}
 	}
 
 	public void setTitle(String title) {
@@ -319,7 +335,12 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage> {
 	}
 
 	public String getContent() {
-		return GetterUtil.getString(_content);
+		if (_content == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _content;
+		}
 	}
 
 	public void setContent(String content) {
@@ -352,7 +373,12 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage> {
 	}
 
 	public String getStatusByUserName() {
-		return GetterUtil.getString(_statusByUserName);
+		if (_statusByUserName == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _statusByUserName;
+		}
 	}
 
 	public void setStatusByUserName(String statusByUserName) {
@@ -368,7 +394,12 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage> {
 	}
 
 	public String getSummary() {
-		return GetterUtil.getString(_summary);
+		if (_summary == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _summary;
+		}
 	}
 
 	public void setSummary(String summary) {
@@ -376,7 +407,12 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage> {
 	}
 
 	public String getFormat() {
-		return GetterUtil.getString(_format);
+		if (_format == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _format;
+		}
 	}
 
 	public void setFormat(String format) {
@@ -396,7 +432,12 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage> {
 	}
 
 	public String getParentTitle() {
-		return GetterUtil.getString(_parentTitle);
+		if (_parentTitle == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _parentTitle;
+		}
 	}
 
 	public void setParentTitle(String parentTitle) {
@@ -404,7 +445,12 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage> {
 	}
 
 	public String getRedirectTitle() {
-		return GetterUtil.getString(_redirectTitle);
+		if (_redirectTitle == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _redirectTitle;
+		}
 	}
 
 	public void setRedirectTitle(String redirectTitle) {

@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
@@ -187,7 +188,12 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry> {
 	}
 
 	public String getUserName() {
-		return GetterUtil.getString(_userName);
+		if (_userName == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _userName;
+		}
 	}
 
 	public void setUserName(String userName) {
@@ -211,7 +217,12 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry> {
 	}
 
 	public String getName() {
-		return GetterUtil.getString(_name);
+		if (_name == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _name;
+		}
 	}
 
 	public void setName(String name) {
@@ -219,7 +230,12 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry> {
 	}
 
 	public String getType() {
-		return GetterUtil.getString(_type);
+		if (_type == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _type;
+		}
 	}
 
 	public void setType(String type) {
@@ -227,7 +243,12 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry> {
 	}
 
 	public String getTags() {
-		return GetterUtil.getString(_tags);
+		if (_tags == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _tags;
+		}
 	}
 
 	public void setTags(String tags) {
@@ -235,7 +256,12 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry> {
 	}
 
 	public String getShortDescription() {
-		return GetterUtil.getString(_shortDescription);
+		if (_shortDescription == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _shortDescription;
+		}
 	}
 
 	public void setShortDescription(String shortDescription) {
@@ -243,7 +269,12 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry> {
 	}
 
 	public String getLongDescription() {
-		return GetterUtil.getString(_longDescription);
+		if (_longDescription == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _longDescription;
+		}
 	}
 
 	public void setLongDescription(String longDescription) {
@@ -251,7 +282,12 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry> {
 	}
 
 	public String getPageURL() {
-		return GetterUtil.getString(_pageURL);
+		if (_pageURL == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _pageURL;
+		}
 	}
 
 	public void setPageURL(String pageURL) {
@@ -259,7 +295,12 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry> {
 	}
 
 	public String getAuthor() {
-		return GetterUtil.getString(_author);
+		if (_author == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _author;
+		}
 	}
 
 	public void setAuthor(String author) {
@@ -267,7 +308,12 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry> {
 	}
 
 	public String getRepoGroupId() {
-		return GetterUtil.getString(_repoGroupId);
+		if (_repoGroupId == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _repoGroupId;
+		}
 	}
 
 	public void setRepoGroupId(String repoGroupId) {
@@ -283,7 +329,12 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry> {
 	}
 
 	public String getRepoArtifactId() {
-		return GetterUtil.getString(_repoArtifactId);
+		if (_repoArtifactId == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _repoArtifactId;
+		}
 	}
 
 	public void setRepoArtifactId(String repoArtifactId) {

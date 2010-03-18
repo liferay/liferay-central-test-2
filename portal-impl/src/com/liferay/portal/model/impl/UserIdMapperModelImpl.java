@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.UserIdMapper;
 import com.liferay.portal.model.UserIdMapperSoap;
 import com.liferay.portal.service.ServiceContext;
@@ -151,7 +152,12 @@ public class UserIdMapperModelImpl extends BaseModelImpl<UserIdMapper> {
 	}
 
 	public String getType() {
-		return GetterUtil.getString(_type);
+		if (_type == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _type;
+		}
 	}
 
 	public void setType(String type) {
@@ -167,7 +173,12 @@ public class UserIdMapperModelImpl extends BaseModelImpl<UserIdMapper> {
 	}
 
 	public String getDescription() {
-		return GetterUtil.getString(_description);
+		if (_description == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _description;
+		}
 	}
 
 	public void setDescription(String description) {
@@ -175,7 +186,12 @@ public class UserIdMapperModelImpl extends BaseModelImpl<UserIdMapper> {
 	}
 
 	public String getExternalUserId() {
-		return GetterUtil.getString(_externalUserId);
+		if (_externalUserId == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _externalUserId;
+		}
 	}
 
 	public void setExternalUserId(String externalUserId) {

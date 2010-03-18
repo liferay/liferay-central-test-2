@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.CompanySoap;
 import com.liferay.portal.service.ServiceContext;
@@ -139,7 +140,12 @@ public class CompanyModelImpl extends BaseModelImpl<Company> {
 	}
 
 	public String getWebId() {
-		return GetterUtil.getString(_webId);
+		if (_webId == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _webId;
+		}
 	}
 
 	public void setWebId(String webId) {
@@ -155,7 +161,12 @@ public class CompanyModelImpl extends BaseModelImpl<Company> {
 	}
 
 	public String getKey() {
-		return GetterUtil.getString(_key);
+		if (_key == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _key;
+		}
 	}
 
 	public void setKey(String key) {
@@ -163,7 +174,12 @@ public class CompanyModelImpl extends BaseModelImpl<Company> {
 	}
 
 	public String getVirtualHost() {
-		return GetterUtil.getString(_virtualHost);
+		if (_virtualHost == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _virtualHost;
+		}
 	}
 
 	public void setVirtualHost(String virtualHost) {
@@ -179,7 +195,12 @@ public class CompanyModelImpl extends BaseModelImpl<Company> {
 	}
 
 	public String getMx() {
-		return GetterUtil.getString(_mx);
+		if (_mx == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _mx;
+		}
 	}
 
 	public void setMx(String mx) {
@@ -195,7 +216,12 @@ public class CompanyModelImpl extends BaseModelImpl<Company> {
 	}
 
 	public String getHomeURL() {
-		return GetterUtil.getString(_homeURL);
+		if (_homeURL == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _homeURL;
+		}
 	}
 
 	public void setHomeURL(String homeURL) {

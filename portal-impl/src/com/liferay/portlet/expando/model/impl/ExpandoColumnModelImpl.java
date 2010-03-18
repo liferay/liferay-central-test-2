@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.impl.BaseModelImpl;
 
 import com.liferay.portlet.expando.model.ExpandoColumn;
@@ -153,7 +154,12 @@ public class ExpandoColumnModelImpl extends BaseModelImpl<ExpandoColumn> {
 	}
 
 	public String getName() {
-		return GetterUtil.getString(_name);
+		if (_name == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _name;
+		}
 	}
 
 	public void setName(String name) {
@@ -177,7 +183,12 @@ public class ExpandoColumnModelImpl extends BaseModelImpl<ExpandoColumn> {
 	}
 
 	public String getDefaultData() {
-		return GetterUtil.getString(_defaultData);
+		if (_defaultData == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _defaultData;
+		}
 	}
 
 	public void setDefaultData(String defaultData) {
@@ -185,7 +196,12 @@ public class ExpandoColumnModelImpl extends BaseModelImpl<ExpandoColumn> {
 	}
 
 	public String getTypeSettings() {
-		return GetterUtil.getString(_typeSettings);
+		if (_typeSettings == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _typeSettings;
+		}
 	}
 
 	public void setTypeSettings(String typeSettings) {

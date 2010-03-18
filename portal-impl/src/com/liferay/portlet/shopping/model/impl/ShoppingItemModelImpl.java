@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
@@ -229,7 +230,12 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem> {
 	}
 
 	public String getUserName() {
-		return GetterUtil.getString(_userName);
+		if (_userName == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _userName;
+		}
 	}
 
 	public void setUserName(String userName) {
@@ -261,7 +267,12 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem> {
 	}
 
 	public String getSku() {
-		return GetterUtil.getString(_sku);
+		if (_sku == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _sku;
+		}
 	}
 
 	public void setSku(String sku) {
@@ -277,7 +288,12 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem> {
 	}
 
 	public String getName() {
-		return GetterUtil.getString(_name);
+		if (_name == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _name;
+		}
 	}
 
 	public void setName(String name) {
@@ -285,7 +301,12 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem> {
 	}
 
 	public String getDescription() {
-		return GetterUtil.getString(_description);
+		if (_description == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _description;
+		}
 	}
 
 	public void setDescription(String description) {
@@ -293,7 +314,12 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem> {
 	}
 
 	public String getProperties() {
-		return GetterUtil.getString(_properties);
+		if (_properties == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _properties;
+		}
 	}
 
 	public void setProperties(String properties) {
@@ -313,7 +339,12 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem> {
 	}
 
 	public String getFieldsQuantities() {
-		return GetterUtil.getString(_fieldsQuantities);
+		if (_fieldsQuantities == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _fieldsQuantities;
+		}
 	}
 
 	public void setFieldsQuantities(String fieldsQuantities) {
@@ -459,7 +490,12 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem> {
 	}
 
 	public String getSmallImageURL() {
-		return GetterUtil.getString(_smallImageURL);
+		if (_smallImageURL == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _smallImageURL;
+		}
 	}
 
 	public void setSmallImageURL(String smallImageURL) {
@@ -497,7 +533,12 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem> {
 	}
 
 	public String getMediumImageURL() {
-		return GetterUtil.getString(_mediumImageURL);
+		if (_mediumImageURL == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _mediumImageURL;
+		}
 	}
 
 	public void setMediumImageURL(String mediumImageURL) {
@@ -535,7 +576,12 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem> {
 	}
 
 	public String getLargeImageURL() {
-		return GetterUtil.getString(_largeImageURL);
+		if (_largeImageURL == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _largeImageURL;
+		}
 	}
 
 	public void setLargeImageURL(String largeImageURL) {

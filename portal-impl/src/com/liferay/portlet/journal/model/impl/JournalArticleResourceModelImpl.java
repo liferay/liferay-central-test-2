@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.service.ServiceContext;
 
@@ -140,7 +141,12 @@ public class JournalArticleResourceModelImpl extends BaseModelImpl<JournalArticl
 	}
 
 	public String getArticleId() {
-		return GetterUtil.getString(_articleId);
+		if (_articleId == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _articleId;
+		}
 	}
 
 	public void setArticleId(String articleId) {

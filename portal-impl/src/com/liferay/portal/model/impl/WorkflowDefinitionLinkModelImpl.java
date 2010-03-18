@@ -193,7 +193,12 @@ public class WorkflowDefinitionLinkModelImpl extends BaseModelImpl<WorkflowDefin
 	}
 
 	public String getUserName() {
-		return GetterUtil.getString(_userName);
+		if (_userName == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _userName;
+		}
 	}
 
 	public void setUserName(String userName) {
@@ -243,7 +248,12 @@ public class WorkflowDefinitionLinkModelImpl extends BaseModelImpl<WorkflowDefin
 	}
 
 	public String getWorkflowDefinitionName() {
-		return GetterUtil.getString(_workflowDefinitionName);
+		if (_workflowDefinitionName == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _workflowDefinitionName;
+		}
 	}
 
 	public void setWorkflowDefinitionName(String workflowDefinitionName) {

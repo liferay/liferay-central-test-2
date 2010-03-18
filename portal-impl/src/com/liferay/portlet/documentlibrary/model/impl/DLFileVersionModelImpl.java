@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
@@ -192,7 +193,12 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion> {
 	}
 
 	public String getUserName() {
-		return GetterUtil.getString(_userName);
+		if (_userName == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _userName;
+		}
 	}
 
 	public void setUserName(String userName) {
@@ -226,7 +232,12 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion> {
 	}
 
 	public String getName() {
-		return GetterUtil.getString(_name);
+		if (_name == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _name;
+		}
 	}
 
 	public void setName(String name) {
@@ -242,7 +253,12 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion> {
 	}
 
 	public String getDescription() {
-		return GetterUtil.getString(_description);
+		if (_description == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _description;
+		}
 	}
 
 	public void setDescription(String description) {
@@ -250,7 +266,12 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion> {
 	}
 
 	public String getVersion() {
-		return GetterUtil.getString(_version);
+		if (_version == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _version;
+		}
 	}
 
 	public void setVersion(String version) {
@@ -299,7 +320,12 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion> {
 	}
 
 	public String getStatusByUserName() {
-		return GetterUtil.getString(_statusByUserName);
+		if (_statusByUserName == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _statusByUserName;
+		}
 	}
 
 	public void setStatusByUserName(String statusByUserName) {

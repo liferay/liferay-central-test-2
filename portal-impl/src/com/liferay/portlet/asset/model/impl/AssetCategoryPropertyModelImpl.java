@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
@@ -163,7 +164,12 @@ public class AssetCategoryPropertyModelImpl extends BaseModelImpl<AssetCategoryP
 	}
 
 	public String getUserName() {
-		return GetterUtil.getString(_userName);
+		if (_userName == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _userName;
+		}
 	}
 
 	public void setUserName(String userName) {
@@ -205,7 +211,12 @@ public class AssetCategoryPropertyModelImpl extends BaseModelImpl<AssetCategoryP
 	}
 
 	public String getKey() {
-		return GetterUtil.getString(_key);
+		if (_key == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _key;
+		}
 	}
 
 	public void setKey(String key) {
@@ -221,7 +232,12 @@ public class AssetCategoryPropertyModelImpl extends BaseModelImpl<AssetCategoryP
 	}
 
 	public String getValue() {
-		return GetterUtil.getString(_value);
+		if (_value == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _value;
+		}
 	}
 
 	public void setValue(String value) {

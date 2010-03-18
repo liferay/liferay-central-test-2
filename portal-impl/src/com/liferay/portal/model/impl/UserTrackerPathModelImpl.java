@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.UserTrackerPath;
 import com.liferay.portal.model.UserTrackerPathSoap;
 import com.liferay.portal.service.ServiceContext;
@@ -131,7 +132,12 @@ public class UserTrackerPathModelImpl extends BaseModelImpl<UserTrackerPath> {
 	}
 
 	public String getPath() {
-		return GetterUtil.getString(_path);
+		if (_path == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _path;
+		}
 	}
 
 	public void setPath(String path) {

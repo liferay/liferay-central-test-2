@@ -198,7 +198,12 @@ public class WebDAVPropsModelImpl extends BaseModelImpl<WebDAVProps> {
 	}
 
 	public String getProps() {
-		return GetterUtil.getString(_props);
+		if (_props == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _props;
+		}
 	}
 
 	public void setProps(String props) {

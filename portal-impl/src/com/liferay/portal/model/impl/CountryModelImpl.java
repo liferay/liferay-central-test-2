@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Country;
 import com.liferay.portal.model.CountrySoap;
 import com.liferay.portal.service.ServiceContext;
@@ -129,7 +130,12 @@ public class CountryModelImpl extends BaseModelImpl<Country> {
 	}
 
 	public String getName() {
-		return GetterUtil.getString(_name);
+		if (_name == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _name;
+		}
 	}
 
 	public void setName(String name) {
@@ -145,7 +151,12 @@ public class CountryModelImpl extends BaseModelImpl<Country> {
 	}
 
 	public String getA2() {
-		return GetterUtil.getString(_a2);
+		if (_a2 == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _a2;
+		}
 	}
 
 	public void setA2(String a2) {
@@ -161,7 +172,12 @@ public class CountryModelImpl extends BaseModelImpl<Country> {
 	}
 
 	public String getA3() {
-		return GetterUtil.getString(_a3);
+		if (_a3 == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _a3;
+		}
 	}
 
 	public void setA3(String a3) {
@@ -177,7 +193,12 @@ public class CountryModelImpl extends BaseModelImpl<Country> {
 	}
 
 	public String getNumber() {
-		return GetterUtil.getString(_number);
+		if (_number == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _number;
+		}
 	}
 
 	public void setNumber(String number) {
@@ -185,7 +206,12 @@ public class CountryModelImpl extends BaseModelImpl<Country> {
 	}
 
 	public String getIdd() {
-		return GetterUtil.getString(_idd);
+		if (_idd == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _idd;
+		}
 	}
 
 	public void setIdd(String idd) {

@@ -179,7 +179,12 @@ public class SubscriptionModelImpl extends BaseModelImpl<Subscription> {
 	}
 
 	public String getUserName() {
-		return GetterUtil.getString(_userName);
+		if (_userName == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _userName;
+		}
 	}
 
 	public void setUserName(String userName) {
@@ -247,7 +252,12 @@ public class SubscriptionModelImpl extends BaseModelImpl<Subscription> {
 	}
 
 	public String getFrequency() {
-		return GetterUtil.getString(_frequency);
+		if (_frequency == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _frequency;
+		}
 	}
 
 	public void setFrequency(String frequency) {

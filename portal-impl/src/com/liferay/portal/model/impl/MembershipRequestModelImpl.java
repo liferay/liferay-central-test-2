@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.MembershipRequest;
 import com.liferay.portal.model.MembershipRequestSoap;
 import com.liferay.portal.service.ServiceContext;
@@ -180,7 +181,12 @@ public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest>
 	}
 
 	public String getComments() {
-		return GetterUtil.getString(_comments);
+		if (_comments == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _comments;
+		}
 	}
 
 	public void setComments(String comments) {
@@ -188,7 +194,12 @@ public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest>
 	}
 
 	public String getReplyComments() {
-		return GetterUtil.getString(_replyComments);
+		if (_replyComments == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _replyComments;
+		}
 	}
 
 	public void setReplyComments(String replyComments) {

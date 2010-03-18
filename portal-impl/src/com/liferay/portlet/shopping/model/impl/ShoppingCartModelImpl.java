@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
@@ -191,7 +192,12 @@ public class ShoppingCartModelImpl extends BaseModelImpl<ShoppingCart> {
 	}
 
 	public String getUserName() {
-		return GetterUtil.getString(_userName);
+		if (_userName == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _userName;
+		}
 	}
 
 	public void setUserName(String userName) {
@@ -215,7 +221,12 @@ public class ShoppingCartModelImpl extends BaseModelImpl<ShoppingCart> {
 	}
 
 	public String getItemIds() {
-		return GetterUtil.getString(_itemIds);
+		if (_itemIds == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _itemIds;
+		}
 	}
 
 	public void setItemIds(String itemIds) {
@@ -223,7 +234,12 @@ public class ShoppingCartModelImpl extends BaseModelImpl<ShoppingCart> {
 	}
 
 	public String getCouponCodes() {
-		return GetterUtil.getString(_couponCodes);
+		if (_couponCodes == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _couponCodes;
+		}
 	}
 
 	public void setCouponCodes(String couponCodes) {

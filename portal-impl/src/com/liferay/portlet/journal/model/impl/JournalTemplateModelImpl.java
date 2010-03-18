@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
@@ -148,7 +149,12 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate> {
 	}
 
 	public String getUuid() {
-		return GetterUtil.getString(_uuid);
+		if (_uuid == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _uuid;
+		}
 	}
 
 	public void setUuid(String uuid) {
@@ -214,7 +220,12 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate> {
 	}
 
 	public String getUserName() {
-		return GetterUtil.getString(_userName);
+		if (_userName == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _userName;
+		}
 	}
 
 	public void setUserName(String userName) {
@@ -238,7 +249,12 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate> {
 	}
 
 	public String getTemplateId() {
-		return GetterUtil.getString(_templateId);
+		if (_templateId == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _templateId;
+		}
 	}
 
 	public void setTemplateId(String templateId) {
@@ -254,7 +270,12 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate> {
 	}
 
 	public String getStructureId() {
-		return GetterUtil.getString(_structureId);
+		if (_structureId == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _structureId;
+		}
 	}
 
 	public void setStructureId(String structureId) {
@@ -262,7 +283,12 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate> {
 	}
 
 	public String getName() {
-		return GetterUtil.getString(_name);
+		if (_name == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _name;
+		}
 	}
 
 	public void setName(String name) {
@@ -270,7 +296,12 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate> {
 	}
 
 	public String getDescription() {
-		return GetterUtil.getString(_description);
+		if (_description == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _description;
+		}
 	}
 
 	public void setDescription(String description) {
@@ -278,7 +309,12 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate> {
 	}
 
 	public String getXsl() {
-		return GetterUtil.getString(_xsl);
+		if (_xsl == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _xsl;
+		}
 	}
 
 	public void setXsl(String xsl) {
@@ -286,7 +322,12 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate> {
 	}
 
 	public String getLangType() {
-		return GetterUtil.getString(_langType);
+		if (_langType == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _langType;
+		}
 	}
 
 	public void setLangType(String langType) {
@@ -336,7 +377,12 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate> {
 	}
 
 	public String getSmallImageURL() {
-		return GetterUtil.getString(_smallImageURL);
+		if (_smallImageURL == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _smallImageURL;
+		}
 	}
 
 	public void setSmallImageURL(String smallImageURL) {

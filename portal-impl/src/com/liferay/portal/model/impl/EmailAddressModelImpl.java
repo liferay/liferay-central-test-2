@@ -166,7 +166,12 @@ public class EmailAddressModelImpl extends BaseModelImpl<EmailAddress> {
 	}
 
 	public String getUserName() {
-		return GetterUtil.getString(_userName);
+		if (_userName == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _userName;
+		}
 	}
 
 	public void setUserName(String userName) {
@@ -214,7 +219,12 @@ public class EmailAddressModelImpl extends BaseModelImpl<EmailAddress> {
 	}
 
 	public String getAddress() {
-		return GetterUtil.getString(_address);
+		if (_address == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _address;
+		}
 	}
 
 	public void setAddress(String address) {

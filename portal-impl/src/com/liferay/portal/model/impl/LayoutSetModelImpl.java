@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.LayoutSetSoap;
 import com.liferay.portal.service.ServiceContext;
@@ -209,7 +210,12 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet> {
 	}
 
 	public String getThemeId() {
-		return GetterUtil.getString(_themeId);
+		if (_themeId == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _themeId;
+		}
 	}
 
 	public void setThemeId(String themeId) {
@@ -217,7 +223,12 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet> {
 	}
 
 	public String getColorSchemeId() {
-		return GetterUtil.getString(_colorSchemeId);
+		if (_colorSchemeId == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _colorSchemeId;
+		}
 	}
 
 	public void setColorSchemeId(String colorSchemeId) {
@@ -225,7 +236,12 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet> {
 	}
 
 	public String getWapThemeId() {
-		return GetterUtil.getString(_wapThemeId);
+		if (_wapThemeId == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _wapThemeId;
+		}
 	}
 
 	public void setWapThemeId(String wapThemeId) {
@@ -233,7 +249,12 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet> {
 	}
 
 	public String getWapColorSchemeId() {
-		return GetterUtil.getString(_wapColorSchemeId);
+		if (_wapColorSchemeId == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _wapColorSchemeId;
+		}
 	}
 
 	public void setWapColorSchemeId(String wapColorSchemeId) {
@@ -241,7 +262,12 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet> {
 	}
 
 	public String getCss() {
-		return GetterUtil.getString(_css);
+		if (_css == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _css;
+		}
 	}
 
 	public void setCss(String css) {
@@ -257,7 +283,12 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet> {
 	}
 
 	public String getVirtualHost() {
-		return GetterUtil.getString(_virtualHost);
+		if (_virtualHost == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _virtualHost;
+		}
 	}
 
 	public void setVirtualHost(String virtualHost) {
