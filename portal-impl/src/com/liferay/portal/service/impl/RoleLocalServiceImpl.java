@@ -43,6 +43,7 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.enterpriseadmin.util.EnterpriseAdminUtil;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -339,6 +340,10 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 	public List<Role> getUserRelatedRoles(long userId, List<Group> groups)
 		throws SystemException {
 
+		if ((groups == null) || (groups.isEmpty())) {
+			return Collections.EMPTY_LIST;
+		}
+		
 		return roleFinder.findByU_G(userId, groups);
 	}
 
