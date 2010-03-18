@@ -340,10 +340,10 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 	public List<Role> getUserRelatedRoles(long userId, List<Group> groups)
 		throws SystemException {
 
-		if ((groups == null) || (groups.isEmpty())) {
+		if ((groups == null) || groups.isEmpty()) {
 			return Collections.EMPTY_LIST;
 		}
-		
+
 		return roleFinder.findByU_G(userId, groups);
 	}
 
