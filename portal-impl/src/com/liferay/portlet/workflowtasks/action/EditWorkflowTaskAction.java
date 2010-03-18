@@ -109,7 +109,7 @@ public class EditWorkflowTaskAction extends PortletAction {
 
 		WorkflowTaskManagerUtil.assignWorkflowTaskToUser(
 			themeDisplay.getCompanyId(), themeDisplay.getUserId(),
-			workflowTaskId, assigneeUserId, comment, null);
+			workflowTaskId, assigneeUserId, comment, null, null);
 	}
 
 	protected void updateTask(ActionRequest actionRequest) throws Exception {
