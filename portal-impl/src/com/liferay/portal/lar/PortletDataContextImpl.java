@@ -87,6 +87,8 @@ import java.util.Set;
  * @author Raymond Augé
  * @author Bruno Farache
  * @author Alex Chow
+ * @author Zsigmond Rab
+ * @author Douglas Wong
  */
 public class PortletDataContextImpl implements PortletDataContext {
 
@@ -208,6 +210,25 @@ public class PortletDataContextImpl implements PortletDataContext {
 		String className, long classPK, List<MBMessage> messages) {
 
 		_commentsMap.put(getPrimaryKeyString(className, classPK), messages);
+	}
+
+	public void addDataPermissionKey(Class<?> classObj, long classPK) {
+		addDataPermissionKey(classObj, Long.toString(classPK));
+	}
+
+	public void addDataPermissionKey(Class<?> classObj, String classPK) {
+		String key = getPrimaryKeyString(classObj, classPK);
+
+		if (!_dataPermissionKeys.contains(key)) {
+			_dataPermissionKeys.add(key);
+		}
+	}
+
+	public void addDataPermissionKey(
+		Class<?> classObj, long classPK, long newClassPK) {
+
+		_dataPermissionKeysMap.put(
+			getPrimaryKeyString(classObj.getName(), classPK), newClassPK);
 	}
 
 	public boolean addPrimaryKey(Class<?> classObj, String primaryKey) {
@@ -348,6 +369,15 @@ public class PortletDataContextImpl implements PortletDataContext {
 
 	public long getCompanyId() {
 		return _companyId;
+	}
+
+	public Set<String> getDataPermissionKeys() {
+		return _dataPermissionKeys;
+	}
+
+	public Long getDataPermissionKey(String className, long classPK) {
+		return _dataPermissionKeysMap.get(
+			getPrimaryKeyString(className, classPK));
 	}
 
 	public String getDataStrategy() {
@@ -585,6 +615,11 @@ public class PortletDataContextImpl implements PortletDataContext {
 		return !addPrimaryKey(String.class, path);
 	}
 
+	public boolean isPermissionsEnabled() {
+		return MapUtil.getBoolean(
+			getParameterMap(), PortletDataHandlerKeys.PERMISSIONS);
+	}
+
 	public boolean isPrivateLayout() {
 		return _privateLayout;
 	}
@@ -720,6 +755,9 @@ public class PortletDataContextImpl implements PortletDataContext {
 	private Map<String, List<MBMessage>> _commentsMap =
 		new HashMap<String, List<MBMessage>>();
 	private long _companyId;
+	private Set<String> _dataPermissionKeys = new HashSet<String>();
+	private Map<String, Long> _dataPermissionKeysMap =
+		new HashMap<String, Long>();
 	private String _dataStrategy;
 	private Date _endDate;
 	private long _groupId;

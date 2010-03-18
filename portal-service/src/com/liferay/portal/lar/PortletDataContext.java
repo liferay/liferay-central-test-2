@@ -39,6 +39,8 @@ import java.util.Set;
  *
  * @author Brian Wing Shun Chan
  * @author Raymond Augé
+ * @author Zsigmond Rab
+ * @author Douglas Wong
  */
 public interface PortletDataContext extends Serializable {
 
@@ -65,6 +67,13 @@ public interface PortletDataContext extends Serializable {
 
 	public void addComments(
 		String className, long classPK, List<MBMessage> messages);
+
+	public void addDataPermissionKey(Class<?> classObj, long classPK);
+
+	public void addDataPermissionKey(Class<?> classObj, String classPK);
+
+	public void addDataPermissionKey(
+		Class<?> classObj, long classPK, long newClassPK);
 
 	public boolean addPrimaryKey(Class<?> classObj, String primaryKey);
 
@@ -108,6 +117,10 @@ public interface PortletDataContext extends Serializable {
 	public Map<String, List<MBMessage>> getComments();
 
 	public long getCompanyId();
+
+	public Long getDataPermissionKey(String className, long classPK);
+
+	public Set<String> getDataPermissionKeys();
 
 	public String getDataStrategy();
 
@@ -184,6 +197,8 @@ public interface PortletDataContext extends Serializable {
 		throws PortalException, SystemException;
 
 	public boolean isPathNotProcessed(String path);
+
+	public boolean isPermissionsEnabled();
 
 	public boolean isPrivateLayout();
 
