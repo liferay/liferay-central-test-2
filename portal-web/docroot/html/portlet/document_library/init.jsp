@@ -138,7 +138,7 @@ boolean showDeleteFileEntryButton = false;
 boolean showFolderMenu = false;
 boolean showTabs = false;
 
-if (portletConfig.getPortletName().equals(PortletKeys.DOCUMENT_LIBRARY)) {
+if (portletName.equals(PortletKeys.DOCUMENT_LIBRARY)) {
 	showAddFileEntryButton = true;
 	showAddFileShortcutButton = true;
 	showAddFolderButton = true;
@@ -146,7 +146,7 @@ if (portletConfig.getPortletName().equals(PortletKeys.DOCUMENT_LIBRARY)) {
 	showFolderMenu = true;
 	showTabs = true;
 }
-else if (portletConfig.getPortletName().equals(PortletKeys.DOCUMENT_LIBRARY_DISPLAY)) {
+else if (portletName.equals(PortletKeys.DOCUMENT_LIBRARY_DISPLAY)) {
 	showTabs = true;
 }
 

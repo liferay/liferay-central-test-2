@@ -60,8 +60,6 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 		String folderColumns = ParamUtil.getString(
 			actionRequest, "folderColumns");
 
-		boolean showFileEntriesSearch = ParamUtil.getBoolean(
-			actionRequest, "showFileEntriesSearch");
 		int fileEntriesPerPage = ParamUtil.getInteger(
 			actionRequest, "fileEntriesPerPage");
 		String fileEntryColumns = ParamUtil.getString(
@@ -94,8 +92,6 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 		preferences.setValue("foldersPerPage", String.valueOf(foldersPerPage));
 		preferences.setValue("folderColumns", folderColumns);
 
-		preferences.setValue(
-			"showFileEntriesSearch", String.valueOf(showFileEntriesSearch));
 		preferences.setValue(
 			"fileEntriesPerPage", String.valueOf(fileEntriesPerPage));
 		preferences.setValue("fileEntryColumns", fileEntryColumns);
