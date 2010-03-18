@@ -53,8 +53,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 					<aui:button disabled="<%= rootFolderId <= 0 %>" name="removeFolderButton" onClick='<%= renderResponse.getNamespace() + "removeFolder();" %>' value="remove" />
 				</aui:field-wrapper>
 
-				<aui:input inlineLabel="left" name="showBreadcrumbs" type="checkbox" value="<%= showBreadcrumbs %>" />
-
 				<aui:input inlineLabel="left" label="show-search" name="showFoldersSearch" type="checkbox" value="<%= showFoldersSearch %>" />
 
 				<aui:input inlineLabel="left" name="showSubfolders" type="checkbox" value="<%= showSubfolders %>" />

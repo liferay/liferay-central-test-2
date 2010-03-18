@@ -87,7 +87,6 @@ if (rootFolderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 	}
 }
 
-boolean showBreadcrumbs = PrefsParamUtil.getBoolean(preferences, request, "showBreadcrumbs", true);
 boolean showFoldersSearch = PrefsParamUtil.getBoolean(preferences, request, "showFoldersSearch", true);
 boolean showSubfolders = PrefsParamUtil.getBoolean(preferences, request, "showSubfolders", true);
 int foldersPerPage = PrefsParamUtil.getInteger(preferences, request, "foldersPerPage", SearchContainer.DEFAULT_DELTA);
