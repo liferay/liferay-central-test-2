@@ -16,7 +16,7 @@ package com.liferay.portal.security.auth;
 
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.util.WebKeys;
+import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.util.PwdGenerator;
 
 import javax.servlet.http.HttpServletRequest;

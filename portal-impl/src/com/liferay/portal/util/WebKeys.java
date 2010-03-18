@@ -36,8 +36,6 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 
 	public static final String ASSOCIATE_KEY = LiferayConfigureListener.ASSOCIATE_KEY;
 
-	public static final String AUTHENTICATION_TOKEN = "AUTHENTICATION_TOKEN";
-
 	public static final String BLOGS_CATEGORY = "BLOGS_CATEGORY";
 
 	public static final String BLOGS_ENTRY = "BLOGS_ENTRY";
