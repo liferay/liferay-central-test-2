@@ -34,7 +34,7 @@ import java.util.List;
 public interface WorkflowDefinitionManager {
 
 	public WorkflowDefinition deployWorkflowDefinition(
-			long companyId, long userId, String name,
+			long companyId, long userId,
 			InputStream inputStream)
 		throws WorkflowException;
 

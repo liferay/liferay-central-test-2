@@ -129,8 +129,9 @@ public class EditWorkflowDefinitionAction extends PortletAction {
 
 			if (!active) {
 				int references = 
-					WorkflowDefinitionLinkLocalServiceUtil.searchCount(
-						name, version);
+					WorkflowDefinitionLinkLocalServiceUtil.
+						getWorkflowDefinitionLinksCount(
+							themeDisplay.getCompanyId(), name, version);
 
 				if (references >= 1) {
 					throw new ReferencedWorkflowDefinitionException();
@@ -167,7 +168,7 @@ public class EditWorkflowDefinitionAction extends PortletAction {
 		WorkflowDefinition workflowDefinition =
 			WorkflowDefinitionManagerUtil.deployWorkflowDefinition(
 				themeDisplay.getCompanyId(), themeDisplay.getUserId(),
-				name, new FileInputStream(file));
+				new FileInputStream(file));
 
 		actionRequest.setAttribute(
 			WebKeys.WORKFLOW_DEFINITION, workflowDefinition);

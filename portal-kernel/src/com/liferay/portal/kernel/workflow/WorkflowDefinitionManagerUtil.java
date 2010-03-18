@@ -32,11 +32,11 @@ import java.util.List;
 public class WorkflowDefinitionManagerUtil {
 
 	public static WorkflowDefinition deployWorkflowDefinition(
-			long companyId, long userId, String name, InputStream inputStream)
+			long companyId, long userId, InputStream inputStream)
 		throws WorkflowException {
 
 		return _workflowDefinitionManager.deployWorkflowDefinition(
-			companyId, userId, name, inputStream);
+			companyId, userId, inputStream);
 	}
 
 	public static WorkflowDefinition getWorkflowDefinition(

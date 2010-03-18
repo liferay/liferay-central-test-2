@@ -123,12 +123,13 @@ public class WorkflowDefinitionLinkLocalServiceImpl
 		}
 	}
 
-	public int searchCount(
-			String workflowDefinitionName, int workflowDefinitionVersion)
+	public int getWorkflowDefinitionLinksCount(
+			long companyId, String workflowDefinitionName,
+			int workflowDefinitionVersion)
 		throws SystemException{
 
-		return workflowDefinitionLinkPersistence.countByW_W(
-			workflowDefinitionName, workflowDefinitionVersion);
+		return workflowDefinitionLinkPersistence.countByC_W_W(
+			companyId, workflowDefinitionName, workflowDefinitionVersion);
 	}
 
 	public WorkflowDefinitionLink updateWorkflowDefinitionLink(
