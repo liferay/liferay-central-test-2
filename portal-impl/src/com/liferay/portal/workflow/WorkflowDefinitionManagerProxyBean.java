@@ -56,12 +56,10 @@ public class WorkflowDefinitionManagerProxyBean
 	}
 
 	public int getActiveWorkflowDefinitionCount(long companyId) {
-
 		throw new UnsupportedOperationException();
 	}
 
 	public int getActiveWorkflowDefinitionCount(long companyId, String name) {
-
 		throw new UnsupportedOperationException();
 	}
 
