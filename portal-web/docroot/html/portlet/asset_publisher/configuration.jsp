@@ -24,20 +24,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 String typeSelection = ParamUtil.getString(request, "typeSelection", StringPool.BLANK);
 
 AssetRendererFactory rendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(typeSelection);
-
-PortletURL configurationRenderURL = renderResponse.createRenderURL();
-
-configurationRenderURL.setParameter("struts_action", "/portlet_configuration/edit_configuration");
-configurationRenderURL.setParameter("redirect", redirect);
-configurationRenderURL.setParameter("backURL", redirect);
-configurationRenderURL.setParameter("portletResource", portletResource);
-
-PortletURL configurationActionURL = renderResponse.createActionURL();
-
-configurationActionURL.setParameter("struts_action", "/portlet_configuration/edit_configuration");
-configurationActionURL.setParameter("redirect", redirect);
-configurationActionURL.setParameter("backURL", redirect);
-configurationActionURL.setParameter("portletResource", portletResource);
 %>
 
 <style type="text/css">
@@ -82,8 +68,12 @@ configurationActionURL.setParameter("portletResource", portletResource);
 	}
 </style>
 
-<aui:form action="<%= configurationActionURL.toString() %>" method="post" name="fm">
+<liferay-portlet:actionURL portletConfiguration="true" var="configurationActionURL" />
+<liferay-portlet:renderURL portletConfiguration="true" varImpl="configurationRenderURL" />
+
+<aui:form action="<%= configurationActionURL %>" method="post" name="fm">
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
+	<aui:input name="redirect" type="hidden" value="<%= configurationRenderURL.toString() %>" />
 	<aui:input name="tabs2" type="hidden" value="<%= tabs2 %>" />
 	<aui:input name="typeSelection" type="hidden" />
 	<aui:input name="assetEntryId" type="hidden" />
@@ -248,7 +238,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 					</liferay-ui:panel-container>
 
 					<aui:button-row>
-						<aui:button onClick='<%= renderResponse.getNamespace() + "saveSelectBoxes();" %>' value="save" />
+						<aui:button onClick='<%= renderResponse.getNamespace() + "saveSelectBoxes();" %>' type="submit" />
 
 						<aui:button onClick="<%= redirect %>" type="cancel" />
 					</aui:button-row>
@@ -518,7 +508,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 					</liferay-ui:panel-container>
 
 					<aui:button-row>
-						<aui:button onClick='<%= renderResponse.getNamespace() + "saveSelectBoxes();" %>' value="save" />
+						<aui:button onClick='<%= renderResponse.getNamespace() + "saveSelectBoxes();" %>' type="submit" />
 
 						<aui:button onClick="<%= redirect %>" type="cancel" />
 					</aui:button-row>
