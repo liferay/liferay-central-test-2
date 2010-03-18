@@ -51,8 +51,6 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 
 		long rootFolderId = ParamUtil.getLong(actionRequest, "rootFolderId");
 
-		boolean showBreadcrumbs = ParamUtil.getBoolean(
-			actionRequest, "showBreadcrumbs");
 		boolean showFoldersSearch = ParamUtil.getBoolean(
 			actionRequest, "showFoldersSearch");
 		boolean showSubfolders = ParamUtil.getBoolean(
@@ -90,8 +88,6 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 
 		preferences.setValue("rootFolderId", String.valueOf(rootFolderId));
 
-		preferences.setValue(
-			"showBreadcrumbs", String.valueOf(showBreadcrumbs));
 		preferences.setValue(
 			"showFoldersSearch", String.valueOf(showFoldersSearch));
 		preferences.setValue("showSubfolders", String.valueOf(showSubfolders));
