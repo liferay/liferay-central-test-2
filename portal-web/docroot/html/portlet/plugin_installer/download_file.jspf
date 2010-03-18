@@ -25,7 +25,7 @@
 
 <br /><br />
 
-<aui:input name="url" size="75" type="text" />
+<input name="<portlet:namespace />url" size="75" type="text" />
 
 <br /><br />
 
@@ -35,11 +35,11 @@
 
 <br /><br />
 
-<aui:input name="deploymentContext" size="20" type="text" />
+<input name="<portlet:namespace />deploymentContext" size="20" type="text" />
 
 <br /><br />
 
-<aui:button onClick='<%= uploadProgressId + ".startProgress();" + renderResponse.getNamespace() + "installPluginPackage(\'remoteDeploy\');" %>' value="install" />
+<input type="button" value="<liferay-ui:message key="install" />" onClick="<%= uploadProgressId %>.startProgress(); <portlet:namespace />installPluginPackage('remoteDeploy');" />
 
 <liferay-ui:upload-progress
 	id="<%= uploadProgressId %>"
