@@ -59,8 +59,8 @@ public class RuntimeTag extends TagSupport {
 		throws Exception {
 
 		doTag(
-			portletName, null, null, pageContext, servletContext, request,
-			response);
+			portletName, queryString, null, pageContext, servletContext,
+			request, response);
 	}
 
 	public static void doTag(
