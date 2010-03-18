@@ -126,6 +126,12 @@ public class PortalUtil {
 		return getPortal().escapeRedirect(url);
 	}
 
+	public static String generateRandomKey(
+		HttpServletRequest request, String input) {
+
+		return getPortal().generateRandomKey(request, input);
+	}
+
 	public static BaseModel<?> getBaseModel(Resource resource)
 		throws PortalException, SystemException {
 

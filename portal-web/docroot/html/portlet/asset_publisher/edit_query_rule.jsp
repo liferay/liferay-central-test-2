@@ -17,7 +17,7 @@
 <%@ include file="/html/portlet/asset_publisher/init.jsp" %>
 
 <%
-String randomNamespace = DeterminateKeyGenerator.generate("portlet_asset_publisher_edit_query_rule") + StringPool.UNDERLINE;
+String randomNamespace = PortalUtil.generateRandomKey(request, "portlet_asset_publisher_edit_query_rule") + StringPool.UNDERLINE;
 
 int index = ParamUtil.getInteger(request, "index", GetterUtil.getInteger((String)request.getAttribute("configuration.jsp-index")));
 int queryLogicIndex = GetterUtil.getInteger((String)request.getAttribute("configuration.jsp-queryLogicIndex"));

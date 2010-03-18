@@ -112,6 +112,8 @@ public interface Portal {
 
 	public String escapeRedirect(String url);
 
+	public String generateRandomKey(HttpServletRequest request, String input);
+
 	public BaseModel<?> getBaseModel(Resource resource)
 		throws PortalException, SystemException;
 

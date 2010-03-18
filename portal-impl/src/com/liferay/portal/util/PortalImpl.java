@@ -46,6 +46,7 @@ import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.ClassUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
+import com.liferay.portal.kernel.util.DeterminateKeyGenerator;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.HttpUtil;
@@ -135,6 +136,7 @@ import com.liferay.portlet.social.util.FacebookUtil;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.util.Encryptor;
 import com.liferay.util.JS;
+import com.liferay.util.PwdGenerator;
 import com.liferay.util.UniqueList;
 import com.liferay.util.servlet.DynamicServletRequest;
 
@@ -613,6 +615,20 @@ public class PortalImpl implements Portal {
 		}
 
 		return url;
+	}
+
+	public String generateRandomKey(HttpServletRequest request, String input) {
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		if (themeDisplay.isLifecycleResource() ||
+			themeDisplay.isStateExclusive()) {
+
+			return PwdGenerator.getPassword(PwdGenerator.KEY3, 4);
+		}
+		else {
+			return DeterminateKeyGenerator.generate(input);
+		}
 	}
 
 	public BaseModel<?> getBaseModel(Resource resource)
