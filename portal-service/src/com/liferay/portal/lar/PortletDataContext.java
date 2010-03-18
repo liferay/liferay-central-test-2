@@ -130,6 +130,8 @@ public interface PortletDataContext extends Serializable {
 
 	public Map<String, String[]> getParameterMap();
 
+	public Map<String, List<KeyValuePair>> getPermissions();
+
 	public long getPlid();
 
 	public String getPortletPath(String portletId);
