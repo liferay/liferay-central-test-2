@@ -615,7 +615,7 @@ public class PortletURLImpl
 	}
 
 	protected void addAuthToken(StringBundler sb, Key key) {
-		if (!PropsValues.AUTH_TOKEN_CHECK_ENABLED &&
+		if (!PropsValues.AUTH_TOKEN_CHECK_ENABLED ||
 			!_lifecycle.equals(PortletRequest.ACTION_PHASE)) {
 
 			return;

@@ -17,6 +17,7 @@
 <%@ include file="/html/portal/init.jsp" %>
 
 <aui:form action='<%= themeDisplay.getPathMain() + "/portal/update_reminder_query" %>' method="post" name="fm">
+	<aui:input name="p_auth" type="hidden" value="<%= AuthTokenUtil.getToken(request) %>" />
 	<aui:input name="doAsUserId" type="hidden" value="<%= themeDisplay.getDoAsUserId() %>" />
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 	<aui:input name="<%= WebKeys.REFERER %>" type="hidden" value='<%= themeDisplay.getPathMain() + "?doAsUserId=" + themeDisplay.getDoAsUserId() %>' />

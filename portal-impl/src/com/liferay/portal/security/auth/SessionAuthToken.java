@@ -33,7 +33,10 @@ public class SessionAuthToken implements AuthToken {
 		String requestAuthenticationToken = ParamUtil.getString(
 			request, "p_auth");
 
-		String sessionAuthenticationToken = getToken(request);
+		HttpSession session = request.getSession();
+
+		String sessionAuthenticationToken = (String)session.getAttribute(
+			WebKeys.AUTHENTICATION_TOKEN);
 
 		if (!requestAuthenticationToken.equals(sessionAuthenticationToken)) {
 			throw new PrincipalException("Invalid authentication token");
