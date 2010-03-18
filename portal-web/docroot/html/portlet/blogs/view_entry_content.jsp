@@ -170,7 +170,6 @@ AssetEntry assetEntry = (AssetEntry)request.getAttribute("view_entry_content.jsp
 						long classNameId = PortalUtil.getClassNameId(BlogsEntry.class.getName());
 
 						int messagesCount = MBMessageLocalServiceUtil.getDiscussionMessagesCount(classNameId, entry.getEntryId(), StatusConstants.APPROVED);
-						String messageKey = messagesCount <= 1 ? "comment" : "comments";
 						%>
 
 						<c:choose>
@@ -178,7 +177,7 @@ AssetEntry assetEntry = (AssetEntry)request.getAttribute("view_entry_content.jsp
 								<%= messagesCount %> <liferay-ui:message key="<%= messageKey %>" />
 							</c:when>
 							<c:otherwise>
-								<aui:a href='<%= viewEntryURL + StringPool.POUND + renderResponse.getNamespace() + "messageScroll0" %>'><%= messagesCount %> <liferay-ui:message key="<%= messageKey %>" /></aui:a>
+								<aui:a href='<%= viewEntryURL + StringPool.POUND + renderResponse.getNamespace() + "messageScroll0" %>'><%= messagesCount %> <liferay-ui:message key='<%= (messagesCount == 1) ? "comment" : "comments" %>' /></aui:a>
 							</c:otherwise>
 						</c:choose>
 					</span>
