@@ -479,7 +479,6 @@ Liferay.Portlet = {
 
 		if (portlet && configurationURL) {
 			var title = portlet.one('.portlet-title') || portlet.one('.portlet-title-default');
-			var loading = '<div class="aui-icon-loading"></div>';
 
 			var iframeId = namespacedId + 'configurationIframe';
 
@@ -495,7 +494,6 @@ Liferay.Portlet = {
 			};
 
 			var updateIframeSize = function(event) {
-
 				setTimeout(
 					function() {
 						var bodyHeight = bodyNode.getStyle('height');
@@ -539,12 +537,6 @@ Liferay.Portlet = {
 
 					if (iframe.get('contentWindow.location.search').indexOf('p_p_id=86') == -1) {
 						dialog.close();
-					}
-
-					loading = dialog.get('contentBox').one('.aui-icon-loading');
-
-					if (loading) {
-						loading.hide();
 					}
 
 					var iframeBody = iframe.get('contentWindow.document.body');
