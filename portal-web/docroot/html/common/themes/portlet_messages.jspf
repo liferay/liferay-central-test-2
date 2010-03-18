@@ -32,7 +32,7 @@
 	</div>
 </c:if>
 
-<liferay-ui:success key='<%= portletConfig.getPortletName() + ".doConfigure" %>' message="you-have-successfully-updated-the-setup" />
-<liferay-ui:success key='<%= portletConfig.getPortletName() + ".doEdit" %>' message="you-have-successfully-updated-your-preferences" />
+<liferay-ui:success key='<%= portletName + ".doConfigure" %>' message="you-have-successfully-updated-the-setup" />
+<liferay-ui:success key='<%= portletName + ".doEdit" %>' message="you-have-successfully-updated-your-preferences" />
 
 <liferay-ui:error />

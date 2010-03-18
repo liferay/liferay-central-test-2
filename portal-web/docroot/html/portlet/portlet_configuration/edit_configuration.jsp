@@ -60,7 +60,7 @@ String path = (String)request.getAttribute(WebKeys.CONFIGURATION_ACTION_PATH);
 	</c:choose>
 </c:if>
 
-<c:if test='<%= themeDisplay.isStatePopUp() && SessionMessages.contains(renderRequest, portletConfig.getPortletName() + ".doConfigure") %>'>
+<c:if test='<%= themeDisplay.isStatePopUp() && SessionMessages.contains(renderRequest, portletName + ".doConfigure") %>'>
 	<aui:script use="node">
 		var curPortletBoundaryId = '#p_p_id_<%= portletResource %>_';
 
