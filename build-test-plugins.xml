@@ -26,6 +26,17 @@ plugins.includes=${plugins.includes}</echo>
 		<mkdir dir="${lp.plugins.dir}/dist" />
 	</target>
 
+	<target name="deploy-versioned-simple-server-plugins">
+		<delete dir="${app.server.parent.dir}/${ee.deploy.dir}" />
+
+		<copy todir="${app.server.parent.dir}/${ee.deploy.dir}">
+			<fileset
+				dir="${hudson.dependencies.dir}/${lp.version}_${license.type}"
+				includes="**portlet**.war"
+			/>
+		</copy>
+	</target>
+
 	<target name="run-plugins1-jboss-mysql">
 		<antcall target="prepare-mysql" />
 

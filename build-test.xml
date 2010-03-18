@@ -493,6 +493,15 @@ file.
 
 		<if>
 			<not>
+				<equals arg1="${deploy.versioned.plugins}" arg2="$${deploy.versioned.plugins}" />
+			</not>
+			<then>
+				<ant antfile="build-test-plugins.xml" target="deploy-versioned-simple-server-plugins" />
+			</then>
+		</if>
+
+		<if>
+			<not>
 				<equals arg1="${portlet.plugins.includes}" arg2="$${portlet.plugins.includes}" />
 			</not>
 			<then>

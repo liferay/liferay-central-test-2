@@ -30,6 +30,8 @@
 		<ant antfile="build-test-tomcat.xml" target="run-selenium-tomcat" inheritAll="false">
 			<property name="skip.rebuild-database" value="true" />
 		</ant>
+
+		<antcall target="clean-up-bundles" />
 	</target>
 
 	<target name="run-smoke-test">
@@ -56,6 +58,7 @@
 		<antcall target="run-versioned-upgrade-test">
 			<param name="file.name" value="liferay-portal-tomcat-6.0-5.1.0.zip" />
 			<param name="legacy.config" value="true" />
+			<param name="legacy.theme.ids" value="classic" />
 			<param name="license.type" value="ce" />
 			<param name="lp.version" value="5.1.0" />
 			<param name="test.name" value="SmokeTestSuite" />
@@ -87,6 +90,7 @@
 		<antcall target="run-versioned-upgrade-test">
 			<param name="file.name" value="liferay-portal-tomcat-6.0-5.1.1.zip" />
 			<param name="legacy.config" value="true" />
+			<param name="legacy.theme.ids" value="classic" />
 			<param name="license.type" value="ce" />
 			<param name="lp.version" value="5.1.1" />
 			<param name="test.name" value="SmokeTestSuite" />
@@ -118,6 +122,7 @@
 		<antcall target="run-versioned-upgrade-test">
 			<param name="file.name" value="liferay-portal-tomcat-6.0-5.1.2.zip" />
 			<param name="legacy.config" value="true" />
+			<param name="legacy.theme.ids" value="classic" />
 			<param name="license.type" value="ce" />
 			<param name="lp.version" value="5.1.2" />
 			<param name="test.name" value="SmokeTestSuite" />
@@ -148,6 +153,7 @@
 
 		<antcall target="run-versioned-upgrade-test">
 			<param name="file.name" value="liferay-portal-tomcat-6.0-5.2.0.zip" />
+			<param name="legacy.theme.ids" value="classic,controlpanel" />
 			<param name="license.type" value="ce" />
 			<param name="lp.version" value="5.2.0" />
 			<param name="test.name" value="SmokeTestSuite" />
@@ -178,6 +184,7 @@
 
 		<antcall target="run-versioned-upgrade-test">
 			<param name="file.name" value="liferay-portal-tomcat-6.0-5.2.1.zip" />
+			<param name="legacy.theme.ids" value="classic,controlpanel" />
 			<param name="license.type" value="ce" />
 			<param name="lp.version" value="5.2.1" />
 			<param name="test.name" value="SmokeTestSuite" />
@@ -208,6 +215,7 @@
 
 		<antcall target="run-versioned-upgrade-test">
 			<param name="file.name" value="liferay-portal-tomcat-6.0-5.2.2.zip" />
+			<param name="legacy.theme.ids" value="classic,controlpanel" />
 			<param name="license.type" value="ce" />
 			<param name="lp.version" value="5.2.2" />
 			<param name="test.name" value="SmokeTestSuite" />
@@ -238,6 +246,7 @@
 
 		<antcall target="run-versioned-upgrade-test">
 			<param name="file.name" value="liferay-portal-tomcat-6.0-5.2.3.zip" />
+			<param name="legacy.theme.ids" value="classic,controlpanel" />
 			<param name="license.type" value="ce" />
 			<param name="lp.version" value="5.2.3" />
 			<param name="test.name" value="SmokeTestSuite" />
@@ -253,6 +262,39 @@
 		<antcall target="prepare-db-mysql-common">
 			<param name="skip.prepare-bundle" value="true" />
 			<param name="sql.version" value="5.2.3" />
+		</antcall>
+
+		<antcall target="run-smoke-test">
+			<param name="build.app.server" value="false" />
+		</antcall>
+	</target>
+
+	<target name="test-db-mysql-6.0.0-data-upgrade-test">
+		<antcall target="prepare-db-mysql-common">
+			<param name="skip.prepare-bundle" value="true" />
+			<param name="sql.version" value="6.0.0" />
+		</antcall>
+
+		<antcall target="run-versioned-upgrade-test">
+			<param name="deploy.versioned.plugins" value="true" />
+			<param name="ee.deploy.dir" value="liferay-portal-6.0.0/deploy" />
+			<param name="file.name" value="liferay-portal-tomcat-6.0.0.zip" />
+			<param name="license.type" value="ce" />
+			<param name="lp.version" value="6.0.0" />
+			<param name="test.name" value="SampleData600TestSuite" />
+			<param name="tomcat.folder.dir" value="liferay-portal-6.0.0/tomcat-6.0.24" />
+		</antcall>
+
+		<antcall target="run-latest-upgrade-test">
+			<param name="portlet.plugins.includes" value="web-form-portlet" />
+			<param name="test.name" value="ViewSampleData600LatestTestSuite" />
+		</antcall>
+	</target>
+
+	<target name="test-db-mysql-6.0.0-smoke-test">
+		<antcall target="prepare-db-mysql-common">
+			<param name="skip.prepare-bundle" value="true" />
+			<param name="sql.version" value="6.0.0" />
 		</antcall>
 
 		<antcall target="run-smoke-test">
@@ -288,5 +330,6 @@ create database lportal character set utf8;</echo>
 		<antcall target="test-db-mysql-5.2.1-smoke-test" />
 		<antcall target="test-db-mysql-5.2.2-smoke-test" />
 		<antcall target="test-db-mysql-5.2.3-smoke-test" />
+		<antcall target="test-db-mysql-6.0.0-smoke-test" />
 	</target>
 </project>

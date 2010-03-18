@@ -131,6 +131,21 @@ web.server.display.node=true</echo>
 
 		<echo file="app.server.${user.name}.properties">app.server.tomcat.dir=${app.server.parent.dir}/${tomcat.folder.dir}</echo>
 
+		<antcall target="revert-test-properties" />
+
+		<if>
+			<not>
+				<equals arg1="${legacy.theme.ids}" arg2="$${legacy.theme.ids}" />
+			</not>
+			<then>
+				<replace
+					file="portal-web/test/test-portal-web.properties"
+					token="#theme.ids="
+					value="theme.ids=${legacy.theme.ids}"
+				/>
+			</then>
+		</if>
+
 		<if>
 			<not>
 				<equals arg1="${jdbc.drivers.optional.dir}" arg2="$${jdbc.drivers.optional.dir}" />
