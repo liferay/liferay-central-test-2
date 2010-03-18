@@ -285,7 +285,7 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> {
 
 		public ${column.type} get${column.methodName}() {
 			<#if column.type == "String" && column.isConvertNull()>
-				if(_${column.name} == null) {
+				if (_${column.name} == null) {
 					return StringPool.BLANK;
 				}
 				else {
