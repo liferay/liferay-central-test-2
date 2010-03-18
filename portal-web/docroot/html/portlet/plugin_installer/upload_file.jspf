@@ -22,7 +22,7 @@
 
 <br /><br />
 
-<input class="lfr-input-text" name="<portlet:namespace />file" type="file" />
+<aui:input cssClass="lfr-input-text" name="file" type="file" />
 
 <br /><br />
 
@@ -32,11 +32,11 @@
 
 <br /><br />
 
-<input name="<portlet:namespace />deploymentContext" size="20" type="text" />
+<aui:input label="" name="deploymentContext" size="20" type="text" />
 
 <br /><br />
 
-<input type="button" value="<liferay-ui:message key="install" />" onClick="<%= uploadProgressId %>.startProgress(); <portlet:namespace />installPluginPackage('localDeploy');" />
+<aui:button onClick='<%= uploadProgressId + ".startProgress();" + renderResponse.getNamespace() + "installPluginPackage(\'localDeploy\');" %>' value="install" />
 
 <liferay-ui:upload-progress
 	id="<%= uploadProgressId %>"

@@ -31,78 +31,57 @@ String installStatus = ParamUtil.getString(request, "installStatus", PluginPacka
 <%
 try {
 %>
+    <aui:fieldset>
 
-	<table class="lfr-table">
-	<tr>
-		<td>
-			<label for="<portlet:namespace />keywords"><liferay-ui:message key="keywords" /></label>
-		</td>
-		<td>
-			<liferay-ui:message key="tag" />
-		</td>
-		<td>
-			<liferay-ui:message key="repository" />
-		</td>
-		<td>
-			<liferay-ui:message key="install-status" />
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<input id="<portlet:namespace />keywords" name="<portlet:namespace />keywords" size="30" type="text" value="<%= HtmlUtil.escape(keywords) %>" />
-		</td>
-		<td>
-			<select name="<portlet:namespace/>tag">
-				<option value=""><liferay-ui:message key="all" /></option>
+		<aui:input cssClass="lfr-input-text-container" id="keywords" label="keywords" name="keywords" size="30" type="text" value="<%= HtmlUtil.escape(keywords) %>" />
 
-				<%
-				Iterator itr = PluginPackageUtil.getAvailableTags().iterator();
+		<aui:select label="tag" name="tag">
+			<aui:option label="all" value="" />
 
-				while (itr.hasNext()) {
-					String curTag = (String)itr.next();
-				%>
+			<%
+			Iterator itr = PluginPackageUtil.getAvailableTags().iterator();
 
-					<option <%= tag.equals(curTag) ? "selected": "" %> value="<%= curTag %>"><%= curTag %></option>
+			while (itr.hasNext()) {
+				String curTag = (String)itr.next();
+			%>
 
-				<%
-				}
-				%>
+				<aui:option label="<%= curTag %>" selected="<%= tag.equals(curTag) %>" value="<%= curTag %>" />
 
-			</select>
-		</td>
-		<td>
-			<select name="<portlet:namespace/>searchRepositoryURL">
-				<option value=""><liferay-ui:message key="all" /></option>
+			<%
+			}
+			%>
 
-				<%
-				String[] repositoryURLs = PluginPackageUtil.getRepositoryURLs();
+		</aui:select>
 
-				for (int i = 0; i < repositoryURLs.length; i++) {
-					String curRepositoryURL = repositoryURLs[i];
-				%>
+		<aui:select label="repository" name="searchRepositoryURL">
+			<aui:option label="all" value="" />
 
-					<option <%= searchRepositoryURL.equals(curRepositoryURL) ? "selected" : "" %> value="<%= curRepositoryURL %>"><%= curRepositoryURL %></option>
+			<%
+			String[] repositoryURLs = PluginPackageUtil.getRepositoryURLs();
 
-				<%
-				}
-				%>
+			for (int i = 0; i < repositoryURLs.length; i++) {
+				String curRepositoryURL = repositoryURLs[i];
+			%>
 
-			</select>
-		</td>
-		<td>
-			<select name="<portlet:namespace/>installStatus">
-				<option <%= (installStatus.equals(PluginPackageImpl.STATUS_NOT_INSTALLED_OR_OLDER_VERSION_INSTALLED))? "selected" : "" %> value="<%= PluginPackageImpl.STATUS_NOT_INSTALLED_OR_OLDER_VERSION_INSTALLED %>"><liferay-ui:message key="not-installed-or-older-version-installed" /></option>
-				<option <%= (installStatus.equals(PluginPackageImpl.STATUS_OLDER_VERSION_INSTALLED))? "selected" : "" %> value="<%= PluginPackageImpl.STATUS_OLDER_VERSION_INSTALLED %>"><liferay-ui:message key="older-version-installed" /></option>
-				<option <%= (installStatus.equals(PluginPackageImpl.STATUS_NOT_INSTALLED))? "selected" : "" %> value="<%= PluginPackageImpl.STATUS_NOT_INSTALLED %>"><liferay-ui:message key="not-installed" /></option>
-				<option <%= (installStatus.equals(PluginPackageImpl.STATUS_ALL)) ? "selected" : "" %> value="<%= PluginPackageImpl.STATUS_ALL %>"><liferay-ui:message key="all" /></option>
-			</select>
-		</td>
-	</tr>
-	</table>
+				<aui:option label="<%= curRepositoryURL %>" selected="<%= searchRepositoryURL.equals(curRepositoryURL) %>" value="<%= curRepositoryURL %>" />
+
+			<%
+			}
+			%>
+
+		</aui:select>
+
+		<aui:select label="install-status" name="installStatus">
+			<aui:option label="not-installed-or-older-version-installed" selected="<%= (installStatus.equals(PluginPackageImpl.STATUS_NOT_INSTALLED_OR_OLDER_VERSION_INSTALLED)) %>" value="<%= PluginPackageImpl.STATUS_NOT_INSTALLED_OR_OLDER_VERSION_INSTALLED %>" />
+			<aui:option label="older-version-installed" selected="<%= (installStatus.equals(PluginPackageImpl.STATUS_OLDER_VERSION_INSTALLED)) %>" value="<%= PluginPackageImpl.STATUS_OLDER_VERSION_INSTALLED %>" />
+			<aui:option label="not-installed" selected="<%= (installStatus.equals(PluginPackageImpl.STATUS_NOT_INSTALLED)) %>" value="<%= PluginPackageImpl.STATUS_NOT_INSTALLED %>" />
+			<aui:option label="all" selected="<%= (installStatus.equals(PluginPackageImpl.STATUS_ALL)) %>" value="<%= PluginPackageImpl.STATUS_ALL %>" />
+		</aui:select>
+	</aui:fieldset>
 
 	<br />
 
-	<input type="submit" value="<liferay-ui:message key="search" />" />
+	<aui:button type="submit" value="search" />
 
 	<br /><br />
 
@@ -308,7 +287,7 @@ try {
 			 <%= LanguageUtil.format(pageContext, "list-of-plugins-was-last-refreshed-on-x", dateFormatDateTime.format(PluginPackageUtil.getLastUpdateDate())) %>
 		</c:if>
 
-		<input type="button" value="<liferay-ui:message key="refresh" />" onClick="<portlet:namespace/>reloadRepositories();" />
+		<aui:button onClick='<%= renderResponse.getNamespace() + "reloadRepositories();" %>' value="refresh" />
 	</div>
 
 	<liferay-util:include page="/html/portlet/plugin_installer/repository_report.jsp" />

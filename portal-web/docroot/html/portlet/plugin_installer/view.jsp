@@ -74,51 +74,51 @@
 		String portletURLString = portletURL.toString();
 		%>
 
-		<form action="<%= portletURL %>" method="get" name="<portlet:namespace />fm">
-		<liferay-portlet:renderURLParams varImpl="portletURL" />
-		<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
-		<input name="<portlet:namespace /><%= Constants.PROGRESS_ID %>" type="hidden" value="<%= uploadProgressId %>" />
-		<input name="<portlet:namespace />tabs1" type="hidden" value="<%= HtmlUtil.escapeAttribute(tabs1) %>" />
-		<input name="<portlet:namespace />tabs2" type="hidden" value="<%= HtmlUtil.escapeAttribute(tabs2) %>" />
+		<aui:form action="<%= portletURL %>" method="get" name="fm">
+			<liferay-portlet:renderURLParams varImpl="portletURL" />
+			<aui:input name="<%= Constants.CMD %>" type="hidden" />
+			<aui:input name="<%= Constants.PROGRESS_ID %>" type="hidden" value="<%= uploadProgressId %>" />
+			<aui:input name="tabs1" type="hidden" value="<%= HtmlUtil.escapeAttribute(tabs1) %>" />
+			<aui:input name="tabs2" type="hidden" value="<%= HtmlUtil.escapeAttribute(tabs2) %>" />
+	
+			<c:if test="<%= Validator.isNull(moduleId) || Validator.isNull(repositoryURL) %>">
+				<aui:input name="redirect" type="hidden" value="<%= portletURLString %>" />
+			</c:if>
+	
+			<aui:input name="pluginType" type="hidden" value="<%= pluginType %>" />
+			<aui:input name="moduleId" type="hidden" value="<%= HtmlUtil.escape(moduleId) %>" />
+			<aui:input name="repositoryURL" type="hidden" value="<%= HtmlUtil.escape(repositoryURL) %>" />
+	
+			<c:choose>
+				<c:when test="<%= Validator.isNotNull(moduleId) && Validator.isNotNull(repositoryURL) %>">
+					<%@ include file="/html/portlet/plugin_installer/view_plugin_package.jspf" %>
+				</c:when>
+				<c:otherwise>
+					<liferay-ui:tabs
+						names="<%= tabs1Names %>"
+						param="tabs1"
+						url="<%= portletURLString %>"
+						backURL="<%= PortalUtil.escapeRedirect(backURL) %>"
+					/>
+	
+					<c:choose>
+						<c:when test='<%= tabs1.equals("upload-file") %>'>
+							<%@ include file="/html/portlet/plugin_installer/upload_file.jspf" %>
+						</c:when>
+						<c:when test='<%= tabs1.equals("download-file") %>'>
+							<%@ include file="/html/portlet/plugin_installer/download_file.jspf" %>
+						</c:when>
+						<c:when test='<%= tabs1.equals("configuration") %>'>
+							<%@ include file="/html/portlet/plugin_installer/configuration.jspf" %>
+						</c:when>
+						<c:otherwise>
+							<%@ include file="/html/portlet/plugin_installer/browse_repository.jspf" %>
+						</c:otherwise>
+					</c:choose>
+				</c:otherwise>
+			</c:choose>
 
-		<c:if test="<%= Validator.isNull(moduleId) || Validator.isNull(repositoryURL) %>">
-			<input name="<portlet:namespace />redirect" type="hidden" value="<%= portletURLString %>" />
-		</c:if>
-
-		<input name="<portlet:namespace />pluginType" type="hidden" value="<%= pluginType %>" />
-		<input name="<portlet:namespace />moduleId" type="hidden" value="<%= HtmlUtil.escape(moduleId) %>" />
-		<input name="<portlet:namespace />repositoryURL" type="hidden" value="<%= HtmlUtil.escape(repositoryURL) %>" />
-
-		<c:choose>
-			<c:when test="<%= Validator.isNotNull(moduleId) && Validator.isNotNull(repositoryURL) %>">
-				<%@ include file="/html/portlet/plugin_installer/view_plugin_package.jspf" %>
-			</c:when>
-			<c:otherwise>
-				<liferay-ui:tabs
-					names="<%= tabs1Names %>"
-					param="tabs1"
-					url="<%= portletURLString %>"
-					backURL="<%= PortalUtil.escapeRedirect(backURL) %>"
-				/>
-
-				<c:choose>
-					<c:when test='<%= tabs1.equals("upload-file") %>'>
-						<%@ include file="/html/portlet/plugin_installer/upload_file.jspf" %>
-					</c:when>
-					<c:when test='<%= tabs1.equals("download-file") %>'>
-						<%@ include file="/html/portlet/plugin_installer/download_file.jspf" %>
-					</c:when>
-					<c:when test='<%= tabs1.equals("configuration") %>'>
-						<%@ include file="/html/portlet/plugin_installer/configuration.jspf" %>
-					</c:when>
-					<c:otherwise>
-						<%@ include file="/html/portlet/plugin_installer/browse_repository.jspf" %>
-					</c:otherwise>
-				</c:choose>
-			</c:otherwise>
-		</c:choose>
-
-		</form>
+		</aui:form>
 
 		<aui:script>
 			function <portlet:namespace />installPluginPackage(cmd) {
