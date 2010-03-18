@@ -63,8 +63,7 @@ ShoppingItem[] prevAndNext = ShoppingItemLocalServiceUtil.getItemsPrevAndNext(it
 		<c:if test="<%= item.isLargeImage() %>">
 			<br />
 
-			<a href="<%= Validator.isNotNull(item.getLargeImageURL()) ? item.getLargeImageURL() : themeDisplay.getPathImage() + "/shopping/item?img_id=" + item.getLargeImageId() + "&t=" + ImageServletTokenUtil.getToken(item.getLargeImageId()) %>" style="font-size: xx-small;" target="_blank">
-			<liferay-ui:message key="see-large-photo" />
+			<a href="<%= Validator.isNotNull(item.getLargeImageURL()) ? item.getLargeImageURL() : themeDisplay.getPathImage() + "/shopping/item?img_id=" + item.getLargeImageId() + "&t=" + ImageServletTokenUtil.getToken(item.getLargeImageId()) %>" style="font-size: xx-small;" target="_blank"><liferay-ui:message key="see-large-photo" /> <span class="opens-new-window-accessible"><liferay-ui:message key="opens-new-window" /></span>
 			</a>
 		</c:if>
 	</td>

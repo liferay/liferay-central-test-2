@@ -81,7 +81,7 @@ viewProductEntryURL.setParameter("productEntryId", String.valueOf(productEntryId
 			SCLicense license = (SCLicense)itr.next();
 		%>
 
-			<a href="<%= license.getUrl() %>" target="_blank"><%= license.getName() %></a><c:if test="<%= itr.hasNext() %>">, </c:if>
+			<a href="<%= license.getUrl() %>" target="_blank"><%= license.getName() %> <span class="opens-new-window-accessible"><liferay-ui:message key="opens-new-window" /></span></a><c:if test="<%= itr.hasNext() %>">, </c:if>
 
 		<%
 		}
@@ -205,7 +205,7 @@ List productScreenshots = SCProductScreenshotLocalServiceUtil.getProductScreensh
 			SCProductScreenshot productScreenshot = (SCProductScreenshot)productScreenshots.get(i);
 		%>
 
-			<a href="<%= themeDisplay.getPathImage() %>/software_catalog?img_id=<%= productScreenshot.getFullImageId() %>&t=<%= ImageServletTokenUtil.getToken(productScreenshot.getFullImageId()) %>" target="_blank"><img alt="<liferay-ui:message key="screenshot" />" src="<%= themeDisplay.getPathImage() %>/software_catalog?img_id=<%= productScreenshot.getThumbnailId() %>&t=<%= ImageServletTokenUtil.getToken(productScreenshot.getThumbnailId()) %>" /></a>
+			<a href="<%= themeDisplay.getPathImage() %>/software_catalog?img_id=<%= productScreenshot.getFullImageId() %>&t=<%= ImageServletTokenUtil.getToken(productScreenshot.getFullImageId()) %>" target="_blank"><img alt="<liferay-ui:message key="screenshot" />" src="<%= themeDisplay.getPathImage() %>/software_catalog?img_id=<%= productScreenshot.getThumbnailId() %>&t=<%= ImageServletTokenUtil.getToken(productScreenshot.getThumbnailId()) %>" /><span class="opens-new-window-accessible"><liferay-ui:message key="opens-new-window" /></span></a>
 
 		<%
 		}

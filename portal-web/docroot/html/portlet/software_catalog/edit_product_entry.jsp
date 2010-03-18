@@ -258,10 +258,10 @@ for (int i = 0; i < screenshotsCount; i++) {
 				<table class="lfr-table">
 				<tr>
 					<td>
-						<a href="<%= themeDisplay.getPathImage() %>/software_catalog?img_id=<%= productScreenshot.getThumbnailId() %>&t=<%= ImageServletTokenUtil.getToken(productScreenshot.getThumbnailId()) %>" target="_blank"><liferay-ui:message key="see-thumbnail" /></a>
+						<a href="<%= themeDisplay.getPathImage() %>/software_catalog?img_id=<%= productScreenshot.getThumbnailId() %>&t=<%= ImageServletTokenUtil.getToken(productScreenshot.getThumbnailId()) %>" target="_blank"><liferay-ui:message key="see-thumbnail" /> <span class="opens-new-window-accessible"><liferay-ui:message key="opens-new-window" /></span></a>
 					</td>
 					<td>
-						<a href="<%= themeDisplay.getPathImage() %>/software_catalog?img_id=<%= productScreenshot.getFullImageId() %>&t=<%= ImageServletTokenUtil.getToken(productScreenshot.getFullImageId()) %>" target="_blank"><liferay-ui:message key="see-full-image" /></a>
+						<a href="<%= themeDisplay.getPathImage() %>/software_catalog?img_id=<%= productScreenshot.getFullImageId() %>&t=<%= ImageServletTokenUtil.getToken(productScreenshot.getFullImageId()) %>" target="_blank"><liferay-ui:message key="see-full-image" /> <span class="opens-new-window-accessible"><liferay-ui:message key="opens-new-window" /></span></a>
 					</td>
 				</tr>
 				<tr>

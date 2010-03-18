@@ -136,6 +136,10 @@ boolean urlIsNotNull = Validator.isNotNull(url);
 			<span class="taglib-text"><liferay-ui:message key="<%= message %>" /></span>
 
 			<c:if test="<%= urlIsNotNull %>">
+				<c:if test='<%= target == "_blank" %>'>
+					<span class="opens-new-window-accessible"><liferay-ui:message key="opens-new-window" /></span>
+				</c:if>
+
 				</a>
 			</c:if>
 		</li>
@@ -151,6 +155,10 @@ boolean urlIsNotNull = Validator.isNotNull(url);
 			<liferay-ui:message key="<%= message %>" />
 
 			<c:if test="<%= urlIsNotNull %>">
+				<c:if test='<%= target == "_blank" %>'>
+					<span class="opens-new-window-accessible"><liferay-ui:message key="opens-new-window" /></span>
+				</c:if>
+
 				</a>
 			</c:if>
 		</li>
@@ -168,6 +176,10 @@ boolean urlIsNotNull = Validator.isNotNull(url);
 			</c:if>
 
 			<c:if test="<%= urlIsNotNull %>">
+				<c:if test='<%= target == "_blank" %>'>
+					<span class="opens-new-window-accessible"><liferay-ui:message key="opens-new-window" /></span>
+				</c:if>
+
 				</a>
 			</c:if>
 		</span>
