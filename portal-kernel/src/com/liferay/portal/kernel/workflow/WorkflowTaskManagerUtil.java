@@ -32,32 +32,12 @@ import java.util.Map;
 public class WorkflowTaskManagerUtil {
 
 	public static WorkflowTask assignWorkflowTaskToRole(
-			long companyId, long userId, long workflowTaskId,
-			long roleId, String comment, Map<String, Serializable> context)
-		throws WorkflowException {
-
-		return _workflowTaskManager.assignWorkflowTaskToRole(
-			companyId, userId, workflowTaskId, roleId, comment, context);
-	}
-
-	public static WorkflowTask assignWorkflowTaskToRole(
 			long companyId, long userId, long workflowTaskId, long roleId,
 			String comment, Date dueDate, Map<String, Serializable> context)
 		throws WorkflowException {
 
 		return _workflowTaskManager.assignWorkflowTaskToRole(
-			companyId, userId, workflowTaskId, roleId,
-			comment, dueDate, context);
-	}
-
-	public static WorkflowTask assignWorkflowTaskToUser(
-			long companyId, long userId, long workflowTaskId,
-			long assigneeUserId, String comment,
-			Map<String, Serializable> context)
-		throws WorkflowException {
-
-		return _workflowTaskManager.assignWorkflowTaskToUser(
-			companyId, userId, workflowTaskId, assigneeUserId, comment,
+			companyId, userId, workflowTaskId, roleId, comment, dueDate,
 			context);
 	}
 
@@ -68,8 +48,8 @@ public class WorkflowTaskManagerUtil {
 		throws WorkflowException {
 
 		return _workflowTaskManager.assignWorkflowTaskToRole(
-			companyId, userId, workflowTaskId, assigneeUserId,
-			comment, dueDate, context);
+			companyId, userId, workflowTaskId, assigneeUserId, comment, dueDate,
+			context);
 	}
 
 	public static WorkflowTask completeWorkflowTask(
@@ -184,19 +164,18 @@ public class WorkflowTaskManagerUtil {
 	}
 
 	public static List<WorkflowTask> getWorkflowTasksByWorkflowInstance(
-			long companyId, long workflowInstanceId,
-			Boolean completed, int start, int end,
-			OrderByComparator orderByComparator)
+			long companyId, long workflowInstanceId, Boolean completed,
+			int start, int end, OrderByComparator orderByComparator)
 		throws WorkflowException {
 
 		return _workflowTaskManager.getWorkflowTasksByWorkflowInstance(
-			companyId, workflowInstanceId,
-			completed, start, end, orderByComparator);
+			companyId, workflowInstanceId, completed, start, end,
+			orderByComparator);
 	}
 
 	public static WorkflowTask updateDueDate(
-			long companyId, long userId, long workflowTaskId,
-			String comment, Date dueDate)
+			long companyId, long userId, long workflowTaskId, String comment,
+			Date dueDate)
 		throws WorkflowException {
 
 		return _workflowTaskManager.updateDueDate(

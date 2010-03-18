@@ -37,23 +37,8 @@ public class WorkflowTaskManagerProxyBean
 	extends BaseProxyBean implements WorkflowTaskManager {
 
 	public WorkflowTask assignWorkflowTaskToRole(
-		long companyId, long userId, long workflowTaskId,
-		long roleId, String comment, Map<String, Serializable> context) {
-
-		throw new UnsupportedOperationException();
-	}
-
-	public WorkflowTask assignWorkflowTaskToRole(
 		long companyId, long userId, long workflowTaskId, long roleId,
 		String comment, Date dueDate, Map<String, Serializable> context) {
-
-		throw new UnsupportedOperationException();
-	}
-
-	public WorkflowTask assignWorkflowTaskToUser(
-		long companyId, long userId, long workflowTaskId,
-		long assigneeUserId, String comment,
-		Map<String, Serializable> context) {
 
 		throw new UnsupportedOperationException();
 	}
@@ -66,9 +51,8 @@ public class WorkflowTaskManagerProxyBean
 	}
 
 	public WorkflowTask completeWorkflowTask(
-		long companyId, long userId, long workflowTaskId,
-		String transitionName, String comment,
-		Map<String, Serializable> context) {
+		long companyId, long userId, long workflowTaskId, String transitionName,
+		String comment, Map<String, Serializable> context) {
 
 		throw new UnsupportedOperationException();
 	}
@@ -144,15 +128,15 @@ public class WorkflowTaskManagerProxyBean
 	}
 
 	public List<WorkflowTask> getWorkflowTasksByWorkflowInstance(
-		long companyId, long workflowInstanceId, Boolean completed,
-		int start, int end, OrderByComparator orderByComparator) {
+		long companyId, long workflowInstanceId, Boolean completed, int start,
+		int end, OrderByComparator orderByComparator) {
 
 		throw new UnsupportedOperationException();
 	}
 
 	public WorkflowTask updateDueDate(
-		long companyId, long userId, long workflowTaskId,
-		String comment, Date dueDate) {
+		long companyId, long userId, long workflowTaskId, String comment,
+		Date dueDate) {
 
 		throw new UnsupportedOperationException();
 	}

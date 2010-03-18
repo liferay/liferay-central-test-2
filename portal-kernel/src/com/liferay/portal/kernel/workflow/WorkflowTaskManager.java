@@ -35,20 +35,8 @@ import java.util.Map;
 public interface WorkflowTaskManager {
 
 	public WorkflowTask assignWorkflowTaskToRole(
-			long companyId, long userId, long workflowTaskId,
-			long roleId, String comment, Map<String, Serializable> context)
-		throws WorkflowException;
-
-	public WorkflowTask assignWorkflowTaskToRole(
-			long companyId, long userId, long workflowTaskId,
-			long roleId, String comment, Date dueDate,
-			Map<String, Serializable> context)
-		throws WorkflowException;
-
-	public WorkflowTask assignWorkflowTaskToUser(
-			long companyId, long userId, long workflowTaskId,
-			long assigneeUserId, String comment,
-			Map<String, Serializable> context)
+			long companyId, long userId, long workflowTaskId, long roleId,
+			String comment, Date dueDate, Map<String, Serializable> context)
 		throws WorkflowException;
 
 	public WorkflowTask assignWorkflowTaskToUser(
@@ -113,14 +101,13 @@ public interface WorkflowTaskManager {
 		throws WorkflowException;
 
 	public List<WorkflowTask> getWorkflowTasksByWorkflowInstance(
-			long companyId, long workflowInstanceId,
-			Boolean completed, int start, int end,
-			OrderByComparator orderByComparator)
+			long companyId, long workflowInstanceId, Boolean completed,
+			int start, int end, OrderByComparator orderByComparator)
 		throws WorkflowException;
 
 	public WorkflowTask updateDueDate(
-			long companyId, long userId, long workflowTaskId,
-			String comment, Date dueDate)
+			long companyId, long userId, long workflowTaskId, String comment,
+			Date dueDate)
 		throws WorkflowException;
 
 }
