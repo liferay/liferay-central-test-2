@@ -16,11 +16,4 @@
 
 <%@ include file="/html/taglib/ui/social_bookmark/init.jsp" %>
 
-<c:choose>
-	<c:when test='<%= target == "_blank" %>'>
-		<a class="<%= styleClass %>" href="<%= postUrl %>" target="<%= target %>"><liferay-ui:message key="<%= messageKey %>" /> <span class="opens-new-window-accessible"><liferay-ui:message key="opens-new-window" /></span></a>
-	</c:when>
-	<c:otherwise>
-		<a class="<%= styleClass %>" href="<%= postUrl %>" target="<%= target %>"><liferay-ui:message key="<%= messageKey %>" /></a>
-	</c:otherwise>
-</c:choose>
+<a class="<%= styleClass %>" href="<%= postUrl %>" target="<%= target %>"><liferay-ui:message key="<%= messageKey %>" /></a>

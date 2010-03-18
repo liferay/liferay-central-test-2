@@ -20,6 +20,6 @@
 BookmarksEntry entry = (BookmarksEntry)request.getAttribute(WebKeys.BOOKMARKS_ENTRY);
 %>
 
-<a href="<%= themeDisplay.getPathMain() %>/bookmarks/open_entry?entryId=<%= entry.getEntryId() %>" target="_blank"><%= entry.getName() %> (<%= entry.getUrl() %>) <span class="opens-new-window-accessible"><liferay-ui:message key="opens-new-window" /></span></a>
+<a href="<%= themeDisplay.getPathMain() %>/bookmarks/open_entry?entryId=<%= entry.getEntryId() %>" target="_blank"><%= entry.getName() %> (<%= entry.getUrl() %>)</a>
 
 <p class="asset-description"><%= entry.getComments() %></p>

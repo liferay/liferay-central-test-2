@@ -287,15 +287,15 @@ if (!tabs2.equals("pages")) {
 		}
 		%>
 
-		<liferay-ui:message key="the-sitemap-protocol-notifies-search-engines-of-the-structure-of-the-website" /> <%= LanguageUtil.format(pageContext, "see-x-x-x-for-more-information", new Object[] {"<a href=\"http://www.sitemaps.org\" target=\"_blank\">http://www.sitemaps.org <span class=\"opens-new-window-accessible\">", "opens-new-window", "</span></a>"}) %>
+		<liferay-ui:message key="the-sitemap-protocol-notifies-search-engines-of-the-structure-of-the-website" /> <%= LanguageUtil.format(pageContext, "see-x-for-more-information", "<a href=\"http://www.sitemaps.org\" target=\"_blank\">http://www.sitemaps.org</a>") %>
 
 		<br /><br />
 
 		<%= LanguageUtil.format(pageContext, "send-sitemap-information-to-preview", new Object[] {"<a target=\"_blank\" href=\"" + sitemapUrl + "\">", "</a>"}) %>
 
 		<ul>
-			<li><a href="http://www.google.com/webmasters/sitemaps/ping?sitemap=<%= sitemapUrl %>" target="_blank">Google <span class="opens-new-window-accessible"><liferay-ui:message key="opens-new-window" /></span></a>
-			<li><a href="https://siteexplorer.search.yahoo.com/submit/ping?sitemap=<%= sitemapUrl %>" target="_blank">Yahoo! <span class="opens-new-window-accessible"><liferay-ui:message key="opens-new-window" /></span></a> (<liferay-ui:message key="requires-login" />)
+			<li><a href="http://www.google.com/webmasters/sitemaps/ping?sitemap=<%= sitemapUrl %>" target="_blank">Google</a>
+			<li><a href="https://siteexplorer.search.yahoo.com/submit/ping?sitemap=<%= sitemapUrl %>" target="_blank">Yahoo!</a> (<liferay-ui:message key="requires-login" />)
 		</ul>
 	</c:when>
 	<c:when test='<%= tabs2.equals("monitoring") %>'>

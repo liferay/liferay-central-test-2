@@ -57,7 +57,7 @@ catch (Exception e) {
 			}
 		%>
 
-			<a class="font-large" href="<%= entry.getLink() %>" style="font-weight: bold;" target="_blank"><%= entry.getTitle() %> <span class="opens-new-window-accessible"><liferay-ui:message key="opens-new-window" /></span></a><br />
+			<a class="font-large" href="<%= entry.getLink() %>" style="font-weight: bold;" target="_blank"><%= entry.getTitle() %></a><br />
 
 			<c:if test="<%= entry.getPublishedDate() != null %>">
 				<%= dateFormatDateTime.format(entry.getPublishedDate()) %><br />

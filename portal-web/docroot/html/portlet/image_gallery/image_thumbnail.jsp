@@ -26,7 +26,7 @@ IGImage image = (IGImage)row.getObject();
 <tr>
 	<td>
 		<aui:a href='<%= themeDisplay.getPathImage() + "/image_gallery?img_id=" + image.getLargeImageId() + "&t=" + ImageServletTokenUtil.getToken(image.getLargeImageId()) %>' target="_blank">
-			<img border="1" src="<%= themeDisplay.getPathImage() %>/image_gallery?img_id=<%= image.getSmallImageId() %>&t=<%= ImageServletTokenUtil.getToken(image.getSmallImageId()) %>" title="<%= image.getDescription() %>" /> <span class="opens-new-window-accessible"><liferay-ui:message key="opens-new-window" /></span>
+			<img border="1" src="<%= themeDisplay.getPathImage() %>/image_gallery?img_id=<%= image.getSmallImageId() %>&t=<%= ImageServletTokenUtil.getToken(image.getSmallImageId()) %>" title="<%= image.getDescription() %>" />
 		</aui:a>
 	</td>
 </tr>
@@ -35,14 +35,14 @@ IGImage image = (IGImage)row.getObject();
 	<tr>
 		<td>
 			<aui:a href='<%= themeDisplay.getPathImage() + "/image_gallery?img_id=" + image.getLargeImageId() + "&t=" + ImageServletTokenUtil.getToken(image.getLargeImageId()) %>' target="_blank">
-				<liferay-ui:message key="original" /> <span class="opens-new-window-accessible"><%= LanguageUtil.get(pageContext, "opens-new-window") %></span>
+				<liferay-ui:message key="original" />
 			</aui:a>
 
 			<c:if test="<%= image.getCustom1ImageId() > 0 %>">
 				|
 
 				<aui:a href='<%= themeDisplay.getPathImage() + "/image_gallery?img_id=" + image.getCustom1ImageId() + "&t=" + ImageServletTokenUtil.getToken(image.getCustom1ImageId()) %>' target="_blank">
-					<liferay-ui:message key="size" /> 1 <span class="opens-new-window-accessible"><%= LanguageUtil.get(pageContext, "opens-new-window") %></span>
+					<liferay-ui:message key="size" /> 1
 				</aui:a>
 			</c:if>
 
@@ -50,7 +50,7 @@ IGImage image = (IGImage)row.getObject();
 				|
 
 				<aui:a href='<%= themeDisplay.getPathImage() + "/image_gallery?img_id=" + image.getCustom2ImageId() + "&t=" + ImageServletTokenUtil.getToken(image.getCustom2ImageId()) %>' target="_blank">
-					<liferay-ui:message key="size" /> 2 <span class="opens-new-window-accessible"><%= LanguageUtil.get(pageContext, "opens-new-window") %></span>
+					<liferay-ui:message key="size" /> 2
 				</aui:a>
 			</c:if>
 		</td>

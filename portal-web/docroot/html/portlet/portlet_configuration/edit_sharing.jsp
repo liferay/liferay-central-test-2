@@ -101,7 +101,7 @@ String widgetURL = PortalUtil.getWidgetURL(portlet, themeDisplay);
 				%>
 
 				<div class="portlet-msg-info">
-					<a href="http://www.facebook.com/developers/editapp.php?new" target="_blank"><liferay-ui:message key="get-the-api-key-and-canvas-page-url-from-facebook" /> <span class="opens-new-window-accessible"><liferay-ui:message key="opens-new-window" /></span></a>
+					<a href="http://www.facebook.com/developers/editapp.php?new" target="_blank"><liferay-ui:message key="get-the-api-key-and-canvas-page-url-from-facebook" /></a>
 				</div>
 
 				<aui:input cssClass="lfr-input-text-container" label="api-key" name="facebookAPIKey" value="<%= HtmlUtil.toInputSafe(facebookAPIKey) %>" />

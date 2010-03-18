@@ -43,7 +43,7 @@
 			<tr>
 				<td>
 					<a href="http://www.amazon.com/exec/obidos/ASIN/<%= amazonRankings.getISBN() %>" target="_blank">
-						<img border="0" src="<%= amazonRankings.getSmallImageURL() %>" /> <span class="opens-new-window-accessible"><liferay-ui:message key="opens-new-window" /></span>
+					<img border="0" src="<%= amazonRankings.getSmallImageURL() %>" />
 					</a>
 				</td>
 				<td>
