@@ -174,7 +174,7 @@ AssetEntry assetEntry = (AssetEntry)request.getAttribute("view_entry_content.jsp
 
 						<c:choose>
 							<c:when test='<%= strutsAction.equals("/blogs/view_entry") %>'>
-								<%= messagesCount %> <liferay-ui:message key="<%= messageKey %>" />
+								<%= messagesCount %> <liferay-ui:message key='<%= (messagesCount == 1) ? "comment" : "comments" %>' />
 							</c:when>
 							<c:otherwise>
 								<aui:a href='<%= viewEntryURL + StringPool.POUND + renderResponse.getNamespace() + "messageScroll0" %>'><%= messagesCount %> <liferay-ui:message key='<%= (messagesCount == 1) ? "comment" : "comments" %>' /></aui:a>
