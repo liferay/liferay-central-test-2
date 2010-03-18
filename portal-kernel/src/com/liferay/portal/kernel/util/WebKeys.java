@@ -21,8 +21,6 @@ package com.liferay.portal.kernel.util;
  */
 public interface WebKeys {
 
-	public static final String AJAX_REQUEST_SUFFIX = "AJAX_REQUEST_SUFFIX";
-
 	public static final String AUI_SCRIPT_DATA = "LIFERAY_SHARED_AUI_SCRIPT_DATA";
 
 	public static final String CLP_MESSAGE_LISTENERS = "CLP_MESSAGE_LISTENERS";
