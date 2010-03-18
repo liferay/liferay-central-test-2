@@ -268,3 +268,7 @@
 .portlet-calendar .calendar-event-details .lfr-panel-content {
 	padding: 10px 15px;
 }
+
+.portlet-calendar #commentsPanelContainer {
+	border-width: 0;
+}

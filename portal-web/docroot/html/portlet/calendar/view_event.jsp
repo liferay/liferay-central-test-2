@@ -441,26 +441,24 @@ request.setAttribute("view_event.jsp-event", event);
 </aui:layout>
 
 <c:if test="<%= enableComments %>">
-	<br />
+	<liferay-ui:panel-container id="commentsPanelContainer" extended="<%= false %>" persistState="<%= true %>">
+		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="commentsPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "comments") %>'>
+			<portlet:actionURL var="discussionURL">
+				<portlet:param name="struts_action" value="/calendar/edit_event_discussion" />
+			</portlet:actionURL>
 
-	<liferay-ui:tabs names="comments" />
-
-	<br /><br />
-
-	<portlet:actionURL var="discussionURL">
-		<portlet:param name="struts_action" value="/calendar/edit_event_discussion" />
-	</portlet:actionURL>
-
-	<liferay-ui:discussion
-		className="<%= CalEvent.class.getName() %>"
-		classPK="<%= event.getEventId() %>"
-		formAction="<%= discussionURL %>"
-		formName="fm2"
-		ratingsEnabled="true"
-		redirect="<%= currentURL %>"
-		subject="<%= event.getTitle() %>"
-		userId="<%= event.getUserId() %>"
-	/>
+			<liferay-ui:discussion
+				className="<%= CalEvent.class.getName() %>"
+				classPK="<%= event.getEventId() %>"
+				formAction="<%= discussionURL %>"
+				formName="fm2"
+				ratingsEnabled="true"
+				redirect="<%= currentURL %>"
+				subject="<%= event.getTitle() %>"
+				userId="<%= event.getUserId() %>"
+			/>
+		</liferay-ui:panel>
+	</liferay-ui:panel-container>
 </c:if>
 
 <%
