@@ -100,7 +100,7 @@ List<WorkflowDefinition> workflowDefinitions = WorkflowDefinitionManagerUtil.get
 								}
 							%>
 
-								<aui:option label="<%= _buildLabel(workflowDefinition.getName(), workflowDefinition.getVersion(), locale) %>" selected="<%= selected %>" value="<%= workflowDefinition.getName() + StringPool.AT + workflowDefinition.getVersion() %>" />
+								<aui:option label='<%= workflowDefinition.getName() + " (" + LanguageUtil.format(locale, "version-x", workflowDefinition.getVersion()) + ")" %>' selected="<%= selected %>" value="<%= workflowDefinition.getName() + StringPool.AT + workflowDefinition.getVersion() %>" />
 
 							<%
 							}
@@ -163,17 +163,3 @@ List<WorkflowDefinition> workflowDefinitions = WorkflowDefinitionManagerUtil.get
 		</liferay-ui:search-container>
 	</c:when>
 </c:choose>
-
-<%!
-private String _buildLabel(String workflowDefinitionName, int workflowDefinitionVersion, Locale locale){
-	StringBuilder sb = new StringBuilder();
-
-	sb.append(workflowDefinitionName);
-	sb.append(StringPool.SPACE);
-	sb.append(StringPool.OPEN_PARENTHESIS);
-	sb.append(LanguageUtil.format(locale, "version-x", workflowDefinitionVersion));
-	sb.append(StringPool.CLOSE_PARENTHESIS);
-
-	return sb.toString();
-}
-%>
