@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.service.GroupLocalService;
 import com.liferay.portal.service.GroupService;
 import com.liferay.portal.service.ImageLocalService;
@@ -91,6 +92,17 @@ public abstract class IGFolderLocalServiceBaseImpl
 	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
 		int end) throws SystemException {
 		return igFolderPersistence.findWithDynamicQuery(dynamicQuery, start, end);
+	}
+
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end, OrderByComparator orderByComparator) throws SystemException {
+		return igFolderPersistence.findWithDynamicQuery(dynamicQuery, start,
+			end, orderByComparator);
+	}
+
+	public int dynamicQueryCount(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return igFolderPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
 	public IGFolder getIGFolder(long folderId)
@@ -375,64 +387,64 @@ public abstract class IGFolderLocalServiceBaseImpl
 		}
 	}
 
-	@BeanReference(name = "com.liferay.portlet.imagegallery.service.IGFolderLocalService")
+	@BeanReference(type = IGFolderLocalService.class)
 	protected IGFolderLocalService igFolderLocalService;
-	@BeanReference(name = "com.liferay.portlet.imagegallery.service.IGFolderService")
+	@BeanReference(type = IGFolderService.class)
 	protected IGFolderService igFolderService;
-	@BeanReference(name = "com.liferay.portlet.imagegallery.service.persistence.IGFolderPersistence")
+	@BeanReference(type = IGFolderPersistence.class)
 	protected IGFolderPersistence igFolderPersistence;
-	@BeanReference(name = "com.liferay.portlet.imagegallery.service.IGImageLocalService")
+	@BeanReference(type = IGImageLocalService.class)
 	protected IGImageLocalService igImageLocalService;
-	@BeanReference(name = "com.liferay.portlet.imagegallery.service.IGImageService")
+	@BeanReference(type = IGImageService.class)
 	protected IGImageService igImageService;
-	@BeanReference(name = "com.liferay.portlet.imagegallery.service.persistence.IGImagePersistence")
+	@BeanReference(type = IGImagePersistence.class)
 	protected IGImagePersistence igImagePersistence;
-	@BeanReference(name = "com.liferay.portlet.imagegallery.service.persistence.IGImageFinder")
+	@BeanReference(type = IGImageFinder.class)
 	protected IGImageFinder igImageFinder;
-	@BeanReference(name = "com.liferay.counter.service.CounterLocalService")
+	@BeanReference(type = CounterLocalService.class)
 	protected CounterLocalService counterLocalService;
-	@BeanReference(name = "com.liferay.counter.service.CounterService")
+	@BeanReference(type = CounterService.class)
 	protected CounterService counterService;
-	@BeanReference(name = "com.liferay.portal.service.GroupLocalService")
+	@BeanReference(type = GroupLocalService.class)
 	protected GroupLocalService groupLocalService;
-	@BeanReference(name = "com.liferay.portal.service.GroupService")
+	@BeanReference(type = GroupService.class)
 	protected GroupService groupService;
-	@BeanReference(name = "com.liferay.portal.service.persistence.GroupPersistence")
+	@BeanReference(type = GroupPersistence.class)
 	protected GroupPersistence groupPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.GroupFinder")
+	@BeanReference(type = GroupFinder.class)
 	protected GroupFinder groupFinder;
-	@BeanReference(name = "com.liferay.portal.service.ImageLocalService")
+	@BeanReference(type = ImageLocalService.class)
 	protected ImageLocalService imageLocalService;
-	@BeanReference(name = "com.liferay.portal.service.persistence.ImagePersistence")
+	@BeanReference(type = ImagePersistence.class)
 	protected ImagePersistence imagePersistence;
-	@BeanReference(name = "com.liferay.portal.service.LayoutLocalService")
+	@BeanReference(type = LayoutLocalService.class)
 	protected LayoutLocalService layoutLocalService;
-	@BeanReference(name = "com.liferay.portal.service.LayoutService")
+	@BeanReference(type = LayoutService.class)
 	protected LayoutService layoutService;
-	@BeanReference(name = "com.liferay.portal.service.persistence.LayoutPersistence")
+	@BeanReference(type = LayoutPersistence.class)
 	protected LayoutPersistence layoutPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.LayoutFinder")
+	@BeanReference(type = LayoutFinder.class)
 	protected LayoutFinder layoutFinder;
-	@BeanReference(name = "com.liferay.portal.service.ResourceLocalService")
+	@BeanReference(type = ResourceLocalService.class)
 	protected ResourceLocalService resourceLocalService;
-	@BeanReference(name = "com.liferay.portal.service.ResourceService")
+	@BeanReference(type = ResourceService.class)
 	protected ResourceService resourceService;
-	@BeanReference(name = "com.liferay.portal.service.persistence.ResourcePersistence")
+	@BeanReference(type = ResourcePersistence.class)
 	protected ResourcePersistence resourcePersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.ResourceFinder")
+	@BeanReference(type = ResourceFinder.class)
 	protected ResourceFinder resourceFinder;
-	@BeanReference(name = "com.liferay.portal.service.UserLocalService")
+	@BeanReference(type = UserLocalService.class)
 	protected UserLocalService userLocalService;
-	@BeanReference(name = "com.liferay.portal.service.UserService")
+	@BeanReference(type = UserService.class)
 	protected UserService userService;
-	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
+	@BeanReference(type = UserPersistence.class)
 	protected UserPersistence userPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.UserFinder")
+	@BeanReference(type = UserFinder.class)
 	protected UserFinder userFinder;
-	@BeanReference(name = "com.liferay.portlet.expando.service.ExpandoValueLocalService")
+	@BeanReference(type = ExpandoValueLocalService.class)
 	protected ExpandoValueLocalService expandoValueLocalService;
-	@BeanReference(name = "com.liferay.portlet.expando.service.ExpandoValueService")
+	@BeanReference(type = ExpandoValueService.class)
 	protected ExpandoValueService expandoValueService;
-	@BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence")
+	@BeanReference(type = ExpandoValuePersistence.class)
 	protected ExpandoValuePersistence expandoValuePersistence;
 }

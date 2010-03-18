@@ -129,33 +129,34 @@ public class IGImageUtil {
 
 	public static java.util.List<com.liferay.portlet.imagegallery.model.IGImage> findByUuid(
 		java.lang.String uuid, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByUuid(uuid, start, end, obc);
+		return getPersistence().findByUuid(uuid, start, end, orderByComparator);
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGImage findByUuid_First(
 		java.lang.String uuid,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchImageException {
-		return getPersistence().findByUuid_First(uuid, obc);
+		return getPersistence().findByUuid_First(uuid, orderByComparator);
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGImage findByUuid_Last(
 		java.lang.String uuid,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchImageException {
-		return getPersistence().findByUuid_Last(uuid, obc);
+		return getPersistence().findByUuid_Last(uuid, orderByComparator);
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGImage[] findByUuid_PrevAndNext(
 		long imageId, java.lang.String uuid,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchImageException {
-		return getPersistence().findByUuid_PrevAndNext(imageId, uuid, obc);
+		return getPersistence()
+				   .findByUuid_PrevAndNext(imageId, uuid, orderByComparator);
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGImage findByUUID_G(
@@ -191,31 +192,36 @@ public class IGImageUtil {
 
 	public static java.util.List<com.liferay.portlet.imagegallery.model.IGImage> findByGroupId(
 		long groupId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByGroupId(groupId, start, end, obc);
+		return getPersistence()
+				   .findByGroupId(groupId, start, end, orderByComparator);
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGImage findByGroupId_First(
-		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long groupId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchImageException {
-		return getPersistence().findByGroupId_First(groupId, obc);
+		return getPersistence().findByGroupId_First(groupId, orderByComparator);
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGImage findByGroupId_Last(
-		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long groupId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchImageException {
-		return getPersistence().findByGroupId_Last(groupId, obc);
+		return getPersistence().findByGroupId_Last(groupId, orderByComparator);
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGImage[] findByGroupId_PrevAndNext(
 		long imageId, long groupId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchImageException {
-		return getPersistence().findByGroupId_PrevAndNext(imageId, groupId, obc);
+		return getPersistence()
+				   .findByGroupId_PrevAndNext(imageId, groupId,
+			orderByComparator);
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGImage findBySmallImageId(
@@ -312,34 +318,38 @@ public class IGImageUtil {
 
 	public static java.util.List<com.liferay.portlet.imagegallery.model.IGImage> findByG_U(
 		long groupId, long userId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByG_U(groupId, userId, start, end, obc);
+		return getPersistence()
+				   .findByG_U(groupId, userId, start, end, orderByComparator);
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGImage findByG_U_First(
 		long groupId, long userId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchImageException {
-		return getPersistence().findByG_U_First(groupId, userId, obc);
+		return getPersistence()
+				   .findByG_U_First(groupId, userId, orderByComparator);
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGImage findByG_U_Last(
 		long groupId, long userId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchImageException {
-		return getPersistence().findByG_U_Last(groupId, userId, obc);
+		return getPersistence()
+				   .findByG_U_Last(groupId, userId, orderByComparator);
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGImage[] findByG_U_PrevAndNext(
 		long imageId, long groupId, long userId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchImageException {
 		return getPersistence()
-				   .findByG_U_PrevAndNext(imageId, groupId, userId, obc);
+				   .findByG_U_PrevAndNext(imageId, groupId, userId,
+			orderByComparator);
 	}
 
 	public static java.util.List<com.liferay.portlet.imagegallery.model.IGImage> findByG_F(
@@ -356,34 +366,38 @@ public class IGImageUtil {
 
 	public static java.util.List<com.liferay.portlet.imagegallery.model.IGImage> findByG_F(
 		long groupId, long folderId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByG_F(groupId, folderId, start, end, obc);
+		return getPersistence()
+				   .findByG_F(groupId, folderId, start, end, orderByComparator);
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGImage findByG_F_First(
 		long groupId, long folderId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchImageException {
-		return getPersistence().findByG_F_First(groupId, folderId, obc);
+		return getPersistence()
+				   .findByG_F_First(groupId, folderId, orderByComparator);
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGImage findByG_F_Last(
 		long groupId, long folderId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchImageException {
-		return getPersistence().findByG_F_Last(groupId, folderId, obc);
+		return getPersistence()
+				   .findByG_F_Last(groupId, folderId, orderByComparator);
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGImage[] findByG_F_PrevAndNext(
 		long imageId, long groupId, long folderId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchImageException {
 		return getPersistence()
-				   .findByG_F_PrevAndNext(imageId, groupId, folderId, obc);
+				   .findByG_F_PrevAndNext(imageId, groupId, folderId,
+			orderByComparator);
 	}
 
 	public static java.util.List<com.liferay.portlet.imagegallery.model.IGImage> findByG_F_N(
@@ -400,36 +414,39 @@ public class IGImageUtil {
 
 	public static java.util.List<com.liferay.portlet.imagegallery.model.IGImage> findByG_F_N(
 		long groupId, long folderId, java.lang.String name, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .findByG_F_N(groupId, folderId, name, start, end, obc);
+				   .findByG_F_N(groupId, folderId, name, start, end,
+			orderByComparator);
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGImage findByG_F_N_First(
 		long groupId, long folderId, java.lang.String name,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchImageException {
-		return getPersistence().findByG_F_N_First(groupId, folderId, name, obc);
+		return getPersistence()
+				   .findByG_F_N_First(groupId, folderId, name, orderByComparator);
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGImage findByG_F_N_Last(
 		long groupId, long folderId, java.lang.String name,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchImageException {
-		return getPersistence().findByG_F_N_Last(groupId, folderId, name, obc);
+		return getPersistence()
+				   .findByG_F_N_Last(groupId, folderId, name, orderByComparator);
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGImage[] findByG_F_N_PrevAndNext(
 		long imageId, long groupId, long folderId, java.lang.String name,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchImageException {
 		return getPersistence()
 				   .findByG_F_N_PrevAndNext(imageId, groupId, folderId, name,
-			obc);
+			orderByComparator);
 	}
 
 	public static java.util.List<com.liferay.portlet.imagegallery.model.IGImage> findAll()
@@ -444,9 +461,10 @@ public class IGImageUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.imagegallery.model.IGImage> findAll(
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findAll(start, end, obc);
+		return getPersistence().findAll(start, end, orderByComparator);
 	}
 
 	public static void removeByUuid(java.lang.String uuid)

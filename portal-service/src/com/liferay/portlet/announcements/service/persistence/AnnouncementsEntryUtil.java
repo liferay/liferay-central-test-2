@@ -132,33 +132,34 @@ public class AnnouncementsEntryUtil {
 
 	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementsEntry> findByUuid(
 		java.lang.String uuid, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByUuid(uuid, start, end, obc);
+		return getPersistence().findByUuid(uuid, start, end, orderByComparator);
 	}
 
 	public static com.liferay.portlet.announcements.model.AnnouncementsEntry findByUuid_First(
 		java.lang.String uuid,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.announcements.NoSuchEntryException {
-		return getPersistence().findByUuid_First(uuid, obc);
+		return getPersistence().findByUuid_First(uuid, orderByComparator);
 	}
 
 	public static com.liferay.portlet.announcements.model.AnnouncementsEntry findByUuid_Last(
 		java.lang.String uuid,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.announcements.NoSuchEntryException {
-		return getPersistence().findByUuid_Last(uuid, obc);
+		return getPersistence().findByUuid_Last(uuid, orderByComparator);
 	}
 
 	public static com.liferay.portlet.announcements.model.AnnouncementsEntry[] findByUuid_PrevAndNext(
 		long entryId, java.lang.String uuid,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.announcements.NoSuchEntryException {
-		return getPersistence().findByUuid_PrevAndNext(entryId, uuid, obc);
+		return getPersistence()
+				   .findByUuid_PrevAndNext(entryId, uuid, orderByComparator);
 	}
 
 	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementsEntry> findByUserId(
@@ -174,31 +175,35 @@ public class AnnouncementsEntryUtil {
 
 	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementsEntry> findByUserId(
 		long userId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByUserId(userId, start, end, obc);
+		return getPersistence()
+				   .findByUserId(userId, start, end, orderByComparator);
 	}
 
 	public static com.liferay.portlet.announcements.model.AnnouncementsEntry findByUserId_First(
-		long userId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long userId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.announcements.NoSuchEntryException {
-		return getPersistence().findByUserId_First(userId, obc);
+		return getPersistence().findByUserId_First(userId, orderByComparator);
 	}
 
 	public static com.liferay.portlet.announcements.model.AnnouncementsEntry findByUserId_Last(
-		long userId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long userId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.announcements.NoSuchEntryException {
-		return getPersistence().findByUserId_Last(userId, obc);
+		return getPersistence().findByUserId_Last(userId, orderByComparator);
 	}
 
 	public static com.liferay.portlet.announcements.model.AnnouncementsEntry[] findByUserId_PrevAndNext(
 		long entryId, long userId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.announcements.NoSuchEntryException {
-		return getPersistence().findByUserId_PrevAndNext(entryId, userId, obc);
+		return getPersistence()
+				   .findByUserId_PrevAndNext(entryId, userId, orderByComparator);
 	}
 
 	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementsEntry> findByC_C(
@@ -215,34 +220,39 @@ public class AnnouncementsEntryUtil {
 
 	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementsEntry> findByC_C(
 		long classNameId, long classPK, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByC_C(classNameId, classPK, start, end, obc);
+		return getPersistence()
+				   .findByC_C(classNameId, classPK, start, end,
+			orderByComparator);
 	}
 
 	public static com.liferay.portlet.announcements.model.AnnouncementsEntry findByC_C_First(
 		long classNameId, long classPK,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.announcements.NoSuchEntryException {
-		return getPersistence().findByC_C_First(classNameId, classPK, obc);
+		return getPersistence()
+				   .findByC_C_First(classNameId, classPK, orderByComparator);
 	}
 
 	public static com.liferay.portlet.announcements.model.AnnouncementsEntry findByC_C_Last(
 		long classNameId, long classPK,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.announcements.NoSuchEntryException {
-		return getPersistence().findByC_C_Last(classNameId, classPK, obc);
+		return getPersistence()
+				   .findByC_C_Last(classNameId, classPK, orderByComparator);
 	}
 
 	public static com.liferay.portlet.announcements.model.AnnouncementsEntry[] findByC_C_PrevAndNext(
 		long entryId, long classNameId, long classPK,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.announcements.NoSuchEntryException {
 		return getPersistence()
-				   .findByC_C_PrevAndNext(entryId, classNameId, classPK, obc);
+				   .findByC_C_PrevAndNext(entryId, classNameId, classPK,
+			orderByComparator);
 	}
 
 	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementsEntry> findByC_C_A(
@@ -260,38 +270,41 @@ public class AnnouncementsEntryUtil {
 
 	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementsEntry> findByC_C_A(
 		long classNameId, long classPK, boolean alert, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .findByC_C_A(classNameId, classPK, alert, start, end, obc);
+				   .findByC_C_A(classNameId, classPK, alert, start, end,
+			orderByComparator);
 	}
 
 	public static com.liferay.portlet.announcements.model.AnnouncementsEntry findByC_C_A_First(
 		long classNameId, long classPK, boolean alert,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.announcements.NoSuchEntryException {
 		return getPersistence()
-				   .findByC_C_A_First(classNameId, classPK, alert, obc);
+				   .findByC_C_A_First(classNameId, classPK, alert,
+			orderByComparator);
 	}
 
 	public static com.liferay.portlet.announcements.model.AnnouncementsEntry findByC_C_A_Last(
 		long classNameId, long classPK, boolean alert,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.announcements.NoSuchEntryException {
 		return getPersistence()
-				   .findByC_C_A_Last(classNameId, classPK, alert, obc);
+				   .findByC_C_A_Last(classNameId, classPK, alert,
+			orderByComparator);
 	}
 
 	public static com.liferay.portlet.announcements.model.AnnouncementsEntry[] findByC_C_A_PrevAndNext(
 		long entryId, long classNameId, long classPK, boolean alert,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.announcements.NoSuchEntryException {
 		return getPersistence()
 				   .findByC_C_A_PrevAndNext(entryId, classNameId, classPK,
-			alert, obc);
+			alert, orderByComparator);
 	}
 
 	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementsEntry> findAll()
@@ -306,9 +319,10 @@ public class AnnouncementsEntryUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementsEntry> findAll(
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findAll(start, end, obc);
+		return getPersistence().findAll(start, end, orderByComparator);
 	}
 
 	public static void removeByUuid(java.lang.String uuid)

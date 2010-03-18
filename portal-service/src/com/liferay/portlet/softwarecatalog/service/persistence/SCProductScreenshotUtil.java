@@ -132,36 +132,39 @@ public class SCProductScreenshotUtil {
 
 	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductScreenshot> findByProductEntryId(
 		long productEntryId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .findByProductEntryId(productEntryId, start, end, obc);
+				   .findByProductEntryId(productEntryId, start, end,
+			orderByComparator);
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCProductScreenshot findByProductEntryId_First(
 		long productEntryId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.softwarecatalog.NoSuchProductScreenshotException {
-		return getPersistence().findByProductEntryId_First(productEntryId, obc);
+		return getPersistence()
+				   .findByProductEntryId_First(productEntryId, orderByComparator);
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCProductScreenshot findByProductEntryId_Last(
 		long productEntryId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.softwarecatalog.NoSuchProductScreenshotException {
-		return getPersistence().findByProductEntryId_Last(productEntryId, obc);
+		return getPersistence()
+				   .findByProductEntryId_Last(productEntryId, orderByComparator);
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCProductScreenshot[] findByProductEntryId_PrevAndNext(
 		long productScreenshotId, long productEntryId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.softwarecatalog.NoSuchProductScreenshotException {
 		return getPersistence()
 				   .findByProductEntryId_PrevAndNext(productScreenshotId,
-			productEntryId, obc);
+			productEntryId, orderByComparator);
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCProductScreenshot findByThumbnailId(
@@ -236,9 +239,10 @@ public class SCProductScreenshotUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductScreenshot> findAll(
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findAll(start, end, obc);
+		return getPersistence().findAll(start, end, orderByComparator);
 	}
 
 	public static void removeByProductEntryId(long productEntryId)

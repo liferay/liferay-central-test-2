@@ -17,7 +17,6 @@ package com.liferay.portlet.polls.service.persistence;
 import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
-import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
@@ -37,6 +36,8 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.BatchSessionUtil;
+import com.liferay.portal.service.persistence.ResourcePersistence;
+import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 import com.liferay.portlet.polls.NoSuchQuestionException;
@@ -468,11 +469,12 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 	}
 
 	public List<PollsQuestion> findByUuid(String uuid, int start, int end,
-		OrderByComparator obc) throws SystemException {
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				uuid,
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<PollsQuestion> list = (List<PollsQuestion>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_UUID,
@@ -486,9 +488,9 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(3);
@@ -508,8 +510,9 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 					}
 				}
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -549,9 +552,10 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 		return list;
 	}
 
-	public PollsQuestion findByUuid_First(String uuid, OrderByComparator obc)
+	public PollsQuestion findByUuid_First(String uuid,
+		OrderByComparator orderByComparator)
 		throws NoSuchQuestionException, SystemException {
-		List<PollsQuestion> list = findByUuid(uuid, 0, 1, obc);
+		List<PollsQuestion> list = findByUuid(uuid, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -570,11 +574,13 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 		}
 	}
 
-	public PollsQuestion findByUuid_Last(String uuid, OrderByComparator obc)
+	public PollsQuestion findByUuid_Last(String uuid,
+		OrderByComparator orderByComparator)
 		throws NoSuchQuestionException, SystemException {
 		int count = countByUuid(uuid);
 
-		List<PollsQuestion> list = findByUuid(uuid, count - 1, count, obc);
+		List<PollsQuestion> list = findByUuid(uuid, count - 1, count,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -594,7 +600,8 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 	}
 
 	public PollsQuestion[] findByUuid_PrevAndNext(long questionId, String uuid,
-		OrderByComparator obc) throws NoSuchQuestionException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchQuestionException, SystemException {
 		PollsQuestion pollsQuestion = findByPrimaryKey(questionId);
 
 		int count = countByUuid(uuid);
@@ -606,9 +613,9 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(3);
@@ -628,8 +635,9 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 				}
 			}
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -646,8 +654,8 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 				qPos.add(uuid);
 			}
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					pollsQuestion);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, pollsQuestion);
 
 			PollsQuestion[] array = new PollsQuestionImpl[3];
 
@@ -850,11 +858,12 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 	}
 
 	public List<PollsQuestion> findByGroupId(long groupId, int start, int end,
-		OrderByComparator obc) throws SystemException {
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<PollsQuestion> list = (List<PollsQuestion>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
@@ -868,9 +877,9 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(3);
@@ -880,8 +889,9 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 
 				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -919,9 +929,11 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 		return list;
 	}
 
-	public PollsQuestion findByGroupId_First(long groupId, OrderByComparator obc)
+	public PollsQuestion findByGroupId_First(long groupId,
+		OrderByComparator orderByComparator)
 		throws NoSuchQuestionException, SystemException {
-		List<PollsQuestion> list = findByGroupId(groupId, 0, 1, obc);
+		List<PollsQuestion> list = findByGroupId(groupId, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -940,11 +952,13 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 		}
 	}
 
-	public PollsQuestion findByGroupId_Last(long groupId, OrderByComparator obc)
+	public PollsQuestion findByGroupId_Last(long groupId,
+		OrderByComparator orderByComparator)
 		throws NoSuchQuestionException, SystemException {
 		int count = countByGroupId(groupId);
 
-		List<PollsQuestion> list = findByGroupId(groupId, count - 1, count, obc);
+		List<PollsQuestion> list = findByGroupId(groupId, count - 1, count,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -964,7 +978,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 	}
 
 	public PollsQuestion[] findByGroupId_PrevAndNext(long questionId,
-		long groupId, OrderByComparator obc)
+		long groupId, OrderByComparator orderByComparator)
 		throws NoSuchQuestionException, SystemException {
 		PollsQuestion pollsQuestion = findByPrimaryKey(questionId);
 
@@ -977,9 +991,9 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(3);
@@ -989,8 +1003,9 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -1005,8 +1020,8 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 
 			qPos.add(groupId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					pollsQuestion);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, pollsQuestion);
 
 			PollsQuestion[] array = new PollsQuestionImpl[3];
 
@@ -1015,46 +1030,6 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 			array[2] = (PollsQuestion)objArray[2];
 
 			return array;
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.setLimit(start, end);
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
 		}
 		catch (Exception e) {
 			throw processException(e);
@@ -1073,10 +1048,11 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 		return findAll(start, end, null);
 	}
 
-	public List<PollsQuestion> findAll(int start, int end, OrderByComparator obc)
-		throws SystemException {
+	public List<PollsQuestion> findAll(int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<PollsQuestion> list = (List<PollsQuestion>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
@@ -1091,13 +1067,14 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 				StringBundler query = null;
 				String sql = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(2 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 
 					query.append(_SQL_SELECT_POLLSQUESTION);
 
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 
 					sql = query.toString();
 				}
@@ -1108,7 +1085,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 
 				Query q = session.createQuery(sql);
 
-				if (obc == null) {
+				if (orderByComparator == null) {
 					list = (List<PollsQuestion>)QueryUtil.list(q, getDialect(),
 							start, end, false);
 
@@ -1386,16 +1363,16 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 		}
 	}
 
-	@BeanReference(name = "com.liferay.portlet.polls.service.persistence.PollsChoicePersistence")
-	protected com.liferay.portlet.polls.service.persistence.PollsChoicePersistence pollsChoicePersistence;
-	@BeanReference(name = "com.liferay.portlet.polls.service.persistence.PollsQuestionPersistence")
-	protected com.liferay.portlet.polls.service.persistence.PollsQuestionPersistence pollsQuestionPersistence;
-	@BeanReference(name = "com.liferay.portlet.polls.service.persistence.PollsVotePersistence")
-	protected com.liferay.portlet.polls.service.persistence.PollsVotePersistence pollsVotePersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.ResourcePersistence")
-	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
-	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
+	@BeanReference(type = PollsChoicePersistence.class)
+	protected PollsChoicePersistence pollsChoicePersistence;
+	@BeanReference(type = PollsQuestionPersistence.class)
+	protected PollsQuestionPersistence pollsQuestionPersistence;
+	@BeanReference(type = PollsVotePersistence.class)
+	protected PollsVotePersistence pollsVotePersistence;
+	@BeanReference(type = ResourcePersistence.class)
+	protected ResourcePersistence resourcePersistence;
+	@BeanReference(type = UserPersistence.class)
+	protected UserPersistence userPersistence;
 	private static final String _SQL_SELECT_POLLSQUESTION = "SELECT pollsQuestion FROM PollsQuestion pollsQuestion";
 	private static final String _SQL_SELECT_POLLSQUESTION_WHERE = "SELECT pollsQuestion FROM PollsQuestion pollsQuestion WHERE ";
 	private static final String _SQL_COUNT_POLLSQUESTION = "SELECT COUNT(pollsQuestion) FROM PollsQuestion pollsQuestion";

@@ -17,7 +17,6 @@ package com.liferay.portlet.messageboards.service.persistence;
 import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
-import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
@@ -37,12 +36,25 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.BatchSessionUtil;
+import com.liferay.portal.service.persistence.CompanyPersistence;
+import com.liferay.portal.service.persistence.GroupPersistence;
+import com.liferay.portal.service.persistence.LockPersistence;
+import com.liferay.portal.service.persistence.PortletPreferencesPersistence;
+import com.liferay.portal.service.persistence.ResourcePersistence;
+import com.liferay.portal.service.persistence.SubscriptionPersistence;
+import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
+import com.liferay.portlet.asset.service.persistence.AssetEntryPersistence;
+import com.liferay.portlet.asset.service.persistence.AssetTagPersistence;
+import com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistence;
+import com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence;
 import com.liferay.portlet.messageboards.NoSuchMessageException;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.impl.MBMessageImpl;
 import com.liferay.portlet.messageboards.model.impl.MBMessageModelImpl;
+import com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence;
+import com.liferay.portlet.social.service.persistence.SocialActivityPersistence;
 
 import java.io.Serializable;
 
@@ -766,11 +778,12 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	}
 
 	public List<MBMessage> findByUuid(String uuid, int start, int end,
-		OrderByComparator obc) throws SystemException {
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				uuid,
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<MBMessage> list = (List<MBMessage>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_UUID,
@@ -784,9 +797,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(3);
@@ -806,8 +819,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 					}
 				}
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -847,9 +861,10 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		return list;
 	}
 
-	public MBMessage findByUuid_First(String uuid, OrderByComparator obc)
+	public MBMessage findByUuid_First(String uuid,
+		OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
-		List<MBMessage> list = findByUuid(uuid, 0, 1, obc);
+		List<MBMessage> list = findByUuid(uuid, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -868,11 +883,13 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		}
 	}
 
-	public MBMessage findByUuid_Last(String uuid, OrderByComparator obc)
+	public MBMessage findByUuid_Last(String uuid,
+		OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
 		int count = countByUuid(uuid);
 
-		List<MBMessage> list = findByUuid(uuid, count - 1, count, obc);
+		List<MBMessage> list = findByUuid(uuid, count - 1, count,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -892,7 +909,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	}
 
 	public MBMessage[] findByUuid_PrevAndNext(long messageId, String uuid,
-		OrderByComparator obc) throws NoSuchMessageException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchMessageException, SystemException {
 		MBMessage mbMessage = findByPrimaryKey(messageId);
 
 		int count = countByUuid(uuid);
@@ -904,9 +922,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(3);
@@ -926,8 +944,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 				}
 			}
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -944,8 +963,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 				qPos.add(uuid);
 			}
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					mbMessage);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, mbMessage);
 
 			MBMessage[] array = new MBMessageImpl[3];
 
@@ -1148,11 +1167,12 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	}
 
 	public List<MBMessage> findByGroupId(long groupId, int start, int end,
-		OrderByComparator obc) throws SystemException {
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<MBMessage> list = (List<MBMessage>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
@@ -1166,9 +1186,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(3);
@@ -1178,8 +1198,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -1217,9 +1238,10 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		return list;
 	}
 
-	public MBMessage findByGroupId_First(long groupId, OrderByComparator obc)
+	public MBMessage findByGroupId_First(long groupId,
+		OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
-		List<MBMessage> list = findByGroupId(groupId, 0, 1, obc);
+		List<MBMessage> list = findByGroupId(groupId, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -1238,11 +1260,13 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		}
 	}
 
-	public MBMessage findByGroupId_Last(long groupId, OrderByComparator obc)
+	public MBMessage findByGroupId_Last(long groupId,
+		OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
 		int count = countByGroupId(groupId);
 
-		List<MBMessage> list = findByGroupId(groupId, count - 1, count, obc);
+		List<MBMessage> list = findByGroupId(groupId, count - 1, count,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -1262,7 +1286,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	}
 
 	public MBMessage[] findByGroupId_PrevAndNext(long messageId, long groupId,
-		OrderByComparator obc) throws NoSuchMessageException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchMessageException, SystemException {
 		MBMessage mbMessage = findByPrimaryKey(messageId);
 
 		int count = countByGroupId(groupId);
@@ -1274,9 +1299,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(3);
@@ -1286,8 +1311,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -1302,8 +1328,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			qPos.add(groupId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					mbMessage);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, mbMessage);
 
 			MBMessage[] array = new MBMessageImpl[3];
 
@@ -1378,11 +1404,12 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	}
 
 	public List<MBMessage> findByCompanyId(long companyId, int start, int end,
-		OrderByComparator obc) throws SystemException {
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(companyId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<MBMessage> list = (List<MBMessage>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
@@ -1396,9 +1423,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(3);
@@ -1408,8 +1435,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -1447,9 +1475,11 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		return list;
 	}
 
-	public MBMessage findByCompanyId_First(long companyId, OrderByComparator obc)
+	public MBMessage findByCompanyId_First(long companyId,
+		OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
-		List<MBMessage> list = findByCompanyId(companyId, 0, 1, obc);
+		List<MBMessage> list = findByCompanyId(companyId, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -1468,11 +1498,13 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		}
 	}
 
-	public MBMessage findByCompanyId_Last(long companyId, OrderByComparator obc)
+	public MBMessage findByCompanyId_Last(long companyId,
+		OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
 		int count = countByCompanyId(companyId);
 
-		List<MBMessage> list = findByCompanyId(companyId, count - 1, count, obc);
+		List<MBMessage> list = findByCompanyId(companyId, count - 1, count,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -1492,7 +1524,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	}
 
 	public MBMessage[] findByCompanyId_PrevAndNext(long messageId,
-		long companyId, OrderByComparator obc)
+		long companyId, OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
 		MBMessage mbMessage = findByPrimaryKey(messageId);
 
@@ -1505,9 +1537,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(3);
@@ -1517,8 +1549,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -1533,8 +1566,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			qPos.add(companyId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					mbMessage);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, mbMessage);
 
 			MBMessage[] array = new MBMessageImpl[3];
 
@@ -1609,11 +1642,12 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	}
 
 	public List<MBMessage> findByThreadId(long threadId, int start, int end,
-		OrderByComparator obc) throws SystemException {
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(threadId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<MBMessage> list = (List<MBMessage>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_THREADID,
@@ -1627,9 +1661,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(3);
@@ -1639,8 +1673,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append(_FINDER_COLUMN_THREADID_THREADID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -1678,9 +1713,10 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		return list;
 	}
 
-	public MBMessage findByThreadId_First(long threadId, OrderByComparator obc)
+	public MBMessage findByThreadId_First(long threadId,
+		OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
-		List<MBMessage> list = findByThreadId(threadId, 0, 1, obc);
+		List<MBMessage> list = findByThreadId(threadId, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -1699,11 +1735,13 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		}
 	}
 
-	public MBMessage findByThreadId_Last(long threadId, OrderByComparator obc)
+	public MBMessage findByThreadId_Last(long threadId,
+		OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
 		int count = countByThreadId(threadId);
 
-		List<MBMessage> list = findByThreadId(threadId, count - 1, count, obc);
+		List<MBMessage> list = findByThreadId(threadId, count - 1, count,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -1723,7 +1761,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	}
 
 	public MBMessage[] findByThreadId_PrevAndNext(long messageId,
-		long threadId, OrderByComparator obc)
+		long threadId, OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
 		MBMessage mbMessage = findByPrimaryKey(messageId);
 
@@ -1736,9 +1774,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(3);
@@ -1748,8 +1786,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			query.append(_FINDER_COLUMN_THREADID_THREADID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -1764,8 +1803,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			qPos.add(threadId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					mbMessage);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, mbMessage);
 
 			MBMessage[] array = new MBMessageImpl[3];
 
@@ -1840,11 +1879,12 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	}
 
 	public List<MBMessage> findByThreadReplies(long threadId, int start,
-		int end, OrderByComparator obc) throws SystemException {
+		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(threadId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<MBMessage> list = (List<MBMessage>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_THREADREPLIES,
@@ -1858,9 +1898,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(3);
@@ -1870,8 +1910,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append(_FINDER_COLUMN_THREADREPLIES_THREADID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -1910,8 +1951,10 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	}
 
 	public MBMessage findByThreadReplies_First(long threadId,
-		OrderByComparator obc) throws NoSuchMessageException, SystemException {
-		List<MBMessage> list = findByThreadReplies(threadId, 0, 1, obc);
+		OrderByComparator orderByComparator)
+		throws NoSuchMessageException, SystemException {
+		List<MBMessage> list = findByThreadReplies(threadId, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -1931,11 +1974,12 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	}
 
 	public MBMessage findByThreadReplies_Last(long threadId,
-		OrderByComparator obc) throws NoSuchMessageException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchMessageException, SystemException {
 		int count = countByThreadReplies(threadId);
 
 		List<MBMessage> list = findByThreadReplies(threadId, count - 1, count,
-				obc);
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -1955,7 +1999,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	}
 
 	public MBMessage[] findByThreadReplies_PrevAndNext(long messageId,
-		long threadId, OrderByComparator obc)
+		long threadId, OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
 		MBMessage mbMessage = findByPrimaryKey(messageId);
 
@@ -1968,9 +2012,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(3);
@@ -1980,8 +2024,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			query.append(_FINDER_COLUMN_THREADREPLIES_THREADID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -1996,8 +2041,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			qPos.add(threadId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					mbMessage);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, mbMessage);
 
 			MBMessage[] array = new MBMessageImpl[3];
 
@@ -2076,11 +2121,12 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	}
 
 	public List<MBMessage> findByG_U(long groupId, long userId, int start,
-		int end, OrderByComparator obc) throws SystemException {
+		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Long(userId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<MBMessage> list = (List<MBMessage>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_G_U,
@@ -2094,9 +2140,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(4 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(4);
@@ -2108,8 +2154,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append(_FINDER_COLUMN_G_U_USERID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -2150,8 +2197,10 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	}
 
 	public MBMessage findByG_U_First(long groupId, long userId,
-		OrderByComparator obc) throws NoSuchMessageException, SystemException {
-		List<MBMessage> list = findByG_U(groupId, userId, 0, 1, obc);
+		OrderByComparator orderByComparator)
+		throws NoSuchMessageException, SystemException {
+		List<MBMessage> list = findByG_U(groupId, userId, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -2174,10 +2223,12 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	}
 
 	public MBMessage findByG_U_Last(long groupId, long userId,
-		OrderByComparator obc) throws NoSuchMessageException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchMessageException, SystemException {
 		int count = countByG_U(groupId, userId);
 
-		List<MBMessage> list = findByG_U(groupId, userId, count - 1, count, obc);
+		List<MBMessage> list = findByG_U(groupId, userId, count - 1, count,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -2200,7 +2251,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	}
 
 	public MBMessage[] findByG_U_PrevAndNext(long messageId, long groupId,
-		long userId, OrderByComparator obc)
+		long userId, OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
 		MBMessage mbMessage = findByPrimaryKey(messageId);
 
@@ -2213,9 +2264,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(4 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(4);
@@ -2227,8 +2278,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			query.append(_FINDER_COLUMN_G_U_USERID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -2245,8 +2297,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			qPos.add(userId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					mbMessage);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, mbMessage);
 
 			MBMessage[] array = new MBMessageImpl[3];
 
@@ -2327,11 +2379,12 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	}
 
 	public List<MBMessage> findByG_C(long groupId, long categoryId, int start,
-		int end, OrderByComparator obc) throws SystemException {
+		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Long(categoryId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<MBMessage> list = (List<MBMessage>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_G_C,
@@ -2345,9 +2398,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(4 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(4);
@@ -2359,8 +2412,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append(_FINDER_COLUMN_G_C_CATEGORYID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -2401,8 +2455,10 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	}
 
 	public MBMessage findByG_C_First(long groupId, long categoryId,
-		OrderByComparator obc) throws NoSuchMessageException, SystemException {
-		List<MBMessage> list = findByG_C(groupId, categoryId, 0, 1, obc);
+		OrderByComparator orderByComparator)
+		throws NoSuchMessageException, SystemException {
+		List<MBMessage> list = findByG_C(groupId, categoryId, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -2425,11 +2481,12 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	}
 
 	public MBMessage findByG_C_Last(long groupId, long categoryId,
-		OrderByComparator obc) throws NoSuchMessageException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchMessageException, SystemException {
 		int count = countByG_C(groupId, categoryId);
 
 		List<MBMessage> list = findByG_C(groupId, categoryId, count - 1, count,
-				obc);
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -2452,7 +2509,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	}
 
 	public MBMessage[] findByG_C_PrevAndNext(long messageId, long groupId,
-		long categoryId, OrderByComparator obc)
+		long categoryId, OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
 		MBMessage mbMessage = findByPrimaryKey(messageId);
 
@@ -2465,9 +2522,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(4 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(4);
@@ -2479,8 +2536,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			query.append(_FINDER_COLUMN_G_C_CATEGORYID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -2497,8 +2555,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			qPos.add(categoryId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					mbMessage);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, mbMessage);
 
 			MBMessage[] array = new MBMessageImpl[3];
 
@@ -2579,11 +2637,12 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	}
 
 	public List<MBMessage> findByG_S(long groupId, int status, int start,
-		int end, OrderByComparator obc) throws SystemException {
+		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Integer(status),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<MBMessage> list = (List<MBMessage>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_G_S,
@@ -2597,9 +2656,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(4 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(4);
@@ -2611,8 +2670,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append(_FINDER_COLUMN_G_S_STATUS_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -2653,8 +2713,10 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	}
 
 	public MBMessage findByG_S_First(long groupId, int status,
-		OrderByComparator obc) throws NoSuchMessageException, SystemException {
-		List<MBMessage> list = findByG_S(groupId, status, 0, 1, obc);
+		OrderByComparator orderByComparator)
+		throws NoSuchMessageException, SystemException {
+		List<MBMessage> list = findByG_S(groupId, status, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -2677,10 +2739,12 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	}
 
 	public MBMessage findByG_S_Last(long groupId, int status,
-		OrderByComparator obc) throws NoSuchMessageException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchMessageException, SystemException {
 		int count = countByG_S(groupId, status);
 
-		List<MBMessage> list = findByG_S(groupId, status, count - 1, count, obc);
+		List<MBMessage> list = findByG_S(groupId, status, count - 1, count,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -2703,7 +2767,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	}
 
 	public MBMessage[] findByG_S_PrevAndNext(long messageId, long groupId,
-		int status, OrderByComparator obc)
+		int status, OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
 		MBMessage mbMessage = findByPrimaryKey(messageId);
 
@@ -2716,9 +2780,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(4 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(4);
@@ -2730,8 +2794,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			query.append(_FINDER_COLUMN_G_S_STATUS_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -2748,8 +2813,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			qPos.add(status);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					mbMessage);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, mbMessage);
 
 			MBMessage[] array = new MBMessageImpl[3];
 
@@ -2830,11 +2895,12 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	}
 
 	public List<MBMessage> findByC_S(long companyId, int status, int start,
-		int end, OrderByComparator obc) throws SystemException {
+		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Integer(status),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<MBMessage> list = (List<MBMessage>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_C_S,
@@ -2848,9 +2914,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(4 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(4);
@@ -2862,8 +2928,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append(_FINDER_COLUMN_C_S_STATUS_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -2904,8 +2971,10 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	}
 
 	public MBMessage findByC_S_First(long companyId, int status,
-		OrderByComparator obc) throws NoSuchMessageException, SystemException {
-		List<MBMessage> list = findByC_S(companyId, status, 0, 1, obc);
+		OrderByComparator orderByComparator)
+		throws NoSuchMessageException, SystemException {
+		List<MBMessage> list = findByC_S(companyId, status, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -2928,11 +2997,12 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	}
 
 	public MBMessage findByC_S_Last(long companyId, int status,
-		OrderByComparator obc) throws NoSuchMessageException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchMessageException, SystemException {
 		int count = countByC_S(companyId, status);
 
 		List<MBMessage> list = findByC_S(companyId, status, count - 1, count,
-				obc);
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -2955,7 +3025,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	}
 
 	public MBMessage[] findByC_S_PrevAndNext(long messageId, long companyId,
-		int status, OrderByComparator obc)
+		int status, OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
 		MBMessage mbMessage = findByPrimaryKey(messageId);
 
@@ -2968,9 +3038,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(4 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(4);
@@ -2982,8 +3052,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			query.append(_FINDER_COLUMN_C_S_STATUS_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -3000,8 +3071,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			qPos.add(status);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					mbMessage);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, mbMessage);
 
 			MBMessage[] array = new MBMessageImpl[3];
 
@@ -3082,11 +3153,12 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	}
 
 	public List<MBMessage> findByC_C(long classNameId, long classPK, int start,
-		int end, OrderByComparator obc) throws SystemException {
+		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(classNameId), new Long(classPK),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<MBMessage> list = (List<MBMessage>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_C_C,
@@ -3100,9 +3172,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(4 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(4);
@@ -3114,8 +3186,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append(_FINDER_COLUMN_C_C_CLASSPK_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -3156,8 +3229,10 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	}
 
 	public MBMessage findByC_C_First(long classNameId, long classPK,
-		OrderByComparator obc) throws NoSuchMessageException, SystemException {
-		List<MBMessage> list = findByC_C(classNameId, classPK, 0, 1, obc);
+		OrderByComparator orderByComparator)
+		throws NoSuchMessageException, SystemException {
+		List<MBMessage> list = findByC_C(classNameId, classPK, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -3180,11 +3255,12 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	}
 
 	public MBMessage findByC_C_Last(long classNameId, long classPK,
-		OrderByComparator obc) throws NoSuchMessageException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchMessageException, SystemException {
 		int count = countByC_C(classNameId, classPK);
 
 		List<MBMessage> list = findByC_C(classNameId, classPK, count - 1,
-				count, obc);
+				count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -3207,7 +3283,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	}
 
 	public MBMessage[] findByC_C_PrevAndNext(long messageId, long classNameId,
-		long classPK, OrderByComparator obc)
+		long classPK, OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
 		MBMessage mbMessage = findByPrimaryKey(messageId);
 
@@ -3220,9 +3296,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(4 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(4);
@@ -3234,8 +3310,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			query.append(_FINDER_COLUMN_C_C_CLASSPK_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -3252,8 +3329,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			qPos.add(classPK);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					mbMessage);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, mbMessage);
 
 			MBMessage[] array = new MBMessageImpl[3];
 
@@ -3334,11 +3411,13 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	}
 
 	public List<MBMessage> findByT_P(long threadId, long parentMessageId,
-		int start, int end, OrderByComparator obc) throws SystemException {
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(threadId), new Long(parentMessageId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<MBMessage> list = (List<MBMessage>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_T_P,
@@ -3352,9 +3431,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(4 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(4);
@@ -3366,8 +3445,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append(_FINDER_COLUMN_T_P_PARENTMESSAGEID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -3408,8 +3488,10 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	}
 
 	public MBMessage findByT_P_First(long threadId, long parentMessageId,
-		OrderByComparator obc) throws NoSuchMessageException, SystemException {
-		List<MBMessage> list = findByT_P(threadId, parentMessageId, 0, 1, obc);
+		OrderByComparator orderByComparator)
+		throws NoSuchMessageException, SystemException {
+		List<MBMessage> list = findByT_P(threadId, parentMessageId, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -3432,11 +3514,12 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	}
 
 	public MBMessage findByT_P_Last(long threadId, long parentMessageId,
-		OrderByComparator obc) throws NoSuchMessageException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchMessageException, SystemException {
 		int count = countByT_P(threadId, parentMessageId);
 
 		List<MBMessage> list = findByT_P(threadId, parentMessageId, count - 1,
-				count, obc);
+				count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -3459,7 +3542,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	}
 
 	public MBMessage[] findByT_P_PrevAndNext(long messageId, long threadId,
-		long parentMessageId, OrderByComparator obc)
+		long parentMessageId, OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
 		MBMessage mbMessage = findByPrimaryKey(messageId);
 
@@ -3472,9 +3555,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(4 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(4);
@@ -3486,8 +3569,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			query.append(_FINDER_COLUMN_T_P_PARENTMESSAGEID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -3504,8 +3588,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			qPos.add(parentMessageId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					mbMessage);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, mbMessage);
 
 			MBMessage[] array = new MBMessageImpl[3];
 
@@ -3586,11 +3670,12 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	}
 
 	public List<MBMessage> findByT_S(long threadId, int status, int start,
-		int end, OrderByComparator obc) throws SystemException {
+		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(threadId), new Integer(status),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<MBMessage> list = (List<MBMessage>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_T_S,
@@ -3604,9 +3689,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(4 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(4);
@@ -3618,8 +3703,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append(_FINDER_COLUMN_T_S_STATUS_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -3660,8 +3746,10 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	}
 
 	public MBMessage findByT_S_First(long threadId, int status,
-		OrderByComparator obc) throws NoSuchMessageException, SystemException {
-		List<MBMessage> list = findByT_S(threadId, status, 0, 1, obc);
+		OrderByComparator orderByComparator)
+		throws NoSuchMessageException, SystemException {
+		List<MBMessage> list = findByT_S(threadId, status, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -3684,10 +3772,12 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	}
 
 	public MBMessage findByT_S_Last(long threadId, int status,
-		OrderByComparator obc) throws NoSuchMessageException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchMessageException, SystemException {
 		int count = countByT_S(threadId, status);
 
-		List<MBMessage> list = findByT_S(threadId, status, count - 1, count, obc);
+		List<MBMessage> list = findByT_S(threadId, status, count - 1, count,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -3710,7 +3800,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	}
 
 	public MBMessage[] findByT_S_PrevAndNext(long messageId, long threadId,
-		int status, OrderByComparator obc)
+		int status, OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
 		MBMessage mbMessage = findByPrimaryKey(messageId);
 
@@ -3723,9 +3813,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(4 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(4);
@@ -3737,8 +3827,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			query.append(_FINDER_COLUMN_T_S_STATUS_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -3755,8 +3846,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			qPos.add(status);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					mbMessage);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, mbMessage);
 
 			MBMessage[] array = new MBMessageImpl[3];
 
@@ -3837,11 +3928,12 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	}
 
 	public List<MBMessage> findByTR_S(long threadId, int status, int start,
-		int end, OrderByComparator obc) throws SystemException {
+		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(threadId), new Integer(status),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<MBMessage> list = (List<MBMessage>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_TR_S,
@@ -3855,9 +3947,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(4 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(4);
@@ -3869,8 +3961,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append(_FINDER_COLUMN_TR_S_STATUS_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -3911,8 +4004,10 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	}
 
 	public MBMessage findByTR_S_First(long threadId, int status,
-		OrderByComparator obc) throws NoSuchMessageException, SystemException {
-		List<MBMessage> list = findByTR_S(threadId, status, 0, 1, obc);
+		OrderByComparator orderByComparator)
+		throws NoSuchMessageException, SystemException {
+		List<MBMessage> list = findByTR_S(threadId, status, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -3935,11 +4030,12 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	}
 
 	public MBMessage findByTR_S_Last(long threadId, int status,
-		OrderByComparator obc) throws NoSuchMessageException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchMessageException, SystemException {
 		int count = countByTR_S(threadId, status);
 
 		List<MBMessage> list = findByTR_S(threadId, status, count - 1, count,
-				obc);
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -3962,7 +4058,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	}
 
 	public MBMessage[] findByTR_S_PrevAndNext(long messageId, long threadId,
-		int status, OrderByComparator obc)
+		int status, OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
 		MBMessage mbMessage = findByPrimaryKey(messageId);
 
@@ -3975,9 +4071,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(4 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(4);
@@ -3989,8 +4085,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			query.append(_FINDER_COLUMN_TR_S_STATUS_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -4007,8 +4104,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			qPos.add(status);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					mbMessage);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, mbMessage);
 
 			MBMessage[] array = new MBMessageImpl[3];
 
@@ -4093,11 +4190,13 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	}
 
 	public List<MBMessage> findByG_U_S(long groupId, long userId, int status,
-		int start, int end, OrderByComparator obc) throws SystemException {
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Long(userId), new Integer(status),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<MBMessage> list = (List<MBMessage>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_G_U_S,
@@ -4111,9 +4210,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(5 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(5);
@@ -4127,8 +4226,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append(_FINDER_COLUMN_G_U_S_STATUS_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -4171,8 +4271,10 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	}
 
 	public MBMessage findByG_U_S_First(long groupId, long userId, int status,
-		OrderByComparator obc) throws NoSuchMessageException, SystemException {
-		List<MBMessage> list = findByG_U_S(groupId, userId, status, 0, 1, obc);
+		OrderByComparator orderByComparator)
+		throws NoSuchMessageException, SystemException {
+		List<MBMessage> list = findByG_U_S(groupId, userId, status, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(8);
@@ -4198,11 +4300,12 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	}
 
 	public MBMessage findByG_U_S_Last(long groupId, long userId, int status,
-		OrderByComparator obc) throws NoSuchMessageException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchMessageException, SystemException {
 		int count = countByG_U_S(groupId, userId, status);
 
 		List<MBMessage> list = findByG_U_S(groupId, userId, status, count - 1,
-				count, obc);
+				count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(8);
@@ -4228,7 +4331,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	}
 
 	public MBMessage[] findByG_U_S_PrevAndNext(long messageId, long groupId,
-		long userId, int status, OrderByComparator obc)
+		long userId, int status, OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
 		MBMessage mbMessage = findByPrimaryKey(messageId);
 
@@ -4241,9 +4344,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(5 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(5);
@@ -4257,8 +4360,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			query.append(_FINDER_COLUMN_G_U_S_STATUS_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -4277,8 +4381,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			qPos.add(status);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					mbMessage);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, mbMessage);
 
 			MBMessage[] array = new MBMessageImpl[3];
 
@@ -4363,12 +4467,13 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	}
 
 	public List<MBMessage> findByG_C_T(long groupId, long categoryId,
-		long threadId, int start, int end, OrderByComparator obc)
+		long threadId, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Long(categoryId), new Long(threadId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<MBMessage> list = (List<MBMessage>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_G_C_T,
@@ -4382,9 +4487,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(5 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(5);
@@ -4398,8 +4503,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append(_FINDER_COLUMN_G_C_T_THREADID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -4442,10 +4548,10 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	}
 
 	public MBMessage findByG_C_T_First(long groupId, long categoryId,
-		long threadId, OrderByComparator obc)
+		long threadId, OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
 		List<MBMessage> list = findByG_C_T(groupId, categoryId, threadId, 0, 1,
-				obc);
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(8);
@@ -4471,12 +4577,12 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	}
 
 	public MBMessage findByG_C_T_Last(long groupId, long categoryId,
-		long threadId, OrderByComparator obc)
+		long threadId, OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
 		int count = countByG_C_T(groupId, categoryId, threadId);
 
 		List<MBMessage> list = findByG_C_T(groupId, categoryId, threadId,
-				count - 1, count, obc);
+				count - 1, count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(8);
@@ -4502,7 +4608,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	}
 
 	public MBMessage[] findByG_C_T_PrevAndNext(long messageId, long groupId,
-		long categoryId, long threadId, OrderByComparator obc)
+		long categoryId, long threadId, OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
 		MBMessage mbMessage = findByPrimaryKey(messageId);
 
@@ -4515,9 +4621,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(5 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(5);
@@ -4531,8 +4637,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			query.append(_FINDER_COLUMN_G_C_T_THREADID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -4551,8 +4658,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			qPos.add(threadId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					mbMessage);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, mbMessage);
 
 			MBMessage[] array = new MBMessageImpl[3];
 
@@ -4637,12 +4744,13 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	}
 
 	public List<MBMessage> findByG_C_S(long groupId, long categoryId,
-		int status, int start, int end, OrderByComparator obc)
+		int status, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Long(categoryId), new Integer(status),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<MBMessage> list = (List<MBMessage>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_G_C_S,
@@ -4656,9 +4764,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(5 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(5);
@@ -4672,8 +4780,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append(_FINDER_COLUMN_G_C_S_STATUS_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -4716,10 +4825,10 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	}
 
 	public MBMessage findByG_C_S_First(long groupId, long categoryId,
-		int status, OrderByComparator obc)
+		int status, OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
 		List<MBMessage> list = findByG_C_S(groupId, categoryId, status, 0, 1,
-				obc);
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(8);
@@ -4745,12 +4854,12 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	}
 
 	public MBMessage findByG_C_S_Last(long groupId, long categoryId,
-		int status, OrderByComparator obc)
+		int status, OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
 		int count = countByG_C_S(groupId, categoryId, status);
 
 		List<MBMessage> list = findByG_C_S(groupId, categoryId, status,
-				count - 1, count, obc);
+				count - 1, count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(8);
@@ -4776,7 +4885,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	}
 
 	public MBMessage[] findByG_C_S_PrevAndNext(long messageId, long groupId,
-		long categoryId, int status, OrderByComparator obc)
+		long categoryId, int status, OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
 		MBMessage mbMessage = findByPrimaryKey(messageId);
 
@@ -4789,9 +4898,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(5 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(5);
@@ -4805,8 +4914,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			query.append(_FINDER_COLUMN_G_C_S_STATUS_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -4825,8 +4935,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			qPos.add(status);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					mbMessage);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, mbMessage);
 
 			MBMessage[] array = new MBMessageImpl[3];
 
@@ -4911,12 +5021,13 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	}
 
 	public List<MBMessage> findByC_C_S(long classNameId, long classPK,
-		int status, int start, int end, OrderByComparator obc)
+		int status, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(classNameId), new Long(classPK), new Integer(status),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<MBMessage> list = (List<MBMessage>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_C_C_S,
@@ -4930,9 +5041,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(5 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(5);
@@ -4946,8 +5057,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append(_FINDER_COLUMN_C_C_S_STATUS_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -4990,10 +5102,10 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	}
 
 	public MBMessage findByC_C_S_First(long classNameId, long classPK,
-		int status, OrderByComparator obc)
+		int status, OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
 		List<MBMessage> list = findByC_C_S(classNameId, classPK, status, 0, 1,
-				obc);
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(8);
@@ -5019,12 +5131,12 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	}
 
 	public MBMessage findByC_C_S_Last(long classNameId, long classPK,
-		int status, OrderByComparator obc)
+		int status, OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
 		int count = countByC_C_S(classNameId, classPK, status);
 
 		List<MBMessage> list = findByC_C_S(classNameId, classPK, status,
-				count - 1, count, obc);
+				count - 1, count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(8);
@@ -5050,7 +5162,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	}
 
 	public MBMessage[] findByC_C_S_PrevAndNext(long messageId,
-		long classNameId, long classPK, int status, OrderByComparator obc)
+		long classNameId, long classPK, int status,
+		OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
 		MBMessage mbMessage = findByPrimaryKey(messageId);
 
@@ -5063,9 +5176,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(5 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(5);
@@ -5079,8 +5192,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			query.append(_FINDER_COLUMN_C_C_S_STATUS_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -5099,8 +5213,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			qPos.add(status);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					mbMessage);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, mbMessage);
 
 			MBMessage[] array = new MBMessageImpl[3];
 
@@ -5192,13 +5306,14 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	}
 
 	public List<MBMessage> findByG_C_T_S(long groupId, long categoryId,
-		long threadId, int status, int start, int end, OrderByComparator obc)
-		throws SystemException {
+		long threadId, int status, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Long(categoryId), new Long(threadId),
 				new Integer(status),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<MBMessage> list = (List<MBMessage>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_G_C_T_S,
@@ -5212,9 +5327,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(6 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(6);
@@ -5230,8 +5345,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				query.append(_FINDER_COLUMN_G_C_T_S_STATUS_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -5276,10 +5392,10 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	}
 
 	public MBMessage findByG_C_T_S_First(long groupId, long categoryId,
-		long threadId, int status, OrderByComparator obc)
+		long threadId, int status, OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
 		List<MBMessage> list = findByG_C_T_S(groupId, categoryId, threadId,
-				status, 0, 1, obc);
+				status, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(10);
@@ -5308,12 +5424,12 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	}
 
 	public MBMessage findByG_C_T_S_Last(long groupId, long categoryId,
-		long threadId, int status, OrderByComparator obc)
+		long threadId, int status, OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
 		int count = countByG_C_T_S(groupId, categoryId, threadId, status);
 
 		List<MBMessage> list = findByG_C_T_S(groupId, categoryId, threadId,
-				status, count - 1, count, obc);
+				status, count - 1, count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(10);
@@ -5342,7 +5458,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	}
 
 	public MBMessage[] findByG_C_T_S_PrevAndNext(long messageId, long groupId,
-		long categoryId, long threadId, int status, OrderByComparator obc)
+		long categoryId, long threadId, int status,
+		OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
 		MBMessage mbMessage = findByPrimaryKey(messageId);
 
@@ -5355,9 +5472,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(6 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(6);
@@ -5373,8 +5490,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			query.append(_FINDER_COLUMN_G_C_T_S_STATUS_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -5395,8 +5513,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			qPos.add(status);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					mbMessage);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, mbMessage);
 
 			MBMessage[] array = new MBMessageImpl[3];
 
@@ -5405,46 +5523,6 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			array[2] = (MBMessage)objArray[2];
 
 			return array;
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.setLimit(start, end);
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
 		}
 		catch (Exception e) {
 			throw processException(e);
@@ -5463,10 +5541,11 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		return findAll(start, end, null);
 	}
 
-	public List<MBMessage> findAll(int start, int end, OrderByComparator obc)
-		throws SystemException {
+	public List<MBMessage> findAll(int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<MBMessage> list = (List<MBMessage>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
@@ -5481,13 +5560,14 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 				StringBundler query = null;
 				String sql = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(2 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 
 					query.append(_SQL_SELECT_MBMESSAGE);
 
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 
 					sql = query.toString();
 				}
@@ -5498,7 +5578,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 				Query q = session.createQuery(sql);
 
-				if (obc == null) {
+				if (orderByComparator == null) {
 					list = (List<MBMessage>)QueryUtil.list(q, getDialect(),
 							start, end, false);
 
@@ -6730,48 +6810,48 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		}
 	}
 
-	@BeanReference(name = "com.liferay.portlet.messageboards.service.persistence.MBBanPersistence")
-	protected com.liferay.portlet.messageboards.service.persistence.MBBanPersistence mbBanPersistence;
-	@BeanReference(name = "com.liferay.portlet.messageboards.service.persistence.MBCategoryPersistence")
-	protected com.liferay.portlet.messageboards.service.persistence.MBCategoryPersistence mbCategoryPersistence;
-	@BeanReference(name = "com.liferay.portlet.messageboards.service.persistence.MBDiscussionPersistence")
-	protected com.liferay.portlet.messageboards.service.persistence.MBDiscussionPersistence mbDiscussionPersistence;
-	@BeanReference(name = "com.liferay.portlet.messageboards.service.persistence.MBMailingListPersistence")
-	protected com.liferay.portlet.messageboards.service.persistence.MBMailingListPersistence mbMailingListPersistence;
-	@BeanReference(name = "com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence")
-	protected com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence mbMessagePersistence;
-	@BeanReference(name = "com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPersistence")
-	protected com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPersistence mbMessageFlagPersistence;
-	@BeanReference(name = "com.liferay.portlet.messageboards.service.persistence.MBStatsUserPersistence")
-	protected com.liferay.portlet.messageboards.service.persistence.MBStatsUserPersistence mbStatsUserPersistence;
-	@BeanReference(name = "com.liferay.portlet.messageboards.service.persistence.MBThreadPersistence")
-	protected com.liferay.portlet.messageboards.service.persistence.MBThreadPersistence mbThreadPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.CompanyPersistence")
-	protected com.liferay.portal.service.persistence.CompanyPersistence companyPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.GroupPersistence")
-	protected com.liferay.portal.service.persistence.GroupPersistence groupPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.LockPersistence")
-	protected com.liferay.portal.service.persistence.LockPersistence lockPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.PortletPreferencesPersistence")
-	protected com.liferay.portal.service.persistence.PortletPreferencesPersistence portletPreferencesPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.ResourcePersistence")
-	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.SubscriptionPersistence")
-	protected com.liferay.portal.service.persistence.SubscriptionPersistence subscriptionPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
-	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
-	@BeanReference(name = "com.liferay.portlet.asset.service.persistence.AssetEntryPersistence")
-	protected com.liferay.portlet.asset.service.persistence.AssetEntryPersistence assetEntryPersistence;
-	@BeanReference(name = "com.liferay.portlet.asset.service.persistence.AssetTagPersistence")
-	protected com.liferay.portlet.asset.service.persistence.AssetTagPersistence assetTagPersistence;
-	@BeanReference(name = "com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistence")
-	protected com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistence blogsEntryPersistence;
-	@BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence")
-	protected com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence expandoValuePersistence;
-	@BeanReference(name = "com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence")
-	protected com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence ratingsStatsPersistence;
-	@BeanReference(name = "com.liferay.portlet.social.service.persistence.SocialActivityPersistence")
-	protected com.liferay.portlet.social.service.persistence.SocialActivityPersistence socialActivityPersistence;
+	@BeanReference(type = MBBanPersistence.class)
+	protected MBBanPersistence mbBanPersistence;
+	@BeanReference(type = MBCategoryPersistence.class)
+	protected MBCategoryPersistence mbCategoryPersistence;
+	@BeanReference(type = MBDiscussionPersistence.class)
+	protected MBDiscussionPersistence mbDiscussionPersistence;
+	@BeanReference(type = MBMailingListPersistence.class)
+	protected MBMailingListPersistence mbMailingListPersistence;
+	@BeanReference(type = MBMessagePersistence.class)
+	protected MBMessagePersistence mbMessagePersistence;
+	@BeanReference(type = MBMessageFlagPersistence.class)
+	protected MBMessageFlagPersistence mbMessageFlagPersistence;
+	@BeanReference(type = MBStatsUserPersistence.class)
+	protected MBStatsUserPersistence mbStatsUserPersistence;
+	@BeanReference(type = MBThreadPersistence.class)
+	protected MBThreadPersistence mbThreadPersistence;
+	@BeanReference(type = CompanyPersistence.class)
+	protected CompanyPersistence companyPersistence;
+	@BeanReference(type = GroupPersistence.class)
+	protected GroupPersistence groupPersistence;
+	@BeanReference(type = LockPersistence.class)
+	protected LockPersistence lockPersistence;
+	@BeanReference(type = PortletPreferencesPersistence.class)
+	protected PortletPreferencesPersistence portletPreferencesPersistence;
+	@BeanReference(type = ResourcePersistence.class)
+	protected ResourcePersistence resourcePersistence;
+	@BeanReference(type = SubscriptionPersistence.class)
+	protected SubscriptionPersistence subscriptionPersistence;
+	@BeanReference(type = UserPersistence.class)
+	protected UserPersistence userPersistence;
+	@BeanReference(type = AssetEntryPersistence.class)
+	protected AssetEntryPersistence assetEntryPersistence;
+	@BeanReference(type = AssetTagPersistence.class)
+	protected AssetTagPersistence assetTagPersistence;
+	@BeanReference(type = BlogsEntryPersistence.class)
+	protected BlogsEntryPersistence blogsEntryPersistence;
+	@BeanReference(type = ExpandoValuePersistence.class)
+	protected ExpandoValuePersistence expandoValuePersistence;
+	@BeanReference(type = RatingsStatsPersistence.class)
+	protected RatingsStatsPersistence ratingsStatsPersistence;
+	@BeanReference(type = SocialActivityPersistence.class)
+	protected SocialActivityPersistence socialActivityPersistence;
 	private static final String _SQL_SELECT_MBMESSAGE = "SELECT mbMessage FROM MBMessage mbMessage";
 	private static final String _SQL_SELECT_MBMESSAGE_WHERE = "SELECT mbMessage FROM MBMessage mbMessage WHERE ";
 	private static final String _SQL_COUNT_MBMESSAGE = "SELECT COUNT(mbMessage) FROM MBMessage mbMessage";

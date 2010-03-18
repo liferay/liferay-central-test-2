@@ -17,7 +17,6 @@ package com.liferay.portlet.calendar.service.persistence;
 import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
-import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
@@ -37,12 +36,21 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.BatchSessionUtil;
+import com.liferay.portal.service.persistence.CompanyPersistence;
+import com.liferay.portal.service.persistence.GroupPersistence;
+import com.liferay.portal.service.persistence.PortletPreferencesPersistence;
+import com.liferay.portal.service.persistence.ResourcePersistence;
+import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
+import com.liferay.portlet.asset.service.persistence.AssetEntryPersistence;
+import com.liferay.portlet.asset.service.persistence.AssetTagPersistence;
 import com.liferay.portlet.calendar.NoSuchEventException;
 import com.liferay.portlet.calendar.model.CalEvent;
 import com.liferay.portlet.calendar.model.impl.CalEventImpl;
 import com.liferay.portlet.calendar.model.impl.CalEventModelImpl;
+import com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence;
+import com.liferay.portlet.social.service.persistence.SocialActivityPersistence;
 
 import java.io.Serializable;
 
@@ -528,11 +536,12 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	}
 
 	public List<CalEvent> findByUuid(String uuid, int start, int end,
-		OrderByComparator obc) throws SystemException {
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				uuid,
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<CalEvent> list = (List<CalEvent>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_UUID,
@@ -546,9 +555,9 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(3);
@@ -568,8 +577,9 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 					}
 				}
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -609,9 +619,10 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 		return list;
 	}
 
-	public CalEvent findByUuid_First(String uuid, OrderByComparator obc)
+	public CalEvent findByUuid_First(String uuid,
+		OrderByComparator orderByComparator)
 		throws NoSuchEventException, SystemException {
-		List<CalEvent> list = findByUuid(uuid, 0, 1, obc);
+		List<CalEvent> list = findByUuid(uuid, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -630,11 +641,13 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 		}
 	}
 
-	public CalEvent findByUuid_Last(String uuid, OrderByComparator obc)
+	public CalEvent findByUuid_Last(String uuid,
+		OrderByComparator orderByComparator)
 		throws NoSuchEventException, SystemException {
 		int count = countByUuid(uuid);
 
-		List<CalEvent> list = findByUuid(uuid, count - 1, count, obc);
+		List<CalEvent> list = findByUuid(uuid, count - 1, count,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -654,7 +667,8 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	}
 
 	public CalEvent[] findByUuid_PrevAndNext(long eventId, String uuid,
-		OrderByComparator obc) throws NoSuchEventException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchEventException, SystemException {
 		CalEvent calEvent = findByPrimaryKey(eventId);
 
 		int count = countByUuid(uuid);
@@ -666,9 +680,9 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(3);
@@ -688,8 +702,9 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 				}
 			}
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -706,7 +721,8 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 				qPos.add(uuid);
 			}
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, calEvent);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, calEvent);
 
 			CalEvent[] array = new CalEventImpl[3];
 
@@ -909,11 +925,12 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	}
 
 	public List<CalEvent> findByCompanyId(long companyId, int start, int end,
-		OrderByComparator obc) throws SystemException {
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(companyId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<CalEvent> list = (List<CalEvent>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
@@ -927,9 +944,9 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(3);
@@ -939,8 +956,9 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -978,9 +996,10 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 		return list;
 	}
 
-	public CalEvent findByCompanyId_First(long companyId, OrderByComparator obc)
+	public CalEvent findByCompanyId_First(long companyId,
+		OrderByComparator orderByComparator)
 		throws NoSuchEventException, SystemException {
-		List<CalEvent> list = findByCompanyId(companyId, 0, 1, obc);
+		List<CalEvent> list = findByCompanyId(companyId, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -999,11 +1018,13 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 		}
 	}
 
-	public CalEvent findByCompanyId_Last(long companyId, OrderByComparator obc)
+	public CalEvent findByCompanyId_Last(long companyId,
+		OrderByComparator orderByComparator)
 		throws NoSuchEventException, SystemException {
 		int count = countByCompanyId(companyId);
 
-		List<CalEvent> list = findByCompanyId(companyId, count - 1, count, obc);
+		List<CalEvent> list = findByCompanyId(companyId, count - 1, count,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -1023,7 +1044,8 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	}
 
 	public CalEvent[] findByCompanyId_PrevAndNext(long eventId, long companyId,
-		OrderByComparator obc) throws NoSuchEventException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchEventException, SystemException {
 		CalEvent calEvent = findByPrimaryKey(eventId);
 
 		int count = countByCompanyId(companyId);
@@ -1035,9 +1057,9 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(3);
@@ -1047,8 +1069,9 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -1063,7 +1086,8 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 			qPos.add(companyId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, calEvent);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, calEvent);
 
 			CalEvent[] array = new CalEventImpl[3];
 
@@ -1137,11 +1161,12 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	}
 
 	public List<CalEvent> findByGroupId(long groupId, int start, int end,
-		OrderByComparator obc) throws SystemException {
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<CalEvent> list = (List<CalEvent>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
@@ -1155,9 +1180,9 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(3);
@@ -1167,8 +1192,9 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -1206,9 +1232,10 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 		return list;
 	}
 
-	public CalEvent findByGroupId_First(long groupId, OrderByComparator obc)
+	public CalEvent findByGroupId_First(long groupId,
+		OrderByComparator orderByComparator)
 		throws NoSuchEventException, SystemException {
-		List<CalEvent> list = findByGroupId(groupId, 0, 1, obc);
+		List<CalEvent> list = findByGroupId(groupId, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -1227,11 +1254,13 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 		}
 	}
 
-	public CalEvent findByGroupId_Last(long groupId, OrderByComparator obc)
+	public CalEvent findByGroupId_Last(long groupId,
+		OrderByComparator orderByComparator)
 		throws NoSuchEventException, SystemException {
 		int count = countByGroupId(groupId);
 
-		List<CalEvent> list = findByGroupId(groupId, count - 1, count, obc);
+		List<CalEvent> list = findByGroupId(groupId, count - 1, count,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -1251,7 +1280,8 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	}
 
 	public CalEvent[] findByGroupId_PrevAndNext(long eventId, long groupId,
-		OrderByComparator obc) throws NoSuchEventException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchEventException, SystemException {
 		CalEvent calEvent = findByPrimaryKey(eventId);
 
 		int count = countByGroupId(groupId);
@@ -1263,9 +1293,9 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(3);
@@ -1275,8 +1305,9 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -1291,7 +1322,8 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 			qPos.add(groupId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, calEvent);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, calEvent);
 
 			CalEvent[] array = new CalEventImpl[3];
 
@@ -1366,11 +1398,12 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	}
 
 	public List<CalEvent> findByRemindBy(int remindBy, int start, int end,
-		OrderByComparator obc) throws SystemException {
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Integer(remindBy),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<CalEvent> list = (List<CalEvent>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_REMINDBY,
@@ -1384,9 +1417,9 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(3);
@@ -1396,8 +1429,9 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 				query.append(_FINDER_COLUMN_REMINDBY_REMINDBY_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -1435,9 +1469,10 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 		return list;
 	}
 
-	public CalEvent findByRemindBy_First(int remindBy, OrderByComparator obc)
+	public CalEvent findByRemindBy_First(int remindBy,
+		OrderByComparator orderByComparator)
 		throws NoSuchEventException, SystemException {
-		List<CalEvent> list = findByRemindBy(remindBy, 0, 1, obc);
+		List<CalEvent> list = findByRemindBy(remindBy, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -1456,11 +1491,13 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 		}
 	}
 
-	public CalEvent findByRemindBy_Last(int remindBy, OrderByComparator obc)
+	public CalEvent findByRemindBy_Last(int remindBy,
+		OrderByComparator orderByComparator)
 		throws NoSuchEventException, SystemException {
 		int count = countByRemindBy(remindBy);
 
-		List<CalEvent> list = findByRemindBy(remindBy, count - 1, count, obc);
+		List<CalEvent> list = findByRemindBy(remindBy, count - 1, count,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -1480,7 +1517,8 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	}
 
 	public CalEvent[] findByRemindBy_PrevAndNext(long eventId, int remindBy,
-		OrderByComparator obc) throws NoSuchEventException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchEventException, SystemException {
 		CalEvent calEvent = findByPrimaryKey(eventId);
 
 		int count = countByRemindBy(remindBy);
@@ -1492,9 +1530,9 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(3);
@@ -1504,8 +1542,9 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 			query.append(_FINDER_COLUMN_REMINDBY_REMINDBY_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -1520,7 +1559,8 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 			qPos.add(remindBy);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, calEvent);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, calEvent);
 
 			CalEvent[] array = new CalEventImpl[3];
 
@@ -1611,13 +1651,14 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	}
 
 	public List<CalEvent> findByG_T(long groupId, String type, int start,
-		int end, OrderByComparator obc) throws SystemException {
+		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
 				type,
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<CalEvent> list = (List<CalEvent>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_G_T,
@@ -1631,9 +1672,9 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(4 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(4);
@@ -1655,8 +1696,9 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 					}
 				}
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -1699,8 +1741,9 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	}
 
 	public CalEvent findByG_T_First(long groupId, String type,
-		OrderByComparator obc) throws NoSuchEventException, SystemException {
-		List<CalEvent> list = findByG_T(groupId, type, 0, 1, obc);
+		OrderByComparator orderByComparator)
+		throws NoSuchEventException, SystemException {
+		List<CalEvent> list = findByG_T(groupId, type, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -1723,10 +1766,12 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	}
 
 	public CalEvent findByG_T_Last(long groupId, String type,
-		OrderByComparator obc) throws NoSuchEventException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchEventException, SystemException {
 		int count = countByG_T(groupId, type);
 
-		List<CalEvent> list = findByG_T(groupId, type, count - 1, count, obc);
+		List<CalEvent> list = findByG_T(groupId, type, count - 1, count,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -1749,7 +1794,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	}
 
 	public CalEvent[] findByG_T_PrevAndNext(long eventId, long groupId,
-		String type, OrderByComparator obc)
+		String type, OrderByComparator orderByComparator)
 		throws NoSuchEventException, SystemException {
 		CalEvent calEvent = findByPrimaryKey(eventId);
 
@@ -1762,9 +1807,9 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(4 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(4);
@@ -1786,8 +1831,9 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 				}
 			}
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -1806,7 +1852,8 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 				qPos.add(type);
 			}
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, calEvent);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, calEvent);
 
 			CalEvent[] array = new CalEventImpl[3];
 
@@ -1887,11 +1934,12 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	}
 
 	public List<CalEvent> findByG_R(long groupId, boolean repeating, int start,
-		int end, OrderByComparator obc) throws SystemException {
+		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), Boolean.valueOf(repeating),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<CalEvent> list = (List<CalEvent>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_G_R,
@@ -1905,9 +1953,9 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(4 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(4);
@@ -1919,8 +1967,9 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 				query.append(_FINDER_COLUMN_G_R_REPEATING_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -1961,8 +2010,10 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	}
 
 	public CalEvent findByG_R_First(long groupId, boolean repeating,
-		OrderByComparator obc) throws NoSuchEventException, SystemException {
-		List<CalEvent> list = findByG_R(groupId, repeating, 0, 1, obc);
+		OrderByComparator orderByComparator)
+		throws NoSuchEventException, SystemException {
+		List<CalEvent> list = findByG_R(groupId, repeating, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -1985,11 +2036,12 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	}
 
 	public CalEvent findByG_R_Last(long groupId, boolean repeating,
-		OrderByComparator obc) throws NoSuchEventException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchEventException, SystemException {
 		int count = countByG_R(groupId, repeating);
 
 		List<CalEvent> list = findByG_R(groupId, repeating, count - 1, count,
-				obc);
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -2012,7 +2064,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	}
 
 	public CalEvent[] findByG_R_PrevAndNext(long eventId, long groupId,
-		boolean repeating, OrderByComparator obc)
+		boolean repeating, OrderByComparator orderByComparator)
 		throws NoSuchEventException, SystemException {
 		CalEvent calEvent = findByPrimaryKey(eventId);
 
@@ -2025,9 +2077,9 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(4 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(4);
@@ -2039,8 +2091,9 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 			query.append(_FINDER_COLUMN_G_R_REPEATING_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -2057,7 +2110,8 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 			qPos.add(repeating);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, calEvent);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, calEvent);
 
 			CalEvent[] array = new CalEventImpl[3];
 
@@ -2075,46 +2129,6 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 		}
 	}
 
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.setLimit(start, end);
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
 	public List<CalEvent> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -2123,10 +2137,11 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 		return findAll(start, end, null);
 	}
 
-	public List<CalEvent> findAll(int start, int end, OrderByComparator obc)
-		throws SystemException {
+	public List<CalEvent> findAll(int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<CalEvent> list = (List<CalEvent>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
@@ -2141,13 +2156,14 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 				StringBundler query = null;
 				String sql = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(2 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 
 					query.append(_SQL_SELECT_CALEVENT);
 
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 
 					sql = query.toString();
 				}
@@ -2158,7 +2174,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 				Query q = session.createQuery(sql);
 
-				if (obc == null) {
+				if (orderByComparator == null) {
 					list = (List<CalEvent>)QueryUtil.list(q, getDialect(),
 							start, end, false);
 
@@ -2669,26 +2685,26 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 		}
 	}
 
-	@BeanReference(name = "com.liferay.portlet.calendar.service.persistence.CalEventPersistence")
-	protected com.liferay.portlet.calendar.service.persistence.CalEventPersistence calEventPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.CompanyPersistence")
-	protected com.liferay.portal.service.persistence.CompanyPersistence companyPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.GroupPersistence")
-	protected com.liferay.portal.service.persistence.GroupPersistence groupPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.PortletPreferencesPersistence")
-	protected com.liferay.portal.service.persistence.PortletPreferencesPersistence portletPreferencesPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.ResourcePersistence")
-	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
-	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
-	@BeanReference(name = "com.liferay.portlet.asset.service.persistence.AssetEntryPersistence")
-	protected com.liferay.portlet.asset.service.persistence.AssetEntryPersistence assetEntryPersistence;
-	@BeanReference(name = "com.liferay.portlet.asset.service.persistence.AssetTagPersistence")
-	protected com.liferay.portlet.asset.service.persistence.AssetTagPersistence assetTagPersistence;
-	@BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence")
-	protected com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence expandoValuePersistence;
-	@BeanReference(name = "com.liferay.portlet.social.service.persistence.SocialActivityPersistence")
-	protected com.liferay.portlet.social.service.persistence.SocialActivityPersistence socialActivityPersistence;
+	@BeanReference(type = CalEventPersistence.class)
+	protected CalEventPersistence calEventPersistence;
+	@BeanReference(type = CompanyPersistence.class)
+	protected CompanyPersistence companyPersistence;
+	@BeanReference(type = GroupPersistence.class)
+	protected GroupPersistence groupPersistence;
+	@BeanReference(type = PortletPreferencesPersistence.class)
+	protected PortletPreferencesPersistence portletPreferencesPersistence;
+	@BeanReference(type = ResourcePersistence.class)
+	protected ResourcePersistence resourcePersistence;
+	@BeanReference(type = UserPersistence.class)
+	protected UserPersistence userPersistence;
+	@BeanReference(type = AssetEntryPersistence.class)
+	protected AssetEntryPersistence assetEntryPersistence;
+	@BeanReference(type = AssetTagPersistence.class)
+	protected AssetTagPersistence assetTagPersistence;
+	@BeanReference(type = ExpandoValuePersistence.class)
+	protected ExpandoValuePersistence expandoValuePersistence;
+	@BeanReference(type = SocialActivityPersistence.class)
+	protected SocialActivityPersistence socialActivityPersistence;
 	private static final String _SQL_SELECT_CALEVENT = "SELECT calEvent FROM CalEvent calEvent";
 	private static final String _SQL_SELECT_CALEVENT_WHERE = "SELECT calEvent FROM CalEvent calEvent WHERE ";
 	private static final String _SQL_COUNT_CALEVENT = "SELECT COUNT(calEvent) FROM CalEvent calEvent";

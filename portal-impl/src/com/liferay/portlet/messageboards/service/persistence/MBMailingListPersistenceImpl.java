@@ -17,7 +17,6 @@ package com.liferay.portlet.messageboards.service.persistence;
 import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
-import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
@@ -37,6 +36,8 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.BatchSessionUtil;
+import com.liferay.portal.service.persistence.ResourcePersistence;
+import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 import com.liferay.portlet.messageboards.NoSuchMailingListException;
@@ -519,11 +520,12 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 	}
 
 	public List<MBMailingList> findByUuid(String uuid, int start, int end,
-		OrderByComparator obc) throws SystemException {
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				uuid,
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<MBMailingList> list = (List<MBMailingList>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_UUID,
@@ -537,9 +539,9 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(2);
@@ -559,8 +561,9 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 					}
 				}
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				String sql = query.toString();
@@ -596,9 +599,10 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 		return list;
 	}
 
-	public MBMailingList findByUuid_First(String uuid, OrderByComparator obc)
+	public MBMailingList findByUuid_First(String uuid,
+		OrderByComparator orderByComparator)
 		throws NoSuchMailingListException, SystemException {
-		List<MBMailingList> list = findByUuid(uuid, 0, 1, obc);
+		List<MBMailingList> list = findByUuid(uuid, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -617,11 +621,13 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 		}
 	}
 
-	public MBMailingList findByUuid_Last(String uuid, OrderByComparator obc)
+	public MBMailingList findByUuid_Last(String uuid,
+		OrderByComparator orderByComparator)
 		throws NoSuchMailingListException, SystemException {
 		int count = countByUuid(uuid);
 
-		List<MBMailingList> list = findByUuid(uuid, count - 1, count, obc);
+		List<MBMailingList> list = findByUuid(uuid, count - 1, count,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -641,7 +647,7 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 	}
 
 	public MBMailingList[] findByUuid_PrevAndNext(long mailingListId,
-		String uuid, OrderByComparator obc)
+		String uuid, OrderByComparator orderByComparator)
 		throws NoSuchMailingListException, SystemException {
 		MBMailingList mbMailingList = findByPrimaryKey(mailingListId);
 
@@ -654,9 +660,9 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(2);
@@ -676,8 +682,9 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 				}
 			}
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			String sql = query.toString();
@@ -690,8 +697,8 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 				qPos.add(uuid);
 			}
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					mbMailingList);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, mbMailingList);
 
 			MBMailingList[] array = new MBMailingListImpl[3];
 
@@ -890,11 +897,12 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 	}
 
 	public List<MBMailingList> findByActive(boolean active, int start, int end,
-		OrderByComparator obc) throws SystemException {
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				Boolean.valueOf(active),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<MBMailingList> list = (List<MBMailingList>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_ACTIVE,
@@ -908,9 +916,9 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(2);
@@ -920,8 +928,9 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 
 				query.append(_FINDER_COLUMN_ACTIVE_ACTIVE_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				String sql = query.toString();
@@ -956,9 +965,9 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 	}
 
 	public MBMailingList findByActive_First(boolean active,
-		OrderByComparator obc)
+		OrderByComparator orderByComparator)
 		throws NoSuchMailingListException, SystemException {
-		List<MBMailingList> list = findByActive(active, 0, 1, obc);
+		List<MBMailingList> list = findByActive(active, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -977,11 +986,13 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 		}
 	}
 
-	public MBMailingList findByActive_Last(boolean active, OrderByComparator obc)
+	public MBMailingList findByActive_Last(boolean active,
+		OrderByComparator orderByComparator)
 		throws NoSuchMailingListException, SystemException {
 		int count = countByActive(active);
 
-		List<MBMailingList> list = findByActive(active, count - 1, count, obc);
+		List<MBMailingList> list = findByActive(active, count - 1, count,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -1001,7 +1012,7 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 	}
 
 	public MBMailingList[] findByActive_PrevAndNext(long mailingListId,
-		boolean active, OrderByComparator obc)
+		boolean active, OrderByComparator orderByComparator)
 		throws NoSuchMailingListException, SystemException {
 		MBMailingList mbMailingList = findByPrimaryKey(mailingListId);
 
@@ -1014,9 +1025,9 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(2);
@@ -1026,8 +1037,9 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 
 			query.append(_FINDER_COLUMN_ACTIVE_ACTIVE_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			String sql = query.toString();
@@ -1038,8 +1050,8 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 
 			qPos.add(active);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					mbMailingList);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, mbMailingList);
 
 			MBMailingList[] array = new MBMailingListImpl[3];
 
@@ -1172,46 +1184,6 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 		}
 	}
 
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.setLimit(start, end);
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
 	public List<MBMailingList> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -1221,10 +1193,11 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 		return findAll(start, end, null);
 	}
 
-	public List<MBMailingList> findAll(int start, int end, OrderByComparator obc)
-		throws SystemException {
+	public List<MBMailingList> findAll(int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<MBMailingList> list = (List<MBMailingList>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
@@ -1239,13 +1212,14 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 				StringBundler query = null;
 				String sql = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(2 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 
 					query.append(_SQL_SELECT_MBMAILINGLIST);
 
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 
 					sql = query.toString();
 				}
@@ -1254,7 +1228,7 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 
 				Query q = session.createQuery(sql);
 
-				if (obc == null) {
+				if (orderByComparator == null) {
 					list = (List<MBMailingList>)QueryUtil.list(q, getDialect(),
 							start, end, false);
 
@@ -1592,26 +1566,26 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 		}
 	}
 
-	@BeanReference(name = "com.liferay.portlet.messageboards.service.persistence.MBBanPersistence")
-	protected com.liferay.portlet.messageboards.service.persistence.MBBanPersistence mbBanPersistence;
-	@BeanReference(name = "com.liferay.portlet.messageboards.service.persistence.MBCategoryPersistence")
-	protected com.liferay.portlet.messageboards.service.persistence.MBCategoryPersistence mbCategoryPersistence;
-	@BeanReference(name = "com.liferay.portlet.messageboards.service.persistence.MBDiscussionPersistence")
-	protected com.liferay.portlet.messageboards.service.persistence.MBDiscussionPersistence mbDiscussionPersistence;
-	@BeanReference(name = "com.liferay.portlet.messageboards.service.persistence.MBMailingListPersistence")
-	protected com.liferay.portlet.messageboards.service.persistence.MBMailingListPersistence mbMailingListPersistence;
-	@BeanReference(name = "com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence")
-	protected com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence mbMessagePersistence;
-	@BeanReference(name = "com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPersistence")
-	protected com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPersistence mbMessageFlagPersistence;
-	@BeanReference(name = "com.liferay.portlet.messageboards.service.persistence.MBStatsUserPersistence")
-	protected com.liferay.portlet.messageboards.service.persistence.MBStatsUserPersistence mbStatsUserPersistence;
-	@BeanReference(name = "com.liferay.portlet.messageboards.service.persistence.MBThreadPersistence")
-	protected com.liferay.portlet.messageboards.service.persistence.MBThreadPersistence mbThreadPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.ResourcePersistence")
-	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
-	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
+	@BeanReference(type = MBBanPersistence.class)
+	protected MBBanPersistence mbBanPersistence;
+	@BeanReference(type = MBCategoryPersistence.class)
+	protected MBCategoryPersistence mbCategoryPersistence;
+	@BeanReference(type = MBDiscussionPersistence.class)
+	protected MBDiscussionPersistence mbDiscussionPersistence;
+	@BeanReference(type = MBMailingListPersistence.class)
+	protected MBMailingListPersistence mbMailingListPersistence;
+	@BeanReference(type = MBMessagePersistence.class)
+	protected MBMessagePersistence mbMessagePersistence;
+	@BeanReference(type = MBMessageFlagPersistence.class)
+	protected MBMessageFlagPersistence mbMessageFlagPersistence;
+	@BeanReference(type = MBStatsUserPersistence.class)
+	protected MBStatsUserPersistence mbStatsUserPersistence;
+	@BeanReference(type = MBThreadPersistence.class)
+	protected MBThreadPersistence mbThreadPersistence;
+	@BeanReference(type = ResourcePersistence.class)
+	protected ResourcePersistence resourcePersistence;
+	@BeanReference(type = UserPersistence.class)
+	protected UserPersistence userPersistence;
 	private static final String _SQL_SELECT_MBMAILINGLIST = "SELECT mbMailingList FROM MBMailingList mbMailingList";
 	private static final String _SQL_SELECT_MBMAILINGLIST_WHERE = "SELECT mbMailingList FROM MBMailingList mbMailingList WHERE ";
 	private static final String _SQL_COUNT_MBMAILINGLIST = "SELECT COUNT(mbMailingList) FROM MBMailingList mbMailingList";

@@ -17,7 +17,6 @@ package com.liferay.portlet.tasks.service.persistence;
 import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
-import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
@@ -36,8 +35,12 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.BatchSessionUtil;
+import com.liferay.portal.service.persistence.ResourcePersistence;
+import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
+import com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence;
+import com.liferay.portlet.social.service.persistence.SocialActivityPersistence;
 import com.liferay.portlet.tasks.NoSuchProposalException;
 import com.liferay.portlet.tasks.model.TasksProposal;
 import com.liferay.portlet.tasks.model.impl.TasksProposalImpl;
@@ -451,11 +454,12 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 	}
 
 	public List<TasksProposal> findByGroupId(long groupId, int start, int end,
-		OrderByComparator obc) throws SystemException {
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<TasksProposal> list = (List<TasksProposal>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
@@ -469,9 +473,9 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(3);
@@ -481,8 +485,9 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 
 				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -520,9 +525,11 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 		return list;
 	}
 
-	public TasksProposal findByGroupId_First(long groupId, OrderByComparator obc)
+	public TasksProposal findByGroupId_First(long groupId,
+		OrderByComparator orderByComparator)
 		throws NoSuchProposalException, SystemException {
-		List<TasksProposal> list = findByGroupId(groupId, 0, 1, obc);
+		List<TasksProposal> list = findByGroupId(groupId, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -541,11 +548,13 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 		}
 	}
 
-	public TasksProposal findByGroupId_Last(long groupId, OrderByComparator obc)
+	public TasksProposal findByGroupId_Last(long groupId,
+		OrderByComparator orderByComparator)
 		throws NoSuchProposalException, SystemException {
 		int count = countByGroupId(groupId);
 
-		List<TasksProposal> list = findByGroupId(groupId, count - 1, count, obc);
+		List<TasksProposal> list = findByGroupId(groupId, count - 1, count,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -565,7 +574,7 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 	}
 
 	public TasksProposal[] findByGroupId_PrevAndNext(long proposalId,
-		long groupId, OrderByComparator obc)
+		long groupId, OrderByComparator orderByComparator)
 		throws NoSuchProposalException, SystemException {
 		TasksProposal tasksProposal = findByPrimaryKey(proposalId);
 
@@ -578,9 +587,9 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(3);
@@ -590,8 +599,9 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -606,8 +616,8 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 
 			qPos.add(groupId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					tasksProposal);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, tasksProposal);
 
 			TasksProposal[] array = new TasksProposalImpl[3];
 
@@ -686,11 +696,12 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 	}
 
 	public List<TasksProposal> findByG_U(long groupId, long userId, int start,
-		int end, OrderByComparator obc) throws SystemException {
+		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Long(userId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<TasksProposal> list = (List<TasksProposal>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_G_U,
@@ -704,9 +715,9 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(4 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(4);
@@ -718,8 +729,9 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 
 				query.append(_FINDER_COLUMN_G_U_USERID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -760,8 +772,10 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 	}
 
 	public TasksProposal findByG_U_First(long groupId, long userId,
-		OrderByComparator obc) throws NoSuchProposalException, SystemException {
-		List<TasksProposal> list = findByG_U(groupId, userId, 0, 1, obc);
+		OrderByComparator orderByComparator)
+		throws NoSuchProposalException, SystemException {
+		List<TasksProposal> list = findByG_U(groupId, userId, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -784,11 +798,12 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 	}
 
 	public TasksProposal findByG_U_Last(long groupId, long userId,
-		OrderByComparator obc) throws NoSuchProposalException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchProposalException, SystemException {
 		int count = countByG_U(groupId, userId);
 
 		List<TasksProposal> list = findByG_U(groupId, userId, count - 1, count,
-				obc);
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -811,7 +826,7 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 	}
 
 	public TasksProposal[] findByG_U_PrevAndNext(long proposalId, long groupId,
-		long userId, OrderByComparator obc)
+		long userId, OrderByComparator orderByComparator)
 		throws NoSuchProposalException, SystemException {
 		TasksProposal tasksProposal = findByPrimaryKey(proposalId);
 
@@ -824,9 +839,9 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(4 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(4);
@@ -838,8 +853,9 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 
 			query.append(_FINDER_COLUMN_G_U_USERID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -856,8 +872,8 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 
 			qPos.add(userId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					tasksProposal);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, tasksProposal);
 
 			TasksProposal[] array = new TasksProposalImpl[3];
 
@@ -1003,46 +1019,6 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 		}
 	}
 
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.setLimit(start, end);
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
 	public List<TasksProposal> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -1052,10 +1028,11 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 		return findAll(start, end, null);
 	}
 
-	public List<TasksProposal> findAll(int start, int end, OrderByComparator obc)
-		throws SystemException {
+	public List<TasksProposal> findAll(int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<TasksProposal> list = (List<TasksProposal>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
@@ -1070,13 +1047,14 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 				StringBundler query = null;
 				String sql = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(2 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 
 					query.append(_SQL_SELECT_TASKSPROPOSAL);
 
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 
 					sql = query.toString();
 				}
@@ -1087,7 +1065,7 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 
 				Query q = session.createQuery(sql);
 
-				if (obc == null) {
+				if (orderByComparator == null) {
 					list = (List<TasksProposal>)QueryUtil.list(q, getDialect(),
 							start, end, false);
 
@@ -1358,18 +1336,18 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 		}
 	}
 
-	@BeanReference(name = "com.liferay.portlet.tasks.service.persistence.TasksProposalPersistence")
-	protected com.liferay.portlet.tasks.service.persistence.TasksProposalPersistence tasksProposalPersistence;
-	@BeanReference(name = "com.liferay.portlet.tasks.service.persistence.TasksReviewPersistence")
-	protected com.liferay.portlet.tasks.service.persistence.TasksReviewPersistence tasksReviewPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.ResourcePersistence")
-	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
-	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
-	@BeanReference(name = "com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence")
-	protected com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence mbMessagePersistence;
-	@BeanReference(name = "com.liferay.portlet.social.service.persistence.SocialActivityPersistence")
-	protected com.liferay.portlet.social.service.persistence.SocialActivityPersistence socialActivityPersistence;
+	@BeanReference(type = TasksProposalPersistence.class)
+	protected TasksProposalPersistence tasksProposalPersistence;
+	@BeanReference(type = TasksReviewPersistence.class)
+	protected TasksReviewPersistence tasksReviewPersistence;
+	@BeanReference(type = ResourcePersistence.class)
+	protected ResourcePersistence resourcePersistence;
+	@BeanReference(type = UserPersistence.class)
+	protected UserPersistence userPersistence;
+	@BeanReference(type = MBMessagePersistence.class)
+	protected MBMessagePersistence mbMessagePersistence;
+	@BeanReference(type = SocialActivityPersistence.class)
+	protected SocialActivityPersistence socialActivityPersistence;
 	private static final String _SQL_SELECT_TASKSPROPOSAL = "SELECT tasksProposal FROM TasksProposal tasksProposal";
 	private static final String _SQL_SELECT_TASKSPROPOSAL_WHERE = "SELECT tasksProposal FROM TasksProposal tasksProposal WHERE ";
 	private static final String _SQL_COUNT_TASKSPROPOSAL = "SELECT COUNT(tasksProposal) FROM TasksProposal tasksProposal";

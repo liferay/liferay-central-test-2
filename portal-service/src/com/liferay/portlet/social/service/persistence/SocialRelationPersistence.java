@@ -70,24 +70,24 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 
 	public java.util.List<com.liferay.portlet.social.model.SocialRelation> findByUuid(
 		java.lang.String uuid, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portlet.social.model.SocialRelation findByUuid_First(
 		java.lang.String uuid,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.social.NoSuchRelationException;
 
 	public com.liferay.portlet.social.model.SocialRelation findByUuid_Last(
 		java.lang.String uuid,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.social.NoSuchRelationException;
 
 	public com.liferay.portlet.social.model.SocialRelation[] findByUuid_PrevAndNext(
 		long relationId, java.lang.String uuid,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.social.NoSuchRelationException;
 
@@ -101,22 +101,24 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 
 	public java.util.List<com.liferay.portlet.social.model.SocialRelation> findByCompanyId(
 		long companyId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portlet.social.model.SocialRelation findByCompanyId_First(
-		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long companyId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.social.NoSuchRelationException;
 
 	public com.liferay.portlet.social.model.SocialRelation findByCompanyId_Last(
-		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long companyId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.social.NoSuchRelationException;
 
 	public com.liferay.portlet.social.model.SocialRelation[] findByCompanyId_PrevAndNext(
 		long relationId, long companyId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.social.NoSuchRelationException;
 
@@ -130,22 +132,24 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 
 	public java.util.List<com.liferay.portlet.social.model.SocialRelation> findByUserId1(
 		long userId1, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portlet.social.model.SocialRelation findByUserId1_First(
-		long userId1, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long userId1,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.social.NoSuchRelationException;
 
 	public com.liferay.portlet.social.model.SocialRelation findByUserId1_Last(
-		long userId1, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long userId1,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.social.NoSuchRelationException;
 
 	public com.liferay.portlet.social.model.SocialRelation[] findByUserId1_PrevAndNext(
 		long relationId, long userId1,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.social.NoSuchRelationException;
 
@@ -159,22 +163,24 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 
 	public java.util.List<com.liferay.portlet.social.model.SocialRelation> findByUserId2(
 		long userId2, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portlet.social.model.SocialRelation findByUserId2_First(
-		long userId2, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long userId2,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.social.NoSuchRelationException;
 
 	public com.liferay.portlet.social.model.SocialRelation findByUserId2_Last(
-		long userId2, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long userId2,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.social.NoSuchRelationException;
 
 	public com.liferay.portlet.social.model.SocialRelation[] findByUserId2_PrevAndNext(
 		long relationId, long userId2,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.social.NoSuchRelationException;
 
@@ -187,22 +193,24 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 
 	public java.util.List<com.liferay.portlet.social.model.SocialRelation> findByType(
 		int type, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portlet.social.model.SocialRelation findByType_First(
-		int type, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int type,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.social.NoSuchRelationException;
 
 	public com.liferay.portlet.social.model.SocialRelation findByType_Last(
-		int type, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int type,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.social.NoSuchRelationException;
 
 	public com.liferay.portlet.social.model.SocialRelation[] findByType_PrevAndNext(
 		long relationId, int type,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.social.NoSuchRelationException;
 
@@ -216,24 +224,24 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 
 	public java.util.List<com.liferay.portlet.social.model.SocialRelation> findByC_T(
 		long companyId, int type, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portlet.social.model.SocialRelation findByC_T_First(
 		long companyId, int type,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.social.NoSuchRelationException;
 
 	public com.liferay.portlet.social.model.SocialRelation findByC_T_Last(
 		long companyId, int type,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.social.NoSuchRelationException;
 
 	public com.liferay.portlet.social.model.SocialRelation[] findByC_T_PrevAndNext(
 		long relationId, long companyId, int type,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.social.NoSuchRelationException;
 
@@ -247,24 +255,24 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 
 	public java.util.List<com.liferay.portlet.social.model.SocialRelation> findByU1_T(
 		long userId1, int type, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portlet.social.model.SocialRelation findByU1_T_First(
 		long userId1, int type,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.social.NoSuchRelationException;
 
 	public com.liferay.portlet.social.model.SocialRelation findByU1_T_Last(
 		long userId1, int type,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.social.NoSuchRelationException;
 
 	public com.liferay.portlet.social.model.SocialRelation[] findByU1_T_PrevAndNext(
 		long relationId, long userId1, int type,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.social.NoSuchRelationException;
 
@@ -278,24 +286,24 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 
 	public java.util.List<com.liferay.portlet.social.model.SocialRelation> findByU2_T(
 		long userId2, int type, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portlet.social.model.SocialRelation findByU2_T_First(
 		long userId2, int type,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.social.NoSuchRelationException;
 
 	public com.liferay.portlet.social.model.SocialRelation findByU2_T_Last(
 		long userId2, int type,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.social.NoSuchRelationException;
 
 	public com.liferay.portlet.social.model.SocialRelation[] findByU2_T_PrevAndNext(
 		long relationId, long userId2, int type,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.social.NoSuchRelationException;
 
@@ -320,7 +328,8 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portlet.social.model.SocialRelation> findAll(
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void removeByUuid(java.lang.String uuid)

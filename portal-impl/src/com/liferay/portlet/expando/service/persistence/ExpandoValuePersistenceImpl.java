@@ -17,7 +17,6 @@ package com.liferay.portlet.expando.service.persistence;
 import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
-import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
@@ -35,6 +34,8 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.BatchSessionUtil;
+import com.liferay.portal.service.persistence.ResourcePersistence;
+import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 import com.liferay.portlet.expando.NoSuchValueException;
@@ -590,11 +591,12 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	}
 
 	public List<ExpandoValue> findByTableId(long tableId, int start, int end,
-		OrderByComparator obc) throws SystemException {
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(tableId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<ExpandoValue> list = (List<ExpandoValue>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_TABLEID,
@@ -608,9 +610,9 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(3);
@@ -620,8 +622,9 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 
 				query.append(_FINDER_COLUMN_TABLEID_TABLEID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -659,9 +662,10 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 		return list;
 	}
 
-	public ExpandoValue findByTableId_First(long tableId, OrderByComparator obc)
+	public ExpandoValue findByTableId_First(long tableId,
+		OrderByComparator orderByComparator)
 		throws NoSuchValueException, SystemException {
-		List<ExpandoValue> list = findByTableId(tableId, 0, 1, obc);
+		List<ExpandoValue> list = findByTableId(tableId, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -680,11 +684,13 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 		}
 	}
 
-	public ExpandoValue findByTableId_Last(long tableId, OrderByComparator obc)
+	public ExpandoValue findByTableId_Last(long tableId,
+		OrderByComparator orderByComparator)
 		throws NoSuchValueException, SystemException {
 		int count = countByTableId(tableId);
 
-		List<ExpandoValue> list = findByTableId(tableId, count - 1, count, obc);
+		List<ExpandoValue> list = findByTableId(tableId, count - 1, count,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -704,7 +710,8 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	}
 
 	public ExpandoValue[] findByTableId_PrevAndNext(long valueId, long tableId,
-		OrderByComparator obc) throws NoSuchValueException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchValueException, SystemException {
 		ExpandoValue expandoValue = findByPrimaryKey(valueId);
 
 		int count = countByTableId(tableId);
@@ -716,9 +723,9 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(3);
@@ -728,8 +735,9 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 
 			query.append(_FINDER_COLUMN_TABLEID_TABLEID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -744,8 +752,8 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 
 			qPos.add(tableId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					expandoValue);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, expandoValue);
 
 			ExpandoValue[] array = new ExpandoValueImpl[3];
 
@@ -820,11 +828,12 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	}
 
 	public List<ExpandoValue> findByColumnId(long columnId, int start, int end,
-		OrderByComparator obc) throws SystemException {
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(columnId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<ExpandoValue> list = (List<ExpandoValue>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_COLUMNID,
@@ -838,9 +847,9 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(3);
@@ -850,8 +859,9 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 
 				query.append(_FINDER_COLUMN_COLUMNID_COLUMNID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -890,8 +900,10 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	}
 
 	public ExpandoValue findByColumnId_First(long columnId,
-		OrderByComparator obc) throws NoSuchValueException, SystemException {
-		List<ExpandoValue> list = findByColumnId(columnId, 0, 1, obc);
+		OrderByComparator orderByComparator)
+		throws NoSuchValueException, SystemException {
+		List<ExpandoValue> list = findByColumnId(columnId, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -910,11 +922,13 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 		}
 	}
 
-	public ExpandoValue findByColumnId_Last(long columnId, OrderByComparator obc)
+	public ExpandoValue findByColumnId_Last(long columnId,
+		OrderByComparator orderByComparator)
 		throws NoSuchValueException, SystemException {
 		int count = countByColumnId(columnId);
 
-		List<ExpandoValue> list = findByColumnId(columnId, count - 1, count, obc);
+		List<ExpandoValue> list = findByColumnId(columnId, count - 1, count,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -934,7 +948,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	}
 
 	public ExpandoValue[] findByColumnId_PrevAndNext(long valueId,
-		long columnId, OrderByComparator obc)
+		long columnId, OrderByComparator orderByComparator)
 		throws NoSuchValueException, SystemException {
 		ExpandoValue expandoValue = findByPrimaryKey(valueId);
 
@@ -947,9 +961,9 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(3);
@@ -959,8 +973,9 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 
 			query.append(_FINDER_COLUMN_COLUMNID_COLUMNID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -975,8 +990,8 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 
 			qPos.add(columnId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					expandoValue);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, expandoValue);
 
 			ExpandoValue[] array = new ExpandoValueImpl[3];
 
@@ -1050,11 +1065,12 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	}
 
 	public List<ExpandoValue> findByRowId(long rowId, int start, int end,
-		OrderByComparator obc) throws SystemException {
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(rowId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<ExpandoValue> list = (List<ExpandoValue>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_ROWID,
@@ -1068,9 +1084,9 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(3);
@@ -1080,8 +1096,9 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 
 				query.append(_FINDER_COLUMN_ROWID_ROWID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -1119,9 +1136,10 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 		return list;
 	}
 
-	public ExpandoValue findByRowId_First(long rowId, OrderByComparator obc)
+	public ExpandoValue findByRowId_First(long rowId,
+		OrderByComparator orderByComparator)
 		throws NoSuchValueException, SystemException {
-		List<ExpandoValue> list = findByRowId(rowId, 0, 1, obc);
+		List<ExpandoValue> list = findByRowId(rowId, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -1140,11 +1158,13 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 		}
 	}
 
-	public ExpandoValue findByRowId_Last(long rowId, OrderByComparator obc)
+	public ExpandoValue findByRowId_Last(long rowId,
+		OrderByComparator orderByComparator)
 		throws NoSuchValueException, SystemException {
 		int count = countByRowId(rowId);
 
-		List<ExpandoValue> list = findByRowId(rowId, count - 1, count, obc);
+		List<ExpandoValue> list = findByRowId(rowId, count - 1, count,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -1164,7 +1184,8 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	}
 
 	public ExpandoValue[] findByRowId_PrevAndNext(long valueId, long rowId,
-		OrderByComparator obc) throws NoSuchValueException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchValueException, SystemException {
 		ExpandoValue expandoValue = findByPrimaryKey(valueId);
 
 		int count = countByRowId(rowId);
@@ -1176,9 +1197,9 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(3);
@@ -1188,8 +1209,9 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 
 			query.append(_FINDER_COLUMN_ROWID_ROWID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -1204,8 +1226,8 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 
 			qPos.add(rowId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					expandoValue);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, expandoValue);
 
 			ExpandoValue[] array = new ExpandoValueImpl[3];
 
@@ -1284,11 +1306,12 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	}
 
 	public List<ExpandoValue> findByT_C(long tableId, long columnId, int start,
-		int end, OrderByComparator obc) throws SystemException {
+		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(tableId), new Long(columnId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<ExpandoValue> list = (List<ExpandoValue>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_T_C,
@@ -1302,9 +1325,9 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(4 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(4);
@@ -1316,8 +1339,9 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 
 				query.append(_FINDER_COLUMN_T_C_COLUMNID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -1358,8 +1382,10 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	}
 
 	public ExpandoValue findByT_C_First(long tableId, long columnId,
-		OrderByComparator obc) throws NoSuchValueException, SystemException {
-		List<ExpandoValue> list = findByT_C(tableId, columnId, 0, 1, obc);
+		OrderByComparator orderByComparator)
+		throws NoSuchValueException, SystemException {
+		List<ExpandoValue> list = findByT_C(tableId, columnId, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -1382,11 +1408,12 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	}
 
 	public ExpandoValue findByT_C_Last(long tableId, long columnId,
-		OrderByComparator obc) throws NoSuchValueException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchValueException, SystemException {
 		int count = countByT_C(tableId, columnId);
 
 		List<ExpandoValue> list = findByT_C(tableId, columnId, count - 1,
-				count, obc);
+				count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -1409,7 +1436,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	}
 
 	public ExpandoValue[] findByT_C_PrevAndNext(long valueId, long tableId,
-		long columnId, OrderByComparator obc)
+		long columnId, OrderByComparator orderByComparator)
 		throws NoSuchValueException, SystemException {
 		ExpandoValue expandoValue = findByPrimaryKey(valueId);
 
@@ -1422,9 +1449,9 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(4 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(4);
@@ -1436,8 +1463,9 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 
 			query.append(_FINDER_COLUMN_T_C_COLUMNID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -1454,8 +1482,8 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 
 			qPos.add(columnId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					expandoValue);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, expandoValue);
 
 			ExpandoValue[] array = new ExpandoValueImpl[3];
 
@@ -1534,11 +1562,13 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	}
 
 	public List<ExpandoValue> findByT_CPK(long tableId, long classPK,
-		int start, int end, OrderByComparator obc) throws SystemException {
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(tableId), new Long(classPK),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<ExpandoValue> list = (List<ExpandoValue>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_T_CPK,
@@ -1552,9 +1582,9 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(4 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(4);
@@ -1566,8 +1596,9 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 
 				query.append(_FINDER_COLUMN_T_CPK_CLASSPK_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -1608,8 +1639,10 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	}
 
 	public ExpandoValue findByT_CPK_First(long tableId, long classPK,
-		OrderByComparator obc) throws NoSuchValueException, SystemException {
-		List<ExpandoValue> list = findByT_CPK(tableId, classPK, 0, 1, obc);
+		OrderByComparator orderByComparator)
+		throws NoSuchValueException, SystemException {
+		List<ExpandoValue> list = findByT_CPK(tableId, classPK, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -1632,11 +1665,12 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	}
 
 	public ExpandoValue findByT_CPK_Last(long tableId, long classPK,
-		OrderByComparator obc) throws NoSuchValueException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchValueException, SystemException {
 		int count = countByT_CPK(tableId, classPK);
 
 		List<ExpandoValue> list = findByT_CPK(tableId, classPK, count - 1,
-				count, obc);
+				count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -1659,7 +1693,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	}
 
 	public ExpandoValue[] findByT_CPK_PrevAndNext(long valueId, long tableId,
-		long classPK, OrderByComparator obc)
+		long classPK, OrderByComparator orderByComparator)
 		throws NoSuchValueException, SystemException {
 		ExpandoValue expandoValue = findByPrimaryKey(valueId);
 
@@ -1672,9 +1706,9 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(4 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(4);
@@ -1686,8 +1720,9 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 
 			query.append(_FINDER_COLUMN_T_CPK_CLASSPK_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -1704,8 +1739,8 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 
 			qPos.add(classPK);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					expandoValue);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, expandoValue);
 
 			ExpandoValue[] array = new ExpandoValueImpl[3];
 
@@ -1784,11 +1819,12 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	}
 
 	public List<ExpandoValue> findByT_R(long tableId, long rowId, int start,
-		int end, OrderByComparator obc) throws SystemException {
+		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(tableId), new Long(rowId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<ExpandoValue> list = (List<ExpandoValue>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_T_R,
@@ -1802,9 +1838,9 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(4 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(4);
@@ -1816,8 +1852,9 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 
 				query.append(_FINDER_COLUMN_T_R_ROWID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -1858,8 +1895,10 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	}
 
 	public ExpandoValue findByT_R_First(long tableId, long rowId,
-		OrderByComparator obc) throws NoSuchValueException, SystemException {
-		List<ExpandoValue> list = findByT_R(tableId, rowId, 0, 1, obc);
+		OrderByComparator orderByComparator)
+		throws NoSuchValueException, SystemException {
+		List<ExpandoValue> list = findByT_R(tableId, rowId, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -1882,11 +1921,12 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	}
 
 	public ExpandoValue findByT_R_Last(long tableId, long rowId,
-		OrderByComparator obc) throws NoSuchValueException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchValueException, SystemException {
 		int count = countByT_R(tableId, rowId);
 
 		List<ExpandoValue> list = findByT_R(tableId, rowId, count - 1, count,
-				obc);
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -1909,7 +1949,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	}
 
 	public ExpandoValue[] findByT_R_PrevAndNext(long valueId, long tableId,
-		long rowId, OrderByComparator obc)
+		long rowId, OrderByComparator orderByComparator)
 		throws NoSuchValueException, SystemException {
 		ExpandoValue expandoValue = findByPrimaryKey(valueId);
 
@@ -1922,9 +1962,9 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(4 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(4);
@@ -1936,8 +1976,9 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 
 			query.append(_FINDER_COLUMN_T_R_ROWID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -1954,8 +1995,8 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 
 			qPos.add(rowId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					expandoValue);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, expandoValue);
 
 			ExpandoValue[] array = new ExpandoValueImpl[3];
 
@@ -2151,11 +2192,13 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	}
 
 	public List<ExpandoValue> findByC_C(long classNameId, long classPK,
-		int start, int end, OrderByComparator obc) throws SystemException {
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(classNameId), new Long(classPK),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<ExpandoValue> list = (List<ExpandoValue>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_C_C,
@@ -2169,9 +2212,9 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(4 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(4);
@@ -2183,8 +2226,9 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 
 				query.append(_FINDER_COLUMN_C_C_CLASSPK_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -2225,8 +2269,10 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	}
 
 	public ExpandoValue findByC_C_First(long classNameId, long classPK,
-		OrderByComparator obc) throws NoSuchValueException, SystemException {
-		List<ExpandoValue> list = findByC_C(classNameId, classPK, 0, 1, obc);
+		OrderByComparator orderByComparator)
+		throws NoSuchValueException, SystemException {
+		List<ExpandoValue> list = findByC_C(classNameId, classPK, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -2249,11 +2295,12 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	}
 
 	public ExpandoValue findByC_C_Last(long classNameId, long classPK,
-		OrderByComparator obc) throws NoSuchValueException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchValueException, SystemException {
 		int count = countByC_C(classNameId, classPK);
 
 		List<ExpandoValue> list = findByC_C(classNameId, classPK, count - 1,
-				count, obc);
+				count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -2276,7 +2323,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	}
 
 	public ExpandoValue[] findByC_C_PrevAndNext(long valueId, long classNameId,
-		long classPK, OrderByComparator obc)
+		long classPK, OrderByComparator orderByComparator)
 		throws NoSuchValueException, SystemException {
 		ExpandoValue expandoValue = findByPrimaryKey(valueId);
 
@@ -2289,9 +2336,9 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(4 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(4);
@@ -2303,8 +2350,9 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 
 			query.append(_FINDER_COLUMN_C_C_CLASSPK_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -2321,8 +2369,8 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 
 			qPos.add(classPK);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					expandoValue);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, expandoValue);
 
 			ExpandoValue[] array = new ExpandoValueImpl[3];
 
@@ -2546,14 +2594,15 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	}
 
 	public List<ExpandoValue> findByT_C_D(long tableId, long columnId,
-		String data, int start, int end, OrderByComparator obc)
+		String data, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(tableId), new Long(columnId),
 				
 				data,
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<ExpandoValue> list = (List<ExpandoValue>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_T_C_D,
@@ -2567,9 +2616,9 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(5 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(5);
@@ -2593,8 +2642,9 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 					}
 				}
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -2639,9 +2689,10 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	}
 
 	public ExpandoValue findByT_C_D_First(long tableId, long columnId,
-		String data, OrderByComparator obc)
+		String data, OrderByComparator orderByComparator)
 		throws NoSuchValueException, SystemException {
-		List<ExpandoValue> list = findByT_C_D(tableId, columnId, data, 0, 1, obc);
+		List<ExpandoValue> list = findByT_C_D(tableId, columnId, data, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(8);
@@ -2667,12 +2718,12 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	}
 
 	public ExpandoValue findByT_C_D_Last(long tableId, long columnId,
-		String data, OrderByComparator obc)
+		String data, OrderByComparator orderByComparator)
 		throws NoSuchValueException, SystemException {
 		int count = countByT_C_D(tableId, columnId, data);
 
 		List<ExpandoValue> list = findByT_C_D(tableId, columnId, data,
-				count - 1, count, obc);
+				count - 1, count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(8);
@@ -2698,7 +2749,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	}
 
 	public ExpandoValue[] findByT_C_D_PrevAndNext(long valueId, long tableId,
-		long columnId, String data, OrderByComparator obc)
+		long columnId, String data, OrderByComparator orderByComparator)
 		throws NoSuchValueException, SystemException {
 		ExpandoValue expandoValue = findByPrimaryKey(valueId);
 
@@ -2711,9 +2762,9 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(5 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(5);
@@ -2737,8 +2788,9 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 				}
 			}
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -2759,8 +2811,8 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 				qPos.add(data);
 			}
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					expandoValue);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, expandoValue);
 
 			ExpandoValue[] array = new ExpandoValueImpl[3];
 
@@ -2769,46 +2821,6 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 			array[2] = (ExpandoValue)objArray[2];
 
 			return array;
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.setLimit(start, end);
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
 		}
 		catch (Exception e) {
 			throw processException(e);
@@ -2827,10 +2839,11 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 		return findAll(start, end, null);
 	}
 
-	public List<ExpandoValue> findAll(int start, int end, OrderByComparator obc)
-		throws SystemException {
+	public List<ExpandoValue> findAll(int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<ExpandoValue> list = (List<ExpandoValue>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
@@ -2845,13 +2858,14 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 				StringBundler query = null;
 				String sql = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(2 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 
 					query.append(_SQL_SELECT_EXPANDOVALUE);
 
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 
 					sql = query.toString();
 				}
@@ -2862,7 +2876,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 
 				Query q = session.createQuery(sql);
 
-				if (obc == null) {
+				if (orderByComparator == null) {
 					list = (List<ExpandoValue>)QueryUtil.list(q, getDialect(),
 							start, end, false);
 
@@ -3541,18 +3555,18 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 		}
 	}
 
-	@BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoColumnPersistence")
-	protected com.liferay.portlet.expando.service.persistence.ExpandoColumnPersistence expandoColumnPersistence;
-	@BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoRowPersistence")
-	protected com.liferay.portlet.expando.service.persistence.ExpandoRowPersistence expandoRowPersistence;
-	@BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoTablePersistence")
-	protected com.liferay.portlet.expando.service.persistence.ExpandoTablePersistence expandoTablePersistence;
-	@BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence")
-	protected com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence expandoValuePersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.ResourcePersistence")
-	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
-	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
+	@BeanReference(type = ExpandoColumnPersistence.class)
+	protected ExpandoColumnPersistence expandoColumnPersistence;
+	@BeanReference(type = ExpandoRowPersistence.class)
+	protected ExpandoRowPersistence expandoRowPersistence;
+	@BeanReference(type = ExpandoTablePersistence.class)
+	protected ExpandoTablePersistence expandoTablePersistence;
+	@BeanReference(type = ExpandoValuePersistence.class)
+	protected ExpandoValuePersistence expandoValuePersistence;
+	@BeanReference(type = ResourcePersistence.class)
+	protected ResourcePersistence resourcePersistence;
+	@BeanReference(type = UserPersistence.class)
+	protected UserPersistence userPersistence;
 	private static final String _SQL_SELECT_EXPANDOVALUE = "SELECT expandoValue FROM ExpandoValue expandoValue";
 	private static final String _SQL_SELECT_EXPANDOVALUE_WHERE = "SELECT expandoValue FROM ExpandoValue expandoValue WHERE ";
 	private static final String _SQL_COUNT_EXPANDOVALUE = "SELECT COUNT(expandoValue) FROM ExpandoValue expandoValue";

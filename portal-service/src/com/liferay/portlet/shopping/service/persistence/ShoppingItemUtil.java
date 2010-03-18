@@ -190,34 +190,38 @@ public class ShoppingItemUtil {
 
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingItem> findByG_C(
 		long groupId, long categoryId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByG_C(groupId, categoryId, start, end, obc);
+		return getPersistence()
+				   .findByG_C(groupId, categoryId, start, end, orderByComparator);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItem findByG_C_First(
 		long groupId, long categoryId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.shopping.NoSuchItemException {
-		return getPersistence().findByG_C_First(groupId, categoryId, obc);
+		return getPersistence()
+				   .findByG_C_First(groupId, categoryId, orderByComparator);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItem findByG_C_Last(
 		long groupId, long categoryId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.shopping.NoSuchItemException {
-		return getPersistence().findByG_C_Last(groupId, categoryId, obc);
+		return getPersistence()
+				   .findByG_C_Last(groupId, categoryId, orderByComparator);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItem[] findByG_C_PrevAndNext(
 		long itemId, long groupId, long categoryId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.shopping.NoSuchItemException {
 		return getPersistence()
-				   .findByG_C_PrevAndNext(itemId, groupId, categoryId, obc);
+				   .findByG_C_PrevAndNext(itemId, groupId, categoryId,
+			orderByComparator);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItem findByC_S(
@@ -251,9 +255,10 @@ public class ShoppingItemUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingItem> findAll(
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findAll(start, end, obc);
+		return getPersistence().findAll(start, end, orderByComparator);
 	}
 
 	public static void removeBySmallImageId(long smallImageId)
@@ -333,9 +338,10 @@ public class ShoppingItemUtil {
 
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingItemPrice> getShoppingItemPrices(
 		long pk, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().getShoppingItemPrices(pk, start, end, obc);
+		return getPersistence()
+				   .getShoppingItemPrices(pk, start, end, orderByComparator);
 	}
 
 	public static int getShoppingItemPricesSize(long pk)

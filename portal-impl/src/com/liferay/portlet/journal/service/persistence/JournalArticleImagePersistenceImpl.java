@@ -17,7 +17,6 @@ package com.liferay.portlet.journal.service.persistence;
 import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
-import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
@@ -36,6 +35,9 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.BatchSessionUtil;
+import com.liferay.portal.service.persistence.ImagePersistence;
+import com.liferay.portal.service.persistence.ResourcePersistence;
+import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 import com.liferay.portlet.journal.NoSuchArticleImageException;
@@ -521,11 +523,12 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 	}
 
 	public List<JournalArticleImage> findByGroupId(long groupId, int start,
-		int end, OrderByComparator obc) throws SystemException {
+		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<JournalArticleImage> list = (List<JournalArticleImage>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
@@ -539,9 +542,9 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(2);
@@ -551,8 +554,9 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 
 				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				String sql = query.toString();
@@ -587,9 +591,10 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 	}
 
 	public JournalArticleImage findByGroupId_First(long groupId,
-		OrderByComparator obc)
+		OrderByComparator orderByComparator)
 		throws NoSuchArticleImageException, SystemException {
-		List<JournalArticleImage> list = findByGroupId(groupId, 0, 1, obc);
+		List<JournalArticleImage> list = findByGroupId(groupId, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -609,12 +614,12 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 	}
 
 	public JournalArticleImage findByGroupId_Last(long groupId,
-		OrderByComparator obc)
+		OrderByComparator orderByComparator)
 		throws NoSuchArticleImageException, SystemException {
 		int count = countByGroupId(groupId);
 
 		List<JournalArticleImage> list = findByGroupId(groupId, count - 1,
-				count, obc);
+				count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -634,7 +639,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 	}
 
 	public JournalArticleImage[] findByGroupId_PrevAndNext(
-		long articleImageId, long groupId, OrderByComparator obc)
+		long articleImageId, long groupId, OrderByComparator orderByComparator)
 		throws NoSuchArticleImageException, SystemException {
 		JournalArticleImage journalArticleImage = findByPrimaryKey(articleImageId);
 
@@ -647,9 +652,9 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(2);
@@ -659,8 +664,9 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			String sql = query.toString();
@@ -671,8 +677,8 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 
 			qPos.add(groupId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					journalArticleImage);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, journalArticleImage);
 
 			JournalArticleImage[] array = new JournalArticleImageImpl[3];
 
@@ -745,11 +751,13 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 	}
 
 	public List<JournalArticleImage> findByTempImage(boolean tempImage,
-		int start, int end, OrderByComparator obc) throws SystemException {
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
 		Object[] finderArgs = new Object[] {
 				Boolean.valueOf(tempImage),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<JournalArticleImage> list = (List<JournalArticleImage>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_TEMPIMAGE,
@@ -763,9 +771,9 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(2);
@@ -775,8 +783,9 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 
 				query.append(_FINDER_COLUMN_TEMPIMAGE_TEMPIMAGE_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				String sql = query.toString();
@@ -811,9 +820,10 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 	}
 
 	public JournalArticleImage findByTempImage_First(boolean tempImage,
-		OrderByComparator obc)
+		OrderByComparator orderByComparator)
 		throws NoSuchArticleImageException, SystemException {
-		List<JournalArticleImage> list = findByTempImage(tempImage, 0, 1, obc);
+		List<JournalArticleImage> list = findByTempImage(tempImage, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -833,12 +843,12 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 	}
 
 	public JournalArticleImage findByTempImage_Last(boolean tempImage,
-		OrderByComparator obc)
+		OrderByComparator orderByComparator)
 		throws NoSuchArticleImageException, SystemException {
 		int count = countByTempImage(tempImage);
 
 		List<JournalArticleImage> list = findByTempImage(tempImage, count - 1,
-				count, obc);
+				count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -858,7 +868,8 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 	}
 
 	public JournalArticleImage[] findByTempImage_PrevAndNext(
-		long articleImageId, boolean tempImage, OrderByComparator obc)
+		long articleImageId, boolean tempImage,
+		OrderByComparator orderByComparator)
 		throws NoSuchArticleImageException, SystemException {
 		JournalArticleImage journalArticleImage = findByPrimaryKey(articleImageId);
 
@@ -871,9 +882,9 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(2);
@@ -883,8 +894,9 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 
 			query.append(_FINDER_COLUMN_TEMPIMAGE_TEMPIMAGE_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			String sql = query.toString();
@@ -895,8 +907,8 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 
 			qPos.add(tempImage);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					journalArticleImage);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, journalArticleImage);
 
 			JournalArticleImage[] array = new JournalArticleImageImpl[3];
 
@@ -995,13 +1007,14 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 
 	public List<JournalArticleImage> findByG_A_V(long groupId,
 		String articleId, double version, int start, int end,
-		OrderByComparator obc) throws SystemException {
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
 				articleId, new Double(version),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<JournalArticleImage> list = (List<JournalArticleImage>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_G_A_V,
@@ -1015,9 +1028,9 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(5 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(4);
@@ -1041,8 +1054,9 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 
 				query.append(_FINDER_COLUMN_G_A_V_VERSION_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				String sql = query.toString();
@@ -1083,10 +1097,10 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 	}
 
 	public JournalArticleImage findByG_A_V_First(long groupId,
-		String articleId, double version, OrderByComparator obc)
+		String articleId, double version, OrderByComparator orderByComparator)
 		throws NoSuchArticleImageException, SystemException {
 		List<JournalArticleImage> list = findByG_A_V(groupId, articleId,
-				version, 0, 1, obc);
+				version, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(8);
@@ -1112,12 +1126,12 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 	}
 
 	public JournalArticleImage findByG_A_V_Last(long groupId, String articleId,
-		double version, OrderByComparator obc)
+		double version, OrderByComparator orderByComparator)
 		throws NoSuchArticleImageException, SystemException {
 		int count = countByG_A_V(groupId, articleId, version);
 
 		List<JournalArticleImage> list = findByG_A_V(groupId, articleId,
-				version, count - 1, count, obc);
+				version, count - 1, count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(8);
@@ -1143,7 +1157,8 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 	}
 
 	public JournalArticleImage[] findByG_A_V_PrevAndNext(long articleImageId,
-		long groupId, String articleId, double version, OrderByComparator obc)
+		long groupId, String articleId, double version,
+		OrderByComparator orderByComparator)
 		throws NoSuchArticleImageException, SystemException {
 		JournalArticleImage journalArticleImage = findByPrimaryKey(articleImageId);
 
@@ -1156,9 +1171,9 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(5 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(4);
@@ -1182,8 +1197,9 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 
 			query.append(_FINDER_COLUMN_G_A_V_VERSION_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			String sql = query.toString();
@@ -1200,8 +1216,8 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 
 			qPos.add(version);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					journalArticleImage);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, journalArticleImage);
 
 			JournalArticleImage[] array = new JournalArticleImageImpl[3];
 
@@ -1433,46 +1449,6 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 		}
 	}
 
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.setLimit(start, end);
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
 	public List<JournalArticleImage> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -1483,9 +1459,10 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 	}
 
 	public List<JournalArticleImage> findAll(int start, int end,
-		OrderByComparator obc) throws SystemException {
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<JournalArticleImage> list = (List<JournalArticleImage>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
@@ -1500,13 +1477,14 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 				StringBundler query = null;
 				String sql = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(2 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 
 					query.append(_SQL_SELECT_JOURNALARTICLEIMAGE);
 
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 
 					sql = query.toString();
 				}
@@ -1515,7 +1493,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 
 				Query q = session.createQuery(sql);
 
-				if (obc == null) {
+				if (orderByComparator == null) {
 					list = (List<JournalArticleImage>)QueryUtil.list(q,
 							getDialect(), start, end, false);
 
@@ -1926,26 +1904,26 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 		}
 	}
 
-	@BeanReference(name = "com.liferay.portlet.journal.service.persistence.JournalArticlePersistence")
-	protected com.liferay.portlet.journal.service.persistence.JournalArticlePersistence journalArticlePersistence;
-	@BeanReference(name = "com.liferay.portlet.journal.service.persistence.JournalArticleImagePersistence")
-	protected com.liferay.portlet.journal.service.persistence.JournalArticleImagePersistence journalArticleImagePersistence;
-	@BeanReference(name = "com.liferay.portlet.journal.service.persistence.JournalArticleResourcePersistence")
-	protected com.liferay.portlet.journal.service.persistence.JournalArticleResourcePersistence journalArticleResourcePersistence;
-	@BeanReference(name = "com.liferay.portlet.journal.service.persistence.JournalContentSearchPersistence")
-	protected com.liferay.portlet.journal.service.persistence.JournalContentSearchPersistence journalContentSearchPersistence;
-	@BeanReference(name = "com.liferay.portlet.journal.service.persistence.JournalFeedPersistence")
-	protected com.liferay.portlet.journal.service.persistence.JournalFeedPersistence journalFeedPersistence;
-	@BeanReference(name = "com.liferay.portlet.journal.service.persistence.JournalStructurePersistence")
-	protected com.liferay.portlet.journal.service.persistence.JournalStructurePersistence journalStructurePersistence;
-	@BeanReference(name = "com.liferay.portlet.journal.service.persistence.JournalTemplatePersistence")
-	protected com.liferay.portlet.journal.service.persistence.JournalTemplatePersistence journalTemplatePersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.ImagePersistence")
-	protected com.liferay.portal.service.persistence.ImagePersistence imagePersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.ResourcePersistence")
-	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
-	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
+	@BeanReference(type = JournalArticlePersistence.class)
+	protected JournalArticlePersistence journalArticlePersistence;
+	@BeanReference(type = JournalArticleImagePersistence.class)
+	protected JournalArticleImagePersistence journalArticleImagePersistence;
+	@BeanReference(type = JournalArticleResourcePersistence.class)
+	protected JournalArticleResourcePersistence journalArticleResourcePersistence;
+	@BeanReference(type = JournalContentSearchPersistence.class)
+	protected JournalContentSearchPersistence journalContentSearchPersistence;
+	@BeanReference(type = JournalFeedPersistence.class)
+	protected JournalFeedPersistence journalFeedPersistence;
+	@BeanReference(type = JournalStructurePersistence.class)
+	protected JournalStructurePersistence journalStructurePersistence;
+	@BeanReference(type = JournalTemplatePersistence.class)
+	protected JournalTemplatePersistence journalTemplatePersistence;
+	@BeanReference(type = ImagePersistence.class)
+	protected ImagePersistence imagePersistence;
+	@BeanReference(type = ResourcePersistence.class)
+	protected ResourcePersistence resourcePersistence;
+	@BeanReference(type = UserPersistence.class)
+	protected UserPersistence userPersistence;
 	private static final String _SQL_SELECT_JOURNALARTICLEIMAGE = "SELECT journalArticleImage FROM JournalArticleImage journalArticleImage";
 	private static final String _SQL_SELECT_JOURNALARTICLEIMAGE_WHERE = "SELECT journalArticleImage FROM JournalArticleImage journalArticleImage WHERE ";
 	private static final String _SQL_COUNT_JOURNALARTICLEIMAGE = "SELECT COUNT(journalArticleImage) FROM JournalArticleImage journalArticleImage";

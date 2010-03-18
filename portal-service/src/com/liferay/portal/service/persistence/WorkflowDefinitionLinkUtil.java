@@ -188,61 +188,66 @@ public class WorkflowDefinitionLinkUtil {
 			retrieveFromCache);
 	}
 
-	public static java.util.List<com.liferay.portal.model.WorkflowDefinitionLink> findByW_W(
-		java.lang.String workflowDefinitionName, int workflowDefinitionVersion)
+	public static java.util.List<com.liferay.portal.model.WorkflowDefinitionLink> findByC_W_W(
+		long companyId, java.lang.String workflowDefinitionName,
+		int workflowDefinitionVersion)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .findByW_W(workflowDefinitionName, workflowDefinitionVersion);
+				   .findByC_W_W(companyId, workflowDefinitionName,
+			workflowDefinitionVersion);
 	}
 
-	public static java.util.List<com.liferay.portal.model.WorkflowDefinitionLink> findByW_W(
-		java.lang.String workflowDefinitionName, int workflowDefinitionVersion,
-		int start, int end)
+	public static java.util.List<com.liferay.portal.model.WorkflowDefinitionLink> findByC_W_W(
+		long companyId, java.lang.String workflowDefinitionName,
+		int workflowDefinitionVersion, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .findByW_W(workflowDefinitionName,
+				   .findByC_W_W(companyId, workflowDefinitionName,
 			workflowDefinitionVersion, start, end);
 	}
 
-	public static java.util.List<com.liferay.portal.model.WorkflowDefinitionLink> findByW_W(
-		java.lang.String workflowDefinitionName, int workflowDefinitionVersion,
-		int start, int end,
+	public static java.util.List<com.liferay.portal.model.WorkflowDefinitionLink> findByC_W_W(
+		long companyId, java.lang.String workflowDefinitionName,
+		int workflowDefinitionVersion, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .findByW_W(workflowDefinitionName,
+				   .findByC_W_W(companyId, workflowDefinitionName,
 			workflowDefinitionVersion, start, end, orderByComparator);
 	}
 
-	public static com.liferay.portal.model.WorkflowDefinitionLink findByW_W_First(
-		java.lang.String workflowDefinitionName, int workflowDefinitionVersion,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.NoSuchWorkflowDefinitionLinkException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence()
-				   .findByW_W_First(workflowDefinitionName,
-			workflowDefinitionVersion, orderByComparator);
-	}
-
-	public static com.liferay.portal.model.WorkflowDefinitionLink findByW_W_Last(
-		java.lang.String workflowDefinitionName, int workflowDefinitionVersion,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.NoSuchWorkflowDefinitionLinkException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence()
-				   .findByW_W_Last(workflowDefinitionName,
-			workflowDefinitionVersion, orderByComparator);
-	}
-
-	public static com.liferay.portal.model.WorkflowDefinitionLink[] findByW_W_PrevAndNext(
-		long workflowDefinitionLinkId, java.lang.String workflowDefinitionName,
+	public static com.liferay.portal.model.WorkflowDefinitionLink findByC_W_W_First(
+		long companyId, java.lang.String workflowDefinitionName,
 		int workflowDefinitionVersion,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchWorkflowDefinitionLinkException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .findByW_W_PrevAndNext(workflowDefinitionLinkId,
-			workflowDefinitionName, workflowDefinitionVersion, orderByComparator);
+				   .findByC_W_W_First(companyId, workflowDefinitionName,
+			workflowDefinitionVersion, orderByComparator);
+	}
+
+	public static com.liferay.portal.model.WorkflowDefinitionLink findByC_W_W_Last(
+		long companyId, java.lang.String workflowDefinitionName,
+		int workflowDefinitionVersion,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.NoSuchWorkflowDefinitionLinkException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByC_W_W_Last(companyId, workflowDefinitionName,
+			workflowDefinitionVersion, orderByComparator);
+	}
+
+	public static com.liferay.portal.model.WorkflowDefinitionLink[] findByC_W_W_PrevAndNext(
+		long workflowDefinitionLinkId, long companyId,
+		java.lang.String workflowDefinitionName, int workflowDefinitionVersion,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.NoSuchWorkflowDefinitionLinkException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByC_W_W_PrevAndNext(workflowDefinitionLinkId,
+			companyId, workflowDefinitionName, workflowDefinitionVersion,
+			orderByComparator);
 	}
 
 	public static java.util.List<com.liferay.portal.model.WorkflowDefinitionLink> findAll()
@@ -275,11 +280,12 @@ public class WorkflowDefinitionLinkUtil {
 		getPersistence().removeByG_C_C(groupId, companyId, classNameId);
 	}
 
-	public static void removeByW_W(java.lang.String workflowDefinitionName,
-		int workflowDefinitionVersion)
+	public static void removeByC_W_W(long companyId,
+		java.lang.String workflowDefinitionName, int workflowDefinitionVersion)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence()
-			.removeByW_W(workflowDefinitionName, workflowDefinitionVersion);
+			.removeByC_W_W(companyId, workflowDefinitionName,
+			workflowDefinitionVersion);
 	}
 
 	public static void removeAll()
@@ -298,11 +304,12 @@ public class WorkflowDefinitionLinkUtil {
 		return getPersistence().countByG_C_C(groupId, companyId, classNameId);
 	}
 
-	public static int countByW_W(java.lang.String workflowDefinitionName,
-		int workflowDefinitionVersion)
+	public static int countByC_W_W(long companyId,
+		java.lang.String workflowDefinitionName, int workflowDefinitionVersion)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .countByW_W(workflowDefinitionName, workflowDefinitionVersion);
+				   .countByC_W_W(companyId, workflowDefinitionName,
+			workflowDefinitionVersion);
 	}
 
 	public static int countAll()

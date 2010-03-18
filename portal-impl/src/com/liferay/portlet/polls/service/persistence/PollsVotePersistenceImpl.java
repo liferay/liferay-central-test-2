@@ -17,7 +17,6 @@ package com.liferay.portlet.polls.service.persistence;
 import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
-import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
@@ -35,6 +34,8 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.BatchSessionUtil;
+import com.liferay.portal.service.persistence.ResourcePersistence;
+import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 import com.liferay.portlet.polls.NoSuchVoteException;
@@ -425,11 +426,12 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 	}
 
 	public List<PollsVote> findByQuestionId(long questionId, int start,
-		int end, OrderByComparator obc) throws SystemException {
+		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(questionId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<PollsVote> list = (List<PollsVote>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_QUESTIONID,
@@ -443,9 +445,9 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(2);
@@ -455,8 +457,9 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 
 				query.append(_FINDER_COLUMN_QUESTIONID_QUESTIONID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				String sql = query.toString();
@@ -491,8 +494,10 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 	}
 
 	public PollsVote findByQuestionId_First(long questionId,
-		OrderByComparator obc) throws NoSuchVoteException, SystemException {
-		List<PollsVote> list = findByQuestionId(questionId, 0, 1, obc);
+		OrderByComparator orderByComparator)
+		throws NoSuchVoteException, SystemException {
+		List<PollsVote> list = findByQuestionId(questionId, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -512,11 +517,12 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 	}
 
 	public PollsVote findByQuestionId_Last(long questionId,
-		OrderByComparator obc) throws NoSuchVoteException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchVoteException, SystemException {
 		int count = countByQuestionId(questionId);
 
 		List<PollsVote> list = findByQuestionId(questionId, count - 1, count,
-				obc);
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -536,7 +542,7 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 	}
 
 	public PollsVote[] findByQuestionId_PrevAndNext(long voteId,
-		long questionId, OrderByComparator obc)
+		long questionId, OrderByComparator orderByComparator)
 		throws NoSuchVoteException, SystemException {
 		PollsVote pollsVote = findByPrimaryKey(voteId);
 
@@ -549,9 +555,9 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(2);
@@ -561,8 +567,9 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 
 			query.append(_FINDER_COLUMN_QUESTIONID_QUESTIONID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			String sql = query.toString();
@@ -573,8 +580,8 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 
 			qPos.add(questionId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					pollsVote);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, pollsVote);
 
 			PollsVote[] array = new PollsVoteImpl[3];
 
@@ -647,11 +654,12 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 	}
 
 	public List<PollsVote> findByChoiceId(long choiceId, int start, int end,
-		OrderByComparator obc) throws SystemException {
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(choiceId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<PollsVote> list = (List<PollsVote>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_CHOICEID,
@@ -665,9 +673,9 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(2);
@@ -677,8 +685,9 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 
 				query.append(_FINDER_COLUMN_CHOICEID_CHOICEID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				String sql = query.toString();
@@ -712,9 +721,10 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 		return list;
 	}
 
-	public PollsVote findByChoiceId_First(long choiceId, OrderByComparator obc)
+	public PollsVote findByChoiceId_First(long choiceId,
+		OrderByComparator orderByComparator)
 		throws NoSuchVoteException, SystemException {
-		List<PollsVote> list = findByChoiceId(choiceId, 0, 1, obc);
+		List<PollsVote> list = findByChoiceId(choiceId, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -733,11 +743,13 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 		}
 	}
 
-	public PollsVote findByChoiceId_Last(long choiceId, OrderByComparator obc)
+	public PollsVote findByChoiceId_Last(long choiceId,
+		OrderByComparator orderByComparator)
 		throws NoSuchVoteException, SystemException {
 		int count = countByChoiceId(choiceId);
 
-		List<PollsVote> list = findByChoiceId(choiceId, count - 1, count, obc);
+		List<PollsVote> list = findByChoiceId(choiceId, count - 1, count,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -757,7 +769,8 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 	}
 
 	public PollsVote[] findByChoiceId_PrevAndNext(long voteId, long choiceId,
-		OrderByComparator obc) throws NoSuchVoteException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchVoteException, SystemException {
 		PollsVote pollsVote = findByPrimaryKey(voteId);
 
 		int count = countByChoiceId(choiceId);
@@ -769,9 +782,9 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(2);
@@ -781,8 +794,9 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 
 			query.append(_FINDER_COLUMN_CHOICEID_CHOICEID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			String sql = query.toString();
@@ -793,8 +807,8 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 
 			qPos.add(choiceId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					pollsVote);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, pollsVote);
 
 			PollsVote[] array = new PollsVoteImpl[3];
 
@@ -927,46 +941,6 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 		}
 	}
 
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.setLimit(start, end);
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
 	public List<PollsVote> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -976,10 +950,11 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 		return findAll(start, end, null);
 	}
 
-	public List<PollsVote> findAll(int start, int end, OrderByComparator obc)
-		throws SystemException {
+	public List<PollsVote> findAll(int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<PollsVote> list = (List<PollsVote>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
@@ -994,13 +969,14 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 				StringBundler query = null;
 				String sql = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(2 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 
 					query.append(_SQL_SELECT_POLLSVOTE);
 
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 
 					sql = query.toString();
 				}
@@ -1009,7 +985,7 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 
 				Query q = session.createQuery(sql);
 
-				if (obc == null) {
+				if (orderByComparator == null) {
 					list = (List<PollsVote>)QueryUtil.list(q, getDialect(),
 							start, end, false);
 
@@ -1265,16 +1241,16 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 		}
 	}
 
-	@BeanReference(name = "com.liferay.portlet.polls.service.persistence.PollsChoicePersistence")
-	protected com.liferay.portlet.polls.service.persistence.PollsChoicePersistence pollsChoicePersistence;
-	@BeanReference(name = "com.liferay.portlet.polls.service.persistence.PollsQuestionPersistence")
-	protected com.liferay.portlet.polls.service.persistence.PollsQuestionPersistence pollsQuestionPersistence;
-	@BeanReference(name = "com.liferay.portlet.polls.service.persistence.PollsVotePersistence")
-	protected com.liferay.portlet.polls.service.persistence.PollsVotePersistence pollsVotePersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.ResourcePersistence")
-	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
-	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
+	@BeanReference(type = PollsChoicePersistence.class)
+	protected PollsChoicePersistence pollsChoicePersistence;
+	@BeanReference(type = PollsQuestionPersistence.class)
+	protected PollsQuestionPersistence pollsQuestionPersistence;
+	@BeanReference(type = PollsVotePersistence.class)
+	protected PollsVotePersistence pollsVotePersistence;
+	@BeanReference(type = ResourcePersistence.class)
+	protected ResourcePersistence resourcePersistence;
+	@BeanReference(type = UserPersistence.class)
+	protected UserPersistence userPersistence;
 	private static final String _SQL_SELECT_POLLSVOTE = "SELECT pollsVote FROM PollsVote pollsVote";
 	private static final String _SQL_SELECT_POLLSVOTE_WHERE = "SELECT pollsVote FROM PollsVote pollsVote WHERE ";
 	private static final String _SQL_COUNT_POLLSVOTE = "SELECT COUNT(pollsVote) FROM PollsVote pollsVote";

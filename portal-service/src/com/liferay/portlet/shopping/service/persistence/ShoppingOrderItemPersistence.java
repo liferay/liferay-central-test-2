@@ -70,22 +70,24 @@ public interface ShoppingOrderItemPersistence extends BasePersistence<ShoppingOr
 
 	public java.util.List<com.liferay.portlet.shopping.model.ShoppingOrderItem> findByOrderId(
 		long orderId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portlet.shopping.model.ShoppingOrderItem findByOrderId_First(
-		long orderId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long orderId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.shopping.NoSuchOrderItemException;
 
 	public com.liferay.portlet.shopping.model.ShoppingOrderItem findByOrderId_Last(
-		long orderId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long orderId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.shopping.NoSuchOrderItemException;
 
 	public com.liferay.portlet.shopping.model.ShoppingOrderItem[] findByOrderId_PrevAndNext(
 		long orderItemId, long orderId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.shopping.NoSuchOrderItemException;
 
@@ -97,7 +99,8 @@ public interface ShoppingOrderItemPersistence extends BasePersistence<ShoppingOr
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portlet.shopping.model.ShoppingOrderItem> findAll(
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void removeByOrderId(long orderId)

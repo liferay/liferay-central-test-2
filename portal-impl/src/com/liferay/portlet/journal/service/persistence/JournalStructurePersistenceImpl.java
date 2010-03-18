@@ -17,7 +17,6 @@ package com.liferay.portlet.journal.service.persistence;
 import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
-import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
@@ -37,8 +36,12 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.BatchSessionUtil;
+import com.liferay.portal.service.persistence.ResourcePersistence;
+import com.liferay.portal.service.persistence.UserPersistence;
+import com.liferay.portal.service.persistence.WebDAVPropsPersistence;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
+import com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence;
 import com.liferay.portlet.journal.NoSuchStructureException;
 import com.liferay.portlet.journal.model.JournalStructure;
 import com.liferay.portlet.journal.model.impl.JournalStructureImpl;
@@ -552,11 +555,12 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	}
 
 	public List<JournalStructure> findByUuid(String uuid, int start, int end,
-		OrderByComparator obc) throws SystemException {
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				uuid,
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<JournalStructure> list = (List<JournalStructure>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_UUID,
@@ -570,9 +574,9 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(3);
@@ -592,8 +596,9 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 					}
 				}
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -633,9 +638,10 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 		return list;
 	}
 
-	public JournalStructure findByUuid_First(String uuid, OrderByComparator obc)
+	public JournalStructure findByUuid_First(String uuid,
+		OrderByComparator orderByComparator)
 		throws NoSuchStructureException, SystemException {
-		List<JournalStructure> list = findByUuid(uuid, 0, 1, obc);
+		List<JournalStructure> list = findByUuid(uuid, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -654,11 +660,13 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 		}
 	}
 
-	public JournalStructure findByUuid_Last(String uuid, OrderByComparator obc)
+	public JournalStructure findByUuid_Last(String uuid,
+		OrderByComparator orderByComparator)
 		throws NoSuchStructureException, SystemException {
 		int count = countByUuid(uuid);
 
-		List<JournalStructure> list = findByUuid(uuid, count - 1, count, obc);
+		List<JournalStructure> list = findByUuid(uuid, count - 1, count,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -678,7 +686,8 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	}
 
 	public JournalStructure[] findByUuid_PrevAndNext(long id, String uuid,
-		OrderByComparator obc) throws NoSuchStructureException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchStructureException, SystemException {
 		JournalStructure journalStructure = findByPrimaryKey(id);
 
 		int count = countByUuid(uuid);
@@ -690,9 +699,9 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(3);
@@ -712,8 +721,9 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 				}
 			}
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -730,8 +740,8 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 				qPos.add(uuid);
 			}
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					journalStructure);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, journalStructure);
 
 			JournalStructure[] array = new JournalStructureImpl[3];
 
@@ -934,11 +944,12 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	}
 
 	public List<JournalStructure> findByGroupId(long groupId, int start,
-		int end, OrderByComparator obc) throws SystemException {
+		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<JournalStructure> list = (List<JournalStructure>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
@@ -952,9 +963,9 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(3);
@@ -964,8 +975,9 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 
 				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -1004,8 +1016,10 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	}
 
 	public JournalStructure findByGroupId_First(long groupId,
-		OrderByComparator obc) throws NoSuchStructureException, SystemException {
-		List<JournalStructure> list = findByGroupId(groupId, 0, 1, obc);
+		OrderByComparator orderByComparator)
+		throws NoSuchStructureException, SystemException {
+		List<JournalStructure> list = findByGroupId(groupId, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -1025,11 +1039,12 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	}
 
 	public JournalStructure findByGroupId_Last(long groupId,
-		OrderByComparator obc) throws NoSuchStructureException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchStructureException, SystemException {
 		int count = countByGroupId(groupId);
 
 		List<JournalStructure> list = findByGroupId(groupId, count - 1, count,
-				obc);
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -1049,7 +1064,8 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	}
 
 	public JournalStructure[] findByGroupId_PrevAndNext(long id, long groupId,
-		OrderByComparator obc) throws NoSuchStructureException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchStructureException, SystemException {
 		JournalStructure journalStructure = findByPrimaryKey(id);
 
 		int count = countByGroupId(groupId);
@@ -1061,9 +1077,9 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(3);
@@ -1073,8 +1089,9 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -1089,8 +1106,8 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 
 			qPos.add(groupId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					journalStructure);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, journalStructure);
 
 			JournalStructure[] array = new JournalStructureImpl[3];
 
@@ -1177,11 +1194,13 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	}
 
 	public List<JournalStructure> findByStructureId(String structureId,
-		int start, int end, OrderByComparator obc) throws SystemException {
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
 		Object[] finderArgs = new Object[] {
 				structureId,
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<JournalStructure> list = (List<JournalStructure>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_STRUCTUREID,
@@ -1195,9 +1214,9 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(3);
@@ -1217,8 +1236,9 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 					}
 				}
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -1259,8 +1279,10 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	}
 
 	public JournalStructure findByStructureId_First(String structureId,
-		OrderByComparator obc) throws NoSuchStructureException, SystemException {
-		List<JournalStructure> list = findByStructureId(structureId, 0, 1, obc);
+		OrderByComparator orderByComparator)
+		throws NoSuchStructureException, SystemException {
+		List<JournalStructure> list = findByStructureId(structureId, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -1280,11 +1302,12 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	}
 
 	public JournalStructure findByStructureId_Last(String structureId,
-		OrderByComparator obc) throws NoSuchStructureException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchStructureException, SystemException {
 		int count = countByStructureId(structureId);
 
 		List<JournalStructure> list = findByStructureId(structureId, count - 1,
-				count, obc);
+				count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -1304,7 +1327,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	}
 
 	public JournalStructure[] findByStructureId_PrevAndNext(long id,
-		String structureId, OrderByComparator obc)
+		String structureId, OrderByComparator orderByComparator)
 		throws NoSuchStructureException, SystemException {
 		JournalStructure journalStructure = findByPrimaryKey(id);
 
@@ -1317,9 +1340,9 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(3);
@@ -1339,8 +1362,9 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 				}
 			}
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -1357,8 +1381,8 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 				qPos.add(structureId);
 			}
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					journalStructure);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, journalStructure);
 
 			JournalStructure[] array = new JournalStructureImpl[3];
 
@@ -1578,14 +1602,15 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	}
 
 	public List<JournalStructure> findByG_P(long groupId,
-		String parentStructureId, int start, int end, OrderByComparator obc)
-		throws SystemException {
+		String parentStructureId, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
 				parentStructureId,
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<JournalStructure> list = (List<JournalStructure>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_G_P,
@@ -1599,9 +1624,9 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(4 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(4);
@@ -1623,8 +1648,9 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 					}
 				}
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -1667,10 +1693,10 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	}
 
 	public JournalStructure findByG_P_First(long groupId,
-		String parentStructureId, OrderByComparator obc)
+		String parentStructureId, OrderByComparator orderByComparator)
 		throws NoSuchStructureException, SystemException {
 		List<JournalStructure> list = findByG_P(groupId, parentStructureId, 0,
-				1, obc);
+				1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -1693,12 +1719,12 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	}
 
 	public JournalStructure findByG_P_Last(long groupId,
-		String parentStructureId, OrderByComparator obc)
+		String parentStructureId, OrderByComparator orderByComparator)
 		throws NoSuchStructureException, SystemException {
 		int count = countByG_P(groupId, parentStructureId);
 
 		List<JournalStructure> list = findByG_P(groupId, parentStructureId,
-				count - 1, count, obc);
+				count - 1, count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -1721,7 +1747,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	}
 
 	public JournalStructure[] findByG_P_PrevAndNext(long id, long groupId,
-		String parentStructureId, OrderByComparator obc)
+		String parentStructureId, OrderByComparator orderByComparator)
 		throws NoSuchStructureException, SystemException {
 		JournalStructure journalStructure = findByPrimaryKey(id);
 
@@ -1734,9 +1760,9 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(4 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(4);
@@ -1758,8 +1784,9 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 				}
 			}
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -1778,8 +1805,8 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 				qPos.add(parentStructureId);
 			}
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					journalStructure);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, journalStructure);
 
 			JournalStructure[] array = new JournalStructureImpl[3];
 
@@ -1788,46 +1815,6 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 			array[2] = (JournalStructure)objArray[2];
 
 			return array;
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.setLimit(start, end);
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
 		}
 		catch (Exception e) {
 			throw processException(e);
@@ -1847,9 +1834,10 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	}
 
 	public List<JournalStructure> findAll(int start, int end,
-		OrderByComparator obc) throws SystemException {
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<JournalStructure> list = (List<JournalStructure>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
@@ -1864,13 +1852,14 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 				StringBundler query = null;
 				String sql = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(2 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 
 					query.append(_SQL_SELECT_JOURNALSTRUCTURE);
 
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 
 					sql = query.toString();
 				}
@@ -1881,7 +1870,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 
 				Query q = session.createQuery(sql);
 
-				if (obc == null) {
+				if (orderByComparator == null) {
 					list = (List<JournalStructure>)QueryUtil.list(q,
 							getDialect(), start, end, false);
 
@@ -2365,28 +2354,28 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 		}
 	}
 
-	@BeanReference(name = "com.liferay.portlet.journal.service.persistence.JournalArticlePersistence")
-	protected com.liferay.portlet.journal.service.persistence.JournalArticlePersistence journalArticlePersistence;
-	@BeanReference(name = "com.liferay.portlet.journal.service.persistence.JournalArticleImagePersistence")
-	protected com.liferay.portlet.journal.service.persistence.JournalArticleImagePersistence journalArticleImagePersistence;
-	@BeanReference(name = "com.liferay.portlet.journal.service.persistence.JournalArticleResourcePersistence")
-	protected com.liferay.portlet.journal.service.persistence.JournalArticleResourcePersistence journalArticleResourcePersistence;
-	@BeanReference(name = "com.liferay.portlet.journal.service.persistence.JournalContentSearchPersistence")
-	protected com.liferay.portlet.journal.service.persistence.JournalContentSearchPersistence journalContentSearchPersistence;
-	@BeanReference(name = "com.liferay.portlet.journal.service.persistence.JournalFeedPersistence")
-	protected com.liferay.portlet.journal.service.persistence.JournalFeedPersistence journalFeedPersistence;
-	@BeanReference(name = "com.liferay.portlet.journal.service.persistence.JournalStructurePersistence")
-	protected com.liferay.portlet.journal.service.persistence.JournalStructurePersistence journalStructurePersistence;
-	@BeanReference(name = "com.liferay.portlet.journal.service.persistence.JournalTemplatePersistence")
-	protected com.liferay.portlet.journal.service.persistence.JournalTemplatePersistence journalTemplatePersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.ResourcePersistence")
-	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
-	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.WebDAVPropsPersistence")
-	protected com.liferay.portal.service.persistence.WebDAVPropsPersistence webDAVPropsPersistence;
-	@BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence")
-	protected com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence expandoValuePersistence;
+	@BeanReference(type = JournalArticlePersistence.class)
+	protected JournalArticlePersistence journalArticlePersistence;
+	@BeanReference(type = JournalArticleImagePersistence.class)
+	protected JournalArticleImagePersistence journalArticleImagePersistence;
+	@BeanReference(type = JournalArticleResourcePersistence.class)
+	protected JournalArticleResourcePersistence journalArticleResourcePersistence;
+	@BeanReference(type = JournalContentSearchPersistence.class)
+	protected JournalContentSearchPersistence journalContentSearchPersistence;
+	@BeanReference(type = JournalFeedPersistence.class)
+	protected JournalFeedPersistence journalFeedPersistence;
+	@BeanReference(type = JournalStructurePersistence.class)
+	protected JournalStructurePersistence journalStructurePersistence;
+	@BeanReference(type = JournalTemplatePersistence.class)
+	protected JournalTemplatePersistence journalTemplatePersistence;
+	@BeanReference(type = ResourcePersistence.class)
+	protected ResourcePersistence resourcePersistence;
+	@BeanReference(type = UserPersistence.class)
+	protected UserPersistence userPersistence;
+	@BeanReference(type = WebDAVPropsPersistence.class)
+	protected WebDAVPropsPersistence webDAVPropsPersistence;
+	@BeanReference(type = ExpandoValuePersistence.class)
+	protected ExpandoValuePersistence expandoValuePersistence;
 	private static final String _SQL_SELECT_JOURNALSTRUCTURE = "SELECT journalStructure FROM JournalStructure journalStructure";
 	private static final String _SQL_SELECT_JOURNALSTRUCTURE_WHERE = "SELECT journalStructure FROM JournalStructure journalStructure WHERE ";
 	private static final String _SQL_COUNT_JOURNALSTRUCTURE = "SELECT COUNT(journalStructure) FROM JournalStructure journalStructure";

@@ -69,22 +69,24 @@ public interface MBMessageFlagPersistence extends BasePersistence<MBMessageFlag>
 
 	public java.util.List<com.liferay.portlet.messageboards.model.MBMessageFlag> findByUserId(
 		long userId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portlet.messageboards.model.MBMessageFlag findByUserId_First(
-		long userId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long userId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageFlagException;
 
 	public com.liferay.portlet.messageboards.model.MBMessageFlag findByUserId_Last(
-		long userId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long userId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageFlagException;
 
 	public com.liferay.portlet.messageboards.model.MBMessageFlag[] findByUserId_PrevAndNext(
 		long messageFlagId, long userId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageFlagException;
 
@@ -98,22 +100,24 @@ public interface MBMessageFlagPersistence extends BasePersistence<MBMessageFlag>
 
 	public java.util.List<com.liferay.portlet.messageboards.model.MBMessageFlag> findByThreadId(
 		long threadId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portlet.messageboards.model.MBMessageFlag findByThreadId_First(
-		long threadId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long threadId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageFlagException;
 
 	public com.liferay.portlet.messageboards.model.MBMessageFlag findByThreadId_Last(
-		long threadId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long threadId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageFlagException;
 
 	public com.liferay.portlet.messageboards.model.MBMessageFlag[] findByThreadId_PrevAndNext(
 		long messageFlagId, long threadId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageFlagException;
 
@@ -127,22 +131,24 @@ public interface MBMessageFlagPersistence extends BasePersistence<MBMessageFlag>
 
 	public java.util.List<com.liferay.portlet.messageboards.model.MBMessageFlag> findByMessageId(
 		long messageId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portlet.messageboards.model.MBMessageFlag findByMessageId_First(
-		long messageId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long messageId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageFlagException;
 
 	public com.liferay.portlet.messageboards.model.MBMessageFlag findByMessageId_Last(
-		long messageId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long messageId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageFlagException;
 
 	public com.liferay.portlet.messageboards.model.MBMessageFlag[] findByMessageId_PrevAndNext(
 		long messageFlagId, long messageId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageFlagException;
 
@@ -156,24 +162,24 @@ public interface MBMessageFlagPersistence extends BasePersistence<MBMessageFlag>
 
 	public java.util.List<com.liferay.portlet.messageboards.model.MBMessageFlag> findByT_F(
 		long threadId, int flag, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portlet.messageboards.model.MBMessageFlag findByT_F_First(
 		long threadId, int flag,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageFlagException;
 
 	public com.liferay.portlet.messageboards.model.MBMessageFlag findByT_F_Last(
 		long threadId, int flag,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageFlagException;
 
 	public com.liferay.portlet.messageboards.model.MBMessageFlag[] findByT_F_PrevAndNext(
 		long messageFlagId, long threadId, int flag,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageFlagException;
 
@@ -187,24 +193,24 @@ public interface MBMessageFlagPersistence extends BasePersistence<MBMessageFlag>
 
 	public java.util.List<com.liferay.portlet.messageboards.model.MBMessageFlag> findByM_F(
 		long messageId, int flag, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portlet.messageboards.model.MBMessageFlag findByM_F_First(
 		long messageId, int flag,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageFlagException;
 
 	public com.liferay.portlet.messageboards.model.MBMessageFlag findByM_F_Last(
 		long messageId, int flag,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageFlagException;
 
 	public com.liferay.portlet.messageboards.model.MBMessageFlag[] findByM_F_PrevAndNext(
 		long messageFlagId, long messageId, int flag,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageFlagException;
 
@@ -218,24 +224,24 @@ public interface MBMessageFlagPersistence extends BasePersistence<MBMessageFlag>
 
 	public java.util.List<com.liferay.portlet.messageboards.model.MBMessageFlag> findByU_T_F(
 		long userId, long threadId, int flag, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portlet.messageboards.model.MBMessageFlag findByU_T_F_First(
 		long userId, long threadId, int flag,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageFlagException;
 
 	public com.liferay.portlet.messageboards.model.MBMessageFlag findByU_T_F_Last(
 		long userId, long threadId, int flag,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageFlagException;
 
 	public com.liferay.portlet.messageboards.model.MBMessageFlag[] findByU_T_F_PrevAndNext(
 		long messageFlagId, long userId, long threadId, int flag,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageFlagException;
 
@@ -260,7 +266,8 @@ public interface MBMessageFlagPersistence extends BasePersistence<MBMessageFlag>
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portlet.messageboards.model.MBMessageFlag> findAll(
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void removeByUserId(long userId)

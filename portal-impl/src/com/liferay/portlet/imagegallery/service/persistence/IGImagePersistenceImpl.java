@@ -17,7 +17,6 @@ package com.liferay.portlet.imagegallery.service.persistence;
 import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
-import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
@@ -37,12 +36,20 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.BatchSessionUtil;
+import com.liferay.portal.service.persistence.ImagePersistence;
+import com.liferay.portal.service.persistence.ResourcePersistence;
+import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
+import com.liferay.portlet.asset.service.persistence.AssetCategoryPersistence;
+import com.liferay.portlet.asset.service.persistence.AssetEntryPersistence;
+import com.liferay.portlet.asset.service.persistence.AssetTagPersistence;
+import com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence;
 import com.liferay.portlet.imagegallery.NoSuchImageException;
 import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.model.impl.IGImageImpl;
 import com.liferay.portlet.imagegallery.model.impl.IGImageModelImpl;
+import com.liferay.portlet.social.service.persistence.SocialActivityPersistence;
 
 import java.io.Serializable;
 
@@ -618,11 +625,12 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 	}
 
 	public List<IGImage> findByUuid(String uuid, int start, int end,
-		OrderByComparator obc) throws SystemException {
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				uuid,
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<IGImage> list = (List<IGImage>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_UUID,
@@ -636,9 +644,9 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(3);
@@ -658,8 +666,9 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 					}
 				}
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -698,9 +707,10 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		return list;
 	}
 
-	public IGImage findByUuid_First(String uuid, OrderByComparator obc)
+	public IGImage findByUuid_First(String uuid,
+		OrderByComparator orderByComparator)
 		throws NoSuchImageException, SystemException {
-		List<IGImage> list = findByUuid(uuid, 0, 1, obc);
+		List<IGImage> list = findByUuid(uuid, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -719,11 +729,13 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		}
 	}
 
-	public IGImage findByUuid_Last(String uuid, OrderByComparator obc)
+	public IGImage findByUuid_Last(String uuid,
+		OrderByComparator orderByComparator)
 		throws NoSuchImageException, SystemException {
 		int count = countByUuid(uuid);
 
-		List<IGImage> list = findByUuid(uuid, count - 1, count, obc);
+		List<IGImage> list = findByUuid(uuid, count - 1, count,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -743,7 +755,8 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 	}
 
 	public IGImage[] findByUuid_PrevAndNext(long imageId, String uuid,
-		OrderByComparator obc) throws NoSuchImageException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchImageException, SystemException {
 		IGImage igImage = findByPrimaryKey(imageId);
 
 		int count = countByUuid(uuid);
@@ -755,9 +768,9 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(3);
@@ -777,8 +790,9 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 				}
 			}
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -795,7 +809,8 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 				qPos.add(uuid);
 			}
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, igImage);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, igImage);
 
 			IGImage[] array = new IGImageImpl[3];
 
@@ -997,11 +1012,12 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 	}
 
 	public List<IGImage> findByGroupId(long groupId, int start, int end,
-		OrderByComparator obc) throws SystemException {
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<IGImage> list = (List<IGImage>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
@@ -1015,9 +1031,9 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(3);
@@ -1027,8 +1043,9 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -1065,9 +1082,10 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		return list;
 	}
 
-	public IGImage findByGroupId_First(long groupId, OrderByComparator obc)
+	public IGImage findByGroupId_First(long groupId,
+		OrderByComparator orderByComparator)
 		throws NoSuchImageException, SystemException {
-		List<IGImage> list = findByGroupId(groupId, 0, 1, obc);
+		List<IGImage> list = findByGroupId(groupId, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -1086,11 +1104,13 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		}
 	}
 
-	public IGImage findByGroupId_Last(long groupId, OrderByComparator obc)
+	public IGImage findByGroupId_Last(long groupId,
+		OrderByComparator orderByComparator)
 		throws NoSuchImageException, SystemException {
 		int count = countByGroupId(groupId);
 
-		List<IGImage> list = findByGroupId(groupId, count - 1, count, obc);
+		List<IGImage> list = findByGroupId(groupId, count - 1, count,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -1110,7 +1130,8 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 	}
 
 	public IGImage[] findByGroupId_PrevAndNext(long imageId, long groupId,
-		OrderByComparator obc) throws NoSuchImageException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchImageException, SystemException {
 		IGImage igImage = findByPrimaryKey(imageId);
 
 		int count = countByGroupId(groupId);
@@ -1122,9 +1143,9 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(3);
@@ -1134,8 +1155,9 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -1150,7 +1172,8 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 			qPos.add(groupId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, igImage);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, igImage);
 
 			IGImage[] array = new IGImageImpl[3];
 
@@ -1657,11 +1680,12 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 	}
 
 	public List<IGImage> findByG_U(long groupId, long userId, int start,
-		int end, OrderByComparator obc) throws SystemException {
+		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Long(userId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<IGImage> list = (List<IGImage>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_G_U,
@@ -1675,9 +1699,9 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(4 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(4);
@@ -1689,8 +1713,9 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 				query.append(_FINDER_COLUMN_G_U_USERID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -1730,8 +1755,9 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 	}
 
 	public IGImage findByG_U_First(long groupId, long userId,
-		OrderByComparator obc) throws NoSuchImageException, SystemException {
-		List<IGImage> list = findByG_U(groupId, userId, 0, 1, obc);
+		OrderByComparator orderByComparator)
+		throws NoSuchImageException, SystemException {
+		List<IGImage> list = findByG_U(groupId, userId, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -1754,10 +1780,12 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 	}
 
 	public IGImage findByG_U_Last(long groupId, long userId,
-		OrderByComparator obc) throws NoSuchImageException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchImageException, SystemException {
 		int count = countByG_U(groupId, userId);
 
-		List<IGImage> list = findByG_U(groupId, userId, count - 1, count, obc);
+		List<IGImage> list = findByG_U(groupId, userId, count - 1, count,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -1780,7 +1808,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 	}
 
 	public IGImage[] findByG_U_PrevAndNext(long imageId, long groupId,
-		long userId, OrderByComparator obc)
+		long userId, OrderByComparator orderByComparator)
 		throws NoSuchImageException, SystemException {
 		IGImage igImage = findByPrimaryKey(imageId);
 
@@ -1793,9 +1821,9 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(4 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(4);
@@ -1807,8 +1835,9 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 			query.append(_FINDER_COLUMN_G_U_USERID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -1825,7 +1854,8 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 			qPos.add(userId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, igImage);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, igImage);
 
 			IGImage[] array = new IGImageImpl[3];
 
@@ -1904,11 +1934,12 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 	}
 
 	public List<IGImage> findByG_F(long groupId, long folderId, int start,
-		int end, OrderByComparator obc) throws SystemException {
+		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Long(folderId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<IGImage> list = (List<IGImage>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_G_F,
@@ -1922,9 +1953,9 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(4 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(4);
@@ -1936,8 +1967,9 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 				query.append(_FINDER_COLUMN_G_F_FOLDERID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -1977,8 +2009,10 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 	}
 
 	public IGImage findByG_F_First(long groupId, long folderId,
-		OrderByComparator obc) throws NoSuchImageException, SystemException {
-		List<IGImage> list = findByG_F(groupId, folderId, 0, 1, obc);
+		OrderByComparator orderByComparator)
+		throws NoSuchImageException, SystemException {
+		List<IGImage> list = findByG_F(groupId, folderId, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -2001,10 +2035,12 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 	}
 
 	public IGImage findByG_F_Last(long groupId, long folderId,
-		OrderByComparator obc) throws NoSuchImageException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchImageException, SystemException {
 		int count = countByG_F(groupId, folderId);
 
-		List<IGImage> list = findByG_F(groupId, folderId, count - 1, count, obc);
+		List<IGImage> list = findByG_F(groupId, folderId, count - 1, count,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -2027,7 +2063,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 	}
 
 	public IGImage[] findByG_F_PrevAndNext(long imageId, long groupId,
-		long folderId, OrderByComparator obc)
+		long folderId, OrderByComparator orderByComparator)
 		throws NoSuchImageException, SystemException {
 		IGImage igImage = findByPrimaryKey(imageId);
 
@@ -2040,9 +2076,9 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(4 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(4);
@@ -2054,8 +2090,9 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 			query.append(_FINDER_COLUMN_G_F_FOLDERID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -2072,7 +2109,8 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 			qPos.add(folderId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, igImage);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, igImage);
 
 			IGImage[] array = new IGImageImpl[3];
 
@@ -2171,13 +2209,15 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 	}
 
 	public List<IGImage> findByG_F_N(long groupId, long folderId, String name,
-		int start, int end, OrderByComparator obc) throws SystemException {
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Long(folderId),
 				
 				name,
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<IGImage> list = (List<IGImage>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_G_F_N,
@@ -2191,9 +2231,9 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(5 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(5);
@@ -2217,8 +2257,9 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 					}
 				}
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -2262,8 +2303,10 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 	}
 
 	public IGImage findByG_F_N_First(long groupId, long folderId, String name,
-		OrderByComparator obc) throws NoSuchImageException, SystemException {
-		List<IGImage> list = findByG_F_N(groupId, folderId, name, 0, 1, obc);
+		OrderByComparator orderByComparator)
+		throws NoSuchImageException, SystemException {
+		List<IGImage> list = findByG_F_N(groupId, folderId, name, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(8);
@@ -2289,11 +2332,12 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 	}
 
 	public IGImage findByG_F_N_Last(long groupId, long folderId, String name,
-		OrderByComparator obc) throws NoSuchImageException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchImageException, SystemException {
 		int count = countByG_F_N(groupId, folderId, name);
 
 		List<IGImage> list = findByG_F_N(groupId, folderId, name, count - 1,
-				count, obc);
+				count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(8);
@@ -2319,7 +2363,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 	}
 
 	public IGImage[] findByG_F_N_PrevAndNext(long imageId, long groupId,
-		long folderId, String name, OrderByComparator obc)
+		long folderId, String name, OrderByComparator orderByComparator)
 		throws NoSuchImageException, SystemException {
 		IGImage igImage = findByPrimaryKey(imageId);
 
@@ -2332,9 +2376,9 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(5 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(5);
@@ -2358,8 +2402,9 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 				}
 			}
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -2380,7 +2425,8 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 				qPos.add(name);
 			}
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, igImage);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, igImage);
 
 			IGImage[] array = new IGImageImpl[3];
 
@@ -2398,46 +2444,6 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		}
 	}
 
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.setLimit(start, end);
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
 	public List<IGImage> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -2446,10 +2452,11 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		return findAll(start, end, null);
 	}
 
-	public List<IGImage> findAll(int start, int end, OrderByComparator obc)
-		throws SystemException {
+	public List<IGImage> findAll(int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<IGImage> list = (List<IGImage>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
@@ -2464,13 +2471,14 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 				StringBundler query = null;
 				String sql = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(2 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 
 					query.append(_SQL_SELECT_IGIMAGE);
 
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 
 					sql = query.toString();
 				}
@@ -2481,7 +2489,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 				Query q = session.createQuery(sql);
 
-				if (obc == null) {
+				if (orderByComparator == null) {
 					list = (List<IGImage>)QueryUtil.list(q, getDialect(),
 							start, end, false);
 
@@ -3166,26 +3174,26 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		}
 	}
 
-	@BeanReference(name = "com.liferay.portlet.imagegallery.service.persistence.IGFolderPersistence")
-	protected com.liferay.portlet.imagegallery.service.persistence.IGFolderPersistence igFolderPersistence;
-	@BeanReference(name = "com.liferay.portlet.imagegallery.service.persistence.IGImagePersistence")
-	protected com.liferay.portlet.imagegallery.service.persistence.IGImagePersistence igImagePersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.ImagePersistence")
-	protected com.liferay.portal.service.persistence.ImagePersistence imagePersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.ResourcePersistence")
-	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
-	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
-	@BeanReference(name = "com.liferay.portlet.asset.service.persistence.AssetCategoryPersistence")
-	protected com.liferay.portlet.asset.service.persistence.AssetCategoryPersistence assetCategoryPersistence;
-	@BeanReference(name = "com.liferay.portlet.asset.service.persistence.AssetEntryPersistence")
-	protected com.liferay.portlet.asset.service.persistence.AssetEntryPersistence assetEntryPersistence;
-	@BeanReference(name = "com.liferay.portlet.asset.service.persistence.AssetTagPersistence")
-	protected com.liferay.portlet.asset.service.persistence.AssetTagPersistence assetTagPersistence;
-	@BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence")
-	protected com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence expandoValuePersistence;
-	@BeanReference(name = "com.liferay.portlet.social.service.persistence.SocialActivityPersistence")
-	protected com.liferay.portlet.social.service.persistence.SocialActivityPersistence socialActivityPersistence;
+	@BeanReference(type = IGFolderPersistence.class)
+	protected IGFolderPersistence igFolderPersistence;
+	@BeanReference(type = IGImagePersistence.class)
+	protected IGImagePersistence igImagePersistence;
+	@BeanReference(type = ImagePersistence.class)
+	protected ImagePersistence imagePersistence;
+	@BeanReference(type = ResourcePersistence.class)
+	protected ResourcePersistence resourcePersistence;
+	@BeanReference(type = UserPersistence.class)
+	protected UserPersistence userPersistence;
+	@BeanReference(type = AssetCategoryPersistence.class)
+	protected AssetCategoryPersistence assetCategoryPersistence;
+	@BeanReference(type = AssetEntryPersistence.class)
+	protected AssetEntryPersistence assetEntryPersistence;
+	@BeanReference(type = AssetTagPersistence.class)
+	protected AssetTagPersistence assetTagPersistence;
+	@BeanReference(type = ExpandoValuePersistence.class)
+	protected ExpandoValuePersistence expandoValuePersistence;
+	@BeanReference(type = SocialActivityPersistence.class)
+	protected SocialActivityPersistence socialActivityPersistence;
 	private static final String _SQL_SELECT_IGIMAGE = "SELECT igImage FROM IGImage igImage";
 	private static final String _SQL_SELECT_IGIMAGE_WHERE = "SELECT igImage FROM IGImage igImage WHERE ";
 	private static final String _SQL_COUNT_IGIMAGE = "SELECT COUNT(igImage) FROM IGImage igImage";

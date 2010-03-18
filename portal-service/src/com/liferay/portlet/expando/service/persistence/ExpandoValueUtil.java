@@ -131,31 +131,36 @@ public class ExpandoValueUtil {
 
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoValue> findByTableId(
 		long tableId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByTableId(tableId, start, end, obc);
+		return getPersistence()
+				   .findByTableId(tableId, start, end, orderByComparator);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoValue findByTableId_First(
-		long tableId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long tableId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.expando.NoSuchValueException {
-		return getPersistence().findByTableId_First(tableId, obc);
+		return getPersistence().findByTableId_First(tableId, orderByComparator);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoValue findByTableId_Last(
-		long tableId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long tableId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.expando.NoSuchValueException {
-		return getPersistence().findByTableId_Last(tableId, obc);
+		return getPersistence().findByTableId_Last(tableId, orderByComparator);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoValue[] findByTableId_PrevAndNext(
 		long valueId, long tableId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.expando.NoSuchValueException {
-		return getPersistence().findByTableId_PrevAndNext(valueId, tableId, obc);
+		return getPersistence()
+				   .findByTableId_PrevAndNext(valueId, tableId,
+			orderByComparator);
 	}
 
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoValue> findByColumnId(
@@ -172,32 +177,36 @@ public class ExpandoValueUtil {
 
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoValue> findByColumnId(
 		long columnId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByColumnId(columnId, start, end, obc);
+		return getPersistence()
+				   .findByColumnId(columnId, start, end, orderByComparator);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoValue findByColumnId_First(
-		long columnId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long columnId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.expando.NoSuchValueException {
-		return getPersistence().findByColumnId_First(columnId, obc);
+		return getPersistence().findByColumnId_First(columnId, orderByComparator);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoValue findByColumnId_Last(
-		long columnId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long columnId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.expando.NoSuchValueException {
-		return getPersistence().findByColumnId_Last(columnId, obc);
+		return getPersistence().findByColumnId_Last(columnId, orderByComparator);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoValue[] findByColumnId_PrevAndNext(
 		long valueId, long columnId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.expando.NoSuchValueException {
 		return getPersistence()
-				   .findByColumnId_PrevAndNext(valueId, columnId, obc);
+				   .findByColumnId_PrevAndNext(valueId, columnId,
+			orderByComparator);
 	}
 
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoValue> findByRowId(
@@ -213,31 +222,34 @@ public class ExpandoValueUtil {
 
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoValue> findByRowId(
 		long rowId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByRowId(rowId, start, end, obc);
+		return getPersistence().findByRowId(rowId, start, end, orderByComparator);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoValue findByRowId_First(
-		long rowId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long rowId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.expando.NoSuchValueException {
-		return getPersistence().findByRowId_First(rowId, obc);
+		return getPersistence().findByRowId_First(rowId, orderByComparator);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoValue findByRowId_Last(
-		long rowId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long rowId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.expando.NoSuchValueException {
-		return getPersistence().findByRowId_Last(rowId, obc);
+		return getPersistence().findByRowId_Last(rowId, orderByComparator);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoValue[] findByRowId_PrevAndNext(
 		long valueId, long rowId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.expando.NoSuchValueException {
-		return getPersistence().findByRowId_PrevAndNext(valueId, rowId, obc);
+		return getPersistence()
+				   .findByRowId_PrevAndNext(valueId, rowId, orderByComparator);
 	}
 
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoValue> findByT_C(
@@ -254,34 +266,38 @@ public class ExpandoValueUtil {
 
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoValue> findByT_C(
 		long tableId, long columnId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByT_C(tableId, columnId, start, end, obc);
+		return getPersistence()
+				   .findByT_C(tableId, columnId, start, end, orderByComparator);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoValue findByT_C_First(
 		long tableId, long columnId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.expando.NoSuchValueException {
-		return getPersistence().findByT_C_First(tableId, columnId, obc);
+		return getPersistence()
+				   .findByT_C_First(tableId, columnId, orderByComparator);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoValue findByT_C_Last(
 		long tableId, long columnId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.expando.NoSuchValueException {
-		return getPersistence().findByT_C_Last(tableId, columnId, obc);
+		return getPersistence()
+				   .findByT_C_Last(tableId, columnId, orderByComparator);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoValue[] findByT_C_PrevAndNext(
 		long valueId, long tableId, long columnId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.expando.NoSuchValueException {
 		return getPersistence()
-				   .findByT_C_PrevAndNext(valueId, tableId, columnId, obc);
+				   .findByT_C_PrevAndNext(valueId, tableId, columnId,
+			orderByComparator);
 	}
 
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoValue> findByT_CPK(
@@ -298,34 +314,38 @@ public class ExpandoValueUtil {
 
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoValue> findByT_CPK(
 		long tableId, long classPK, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByT_CPK(tableId, classPK, start, end, obc);
+		return getPersistence()
+				   .findByT_CPK(tableId, classPK, start, end, orderByComparator);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoValue findByT_CPK_First(
 		long tableId, long classPK,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.expando.NoSuchValueException {
-		return getPersistence().findByT_CPK_First(tableId, classPK, obc);
+		return getPersistence()
+				   .findByT_CPK_First(tableId, classPK, orderByComparator);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoValue findByT_CPK_Last(
 		long tableId, long classPK,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.expando.NoSuchValueException {
-		return getPersistence().findByT_CPK_Last(tableId, classPK, obc);
+		return getPersistence()
+				   .findByT_CPK_Last(tableId, classPK, orderByComparator);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoValue[] findByT_CPK_PrevAndNext(
 		long valueId, long tableId, long classPK,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.expando.NoSuchValueException {
 		return getPersistence()
-				   .findByT_CPK_PrevAndNext(valueId, tableId, classPK, obc);
+				   .findByT_CPK_PrevAndNext(valueId, tableId, classPK,
+			orderByComparator);
 	}
 
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoValue> findByT_R(
@@ -342,34 +362,37 @@ public class ExpandoValueUtil {
 
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoValue> findByT_R(
 		long tableId, long rowId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByT_R(tableId, rowId, start, end, obc);
+		return getPersistence()
+				   .findByT_R(tableId, rowId, start, end, orderByComparator);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoValue findByT_R_First(
 		long tableId, long rowId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.expando.NoSuchValueException {
-		return getPersistence().findByT_R_First(tableId, rowId, obc);
+		return getPersistence()
+				   .findByT_R_First(tableId, rowId, orderByComparator);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoValue findByT_R_Last(
 		long tableId, long rowId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.expando.NoSuchValueException {
-		return getPersistence().findByT_R_Last(tableId, rowId, obc);
+		return getPersistence().findByT_R_Last(tableId, rowId, orderByComparator);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoValue[] findByT_R_PrevAndNext(
 		long valueId, long tableId, long rowId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.expando.NoSuchValueException {
 		return getPersistence()
-				   .findByT_R_PrevAndNext(valueId, tableId, rowId, obc);
+				   .findByT_R_PrevAndNext(valueId, tableId, rowId,
+			orderByComparator);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoValue findByC_R(
@@ -405,34 +428,39 @@ public class ExpandoValueUtil {
 
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoValue> findByC_C(
 		long classNameId, long classPK, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByC_C(classNameId, classPK, start, end, obc);
+		return getPersistence()
+				   .findByC_C(classNameId, classPK, start, end,
+			orderByComparator);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoValue findByC_C_First(
 		long classNameId, long classPK,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.expando.NoSuchValueException {
-		return getPersistence().findByC_C_First(classNameId, classPK, obc);
+		return getPersistence()
+				   .findByC_C_First(classNameId, classPK, orderByComparator);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoValue findByC_C_Last(
 		long classNameId, long classPK,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.expando.NoSuchValueException {
-		return getPersistence().findByC_C_Last(classNameId, classPK, obc);
+		return getPersistence()
+				   .findByC_C_Last(classNameId, classPK, orderByComparator);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoValue[] findByC_C_PrevAndNext(
 		long valueId, long classNameId, long classPK,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.expando.NoSuchValueException {
 		return getPersistence()
-				   .findByC_C_PrevAndNext(valueId, classNameId, classPK, obc);
+				   .findByC_C_PrevAndNext(valueId, classNameId, classPK,
+			orderByComparator);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoValue findByT_C_C(
@@ -469,36 +497,39 @@ public class ExpandoValueUtil {
 
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoValue> findByT_C_D(
 		long tableId, long columnId, java.lang.String data, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .findByT_C_D(tableId, columnId, data, start, end, obc);
+				   .findByT_C_D(tableId, columnId, data, start, end,
+			orderByComparator);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoValue findByT_C_D_First(
 		long tableId, long columnId, java.lang.String data,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.expando.NoSuchValueException {
-		return getPersistence().findByT_C_D_First(tableId, columnId, data, obc);
+		return getPersistence()
+				   .findByT_C_D_First(tableId, columnId, data, orderByComparator);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoValue findByT_C_D_Last(
 		long tableId, long columnId, java.lang.String data,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.expando.NoSuchValueException {
-		return getPersistence().findByT_C_D_Last(tableId, columnId, data, obc);
+		return getPersistence()
+				   .findByT_C_D_Last(tableId, columnId, data, orderByComparator);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoValue[] findByT_C_D_PrevAndNext(
 		long valueId, long tableId, long columnId, java.lang.String data,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.expando.NoSuchValueException {
 		return getPersistence()
 				   .findByT_C_D_PrevAndNext(valueId, tableId, columnId, data,
-			obc);
+			orderByComparator);
 	}
 
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoValue> findAll()
@@ -513,9 +544,10 @@ public class ExpandoValueUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoValue> findAll(
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findAll(start, end, obc);
+		return getPersistence().findAll(start, end, orderByComparator);
 	}
 
 	public static void removeByTableId(long tableId)

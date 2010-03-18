@@ -148,19 +148,19 @@ public class WorkflowDefinitionLinkLocalServiceWrapper
 			groupId, className);
 	}
 
+	public int getWorkflowDefinitionLinksCount(long companyId,
+		java.lang.String workflowDefinitionName, int workflowDefinitionVersion)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _workflowDefinitionLinkLocalService.getWorkflowDefinitionLinksCount(companyId,
+			workflowDefinitionName, workflowDefinitionVersion);
+	}
+
 	public boolean hasWorkflowDefinitionLink(long companyId, long groupId,
 		java.lang.String className)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _workflowDefinitionLinkLocalService.hasWorkflowDefinitionLink(companyId,
 			groupId, className);
-	}
-
-	public int searchCount(java.lang.String workflowDefinitionName,
-		int workflowDefinitionVersion)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return _workflowDefinitionLinkLocalService.searchCount(workflowDefinitionName,
-			workflowDefinitionVersion);
 	}
 
 	public com.liferay.portal.model.WorkflowDefinitionLink updateWorkflowDefinitionLink(

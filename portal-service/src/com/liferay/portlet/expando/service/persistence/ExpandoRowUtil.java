@@ -129,31 +129,35 @@ public class ExpandoRowUtil {
 
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoRow> findByTableId(
 		long tableId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByTableId(tableId, start, end, obc);
+		return getPersistence()
+				   .findByTableId(tableId, start, end, orderByComparator);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoRow findByTableId_First(
-		long tableId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long tableId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.expando.NoSuchRowException {
-		return getPersistence().findByTableId_First(tableId, obc);
+		return getPersistence().findByTableId_First(tableId, orderByComparator);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoRow findByTableId_Last(
-		long tableId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long tableId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.expando.NoSuchRowException {
-		return getPersistence().findByTableId_Last(tableId, obc);
+		return getPersistence().findByTableId_Last(tableId, orderByComparator);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoRow[] findByTableId_PrevAndNext(
 		long rowId, long tableId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.expando.NoSuchRowException {
-		return getPersistence().findByTableId_PrevAndNext(rowId, tableId, obc);
+		return getPersistence()
+				   .findByTableId_PrevAndNext(rowId, tableId, orderByComparator);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoRow findByT_C(
@@ -187,9 +191,10 @@ public class ExpandoRowUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoRow> findAll(
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findAll(start, end, obc);
+		return getPersistence().findAll(start, end, orderByComparator);
 	}
 
 	public static void removeByTableId(long tableId)

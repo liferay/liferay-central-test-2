@@ -131,33 +131,34 @@ public class MBMessageUtil {
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByUuid(
 		java.lang.String uuid, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByUuid(uuid, start, end, obc);
+		return getPersistence().findByUuid(uuid, start, end, orderByComparator);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage findByUuid_First(
 		java.lang.String uuid,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageException {
-		return getPersistence().findByUuid_First(uuid, obc);
+		return getPersistence().findByUuid_First(uuid, orderByComparator);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage findByUuid_Last(
 		java.lang.String uuid,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageException {
-		return getPersistence().findByUuid_Last(uuid, obc);
+		return getPersistence().findByUuid_Last(uuid, orderByComparator);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage[] findByUuid_PrevAndNext(
 		long messageId, java.lang.String uuid,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageException {
-		return getPersistence().findByUuid_PrevAndNext(messageId, uuid, obc);
+		return getPersistence()
+				   .findByUuid_PrevAndNext(messageId, uuid, orderByComparator);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage findByUUID_G(
@@ -193,32 +194,36 @@ public class MBMessageUtil {
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByGroupId(
 		long groupId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByGroupId(groupId, start, end, obc);
+		return getPersistence()
+				   .findByGroupId(groupId, start, end, orderByComparator);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage findByGroupId_First(
-		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long groupId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageException {
-		return getPersistence().findByGroupId_First(groupId, obc);
+		return getPersistence().findByGroupId_First(groupId, orderByComparator);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage findByGroupId_Last(
-		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long groupId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageException {
-		return getPersistence().findByGroupId_Last(groupId, obc);
+		return getPersistence().findByGroupId_Last(groupId, orderByComparator);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage[] findByGroupId_PrevAndNext(
 		long messageId, long groupId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageException {
 		return getPersistence()
-				   .findByGroupId_PrevAndNext(messageId, groupId, obc);
+				   .findByGroupId_PrevAndNext(messageId, groupId,
+			orderByComparator);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByCompanyId(
@@ -235,32 +240,38 @@ public class MBMessageUtil {
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByCompanyId(
 		long companyId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByCompanyId(companyId, start, end, obc);
+		return getPersistence()
+				   .findByCompanyId(companyId, start, end, orderByComparator);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage findByCompanyId_First(
-		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long companyId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageException {
-		return getPersistence().findByCompanyId_First(companyId, obc);
+		return getPersistence()
+				   .findByCompanyId_First(companyId, orderByComparator);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage findByCompanyId_Last(
-		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long companyId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageException {
-		return getPersistence().findByCompanyId_Last(companyId, obc);
+		return getPersistence()
+				   .findByCompanyId_Last(companyId, orderByComparator);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage[] findByCompanyId_PrevAndNext(
 		long messageId, long companyId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageException {
 		return getPersistence()
-				   .findByCompanyId_PrevAndNext(messageId, companyId, obc);
+				   .findByCompanyId_PrevAndNext(messageId, companyId,
+			orderByComparator);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByThreadId(
@@ -277,32 +288,36 @@ public class MBMessageUtil {
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByThreadId(
 		long threadId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByThreadId(threadId, start, end, obc);
+		return getPersistence()
+				   .findByThreadId(threadId, start, end, orderByComparator);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage findByThreadId_First(
-		long threadId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long threadId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageException {
-		return getPersistence().findByThreadId_First(threadId, obc);
+		return getPersistence().findByThreadId_First(threadId, orderByComparator);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage findByThreadId_Last(
-		long threadId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long threadId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageException {
-		return getPersistence().findByThreadId_Last(threadId, obc);
+		return getPersistence().findByThreadId_Last(threadId, orderByComparator);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage[] findByThreadId_PrevAndNext(
 		long messageId, long threadId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageException {
 		return getPersistence()
-				   .findByThreadId_PrevAndNext(messageId, threadId, obc);
+				   .findByThreadId_PrevAndNext(messageId, threadId,
+			orderByComparator);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByThreadReplies(
@@ -319,32 +334,38 @@ public class MBMessageUtil {
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByThreadReplies(
 		long threadId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByThreadReplies(threadId, start, end, obc);
+		return getPersistence()
+				   .findByThreadReplies(threadId, start, end, orderByComparator);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage findByThreadReplies_First(
-		long threadId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long threadId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageException {
-		return getPersistence().findByThreadReplies_First(threadId, obc);
+		return getPersistence()
+				   .findByThreadReplies_First(threadId, orderByComparator);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage findByThreadReplies_Last(
-		long threadId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long threadId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageException {
-		return getPersistence().findByThreadReplies_Last(threadId, obc);
+		return getPersistence()
+				   .findByThreadReplies_Last(threadId, orderByComparator);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage[] findByThreadReplies_PrevAndNext(
 		long messageId, long threadId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageException {
 		return getPersistence()
-				   .findByThreadReplies_PrevAndNext(messageId, threadId, obc);
+				   .findByThreadReplies_PrevAndNext(messageId, threadId,
+			orderByComparator);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByG_U(
@@ -361,34 +382,38 @@ public class MBMessageUtil {
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByG_U(
 		long groupId, long userId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByG_U(groupId, userId, start, end, obc);
+		return getPersistence()
+				   .findByG_U(groupId, userId, start, end, orderByComparator);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage findByG_U_First(
 		long groupId, long userId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageException {
-		return getPersistence().findByG_U_First(groupId, userId, obc);
+		return getPersistence()
+				   .findByG_U_First(groupId, userId, orderByComparator);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage findByG_U_Last(
 		long groupId, long userId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageException {
-		return getPersistence().findByG_U_Last(groupId, userId, obc);
+		return getPersistence()
+				   .findByG_U_Last(groupId, userId, orderByComparator);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage[] findByG_U_PrevAndNext(
 		long messageId, long groupId, long userId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageException {
 		return getPersistence()
-				   .findByG_U_PrevAndNext(messageId, groupId, userId, obc);
+				   .findByG_U_PrevAndNext(messageId, groupId, userId,
+			orderByComparator);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByG_C(
@@ -405,34 +430,38 @@ public class MBMessageUtil {
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByG_C(
 		long groupId, long categoryId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByG_C(groupId, categoryId, start, end, obc);
+		return getPersistence()
+				   .findByG_C(groupId, categoryId, start, end, orderByComparator);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage findByG_C_First(
 		long groupId, long categoryId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageException {
-		return getPersistence().findByG_C_First(groupId, categoryId, obc);
+		return getPersistence()
+				   .findByG_C_First(groupId, categoryId, orderByComparator);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage findByG_C_Last(
 		long groupId, long categoryId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageException {
-		return getPersistence().findByG_C_Last(groupId, categoryId, obc);
+		return getPersistence()
+				   .findByG_C_Last(groupId, categoryId, orderByComparator);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage[] findByG_C_PrevAndNext(
 		long messageId, long groupId, long categoryId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageException {
 		return getPersistence()
-				   .findByG_C_PrevAndNext(messageId, groupId, categoryId, obc);
+				   .findByG_C_PrevAndNext(messageId, groupId, categoryId,
+			orderByComparator);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByG_S(
@@ -449,34 +478,38 @@ public class MBMessageUtil {
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByG_S(
 		long groupId, int status, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByG_S(groupId, status, start, end, obc);
+		return getPersistence()
+				   .findByG_S(groupId, status, start, end, orderByComparator);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage findByG_S_First(
 		long groupId, int status,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageException {
-		return getPersistence().findByG_S_First(groupId, status, obc);
+		return getPersistence()
+				   .findByG_S_First(groupId, status, orderByComparator);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage findByG_S_Last(
 		long groupId, int status,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageException {
-		return getPersistence().findByG_S_Last(groupId, status, obc);
+		return getPersistence()
+				   .findByG_S_Last(groupId, status, orderByComparator);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage[] findByG_S_PrevAndNext(
 		long messageId, long groupId, int status,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageException {
 		return getPersistence()
-				   .findByG_S_PrevAndNext(messageId, groupId, status, obc);
+				   .findByG_S_PrevAndNext(messageId, groupId, status,
+			orderByComparator);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByC_S(
@@ -493,34 +526,38 @@ public class MBMessageUtil {
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByC_S(
 		long companyId, int status, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByC_S(companyId, status, start, end, obc);
+		return getPersistence()
+				   .findByC_S(companyId, status, start, end, orderByComparator);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage findByC_S_First(
 		long companyId, int status,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageException {
-		return getPersistence().findByC_S_First(companyId, status, obc);
+		return getPersistence()
+				   .findByC_S_First(companyId, status, orderByComparator);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage findByC_S_Last(
 		long companyId, int status,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageException {
-		return getPersistence().findByC_S_Last(companyId, status, obc);
+		return getPersistence()
+				   .findByC_S_Last(companyId, status, orderByComparator);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage[] findByC_S_PrevAndNext(
 		long messageId, long companyId, int status,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageException {
 		return getPersistence()
-				   .findByC_S_PrevAndNext(messageId, companyId, status, obc);
+				   .findByC_S_PrevAndNext(messageId, companyId, status,
+			orderByComparator);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByC_C(
@@ -537,34 +574,39 @@ public class MBMessageUtil {
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByC_C(
 		long classNameId, long classPK, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByC_C(classNameId, classPK, start, end, obc);
+		return getPersistence()
+				   .findByC_C(classNameId, classPK, start, end,
+			orderByComparator);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage findByC_C_First(
 		long classNameId, long classPK,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageException {
-		return getPersistence().findByC_C_First(classNameId, classPK, obc);
+		return getPersistence()
+				   .findByC_C_First(classNameId, classPK, orderByComparator);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage findByC_C_Last(
 		long classNameId, long classPK,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageException {
-		return getPersistence().findByC_C_Last(classNameId, classPK, obc);
+		return getPersistence()
+				   .findByC_C_Last(classNameId, classPK, orderByComparator);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage[] findByC_C_PrevAndNext(
 		long messageId, long classNameId, long classPK,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageException {
 		return getPersistence()
-				   .findByC_C_PrevAndNext(messageId, classNameId, classPK, obc);
+				   .findByC_C_PrevAndNext(messageId, classNameId, classPK,
+			orderByComparator);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByT_P(
@@ -581,36 +623,39 @@ public class MBMessageUtil {
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByT_P(
 		long threadId, long parentMessageId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .findByT_P(threadId, parentMessageId, start, end, obc);
+				   .findByT_P(threadId, parentMessageId, start, end,
+			orderByComparator);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage findByT_P_First(
 		long threadId, long parentMessageId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageException {
-		return getPersistence().findByT_P_First(threadId, parentMessageId, obc);
+		return getPersistence()
+				   .findByT_P_First(threadId, parentMessageId, orderByComparator);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage findByT_P_Last(
 		long threadId, long parentMessageId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageException {
-		return getPersistence().findByT_P_Last(threadId, parentMessageId, obc);
+		return getPersistence()
+				   .findByT_P_Last(threadId, parentMessageId, orderByComparator);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage[] findByT_P_PrevAndNext(
 		long messageId, long threadId, long parentMessageId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageException {
 		return getPersistence()
 				   .findByT_P_PrevAndNext(messageId, threadId, parentMessageId,
-			obc);
+			orderByComparator);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByT_S(
@@ -627,34 +672,38 @@ public class MBMessageUtil {
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByT_S(
 		long threadId, int status, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByT_S(threadId, status, start, end, obc);
+		return getPersistence()
+				   .findByT_S(threadId, status, start, end, orderByComparator);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage findByT_S_First(
 		long threadId, int status,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageException {
-		return getPersistence().findByT_S_First(threadId, status, obc);
+		return getPersistence()
+				   .findByT_S_First(threadId, status, orderByComparator);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage findByT_S_Last(
 		long threadId, int status,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageException {
-		return getPersistence().findByT_S_Last(threadId, status, obc);
+		return getPersistence()
+				   .findByT_S_Last(threadId, status, orderByComparator);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage[] findByT_S_PrevAndNext(
 		long messageId, long threadId, int status,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageException {
 		return getPersistence()
-				   .findByT_S_PrevAndNext(messageId, threadId, status, obc);
+				   .findByT_S_PrevAndNext(messageId, threadId, status,
+			orderByComparator);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByTR_S(
@@ -671,34 +720,38 @@ public class MBMessageUtil {
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByTR_S(
 		long threadId, int status, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByTR_S(threadId, status, start, end, obc);
+		return getPersistence()
+				   .findByTR_S(threadId, status, start, end, orderByComparator);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage findByTR_S_First(
 		long threadId, int status,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageException {
-		return getPersistence().findByTR_S_First(threadId, status, obc);
+		return getPersistence()
+				   .findByTR_S_First(threadId, status, orderByComparator);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage findByTR_S_Last(
 		long threadId, int status,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageException {
-		return getPersistence().findByTR_S_Last(threadId, status, obc);
+		return getPersistence()
+				   .findByTR_S_Last(threadId, status, orderByComparator);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage[] findByTR_S_PrevAndNext(
 		long messageId, long threadId, int status,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageException {
 		return getPersistence()
-				   .findByTR_S_PrevAndNext(messageId, threadId, status, obc);
+				   .findByTR_S_PrevAndNext(messageId, threadId, status,
+			orderByComparator);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByG_U_S(
@@ -715,36 +768,39 @@ public class MBMessageUtil {
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByG_U_S(
 		long groupId, long userId, int status, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .findByG_U_S(groupId, userId, status, start, end, obc);
+				   .findByG_U_S(groupId, userId, status, start, end,
+			orderByComparator);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage findByG_U_S_First(
 		long groupId, long userId, int status,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageException {
-		return getPersistence().findByG_U_S_First(groupId, userId, status, obc);
+		return getPersistence()
+				   .findByG_U_S_First(groupId, userId, status, orderByComparator);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage findByG_U_S_Last(
 		long groupId, long userId, int status,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageException {
-		return getPersistence().findByG_U_S_Last(groupId, userId, status, obc);
+		return getPersistence()
+				   .findByG_U_S_Last(groupId, userId, status, orderByComparator);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage[] findByG_U_S_PrevAndNext(
 		long messageId, long groupId, long userId, int status,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageException {
 		return getPersistence()
 				   .findByG_U_S_PrevAndNext(messageId, groupId, userId, status,
-			obc);
+			orderByComparator);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByG_C_T(
@@ -762,38 +818,41 @@ public class MBMessageUtil {
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByG_C_T(
 		long groupId, long categoryId, long threadId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .findByG_C_T(groupId, categoryId, threadId, start, end, obc);
+				   .findByG_C_T(groupId, categoryId, threadId, start, end,
+			orderByComparator);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage findByG_C_T_First(
 		long groupId, long categoryId, long threadId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageException {
 		return getPersistence()
-				   .findByG_C_T_First(groupId, categoryId, threadId, obc);
+				   .findByG_C_T_First(groupId, categoryId, threadId,
+			orderByComparator);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage findByG_C_T_Last(
 		long groupId, long categoryId, long threadId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageException {
 		return getPersistence()
-				   .findByG_C_T_Last(groupId, categoryId, threadId, obc);
+				   .findByG_C_T_Last(groupId, categoryId, threadId,
+			orderByComparator);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage[] findByG_C_T_PrevAndNext(
 		long messageId, long groupId, long categoryId, long threadId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageException {
 		return getPersistence()
 				   .findByG_C_T_PrevAndNext(messageId, groupId, categoryId,
-			threadId, obc);
+			threadId, orderByComparator);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByG_C_S(
@@ -811,38 +870,41 @@ public class MBMessageUtil {
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByG_C_S(
 		long groupId, long categoryId, int status, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .findByG_C_S(groupId, categoryId, status, start, end, obc);
+				   .findByG_C_S(groupId, categoryId, status, start, end,
+			orderByComparator);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage findByG_C_S_First(
 		long groupId, long categoryId, int status,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageException {
 		return getPersistence()
-				   .findByG_C_S_First(groupId, categoryId, status, obc);
+				   .findByG_C_S_First(groupId, categoryId, status,
+			orderByComparator);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage findByG_C_S_Last(
 		long groupId, long categoryId, int status,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageException {
 		return getPersistence()
-				   .findByG_C_S_Last(groupId, categoryId, status, obc);
+				   .findByG_C_S_Last(groupId, categoryId, status,
+			orderByComparator);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage[] findByG_C_S_PrevAndNext(
 		long messageId, long groupId, long categoryId, int status,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageException {
 		return getPersistence()
 				   .findByG_C_S_PrevAndNext(messageId, groupId, categoryId,
-			status, obc);
+			status, orderByComparator);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByC_C_S(
@@ -860,38 +922,41 @@ public class MBMessageUtil {
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByC_C_S(
 		long classNameId, long classPK, int status, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .findByC_C_S(classNameId, classPK, status, start, end, obc);
+				   .findByC_C_S(classNameId, classPK, status, start, end,
+			orderByComparator);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage findByC_C_S_First(
 		long classNameId, long classPK, int status,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageException {
 		return getPersistence()
-				   .findByC_C_S_First(classNameId, classPK, status, obc);
+				   .findByC_C_S_First(classNameId, classPK, status,
+			orderByComparator);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage findByC_C_S_Last(
 		long classNameId, long classPK, int status,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageException {
 		return getPersistence()
-				   .findByC_C_S_Last(classNameId, classPK, status, obc);
+				   .findByC_C_S_Last(classNameId, classPK, status,
+			orderByComparator);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage[] findByC_C_S_PrevAndNext(
 		long messageId, long classNameId, long classPK, int status,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageException {
 		return getPersistence()
 				   .findByC_C_S_PrevAndNext(messageId, classNameId, classPK,
-			status, obc);
+			status, orderByComparator);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByG_C_T_S(
@@ -911,41 +976,43 @@ public class MBMessageUtil {
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByG_C_T_S(
 		long groupId, long categoryId, long threadId, int status, int start,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
 				   .findByG_C_T_S(groupId, categoryId, threadId, status, start,
-			end, obc);
+			end, orderByComparator);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage findByG_C_T_S_First(
 		long groupId, long categoryId, long threadId, int status,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageException {
 		return getPersistence()
 				   .findByG_C_T_S_First(groupId, categoryId, threadId, status,
-			obc);
+			orderByComparator);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage findByG_C_T_S_Last(
 		long groupId, long categoryId, long threadId, int status,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageException {
 		return getPersistence()
 				   .findByG_C_T_S_Last(groupId, categoryId, threadId, status,
-			obc);
+			orderByComparator);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage[] findByG_C_T_S_PrevAndNext(
 		long messageId, long groupId, long categoryId, long threadId,
-		int status, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int status,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageException {
 		return getPersistence()
 				   .findByG_C_T_S_PrevAndNext(messageId, groupId, categoryId,
-			threadId, status, obc);
+			threadId, status, orderByComparator);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findAll()
@@ -960,9 +1027,10 @@ public class MBMessageUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findAll(
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findAll(start, end, obc);
+		return getPersistence().findAll(start, end, orderByComparator);
 	}
 
 	public static void removeByUuid(java.lang.String uuid)

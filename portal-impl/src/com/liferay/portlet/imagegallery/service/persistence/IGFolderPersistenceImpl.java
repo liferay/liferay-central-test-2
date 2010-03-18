@@ -17,7 +17,6 @@ package com.liferay.portlet.imagegallery.service.persistence;
 import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
-import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
@@ -37,8 +36,14 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.BatchSessionUtil;
+import com.liferay.portal.service.persistence.GroupPersistence;
+import com.liferay.portal.service.persistence.ImagePersistence;
+import com.liferay.portal.service.persistence.LayoutPersistence;
+import com.liferay.portal.service.persistence.ResourcePersistence;
+import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
+import com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence;
 import com.liferay.portlet.imagegallery.NoSuchFolderException;
 import com.liferay.portlet.imagegallery.model.IGFolder;
 import com.liferay.portlet.imagegallery.model.impl.IGFolderImpl;
@@ -542,11 +547,12 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	}
 
 	public List<IGFolder> findByUuid(String uuid, int start, int end,
-		OrderByComparator obc) throws SystemException {
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				uuid,
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<IGFolder> list = (List<IGFolder>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_UUID,
@@ -560,9 +566,9 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(3);
@@ -582,8 +588,9 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 					}
 				}
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -623,9 +630,10 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 		return list;
 	}
 
-	public IGFolder findByUuid_First(String uuid, OrderByComparator obc)
+	public IGFolder findByUuid_First(String uuid,
+		OrderByComparator orderByComparator)
 		throws NoSuchFolderException, SystemException {
-		List<IGFolder> list = findByUuid(uuid, 0, 1, obc);
+		List<IGFolder> list = findByUuid(uuid, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -644,11 +652,13 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 		}
 	}
 
-	public IGFolder findByUuid_Last(String uuid, OrderByComparator obc)
+	public IGFolder findByUuid_Last(String uuid,
+		OrderByComparator orderByComparator)
 		throws NoSuchFolderException, SystemException {
 		int count = countByUuid(uuid);
 
-		List<IGFolder> list = findByUuid(uuid, count - 1, count, obc);
+		List<IGFolder> list = findByUuid(uuid, count - 1, count,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -668,7 +678,8 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	}
 
 	public IGFolder[] findByUuid_PrevAndNext(long folderId, String uuid,
-		OrderByComparator obc) throws NoSuchFolderException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchFolderException, SystemException {
 		IGFolder igFolder = findByPrimaryKey(folderId);
 
 		int count = countByUuid(uuid);
@@ -680,9 +691,9 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(3);
@@ -702,8 +713,9 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 				}
 			}
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -720,7 +732,8 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 				qPos.add(uuid);
 			}
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, igFolder);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, igFolder);
 
 			IGFolder[] array = new IGFolderImpl[3];
 
@@ -922,11 +935,12 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	}
 
 	public List<IGFolder> findByGroupId(long groupId, int start, int end,
-		OrderByComparator obc) throws SystemException {
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<IGFolder> list = (List<IGFolder>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
@@ -940,9 +954,9 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(3);
@@ -952,8 +966,9 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 
 				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -991,9 +1006,10 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 		return list;
 	}
 
-	public IGFolder findByGroupId_First(long groupId, OrderByComparator obc)
+	public IGFolder findByGroupId_First(long groupId,
+		OrderByComparator orderByComparator)
 		throws NoSuchFolderException, SystemException {
-		List<IGFolder> list = findByGroupId(groupId, 0, 1, obc);
+		List<IGFolder> list = findByGroupId(groupId, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -1012,11 +1028,13 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 		}
 	}
 
-	public IGFolder findByGroupId_Last(long groupId, OrderByComparator obc)
+	public IGFolder findByGroupId_Last(long groupId,
+		OrderByComparator orderByComparator)
 		throws NoSuchFolderException, SystemException {
 		int count = countByGroupId(groupId);
 
-		List<IGFolder> list = findByGroupId(groupId, count - 1, count, obc);
+		List<IGFolder> list = findByGroupId(groupId, count - 1, count,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -1036,7 +1054,8 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	}
 
 	public IGFolder[] findByGroupId_PrevAndNext(long folderId, long groupId,
-		OrderByComparator obc) throws NoSuchFolderException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchFolderException, SystemException {
 		IGFolder igFolder = findByPrimaryKey(folderId);
 
 		int count = countByGroupId(groupId);
@@ -1048,9 +1067,9 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(3);
@@ -1060,8 +1079,9 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -1076,7 +1096,8 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 
 			qPos.add(groupId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, igFolder);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, igFolder);
 
 			IGFolder[] array = new IGFolderImpl[3];
 
@@ -1151,11 +1172,12 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	}
 
 	public List<IGFolder> findByCompanyId(long companyId, int start, int end,
-		OrderByComparator obc) throws SystemException {
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(companyId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<IGFolder> list = (List<IGFolder>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
@@ -1169,9 +1191,9 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(3);
@@ -1181,8 +1203,9 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 
 				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -1220,9 +1243,10 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 		return list;
 	}
 
-	public IGFolder findByCompanyId_First(long companyId, OrderByComparator obc)
+	public IGFolder findByCompanyId_First(long companyId,
+		OrderByComparator orderByComparator)
 		throws NoSuchFolderException, SystemException {
-		List<IGFolder> list = findByCompanyId(companyId, 0, 1, obc);
+		List<IGFolder> list = findByCompanyId(companyId, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -1241,11 +1265,13 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 		}
 	}
 
-	public IGFolder findByCompanyId_Last(long companyId, OrderByComparator obc)
+	public IGFolder findByCompanyId_Last(long companyId,
+		OrderByComparator orderByComparator)
 		throws NoSuchFolderException, SystemException {
 		int count = countByCompanyId(companyId);
 
-		List<IGFolder> list = findByCompanyId(companyId, count - 1, count, obc);
+		List<IGFolder> list = findByCompanyId(companyId, count - 1, count,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -1265,7 +1291,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	}
 
 	public IGFolder[] findByCompanyId_PrevAndNext(long folderId,
-		long companyId, OrderByComparator obc)
+		long companyId, OrderByComparator orderByComparator)
 		throws NoSuchFolderException, SystemException {
 		IGFolder igFolder = findByPrimaryKey(folderId);
 
@@ -1278,9 +1304,9 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(3);
@@ -1290,8 +1316,9 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 
 			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -1306,7 +1333,8 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 
 			qPos.add(companyId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, igFolder);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, igFolder);
 
 			IGFolder[] array = new IGFolderImpl[3];
 
@@ -1387,11 +1415,13 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	}
 
 	public List<IGFolder> findByG_P(long groupId, long parentFolderId,
-		int start, int end, OrderByComparator obc) throws SystemException {
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Long(parentFolderId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<IGFolder> list = (List<IGFolder>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_G_P,
@@ -1405,9 +1435,9 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(4 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(4);
@@ -1419,8 +1449,9 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 
 				query.append(_FINDER_COLUMN_G_P_PARENTFOLDERID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -1461,8 +1492,10 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	}
 
 	public IGFolder findByG_P_First(long groupId, long parentFolderId,
-		OrderByComparator obc) throws NoSuchFolderException, SystemException {
-		List<IGFolder> list = findByG_P(groupId, parentFolderId, 0, 1, obc);
+		OrderByComparator orderByComparator)
+		throws NoSuchFolderException, SystemException {
+		List<IGFolder> list = findByG_P(groupId, parentFolderId, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -1485,11 +1518,12 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	}
 
 	public IGFolder findByG_P_Last(long groupId, long parentFolderId,
-		OrderByComparator obc) throws NoSuchFolderException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchFolderException, SystemException {
 		int count = countByG_P(groupId, parentFolderId);
 
 		List<IGFolder> list = findByG_P(groupId, parentFolderId, count - 1,
-				count, obc);
+				count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -1512,7 +1546,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	}
 
 	public IGFolder[] findByG_P_PrevAndNext(long folderId, long groupId,
-		long parentFolderId, OrderByComparator obc)
+		long parentFolderId, OrderByComparator orderByComparator)
 		throws NoSuchFolderException, SystemException {
 		IGFolder igFolder = findByPrimaryKey(folderId);
 
@@ -1525,9 +1559,9 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(4 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(4);
@@ -1539,8 +1573,9 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 
 			query.append(_FINDER_COLUMN_G_P_PARENTFOLDERID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -1557,7 +1592,8 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 
 			qPos.add(parentFolderId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, igFolder);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, igFolder);
 
 			IGFolder[] array = new IGFolderImpl[3];
 
@@ -1715,46 +1751,6 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 		}
 	}
 
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.setLimit(start, end);
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
 	public List<IGFolder> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -1763,10 +1759,11 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 		return findAll(start, end, null);
 	}
 
-	public List<IGFolder> findAll(int start, int end, OrderByComparator obc)
-		throws SystemException {
+	public List<IGFolder> findAll(int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<IGFolder> list = (List<IGFolder>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
@@ -1781,13 +1778,14 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 				StringBundler query = null;
 				String sql = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(2 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 
 					query.append(_SQL_SELECT_IGFOLDER);
 
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 
 					sql = query.toString();
 				}
@@ -1798,7 +1796,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 
 				Query q = session.createQuery(sql);
 
-				if (obc == null) {
+				if (orderByComparator == null) {
 					list = (List<IGFolder>)QueryUtil.list(q, getDialect(),
 							start, end, false);
 
@@ -2266,22 +2264,22 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 		}
 	}
 
-	@BeanReference(name = "com.liferay.portlet.imagegallery.service.persistence.IGFolderPersistence")
-	protected com.liferay.portlet.imagegallery.service.persistence.IGFolderPersistence igFolderPersistence;
-	@BeanReference(name = "com.liferay.portlet.imagegallery.service.persistence.IGImagePersistence")
-	protected com.liferay.portlet.imagegallery.service.persistence.IGImagePersistence igImagePersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.GroupPersistence")
-	protected com.liferay.portal.service.persistence.GroupPersistence groupPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.ImagePersistence")
-	protected com.liferay.portal.service.persistence.ImagePersistence imagePersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.LayoutPersistence")
-	protected com.liferay.portal.service.persistence.LayoutPersistence layoutPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.ResourcePersistence")
-	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
-	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
-	@BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence")
-	protected com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence expandoValuePersistence;
+	@BeanReference(type = IGFolderPersistence.class)
+	protected IGFolderPersistence igFolderPersistence;
+	@BeanReference(type = IGImagePersistence.class)
+	protected IGImagePersistence igImagePersistence;
+	@BeanReference(type = GroupPersistence.class)
+	protected GroupPersistence groupPersistence;
+	@BeanReference(type = ImagePersistence.class)
+	protected ImagePersistence imagePersistence;
+	@BeanReference(type = LayoutPersistence.class)
+	protected LayoutPersistence layoutPersistence;
+	@BeanReference(type = ResourcePersistence.class)
+	protected ResourcePersistence resourcePersistence;
+	@BeanReference(type = UserPersistence.class)
+	protected UserPersistence userPersistence;
+	@BeanReference(type = ExpandoValuePersistence.class)
+	protected ExpandoValuePersistence expandoValuePersistence;
 	private static final String _SQL_SELECT_IGFOLDER = "SELECT igFolder FROM IGFolder igFolder";
 	private static final String _SQL_SELECT_IGFOLDER_WHERE = "SELECT igFolder FROM IGFolder igFolder WHERE ";
 	private static final String _SQL_COUNT_IGFOLDER = "SELECT COUNT(igFolder) FROM IGFolder igFolder";

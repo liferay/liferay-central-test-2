@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceService;
 import com.liferay.portal.service.UserLocalService;
@@ -84,6 +85,17 @@ public abstract class AnnouncementsFlagLocalServiceBaseImpl
 		int end) throws SystemException {
 		return announcementsFlagPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
+	}
+
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end, OrderByComparator orderByComparator) throws SystemException {
+		return announcementsFlagPersistence.findWithDynamicQuery(dynamicQuery,
+			start, end, orderByComparator);
+	}
+
+	public int dynamicQueryCount(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return announcementsFlagPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
 	public AnnouncementsFlag getAnnouncementsFlag(long flagId)
@@ -297,44 +309,44 @@ public abstract class AnnouncementsFlagLocalServiceBaseImpl
 		}
 	}
 
-	@BeanReference(name = "com.liferay.portlet.announcements.service.AnnouncementsDeliveryLocalService")
+	@BeanReference(type = AnnouncementsDeliveryLocalService.class)
 	protected AnnouncementsDeliveryLocalService announcementsDeliveryLocalService;
-	@BeanReference(name = "com.liferay.portlet.announcements.service.AnnouncementsDeliveryService")
+	@BeanReference(type = AnnouncementsDeliveryService.class)
 	protected AnnouncementsDeliveryService announcementsDeliveryService;
-	@BeanReference(name = "com.liferay.portlet.announcements.service.persistence.AnnouncementsDeliveryPersistence")
+	@BeanReference(type = AnnouncementsDeliveryPersistence.class)
 	protected AnnouncementsDeliveryPersistence announcementsDeliveryPersistence;
-	@BeanReference(name = "com.liferay.portlet.announcements.service.AnnouncementsEntryLocalService")
+	@BeanReference(type = AnnouncementsEntryLocalService.class)
 	protected AnnouncementsEntryLocalService announcementsEntryLocalService;
-	@BeanReference(name = "com.liferay.portlet.announcements.service.AnnouncementsEntryService")
+	@BeanReference(type = AnnouncementsEntryService.class)
 	protected AnnouncementsEntryService announcementsEntryService;
-	@BeanReference(name = "com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryPersistence")
+	@BeanReference(type = AnnouncementsEntryPersistence.class)
 	protected AnnouncementsEntryPersistence announcementsEntryPersistence;
-	@BeanReference(name = "com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryFinder")
+	@BeanReference(type = AnnouncementsEntryFinder.class)
 	protected AnnouncementsEntryFinder announcementsEntryFinder;
-	@BeanReference(name = "com.liferay.portlet.announcements.service.AnnouncementsFlagLocalService")
+	@BeanReference(type = AnnouncementsFlagLocalService.class)
 	protected AnnouncementsFlagLocalService announcementsFlagLocalService;
-	@BeanReference(name = "com.liferay.portlet.announcements.service.AnnouncementsFlagService")
+	@BeanReference(type = AnnouncementsFlagService.class)
 	protected AnnouncementsFlagService announcementsFlagService;
-	@BeanReference(name = "com.liferay.portlet.announcements.service.persistence.AnnouncementsFlagPersistence")
+	@BeanReference(type = AnnouncementsFlagPersistence.class)
 	protected AnnouncementsFlagPersistence announcementsFlagPersistence;
-	@BeanReference(name = "com.liferay.counter.service.CounterLocalService")
+	@BeanReference(type = CounterLocalService.class)
 	protected CounterLocalService counterLocalService;
-	@BeanReference(name = "com.liferay.counter.service.CounterService")
+	@BeanReference(type = CounterService.class)
 	protected CounterService counterService;
-	@BeanReference(name = "com.liferay.portal.service.ResourceLocalService")
+	@BeanReference(type = ResourceLocalService.class)
 	protected ResourceLocalService resourceLocalService;
-	@BeanReference(name = "com.liferay.portal.service.ResourceService")
+	@BeanReference(type = ResourceService.class)
 	protected ResourceService resourceService;
-	@BeanReference(name = "com.liferay.portal.service.persistence.ResourcePersistence")
+	@BeanReference(type = ResourcePersistence.class)
 	protected ResourcePersistence resourcePersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.ResourceFinder")
+	@BeanReference(type = ResourceFinder.class)
 	protected ResourceFinder resourceFinder;
-	@BeanReference(name = "com.liferay.portal.service.UserLocalService")
+	@BeanReference(type = UserLocalService.class)
 	protected UserLocalService userLocalService;
-	@BeanReference(name = "com.liferay.portal.service.UserService")
+	@BeanReference(type = UserService.class)
 	protected UserService userService;
-	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
+	@BeanReference(type = UserPersistence.class)
 	protected UserPersistence userPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.UserFinder")
+	@BeanReference(type = UserFinder.class)
 	protected UserFinder userFinder;
 }

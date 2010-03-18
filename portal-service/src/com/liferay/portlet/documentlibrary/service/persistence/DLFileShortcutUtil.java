@@ -131,33 +131,35 @@ public class DLFileShortcutUtil {
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileShortcut> findByUuid(
 		java.lang.String uuid, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByUuid(uuid, start, end, obc);
+		return getPersistence().findByUuid(uuid, start, end, orderByComparator);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut findByUuid_First(
 		java.lang.String uuid,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileShortcutException {
-		return getPersistence().findByUuid_First(uuid, obc);
+		return getPersistence().findByUuid_First(uuid, orderByComparator);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut findByUuid_Last(
 		java.lang.String uuid,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileShortcutException {
-		return getPersistence().findByUuid_Last(uuid, obc);
+		return getPersistence().findByUuid_Last(uuid, orderByComparator);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut[] findByUuid_PrevAndNext(
 		long fileShortcutId, java.lang.String uuid,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileShortcutException {
-		return getPersistence().findByUuid_PrevAndNext(fileShortcutId, uuid, obc);
+		return getPersistence()
+				   .findByUuid_PrevAndNext(fileShortcutId, uuid,
+			orderByComparator);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut findByUUID_G(
@@ -193,34 +195,38 @@ public class DLFileShortcutUtil {
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileShortcut> findByG_F(
 		long groupId, long folderId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByG_F(groupId, folderId, start, end, obc);
+		return getPersistence()
+				   .findByG_F(groupId, folderId, start, end, orderByComparator);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut findByG_F_First(
 		long groupId, long folderId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileShortcutException {
-		return getPersistence().findByG_F_First(groupId, folderId, obc);
+		return getPersistence()
+				   .findByG_F_First(groupId, folderId, orderByComparator);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut findByG_F_Last(
 		long groupId, long folderId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileShortcutException {
-		return getPersistence().findByG_F_Last(groupId, folderId, obc);
+		return getPersistence()
+				   .findByG_F_Last(groupId, folderId, orderByComparator);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut[] findByG_F_PrevAndNext(
 		long fileShortcutId, long groupId, long folderId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileShortcutException {
 		return getPersistence()
-				   .findByG_F_PrevAndNext(fileShortcutId, groupId, folderId, obc);
+				   .findByG_F_PrevAndNext(fileShortcutId, groupId, folderId,
+			orderByComparator);
 	}
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileShortcut> findByG_F_S(
@@ -238,36 +244,41 @@ public class DLFileShortcutUtil {
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileShortcut> findByG_F_S(
 		long groupId, long folderId, int status, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .findByG_F_S(groupId, folderId, status, start, end, obc);
+				   .findByG_F_S(groupId, folderId, status, start, end,
+			orderByComparator);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut findByG_F_S_First(
 		long groupId, long folderId, int status,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileShortcutException {
-		return getPersistence().findByG_F_S_First(groupId, folderId, status, obc);
+		return getPersistence()
+				   .findByG_F_S_First(groupId, folderId, status,
+			orderByComparator);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut findByG_F_S_Last(
 		long groupId, long folderId, int status,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileShortcutException {
-		return getPersistence().findByG_F_S_Last(groupId, folderId, status, obc);
+		return getPersistence()
+				   .findByG_F_S_Last(groupId, folderId, status,
+			orderByComparator);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut[] findByG_F_S_PrevAndNext(
 		long fileShortcutId, long groupId, long folderId, int status,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileShortcutException {
 		return getPersistence()
 				   .findByG_F_S_PrevAndNext(fileShortcutId, groupId, folderId,
-			status, obc);
+			status, orderByComparator);
 	}
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileShortcut> findByG_TF_TN(
@@ -285,39 +296,43 @@ public class DLFileShortcutUtil {
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileShortcut> findByG_TF_TN(
 		long groupId, long toFolderId, java.lang.String toName, int start,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .findByG_TF_TN(groupId, toFolderId, toName, start, end, obc);
+				   .findByG_TF_TN(groupId, toFolderId, toName, start, end,
+			orderByComparator);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut findByG_TF_TN_First(
 		long groupId, long toFolderId, java.lang.String toName,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileShortcutException {
 		return getPersistence()
-				   .findByG_TF_TN_First(groupId, toFolderId, toName, obc);
+				   .findByG_TF_TN_First(groupId, toFolderId, toName,
+			orderByComparator);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut findByG_TF_TN_Last(
 		long groupId, long toFolderId, java.lang.String toName,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileShortcutException {
 		return getPersistence()
-				   .findByG_TF_TN_Last(groupId, toFolderId, toName, obc);
+				   .findByG_TF_TN_Last(groupId, toFolderId, toName,
+			orderByComparator);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut[] findByG_TF_TN_PrevAndNext(
 		long fileShortcutId, long groupId, long toFolderId,
 		java.lang.String toName,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileShortcutException {
 		return getPersistence()
 				   .findByG_TF_TN_PrevAndNext(fileShortcutId, groupId,
-			toFolderId, toName, obc);
+			toFolderId, toName, orderByComparator);
 	}
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileShortcut> findByG_TF_TN_S(
@@ -338,42 +353,43 @@ public class DLFileShortcutUtil {
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileShortcut> findByG_TF_TN_S(
 		long groupId, long toFolderId, java.lang.String toName, int status,
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
 				   .findByG_TF_TN_S(groupId, toFolderId, toName, status, start,
-			end, obc);
+			end, orderByComparator);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut findByG_TF_TN_S_First(
 		long groupId, long toFolderId, java.lang.String toName, int status,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileShortcutException {
 		return getPersistence()
 				   .findByG_TF_TN_S_First(groupId, toFolderId, toName, status,
-			obc);
+			orderByComparator);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut findByG_TF_TN_S_Last(
 		long groupId, long toFolderId, java.lang.String toName, int status,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileShortcutException {
 		return getPersistence()
 				   .findByG_TF_TN_S_Last(groupId, toFolderId, toName, status,
-			obc);
+			orderByComparator);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut[] findByG_TF_TN_S_PrevAndNext(
 		long fileShortcutId, long groupId, long toFolderId,
 		java.lang.String toName, int status,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileShortcutException {
 		return getPersistence()
 				   .findByG_TF_TN_S_PrevAndNext(fileShortcutId, groupId,
-			toFolderId, toName, status, obc);
+			toFolderId, toName, status, orderByComparator);
 	}
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileShortcut> findAll()
@@ -388,9 +404,10 @@ public class DLFileShortcutUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileShortcut> findAll(
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findAll(start, end, obc);
+		return getPersistence().findAll(start, end, orderByComparator);
 	}
 
 	public static void removeByUuid(java.lang.String uuid)

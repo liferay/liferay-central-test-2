@@ -17,7 +17,6 @@ package com.liferay.portlet.tasks.service.persistence;
 import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
-import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
@@ -35,8 +34,11 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.BatchSessionUtil;
+import com.liferay.portal.service.persistence.ResourcePersistence;
+import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
+import com.liferay.portlet.social.service.persistence.SocialActivityPersistence;
 import com.liferay.portlet.tasks.NoSuchReviewException;
 import com.liferay.portlet.tasks.model.TasksReview;
 import com.liferay.portlet.tasks.model.impl.TasksReviewImpl;
@@ -502,11 +504,12 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 	}
 
 	public List<TasksReview> findByUserId(long userId, int start, int end,
-		OrderByComparator obc) throws SystemException {
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(userId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<TasksReview> list = (List<TasksReview>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_USERID,
@@ -520,9 +523,9 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(3);
@@ -532,8 +535,9 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 
 				query.append(_FINDER_COLUMN_USERID_USERID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -571,9 +575,10 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 		return list;
 	}
 
-	public TasksReview findByUserId_First(long userId, OrderByComparator obc)
+	public TasksReview findByUserId_First(long userId,
+		OrderByComparator orderByComparator)
 		throws NoSuchReviewException, SystemException {
-		List<TasksReview> list = findByUserId(userId, 0, 1, obc);
+		List<TasksReview> list = findByUserId(userId, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -592,11 +597,13 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 		}
 	}
 
-	public TasksReview findByUserId_Last(long userId, OrderByComparator obc)
+	public TasksReview findByUserId_Last(long userId,
+		OrderByComparator orderByComparator)
 		throws NoSuchReviewException, SystemException {
 		int count = countByUserId(userId);
 
-		List<TasksReview> list = findByUserId(userId, count - 1, count, obc);
+		List<TasksReview> list = findByUserId(userId, count - 1, count,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -616,7 +623,8 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 	}
 
 	public TasksReview[] findByUserId_PrevAndNext(long reviewId, long userId,
-		OrderByComparator obc) throws NoSuchReviewException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchReviewException, SystemException {
 		TasksReview tasksReview = findByPrimaryKey(reviewId);
 
 		int count = countByUserId(userId);
@@ -628,9 +636,9 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(3);
@@ -640,8 +648,9 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 
 			query.append(_FINDER_COLUMN_USERID_USERID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -656,8 +665,8 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 
 			qPos.add(userId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					tasksReview);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, tasksReview);
 
 			TasksReview[] array = new TasksReviewImpl[3];
 
@@ -732,11 +741,12 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 	}
 
 	public List<TasksReview> findByProposalId(long proposalId, int start,
-		int end, OrderByComparator obc) throws SystemException {
+		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(proposalId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<TasksReview> list = (List<TasksReview>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_PROPOSALID,
@@ -750,9 +760,9 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(3);
@@ -762,8 +772,9 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 
 				query.append(_FINDER_COLUMN_PROPOSALID_PROPOSALID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -802,8 +813,10 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 	}
 
 	public TasksReview findByProposalId_First(long proposalId,
-		OrderByComparator obc) throws NoSuchReviewException, SystemException {
-		List<TasksReview> list = findByProposalId(proposalId, 0, 1, obc);
+		OrderByComparator orderByComparator)
+		throws NoSuchReviewException, SystemException {
+		List<TasksReview> list = findByProposalId(proposalId, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -823,11 +836,12 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 	}
 
 	public TasksReview findByProposalId_Last(long proposalId,
-		OrderByComparator obc) throws NoSuchReviewException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchReviewException, SystemException {
 		int count = countByProposalId(proposalId);
 
 		List<TasksReview> list = findByProposalId(proposalId, count - 1, count,
-				obc);
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -847,7 +861,7 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 	}
 
 	public TasksReview[] findByProposalId_PrevAndNext(long reviewId,
-		long proposalId, OrderByComparator obc)
+		long proposalId, OrderByComparator orderByComparator)
 		throws NoSuchReviewException, SystemException {
 		TasksReview tasksReview = findByPrimaryKey(reviewId);
 
@@ -860,9 +874,9 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(3);
@@ -872,8 +886,9 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 
 			query.append(_FINDER_COLUMN_PROPOSALID_PROPOSALID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -888,8 +903,8 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 
 			qPos.add(proposalId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					tasksReview);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, tasksReview);
 
 			TasksReview[] array = new TasksReviewImpl[3];
 
@@ -1087,11 +1102,12 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 	}
 
 	public List<TasksReview> findByP_S(long proposalId, int stage, int start,
-		int end, OrderByComparator obc) throws SystemException {
+		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(proposalId), new Integer(stage),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<TasksReview> list = (List<TasksReview>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_P_S,
@@ -1105,9 +1121,9 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(4 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(4);
@@ -1119,8 +1135,9 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 
 				query.append(_FINDER_COLUMN_P_S_STAGE_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -1161,8 +1178,10 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 	}
 
 	public TasksReview findByP_S_First(long proposalId, int stage,
-		OrderByComparator obc) throws NoSuchReviewException, SystemException {
-		List<TasksReview> list = findByP_S(proposalId, stage, 0, 1, obc);
+		OrderByComparator orderByComparator)
+		throws NoSuchReviewException, SystemException {
+		List<TasksReview> list = findByP_S(proposalId, stage, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -1185,11 +1204,12 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 	}
 
 	public TasksReview findByP_S_Last(long proposalId, int stage,
-		OrderByComparator obc) throws NoSuchReviewException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchReviewException, SystemException {
 		int count = countByP_S(proposalId, stage);
 
 		List<TasksReview> list = findByP_S(proposalId, stage, count - 1, count,
-				obc);
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -1212,7 +1232,7 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 	}
 
 	public TasksReview[] findByP_S_PrevAndNext(long reviewId, long proposalId,
-		int stage, OrderByComparator obc)
+		int stage, OrderByComparator orderByComparator)
 		throws NoSuchReviewException, SystemException {
 		TasksReview tasksReview = findByPrimaryKey(reviewId);
 
@@ -1225,9 +1245,9 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(4 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(4);
@@ -1239,8 +1259,9 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 
 			query.append(_FINDER_COLUMN_P_S_STAGE_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -1257,8 +1278,8 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 
 			qPos.add(stage);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					tasksReview);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, tasksReview);
 
 			TasksReview[] array = new TasksReviewImpl[3];
 
@@ -1344,13 +1365,14 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 	}
 
 	public List<TasksReview> findByP_S_C(long proposalId, int stage,
-		boolean completed, int start, int end, OrderByComparator obc)
-		throws SystemException {
+		boolean completed, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(proposalId), new Integer(stage),
 				Boolean.valueOf(completed),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<TasksReview> list = (List<TasksReview>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_P_S_C,
@@ -1364,9 +1386,9 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(5 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(5);
@@ -1380,8 +1402,9 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 
 				query.append(_FINDER_COLUMN_P_S_C_COMPLETED_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -1424,10 +1447,10 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 	}
 
 	public TasksReview findByP_S_C_First(long proposalId, int stage,
-		boolean completed, OrderByComparator obc)
+		boolean completed, OrderByComparator orderByComparator)
 		throws NoSuchReviewException, SystemException {
 		List<TasksReview> list = findByP_S_C(proposalId, stage, completed, 0,
-				1, obc);
+				1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(8);
@@ -1453,12 +1476,12 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 	}
 
 	public TasksReview findByP_S_C_Last(long proposalId, int stage,
-		boolean completed, OrderByComparator obc)
+		boolean completed, OrderByComparator orderByComparator)
 		throws NoSuchReviewException, SystemException {
 		int count = countByP_S_C(proposalId, stage, completed);
 
 		List<TasksReview> list = findByP_S_C(proposalId, stage, completed,
-				count - 1, count, obc);
+				count - 1, count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(8);
@@ -1484,7 +1507,8 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 	}
 
 	public TasksReview[] findByP_S_C_PrevAndNext(long reviewId,
-		long proposalId, int stage, boolean completed, OrderByComparator obc)
+		long proposalId, int stage, boolean completed,
+		OrderByComparator orderByComparator)
 		throws NoSuchReviewException, SystemException {
 		TasksReview tasksReview = findByPrimaryKey(reviewId);
 
@@ -1497,9 +1521,9 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(5 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(5);
@@ -1513,8 +1537,9 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 
 			query.append(_FINDER_COLUMN_P_S_C_COMPLETED_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -1533,8 +1558,8 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 
 			qPos.add(completed);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					tasksReview);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, tasksReview);
 
 			TasksReview[] array = new TasksReviewImpl[3];
 
@@ -1627,12 +1652,13 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 
 	public List<TasksReview> findByP_S_C_R(long proposalId, int stage,
 		boolean completed, boolean rejected, int start, int end,
-		OrderByComparator obc) throws SystemException {
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(proposalId), new Integer(stage),
 				Boolean.valueOf(completed), Boolean.valueOf(rejected),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<TasksReview> list = (List<TasksReview>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_P_S_C_R,
@@ -1646,9 +1672,9 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(6 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(6);
@@ -1664,8 +1690,9 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 
 				query.append(_FINDER_COLUMN_P_S_C_R_REJECTED_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -1710,10 +1737,10 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 	}
 
 	public TasksReview findByP_S_C_R_First(long proposalId, int stage,
-		boolean completed, boolean rejected, OrderByComparator obc)
+		boolean completed, boolean rejected, OrderByComparator orderByComparator)
 		throws NoSuchReviewException, SystemException {
 		List<TasksReview> list = findByP_S_C_R(proposalId, stage, completed,
-				rejected, 0, 1, obc);
+				rejected, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(10);
@@ -1742,12 +1769,12 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 	}
 
 	public TasksReview findByP_S_C_R_Last(long proposalId, int stage,
-		boolean completed, boolean rejected, OrderByComparator obc)
+		boolean completed, boolean rejected, OrderByComparator orderByComparator)
 		throws NoSuchReviewException, SystemException {
 		int count = countByP_S_C_R(proposalId, stage, completed, rejected);
 
 		List<TasksReview> list = findByP_S_C_R(proposalId, stage, completed,
-				rejected, count - 1, count, obc);
+				rejected, count - 1, count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(10);
@@ -1777,7 +1804,8 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 
 	public TasksReview[] findByP_S_C_R_PrevAndNext(long reviewId,
 		long proposalId, int stage, boolean completed, boolean rejected,
-		OrderByComparator obc) throws NoSuchReviewException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchReviewException, SystemException {
 		TasksReview tasksReview = findByPrimaryKey(reviewId);
 
 		int count = countByP_S_C_R(proposalId, stage, completed, rejected);
@@ -1789,9 +1817,9 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(6 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(6);
@@ -1807,8 +1835,9 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 
 			query.append(_FINDER_COLUMN_P_S_C_R_REJECTED_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -1829,8 +1858,8 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 
 			qPos.add(rejected);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					tasksReview);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, tasksReview);
 
 			TasksReview[] array = new TasksReviewImpl[3];
 
@@ -1839,46 +1868,6 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 			array[2] = (TasksReview)objArray[2];
 
 			return array;
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.setLimit(start, end);
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
 		}
 		catch (Exception e) {
 			throw processException(e);
@@ -1897,10 +1886,11 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 		return findAll(start, end, null);
 	}
 
-	public List<TasksReview> findAll(int start, int end, OrderByComparator obc)
-		throws SystemException {
+	public List<TasksReview> findAll(int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<TasksReview> list = (List<TasksReview>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
@@ -1915,13 +1905,14 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 				StringBundler query = null;
 				String sql = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(2 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 
 					query.append(_SQL_SELECT_TASKSREVIEW);
 
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 
 					sql = query.toString();
 				}
@@ -1932,7 +1923,7 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 
 				Query q = session.createQuery(sql);
 
-				if (obc == null) {
+				if (orderByComparator == null) {
 					list = (List<TasksReview>)QueryUtil.list(q, getDialect(),
 							start, end, false);
 
@@ -2382,16 +2373,16 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 		}
 	}
 
-	@BeanReference(name = "com.liferay.portlet.tasks.service.persistence.TasksProposalPersistence")
-	protected com.liferay.portlet.tasks.service.persistence.TasksProposalPersistence tasksProposalPersistence;
-	@BeanReference(name = "com.liferay.portlet.tasks.service.persistence.TasksReviewPersistence")
-	protected com.liferay.portlet.tasks.service.persistence.TasksReviewPersistence tasksReviewPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.ResourcePersistence")
-	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
-	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
-	@BeanReference(name = "com.liferay.portlet.social.service.persistence.SocialActivityPersistence")
-	protected com.liferay.portlet.social.service.persistence.SocialActivityPersistence socialActivityPersistence;
+	@BeanReference(type = TasksProposalPersistence.class)
+	protected TasksProposalPersistence tasksProposalPersistence;
+	@BeanReference(type = TasksReviewPersistence.class)
+	protected TasksReviewPersistence tasksReviewPersistence;
+	@BeanReference(type = ResourcePersistence.class)
+	protected ResourcePersistence resourcePersistence;
+	@BeanReference(type = UserPersistence.class)
+	protected UserPersistence userPersistence;
+	@BeanReference(type = SocialActivityPersistence.class)
+	protected SocialActivityPersistence socialActivityPersistence;
 	private static final String _SQL_SELECT_TASKSREVIEW = "SELECT tasksReview FROM TasksReview tasksReview";
 	private static final String _SQL_SELECT_TASKSREVIEW_WHERE = "SELECT tasksReview FROM TasksReview tasksReview WHERE ";
 	private static final String _SQL_COUNT_TASKSREVIEW = "SELECT COUNT(tasksReview) FROM TasksReview tasksReview";

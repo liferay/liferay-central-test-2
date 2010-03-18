@@ -17,7 +17,6 @@ package com.liferay.portlet.social.service.persistence;
 import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
-import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
@@ -37,6 +36,8 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.BatchSessionUtil;
+import com.liferay.portal.service.persistence.ResourcePersistence;
+import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 import com.liferay.portlet.social.NoSuchRequestException;
@@ -652,11 +653,12 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 	}
 
 	public List<SocialRequest> findByUuid(String uuid, int start, int end,
-		OrderByComparator obc) throws SystemException {
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				uuid,
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<SocialRequest> list = (List<SocialRequest>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_UUID,
@@ -670,9 +672,9 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(3);
@@ -692,8 +694,9 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 					}
 				}
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -733,9 +736,10 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		return list;
 	}
 
-	public SocialRequest findByUuid_First(String uuid, OrderByComparator obc)
+	public SocialRequest findByUuid_First(String uuid,
+		OrderByComparator orderByComparator)
 		throws NoSuchRequestException, SystemException {
-		List<SocialRequest> list = findByUuid(uuid, 0, 1, obc);
+		List<SocialRequest> list = findByUuid(uuid, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -754,11 +758,13 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		}
 	}
 
-	public SocialRequest findByUuid_Last(String uuid, OrderByComparator obc)
+	public SocialRequest findByUuid_Last(String uuid,
+		OrderByComparator orderByComparator)
 		throws NoSuchRequestException, SystemException {
 		int count = countByUuid(uuid);
 
-		List<SocialRequest> list = findByUuid(uuid, count - 1, count, obc);
+		List<SocialRequest> list = findByUuid(uuid, count - 1, count,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -778,7 +784,8 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 	}
 
 	public SocialRequest[] findByUuid_PrevAndNext(long requestId, String uuid,
-		OrderByComparator obc) throws NoSuchRequestException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchRequestException, SystemException {
 		SocialRequest socialRequest = findByPrimaryKey(requestId);
 
 		int count = countByUuid(uuid);
@@ -790,9 +797,9 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(3);
@@ -812,8 +819,9 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 				}
 			}
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -830,8 +838,8 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 				qPos.add(uuid);
 			}
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					socialRequest);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, socialRequest);
 
 			SocialRequest[] array = new SocialRequestImpl[3];
 
@@ -1034,11 +1042,12 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 	}
 
 	public List<SocialRequest> findByCompanyId(long companyId, int start,
-		int end, OrderByComparator obc) throws SystemException {
+		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(companyId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<SocialRequest> list = (List<SocialRequest>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
@@ -1052,9 +1061,9 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(3);
@@ -1064,8 +1073,9 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -1104,8 +1114,10 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 	}
 
 	public SocialRequest findByCompanyId_First(long companyId,
-		OrderByComparator obc) throws NoSuchRequestException, SystemException {
-		List<SocialRequest> list = findByCompanyId(companyId, 0, 1, obc);
+		OrderByComparator orderByComparator)
+		throws NoSuchRequestException, SystemException {
+		List<SocialRequest> list = findByCompanyId(companyId, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -1125,11 +1137,12 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 	}
 
 	public SocialRequest findByCompanyId_Last(long companyId,
-		OrderByComparator obc) throws NoSuchRequestException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchRequestException, SystemException {
 		int count = countByCompanyId(companyId);
 
 		List<SocialRequest> list = findByCompanyId(companyId, count - 1, count,
-				obc);
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -1149,7 +1162,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 	}
 
 	public SocialRequest[] findByCompanyId_PrevAndNext(long requestId,
-		long companyId, OrderByComparator obc)
+		long companyId, OrderByComparator orderByComparator)
 		throws NoSuchRequestException, SystemException {
 		SocialRequest socialRequest = findByPrimaryKey(requestId);
 
@@ -1162,9 +1175,9 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(3);
@@ -1174,8 +1187,9 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -1190,8 +1204,8 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 			qPos.add(companyId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					socialRequest);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, socialRequest);
 
 			SocialRequest[] array = new SocialRequestImpl[3];
 
@@ -1266,11 +1280,12 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 	}
 
 	public List<SocialRequest> findByUserId(long userId, int start, int end,
-		OrderByComparator obc) throws SystemException {
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(userId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<SocialRequest> list = (List<SocialRequest>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_USERID,
@@ -1284,9 +1299,9 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(3);
@@ -1296,8 +1311,9 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 				query.append(_FINDER_COLUMN_USERID_USERID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -1335,9 +1351,10 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		return list;
 	}
 
-	public SocialRequest findByUserId_First(long userId, OrderByComparator obc)
+	public SocialRequest findByUserId_First(long userId,
+		OrderByComparator orderByComparator)
 		throws NoSuchRequestException, SystemException {
-		List<SocialRequest> list = findByUserId(userId, 0, 1, obc);
+		List<SocialRequest> list = findByUserId(userId, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -1356,11 +1373,13 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		}
 	}
 
-	public SocialRequest findByUserId_Last(long userId, OrderByComparator obc)
+	public SocialRequest findByUserId_Last(long userId,
+		OrderByComparator orderByComparator)
 		throws NoSuchRequestException, SystemException {
 		int count = countByUserId(userId);
 
-		List<SocialRequest> list = findByUserId(userId, count - 1, count, obc);
+		List<SocialRequest> list = findByUserId(userId, count - 1, count,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -1380,7 +1399,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 	}
 
 	public SocialRequest[] findByUserId_PrevAndNext(long requestId,
-		long userId, OrderByComparator obc)
+		long userId, OrderByComparator orderByComparator)
 		throws NoSuchRequestException, SystemException {
 		SocialRequest socialRequest = findByPrimaryKey(requestId);
 
@@ -1393,9 +1412,9 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(3);
@@ -1405,8 +1424,9 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 			query.append(_FINDER_COLUMN_USERID_USERID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -1421,8 +1441,8 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 			qPos.add(userId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					socialRequest);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, socialRequest);
 
 			SocialRequest[] array = new SocialRequestImpl[3];
 
@@ -1497,11 +1517,13 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 	}
 
 	public List<SocialRequest> findByReceiverUserId(long receiverUserId,
-		int start, int end, OrderByComparator obc) throws SystemException {
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(receiverUserId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<SocialRequest> list = (List<SocialRequest>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_RECEIVERUSERID,
@@ -1515,9 +1537,9 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(3);
@@ -1527,8 +1549,9 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 				query.append(_FINDER_COLUMN_RECEIVERUSERID_RECEIVERUSERID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -1567,9 +1590,10 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 	}
 
 	public SocialRequest findByReceiverUserId_First(long receiverUserId,
-		OrderByComparator obc) throws NoSuchRequestException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchRequestException, SystemException {
 		List<SocialRequest> list = findByReceiverUserId(receiverUserId, 0, 1,
-				obc);
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -1589,11 +1613,12 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 	}
 
 	public SocialRequest findByReceiverUserId_Last(long receiverUserId,
-		OrderByComparator obc) throws NoSuchRequestException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchRequestException, SystemException {
 		int count = countByReceiverUserId(receiverUserId);
 
 		List<SocialRequest> list = findByReceiverUserId(receiverUserId,
-				count - 1, count, obc);
+				count - 1, count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -1613,7 +1638,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 	}
 
 	public SocialRequest[] findByReceiverUserId_PrevAndNext(long requestId,
-		long receiverUserId, OrderByComparator obc)
+		long receiverUserId, OrderByComparator orderByComparator)
 		throws NoSuchRequestException, SystemException {
 		SocialRequest socialRequest = findByPrimaryKey(requestId);
 
@@ -1626,9 +1651,9 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(3);
@@ -1638,8 +1663,9 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 			query.append(_FINDER_COLUMN_RECEIVERUSERID_RECEIVERUSERID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -1654,8 +1680,8 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 			qPos.add(receiverUserId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					socialRequest);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, socialRequest);
 
 			SocialRequest[] array = new SocialRequestImpl[3];
 
@@ -1734,11 +1760,12 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 	}
 
 	public List<SocialRequest> findByU_S(long userId, int status, int start,
-		int end, OrderByComparator obc) throws SystemException {
+		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(userId), new Integer(status),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<SocialRequest> list = (List<SocialRequest>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_U_S,
@@ -1752,9 +1779,9 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(4 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(4);
@@ -1766,8 +1793,9 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 				query.append(_FINDER_COLUMN_U_S_STATUS_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -1808,8 +1836,10 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 	}
 
 	public SocialRequest findByU_S_First(long userId, int status,
-		OrderByComparator obc) throws NoSuchRequestException, SystemException {
-		List<SocialRequest> list = findByU_S(userId, status, 0, 1, obc);
+		OrderByComparator orderByComparator)
+		throws NoSuchRequestException, SystemException {
+		List<SocialRequest> list = findByU_S(userId, status, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -1832,11 +1862,12 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 	}
 
 	public SocialRequest findByU_S_Last(long userId, int status,
-		OrderByComparator obc) throws NoSuchRequestException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchRequestException, SystemException {
 		int count = countByU_S(userId, status);
 
 		List<SocialRequest> list = findByU_S(userId, status, count - 1, count,
-				obc);
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -1859,7 +1890,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 	}
 
 	public SocialRequest[] findByU_S_PrevAndNext(long requestId, long userId,
-		int status, OrderByComparator obc)
+		int status, OrderByComparator orderByComparator)
 		throws NoSuchRequestException, SystemException {
 		SocialRequest socialRequest = findByPrimaryKey(requestId);
 
@@ -1872,9 +1903,9 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(4 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(4);
@@ -1886,8 +1917,9 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 			query.append(_FINDER_COLUMN_U_S_STATUS_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -1904,8 +1936,8 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 			qPos.add(status);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					socialRequest);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, socialRequest);
 
 			SocialRequest[] array = new SocialRequestImpl[3];
 
@@ -1986,11 +2018,13 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 	}
 
 	public List<SocialRequest> findByR_S(long receiverUserId, int status,
-		int start, int end, OrderByComparator obc) throws SystemException {
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(receiverUserId), new Integer(status),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<SocialRequest> list = (List<SocialRequest>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_R_S,
@@ -2004,9 +2038,9 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(4 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(4);
@@ -2018,8 +2052,9 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 				query.append(_FINDER_COLUMN_R_S_STATUS_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -2060,8 +2095,10 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 	}
 
 	public SocialRequest findByR_S_First(long receiverUserId, int status,
-		OrderByComparator obc) throws NoSuchRequestException, SystemException {
-		List<SocialRequest> list = findByR_S(receiverUserId, status, 0, 1, obc);
+		OrderByComparator orderByComparator)
+		throws NoSuchRequestException, SystemException {
+		List<SocialRequest> list = findByR_S(receiverUserId, status, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -2084,11 +2121,12 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 	}
 
 	public SocialRequest findByR_S_Last(long receiverUserId, int status,
-		OrderByComparator obc) throws NoSuchRequestException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchRequestException, SystemException {
 		int count = countByR_S(receiverUserId, status);
 
 		List<SocialRequest> list = findByR_S(receiverUserId, status, count - 1,
-				count, obc);
+				count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -2111,7 +2149,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 	}
 
 	public SocialRequest[] findByR_S_PrevAndNext(long requestId,
-		long receiverUserId, int status, OrderByComparator obc)
+		long receiverUserId, int status, OrderByComparator orderByComparator)
 		throws NoSuchRequestException, SystemException {
 		SocialRequest socialRequest = findByPrimaryKey(requestId);
 
@@ -2124,9 +2162,9 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(4 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(4);
@@ -2138,8 +2176,9 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 			query.append(_FINDER_COLUMN_R_S_STATUS_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -2156,8 +2195,8 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 			qPos.add(status);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					socialRequest);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, socialRequest);
 
 			SocialRequest[] array = new SocialRequestImpl[3];
 
@@ -2400,12 +2439,13 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 	public List<SocialRequest> findByU_C_C_T_S(long userId, long classNameId,
 		long classPK, int type, int status, int start, int end,
-		OrderByComparator obc) throws SystemException {
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(userId), new Long(classNameId), new Long(classPK),
 				new Integer(type), new Integer(status),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<SocialRequest> list = (List<SocialRequest>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_U_C_C_T_S,
@@ -2419,9 +2459,9 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(7 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(7);
@@ -2439,8 +2479,9 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 				query.append(_FINDER_COLUMN_U_C_C_T_S_STATUS_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -2487,10 +2528,10 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 	}
 
 	public SocialRequest findByU_C_C_T_S_First(long userId, long classNameId,
-		long classPK, int type, int status, OrderByComparator obc)
+		long classPK, int type, int status, OrderByComparator orderByComparator)
 		throws NoSuchRequestException, SystemException {
 		List<SocialRequest> list = findByU_C_C_T_S(userId, classNameId,
-				classPK, type, status, 0, 1, obc);
+				classPK, type, status, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(12);
@@ -2522,12 +2563,12 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 	}
 
 	public SocialRequest findByU_C_C_T_S_Last(long userId, long classNameId,
-		long classPK, int type, int status, OrderByComparator obc)
+		long classPK, int type, int status, OrderByComparator orderByComparator)
 		throws NoSuchRequestException, SystemException {
 		int count = countByU_C_C_T_S(userId, classNameId, classPK, type, status);
 
 		List<SocialRequest> list = findByU_C_C_T_S(userId, classNameId,
-				classPK, type, status, count - 1, count, obc);
+				classPK, type, status, count - 1, count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(12);
@@ -2560,7 +2601,8 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 	public SocialRequest[] findByU_C_C_T_S_PrevAndNext(long requestId,
 		long userId, long classNameId, long classPK, int type, int status,
-		OrderByComparator obc) throws NoSuchRequestException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchRequestException, SystemException {
 		SocialRequest socialRequest = findByPrimaryKey(requestId);
 
 		int count = countByU_C_C_T_S(userId, classNameId, classPK, type, status);
@@ -2572,9 +2614,9 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(7 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(7);
@@ -2592,8 +2634,9 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 			query.append(_FINDER_COLUMN_U_C_C_T_S_STATUS_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -2616,8 +2659,8 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 			qPos.add(status);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					socialRequest);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, socialRequest);
 
 			SocialRequest[] array = new SocialRequestImpl[3];
 
@@ -2714,12 +2757,13 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 	public List<SocialRequest> findByC_C_T_R_S(long classNameId, long classPK,
 		int type, long receiverUserId, int status, int start, int end,
-		OrderByComparator obc) throws SystemException {
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(classNameId), new Long(classPK), new Integer(type),
 				new Long(receiverUserId), new Integer(status),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<SocialRequest> list = (List<SocialRequest>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_C_C_T_R_S,
@@ -2733,9 +2777,9 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(7 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(7);
@@ -2753,8 +2797,9 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 				query.append(_FINDER_COLUMN_C_C_T_R_S_STATUS_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -2801,10 +2846,11 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 	}
 
 	public SocialRequest findByC_C_T_R_S_First(long classNameId, long classPK,
-		int type, long receiverUserId, int status, OrderByComparator obc)
+		int type, long receiverUserId, int status,
+		OrderByComparator orderByComparator)
 		throws NoSuchRequestException, SystemException {
 		List<SocialRequest> list = findByC_C_T_R_S(classNameId, classPK, type,
-				receiverUserId, status, 0, 1, obc);
+				receiverUserId, status, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(12);
@@ -2836,13 +2882,14 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 	}
 
 	public SocialRequest findByC_C_T_R_S_Last(long classNameId, long classPK,
-		int type, long receiverUserId, int status, OrderByComparator obc)
+		int type, long receiverUserId, int status,
+		OrderByComparator orderByComparator)
 		throws NoSuchRequestException, SystemException {
 		int count = countByC_C_T_R_S(classNameId, classPK, type,
 				receiverUserId, status);
 
 		List<SocialRequest> list = findByC_C_T_R_S(classNameId, classPK, type,
-				receiverUserId, status, count - 1, count, obc);
+				receiverUserId, status, count - 1, count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(12);
@@ -2875,7 +2922,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 	public SocialRequest[] findByC_C_T_R_S_PrevAndNext(long requestId,
 		long classNameId, long classPK, int type, long receiverUserId,
-		int status, OrderByComparator obc)
+		int status, OrderByComparator orderByComparator)
 		throws NoSuchRequestException, SystemException {
 		SocialRequest socialRequest = findByPrimaryKey(requestId);
 
@@ -2889,9 +2936,9 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(7 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(7);
@@ -2909,8 +2956,9 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 			query.append(_FINDER_COLUMN_C_C_T_R_S_STATUS_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -2933,8 +2981,8 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 			qPos.add(status);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					socialRequest);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, socialRequest);
 
 			SocialRequest[] array = new SocialRequestImpl[3];
 
@@ -2943,46 +2991,6 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 			array[2] = (SocialRequest)objArray[2];
 
 			return array;
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.setLimit(start, end);
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
 		}
 		catch (Exception e) {
 			throw processException(e);
@@ -3001,10 +3009,11 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		return findAll(start, end, null);
 	}
 
-	public List<SocialRequest> findAll(int start, int end, OrderByComparator obc)
-		throws SystemException {
+	public List<SocialRequest> findAll(int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<SocialRequest> list = (List<SocialRequest>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
@@ -3019,13 +3028,14 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 				StringBundler query = null;
 				String sql = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(2 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 
 					query.append(_SQL_SELECT_SOCIALREQUEST);
 
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 
 					sql = query.toString();
 				}
@@ -3036,7 +3046,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 				Query q = session.createQuery(sql);
 
-				if (obc == null) {
+				if (orderByComparator == null) {
 					list = (List<SocialRequest>)QueryUtil.list(q, getDialect(),
 							start, end, false);
 
@@ -3759,16 +3769,16 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		}
 	}
 
-	@BeanReference(name = "com.liferay.portlet.social.service.persistence.SocialActivityPersistence")
-	protected com.liferay.portlet.social.service.persistence.SocialActivityPersistence socialActivityPersistence;
-	@BeanReference(name = "com.liferay.portlet.social.service.persistence.SocialRelationPersistence")
-	protected com.liferay.portlet.social.service.persistence.SocialRelationPersistence socialRelationPersistence;
-	@BeanReference(name = "com.liferay.portlet.social.service.persistence.SocialRequestPersistence")
-	protected com.liferay.portlet.social.service.persistence.SocialRequestPersistence socialRequestPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.ResourcePersistence")
-	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
-	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
+	@BeanReference(type = SocialActivityPersistence.class)
+	protected SocialActivityPersistence socialActivityPersistence;
+	@BeanReference(type = SocialRelationPersistence.class)
+	protected SocialRelationPersistence socialRelationPersistence;
+	@BeanReference(type = SocialRequestPersistence.class)
+	protected SocialRequestPersistence socialRequestPersistence;
+	@BeanReference(type = ResourcePersistence.class)
+	protected ResourcePersistence resourcePersistence;
+	@BeanReference(type = UserPersistence.class)
+	protected UserPersistence userPersistence;
 	private static final String _SQL_SELECT_SOCIALREQUEST = "SELECT socialRequest FROM SocialRequest socialRequest";
 	private static final String _SQL_SELECT_SOCIALREQUEST_WHERE = "SELECT socialRequest FROM SocialRequest socialRequest WHERE ";
 	private static final String _SQL_COUNT_SOCIALREQUEST = "SELECT COUNT(socialRequest) FROM SocialRequest socialRequest";

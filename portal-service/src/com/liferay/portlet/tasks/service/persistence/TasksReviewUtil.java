@@ -129,31 +129,35 @@ public class TasksReviewUtil {
 
 	public static java.util.List<com.liferay.portlet.tasks.model.TasksReview> findByUserId(
 		long userId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByUserId(userId, start, end, obc);
+		return getPersistence()
+				   .findByUserId(userId, start, end, orderByComparator);
 	}
 
 	public static com.liferay.portlet.tasks.model.TasksReview findByUserId_First(
-		long userId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long userId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.tasks.NoSuchReviewException {
-		return getPersistence().findByUserId_First(userId, obc);
+		return getPersistence().findByUserId_First(userId, orderByComparator);
 	}
 
 	public static com.liferay.portlet.tasks.model.TasksReview findByUserId_Last(
-		long userId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long userId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.tasks.NoSuchReviewException {
-		return getPersistence().findByUserId_Last(userId, obc);
+		return getPersistence().findByUserId_Last(userId, orderByComparator);
 	}
 
 	public static com.liferay.portlet.tasks.model.TasksReview[] findByUserId_PrevAndNext(
 		long reviewId, long userId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.tasks.NoSuchReviewException {
-		return getPersistence().findByUserId_PrevAndNext(reviewId, userId, obc);
+		return getPersistence()
+				   .findByUserId_PrevAndNext(reviewId, userId, orderByComparator);
 	}
 
 	public static java.util.List<com.liferay.portlet.tasks.model.TasksReview> findByProposalId(
@@ -170,32 +174,38 @@ public class TasksReviewUtil {
 
 	public static java.util.List<com.liferay.portlet.tasks.model.TasksReview> findByProposalId(
 		long proposalId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByProposalId(proposalId, start, end, obc);
+		return getPersistence()
+				   .findByProposalId(proposalId, start, end, orderByComparator);
 	}
 
 	public static com.liferay.portlet.tasks.model.TasksReview findByProposalId_First(
-		long proposalId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long proposalId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.tasks.NoSuchReviewException {
-		return getPersistence().findByProposalId_First(proposalId, obc);
+		return getPersistence()
+				   .findByProposalId_First(proposalId, orderByComparator);
 	}
 
 	public static com.liferay.portlet.tasks.model.TasksReview findByProposalId_Last(
-		long proposalId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long proposalId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.tasks.NoSuchReviewException {
-		return getPersistence().findByProposalId_Last(proposalId, obc);
+		return getPersistence()
+				   .findByProposalId_Last(proposalId, orderByComparator);
 	}
 
 	public static com.liferay.portlet.tasks.model.TasksReview[] findByProposalId_PrevAndNext(
 		long reviewId, long proposalId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.tasks.NoSuchReviewException {
 		return getPersistence()
-				   .findByProposalId_PrevAndNext(reviewId, proposalId, obc);
+				   .findByProposalId_PrevAndNext(reviewId, proposalId,
+			orderByComparator);
 	}
 
 	public static com.liferay.portlet.tasks.model.TasksReview findByU_P(
@@ -231,34 +241,38 @@ public class TasksReviewUtil {
 
 	public static java.util.List<com.liferay.portlet.tasks.model.TasksReview> findByP_S(
 		long proposalId, int stage, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByP_S(proposalId, stage, start, end, obc);
+		return getPersistence()
+				   .findByP_S(proposalId, stage, start, end, orderByComparator);
 	}
 
 	public static com.liferay.portlet.tasks.model.TasksReview findByP_S_First(
 		long proposalId, int stage,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.tasks.NoSuchReviewException {
-		return getPersistence().findByP_S_First(proposalId, stage, obc);
+		return getPersistence()
+				   .findByP_S_First(proposalId, stage, orderByComparator);
 	}
 
 	public static com.liferay.portlet.tasks.model.TasksReview findByP_S_Last(
 		long proposalId, int stage,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.tasks.NoSuchReviewException {
-		return getPersistence().findByP_S_Last(proposalId, stage, obc);
+		return getPersistence()
+				   .findByP_S_Last(proposalId, stage, orderByComparator);
 	}
 
 	public static com.liferay.portlet.tasks.model.TasksReview[] findByP_S_PrevAndNext(
 		long reviewId, long proposalId, int stage,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.tasks.NoSuchReviewException {
 		return getPersistence()
-				   .findByP_S_PrevAndNext(reviewId, proposalId, stage, obc);
+				   .findByP_S_PrevAndNext(reviewId, proposalId, stage,
+			orderByComparator);
 	}
 
 	public static java.util.List<com.liferay.portlet.tasks.model.TasksReview> findByP_S_C(
@@ -276,38 +290,41 @@ public class TasksReviewUtil {
 
 	public static java.util.List<com.liferay.portlet.tasks.model.TasksReview> findByP_S_C(
 		long proposalId, int stage, boolean completed, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .findByP_S_C(proposalId, stage, completed, start, end, obc);
+				   .findByP_S_C(proposalId, stage, completed, start, end,
+			orderByComparator);
 	}
 
 	public static com.liferay.portlet.tasks.model.TasksReview findByP_S_C_First(
 		long proposalId, int stage, boolean completed,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.tasks.NoSuchReviewException {
 		return getPersistence()
-				   .findByP_S_C_First(proposalId, stage, completed, obc);
+				   .findByP_S_C_First(proposalId, stage, completed,
+			orderByComparator);
 	}
 
 	public static com.liferay.portlet.tasks.model.TasksReview findByP_S_C_Last(
 		long proposalId, int stage, boolean completed,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.tasks.NoSuchReviewException {
 		return getPersistence()
-				   .findByP_S_C_Last(proposalId, stage, completed, obc);
+				   .findByP_S_C_Last(proposalId, stage, completed,
+			orderByComparator);
 	}
 
 	public static com.liferay.portlet.tasks.model.TasksReview[] findByP_S_C_PrevAndNext(
 		long reviewId, long proposalId, int stage, boolean completed,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.tasks.NoSuchReviewException {
 		return getPersistence()
 				   .findByP_S_C_PrevAndNext(reviewId, proposalId, stage,
-			completed, obc);
+			completed, orderByComparator);
 	}
 
 	public static java.util.List<com.liferay.portlet.tasks.model.TasksReview> findByP_S_C_R(
@@ -328,41 +345,43 @@ public class TasksReviewUtil {
 
 	public static java.util.List<com.liferay.portlet.tasks.model.TasksReview> findByP_S_C_R(
 		long proposalId, int stage, boolean completed, boolean rejected,
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
 				   .findByP_S_C_R(proposalId, stage, completed, rejected,
-			start, end, obc);
+			start, end, orderByComparator);
 	}
 
 	public static com.liferay.portlet.tasks.model.TasksReview findByP_S_C_R_First(
 		long proposalId, int stage, boolean completed, boolean rejected,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.tasks.NoSuchReviewException {
 		return getPersistence()
 				   .findByP_S_C_R_First(proposalId, stage, completed, rejected,
-			obc);
+			orderByComparator);
 	}
 
 	public static com.liferay.portlet.tasks.model.TasksReview findByP_S_C_R_Last(
 		long proposalId, int stage, boolean completed, boolean rejected,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.tasks.NoSuchReviewException {
 		return getPersistence()
 				   .findByP_S_C_R_Last(proposalId, stage, completed, rejected,
-			obc);
+			orderByComparator);
 	}
 
 	public static com.liferay.portlet.tasks.model.TasksReview[] findByP_S_C_R_PrevAndNext(
 		long reviewId, long proposalId, int stage, boolean completed,
-		boolean rejected, com.liferay.portal.kernel.util.OrderByComparator obc)
+		boolean rejected,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.tasks.NoSuchReviewException {
 		return getPersistence()
 				   .findByP_S_C_R_PrevAndNext(reviewId, proposalId, stage,
-			completed, rejected, obc);
+			completed, rejected, orderByComparator);
 	}
 
 	public static java.util.List<com.liferay.portlet.tasks.model.TasksReview> findAll()
@@ -377,9 +396,10 @@ public class TasksReviewUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.tasks.model.TasksReview> findAll(
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findAll(start, end, obc);
+		return getPersistence().findAll(start, end, orderByComparator);
 	}
 
 	public static void removeByUserId(long userId)

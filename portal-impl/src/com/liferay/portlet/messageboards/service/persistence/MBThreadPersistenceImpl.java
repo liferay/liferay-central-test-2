@@ -17,7 +17,6 @@ package com.liferay.portlet.messageboards.service.persistence;
 import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
-import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
@@ -36,12 +35,18 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.BatchSessionUtil;
+import com.liferay.portal.service.persistence.LockPersistence;
+import com.liferay.portal.service.persistence.ResourcePersistence;
+import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
+import com.liferay.portlet.asset.service.persistence.AssetEntryPersistence;
 import com.liferay.portlet.messageboards.NoSuchThreadException;
 import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.model.impl.MBThreadImpl;
 import com.liferay.portlet.messageboards.model.impl.MBThreadModelImpl;
+import com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence;
+import com.liferay.portlet.social.service.persistence.SocialActivityPersistence;
 
 import java.io.Serializable;
 
@@ -470,11 +475,12 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	}
 
 	public List<MBThread> findByGroupId(long groupId, int start, int end,
-		OrderByComparator obc) throws SystemException {
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<MBThread> list = (List<MBThread>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
@@ -488,9 +494,9 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(3);
@@ -500,8 +506,9 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 
 				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -539,9 +546,10 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		return list;
 	}
 
-	public MBThread findByGroupId_First(long groupId, OrderByComparator obc)
+	public MBThread findByGroupId_First(long groupId,
+		OrderByComparator orderByComparator)
 		throws NoSuchThreadException, SystemException {
-		List<MBThread> list = findByGroupId(groupId, 0, 1, obc);
+		List<MBThread> list = findByGroupId(groupId, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -560,11 +568,13 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		}
 	}
 
-	public MBThread findByGroupId_Last(long groupId, OrderByComparator obc)
+	public MBThread findByGroupId_Last(long groupId,
+		OrderByComparator orderByComparator)
 		throws NoSuchThreadException, SystemException {
 		int count = countByGroupId(groupId);
 
-		List<MBThread> list = findByGroupId(groupId, count - 1, count, obc);
+		List<MBThread> list = findByGroupId(groupId, count - 1, count,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -584,7 +594,8 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	}
 
 	public MBThread[] findByGroupId_PrevAndNext(long threadId, long groupId,
-		OrderByComparator obc) throws NoSuchThreadException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchThreadException, SystemException {
 		MBThread mbThread = findByPrimaryKey(threadId);
 
 		int count = countByGroupId(groupId);
@@ -596,9 +607,9 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(3);
@@ -608,8 +619,9 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -624,7 +636,8 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 
 			qPos.add(groupId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, mbThread);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, mbThread);
 
 			MBThread[] array = new MBThreadImpl[3];
 
@@ -705,11 +718,12 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	}
 
 	public List<MBThread> findByG_C(long groupId, long categoryId, int start,
-		int end, OrderByComparator obc) throws SystemException {
+		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Long(categoryId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<MBThread> list = (List<MBThread>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_G_C,
@@ -723,9 +737,9 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(4 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(4);
@@ -737,8 +751,9 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 
 				query.append(_FINDER_COLUMN_G_C_CATEGORYID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -779,8 +794,10 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	}
 
 	public MBThread findByG_C_First(long groupId, long categoryId,
-		OrderByComparator obc) throws NoSuchThreadException, SystemException {
-		List<MBThread> list = findByG_C(groupId, categoryId, 0, 1, obc);
+		OrderByComparator orderByComparator)
+		throws NoSuchThreadException, SystemException {
+		List<MBThread> list = findByG_C(groupId, categoryId, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -803,11 +820,12 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	}
 
 	public MBThread findByG_C_Last(long groupId, long categoryId,
-		OrderByComparator obc) throws NoSuchThreadException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchThreadException, SystemException {
 		int count = countByG_C(groupId, categoryId);
 
 		List<MBThread> list = findByG_C(groupId, categoryId, count - 1, count,
-				obc);
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -830,7 +848,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	}
 
 	public MBThread[] findByG_C_PrevAndNext(long threadId, long groupId,
-		long categoryId, OrderByComparator obc)
+		long categoryId, OrderByComparator orderByComparator)
 		throws NoSuchThreadException, SystemException {
 		MBThread mbThread = findByPrimaryKey(threadId);
 
@@ -843,9 +861,9 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(4 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(4);
@@ -857,8 +875,9 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 
 			query.append(_FINDER_COLUMN_G_C_CATEGORYID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -875,7 +894,8 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 
 			qPos.add(categoryId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, mbThread);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, mbThread);
 
 			MBThread[] array = new MBThreadImpl[3];
 
@@ -956,11 +976,12 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	}
 
 	public List<MBThread> findByG_S(long groupId, int status, int start,
-		int end, OrderByComparator obc) throws SystemException {
+		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Integer(status),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<MBThread> list = (List<MBThread>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_G_S,
@@ -974,9 +995,9 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(4 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(4);
@@ -988,8 +1009,9 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 
 				query.append(_FINDER_COLUMN_G_S_STATUS_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -1030,8 +1052,9 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	}
 
 	public MBThread findByG_S_First(long groupId, int status,
-		OrderByComparator obc) throws NoSuchThreadException, SystemException {
-		List<MBThread> list = findByG_S(groupId, status, 0, 1, obc);
+		OrderByComparator orderByComparator)
+		throws NoSuchThreadException, SystemException {
+		List<MBThread> list = findByG_S(groupId, status, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -1054,10 +1077,12 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	}
 
 	public MBThread findByG_S_Last(long groupId, int status,
-		OrderByComparator obc) throws NoSuchThreadException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchThreadException, SystemException {
 		int count = countByG_S(groupId, status);
 
-		List<MBThread> list = findByG_S(groupId, status, count - 1, count, obc);
+		List<MBThread> list = findByG_S(groupId, status, count - 1, count,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -1080,7 +1105,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	}
 
 	public MBThread[] findByG_S_PrevAndNext(long threadId, long groupId,
-		int status, OrderByComparator obc)
+		int status, OrderByComparator orderByComparator)
 		throws NoSuchThreadException, SystemException {
 		MBThread mbThread = findByPrimaryKey(threadId);
 
@@ -1093,9 +1118,9 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(4 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(4);
@@ -1107,8 +1132,9 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 
 			query.append(_FINDER_COLUMN_G_S_STATUS_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -1125,7 +1151,8 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 
 			qPos.add(status);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, mbThread);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, mbThread);
 
 			MBThread[] array = new MBThreadImpl[3];
 
@@ -1206,11 +1233,13 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	}
 
 	public List<MBThread> findByC_P(long categoryId, double priority,
-		int start, int end, OrderByComparator obc) throws SystemException {
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(categoryId), new Double(priority),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<MBThread> list = (List<MBThread>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_C_P,
@@ -1224,9 +1253,9 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(4 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(4);
@@ -1238,8 +1267,9 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 
 				query.append(_FINDER_COLUMN_C_P_PRIORITY_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -1280,8 +1310,10 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	}
 
 	public MBThread findByC_P_First(long categoryId, double priority,
-		OrderByComparator obc) throws NoSuchThreadException, SystemException {
-		List<MBThread> list = findByC_P(categoryId, priority, 0, 1, obc);
+		OrderByComparator orderByComparator)
+		throws NoSuchThreadException, SystemException {
+		List<MBThread> list = findByC_P(categoryId, priority, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -1304,11 +1336,12 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	}
 
 	public MBThread findByC_P_Last(long categoryId, double priority,
-		OrderByComparator obc) throws NoSuchThreadException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchThreadException, SystemException {
 		int count = countByC_P(categoryId, priority);
 
 		List<MBThread> list = findByC_P(categoryId, priority, count - 1, count,
-				obc);
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -1331,7 +1364,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	}
 
 	public MBThread[] findByC_P_PrevAndNext(long threadId, long categoryId,
-		double priority, OrderByComparator obc)
+		double priority, OrderByComparator orderByComparator)
 		throws NoSuchThreadException, SystemException {
 		MBThread mbThread = findByPrimaryKey(threadId);
 
@@ -1344,9 +1377,9 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(4 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(4);
@@ -1358,8 +1391,9 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 
 			query.append(_FINDER_COLUMN_C_P_PRIORITY_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -1376,7 +1410,8 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 
 			qPos.add(priority);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, mbThread);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, mbThread);
 
 			MBThread[] array = new MBThreadImpl[3];
 
@@ -1470,14 +1505,15 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	}
 
 	public List<MBThread> findByG_C_L(long groupId, long categoryId,
-		Date lastPostDate, int start, int end, OrderByComparator obc)
-		throws SystemException {
+		Date lastPostDate, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Long(categoryId),
 				
 				lastPostDate,
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<MBThread> list = (List<MBThread>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_G_C_L,
@@ -1491,9 +1527,9 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(5 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(5);
@@ -1512,8 +1548,9 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 					query.append(_FINDER_COLUMN_G_C_L_LASTPOSTDATE_2);
 				}
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -1558,10 +1595,10 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	}
 
 	public MBThread findByG_C_L_First(long groupId, long categoryId,
-		Date lastPostDate, OrderByComparator obc)
+		Date lastPostDate, OrderByComparator orderByComparator)
 		throws NoSuchThreadException, SystemException {
 		List<MBThread> list = findByG_C_L(groupId, categoryId, lastPostDate, 0,
-				1, obc);
+				1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(8);
@@ -1587,12 +1624,12 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	}
 
 	public MBThread findByG_C_L_Last(long groupId, long categoryId,
-		Date lastPostDate, OrderByComparator obc)
+		Date lastPostDate, OrderByComparator orderByComparator)
 		throws NoSuchThreadException, SystemException {
 		int count = countByG_C_L(groupId, categoryId, lastPostDate);
 
 		List<MBThread> list = findByG_C_L(groupId, categoryId, lastPostDate,
-				count - 1, count, obc);
+				count - 1, count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(8);
@@ -1618,7 +1655,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	}
 
 	public MBThread[] findByG_C_L_PrevAndNext(long threadId, long groupId,
-		long categoryId, Date lastPostDate, OrderByComparator obc)
+		long categoryId, Date lastPostDate, OrderByComparator orderByComparator)
 		throws NoSuchThreadException, SystemException {
 		MBThread mbThread = findByPrimaryKey(threadId);
 
@@ -1631,9 +1668,9 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(5 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(5);
@@ -1652,8 +1689,9 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 				query.append(_FINDER_COLUMN_G_C_L_LASTPOSTDATE_2);
 			}
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -1674,7 +1712,8 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 				qPos.add(CalendarUtil.getTimestamp(lastPostDate));
 			}
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, mbThread);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, mbThread);
 
 			MBThread[] array = new MBThreadImpl[3];
 
@@ -1759,12 +1798,13 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	}
 
 	public List<MBThread> findByG_C_S(long groupId, long categoryId,
-		int status, int start, int end, OrderByComparator obc)
+		int status, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Long(categoryId), new Integer(status),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<MBThread> list = (List<MBThread>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_G_C_S,
@@ -1778,9 +1818,9 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(5 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(5);
@@ -1794,8 +1834,9 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 
 				query.append(_FINDER_COLUMN_G_C_S_STATUS_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -1838,9 +1879,10 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	}
 
 	public MBThread findByG_C_S_First(long groupId, long categoryId,
-		int status, OrderByComparator obc)
+		int status, OrderByComparator orderByComparator)
 		throws NoSuchThreadException, SystemException {
-		List<MBThread> list = findByG_C_S(groupId, categoryId, status, 0, 1, obc);
+		List<MBThread> list = findByG_C_S(groupId, categoryId, status, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(8);
@@ -1866,11 +1908,12 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	}
 
 	public MBThread findByG_C_S_Last(long groupId, long categoryId, int status,
-		OrderByComparator obc) throws NoSuchThreadException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchThreadException, SystemException {
 		int count = countByG_C_S(groupId, categoryId, status);
 
 		List<MBThread> list = findByG_C_S(groupId, categoryId, status,
-				count - 1, count, obc);
+				count - 1, count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(8);
@@ -1896,7 +1939,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	}
 
 	public MBThread[] findByG_C_S_PrevAndNext(long threadId, long groupId,
-		long categoryId, int status, OrderByComparator obc)
+		long categoryId, int status, OrderByComparator orderByComparator)
 		throws NoSuchThreadException, SystemException {
 		MBThread mbThread = findByPrimaryKey(threadId);
 
@@ -1909,9 +1952,9 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(5 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(5);
@@ -1925,8 +1968,9 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 
 			query.append(_FINDER_COLUMN_G_C_S_STATUS_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -1945,7 +1989,8 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 
 			qPos.add(status);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, mbThread);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, mbThread);
 
 			MBThread[] array = new MBThreadImpl[3];
 
@@ -1963,46 +2008,6 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		}
 	}
 
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.setLimit(start, end);
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
 	public List<MBThread> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -2011,10 +2016,11 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		return findAll(start, end, null);
 	}
 
-	public List<MBThread> findAll(int start, int end, OrderByComparator obc)
-		throws SystemException {
+	public List<MBThread> findAll(int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<MBThread> list = (List<MBThread>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
@@ -2029,13 +2035,14 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 				StringBundler query = null;
 				String sql = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(2 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 
 					query.append(_SQL_SELECT_MBTHREAD);
 
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 
 					sql = query.toString();
 				}
@@ -2046,7 +2053,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 
 				Query q = session.createQuery(sql);
 
-				if (obc == null) {
+				if (orderByComparator == null) {
 					list = (List<MBThread>)QueryUtil.list(q, getDialect(),
 							start, end, false);
 
@@ -2505,34 +2512,34 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		}
 	}
 
-	@BeanReference(name = "com.liferay.portlet.messageboards.service.persistence.MBBanPersistence")
-	protected com.liferay.portlet.messageboards.service.persistence.MBBanPersistence mbBanPersistence;
-	@BeanReference(name = "com.liferay.portlet.messageboards.service.persistence.MBCategoryPersistence")
-	protected com.liferay.portlet.messageboards.service.persistence.MBCategoryPersistence mbCategoryPersistence;
-	@BeanReference(name = "com.liferay.portlet.messageboards.service.persistence.MBDiscussionPersistence")
-	protected com.liferay.portlet.messageboards.service.persistence.MBDiscussionPersistence mbDiscussionPersistence;
-	@BeanReference(name = "com.liferay.portlet.messageboards.service.persistence.MBMailingListPersistence")
-	protected com.liferay.portlet.messageboards.service.persistence.MBMailingListPersistence mbMailingListPersistence;
-	@BeanReference(name = "com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence")
-	protected com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence mbMessagePersistence;
-	@BeanReference(name = "com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPersistence")
-	protected com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPersistence mbMessageFlagPersistence;
-	@BeanReference(name = "com.liferay.portlet.messageboards.service.persistence.MBStatsUserPersistence")
-	protected com.liferay.portlet.messageboards.service.persistence.MBStatsUserPersistence mbStatsUserPersistence;
-	@BeanReference(name = "com.liferay.portlet.messageboards.service.persistence.MBThreadPersistence")
-	protected com.liferay.portlet.messageboards.service.persistence.MBThreadPersistence mbThreadPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.LockPersistence")
-	protected com.liferay.portal.service.persistence.LockPersistence lockPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.ResourcePersistence")
-	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
-	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
-	@BeanReference(name = "com.liferay.portlet.asset.service.persistence.AssetEntryPersistence")
-	protected com.liferay.portlet.asset.service.persistence.AssetEntryPersistence assetEntryPersistence;
-	@BeanReference(name = "com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence")
-	protected com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence ratingsStatsPersistence;
-	@BeanReference(name = "com.liferay.portlet.social.service.persistence.SocialActivityPersistence")
-	protected com.liferay.portlet.social.service.persistence.SocialActivityPersistence socialActivityPersistence;
+	@BeanReference(type = MBBanPersistence.class)
+	protected MBBanPersistence mbBanPersistence;
+	@BeanReference(type = MBCategoryPersistence.class)
+	protected MBCategoryPersistence mbCategoryPersistence;
+	@BeanReference(type = MBDiscussionPersistence.class)
+	protected MBDiscussionPersistence mbDiscussionPersistence;
+	@BeanReference(type = MBMailingListPersistence.class)
+	protected MBMailingListPersistence mbMailingListPersistence;
+	@BeanReference(type = MBMessagePersistence.class)
+	protected MBMessagePersistence mbMessagePersistence;
+	@BeanReference(type = MBMessageFlagPersistence.class)
+	protected MBMessageFlagPersistence mbMessageFlagPersistence;
+	@BeanReference(type = MBStatsUserPersistence.class)
+	protected MBStatsUserPersistence mbStatsUserPersistence;
+	@BeanReference(type = MBThreadPersistence.class)
+	protected MBThreadPersistence mbThreadPersistence;
+	@BeanReference(type = LockPersistence.class)
+	protected LockPersistence lockPersistence;
+	@BeanReference(type = ResourcePersistence.class)
+	protected ResourcePersistence resourcePersistence;
+	@BeanReference(type = UserPersistence.class)
+	protected UserPersistence userPersistence;
+	@BeanReference(type = AssetEntryPersistence.class)
+	protected AssetEntryPersistence assetEntryPersistence;
+	@BeanReference(type = RatingsStatsPersistence.class)
+	protected RatingsStatsPersistence ratingsStatsPersistence;
+	@BeanReference(type = SocialActivityPersistence.class)
+	protected SocialActivityPersistence socialActivityPersistence;
 	private static final String _SQL_SELECT_MBTHREAD = "SELECT mbThread FROM MBThread mbThread";
 	private static final String _SQL_SELECT_MBTHREAD_WHERE = "SELECT mbThread FROM MBThread mbThread WHERE ";
 	private static final String _SQL_COUNT_MBTHREAD = "SELECT COUNT(mbThread) FROM MBThread mbThread";

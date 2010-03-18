@@ -72,6 +72,21 @@ public class DLFileRankLocalServiceWrapper implements DLFileRankLocalService {
 		return _dlFileRankLocalService.dynamicQuery(dynamicQuery, start, end);
 	}
 
+	public java.util.List<Object> dynamicQuery(
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
+		int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _dlFileRankLocalService.dynamicQuery(dynamicQuery, start, end,
+			orderByComparator);
+	}
+
+	public int dynamicQueryCount(
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _dlFileRankLocalService.dynamicQueryCount(dynamicQuery);
+	}
+
 	public com.liferay.portlet.documentlibrary.model.DLFileRank getDLFileRank(
 		long fileRankId)
 		throws com.liferay.portal.kernel.exception.PortalException,

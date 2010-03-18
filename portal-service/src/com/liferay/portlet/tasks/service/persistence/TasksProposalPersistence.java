@@ -68,22 +68,24 @@ public interface TasksProposalPersistence extends BasePersistence<TasksProposal>
 
 	public java.util.List<com.liferay.portlet.tasks.model.TasksProposal> findByGroupId(
 		long groupId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portlet.tasks.model.TasksProposal findByGroupId_First(
-		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long groupId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.tasks.NoSuchProposalException;
 
 	public com.liferay.portlet.tasks.model.TasksProposal findByGroupId_Last(
-		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long groupId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.tasks.NoSuchProposalException;
 
 	public com.liferay.portlet.tasks.model.TasksProposal[] findByGroupId_PrevAndNext(
 		long proposalId, long groupId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.tasks.NoSuchProposalException;
 
@@ -97,24 +99,24 @@ public interface TasksProposalPersistence extends BasePersistence<TasksProposal>
 
 	public java.util.List<com.liferay.portlet.tasks.model.TasksProposal> findByG_U(
 		long groupId, long userId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portlet.tasks.model.TasksProposal findByG_U_First(
 		long groupId, long userId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.tasks.NoSuchProposalException;
 
 	public com.liferay.portlet.tasks.model.TasksProposal findByG_U_Last(
 		long groupId, long userId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.tasks.NoSuchProposalException;
 
 	public com.liferay.portlet.tasks.model.TasksProposal[] findByG_U_PrevAndNext(
 		long proposalId, long groupId, long userId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.tasks.NoSuchProposalException;
 
@@ -139,7 +141,8 @@ public interface TasksProposalPersistence extends BasePersistence<TasksProposal>
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portlet.tasks.model.TasksProposal> findAll(
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void removeByGroupId(long groupId)

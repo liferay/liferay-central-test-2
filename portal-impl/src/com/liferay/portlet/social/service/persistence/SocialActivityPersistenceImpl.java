@@ -17,7 +17,6 @@ package com.liferay.portlet.social.service.persistence;
 import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
-import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
@@ -35,6 +34,10 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.BatchSessionUtil;
+import com.liferay.portal.service.persistence.GroupPersistence;
+import com.liferay.portal.service.persistence.LayoutPersistence;
+import com.liferay.portal.service.persistence.ResourcePersistence;
+import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 import com.liferay.portlet.social.NoSuchActivityException;
@@ -601,11 +604,12 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 	}
 
 	public List<SocialActivity> findByGroupId(long groupId, int start, int end,
-		OrderByComparator obc) throws SystemException {
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<SocialActivity> list = (List<SocialActivity>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
@@ -619,9 +623,9 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(3);
@@ -631,8 +635,9 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 
 				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -671,8 +676,10 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 	}
 
 	public SocialActivity findByGroupId_First(long groupId,
-		OrderByComparator obc) throws NoSuchActivityException, SystemException {
-		List<SocialActivity> list = findByGroupId(groupId, 0, 1, obc);
+		OrderByComparator orderByComparator)
+		throws NoSuchActivityException, SystemException {
+		List<SocialActivity> list = findByGroupId(groupId, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -691,11 +698,13 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		}
 	}
 
-	public SocialActivity findByGroupId_Last(long groupId, OrderByComparator obc)
+	public SocialActivity findByGroupId_Last(long groupId,
+		OrderByComparator orderByComparator)
 		throws NoSuchActivityException, SystemException {
 		int count = countByGroupId(groupId);
 
-		List<SocialActivity> list = findByGroupId(groupId, count - 1, count, obc);
+		List<SocialActivity> list = findByGroupId(groupId, count - 1, count,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -715,7 +724,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 	}
 
 	public SocialActivity[] findByGroupId_PrevAndNext(long activityId,
-		long groupId, OrderByComparator obc)
+		long groupId, OrderByComparator orderByComparator)
 		throws NoSuchActivityException, SystemException {
 		SocialActivity socialActivity = findByPrimaryKey(activityId);
 
@@ -728,9 +737,9 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(3);
@@ -740,8 +749,9 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -756,8 +766,8 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 
 			qPos.add(groupId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					socialActivity);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, socialActivity);
 
 			SocialActivity[] array = new SocialActivityImpl[3];
 
@@ -832,11 +842,12 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 	}
 
 	public List<SocialActivity> findByCompanyId(long companyId, int start,
-		int end, OrderByComparator obc) throws SystemException {
+		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(companyId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<SocialActivity> list = (List<SocialActivity>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
@@ -850,9 +861,9 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(3);
@@ -862,8 +873,9 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 
 				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -902,8 +914,10 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 	}
 
 	public SocialActivity findByCompanyId_First(long companyId,
-		OrderByComparator obc) throws NoSuchActivityException, SystemException {
-		List<SocialActivity> list = findByCompanyId(companyId, 0, 1, obc);
+		OrderByComparator orderByComparator)
+		throws NoSuchActivityException, SystemException {
+		List<SocialActivity> list = findByCompanyId(companyId, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -923,11 +937,12 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 	}
 
 	public SocialActivity findByCompanyId_Last(long companyId,
-		OrderByComparator obc) throws NoSuchActivityException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchActivityException, SystemException {
 		int count = countByCompanyId(companyId);
 
 		List<SocialActivity> list = findByCompanyId(companyId, count - 1,
-				count, obc);
+				count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -947,7 +962,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 	}
 
 	public SocialActivity[] findByCompanyId_PrevAndNext(long activityId,
-		long companyId, OrderByComparator obc)
+		long companyId, OrderByComparator orderByComparator)
 		throws NoSuchActivityException, SystemException {
 		SocialActivity socialActivity = findByPrimaryKey(activityId);
 
@@ -960,9 +975,9 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(3);
@@ -972,8 +987,9 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 
 			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -988,8 +1004,8 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 
 			qPos.add(companyId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					socialActivity);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, socialActivity);
 
 			SocialActivity[] array = new SocialActivityImpl[3];
 
@@ -1064,11 +1080,12 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 	}
 
 	public List<SocialActivity> findByUserId(long userId, int start, int end,
-		OrderByComparator obc) throws SystemException {
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(userId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<SocialActivity> list = (List<SocialActivity>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_USERID,
@@ -1082,9 +1099,9 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(3);
@@ -1094,8 +1111,9 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 
 				query.append(_FINDER_COLUMN_USERID_USERID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -1133,9 +1151,10 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		return list;
 	}
 
-	public SocialActivity findByUserId_First(long userId, OrderByComparator obc)
+	public SocialActivity findByUserId_First(long userId,
+		OrderByComparator orderByComparator)
 		throws NoSuchActivityException, SystemException {
-		List<SocialActivity> list = findByUserId(userId, 0, 1, obc);
+		List<SocialActivity> list = findByUserId(userId, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -1154,11 +1173,13 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		}
 	}
 
-	public SocialActivity findByUserId_Last(long userId, OrderByComparator obc)
+	public SocialActivity findByUserId_Last(long userId,
+		OrderByComparator orderByComparator)
 		throws NoSuchActivityException, SystemException {
 		int count = countByUserId(userId);
 
-		List<SocialActivity> list = findByUserId(userId, count - 1, count, obc);
+		List<SocialActivity> list = findByUserId(userId, count - 1, count,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -1178,7 +1199,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 	}
 
 	public SocialActivity[] findByUserId_PrevAndNext(long activityId,
-		long userId, OrderByComparator obc)
+		long userId, OrderByComparator orderByComparator)
 		throws NoSuchActivityException, SystemException {
 		SocialActivity socialActivity = findByPrimaryKey(activityId);
 
@@ -1191,9 +1212,9 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(3);
@@ -1203,8 +1224,9 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 
 			query.append(_FINDER_COLUMN_USERID_USERID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -1219,8 +1241,8 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 
 			qPos.add(userId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					socialActivity);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, socialActivity);
 
 			SocialActivity[] array = new SocialActivityImpl[3];
 
@@ -1402,11 +1424,12 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 	}
 
 	public List<SocialActivity> findByClassNameId(long classNameId, int start,
-		int end, OrderByComparator obc) throws SystemException {
+		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(classNameId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<SocialActivity> list = (List<SocialActivity>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_CLASSNAMEID,
@@ -1420,9 +1443,9 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(3);
@@ -1432,8 +1455,9 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 
 				query.append(_FINDER_COLUMN_CLASSNAMEID_CLASSNAMEID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -1472,8 +1496,10 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 	}
 
 	public SocialActivity findByClassNameId_First(long classNameId,
-		OrderByComparator obc) throws NoSuchActivityException, SystemException {
-		List<SocialActivity> list = findByClassNameId(classNameId, 0, 1, obc);
+		OrderByComparator orderByComparator)
+		throws NoSuchActivityException, SystemException {
+		List<SocialActivity> list = findByClassNameId(classNameId, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -1493,11 +1519,12 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 	}
 
 	public SocialActivity findByClassNameId_Last(long classNameId,
-		OrderByComparator obc) throws NoSuchActivityException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchActivityException, SystemException {
 		int count = countByClassNameId(classNameId);
 
 		List<SocialActivity> list = findByClassNameId(classNameId, count - 1,
-				count, obc);
+				count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -1517,7 +1544,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 	}
 
 	public SocialActivity[] findByClassNameId_PrevAndNext(long activityId,
-		long classNameId, OrderByComparator obc)
+		long classNameId, OrderByComparator orderByComparator)
 		throws NoSuchActivityException, SystemException {
 		SocialActivity socialActivity = findByPrimaryKey(activityId);
 
@@ -1530,9 +1557,9 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(3);
@@ -1542,8 +1569,9 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 
 			query.append(_FINDER_COLUMN_CLASSNAMEID_CLASSNAMEID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -1558,8 +1586,8 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 
 			qPos.add(classNameId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					socialActivity);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, socialActivity);
 
 			SocialActivity[] array = new SocialActivityImpl[3];
 
@@ -1634,11 +1662,13 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 	}
 
 	public List<SocialActivity> findByReceiverUserId(long receiverUserId,
-		int start, int end, OrderByComparator obc) throws SystemException {
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(receiverUserId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<SocialActivity> list = (List<SocialActivity>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_RECEIVERUSERID,
@@ -1652,9 +1682,9 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(3);
@@ -1664,8 +1694,9 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 
 				query.append(_FINDER_COLUMN_RECEIVERUSERID_RECEIVERUSERID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -1704,9 +1735,10 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 	}
 
 	public SocialActivity findByReceiverUserId_First(long receiverUserId,
-		OrderByComparator obc) throws NoSuchActivityException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchActivityException, SystemException {
 		List<SocialActivity> list = findByReceiverUserId(receiverUserId, 0, 1,
-				obc);
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -1726,11 +1758,12 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 	}
 
 	public SocialActivity findByReceiverUserId_Last(long receiverUserId,
-		OrderByComparator obc) throws NoSuchActivityException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchActivityException, SystemException {
 		int count = countByReceiverUserId(receiverUserId);
 
 		List<SocialActivity> list = findByReceiverUserId(receiverUserId,
-				count - 1, count, obc);
+				count - 1, count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -1750,7 +1783,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 	}
 
 	public SocialActivity[] findByReceiverUserId_PrevAndNext(long activityId,
-		long receiverUserId, OrderByComparator obc)
+		long receiverUserId, OrderByComparator orderByComparator)
 		throws NoSuchActivityException, SystemException {
 		SocialActivity socialActivity = findByPrimaryKey(activityId);
 
@@ -1763,9 +1796,9 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(3);
@@ -1775,8 +1808,9 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 
 			query.append(_FINDER_COLUMN_RECEIVERUSERID_RECEIVERUSERID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -1791,8 +1825,8 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 
 			qPos.add(receiverUserId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					socialActivity);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, socialActivity);
 
 			SocialActivity[] array = new SocialActivityImpl[3];
 
@@ -1873,11 +1907,13 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 	}
 
 	public List<SocialActivity> findByC_C(long classNameId, long classPK,
-		int start, int end, OrderByComparator obc) throws SystemException {
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(classNameId), new Long(classPK),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<SocialActivity> list = (List<SocialActivity>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_C_C,
@@ -1891,9 +1927,9 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(4 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(4);
@@ -1905,8 +1941,9 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 
 				query.append(_FINDER_COLUMN_C_C_CLASSPK_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -1947,8 +1984,10 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 	}
 
 	public SocialActivity findByC_C_First(long classNameId, long classPK,
-		OrderByComparator obc) throws NoSuchActivityException, SystemException {
-		List<SocialActivity> list = findByC_C(classNameId, classPK, 0, 1, obc);
+		OrderByComparator orderByComparator)
+		throws NoSuchActivityException, SystemException {
+		List<SocialActivity> list = findByC_C(classNameId, classPK, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -1971,11 +2010,12 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 	}
 
 	public SocialActivity findByC_C_Last(long classNameId, long classPK,
-		OrderByComparator obc) throws NoSuchActivityException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchActivityException, SystemException {
 		int count = countByC_C(classNameId, classPK);
 
 		List<SocialActivity> list = findByC_C(classNameId, classPK, count - 1,
-				count, obc);
+				count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -1998,7 +2038,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 	}
 
 	public SocialActivity[] findByC_C_PrevAndNext(long activityId,
-		long classNameId, long classPK, OrderByComparator obc)
+		long classNameId, long classPK, OrderByComparator orderByComparator)
 		throws NoSuchActivityException, SystemException {
 		SocialActivity socialActivity = findByPrimaryKey(activityId);
 
@@ -2011,9 +2051,9 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(4 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(4);
@@ -2025,8 +2065,9 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 
 			query.append(_FINDER_COLUMN_C_C_CLASSPK_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -2043,8 +2084,8 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 
 			qPos.add(classPK);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					socialActivity);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, socialActivity);
 
 			SocialActivity[] array = new SocialActivityImpl[3];
 
@@ -2133,12 +2174,13 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 
 	public List<SocialActivity> findByM_C_C(long mirrorActivityId,
 		long classNameId, long classPK, int start, int end,
-		OrderByComparator obc) throws SystemException {
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(mirrorActivityId), new Long(classNameId),
 				new Long(classPK),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<SocialActivity> list = (List<SocialActivity>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_M_C_C,
@@ -2152,9 +2194,9 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(5 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(5);
@@ -2168,8 +2210,9 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 
 				query.append(_FINDER_COLUMN_M_C_C_CLASSPK_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -2212,10 +2255,10 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 	}
 
 	public SocialActivity findByM_C_C_First(long mirrorActivityId,
-		long classNameId, long classPK, OrderByComparator obc)
+		long classNameId, long classPK, OrderByComparator orderByComparator)
 		throws NoSuchActivityException, SystemException {
 		List<SocialActivity> list = findByM_C_C(mirrorActivityId, classNameId,
-				classPK, 0, 1, obc);
+				classPK, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(8);
@@ -2241,12 +2284,12 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 	}
 
 	public SocialActivity findByM_C_C_Last(long mirrorActivityId,
-		long classNameId, long classPK, OrderByComparator obc)
+		long classNameId, long classPK, OrderByComparator orderByComparator)
 		throws NoSuchActivityException, SystemException {
 		int count = countByM_C_C(mirrorActivityId, classNameId, classPK);
 
 		List<SocialActivity> list = findByM_C_C(mirrorActivityId, classNameId,
-				classPK, count - 1, count, obc);
+				classPK, count - 1, count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(8);
@@ -2273,7 +2316,8 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 
 	public SocialActivity[] findByM_C_C_PrevAndNext(long activityId,
 		long mirrorActivityId, long classNameId, long classPK,
-		OrderByComparator obc) throws NoSuchActivityException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchActivityException, SystemException {
 		SocialActivity socialActivity = findByPrimaryKey(activityId);
 
 		int count = countByM_C_C(mirrorActivityId, classNameId, classPK);
@@ -2285,9 +2329,9 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(5 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(5);
@@ -2301,8 +2345,9 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 
 			query.append(_FINDER_COLUMN_M_C_C_CLASSPK_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -2321,8 +2366,8 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 
 			qPos.add(classPK);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					socialActivity);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, socialActivity);
 
 			SocialActivity[] array = new SocialActivityImpl[3];
 
@@ -2505,46 +2550,6 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		}
 	}
 
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.setLimit(start, end);
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
 	public List<SocialActivity> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -2555,9 +2560,10 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 	}
 
 	public List<SocialActivity> findAll(int start, int end,
-		OrderByComparator obc) throws SystemException {
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<SocialActivity> list = (List<SocialActivity>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
@@ -2572,13 +2578,14 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 				StringBundler query = null;
 				String sql = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(2 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 
 					query.append(_SQL_SELECT_SOCIALACTIVITY);
 
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 
 					sql = query.toString();
 				}
@@ -2589,7 +2596,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 
 				Query q = session.createQuery(sql);
 
-				if (obc == null) {
+				if (orderByComparator == null) {
 					list = (List<SocialActivity>)QueryUtil.list(q,
 							getDialect(), start, end, false);
 
@@ -3209,20 +3216,20 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		}
 	}
 
-	@BeanReference(name = "com.liferay.portlet.social.service.persistence.SocialActivityPersistence")
-	protected com.liferay.portlet.social.service.persistence.SocialActivityPersistence socialActivityPersistence;
-	@BeanReference(name = "com.liferay.portlet.social.service.persistence.SocialRelationPersistence")
-	protected com.liferay.portlet.social.service.persistence.SocialRelationPersistence socialRelationPersistence;
-	@BeanReference(name = "com.liferay.portlet.social.service.persistence.SocialRequestPersistence")
-	protected com.liferay.portlet.social.service.persistence.SocialRequestPersistence socialRequestPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.GroupPersistence")
-	protected com.liferay.portal.service.persistence.GroupPersistence groupPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.LayoutPersistence")
-	protected com.liferay.portal.service.persistence.LayoutPersistence layoutPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.ResourcePersistence")
-	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
-	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
+	@BeanReference(type = SocialActivityPersistence.class)
+	protected SocialActivityPersistence socialActivityPersistence;
+	@BeanReference(type = SocialRelationPersistence.class)
+	protected SocialRelationPersistence socialRelationPersistence;
+	@BeanReference(type = SocialRequestPersistence.class)
+	protected SocialRequestPersistence socialRequestPersistence;
+	@BeanReference(type = GroupPersistence.class)
+	protected GroupPersistence groupPersistence;
+	@BeanReference(type = LayoutPersistence.class)
+	protected LayoutPersistence layoutPersistence;
+	@BeanReference(type = ResourcePersistence.class)
+	protected ResourcePersistence resourcePersistence;
+	@BeanReference(type = UserPersistence.class)
+	protected UserPersistence userPersistence;
 	private static final String _SQL_SELECT_SOCIALACTIVITY = "SELECT socialActivity FROM SocialActivity socialActivity";
 	private static final String _SQL_SELECT_SOCIALACTIVITY_WHERE = "SELECT socialActivity FROM SocialActivity socialActivity WHERE ";
 	private static final String _SQL_COUNT_SOCIALACTIVITY = "SELECT COUNT(socialActivity) FROM SocialActivity socialActivity";

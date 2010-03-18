@@ -66,22 +66,24 @@ public interface ExpandoRowPersistence extends BasePersistence<ExpandoRow> {
 
 	public java.util.List<com.liferay.portlet.expando.model.ExpandoRow> findByTableId(
 		long tableId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portlet.expando.model.ExpandoRow findByTableId_First(
-		long tableId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long tableId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.expando.NoSuchRowException;
 
 	public com.liferay.portlet.expando.model.ExpandoRow findByTableId_Last(
-		long tableId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long tableId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.expando.NoSuchRowException;
 
 	public com.liferay.portlet.expando.model.ExpandoRow[] findByTableId_PrevAndNext(
 		long rowId, long tableId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.expando.NoSuchRowException;
 
@@ -106,7 +108,8 @@ public interface ExpandoRowPersistence extends BasePersistence<ExpandoRow> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portlet.expando.model.ExpandoRow> findAll(
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void removeByTableId(long tableId)

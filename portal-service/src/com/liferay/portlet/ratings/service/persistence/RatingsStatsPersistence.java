@@ -79,7 +79,8 @@ public interface RatingsStatsPersistence extends BasePersistence<RatingsStats> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portlet.ratings.model.RatingsStats> findAll(
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void removeByC_C(long classNameId, long classPK)

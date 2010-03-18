@@ -129,31 +129,36 @@ public class MBThreadUtil {
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByGroupId(
 		long groupId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByGroupId(groupId, start, end, obc);
+		return getPersistence()
+				   .findByGroupId(groupId, start, end, orderByComparator);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBThread findByGroupId_First(
-		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long groupId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchThreadException {
-		return getPersistence().findByGroupId_First(groupId, obc);
+		return getPersistence().findByGroupId_First(groupId, orderByComparator);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBThread findByGroupId_Last(
-		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long groupId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchThreadException {
-		return getPersistence().findByGroupId_Last(groupId, obc);
+		return getPersistence().findByGroupId_Last(groupId, orderByComparator);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBThread[] findByGroupId_PrevAndNext(
 		long threadId, long groupId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchThreadException {
-		return getPersistence().findByGroupId_PrevAndNext(threadId, groupId, obc);
+		return getPersistence()
+				   .findByGroupId_PrevAndNext(threadId, groupId,
+			orderByComparator);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByG_C(
@@ -170,34 +175,38 @@ public class MBThreadUtil {
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByG_C(
 		long groupId, long categoryId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByG_C(groupId, categoryId, start, end, obc);
+		return getPersistence()
+				   .findByG_C(groupId, categoryId, start, end, orderByComparator);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBThread findByG_C_First(
 		long groupId, long categoryId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchThreadException {
-		return getPersistence().findByG_C_First(groupId, categoryId, obc);
+		return getPersistence()
+				   .findByG_C_First(groupId, categoryId, orderByComparator);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBThread findByG_C_Last(
 		long groupId, long categoryId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchThreadException {
-		return getPersistence().findByG_C_Last(groupId, categoryId, obc);
+		return getPersistence()
+				   .findByG_C_Last(groupId, categoryId, orderByComparator);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBThread[] findByG_C_PrevAndNext(
 		long threadId, long groupId, long categoryId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchThreadException {
 		return getPersistence()
-				   .findByG_C_PrevAndNext(threadId, groupId, categoryId, obc);
+				   .findByG_C_PrevAndNext(threadId, groupId, categoryId,
+			orderByComparator);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByG_S(
@@ -214,34 +223,38 @@ public class MBThreadUtil {
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByG_S(
 		long groupId, int status, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByG_S(groupId, status, start, end, obc);
+		return getPersistence()
+				   .findByG_S(groupId, status, start, end, orderByComparator);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBThread findByG_S_First(
 		long groupId, int status,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchThreadException {
-		return getPersistence().findByG_S_First(groupId, status, obc);
+		return getPersistence()
+				   .findByG_S_First(groupId, status, orderByComparator);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBThread findByG_S_Last(
 		long groupId, int status,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchThreadException {
-		return getPersistence().findByG_S_Last(groupId, status, obc);
+		return getPersistence()
+				   .findByG_S_Last(groupId, status, orderByComparator);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBThread[] findByG_S_PrevAndNext(
 		long threadId, long groupId, int status,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchThreadException {
 		return getPersistence()
-				   .findByG_S_PrevAndNext(threadId, groupId, status, obc);
+				   .findByG_S_PrevAndNext(threadId, groupId, status,
+			orderByComparator);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByC_P(
@@ -258,34 +271,39 @@ public class MBThreadUtil {
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByC_P(
 		long categoryId, double priority, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByC_P(categoryId, priority, start, end, obc);
+		return getPersistence()
+				   .findByC_P(categoryId, priority, start, end,
+			orderByComparator);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBThread findByC_P_First(
 		long categoryId, double priority,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchThreadException {
-		return getPersistence().findByC_P_First(categoryId, priority, obc);
+		return getPersistence()
+				   .findByC_P_First(categoryId, priority, orderByComparator);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBThread findByC_P_Last(
 		long categoryId, double priority,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchThreadException {
-		return getPersistence().findByC_P_Last(categoryId, priority, obc);
+		return getPersistence()
+				   .findByC_P_Last(categoryId, priority, orderByComparator);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBThread[] findByC_P_PrevAndNext(
 		long threadId, long categoryId, double priority,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchThreadException {
 		return getPersistence()
-				   .findByC_P_PrevAndNext(threadId, categoryId, priority, obc);
+				   .findByC_P_PrevAndNext(threadId, categoryId, priority,
+			orderByComparator);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByG_C_L(
@@ -303,40 +321,43 @@ public class MBThreadUtil {
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByG_C_L(
 		long groupId, long categoryId, java.util.Date lastPostDate, int start,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
 				   .findByG_C_L(groupId, categoryId, lastPostDate, start, end,
-			obc);
+			orderByComparator);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBThread findByG_C_L_First(
 		long groupId, long categoryId, java.util.Date lastPostDate,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchThreadException {
 		return getPersistence()
-				   .findByG_C_L_First(groupId, categoryId, lastPostDate, obc);
+				   .findByG_C_L_First(groupId, categoryId, lastPostDate,
+			orderByComparator);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBThread findByG_C_L_Last(
 		long groupId, long categoryId, java.util.Date lastPostDate,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchThreadException {
 		return getPersistence()
-				   .findByG_C_L_Last(groupId, categoryId, lastPostDate, obc);
+				   .findByG_C_L_Last(groupId, categoryId, lastPostDate,
+			orderByComparator);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBThread[] findByG_C_L_PrevAndNext(
 		long threadId, long groupId, long categoryId,
 		java.util.Date lastPostDate,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchThreadException {
 		return getPersistence()
 				   .findByG_C_L_PrevAndNext(threadId, groupId, categoryId,
-			lastPostDate, obc);
+			lastPostDate, orderByComparator);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByG_C_S(
@@ -354,38 +375,41 @@ public class MBThreadUtil {
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByG_C_S(
 		long groupId, long categoryId, int status, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .findByG_C_S(groupId, categoryId, status, start, end, obc);
+				   .findByG_C_S(groupId, categoryId, status, start, end,
+			orderByComparator);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBThread findByG_C_S_First(
 		long groupId, long categoryId, int status,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchThreadException {
 		return getPersistence()
-				   .findByG_C_S_First(groupId, categoryId, status, obc);
+				   .findByG_C_S_First(groupId, categoryId, status,
+			orderByComparator);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBThread findByG_C_S_Last(
 		long groupId, long categoryId, int status,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchThreadException {
 		return getPersistence()
-				   .findByG_C_S_Last(groupId, categoryId, status, obc);
+				   .findByG_C_S_Last(groupId, categoryId, status,
+			orderByComparator);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBThread[] findByG_C_S_PrevAndNext(
 		long threadId, long groupId, long categoryId, int status,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchThreadException {
 		return getPersistence()
 				   .findByG_C_S_PrevAndNext(threadId, groupId, categoryId,
-			status, obc);
+			status, orderByComparator);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBThread> findAll()
@@ -400,9 +424,10 @@ public class MBThreadUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBThread> findAll(
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findAll(start, end, obc);
+		return getPersistence().findAll(start, end, orderByComparator);
 	}
 
 	public static void removeByGroupId(long groupId)

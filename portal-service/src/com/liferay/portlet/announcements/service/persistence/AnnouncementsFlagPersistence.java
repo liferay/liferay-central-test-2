@@ -69,22 +69,24 @@ public interface AnnouncementsFlagPersistence extends BasePersistence<Announceme
 
 	public java.util.List<com.liferay.portlet.announcements.model.AnnouncementsFlag> findByEntryId(
 		long entryId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portlet.announcements.model.AnnouncementsFlag findByEntryId_First(
-		long entryId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long entryId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.announcements.NoSuchFlagException;
 
 	public com.liferay.portlet.announcements.model.AnnouncementsFlag findByEntryId_Last(
-		long entryId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long entryId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.announcements.NoSuchFlagException;
 
 	public com.liferay.portlet.announcements.model.AnnouncementsFlag[] findByEntryId_PrevAndNext(
 		long flagId, long entryId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.announcements.NoSuchFlagException;
 
@@ -109,7 +111,8 @@ public interface AnnouncementsFlagPersistence extends BasePersistence<Announceme
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portlet.announcements.model.AnnouncementsFlag> findAll(
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void removeByEntryId(long entryId)

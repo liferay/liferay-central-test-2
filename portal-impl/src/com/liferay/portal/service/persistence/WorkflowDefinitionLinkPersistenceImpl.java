@@ -92,23 +92,30 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 			new String[] {
 				Long.class.getName(), Long.class.getName(), Long.class.getName()
 			});
-	public static final FinderPath FINDER_PATH_FIND_BY_W_W = new FinderPath(WorkflowDefinitionLinkModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_FIND_BY_C_W_W = new FinderPath(WorkflowDefinitionLinkModelImpl.ENTITY_CACHE_ENABLED,
 			WorkflowDefinitionLinkModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "findByW_W",
-			new String[] { String.class.getName(), Integer.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_W_W = new FinderPath(WorkflowDefinitionLinkModelImpl.ENTITY_CACHE_ENABLED,
-			WorkflowDefinitionLinkModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "findByW_W",
+			FINDER_CLASS_NAME_LIST, "findByC_W_W",
 			new String[] {
-				String.class.getName(), Integer.class.getName(),
+				Long.class.getName(), String.class.getName(),
+				Integer.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_C_W_W = new FinderPath(WorkflowDefinitionLinkModelImpl.ENTITY_CACHE_ENABLED,
+			WorkflowDefinitionLinkModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByC_W_W",
+			new String[] {
+				Long.class.getName(), String.class.getName(),
+				Integer.class.getName(),
 				
 			"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			});
-	public static final FinderPath FINDER_PATH_COUNT_BY_W_W = new FinderPath(WorkflowDefinitionLinkModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_COUNT_BY_C_W_W = new FinderPath(WorkflowDefinitionLinkModelImpl.ENTITY_CACHE_ENABLED,
 			WorkflowDefinitionLinkModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "countByW_W",
-			new String[] { String.class.getName(), Integer.class.getName() });
+			FINDER_CLASS_NAME_LIST, "countByC_W_W",
+			new String[] {
+				Long.class.getName(), String.class.getName(),
+				Integer.class.getName()
+			});
 	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(WorkflowDefinitionLinkModelImpl.ENTITY_CACHE_ENABLED,
 			WorkflowDefinitionLinkModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "findAll", new String[0]);
@@ -767,14 +774,16 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 		}
 	}
 
-	public List<WorkflowDefinitionLink> findByW_W(
+	public List<WorkflowDefinitionLink> findByC_W_W(long companyId,
 		String workflowDefinitionName, int workflowDefinitionVersion)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
+				new Long(companyId),
+				
 				workflowDefinitionName, new Integer(workflowDefinitionVersion)
 			};
 
-		List<WorkflowDefinitionLink> list = (List<WorkflowDefinitionLink>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_W_W,
+		List<WorkflowDefinitionLink> list = (List<WorkflowDefinitionLink>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_C_W_W,
 				finderArgs, this);
 
 		if (list == null) {
@@ -783,23 +792,25 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(4);
+				StringBundler query = new StringBundler(5);
 
 				query.append(_SQL_SELECT_WORKFLOWDEFINITIONLINK_WHERE);
 
+				query.append(_FINDER_COLUMN_C_W_W_COMPANYID_2);
+
 				if (workflowDefinitionName == null) {
-					query.append(_FINDER_COLUMN_W_W_WORKFLOWDEFINITIONNAME_1);
+					query.append(_FINDER_COLUMN_C_W_W_WORKFLOWDEFINITIONNAME_1);
 				}
 				else {
 					if (workflowDefinitionName.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_W_W_WORKFLOWDEFINITIONNAME_3);
+						query.append(_FINDER_COLUMN_C_W_W_WORKFLOWDEFINITIONNAME_3);
 					}
 					else {
-						query.append(_FINDER_COLUMN_W_W_WORKFLOWDEFINITIONNAME_2);
+						query.append(_FINDER_COLUMN_C_W_W_WORKFLOWDEFINITIONNAME_2);
 					}
 				}
 
-				query.append(_FINDER_COLUMN_W_W_WORKFLOWDEFINITIONVERSION_2);
+				query.append(_FINDER_COLUMN_C_W_W_WORKFLOWDEFINITIONVERSION_2);
 
 				query.append(WorkflowDefinitionLinkModelImpl.ORDER_BY_JPQL);
 
@@ -808,6 +819,8 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(companyId);
 
 				if (workflowDefinitionName != null) {
 					qPos.add(workflowDefinitionName);
@@ -827,8 +840,8 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_W_W, finderArgs,
-					list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_W_W,
+					finderArgs, list);
 
 				closeSession(session);
 			}
@@ -837,25 +850,27 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 		return list;
 	}
 
-	public List<WorkflowDefinitionLink> findByW_W(
+	public List<WorkflowDefinitionLink> findByC_W_W(long companyId,
 		String workflowDefinitionName, int workflowDefinitionVersion,
 		int start, int end) throws SystemException {
-		return findByW_W(workflowDefinitionName, workflowDefinitionVersion,
-			start, end, null);
+		return findByC_W_W(companyId, workflowDefinitionName,
+			workflowDefinitionVersion, start, end, null);
 	}
 
-	public List<WorkflowDefinitionLink> findByW_W(
+	public List<WorkflowDefinitionLink> findByC_W_W(long companyId,
 		String workflowDefinitionName, int workflowDefinitionVersion,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
+				new Long(companyId),
+				
 				workflowDefinitionName, new Integer(workflowDefinitionVersion),
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
 			};
 
-		List<WorkflowDefinitionLink> list = (List<WorkflowDefinitionLink>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_W_W,
+		List<WorkflowDefinitionLink> list = (List<WorkflowDefinitionLink>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_C_W_W,
 				finderArgs, this);
 
 		if (list == null) {
@@ -867,28 +882,30 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 				StringBundler query = null;
 
 				if (orderByComparator != null) {
-					query = new StringBundler(4 +
+					query = new StringBundler(5 +
 							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
-					query = new StringBundler(4);
+					query = new StringBundler(5);
 				}
 
 				query.append(_SQL_SELECT_WORKFLOWDEFINITIONLINK_WHERE);
 
+				query.append(_FINDER_COLUMN_C_W_W_COMPANYID_2);
+
 				if (workflowDefinitionName == null) {
-					query.append(_FINDER_COLUMN_W_W_WORKFLOWDEFINITIONNAME_1);
+					query.append(_FINDER_COLUMN_C_W_W_WORKFLOWDEFINITIONNAME_1);
 				}
 				else {
 					if (workflowDefinitionName.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_W_W_WORKFLOWDEFINITIONNAME_3);
+						query.append(_FINDER_COLUMN_C_W_W_WORKFLOWDEFINITIONNAME_3);
 					}
 					else {
-						query.append(_FINDER_COLUMN_W_W_WORKFLOWDEFINITIONNAME_2);
+						query.append(_FINDER_COLUMN_C_W_W_WORKFLOWDEFINITIONNAME_2);
 					}
 				}
 
-				query.append(_FINDER_COLUMN_W_W_WORKFLOWDEFINITIONVERSION_2);
+				query.append(_FINDER_COLUMN_C_W_W_WORKFLOWDEFINITIONVERSION_2);
 
 				if (orderByComparator != null) {
 					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
@@ -904,6 +921,8 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(companyId);
 
 				if (workflowDefinitionName != null) {
 					qPos.add(workflowDefinitionName);
@@ -924,7 +943,7 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_W_W,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_C_W_W,
 					finderArgs, list);
 
 				closeSession(session);
@@ -934,19 +953,23 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 		return list;
 	}
 
-	public WorkflowDefinitionLink findByW_W_First(
+	public WorkflowDefinitionLink findByC_W_W_First(long companyId,
 		String workflowDefinitionName, int workflowDefinitionVersion,
 		OrderByComparator orderByComparator)
 		throws NoSuchWorkflowDefinitionLinkException, SystemException {
-		List<WorkflowDefinitionLink> list = findByW_W(workflowDefinitionName,
-				workflowDefinitionVersion, 0, 1, orderByComparator);
+		List<WorkflowDefinitionLink> list = findByC_W_W(companyId,
+				workflowDefinitionName, workflowDefinitionVersion, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(6);
+			StringBundler msg = new StringBundler(8);
 
 			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("workflowDefinitionName=");
+			msg.append("companyId=");
+			msg.append(companyId);
+
+			msg.append(", workflowDefinitionName=");
 			msg.append(workflowDefinitionName);
 
 			msg.append(", workflowDefinitionVersion=");
@@ -961,21 +984,26 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 		}
 	}
 
-	public WorkflowDefinitionLink findByW_W_Last(
+	public WorkflowDefinitionLink findByC_W_W_Last(long companyId,
 		String workflowDefinitionName, int workflowDefinitionVersion,
 		OrderByComparator orderByComparator)
 		throws NoSuchWorkflowDefinitionLinkException, SystemException {
-		int count = countByW_W(workflowDefinitionName, workflowDefinitionVersion);
+		int count = countByC_W_W(companyId, workflowDefinitionName,
+				workflowDefinitionVersion);
 
-		List<WorkflowDefinitionLink> list = findByW_W(workflowDefinitionName,
-				workflowDefinitionVersion, count - 1, count, orderByComparator);
+		List<WorkflowDefinitionLink> list = findByC_W_W(companyId,
+				workflowDefinitionName, workflowDefinitionVersion, count - 1,
+				count, orderByComparator);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(6);
+			StringBundler msg = new StringBundler(8);
 
 			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("workflowDefinitionName=");
+			msg.append("companyId=");
+			msg.append(companyId);
+
+			msg.append(", workflowDefinitionName=");
 			msg.append(workflowDefinitionName);
 
 			msg.append(", workflowDefinitionVersion=");
@@ -990,13 +1018,15 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 		}
 	}
 
-	public WorkflowDefinitionLink[] findByW_W_PrevAndNext(
-		long workflowDefinitionLinkId, String workflowDefinitionName,
-		int workflowDefinitionVersion, OrderByComparator orderByComparator)
+	public WorkflowDefinitionLink[] findByC_W_W_PrevAndNext(
+		long workflowDefinitionLinkId, long companyId,
+		String workflowDefinitionName, int workflowDefinitionVersion,
+		OrderByComparator orderByComparator)
 		throws NoSuchWorkflowDefinitionLinkException, SystemException {
 		WorkflowDefinitionLink workflowDefinitionLink = findByPrimaryKey(workflowDefinitionLinkId);
 
-		int count = countByW_W(workflowDefinitionName, workflowDefinitionVersion);
+		int count = countByC_W_W(companyId, workflowDefinitionName,
+				workflowDefinitionVersion);
 
 		Session session = null;
 
@@ -1006,28 +1036,30 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 			StringBundler query = null;
 
 			if (orderByComparator != null) {
-				query = new StringBundler(4 +
+				query = new StringBundler(5 +
 						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
-				query = new StringBundler(4);
+				query = new StringBundler(5);
 			}
 
 			query.append(_SQL_SELECT_WORKFLOWDEFINITIONLINK_WHERE);
 
+			query.append(_FINDER_COLUMN_C_W_W_COMPANYID_2);
+
 			if (workflowDefinitionName == null) {
-				query.append(_FINDER_COLUMN_W_W_WORKFLOWDEFINITIONNAME_1);
+				query.append(_FINDER_COLUMN_C_W_W_WORKFLOWDEFINITIONNAME_1);
 			}
 			else {
 				if (workflowDefinitionName.equals(StringPool.BLANK)) {
-					query.append(_FINDER_COLUMN_W_W_WORKFLOWDEFINITIONNAME_3);
+					query.append(_FINDER_COLUMN_C_W_W_WORKFLOWDEFINITIONNAME_3);
 				}
 				else {
-					query.append(_FINDER_COLUMN_W_W_WORKFLOWDEFINITIONNAME_2);
+					query.append(_FINDER_COLUMN_C_W_W_WORKFLOWDEFINITIONNAME_2);
 				}
 			}
 
-			query.append(_FINDER_COLUMN_W_W_WORKFLOWDEFINITIONVERSION_2);
+			query.append(_FINDER_COLUMN_C_W_W_WORKFLOWDEFINITIONVERSION_2);
 
 			if (orderByComparator != null) {
 				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
@@ -1043,6 +1075,8 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 			Query q = session.createQuery(sql);
 
 			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(companyId);
 
 			if (workflowDefinitionName != null) {
 				qPos.add(workflowDefinitionName);
@@ -1160,10 +1194,10 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 		remove(workflowDefinitionLink);
 	}
 
-	public void removeByW_W(String workflowDefinitionName,
+	public void removeByC_W_W(long companyId, String workflowDefinitionName,
 		int workflowDefinitionVersion) throws SystemException {
-		for (WorkflowDefinitionLink workflowDefinitionLink : findByW_W(
-				workflowDefinitionName, workflowDefinitionVersion)) {
+		for (WorkflowDefinitionLink workflowDefinitionLink : findByC_W_W(
+				companyId, workflowDefinitionName, workflowDefinitionVersion)) {
 			remove(workflowDefinitionLink);
 		}
 	}
@@ -1277,13 +1311,15 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 		return count.intValue();
 	}
 
-	public int countByW_W(String workflowDefinitionName,
+	public int countByC_W_W(long companyId, String workflowDefinitionName,
 		int workflowDefinitionVersion) throws SystemException {
 		Object[] finderArgs = new Object[] {
+				new Long(companyId),
+				
 				workflowDefinitionName, new Integer(workflowDefinitionVersion)
 			};
 
-		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_W_W,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_W_W,
 				finderArgs, this);
 
 		if (count == null) {
@@ -1292,29 +1328,33 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(3);
+				StringBundler query = new StringBundler(4);
 
 				query.append(_SQL_COUNT_WORKFLOWDEFINITIONLINK_WHERE);
 
+				query.append(_FINDER_COLUMN_C_W_W_COMPANYID_2);
+
 				if (workflowDefinitionName == null) {
-					query.append(_FINDER_COLUMN_W_W_WORKFLOWDEFINITIONNAME_1);
+					query.append(_FINDER_COLUMN_C_W_W_WORKFLOWDEFINITIONNAME_1);
 				}
 				else {
 					if (workflowDefinitionName.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_W_W_WORKFLOWDEFINITIONNAME_3);
+						query.append(_FINDER_COLUMN_C_W_W_WORKFLOWDEFINITIONNAME_3);
 					}
 					else {
-						query.append(_FINDER_COLUMN_W_W_WORKFLOWDEFINITIONNAME_2);
+						query.append(_FINDER_COLUMN_C_W_W_WORKFLOWDEFINITIONNAME_2);
 					}
 				}
 
-				query.append(_FINDER_COLUMN_W_W_WORKFLOWDEFINITIONVERSION_2);
+				query.append(_FINDER_COLUMN_C_W_W_WORKFLOWDEFINITIONVERSION_2);
 
 				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
 				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(companyId);
 
 				if (workflowDefinitionName != null) {
 					qPos.add(workflowDefinitionName);
@@ -1332,8 +1372,8 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 					count = Long.valueOf(0);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_W_W, finderArgs,
-					count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_W_W,
+					finderArgs, count);
 
 				closeSession(session);
 			}
@@ -1398,110 +1438,110 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 		}
 	}
 
-	@BeanReference(name = "com.liferay.portal.service.persistence.AccountPersistence")
-	protected com.liferay.portal.service.persistence.AccountPersistence accountPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.AddressPersistence")
-	protected com.liferay.portal.service.persistence.AddressPersistence addressPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.BrowserTrackerPersistence")
-	protected com.liferay.portal.service.persistence.BrowserTrackerPersistence browserTrackerPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.ClassNamePersistence")
-	protected com.liferay.portal.service.persistence.ClassNamePersistence classNamePersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.CompanyPersistence")
-	protected com.liferay.portal.service.persistence.CompanyPersistence companyPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.ContactPersistence")
-	protected com.liferay.portal.service.persistence.ContactPersistence contactPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.CountryPersistence")
-	protected com.liferay.portal.service.persistence.CountryPersistence countryPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.EmailAddressPersistence")
-	protected com.liferay.portal.service.persistence.EmailAddressPersistence emailAddressPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.GroupPersistence")
-	protected com.liferay.portal.service.persistence.GroupPersistence groupPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.ImagePersistence")
-	protected com.liferay.portal.service.persistence.ImagePersistence imagePersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.LayoutPersistence")
-	protected com.liferay.portal.service.persistence.LayoutPersistence layoutPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.LayoutPrototypePersistence")
-	protected com.liferay.portal.service.persistence.LayoutPrototypePersistence layoutPrototypePersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.LayoutSetPersistence")
-	protected com.liferay.portal.service.persistence.LayoutSetPersistence layoutSetPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.LayoutSetPrototypePersistence")
-	protected com.liferay.portal.service.persistence.LayoutSetPrototypePersistence layoutSetPrototypePersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.ListTypePersistence")
-	protected com.liferay.portal.service.persistence.ListTypePersistence listTypePersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.LockPersistence")
-	protected com.liferay.portal.service.persistence.LockPersistence lockPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.MembershipRequestPersistence")
-	protected com.liferay.portal.service.persistence.MembershipRequestPersistence membershipRequestPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.OrganizationPersistence")
-	protected com.liferay.portal.service.persistence.OrganizationPersistence organizationPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.OrgGroupPermissionPersistence")
-	protected com.liferay.portal.service.persistence.OrgGroupPermissionPersistence orgGroupPermissionPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.OrgGroupRolePersistence")
-	protected com.liferay.portal.service.persistence.OrgGroupRolePersistence orgGroupRolePersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.OrgLaborPersistence")
-	protected com.liferay.portal.service.persistence.OrgLaborPersistence orgLaborPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.PasswordPolicyPersistence")
-	protected com.liferay.portal.service.persistence.PasswordPolicyPersistence passwordPolicyPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.PasswordPolicyRelPersistence")
-	protected com.liferay.portal.service.persistence.PasswordPolicyRelPersistence passwordPolicyRelPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.PasswordTrackerPersistence")
-	protected com.liferay.portal.service.persistence.PasswordTrackerPersistence passwordTrackerPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.PermissionPersistence")
-	protected com.liferay.portal.service.persistence.PermissionPersistence permissionPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.PhonePersistence")
-	protected com.liferay.portal.service.persistence.PhonePersistence phonePersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.PluginSettingPersistence")
-	protected com.liferay.portal.service.persistence.PluginSettingPersistence pluginSettingPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.PortletPersistence")
-	protected com.liferay.portal.service.persistence.PortletPersistence portletPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.PortletItemPersistence")
-	protected com.liferay.portal.service.persistence.PortletItemPersistence portletItemPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.PortletPreferencesPersistence")
-	protected com.liferay.portal.service.persistence.PortletPreferencesPersistence portletPreferencesPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.RegionPersistence")
-	protected com.liferay.portal.service.persistence.RegionPersistence regionPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.ReleasePersistence")
-	protected com.liferay.portal.service.persistence.ReleasePersistence releasePersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.ResourcePersistence")
-	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.ResourceActionPersistence")
-	protected com.liferay.portal.service.persistence.ResourceActionPersistence resourceActionPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.ResourceCodePersistence")
-	protected com.liferay.portal.service.persistence.ResourceCodePersistence resourceCodePersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.ResourcePermissionPersistence")
-	protected com.liferay.portal.service.persistence.ResourcePermissionPersistence resourcePermissionPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.RolePersistence")
-	protected com.liferay.portal.service.persistence.RolePersistence rolePersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.ServiceComponentPersistence")
-	protected com.liferay.portal.service.persistence.ServiceComponentPersistence serviceComponentPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.ShardPersistence")
-	protected com.liferay.portal.service.persistence.ShardPersistence shardPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.SubscriptionPersistence")
-	protected com.liferay.portal.service.persistence.SubscriptionPersistence subscriptionPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.TeamPersistence")
-	protected com.liferay.portal.service.persistence.TeamPersistence teamPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
-	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.UserGroupPersistence")
-	protected com.liferay.portal.service.persistence.UserGroupPersistence userGroupPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.UserGroupGroupRolePersistence")
-	protected com.liferay.portal.service.persistence.UserGroupGroupRolePersistence userGroupGroupRolePersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.UserGroupRolePersistence")
-	protected com.liferay.portal.service.persistence.UserGroupRolePersistence userGroupRolePersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.UserIdMapperPersistence")
-	protected com.liferay.portal.service.persistence.UserIdMapperPersistence userIdMapperPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.UserTrackerPersistence")
-	protected com.liferay.portal.service.persistence.UserTrackerPersistence userTrackerPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.UserTrackerPathPersistence")
-	protected com.liferay.portal.service.persistence.UserTrackerPathPersistence userTrackerPathPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.WebDAVPropsPersistence")
-	protected com.liferay.portal.service.persistence.WebDAVPropsPersistence webDAVPropsPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.WebsitePersistence")
-	protected com.liferay.portal.service.persistence.WebsitePersistence websitePersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence")
-	protected com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence")
-	protected com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
+	@BeanReference(type = AccountPersistence.class)
+	protected AccountPersistence accountPersistence;
+	@BeanReference(type = AddressPersistence.class)
+	protected AddressPersistence addressPersistence;
+	@BeanReference(type = BrowserTrackerPersistence.class)
+	protected BrowserTrackerPersistence browserTrackerPersistence;
+	@BeanReference(type = ClassNamePersistence.class)
+	protected ClassNamePersistence classNamePersistence;
+	@BeanReference(type = CompanyPersistence.class)
+	protected CompanyPersistence companyPersistence;
+	@BeanReference(type = ContactPersistence.class)
+	protected ContactPersistence contactPersistence;
+	@BeanReference(type = CountryPersistence.class)
+	protected CountryPersistence countryPersistence;
+	@BeanReference(type = EmailAddressPersistence.class)
+	protected EmailAddressPersistence emailAddressPersistence;
+	@BeanReference(type = GroupPersistence.class)
+	protected GroupPersistence groupPersistence;
+	@BeanReference(type = ImagePersistence.class)
+	protected ImagePersistence imagePersistence;
+	@BeanReference(type = LayoutPersistence.class)
+	protected LayoutPersistence layoutPersistence;
+	@BeanReference(type = LayoutPrototypePersistence.class)
+	protected LayoutPrototypePersistence layoutPrototypePersistence;
+	@BeanReference(type = LayoutSetPersistence.class)
+	protected LayoutSetPersistence layoutSetPersistence;
+	@BeanReference(type = LayoutSetPrototypePersistence.class)
+	protected LayoutSetPrototypePersistence layoutSetPrototypePersistence;
+	@BeanReference(type = ListTypePersistence.class)
+	protected ListTypePersistence listTypePersistence;
+	@BeanReference(type = LockPersistence.class)
+	protected LockPersistence lockPersistence;
+	@BeanReference(type = MembershipRequestPersistence.class)
+	protected MembershipRequestPersistence membershipRequestPersistence;
+	@BeanReference(type = OrganizationPersistence.class)
+	protected OrganizationPersistence organizationPersistence;
+	@BeanReference(type = OrgGroupPermissionPersistence.class)
+	protected OrgGroupPermissionPersistence orgGroupPermissionPersistence;
+	@BeanReference(type = OrgGroupRolePersistence.class)
+	protected OrgGroupRolePersistence orgGroupRolePersistence;
+	@BeanReference(type = OrgLaborPersistence.class)
+	protected OrgLaborPersistence orgLaborPersistence;
+	@BeanReference(type = PasswordPolicyPersistence.class)
+	protected PasswordPolicyPersistence passwordPolicyPersistence;
+	@BeanReference(type = PasswordPolicyRelPersistence.class)
+	protected PasswordPolicyRelPersistence passwordPolicyRelPersistence;
+	@BeanReference(type = PasswordTrackerPersistence.class)
+	protected PasswordTrackerPersistence passwordTrackerPersistence;
+	@BeanReference(type = PermissionPersistence.class)
+	protected PermissionPersistence permissionPersistence;
+	@BeanReference(type = PhonePersistence.class)
+	protected PhonePersistence phonePersistence;
+	@BeanReference(type = PluginSettingPersistence.class)
+	protected PluginSettingPersistence pluginSettingPersistence;
+	@BeanReference(type = PortletPersistence.class)
+	protected PortletPersistence portletPersistence;
+	@BeanReference(type = PortletItemPersistence.class)
+	protected PortletItemPersistence portletItemPersistence;
+	@BeanReference(type = PortletPreferencesPersistence.class)
+	protected PortletPreferencesPersistence portletPreferencesPersistence;
+	@BeanReference(type = RegionPersistence.class)
+	protected RegionPersistence regionPersistence;
+	@BeanReference(type = ReleasePersistence.class)
+	protected ReleasePersistence releasePersistence;
+	@BeanReference(type = ResourcePersistence.class)
+	protected ResourcePersistence resourcePersistence;
+	@BeanReference(type = ResourceActionPersistence.class)
+	protected ResourceActionPersistence resourceActionPersistence;
+	@BeanReference(type = ResourceCodePersistence.class)
+	protected ResourceCodePersistence resourceCodePersistence;
+	@BeanReference(type = ResourcePermissionPersistence.class)
+	protected ResourcePermissionPersistence resourcePermissionPersistence;
+	@BeanReference(type = RolePersistence.class)
+	protected RolePersistence rolePersistence;
+	@BeanReference(type = ServiceComponentPersistence.class)
+	protected ServiceComponentPersistence serviceComponentPersistence;
+	@BeanReference(type = ShardPersistence.class)
+	protected ShardPersistence shardPersistence;
+	@BeanReference(type = SubscriptionPersistence.class)
+	protected SubscriptionPersistence subscriptionPersistence;
+	@BeanReference(type = TeamPersistence.class)
+	protected TeamPersistence teamPersistence;
+	@BeanReference(type = UserPersistence.class)
+	protected UserPersistence userPersistence;
+	@BeanReference(type = UserGroupPersistence.class)
+	protected UserGroupPersistence userGroupPersistence;
+	@BeanReference(type = UserGroupGroupRolePersistence.class)
+	protected UserGroupGroupRolePersistence userGroupGroupRolePersistence;
+	@BeanReference(type = UserGroupRolePersistence.class)
+	protected UserGroupRolePersistence userGroupRolePersistence;
+	@BeanReference(type = UserIdMapperPersistence.class)
+	protected UserIdMapperPersistence userIdMapperPersistence;
+	@BeanReference(type = UserTrackerPersistence.class)
+	protected UserTrackerPersistence userTrackerPersistence;
+	@BeanReference(type = UserTrackerPathPersistence.class)
+	protected UserTrackerPathPersistence userTrackerPathPersistence;
+	@BeanReference(type = WebDAVPropsPersistence.class)
+	protected WebDAVPropsPersistence webDAVPropsPersistence;
+	@BeanReference(type = WebsitePersistence.class)
+	protected WebsitePersistence websitePersistence;
+	@BeanReference(type = WorkflowDefinitionLinkPersistence.class)
+	protected WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
+	@BeanReference(type = WorkflowInstanceLinkPersistence.class)
+	protected WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
 	private static final String _SQL_SELECT_WORKFLOWDEFINITIONLINK = "SELECT workflowDefinitionLink FROM WorkflowDefinitionLink workflowDefinitionLink";
 	private static final String _SQL_SELECT_WORKFLOWDEFINITIONLINK_WHERE = "SELECT workflowDefinitionLink FROM WorkflowDefinitionLink workflowDefinitionLink WHERE ";
 	private static final String _SQL_COUNT_WORKFLOWDEFINITIONLINK = "SELECT COUNT(workflowDefinitionLink) FROM WorkflowDefinitionLink workflowDefinitionLink";
@@ -1510,10 +1550,12 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 	private static final String _FINDER_COLUMN_G_C_C_GROUPID_2 = "workflowDefinitionLink.groupId = ? AND ";
 	private static final String _FINDER_COLUMN_G_C_C_COMPANYID_2 = "workflowDefinitionLink.companyId = ? AND ";
 	private static final String _FINDER_COLUMN_G_C_C_CLASSNAMEID_2 = "workflowDefinitionLink.classNameId = ?";
-	private static final String _FINDER_COLUMN_W_W_WORKFLOWDEFINITIONNAME_1 = "workflowDefinitionLink.workflowDefinitionName IS NULL AND ";
-	private static final String _FINDER_COLUMN_W_W_WORKFLOWDEFINITIONNAME_2 = "workflowDefinitionLink.workflowDefinitionName = ? AND ";
-	private static final String _FINDER_COLUMN_W_W_WORKFLOWDEFINITIONNAME_3 = "(workflowDefinitionLink.workflowDefinitionName IS NULL OR workflowDefinitionLink.workflowDefinitionName = ?) AND ";
-	private static final String _FINDER_COLUMN_W_W_WORKFLOWDEFINITIONVERSION_2 = "workflowDefinitionLink.workflowDefinitionVersion = ?";
+	private static final String _FINDER_COLUMN_C_W_W_COMPANYID_2 = "workflowDefinitionLink.companyId = ? AND ";
+	private static final String _FINDER_COLUMN_C_W_W_WORKFLOWDEFINITIONNAME_1 = "workflowDefinitionLink.workflowDefinitionName IS NULL AND ";
+	private static final String _FINDER_COLUMN_C_W_W_WORKFLOWDEFINITIONNAME_2 = "workflowDefinitionLink.workflowDefinitionName = ? AND ";
+	private static final String _FINDER_COLUMN_C_W_W_WORKFLOWDEFINITIONNAME_3 = "(workflowDefinitionLink.workflowDefinitionName IS NULL OR workflowDefinitionLink.workflowDefinitionName = ?) AND ";
+	private static final String _FINDER_COLUMN_C_W_W_WORKFLOWDEFINITIONVERSION_2 =
+		"workflowDefinitionLink.workflowDefinitionVersion = ?";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "workflowDefinitionLink.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No WorkflowDefinitionLink exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No WorkflowDefinitionLink exists with the key {";

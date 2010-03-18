@@ -22,7 +22,6 @@ import com.liferay.portal.kernel.dao.jdbc.MappingSqlQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.jdbc.RowMapper;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
-import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
@@ -43,6 +42,8 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.BatchSessionUtil;
+import com.liferay.portal.service.persistence.ResourcePersistence;
+import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 import com.liferay.portlet.softwarecatalog.NoSuchLicenseException;
@@ -406,11 +407,12 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	}
 
 	public List<SCLicense> findByActive(boolean active, int start, int end,
-		OrderByComparator obc) throws SystemException {
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				Boolean.valueOf(active),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<SCLicense> list = (List<SCLicense>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_ACTIVE,
@@ -424,9 +426,9 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(3);
@@ -436,8 +438,9 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 
 				query.append(_FINDER_COLUMN_ACTIVE_ACTIVE_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -475,9 +478,10 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 		return list;
 	}
 
-	public SCLicense findByActive_First(boolean active, OrderByComparator obc)
+	public SCLicense findByActive_First(boolean active,
+		OrderByComparator orderByComparator)
 		throws NoSuchLicenseException, SystemException {
-		List<SCLicense> list = findByActive(active, 0, 1, obc);
+		List<SCLicense> list = findByActive(active, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -496,11 +500,13 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 		}
 	}
 
-	public SCLicense findByActive_Last(boolean active, OrderByComparator obc)
+	public SCLicense findByActive_Last(boolean active,
+		OrderByComparator orderByComparator)
 		throws NoSuchLicenseException, SystemException {
 		int count = countByActive(active);
 
-		List<SCLicense> list = findByActive(active, count - 1, count, obc);
+		List<SCLicense> list = findByActive(active, count - 1, count,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -520,7 +526,8 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	}
 
 	public SCLicense[] findByActive_PrevAndNext(long licenseId, boolean active,
-		OrderByComparator obc) throws NoSuchLicenseException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchLicenseException, SystemException {
 		SCLicense scLicense = findByPrimaryKey(licenseId);
 
 		int count = countByActive(active);
@@ -532,9 +539,9 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(3);
@@ -544,8 +551,9 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 
 			query.append(_FINDER_COLUMN_ACTIVE_ACTIVE_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -560,8 +568,8 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 
 			qPos.add(active);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					scLicense);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, scLicense);
 
 			SCLicense[] array = new SCLicenseImpl[3];
 
@@ -642,11 +650,13 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	}
 
 	public List<SCLicense> findByA_R(boolean active, boolean recommended,
-		int start, int end, OrderByComparator obc) throws SystemException {
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
 		Object[] finderArgs = new Object[] {
 				Boolean.valueOf(active), Boolean.valueOf(recommended),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<SCLicense> list = (List<SCLicense>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_A_R,
@@ -660,9 +670,9 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(4 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(4);
@@ -674,8 +684,9 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 
 				query.append(_FINDER_COLUMN_A_R_RECOMMENDED_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -716,8 +727,10 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	}
 
 	public SCLicense findByA_R_First(boolean active, boolean recommended,
-		OrderByComparator obc) throws NoSuchLicenseException, SystemException {
-		List<SCLicense> list = findByA_R(active, recommended, 0, 1, obc);
+		OrderByComparator orderByComparator)
+		throws NoSuchLicenseException, SystemException {
+		List<SCLicense> list = findByA_R(active, recommended, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -740,11 +753,12 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	}
 
 	public SCLicense findByA_R_Last(boolean active, boolean recommended,
-		OrderByComparator obc) throws NoSuchLicenseException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchLicenseException, SystemException {
 		int count = countByA_R(active, recommended);
 
 		List<SCLicense> list = findByA_R(active, recommended, count - 1, count,
-				obc);
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -767,7 +781,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	}
 
 	public SCLicense[] findByA_R_PrevAndNext(long licenseId, boolean active,
-		boolean recommended, OrderByComparator obc)
+		boolean recommended, OrderByComparator orderByComparator)
 		throws NoSuchLicenseException, SystemException {
 		SCLicense scLicense = findByPrimaryKey(licenseId);
 
@@ -780,9 +794,9 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(4 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(4);
@@ -794,8 +808,9 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 
 			query.append(_FINDER_COLUMN_A_R_RECOMMENDED_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -812,8 +827,8 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 
 			qPos.add(recommended);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					scLicense);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, scLicense);
 
 			SCLicense[] array = new SCLicenseImpl[3];
 
@@ -822,46 +837,6 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 			array[2] = (SCLicense)objArray[2];
 
 			return array;
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.setLimit(start, end);
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
 		}
 		catch (Exception e) {
 			throw processException(e);
@@ -880,10 +855,11 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 		return findAll(start, end, null);
 	}
 
-	public List<SCLicense> findAll(int start, int end, OrderByComparator obc)
-		throws SystemException {
+	public List<SCLicense> findAll(int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<SCLicense> list = (List<SCLicense>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
@@ -898,13 +874,14 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 				StringBundler query = null;
 				String sql = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(2 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 
 					query.append(_SQL_SELECT_SCLICENSE);
 
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 
 					sql = query.toString();
 				}
@@ -915,7 +892,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 
 				Query q = session.createQuery(sql);
 
-				if (obc == null) {
+				if (orderByComparator == null) {
 					list = (List<SCLicense>)QueryUtil.list(q, getDialect(),
 							start, end, false);
 
@@ -1117,11 +1094,11 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 			});
 
 	public List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> getSCProductEntries(
-		long pk, int start, int end, OrderByComparator obc)
+		long pk, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(pk), String.valueOf(start), String.valueOf(end),
-				String.valueOf(obc)
+				String.valueOf(orderByComparator)
 			};
 
 		List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> list = (List<com.liferay.portlet.softwarecatalog.model.SCProductEntry>)FinderCacheUtil.getResult(FINDER_PATH_GET_SCPRODUCTENTRIES,
@@ -1135,9 +1112,9 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 
 				String sql = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					sql = _SQL_GETSCPRODUCTENTRIES.concat(ORDER_BY_CLAUSE)
-												  .concat(obc.getOrderBy());
+												  .concat(orderByComparator.getOrderBy());
 				}
 
 				else {
@@ -1478,20 +1455,20 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 		removeSCProductEntry = new RemoveSCProductEntry(this);
 	}
 
-	@BeanReference(name = "com.liferay.portlet.softwarecatalog.service.persistence.SCLicensePersistence")
-	protected com.liferay.portlet.softwarecatalog.service.persistence.SCLicensePersistence scLicensePersistence;
-	@BeanReference(name = "com.liferay.portlet.softwarecatalog.service.persistence.SCFrameworkVersionPersistence")
-	protected com.liferay.portlet.softwarecatalog.service.persistence.SCFrameworkVersionPersistence scFrameworkVersionPersistence;
-	@BeanReference(name = "com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryPersistence")
-	protected com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryPersistence scProductEntryPersistence;
-	@BeanReference(name = "com.liferay.portlet.softwarecatalog.service.persistence.SCProductScreenshotPersistence")
-	protected com.liferay.portlet.softwarecatalog.service.persistence.SCProductScreenshotPersistence scProductScreenshotPersistence;
-	@BeanReference(name = "com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionPersistence")
-	protected com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionPersistence scProductVersionPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.ResourcePersistence")
-	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
-	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
+	@BeanReference(type = SCLicensePersistence.class)
+	protected SCLicensePersistence scLicensePersistence;
+	@BeanReference(type = SCFrameworkVersionPersistence.class)
+	protected SCFrameworkVersionPersistence scFrameworkVersionPersistence;
+	@BeanReference(type = SCProductEntryPersistence.class)
+	protected SCProductEntryPersistence scProductEntryPersistence;
+	@BeanReference(type = SCProductScreenshotPersistence.class)
+	protected SCProductScreenshotPersistence scProductScreenshotPersistence;
+	@BeanReference(type = SCProductVersionPersistence.class)
+	protected SCProductVersionPersistence scProductVersionPersistence;
+	@BeanReference(type = ResourcePersistence.class)
+	protected ResourcePersistence resourcePersistence;
+	@BeanReference(type = UserPersistence.class)
+	protected UserPersistence userPersistence;
 	protected ContainsSCProductEntry containsSCProductEntry;
 	protected AddSCProductEntry addSCProductEntry;
 	protected ClearSCProductEntries clearSCProductEntries;

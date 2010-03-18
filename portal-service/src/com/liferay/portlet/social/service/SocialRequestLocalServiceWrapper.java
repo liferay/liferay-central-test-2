@@ -73,6 +73,21 @@ public class SocialRequestLocalServiceWrapper
 		return _socialRequestLocalService.dynamicQuery(dynamicQuery, start, end);
 	}
 
+	public java.util.List<Object> dynamicQuery(
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
+		int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _socialRequestLocalService.dynamicQuery(dynamicQuery, start,
+			end, orderByComparator);
+	}
+
+	public int dynamicQueryCount(
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _socialRequestLocalService.dynamicQueryCount(dynamicQuery);
+	}
+
 	public com.liferay.portlet.social.model.SocialRequest getSocialRequest(
 		long requestId)
 		throws com.liferay.portal.kernel.exception.PortalException,

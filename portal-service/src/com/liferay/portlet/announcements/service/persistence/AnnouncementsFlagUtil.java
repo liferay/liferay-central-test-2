@@ -131,31 +131,35 @@ public class AnnouncementsFlagUtil {
 
 	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementsFlag> findByEntryId(
 		long entryId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByEntryId(entryId, start, end, obc);
+		return getPersistence()
+				   .findByEntryId(entryId, start, end, orderByComparator);
 	}
 
 	public static com.liferay.portlet.announcements.model.AnnouncementsFlag findByEntryId_First(
-		long entryId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long entryId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.announcements.NoSuchFlagException {
-		return getPersistence().findByEntryId_First(entryId, obc);
+		return getPersistence().findByEntryId_First(entryId, orderByComparator);
 	}
 
 	public static com.liferay.portlet.announcements.model.AnnouncementsFlag findByEntryId_Last(
-		long entryId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long entryId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.announcements.NoSuchFlagException {
-		return getPersistence().findByEntryId_Last(entryId, obc);
+		return getPersistence().findByEntryId_Last(entryId, orderByComparator);
 	}
 
 	public static com.liferay.portlet.announcements.model.AnnouncementsFlag[] findByEntryId_PrevAndNext(
 		long flagId, long entryId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.announcements.NoSuchFlagException {
-		return getPersistence().findByEntryId_PrevAndNext(flagId, entryId, obc);
+		return getPersistence()
+				   .findByEntryId_PrevAndNext(flagId, entryId, orderByComparator);
 	}
 
 	public static com.liferay.portlet.announcements.model.AnnouncementsFlag findByU_E_V(
@@ -190,9 +194,10 @@ public class AnnouncementsFlagUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementsFlag> findAll(
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findAll(start, end, obc);
+		return getPersistence().findAll(start, end, orderByComparator);
 	}
 
 	public static void removeByEntryId(long entryId)

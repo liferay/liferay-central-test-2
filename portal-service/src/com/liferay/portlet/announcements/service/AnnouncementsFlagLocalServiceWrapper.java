@@ -74,6 +74,21 @@ public class AnnouncementsFlagLocalServiceWrapper
 			end);
 	}
 
+	public java.util.List<Object> dynamicQuery(
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
+		int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _announcementsFlagLocalService.dynamicQuery(dynamicQuery, start,
+			end, orderByComparator);
+	}
+
+	public int dynamicQueryCount(
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _announcementsFlagLocalService.dynamicQueryCount(dynamicQuery);
+	}
+
 	public com.liferay.portlet.announcements.model.AnnouncementsFlag getAnnouncementsFlag(
 		long flagId)
 		throws com.liferay.portal.kernel.exception.PortalException,

@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceService;
 import com.liferay.portal.service.UserLocalService;
@@ -97,6 +98,17 @@ public abstract class ShoppingItemPriceLocalServiceBaseImpl
 		int end) throws SystemException {
 		return shoppingItemPricePersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
+	}
+
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end, OrderByComparator orderByComparator) throws SystemException {
+		return shoppingItemPricePersistence.findWithDynamicQuery(dynamicQuery,
+			start, end, orderByComparator);
+	}
+
+	public int dynamicQueryCount(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return shoppingItemPricePersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
 	public ShoppingItemPrice getShoppingItemPrice(long itemPriceId)
@@ -424,70 +436,70 @@ public abstract class ShoppingItemPriceLocalServiceBaseImpl
 		}
 	}
 
-	@BeanReference(name = "com.liferay.portlet.shopping.service.ShoppingCartLocalService")
+	@BeanReference(type = ShoppingCartLocalService.class)
 	protected ShoppingCartLocalService shoppingCartLocalService;
-	@BeanReference(name = "com.liferay.portlet.shopping.service.persistence.ShoppingCartPersistence")
+	@BeanReference(type = ShoppingCartPersistence.class)
 	protected ShoppingCartPersistence shoppingCartPersistence;
-	@BeanReference(name = "com.liferay.portlet.shopping.service.ShoppingCategoryLocalService")
+	@BeanReference(type = ShoppingCategoryLocalService.class)
 	protected ShoppingCategoryLocalService shoppingCategoryLocalService;
-	@BeanReference(name = "com.liferay.portlet.shopping.service.ShoppingCategoryService")
+	@BeanReference(type = ShoppingCategoryService.class)
 	protected ShoppingCategoryService shoppingCategoryService;
-	@BeanReference(name = "com.liferay.portlet.shopping.service.persistence.ShoppingCategoryPersistence")
+	@BeanReference(type = ShoppingCategoryPersistence.class)
 	protected ShoppingCategoryPersistence shoppingCategoryPersistence;
-	@BeanReference(name = "com.liferay.portlet.shopping.service.ShoppingCouponLocalService")
+	@BeanReference(type = ShoppingCouponLocalService.class)
 	protected ShoppingCouponLocalService shoppingCouponLocalService;
-	@BeanReference(name = "com.liferay.portlet.shopping.service.ShoppingCouponService")
+	@BeanReference(type = ShoppingCouponService.class)
 	protected ShoppingCouponService shoppingCouponService;
-	@BeanReference(name = "com.liferay.portlet.shopping.service.persistence.ShoppingCouponPersistence")
+	@BeanReference(type = ShoppingCouponPersistence.class)
 	protected ShoppingCouponPersistence shoppingCouponPersistence;
-	@BeanReference(name = "com.liferay.portlet.shopping.service.persistence.ShoppingCouponFinder")
+	@BeanReference(type = ShoppingCouponFinder.class)
 	protected ShoppingCouponFinder shoppingCouponFinder;
-	@BeanReference(name = "com.liferay.portlet.shopping.service.ShoppingItemLocalService")
+	@BeanReference(type = ShoppingItemLocalService.class)
 	protected ShoppingItemLocalService shoppingItemLocalService;
-	@BeanReference(name = "com.liferay.portlet.shopping.service.ShoppingItemService")
+	@BeanReference(type = ShoppingItemService.class)
 	protected ShoppingItemService shoppingItemService;
-	@BeanReference(name = "com.liferay.portlet.shopping.service.persistence.ShoppingItemPersistence")
+	@BeanReference(type = ShoppingItemPersistence.class)
 	protected ShoppingItemPersistence shoppingItemPersistence;
-	@BeanReference(name = "com.liferay.portlet.shopping.service.persistence.ShoppingItemFinder")
+	@BeanReference(type = ShoppingItemFinder.class)
 	protected ShoppingItemFinder shoppingItemFinder;
-	@BeanReference(name = "com.liferay.portlet.shopping.service.ShoppingItemFieldLocalService")
+	@BeanReference(type = ShoppingItemFieldLocalService.class)
 	protected ShoppingItemFieldLocalService shoppingItemFieldLocalService;
-	@BeanReference(name = "com.liferay.portlet.shopping.service.persistence.ShoppingItemFieldPersistence")
+	@BeanReference(type = ShoppingItemFieldPersistence.class)
 	protected ShoppingItemFieldPersistence shoppingItemFieldPersistence;
-	@BeanReference(name = "com.liferay.portlet.shopping.service.ShoppingItemPriceLocalService")
+	@BeanReference(type = ShoppingItemPriceLocalService.class)
 	protected ShoppingItemPriceLocalService shoppingItemPriceLocalService;
-	@BeanReference(name = "com.liferay.portlet.shopping.service.persistence.ShoppingItemPricePersistence")
+	@BeanReference(type = ShoppingItemPricePersistence.class)
 	protected ShoppingItemPricePersistence shoppingItemPricePersistence;
-	@BeanReference(name = "com.liferay.portlet.shopping.service.ShoppingOrderLocalService")
+	@BeanReference(type = ShoppingOrderLocalService.class)
 	protected ShoppingOrderLocalService shoppingOrderLocalService;
-	@BeanReference(name = "com.liferay.portlet.shopping.service.ShoppingOrderService")
+	@BeanReference(type = ShoppingOrderService.class)
 	protected ShoppingOrderService shoppingOrderService;
-	@BeanReference(name = "com.liferay.portlet.shopping.service.persistence.ShoppingOrderPersistence")
+	@BeanReference(type = ShoppingOrderPersistence.class)
 	protected ShoppingOrderPersistence shoppingOrderPersistence;
-	@BeanReference(name = "com.liferay.portlet.shopping.service.persistence.ShoppingOrderFinder")
+	@BeanReference(type = ShoppingOrderFinder.class)
 	protected ShoppingOrderFinder shoppingOrderFinder;
-	@BeanReference(name = "com.liferay.portlet.shopping.service.ShoppingOrderItemLocalService")
+	@BeanReference(type = ShoppingOrderItemLocalService.class)
 	protected ShoppingOrderItemLocalService shoppingOrderItemLocalService;
-	@BeanReference(name = "com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemPersistence")
+	@BeanReference(type = ShoppingOrderItemPersistence.class)
 	protected ShoppingOrderItemPersistence shoppingOrderItemPersistence;
-	@BeanReference(name = "com.liferay.counter.service.CounterLocalService")
+	@BeanReference(type = CounterLocalService.class)
 	protected CounterLocalService counterLocalService;
-	@BeanReference(name = "com.liferay.counter.service.CounterService")
+	@BeanReference(type = CounterService.class)
 	protected CounterService counterService;
-	@BeanReference(name = "com.liferay.portal.service.ResourceLocalService")
+	@BeanReference(type = ResourceLocalService.class)
 	protected ResourceLocalService resourceLocalService;
-	@BeanReference(name = "com.liferay.portal.service.ResourceService")
+	@BeanReference(type = ResourceService.class)
 	protected ResourceService resourceService;
-	@BeanReference(name = "com.liferay.portal.service.persistence.ResourcePersistence")
+	@BeanReference(type = ResourcePersistence.class)
 	protected ResourcePersistence resourcePersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.ResourceFinder")
+	@BeanReference(type = ResourceFinder.class)
 	protected ResourceFinder resourceFinder;
-	@BeanReference(name = "com.liferay.portal.service.UserLocalService")
+	@BeanReference(type = UserLocalService.class)
 	protected UserLocalService userLocalService;
-	@BeanReference(name = "com.liferay.portal.service.UserService")
+	@BeanReference(type = UserService.class)
 	protected UserService userService;
-	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
+	@BeanReference(type = UserPersistence.class)
 	protected UserPersistence userPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.UserFinder")
+	@BeanReference(type = UserFinder.class)
 	protected UserFinder userFinder;
 }

@@ -17,7 +17,6 @@ package com.liferay.portlet.journal.service.persistence;
 import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
-import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
@@ -36,6 +35,11 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.BatchSessionUtil;
+import com.liferay.portal.service.persistence.GroupPersistence;
+import com.liferay.portal.service.persistence.LayoutPersistence;
+import com.liferay.portal.service.persistence.PortletPreferencesPersistence;
+import com.liferay.portal.service.persistence.ResourcePersistence;
+import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 import com.liferay.portlet.journal.NoSuchContentSearchException;
@@ -581,11 +585,13 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 	}
 
 	public List<JournalContentSearch> findByArticleId(String articleId,
-		int start, int end, OrderByComparator obc) throws SystemException {
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
 		Object[] finderArgs = new Object[] {
 				articleId,
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<JournalContentSearch> list = (List<JournalContentSearch>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_ARTICLEID,
@@ -599,9 +605,9 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(2);
@@ -621,8 +627,9 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 					}
 				}
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				String sql = query.toString();
@@ -659,9 +666,10 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 	}
 
 	public JournalContentSearch findByArticleId_First(String articleId,
-		OrderByComparator obc)
+		OrderByComparator orderByComparator)
 		throws NoSuchContentSearchException, SystemException {
-		List<JournalContentSearch> list = findByArticleId(articleId, 0, 1, obc);
+		List<JournalContentSearch> list = findByArticleId(articleId, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -681,12 +689,12 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 	}
 
 	public JournalContentSearch findByArticleId_Last(String articleId,
-		OrderByComparator obc)
+		OrderByComparator orderByComparator)
 		throws NoSuchContentSearchException, SystemException {
 		int count = countByArticleId(articleId);
 
 		List<JournalContentSearch> list = findByArticleId(articleId, count - 1,
-				count, obc);
+				count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -706,7 +714,8 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 	}
 
 	public JournalContentSearch[] findByArticleId_PrevAndNext(
-		long contentSearchId, String articleId, OrderByComparator obc)
+		long contentSearchId, String articleId,
+		OrderByComparator orderByComparator)
 		throws NoSuchContentSearchException, SystemException {
 		JournalContentSearch journalContentSearch = findByPrimaryKey(contentSearchId);
 
@@ -719,9 +728,9 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(2);
@@ -741,8 +750,9 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 				}
 			}
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			String sql = query.toString();
@@ -755,8 +765,8 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 				qPos.add(articleId);
 			}
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					journalContentSearch);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, journalContentSearch);
 
 			JournalContentSearch[] array = new JournalContentSearchImpl[3];
 
@@ -835,12 +845,13 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 	}
 
 	public List<JournalContentSearch> findByG_P(long groupId,
-		boolean privateLayout, int start, int end, OrderByComparator obc)
-		throws SystemException {
+		boolean privateLayout, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), Boolean.valueOf(privateLayout),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<JournalContentSearch> list = (List<JournalContentSearch>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_G_P,
@@ -854,9 +865,9 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(4 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(3);
@@ -868,8 +879,9 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 
 				query.append(_FINDER_COLUMN_G_P_PRIVATELAYOUT_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				String sql = query.toString();
@@ -906,10 +918,10 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 	}
 
 	public JournalContentSearch findByG_P_First(long groupId,
-		boolean privateLayout, OrderByComparator obc)
+		boolean privateLayout, OrderByComparator orderByComparator)
 		throws NoSuchContentSearchException, SystemException {
 		List<JournalContentSearch> list = findByG_P(groupId, privateLayout, 0,
-				1, obc);
+				1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -932,12 +944,12 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 	}
 
 	public JournalContentSearch findByG_P_Last(long groupId,
-		boolean privateLayout, OrderByComparator obc)
+		boolean privateLayout, OrderByComparator orderByComparator)
 		throws NoSuchContentSearchException, SystemException {
 		int count = countByG_P(groupId, privateLayout);
 
 		List<JournalContentSearch> list = findByG_P(groupId, privateLayout,
-				count - 1, count, obc);
+				count - 1, count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -960,7 +972,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 	}
 
 	public JournalContentSearch[] findByG_P_PrevAndNext(long contentSearchId,
-		long groupId, boolean privateLayout, OrderByComparator obc)
+		long groupId, boolean privateLayout, OrderByComparator orderByComparator)
 		throws NoSuchContentSearchException, SystemException {
 		JournalContentSearch journalContentSearch = findByPrimaryKey(contentSearchId);
 
@@ -973,9 +985,9 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(4 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(3);
@@ -987,8 +999,9 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 
 			query.append(_FINDER_COLUMN_G_P_PRIVATELAYOUT_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			String sql = query.toString();
@@ -1001,8 +1014,8 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 
 			qPos.add(privateLayout);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					journalContentSearch);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, journalContentSearch);
 
 			JournalContentSearch[] array = new JournalContentSearchImpl[3];
 
@@ -1091,13 +1104,15 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 	}
 
 	public List<JournalContentSearch> findByG_A(long groupId, String articleId,
-		int start, int end, OrderByComparator obc) throws SystemException {
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
 				articleId,
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<JournalContentSearch> list = (List<JournalContentSearch>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_G_A,
@@ -1111,9 +1126,9 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(4 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(3);
@@ -1135,8 +1150,9 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 					}
 				}
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				String sql = query.toString();
@@ -1175,10 +1191,10 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 	}
 
 	public JournalContentSearch findByG_A_First(long groupId, String articleId,
-		OrderByComparator obc)
+		OrderByComparator orderByComparator)
 		throws NoSuchContentSearchException, SystemException {
 		List<JournalContentSearch> list = findByG_A(groupId, articleId, 0, 1,
-				obc);
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -1201,12 +1217,12 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 	}
 
 	public JournalContentSearch findByG_A_Last(long groupId, String articleId,
-		OrderByComparator obc)
+		OrderByComparator orderByComparator)
 		throws NoSuchContentSearchException, SystemException {
 		int count = countByG_A(groupId, articleId);
 
 		List<JournalContentSearch> list = findByG_A(groupId, articleId,
-				count - 1, count, obc);
+				count - 1, count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -1229,7 +1245,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 	}
 
 	public JournalContentSearch[] findByG_A_PrevAndNext(long contentSearchId,
-		long groupId, String articleId, OrderByComparator obc)
+		long groupId, String articleId, OrderByComparator orderByComparator)
 		throws NoSuchContentSearchException, SystemException {
 		JournalContentSearch journalContentSearch = findByPrimaryKey(contentSearchId);
 
@@ -1242,9 +1258,9 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(4 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(3);
@@ -1266,8 +1282,9 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 				}
 			}
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			String sql = query.toString();
@@ -1282,8 +1299,8 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 				qPos.add(articleId);
 			}
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					journalContentSearch);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, journalContentSearch);
 
 			JournalContentSearch[] array = new JournalContentSearchImpl[3];
 
@@ -1369,12 +1386,13 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 
 	public List<JournalContentSearch> findByG_P_L(long groupId,
 		boolean privateLayout, long layoutId, int start, int end,
-		OrderByComparator obc) throws SystemException {
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), Boolean.valueOf(privateLayout),
 				new Long(layoutId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<JournalContentSearch> list = (List<JournalContentSearch>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_G_P_L,
@@ -1388,9 +1406,9 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(5 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(4);
@@ -1404,8 +1422,9 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 
 				query.append(_FINDER_COLUMN_G_P_L_LAYOUTID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				String sql = query.toString();
@@ -1444,10 +1463,11 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 	}
 
 	public JournalContentSearch findByG_P_L_First(long groupId,
-		boolean privateLayout, long layoutId, OrderByComparator obc)
+		boolean privateLayout, long layoutId,
+		OrderByComparator orderByComparator)
 		throws NoSuchContentSearchException, SystemException {
 		List<JournalContentSearch> list = findByG_P_L(groupId, privateLayout,
-				layoutId, 0, 1, obc);
+				layoutId, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(8);
@@ -1473,12 +1493,13 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 	}
 
 	public JournalContentSearch findByG_P_L_Last(long groupId,
-		boolean privateLayout, long layoutId, OrderByComparator obc)
+		boolean privateLayout, long layoutId,
+		OrderByComparator orderByComparator)
 		throws NoSuchContentSearchException, SystemException {
 		int count = countByG_P_L(groupId, privateLayout, layoutId);
 
 		List<JournalContentSearch> list = findByG_P_L(groupId, privateLayout,
-				layoutId, count - 1, count, obc);
+				layoutId, count - 1, count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(8);
@@ -1505,7 +1526,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 
 	public JournalContentSearch[] findByG_P_L_PrevAndNext(
 		long contentSearchId, long groupId, boolean privateLayout,
-		long layoutId, OrderByComparator obc)
+		long layoutId, OrderByComparator orderByComparator)
 		throws NoSuchContentSearchException, SystemException {
 		JournalContentSearch journalContentSearch = findByPrimaryKey(contentSearchId);
 
@@ -1518,9 +1539,9 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(5 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(4);
@@ -1534,8 +1555,9 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 
 			query.append(_FINDER_COLUMN_G_P_L_LAYOUTID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			String sql = query.toString();
@@ -1550,8 +1572,8 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 
 			qPos.add(layoutId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					journalContentSearch);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, journalContentSearch);
 
 			JournalContentSearch[] array = new JournalContentSearchImpl[3];
 
@@ -1650,13 +1672,14 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 
 	public List<JournalContentSearch> findByG_P_A(long groupId,
 		boolean privateLayout, String articleId, int start, int end,
-		OrderByComparator obc) throws SystemException {
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), Boolean.valueOf(privateLayout),
 				
 				articleId,
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<JournalContentSearch> list = (List<JournalContentSearch>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_G_P_A,
@@ -1670,9 +1693,9 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(5 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(4);
@@ -1696,8 +1719,9 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 					}
 				}
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				String sql = query.toString();
@@ -1738,10 +1762,11 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 	}
 
 	public JournalContentSearch findByG_P_A_First(long groupId,
-		boolean privateLayout, String articleId, OrderByComparator obc)
+		boolean privateLayout, String articleId,
+		OrderByComparator orderByComparator)
 		throws NoSuchContentSearchException, SystemException {
 		List<JournalContentSearch> list = findByG_P_A(groupId, privateLayout,
-				articleId, 0, 1, obc);
+				articleId, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(8);
@@ -1767,12 +1792,13 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 	}
 
 	public JournalContentSearch findByG_P_A_Last(long groupId,
-		boolean privateLayout, String articleId, OrderByComparator obc)
+		boolean privateLayout, String articleId,
+		OrderByComparator orderByComparator)
 		throws NoSuchContentSearchException, SystemException {
 		int count = countByG_P_A(groupId, privateLayout, articleId);
 
 		List<JournalContentSearch> list = findByG_P_A(groupId, privateLayout,
-				articleId, count - 1, count, obc);
+				articleId, count - 1, count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(8);
@@ -1799,7 +1825,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 
 	public JournalContentSearch[] findByG_P_A_PrevAndNext(
 		long contentSearchId, long groupId, boolean privateLayout,
-		String articleId, OrderByComparator obc)
+		String articleId, OrderByComparator orderByComparator)
 		throws NoSuchContentSearchException, SystemException {
 		JournalContentSearch journalContentSearch = findByPrimaryKey(contentSearchId);
 
@@ -1812,9 +1838,9 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(5 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(4);
@@ -1838,8 +1864,9 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 				}
 			}
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			String sql = query.toString();
@@ -1856,8 +1883,8 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 				qPos.add(articleId);
 			}
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					journalContentSearch);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, journalContentSearch);
 
 			JournalContentSearch[] array = new JournalContentSearchImpl[3];
 
@@ -1963,14 +1990,15 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 
 	public List<JournalContentSearch> findByG_P_L_P(long groupId,
 		boolean privateLayout, long layoutId, String portletId, int start,
-		int end, OrderByComparator obc) throws SystemException {
+		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), Boolean.valueOf(privateLayout),
 				new Long(layoutId),
 				
 				portletId,
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<JournalContentSearch> list = (List<JournalContentSearch>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_G_P_L_P,
@@ -1984,9 +2012,9 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(6 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(5);
@@ -2012,8 +2040,9 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 					}
 				}
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				String sql = query.toString();
@@ -2057,10 +2086,10 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 
 	public JournalContentSearch findByG_P_L_P_First(long groupId,
 		boolean privateLayout, long layoutId, String portletId,
-		OrderByComparator obc)
+		OrderByComparator orderByComparator)
 		throws NoSuchContentSearchException, SystemException {
 		List<JournalContentSearch> list = findByG_P_L_P(groupId, privateLayout,
-				layoutId, portletId, 0, 1, obc);
+				layoutId, portletId, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(10);
@@ -2090,12 +2119,12 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 
 	public JournalContentSearch findByG_P_L_P_Last(long groupId,
 		boolean privateLayout, long layoutId, String portletId,
-		OrderByComparator obc)
+		OrderByComparator orderByComparator)
 		throws NoSuchContentSearchException, SystemException {
 		int count = countByG_P_L_P(groupId, privateLayout, layoutId, portletId);
 
 		List<JournalContentSearch> list = findByG_P_L_P(groupId, privateLayout,
-				layoutId, portletId, count - 1, count, obc);
+				layoutId, portletId, count - 1, count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(10);
@@ -2125,7 +2154,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 
 	public JournalContentSearch[] findByG_P_L_P_PrevAndNext(
 		long contentSearchId, long groupId, boolean privateLayout,
-		long layoutId, String portletId, OrderByComparator obc)
+		long layoutId, String portletId, OrderByComparator orderByComparator)
 		throws NoSuchContentSearchException, SystemException {
 		JournalContentSearch journalContentSearch = findByPrimaryKey(contentSearchId);
 
@@ -2138,9 +2167,9 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(6 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(5);
@@ -2166,8 +2195,9 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 				}
 			}
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			String sql = query.toString();
@@ -2186,8 +2216,8 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 				qPos.add(portletId);
 			}
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					journalContentSearch);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, journalContentSearch);
 
 			JournalContentSearch[] array = new JournalContentSearchImpl[3];
 
@@ -2382,46 +2412,6 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 		}
 	}
 
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.setLimit(start, end);
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
 	public List<JournalContentSearch> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -2432,9 +2422,10 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 	}
 
 	public List<JournalContentSearch> findAll(int start, int end,
-		OrderByComparator obc) throws SystemException {
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<JournalContentSearch> list = (List<JournalContentSearch>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
@@ -2449,13 +2440,14 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 				StringBundler query = null;
 				String sql = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(2 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 
 					query.append(_SQL_SELECT_JOURNALCONTENTSEARCH);
 
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 
 					sql = query.toString();
 				}
@@ -2464,7 +2456,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 
 				Query q = session.createQuery(sql);
 
-				if (obc == null) {
+				if (orderByComparator == null) {
 					list = (List<JournalContentSearch>)QueryUtil.list(q,
 							getDialect(), start, end, false);
 
@@ -3086,30 +3078,30 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 		}
 	}
 
-	@BeanReference(name = "com.liferay.portlet.journal.service.persistence.JournalArticlePersistence")
-	protected com.liferay.portlet.journal.service.persistence.JournalArticlePersistence journalArticlePersistence;
-	@BeanReference(name = "com.liferay.portlet.journal.service.persistence.JournalArticleImagePersistence")
-	protected com.liferay.portlet.journal.service.persistence.JournalArticleImagePersistence journalArticleImagePersistence;
-	@BeanReference(name = "com.liferay.portlet.journal.service.persistence.JournalArticleResourcePersistence")
-	protected com.liferay.portlet.journal.service.persistence.JournalArticleResourcePersistence journalArticleResourcePersistence;
-	@BeanReference(name = "com.liferay.portlet.journal.service.persistence.JournalContentSearchPersistence")
-	protected com.liferay.portlet.journal.service.persistence.JournalContentSearchPersistence journalContentSearchPersistence;
-	@BeanReference(name = "com.liferay.portlet.journal.service.persistence.JournalFeedPersistence")
-	protected com.liferay.portlet.journal.service.persistence.JournalFeedPersistence journalFeedPersistence;
-	@BeanReference(name = "com.liferay.portlet.journal.service.persistence.JournalStructurePersistence")
-	protected com.liferay.portlet.journal.service.persistence.JournalStructurePersistence journalStructurePersistence;
-	@BeanReference(name = "com.liferay.portlet.journal.service.persistence.JournalTemplatePersistence")
-	protected com.liferay.portlet.journal.service.persistence.JournalTemplatePersistence journalTemplatePersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.GroupPersistence")
-	protected com.liferay.portal.service.persistence.GroupPersistence groupPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.LayoutPersistence")
-	protected com.liferay.portal.service.persistence.LayoutPersistence layoutPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.PortletPreferencesPersistence")
-	protected com.liferay.portal.service.persistence.PortletPreferencesPersistence portletPreferencesPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.ResourcePersistence")
-	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
-	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
+	@BeanReference(type = JournalArticlePersistence.class)
+	protected JournalArticlePersistence journalArticlePersistence;
+	@BeanReference(type = JournalArticleImagePersistence.class)
+	protected JournalArticleImagePersistence journalArticleImagePersistence;
+	@BeanReference(type = JournalArticleResourcePersistence.class)
+	protected JournalArticleResourcePersistence journalArticleResourcePersistence;
+	@BeanReference(type = JournalContentSearchPersistence.class)
+	protected JournalContentSearchPersistence journalContentSearchPersistence;
+	@BeanReference(type = JournalFeedPersistence.class)
+	protected JournalFeedPersistence journalFeedPersistence;
+	@BeanReference(type = JournalStructurePersistence.class)
+	protected JournalStructurePersistence journalStructurePersistence;
+	@BeanReference(type = JournalTemplatePersistence.class)
+	protected JournalTemplatePersistence journalTemplatePersistence;
+	@BeanReference(type = GroupPersistence.class)
+	protected GroupPersistence groupPersistence;
+	@BeanReference(type = LayoutPersistence.class)
+	protected LayoutPersistence layoutPersistence;
+	@BeanReference(type = PortletPreferencesPersistence.class)
+	protected PortletPreferencesPersistence portletPreferencesPersistence;
+	@BeanReference(type = ResourcePersistence.class)
+	protected ResourcePersistence resourcePersistence;
+	@BeanReference(type = UserPersistence.class)
+	protected UserPersistence userPersistence;
 	private static final String _SQL_SELECT_JOURNALCONTENTSEARCH = "SELECT journalContentSearch FROM JournalContentSearch journalContentSearch";
 	private static final String _SQL_SELECT_JOURNALCONTENTSEARCH_WHERE = "SELECT journalContentSearch FROM JournalContentSearch journalContentSearch WHERE ";
 	private static final String _SQL_COUNT_JOURNALCONTENTSEARCH = "SELECT COUNT(journalContentSearch) FROM JournalContentSearch journalContentSearch";

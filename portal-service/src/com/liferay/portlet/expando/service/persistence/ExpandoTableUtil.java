@@ -131,35 +131,39 @@ public class ExpandoTableUtil {
 
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoTable> findByC_C(
 		long companyId, long classNameId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .findByC_C(companyId, classNameId, start, end, obc);
+				   .findByC_C(companyId, classNameId, start, end,
+			orderByComparator);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoTable findByC_C_First(
 		long companyId, long classNameId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.expando.NoSuchTableException {
-		return getPersistence().findByC_C_First(companyId, classNameId, obc);
+		return getPersistence()
+				   .findByC_C_First(companyId, classNameId, orderByComparator);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoTable findByC_C_Last(
 		long companyId, long classNameId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.expando.NoSuchTableException {
-		return getPersistence().findByC_C_Last(companyId, classNameId, obc);
+		return getPersistence()
+				   .findByC_C_Last(companyId, classNameId, orderByComparator);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoTable[] findByC_C_PrevAndNext(
 		long tableId, long companyId, long classNameId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.expando.NoSuchTableException {
 		return getPersistence()
-				   .findByC_C_PrevAndNext(tableId, companyId, classNameId, obc);
+				   .findByC_C_PrevAndNext(tableId, companyId, classNameId,
+			orderByComparator);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoTable findByC_C_N(
@@ -195,9 +199,10 @@ public class ExpandoTableUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoTable> findAll(
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findAll(start, end, obc);
+		return getPersistence().findAll(start, end, orderByComparator);
 	}
 
 	public static void removeByC_C(long companyId, long classNameId)

@@ -17,7 +17,6 @@ package com.liferay.portlet.journal.service.persistence;
 import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
-import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
@@ -37,8 +36,13 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.BatchSessionUtil;
+import com.liferay.portal.service.persistence.ImagePersistence;
+import com.liferay.portal.service.persistence.ResourcePersistence;
+import com.liferay.portal.service.persistence.UserPersistence;
+import com.liferay.portal.service.persistence.WebDAVPropsPersistence;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
+import com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence;
 import com.liferay.portlet.journal.NoSuchTemplateException;
 import com.liferay.portlet.journal.model.JournalTemplate;
 import com.liferay.portlet.journal.model.impl.JournalTemplateImpl;
@@ -587,11 +591,12 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 	}
 
 	public List<JournalTemplate> findByUuid(String uuid, int start, int end,
-		OrderByComparator obc) throws SystemException {
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				uuid,
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<JournalTemplate> list = (List<JournalTemplate>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_UUID,
@@ -605,9 +610,9 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(3);
@@ -627,8 +632,9 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 					}
 				}
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -668,9 +674,10 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 		return list;
 	}
 
-	public JournalTemplate findByUuid_First(String uuid, OrderByComparator obc)
+	public JournalTemplate findByUuid_First(String uuid,
+		OrderByComparator orderByComparator)
 		throws NoSuchTemplateException, SystemException {
-		List<JournalTemplate> list = findByUuid(uuid, 0, 1, obc);
+		List<JournalTemplate> list = findByUuid(uuid, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -689,11 +696,13 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 		}
 	}
 
-	public JournalTemplate findByUuid_Last(String uuid, OrderByComparator obc)
+	public JournalTemplate findByUuid_Last(String uuid,
+		OrderByComparator orderByComparator)
 		throws NoSuchTemplateException, SystemException {
 		int count = countByUuid(uuid);
 
-		List<JournalTemplate> list = findByUuid(uuid, count - 1, count, obc);
+		List<JournalTemplate> list = findByUuid(uuid, count - 1, count,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -713,7 +722,8 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 	}
 
 	public JournalTemplate[] findByUuid_PrevAndNext(long id, String uuid,
-		OrderByComparator obc) throws NoSuchTemplateException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchTemplateException, SystemException {
 		JournalTemplate journalTemplate = findByPrimaryKey(id);
 
 		int count = countByUuid(uuid);
@@ -725,9 +735,9 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(3);
@@ -747,8 +757,9 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 				}
 			}
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -765,8 +776,8 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 				qPos.add(uuid);
 			}
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					journalTemplate);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, journalTemplate);
 
 			JournalTemplate[] array = new JournalTemplateImpl[3];
 
@@ -969,11 +980,12 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 	}
 
 	public List<JournalTemplate> findByGroupId(long groupId, int start,
-		int end, OrderByComparator obc) throws SystemException {
+		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<JournalTemplate> list = (List<JournalTemplate>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
@@ -987,9 +999,9 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(3);
@@ -999,8 +1011,9 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 
 				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -1039,8 +1052,10 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 	}
 
 	public JournalTemplate findByGroupId_First(long groupId,
-		OrderByComparator obc) throws NoSuchTemplateException, SystemException {
-		List<JournalTemplate> list = findByGroupId(groupId, 0, 1, obc);
+		OrderByComparator orderByComparator)
+		throws NoSuchTemplateException, SystemException {
+		List<JournalTemplate> list = findByGroupId(groupId, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -1060,11 +1075,12 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 	}
 
 	public JournalTemplate findByGroupId_Last(long groupId,
-		OrderByComparator obc) throws NoSuchTemplateException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchTemplateException, SystemException {
 		int count = countByGroupId(groupId);
 
 		List<JournalTemplate> list = findByGroupId(groupId, count - 1, count,
-				obc);
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -1084,7 +1100,8 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 	}
 
 	public JournalTemplate[] findByGroupId_PrevAndNext(long id, long groupId,
-		OrderByComparator obc) throws NoSuchTemplateException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchTemplateException, SystemException {
 		JournalTemplate journalTemplate = findByPrimaryKey(id);
 
 		int count = countByGroupId(groupId);
@@ -1096,9 +1113,9 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(3);
@@ -1108,8 +1125,9 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -1124,8 +1142,8 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 
 			qPos.add(groupId);
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					journalTemplate);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, journalTemplate);
 
 			JournalTemplate[] array = new JournalTemplateImpl[3];
 
@@ -1212,11 +1230,12 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 	}
 
 	public List<JournalTemplate> findByTemplateId(String templateId, int start,
-		int end, OrderByComparator obc) throws SystemException {
+		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				templateId,
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<JournalTemplate> list = (List<JournalTemplate>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_TEMPLATEID,
@@ -1230,9 +1249,9 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(3 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(3);
@@ -1252,8 +1271,9 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 					}
 				}
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -1294,8 +1314,10 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 	}
 
 	public JournalTemplate findByTemplateId_First(String templateId,
-		OrderByComparator obc) throws NoSuchTemplateException, SystemException {
-		List<JournalTemplate> list = findByTemplateId(templateId, 0, 1, obc);
+		OrderByComparator orderByComparator)
+		throws NoSuchTemplateException, SystemException {
+		List<JournalTemplate> list = findByTemplateId(templateId, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -1315,11 +1337,12 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 	}
 
 	public JournalTemplate findByTemplateId_Last(String templateId,
-		OrderByComparator obc) throws NoSuchTemplateException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchTemplateException, SystemException {
 		int count = countByTemplateId(templateId);
 
 		List<JournalTemplate> list = findByTemplateId(templateId, count - 1,
-				count, obc);
+				count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -1339,7 +1362,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 	}
 
 	public JournalTemplate[] findByTemplateId_PrevAndNext(long id,
-		String templateId, OrderByComparator obc)
+		String templateId, OrderByComparator orderByComparator)
 		throws NoSuchTemplateException, SystemException {
 		JournalTemplate journalTemplate = findByPrimaryKey(id);
 
@@ -1352,9 +1375,9 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(3 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(3);
@@ -1374,8 +1397,9 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 				}
 			}
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -1392,8 +1416,8 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 				qPos.add(templateId);
 			}
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					journalTemplate);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, journalTemplate);
 
 			JournalTemplate[] array = new JournalTemplateImpl[3];
 
@@ -1719,13 +1743,15 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 	}
 
 	public List<JournalTemplate> findByG_S(long groupId, String structureId,
-		int start, int end, OrderByComparator obc) throws SystemException {
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
 				structureId,
 				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<JournalTemplate> list = (List<JournalTemplate>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_G_S,
@@ -1739,9 +1765,9 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 
 				StringBundler query = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(4 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
 					query = new StringBundler(4);
@@ -1763,8 +1789,9 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 					}
 				}
 
-				if (obc != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 				}
 
 				else {
@@ -1807,8 +1834,10 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 	}
 
 	public JournalTemplate findByG_S_First(long groupId, String structureId,
-		OrderByComparator obc) throws NoSuchTemplateException, SystemException {
-		List<JournalTemplate> list = findByG_S(groupId, structureId, 0, 1, obc);
+		OrderByComparator orderByComparator)
+		throws NoSuchTemplateException, SystemException {
+		List<JournalTemplate> list = findByG_S(groupId, structureId, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -1831,11 +1860,12 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 	}
 
 	public JournalTemplate findByG_S_Last(long groupId, String structureId,
-		OrderByComparator obc) throws NoSuchTemplateException, SystemException {
+		OrderByComparator orderByComparator)
+		throws NoSuchTemplateException, SystemException {
 		int count = countByG_S(groupId, structureId);
 
 		List<JournalTemplate> list = findByG_S(groupId, structureId, count - 1,
-				count, obc);
+				count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -1858,7 +1888,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 	}
 
 	public JournalTemplate[] findByG_S_PrevAndNext(long id, long groupId,
-		String structureId, OrderByComparator obc)
+		String structureId, OrderByComparator orderByComparator)
 		throws NoSuchTemplateException, SystemException {
 		JournalTemplate journalTemplate = findByPrimaryKey(id);
 
@@ -1871,9 +1901,9 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 
 			StringBundler query = null;
 
-			if (obc != null) {
+			if (orderByComparator != null) {
 				query = new StringBundler(4 +
-						(obc.getOrderByFields().length * 3));
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
 				query = new StringBundler(4);
@@ -1895,8 +1925,9 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 				}
 			}
 
-			if (obc != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			else {
@@ -1915,8 +1946,8 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 				qPos.add(structureId);
 			}
 
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					journalTemplate);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, journalTemplate);
 
 			JournalTemplate[] array = new JournalTemplateImpl[3];
 
@@ -1925,46 +1956,6 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 			array[2] = (JournalTemplate)objArray[2];
 
 			return array;
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.setLimit(start, end);
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
 		}
 		catch (Exception e) {
 			throw processException(e);
@@ -1984,9 +1975,10 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 	}
 
 	public List<JournalTemplate> findAll(int start, int end,
-		OrderByComparator obc) throws SystemException {
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
 			};
 
 		List<JournalTemplate> list = (List<JournalTemplate>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
@@ -2001,13 +1993,14 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 				StringBundler query = null;
 				String sql = null;
 
-				if (obc != null) {
+				if (orderByComparator != null) {
 					query = new StringBundler(2 +
-							(obc.getOrderByFields().length * 3));
+							(orderByComparator.getOrderByFields().length * 3));
 
 					query.append(_SQL_SELECT_JOURNALTEMPLATE);
 
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, obc);
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
 
 					sql = query.toString();
 				}
@@ -2018,7 +2011,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 
 				Query q = session.createQuery(sql);
 
-				if (obc == null) {
+				if (orderByComparator == null) {
 					list = (List<JournalTemplate>)QueryUtil.list(q,
 							getDialect(), start, end, false);
 
@@ -2553,30 +2546,30 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 		}
 	}
 
-	@BeanReference(name = "com.liferay.portlet.journal.service.persistence.JournalArticlePersistence")
-	protected com.liferay.portlet.journal.service.persistence.JournalArticlePersistence journalArticlePersistence;
-	@BeanReference(name = "com.liferay.portlet.journal.service.persistence.JournalArticleImagePersistence")
-	protected com.liferay.portlet.journal.service.persistence.JournalArticleImagePersistence journalArticleImagePersistence;
-	@BeanReference(name = "com.liferay.portlet.journal.service.persistence.JournalArticleResourcePersistence")
-	protected com.liferay.portlet.journal.service.persistence.JournalArticleResourcePersistence journalArticleResourcePersistence;
-	@BeanReference(name = "com.liferay.portlet.journal.service.persistence.JournalContentSearchPersistence")
-	protected com.liferay.portlet.journal.service.persistence.JournalContentSearchPersistence journalContentSearchPersistence;
-	@BeanReference(name = "com.liferay.portlet.journal.service.persistence.JournalFeedPersistence")
-	protected com.liferay.portlet.journal.service.persistence.JournalFeedPersistence journalFeedPersistence;
-	@BeanReference(name = "com.liferay.portlet.journal.service.persistence.JournalStructurePersistence")
-	protected com.liferay.portlet.journal.service.persistence.JournalStructurePersistence journalStructurePersistence;
-	@BeanReference(name = "com.liferay.portlet.journal.service.persistence.JournalTemplatePersistence")
-	protected com.liferay.portlet.journal.service.persistence.JournalTemplatePersistence journalTemplatePersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.ImagePersistence")
-	protected com.liferay.portal.service.persistence.ImagePersistence imagePersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.ResourcePersistence")
-	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
-	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.WebDAVPropsPersistence")
-	protected com.liferay.portal.service.persistence.WebDAVPropsPersistence webDAVPropsPersistence;
-	@BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence")
-	protected com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence expandoValuePersistence;
+	@BeanReference(type = JournalArticlePersistence.class)
+	protected JournalArticlePersistence journalArticlePersistence;
+	@BeanReference(type = JournalArticleImagePersistence.class)
+	protected JournalArticleImagePersistence journalArticleImagePersistence;
+	@BeanReference(type = JournalArticleResourcePersistence.class)
+	protected JournalArticleResourcePersistence journalArticleResourcePersistence;
+	@BeanReference(type = JournalContentSearchPersistence.class)
+	protected JournalContentSearchPersistence journalContentSearchPersistence;
+	@BeanReference(type = JournalFeedPersistence.class)
+	protected JournalFeedPersistence journalFeedPersistence;
+	@BeanReference(type = JournalStructurePersistence.class)
+	protected JournalStructurePersistence journalStructurePersistence;
+	@BeanReference(type = JournalTemplatePersistence.class)
+	protected JournalTemplatePersistence journalTemplatePersistence;
+	@BeanReference(type = ImagePersistence.class)
+	protected ImagePersistence imagePersistence;
+	@BeanReference(type = ResourcePersistence.class)
+	protected ResourcePersistence resourcePersistence;
+	@BeanReference(type = UserPersistence.class)
+	protected UserPersistence userPersistence;
+	@BeanReference(type = WebDAVPropsPersistence.class)
+	protected WebDAVPropsPersistence webDAVPropsPersistence;
+	@BeanReference(type = ExpandoValuePersistence.class)
+	protected ExpandoValuePersistence expandoValuePersistence;
 	private static final String _SQL_SELECT_JOURNALTEMPLATE = "SELECT journalTemplate FROM JournalTemplate journalTemplate";
 	private static final String _SQL_SELECT_JOURNALTEMPLATE_WHERE = "SELECT journalTemplate FROM JournalTemplate journalTemplate WHERE ";
 	private static final String _SQL_COUNT_JOURNALTEMPLATE = "SELECT COUNT(journalTemplate) FROM JournalTemplate journalTemplate";

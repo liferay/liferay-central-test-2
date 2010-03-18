@@ -417,84 +417,84 @@ public abstract class AnnouncementsEntryServiceBaseImpl extends PrincipalBean
 		}
 	}
 
-	@BeanReference(name = "com.liferay.portlet.announcements.service.AnnouncementsDeliveryLocalService")
+	@BeanReference(type = AnnouncementsDeliveryLocalService.class)
 	protected AnnouncementsDeliveryLocalService announcementsDeliveryLocalService;
-	@BeanReference(name = "com.liferay.portlet.announcements.service.AnnouncementsDeliveryService")
+	@BeanReference(type = AnnouncementsDeliveryService.class)
 	protected AnnouncementsDeliveryService announcementsDeliveryService;
-	@BeanReference(name = "com.liferay.portlet.announcements.service.persistence.AnnouncementsDeliveryPersistence")
+	@BeanReference(type = AnnouncementsDeliveryPersistence.class)
 	protected AnnouncementsDeliveryPersistence announcementsDeliveryPersistence;
-	@BeanReference(name = "com.liferay.portlet.announcements.service.AnnouncementsEntryLocalService")
+	@BeanReference(type = AnnouncementsEntryLocalService.class)
 	protected AnnouncementsEntryLocalService announcementsEntryLocalService;
-	@BeanReference(name = "com.liferay.portlet.announcements.service.AnnouncementsEntryService")
+	@BeanReference(type = AnnouncementsEntryService.class)
 	protected AnnouncementsEntryService announcementsEntryService;
-	@BeanReference(name = "com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryPersistence")
+	@BeanReference(type = AnnouncementsEntryPersistence.class)
 	protected AnnouncementsEntryPersistence announcementsEntryPersistence;
-	@BeanReference(name = "com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryFinder")
+	@BeanReference(type = AnnouncementsEntryFinder.class)
 	protected AnnouncementsEntryFinder announcementsEntryFinder;
-	@BeanReference(name = "com.liferay.portlet.announcements.service.AnnouncementsFlagLocalService")
+	@BeanReference(type = AnnouncementsFlagLocalService.class)
 	protected AnnouncementsFlagLocalService announcementsFlagLocalService;
-	@BeanReference(name = "com.liferay.portlet.announcements.service.AnnouncementsFlagService")
+	@BeanReference(type = AnnouncementsFlagService.class)
 	protected AnnouncementsFlagService announcementsFlagService;
-	@BeanReference(name = "com.liferay.portlet.announcements.service.persistence.AnnouncementsFlagPersistence")
+	@BeanReference(type = AnnouncementsFlagPersistence.class)
 	protected AnnouncementsFlagPersistence announcementsFlagPersistence;
-	@BeanReference(name = "com.liferay.counter.service.CounterLocalService")
+	@BeanReference(type = CounterLocalService.class)
 	protected CounterLocalService counterLocalService;
-	@BeanReference(name = "com.liferay.counter.service.CounterService")
+	@BeanReference(type = CounterService.class)
 	protected CounterService counterService;
-	@BeanReference(name = "com.liferay.mail.service.MailService")
+	@BeanReference(type = MailService.class)
 	protected MailService mailService;
-	@BeanReference(name = "com.liferay.portal.service.CompanyLocalService")
+	@BeanReference(type = CompanyLocalService.class)
 	protected CompanyLocalService companyLocalService;
-	@BeanReference(name = "com.liferay.portal.service.CompanyService")
+	@BeanReference(type = CompanyService.class)
 	protected CompanyService companyService;
-	@BeanReference(name = "com.liferay.portal.service.persistence.CompanyPersistence")
+	@BeanReference(type = CompanyPersistence.class)
 	protected CompanyPersistence companyPersistence;
-	@BeanReference(name = "com.liferay.portal.service.GroupLocalService")
+	@BeanReference(type = GroupLocalService.class)
 	protected GroupLocalService groupLocalService;
-	@BeanReference(name = "com.liferay.portal.service.GroupService")
+	@BeanReference(type = GroupService.class)
 	protected GroupService groupService;
-	@BeanReference(name = "com.liferay.portal.service.persistence.GroupPersistence")
+	@BeanReference(type = GroupPersistence.class)
 	protected GroupPersistence groupPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.GroupFinder")
+	@BeanReference(type = GroupFinder.class)
 	protected GroupFinder groupFinder;
-	@BeanReference(name = "com.liferay.portal.service.OrganizationLocalService")
+	@BeanReference(type = OrganizationLocalService.class)
 	protected OrganizationLocalService organizationLocalService;
-	@BeanReference(name = "com.liferay.portal.service.OrganizationService")
+	@BeanReference(type = OrganizationService.class)
 	protected OrganizationService organizationService;
-	@BeanReference(name = "com.liferay.portal.service.persistence.OrganizationPersistence")
+	@BeanReference(type = OrganizationPersistence.class)
 	protected OrganizationPersistence organizationPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.OrganizationFinder")
+	@BeanReference(type = OrganizationFinder.class)
 	protected OrganizationFinder organizationFinder;
-	@BeanReference(name = "com.liferay.portal.service.ResourceLocalService")
+	@BeanReference(type = ResourceLocalService.class)
 	protected ResourceLocalService resourceLocalService;
-	@BeanReference(name = "com.liferay.portal.service.ResourceService")
+	@BeanReference(type = ResourceService.class)
 	protected ResourceService resourceService;
-	@BeanReference(name = "com.liferay.portal.service.persistence.ResourcePersistence")
+	@BeanReference(type = ResourcePersistence.class)
 	protected ResourcePersistence resourcePersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.ResourceFinder")
+	@BeanReference(type = ResourceFinder.class)
 	protected ResourceFinder resourceFinder;
-	@BeanReference(name = "com.liferay.portal.service.RoleLocalService")
+	@BeanReference(type = RoleLocalService.class)
 	protected RoleLocalService roleLocalService;
-	@BeanReference(name = "com.liferay.portal.service.RoleService")
+	@BeanReference(type = RoleService.class)
 	protected RoleService roleService;
-	@BeanReference(name = "com.liferay.portal.service.persistence.RolePersistence")
+	@BeanReference(type = RolePersistence.class)
 	protected RolePersistence rolePersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.RoleFinder")
+	@BeanReference(type = RoleFinder.class)
 	protected RoleFinder roleFinder;
-	@BeanReference(name = "com.liferay.portal.service.UserLocalService")
+	@BeanReference(type = UserLocalService.class)
 	protected UserLocalService userLocalService;
-	@BeanReference(name = "com.liferay.portal.service.UserService")
+	@BeanReference(type = UserService.class)
 	protected UserService userService;
-	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence")
+	@BeanReference(type = UserPersistence.class)
 	protected UserPersistence userPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.UserFinder")
+	@BeanReference(type = UserFinder.class)
 	protected UserFinder userFinder;
-	@BeanReference(name = "com.liferay.portal.service.UserGroupLocalService")
+	@BeanReference(type = UserGroupLocalService.class)
 	protected UserGroupLocalService userGroupLocalService;
-	@BeanReference(name = "com.liferay.portal.service.UserGroupService")
+	@BeanReference(type = UserGroupService.class)
 	protected UserGroupService userGroupService;
-	@BeanReference(name = "com.liferay.portal.service.persistence.UserGroupPersistence")
+	@BeanReference(type = UserGroupPersistence.class)
 	protected UserGroupPersistence userGroupPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.UserGroupFinder")
+	@BeanReference(type = UserGroupFinder.class)
 	protected UserGroupFinder userGroupFinder;
 }
