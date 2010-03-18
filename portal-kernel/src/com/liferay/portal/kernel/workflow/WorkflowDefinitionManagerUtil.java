@@ -39,6 +39,38 @@ public class WorkflowDefinitionManagerUtil {
 			companyId, userId, inputStream);
 	}
 
+	public List<WorkflowDefinition> getActiveWorkflowDefinitions(
+			long companyId, int start, int end,
+			OrderByComparator orderByComparator)
+		throws WorkflowException {
+
+		return _workflowDefinitionManager.getActiveWorkflowDefinitions(
+			companyId, start, end,orderByComparator);
+	}
+
+	public List<WorkflowDefinition> getActiveWorkflowDefinitions(
+			long companyId, String name, int start, int end,
+			OrderByComparator orderByComparator)
+		throws WorkflowException {
+
+		return _workflowDefinitionManager.getActiveWorkflowDefinitions(
+			companyId, name, start, end,orderByComparator);
+	}
+
+	public int getActiveWorkflowDefinitionCount(long companyId)
+		throws WorkflowException {
+
+		return _workflowDefinitionManager.getActiveWorkflowDefinitionCount(
+			companyId);
+	}
+
+	public int getActiveWorkflowDefinitionCount(long companyId, String name)
+		throws WorkflowException {
+
+		return _workflowDefinitionManager.getActiveWorkflowDefinitionCount(
+			companyId, name);
+	}
+
 	public static WorkflowDefinition getWorkflowDefinition(
 			long companyId, String name, int version)
 		throws WorkflowException {

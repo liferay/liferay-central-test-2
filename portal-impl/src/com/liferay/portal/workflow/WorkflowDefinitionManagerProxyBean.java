@@ -41,6 +41,30 @@ public class WorkflowDefinitionManagerProxyBean
 		throw new UnsupportedOperationException();
 	}
 
+	public List<WorkflowDefinition> getActiveWorkflowDefinitions(
+		long companyId, int start, int end,
+		OrderByComparator orderByComparator) {
+
+		throw new UnsupportedOperationException();
+	}
+
+	public List<WorkflowDefinition> getActiveWorkflowDefinitions(
+		long companyId, String name, int start, int end,
+		OrderByComparator orderByComparator) {
+
+		throw new UnsupportedOperationException();
+	}
+
+	public int getActiveWorkflowDefinitionCount(long companyId) {
+
+		throw new UnsupportedOperationException();
+	}
+
+	public int getActiveWorkflowDefinitionCount(long companyId, String name) {
+
+		throw new UnsupportedOperationException();
+	}
+
 	public WorkflowDefinition getWorkflowDefinition(
 		long companyId, String name, int version) {
 
