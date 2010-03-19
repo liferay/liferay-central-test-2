@@ -22,34 +22,41 @@ String redirect = ParamUtil.getString(request, "redirect");
 long categoryId = ParamUtil.getLong(request, "categoryId", ShoppingCategoryConstants.DEFAULT_PARENT_CATEGORY_ID);
 %>
 
-<form action="<portlet:actionURL><portlet:param name="struts_action" value="/shopping/add_book_items" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="alert('<%= UnicodeLanguageUtil.get(pageContext, "please-be-patient") %>'); submitForm(this); return false;">
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
-<input name="<portlet:namespace />categoryId" type="hidden" value="<%= categoryId %>" />
+<portlet:actionURL var="addBookItermsURL">
+	<portlet:param name="struts_action" value="/shopping/add_book_items" />
+</portlet:actionURL>
 
-<liferay-util:include page="/html/portlet/shopping/tabs1.jsp">
-	<liferay-util:param name="tabs1" value="categories" />
-</liferay-util:include>
+<aui:form action="<%= addBookItermsURL %>" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "saveBookItem();" %>'>
+	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
+	<aui:input name="categoryId" type="hidden" value="<%= categoryId %>" />
 
-<div class="breadcrumbs">
-	<%= ShoppingUtil.getBreadcrumbs(categoryId, pageContext, renderRequest, renderResponse) %>
-</div>
+	<liferay-util:include page="/html/portlet/shopping/tabs1.jsp">
+		<liferay-util:param name="tabs1" value="categories" />
+	</liferay-util:include>
 
-<liferay-ui:message key="add-all-isbn-numbers-separated-by-spaces" />
+	<div class="breadcrumbs">
+		<%= ShoppingUtil.getBreadcrumbs(categoryId, pageContext, renderRequest, renderResponse) %>
+	</div>
 
-<br /><br />
+	<aui:fieldset>
+		<aui:input cssClass="lfr-textarea-container" label="add-all-isbn-numbers-separated-by-spaces" name="isbns" type="textarea" wrap="soft" />
+	</aui:fieldset>
 
-<textarea class="lfr-textarea" name="<portlet:namespace />isbns" wrap="soft"></textarea>
+	<aui:button-row>
+		<aui:button type="submit" />
 
-<br /><br />
+		<aui:button onClick="<%= redirect %>" type="cancel" />
+	</aui:button-row>
+</aui:form>
 
-<input type="submit" value="<liferay-ui:message key="save" />" />
-
-<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(PortalUtil.escapeRedirect(redirect)) %>';" />
-
-</form>
-
-<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-	<aui:script>
+<aui:script>
+	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />isbns);
-	</aui:script>
-</c:if>
+	</c:if>
+
+	function <portlet:namespace />saveBookItem() {
+		alert('<%= UnicodeLanguageUtil.get(pageContext, "please-be-patient") %>');
+
+		submitForm(this); return false;
+	}
+</aui:script>

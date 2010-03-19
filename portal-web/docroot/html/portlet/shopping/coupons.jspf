@@ -21,102 +21,101 @@ portletURL.setParameter("struts_action", "/shopping/view");
 portletURL.setParameter("tabs1", tabs1);
 %>
 
-<form action="<%= portletURL.toString() %>" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
-<input name="<portlet:namespace />deleteCouponIds" type="hidden" value="" />
+<aui:form action="<%= portletURL.toString() %>" method="post" name="fm">
+	<aui:input name="<%= Constants.CMD %>" type="hidden" />
+	<aui:input name="deleteCouponIds" type="hidden" />
 
-<%
-CouponSearch searchContainer = new CouponSearch(renderRequest, portletURL);
+	<%
+	CouponSearch searchContainer = new CouponSearch(renderRequest, portletURL);
 
-List headerNames = searchContainer.getHeaderNames();
+	List headerNames = searchContainer.getHeaderNames();
 
-headerNames.add(StringPool.BLANK);
+	headerNames.add(StringPool.BLANK);
 
-searchContainer.setRowChecker(new RowChecker(renderResponse));
-%>
+	searchContainer.setRowChecker(new RowChecker(renderResponse));
+	%>
 
-<liferay-ui:search-form
-	page="/html/portlet/shopping/coupon_search.jsp"
-	searchContainer="<%= searchContainer %>"
-/>
+	<liferay-ui:search-form
+		page="/html/portlet/shopping/coupon_search.jsp"
+		searchContainer="<%= searchContainer %>"
+	/>
 
-<%
-CouponSearchTerms searchTerms = (CouponSearchTerms)searchContainer.getSearchTerms();
+	<%
+	CouponSearchTerms searchTerms = (CouponSearchTerms)searchContainer.getSearchTerms();
 
-int total = ShoppingCouponLocalServiceUtil.searchCount(scopeGroupId, company.getCompanyId(), searchTerms.getCode(), searchTerms.isActive(), searchTerms.getDiscountType(), searchTerms.isAndOperator());
+	int total = ShoppingCouponLocalServiceUtil.searchCount(scopeGroupId, company.getCompanyId(), searchTerms.getCode(), searchTerms.isActive(), searchTerms.getDiscountType(), searchTerms.isAndOperator());
 
-searchContainer.setTotal(total);
+	searchContainer.setTotal(total);
 
-List results = ShoppingCouponServiceUtil.search(scopeGroupId, company.getCompanyId(), searchTerms.getCode(), searchTerms.isActive(), searchTerms.getDiscountType(), searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd());
+	List results = ShoppingCouponServiceUtil.search(scopeGroupId, company.getCompanyId(), searchTerms.getCode(), searchTerms.isActive(), searchTerms.getDiscountType(), searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd());
 
-searchContainer.setResults(results);
-%>
+	searchContainer.setResults(results);
+	%>
 
-<div class="separator"><!-- --></div>
+	<div class="separator"><!-- --></div>
 
-<input type="button" value="<liferay-ui:message key="delete" />" onClick="<portlet:namespace />deleteCoupons();" />
+	<aui:button-row>
+		<aui:button onClick='<%= renderResponse.getNamespace() + "deleteCoupons();" %>' type="button" value="delete" />
+	</aui:button-row>
 
-<br /><br />
+	<%
+	List resultRows = searchContainer.getResultRows();
 
-<%
-List resultRows = searchContainer.getResultRows();
+	for (int i = 0; i < results.size(); i++) {
+		ShoppingCoupon coupon = (ShoppingCoupon)results.get(i);
 
-for (int i = 0; i < results.size(); i++) {
-	ShoppingCoupon coupon = (ShoppingCoupon)results.get(i);
+		coupon = coupon.toEscapedModel();
 
-	coupon = coupon.toEscapedModel();
+		ResultRow row = new ResultRow(coupon, coupon.getCouponId(), i);
 
-	ResultRow row = new ResultRow(coupon, coupon.getCouponId(), i);
+		PortletURL rowURL = renderResponse.createRenderURL();
 
-	PortletURL rowURL = renderResponse.createRenderURL();
+		rowURL.setParameter("struts_action", "/shopping/edit_coupon");
+		rowURL.setParameter("redirect", currentURL);
+		rowURL.setParameter("couponId", String.valueOf(coupon.getCouponId()));
 
-	rowURL.setParameter("struts_action", "/shopping/edit_coupon");
-	rowURL.setParameter("redirect", currentURL);
-	rowURL.setParameter("couponId", String.valueOf(coupon.getCouponId()));
+		// Code
 
-	// Code
+		row.addText(coupon.getCode(), rowURL);
 
-	row.addText(coupon.getCode(), rowURL);
+		// Name and description
 
-	// Name and description
+		if (Validator.isNotNull(coupon.getDescription())) {
+			row.addText(coupon.getName().concat("<br />").concat(coupon.getDescription()), rowURL);
+		}
+		else {
+			row.addText(coupon.getName(), rowURL);
+		}
 
-	if (Validator.isNotNull(coupon.getDescription())) {
-		row.addText(coupon.getName().concat("<br />").concat(coupon.getDescription()), rowURL);
+		// Start date
+
+		row.addText(dateFormatDateTime.format(coupon.getStartDate()), rowURL);
+
+		// End date
+
+		if (coupon.getEndDate() == null) {
+			row.addText(LanguageUtil.get(pageContext, "never"), rowURL);
+		}
+		else {
+			row.addText(dateFormatDateTime.format(coupon.getEndDate()), rowURL);
+		}
+
+		// Discount type
+
+		row.addText(LanguageUtil.get(pageContext, coupon.getDiscountType()), rowURL);
+
+		// Action
+
+		row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/shopping/coupon_action.jsp");
+
+		// Add result row
+
+		resultRows.add(row);
 	}
-	else {
-		row.addText(coupon.getName(), rowURL);
-	}
+	%>
 
-	// Start date
-
-	row.addText(dateFormatDateTime.format(coupon.getStartDate()), rowURL);
-
-	// End date
-
-	if (coupon.getEndDate() == null) {
-		row.addText(LanguageUtil.get(pageContext, "never"), rowURL);
-	}
-	else {
-		row.addText(dateFormatDateTime.format(coupon.getEndDate()), rowURL);
-	}
-
-	// Discount type
-
-	row.addText(LanguageUtil.get(pageContext, coupon.getDiscountType()), rowURL);
-
-	// Action
-
-	row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/shopping/coupon_action.jsp");
-
-	// Add result row
-
-	resultRows.add(row);
-}
-%>
-
-<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-
-</form>
+	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+</aui:form>
 
 <aui:script>
 	function <portlet:namespace />deleteCoupons() {

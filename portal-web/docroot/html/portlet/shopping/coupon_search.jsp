@@ -22,59 +22,45 @@ CouponSearch searchContainer = (CouponSearch)request.getAttribute("liferay-ui:se
 CouponDisplayTerms displayTerms = (CouponDisplayTerms)searchContainer.getDisplayTerms();
 %>
 
-<table class="lfr-table">
-<tr>
-	<td>
-		<liferay-ui:message key="code" />
-	</td>
-	<td>
-		<liferay-ui:message key="discount-type" />
-	</td>
-	<td>
-		<liferay-ui:message key="active" />
-	</td>
-</tr>
-<tr>
-	<td>
-		<input name="<portlet:namespace /><%= displayTerms.CODE %>" size="20" type="text" value="<%= HtmlUtil.escape(displayTerms.getCode()) %>" />
-	</td>
-	<td>
-		<select name="<%= displayTerms.DISCOUNT_TYPE %>">
-			<option value=""></option>
+<aui:fieldset>
+	<aui:column>
+		<aui:input name="<%= displayTerms.CODE %>" size="20" type="text" value="<%= displayTerms.getCode() %>" />
+
+		<aui:select label="" name="<%= displayTerms.AND_OPERATOR %>">
+			<aui:option label="and" selected="<%= displayTerms.isAndOperator() %>" value="1" />
+			<aui:option label="or" selected="<%= !displayTerms.isAndOperator() %>" value="0" />
+		</aui:select>
+	</aui:column>
+
+	<aui:column>
+		<aui:select name="<%= displayTerms.DISCOUNT_TYPE %>" showEmptyOption="<%= true %>">
 
 			<%
 			for (int i = 0; i < ShoppingCouponConstants.DISCOUNT_TYPES.length; i++) {
 			%>
 
-				<option <%= displayTerms.getDiscountType().equals(ShoppingCouponConstants.DISCOUNT_TYPES[i]) ? "selected" : "" %> value="<%= ShoppingCouponConstants.DISCOUNT_TYPES[i] %>"><%= LanguageUtil.get(pageContext, ShoppingCouponConstants.DISCOUNT_TYPES[i]) %></option>
+				<aui:option label="<%= ShoppingCouponConstants.DISCOUNT_TYPES[i] %>" selected="<%= displayTerms.getDiscountType().equals(ShoppingCouponConstants.DISCOUNT_TYPES[i]) %>" />
 
 			<%
 			}
 			%>
 
-		</select>
-	</td>
-	<td>
-		<select name="<portlet:namespace /><%= displayTerms.ACTIVE %>">
-			<option <%= displayTerms.isActive() ? "selected" : "" %> value="1"><liferay-ui:message key="yes" /></option>
-			<option <%= !displayTerms.isActive() ? "selected" : "" %> value="0"><liferay-ui:message key="no" /></option>
-		</select>
-	</td>
-</tr>
-</table>
+		</aui:select>
+	</aui:column>
 
-<br />
+	<aui:column>
+		<aui:select name="<%= displayTerms.ACTIVE %>">
+			<aui:option label="yes" selected="<%= displayTerms.isActive() %>" value="1" />
+			<aui:option label="no" selected="<%= !displayTerms.isActive() %>" value="0" />
+		</aui:select>
+	</aui:column>
+</aui:fieldset>
 
-<div>
-	<select name="<portlet:namespace /><%= displayTerms.AND_OPERATOR %>">
-		<option <%= displayTerms.isAndOperator() ? "selected" : "" %> value="1"><liferay-ui:message key="and" /></option>
-		<option <%= !displayTerms.isAndOperator() ? "selected" : "" %> value="0"><liferay-ui:message key="or" /></option>
-	</select>
+<aui:button-row>
+	<aui:button type="submit" value="search" />
 
-	<input type="submit" value="<liferay-ui:message key="search" />" />
-
-	<input type="button" value="<liferay-ui:message key="add-coupon" />" onClick="<portlet:namespace />addCoupon();" />
-</div>
+	<aui:button onClick='<%= renderResponse.getNamespace() + "addCoupon();" %>' type="button" value="add-coupon" />
+</aui:button-row>
 
 <aui:script>
 	function <portlet:namespace />addCoupon() {

@@ -42,153 +42,156 @@ else {
 String keywords = ParamUtil.getString(request, "keywords");
 %>
 
-<liferay-portlet:renderURL varImpl="searchURL"><portlet:param name="struts_action" value="/shopping/search" /></liferay-portlet:renderURL>
+<liferay-portlet:renderURL varImpl="searchURL">
+	<portlet:param name="struts_action" value="/shopping/search" />
+</liferay-portlet:renderURL>
 
-<form action="<%= searchURL %>" method="get" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
-<liferay-portlet:renderURLParams varImpl="searchURL" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
-<input name="<portlet:namespace />breadcrumbsCategoryId" type="hidden" value="<%= breadcrumbsCategoryId %>" />
-<input name="<portlet:namespace />searchCategoryId" type="hidden" value="<%= searchCategoryId %>" />
-<input name="<portlet:namespace />searchCategoryIds" type="hidden" value="<%= searchCategoryIds %>" />
+<aui:form action="<%= searchURL %>" method="get" name="fm">
+	<liferay-portlet:renderURLParams varImpl="searchURL" />
+	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
+	<aui:input name="breadcrumbsCategoryId" type="hidden" value="<%= breadcrumbsCategoryId %>" />
+	<aui:input name="searchCategoryId" type="hidden" value="<%= searchCategoryId %>" />
+	<aui:input name="searchCategoryIds" type="hidden" value="<%= searchCategoryIds %>" />
 
-<liferay-ui:tabs
-	names="search"
-	backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
-/>
+	<liferay-ui:tabs
+		names="search"
+		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
+	/>
 
-<%
-PortletURL portletURL = renderResponse.createRenderURL();
+	<%
+	PortletURL portletURL = renderResponse.createRenderURL();
 
-portletURL.setParameter("struts_action", "/shopping/search");
-portletURL.setParameter("redirect", redirect);
-portletURL.setParameter("breadcrumbsCategoryId", String.valueOf(breadcrumbsCategoryId));
-portletURL.setParameter("searchCategoryId", String.valueOf(searchCategoryId));
-portletURL.setParameter("searchCategoryIds", String.valueOf(searchCategoryIds));
-portletURL.setParameter("keywords", keywords);
+	portletURL.setParameter("struts_action", "/shopping/search");
+	portletURL.setParameter("redirect", redirect);
+	portletURL.setParameter("breadcrumbsCategoryId", String.valueOf(breadcrumbsCategoryId));
+	portletURL.setParameter("searchCategoryId", String.valueOf(searchCategoryId));
+	portletURL.setParameter("searchCategoryIds", String.valueOf(searchCategoryIds));
+	portletURL.setParameter("keywords", keywords);
 
-List<String> headerNames = new ArrayList<String>();
+	List<String> headerNames = new ArrayList<String>();
 
-headerNames.add("sku");
-headerNames.add("description");
-headerNames.add("min-qty");
-headerNames.add("price");
-headerNames.add(StringPool.BLANK);
+	headerNames.add("sku");
+	headerNames.add("description");
+	headerNames.add("min-qty");
+	headerNames.add("price");
+	headerNames.add(StringPool.BLANK);
 
-SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.format(pageContext, "no-entries-were-found-that-matched-the-keywords-x", "<strong>" + HtmlUtil.escape(keywords) + "</strong>"));
+	SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.format(pageContext, "no-entries-were-found-that-matched-the-keywords-x", "<strong>" + HtmlUtil.escape(keywords) + "</strong>"));
 
-int total = ShoppingItemLocalServiceUtil.searchCount(scopeGroupId, categoryIdsArray, keywords);
+	int total = ShoppingItemLocalServiceUtil.searchCount(scopeGroupId, categoryIdsArray, keywords);
 
-searchContainer.setTotal(total);
+	searchContainer.setTotal(total);
 
-List results = ShoppingItemLocalServiceUtil.search(scopeGroupId, categoryIdsArray, keywords, searchContainer.getStart(), searchContainer.getEnd());
+	List results = ShoppingItemLocalServiceUtil.search(scopeGroupId, categoryIdsArray, keywords, searchContainer.getStart(), searchContainer.getEnd());
 
-searchContainer.setResults(results);
+	searchContainer.setResults(results);
 
-List resultRows = searchContainer.getResultRows();
+	List resultRows = searchContainer.getResultRows();
 
-for (int i = 0; i < results.size(); i++) {
-	ShoppingItem item = (ShoppingItem)results.get(i);
+	for (int i = 0; i < results.size(); i++) {
+		ShoppingItem item = (ShoppingItem)results.get(i);
 
-	item = item.toEscapedModel();
+		item = item.toEscapedModel();
 
-	ResultRow row = new ResultRow(item, item.getItemId(), i);
+		ResultRow row = new ResultRow(item, item.getItemId(), i);
 
-	PortletURL rowURL = renderResponse.createRenderURL();
+		PortletURL rowURL = renderResponse.createRenderURL();
 
-	rowURL.setParameter("struts_action", "/shopping/view_item");
-	rowURL.setParameter("redirect", currentURL);
-	rowURL.setParameter("itemId", String.valueOf(item.getItemId()));
+		rowURL.setParameter("struts_action", "/shopping/view_item");
+		rowURL.setParameter("redirect", currentURL);
+		rowURL.setParameter("itemId", String.valueOf(item.getItemId()));
 
-	// SKU and small image
+		// SKU and small image
 
-	StringBundler sb = new StringBundler();
+		StringBundler sb = new StringBundler();
 
-	if (item.isSmallImage()) {
-		sb.append("<br />");
-		sb.append("<img alt=\"");
-		sb.append(item.getSku());
-		sb.append("\" border=\"0\" src=\"");
+		if (item.isSmallImage()) {
+			sb.append("<br />");
+			sb.append("<img alt=\"");
+			sb.append(item.getSku());
+			sb.append("\" border=\"0\" src=\"");
 
-		if (Validator.isNotNull(item.getSmallImageURL())) {
-			sb.append(item.getSmallImageURL());
+			if (Validator.isNotNull(item.getSmallImageURL())) {
+				sb.append(item.getSmallImageURL());
+			}
+			else {
+				sb.append(themeDisplay.getPathImage());
+				sb.append("/shopping/item?img_id=");
+				sb.append(item.getSmallImageId());
+				sb.append("&t=");
+				sb.append(ImageServletTokenUtil.getToken(item.getSmallImageId()));
+			}
+
+			sb.append("\">");
 		}
 		else {
-			sb.append(themeDisplay.getPathImage());
-			sb.append("/shopping/item?img_id=");
-			sb.append(item.getSmallImageId());
-			sb.append("&t=");
-			sb.append(ImageServletTokenUtil.getToken(item.getSmallImageId()));
+			sb.append(item.getSku());
 		}
 
-		sb.append("\">");
+		row.addText(sb.toString(), rowURL);
+
+		// Description
+
+		sb = new StringBundler();
+
+		sb.append(item.getName());
+
+		if (Validator.isNotNull(item.getDescription())) {
+			sb.append("<br />");
+			sb.append(item.getDescription());
+		}
+
+		Properties props = new OrderedProperties();
+
+		PropertiesUtil.load(props, item.getProperties());
+
+		Enumeration enu = props.propertyNames();
+
+		while (enu.hasMoreElements()) {
+			String propsKey = (String)enu.nextElement();
+			String propsValue = props.getProperty(propsKey, StringPool.BLANK);
+
+			sb.append("<br />");
+			sb.append(propsKey);
+			sb.append(": ");
+			sb.append(propsValue);
+		}
+
+		row.addText(sb.toString(), rowURL);
+
+		// Minimum quantity
+
+		row.addText(String.valueOf(item.getMinQuantity()), rowURL);
+
+		// Price
+
+		if (item.getDiscount() <= 0) {
+			row.addText(currencyFormat.format(item.getPrice()), rowURL);
+		}
+		else {
+			row.addText("<div class=\"portlet-msg-success\">" + currencyFormat.format(ShoppingUtil.calculateActualPrice(item)) + "</div>", rowURL);
+		}
+
+		// Action
+
+		row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/shopping/item_action.jsp");
+
+		// Add result row
+
+		resultRows.add(row);
 	}
-	else {
-		sb.append(item.getSku());
-	}
+	%>
 
-	row.addText(sb.toString(), rowURL);
+	<aui:fieldset>
+		<aui:input label="" name="keywords" size="30" value="<%= keywords %>" />
+	</aui:fieldset>
 
-	// Description
+	<aui:button-row>
+		<aui:button type="submit" value="search" />
+	</aui:button-row>
 
-	sb = new StringBundler();
-
-	sb.append(item.getName());
-
-	if (Validator.isNotNull(item.getDescription())) {
-		sb.append("<br />");
-		sb.append(item.getDescription());
-	}
-
-	Properties props = new OrderedProperties();
-
-	PropertiesUtil.load(props, item.getProperties());
-
-	Enumeration enu = props.propertyNames();
-
-	while (enu.hasMoreElements()) {
-		String propsKey = (String)enu.nextElement();
-		String propsValue = props.getProperty(propsKey, StringPool.BLANK);
-
-		sb.append("<br />");
-		sb.append(propsKey);
-		sb.append(": ");
-		sb.append(propsValue);
-	}
-
-	row.addText(sb.toString(), rowURL);
-
-	// Minimum quantity
-
-	row.addText(String.valueOf(item.getMinQuantity()), rowURL);
-
-	// Price
-
-	if (item.getDiscount() <= 0) {
-		row.addText(currencyFormat.format(item.getPrice()), rowURL);
-	}
-	else {
-		row.addText("<div class=\"portlet-msg-success\">" + currencyFormat.format(ShoppingUtil.calculateActualPrice(item)) + "</div>", rowURL);
-	}
-
-	// Action
-
-	row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/shopping/item_action.jsp");
-
-	// Add result row
-
-	resultRows.add(row);
-}
-%>
-
-<input name="<portlet:namespace />keywords" size="30" type="text" value="<%= HtmlUtil.escape(keywords) %>" />
-
-<input type="submit" value="<liferay-ui:message key="search" />" />
-
-<br /><br />
-
-<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-
-</form>
+	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+</aui:form>
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 	<aui:script>

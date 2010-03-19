@@ -34,186 +34,192 @@ OrderByComparator orderByComparator = ShoppingUtil.getItemOrderByComparator(orde
 ShoppingItem[] prevAndNext = ShoppingItemLocalServiceUtil.getItemsPrevAndNext(item.getItemId(), orderByComparator);
 %>
 
-<form action="<portlet:actionURL><portlet:param name="struts_action" value="/shopping/cart" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.ADD %>" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<portlet:renderURL><portlet:param name="struts_action" value="/shopping/cart" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>" />
-<input name="<portlet:namespace />itemId" type="hidden" value="<%= item.getItemId() %>" />
-<input name="<portlet:namespace />fields" type="hidden" value="" />
+<portlet:actionURL var="cartURL">
+	<portlet:param name="struts_action" value="/shopping/cart" />
+</portlet:actionURL>
 
-<liferay-ui:tabs
-	names="item"
-	backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
-/>
+<portlet:renderURL var="redirectURL">
+	<portlet:param name="struts_action" value="/shopping/cart" />
+	<portlet:param name="redirect" value="<%= currentURL %>" />
+</portlet:renderURL>
 
-<div class="breadcrumbs">
-	<%= ShoppingUtil.getBreadcrumbs(item.getCategoryId(), pageContext, renderRequest, renderResponse) %>
-</div>
+<aui:form action="<%= cartURL %>" method="post" name="fm">
+	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.ADD %>" />
+	<aui:input name="redirect" type="hidden" value="<%= redirectURL %>" />
+	<aui:input name="itemId" type="hidden" value="<%= item.getItemId() %>" />
+	<aui:input name="fields" type="hidden" />
 
-<table border="0" cellpadding="0" cellspacing="0">
-<tr>
-	<td class="lfr-top">
-		<strong><%= item.getSku() %></strong>
+	<liferay-ui:tabs
+		names="item"
+		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
+	/>
 
-		<br /><br />
+	<div class="breadcrumbs">
+		<%= ShoppingUtil.getBreadcrumbs(item.getCategoryId(), pageContext, renderRequest, renderResponse) %>
+	</div>
 
-		<c:if test="<%= item.isMediumImage() %>">
-			<img alt="<liferay-ui:message key="image" />" src='<%= Validator.isNotNull(item.getMediumImageURL()) ? item.getMediumImageURL() : themeDisplay.getPathImage() + "/shopping/item?img_id=" + item.getMediumImageId() + "&t=" + ImageServletTokenUtil.getToken(item.getMediumImageId()) %>' vspace="0" />
-		</c:if>
+	<table border="0" cellpadding="0" cellspacing="0">
+	<tr>
+		<td class="lfr-top">
+			<strong><%= item.getSku() %></strong>
 
-		<c:if test="<%= item.isLargeImage() %>">
-			<br />
+			<br /><br />
 
-			<a href="<%= Validator.isNotNull(item.getLargeImageURL()) ? item.getLargeImageURL() : themeDisplay.getPathImage() + "/shopping/item?img_id=" + item.getLargeImageId() + "&t=" + ImageServletTokenUtil.getToken(item.getLargeImageId()) %>" style="font-size: xx-small;" target="_blank">
-			<liferay-ui:message key="see-large-photo" />
-			</a>
-		</c:if>
-	</td>
-	<td style="padding-left: 30px;"></td>
-	<td class="lfr-top">
-		<span style="font-size: small;">
-		<strong><%= item.getName() %></strong><br />
-		</span>
+			<c:if test="<%= item.isMediumImage() %>">
+				<img alt="<liferay-ui:message key="image" />" src='<%= Validator.isNotNull(item.getMediumImageURL()) ? item.getMediumImageURL() : themeDisplay.getPathImage() + "/shopping/item?img_id=" + item.getMediumImageId() + "&t=" + ImageServletTokenUtil.getToken(item.getMediumImageId()) %>' vspace="0" />
+			</c:if>
 
-		<c:if test="<%= Validator.isNotNull(item.getDescription()) %>">
-			<br />
+			<c:if test="<%= item.isLargeImage() %>">
+				<br />
 
-			<%= item.getDescription() %>
-		</c:if>
+				<a href="<%= Validator.isNotNull(item.getLargeImageURL()) ? item.getLargeImageURL() : themeDisplay.getPathImage() + "/shopping/item?img_id=" + item.getLargeImageId() + "&t=" + ImageServletTokenUtil.getToken(item.getLargeImageId()) %>" style="font-size: xx-small;" target="_blank">
+				<liferay-ui:message key="see-large-photo" />
+				</a>
+			</c:if>
+		</td>
+		<td style="padding-left: 30px;"></td>
+		<td class="lfr-top">
+			<span style="font-size: small;">
+			<strong><%= item.getName() %></strong><br />
+			</span>
 
-		<%
-		Properties props = new OrderedProperties();
+			<c:if test="<%= Validator.isNotNull(item.getDescription()) %>">
+				<br />
 
-		PropertiesUtil.load(props, item.getProperties());
+				<%= item.getDescription() %>
+			</c:if>
 
-		Enumeration enu = props.propertyNames();
+			<%
+			Properties props = new OrderedProperties();
 
-		while (enu.hasMoreElements()) {
-			String propsKey = (String)enu.nextElement();
-			String propsValue = props.getProperty(propsKey, StringPool.BLANK);
-		%>
+			PropertiesUtil.load(props, item.getProperties());
 
-			<br />
+			Enumeration enu = props.propertyNames();
 
-			<%= propsKey %>: <%= propsValue %>
+			while (enu.hasMoreElements()) {
+				String propsKey = (String)enu.nextElement();
+				String propsValue = props.getProperty(propsKey, StringPool.BLANK);
+			%>
 
-		<%
-		}
-		%>
+				<br />
 
-		<br /><br />
+				<%= propsKey %>: <%= propsValue %>
 
-		<%
-		for (int i = 0; i < itemPrices.length; i++) {
-			ShoppingItemPrice itemPrice = itemPrices[i];
-
-			if (itemPrice.getStatus() == ShoppingItemPriceConstants.STATUS_INACTIVE) {
-				continue;
+			<%
 			}
-		%>
+			%>
 
-			<c:choose>
-				<c:when test="<%= (itemPrice.getMinQuantity()) == 0 && (itemPrice.getMaxQuantity() == 0) %>">
-					<liferay-ui:message key="price" />:
-				</c:when>
-				<c:when test="<%= itemPrice.getMaxQuantity() != 0 %>">
-					<%= LanguageUtil.format(pageContext, "price-for-x-to-x-items", new Object[] {"<strong>" + new Integer(itemPrice.getMinQuantity()) + "</strong>", "<strong>" + new Integer(itemPrice.getMaxQuantity()) + "</strong>"}, false) %>
-				</c:when>
-				<c:when test="<%= itemPrice.getMaxQuantity() == 0 %>">
-					<%= LanguageUtil.format(pageContext, "price-for-x-items-and-above", "<strong>" + new Integer(itemPrice.getMinQuantity()) + "</strong>", false) %>
-				</c:when>
-			</c:choose>
+			<br /><br />
 
-			<c:if test="<%= itemPrice.getDiscount() <= 0 %>">
-				<%= currencyFormat.format(itemPrice.getPrice()) %><br />
-			</c:if>
+			<%
+			for (int i = 0; i < itemPrices.length; i++) {
+				ShoppingItemPrice itemPrice = itemPrices[i];
 
-			<c:if test="<%= itemPrice.getDiscount() > 0 %>">
-				<strike><%= currencyFormat.format(itemPrice.getPrice()) %></strike> <div class="portlet-msg-success"><%= currencyFormat.format(ShoppingUtil.calculateActualPrice(itemPrice)) %></div> / <liferay-ui:message key="you-save" />: <div class="portlet-msg-error"><%= currencyFormat.format(ShoppingUtil.calculateDiscountPrice(itemPrice)) %> (<%= percentFormat.format(itemPrice.getDiscount()) %>)</div><br />
-			</c:if>
+				if (itemPrice.getStatus() == ShoppingItemPriceConstants.STATUS_INACTIVE) {
+					continue;
+				}
+			%>
 
-		<%
-		}
-		%>
+				<c:choose>
+					<c:when test="<%= (itemPrice.getMinQuantity()) == 0 && (itemPrice.getMaxQuantity() == 0) %>">
+						<liferay-ui:message key="price" />:
+					</c:when>
+					<c:when test="<%= itemPrice.getMaxQuantity() != 0 %>">
+						<liferay-ui:message arguments='<%= new Object[] {"<strong>" + new Integer(itemPrice.getMinQuantity()) + "</strong>", "<strong>" + new Integer(itemPrice.getMaxQuantity()) + "</strong>"} %>' key="price-for-x-to-x-items" translateArguments="<%= false %>" />
+					</c:when>
+					<c:when test="<%= itemPrice.getMaxQuantity() == 0 %>">
+						<liferay-ui:message arguments='<%= "<strong>" + new Integer(itemPrice.getMinQuantity()) + "</strong>" %>' key="price-for-x-items-and-above" translateArguments="<%= false %>" />
+					</c:when>
+				</c:choose>
 
-		<br />
+				<c:if test="<%= itemPrice.getDiscount() <= 0 %>">
+					<%= currencyFormat.format(itemPrice.getPrice()) %><br />
+				</c:if>
 
-		<c:if test="<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.SHOPPING_ITEM_SHOW_AVAILABILITY) %>">
-			<c:choose>
-				<c:when test="<%= ShoppingUtil.isInStock(item) %>">
-					<liferay-ui:message key="availability" />: <div class="portlet-msg-success"><liferay-ui:message key="in-stock" /></div><br />
-				</c:when>
-				<c:otherwise>
-					<liferay-ui:message key="availability" />: <div class="portlet-msg-error"><liferay-ui:message key="out-of-stock" /></div><br />
-				</c:otherwise>
-			</c:choose>
+				<c:if test="<%= itemPrice.getDiscount() > 0 %>">
+					<strike><%= currencyFormat.format(itemPrice.getPrice()) %></strike> <div class="portlet-msg-success"><%= currencyFormat.format(ShoppingUtil.calculateActualPrice(itemPrice)) %></div> / <liferay-ui:message key="you-save" />: <div class="portlet-msg-error"><%= currencyFormat.format(ShoppingUtil.calculateDiscountPrice(itemPrice)) %> (<%= percentFormat.format(itemPrice.getDiscount()) %>)</div><br />
+				</c:if>
+
+			<%
+			}
+			%>
 
 			<br />
-		</c:if>
 
-		<%
-		for (int i = 0; i < itemFields.length; i++) {
-			ShoppingItemField itemField = itemFields[i];
+			<c:if test="<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.SHOPPING_ITEM_SHOW_AVAILABILITY) %>">
+				<c:choose>
+					<c:when test="<%= ShoppingUtil.isInStock(item) %>">
+						<liferay-ui:message key="availability" />: <div class="portlet-msg-success"><liferay-ui:message key="in-stock" /></div><br />
+					</c:when>
+					<c:otherwise>
+						<liferay-ui:message key="availability" />: <div class="portlet-msg-error"><liferay-ui:message key="out-of-stock" /></div><br />
+					</c:otherwise>
+				</c:choose>
 
-			String fieldName = itemField.getName();
-			String[] fieldValues = itemField.getValuesArray();
-			String fieldDescription = itemField.getDescription();
-		%>
+				<br />
+			</c:if>
 
-			<table class="lfr-table">
-			<tr>
-				<td>
-					<%= fieldName %>:
-				</td>
-				<td>
-					<select name="<portlet:namespace />fieldName<%= fieldName %>">
-						<option value=""><liferay-ui:message key="select-option" /></option>
+			<%
+			for (int i = 0; i < itemFields.length; i++) {
+				ShoppingItemField itemField = itemFields[i];
+
+				String fieldName = itemField.getName();
+				String[] fieldValues = itemField.getValuesArray();
+				String fieldDescription = itemField.getDescription();
+			%>
+
+				<aui:fieldset>
+					<aui:select label="<%= fieldName %>" name='<%= "fieldName" + fieldName %>'>
+						<aui:option label="select-option" />
 
 						<%
 						for (int j = 0; j < fieldValues.length; j++) {
 						%>
 
-							<option value="<%= fieldValues[j] %>"><%= fieldValues[j] %></option>
+							<aui:option label="<%= fieldValues[j] %>" />
 
 						<%
 						}
 						%>
 
-					</select>
-				</td>
+					</aui:select>
 
-				<c:if test="<%= Validator.isNotNull(fieldDescription) %>">
-					<td>
+					<c:if test="<%= Validator.isNotNull(fieldDescription) %>">
 						<%= fieldDescription %>
-					</td>
+					</c:if>
+				</aui:fieldset>
+
+			<%
+			}
+			%>
+
+			<aui:button onClick='<%= renderResponse.getNamespace() + "addToCart();" %>' type="button" value="add-to-shopping-cart" />
+
+			<aui:button-row>
+				<c:if test="<%= (prevAndNext[0] != null) || (prevAndNext[2] != null) %>">
+					<c:if test="<%= prevAndNext[0] != null %>">
+						<portlet:renderURL var="viewPreviousPageURL">
+							<portlet:param name="struts_action" value="/shopping/view_item" />
+							<portlet:param name="itemId" value="<%= String.valueOf(prevAndNext[0].getItemId()) %>" />
+						</portlet:renderURL>
+
+						<aui:button onClick="<%= viewPreviousPageURL %>" type="button" value="previous" />
+					</c:if>
+
+					<c:if test="<%= prevAndNext[2] != null %>">
+						<portlet:renderURL var="viewNextPageURL">
+							<portlet:param name="struts_action" value="/shopping/view_item" />
+							<portlet:param name="itemId" value="<%= String.valueOf(prevAndNext[2].getItemId()) %>" />
+						</portlet:renderURL>
+
+						<aui:button onClick="<%= viewNextPageURL %>" type="button" value="next" />
+					</c:if>
 				</c:if>
-
-			</tr>
-			</table>
-
-			<br />
-
-		<%
-		}
-		%>
-
-		<input type="button" value="<liferay-ui:message key="add-to-shopping-cart" />" onClick="<portlet:namespace />addToCart();" /><br />
-
-		<c:if test="<%= (prevAndNext[0] != null) || (prevAndNext[2] != null) %>">
-			<br />
-
-			<c:if test="<%= prevAndNext[0] != null %>">
-				<input type="button" value="<liferay-ui:message key="previous" />" onClick="location.href = '<portlet:renderURL><portlet:param name="struts_action" value="/shopping/view_item" /><portlet:param name="itemId" value="<%= String.valueOf(prevAndNext[0].getItemId()) %>" /></portlet:renderURL>';" />
-			</c:if>
-
-			<c:if test="<%= prevAndNext[2] != null %>">
-				<input type="button" value="<liferay-ui:message key="next" />" onClick="location.href = '<portlet:renderURL><portlet:param name="struts_action" value="/shopping/view_item" /><portlet:param name="itemId" value="<%= String.valueOf(prevAndNext[2].getItemId()) %>" /></portlet:renderURL>';" />
-			</c:if>
-		</c:if>
-	</td>
-</tr>
-</table>
-
-</form>
+			</aui:button-row>
+		</td>
+	</tr>
+	</table>
+</aui:form>
 
 <aui:script>
 	function <portlet:namespace />addToCart() {

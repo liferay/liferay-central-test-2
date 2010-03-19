@@ -22,66 +22,48 @@ OrderSearch searchContainer = (OrderSearch)request.getAttribute("liferay-ui:sear
 OrderDisplayTerms displayTerms = (OrderDisplayTerms)searchContainer.getDisplayTerms();
 %>
 
-<table class="lfr-table">
-<tr>
-	<td>
-		<liferay-ui:message key="number" />
-	</td>
-	<td>
-		<liferay-ui:message key="status" />
-	</td>
-	<td>
-		<liferay-ui:message key="first-name" />
-	</td>
-	<td>
-		<liferay-ui:message key="last-name" />
-	</td>
-	<td>
-		<liferay-ui:message key="email-address" />
-	</td>
-</tr>
-<tr>
-	<td>
-		<input name="<portlet:namespace /><%= displayTerms.NUMBER %>" size="20" type="text" value="<%= HtmlUtil.escape(displayTerms.getNumber()) %>" />
-	</td>
-	<td>
-		<select name="<%= displayTerms.STATUS %>">
-			<option value=""></option>
+<aui:fieldset>
+	<aui:column>
+		<aui:input name="<%= displayTerms.NUMBER %>" size="20" type="text" value="<%= displayTerms.getNumber() %>" />
+
+		<aui:select label="" name="<%= displayTerms.AND_OPERATOR %>">
+			<aui:option label="and" selected="<%= displayTerms.isAndOperator() %>" value="1" />
+			<aui:option label="or" selected="<%= !displayTerms.isAndOperator() %>" value="0" />
+		</aui:select>
+	</aui:column>
+
+	<aui:column>
+		<aui:select name="<%= displayTerms.STATUS %>" showEmptyOption="<%= true %>">
 
 			<%
 			for (int i = 0; i < ShoppingOrderConstants.STATUSES.length; i++) {
 			%>
 
-				<option <%= displayTerms.getStatus().equals(ShoppingOrderConstants.STATUSES[i]) ? "selected" : "" %> value="<%= ShoppingOrderConstants.STATUSES[i] %>"><%= LanguageUtil.get(pageContext, ShoppingOrderConstants.STATUSES[i]) %></option>
+				<aui:option label="<%= ShoppingOrderConstants.STATUSES[i] %>" selected="<%= displayTerms.getStatus().equals(ShoppingOrderConstants.STATUSES[i]) %>" />
 
 			<%
 			}
 			%>
 
-		</select>
-	</td>
-	<td>
-		<input name="<portlet:namespace /><%= displayTerms.FIRST_NAME %>" size="20" type="text" value="<%= HtmlUtil.escape(displayTerms.getFirstName()) %>" />
-	</td>
-	<td>
-		<input name="<portlet:namespace /><%= displayTerms.LAST_NAME %>" size="20" type="text" value="<%= HtmlUtil.escape(displayTerms.getLastName()) %>" />
-	</td>
-	<td>
-		<input name="<portlet:namespace /><%= displayTerms.EMAIL_ADDRESS %>" size="20" type="text" value="<%= HtmlUtil.escape(displayTerms.getEmailAddress()) %>" />
-	</td>
-</tr>
-</table>
+		</aui:select>
+	</aui:column>
 
-<br />
+	<aui:column>
+		<aui:input name="<%= displayTerms.FIRST_NAME %>" size="20" type="text" value="<%= displayTerms.getFirstName() %>" />
+	</aui:column>
 
-<div>
-	<select name="<portlet:namespace /><%= displayTerms.AND_OPERATOR %>">
-		<option <%= displayTerms.isAndOperator() ? "selected" : "" %> value="1"><liferay-ui:message key="and" /></option>
-		<option <%= !displayTerms.isAndOperator() ? "selected" : "" %> value="0"><liferay-ui:message key="or" /></option>
-	</select>
+	<aui:column>
+		<aui:input name="<%= displayTerms.LAST_NAME %>" size="20" type="text" value="<%= displayTerms.getLastName() %>" />
+	</aui:column>
 
-	<input type="submit" value="<liferay-ui:message key="search" />" />
-</div>
+	<aui:column>
+		<aui:input name="<%= displayTerms.EMAIL_ADDRESS %>" size="20" type="text" value="<%= displayTerms.getEmailAddress() %>" />
+	</aui:column>
+</aui:fieldset>
+
+<aui:button-row>
+	<aui:button type="submit" value="search" />
+</aui:button-row>
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 	<aui:script>

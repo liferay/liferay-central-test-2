@@ -74,575 +74,420 @@ else {
 int priceId = ParamUtil.getInteger(request, "priceId", -1);
 %>
 
-<form action="<portlet:actionURL><portlet:param name="struts_action" value="/shopping/edit_item" /></portlet:actionURL>" enctype="multipart/form-data" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveItem(); return false;">
-<input name="scroll" type="hidden" value="" />
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
-<input name="<portlet:namespace />categoryId" type="hidden" value="<%= categoryId %>" />
-<input name="<portlet:namespace />itemId" type="hidden" value="<%= itemId %>" />
-<input name="<portlet:namespace />fieldsCount" type="hidden" value="<%= fieldsCount %>" />
-<input name="<portlet:namespace />fieldId" type="hidden" value="" />
-<input name="<portlet:namespace />fieldName<%= fieldsCount %>" type="hidden" value="" />
-<input name="<portlet:namespace />fieldValues<%= fieldsCount %>" type="hidden" value="" />
-<input name="<portlet:namespace />fieldDescription<%= fieldsCount %>" type="hidden" value="" />
-<input name="<portlet:namespace />fieldsQuantities" type="hidden" value="<%= HtmlUtil.escapeAttribute(fieldsQuantities) %>" />
-<input name="<portlet:namespace />pricesCount" type="hidden" value="<%= pricesCount %>" />
-<input name="<portlet:namespace />priceId" type="hidden" value="" />
+<portlet:actionURL var="editItemURL">
+	<portlet:param name="struts_action" value="/shopping/edit_item" />
+</portlet:actionURL>
 
-<liferay-ui:tabs
-	names="item"
-	backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
-/>
+<aui:form action="<%= editItemURL %>" enctype="multipart/form-data" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "saveItem(); return false;" %>'>
+	<input name="scroll" type="hidden" value="" />
+	<aui:input name="<%= Constants.CMD %>" type="hidden" />
+	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
+	<aui:input name="categoryId" type="hidden" value="<%= categoryId %>" />
+	<aui:input name="itemId" type="hidden" value="<%= itemId %>" />
+	<aui:input name="fieldsCount" type="hidden" value="<%= fieldsCount %>" />
+	<aui:input name="fieldId" type="hidden" />
+	<aui:input name='<%= "fieldName" + fieldsCount %>' type="hidden" />
+	<aui:input name='<%= "fieldValues" + fieldsCount %>' type="hidden" />
+	<aui:input name='<%= "fieldDescription" + fieldsCount %>' type="hidden" />
+	<aui:input name="fieldsQuantities" type="hidden" value="<%= fieldsQuantities %>" />
+	<aui:input name="pricesCount" type="hidden" value="<%= pricesCount %>" />
+	<aui:input name="priceId" type="hidden" />
 
-<liferay-ui:error exception="<%= DuplicateItemSKUException.class %>" message="the-item-sku-you-requested-is-already-taken" />
-<liferay-ui:error exception="<%= ItemNameException.class %>" message="please-enter-a-valid-name" />
-<liferay-ui:error exception="<%= ItemSKUException.class %>" message="please-enter-a-valid-item-sku" />
+	<liferay-ui:tabs
+		names="item"
+		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
+	/>
 
-<div class="breadcrumbs">
-	<%= ShoppingUtil.getBreadcrumbs(categoryId, pageContext, renderRequest, renderResponse) %>
-</div>
+	<liferay-ui:error exception="<%= DuplicateItemSKUException.class %>" message="the-item-sku-you-requested-is-already-taken" />
+	<liferay-ui:error exception="<%= ItemNameException.class %>" message="please-enter-a-valid-name" />
+	<liferay-ui:error exception="<%= ItemSKUException.class %>" message="please-enter-a-valid-item-sku" />
 
-<table class="lfr-table">
+	<div class="breadcrumbs">
+		<%= ShoppingUtil.getBreadcrumbs(categoryId, pageContext, renderRequest, renderResponse) %>
+	</div>
 
-<c:if test="<%= item != null %>">
-	<tr>
-		<td>
-			<liferay-ui:message key="category" />
-		</td>
-		<td>
+	<aui:fieldset>
+		<c:if test="<%= item != null %>">
+			<aui:field-wrapper label="category">
+
+				<%
+				String categoryName = "";
+
+				if (categoryId != ShoppingCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) {
+					ShoppingCategory category = ShoppingCategoryLocalServiceUtil.getCategory(categoryId);
+
+					category = category.toEscapedModel();
+
+					categoryName = category.getName();
+				}
+				%>
+
+				<portlet:renderURL var="viewCategoryURL">
+					<portlet:param name="struts_action" value="/shopping/view" />
+					<portlet:param name="categoryId" value="<%= String.valueOf(categoryId) %>" />
+				</portlet:renderURL>
+
+				<aui:a href="<%= viewCategoryURL %>" id="categoryName" label="<%= categoryName %>" />
+
+				<portlet:renderURL var="selectCateforyURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
+					<portlet:param name="struts_action" value="/shopping/select_category" />
+					<portlet:param name="categoryId" value="<%= String.valueOf(categoryId) %>" />
+				</portlet:renderURL>
+
+				<%
+				String taglibOpenCategoryWindow = "var categoryWindow = window.open('" + selectCateforyURL + "', 'category', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680'); void(''); categoryWindow.focus();";
+				%>
+
+				<aui:button onClick="<%= taglibOpenCategoryWindow %>" type="button" value="select" />
+
+				<aui:button onClick='<%= renderResponse.getNamespace() + "removeCategory();" %>' type="button" value="remove" />
+			</aui:field-wrapper>
+		</c:if>
+
+		<aui:input bean="<%= item %>" model="<%= ShoppingItem.class %>" name="sku" />
+
+		<aui:input bean="<%= item %>" model="<%= ShoppingItem.class %>" name="name" />
+
+		<aui:input bean="<%= item %>" model="<%= ShoppingItem.class %>" name="description" />
+
+		<aui:input bean="<%= item %>" model="<%= ShoppingItem.class %>" name="properties" />
+
+		<aui:input bean="<%= item %>" model="<%= ShoppingItem.class %>" name="requiresShipping" />
+
+		<aui:input bean="<%= item %>" model="<%= ShoppingItem.class %>" name="featured" />
+
+		<c:if test="<%= fieldsCount == 0 %>">
+			<aui:input bean="<%= item %>" model="<%= ShoppingItem.class %>" name="stockQuantity" />
+		</c:if>
+
+		<c:if test="<%= item == null %>">
+			<aui:field-wrapper label="permissions">
+				<liferay-ui:input-permissions
+					modelName="<%= ShoppingItem.class.getName() %>"
+				/>
+			</aui:field-wrapper>
+		</c:if>
+	</aui:fieldset>
+
+	<aui:button-row>
+		<aui:button type="submit" />
+
+		<aui:button onClick="<%= redirect %>" type="cancel" />
+	</aui:button-row>
+
+	<liferay-ui:panel-container extended="<%= true %>" persistState="<%= true %>">
+		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "fields") %>'>
+			<aui:input name="fields" type="hidden" />
+
+			<liferay-ui:message key="fields-are-added-if-you-need-to-distinguish-items-based-on-criteria-chosen-by-the-user" />
+
+			<br /><br />
+
+			<table class="lfr-table">
 
 			<%
-			String categoryName = "";
+			for (int i = 0; i < fieldsCount; i++) {
+				int curFieldId = i;
 
-			if (categoryId != ShoppingCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) {
-				ShoppingCategory category = ShoppingCategoryLocalServiceUtil.getCategory(categoryId);
+				if ((fieldId > -1) && (i >= fieldId)) {
+					curFieldId++;
+				}
 
-				category = category.toEscapedModel();
+				String fieldName = ParamUtil.getString(request, "fieldName" + curFieldId);
+				String fieldNameParam = request.getParameter("fieldName" + curFieldId);
+				if ((fieldNameParam == null) || (fieldNameParam.equals(StringPool.NULL))) {
+					if (itemFields[curFieldId] != null) {
+						fieldName = itemFields[curFieldId].getName();
+					}
+				}
 
-				categoryName = category.getName();
+				String[] fieldValues = StringUtil.split(ParamUtil.getString(request, "fieldValues" + curFieldId));
+				String fieldValuesParam = request.getParameter("fieldValues" + curFieldId);
+				if ((fieldValuesParam == null) || (fieldValuesParam.equals(StringPool.NULL))) {
+					if (itemFields[curFieldId] != null) {
+						fieldValues = itemFields[curFieldId].getValuesArray();
+					}
+				}
+
+				String fieldDescription = ParamUtil.getString(request, "fieldDescription" + curFieldId);
+				String fieldDescriptionParam = request.getParameter("fieldDescription" + curFieldId);
+				if ((fieldDescriptionParam == null) || (fieldDescriptionParam.equals(StringPool.NULL))) {
+					if (itemFields[curFieldId] != null) {
+						fieldDescription = itemFields[curFieldId].getDescription();
+					}
+				}
+			%>
+
+				<tr>
+					<td>
+						<aui:input cssClass="lfr-input-text-container" label="name" name='<%= "fieldName" + i %>' style="width: 100px;" type="text" value="<%= fieldName %>" />
+					</td>
+					<td>
+						<aui:input cssClass="lfr-input-text-container" label="values" name='<%= "fieldValues" + i %>' style="width: 100px;" type="text" value='<%= StringUtil.merge(fieldValues, ", ") %>' />
+					</td>
+					<td>
+						<aui:input cssClass="lfr-input-text-container" label="description" name='<%= "fieldDescription" + i %>' style="width: 150px;" type="text" value="<%= fieldDescription %>" />
+					</td>
+
+					<c:if test="<%= fieldsCount > 0 %>">
+						<td>
+							<aui:button onClick='<%= renderResponse.getNamespace() + "deleteField(" + i + ");" %>' type="button" value="delete" />
+						</td>
+					</c:if>
+				</tr>
+
+			<%
 			}
 			%>
 
-			<a href="<portlet:renderURL><portlet:param name="struts_action" value="/shopping/view" /><portlet:param name="categoryId" value="<%= String.valueOf(categoryId) %>" /></portlet:renderURL>" id="<portlet:namespace />categoryName">
-			<%= categoryName %></a>
-
-			<input type="button" value="<liferay-ui:message key="select" />" onClick="var categoryWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/shopping/select_category" /><portlet:param name="categoryId" value="<%= String.valueOf(categoryId) %>" /></portlet:renderURL>', 'category', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680'); void(''); categoryWindow.focus();" />
-
-			<input type="button" value="<liferay-ui:message key="remove" />" onClick='<%= renderResponse.getNamespace() + "removeCategory();" %>' />
-		</td>
-	</tr>
-	<tr>
-		<td colspan="2">
-			<br />
-		</td>
-	</tr>
-</c:if>
-
-<tr>
-	<td>
-		<liferay-ui:message key="sku" />
-	</td>
-	<td>
-		<liferay-ui:input-field model="<%= ShoppingItem.class %>" bean="<%= item %>" field="sku" />
-	</td>
-</tr>
-<tr>
-	<td colspan="2">
-		<br />
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="name" />
-	</td>
-	<td>
-		<liferay-ui:input-field model="<%= ShoppingItem.class %>" bean="<%= item %>" field="name" />
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="description" />
-	</td>
-	<td>
-		<liferay-ui:input-field model="<%= ShoppingItem.class %>" bean="<%= item %>" field="description" />
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="properties" />
-	</td>
-	<td>
-		<liferay-ui:input-field model="<%= ShoppingItem.class %>" bean="<%= item %>" field="properties" />
-	</td>
-</tr>
-<tr>
-	<td colspan="2">
-		<br />
-
-		<table class="lfr-table">
-		<tr>
-			<td>
-				<liferay-ui:message key="requires-shipping" />
-			</td>
-			<td>
-				<liferay-ui:input-field model="<%= ShoppingItem.class %>" bean="<%= item %>" field="requiresShipping" />
-			</td>
-			<td>
-				<liferay-ui:message key="featured" />
-			</td>
-			<td>
-				<liferay-ui:input-field model="<%= ShoppingItem.class %>" bean="<%= item %>" field="featured" />
-			</td>
-
-			<c:if test="<%= fieldsCount == 0 %>">
-				<td>
-					<liferay-ui:message key="stock-quantity" />
-				</td>
-				<td>
-					<liferay-ui:input-field model="<%= ShoppingItem.class %>" bean="<%= item %>" field="stockQuantity" />
-				</td>
-			</c:if>
-		</tr>
-		</table>
-	</td>
-</tr>
-
-<c:if test="<%= item == null %>">
-	<tr>
-		<td colspan="2">
-			<br />
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<liferay-ui:message key="permissions" />
-		</td>
-		<td>
-			<liferay-ui:input-permissions
-				modelName="<%= ShoppingItem.class.getName() %>"
-			/>
-		</td>
-	</tr>
-</c:if>
-
-</table>
-
-<br />
-
-<input type="submit" value="<liferay-ui:message key="save" />" />
-
-<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(PortalUtil.escapeRedirect(redirect)) %>';" />
-
-<br /><br />
-
-<liferay-ui:tabs names="fields" />
-
-<input name="<portlet:namespace />fields" type="hidden" value="" />
-
-<liferay-ui:message key="fields-are-added-if-you-need-to-distinguish-items-based-on-criteria-chosen-by-the-user" />
-
-<br /><br />
-
-<table class="lfr-table">
-
-<%
-for (int i = 0; i < fieldsCount; i++) {
-	int curFieldId = i;
-
-	if ((fieldId > -1) && (i >= fieldId)) {
-		curFieldId++;
-	}
-
-	String fieldName = ParamUtil.getString(request, "fieldName" + curFieldId);
-	String fieldNameParam = request.getParameter("fieldName" + curFieldId);
-	if ((fieldNameParam == null) || (fieldNameParam.equals(StringPool.NULL))) {
-		if (itemFields[curFieldId] != null) {
-			fieldName = itemFields[curFieldId].getName();
-		}
-	}
-
-	String[] fieldValues = StringUtil.split(ParamUtil.getString(request, "fieldValues" + curFieldId));
-	String fieldValuesParam = request.getParameter("fieldValues" + curFieldId);
-	if ((fieldValuesParam == null) || (fieldValuesParam.equals(StringPool.NULL))) {
-		if (itemFields[curFieldId] != null) {
-			fieldValues = itemFields[curFieldId].getValuesArray();
-		}
-	}
-
-	String fieldDescription = ParamUtil.getString(request, "fieldDescription" + curFieldId);
-	String fieldDescriptionParam = request.getParameter("fieldDescription" + curFieldId);
-	if ((fieldDescriptionParam == null) || (fieldDescriptionParam.equals(StringPool.NULL))) {
-		if (itemFields[curFieldId] != null) {
-			fieldDescription = itemFields[curFieldId].getDescription();
-		}
-	}
-%>
-
-	<tr>
-		<td>
-			<liferay-ui:message key="name" />
-		</td>
-		<td>
-			<input class="lfr-input-text" name="<portlet:namespace /><%= "fieldName" + i %>" type="text" value="<%= fieldName %>" style="width: 100px;" />
-		</td>
-		<td>
-			<liferay-ui:message key="values" />
-		</td>
-		<td>
-			<input class="lfr-input-text" name="<portlet:namespace /><%= "fieldValues" + i %>" type="text" value="<%= StringUtil.merge(fieldValues, ", ") %>" style="width: 100px;" />
-		</td>
-		<td>
-			<liferay-ui:message key="description" />
-		</td>
-		<td>
-			<input class="lfr-input-text" name="<portlet:namespace /><%= "fieldDescription" + i %>" type="text" value="<%= fieldDescription %>" style="width: 150px;" />
-		</td>
-
-		<c:if test="<%= fieldsCount > 0 %>">
-			<td>
-				<input type="button" value="<liferay-ui:message key="delete" />" onClick="<portlet:namespace />deleteField(<%= i %>);" />
-			</td>
-		</c:if>
-	</tr>
-
-<%
-}
-%>
-
-</table>
-
-<c:if test="<%= fieldsCount > 0 %>">
-	<br />
-</c:if>
-
-<input type="button" value="<liferay-ui:message key="add-field" />" onClick="<portlet:namespace />addField();" />
-
-<c:if test="<%= fieldsCount > 0 %>">
-	<input type="button" value="<liferay-ui:message key="edit-stock-quantity" />" onClick="<portlet:namespace />editItemQuantities();" />
-</c:if>
-
-<br /><br />
-
-<liferay-ui:tabs names="prices" />
-
-<input name="<portlet:namespace />prices" type="hidden" value="" />
-
-<table class="lfr-table">
-
-<%
-for (int i = 0; i < pricesCount; i++) {
-	int curPriceId = i;
-
-	if (priceId > -1 && i >= priceId) {
-		curPriceId++;
-	}
-
-	int minQuantity = ParamUtil.getInteger(request, "minQuantity" + curPriceId, 0);
-	String minQuantityParam = request.getParameter("minQuantity" + curPriceId);
-	if ((minQuantityParam == null) || (minQuantityParam.equals(StringPool.NULL))) {
-		if (itemPrices[curPriceId] != null) {
-			minQuantity = itemPrices[curPriceId].getMinQuantity();
-		}
-	}
-
-	int maxQuantity = ParamUtil.getInteger(request, "maxQuantity" + curPriceId);
-	String maxQuantityParam = request.getParameter("maxQuantity" + curPriceId);
-	if ((maxQuantityParam == null) || (maxQuantityParam.equals(StringPool.NULL))) {
-		if (itemPrices[curPriceId] != null) {
-			maxQuantity = itemPrices[curPriceId].getMaxQuantity();
-		}
-	}
-
-	double price = ParamUtil.getDouble(request, "price" + curPriceId);
-	String priceParam = request.getParameter("price" + curPriceId);
-	if ((priceParam == null) || (priceParam.equals(StringPool.NULL))) {
-		if (itemPrices[curPriceId] != null) {
-			price = itemPrices[curPriceId].getPrice();
-		}
-	}
-
-	double discount = ParamUtil.getDouble(request, "discount" + curPriceId) / 100;
-	String discountParam = request.getParameter("discount" + curPriceId);
-	if ((discountParam == null) || (discountParam.equals(StringPool.NULL))) {
-		if (itemPrices[curPriceId] != null) {
-			discount = itemPrices[curPriceId].getDiscount();
-		}
-	}
-
-	boolean taxable = ParamUtil.getBoolean(request, "taxable" + curPriceId, true);
-	String taxableParam = request.getParameter("taxable" + curPriceId);
-	if ((taxableParam == null) || (taxableParam.equals(StringPool.NULL))) {
-		if (itemPrices[curPriceId] != null) {
-			taxable = itemPrices[curPriceId].isTaxable();
-		}
-	}
-
-	double shipping = ParamUtil.getDouble(request, "shipping" + curPriceId);
-	String shippingParam = request.getParameter("shipping" + curPriceId);
-	if ((shippingParam == null) || (shippingParam.equals(StringPool.NULL))) {
-		if (itemPrices[curPriceId] != null) {
-			shipping = itemPrices[curPriceId].getShipping();
-		}
-	}
-
-	boolean useShippingFormula = ParamUtil.getBoolean(request, "useShippingFormula" + curPriceId, true);
-	String useShippingFormulaParam = request.getParameter("useShippingFormula" + curPriceId);
-	if ((useShippingFormulaParam == null) || (useShippingFormulaParam.equals(StringPool.NULL))) {
-		if (itemPrices[curPriceId] != null) {
-			useShippingFormula = itemPrices[curPriceId].isUseShippingFormula();
-		}
-	}
-
-	boolean active = ParamUtil.getBoolean(request, "active" + curPriceId, true);
-	String activeParam = request.getParameter("active" + curPriceId);
-	if ((activeParam == null) || (activeParam.equals(StringPool.NULL))) {
-		if (itemPrices[curPriceId] != null) {
-			int status = itemPrices[curPriceId].getStatus();
-
-			if (status == ShoppingItemPriceConstants.STATUS_ACTIVE_DEFAULT || status == ShoppingItemPriceConstants.STATUS_ACTIVE) {
-				active = true;
-			}
-			else {
-				active = false;
-			}
-		}
-	}
-
-	String defaultPriceParam = request.getParameter("defaultPrice");
-	boolean defaultPrice = (curPriceId == 0 ? true : false);
-	if (Validator.isNotNull(defaultPriceParam)) {
-		if (ParamUtil.getInteger(request, "defaultPrice") == curPriceId) {
-			defaultPrice = true;
-		}
-		else {
-			defaultPrice = false;
-		}
-	}
-	else {
-		if (itemPrices[curPriceId] != null) {
-			int status = itemPrices[curPriceId].getStatus();
-
-			if (status == ShoppingItemPriceConstants.STATUS_ACTIVE_DEFAULT) {
-				defaultPrice = true;
-			}
-			else {
-				defaultPrice = false;
-			}
-		}
-	}
-%>
-
-	<tr>
-		<td>
-			<table class="lfr-table">
-			<tr>
-				<td>
-					<liferay-ui:message key="min-qty" />
-				</td>
-				<td>
-					<liferay-ui:input-field model="<%= ShoppingItemPrice.class %>" field="minQuantity" fieldParam='<%= "minQuantity" + i %>' defaultValue="<%= String.valueOf(minQuantity) %>" />
-				</td>
-				<td>
-					<liferay-ui:message key="max-qty" />
-				</td>
-				<td>
-					<liferay-ui:input-field model="<%= ShoppingItemPrice.class %>" field="maxQuantity" fieldParam='<%= "maxQuantity" + i %>' defaultValue="<%= String.valueOf(maxQuantity) %>" />
-				</td>
-				<td>
-					<liferay-ui:message key="price" />
-				</td>
-				<td>
-					<liferay-ui:input-field model="<%= ShoppingItemPrice.class %>" field="price" fieldParam='<%= "price" + i %>' format="<%= doubleFormat %>" defaultValue="<%= String.valueOf(price) %>" />
-				</td>
-				<td>
-					<liferay-ui:message key="discount" />
-				</td>
-				<td>
-					<liferay-ui:input-field model="<%= ShoppingItemPrice.class %>" field="discount" fieldParam='<%= "discount" + i %>' defaultValue="<%= percentFormat.format(discount) %>" />
-				</td>
-				<td>
-					<liferay-ui:message key="taxable" />
-				</td>
-				<td>
-					<liferay-ui:input-checkbox param='<%= "taxable" + i %>' defaultValue="<%= taxable %>" />
-				</td>
-			</tr>
 			</table>
 
-			<table class="lfr-table">
-			<tr>
-				<td>
-					<liferay-ui:message key="shipping" />
-				</td>
-				<td>
-					<liferay-ui:input-field model="<%= ShoppingItemPrice.class %>" field="shipping" fieldParam='<%= "shipping" + i %>' format="<%= doubleFormat %>" defaultValue="<%= String.valueOf(shipping) %>" />
-				</td>
-				<td>
-					<liferay-ui:message key="use-shipping-formula" />
-				</td>
-				<td>
-					<liferay-ui:input-checkbox param='<%= "useShippingFormula" + i %>' defaultValue="<%= useShippingFormula %>" />
-				</td>
-				<td>
-					<liferay-ui:message key="active" />
-				</td>
-				<td>
-					<liferay-ui:input-checkbox param='<%= "active" + i %>' defaultValue="<%= active %>" />
-				</td>
-				<td>
-					<liferay-ui:message key="default" />
-				</td>
-				<td>
-					<input <%= defaultPrice ? "checked" : "" %> name="<portlet:namespace />defaultPrice" type="radio" value="<%= i %>" onClick="document.<portlet:namespace />fm.<portlet:namespace />active<%= i %>.checked = true;">
-				</td>
-
-				<c:if test="<%= pricesCount > 1 %>">
-					<td>
-						<input type="button" value="<liferay-ui:message key="delete" />" onClick="<portlet:namespace />deletePrice(<%= i %>);" />
-					</td>
-				</c:if>
-			</tr>
-			</table>
-
-			<c:if test="<%= (i + 1) < pricesCount %>">
+			<c:if test="<%= fieldsCount > 0 %>">
 				<br />
 			</c:if>
-		</td>
-	</tr>
 
-<%
-}
-%>
+			<aui:button onClick='<%= renderResponse.getNamespace() + "addField();" %>' type="button" value="add-field" />
 
-</table>
+			<c:if test="<%= fieldsCount > 0 %>">
+				<aui:button onClick='<%= renderResponse.getNamespace() + "editItemQuantities();" %>' type="button" value="edit-stock-quantity" />
+			</c:if>
 
-<br />
+			<br /><br />
 
-<input type="button" value="<liferay-ui:message key="add-price" />" onClick="<portlet:namespace />addPrice();" />
+		</liferay-ui:panel>
 
-<br /><br />
+		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "prices") %>'>
+			<aui:input name="prices" type="hidden" />
 
-<liferay-ui:tabs names="images" />
+			<aui:fieldset>
+				<table class="lfr-table">
 
-<liferay-ui:error exception="<%= ItemLargeImageNameException.class %>">
+				<%
+				for (int i = 0; i < pricesCount; i++) {
+					int curPriceId = i;
 
-	<%
-	String[] imageExtensions = PrefsPropsUtil.getStringArray(PropsKeys.SHOPPING_IMAGE_EXTENSIONS, StringPool.COMMA);
-	%>
+					if (priceId > -1 && i >= priceId) {
+						curPriceId++;
+					}
 
-	<liferay-ui:message key="image-names-must-end-with-one-of-the-following-extensions" /> <%= StringUtil.merge(imageExtensions, ", ") %>.
-</liferay-ui:error>
+					int minQuantity = ParamUtil.getInteger(request, "minQuantity" + curPriceId, 0);
+					String minQuantityParam = request.getParameter("minQuantity" + curPriceId);
+					if ((minQuantityParam == null) || (minQuantityParam.equals(StringPool.NULL))) {
+						if (itemPrices[curPriceId] != null) {
+							minQuantity = itemPrices[curPriceId].getMinQuantity();
+						}
+					}
 
-<liferay-ui:error exception="<%= ItemLargeImageSizeException.class %>" message="please-enter-a-file-with-a-valid-file-size" />
+					int maxQuantity = ParamUtil.getInteger(request, "maxQuantity" + curPriceId);
+					String maxQuantityParam = request.getParameter("maxQuantity" + curPriceId);
+					if ((maxQuantityParam == null) || (maxQuantityParam.equals(StringPool.NULL))) {
+						if (itemPrices[curPriceId] != null) {
+							maxQuantity = itemPrices[curPriceId].getMaxQuantity();
+						}
+					}
 
-<liferay-ui:error exception="<%= ItemMediumImageNameException.class %>">
+					double price = ParamUtil.getDouble(request, "price" + curPriceId);
+					String priceParam = request.getParameter("price" + curPriceId);
+					if ((priceParam == null) || (priceParam.equals(StringPool.NULL))) {
+						if (itemPrices[curPriceId] != null) {
+							price = itemPrices[curPriceId].getPrice();
+						}
+					}
 
-	<%
-	String[] imageExtensions = PrefsPropsUtil.getStringArray(PropsKeys.SHOPPING_IMAGE_EXTENSIONS, StringPool.COMMA);
-	%>
+					double discount = ParamUtil.getDouble(request, "discount" + curPriceId) / 100;
+					String discountParam = request.getParameter("discount" + curPriceId);
+					if ((discountParam == null) || (discountParam.equals(StringPool.NULL))) {
+						if (itemPrices[curPriceId] != null) {
+							discount = itemPrices[curPriceId].getDiscount();
+						}
+					}
 
-	<liferay-ui:message key="image-names-must-end-with-one-of-the-following-extensions" /> <%= StringUtil.merge(imageExtensions, ", ") %>.
-</liferay-ui:error>
+					boolean taxable = ParamUtil.getBoolean(request, "taxable" + curPriceId, true);
+					String taxableParam = request.getParameter("taxable" + curPriceId);
+					if ((taxableParam == null) || (taxableParam.equals(StringPool.NULL))) {
+						if (itemPrices[curPriceId] != null) {
+							taxable = itemPrices[curPriceId].isTaxable();
+						}
+					}
 
-<liferay-ui:error exception="<%= ItemMediumImageSizeException.class %>" message="please-enter-a-file-with-a-valid-file-size" />
+					double shipping = ParamUtil.getDouble(request, "shipping" + curPriceId);
+					String shippingParam = request.getParameter("shipping" + curPriceId);
+					if ((shippingParam == null) || (shippingParam.equals(StringPool.NULL))) {
+						if (itemPrices[curPriceId] != null) {
+							shipping = itemPrices[curPriceId].getShipping();
+						}
+					}
 
-<liferay-ui:error exception="<%= ItemSmallImageNameException.class %>">
+					boolean useShippingFormula = ParamUtil.getBoolean(request, "useShippingFormula" + curPriceId, true);
+					String useShippingFormulaParam = request.getParameter("useShippingFormula" + curPriceId);
+					if ((useShippingFormulaParam == null) || (useShippingFormulaParam.equals(StringPool.NULL))) {
+						if (itemPrices[curPriceId] != null) {
+							useShippingFormula = itemPrices[curPriceId].isUseShippingFormula();
+						}
+					}
 
-	<%
-	String[] imageExtensions = PrefsPropsUtil.getStringArray(PropsKeys.SHOPPING_IMAGE_EXTENSIONS, StringPool.COMMA);
-	%>
+					boolean active = ParamUtil.getBoolean(request, "active" + curPriceId, true);
+					String activeParam = request.getParameter("active" + curPriceId);
+					if ((activeParam == null) || (activeParam.equals(StringPool.NULL))) {
+						if (itemPrices[curPriceId] != null) {
+							int status = itemPrices[curPriceId].getStatus();
 
-	<liferay-ui:message key="image-names-must-end-with-one-of-the-following-extensions" /> <%= StringUtil.merge(imageExtensions, ", ") %>.
-</liferay-ui:error>
+							if (status == ShoppingItemPriceConstants.STATUS_ACTIVE_DEFAULT || status == ShoppingItemPriceConstants.STATUS_ACTIVE) {
+								active = true;
+							}
+							else {
+								active = false;
+							}
+						}
+					}
 
-<liferay-ui:error exception="<%= ItemSmallImageSizeException.class %>" message="please-enter-a-file-with-a-valid-file-size" />
+					String defaultPriceParam = request.getParameter("defaultPrice");
+					boolean defaultPrice = (curPriceId == 0 ? true : false);
+					if (Validator.isNotNull(defaultPriceParam)) {
+						if (ParamUtil.getInteger(request, "defaultPrice") == curPriceId) {
+							defaultPrice = true;
+						}
+						else {
+							defaultPrice = false;
+						}
+					}
+					else {
+						if (itemPrices[curPriceId] != null) {
+							int status = itemPrices[curPriceId].getStatus();
 
-<table class="lfr-table">
-<tr>
-	<td>
-		<liferay-ui:message key="small-image-url" />
-	</td>
-	<td>
-		<liferay-ui:input-field model="<%= ShoppingItem.class %>" bean="<%= item %>" field="smallImageURL" />
-	</td>
-</tr>
-<tr>
-	<td>
-		<span style="font-size: xx-small;">-- <%= LanguageUtil.get(pageContext, "or").toUpperCase() %> --</span> <liferay-ui:message key="small-image" />
-	</td>
-	<td>
-		<input class="lfr-input-text" name="<portlet:namespace />smallFile" type="file" />
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="use-small-image" />
-	</td>
-	<td>
-		<liferay-ui:input-field model="<%= ShoppingItem.class %>" bean="<%= item %>" field="smallImage" />
-	</td>
-</tr>
-<tr>
-	<td colspan="2">
-		<br />
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="medium-image-url" />
-	</td>
-	<td>
-		<liferay-ui:input-field model="<%= ShoppingItem.class %>" bean="<%= item %>" field="mediumImageURL" />
-	</td>
-</tr>
-<tr>
-	<td>
-		<span style="font-size: xx-small;">-- <%= LanguageUtil.get(pageContext, "or").toUpperCase() %> --</span> <liferay-ui:message key="medium-image" />
-	</td>
-	<td>
-		<input class="lfr-input-text" name="<portlet:namespace />mediumFile" type="file" />
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="use-medium-image" />
-	</td>
-	<td>
-		<liferay-ui:input-field model="<%= ShoppingItem.class %>" bean="<%= item %>" field="mediumImage" />
-	</td>
-</tr>
-<tr>
-	<td colspan="2">
-		<br />
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="large-image-url" />
-	</td>
-	<td>
-		<liferay-ui:input-field model="<%= ShoppingItem.class %>" bean="<%= item %>" field="largeImageURL" />
-	</td>
-</tr>
-<tr>
-	<td>
-		<span style="font-size: xx-small;">-- <%= LanguageUtil.get(pageContext, "or").toUpperCase() %> --</span> <liferay-ui:message key="large-image" />
-	</td>
-	<td>
-		<input class="lfr-input-text" name="<portlet:namespace />largeFile" type="file" />
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="use-large-image" />
-	</td>
-	<td>
-		<liferay-ui:input-field model="<%= ShoppingItem.class %>" bean="<%= item %>" field="largeImage" />
-	</td>
-</tr>
-</table>
+							if (status == ShoppingItemPriceConstants.STATUS_ACTIVE_DEFAULT) {
+								defaultPrice = true;
+							}
+							else {
+								defaultPrice = false;
+							}
+						}
+					}
+				%>
 
-</form>
+					<tr>
+						<td>
+							<table class="lfr-table">
+							<tr>
+								<td>
+									<aui:input field="minQuantity" fieldParam='<%= "minQuantity" + i %>' label="min-qty" model="<%= ShoppingItemPrice.class %>" name="minQuantity" value="<%= String.valueOf(minQuantity) %>" />
+								</td>
+								<td>
+									<aui:input field="maxQuantity" fieldParam='<%= "maxQuantity" + i %>' label="max-qty" model="<%= ShoppingItemPrice.class %>" name="maxQuantity" value="<%= String.valueOf(maxQuantity) %>" />
+								</td>
+								<td>
+									<aui:input field="price" fieldParam='<%= "price" + i %>' format="<%= doubleFormat %>" label="price" model="<%= ShoppingItemPrice.class %>" name="price" value="<%= String.valueOf(price) %>" />
+								</td>
+								<td>
+									<aui:input field="discount" fieldParam='<%= "discount" + i %>' label="discount" model="<%= ShoppingItemPrice.class %>" name="discount" value="<%= percentFormat.format(discount) %>" />
+								</td>
+								<td>
+									<aui:input name="taxable" param='<%= "taxable" + i %>' type="checkbox" value="<%= taxable %>" />
+								</td>
+							</tr>
+							</table>
+
+							<table class="lfr-table">
+							<tr>
+								<td>
+									<aui:input field="shipping" fieldParam='<%= "shipping" + i %>' format="<%= doubleFormat %>" model="<%= ShoppingItemPrice.class %>" name="shipping" value="<%= String.valueOf(shipping) %>" />
+								</td>
+								<td>
+									<aui:input label="use-shipping-formula" name='<%= "useShippingFormula" + i %>' type="checkbox" value="<%= useShippingFormula %>" />
+								</td>
+								<td>
+									<aui:input label="active" name='<%= "active" + i %>' type="checkbox" value="<%= active %>" />
+								</td>
+								<td>
+									<aui:input checked="<%= defaultPrice %>" label="default" name="defaultPrice" onClick='<%= "document." + renderResponse.getNamespace() + "fm." + renderResponse.getNamespace() + "active" + i + ".checked = true;" %>' type="radio" value="<% i %>" />
+								</td>
+
+								<c:if test="<%= pricesCount > 1 %>">
+									<td>
+										<aui:button onClick='<%= renderResponse.getNamespace() + "deletePrice(" + i + ");" %>' type="button" value="delete" />
+									</td>
+								</c:if>
+							</tr>
+							</table>
+
+							<c:if test="<%= (i + 1) < pricesCount %>">
+								<br />
+							</c:if>
+						</td>
+					</tr>
+
+				<%
+				}
+				%>
+
+				</table>
+			</aui:fieldset>
+
+			<aui:button onClick='<%= renderResponse.getNamespace() + "addPrice();" %>' type="button" value="add-price" />
+		</liferay-ui:panel>
+
+		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "images") %>'>
+			<liferay-ui:error exception="<%= ItemLargeImageNameException.class %>">
+
+				<%
+				String[] imageExtensions = PrefsPropsUtil.getStringArray(PropsKeys.SHOPPING_IMAGE_EXTENSIONS, StringPool.COMMA);
+				%>
+
+				<liferay-ui:message key="image-names-must-end-with-one-of-the-following-extensions" /> <%= StringUtil.merge(imageExtensions, ", ") %>.
+			</liferay-ui:error>
+
+			<liferay-ui:error exception="<%= ItemLargeImageSizeException.class %>" message="please-enter-a-file-with-a-valid-file-size" />
+
+			<liferay-ui:error exception="<%= ItemMediumImageNameException.class %>">
+
+				<%
+				String[] imageExtensions = PrefsPropsUtil.getStringArray(PropsKeys.SHOPPING_IMAGE_EXTENSIONS, StringPool.COMMA);
+				%>
+
+				<liferay-ui:message key="image-names-must-end-with-one-of-the-following-extensions" /> <%= StringUtil.merge(imageExtensions, ", ") %>.
+			</liferay-ui:error>
+
+			<liferay-ui:error exception="<%= ItemMediumImageSizeException.class %>" message="please-enter-a-file-with-a-valid-file-size" />
+
+			<liferay-ui:error exception="<%= ItemSmallImageNameException.class %>">
+
+				<%
+				String[] imageExtensions = PrefsPropsUtil.getStringArray(PropsKeys.SHOPPING_IMAGE_EXTENSIONS, StringPool.COMMA);
+				%>
+
+				<liferay-ui:message key="image-names-must-end-with-one-of-the-following-extensions" /> <%= StringUtil.merge(imageExtensions, ", ") %>.
+			</liferay-ui:error>
+
+			<liferay-ui:error exception="<%= ItemSmallImageSizeException.class %>" message="please-enter-a-file-with-a-valid-file-size" />
+
+			<aui:fieldset>
+				<aui:input label="small-image-url" name="smallImageURL" />
+
+				<span style="font-size: xx-small;">-- <%= LanguageUtil.get(pageContext, "or").toUpperCase() %> --</span> <liferay-ui:message key="small-image" />
+
+				<aui:input label="" name="smallFile" type="file" />
+
+				<aui:input label="use-small-image" name="smallImage" />
+
+				<aui:input label="medium-image-url" name="mediumImageURL" />
+
+				<span style="font-size: xx-small;">-- <%= LanguageUtil.get(pageContext, "or").toUpperCase() %> --</span> <liferay-ui:message key="medium-image" />
+
+				<aui:input label="" name="mediumFile" type="file" />
+
+				<aui:input label="use-medium-image" name="mediumImage" />
+
+				<aui:input label="large-image-url" name="largeImageURL" />
+
+				<span style="font-size: xx-small;">-- <%= LanguageUtil.get(pageContext, "or").toUpperCase() %> --</span> <liferay-ui:message key="large-image" />
+
+				<aui:input label="" name="largeFile" type="file" />
+
+				<aui:input label="use-large-image" name="largeImage" />
+			</aui:fieldset>
+		</liferay-ui:panel>
+	</liferay-ui:panel-container>
+</aui:form>
 
 <aui:script>
 	function <portlet:namespace />addField() {

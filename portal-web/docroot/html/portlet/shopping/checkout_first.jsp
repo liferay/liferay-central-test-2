@@ -58,453 +58,270 @@ String ccVerNumber = ParamUtil.getString(request, "ccVerNumber");
 List addresses = AddressServiceUtil.getAddresses(Contact.class.getName(), contact.getContactId());
 %>
 
-<form action="<portlet:actionURL><portlet:param name="struts_action" value="/shopping/checkout" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
+<portlet:actionURL var="checkoutURL">
+	<portlet:param name="struts_action" value="/shopping/checkout" />
+</portlet:actionURL>
 
-<liferay-util:include page="/html/portlet/shopping/tabs1.jsp">
-	<liferay-util:param name="tabs1" value="cart" />
-</liferay-util:include>
+<aui:form action="<%= checkoutURL %>" method="post" name="fm">
+	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 
-<liferay-ui:tabs names="billing-address" />
+	<liferay-util:include page="/html/portlet/shopping/tabs1.jsp">
+		<liferay-util:param name="tabs1" value="cart" />
+	</liferay-util:include>
 
-<liferay-ui:error exception="<%= BillingCityException.class %>" message="please-enter-a-valid-city" />
-<liferay-ui:error exception="<%= BillingCountryException.class %>" message="please-enter-a-valid-country" />
-<liferay-ui:error exception="<%= BillingEmailAddressException.class %>" message="please-enter-a-valid-email-address" />
-<liferay-ui:error exception="<%= BillingFirstNameException.class %>" message="please-enter-a-valid-first-name" />
-<liferay-ui:error exception="<%= BillingLastNameException.class %>" message="please-enter-a-valid-last-name" />
-<liferay-ui:error exception="<%= BillingPhoneException.class %>" message="please-enter-a-valid-phone" />
-<liferay-ui:error exception="<%= BillingStateException.class %>" message="please-enter-a-valid-state" />
-<liferay-ui:error exception="<%= BillingStreetException.class %>" message="please-enter-a-valid-street" />
-<liferay-ui:error exception="<%= BillingZipException.class %>" message="please-enter-a-valid-zip" />
+	<aui:model-context bean="<%= order %>" model="<%= ShoppingOrder.class %>" />
 
-<c:if test="<%= !addresses.isEmpty() %>">
-	<select onChange="<portlet:namespace />updateAddress(this[this.selectedIndex].value, 'billing');">
-		<option value="">-- <liferay-ui:message key="my-addresses" /> --</option>
+	<liferay-ui:panel-container extended="<%= true %>" persistState="<%= true %>">
+		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "billing-address") %>'>
+			<liferay-ui:error exception="<%= BillingCityException.class %>" message="please-enter-a-valid-city" />
+			<liferay-ui:error exception="<%= BillingCountryException.class %>" message="please-enter-a-valid-country" />
+			<liferay-ui:error exception="<%= BillingEmailAddressException.class %>" message="please-enter-a-valid-email-address" />
+			<liferay-ui:error exception="<%= BillingFirstNameException.class %>" message="please-enter-a-valid-first-name" />
+			<liferay-ui:error exception="<%= BillingLastNameException.class %>" message="please-enter-a-valid-last-name" />
+			<liferay-ui:error exception="<%= BillingPhoneException.class %>" message="please-enter-a-valid-phone" />
+			<liferay-ui:error exception="<%= BillingStateException.class %>" message="please-enter-a-valid-state" />
+			<liferay-ui:error exception="<%= BillingStreetException.class %>" message="please-enter-a-valid-street" />
+			<liferay-ui:error exception="<%= BillingZipException.class %>" message="please-enter-a-valid-zip" />
 
-		<%
-		for (int i = 0; addresses != null && i < addresses.size(); i++) {
-			Address address = (Address)addresses.get(i);
-		%>
-
-			<option value="<%= address.getAddressId() %>"><%= address.getStreet1() %></option>
-
-		<%
-		}
-		%>
-
-	</select>
-
-	<br /><br />
-</c:if>
-
-<table class="lfr-table">
-<tr>
-	<td>
-		<table class="lfr-table">
-		<tr>
-			<td>
-				<liferay-ui:message key="first-name" />
-			</td>
-			<td>
-				<liferay-ui:input-field model="<%= ShoppingOrder.class %>" bean="<%= order %>" field="billingFirstName" />
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<liferay-ui:message key="last-name" />
-			</td>
-			<td>
-				<liferay-ui:input-field model="<%= ShoppingOrder.class %>" bean="<%= order %>" field="billingLastName" />
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<liferay-ui:message key="email-address" />
-			</td>
-			<td>
-				<liferay-ui:input-field model="<%= ShoppingOrder.class %>" bean="<%= order %>" field="billingEmailAddress" />
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<liferay-ui:message key="company" />
-			</td>
-			<td>
-				<liferay-ui:input-field model="<%= ShoppingOrder.class %>" bean="<%= order %>" field="billingCompany" />
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<liferay-ui:message key="street" />
-			</td>
-			<td>
-				<liferay-ui:input-field model="<%= ShoppingOrder.class %>" bean="<%= order %>" field="billingStreet" />
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<liferay-ui:message key="city" />
-			</td>
-			<td>
-				<liferay-ui:input-field model="<%= ShoppingOrder.class %>" bean="<%= order %>" field="billingCity" />
-			</td>
-		</tr>
-		</table>
-	</td>
-	<td class="lfr-top">
-		<table class="lfr-table">
-		<tr>
-			<td>
-				<liferay-ui:message key="state" />
-			</td>
-			<td>
-				<select id="<portlet:namespace />billingStateSel" name="<portlet:namespace />billingStateSel">
-					<option value=""><liferay-ui:message key="outside-us" /></option>
+			<aui:fieldset>
+				<c:if test="<%= !addresses.isEmpty() %>">
 
 					<%
-					for (int i = 0; i < StateUtil.STATES.length; i++) {
+					String taglibBilling = renderResponse.getNamespace() + "updateAddress(this[this.selectedIndex].value, 'billing');";
 					%>
 
-						<option <%= billingStateSel.equals(StateUtil.STATES[i].getId()) ? "selected" : "" %> value="<%= StateUtil.STATES[i].getId() %>"><%= StateUtil.STATES[i].getName() %></option>
+					<aui:select label="" name="addressBilling" onChange="<%= taglibBilling %>">
+						<aui:option label='<%= "--" + LanguageUtil.get(pageContext,"my-addresses") + "--" %>' />
+
+						<%
+						for (int i = 0; addresses != null && i < addresses.size(); i++) {
+							Address address = (Address)addresses.get(i);
+						%>
+
+							<aui:option label="<%= address.getStreet1() %>" value="<%= address.getAddressId() %>" />
+
+						<%
+						}
+						%>
+
+					</aui:select>
+				</c:if>
+
+				<aui:column>
+					<aui:input label="first-name" name="billingFirstName" />
+
+					<aui:input label="last-name"  name="billingLastName" />
+
+					<aui:input label="email-address" name="billingEmailAddress" />
+
+					<aui:input label="company" name="billingCompany" />
+
+					<aui:input label="street" name="billingStreet" />
+
+					<aui:input label="city" name="billingCity" />
+				</aui:column>
+
+				<aui:column>
+					<aui:select label="state" name="billingStateSel">
+						<aui:option label="outside-us" />
+
+						<%
+						for (int i = 0; i < StateUtil.STATES.length; i++) {
+						%>
+
+							<aui:option label="<%= StateUtil.STATES[i].getName() %>" selected="<%= billingStateSel.equals(StateUtil.STATES[i].getId()) %>" value="<%= StateUtil.STATES[i].getId() %>" />
+
+						<%
+						}
+						%>
+					</aui:select>
+
+					<aui:input bean="<%= null %>" label="other-state" name="billingState" value="<%= billingState %>" />
+
+					<aui:input label="zip" name="billingZip" />
+
+					<aui:input label="country" name="billingCountry" />
+
+					<aui:input label="phone" name="billingPhone" />
+				</aui:column>
+			</aui:fieldset>
+		</liferay-ui:panel>
+
+		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "shipping-address") %>'>
+			<liferay-ui:error exception="<%= ShippingCityException.class %>" message="please-enter-a-valid-city" />
+			<liferay-ui:error exception="<%= ShippingCountryException.class %>" message="please-enter-a-valid-country" />
+			<liferay-ui:error exception="<%= ShippingEmailAddressException.class %>" message="please-enter-a-valid-email-address" />
+			<liferay-ui:error exception="<%= ShippingFirstNameException.class %>" message="please-enter-a-valid-first-name" />
+			<liferay-ui:error exception="<%= ShippingLastNameException.class %>" message="please-enter-a-valid-last-name" />
+			<liferay-ui:error exception="<%= ShippingPhoneException.class %>" message="please-enter-a-valid-phone" />
+			<liferay-ui:error exception="<%= ShippingStateException.class %>" message="please-enter-a-valid-state" />
+			<liferay-ui:error exception="<%= ShippingStreetException.class %>" message="please-enter-a-valid-street" />
+			<liferay-ui:error exception="<%= ShippingZipException.class %>" message="please-enter-a-valid-zip" />
+
+			<aui:fieldset>
+				<c:if test="<%= !addresses.isEmpty() %>">
+
+					<%
+					String taglibShipping = renderResponse.getNamespace() + "updateAddress(this[this.selectedIndex].value, 'shipping');";
+					%>
+
+					<aui:select label="" name="addressShipping" onChange="<%= taglibShipping %>">
+						<aui:option label='<%= "--" + LanguageUtil.get(pageContext,"my-addresses") + "--" %>' />
+
+						<%
+						for (int i = 0; addresses != null && i < addresses.size(); i++) {
+							Address address = (Address)addresses.get(i);
+						%>
+
+							<aui:option label="<%= address.getStreet1() %>" value="<%= address.getAddressId() %>" />
+
+						<%
+						}
+						%>
+
+					</aui:select>
+				</c:if>
+
+				<aui:column>
+					<aui:input label="first-name" name="shippingFirstName" />
+
+					<aui:input label="last-name" name="shippingLastName" />
+
+					<aui:input label="email-address" name="shippingEmailAddress" />
+
+					<aui:input label="company" name="shippingCompany" />
+
+					<aui:input label="street" name="shippingStreet" />
+
+					<aui:input label="city" name="shippingCity" />
+
+					<aui:input label="same-as-billing" name="shipToBilling" />
+				</aui:column>
+
+				<aui:column>
+					<aui:select label="state" name="shippingStateSel">
+						<aui:option label="outside-us" />
+
+						<%
+						for (int i = 0; i < StateUtil.STATES.length; i++) {
+						%>
+
+							<aui:option label="<%= StateUtil.STATES[i].getName() %>" selected="<%= shippingStateSel.equals(StateUtil.STATES[i].getId()) %>" value="<%= StateUtil.STATES[i].getId() %>" />
+
+						<%
+						}
+						%>
+
+					</aui:select>
+
+					<aui:input bean="<%= null %>" label="other-state" name="shippingState" value="<%= shippingState %>" />
+
+					<aui:input label="zip" name="shippingZip" />
+
+					<aui:input label="country" name="shippingCountry" />
+
+					<aui:input label="phone" name="shippingPhone" />
+				</aui:column>
+			</aui:fieldset>
+		</liferay-ui:panel>
+
+		<%
+		String[] ccTypes = shoppingPrefs.getCcTypes();
+		%>
+
+		<c:if test="<%= !shoppingPrefs.usePayPal() && (ccTypes.length > 0) %>">
+			<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "credit-card") %>'>
+				<liferay-ui:error exception="<%= CCExpirationException.class %>" message="please-enter-a-valid-credit-card-expiration-date" />
+				<liferay-ui:error exception="<%= CCNameException.class %>" message="please-enter-the-full-name-exactly-as-it-is-appears-on-your-credit-card" />
+				<liferay-ui:error exception="<%= CCNumberException.class %>" message="please-enter-a-valid-credit-card-number" />
+				<liferay-ui:error exception="<%= CCTypeException.class %>" message="please-enter-a-valid-credit-card-type" />
+
+				<aui:fieldset>
+
+					<%
+					for (int i = 0; i < ccTypes.length; i++) {
+					%>
+
+						<img alt="<%= ccTypes[i] %>" src="<%= themeDisplay.getPathThemeImages() %>/shopping/cc_<%= ccTypes[i] %>.png" />
 
 					<%
 					}
 					%>
 
-				</select>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<liferay-ui:message key="other-state" />
-			</td>
-			<td>
-				<liferay-ui:input-field model="<%= ShoppingOrder.class %>" bean="<%= null %>" field="billingState" defaultValue="<%= billingState %>" />
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<liferay-ui:message key="zip" />
-			</td>
-			<td>
-				<liferay-ui:input-field model="<%= ShoppingOrder.class %>" bean="<%= order %>" field="billingZip" />
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<liferay-ui:message key="country" />
-			</td>
-			<td>
-				<liferay-ui:input-field model="<%= ShoppingOrder.class %>" bean="<%= order %>" field="billingCountry" />
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<liferay-ui:message key="phone" />
-			</td>
-			<td>
-				<liferay-ui:input-field model="<%= ShoppingOrder.class %>" bean="<%= order %>" field="billingPhone" />
-			</td>
-		</tr>
-		</table>
-	</td>
-</tr>
-</table>
+					<aui:input label="full-name" name="ccName" />
 
-<br />
+					<aui:select label="type" name="ccType" showEmptyOption="<%= true %>">
 
-<liferay-ui:tabs names="shipping-address" />
+						<%
+						for (int i = 0; i < ccTypes.length; i++) {
+						%>
 
-<liferay-ui:error exception="<%= ShippingCityException.class %>" message="please-enter-a-valid-city" />
-<liferay-ui:error exception="<%= ShippingCountryException.class %>" message="please-enter-a-valid-country" />
-<liferay-ui:error exception="<%= ShippingEmailAddressException.class %>" message="please-enter-a-valid-email-address" />
-<liferay-ui:error exception="<%= ShippingFirstNameException.class %>" message="please-enter-a-valid-first-name" />
-<liferay-ui:error exception="<%= ShippingLastNameException.class %>" message="please-enter-a-valid-last-name" />
-<liferay-ui:error exception="<%= ShippingPhoneException.class %>" message="please-enter-a-valid-phone" />
-<liferay-ui:error exception="<%= ShippingStateException.class %>" message="please-enter-a-valid-state" />
-<liferay-ui:error exception="<%= ShippingStreetException.class %>" message="please-enter-a-valid-street" />
-<liferay-ui:error exception="<%= ShippingZipException.class %>" message="please-enter-a-valid-zip" />
+							<aui:option label='<%= "cc_" + ccTypes[i] %>' selected="<%= ccTypes[i].equals(ccType) %>" value="<%= ccTypes[i] %>" />
 
-<table class="lfr-table">
-<tr>
-	<c:if test="<%= !addresses.isEmpty() %>">
-		<td>
-			<select onChange="<portlet:namespace />updateAddress(this[this.selectedIndex].value, 'shipping');">
-				<option value="">-- <liferay-ui:message key="my-addresses" /> --</option>
+						<%
+						}
+						%>
 
-				<%
-				for (int i = 0; addresses != null && i < addresses.size(); i++) {
-					Address address = (Address)addresses.get(i);
-				%>
+					</aui:select>
 
-					<option value="<%= address.getAddressId() %>"><%= address.getStreet1() %></option>
+					<aui:input bean="<%= null %>" label="number" name="ccNumber" />
 
-				<%
-				}
-				%>
+					<aui:field-wrapper label="expiration-date">
+						<aui:column>
+							<aui:select label="" name="ccExpMonth">
 
-			</select>
-		</td>
-	</c:if>
+								<%
+								String[] months = CalendarUtil.getMonths(locale);
 
-	<td>
-		<liferay-ui:message key="same-as-billing" />
-	</td>
-	<td>
-		<liferay-ui:input-field model="<%= ShoppingOrder.class %>" bean="<%= order %>" field="shipToBilling" />
-	</td>
-</tr>
-</table>
+								for (int i = 0; i < months.length; i++) {
+								%>
 
-<br />
+									<aui:option label="<%= months[i] %>" selected="<%= (i == ccExpMonth) %>" value="<%= i %>" />
 
-<table class="lfr-table">
-<tr>
-	<td>
-		<table class="lfr-table">
-		<tr>
-			<td>
-				<liferay-ui:message key="first-name" />
-			</td>
-			<td>
-				<liferay-ui:input-field model="<%= ShoppingOrder.class %>" bean="<%= order %>" field="shippingFirstName" />
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<liferay-ui:message key="last-name" />
-			</td>
-			<td>
-				<liferay-ui:input-field model="<%= ShoppingOrder.class %>" bean="<%= order %>" field="shippingLastName" />
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<liferay-ui:message key="email-address" />
-			</td>
-			<td>
-				<liferay-ui:input-field model="<%= ShoppingOrder.class %>" bean="<%= order %>" field="shippingEmailAddress" />
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<liferay-ui:message key="company" />
-			</td>
-			<td>
-				<liferay-ui:input-field model="<%= ShoppingOrder.class %>" bean="<%= order %>" field="shippingCompany" />
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<liferay-ui:message key="street" />
-			</td>
-			<td>
-				<liferay-ui:input-field model="<%= ShoppingOrder.class %>" bean="<%= order %>" field="shippingStreet" />
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<liferay-ui:message key="city" />
-			</td>
-			<td>
-				<liferay-ui:input-field model="<%= ShoppingOrder.class %>" bean="<%= order %>" field="shippingCity" />
-			</td>
-		</tr>
-		</table>
-	</td>
-	<td class="lfr-top">
-		<table class="lfr-table">
-		<tr>
-			<td>
-				<liferay-ui:message key="state" />
-			</td>
-			<td>
-				<select id="<portlet:namespace />shippingStateSel" name="<portlet:namespace />shippingStateSel">
-					<option value=""><liferay-ui:message key="outside-us" /></option>
+								<%
+								}
+								%>
 
-					<%
-					for (int i = 0; i < StateUtil.STATES.length; i++) {
-					%>
+							</aui:select>
+						</aui:column>
 
-						<option <%= shippingStateSel.equals(StateUtil.STATES[i].getId()) ? "selected" : "" %> value="<%= StateUtil.STATES[i].getId() %>"><%= StateUtil.STATES[i].getName() %></option>
+						<aui:column>
+							<aui:select label="" name="ccExpYear">
 
-					<%
-					}
-					%>
+								<%
+								int currentYear = cal.get(Calendar.YEAR);
 
-				</select>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<liferay-ui:message key="other-state" />
-			</td>
-			<td>
-				<liferay-ui:input-field model="<%= ShoppingOrder.class %>" bean="<%= null %>" field="shippingState" defaultValue="<%= shippingState %>" />
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<liferay-ui:message key="zip" />
-			</td>
-			<td>
-				<liferay-ui:input-field model="<%= ShoppingOrder.class %>" bean="<%= order %>" field="shippingZip" />
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<liferay-ui:message key="country" />
-			</td>
-			<td>
-				<liferay-ui:input-field model="<%= ShoppingOrder.class %>" bean="<%= order %>" field="shippingCountry" />
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<liferay-ui:message key="phone" />
-			</td>
-			<td>
-				<liferay-ui:input-field model="<%= ShoppingOrder.class %>" bean="<%= order %>" field="shippingPhone" />
-			</td>
-		</tr>
-		</table>
-	</td>
-</tr>
-</table>
+								for (int i = currentYear; i <= currentYear + 5; i++) {
+								%>
 
-<br />
+									<aui:option label="<%= i %>" selected="<%= i == ccExpYear %>" />
 
-<%
-String[] ccTypes = shoppingPrefs.getCcTypes();
-%>
+								<%
+								}
+								%>
 
-<c:if test="<%= !shoppingPrefs.usePayPal() && (ccTypes.length > 0) %>">
-	<liferay-ui:tabs names="credit-card" />
+							</aui:select>
+						</aui:column>
+					</aui:field-wrapper>
 
-	<liferay-ui:error exception="<%= CCExpirationException.class %>" message="please-enter-a-valid-credit-card-expiration-date" />
-	<liferay-ui:error exception="<%= CCNameException.class %>" message="please-enter-the-full-name-exactly-as-it-is-appears-on-your-credit-card" />
-	<liferay-ui:error exception="<%= CCNumberException.class %>" message="please-enter-a-valid-credit-card-number" />
-	<liferay-ui:error exception="<%= CCTypeException.class %>" message="please-enter-a-valid-credit-card-type" />
+					<img alt="" src="<%= themeDisplay.getPathThemeImages() %>/shopping/cc_ver_number.png" />
 
-	<%
-	for (int i = 0; i < ccTypes.length; i++) {
-	%>
+					<aui:input bean="<%= null %>" label="verification-number" name="ccVerNumber" />
+				</aui:fieldset>
+			</liferay-ui:panel>
+		</c:if>
 
-		<img alt="<%= ccTypes[i] %>" src="<%= themeDisplay.getPathThemeImages() %>/shopping/cc_<%= ccTypes[i] %>.png" />
+		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "comments") %>'>
+			<aui:fieldset>
+				<aui:input label="" name="comments" />
+			</aui:fieldset>
+		</liferay-ui:panel>
+	</liferay-ui:panel-container>
 
-	<%
-	}
-	%>
-
-	<br /><br />
-
-	<table class="lfr-table">
-	<tr>
-		<td>
-			<liferay-ui:message key="full-name" />
-		</td>
-		<td>
-			<liferay-ui:input-field model="<%= ShoppingOrder.class %>" bean="<%= order %>" field="ccName" />
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<liferay-ui:message key="type" />
-		</td>
-		<td>
-			<select name="<portlet:namespace />ccType">
-				<option value=""></option>
-
-				<%
-				for (int i = 0; i < ccTypes.length; i++) {
-				%>
-
-					<option <%= ccTypes[i].equals(ccType) ? "selected" : "" %> value="<%= ccTypes[i] %>"><liferay-ui:message key='<%= "cc_" + ccTypes[i] %>' /></option>
-
-				<%
-				}
-				%>
-
-			</select>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<liferay-ui:message key="number" />
-		</td>
-		<td>
-			<liferay-ui:input-field model="<%= ShoppingOrder.class %>" bean="<%= null %>" field="ccNumber" />
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<liferay-ui:message key="expiration-date" />
-		</td>
-		<td>
-			<select name="<portlet:namespace />ccExpMonth">
-
-				<%
-				String[] months = CalendarUtil.getMonths(locale);
-
-				for (int i = 0; i < months.length; i++) {
-				%>
-
-					<option <%= (i == ccExpMonth) ? "selected" : "" %> value="<%= i %>"><%= months[i] %></option>
-
-				<%
-				}
-				%>
-
-			</select>
-
-			<select name="<portlet:namespace />ccExpYear">
-
-				<%
-				int currentYear = cal.get(Calendar.YEAR);
-
-				for (int i = currentYear; i <= currentYear + 5; i++) {
-				%>
-
-					<option <%= (i == ccExpYear) ? "selected" : "" %> value="<%= i %>"><%= i %></option>
-
-				<%
-				}
-				%>
-
-			</select>
-		</td>
-	</tr>
-	</table>
-
-	<br />
-
-	<img alt="" src="<%= themeDisplay.getPathThemeImages() %>/shopping/cc_ver_number.png" />
-
-	<br /><br />
-
-	<table class="lfr-table">
-	<tr>
-		<td>
-			<liferay-ui:message key="verification-number" />
-		</td>
-		<td>
-			<liferay-ui:input-field model="<%= ShoppingOrder.class %>" bean="<%= null %>" field="ccVerNumber" />
-		</td>
-	</tr>
-	</table>
-
-	<br />
-</c:if>
-
-<liferay-ui:tabs names="comments" />
-
-<liferay-ui:input-field model="<%= ShoppingOrder.class %>" bean="<%= order %>" field="comments" />
-
-<br /><br />
-
-<input type="button" value="<liferay-ui:message key="continue" />" onClick="submitForm(document.<portlet:namespace />fm);" />
-
-</form>
+	<aui:button-row>
+		<aui:button type="button" value="continue" onClick='<%= "submitForm(document." + renderResponse.getNamespace() + "fm);" %>' />
+	</aui:button-row>
+</aui:form>
 
 <aui:script>
 	function <portlet:namespace />updateAddress(addressId, type) {

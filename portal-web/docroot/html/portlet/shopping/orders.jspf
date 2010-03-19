@@ -21,94 +21,93 @@ portletURL.setParameter("struts_action", "/shopping/view");
 portletURL.setParameter("tabs1", tabs1);
 %>
 
-<form action="<%= portletURL.toString() %>" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
-<input name="<portlet:namespace />deleteOrderIds" type="hidden" value="" />
+<aui:form action="<%= portletURL.toString() %>" method="post" name="fm">
+	<aui:input name="<%= Constants.CMD %>" type="hidden" />
+	<aui:input name="deleteOrderIds" type="hidden" />
 
-<%
-OrderSearch searchContainer = new OrderSearch(renderRequest, portletURL);
+	<%
+	OrderSearch searchContainer = new OrderSearch(renderRequest, portletURL);
 
-List headerNames = searchContainer.getHeaderNames();
+	List headerNames = searchContainer.getHeaderNames();
 
-headerNames.add(StringPool.BLANK);
+	headerNames.add(StringPool.BLANK);
 
-searchContainer.setRowChecker(new RowChecker(renderResponse));
-%>
+	searchContainer.setRowChecker(new RowChecker(renderResponse));
+	%>
 
-<liferay-ui:search-form
-	page="/html/portlet/shopping/order_search.jsp"
-	searchContainer="<%= searchContainer %>"
-/>
+	<liferay-ui:search-form
+		page="/html/portlet/shopping/order_search.jsp"
+		searchContainer="<%= searchContainer %>"
+	/>
 
-<%
-OrderSearchTerms searchTerms = (OrderSearchTerms)searchContainer.getSearchTerms();
+	<%
+	OrderSearchTerms searchTerms = (OrderSearchTerms)searchContainer.getSearchTerms();
 
-long searchUserId = user.getUserId();
+	long searchUserId = user.getUserId();
 
-if (ShoppingPermission.contains(permissionChecker, scopeGroupId, ActionKeys.MANAGE_ORDERS)) {
-	searchUserId = 0;
-}
+	if (ShoppingPermission.contains(permissionChecker, scopeGroupId, ActionKeys.MANAGE_ORDERS)) {
+		searchUserId = 0;
+	}
 
-int total = ShoppingOrderLocalServiceUtil.searchCount(scopeGroupId, company.getCompanyId(), searchUserId, searchTerms.getNumber(), searchTerms.getFirstName(), searchTerms.getLastName(), searchTerms.getEmailAddress(), searchTerms.getFirstName(), searchTerms.getLastName(), searchTerms.getEmailAddress(), searchTerms.getStatus(), searchTerms.isAndOperator());
+	int total = ShoppingOrderLocalServiceUtil.searchCount(scopeGroupId, company.getCompanyId(), searchUserId, searchTerms.getNumber(), searchTerms.getFirstName(), searchTerms.getLastName(), searchTerms.getEmailAddress(), searchTerms.getFirstName(), searchTerms.getLastName(), searchTerms.getEmailAddress(), searchTerms.getStatus(), searchTerms.isAndOperator());
 
-searchContainer.setTotal(total);
+	searchContainer.setTotal(total);
 
-List results = ShoppingOrderLocalServiceUtil.search(scopeGroupId, company.getCompanyId(), searchUserId, searchTerms.getNumber(), searchTerms.getFirstName(), searchTerms.getLastName(), searchTerms.getEmailAddress(), searchTerms.getFirstName(), searchTerms.getLastName(), searchTerms.getEmailAddress(), searchTerms.getStatus(), searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd());
+	List results = ShoppingOrderLocalServiceUtil.search(scopeGroupId, company.getCompanyId(), searchUserId, searchTerms.getNumber(), searchTerms.getFirstName(), searchTerms.getLastName(), searchTerms.getEmailAddress(), searchTerms.getFirstName(), searchTerms.getLastName(), searchTerms.getEmailAddress(), searchTerms.getStatus(), searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd());
 
-searchContainer.setResults(results);
-%>
+	searchContainer.setResults(results);
+	%>
 
-<div class="separator"><!-- --></div>
+	<div class="separator"><!-- --></div>
 
-<input type="button" value="<liferay-ui:message key="delete" />" onClick="<portlet:namespace />deleteOrders();" />
+	<aui:button-row>
+		<aui:button onClick='<%= renderResponse.getNamespace() + "deleteOrders();" %>' type="button" value="delete" />
+	</aui:button-row>
 
-<br /><br />
+	<%
+	List resultRows = searchContainer.getResultRows();
 
-<%
-List resultRows = searchContainer.getResultRows();
+	for (int i = 0; i < results.size(); i++) {
+		ShoppingOrder order = (ShoppingOrder)results.get(i);
 
-for (int i = 0; i < results.size(); i++) {
-	ShoppingOrder order = (ShoppingOrder)results.get(i);
+		order = order.toEscapedModel();
 
-	order = order.toEscapedModel();
+		ResultRow row = new ResultRow(order, order.getOrderId(), i);
 
-	ResultRow row = new ResultRow(order, order.getOrderId(), i);
+		PortletURL rowURL = renderResponse.createRenderURL();
 
-	PortletURL rowURL = renderResponse.createRenderURL();
+		rowURL.setParameter("struts_action", "/shopping/edit_order");
+		rowURL.setParameter("redirect", currentURL);
+		rowURL.setParameter("orderId", String.valueOf(order.getOrderId()));
 
-	rowURL.setParameter("struts_action", "/shopping/edit_order");
-	rowURL.setParameter("redirect", currentURL);
-	rowURL.setParameter("orderId", String.valueOf(order.getOrderId()));
+		// Number
 
-	// Number
+		row.addText(order.getNumber(), rowURL);
 
-	row.addText(order.getNumber(), rowURL);
+		// Date
 
-	// Date
+		row.addText(dateFormatDateTime.format(order.getCreateDate()), rowURL);
 
-	row.addText(dateFormatDateTime.format(order.getCreateDate()), rowURL);
+		// Status
 
-	// Status
+		row.addText(ShoppingUtil.getPpPaymentStatus(order, pageContext), rowURL);
 
-	row.addText(ShoppingUtil.getPpPaymentStatus(order, pageContext), rowURL);
+		// Customer
 
-	// Customer
+		row.addText(HtmlUtil.escape(PortalUtil.getUserName(order.getUserId(), order.getBillingFirstName() + StringPool.SPACE + order.getBillingLastName())));
 
-	row.addText(HtmlUtil.escape(PortalUtil.getUserName(order.getUserId(), order.getBillingFirstName() + StringPool.SPACE + order.getBillingLastName())));
+		// Action
 
-	// Action
+		row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/shopping/order_action.jsp");
 
-	row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/shopping/order_action.jsp");
+		// Add result row
 
-	// Add result row
+		resultRows.add(row);
+	}
+	%>
 
-	resultRows.add(row);
-}
-%>
-
-<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-
-</form>
+	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+</aui:form>
 
 <aui:script>
 	function <portlet:namespace />deleteOrders() {

@@ -43,84 +43,84 @@ for (int i = 0; i < values.size(); i++) {
 }
 %>
 
-<form method="post" name="<portlet:namespace />fm">
+<aui:form method="post" name="fm">
+	<aui:fieldset>
+		<table border="1" cellpadding="4" cellspacing="0">
+		<tr>
 
-<table border="1" cellpadding="4" cellspacing="0">
-<tr>
+			<%
+			for (int i = 0; i < names.size(); i++) {
+			%>
 
-	<%
-	for (int i = 0; i < names.size(); i++) {
-	%>
+				<td>
+					<strong><%= names.get(i) %></strong>
+				</td>
 
-		<td>
-			<strong><%= names.get(i) %></strong>
-		</td>
-
-	<%
-	}
-	%>
-
-	<td>
-		<strong><liferay-ui:message key="quantity" /></strong>
-	</td>
-</tr>
-
-<%
-for (int i = 0; i < rowsCount; i++) {
-%>
-
-	<tr>
-
-		<%
-		for (int j = 0; j < names.size(); j++) {
-			int numOfRepeats = 1;
-
-			for (int k = j + 1; k < values.size(); k++) {
-				String[] vArray = (String[])values.get(k);
-
-				numOfRepeats = numOfRepeats * vArray.length;
+			<%
 			}
-
-			String[] vArray = (String[])values.get(j);
-
-			int arrayPos;
-
-			for (arrayPos = i / numOfRepeats; arrayPos >= vArray.length; arrayPos = arrayPos - vArray.length) {
-			}
-		%>
+			%>
 
 			<td>
-				<%= vArray[arrayPos] %>
+				<strong><liferay-ui:message key="quantity" /></strong>
 			</td>
+		</tr>
+
+		<%
+		for (int i = 0; i < rowsCount; i++) {
+		%>
+
+			<tr>
+
+				<%
+				for (int j = 0; j < names.size(); j++) {
+					int numOfRepeats = 1;
+
+					for (int k = j + 1; k < values.size(); k++) {
+						String[] vArray = (String[])values.get(k);
+
+						numOfRepeats = numOfRepeats * vArray.length;
+					}
+
+					String[] vArray = (String[])values.get(j);
+
+					int arrayPos;
+
+					for (arrayPos = i / numOfRepeats; arrayPos >= vArray.length; arrayPos = arrayPos - vArray.length) {
+					}
+				%>
+
+					<td>
+						<%= vArray[arrayPos] %>
+					</td>
+
+				<%
+				}
+
+				int fieldsQuantity = 0;
+
+				if (i < fieldsQuantities.length) {
+					fieldsQuantity = GetterUtil.getInteger(fieldsQuantities[i]);
+				}
+				%>
+
+				<td>
+					<aui:input label="" name='<%= "fieldsQuantity" + i %>' size="4" type="text" value="<%= fieldsQuantity %>" />
+				</td>
+			</tr>
 
 		<%
 		}
-
-		int fieldsQuantity = 0;
-
-		if (i < fieldsQuantities.length) {
-			fieldsQuantity = GetterUtil.getInteger(fieldsQuantities[i]);
-		}
 		%>
 
-		<td>
-			<input name="<portlet:namespace />fieldsQuantity<%= i %>" type="text" size="4" value="<%= fieldsQuantity %>" />
-		</td>
-	</tr>
+		</table>
+	</aui:fieldset>
 
-<%
-}
-%>
+	<aui:button-row>
+		<aui:button onClick='<%= renderResponse.getNamespace() + "updateItemQuantities();" %>' type="button" value="update" />
 
-</table>
-
-<br />
-
-<input type="button" value="<liferay-ui:message key="update" />" onClick="<portlet:namespace />updateItemQuantities();" />
-
-<input type="button" value="<liferay-ui:message key="cancel" />" onClick="self.close();" />
-
-</form>
+		<aui:button onClick="self.close();" type="button" value="cancel" />
+	</aui:button-row>
+</aui:form>
 
 <aui:script>
 	function <portlet:namespace />updateItemQuantities() {

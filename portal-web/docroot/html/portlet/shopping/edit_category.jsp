@@ -26,122 +26,96 @@ long categoryId = BeanParamUtil.getLong(category, request, "categoryId");
 long parentCategoryId = BeanParamUtil.getLong(category, request, "parentCategoryId", ShoppingCategoryConstants.DEFAULT_PARENT_CATEGORY_ID);
 %>
 
-<form action="<portlet:actionURL><portlet:param name="struts_action" value="/shopping/edit_category" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveCategory(); return false;">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
-<input name="<portlet:namespace />categoryId" type="hidden" value="<%= categoryId %>" />
-<input name="<portlet:namespace />parentCategoryId" type="hidden" value="<%= parentCategoryId %>" />
+<portlet:actionURL var="editCategoryURL">
+	<portlet:param name="struts_action" value="/shopping/edit_category" />
+</portlet:actionURL>
 
-<liferay-ui:tabs
-	names="category"
-	backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
-/>
+<aui:form action="<%= editCategoryURL %>" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "saveCategory();" %>'>
+	<aui:input name="<%= Constants.CMD %>" type="hidden" />
+	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
+	<aui:input name="categoryId" type="hidden" value="<%= categoryId %>" />
+	<aui:input name="parentCategoryId" type="hidden" value="<%= parentCategoryId %>" />
 
-<liferay-ui:error exception="<%= CategoryNameException.class %>" message="please-enter-a-valid-name" />
+	<liferay-ui:tabs
+		names="category"
+		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
+	/>
 
-<c:if test="<%= parentCategoryId != ShoppingCategoryConstants.DEFAULT_PARENT_CATEGORY_ID %>">
-	<div class="breadcrumbs">
-		<%= ShoppingUtil.getBreadcrumbs(parentCategoryId, pageContext, renderRequest, renderResponse) %>
-	</div>
-</c:if>
+	<liferay-ui:error exception="<%= CategoryNameException.class %>" message="please-enter-a-valid-name" />
 
-<table class="lfr-table">
+	<c:if test="<%= parentCategoryId != ShoppingCategoryConstants.DEFAULT_PARENT_CATEGORY_ID %>">
+		<div class="breadcrumbs">
+			<%= ShoppingUtil.getBreadcrumbs(parentCategoryId, pageContext, renderRequest, renderResponse) %>
+		</div>
+	</c:if>
 
-<c:if test="<%= category != null %>">
-	<tr>
-		<td>
-			<liferay-ui:message key="parent-category" />
-		</td>
-		<td>
-			<table class="lfr-table">
-			<tr>
-				<td>
+	<aui:model-context bean="<%= category %>" model="<%= ShoppingCategory.class %>" />
 
-					<%
-					String parentCategoryName = "";
+	<aui:fieldset>
+		<c:if test="<%= category != null %>">
+			<aui:field-wrapper label="parent-category">
 
-					try {
-						ShoppingCategory parentCategory = ShoppingCategoryLocalServiceUtil.getCategory(parentCategoryId);
+				<%
+				String parentCategoryName = "";
 
-						parentCategoryName = parentCategory.getName();
-					}
-					catch (NoSuchCategoryException nscce) {
-					}
-					%>
+				try {
+					ShoppingCategory parentCategory = ShoppingCategoryLocalServiceUtil.getCategory(parentCategoryId);
 
-					<a href="<portlet:renderURL><portlet:param name="struts_action" value="/shopping/view" /><portlet:param name="categoryId" value="<%= String.valueOf(parentCategoryId) %>" /></portlet:renderURL>" id="<portlet:namespace />parentCategoryName">
-					<%= parentCategoryName %></a>
+					parentCategoryName = parentCategory.getName();
+				}
+				catch (NoSuchCategoryException nscce) {
+				}
+				%>
 
-					<input type="button" value="<liferay-ui:message key="select" />" onClick="var categoryWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/shopping/select_category" /><portlet:param name="categoryId" value="<%= String.valueOf(parentCategoryId) %>" /></portlet:renderURL>', 'category', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680'); void(''); categoryWindow.focus();" />
+				<portlet:renderURL var="viewCategoryURL">
+					<portlet:param name="struts_action" value="/shopping/view" />
+					<portlet:param name="categoryId" value="<%= String.valueOf(parentCategoryId) %>" />
+				</portlet:renderURL>
 
-					<input id="<portlet:namespace />removeCategoryButton" type="button" value="<liferay-ui:message key="remove" />" onClick="<portlet:namespace />removeCategory();" />
-				</td>
-				<td>
-					<div id="<portlet:namespace />merge-with-parent-checkbox-div"
-						<c:if test="<%= category.getParentCategoryId() == ShoppingCategoryConstants.DEFAULT_PARENT_CATEGORY_ID %>">
-							style="display: none;"
-						</c:if>
-					>
-						<liferay-ui:input-checkbox param="mergeWithParentCategory" />
+				<aui:a href="<%= viewCategoryURL %>" id="parentCategoryName" label="<%= parentCategoryName %>" />
 
-						<liferay-ui:message key="merge-with-parent-category" />
-					</div>
-				</td>
-			</tr>
-			</table>
-		</td>
-	</tr>
-	<tr>
-		<td colspan="2">
-			<br />
-		</td>
-	</tr>
-</c:if>
+				<portlet:renderURL var="selectCategoryURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
+					<portlet:param name="struts_action" value="/shopping/select_category" />
+					<portlet:param name="categoryId" value="<%= String.valueOf(parentCategoryId) %>" />
+				</portlet:renderURL>
 
-<tr>
-	<td>
-		<liferay-ui:message key="name" />
-	</td>
-	<td>
-		<liferay-ui:input-field model="<%= ShoppingCategory.class %>" bean="<%= category %>" field="name" />
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="description" />
-	</td>
-	<td>
-		<liferay-ui:input-field model="<%= ShoppingCategory.class %>" bean="<%= category %>" field="description" />
-	</td>
-</tr>
+				<%
+				String taglibOpenCategoryWindow = "var categoryWindow = window.open('" + selectCategoryURL + "', 'category', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680'); void('');categoryWindow.focus();";
+				%>
 
-<c:if test="<%= category == null %>">
-	<tr>
-		<td colspan="2">
-			<br />
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<liferay-ui:message key="permissions" />
-		</td>
-		<td>
-			<liferay-ui:input-permissions
-				modelName="<%= ShoppingCategory.class.getName() %>"
-			/>
-		</td>
-	</tr>
-</c:if>
+				<aui:button onClick="<%= taglibOpenCategoryWindow %>" type="button" value="select" />
 
-</table>
+				<aui:button onClick='<%= renderResponse.getNamespace() + "removeCategory();" %>' type="button" value="remove" />
 
-<br />
+				<div id="<portlet:namespace />merge-with-parent-checkbox-div"
+					<c:if test="<%= category.getParentCategoryId() == ShoppingCategoryConstants.DEFAULT_PARENT_CATEGORY_ID %>">
+						style="display: none;"
+					</c:if>
+				>
+					<aui:input name="mergeWithParentCategory" type="checkbox" />
+				</div>
+			</aui:field-wrapper>
+		</c:if>
 
-<input type="submit" value="<liferay-ui:message key="save" />" />
+		<aui:input cssClass="lfr-input-text-container" name="name" />
 
-<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(PortalUtil.escapeRedirect(redirect)) %>';" />
+		<aui:input cssClass="lfr-textarea-container" name="description" />
 
-</form>
+		<c:if test="<%= category == null %>">
+			<aui:field-wrapper label="permissions">
+				<liferay-ui:input-permissions
+					modelName="<%= ShoppingCategory.class.getName() %>"
+				/>
+			</aui:field-wrapper>
+		</c:if>
+	</aui:fieldset>
+
+	<aui:button-row>
+		<aui:button type="submit" />
+
+		<aui:button onClick="<%= redirect %>" type="cancel" />
+	</aui:button-row>
+</aui:form>
 
 <aui:script>
 	function <portlet:namespace />removeCategory() {

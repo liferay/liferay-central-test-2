@@ -54,227 +54,128 @@ double discount = BeanParamUtil.getDouble(coupon, request, "discount");
 String discountType = BeanParamUtil.getString(coupon, request, "discountType");
 %>
 
-<form action="<portlet:actionURL><portlet:param name="struts_action" value="/shopping/edit_coupon" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveCoupon(); return false;">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
-<input name="<portlet:namespace />couponId" type="hidden" value="<%= couponId %>" />
+<portlet:actionURL var="editCouponURL">
+	<portlet:param name="struts_action" value="/shopping/edit_coupon" />
+</portlet:actionURL>
 
-<liferay-ui:tabs
-	names="coupon"
-	backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
-/>
+<aui:form action="<%= editCouponURL %>" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "saveCoupon(); return false;" %>'>
+	<aui:input name="<%= Constants.CMD %>" type="hidden" />
+	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
+	<aui:input name="couponId" type="hidden" value="<%= couponId %>" />
 
-<liferay-ui:error exception="<%= CouponCodeException.class %>" message="please-enter-a-valid-code" />
-<liferay-ui:error exception="<%= CouponDateException.class %>" message="please-enter-a-start-date-that-comes-before-the-expiration-date" />
-<liferay-ui:error exception="<%= CouponDescriptionException.class %>" message="please-enter-a-valid-description" />
-<liferay-ui:error exception="<%= CouponDiscountException.class %>" message="please-enter-a-valid-number" />
-<liferay-ui:error exception="<%= CouponEndDateException.class %>" message="please-enter-a-valid-expiration-date" />
-<liferay-ui:error exception="<%= CouponMinimumOrderException.class %>" message="please-enter-a-valid-number" />
-<liferay-ui:error exception="<%= CouponNameException.class %>" message="please-enter-a-valid-name" />
-<liferay-ui:error exception="<%= CouponStartDateException.class %>" message="please-enter-a-valid-start-date" />
-<liferay-ui:error exception="<%= DuplicateCouponCodeException.class %>" message="please-enter-a-unique-code" />
+	<liferay-ui:tabs
+		names="coupon"
+		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
+	/>
 
-<table class="lfr-table">
-<tr>
-	<td>
-		<liferay-ui:message key="code" />
-	</td>
-	<td>
-		<table class="lfr-table">
-		<tr>
-			<td>
-				<c:choose>
-					<c:when test="<%= coupon == null %>">
-						<liferay-ui:input-field model="<%= ShoppingCoupon.class %>" bean="<%= coupon %>" field="code" />
-					</c:when>
-					<c:otherwise>
-						<%= HtmlUtil.escape(code) %>
-					</c:otherwise>
-				</c:choose>
-			</td>
-			<td>
-				<c:if test="<%= coupon == null %>">
-					<liferay-ui:input-checkbox param="autoCode" />
+	<liferay-ui:error exception="<%= CouponCodeException.class %>" message="please-enter-a-valid-code" />
+	<liferay-ui:error exception="<%= CouponDateException.class %>" message="please-enter-a-start-date-that-comes-before-the-expiration-date" />
+	<liferay-ui:error exception="<%= CouponDescriptionException.class %>" message="please-enter-a-valid-description" />
+	<liferay-ui:error exception="<%= CouponDiscountException.class %>" message="please-enter-a-valid-number" />
+	<liferay-ui:error exception="<%= CouponEndDateException.class %>" message="please-enter-a-valid-expiration-date" />
+	<liferay-ui:error exception="<%= CouponMinimumOrderException.class %>" message="please-enter-a-valid-number" />
+	<liferay-ui:error exception="<%= CouponNameException.class %>" message="please-enter-a-valid-name" />
+	<liferay-ui:error exception="<%= CouponStartDateException.class %>" message="please-enter-a-valid-start-date" />
+	<liferay-ui:error exception="<%= DuplicateCouponCodeException.class %>" message="please-enter-a-unique-code" />
 
-					<liferay-ui:message key="autogenerate-code" />
-				</c:if>
-			</td>
-		</tr>
-		</table>
-	</td>
-</tr>
-<tr>
-	<td colspan="2">
-		<br />
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="name" />
-	</td>
-	<td>
-		<liferay-ui:input-field model="<%= ShoppingCoupon.class %>" bean="<%= coupon %>" field="name" />
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="description" />
-	</td>
-	<td>
-		<liferay-ui:input-field model="<%= ShoppingCoupon.class %>" bean="<%= coupon %>" field="description" />
-	</td>
-</tr>
-<tr>
-	<td colspan="2">
-		<br />
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="start-date" />
-	</td>
-	<td>
-		<liferay-ui:input-field model="<%= ShoppingCoupon.class %>" bean="<%= coupon %>" field="startDate" defaultValue="<%= startDate %>" />
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="expiration-date" />
-	</td>
-	<td>
-		<table border="0" cellpadding="0" cellspacing="0">
-		<tr>
-			<td>
-				<liferay-ui:input-field model="<%= ShoppingCoupon.class %>" bean="<%= coupon %>" field="endDate" defaultValue="<%= endDate %>" disabled="<%= neverExpire %>" />
-			</td>
-			<td style="padding-left: 30px;"></td>
-			<td>
+	<aui:model-context bean="<%= coupon %>" model="<%= ShoppingCoupon.class %>" />
+
+	<aui:fieldset>
+		<c:choose>
+			<c:when test="<%= coupon == null %>">
+				<aui:input name="code" />
+
+				<aui:input label="autogenerate-code" name="autoCode" type="checkbox" />
+			</c:when>
+			<c:otherwise>
+				<aui:field-wrapper label="code">
+					<%= HtmlUtil.escape(code) %>
+				</aui:field-wrapper>
+			</c:otherwise>
+		</c:choose>
+
+		<aui:input name="name" />
+
+		<aui:input name="description" />
+
+		<aui:input name="startDate" value="<%= startDate %>" />
+
+		<aui:input disabled="<%= neverExpire %>" label="expiration-date" name="endDate" value="<%= endDate %>" />
+
+		<%
+		String taglibNeverExpireOnClick = renderResponse.getNamespace() + "disableInputDate('endDate', this.checked);";
+		%>
+
+		<aui:input name="neverExpire" onClick="<%= taglibNeverExpireOnClick %>" type="checkbox" value="<%= neverExpire %>" />
+
+		<aui:input name="active" value="<%= Boolean.TRUE %>" />
+	</aui:fieldset>
+
+	<aui:button-row>
+		<aui:button type="submit" />
+
+		<aui:button onClick="<%= redirect %>" type="cancel" />
+	</aui:button-row>
+
+	<liferay-ui:panel-container extended="<%= true %>" persistState="<%= true %>">
+		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "discount") %>'>
+			<liferay-ui:message arguments="<%= currencyFormat.format(0) %>" key="coupons-can-be-set-to-only-apply-to-orders-above-a-minimum-amount" translateArguments="<%= false %>" />
+
+			<br /><br />
+
+			<liferay-ui:message key="set-the-discount-amount-and-the-discount-type" />
+
+			<br /><br />
+
+			<liferay-ui:message key="if-the-discount-type-is-free-shipping,-then-shipping-charges-are-subtracted-from-the-order" />
+
+			<aui:fieldset>
+				<aui:input label="minimum-order" name="minOrder" size="4" type="text" value="<%= doubleFormat.format(minOrder) %>" />
+
+				<aui:input name="discount" size="4" type="text" value="<%= doubleFormat.format(discount) %>" />
+
+				<aui:select name="discountType">
+
+					<%
+					for (int i = 0; i < ShoppingCouponConstants.DISCOUNT_TYPES.length; i++) {
+					%>
+
+						<aui:option label="<%= ShoppingCouponConstants.DISCOUNT_TYPES[i] %>" selected="<%= discountType.equals(ShoppingCouponConstants.DISCOUNT_TYPES[i]) %>" />
+
+					<%
+					}
+					%>
+				</aui:select>
+			</aui:fieldset>
+		</liferay-ui:panel>
+
+		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "limits") %>'>
+			<liferay-ui:error exception="<%= CouponLimitCategoriesException.class %>">
 
 				<%
-				String taglibNeverExpireOnClick = renderResponse.getNamespace() + "disableInputDate('endDate', this.checked);";
+				List categoryIds = (List)errorException;
 				%>
 
-				<liferay-ui:input-checkbox param="neverExpire" defaultValue="<%= neverExpire %>" onClick="<%= taglibNeverExpireOnClick %>" />
+				<liferay-ui:message key="the-following-are-invalid-category-ids" /> <%= StringUtil.merge((String[])categoryIds.toArray(new String[0])) %>
+			</liferay-ui:error>
 
-				<liferay-ui:message key="never-expire" />
-			</td>
-		</tr>
-		</table>
-	</td>
-</tr>
-<tr>
-	<td colspan="2">
-		<br />
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="active" />
-	</td>
-	<td>
-		<liferay-ui:input-field model="<%= ShoppingCoupon.class %>" bean="<%= coupon %>" field="active" defaultValue="<%= Boolean.TRUE %>" />
-	</td>
-</tr>
-</table>
+			<liferay-ui:error exception="<%= CouponLimitSKUsException.class %>">
 
-<br />
+				<%
+				List skus = (List)errorException;
+				%>
 
-<input type="submit" value="<liferay-ui:message key="save" />" />
+				<liferay-ui:message key="the-following-are-invalid-item-skus" /> <%= StringUtil.merge((String[])skus.toArray(new String[0])) %>
+			</liferay-ui:error>
 
-<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(PortalUtil.escapeRedirect(redirect)) %>';" />
+			<aui:fieldset>
+				<aui:input label='<%= LanguageUtil.get(pageContext, "this-coupon-only-applies-to-items-that-are-children-of-this-comma-delimited-list-of-categories") + StringPool.SPACE + LanguageUtil.get(pageContext, "leave-this-blank-if-the-coupon-does-not-check-for-the-parent-categories-of-an-item") %>' name="limitCategories" />
 
-<br /><br />
-
-<liferay-ui:tabs names="discount" />
-
-<%= LanguageUtil.format(pageContext, "coupons-can-be-set-to-only-apply-to-orders-above-a-minimum-amount", currencyFormat.format(0), false) %>
-
-<br /><br />
-
-<liferay-ui:message key="set-the-discount-amount-and-the-discount-type" />
-
-<br /><br />
-
-<liferay-ui:message key="if-the-discount-type-is-free-shipping,-then-shipping-charges-are-subtracted-from-the-order" />
-
-<br /><br />
-
-<table class="lfr-table">
-<tr>
-	<td>
-		<liferay-ui:message key="minimum-order" />
-	</td>
-	<td>
-		<input name="<portlet:namespace />minOrder" size="4" type="text" value="<%= doubleFormat.format(minOrder) %>" />
-	</td>
-	<td>
-		<liferay-ui:message key="discount" />
-	</td>
-	<td>
-		<input name="<portlet:namespace />discount" size="4" type="text" value="<%= doubleFormat.format(discount) %>" />
-	</td>
-	<td>
-		<liferay-ui:message key="discount-type" />
-	</td>
-	<td>
-		<select name="<portlet:namespace />discountType">
-
-			<%
-			for (int i = 0; i < ShoppingCouponConstants.DISCOUNT_TYPES.length; i++) {
-			%>
-
-				<option <%= discountType.equals(ShoppingCouponConstants.DISCOUNT_TYPES[i]) ? "selected" : "" %> value="<%= ShoppingCouponConstants.DISCOUNT_TYPES[i] %>"><%= LanguageUtil.get(pageContext, ShoppingCouponConstants.DISCOUNT_TYPES[i]) %></option>
-
-			<%
-			}
-			%>
-
-		</select>
-	</td>
-</tr>
-</table>
-
-<br />
-
-<liferay-ui:tabs names="limits" />
-
-<liferay-ui:error exception="<%= CouponLimitCategoriesException.class %>">
-
-	<%
-	List categoryIds = (List)errorException;
-	%>
-
-	<liferay-ui:message key="the-following-are-invalid-category-ids" /> <%= StringUtil.merge((String[])categoryIds.toArray(new String[0])) %>
-</liferay-ui:error>
-
-<liferay-ui:error exception="<%= CouponLimitSKUsException.class %>">
-
-	<%
-	List skus = (List)errorException;
-	%>
-
-	<liferay-ui:message key="the-following-are-invalid-item-skus" /> <%= StringUtil.merge((String[])skus.toArray(new String[0])) %>
-</liferay-ui:error>
-
-<liferay-ui:message key="this-coupon-only-applies-to-items-that-are-children-of-this-comma-delimited-list-of-categories" />
-
-<liferay-ui:message key="leave-this-blank-if-the-coupon-does-not-check-for-the-parent-categories-of-an-item" />
-
-<br /><br />
-
-<liferay-ui:input-field model="<%= ShoppingCoupon.class %>" bean="<%= coupon %>" field="limitCategories" />
-
-<br /><br />
-
-<liferay-ui:message key="this-coupon-only-applies-to-items-with-a-sku-that-corresponds-to-this-comma-delimited-list-of-item-skus" />
-
-<liferay-ui:message key="leave-this-blank-if-the-coupon-does-not-check-for-the-item-sku" />
-
-<br /><br />
-
-<liferay-ui:input-field model="<%= ShoppingCoupon.class %>" bean="<%= coupon %>" field="limitSkus" />
-
-</form>
+				<aui:input label='<%= LanguageUtil.get(pageContext, "this-coupon-only-applies-to-items-with-a-sku-that-corresponds-to-this-comma-delimited-list-of-item-skus") + StringPool.SPACE + LanguageUtil.get(pageContext, "leave-this-blank-if-the-coupon-does-not-check-for-the-item-sku") %>' name="limitSkus" />
+			</aui:fieldset>
+		</liferay-ui:panel>
+	</liferay-ui:panel-container>
+</aui:form>
 
 <aui:script>
 	function <portlet:namespace />disableInputDate(date, checked) {
@@ -296,6 +197,8 @@ String discountType = BeanParamUtil.getString(coupon, request, "discountType");
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= coupon == null ? Constants.ADD : Constants.UPDATE %>";
 		submitForm(document.<portlet:namespace />fm);
 	}
+
+	Liferay.Util.disableToggleBoxes('<portlet:namespace />autoCodeCheckbox', '<portlet:namespace />code', true);
 
 	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace /><%= (coupon == null) ? "code" : "name" %>);
