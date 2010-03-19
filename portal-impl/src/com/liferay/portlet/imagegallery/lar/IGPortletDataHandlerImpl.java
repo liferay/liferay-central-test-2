@@ -93,6 +93,8 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 
 			image.setImageType(largeImage.getType());
 
+			context.addPermissions(IGImage.class, image.getImageId());
+
 			context.addZipEntry(
 				getImageBinPath(context, image), largeImage.getTextObj());
 
@@ -171,6 +173,10 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 			}
 
 			folderPKs.put(folder.getFolderId(), existingFolder.getFolderId());
+
+			context.importPermissions(
+				IGFolder.class, folder.getFolderId(),
+				existingFolder.getFolderId());
 		}
 		catch (NoSuchFolderException nsfe) {
 			_log.error(
@@ -245,24 +251,27 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 					existingImage = IGImageUtil.findByUUID_G(
 						image.getUuid(), groupId);
 
-					IGImageLocalServiceUtil.updateImage(
+					existingImage = IGImageLocalServiceUtil.updateImage(
 						userId, existingImage.getImageId(), groupId, folderId,
 						image.getName(), image.getDescription(), imageFile,
 						image.getImageType(), serviceContext);
 				}
 				catch (NoSuchImageException nsie) {
-					IGImageLocalServiceUtil.addImage(
+					existingImage = IGImageLocalServiceUtil.addImage(
 						image.getUuid(), userId, groupId, folderId,
 						image.getName(), image.getDescription(), imageFile,
 						image.getImageType(), serviceContext);
 				}
 			}
 			else {
-				IGImageLocalServiceUtil.addImage(
+				existingImage = IGImageLocalServiceUtil.addImage(
 					null, userId, groupId, folderId, image.getName(),
 					image.getDescription(), imageFile, image.getImageType(),
 					serviceContext);
 			}
+
+			context.importPermissions(
+				IGImage.class, image.getImageId(), existingImage.getImageId());
 		}
 		catch (NoSuchFolderException nsfe) {
 			_log.error(
@@ -403,6 +412,8 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 
 				folder.setUserUuid(folder.getUserUuid());
 
+				context.addPermissions(IGFolder.class, folder.getFolderId());
+
 				context.addZipEntry(path, folder);
 			}
 		}
@@ -435,6 +446,8 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 			folderEl.addAttribute("path", path);
 
 			folder.setUserUuid(folder.getUserUuid());
+
+			context.addPermissions(IGFolder.class, folder.getFolderId());
 
 			context.addZipEntry(path, folder);
 		}

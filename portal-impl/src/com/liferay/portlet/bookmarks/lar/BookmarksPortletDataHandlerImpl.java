@@ -190,6 +190,9 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 
 				folder.setUserUuid(folder.getUserUuid());
 
+				context.addPermissions(
+					BookmarksFolder.class, folder.getFolderId());
+
 				context.addZipEntry(path, folder);
 			}
 		}
@@ -222,6 +225,8 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 
 			entryEl.addAttribute("path", path);
 
+			context.addPermissions(BookmarksEntry.class, entry.getEntryId());
+
 			if (context.getBooleanParameter(_NAMESPACE, "tags")) {
 				context.addAssetTags(BookmarksEntry.class, entry.getEntryId());
 			}
@@ -252,6 +257,8 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 			folderEl.addAttribute("path", path);
 
 			folder.setUserUuid(folder.getUserUuid());
+
+			context.addPermissions(BookmarksFolder.class, folder.getFolderId());
 
 			context.addZipEntry(path, folder);
 		}
@@ -345,23 +352,27 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 					existingEntry = BookmarksEntryUtil.findByUUID_G(
 						entry.getUuid(), groupId);
 
-					BookmarksEntryLocalServiceUtil.updateEntry(
+					existingEntry = BookmarksEntryLocalServiceUtil.updateEntry(
 						userId, existingEntry.getEntryId(), groupId, folderId,
 						entry.getName(), entry.getUrl(), entry.getComments(),
 						serviceContext);
 				}
 				catch (NoSuchEntryException nsee) {
-					BookmarksEntryLocalServiceUtil.addEntry(
+					existingEntry = BookmarksEntryLocalServiceUtil.addEntry(
 						entry.getUuid(), userId, groupId, folderId,
 						entry.getName(), entry.getUrl(), entry.getComments(),
 						serviceContext);
 				}
 			}
 			else {
-				BookmarksEntryLocalServiceUtil.addEntry(
+				existingEntry = BookmarksEntryLocalServiceUtil.addEntry(
 					null, userId, groupId, folderId, entry.getName(),
 					entry.getUrl(), entry.getComments(), serviceContext);
 			}
+
+			context.importPermissions(
+				BookmarksEntry.class, entry.getEntryId(),
+				existingEntry.getEntryId());
 		}
 		catch (NoSuchFolderException nsfe) {
 			_log.error(
@@ -438,6 +449,10 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 			}
 
 			folderPKs.put(folder.getFolderId(), existingFolder.getFolderId());
+
+			context.importPermissions(
+				BookmarksFolder.class, folder.getFolderId(),
+				existingFolder.getFolderId());
 		}
 		catch (NoSuchFolderException nsfe) {
 			_log.error(

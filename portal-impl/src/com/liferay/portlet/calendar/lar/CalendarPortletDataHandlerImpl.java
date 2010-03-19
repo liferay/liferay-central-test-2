@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.calendar.lar;
 
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -132,7 +133,7 @@ public class CalendarPortletDataHandlerImpl extends BasePortletDataHandler {
 
 	protected void exportEvent(
 			PortletDataContext context, Element root, CalEvent event)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		if (!context.isWithinDateRange(event.getModifiedDate())) {
 			return;
@@ -149,6 +150,8 @@ public class CalendarPortletDataHandlerImpl extends BasePortletDataHandler {
 		eventEl.addAttribute("path", path);
 
 		event.setUserUuid(event.getUserUuid());
+
+		context.addPermissions(CalEvent.class, event.getEventId());
 
 		context.addZipEntry(path, event);
 	}
@@ -224,7 +227,7 @@ public class CalendarPortletDataHandlerImpl extends BasePortletDataHandler {
 				event.getUuid(), context.getGroupId());
 
 			if (existingEvent == null) {
-				CalEventLocalServiceUtil.addEvent(
+				existingEvent = CalEventLocalServiceUtil.addEvent(
 					event.getUuid(), userId, event.getTitle(),
 					event.getDescription(), startDateMonth, startDateDay,
 					startDateYear, startDateHour, startDateMinute, endDateMonth,
@@ -236,7 +239,7 @@ public class CalendarPortletDataHandlerImpl extends BasePortletDataHandler {
 					event.getSecondReminder(), serviceContext);
 			}
 			else {
-				CalEventLocalServiceUtil.updateEvent(
+				existingEvent = CalEventLocalServiceUtil.updateEvent(
 					userId, existingEvent.getEventId(), event.getTitle(),
 					event.getDescription(), startDateMonth, startDateDay,
 					startDateYear, startDateHour, startDateMinute, endDateMonth,
@@ -249,7 +252,7 @@ public class CalendarPortletDataHandlerImpl extends BasePortletDataHandler {
 			}
 		}
 		else {
-			CalEventLocalServiceUtil.addEvent(
+			existingEvent = CalEventLocalServiceUtil.addEvent(
 				null, userId, event.getTitle(), event.getDescription(),
 				startDateMonth, startDateDay, startDateYear, startDateHour,
 				startDateMinute, endDateMonth, endDateDay, endDateYear,
@@ -259,6 +262,9 @@ public class CalendarPortletDataHandlerImpl extends BasePortletDataHandler {
 				event.getRemindBy(), event.getFirstReminder(),
 				event.getSecondReminder(), serviceContext);
 		}
+
+		context.importPermissions(
+			CalEvent.class, event.getEventId(), existingEvent.getEventId());
 	}
 
 	private static final String _NAMESPACE = "calendar";

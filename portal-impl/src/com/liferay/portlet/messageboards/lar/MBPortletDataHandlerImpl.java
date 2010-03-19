@@ -260,6 +260,9 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 
 				category.setUserUuid(category.getUserUuid());
 
+				context.addPermissions(
+					MBCategory.class, category.getCategoryId());
+
 				context.addZipEntry(path, category);
 			}
 		}
@@ -293,6 +296,8 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 
 			message.setUserUuid(message.getUserUuid());
 			message.setPriority(message.getPriority());
+
+			context.addPermissions(MBMessage.class, message.getMessageId());
 
 			if (context.getBooleanParameter(_NAMESPACE, "ratings")) {
 				context.addRatingsEntries(
@@ -385,6 +390,8 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 			categoryEl.addAttribute("path", path);
 
 			category.setUserUuid(category.getUserUuid());
+
+			context.addPermissions(MBCategory.class, category.getCategoryId());
 
 			context.addZipEntry(path, category);
 		}
@@ -538,6 +545,10 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 
 			categoryPKs.put(
 				category.getCategoryId(), existingCategory.getCategoryId());
+
+			context.importPermissions(
+				MBCategory.class, category.getCategoryId(),
+				existingCategory.getCategoryId());
 		}
 		catch (NoSuchCategoryException nsce) {
 			_log.error(
@@ -657,7 +668,7 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 					existingMessage = MBMessageUtil.findByUUID_G(
 						message.getUuid(), context.getGroupId());
 
-					MBMessageLocalServiceUtil.updateMessage(
+					existingMessage = MBMessageLocalServiceUtil.updateMessage(
 						userId, existingMessage.getMessageId(),
 						message.getSubject(), message.getBody(), files,
 						existingFiles, message.getPriority(),
@@ -685,6 +696,10 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 			threadPKs.put(message.getThreadId(), existingMessage.getThreadId());
 			messagePKs.put(
 				message.getMessageId(), existingMessage.getMessageId());
+
+			context.importPermissions(
+				MBMessage.class, message.getMessageId(),
+				existingMessage.getMessageId());
 
 			if (context.getBooleanParameter(_NAMESPACE, "ratings")) {
 				context.importRatingsEntries(

@@ -94,6 +94,9 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 
 			fileEntry.setUserUuid(fileEntry.getUserUuid());
 
+			context.addPermissions(
+				DLFileEntry.class, fileEntry.getFileEntryId());
+
 			if (context.getBooleanParameter(_NAMESPACE, "categories")) {
 				context.addAssetCategories(
 					DLFileEntry.class, fileEntry.getFileEntryId());
@@ -176,6 +179,8 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 				folderEl.addAttribute("path", path);
 
 				folder.setUserUuid(folder.getUserUuid());
+
+				context.addPermissions(DLFolder.class, folder.getFolderId());
 
 				context.addZipEntry(path, folder);
 			}
@@ -297,6 +302,10 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 
 			fileEntryNames.put(
 				fileEntry.getName(), existingFileEntry.getName());
+
+			context.importPermissions(
+				DLFileEntry.class, fileEntry.getFileEntryId(),
+				existingFileEntry.getFileEntryId());
 
 			if (context.getBooleanParameter(_NAMESPACE, "comments")) {
 				context.importComments(
@@ -433,6 +442,10 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			}
 
 			folderPKs.put(folder.getFolderId(), existingFolder.getFolderId());
+
+			context.importPermissions(
+				DLFolder.class, folder.getFolderId(),
+				existingFolder.getFolderId());
 		}
 		catch (NoSuchFolderException nsfe) {
 			_log.error(
@@ -649,6 +662,9 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 
 			fileShortcut.setUserUuid(fileShortcut.getUserUuid());
 
+			context.addPermissions(
+				DLFileShortcut.class, fileShortcut.getFileShortcutId());
+
 			context.addZipEntry(path, fileShortcut);
 		}
 	}
@@ -673,6 +689,8 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			folderEl.addAttribute("path", path);
 
 			folder.setUserUuid(folder.getUserUuid());
+
+			context.addPermissions(DLFolder.class, folder.getFolderId());
 
 			context.addZipEntry(path, folder);
 		}
@@ -847,29 +865,38 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			serviceContext.setModifiedDate(fileShortcut.getModifiedDate());
 			serviceContext.setScopeGroupId(context.getGroupId());
 
+			DLFileShortcut existingFileShortcut = null;
+
 			if (context.getDataStrategy().equals(
 					PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
 
 				try {
-					DLFileShortcut existingFileShortcut =
-						DLFileShortcutUtil.findByUUID_G(
-							fileShortcut.getUuid(), context.getGroupId());
+					existingFileShortcut = DLFileShortcutUtil.findByUUID_G(
+						fileShortcut.getUuid(), context.getGroupId());
 
-					DLFileShortcutLocalServiceUtil.updateFileShortcut(
-						userId, existingFileShortcut.getFileShortcutId(),
-						folderId, toFolderId, toName, serviceContext);
+					existingFileShortcut =
+						DLFileShortcutLocalServiceUtil.updateFileShortcut(
+							userId, existingFileShortcut.getFileShortcutId(),
+							folderId, toFolderId, toName, serviceContext);
 				}
 				catch (NoSuchFileShortcutException nsfse) {
-					DLFileShortcutLocalServiceUtil.addFileShortcut(
-						fileShortcut.getUuid(), userId, groupId, folderId,
-						toFolderId, toName, serviceContext);
+					existingFileShortcut =
+						DLFileShortcutLocalServiceUtil.addFileShortcut(
+							fileShortcut.getUuid(), userId, groupId, folderId,
+							toFolderId, toName, serviceContext);
 				}
 			}
 			else {
-				DLFileShortcutLocalServiceUtil.addFileShortcut(
-					null, userId, groupId, folderId, toFolderId, toName,
-					serviceContext);
+				existingFileShortcut =
+					DLFileShortcutLocalServiceUtil.addFileShortcut(
+						null, userId, groupId, folderId, toFolderId, toName,
+						serviceContext);
 			}
+
+			context.importPermissions(
+				DLFileShortcut.class, fileShortcut.getPrimaryKey(),
+				existingFileShortcut.getPrimaryKey());
+
 		}
 		catch (NoSuchFolderException nsfe) {
 			_log.error(

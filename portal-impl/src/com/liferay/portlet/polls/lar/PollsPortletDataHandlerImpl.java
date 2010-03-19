@@ -64,7 +64,7 @@ public class PollsPortletDataHandlerImpl extends BasePortletDataHandler {
 	public static void exportQuestion(
 			PortletDataContext context, Element questionsEl, Element choicesEl,
 			Element votesEl, PollsQuestion question)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		if (!context.isWithinDateRange(question.getModifiedDate())) {
 			return;
@@ -97,6 +97,8 @@ public class PollsPortletDataHandlerImpl extends BasePortletDataHandler {
 				exportVote(context, votesEl, vote);
 			}
 		}
+
+		context.addPermissions(PollsQuestion.class, question.getQuestionId());
 
 		context.addZipEntry(path, question);
 	}
@@ -138,6 +140,10 @@ public class PollsPortletDataHandlerImpl extends BasePortletDataHandler {
 			}
 
 			choicePKs.put(choice.getChoiceId(), existingChoice.getChoiceId());
+
+			context.importPermissions(
+				PollsChoice.class, choice.getChoiceId(),
+				existingChoice.getChoiceId());
 		}
 		catch (NoSuchQuestionException nsqe) {
 			_log.error(
@@ -218,6 +224,10 @@ public class PollsPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		questionPKs.put(
 			question.getQuestionId(), existingQuestion.getQuestionId());
+
+		context.importPermissions(
+			PollsQuestion.class, question.getQuestionId(),
+			existingQuestion.getQuestionId());
 	}
 
 	public static void importVote(

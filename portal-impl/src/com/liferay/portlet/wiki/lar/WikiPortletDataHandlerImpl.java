@@ -78,6 +78,8 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 
 				node.setUserUuid(node.getUserUuid());
 
+				context.addPermissions(WikiNode.class, node.getNodeId());
+
 				context.addZipEntry(path, node);
 			}
 		}
@@ -152,6 +154,9 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 		}
 
 		nodePKs.put(node.getNodeId(), existingNode.getNodeId());
+
+		context.importPermissions(
+			WikiNode.class, node.getNodeId(), existingNode.getNodeId());
 	}
 
 	public static void importPage(
@@ -255,6 +260,10 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 						nodeId, page.getTitle(), files);
 				}
 			}
+
+			context.importPermissions(
+				WikiPage.class, page.getResourcePrimKey(),
+				existingPage.getResourcePrimKey());
 
 			if (context.getBooleanParameter(_NAMESPACE, "comments") &&
 				page.isHead()) {
@@ -405,6 +414,8 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		node.setUserUuid(node.getUserUuid());
 
+		context.addPermissions(WikiNode.class, node.getNodeId());
+
 		context.addZipEntry(path, node);
 	}
 
@@ -425,6 +436,8 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 			pageEl.addAttribute("path", path);
 
 			page.setUserUuid(page.getUserUuid());
+
+			context.addPermissions(WikiPage.class, page.getResourcePrimKey());
 
 			if (context.getBooleanParameter(_NAMESPACE, "categories")) {
 				context.addAssetCategories(

@@ -181,6 +181,9 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 			}
 		}
 
+		context.addPermissions(
+			JournalArticle.class, article.getResourcePrimKey());
+
 		if (context.getBooleanParameter(_NAMESPACE, "categories")) {
 			context.addAssetCategories(
 				JournalArticle.class, article.getResourcePrimKey());
@@ -221,7 +224,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 	public static void exportFeed(
 			PortletDataContext context, Element feedsEl, JournalFeed feed)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		if (!context.isWithinDateRange(feed.getModifiedDate())) {
 			return;
@@ -238,6 +241,8 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		feedEl.addAttribute("path", path);
 
 		feed.setUserUuid(feed.getUserUuid());
+
+		context.addPermissions(JournalFeed.class, feed.getId());
 
 		context.addZipEntry(path, feed);
 	}
@@ -517,7 +522,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 	public static void exportStructure(
 			PortletDataContext context, Element structuresEl,
 			JournalStructure structure)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		if (!context.isWithinDateRange(structure.getModifiedDate())) {
 			return;
@@ -534,6 +539,8 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		structureEl.addAttribute("path", path);
 
 		structure.setUserUuid(structure.getUserUuid());
+
+		context.addPermissions(JournalStructure.class, structure.getId());
 
 		context.addZipEntry(path, structure);
 	}
@@ -594,6 +601,8 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		}
 
 		template.setUserUuid(template.getUserUuid());
+
+		context.addPermissions(JournalTemplate.class, template.getId());
 
 		context.addZipEntry(path, template);
 	}
@@ -927,6 +936,10 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 				articleURL, serviceContext);
 		}
 
+		context.importPermissions(
+			JournalArticle.class, article.getResourcePrimKey(),
+			existingArticle.getResourcePrimKey());
+
 		if (context.getBooleanParameter(_NAMESPACE, "comments")) {
 			context.importComments(
 				JournalArticle.class, article.getResourcePrimKey(),
@@ -1049,6 +1062,9 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		feedIds.put(feedId, existingFeed.getFeedId());
 
+		context.importPermissions(
+			JournalFeed.class, feed.getId(), existingFeed.getId());
+
 		if (!feedId.equals(existingFeed.getStructureId())) {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
@@ -1148,6 +1164,10 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		}
 
 		structureIds.put(structureId, existingStructure.getStructureId());
+
+		context.importPermissions(
+			JournalStructure.class, structure.getId(),
+			existingStructure.getId());
 
 		if (!structureId.equals(existingStructure.getStructureId())) {
 			if (_log.isWarnEnabled()) {
@@ -1278,6 +1298,10 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		}
 
 		templateIds.put(templateId, existingTemplate.getTemplateId());
+
+		context.importPermissions(
+			JournalTemplate.class, template.getId(),
+			existingTemplate.getId());
 
 		if (!templateId.equals(existingTemplate.getTemplateId())) {
 			if (_log.isWarnEnabled()) {
