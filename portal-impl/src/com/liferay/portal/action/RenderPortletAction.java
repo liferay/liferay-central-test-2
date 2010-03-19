@@ -85,8 +85,8 @@ public class RenderPortletAction extends Action {
 			portletId, user, layout, windowState, request);
 
 		PortalUtil.renderPortlet(
-			servletContext, request, response, portlet, queryString,
-			columnId, new Integer(columnPos), new Integer(columnCount), true);
+			servletContext, request, response, portlet, queryString, columnId,
+			new Integer(columnPos), new Integer(columnCount), true);
 
 		return null;
 	}

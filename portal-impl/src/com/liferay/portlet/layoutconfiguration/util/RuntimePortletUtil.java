@@ -64,8 +64,8 @@ public class RuntimePortletUtil {
 		throws Exception {
 
 		return processPortlet(
-			servletContext, request, response, renderRequest,
-			renderResponse, portletId, queryString, null, null, null);
+			servletContext, request, response, renderRequest, renderResponse,
+			portletId, queryString, null, null, null);
 	}
 
 	public static String processPortlet(
@@ -76,9 +76,9 @@ public class RuntimePortletUtil {
 		throws Exception {
 
 		return processPortlet(
-			servletContext, request, response, renderRequest,
-			renderResponse, null, portletId, queryString, columnId, columnPos,
-			columnCount, null);
+			servletContext, request, response, renderRequest, renderResponse,
+			null, portletId, queryString, columnId, columnPos, columnCount,
+			null);
 	}
 
 	public static String processPortlet(

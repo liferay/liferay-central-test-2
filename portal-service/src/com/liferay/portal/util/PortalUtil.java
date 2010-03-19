@@ -1022,8 +1022,8 @@ public class PortalUtil {
 		throws IOException, ServletException {
 
 		return getPortal().renderPortlet(
-			servletContext, request, response, portlet, queryString,
-			columnId, columnPos, columnCount, writeOutput);
+			servletContext, request, response, portlet, queryString, columnId,
+			columnPos, columnCount, writeOutput);
 	}
 
 	public static String renderPortlet(
@@ -1034,8 +1034,8 @@ public class PortalUtil {
 		throws IOException, ServletException {
 
 		return getPortal().renderPortlet(
-			servletContext, request, response, portlet, queryString,
-			columnId, columnPos, columnCount, path, writeOutput);
+			servletContext, request, response, portlet, queryString, columnId,
+			columnPos, columnCount, path, writeOutput);
 	}
 
 	/**

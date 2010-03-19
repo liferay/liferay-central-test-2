@@ -3273,8 +3273,8 @@ public class PortalImpl implements Portal {
 		throws IOException, ServletException {
 
 		return renderPortlet(
-			servletContext, request, response, portlet, queryString, null,
-			null, null, writeOutput);
+			servletContext, request, response, portlet, queryString, null, null,
+			null, writeOutput);
 	}
 
 	public String renderPortlet(
@@ -3321,11 +3321,13 @@ public class PortalImpl implements Portal {
 			servletContext.getRequestDispatcher(path);
 
 		if (writeOutput) {
+
 			// LEP-766
 
 			response.setContentType(ContentTypes.TEXT_HTML_UTF8);
 
 			requestDispatcher.include(request, response);
+
 			return StringPool.BLANK;
 		}
 		else {

@@ -86,12 +86,12 @@ public class TemplateProcessor {
 			_servletContext, _request, _response, _portletId);
 
 		return logic.processContent(attributes);
-
 	}
 
 	public String processPortlet(String portletId) throws Exception {
 		RuntimeLogic logic = new PortletLogic(
 			_servletContext, _request, _response, portletId);
+
 		return logic.processContent(new HashMap<String, String>());
 	}
 
