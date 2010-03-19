@@ -15,7 +15,6 @@
 package com.liferay.portlet.communities.action;
 
 import com.liferay.portal.events.EventsProcessorUtil;
-import com.liferay.portal.kernel.configuration.Filter;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.util.Constants;
@@ -38,8 +37,8 @@ import com.liferay.portal.service.permission.GroupPermissionUtil;
 import com.liferay.portal.service.permission.LayoutPermissionUtil;
 import com.liferay.portal.struts.JSONAction;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.LayoutSetting;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.communities.util.CommunitiesUtil;
 
@@ -181,10 +180,10 @@ public class UpdatePageAction extends JSONAction {
 				description, type, hidden, friendlyURL, serviceContext);
 		}
 
-		String[] eventClasses = StringUtil.split(
-			PropsUtil.get(
-				PropsKeys.LAYOUT_CONFIGURATION_ACTION_UPDATE,
-				new Filter(layout.getType())));
+		String[] eventClasses =
+			StringUtil.split(
+				LayoutSetting.getLayoutSetting(layout).
+					getConfigurationActionUpdate());
 
 		EventsProcessorUtil.process(
 			PropsKeys.LAYOUT_CONFIGURATION_ACTION_UPDATE, eventClasses, request,
