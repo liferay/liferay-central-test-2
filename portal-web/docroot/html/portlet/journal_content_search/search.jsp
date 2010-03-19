@@ -26,106 +26,117 @@
 		String keywords = ParamUtil.getString(request, "keywords", defaultKeywords);
 		%>
 
-		<form action="<portlet:renderURL><portlet:param name="struts_action" value="/journal_content_search/search" /></portlet:renderURL>" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
+		<portlet:actionURL var="journalContentSearchURL">
+			<portlet:param name="struts_action" value="/journal_content_search/search" />
+		</portlet:actionURL>
 
-		<%
-		PortletURL portletURL = renderResponse.createRenderURL();
+		<aui:form action="<%= journalContentSearchURL %>" method="post" name="fm">
 
-		portletURL.setParameter("struts_action", "/journal_content_search/search");
-		portletURL.setParameter("keywords", keywords);
+			<%
+			PortletURL portletURL = renderResponse.createRenderURL();
 
-		List<String> headerNames = new ArrayList<String>();
+			portletURL.setParameter("struts_action", "/journal_content_search/search");
+			portletURL.setParameter("keywords", keywords);
 
-		headerNames.add("#");
-		headerNames.add("name");
-		headerNames.add("content");
-		headerNames.add("score");
+			List<String> headerNames = new ArrayList<String>();
 
-		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.format(pageContext, "no-pages-were-found-that-matched-the-keywords-x", "<strong>" + HtmlUtil.escape(keywords) + "</strong>"));
+			headerNames.add("#");
+			headerNames.add("name");
+			headerNames.add("content");
+			headerNames.add("score");
 
-		try {
-			Indexer indexer = IndexerRegistryUtil.getIndexer(JournalArticle.class);
+			SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.format(pageContext, "no-pages-were-found-that-matched-the-keywords-x", "<strong>" + HtmlUtil.escape(keywords) + "</strong>"));
 
-			SearchContext searchContext = SearchContextFactory.getInstance(request);
+			try {
+				Indexer indexer = IndexerRegistryUtil.getIndexer(JournalArticle.class);
 
-			searchContext.setAttribute("type", type);
-			searchContext.setGroupId(0);
-			searchContext.setKeywords(keywords);
+				SearchContext searchContext = SearchContextFactory.getInstance(request);
 
-			Hits results = indexer.search(searchContext);
+				searchContext.setAttribute("type", type);
+				searchContext.setGroupId(0);
+				searchContext.setKeywords(keywords);
 
-			String[] queryTerms = results.getQueryTerms();
+				Hits results = indexer.search(searchContext);
 
-			ContentHits contentHits = new ContentHits();
+				String[] queryTerms = results.getQueryTerms();
 
-			contentHits.setShowListed(showListed);
+				ContentHits contentHits = new ContentHits();
 
-			contentHits.recordHits(results, layout.getGroupId(), layout.isPrivateLayout(), searchContainer.getStart(), searchContainer.getEnd());
+				contentHits.setShowListed(showListed);
 
-			int total = results.getLength();
+				contentHits.recordHits(results, layout.getGroupId(), layout.isPrivateLayout(), searchContainer.getStart(), searchContainer.getEnd());
 
-			searchContainer.setTotal(total);
+				int total = results.getLength();
 
-			List resultRows = searchContainer.getResultRows();
+				searchContainer.setTotal(total);
 
-			for (int i = 0; i < results.getDocs().length; i++) {
-				Document doc = results.doc(i);
+				List resultRows = searchContainer.getResultRows();
 
-				String snippet = results.snippet(i);
+				for (int i = 0; i < results.getDocs().length; i++) {
+					Document doc = results.doc(i);
 
-				ResultRow row = new ResultRow(new Object[] {queryTerms, doc, snippet}, i, i);
+					String snippet = results.snippet(i);
 
-				// Position
+					ResultRow row = new ResultRow(new Object[] {queryTerms, doc, snippet}, i, i);
 
-				row.addText(searchContainer.getStart() + i + 1 + StringPool.PERIOD);
+					// Position
 
-				// Title
+					row.addText(searchContainer.getStart() + i + 1 + StringPool.PERIOD);
 
-				String title = doc.get(Field.TITLE);
+					// Title
 
-				title = StringUtil.highlight(title, queryTerms);
+					String title = doc.get(Field.TITLE);
 
-				row.addText(title);
+					title = StringUtil.highlight(title, queryTerms);
 
-				// Content
+					row.addText(title);
 
-				row.addJSP("/html/portlet/journal_content_search/article_content.jsp");
+					// Content
 
-				// Score
+					row.addJSP("/html/portlet/journal_content_search/article_content.jsp");
 
-				row.addScore(results.score(i));
+					// Score
 
-				// Add result row
+					row.addScore(results.score(i));
 
-				resultRows.add(row);
+					// Add result row
+
+					resultRows.add(row);
+				}
+			%>
+
+				<table border="0" cellpadding="0" cellspacing="0" width="100%">
+				<tr>
+					<td>
+
+						<%
+						String taglibClearDefaultKeywords = "if (this.value == '" + unicodeDefaultKeywords + "') { this.value = ''; }";
+
+						String taglibRestoreDefaultKeywords = "if (this.value == '') { this.value = '" + unicodeDefaultKeywords + "'; }";
+						%>
+
+						<aui:input name="keywords" onBlur="<%= taglibRestoreDefaultKeywords %>" onFocus="<%= taglibClearDefaultKeywords %>" size="30" type="text" value="<%= keywords %>" />
+
+						<aui:input align="absmiddle" border="0" label="" name="search" src='<%= themeDisplay.getPathThemeImages()+ "/common/search.png" %>' type="image" />
+					</td>
+					<td align="right">
+						<liferay-ui:search-speed searchContainer="<%= searchContainer %>" hits="<%= results %>" />
+					</td>
+				</tr>
+				</table>
+
+				<br />
+
+				<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+
+			<%
 			}
-		%>
+			catch (Exception e) {
+				_log.error(e.getMessage());
+			}
+			%>
 
-			<table border="0" cellpadding="0" cellspacing="0" width="100%">
-			<tr>
-				<td>
-					<input name="<portlet:namespace />keywords" size="30" type="text" value="<%= HtmlUtil.escape(keywords) %>" onBlur="if (this.value == '') { this.value = '<%= unicodeDefaultKeywords %>'; }" onFocus="if (this.value == '<%= unicodeDefaultKeywords %>') { this.value = ''; }" />
-
-					<input align="absmiddle" border="0" src="<%= themeDisplay.getPathThemeImages() %>/common/search.png" title="<liferay-ui:message key="search" />" type="image" />
-				</td>
-				<td align="right">
-					<liferay-ui:search-speed searchContainer="<%= searchContainer %>" hits="<%= results %>" />
-				</td>
-			</tr>
-			</table>
-
-			<br />
-
-			<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-
-		<%
-		}
-		catch (Exception e) {
-			_log.error(e.getMessage());
-		}
-		%>
-
-		</form>
+		</aui:form>
 
 		<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 			<aui:script>
