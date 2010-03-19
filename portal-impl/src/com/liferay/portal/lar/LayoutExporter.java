@@ -440,7 +440,7 @@ public class LayoutExporter {
 			}
 		}
 
-		// Export Portlets
+		// Export portlets
 
 		long previousScopeGroupId = context.getScopeGroupId();
 
@@ -485,7 +485,7 @@ public class LayoutExporter {
 
 		_portletExporter.exportComments(context, root);
 
-		// Portlet Data Permissions
+		// Portlet data permissions
 
 		_portletExporter.exportPortletDataPermissions(context);
 

@@ -231,7 +231,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 		throws PortalException, SystemException {
 
 		if (((PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM != 5) &&
-				(PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM != 6)) ||
+			 (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM != 6)) ||
 			(!MapUtil.getBoolean(
 				_parameterMap, PortletDataHandlerKeys.PERMISSIONS))) {
 
@@ -640,7 +640,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 		throws PortalException, SystemException {
 
 		if (((PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM != 5) &&
-				(PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM != 6)) ||
+			 (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM != 6)) ||
 			(!MapUtil.getBoolean(
 				_parameterMap, PortletDataHandlerKeys.PERMISSIONS))) {
 

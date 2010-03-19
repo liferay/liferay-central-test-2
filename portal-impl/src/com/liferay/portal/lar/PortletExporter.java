@@ -244,9 +244,11 @@ public class PortletExporter {
 
 		exportComments(context, root);
 
-		// Portlet Data Permissions
+		// Portlet data permissions
 
-		exportPortletDataPermissions(context);
+		if (exportPermissions) {
+			exportPortletDataPermissions(context);
+		}
 
 		// Ratings
 
