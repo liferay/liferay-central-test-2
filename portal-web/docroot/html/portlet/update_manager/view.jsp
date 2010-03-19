@@ -51,14 +51,13 @@ List updatablePackageIds = new ArrayList();
 					<portlet:param name="struts_action" value="/update_manager/install_plugin" />
 				</portlet:actionURL>
 
+				<portlet:renderURL var="redirectURL">
+					<portlet:param name="struts_action" value="/update_manager/view" />
+				</portlet:renderURL>
+
 				<aui:form action="<%= installPluginURL %>" method="post" name="fm">
 					<aui:input name="<%= Constants.CMD %>" type="hidden" />
-
-					<portlet:renderURL var="viewURL">
-						<portlet:param name="struts_action" value="/update_manager/view" />
-					</portlet:renderURL>
-
-					<aui:input name="redirect" type="hidden" value="<%= viewURL %>" />
+					<aui:input name="redirect" type="hidden" value="<%= redirectURL %>" />
 
 					<%
 					try {
