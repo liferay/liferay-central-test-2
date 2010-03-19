@@ -35,9 +35,9 @@ public class StringPool {
 
 	public static final String BLANK = "";
 
-	public static final String CDATA_OPEN = "<![CDATA[";
-
 	public static final String CDATA_CLOSE = "]]>";
+
+	public static final String CDATA_OPEN = "<![CDATA[";
 
 	public static final String CLOSE_BRACKET = "]";
 
@@ -54,6 +54,8 @@ public class StringPool {
 	public static final String DASH = "-";
 
 	public static final String DOLLAR = "$";
+
+	public static final String DOLLAR_AND_OPEN_CURLY_BRACE = "${";
 
 	public static final String DOUBLE_APOSTROPHE = "''";
 
@@ -73,15 +75,15 @@ public class StringPool {
 
 	public static final String EQUAL = "=";
 
-	public static final String GREATER_THAN = ">";
-
-	public static final String GREATER_THAN_OR_EQUAL = ">=";
-
 	public static final String FALSE = "false";
 
 	public static final String FORWARD_SLASH = "/";
 
 	public static final String FOUR_SPACES = "    ";
+
+	public static final String GREATER_THAN = ">";
+
+	public static final String GREATER_THAN_OR_EQUAL = ">=";
 
 	public static final String IS_NOT_NULL = "IS NOT NULL";
 

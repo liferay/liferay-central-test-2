@@ -419,6 +419,10 @@ public class PortalUtil {
 		return getPortal().getLayoutEditPage(layout);
 	}
 
+	public static String getLayoutEditPage(String type) {
+		return getPortal().getLayoutEditPage(type);
+	}
+
 	public static String getLayoutFriendlyURL(
 			Layout layout, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
@@ -492,6 +496,10 @@ public class PortalUtil {
 
 	public static String getLayoutViewPage(Layout layout) {
 		return getPortal().getLayoutViewPage(layout);
+	}
+
+	public static String getLayoutViewPage(String type) {
+		return getPortal().getLayoutViewPage(type);
 	}
 
 	public static Locale getLocale(HttpServletRequest request) {
@@ -951,12 +959,20 @@ public class PortalUtil {
 		return getPortal().getWidgetURL(portlet, themeDisplay);
 	}
 
+	public static boolean isLayoutFirstPageable(Layout layout) {
+		return getPortal().isLayoutFirstPageable(layout);
+	}
+
 	public static boolean isLayoutFirstPageable(String type) {
 		return getPortal().isLayoutFirstPageable(type);
 	}
 
 	public static boolean isLayoutFriendliable(Layout layout) {
 		return getPortal().isLayoutFriendliable(layout);
+	}
+
+	public static boolean isLayoutFriendliable(String type) {
+		return getPortal().isLayoutFriendliable(type);
 	}
 
 	public static boolean isLayoutParentable(Layout layout) {

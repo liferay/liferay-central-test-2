@@ -258,6 +258,8 @@ public interface Portal {
 
 	public String getLayoutEditPage(Layout layout);
 
+	public String getLayoutEditPage(String type);
+
 	public String getLayoutFriendlyURL(
 			Layout layout, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException;
@@ -296,6 +298,8 @@ public interface Portal {
 		throws PortalException, SystemException;
 
 	public String getLayoutViewPage(Layout layout);
+
+	public String getLayoutViewPage(String type);
 
 	public Locale getLocale(HttpServletRequest request);
 
@@ -503,9 +507,13 @@ public interface Portal {
 	public String getWidgetURL(Portlet portlet, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException;
 
+	public boolean isLayoutFirstPageable(Layout layout);
+
 	public boolean isLayoutFirstPageable(String type);
 
 	public boolean isLayoutFriendliable(Layout layout);
+
+	public boolean isLayoutFriendliable(String type);
 
 	public boolean isLayoutParentable(Layout layout);
 

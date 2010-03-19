@@ -15,10 +15,8 @@
 package com.liferay.portlet.communities.util;
 
 import com.liferay.portal.events.EventsProcessorUtil;
-import com.liferay.portal.kernel.configuration.Filter;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
-import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.lar.PortletDataHandlerKeys;
 import com.liferay.portal.lar.UserIdStrategy;
 import com.liferay.portal.model.Group;
@@ -34,8 +32,8 @@ import com.liferay.portal.service.LayoutSetPrototypeLocalServiceUtil;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
 import com.liferay.portal.service.permission.LayoutPermissionUtil;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.LayoutSettings;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
 
 import java.io.File;
@@ -161,14 +159,12 @@ public class CommunitiesUtil {
 				permissionChecker, groupId, privateLayout, layoutId,
 				ActionKeys.DELETE)) {
 
-			String[] eventClasses = StringUtil.split(
-				PropsUtil.get(
-					PropsKeys.LAYOUT_CONFIGURATION_ACTION_DELETE,
-					new Filter(layout.getType())));
+			LayoutSettings layoutSettings = LayoutSettings.getInstance(layout);
 
 			EventsProcessorUtil.process(
-				PropsKeys.LAYOUT_CONFIGURATION_ACTION_DELETE, eventClasses,
-				request, response);
+				PropsKeys.LAYOUT_CONFIGURATION_ACTION_DELETE,
+				layoutSettings.getConfigurationActionDelete(), request,
+				response);
 		}
 
 		LayoutServiceUtil.deleteLayout(groupId, privateLayout, layoutId);

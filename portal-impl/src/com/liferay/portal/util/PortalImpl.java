@@ -18,7 +18,6 @@ import com.liferay.portal.NoSuchCompanyException;
 import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.kernel.bean.BeanPropertiesUtil;
-import com.liferay.portal.kernel.configuration.Filter;
 import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -1343,10 +1342,9 @@ public class PortalImpl implements Portal {
 			variables.put(key, value);
 		}
 
-		String href = PropsUtil.get(
-			PropsKeys.LAYOUT_URL, new Filter(layout.getType(), variables));
+		LayoutSettings layoutSettings = LayoutSettings.getInstance(layout);
 
-		return href;
+		return layoutSettings.getURL(variables);
 	}
 
 	public String getLayoutActualURL(
@@ -1411,8 +1409,16 @@ public class PortalImpl implements Portal {
 	}
 
 	public String getLayoutEditPage(Layout layout) {
-		return PropsUtil.get(
-			PropsKeys.LAYOUT_EDIT_PAGE, new Filter(layout.getType()));
+		LayoutSettings layoutSettings = LayoutSettings.getInstance(
+			layout.getType());
+
+		return layoutSettings.getEditPage();
+	}
+
+	public String getLayoutEditPage(String type) {
+		LayoutSettings layoutSettings = LayoutSettings.getInstance(type);
+
+		return layoutSettings.getEditPage();
 	}
 
 	public String getLayoutFriendlyURL(
@@ -1796,8 +1802,16 @@ public class PortalImpl implements Portal {
 	}
 
 	public String getLayoutViewPage(Layout layout) {
-		return PropsUtil.get(
-			PropsKeys.LAYOUT_VIEW_PAGE, new Filter(layout.getType()));
+		LayoutSettings layoutSettings = LayoutSettings.getInstance(
+			layout.getType());
+
+		return layoutSettings.getViewPage();
+	}
+
+	public String getLayoutViewPage(String type) {
+		LayoutSettings layoutSettings = LayoutSettings.getInstance(type);
+
+		return layoutSettings.getViewPage();
 	}
 
 	public Locale getLocale(HttpServletRequest request) {
@@ -3132,18 +3146,28 @@ public class PortalImpl implements Portal {
 			portlet, PropsValues.WIDGET_SERVLET_MAPPING, themeDisplay);
 	}
 
+	public boolean isLayoutFirstPageable(Layout layout) {
+		LayoutSettings layoutSettings = LayoutSettings.getInstance(layout);
+
+		return layoutSettings.isFirstPageable();
+	}
+
 	public boolean isLayoutFirstPageable(String type) {
-		return GetterUtil.getBoolean(
-			PropsUtil.get(PropsKeys.LAYOUT_FIRST_PAGEABLE, new Filter(type)),
-			false);
+		LayoutSettings layoutSettings = LayoutSettings.getInstance(type);
+
+		return layoutSettings.isFirstPageable();
 	}
 
 	public boolean isLayoutFriendliable(Layout layout) {
-		return GetterUtil.getBoolean(
-			PropsUtil.get(
-				PropsKeys.LAYOUT_URL_FRIENDLIABLE,
-				new Filter(layout.getType())),
-			true);
+		LayoutSettings layoutSettings = LayoutSettings.getInstance(layout);
+
+		return layoutSettings.isURLFriendliable();
+	}
+
+	public boolean isLayoutFriendliable(String type) {
+		LayoutSettings layoutSettings = LayoutSettings.getInstance(type);
+
+		return layoutSettings.isURLFriendliable();
 	}
 
 	public boolean isLayoutParentable(Layout layout) {
@@ -3151,8 +3175,9 @@ public class PortalImpl implements Portal {
 	}
 
 	public boolean isLayoutParentable(String type) {
-		return GetterUtil.getBoolean(
-			PropsUtil.get(PropsKeys.LAYOUT_PARENTABLE, new Filter(type)), true);
+		LayoutSettings layoutSettings = LayoutSettings.getInstance(type);
+
+		return layoutSettings.isParentable();
 	}
 
 	public boolean isLayoutSitemapable(Layout layout) {
@@ -3160,8 +3185,9 @@ public class PortalImpl implements Portal {
 			return false;
 		}
 
-		return GetterUtil.getBoolean(PropsUtil.get(
-			PropsKeys.LAYOUT_SITEMAPABLE, new Filter(layout.getType())), true);
+		LayoutSettings layoutSettings = LayoutSettings.getInstance(layout);
+
+		return layoutSettings.isSitemapable();
 	}
 
 	public boolean isMethodGet(PortletRequest portletRequest) {
