@@ -28,6 +28,8 @@ public interface WorkflowLog {
 
 	public final int TASK_ASSIGN = 1;
 
+	public final int TASK_UPDATE = 2;
+
 	public final int TRANSITION = 0;
 
 	public String getComment();

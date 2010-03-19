@@ -15,7 +15,9 @@
 package com.liferay.portlet.workflowtasks.action;
 
 import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.kernel.workflow.WorkflowException;
@@ -23,6 +25,8 @@ import com.liferay.portal.kernel.workflow.WorkflowTaskManagerUtil;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
+
+import java.util.Calendar;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -53,7 +57,9 @@ public class EditWorkflowTaskAction extends PortletAction {
 			if (cmd.equals(Constants.ASSIGN)) {
 				assignTask(actionRequest);
 			}
-			else if (cmd.equals(Constants.SAVE)) {
+			else if (cmd.equals(Constants.SAVE) ||
+					 cmd.equals(Constants.UPDATE)) {
+
 				updateTask(actionRequest);
 			}
 
@@ -116,15 +122,52 @@ public class EditWorkflowTaskAction extends PortletAction {
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
+
 		long workflowTaskId = ParamUtil.getLong(
 			actionRequest, "workflowTaskId");
 		String transitionName = ParamUtil.getString(
 			actionRequest, "transitionName");
 		String comment = ParamUtil.getString(actionRequest, "comment");
 
-		WorkflowTaskManagerUtil.completeWorkflowTask(
-			themeDisplay.getCompanyId(), themeDisplay.getUserId(),
-			workflowTaskId, transitionName, comment, null);
+		if (cmd.equals(Constants.UPDATE)) {
+			int dueDateMonth = ParamUtil.getInteger(
+				actionRequest, "dueDateMonth");
+			int dueDateDay = ParamUtil.getInteger(
+				actionRequest, "dueDateDay");
+			int dueDateYear = ParamUtil.getInteger(
+				actionRequest, "dueDateYear");
+			int dueDateHour = ParamUtil.getInteger(
+				actionRequest, "dueDateHour");
+			int dueDateMinute = ParamUtil.getInteger(
+				actionRequest, "dueDateMinute");
+			int dueDateAmPm = ParamUtil.getInteger(
+				actionRequest, "dueDateAmPm");
+
+			if (dueDateAmPm == Calendar.PM) {
+				dueDateHour += 12;
+			}
+
+			Calendar dueDate = CalendarFactoryUtil.getCalendar(
+				LocaleUtil.getDefault());
+
+			dueDate.set(Calendar.MONTH, dueDateMonth);
+			dueDate.set(Calendar.DATE, dueDateDay);
+			dueDate.set(Calendar.YEAR, dueDateYear);
+			dueDate.set(Calendar.HOUR_OF_DAY, dueDateHour);
+			dueDate.set(Calendar.MINUTE, dueDateMinute);
+			dueDate.set(Calendar.SECOND, 0);
+			dueDate.set(Calendar.MILLISECOND, 0);
+
+			WorkflowTaskManagerUtil.updateDueDate(
+				themeDisplay.getCompanyId(), themeDisplay.getUserId(),
+				workflowTaskId, comment, dueDate.getTime());
+		}
+		else {
+			WorkflowTaskManagerUtil.completeWorkflowTask(
+				themeDisplay.getCompanyId(), themeDisplay.getUserId(),
+				workflowTaskId, transitionName, comment, null);
+		}
 	}
 
 }
