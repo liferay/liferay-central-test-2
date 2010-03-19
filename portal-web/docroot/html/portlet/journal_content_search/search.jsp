@@ -26,11 +26,11 @@
 		String keywords = ParamUtil.getString(request, "keywords", defaultKeywords);
 		%>
 
-		<portlet:actionURL var="journalContentSearchURL">
+		<portlet:actionURL var="searchURL">
 			<portlet:param name="struts_action" value="/journal_content_search/search" />
 		</portlet:actionURL>
 
-		<aui:form action="<%= journalContentSearchURL %>" method="post" name="fm">
+		<aui:form action="<%= searchURL %>" method="post" name="fm">
 
 			<%
 			PortletURL portletURL = renderResponse.createRenderURL();
@@ -110,12 +110,12 @@
 					<td>
 
 						<%
-						String taglibClearDefaultKeywords = "if (this.value == '" + unicodeDefaultKeywords + "') { this.value = ''; }";
+						String taglibFocus = "if (this.value == '" + unicodeDefaultKeywords + "') { this.value = ''; }";
 
-						String taglibRestoreDefaultKeywords = "if (this.value == '') { this.value = '" + unicodeDefaultKeywords + "'; }";
+						String taglibOnBlur = "if (this.value == '') { this.value = '" + unicodeDefaultKeywords + "'; }";
 						%>
 
-						<aui:input name="keywords" onBlur="<%= taglibRestoreDefaultKeywords %>" onFocus="<%= taglibClearDefaultKeywords %>" size="30" type="text" value="<%= keywords %>" />
+						<aui:input name="keywords" onBlur="<%= taglibOnBlur %>" onFocus="<%= taglibFocus %>" size="30" type="text" value="<%= keywords %>" />
 
 						<aui:input align="absmiddle" border="0" label="" name="search" src='<%= themeDisplay.getPathThemeImages()+ "/common/search.png" %>' type="image" />
 					</td>
