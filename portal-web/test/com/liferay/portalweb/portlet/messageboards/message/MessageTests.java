@@ -44,6 +44,7 @@ import com.liferay.portalweb.portlet.messageboards.message.splitthreadcategoryme
 import com.liferay.portalweb.portlet.messageboards.message.splitthreadcategorymessagereplymultiple.SplitThreadCategoryMessageReplyMultipleTests;
 import com.liferay.portalweb.portlet.messageboards.message.unmarkcategorymessagequestionreply.UnmarkCategoryMessageQuestionReplyTests;
 import com.liferay.portalweb.portlet.messageboards.message.viewcategorymessagemyposts.ViewCategoryMessageMyPostsTests;
+import com.liferay.portalweb.portlet.messageboards.message.viewcategorymessagepostcount.ViewCategoryMessagePostCountTests;
 import com.liferay.portalweb.portlet.messageboards.message.viewcategorymessagerecentposts.ViewCategoryMessageRecentPostsTests;
 
 import junit.framework.Test;
@@ -93,6 +94,7 @@ public class MessageTests extends BaseTests {
 		testSuite.addTest(SplitThreadCategoryMessageReplyMultipleTests.suite());
 		testSuite.addTest(UnmarkCategoryMessageQuestionReplyTests.suite());
 		testSuite.addTest(ViewCategoryMessageMyPostsTests.suite());
+		testSuite.addTest(ViewCategoryMessagePostCountTests.suite());
 		testSuite.addTest(ViewCategoryMessageRecentPostsTests.suite());
 
 		return testSuite;
