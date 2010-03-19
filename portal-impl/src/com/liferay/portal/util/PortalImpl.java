@@ -166,6 +166,7 @@ import java.util.Set;
 import java.util.TimeZone;
 import java.util.TreeSet;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.locks.ReentrantLock;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -3530,9 +3531,17 @@ public class PortalImpl implements Portal {
 	 * Sets the port obtained on the first request to the portal.
 	 */
 	public void setPortalPort(HttpServletRequest request) {
+
 		if (_portalPort == -1) {
-			synchronized (this) {
-				_portalPort = request.getServerPort();
+			_lock.lock();
+
+			try {
+				if (_portalPort == -1) {
+					_portalPort = request.getServerPort();
+				}
+			}
+			finally {
+				_lock.unlock();
 			}
 		}
 	}
@@ -4112,7 +4121,8 @@ public class PortalImpl implements Portal {
 	private Map<String, Long> _plidToPortletIdCache =
 		new ConcurrentHashMap<String, Long>();
 	private String _portalLibDir;
-	private int _portalPort = -1;
+	private volatile int _portalPort = -1;
+	private ReentrantLock _lock = new ReentrantLock();
 	private String _portalWebDir;
 	private Set<String> _reservedParams;
 	private String[] _sortedSystemCommunityRoles;
