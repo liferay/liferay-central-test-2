@@ -58,6 +58,19 @@
 				<xs:element ref="assignments" minOccurs="1" maxOccurs="1" />
 			</xs:sequence>
 			<xs:attribute name="name" type="xs:string" use="required" />
+			<xs:attribute name="due-date-duration" type="xs:double" use="optional" />
+			<xs:attribute name="due-date-scale" use="optional">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="seconds" />
+						<xs:enumeration value="minutes" />
+						<xs:enumeration value="hours" />
+						<xs:enumeration value="days" />
+						<xs:enumeration value="months" />
+						<xs:enumeration value="years" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
 		</xs:complexType>
 	</xs:element>
 	<xs:element name="join">
