@@ -203,17 +203,17 @@ public class StreamUtil {
 			boolean cleanUp)
 		throws IOException {
 
-		if (readableByteChannel == null) {
-			throw new IllegalArgumentException(
-				"Readable byte channel cannot be null");
-		}
-
-		if (writableByteChannel == null) {
-			throw new IllegalArgumentException(
-				"Writable byte channel cannot be null");
-		}
-
 		try {
+			if (readableByteChannel == null) {
+				throw new IllegalArgumentException(
+					"Readable byte channel cannot be null");
+			}
+
+			if (writableByteChannel == null) {
+				throw new IllegalArgumentException(
+					"Writable byte channel cannot be null");
+			}
+
 			ByteBuffer byteBuffer = ByteBuffer.allocateDirect(bufferSize);
 
 			while (readableByteChannel.read(byteBuffer) != -1) {
