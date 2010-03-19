@@ -110,12 +110,12 @@
 					<td>
 
 						<%
-						String taglibFocus = "if (this.value == '" + unicodeDefaultKeywords + "') { this.value = ''; }";
+						String taglibClearDefaultKeywords = "if (this.value == '" + unicodeDefaultKeywords + "') { this.value = ''; }";
 
-						String taglibOnBlur = "if (this.value == '') { this.value = '" + unicodeDefaultKeywords + "'; }";
+						String taglibRestoreDefaultKeywords = "if (this.value == '') { this.value = '" + unicodeDefaultKeywords + "'; }";
 						%>
 
-						<aui:input name="keywords" onBlur="<%= taglibOnBlur %>" onFocus="<%= taglibFocus %>" size="30" type="text" value="<%= keywords %>" />
+						<aui:input name="keywords" onBlur="<%= taglibRestoreDefaultKeywords %>" onFocus="<%= taglibClearDefaultKeywords %>" size="30" type="text" value="<%= keywords %>" />
 
 						<aui:input align="absmiddle" border="0" label="" name="search" src='<%= themeDisplay.getPathThemeImages()+ "/common/search.png" %>' type="image" />
 					</td>
