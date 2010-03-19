@@ -40,6 +40,10 @@ public class DefaultWorkflowDefinition
 		return _optionalAttributes;
 	}
 
+	public String getTitle() {
+		return _title;
+	}
+
 	public int getVersion() {
 		return _version;
 	}
@@ -64,6 +68,10 @@ public class DefaultWorkflowDefinition
 		_optionalAttributes = optionalAttributes;
 	}
 
+	public void setTitle(String title) {
+		_title = title;
+	}
+
 	public void setVersion(int version) {
 		_version = version;
 	}
@@ -72,6 +80,7 @@ public class DefaultWorkflowDefinition
 	private InputStream _inputStream;
 	private String _name;
 	private Map<String, Object> _optionalAttributes;
+	private String _title;
 	private int _version;
 
 }

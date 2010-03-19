@@ -34,7 +34,7 @@ import java.util.List;
 public interface WorkflowDefinitionManager {
 
 	public WorkflowDefinition deployWorkflowDefinition(
-			long companyId, long userId, InputStream inputStream)
+			long companyId, long userId, String title, InputStream inputStream)
 		throws WorkflowException;
 
 	public int getActiveWorkflowDefinitionCount(long companyId)
@@ -80,6 +80,10 @@ public interface WorkflowDefinitionManager {
 	public WorkflowDefinition updateActive(
 			long companyId, long userId, String name, int version,
 			boolean active)
+		throws WorkflowException;
+
+	public WorkflowDefinition updateTitle(
+			long companyId, long userId, String name, int version, String title)
 		throws WorkflowException;
 
 }

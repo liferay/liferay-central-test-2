@@ -32,11 +32,11 @@ import java.util.List;
 public class WorkflowDefinitionManagerUtil {
 
 	public static WorkflowDefinition deployWorkflowDefinition(
-			long companyId, long userId, InputStream inputStream)
+			long companyId, long userId, String title, InputStream inputStream)
 		throws WorkflowException {
 
 		return _workflowDefinitionManager.deployWorkflowDefinition(
-			companyId, userId, inputStream);
+			companyId, userId, title, inputStream);
 	}
 
 	public List<WorkflowDefinition> getActiveWorkflowDefinitions(
@@ -129,6 +129,15 @@ public class WorkflowDefinitionManagerUtil {
 
 		return _workflowDefinitionManager.updateActive(
 			companyId, userId, name, version, active);
+	}
+
+	public static WorkflowDefinition updateTitle(
+			long companyId, long userId, String name, int version,
+			String title)
+		throws WorkflowException {
+
+		return _workflowDefinitionManager.updateTitle(
+			companyId, userId, name, version, title);
 	}
 
 	public void setWorkflowDefinitionManager(

@@ -31,6 +31,8 @@ public interface WorkflowDefinition {
 
 	public String getName();
 
+	public String getTitle();
+
 	public Map<String, Object> getOptionalAttributes();
 
 	public int getVersion();
