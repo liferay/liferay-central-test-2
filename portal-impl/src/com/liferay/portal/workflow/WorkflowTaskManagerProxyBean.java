@@ -141,5 +141,4 @@ public class WorkflowTaskManagerProxyBean
 		throw new UnsupportedOperationException();
 	}
 
-
 }
