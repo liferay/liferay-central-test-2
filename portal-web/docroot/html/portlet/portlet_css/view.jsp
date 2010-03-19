@@ -27,8 +27,8 @@ PortletURL portletURL = renderResponse.createRenderURL();
 	/>
 
 	<aui:form method="post">
-		<input type="hidden" name="portlet-area" id="portlet-area" />
-		<input type="hidden" name="portlet-boundary-id" id="portlet-boundary-id" />
+		<input id="portlet-area" name="portlet-area" type="hidden" />
+		<input id="portlet-boundary-id" name="portlet-boundary-id" type="hidden" />
 
 		<div class="aui-tabview-content">
 			<aui:fieldset id="portlet-config" label="portlet-configuration">
