@@ -36,7 +36,6 @@ import com.liferay.portal.model.UserGroupConstants;
 import com.liferay.portal.security.permission.PermissionCacheUtil;
 import com.liferay.portal.service.base.UserGroupLocalServiceBaseImpl;
 
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -101,15 +100,9 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 	public void copyUserGroupLayouts(long userGroupId, long userIds[])
 		throws PortalException, SystemException {
 
-		UserGroup userGroup = userGroupLocalService.getUserGroup(userGroupId);
-
-		Map<String, String[]> parameterMap = getLayoutTemplatesParameters();
-
-		LayoutHolder layoutHolder = getUserGroupLayouts(userGroup, parameterMap);
-
 		for (long userId : userIds) {
 			if (!userGroupPersistence.containsUser(userGroupId, userId)) {
-				doCopyUserGroupLayouts(layoutHolder, parameterMap, userId);
+				copyUserGroupLayouts(userGroupId, userId);
 			}
 		}
 	}
@@ -128,12 +121,37 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		UserGroup userGroup = userGroupLocalService.getUserGroup(userGroupId);
+		User user = userPersistence.findByPrimaryKey(userId);
 
 		Map<String, String[]> parameterMap = getLayoutTemplatesParameters();
 
-		LayoutHolder layoutHolder = getUserGroupLayouts(userGroup, parameterMap);
+		if (userGroup.hasPrivateLayouts()) {
+			long sourceGroupId = userGroup.getGroup().getGroupId();
+			long targetGroupId = user.getGroup().getGroupId();
 
-		doCopyUserGroupLayouts(layoutHolder, parameterMap, userId);
+			byte[] bytes = layoutLocalService.exportLayouts(
+				sourceGroupId, true, parameterMap, null, null);
+
+			UnsyncByteArrayInputStream ubais = new UnsyncByteArrayInputStream(
+				bytes);
+
+			layoutLocalService.importLayouts(
+				userId, targetGroupId, true, parameterMap, ubais);
+		}
+
+		if (userGroup.hasPublicLayouts()) {
+			long sourceGroupId = userGroup.getGroup().getGroupId();
+			long targetGroupId = user.getGroup().getGroupId();
+
+			byte[] bytes = layoutLocalService.exportLayouts(
+				sourceGroupId, false, parameterMap, null, null);
+
+			UnsyncByteArrayInputStream ubais = new UnsyncByteArrayInputStream(
+				bytes);
+
+			layoutLocalService.importLayouts(
+				userId, targetGroupId, false, parameterMap, ubais);
+		}
 	}
 
 	public void deleteUserGroup(long userGroupId)
@@ -283,63 +301,6 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 		return userGroup;
 	}
 
-	protected void doCopyUserGroupLayouts(
-			LayoutHolder layoutHolder,  Map<String, String[]> parameterMap,
-			long userId)
-		throws PortalException, SystemException {
-
-		User user = userPersistence.findByPrimaryKey(userId);
-
-		if (layoutHolder.hasPrivateLayouts()) {
-			long targetGroupId = user.getGroup().getGroupId();
-
-			layoutLocalService.importLayouts(
-				userId, targetGroupId, true, parameterMap,
-				layoutHolder.getPrivateLayouts());
-		}
-
-		if (layoutHolder.hasPublicLayouts()) {
-			long targetGroupId = user.getGroup().getGroupId();
-
-			layoutLocalService.importLayouts(
-				userId, targetGroupId, false, parameterMap,
-				layoutHolder.getPublicLayouts());
-		}
-	}
-
-	protected LayoutHolder getUserGroupLayouts(
-			UserGroup userGroup, Map<String, String[]> parameterMap)
-		throws PortalException, SystemException {
-
-		LayoutHolder layoutHolder = new LayoutHolder();
-
-		if (userGroup.hasPrivateLayouts()) {
-			long sourceGroupId = userGroup.getGroup().getGroupId();
-
-			byte[] bytes = layoutLocalService.exportLayouts(
-				sourceGroupId, true, parameterMap, null, null);
-
-			UnsyncByteArrayInputStream ubais = new UnsyncByteArrayInputStream(
-				bytes);
-
-			layoutHolder.setPrivateLayouts(ubais);
-		}
-
-		if (userGroup.hasPublicLayouts()) {
-			long sourceGroupId = userGroup.getGroup().getGroupId();
-
-			byte[] bytes = layoutLocalService.exportLayouts(
-				sourceGroupId, false, parameterMap, null, null);
-
-			UnsyncByteArrayInputStream ubais = new UnsyncByteArrayInputStream(
-				bytes);
-
-			layoutHolder.setPublicLayouts(ubais);
-		}
-
-		return layoutHolder;
-	}
-
 	protected Map<String, String[]> getLayoutTemplatesParameters() {
 		Map<String, String[]> parameterMap =
 			new LinkedHashMap<String, String[]>();
@@ -411,36 +372,6 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 		}
 		catch (NoSuchUserGroupException nsuge) {
 		}
-	}
-
-	private class LayoutHolder {
-
-		public boolean hasPrivateLayouts() {
-			return (_privateLayouts == null);
-		}
-
-		public boolean hasPublicLayouts() {
-			return (_publicLayouts == null); 
-		}
-
-		public InputStream getPrivateLayouts() {
-			return _privateLayouts;
-		}
-
-		public InputStream getPublicLayouts() {
-			return _publicLayouts;
-		}
-
-		public void setPrivateLayouts(InputStream privateLayouts) {
-			_privateLayouts = privateLayouts;
-		}
-
-		public void setPublicLayouts(InputStream publicLayouts) {
-			_publicLayouts = publicLayouts;
-		}
-
-		private InputStream _privateLayouts;
-		private InputStream _publicLayouts;
 	}
 
 }
