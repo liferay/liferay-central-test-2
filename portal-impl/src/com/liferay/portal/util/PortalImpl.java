@@ -2029,7 +2029,7 @@ public class PortalImpl implements Portal {
 	}
 
 	public int getPortalPort() {
-		return _portalPort.intValue();
+		return _portalPort;
 	}
 
 	public Properties getPortalProperties() {
@@ -3299,11 +3299,11 @@ public class PortalImpl implements Portal {
 		columnId = GetterUtil.getString(columnId);
 
 		if (columnPos == null) {
-			columnPos = new Integer(0);
+			columnPos = Integer.valueOf(0);
 		}
 
 		if (columnCount == null) {
-			columnCount = new Integer(0);
+			columnCount = Integer.valueOf(0);
 		}
 
 		request.setAttribute(WebKeys.RENDER_PORTLET, portlet);
@@ -3530,9 +3530,10 @@ public class PortalImpl implements Portal {
 	 * Sets the port obtained on the first request to the portal.
 	 */
 	public void setPortalPort(HttpServletRequest request) {
-		if (_portalPort.intValue() == -1) {
-			synchronized (_portalPort) {
-				_portalPort = new Integer(request.getServerPort());
+		if (_portalPort == -1) {
+			synchronized (_objectLock) {
+				_portalPort =
+					Integer.valueOf(request.getServerPort()).intValue();
 			}
 		}
 	}
@@ -4112,7 +4113,8 @@ public class PortalImpl implements Portal {
 	private Map<String, Long> _plidToPortletIdCache =
 		new ConcurrentHashMap<String, Long>();
 	private String _portalLibDir;
-	private Integer _portalPort = new Integer(-1);
+	private int _portalPort = -1;
+	private Object _objectLock = new Object();
 	private String _portalWebDir;
 	private Set<String> _reservedParams;
 	private String[] _sortedSystemCommunityRoles;
