@@ -525,30 +525,29 @@ public interface Portal {
 
 	public boolean isUpdateAvailable() throws SystemException;
 
-	public void renderPage(
-			StringBuilder sb, ServletContext servletContext,
-			HttpServletRequest request, HttpServletResponse response,
-			String path)
+	public String renderPage(
+			ServletContext servletContext, HttpServletRequest request,
+			HttpServletResponse response, String path)
 		throws IOException, ServletException;
 
-	public void renderPortlet(
-			StringBuilder sb, ServletContext servletContext,
-			HttpServletRequest request, HttpServletResponse response,
-			Portlet portlet, String queryString)
+	public String renderPortlet(
+			ServletContext servletContext, HttpServletRequest request,
+			HttpServletResponse response, Portlet portlet, String queryString,
+			boolean writeOutput)
 		throws IOException, ServletException;
 
-	public void renderPortlet(
-			StringBuilder sb, ServletContext servletContext,
-			HttpServletRequest request, HttpServletResponse response,
-			Portlet portlet, String queryString, String columnId,
-			Integer columnPos, Integer columnCount)
+	public String renderPortlet(
+			ServletContext servletContext, HttpServletRequest request,
+			HttpServletResponse response, Portlet portlet, String queryString,
+			String columnId, Integer columnPos, Integer columnCount,
+			boolean writeOutput)
 		throws IOException, ServletException;
 
-	public void renderPortlet(
-			StringBuilder sb, ServletContext servletContext,
-			HttpServletRequest request, HttpServletResponse response,
-			Portlet portlet, String queryString, String columnId,
-			Integer columnPos, Integer columnCount, String path)
+	public String renderPortlet(
+			ServletContext servletContext, HttpServletRequest request,
+			HttpServletResponse response, Portlet portlet, String queryString,
+			String columnId, Integer columnPos, Integer columnCount,
+			String path, boolean writeOutput)
 		throws IOException, ServletException;
 
 	public void sendError(

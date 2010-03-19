@@ -24,8 +24,7 @@ import java.util.Map;
  */
 public abstract class RuntimeLogic {
 
-	public abstract void processContent(
-			StringBuilder sb, Map<String, String> attributes)
+	public abstract String processContent(Map<String, String> attributes)
 		throws Exception;
 
 }

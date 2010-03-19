@@ -3240,10 +3240,9 @@ public class PortalImpl implements Portal {
 		return PluginPackageUtil.isUpdateAvailable();
 	}
 
-	public void renderPage(
-			StringBuilder sb, ServletContext servletContext,
-			HttpServletRequest request, HttpServletResponse response,
-			String path)
+	public String renderPage(
+			ServletContext servletContext, HttpServletRequest request,
+			HttpServletResponse response, String path)
 		throws IOException, ServletException {
 
 		RequestDispatcher requestDispatcher =
@@ -3254,37 +3253,37 @@ public class PortalImpl implements Portal {
 
 		requestDispatcher.include(request, stringResponse);
 
-		sb.append(stringResponse.getString());
+		return stringResponse.getString();
 	}
 
-	public void renderPortlet(
-			StringBuilder sb, ServletContext servletContext,
-			HttpServletRequest request, HttpServletResponse response,
-			Portlet portlet, String queryString)
+	public String renderPortlet(
+			ServletContext servletContext, HttpServletRequest request,
+			HttpServletResponse response, Portlet portlet, String queryString,
+			boolean writeOutput)
 		throws IOException, ServletException {
 
-		renderPortlet(
-			sb, servletContext, request, response, portlet, queryString, null,
-			null, null);
+		return renderPortlet(
+			servletContext, request, response, portlet, queryString, null,
+			null, null, writeOutput);
 	}
 
-	public void renderPortlet(
-			StringBuilder sb, ServletContext servletContext,
-			HttpServletRequest request, HttpServletResponse response,
-			Portlet portlet, String queryString, String columnId,
-			Integer columnPos, Integer columnCount)
+	public String renderPortlet(
+			ServletContext servletContext, HttpServletRequest request,
+			HttpServletResponse response, Portlet portlet, String queryString,
+			String columnId, Integer columnPos, Integer columnCount,
+			boolean writeOutput)
 		throws IOException, ServletException {
 
-		renderPortlet(
-			sb, servletContext, request, response, portlet, queryString,
-			columnId, columnPos, columnCount, null);
+		return renderPortlet(
+			servletContext, request, response, portlet, queryString, columnId,
+			columnPos, columnCount, null, writeOutput);
 	}
 
-	public void renderPortlet(
-			StringBuilder sb, ServletContext servletContext,
-			HttpServletRequest request, HttpServletResponse response,
-			Portlet portlet, String queryString, String columnId,
-			Integer columnPos, Integer columnCount, String path)
+	public String renderPortlet(
+			ServletContext servletContext, HttpServletRequest request,
+			HttpServletResponse response, Portlet portlet, String queryString,
+			String columnId, Integer columnPos, Integer columnCount,
+			String path, boolean writeOutput)
 		throws IOException, ServletException {
 
 		queryString = GetterUtil.getString(queryString);
@@ -3311,7 +3310,15 @@ public class PortalImpl implements Portal {
 		RequestDispatcher requestDispatcher =
 			servletContext.getRequestDispatcher(path);
 
-		if (sb != null) {
+		if (writeOutput) {
+			// LEP-766
+
+			response.setContentType(ContentTypes.TEXT_HTML_UTF8);
+
+			requestDispatcher.include(request, response);
+			return StringPool.BLANK;
+		}
+		else {
 			StringServletResponse stringResponse = new StringServletResponse(
 				response);
 
@@ -3345,16 +3352,11 @@ public class PortalImpl implements Portal {
 			}
 
 			if (showPortlet) {
-				sb.append(stringResponse.getString());
+				return stringResponse.getString();
 			}
-		}
-		else {
-
-			// LEP-766
-
-			response.setContentType(ContentTypes.TEXT_HTML_UTF8);
-
-			requestDispatcher.include(request, response);
+			else {
+				return StringPool.BLANK;
+			}
 		}
 	}
 

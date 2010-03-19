@@ -57,52 +57,49 @@ import javax.servlet.jsp.PageContext;
  */
 public class RuntimePortletUtil {
 
-	public static void processPortlet(
-			StringBuilder sb, ServletContext servletContext,
-			HttpServletRequest request, HttpServletResponse response,
-			RenderRequest renderRequest, RenderResponse renderResponse,
-			String portletId, String queryString)
+	public static String processPortlet(
+			ServletContext servletContext, HttpServletRequest request,
+			HttpServletResponse response, RenderRequest renderRequest,
+			RenderResponse renderResponse, String portletId, String queryString)
 		throws Exception {
 
-		processPortlet(
-			sb, servletContext, request, response, renderRequest,
+		return processPortlet(
+			servletContext, request, response, renderRequest,
 			renderResponse, portletId, queryString, null, null, null);
 	}
 
-	public static void processPortlet(
-			StringBuilder sb, ServletContext servletContext,
-			HttpServletRequest request, HttpServletResponse response,
-			RenderRequest renderRequest, RenderResponse renderResponse,
-			String portletId, String queryString, String columnId,
-			Integer columnPos, Integer columnCount)
+	public static String processPortlet(
+			ServletContext servletContext, HttpServletRequest request,
+			HttpServletResponse response, RenderRequest renderRequest,
+			RenderResponse renderResponse, String portletId, String queryString,
+			String columnId, Integer columnPos, Integer columnCount)
 		throws Exception {
 
-		processPortlet(
-			sb, servletContext, request, response, renderRequest,
+		return processPortlet(
+			servletContext, request, response, renderRequest,
 			renderResponse, null, portletId, queryString, columnId, columnPos,
 			columnCount, null);
 	}
 
-	public static void processPortlet(
-			StringBuilder sb, ServletContext servletContext,
-			HttpServletRequest request, HttpServletResponse response,
-			Portlet portlet, String queryString, String columnId,
-			Integer columnPos, Integer columnCount, String path)
+	public static String processPortlet(
+			ServletContext servletContext, HttpServletRequest request,
+			HttpServletResponse response, Portlet portlet, String queryString,
+			String columnId, Integer columnPos, Integer columnCount,
+			String path)
 		throws Exception {
 
-		processPortlet(
-			sb, servletContext, request, response, null, null, portlet,
+		return processPortlet(
+			servletContext, request, response, null, null, portlet,
 			portlet.getPortletId(), queryString, columnId, columnPos,
 			columnCount, path);
 	}
 
-	public static void processPortlet(
-			StringBuilder sb, ServletContext servletContext,
-			HttpServletRequest request, HttpServletResponse response,
-			RenderRequest renderRequest, RenderResponse renderResponse,
-			Portlet portlet, String portletId, String queryString,
-			String columnId, Integer columnPos, Integer columnCount,
-			String path)
+	public static String processPortlet(
+			ServletContext servletContext, HttpServletRequest request,
+			HttpServletResponse response, RenderRequest renderRequest,
+			RenderResponse renderResponse, Portlet portlet, String portletId,
+			String queryString, String columnId, Integer columnPos,
+			Integer columnCount, String path)
 		throws Exception {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
@@ -141,7 +138,7 @@ public class RuntimePortletUtil {
 		}
 
 		if (portlet == null) {
-			return;
+			return StringPool.BLANK;
 		}
 
 		// Capture the current portlet's settings to reset them once the child
@@ -157,9 +154,9 @@ public class RuntimePortletUtil {
 			JavaConstants.JAVAX_PORTLET_CONFIG);
 
 		try {
-			PortalUtil.renderPortlet(
-				sb, servletContext, request, response, portlet, queryString,
-				columnId, columnPos, columnCount, path);
+			return PortalUtil.renderPortlet(
+				servletContext, request, response, portlet, queryString,
+				columnId, columnPos, columnCount, path, false);
 		}
 		finally {
 			portletDisplay.copyFrom(portletDisplayClone);
@@ -266,15 +263,13 @@ public class RuntimePortletUtil {
 			Integer columnPos = (Integer)value[2];
 			Integer columnCount = (Integer)value[3];
 
-			StringBuilder sb = new StringBuilder();
-
-			processPortlet(
-				sb, servletContext, request, response, portlet, queryString,
+			String content = processPortlet(
+				servletContext, request, response, portlet, queryString,
 				columnId, columnPos, columnCount, null);
 
 			output = StringUtil.replace(
 				output, "[$TEMPLATE_PORTLET_" + portlet.getPortletId() + "$]",
-				sb.toString());
+				content);
 		}
 
 		return output;
@@ -310,7 +305,7 @@ public class RuntimePortletUtil {
 					x = close2 + runtimeLogic.getClose2Tag().length();
 				}
 
-				runtimeLogic.processXML(sb, content.substring(y, x));
+				sb.append(runtimeLogic.processXML(content.substring(y, x)));
 
 				y = content.indexOf(runtimeLogic.getOpenTag(), x);
 			}

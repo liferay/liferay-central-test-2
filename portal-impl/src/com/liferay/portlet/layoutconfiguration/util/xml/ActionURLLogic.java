@@ -49,7 +49,7 @@ public class ActionURLLogic extends RuntimeLogic {
 		return CLOSE_1_TAG;
 	}
 
-	public void processXML(StringBuilder sb, String xml) throws Exception {
+	public String processXML(String xml) throws Exception {
 		Document doc = SAXReaderUtil.read(xml);
 
 		Element root = doc.getRootElement();
@@ -76,7 +76,7 @@ public class ActionURLLogic extends RuntimeLogic {
 			portletURL.setParameter(paramName, paramValue);
 		}
 
-		sb.append(portletURL.toString());
+		return portletURL.toString();
 	}
 
 	public String getLifecycle() {

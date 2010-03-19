@@ -995,47 +995,47 @@ public class PortalUtil {
 		return getPortal().isUpdateAvailable();
 	}
 
-	public static void renderPage(
-			StringBuilder sb, ServletContext servletContext,
-			HttpServletRequest request, HttpServletResponse response,
-			String path)
+	public static String renderPage(
+			ServletContext servletContext, HttpServletRequest request,
+			HttpServletResponse response, String path, boolean writeOutput)
 		throws IOException, ServletException {
 
-		getPortal().renderPage(sb, servletContext, request, response, path);
+		return getPortal().renderPage(servletContext, request, response, path);
 	}
 
-	public static void renderPortlet(
-			StringBuilder sb, ServletContext servletContext,
-			HttpServletRequest request, HttpServletResponse response,
-			Portlet portlet, String queryString)
+	public static String renderPortlet(
+			ServletContext servletContext, HttpServletRequest request,
+			HttpServletResponse response, Portlet portlet, String queryString,
+			boolean writeOutput)
 		throws IOException, ServletException {
 
-		getPortal().renderPortlet(
-			sb, servletContext, request, response, portlet, queryString);
+		return getPortal().renderPortlet(
+			servletContext, request, response, portlet, queryString,
+			writeOutput);
 	}
 
-	public static void renderPortlet(
-			StringBuilder sb, ServletContext servletContext,
-			HttpServletRequest request, HttpServletResponse response,
-			Portlet portlet, String queryString, String columnId,
-			Integer columnPos, Integer columnCount)
+	public static String renderPortlet(
+			ServletContext servletContext, HttpServletRequest request,
+			HttpServletResponse response, Portlet portlet, String queryString,
+			String columnId, Integer columnPos, Integer columnCount,
+			boolean writeOutput)
 		throws IOException, ServletException {
 
-		getPortal().renderPortlet(
-			sb, servletContext, request, response, portlet, queryString,
-			columnId, columnPos, columnCount);
+		return getPortal().renderPortlet(
+			servletContext, request, response, portlet, queryString,
+			columnId, columnPos, columnCount, writeOutput);
 	}
 
-	public static void renderPortlet(
-			StringBuilder sb, ServletContext servletContext,
-			HttpServletRequest request, HttpServletResponse response,
-			Portlet portlet, String queryString, String columnId,
-			Integer columnPos, Integer columnCount, String path)
+	public static String renderPortlet(
+			ServletContext servletContext, HttpServletRequest request,
+			HttpServletResponse response, Portlet portlet, String queryString,
+			String columnId, Integer columnPos, Integer columnCount,
+			String path, boolean writeOutput)
 		throws IOException, ServletException {
 
-		getPortal().renderPortlet(
-			sb, servletContext, request, response, portlet, queryString,
-			columnId, columnPos, columnCount, path);
+		return getPortal().renderPortlet(
+			servletContext, request, response, portlet, queryString,
+			columnId, columnPos, columnCount, path, writeOutput);
 	}
 
 	/**

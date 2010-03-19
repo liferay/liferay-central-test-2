@@ -62,15 +62,13 @@ public class TemplateProcessor {
 		PortletColumnLogic logic = new PortletColumnLogic(
 			_servletContext, _request, _response);
 
-		StringBuilder sb = new StringBuilder();
-
-		logic.processContent(sb, attributes);
+		String content = logic.processContent(attributes);
 
 		_portletsMap.putAll(logic.getPortletsMap());
 
 		String columnIdPlaceHolder = "[$TEMPLATE_COLUMN_" + columnId + "$]";
 
-		_columnsMap.put(columnIdPlaceHolder, sb.toString());
+		_columnsMap.put(columnIdPlaceHolder, content);
 
 		return columnIdPlaceHolder;
 	}
@@ -87,22 +85,14 @@ public class TemplateProcessor {
 		RuntimeLogic logic = new PortletLogic(
 			_servletContext, _request, _response, _portletId);
 
-		StringBuilder sb = new StringBuilder();
+		return logic.processContent(attributes);
 
-		logic.processContent(sb, attributes);
-
-		return sb.toString();
 	}
 
 	public String processPortlet(String portletId) throws Exception {
 		RuntimeLogic logic = new PortletLogic(
 			_servletContext, _request, _response, portletId);
-
-		StringBuilder sb = new StringBuilder();
-
-		logic.processContent(sb, new HashMap<String, String>());
-
-		return sb.toString();
+		return logic.processContent(new HashMap<String, String>());
 	}
 
 	public Map<String, String> getColumnsMap() {

@@ -61,7 +61,7 @@ public class PortletLogic extends RuntimeLogic {
 		return CLOSE_1_TAG;
 	}
 
-	public void processXML(StringBuilder sb, String xml) throws Exception {
+	public String processXML(String xml) throws Exception {
 		Document doc = SAXReaderUtil.read(xml);
 
 		Element root = doc.getRootElement();
@@ -76,8 +76,8 @@ public class PortletLogic extends RuntimeLogic {
 			portletId += PortletConstants.INSTANCE_SEPARATOR + instanceId;
 		}
 
-		RuntimePortletUtil.processPortlet(
-			sb, _servletContext, _request, _response, _renderRequest,
+		return RuntimePortletUtil.processPortlet(
+			_servletContext, _request, _response, _renderRequest,
 			_renderResponse, portletId, queryString);
 	}
 

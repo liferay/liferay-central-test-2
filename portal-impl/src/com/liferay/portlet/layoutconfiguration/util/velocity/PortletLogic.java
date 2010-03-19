@@ -56,7 +56,7 @@ public class PortletLogic extends RuntimeLogic {
 		_renderResponse = renderResponse;
 	}
 
-	public void processContent(StringBuilder sb, Map<String, String> attributes)
+	public String processContent(Map<String, String> attributes)
 		throws Exception {
 
 		String rootPortletId = attributes.get("name");
@@ -73,8 +73,8 @@ public class PortletLogic extends RuntimeLogic {
 			}
 		}
 
-		RuntimePortletUtil.processPortlet(
-			sb, _servletContext, _request, _response, _renderRequest,
+		return RuntimePortletUtil.processPortlet(
+			_servletContext, _request, _response, _renderRequest,
 			_renderResponse, portletId, queryString);
 	}
 

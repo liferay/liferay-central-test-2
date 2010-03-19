@@ -17,6 +17,7 @@ package com.liferay.taglib.portletext;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.Layout;
@@ -93,7 +94,7 @@ public class RuntimeTag extends TagSupport {
 
 		String portletId = portletName;
 
-		StringBuilder sb = new StringBuilder();
+		String content = StringPool.BLANK;
 
 		try {
 			request.setAttribute(WebKeys.RENDER_PORTLET_RESOURCE, Boolean.TRUE);
@@ -103,8 +104,8 @@ public class RuntimeTag extends TagSupport {
 					request, portletId, defaultPreferences);
 			}
 
-			RuntimePortletUtil.processPortlet(
-				sb, servletContext, request, response, renderRequest,
+			content = RuntimePortletUtil.processPortlet(
+				servletContext, request, response, renderRequest,
 				renderResponse, portletId, queryString);
 		}
 		finally {
@@ -112,14 +113,14 @@ public class RuntimeTag extends TagSupport {
 		}
 
 		if (pageContext != null) {
-			pageContext.getOut().print(sb.toString());
+			pageContext.getOut().print(content);
 		}
 		else {
 
 			// LEP-1023
 
 			//res.getOutputStream().print(renderPortletSM.toString());
-			response.getWriter().print(sb.toString());
+			response.getWriter().print(content);
 		}
 	}
 

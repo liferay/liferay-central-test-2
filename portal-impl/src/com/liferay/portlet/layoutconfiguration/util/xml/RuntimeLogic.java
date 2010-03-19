@@ -31,7 +31,6 @@ public abstract class RuntimeLogic {
 		return CLOSE_2_TAG;
 	}
 
-	public abstract void processXML(StringBuilder sb, String xml)
-		throws Exception;
+	public abstract String processXML(String xml) throws Exception;
 
 }

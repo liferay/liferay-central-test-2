@@ -16,6 +16,7 @@ package com.liferay.portlet.layoutconfiguration.util.velocity;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Portlet;
@@ -80,7 +81,7 @@ public class PortletColumnLogic extends RuntimeLogic {
 		}
 	}
 
-	public void processContent(StringBuilder sb, Map<String, String> attributes)
+	public String processContent(Map<String, String> attributes)
 		throws Exception {
 
 		LayoutTypePortlet layoutTypePortlet =
@@ -101,6 +102,8 @@ public class PortletColumnLogic extends RuntimeLogic {
 		if (Validator.isNotNull(additionalClassNames)) {
 			columnCssClass += " " + additionalClassNames;
 		}
+
+		StringBundler sb = new StringBundler();
 
 		sb.append("<div class=\"");
 		sb.append(columnCssClass);
@@ -128,12 +131,14 @@ public class PortletColumnLogic extends RuntimeLogic {
 				}
 			}
 
-			RuntimePortletUtil.processPortlet(
-				sb, _servletContext, _request, _response, portlet, queryString,
-				columnId, columnPos, columnCount, path);
+			sb.append(RuntimePortletUtil.processPortlet(
+				_servletContext, _request, _response, portlet, queryString,
+				columnId, columnPos, columnCount, path));
 		}
 
 		sb.append("</div>");
+
+		return sb.toString();
 	}
 
 	public Map<Portlet, Object[]> getPortletsMap() {
