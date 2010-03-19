@@ -16,40 +16,22 @@
 
 <%@ include file="/html/portlet/portlet_css/init.jsp" %>
 
-<div id="lfr-look-and-feel">
-	<div class="aui-tabview" id="portlet-set-properties">
-		<ul class="aui-tabview-list">
-			<li>
-				<a href="#portlet-config"><liferay-ui:message key="portlet-configuration" /></a>
-			</li>
-			<li>
-				<a href="#text-styles"><liferay-ui:message key="text-styles" /></a>
-			</li>
-			<li>
-				<a href="#background-styles"><liferay-ui:message key="background-styles" /></a>
-			</li>
-			<li>
-				<a href="#border-styles"><liferay-ui:message key="border-styles" /></a>
-			</li>
-			<li>
-				<a href="#spacing-styles"><liferay-ui:message key="margin-and-padding" /></a>
-			</li>
-			<li>
-				<a href="#css-styling"><liferay-ui:message key="advanced-styling" /></a>
-			</li>
-			<li>
-				<a href="#wap-styling"><liferay-ui:message key="wap-styling" /></a>
-			</li>
-		</ul>
+<%
+PortletURL portletURL = renderResponse.createRenderURL();
+%>
 
-		<form class="aui-form" method="post">
+<div class="aui-tabview" id="portlet-set-properties">
+	<liferay-ui:tabs
+		names="portlet-configuration,text-styles,background-styles,border-styles,margin-and-padding,advanced-styling,wap-styling"
+		url="<%= portletURL.toString() %>"
+	/>
+
+	<aui:form method="post">
 		<input type="hidden" name="portlet-area" id="portlet-area" />
 		<input type="hidden" name="portlet-boundary-id" id="portlet-boundary-id" />
 
 		<div class="aui-tabview-content">
-			<fieldset class="aui-fieldset" id="portlet-config">
-				<legend><liferay-ui:message key="portlet-configuration" /></legend>
-
+			<aui:fieldset id="portlet-config" label="portlet-configuration">
 				<aui:input inlineField="<%= true %>" label="portlet-title" name="custom-title" />
 
 				<aui:select inlineField="<%= true %>" label="portlet-title" name="lfr-portlet-language">
@@ -71,7 +53,7 @@
 				<aui:input label="use-custom-title" name="use-custom-title" type="checkbox" />
 
 				<aui:select label="link-portlet-urls-to-page" name="lfr-point-links">
-					<aui:option label="current-page" value="" />
+					<aui:option label="current-page" />
 
 					<%
 					long linkToLayoutId = 0;
@@ -131,150 +113,131 @@
 				<span class="form-hint portlet-msg-info aui-helper-hidden" id="border-note">
 					<liferay-ui:message key="this-change-will-only-be-shown-after-you-refresh-the-page" />
 				</span>
-			</fieldset>
+			</aui:fieldset>
 
-			<fieldset class="aui-fieldset" id="text-styles">
-				<legend><liferay-ui:message key="text-styles" /></legend>
+			<aui:fieldset id="text-styles" label="text-styles">
+				<aui:column>
+					<aui:select label="font" name="lfr-font-family" showEmptyOption="<%= true %>">
+						<aui:option label="Arial" />
+						<aui:option label="Georgia" />
+						<aui:option label="Times New Roman" />
+						<aui:option label="Tahoma" />
+						<aui:option label="Trebuchet MS" />
+						<aui:option label="Verdana" />
+					</aui:select>
 
-				<div class="common aui-column aui-form-column">
-					<div class="aui-column-content">
-						<aui:select label="font" name="lfr-font-family">
-							<aui:option label="" value="" />
-							<aui:option label="Arial" value="Arial" />
-							<aui:option label="Georgia" value="Georgia" />
-							<aui:option label="Times New Roman" value="Times New Roman" />
-							<aui:option label="Tahoma" value="Tahoma" />
-							<aui:option label="Trebuchet MS" value="Trebuchet MS" />
-							<aui:option label="Verdana" value="Verdana" />
-						</aui:select>
+					<aui:input label="bold" name="lfr-font-bold" type="checkbox" />
 
-						<aui:input label="bold" name="lfr-font-bold" type="checkbox" />
+					<aui:input label="italic" name="lfr-font-italic" type="checkbox" />
 
-						<aui:input label="italic" name="lfr-font-italic" type="checkbox" />
+					<aui:select label="size" name="lfr-font-size" showEmptyOption="<%= true %>">
 
-						<aui:select label="size" name="lfr-font-size">
-							<aui:option label="" value="" />
+						<%
+						DecimalFormat decimalFormat = new DecimalFormat("#.##em");
 
-							<%
-							DecimalFormat decimalFormat = new DecimalFormat("#.##em");
+						for (double i = 0.1; i <= 12; i += 0.1) {
+							String value = decimalFormat.format(i);
+						%>
 
-							for (double i = 0.1; i <= 12; i += 0.1) {
-								String value = decimalFormat.format(i);
-							%>
+							<aui:option label="<%= value %>" />
 
-								<aui:option label="<%= value %>" value="<%= value %>" />
+						<%
+						}
+						%>
 
-							<%
+					</aui:select>
+
+					<aui:input label="color" name="lfr-font-color" />
+
+					<aui:select label="alignment" name="lfr-font-align" showEmptyOption="<%= true %>">
+						<aui:option label="justify" />
+						<aui:option label="left" />
+						<aui:option label="right" />
+						<aui:option label="center" />
+					</aui:select>
+
+					<aui:select label="text-decoration" name="lfr-font-decoration" showEmptyOption="<%= true %>">
+						<aui:option label="none" />
+						<aui:option label="underline" />
+						<aui:option label="overline" />
+						<aui:option label="strikethrough" value="line-through" />
+					</aui:select>
+				</aui:column>
+
+				<aui:column>
+					<aui:select label="word-spacing" name="lfr-font-space" showEmptyOption="<%= true %>">
+
+						<%
+						DecimalFormat decimalFormat = new DecimalFormat("#.##em");
+
+						for (double i = -1; i <= 1; i += 0.05) {
+							String value = decimalFormat.format(i);
+
+							if (value.equals("0em")) {
+								value = "normal";
 							}
-							%>
+						%>
 
-						</aui:select>
+							<aui:option label="<%= value %>" />
 
-						<aui:input label="color" name="lfr-font-color" />
+						<%
+						}
+						%>
 
-						<aui:select label="alignment" name="lfr-font-align">
-							<aui:option label="" value="" />
-							<aui:option label="justify" value="justify" />
-							<aui:option label="left" value="left" />
-							<aui:option label="right" value="right" />
-							<aui:option label="center" value="center" />
-						</aui:select>
+					</aui:select>
 
-						<aui:select label="text-decoration" name="lfr-font-decoration">
-							<aui:option label="" value="" />
-							<aui:option label="none" value="none" />
-							<aui:option label="underline" value="underline" />
-							<aui:option label="overline" value="overline" />
-							<aui:option label="strikethrough" value="line-through" />
-						</aui:select>
-					</div>
-				</div>
+					<aui:select label="line-height" name="lfr-font-leading" showEmptyOption="<%= true %>">
 
-				<div class="extra aui-column aui-form-column">
-					<div class="aui-column-content">
-						<aui:select label="word-spacing" name="lfr-font-space">
-							<aui:option label="" value="" />
+						<%
+						DecimalFormat decimalFormat = new DecimalFormat("#.##em");
 
-							<%
-							DecimalFormat decimalFormat = new DecimalFormat("#.##em");
+						for (double i = 0.1; i <= 12; i += 0.1) {
+							String value = decimalFormat.format(i);
+						%>
 
-							for (double i = -1; i <= 1; i += 0.05) {
-								String value = decimalFormat.format(i);
+							<aui:option label="<%= value %>" />
 
-								if (value.equals("0em")) {
-									value = "normal";
+						<%
+						}
+						%>
+
+					</aui:select>
+
+					<aui:select label="letter-spacing" name="lfr-font-tracking" showEmptyOption="<%= true %>">
+
+						<%
+							for (int i = -10; i <= 50; i++) {
+								String value = i + "px";
+
+								if (i == 0) {
+									value = "0";
 								}
 							%>
-
-								<aui:option label="<%= value %>" value="<%= value %>" />
-
+								<aui:option label="<%= value %>" />
 							<%
 							}
-							%>
+						%>
 
-						</aui:select>
+					</aui:select>
+				</aui:column>
+			</aui:fieldset>
 
-						<aui:select label="line-height" name="lfr-font-leading">
-							<aui:option label="" value="" />
-
-							<%
-							DecimalFormat decimalFormat = new DecimalFormat("#.##em");
-
-							for (double i = 0.1; i <= 12; i += 0.1) {
-								String value = decimalFormat.format(i);
-							%>
-
-								<aui:option label="<%= value %>" value="<%= value %>" />
-
-							<%
-							}
-							%>
-
-						</aui:select>
-
-						<aui:select label="letter-spacing" name="lfr-font-tracking">
-							<aui:option label="" value="" />
-
-							<%
-								for (int i = -10; i <= 50; i++) {
-									String value = i + "px";
-
-									if (i == 0) {
-										value = "0";
-									}
-								%>
-									<aui:option label="<%= value %>" value="<%= value %>" />
-								<%
-								}
-							%>
-
-						</aui:select>
-					</div>
-				</div>
-			</fieldset>
-
-			<fieldset class="aui-fieldset" id="background-styles">
-				<legend><liferay-ui:message key="background-styles" /></legend>
-
+			<aui:fieldset id="background-styles" label="background-styles">
 				<aui:input label="background-color" name="lfr-bg-color" />
-			</fieldset>
+			</aui:fieldset>
 
-			<fieldset class="aui-fieldset" id="border-styles">
-				<legend><liferay-ui:message key="border-styling" /></legend>
-
-				<fieldset class="aui-column aui-form-column" id="lfr-border-width">
-					<legend><liferay-ui:message key="border-width" /></legend>
-
-					<div class="aui-column-content">
+			<aui:fieldset id="border-styles" label="border-styling">
+				<aui:fieldset id="lfr-border-width" label="border-width">
+					<aui:column>
 						<aui:input checked="checked" cssClass="lfr-use-for-all" inlineField="<%= true %>" label="same-for-all" name="lfr-use-for-all-width" type="checkbox" />
 
 						<span class="aui-field-row">
 							<aui:input inlineField="<%= true %>" label="top" name="lfr-border-width-top" />
 
 							<aui:select inlineField="<%= true %>" label="" name="lfr-border-width-top-unit">
-								<aui:option label="%" value="%" />
-								<aui:option label="px" value="px" />
-								<aui:option label="em" value="em" />
+								<aui:option label="%" />
+								<aui:option label="px" />
+								<aui:option label="em" />
 							</aui:select>
 						</span>
 
@@ -282,9 +245,9 @@
 							<aui:input inlineField="<%= true %>" label="right" name="lfr-border-width-right" />
 
 							<aui:select inlineField="<%= true %>" label="" name="lfr-border-width-right-unit">
-								<aui:option label="%" value="%" />
-								<aui:option label="px" value="px" />
-								<aui:option label="em" value="em" />
+								<aui:option label="%" />
+								<aui:option label="px" />
+								<aui:option label="em" />
 							</aui:select>
 						</span>
 
@@ -292,9 +255,9 @@
 							<aui:input inlineField="<%= true %>" label="bottom" name="lfr-border-width-bottom" />
 
 							<aui:select inlineField="<%= true %>" label="" name="lfr-border-width-bottom-unit">
-								<aui:option label="%" value="%" />
-								<aui:option label="px" value="px" />
-								<aui:option label="em" value="em" />
+								<aui:option label="%" />
+								<aui:option label="px" />
+								<aui:option label="em" />
 							</aui:select>
 						</span>
 
@@ -302,78 +265,70 @@
 							<aui:input inlineField="<%= true %>" label="left" name="lfr-border-width-left" />
 
 							<aui:select inlineField="<%= true %>" label="" name="lfr-border-width-left-unit">
-								<aui:option label="%" value="%" />
-								<aui:option label="px" value="px" />
-								<aui:option label="em" value="em" />
+								<aui:option label="%" />
+								<aui:option label="px" />
+								<aui:option label="em" />
 							</aui:select>
 						</span>
-					</div>
-				</fieldset>
+					</aui:column>
+				</aui:fieldset>
 
-				<fieldset class="aui-column aui-form-column" id="lfr-border-style">
-					<legend><liferay-ui:message key="border-style" /></legend>
-
-					<div class="aui-column-content">
+				<aui:fieldset id="lfr-border-style" label="border-style">
+					<aui:column>
 						<aui:input checked="checked" cssClass="lfr-use-for-all" label="same-for-all" name="lfr-use-for-all-style" type="checkbox" />
 
-						<aui:select label="top" name="lfr-border-style-top">
-							<aui:option label="" value="" />
-							<aui:option label="dashed" value="dashed" />
-							<aui:option label="double" value="double" />
-							<aui:option label="dotted" value="dotted" />
-							<aui:option label="groove" value="groove" />
+						<aui:select label="top" name="lfr-border-style-top" showEmptyOption="<%= true %>">
+							<aui:option label="dashed" />
+							<aui:option label="double" />
+							<aui:option label="dotted" />
+							<aui:option label="groove" />
 							<aui:option label="hidden[css]" value="hidden" />
-							<aui:option label="inset" value="inset" />
-							<aui:option label="outset" value="outset" />
-							<aui:option label="ridge" value="ridge" />
-							<aui:option label="solid" value="solid" />
+							<aui:option label="inset" />
+							<aui:option label="outset" />
+							<aui:option label="ridge" />
+							<aui:option label="solid" />
 						</aui:select>
 
-						<aui:select label="right" name="lfr-border-style-right">
-							<aui:option label="" value="" />
-							<aui:option label="dashed" value="dashed" />
-							<aui:option label="double" value="double" />
-							<aui:option label="dotted" value="dotted" />
-							<aui:option label="groove" value="groove" />
+						<aui:select label="right" name="lfr-border-style-right" showEmptyOption="<%= true %>">
+							<aui:option label="dashed" />
+							<aui:option label="double" />
+							<aui:option label="dotted" />
+							<aui:option label="groove" />
 							<aui:option label="hidden[css]" value="hidden" />
-							<aui:option label="inset" value="inset" />
-							<aui:option label="outset" value="outset" />
-							<aui:option label="ridge" value="ridge" />
-							<aui:option label="solid" value="solid" />
+							<aui:option label="inset" />
+							<aui:option label="outset" />
+							<aui:option label="ridge" />
+							<aui:option label="solid" />
 						</aui:select>
 
-						<aui:select label="bottom" name="lfr-border-style-bottom">
-							<aui:option label="" value="" />
-							<aui:option label="dashed" value="dashed" />
-							<aui:option label="double" value="double" />
-							<aui:option label="dotted" value="dotted" />
-							<aui:option label="groove" value="groove" />
+						<aui:select label="bottom" name="lfr-border-style-bottom" showEmptyOption="<%= true %>">
+							<aui:option label="dashed" />
+							<aui:option label="double" />
+							<aui:option label="dotted" />
+							<aui:option label="groove" />
 							<aui:option label="hidden[css]" value="hidden" />
-							<aui:option label="inset" value="inset" />
-							<aui:option label="outset" value="outset" />
-							<aui:option label="ridge" value="ridge" />
-							<aui:option label="solid" value="solid" />
+							<aui:option label="inset" />
+							<aui:option label="outset" />
+							<aui:option label="ridge" />
+							<aui:option label="solid" />
 						</aui:select>
 
-						<aui:select label="left" name="lfr-border-style-left">
-							<aui:option label="" value="" />
-							<aui:option label="dashed" value="dashed" />
-							<aui:option label="double" value="double" />
-							<aui:option label="dotted" value="dotted" />
-							<aui:option label="groove" value="groove" />
+						<aui:select label="left" name="lfr-border-style-left" showEmptyOption="<%= true %>">
+							<aui:option label="dashed" />
+							<aui:option label="double" />
+							<aui:option label="dotted" />
+							<aui:option label="groove" />
 							<aui:option label="hidden[css]" value="hidden" />
-							<aui:option label="inset" value="inset" />
-							<aui:option label="outset" value="outset" />
-							<aui:option label="ridge" value="ridge" />
-							<aui:option label="solid" value="solid" />
+							<aui:option label="inset" />
+							<aui:option label="outset" />
+							<aui:option label="ridge" />
+							<aui:option label="solid" />
 						</aui:select>
-					</div>
-				</fieldset>
+					</aui:column>
+				</aui:fieldset>
 
-				<fieldset class="aui-column aui-form-column" id="lfr-border-color">
-					<legend><liferay-ui:message key="border-color" /></legend>
-
-					<div class="aui-column-content">
+				<aui:fieldset id="lfr-border-color" label="border-color">
+					<aui:column>
 						<aui:input checked="checked" cssClass="lfr-use-for-all" label="same-for-all" name="lfr-use-for-all-color" type="checkbox" />
 
 						<aui:input label="top" name="lfr-border-color-top" />
@@ -383,26 +338,22 @@
 						<aui:input label="bottom" name="lfr-border-color-bottom" />
 
 						<aui:input label="left" name="lfr-border-color-left" />
-					</div>
-				</fieldset>
-			</fieldset>
+					</aui:column>
+				</aui:fieldset>
+			</aui:fieldset>
 
-			<fieldset class="spacing aui-fieldset" id="spacing-styles">
-				<legend><liferay-ui:message key="spacing" /></legend>
-
-				<fieldset class="aui-column aui-form-column" id="lfr-padding">
-					<legend><liferay-ui:message key="padding" /></legend>
-
-					<div class="aui-column-content">
+			<aui:fieldset cssClass="spacing aui-fieldset" id="spacing-styles" label="spacing">
+				<aui:column>
+					<aui:fieldset id="lfr-padding" label="padding">
 						<aui:input checked="checked" cssClass="lfr-use-for-all" label="same-for-all" name="lfr-use-for-all-padding" type="checkbox" />
 
 						<span class="aui-field-row">
 							<aui:input inlineField="<%= true %>" label="top" name="lfr-padding-top" />
 
 							<aui:select inlineField="<%= true %>" label="" name="lfr-padding-top-unit">
-								<aui:option label="%" value="%" />
-								<aui:option label="px" value="px" />
-								<aui:option label="em" value="em" />
+								<aui:option label="%" />
+								<aui:option label="px" />
+								<aui:option label="em" />
 							</aui:select>
 						</span>
 
@@ -410,9 +361,9 @@
 							<aui:input inlineField="<%= true %>" label="right" name="lfr-padding-right" />
 
 							<aui:select inlineField="<%= true %>" label="" name="lfr-padding-right-unit">
-								<aui:option label="%" value="%" />
-								<aui:option label="px" value="px" />
-								<aui:option label="em" value="em" />
+								<aui:option label="%" />
+								<aui:option label="px" />
+								<aui:option label="em" />
 							</aui:select>
 						</span>
 
@@ -420,9 +371,9 @@
 							<aui:input inlineField="<%= true %>" label="bottom" name="lfr-padding-bottom" />
 
 							<aui:select inlineField="<%= true %>" label="" name="lfr-padding-bottom-unit">
-								<aui:option label="%" value="%" />
-								<aui:option label="px" value="px" />
-								<aui:option label="em" value="em" />
+								<aui:option label="%" />
+								<aui:option label="px" />
+								<aui:option label="em" />
 							</aui:select>
 						</span>
 
@@ -430,27 +381,25 @@
 							<aui:input inlineField="<%= true %>" label="left" name="lfr-padding-left" />
 
 							<aui:select inlineField="<%= true %>" label="" name="lfr-padding-left-unit">
-								<aui:option label="%" value="%" />
-								<aui:option label="px" value="px" />
-								<aui:option label="em" value="em" />
+								<aui:option label="%" />
+								<aui:option label="px" />
+								<aui:option label="em" />
 							</aui:select>
 						</span>
-					</div>
-				</fieldset>
+					</aui:fieldset>
+				</aui:column>
 
-				<fieldset class="aui-column aui-form-column" id="lfr-margin">
-					<legend><liferay-ui:message key="margin" /></legend>
-
-					<div class="aui-column-content">
+				<aui:column>
+					<aui:fieldset id="lfr-margin" label="margin">
 						<aui:input checked="checked" cssClass="lfr-use-for-all" label="same-for-all" name="lfr-use-for-all-margin" type="checkbox" />
 
 						<span class="aui-field-row">
 							<aui:input inlineField="<%= true %>" label="top" name="lfr-margin-top" />
 
 							<aui:select inlineField="<%= true %>" label="" name="lfr-margin-top-unit">
-								<aui:option label="%" value="%" />
-								<aui:option label="px" value="px" />
-								<aui:option label="em" value="em" />
+								<aui:option label="%" />
+								<aui:option label="px" />
+								<aui:option label="em" />
 							</aui:select>
 						</span>
 
@@ -458,9 +407,9 @@
 							<aui:input inlineField="<%= true %>" label="right" name="lfr-margin-right" />
 
 							<aui:select inlineField="<%= true %>" label="" name="lfr-margin-right-unit">
-								<aui:option label="%" value="%" />
-								<aui:option label="px" value="px" />
-								<aui:option label="em" value="em" />
+								<aui:option label="%" />
+								<aui:option label="px" />
+								<aui:option label="em" />
 							</aui:select>
 						</span>
 
@@ -468,9 +417,9 @@
 							<aui:input inlineField="<%= true %>" label="bottom" name="lfr-margin-bottom" />
 
 							<aui:select inlineField="<%= true %>" label="" name="lfr-margin-bottom-unit">
-								<aui:option label="%" value="%" />
-								<aui:option label="px" value="px" />
-								<aui:option label="em" value="em" />
+								<aui:option label="%" />
+								<aui:option label="px" />
+								<aui:option label="em" />
 							</aui:select>
 						</span>
 
@@ -478,38 +427,32 @@
 							<aui:input inlineField="<%= true %>" label="left" name="lfr-margin-left" />
 
 							<aui:select inlineField="<%= true %>" label="" name="lfr-margin-left-unit">
-								<aui:option label="%" value="%" />
-								<aui:option label="px" value="px" />
-								<aui:option label="em" value="em" />
+								<aui:option label="%" />
+								<aui:option label="px" />
+								<aui:option label="em" />
 							</aui:select>
 						</span>
-					</div>
-				</fieldset>
-			</fieldset>
+					</aui:fieldset>
+				</aui:column>
+			</aui:fieldset>
 
-			<fieldset class="aui-fieldset" id="css-styling">
-				<legend><liferay-ui:message key="advanced-css-styling" /></legend>
+			<aui:fieldset id="css-styling" label="advanced-css-styling">
+				<aui:input cssClass="lfr-textarea-container" label="enter-your-custom-css" name="lfr-custom-css" type="textarea" />
+			</aui:fieldset>
 
-				<aui:input label="enter-your-custom-css" name="lfr-custom-css" type="textarea" />
-			</fieldset>
-
-			<fieldset class="aui-fieldset" id="wap-styling">
-				<legend><liferay-ui:message key="wap-styling" /></legend>
-
+			<aui:fieldset id="wap-styling" label="wap-styling">
 				<aui:input label="title" name="lfr-wap-title" />
 
 				<aui:select label="initial-window-state" name="lfr-wap-initial-window-state">
 					<aui:option label="minimized" value="MINIMIZED" />
 					<aui:option label="normal" value="NORMAL" />
 				</aui:select>
-			</fieldset>
+			</aui:fieldset>
 
 			<aui:button-row>
 				<aui:button name="lfr-lookfeel-save" value="save" />
 				<aui:button name="lfr-lookfeel-reset" value="reset" />
 			</aui:button-row>
 		</div>
-
-		</form>
-	</div>
+	</aui:form>
 </div>
