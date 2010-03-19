@@ -33,7 +33,7 @@ List updatablePackageIds = new ArrayList();
 				configurationURL.setParameter("tabs1", "configuration");
 				%>
 
-				<a href="<%= configurationURL %>"><liferay-ui:message key="auto-deploy-is-not-enabled" /></a>
+				<aui:a href="<%= configurationURL.toString() %>"><liferay-ui:message key="auto-deploy-is-not-enabled" /></aui:a>
 			</c:when>
 			<c:otherwise>
 
@@ -47,199 +47,210 @@ List updatablePackageIds = new ArrayList();
 				pluginInstallerURL.setParameter("backURL", currentURL);
 				%>
 
-				<form action="<portlet:actionURL><portlet:param name="struts_action" value="/update_manager/install_plugin" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
-				<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
-				<input name="<portlet:namespace />redirect" type="hidden" value="<portlet:renderURL><portlet:param name="struts_action" value="/update_manager/view" /></portlet:renderURL>" />
+				<portlet:actionURL var="installPluginURL">
+					<portlet:param name="struts_action" value="/update_manager/install_plugin" />
+				</portlet:actionURL>
 
-				<%
-				try {
-					List<String> headerNames = new ArrayList<String>();
+				<aui:form action="<%= installPluginURL %>" method="post" name="fm">
+					<aui:input name="<%= Constants.CMD %>" type="hidden" />
 
-					headerNames.add("plugin");
-					headerNames.add("trusted");
-					headerNames.add("status");
-					headerNames.add("installed-version");
-					headerNames.add("available-version");
-					headerNames.add(StringPool.BLANK);
+					<portlet:renderURL var="viewURL">
+						<portlet:param name="struts_action" value="/update_manager/view" />
+					</portlet:renderURL>
 
-					SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, renderResponse.createRenderURL(), headerNames, null);
+					<aui:input name="redirect" type="hidden" value="<%= viewURL %>" />
 
-					List pluginPackages = PluginPackageUtil.getInstalledPluginPackages();
+					<%
+					try {
+						List<String> headerNames = new ArrayList<String>();
 
-					int total = pluginPackages.size();
+						headerNames.add("plugin");
+						headerNames.add("trusted");
+						headerNames.add("status");
+						headerNames.add("installed-version");
+						headerNames.add("available-version");
+						headerNames.add(StringPool.BLANK);
 
-					searchContainer.setTotal(total);
+						SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, renderResponse.createRenderURL(), headerNames, null);
 
-					pluginPackages = pluginPackages.subList(searchContainer.getStart(), Math.min(total, searchContainer.getEnd()));
+						List pluginPackages = PluginPackageUtil.getInstalledPluginPackages();
 
-					List resultRows = searchContainer.getResultRows();
+						int total = pluginPackages.size();
 
-					for (int i = 0; i < pluginPackages.size(); i++) {
-						PluginPackage pluginPackage = (PluginPackage)pluginPackages.get(i);
+						searchContainer.setTotal(total);
 
-						PluginPackage availablePluginPackage = null;
+						pluginPackages = pluginPackages.subList(searchContainer.getStart(), Math.min(total, searchContainer.getEnd()));
 
-						try {
-							availablePluginPackage = PluginPackageUtil.getLatestAvailablePluginPackage(pluginPackage.getGroupId(), pluginPackage.getArtifactId());
-						}
-						catch (Exception e) {
-						}
+						List resultRows = searchContainer.getResultRows();
 
-						String pluginPackageModuleId = pluginPackage.getModuleId();
-						String pluginPackageName = pluginPackage.getName();
-						String pluginPackageVersion = pluginPackage.getVersion();
-						String pluginPackageContext = pluginPackage.getContext();
+						for (int i = 0; i < pluginPackages.size(); i++) {
+							PluginPackage pluginPackage = (PluginPackage)pluginPackages.get(i);
 
-						String pluginPackageStatus = "up-to-date";
+							PluginPackage availablePluginPackage = null;
 
-						if (PluginPackageUtil.isInstallationInProcess(pluginPackage.getContext())) {
-							pluginPackageStatus = "installation-in-process";
-						}
-						else
-						if ((availablePluginPackage != null) && Version.getInstance(availablePluginPackage.getVersion()).isLaterVersionThan(pluginPackageVersion)) {
-							if (PluginPackageUtil.isIgnored(pluginPackage)) {
-								pluginPackageStatus = "update-ignored";
+							try {
+								availablePluginPackage = PluginPackageUtil.getLatestAvailablePluginPackage(pluginPackage.getGroupId(), pluginPackage.getArtifactId());
 							}
-							else {
-								pluginPackageStatus = "update-available";
+							catch (Exception e) {
 							}
 
-							updatablePackageIds.add(pluginPackage.getPackageId());
-						}
-						else
-						if (pluginPackage.getVersion().equals(Version.UNKNOWN)) {
-							pluginPackageStatus = "unknown";
-						}
+							String pluginPackageModuleId = pluginPackage.getModuleId();
+							String pluginPackageName = pluginPackage.getName();
+							String pluginPackageVersion = pluginPackage.getVersion();
+							String pluginPackageContext = pluginPackage.getContext();
 
-						ResultRow row = new ResultRow(new Object[] {pluginPackage, availablePluginPackage, pluginPackageStatus, uploadProgressId, currentURL}, pluginPackageModuleId, i);
+							String pluginPackageStatus = "up-to-date";
 
-						row.setClassName("status-" + pluginPackageStatus);
+							if (PluginPackageUtil.isInstallationInProcess(pluginPackage.getContext())) {
+								pluginPackageStatus = "installation-in-process";
+							}
+							else
+							if ((availablePluginPackage != null) && Version.getInstance(availablePluginPackage.getVersion()).isLaterVersionThan(pluginPackageVersion)) {
+								if (PluginPackageUtil.isIgnored(pluginPackage)) {
+									pluginPackageStatus = "update-ignored";
+								}
+								else {
+									pluginPackageStatus = "update-available";
+								}
 
-						// Name
+								updatablePackageIds.add(pluginPackage.getPackageId());
+							}
+							else
+							if (pluginPackage.getVersion().equals(Version.UNKNOWN)) {
+								pluginPackageStatus = "unknown";
+							}
 
-						StringBundler sb = new StringBundler(10);
+							ResultRow row = new ResultRow(new Object[] {pluginPackage, availablePluginPackage, pluginPackageStatus, uploadProgressId, currentURL}, pluginPackageModuleId, i);
 
-						sb.append("<strong>");
-						sb.append(pluginPackageName);
-						sb.append("</strong>");
-						sb.append("<br />/");
-						sb.append(pluginPackageContext);
+							row.setClassName("status-" + pluginPackageStatus);
 
-						row.addText(sb.toString());
+							// Name
 
-						// Trusted
+							StringBundler sb = new StringBundler(10);
 
-						if ((availablePluginPackage != null) && PluginPackageUtil.isTrusted(availablePluginPackage.getRepositoryURL())) {
-							row.addText(LanguageUtil.get(pageContext, "yes"));
-						}
-						else {
-							row.addText(LanguageUtil.get(pageContext, "no"));
-						}
-
-						// Status
-
-						row.addText(LanguageUtil.get(pageContext, pluginPackageStatus));
-
-						// Installed version
-
-						row.addText(pluginPackageVersion);
-
-						// Available version
-
-						if (availablePluginPackage != null) {
-							PortletURL rowURL = ((RenderResponseImpl)renderResponse).createRenderURL(PortletKeys.PLUGIN_INSTALLER);
-
-							rowURL.setParameter("struts_action", "/plugin_installer/view");
-							rowURL.setParameter("redirect", currentURL);
-							rowURL.setParameter("tabs1", "browse-repository");
-							rowURL.setParameter("moduleId", availablePluginPackage.getModuleId());
-							rowURL.setParameter("repositoryURL", availablePluginPackage.getRepositoryURL());
-
-							sb.setIndex(0);
-
-							sb.append("<a href=\"");
-							sb.append(rowURL.toString());
-							sb.append("\">");
-							sb.append(availablePluginPackage.getVersion());
-							sb.append("</a>&nbsp;<img align=\"absmiddle\" border=\"0\" src='");
-							sb.append(themeDisplay.getPathThemeImages());
-							sb.append("/document_library/page.png");
-							sb.append("' onmouseover=\"Liferay.Portal.ToolTip.show(this, '");
-							sb.append(availablePluginPackage.getChangeLog());
-							sb.append("')\" />");
+							sb.append("<strong>");
+							sb.append(pluginPackageName);
+							sb.append("</strong>");
+							sb.append("<br />/");
+							sb.append(pluginPackageContext);
 
 							row.addText(sb.toString());
+
+							// Trusted
+
+							if ((availablePluginPackage != null) && PluginPackageUtil.isTrusted(availablePluginPackage.getRepositoryURL())) {
+								row.addText(LanguageUtil.get(pageContext, "yes"));
+							}
+							else {
+								row.addText(LanguageUtil.get(pageContext, "no"));
+							}
+
+							// Status
+
+							row.addText(LanguageUtil.get(pageContext, pluginPackageStatus));
+
+							// Installed version
+
+							row.addText(pluginPackageVersion);
+
+							// Available version
+
+							if (availablePluginPackage != null) {
+								PortletURL rowURL = ((RenderResponseImpl)renderResponse).createRenderURL(PortletKeys.PLUGIN_INSTALLER);
+
+								rowURL.setParameter("struts_action", "/plugin_installer/view");
+								rowURL.setParameter("redirect", currentURL);
+								rowURL.setParameter("tabs1", "browse-repository");
+								rowURL.setParameter("moduleId", availablePluginPackage.getModuleId());
+								rowURL.setParameter("repositoryURL", availablePluginPackage.getRepositoryURL());
+
+								sb.setIndex(0);
+
+								sb.append("<a href=\"");
+								sb.append(rowURL.toString());
+								sb.append("\">");
+								sb.append(availablePluginPackage.getVersion());
+								sb.append("</a>&nbsp;<img align=\"absmiddle\" border=\"0\" src='");
+								sb.append(themeDisplay.getPathThemeImages());
+								sb.append("/document_library/page.png");
+								sb.append("' onmouseover=\"Liferay.Portal.ToolTip.show(this, '");
+								sb.append(availablePluginPackage.getChangeLog());
+								sb.append("')\" />");
+
+								row.addText(sb.toString());
+							}
+							else {
+								row.addText(StringPool.DASH);
+							}
+
+							// Actions
+
+							row.addJSP("/html/portlet/update_manager/plugin_package_action.jsp");
+
+							// Add result row
+
+							resultRows.add(row);
 						}
-						else {
-							row.addText(StringPool.DASH);
-						}
+					%>
 
-						// Actions
+						<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
-						row.addJSP("/html/portlet/update_manager/plugin_package_action.jsp");
+						<liferay-ui:upload-progress
+							id="<%= uploadProgressId %>"
+							message="downloading"
+							redirect="<%= currentURL %>"
+						/>
 
-						// Add result row
-
-						resultRows.add(row);
-					}
-				%>
-
-					<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-
-					<liferay-ui:upload-progress
-						id="<%= uploadProgressId %>"
-						message="downloading"
-						redirect="<%= currentURL %>"
-					/>
-
-					<c:if test="<%= !pluginPackages.isEmpty() %>">
-						<br />
-					</c:if>
-
-					<input type="button" value="<liferay-ui:message key="install-more-plugins" />" onClick="submitForm(document.hrefFm, '<%= pluginInstallerURL.toString() %>');" />
-
-					<c:if test="<%= !updatablePackageIds.isEmpty() %>">
-						<portlet:actionURL var="ignoreAllURL">
-							<portlet:param name="struts_action" value="/update_manager/install_plugin" />
-							<portlet:param name="<%= Constants.CMD %>" value="ignorePackages" />
-							<portlet:param name="redirect" value="<%= currentURL %>" />
-							<portlet:param name="pluginPackagesIgnored" value='<%= StringUtil.merge(updatablePackageIds, "\n") %>' />
-						</portlet:actionURL>
-
-						<input type="button" value="<liferay-ui:message key="ignore-all-updates" />" onClick="submitForm(document.hrefFm, '<%= ignoreAllURL.toString() %>');" />
-					</c:if>
-
-					<div class="separator"><!-- --></div>
-
-					<div>
-						<c:if test="<%= PluginPackageUtil.getLastUpdateDate() != null %>">
-							<%= LanguageUtil.format(pageContext, "list-of-plugins-was-last-refreshed-on-x", dateFormatDateTime.format(PluginPackageUtil.getLastUpdateDate())) %>
+						<c:if test="<%= !pluginPackages.isEmpty() %>">
+							<br />
 						</c:if>
 
-						<input type="button" value="<liferay-ui:message key="refresh" />" onClick="<portlet:namespace/>reloadRepositories();" />
+						<aui:button-row>
+							<aui:button onClick='<%= "submitForm(document.hrefFm," + StringPool.APOSTROPHE + pluginInstallerURL.toString() + StringPool.APOSTROPHE + ");" %>' value="install-more-plugins" />
 
-						<br />
+							<c:if test="<%= !updatablePackageIds.isEmpty() %>">
+								<portlet:actionURL var="ignoreAllURL">
+									<portlet:param name="struts_action" value="/update_manager/install_plugin" />
+									<portlet:param name="<%= Constants.CMD %>" value="ignorePackages" />
+									<portlet:param name="redirect" value="<%= currentURL %>" />
+									<portlet:param name="pluginPackagesIgnored" value='<%= StringUtil.merge(updatablePackageIds, "\n") %>' />
+								</portlet:actionURL>
 
-						<liferay-util:include page="/html/portlet/plugin_installer/repository_report.jsp" />
-					</div>
+								<aui:button onClick='<%= "submitForm(document.hrefFm," + StringPool.APOSTROPHE + ignoreAllURL.toString() + StringPool.APOSTROPHE + ");" %>' value="ignore-all-updates" />
+							</c:if>
+						</aui:button-row>
 
-				<%
-				}
-				catch (PluginPackageException ppe) {
-					if (_log.isWarnEnabled()) {
-						_log.warn("Error browsing the repository", ppe);
+						<div class="separator"><!-- --></div>
+
+						<div>
+							<c:if test="<%= PluginPackageUtil.getLastUpdateDate() != null %>">
+								<%= LanguageUtil.format(pageContext, "list-of-plugins-was-last-refreshed-on-x", dateFormatDateTime.format(PluginPackageUtil.getLastUpdateDate())) %>
+							</c:if>
+
+							<aui:button onClick='<%= renderResponse.getNamespace() + "<portlet:namespace/>reloadRepositories();" %>' value="refresh" />
+
+							<br />
+
+							<liferay-util:include page="/html/portlet/plugin_installer/repository_report.jsp" />
+						</div>
+
+					<%
 					}
-				%>
+					catch (PluginPackageException ppe) {
+						if (_log.isWarnEnabled()) {
+							_log.warn("Error browsing the repository", ppe);
+						}
+					%>
 
-					<div class="portlet-msg-error">
-						<liferay-ui:message key="an-error-occurred-while-retrieving-available-plugins" />
-					</div>
+						<div class="portlet-msg-error">
+							<liferay-ui:message key="an-error-occurred-while-retrieving-available-plugins" />
+						</div>
 
-				<%
-				}
-				%>
+					<%
+					}
+					%>
 
-				</form>
+				</aui:form>
 
 				<aui:script>
 					function <portlet:namespace />reloadRepositories() {
