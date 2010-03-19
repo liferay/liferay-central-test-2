@@ -896,7 +896,6 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			context.importPermissions(
 				DLFileShortcut.class, fileShortcut.getPrimaryKey(),
 				existingFileShortcut.getPrimaryKey());
-
 		}
 		catch (NoSuchFolderException nsfe) {
 			_log.error(
