@@ -554,14 +554,16 @@ long orderId = BeanParamUtil.getLong(order, request, "orderId");
 			<aui:button onClick="<%= taglibOpenInvoiceWindow %>" type="button" value="invoice" />
 
 			<%
-			String taglibConfirmation = renderResponse.getNamespace() + "sendEmail('confirmation');";
-
-			String taglibShipping = renderResponse.getNamespace() + "sendEmail('shipping');";
+			String taglibSendEmailConfirmation = renderResponse.getNamespace() + "sendEmail('confirmation');";
 			%>
 
-			<aui:button onClick="<%= taglibConfirmation %>" type="button" value='<%= LanguageUtil.get(pageContext, (order.isSendOrderEmail() ? "" : "re") + "send-confirmation-email") %>' />
+			<aui:button onClick="<%= taglibSendEmailConfirmation %>" type="button" value='<%= LanguageUtil.get(pageContext, (order.isSendOrderEmail() ? "" : "re") + "send-confirmation-email") %>' />
 
-			<aui:button onClick="<%= taglibShipping %>" type="button" value='<%= LanguageUtil.get(pageContext, (order.isSendShippingEmail() ? "" : "re") + "send-shipping-email") %>' />
+			<%
+			String taglibSendEmailShipping = renderResponse.getNamespace() + "sendEmail('shipping');";
+			%>
+
+			<aui:button onClick="<%= taglibSendEmailShipping %>" type="button" value='<%= LanguageUtil.get(pageContext, (order.isSendShippingEmail() ? "" : "re") + "send-shipping-email") %>' />
 
 			<c:if test="<%= ShoppingOrderPermission.contains(permissionChecker, scopeGroupId, order, ActionKeys.DELETE) %>">
 				<aui:button onClick='<%= renderResponse.getNamespace() + "deleteOrder();" %>' type="button" value="delete" />

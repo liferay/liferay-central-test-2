@@ -62,7 +62,6 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 		List resultRows = searchContainer.getResultRows();
 
 		for (int i = 0; i < results.size(); i++) {
-
 			ShoppingCategory curCategory = (ShoppingCategory)results.get(i);
 
 			curCategory = curCategory.toEscapedModel();
@@ -316,7 +315,6 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 		boolean showAddItemButton = ShoppingCategoryPermission.contains(permissionChecker, scopeGroupId, categoryId, ActionKeys.ADD_ITEM);
 		boolean showSearch = !results.isEmpty();
 		%>
-
 
 		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "items") %>'>
 			<c:if test="<%= showAddItemButton || showSearch %>">

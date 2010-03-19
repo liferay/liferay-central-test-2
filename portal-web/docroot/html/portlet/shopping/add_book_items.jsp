@@ -22,11 +22,11 @@ String redirect = ParamUtil.getString(request, "redirect");
 long categoryId = ParamUtil.getLong(request, "categoryId", ShoppingCategoryConstants.DEFAULT_PARENT_CATEGORY_ID);
 %>
 
-<portlet:actionURL var="addBookItermsURL">
+<portlet:actionURL var="addBookItemsURL">
 	<portlet:param name="struts_action" value="/shopping/add_book_items" />
 </portlet:actionURL>
 
-<aui:form action="<%= addBookItermsURL %>" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "saveBookItem();" %>'>
+<aui:form action="<%= addBookItemsURL %>" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "saveBookItem();" %>'>
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 	<aui:input name="categoryId" type="hidden" value="<%= categoryId %>" />
 
@@ -50,13 +50,13 @@ long categoryId = ParamUtil.getLong(request, "categoryId", ShoppingCategoryConst
 </aui:form>
 
 <aui:script>
-	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />isbns);
-	</c:if>
-
 	function <portlet:namespace />saveBookItem() {
 		alert('<%= UnicodeLanguageUtil.get(pageContext, "please-be-patient") %>');
 
-		submitForm(this); return false;
+		submitForm(this);
 	}
+
+	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
+		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />isbns);
+	</c:if>
 </aui:script>
