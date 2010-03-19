@@ -47,7 +47,7 @@ public class WorkflowTaskManagerUtil {
 			Map<String, Serializable> context)
 		throws WorkflowException {
 
-		return _workflowTaskManager.assignWorkflowTaskToRole(
+		return _workflowTaskManager.assignWorkflowTaskToUser(
 			companyId, userId, workflowTaskId, assigneeUserId, comment, dueDate,
 			context);
 	}
