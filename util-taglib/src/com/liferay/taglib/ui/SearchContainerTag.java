@@ -192,6 +192,10 @@ public class SearchContainerTag extends ParamAndPropertyAncestorTagImpl {
 		return _var;
 	}
 
+	public boolean isDeltaConfigurable() {
+		return _deltaConfigurable;
+	}
+
 	public boolean isHasResults() {
 		return _hasResults;
 	}
@@ -206,10 +210,6 @@ public class SearchContainerTag extends ParamAndPropertyAncestorTagImpl {
 
 	public void setDelta(int delta) {
 		_delta = delta;
-	}
-
-	public boolean isDeltaConfigurable() {
-		return _deltaConfigurable;
 	}
 
 	public void setDeltaConfigurable(boolean deltaConfigurable) {
