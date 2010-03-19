@@ -1112,7 +1112,7 @@ public class DLFileEntryLocalServiceImpl
 					StringPool.BLANK, 0);
 			}
 			else {
-				socialActivityLocalService.addActivity(
+				socialActivityLocalService.addUniqueActivity(
 					fileVersion.getUserId(), fileVersion.getGroupId(),
 					fileVersion.getCreateDate(), DLFileEntry.class.getName(),
 					fileEntryId, DLActivityKeys.UPDATE_FILE_ENTRY,
