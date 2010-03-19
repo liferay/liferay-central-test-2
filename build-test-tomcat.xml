@@ -196,7 +196,7 @@ web.server.display.node=true</echo>
 				<equals arg1="${license.type}" arg2="ee" />
 				<then>
 					<copy
-						file="${hudson.dependencies.dir}${lp.version}_${license.type}/license"
+						file="${hudson.dependencies.dir}/${lp.version}_${license.type}/license"
 						todir="${app.server.parent.dir}/${ee.license.dir}"
 					/>
 				</then>
