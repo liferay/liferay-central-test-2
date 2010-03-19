@@ -31,6 +31,7 @@ import com.liferay.portalweb.portlet.wiki.wikipage.addwikipagename255character.A
 import com.liferay.portalweb.portlet.wiki.wikipage.addwikipagename255characterchildpage.AddWikiPageName255CharacterChildPageTests;
 import com.liferay.portalweb.portlet.wiki.wikipage.addwikipagename255characterchildpagemultiple.AddWikiPageName255CharacterChildPageMultipleTests;
 import com.liferay.portalweb.portlet.wiki.wikipage.addwikipagename256character.AddWikiPageName256CharacterTests;
+import com.liferay.portalweb.portlet.wiki.wikipage.addwikipagenamebackslash.AddWikiPageNameBackSlashTests;
 import com.liferay.portalweb.portlet.wiki.wikipage.addwikipagenameduplicate.AddWikiPageNameDuplicateTests;
 import com.liferay.portalweb.portlet.wiki.wikipage.addwikipagenamenull.AddWikiPageNameNullTests;
 import com.liferay.portalweb.portlet.wiki.wikipage.addwikipagenamesymbol.AddWikiPageNameSymbolTests;
@@ -104,6 +105,7 @@ public class WikiPageTests extends BaseTests {
 		testSuite.addTest(
 			AddWikiPageName255CharacterChildPageMultipleTests.suite());
 		testSuite.addTest(AddWikiPageName256CharacterTests.suite());
+		testSuite.addTest(AddWikiPageNameBackSlashTests.suite());
 		testSuite.addTest(AddWikiPageNameDuplicateTests.suite());
 		testSuite.addTest(AddWikiPageNameNullTests.suite());
 		testSuite.addTest(AddWikiPageNameSymbolTests.suite());
