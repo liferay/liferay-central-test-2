@@ -151,9 +151,11 @@ public class EditWorkflowDefinitionAction extends PortletAction {
 			throw new WorkflowDefinitionFileException();
 		}
 
+		String title = uploadRequest.getParameter("title");
+
 		WorkflowDefinition workflowDefinition =
 			WorkflowDefinitionManagerUtil.deployWorkflowDefinition(
-				themeDisplay.getCompanyId(), themeDisplay.getUserId(),
+				themeDisplay.getCompanyId(), themeDisplay.getUserId(), title,
 				new FileInputStream(file));
 
 		actionRequest.setAttribute(
