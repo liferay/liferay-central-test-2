@@ -661,13 +661,13 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 			throw new SystemException(pe.getMessage());
 		}
 		finally {
-			if (fileReader != null) {
-				try {
+			try {
+				if (fileReader != null) {
 					fileReader.close();
 				}
-				catch (IOException ioe) {
-					_log.error(ioe);
-				}
+			}
+			catch (IOException ioe) {
+				_log.error(ioe);
 			}
 		}
 	}
