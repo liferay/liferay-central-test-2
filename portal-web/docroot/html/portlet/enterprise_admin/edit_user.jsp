@@ -213,7 +213,7 @@ String taglibOnSubmit = renderResponse.getNamespace() + "saveUser('" + ((selUser
 					String sectionJsp = "/html/portlet/enterprise_admin/user/" + _getSectionJsp(section) + ".jsp";
 				%>
 
-					<div class="form-section <%= curSection.equals(section)? "selected" : StringPool.BLANK %>" id="<%= sectionId %>">
+					<div class="form-section <%= curSection.equals(section)? "selected" : "aui-helper-hidden-accessible" %>" id="<%= sectionId %>">
 						<liferay-util:include page="<%= sectionJsp %>" />
 					</div>
 

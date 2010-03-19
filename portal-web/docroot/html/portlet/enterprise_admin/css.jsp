@@ -206,17 +206,12 @@
 }
 
 .portlet-enterprise-admin .form-section {
-	display: none;
 	float: left;
 	width: 63%;
 }
 
 .ie6 .portlet-enterprise-admin .form-section {
 	width: 60%;
-}
-
-.portlet-enterprise-admin .form-section.selected {
-	display: block;
 }
 
 .portlet-enterprise-admin .form-section h3 {

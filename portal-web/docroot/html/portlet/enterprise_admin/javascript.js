@@ -124,10 +124,10 @@ AUI().add(
 					selected.removeClass('selected');
 				}
 
-				instance._sections.removeClass('selected');
+				instance._sections.removeClass('selected').hide('aui-helper-hidden-accessible');
 
 				if (section) {
-					section.addClass('selected');
+					section.addClass('selected').show('aui-helper-hidden-accessible');
 				}
 
 				li.addClass('selected');

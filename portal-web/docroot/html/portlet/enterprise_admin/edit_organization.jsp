@@ -78,7 +78,7 @@ String curSection = mainSections[0];
 					String sectionJsp = "/html/portlet/enterprise_admin/organization/" + _getSectionJsp(section) + ".jsp";
 				%>
 
-					<div class="form-section <%= curSection.equals(section)? "selected" : StringPool.BLANK %>" id="<%= sectionId %>">
+					<div class="form-section <%= curSection.equals(section)? "selected" : "aui-helper-hidden-accessible" %>" id="<%= sectionId %>">
 						<liferay-util:include page="<%= sectionJsp %>" />
 					</div>
 
