@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.log.LogUtil;
 import com.liferay.portal.kernel.servlet.StringPageContext;
 import com.liferay.portal.kernel.servlet.StringServletResponse;
+import com.liferay.portal.kernel.servlet.TrackedServletRequest;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -64,11 +65,12 @@ public class IncludeTag
 			return EVAL_PAGE;
 		}
 		finally {
-			_calledSetAttributes = false;
 			_dynamicAttributes.clear();
 
 			clearParams();
 			clearProperties();
+
+			_cleanUpSetAttributes();
 
 			if (!ServerDetector.isResin()) {
 				_page = null;
@@ -198,16 +200,24 @@ public class IncludeTag
 	}
 
 	private void _callSetAttributes() {
-		if (_calledSetAttributes) {
+		if (_trackedRequest != null) {
 			return;
 		}
-
-		_calledSetAttributes = true;
 
 		HttpServletRequest request =
 			(HttpServletRequest)pageContext.getRequest();
 
-		setAttributes(request);
+		_trackedRequest = new TrackedServletRequest(request);
+
+		setAttributes(_trackedRequest);
+	}
+
+	private void _cleanUpSetAttributes() {
+		for (String name : _trackedRequest.getSetAttributes()) {
+			_trackedRequest.removeAttribute(name);
+		}
+
+		_trackedRequest = null;
 	}
 
 	private void _doInclude(String page) throws JspException {
@@ -234,10 +244,10 @@ public class IncludeTag
 
 	private static Log _log = LogFactoryUtil.getLog(IncludeTag.class);
 
-	private boolean _calledSetAttributes;
 	private Map<String, Object> _dynamicAttributes =
 		new HashMap<String, Object>();
 	private String _page;
 	private String _portletId;
+	private TrackedServletRequest _trackedRequest;
 
 }
