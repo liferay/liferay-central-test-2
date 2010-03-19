@@ -47,6 +47,7 @@ double version = ParamUtil.getDouble(request, "version");
 		ArticleSearch searchContainer = new ArticleSearch(renderRequest, portletURL);
 
 		searchContainer.setDelta(pageDelta);
+		searchContainer.setDeltaConfigurable(false);
 		searchContainer.setOrderByCol(orderByCol);
 		searchContainer.setOrderByType(orderByType);
 		searchContainer.setOrderByComparator(orderByComparator);

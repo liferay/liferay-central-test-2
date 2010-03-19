@@ -104,6 +104,7 @@ request.setAttribute("view.jsp-viewFolder", Boolean.TRUE.toString());
 								<liferay-ui:search-container
 									curParam="cur1"
 									delta="<%= foldersPerPage %>"
+									deltaConfigurable="<%= false %>"
 									headerNames="<%= StringUtil.merge(folderColumns) %>"
 									iteratorURL="<%= portletURL %>"
 								>
@@ -196,6 +197,7 @@ request.setAttribute("view.jsp-viewFolder", Boolean.TRUE.toString());
 				delta="<%= fileEntriesPerPage %>"
 				emptyResultsMessage="there-are-no-documents"
 				iteratorURL="<%= portletURL %>"
+				deltaConfigurable="<%= false %>"
 			>
 				<liferay-ui:search-container-results
 					results="<%= DLFileEntryLocalServiceUtil.getGroupFileEntries(scopeGroupId, groupFileEntriesUserId, searchContainer.getStart(), searchContainer.getEnd()) %>"

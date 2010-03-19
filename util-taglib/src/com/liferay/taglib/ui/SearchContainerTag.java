@@ -46,6 +46,7 @@ public class SearchContainerTag extends ParamAndPropertyAncestorTagImpl {
 	public int doEndTag() {
 		_curParam = SearchContainer.DEFAULT_CUR_PARAM;
 		_delta = SearchContainer.DEFAULT_DELTA;
+		_deltaConfigurable = SearchContainer.DEFAULT_DELTA_CONFIGURABLE;
 		_deltaParam = SearchContainer.DEFAULT_DELTA_PARAM;
 		_displayTerms = null;
 		_emptyResultsMessage = null;
@@ -89,6 +90,7 @@ public class SearchContainerTag extends ParamAndPropertyAncestorTagImpl {
 					getDelta(), _iteratorURL,  null, _emptyResultsMessage);
 			}
 
+			_searchContainer.setDeltaConfigurable(_deltaConfigurable);
 			_searchContainer.setId(_id);
 
 			if (_headerNames != null) {
@@ -206,6 +208,14 @@ public class SearchContainerTag extends ParamAndPropertyAncestorTagImpl {
 		_delta = delta;
 	}
 
+	public boolean isDeltaConfigurable() {
+		return _deltaConfigurable;
+	}
+
+	public void setDeltaConfigurable(boolean deltaConfigurable) {
+		_deltaConfigurable = deltaConfigurable;
+	}
+
 	public void setDeltaParam(String deltaParam) {
 		_deltaParam = deltaParam;
 	}
@@ -276,6 +286,8 @@ public class SearchContainerTag extends ParamAndPropertyAncestorTagImpl {
 
 	private String _curParam = SearchContainer.DEFAULT_CUR_PARAM;
 	private int _delta = SearchContainer.DEFAULT_DELTA;
+	private boolean _deltaConfigurable =
+		SearchContainer.DEFAULT_DELTA_CONFIGURABLE;
 	private String _deltaParam = SearchContainer.DEFAULT_DELTA_PARAM;
 	private DisplayTerms _displayTerms;
 	private String _emptyResultsMessage;
