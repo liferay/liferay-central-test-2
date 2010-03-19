@@ -22,8 +22,8 @@
 		<liferay-ui:message key="link-to-layout" />
 	</td>
 	<td>
-		<input name="TypeSettingsProperties(groupId)" type="hidden" value="<%= layout.getGroupId() %>" />
-		<input name="TypeSettingsProperties(privateLayout)" type="hidden" value="<%= layout.isPrivateLayout() %>" />
+		<input name="TypeSettingsProperties(groupId)" type="hidden" value="<%= selLayout.getGroupId() %>" />
+		<input name="TypeSettingsProperties(privateLayout)" type="hidden" value="<%= selLayout.isPrivateLayout() %>" />
 
 		<%
 		long linkToLayoutId = GetterUtil.getLong(selLayout.getTypeSettingsProperties().getProperty("linkToLayoutId", StringPool.BLANK));
