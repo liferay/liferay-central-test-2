@@ -3531,9 +3531,8 @@ public class PortalImpl implements Portal {
 	 */
 	public void setPortalPort(HttpServletRequest request) {
 		if (_portalPort == -1) {
-			synchronized (_objectLock) {
-				_portalPort =
-					Integer.valueOf(request.getServerPort()).intValue();
+			synchronized (this) {
+				_portalPort = request.getServerPort();
 			}
 		}
 	}
@@ -4114,7 +4113,6 @@ public class PortalImpl implements Portal {
 		new ConcurrentHashMap<String, Long>();
 	private String _portalLibDir;
 	private int _portalPort = -1;
-	private Object _objectLock = new Object();
 	private String _portalWebDir;
 	private Set<String> _reservedParams;
 	private String[] _sortedSystemCommunityRoles;
