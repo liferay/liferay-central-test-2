@@ -15,18 +15,19 @@
 package com.liferay.portlet.workflowtasks.action;
 
 import com.liferay.portal.kernel.servlet.SessionErrors;
-import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.Constants;
-import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.kernel.workflow.WorkflowException;
 import com.liferay.portal.kernel.workflow.WorkflowTaskManagerUtil;
+import com.liferay.portal.kernel.workflow.WorkflowTaskDueDateException;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.PortalUtil;
 
 import java.util.Calendar;
+import java.util.Date;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -43,6 +44,7 @@ import org.apache.struts.action.ActionMapping;
  *
  * @author Jorge Ferrer
  * @author Marcellus Tavares
+ * @author Brian Wing Shun Chan
  */
 public class EditWorkflowTaskAction extends PortletAction {
 
@@ -57,17 +59,21 @@ public class EditWorkflowTaskAction extends PortletAction {
 			if (cmd.equals(Constants.ASSIGN)) {
 				assignTask(actionRequest);
 			}
-			else if (cmd.equals(Constants.SAVE) ||
-					 cmd.equals(Constants.UPDATE)) {
-
+			else if (cmd.equals(Constants.SAVE)) {
+				completeTask(actionRequest);
+			}
+			else if (cmd.equals(Constants.UPDATE)) {
 				updateTask(actionRequest);
 			}
 
 			sendRedirect(actionRequest, actionResponse);
 		}
 		catch (Exception e) {
-			if (e instanceof PrincipalException ||
-				e instanceof WorkflowException) {
+			if (e instanceof WorkflowTaskDueDateException) {
+				SessionErrors.add(actionRequest, e.getClass().getName());
+			}
+			else if (e instanceof PrincipalException ||
+					 e instanceof WorkflowException) {
 
 				SessionErrors.add(actionRequest, e.getClass().getName());
 
@@ -109,6 +115,7 @@ public class EditWorkflowTaskAction extends PortletAction {
 
 		long workflowTaskId = ParamUtil.getLong(
 			actionRequest, "workflowTaskId");
+
 		long assigneeUserId = ParamUtil.getLong(
 			actionRequest, "assigneeUserId");
 		String comment = ParamUtil.getString(actionRequest, "comment");
@@ -118,56 +125,50 @@ public class EditWorkflowTaskAction extends PortletAction {
 			workflowTaskId, assigneeUserId, comment, null, null);
 	}
 
-	protected void updateTask(ActionRequest actionRequest) throws Exception {
+	protected void completeTask(ActionRequest actionRequest) throws Exception {
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
-
 		long workflowTaskId = ParamUtil.getLong(
 			actionRequest, "workflowTaskId");
+
 		String transitionName = ParamUtil.getString(
 			actionRequest, "transitionName");
 		String comment = ParamUtil.getString(actionRequest, "comment");
 
-		if (cmd.equals(Constants.UPDATE)) {
-			int dueDateMonth = ParamUtil.getInteger(
-				actionRequest, "dueDateMonth");
-			int dueDateDay = ParamUtil.getInteger(
-				actionRequest, "dueDateDay");
-			int dueDateYear = ParamUtil.getInteger(
-				actionRequest, "dueDateYear");
-			int dueDateHour = ParamUtil.getInteger(
-				actionRequest, "dueDateHour");
-			int dueDateMinute = ParamUtil.getInteger(
-				actionRequest, "dueDateMinute");
-			int dueDateAmPm = ParamUtil.getInteger(
-				actionRequest, "dueDateAmPm");
+		WorkflowTaskManagerUtil.completeWorkflowTask(
+			themeDisplay.getCompanyId(), themeDisplay.getUserId(),
+			workflowTaskId, transitionName, comment, null);
+	}
 
-			if (dueDateAmPm == Calendar.PM) {
-				dueDateHour += 12;
-			}
+	protected void updateTask(ActionRequest actionRequest) throws Exception {
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
-			Calendar dueDate = CalendarFactoryUtil.getCalendar(
-				LocaleUtil.getDefault());
+		long workflowTaskId = ParamUtil.getLong(
+			actionRequest, "workflowTaskId");
 
-			dueDate.set(Calendar.MONTH, dueDateMonth);
-			dueDate.set(Calendar.DATE, dueDateDay);
-			dueDate.set(Calendar.YEAR, dueDateYear);
-			dueDate.set(Calendar.HOUR_OF_DAY, dueDateHour);
-			dueDate.set(Calendar.MINUTE, dueDateMinute);
-			dueDate.set(Calendar.SECOND, 0);
-			dueDate.set(Calendar.MILLISECOND, 0);
+		String comment = ParamUtil.getString(actionRequest, "comment");
 
-			WorkflowTaskManagerUtil.updateDueDate(
-				themeDisplay.getCompanyId(), themeDisplay.getUserId(),
-				workflowTaskId, comment, dueDate.getTime());
+		int dueDateMonth = ParamUtil.getInteger(actionRequest, "dueDateMonth");
+		int dueDateDay = ParamUtil.getInteger(actionRequest, "dueDateDay");
+		int dueDateYear = ParamUtil.getInteger(actionRequest, "dueDateYear");
+		int dueDateHour = ParamUtil.getInteger(actionRequest, "dueDateHour");
+		int dueDateMinute = ParamUtil.getInteger(
+			actionRequest, "dueDateMinute");
+		int dueDateAmPm = ParamUtil.getInteger(actionRequest, "dueDateAmPm");
+
+		if (dueDateAmPm == Calendar.PM) {
+			dueDateHour += 12;
 		}
-		else {
-			WorkflowTaskManagerUtil.completeWorkflowTask(
-				themeDisplay.getCompanyId(), themeDisplay.getUserId(),
-				workflowTaskId, transitionName, comment, null);
-		}
+
+		Date dueDate = PortalUtil.getDate(
+			dueDateMonth, dueDateDay, dueDateYear, dueDateHour, dueDateMinute,
+			new WorkflowTaskDueDateException());
+
+		WorkflowTaskManagerUtil.updateDueDate(
+			themeDisplay.getCompanyId(), themeDisplay.getUserId(),
+			workflowTaskId, comment, dueDate);
 	}
 
 }

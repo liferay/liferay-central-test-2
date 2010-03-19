@@ -21,12 +21,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 WorkflowTask workflowTask = (WorkflowTask)request.getAttribute(WebKeys.WORKFLOW_TASK);
 
-Calendar dueDate = CalendarFactoryUtil.getCalendar(timeZone, locale);
-
-if (workflowTask.getDueDate() != null) {
-	dueDate.setTime(workflowTask.getDueDate());
-}
-
 WorkflowInstance workflowInstance = WorkflowInstanceManagerUtil.getWorkflowInstance(company.getCompanyId(), workflowTask.getWorkflowInstanceId());
 
 Map<String, Serializable> workflowInstanceContext = workflowInstance.getContext();
@@ -49,6 +43,8 @@ long classPK = ((Number)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS
 	<aui:input name="workflowTaskId" type="hidden" value="<%= String.valueOf(workflowTask.getWorkflowTaskId()) %>" />
 	<aui:input name="transitionName" type="hidden" />
 	<aui:input name="comment" type="hidden" />
+
+	<liferay-ui:error exception="<%= WorkflowTaskDueDateException.class %>" message="please-enter-a-valid-due-date" />
 
 	<aui:field-wrapper inlineLabel="left" label="name">
 		<%= workflowTask.getName() %>
@@ -90,41 +86,9 @@ long classPK = ((Number)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS
 		<%= dateFormatDateTime.format(workflowTask.getCreateDate()) %>
 	</aui:field-wrapper>
 
-	<aui:field-wrapper label="due-date">
-		<span class="aui-field-element ">
-			<liferay-ui:input-date
-				monthParam="dueDateMonth"
-				monthValue="<%= dueDate.get(Calendar.MONTH) %>"
-				dayParam="dueDateDay"
-				dayValue="<%= dueDate.get(Calendar.DATE) %>"
-				yearParam="dueDateYear"
-				yearValue="<%= dueDate.get(Calendar.YEAR) %>"
-				yearRangeStart="<%= dueDate.get(Calendar.YEAR) - 100 %>"
-				yearRangeEnd="<%= dueDate.get(Calendar.YEAR) + 100 %>"
-				firstDayOfWeek="<%= dueDate.getFirstDayOfWeek() - 1 %>"
-				disabled="<%= true %>"
-			/>
-
-			&nbsp;
-
-			<liferay-ui:input-time
-				hourParam="dueDateHour"
-				hourValue="<%= dueDate.get(Calendar.HOUR) %>"
-				minuteParam="dueDateMinute"
-				minuteValue="<%= dueDate.get(Calendar.MINUTE) %>"
-				minuteInterval="<%= 1 %>"
-				amPmParam="dueDateAmPm"
-				amPmValue="<%= dueDate.get(Calendar.AM_PM) %>"
-				disabled="<%= true %>"
-			/>
-		</span>
+	<aui:field-wrapper inlineLabel="left" label="due-date">
+		<%= (workflowTask.getDueDate() == null) ? LanguageUtil.get(pageContext, "never") : dateFormatDateTime.format(workflowTask.getDueDate()) %>
 	</aui:field-wrapper>
-
-	<%
-	String taglibDueDateOnClick = renderResponse.getNamespace() + "disableInputDate('dueDate', !this.checked);";
-	%>
-
-	<aui:input inlineLabel="right" label="change-due-date" name="changeDueDate" onClick="<%= taglibDueDateOnClick %>" type="checkbox" />
 
 	<c:if test="<%= PortletPermissionUtil.contains(permissionChecker, PortletKeys.WORKFLOW_TASKS, ActionKeys.ASSIGN_USER_TASKS) %>">
 
@@ -162,15 +126,12 @@ long classPK = ((Number)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS
 		for (WorkflowLog workflowLog : workflowLogs) {
 			Role curRole = null;
 			User curUser = null;
-			String actorName = null;
 
 			if (workflowLog.getRoleId() != 0) {
 				curRole = RoleLocalServiceUtil.getRole(workflowLog.getRoleId());
-				actorName = curRole.getDescriptiveName();
 			}
 			else if (workflowLog.getUserId() != 0) {
 				curUser = UserLocalServiceUtil.getUser(workflowLog.getUserId());
-				actorName = curUser.getFullName();
 			}
 		%>
 
@@ -180,12 +141,19 @@ long classPK = ((Number)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS
 				</div>
 
 				<c:choose>
-					<c:when test="<%= workflowLog.getType() == WorkflowLog.TASK_UPDATE %>">
-						<div>
-							<%= LanguageUtil.format(pageContext, "x-updated-the-due-date", HtmlUtil.escape(actorName)) %>
-						</div>
-					</c:when>
 					<c:when test="<%= workflowLog.getType() == WorkflowLog.TRANSITION %>">
+
+						<%
+						String actorName = null;
+
+						if (curRole == null) {
+							actorName = curUser.getFullName();
+						}
+						else {
+							actorName = curRole.getDescriptiveName();
+						}
+						%>
+
 						<div>
 							<%= LanguageUtil.format(pageContext, "x-changed-the-state-from-x-to-x", new Object[] {HtmlUtil.escape(actorName), workflowLog.getPreviousState(), workflowLog.getState()}) %>
 						</div>
@@ -201,12 +169,15 @@ long classPK = ((Number)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS
 
 								<%
 								String previousActorName = null;
+								String actorName = null;
 
 								if (curRole == null) {
 									previousActorName = PortalUtil.getUserName(workflowLog.getPreviousUserId(), StringPool.BLANK);
+									actorName = curUser.getFullName();
 								}
 								else {
 									previousActorName = curRole.getDescriptiveName();
+									actorName = curRole.getDescriptiveName();
 								}
 								%>
 
@@ -255,12 +226,6 @@ long classPK = ((Number)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS
 
 		</c:if>
 
-		<%
-		String taglibOnClick = renderResponse.getNamespace() + "updateWorkflowTask('"+ Constants.UPDATE +"');";
-		%>
-
-		<aui:button name="updateButton" onClick="<%= taglibOnClick %>" disabled="<%= true %>" type="button" value="update-due-date" />
-
 		<aui:button onClick="<%= redirect %>" type="cancel" />
 	</aui:button-row>
 </aui:form>
@@ -285,17 +250,6 @@ long classPK = ((Number)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS
 />
 
 <aui:script>
-	function <portlet:namespace />disableInputDate(date, disabled) {
-		document.<portlet:namespace />fm["<portlet:namespace />" + date + "Month"].disabled = disabled;
-		document.<portlet:namespace />fm["<portlet:namespace />" + date + "Day"].disabled = disabled;
-		document.<portlet:namespace />fm["<portlet:namespace />" + date + "Year"].disabled = disabled;
-		document.<portlet:namespace />fm["<portlet:namespace />" + date + "Hour"].disabled = disabled;
-		document.<portlet:namespace />fm["<portlet:namespace />" + date + "Minute"].disabled = disabled;
-		document.<portlet:namespace />fm["<portlet:namespace />" + date + "AmPm"].disabled = disabled;
-
-		document.<portlet:namespace />fm["<portlet:namespace />updateButton"].disabled = disabled;
-	}
-
 	function <portlet:namespace />updateWorkflowTask(cmd, transitionName) {
 		AUI().use(
 			'aui-dialog',
