@@ -178,7 +178,9 @@ public abstract class BaseIndexer implements Indexer {
 			categoryIdsQuery.add(termQuery, BooleanClauseOccur.SHOULD);
 		}
 
-		contextQuery.add(categoryIdsQuery, BooleanClauseOccur.MUST);
+		if (!categoryIdsQuery.clauses().isEmpty()) {
+			contextQuery.add(categoryIdsQuery, BooleanClauseOccur.MUST);
+		}
 	}
 
 	protected void addSearchFolderIds(
@@ -209,7 +211,9 @@ public abstract class BaseIndexer implements Indexer {
 			folderIdsQuery.add(termQuery, BooleanClauseOccur.SHOULD);
 		}
 
-		contextQuery.add(folderIdsQuery, BooleanClauseOccur.MUST);
+		if (!folderIdsQuery.clauses().isEmpty()) {
+			contextQuery.add(folderIdsQuery, BooleanClauseOccur.MUST);
+		}
 	}
 
 	protected void addSearchGroupId(
@@ -287,7 +291,9 @@ public abstract class BaseIndexer implements Indexer {
 			nodeIdsQuery.add(termQuery, BooleanClauseOccur.SHOULD);
 		}
 
-		contextQuery.add(nodeIdsQuery, BooleanClauseOccur.MUST);
+		if (!nodeIdsQuery.clauses().isEmpty()) {
+			contextQuery.add(nodeIdsQuery, BooleanClauseOccur.MUST);
+		}
 	}
 
 	protected void addSearchOwnerUserId(
@@ -330,7 +336,7 @@ public abstract class BaseIndexer implements Indexer {
 
 		fullQuery.add(contextQuery, BooleanClauseOccur.MUST);
 
-		if (searchQuery.clauses().size() > 0) {
+		if (!searchQuery.clauses().isEmpty()) {
 			fullQuery.add(searchQuery, BooleanClauseOccur.MUST);
 		}
 
