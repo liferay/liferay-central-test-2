@@ -902,9 +902,6 @@ public class PropsValues {
 	public static final String[] LAYOUT_TYPES =
 		PropsUtil.getArray(PropsKeys.LAYOUT_TYPES);
 
-	public static final String[] LAYOUT_SYSTEM_TYPES =
-		PropsUtil.getArray(PropsKeys.LAYOUT_SYSTEM_TYPES);
-
 	public static boolean LAYOUT_USER_PRIVATE_LAYOUTS_AUTO_CREATE =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.LAYOUT_USER_PRIVATE_LAYOUTS_AUTO_CREATE));

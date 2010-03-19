@@ -1411,7 +1411,8 @@ public class PortalImpl implements Portal {
 	}
 
 	public String getLayoutEditPage(Layout layout) {
-		return LayoutSetting.getLayoutSetting(layout).getEditPage();
+		return PropsUtil.get(
+			PropsKeys.LAYOUT_EDIT_PAGE, new Filter(layout.getType()));
 	}
 
 	public String getLayoutFriendlyURL(
@@ -1795,7 +1796,8 @@ public class PortalImpl implements Portal {
 	}
 
 	public String getLayoutViewPage(Layout layout) {
-		return LayoutSetting.getLayoutSetting(layout).getViewPage();
+		return PropsUtil.get(
+			PropsKeys.LAYOUT_VIEW_PAGE, new Filter(layout.getType()));
 	}
 
 	public Locale getLocale(HttpServletRequest request) {
@@ -3131,19 +3133,26 @@ public class PortalImpl implements Portal {
 	}
 
 	public boolean isLayoutFirstPageable(String type) {
-		return LayoutSetting.getLayoutSetting(type).isFirstPageable();
+		return GetterUtil.getBoolean(
+			PropsUtil.get(PropsKeys.LAYOUT_FIRST_PAGEABLE, new Filter(type)),
+			false);
 	}
 
 	public boolean isLayoutFriendliable(Layout layout) {
-		return LayoutSetting.getLayoutSetting(layout).isUrlFriendliable();
+		return GetterUtil.getBoolean(
+			PropsUtil.get(
+				PropsKeys.LAYOUT_URL_FRIENDLIABLE,
+				new Filter(layout.getType())),
+			true);
 	}
 
 	public boolean isLayoutParentable(Layout layout) {
-		return LayoutSetting.getLayoutSetting(layout).isParentable();
+		return isLayoutParentable(layout.getType());
 	}
 
 	public boolean isLayoutParentable(String type) {
-		return LayoutSetting.getLayoutSetting(type).isParentable();
+		return GetterUtil.getBoolean(
+			PropsUtil.get(PropsKeys.LAYOUT_PARENTABLE, new Filter(type)), true);
 	}
 
 	public boolean isLayoutSitemapable(Layout layout) {
@@ -3151,7 +3160,8 @@ public class PortalImpl implements Portal {
 			return false;
 		}
 
-		return LayoutSetting.getLayoutSetting(layout).isSitemapable();
+		return GetterUtil.getBoolean(PropsUtil.get(
+			PropsKeys.LAYOUT_SITEMAPABLE, new Filter(layout.getType())), true);
 	}
 
 	public boolean isMethodGet(PortletRequest portletRequest) {

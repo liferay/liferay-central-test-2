@@ -15,6 +15,7 @@
 package com.liferay.portlet.communities.util;
 
 import com.liferay.portal.events.EventsProcessorUtil;
+import com.liferay.portal.kernel.configuration.Filter;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -33,8 +34,8 @@ import com.liferay.portal.service.LayoutSetPrototypeLocalServiceUtil;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
 import com.liferay.portal.service.permission.LayoutPermissionUtil;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.LayoutSetting;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
 
 import java.io.File;
@@ -160,10 +161,10 @@ public class CommunitiesUtil {
 				permissionChecker, groupId, privateLayout, layoutId,
 				ActionKeys.DELETE)) {
 
-			String[] eventClasses =
-				StringUtil.split(
-					LayoutSetting.getLayoutSetting(layout).
-						getConfigurationActionDelete());
+			String[] eventClasses = StringUtil.split(
+				PropsUtil.get(
+					PropsKeys.LAYOUT_CONFIGURATION_ACTION_DELETE,
+					new Filter(layout.getType())));
 
 			EventsProcessorUtil.process(
 				PropsKeys.LAYOUT_CONFIGURATION_ACTION_DELETE, eventClasses,
