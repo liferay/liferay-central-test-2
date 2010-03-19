@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.KeyValuePair;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -242,6 +243,10 @@ public class PortletExporter {
 		// Comments
 
 		exportComments(context, root);
+
+		// Portlet Data Permissions
+
+		exportPortletDataPermissions(context);
 
 		// Ratings
 
@@ -793,6 +798,51 @@ public class PortletExporter {
 		portletDataEl.addAttribute("path", sb.toString());
 
 		context.addZipEntry(sb.toString(), data);
+	}
+
+	protected void exportPortletDataPermissions(PortletDataContext context)
+		throws SystemException {
+
+		try {
+			Document doc = SAXReaderUtil.createDocument();
+
+			Element root = doc.addElement("portlet-data-permissions");
+
+			Map<String, List<KeyValuePair>> permissionsMap =
+				context.getPermissions();
+
+			for (Map.Entry<String, List<KeyValuePair>> entry :
+					permissionsMap.entrySet()) {
+
+				String[] permissionEntry = entry.getKey().split(
+					StringPool.POUND);
+
+				Element portletDataEl = root.addElement("portlet-data");
+
+				portletDataEl.addAttribute("class-name", permissionEntry[0]);
+				portletDataEl.addAttribute("class-pk", permissionEntry[1]);
+
+				List<KeyValuePair> permissions = entry.getValue();
+
+				for (KeyValuePair permission : permissions) {
+					String roleName = permission.getKey();
+					String actions = permission.getValue();
+
+					Element permissionsEl = portletDataEl.addElement(
+						"permissions");
+
+					permissionsEl.addAttribute("role-name", roleName);
+					permissionsEl.addAttribute("actions", actions);
+				}
+			}
+
+			context.addZipEntry(
+				context.getRootPath() + "/portlet-data-permissions.xml",
+				doc.formattedString());
+		}
+		catch (IOException ioe) {
+			throw new SystemException(ioe);
+		}
 	}
 
 	protected void exportPortletPermissions_4(

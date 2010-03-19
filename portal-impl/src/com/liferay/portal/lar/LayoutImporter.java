@@ -303,6 +303,7 @@ public class LayoutImporter {
 
 		_portletImporter.readCategories(context, root);
 		_portletImporter.readComments(context, root);
+		_portletImporter.readPortletDataPermissions(context);
 		_portletImporter.readRatings(context, root);
 		_portletImporter.readTags(context, root);
 

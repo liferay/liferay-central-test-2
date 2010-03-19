@@ -485,6 +485,10 @@ public class LayoutExporter {
 
 		_portletExporter.exportComments(context, root);
 
+		// Portlet Data Permissions
+
+		_portletExporter.exportPortletDataPermissions(context);
+
 		// Ratings
 
 		_portletExporter.exportRatings(context, root);
