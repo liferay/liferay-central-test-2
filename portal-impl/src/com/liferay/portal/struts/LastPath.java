@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.util.StringBundler;
 
 import java.io.Serializable;
 
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -29,7 +30,7 @@ import java.util.Map;
 public class LastPath implements Serializable {
 
 	public LastPath(String contextPath, String path) {
-		this(contextPath, path, null);
+		this(contextPath, path, Collections.EMPTY_MAP);
 	}
 
 	public LastPath(
