@@ -67,6 +67,7 @@ import com.liferay.portalweb.portlet.wiki.wikipage.revertchangeparentfrontpagech
 import com.liferay.portalweb.portlet.wiki.wikipage.revertchangeparentwikipagetowikipage.RevertChangeParentWikiPageToWikiPageTests;
 import com.liferay.portalweb.portlet.wiki.wikipage.reverteditfrontpage.RevertEditFrontPageTests;
 import com.liferay.portalweb.portlet.wiki.wikipage.reverteditfrontpageminorchange.RevertEditFrontPageMinorChangeTests;
+import com.liferay.portalweb.portlet.wiki.wikipage.searchrenamewikipagetitle.SearchRenameWikiPageTitleTests;
 import com.liferay.portalweb.portlet.wiki.wikipage.searchwikipagecontent.SearchWikiPageContentTests;
 import com.liferay.portalweb.portlet.wiki.wikipage.searchwikipagetitle.SearchWikiPageTitleTests;
 import com.liferay.portalweb.portlet.wiki.wikipage.viewwikipageallpages.ViewWikiPageAllPagesTests;
@@ -148,6 +149,7 @@ public class WikiPageTests extends BaseTests {
 		testSuite.addTest(RevertChangeParentWikiPageToWikiPageTests.suite());
 		testSuite.addTest(RevertEditFrontPageTests.suite());
 		testSuite.addTest(RevertEditFrontPageMinorChangeTests.suite());
+		testSuite.addTest(SearchRenameWikiPageTitleTests.suite());
 		testSuite.addTest(SearchWikiPageContentTests.suite());
 		testSuite.addTest(SearchWikiPageTitleTests.suite());
 		testSuite.addTest(ViewWikiPageAllPagesTests.suite());
