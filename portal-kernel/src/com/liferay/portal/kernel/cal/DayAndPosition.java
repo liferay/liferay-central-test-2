@@ -161,9 +161,7 @@ public class DayAndPosition implements Cloneable, Serializable {
 	}
 
 	public int hashCode() {
-		int result = day;
-		result = 31 * result + position;
-		return result;
+		return 31 * day + position;
 	}
 
 	/**

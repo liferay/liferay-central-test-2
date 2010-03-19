@@ -162,6 +162,10 @@ public class DayAndPosition implements Cloneable, Serializable {
 			   && (getDayPosition() == that.getDayPosition());
 	}
 
+	public int hashCode() {
+		return 31 * day + position;
+	}
+
 	/**
 	 * Method isValidDayOfWeek
 	 *
