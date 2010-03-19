@@ -36,6 +36,7 @@ import com.liferay.portal.model.UserGroupConstants;
 import com.liferay.portal.security.permission.PermissionCacheUtil;
 import com.liferay.portal.service.base.UserGroupLocalServiceBaseImpl;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -100,9 +101,14 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 	public void copyUserGroupLayouts(long userGroupId, long userIds[])
 		throws PortalException, SystemException {
 
+		Map<String, String[]> parameterMap = getLayoutTemplatesParameters();
+
+		InputStream[] inputStreams = exportLayouts(userGroupId, parameterMap);
+
 		for (long userId : userIds) {
 			if (!userGroupPersistence.containsUser(userGroupId, userId)) {
-				copyUserGroupLayouts(userGroupId, userId);
+				importLayouts(
+					userId, parameterMap, inputStreams[0], inputStreams[1]);
 			}
 		}
 	}
@@ -120,38 +126,11 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 	public void copyUserGroupLayouts(long userGroupId, long userId)
 		throws PortalException, SystemException {
 
-		UserGroup userGroup = userGroupLocalService.getUserGroup(userGroupId);
-		User user = userPersistence.findByPrimaryKey(userId);
-
 		Map<String, String[]> parameterMap = getLayoutTemplatesParameters();
 
-		if (userGroup.hasPrivateLayouts()) {
-			long sourceGroupId = userGroup.getGroup().getGroupId();
-			long targetGroupId = user.getGroup().getGroupId();
+		InputStream[] inputStreams = exportLayouts(userGroupId, parameterMap);
 
-			byte[] bytes = layoutLocalService.exportLayouts(
-				sourceGroupId, true, parameterMap, null, null);
-
-			UnsyncByteArrayInputStream ubais = new UnsyncByteArrayInputStream(
-				bytes);
-
-			layoutLocalService.importLayouts(
-				userId, targetGroupId, true, parameterMap, ubais);
-		}
-
-		if (userGroup.hasPublicLayouts()) {
-			long sourceGroupId = userGroup.getGroup().getGroupId();
-			long targetGroupId = user.getGroup().getGroupId();
-
-			byte[] bytes = layoutLocalService.exportLayouts(
-				sourceGroupId, false, parameterMap, null, null);
-
-			UnsyncByteArrayInputStream ubais = new UnsyncByteArrayInputStream(
-				bytes);
-
-			layoutLocalService.importLayouts(
-				userId, targetGroupId, false, parameterMap, ubais);
-		}
+		importLayouts(userId, parameterMap, inputStreams[0], inputStreams[1]);
 	}
 
 	public void deleteUserGroup(long userGroupId)
@@ -301,6 +280,33 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 		return userGroup;
 	}
 
+	protected InputStream[] exportLayouts(
+			long userGroupId, Map<String, String[]> parameterMap)
+		throws PortalException, SystemException {
+
+		InputStream[] inputStreams = new InputStream[2];
+
+		UserGroup userGroup = userGroupLocalService.getUserGroup(userGroupId);
+
+		long groupId = userGroup.getGroup().getGroupId();
+
+		if (userGroup.hasPrivateLayouts()) {
+			byte[] bytes = layoutLocalService.exportLayouts(
+				groupId, true, parameterMap, null, null);
+
+			inputStreams[0] = new UnsyncByteArrayInputStream(bytes);
+		}
+
+		if (userGroup.hasPublicLayouts()) {
+			byte[] bytes = layoutLocalService.exportLayouts(
+				groupId, false, parameterMap, null, null);
+
+			inputStreams[1] = new UnsyncByteArrayInputStream(bytes);
+		}
+
+		return inputStreams;
+	}
+
 	protected Map<String, String[]> getLayoutTemplatesParameters() {
 		Map<String, String[]> parameterMap =
 			new LinkedHashMap<String, String[]>();
@@ -351,6 +357,26 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 			new String[] {Boolean.FALSE.toString()});
 
 		return parameterMap;
+	}
+
+	protected void importLayouts(
+			long userId, Map<String, String[]> parameterMap,
+			InputStream privateLayoutsIS, InputStream publicLayoutsIS)
+		throws PortalException, SystemException {
+
+		User user = userPersistence.findByPrimaryKey(userId);
+
+		long groupId = user.getGroup().getGroupId();
+
+		if (privateLayoutsIS != null) {
+			layoutLocalService.importLayouts(
+				userId, groupId, true, parameterMap, privateLayoutsIS);
+		}
+
+		if (publicLayoutsIS != null) {
+			layoutLocalService.importLayouts(
+				userId, groupId, false, parameterMap, publicLayoutsIS);
+		}
 	}
 
 	protected void validate(long userGroupId, long companyId, String name)
