@@ -20,6 +20,8 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.Company;
+import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.ldap.LDAPSettingsUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
@@ -44,38 +46,52 @@ public class SiteMinderAutoLogin extends CASAutoLogin {
 		String[] credentials = null;
 
 		try {
-			long companyId = PortalUtil.getCompanyId(request);
+			Company company = PortalUtil.getCompany(request);
+			long companyId = company.getCompanyId();
 
 			if (!LDAPSettingsUtil.isSiteMinderEnabled(companyId)) {
 				return credentials;
 			}
 
-			String screenName = request.getHeader(
+			String siteMinderUserHeader = request.getHeader(
 				PrefsPropsUtil.getString(
 					companyId, PropsKeys.SITEMINDER_USER_HEADER,
 					PropsValues.SITEMINDER_USER_HEADER));
 
-			if (Validator.isNull(screenName)) {
+			if (Validator.isNull(siteMinderUserHeader)) {
 				return credentials;
 			}
 
+			String authType = company.getAuthType();
+			
 			User user = null;
 
 			if (PrefsPropsUtil.getBoolean(
 					companyId, PropsKeys.SITEMINDER_IMPORT_FROM_LDAP,
 					PropsValues.SITEMINDER_IMPORT_FROM_LDAP)) {
-
 				try {
-					user = importLDAPUser(
-						companyId, StringPool.BLANK, screenName);
+					if (authType.equals(CompanyConstants.AUTH_TYPE_EA)) {
+						user = importLDAPUser(
+							companyId, siteMinderUserHeader, StringPool.BLANK);
+					}
+					else {
+						user = importLDAPUser(
+							companyId, StringPool.BLANK, siteMinderUserHeader);
+					}
 				}
 				catch (SystemException se) {
 				}
 			}
 
 			if (user == null) {
-				user = UserLocalServiceUtil.getUserByScreenName(
-					companyId, screenName);
+				if (authType.equals(CompanyConstants.AUTH_TYPE_EA)) {
+					user = UserLocalServiceUtil.getUserByEmailAddress(
+						companyId, siteMinderUserHeader);
+				}
+				else {
+					user = UserLocalServiceUtil.getUserByScreenName(
+						companyId, siteMinderUserHeader);
+				}
 			}
 
 			credentials = new String[3];
