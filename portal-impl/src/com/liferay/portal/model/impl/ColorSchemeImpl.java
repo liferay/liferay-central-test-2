@@ -196,6 +196,10 @@ public class ColorSchemeImpl implements ColorScheme {
 		}
 	}
 
+	public int hashCode() {
+		return _colorSchemeId.hashCode();
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(ColorScheme.class);
 
 	private String _colorSchemeId;

@@ -331,6 +331,10 @@ public class Entity {
 		}
 	}
 
+	public int hashCode() {
+		return _name.hashCode();
+	}
+
 	public boolean hasLocalizedColumn() {
 		for (EntityColumn col : _columnList) {
 			if (col.isLocalized()) {

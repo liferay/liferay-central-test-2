@@ -119,6 +119,10 @@ public class PortletPreferencesWrapper
 		}
 	}
 
+	public int hashCode() {
+		return _preferences.hashCode();
+	}
+
 	private PortletPreferences _preferences;
 	private String _lifecycle;
 

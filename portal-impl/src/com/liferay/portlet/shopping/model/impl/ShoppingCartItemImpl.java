@@ -89,6 +89,12 @@ public class ShoppingCartItemImpl implements ShoppingCartItem {
 		return _item;
 	}
 
+	public int hashCode() {
+		int result = _fields.hashCode();
+		result = 31 * result + _item.hashCode();
+		return result;
+	}
+	
 	private String _fields;
 	private ShoppingItem _item;
 

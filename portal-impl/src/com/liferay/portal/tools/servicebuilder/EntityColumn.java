@@ -141,6 +141,10 @@ public class EntityColumn implements Cloneable {
 		return _name.substring(0, _name.length() - 2) + "Uuid";
 	}
 
+	public int hashCode() {
+		return _name.hashCode();
+	}
+	
 	public boolean isCaseSensitive() {
 		return _caseSensitive;
 	}

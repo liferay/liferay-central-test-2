@@ -148,6 +148,16 @@ public class PortletPreferencesImpl
 		}
 	}
 
+	public int hashCode() {
+		int result = (int) (_companyId ^ (_companyId >>> 32));
+		result = 31 * result + (int) (_ownerId ^ (_ownerId >>> 32));
+		result = 31 * result + _ownerType;
+		result = 31 * result + (int) (_plid ^ (_plid >>> 32));
+		result = 31 * result + _portletId.hashCode();
+		result = 31 * result + getMap().hashCode();
+		return result;
+	}
+	
 	public boolean isReadOnly(String key) {
 		if (key == null) {
 			throw new IllegalArgumentException();

@@ -69,6 +69,10 @@ public class KeyValuePair implements Comparable<KeyValuePair>, Serializable {
 		}
 	}
 
+	public int hashCode() {
+		return _key.hashCode();		
+	}
+
 	private String _key;
 	private String _value;
 

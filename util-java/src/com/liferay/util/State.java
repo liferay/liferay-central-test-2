@@ -63,6 +63,10 @@ public class State {
 		}
 	}
 
+	public int hashCode() {
+		return (31 * _id.hashCode()+ _name.hashCode());
+	}
+
 	private String _id;
 	private String _name;
 

@@ -77,6 +77,13 @@ public class DiffResult {
 		return false;
 	}
 
+	public int hashCode() {
+		int result = _lineNumber;
+		result = 31 * result + (
+			(_changedLines != null) ? _changedLines.hashCode() : 0);
+		return result;
+	}
+
 	public String toString() {
 		StringBundler sb = new StringBundler(2 * _changedLines.size() + 2);
 

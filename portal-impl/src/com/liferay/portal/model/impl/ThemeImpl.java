@@ -374,6 +374,10 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 		}
 	}
 
+	public int hashCode() {
+		return _themeId.hashCode();
+	}
+
 	protected boolean isAvailable(ThemeCompanyLimit limit, long id) {
 		boolean available = true;
 

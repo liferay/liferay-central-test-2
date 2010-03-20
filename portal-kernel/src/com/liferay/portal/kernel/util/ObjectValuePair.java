@@ -64,6 +64,10 @@ public class ObjectValuePair<K, V> implements Serializable {
 		}
 	}
 
+	public int hashCode() {
+		return _key.hashCode();
+	}
+
 	private K _key;
 	private V _value;
 
