@@ -167,7 +167,14 @@
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:attribute>
-
+			<xs:attribute name="type" use="required">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="onEntry" />
+						<xs:enumeration value="onExit" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>			
 		</xs:complexType>
 	</xs:element>
 	<xs:element name="transitions">
