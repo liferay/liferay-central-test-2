@@ -323,6 +323,9 @@ public class HookHotDeployListener
 					initAutoLogins(
 						servletContextName, portletClassLoader,
 						portalProperties);
+					initAuthenticators(
+						servletContextName, portletClassLoader,
+						portalProperties);
 					initHotDeployListeners(
 						servletContextName, portletClassLoader,
 						portalProperties);
