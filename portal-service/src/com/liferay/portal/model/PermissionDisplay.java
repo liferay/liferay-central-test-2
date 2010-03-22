@@ -112,10 +112,7 @@ public class PermissionDisplay
 	}
 
 	public int hashCode() {
-		int result = _portletName.hashCode();
-		result = 31 * result + _modelName.hashCode();
-		result = 31 * result + _actionId.hashCode();
-		return result;
+		return _portletName.concat(_modelName).concat(_actionId).hashCode();
 	}
 
 	private Permission _permission;

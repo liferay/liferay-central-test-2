@@ -14,6 +14,8 @@
 
 package com.liferay.portlet.shopping.model.impl;
 
+import com.liferay.portal.kernel.util.HashCode;
+import com.liferay.portal.kernel.util.HashCodeFactoryUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portlet.shopping.model.ShoppingCartItem;
@@ -90,11 +92,14 @@ public class ShoppingCartItemImpl implements ShoppingCartItem {
 	}
 
 	public int hashCode() {
-		int result = _fields.hashCode();
-		result = 31 * result + _item.hashCode();
-		return result;
+		HashCode hashCode = HashCodeFactoryUtil.getHashCode();
+
+		hashCode.append(_item.getItemId());
+		hashCode.append(_fields);
+
+		return hashCode.toHashCode();
 	}
-	
+
 	private String _fields;
 	private ShoppingItem _item;
 

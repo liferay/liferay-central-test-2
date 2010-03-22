@@ -144,7 +144,7 @@ public class EntityColumn implements Cloneable {
 	public int hashCode() {
 		return _name.hashCode();
 	}
-	
+
 	public boolean isCaseSensitive() {
 		return _caseSensitive;
 	}

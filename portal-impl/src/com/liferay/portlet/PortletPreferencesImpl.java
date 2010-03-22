@@ -17,6 +17,8 @@ package com.liferay.portlet;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.HashCode;
+import com.liferay.portal.kernel.util.HashCodeFactoryUtil;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
@@ -149,15 +151,18 @@ public class PortletPreferencesImpl
 	}
 
 	public int hashCode() {
-		int result = (int) (_companyId ^ (_companyId >>> 32));
-		result = 31 * result + (int) (_ownerId ^ (_ownerId >>> 32));
-		result = 31 * result + _ownerType;
-		result = 31 * result + (int) (_plid ^ (_plid >>> 32));
-		result = 31 * result + _portletId.hashCode();
-		result = 31 * result + getMap().hashCode();
-		return result;
+		HashCode hashCode = HashCodeFactoryUtil.getHashCode();
+
+		hashCode.append(_companyId);
+		hashCode.append(_ownerId);
+		hashCode.append(_ownerType);
+		hashCode.append(_plid);
+		hashCode.append(_portletId);
+		hashCode.append(getPreferences());
+
+		return hashCode.toHashCode();
 	}
-	
+
 	public boolean isReadOnly(String key) {
 		if (key == null) {
 			throw new IllegalArgumentException();

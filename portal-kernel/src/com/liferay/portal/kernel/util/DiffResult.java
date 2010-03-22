@@ -78,10 +78,12 @@ public class DiffResult {
 	}
 
 	public int hashCode() {
-		int result = _lineNumber;
-		result = 31 * result + (
-			(_changedLines != null) ? _changedLines.hashCode() : 0);
-		return result;
+		HashCode hashCode = HashCodeFactoryUtil.getHashCode();
+
+		hashCode.append(_lineNumber);
+		hashCode.append(_changedLines);
+
+		return hashCode.toHashCode();
 	}
 
 	public String toString() {

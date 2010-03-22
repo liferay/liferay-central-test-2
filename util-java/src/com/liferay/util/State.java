@@ -14,6 +14,9 @@
 
 package com.liferay.util;
 
+import com.liferay.portal.kernel.util.HashCode;
+import com.liferay.portal.kernel.util.HashCodeFactoryUtil;
+
 /**
  * <a href="State.java.html"><b><i>View Source</i></b></a>
  *
@@ -52,10 +55,10 @@ public class State {
 	public boolean equals(Object obj) {
 		State state = (State)obj;
 
-		if (getId() != null && state.getId() != null) {
+		if ((getId() != null) && (state.getId() != null)) {
 			return getId().equalsIgnoreCase(state.getId());
 		}
-		else if (getName() != null && state.getName() != null) {
+		else if ((getName() != null) && (state.getName() != null)) {
 			return getName().equalsIgnoreCase(state.getName());
 		}
 		else {
@@ -64,7 +67,12 @@ public class State {
 	}
 
 	public int hashCode() {
-		return (31 * _id.hashCode()+ _name.hashCode());
+		HashCode hashCode = HashCodeFactoryUtil.getHashCode();
+
+		hashCode.append(_id);
+		hashCode.append(_name);
+
+		return hashCode.toHashCode();
 	}
 
 	private String _id;
