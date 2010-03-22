@@ -47,7 +47,7 @@ public class ATag extends IncludeTag {
 		_lang = lang;
 	}
 
-	public void setTarget (String target) {
+	public void setTarget(String target) {
 		_target = target;
 	}
 

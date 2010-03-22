@@ -20,8 +20,7 @@
 String target = GetterUtil.getString((String)request.getAttribute("aui:a:target"));
 %>
 
-<c:if test='<%= target.equals("_blank") || target.equals("_new") %>'>
-	<span class="opens-new-window-accessible"><liferay-ui:message key="opens-new-window" /></span>
-</c:if>
-
+	<c:if test='<%= target.equals("_blank") || target.equals("_new") %>'>
+		<span class="opens-new-window-accessible"><liferay-ui:message key="opens-new-window" /></span>
+	</c:if>
 </a>
