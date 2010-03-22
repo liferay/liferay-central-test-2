@@ -281,6 +281,12 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 
 			String contentType = MimeTypesUtil.getContentType(is, fileName);
 
+			if (_log.isInfoEnabled()) {
+				_log.info(
+					"Attempting to extract text from " + fileName +
+						" of type " + contentType);
+			}
+
 			TextExtractor textExtractor = _textExtractors.get(contentType);
 
 			if (textExtractor != null) {
@@ -340,31 +346,34 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 
 				text = sb.toString();
 			}
-			else {
-				if (contentType.equals(ContentTypes.APPLICATION_ZIP) ||
-					contentType.startsWith(
-						"application/vnd.openxmlformats-officedocument.")) {
+			else if (contentType.equals(ContentTypes.APPLICATION_ZIP) ||
+				contentType.startsWith(
+					"application/vnd.openxmlformats-officedocument.")) {
 
-					try {
-						POITextExtractor poiTextExtractor =
-							ExtractorFactory.createExtractor(is);
+				try {
+					POITextExtractor poiTextExtractor =
+						ExtractorFactory.createExtractor(is);
 
-						text = poiTextExtractor.getText();
-					}
-					catch (Exception e) {
-						if (_log.isWarnEnabled()) {
-							_log.warn(e, e);
-						}
-					}
+					text = poiTextExtractor.getText();
 				}
-
-				if ((text == null) && _log.isInfoEnabled()) {
-					_log.info("No text extractor found for " + fileName);
+				catch (Exception e) {
+					if (_log.isInfoEnabled()) {
+						_log.info(e.getMessage());
+					}
 				}
 			}
 		}
 		catch (Exception e) {
 			_log.error(e, e);
+		}
+
+		if (_log.isInfoEnabled()) {
+			if (text == null) {
+				_log.info("No text extractor found for " + fileName);
+			}
+			else {
+				_log.info("Text was extracted for " + fileName);
+			}
 		}
 
 		if (_log.isDebugEnabled()) {
