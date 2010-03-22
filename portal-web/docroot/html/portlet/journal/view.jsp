@@ -63,7 +63,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 			<div class="separator article-separator"><!-- --></div>
 
-			<c:if test="<%= results.size() > 0 %>">
+			<c:if test="<%= !results.isEmpty() %>">
 				<aui:button-row>
 					<aui:button onClick='<%= renderResponse.getNamespace() + "expireArticles();" %>' value="expire" />
 
