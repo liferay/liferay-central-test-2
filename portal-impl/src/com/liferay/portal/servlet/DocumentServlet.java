@@ -74,11 +74,10 @@ public class DocumentServlet extends HttpServlet {
 				user = company.getDefaultUser();
  			}
 
-			PermissionChecker permissionChecker = null;
-
 			PrincipalThreadLocal.setName(user.getUserId());
 
-			permissionChecker = PermissionCheckerFactoryUtil.create(user, true);
+			PermissionChecker permissionChecker =
+				PermissionCheckerFactoryUtil.create(user, true);
 
 			PermissionThreadLocal.setPermissionChecker(permissionChecker);
 
