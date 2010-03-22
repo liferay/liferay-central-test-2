@@ -15,9 +15,15 @@
 package com.liferay.portal.security.auth;
 
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.PwdGenerator;
+
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -29,7 +35,23 @@ import javax.servlet.http.HttpSession;
  */
 public class SessionAuthToken implements AuthToken {
 
+	public SessionAuthToken() {
+		_ignoreActions = SetUtil.fromArray(
+			PropsUtil.getArray(PropsKeys.AUTH_TOKEN_IGNORE_ACTIONS));
+	}
+
 	public void check(HttpServletRequest request) throws PrincipalException {
+		String ppid = ParamUtil.getString(request, "p_p_id");
+
+		String portletNamespace = PortalUtil.getPortletNamespace(ppid);
+
+		String strutsAction = ParamUtil.getString(
+			request, portletNamespace + "struts_action");
+
+		if (isIgnoreAction(strutsAction)) {
+			return;
+		}
+
 		String requestAuthenticationToken = ParamUtil.getString(
 			request, "p_auth");
 
@@ -58,5 +80,11 @@ public class SessionAuthToken implements AuthToken {
 
 		return sessionAuthenticationToken;
 	}
+
+	protected boolean isIgnoreAction(String strutsAction) {
+		return _ignoreActions.contains(strutsAction);
+	}
+
+	private Set<String> _ignoreActions;
 
 }
