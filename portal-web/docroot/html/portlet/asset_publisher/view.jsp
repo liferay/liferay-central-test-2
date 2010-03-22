@@ -68,9 +68,12 @@ if (enableTagBasedNavigation && selectionStyle.equals("manual") && ((allAssetCat
 }
 %>
 
-<aui:form name="fm">
-	<%@ include file="/html/portlet/asset_publisher/add_asset.jspf" %>
-</aui:form>
+
+<c:if test="<%= (scopeGroup != null) && (!scopeGroup.hasStagingGroup() || scopeGroup.isStagingGroup()) %>">
+	<aui:form name="fm">
+		<%@ include file="/html/portlet/asset_publisher/add_asset.jspf" %>
+	</aui:form>
+</c:if>
 
 <%
 PortletURL portletURL = renderResponse.createRenderURL();
