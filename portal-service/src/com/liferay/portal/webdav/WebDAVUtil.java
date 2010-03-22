@@ -62,14 +62,6 @@ public class WebDAVUtil {
 		_instance._deleteStorage(storage);
 	}
 
-	public static String fixPath(String path) {
-		if (path.endsWith(StringPool.SLASH)) {
-			path = path.substring(0, path.length() - 1);
-		}
-
-		return path;
-	}
-
 	public static long getCompanyId(String path) throws WebDAVException {
 		String[] pathArray = getPathArray(path);
 
@@ -208,14 +200,8 @@ public class WebDAVUtil {
 		return getPathArray(path, false);
 	}
 
-	public static String[] getPathArray(String path, boolean fixPath) {
-		if (fixPath) {
-			path = fixPath(path);
-		}
-
-		if (path.startsWith(StringPool.SLASH)) {
-			path = path.substring(1, path.length());
-		}
+	public static String[] getPathArray(String path, boolean fixTrailing) {
+		path = HttpUtil.fixPath(path, true, fixTrailing);
 
 		return StringUtil.split(path, StringPool.SLASH);
 	}

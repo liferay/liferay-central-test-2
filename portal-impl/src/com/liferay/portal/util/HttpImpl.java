@@ -242,6 +242,22 @@ public class HttpImpl implements Http {
 		}
 	}
 
+	public String fixPath(String path) {
+		return fixPath(path, true, true);
+	}
+
+	public String fixPath(String path, boolean leading, boolean trailing) {
+		if (leading) {
+			path = path.replaceAll("^/+", StringPool.BLANK);
+		}
+
+		if (trailing) {
+			path = path.replaceAll("/+$", StringPool.BLANK);
+		}
+
+		return path;
+	}
+
 	public HttpClient getClient(HostConfiguration hostConfig) {
 		if (isProxyHost(hostConfig.getHost())) {
 			return _proxyClient;

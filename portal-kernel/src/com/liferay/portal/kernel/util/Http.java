@@ -68,6 +68,10 @@ public interface Http {
 
 	public String encodeURL(String url, boolean escapeSpaces);
 
+	public String fixPath(String path);
+
+	public String fixPath(String path, boolean leading, boolean trailing);
+
 	public String getCompleteURL(HttpServletRequest request);
 
 	public Cookie[] getCookies();

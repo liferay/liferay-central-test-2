@@ -73,6 +73,16 @@ public class HttpUtil {
 		return getHttp().encodeURL(url, escapeSpaces);
 	}
 
+	public static String fixPath(String path) {
+		return getHttp().fixPath(path);
+	}
+
+	public static String fixPath(
+		String path, boolean leading, boolean trailing) {
+
+		return getHttp().fixPath(path, leading, trailing);
+	}
+
 	public static String getCompleteURL(HttpServletRequest request) {
 		return getHttp().getCompleteURL(request);
 	}
