@@ -48,6 +48,7 @@ import com.liferay.portal.service.persistence.ImagePersistence;
 import com.liferay.portal.service.persistence.ResourcePersistence;
 import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
+
 import com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence;
 import com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence;
 import com.liferay.portlet.softwarecatalog.NoSuchProductEntryException;
@@ -56,7 +57,9 @@ import com.liferay.portlet.softwarecatalog.model.impl.SCProductEntryImpl;
 import com.liferay.portlet.softwarecatalog.model.impl.SCProductEntryModelImpl;
 
 import java.io.Serializable;
+
 import java.sql.Types;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

@@ -46,13 +46,16 @@ import com.liferay.portal.service.persistence.BatchSessionUtil;
 import com.liferay.portal.service.persistence.ResourcePersistence;
 import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
+
 import com.liferay.portlet.softwarecatalog.NoSuchProductVersionException;
 import com.liferay.portlet.softwarecatalog.model.SCProductVersion;
 import com.liferay.portlet.softwarecatalog.model.impl.SCProductVersionImpl;
 import com.liferay.portlet.softwarecatalog.model.impl.SCProductVersionModelImpl;
 
 import java.io.Serializable;
+
 import java.sql.Types;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

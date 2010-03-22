@@ -41,6 +41,7 @@ import com.liferay.portal.model.impl.PortletItemModelImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
