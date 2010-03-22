@@ -3343,6 +3343,6 @@ AUI().add(
 	},
 	'',
 	{
-		requires: ['aui-base', 'aui-overlay-context-panel', 'aui-data-set', 'aui-datatype', 'aui-dialog', 'aui-nested-list', 'json', 'substitute']
+		requires: ['aui-base', 'aui-data-set', 'aui-datatype', 'aui-dialog', 'aui-nested-list', 'aui-overlay-context-panel', 'json', 'substitute']
 	}
 );

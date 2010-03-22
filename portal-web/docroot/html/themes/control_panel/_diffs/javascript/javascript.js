@@ -2,8 +2,8 @@ Liferay.Util.portletTitleEdit = function() {
 };
 
 AUI().use(
-	'aui-overlay-context-panel',
 	'aui-io-request',
+	'aui-overlay-context-panel',
 	function(A) {
 		var portletInformationEl = A.get('#cpContextPanelTemplate');
 		var portletInformationIcon = A.get('#cpPortletTitleHelpIcon');
