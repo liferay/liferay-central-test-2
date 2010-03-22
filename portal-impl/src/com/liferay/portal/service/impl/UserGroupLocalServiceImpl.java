@@ -20,7 +20,6 @@ import com.liferay.portal.RequiredUserGroupException;
 import com.liferay.portal.UserGroupNameException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -36,7 +35,7 @@ import com.liferay.portal.model.UserGroupConstants;
 import com.liferay.portal.security.permission.PermissionCacheUtil;
 import com.liferay.portal.service.base.UserGroupLocalServiceBaseImpl;
 
-import java.io.InputStream;
+import java.io.File;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -104,12 +103,23 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 
 		Map<String, String[]> parameterMap = getLayoutTemplatesParameters();
 
-		InputStream[] inputStreams = exportLayouts(userGroupId, parameterMap);
+		File[] exportFiles = exportLayouts(userGroupId, parameterMap);
 
-		for (long userId : userIds) {
-			if (!userGroupPersistence.containsUser(userGroupId, userId)) {
-				importLayouts(
-					userId, parameterMap, inputStreams[0], inputStreams[1]);
+		try {
+			for (long userId : userIds) {
+				if (!userGroupPersistence.containsUser(userGroupId, userId)) {
+					importLayouts(
+						userId, parameterMap, exportFiles[0], exportFiles[1]);
+				}
+			}
+		}
+		finally {
+			if (exportFiles[0] != null) {
+				exportFiles[0].delete();
+			}
+
+			if (exportFiles[1] != null) {
+				exportFiles[1].delete();
 			}
 		}
 	}
@@ -129,9 +139,20 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 
 		Map<String, String[]> parameterMap = getLayoutTemplatesParameters();
 
-		InputStream[] inputStreams = exportLayouts(userGroupId, parameterMap);
+		File[] exportFiles = exportLayouts(userGroupId, parameterMap);
 
-		importLayouts(userId, parameterMap, inputStreams[0], inputStreams[1]);
+		try {
+			importLayouts(userId, parameterMap, exportFiles[0], exportFiles[1]);
+		}
+		finally {
+			if (exportFiles[0] != null) {
+				exportFiles[0].delete();
+			}
+
+			if (exportFiles[1] != null) {
+				exportFiles[1].delete();
+			}
+		}
 	}
 
 	public void deleteUserGroup(long userGroupId)
@@ -281,31 +302,27 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 		return userGroup;
 	}
 
-	protected InputStream[] exportLayouts(
+	protected File[] exportLayouts(
 			long userGroupId, Map<String, String[]> parameterMap)
 		throws PortalException, SystemException {
 
-		InputStream[] inputStreams = new InputStream[2];
+		File[] exportFiles = new File[2];
 
 		UserGroup userGroup = userGroupLocalService.getUserGroup(userGroupId);
 
 		long groupId = userGroup.getGroup().getGroupId();
 
 		if (userGroup.hasPrivateLayouts()) {
-			byte[] bytes = layoutLocalService.exportLayouts(
-				groupId, true, parameterMap, null, null);
-
-			inputStreams[0] = new UnsyncByteArrayInputStream(bytes);
+			exportFiles[0] = layoutLocalService.exportLayoutsAsFile(
+				groupId, true, null, parameterMap, null, null);
 		}
 
 		if (userGroup.hasPublicLayouts()) {
-			byte[] bytes = layoutLocalService.exportLayouts(
-				groupId, false, parameterMap, null, null);
-
-			inputStreams[1] = new UnsyncByteArrayInputStream(bytes);
+			exportFiles[1] = layoutLocalService.exportLayoutsAsFile(
+				groupId, false, null, parameterMap, null, null);
 		}
 
-		return inputStreams;
+		return exportFiles;
 	}
 
 	protected Map<String, String[]> getLayoutTemplatesParameters() {
@@ -362,21 +379,21 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 
 	protected void importLayouts(
 			long userId, Map<String, String[]> parameterMap,
-			InputStream privateLayoutsIS, InputStream publicLayoutsIS)
+			File privateExportFile, File publicExportFile)
 		throws PortalException, SystemException {
 
 		User user = userPersistence.findByPrimaryKey(userId);
 
 		long groupId = user.getGroup().getGroupId();
 
-		if (privateLayoutsIS != null) {
+		if (privateExportFile != null) {
 			layoutLocalService.importLayouts(
-				userId, groupId, true, parameterMap, privateLayoutsIS);
+				userId, groupId, true, parameterMap, privateExportFile);
 		}
 
-		if (publicLayoutsIS != null) {
+		if (publicExportFile != null) {
 			layoutLocalService.importLayouts(
-				userId, groupId, false, parameterMap, publicLayoutsIS);
+				userId, groupId, false, parameterMap, publicExportFile);
 		}
 	}
 
