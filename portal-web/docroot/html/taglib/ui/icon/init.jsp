@@ -17,6 +17,8 @@
 <%@ include file="/html/taglib/init.jsp" %>
 
 <%
+String randomId = PwdGenerator.getPassword(PwdGenerator.KEY3, 4);
+
 IntegerWrapper iconListIconCount = (IntegerWrapper)request.getAttribute("liferay-ui:icon-list:icon-count");
 
 if (iconListIconCount != null) {
@@ -66,8 +68,6 @@ if (Validator.isNull(srcHover) && Validator.isNotNull(imageHover)) {
 }
 
 String url = GetterUtil.getString((String)request.getAttribute("liferay-ui:icon:url"));
-
-url = HtmlUtil.escape(url);
 
 String method = (String)request.getAttribute("liferay-ui:icon:method");
 

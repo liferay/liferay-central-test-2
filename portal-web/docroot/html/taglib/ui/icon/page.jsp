@@ -17,40 +17,10 @@
 <%@ include file="/html/taglib/ui/icon/init.jsp" %>
 
 <%
-String randomId = StringPool.BLANK;
-
 String cssClassHtml = StringPool.BLANK;
 
 if (Validator.isNotNull(cssClass)) {
 	cssClassHtml = "class=\"" + cssClass + "\"";
-}
-
-String idHtml = StringPool.BLANK;
-
-boolean srcHoverIsNotNull = Validator.isNotNull(srcHover);
-
-if (srcHoverIsNotNull) {
-	randomId = PwdGenerator.getPassword(PwdGenerator.KEY3, 4);
-
-	idHtml = " id=\"" + randomId + "\" ";
-}
-
-String langHtml = StringPool.BLANK;
-
-if (Validator.isNotNull(lang)) {
-		langHtml = "lang=\"" + lang + "\"";
-}
-
-String onClickHtml = StringPool.BLANK;
-
-if (method.equals("post") && (url.startsWith(Http.HTTP_WITH_SLASH) || url.startsWith(Http.HTTPS_WITH_SLASH))) {
-	onClickHtml = "onclick=\"Liferay.Util.forcePost(this); return false;\"";
-}
-
-String targetHtml = StringPool.BLANK;
-
-if (Validator.isNotNull(target) && !target.equals("_self")) {
-	targetHtml = "target=\"" + target + "\"";
 }
 
 if (themeDisplay.isThemeImagesFastLoad() && !auiImage) {
@@ -122,84 +92,112 @@ if (auiImage) {
 }
 
 boolean urlIsNotNull = Validator.isNotNull(url);
+boolean forcePost = method.equals("post") && (url.startsWith(Http.HTTP_WITH_SLASH) || url.startsWith(Http.HTTPS_WITH_SLASH));
 %>
+
+<liferay-util:buffer var="linkContent">
+	<img class="<%= imgClass %>" src="<%= src %>" <%= details %> />
+
+	<c:choose>
+		<c:when test="<%= (iconMenuIconCount != null) && ((iconMenuSingleIcon == null) || iconMenuShowWhenSingleIcon) %>">
+			<liferay-ui:message key="<%= message %>" />
+		</c:when>
+		<c:when test="<%= (iconListIconCount != null) && ((iconListSingleIcon == null) || iconListShowWhenSingleIcon) %>">
+			<span class="taglib-text"><liferay-ui:message key="<%= message %>" /></span>
+		</c:when>
+		<c:otherwise>
+			<c:if test="<%= label %>">
+				<span class="taglib-text"><liferay-ui:message key="<%= message %>" /></span>
+			</c:if>
+		</c:otherwise>
+	</c:choose>
+</liferay-util:buffer>
 
 <c:choose>
 	<c:when test="<%= (iconListIconCount != null) && ((iconListSingleIcon == null) || iconListShowWhenSingleIcon) %>">
 		<li <%= cssClassHtml %>>
-			<c:if test="<%= urlIsNotNull %>">
-				<a class="taglib-icon" href="<%= url %>" <%= langHtml %> <%= onClickHtml %> <%= targetHtml %>>
-			</c:if>
-
-			<img class="<%= imgClass %>" src="<%= src %>" <%= details %> />
-
-			<span class="taglib-text"><liferay-ui:message key="<%= message %>" /></span>
-
-			<c:if test="<%= urlIsNotNull %>">
-				</a>
-			</c:if>
+			<c:choose>
+				<c:when test="<%= urlIsNotNull %>">
+					<aui:a cssClass="taglib-icon" href="<%= url %>" id="<%= randomId %>" lang="<%= lang %>" target="<%= target %>">
+						<%= linkContent %>
+					</aui:a>
+				</c:when>
+				<c:otherwise>
+						<%= linkContent %>
+				</c:otherwise>
+			</c:choose>
 		</li>
 	</c:when>
 	<c:when test="<%= (iconMenuIconCount != null) && ((iconMenuSingleIcon == null) || iconMenuShowWhenSingleIcon) %>">
 		<li <%= cssClassHtml %>>
-			<c:if test="<%= urlIsNotNull %>">
-				<a href="<%= url %>" <%= langHtml %> <%= onClickHtml %> <%= targetHtml %>>
-			</c:if>
-
-			<img class="<%= imgClass %>" src="<%= src %>" <%= details %> />
-
-			<liferay-ui:message key="<%= message %>" />
-
-			<c:if test="<%= urlIsNotNull %>">
-				</a>
-			</c:if>
+			<c:choose>
+				<c:when test="<%= urlIsNotNull %>">
+					<aui:a href="<%= url %>" id="<%= randomId %>" lang="<%= lang %>" target="<%= target %>">
+						<%= linkContent %>
+					</aui:a>
+				</c:when>
+				<c:otherwise>
+						<%= linkContent %>
+				</c:otherwise>
+			</c:choose>
 		</li>
 	</c:when>
 	<c:otherwise>
-		<span <%= cssClassHtml %> <%= idHtml %>>
-			<c:if test="<%= urlIsNotNull %>">
-				<a class="taglib-icon" href="<%= url %>" <%= langHtml %> <%= onClickHtml %> <%= targetHtml %>>
-			</c:if>
-
-			<img class="<%= imgClass %>" src="<%= src %>" <%= details %> />
-
-			<c:if test="<%= label %>">
-				<span class="taglib-text"><liferay-ui:message key="<%= message %>" /></span>
-			</c:if>
-
-			<c:if test="<%= urlIsNotNull %>">
-				</a>
-			</c:if>
+		<span <%= cssClassHtml %> >
+			<c:choose>
+				<c:when test="<%= urlIsNotNull %>">
+					<aui:a cssClass="taglib-icon" href="<%= url %>" id="<%= randomId %>" lang="<%= lang %>" target="<%= target %>">
+						<%= linkContent %>
+					</aui:a>
+				</c:when>
+				<c:otherwise>
+						<%= linkContent %>
+				</c:otherwise>
+			</c:choose>
 		</span>
 	</c:otherwise>
 </c:choose>
 
-<c:if test="<%= srcHoverIsNotNull %>">
+<c:if test="<%= Validator.isNotNull(srcHover) || forcePost %>">
 	<aui:script use="event,node">
-		var icon = A.one('#<%= randomId %>');
+		var icon = A.one('#<portlet:namespace/><%= randomId %>');
 
-		if (icon) {
-			icon.on(
-				'mouseout',
-				function(event) {
-					var img = event.currentTarget.one('img');
+		<c:if test="<%= Validator.isNotNull(srcHover) %>">
+			if (icon) {
+				icon.on(
+					'mouseout',
+					function(event) {
+						var img = event.currentTarget.one('img');
 
-					if (img) {
-						img.attr('src', '<%= src %>');
+						if (img) {
+							img.attr('src', '<%= src %>');
+						}
 					}
-				}
-			);
+				);
 
-			icon.on(
-				'mouseover',
-				function(event) {
-					var img = event.currentTarget.one('img');
+				icon.on(
+					'mouseover',
+					function(event) {
+						var img = event.currentTarget.one('img');
 
-					if (img) {
-						img.attr('src', '<%= srcHover %>');
+						if (img) {
+							img.attr('src', '<%= srcHover %>');
+						}
 					}
-				}
-			);
-		}
+				);
+			}
+		</c:if>
+
+		<c:if test="<%= forcePost %>">
+			if (icon) {
+				icon.on(
+					'click',
+					function(event) {
+						Liferay.Util.forcePost(this);
+						return false;
+					}
+				);
+			}
+		</c:if>
 	</aui:script>
 </c:if>
