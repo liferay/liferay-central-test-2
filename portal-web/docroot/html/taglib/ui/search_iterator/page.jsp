@@ -22,7 +22,7 @@ SearchContainer searchContainer = (SearchContainer)request.getAttribute("liferay
 boolean paginate = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:search-iterator:paginate"));
 
 String id = searchContainer.getId();
-String randomId = randomId = PwdGenerator.getPassword(PwdGenerator.KEY3, 4);
+String randomId = PwdGenerator.getPassword(PwdGenerator.KEY3, 4);
 int start = searchContainer.getStart();
 int end = searchContainer.getEnd();
 int total = searchContainer.getTotal();
