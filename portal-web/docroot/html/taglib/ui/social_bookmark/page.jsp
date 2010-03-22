@@ -16,4 +16,4 @@
 
 <%@ include file="/html/taglib/ui/social_bookmark/init.jsp" %>
 
-<a class="<%= styleClass %>" href="<%= postUrl %>" target="<%= target %>"><liferay-ui:message key="<%= messageKey %>" /></a>
+<aui:a cssClass="<%= styleClass %>" href="<%= postUrl %>" target="<%= target %>"><liferay-ui:message key="<%= messageKey %>" /></aui:a>
