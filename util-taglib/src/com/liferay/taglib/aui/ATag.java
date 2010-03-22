@@ -43,11 +43,21 @@ public class ATag extends IncludeTag {
 		_label = label;
 	}
 
+	public void setLang(String lang) {
+		_lang = lang;
+	}
+
+	public void setTarget (String target) {
+		_target = target;
+	}
+
 	protected void cleanUp() {
 		_cssClass = null;
 		_href = null;
 		_id = null;
 		_label = null;
+		_lang = null;
+		_target = null;
 	}
 
 	protected String getEndPage() {
@@ -64,6 +74,8 @@ public class ATag extends IncludeTag {
 		request.setAttribute("aui:a:href", _href);
 		request.setAttribute("aui:a:id", _id);
 		request.setAttribute("aui:a:label", _label);
+		request.setAttribute("aui:a:lang", _lang);
+		request.setAttribute("aui:a:target", _target);
 	}
 
 	private static final String _END_PAGE =
@@ -76,5 +88,7 @@ public class ATag extends IncludeTag {
 	private String _href;
 	private String _id;
 	private String _label;
+	private String _lang;
+	private String _target;
 
 }

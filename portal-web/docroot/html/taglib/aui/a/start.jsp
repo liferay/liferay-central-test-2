@@ -22,9 +22,11 @@ Map<String, Object> dynamicAttributes = (Map<String, Object>)request.getAttribut
 String href = GetterUtil.getString((String)request.getAttribute("aui:a:href"));
 String id = GetterUtil.getString((String)request.getAttribute("aui:a:id"));
 String label = GetterUtil.getString((String)request.getAttribute("aui:a:label"));
+String lang = GetterUtil.getString((String)request.getAttribute("aui:a:lang"));
+String target = GetterUtil.getString((String)request.getAttribute("aui:a:target"));
 %>
 
-<a <%= Validator.isNotNull(cssClass) ? "class=\"" + cssClass + "\"" : StringPool.BLANK %> href="<%= HtmlUtil.escape(href) %>" <%= Validator.isNotNull(id) ? "id=\"" + namespace + id + "\"" : StringPool.BLANK %> <%= _buildDynamicAttributes(dynamicAttributes) %>>
+<a <%= Validator.isNotNull(cssClass) ? "class=\"" + cssClass + "\"" : StringPool.BLANK %> href="<%= HtmlUtil.escape(href) %>" <%= Validator.isNotNull(id) ? "id=\"" + namespace + id + "\"" : StringPool.BLANK %> <%= Validator.isNotNull(lang) ? "lang=\"" + lang + "\"" : StringPool.BLANK %> <%= Validator.isNotNull(target) ? "target=\"" + target + "\"" : StringPool.BLANK %> <%= _buildDynamicAttributes(dynamicAttributes) %>>
 
 <c:if test="<%= Validator.isNotNull(label) %>">
 	<liferay-ui:message key="<%= label %>" />
