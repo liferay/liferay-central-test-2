@@ -18,9 +18,9 @@
 PluginPackage pluginPackage = PluginPackageUtil.getPluginPackageByModuleId(moduleId, repositoryURL);
 %>
 
-<aui:input type="hidden" name="redirect" value="<%= currentURL %>" />
-<aui:input type="hidden" name="url" value="<%= pluginPackage.getDownloadURL() %>" />
-<aui:input type="hidden" name="deploymentContext" value="<%= pluginPackage.getContext() %>" />
+<input type="hidden" name="<portlet:namespace />redirect" value="<%= currentURL %>" />
+<input type="hidden" name="<portlet:namespace />url" value="<%= pluginPackage.getDownloadURL() %>" />
+<input type="hidden" name="<portlet:namespace />deploymentContext" value="<%= pluginPackage.getContext() %>" />
 
 <liferay-ui:tabs
 	names="<%= pluginPackage.getName() %>"
@@ -38,7 +38,7 @@ PluginPackage pluginPackage = PluginPackageUtil.getPluginPackageByModuleId(modul
 		<liferay-ui:message key="name" />:
 	</td>
 	<td>
-		<strong><aui:a href="<%= pluginPackage.getPageURL() %>" label="<%= pluginPackage.getName() %>" /></strong> (v<%= pluginPackage.getVersion() %>) <aui:a href="<%= pluginPackage.getDownloadURL() %>" label='<%= "[" + LanguageUtil.get(pageContext, "download") + "]" %>' />
+		<strong><a href="<%= pluginPackage.getPageURL() %>"><%= pluginPackage.getName() %></a></strong> (v<%= pluginPackage.getVersion() %>) <a href="<%= pluginPackage.getDownloadURL() %>">[<liferay-ui:message key="download" />]</a>
 	</td>
 </tr>
 <tr>
@@ -105,7 +105,13 @@ PluginPackage pluginPackage = PluginPackageUtil.getPluginPackageByModuleId(modul
 		%>
 
 			<c:if test="<%= Validator.isNotNull(license.getUrl()) %>">
-				<aui:a href="<%= license.getUrl() %>" label="<%= license.getName() %>" />
+				<a href="<%= license.getUrl() %>">
+			</c:if>
+
+			<%= license.getName() %>
+
+			<c:if test="<%= Validator.isNotNull(license.getUrl()) %>">
+				</a>
 			</c:if>
 
 			<c:if test="<%= license.isOsiApproved() %>">
@@ -210,7 +216,7 @@ List screenshots = pluginPackage.getScreenshots();
 				Screenshot screenshot = (Screenshot)itr.next();
 			%>
 
-				<aui:a href="<%= screenshot.getLargeImageURL() %>" target="_blank"><img alt="<liferay-ui:message key="thumbnail" />" src="<%= screenshot.getThumbnailURL() %>" /></aui:a>
+				<a href="<%= screenshot.getLargeImageURL() %>" target="_blank"><img alt="<liferay-ui:message key="thumbnail" />" src="<%= screenshot.getThumbnailURL() %>" /></a>
 
 			<%
 			}
@@ -222,9 +228,9 @@ List screenshots = pluginPackage.getScreenshots();
 
 </table>
 
-<aui:button-row>
-	<aui:button onClick='<%= uploadProgressId + ".startProgress();" + renderResponse.getNamespace() + "installPluginPackage(" + StringPool.APOSTROPHE + "remoteDeploy" + StringPool.APOSTROPHE + ");" %>' value="install" />
-</aui:button-row>
+<br />
+
+<input type="button" value="<liferay-ui:message key="install" />" onClick="<%= uploadProgressId %>.startProgress(); <portlet:namespace />installPluginPackage('remoteDeploy');" />
 
 <liferay-ui:upload-progress
 	id="<%= uploadProgressId %>"

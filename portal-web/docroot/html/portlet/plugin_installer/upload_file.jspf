@@ -18,15 +18,25 @@
 
 <liferay-ui:error exception="<%= UploadException.class %>" message="an-unexpected-error-occurred-while-uploading-your-file" />
 
-<aui:input cssClass="lfr-input-text" label="upload-a-war-file-to-install-a-layout-template,-portlet,-or-theme" name="file" type="file" />
+<liferay-ui:message key="upload-a-war-file-to-install-a-layout-template,-portlet,-or-theme" />
 
 <br /><br />
 
-<aui:input label='<%= LanguageUtil.get(pageContext, "specify-an-optional-context-for-deployment") + StringPool.SPACE + LanguageUtil.format(pageContext, "for-example-x", "sample-jsp-portlet") %>' name="deploymentContext" size="20" type="text" />
+<input class="lfr-input-text" name="<portlet:namespace />file" type="file" />
 
-<aui:button-row>
-	<aui:button onClick='<%= uploadProgressId + ".startProgress();" + renderResponse.getNamespace() + "installPluginPackage(" + StringPool.APOSTROPHE + "localDeploy" + StringPool.APOSTROPHE + ");" %>' value="install" />
-</aui:button-row>
+<br /><br />
+
+<liferay-ui:message key="specify-an-optional-context-for-deployment" />
+
+<%= LanguageUtil.format(pageContext, "for-example-x", "<em>sample-jsp-portlet</em>") %>
+
+<br /><br />
+
+<input name="<portlet:namespace />deploymentContext" size="20" type="text" />
+
+<br /><br />
+
+<input type="button" value="<liferay-ui:message key="install" />" onClick="<%= uploadProgressId %>.startProgress(); <portlet:namespace />installPluginPackage('localDeploy');" />
 
 <liferay-ui:upload-progress
 	id="<%= uploadProgressId %>"
