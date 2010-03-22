@@ -47,6 +47,7 @@ public class SiteMinderAutoLogin extends CASAutoLogin {
 
 		try {
 			Company company = PortalUtil.getCompany(request);
+
 			long companyId = company.getCompanyId();
 
 			if (!LDAPSettingsUtil.isSiteMinderEnabled(companyId)) {
@@ -63,12 +64,13 @@ public class SiteMinderAutoLogin extends CASAutoLogin {
 			}
 
 			String authType = company.getAuthType();
-			
+
 			User user = null;
 
 			if (PrefsPropsUtil.getBoolean(
 					companyId, PropsKeys.SITEMINDER_IMPORT_FROM_LDAP,
 					PropsValues.SITEMINDER_IMPORT_FROM_LDAP)) {
+
 				try {
 					if (authType.equals(CompanyConstants.AUTH_TYPE_EA)) {
 						user = importLDAPUser(
