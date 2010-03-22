@@ -56,11 +56,19 @@ public class UpgradeTableBuilder {
 			String version = StringUtil.replace(
 				fileName.substring(x + 9, y), "_", ".");
 
+			String upgradeFileVersion = version;
+
+			int z = upgradeFileVersion.indexOf(".to.");
+
+			if (z != -1) {
+				upgradeFileVersion = upgradeFileVersion.substring(z + 4);
+			}
+
 			x = fileName.indexOf("/", y + 1);
 			y = fileName.indexOf("Table.java", x);
 
 			String upgradeFileName =
-				upgradeTableDir + "/" + version + "/" +
+				upgradeTableDir + "/" + upgradeFileVersion + "/" +
 					fileName.substring(x, y) + "ModelImpl.java";
 
 			if (!_fileUtil.exists(upgradeFileName)) {
