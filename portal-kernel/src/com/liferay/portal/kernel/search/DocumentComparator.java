@@ -38,6 +38,10 @@ public class DocumentComparator implements Comparator<Document> {
 		addOrderBy(name, _ascending, _caseSensitive);
 	}
 
+	public void addOrderBy(String name, boolean ascending) {
+		addOrderBy(name, ascending, _caseSensitive);
+	}
+
 	public void addOrderBy(
 		String name, boolean ascending, boolean caseSensitive) {
 
