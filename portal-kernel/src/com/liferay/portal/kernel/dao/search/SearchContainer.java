@@ -103,7 +103,7 @@ public class SearchContainer<R> {
 			_cur = cur;
 		}
 
-		setDelta(delta);
+		setDelta(ParamUtil.getInteger(portletRequest, _deltaParam, delta));
 
 		_iteratorURL = iteratorURL;
 
