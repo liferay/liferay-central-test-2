@@ -69,24 +69,24 @@
 	color: #7d7d7d;
 }
 
-.portlet-wiki h1, .portlet-wiki h2, .portlet-wiki h3 {
+.portlet-wiki .portlet-body h1, .portlet-wiki .portlet-body h2, .portlet-wiki .portlet-body h3 {
 	border-bottom: 1px solid #aaa;
 	margin-bottom: 0.5em;
 	padding-bottom: 5px;
 }
 
-.portlet-wiki h1.page-title {
+.portlet-wiki .portlet-body h1.page-title {
 	clear: both;
 	margin: 0 0 10px 0;
 }
 
-.portlet-wiki h1.page-title .return-to-page {
+.portlet-wiki .portlet-body h1.page-title .return-to-page {
 	background: url(<%= themeImagesPath %>/wiki/return_to_page.png) no-repeat 0 50%;
 	padding-left: 20px;
 	text-decoration: none;
 }
 
-.portlet-wiki h3 {
+.portlet-wiki .portlet-body h3 {
 	border-bottom: 1px dotted #aaa;
 }
 
