@@ -63,13 +63,15 @@ portletURL.setParameter("tabs1", tabs1);
 
 			<div class="separator article-separator"><!-- --></div>
 
-			<aui:button-row>
-				<aui:button onClick='<%= renderResponse.getNamespace() + "expireArticles();" %>' value="expire" />
+			<c:if test="<%= results.size() > 0 %>">
+				<aui:button-row>
+					<aui:button onClick='<%= renderResponse.getNamespace() + "expireArticles();" %>' value="expire" />
 
-				<aui:button onClick='<%= renderResponse.getNamespace() + "deleteArticles();" %>' value="delete" />
-			</aui:button-row>
+					<aui:button onClick='<%= renderResponse.getNamespace() + "deleteArticles();" %>' value="delete" />
+				</aui:button-row>
 
-			<br /><br />
+				<br /><br />
+			</c:if>
 
 			<%
 			List resultRows = searchContainer.getResultRows();
