@@ -34,7 +34,6 @@ portletURL.setParameter("struts_action", "/journal_content_search/search");
 
 <%
 String taglibOnBlur = "if (this.value == '') { this.value = '" + unicodeDefaultKeywords + "'; }";
-
 String taglibOnFocus = "if (this.value == '" + unicodeDefaultKeywords + "') { this.value = ''; }";
 %>
 
