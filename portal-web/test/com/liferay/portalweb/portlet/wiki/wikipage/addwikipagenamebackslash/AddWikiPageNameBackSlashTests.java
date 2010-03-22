@@ -33,7 +33,6 @@ public class AddWikiPageNameBackSlashTests extends BaseTests {
 		testSuite.addTestSuite(AddPageTest.class);
 		testSuite.addTestSuite(AddPortletTest.class);
 		testSuite.addTestSuite(AddWikiPageNameBackSlashTest.class);
-		testSuite.addTestSuite(TearDownWikiPageTest.class);
 		testSuite.addTestSuite(TearDownWikiNodeTest.class);
 		testSuite.addTestSuite(TearDownPageTest.class);
 

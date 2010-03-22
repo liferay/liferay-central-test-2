@@ -34,9 +34,8 @@ public class AddWikiNodeInteruptEditFrontPageTests extends BaseTests {
 		testSuite.addTestSuite(AddPortletTest.class);
 		testSuite.addTestSuite(AddFrontPageTest.class);
 		testSuite.addTestSuite(AddWikiNodeInteruptEditFrontPageTest.class);
-		testSuite.addTestSuite(TearDownWikiPageTest.class);
 		testSuite.addTestSuite(TearDownWikiNodeTest.class);
-//		testSuite.addTestSuite(TearDownPageTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}
