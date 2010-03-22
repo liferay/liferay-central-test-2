@@ -111,7 +111,7 @@ AUI().add(
 
 					AssetTagsSelector.superclass.renderUI.apply(instance, arguments);
 
-					instance._renderToolset();
+					instance._renderIcons();
 
 					instance.inputNode.addClass(CSS_INPUT_NODE);
 				},
@@ -294,12 +294,12 @@ AUI().add(
 					instance[action](value);
 				},
 
-				_renderToolset: function() {
+				_renderIcons: function() {
 					var instance = this;
 
 					var contentBox = instance.get('contentBox');
 
-					var toolSet = [
+					var toolbar = [
 						{
 							icon: 'plus',
 							id: 'add',
@@ -319,7 +319,7 @@ AUI().add(
 					];
 
 					if (instance.get('contentCallback')) {
-						toolSet.push(
+						toolbar.push(
 							{
 								icon: 'comment',
 								id: 'suggest',
@@ -331,15 +331,15 @@ AUI().add(
 						);
 					}
 
-					instance.toolset = new A.Toolbar(
+					instance.icons = new A.Toolbar(
 						{
-							children: toolSet
+							children: toolbar
 						}
 					).render(contentBox);
 
-					var toolsetBoundingBox = instance.toolset.get('boundingBox');
+					var iconsBoundingBox = instance.icons.get('boundingBox');
 
-					instance.entryHolder.placeAfter(toolsetBoundingBox);
+					instance.entryHolder.placeAfter(iconsBoundingBox);
 				},
 
 				_searchEntries: function(term) {

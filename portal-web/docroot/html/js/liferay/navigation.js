@@ -156,7 +156,7 @@ AUI().add(
 						instance.fire(eventName, options);
 					};
 
-					var tools = [
+					var icons = [
 						{
 							handler: function(event) {
 								comboBox.fire('savePage', options);
@@ -167,7 +167,7 @@ AUI().add(
 					];
 
 					if (prototypeTemplate && !prevVal) {
-						tools.unshift(
+						icons.unshift(
 							{
 								activeState: true,
 								handler: function(event) {
@@ -226,6 +226,7 @@ AUI().add(
 							field: {
 								value: prevVal
 							},
+							icons: icons,
 							on: {
 								destroy: function(event) {
 									var instance = this;
@@ -234,13 +235,12 @@ AUI().add(
 										optionsOverlay.destroy();
 									}
 								}
-							},
-							tools: tools
+							}
 						}
 					).render(listItem);
 
 					if (prototypeTemplate && instance._optionsOpen && !prevVal) {
-						var optionItem = comboBox.toolset.tools.item('options');
+						var optionItem = comboBox.icons.item('options');
 
 						optionItem.StateInteraction.set('active', true);
 						optionsOverlay.show();

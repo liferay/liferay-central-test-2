@@ -65,7 +65,7 @@ AUI().add(
 
 					AssetCategoriesSelector.superclass.constructor.superclass.renderUI.apply(instance, arguments);
 
-					instance._renderToolset();
+					instance._renderIcons();
 
 					instance.inputContainer.hide('aui-helper-hidden-accessible');
 				},
@@ -175,12 +175,12 @@ AUI().add(
 					}
 				},
 
-				_renderToolset: function() {
+				_renderIcons: function() {
 					var instance = this;
 
 					var contentBox = instance.get('contentBox');
 
-					instance.toolset = new A.Toolbar(
+					instance.icons = new A.Toolbar(
 						{
 							children: [
 								{
@@ -195,9 +195,9 @@ AUI().add(
 						}
 					).render(contentBox);
 
-					var toolsetBoundingBox = instance.toolset.get('boundingBox');
+					var iconsBoundingBox = instance.icons.get('boundingBox');
 
-					instance.entryHolder.placeAfter(toolsetBoundingBox);
+					instance.entryHolder.placeAfter(iconsBoundingBox);
 				},
 
 				_showSelectPopup: function(event) {
