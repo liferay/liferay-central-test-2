@@ -15,11 +15,13 @@
 package com.liferay.portal.cmis.model;
 
 import com.liferay.portal.kernel.util.DateFormatFactoryUtil;
+import com.liferay.portal.kernel.util.FastDateFormatFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 
 import java.io.Serializable;
 
 import java.text.DateFormat;
+import java.text.Format;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -177,7 +179,7 @@ public class CMISObject extends ExtensibleElementWrapper {
 			propertyElement = factory.newElement(
 				_cmisConstants.PROPERTY_TYPE_DATETIME, propertiesElement);
 
-			propertyValue = _dateFormat.format((Date)propertyValue);
+			propertyValue = _dateFormat.format(propertyValue);
 		}
 		else if (propertyValue instanceof Double) {
 			propertyElement = factory.newElement(
@@ -215,7 +217,10 @@ public class CMISObject extends ExtensibleElementWrapper {
 		try {
 			String value = getPropertyValue(propertyName);
 
-			return _dateFormat.parse(value);
+			DateFormat dateFormat = DateFormatFactoryUtil.getSimpleDateFormat(
+				_DATE_FORMAT_PATTERN);
+
+			return dateFormat.parse(value);
 		}
 		catch (Exception e) {
 			return new Date();
@@ -261,8 +266,11 @@ public class CMISObject extends ExtensibleElementWrapper {
 		return propertyValue;
 	}
 
-	private static DateFormat _dateFormat =
-		DateFormatFactoryUtil.getSimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
+	private static final String _DATE_FORMAT_PATTERN =
+		"yyyy-MM-dd'T'HH:mm:ss.SSSZ";
+
+	private static Format _dateFormat =
+		FastDateFormatFactoryUtil.getSimpleDateFormat(_DATE_FORMAT_PATTERN);
 
 	private CMISConstants _cmisConstants;
 

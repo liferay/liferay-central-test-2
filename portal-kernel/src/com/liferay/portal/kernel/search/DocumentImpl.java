@@ -17,6 +17,7 @@ package com.liferay.portal.kernel.search;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.DateFormatFactoryUtil;
+import com.liferay.portal.kernel.util.FastDateFormatFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -28,6 +29,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import java.text.DateFormat;
+import java.text.Format;
 import java.text.ParseException;
 
 import java.util.Arrays;
@@ -295,7 +297,10 @@ public class DocumentImpl implements Document {
 	}
 
 	public Date getDate(String name) throws ParseException {
-		return _dateFormat.parse(get(name));
+		DateFormat dateFormat = DateFormatFactoryUtil.getSimpleDateFormat(
+			_DATE_FORMAT_PATTERN);
+
+		return dateFormat.parse(get(name));
 	}
 
 	public Map<String, Field> getFields() {
@@ -348,7 +353,7 @@ public class DocumentImpl implements Document {
 
 	private static final String _UID_PORTLET = "_PORTLET_";
 
-	private DateFormat _dateFormat = DateFormatFactoryUtil.getSimpleDateFormat(
+	private Format _dateFormat = FastDateFormatFactoryUtil.getSimpleDateFormat(
 		_DATE_FORMAT_PATTERN);
 	private Map<String, Field> _fields = new HashMap<String, Field>();
 
