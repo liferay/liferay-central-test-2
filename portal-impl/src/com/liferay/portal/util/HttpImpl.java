@@ -247,6 +247,10 @@ public class HttpImpl implements Http {
 	}
 
 	public String fixPath(String path, boolean leading, boolean trailing) {
+		if (path == null) {
+			return StringPool.BLANK;
+		}
+
 		if (leading) {
 			path = path.replaceAll("^/+", StringPool.BLANK);
 		}
