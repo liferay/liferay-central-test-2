@@ -18,7 +18,6 @@ import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.workflow.RequiredWorkflowDefinitionException;
 import com.liferay.portal.kernel.workflow.WorkflowDefinition;
 import com.liferay.portal.kernel.workflow.WorkflowDefinitionFileException;
 import com.liferay.portal.kernel.workflow.WorkflowDefinitionManagerUtil;
@@ -72,7 +71,6 @@ public class EditWorkflowDefinitionAction extends PortletAction {
 		}
 		catch (Exception e) {
 			if (e instanceof FileNotFoundException ||
-				e instanceof RequiredWorkflowDefinitionException ||
 				e instanceof WorkflowDefinitionFileException) {
 
 				SessionErrors.add(actionRequest, e.getClass().getName());

@@ -22,7 +22,7 @@
 			<aop:around pointcut="bean(com.liferay.portal.workflow.WorkflowTaskManagerProxyBean)" method="invoke" />
 		</aop:aspect>
 		<aop:aspect ref="com.liferay.portal.workflow.WorkflowLinkAdvice" order="3">
-			<aop:around pointcut="bean(com.liferay.portal.workflow.WorkflowDefinitionManagerProxyBean.updateActive(..))" method="invoke" />
+			<aop:around pointcut="execution (public * com.liferay.portal.workflow.WorkflowDefinitionManagerProxyBean.updateActive(..))" method="invoke" />
 		</aop:aspect>
 		<aop:aspect ref="messagingProxyAdvice" order="4">
 			<aop:around pointcut="bean(com.liferay.portal.workflow.*ProxyBean)" method="invoke" />
