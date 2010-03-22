@@ -92,7 +92,7 @@ if (yearValue > 0) {
 
 <input class="<%= disabled ? "disabled" : "" %>" id="<%= imageInputId %>Input" type="hidden" />
 
-<aui:script use="aui-date-picker-select">
+<aui:script use="aui-calendar-datepicker-select">
 	var datePicker = new A.DatePickerSelect(
 		{
 			appendOrder: <%= dateFormatMDY ? "['m', 'd', 'y']" : "['y', 'm', 'd']" %>,

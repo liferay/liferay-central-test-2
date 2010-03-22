@@ -308,9 +308,9 @@ AUI().add(
 
 					var boundingBox = instance.get('boundingBox');
 
-					var renderControls = new A.ToolSet(
+					var renderControls = new A.Toolbar(
 						{
-							tools: [
+							children: [
 								{
 									handler: {
 										context: instance,

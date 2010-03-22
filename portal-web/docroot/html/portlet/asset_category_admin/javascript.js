@@ -45,7 +45,7 @@ AUI().add(
 					var addCategoryLayer = A.one('.add-category-layer');
 					var addVocabularyLayer = A.one('.add-vocabulary-layer');
 
-					instance._toolbarCategoryPanel = new A.ContextPanel(
+					instance._toolbarCategoryPanel = new A.OverlayContextPanel(
 						{
 							align: {
 								points: ['tr', 'br']
@@ -56,7 +56,7 @@ AUI().add(
 					)
 					.render();
 
-					instance._vocabularyCategoryPanel = new A.ContextPanel(
+					instance._vocabularyCategoryPanel = new A.OverlayContextPanel(
 						{
 							align: {
 								points: ['tr', 'br']
@@ -1356,6 +1356,6 @@ AUI().add(
 	},
 	'',
 	{
-		requires: ['aui-context-panel', 'aui-editable', 'aui-live-search', 'aui-tree-view', 'dd', 'json', 'liferay-portlet-url']
+		requires: ['aui-overlay-context-panel', 'aui-editable', 'aui-live-search', 'aui-tree-view', 'dd', 'json', 'liferay-portlet-url']
 	}
 );

@@ -471,20 +471,20 @@
 	width: auto;
 }
 
-.journal-article-edit-field-wrapper.aui-context-panel-container,
-.journal-article-edit-field-wrapper .aui-context-panel-container {
+.journal-article-edit-field-wrapper.aui-overlaycontextpanel-container,
+.journal-article-edit-field-wrapper .aui-overlaycontextpanel-container {
 
 	background-color: #EBFFEE;
 	border-color: #C3E7CC;
 }
 
-.journal-article-edit-field-wrapper.aui-context-panel {
+.journal-article-edit-field-wrapper.aui-overlaycontextpanel {
 	margin: 0 13px 0 0;
 	padding: 0;
 	position: relative;
 }
 
-.journal-article-edit-field-wrapper.aui-context-panel-arrow-tl .aui-context-panel-pointer-inner {
+.journal-article-edit-field-wrapper.aui-overlaycontextpanel-arrow-tl .aui-overlaycontextpanel-pointer-inner {
 	border-bottom: 10px solid #EBFFEE;
 }
 

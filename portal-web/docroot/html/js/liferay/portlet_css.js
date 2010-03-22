@@ -910,7 +910,7 @@ AUI().add(
 							function(holderItem, holderIndex, holderCollection) {
 								if (holderIndex > firstIndex) {
 									var fields = holderItem.all('input, select');
-									var colorPickerImages = holderItem.all('.aui-tool-item');
+									var colorPickerImages = holderItem.all('.aui-button');
 
 									var action = 'show';
 									var disabled = false;

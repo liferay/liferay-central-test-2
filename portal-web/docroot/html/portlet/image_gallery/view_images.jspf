@@ -108,7 +108,7 @@
 	<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 </div>
 
-<aui:script use="aui-image-gallery">
+<aui:script use="aui-image-viewer-gallery">
 	var imageGallery = new A.ImageGallery(
 		{
 			after: {

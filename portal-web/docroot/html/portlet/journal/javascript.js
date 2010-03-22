@@ -279,7 +279,7 @@ AUI().add(
 
 			editContainerWrapper.show();
 
-			instance.editContainerContextPanel = new A.ContextPanel(
+			instance.editContainerContextPanel = new A.OverlayContextPanel(
 				{
 					after: {
 						hide: A.bind(instance.closeEditFieldOptions, instance),
@@ -302,7 +302,7 @@ AUI().add(
 			)
 			.render();
 
-			A.ContextOverlayManager.remove(instance.editContainerContextPanel);
+			A.OverlayContextManager.remove(instance.editContainerContextPanel);
 
 			instance._initializeTagsSuggestionContent();
 			instance._initializePageLoadFieldInstances();
@@ -1410,7 +1410,7 @@ AUI().add(
 
 				var editContainerWrapper = instance.getById('#journalArticleEditFieldWrapper');
 
-				var isVisible = !editContainerWrapper.ancestor('.aui-contextpanel-hidden');
+				var isVisible = !editContainerWrapper.ancestor('.aui-overlaycontextpanel-hidden');
 
 				if (isVisible) {
 					setTimeout(
@@ -3343,6 +3343,6 @@ AUI().add(
 	},
 	'',
 	{
-		requires: ['aui-base', 'aui-context-panel', 'aui-data-set', 'aui-datatype', 'aui-dialog', 'aui-nested-list', 'json', 'substitute']
+		requires: ['aui-base', 'aui-overlay-context-panel', 'aui-data-set', 'aui-datatype', 'aui-dialog', 'aui-nested-list', 'json', 'substitute']
 	}
 );

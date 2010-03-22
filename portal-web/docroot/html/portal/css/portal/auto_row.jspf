@@ -56,7 +56,7 @@
 	position: relative;
 }
 
-.lfr-autorow-controls .aui-tool {
+.lfr-autorow-controls.aui-toolbar {
 	padding: 1px;
 }
 

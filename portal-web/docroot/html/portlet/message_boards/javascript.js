@@ -342,7 +342,7 @@ AUI().add(
 				var offsetWidth = 0;
 				var boxWidth = 0;
 
-				var emoticonOverlay = new A.ContextOverlay(
+				var emoticonOverlay = new A.OverlayContext(
 					{
 						align: {
 							 points: ['tr', 'br']
@@ -554,6 +554,6 @@ AUI().add(
 	},
 	'',
 	{
-		requires: ['aui-color-picker', 'aui-context-overlay', 'aui-io-request']
+		requires: ['aui-color-picker', 'aui-overlay-context', 'aui-io-request']
 	}
 );

@@ -22,15 +22,6 @@
 	box-shadow: 1px 1px 0 #FFF;
 }
 
-.aui-context-panel {
-	-moz-border-radius: 4px;
-	-moz-box-shadow: 4px 4px 14px #777;
-	-webkit-border-radius: 4px;
-	-webkit-box-shadow: 4px 4px 14px #777;
-	border-radius: 4px;
-	box-shadow: 4px 4px 14px #777;
-}
-
 .aui-tabview-list, .aui-tab-active, body > .lfr-menu-list ul, .lfr-actions, .aui-dialog-content, .aui-dialog .aui-widget-hd, input[type="submit"], input[type="button"], input[type="reset"], button {
 	-moz-border-radius: 4px;
 	-webkit-border-radius: 4px;

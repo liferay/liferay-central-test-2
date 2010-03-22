@@ -331,9 +331,9 @@ AUI().add(
 						);
 					}
 
-					instance.toolset = new A.ToolSet(
+					instance.toolset = new A.Toolbar(
 						{
-							tools: toolSet
+							children: toolSet
 						}
 					).render(contentBox);
 
@@ -494,6 +494,6 @@ AUI().add(
 	},
 	'',
 	{
-		requires: ['aui-autocomplete', 'aui-dialog', 'aui-io-request', 'aui-live-search', 'aui-textboxlist', 'aui-textfield', 'substitute']
+		requires: ['aui-autocomplete', 'aui-dialog', 'aui-io-request', 'aui-live-search', 'aui-textboxlist', 'aui-form-textfield', 'substitute']
 	}
 );

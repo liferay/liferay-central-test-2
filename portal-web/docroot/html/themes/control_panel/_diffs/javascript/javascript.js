@@ -2,7 +2,7 @@ Liferay.Util.portletTitleEdit = function() {
 };
 
 AUI().use(
-	'aui-context-panel',
+	'aui-overlay-context-panel',
 	'aui-io-request',
 	function(A) {
 		var portletInformationEl = A.get('#cpContextPanelTemplate');
@@ -16,9 +16,9 @@ AUI().use(
 
 			sessionData[sessionKey] = false;
 
-			portletInformationEl.removeClass('aui-contextpanel-hidden');
+			portletInformationEl.removeClass('aui-overlaycontextpanel-hidden');
 
-			var contextPanel = new A.ContextPanel(
+			var contextPanel = new A.OverlayContextPanel(
 				{
 					align: {
 						points: [ 'tl', 'br' ]

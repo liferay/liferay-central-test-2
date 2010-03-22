@@ -1,9 +1,9 @@
 AUI().use(
-	'aui-context-overlay',
+	'aui-button',
 	'aui-io-plugin',
 	'aui-io-request',
+	'aui-overlay-context',
 	'aui-overlay-manager',
-	'aui-tool-item',
 	function(A) {
 		Liferay.Dockbar = {
 			init: function() {
@@ -306,7 +306,7 @@ AUI().use(
 						options.contentBox = options.boundingBox + '> .aui-menu-content';
 					}
 
-					var menu = new A.ContextOverlay(options);
+					var menu = new A.OverlayContext(options);
 
 					Liferay.Dockbar.MenuManager.register(menu);
 
@@ -487,7 +487,7 @@ AUI().use(
 
 		A.extend(
 			Underlay,
-			A.ComponentOverlay,
+			A.OverlayBase,
 			{
 				initializer: function() {
 					var instance = this;
@@ -500,7 +500,7 @@ AUI().use(
 
 					Underlay.superclass.renderUI.apply(instance, arguments);
 
-					var closeTool = new A.ToolItem('close');
+					var closeTool = new A.Button('close');
 
 					closeTool.render(instance.get('boundingBox'));
 

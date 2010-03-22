@@ -48,7 +48,7 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 					</span>
 				</a>
 
-				<div class="aui-menu add-content-menu aui-contextoverlay-hidden" id="<portlet:namespace />addContentContainer">
+				<div class="aui-menu add-content-menu aui-overlaycontext-hidden" id="<portlet:namespace />addContentContainer">
 					<div class="aui-menu-content">
 						<ul>
 							<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.MANAGE_LAYOUTS) && !group.isLayoutPrototype() %>">
@@ -108,7 +108,7 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 					</span>
 				</a>
 
-				<div class="aui-menu manage-content-menu aui-contextoverlay-hidden" id="<portlet:namespace />manageContentContainer">
+				<div class="aui-menu manage-content-menu aui-overlaycontext-hidden" id="<portlet:namespace />manageContentContainer">
 					<div class="aui-menu-content">
 						<ul>
 							<c:if test="<%= themeDisplay.isShowPageSettingsIcon() %>">
@@ -164,7 +164,7 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 					</span>
 				</a>
 
-				<div class="aui-menu staging-menu aui-contextoverlay-hidden" id="<portlet:namespace />stagingContainer">
+				<div class="aui-menu staging-menu aui-overlaycontext-hidden" id="<portlet:namespace />stagingContainer">
 					<div class="aui-menu-content">
 						<liferay-ui:staging />
 					</div>
@@ -194,7 +194,7 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 					</span>
 				</a>
 
-				<div class="aui-menu my-places-menu aui-contextoverlay-hidden" id="<portlet:namespace />myPlacesContainer">
+				<div class="aui-menu my-places-menu aui-overlaycontext-hidden" id="<portlet:namespace />myPlacesContainer">
 					<div class="aui-menu-content">
 						<liferay-ui:my-places />
 					</div>
@@ -216,7 +216,7 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 			</span>
 
 			<c:if test="<%= themeDisplay.isImpersonated() %>">
-				<div class="aui-menu impersonation-menu aui-contextoverlay-hidden" id="<portlet:namespace />userOptionsContainer">
+				<div class="aui-menu impersonation-menu aui-overlaycontext-hidden" id="<portlet:namespace />userOptionsContainer">
 					<div class="aui-menu-content">
 						<div class="notice-message portlet-msg-info">
 							<c:choose>

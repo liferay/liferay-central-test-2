@@ -180,9 +180,9 @@ AUI().add(
 
 					var contentBox = instance.get('contentBox');
 
-					instance.toolset = new A.ToolSet(
+					instance.toolset = new A.Toolbar(
 						{
-							tools: [
+							children: [
 								{
 									icon: 'search',
 									id: 'select',

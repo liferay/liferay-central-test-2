@@ -48,7 +48,7 @@ AUI().add(
 
 					var addTagLayer = A.one('.add-tag-layer');
 
-					instance._addTagOverlay = new A.ContextPanel(
+					instance._addTagOverlay = new A.OverlayContextPanel(
 						{
 							align: {
 								points: ['tr', 'br']
@@ -891,6 +891,6 @@ AUI().add(
 	},
 	'',
 	{
-		requires: ['aui-context-panel', 'aui-live-search', 'base', 'dd', 'json', 'liferay-portlet-url', 'substitute']
+		requires: ['aui-overlay-context-panel', 'aui-live-search', 'base', 'dd', 'json', 'liferay-portlet-url', 'substitute']
 	}
 );
