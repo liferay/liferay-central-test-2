@@ -109,7 +109,7 @@ public class StringServletResponse extends HttpServletResponseWrapper {
 
 		_unsyncByteArrayOutputStream.reset();
 
-		_unsyncStringWriter = new UnsyncStringWriter(true);
+		_unsyncStringWriter.reset();
 		_printWriter = new PrintWriter(_unsyncStringWriter);
 	}
 
