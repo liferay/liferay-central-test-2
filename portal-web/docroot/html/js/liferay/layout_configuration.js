@@ -56,7 +56,11 @@ AUI().add(
 					instance.categoryContainers = menu.all('.lfr-add-content');
 
 					var data = function(node) {
-						var value = node.attr('id');
+						var id = node.attr('id');
+
+						var dataNode = A.one('#' + id + 'CategoryPath');
+
+						var value = (dataNode && dataNode.val()) || '';
 
 						return [Liferay.Util.uncamelize(value), value].join(' ').toLowerCase();
 					};

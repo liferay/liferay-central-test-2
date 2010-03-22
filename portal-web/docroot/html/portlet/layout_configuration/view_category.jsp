@@ -19,11 +19,13 @@
 <%
 PortletCategory portletCategory = (PortletCategory)request.getAttribute(WebKeys.PORTLET_CATEGORY);
 
+int portletCategoryIndex = GetterUtil.getInteger((String)request.getAttribute("portletCategoryIndex"), 0);
+
 String oldCategoryPath = (String)request.getAttribute(WebKeys.PORTLET_CATEGORY_PATH);
 
 String newCategoryPath = LanguageUtil.get(pageContext, portletCategory.getName());
 
-Pattern pattern = Pattern.compile("[:,a-z,A-Z,0-9]+");
+Pattern pattern = Pattern.compile(".*");
 
 Matcher matcher = pattern.matcher(newCategoryPath);
 
@@ -78,7 +80,7 @@ portlets = ListUtil.sort(portlets, new PortletTitleComparator(application, local
 if (!categories.isEmpty() || !portlets.isEmpty()) {
 %>
 
-	<div class="lfr-add-content <%= (layout.getType().equals(LayoutConstants.TYPE_PORTLET)) ? "collapsed" : "" %>" id="<%= newCategoryPath.replace(':', '-') %>">
+	<div class="lfr-add-content <%= (layout.getType().equals(LayoutConstants.TYPE_PORTLET)) ? "collapsed" : "" %>" id="layoutConfigurationEntry<%= portletCategoryIndex %>">
 		<h2>
 			<span><%= Validator.isNotNull(externalPortletCategory) ? externalPortletCategory : LanguageUtil.get(pageContext, portletCategory.getName()) %></span>
 		</h2>
@@ -91,6 +93,8 @@ if (!categories.isEmpty() || !portlets.isEmpty()) {
 			while (itr.hasNext()) {
 				request.setAttribute(WebKeys.PORTLET_CATEGORY, itr.next());
 				request.setAttribute(WebKeys.PORTLET_CATEGORY_PATH, newCategoryPath);
+
+				request.setAttribute("portletCategoryIndex", portletCategoryIndex);
 			%>
 
 				<liferay-util:include page="/html/portlet/layout_configuration/view_category.jsp" />
@@ -183,7 +187,7 @@ if (!categories.isEmpty() || !portlets.isEmpty()) {
 							footerPortletCssPaths="<%= StringUtil.merge(footerPortletCssSet) %>"
 							headerPortalCssPaths="<%= StringUtil.merge(headerPortalCssSet) %>"
 							headerPortletCssPaths="<%= StringUtil.merge(headerPortletCssSet) %>"
-							id="<%= divId.toString().replace(':', '-') %>"
+							id="layoutConfigurationEntry<%= portlet.getPortletId() %>"
 							instanceable="<%= portletInstanceable %>"
 							plid="<%= plid %>"
 							portletId="<%= portlet.getPortletId() %>"
@@ -191,6 +195,8 @@ if (!categories.isEmpty() || !portlets.isEmpty()) {
 						>
 							<p><%= PortalUtil.getPortletTitle(portlet, application, locale) %> <a href="javascript:;"><liferay-ui:message key="add" /></a></p>
 						</div>
+
+						<input id="layoutConfigurationEntry<%= portlet.getPortletId() %>CategoryPath" type="hidden" value="<%= divId.toString().replace(':', '-') %>" />
 					</c:when>
 					<c:otherwise>
 						<div>
@@ -206,6 +212,7 @@ if (!categories.isEmpty() || !portlets.isEmpty()) {
 		</div>
 	</div>
 
+	<input id="layoutConfigurationEntry<%= portletCategoryIndex %>CategoryPath" type="hidden" value="<%= newCategoryPath.replace(':', '-') %>" />
 <%
 }
 %>
