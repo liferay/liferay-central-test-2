@@ -4052,6 +4052,7 @@ x-people-are-planning-to-attend-this-meetup=<strong>{0}</strong> osób planuje u
 x-role={0} Role (Automatic Copy)
 x-search-provider={0} Search Provider (Automatic Copy)
 x-search={0} Search (Automatic Copy)
+x-updated-the-due-date={0} updated the due date. (Automatic Copy)
 x-users-were-successfully-notified={0} użytkowników zostało powiadomionych.
 xml-feeds=Kanał XML
 xml-url=URL XML

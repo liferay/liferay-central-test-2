@@ -4181,6 +4181,7 @@ x-people-are-planning-to-attend-this-meetup=<b>{0}</b> inimest plaanib sellest k
 x-role={0} Role (Automatic Copy)
 x-search-provider={0} Search Provider (Automatic Copy)
 x-search={0} Search (Automatic Copy)
+x-updated-the-due-date={0} updated the due date. (Automatic Copy)
 x-users-were-successfully-notified={0} kasutaja teavitamine oli edukas. 
 xml-feeds=XML vood
 xml-url=XML aadress

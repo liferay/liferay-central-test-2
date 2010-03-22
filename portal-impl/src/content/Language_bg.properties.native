@@ -3957,6 +3957,7 @@ x-people-are-planning-to-attend-this-meetup=<strong>{0}</strong> хора пла
 x-role={0} Role (Automatic Copy)
 x-search-provider={0} Search Provider (Automatic Copy)
 x-search={0} Search (Automatic Copy)
+x-updated-the-due-date={0} updated the due date. (Automatic Copy)
 x-users-were-successfully-notified={0} потребители са успешно уведомени.
 xml-url=XML URL
 xml=XML

@@ -4114,6 +4114,7 @@ x-people-are-planning-to-attend-this-meetup=<strong>{0}</strong> personer planer
 x-role={0} Role (Automatic Copy)
 x-search-provider={0} Söktjänst
 x-search={0} Sök
+x-updated-the-due-date={0} updated the due date. (Automatic Copy)
 x-users-were-successfully-notified={0} användare har meddelats.
 xml-feeds=XML-prenumerationer
 xml-url=XML-URL
