@@ -4634,7 +4634,6 @@ you-can-get-a-license-directly-from-google=您可以直接从 Google 得到一�
 you-can-now-check-for-new-messages-in-your-x=您现在可以在 {0} 检查您的新信息。
 you-cannot-assign-groups-or-users-to-this-role=您无法将组或用户指定到此角色。
 you-cannot-change-your-password-yet-please-wait-at-least-x-before-changing-your-password-again=您目前不能更改您的密码。请等待至少 {0} 才能更改您的密码。
-you-cannot-deactivate-or-delete-this-definition=您不可能撤销或删除这个定义。 有参考这个定义的处理事例。 (Automatic Translation)
 you-cannot-delete-a-root-message-that-has-more-than-one-immediate-reply=您无法删除具有一个以上直接回复的根消息。
 you-cannot-delete-a-system-role=您无法删除系统角色。
 you-cannot-delete-locations-that-have-users=您无法删除具有用户的区域。
