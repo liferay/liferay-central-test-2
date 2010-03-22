@@ -102,35 +102,34 @@ portletURL.setParameter("tabs1", tabs1);
 
 		List results = indexer.search(searchContext).toList();
 
-		DocumentComparator docComparator = null;
+		DocumentComparator docComparator = new DocumentComparator();
+
+		boolean ascending = true;
 
 		if (orderByType.equals("desc")) {
-			docComparator = new DocumentComparator(false, false);
-		}
-		else {
-			docComparator = new DocumentComparator();
+			ascending = false;
 		}
 
 		if (orderByCol.equals("version")) {
-			docComparator.addOrderBy("version");
+			docComparator.addOrderBy("version", ascending);
 			docComparator.addOrderBy("modified-date");
 			docComparator.addOrderBy(Field.TITLE);
 			docComparator.addOrderBy("type");
 		}
 		else if (orderByCol.equals("modified-date")) {
-			docComparator.addOrderBy("modified-date");
+			docComparator.addOrderBy("modified-date", ascending);
 			docComparator.addOrderBy(Field.TITLE);
 			docComparator.addOrderBy("version");
 			docComparator.addOrderBy("type");
 		}
 		else if (orderByCol.equals("type")) {
-			docComparator.addOrderBy("type");
+			docComparator.addOrderBy("type", ascending);
 			docComparator.addOrderBy("modified-date");
 			docComparator.addOrderBy(Field.TITLE);
 			docComparator.addOrderBy("version");
 		}
 		else {
-			docComparator.addOrderBy(Field.TITLE);
+			docComparator.addOrderBy(Field.TITLE, ascending);
 			docComparator.addOrderBy("version");
 			docComparator.addOrderBy("modified-date");
 			docComparator.addOrderBy("type");
