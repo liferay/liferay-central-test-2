@@ -82,15 +82,7 @@ public class DocumentServlet extends HttpServlet {
 
 			PermissionThreadLocal.setPermissionChecker(permissionChecker);
 
-			String path = request.getPathInfo();
-
-			if (path.startsWith(StringPool.SLASH)) {
-				path = path.substring(1);
-			}
-
-			if (path.endsWith(StringPool.SLASH)) {
-				path = path.substring(0, path.length() - 1);
-			}
+			String path = HttpUtil.fixPath(request.getPathInfo());
 
 			String[] pathArray = StringUtil.split(path, StringPool.SLASH);
 
