@@ -213,6 +213,7 @@ if (!categories.isEmpty() || !portlets.isEmpty()) {
 	</div>
 
 	<input id="layoutConfigurationEntry<%= portletCategoryIndex %>CategoryPath" type="hidden" value="<%= newCategoryPath.replace(':', '-') %>" />
+
 <%
 }
 %>
