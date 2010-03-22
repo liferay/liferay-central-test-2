@@ -42,13 +42,12 @@ public class DLFileEntryTable {
 		{"title", new Integer(Types.VARCHAR)},
 		{"description", new Integer(Types.VARCHAR)},
 		{"version", new Integer(Types.VARCHAR)},
-		{"pendingVersion", new Integer(Types.VARCHAR)},
 		{"size_", new Integer(Types.BIGINT)},
 		{"readCount", new Integer(Types.INTEGER)},
 		{"extraSettings", new Integer(Types.CLOB)}
 	};
 
-	public static final String TABLE_SQL_CREATE = "create table DLFileEntry (uuid_ VARCHAR(75) null,fileEntryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,versionUserId LONG,versionUserName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,folderId LONG,name VARCHAR(255) null,title VARCHAR(255) null,description STRING null,version VARCHAR(75) null,pendingVersion VARCHAR(75) null,size_ LONG,readCount INTEGER,extraSettings TEXT null)";
+	public static final String TABLE_SQL_CREATE = "create table DLFileEntry (uuid_ VARCHAR(75) null,fileEntryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,versionUserId LONG,versionUserName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,folderId LONG,name VARCHAR(255) null,title VARCHAR(255) null,description STRING null,version VARCHAR(75) null,size_ LONG,readCount INTEGER,extraSettings TEXT null)";
 
 	public static final String TABLE_SQL_DROP = "drop table DLFileEntry";
 
