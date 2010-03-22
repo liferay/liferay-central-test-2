@@ -56,14 +56,16 @@
 		<antcall target="run-versioned-upgrade-test">
 			<param name="file.name" value="liferay-portal-tomcat-6.0-5.1.0.zip" />
 			<param name="legacy.config" value="true" />
+			<param name="legacy.theme.ids" value="classic" />
 			<param name="license.type" value="ce" />
 			<param name="lp.version" value="5.1.0" />
-			<param name="test.name" value="SmokeTestSuite" />
+			<param name="test.name" value="SampleData510TestSuite" />
 			<param name="tomcat.folder.dir" value="liferay-portal-tomcat-6.0-5.1.0" />
 		</antcall>
 
 		<antcall target="run-latest-upgrade-test">
-			<param name="test.name" value="SmokeTestSuite" />
+			<param name="portlet.plugins.includes" value="web-form-portlet" />
+			<param name="test.name" value="ViewSampleData510LatestTestSuite" />
 		</antcall>
 	</target>
 
@@ -87,14 +89,16 @@
 		<antcall target="run-versioned-upgrade-test">
 			<param name="file.name" value="liferay-portal-tomcat-6.0-5.1.1.zip" />
 			<param name="legacy.config" value="true" />
+			<param name="legacy.theme.ids" value="classic" />
 			<param name="license.type" value="ce" />
 			<param name="lp.version" value="5.1.1" />
-			<param name="test.name" value="SmokeTestSuite" />
+			<param name="test.name" value="SampleData511TestSuite" />
 			<param name="tomcat.folder.dir" value="liferay-portal-tomcat-6.0-5.1.1" />
 		</antcall>
 
 		<antcall target="run-latest-upgrade-test">
-			<param name="test.name" value="SmokeTestSuite" />
+			<param name="portlet.plugins.includes" value="web-form-portlet" />
+			<param name="test.name" value="ViewSampleData511LatestTestSuite" />
 		</antcall>
 	</target>
 
@@ -118,14 +122,16 @@
 		<antcall target="run-versioned-upgrade-test">
 			<param name="file.name" value="liferay-portal-tomcat-6.0-5.1.2.zip" />
 			<param name="legacy.config" value="true" />
+			<param name="legacy.theme.ids" value="classic" />
 			<param name="license.type" value="ce" />
 			<param name="lp.version" value="5.1.2" />
-			<param name="test.name" value="SmokeTestSuite" />
+			<param name="test.name" value="SampleData512TestSuite" />
 			<param name="tomcat.folder.dir" value="liferay-portal-tomcat-6.0-5.1.2" />
 		</antcall>
 
 		<antcall target="run-latest-upgrade-test">
-			<param name="test.name" value="SmokeTestSuite" />
+			<param name="portlet.plugins.includes" value="web-form-portlet" />
+			<param name="test.name" value="ViewSampleData512LatestTestSuite" />
 		</antcall>
 	</target>
 
@@ -148,14 +154,15 @@
 
 		<antcall target="run-versioned-upgrade-test">
 			<param name="file.name" value="liferay-portal-tomcat-6.0-5.2.0.zip" />
+			<param name="legacy.theme.ids" value="classic,controlpanel" />
 			<param name="license.type" value="ce" />
 			<param name="lp.version" value="5.2.0" />
-			<param name="test.name" value="SmokeTestSuite" />
+			<param name="test.name" value="SampleData520TestSuite" />
 			<param name="tomcat.folder.dir" value="liferay-portal-5.2.0/tomcat-6.0.18" />
 		</antcall>
 
 		<antcall target="run-latest-upgrade-test">
-			<param name="test.name" value="SmokeTestSuite" />
+			<param name="test.name" value="ViewSampleData520LatestTestSuite" />
 		</antcall>
 	</target>
 
@@ -177,15 +184,18 @@
 		</antcall>
 
 		<antcall target="run-versioned-upgrade-test">
+			<param name="deploy.versioned.plugins" value="true" />
 			<param name="file.name" value="liferay-portal-tomcat-6.0-5.2.1.zip" />
+			<param name="legacy.theme.ids" value="classic,controlpanel" />
 			<param name="license.type" value="ce" />
 			<param name="lp.version" value="5.2.1" />
-			<param name="test.name" value="SmokeTestSuite" />
+			<param name="test.name" value="SampleData521TestSuite" />
 			<param name="tomcat.folder.dir" value="liferay-portal-5.2.1/tomcat-6.0.18" />
 		</antcall>
 
 		<antcall target="run-latest-upgrade-test">
-			<param name="test.name" value="SmokeTestSuite" />
+			<param name="portlet.plugins.includes" value="web-form-portlet" />
+			<param name="test.name" value="ViewSampleData521LatestTestSuite" />
 		</antcall>
 	</target>
 
@@ -207,15 +217,18 @@
 		</antcall>
 
 		<antcall target="run-versioned-upgrade-test">
+			<param name="deploy.versioned.plugins" value="true" />
 			<param name="file.name" value="liferay-portal-tomcat-6.0-5.2.2.zip" />
+			<param name="legacy.theme.ids" value="classic,controlpanel" />
 			<param name="license.type" value="ce" />
 			<param name="lp.version" value="5.2.2" />
-			<param name="test.name" value="SmokeTestSuite" />
+			<param name="test.name" value="SampleData522TestSuite" />
 			<param name="tomcat.folder.dir" value="liferay-portal-5.2.2/tomcat-6.0.18" />
 		</antcall>
 
 		<antcall target="run-latest-upgrade-test">
-			<param name="test.name" value="SmokeTestSuite" />
+			<param name="portlet.plugins.includes" value="web-form-portlet" />
+			<param name="test.name" value="ViewSampleData522LatestTestSuite" />
 		</antcall>
 	</target>
 
@@ -238,14 +251,15 @@
 
 		<antcall target="run-versioned-upgrade-test">
 			<param name="file.name" value="liferay-portal-tomcat-6.0-5.2.3.zip" />
+			<param name="legacy.theme.ids" value="classic,controlpanel" />
 			<param name="license.type" value="ce" />
 			<param name="lp.version" value="5.2.3" />
-			<param name="test.name" value="SmokeTestSuite" />
+			<param name="test.name" value="SampleData523TestSuite" />
 			<param name="tomcat.folder.dir" value="liferay-portal-5.2.3/tomcat-6.0.18" />
 		</antcall>
 
 		<antcall target="run-latest-upgrade-test">
-			<param name="test.name" value="SmokeTestSuite" />
+			<param name="test.name" value="ViewSampleData523LatestTestSuite" />
 		</antcall>
 	</target>
 
@@ -253,6 +267,83 @@
 		<antcall target="prepare-db-postgresql-common">
 			<param name="skip.prepare-bundle" value="true" />
 			<param name="sql.version" value="5.2.3" />
+		</antcall>
+
+		<antcall target="run-smoke-test">
+			<param name="build.app.server" value="false" />
+		</antcall>
+	</target>
+
+	<target name="test-db-postgresql-5.2.7-data-upgrade-test">
+		<antcall target="prepare-db-postgresql-common">
+			<param name="skip.prepare-bundle" value="true" />
+			<param name="sql.version" value="5.2.7" />
+		</antcall>
+
+		<antcall target="run-versioned-upgrade-test">
+			<param name="deploy.versioned.plugins" value="true" />
+			<param name="ee.deploy.dir" value="liferay-portal-5.2-ee-sp3/deploy" />
+			<param name="ee.license.dir" value="liferay-portal-5.2-ee-sp3/ee" />
+			<param name="file.name" value="liferay-portal-tomcat-6.0-5.2-ee-sp3.zip" />
+			<param name="legacy.theme.ids" value="classic,controlpanel" />
+			<param name="license.type" value="ee" />
+			<param name="lp.version" value="5.2.7" />
+			<param name="test.name" value="SampleData527TestSuite" />
+			<param name="tomcat.folder.dir" value="liferay-portal-5.2-ee-sp3/tomcat-6.0.18" />
+		</antcall>
+
+		<antcall target="prepare-db-postgresql-common">
+			<param name="custom.properties" value="upgrade.processes=com.liferay.portal.upgrade.UpgradeProcess_5_2_7_to_6_0_0,com.liferay.portal.upgrade.UpgradeProcess_6_0_1" />
+			<param name="skip.prepare-bundle" value="true" />
+			<param name="skip.rebuild-database" value="true" />
+			<param name="sql.version" value="5.2.7" />
+		</antcall>
+
+		<antcall target="run-latest-upgrade-test">
+			<param name="custom.properties" value="upgrade.processes=com.liferay.portal.upgrade.UpgradeProcess_5_2_7_to_6_0_0,com.liferay.portal.upgrade.UpgradeProcess_6_0_1" />
+			<param name="portlet.plugins.includes" value="web-form-portlet" />
+			<param name="test.name" value="ViewSampleData527LatestTestSuite" />
+		</antcall>
+	</target>
+
+	<target name="test-db-postgresql-5.2.7-smoke-test">
+		<antcall target="prepare-db-postgresql-common">
+			<param name="skip.prepare-bundle" value="true" />
+			<param name="sql.version" value="5.2.7" />
+		</antcall>
+
+		<antcall target="run-smoke-test">
+			<param name="custom.properties" value="upgrade.processes=com.liferay.portal.upgrade.UpgradeProcess_5_2_7_to_6_0_0,com.liferay.portal.upgrade.UpgradeProcess_6_0_1" />
+			<param name="build.app.server" value="false" />
+		</antcall>
+	</target>
+
+	<target name="test-db-postgresql-6.0.0-data-upgrade-test">
+		<antcall target="prepare-db-postgresql-common">
+			<param name="skip.prepare-bundle" value="true" />
+			<param name="sql.version" value="6.0.0" />
+		</antcall>
+
+		<antcall target="run-versioned-upgrade-test">
+			<param name="deploy.versioned.plugins" value="true" />
+			<param name="ee.deploy.dir" value="liferay-portal-6.0.0/deploy" />
+			<param name="file.name" value="liferay-portal-tomcat-6.0.0.zip" />
+			<param name="license.type" value="ce" />
+			<param name="lp.version" value="6.0.0" />
+			<param name="test.name" value="SampleData600TestSuite" />
+			<param name="tomcat.folder.dir" value="liferay-portal-6.0.0/tomcat-6.0.24" />
+		</antcall>
+
+		<antcall target="run-latest-upgrade-test">
+			<param name="portlet.plugins.includes" value="web-form-portlet" />
+			<param name="test.name" value="ViewSampleData600LatestTestSuite" />
+		</antcall>
+	</target>
+
+	<target name="test-db-postgresql-6.0.0-smoke-test">
+		<antcall target="prepare-db-postgresql-common">
+			<param name="skip.prepare-bundle" value="true" />
+			<param name="sql.version" value="6.0.0" />
 		</antcall>
 
 		<antcall target="run-smoke-test">
