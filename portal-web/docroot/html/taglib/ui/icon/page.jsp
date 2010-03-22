@@ -92,7 +92,6 @@ if (auiImage) {
 }
 
 boolean urlIsNotNull = Validator.isNotNull(url);
-boolean forcePost = method.equals("post") && (url.startsWith(Http.HTTP_WITH_SLASH) || url.startsWith(Http.HTTPS_WITH_SLASH));
 %>
 
 <liferay-util:buffer var="linkContent">
@@ -158,6 +157,10 @@ boolean forcePost = method.equals("post") && (url.startsWith(Http.HTTP_WITH_SLAS
 	</c:otherwise>
 </c:choose>
 
+<%
+boolean forcePost = method.equals("post") && (url.startsWith(Http.HTTP_WITH_SLASH) || url.startsWith(Http.HTTPS_WITH_SLASH));
+%>
+
 <c:if test="<%= Validator.isNotNull(srcHover) || forcePost %>">
 	<aui:script use="event,node">
 		var icon = A.one('#<portlet:namespace/><%= randomId %>');
@@ -194,6 +197,7 @@ boolean forcePost = method.equals("post") && (url.startsWith(Http.HTTP_WITH_SLAS
 					'click',
 					function(event) {
 						Liferay.Util.forcePost(this);
+
 						return false;
 					}
 				);
