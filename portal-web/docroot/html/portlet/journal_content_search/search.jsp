@@ -18,6 +18,11 @@
 
 <c:choose>
 	<c:when test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
+		<style type="text/css">
+			.portlet-journal-content-search .search-results {
+				margin-top: 1em;
+			}
+		</style>
 
 		<%
 		String defaultKeywords = LanguageUtil.get(pageContext, "search") + "...";
@@ -26,9 +31,9 @@
 		String keywords = ParamUtil.getString(request, "keywords", defaultKeywords);
 		%>
 
-		<portlet:actionURL var="searchURL">
+		<portlet:renderURL var="searchURL">
 			<portlet:param name="struts_action" value="/journal_content_search/search" />
-		</portlet:actionURL>
+		</portlet:renderURL>
 
 		<aui:form action="<%= searchURL %>" method="post" name="fm">
 
@@ -105,29 +110,21 @@
 				}
 			%>
 
-				<table border="0" cellpadding="0" cellspacing="0" width="100%">
-				<tr>
-					<td>
+			<%
+			String taglibOnBlur = "if (this.value == '') { this.value = '" + unicodeDefaultKeywords + "'; }";
 
-						<%
-						String taglibClearDefaultKeywords = "if (this.value == '" + unicodeDefaultKeywords + "') { this.value = ''; }";
+			String taglibOnFocus = "if (this.value == '" + unicodeDefaultKeywords + "') { this.value = ''; }";
+			%>
 
-						String taglibRestoreDefaultKeywords = "if (this.value == '') { this.value = '" + unicodeDefaultKeywords + "'; }";
-						%>
+			<aui:input inlineField="<%= true %>" label="" name="keywords" size="30" onBlur="<%= taglibOnBlur %>" onFocus="<%= taglibOnFocus %>" type="text" value="<%= HtmlUtil.escape(keywords) %>" />
 
-						<aui:input name="keywords" onBlur="<%= taglibRestoreDefaultKeywords %>" onFocus="<%= taglibClearDefaultKeywords %>" size="30" type="text" value="<%= keywords %>" />
+			<aui:input align="absmiddle" border="0" inlineField="<%= true %>" label="" name="search" src='<%= themeDisplay.getPathThemeImages() + "/common/search.png" %>' title="search" type="image" />
 
-						<aui:input align="absmiddle" border="0" label="" name="search" src='<%= themeDisplay.getPathThemeImages()+ "/common/search.png" %>' type="image" />
-					</td>
-					<td align="right">
-						<liferay-ui:search-speed searchContainer="<%= searchContainer %>" hits="<%= results %>" />
-					</td>
-				</tr>
-				</table>
-
-				<br />
+			<div class="search-results">
+				<liferay-ui:search-speed searchContainer="<%= searchContainer %>" hits="<%= results %>" />
 
 				<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+			</div>
 
 			<%
 			}
