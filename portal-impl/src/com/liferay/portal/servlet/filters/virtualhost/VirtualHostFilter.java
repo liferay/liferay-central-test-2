@@ -96,6 +96,7 @@ public class VirtualHostFilter extends BasePortalFilter {
 			friendlyURL.startsWith(_PATH_SITEMAP_XML) ||
 			friendlyURL.startsWith(_PATH_SOFTWARE_CATALOG) ||
 			friendlyURL.startsWith(_PATH_VTI) ||
+			friendlyURL.startsWith(_PATH_VLS) ||
 			friendlyURL.startsWith(_PATH_WAP) ||
 			friendlyURL.startsWith(_PATH_WIDGET) ||
 			friendlyURL.startsWith(_PATH_XMLRPC)) {
@@ -352,6 +353,8 @@ public class VirtualHostFilter extends BasePortalFilter {
 	private static final String _PATH_SITEMAP_XML = "/sitemap.xml";
 
 	private static final String _PATH_SOFTWARE_CATALOG = "/software_catalog";
+
+	private static final String _PATH_VLS = "/vls";
 
 	private static final String _PATH_VTI = "/_vti_";
 
