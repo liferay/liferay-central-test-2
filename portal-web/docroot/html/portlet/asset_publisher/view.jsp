@@ -66,10 +66,11 @@ for (String curAssetTagName : allAssetTagNames) {
 if (enableTagBasedNavigation && selectionStyle.equals("manual") && ((allAssetCategoryIds.length > 0) || (allAssetTagNames.length > 0))) {
 	selectionStyle = "dynamic";
 }
+
+Group group = themeDisplay.getScopeGroup();
 %>
 
-
-<c:if test="<%= (scopeGroup != null) && (!scopeGroup.hasStagingGroup() || scopeGroup.isStagingGroup()) %>">
+<c:if test="<%= (group != null) && (!group.hasStagingGroup() || group.isStagingGroup()) %>">
 	<aui:form name="fm">
 		<%@ include file="/html/portlet/asset_publisher/add_asset.jspf" %>
 	</aui:form>

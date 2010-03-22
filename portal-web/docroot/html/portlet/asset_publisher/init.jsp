@@ -129,7 +129,6 @@ if (Validator.isNull(selectionStyle)) {
 boolean defaultScope = GetterUtil.getBoolean(preferences.getValue("default-scope", null), true);
 
 long[] groupIds = new long[] {scopeGroupId};
-Group scopeGroup = themeDisplay.getScopeGroup();
 
 if (!defaultScope) {
 	String[] scopeIds = preferences.getValues("scope-ids", new String[] {"group" + StringPool.UNDERLINE + scopeGroupId});
