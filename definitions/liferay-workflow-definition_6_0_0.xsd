@@ -95,7 +95,7 @@
 		</xs:choice>
 	</xs:group>
 	<xs:element name="script" type="xs:string" />
-	<xs:element name="template" type="xs:string" />	
+	<xs:element name="template" type="xs:string" />
 	<xs:element name="action">
 		<xs:complexType>
 			<xs:sequence>
@@ -174,7 +174,7 @@
 						<xs:enumeration value="onExit" />
 					</xs:restriction>
 				</xs:simpleType>
-			</xs:attribute>			
+			</xs:attribute>
 		</xs:complexType>
 	</xs:element>
 	<xs:element name="transitions">
@@ -207,7 +207,7 @@
 		<xs:complexType>
 			<xs:simpleContent>
 				<xs:extension base="xs:string">
-					<xs:attribute name="role-id" type="xs:long" use="optional" default="0"/>
+					<xs:attribute name="role-id" type="xs:long" use="optional" default="0" />
 					<xs:attribute name="name" type="xs:string" use="optional" />
 					<xs:attribute name="default" type="xs:string" use="optional" default="true" />
 				</xs:extension>
