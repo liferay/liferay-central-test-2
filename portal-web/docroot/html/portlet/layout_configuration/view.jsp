@@ -52,6 +52,8 @@
 
 					categories = ListUtil.sort(categories, new PortletCategoryComparator(locale));
 
+					int portletCategoryIndex = 0;
+
 					Iterator itr = categories.iterator();
 
 					while (itr.hasNext()) {
@@ -62,11 +64,14 @@
 						}
 
 						request.setAttribute(WebKeys.PORTLET_CATEGORY, curPortletCategory);
+
+						request.setAttribute("portletCategoryIndex", String.valueOf(portletCategoryIndex));
 					%>
 
 						<liferay-util:include page="/html/portlet/layout_configuration/view_category.jsp" />
 
 					<%
+						portletCategoryIndex++;
 					}
 					%>
 

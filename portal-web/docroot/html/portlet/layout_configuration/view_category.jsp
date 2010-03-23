@@ -101,6 +101,8 @@ if (!categories.isEmpty() || !portlets.isEmpty()) {
 
 			<%
 				request.setAttribute(WebKeys.PORTLET_CATEGORY_PATH, oldCategoryPath);
+
+				portletCategoryIndex++;
 			}
 
 			itr = portlets.iterator();
