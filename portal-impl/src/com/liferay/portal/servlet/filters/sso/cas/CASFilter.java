@@ -106,6 +106,7 @@ public class CASFilter extends BasePortalFilter {
 				PropsValues.CAS_AUTH_ENABLED)) {
 
 			HttpSession session = request.getSession();
+
 			String pathInfo = request.getPathInfo();
 
 			if (pathInfo.indexOf("/portal/logout") != -1) {
@@ -122,17 +123,18 @@ public class CASFilter extends BasePortalFilter {
 			else {
 				String login = (String)session.getAttribute(LOGIN);
 
-				String serviceUrl = PrefsPropsUtil.getString(
-					companyId, PropsKeys.CAS_SERVICE_URL,
-					PropsValues.CAS_SERVICE_URL);
 				String serverName = PrefsPropsUtil.getString(
 					companyId, PropsKeys.CAS_SERVER_NAME,
 					PropsValues.CAS_SERVER_NAME);
 
+				String serviceUrl = PrefsPropsUtil.getString(
+					companyId, PropsKeys.CAS_SERVICE_URL,
+					PropsValues.CAS_SERVICE_URL);
+
 				if (Validator.isNull(serviceUrl)) {
 					serviceUrl = CommonUtils.constructServiceUrl(
-						request, response, serviceUrl, serverName,
-						"ticket", false);
+						request, response, serviceUrl, serverName, "ticket",
+						false);
 				}
 
 				String ticket = ParamUtil.getString(request, "ticket");
