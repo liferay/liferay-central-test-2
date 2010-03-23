@@ -162,7 +162,7 @@ The id-type and id-param values are used in order to create an auto-generated,
 auto-incrementing primary key when inserting records into a table. This can be 
 implemented in 4 different ways, depending on the type of database being used. 
 In all cases, the primary key of the model object should be assigned a value of 
-null, and hibernate will know to replace the null value with an auto-generated, 
+null, and Hibernate will know to replace the null value with an auto-generated, 
 auto-incremented value. If no id-type value is used, it is assumed that the 
 primary key will be assigned and not auto-generated.
 

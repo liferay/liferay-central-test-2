@@ -84,13 +84,13 @@ If the remote-service is true, then the service will generate remote interfaces
 for the service. The default value is true.
 
 The persistence-class value specifies the name of your custom persistence class.
-This class must implmeent the generated persistence interface or extend the
+This class must implement the generated persistence interface or extend the
 generated persistence class. This allows you to override default behavior
 without modifying the generated persistence class.
 
 You can generate classes to use a custom data source and session factory.
 Point "spring.configs" in portal.properties to load your custom Spring XML with
-the defintions of your custom data source and session factory. Then set the
+the definitions of your custom data source and session factory. Then set the
 data-source and session-factory values to your custom values.
 
 The data-source value specifies the data source target that is set to the
@@ -185,7 +185,7 @@ The id-type and id-param values are used in order to create an auto-generated,
 auto-incrementing primary key when inserting records into a table. This can be 
 implemented in 4 different ways, depending on the type of database being used. 
 In all cases, the primary key of the model object should be assigned a value of 
-null, and hibernate will know to replace the null value with an auto-generated, 
+null, and Hibernate will know to replace the null value with an auto-generated, 
 auto-incremented value. If no id-type value is used, it is assumed that the 
 primary key will be assigned and not auto-generated.
 
