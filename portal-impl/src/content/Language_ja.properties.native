@@ -4634,6 +4634,7 @@ you-can-get-a-license-directly-from-google=Googleから直接ライセンスを�
 you-can-now-check-for-new-messages-in-your-x={0}の新着メールを確認することができます。
 you-cannot-assign-groups-or-users-to-this-role=このロールをグループかユーザに割り当てることはできません。
 you-cannot-change-your-password-yet-please-wait-at-least-x-before-changing-your-password-again=現在、パスワードを変更することはできません。パスワードの再変更には{0}お待ちください。
+you-cannot-deactivate-or-delete-this-definition=この定義を非活動化させるか、または削除できない。 この定義を参照するプロセス例がある。 (Automatic Translation)
 you-cannot-delete-a-root-message-that-has-more-than-one-immediate-reply=コメントのあるメッセージを削除することはできません。
 you-cannot-delete-a-system-role=システムで登録されているロールを削除することはできません。
 you-cannot-delete-locations-that-have-users=ユーザが所属している支部を削除することはできません。

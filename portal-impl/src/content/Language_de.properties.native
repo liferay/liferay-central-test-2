@@ -4634,6 +4634,7 @@ you-can-get-a-license-directly-from-google=Sie können eine Lizenz direkt von Go
 you-can-now-check-for-new-messages-in-your-x=Sie können jetzt nach neuen Nachrichten in Ihrer {0} schauen.
 you-cannot-assign-groups-or-users-to-this-role=Sie können Gruppen oder Benutzer nicht dieser Rolle zuweisen.
 you-cannot-change-your-password-yet-please-wait-at-least-x-before-changing-your-password-again=Sie können Ihr Kennwort noch nicht ändern. Bitte warten Sie mindestens {0} bevor Sie das Kennwort erneut ändern.
+you-cannot-deactivate-or-delete-this-definition=Sie können diese Definition nicht entaktivieren oder löschen. Es gibt Prozessfälle, die diese Definition beziehen. (Automatic Translation)
 you-cannot-delete-a-root-message-that-has-more-than-one-immediate-reply=Sie können keine Wurzel-Nachricht löschen, die mehr als eine direkte Antwort hat.
 you-cannot-delete-a-system-role=Sie können eine Systemrolle nicht löschen.
 you-cannot-delete-locations-that-have-users=Sie können Standorte nicht löschen, die Benutzer haben.

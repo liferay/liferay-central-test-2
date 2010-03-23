@@ -4634,6 +4634,7 @@ you-can-get-a-license-directly-from-google=Μπορείτε να πάρετε μ
 you-can-now-check-for-new-messages-in-your-x=Μπορείς τώρα να ελέγξεις για νέα μηνύματα στο {0}.
 you-cannot-assign-groups-or-users-to-this-role=Δεν μπορείτε να διορίσετε τις ομάδες ή τους χρήστες σε αυτόν τον ρόλο.
 you-cannot-change-your-password-yet-please-wait-at-least-x-before-changing-your-password-again=You cannot change your password yet. Please wait at least {0} before changing your password again.
+you-cannot-deactivate-or-delete-this-definition=Δεν μπορείτε να απενεργοποιήσετε ή να διαγράψετε αυτόν τον καθορισμό. Υπάρχουν περιπτώσεις διαδικασίας που παραπέμπουν αυτόν τον καθορισμό. (Automatic Translation)
 you-cannot-delete-a-root-message-that-has-more-than-one-immediate-reply=Δεν μπορείτε να διαγράψετε ένα μήνυμα ρίζας που έχει περισσότερες από μια άμεσες απαντήσεις.
 you-cannot-delete-a-system-role=Δεν μπορείτε να διαγράψετε έναν ρόλο συστημάτων.
 you-cannot-delete-locations-that-have-users=Δεν μπορείτε να διαγράψετε τις θέσεις που έχουν τους χρήστες.

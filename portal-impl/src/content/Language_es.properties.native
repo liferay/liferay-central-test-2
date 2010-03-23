@@ -4633,6 +4633,7 @@ you-can-get-a-license-directly-from-google=Puede obtener una licencia a traves d
 you-can-now-check-for-new-messages-in-your-x=Ahora puede comprobar los mensajes nuevos en {0}.
 you-cannot-assign-groups-or-users-to-this-role=No pueden asignarse grupos o a usuarios a este rol.
 you-cannot-change-your-password-yet-please-wait-at-least-x-before-changing-your-password-again=La contraseña no puede ser cambiada aún. Por favor, espere al menos {0} antes de cambiar la contraseña de nuevo.
+you-cannot-deactivate-or-delete-this-definition=Usted no puede desactivar o suprimir esta definición. Hay los casos de proceso que se refieren a esta definición. (Automatic Translation)
 you-cannot-delete-a-root-message-that-has-more-than-one-immediate-reply=No puede eliminarse un mensaje que tenga más de una respuesta directa
 you-cannot-delete-a-system-role=Los roles de sistema no pueden ser eliminados
 you-cannot-delete-locations-that-have-users=No pueden eliminarse localizaciones que contengan usuarios.
