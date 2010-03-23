@@ -6,7 +6,13 @@
 	<property name="war.file" value="${ant.project.name}" />
 
 	<property name="alloy.file" value="alloy-1.0pr.zip" />
-	<property name="ckeditor.file" value="ckeditor_3.1.zip" />
+
+	<!--
+	When upgrading CKEditor, make sure to delete
+	docroot/html/js/editor/_ckeditor/ckeditor.js.
+	-->
+
+	<property name="ckeditor.file" value="ckeditor_3.2.zip" />
 
 	<!--
 	When upgrading CodePress, make sure to reapply LEP-7427.
@@ -496,6 +502,40 @@
 				<delete dir="docroot/html/js/editor/ckeditor" />
 
 				<unzip src="third-party/${ckeditor.file}" dest="docroot/html/js/editor" />
+
+				<if>
+					<not>
+						<available file="docroot/html/js/editor/_ckeditor/ckeditor.js" />
+					</not>
+					<then>
+						<replace file="docroot/html/js/editor/ckeditor/_source/core/dtd.js">
+							<replacefilter token="div:1," value="div:1,section:1," />
+						</replace>
+
+						<replace file="docroot/html/js/editor/ckeditor/_source/core/dtd.js">
+							<replacetoken>div : P,</replacetoken>
+							<replacevalue>
+								div : P,
+								section : P,
+							</replacevalue>
+						</replace>
+
+						<java
+							classname="ckpackager.ckpackager"
+							classpathref="project.classpath"
+							dir="docroot/html/js/editor/ckeditor"
+							fork="true"
+							newenvironment="true"
+						>
+							<arg line="ckeditor.pack" />
+						</java>
+
+						<copy
+							file="docroot/html/js/editor/ckeditor/ckeditor.js"
+							tofile="docroot/html/js/editor/_ckeditor/ckeditor.js"
+						/>
+					</then>
+				</if>
 
 				<copy todir="docroot/html/js/editor/ckeditor" overwrite="true">
 					<fileset dir="docroot/html/js/editor/_ckeditor" />

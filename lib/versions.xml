@@ -71,6 +71,17 @@
 		</licenses>
 	</library>
 	<library>
+		<file-name>development/ckpackager.jar</file-name>
+		<version>5274</version>
+		<project-name>CKPackager</project-name>
+		<project-url>http://svn.fckeditor.net/CKPackager/trunk/bin</project-url>
+		<licenses>
+			<license>
+				<license-name>LGPL 2.1</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
 		<file-name>development/deployment.jar</file-name>
 		<version>1.1</version>
 		<project-name>J2EE Application Deployment Library</project-name>
