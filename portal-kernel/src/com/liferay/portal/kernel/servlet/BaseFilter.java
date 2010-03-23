@@ -50,8 +50,12 @@ public abstract class BaseFilter implements Filter {
 			_urlRegexPattern = Pattern.compile(urlRegexPattern);
 		}
 
-		_servlet24Dispatcher = filterConfig.getInitParameter(
+		String servlet24Dispatcher = filterConfig.getInitParameter(
 			"servlet-2.4-dispatcher");
+		_isServlet24Dispatcher =
+			Validator.isNotNull(servlet24Dispatcher) &&
+				servlet24Dispatcher.equalsIgnoreCase(
+					_SERVLET_24_DISPATCHER_REQUEST);
 	}
 
 	public void doFilter(
@@ -73,28 +77,21 @@ public abstract class BaseFilter implements Filter {
 		HttpServletRequest request = (HttpServletRequest)servletRequest;
 		HttpServletResponse response = (HttpServletResponse)servletResponse;
 
+		StringBuffer requestUrl = request.getRequestURL();
 		boolean filterEnabled = isFilterEnabled();
 
-		if (filterEnabled && Validator.isNotNull(_servlet24Dispatcher)) {
-			if ((_servlet24Dispatcher.equalsIgnoreCase(
-					_SERVLET_24_DISPATCHER_REQUEST)) &&
-				(request.getRequestURL() == null)) {
-
-				filterEnabled = false;
-			}
+		if (filterEnabled && _isServlet24Dispatcher && requestUrl == null) {
+			filterEnabled = false;
 		}
 
 		if (filterEnabled && (_urlRegexPattern != null)) {
-			StringBuilder sb = new StringBuilder();
-
-			sb.append(request.getRequestURL());
-
-			if (Validator.isNotNull(request.getQueryString())) {
-				sb.append(StringPool.QUESTION);
-				sb.append(request.getQueryString());
+			String url = requestUrl.toString();
+			String queryString = request.getQueryString();
+			if (Validator.isNotNull(queryString)) {
+				url = url.concat(StringPool.QUESTION).concat(queryString);
 			}
 
-			Matcher matcher = _urlRegexPattern.matcher(sb.toString());
+			Matcher matcher = _urlRegexPattern.matcher(url);
 
 			filterEnabled = matcher.find();
 		}
@@ -201,7 +198,7 @@ public abstract class BaseFilter implements Filter {
 	private FilterConfig _filterConfig;
 	private Class<?> _filterClass = getClass();
 	private boolean _filterEnabled = true;
-	private String _servlet24Dispatcher;
+	private boolean _isServlet24Dispatcher;
 	private Pattern _urlRegexPattern;
 
 }
