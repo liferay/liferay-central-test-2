@@ -109,10 +109,10 @@ Liferay.LayoutExporter = {
 						width: 300,
 						buttons: [
 							{
-								text: Liferay.Language.get('close'),
 								handler: function() {
 									this.close();
-								}
+								},
+								text: Liferay.Language.get('close')
 							}
 						]
 					}
@@ -140,10 +140,10 @@ Liferay.LayoutExporter = {
 						width: 600,
 						buttons: [
 							{
-								text: Liferay.Language.get('close'),
 								handler: function() {
 									this.close();
-								}
+								},
+								text: Liferay.Language.get('close')
 							}
 						]
 					}
