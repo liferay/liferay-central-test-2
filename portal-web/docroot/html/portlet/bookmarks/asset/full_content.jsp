@@ -20,6 +20,6 @@
 BookmarksEntry entry = (BookmarksEntry)request.getAttribute(WebKeys.BOOKMARKS_ENTRY);
 %>
 
-<a href="<%= themeDisplay.getPathMain() %>/bookmarks/open_entry?entryId=<%= entry.getEntryId() %>" target="_blank"><%= entry.getName() %> (<%= entry.getUrl() %>)</a>
+<aui:a href='<%= themeDisplay.getPathMain() + "/bookmarks/open_entry?entryId=" + entry.getEntryId() %>' target="_blank"><%= entry.getName() %> (<%= entry.getUrl() %>)</aui:a>
 
 <p class="asset-description"><%= entry.getComments() %></p>

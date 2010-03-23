@@ -57,7 +57,7 @@ catch (Exception e) {
 			}
 		%>
 
-			<a class="font-large" href="<%= entry.getLink() %>" style="font-weight: bold;" target="_blank"><%= entry.getTitle() %></a><br />
+			<aui:a cssClass="font-large" href="<%= entry.getLink() %>" style="font-weight: bold;" target="_blank"> <%= entry.getTitle() %></aui:a><br />
 
 			<c:if test="<%= entry.getPublishedDate() != null %>">
 				<%= dateFormatDateTime.format(entry.getPublishedDate()) %><br />
