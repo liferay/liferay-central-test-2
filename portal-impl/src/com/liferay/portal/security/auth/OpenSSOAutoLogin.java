@@ -18,7 +18,6 @@ import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
-import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -45,7 +44,6 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Brian Wing Shun Chan
  * @author Prashant Dighe
- * @author Wesley Gong
  */
 public class OpenSSOAutoLogin implements AutoLogin {
 
@@ -119,12 +117,6 @@ public class OpenSSOAutoLogin implements AutoLogin {
 				user = addUser(
 					companyId, firstName, lastName, emailAddress, screenName,
 					locale);
-			}
-
-			String redirect = ParamUtil.getString(request, "redirect");
-
-			if (Validator.isNotNull(redirect)) {
-				request.setAttribute(AutoLogin.AUTO_LOGIN_REDIRECT, redirect);
 			}
 
 			credentials = new String[3];
