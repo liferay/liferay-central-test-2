@@ -184,12 +184,13 @@ AUI().add(
 						{
 							children: [
 								{
-									icon: 'search',
-									id: 'select',
 									handler: {
 										context: instance,
 										fn: instance._showSelectPopup
-									}
+									},
+									icon: 'search',
+									id: 'select',
+									label: Liferay.Language.get('select')
 								}
 							]
 						}

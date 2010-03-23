@@ -301,32 +301,35 @@ AUI().add(
 
 					var toolbar = [
 						{
-							icon: 'plus',
-							id: 'add',
 							handler: {
 								context: instance,
 								fn: instance._onAddEntryClick
-							}
+							},
+							icon: 'plus',
+							id: 'add',
+							label: Liferay.Language.get('add')
 						},
 						{
-							icon: 'search',
-							id: 'select',
 							handler: {
 								context: instance,
 								fn: instance._showSelectPopup
-							}
+							},
+							icon: 'search',
+							id: 'select',
+							label: Liferay.Language.get('select')
 						}
 					];
 
 					if (instance.get('contentCallback')) {
 						toolbar.push(
 							{
-								icon: 'comment',
-								id: 'suggest',
 								handler: {
 									context: instance,
 									fn: instance._showSuggestionsPopup
-								}
+								},
+								icon: 'comment',
+								id: 'suggest',
+								label: Liferay.Language.get('suggestions')
 							}
 						);
 					}
