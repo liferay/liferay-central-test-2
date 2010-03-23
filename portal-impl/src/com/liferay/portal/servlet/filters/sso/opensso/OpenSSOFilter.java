@@ -17,6 +17,8 @@ package com.liferay.portal.servlet.filters.sso.opensso;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HttpUtil;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
@@ -121,7 +123,28 @@ public class OpenSSOFilter extends BasePortalFilter {
 					OpenSSOFilter.class, request, response, filterChain);
 			}
 			else {
-				response.sendRedirect(loginUrl);
+				if (!loginUrl.contains("/portal/login")) {
+					response.sendRedirect(loginUrl);
+
+					return;
+				}
+
+				String currentURL = PortalUtil.getCurrentURL(request);
+
+				String redirect = currentURL;
+
+				if (currentURL.contains("/portal/login")) {
+					redirect = ParamUtil.getString(request, "redirect");
+
+					if (Validator.isNull(redirect)) {
+						redirect = PortalUtil.getPathMain();
+					}
+				}
+
+				response.sendRedirect(
+					loginUrl +
+						HttpUtil.encodeURL(
+							"?redirect=" + HttpUtil.encodeURL(redirect)));
 			}
 		}
 	}
