@@ -64,8 +64,7 @@
 						}
 
 						request.setAttribute(WebKeys.PORTLET_CATEGORY, curPortletCategory);
-
-						request.setAttribute("portletCategoryIndex", String.valueOf(portletCategoryIndex));
+						request.setAttribute(WebKeys.PORTLET_CATEGORY_INDEX, String.valueOf(portletCategoryIndex));
 					%>
 
 						<liferay-util:include page="/html/portlet/layout_configuration/view_category.jsp" />

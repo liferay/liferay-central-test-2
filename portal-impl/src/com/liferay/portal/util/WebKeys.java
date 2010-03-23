@@ -262,6 +262,8 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 
 	public static final String PORTLET_CATEGORY = "PORTLET_CATEGORY";
 
+	public static final String PORTLET_CATEGORY_INDEX = "PORTLET_CATEGORY_INDEX";
+
 	public static final String PORTLET_CATEGORY_PATH = "PORTLET_CATEGORY_PATH";
 
 	public static final String PORTLET_CONFIGURATOR_VISIBILITY = "PORTLET_CONFIGURATOR_VISIBILITY";
