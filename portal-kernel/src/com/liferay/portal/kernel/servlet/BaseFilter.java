@@ -50,12 +50,14 @@ public abstract class BaseFilter implements Filter {
 			_urlRegexPattern = Pattern.compile(urlRegexPattern);
 		}
 
-		String servlet24Dispatcher = filterConfig.getInitParameter(
-			"servlet-2.4-dispatcher");
-		_isServlet24Dispatcher =
-			Validator.isNotNull(servlet24Dispatcher) &&
-				servlet24Dispatcher.equalsIgnoreCase(
-					_SERVLET_24_DISPATCHER_REQUEST);
+		String servlet24Dispatcher = GetterUtil.getString(
+			filterConfig.getInitParameter("servlet-2.4-dispatcher"));
+
+		if (servlet24Dispatcher.equalsIgnoreCase(
+				_SERVLET_24_DISPATCHER_REQUEST)) {
+
+			_servlet24Dispatcher = true;
+		}
 	}
 
 	public void doFilter(
@@ -77,16 +79,19 @@ public abstract class BaseFilter implements Filter {
 		HttpServletRequest request = (HttpServletRequest)servletRequest;
 		HttpServletResponse response = (HttpServletResponse)servletResponse;
 
-		StringBuffer requestUrl = request.getRequestURL();
+		StringBuffer requestURL = request.getRequestURL();
+
 		boolean filterEnabled = isFilterEnabled();
 
-		if (filterEnabled && _isServlet24Dispatcher && requestUrl == null) {
+		if (filterEnabled && _servlet24Dispatcher && (requestURL == null)) {
 			filterEnabled = false;
 		}
 
 		if (filterEnabled && (_urlRegexPattern != null)) {
-			String url = requestUrl.toString();
+			String url = requestURL.toString();
+
 			String queryString = request.getQueryString();
+
 			if (Validator.isNotNull(queryString)) {
 				url = url.concat(StringPool.QUESTION).concat(queryString);
 			}
@@ -198,7 +203,7 @@ public abstract class BaseFilter implements Filter {
 	private FilterConfig _filterConfig;
 	private Class<?> _filterClass = getClass();
 	private boolean _filterEnabled = true;
-	private boolean _isServlet24Dispatcher;
+	private boolean _servlet24Dispatcher;
 	private Pattern _urlRegexPattern;
 
 }
