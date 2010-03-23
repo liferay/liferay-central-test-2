@@ -22,6 +22,8 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PropsValues;
@@ -168,8 +170,11 @@ public class JournalContentImpl implements JournalContent {
 
 		if (themeDisplay != null) {
 			try {
-				layoutSetId =
-					themeDisplay.getLayout().getLayoutSet().getLayoutSetId();
+				Layout layout = themeDisplay.getLayout();
+
+				LayoutSet layoutSet = layout.getLayoutSet();
+
+				layoutSetId = layoutSet.getLayoutSetId();
 			}
 			catch (Exception e) {
 			}
@@ -236,7 +241,7 @@ public class JournalContentImpl implements JournalContent {
 		sb.append(templateId);
 
 		if (layoutSetId > 0) {
-			sb.append(LAYOUTSET_SEPARATOR);
+			sb.append(LAYOUT_SET_SEPARATOR);
 			sb.append(layoutSetId);
 		}
 

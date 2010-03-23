@@ -173,7 +173,7 @@ public class VelocityTemplateParser extends BaseTemplateParser {
 	}
 
 	protected List<TemplateNode> extractDynamicContents(
-			ThemeDisplay themeDisplay,Element parent)
+			ThemeDisplay themeDisplay, Element parent)
 		throws TransformException {
 
 		List<TemplateNode> nodes = new ArrayList<TemplateNode>();
