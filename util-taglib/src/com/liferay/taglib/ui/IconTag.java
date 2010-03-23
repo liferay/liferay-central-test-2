@@ -92,6 +92,10 @@ public class IconTag extends IncludeTag {
 		return _PAGE;
 	}
 
+	protected boolean isCleanUpSetAttributes() {
+		return _CLEAN_UP_SET_ATTRIBUTES;
+	}
+
 	protected void setAttributes(HttpServletRequest request) {
 		request.setAttribute("liferay-ui:icon:cssClass", _cssClass);
 		request.setAttribute("liferay-ui:icon:image", _image);
@@ -107,6 +111,8 @@ public class IconTag extends IncludeTag {
 			"liferay-ui:icon:toolTip", String.valueOf(_toolTip));
 		request.setAttribute("liferay-ui:icon:url", _url);
 	}
+
+	private static final boolean _CLEAN_UP_SET_ATTRIBUTES = true;
 
 	private static final String _PAGE = "/html/taglib/ui/icon/page.jsp";
 

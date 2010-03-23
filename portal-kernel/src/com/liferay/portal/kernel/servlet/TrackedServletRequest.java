@@ -47,6 +47,8 @@ public class TrackedServletRequest extends HttpServletRequestWrapper {
 		}
 
 		_setAttributes.add(name);
+
+		super.setAttribute(name, obj);
 	}
 
 	private Set<String> _setAttributes;

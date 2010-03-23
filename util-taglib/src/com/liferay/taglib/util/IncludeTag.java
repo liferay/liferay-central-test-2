@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.log.LogUtil;
 import com.liferay.portal.kernel.servlet.StringPageContext;
 import com.liferay.portal.kernel.servlet.StringServletResponse;
+import com.liferay.portal.kernel.servlet.TrackedServletRequest;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -64,11 +65,12 @@ public class IncludeTag
 			return EVAL_PAGE;
 		}
 		finally {
-			_calledSetAttributes = false;
 			_dynamicAttributes.clear();
 
 			clearParams();
 			clearProperties();
+
+			_cleanUpSetAttributes();
 
 			if (!ServerDetector.isResin()) {
 				_page = null;
@@ -194,6 +196,10 @@ public class IncludeTag
 		jspWriter.print(stringResponse.getString());
 	}
 
+	protected boolean isCleanUpSetAttributes() {
+		return _CLEAN_UP_SET_ATTRIBUTES;
+	}
+
 	protected void setAttributes(HttpServletRequest request) {
 	}
 
@@ -207,7 +213,25 @@ public class IncludeTag
 		HttpServletRequest request =
 			(HttpServletRequest)pageContext.getRequest();
 
+		if (isCleanUpSetAttributes()) {
+			_trackedRequest = new TrackedServletRequest(request);
+
+			request = _trackedRequest;
+		}
+
 		setAttributes(request);
+	}
+
+	private void _cleanUpSetAttributes() {
+		_calledSetAttributes = false;
+
+		if (isCleanUpSetAttributes()) {
+			for (String name : _trackedRequest.getSetAttributes()) {
+				_trackedRequest.removeAttribute(name);
+			}
+
+			_trackedRequest = null;
+		}
 	}
 
 	private void _doInclude(String page) throws JspException {
@@ -232,6 +256,8 @@ public class IncludeTag
 		}
 	}
 
+	private static final boolean _CLEAN_UP_SET_ATTRIBUTES = false;
+
 	private static Log _log = LogFactoryUtil.getLog(IncludeTag.class);
 
 	private boolean _calledSetAttributes;
@@ -239,5 +265,6 @@ public class IncludeTag
 		new HashMap<String, Object>();
 	private String _page;
 	private String _portletId;
+	private TrackedServletRequest _trackedRequest;
 
 }
