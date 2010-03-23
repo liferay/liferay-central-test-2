@@ -402,9 +402,23 @@ public class SeleneseToJavaBuilder {
 					sb.append("assertEquals");
 				}
 
-				sb.append("(\"");
-				sb.append(param3);
-				sb.append("\", selenium.getSelectedLabel(\"");
+				sb.append("(");
+
+				if (param3.startsWith("${")) {
+					sb.append("RuntimeVariables.getValue(\"");
+
+					String text = param3.substring(2, param3.length() - 1);
+
+					sb.append(text);
+					sb.append("\")");
+				}
+				else {
+					sb.append("\"");
+					sb.append(param3);
+					sb.append("\"");
+				}
+
+				sb.append(", selenium.getSelectedLabel(\"");
 				sb.append(param2);
 				sb.append("\"));");
 			}
@@ -677,11 +691,13 @@ public class SeleneseToJavaBuilder {
 			else if (param1.equals("waitForElementNotPresent") ||
 					 param1.equals("waitForElementPresent") ||
 					 param1.equals("waitForNotPartialText") ||
+					 param1.equals("waitForNotSelectedLabel") ||
 					 param1.equals("waitForNotTable") ||
 					 param1.equals("waitForNotText") ||
 					 param1.equals("waitForNotValue") ||
 					 param1.equals("waitForNotVisible") ||
 					 param1.equals("waitForPartialText") ||
+					 param1.equals("waitForSelectedLabel") ||
 					 param1.equals("waitForTable") ||
 					 param1.equals("waitForText") ||
 					 param1.equals("waitForTextNotPresent") ||
@@ -699,6 +715,7 @@ public class SeleneseToJavaBuilder {
 
 				if (param1.equals("waitForElementNotPresent") ||
 					param1.equals("waitForNotPartialText") ||
+					param1.equals("waitForNotSelectedLabel") ||
 					param1.equals("waitForNotTable") ||
 					param1.equals("waitForNotText") ||
 					param1.equals("waitForNotValue") ||
@@ -738,6 +755,28 @@ public class SeleneseToJavaBuilder {
 					}
 
 					sb.append(")");
+				}
+				else if (param1.equals("waitForNotSelectedLabel") ||
+						 param1.equals("waitForSelectedLabel"))
+				{
+
+					if (param3.startsWith("${")) {
+						sb.append("RuntimeVariables.getValue(\"");
+
+						String text = param3.substring(2, param3.length() - 1);
+
+						sb.append(text);
+						sb.append("\")");
+					}
+					else {
+						sb.append("\"");
+						sb.append(param3);
+						sb.append("\"");
+					}
+
+					sb.append(".equals(selenium.getSelectedLabel(\"");
+					sb.append(param2);
+					sb.append("\"))");
 				}
 				else if (param1.equals("waitForNotTable") ||
 						 param1.equals("waitForTable")) {
