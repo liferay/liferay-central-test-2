@@ -79,7 +79,7 @@ public class PortalLDAPExporterImpl implements PortalLDAPExporter {
 				Properties userMappings = LDAPSettingsUtil.getUserMappings(
 					ldapServerId, companyId);
 
-				binding = createLDAPUser(
+				binding = addUser(
 					ldapServerId, ldapContext, user, userMappings);
 			}
 
@@ -145,7 +145,7 @@ public class PortalLDAPExporterImpl implements PortalLDAPExporter {
 				ldapServerId, user.getCompanyId(), user.getScreenName());
 
 			if (binding == null) {
-				binding = createLDAPUser(
+				binding = addUser(
 					ldapServerId, ldapContext, user, userMappings);
 			}
 
@@ -184,7 +184,7 @@ public class PortalLDAPExporterImpl implements PortalLDAPExporter {
 		_portalToLDAPConverter = portalToLDAPConverter;
 	}
 
-	protected Binding createLDAPUser(
+	protected Binding addUser(
 			long ldapServerId, LdapContext ldapContext, User user,
 			Properties userMappings)
 		throws Exception {
