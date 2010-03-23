@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.ContentUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.velocity.VelocityResourceListener;
@@ -57,8 +58,8 @@ import org.apache.velocity.exception.VelocityException;
 public class VelocityTemplateParser extends BaseTemplateParser {
 
 	protected String doTransform(
-			Map<String, String> tokens, String viewMode, String languageId,
-			String xml, String script)
+			ThemeDisplay themeDisplay, Map<String, String> tokens,
+			String viewMode, String languageId,	String xml, String script)
 		throws Exception {
 
 		UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter(true);
@@ -73,7 +74,8 @@ public class VelocityTemplateParser extends BaseTemplateParser {
 
 			Element root = doc.getRootElement();
 
-			List<TemplateNode> nodes = extractDynamicContents(root);
+			List<TemplateNode> nodes = extractDynamicContents(
+				themeDisplay, root);
 
 			for (TemplateNode node : nodes) {
 				velocityContext.put(node.getName(), node);
@@ -170,7 +172,8 @@ public class VelocityTemplateParser extends BaseTemplateParser {
 		return unsyncStringWriter.toString();
 	}
 
-	protected List<TemplateNode> extractDynamicContents(Element parent)
+	protected List<TemplateNode> extractDynamicContents(
+			ThemeDisplay themeDisplay,Element parent)
 		throws TransformException {
 
 		List<TemplateNode> nodes = new ArrayList<TemplateNode>();
@@ -196,10 +199,10 @@ public class VelocityTemplateParser extends BaseTemplateParser {
 			String type = el.attributeValue("type", "");
 
 			TemplateNode node = new TemplateNode(
-				name, CDATAUtil.strip(content.getText()), type);
+				themeDisplay, name, CDATAUtil.strip(content.getText()), type);
 
 			if (el.element("dynamic-element") != null) {
-				node.appendChildren(extractDynamicContents(el));
+				node.appendChildren(extractDynamicContents(themeDisplay, el));
 			}
 			else if (content.element("option") != null) {
 				for (Element option : content.elements("option")) {

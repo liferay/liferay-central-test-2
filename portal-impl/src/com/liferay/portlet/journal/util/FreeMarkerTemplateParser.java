@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.ContentUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.journal.TransformException;
@@ -51,8 +52,8 @@ import java.util.Map;
 public class FreeMarkerTemplateParser extends VelocityTemplateParser {
 
 	public String doTransform(
-			Map<String, String> tokens, String viewMode, String languageId,
-			String xml, String script)
+			ThemeDisplay themeDisplay, Map<String, String> tokens,
+			String viewMode, String languageId, String xml, String script)
 		throws Exception {
 
 		UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter(true);
@@ -67,7 +68,8 @@ public class FreeMarkerTemplateParser extends VelocityTemplateParser {
 
 			Element root = doc.getRootElement();
 
-			List<TemplateNode> nodes = extractDynamicContents(root);
+			List<TemplateNode> nodes = extractDynamicContents(
+				themeDisplay, root);
 
 			for (TemplateNode node : nodes) {
 				freeMarkerContext.put(node.getName(), node);

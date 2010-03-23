@@ -970,8 +970,9 @@ public class JournalUtil {
 	}
 
 	public static String transform(
-			Map<String, String> tokens, String viewMode, String languageId,
-			String xml, String script, String langType)
+			ThemeDisplay themeDisplay, Map<String, String> tokens,
+			String viewMode, String languageId, String xml, String script,
+			String langType)
 		throws Exception {
 
 		// Setup Listeners
@@ -1080,7 +1081,7 @@ public class JournalUtil {
 				}
 
 				output = templateParser.transform(
-					tokens, viewMode, languageId, xml, script);
+					themeDisplay, tokens, viewMode, languageId, xml, script);
 			}
 		}
 

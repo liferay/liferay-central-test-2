@@ -163,14 +163,23 @@ public class JournalContentImpl implements JournalContent {
 		articleId = GetterUtil.getString(articleId).toUpperCase();
 		templateId = GetterUtil.getString(templateId).toUpperCase();
 
+		long layoutSetId = 0;
 		boolean secure = false;
 
 		if (themeDisplay != null) {
+			try {
+				layoutSetId =
+					themeDisplay.getLayout().getLayoutSet().getLayoutSetId();
+			}
+			catch (Exception e) {
+			}
+
 			secure = themeDisplay.isSecure();
 		}
 
 		String key = encodeKey(
-			groupId, articleId, templateId, viewMode, languageId, page, secure);
+			groupId, articleId, templateId, layoutSetId, viewMode, languageId,
+			page, secure);
 
 		JournalArticleDisplay articleDisplay =
 			(JournalArticleDisplay)portalCache.get(key);
@@ -213,8 +222,8 @@ public class JournalContentImpl implements JournalContent {
 	}
 
 	protected String encodeKey(
-		long groupId, String articleId, String templateId, String viewMode,
-		String languageId, int page, boolean secure) {
+		long groupId, String articleId, String templateId, long layoutSetId,
+		String viewMode, String languageId, int page, boolean secure) {
 
 		StringBundler sb = new StringBundler();
 
@@ -225,6 +234,11 @@ public class JournalContentImpl implements JournalContent {
 		sb.append(articleId);
 		sb.append(TEMPLATE_SEPARATOR);
 		sb.append(templateId);
+
+		if (layoutSetId > 0) {
+			sb.append(LAYOUTSET_SEPARATOR);
+			sb.append(layoutSetId);
+		}
 
 		if (Validator.isNotNull(viewMode)) {
 			sb.append(VIEW_MODE_SEPARATOR);

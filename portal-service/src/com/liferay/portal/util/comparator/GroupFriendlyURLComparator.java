@@ -25,7 +25,7 @@ import java.util.Comparator;
  *
  * @author Alexander Chow
  */
-public class GroupFriendlyURLComparator 
+public class GroupFriendlyURLComparator
 	implements Comparator<Group>, Serializable {
 
 	public GroupFriendlyURLComparator() {

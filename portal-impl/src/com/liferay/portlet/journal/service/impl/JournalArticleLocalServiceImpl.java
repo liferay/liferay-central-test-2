@@ -1007,7 +1007,8 @@ public class JournalArticleLocalServiceImpl
 			}
 
 			content = JournalUtil.transform(
-				tokens, viewMode, languageId, xml, script, langType);
+				themeDisplay, tokens, viewMode, languageId, xml, script,
+				langType);
 
 			if (!pageFlow) {
 				String[] pieces = StringUtil.split(content, _TOKEN_PAGE_BREAK);

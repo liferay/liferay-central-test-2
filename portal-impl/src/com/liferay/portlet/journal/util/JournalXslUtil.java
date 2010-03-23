@@ -31,7 +31,7 @@ public class JournalXslUtil {
 		throws Exception {
 
 		return _instance._templateParser.transform(
-			tokens, viewMode, languageId, xml, script);
+			null, tokens, viewMode, languageId, xml, script);
 	}
 
 	private JournalXslUtil() {

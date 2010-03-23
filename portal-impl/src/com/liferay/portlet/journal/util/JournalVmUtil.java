@@ -33,7 +33,8 @@ public class JournalVmUtil {
 	public static List<TemplateNode> extractDynamicContents(Element parent)
 		throws TransformException {
 
-		return _instance._velocityTemplateParser.extractDynamicContents(parent);
+		return _instance._velocityTemplateParser.extractDynamicContents(
+			null, parent);
 	}
 
 	public static String transform(
@@ -42,7 +43,7 @@ public class JournalVmUtil {
 		throws TransformException {
 
 		return _instance._velocityTemplateParser.transform(
-			tokens, viewMode, languageId, xml, script);
+			null, tokens, viewMode, languageId, xml, script);
 	}
 
 	private JournalVmUtil() {

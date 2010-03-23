@@ -30,6 +30,8 @@ public interface JournalContent {
 
 	public static final String LANGUAGE_SEPARATOR = "_LANGUAGE_";
 
+	public static final String LAYOUTSET_SEPARATOR = "_LAYOUTSET_";
+
 	public static final String PAGE_SEPARATOR = "_PAGE_";
 
 	public static final String SECURE_SEPARATOR = "_SECURE_";

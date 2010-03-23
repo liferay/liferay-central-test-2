@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.journal.util;
 
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.journal.TransformException;
 
 import java.util.Map;
@@ -26,12 +27,13 @@ import java.util.Map;
 public abstract class BaseTemplateParser implements TemplateParser {
 
 	public String transform(
-			Map<String, String> tokens, String viewMode, String languageId,
-			String xml, String script)
+			ThemeDisplay themeDisplay, Map<String, String> tokens,
+			String viewMode, String languageId, String xml, String script)
 		throws TransformException {
 
 		try {
-			return doTransform(tokens, viewMode, languageId, xml, script);
+			return doTransform(
+				themeDisplay, tokens, viewMode, languageId, xml, script);
 		}
 		catch (TransformException te) {
 			throw te;
@@ -42,8 +44,8 @@ public abstract class BaseTemplateParser implements TemplateParser {
 	}
 
 	protected String doTransform(
-			Map<String, String> tokens, String viewMode, String languageId,
-			String xml, String script)
+			ThemeDisplay themeDisplay, Map<String, String> tokens,
+			String viewMode, String languageId, String xml, String script)
 		throws Exception {
 
 		return null;
