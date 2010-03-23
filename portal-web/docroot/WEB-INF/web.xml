@@ -362,6 +362,8 @@
 	<filter-mapping>
 		<filter-name>Auto Login Filter</filter-name>
 		<url-pattern>/widget/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
 	</filter-mapping>
 	<filter-mapping>
 		<filter-name>Header Filter</filter-name>
