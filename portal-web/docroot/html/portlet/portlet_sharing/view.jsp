@@ -34,7 +34,7 @@ Liferay.Widget({ url: &#x27;<%= widgetURL %>&#x27;});
 	</c:when>
 	<c:when test="<%= Validator.isNotNull(netvibesURL) %>">
 		<p>
-			<aui:a href="http://eco.netvibes.com/submit/widget" target="_blank"><liferay-ui:message key="add-this-application-to-netvibes" /></aui:a>
+			<a href="http://eco.netvibes.com/submit/widget" target="_blank"><liferay-ui:message key="add-this-application-to-netvibes" /></a>
 		</p>
 
 		<liferay-ui:input-resource url="<%= netvibesURL %>" />
