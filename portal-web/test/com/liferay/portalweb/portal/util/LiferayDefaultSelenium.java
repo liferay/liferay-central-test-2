@@ -36,6 +36,21 @@ public class LiferayDefaultSelenium
 		super(processor);
 	}
 
+	public String getCurrentDay() {
+		return commandProcessor.getString(
+			"getCurrentDay", new String[0]);
+	}
+
+	public String getCurrentMonth() {
+		return commandProcessor.getString(
+			"getCurrentMonth", new String[0]);
+	}
+
+	public String getCurrentYear() {
+		return commandProcessor.getString(
+			"getCurrentYear", new String[0]);
+	}
+
 	public String getIncrementedText(String locator) {
 		return commandProcessor.getString(
 			"getIncrementedText", new String[] {locator,});

@@ -629,6 +629,39 @@ public class SeleneseToJavaBuilder {
 
 				sb.append(";");
 			}
+			else if (param1.equals("storeCurrentDay")) {
+				sb.append("String ");
+				sb.append(param2);
+				sb.append(" = selenium.getCurrentDay();");
+
+				sb.append("RuntimeVariables.setValue(\"");
+				sb.append(param2);
+				sb.append("\", ");
+				sb.append(param2);
+				sb.append(");");
+			}
+			else if (param1.equals("storeCurrentMonth")) {
+				sb.append("String ");
+				sb.append(param2);
+				sb.append(" = selenium.getCurrentMonth();");
+
+				sb.append("RuntimeVariables.setValue(\"");
+				sb.append(param2);
+				sb.append("\", ");
+				sb.append(param2);
+				sb.append(");");
+			}
+			else if (param1.equals("storeCurrentYear")) {
+				sb.append("String ");
+				sb.append(param2);
+				sb.append(" = selenium.getCurrentYear();");
+
+				sb.append("RuntimeVariables.setValue(\"");
+				sb.append(param2);
+				sb.append("\", ");
+				sb.append(param2);
+				sb.append(");");
+			}
 			else if (param1.equals("storeIncrementedText")) {
 				sb.append("String ");
 				sb.append(param3);

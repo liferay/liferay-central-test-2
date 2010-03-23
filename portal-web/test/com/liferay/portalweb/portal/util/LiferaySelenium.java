@@ -23,6 +23,12 @@ import com.thoughtworks.selenium.Selenium;
  */
 public interface LiferaySelenium extends Selenium {
 
+	public String getCurrentDay();
+
+	public String getCurrentMonth();
+
+	public String getCurrentYear();
+
 	public String getIncrementedText(String locator);
 
 	public boolean isPartialText(String locator, String value);
