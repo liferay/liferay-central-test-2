@@ -39,6 +39,7 @@ import com.liferay.portalweb.portlet.language.LanguageTests;
 import com.liferay.portalweb.portlet.loancalculator.LoanCalculatorTests;
 import com.liferay.portalweb.portlet.managepages.ManagePagesTests;
 import com.liferay.portalweb.portlet.messageboards.MessageBoardsTests;
+import com.liferay.portalweb.portlet.myaccount.MyAccountTests;
 import com.liferay.portalweb.portlet.navigation.NavigationTests;
 import com.liferay.portalweb.portlet.nestedportlets.NestedPortletsTests;
 import com.liferay.portalweb.portlet.networkutilities.NetworkUtilitiesTests;
@@ -104,6 +105,7 @@ public class PortalWebTestSuite extends BaseTests {
 		testSuite.addTest(LoanCalculatorTests.suite());
 		testSuite.addTest(ManagePagesTests.suite());
 		testSuite.addTest(MessageBoardsTests.suite());
+		testSuite.addTest(MyAccountTests.suite());
 		testSuite.addTest(NavigationTests.suite());
 		testSuite.addTest(NestedPortletsTests.suite());
 		testSuite.addTest(NetworkUtilitiesTests.suite());
