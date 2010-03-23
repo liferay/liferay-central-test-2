@@ -188,7 +188,7 @@ if (!categories.isEmpty() || !portlets.isEmpty()) {
 							footerPortletCssPaths="<%= StringUtil.merge(footerPortletCssSet) %>"
 							headerPortalCssPaths="<%= StringUtil.merge(headerPortalCssSet) %>"
 							headerPortletCssPaths="<%= StringUtil.merge(headerPortletCssSet) %>"
-							id="<portlet:namespace />portletCategory<%= portlet.getPortletId() %>"
+							id="<portlet:namespace />portletItem<%= portlet.getPortletId() %>"
 							instanceable="<%= portletInstanceable %>"
 							plid="<%= plid %>"
 							portletId="<%= portlet.getPortletId() %>"
@@ -197,7 +197,7 @@ if (!categories.isEmpty() || !portlets.isEmpty()) {
 							<p><%= PortalUtil.getPortletTitle(portlet, application, locale) %> <a href="javascript:;"><liferay-ui:message key="add" /></a></p>
 						</div>
 
-						<input id="<portlet:namespace />portletCategory<%= portlet.getPortletId() %>CategoryPath" type="hidden" value="<%= divId.toString().replace(':', '-') %>" />
+						<input id="<portlet:namespace />portletItem<%= portlet.getPortletId() %>CategoryPath" type="hidden" value="<%= divId.toString().replace(':', '-') %>" />
 					</c:when>
 					<c:otherwise>
 						<div>
