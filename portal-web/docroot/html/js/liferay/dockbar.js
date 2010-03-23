@@ -1,5 +1,5 @@
 AUI().use(
-	'aui-button',
+	'aui-button-item',
 	'aui-io-plugin',
 	'aui-io-request',
 	'aui-overlay-context',
@@ -500,7 +500,7 @@ AUI().use(
 
 					Underlay.superclass.renderUI.apply(instance, arguments);
 
-					var closeTool = new A.Button('close');
+					var closeTool = new A.ButtonItem('close');
 
 					closeTool.render(instance.get('boundingBox'));
 
