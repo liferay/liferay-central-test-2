@@ -139,11 +139,6 @@ List<WorkflowDefinition> workflowDefinitions = WorkflowDefinitionManagerUtil.get
 			>
 
 				<liferay-ui:search-container-column-text
-					name="name"
-					value="<%= workflowDefinition.getName() %>"
-				/>
-
-				<liferay-ui:search-container-column-text
 					name="title"
 					value="<%= workflowDefinition.getTitle(themeDisplay.getLanguageId()) %>"
 				/>
