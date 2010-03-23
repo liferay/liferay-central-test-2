@@ -135,7 +135,8 @@ public class SafeFileNameHookWrapper implements Hook {
 
 		String safeFileName = FileUtil.encodeSafeFileName(fileName);
 
-		if (!safeFileName.equals(fileName) && _hook.hasFile(
+		if (!safeFileName.equals(fileName) &&
+			_hook.hasFile(
 				companyId, repositoryId, fileName,
 				DLFileEntryConstants.DEFAULT_VERSION)) {
 
@@ -154,7 +155,8 @@ public class SafeFileNameHookWrapper implements Hook {
 
 		String safeFileName = FileUtil.encodeSafeFileName(fileName);
 
-		if (!safeFileName.equals(fileName) && _hook.hasFile(
+		if (!safeFileName.equals(fileName) &&
+			_hook.hasFile(
 				companyId, repositoryId, fileName, versionNumber)) {
 
 			_hook.deleteFile(
@@ -172,7 +174,8 @@ public class SafeFileNameHookWrapper implements Hook {
 
 		String safeFileName = FileUtil.encodeSafeFileName(fileName);
 
-		if (!safeFileName.equals(fileName) && _hook.hasFile(
+		if (!safeFileName.equals(fileName) &&
+			_hook.hasFile(
 				companyId, repositoryId, fileName,
 				DLFileEntryConstants.DEFAULT_VERSION)) {
 
@@ -189,8 +192,8 @@ public class SafeFileNameHookWrapper implements Hook {
 
 		String safeFileName = FileUtil.encodeSafeFileName(fileName);
 
-		if (!safeFileName.equals(fileName) && _hook.hasFile(
-				companyId, repositoryId, fileName, versionNumber)) {
+		if (!safeFileName.equals(fileName) &&
+			_hook.hasFile(companyId, repositoryId, fileName, versionNumber)) {
 
 			return _hook.getFile(
 				companyId, repositoryId, fileName, versionNumber);
@@ -206,7 +209,8 @@ public class SafeFileNameHookWrapper implements Hook {
 
 		String safeFileName = FileUtil.encodeSafeFileName(fileName);
 
-		if (!safeFileName.equals(fileName) && _hook.hasFile(
+		if (!safeFileName.equals(fileName) &&
+			_hook.hasFile(
 				companyId, repositoryId, fileName,
 				DLFileEntryConstants.DEFAULT_VERSION)) {
 
@@ -223,7 +227,8 @@ public class SafeFileNameHookWrapper implements Hook {
 
 		String safeFileName = FileUtil.encodeSafeFileName(fileName);
 
-		if (!safeFileName.equals(fileName) && _hook.hasFile(
+		if (!safeFileName.equals(fileName) &&
+			_hook.hasFile(
 				companyId, repositoryId, fileName, versionNumber)) {
 
 			return _hook.getFileAsStream(
@@ -266,7 +271,8 @@ public class SafeFileNameHookWrapper implements Hook {
 
 		String safeFileName = FileUtil.encodeSafeFileName(fileName);
 
-		if (!safeFileName.equals(fileName) && _hook.hasFile(
+		if (!safeFileName.equals(fileName) &&
+			_hook.hasFile(
 				companyId, repositoryId, fileName,
 				DLFileEntryConstants.DEFAULT_VERSION)) {
 
