@@ -19,7 +19,6 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.service.ServiceContext;
-import com.liferay.portlet.documentlibrary.model.DLFileEntryConstants;
 
 import java.io.File;
 import java.io.InputStream;
@@ -40,17 +39,8 @@ public class SafeFileNameHookWrapper implements Hook {
 	public void addDirectory(long companyId, long repositoryId, String dirName)
 		throws PortalException, SystemException {
 
-		String safeDirName = FileUtil.encodeSafeFileName(dirName);
-
-		if (!safeDirName.equals(dirName)) {
-			try {
-				_hook.move(dirName, safeDirName);
-			}
-			catch (Exception e) {
-			}
-		}
-
-		_hook.addDirectory(companyId, repositoryId, safeDirName);
+		_hook.addDirectory(
+			companyId, repositoryId, FileUtil.encodeSafeFileName(dirName));
 	}
 
 	public void addFile(
@@ -59,15 +49,10 @@ public class SafeFileNameHookWrapper implements Hook {
 			Date modifiedDate, ServiceContext serviceContext, byte[] bytes)
 		throws PortalException, SystemException {
 
-		String safeFileName = FileUtil.encodeSafeFileName(fileName);
-
-		renameUnsafeFile(
-			companyId, portletId, groupId, repositoryId, fileName,
-			safeFileName);
-
 		_hook.addFile(
-			companyId, portletId, groupId, repositoryId, safeFileName,
-			fileEntryId, properties, modifiedDate, serviceContext, bytes);
+			companyId, portletId, groupId, repositoryId,
+			FileUtil.encodeSafeFileName(fileName), fileEntryId, properties,
+			modifiedDate, serviceContext, bytes);
 	}
 
 	public void addFile(
@@ -76,15 +61,10 @@ public class SafeFileNameHookWrapper implements Hook {
 			Date modifiedDate, ServiceContext serviceContext, File file)
 		throws PortalException, SystemException {
 
-		String safeFileName = FileUtil.encodeSafeFileName(fileName);
-
-		renameUnsafeFile(
-			companyId, portletId, groupId, repositoryId, fileName,
-			safeFileName);
-
 		_hook.addFile(
-			companyId, portletId, groupId, repositoryId, safeFileName,
-			fileEntryId, properties, modifiedDate, serviceContext, file);
+			companyId, portletId, groupId, repositoryId,
+			FileUtil.encodeSafeFileName(fileName), fileEntryId, properties,
+			modifiedDate, serviceContext, file);
 	}
 
 	public void addFile(
@@ -93,15 +73,10 @@ public class SafeFileNameHookWrapper implements Hook {
 			Date modifiedDate, ServiceContext serviceContext, InputStream is)
 		throws PortalException, SystemException {
 
-		String safeFileName = FileUtil.encodeSafeFileName(fileName);
-
-		renameUnsafeFile(
-			companyId, portletId, groupId, repositoryId, fileName,
-			safeFileName);
-
 		_hook.addFile(
-			companyId, portletId, groupId, repositoryId, safeFileName,
-			fileEntryId, properties, modifiedDate, serviceContext, is);
+			companyId, portletId, groupId, repositoryId,
+			FileUtil.encodeSafeFileName(fileName), fileEntryId,
+			properties, modifiedDate, serviceContext, is);
 	}
 
 	public void checkRoot(long companyId) throws SystemException {
@@ -112,20 +87,9 @@ public class SafeFileNameHookWrapper implements Hook {
 			long companyId, String portletId, long repositoryId, String dirName)
 		throws PortalException, SystemException {
 
-		String safeDirName = FileUtil.encodeSafeFileName(dirName);
-
-		if (!safeDirName.equals(dirName)) {
-			try {
-				_hook.deleteDirectory(
-					companyId, portletId, repositoryId, dirName);
-
-				return;
-			}
-			catch (Exception e) {
-			}
-		}
-
-		_hook.deleteDirectory(companyId, portletId, repositoryId, safeDirName);
+		_hook.deleteDirectory(
+			companyId, portletId, repositoryId,
+			FileUtil.encodeSafeFileName(dirName));
 	}
 
 	public void deleteFile(
@@ -133,18 +97,9 @@ public class SafeFileNameHookWrapper implements Hook {
 			String fileName)
 		throws PortalException, SystemException {
 
-		String safeFileName = FileUtil.encodeSafeFileName(fileName);
-
-		if (!safeFileName.equals(fileName) && _hook.hasFile(
-				companyId, repositoryId, fileName,
-				DLFileEntryConstants.DEFAULT_VERSION)) {
-
-			_hook.deleteFile(companyId, portletId, repositoryId, fileName);
-
-			return;
-		}
-
-		_hook.deleteFile(companyId, portletId, repositoryId, safeFileName);
+		_hook.deleteFile(
+			companyId, portletId, repositoryId,
+			FileUtil.encodeSafeFileName(fileName));
 	}
 
 	public void deleteFile(
@@ -152,34 +107,16 @@ public class SafeFileNameHookWrapper implements Hook {
 			String fileName, String versionNumber)
 		throws PortalException, SystemException {
 
-		String safeFileName = FileUtil.encodeSafeFileName(fileName);
-
-		if (!safeFileName.equals(fileName) && _hook.hasFile(
-				companyId, repositoryId, fileName, versionNumber)) {
-
-			_hook.deleteFile(
-				companyId, portletId, repositoryId, fileName, versionNumber);
-
-			return;
-		}
-
 		_hook.deleteFile(
-			companyId, portletId, repositoryId, safeFileName, versionNumber);
+			companyId, portletId, repositoryId,
+			FileUtil.encodeSafeFileName(fileName), versionNumber);
 	}
 
 	public byte[] getFile(long companyId, long repositoryId, String fileName)
 		throws PortalException, SystemException {
 
-		String safeFileName = FileUtil.encodeSafeFileName(fileName);
-
-		if (!safeFileName.equals(fileName) && _hook.hasFile(
-				companyId, repositoryId, fileName,
-				DLFileEntryConstants.DEFAULT_VERSION)) {
-
-			return _hook.getFile(companyId, repositoryId, fileName);
-		}
-
-		return _hook.getFile(companyId, repositoryId, safeFileName);
+		return _hook.getFile(
+			companyId, repositoryId, FileUtil.encodeSafeFileName(fileName));
 	}
 
 	public byte[] getFile(
@@ -187,33 +124,17 @@ public class SafeFileNameHookWrapper implements Hook {
 			String versionNumber)
 		throws PortalException, SystemException {
 
-		String safeFileName = FileUtil.encodeSafeFileName(fileName);
-
-		if (!safeFileName.equals(fileName) && _hook.hasFile(
-				companyId, repositoryId, fileName, versionNumber)) {
-
-			return _hook.getFile(
-				companyId, repositoryId, fileName, versionNumber);
-		}
-
 		return _hook.getFile(
-			companyId, repositoryId, safeFileName, versionNumber);
+			companyId, repositoryId, FileUtil.encodeSafeFileName(fileName),
+			versionNumber);
 	}
 
 	public InputStream getFileAsStream(
 			long companyId, long repositoryId, String fileName)
 		throws PortalException, SystemException {
 
-		String safeFileName = FileUtil.encodeSafeFileName(fileName);
-
-		if (!safeFileName.equals(fileName) && _hook.hasFile(
-				companyId, repositoryId, fileName,
-				DLFileEntryConstants.DEFAULT_VERSION)) {
-
-			return _hook.getFileAsStream(companyId, repositoryId, fileName);
-		}
-
-		return _hook.getFileAsStream(companyId, repositoryId, safeFileName);
+		return _hook.getFileAsStream(
+			companyId, repositoryId, FileUtil.encodeSafeFileName(fileName));
 	}
 
 	public InputStream getFileAsStream(
@@ -221,35 +142,17 @@ public class SafeFileNameHookWrapper implements Hook {
 			String versionNumber)
 		throws PortalException, SystemException {
 
-		String safeFileName = FileUtil.encodeSafeFileName(fileName);
-
-		if (!safeFileName.equals(fileName) && _hook.hasFile(
-				companyId, repositoryId, fileName, versionNumber)) {
-
-			return _hook.getFileAsStream(
-				companyId, repositoryId, fileName, versionNumber);
-		}
-
 		return _hook.getFileAsStream(
-			companyId, repositoryId, safeFileName, versionNumber);
+			companyId, repositoryId, FileUtil.encodeSafeFileName(fileName),
+			versionNumber);
 	}
 
 	public String[] getFileNames(
 			long companyId, long repositoryId, String dirName)
 		throws PortalException, SystemException {
 
-		String safeDirName = FileUtil.encodeSafeFileName(dirName);
-
-		if (!safeDirName.equals(dirName)) {
-			try {
-				_hook.move(dirName, safeDirName);
-			}
-			catch (Exception e) {
-			}
-		}
-
 		String[] fileNames = _hook.getFileNames(
-			companyId, repositoryId, safeDirName);
+			companyId, repositoryId, FileUtil.encodeSafeFileName(dirName));
 
 		String[] decodedFileNames = new String[fileNames.length];
 
@@ -264,16 +167,8 @@ public class SafeFileNameHookWrapper implements Hook {
 			long companyId, long repositoryId, String fileName)
 		throws PortalException, SystemException {
 
-		String safeFileName = FileUtil.encodeSafeFileName(fileName);
-
-		if (!safeFileName.equals(fileName) && _hook.hasFile(
-				companyId, repositoryId, fileName,
-				DLFileEntryConstants.DEFAULT_VERSION)) {
-
-			return _hook.getFileSize(companyId, repositoryId, fileName);
-		}
-
-		return _hook.getFileSize(companyId, repositoryId, safeFileName);
+		return _hook.getFileSize(
+			companyId, repositoryId, FileUtil.encodeSafeFileName(fileName));
 	}
 
 	public boolean hasFile(
@@ -281,16 +176,9 @@ public class SafeFileNameHookWrapper implements Hook {
 			String versionNumber)
 		throws PortalException, SystemException {
 
-		String safeFileName = FileUtil.encodeSafeFileName(fileName);
-
-		if (!safeFileName.equals(fileName) &&
-			_hook.hasFile(companyId, repositoryId, fileName, versionNumber)) {
-
-			return true;
-		}
-
 		return _hook.hasFile(
-			companyId, repositoryId, safeFileName, versionNumber);
+			companyId, repositoryId, FileUtil.encodeSafeFileName(fileName),
+			versionNumber);
 	}
 
 	public void move(String srcDir, String destDir) throws SystemException {
@@ -306,15 +194,9 @@ public class SafeFileNameHookWrapper implements Hook {
 			long newRepositoryId, String fileName, long fileEntryId)
 		throws PortalException, SystemException {
 
-		String safeFileName = FileUtil.encodeSafeFileName(fileName);
-
-		renameUnsafeFile(
-			companyId, portletId, groupId, repositoryId, fileName,
-			safeFileName);
-
 		_hook.updateFile(
 			companyId, portletId, groupId, repositoryId, newRepositoryId,
-			safeFileName, fileEntryId);
+			FileUtil.encodeSafeFileName(fileName), fileEntryId);
 	}
 
 	public void updateFile(
@@ -324,20 +206,11 @@ public class SafeFileNameHookWrapper implements Hook {
 			ServiceContext serviceContext, byte[] bytes)
 		throws PortalException, SystemException {
 
-		String safeFileName = FileUtil.encodeSafeFileName(fileName);
-		String safeSourceFileName = FileUtil.encodeSafeFileName(sourceFileName);
-
-		renameUnsafeFile(
-			companyId, portletId, groupId, repositoryId, fileName,
-			safeFileName);
-		renameUnsafeFile(
-			companyId, portletId, groupId, repositoryId, sourceFileName,
-			safeSourceFileName);
-
 		_hook.updateFile(
-			companyId, portletId, groupId, repositoryId, safeFileName,
-			versionNumber, safeSourceFileName, fileEntryId, properties,
-			modifiedDate, serviceContext, bytes);
+			companyId, portletId, groupId, repositoryId,
+			FileUtil.encodeSafeFileName(fileName), versionNumber,
+			FileUtil.encodeSafeFileName(sourceFileName), fileEntryId,
+			properties, modifiedDate, serviceContext, bytes);
 	}
 
 	public void updateFile(
@@ -347,20 +220,11 @@ public class SafeFileNameHookWrapper implements Hook {
 			ServiceContext serviceContext, File file)
 		throws PortalException, SystemException {
 
-		String safeFileName = FileUtil.encodeSafeFileName(fileName);
-		String safeSourceFileName = FileUtil.encodeSafeFileName(sourceFileName);
-
-		renameUnsafeFile(
-			companyId, portletId, groupId, repositoryId, fileName,
-			safeFileName);
-		renameUnsafeFile(
-			companyId, portletId, groupId, repositoryId, sourceFileName,
-			safeSourceFileName);
-
 		_hook.updateFile(
-			companyId, portletId, groupId, repositoryId, safeFileName,
-			versionNumber, safeSourceFileName, fileEntryId, properties,
-			modifiedDate, serviceContext, file);
+			companyId, portletId, groupId, repositoryId,
+			FileUtil.encodeSafeFileName(fileName),
+			versionNumber, FileUtil.encodeSafeFileName(sourceFileName),
+			fileEntryId, properties, modifiedDate, serviceContext, file);
 	}
 
 	public void updateFile(
@@ -370,20 +234,11 @@ public class SafeFileNameHookWrapper implements Hook {
 			ServiceContext serviceContext, InputStream is)
 		throws PortalException, SystemException {
 
-		String safeFileName = FileUtil.encodeSafeFileName(fileName);
-		String safeSourceFileName = FileUtil.encodeSafeFileName(sourceFileName);
-
-		renameUnsafeFile(
-			companyId, portletId, groupId, repositoryId, fileName,
-			safeFileName);
-		renameUnsafeFile(
-			companyId, portletId, groupId, repositoryId, sourceFileName,
-			safeSourceFileName);
-
 		_hook.updateFile(
-			companyId, portletId, groupId, repositoryId, safeFileName,
-			versionNumber, safeSourceFileName, fileEntryId, properties,
-			modifiedDate, serviceContext, is);
+			companyId, portletId, groupId, repositoryId,
+			FileUtil.encodeSafeFileName(fileName), versionNumber,
+			FileUtil.encodeSafeFileName(sourceFileName), fileEntryId,
+			properties, modifiedDate, serviceContext, is);
 	}
 
 	public void updateFile(
@@ -391,38 +246,10 @@ public class SafeFileNameHookWrapper implements Hook {
 			String fileName, String newFileName, boolean reindex)
 		throws PortalException, SystemException {
 
-		String safeFileName = FileUtil.encodeSafeFileName(fileName);
-		String safeNewFileName = FileUtil.encodeSafeFileName(newFileName);
-
-		if (!safeFileName.equals(fileName)) {
-			if (_hook.hasFile(
-					companyId, repositoryId, fileName,
-					DLFileEntryConstants.DEFAULT_VERSION)) {
-
-				safeFileName = fileName;
-			}
-		}
-
 		_hook.updateFile(
-			companyId, portletId, groupId, repositoryId, safeFileName,
-			safeNewFileName, reindex);
-	}
-
-	protected void renameUnsafeFile(
-			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, String safeFileName)
-		throws PortalException, SystemException {
-
-		if (!safeFileName.equals(fileName)) {
-			if (_hook.hasFile(
-					companyId, repositoryId, fileName,
-					DLFileEntryConstants.DEFAULT_VERSION)) {
-
-				_hook.updateFile(
-					companyId, portletId, groupId, repositoryId, fileName,
-					safeFileName, true);
-			}
-		}
+			companyId, portletId, groupId, repositoryId,
+			FileUtil.encodeSafeFileName(fileName),
+			FileUtil.encodeSafeFileName(newFileName), reindex);
 	}
 
 	private Hook _hook;
