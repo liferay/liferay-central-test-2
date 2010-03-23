@@ -33,6 +33,8 @@ public interface WorkflowDefinition {
 
 	public String getTitle();
 
+	public String getTitle(String languageId);
+
 	public Map<String, Object> getOptionalAttributes();
 
 	public int getVersion();

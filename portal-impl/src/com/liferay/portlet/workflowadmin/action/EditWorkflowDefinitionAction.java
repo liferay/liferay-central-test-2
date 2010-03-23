@@ -14,10 +14,14 @@
 
 package com.liferay.portlet.workflowadmin.action;
 
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowDefinition;
 import com.liferay.portal.kernel.workflow.WorkflowDefinitionFileException;
 import com.liferay.portal.kernel.workflow.WorkflowDefinitionManagerUtil;
@@ -26,10 +30,14 @@ import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.util.LocalizationUtil;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+
+import java.util.Locale;
+import java.util.Map;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -143,7 +151,8 @@ public class EditWorkflowDefinitionAction extends PortletAction {
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		String title = ParamUtil.getString(actionRequest, "title");
+		Map<Locale, String> titleMap = LocalizationUtil.getLocalizationMap(
+			actionRequest, "title");
 
 		File file = uploadRequest.getFile("file");
 
@@ -153,11 +162,37 @@ public class EditWorkflowDefinitionAction extends PortletAction {
 
 		WorkflowDefinition workflowDefinition =
 			WorkflowDefinitionManagerUtil.deployWorkflowDefinition(
-				themeDisplay.getCompanyId(), themeDisplay.getUserId(), title,
-				new FileInputStream(file));
+				themeDisplay.getCompanyId(), themeDisplay.getUserId(),
+				getTitle(titleMap), new FileInputStream(file));
 
 		actionRequest.setAttribute(
 			WebKeys.WORKFLOW_DEFINITION, workflowDefinition);
+	}
+
+	protected String getTitle(Map<Locale, String> titleMap) {
+		if (titleMap == null){
+			return null;
+		}
+
+		String value = StringPool.BLANK;
+
+		Locale[] locales = LanguageUtil.getAvailableLocales();
+
+		for (Locale locale : locales) {
+			String languageId = LocaleUtil.toLanguageId(locale);
+			String title = titleMap.get(locale);
+
+			if (Validator.isNotNull(title)) {
+				value = LocalizationUtil.updateLocalization(
+					value, "Title",	title, languageId);
+			}
+			else {
+				value = LocalizationUtil.removeLocalization(
+					value, "Title",	languageId);
+			}
+		}
+
+		return value;
 	}
 
 }

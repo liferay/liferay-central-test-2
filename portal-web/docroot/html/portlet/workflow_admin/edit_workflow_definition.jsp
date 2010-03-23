@@ -23,11 +23,9 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 WorkflowDefinition workflowDefinition = (WorkflowDefinition)request.getAttribute(WebKeys.WORKFLOW_DEFINITION);
 
-String name = StringPool.BLANK;
 String version = StringPool.BLANK;
 
 if (workflowDefinition != null) {
-	name = workflowDefinition.getName();
 	version = String.valueOf(workflowDefinition.getVersion());
 }
 
@@ -58,7 +56,11 @@ portletURL.setParameter("tabs1", tabs1);
 	<liferay-ui:error exception="<%= WorkflowDefinitionFileException.class %>" message="please-enter-a-valid-file" />
 
 	<aui:fieldset>
-		<aui:input name="name" value="<%= name %>" />
+		<span class="aui-field-label">
+			<liferay-ui:message key="title" />
+		</span>
+
+		<liferay-ui:input-localized name="title" xml='<%= BeanPropertiesUtil.getString(workflowDefinition, "title") %>' />
 
 		<aui:input name="file" type="file" />
 

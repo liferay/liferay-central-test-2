@@ -14,6 +14,8 @@
 
 package com.liferay.portal.kernel.workflow;
 
+import com.liferay.portal.kernel.util.StringPool;
+
 import java.io.InputStream;
 import java.io.Serializable;
 
@@ -40,8 +42,17 @@ public class DefaultWorkflowDefinition
 		return _optionalAttributes;
 	}
 
-	public String getTitle() {
-		return _title;
+	public String getTitle(){
+		if (_title == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _title;
+		}
+	}
+
+	public String getTitle(String languageId) {
+		return getTitle();
 	}
 
 	public int getVersion() {
