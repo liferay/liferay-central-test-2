@@ -41,14 +41,7 @@ public class SessionAuthToken implements AuthToken {
 	}
 
 	public void check(HttpServletRequest request) throws PrincipalException {
-		String ppid = ParamUtil.getString(request, "p_p_id");
-
-		String portletNamespace = PortalUtil.getPortletNamespace(ppid);
-
-		String strutsAction = ParamUtil.getString(
-			request, portletNamespace + "struts_action");
-
-		if (isIgnoreAction(strutsAction)) {
+		if (isIgnoreAction(request)) {
 			return;
 		}
 
@@ -79,6 +72,17 @@ public class SessionAuthToken implements AuthToken {
 		}
 
 		return sessionAuthenticationToken;
+	}
+
+	protected boolean isIgnoreAction(HttpServletRequest request) {
+		String ppid = ParamUtil.getString(request, "p_p_id");
+
+		String portletNamespace = PortalUtil.getPortletNamespace(ppid);
+
+		String strutsAction = ParamUtil.getString(
+			request, portletNamespace + "struts_action");
+
+		return isIgnoreAction(strutsAction);
 	}
 
 	protected boolean isIgnoreAction(String strutsAction) {
