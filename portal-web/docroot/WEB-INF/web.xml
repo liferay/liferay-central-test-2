@@ -321,12 +321,6 @@
 	</filter-mapping>
 	<filter-mapping>
 		<filter-name>Auto Login Filter</filter-name>
-		<url-pattern>/vls/*</url-pattern>
-		<dispatcher>REQUEST</dispatcher>
-		<dispatcher>FORWARD</dispatcher>
-	</filter-mapping>
-	<filter-mapping>
-		<filter-name>Auto Login Filter</filter-name>
 		<url-pattern>/web/*</url-pattern>
 		<dispatcher>REQUEST</dispatcher>
 		<dispatcher>FORWARD</dispatcher>
@@ -882,11 +876,6 @@
 		<load-on-startup>2</load-on-startup>
 	</servlet>
 	<servlet>
-		<servlet-name>Virtual Listing Servlet</servlet-name>
-		<servlet-class>com.liferay.portal.servlet.VirtualListingServlet</servlet-class>
-		<load-on-startup>2</load-on-startup>
-	</servlet>
-	<servlet>
 		<servlet-name>Widget Servlet</servlet-name>
 		<servlet-class>com.liferay.portal.servlet.WidgetServlet</servlet-class>
 		<load-on-startup>2</load-on-startup>
@@ -1219,10 +1208,6 @@
 	<servlet-mapping>
 		<servlet-name>Software Catalog Servlet</servlet-name>
 		<url-pattern>/software_catalog/*</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>Virtual Listing Servlet</servlet-name>
-		<url-pattern>/vls/*</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>Widget Servlet</servlet-name>
