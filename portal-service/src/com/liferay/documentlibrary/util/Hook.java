@@ -119,6 +119,12 @@ public interface Hook {
 	@MessagingProxy(mode = ProxyMode.ASYNC)
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
+			String fileName, String newFileName, boolean reindex)
+		throws PortalException, SystemException;
+
+	@MessagingProxy(mode = ProxyMode.ASYNC)
+	public void updateFile(
+			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, String versionNumber, String sourceFileName,
 			long fileEntryId, String properties, Date modifiedDate,
 			ServiceContext serviceContext, byte[] bytes)
@@ -138,12 +144,6 @@ public interface Hook {
 			String fileName, String versionNumber, String sourceFileName,
 			long fileEntryId, String properties, Date modifiedDate,
 			ServiceContext serviceContext, InputStream is)
-		throws PortalException, SystemException;
-
-	@MessagingProxy(mode = ProxyMode.ASYNC)
-	public void updateFile(
-			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, String newFileName, boolean reindex)
 		throws PortalException, SystemException;
 
 }

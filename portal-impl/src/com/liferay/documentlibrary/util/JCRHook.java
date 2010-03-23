@@ -702,70 +702,6 @@ public class JCRHook extends BaseHook {
 
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, String versionNumber, String sourceFileName,
-			long fileEntryId, String properties, Date modifiedDate,
-			ServiceContext serviceContext, InputStream is)
-		throws PortalException, SystemException {
-
-		String versionLabel = versionNumber;
-
-		Session session = null;
-
-		try {
-			session = JCRFactoryUtil.createSession();
-
-			Node rootNode = getRootNode(session, companyId);
-			Node repositoryNode = getFolderNode(rootNode, repositoryId);
-			Node fileNode = repositoryNode.getNode(fileName);
-			Node contentNode = fileNode.getNode(JCRConstants.JCR_CONTENT);
-
-			contentNode.checkout();
-
-			contentNode.setProperty(JCRConstants.JCR_MIME_TYPE, "text/plain");
-			contentNode.setProperty(JCRConstants.JCR_DATA, is);
-			contentNode.setProperty(
-				JCRConstants.JCR_LAST_MODIFIED, Calendar.getInstance());
-
-			session.save();
-
-			Version version = contentNode.checkin();
-
-			contentNode.getVersionHistory().addVersionLabel(
-				version.getName(), versionLabel, false);
-
-			Indexer indexer = IndexerRegistryUtil.getIndexer(
-				FileModel.class);
-
-			FileModel fileModel = new FileModel();
-
-			fileModel.setAssetCategoryIds(serviceContext.getAssetCategoryIds());
-			fileModel.setAssetTagNames(serviceContext.getAssetTagNames());
-			fileModel.setCompanyId(companyId);
-			fileModel.setFileEntryId(fileEntryId);
-			fileModel.setFileName(fileName);
-			fileModel.setGroupId(groupId);
-			fileModel.setModifiedDate(modifiedDate);
-			fileModel.setPortletId(portletId);
-			fileModel.setProperties(properties);
-			fileModel.setRepositoryId(repositoryId);
-
-			indexer.reindex(fileModel);
-		}
-		catch (PathNotFoundException pnfe) {
-			throw new NoSuchFileException(fileName);
-		}
-		catch (RepositoryException re) {
-			throw new SystemException(re);
-		}
-		finally {
-			if (session != null) {
-				session.logout();
-			}
-		}
-	}
-
-	public void updateFile(
-			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, String newFileName, boolean reindex)
 		throws PortalException, SystemException {
 
@@ -842,6 +778,70 @@ public class JCRHook extends BaseHook {
 
 				indexer.reindex(fileModel);
 			}
+		}
+		catch (PathNotFoundException pnfe) {
+			throw new NoSuchFileException(fileName);
+		}
+		catch (RepositoryException re) {
+			throw new SystemException(re);
+		}
+		finally {
+			if (session != null) {
+				session.logout();
+			}
+		}
+	}
+
+	public void updateFile(
+			long companyId, String portletId, long groupId, long repositoryId,
+			String fileName, String versionNumber, String sourceFileName,
+			long fileEntryId, String properties, Date modifiedDate,
+			ServiceContext serviceContext, InputStream is)
+		throws PortalException, SystemException {
+
+		String versionLabel = versionNumber;
+
+		Session session = null;
+
+		try {
+			session = JCRFactoryUtil.createSession();
+
+			Node rootNode = getRootNode(session, companyId);
+			Node repositoryNode = getFolderNode(rootNode, repositoryId);
+			Node fileNode = repositoryNode.getNode(fileName);
+			Node contentNode = fileNode.getNode(JCRConstants.JCR_CONTENT);
+
+			contentNode.checkout();
+
+			contentNode.setProperty(JCRConstants.JCR_MIME_TYPE, "text/plain");
+			contentNode.setProperty(JCRConstants.JCR_DATA, is);
+			contentNode.setProperty(
+				JCRConstants.JCR_LAST_MODIFIED, Calendar.getInstance());
+
+			session.save();
+
+			Version version = contentNode.checkin();
+
+			contentNode.getVersionHistory().addVersionLabel(
+				version.getName(), versionLabel, false);
+
+			Indexer indexer = IndexerRegistryUtil.getIndexer(
+				FileModel.class);
+
+			FileModel fileModel = new FileModel();
+
+			fileModel.setAssetCategoryIds(serviceContext.getAssetCategoryIds());
+			fileModel.setAssetTagNames(serviceContext.getAssetTagNames());
+			fileModel.setCompanyId(companyId);
+			fileModel.setFileEntryId(fileEntryId);
+			fileModel.setFileName(fileName);
+			fileModel.setGroupId(groupId);
+			fileModel.setModifiedDate(modifiedDate);
+			fileModel.setPortletId(portletId);
+			fileModel.setProperties(properties);
+			fileModel.setRepositoryId(repositoryId);
+
+			indexer.reindex(fileModel);
 		}
 		catch (PathNotFoundException pnfe) {
 			throw new NoSuchFileException(fileName);

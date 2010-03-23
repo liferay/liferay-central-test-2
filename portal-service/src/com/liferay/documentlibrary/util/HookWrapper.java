@@ -174,6 +174,16 @@ public class HookWrapper implements Hook {
 
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
+			String fileName, String newFileName, boolean reindex)
+		throws PortalException, SystemException {
+
+		_hook.updateFile(
+			companyId, portletId, groupId, repositoryId, fileName,
+			newFileName, reindex);
+	}
+
+	public void updateFile(
+			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, String versionNumber, String sourceFileName,
 			long fileEntryId, String properties, Date modifiedDate,
 			ServiceContext serviceContext, byte[] bytes)
@@ -209,16 +219,6 @@ public class HookWrapper implements Hook {
 			companyId, portletId, groupId, repositoryId, fileName,
 			versionNumber, sourceFileName, fileEntryId, properties,
 			modifiedDate, serviceContext, is);
-	}
-
-	public void updateFile(
-			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, String newFileName, boolean reindex)
-		throws PortalException, SystemException {
-
-		_hook.updateFile(
-			companyId, portletId, groupId, repositoryId, fileName,
-			newFileName, reindex);
 	}
 
 	private Hook _hook;

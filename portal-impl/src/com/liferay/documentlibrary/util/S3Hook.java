@@ -412,45 +412,6 @@ public class S3Hook extends BaseHook {
 
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, String versionNumber, String sourceFileName,
-			long fileEntryId, String properties, Date modifiedDate,
-			ServiceContext serviceContext, InputStream is)
-		throws PortalException, SystemException {
-
-		try {
-			S3Object s3Object = new S3Object(
-				_s3Bucket,
-				getKey(companyId, repositoryId, fileName, versionNumber));
-
-			s3Object.setDataInputStream(is);
-
-			_s3Service.putObject(_s3Bucket, s3Object);
-
-			Indexer indexer = IndexerRegistryUtil.getIndexer(
-				FileModel.class);
-
-			FileModel fileModel = new FileModel();
-
-			fileModel.setAssetCategoryIds(serviceContext.getAssetCategoryIds());
-			fileModel.setAssetTagNames(serviceContext.getAssetTagNames());
-			fileModel.setCompanyId(companyId);
-			fileModel.setFileEntryId(fileEntryId);
-			fileModel.setFileName(fileName);
-			fileModel.setGroupId(groupId);
-			fileModel.setModifiedDate(modifiedDate);
-			fileModel.setPortletId(portletId);
-			fileModel.setProperties(properties);
-			fileModel.setRepositoryId(repositoryId);
-
-			indexer.reindex(fileModel);
-		}
-		catch (S3ServiceException s3se) {
-			throw new SystemException(s3se);
-		}
-	}
-
-	public void updateFile(
-			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, String newFileName, boolean reindex)
 		throws PortalException, SystemException {
 
@@ -516,6 +477,45 @@ public class S3Hook extends BaseHook {
 		}
 		catch (IOException ioe) {
 			throw new SystemException(ioe);
+		}
+		catch (S3ServiceException s3se) {
+			throw new SystemException(s3se);
+		}
+	}
+
+	public void updateFile(
+			long companyId, String portletId, long groupId, long repositoryId,
+			String fileName, String versionNumber, String sourceFileName,
+			long fileEntryId, String properties, Date modifiedDate,
+			ServiceContext serviceContext, InputStream is)
+		throws PortalException, SystemException {
+
+		try {
+			S3Object s3Object = new S3Object(
+				_s3Bucket,
+				getKey(companyId, repositoryId, fileName, versionNumber));
+
+			s3Object.setDataInputStream(is);
+
+			_s3Service.putObject(_s3Bucket, s3Object);
+
+			Indexer indexer = IndexerRegistryUtil.getIndexer(
+				FileModel.class);
+
+			FileModel fileModel = new FileModel();
+
+			fileModel.setAssetCategoryIds(serviceContext.getAssetCategoryIds());
+			fileModel.setAssetTagNames(serviceContext.getAssetTagNames());
+			fileModel.setCompanyId(companyId);
+			fileModel.setFileEntryId(fileEntryId);
+			fileModel.setFileName(fileName);
+			fileModel.setGroupId(groupId);
+			fileModel.setModifiedDate(modifiedDate);
+			fileModel.setPortletId(portletId);
+			fileModel.setProperties(properties);
+			fileModel.setRepositoryId(repositoryId);
+
+			indexer.reindex(fileModel);
 		}
 		catch (S3ServiceException s3se) {
 			throw new SystemException(s3se);

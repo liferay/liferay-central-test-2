@@ -142,6 +142,13 @@ public class HookProxyBean extends BaseProxyBean implements Hook {
 
 	public void updateFile(
 		long companyId, String portletId, long groupId, long repositoryId,
+		String fileName, String newFileName, boolean reindex) {
+
+		throw new UnsupportedOperationException();
+	}
+
+	public void updateFile(
+		long companyId, String portletId, long groupId, long repositoryId,
 		String fileName, String versionNumber, String sourceFileName,
 		long fileEntryId, String properties, Date modifiedDate,
 		ServiceContext serviceContext, byte[] bytes) {
@@ -163,13 +170,6 @@ public class HookProxyBean extends BaseProxyBean implements Hook {
 		String fileName, String versionNumber, String sourceFileName,
 		long fileEntryId, String properties, Date modifiedDate,
 		ServiceContext serviceContext, InputStream is) {
-
-		throw new UnsupportedOperationException();
-	}
-
-	public void updateFile(
-		long companyId, String portletId, long groupId, long repositoryId,
-		String fileName, String newFileName, boolean reindex) {
 
 		throw new UnsupportedOperationException();
 	}

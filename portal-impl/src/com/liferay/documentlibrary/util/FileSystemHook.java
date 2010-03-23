@@ -326,6 +326,38 @@ public class FileSystemHook extends BaseHook {
 
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
+			String fileName, String newFileName, boolean reindex)
+		throws PortalException {
+
+		File fileNameDir = getFileNameDir(companyId, repositoryId, fileName);
+		File newFileNameDir = getFileNameDir(
+			companyId, repositoryId, newFileName);
+
+		FileUtil.copyDirectory(fileNameDir, newFileNameDir);
+
+		FileUtil.deltree(fileNameDir);
+
+		if (reindex) {
+			Indexer indexer = IndexerRegistryUtil.getIndexer(FileModel.class);
+
+			FileModel fileModel = new FileModel();
+
+			fileModel.setCompanyId(companyId);
+			fileModel.setFileName(fileName);
+			fileModel.setPortletId(portletId);
+			fileModel.setRepositoryId(repositoryId);
+
+			indexer.delete(fileModel);
+
+			fileModel.setFileName(newFileName);
+			fileModel.setGroupId(groupId);
+
+			indexer.reindex(fileModel);
+		}
+	}
+
+	public void updateFile(
+			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, String versionNumber, String sourceFileName,
 			long fileEntryId, String properties, Date modifiedDate,
 			ServiceContext serviceContext, InputStream is)
@@ -361,38 +393,6 @@ public class FileSystemHook extends BaseHook {
 		}
 		catch (IOException ioe) {
 			throw new SystemException(ioe);
-		}
-	}
-
-	public void updateFile(
-			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, String newFileName, boolean reindex)
-		throws PortalException {
-
-		File fileNameDir = getFileNameDir(companyId, repositoryId, fileName);
-		File newFileNameDir = getFileNameDir(
-			companyId, repositoryId, newFileName);
-
-		FileUtil.copyDirectory(fileNameDir, newFileNameDir);
-
-		FileUtil.deltree(fileNameDir);
-
-		if (reindex) {
-			Indexer indexer = IndexerRegistryUtil.getIndexer(FileModel.class);
-
-			FileModel fileModel = new FileModel();
-
-			fileModel.setCompanyId(companyId);
-			fileModel.setFileName(fileName);
-			fileModel.setPortletId(portletId);
-			fileModel.setRepositoryId(repositoryId);
-
-			indexer.delete(fileModel);
-
-			fileModel.setFileName(newFileName);
-			fileModel.setGroupId(groupId);
-
-			indexer.reindex(fileModel);
 		}
 	}
 

@@ -330,6 +330,48 @@ public class CMISHook extends BaseHook {
 
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
+			String fileName, String newFileName, boolean reindex)
+		throws PortalException {
+
+		Entry oldVersioningFolderEntry = getVersioningFolderEntry(
+			companyId, repositoryId, fileName, true);
+		Entry newVersioningFolderEntry = getVersioningFolderEntry(
+			companyId, repositoryId, newFileName, true);
+
+		List<String> fileNames = CMISUtil.getFolders(oldVersioningFolderEntry);
+
+		for (String curFileName : fileNames) {
+			Entry entry = CMISUtil.getDocument(
+				oldVersioningFolderEntry, curFileName);
+
+			InputStream is = CMISUtil.getInputStream(entry);
+
+			CMISUtil.createDocument(newVersioningFolderEntry, curFileName, is);
+		}
+
+		CMISUtil.delete(oldVersioningFolderEntry);
+
+		if (reindex) {
+			Indexer indexer = IndexerRegistryUtil.getIndexer(FileModel.class);
+
+			FileModel fileModel = new FileModel();
+
+			fileModel.setCompanyId(companyId);
+			fileModel.setFileName(fileName);
+			fileModel.setPortletId(portletId);
+			fileModel.setRepositoryId(repositoryId);
+
+			indexer.delete(fileModel);
+
+			fileModel.setFileName(newFileName);
+			fileModel.setGroupId(groupId);
+
+			indexer.reindex(fileModel);
+		}
+	}
+
+	public void updateFile(
+			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, String versionNumber, String sourceFileName,
 			long fileEntryId, String properties, Date modifiedDate,
 			ServiceContext serviceContext, InputStream is)
@@ -370,48 +412,6 @@ public class CMISHook extends BaseHook {
 		fileModel.setRepositoryId(repositoryId);
 
 		indexer.reindex(fileModel);
-	}
-
-	public void updateFile(
-			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, String newFileName, boolean reindex)
-		throws PortalException {
-
-		Entry oldVersioningFolderEntry = getVersioningFolderEntry(
-			companyId, repositoryId, fileName, true);
-		Entry newVersioningFolderEntry = getVersioningFolderEntry(
-			companyId, repositoryId, newFileName, true);
-
-		List<String> fileNames = CMISUtil.getFolders(oldVersioningFolderEntry);
-
-		for (String curFileName : fileNames) {
-			Entry entry = CMISUtil.getDocument(
-				oldVersioningFolderEntry, curFileName);
-
-			InputStream is = CMISUtil.getInputStream(entry);
-
-			CMISUtil.createDocument(newVersioningFolderEntry, curFileName, is);
-		}
-
-		CMISUtil.delete(oldVersioningFolderEntry);
-
-		if (reindex) {
-			Indexer indexer = IndexerRegistryUtil.getIndexer(FileModel.class);
-
-			FileModel fileModel = new FileModel();
-
-			fileModel.setCompanyId(companyId);
-			fileModel.setFileName(fileName);
-			fileModel.setPortletId(portletId);
-			fileModel.setRepositoryId(repositoryId);
-
-			indexer.delete(fileModel);
-
-			fileModel.setFileName(newFileName);
-			fileModel.setGroupId(groupId);
-
-			indexer.reindex(fileModel);
-		}
 	}
 
 	protected Entry getCompanyFolderEntry(long companyId) throws CMISException {
