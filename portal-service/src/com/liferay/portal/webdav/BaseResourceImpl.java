@@ -18,7 +18,6 @@ import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.FastDateFormatFactoryUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 
 import java.io.InputStream;
@@ -71,9 +70,7 @@ public class BaseResourceImpl implements Resource {
 			_href += StringPool.SLASH + name;
 		}
 
-		_href = StringUtil.replace(_href, StringPool.SLASH, _TEMP_SLASH);
-		_href = HttpUtil.encodeURL(_href, true);
-		_href = StringUtil.replace(_href, _TEMP_SLASH, StringPool.SLASH);
+		_href = HttpUtil.encodePath(_href);
 
 		_displayName = displayName;
 
@@ -154,8 +151,6 @@ public class BaseResourceImpl implements Resource {
 	public InputStream getContentAsStream() throws WebDAVException {
 		return null;
 	}
-
-	private static final String _TEMP_SLASH = "_LIFERAY_TEMP_SLASH_";
 
 	private static Format _createDateFormatter =
 		FastDateFormatFactoryUtil.getSimpleDateFormat(

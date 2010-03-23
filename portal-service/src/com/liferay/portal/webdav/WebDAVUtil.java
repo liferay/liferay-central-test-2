@@ -104,11 +104,7 @@ public class WebDAVUtil {
 
 		String destination = pathSegments[pathSegments.length - 1];
 
-		destination =  StringUtil.replace(
-			destination, StringPool.SLASH, _TEMP_SLASH);
-		destination = HttpUtil.decodeURL(destination, true);
-		destination =  StringUtil.replace(
-			destination, _TEMP_SLASH, StringPool.SLASH);
+		destination = HttpUtil.decodePath(destination);
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Destination " + destination);
@@ -300,8 +296,6 @@ public class WebDAVUtil {
 			return true;
 		}
 	}
-
-	private static final String _TEMP_SLASH = "_LIFERAY_TEMP_SLASH_";
 
 	private static Log _log = LogFactoryUtil.getLog(WebDAVUtil.class);
 

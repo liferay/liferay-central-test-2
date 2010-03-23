@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Http;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -188,6 +189,14 @@ public class HttpImpl implements Http {
 		return url + name + StringPool.EQUAL + encodeURL(value) + anchor;
 	}
 
+	public String decodePath(String path) {
+		path =  StringUtil.replace(path, StringPool.SLASH, _TEMP_SLASH);
+		path = HttpUtil.decodeURL(path, true);
+		path =  StringUtil.replace(path, _TEMP_SLASH, StringPool.SLASH);
+
+		return path;
+	}
+
 	public String decodeURL(String url) {
 		return decodeURL(url, false);
 	}
@@ -215,6 +224,14 @@ public class HttpImpl implements Http {
 
 	public void destroy() {
 		MultiThreadedHttpConnectionManager.shutdownAll();
+	}
+
+	public String encodePath(String path) {
+		path = StringUtil.replace(path, StringPool.SLASH, _TEMP_SLASH);
+		path = HttpUtil.encodeURL(path, true);
+		path = StringUtil.replace(path, _TEMP_SLASH, StringPool.SLASH);
+
+		return path;
 	}
 
 	public String encodeURL(String url) {
@@ -1112,6 +1129,8 @@ public class HttpImpl implements Http {
 
 	private static final String _PROXY_USERNAME = GetterUtil.getString(
 		PropsUtil.get(HttpImpl.class.getName() + ".proxy.username"));
+
+	private static final String _TEMP_SLASH = "_LIFERAY_TEMP_SLASH_";
 
 	private static final int _TIMEOUT = GetterUtil.getInteger(
 		PropsUtil.get(HttpImpl.class.getName() + ".timeout"), 5000);

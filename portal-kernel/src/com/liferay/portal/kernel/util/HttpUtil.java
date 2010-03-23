@@ -57,12 +57,20 @@ public class HttpUtil {
 		return getHttp().addParameter(url, name, value);
 	}
 
+	public static String decodePath(String path) {
+		return getHttp().decodePath(path);
+	}
+
 	public static String decodeURL(String url) {
 		return getHttp().decodeURL(url);
 	}
 
 	public static String decodeURL(String url, boolean unescapeSpace) {
 		return getHttp().decodeURL(url, unescapeSpace);
+	}
+
+	public static String encodePath(String path) {
+		return getHttp().encodePath(path);
 	}
 
 	public static String encodeURL(String url) {

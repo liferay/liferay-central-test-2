@@ -60,9 +60,13 @@ public interface Http {
 
 	public String addParameter(String url, String name, String value);
 
+	public String decodePath(String path);
+
 	public String decodeURL(String url);
 
 	public String decodeURL(String url, boolean unescapeSpace);
+
+	public String encodePath(String path);
 
 	public String encodeURL(String url);
 
