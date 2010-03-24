@@ -27,7 +27,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 		<input name="<%= WebKeys.REFERER %>" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
 		<input name="refresh" type="hidden" value="true" />
 
-		<aui:layout>
+		<aui:layout cssClass="lfr-page-layouts">
 
 			<%
 			List layoutTemplates = LayoutTemplateLocalServiceUtil.getLayoutTemplates(theme.getThemeId());
@@ -67,7 +67,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 				}
 			%>
 
-				<aui:column>
+				<aui:column cssClass="lfr-layout-template-column">
 
 					<%
 					for (int k = 0; k < NUMBER_OF_TEMPLATES_IN_THIS_COLUMN; k++) {
@@ -93,10 +93,9 @@ String redirect = ParamUtil.getString(request, "redirect");
 			}
 			%>
 
+			<aui:button-row>
+				<aui:button type="submit" />
+			</aui:button-row>
 		</aui:layout>
-
-		<aui:button-row>
-			<aui:button type="submit" />
-		</aui:button-row>
 	</aui:form>
 </c:if>
