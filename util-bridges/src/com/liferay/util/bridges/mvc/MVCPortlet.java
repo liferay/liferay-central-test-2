@@ -45,7 +45,9 @@ import javax.portlet.ResourceResponse;
  */
 public class MVCPortlet extends LiferayPortlet {
 
-	public void init() {
+	public void init() throws PortletException {
+		super.init();
+
 		aboutJSP = getInitParameter("about-jsp");
 		configJSP = getInitParameter("config-jsp");
 		editJSP = getInitParameter("edit-jsp");

@@ -15,7 +15,6 @@
 package com.liferay.portlet.portletconfiguration.action;
 
 import com.liferay.portal.kernel.servlet.SessionErrors;
-import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -91,7 +90,7 @@ public class EditPermissionsAction extends EditConfigurationAction {
 				sendRedirect(actionRequest, actionResponse, redirect);
 			}
 			else {
-				SessionMessages.add(actionRequest, "request_processed");
+				addSuccessMessage(actionRequest, actionResponse);
 			}
 		}
 		catch (Exception e) {

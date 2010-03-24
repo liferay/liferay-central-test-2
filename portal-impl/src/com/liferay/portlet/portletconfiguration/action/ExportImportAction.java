@@ -23,7 +23,6 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
-import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ContentTypes;
@@ -93,7 +92,7 @@ public class ExportImportAction extends EditConfigurationAction {
 				exportData(actionRequest, actionResponse, portlet);
 			}
 			else if (cmd.equals("import")) {
-				importData(actionRequest, portlet);
+				importData(actionRequest, actionResponse, portlet);
 
 				sendRedirect(actionRequest, actionResponse);
 			}
@@ -225,7 +224,9 @@ public class ExportImportAction extends EditConfigurationAction {
 		}
 	}
 
-	protected void importData(ActionRequest actionRequest, Portlet portlet)
+	protected void importData(
+			ActionRequest actionRequest, ActionResponse actionResponse,
+			Portlet portlet)
 		throws Exception {
 
 		try {
@@ -244,7 +245,7 @@ public class ExportImportAction extends EditConfigurationAction {
 				plid, groupId, portlet.getPortletId(),
 				actionRequest.getParameterMap(), file);
 
-			SessionMessages.add(actionRequest, "request_processed");
+			addSuccessMessage(actionRequest, actionResponse);
 		}
 		catch (Exception e) {
 			if ((e instanceof LARFileException) ||

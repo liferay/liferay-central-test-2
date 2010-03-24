@@ -78,7 +78,7 @@ public class CheckoutAction extends CartAction {
 		getLatestOrder(actionRequest);
 
 		if (cmd.equals(Constants.SAVE)) {
-			updateCart(actionRequest);
+			updateCart(actionRequest, actionResponse);
 			updateLatestOrder(actionRequest);
 			saveLatestOrder(actionRequest);
 			forwardCheckout(actionRequest, actionResponse);

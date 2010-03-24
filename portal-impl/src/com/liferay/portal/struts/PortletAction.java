@@ -161,6 +161,15 @@ public class PortletAction extends Action {
 		}
 	}
 
+	protected void addSuccessMessage(
+		ActionRequest actionRequest, ActionResponse actionResponse) {
+
+		String successMessage = ParamUtil.getString(
+			actionRequest, "successMessage");
+
+		SessionMessages.add(actionRequest, "request_processed", successMessage);
+	}
+
 	protected String getForward(PortletRequest portletRequest) {
 		return getForward(portletRequest, null);
 	}
@@ -219,11 +228,7 @@ public class PortletAction extends Action {
 		throws IOException {
 
 		if (SessionErrors.isEmpty(actionRequest)) {
-			String successMessage = ParamUtil.getString(
-				actionRequest, "successMessage");
-
-			SessionMessages.add(
-				actionRequest, "request_processed", successMessage);
+			addSuccessMessage(actionRequest, actionResponse);
 		}
 
 		if (Validator.isNull(redirect)) {

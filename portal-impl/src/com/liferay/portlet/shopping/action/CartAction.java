@@ -15,7 +15,6 @@
 package com.liferay.portlet.shopping.action;
 
 import com.liferay.portal.kernel.servlet.SessionErrors;
-import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -56,7 +55,7 @@ public void processAction(
 		throws Exception {
 
 		try {
-			updateCart(actionRequest);
+			updateCart(actionRequest, actionResponse);
 
 			String redirect = ParamUtil.getString(actionRequest, "redirect");
 
@@ -95,7 +94,10 @@ public void processAction(
 			getForward(renderRequest, "portlet.shopping.cart"));
 	}
 
-	protected void updateCart(ActionRequest actionRequest) throws Exception {
+	protected void updateCart(
+			ActionRequest actionRequest, ActionResponse actionResponse)
+		throws Exception {
+
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		ShoppingCart cart = ShoppingUtil.getCart(actionRequest);
@@ -139,7 +141,7 @@ public void processAction(
 			cart.getCouponCodes(), cart.getAltShipping(), cart.isInsure());
 
 		if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
-			SessionMessages.add(actionRequest, "request_processed");
+			addSuccessMessage(actionRequest, actionResponse);
 		}
 	}
 

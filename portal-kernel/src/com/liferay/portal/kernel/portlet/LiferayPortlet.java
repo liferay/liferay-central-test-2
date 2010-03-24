@@ -16,6 +16,7 @@ package com.liferay.portal.kernel.portlet;
 
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.MethodCache;
 import com.liferay.portal.kernel.util.MethodKey;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -49,6 +50,13 @@ import javax.portlet.WindowState;
  */
 public class LiferayPortlet extends GenericPortlet {
 
+	public void init() throws PortletException {
+		super.init();
+
+		addProcessActionSuccessMessage = GetterUtil.getBoolean(
+			getInitParameter("add-process-action-success-action"));
+	}
+
 	public void processAction(
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws IOException, PortletException {
@@ -62,7 +70,7 @@ public class LiferayPortlet extends GenericPortlet {
 		}
 
 		if (SessionErrors.isEmpty(actionRequest)) {
-			SessionMessages.add(actionRequest, "request_processed");
+			addSuccessMessage(actionRequest, actionResponse);
 		}
 		else {
 			return;
@@ -86,6 +94,19 @@ public class LiferayPortlet extends GenericPortlet {
 		super.serveResource(resourceRequest, resourceResponse);
 	}
 
+	protected void addSuccessMessage(
+		ActionRequest actionRequest, ActionResponse actionResponse) {
+
+		if (!addProcessActionSuccessMessage) {
+			return;
+		}
+
+		String successMessage = ParamUtil.getString(
+			actionRequest, "successMessage");
+
+		SessionMessages.add(actionRequest, "request_processed", successMessage);
+	}
+
 	protected boolean callActionMethod(
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws PortletException {
@@ -102,7 +123,12 @@ public class LiferayPortlet extends GenericPortlet {
 				_classesMap, _methodsMap, getClass().getName(), actionName,
 				new Class[] {ActionRequest.class, ActionResponse.class});
 
-			method.invoke(this, actionRequest, actionResponse);
+			if (method != null) {
+				method.invoke(this, actionRequest, actionResponse);
+			}
+			else {
+				super.processAction(actionRequest, actionResponse);
+			}
 
 			return true;
 		}
@@ -115,6 +141,9 @@ public class LiferayPortlet extends GenericPortlet {
 			else {
 				throw new PortletException(ite);
 			}
+		}
+		catch (PortletException pe) {
+			throw pe;
 		}
 		catch (Exception e) {
 			throw new PortletException(e);
@@ -236,6 +265,8 @@ public class LiferayPortlet extends GenericPortlet {
 
 		return isProcessPortletRequest(resourceRequest);
 	}
+
+	protected boolean addProcessActionSuccessMessage;
 
 	private static final boolean _PROCESS_PORTLET_REQUEST = true;
 

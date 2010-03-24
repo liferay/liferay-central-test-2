@@ -20,7 +20,6 @@ import com.liferay.portal.LayoutImportException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
-import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.service.LayoutServiceUtil;
@@ -64,7 +63,7 @@ public class ImportPagesAction extends EditPagesAction {
 			LayoutServiceUtil.importLayouts(
 				groupId, privateLayout, actionRequest.getParameterMap(), file);
 
-			SessionMessages.add(actionRequest, "request_processed");
+			addSuccessMessage(actionRequest, actionResponse);
 		}
 		catch (Exception e) {
 			if ((e instanceof LARFileException) ||
