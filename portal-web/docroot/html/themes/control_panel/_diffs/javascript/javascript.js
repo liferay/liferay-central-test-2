@@ -16,7 +16,7 @@ AUI().use(
 
 			sessionData[sessionKey] = false;
 
-			portletInformationEl.removeClass('aui-overlaycontextpanel-hidden');
+			portletInformationEl.show();
 
 			var contextPanel = new A.OverlayContextPanel(
 				{
