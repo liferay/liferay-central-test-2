@@ -54,7 +54,7 @@ public class LiferayPortlet extends GenericPortlet {
 		super.init();
 
 		addProcessActionSuccessMessage = GetterUtil.getBoolean(
-			getInitParameter("add-process-action-success-action"));
+			getInitParameter("add-process-action-success-action"), true);
 	}
 
 	public void processAction(
