@@ -47,9 +47,7 @@ public class HtmlImpl implements Html {
 			return null;
 		}
 
-		int length = text.length();
-
-		if (length == 0) {
+		if (text.length() == 0) {
 			return StringPool.BLANK;
 		}
 
@@ -57,7 +55,7 @@ public class HtmlImpl implements Html {
 		// http://www.owasp.org/index.php/Cross_Site_Scripting
 		// #How_to_Protect_Yourself
 
-		StringBuilder sb = new StringBuilder(length);
+		StringBuilder sb = new StringBuilder(text.length());
 
 		for (int i = 0; i < text.length(); i++) {
 			char c = text.charAt(i);
@@ -101,6 +99,10 @@ public class HtmlImpl implements Html {
 	public String escape(String text, int type) {
 		if (text == null) {
 			return null;
+		}
+
+		if (text.length() == 0) {
+			return StringPool.BLANK;
 		}
 
 		String prefix = StringPool.BLANK;
@@ -280,6 +282,10 @@ public class HtmlImpl implements Html {
 	public String unescape(String text) {
 		if (text == null) {
 			return null;
+		}
+
+		if (text.length() == 0) {
+			return StringPool.BLANK;
 		}
 
 		// Optimize this

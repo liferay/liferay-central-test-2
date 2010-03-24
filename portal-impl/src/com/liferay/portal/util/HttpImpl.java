@@ -206,6 +206,10 @@ public class HttpImpl implements Http {
 			return null;
 		}
 
+		if (url.length() == 0) {
+			return StringPool.BLANK;
+		}
+
 		try {
 			url = URLDecoder.decode(url, StringPool.UTF8);
 
@@ -241,6 +245,10 @@ public class HttpImpl implements Http {
 	public String encodeURL(String url, boolean escapeSpaces) {
 		if (url == null) {
 			return null;
+		}
+
+		if (url.length() == 0) {
+			return StringPool.BLANK;
 		}
 
 		try {
