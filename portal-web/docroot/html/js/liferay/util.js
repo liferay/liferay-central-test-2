@@ -602,6 +602,7 @@ Liferay.Util = {
 								if (!clicked) {
 									popup = new A.Dialog(
 										{
+											centered: true,
 											height: 640,
 											title: Liferay.Language.get('editor'),
 											width: 680
@@ -619,6 +620,9 @@ Liferay.Util = {
 								}
 								else {
 									popup.show();
+
+									popup._setAlignCenter(true);
+
 									popup.io.start();
 								}
 							}
