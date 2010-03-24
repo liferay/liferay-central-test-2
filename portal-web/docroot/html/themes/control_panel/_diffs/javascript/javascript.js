@@ -21,7 +21,7 @@ AUI().use(
 			var contextPanel = new A.OverlayContextPanel(
 				{
 					align: {
-						points: [ 'tl', 'br' ]
+						points: [ 'tl', 'bl' ]
 					},
 					bodyContent: portletInformationEl,
 					on: {
