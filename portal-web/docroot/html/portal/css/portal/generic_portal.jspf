@@ -111,8 +111,3 @@ td.lfr-middle {
 .popup-alert-notice input, .popup-alert-warning input {
 	vertical-align: middle;
 }
-
-#lfr-look-and-feel fieldset {
-	border:1px solid #BFBFBF;
-	padding: 8px;
-}

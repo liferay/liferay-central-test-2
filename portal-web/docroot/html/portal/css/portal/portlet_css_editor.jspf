@@ -47,24 +47,8 @@
 	width: 20%;
 }
 
-#portlet-set-properties #lfr-border-width, #portlet-set-properties #lfr-border-style, #portlet-set-properties #lfr-border-color {
-	float: left;
-}
-
-#portlet-set-properties #lfr-border-width {
-	width: 25%;
-}
-
-#portlet-set-properties #lfr-border-style {
-	width: 15%;
-}
-
-#portlet-set-properties #lfr-border-color {
-	width: 20%;
-}
-
-#portlet-set-properties #lfr-padding, #portlet-set-properties #lfr-margin {
-	width: 25%;
+#portlet-set-properties .use-for-all-column .aui-field-row .aui-field-label {
+	width: 50px;
 }
 
 #portlet-set-properties .aui-form #custom-css {
@@ -86,4 +70,8 @@
 
 #portlet-set-properties .aui-form {
 	clear: both;
+}
+
+#portlet-set-properties .aui-legend {
+	width: 100%;
 }
