@@ -23,6 +23,6 @@
 	padding: 0 2em 0 0;
 }
 
-.lfr-page-layouts-container {
+.lfr-page-layouts-content {
 	padding-left: 1em;
 }
