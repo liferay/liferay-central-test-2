@@ -161,14 +161,19 @@ AUI().add(
 					}
 					else {
 						var layoutOptions = Liferay.Layout.options;
-
 						var firstColumn = A.one(layoutOptions.dropNodes);
 
 						if (firstColumn) {
 							var dropColumn = firstColumn.one(layoutOptions.dropContainer);
+							var referencePortlet = Liferay.Layout.findReferencePortlet(dropColumn);
 
-							if (dropColumn) {
-								dropColumn.prepend(placeHolder);
+							if (referencePortlet) {
+								referencePortlet.placeBefore(placeHolder);
+							}
+							else {
+								if (dropColumn) {
+									dropColumn.append(placeHolder);
+								}
 							}
 						}
 					}
@@ -522,6 +527,39 @@ AUI().add(
 							portletItem.lazyEvents = false;
 							portletItem.quadrant = 1;
 						}
+					}
+				},
+
+				_positionNode: function(event) {
+					var instance = this;
+
+					var portalLayout = event.currentTarget;
+					var activeDrop = portalLayout.lastAlignDrop || portalLayout.activeDrop;
+
+					if (activeDrop) {
+						var dropNode = activeDrop.get('node');
+
+						if (dropNode.isStatic) {
+							var options = Liferay.Layout.options;
+							var dropColumn = dropNode.ancestor(options.dropContainer);
+							var foundReferencePortlet = Liferay.Layout.findReferencePortlet(dropColumn);
+
+							if (!foundReferencePortlet) {
+								foundReferencePortlet = Liferay.Layout.getLastPortletNode(dropColumn);
+							}
+
+							if (foundReferencePortlet) {
+								var drop = DDM.getDrop(foundReferencePortlet);
+
+								if (drop) {
+									portalLayout.quadrant = 4;
+									portalLayout.activeDrop = drop;
+									portalLayout.lastAlignDrop = drop;
+								}
+							}
+						}
+
+						PortletItem.superclass._positionNode.apply(this, arguments);
 					}
 				},
 
