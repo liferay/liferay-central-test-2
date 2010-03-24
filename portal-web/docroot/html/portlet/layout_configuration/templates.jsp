@@ -27,63 +27,76 @@ String redirect = ParamUtil.getString(request, "redirect");
 		<input name="<%= WebKeys.REFERER %>" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
 		<input name="refresh" type="hidden" value="true" />
 
-		<table border="0" cellpadding="0" cellspacing="10" style="margin-top: 10px;" width="100%">
+		<aui:layout>
 
-		<%
-		int CELLS_PER_ROW = 4;
+			<%
+			List layoutTemplates = LayoutTemplateLocalServiceUtil.getLayoutTemplates(theme.getThemeId());
 
-		List layoutTemplates = LayoutTemplateLocalServiceUtil.getLayoutTemplates(theme.getThemeId());
+			layoutTemplates = PluginUtil.restrictPlugins(layoutTemplates, user);
 
-		layoutTemplates = PluginUtil.restrictPlugins(layoutTemplates, user);
+			Group group = layout.getGroup();
 
-		Group group = layout.getGroup();
+			String selector1 = StringPool.BLANK;
 
-		String selector1 = StringPool.BLANK;
+			if (group.isUser()) {
+				selector1 = "desktop";
+			}
+			else if (group.isCommunity()) {
+				selector1 = "community";
+			}
+			else if (group.isOrganization()) {
+				selector1 = "organization";
+			}
 
-		if (group.isUser()) {
-			selector1 = "desktop";
-		}
-		else if (group.isCommunity()) {
-			selector1 = "community";
-		}
-		else if (group.isOrganization()) {
-			selector1 = "organization";
-		}
+			String selector2 = StringPool.BLANK;
 
-		String selector2 = StringPool.BLANK;
+			if ((layout.getPriority() == 0) && (layout.getParentLayoutId() == LayoutConstants.DEFAULT_PARENT_LAYOUT_ID)) {
+				selector2 = "firstLayout";
+			}
 
-		if ((layout.getPriority() == 0) && (layout.getParentLayoutId() == LayoutConstants.DEFAULT_PARENT_LAYOUT_ID)) {
-			selector2 = "firstLayout";
-		}
+			int NUMBER_OF_COLUMNS = 4;
+			int NUMBER_OF_TEMPLATES = layoutTemplates.size();
 
-		for (int i = 0; i < layoutTemplates.size(); i++) {
-			LayoutTemplate layoutTemplate = (LayoutTemplate)layoutTemplates.get(i);
-		%>
+			int i = 0;
 
-			<c:if test="<%= (i % CELLS_PER_ROW) == 0 %>">
-				<tr>
-			</c:if>
+			for (int j = 0; j < NUMBER_OF_COLUMNS; j++) {
+				int NUMBER_OF_TEMPLATES_IN_THIS_COLUMN = NUMBER_OF_TEMPLATES/NUMBER_OF_COLUMNS;
 
-			<td align="center" width="<%= 100 / CELLS_PER_ROW %>%">
-				<img onclick="document.getElementById('layoutTemplateId<%= i %>').checked = true;" src="<%= layoutTemplate.getContextPath() %><%= layoutTemplate.getThumbnailPath() %>" /><br />
+				if (j < NUMBER_OF_TEMPLATES%NUMBER_OF_COLUMNS) {
+					NUMBER_OF_TEMPLATES_IN_THIS_COLUMN++;
+				}
+			%>
 
-				<input <%= layoutTypePortlet.getLayoutTemplateId().equals(layoutTemplate.getLayoutTemplateId()) ? "checked" : "" %> id="layoutTemplateId<%= i %>" name="layoutTemplateId" type="radio" value="<%= layoutTemplate.getLayoutTemplateId() %>" />
+				<aui:column>
 
-				<label for="layoutTemplateId<%= i %>"><%= layoutTemplate.getName() %></label>
-			</td>
+					<%
+					for (int k = 0; k < NUMBER_OF_TEMPLATES_IN_THIS_COLUMN; k++) {
+						LayoutTemplate layoutTemplate = (LayoutTemplate)layoutTemplates.get(i);
+					%>
 
-			<c:if test="<%= (i % CELLS_PER_ROW) == (CELLS_PER_ROW - 1) %>">
-				</tr>
-			</c:if>
+						<div class="lfr-layout-template">
+							<img onclick="document.getElementById('layoutTemplateId<%= i %>').checked = true;" src="<%= layoutTemplate.getContextPath() %><%= layoutTemplate.getThumbnailPath() %>" /><br />
 
-		<%
-		}
-		%>
+							<input <%= layoutTypePortlet.getLayoutTemplateId().equals(layoutTemplate.getLayoutTemplateId()) ? "checked" : "" %> id="layoutTemplateId<%= i %>" name="layoutTemplateId" type="radio" value="<%= layoutTemplate.getLayoutTemplateId() %>" />
 
-		</table>
+							<label for="layoutTemplateId<%= i %>"><%= layoutTemplate.getName() %></label>
+						</div>
+
+					<%
+						i++;
+					}
+					%>
+
+				</aui:column>
+
+			<%
+			}
+			%>
+
+		</aui:layout>
 
 		<aui:button-row>
-			<aui:button type="submit" value="save" />
+			<aui:button type="submit" />
 		</aui:button-row>
 	</aui:form>
 </c:if>
