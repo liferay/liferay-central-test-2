@@ -54,23 +54,20 @@ String redirect = ParamUtil.getString(request, "redirect");
 				selector2 = "firstLayout";
 			}
 
-			int NUMBER_OF_COLUMNS = 4;
-			int NUMBER_OF_TEMPLATES = layoutTemplates.size();
-
 			int i = 0;
 
-			for (int j = 0; j < NUMBER_OF_COLUMNS; j++) {
-				int NUMBER_OF_TEMPLATES_IN_THIS_COLUMN = NUMBER_OF_TEMPLATES/NUMBER_OF_COLUMNS;
+			for (int j = 0; j < _COLUMNS_COUNT; j++) {
+				int columnLayoutTemplatesCount = layoutTemplates.size() / _COLUMNS_COUNT;
 
-				if (j < NUMBER_OF_TEMPLATES%NUMBER_OF_COLUMNS) {
-					NUMBER_OF_TEMPLATES_IN_THIS_COLUMN++;
+				if (j < layoutTemplates.size() % _COLUMNS_COUNT) {
+					columnLayoutTemplatesCount++;
 				}
 			%>
 
 				<aui:column cssClass="lfr-layout-template-column">
 
 					<%
-					for (int k = 0; k < NUMBER_OF_TEMPLATES_IN_THIS_COLUMN; k++) {
+					for (int k = 0; k < columnLayoutTemplatesCount; k++) {
 						LayoutTemplate layoutTemplate = (LayoutTemplate)layoutTemplates.get(i);
 					%>
 
@@ -99,3 +96,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 		</aui:layout>
 	</aui:form>
 </c:if>
+
+<%!
+private static final int _COLUMNS_COUNT = 4;
+%>
