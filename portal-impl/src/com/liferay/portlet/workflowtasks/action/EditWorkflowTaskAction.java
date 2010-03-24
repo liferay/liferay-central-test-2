@@ -141,6 +141,10 @@ public class EditWorkflowTaskAction extends PortletAction {
 			workflowTaskId, transitionName, comment, null);
 	}
 
+	protected boolean isCheckMethodOnProcessAction() {
+		return _CHECK_METHOD_ON_PROCESS_ACTION;
+	}
+
 	protected void updateTask(ActionRequest actionRequest) throws Exception {
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
@@ -170,5 +174,7 @@ public class EditWorkflowTaskAction extends PortletAction {
 			themeDisplay.getCompanyId(), themeDisplay.getUserId(),
 			workflowTaskId, comment, dueDate);
 	}
+
+	private static final boolean _CHECK_METHOD_ON_PROCESS_ACTION = false;
 
 }

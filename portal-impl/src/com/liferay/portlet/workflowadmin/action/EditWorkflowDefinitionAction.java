@@ -141,6 +141,10 @@ public class EditWorkflowDefinitionAction extends PortletAction {
 				version);
 		}
 	}
+	
+	protected boolean isCheckMethodOnProcessAction() {
+		return _CHECK_METHOD_ON_PROCESS_ACTION;
+	}
 
 	protected void updateWorkflowDefinition(ActionRequest actionRequest)
 		throws Exception {
@@ -194,5 +198,7 @@ public class EditWorkflowDefinitionAction extends PortletAction {
 
 		return value;
 	}
+	
+	private static final boolean _CHECK_METHOD_ON_PROCESS_ACTION = false;
 
 }
