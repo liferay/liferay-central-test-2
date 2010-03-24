@@ -109,7 +109,7 @@ public class LiferayPortlet extends GenericPortlet {
 
 	protected boolean callActionMethod(
 			ActionRequest actionRequest, ActionResponse actionResponse)
-		throws IOException, PortletException {
+		throws PortletException {
 
 		String actionName = ParamUtil.getString(
 			actionRequest, ActionRequest.ACTION_NAME);
@@ -133,7 +133,7 @@ public class LiferayPortlet extends GenericPortlet {
 
 				return true;
 			}
-			catch (PortletException pe) {
+			catch (Exception e) {
 				throw new PortletException(nsme);
 			}
 		}
