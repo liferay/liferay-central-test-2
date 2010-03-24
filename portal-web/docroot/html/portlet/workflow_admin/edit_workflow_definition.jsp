@@ -23,9 +23,11 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 WorkflowDefinition workflowDefinition = (WorkflowDefinition)request.getAttribute(WebKeys.WORKFLOW_DEFINITION);
 
+String name = StringPool.BLANK;
 String version = StringPool.BLANK;
 
 if (workflowDefinition != null) {
+	name = workflowDefinition.getName();
 	version = String.valueOf(workflowDefinition.getVersion());
 }
 
@@ -56,6 +58,10 @@ portletURL.setParameter("tabs1", tabs1);
 	<liferay-ui:error exception="<%= WorkflowDefinitionFileException.class %>" message="please-enter-a-valid-file" />
 
 	<aui:fieldset>
+		<aui:field-wrapper helpMessage='<%= LanguageUtil.get(locale, "the-definition-name-must-be-defined-in-the-workflow-definition-file") %>' label="name">
+			<%= name %>
+		</aui:field-wrapper>
+
 		<span class="aui-field-label">
 			<liferay-ui:message key="title" />
 		</span>
