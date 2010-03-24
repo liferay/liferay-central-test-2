@@ -109,7 +109,7 @@ public class LiferayPortlet extends GenericPortlet {
 
 	protected boolean callActionMethod(
 			ActionRequest actionRequest, ActionResponse actionResponse)
-		throws PortletException {
+		throws IOException, PortletException {
 
 		String actionName = ParamUtil.getString(
 			actionRequest, ActionRequest.ACTION_NAME);
@@ -123,14 +123,19 @@ public class LiferayPortlet extends GenericPortlet {
 				_classesMap, _methodsMap, getClass().getName(), actionName,
 				new Class[] {ActionRequest.class, ActionResponse.class});
 
-			if (method != null) {
-				method.invoke(this, actionRequest, actionResponse);
-			}
-			else {
-				super.processAction(actionRequest, actionResponse);
-			}
+			method.invoke(this, actionRequest, actionResponse);
 
 			return true;
+		}
+		catch (NoSuchMethodException nsme) {
+			try {
+				super.processAction(actionRequest, actionResponse);
+
+				return true;
+			}
+			catch (PortletException pe) {
+				throw new PortletException(nsme);
+			}
 		}
 		catch (InvocationTargetException ite) {
 			Throwable cause = ite.getCause();
@@ -141,9 +146,6 @@ public class LiferayPortlet extends GenericPortlet {
 			else {
 				throw new PortletException(ite);
 			}
-		}
-		catch (PortletException pe) {
-			throw pe;
 		}
 		catch (Exception e) {
 			throw new PortletException(e);
