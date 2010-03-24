@@ -47,11 +47,17 @@ public class HtmlImpl implements Html {
 			return null;
 		}
 
+		int length = text.length();
+
+		if (length == 0) {
+			return StringPool.BLANK;
+		}
+
 		// Escape using XSS recommendations from
 		// http://www.owasp.org/index.php/Cross_Site_Scripting
 		// #How_to_Protect_Yourself
 
-		StringBuilder sb = new StringBuilder(text.length());
+		StringBuilder sb = new StringBuilder(length);
 
 		for (int i = 0; i < text.length(); i++) {
 			char c = text.charAt(i);
