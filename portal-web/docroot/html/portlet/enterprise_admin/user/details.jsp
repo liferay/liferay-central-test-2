@@ -186,7 +186,7 @@ boolean deletePortrait = ParamUtil.getBoolean(request, "deletePortrait");
 	}
 
 	function <portlet:namespace />openEditUserPortraitWindow(editUserPortraitURL) {
-		var editUserPortraitWindow = window.open(editUserPortraitURL, '<liferay-ui:message key="change" />', 'directories=no,height=400,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=500');
+		var editUserPortraitWindow = window.open(editUserPortraitURL, 'change', 'directories=no,height=400,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=500');
 
 		editUserPortraitWindow.focus();
 	}
