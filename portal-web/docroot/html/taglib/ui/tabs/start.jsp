@@ -170,29 +170,31 @@ String onClick = GetterUtil.getString((String)request.getAttribute("liferay-ui:t
 			<c:otherwise>
 				<li class="<%= cssClassName %>" id="<%= namespace %><%= param %><%= values[i] %>TabsId">
 					<span class="aui-tab-content">
-						<c:choose>
-							<c:when test="<%= Validator.isNotNull(curURL) %>">
-								<a href="<%= curURL %>"
-									<c:if test="<%= Validator.isNotNull(curOnClick) %>">
-										onClick="<%= curOnClick %>"
-									</c:if>
-								>
-							</c:when>
-							<c:otherwise>
-								<span>
-							</c:otherwise>
-						</c:choose>
+						<span class="aui-tab-label">
+							<c:choose>
+								<c:when test="<%= Validator.isNotNull(curURL) %>">
+									<a href="<%= curURL %>"
+										<c:if test="<%= Validator.isNotNull(curOnClick) %>">
+											onClick="<%= curOnClick %>"
+										</c:if>
+									>
+								</c:when>
+								<c:otherwise>
+									<span>
+								</c:otherwise>
+							</c:choose>
 
-						<%= LanguageUtil.get(pageContext, names[i]) %>
+							<%= LanguageUtil.get(pageContext, names[i]) %>
 
-						<c:choose>
-							<c:when test="<%= Validator.isNotNull(curURL) %>">
-								</a>
-							</c:when>
-							<c:otherwise>
-								</span>
-							</c:otherwise>
-						</c:choose>
+							<c:choose>
+								<c:when test="<%= Validator.isNotNull(curURL) %>">
+									</a>
+								</c:when>
+								<c:otherwise>
+									</span>
+								</c:otherwise>
+							</c:choose>
+						</span>
 					</span>
 				</li>
 			</c:otherwise>
@@ -222,7 +224,9 @@ String onClick = GetterUtil.getString((String)request.getAttribute("liferay-ui:t
 			<c:otherwise>
 				<li class="aui-tab toggle last">
 					<span class="aui-tab-content">
-						<a href="<%= backURL %>" id="<%= namespace %><%= param %>TabsBack">&laquo; <liferay-ui:message key="back" /></a>
+						<span class="aui-tab-label">
+							<a href="<%= backURL %>" id="<%= namespace %><%= param %>TabsBack">&laquo; <liferay-ui:message key="back" /></a>
+						</span>
 					</span>
 				</li>
 			</c:otherwise>
