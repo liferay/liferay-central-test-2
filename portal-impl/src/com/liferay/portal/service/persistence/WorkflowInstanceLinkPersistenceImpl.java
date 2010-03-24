@@ -63,12 +63,22 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 	public static final String FINDER_CLASS_NAME_ENTITY = WorkflowInstanceLinkImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
-	public static final FinderPath FINDER_PATH_FETCH_BY_G_C_C_C = new FinderPath(WorkflowInstanceLinkModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_FIND_BY_G_C_C_C = new FinderPath(WorkflowInstanceLinkModelImpl.ENTITY_CACHE_ENABLED,
 			WorkflowInstanceLinkModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_ENTITY, "fetchByG_C_C_C",
+			FINDER_CLASS_NAME_LIST, "findByG_C_C_C",
 			new String[] {
 				Long.class.getName(), Long.class.getName(), Long.class.getName(),
 				Long.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_G_C_C_C = new FinderPath(WorkflowInstanceLinkModelImpl.ENTITY_CACHE_ENABLED,
+			WorkflowInstanceLinkModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByG_C_C_C",
+			new String[] {
+				Long.class.getName(), Long.class.getName(), Long.class.getName(),
+				Long.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
 			});
 	public static final FinderPath FINDER_PATH_COUNT_BY_G_C_C_C = new FinderPath(WorkflowInstanceLinkModelImpl.ENTITY_CACHE_ENABLED,
 			WorkflowInstanceLinkModelImpl.FINDER_CACHE_ENABLED,
@@ -88,14 +98,6 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 		EntityCacheUtil.putResult(WorkflowInstanceLinkModelImpl.ENTITY_CACHE_ENABLED,
 			WorkflowInstanceLinkImpl.class,
 			workflowInstanceLink.getPrimaryKey(), workflowInstanceLink);
-
-		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_C_C_C,
-			new Object[] {
-				new Long(workflowInstanceLink.getGroupId()),
-				new Long(workflowInstanceLink.getCompanyId()),
-				new Long(workflowInstanceLink.getClassNameId()),
-				new Long(workflowInstanceLink.getClassPK())
-			}, workflowInstanceLink);
 	}
 
 	public void cacheResult(List<WorkflowInstanceLink> workflowInstanceLinks) {
@@ -210,16 +212,6 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
-		WorkflowInstanceLinkModelImpl workflowInstanceLinkModelImpl = (WorkflowInstanceLinkModelImpl)workflowInstanceLink;
-
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_C_C_C,
-			new Object[] {
-				new Long(workflowInstanceLinkModelImpl.getOriginalGroupId()),
-				new Long(workflowInstanceLinkModelImpl.getOriginalCompanyId()),
-				new Long(workflowInstanceLinkModelImpl.getOriginalClassNameId()),
-				new Long(workflowInstanceLinkModelImpl.getOriginalClassPK())
-			});
-
 		EntityCacheUtil.removeResult(WorkflowInstanceLinkModelImpl.ENTITY_CACHE_ENABLED,
 			WorkflowInstanceLinkImpl.class, workflowInstanceLink.getPrimaryKey());
 
@@ -230,10 +222,6 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 		com.liferay.portal.model.WorkflowInstanceLink workflowInstanceLink,
 		boolean merge) throws SystemException {
 		workflowInstanceLink = toUnwrappedModel(workflowInstanceLink);
-
-		boolean isNew = workflowInstanceLink.isNew();
-
-		WorkflowInstanceLinkModelImpl workflowInstanceLinkModelImpl = (WorkflowInstanceLinkModelImpl)workflowInstanceLink;
 
 		Session session = null;
 
@@ -256,34 +244,6 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 		EntityCacheUtil.putResult(WorkflowInstanceLinkModelImpl.ENTITY_CACHE_ENABLED,
 			WorkflowInstanceLinkImpl.class,
 			workflowInstanceLink.getPrimaryKey(), workflowInstanceLink);
-
-		if (!isNew &&
-				((workflowInstanceLink.getGroupId() != workflowInstanceLinkModelImpl.getOriginalGroupId()) ||
-				(workflowInstanceLink.getCompanyId() != workflowInstanceLinkModelImpl.getOriginalCompanyId()) ||
-				(workflowInstanceLink.getClassNameId() != workflowInstanceLinkModelImpl.getOriginalClassNameId()) ||
-				(workflowInstanceLink.getClassPK() != workflowInstanceLinkModelImpl.getOriginalClassPK()))) {
-			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_C_C_C,
-				new Object[] {
-					new Long(workflowInstanceLinkModelImpl.getOriginalGroupId()),
-					new Long(workflowInstanceLinkModelImpl.getOriginalCompanyId()),
-					new Long(workflowInstanceLinkModelImpl.getOriginalClassNameId()),
-					new Long(workflowInstanceLinkModelImpl.getOriginalClassPK())
-				});
-		}
-
-		if (isNew ||
-				((workflowInstanceLink.getGroupId() != workflowInstanceLinkModelImpl.getOriginalGroupId()) ||
-				(workflowInstanceLink.getCompanyId() != workflowInstanceLinkModelImpl.getOriginalCompanyId()) ||
-				(workflowInstanceLink.getClassNameId() != workflowInstanceLinkModelImpl.getOriginalClassNameId()) ||
-				(workflowInstanceLink.getClassPK() != workflowInstanceLinkModelImpl.getOriginalClassPK()))) {
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_C_C_C,
-				new Object[] {
-					new Long(workflowInstanceLink.getGroupId()),
-					new Long(workflowInstanceLink.getCompanyId()),
-					new Long(workflowInstanceLink.getClassNameId()),
-					new Long(workflowInstanceLink.getClassPK())
-				}, workflowInstanceLink);
-		}
 
 		return workflowInstanceLink;
 	}
@@ -369,13 +329,174 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 		return workflowInstanceLink;
 	}
 
-	public WorkflowInstanceLink findByG_C_C_C(long groupId, long companyId,
-		long classNameId, long classPK)
-		throws NoSuchWorkflowInstanceLinkException, SystemException {
-		WorkflowInstanceLink workflowInstanceLink = fetchByG_C_C_C(groupId,
-				companyId, classNameId, classPK);
+	public List<WorkflowInstanceLink> findByG_C_C_C(long groupId,
+		long companyId, long classNameId, long classPK)
+		throws SystemException {
+		Object[] finderArgs = new Object[] {
+				new Long(groupId), new Long(companyId), new Long(classNameId),
+				new Long(classPK)
+			};
 
-		if (workflowInstanceLink == null) {
+		List<WorkflowInstanceLink> list = (List<WorkflowInstanceLink>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_C_C_C,
+				finderArgs, this);
+
+		if (list == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBundler query = new StringBundler(6);
+
+				query.append(_SQL_SELECT_WORKFLOWINSTANCELINK_WHERE);
+
+				query.append(_FINDER_COLUMN_G_C_C_C_GROUPID_2);
+
+				query.append(_FINDER_COLUMN_G_C_C_C_COMPANYID_2);
+
+				query.append(_FINDER_COLUMN_G_C_C_C_CLASSNAMEID_2);
+
+				query.append(_FINDER_COLUMN_G_C_C_C_CLASSPK_2);
+
+				query.append(WorkflowInstanceLinkModelImpl.ORDER_BY_JPQL);
+
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				qPos.add(companyId);
+
+				qPos.add(classNameId);
+
+				qPos.add(classPK);
+
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<WorkflowInstanceLink>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_C_C_C,
+					finderArgs, list);
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	public List<WorkflowInstanceLink> findByG_C_C_C(long groupId,
+		long companyId, long classNameId, long classPK, int start, int end)
+		throws SystemException {
+		return findByG_C_C_C(groupId, companyId, classNameId, classPK, start,
+			end, null);
+	}
+
+	public List<WorkflowInstanceLink> findByG_C_C_C(long groupId,
+		long companyId, long classNameId, long classPK, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
+		Object[] finderArgs = new Object[] {
+				new Long(groupId), new Long(companyId), new Long(classNameId),
+				new Long(classPK),
+				
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
+			};
+
+		List<WorkflowInstanceLink> list = (List<WorkflowInstanceLink>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_G_C_C_C,
+				finderArgs, this);
+
+		if (list == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBundler query = null;
+
+				if (orderByComparator != null) {
+					query = new StringBundler(6 +
+							(orderByComparator.getOrderByFields().length * 3));
+				}
+				else {
+					query = new StringBundler(6);
+				}
+
+				query.append(_SQL_SELECT_WORKFLOWINSTANCELINK_WHERE);
+
+				query.append(_FINDER_COLUMN_G_C_C_C_GROUPID_2);
+
+				query.append(_FINDER_COLUMN_G_C_C_C_COMPANYID_2);
+
+				query.append(_FINDER_COLUMN_G_C_C_C_CLASSNAMEID_2);
+
+				query.append(_FINDER_COLUMN_G_C_C_C_CLASSPK_2);
+
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
+				}
+
+				else {
+					query.append(WorkflowInstanceLinkModelImpl.ORDER_BY_JPQL);
+				}
+
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				qPos.add(companyId);
+
+				qPos.add(classNameId);
+
+				qPos.add(classPK);
+
+				list = (List<WorkflowInstanceLink>)QueryUtil.list(q,
+						getDialect(), start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<WorkflowInstanceLink>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_G_C_C_C,
+					finderArgs, list);
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	public WorkflowInstanceLink findByG_C_C_C_First(long groupId,
+		long companyId, long classNameId, long classPK,
+		OrderByComparator orderByComparator)
+		throws NoSuchWorkflowInstanceLinkException, SystemException {
+		List<WorkflowInstanceLink> list = findByG_C_C_C(groupId, companyId,
+				classNameId, classPK, 0, 1, orderByComparator);
+
+		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(10);
 
 			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
@@ -394,113 +515,120 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
-			if (_log.isWarnEnabled()) {
-				_log.warn(msg.toString());
-			}
+			throw new NoSuchWorkflowInstanceLinkException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public WorkflowInstanceLink findByG_C_C_C_Last(long groupId,
+		long companyId, long classNameId, long classPK,
+		OrderByComparator orderByComparator)
+		throws NoSuchWorkflowInstanceLinkException, SystemException {
+		int count = countByG_C_C_C(groupId, companyId, classNameId, classPK);
+
+		List<WorkflowInstanceLink> list = findByG_C_C_C(groupId, companyId,
+				classNameId, classPK, count - 1, count, orderByComparator);
+
+		if (list.isEmpty()) {
+			StringBundler msg = new StringBundler(10);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("groupId=");
+			msg.append(groupId);
+
+			msg.append(", companyId=");
+			msg.append(companyId);
+
+			msg.append(", classNameId=");
+			msg.append(classNameId);
+
+			msg.append(", classPK=");
+			msg.append(classPK);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			throw new NoSuchWorkflowInstanceLinkException(msg.toString());
 		}
-
-		return workflowInstanceLink;
-	}
-
-	public WorkflowInstanceLink fetchByG_C_C_C(long groupId, long companyId,
-		long classNameId, long classPK) throws SystemException {
-		return fetchByG_C_C_C(groupId, companyId, classNameId, classPK, true);
-	}
-
-	public WorkflowInstanceLink fetchByG_C_C_C(long groupId, long companyId,
-		long classNameId, long classPK, boolean retrieveFromCache)
-		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Long(companyId), new Long(classNameId),
-				new Long(classPK)
-			};
-
-		Object result = null;
-
-		if (retrieveFromCache) {
-			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_G_C_C_C,
-					finderArgs, this);
-		}
-
-		if (result == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(5);
-
-				query.append(_SQL_SELECT_WORKFLOWINSTANCELINK_WHERE);
-
-				query.append(_FINDER_COLUMN_G_C_C_C_GROUPID_2);
-
-				query.append(_FINDER_COLUMN_G_C_C_C_COMPANYID_2);
-
-				query.append(_FINDER_COLUMN_G_C_C_C_CLASSNAMEID_2);
-
-				query.append(_FINDER_COLUMN_G_C_C_C_CLASSPK_2);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(groupId);
-
-				qPos.add(companyId);
-
-				qPos.add(classNameId);
-
-				qPos.add(classPK);
-
-				List<WorkflowInstanceLink> list = q.list();
-
-				result = list;
-
-				WorkflowInstanceLink workflowInstanceLink = null;
-
-				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_C_C_C,
-						finderArgs, list);
-				}
-				else {
-					workflowInstanceLink = list.get(0);
-
-					cacheResult(workflowInstanceLink);
-
-					if ((workflowInstanceLink.getGroupId() != groupId) ||
-							(workflowInstanceLink.getCompanyId() != companyId) ||
-							(workflowInstanceLink.getClassNameId() != classNameId) ||
-							(workflowInstanceLink.getClassPK() != classPK)) {
-						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_C_C_C,
-							finderArgs, workflowInstanceLink);
-					}
-				}
-
-				return workflowInstanceLink;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (result == null) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_C_C_C,
-						finderArgs, new ArrayList<WorkflowInstanceLink>());
-				}
-
-				closeSession(session);
-			}
-		}
 		else {
-			if (result instanceof List<?>) {
-				return null;
+			return list.get(0);
+		}
+	}
+
+	public WorkflowInstanceLink[] findByG_C_C_C_PrevAndNext(
+		long workflowInstanceLinkId, long groupId, long companyId,
+		long classNameId, long classPK, OrderByComparator orderByComparator)
+		throws NoSuchWorkflowInstanceLinkException, SystemException {
+		WorkflowInstanceLink workflowInstanceLink = findByPrimaryKey(workflowInstanceLinkId);
+
+		int count = countByG_C_C_C(groupId, companyId, classNameId, classPK);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(6 +
+						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
-				return (WorkflowInstanceLink)result;
+				query = new StringBundler(6);
 			}
+
+			query.append(_SQL_SELECT_WORKFLOWINSTANCELINK_WHERE);
+
+			query.append(_FINDER_COLUMN_G_C_C_C_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_G_C_C_C_COMPANYID_2);
+
+			query.append(_FINDER_COLUMN_G_C_C_C_CLASSNAMEID_2);
+
+			query.append(_FINDER_COLUMN_G_C_C_C_CLASSPK_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			else {
+				query.append(WorkflowInstanceLinkModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
+			Query q = session.createQuery(sql);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			qPos.add(companyId);
+
+			qPos.add(classNameId);
+
+			qPos.add(classPK);
+
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, workflowInstanceLink);
+
+			WorkflowInstanceLink[] array = new WorkflowInstanceLinkImpl[3];
+
+			array[0] = (WorkflowInstanceLink)objArray[0];
+			array[1] = (WorkflowInstanceLink)objArray[1];
+			array[2] = (WorkflowInstanceLink)objArray[2];
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
 		}
 	}
 
@@ -544,7 +672,9 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 					sql = query.toString();
 				}
 
-				sql = _SQL_SELECT_WORKFLOWINSTANCELINK;
+				else {
+					sql = _SQL_SELECT_WORKFLOWINSTANCELINK.concat(WorkflowInstanceLinkModelImpl.ORDER_BY_JPQL);
+				}
 
 				Query q = session.createQuery(sql);
 
@@ -579,12 +709,11 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 	}
 
 	public void removeByG_C_C_C(long groupId, long companyId, long classNameId,
-		long classPK)
-		throws NoSuchWorkflowInstanceLinkException, SystemException {
-		WorkflowInstanceLink workflowInstanceLink = findByG_C_C_C(groupId,
-				companyId, classNameId, classPK);
-
-		remove(workflowInstanceLink);
+		long classPK) throws SystemException {
+		for (WorkflowInstanceLink workflowInstanceLink : findByG_C_C_C(
+				groupId, companyId, classNameId, classPK)) {
+			remove(workflowInstanceLink);
+		}
 	}
 
 	public void removeAll() throws SystemException {

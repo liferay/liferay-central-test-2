@@ -31,6 +31,7 @@ import java.io.Serializable;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -90,6 +91,23 @@ public class WorkflowInstanceLinkLocalServiceImpl
 		}
 	}
 
+	public void deleteWorkflowInstanceLinks(
+			long companyId, long groupId, String className, long classPK)
+		throws PortalException, SystemException {
+
+		List<WorkflowInstanceLink> workflowInstanceLinks =
+			getWorkflowInstanceLinks(companyId, groupId, className, classPK);
+
+		for (WorkflowInstanceLink workflowInstanceLink :
+			 workflowInstanceLinks) {
+
+			deleteWorkflowInstanceLink(workflowInstanceLink);
+
+			WorkflowInstanceManagerUtil.deleteWorkflowInstance(
+				companyId, workflowInstanceLink.getWorkflowInstanceId());
+		}
+	}
+
 	public String getState(
 			long companyId, long groupId, String className, long classPK)
 		throws PortalException, SystemException {
@@ -106,6 +124,21 @@ public class WorkflowInstanceLinkLocalServiceImpl
 
 	public WorkflowInstanceLink getWorkflowInstanceLink(
 			long companyId, long groupId, String className, long classPK)
+		throws PortalException, SystemException {
+
+		List<WorkflowInstanceLink> workflowInstaneLinks =
+			getWorkflowInstanceLinks(companyId, groupId, className, classPK);
+
+		if (workflowInstaneLinks.isEmpty()) {
+			throw new NoSuchWorkflowInstanceLinkException();
+		}
+		else {
+			return workflowInstaneLinks.get(0);
+		}
+	}
+
+	public List<WorkflowInstanceLink> getWorkflowInstanceLinks(
+		long companyId, long groupId, String className, long classPK)
 		throws PortalException, SystemException {
 
 		long classNameId = PortalUtil.getClassNameId(className);

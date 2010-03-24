@@ -76,11 +76,11 @@ int status = StatusConstants.APPROVED;
 
 if (fileEntry == null) {
 	if (WorkflowDefinitionLinkLocalServiceUtil.hasWorkflowDefinitionLink(company.getCompanyId(), scopeGroupId, DLFileEntry.class.getName())) {
-		status = StatusConstants.PENDING;
+		status = StatusConstants.DRAFT;
 	}
 }
 else if (WorkflowInstanceLinkLocalServiceUtil.hasWorkflowInstanceLink(company.getCompanyId(), fileEntry.getGroupId(), DLFileEntry.class.getName(), fileEntry.getFileEntryId())) {
-	status = StatusConstants.PENDING;
+	status = StatusConstants.DRAFT;
 }
 
 PortletURL portletURL = renderResponse.createRenderURL();
@@ -140,7 +140,7 @@ portletURL.setParameter("name", name);
 	<portlet:param name="struts_action" value="/document_library/edit_file_entry" />
 </portlet:actionURL>
 
-<aui:form action="<%= editFileEntryURL %>" enctype="multipart/form-data" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveFileEntry(false);" %>'>
+<aui:form action="<%= editFileEntryURL %>" enctype="multipart/form-data" method="post" name="fm" onsubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveFileEntry(false);" %>'>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 	<aui:input name="referringPortletResource" type="hidden" value="<%= referringPortletResource %>" />

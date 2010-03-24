@@ -117,28 +117,61 @@ public class WorkflowInstanceLinkUtil {
 		return getPersistence().fetchByPrimaryKey(workflowInstanceLinkId);
 	}
 
-	public static com.liferay.portal.model.WorkflowInstanceLink findByG_C_C_C(
+	public static java.util.List<com.liferay.portal.model.WorkflowInstanceLink> findByG_C_C_C(
 		long groupId, long companyId, long classNameId, long classPK)
-		throws com.liferay.portal.NoSuchWorkflowInstanceLinkException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
 				   .findByG_C_C_C(groupId, companyId, classNameId, classPK);
 	}
 
-	public static com.liferay.portal.model.WorkflowInstanceLink fetchByG_C_C_C(
-		long groupId, long companyId, long classNameId, long classPK)
+	public static java.util.List<com.liferay.portal.model.WorkflowInstanceLink> findByG_C_C_C(
+		long groupId, long companyId, long classNameId, long classPK,
+		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .fetchByG_C_C_C(groupId, companyId, classNameId, classPK);
+				   .findByG_C_C_C(groupId, companyId, classNameId, classPK,
+			start, end);
 	}
 
-	public static com.liferay.portal.model.WorkflowInstanceLink fetchByG_C_C_C(
+	public static java.util.List<com.liferay.portal.model.WorkflowInstanceLink> findByG_C_C_C(
 		long groupId, long companyId, long classNameId, long classPK,
-		boolean retrieveFromCache)
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .fetchByG_C_C_C(groupId, companyId, classNameId, classPK,
-			retrieveFromCache);
+				   .findByG_C_C_C(groupId, companyId, classNameId, classPK,
+			start, end, orderByComparator);
+	}
+
+	public static com.liferay.portal.model.WorkflowInstanceLink findByG_C_C_C_First(
+		long groupId, long companyId, long classNameId, long classPK,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.NoSuchWorkflowInstanceLinkException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByG_C_C_C_First(groupId, companyId, classNameId,
+			classPK, orderByComparator);
+	}
+
+	public static com.liferay.portal.model.WorkflowInstanceLink findByG_C_C_C_Last(
+		long groupId, long companyId, long classNameId, long classPK,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.NoSuchWorkflowInstanceLinkException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByG_C_C_C_Last(groupId, companyId, classNameId,
+			classPK, orderByComparator);
+	}
+
+	public static com.liferay.portal.model.WorkflowInstanceLink[] findByG_C_C_C_PrevAndNext(
+		long workflowInstanceLinkId, long groupId, long companyId,
+		long classNameId, long classPK,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.NoSuchWorkflowInstanceLinkException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByG_C_C_C_PrevAndNext(workflowInstanceLinkId, groupId,
+			companyId, classNameId, classPK, orderByComparator);
 	}
 
 	public static java.util.List<com.liferay.portal.model.WorkflowInstanceLink> findAll()
@@ -161,8 +194,7 @@ public class WorkflowInstanceLinkUtil {
 
 	public static void removeByG_C_C_C(long groupId, long companyId,
 		long classNameId, long classPK)
-		throws com.liferay.portal.NoSuchWorkflowInstanceLinkException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence()
 			.removeByG_C_C_C(groupId, companyId, classNameId, classPK);
 	}

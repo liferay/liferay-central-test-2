@@ -32,10 +32,15 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.workflow.ContextConstants;
 import com.liferay.portal.kernel.workflow.StatusConstants;
+import com.liferay.portal.kernel.workflow.WorkflowHandlerRegistryUtil;
+import com.liferay.portal.kernel.workflow.WorkflowInstance;
+import com.liferay.portal.kernel.workflow.WorkflowInstanceManagerUtil;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
+import com.liferay.portal.model.WorkflowInstanceLink;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
@@ -63,9 +68,12 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.io.Serializable;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <a href="DLFileEntryLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -232,6 +240,19 @@ public class DLFileEntryLocalServiceImpl
 
 		fileEntry = updateWorkflowStatus(userId, fileEntryId, serviceContext);
 
+		// Workflow
+
+		if (serviceContext.isStartWorkflow()) {
+			try {
+				WorkflowHandlerRegistryUtil.startWorkflowInstance(
+					user.getCompanyId(), groupId, userId,
+					DLFileEntry.class.getName(), fileEntryId, fileEntry);
+			}
+			catch (Exception e) {
+				throw new SystemException(e);
+			}
+		}
+
 		return fileEntry;
 	}
 
@@ -335,7 +356,7 @@ public class DLFileEntryLocalServiceImpl
 
 		// Workflow
 
-		workflowInstanceLinkLocalService.deleteWorkflowInstanceLink(
+		workflowInstanceLinkLocalService.deleteWorkflowInstanceLinks(
 			fileEntry.getCompanyId(), fileEntry.getGroupId(),
 			DLFileEntry.class.getName(), fileEntry.getFileEntryId());
 
@@ -798,6 +819,10 @@ public class DLFileEntryLocalServiceImpl
 
 			dlFileEntryPersistence.remove(fileEntry);
 
+			if (serviceContext.isStartWorkflow()) {
+				updateWorkflowInstance(fileEntry, newFileEntry);
+			}
+
 			List<DLFileVersion> fileVersions =
 				dlFileVersionPersistence.findByG_F_N(
 					groupId, folderId, name);
@@ -921,6 +946,8 @@ public class DLFileEntryLocalServiceImpl
 		String version = getNextVersion(
 			fileEntry, majorVersion, serviceContext.getStatus());
 
+		boolean newFileVersion = true;
+
 		try {
 			DLFileVersion fileVersion =
 				dlFileVersionLocalService.getLatestFileVersion(
@@ -935,6 +962,8 @@ public class DLFileEntryLocalServiceImpl
 					user, fileVersion, serviceContext.getModifiedDate(now),
 					version, versionDescription, size,
 					serviceContext.getStatus());
+
+				newFileVersion = false;
 			}
 			else if (is != null) {
 				addFileVersion(
@@ -1026,6 +1055,20 @@ public class DLFileEntryLocalServiceImpl
 
 		fileEntry = updateWorkflowStatus(
 			userId, fileEntry.getFileEntryId(), serviceContext);
+
+		// Workflow
+
+		if (newFileVersion && serviceContext.isStartWorkflow()) {
+			try {
+				WorkflowHandlerRegistryUtil.startWorkflowInstance(
+					user.getCompanyId(), groupId, userId,
+					DLFileEntry.class.getName(), fileEntry.getFileEntryId(),
+					fileEntry);
+			}
+			catch (Exception e) {
+				throw new SystemException(e);
+			}
+		}
 
 		return fileEntry;
 	}
@@ -1229,6 +1272,43 @@ public class DLFileEntryLocalServiceImpl
 		fileVersion.setStatusDate(modifiedDate);
 
 		dlFileVersionPersistence.update(fileVersion, false);
+	}
+
+	protected void updateWorkflowInstance(
+			DLFileEntry fileEntry, DLFileEntry newFileEntry)
+		throws PortalException, SystemException {
+
+		List<WorkflowInstanceLink> workflowInstanceLinks =
+			workflowInstanceLinkLocalService.getWorkflowInstanceLinks(
+				fileEntry.getCompanyId(), fileEntry.getGroupId(),
+				DLFileEntry.class.getName(),
+				fileEntry.getFileEntryId());
+
+		for (WorkflowInstanceLink workflowInstanceLink :
+			workflowInstanceLinks) {
+
+			WorkflowInstance workflowInstance =
+				WorkflowInstanceManagerUtil.getWorkflowInstance(
+					workflowInstanceLink.getCompanyId(),
+					workflowInstanceLink.getWorkflowInstanceId());
+
+			Map<String, Serializable> newContext =
+				new HashMap<String, Serializable>();
+
+			newContext.putAll(workflowInstance.getContext());
+
+			newContext.put(
+				ContextConstants.ENTRY_CLASS_PK, newFileEntry.getFileEntryId());
+
+			WorkflowInstanceManagerUtil.updateContext(
+				workflowInstanceLink.getCompanyId(),
+				workflowInstanceLink.getWorkflowInstanceId(), newContext);
+
+			workflowInstanceLink.setClassPK(newFileEntry.getFileEntryId());
+
+			workflowInstanceLinkPersistence.update(
+				workflowInstanceLink, false);
+		}
 	}
 
 	protected void validate(

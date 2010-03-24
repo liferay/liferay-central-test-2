@@ -16,6 +16,7 @@ package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -73,6 +74,8 @@ public class WorkflowInstanceLinkModelImpl extends BaseModelImpl<WorkflowInstanc
 		};
 	public static final String TABLE_SQL_CREATE = "create table WorkflowInstanceLink (workflowInstanceLinkId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,workflowInstanceId LONG)";
 	public static final String TABLE_SQL_DROP = "drop table WorkflowInstanceLink";
+	public static final String ORDER_BY_JPQL = " ORDER BY workflowInstanceLink.createDate DESC";
+	public static final String ORDER_BY_SQL = " ORDER BY WorkflowInstanceLink.createDate DESC";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
@@ -144,16 +147,6 @@ public class WorkflowInstanceLinkModelImpl extends BaseModelImpl<WorkflowInstanc
 
 	public void setGroupId(long groupId) {
 		_groupId = groupId;
-
-		if (!_setOriginalGroupId) {
-			_setOriginalGroupId = true;
-
-			_originalGroupId = groupId;
-		}
-	}
-
-	public long getOriginalGroupId() {
-		return _originalGroupId;
 	}
 
 	public long getCompanyId() {
@@ -162,16 +155,6 @@ public class WorkflowInstanceLinkModelImpl extends BaseModelImpl<WorkflowInstanc
 
 	public void setCompanyId(long companyId) {
 		_companyId = companyId;
-
-		if (!_setOriginalCompanyId) {
-			_setOriginalCompanyId = true;
-
-			_originalCompanyId = companyId;
-		}
-	}
-
-	public long getOriginalCompanyId() {
-		return _originalCompanyId;
 	}
 
 	public long getUserId() {
@@ -233,16 +216,6 @@ public class WorkflowInstanceLinkModelImpl extends BaseModelImpl<WorkflowInstanc
 
 	public void setClassNameId(long classNameId) {
 		_classNameId = classNameId;
-
-		if (!_setOriginalClassNameId) {
-			_setOriginalClassNameId = true;
-
-			_originalClassNameId = classNameId;
-		}
-	}
-
-	public long getOriginalClassNameId() {
-		return _originalClassNameId;
 	}
 
 	public long getClassPK() {
@@ -251,16 +224,6 @@ public class WorkflowInstanceLinkModelImpl extends BaseModelImpl<WorkflowInstanc
 
 	public void setClassPK(long classPK) {
 		_classPK = classPK;
-
-		if (!_setOriginalClassPK) {
-			_setOriginalClassPK = true;
-
-			_originalClassPK = classPK;
-		}
-	}
-
-	public long getOriginalClassPK() {
-		return _originalClassPK;
 	}
 
 	public long getWorkflowInstanceId() {
@@ -331,17 +294,18 @@ public class WorkflowInstanceLinkModelImpl extends BaseModelImpl<WorkflowInstanc
 	}
 
 	public int compareTo(WorkflowInstanceLink workflowInstanceLink) {
-		long pk = workflowInstanceLink.getPrimaryKey();
+		int value = 0;
 
-		if (getPrimaryKey() < pk) {
-			return -1;
+		value = DateUtil.compareTo(getCreateDate(),
+				workflowInstanceLink.getCreateDate());
+
+		value = value * -1;
+
+		if (value != 0) {
+			return value;
 		}
-		else if (getPrimaryKey() > pk) {
-			return 1;
-		}
-		else {
-			return 0;
-		}
+
+		return 0;
 	}
 
 	public boolean equals(Object obj) {
@@ -455,22 +419,14 @@ public class WorkflowInstanceLinkModelImpl extends BaseModelImpl<WorkflowInstanc
 
 	private long _workflowInstanceLinkId;
 	private long _groupId;
-	private long _originalGroupId;
-	private boolean _setOriginalGroupId;
 	private long _companyId;
-	private long _originalCompanyId;
-	private boolean _setOriginalCompanyId;
 	private long _userId;
 	private String _userUuid;
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
 	private long _classNameId;
-	private long _originalClassNameId;
-	private boolean _setOriginalClassNameId;
 	private long _classPK;
-	private long _originalClassPK;
-	private boolean _setOriginalClassPK;
 	private long _workflowInstanceId;
 	private transient ExpandoBridge _expandoBridge;
 }

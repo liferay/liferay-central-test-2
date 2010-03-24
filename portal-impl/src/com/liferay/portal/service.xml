@@ -1963,9 +1963,15 @@
 		<column name="classPK" type="long" />
 		<column name="workflowInstanceId" type="long" />
 
+		<!-- Order -->
+
+		<order by="desc">
+			<order-column name="createDate" />
+		</order>
+
 		<!-- Finder methods -->
 
-		<finder name="G_C_C_C" return-type="WorkflowInstanceLink">
+		<finder name="G_C_C_C" return-type="Collection">
 			<finder-column name="groupId" />
 			<finder-column name="companyId" />
 			<finder-column name="classNameId" />
