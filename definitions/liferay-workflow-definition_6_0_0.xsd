@@ -209,7 +209,8 @@
 				<xs:extension base="xs:string">
 					<xs:attribute name="role-id" type="xs:long" use="optional" default="0" />
 					<xs:attribute name="name" type="xs:string" use="optional" />
-					<xs:attribute name="default" type="xs:string" use="optional" default="true" />
+					<xs:attribute name="default" type="xs:boolean" use="optional" default="true" />
+					<xs:attribute name="auto-create" type="xs:boolean" use="optional" default="true" />
 				</xs:extension>
 			</xs:simpleContent>
 		</xs:complexType>
