@@ -12,12 +12,10 @@
  * details.
  */
 
-package com.liferay.portal.servlet;
+package com.liferay.portal.virtuallisting;
 
 import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
-import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.FastDateFormatFactoryUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
@@ -74,12 +72,36 @@ import javax.servlet.http.HttpServletResponse;
  * <a href="VirtualListingServlet.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alexander Chow
+ * @author Brian Wing Shun Chan
  */
 public class VirtualListingServlet extends HttpServlet {
 
+	protected Tuple buildEntry(
+		String path, String name, Date modifiedDate, String size,
+		String description) {
+
+		path = getPath(path, name);
+
+		String date = StringPool.DASH;
+
+		if (modifiedDate != null) {
+			date = _dateFormat.format(modifiedDate);
+		}
+
+		if (size == null) {
+			size = StringPool.DASH;
+		}
+
+		if (description == null) {
+			description = StringPool.BLANK;
+		}
+
+		return new Tuple(path, name, date, size, description);
+	}
+
 	protected void doGet(
 			HttpServletRequest request, HttpServletResponse response)
-		throws ServletException, IOException {
+		throws IOException, ServletException {
 
 		try {
 			long companyId = PortalUtil.getCompanyId(request);
@@ -94,18 +116,16 @@ public class VirtualListingServlet extends HttpServlet {
 
 			long userId = user.getUserId();
 
-			PermissionChecker permissionChecker = null;
-
 			PrincipalThreadLocal.setName(userId);
 
-			permissionChecker = PermissionCheckerFactoryUtil.create(user, true);
+			PermissionChecker permissionChecker =
+				PermissionCheckerFactoryUtil.create(user, true);
 
 			PermissionThreadLocal.setPermissionChecker(permissionChecker);
 
 			String path = HttpUtil.fixPath(request.getPathInfo());
 			String fullPath =
 				request.getServletPath() + StringPool.SLASH + path;
-
 			String[] pathArray = StringUtil.split(path, StringPool.SLASH);
 
 			if (pathArray.length == 0) {
@@ -130,6 +150,48 @@ public class VirtualListingServlet extends HttpServlet {
 		}
 
 		return pathEncoded + StringPool.SLASH;
+	}
+
+	protected long getGroupId(long companyId, String name) throws Exception {
+		try {
+			Group group = GroupLocalServiceUtil.getGroup(companyId, name);
+
+			return group.getGroupId();
+		}
+		catch (NoSuchGroupException nsge) {
+		}
+
+		try {
+			Group group = GroupLocalServiceUtil.getFriendlyURLGroup(
+				companyId, StringPool.SLASH + name);
+
+			return group.getGroupId();
+		}
+		catch (NoSuchGroupException nsge) {
+		}
+
+		User user = UserLocalServiceUtil.getUserByScreenName(companyId, name);
+
+		Group group = user.getGroup();
+
+		return group.getGroupId();
+	}
+
+	protected String getPath(String path, String name) {
+		if (name.endsWith(StringPool.SLASH)) {
+			name = HttpUtil.fixPath(name, false, true);
+
+			return getPath(path, name) + StringPool.SLASH;
+		}
+
+		if (path.endsWith(StringPool.SLASH)) {
+			path = path + HttpUtil.encodeURL(name, true);
+		}
+		else {
+			path = path + StringPool.SLASH + HttpUtil.encodeURL(name, true);
+		}
+
+		return path;
 	}
 
 	protected void sendDocumentLibraryListing(
@@ -165,7 +227,7 @@ public class VirtualListingServlet extends HttpServlet {
 
 		try {
 			sendFile(
-				response, companyId, userId, groupId, folderId, "index.htm");
+				response, companyId, userId, groupId, folderId, "index.html");
 
 			return;
 		}
@@ -176,7 +238,7 @@ public class VirtualListingServlet extends HttpServlet {
 				try {
 					sendFile(
 						response, companyId, userId, groupId, folderId,
-						"index.html");
+						"index.htm");
 
 					return;
 				}
@@ -194,17 +256,19 @@ public class VirtualListingServlet extends HttpServlet {
 
 		entries.add(buildEntry(fullPath, "../", null, null, null));
 
-		List<DLFolder> folders =
-			DLFolderServiceUtil.getFolders(groupId, folderId);
+		List<DLFolder> folders = DLFolderServiceUtil.getFolders(
+			groupId, folderId);
 
 		for (DLFolder folder : folders) {
-			entries.add(buildEntry(
-				fullPath, folder.getName() + "/", folder.getModifiedDate(),
-				null, folder.getDescription()));
+			Tuple entry = buildEntry(
+				fullPath, folder.getName() + StringPool.SLASH,
+				folder.getModifiedDate(), null, folder.getDescription());
+
+			entries.add(entry);
 		}
 
-		List<DLFileEntry> fileEntries =
-			DLFileEntryServiceUtil.getFileEntries(groupId, folderId);
+		List<DLFileEntry> fileEntries = DLFileEntryServiceUtil.getFileEntries(
+			groupId, folderId);
 
 		for (DLFileEntry fileEntry : fileEntries) {
 			String size = String.valueOf(fileEntry.getSize());
@@ -214,34 +278,36 @@ public class VirtualListingServlet extends HttpServlet {
 					fileEntry.getSize(), PortalUtil.getLocale(request)) + "k";
 			}
 
-			entries.add(buildEntry(
+			Tuple entry = buildEntry(
 				fullPath, fileEntry.getTitle(), fileEntry.getModifiedDate(),
-				size, fileEntry.getDescription()));
+				size, fileEntry.getDescription());
+
+			entries.add(entry);
 		}
 
 		String directoryPath = HttpUtil.encodePath(
 			StringPool.SLASH + StringUtil.merge(pathArray, StringPool.SLASH));
 
-		sendHtml(response, directoryPath, entries);
+		sendHTML(response, directoryPath, entries);
 	}
 
 	protected void sendFile(
 			HttpServletResponse response, long companyId, long userId,
 			long groupId, long folderId, String title)
-		throws PortalException, SystemException, IOException {
+		throws Exception {
 
 		DLFileEntry fileEntry = DLFileEntryServiceUtil.getFileEntryByTitle(
 			groupId, folderId, title);
 
-		InputStream is = DLFileEntryLocalServiceUtil.getFileAsStream(
-			companyId, userId, groupId, folderId, fileEntry.getName());
-
 		String contentType = MimeTypesUtil.getContentType(fileEntry.getTitle());
+
+		InputStream inputStream = DLFileEntryLocalServiceUtil.getFileAsStream(
+			companyId, userId, groupId, folderId, fileEntry.getName());
 
 		response.setContentType(contentType);
 		response.setStatus(HttpServletResponse.SC_OK);
 
-		ServletResponseUtil.write(response, is);
+		ServletResponseUtil.write(response, inputStream);
 	}
 
 	protected void sendGroupListing(
@@ -249,13 +315,13 @@ public class VirtualListingServlet extends HttpServlet {
 			String fullPath)
 		throws Exception {
 
-		LinkedHashMap<String, Object> groupParams =
+		LinkedHashMap<String, Object> params =
 			new LinkedHashMap<String, Object>();
 
-		groupParams.put("usersGroups", new Long(userId));
+		params.put("usersGroups", new Long(userId));
 
 		List<Group> groups = GroupLocalServiceUtil.search(
-			companyId, null, null, groupParams, QueryUtil.ALL_POS,
+			companyId, null, null, params, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS);
 
 		try {
@@ -273,20 +339,22 @@ public class VirtualListingServlet extends HttpServlet {
 		for (Group group : groups) {
 			String name = HttpUtil.fixPath(group.getFriendlyURL());
 
-			entries.add(buildEntry(
-				fullPath, name + "/", null, null, group.getDescription()));
+			Tuple entry = buildEntry(
+				fullPath, name + StringPool.SLASH, null, null,
+				group.getDescription());
+
+			entries.add(entry);
 		}
 
-		sendHtml(response, StringPool.SLASH, entries);
+		sendHTML(response, StringPool.SLASH, entries);
 	}
 
-	protected void sendHtml(
+	protected void sendHTML(
 			HttpServletResponse response, String directoryPath,
 			List<Tuple> entries)
 		throws Exception {
 
-		String template = ContentUtil.get(
-			"com/liferay/portal/dependencies/virtual_listing.vm");
+		String template = ContentUtil.get(_TEMPLATE_PATH);
 
 		Map<String, Object> variables = new HashMap<String, Object>();
 
@@ -302,73 +370,12 @@ public class VirtualListingServlet extends HttpServlet {
 		ServletResponseUtil.write(response, html);
 	}
 
-	protected Tuple buildEntry(
-		String path, String name, Date modifiedDate, String size,
-		String description) {
+	private static final String _DATE_FORMAT_PATTERN = "d MMM yyyy HH:mm z";
 
-		path = getPath(path, name);
-
-		String date = StringPool.DASH;
-
-		if (modifiedDate != null) {
-			date = _dateFormat.format(modifiedDate);
-		}
-
-		if (size == null) {
-			size = StringPool.DASH;
-		}
-
-		if (description == null) {
-			description = StringPool.BLANK;
-		}
-
-		return new Tuple(path, name, date, size, description);
-	}
-
-	protected long getGroupId(long companyId, String name) throws Exception {
-		try {
-			Group group = GroupLocalServiceUtil.getGroup(companyId, name);
-
-			return group.getGroupId();
-		}
-		catch (NoSuchGroupException nsge) {
-		}
-
-		try {
-			Group group = GroupLocalServiceUtil.getFriendlyURLGroup(
-				companyId, StringPool.SLASH + name);
-
-			return group.getGroupId();
-		}
-		catch (NoSuchGroupException nsge) {
-		}
-
-		User user = UserLocalServiceUtil.getUserByScreenName(
-			companyId, name);
-
-		Group group = user.getGroup();
-
-		return group.getGroupId();
-	}
-
-	protected String getPath(String path, String name) {
-		if (name.endsWith(StringPool.SLASH)) {
-			name = HttpUtil.fixPath(name, false, true);
-
-			return getPath(path, name) + StringPool.SLASH;
-		}
-
-		if (path.endsWith(StringPool.SLASH)) {
-			path = path + HttpUtil.encodeURL(name, true);
-		}
-		else {
-			path = path + StringPool.SLASH + HttpUtil.encodeURL(name, true);
-		}
-
-		return path;
-	}
+	private static final String _TEMPLATE_PATH =
+		"com/liferay/portal/virtuallisting/dependencies/virtual_listing.vm";
 
 	private static Format _dateFormat =
-		FastDateFormatFactoryUtil.getSimpleDateFormat("d MMM yyyy HH:mm z");
+		FastDateFormatFactoryUtil.getSimpleDateFormat(_DATE_FORMAT_PATTERN);
 
 }

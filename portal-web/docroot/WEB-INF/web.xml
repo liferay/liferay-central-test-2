@@ -895,7 +895,7 @@
 	</servlet>
 	<servlet>
 		<servlet-name>Virtual Listing Servlet</servlet-name>
-		<servlet-class>com.liferay.portal.servlet.VirtualListingServlet</servlet-class>
+		<servlet-class>com.liferay.portal.virtuallisting.VirtualListingServlet</servlet-class>
 		<load-on-startup>2</load-on-startup>
 	</servlet>
 	<servlet>
