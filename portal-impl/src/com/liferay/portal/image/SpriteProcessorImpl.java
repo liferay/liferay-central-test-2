@@ -134,10 +134,9 @@ public class SpriteProcessorImpl implements SpriteProcessor {
 				continue;
 			}
 
-			FileInputStream fis = new FileInputStream(file);
-
 			try {
-				RenderedImage renderedImage = ImageIO.read(fis);
+				RenderedImage renderedImage = ImageProcessorUtil.read(file)
+					.getRenderedImage();
 
 				int height = renderedImage.getHeight();
 				int width = renderedImage.getWidth();
@@ -172,9 +171,6 @@ public class SpriteProcessorImpl implements SpriteProcessor {
 				if (_log.isDebugEnabled()) {
 					_log.debug(e, e);
 				}
-			}
-			finally {
-				fis.close();
 			}
 		}
 
