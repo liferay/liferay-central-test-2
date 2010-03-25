@@ -65,14 +65,14 @@ Liferay.Service = {
 			}
 		}
 		else {
-			config.on.success = function(id, obj) {
+			config.on.success = function(event, id, obj) {
 				xHR = obj;
 			};
 
 			config.sync = true;
 		}
 
-		AUI().io(serviceUrl, config);
+		AUI().io.request(serviceUrl, config);
 
 		if (xHR) {
 			return eval('(' + xHR.responseText + ')');
