@@ -262,7 +262,7 @@ if (parentOrganization != null) {
 	}
 
 	function <portlet:namespace />openEditOrganizationLogoWindow(editOrganizationLogoURL) {
-		var editOrganizationLogoWindow = window.open(editOrganizationLogoURL, '<liferay-ui:message key="change" />', 'directories=no,height=400,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=500');
+		var editOrganizationLogoWindow = window.open(editOrganizationLogoURL, 'change', 'directories=no,height=400,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=500');
 
 		editOrganizationLogoWindow.focus();
 	}
