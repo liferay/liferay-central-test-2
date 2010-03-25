@@ -90,8 +90,8 @@ if (yearValue > 0) {
 	</c:when>
 </c:choose>
 
-<select <%= disabled ? "disabled=\"disabled\"" : "" %> id="<%= dayParam %>" name="<%= dayParam %>"></select>
-<select <%= disabled ? "disabled=\"disabled\"" : "" %> id="<%= yearParam %>" name="<%= yearParam %>"></select>
+<select class="aui-helper-hidden" <%= disabled ? "disabled=\"disabled\"" : "" %> id="<%= dayParam %>" name="<%= dayParam %>"></select>
+<select class="aui-helper-hidden" <%= disabled ? "disabled=\"disabled\"" : "" %> id="<%= yearParam %>" name="<%= yearParam %>"></select>
 
 <input class="<%= disabled ? "disabled" : "" %>" id="<%= imageInputId %>Input" type="hidden" />
 
@@ -121,6 +121,8 @@ if (yearValue > 0) {
 				},
 				render: function() {
 					A.get('#<%= monthParam %>').removeClass('aui-helper-hidden');
+					A.get('#<%= dayParam %>').removeClass('aui-helper-hidden');
+					A.get('#<%= yearParam %>').removeClass('aui-helper-hidden');
 				}
 			},
 			populateMonth: false,
