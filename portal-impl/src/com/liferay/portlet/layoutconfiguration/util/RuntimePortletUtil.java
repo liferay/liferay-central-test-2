@@ -37,6 +37,7 @@ import com.liferay.portal.velocity.VelocityVariables;
 import com.liferay.portlet.layoutconfiguration.util.velocity.TemplateProcessor;
 import com.liferay.portlet.layoutconfiguration.util.xml.RuntimeLogic;
 
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -248,16 +249,14 @@ public class RuntimePortletUtil {
 		}
 
 		Map<Portlet, Object[]> portletsMap = processor.getPortletsMap();
+		Map<String, String> replaceMap =
+			new HashMap<String, String>(portletsMap.size());
 
-		Iterator<Map.Entry<Portlet, Object[]>> portletsMapItr =
-			portletsMap.entrySet().iterator();
+		for(Map.Entry<Portlet, Object[]> portletEntry :
+			portletsMap.entrySet()) {
 
-		while (portletsMapItr.hasNext()) {
-			Map.Entry<Portlet, Object[]> entry = portletsMapItr.next();
-
-			Portlet portlet = entry.getKey();
-			Object[] value = entry.getValue();
-
+			Portlet portlet = portletEntry.getKey();
+			Object[] value = portletEntry.getValue();
 			String queryString = (String)value[0];
 			String columnId = (String)value[1];
 			Integer columnPos = (Integer)value[2];
@@ -266,13 +265,11 @@ public class RuntimePortletUtil {
 			String content = processPortlet(
 				servletContext, request, response, portlet, queryString,
 				columnId, columnPos, columnCount, null);
-
-			output = StringUtil.replace(
-				output, "[$TEMPLATE_PORTLET_" + portlet.getPortletId() + "$]",
-				content);
+			replaceMap.put(portlet.getPortletId(), content);
 		}
 
-		return output;
+		return StringUtil.replace(
+			output, "[$TEMPLATE_PORTLET_", "$]", replaceMap);
 	}
 
 	public static String processXML(

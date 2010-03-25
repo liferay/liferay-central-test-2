@@ -22,7 +22,6 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Layout;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 /**
@@ -62,25 +61,9 @@ public class LayoutSettings {
 	}
 
 	public String getURL(Map<String, String> variables) {
-		String url = _url;
-
-		Iterator<Map.Entry<String, String>> itr =
-			variables.entrySet().iterator();
-
-		while (itr.hasNext()) {
-			Map.Entry<String, String> entry = itr.next();
-
-			String key = entry.getKey();
-			String value = entry.getValue();
-
-			url = StringUtil.replace(
-				url,
-				StringPool.DOLLAR_AND_OPEN_CURLY_BRACE.concat(key).concat(
-					StringPool.CLOSE_CURLY_BRACE),
-				value);
-		}
-
-		return url;
+		return StringUtil.replace(
+			_url, StringPool.DOLLAR_AND_OPEN_CURLY_BRACE,
+			StringPool.CLOSE_CURLY_BRACE, variables);
 	}
 
 	public String getViewPage() {
