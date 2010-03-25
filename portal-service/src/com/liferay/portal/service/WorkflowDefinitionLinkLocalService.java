@@ -116,6 +116,12 @@ public interface WorkflowDefinitionLinkLocalService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portal.model.WorkflowDefinitionLink getCompanyDefaultWorkflowDefinitionLink(
+		long companyId, java.lang.String className)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.WorkflowDefinitionLink getWorkflowDefinitionLink(
 		long companyId, long groupId, java.lang.String className)
 		throws com.liferay.portal.kernel.exception.PortalException,

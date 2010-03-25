@@ -140,6 +140,14 @@ public class WorkflowDefinitionLinkLocalServiceWrapper
 			groupId, className);
 	}
 
+	public com.liferay.portal.model.WorkflowDefinitionLink getCompanyDefaultWorkflowDefinitionLink(
+		long companyId, java.lang.String className)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _workflowDefinitionLinkLocalService.getCompanyDefaultWorkflowDefinitionLink(companyId,
+			className);
+	}
+
 	public com.liferay.portal.model.WorkflowDefinitionLink getWorkflowDefinitionLink(
 		long companyId, long groupId, java.lang.String className)
 		throws com.liferay.portal.kernel.exception.PortalException,

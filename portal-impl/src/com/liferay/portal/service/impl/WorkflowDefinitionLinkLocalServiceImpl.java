@@ -82,6 +82,18 @@ public class WorkflowDefinitionLinkLocalServiceImpl
 		}
 	}
 
+	public WorkflowDefinitionLink getCompanyDefaultWorkflowDefinitionLink(
+			long companyId, String className)
+		throws PortalException, SystemException {
+
+		long classNameId = PortalUtil.getClassNameId(className);
+
+		Group group = groupLocalService.getCompanyGroup(companyId);
+
+		return workflowDefinitionLinkPersistence.findByG_C_C(
+			group.getGroupId(), companyId, classNameId);
+	}
+
 	public WorkflowDefinitionLink getWorkflowDefinitionLink(
 			long companyId, long groupId, String className)
 		throws PortalException, SystemException {
