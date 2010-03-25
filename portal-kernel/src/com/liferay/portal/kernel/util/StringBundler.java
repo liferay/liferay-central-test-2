@@ -88,6 +88,10 @@ public class StringBundler {
 			s = StringPool.NULL;
 		}
 
+		if (s.length() == 0) {
+			return this;
+		}
+
 		if (_arrayIndex >= _array.length) {
 			expandCapacity(_array.length * 2);
 		}
@@ -98,7 +102,7 @@ public class StringBundler {
 	}
 
 	public StringBundler append(StringBundler sb) {
-		if (sb == null) {
+		if (sb == null || sb._arrayIndex == 0) {
 			return this;
 		}
 
