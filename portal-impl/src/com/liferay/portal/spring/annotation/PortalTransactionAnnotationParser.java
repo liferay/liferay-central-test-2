@@ -21,9 +21,12 @@ import com.liferay.portal.util.PropsValues;
 import java.io.Serializable;
 
 import java.lang.reflect.AnnotatedElement;
+import java.lang.reflect.Method;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 import org.springframework.transaction.annotation.TransactionAnnotationParser;
 import org.springframework.transaction.interceptor.NoRollbackRuleAttribute;
@@ -36,6 +39,7 @@ import org.springframework.transaction.interceptor.TransactionAttribute;
  * </b></a>
  *
  * @author Michael Young
+ * @author Shuyang Zhou
  */
 public class PortalTransactionAnnotationParser
 	implements TransactionAnnotationParser, Serializable {
@@ -43,8 +47,18 @@ public class PortalTransactionAnnotationParser
 	public TransactionAttribute parseTransactionAnnotation(
 		AnnotatedElement annotatedElement) {
 
-		Transactional annotation = annotatedElement.getAnnotation(
-			Transactional.class);
+		Transactional annotation = null;
+
+		Queue<Class<?>> candidateQueue = new LinkedList<Class<?>>();
+		if (annotatedElement instanceof Method) {
+			Method method = (Method)annotatedElement;
+			candidateQueue.offer(method.getDeclaringClass());
+			annotation = _deepSearchMethods(method, candidateQueue);
+		}
+		else {
+			candidateQueue.offer((Class<?>)annotatedElement);
+			annotation = _deepSearchTypes(candidateQueue);
+		}
 
 		if (annotation == null) {
 			return null;
@@ -111,6 +125,80 @@ public class PortalTransactionAnnotationParser
 			rollBackAttributes);
 
 		return ruleBasedTransactionAttribute;
+	}
+
+	private Transactional _deepSearchMethods(
+		Method method, Queue<Class<?>> candidateQueue) {
+		// Check method first
+		Transactional annotation = method.getAnnotation(Transactional.class);
+		if (annotation != null) {
+			return annotation;
+		}
+
+		if (candidateQueue.isEmpty()) {
+			return null;
+		}
+
+		Class<?> clazz = candidateQueue.poll();
+		// Check specific method
+		if (method.getDeclaringClass() != clazz) {
+			try {
+				Method specificMethod = clazz.getDeclaredMethod(
+					method.getName(), method.getParameterTypes());
+				annotation = specificMethod.getAnnotation(Transactional.class);
+				if (annotation != null) {
+					return annotation;
+				}
+			} catch (Exception ex) {
+			}
+		}
+
+		// Check first candidate class
+		annotation = clazz.getAnnotation(Transactional.class);
+		if (annotation == null) {
+			// Keep searching super types
+			_enqueueSuperTypes(clazz, candidateQueue);
+			return _deepSearchMethods(method, candidateQueue);
+		}
+		else {
+			// Find it, stop searching
+			return annotation;
+		}
+	}
+
+	private Transactional _deepSearchTypes(
+		Queue<Class<?>> candidateQueue) {
+
+		if (candidateQueue.isEmpty()) {
+			return null;
+		}
+		// Check first candidate Class
+		Class<?> clazz = candidateQueue.poll();
+		Transactional annotation = clazz.getAnnotation(Transactional.class);
+		if (annotation == null) {
+			// Keep searching super types
+			_enqueueSuperTypes(clazz, candidateQueue);
+			return _deepSearchTypes(candidateQueue);
+		}
+		else {
+			// Find it, stop searching
+			return annotation;
+		}
+	}
+
+	private void _enqueueSuperTypes(
+		Class<?> clazz, Queue<Class<?>> candidateQueue) {
+
+		// Class has higher priority than interfaces
+		Class<?> supperClass = clazz.getSuperclass();
+		if (supperClass != null && supperClass != Object.class) {
+			candidateQueue.offer(supperClass);
+		}
+
+		Class<?>[] interfaces = clazz.getInterfaces();
+		for(Class<?> inter : interfaces) {
+			candidateQueue.offer(inter);
+		}
 	}
 
 }
