@@ -27,7 +27,7 @@ String message = GetterUtil.getString((String)request.getAttribute("liferay-ui:f
 long reportedUserId = GetterUtil.getLong((String)request.getAttribute("liferay-ui:flags:reportedUserId"));
 %>
 
-<div class="taglib-flags">
+<div class="taglib-flags" title="<liferay-ui:message key="<%= message %>" />">
 	<liferay-ui:icon
 		cssClass="<%= randomNamespace %>"
 		image="../ratings/flagged_icon"
