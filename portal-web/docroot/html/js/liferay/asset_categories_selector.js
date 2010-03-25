@@ -74,8 +74,6 @@ AUI().add(
 					var instance = this;
 
 					AssetCategoriesSelector.superclass.bindUI.apply(instance, arguments);
-
-					instance._submitFormListener.detach();
 				},
 
 				syncUI: function() {
@@ -107,6 +105,9 @@ AUI().add(
 				},
 
 				_afterTBLFocusedChange: function() {
+				},
+
+				_bindTagsSelector: function() {
 				},
 
 				_entriesIterator: function(item, index, collection) {

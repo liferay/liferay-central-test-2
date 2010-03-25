@@ -121,8 +121,16 @@ AUI().add(
 
 					AssetTagsSelector.superclass.bindUI.apply(instance, arguments);
 
+					instance._bindTagsSelector();
+
 					instance.entries.after('add', instance._updateHiddenInput, instance);
 					instance.entries.after('remove', instance._updateHiddenInput, instance);
+				},
+
+				_bindTagsSelector: function() {
+					var instance = this;
+
+					instance.entries.on('add', instance._onAddMultipleEntries, instance);
 
 					instance._submitFormListener = A.Do.before(instance._onAddEntryClick, window, 'submitForm', instance);
 				},
@@ -278,6 +286,30 @@ AUI().add(
 					instance.entries.add(instance.inputNode.val(), {});
 
 					instance.inputNode.focus();
+				},
+
+				_onAddMultipleEntries: function(event) {
+					var instance = this;
+
+					var obj = event.item;
+					var matchKey = instance.get('matchKey');
+
+					var text = obj[matchKey] || event.attrName;
+
+					if (text && text.indexOf(',') > -1) {
+						var items = text.split(',');
+
+						A.each(
+							items,
+							function(item, index, collection) {
+								instance.entries.add(item, {});
+							}
+						);
+
+						instance.inputNode.val('');
+
+						event.preventDefault();
+					}
 				},
 
 				_onCheckboxClick: function(event) {
