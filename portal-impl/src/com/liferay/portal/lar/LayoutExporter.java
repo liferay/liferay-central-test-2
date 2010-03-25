@@ -34,7 +34,6 @@ import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.kernel.zip.ZipWriter;
 import com.liferay.portal.kernel.zip.ZipWriterFactoryUtil;
 import com.liferay.portal.model.Group;
-import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
@@ -42,10 +41,7 @@ import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletConstants;
-import com.liferay.portal.model.Resource;
-import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.Theme;
-import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.ImageLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
@@ -91,6 +87,8 @@ import org.apache.commons.lang.time.StopWatch;
  * @author Jorge Ferrer
  * @author Bruno Farache
  * @author Karthik Sudarshan
+ * @author Zsigmond Rab
+ * @author Douglas Wong
  */
 public class LayoutExporter {
 
@@ -185,8 +183,6 @@ public class LayoutExporter {
 			stopWatch.start();
 		}
 
-		LayoutCache layoutCache = new LayoutCache();
-
 		LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
 			groupId, privateLayout);
 
@@ -198,9 +194,6 @@ public class LayoutExporter {
 		PortletDataContext context = new PortletDataContextImpl(
 			companyId, groupId, parameterMap, new HashSet<String>(), startDate,
 			endDate, zipWriter);
-
-		Group guestGroup = GroupLocalServiceUtil.getGroup(
-			companyId, GroupConstants.GUEST);
 
 		// Build compatibility
 
@@ -317,27 +310,9 @@ public class LayoutExporter {
 			// Layout permissions
 
 			if (exportPermissions) {
-				Element permissionsEl = layoutEl.addElement("permissions");
-
-				String resourceName = Layout.class.getName();
-				String resourcePrimKey = String.valueOf(layout.getPlid());
-
-				if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5) {
-					exportLayoutPermissions_5(
-						layoutCache, companyId, groupId, resourceName,
-						resourcePrimKey, permissionsEl);
-				}
-				else if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
-					exportLayoutPermissions_6(
-						layoutCache, companyId, groupId, resourceName,
-						resourcePrimKey, permissionsEl);
-				}
-				else {
-					exportLayoutPermissions_4(
-						layoutCache, companyId, groupId, guestGroup,
-						resourceName, resourcePrimKey, permissionsEl,
-						exportUserPermissions);
-				}
+				_permissionExporter.exportLayoutPermissions(
+					context, companyId, groupId, layout, layoutEl,
+					exportUserPermissions);
 			}
 
 			if (layout.getType().equals(LayoutConstants.TYPE_PORTLET)) {
@@ -436,7 +411,8 @@ public class LayoutExporter {
 			// Layout roles
 
 			if (exportPermissions) {
-				exportLayoutRoles(layoutCache, companyId, groupId, rolesEl);
+				_permissionExporter.exportLayoutRoles(
+					companyId, groupId, rolesEl);
 			}
 		}
 
@@ -465,7 +441,7 @@ public class LayoutExporter {
 				context.getCompanyId(), portletId, context, parameterMap);
 
 			_portletExporter.exportPortlet(
-				context, layoutCache, portletId, layout, portletsEl,
+				context, portletId, layout, portletsEl,
 				defaultUserId, exportPermissions, exportPortletArchivedSetups,
 				exportPortletControls[0], exportPortletControls[1],
 				exportPortletUserPreferences, exportUserPermissions);
@@ -487,7 +463,7 @@ public class LayoutExporter {
 
 		// Portlet data permissions
 
-		_portletExporter.exportPortletDataPermissions(context);
+		_permissionExporter.exportPortletDataPermissions(context);
 
 		// Ratings
 
@@ -563,89 +539,6 @@ public class LayoutExporter {
 		catch (Exception e) {
 			throw new SystemException(e);
 		}
-	}
-
-	protected void exportLayoutPermissions_4(
-			LayoutCache layoutCache, long companyId, long groupId,
-			Group guestGroup, String resourceName, String resourcePrimKey,
-			Element permissionsEl, boolean exportUserPermissions)
-		throws PortalException, SystemException {
-
-		_portletExporter.exportGroupPermissions(
-			companyId, groupId, resourceName, resourcePrimKey, permissionsEl,
-			"community-actions");
-
-		if (groupId != guestGroup.getGroupId()) {
-			_portletExporter.exportGroupPermissions(
-				companyId, guestGroup.getGroupId(), resourceName,
-				resourcePrimKey, permissionsEl, "guest-actions");
-		}
-
-		if (exportUserPermissions) {
-			_portletExporter.exportUserPermissions(
-				layoutCache, companyId, groupId, resourceName, resourcePrimKey,
-				permissionsEl);
-		}
-
-		_portletExporter.exportInheritedPermissions(
-			layoutCache, companyId, resourceName, resourcePrimKey,
-			permissionsEl, "organization");
-
-		_portletExporter.exportInheritedPermissions(
-			layoutCache, companyId, resourceName, resourcePrimKey,
-			permissionsEl, "user-group");
-	}
-
-	protected void exportLayoutPermissions_5(
-			LayoutCache layoutCache, long companyId, long groupId,
-			String resourceName, String resourcePrimKey, Element permissionsEl)
-		throws PortalException, SystemException {
-
-		boolean portletActions = false;
-
-		Resource resource = layoutCache.getResource(
-			companyId, groupId, resourceName,
-			ResourceConstants.SCOPE_INDIVIDUAL, resourcePrimKey,
-			portletActions);
-
-		_portletExporter.exportPermissions_5(
-			layoutCache, groupId, resourceName, resource.getResourceId(),
-			permissionsEl);
-	}
-
-	protected void exportLayoutPermissions_6(
-			LayoutCache layoutCache, long companyId, long groupId,
-			String resourceName, String resourcePrimKey, Element permissionsEl)
-		throws PortalException, SystemException {
-
-		boolean portletActions = false;
-
-		_portletExporter.exportPermissions_6(
-			layoutCache, companyId, groupId, resourceName, resourcePrimKey,
-			permissionsEl, portletActions);
-	}
-
-	protected void exportLayoutRoles(
-			LayoutCache layoutCache, long companyId, long groupId,
-			Element rolesEl)
-		throws PortalException, SystemException {
-
-		String resourceName = Layout.class.getName();
-
-		_portletExporter.exportGroupRoles(
-			layoutCache, companyId, groupId, resourceName, "community",
-			rolesEl);
-
-		_portletExporter.exportUserRoles(
-		layoutCache, companyId, groupId, resourceName, rolesEl);
-
-		_portletExporter.exportInheritedRoles(
-			layoutCache, companyId, groupId, resourceName, "organization",
-			rolesEl);
-
-		_portletExporter.exportInheritedRoles(
-			layoutCache, companyId, groupId, resourceName, "user-group",
-			rolesEl);
 	}
 
 	protected void exportTheme(LayoutSet layoutSet, ZipWriter zipWriter)
@@ -926,6 +819,8 @@ public class LayoutExporter {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(LayoutExporter.class);
+
+	private PermissionExporter _permissionExporter = new PermissionExporter();
 
 	private PortletExporter _portletExporter = new PortletExporter();
 
