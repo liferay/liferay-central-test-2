@@ -17,6 +17,7 @@ package com.liferay.portal.service.impl;
 import com.liferay.portal.NoSuchWorkflowDefinitionLinkException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.model.Group;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.WorkflowDefinitionLink;
 import com.liferay.portal.service.base.WorkflowDefinitionLinkLocalServiceBaseImpl;
@@ -31,6 +32,7 @@ import java.util.Date;
  * @author Jorge Ferrer
  * @author Bruno Farache
  * @author Brian Wing Shun Chan
+ * @author Juan Fernández
  */
 public class WorkflowDefinitionLinkLocalServiceImpl
 	extends WorkflowDefinitionLinkLocalServiceBaseImpl {
@@ -92,6 +94,14 @@ public class WorkflowDefinitionLinkLocalServiceImpl
 			workflowDefinitionLink =
 				workflowDefinitionLinkPersistence.fetchByG_C_C(
 					groupId, companyId, classNameId);
+		}
+
+		if (workflowDefinitionLink == null) {
+			Group group = groupLocalService.getCompanyGroup(companyId);
+
+			workflowDefinitionLink =
+				workflowDefinitionLinkPersistence.fetchByG_C_C(
+					group.getGroupId(), companyId, classNameId);
 		}
 
 		if (workflowDefinitionLink == null) {

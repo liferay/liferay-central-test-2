@@ -44,6 +44,7 @@ import org.apache.struts.action.ActionMapping;
  *
  * @author Jorge Ferrer
  * @author Bruno Farache
+ * @author Juan Fernández
  */
 public class EditWorkflowDefinitionLinkAction extends PortletAction {
 
@@ -84,7 +85,8 @@ public class EditWorkflowDefinitionLinkAction extends PortletAction {
 
 		if (Validator.isNull(value)) {
 			WorkflowDefinitionLinkLocalServiceUtil.deleteWorkflowDefinitionLink(
-				themeDisplay.getCompanyId(), 0,	className);
+				themeDisplay.getCompanyId(), themeDisplay.getScopeGroupId(),
+				className);
 		}
 		else {
 			String[] values = StringUtil.split(value, StringPool.AT);
@@ -94,8 +96,9 @@ public class EditWorkflowDefinitionLinkAction extends PortletAction {
 				values[1]);
 
 			WorkflowDefinitionLinkLocalServiceUtil.updateWorkflowDefinitionLink(
-				themeDisplay.getUserId(), themeDisplay.getCompanyId(), 0,
-				className, workflowDefinitionName, workflowDefinitionVersion);
+				themeDisplay.getUserId(), themeDisplay.getCompanyId(),
+				themeDisplay.getScopeGroupId(), className,
+				workflowDefinitionName, workflowDefinitionVersion);
 		}
 	}
 

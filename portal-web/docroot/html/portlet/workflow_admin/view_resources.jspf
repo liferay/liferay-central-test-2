@@ -81,13 +81,20 @@ List<WorkflowDefinition> workflowDefinitions = WorkflowDefinitionManagerUtil.get
 						name="workflow"
 					>
 						<aui:select label="" name='<%= "workflowDefinitionName@" + workflowHandler.getClassName() %>'>
-							<aui:option><liferay-ui:message key="no-workflow" /></aui:option>
+							<c:choose>
+								<c:when test='<%= themeDisplay.getScopeGroup().isCompany() %>'>
+									<aui:option><liferay-ui:message key="default" /></aui:option>
+								</c:when>
+								<c:otherwise>
+									<aui:option></aui:option>
+								</c:otherwise>
+							</c:choose>
 
 							<%
 							WorkflowDefinitionLink workflowDefinitionLink = null;
 
 							try {
-								workflowDefinitionLink = WorkflowDefinitionLinkLocalServiceUtil.getWorkflowDefinitionLink(company.getCompanyId(), 0, workflowHandler.getClassName());
+								workflowDefinitionLink = WorkflowDefinitionLinkLocalServiceUtil.getWorkflowDefinitionLink(company.getCompanyId(), themeDisplay.getScopeGroupId(), workflowHandler.getClassName());
 							}
 							catch (NoSuchWorkflowDefinitionLinkException nswle) {
 							}
