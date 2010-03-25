@@ -264,6 +264,21 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 	</aui:button-row>
 </aui:form>
 
+<aui:script use="aui-base">
+	var allDayCheckbox = A.one('#<portlet:namespace />allDayCheckbox');
+	var durationHour = A.one('#<portlet:namespace />durationHour');
+
+	if (allDayCheckbox && durationHour) {
+		allDayCheckbox.on(
+			'change',
+			function() {
+				if (!this.get('checked') && (durationHour.val() == '24')) {
+					durationHour.val('1');
+				}
+			}
+		);
+	}
+</aui:script>
 <aui:script>
 	function <portlet:namespace />init() {
 		<c:choose>
