@@ -24,47 +24,47 @@ if (translation == null) {
 }
 %>
 
-<form accept-charset="UTF-8" action="<portlet:actionURL />" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
+<portlet:actionURL var="viewURL" />
 
-<c:if test="<%= Validator.isNotNull(translation.getToText()) %>">
-	<%= HtmlUtil.escape(translation.getToText()) %>
+<aui:form accept-charset="UTF-8" action="<%= viewURL %>" method="post" name="fm">
+	<c:if test="<%= Validator.isNotNull(translation.getToText()) %>">
+		<%= HtmlUtil.escape(translation.getToText()) %>
+	</c:if>
 
-	<br /><br />
-</c:if>
+	<aui:fieldset>
+		<aui:input cssClass="lfr-textarea-container" label="" name="text" type="textarea" value="<%= translation.getFromText() %>" wrap="soft" />
 
-<textarea class="lfr-textarea" name="<portlet:namespace />text" wrap="soft"><%= HtmlUtil.escape(translation.getFromText()) %></textarea>
+		<aui:select label="" name="id">
+			<aui:option label="en_zh" selected='<%= translation.getTranslationId().equals("en_zh") %>' />
+			<aui:option label="en_zt" selected='<%= translation.getTranslationId().equals("en_zt") %>' />
+			<aui:option label="en_nl" selected='<%= translation.getTranslationId().equals("en_nl") %>' />
+			<aui:option label="en_fr" selected='<%= translation.getTranslationId().equals("en_fr") %>' />
+			<aui:option label="en_de" selected='<%= translation.getTranslationId().equals("en_de") %>' />
+			<aui:option label="en_it" selected='<%= translation.getTranslationId().equals("en_it") %>' />
+			<aui:option label="en_ja" selected='<%= translation.getTranslationId().equals("en_ja") %>' />
+			<aui:option label="en_ko" selected='<%= translation.getTranslationId().equals("en_ko") %>' />
+			<aui:option label="en_pt" selected='<%= translation.getTranslationId().equals("en_pt") %>' />
+			<aui:option label="en_es" selected='<%= translation.getTranslationId().equals("en_es") %>' />
+			<aui:option label="zh_en" selected='<%= translation.getTranslationId().equals("zh_en") %>' />
+			<aui:option label="zt_en" selected='<%= translation.getTranslationId().equals("zt_en") %>' />
+			<aui:option label="nl_en" selected='<%= translation.getTranslationId().equals("nl_en") %>' />
+			<aui:option label="fr_en" selected='<%= translation.getTranslationId().equals("fr_en") %>' />
+			<aui:option label="fr_de" selected='<%= translation.getTranslationId().equals("fr_de") %>' />
+			<aui:option label="de_en" selected='<%= translation.getTranslationId().equals("de_en") %>' />
+			<aui:option label="de_fr" selected='<%= translation.getTranslationId().equals("de_fr") %>' />
+			<aui:option label="it_en" selected='<%= translation.getTranslationId().equals("it_en") %>' />
+			<aui:option label="ja_en" selected='<%= translation.getTranslationId().equals("ja_en") %>' />
+			<aui:option label="ko_en" selected='<%= translation.getTranslationId().equals("ko_en") %>' />
+			<aui:option label="pt_en" selected='<%= translation.getTranslationId().equals("pt_en") %>' />
+			<aui:option label="ru_en" selected='<%= translation.getTranslationId().equals("ru_en") %>' />
+			<aui:option label="es_en" selected='<%= translation.getTranslationId().equals("es_en") %>' />
+		</aui:select>
+	</aui:fieldset>
 
-<br /><br />
-
-<select name="<portlet:namespace />id">
-	<option <%= (translation.getTranslationId().equals("en_zh")) ? "selected" : "" %> value="en_zh"><liferay-ui:message key="en_zh" /></option>
-	<option <%= (translation.getTranslationId().equals("en_zt")) ? "selected" : "" %> value="en_zt"><liferay-ui:message key="en_zt" /></option>
-	<option <%= (translation.getTranslationId().equals("en_nl")) ? "selected" : "" %> value="en_nl"><liferay-ui:message key="en_nl" /></option>
-	<option <%= (translation.getTranslationId().equals("en_fr")) ? "selected" : "" %> value="en_fr"><liferay-ui:message key="en_fr" /></option>
-	<option <%= (translation.getTranslationId().equals("en_de")) ? "selected" : "" %> value="en_de"><liferay-ui:message key="en_de" /></option>
-	<option <%= (translation.getTranslationId().equals("en_it")) ? "selected" : "" %> value="en_it"><liferay-ui:message key="en_it" /></option>
-	<option <%= (translation.getTranslationId().equals("en_ja")) ? "selected" : "" %> value="en_ja"><liferay-ui:message key="en_ja" /></option>
-	<option <%= (translation.getTranslationId().equals("en_ko")) ? "selected" : "" %> value="en_ko"><liferay-ui:message key="en_ko" /></option>
-	<option <%= (translation.getTranslationId().equals("en_pt")) ? "selected" : "" %> value="en_pt"><liferay-ui:message key="en_pt" /></option>
-	<option <%= (translation.getTranslationId().equals("en_es")) ? "selected" : "" %> value="en_es"><liferay-ui:message key="en_es" /></option>
-	<option <%= (translation.getTranslationId().equals("zh_en")) ? "selected" : "" %> value="zh_en"><liferay-ui:message key="zh_en" /></option>
-	<option <%= (translation.getTranslationId().equals("zt_en")) ? "selected" : "" %> value="zt_en"><liferay-ui:message key="zt_en" /></option>
-	<option <%= (translation.getTranslationId().equals("nl_en")) ? "selected" : "" %> value="nl_en"><liferay-ui:message key="nl_en" /></option>
-	<option <%= (translation.getTranslationId().equals("fr_en")) ? "selected" : "" %> value="fr_en"><liferay-ui:message key="fr_en" /></option>
-	<option <%= (translation.getTranslationId().equals("fr_de")) ? "selected" : "" %> value="fr_de"><liferay-ui:message key="fr_de" /></option>
-	<option <%= (translation.getTranslationId().equals("de_en")) ? "selected" : "" %> value="de_en"><liferay-ui:message key="de_en" /></option>
-	<option <%= (translation.getTranslationId().equals("de_fr")) ? "selected" : "" %> value="de_fr"><liferay-ui:message key="de_fr" /></option>
-	<option <%= (translation.getTranslationId().equals("it_en")) ? "selected" : "" %> value="it_en"><liferay-ui:message key="it_en" /></option>
-	<option <%= (translation.getTranslationId().equals("ja_en")) ? "selected" : "" %> value="ja_en"><liferay-ui:message key="ja_en" /></option>
-	<option <%= (translation.getTranslationId().equals("ko_en")) ? "selected" : "" %> value="ko_en"><liferay-ui:message key="ko_en" /></option>
-	<option <%= (translation.getTranslationId().equals("pt_en")) ? "selected" : "" %> value="pt_en"><liferay-ui:message key="pt_en" /></option>
-	<option <%= (translation.getTranslationId().equals("ru_en")) ? "selected" : "" %> value="ru_en"><liferay-ui:message key="ru_en" /></option>
-	<option <%= (translation.getTranslationId().equals("es_en")) ? "selected" : "" %> value="es_en"><liferay-ui:message key="es_en" /></option>
-</select>
-
-<input type="submit" value="<liferay-ui:message key="translate" />" />
-
-</form>
+	<aui:button-row>
+		<aui:button type="submit" value="translate" />
+	</aui:button-row>
+</aui:form>
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 	<aui:script>
