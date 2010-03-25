@@ -47,6 +47,7 @@ import com.liferay.portal.kernel.util.ClassUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.DeterminateKeyGenerator;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.InstancePool;
@@ -3097,8 +3098,8 @@ public class PortalImpl implements Portal {
 					"p_u_i_d", String.valueOf(user.getUserId()));
 
 				userName =
-					"<a href=\"" + portletURL.toString() + "\">" + userName +
-						"</a>";
+					"<a href=\"" + portletURL.toString() + "\">" +
+						HtmlUtil.escape(userName) +	"</a>";
 			}
 		}
 		catch (Exception e) {
