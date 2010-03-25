@@ -108,6 +108,7 @@
 					<xs:restriction base="xs:string">
 						<xs:enumeration value="onEntry" />
 						<xs:enumeration value="onExit" />
+						<xs:enumeration value="onAssignment" />
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:attribute>
@@ -172,6 +173,7 @@
 					<xs:restriction base="xs:string">
 						<xs:enumeration value="onEntry" />
 						<xs:enumeration value="onExit" />
+						<xs:enumeration value="onAssignment" />
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:attribute>
