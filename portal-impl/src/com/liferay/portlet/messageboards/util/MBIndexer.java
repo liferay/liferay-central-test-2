@@ -49,7 +49,9 @@ import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBThreadLocalServiceUtil;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.portlet.PortletURL;
 
@@ -207,6 +209,7 @@ public class MBIndexer extends BaseIndexer {
 
 		return document;
 	}
+	
 	protected void doReindex(Object obj) throws Exception {
 		MBMessage message = (MBMessage)obj;
 
@@ -327,8 +330,21 @@ public class MBIndexer extends BaseIndexer {
 				groupId, categoryId, StatusConstants.APPROVED, messageStart,
 				messageEnd);
 
+		if (messages.isEmpty()) {
+			return;
+		}
+
+		long companyId = messages.get(0).getCompanyId();
+
+		Map<String, Document> documents = new HashMap<String, Document>();
+
 		for (MBMessage message : messages) {
-			reindex(message);
+			Document document = getDocument(message);
+			documents.put(document.get(Field.UID), document);
+		}
+
+		if (!documents.isEmpty()) {
+			SearchEngineUtil.updateDocuments(companyId, documents);
 		}
 	}
 

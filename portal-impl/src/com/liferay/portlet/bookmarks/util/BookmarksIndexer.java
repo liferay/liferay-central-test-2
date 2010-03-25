@@ -37,7 +37,9 @@ import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeIndexerUtil;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.portlet.PortletURL;
 
@@ -168,10 +170,21 @@ public class BookmarksIndexer extends BaseIndexer {
 		List<BookmarksEntry> entries =
 			BookmarksEntryLocalServiceUtil.getEntries(
 				groupId, folderId, entryStart, entryEnd);
+		
+		if (entries.isEmpty()) {
+			return;
+		}
+
+		long companyId = entries.get(0).getCompanyId();
+
+		Map<String, Document> documents = new HashMap<String, Document>();
 
 		for (BookmarksEntry entry : entries) {
-			reindex(entry);
+			Document document = getDocument(entry);
+			documents.put(document.get(Field.UID), document);
 		}
+
+		SearchEngineUtil.updateDocuments(companyId, documents);
 	}
 
 	protected void reindexFolders(long companyId) throws Exception {

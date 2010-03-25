@@ -40,7 +40,9 @@ import com.liferay.portlet.softwarecatalog.model.SCProductVersion;
 import com.liferay.portlet.softwarecatalog.service.SCProductEntryLocalServiceUtil;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.portlet.PortletURL;
 
@@ -241,9 +243,19 @@ public class SCIndexer extends BaseIndexer {
 			SCProductEntryLocalServiceUtil.getCompanyProductEntries(
 				companyId, start, end);
 
-		for (SCProductEntry productEntry : productEntries) {
-			reindex(productEntry);
+		if (productEntries.isEmpty()) {
+			return;
 		}
+
+		Map<String, Document> documents = new HashMap<String, Document>();
+
+		for (SCProductEntry productEntry : productEntries) {
+			Document document = getDocument(productEntry);
+
+			documents.put(document.get(Field.UID), document);
+		}
+
+		SearchEngineUtil.updateDocuments(companyId, documents);
 	}
 
 }

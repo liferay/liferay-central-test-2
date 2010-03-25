@@ -44,7 +44,9 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
@@ -545,6 +547,8 @@ public class JCRHook extends BaseHook {
 		long groupId = GetterUtil.getLong(ids[2]);
 		long repositoryId = GetterUtil.getLong(ids[3]);
 
+		Map<String, Document> documents = new HashMap<String, Document>();
+
 		Session session = null;
 
 		try {
@@ -579,8 +583,7 @@ public class JCRHook extends BaseHook {
 							continue;
 						}
 
-						SearchEngineUtil.updateDocument(
-							companyId, document.get(Field.UID), document);
+						documents.put(document.get(Field.UID), document);
 					}
 					catch (Exception e2) {
 						_log.error("Reindexing " + node.getName(), e2);
@@ -601,6 +604,8 @@ public class JCRHook extends BaseHook {
 				_log.error(e);
 			}
 		}
+
+		SearchEngineUtil.updateDocuments(companyId, documents);
 	}
 
 	public void updateFile(

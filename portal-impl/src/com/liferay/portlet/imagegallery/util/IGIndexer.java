@@ -40,7 +40,9 @@ import com.liferay.portlet.imagegallery.service.IGFolderServiceUtil;
 import com.liferay.portlet.imagegallery.service.IGImageLocalServiceUtil;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.portlet.PortletURL;
 
@@ -214,9 +216,22 @@ public class IGIndexer extends BaseIndexer {
 		List<IGImage> images = IGImageLocalServiceUtil.getImages(
 			groupId, folderId, entryStart, entryEnd);
 
-		for (IGImage image : images) {
-			reindex(image);
+		if (images.isEmpty()) {
+			return;
 		}
+
+		long companyId = images.get(0).getCompanyId();
+
+		Map<String, Document> documents = new HashMap<String, Document>();
+
+		for (IGImage image : images) {
+
+			Document document = getDocument(image);
+
+			documents.put(document.get(Field.UID), document);
+		}
+
+		SearchEngineUtil.updateDocuments(companyId, documents);
 	}
 
 	protected void reindexRoot(long companyId) throws Exception {

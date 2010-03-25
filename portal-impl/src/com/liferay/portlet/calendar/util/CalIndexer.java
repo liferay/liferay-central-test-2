@@ -35,7 +35,9 @@ import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeIndexerUtil;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.portlet.PortletURL;
 
@@ -171,9 +173,18 @@ public class CalIndexer extends BaseIndexer {
 		List<CalEvent> events = CalEventLocalServiceUtil.getCompanyEvents(
 			companyId, start, end);
 
-		for (CalEvent event : events) {
-			reindex(event);
+		if (events.isEmpty()) {
+			return;
 		}
+		Map<String, Document> documents = new HashMap<String, Document>();
+
+		for (CalEvent event : events) {
+			Document document = getDocument(event);
+			
+			documents.put(document.get(Field.UID), document);
+		}
+
+		SearchEngineUtil.updateDocuments(companyId, documents);
 	}
 
 }

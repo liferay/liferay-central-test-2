@@ -22,6 +22,9 @@ import com.liferay.portal.kernel.util.StringBundler;
 import java.io.Serializable;
 
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 
 /**
  * <a href="SearchRequest.java.html"><b><i>View Source</i></b></a>
@@ -40,12 +43,37 @@ public class SearchRequest implements Serializable {
 		return searchRequest;
 	}
 
+
+	public static SearchRequest addMultiple(
+		long companyId, Collection<Document> documents) {
+
+		SearchRequest searchRequest = new SearchRequest(
+			SearchEngineCommand.ADD_MULTIPLE);
+
+		searchRequest.setCompanyId(companyId);
+		searchRequest.setDocuments(documents);
+
+		return searchRequest;
+	}
+
 	public static SearchRequest delete(long companyId, String uid) {
 		SearchRequest searchRequest = new SearchRequest(
 			SearchEngineCommand.DELETE);
 
 		searchRequest.setCompanyId(companyId);
 		searchRequest.setId(uid);
+
+		return searchRequest;
+	}
+
+	public static SearchRequest deleteMultiple(
+		long companyId, Collection<String> uids) {
+
+		SearchRequest searchRequest = new SearchRequest(
+			SearchEngineCommand.DELETE_MULTIPLE);
+
+		searchRequest.setCompanyId(companyId);
+		searchRequest.setIds(uids);
 
 		return searchRequest;
 	}
@@ -90,6 +118,19 @@ public class SearchRequest implements Serializable {
 		return searchRequest;
 	}
 
+	public static SearchRequest updateMultiple(
+		long companyId, Map<String, Document> documentsMap) {
+
+		SearchRequest searchRequest = new SearchRequest(
+			SearchEngineCommand.UPDATE_MULTIPLE);
+
+		searchRequest.setCompanyId(companyId);
+		searchRequest.setDocumentsMap(documentsMap);
+
+		return searchRequest;
+	}
+	
+
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -98,12 +139,24 @@ public class SearchRequest implements Serializable {
 		return _document;
 	}
 
+	public Collection<Document> getDocuments() {
+		return _documents;
+	}
+
+	public Map<String, Document> getDocumentsMap() {
+		return _documentsMap;
+	}
+
 	public int getEnd() {
 		return _end;
 	}
 
 	public String getId() {
 		return _id;
+	}
+
+	public Collection<String> getIds() {
+		return _ids;
 	}
 
 	public Query getQuery() {
@@ -130,12 +183,24 @@ public class SearchRequest implements Serializable {
 		_document = document;
 	}
 
+	public void setDocuments(Collection<Document> documents) {
+		_documents = documents;
+	}
+
+	public void setDocumentsMap(Map<String, Document> documentsMap) {
+		_documentsMap = documentsMap;
+	}
+
 	public void setEnd(int end) {
 		_end = end;
 	}
 
 	public void setId(String id) {
 		_id = id;
+	}
+
+	public void setIds(Collection<String> ids) {
+		_ids = ids;
 	}
 
 	public void setQuery(Query query) {
@@ -159,8 +224,14 @@ public class SearchRequest implements Serializable {
 		sb.append(_companyId);
 		sb.append(", id=");
 		sb.append(_id);
+		sb.append(", ids=");
+		sb.append(_ids);
 		sb.append(", document=");
 		sb.append(_document);
+		sb.append(", documents=");
+		sb.append(_documents);
+		sb.append(", documentsMap=");
+		sb.append(_documentsMap);
 		sb.append(", query=");
 		sb.append(_query);
 		sb.append(", sorts=");
@@ -180,8 +251,11 @@ public class SearchRequest implements Serializable {
 
 	private long _companyId;
 	private Document _document;
+	private Collection<Document> _documents;
+	private Map<String, Document> _documentsMap;
 	private int _end;
 	private String _id;
+	private Collection<String> _ids;
 	private Query _query;
 	private SearchEngineCommand _searchEngineCommand;
 	private Sort[] _sorts;

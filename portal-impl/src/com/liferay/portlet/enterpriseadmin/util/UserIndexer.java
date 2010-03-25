@@ -43,6 +43,7 @@ import com.liferay.portlet.expando.util.ExpandoBridgeIndexer;
 import com.liferay.portlet.expando.util.ExpandoBridgeIndexerUtil;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -247,10 +248,37 @@ public class UserIndexer extends BaseIndexer {
 		else if (obj instanceof long[]) {
 			long[] userIds = (long[])obj;
 
+			Map<Long, Map<String, Document>> documentsMap =
+				new HashMap<Long, Map<String, Document>>();
+
 			for (long userId : userIds) {
 				User user = UserLocalServiceUtil.getUserById(userId);
 
-				doReindex(user);
+				if (user.isDefaultUser()) {
+					continue;
+				}
+
+				Document document = getDocument(user);
+
+				long companyId = user.getCompanyId();
+
+				Map<String, Document> documents = documentsMap.get(companyId);
+
+				if (documents == null) {
+					documents = new HashMap<String, Document>();
+					documentsMap.put(companyId, documents);
+				}
+
+				documents.put(document.get(Field.UID), document);
+			}
+
+			for (Map.Entry<Long, Map<String, Document>> documenstEntry:
+					documentsMap.entrySet()) {
+
+				Map<String, Document> documents = documenstEntry.getValue();
+
+				SearchEngineUtil.updateDocuments(
+					documenstEntry.getKey(), documents);
 			}
 		}
 		else if (obj instanceof User) {
@@ -453,9 +481,23 @@ public class UserIndexer extends BaseIndexer {
 		List<User> users = UserLocalServiceUtil.getCompanyUsers(
 			companyId, start, end);
 
-		for (User user : users) {
-			reindex(user);
+		if (users.isEmpty()) {
+			return;
 		}
+		
+		Map<String, Document> documents = new HashMap<String, Document>();
+
+		for (User user : users) {
+			if (user.isDefaultUser()) {
+				continue;
+			}
+			
+			Document document = getDocument(user);
+
+			documents.put(document.get(Field.UID), document);
+		}
+
+		SearchEngineUtil.updateDocuments(companyId, documents);
 	}
 
 }

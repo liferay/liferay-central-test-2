@@ -42,7 +42,9 @@ import com.liferay.portlet.wiki.service.WikiNodeServiceUtil;
 import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.portlet.PortletURL;
 
@@ -254,9 +256,21 @@ public class WikiIndexer extends BaseIndexer {
 		List<WikiPage> pages = WikiPageLocalServiceUtil.getPages(
 			nodeId, true, pageStart, pageEnd);
 
-		for (WikiPage page : pages) {
-			reindex(page);
+		if (pages.isEmpty()) {
+			return;
 		}
+
+		long companyId = pages.get(0).getCompanyId();
+		
+		Map<String, Document> documents = new HashMap<String, Document>();
+
+		for (WikiPage page : pages) {
+			Document document = getDocument(page);
+
+			documents.put(document.get(Field.UID), document);
+		}
+
+		SearchEngineUtil.updateDocuments(companyId, documents);
 	}
 
 }

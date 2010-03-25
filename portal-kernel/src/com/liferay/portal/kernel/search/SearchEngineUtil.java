@@ -17,6 +17,9 @@ package com.liferay.portal.kernel.search;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
+import java.util.Collection;
+import java.util.Map;
+
 /**
  * <a href="SearchEngineUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -47,6 +50,24 @@ public class SearchEngineUtil {
 		_searchEngine.getWriter().addDocument(companyId, doc);
 	}
 
+	public static void addDocuments(long companyId, Collection<Document> docs)
+		throws SearchException {
+
+		if (isIndexReadOnly() || (docs == null) || (docs.isEmpty())) {
+			return;
+		}
+
+		for (Document doc : docs) {
+			if (_log.isDebugEnabled()) {
+				_log.debug("Add document " + doc.toString());
+			}
+
+			_searchPermissionChecker.addPermissionFields(companyId, doc);			
+		}
+
+		_searchEngine.getWriter().addDocuments(companyId, docs);
+	}
+
 	public static void deleteDocument(long companyId, String uid)
 		throws SearchException {
 
@@ -55,6 +76,16 @@ public class SearchEngineUtil {
 		}
 
 		_searchEngine.getWriter().deleteDocument(companyId, uid);
+	}
+
+	public static void deleteDocuments(long companyId, Collection<String> uids)
+		throws SearchException {
+
+		if (isIndexReadOnly() || (uids == null) || (uids.isEmpty())) {
+			return;
+		}
+
+		_searchEngine.getWriter().deleteDocuments(companyId, uids);
 	}
 
 	public static void deletePortletDocuments(long companyId, String portletId)
@@ -171,6 +202,25 @@ public class SearchEngineUtil {
 		_searchPermissionChecker.addPermissionFields(companyId, doc);
 
 		_searchEngine.getWriter().updateDocument(companyId, uid, doc);
+	}
+
+	public static void updateDocuments(
+			long companyId, Map<String, Document> documents)
+		throws SearchException {
+
+		if (isIndexReadOnly() || (documents == null) || (documents.isEmpty())) {
+			return;
+		}
+
+		for (Document document : documents.values()) {
+			if (_log.isDebugEnabled()) {
+				_log.debug("Document " + document.toString());
+			}
+
+			_searchPermissionChecker.addPermissionFields(companyId, document);
+		}
+		
+		_searchEngine.getWriter().updateDocuments(companyId, documents);
 	}
 
 	public static void updatePermissionFields(long resourceId) {

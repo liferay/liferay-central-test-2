@@ -25,6 +25,7 @@ import com.liferay.portal.kernel.util.Validator;
 import java.io.IOException;
 
 import java.util.Collection;
+import java.util.Map;
 
 import org.apache.lucene.index.Term;
 
@@ -54,6 +55,15 @@ public class LuceneIndexWriterImpl implements IndexWriter {
 		}
 	}
 
+	public void addDocuments(long companyId, Collection<Document> documents)
+		throws SearchException {
+
+		//lucene does not have "bulk add" capabilities
+		for (Document document : documents) {
+			addDocument(companyId, document);
+		}
+	}
+
 	public void deleteDocument(long companyId, String uid)
 		throws SearchException {
 
@@ -67,6 +77,14 @@ public class LuceneIndexWriterImpl implements IndexWriter {
 		}
 		catch (IOException ioe) {
 			throw new SearchException(ioe);
+		}
+	}
+
+	public void deleteDocuments(long companyId, Collection<String> uids)
+		throws SearchException {
+		
+		for (String uid : uids) {
+			deleteDocument(companyId, uid);
 		}
 	}
 
@@ -96,6 +114,18 @@ public class LuceneIndexWriterImpl implements IndexWriter {
 		}
 		catch (IOException ioe) {
 			throw new SearchException(ioe);
+		}
+	}
+
+	public void updateDocuments(long companyId, Map<String, Document> documents)
+		throws SearchException {
+
+		for (Map.Entry<String, Document> documentEntries :
+				documents.entrySet()) {
+
+			updateDocument(
+				companyId, documentEntries.getKey(),
+				documentEntries.getValue());
 		}
 	}
 

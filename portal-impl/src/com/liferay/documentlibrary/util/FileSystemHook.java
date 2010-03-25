@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
@@ -44,6 +45,8 @@ import java.io.InputStream;
 
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * <a href="FileSystemHook.java.html"><b><i>View Source</i></b></a>
@@ -253,7 +256,7 @@ public class FileSystemHook extends BaseHook {
 	public void move(String srcDir, String destDir) {
 	}
 
-	public void reindex(String[] ids) {
+	public void reindex(String[] ids) throws SearchException {
 		long companyId = GetterUtil.getLong(ids[0]);
 		String portletId = ids[1];
 		long groupId = GetterUtil.getLong(ids[2]);
@@ -262,6 +265,8 @@ public class FileSystemHook extends BaseHook {
 		File repistoryDir = getRepositoryDir(companyId, repositoryId);
 
 		String[] fileNames = FileUtil.listDirs(repistoryDir);
+
+		Map<String, Document> documents = new HashMap<String, Document>();
 
 		for (int i = 0; i < fileNames.length; i++) {
 			String fileName = fileNames[i];
@@ -284,13 +289,14 @@ public class FileSystemHook extends BaseHook {
 					continue;
 				}
 
-				SearchEngineUtil.updateDocument(
-					companyId, document.get(Field.UID), document);
+				documents.put(document.get(Field.UID), document);
 			}
 			catch (Exception e) {
 				_log.error("Reindexing " + fileName, e);
 			}
 		}
+
+		SearchEngineUtil.updateDocuments(companyId, documents);
 	}
 
 	public void updateFile(

@@ -36,7 +36,9 @@ import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeIndexerUtil;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.portlet.PortletURL;
 
@@ -180,9 +182,19 @@ public class BlogsIndexer extends BaseIndexer {
 		List<BlogsEntry> entries = BlogsEntryLocalServiceUtil.getCompanyEntries(
 			companyId, StatusConstants.APPROVED, start, end);
 
-		for (BlogsEntry entry : entries) {
-			reindex(entry);
+		if (entries.isEmpty()) {
+			return;
 		}
+		
+		Map<String, Document> documents = new HashMap<String, Document>();
+
+		for (BlogsEntry entry : entries) {
+			Document document = getDocument(entry);
+
+			documents.put(document.get(Field.UID), document);
+		}
+
+		SearchEngineUtil.updateDocuments(companyId, documents);
 	}
 
 }

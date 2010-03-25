@@ -42,8 +42,10 @@ import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import javax.portlet.PortletURL;
 
@@ -312,9 +314,19 @@ public class JournalIndexer extends BaseIndexer {
 			JournalArticleLocalServiceUtil.getCompanyArticles(
 				companyId, StatusConstants.APPROVED, start, end);
 
-		for (JournalArticle article : articles) {
-			reindex(article);
+		if (articles.isEmpty()) {
+			return;
 		}
+
+		Map<String, Document> documents = new HashMap<String, Document>();
+
+		for (JournalArticle article : articles) {
+			Document document = getDocument(article);
+
+			documents.put(document.get(Field.UID), document);
+		}
+
+		SearchEngineUtil.updateDocuments(companyId, documents);
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(JournalIndexer.class);

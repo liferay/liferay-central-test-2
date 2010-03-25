@@ -36,7 +36,9 @@ import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.search.BaseIndexer;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.portlet.PortletURL;
 
@@ -194,11 +196,15 @@ public class PluginPackageIndexer extends BaseIndexer {
 		SearchEngineUtil.deletePortletDocuments(
 			CompanyConstants.SYSTEM, PORTLET_ID);
 
+		Map<String, Document> documents = new HashMap<String, Document>();
 		for (PluginPackage pluginPackage :
 				PluginPackageUtil.getAllAvailablePluginPackages()) {
 
-			doReindex(pluginPackage);
+			Document document = getDocument(pluginPackage);
+			documents.put(document.get(Field.UID), document);
 		}
+
+		SearchEngineUtil.updateDocuments(CompanyConstants.SYSTEM, documents);
 	}
 
 	protected String getPortletId(SearchContext searchContext) {

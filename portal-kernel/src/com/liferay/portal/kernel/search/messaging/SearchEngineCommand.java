@@ -21,6 +21,7 @@ package com.liferay.portal.kernel.search.messaging;
  */
 public enum SearchEngineCommand {
 
-	ADD, DELETE, DELETE_PORTLET_DOCUMENTS, SEARCH, UPDATE
+	ADD, ADD_MULTIPLE, DELETE, DELETE_MULTIPLE,
+	DELETE_PORTLET_DOCUMENTS, SEARCH, UPDATE, UPDATE_MULTIPLE
 
 }

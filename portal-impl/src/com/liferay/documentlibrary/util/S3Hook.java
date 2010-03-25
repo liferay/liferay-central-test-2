@@ -45,9 +45,11 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.jets3t.service.S3Service;
@@ -291,6 +293,7 @@ public class S3Hook extends BaseHook {
 		long groupId = GetterUtil.getLong(ids[2]);
 		long repositoryId = GetterUtil.getLong(ids[3]);
 
+		Map<String, Document> documents = new HashMap<String, Document>();
 		try {
 			S3Object[] searchObjects = _s3Service.listObjects(
 				_s3Bucket, getKey(companyId, repositoryId), null);
@@ -328,8 +331,7 @@ public class S3Hook extends BaseHook {
 						continue;
 					}
 
-					SearchEngineUtil.updateDocument(
-						companyId, document.get(Field.UID), document);
+					documents.put(document.get(Field.UID), document);
 				}
 				catch (Exception e) {
 					_log.error("Reindexing " + fileName, e);
@@ -339,6 +341,8 @@ public class S3Hook extends BaseHook {
 		catch (S3ServiceException s3se) {
 			throw new SearchException(s3se);
 		}
+
+		SearchEngineUtil.updateDocuments(companyId, documents);
 	}
 
 	public void updateFile(
