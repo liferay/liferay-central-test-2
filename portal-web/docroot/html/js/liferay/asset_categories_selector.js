@@ -70,6 +70,14 @@ AUI().add(
 					instance.inputContainer.hide('aui-helper-hidden-accessible');
 				},
 
+				bindUI: function() {
+					var instance = this;
+
+					AssetCategoriesSelector.superclass.bindUI.apply(instance, arguments);
+
+					instance._submitFormListener.detach();
+				},
+
 				syncUI: function() {
 					var instance = this;
 

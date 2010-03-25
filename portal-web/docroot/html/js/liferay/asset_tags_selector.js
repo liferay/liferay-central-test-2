@@ -123,6 +123,8 @@ AUI().add(
 
 					instance.entries.after('add', instance._updateHiddenInput, instance);
 					instance.entries.after('remove', instance._updateHiddenInput, instance);
+
+					instance._submitFormListener = A.Do.before(instance._onAddEntryClick, window, 'submitForm', instance);
 				},
 
 				syncUI: function() {
