@@ -230,13 +230,13 @@ if (articleDisplay != null) {
 
 										<div class="portlet-msg-alert">
 											<a href="<%= editURL %>">
-												<%= LanguageUtil.format(pageContext, "x-is-not approved", article.getTitle()) %>
+												<%= LanguageUtil.format(pageContext, "x-is-not-approved", article.getTitle()) %>
 											</a>
 										</div>
 								</c:when>
 								<c:otherwise>
 									<div class="portlet-msg-alert">
-										<%= LanguageUtil.format(pageContext, "x-is-not approved", article.getTitle()) %>
+										<%= LanguageUtil.format(pageContext, "x-is-not-approved", article.getTitle()) %>
 									</div>
 								</c:otherwise>
 							</c:choose>
