@@ -90,6 +90,9 @@ if (yearValue > 0) {
 	</c:when>
 </c:choose>
 
+<select <%= disabled ? "disabled=\"disabled\"" : "" %> id="<%= dayParam %>" name="<%= dayParam %>"></select>
+<select <%= disabled ? "disabled=\"disabled\"" : "" %> id="<%= yearParam %>" name="<%= yearParam %>"></select>
+
 <input class="<%= disabled ? "disabled" : "" %>" id="<%= imageInputId %>Input" type="hidden" />
 
 <aui:script use="aui-calendar-datepicker-select">
@@ -104,6 +107,7 @@ if (yearValue > 0) {
 				)
 			],
 			dateFormat: '%m/%e/%Y',
+			dayField: '#<%= dayParam %>',
 			dayFieldName: '<%= dayParam %>',
 			displayBoundingBox: '#<%= randomNamespace %>displayDate',
 			firstDayOfWeek: <%= firstDayOfWeek %>,
@@ -120,6 +124,7 @@ if (yearValue > 0) {
 				}
 			},
 			populateMonth: false,
+			yearField: '#<%= yearParam %>',
 			yearFieldName: '<%= yearParam %>',
 			yearRange: [<%= yearRangeStart %>, <%= yearRangeEnd %>]
 		}
