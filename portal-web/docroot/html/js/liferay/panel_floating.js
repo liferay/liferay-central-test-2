@@ -110,7 +110,7 @@ AUI().add(
 					var currentContainer = A.one(el).ancestor('.lfr-panel');
 					var sets = currentContainer.all('ul');
 
-					if (!sets.all('.current-set').size()) {
+					if (sets.size() && !sets.all('.current-set').size()) {
 						sets.item(0).addClass('current-set');
 					}
 				},
