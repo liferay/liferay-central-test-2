@@ -23,36 +23,46 @@ boolean scramble = ParamUtil.getBoolean(request, "scramble", true);
 String[] words = (String[])request.getAttribute(WebKeys.WORDS_LIST);
 %>
 
-<form action="<portlet:renderURL><portlet:param name="struts_action" value="/words/view" /></portlet:renderURL>" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.SEARCH %>" />
+<portlet:renderURL var="viewURL">
+	<portlet:param name="struts_action" value="/words/view" />
+</portlet:renderURL>
 
-<liferay-ui:error exception="<%= ScramblerException.class %>" message="please-enter-a-word-that-is-at-least-3-characters-long" />
+<aui:form action="<%= viewURL %>" method="post" name="fm">
+	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.SEARCH %>" />
 
-<input name="<portlet:namespace />word" type="text" value="<%= HtmlUtil.escape(word) %>" />
+	<liferay-ui:error exception="<%= ScramblerException.class %>" message="please-enter-a-word-that-is-at-least-3-characters-long" />
 
-<select name="<portlet:namespace />scramble">
-	<option <%= scramble ? "selected" : "" %> value="1"><liferay-ui:message key="scramble" /></option>
-	<option <%= !scramble ? "selected" : "" %> value="0"><liferay-ui:message key="unscramble" /></option>
-</select>
+	<aui:fieldset>
+		<aui:column>
+			<aui:input label="" name="word" value="<%= word %>" />
+		</aui:column>
 
-<input type="submit" value="<liferay-ui:message key="search" />" />
+		<aui:column>
+			<aui:select label="" name="scramble">
+				<aui:option label="scramble" selected="<%= scramble %>" value="1" />
+				<aui:option label="unscramble" selected="<%= !scramble %>" value="0" />
+			</aui:select>
+		</aui:column>
+	</aui:fieldset>
 
-<c:if test="<%= (words != null) && (words.length > 0) %>">
-	<br /><br />
+	<aui:button-row>
+		<aui:button type="submit" value="search" />
+	</aui:button-row>
 
-	<%
-	for (int i = 0; i < words.length; i++) {
-	%>
+	<c:if test="<%= (words != null) && (words.length > 0) %>">
 
-		<%= HtmlUtil.escape(words[i]) %><br />
+		<%
+		for (int i = 0; i < words.length; i++) {
+		%>
 
-	<%
-	}
-	%>
+			<%= HtmlUtil.escape(words[i]) %><br />
 
-</c:if>
+		<%
+		}
+		%>
 
-</form>
+	</c:if>
+</aui:form>
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 	<aui:script>
