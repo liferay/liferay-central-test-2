@@ -89,6 +89,8 @@ public class PortletImporter {
 
 		boolean deletePortletData = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.DELETE_PORTLET_DATA);
+		boolean importPermissions = MapUtil.getBoolean(
+			parameterMap, PortletDataHandlerKeys.PERMISSIONS);
 		boolean importPortletData = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.PORTLET_DATA);
 		boolean importPortletArchivedSetups = MapUtil.getBoolean(
@@ -191,6 +193,10 @@ public class PortletImporter {
 		readComments(context, root);
 		readRatings(context, root);
 		readTags(context, root);
+
+		if (importPermissions) {
+			_permissionImporter.readPortletDataPermissions(context);
+		}
 
 		// Delete portlet data
 
@@ -790,5 +796,7 @@ public class PortletImporter {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(PortletImporter.class);
+
+	private PermissionImporter _permissionImporter = new PermissionImporter();
 
 }
