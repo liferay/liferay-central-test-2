@@ -62,16 +62,16 @@
 	background: #FFC;
 }
 
-.portlet-boundary.yui-dd-dragging {
+.portlet-boundary.yui3-dd-dragging {
 	opacity: .6;
 }
 
-.ie .portlet-boundary.yui-dd-dragging {
+.ie .portlet-boundary.yui3-dd-dragging {
 	-ms-filter: alpha(opacity=60);
 	filter: alpha(opacity=60);
 }
 
-.portlet-boundary.yui-dd-dragging .portlet {
+.portlet-boundary.yui3-dd-dragging .portlet {
 	border: 2px dashed #ccc;
 }
 
