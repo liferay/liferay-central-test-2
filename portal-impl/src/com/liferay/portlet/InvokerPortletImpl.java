@@ -35,11 +35,11 @@ import com.liferay.portal.util.WebKeys;
 import java.io.IOException;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -116,8 +116,7 @@ public class InvokerPortletImpl implements InvokerPortlet {
 				WebKeys.CACHE_PORTLET_RESPONSES);
 
 		if (responses == null) {
-			responses = Collections.synchronizedMap(
-				new HashMap<String, InvokerPortletResponse>());
+			responses = new ConcurrentHashMap<String, InvokerPortletResponse>();
 
 			session.setAttribute(WebKeys.CACHE_PORTLET_RESPONSES, responses);
 		}
