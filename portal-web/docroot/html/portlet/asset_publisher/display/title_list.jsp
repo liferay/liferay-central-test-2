@@ -48,6 +48,8 @@ if (Validator.isNotNull(assetRenderer.getUrlTitle())) {
 String viewURL = viewInContext ? assetRenderer.getURLViewInContext((LiferayPortletRequest)renderRequest, (LiferayPortletResponse)renderResponse, viewFullContentURL.toString()) : viewFullContentURL.toString();
 
 viewURL = _checkViewURL(viewURL, currentURL, themeDisplay);
+
+boolean viewPermission = assetRenderer.hasViewPermission(permissionChecker);
 %>
 
 	<c:if test="<%= assetEntryIndex == 0 %>">
@@ -57,7 +59,7 @@ viewURL = _checkViewURL(viewURL, currentURL, themeDisplay);
 	<c:if test="<%= show %>">
 		<li class="title-list <%= assetRendererFactory.getType() %>">
 			<c:choose>
-				<c:when test="<%= Validator.isNotNull(viewURL) %>">
+				<c:when test="<%= viewPermission && Validator.isNotNull(viewURL) %>">
 					<a href="<%= viewURL %>"><%= title %></a>
 				</c:when>
 				<c:otherwise>
@@ -67,9 +69,11 @@ viewURL = _checkViewURL(viewURL, currentURL, themeDisplay);
 
 			<liferay-util:include page="/html/portlet/asset_publisher/asset_actions.jsp" />
 
-			<div class="asset-metadata">
-				<%@ include file="/html/portlet/asset_publisher/asset_metadata.jspf" %>
-			</div>
+			<c:if test="<%= viewPermission %>">
+				<div class="asset-metadata">
+					<%@ include file="/html/portlet/asset_publisher/asset_metadata.jspf" %>
+				</div>
+			</c:if>
 		</li>
 	</c:if>
 

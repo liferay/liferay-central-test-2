@@ -18,12 +18,13 @@ import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.asset.model.BaseAssetRenderer;
 import com.liferay.portlet.messageboards.model.MBMessage;
-import com.liferay.portlet.messageboards.service.permission.MBPermission;
+import com.liferay.portlet.messageboards.service.permission.MBMessagePermission;
 
 import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
@@ -64,20 +65,13 @@ public class MBMessageAssetRenderer extends BaseAssetRenderer {
 			(ThemeDisplay)liferayPortletRequest.getAttribute(
 				WebKeys.THEME_DISPLAY);
 
-		PortletURL editPortletURL = null;
+		PortletURL editPortletURL = liferayPortletResponse.createRenderURL(
+			PortletKeys.MESSAGE_BOARDS);
 
-		if (MBPermission.contains(
-				themeDisplay.getPermissionChecker(),
-				themeDisplay.getScopeGroupId(), ActionKeys.ADD_MESSAGE)) {
-
-			editPortletURL = liferayPortletResponse.createRenderURL(
-				PortletKeys.MESSAGE_BOARDS);
-
-			editPortletURL.setParameter(
-				"struts_action", "/message_boards/edit_message");
-			editPortletURL.setParameter(
-				"messageId", String.valueOf(_message.getMessageId()));
-		}
+		editPortletURL.setParameter(
+			"struts_action", "/message_boards/edit_message");
+		editPortletURL.setParameter(
+			"messageId", String.valueOf(_message.getMessageId()));
 
 		return editPortletURL;
 	}
@@ -96,6 +90,28 @@ public class MBMessageAssetRenderer extends BaseAssetRenderer {
 
 	public long getUserId() {
 		return _message.getUserId();
+	}
+
+	public boolean hasEditPermission(PermissionChecker permissionChecker) {
+		try {
+			return MBMessagePermission.contains(
+				permissionChecker, _message, ActionKeys.UPDATE);
+		}
+		catch (Exception e) {
+		}
+
+		return false;
+	}
+
+	public boolean hasViewPermission(PermissionChecker permissionChecker) {
+		try {
+			return MBMessagePermission.contains(
+				permissionChecker, _message, ActionKeys.VIEW);
+		}
+		catch (Exception e) {
+		}
+
+		return true;
 	}
 
 	public boolean isPrintable() {

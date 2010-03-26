@@ -19,13 +19,14 @@ import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.asset.model.BaseAssetRenderer;
 import com.liferay.portlet.blogs.model.BlogsEntry;
-import com.liferay.portlet.blogs.service.permission.BlogsPermission;
+import com.liferay.portlet.blogs.service.permission.BlogsEntryPermission;
 
 import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
@@ -75,19 +76,12 @@ public class BlogsEntryAssetRenderer extends BaseAssetRenderer {
 			(ThemeDisplay)liferayPortletRequest.getAttribute(
 				WebKeys.THEME_DISPLAY);
 
-		PortletURL editPortletURL = null;
+		PortletURL editPortletURL = liferayPortletResponse.createRenderURL(
+			PortletKeys.BLOGS);
 
-		if (BlogsPermission.contains(
-				themeDisplay.getPermissionChecker(),
-				themeDisplay.getScopeGroupId(), ActionKeys.ADD_ENTRY)) {
-
-			editPortletURL = liferayPortletResponse.createRenderURL(
-				PortletKeys.BLOGS);
-
-			editPortletURL.setParameter("struts_action", "/blogs/edit_entry");
-			editPortletURL.setParameter(
-				"entryId", String.valueOf(_entry.getEntryId()));
-		}
+		editPortletURL.setParameter("struts_action", "/blogs/edit_entry");
+		editPortletURL.setParameter(
+			"entryId", String.valueOf(_entry.getEntryId()));
 
 		return editPortletURL;
 	}
@@ -113,6 +107,16 @@ public class BlogsEntryAssetRenderer extends BaseAssetRenderer {
 
 	public long getUserId() {
 		return _entry.getUserId();
+	}
+
+	public boolean hasEditPermission(PermissionChecker permissionChecker) {
+		return BlogsEntryPermission.contains(
+			permissionChecker, _entry, ActionKeys.UPDATE);
+	}
+
+	public boolean hasViewPermission(PermissionChecker permissionChecker) {
+		return BlogsEntryPermission.contains(
+			permissionChecker, _entry, ActionKeys.VIEW);
 	}
 
 	public boolean isPrintable() {

@@ -31,6 +31,8 @@ boolean show = ((Boolean)request.getAttribute("view.jsp-show")).booleanValue();
 boolean print = ((Boolean)request.getAttribute("view.jsp-print")).booleanValue();
 
 request.setAttribute("view.jsp-showIconLabel", true);
+
+boolean viewPermission = assetRenderer.hasViewPermission(permissionChecker);
 %>
 
 <div class="asset-full-content <%= showAssetTitle ? "show-asset-title" : "no-title" %>">
@@ -106,66 +108,68 @@ request.setAttribute("view.jsp-showIconLabel", true);
 		<h3 class="asset-title <%= assetRendererFactory.getType() %>"><%= title %></h3>
 	</c:if>
 
-	<div class="asset-content">
+	<c:if test="<%= viewPermission %>">
+		<div class="asset-content">
 
-		<%
-		String path = assetRenderer.render(renderRequest, renderResponse, AssetRenderer.TEMPLATE_FULL_CONTENT);
+			<%
+			String path = assetRenderer.render(renderRequest, renderResponse, AssetRenderer.TEMPLATE_FULL_CONTENT);
 
-		request.setAttribute(WebKeys.ASSET_RENDERER, assetRenderer);
-		%>
+			request.setAttribute(WebKeys.ASSET_RENDERER, assetRenderer);
+			%>
 
-		<liferay-util:include page="<%= path %>" portletId="<%= assetRendererFactory.getPortletId() %>" />
+			<liferay-util:include page="<%= path %>" portletId="<%= assetRendererFactory.getPortletId() %>" />
 
-		<c:if test="<%= showContextLink && !print %>">
-			<div class="asset-more">
-				<a href="<%= assetRenderer.getURLViewInContext((LiferayPortletRequest)renderRequest, (LiferayPortletResponse)renderResponse, viewFullContentURL.toString()) %>"><liferay-ui:message key="<%= assetRenderer.getViewInContextMessage() %>" /> &raquo;</a>
-			</div>
-		</c:if>
+			<c:if test="<%= showContextLink && !print %>">
+				<div class="asset-more">
+					<a href="<%= assetRenderer.getURLViewInContext((LiferayPortletRequest)renderRequest, (LiferayPortletResponse)renderResponse, viewFullContentURL.toString()) %>"><liferay-ui:message key="<%= assetRenderer.getViewInContextMessage() %>" /> &raquo;</a>
+				</div>
+			</c:if>
 
-		<c:if test="<%= enableFlags %>">
-			<div class="asset-flag">
-				<liferay-ui:flags
-					className="<%= assetEntry.getClassName() %>"
-					classPK="<%= assetEntry.getClassPK() %>"
-					contentTitle="<%= assetRenderer.getTitle() %>"
-					reportedUserId="<%= assetRenderer.getUserId() %>"
-				/>
-			</div>
-		</c:if>
+			<c:if test="<%= enableFlags %>">
+				<div class="asset-flag">
+					<liferay-ui:flags
+						className="<%= assetEntry.getClassName() %>"
+						classPK="<%= assetEntry.getClassPK() %>"
+						contentTitle="<%= assetRenderer.getTitle() %>"
+						reportedUserId="<%= assetRenderer.getUserId() %>"
+					/>
+				</div>
+			</c:if>
 
-		<c:if test="<%= enableRatings %>">
+			<c:if test="<%= enableRatings %>">
 			<div class="asset-ratings">
 				<liferay-ui:ratings
+						className="<%= assetEntry.getClassName() %>"
+						classPK="<%= assetEntry.getClassPK() %>"
+					/>
+				</div>
+			</c:if>
+
+			<c:if test="<%= Validator.isNotNull(assetRenderer.getDiscussionPath()) && enableComments %>">
+				<br />
+
+				<portlet:actionURL var="discussionURL">
+					<portlet:param name="struts_action" value='<%= "/asset_publisher/" + assetRenderer.getDiscussionPath() %>' />
+				</portlet:actionURL>
+
+				<liferay-ui:discussion
 					className="<%= assetEntry.getClassName() %>"
 					classPK="<%= assetEntry.getClassPK() %>"
+					formAction="<%= discussionURL %>"
+					formName='<%= "fm" + assetEntry.getClassPK() %>'
+					ratingsEnabled="<%= enableCommentRatings %>"
+					redirect="<%= currentURL %>"
+					subject="<%= assetRenderer.getTitle() %>"
+					userId="<%= assetRenderer.getUserId() %>"
 				/>
+			</c:if>
+		</div>
+
+		<c:if test="<%= show %>">
+			<div class="asset-metadata">
+				<%@ include file="/html/portlet/asset_publisher/asset_metadata.jspf" %>
 			</div>
 		</c:if>
-
-		<c:if test="<%= Validator.isNotNull(assetRenderer.getDiscussionPath()) && enableComments %>">
-			<br />
-
-			<portlet:actionURL var="discussionURL">
-				<portlet:param name="struts_action" value='<%= "/asset_publisher/" + assetRenderer.getDiscussionPath() %>' />
-			</portlet:actionURL>
-
-			<liferay-ui:discussion
-				className="<%= assetEntry.getClassName() %>"
-				classPK="<%= assetEntry.getClassPK() %>"
-				formAction="<%= discussionURL %>"
-				formName='<%= "fm" + assetEntry.getClassPK() %>'
-				ratingsEnabled="<%= enableCommentRatings %>"
-				redirect="<%= currentURL %>"
-				subject="<%= assetRenderer.getTitle() %>"
-				userId="<%= assetRenderer.getUserId() %>"
-			/>
-		</c:if>
-	</div>
-
-	<c:if test="<%= show %>">
-		<div class="asset-metadata">
-			<%@ include file="/html/portlet/asset_publisher/asset_metadata.jspf" %>
-		</div>
 	</c:if>
 </div>
 

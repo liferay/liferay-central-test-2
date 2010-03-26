@@ -18,12 +18,13 @@ import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.asset.model.BaseAssetRenderer;
 import com.liferay.portlet.imagegallery.model.IGImage;
-import com.liferay.portlet.imagegallery.service.permission.IGPermission;
+import com.liferay.portlet.imagegallery.service.permission.IGImagePermission;
 
 import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
@@ -65,22 +66,15 @@ public class IGImageAssetRenderer extends BaseAssetRenderer {
 			(ThemeDisplay)liferayPortletRequest.getAttribute(
 				WebKeys.THEME_DISPLAY);
 
-		PortletURL editPortletURL = null;
+		PortletURL editPortletURL = liferayPortletResponse.createRenderURL(
+			PortletKeys.IMAGE_GALLERY);
 
-		if (IGPermission.contains(
-				themeDisplay.getPermissionChecker(),
-				themeDisplay.getScopeGroupId(), ActionKeys.ADD_IMAGE)) {
-
-			editPortletURL = liferayPortletResponse.createRenderURL(
-				PortletKeys.IMAGE_GALLERY);
-
-			editPortletURL.setParameter(
-				"struts_action", "/image_gallery/edit_image");
-			editPortletURL.setParameter(
-				"folderId", String.valueOf(_image.getFolderId()));
- 			editPortletURL.setParameter(
-				 "imageId", String.valueOf(_image.getImageId()));
-		}
+		editPortletURL.setParameter(
+			"struts_action", "/image_gallery/edit_image");
+		editPortletURL.setParameter(
+			"folderId", String.valueOf(_image.getFolderId()));
+		editPortletURL.setParameter(
+			"imageId", String.valueOf(_image.getImageId()));
 
 		return editPortletURL;
 	}
@@ -111,6 +105,28 @@ public class IGImageAssetRenderer extends BaseAssetRenderer {
 
 	public String getViewInContextMessage() {
 		return "view-album";
+	}
+
+	public boolean hasEditPermission(PermissionChecker permissionChecker) {
+		try {
+			return IGImagePermission.contains(
+				permissionChecker, _image, ActionKeys.UPDATE);
+		}
+		catch (Exception e) {
+		}
+
+		return false;
+	}
+
+	public boolean hasViewPermission(PermissionChecker permissionChecker) {
+		try {
+			return IGImagePermission.contains(
+				permissionChecker, _image, ActionKeys.VIEW);
+		}
+		catch (Exception e) {
+		}
+
+		return true;
 	}
 
 	public boolean isPrintable() {

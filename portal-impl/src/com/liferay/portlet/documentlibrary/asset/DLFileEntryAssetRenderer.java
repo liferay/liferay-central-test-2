@@ -19,13 +19,14 @@ import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.asset.model.BaseAssetRenderer;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
-import com.liferay.portlet.documentlibrary.service.permission.DLPermission;
+import com.liferay.portlet.documentlibrary.service.permission.DLFileEntryPermission;
 
 import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
@@ -75,22 +76,15 @@ public class DLFileEntryAssetRenderer extends BaseAssetRenderer {
 			(ThemeDisplay)liferayPortletRequest.getAttribute(
 				WebKeys.THEME_DISPLAY);
 
-		PortletURL editPortletURL = null;
+		PortletURL editPortletURL = liferayPortletResponse.createRenderURL(
+			PortletKeys.DOCUMENT_LIBRARY);
 
-		if (DLPermission.contains(
-				themeDisplay.getPermissionChecker(),
-				themeDisplay.getScopeGroupId(), ActionKeys.ADD_DOCUMENT)) {
-
-			editPortletURL = liferayPortletResponse.createRenderURL(
-				PortletKeys.DOCUMENT_LIBRARY);
-
-			editPortletURL.setParameter(
-				"struts_action", "/document_library/edit_file_entry");
-			editPortletURL.setParameter(
-				"folderId", String.valueOf(_entry.getFolderId()));
- 			editPortletURL.setParameter(
-				"name", String.valueOf(_entry.getName()));
-		}
+		editPortletURL.setParameter(
+			"struts_action", "/document_library/edit_file_entry");
+		editPortletURL.setParameter(
+			"folderId", String.valueOf(_entry.getFolderId()));
+		editPortletURL.setParameter(
+			"name", String.valueOf(_entry.getName()));
 
 		return editPortletURL;
 	}
@@ -130,6 +124,28 @@ public class DLFileEntryAssetRenderer extends BaseAssetRenderer {
 
 	public long getUserId() {
 		return _entry.getUserId();
+	}
+
+	public boolean hasEditPermission(PermissionChecker permissionChecker) {
+		try {
+			return DLFileEntryPermission.contains(
+				permissionChecker, _entry, ActionKeys.UPDATE);
+		}
+		catch (Exception e) {
+		}
+
+		return false;
+	}
+
+	public boolean hasViewPermission(PermissionChecker permissionChecker) {
+		try {
+			return DLFileEntryPermission.contains(
+				permissionChecker, _entry, ActionKeys.VIEW);
+		}
+		catch (Exception e) {
+		}
+
+		return true;
 	}
 
 	public boolean isConvertible() {

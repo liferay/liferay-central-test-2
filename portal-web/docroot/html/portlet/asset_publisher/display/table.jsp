@@ -46,6 +46,8 @@ if (Validator.isNotNull(assetRenderer.getUrlTitle())) {
 String viewURL = viewInContext ? assetRenderer.getURLViewInContext((LiferayPortletRequest)renderRequest, (LiferayPortletResponse)renderResponse, viewFullContentURL.toString()) : viewFullContentURL.toString();
 
 viewURL = _checkViewURL(viewURL, currentURL, themeDisplay);
+
+boolean viewPermission = assetRenderer.hasViewPermission(permissionChecker);
 %>
 
 <c:if test="<%= assetEntryIndex == 0 %>">
@@ -82,7 +84,7 @@ viewURL = _checkViewURL(viewURL, currentURL, themeDisplay);
 	<tr <%= style %>>
 		<td>
 			<c:choose>
-				<c:when test="<%= Validator.isNotNull(viewURL) %>">
+				<c:when test="<%= viewPermission && Validator.isNotNull(viewURL) %>">
 					<a href="<%= viewURL %>"><%= title %></a>
 				</c:when>
 				<c:otherwise>
@@ -157,7 +159,9 @@ viewURL = _checkViewURL(viewURL, currentURL, themeDisplay);
 		%>
 
 				<td>
-					<liferay-ui:message key="<%= value %>" />
+					<c:if test="<%= viewPermission %>">
+						<liferay-ui:message key="<%= value %>" />
+					</c:if>
 				</td>
 
 		<%

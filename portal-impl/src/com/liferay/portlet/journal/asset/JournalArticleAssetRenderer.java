@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
@@ -27,7 +28,7 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.asset.model.BaseAssetRenderer;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalArticleDisplay;
-import com.liferay.portlet.journal.service.permission.JournalPermission;
+import com.liferay.portlet.journal.service.permission.JournalArticlePermission;
 import com.liferay.portlet.journalcontent.util.JournalContentUtil;
 
 import javax.portlet.PortletURL;
@@ -82,24 +83,17 @@ public class JournalArticleAssetRenderer extends BaseAssetRenderer {
 			(ThemeDisplay)liferayPortletRequest.getAttribute(
 				WebKeys.THEME_DISPLAY);
 
-		PortletURL editPortletURL = null;
+		PortletURL editPortletURL = liferayPortletResponse.createRenderURL(
+			PortletKeys.JOURNAL);
 
-		if (JournalPermission.contains(
-				themeDisplay.getPermissionChecker(),
-				themeDisplay.getScopeGroupId(), ActionKeys.ADD_ARTICLE)) {
-
-			editPortletURL = liferayPortletResponse.createRenderURL(
-				PortletKeys.JOURNAL);
-
-			editPortletURL.setParameter(
-				"struts_action", "/journal/edit_article");
-			editPortletURL.setParameter(
-				"groupId", String.valueOf(_article.getGroupId()));
-			editPortletURL.setParameter(
-				"articleId", _article.getArticleId());
-			editPortletURL.setParameter(
-				"version", String.valueOf(_article.getVersion()));
-		}
+		editPortletURL.setParameter(
+			"struts_action", "/journal/edit_article");
+		editPortletURL.setParameter(
+			"groupId", String.valueOf(_article.getGroupId()));
+		editPortletURL.setParameter(
+			"articleId", _article.getArticleId());
+		editPortletURL.setParameter(
+			"version", String.valueOf(_article.getVersion()));
 
 		return editPortletURL;
 	}
@@ -165,6 +159,16 @@ public class JournalArticleAssetRenderer extends BaseAssetRenderer {
 
 	public String getViewInContextMessage() {
 		return "view";
+	}
+
+	public boolean hasEditPermission(PermissionChecker permissionChecker) {
+		return JournalArticlePermission.contains(
+			permissionChecker,_article, ActionKeys.UPDATE);
+	}
+
+	public boolean hasViewPermission(PermissionChecker permissionChecker) {
+		return JournalArticlePermission.contains(
+			permissionChecker,_article, ActionKeys.VIEW);
 	}
 
 	public boolean isConvertible() {

@@ -17,13 +17,14 @@ package com.liferay.portlet.calendar.asset;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.asset.model.BaseAssetRenderer;
 import com.liferay.portlet.calendar.model.CalEvent;
-import com.liferay.portlet.calendar.service.permission.CalendarPermission;
+import com.liferay.portlet.calendar.service.permission.CalEventPermission;
 
 import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
@@ -73,20 +74,13 @@ public class CalEventAssetRenderer extends BaseAssetRenderer {
 			(ThemeDisplay)liferayPortletRequest.getAttribute(
 				WebKeys.THEME_DISPLAY);
 
-		PortletURL editPortletURL = null;
+		PortletURL editPortletURL = liferayPortletResponse.createRenderURL(
+			PortletKeys.CALENDAR);
 
-		if (CalendarPermission.contains(
-				themeDisplay.getPermissionChecker(),
-				themeDisplay.getScopeGroupId(), ActionKeys.ADD_EVENT)) {
-
-			editPortletURL = liferayPortletResponse.createRenderURL(
-				PortletKeys.CALENDAR);
-
-			editPortletURL.setParameter(
-				"struts_action", "/calendar/edit_event");
-			editPortletURL.setParameter(
-				"eventId", String.valueOf(_event.getEventId()));
-		}
+		editPortletURL.setParameter(
+			"struts_action", "/calendar/edit_event");
+		editPortletURL.setParameter(
+			"eventId", String.valueOf(_event.getEventId()));
 
 		return editPortletURL;
 	}
@@ -106,6 +100,16 @@ public class CalEventAssetRenderer extends BaseAssetRenderer {
 
 	public long getUserId() {
 		return _event.getUserId();
+	}
+
+	public boolean hasEditPermission(PermissionChecker permissionChecker) {
+		return CalEventPermission.contains(
+			permissionChecker, _event, ActionKeys.UPDATE);
+	}
+
+	public boolean hasViewPermission(PermissionChecker permissionChecker) {
+		return CalEventPermission.contains(
+			permissionChecker, _event, ActionKeys.VIEW);
 	}
 
 	public boolean isPrintable() {

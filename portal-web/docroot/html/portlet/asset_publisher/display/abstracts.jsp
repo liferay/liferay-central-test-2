@@ -50,6 +50,8 @@ String viewURL = viewInContext ? assetRenderer.getURLViewInContext((LiferayPortl
 String viewURLMessage = viewInContext ? assetRenderer.getViewInContextMessage() : "read-more-x-about-x";
 
 viewURL = _checkViewURL(viewURL, currentURL, themeDisplay);
+
+boolean viewPermission = assetRenderer.hasViewPermission(permissionChecker);
 %>
 
 <c:if test="<%= show %>">
@@ -58,7 +60,7 @@ viewURL = _checkViewURL(viewURL, currentURL, themeDisplay);
 
 		<h3 class="asset-title <%= assetRendererFactory.getType() %>">
 			<c:choose>
-				<c:when test="<%= Validator.isNotNull(viewURL) %>">
+				<c:when test="<%= viewPermission && Validator.isNotNull(viewURL) %>">
 					<a href="<%= viewURL %>"><%= title %></a>
 				</c:when>
 				<c:otherwise>
@@ -67,36 +69,38 @@ viewURL = _checkViewURL(viewURL, currentURL, themeDisplay);
 			</c:choose>
 		</h3>
 
-		<div class="asset-content">
-			<div class="asset-summary">
+		<c:if test="<%= viewPermission %>">
+			<div class="asset-content">
+				<div class="asset-summary">
 
-				<%
-				String path = assetRenderer.render(renderRequest, renderResponse, AssetRenderer.TEMPLATE_ABSTRACT);
+					<%
+					String path = assetRenderer.render(renderRequest, renderResponse, AssetRenderer.TEMPLATE_ABSTRACT);
 
-				request.setAttribute(WebKeys.ASSET_RENDERER, assetRenderer);
-				request.setAttribute(WebKeys.ASSET_PUBLISHER_ABSTRACT_LENGTH, abstractLength);
-				%>
+					request.setAttribute(WebKeys.ASSET_RENDERER, assetRenderer);
+					request.setAttribute(WebKeys.ASSET_PUBLISHER_ABSTRACT_LENGTH, abstractLength);
+					%>
 
-				<c:choose>
-					<c:when test="<%= path == null %>">
-						<%= summary %>
-					</c:when>
-					<c:otherwise>
-						<liferay-util:include page="<%= path %>" portletId="<%= assetRendererFactory.getPortletId() %>" />
-					</c:otherwise>
-				</c:choose>
+					<c:choose>
+						<c:when test="<%= path == null %>">
+							<%= summary %>
+						</c:when>
+						<c:otherwise>
+							<liferay-util:include page="<%= path %>" portletId="<%= assetRendererFactory.getPortletId() %>" />
+						</c:otherwise>
+					</c:choose>
+				</div>
+
+				<c:if test="<%= Validator.isNotNull(viewURL) %>">
+					<div class="asset-more">
+						<a href="<%= viewURL %>"><liferay-ui:message arguments='<%= new Object[] {"aui-helper-hidden-accessible", assetRenderer.getTitle()} %>' key="<%=viewURLMessage%>" /> &raquo; </a>
+					</div>
+				</c:if>
 			</div>
 
-			<c:if test="<%= Validator.isNotNull(viewURL) %>">
-				<div class="asset-more">
-					<a href="<%= viewURL %>"><liferay-ui:message arguments='<%= new Object[] {"aui-helper-hidden-accessible", assetRenderer.getTitle()} %>' key="<%=viewURLMessage%>" /> &raquo; </a>
-				</div>
-			</c:if>
-		</div>
-
-		<div class="asset-metadata">
-			<%@ include file="/html/portlet/asset_publisher/asset_metadata.jspf" %>
-		</div>
+			<div class="asset-metadata">
+				<%@ include file="/html/portlet/asset_publisher/asset_metadata.jspf" %>
+			</div>
+		</c:if>
 	</div>
 
 	<c:if test="<%= (assetEntryIndex + 1) == results.size() %>">

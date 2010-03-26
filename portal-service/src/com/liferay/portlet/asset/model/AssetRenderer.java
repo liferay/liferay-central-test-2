@@ -16,6 +16,7 @@ package com.liferay.portlet.asset.model;
 
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
+import com.liferay.portal.security.permission.PermissionChecker;
 
 import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
@@ -65,6 +66,10 @@ public interface AssetRenderer {
 	public long getUserId();
 
 	public String getViewInContextMessage();
+
+	public boolean hasEditPermission(PermissionChecker permissionChecker);
+
+	public boolean hasViewPermission(PermissionChecker permissionChecker);
 
 	public boolean isConvertible();
 
