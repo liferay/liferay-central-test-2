@@ -721,11 +721,7 @@ public class StringUtil {
 
 		if (y >= 0) {
 
-			// The number 5 is arbitrary and is used as extra padding to reduce
-			// buffer expansion
-
-			StringBuilder sb = new StringBuilder(
-				s.length() + 5 * newSub.length());
+			StringBundler sb = new StringBundler();
 
 			int length = oldSub.length();
 			int x = 0;
@@ -894,12 +890,7 @@ public class StringUtil {
 		int y = s.lastIndexOf(oldSub);
 
 		if (y >= 0) {
-
-			// The number 5 is arbitrary and is used as extra padding to reduce
-			// buffer expansion
-
-			StringBuilder sb = new StringBuilder(
-				s.length() + 5 * newSub.length());
+			StringBundler sb = new StringBundler();
 
 			int length = oldSub.length();
 			int x = 0;
@@ -960,7 +951,7 @@ public class StringUtil {
 			return s;
 		}
 
-		StringBuilder sb = new StringBuilder(s.length());
+		StringBundler sb = new StringBundler(values.size() * 2 + 1);
 
 		int pos = 0;
 
