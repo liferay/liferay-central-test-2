@@ -174,15 +174,21 @@ long classPK = ((Number)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS
 								if (curRole == null) {
 									previousActorName = PortalUtil.getUserName(workflowLog.getPreviousUserId(), StringPool.BLANK);
 									actorName = curUser.getFullName();
+								%>
+
+								<div>
+									<%= LanguageUtil.format(pageContext, "task-assigned-to-x.-previous-assignee-was-x", new Object[] {actorName, HtmlUtil.escape(previousActorName)}) %>
+								</div>
+
+								<%
 								}
 								else {
 									previousActorName = curRole.getDescriptiveName();
 									actorName = curRole.getDescriptiveName();
 								}
 								%>
-
 								<div>
-									<%= LanguageUtil.format(pageContext, "x-assigned-the-task-to-x", new Object[] {HtmlUtil.escape(previousActorName), actorName}) %>
+									<%= LanguageUtil.format(pageContext, "task-initially-assigned-to-the-x-role", new Object[] {actorName}) %>
 								</div>
 							</c:otherwise>
 						</c:choose>
