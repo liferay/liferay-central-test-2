@@ -14,29 +14,34 @@
 
 package com.liferay.portal.util.comparator;
 
+import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.Group;
-
-import java.io.Serializable;
-
-import java.util.Comparator;
 
 /**
  * <a href="GroupFriendlyURLComparator.java.html"><b><i>View Source</i></b></a>
  *
- * @author Alexander Chow
+ * @author Brian Wing Shun Chan
  */
-public class GroupFriendlyURLComparator
-	implements Comparator<Group>, Serializable {
+public class GroupFriendlyURLComparator extends OrderByComparator {
+
+	public static String ORDER_BY_ASC = "groupFriendlyURL ASC";
+
+	public static String ORDER_BY_DESC = "groupFriendlyURL DESC";
+
+	public static String[] ORDER_BY_FIELDS = {"groupFriendlyURL"};
 
 	public GroupFriendlyURLComparator() {
-		this(true);
+		this(false);
 	}
 
 	public GroupFriendlyURLComparator(boolean ascending) {
 		_ascending = ascending;
 	}
 
-	public int compare(Group group1, Group group2) {
+	public int compare(Object obj1, Object obj2) {
+		Group group1 = (Group)obj1;
+		Group group2 = (Group)obj2;
+
 		int value = group1.getFriendlyURL().compareTo(group2.getFriendlyURL());
 
 		if (_ascending) {
@@ -45,6 +50,23 @@ public class GroupFriendlyURLComparator
 		else {
 			return -value;
 		}
+	}
+
+	public String getOrderBy() {
+		if (_ascending) {
+			return ORDER_BY_ASC;
+		}
+		else {
+			return ORDER_BY_DESC;
+		}
+	}
+
+	public String[] getOrderByFields() {
+		return ORDER_BY_FIELDS;
+	}
+
+	public boolean isAscending() {
+		return _ascending;
 	}
 
 	private boolean _ascending;

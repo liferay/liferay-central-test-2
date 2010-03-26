@@ -87,7 +87,7 @@
 	<sql id="com.liferay.portal.service.persistence.GroupFinder.findByC_N_D">
 		<![CDATA[
 			SELECT
-				Group_.groupId AS groupId, Group_.name AS groupName, Group_.type_ AS groupType
+				Group_.groupId AS groupId, Group_.name AS groupName, Group_.type_ AS groupType, Group_.friendlyURL AS groupFriendlyURL
 			FROM
 				Group_
 			[$JOIN$]
@@ -198,6 +198,17 @@
 		<![CDATA[
 			WHERE
 				(Group_.type_ = ?)
+		]]>
+	</sql>
+	<sql id="com.liferay.portal.service.persistence.GroupFinder.joinByUserGroup">
+		<![CDATA[
+			INNER JOIN
+				UserGroupRole ON
+					(UserGroupRole.userId = ?)
+			WHERE
+				(Group_.liveGroupId = 0) AND
+				(UserGroupRole.groupId = Group_.groupId) AND
+				(UserGroupRole.roleId = ?)
 		]]>
 	</sql>
 	<sql id="com.liferay.portal.service.persistence.GroupFinder.joinByUserGroupRole">

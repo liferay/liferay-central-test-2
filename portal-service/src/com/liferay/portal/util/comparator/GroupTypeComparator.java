@@ -28,7 +28,7 @@ public class GroupTypeComparator extends OrderByComparator {
 
 	public static String ORDER_BY_DESC = "groupType DESC, groupName DESC";
 
-	public static String[] ORDER_BY_FIELDS = {"type", "name"};
+	public static String[] ORDER_BY_FIELDS = {"groupType", "groupName"};
 
 	public GroupTypeComparator() {
 		this(false);
