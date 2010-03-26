@@ -417,7 +417,8 @@ public class LayoutAction extends Action {
 
 		EventRequestImpl eventRequestImpl = EventRequestFactory.create(
 			request, portlet, invokerPortlet, portletContext, windowState,
-			portletMode, portletPreferences, layout.getPlid());
+			portletMode, portletPreferences,
+			layoutTypePortlet.getLayout().getPlid());
 
 		eventRequestImpl.setEvent(
 			serializeEvent(event, invokerPortlet.getPortletClassLoader()));
