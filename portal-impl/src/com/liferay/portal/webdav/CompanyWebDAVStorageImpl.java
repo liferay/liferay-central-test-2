@@ -45,15 +45,17 @@ public class CompanyWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		throws WebDAVException {
 
 		try {
-			LinkedHashMap<String, Object> groupParams =
+			LinkedHashMap<String, Object> params =
 				new LinkedHashMap<String, Object>();
 
-			groupParams.put("usersGroups", new Long(webDavRequest.getUserId()));
+			params.put("userGroup", webDavRequest.getUserId());
+			params.put("usersGroups", webDavRequest.getUserId());
+			params.put("usersOrgs", webDavRequest.getUserId());
 
 			List<Resource> resources = new ArrayList<Resource>();
 
 			List<Group> groups = GroupLocalServiceUtil.search(
-				webDavRequest.getCompanyId(), null, null, groupParams,
+				webDavRequest.getCompanyId(), null, null, params,
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
 			for (Group group : groups) {

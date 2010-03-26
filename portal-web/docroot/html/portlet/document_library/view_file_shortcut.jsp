@@ -164,7 +164,7 @@ request.setAttribute("view_file_shortcut.jsp-fileShortcut", fileShortcut);
 			<label><liferay-ui:message key="url" /></label>
 
 			<liferay-ui:input-resource
-				url='<%= themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/document/" + fileShortcutId %>'
+				url='<%= themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + fileShortcutId %>'
 			/>
 		</div>
 
@@ -187,11 +187,11 @@ request.setAttribute("view_file_shortcut.jsp-fileShortcut", fileShortcut);
 				cssClass="file-entry-avatar"
 				image='<%= "../file_system/large/" + DLUtil.getGenericName(extension) %>'
 				message="download"
-				url='<%= themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/document/" + fileShortcutId %>'
+				url='<%= themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + fileShortcutId %>'
 			/>
 
 			<div class="file-entry-name">
-				<a href="<%= themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/document/" + fileShortcutId %>">
+				<a href="<%= themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + fileShortcutId %>">
 					<%= toFileEntry.getTitle() %>
 				</a>
 			</div>
@@ -209,7 +209,7 @@ request.setAttribute("view_file_shortcut.jsp-fileShortcut", fileShortcut);
 							image='<%= "../file_system/small/" + conversion %>'
 							label="<%= true %>"
 							message="<%= conversion.toUpperCase() %>"
-							url='<%= themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/document/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + toFolder.getFolderId() + StringPool.SLASH + HttpUtil.encodeURL(toFileEntry.getTitle()) + "?targetExtension=" + conversion %>'
+							url='<%= themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + toFolder.getFolderId() + StringPool.SLASH + HttpUtil.encodeURL(toFileEntry.getTitle()) + "?targetExtension=" + conversion %>'
 						/>
 
 					<%
@@ -269,7 +269,7 @@ request.setAttribute("view_file_shortcut.jsp-fileShortcut", fileShortcut);
 
 				sb.append(themeDisplay.getPortalURL());
 				sb.append(themeDisplay.getPathContext());
-				sb.append("/document/");
+				sb.append("/documents/");
 				sb.append(fileShortcutId);
 				sb.append("?version=");
 				sb.append(String.valueOf(fileVersion.getVersion()));

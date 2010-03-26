@@ -323,7 +323,7 @@
 	</filter-mapping>
 	<filter-mapping>
 		<filter-name>Auto Login Filter</filter-name>
-		<url-pattern>/document/*</url-pattern>
+		<url-pattern>/documents/*</url-pattern>
 		<dispatcher>REQUEST</dispatcher>
 		<dispatcher>FORWARD</dispatcher>
 	</filter-mapping>
@@ -336,12 +336,6 @@
 	<filter-mapping>
 		<filter-name>Auto Login Filter</filter-name>
 		<url-pattern>/user/*</url-pattern>
-		<dispatcher>REQUEST</dispatcher>
-		<dispatcher>FORWARD</dispatcher>
-	</filter-mapping>
-	<filter-mapping>
-		<filter-name>Auto Login Filter</filter-name>
-		<url-pattern>/vls/*</url-pattern>
 		<dispatcher>REQUEST</dispatcher>
 		<dispatcher>FORWARD</dispatcher>
 	</filter-mapping>
@@ -765,11 +759,6 @@
 		<load-on-startup>2</load-on-startup>
 	</servlet>
 	<servlet>
-		<servlet-name>Document Servlet</servlet-name>
-		<servlet-class>com.liferay.portal.servlet.DocumentServlet</servlet-class>
-		<load-on-startup>2</load-on-startup>
-	</servlet>
-	<servlet>
 		<servlet-name>Facebook Servlet</servlet-name>
 		<servlet-class>com.liferay.portal.servlet.FacebookServlet</servlet-class>
 		<load-on-startup>2</load-on-startup>
@@ -904,8 +893,8 @@
 		<load-on-startup>2</load-on-startup>
 	</servlet>
 	<servlet>
-		<servlet-name>Virtual Listing Servlet</servlet-name>
-		<servlet-class>com.liferay.portal.virtuallisting.VirtualListingServlet</servlet-class>
+		<servlet-name>Web Server Servlet</servlet-name>
+		<servlet-class>com.liferay.portal.webserver.WebServerServlet</servlet-class>
 		<load-on-startup>2</load-on-startup>
 	</servlet>
 	<servlet>
@@ -925,10 +914,6 @@
 	<servlet-mapping>
 		<servlet-name>Display Chart</servlet-name>
 		<url-pattern>/display_chart/*</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>Document Servlet</servlet-name>
-		<url-pattern>/document/*</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>Facebook Servlet</servlet-name>
@@ -1243,8 +1228,8 @@
 		<url-pattern>/software_catalog/*</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
-		<servlet-name>Virtual Listing Servlet</servlet-name>
-		<url-pattern>/vls/*</url-pattern>
+		<servlet-name>Web Server Servlet</servlet-name>
+		<url-pattern>/documents/*</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>Widget Servlet</servlet-name>

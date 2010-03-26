@@ -82,7 +82,7 @@ public class VirtualHostFilter extends BasePortalFilter {
 			friendlyURL.startsWith(_PATH_C) ||
 			friendlyURL.startsWith(_PATH_DELEGATE) ||
 			friendlyURL.startsWith(_PATH_DISPLAY_CHART) ||
-			friendlyURL.startsWith(_PATH_DOCUMENT) ||
+			friendlyURL.startsWith(_PATH_DOCUMENTS) ||
 			friendlyURL.startsWith(_PATH_DTD) ||
 			friendlyURL.startsWith(_PATH_FACEBOOK) ||
 			friendlyURL.startsWith(_PATH_GOOGLE_GADGET) ||
@@ -96,7 +96,6 @@ public class VirtualHostFilter extends BasePortalFilter {
 			friendlyURL.startsWith(_PATH_SITEMAP_XML) ||
 			friendlyURL.startsWith(_PATH_SOFTWARE_CATALOG) ||
 			friendlyURL.startsWith(_PATH_VTI) ||
-			friendlyURL.startsWith(_PATH_VLS) ||
 			friendlyURL.startsWith(_PATH_WAP) ||
 			friendlyURL.startsWith(_PATH_WIDGET) ||
 			friendlyURL.startsWith(_PATH_XMLRPC)) {
@@ -328,7 +327,7 @@ public class VirtualHostFilter extends BasePortalFilter {
 
 	private static final String _PATH_DISPLAY_CHART = "/display_chart";
 
-	private static final String _PATH_DOCUMENT = "/document/";
+	private static final String _PATH_DOCUMENTS = "/documents/";
 
 	private static final String _PATH_DTD = "/dtd/";
 
@@ -353,8 +352,6 @@ public class VirtualHostFilter extends BasePortalFilter {
 	private static final String _PATH_SITEMAP_XML = "/sitemap.xml";
 
 	private static final String _PATH_SOFTWARE_CATALOG = "/software_catalog";
-
-	private static final String _PATH_VLS = "/vls/";
 
 	private static final String _PATH_VTI = "/_vti_";
 

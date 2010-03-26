@@ -132,7 +132,7 @@ if (folder != null) {
 
 		ResultRow row = new ResultRow(fileEntry, fileEntry.getFileEntryId(), i);
 
-		String rowHREF = themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/document/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + folderId + StringPool.SLASH + HttpUtil.encodeURL(fileEntry.getTitle());
+		String rowHREF = themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + folderId + StringPool.SLASH + HttpUtil.encodeURL(fileEntry.getTitle());
 
 		// Title
 
@@ -167,7 +167,7 @@ if (folder != null) {
 		sb.append("selectDocumentLibrary('");
 		sb.append(themeDisplay.getPortalURL());
 		sb.append(themeDisplay.getPathContext());
-		sb.append("/document/");
+		sb.append("/documents/");
 		sb.append(groupId);
 		sb.append(StringPool.SLASH);
 		sb.append(fileEntry.getUuid());

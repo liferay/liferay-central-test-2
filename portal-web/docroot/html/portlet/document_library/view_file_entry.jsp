@@ -64,7 +64,7 @@ try {
 catch (Exception e) {
 }
 
-String fileUrl = themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/document/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + folderId + StringPool.SLASH + HttpUtil.encodeURL(title);
+String fileUrl = themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + folderId + StringPool.SLASH + HttpUtil.encodeURL(title);
 String webDavUrl = StringPool.BLANK;
 
 if (portletDisplay.isWebDAVEnabled()) {
@@ -185,7 +185,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 			<label><liferay-ui:message key="url" /></label>
 
 			<liferay-ui:input-resource
-				url='<%= themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/document/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + fileEntry.getUuid() %>'
+				url='<%= themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + fileEntry.getUuid() %>'
 			/>
 		</div>
 
@@ -329,7 +329,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 
 				sb.append(themeDisplay.getPortalURL());
 				sb.append(themeDisplay.getPathContext());
-				sb.append("/document/");
+				sb.append("/documents/");
 				sb.append(themeDisplay.getScopeGroupId());
 				sb.append(StringPool.SLASH);
 				sb.append(folderId);
