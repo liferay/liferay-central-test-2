@@ -171,7 +171,7 @@ String labelTag = _buildLabel(inlineLabel, showForLabel, forLabel);
 			booleanValue = GetterUtil.getBoolean(valueString);
 		}
 
-		booleanValue = ParamUtil.getBoolean(request, namespace + name, booleanValue);
+		booleanValue = ParamUtil.getBoolean(request, name, booleanValue);
 
 		String onClick = "AUI().one(this).previous().val(this.checked);";
 		String onClickDynamicAttribute = _getAttributeIgnoreCase(dynamicAttributes, "onclick");
