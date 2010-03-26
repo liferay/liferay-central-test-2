@@ -1,7 +1,7 @@
 Selenium.prototype.getCurrentDay = function() {
 	var date = new Date();
 
-	return d.getDate();
+	return date.getDate();
 };
 
 Selenium.prototype.getCurrentMonth = function() {
