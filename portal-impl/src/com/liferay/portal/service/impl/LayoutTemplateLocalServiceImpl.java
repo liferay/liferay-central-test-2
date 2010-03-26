@@ -15,7 +15,7 @@
 package com.liferay.portal.service.impl;
 
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.io.unsync.UnsyncStringWriter;
+import com.liferay.portal.kernel.io.DummyWriter;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.plugin.PluginPackage;
@@ -40,7 +40,6 @@ import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.layoutconfiguration.util.velocity.InitColumnProcessor;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -533,7 +532,7 @@ public class LayoutTemplateLocalServiceImpl
 
 			VelocityEngineUtil.mergeTemplate(
 				velocityTemplateId, velocityTemplateContent, velocityContext,
-				new PrintWriter(new UnsyncStringWriter(true)));
+				new DummyWriter());
 
 			return ListUtil.sort(processor.getColumns());
 		}
