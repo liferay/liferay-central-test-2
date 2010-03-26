@@ -173,17 +173,13 @@ public class ThemeUtil {
 		FreeMarkerEngineUtil.mergeTemplate(
 			source, freeMarkerContext, unsyncStringWriter);
 
-		// Print output
-
-		String output = unsyncStringWriter.toString();
-
 		if (write) {
-			pageContext.getOut().print(output);
+			unsyncStringWriter.getStringBundler().writeTo(pageContext.getOut());
 
 			return null;
 		}
 		else {
-			return output;
+			return unsyncStringWriter.toString();
 		}
 	}
 
@@ -314,17 +310,13 @@ public class ThemeUtil {
 		VelocityEngineUtil.mergeTemplate(
 			source, velocityContext, unsyncStringWriter);
 
-		// Print output
-
-		String output = unsyncStringWriter.toString();
-
 		if (write) {
-			pageContext.getOut().print(output);
+			unsyncStringWriter.getStringBundler().writeTo(pageContext.getOut());
 
 			return null;
 		}
 		else {
-			return output;
+			return unsyncStringWriter.toString();
 		}
 	}
 

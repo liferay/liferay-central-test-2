@@ -14,6 +14,9 @@
 
 package com.liferay.portal.kernel.util;
 
+import java.io.IOException;
+import java.io.Writer;
+
 /**
  * <a href="StringBundler.java.html"><b><i>View Source</i></b></a>
  *
@@ -202,6 +205,12 @@ public class StringBundler {
 		}
 
 		return s;
+	}
+
+	public void writeTo(Writer writer) throws IOException {
+		for(int i = 0; i < _arrayIndex; i++) {
+			writer.write(_array[i]);
+		}
 	}
 
 	protected void expandCapacity(int newCapacity) {
