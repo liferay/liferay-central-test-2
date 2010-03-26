@@ -32,7 +32,6 @@ import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.ServerDetector;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Document;
@@ -712,13 +711,8 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 	}
 
 	private String _encodeKey(long companyId) {
-		StringBundler sb = new StringBundler();
 
-		sb.append(Portlet.class.getName());
-		sb.append(StringPool.POUND);
-		sb.append(companyId);
-
-		return sb.toString();
+		return _keyPrefix.concat(Long.toString(companyId));
 	}
 
 	private PortletApp _getPortletApp(String servletContextName) {
@@ -2073,5 +2067,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		new ConcurrentHashMap<String, Portlet>();
 	private static Map<String, Portlet> _friendlyURLMapperPortlets =
 		new ConcurrentHashMap<String, Portlet>();
+	private static String _keyPrefix =
+			Portlet.class.getName().concat(StringPool.POUND);
 
 }
