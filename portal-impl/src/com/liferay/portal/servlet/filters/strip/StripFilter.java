@@ -25,6 +25,7 @@ import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.KMPSearch;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
 import com.liferay.portal.servlet.filters.etag.ETagUtil;
@@ -33,6 +34,7 @@ import com.liferay.portal.util.PropsValues;
 import com.liferay.util.servlet.ServletResponseUtil;
 
 import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -47,6 +49,18 @@ public class StripFilter extends BasePortalFilter {
 
 	public static final String SKIP_FILTER =
 		StripFilter.class.getName() + "SKIP_FILTER";
+
+	public void init(FilterConfig filterConfig) {
+		super.init(filterConfig);
+		String jsSkipCacheKeys = filterConfig.getInitParameter(_JS_SKIP_CACHE_KEYS);
+		if(!Validator.isNull(jsSkipCacheKeys)) {
+			_jsSkipCacheKeys = jsSkipCacheKeys.split(StringPool.COMMA);
+		}
+		String cssSkipCacheKeys = filterConfig.getInitParameter(_CSS_SKIP_CACHE_KEYS);
+		if(!Validator.isNull(cssSkipCacheKeys)) {
+			_cssSkipCacheKeys = cssSkipCacheKeys.split(StringPool.COMMA);
+		}
+	}
 
 	protected int countContinuousWhiteSpace(byte[] oldByteArray, int offset) {
 		int count = 0;
@@ -167,7 +181,18 @@ public class StripFilter extends BasePortalFilter {
 			if (minifiedContent == null) {
 				minifiedContent = MinifierUtil.minifyCss(content);
 
-				_minifierCache.put(key, minifiedContent);
+				boolean skipCache = false;
+				if(_cssSkipCacheKeys != null) {
+					for(String skipCacheKey : _cssSkipCacheKeys) {
+						if(minifiedContent.contains(skipCacheKey)) {
+							skipCache = true;
+							break;
+						}
+					}
+				}
+				if(!skipCache) {
+					_minifierCache.put(key, minifiedContent);
+				}
 			}
 		}
 
@@ -276,8 +301,18 @@ public class StripFilter extends BasePortalFilter {
 
 			if (minifiedContent == null) {
 				minifiedContent = MinifierUtil.minifyJavaScript(content);
-
-				_minifierCache.put(key, minifiedContent);
+				boolean skipCache = false;
+				if(_jsSkipCacheKeys != null) {
+					for(String skipCacheKey : _jsSkipCacheKeys) {
+						if(minifiedContent.contains(skipCacheKey)) {
+							skipCache = true;
+							break;
+						}
+					}
+				}
+				if(!skipCache) {
+					_minifierCache.put(key, minifiedContent);
+				}
 			}
 		}
 
@@ -463,6 +498,12 @@ public class StripFilter extends BasePortalFilter {
 
 	private static Log _log = LogFactoryUtil.getLog(StripFilter.class);
 
+	private static final String _CSS_SKIP_CACHE_KEYS = "cssSkipCacheKeys";
+	
+	private static final String _JS_SKIP_CACHE_KEYS = "jsSkipCacheKeys";
+
+	private String[] _cssSkipCacheKeys;
+	private String[] _jsSkipCacheKeys;
 	private ConcurrentLRUCache<String, String> _minifierCache =
 		new ConcurrentLRUCache<String, String>(
 			PropsValues.MINIFIER_INLINE_CONTENT_CACHE_SIZE);
