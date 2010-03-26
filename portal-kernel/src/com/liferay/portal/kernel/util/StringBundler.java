@@ -105,7 +105,7 @@ public class StringBundler {
 	}
 
 	public StringBundler append(StringBundler sb) {
-		if (sb == null || sb._arrayIndex == 0) {
+		if ((sb == null) || (sb._arrayIndex == 0)) {
 			return this;
 		}
 
