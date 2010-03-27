@@ -21,7 +21,6 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.Document;
-import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
@@ -44,12 +43,11 @@ import java.io.InputStream;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import org.jets3t.service.S3Service;
@@ -293,7 +291,8 @@ public class S3Hook extends BaseHook {
 		long groupId = GetterUtil.getLong(ids[2]);
 		long repositoryId = GetterUtil.getLong(ids[3]);
 
-		Map<String, Document> documents = new HashMap<String, Document>();
+		Collection<Document> documents = new ArrayList<Document>();
+
 		try {
 			S3Object[] searchObjects = _s3Service.listObjects(
 				_s3Bucket, getKey(companyId, repositoryId), null);
@@ -331,7 +330,7 @@ public class S3Hook extends BaseHook {
 						continue;
 					}
 
-					documents.put(document.get(Field.UID), document);
+					documents.add(document);
 				}
 				catch (Exception e) {
 					_log.error("Reindexing " + fileName, e);

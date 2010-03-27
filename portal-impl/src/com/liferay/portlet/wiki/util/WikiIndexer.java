@@ -41,10 +41,10 @@ import com.liferay.portlet.wiki.service.WikiNodeLocalServiceUtil;
 import com.liferay.portlet.wiki.service.WikiNodeServiceUtil;
 import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.portlet.PortletURL;
 
@@ -146,8 +146,7 @@ public class WikiIndexer extends BaseIndexer {
 
 		Document document = getDocument(page);
 
-		SearchEngineUtil.updateDocument(
-			page.getCompanyId(), document.get(Field.UID), document);
+		SearchEngineUtil.updateDocument(page.getCompanyId(), document);
 	}
 
 	protected void doReindex(String className, long classPK) throws Exception {
@@ -245,12 +244,13 @@ public class WikiIndexer extends BaseIndexer {
 				int pageStart = (i * Indexer.DEFAULT_INTERVAL);
 				int pageEnd = pageStart + Indexer.DEFAULT_INTERVAL;
 
-				reindexPages(nodeId, pageStart, pageEnd);
+				reindexPages(companyId, nodeId, pageStart, pageEnd);
 			}
 		}
 	}
 
-	protected void reindexPages(long nodeId, int pageStart, int pageEnd)
+	protected void reindexPages(
+			long companyId, long nodeId, int pageStart, int pageEnd)
 		throws Exception {
 
 		List<WikiPage> pages = WikiPageLocalServiceUtil.getPages(
@@ -260,14 +260,12 @@ public class WikiIndexer extends BaseIndexer {
 			return;
 		}
 
-		long companyId = pages.get(0).getCompanyId();
-		
-		Map<String, Document> documents = new HashMap<String, Document>();
+		Collection<Document> documents = new ArrayList<Document>();
 
 		for (WikiPage page : pages) {
 			Document document = getDocument(page);
 
-			documents.put(document.get(Field.UID), document);
+			documents.add(document);
 		}
 
 		SearchEngineUtil.updateDocuments(companyId, documents);

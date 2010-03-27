@@ -48,10 +48,10 @@ import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBThreadLocalServiceUtil;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.portlet.PortletURL;
 
@@ -209,7 +209,7 @@ public class MBIndexer extends BaseIndexer {
 
 		return document;
 	}
-	
+
 	protected void doReindex(Object obj) throws Exception {
 		MBMessage message = (MBMessage)obj;
 
@@ -221,8 +221,7 @@ public class MBIndexer extends BaseIndexer {
 
 		Document document = getDocument(message);
 
-		SearchEngineUtil.updateDocument(
-			message.getCompanyId(), document.get(Field.UID), document);
+		SearchEngineUtil.updateDocument(message.getCompanyId(), document);
 	}
 
 	protected void doReindex(String className, long classPK) throws Exception {
@@ -316,13 +315,15 @@ public class MBIndexer extends BaseIndexer {
 				int messageStart = (i * Indexer.DEFAULT_INTERVAL);
 				int messageEnd = messageStart + Indexer.DEFAULT_INTERVAL;
 
-				reindexMessages(groupId, categoryId, messageStart, messageEnd);
+				reindexMessages(
+					companyId, groupId, categoryId, messageStart, messageEnd);
 			}
 		}
 	}
 
 	protected void reindexMessages(
-			long groupId, long categoryId, int messageStart, int messageEnd)
+			long companyId, long groupId, long categoryId, int messageStart,
+			int messageEnd)
 		throws Exception {
 
 		List<MBMessage> messages =
@@ -334,18 +335,15 @@ public class MBIndexer extends BaseIndexer {
 			return;
 		}
 
-		long companyId = messages.get(0).getCompanyId();
-
-		Map<String, Document> documents = new HashMap<String, Document>();
+		Collection<Document> documents = new ArrayList<Document>();
 
 		for (MBMessage message : messages) {
 			Document document = getDocument(message);
-			documents.put(document.get(Field.UID), document);
+
+			documents.add(document);
 		}
 
-		if (!documents.isEmpty()) {
-			SearchEngineUtil.updateDocuments(companyId, documents);
-		}
+		SearchEngineUtil.updateDocuments(companyId, documents);
 	}
 
 	protected void reindexRoot(long companyId) throws Exception {
@@ -380,7 +378,8 @@ public class MBIndexer extends BaseIndexer {
 				int entryStart = (i * Indexer.DEFAULT_INTERVAL);
 				int entryEnd = entryStart + Indexer.DEFAULT_INTERVAL;
 
-				reindexMessages(groupId, categoryId, entryStart, entryEnd);
+				reindexMessages(
+					companyId, groupId, categoryId, entryStart, entryEnd);
 			}
 		}
 	}

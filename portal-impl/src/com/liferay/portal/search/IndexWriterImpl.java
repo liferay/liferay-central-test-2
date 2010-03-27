@@ -18,11 +18,9 @@ import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.IndexWriter;
-import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.search.messaging.SearchRequest;
 
 import java.util.Collection;
-import java.util.Map;
 
 /**
  * <a href="IndexWriterImpl.java.html"><b><i>View Source</i></b></a>
@@ -32,20 +30,19 @@ import java.util.Map;
 public class IndexWriterImpl implements IndexWriter {
 
 	public void addDocument(long companyId, Document document) {
-		SearchRequest searchRequest = SearchRequest.add(companyId, document);
+		SearchRequest searchRequest = SearchRequest.addDocument(
+			companyId, document);
 
 		MessageBusUtil.sendMessage(
 			DestinationNames.SEARCH_WRITER, searchRequest);
 	}
 
-	public void addDocuments(long companyId, Collection<Document> documents)
-		throws SearchException {
-
+	public void addDocuments(long companyId, Collection<Document> documents) {
 		if (documents.isEmpty()) {
 			return;
 		}
 
-		SearchRequest searchRequest = SearchRequest.addMultiple(
+		SearchRequest searchRequest = SearchRequest.addDocuments(
 			companyId, documents);
 
 		MessageBusUtil.sendMessage(
@@ -53,20 +50,19 @@ public class IndexWriterImpl implements IndexWriter {
 	}
 
 	public void deleteDocument(long companyId, String uid) {
-		SearchRequest searchRequest = SearchRequest.delete(companyId, uid);
+		SearchRequest searchRequest = SearchRequest.deleteDocument(
+			companyId, uid);
 
 		MessageBusUtil.sendMessage(
 			DestinationNames.SEARCH_WRITER, searchRequest);
 	}
 
-	public void deleteDocuments(long companyId, Collection<String> uids)
-		throws SearchException {
-
+	public void deleteDocuments(long companyId, Collection<String> uids) {
 		if (uids.isEmpty()) {
 			return;
 		}
 
-		SearchRequest searchRequest = SearchRequest.deleteMultiple(
+		SearchRequest searchRequest = SearchRequest.deleteDocuments(
 			companyId, uids);
 
 		MessageBusUtil.sendMessage(
@@ -81,26 +77,26 @@ public class IndexWriterImpl implements IndexWriter {
 			DestinationNames.SEARCH_WRITER, searchRequest);
 	}
 
-	public void updateDocument(long companyId, String uid, Document document) {
-		SearchRequest searchRequest = SearchRequest.update(
-			companyId, uid, document);
+	public void updateDocument(long companyId, Document document) {
+		SearchRequest searchRequest = SearchRequest.updateDocument(
+			companyId, document);
 
 		MessageBusUtil.sendMessage(
 			DestinationNames.SEARCH_WRITER, searchRequest);
 	}
 
-
-	public void updateDocuments(long companyId, Map<String, Document> documents)
-		throws SearchException {
+	public void updateDocuments(
+		long companyId, Collection<Document> documents) {
 
 		if (documents.isEmpty()) {
 			return;
 		}
 
-		SearchRequest searchRequest = SearchRequest.updateMultiple(
+		SearchRequest searchRequest = SearchRequest.updateDocuments(
 			companyId, documents);
 
 		MessageBusUtil.sendMessage(
 			DestinationNames.SEARCH_WRITER, searchRequest);
 	}
+
 }

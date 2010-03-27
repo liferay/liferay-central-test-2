@@ -15,7 +15,6 @@
 package com.liferay.portal.kernel.search;
 
 import java.util.Collection;
-import java.util.Map;
 
 /**
  * <a href="IndexWriter.java.html"><b><i>View Source</i></b></a>
@@ -27,22 +26,22 @@ public interface IndexWriter {
 	public void addDocument(long companyId, Document document)
 		throws SearchException;
 
-	public void addDocuments(long companyId, Collection<Document> document)
-	throws SearchException;
+	public void addDocuments(long companyId, Collection<Document> documents)
+		throws SearchException;
 
 	public void deleteDocument(long companyId, String uid)
 		throws SearchException;
 
 	public void deleteDocuments(long companyId, Collection<String> uids)
-	throws SearchException;
+		throws SearchException;
 
 	public void deletePortletDocuments(long companyId, String portletId)
 		throws SearchException;
 
-	public void updateDocument(long companyId, String uid, Document document)
+	public void updateDocument(long companyId, Document document)
 		throws SearchException;
 
-	public void updateDocuments(long companyId, Map<String, Document> documents)
-	throws SearchException;
+	public void updateDocuments(long companyId, Collection<Document> documents)
+		throws SearchException;
 
 }

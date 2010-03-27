@@ -25,7 +25,6 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.Document;
-import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
@@ -37,10 +36,10 @@ import com.liferay.portlet.documentlibrary.util.DLUtil;
 
 import java.io.InputStream;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.abdera.model.Entry;
 import org.apache.abdera.model.Link;
@@ -249,15 +248,14 @@ public class CMISHook extends BaseHook {
 	}
 
 	public void reindex(String[] ids) throws SearchException {
-		Map<String, Document> documents = new HashMap<String, Document>();
-
 		long companyId = GetterUtil.getLong(ids[0]);
+		String portletId = ids[1];
+		long groupId = GetterUtil.getLong(ids[2]);
+		long repositoryId = GetterUtil.getLong(ids[3]);
+
+		Collection<Document> documents = new ArrayList<Document>();
 
 		try {
-			String portletId = ids[1];
-			long groupId = GetterUtil.getLong(ids[2]);
-			long repositoryId = GetterUtil.getLong(ids[3]);
-
 			Entry repositoryFolderEntry = getRepositoryFolderEntry(
 				companyId, repositoryId);
 
@@ -281,16 +279,17 @@ public class CMISHook extends BaseHook {
 					if (document == null) {
 						continue;
 					}
-					documents.put(document.get(Field.UID), document);
+
+					documents.add(document);
 				}
 				catch (Exception e) {
 					_log.error("Reindexing " + fileName, e);
 				}
 			}
 		}
-		catch (Exception e) {
+		catch (CMISException cmise) {
 			if (_log.isErrorEnabled()) {
-				_log.error("Error while reindexing files", e);
+				_log.error(cmise, cmise);
 			}
 		}
 

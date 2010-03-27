@@ -41,11 +41,11 @@ import com.liferay.portlet.expando.util.ExpandoBridgeIndexerUtil;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 import javax.portlet.PortletURL;
 
@@ -162,8 +162,7 @@ public class JournalIndexer extends BaseIndexer {
 
 		Document document = getDocument(article);
 
-		SearchEngineUtil.updateDocument(
-			article.getCompanyId(), document.get(Field.UID), document);
+		SearchEngineUtil.updateDocument(article.getCompanyId(), document);
 	}
 
 	protected void doReindex(String className, long classPK) throws Exception {
@@ -318,12 +317,12 @@ public class JournalIndexer extends BaseIndexer {
 			return;
 		}
 
-		Map<String, Document> documents = new HashMap<String, Document>();
+		Collection<Document> documents = new ArrayList<Document>();
 
 		for (JournalArticle article : articles) {
 			Document document = getDocument(article);
 
-			documents.put(document.get(Field.UID), document);
+			documents.add(document);
 		}
 
 		SearchEngineUtil.updateDocuments(companyId, documents);

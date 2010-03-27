@@ -18,7 +18,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 import java.util.Collection;
-import java.util.Map;
 
 /**
  * <a href="SearchEngineUtil.java.html"><b><i>View Source</i></b></a>
@@ -34,7 +33,7 @@ public class SearchEngineUtil {
 	 */
 	public static final int ALL_POS = -1;
 
-	public static void addDocument(long companyId, Document doc)
+	public static void addDocument(long companyId, Document document)
 		throws SearchException {
 
 		if (isIndexReadOnly()) {
@@ -42,30 +41,31 @@ public class SearchEngineUtil {
 		}
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Add document " + doc.toString());
+			_log.debug("Add document " + document.toString());
 		}
 
-		_searchPermissionChecker.addPermissionFields(companyId, doc);
+		_searchPermissionChecker.addPermissionFields(companyId, document);
 
-		_searchEngine.getWriter().addDocument(companyId, doc);
+		_searchEngine.getWriter().addDocument(companyId, document);
 	}
 
-	public static void addDocuments(long companyId, Collection<Document> docs)
+	public static void addDocuments(
+			long companyId, Collection<Document> documents)
 		throws SearchException {
 
-		if (isIndexReadOnly() || (docs == null) || (docs.isEmpty())) {
+		if (isIndexReadOnly() || (documents == null) || documents.isEmpty()) {
 			return;
 		}
 
-		for (Document doc : docs) {
+		for (Document document : documents) {
 			if (_log.isDebugEnabled()) {
-				_log.debug("Add document " + doc.toString());
+				_log.debug("Add document " + document.toString());
 			}
 
-			_searchPermissionChecker.addPermissionFields(companyId, doc);			
+			_searchPermissionChecker.addPermissionFields(companyId, document);
 		}
 
-		_searchEngine.getWriter().addDocuments(companyId, docs);
+		_searchEngine.getWriter().addDocuments(companyId, documents);
 	}
 
 	public static void deleteDocument(long companyId, String uid)
@@ -81,7 +81,7 @@ public class SearchEngineUtil {
 	public static void deleteDocuments(long companyId, Collection<String> uids)
 		throws SearchException {
 
-		if (isIndexReadOnly() || (uids == null) || (uids.isEmpty())) {
+		if (isIndexReadOnly() || (uids == null) || uids.isEmpty()) {
 			return;
 		}
 
@@ -188,7 +188,7 @@ public class SearchEngineUtil {
 		_portalSearchEngine.setIndexReadOnly(indexReadOnly);
 	}
 
-	public static void updateDocument(long companyId, String uid, Document doc)
+	public static void updateDocument(long companyId, Document document)
 		throws SearchException {
 
 		if (isIndexReadOnly()) {
@@ -196,30 +196,30 @@ public class SearchEngineUtil {
 		}
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Document " + doc.toString());
+			_log.debug("Document " + document.toString());
 		}
 
-		_searchPermissionChecker.addPermissionFields(companyId, doc);
+		_searchPermissionChecker.addPermissionFields(companyId, document);
 
-		_searchEngine.getWriter().updateDocument(companyId, uid, doc);
+		_searchEngine.getWriter().updateDocument(companyId, document);
 	}
 
 	public static void updateDocuments(
-			long companyId, Map<String, Document> documents)
+			long companyId, Collection<Document> documents)
 		throws SearchException {
 
-		if (isIndexReadOnly() || (documents == null) || (documents.isEmpty())) {
+		if (isIndexReadOnly() || (documents == null) || documents.isEmpty()) {
 			return;
 		}
 
-		for (Document document : documents.values()) {
+		for (Document document : documents) {
 			if (_log.isDebugEnabled()) {
 				_log.debug("Document " + document.toString());
 			}
 
 			_searchPermissionChecker.addPermissionFields(companyId, document);
 		}
-		
+
 		_searchEngine.getWriter().updateDocuments(companyId, documents);
 	}
 

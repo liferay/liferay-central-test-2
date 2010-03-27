@@ -24,7 +24,6 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.Document;
-import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
@@ -43,10 +42,10 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * <a href="FileSystemHook.java.html"><b><i>View Source</i></b></a>
@@ -262,11 +261,11 @@ public class FileSystemHook extends BaseHook {
 		long groupId = GetterUtil.getLong(ids[2]);
 		long repositoryId = GetterUtil.getLong(ids[3]);
 
+		Collection<Document> documents = new ArrayList<Document>();
+
 		File repistoryDir = getRepositoryDir(companyId, repositoryId);
 
 		String[] fileNames = FileUtil.listDirs(repistoryDir);
-
-		Map<String, Document> documents = new HashMap<String, Document>();
 
 		for (int i = 0; i < fileNames.length; i++) {
 			String fileName = fileNames[i];
@@ -289,7 +288,7 @@ public class FileSystemHook extends BaseHook {
 					continue;
 				}
 
-				documents.put(document.get(Field.UID), document);
+				documents.add(document);
 			}
 			catch (Exception e) {
 				_log.error("Reindexing " + fileName, e);

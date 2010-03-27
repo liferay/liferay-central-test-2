@@ -20,6 +20,8 @@ import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.IndexWriter;
 
+import java.util.Collection;
+
 /**
  * <a href="SearchWriterMessageListener.java.html"><b><i>View Source</i></b></a>
  *
@@ -50,15 +52,29 @@ public class SearchWriterMessageListener
 			searchRequest.getSearchEngineCommand();
 
 		long companyId = searchRequest.getCompanyId();
+		Document document = searchRequest.getDocument();
+		Collection<Document> documents = searchRequest.getDocuments();
 		String id = searchRequest.getId();
-		Document doc = searchRequest.getDocument();
+		Collection<String> ids = searchRequest.getIds();
 
 		IndexWriter indexWriter = searchEngine.getWriter();
 
-		if (searchEngineCommand.equals(SearchEngineCommand.ADD)) {
-			indexWriter.addDocument(companyId, doc);
+		if (searchEngineCommand.equals(SearchEngineCommand.ADD_DOCUMENT)) {
+			indexWriter.addDocument(companyId, document);
 		}
-		else if (searchEngineCommand.equals(SearchEngineCommand.DELETE)) {
+		else if (searchEngineCommand.equals(
+					SearchEngineCommand.ADD_DOCUMENTS)) {
+
+			indexWriter.addDocuments(companyId, documents);
+		}
+		else if (searchEngineCommand.equals(
+					SearchEngineCommand.DELETE_DOCUMENT)) {
+
+			indexWriter.deleteDocuments(companyId, ids);
+		}
+		else if (searchEngineCommand.equals(
+					SearchEngineCommand.DELETE_DOCUMENTS)) {
+
 			indexWriter.deleteDocument(companyId, id);
 		}
 		else if (searchEngineCommand.equals(
@@ -66,8 +82,15 @@ public class SearchWriterMessageListener
 
 			indexWriter.deletePortletDocuments(companyId, id);
 		}
-		else if (searchEngineCommand.equals(SearchEngineCommand.UPDATE)) {
-			indexWriter.updateDocument(companyId, id, doc);
+		else if (searchEngineCommand.equals(
+					SearchEngineCommand.UPDATE_DOCUMENT)) {
+
+			indexWriter.updateDocument(companyId, document);
+		}
+		else if (searchEngineCommand.equals(
+					SearchEngineCommand.UPDATE_DOCUMENTS)) {
+
+			indexWriter.updateDocuments(companyId, documents);
 		}
 	}
 

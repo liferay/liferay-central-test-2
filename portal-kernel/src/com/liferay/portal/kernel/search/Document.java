@@ -118,6 +118,8 @@ public interface Document extends Serializable {
 
 	public String get(String name);
 
+	public String getUID();
+
 	public Date getDate(String name) throws ParseException;
 
 	public Map<String, Field> getFields();

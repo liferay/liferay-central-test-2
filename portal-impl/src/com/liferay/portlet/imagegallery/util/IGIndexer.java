@@ -39,10 +39,10 @@ import com.liferay.portlet.imagegallery.service.IGFolderLocalServiceUtil;
 import com.liferay.portlet.imagegallery.service.IGFolderServiceUtil;
 import com.liferay.portlet.imagegallery.service.IGImageLocalServiceUtil;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.portlet.PortletURL;
 
@@ -149,8 +149,7 @@ public class IGIndexer extends BaseIndexer {
 
 		Document document = getDocument(image);
 
-		SearchEngineUtil.updateDocument(
-			image.getCompanyId(), document.get(Field.UID), document);
+		SearchEngineUtil.updateDocument(image.getCompanyId(), document);
 	}
 
 	protected void doReindex(String className, long classPK) throws Exception {
@@ -204,13 +203,15 @@ public class IGIndexer extends BaseIndexer {
 				int entryStart = (i * Indexer.DEFAULT_INTERVAL);
 				int entryEnd = entryStart + Indexer.DEFAULT_INTERVAL;
 
-				reindexImages(groupId, folderId, entryStart, entryEnd);
+				reindexImages(
+					companyId, groupId, folderId, entryStart, entryEnd);
 			}
 		}
 	}
 
 	protected void reindexImages(
-			long groupId, long folderId, int entryStart, int entryEnd)
+			long companyId, long groupId, long folderId, int entryStart,
+			int entryEnd)
 		throws Exception {
 
 		List<IGImage> images = IGImageLocalServiceUtil.getImages(
@@ -220,15 +221,12 @@ public class IGIndexer extends BaseIndexer {
 			return;
 		}
 
-		long companyId = images.get(0).getCompanyId();
-
-		Map<String, Document> documents = new HashMap<String, Document>();
+		Collection<Document> documents = new ArrayList<Document>();
 
 		for (IGImage image : images) {
-
 			Document document = getDocument(image);
 
-			documents.put(document.get(Field.UID), document);
+			documents.add(document);
 		}
 
 		SearchEngineUtil.updateDocuments(companyId, documents);
@@ -266,7 +264,8 @@ public class IGIndexer extends BaseIndexer {
 				int entryStart = (j * Indexer.DEFAULT_INTERVAL);
 				int entryEnd = entryStart + Indexer.DEFAULT_INTERVAL;
 
-				reindexImages(groupId, folderId, entryStart, entryEnd);
+				reindexImages(
+					companyId, groupId, folderId, entryStart, entryEnd);
 			}
 		}
 	}

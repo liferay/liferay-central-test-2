@@ -43,6 +43,7 @@ import com.liferay.portlet.expando.util.ExpandoBridgeIndexer;
 import com.liferay.portlet.expando.util.ExpandoBridgeIndexerUtil;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -248,8 +249,8 @@ public class UserIndexer extends BaseIndexer {
 		else if (obj instanceof long[]) {
 			long[] userIds = (long[])obj;
 
-			Map<Long, Map<String, Document>> documentsMap =
-				new HashMap<Long, Map<String, Document>>();
+			Map<Long, Collection<Document>> documentsMap =
+				new HashMap<Long, Collection<Document>>();
 
 			for (long userId : userIds) {
 				User user = UserLocalServiceUtil.getUserById(userId);
@@ -262,23 +263,24 @@ public class UserIndexer extends BaseIndexer {
 
 				long companyId = user.getCompanyId();
 
-				Map<String, Document> documents = documentsMap.get(companyId);
+				Collection<Document> documents = documentsMap.get(companyId);
 
 				if (documents == null) {
-					documents = new HashMap<String, Document>();
+					documents = new ArrayList<Document>();
+
 					documentsMap.put(companyId, documents);
 				}
 
-				documents.put(document.get(Field.UID), document);
+				documents.add(document);
 			}
 
-			for (Map.Entry<Long, Map<String, Document>> documenstEntry:
+			for (Map.Entry<Long, Collection<Document>> entry :
 					documentsMap.entrySet()) {
 
-				Map<String, Document> documents = documenstEntry.getValue();
+				long companyId = entry.getKey();
+				Collection<Document> documents = entry.getValue();
 
-				SearchEngineUtil.updateDocuments(
-					documenstEntry.getKey(), documents);
+				SearchEngineUtil.updateDocuments(companyId, documents);
 			}
 		}
 		else if (obj instanceof User) {
@@ -290,8 +292,7 @@ public class UserIndexer extends BaseIndexer {
 
 			Document document = getDocument(user);
 
-			SearchEngineUtil.updateDocument(
-				user.getCompanyId(), document.get(Field.UID), document);
+			SearchEngineUtil.updateDocument(user.getCompanyId(), document);
 		}
 	}
 
@@ -484,17 +485,17 @@ public class UserIndexer extends BaseIndexer {
 		if (users.isEmpty()) {
 			return;
 		}
-		
-		Map<String, Document> documents = new HashMap<String, Document>();
+
+		Collection<Document> documents = new ArrayList<Document>();
 
 		for (User user : users) {
 			if (user.isDefaultUser()) {
 				continue;
 			}
-			
+
 			Document document = getDocument(user);
 
-			documents.put(document.get(Field.UID), document);
+			documents.add(document);
 		}
 
 		SearchEngineUtil.updateDocuments(companyId, documents);

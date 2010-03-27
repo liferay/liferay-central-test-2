@@ -35,10 +35,10 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.search.BaseIndexer;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.portlet.PortletURL;
 
@@ -185,8 +185,7 @@ public class PluginPackageIndexer extends BaseIndexer {
 
 		Document document = getDocument(pluginPackage);
 
-		SearchEngineUtil.updateDocument(
-			CompanyConstants.SYSTEM, document.get(Field.UID), document);
+		SearchEngineUtil.updateDocument(CompanyConstants.SYSTEM, document);
 	}
 
 	protected void doReindex(String className, long classPK) throws Exception {
@@ -196,12 +195,14 @@ public class PluginPackageIndexer extends BaseIndexer {
 		SearchEngineUtil.deletePortletDocuments(
 			CompanyConstants.SYSTEM, PORTLET_ID);
 
-		Map<String, Document> documents = new HashMap<String, Document>();
+		Collection<Document> documents = new ArrayList<Document>();
+
 		for (PluginPackage pluginPackage :
 				PluginPackageUtil.getAllAvailablePluginPackages()) {
 
 			Document document = getDocument(pluginPackage);
-			documents.put(document.get(Field.UID), document);
+
+			documents.add(document);
 		}
 
 		SearchEngineUtil.updateDocuments(CompanyConstants.SYSTEM, documents);

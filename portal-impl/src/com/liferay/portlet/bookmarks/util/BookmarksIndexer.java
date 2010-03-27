@@ -36,10 +36,10 @@ import com.liferay.portlet.bookmarks.service.BookmarksFolderServiceUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeIndexerUtil;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.portlet.PortletURL;
 
@@ -142,8 +142,7 @@ public class BookmarksIndexer extends BaseIndexer {
 
 		Document document = getDocument(entry);
 
-		SearchEngineUtil.updateDocument(
-			entry.getCompanyId(), document.get(Field.UID), document);
+		SearchEngineUtil.updateDocument(entry.getCompanyId(), document);
 	}
 
 	protected void doReindex(String className, long classPK) throws Exception {
@@ -164,24 +163,24 @@ public class BookmarksIndexer extends BaseIndexer {
 	}
 
 	protected void reindexEntries(
-			long groupId, long folderId, int entryStart, int entryEnd)
+			long companyId, long groupId, long folderId, int entryStart,
+			int entryEnd)
 		throws Exception {
 
 		List<BookmarksEntry> entries =
 			BookmarksEntryLocalServiceUtil.getEntries(
 				groupId, folderId, entryStart, entryEnd);
-		
+
 		if (entries.isEmpty()) {
 			return;
 		}
 
-		long companyId = entries.get(0).getCompanyId();
-
-		Map<String, Document> documents = new HashMap<String, Document>();
+		Collection<Document> documents = new ArrayList<Document>();
 
 		for (BookmarksEntry entry : entries) {
 			Document document = getDocument(entry);
-			documents.put(document.get(Field.UID), document);
+
+			documents.add(document);
 		}
 
 		SearchEngineUtil.updateDocuments(companyId, documents);
@@ -222,7 +221,8 @@ public class BookmarksIndexer extends BaseIndexer {
 				int entryStart = (i * Indexer.DEFAULT_INTERVAL);
 				int entryEnd = entryStart + Indexer.DEFAULT_INTERVAL;
 
-				reindexEntries(groupId, folderId, entryStart, entryEnd);
+				reindexEntries(
+					companyId, groupId, folderId, entryStart, entryEnd);
 			}
 		}
 	}
@@ -259,7 +259,8 @@ public class BookmarksIndexer extends BaseIndexer {
 				int entryStart = (i * Indexer.DEFAULT_INTERVAL);
 				int entryEnd = entryStart + Indexer.DEFAULT_INTERVAL;
 
-				reindexEntries(groupId, folderId, entryStart, entryEnd);
+				reindexEntries(
+					companyId, groupId, folderId, entryStart, entryEnd);
 			}
 		}
 	}

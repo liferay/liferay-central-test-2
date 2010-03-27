@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.io.unsync.UnsyncBufferedInputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.Document;
-import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
@@ -43,10 +42,9 @@ import java.io.InputStream;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
@@ -547,7 +545,7 @@ public class JCRHook extends BaseHook {
 		long groupId = GetterUtil.getLong(ids[2]);
 		long repositoryId = GetterUtil.getLong(ids[3]);
 
-		Map<String, Document> documents = new HashMap<String, Document>();
+		Collection<Document> documents = new ArrayList<Document>();
 
 		Session session = null;
 
@@ -583,7 +581,7 @@ public class JCRHook extends BaseHook {
 							continue;
 						}
 
-						documents.put(document.get(Field.UID), document);
+						documents.add(document);
 					}
 					catch (Exception e2) {
 						_log.error("Reindexing " + node.getName(), e2);

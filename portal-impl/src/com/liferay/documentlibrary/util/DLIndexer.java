@@ -211,8 +211,7 @@ public class DLIndexer extends BaseIndexer {
 		Document document = getDocument(fileModel);
 
 		if (document != null) {
-			SearchEngineUtil.updateDocument(
-				fileModel.getCompanyId(), document.get(Field.UID), document);
+			SearchEngineUtil.updateDocument(fileModel.getCompanyId(), document);
 		}
 	}
 

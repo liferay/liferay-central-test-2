@@ -35,10 +35,10 @@ import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeIndexerUtil;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.portlet.PortletURL;
 
@@ -142,8 +142,7 @@ public class BlogsIndexer extends BaseIndexer {
 
 		Document document = getDocument(entry);
 
-		SearchEngineUtil.updateDocument(
-			entry.getCompanyId(), document.get(Field.UID), document);
+		SearchEngineUtil.updateDocument(entry.getCompanyId(), document);
 	}
 
 	protected void doReindex(String className, long classPK) throws Exception {
@@ -185,13 +184,13 @@ public class BlogsIndexer extends BaseIndexer {
 		if (entries.isEmpty()) {
 			return;
 		}
-		
-		Map<String, Document> documents = new HashMap<String, Document>();
+
+		Collection<Document> documents = new ArrayList<Document>();
 
 		for (BlogsEntry entry : entries) {
 			Document document = getDocument(entry);
 
-			documents.put(document.get(Field.UID), document);
+			documents.add(document);
 		}
 
 		SearchEngineUtil.updateDocuments(companyId, documents);

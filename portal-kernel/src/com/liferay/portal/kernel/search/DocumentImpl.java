@@ -307,6 +307,16 @@ public class DocumentImpl implements Document {
 		return _fields;
 	}
 
+	public String getUID() {
+		Field field = _fields.get(Field.UID);
+
+		if (field == null) {
+			throw new RuntimeException("UID is not set");
+		}
+
+		return field.getValue();
+	}
+
 	public String[] getValues(String name) {
 		Field field = _fields.get(name);
 

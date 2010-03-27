@@ -39,10 +39,10 @@ import com.liferay.portlet.softwarecatalog.model.SCProductEntry;
 import com.liferay.portlet.softwarecatalog.model.SCProductVersion;
 import com.liferay.portlet.softwarecatalog.service.SCProductEntryLocalServiceUtil;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.portlet.PortletURL;
 
@@ -185,8 +185,7 @@ public class SCIndexer extends BaseIndexer {
 
 		Document document = getDocument(productEntry);
 
-		SearchEngineUtil.updateDocument(
-			productEntry.getCompanyId(), document.get(Field.UID), document);
+		SearchEngineUtil.updateDocument(productEntry.getCompanyId(), document);
 	}
 
 	protected void doReindex(String className, long classPK) throws Exception {
@@ -247,12 +246,12 @@ public class SCIndexer extends BaseIndexer {
 			return;
 		}
 
-		Map<String, Document> documents = new HashMap<String, Document>();
+		Collection<Document> documents = new ArrayList<Document>();
 
 		for (SCProductEntry productEntry : productEntries) {
 			Document document = getDocument(productEntry);
 
-			documents.put(document.get(Field.UID), document);
+			documents.add(document);
 		}
 
 		SearchEngineUtil.updateDocuments(companyId, documents);
