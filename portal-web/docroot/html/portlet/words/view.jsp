@@ -23,11 +23,11 @@ boolean scramble = ParamUtil.getBoolean(request, "scramble", true);
 String[] words = (String[])request.getAttribute(WebKeys.WORDS_LIST);
 %>
 
-<portlet:renderURL var="viewURL">
+<portlet:renderURL var="portletURL">
 	<portlet:param name="struts_action" value="/words/view" />
 </portlet:renderURL>
 
-<aui:form action="<%= viewURL %>" method="post" name="fm">
+<aui:form action="<%= portletURL %>" method="post" name="fm">
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.SEARCH %>" />
 
 	<liferay-ui:error exception="<%= ScramblerException.class %>" message="please-enter-a-word-that-is-at-least-3-characters-long" />
