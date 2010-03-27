@@ -264,21 +264,6 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 	</aui:button-row>
 </aui:form>
 
-<aui:script use="aui-base">
-	var allDayCheckbox = A.one('#<portlet:namespace />allDayCheckbox');
-	var durationHour = A.one('#<portlet:namespace />durationHour');
-
-	if (allDayCheckbox && durationHour) {
-		allDayCheckbox.on(
-			'change',
-			function() {
-				if (!this.get('checked') && (durationHour.val() == '24')) {
-					durationHour.val('1');
-				}
-			}
-		);
-	}
-</aui:script>
 <aui:script>
 	function <portlet:namespace />init() {
 		<c:choose>
@@ -322,6 +307,22 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 	document.<portlet:namespace />fm.<portlet:namespace />endDateHour.disabled = true;
 	document.<portlet:namespace />fm.<portlet:namespace />endDateMinute.disabled = true;
 	document.<portlet:namespace />fm.<portlet:namespace />endDateAmPm.disabled = true;
+</aui:script>
+
+<aui:script use="aui-base">
+	var allDayCheckbox = A.one('#<portlet:namespace />allDayCheckbox');
+	var durationHour = A.one('#<portlet:namespace />durationHour');
+
+	if (allDayCheckbox && durationHour) {
+		allDayCheckbox.on(
+			'change',
+			function() {
+				if (!this.get('checked') && (durationHour.val() == '24')) {
+					durationHour.val('1');
+				}
+			}
+		);
+	}
 </aui:script>
 
 <%
