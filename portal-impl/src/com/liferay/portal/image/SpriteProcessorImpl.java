@@ -14,6 +14,7 @@
 
 package com.liferay.portal.image;
 
+import com.liferay.portal.kernel.image.ImageBag;
 import com.liferay.portal.kernel.image.ImageProcessorUtil;
 import com.liferay.portal.kernel.image.SpriteProcessor;
 import com.liferay.portal.kernel.log.Log;
@@ -37,7 +38,6 @@ import java.awt.image.RenderedImage;
 import java.awt.image.SampleModel;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
@@ -135,8 +135,9 @@ public class SpriteProcessorImpl implements SpriteProcessor {
 			}
 
 			try {
-				RenderedImage renderedImage = ImageProcessorUtil.read(file)
-					.getRenderedImage();
+				ImageBag imageBag = ImageProcessorUtil.read(file);
+
+				RenderedImage renderedImage = imageBag.getRenderedImage();
 
 				int height = renderedImage.getHeight();
 				int width = renderedImage.getWidth();
