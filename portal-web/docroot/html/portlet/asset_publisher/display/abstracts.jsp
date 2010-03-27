@@ -50,8 +50,6 @@ String viewURL = viewInContext ? assetRenderer.getURLViewInContext((LiferayPortl
 String viewURLMessage = viewInContext ? assetRenderer.getViewInContextMessage() : "read-more-x-about-x";
 
 viewURL = _checkViewURL(viewURL, currentURL, themeDisplay);
-
-boolean viewPermission = assetRenderer.hasViewPermission(permissionChecker);
 %>
 
 <c:if test="<%= show %>">
@@ -60,7 +58,7 @@ boolean viewPermission = assetRenderer.hasViewPermission(permissionChecker);
 
 		<h3 class="asset-title <%= assetRendererFactory.getType() %>">
 			<c:choose>
-				<c:when test="<%= viewPermission && Validator.isNotNull(viewURL) %>">
+				<c:when test="<%= assetRenderer.hasViewPermission(permissionChecker) && Validator.isNotNull(viewURL) %>">
 					<a href="<%= viewURL %>"><%= title %></a>
 				</c:when>
 				<c:otherwise>
@@ -69,7 +67,7 @@ boolean viewPermission = assetRenderer.hasViewPermission(permissionChecker);
 			</c:choose>
 		</h3>
 
-		<c:if test="<%= viewPermission %>">
+		<c:if test="<%= assetRenderer.hasViewPermission(permissionChecker) %>">
 			<div class="asset-content">
 				<div class="asset-summary">
 

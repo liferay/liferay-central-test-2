@@ -14,6 +14,8 @@
 
 package com.liferay.portlet.documentlibrary.asset;
 
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.util.HtmlUtil;
@@ -126,26 +128,18 @@ public class DLFileEntryAssetRenderer extends BaseAssetRenderer {
 		return _entry.getUserId();
 	}
 
-	public boolean hasEditPermission(PermissionChecker permissionChecker) {
-		try {
-			return DLFileEntryPermission.contains(
-				permissionChecker, _entry, ActionKeys.UPDATE);
-		}
-		catch (Exception e) {
-		}
+	public boolean hasEditPermission(PermissionChecker permissionChecker)
+		throws PortalException, SystemException {
 
-		return false;
+		return DLFileEntryPermission.contains(
+			permissionChecker, _entry, ActionKeys.UPDATE);
 	}
 
-	public boolean hasViewPermission(PermissionChecker permissionChecker) {
-		try {
-			return DLFileEntryPermission.contains(
-				permissionChecker, _entry, ActionKeys.VIEW);
-		}
-		catch (Exception e) {
-		}
+	public boolean hasViewPermission(PermissionChecker permissionChecker)
+		throws PortalException, SystemException {
 
-		return true;
+		return DLFileEntryPermission.contains(
+			permissionChecker, _entry, ActionKeys.VIEW);
 	}
 
 	public boolean isConvertible() {

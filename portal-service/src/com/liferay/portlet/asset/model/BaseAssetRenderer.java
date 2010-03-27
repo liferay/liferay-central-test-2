@@ -14,6 +14,8 @@
 
 package com.liferay.portlet.asset.model;
 
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.security.permission.PermissionChecker;
@@ -68,11 +70,17 @@ public abstract class BaseAssetRenderer implements AssetRenderer {
 		return "view-in-context";
 	}
 
-	public boolean hasEditPermission(PermissionChecker permissionChecker) {
+	@SuppressWarnings("unused")
+	public boolean hasEditPermission(PermissionChecker permissionChecker)
+		throws PortalException, SystemException {
+
 		return false;
 	}
 
-	public boolean hasViewPermission(PermissionChecker permissionChecker) {
+	@SuppressWarnings("unused")
+	public boolean hasViewPermission(PermissionChecker permissionChecker)
+		throws PortalException, SystemException {
+
 		return true;
 	}
 

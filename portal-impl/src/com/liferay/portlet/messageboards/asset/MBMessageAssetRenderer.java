@@ -14,6 +14,8 @@
 
 package com.liferay.portlet.messageboards.asset;
 
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.util.HtmlUtil;
@@ -92,26 +94,18 @@ public class MBMessageAssetRenderer extends BaseAssetRenderer {
 		return _message.getUserId();
 	}
 
-	public boolean hasEditPermission(PermissionChecker permissionChecker) {
-		try {
-			return MBMessagePermission.contains(
-				permissionChecker, _message, ActionKeys.UPDATE);
-		}
-		catch (Exception e) {
-		}
+	public boolean hasEditPermission(PermissionChecker permissionChecker)
+		throws PortalException, SystemException {
 
-		return false;
+		return MBMessagePermission.contains(
+			permissionChecker, _message, ActionKeys.UPDATE);
 	}
 
-	public boolean hasViewPermission(PermissionChecker permissionChecker) {
-		try {
-			return MBMessagePermission.contains(
-				permissionChecker, _message, ActionKeys.VIEW);
-		}
-		catch (Exception e) {
-		}
+	public boolean hasViewPermission(PermissionChecker permissionChecker)
+		throws PortalException, SystemException {
 
-		return true;
+		return MBMessagePermission.contains(
+			permissionChecker, _message, ActionKeys.VIEW);
 	}
 
 	public boolean isPrintable() {

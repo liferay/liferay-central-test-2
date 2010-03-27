@@ -30,8 +30,6 @@ if (editPortletURL != null) {
 	editPortletURL.setParameter("redirect", currentURL);
 }
 
-boolean editPermission =  assetRenderer.hasEditPermission(permissionChecker);
-
 Group stageableGroup = themeDisplay.getScopeGroup();
 
 if (themeDisplay.getScopeGroup().isLayout()) {
@@ -39,7 +37,7 @@ if (themeDisplay.getScopeGroup().isLayout()) {
 }
 %>
 
-<c:if test="<%= editPermission && (editPortletURL != null) && !stageableGroup.hasStagingGroup() %>">
+<c:if test="<%= assetRenderer.hasEditPermission(permissionChecker) && (editPortletURL != null) && !stageableGroup.hasStagingGroup() %>">
 	<div class="lfr-meta-actions asset-actions">
 		<liferay-ui:icon
 			image="edit"

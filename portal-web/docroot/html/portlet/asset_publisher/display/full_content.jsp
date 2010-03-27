@@ -31,8 +31,6 @@ boolean show = ((Boolean)request.getAttribute("view.jsp-show")).booleanValue();
 boolean print = ((Boolean)request.getAttribute("view.jsp-print")).booleanValue();
 
 request.setAttribute("view.jsp-showIconLabel", true);
-
-boolean viewPermission = assetRenderer.hasViewPermission(permissionChecker);
 %>
 
 <div class="asset-full-content <%= showAssetTitle ? "show-asset-title" : "no-title" %>">
@@ -108,7 +106,7 @@ boolean viewPermission = assetRenderer.hasViewPermission(permissionChecker);
 		<h3 class="asset-title <%= assetRendererFactory.getType() %>"><%= title %></h3>
 	</c:if>
 
-	<c:if test="<%= viewPermission %>">
+	<c:if test="<%= assetRenderer.hasViewPermission(permissionChecker) %>">
 		<div class="asset-content">
 
 			<%
