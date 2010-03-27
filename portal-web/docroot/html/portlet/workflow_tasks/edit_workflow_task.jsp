@@ -176,9 +176,9 @@ long classPK = ((Number)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS
 									actorName = curUser.getFullName();
 								%>
 
-								<div>
-									<%= LanguageUtil.format(pageContext, "task-assigned-to-x.-previous-assignee-was-x", new Object[] {actorName, HtmlUtil.escape(previousActorName)}) %>
-								</div>
+									<div>
+										<%= LanguageUtil.format(pageContext, "task-assigned-to-x.-previous-assignee-was-x", new Object[] {actorName, HtmlUtil.escape(previousActorName)}) %>
+									</div>
 
 								<%
 								}
@@ -187,6 +187,7 @@ long classPK = ((Number)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS
 									actorName = curRole.getDescriptiveName();
 								}
 								%>
+
 								<div>
 									<%= LanguageUtil.format(pageContext, "task-initially-assigned-to-the-x-role", new Object[] {actorName}) %>
 								</div>
