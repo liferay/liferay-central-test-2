@@ -136,13 +136,13 @@ public class PortletLocalServiceUtil {
 		return getService().deployRemotePortlet(portlet, categoryName);
 	}
 
+	public static void destroyPortlet(com.liferay.portal.model.Portlet portlet) {
+		getService().destroyPortlet(portlet);
+	}
+
 	public static void destroyRemotePortlet(
 		com.liferay.portal.model.Portlet portlet) {
 		getService().destroyRemotePortlet(portlet);
-	}
-
-	public static void destroyPortlet(com.liferay.portal.model.Portlet portlet) {
-		getService().destroyPortlet(portlet);
 	}
 
 	public static java.util.List<com.liferay.portlet.expando.model.CustomAttributesDisplay> getCustomAttributesDisplays() {
@@ -155,17 +155,6 @@ public class PortletLocalServiceUtil {
 		return getService().getEARDisplay(xml);
 	}
 
-	public static com.liferay.portal.model.PortletApp getPortletApp(
-		java.lang.String servletContextName) {
-		return getService().getPortletApp(servletContextName);
-	}
-
-	public static com.liferay.portal.model.PortletCategory getWARDisplay(
-		java.lang.String servletContextName, java.lang.String xml)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getWARDisplay(servletContextName, xml);
-	}
-
 	public static java.util.List<com.liferay.portal.model.Portlet> getFriendlyURLMapperPortlets() {
 		return getService().getFriendlyURLMapperPortlets();
 	}
@@ -174,15 +163,20 @@ public class PortletLocalServiceUtil {
 		return getService().getFriendlyURLMappers();
 	}
 
-	public static com.liferay.portal.model.Portlet getPortletById(
-		java.lang.String portletId) {
-		return getService().getPortletById(portletId);
+	public static com.liferay.portal.model.PortletApp getPortletApp(
+		java.lang.String servletContextName) {
+		return getService().getPortletApp(servletContextName);
 	}
 
 	public static com.liferay.portal.model.Portlet getPortletById(
 		long companyId, java.lang.String portletId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getPortletById(companyId, portletId);
+	}
+
+	public static com.liferay.portal.model.Portlet getPortletById(
+		java.lang.String portletId) {
+		return getService().getPortletById(portletId);
 	}
 
 	public static com.liferay.portal.model.Portlet getPortletByStrutsPath(
@@ -205,6 +199,12 @@ public class PortletLocalServiceUtil {
 		long companyId, boolean showSystem, boolean showPortal)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getPortlets(companyId, showSystem, showPortal);
+	}
+
+	public static com.liferay.portal.model.PortletCategory getWARDisplay(
+		java.lang.String servletContextName, java.lang.String xml)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getWARDisplay(servletContextName, xml);
 	}
 
 	public static boolean hasPortlet(long companyId, java.lang.String portletId)

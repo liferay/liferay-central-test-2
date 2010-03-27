@@ -135,12 +135,12 @@ public class PortletLocalServiceWrapper implements PortletLocalService {
 		return _portletLocalService.deployRemotePortlet(portlet, categoryName);
 	}
 
-	public void destroyRemotePortlet(com.liferay.portal.model.Portlet portlet) {
-		_portletLocalService.destroyRemotePortlet(portlet);
-	}
-
 	public void destroyPortlet(com.liferay.portal.model.Portlet portlet) {
 		_portletLocalService.destroyPortlet(portlet);
+	}
+
+	public void destroyRemotePortlet(com.liferay.portal.model.Portlet portlet) {
+		_portletLocalService.destroyRemotePortlet(portlet);
 	}
 
 	public java.util.List<com.liferay.portlet.expando.model.CustomAttributesDisplay> getCustomAttributesDisplays() {
@@ -153,17 +153,6 @@ public class PortletLocalServiceWrapper implements PortletLocalService {
 		return _portletLocalService.getEARDisplay(xml);
 	}
 
-	public com.liferay.portal.model.PortletApp getPortletApp(
-		java.lang.String servletContextName) {
-		return _portletLocalService.getPortletApp(servletContextName);
-	}
-
-	public com.liferay.portal.model.PortletCategory getWARDisplay(
-		java.lang.String servletContextName, java.lang.String xml)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return _portletLocalService.getWARDisplay(servletContextName, xml);
-	}
-
 	public java.util.List<com.liferay.portal.model.Portlet> getFriendlyURLMapperPortlets() {
 		return _portletLocalService.getFriendlyURLMapperPortlets();
 	}
@@ -172,15 +161,20 @@ public class PortletLocalServiceWrapper implements PortletLocalService {
 		return _portletLocalService.getFriendlyURLMappers();
 	}
 
-	public com.liferay.portal.model.Portlet getPortletById(
-		java.lang.String portletId) {
-		return _portletLocalService.getPortletById(portletId);
+	public com.liferay.portal.model.PortletApp getPortletApp(
+		java.lang.String servletContextName) {
+		return _portletLocalService.getPortletApp(servletContextName);
 	}
 
 	public com.liferay.portal.model.Portlet getPortletById(long companyId,
 		java.lang.String portletId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _portletLocalService.getPortletById(companyId, portletId);
+	}
+
+	public com.liferay.portal.model.Portlet getPortletById(
+		java.lang.String portletId) {
+		return _portletLocalService.getPortletById(portletId);
 	}
 
 	public com.liferay.portal.model.Portlet getPortletByStrutsPath(
@@ -204,6 +198,12 @@ public class PortletLocalServiceWrapper implements PortletLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _portletLocalService.getPortlets(companyId, showSystem,
 			showPortal);
+	}
+
+	public com.liferay.portal.model.PortletCategory getWARDisplay(
+		java.lang.String servletContextName, java.lang.String xml)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _portletLocalService.getWARDisplay(servletContextName, xml);
 	}
 
 	public boolean hasPortlet(long companyId, java.lang.String portletId)
