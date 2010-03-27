@@ -58,7 +58,7 @@ portletURL.setParameter("tabs1", tabs1);
 	<liferay-ui:error exception="<%= WorkflowDefinitionFileException.class %>" message="please-enter-a-valid-file" />
 
 	<aui:fieldset>
-		<aui:field-wrapper helpMessage='<%= LanguageUtil.get(locale, "the-definition-name-must-be-defined-in-the-workflow-definition-file") %>' label="name">
+		<aui:field-wrapper helpMessage="the-definition-name-must-be-defined-in-the-workflow-definition-file" label="name">
 			<%= name %>
 		</aui:field-wrapper>
 
