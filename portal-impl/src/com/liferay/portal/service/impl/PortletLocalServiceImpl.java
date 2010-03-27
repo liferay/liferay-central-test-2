@@ -207,18 +207,6 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		return portlet;
 	}
 
-	public void destroyRemotePortlet(Portlet portlet) {
-		Map<String, Portlet> portletsPool = _getPortletsPool();
-
-		portletsPool.remove(portlet.getRootPortletId());
-
-		PortletApp portletApp = portlet.getPortletApp();
-
-		_portletAppsPool.remove(portletApp.getServletContextName());
-
-		clearCache();
-	}
-
 	public void destroyPortlet(Portlet portlet) {
 		Map<String, Portlet> portletsPool = _getPortletsPool();
 
@@ -229,6 +217,18 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		if (portletApp != null) {
 			_portletAppsPool.remove(portletApp.getServletContextName());
 		}
+
+		clearCache();
+	}
+
+	public void destroyRemotePortlet(Portlet portlet) {
+		Map<String, Portlet> portletsPool = _getPortletsPool();
+
+		portletsPool.remove(portlet.getRootPortletId());
+
+		PortletApp portletApp = portlet.getPortletApp();
+
+		_portletAppsPool.remove(portletApp.getServletContextName());
 
 		clearCache();
 	}
@@ -263,21 +263,6 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 	public PortletCategory getEARDisplay(String xml) throws SystemException {
 		try {
 			return _readLiferayDisplayXML(xml);
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-	}
-
-	public PortletApp getPortletApp(String servletContextName) {
-		return _getPortletApp(servletContextName);
-	}
-
-	public PortletCategory getWARDisplay(String servletContextName, String xml)
-		throws SystemException {
-
-		try {
-			return _readLiferayDisplayXML(servletContextName, xml);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -330,10 +315,8 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		return friendlyURLMappers;
 	}
 
-	public Portlet getPortletById(String portletId) {
-		Map<String, Portlet> portletsPool = _getPortletsPool();
-
-		return portletsPool.get(portletId);
+	public PortletApp getPortletApp(String servletContextName) {
+		return _getPortletApp(servletContextName);
 	}
 
 	public Portlet getPortletById(long companyId, String portletId)
@@ -421,6 +404,12 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		return portlet;
 	}
 
+	public Portlet getPortletById(String portletId) {
+		Map<String, Portlet> portletsPool = _getPortletsPool();
+
+		return portletsPool.get(portletId);
+	}
+
 	public Portlet getPortletByStrutsPath(long companyId, String strutsPath)
 		throws SystemException {
 
@@ -467,6 +456,17 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		}
 
 		return portlets;
+	}
+
+	public PortletCategory getWARDisplay(String servletContextName, String xml)
+		throws SystemException {
+
+		try {
+			return _readLiferayDisplayXML(servletContextName, xml);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
 	}
 
 	public boolean hasPortlet(long companyId, String portletId)
@@ -2054,19 +2054,19 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 	private static Log _log = LogFactoryUtil.getLog(
 		PortletLocalServiceImpl.class);
 
-	private static Map<String, PortletApp> _portletAppsPool =
-		new ConcurrentHashMap<String, PortletApp>();
-	private static Map<String, Portlet> _portletsPool =
-		new ConcurrentHashMap<String, Portlet>();
 	private static PortalCache _companyPortletsPool =
 		MultiVMPoolUtil.getCache(Portlet.class.getName());
-	private static Map<String, String> _portletIdsByStrutsPath =
-		new ConcurrentHashMap<String, String>();
 	private static Map<String, Portlet> _customAttributesDisplayPortlets =
 		new ConcurrentHashMap<String, Portlet>();
 	private static Map<String, Portlet> _friendlyURLMapperPortlets =
 		new ConcurrentHashMap<String, Portlet>();
 	private static String _keyPrefix = Portlet.class.getName().concat(
 		StringPool.POUND);
+	private static Map<String, PortletApp> _portletAppsPool =
+		new ConcurrentHashMap<String, PortletApp>();
+	private static Map<String, String> _portletIdsByStrutsPath =
+		new ConcurrentHashMap<String, String>();
+	private static Map<String, Portlet> _portletsPool =
+		new ConcurrentHashMap<String, Portlet>();
 
 }
