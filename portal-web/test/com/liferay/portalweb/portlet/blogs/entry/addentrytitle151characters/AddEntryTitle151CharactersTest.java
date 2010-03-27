@@ -49,7 +49,7 @@ public class AddEntryTitle151CharactersTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_33_title",
 			RuntimeVariables.replace(
-				"||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||thisfieldisaboutonehundredfiftycharacterslongX"));
+				"|||||||||1|||||||||2|||||||||3|||||||||4|||||||||5|||||||||6|||||||||7|||||||||8|||||||||9||||||||10||||||||11||||||||12||||||||13||||||||14||||||||15X"));
 		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
@@ -110,9 +110,9 @@ public class AddEntryTitle151CharactersTest extends BaseTestCase {
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 		assertFalse(selenium.isTextPresent(
-				"||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||thisfieldisaboutonehundredfiftycharacterslongX"));
+				"|||||||||1|||||||||2|||||||||3|||||||||4|||||||||5|||||||||6|||||||||7|||||||||8|||||||||9||||||||10||||||||11||||||||12||||||||13||||||||14||||||||15X"));
 		assertEquals(RuntimeVariables.replace(
-				"||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||thisfieldisaboutonehundredfiftycharacterslong"),
+				"|||||||||1|||||||||2|||||||||3|||||||||4|||||||||5|||||||||6|||||||||7|||||||||8|||||||||9||||||||10||||||||11||||||||12||||||||13||||||||14||||||||15"),
 			selenium.getText("//div[2]/div[1]/div[1]/a"));
 		assertEquals(RuntimeVariables.replace("Content."),
 			selenium.getText("//p"));

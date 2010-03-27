@@ -48,8 +48,8 @@ public class ViewUserNameAndImageTest extends BaseTestCase {
 		assertTrue(selenium.isElementPresent(
 				"//div[@class='user-profile-image']/a/img[@alt='Joe Bloggs']"));
 		assertTrue(selenium.isElementPresent("//a[@class='user-name']"));
-		assertTrue(selenium.isTextPresent("Posts: 1"));
-		assertTrue(selenium.isTextPresent("Stars: 0"));
+		assertTrue(selenium.isTextPresent("Posts:"));
+		assertTrue(selenium.isTextPresent("Stars:"));
 		assertTrue(selenium.isTextPresent("Date:"));
 		assertFalse(selenium.isElementPresent("//th[1]"));
 		assertFalse(selenium.isElementPresent("//th[2]"));
