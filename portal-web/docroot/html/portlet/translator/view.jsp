@@ -24,9 +24,9 @@ if (translation == null) {
 }
 %>
 
-<portlet:actionURL var="viewURL" />
+<portlet:actionURL var="portletURL" />
 
-<aui:form accept-charset="UTF-8" action="<%= viewURL %>" method="post" name="fm">
+<aui:form accept-charset="UTF-8" action="<%= portletURL %>" method="post" name="fm">
 	<c:if test="<%= Validator.isNotNull(translation.getToText()) %>">
 		<%= HtmlUtil.escape(translation.getToText()) %>
 	</c:if>
