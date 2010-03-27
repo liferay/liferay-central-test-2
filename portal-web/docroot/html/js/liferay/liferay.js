@@ -5,6 +5,9 @@ Liferay.namespace = AUI().namespace;
 AUI().mix(
 	AUI.defaults.io,
 	{
+		dataFormatter: function(data) {
+			return AUI().Lang.toQueryString(data);
+		},
 		method: 'POST',
 		uriFormatter: function(value) {
 			return Liferay.Util.getURLWithSessionId(value);
