@@ -20,6 +20,7 @@ import com.liferay.taglib.util.IncludeTag;
 import javax.portlet.PortletURL;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.jsp.JspException;
 
 /**
  * <a href="FormTag.java.html"><b><i>View Source</i></b></a>
@@ -29,6 +30,18 @@ import javax.servlet.http.HttpServletRequest;
  * @author Brian Wing Shun Chan
  */
 public class FormTag extends IncludeTag {
+
+	public int doEndTag() throws JspException {
+		try {
+			return super.doEndTag();
+		}
+		finally {
+			HttpServletRequest request =
+				(HttpServletRequest)pageContext.getRequest();
+
+			request.removeAttribute("aui:form:useNamespace");
+		}
+	}
 
 	public void setAction(PortletURL portletURL) {
 		if (portletURL != null) {
@@ -60,6 +73,10 @@ public class FormTag extends IncludeTag {
 		_onSubmit = onSubmit;
 	}
 
+	public void setUseNamespace(boolean useNamespace) {
+		_useNamespace = useNamespace;
+	}
+
 	protected void cleanUp() {
 		_action = null;
 		_cssClass = null;
@@ -67,6 +84,7 @@ public class FormTag extends IncludeTag {
 		_inlineLabel = false;
 		_name = "fm";
 		_onSubmit = null;
+		_useNamespace = true;
 	}
 
 	protected String getEndPage() {
@@ -92,6 +110,8 @@ public class FormTag extends IncludeTag {
 			"aui:form:inlineLabel", String.valueOf(_inlineLabel));
 		request.setAttribute("aui:form:name", _name);
 		request.setAttribute("aui:form:onSubmit", _onSubmit);
+		request.setAttribute(
+			"aui:form:useNamespace", String.valueOf(_useNamespace));
 	}
 
 	private static final String _END_PAGE = "/html/taglib/aui/form/end.jsp";
@@ -104,5 +124,6 @@ public class FormTag extends IncludeTag {
 	private boolean _inlineLabel;
 	private String _name = "fm";
 	private String _onSubmit;
+	private boolean _useNamespace = true;
 
 }
