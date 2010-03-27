@@ -99,7 +99,7 @@ public class WorkflowInstanceLinkLocalServiceImpl
 			getWorkflowInstanceLinks(companyId, groupId, className, classPK);
 
 		for (WorkflowInstanceLink workflowInstanceLink :
-			 workflowInstanceLinks) {
+				workflowInstanceLinks) {
 
 			deleteWorkflowInstanceLink(workflowInstanceLink);
 
