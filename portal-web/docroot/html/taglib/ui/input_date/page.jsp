@@ -91,6 +91,7 @@ if (yearValue > 0) {
 </c:choose>
 
 <select class="aui-helper-hidden" <%= disabled ? "disabled=\"disabled\"" : "" %> id="<%= dayParam %>" name="<%= dayParam %>"></select>
+
 <select class="aui-helper-hidden" <%= disabled ? "disabled=\"disabled\"" : "" %> id="<%= yearParam %>" name="<%= yearParam %>"></select>
 
 <input class="<%= disabled ? "disabled" : "" %>" id="<%= imageInputId %>Input" type="hidden" />
