@@ -3140,6 +3140,24 @@ public class PortalImpl implements Portal {
 		}
 	}
 
+	public long getValidUserId(long companyId, long userId)
+		throws PortalException, SystemException {
+
+		try {
+			User user = UserLocalServiceUtil.getUser(userId);
+
+			if (user.getCompanyId() == companyId) {
+				return user.getUserId();
+			}
+			else {
+				return userId;
+			}
+		}
+		catch (NoSuchUserException nsue) {
+			return UserLocalServiceUtil.getDefaultUserId(companyId);
+		}
+	}
+
 	public String getWidgetURL(Portlet portlet, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 

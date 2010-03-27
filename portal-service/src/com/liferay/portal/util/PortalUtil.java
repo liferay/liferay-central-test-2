@@ -952,6 +952,12 @@ public class PortalUtil {
 		return getPortal().getUserValue(userId, param, defaultValue);
 	}
 
+	public long getValidUserId(long companyId, long userId)
+		throws PortalException, SystemException {
+
+		return getPortal().getValidUserId(companyId, userId);
+	}
+
 	public static String getWidgetURL(
 			Portlet portlet, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {

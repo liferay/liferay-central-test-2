@@ -504,6 +504,9 @@ public interface Portal {
 	public String getUserValue(long userId, String param, String defaultValue)
 		throws SystemException;
 
+	public long getValidUserId(long companyId, long userId)
+		throws PortalException, SystemException;
+
 	public String getWidgetURL(Portlet portlet, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException;
 
