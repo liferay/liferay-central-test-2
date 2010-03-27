@@ -163,8 +163,7 @@ public class WorkflowInstanceLinkLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portal.model.WorkflowInstanceLink> getWorkflowInstanceLinks(
 		long companyId, long groupId, java.lang.String className, long classPK)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .getWorkflowInstanceLinks(companyId, groupId, className,
 			classPK);

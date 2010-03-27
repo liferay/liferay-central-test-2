@@ -138,8 +138,8 @@ public class WorkflowInstanceLinkLocalServiceImpl
 	}
 
 	public List<WorkflowInstanceLink> getWorkflowInstanceLinks(
-		long companyId, long groupId, String className, long classPK)
-		throws PortalException, SystemException {
+			long companyId, long groupId, String className, long classPK)
+		throws SystemException {
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
