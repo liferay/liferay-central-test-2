@@ -14,7 +14,6 @@
 
 package com.liferay.portal.kernel.io;
 
-import java.io.IOException;
 import java.io.Writer;
 
 /**
@@ -22,40 +21,39 @@ import java.io.Writer;
  *
  * @author Shuyang Zhou
  */
-public class DummyWriter extends Writer{
+public class DummyWriter extends Writer {
 
-	public Writer append(CharSequence csq) throws IOException {
+	public Writer append(char c) {
 		return this;
 	}
 
-	public Writer append(CharSequence csq, int start, int end)
-		throws IOException {
+	public Writer append(CharSequence charSequence) {
 		return this;
 	}
 
-	public Writer append(char c) throws IOException {
+	public Writer append(CharSequence charSequence, int start, int end) {
 		return this;
 	}
 
-	public void close() throws IOException {
+	public void close() {
 	}
 
-	public void flush() throws IOException {
+	public void flush() {
 	}
 
-	public void write(int c) throws IOException {
+	public void write(char[] charArray) {
 	}
 
-	public void write(char[] cbuf) throws IOException {
+	public void write(char[] charArray, int offset, int length) {
 	}
 
-	public void write(char[] cbuf, int off, int len) throws IOException {
+	public void write(int c) {
 	}
 
-	public void write(String str) throws IOException {
+	public void write(String string) {
 	}
 
-	public void write(String str, int off, int len) throws IOException {
+	public void write(String string, int offset, int length) {
 	}
 
 }
