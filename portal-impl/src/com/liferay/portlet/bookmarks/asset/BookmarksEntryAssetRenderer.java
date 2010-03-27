@@ -61,10 +61,6 @@ public class BookmarksEntryAssetRenderer extends BaseAssetRenderer {
 		LiferayPortletRequest liferayPortletRequest,
 		LiferayPortletResponse liferayPortletResponse) {
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)liferayPortletRequest.getAttribute(
-				WebKeys.THEME_DISPLAY);
-
 		PortletURL editPortletURL = liferayPortletResponse.createRenderURL(
 			PortletKeys.BOOKMARKS);
 
