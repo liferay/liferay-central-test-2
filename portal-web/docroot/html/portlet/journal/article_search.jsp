@@ -73,6 +73,7 @@ ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDispl
 					%>
 
 					<aui:select label="my-places" name="<%= displayTerms.GROUP_ID %>">
+						<aui:option label="global" selected="<%= displayTerms.getGroupId() == themeDisplay.getCompanyGroupId() %>" value="<%= themeDisplay.getCompanyGroupId() %>" />
 
 						<%
 						for (Group myPlace : myPlaces) {
@@ -87,7 +88,6 @@ ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDispl
 						}
 						%>
 
-						<aui:option label="global" selected="<%= displayTerms.getGroupId() == themeDisplay.getCompanyGroupId() %>" value="<%= themeDisplay.getCompanyGroupId() %>" />
 					</aui:select>
 				</c:otherwise>
 			</c:choose>
