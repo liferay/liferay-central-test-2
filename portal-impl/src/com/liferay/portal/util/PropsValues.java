@@ -1141,6 +1141,13 @@ public class PropsValues {
 		GetterUtil.getInteger(
 			PropsUtil.get(PropsKeys.MINIFIER_INLINE_CONTENT_CACHE_SIZE));
 
+	public static final String[] MINIFIER_INLINE_CONTENT_CACHE_SKIP_CSS =
+		PropsUtil.getArray(PropsKeys.MINIFIER_INLINE_CONTENT_CACHE_SKIP_CSS);
+
+	public static final String[] MINIFIER_INLINE_CONTENT_CACHE_SKIP_JAVASCRIPT =
+		PropsUtil.getArray(
+			PropsKeys.MINIFIER_INLINE_CONTENT_CACHE_SKIP_JAVASCRIPT);
+
 	public static final boolean MONITORING_DATA_SAMPLE_THREAD_LOCAL =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.MONITORING_DATA_SAMPLE_THREAD_LOCAL));

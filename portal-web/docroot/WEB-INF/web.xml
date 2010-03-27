@@ -168,16 +168,6 @@
 	<filter>
 		<filter-name>Strip Filter</filter-name>
 		<filter-class>com.liferay.portal.servlet.filters.strip.StripFilter</filter-class>
-		<init-param>
-			<description>A comma separated keys, if minifier inline cache is enabled and the processing JS contains one of the keys, it will be skipped from caching.</description>
-			<param-name>jsSkipCacheKeys</param-name>
-			<param-value>getSessionId,encryptedUserId</param-value>
-		</init-param>
-		<!--<init-param>
-			<description>A comma separated keys, if minifier inline cache is enabled and the processing CSS contains one of the keys, it will be skipped from caching.</description>
-			<param-name>cssSkipCacheKeys</param-name>
-			<param-value></param-value>
-		</init-param>-->
 	</filter>
 	<filter>
 		<filter-name>Thread Local Filter</filter-name>
