@@ -50,13 +50,17 @@ public class PortalTransactionAnnotationParser
 		Transactional annotation = null;
 
 		Queue<Class<?>> candidateQueue = new LinkedList<Class<?>>();
+
 		if (annotatedElement instanceof Method) {
 			Method method = (Method)annotatedElement;
+
 			candidateQueue.offer(method.getDeclaringClass());
+
 			annotation = _deepSearchMethods(method, candidateQueue);
 		}
 		else {
 			candidateQueue.offer((Class<?>)annotatedElement);
+
 			annotation = _deepSearchTypes(candidateQueue);
 		}
 
@@ -129,8 +133,9 @@ public class PortalTransactionAnnotationParser
 
 	private Transactional _deepSearchMethods(
 		Method method, Queue<Class<?>> candidateQueue) {
-		// Check method first
+
 		Transactional annotation = method.getAnnotation(Transactional.class);
+
 		if (annotation != null) {
 			return annotation;
 		}
@@ -140,63 +145,65 @@ public class PortalTransactionAnnotationParser
 		}
 
 		Class<?> clazz = candidateQueue.poll();
-		// Check specific method
+
 		if (method.getDeclaringClass() != clazz) {
 			try {
 				Method specificMethod = clazz.getDeclaredMethod(
 					method.getName(), method.getParameterTypes());
+
 				annotation = specificMethod.getAnnotation(Transactional.class);
+
 				if (annotation != null) {
 					return annotation;
 				}
-			} catch (Exception ex) {
+			}
+			catch (Exception e) {
 			}
 		}
 
-		// Check first candidate class
 		annotation = clazz.getAnnotation(Transactional.class);
+
 		if (annotation == null) {
-			// Keep searching super types
-			_enqueueSuperTypes(clazz, candidateQueue);
+			_queueSuperTypes(clazz, candidateQueue);
+
 			return _deepSearchMethods(method, candidateQueue);
 		}
 		else {
-			// Find it, stop searching
 			return annotation;
 		}
 	}
 
-	private Transactional _deepSearchTypes(
-		Queue<Class<?>> candidateQueue) {
-
+	private Transactional _deepSearchTypes(Queue<Class<?>> candidateQueue) {
 		if (candidateQueue.isEmpty()) {
 			return null;
 		}
-		// Check first candidate Class
+
 		Class<?> clazz = candidateQueue.poll();
+
 		Transactional annotation = clazz.getAnnotation(Transactional.class);
+
 		if (annotation == null) {
-			// Keep searching super types
-			_enqueueSuperTypes(clazz, candidateQueue);
+			_queueSuperTypes(clazz, candidateQueue);
+
 			return _deepSearchTypes(candidateQueue);
 		}
 		else {
-			// Find it, stop searching
 			return annotation;
 		}
 	}
 
-	private void _enqueueSuperTypes(
+	private void _queueSuperTypes(
 		Class<?> clazz, Queue<Class<?>> candidateQueue) {
 
-		// Class has higher priority than interfaces
 		Class<?> supperClass = clazz.getSuperclass();
+
 		if (supperClass != null && supperClass != Object.class) {
 			candidateQueue.offer(supperClass);
 		}
 
 		Class<?>[] interfaces = clazz.getInterfaces();
-		for(Class<?> inter : interfaces) {
+
+		for (Class<?> inter : interfaces) {
 			candidateQueue.offer(inter);
 		}
 	}

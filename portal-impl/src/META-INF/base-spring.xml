@@ -24,7 +24,6 @@
 		</property>
 	</bean>
 	<bean id="serviceHookAdvice" class="com.liferay.portal.spring.aop.ServiceHookAdvice" />
-	<!-- Set proxy-target-class to true to enable CGLIB proxy-->
 	<aop:config proxy-target-class="false">
 		<aop:pointcut id="transactionOperation" expression="bean(*Service)" />
 		<aop:advisor advice-ref="transactionAdvice" pointcut-ref="transactionOperation" order="1" />
