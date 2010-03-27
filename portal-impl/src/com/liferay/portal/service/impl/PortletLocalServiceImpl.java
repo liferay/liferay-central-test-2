@@ -711,8 +711,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 	}
 
 	private String _encodeKey(long companyId) {
-
-		return _keyPrefix.concat(Long.toString(companyId));
+		return _keyPrefix.concat(String.valueOf(companyId));
 	}
 
 	private PortletApp _getPortletApp(String servletContextName) {
