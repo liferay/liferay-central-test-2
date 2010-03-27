@@ -205,8 +205,8 @@ String defaultLanguageValue = ParamUtil.getString(request, name + StringPool.UND
 
 	var panel = new Liferay.PanelFloating(
 		{
-			container: '#<%= randomNamespace %>languageSelector',
 			collapsible: false,
+			container: '#<%= randomNamespace %>languageSelector',
 			on: {
 				hide: function(event) {
 					var instance = this;
