@@ -720,7 +720,6 @@ public class StringUtil {
 		int y = s.indexOf(oldSub, fromIndex);
 
 		if (y >= 0) {
-
 			StringBundler sb = new StringBundler();
 
 			int length = oldSub.length();
