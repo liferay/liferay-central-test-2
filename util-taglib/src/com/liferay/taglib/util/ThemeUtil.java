@@ -174,7 +174,9 @@ public class ThemeUtil {
 			source, freeMarkerContext, unsyncStringWriter);
 
 		if (write) {
-			unsyncStringWriter.getStringBundler().writeTo(pageContext.getOut());
+			StringBundler sb = unsyncStringWriter.getStringBundler();
+
+			sb.writeTo(pageContext.getOut());
 
 			return null;
 		}
