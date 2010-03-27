@@ -47,6 +47,9 @@ public class PortalTransactionAnnotationParser
 	public TransactionAttribute parseTransactionAnnotation(
 		AnnotatedElement annotatedElement) {
 
+		//Transactional annotation = annotatedElement.getAnnotation(
+		//	Transactional.class);
+
 		Transactional annotation = null;
 
 		Queue<Class<?>> candidateQueue = new LinkedList<Class<?>>();
@@ -197,7 +200,7 @@ public class PortalTransactionAnnotationParser
 
 		Class<?> supperClass = clazz.getSuperclass();
 
-		if (supperClass != null && supperClass != Object.class) {
+		if ((supperClass != null) && (supperClass != Object.class)) {
 			candidateQueue.offer(supperClass);
 		}
 
