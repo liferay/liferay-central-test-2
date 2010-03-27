@@ -2066,7 +2066,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		new ConcurrentHashMap<String, Portlet>();
 	private static Map<String, Portlet> _friendlyURLMapperPortlets =
 		new ConcurrentHashMap<String, Portlet>();
-	private static String _keyPrefix =
-			Portlet.class.getName().concat(StringPool.POUND);
+	private static String _keyPrefix = Portlet.class.getName().concat(
+		StringPool.POUND);
 
 }
