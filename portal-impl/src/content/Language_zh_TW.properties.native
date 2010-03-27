@@ -10,7 +10,7 @@ lang.line.end=right
 ## Portlet descriptions and titles
 ##
 
-javax.portlet.description.122=類別描述一套詞彙量期限標記美滿的項目。 管理員能創造類別和居住於他們與用戶能選擇從，當標記內容时的詞彙量期限。 (Automatic Translation)
+javax.portlet.description.122=類別描述一套詞彙量期限標記美滿的項目。 管理員能創造詞彙量和居住於他們與用戶能選擇從，當創作內容时的類別。 (Automatic Translation)
 javax.portlet.description.126=组织代表用戶階層，例如部門或輔助者。 管理員能處理用戶會員資格，定义了角色，並且設定組織的屬性。 (Automatic Translation)
 javax.portlet.description.127=不管社區或組織會員資格，用户群是捷徑對一個寬鬆小組用戶。 如果需要管理員能定義用户群和分配用户群作為社區的成員。 (Automatic Translation)
 javax.portlet.description.129=密碼政策定义了企業水平包括用戶停工和密碼失效的安全措施。 管理員能定義政策或代表到LDAP服務器。 (Automatic Translation)
@@ -3753,8 +3753,10 @@ talent=天分
 target-layout-friendly-url=目標頁友好的URL
 target-portlet-id=目標Portlet 身份證
 target=目標
+task-assigned-to-x.-previous-assignee-was-x=Task assigned to {0}. Previous assignee was {1}. (Automatic Copy)
 task-id=任務身份證
 task-information=任務資訊
+task-initially-assigned-to-the-x-role=Task initially assigned to the {0} role. (Automatic Copy)
 task-name=任務名
 task=任務
 tasks=任務
@@ -3842,6 +3844,7 @@ the-coupon-could-not-be-found=優惠券找不到。
 the-custom-field-could-not-be-found=不能找到習慣領域。 (Automatic Translation)
 the-date-of-the-modifications=修改的日期
 the-default-preferences-are-invalid=預設偏好無效。
+the-definition-name-must-be-defined-in-the-workflow-definition-file=在工作流定義文件必须定義定義名字。 (Automatic Translation)
 the-document-could-not-be-found=文件找不到。
 the-email-address-of-the-mailing-list=郵寄的名單的電子郵件
 the-email-address-of-the-user-who-added-the-blog-entry=增加博克詞條用戶的電子郵件 (Automatic Translation)
@@ -4559,7 +4562,6 @@ x's-commits-on-x={0}'s commits on {1}.
 x's-commits={0}'s Commits
 x-assigned-the-task-to-herself={0} assigned the task to herself. (Automatic Copy)
 x-assigned-the-task-to-himself={0} assigned the task to himself. (Automatic Copy)
-x-assigned-the-task-to-x={0} assigned the task to {1}. (Automatic Copy)
 x-blog-entries={0} Blog Entries
 x-cannot-be-unassociated-from-this-community=<em>{0}</em> cannot be unassociated from this community.
 x-cannot-be-unassociated-from-this-location=<em>{0}</em> cannot be unassociated from this location.

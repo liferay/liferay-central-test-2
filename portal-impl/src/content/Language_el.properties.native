@@ -10,7 +10,7 @@ lang.line.end=right
 ## Portlet descriptions and titles
 ##
 
-javax.portlet.description.122=Οι κατηγορίες περιγράφουν ένα σύνολο όρων λεξιλογίου για να κολλήσουν τα ικανοποιημένα στοιχεία. Οι διοικητές μπορούν να δημιουργήσουν τις κατηγορίες και να τις εποικήσουν με τους όρους λεξιλογίου που το οι χρήστες μπορούν να επιλέξουν από κατά επικόλληση του περιεχομένου. (Automatic Translation)
+javax.portlet.description.122=Οι κατηγορίες περιγράφουν ένα σύνολο όρων λεξιλογίου για να κολλήσουν τα ικανοποιημένα στοιχεία. Οι διοικητές μπορούν να δημιουργήσουν τα λεξιλόγια και να τα εποικήσουν με τις κατηγορίες που οι χρήστες μπορούν να επιλέξουν από όταν περιεχόμενο δημιουργίας. (Automatic Translation)
 javax.portlet.description.126=Οι οργανώσεις αντιπροσωπεύουν μια ιεραρχία των χρηστών, όπως ένα τμήμα ή ένα υποκατάστημα. Οι διοικητές μπορούν να διαχειριστούν την ιδιότητα μέλους χρηστών, να καθορίσει τους ρόλους, και την οργάνωση οι ιδιότητες μιας οργάνωσης. (Automatic Translation)
 javax.portlet.description.127=Οι ομάδες χρηστών είναι ένας συντομότερος δρόμος σε μια χαλαρή ομάδα χρηστών, ανεξάρτητα από την ιδιότητα μέλους κοινοτήτων ή οργάνωσης. Οι διοικητές μπορούν να καθορίσουν μια ομάδα χρηστών και να διορίσουν την ομάδα χρηστών ως μέλη μιας κοινότητας εάν επιθυμεί. (Automatic Translation)
 javax.portlet.description.129=Οι πολιτικές κωδικού πρόσβασης καθορίζουν τα μέτρα ασφάλειας επιπέδου εταιρίας που περιλαμβάνουν την ανταπεργία χρηστών και τη λήξη κωδικού πρόσβασης. Οι διοικητές μπορούν να καθορίσουν τις πολιτικές ή τον εκπρόσωπο σε έναν κεντρικό υπολογιστή LDAP. (Automatic Translation)
@@ -3753,8 +3753,10 @@ talent=Ταλέντο
 target-layout-friendly-url=Σελίδα φιλικό URL στόχων
 target-portlet-id=Ταυτότητα Portlet στόχων
 target=Στόχος
+task-assigned-to-x.-previous-assignee-was-x=Task assigned to {0}. Previous assignee was {1}. (Automatic Copy)
 task-id=Ταυτότητα στόχου
 task-information=Πληροφορίες Εργασίας
+task-initially-assigned-to-the-x-role=Task initially assigned to the {0} role. (Automatic Copy)
 task-name=Όνομα Εργασίας
 task=Στόχος
 tasks=Εργασίες
@@ -3842,6 +3844,7 @@ the-coupon-could-not-be-found=Το κουπόνι δεν βρέθηκε.
 the-custom-field-could-not-be-found=Ο τομέας συνήθειας δεν θα μπορούσε να βρεθεί. (Automatic Translation)
 the-date-of-the-modifications=Η ημερομηνία των τροποποιήσεων
 the-default-preferences-are-invalid=Οι προτιμήσεις προεπιλογής είναι άκυρες.
+the-definition-name-must-be-defined-in-the-workflow-definition-file=Το όνομα καθορισμού πρέπει να καθοριστεί στο αρχείο καθορισμού ροής της δουλειάς. (Automatic Translation)
 the-document-could-not-be-found=Το έγγραφο δεν μπόρεσε να βρεθεί.
 the-email-address-of-the-mailing-list=Η διεύθυνση ηλεκτρονικού ταχυδρομείου του καταλόγου διευθύνσεων
 the-email-address-of-the-user-who-added-the-blog-entry=Η διεύθυνση ηλεκτρονικού ταχυδρομείου του χρήστη που πρόσθεσε το λήμμα blog (Automatic Translation)
@@ -4559,7 +4562,6 @@ x's-commits-on-x={0}'s commits on {1}.
 x's-commits={0}'s Commits
 x-assigned-the-task-to-herself={0} assigned the task to herself. (Automatic Copy)
 x-assigned-the-task-to-himself={0} assigned the task to himself. (Automatic Copy)
-x-assigned-the-task-to-x={0} assigned the task to {1}. (Automatic Copy)
 x-blog-entries={0} Blog Entries
 x-cannot-be-unassociated-from-this-community=<em>{0}</em> cannot be unassociated from this community.
 x-cannot-be-unassociated-from-this-location=<em>{0}</em> cannot be unassociated from this location.

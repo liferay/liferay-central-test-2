@@ -10,7 +10,7 @@ lang.line.end=right
 ## Portlet descriptions and titles
 ##
 
-javax.portlet.description.122=종류는 어휘 기간의 만족한 품목을 표를 붙이기 위하여 세트를 기술한다. 행정관은 종류를 창조하고 사용자가 선택할 수 있는 어휘 기간으로 사람을 거주케 할 수 있다 내용을 표를 붙일 때. (Automatic Translation)
+javax.portlet.description.122=종류는 어휘 기간의 만족한 품목을 표를 붙이기 위하여 세트를 기술한다. 행정관은 어휘를 창조하고 사용자가 선택할 수 있는 종류로 사람을 거주케 할 수 있다 내용을 저작할 때. (Automatic Translation)
 javax.portlet.description.126=조직은 부 자회사와 같은 사용자의 계층구조를 대표한다. 행정관은 사용자 회원을 처리할 수 있고, 역할을 정의하고, 조직의 속성을 설치한다. (Automatic Translation)
 javax.portlet.description.127=사용자 그룹은 지역 사회 또는 조직 회원에 관계 없이 사용자의 느슨한 그룹에게 편법, 이다. 행정관은 지역 사회의 일원으로 사용자 그룹을 정의하고 필요하다면 사용자 그룹을 지정할 수 있다. (Automatic Translation)
 javax.portlet.description.129=암호 정책은 기업 사용자 차단과 암호 만료를 포함하는 수평 안보 조치를 정의한다. 행정관은 LDAP 서버에 정책 또는 대표를 정의할 수 있다. (Automatic Translation)
@@ -3753,8 +3753,10 @@ talent=재능
 target-layout-friendly-url=표적 페이지 친절한URL
 target-portlet-id=표적Portlet식별
 target=표적
+task-assigned-to-x.-previous-assignee-was-x=Task assigned to {0}. Previous assignee was {1}. (Automatic Copy)
 task-id=업무 식별
 task-information=업무 정보
+task-initially-assigned-to-the-x-role=Task initially assigned to the {0} role. (Automatic Copy)
 task-name=업무 이름
 task=업무
 tasks=업무
@@ -3842,6 +3844,7 @@ the-coupon-could-not-be-found=쿠폰은 발견될 수 없었다.
 the-custom-field-could-not-be-found=주문 분야는 찾아낼 수 없었다. (Automatic Translation)
 the-date-of-the-modifications=수정의 날짜
 the-default-preferences-are-invalid=과태 특혜는 부당하다.
+the-definition-name-must-be-defined-in-the-workflow-definition-file=정의 이름은 작업 흐름 정의 파일에서 정의되어야 한다. (Automatic Translation)
 the-document-could-not-be-found=문서는 발견될 수 없었다.
 the-email-address-of-the-mailing-list=우송 명부의 전자 우편 주소
 the-email-address-of-the-user-who-added-the-blog-entry=블로그 입장을 추가한 사용자의 이메일 주소 (Automatic Translation)
@@ -4559,7 +4562,6 @@ x's-commits-on-x={0}'s commits on {1}.
 x's-commits={0}'s Commits
 x-assigned-the-task-to-herself={0} assigned the task to herself. (Automatic Copy)
 x-assigned-the-task-to-himself={0} assigned the task to himself. (Automatic Copy)
-x-assigned-the-task-to-x={0} assigned the task to {1}. (Automatic Copy)
 x-blog-entries={0} Blog Entries
 x-cannot-be-unassociated-from-this-community=<em>{0}</em> cannot be unassociated from this community.
 x-cannot-be-unassociated-from-this-location=<em>{0}</em> cannot be unassociated from this location.

@@ -10,7 +10,7 @@ lang.line.end=right
 ## Portlet descriptions and titles
 ##
 
-javax.portlet.description.122=As categorias descrevem um jogo de termos do vocabulário para etiquetar artigos satisfeitos. Os administradores podem criar categorias e povoá-las com termos do vocabulário de que os usuários podem escolher ao etiquetar o índice. (Automatic Translation)
+javax.portlet.description.122=As categorias descrevem um jogo de termos do vocabulário para etiquetar artigos satisfeitos. Os administradores podem criar vocabulários e povoá-los com categorias de que os usuários podem escolher ao ser o autor do índice. (Automatic Translation)
 javax.portlet.description.126=As organizações representam uma hierarquia dos usuários, tais como um departamento ou uma subsidiária. Os administradores podem controlar a sociedade do usuário, definem papéis, e setup os atributos de uma organização. (Automatic Translation)
 javax.portlet.description.127=Os grupos de usuário são um atalho a um grupo frouxo de usuários, não obstante a sociedade da comunidade ou da organização. Os administradores podem definir um grupo de usuário e atribuir o grupo de usuário como membros de uma comunidade se desejados. (Automatic Translation)
 javax.portlet.description.129=As políticas da senha definem as medidas de segurança do nível da empresa que incluem o fechamento do usuário e a expiração da senha. Os administradores podem definir políticas ou delegado a um usuário de LDAP. (Automatic Translation)
@@ -3753,8 +3753,10 @@ talent=Talent
 target-layout-friendly-url=URL Amigável Da Página Do Alvo
 target-portlet-id=Alvo Portlet Id
 target=Alvo
+task-assigned-to-x.-previous-assignee-was-x=Task assigned to {0}. Previous assignee was {1}. (Automatic Copy)
 task-id=Tarefa Id
 task-information=Informação Da Tarefa
+task-initially-assigned-to-the-x-role=Task initially assigned to the {0} role. (Automatic Copy)
 task-name=Nome Da Tarefa
 task=Tarefa
 tasks=Tarefas
@@ -3842,6 +3844,7 @@ the-coupon-could-not-be-found=O coupon não podia ser encontrado.
 the-custom-field-could-not-be-found=O campo feito sob encomenda não podia ser encontrado. (Automatic Translation)
 the-date-of-the-modifications=A data das modificações
 the-default-preferences-are-invalid=As preferências do defeito são inválidas.
+the-definition-name-must-be-defined-in-the-workflow-definition-file=O nome da definição deve ser definido na lima da definição dos trabalhos. (Automatic Translation)
 the-document-could-not-be-found=O original não podia ser encontrado.
 the-email-address-of-the-mailing-list=O e-mail address da lista enviando
 the-email-address-of-the-user-who-added-the-blog-entry=O e-mail address do usuário que adicionou a entrada do blogue (Automatic Translation)
@@ -4559,7 +4562,6 @@ x's-commits-on-x={0}'s commits on {1}.
 x's-commits={0}'s Commits
 x-assigned-the-task-to-herself={0} assigned the task to herself. (Automatic Copy)
 x-assigned-the-task-to-himself={0} assigned the task to himself. (Automatic Copy)
-x-assigned-the-task-to-x={0} assigned the task to {1}. (Automatic Copy)
 x-blog-entries={0} Blog Entries
 x-cannot-be-unassociated-from-this-community=<em>{0}</em> cannot be unassociated from this community.
 x-cannot-be-unassociated-from-this-location=<em>{0}</em> cannot be unassociated from this location.

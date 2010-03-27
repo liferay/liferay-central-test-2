@@ -10,7 +10,7 @@ lang.line.end=right
 ## Portlet descriptions and titles
 ##
 
-javax.portlet.description.122=类别描述一套词汇量期限标记美满的项目。 管理员能创造类别和居住于他们与用户能选择从，当标记内容时的词汇量期限。 (Automatic Translation)
+javax.portlet.description.122=类别描述一套词汇量期限标记美满的项目。 管理员能创造词汇量和居住于他们与用户能选择从，当创作内容时的类别。 (Automatic Translation)
 javax.portlet.description.126=组织代表用户阶层，例如部门或辅助者。 管理员能处理用户会员资格，定义了角色，并且设定组织的属性。 (Automatic Translation)
 javax.portlet.description.127=不管社区或组织会员资格，用户群是捷径对一个宽松小组用户。 如果需要管理员能定义用户群和分配用户群作为社区的成员。 (Automatic Translation)
 javax.portlet.description.129=密码政策定义了企业水平包括用户停工和密码失效的安全措施。 管理员能定义政策或代表到LDAP服务器。 (Automatic Translation)
@@ -3753,8 +3753,10 @@ talent=天分
 target-layout-friendly-url=目标页面的易用 URl
 target-portlet-id=目标 Portlet ID
 target=目标
+task-assigned-to-x.-previous-assignee-was-x=Task assigned to {0}. Previous assignee was {1}. (Automatic Copy)
 task-id=任务 ID
 task-information=任务信息
+task-initially-assigned-to-the-x-role=Task initially assigned to the {0} role. (Automatic Copy)
 task-name=任务名称
 task=任务
 tasks=任务
@@ -3842,6 +3844,7 @@ the-coupon-could-not-be-found=找不到优惠券。
 the-custom-field-could-not-be-found=不能找到自定义领域。
 the-date-of-the-modifications=修改的日期
 the-default-preferences-are-invalid=默认首选项无效。
+the-definition-name-must-be-defined-in-the-workflow-definition-file=在工作流定义文件必须定义定义名字。 (Automatic Translation)
 the-document-could-not-be-found=找不到文档。
 the-email-address-of-the-mailing-list=邮件列表的电子邮件地址
 the-email-address-of-the-user-who-added-the-blog-entry=增加博克用户的电子邮件
@@ -4559,7 +4562,6 @@ x's-commits-on-x={0} 对 {1} 的提交。
 x's-commits={0} 的提交
 x-assigned-the-task-to-herself={0} 分配这个任务给她自己。
 x-assigned-the-task-to-himself={0} 分配这个任务给他自己。
-x-assigned-the-task-to-x={0} 分配这个任务给 {1}。
 x-blog-entries={0} 博客条目
 x-cannot-be-unassociated-from-this-community=<strong>{0}</strong> 不能从本社区解除关联。
 x-cannot-be-unassociated-from-this-location=<strong>{0}</strong> 不能从本区域解除关联。

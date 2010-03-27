@@ -10,7 +10,7 @@ lang.line.end=right
 ## Portlet descriptions and titles
 ##
 
-javax.portlet.description.122=Les catégories décrivent un ensemble de limites de vocabulaire pour étiqueter les articles contents. Les administrateurs peuvent créer des catégories et les peupler avec les limites de vocabulaire des lesquelles les utilisateurs peuvent choisir en étiquetant le contenu. (Automatic Translation)
+javax.portlet.description.122=Les catégories décrivent un ensemble de limites de vocabulaire pour étiqueter les articles contents. Les administrateurs peuvent créer des vocabulaires et les peupler avec les catégories des lesquelles les utilisateurs peuvent choisir en écrivant le contenu. (Automatic Translation)
 javax.portlet.description.126=Les organismes représentent une hiérarchie des utilisateurs, tels qu'un département ou une filiale. Les administrateurs peuvent contrôler l'adhésion d'utilisateur, définissent des rôles, et installent les attributs d'une organisation. (Automatic Translation)
 javax.portlet.description.127=Les Groupes d'utilisateurs sont un raccourci à un groupe lâche d'utilisateurs, indépendamment d'adhésion de la communauté ou d'organisation. Les administrateurs peuvent définir un Groupe d'utilisateurs et affecter le Groupe d'utilisateurs comme membres d'une communauté si désirés. (Automatic Translation)
 javax.portlet.description.129=Les politiques de mot de passe définissent les mesures de sécurité de niveau d'entreprise qui incluent le verrouillage d'utilisateur et l'expiration de mot de passe. Les administrateurs peuvent définir les politiques ou le délégué à un serveur de LDAP. (Automatic Translation)
@@ -3753,8 +3753,10 @@ talent=Talent
 target-layout-friendly-url=URL simplifié de la page cible
 target-portlet-id=Identifiant de l'application cible
 target=Cible
+task-assigned-to-x.-previous-assignee-was-x=Task assigned to {0}. Previous assignee was {1}. (Automatic Copy)
 task-id=Identifiant de tâche
 task-information=Information sur la tâche
+task-initially-assigned-to-the-x-role=Task initially assigned to the {0} role. (Automatic Copy)
 task-name=Nom de tâche
 task=Chargez
 tasks=Tâches
@@ -3842,6 +3844,7 @@ the-coupon-could-not-be-found=Le bon n'a pas pu être trouvé.
 the-custom-field-could-not-be-found=Le champ fait sur commande n'a pas pu être trouvé. (Automatic Translation)
 the-date-of-the-modifications=La date des modifications
 the-default-preferences-are-invalid=Les préférences par défaut sont invalides.
+the-definition-name-must-be-defined-in-the-workflow-definition-file=Le nom de définition doit être défini dans le dossier de définition de déroulement des opérations. (Automatic Translation)
 the-document-could-not-be-found=Le document n'a pu être trouvé.
 the-email-address-of-the-mailing-list=L'adresse email de la liste de diffusion
 the-email-address-of-the-user-who-added-the-blog-entry=L'email address de l'utilisateur qui a ajouté l'entrée de blog (Automatic Translation)
@@ -4559,7 +4562,6 @@ x's-commits-on-x={0}'s commits on {1}.
 x's-commits={0}'s Commits
 x-assigned-the-task-to-herself={0} assigned the task to herself. (Automatic Copy)
 x-assigned-the-task-to-himself={0} assigned the task to himself. (Automatic Copy)
-x-assigned-the-task-to-x={0} assigned the task to {1}. (Automatic Copy)
 x-blog-entries={0} Blog Entries
 x-cannot-be-unassociated-from-this-community=<em>{0}</em> ne peut pas être dissocié de cette communauté.
 x-cannot-be-unassociated-from-this-location=<em>{0}</em> ne peut pas être dissocié de cette localisation.

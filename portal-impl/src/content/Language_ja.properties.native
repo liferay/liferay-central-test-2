@@ -10,7 +10,7 @@ lang.line.end=right
 ## Portlet descriptions and titles
 ##
 
-javax.portlet.description.122=部門は満足な項目に付けるために一組の用語の言葉を記述する。 管理者は部門を作成し、ユーザーが選ぶことができる用語の言葉と住むことができる内容に付けるとき。 (Automatic Translation)
+javax.portlet.description.122=部門は満足な項目に付けるために一組の用語の言葉を記述する。 管理者は用語を作成し、ユーザーが選ぶことができる部門と住むことができる内容を書くとき。 (Automatic Translation)
 javax.portlet.description.126=組織は部門または子会社のようなユーザーの階層を、表す。 管理者はユーザー会員を管理でき役割を定義し、そして組織の属性をセットアップする。 (Automatic Translation)
 javax.portlet.description.127=ユーザ・グループはコミュニティまたは構成会員にもかかわらずユーザーの緩いグループへ近道、である。 管理者はユーザ・グループを定義し、お好みであればコミュニティのメンバーとしてユーザ・グループを割り当てることができる。 (Automatic Translation)
 javax.portlet.description.129=パスワード方針はユーザー閉鎖およびパスワード満了が含まれているエンタープライズレベルの安全対策を定義する。 管理者はLDAPサーバーに方針か代表者を定義できる。 (Automatic Translation)
@@ -3753,8 +3753,10 @@ talent=タレント
 target-layout-friendly-url=対象ページのフレンドリーURL
 target-portlet-id=対象とするポートレットID
 target=ターゲット属性
+task-assigned-to-x.-previous-assignee-was-x=Task assigned to {0}. Previous assignee was {1}. (Automatic Copy)
 task-id=タスクID
 task-information=タスク情報
+task-initially-assigned-to-the-x-role=Task initially assigned to the {0} role. (Automatic Copy)
 task-name=タスク名
 task=タスク
 tasks=タスク
@@ -3842,6 +3844,7 @@ the-coupon-could-not-be-found=クーポンが見つかりません。
 the-custom-field-could-not-be-found=注文分野は見つけることができなかった。 (Automatic Translation)
 the-date-of-the-modifications=修正の日付
 the-default-preferences-are-invalid=デフォルトの設定が無効です。
+the-definition-name-must-be-defined-in-the-workflow-definition-file=定義名前はワークフロー定義ファイルで定義されなければならない。 (Automatic Translation)
 the-document-could-not-be-found=ファイルが見つかりません。
 the-email-address-of-the-mailing-list=メーリングリストのメールアドレス
 the-email-address-of-the-user-who-added-the-blog-entry=ブログの記入項目を加えたユーザーの電子メールアドレス (Automatic Translation)
@@ -4559,7 +4562,6 @@ x's-commits-on-x={1} への {0} さんのコメント
 x's-commits={0} さんのコメント
 x-assigned-the-task-to-herself={0} assigned the task to herself. (Automatic Copy)
 x-assigned-the-task-to-himself={0} assigned the task to himself. (Automatic Copy)
-x-assigned-the-task-to-x={0} assigned the task to {1}. (Automatic Copy)
 x-blog-entries={0} ブログエントリ
 x-cannot-be-unassociated-from-this-community=<i>{0}</i> cannot be unassociated from this community.
 x-cannot-be-unassociated-from-this-location=<i>{0}</i> さんは、この場所から関連を解消することはできません。

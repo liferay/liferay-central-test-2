@@ -10,7 +10,7 @@ lang.line.end=right
 ## Portlet descriptions and titles
 ##
 
-javax.portlet.description.122=Le categorie descrivono un insieme dei termini di vocabolario per etichettare gli articoli soddisfatti. I coordinatori possono generare le categorie e popolarli con i termini di vocabolario da che gli utenti possono scegliere quando etichetta il soddisfare. (Automatic Translation)
+javax.portlet.description.122=Le categorie descrivono un insieme dei termini di vocabolario per etichettare gli articoli soddisfatti. I coordinatori possono generare i vocabolari e popolarli con le categorie da che gli utenti possono scegliere quando crea il soddisfare. (Automatic Translation)
 javax.portlet.description.126=Le organizzazioni rappresentano una gerarchia degli utenti, quali un reparto o una filiale. I coordinatori possono dirigere l'insieme dei membri dell'utente, definiscono i ruoli ed installano gli attributi di un'organizzazione. (Automatic Translation)
 javax.portlet.description.127=I gruppi di utenti sono una scorciatoia ad un gruppo allentato di utenti, senza riguardo all'insieme dei membri di organizzazione o della comunità. I coordinatori possono definire un gruppo di utenti ed assegnare il gruppo di utenti come membri di una comunità se voluti. (Automatic Translation)
 javax.portlet.description.129=Le politiche di parola d'accesso definiscono le misure di sicurezza di livello imprenditoriale che comprendono il bloccaggio dell'utente e la scadenza di parola d'accesso. I coordinatori possono definire le politiche o il delegato ad un assistente di LDAP. (Automatic Translation)
@@ -3752,8 +3752,10 @@ talent=Talento
 target-layout-friendly-url=Friendly URL del layout d'interesse
 target-portlet-id=ID della Portlet d'interesse
 target=Target
+task-assigned-to-x.-previous-assignee-was-x=Task assigned to {0}. Previous assignee was {1}. (Automatic Copy)
 task-id=ID Attività
 task-information=Informazioni sull'Attività
+task-initially-assigned-to-the-x-role=Task initially assigned to the {0} role. (Automatic Copy)
 task-name=Nome dell'Attività
 task=Attività
 tasks=Attività
@@ -3841,6 +3843,7 @@ the-coupon-could-not-be-found=Il buono non è stato trovato.
 the-custom-field-could-not-be-found=Il campo su ordinazione non ha potuto essere trovato. (Automatic Translation)
 the-date-of-the-modifications=La data delle modifiche
 the-default-preferences-are-invalid=Le preferenze di default non sono valide.
+the-definition-name-must-be-defined-in-the-workflow-definition-file=Il nome di definizione deve essere definito nella lima di definizione di flusso di lavoro. (Automatic Translation)
 the-document-could-not-be-found=Il documento non è stato trovato.
 the-email-address-of-the-mailing-list=Indirizzo email della mailing list
 the-email-address-of-the-user-who-added-the-blog-entry=Il email address dell'utente che ha aggiunto l'entrata del blog (Automatic Translation)
@@ -4558,7 +4561,6 @@ x's-commits-on-x={0}'s commits on {1}.
 x's-commits={0}'s Commits
 x-assigned-the-task-to-herself={0} assigned the task to herself. (Automatic Copy)
 x-assigned-the-task-to-himself={0} assigned the task to himself. (Automatic Copy)
-x-assigned-the-task-to-x={0} assigned the task to {1}. (Automatic Copy)
 x-blog-entries={0} Blog Entries
 x-cannot-be-unassociated-from-this-community=<em>{0}</em> non può venir disassiociato da questa comunità.
 x-cannot-be-unassociated-from-this-location=<em>{0}</em> non può venir disassiociato da questa sede.
