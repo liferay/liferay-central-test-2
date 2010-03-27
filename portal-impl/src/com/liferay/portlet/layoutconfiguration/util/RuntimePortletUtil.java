@@ -249,14 +249,14 @@ public class RuntimePortletUtil {
 		}
 
 		Map<Portlet, Object[]> portletsMap = processor.getPortletsMap();
-		Map<String, String> replaceMap =
-			new HashMap<String, String>(portletsMap.size());
 
-		for(Map.Entry<Portlet, Object[]> portletEntry :
-			portletsMap.entrySet()) {
+		Map<String, String> contentsMap = new HashMap<String, String>(
+			portletsMap.size());
 
-			Portlet portlet = portletEntry.getKey();
-			Object[] value = portletEntry.getValue();
+		for (Map.Entry<Portlet, Object[]> entry : portletsMap.entrySet()) {
+			Portlet portlet = entry.getKey();
+			Object[] value = entry.getValue();
+
 			String queryString = (String)value[0];
 			String columnId = (String)value[1];
 			Integer columnPos = (Integer)value[2];
@@ -265,11 +265,12 @@ public class RuntimePortletUtil {
 			String content = processPortlet(
 				servletContext, request, response, portlet, queryString,
 				columnId, columnPos, columnCount, null);
-			replaceMap.put(portlet.getPortletId(), content);
+
+			contentsMap.put(portlet.getPortletId(), content);
 		}
 
-		return StringUtil.replace(
-			output, "[$TEMPLATE_PORTLET_", "$]", replaceMap);
+		return StringUtil.replaceValues(
+			output, "[$TEMPLATE_PORTLET_", "$]", contentsMap);
 	}
 
 	public static String processXML(

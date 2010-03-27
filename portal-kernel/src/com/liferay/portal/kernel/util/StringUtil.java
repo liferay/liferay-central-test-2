@@ -782,48 +782,6 @@ public class StringUtil {
 		return s;
 	}
 
-	public static String replace(
-		String s, String begin, String end, Map<String, String> values) {
-
-		if ((s == null) || (begin == null) || (end == null) ||
-			(values == null) || (values.size() == 0)) {
-
-			return s;
-		}
-
-		StringBundler sb = new StringBundler(values.size() * 2 + 1);
-
-		int pos = 0;
-
-		while (true) {
-			int x = s.indexOf(begin, pos);
-			int y = s.indexOf(end, x + begin.length());
-
-			if ((x == -1) || (y == -1)) {
-				sb.append(s.substring(pos, s.length()));
-
-				break;
-			}
-			else {
-				sb.append(s.substring(pos, x));
-
-				String oldValue = s.substring(x + begin.length(), y);
-
-				String newValue = values.get(oldValue);
-
-				if (newValue == null) {
-					newValue = oldValue;
-				}
-
-				sb.append(newValue);
-
-				pos = y + end.length();
-			}
-		}
-
-		return sb.toString();
-	}
-
 	public static String replaceFirst(String s, char oldSub, char newSub) {
 		if (s == null) {
 			return null;

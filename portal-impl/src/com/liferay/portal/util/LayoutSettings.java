@@ -61,7 +61,7 @@ public class LayoutSettings {
 	}
 
 	public String getURL(Map<String, String> variables) {
-		return StringUtil.replace(
+		return StringUtil.replaceValues(
 			_url, StringPool.DOLLAR_AND_OPEN_CURLY_BRACE,
 			StringPool.CLOSE_CURLY_BRACE, variables);
 	}
