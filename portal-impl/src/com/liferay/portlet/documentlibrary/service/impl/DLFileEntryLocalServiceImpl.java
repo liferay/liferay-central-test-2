@@ -942,6 +942,9 @@ public class DLFileEntryLocalServiceImpl
 					version, versionDescription, size,
 					serviceContext.getStatus());
 			}
+			else {
+				version = fileEntry.getVersion();
+			}
 		}
 		catch (NoSuchFileVersionException nsfve) {
 			addFileVersion(
