@@ -174,9 +174,10 @@ public class ThemeUtil {
 			source, freeMarkerContext, unsyncStringWriter);
 
 		if (write) {
-			StringBundler sb = unsyncStringWriter.getStringBundler();
+			StringBundler unsyncStringWriterSB =
+				unsyncStringWriter.getStringBundler();
 
-			sb.writeTo(pageContext.getOut());
+			unsyncStringWriterSB.writeTo(pageContext.getOut());
 
 			return null;
 		}
@@ -313,9 +314,10 @@ public class ThemeUtil {
 			source, velocityContext, unsyncStringWriter);
 
 		if (write) {
-			StringBundler sb = unsyncStringWriter.getStringBundler();
+			StringBundler unsyncStringWriterSB =
+				unsyncStringWriter.getStringBundler();
 
-			sb.writeTo(pageContext.getOut());
+			unsyncStringWriterSB.writeTo(pageContext.getOut());
 
 			return null;
 		}
