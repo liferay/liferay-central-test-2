@@ -742,6 +742,48 @@ public class StringUtil {
 		}
 	}
 
+	public static String replace(
+		String s, String begin, String end, Map<String, String> values) {
+
+		if ((s == null) || (begin == null) || (end == null) ||
+			(values == null) || (values.size() == 0)) {
+
+			return s;
+		}
+
+		StringBundler sb = new StringBundler(values.size() * 2 + 1);
+
+		int pos = 0;
+
+		while (true) {
+			int x = s.indexOf(begin, pos);
+			int y = s.indexOf(end, x + begin.length());
+
+			if ((x == -1) || (y == -1)) {
+				sb.append(s.substring(pos, s.length()));
+
+				break;
+			}
+			else {
+				sb.append(s.substring(pos, x));
+
+				String oldValue = s.substring(x + begin.length(), y);
+
+				String newValue = values.get(oldValue);
+
+				if (newValue == null) {
+					newValue = oldValue;
+				}
+
+				sb.append(newValue);
+
+				pos = y + end.length();
+			}
+		}
+
+		return sb.toString();
+	}
+
 	public static String replace(String s, String[] oldSubs, String[] newSubs) {
 		if ((s == null) || (oldSubs == null) || (newSubs == null)) {
 			return null;
@@ -885,60 +927,6 @@ public class StringUtil {
 		}
 
 		return s;
-	}
-
-	/**
-	 * Returns a string with replaced values. This method will replace all text
-	 * in the given string, between the beginning and ending delimiter, with new
-	 * values found in the given map. For example, if the string contained the
-	 * text <code>[$HELLO$]</code>, and the beginning delimiter was
-	 * <code>[$]</code>, and the ending delimiter was <code>$]</code>, and the
-	 * values map had a key of <code>HELLO</code> that mapped to
-	 * <code>WORLD</code>, then the replaced string will contain the text
-	 * <code>[$WORLD$]</code>.
-	 *
-	 * @return a string with replaced values
-	 */
-	public static String replaceValues(
-		String s, String begin, String end, Map<String, String> values) {
-
-		if ((s == null) || (begin == null) || (end == null) ||
-			(values == null) || (values.size() == 0)) {
-
-			return s;
-		}
-
-		StringBundler sb = new StringBundler(values.size() * 2 + 1);
-
-		int pos = 0;
-
-		while (true) {
-			int x = s.indexOf(begin, pos);
-			int y = s.indexOf(end, x + begin.length());
-
-			if ((x == -1) || (y == -1)) {
-				sb.append(s.substring(pos, s.length()));
-
-				break;
-			}
-			else {
-				sb.append(s.substring(pos, x + begin.length()));
-
-				String oldValue = s.substring(x + begin.length(), y);
-
-				String newValue = values.get(oldValue);
-
-				if (newValue == null) {
-					newValue = oldValue;
-				}
-
-				sb.append(newValue);
-
-				pos = y;
-			}
-		}
-
-		return sb.toString();
 	}
 
 	public static String reverse(String s) {

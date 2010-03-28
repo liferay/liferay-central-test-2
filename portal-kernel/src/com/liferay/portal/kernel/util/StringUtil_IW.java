@@ -235,6 +235,11 @@ public class StringUtil_IW {
 		return StringUtil.replace(s, oldSub, newSub, fromIndex);
 	}
 
+	public java.lang.String replace(java.lang.String s, java.lang.String begin,
+		java.lang.String end, java.util.Map<String, String> values) {
+		return StringUtil.replace(s, begin, end, values);
+	}
+
 	public java.lang.String replace(java.lang.String s,
 		java.lang.String[] oldSubs, java.lang.String[] newSubs) {
 		return StringUtil.replace(s, oldSubs, newSubs);
@@ -284,12 +289,6 @@ public class StringUtil_IW {
 	public java.lang.String replaceLast(java.lang.String s,
 		java.lang.String[] oldSubs, java.lang.String[] newSubs) {
 		return StringUtil.replaceLast(s, oldSubs, newSubs);
-	}
-
-	public java.lang.String replaceValues(java.lang.String s,
-		java.lang.String begin, java.lang.String end,
-		java.util.Map<String, String> values) {
-		return StringUtil.replaceValues(s, begin, end, values);
 	}
 
 	public java.lang.String reverse(java.lang.String s) {

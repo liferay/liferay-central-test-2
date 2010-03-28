@@ -269,7 +269,7 @@ public class RuntimePortletUtil {
 			contentsMap.put(portlet.getPortletId(), content);
 		}
 
-		return StringUtil.replaceValues(
+		return StringUtil.replace(
 			output, "[$TEMPLATE_PORTLET_", "$]", contentsMap);
 	}
 
