@@ -70,12 +70,12 @@ public class SearchWriterMessageListener
 		else if (searchEngineCommand.equals(
 					SearchEngineCommand.DELETE_DOCUMENT)) {
 
-			indexWriter.deleteDocuments(companyId, ids);
+			indexWriter.deleteDocument(companyId, id);
 		}
 		else if (searchEngineCommand.equals(
 					SearchEngineCommand.DELETE_DOCUMENTS)) {
 
-			indexWriter.deleteDocument(companyId, id);
+			indexWriter.deleteDocuments(companyId, ids);
 		}
 		else if (searchEngineCommand.equals(
 					SearchEngineCommand.DELETE_PORTLET_DOCUMENTS)) {
