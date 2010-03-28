@@ -198,7 +198,7 @@ boolean forcePost = method.equals("post") && (url.startsWith(Http.HTTP_WITH_SLAS
 					function(event) {
 						Liferay.Util.forcePost(this);
 
-						return false;
+						event.preventDefault();
 					}
 				);
 			}
