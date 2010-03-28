@@ -952,7 +952,7 @@ public class PortalUtil {
 		return getPortal().getUserValue(userId, param, defaultValue);
 	}
 
-	public long getValidUserId(long companyId, long userId)
+	public static long getValidUserId(long companyId, long userId)
 		throws PortalException, SystemException {
 
 		return getPortal().getValidUserId(companyId, userId);
