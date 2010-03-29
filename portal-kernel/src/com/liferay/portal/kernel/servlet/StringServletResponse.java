@@ -33,18 +33,12 @@ import javax.servlet.http.HttpServletResponseWrapper;
  * <a href="StringServletResponse.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @auther Shuyang Zhou
  */
 public class StringServletResponse extends HttpServletResponseWrapper {
 
 	public StringServletResponse(HttpServletResponse response) {
 		super(response);
-
-		_unsyncByteArrayOutputStream = new UnsyncByteArrayOutputStream();
-		_servletOutputStream = new StringServletOutputStream(
-			_unsyncByteArrayOutputStream);
-
-		_unsyncStringWriter = new UnsyncStringWriter(true);
-		_printWriter = new PrintWriter(_unsyncStringWriter);
 	}
 
 	public int getBufferSize() {
@@ -56,8 +50,12 @@ public class StringServletResponse extends HttpServletResponseWrapper {
 	}
 
 	public ServletOutputStream getOutputStream() {
-		_callGetOutputStream = true;
 
+		if(_servletOutputStream == null) {
+			_unsyncByteArrayOutputStream = new UnsyncByteArrayOutputStream();
+			_servletOutputStream = new StringServletOutputStream(
+				_unsyncByteArrayOutputStream);
+		}
 		return _servletOutputStream;
 	}
 
@@ -69,7 +67,7 @@ public class StringServletResponse extends HttpServletResponseWrapper {
 		if (_string != null) {
 			return _string;
 		}
-		else if (_callGetOutputStream) {
+		else if (_servletOutputStream != null) {
 			try {
 				return _unsyncByteArrayOutputStream.toString(StringPool.UTF8);
 			}
@@ -79,7 +77,7 @@ public class StringServletResponse extends HttpServletResponseWrapper {
 				return StringPool.BLANK;
 			}
 		}
-		else if (_callGetWriter) {
+		else if (_printWriter != null) {
 			return _unsyncStringWriter.toString();
 		}
 		else {
@@ -92,33 +90,29 @@ public class StringServletResponse extends HttpServletResponseWrapper {
 	}
 
 	public PrintWriter getWriter() {
-		_callGetWriter = true;
-
+		if(_printWriter == null) {
+			_unsyncStringWriter = new UnsyncStringWriter(true);
+			_printWriter = new PrintWriter(_unsyncStringWriter);
+		}
 		return _printWriter;
 	}
 
 	public boolean isCalledGetOutputStream() {
-		return _callGetOutputStream;
+		return _servletOutputStream != null;
 	}
 
 	public void recycle() {
-		_callGetOutputStream = false;
-		_callGetWriter = false;
 		_status = SC_OK;
 		_string = null;
 
-		_unsyncByteArrayOutputStream.reset();
-
-		_unsyncStringWriter.reset();
-
-		_printWriter = new PrintWriter(_unsyncStringWriter);
+		resetBuffer();
 	}
 
 	public void resetBuffer() {
-		if (_callGetOutputStream) {
+		if (_servletOutputStream != null) {
 			_unsyncByteArrayOutputStream.reset();
 		}
-		else if (_callGetWriter) {
+		else if (_printWriter != null) {
 			_unsyncStringWriter.reset();
 		}
 	}
@@ -148,8 +142,6 @@ public class StringServletResponse extends HttpServletResponseWrapper {
 		StringServletResponse.class);
 
 	private int _bufferSize;
-	private boolean _callGetOutputStream;
-	private boolean _callGetWriter;
 	private String _contentType;
 	private PrintWriter _printWriter;
 	private ServletOutputStream _servletOutputStream;
