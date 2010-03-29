@@ -3099,7 +3099,7 @@ public class PortalImpl implements Portal {
 
 				userName =
 					"<a href=\"" + portletURL.toString() + "\">" +
-						HtmlUtil.escape(userName) +	"</a>";
+						HtmlUtil.escape(userName) + "</a>";
 			}
 		}
 		catch (Exception e) {
