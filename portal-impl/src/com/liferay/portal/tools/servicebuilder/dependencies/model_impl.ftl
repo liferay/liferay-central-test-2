@@ -15,7 +15,7 @@ package ${packagePath}.model.impl;
 import ${packagePath}.model.${entity.name};
 import ${packagePath}.model.${entity.name}Soap;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.EscapedBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.DateUtil;
@@ -421,50 +421,7 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> {
 			return (${entity.name})this;
 		}
 		else {
-			${entity.name} model = new ${entity.name}Impl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			<#list entity.regularColList as column>
-				model.set${column.methodName}(
-
-				<#if column.EJBName??>
-					(${column.EJBName})get${column.methodName}().clone()
-				<#else>
-					<#assign autoEscape = true>
-
-					<#assign modelName = packagePath + ".model." + entity.name>
-
-					<#if modelHintsUtil.getHints(modelName, column.name)??>
-						<#assign hints = modelHintsUtil.getHints(modelName, column.name)>
-
-						<#if hints.get("auto-escape")??>
-							<#assign autoEscapeHintValue = hints.get("auto-escape")>
-
-							<#if autoEscapeHintValue == "false">
-								<#assign autoEscape = false>
-							</#if>
-						</#if>
-					</#if>
-
-					<#if autoEscape && (column.type == "String") && (column.localized == false) >
-						HtmlUtil.escape(
-					</#if>
-
-					get${column.methodName}()
-
-					<#if autoEscape && (column.type == "String") && (column.localized == false) >
-						)
-					</#if>
-				</#if>
-
-				);
-			</#list>
-
-			model = (${entity.name})Proxy.newProxyInstance(${entity.name}.class.getClassLoader(), new Class[] {${entity.name}.class}, new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (${entity.name})Proxy.newProxyInstance(${entity.name}.class.getClassLoader(), new Class[] {${entity.name}.class}, new EscapedBeanHandler(this));
 		}
 	}
 

@@ -46,6 +46,24 @@ public interface ${entity.name}Model extends BaseModel<${entity.name}> {
 			public String getClassName();
 		</#if>
 
+		<#assign autoEscape = true>
+
+		<#assign modelName = packagePath + ".model." + entity.name>
+
+		<#if modelHintsUtil.getHints(modelName, column.name)??>
+			<#assign hints = modelHintsUtil.getHints(modelName, column.name)>
+
+			<#if hints.get("auto-escape")??>
+				<#assign autoEscapeHintValue = hints.get("auto-escape")>
+
+				<#if autoEscapeHintValue == "false">
+					<#assign autoEscape = false>
+				</#if>
+			</#if>
+		</#if>
+		<#if autoEscape && (column.type == "String") && (column.localized == false) >
+			@com.liferay.portal.kernel.annotation.AutoEscape
+		</#if>
 		public ${column.type} get${column.methodName}();
 
         <#if column.localized>
