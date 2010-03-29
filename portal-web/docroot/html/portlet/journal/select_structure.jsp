@@ -16,30 +16,24 @@
 
 <%@ include file="/html/portlet/journal/init.jsp" %>
 
-<aui:form method="post" name="fm">
+<liferay-portlet:renderURL var="renderURL">
+	<portlet:param name="struts_action" value="/journal/select_structure" />
+</liferay-portlet:renderURL>
+
+<aui:form method="post" name="fm" action="<%= renderURL %>">
 
 	<%
-	String tabs1 = ParamUtil.getString(request, "tabs1", "structures");
-
 	PortletURL portletURL = renderResponse.createRenderURL();
 
 	portletURL.setParameter("struts_action", "/journal/select_structure");
-	portletURL.setParameter("tabs1", tabs1);
 
 	StructureSearch searchContainer = new StructureSearch(renderRequest, portletURL);
 
 	searchContainer.setDelta(10);
-
-	String tabs1Names = "shared-structures";
-
-	if (scopeGroupId != themeDisplay.getCompanyGroupId()) {
-		tabs1Names = "structures," + tabs1Names;
-	}
 	%>
 
 	<liferay-ui:tabs
-		names="<%= tabs1Names %>"
-		url="<%= portletURL.toString() %>"
+		names="structures"
 	/>
 
 	<liferay-ui:search-form
@@ -49,12 +43,6 @@
 
 	<%
 	StructureSearchTerms searchTerms = (StructureSearchTerms)searchContainer.getSearchTerms();
-
-	if (tabs1.equals("shared-structures")) {
-		long companyGroupId = themeDisplay.getCompanyGroupId();
-
-		searchTerms.setGroupId(companyGroupId);
-	}
 	%>
 
 	<%@ include file="/html/portlet/journal/structure_search_results.jspf" %>

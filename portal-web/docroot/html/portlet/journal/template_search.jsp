@@ -20,6 +20,8 @@
 TemplateSearch searchContainer = (TemplateSearch)request.getAttribute("liferay-ui:search:searchContainer");
 
 TemplateDisplayTerms displayTerms = (TemplateDisplayTerms)searchContainer.getDisplayTerms();
+
+String strutsAction = ParamUtil.getString(request, "struts_action");
 %>
 
 <liferay-ui:search-toggle
@@ -39,6 +41,17 @@ TemplateDisplayTerms displayTerms = (TemplateDisplayTerms)searchContainer.getDis
 		<aui:column>
 			<aui:input name="<%= displayTerms.DESCRIPTION %>" type="text" size="20" value="<%= displayTerms.getDescription() %>" />
 		</aui:column>
+
+		<c:if test='<%= strutsAction.equalsIgnoreCase("/journal/select_template") %>'>
+			<aui:column>
+				<aui:select label="my-places" name="<%= displayTerms.GROUP_ID %>">
+					<c:if test='<%= themeDisplay.getCompanyGroupId() != scopeGroupId %>'>
+						<aui:option label="global" selected="<%= displayTerms.getGroupId() == themeDisplay.getCompanyGroupId() %>" value="<%= themeDisplay.getCompanyGroupId() %>" />
+					</c:if>
+					<aui:option label='<%= themeDisplay.getScopeGroupName() %>' selected="<%= displayTerms.getGroupId() == scopeGroupId %>" value="<%= scopeGroupId %>" />
+				</aui:select>
+			</aui:column>
+		</c:if>
 	</aui:fieldset>
 </liferay-ui:search-toggle>
 

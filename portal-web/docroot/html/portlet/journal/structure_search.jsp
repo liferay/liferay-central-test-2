@@ -20,6 +20,8 @@
 StructureSearch searchContainer = (StructureSearch)request.getAttribute("liferay-ui:search:searchContainer");
 
 StructureDisplayTerms displayTerms = (StructureDisplayTerms)searchContainer.getDisplayTerms();
+
+String strutsAction = ParamUtil.getString(request, "struts_action");
 %>
 
 <liferay-ui:search-toggle
@@ -39,6 +41,17 @@ StructureDisplayTerms displayTerms = (StructureDisplayTerms)searchContainer.getD
 		<aui:column>
 			<aui:input name="<%= displayTerms.DESCRIPTION %>" size="20" type="text" value="<%= displayTerms.getDescription() %>" />
 		</aui:column>
+
+		<c:if test='<%= strutsAction.equalsIgnoreCase("/journal/select_structure") %>'>
+			<aui:column>
+				<aui:select label="my-places" name="<%= displayTerms.GROUP_ID %>">
+					<c:if test='<%= themeDisplay.getCompanyGroupId() != scopeGroupId %>'>
+						<aui:option label="global" selected="<%= displayTerms.getGroupId() == themeDisplay.getCompanyGroupId() %>" value="<%= themeDisplay.getCompanyGroupId() %>" />
+					</c:if>
+					<aui:option label='<%= themeDisplay.getScopeGroupName() %>' selected="<%= displayTerms.getGroupId() == scopeGroupId %>" value="<%= scopeGroupId %>" />
+				</aui:select>
+			</aui:column>
+		</c:if>
 	</aui:fieldset>
 </liferay-ui:search-toggle>
 
