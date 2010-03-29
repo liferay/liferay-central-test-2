@@ -51,7 +51,7 @@ public class StringServletResponse extends HttpServletResponseWrapper {
 
 	public ServletOutputStream getOutputStream() {
 
-		if(_servletOutputStream == null) {
+		if (_servletOutputStream == null) {
 			_unsyncByteArrayOutputStream = new UnsyncByteArrayOutputStream();
 			_servletOutputStream = new StringServletOutputStream(
 				_unsyncByteArrayOutputStream);
@@ -90,7 +90,7 @@ public class StringServletResponse extends HttpServletResponseWrapper {
 	}
 
 	public PrintWriter getWriter() {
-		if(_printWriter == null) {
+		if (_printWriter == null) {
 			_unsyncStringWriter = new UnsyncStringWriter(true);
 			_printWriter = new PrintWriter(_unsyncStringWriter);
 		}
