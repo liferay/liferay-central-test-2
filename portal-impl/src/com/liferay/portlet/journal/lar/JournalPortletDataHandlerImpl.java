@@ -1411,8 +1411,8 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 	public PortletDataHandlerControl[] getExportControls() {
 		return new PortletDataHandlerControl[] {
-			_articles, _structuresTemplatesAndFeeds, _embeddedAssets, _images,
-			_categories, _comments, _ratings, _tags
+			_deleteExistingData, _articles, _structuresTemplatesAndFeeds,
+			_embeddedAssets, _images, _categories, _comments, _ratings, _tags
 		};
 	}
 
@@ -1429,6 +1429,13 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		throws PortletDataException {
 
 		try {
+
+			if (context.getBooleanParameter(
+				_NAMESPACE, "delete-existing-data")) {
+
+				deleteData(context, portletId, preferences);
+ 	 		}
+
 			Document doc = SAXReaderUtil.read(data);
 
 			Element root = doc.getRootElement();
@@ -1784,6 +1791,9 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 	private static final PortletDataHandlerBoolean _comments =
 		new PortletDataHandlerBoolean(_NAMESPACE, "comments");
+
+	private static final PortletDataHandlerBoolean _deleteExistingData =
+ 	 	new PortletDataHandlerBoolean(_NAMESPACE, "delete-existing-data");
 
 	private static final PortletDataHandlerBoolean _ratings =
 		new PortletDataHandlerBoolean(_NAMESPACE, "ratings");
