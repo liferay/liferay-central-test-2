@@ -194,6 +194,14 @@ public class WorkflowInstanceLinkLocalServiceWrapper
 			groupId, userId, className, classPK);
 	}
 
+	public void updateClassPK(long companyId, long groupId,
+		java.lang.String className, long oldClassPK, long newClassPK)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_workflowInstanceLinkLocalService.updateClassPK(companyId, groupId,
+			className, oldClassPK, newClassPK);
+	}
+
 	public WorkflowInstanceLinkLocalService getWrappedWorkflowInstanceLinkLocalService() {
 		return _workflowInstanceLinkLocalService;
 	}

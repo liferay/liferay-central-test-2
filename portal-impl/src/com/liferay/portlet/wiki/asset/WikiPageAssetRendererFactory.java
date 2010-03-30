@@ -14,6 +14,8 @@
 
 package com.liferay.portlet.wiki.asset;
 
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portlet.asset.model.AssetRenderer;
@@ -35,7 +37,9 @@ public class WikiPageAssetRendererFactory extends BaseAssetRendererFactory {
 
 	public static final String TYPE = "wiki";
 
-	public AssetRenderer getAssetRenderer(long classPK) throws Exception {
+	public AssetRenderer getAssetRenderer(long classPK)
+		throws PortalException, SystemException {
+
 		WikiPage page = WikiPageLocalServiceUtil.getPage(classPK);
 
 		return new WikiPageAssetRenderer(page);

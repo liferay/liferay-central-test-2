@@ -14,6 +14,7 @@
 
 package com.liferay.portal.model;
 
+import com.liferay.portal.kernel.annotation.AutoEscape;
 import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
@@ -58,6 +59,7 @@ public interface ShardModel extends BaseModel<Shard> {
 
 	public void setClassPK(long classPK);
 
+	@AutoEscape
 	public String getName();
 
 	public void setName(String name);

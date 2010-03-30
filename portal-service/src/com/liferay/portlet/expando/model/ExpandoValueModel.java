@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.expando.model;
 
+import com.liferay.portal.kernel.annotation.AutoEscape;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.service.ServiceContext;
 
@@ -73,6 +74,7 @@ public interface ExpandoValueModel extends BaseModel<ExpandoValue> {
 
 	public void setClassPK(long classPK);
 
+	@AutoEscape
 	public String getData();
 
 	public void setData(String data);

@@ -14,7 +14,7 @@
 
 package com.liferay.portal.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -147,20 +147,9 @@ public class UserGroupRoleModelImpl extends BaseModelImpl<UserGroupRole> {
 			return (UserGroupRole)this;
 		}
 		else {
-			UserGroupRole model = new UserGroupRoleImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setUserId(getUserId());
-			model.setGroupId(getGroupId());
-			model.setRoleId(getRoleId());
-
-			model = (UserGroupRole)Proxy.newProxyInstance(UserGroupRole.class.getClassLoader(),
-					new Class[] { UserGroupRole.class },
-					new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (UserGroupRole)Proxy.newProxyInstance(UserGroupRole.class.getClassLoader(),
+				new Class[] { UserGroupRole.class },
+				new AutoEscapeBeanHandler(this));
 		}
 	}
 

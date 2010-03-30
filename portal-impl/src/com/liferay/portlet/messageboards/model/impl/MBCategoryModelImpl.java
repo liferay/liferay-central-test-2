@@ -14,10 +14,9 @@
 
 package com.liferay.portlet.messageboards.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.impl.BaseModelImpl;
@@ -302,31 +301,9 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory> {
 			return (MBCategory)this;
 		}
 		else {
-			MBCategory model = new MBCategoryImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setUuid(HtmlUtil.escape(getUuid()));
-			model.setCategoryId(getCategoryId());
-			model.setGroupId(getGroupId());
-			model.setCompanyId(getCompanyId());
-			model.setUserId(getUserId());
-			model.setUserName(HtmlUtil.escape(getUserName()));
-			model.setCreateDate(getCreateDate());
-			model.setModifiedDate(getModifiedDate());
-			model.setParentCategoryId(getParentCategoryId());
-			model.setName(HtmlUtil.escape(getName()));
-			model.setDescription(HtmlUtil.escape(getDescription()));
-			model.setThreadCount(getThreadCount());
-			model.setMessageCount(getMessageCount());
-			model.setLastPostDate(getLastPostDate());
-
-			model = (MBCategory)Proxy.newProxyInstance(MBCategory.class.getClassLoader(),
-					new Class[] { MBCategory.class },
-					new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (MBCategory)Proxy.newProxyInstance(MBCategory.class.getClassLoader(),
+				new Class[] { MBCategory.class },
+				new AutoEscapeBeanHandler(this));
 		}
 	}
 

@@ -160,21 +160,23 @@ AssetUtil.addLayoutTags(request, AssetTagLocalServiceUtil.getTags(WikiPage.class
 	</div>
 </c:if>
 
-<div class="page-categories">
-	<liferay-ui:asset-categories-summary
-		className="<%= WikiPage.class.getName() %>"
-		classPK="<%= wikiPage.getResourcePrimKey() %>"
-		portletURL="<%= PortletURLUtil.clone(categorizedPagesURL, renderResponse) %>"
-	/>
-</div>
+<div class="page-categorization">
+	<div class="page-categories">
+		<liferay-ui:asset-categories-summary
+			className="<%= WikiPage.class.getName() %>"
+			classPK="<%= wikiPage.getResourcePrimKey() %>"
+			portletURL="<%= PortletURLUtil.clone(categorizedPagesURL, renderResponse) %>"
+		/>
+	</div>
 
-<div class="page-tags">
-	<liferay-ui:asset-tags-summary
-		className="<%= WikiPage.class.getName() %>"
-		classPK="<%= wikiPage.getResourcePrimKey() %>"
-		message="tags"
-		portletURL="<%= PortletURLUtil.clone(taggedPagesURL, renderResponse) %>"
-	/>
+	<div class="page-tags">
+		<liferay-ui:asset-tags-summary
+			className="<%= WikiPage.class.getName() %>"
+			classPK="<%= wikiPage.getResourcePrimKey() %>"
+			message="tags"
+			portletURL="<%= PortletURLUtil.clone(taggedPagesURL, renderResponse) %>"
+		/>
+	</div>
 </div>
 
 <div>

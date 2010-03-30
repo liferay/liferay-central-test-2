@@ -14,10 +14,9 @@
 
 package com.liferay.portlet.journal.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.impl.BaseModelImpl;
@@ -527,46 +526,9 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle> {
 			return (JournalArticle)this;
 		}
 		else {
-			JournalArticle model = new JournalArticleImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setUuid(HtmlUtil.escape(getUuid()));
-			model.setId(getId());
-			model.setResourcePrimKey(getResourcePrimKey());
-			model.setGroupId(getGroupId());
-			model.setCompanyId(getCompanyId());
-			model.setUserId(getUserId());
-			model.setUserName(HtmlUtil.escape(getUserName()));
-			model.setCreateDate(getCreateDate());
-			model.setModifiedDate(getModifiedDate());
-			model.setArticleId(getArticleId());
-			model.setVersion(getVersion());
-			model.setTitle(HtmlUtil.escape(getTitle()));
-			model.setUrlTitle(HtmlUtil.escape(getUrlTitle()));
-			model.setDescription(HtmlUtil.escape(getDescription()));
-			model.setContent(HtmlUtil.escape(getContent()));
-			model.setType(HtmlUtil.escape(getType()));
-			model.setStructureId(getStructureId());
-			model.setTemplateId(getTemplateId());
-			model.setDisplayDate(getDisplayDate());
-			model.setStatus(getStatus());
-			model.setStatusByUserId(getStatusByUserId());
-			model.setStatusByUserName(HtmlUtil.escape(getStatusByUserName()));
-			model.setStatusDate(getStatusDate());
-			model.setExpirationDate(getExpirationDate());
-			model.setReviewDate(getReviewDate());
-			model.setIndexable(getIndexable());
-			model.setSmallImage(getSmallImage());
-			model.setSmallImageId(getSmallImageId());
-			model.setSmallImageURL(HtmlUtil.escape(getSmallImageURL()));
-
-			model = (JournalArticle)Proxy.newProxyInstance(JournalArticle.class.getClassLoader(),
-					new Class[] { JournalArticle.class },
-					new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (JournalArticle)Proxy.newProxyInstance(JournalArticle.class.getClassLoader(),
+				new Class[] { JournalArticle.class },
+				new AutoEscapeBeanHandler(this));
 		}
 	}
 

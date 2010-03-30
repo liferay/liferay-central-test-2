@@ -153,4 +153,9 @@ public interface WorkflowInstanceLinkLocalService {
 		long userId, java.lang.String className, long classPK)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
+
+	public void updateClassPK(long companyId, long groupId,
+		java.lang.String className, long oldClassPK, long newClassPK)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 }

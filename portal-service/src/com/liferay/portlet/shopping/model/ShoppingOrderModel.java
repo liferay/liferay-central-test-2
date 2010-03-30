@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.shopping.model;
 
+import com.liferay.portal.kernel.annotation.AutoEscape;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.service.ServiceContext;
@@ -68,6 +69,7 @@ public interface ShoppingOrderModel extends BaseModel<ShoppingOrder> {
 
 	public void setUserUuid(String userUuid);
 
+	@AutoEscape
 	public String getUserName();
 
 	public void setUserName(String userName);
@@ -80,6 +82,7 @@ public interface ShoppingOrderModel extends BaseModel<ShoppingOrder> {
 
 	public void setModifiedDate(Date modifiedDate);
 
+	@AutoEscape
 	public String getNumber();
 
 	public void setNumber(String number);
@@ -92,6 +95,7 @@ public interface ShoppingOrderModel extends BaseModel<ShoppingOrder> {
 
 	public void setShipping(double shipping);
 
+	@AutoEscape
 	public String getAltShipping();
 
 	public void setAltShipping(String altShipping);
@@ -112,6 +116,7 @@ public interface ShoppingOrderModel extends BaseModel<ShoppingOrder> {
 
 	public void setInsurance(double insurance);
 
+	@AutoEscape
 	public String getCouponCodes();
 
 	public void setCouponCodes(String couponCodes);
@@ -120,42 +125,52 @@ public interface ShoppingOrderModel extends BaseModel<ShoppingOrder> {
 
 	public void setCouponDiscount(double couponDiscount);
 
+	@AutoEscape
 	public String getBillingFirstName();
 
 	public void setBillingFirstName(String billingFirstName);
 
+	@AutoEscape
 	public String getBillingLastName();
 
 	public void setBillingLastName(String billingLastName);
 
+	@AutoEscape
 	public String getBillingEmailAddress();
 
 	public void setBillingEmailAddress(String billingEmailAddress);
 
+	@AutoEscape
 	public String getBillingCompany();
 
 	public void setBillingCompany(String billingCompany);
 
+	@AutoEscape
 	public String getBillingStreet();
 
 	public void setBillingStreet(String billingStreet);
 
+	@AutoEscape
 	public String getBillingCity();
 
 	public void setBillingCity(String billingCity);
 
+	@AutoEscape
 	public String getBillingState();
 
 	public void setBillingState(String billingState);
 
+	@AutoEscape
 	public String getBillingZip();
 
 	public void setBillingZip(String billingZip);
 
+	@AutoEscape
 	public String getBillingCountry();
 
 	public void setBillingCountry(String billingCountry);
 
+	@AutoEscape
 	public String getBillingPhone();
 
 	public void setBillingPhone(String billingPhone);
@@ -166,54 +181,67 @@ public interface ShoppingOrderModel extends BaseModel<ShoppingOrder> {
 
 	public void setShipToBilling(boolean shipToBilling);
 
+	@AutoEscape
 	public String getShippingFirstName();
 
 	public void setShippingFirstName(String shippingFirstName);
 
+	@AutoEscape
 	public String getShippingLastName();
 
 	public void setShippingLastName(String shippingLastName);
 
+	@AutoEscape
 	public String getShippingEmailAddress();
 
 	public void setShippingEmailAddress(String shippingEmailAddress);
 
+	@AutoEscape
 	public String getShippingCompany();
 
 	public void setShippingCompany(String shippingCompany);
 
+	@AutoEscape
 	public String getShippingStreet();
 
 	public void setShippingStreet(String shippingStreet);
 
+	@AutoEscape
 	public String getShippingCity();
 
 	public void setShippingCity(String shippingCity);
 
+	@AutoEscape
 	public String getShippingState();
 
 	public void setShippingState(String shippingState);
 
+	@AutoEscape
 	public String getShippingZip();
 
 	public void setShippingZip(String shippingZip);
 
+	@AutoEscape
 	public String getShippingCountry();
 
 	public void setShippingCountry(String shippingCountry);
 
+	@AutoEscape
 	public String getShippingPhone();
 
 	public void setShippingPhone(String shippingPhone);
 
+	@AutoEscape
 	public String getCcName();
 
 	public void setCcName(String ccName);
 
+	@AutoEscape
 	public String getCcType();
 
 	public void setCcType(String ccType);
 
+	@AutoEscape
 	public String getCcNumber();
 
 	public void setCcNumber(String ccNumber);
@@ -226,18 +254,22 @@ public interface ShoppingOrderModel extends BaseModel<ShoppingOrder> {
 
 	public void setCcExpYear(int ccExpYear);
 
+	@AutoEscape
 	public String getCcVerNumber();
 
 	public void setCcVerNumber(String ccVerNumber);
 
+	@AutoEscape
 	public String getComments();
 
 	public void setComments(String comments);
 
+	@AutoEscape
 	public String getPpTxnId();
 
 	public void setPpTxnId(String ppTxnId);
 
+	@AutoEscape
 	public String getPpPaymentStatus();
 
 	public void setPpPaymentStatus(String ppPaymentStatus);
@@ -246,10 +278,12 @@ public interface ShoppingOrderModel extends BaseModel<ShoppingOrder> {
 
 	public void setPpPaymentGross(double ppPaymentGross);
 
+	@AutoEscape
 	public String getPpReceiverEmail();
 
 	public void setPpReceiverEmail(String ppReceiverEmail);
 
+	@AutoEscape
 	public String getPpPayerEmail();
 
 	public void setPpPayerEmail(String ppPayerEmail);

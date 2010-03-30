@@ -14,9 +14,8 @@
 
 package com.liferay.portal.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Region;
@@ -176,21 +175,8 @@ public class RegionModelImpl extends BaseModelImpl<Region> {
 			return (Region)this;
 		}
 		else {
-			Region model = new RegionImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setRegionId(getRegionId());
-			model.setCountryId(getCountryId());
-			model.setRegionCode(HtmlUtil.escape(getRegionCode()));
-			model.setName(HtmlUtil.escape(getName()));
-			model.setActive(getActive());
-
-			model = (Region)Proxy.newProxyInstance(Region.class.getClassLoader(),
-					new Class[] { Region.class }, new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (Region)Proxy.newProxyInstance(Region.class.getClassLoader(),
+				new Class[] { Region.class }, new AutoEscapeBeanHandler(this));
 		}
 	}
 

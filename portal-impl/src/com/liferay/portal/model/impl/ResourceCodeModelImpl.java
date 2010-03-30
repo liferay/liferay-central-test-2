@@ -14,9 +14,8 @@
 
 package com.liferay.portal.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.ResourceCode;
@@ -183,21 +182,9 @@ public class ResourceCodeModelImpl extends BaseModelImpl<ResourceCode> {
 			return (ResourceCode)this;
 		}
 		else {
-			ResourceCode model = new ResourceCodeImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setCodeId(getCodeId());
-			model.setCompanyId(getCompanyId());
-			model.setName(HtmlUtil.escape(getName()));
-			model.setScope(getScope());
-
-			model = (ResourceCode)Proxy.newProxyInstance(ResourceCode.class.getClassLoader(),
-					new Class[] { ResourceCode.class },
-					new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (ResourceCode)Proxy.newProxyInstance(ResourceCode.class.getClassLoader(),
+				new Class[] { ResourceCode.class },
+				new AutoEscapeBeanHandler(this));
 		}
 	}
 

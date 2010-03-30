@@ -2408,9 +2408,9 @@ AUI().add(
 				saveStructureTriggers.on(
 					'click',
 					function(event) {
-						saveStructureBtn.simulate('click');
+						event.preventDefault();
 
-						return false;
+						saveStructureBtn.simulate('click');
 					}
 				);
 

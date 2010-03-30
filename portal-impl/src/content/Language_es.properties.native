@@ -1323,6 +1323,7 @@ delete-category=Eliminar categoría
 delete-data=Eliminar datos
 delete-document=Eliminar documento
 delete-entry=Eliminar registro
+delete-existing-data=Datos existentes de la cancelación (Automatic Translation)
 delete-folder=Eliminar carpeta
 delete-image=Eliminar imagen
 delete-live-page=Borrar la página 'live'.

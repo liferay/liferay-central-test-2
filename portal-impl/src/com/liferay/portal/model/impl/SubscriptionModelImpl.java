@@ -14,10 +14,9 @@
 
 package com.liferay.portal.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Subscription;
@@ -269,26 +268,9 @@ public class SubscriptionModelImpl extends BaseModelImpl<Subscription> {
 			return (Subscription)this;
 		}
 		else {
-			Subscription model = new SubscriptionImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setSubscriptionId(getSubscriptionId());
-			model.setCompanyId(getCompanyId());
-			model.setUserId(getUserId());
-			model.setUserName(HtmlUtil.escape(getUserName()));
-			model.setCreateDate(getCreateDate());
-			model.setModifiedDate(getModifiedDate());
-			model.setClassNameId(getClassNameId());
-			model.setClassPK(getClassPK());
-			model.setFrequency(HtmlUtil.escape(getFrequency()));
-
-			model = (Subscription)Proxy.newProxyInstance(Subscription.class.getClassLoader(),
-					new Class[] { Subscription.class },
-					new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (Subscription)Proxy.newProxyInstance(Subscription.class.getClassLoader(),
+				new Class[] { Subscription.class },
+				new AutoEscapeBeanHandler(this));
 		}
 	}
 

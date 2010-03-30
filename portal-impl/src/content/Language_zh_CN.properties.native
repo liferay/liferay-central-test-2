@@ -1324,6 +1324,7 @@ delete-category=删除类别
 delete-data=删除数据
 delete-document=删除文档
 delete-entry=删除条目
+delete-existing-data=删除现有数据 (Automatic Translation)
 delete-folder=删除文件夹
 delete-image=删除图片
 delete-live-page=删除活动的页。

@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.journal.model;
 
+import com.liferay.portal.kernel.annotation.AutoEscape;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.service.ServiceContext;
@@ -48,6 +49,7 @@ public interface JournalTemplateModel extends BaseModel<JournalTemplate> {
 
 	public void setPrimaryKey(long pk);
 
+	@AutoEscape
 	public String getUuid();
 
 	public void setUuid(String uuid);
@@ -72,6 +74,7 @@ public interface JournalTemplateModel extends BaseModel<JournalTemplate> {
 
 	public void setUserUuid(String userUuid);
 
+	@AutoEscape
 	public String getUserName();
 
 	public void setUserName(String userName);
@@ -92,18 +95,22 @@ public interface JournalTemplateModel extends BaseModel<JournalTemplate> {
 
 	public void setStructureId(String structureId);
 
+	@AutoEscape
 	public String getName();
 
 	public void setName(String name);
 
+	@AutoEscape
 	public String getDescription();
 
 	public void setDescription(String description);
 
+	@AutoEscape
 	public String getXsl();
 
 	public void setXsl(String xsl);
 
+	@AutoEscape
 	public String getLangType();
 
 	public void setLangType(String langType);
@@ -124,6 +131,7 @@ public interface JournalTemplateModel extends BaseModel<JournalTemplate> {
 
 	public void setSmallImageId(long smallImageId);
 
+	@AutoEscape
 	public String getSmallImageURL();
 
 	public void setSmallImageURL(String smallImageURL);

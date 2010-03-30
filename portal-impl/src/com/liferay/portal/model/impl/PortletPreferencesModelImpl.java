@@ -14,9 +14,8 @@
 
 package com.liferay.portal.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.PortletPreferences;
@@ -219,23 +218,9 @@ public class PortletPreferencesModelImpl extends BaseModelImpl<PortletPreference
 			return (PortletPreferences)this;
 		}
 		else {
-			PortletPreferences model = new PortletPreferencesImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setPortletPreferencesId(getPortletPreferencesId());
-			model.setOwnerId(getOwnerId());
-			model.setOwnerType(getOwnerType());
-			model.setPlid(getPlid());
-			model.setPortletId(HtmlUtil.escape(getPortletId()));
-			model.setPreferences(HtmlUtil.escape(getPreferences()));
-
-			model = (PortletPreferences)Proxy.newProxyInstance(PortletPreferences.class.getClassLoader(),
-					new Class[] { PortletPreferences.class },
-					new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (PortletPreferences)Proxy.newProxyInstance(PortletPreferences.class.getClassLoader(),
+				new Class[] { PortletPreferences.class },
+				new AutoEscapeBeanHandler(this));
 		}
 	}
 

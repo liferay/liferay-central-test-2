@@ -80,7 +80,7 @@ else {
 
 		<aui:model-context bean="<%= phone %>" model="<%= Phone.class %>" />
 
-		<div class="lfr-form-row">
+		<div class="lfr-form-row lfr-form-row-inline">
 			<div class="row-fields">
 				<aui:input name='<%= "phoneId" + phonesIndex %>' type="hidden" value="<%= phone.getPhoneId() %>" />
 
@@ -90,9 +90,7 @@ else {
 
 				<aui:select label="type" name='<%= "phoneTypeId" + phonesIndex %>' listType="<%= className + ListTypeConstants.PHONE %>" />
 
-				<aui:field-wrapper cssClass="primary-ctrl">
-					<aui:input checked="<%= phone.isPrimary() %>" id='<%= "phonePrimary" + phonesIndex %>' inlineLabel="left" label="primary" name="phonePrimary" type="radio" value="<%= phonesIndex %>" />
-				</aui:field-wrapper>
+				<aui:input checked="<%= phone.isPrimary() %>" cssClass="primary-ctrl" id='<%= "phonePrimary" + phonesIndex %>' inlineLabel="left" label="primary" name="phonePrimary" type="radio" value="<%= phonesIndex %>" />
 			</div>
 		</div>
 

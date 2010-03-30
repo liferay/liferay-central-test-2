@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.documentlibrary.model;
 
+import com.liferay.portal.kernel.annotation.AutoEscape;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.service.ServiceContext;
@@ -76,6 +77,7 @@ public interface DLFileRankModel extends BaseModel<DLFileRank> {
 
 	public void setFolderId(long folderId);
 
+	@AutoEscape
 	public String getName();
 
 	public void setName(String name);

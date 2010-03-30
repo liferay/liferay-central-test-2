@@ -14,11 +14,10 @@
 
 package com.liferay.portal.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Website;
@@ -256,28 +255,8 @@ public class WebsiteModelImpl extends BaseModelImpl<Website> {
 			return (Website)this;
 		}
 		else {
-			Website model = new WebsiteImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setWebsiteId(getWebsiteId());
-			model.setCompanyId(getCompanyId());
-			model.setUserId(getUserId());
-			model.setUserName(HtmlUtil.escape(getUserName()));
-			model.setCreateDate(getCreateDate());
-			model.setModifiedDate(getModifiedDate());
-			model.setClassNameId(getClassNameId());
-			model.setClassPK(getClassPK());
-			model.setUrl(HtmlUtil.escape(getUrl()));
-			model.setTypeId(getTypeId());
-			model.setPrimary(getPrimary());
-
-			model = (Website)Proxy.newProxyInstance(Website.class.getClassLoader(),
-					new Class[] { Website.class },
-					new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (Website)Proxy.newProxyInstance(Website.class.getClassLoader(),
+				new Class[] { Website.class }, new AutoEscapeBeanHandler(this));
 		}
 	}
 

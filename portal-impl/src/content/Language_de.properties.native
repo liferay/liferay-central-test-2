@@ -1324,6 +1324,7 @@ delete-category=Kategorie löschen
 delete-data=Löschung-Daten
 delete-document=Dokument löschen
 delete-entry=Eintrag löschen
+delete-existing-data=Löschung-vorhandene Daten (Automatic Translation)
 delete-folder=Ordner löschen
 delete-image=Bild löschen
 delete-live-page=Veröffentlichte Seite löschen.

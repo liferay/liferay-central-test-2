@@ -30,7 +30,9 @@
 	</xs:element>
 	<xs:element name="actions">
 		<xs:complexType>
-			<xs:group ref="actions-group" />
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:group ref="actions-group" />
+			</xs:choice>
 		</xs:complexType>
 	</xs:element>
 	<xs:element name="assignments">
@@ -179,12 +181,12 @@
 	</xs:element>
 	<xs:element name="workflow-definition">
 		<xs:complexType>
-			<xs:sequence>
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
 				<xs:element ref="name" />
 				<xs:element ref="description" minOccurs="0" />
 				<xs:element name="version" type="xs:int" />
 				<xs:group ref="nodes-group" />
-			</xs:sequence>
+			</xs:choice>
 		</xs:complexType>
 	</xs:element>
 	<xs:group name="actions-group">

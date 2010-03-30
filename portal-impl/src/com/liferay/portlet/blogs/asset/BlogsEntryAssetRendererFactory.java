@@ -14,6 +14,8 @@
 
 package com.liferay.portlet.blogs.asset;
 
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.security.permission.ActionKeys;
@@ -41,14 +43,16 @@ public class BlogsEntryAssetRendererFactory extends BaseAssetRendererFactory {
 
 	public static final String TYPE = "blog";
 
-	public AssetRenderer getAssetRenderer(long classPK) throws Exception {
+	public AssetRenderer getAssetRenderer(long classPK)
+		throws PortalException, SystemException {
+
 		BlogsEntry entry = BlogsEntryLocalServiceUtil.getEntry(classPK);
 
 		return new BlogsEntryAssetRenderer(entry);
 	}
 
 	public AssetRenderer getAssetRenderer(long groupId, String urlTitle)
-		throws Exception {
+		throws PortalException, SystemException {
 
 		BlogsEntry entry = BlogsEntryServiceUtil.getEntry(groupId, urlTitle);
 

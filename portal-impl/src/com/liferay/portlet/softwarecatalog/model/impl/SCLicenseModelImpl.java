@@ -14,9 +14,8 @@
 
 package com.liferay.portlet.softwarecatalog.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.impl.BaseModelImpl;
@@ -207,23 +206,8 @@ public class SCLicenseModelImpl extends BaseModelImpl<SCLicense> {
 			return (SCLicense)this;
 		}
 		else {
-			SCLicense model = new SCLicenseImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setLicenseId(getLicenseId());
-			model.setName(HtmlUtil.escape(getName()));
-			model.setUrl(HtmlUtil.escape(getUrl()));
-			model.setOpenSource(getOpenSource());
-			model.setActive(getActive());
-			model.setRecommended(getRecommended());
-
-			model = (SCLicense)Proxy.newProxyInstance(SCLicense.class.getClassLoader(),
-					new Class[] { SCLicense.class },
-					new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (SCLicense)Proxy.newProxyInstance(SCLicense.class.getClassLoader(),
+				new Class[] { SCLicense.class }, new AutoEscapeBeanHandler(this));
 		}
 	}
 

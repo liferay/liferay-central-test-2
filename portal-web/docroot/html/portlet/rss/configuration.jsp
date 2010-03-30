@@ -93,7 +93,7 @@ configurationRenderURL.setParameter("portletResource", portletResource);
 							}
 						%>
 
-							<div class="lfr-form-row">
+							<div class="lfr-form-row lfr-form-row-inline">
 								<div class="row-fields">
 									<aui:input cssClass="lfr-input-text-container" label="title" name='<%= "title" + i %>' value="<%= title %>" />
 

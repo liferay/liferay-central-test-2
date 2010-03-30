@@ -14,10 +14,9 @@
 
 package com.liferay.portlet.imagegallery.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.impl.BaseModelImpl;
@@ -275,27 +274,8 @@ public class IGFolderModelImpl extends BaseModelImpl<IGFolder> {
 			return (IGFolder)this;
 		}
 		else {
-			IGFolder model = new IGFolderImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setUuid(HtmlUtil.escape(getUuid()));
-			model.setFolderId(getFolderId());
-			model.setGroupId(getGroupId());
-			model.setCompanyId(getCompanyId());
-			model.setUserId(getUserId());
-			model.setCreateDate(getCreateDate());
-			model.setModifiedDate(getModifiedDate());
-			model.setParentFolderId(getParentFolderId());
-			model.setName(HtmlUtil.escape(getName()));
-			model.setDescription(HtmlUtil.escape(getDescription()));
-
-			model = (IGFolder)Proxy.newProxyInstance(IGFolder.class.getClassLoader(),
-					new Class[] { IGFolder.class },
-					new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (IGFolder)Proxy.newProxyInstance(IGFolder.class.getClassLoader(),
+				new Class[] { IGFolder.class }, new AutoEscapeBeanHandler(this));
 		}
 	}
 

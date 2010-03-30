@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.softwarecatalog.model;
 
+import com.liferay.portal.kernel.annotation.AutoEscape;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.service.ServiceContext;
@@ -68,6 +69,7 @@ public interface SCFrameworkVersionModel extends BaseModel<SCFrameworkVersion> {
 
 	public void setUserUuid(String userUuid);
 
+	@AutoEscape
 	public String getUserName();
 
 	public void setUserName(String userName);
@@ -80,10 +82,12 @@ public interface SCFrameworkVersionModel extends BaseModel<SCFrameworkVersion> {
 
 	public void setModifiedDate(Date modifiedDate);
 
+	@AutoEscape
 	public String getName();
 
 	public void setName(String name);
 
+	@AutoEscape
 	public String getUrl();
 
 	public void setUrl(String url);

@@ -14,6 +14,7 @@
 
 package com.liferay.portal.model;
 
+import com.liferay.portal.kernel.annotation.AutoEscape;
 import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
@@ -54,6 +55,7 @@ public interface UserTrackerPathModel extends BaseModel<UserTrackerPath> {
 
 	public void setUserTrackerId(long userTrackerId);
 
+	@AutoEscape
 	public String getPath();
 
 	public void setPath(String path);

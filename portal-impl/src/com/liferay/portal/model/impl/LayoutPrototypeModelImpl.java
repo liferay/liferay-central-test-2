@@ -14,7 +14,7 @@
 
 package com.liferay.portal.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
@@ -263,23 +263,9 @@ public class LayoutPrototypeModelImpl extends BaseModelImpl<LayoutPrototype> {
 			return (LayoutPrototype)this;
 		}
 		else {
-			LayoutPrototype model = new LayoutPrototypeImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setLayoutPrototypeId(getLayoutPrototypeId());
-			model.setCompanyId(getCompanyId());
-			model.setName(getName());
-			model.setDescription(HtmlUtil.escape(getDescription()));
-			model.setSettings(HtmlUtil.escape(getSettings()));
-			model.setActive(getActive());
-
-			model = (LayoutPrototype)Proxy.newProxyInstance(LayoutPrototype.class.getClassLoader(),
-					new Class[] { LayoutPrototype.class },
-					new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (LayoutPrototype)Proxy.newProxyInstance(LayoutPrototype.class.getClassLoader(),
+				new Class[] { LayoutPrototype.class },
+				new AutoEscapeBeanHandler(this));
 		}
 	}
 

@@ -14,9 +14,8 @@
 
 package com.liferay.portlet.shopping.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.impl.BaseModelImpl;
@@ -240,27 +239,9 @@ public class ShoppingOrderItemModelImpl extends BaseModelImpl<ShoppingOrderItem>
 			return (ShoppingOrderItem)this;
 		}
 		else {
-			ShoppingOrderItem model = new ShoppingOrderItemImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setOrderItemId(getOrderItemId());
-			model.setOrderId(getOrderId());
-			model.setItemId(HtmlUtil.escape(getItemId()));
-			model.setSku(HtmlUtil.escape(getSku()));
-			model.setName(HtmlUtil.escape(getName()));
-			model.setDescription(HtmlUtil.escape(getDescription()));
-			model.setProperties(HtmlUtil.escape(getProperties()));
-			model.setPrice(getPrice());
-			model.setQuantity(getQuantity());
-			model.setShippedDate(getShippedDate());
-
-			model = (ShoppingOrderItem)Proxy.newProxyInstance(ShoppingOrderItem.class.getClassLoader(),
-					new Class[] { ShoppingOrderItem.class },
-					new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (ShoppingOrderItem)Proxy.newProxyInstance(ShoppingOrderItem.class.getClassLoader(),
+				new Class[] { ShoppingOrderItem.class },
+				new AutoEscapeBeanHandler(this));
 		}
 	}
 

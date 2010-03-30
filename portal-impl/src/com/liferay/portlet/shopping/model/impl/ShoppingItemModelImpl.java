@@ -14,10 +14,9 @@
 
 package com.liferay.portlet.shopping.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.impl.BaseModelImpl;
@@ -593,51 +592,9 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem> {
 			return (ShoppingItem)this;
 		}
 		else {
-			ShoppingItem model = new ShoppingItemImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setItemId(getItemId());
-			model.setGroupId(getGroupId());
-			model.setCompanyId(getCompanyId());
-			model.setUserId(getUserId());
-			model.setUserName(HtmlUtil.escape(getUserName()));
-			model.setCreateDate(getCreateDate());
-			model.setModifiedDate(getModifiedDate());
-			model.setCategoryId(getCategoryId());
-			model.setSku(HtmlUtil.escape(getSku()));
-			model.setName(HtmlUtil.escape(getName()));
-			model.setDescription(HtmlUtil.escape(getDescription()));
-			model.setProperties(HtmlUtil.escape(getProperties()));
-			model.setFields(getFields());
-			model.setFieldsQuantities(HtmlUtil.escape(getFieldsQuantities()));
-			model.setMinQuantity(getMinQuantity());
-			model.setMaxQuantity(getMaxQuantity());
-			model.setPrice(getPrice());
-			model.setDiscount(getDiscount());
-			model.setTaxable(getTaxable());
-			model.setShipping(getShipping());
-			model.setUseShippingFormula(getUseShippingFormula());
-			model.setRequiresShipping(getRequiresShipping());
-			model.setStockQuantity(getStockQuantity());
-			model.setFeatured(getFeatured());
-			model.setSale(getSale());
-			model.setSmallImage(getSmallImage());
-			model.setSmallImageId(getSmallImageId());
-			model.setSmallImageURL(HtmlUtil.escape(getSmallImageURL()));
-			model.setMediumImage(getMediumImage());
-			model.setMediumImageId(getMediumImageId());
-			model.setMediumImageURL(HtmlUtil.escape(getMediumImageURL()));
-			model.setLargeImage(getLargeImage());
-			model.setLargeImageId(getLargeImageId());
-			model.setLargeImageURL(HtmlUtil.escape(getLargeImageURL()));
-
-			model = (ShoppingItem)Proxy.newProxyInstance(ShoppingItem.class.getClassLoader(),
-					new Class[] { ShoppingItem.class },
-					new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (ShoppingItem)Proxy.newProxyInstance(ShoppingItem.class.getClassLoader(),
+				new Class[] { ShoppingItem.class },
+				new AutoEscapeBeanHandler(this));
 		}
 	}
 

@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.asset.model;
 
+import com.liferay.portal.kernel.annotation.AutoEscape;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.service.ServiceContext;
@@ -68,6 +69,7 @@ public interface AssetEntryModel extends BaseModel<AssetEntry> {
 
 	public void setUserUuid(String userUuid);
 
+	@AutoEscape
 	public String getUserName();
 
 	public void setUserName(String userName);
@@ -112,22 +114,27 @@ public interface AssetEntryModel extends BaseModel<AssetEntry> {
 
 	public void setExpirationDate(Date expirationDate);
 
+	@AutoEscape
 	public String getMimeType();
 
 	public void setMimeType(String mimeType);
 
+	@AutoEscape
 	public String getTitle();
 
 	public void setTitle(String title);
 
+	@AutoEscape
 	public String getDescription();
 
 	public void setDescription(String description);
 
+	@AutoEscape
 	public String getSummary();
 
 	public void setSummary(String summary);
 
+	@AutoEscape
 	public String getUrl();
 
 	public void setUrl(String url);

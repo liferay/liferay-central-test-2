@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.journal.model;
 
+import com.liferay.portal.kernel.annotation.AutoEscape;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.service.ServiceContext;
@@ -48,6 +49,7 @@ public interface JournalArticleModel extends BaseModel<JournalArticle> {
 
 	public void setPrimaryKey(long pk);
 
+	@AutoEscape
 	public String getUuid();
 
 	public void setUuid(String uuid);
@@ -76,6 +78,7 @@ public interface JournalArticleModel extends BaseModel<JournalArticle> {
 
 	public void setUserUuid(String userUuid);
 
+	@AutoEscape
 	public String getUserName();
 
 	public void setUserName(String userName);
@@ -96,22 +99,27 @@ public interface JournalArticleModel extends BaseModel<JournalArticle> {
 
 	public void setVersion(double version);
 
+	@AutoEscape
 	public String getTitle();
 
 	public void setTitle(String title);
 
+	@AutoEscape
 	public String getUrlTitle();
 
 	public void setUrlTitle(String urlTitle);
 
+	@AutoEscape
 	public String getDescription();
 
 	public void setDescription(String description);
 
+	@AutoEscape
 	public String getContent();
 
 	public void setContent(String content);
 
+	@AutoEscape
 	public String getType();
 
 	public void setType(String type);
@@ -140,6 +148,7 @@ public interface JournalArticleModel extends BaseModel<JournalArticle> {
 
 	public void setStatusByUserUuid(String statusByUserUuid);
 
+	@AutoEscape
 	public String getStatusByUserName();
 
 	public void setStatusByUserName(String statusByUserName);
@@ -172,6 +181,7 @@ public interface JournalArticleModel extends BaseModel<JournalArticle> {
 
 	public void setSmallImageId(long smallImageId);
 
+	@AutoEscape
 	public String getSmallImageURL();
 
 	public void setSmallImageURL(String smallImageURL);

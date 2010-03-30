@@ -21,8 +21,6 @@ PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("struts_action", "/workflow_admin/view");
 portletURL.setParameter("tabs1", tabs1);
-
-List<WorkflowDefinition> workflowDefinitions = WorkflowDefinitionManagerUtil.getWorkflowDefinitions(company.getCompanyId(), 0, 100, null);
 %>
 
 <liferay-ui:tabs
@@ -34,6 +32,7 @@ List<WorkflowDefinition> workflowDefinitions = WorkflowDefinitionManagerUtil.get
 	<c:when test='<%= tabs1.equals("resources") %>'>
 
 		<%
+		List<WorkflowDefinition> workflowDefinitions = WorkflowDefinitionManagerUtil.getActiveWorkflowDefinitions(company.getCompanyId(), 0, 100, null);
 		List<WorkflowHandler> workflowHandlers = WorkflowHandlerRegistryUtil.getWorkflowHandlers();
 		%>
 
@@ -81,14 +80,7 @@ List<WorkflowDefinition> workflowDefinitions = WorkflowDefinitionManagerUtil.get
 						name="workflow"
 					>
 						<aui:select label="" name='<%= "workflowDefinitionName@" + workflowHandler.getClassName() %>'>
-							<c:choose>
-								<c:when test='<%= themeDisplay.getScopeGroup().isCompany() %>'>
-									<aui:option><liferay-ui:message key="default" /></aui:option>
-								</c:when>
-								<c:otherwise>
-									<aui:option></aui:option>
-								</c:otherwise>
-							</c:choose>
+							<aui:option></aui:option>
 
 							<%
 							WorkflowDefinitionLink workflowDefinitionLink = null;
@@ -127,6 +119,11 @@ List<WorkflowDefinition> workflowDefinitions = WorkflowDefinitionManagerUtil.get
 		</aui:form>
 	</c:when>
 	<c:when test='<%= tabs1.equals("workflow-definitions") %>'>
+
+		<%
+		List<WorkflowDefinition> workflowDefinitions = WorkflowDefinitionManagerUtil.getWorkflowDefinitions(company.getCompanyId(), 0, 100, null);
+		%>
+
 		<liferay-util:include page="/html/portlet/workflow_admin/toolbar.jsp">
 			<liferay-util:param name="toolbarItem" value="view-all" />
 		</liferay-util:include>

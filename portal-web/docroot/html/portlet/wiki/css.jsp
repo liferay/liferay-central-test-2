@@ -19,7 +19,7 @@
 .portlet-wiki .wiki-body pre {
 	background : #fff;
 	border: 1px dashed #2f6fab;
-	margin: 5px 0px 5px 0px;
+	margin: 5px 0;
 	padding: 0.5em;
 }
 
@@ -38,11 +38,11 @@
 }
 
 .portlet-wiki .toc ul {
- 	margin-top: 0px;
+ 	margin-top: 0;
 }
 .portlet-wiki .toc li.toclevel-1 {
 	list-style-type: none;
-	margin-left: 0px;
+	margin-left: 0;
 }
 
 .portlet-wiki .toc li.toclevel-2 {
@@ -55,8 +55,11 @@
 	margin-left: 30px;
 }
 
+.portlet-wiki .page-categorization {
+	margin: -8px 0 10px;
+}
+
 .portlet-wiki .page-categories {
-	margin: -10px 0px 10px 0px;
 	color: #7d7d7d;
 }
 
@@ -65,7 +68,6 @@
 }
 
 .portlet-wiki .page-tags {
-	margin: -7px 0px 10px 0px;
 	color: #7d7d7d;
 }
 
@@ -77,7 +79,7 @@
 
 .portlet-wiki .portlet-body h1.page-title {
 	clear: both;
-	margin: 0 0 10px 0;
+	margin: 0 0 10px;
 }
 
 .portlet-wiki .portlet-body h1.page-title .return-to-page {
@@ -134,7 +136,7 @@
 	border-right: 1px solid #ccc;
 	color: #000;
 	margin-right: 5px;
-	padding: 0px 5px 0px 5px;
+	padding: 0 5px;
 }
 
 .portlet-wiki .content-body a.external-link {
@@ -260,7 +262,7 @@
 .portlet-wiki .page-old-version {
 	color: #f93;
 	line-height: 1.2em;
-	margin: -1em 0pt 1.4em 0em;
+	margin: -1em 0 1.4em 0;
 	width: auto;
 }
 
@@ -268,7 +270,7 @@
 	color: #7d7d7d;
 	cursor: pointer;
 	line-height: 1.2em;
-	margin: -1em 0pt 1.4em 0em;
+	margin: -1em 0 1.4em 0;
 	width: auto;
 }
 

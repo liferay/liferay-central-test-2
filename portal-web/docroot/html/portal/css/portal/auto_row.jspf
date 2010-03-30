@@ -34,6 +34,10 @@
 	float: left;
 }
 
+.lfr-form-row-inline .aui-field {
+	margin-right: 5px;
+}
+
 .lfr-form-row legend .field-label{
 	float:left;
 	margin-right: 10px;

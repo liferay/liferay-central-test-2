@@ -14,6 +14,7 @@
 
 package com.liferay.portal.model;
 
+import com.liferay.portal.kernel.annotation.AutoEscape;
 import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
@@ -72,22 +73,27 @@ public interface LayoutSetModel extends BaseModel<LayoutSet> {
 
 	public void setLogoId(long logoId);
 
+	@AutoEscape
 	public String getThemeId();
 
 	public void setThemeId(String themeId);
 
+	@AutoEscape
 	public String getColorSchemeId();
 
 	public void setColorSchemeId(String colorSchemeId);
 
+	@AutoEscape
 	public String getWapThemeId();
 
 	public void setWapThemeId(String wapThemeId);
 
+	@AutoEscape
 	public String getWapColorSchemeId();
 
 	public void setWapColorSchemeId(String wapColorSchemeId);
 
+	@AutoEscape
 	public String getCss();
 
 	public void setCss(String css);
@@ -96,6 +102,7 @@ public interface LayoutSetModel extends BaseModel<LayoutSet> {
 
 	public void setPageCount(int pageCount);
 
+	@AutoEscape
 	public String getVirtualHost();
 
 	public void setVirtualHost(String virtualHost);

@@ -14,6 +14,8 @@
 
 package com.liferay.portlet.calendar.asset;
 
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.security.permission.ActionKeys;
@@ -40,7 +42,9 @@ public class CalEventAssetRendererFactory extends BaseAssetRendererFactory {
 
 	public static final String TYPE = "event";
 
-	public AssetRenderer getAssetRenderer(long classPK) throws Exception {
+	public AssetRenderer getAssetRenderer(long classPK)
+		throws PortalException, SystemException {
+
 		CalEvent event = CalEventLocalServiceUtil.getEvent(classPK);
 
 		return new CalEventAssetRenderer(event);

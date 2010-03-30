@@ -14,9 +14,8 @@
 
 package com.liferay.portal.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.ResourceAction;
@@ -178,21 +177,9 @@ public class ResourceActionModelImpl extends BaseModelImpl<ResourceAction> {
 			return (ResourceAction)this;
 		}
 		else {
-			ResourceAction model = new ResourceActionImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setResourceActionId(getResourceActionId());
-			model.setName(HtmlUtil.escape(getName()));
-			model.setActionId(HtmlUtil.escape(getActionId()));
-			model.setBitwiseValue(getBitwiseValue());
-
-			model = (ResourceAction)Proxy.newProxyInstance(ResourceAction.class.getClassLoader(),
-					new Class[] { ResourceAction.class },
-					new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (ResourceAction)Proxy.newProxyInstance(ResourceAction.class.getClassLoader(),
+				new Class[] { ResourceAction.class },
+				new AutoEscapeBeanHandler(this));
 		}
 	}
 

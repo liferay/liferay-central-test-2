@@ -14,11 +14,10 @@
 
 package com.liferay.portlet.documentlibrary.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.impl.BaseModelImpl;
@@ -345,32 +344,9 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion> {
 			return (DLFileVersion)this;
 		}
 		else {
-			DLFileVersion model = new DLFileVersionImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setFileVersionId(getFileVersionId());
-			model.setGroupId(getGroupId());
-			model.setCompanyId(getCompanyId());
-			model.setUserId(getUserId());
-			model.setUserName(HtmlUtil.escape(getUserName()));
-			model.setCreateDate(getCreateDate());
-			model.setFolderId(getFolderId());
-			model.setName(HtmlUtil.escape(getName()));
-			model.setDescription(HtmlUtil.escape(getDescription()));
-			model.setVersion(HtmlUtil.escape(getVersion()));
-			model.setSize(getSize());
-			model.setStatus(getStatus());
-			model.setStatusByUserId(getStatusByUserId());
-			model.setStatusByUserName(HtmlUtil.escape(getStatusByUserName()));
-			model.setStatusDate(getStatusDate());
-
-			model = (DLFileVersion)Proxy.newProxyInstance(DLFileVersion.class.getClassLoader(),
-					new Class[] { DLFileVersion.class },
-					new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (DLFileVersion)Proxy.newProxyInstance(DLFileVersion.class.getClassLoader(),
+				new Class[] { DLFileVersion.class },
+				new AutoEscapeBeanHandler(this));
 		}
 	}
 

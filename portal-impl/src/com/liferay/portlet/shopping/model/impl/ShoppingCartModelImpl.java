@@ -14,10 +14,9 @@
 
 package com.liferay.portlet.shopping.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.impl.BaseModelImpl;
@@ -271,28 +270,9 @@ public class ShoppingCartModelImpl extends BaseModelImpl<ShoppingCart> {
 			return (ShoppingCart)this;
 		}
 		else {
-			ShoppingCart model = new ShoppingCartImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setCartId(getCartId());
-			model.setGroupId(getGroupId());
-			model.setCompanyId(getCompanyId());
-			model.setUserId(getUserId());
-			model.setUserName(HtmlUtil.escape(getUserName()));
-			model.setCreateDate(getCreateDate());
-			model.setModifiedDate(getModifiedDate());
-			model.setItemIds(HtmlUtil.escape(getItemIds()));
-			model.setCouponCodes(HtmlUtil.escape(getCouponCodes()));
-			model.setAltShipping(getAltShipping());
-			model.setInsure(getInsure());
-
-			model = (ShoppingCart)Proxy.newProxyInstance(ShoppingCart.class.getClassLoader(),
-					new Class[] { ShoppingCart.class },
-					new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (ShoppingCart)Proxy.newProxyInstance(ShoppingCart.class.getClassLoader(),
+				new Class[] { ShoppingCart.class },
+				new AutoEscapeBeanHandler(this));
 		}
 	}
 

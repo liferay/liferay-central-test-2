@@ -6,9 +6,15 @@
 	<target name="prepare-cluster-apache-node-1">
 		<if>
 			<or>
-				<equals arg1="${apache.http.win32.dir}" arg2="$${apache.http.win32.dir}" />
-				<equals arg1="${apache.http.win32.install}" arg2="$${apache.http.win32.install}" />
-				<equals arg1="${apache.http.win32.modjk}" arg2="$${apache.http.win32.modjk}" />
+				<not>
+					<isset property="apache.http.win32.dir" />
+				</not>
+				<not>
+					<isset property="apache.http.win32.install" />
+				</not>
+				<not>
+					<isset property="apache.http.win32.modjk" />
+				</not>
 			</or>
 			<then>
 				<fail>

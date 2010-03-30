@@ -14,10 +14,9 @@
 
 package com.liferay.portlet.asset.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.impl.BaseModelImpl;
@@ -435,40 +434,9 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry> {
 			return (AssetEntry)this;
 		}
 		else {
-			AssetEntry model = new AssetEntryImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setEntryId(getEntryId());
-			model.setGroupId(getGroupId());
-			model.setCompanyId(getCompanyId());
-			model.setUserId(getUserId());
-			model.setUserName(HtmlUtil.escape(getUserName()));
-			model.setCreateDate(getCreateDate());
-			model.setModifiedDate(getModifiedDate());
-			model.setClassNameId(getClassNameId());
-			model.setClassPK(getClassPK());
-			model.setVisible(getVisible());
-			model.setStartDate(getStartDate());
-			model.setEndDate(getEndDate());
-			model.setPublishDate(getPublishDate());
-			model.setExpirationDate(getExpirationDate());
-			model.setMimeType(HtmlUtil.escape(getMimeType()));
-			model.setTitle(HtmlUtil.escape(getTitle()));
-			model.setDescription(HtmlUtil.escape(getDescription()));
-			model.setSummary(HtmlUtil.escape(getSummary()));
-			model.setUrl(HtmlUtil.escape(getUrl()));
-			model.setHeight(getHeight());
-			model.setWidth(getWidth());
-			model.setPriority(getPriority());
-			model.setViewCount(getViewCount());
-
-			model = (AssetEntry)Proxy.newProxyInstance(AssetEntry.class.getClassLoader(),
-					new Class[] { AssetEntry.class },
-					new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (AssetEntry)Proxy.newProxyInstance(AssetEntry.class.getClassLoader(),
+				new Class[] { AssetEntry.class },
+				new AutoEscapeBeanHandler(this));
 		}
 	}
 

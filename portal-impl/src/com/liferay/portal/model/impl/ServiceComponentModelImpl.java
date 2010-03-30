@@ -14,9 +14,8 @@
 
 package com.liferay.portal.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.ServiceComponent;
@@ -191,22 +190,9 @@ public class ServiceComponentModelImpl extends BaseModelImpl<ServiceComponent> {
 			return (ServiceComponent)this;
 		}
 		else {
-			ServiceComponent model = new ServiceComponentImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setServiceComponentId(getServiceComponentId());
-			model.setBuildNamespace(HtmlUtil.escape(getBuildNamespace()));
-			model.setBuildNumber(getBuildNumber());
-			model.setBuildDate(getBuildDate());
-			model.setData(HtmlUtil.escape(getData()));
-
-			model = (ServiceComponent)Proxy.newProxyInstance(ServiceComponent.class.getClassLoader(),
-					new Class[] { ServiceComponent.class },
-					new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (ServiceComponent)Proxy.newProxyInstance(ServiceComponent.class.getClassLoader(),
+				new Class[] { ServiceComponent.class },
+				new AutoEscapeBeanHandler(this));
 		}
 	}
 

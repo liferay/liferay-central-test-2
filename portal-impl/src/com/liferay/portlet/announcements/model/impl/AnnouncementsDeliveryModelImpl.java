@@ -14,10 +14,9 @@
 
 package com.liferay.portlet.announcements.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.impl.BaseModelImpl;
@@ -228,24 +227,9 @@ public class AnnouncementsDeliveryModelImpl extends BaseModelImpl<AnnouncementsD
 			return (AnnouncementsDelivery)this;
 		}
 		else {
-			AnnouncementsDelivery model = new AnnouncementsDeliveryImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setDeliveryId(getDeliveryId());
-			model.setCompanyId(getCompanyId());
-			model.setUserId(getUserId());
-			model.setType(HtmlUtil.escape(getType()));
-			model.setEmail(getEmail());
-			model.setSms(getSms());
-			model.setWebsite(getWebsite());
-
-			model = (AnnouncementsDelivery)Proxy.newProxyInstance(AnnouncementsDelivery.class.getClassLoader(),
-					new Class[] { AnnouncementsDelivery.class },
-					new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (AnnouncementsDelivery)Proxy.newProxyInstance(AnnouncementsDelivery.class.getClassLoader(),
+				new Class[] { AnnouncementsDelivery.class },
+				new AutoEscapeBeanHandler(this));
 		}
 	}
 

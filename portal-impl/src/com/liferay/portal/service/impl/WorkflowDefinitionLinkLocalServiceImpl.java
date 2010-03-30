@@ -116,12 +116,6 @@ public class WorkflowDefinitionLinkLocalServiceImpl
 		}
 
 		if (workflowDefinitionLink == null) {
-			workflowDefinitionLink =
-				workflowDefinitionLinkPersistence.fetchByG_C_C(
-					0, companyId, classNameId);
-		}
-
-		if (workflowDefinitionLink == null) {
 			throw new NoSuchWorkflowDefinitionLinkException(
 				"No workflow for groupId=" + groupId + ", companyId=" +
 					companyId + " and classNameId=" + classNameId);

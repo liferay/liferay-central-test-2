@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.messageboards.model;
 
+import com.liferay.portal.kernel.annotation.AutoEscape;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.service.ServiceContext;
@@ -48,6 +49,7 @@ public interface MBCategoryModel extends BaseModel<MBCategory> {
 
 	public void setPrimaryKey(long pk);
 
+	@AutoEscape
 	public String getUuid();
 
 	public void setUuid(String uuid);
@@ -72,6 +74,7 @@ public interface MBCategoryModel extends BaseModel<MBCategory> {
 
 	public void setUserUuid(String userUuid);
 
+	@AutoEscape
 	public String getUserName();
 
 	public void setUserName(String userName);
@@ -88,10 +91,12 @@ public interface MBCategoryModel extends BaseModel<MBCategory> {
 
 	public void setParentCategoryId(long parentCategoryId);
 
+	@AutoEscape
 	public String getName();
 
 	public void setName(String name);
 
+	@AutoEscape
 	public String getDescription();
 
 	public void setDescription(String description);

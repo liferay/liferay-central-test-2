@@ -14,6 +14,7 @@
 
 package com.liferay.portal.model;
 
+import com.liferay.portal.kernel.annotation.AutoEscape;
 import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
@@ -52,10 +53,12 @@ public interface RegionModel extends BaseModel<Region> {
 
 	public void setCountryId(long countryId);
 
+	@AutoEscape
 	public String getRegionCode();
 
 	public void setRegionCode(String regionCode);
 
+	@AutoEscape
 	public String getName();
 
 	public void setName(String name);

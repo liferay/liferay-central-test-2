@@ -14,9 +14,8 @@
 
 package com.liferay.portlet.social.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.impl.BaseModelImpl;
@@ -216,24 +215,9 @@ public class SocialRelationModelImpl extends BaseModelImpl<SocialRelation> {
 			return (SocialRelation)this;
 		}
 		else {
-			SocialRelation model = new SocialRelationImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setUuid(HtmlUtil.escape(getUuid()));
-			model.setRelationId(getRelationId());
-			model.setCompanyId(getCompanyId());
-			model.setCreateDate(getCreateDate());
-			model.setUserId1(getUserId1());
-			model.setUserId2(getUserId2());
-			model.setType(getType());
-
-			model = (SocialRelation)Proxy.newProxyInstance(SocialRelation.class.getClassLoader(),
-					new Class[] { SocialRelation.class },
-					new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (SocialRelation)Proxy.newProxyInstance(SocialRelation.class.getClassLoader(),
+				new Class[] { SocialRelation.class },
+				new AutoEscapeBeanHandler(this));
 		}
 	}
 

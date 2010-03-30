@@ -14,6 +14,7 @@
 
 package com.liferay.portal.model;
 
+import com.liferay.portal.kernel.annotation.AutoEscape;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.ServiceContext;
 
@@ -71,10 +72,12 @@ public interface MembershipRequestModel extends BaseModel<MembershipRequest> {
 
 	public void setGroupId(long groupId);
 
+	@AutoEscape
 	public String getComments();
 
 	public void setComments(String comments);
 
+	@AutoEscape
 	public String getReplyComments();
 
 	public void setReplyComments(String replyComments);

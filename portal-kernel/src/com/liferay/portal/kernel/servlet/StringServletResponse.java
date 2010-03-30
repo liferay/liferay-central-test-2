@@ -50,12 +50,12 @@ public class StringServletResponse extends HttpServletResponseWrapper {
 	}
 
 	public ServletOutputStream getOutputStream() {
-
 		if (_servletOutputStream == null) {
 			_unsyncByteArrayOutputStream = new UnsyncByteArrayOutputStream();
 			_servletOutputStream = new StringServletOutputStream(
 				_unsyncByteArrayOutputStream);
 		}
+
 		return _servletOutputStream;
 	}
 
@@ -94,11 +94,17 @@ public class StringServletResponse extends HttpServletResponseWrapper {
 			_unsyncStringWriter = new UnsyncStringWriter(true);
 			_printWriter = new PrintWriter(_unsyncStringWriter);
 		}
+
 		return _printWriter;
 	}
 
 	public boolean isCalledGetOutputStream() {
-		return _servletOutputStream != null;
+		if (_servletOutputStream != null) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	public void recycle() {

@@ -14,7 +14,7 @@
 
 package com.liferay.portlet.softwarecatalog.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.model.impl.BaseModelImpl;
@@ -222,24 +222,9 @@ public class SCProductScreenshotModelImpl extends BaseModelImpl<SCProductScreens
 			return (SCProductScreenshot)this;
 		}
 		else {
-			SCProductScreenshot model = new SCProductScreenshotImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setProductScreenshotId(getProductScreenshotId());
-			model.setCompanyId(getCompanyId());
-			model.setGroupId(getGroupId());
-			model.setProductEntryId(getProductEntryId());
-			model.setThumbnailId(getThumbnailId());
-			model.setFullImageId(getFullImageId());
-			model.setPriority(getPriority());
-
-			model = (SCProductScreenshot)Proxy.newProxyInstance(SCProductScreenshot.class.getClassLoader(),
-					new Class[] { SCProductScreenshot.class },
-					new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (SCProductScreenshot)Proxy.newProxyInstance(SCProductScreenshot.class.getClassLoader(),
+				new Class[] { SCProductScreenshot.class },
+				new AutoEscapeBeanHandler(this));
 		}
 	}
 

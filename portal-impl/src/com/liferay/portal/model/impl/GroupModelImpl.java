@@ -14,10 +14,9 @@
 
 package com.liferay.portal.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Group;
@@ -375,29 +374,8 @@ public class GroupModelImpl extends BaseModelImpl<Group> {
 			return (Group)this;
 		}
 		else {
-			Group model = new GroupImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setGroupId(getGroupId());
-			model.setCompanyId(getCompanyId());
-			model.setCreatorUserId(getCreatorUserId());
-			model.setClassNameId(getClassNameId());
-			model.setClassPK(getClassPK());
-			model.setParentGroupId(getParentGroupId());
-			model.setLiveGroupId(getLiveGroupId());
-			model.setName(HtmlUtil.escape(getName()));
-			model.setDescription(HtmlUtil.escape(getDescription()));
-			model.setType(getType());
-			model.setTypeSettings(HtmlUtil.escape(getTypeSettings()));
-			model.setFriendlyURL(HtmlUtil.escape(getFriendlyURL()));
-			model.setActive(getActive());
-
-			model = (Group)Proxy.newProxyInstance(Group.class.getClassLoader(),
-					new Class[] { Group.class }, new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (Group)Proxy.newProxyInstance(Group.class.getClassLoader(),
+				new Class[] { Group.class }, new AutoEscapeBeanHandler(this));
 		}
 	}
 

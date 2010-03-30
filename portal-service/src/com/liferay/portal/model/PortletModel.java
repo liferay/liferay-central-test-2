@@ -14,6 +14,7 @@
 
 package com.liferay.portal.model;
 
+import com.liferay.portal.kernel.annotation.AutoEscape;
 import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
@@ -52,10 +53,12 @@ public interface PortletModel extends BaseModel<Portlet> {
 
 	public void setCompanyId(long companyId);
 
+	@AutoEscape
 	public String getPortletId();
 
 	public void setPortletId(String portletId);
 
+	@AutoEscape
 	public String getRoles();
 
 	public void setRoles(String roles);

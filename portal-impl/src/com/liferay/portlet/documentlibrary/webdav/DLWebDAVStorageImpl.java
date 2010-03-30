@@ -780,7 +780,7 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 		serviceContext.setAssetTagNames(assetTagNames);
 
-		DLFileEntryLocalServiceUtil.updateWorkflowStatus(
+		DLFileEntryLocalServiceUtil.updateStatus(
 			fileEntry.getUserId(), fileEntry.getFileEntryId(), serviceContext);
 	}
 

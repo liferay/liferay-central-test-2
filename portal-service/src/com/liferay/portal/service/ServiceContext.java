@@ -306,7 +306,7 @@ public class ServiceContext implements Serializable {
 	private long _scopeGroupId;
 	private String _userDisplayURL;
 	private long _plid;
-	private boolean _startWorkflow;
+	private boolean _startWorkflow = true;
 	private int _status = StatusConstants.APPROVED;
 	private long _userId;
 

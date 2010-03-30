@@ -14,7 +14,7 @@
 
 package com.liferay.portlet.messageboards.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -210,23 +210,9 @@ public class MBMessageFlagModelImpl extends BaseModelImpl<MBMessageFlag> {
 			return (MBMessageFlag)this;
 		}
 		else {
-			MBMessageFlag model = new MBMessageFlagImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setMessageFlagId(getMessageFlagId());
-			model.setUserId(getUserId());
-			model.setModifiedDate(getModifiedDate());
-			model.setThreadId(getThreadId());
-			model.setMessageId(getMessageId());
-			model.setFlag(getFlag());
-
-			model = (MBMessageFlag)Proxy.newProxyInstance(MBMessageFlag.class.getClassLoader(),
-					new Class[] { MBMessageFlag.class },
-					new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (MBMessageFlag)Proxy.newProxyInstance(MBMessageFlag.class.getClassLoader(),
+				new Class[] { MBMessageFlag.class },
+				new AutoEscapeBeanHandler(this));
 		}
 	}
 

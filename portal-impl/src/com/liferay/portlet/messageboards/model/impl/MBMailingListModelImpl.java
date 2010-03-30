@@ -14,10 +14,9 @@
 
 package com.liferay.portlet.messageboards.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.impl.BaseModelImpl;
@@ -471,42 +470,9 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList> {
 			return (MBMailingList)this;
 		}
 		else {
-			MBMailingList model = new MBMailingListImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setUuid(HtmlUtil.escape(getUuid()));
-			model.setMailingListId(getMailingListId());
-			model.setGroupId(getGroupId());
-			model.setCompanyId(getCompanyId());
-			model.setUserId(getUserId());
-			model.setUserName(HtmlUtil.escape(getUserName()));
-			model.setCreateDate(getCreateDate());
-			model.setModifiedDate(getModifiedDate());
-			model.setCategoryId(getCategoryId());
-			model.setEmailAddress(HtmlUtil.escape(getEmailAddress()));
-			model.setInProtocol(HtmlUtil.escape(getInProtocol()));
-			model.setInServerName(HtmlUtil.escape(getInServerName()));
-			model.setInServerPort(getInServerPort());
-			model.setInUseSSL(getInUseSSL());
-			model.setInUserName(HtmlUtil.escape(getInUserName()));
-			model.setInPassword(HtmlUtil.escape(getInPassword()));
-			model.setInReadInterval(getInReadInterval());
-			model.setOutEmailAddress(HtmlUtil.escape(getOutEmailAddress()));
-			model.setOutCustom(getOutCustom());
-			model.setOutServerName(HtmlUtil.escape(getOutServerName()));
-			model.setOutServerPort(getOutServerPort());
-			model.setOutUseSSL(getOutUseSSL());
-			model.setOutUserName(HtmlUtil.escape(getOutUserName()));
-			model.setOutPassword(HtmlUtil.escape(getOutPassword()));
-			model.setActive(getActive());
-
-			model = (MBMailingList)Proxy.newProxyInstance(MBMailingList.class.getClassLoader(),
-					new Class[] { MBMailingList.class },
-					new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (MBMailingList)Proxy.newProxyInstance(MBMailingList.class.getClassLoader(),
+				new Class[] { MBMailingList.class },
+				new AutoEscapeBeanHandler(this));
 		}
 	}
 

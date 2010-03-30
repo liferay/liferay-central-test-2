@@ -18,6 +18,9 @@
 		<hint name="year-nullable">true</hint>
 		<hint name="show-time">false</hint>
 	</hint-collection>
+	<model name="com.liferay.portal.kernel.workflow.WorkflowTask">
+		<field name="dueDate" type="Date" />
+	</model>
 	<model name="com.liferay.portal.model.Account">
 		<default-hints>
 			<hint name="display-width">150</hint>

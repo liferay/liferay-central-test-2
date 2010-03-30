@@ -14,6 +14,7 @@
 
 package com.liferay.portal.model;
 
+import com.liferay.portal.kernel.annotation.AutoEscape;
 import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
@@ -48,6 +49,7 @@ public interface ServiceComponentModel extends BaseModel<ServiceComponent> {
 
 	public void setServiceComponentId(long serviceComponentId);
 
+	@AutoEscape
 	public String getBuildNamespace();
 
 	public void setBuildNamespace(String buildNamespace);
@@ -60,6 +62,7 @@ public interface ServiceComponentModel extends BaseModel<ServiceComponent> {
 
 	public void setBuildDate(long buildDate);
 
+	@AutoEscape
 	public String getData();
 
 	public void setData(String data);

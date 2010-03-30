@@ -14,9 +14,8 @@
 
 package com.liferay.portlet.shopping.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.impl.BaseModelImpl;
@@ -179,22 +178,9 @@ public class ShoppingItemFieldModelImpl extends BaseModelImpl<ShoppingItemField>
 			return (ShoppingItemField)this;
 		}
 		else {
-			ShoppingItemField model = new ShoppingItemFieldImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setItemFieldId(getItemFieldId());
-			model.setItemId(getItemId());
-			model.setName(HtmlUtil.escape(getName()));
-			model.setValues(HtmlUtil.escape(getValues()));
-			model.setDescription(HtmlUtil.escape(getDescription()));
-
-			model = (ShoppingItemField)Proxy.newProxyInstance(ShoppingItemField.class.getClassLoader(),
-					new Class[] { ShoppingItemField.class },
-					new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (ShoppingItemField)Proxy.newProxyInstance(ShoppingItemField.class.getClassLoader(),
+				new Class[] { ShoppingItemField.class },
+				new AutoEscapeBeanHandler(this));
 		}
 	}
 

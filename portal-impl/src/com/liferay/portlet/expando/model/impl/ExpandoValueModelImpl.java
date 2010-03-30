@@ -14,9 +14,8 @@
 
 package com.liferay.portlet.expando.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.impl.BaseModelImpl;
@@ -244,25 +243,9 @@ public class ExpandoValueModelImpl extends BaseModelImpl<ExpandoValue> {
 			return (ExpandoValue)this;
 		}
 		else {
-			ExpandoValue model = new ExpandoValueImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setValueId(getValueId());
-			model.setCompanyId(getCompanyId());
-			model.setTableId(getTableId());
-			model.setColumnId(getColumnId());
-			model.setRowId(getRowId());
-			model.setClassNameId(getClassNameId());
-			model.setClassPK(getClassPK());
-			model.setData(HtmlUtil.escape(getData()));
-
-			model = (ExpandoValue)Proxy.newProxyInstance(ExpandoValue.class.getClassLoader(),
-					new Class[] { ExpandoValue.class },
-					new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (ExpandoValue)Proxy.newProxyInstance(ExpandoValue.class.getClassLoader(),
+				new Class[] { ExpandoValue.class },
+				new AutoEscapeBeanHandler(this));
 		}
 	}
 

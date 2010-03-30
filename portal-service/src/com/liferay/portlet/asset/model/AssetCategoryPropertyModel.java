@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.asset.model;
 
+import com.liferay.portal.kernel.annotation.AutoEscape;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.service.ServiceContext;
@@ -64,6 +65,7 @@ public interface AssetCategoryPropertyModel extends BaseModel<AssetCategoryPrope
 
 	public void setUserUuid(String userUuid);
 
+	@AutoEscape
 	public String getUserName();
 
 	public void setUserName(String userName);
@@ -80,10 +82,12 @@ public interface AssetCategoryPropertyModel extends BaseModel<AssetCategoryPrope
 
 	public void setCategoryId(long categoryId);
 
+	@AutoEscape
 	public String getKey();
 
 	public void setKey(String key);
 
+	@AutoEscape
 	public String getValue();
 
 	public void setValue(String value);

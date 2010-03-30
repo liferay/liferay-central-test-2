@@ -14,6 +14,7 @@
 
 package com.liferay.portal.model;
 
+import com.liferay.portal.kernel.annotation.AutoEscape;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.ServiceContext;
 
@@ -63,6 +64,7 @@ public interface PasswordTrackerModel extends BaseModel<PasswordTracker> {
 
 	public void setCreateDate(Date createDate);
 
+	@AutoEscape
 	public String getPassword();
 
 	public void setPassword(String password);

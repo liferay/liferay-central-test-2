@@ -14,7 +14,7 @@
 
 package com.liferay.portlet.announcements.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -204,22 +204,9 @@ public class AnnouncementsFlagModelImpl extends BaseModelImpl<AnnouncementsFlag>
 			return (AnnouncementsFlag)this;
 		}
 		else {
-			AnnouncementsFlag model = new AnnouncementsFlagImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setFlagId(getFlagId());
-			model.setUserId(getUserId());
-			model.setCreateDate(getCreateDate());
-			model.setEntryId(getEntryId());
-			model.setValue(getValue());
-
-			model = (AnnouncementsFlag)Proxy.newProxyInstance(AnnouncementsFlag.class.getClassLoader(),
-					new Class[] { AnnouncementsFlag.class },
-					new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (AnnouncementsFlag)Proxy.newProxyInstance(AnnouncementsFlag.class.getClassLoader(),
+				new Class[] { AnnouncementsFlag.class },
+				new AutoEscapeBeanHandler(this));
 		}
 	}
 

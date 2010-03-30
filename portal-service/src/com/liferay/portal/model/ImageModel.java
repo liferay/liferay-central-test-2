@@ -14,6 +14,7 @@
 
 package com.liferay.portal.model;
 
+import com.liferay.portal.kernel.annotation.AutoEscape;
 import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
@@ -54,10 +55,12 @@ public interface ImageModel extends BaseModel<Image> {
 
 	public void setModifiedDate(Date modifiedDate);
 
+	@AutoEscape
 	public String getText();
 
 	public void setText(String text);
 
+	@AutoEscape
 	public String getType();
 
 	public void setType(String type);

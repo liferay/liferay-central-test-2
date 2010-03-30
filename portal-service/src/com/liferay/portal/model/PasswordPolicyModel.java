@@ -14,6 +14,7 @@
 
 package com.liferay.portal.model;
 
+import com.liferay.portal.kernel.annotation.AutoEscape;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.ServiceContext;
 
@@ -63,6 +64,7 @@ public interface PasswordPolicyModel extends BaseModel<PasswordPolicy> {
 
 	public void setUserUuid(String userUuid);
 
+	@AutoEscape
 	public String getUserName();
 
 	public void setUserName(String userName);
@@ -81,10 +83,12 @@ public interface PasswordPolicyModel extends BaseModel<PasswordPolicy> {
 
 	public void setDefaultPolicy(boolean defaultPolicy);
 
+	@AutoEscape
 	public String getName();
 
 	public void setName(String name);
 
+	@AutoEscape
 	public String getDescription();
 
 	public void setDescription(String description);

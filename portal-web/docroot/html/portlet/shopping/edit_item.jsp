@@ -78,7 +78,7 @@ int priceId = ParamUtil.getInteger(request, "priceId", -1);
 	<portlet:param name="struts_action" value="/shopping/edit_item" />
 </portlet:actionURL>
 
-<aui:form action="<%= editItemURL %>" enctype="multipart/form-data" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "saveItem(); return false;" %>'>
+<aui:form action="<%= editItemURL %>" enctype="multipart/form-data" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveItem();" %>'>
 	<input name="scroll" type="hidden" value="" />
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />

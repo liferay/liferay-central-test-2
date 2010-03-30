@@ -1324,6 +1324,7 @@ delete-category=Categoria Da Supressão
 delete-data=Dados da supressão
 delete-document=Original Da Supressão
 delete-entry=Entrada Da Supressão
+delete-existing-data=Dados existentes da supressão (Automatic Translation)
 delete-folder=Dobrador Da Supressão
 delete-image=Imagem Da Supressão
 delete-live-page=Página viva da supressão. (Automatic Translation)

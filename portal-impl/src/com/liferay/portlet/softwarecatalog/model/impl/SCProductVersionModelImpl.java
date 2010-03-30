@@ -14,11 +14,10 @@
 
 package com.liferay.portlet.softwarecatalog.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.impl.BaseModelImpl;
@@ -287,29 +286,9 @@ public class SCProductVersionModelImpl extends BaseModelImpl<SCProductVersion> {
 			return (SCProductVersion)this;
 		}
 		else {
-			SCProductVersion model = new SCProductVersionImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setProductVersionId(getProductVersionId());
-			model.setCompanyId(getCompanyId());
-			model.setUserId(getUserId());
-			model.setUserName(HtmlUtil.escape(getUserName()));
-			model.setCreateDate(getCreateDate());
-			model.setModifiedDate(getModifiedDate());
-			model.setProductEntryId(getProductEntryId());
-			model.setVersion(HtmlUtil.escape(getVersion()));
-			model.setChangeLog(HtmlUtil.escape(getChangeLog()));
-			model.setDownloadPageURL(HtmlUtil.escape(getDownloadPageURL()));
-			model.setDirectDownloadURL(HtmlUtil.escape(getDirectDownloadURL()));
-			model.setRepoStoreArtifact(getRepoStoreArtifact());
-
-			model = (SCProductVersion)Proxy.newProxyInstance(SCProductVersion.class.getClassLoader(),
-					new Class[] { SCProductVersion.class },
-					new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (SCProductVersion)Proxy.newProxyInstance(SCProductVersion.class.getClassLoader(),
+				new Class[] { SCProductVersion.class },
+				new AutoEscapeBeanHandler(this));
 		}
 	}
 

@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.messageboards.model;
 
+import com.liferay.portal.kernel.annotation.AutoEscape;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.service.ServiceContext;
@@ -48,6 +49,7 @@ public interface MBMailingListModel extends BaseModel<MBMailingList> {
 
 	public void setPrimaryKey(long pk);
 
+	@AutoEscape
 	public String getUuid();
 
 	public void setUuid(String uuid);
@@ -72,6 +74,7 @@ public interface MBMailingListModel extends BaseModel<MBMailingList> {
 
 	public void setUserUuid(String userUuid);
 
+	@AutoEscape
 	public String getUserName();
 
 	public void setUserName(String userName);
@@ -88,14 +91,17 @@ public interface MBMailingListModel extends BaseModel<MBMailingList> {
 
 	public void setCategoryId(long categoryId);
 
+	@AutoEscape
 	public String getEmailAddress();
 
 	public void setEmailAddress(String emailAddress);
 
+	@AutoEscape
 	public String getInProtocol();
 
 	public void setInProtocol(String inProtocol);
 
+	@AutoEscape
 	public String getInServerName();
 
 	public void setInServerName(String inServerName);
@@ -110,10 +116,12 @@ public interface MBMailingListModel extends BaseModel<MBMailingList> {
 
 	public void setInUseSSL(boolean inUseSSL);
 
+	@AutoEscape
 	public String getInUserName();
 
 	public void setInUserName(String inUserName);
 
+	@AutoEscape
 	public String getInPassword();
 
 	public void setInPassword(String inPassword);
@@ -122,6 +130,7 @@ public interface MBMailingListModel extends BaseModel<MBMailingList> {
 
 	public void setInReadInterval(int inReadInterval);
 
+	@AutoEscape
 	public String getOutEmailAddress();
 
 	public void setOutEmailAddress(String outEmailAddress);
@@ -132,6 +141,7 @@ public interface MBMailingListModel extends BaseModel<MBMailingList> {
 
 	public void setOutCustom(boolean outCustom);
 
+	@AutoEscape
 	public String getOutServerName();
 
 	public void setOutServerName(String outServerName);
@@ -146,10 +156,12 @@ public interface MBMailingListModel extends BaseModel<MBMailingList> {
 
 	public void setOutUseSSL(boolean outUseSSL);
 
+	@AutoEscape
 	public String getOutUserName();
 
 	public void setOutUserName(String outUserName);
 
+	@AutoEscape
 	public String getOutPassword();
 
 	public void setOutPassword(String outPassword);

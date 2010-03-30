@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.messageboards.model;
 
+import com.liferay.portal.kernel.annotation.AutoEscape;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.service.ServiceContext;
@@ -100,6 +101,7 @@ public interface MBThreadModel extends BaseModel<MBThread> {
 
 	public void setStatusByUserUuid(String statusByUserUuid);
 
+	@AutoEscape
 	public String getStatusByUserName();
 
 	public void setStatusByUserName(String statusByUserName);

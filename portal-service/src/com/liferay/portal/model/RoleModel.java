@@ -14,6 +14,7 @@
 
 package com.liferay.portal.model;
 
+import com.liferay.portal.kernel.annotation.AutoEscape;
 import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
@@ -65,6 +66,7 @@ public interface RoleModel extends BaseModel<Role> {
 
 	public void setClassPK(long classPK);
 
+	@AutoEscape
 	public String getName();
 
 	public void setName(String name);
@@ -87,6 +89,7 @@ public interface RoleModel extends BaseModel<Role> {
 
 	public void setTitleMap(Map<Locale, String> titleMap);
 
+	@AutoEscape
 	public String getDescription();
 
 	public void setDescription(String description);
@@ -95,6 +98,7 @@ public interface RoleModel extends BaseModel<Role> {
 
 	public void setType(int type);
 
+	@AutoEscape
 	public String getSubtype();
 
 	public void setSubtype(String subtype);

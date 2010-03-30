@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.documentlibrary.model;
 
+import com.liferay.portal.kernel.annotation.AutoEscape;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.service.ServiceContext;
@@ -68,6 +69,7 @@ public interface DLFileVersionModel extends BaseModel<DLFileVersion> {
 
 	public void setUserUuid(String userUuid);
 
+	@AutoEscape
 	public String getUserName();
 
 	public void setUserName(String userName);
@@ -80,14 +82,17 @@ public interface DLFileVersionModel extends BaseModel<DLFileVersion> {
 
 	public void setFolderId(long folderId);
 
+	@AutoEscape
 	public String getName();
 
 	public void setName(String name);
 
+	@AutoEscape
 	public String getDescription();
 
 	public void setDescription(String description);
 
+	@AutoEscape
 	public String getVersion();
 
 	public void setVersion(String version);
@@ -108,6 +113,7 @@ public interface DLFileVersionModel extends BaseModel<DLFileVersion> {
 
 	public void setStatusByUserUuid(String statusByUserUuid);
 
+	@AutoEscape
 	public String getStatusByUserName();
 
 	public void setStatusByUserName(String statusByUserName);

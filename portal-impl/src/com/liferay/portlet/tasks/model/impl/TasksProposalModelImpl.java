@@ -14,11 +14,10 @@
 
 package com.liferay.portlet.tasks.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.impl.BaseModelImpl;
@@ -301,30 +300,9 @@ public class TasksProposalModelImpl extends BaseModelImpl<TasksProposal> {
 			return (TasksProposal)this;
 		}
 		else {
-			TasksProposal model = new TasksProposalImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setProposalId(getProposalId());
-			model.setGroupId(getGroupId());
-			model.setCompanyId(getCompanyId());
-			model.setUserId(getUserId());
-			model.setUserName(HtmlUtil.escape(getUserName()));
-			model.setCreateDate(getCreateDate());
-			model.setModifiedDate(getModifiedDate());
-			model.setClassNameId(getClassNameId());
-			model.setClassPK(HtmlUtil.escape(getClassPK()));
-			model.setName(HtmlUtil.escape(getName()));
-			model.setDescription(HtmlUtil.escape(getDescription()));
-			model.setPublishDate(getPublishDate());
-			model.setDueDate(getDueDate());
-
-			model = (TasksProposal)Proxy.newProxyInstance(TasksProposal.class.getClassLoader(),
-					new Class[] { TasksProposal.class },
-					new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (TasksProposal)Proxy.newProxyInstance(TasksProposal.class.getClassLoader(),
+				new Class[] { TasksProposal.class },
+				new AutoEscapeBeanHandler(this));
 		}
 	}
 

@@ -318,15 +318,15 @@ public class BlogsEntryLocalServiceUtil {
 			.updateEntryResources(entry, communityPermissions, guestPermissions);
 	}
 
-	public static com.liferay.portlet.blogs.model.BlogsEntry updateWorkflowStatus(
+	public static com.liferay.portlet.blogs.model.BlogsEntry updateStatus(
 		long userId, long entryId, java.lang.String[] trackbacks,
 		boolean pingOldTrackbaks,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .updateWorkflowStatus(userId, entryId, trackbacks,
-			pingOldTrackbaks, serviceContext);
+				   .updateStatus(userId, entryId, trackbacks, pingOldTrackbaks,
+			serviceContext);
 	}
 
 	public static BlogsEntryLocalService getService() {

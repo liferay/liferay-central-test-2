@@ -14,10 +14,9 @@
 
 package com.liferay.portlet.bookmarks.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.impl.BaseModelImpl;
@@ -258,27 +257,9 @@ public class BookmarksFolderModelImpl extends BaseModelImpl<BookmarksFolder> {
 			return (BookmarksFolder)this;
 		}
 		else {
-			BookmarksFolder model = new BookmarksFolderImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setUuid(HtmlUtil.escape(getUuid()));
-			model.setFolderId(getFolderId());
-			model.setGroupId(getGroupId());
-			model.setCompanyId(getCompanyId());
-			model.setUserId(getUserId());
-			model.setCreateDate(getCreateDate());
-			model.setModifiedDate(getModifiedDate());
-			model.setParentFolderId(getParentFolderId());
-			model.setName(HtmlUtil.escape(getName()));
-			model.setDescription(HtmlUtil.escape(getDescription()));
-
-			model = (BookmarksFolder)Proxy.newProxyInstance(BookmarksFolder.class.getClassLoader(),
-					new Class[] { BookmarksFolder.class },
-					new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (BookmarksFolder)Proxy.newProxyInstance(BookmarksFolder.class.getClassLoader(),
+				new Class[] { BookmarksFolder.class },
+				new AutoEscapeBeanHandler(this));
 		}
 	}
 

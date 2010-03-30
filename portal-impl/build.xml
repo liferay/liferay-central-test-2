@@ -421,6 +421,10 @@ ${exception.message}
 		</antcall>
 
 		<antcall target="build-lang-native2ascii">
+			<param name="lang.code" value="hi_IN" />
+		</antcall>
+
+		<antcall target="build-lang-native2ascii">
 			<param name="lang.code" value="hu" />
 		</antcall>
 
@@ -722,9 +726,7 @@ ${exception.message}
 
 	<target name="build-upgrade-table">
 		<if>
-			<not>
-				<equals arg1="${upgrade.table.path}" arg2="$${upgrade.table.path}" />
-			</not>
+			<isset property="upgrade.table.path" />
 			<then>
 				<for param="zip.file">
 					<path>

@@ -14,10 +14,9 @@
 
 package com.liferay.portlet.journal.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.impl.BaseModelImpl;
@@ -455,41 +454,9 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed> {
 			return (JournalFeed)this;
 		}
 		else {
-			JournalFeed model = new JournalFeedImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setUuid(HtmlUtil.escape(getUuid()));
-			model.setId(getId());
-			model.setGroupId(getGroupId());
-			model.setCompanyId(getCompanyId());
-			model.setUserId(getUserId());
-			model.setUserName(HtmlUtil.escape(getUserName()));
-			model.setCreateDate(getCreateDate());
-			model.setModifiedDate(getModifiedDate());
-			model.setFeedId(getFeedId());
-			model.setName(HtmlUtil.escape(getName()));
-			model.setDescription(HtmlUtil.escape(getDescription()));
-			model.setType(HtmlUtil.escape(getType()));
-			model.setStructureId(getStructureId());
-			model.setTemplateId(getTemplateId());
-			model.setRendererTemplateId(HtmlUtil.escape(getRendererTemplateId()));
-			model.setDelta(getDelta());
-			model.setOrderByCol(HtmlUtil.escape(getOrderByCol()));
-			model.setOrderByType(HtmlUtil.escape(getOrderByType()));
-			model.setTargetLayoutFriendlyUrl(HtmlUtil.escape(
-					getTargetLayoutFriendlyUrl()));
-			model.setTargetPortletId(HtmlUtil.escape(getTargetPortletId()));
-			model.setContentField(HtmlUtil.escape(getContentField()));
-			model.setFeedType(HtmlUtil.escape(getFeedType()));
-			model.setFeedVersion(getFeedVersion());
-
-			model = (JournalFeed)Proxy.newProxyInstance(JournalFeed.class.getClassLoader(),
-					new Class[] { JournalFeed.class },
-					new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (JournalFeed)Proxy.newProxyInstance(JournalFeed.class.getClassLoader(),
+				new Class[] { JournalFeed.class },
+				new AutoEscapeBeanHandler(this));
 		}
 	}
 

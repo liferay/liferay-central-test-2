@@ -14,9 +14,8 @@
 
 package com.liferay.portal.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Organization;
@@ -283,29 +282,9 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization> {
 			return (Organization)this;
 		}
 		else {
-			Organization model = new OrganizationImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setOrganizationId(getOrganizationId());
-			model.setCompanyId(getCompanyId());
-			model.setParentOrganizationId(getParentOrganizationId());
-			model.setLeftOrganizationId(getLeftOrganizationId());
-			model.setRightOrganizationId(getRightOrganizationId());
-			model.setName(HtmlUtil.escape(getName()));
-			model.setType(getType());
-			model.setRecursable(getRecursable());
-			model.setRegionId(getRegionId());
-			model.setCountryId(getCountryId());
-			model.setStatusId(getStatusId());
-			model.setComments(HtmlUtil.escape(getComments()));
-
-			model = (Organization)Proxy.newProxyInstance(Organization.class.getClassLoader(),
-					new Class[] { Organization.class },
-					new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (Organization)Proxy.newProxyInstance(Organization.class.getClassLoader(),
+				new Class[] { Organization.class },
+				new AutoEscapeBeanHandler(this));
 		}
 	}
 

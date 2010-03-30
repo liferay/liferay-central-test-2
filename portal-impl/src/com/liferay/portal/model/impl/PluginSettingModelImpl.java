@@ -14,9 +14,8 @@
 
 package com.liferay.portal.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.PluginSetting;
@@ -215,23 +214,9 @@ public class PluginSettingModelImpl extends BaseModelImpl<PluginSetting> {
 			return (PluginSetting)this;
 		}
 		else {
-			PluginSetting model = new PluginSettingImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setPluginSettingId(getPluginSettingId());
-			model.setCompanyId(getCompanyId());
-			model.setPluginId(HtmlUtil.escape(getPluginId()));
-			model.setPluginType(HtmlUtil.escape(getPluginType()));
-			model.setRoles(HtmlUtil.escape(getRoles()));
-			model.setActive(getActive());
-
-			model = (PluginSetting)Proxy.newProxyInstance(PluginSetting.class.getClassLoader(),
-					new Class[] { PluginSetting.class },
-					new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (PluginSetting)Proxy.newProxyInstance(PluginSetting.class.getClassLoader(),
+				new Class[] { PluginSetting.class },
+				new AutoEscapeBeanHandler(this));
 		}
 	}
 

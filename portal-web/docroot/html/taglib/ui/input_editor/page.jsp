@@ -32,7 +32,7 @@ else {
 String toolbarSet = (String)request.getAttribute("liferay-ui:input-editor:toolbarSet");
 String initMethod = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-editor:initMethod"), namespace + "initEditor");
 String onChangeMethod = (String)request.getAttribute("liferay-ui:input-editor:onChangeMethod");
-String height = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-editor:height"), "400");
+String height = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-editor:height"), "350");
 String width = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-editor:width"), "640");
 
 StringBundler sb = new StringBundler();

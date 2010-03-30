@@ -14,6 +14,10 @@
 
 package com.liferay.portal.workflow;
 
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.workflow.WorkflowHandler;
@@ -32,15 +36,21 @@ import javax.portlet.PortletURL;
  */
 public abstract class BaseWorkflowHandler implements WorkflowHandler {
 
-	public String getTitle(long classPK) throws Exception {
-		AssetRenderer assetRenderer = getAssetRenderer(classPK);
+	public String getTitle(long classPK) {
+		try {
+			AssetRenderer assetRenderer = getAssetRenderer(classPK);
 
-		if (assetRenderer != null) {
-			return assetRenderer.getTitle();
+			if (assetRenderer != null) {
+				return assetRenderer.getTitle();
+			}
 		}
-		else {
-			return null;
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(e, e);
+			}
 		}
+
+		return null;
 	}
 
 	public String getType() {
@@ -48,31 +58,38 @@ public abstract class BaseWorkflowHandler implements WorkflowHandler {
 	}
 
 	public PortletURL getURLEdit(
-			long classPK, LiferayPortletRequest liferayPortletRequest,
-			LiferayPortletResponse liferayPortletResponse)
-		throws Exception {
+		long classPK, LiferayPortletRequest liferayPortletRequest,
+		LiferayPortletResponse liferayPortletResponse) {
 
-		AssetRenderer assetRenderer = getAssetRenderer(classPK);
+		try {
+			AssetRenderer assetRenderer = getAssetRenderer(classPK);
 
-		if (assetRenderer != null) {
-			return assetRenderer.getURLEdit(
-				liferayPortletRequest, liferayPortletResponse);
+			if (assetRenderer != null) {
+				return assetRenderer.getURLEdit(
+					liferayPortletRequest, liferayPortletResponse);
+			}
 		}
-		else {
-			return null;
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(e, e);
+			}
 		}
+
+		return null;
 	}
 
 	public void startWorkflowInstance(
 			long companyId, long groupId, long userId, long classPK,
 			Object model)
-		throws Exception {
+		throws PortalException, SystemException {
 
 		WorkflowInstanceLinkLocalServiceUtil.startWorkflowInstance(
 			companyId, groupId, userId, getClassName(), classPK);
 	}
 
-	protected AssetRenderer getAssetRenderer(long classPK) throws Exception {
+	protected AssetRenderer getAssetRenderer(long classPK)
+		throws PortalException, SystemException {
+
 		AssetRendererFactory assetRendererFactory =
 			AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(
 				getClassName());
@@ -84,5 +101,7 @@ public abstract class BaseWorkflowHandler implements WorkflowHandler {
 			return null;
 		}
 	}
+
+	private static Log _log = LogFactoryUtil.getLog(BaseWorkflowHandler.class);
 
 }

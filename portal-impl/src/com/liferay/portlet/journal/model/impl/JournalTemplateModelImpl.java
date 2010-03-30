@@ -14,10 +14,9 @@
 
 package com.liferay.portlet.journal.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.impl.BaseModelImpl;
@@ -394,35 +393,9 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate> {
 			return (JournalTemplate)this;
 		}
 		else {
-			JournalTemplate model = new JournalTemplateImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setUuid(HtmlUtil.escape(getUuid()));
-			model.setId(getId());
-			model.setGroupId(getGroupId());
-			model.setCompanyId(getCompanyId());
-			model.setUserId(getUserId());
-			model.setUserName(HtmlUtil.escape(getUserName()));
-			model.setCreateDate(getCreateDate());
-			model.setModifiedDate(getModifiedDate());
-			model.setTemplateId(getTemplateId());
-			model.setStructureId(getStructureId());
-			model.setName(HtmlUtil.escape(getName()));
-			model.setDescription(HtmlUtil.escape(getDescription()));
-			model.setXsl(HtmlUtil.escape(getXsl()));
-			model.setLangType(HtmlUtil.escape(getLangType()));
-			model.setCacheable(getCacheable());
-			model.setSmallImage(getSmallImage());
-			model.setSmallImageId(getSmallImageId());
-			model.setSmallImageURL(HtmlUtil.escape(getSmallImageURL()));
-
-			model = (JournalTemplate)Proxy.newProxyInstance(JournalTemplate.class.getClassLoader(),
-					new Class[] { JournalTemplate.class },
-					new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (JournalTemplate)Proxy.newProxyInstance(JournalTemplate.class.getClassLoader(),
+				new Class[] { JournalTemplate.class },
+				new AutoEscapeBeanHandler(this));
 		}
 	}
 

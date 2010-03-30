@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.shopping.model;
 
+import com.liferay.portal.kernel.annotation.AutoEscape;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.service.ServiceContext;
@@ -68,6 +69,7 @@ public interface ShoppingCouponModel extends BaseModel<ShoppingCoupon> {
 
 	public void setUserUuid(String userUuid);
 
+	@AutoEscape
 	public String getUserName();
 
 	public void setUserName(String userName);
@@ -80,14 +82,17 @@ public interface ShoppingCouponModel extends BaseModel<ShoppingCoupon> {
 
 	public void setModifiedDate(Date modifiedDate);
 
+	@AutoEscape
 	public String getCode();
 
 	public void setCode(String code);
 
+	@AutoEscape
 	public String getName();
 
 	public void setName(String name);
 
+	@AutoEscape
 	public String getDescription();
 
 	public void setDescription(String description);
@@ -106,10 +111,12 @@ public interface ShoppingCouponModel extends BaseModel<ShoppingCoupon> {
 
 	public void setActive(boolean active);
 
+	@AutoEscape
 	public String getLimitCategories();
 
 	public void setLimitCategories(String limitCategories);
 
+	@AutoEscape
 	public String getLimitSkus();
 
 	public void setLimitSkus(String limitSkus);
@@ -122,6 +129,7 @@ public interface ShoppingCouponModel extends BaseModel<ShoppingCoupon> {
 
 	public void setDiscount(double discount);
 
+	@AutoEscape
 	public String getDiscountType();
 
 	public void setDiscountType(String discountType);

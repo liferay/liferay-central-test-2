@@ -14,9 +14,8 @@
 
 package com.liferay.portal.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.WebDAVProps;
@@ -215,24 +214,9 @@ public class WebDAVPropsModelImpl extends BaseModelImpl<WebDAVProps> {
 			return (WebDAVProps)this;
 		}
 		else {
-			WebDAVProps model = new WebDAVPropsImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setWebDavPropsId(getWebDavPropsId());
-			model.setCompanyId(getCompanyId());
-			model.setCreateDate(getCreateDate());
-			model.setModifiedDate(getModifiedDate());
-			model.setClassNameId(getClassNameId());
-			model.setClassPK(getClassPK());
-			model.setProps(HtmlUtil.escape(getProps()));
-
-			model = (WebDAVProps)Proxy.newProxyInstance(WebDAVProps.class.getClassLoader(),
-					new Class[] { WebDAVProps.class },
-					new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (WebDAVProps)Proxy.newProxyInstance(WebDAVProps.class.getClassLoader(),
+				new Class[] { WebDAVProps.class },
+				new AutoEscapeBeanHandler(this));
 		}
 	}
 

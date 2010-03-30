@@ -14,7 +14,7 @@
 
 package com.liferay.portal.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -158,20 +158,9 @@ public class BrowserTrackerModelImpl extends BaseModelImpl<BrowserTracker> {
 			return (BrowserTracker)this;
 		}
 		else {
-			BrowserTracker model = new BrowserTrackerImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setBrowserTrackerId(getBrowserTrackerId());
-			model.setUserId(getUserId());
-			model.setBrowserKey(getBrowserKey());
-
-			model = (BrowserTracker)Proxy.newProxyInstance(BrowserTracker.class.getClassLoader(),
-					new Class[] { BrowserTracker.class },
-					new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (BrowserTracker)Proxy.newProxyInstance(BrowserTracker.class.getClassLoader(),
+				new Class[] { BrowserTracker.class },
+				new AutoEscapeBeanHandler(this));
 		}
 	}
 

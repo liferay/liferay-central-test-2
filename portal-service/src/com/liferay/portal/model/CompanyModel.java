@@ -14,6 +14,7 @@
 
 package com.liferay.portal.model;
 
+import com.liferay.portal.kernel.annotation.AutoEscape;
 import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
@@ -52,22 +53,27 @@ public interface CompanyModel extends BaseModel<Company> {
 
 	public void setAccountId(long accountId);
 
+	@AutoEscape
 	public String getWebId();
 
 	public void setWebId(String webId);
 
+	@AutoEscape
 	public String getKey();
 
 	public void setKey(String key);
 
+	@AutoEscape
 	public String getVirtualHost();
 
 	public void setVirtualHost(String virtualHost);
 
+	@AutoEscape
 	public String getMx();
 
 	public void setMx(String mx);
 
+	@AutoEscape
 	public String getHomeURL();
 
 	public void setHomeURL(String homeURL);

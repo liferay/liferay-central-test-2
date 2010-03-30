@@ -14,7 +14,7 @@
 
 package com.liferay.portal.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -189,21 +189,9 @@ public class PasswordPolicyRelModelImpl extends BaseModelImpl<PasswordPolicyRel>
 			return (PasswordPolicyRel)this;
 		}
 		else {
-			PasswordPolicyRel model = new PasswordPolicyRelImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setPasswordPolicyRelId(getPasswordPolicyRelId());
-			model.setPasswordPolicyId(getPasswordPolicyId());
-			model.setClassNameId(getClassNameId());
-			model.setClassPK(getClassPK());
-
-			model = (PasswordPolicyRel)Proxy.newProxyInstance(PasswordPolicyRel.class.getClassLoader(),
-					new Class[] { PasswordPolicyRel.class },
-					new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (PasswordPolicyRel)Proxy.newProxyInstance(PasswordPolicyRel.class.getClassLoader(),
+				new Class[] { PasswordPolicyRel.class },
+				new AutoEscapeBeanHandler(this));
 		}
 	}
 

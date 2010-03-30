@@ -14,7 +14,7 @@
 
 package com.liferay.portlet.messageboards.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -189,21 +189,9 @@ public class MBDiscussionModelImpl extends BaseModelImpl<MBDiscussion> {
 			return (MBDiscussion)this;
 		}
 		else {
-			MBDiscussion model = new MBDiscussionImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setDiscussionId(getDiscussionId());
-			model.setClassNameId(getClassNameId());
-			model.setClassPK(getClassPK());
-			model.setThreadId(getThreadId());
-
-			model = (MBDiscussion)Proxy.newProxyInstance(MBDiscussion.class.getClassLoader(),
-					new Class[] { MBDiscussion.class },
-					new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (MBDiscussion)Proxy.newProxyInstance(MBDiscussion.class.getClassLoader(),
+				new Class[] { MBDiscussion.class },
+				new AutoEscapeBeanHandler(this));
 		}
 	}
 

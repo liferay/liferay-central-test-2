@@ -14,6 +14,7 @@
 
 package com.liferay.portal.model;
 
+import com.liferay.portal.kernel.annotation.AutoEscape;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.ServiceContext;
 
@@ -67,6 +68,7 @@ public interface WorkflowDefinitionLinkModel extends BaseModel<WorkflowDefinitio
 
 	public void setUserUuid(String userUuid);
 
+	@AutoEscape
 	public String getUserName();
 
 	public void setUserName(String userName);
@@ -85,6 +87,7 @@ public interface WorkflowDefinitionLinkModel extends BaseModel<WorkflowDefinitio
 
 	public void setClassNameId(long classNameId);
 
+	@AutoEscape
 	public String getWorkflowDefinitionName();
 
 	public void setWorkflowDefinitionName(String workflowDefinitionName);

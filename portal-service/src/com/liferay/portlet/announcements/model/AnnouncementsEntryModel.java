@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.announcements.model;
 
+import com.liferay.portal.kernel.annotation.AutoEscape;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.service.ServiceContext;
@@ -48,6 +49,7 @@ public interface AnnouncementsEntryModel extends BaseModel<AnnouncementsEntry> {
 
 	public void setPrimaryKey(long pk);
 
+	@AutoEscape
 	public String getUuid();
 
 	public void setUuid(String uuid);
@@ -68,6 +70,7 @@ public interface AnnouncementsEntryModel extends BaseModel<AnnouncementsEntry> {
 
 	public void setUserUuid(String userUuid);
 
+	@AutoEscape
 	public String getUserName();
 
 	public void setUserName(String userName);
@@ -90,18 +93,22 @@ public interface AnnouncementsEntryModel extends BaseModel<AnnouncementsEntry> {
 
 	public void setClassPK(long classPK);
 
+	@AutoEscape
 	public String getTitle();
 
 	public void setTitle(String title);
 
+	@AutoEscape
 	public String getContent();
 
 	public void setContent(String content);
 
+	@AutoEscape
 	public String getUrl();
 
 	public void setUrl(String url);
 
+	@AutoEscape
 	public String getType();
 
 	public void setType(String type);

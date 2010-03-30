@@ -14,9 +14,8 @@
 
 package com.liferay.portal.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Country;
@@ -235,24 +234,8 @@ public class CountryModelImpl extends BaseModelImpl<Country> {
 			return (Country)this;
 		}
 		else {
-			Country model = new CountryImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setCountryId(getCountryId());
-			model.setName(HtmlUtil.escape(getName()));
-			model.setA2(HtmlUtil.escape(getA2()));
-			model.setA3(HtmlUtil.escape(getA3()));
-			model.setNumber(HtmlUtil.escape(getNumber()));
-			model.setIdd(HtmlUtil.escape(getIdd()));
-			model.setActive(getActive());
-
-			model = (Country)Proxy.newProxyInstance(Country.class.getClassLoader(),
-					new Class[] { Country.class },
-					new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (Country)Proxy.newProxyInstance(Country.class.getClassLoader(),
+				new Class[] { Country.class }, new AutoEscapeBeanHandler(this));
 		}
 	}
 

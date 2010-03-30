@@ -14,9 +14,8 @@
 
 package com.liferay.portal.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Layout;
@@ -467,39 +466,8 @@ public class LayoutModelImpl extends BaseModelImpl<Layout> {
 			return (Layout)this;
 		}
 		else {
-			Layout model = new LayoutImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setPlid(getPlid());
-			model.setGroupId(getGroupId());
-			model.setCompanyId(getCompanyId());
-			model.setPrivateLayout(getPrivateLayout());
-			model.setLayoutId(getLayoutId());
-			model.setParentLayoutId(getParentLayoutId());
-			model.setName(HtmlUtil.escape(getName()));
-			model.setTitle(HtmlUtil.escape(getTitle()));
-			model.setDescription(HtmlUtil.escape(getDescription()));
-			model.setType(HtmlUtil.escape(getType()));
-			model.setTypeSettings(HtmlUtil.escape(getTypeSettings()));
-			model.setHidden(getHidden());
-			model.setFriendlyURL(HtmlUtil.escape(getFriendlyURL()));
-			model.setIconImage(getIconImage());
-			model.setIconImageId(getIconImageId());
-			model.setThemeId(HtmlUtil.escape(getThemeId()));
-			model.setColorSchemeId(HtmlUtil.escape(getColorSchemeId()));
-			model.setWapThemeId(HtmlUtil.escape(getWapThemeId()));
-			model.setWapColorSchemeId(HtmlUtil.escape(getWapColorSchemeId()));
-			model.setCss(HtmlUtil.escape(getCss()));
-			model.setPriority(getPriority());
-			model.setLayoutPrototypeId(getLayoutPrototypeId());
-			model.setDlFolderId(getDlFolderId());
-
-			model = (Layout)Proxy.newProxyInstance(Layout.class.getClassLoader(),
-					new Class[] { Layout.class }, new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (Layout)Proxy.newProxyInstance(Layout.class.getClassLoader(),
+				new Class[] { Layout.class }, new AutoEscapeBeanHandler(this));
 		}
 	}
 

@@ -14,9 +14,8 @@
 
 package com.liferay.portlet.wiki.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.impl.BaseModelImpl;
@@ -165,20 +164,9 @@ public class WikiPageResourceModelImpl extends BaseModelImpl<WikiPageResource> {
 			return (WikiPageResource)this;
 		}
 		else {
-			WikiPageResource model = new WikiPageResourceImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setResourcePrimKey(getResourcePrimKey());
-			model.setNodeId(getNodeId());
-			model.setTitle(HtmlUtil.escape(getTitle()));
-
-			model = (WikiPageResource)Proxy.newProxyInstance(WikiPageResource.class.getClassLoader(),
-					new Class[] { WikiPageResource.class },
-					new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (WikiPageResource)Proxy.newProxyInstance(WikiPageResource.class.getClassLoader(),
+				new Class[] { WikiPageResource.class },
+				new AutoEscapeBeanHandler(this));
 		}
 	}
 

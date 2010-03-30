@@ -30,6 +30,8 @@ import com.liferay.portal.kernel.workflow.StatusConstants;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
+import com.liferay.portal.service.WorkflowDefinitionLinkLocalServiceUtil;
+import com.liferay.portal.service.WorkflowInstanceLinkLocalServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
@@ -41,6 +43,7 @@ import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileVersion;
+import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileVersionLocalServiceUtil;
 
@@ -51,6 +54,8 @@ import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -116,6 +121,15 @@ public class EditFileEntryAction extends PortletAction {
 					 e instanceof FileSizeException ||
 					 e instanceof NoSuchFolderException ||
 					 e instanceof SourceFileNameException) {
+
+				if (e instanceof DuplicateFileException) {
+					HttpServletResponse response =
+						PortalUtil.getHttpServletResponse(
+							actionResponse);
+
+					response.setStatus(
+						HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+				}
 
 				SessionErrors.add(actionRequest, e.getClass().getName());
 			}
@@ -280,6 +294,14 @@ public class EditFileEntryAction extends PortletAction {
 
 			// Add file entry
 
+			if (WorkflowDefinitionLinkLocalServiceUtil.
+					hasWorkflowDefinitionLink(
+						themeDisplay.getCompanyId(), groupId,
+						DLFileEntry.class.getName())) {
+
+				serviceContext.setStatus(StatusConstants.DRAFT);
+			}
+
 			DLFileEntry fileEntry = DLFileEntryServiceUtil.addFileEntry(
 				groupId, newFolderId, sourceFileName, title, description,
 				versionDescription, extraSettings, file, serviceContext);
@@ -291,6 +313,16 @@ public class EditFileEntryAction extends PortletAction {
 		else {
 
 			// Update file entry
+
+			DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(
+				groupId, folderId, name);
+
+			if (WorkflowInstanceLinkLocalServiceUtil.hasWorkflowInstanceLink(
+					themeDisplay.getCompanyId(), groupId,
+					DLFileEntry.class.getName(), fileEntry.getFileEntryId())) {
+
+				serviceContext.setStatus(StatusConstants.DRAFT);
+			}
 
 			DLFileEntryServiceUtil.updateFileEntry(
 				groupId, folderId, newFolderId, name, sourceFileName, title,

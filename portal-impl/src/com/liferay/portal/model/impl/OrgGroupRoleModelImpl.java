@@ -14,7 +14,7 @@
 
 package com.liferay.portal.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.model.OrgGroupRole;
@@ -137,20 +137,9 @@ public class OrgGroupRoleModelImpl extends BaseModelImpl<OrgGroupRole> {
 			return (OrgGroupRole)this;
 		}
 		else {
-			OrgGroupRole model = new OrgGroupRoleImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setOrganizationId(getOrganizationId());
-			model.setGroupId(getGroupId());
-			model.setRoleId(getRoleId());
-
-			model = (OrgGroupRole)Proxy.newProxyInstance(OrgGroupRole.class.getClassLoader(),
-					new Class[] { OrgGroupRole.class },
-					new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (OrgGroupRole)Proxy.newProxyInstance(OrgGroupRole.class.getClassLoader(),
+				new Class[] { OrgGroupRole.class },
+				new AutoEscapeBeanHandler(this));
 		}
 	}
 

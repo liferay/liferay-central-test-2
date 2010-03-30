@@ -14,9 +14,8 @@
 
 package com.liferay.portal.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.ListType;
@@ -148,20 +147,8 @@ public class ListTypeModelImpl extends BaseModelImpl<ListType> {
 			return (ListType)this;
 		}
 		else {
-			ListType model = new ListTypeImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setListTypeId(getListTypeId());
-			model.setName(HtmlUtil.escape(getName()));
-			model.setType(HtmlUtil.escape(getType()));
-
-			model = (ListType)Proxy.newProxyInstance(ListType.class.getClassLoader(),
-					new Class[] { ListType.class },
-					new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (ListType)Proxy.newProxyInstance(ListType.class.getClassLoader(),
+				new Class[] { ListType.class }, new AutoEscapeBeanHandler(this));
 		}
 	}
 

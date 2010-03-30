@@ -14,6 +14,7 @@
 
 package com.liferay.portal.security.permission;
 
+import com.liferay.portal.NoSuchResourceActionException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
@@ -83,6 +84,17 @@ public class ResourceActionsUtil {
 		PasswordPolicy.class.getName(), Role.class.getName(),
 		User.class.getName(), UserGroup.class.getName()
 	};
+
+	public static void checkAction(String name, String actionId)
+		throws NoSuchResourceActionException {
+
+		List<String> resourceActions = getResourceActions(name);
+
+		if (!resourceActions.contains(actionId)) {
+			throw new NoSuchResourceActionException(
+				name.concat(StringPool.POUND).concat(actionId));
+		}
+	}
 
 	public static String getAction(Locale locale, String action) {
 		String key = ACTION_NAME_PREFIX + action;
@@ -393,14 +405,14 @@ public class ResourceActionsUtil {
 	private ResourceActionsUtil() {
 		_organizationModelResources = new HashSet<String>();
 
-		for (int i = 0; i < ORGANIZATION_MODEL_RESOURCES.length; i++) {
-			_organizationModelResources.add(ORGANIZATION_MODEL_RESOURCES[i]);
+		for (String resource : ORGANIZATION_MODEL_RESOURCES) {
+			_organizationModelResources.add(resource);
 		}
 
 		_portalModelResources = new HashSet<String>();
 
-		for (int i = 0; i < PORTAL_MODEL_RESOURCES.length; i++) {
-			_portalModelResources.add(PORTAL_MODEL_RESOURCES[i]);
+		for (String resource : PORTAL_MODEL_RESOURCES) {
+			_portalModelResources.add(resource);
 		}
 
 		_portletModelResources = new HashMap<String, Set<String>>();
@@ -430,8 +442,8 @@ public class ResourceActionsUtil {
 			String[] configs = StringUtil.split(
 				PropsUtil.get(PropsKeys.RESOURCE_ACTIONS_CONFIGS));
 
-			for (int i = 0; i < configs.length; i++) {
-				_read(null, classLoader, configs[i]);
+			for (String config : configs) {
+				_read(null, classLoader, config);
 			}
 		}
 		catch (Exception e) {
@@ -755,7 +767,7 @@ public class ResourceActionsUtil {
 		while (itr1.hasNext()) {
 			Element resource = itr1.next();
 
-			String file = resource.attributeValue("file");
+			String file = resource.attributeValue("file").trim();
 
 			_read(servletContextName, classLoader, file);
 
@@ -769,7 +781,7 @@ public class ResourceActionsUtil {
 		while (itr1.hasNext()) {
 			Element resource = itr1.next();
 
-			String name = resource.elementText("portlet-name");
+			String name = resource.elementTextTrim("portlet-name");
 
 			if (servletContextName != null) {
 				name =
@@ -789,7 +801,7 @@ public class ResourceActionsUtil {
 			while (itr2.hasNext()) {
 				Element actionKey = itr2.next();
 
-				String actionKeyText = actionKey.getText();
+				String actionKeyText = actionKey.getTextTrim();
 
 				if (Validator.isNotNull(actionKeyText)) {
 					actions.add(actionKeyText);
@@ -814,7 +826,7 @@ public class ResourceActionsUtil {
 			while (itr2.hasNext()) {
 				Element actionKey = itr2.next();
 
-				String actionKeyText = actionKey.getText();
+				String actionKeyText = actionKey.getTextTrim();
 
 				if (Validator.isNotNull(actionKeyText)) {
 					communityDefaultActions.add(actionKeyText);
@@ -833,7 +845,7 @@ public class ResourceActionsUtil {
 			while (itr2.hasNext()) {
 				Element actionKey = itr2.next();
 
-				String actionKeyText = actionKey.getText();
+				String actionKeyText = actionKey.getTextTrim();
 
 				if (Validator.isNotNull(actionKeyText)) {
 					guestDefaultActions.add(actionKeyText);
@@ -853,7 +865,7 @@ public class ResourceActionsUtil {
 				while (itr2.hasNext()) {
 					Element actionKey = itr2.next();
 
-					String actionKeyText = actionKey.getText();
+					String actionKeyText = actionKey.getTextTrim();
 
 					if (Validator.isNotNull(actionKeyText)) {
 						guestUnsupportedActions.add(actionKeyText);
@@ -877,7 +889,7 @@ public class ResourceActionsUtil {
 				while (itr2.hasNext()) {
 					Element actionKey = itr2.next();
 
-					String actionKeyText = actionKey.getText();
+					String actionKeyText = actionKey.getTextTrim();
 
 					if (Validator.isNotNull(actionKeyText)) {
 						layoutManagerActions.add(actionKeyText);
@@ -898,7 +910,7 @@ public class ResourceActionsUtil {
 		while (itr1.hasNext()) {
 			Element resource = itr1.next();
 
-			String name = resource.elementText("model-name");
+			String name = resource.elementTextTrim("model-name");
 
 			Element portletRef = resource.element("portlet-ref");
 
@@ -908,7 +920,7 @@ public class ResourceActionsUtil {
 			while (itr2.hasNext()) {
 				Element portletName = itr2.next();
 
-				String portletNameString = portletName.getText();
+				String portletNameString = portletName.getTextTrim();
 
 				if (servletContextName != null) {
 					portletNameString =
@@ -957,7 +969,7 @@ public class ResourceActionsUtil {
 			while (itr2.hasNext()) {
 				Element actionKey = itr2.next();
 
-				String actionKeyText = actionKey.getText();
+				String actionKeyText = actionKey.getTextTrim();
 
 				if (Validator.isNotNull(actionKeyText)) {
 					actions.add(actionKeyText);
@@ -976,7 +988,7 @@ public class ResourceActionsUtil {
 			while (itr2.hasNext()) {
 				Element actionKey = itr2.next();
 
-				String actionKeyText = actionKey.getText();
+				String actionKeyText = actionKey.getTextTrim();
 
 				if (Validator.isNotNull(actionKeyText)) {
 					communityDefaultActions.add(actionKeyText);
@@ -995,7 +1007,7 @@ public class ResourceActionsUtil {
 			while (itr2.hasNext()) {
 				Element actionKey = itr2.next();
 
-				String actionKeyText = actionKey.getText();
+				String actionKeyText = actionKey.getTextTrim();
 
 				if (Validator.isNotNull(actionKeyText)) {
 					guestDefaultActions.add(actionKeyText);
@@ -1014,7 +1026,7 @@ public class ResourceActionsUtil {
 			while (itr2.hasNext()) {
 				Element actionKey = itr2.next();
 
-				String actionKeyText = actionKey.getText();
+				String actionKeyText = actionKey.getTextTrim();
 
 				if (Validator.isNotNull(actionKeyText)) {
 					guestUnsupportedActions.add(actionKeyText);
@@ -1037,7 +1049,7 @@ public class ResourceActionsUtil {
 				while (itr2.hasNext()) {
 					Element actionKey = itr2.next();
 
-					String actionKeyText = actionKey.getText();
+					String actionKeyText = actionKey.getTextTrim();
 
 					if (Validator.isNotNull(actionKeyText)) {
 						ownerDefaultActions.add(actionKeyText);

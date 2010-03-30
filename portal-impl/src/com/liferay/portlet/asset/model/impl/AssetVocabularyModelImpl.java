@@ -14,7 +14,7 @@
 
 package com.liferay.portlet.asset.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -441,29 +441,9 @@ public class AssetVocabularyModelImpl extends BaseModelImpl<AssetVocabulary> {
 			return (AssetVocabulary)this;
 		}
 		else {
-			AssetVocabulary model = new AssetVocabularyImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setUuid(HtmlUtil.escape(getUuid()));
-			model.setVocabularyId(getVocabularyId());
-			model.setGroupId(getGroupId());
-			model.setCompanyId(getCompanyId());
-			model.setUserId(getUserId());
-			model.setUserName(HtmlUtil.escape(getUserName()));
-			model.setCreateDate(getCreateDate());
-			model.setModifiedDate(getModifiedDate());
-			model.setName(HtmlUtil.escape(getName()));
-			model.setTitle(getTitle());
-			model.setDescription(getDescription());
-			model.setSettings(HtmlUtil.escape(getSettings()));
-
-			model = (AssetVocabulary)Proxy.newProxyInstance(AssetVocabulary.class.getClassLoader(),
-					new Class[] { AssetVocabulary.class },
-					new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (AssetVocabulary)Proxy.newProxyInstance(AssetVocabulary.class.getClassLoader(),
+				new Class[] { AssetVocabulary.class },
+				new AutoEscapeBeanHandler(this));
 		}
 	}
 

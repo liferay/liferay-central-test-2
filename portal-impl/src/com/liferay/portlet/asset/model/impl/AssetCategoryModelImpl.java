@@ -14,7 +14,7 @@
 
 package com.liferay.portlet.asset.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -388,31 +388,9 @@ public class AssetCategoryModelImpl extends BaseModelImpl<AssetCategory> {
 			return (AssetCategory)this;
 		}
 		else {
-			AssetCategory model = new AssetCategoryImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setUuid(HtmlUtil.escape(getUuid()));
-			model.setCategoryId(getCategoryId());
-			model.setGroupId(getGroupId());
-			model.setCompanyId(getCompanyId());
-			model.setUserId(getUserId());
-			model.setUserName(HtmlUtil.escape(getUserName()));
-			model.setCreateDate(getCreateDate());
-			model.setModifiedDate(getModifiedDate());
-			model.setParentCategoryId(getParentCategoryId());
-			model.setLeftCategoryId(getLeftCategoryId());
-			model.setRightCategoryId(getRightCategoryId());
-			model.setName(HtmlUtil.escape(getName()));
-			model.setTitle(getTitle());
-			model.setVocabularyId(getVocabularyId());
-
-			model = (AssetCategory)Proxy.newProxyInstance(AssetCategory.class.getClassLoader(),
-					new Class[] { AssetCategory.class },
-					new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (AssetCategory)Proxy.newProxyInstance(AssetCategory.class.getClassLoader(),
+				new Class[] { AssetCategory.class },
+				new AutoEscapeBeanHandler(this));
 		}
 	}
 

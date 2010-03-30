@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.journal.model;
 
+import com.liferay.portal.kernel.annotation.AutoEscape;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.service.ServiceContext;
@@ -48,6 +49,7 @@ public interface JournalFeedModel extends BaseModel<JournalFeed> {
 
 	public void setPrimaryKey(long pk);
 
+	@AutoEscape
 	public String getUuid();
 
 	public void setUuid(String uuid);
@@ -72,6 +74,7 @@ public interface JournalFeedModel extends BaseModel<JournalFeed> {
 
 	public void setUserUuid(String userUuid);
 
+	@AutoEscape
 	public String getUserName();
 
 	public void setUserName(String userName);
@@ -88,14 +91,17 @@ public interface JournalFeedModel extends BaseModel<JournalFeed> {
 
 	public void setFeedId(String feedId);
 
+	@AutoEscape
 	public String getName();
 
 	public void setName(String name);
 
+	@AutoEscape
 	public String getDescription();
 
 	public void setDescription(String description);
 
+	@AutoEscape
 	public String getType();
 
 	public void setType(String type);
@@ -108,6 +114,7 @@ public interface JournalFeedModel extends BaseModel<JournalFeed> {
 
 	public void setTemplateId(String templateId);
 
+	@AutoEscape
 	public String getRendererTemplateId();
 
 	public void setRendererTemplateId(String rendererTemplateId);
@@ -116,26 +123,32 @@ public interface JournalFeedModel extends BaseModel<JournalFeed> {
 
 	public void setDelta(int delta);
 
+	@AutoEscape
 	public String getOrderByCol();
 
 	public void setOrderByCol(String orderByCol);
 
+	@AutoEscape
 	public String getOrderByType();
 
 	public void setOrderByType(String orderByType);
 
+	@AutoEscape
 	public String getTargetLayoutFriendlyUrl();
 
 	public void setTargetLayoutFriendlyUrl(String targetLayoutFriendlyUrl);
 
+	@AutoEscape
 	public String getTargetPortletId();
 
 	public void setTargetPortletId(String targetPortletId);
 
+	@AutoEscape
 	public String getContentField();
 
 	public void setContentField(String contentField);
 
+	@AutoEscape
 	public String getFeedType();
 
 	public void setFeedType(String feedType);

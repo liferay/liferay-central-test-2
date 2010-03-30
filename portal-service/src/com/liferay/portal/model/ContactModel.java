@@ -14,6 +14,7 @@
 
 package com.liferay.portal.model;
 
+import com.liferay.portal.kernel.annotation.AutoEscape;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.ServiceContext;
 
@@ -63,6 +64,7 @@ public interface ContactModel extends BaseModel<Contact> {
 
 	public void setUserUuid(String userUuid);
 
+	@AutoEscape
 	public String getUserName();
 
 	public void setUserName(String userName);
@@ -83,14 +85,17 @@ public interface ContactModel extends BaseModel<Contact> {
 
 	public void setParentContactId(long parentContactId);
 
+	@AutoEscape
 	public String getFirstName();
 
 	public void setFirstName(String firstName);
 
+	@AutoEscape
 	public String getMiddleName();
 
 	public void setMiddleName(String middleName);
 
+	@AutoEscape
 	public String getLastName();
 
 	public void setLastName(String lastName);
@@ -113,62 +118,77 @@ public interface ContactModel extends BaseModel<Contact> {
 
 	public void setBirthday(Date birthday);
 
+	@AutoEscape
 	public String getSmsSn();
 
 	public void setSmsSn(String smsSn);
 
+	@AutoEscape
 	public String getAimSn();
 
 	public void setAimSn(String aimSn);
 
+	@AutoEscape
 	public String getFacebookSn();
 
 	public void setFacebookSn(String facebookSn);
 
+	@AutoEscape
 	public String getIcqSn();
 
 	public void setIcqSn(String icqSn);
 
+	@AutoEscape
 	public String getJabberSn();
 
 	public void setJabberSn(String jabberSn);
 
+	@AutoEscape
 	public String getMsnSn();
 
 	public void setMsnSn(String msnSn);
 
+	@AutoEscape
 	public String getMySpaceSn();
 
 	public void setMySpaceSn(String mySpaceSn);
 
+	@AutoEscape
 	public String getSkypeSn();
 
 	public void setSkypeSn(String skypeSn);
 
+	@AutoEscape
 	public String getTwitterSn();
 
 	public void setTwitterSn(String twitterSn);
 
+	@AutoEscape
 	public String getYmSn();
 
 	public void setYmSn(String ymSn);
 
+	@AutoEscape
 	public String getEmployeeStatusId();
 
 	public void setEmployeeStatusId(String employeeStatusId);
 
+	@AutoEscape
 	public String getEmployeeNumber();
 
 	public void setEmployeeNumber(String employeeNumber);
 
+	@AutoEscape
 	public String getJobTitle();
 
 	public void setJobTitle(String jobTitle);
 
+	@AutoEscape
 	public String getJobClass();
 
 	public void setJobClass(String jobClass);
 
+	@AutoEscape
 	public String getHoursOfOperation();
 
 	public void setHoursOfOperation(String hoursOfOperation);

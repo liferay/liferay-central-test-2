@@ -14,10 +14,9 @@
 
 package com.liferay.portal.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.PasswordPolicy;
@@ -460,43 +459,9 @@ public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy> {
 			return (PasswordPolicy)this;
 		}
 		else {
-			PasswordPolicy model = new PasswordPolicyImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setPasswordPolicyId(getPasswordPolicyId());
-			model.setCompanyId(getCompanyId());
-			model.setUserId(getUserId());
-			model.setUserName(HtmlUtil.escape(getUserName()));
-			model.setCreateDate(getCreateDate());
-			model.setModifiedDate(getModifiedDate());
-			model.setDefaultPolicy(getDefaultPolicy());
-			model.setName(HtmlUtil.escape(getName()));
-			model.setDescription(HtmlUtil.escape(getDescription()));
-			model.setChangeable(getChangeable());
-			model.setChangeRequired(getChangeRequired());
-			model.setMinAge(getMinAge());
-			model.setCheckSyntax(getCheckSyntax());
-			model.setAllowDictionaryWords(getAllowDictionaryWords());
-			model.setMinLength(getMinLength());
-			model.setHistory(getHistory());
-			model.setHistoryCount(getHistoryCount());
-			model.setExpireable(getExpireable());
-			model.setMaxAge(getMaxAge());
-			model.setWarningTime(getWarningTime());
-			model.setGraceLimit(getGraceLimit());
-			model.setLockout(getLockout());
-			model.setMaxFailure(getMaxFailure());
-			model.setLockoutDuration(getLockoutDuration());
-			model.setRequireUnlock(getRequireUnlock());
-			model.setResetFailureCount(getResetFailureCount());
-
-			model = (PasswordPolicy)Proxy.newProxyInstance(PasswordPolicy.class.getClassLoader(),
-					new Class[] { PasswordPolicy.class },
-					new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (PasswordPolicy)Proxy.newProxyInstance(PasswordPolicy.class.getClassLoader(),
+				new Class[] { PasswordPolicy.class },
+				new AutoEscapeBeanHandler(this));
 		}
 	}
 

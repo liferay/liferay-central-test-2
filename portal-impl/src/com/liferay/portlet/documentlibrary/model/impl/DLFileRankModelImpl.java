@@ -14,11 +14,10 @@
 
 package com.liferay.portlet.documentlibrary.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.impl.BaseModelImpl;
@@ -238,24 +237,9 @@ public class DLFileRankModelImpl extends BaseModelImpl<DLFileRank> {
 			return (DLFileRank)this;
 		}
 		else {
-			DLFileRank model = new DLFileRankImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setFileRankId(getFileRankId());
-			model.setGroupId(getGroupId());
-			model.setCompanyId(getCompanyId());
-			model.setUserId(getUserId());
-			model.setCreateDate(getCreateDate());
-			model.setFolderId(getFolderId());
-			model.setName(HtmlUtil.escape(getName()));
-
-			model = (DLFileRank)Proxy.newProxyInstance(DLFileRank.class.getClassLoader(),
-					new Class[] { DLFileRank.class },
-					new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (DLFileRank)Proxy.newProxyInstance(DLFileRank.class.getClassLoader(),
+				new Class[] { DLFileRank.class },
+				new AutoEscapeBeanHandler(this));
 		}
 	}
 

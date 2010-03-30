@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.softwarecatalog.model;
 
+import com.liferay.portal.kernel.annotation.AutoEscape;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.service.ServiceContext;
@@ -64,6 +65,7 @@ public interface SCProductVersionModel extends BaseModel<SCProductVersion> {
 
 	public void setUserUuid(String userUuid);
 
+	@AutoEscape
 	public String getUserName();
 
 	public void setUserName(String userName);
@@ -80,18 +82,22 @@ public interface SCProductVersionModel extends BaseModel<SCProductVersion> {
 
 	public void setProductEntryId(long productEntryId);
 
+	@AutoEscape
 	public String getVersion();
 
 	public void setVersion(String version);
 
+	@AutoEscape
 	public String getChangeLog();
 
 	public void setChangeLog(String changeLog);
 
+	@AutoEscape
 	public String getDownloadPageURL();
 
 	public void setDownloadPageURL(String downloadPageURL);
 
+	@AutoEscape
 	public String getDirectDownloadURL();
 
 	public void setDirectDownloadURL(String directDownloadURL);

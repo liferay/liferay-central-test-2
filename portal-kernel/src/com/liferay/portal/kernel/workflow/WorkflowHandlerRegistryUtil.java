@@ -14,6 +14,9 @@
 
 package com.liferay.portal.kernel.workflow;
 
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
+
 import java.util.List;
 
 /**
@@ -49,7 +52,7 @@ public class WorkflowHandlerRegistryUtil {
 	public static void startWorkflowInstance(
 			long companyId, long groupId, long userId, String className,
 			long classPK, Object model)
-		throws Exception {
+		throws PortalException, SystemException {
 
 		WorkflowHandler workflowHandler = getWorkflowHandler(className);
 
@@ -72,7 +75,7 @@ public class WorkflowHandlerRegistryUtil {
 	public static Object updateStatus(
 			long companyId, long groupId, long userId, String className,
 			long classPK, int status)
-		throws Exception {
+		throws PortalException, SystemException {
 
 		WorkflowHandler workflowHandler = getWorkflowHandler(className);
 

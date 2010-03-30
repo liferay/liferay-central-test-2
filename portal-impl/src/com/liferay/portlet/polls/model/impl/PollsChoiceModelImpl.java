@@ -14,7 +14,7 @@
 
 package com.liferay.portlet.polls.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
@@ -270,22 +270,9 @@ public class PollsChoiceModelImpl extends BaseModelImpl<PollsChoice> {
 			return (PollsChoice)this;
 		}
 		else {
-			PollsChoice model = new PollsChoiceImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setUuid(HtmlUtil.escape(getUuid()));
-			model.setChoiceId(getChoiceId());
-			model.setQuestionId(getQuestionId());
-			model.setName(HtmlUtil.escape(getName()));
-			model.setDescription(getDescription());
-
-			model = (PollsChoice)Proxy.newProxyInstance(PollsChoice.class.getClassLoader(),
-					new Class[] { PollsChoice.class },
-					new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (PollsChoice)Proxy.newProxyInstance(PollsChoice.class.getClassLoader(),
+				new Class[] { PollsChoice.class },
+				new AutoEscapeBeanHandler(this));
 		}
 	}
 

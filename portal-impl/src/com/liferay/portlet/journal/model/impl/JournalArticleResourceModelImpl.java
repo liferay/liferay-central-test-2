@@ -14,9 +14,8 @@
 
 package com.liferay.portlet.journal.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.impl.BaseModelImpl;
@@ -166,20 +165,9 @@ public class JournalArticleResourceModelImpl extends BaseModelImpl<JournalArticl
 			return (JournalArticleResource)this;
 		}
 		else {
-			JournalArticleResource model = new JournalArticleResourceImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setResourcePrimKey(getResourcePrimKey());
-			model.setGroupId(getGroupId());
-			model.setArticleId(HtmlUtil.escape(getArticleId()));
-
-			model = (JournalArticleResource)Proxy.newProxyInstance(JournalArticleResource.class.getClassLoader(),
-					new Class[] { JournalArticleResource.class },
-					new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (JournalArticleResource)Proxy.newProxyInstance(JournalArticleResource.class.getClassLoader(),
+				new Class[] { JournalArticleResource.class },
+				new AutoEscapeBeanHandler(this));
 		}
 	}
 

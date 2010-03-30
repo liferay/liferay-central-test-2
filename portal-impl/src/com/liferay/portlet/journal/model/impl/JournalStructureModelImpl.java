@@ -14,10 +14,9 @@
 
 package com.liferay.portlet.journal.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.impl.BaseModelImpl;
@@ -316,30 +315,9 @@ public class JournalStructureModelImpl extends BaseModelImpl<JournalStructure> {
 			return (JournalStructure)this;
 		}
 		else {
-			JournalStructure model = new JournalStructureImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setUuid(HtmlUtil.escape(getUuid()));
-			model.setId(getId());
-			model.setGroupId(getGroupId());
-			model.setCompanyId(getCompanyId());
-			model.setUserId(getUserId());
-			model.setUserName(HtmlUtil.escape(getUserName()));
-			model.setCreateDate(getCreateDate());
-			model.setModifiedDate(getModifiedDate());
-			model.setStructureId(getStructureId());
-			model.setParentStructureId(HtmlUtil.escape(getParentStructureId()));
-			model.setName(HtmlUtil.escape(getName()));
-			model.setDescription(HtmlUtil.escape(getDescription()));
-			model.setXsd(HtmlUtil.escape(getXsd()));
-
-			model = (JournalStructure)Proxy.newProxyInstance(JournalStructure.class.getClassLoader(),
-					new Class[] { JournalStructure.class },
-					new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (JournalStructure)Proxy.newProxyInstance(JournalStructure.class.getClassLoader(),
+				new Class[] { JournalStructure.class },
+				new AutoEscapeBeanHandler(this));
 		}
 	}
 

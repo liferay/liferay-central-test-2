@@ -14,6 +14,8 @@
 
 package com.liferay.portlet.documentlibrary.asset;
 
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.security.permission.ActionKeys;
@@ -41,7 +43,9 @@ public class DLFileEntryAssetRendererFactory extends BaseAssetRendererFactory {
 
 	public static final String TYPE = "document";
 
-	public AssetRenderer getAssetRenderer(long classPK) throws Exception {
+	public AssetRenderer getAssetRenderer(long classPK)
+		throws PortalException, SystemException {
+
 		DLFileEntry entry = DLFileEntryLocalServiceUtil.getFileEntry(classPK);
 
 		return new DLFileEntryAssetRenderer(entry);

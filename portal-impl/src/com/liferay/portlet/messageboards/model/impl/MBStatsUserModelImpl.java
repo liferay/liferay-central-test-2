@@ -14,7 +14,7 @@
 
 package com.liferay.portlet.messageboards.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -200,22 +200,9 @@ public class MBStatsUserModelImpl extends BaseModelImpl<MBStatsUser> {
 			return (MBStatsUser)this;
 		}
 		else {
-			MBStatsUser model = new MBStatsUserImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setStatsUserId(getStatsUserId());
-			model.setGroupId(getGroupId());
-			model.setUserId(getUserId());
-			model.setMessageCount(getMessageCount());
-			model.setLastPostDate(getLastPostDate());
-
-			model = (MBStatsUser)Proxy.newProxyInstance(MBStatsUser.class.getClassLoader(),
-					new Class[] { MBStatsUser.class },
-					new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (MBStatsUser)Proxy.newProxyInstance(MBStatsUser.class.getClassLoader(),
+				new Class[] { MBStatsUser.class },
+				new AutoEscapeBeanHandler(this));
 		}
 	}
 

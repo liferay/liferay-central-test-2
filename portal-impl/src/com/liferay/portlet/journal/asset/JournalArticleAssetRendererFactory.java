@@ -14,6 +14,8 @@
 
 package com.liferay.portlet.journal.asset;
 
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.security.permission.ActionKeys;
@@ -44,7 +46,9 @@ public class JournalArticleAssetRendererFactory
 
 	public static final String TYPE = "content";
 
-	public AssetRenderer getAssetRenderer(long classPK) throws Exception {
+	public AssetRenderer getAssetRenderer(long classPK)
+		throws PortalException, SystemException {
+
 		JournalArticleResource articleResource =
 			JournalArticleResourceLocalServiceUtil.getArticleResource(classPK);
 
@@ -56,7 +60,7 @@ public class JournalArticleAssetRendererFactory
 	}
 
 	public AssetRenderer getAssetRenderer(long groupId, String urlTitle)
-		throws Exception {
+		throws PortalException, SystemException {
 
 		JournalArticle article = JournalArticleServiceUtil.getArticleByUrlTitle(
 			groupId, urlTitle);

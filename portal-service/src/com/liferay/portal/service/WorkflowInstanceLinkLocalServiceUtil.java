@@ -194,6 +194,14 @@ public class WorkflowInstanceLinkLocalServiceUtil {
 			classPK);
 	}
 
+	public static void updateClassPK(long companyId, long groupId,
+		java.lang.String className, long oldClassPK, long newClassPK)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService()
+			.updateClassPK(companyId, groupId, className, oldClassPK, newClassPK);
+	}
+
 	public static WorkflowInstanceLinkLocalService getService() {
 		if (_service == null) {
 			_service = (WorkflowInstanceLinkLocalService)PortalBeanLocatorUtil.locate(WorkflowInstanceLinkLocalService.class.getName());

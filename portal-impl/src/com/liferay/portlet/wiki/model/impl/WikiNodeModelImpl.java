@@ -14,10 +14,9 @@
 
 package com.liferay.portlet.wiki.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.impl.BaseModelImpl;
@@ -280,28 +279,8 @@ public class WikiNodeModelImpl extends BaseModelImpl<WikiNode> {
 			return (WikiNode)this;
 		}
 		else {
-			WikiNode model = new WikiNodeImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setUuid(HtmlUtil.escape(getUuid()));
-			model.setNodeId(getNodeId());
-			model.setGroupId(getGroupId());
-			model.setCompanyId(getCompanyId());
-			model.setUserId(getUserId());
-			model.setUserName(HtmlUtil.escape(getUserName()));
-			model.setCreateDate(getCreateDate());
-			model.setModifiedDate(getModifiedDate());
-			model.setName(HtmlUtil.escape(getName()));
-			model.setDescription(HtmlUtil.escape(getDescription()));
-			model.setLastPostDate(getLastPostDate());
-
-			model = (WikiNode)Proxy.newProxyInstance(WikiNode.class.getClassLoader(),
-					new Class[] { WikiNode.class },
-					new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (WikiNode)Proxy.newProxyInstance(WikiNode.class.getClassLoader(),
+				new Class[] { WikiNode.class }, new AutoEscapeBeanHandler(this));
 		}
 	}
 

@@ -14,6 +14,7 @@
 
 package com.liferay.portal.model;
 
+import com.liferay.portal.kernel.annotation.AutoEscape;
 import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
@@ -60,10 +61,12 @@ public interface PortletPreferencesModel extends BaseModel<PortletPreferences> {
 
 	public void setPlid(long plid);
 
+	@AutoEscape
 	public String getPortletId();
 
 	public void setPortletId(String portletId);
 
+	@AutoEscape
 	public String getPreferences();
 
 	public void setPreferences(String preferences);

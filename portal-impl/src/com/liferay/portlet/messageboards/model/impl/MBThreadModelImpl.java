@@ -14,11 +14,10 @@
 
 package com.liferay.portlet.messageboards.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.impl.BaseModelImpl;
@@ -270,30 +269,8 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread> {
 			return (MBThread)this;
 		}
 		else {
-			MBThread model = new MBThreadImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setThreadId(getThreadId());
-			model.setGroupId(getGroupId());
-			model.setCategoryId(getCategoryId());
-			model.setRootMessageId(getRootMessageId());
-			model.setMessageCount(getMessageCount());
-			model.setViewCount(getViewCount());
-			model.setLastPostByUserId(getLastPostByUserId());
-			model.setLastPostDate(getLastPostDate());
-			model.setPriority(getPriority());
-			model.setStatus(getStatus());
-			model.setStatusByUserId(getStatusByUserId());
-			model.setStatusByUserName(HtmlUtil.escape(getStatusByUserName()));
-			model.setStatusDate(getStatusDate());
-
-			model = (MBThread)Proxy.newProxyInstance(MBThread.class.getClassLoader(),
-					new Class[] { MBThread.class },
-					new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (MBThread)Proxy.newProxyInstance(MBThread.class.getClassLoader(),
+				new Class[] { MBThread.class }, new AutoEscapeBeanHandler(this));
 		}
 	}
 

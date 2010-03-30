@@ -14,9 +14,8 @@
 
 package com.liferay.portlet.journal.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.impl.BaseModelImpl;
@@ -268,25 +267,9 @@ public class JournalArticleImageModelImpl extends BaseModelImpl<JournalArticleIm
 			return (JournalArticleImage)this;
 		}
 		else {
-			JournalArticleImage model = new JournalArticleImageImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setArticleImageId(getArticleImageId());
-			model.setGroupId(getGroupId());
-			model.setArticleId(HtmlUtil.escape(getArticleId()));
-			model.setVersion(getVersion());
-			model.setElInstanceId(HtmlUtil.escape(getElInstanceId()));
-			model.setElName(HtmlUtil.escape(getElName()));
-			model.setLanguageId(HtmlUtil.escape(getLanguageId()));
-			model.setTempImage(getTempImage());
-
-			model = (JournalArticleImage)Proxy.newProxyInstance(JournalArticleImage.class.getClassLoader(),
-					new Class[] { JournalArticleImage.class },
-					new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (JournalArticleImage)Proxy.newProxyInstance(JournalArticleImage.class.getClassLoader(),
+				new Class[] { JournalArticleImage.class },
+				new AutoEscapeBeanHandler(this));
 		}
 	}
 

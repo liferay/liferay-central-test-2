@@ -20,7 +20,6 @@ import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.WebKeys;
-import com.liferay.portal.kernel.workflow.StatusConstants;
 import com.liferay.portal.model.PortletPreferencesIds;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
@@ -150,10 +149,7 @@ public class ServiceContextFactory {
 
 		// Workflow
 
-		serviceContext.setStartWorkflow(true);
-
-		int status = ParamUtil.getInteger(
-			portletRequest, "status", StatusConstants.APPROVED);
+		int status = ParamUtil.getInteger(portletRequest, "status");
 
 		serviceContext.setStatus(status);
 

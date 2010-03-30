@@ -14,6 +14,7 @@
 
 package com.liferay.portal.model;
 
+import com.liferay.portal.kernel.annotation.AutoEscape;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.ServiceContext;
 
@@ -63,6 +64,7 @@ public interface EmailAddressModel extends BaseModel<EmailAddress> {
 
 	public void setUserUuid(String userUuid);
 
+	@AutoEscape
 	public String getUserName();
 
 	public void setUserName(String userName);
@@ -85,6 +87,7 @@ public interface EmailAddressModel extends BaseModel<EmailAddress> {
 
 	public void setClassPK(long classPK);
 
+	@AutoEscape
 	public String getAddress();
 
 	public void setAddress(String address);

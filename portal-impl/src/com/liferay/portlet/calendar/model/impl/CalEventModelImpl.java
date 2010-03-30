@@ -14,11 +14,10 @@
 
 package com.liferay.portlet.calendar.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.impl.BaseModelImpl;
@@ -405,39 +404,8 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent> {
 			return (CalEvent)this;
 		}
 		else {
-			CalEvent model = new CalEventImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setUuid(HtmlUtil.escape(getUuid()));
-			model.setEventId(getEventId());
-			model.setGroupId(getGroupId());
-			model.setCompanyId(getCompanyId());
-			model.setUserId(getUserId());
-			model.setUserName(HtmlUtil.escape(getUserName()));
-			model.setCreateDate(getCreateDate());
-			model.setModifiedDate(getModifiedDate());
-			model.setTitle(HtmlUtil.escape(getTitle()));
-			model.setDescription(HtmlUtil.escape(getDescription()));
-			model.setStartDate(getStartDate());
-			model.setEndDate(getEndDate());
-			model.setDurationHour(getDurationHour());
-			model.setDurationMinute(getDurationMinute());
-			model.setAllDay(getAllDay());
-			model.setTimeZoneSensitive(getTimeZoneSensitive());
-			model.setType(HtmlUtil.escape(getType()));
-			model.setRepeating(getRepeating());
-			model.setRecurrence(getRecurrence());
-			model.setRemindBy(getRemindBy());
-			model.setFirstReminder(getFirstReminder());
-			model.setSecondReminder(getSecondReminder());
-
-			model = (CalEvent)Proxy.newProxyInstance(CalEvent.class.getClassLoader(),
-					new Class[] { CalEvent.class },
-					new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (CalEvent)Proxy.newProxyInstance(CalEvent.class.getClassLoader(),
+				new Class[] { CalEvent.class }, new AutoEscapeBeanHandler(this));
 		}
 	}
 

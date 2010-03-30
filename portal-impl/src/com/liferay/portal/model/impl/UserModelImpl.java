@@ -14,10 +14,9 @@
 
 package com.liferay.portal.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.User;
@@ -712,54 +711,8 @@ public class UserModelImpl extends BaseModelImpl<User> {
 			return (User)this;
 		}
 		else {
-			User model = new UserImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setUuid(HtmlUtil.escape(getUuid()));
-			model.setUserId(getUserId());
-			model.setCompanyId(getCompanyId());
-			model.setCreateDate(getCreateDate());
-			model.setModifiedDate(getModifiedDate());
-			model.setDefaultUser(getDefaultUser());
-			model.setContactId(getContactId());
-			model.setPassword(HtmlUtil.escape(getPassword()));
-			model.setPasswordEncrypted(getPasswordEncrypted());
-			model.setPasswordReset(getPasswordReset());
-			model.setPasswordModifiedDate(getPasswordModifiedDate());
-			model.setReminderQueryQuestion(HtmlUtil.escape(
-					getReminderQueryQuestion()));
-			model.setReminderQueryAnswer(HtmlUtil.escape(
-					getReminderQueryAnswer()));
-			model.setGraceLoginCount(getGraceLoginCount());
-			model.setScreenName(HtmlUtil.escape(getScreenName()));
-			model.setEmailAddress(HtmlUtil.escape(getEmailAddress()));
-			model.setOpenId(HtmlUtil.escape(getOpenId()));
-			model.setPortraitId(getPortraitId());
-			model.setLanguageId(HtmlUtil.escape(getLanguageId()));
-			model.setTimeZoneId(HtmlUtil.escape(getTimeZoneId()));
-			model.setGreeting(HtmlUtil.escape(getGreeting()));
-			model.setComments(HtmlUtil.escape(getComments()));
-			model.setFirstName(HtmlUtil.escape(getFirstName()));
-			model.setMiddleName(HtmlUtil.escape(getMiddleName()));
-			model.setLastName(HtmlUtil.escape(getLastName()));
-			model.setJobTitle(HtmlUtil.escape(getJobTitle()));
-			model.setLoginDate(getLoginDate());
-			model.setLoginIP(HtmlUtil.escape(getLoginIP()));
-			model.setLastLoginDate(getLastLoginDate());
-			model.setLastLoginIP(HtmlUtil.escape(getLastLoginIP()));
-			model.setLastFailedLoginDate(getLastFailedLoginDate());
-			model.setFailedLoginAttempts(getFailedLoginAttempts());
-			model.setLockout(getLockout());
-			model.setLockoutDate(getLockoutDate());
-			model.setAgreedToTermsOfUse(getAgreedToTermsOfUse());
-			model.setActive(getActive());
-
-			model = (User)Proxy.newProxyInstance(User.class.getClassLoader(),
-					new Class[] { User.class }, new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (User)Proxy.newProxyInstance(User.class.getClassLoader(),
+				new Class[] { User.class }, new AutoEscapeBeanHandler(this));
 		}
 	}
 

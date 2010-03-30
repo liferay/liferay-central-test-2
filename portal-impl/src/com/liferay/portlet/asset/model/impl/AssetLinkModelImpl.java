@@ -14,10 +14,9 @@
 
 package com.liferay.portlet.asset.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.impl.BaseModelImpl;
@@ -219,26 +218,8 @@ public class AssetLinkModelImpl extends BaseModelImpl<AssetLink> {
 			return (AssetLink)this;
 		}
 		else {
-			AssetLink model = new AssetLinkImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setLinkId(getLinkId());
-			model.setCompanyId(getCompanyId());
-			model.setUserId(getUserId());
-			model.setUserName(HtmlUtil.escape(getUserName()));
-			model.setCreateDate(getCreateDate());
-			model.setEntryId1(getEntryId1());
-			model.setEntryId2(getEntryId2());
-			model.setType(getType());
-			model.setWeight(getWeight());
-
-			model = (AssetLink)Proxy.newProxyInstance(AssetLink.class.getClassLoader(),
-					new Class[] { AssetLink.class },
-					new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (AssetLink)Proxy.newProxyInstance(AssetLink.class.getClassLoader(),
+				new Class[] { AssetLink.class }, new AutoEscapeBeanHandler(this));
 		}
 	}
 

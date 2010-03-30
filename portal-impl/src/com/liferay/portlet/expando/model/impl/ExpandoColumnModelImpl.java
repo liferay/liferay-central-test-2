@@ -14,9 +14,8 @@
 
 package com.liferay.portlet.expando.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.impl.BaseModelImpl;
@@ -213,24 +212,9 @@ public class ExpandoColumnModelImpl extends BaseModelImpl<ExpandoColumn> {
 			return (ExpandoColumn)this;
 		}
 		else {
-			ExpandoColumn model = new ExpandoColumnImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setColumnId(getColumnId());
-			model.setCompanyId(getCompanyId());
-			model.setTableId(getTableId());
-			model.setName(HtmlUtil.escape(getName()));
-			model.setType(getType());
-			model.setDefaultData(HtmlUtil.escape(getDefaultData()));
-			model.setTypeSettings(HtmlUtil.escape(getTypeSettings()));
-
-			model = (ExpandoColumn)Proxy.newProxyInstance(ExpandoColumn.class.getClassLoader(),
-					new Class[] { ExpandoColumn.class },
-					new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (ExpandoColumn)Proxy.newProxyInstance(ExpandoColumn.class.getClassLoader(),
+				new Class[] { ExpandoColumn.class },
+				new AutoEscapeBeanHandler(this));
 		}
 	}
 

@@ -14,10 +14,9 @@
 
 package com.liferay.portlet.ratings.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.impl.BaseModelImpl;
@@ -255,26 +254,9 @@ public class RatingsEntryModelImpl extends BaseModelImpl<RatingsEntry> {
 			return (RatingsEntry)this;
 		}
 		else {
-			RatingsEntry model = new RatingsEntryImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setEntryId(getEntryId());
-			model.setCompanyId(getCompanyId());
-			model.setUserId(getUserId());
-			model.setUserName(HtmlUtil.escape(getUserName()));
-			model.setCreateDate(getCreateDate());
-			model.setModifiedDate(getModifiedDate());
-			model.setClassNameId(getClassNameId());
-			model.setClassPK(getClassPK());
-			model.setScore(getScore());
-
-			model = (RatingsEntry)Proxy.newProxyInstance(RatingsEntry.class.getClassLoader(),
-					new Class[] { RatingsEntry.class },
-					new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (RatingsEntry)Proxy.newProxyInstance(RatingsEntry.class.getClassLoader(),
+				new Class[] { RatingsEntry.class },
+				new AutoEscapeBeanHandler(this));
 		}
 	}
 

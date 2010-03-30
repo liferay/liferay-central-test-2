@@ -58,7 +58,7 @@ String discountType = BeanParamUtil.getString(coupon, request, "discountType");
 	<portlet:param name="struts_action" value="/shopping/edit_coupon" />
 </portlet:actionURL>
 
-<aui:form action="<%= editCouponURL %>" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "saveCoupon(); return false;" %>'>
+<aui:form action="<%= editCouponURL %>" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveCoupon();" %>'>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 	<aui:input name="couponId" type="hidden" value="<%= couponId %>" />

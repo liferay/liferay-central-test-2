@@ -14,6 +14,8 @@
 
 package com.liferay.portlet.asset.model;
 
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 
@@ -26,8 +28,9 @@ import javax.portlet.PortletURL;
  */
 public abstract class BaseAssetRendererFactory implements AssetRendererFactory {
 
+	@SuppressWarnings("unused")
 	public AssetRenderer getAssetRenderer(long groupId, String urlTitle)
-		throws Exception {
+		throws PortalException, SystemException {
 
 		return null;
 	}
@@ -41,9 +44,8 @@ public abstract class BaseAssetRendererFactory implements AssetRendererFactory {
 	}
 
 	public PortletURL getURLAdd(
-			LiferayPortletRequest liferayPortletRequest,
-			LiferayPortletResponse liferayPortletResponse)
-		throws Exception {
+		LiferayPortletRequest liferayPortletRequest,
+		LiferayPortletResponse liferayPortletResponse) {
 
 		return null;
 	}

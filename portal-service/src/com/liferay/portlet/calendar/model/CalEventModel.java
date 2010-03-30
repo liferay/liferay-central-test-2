@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.calendar.model;
 
+import com.liferay.portal.kernel.annotation.AutoEscape;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.service.ServiceContext;
@@ -48,6 +49,7 @@ public interface CalEventModel extends BaseModel<CalEvent> {
 
 	public void setPrimaryKey(long pk);
 
+	@AutoEscape
 	public String getUuid();
 
 	public void setUuid(String uuid);
@@ -72,6 +74,7 @@ public interface CalEventModel extends BaseModel<CalEvent> {
 
 	public void setUserUuid(String userUuid);
 
+	@AutoEscape
 	public String getUserName();
 
 	public void setUserName(String userName);
@@ -84,10 +87,12 @@ public interface CalEventModel extends BaseModel<CalEvent> {
 
 	public void setModifiedDate(Date modifiedDate);
 
+	@AutoEscape
 	public String getTitle();
 
 	public void setTitle(String title);
 
+	@AutoEscape
 	public String getDescription();
 
 	public void setDescription(String description);
@@ -120,6 +125,7 @@ public interface CalEventModel extends BaseModel<CalEvent> {
 
 	public void setTimeZoneSensitive(boolean timeZoneSensitive);
 
+	@AutoEscape
 	public String getType();
 
 	public void setType(String type);

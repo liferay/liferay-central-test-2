@@ -3,6 +3,8 @@ AUI().add(
 	function(A) {
 		var Lang = A.Lang;
 
+		var EMPTY_FN = Lang.emptyFn;
+
 		var	getClassName = A.ClassNameManager.getClassName;
 
 		var NAME = 'categoriesselector';
@@ -104,11 +106,9 @@ AUI().add(
 					);
 				},
 
-				_afterTBLFocusedChange: function() {
-				},
+				_afterTBLFocusedChange: EMPTY_FN,
 
-				_bindTagsSelector: function() {
-				},
+				_bindTagsSelector: EMPTY_FN,
 
 				_entriesIterator: function(item, index, collection) {
 					var instance = this;
@@ -159,6 +159,8 @@ AUI().add(
 						callback
 					);
 				},
+
+				_onBoundingBoxClick: EMPTY_FN,
 
 				_onCheckboxClick: function(event) {
 					var instance = this;

@@ -14,11 +14,10 @@
 
 package com.liferay.portlet.tasks.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.impl.BaseModelImpl;
@@ -302,30 +301,9 @@ public class TasksReviewModelImpl extends BaseModelImpl<TasksReview> {
 			return (TasksReview)this;
 		}
 		else {
-			TasksReview model = new TasksReviewImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setReviewId(getReviewId());
-			model.setGroupId(getGroupId());
-			model.setCompanyId(getCompanyId());
-			model.setUserId(getUserId());
-			model.setUserName(HtmlUtil.escape(getUserName()));
-			model.setCreateDate(getCreateDate());
-			model.setModifiedDate(getModifiedDate());
-			model.setProposalId(getProposalId());
-			model.setAssignedByUserId(getAssignedByUserId());
-			model.setAssignedByUserName(HtmlUtil.escape(getAssignedByUserName()));
-			model.setStage(getStage());
-			model.setCompleted(getCompleted());
-			model.setRejected(getRejected());
-
-			model = (TasksReview)Proxy.newProxyInstance(TasksReview.class.getClassLoader(),
-					new Class[] { TasksReview.class },
-					new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (TasksReview)Proxy.newProxyInstance(TasksReview.class.getClassLoader(),
+				new Class[] { TasksReview.class },
+				new AutoEscapeBeanHandler(this));
 		}
 	}
 

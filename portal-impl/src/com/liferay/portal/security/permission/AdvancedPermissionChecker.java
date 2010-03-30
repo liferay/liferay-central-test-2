@@ -198,6 +198,8 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 					primKey, getOwnerRoleId(), actionId);
 			}
 			else {
+				ResourceActionsUtil.checkAction(name, actionId);
+
 				Resource resource = ResourceLocalServiceUtil.getResource(
 					companyId, name, ResourceConstants.SCOPE_INDIVIDUAL,
 					primKey);
@@ -501,6 +503,8 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 			long groupId, String name, String primKey, String actionId)
 		throws Exception {
 
+		ResourceActionsUtil.checkAction(name, actionId);
+
 		if (name.indexOf(StringPool.PERIOD) != -1) {
 
 			// Check unsupported model actions
@@ -630,6 +634,9 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 			hasLayoutManagerPermission =
 				PortletPermissionUtil.hasLayoutManagerPermission(
 					name, actionId);
+		}
+		else {
+			hasLayoutManagerPermission = false;
 		}
 
 		if (checkAdmin &&

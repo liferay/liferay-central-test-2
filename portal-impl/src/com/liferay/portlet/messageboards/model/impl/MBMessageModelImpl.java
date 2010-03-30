@@ -14,11 +14,10 @@
 
 package com.liferay.portlet.messageboards.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.impl.BaseModelImpl;
@@ -427,40 +426,8 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage> {
 			return (MBMessage)this;
 		}
 		else {
-			MBMessage model = new MBMessageImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setUuid(HtmlUtil.escape(getUuid()));
-			model.setMessageId(getMessageId());
-			model.setGroupId(getGroupId());
-			model.setCompanyId(getCompanyId());
-			model.setUserId(getUserId());
-			model.setUserName(HtmlUtil.escape(getUserName()));
-			model.setCreateDate(getCreateDate());
-			model.setModifiedDate(getModifiedDate());
-			model.setClassNameId(getClassNameId());
-			model.setClassPK(getClassPK());
-			model.setCategoryId(getCategoryId());
-			model.setThreadId(getThreadId());
-			model.setParentMessageId(getParentMessageId());
-			model.setSubject(HtmlUtil.escape(getSubject()));
-			model.setBody(HtmlUtil.escape(getBody()));
-			model.setAttachments(getAttachments());
-			model.setAnonymous(getAnonymous());
-			model.setPriority(getPriority());
-			model.setAllowPingbacks(getAllowPingbacks());
-			model.setStatus(getStatus());
-			model.setStatusByUserId(getStatusByUserId());
-			model.setStatusByUserName(HtmlUtil.escape(getStatusByUserName()));
-			model.setStatusDate(getStatusDate());
-
-			model = (MBMessage)Proxy.newProxyInstance(MBMessage.class.getClassLoader(),
-					new Class[] { MBMessage.class },
-					new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (MBMessage)Proxy.newProxyInstance(MBMessage.class.getClassLoader(),
+				new Class[] { MBMessage.class }, new AutoEscapeBeanHandler(this));
 		}
 	}
 

@@ -318,13 +318,13 @@ public class BlogsEntryLocalServiceWrapper implements BlogsEntryLocalService {
 			communityPermissions, guestPermissions);
 	}
 
-	public com.liferay.portlet.blogs.model.BlogsEntry updateWorkflowStatus(
+	public com.liferay.portlet.blogs.model.BlogsEntry updateStatus(
 		long userId, long entryId, java.lang.String[] trackbacks,
 		boolean pingOldTrackbaks,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _blogsEntryLocalService.updateWorkflowStatus(userId, entryId,
+		return _blogsEntryLocalService.updateStatus(userId, entryId,
 			trackbacks, pingOldTrackbaks, serviceContext);
 	}
 

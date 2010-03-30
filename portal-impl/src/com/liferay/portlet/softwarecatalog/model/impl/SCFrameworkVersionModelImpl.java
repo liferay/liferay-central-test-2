@@ -14,10 +14,9 @@
 
 package com.liferay.portlet.softwarecatalog.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.impl.BaseModelImpl;
@@ -267,28 +266,9 @@ public class SCFrameworkVersionModelImpl extends BaseModelImpl<SCFrameworkVersio
 			return (SCFrameworkVersion)this;
 		}
 		else {
-			SCFrameworkVersion model = new SCFrameworkVersionImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setFrameworkVersionId(getFrameworkVersionId());
-			model.setGroupId(getGroupId());
-			model.setCompanyId(getCompanyId());
-			model.setUserId(getUserId());
-			model.setUserName(HtmlUtil.escape(getUserName()));
-			model.setCreateDate(getCreateDate());
-			model.setModifiedDate(getModifiedDate());
-			model.setName(HtmlUtil.escape(getName()));
-			model.setUrl(HtmlUtil.escape(getUrl()));
-			model.setActive(getActive());
-			model.setPriority(getPriority());
-
-			model = (SCFrameworkVersion)Proxy.newProxyInstance(SCFrameworkVersion.class.getClassLoader(),
-					new Class[] { SCFrameworkVersion.class },
-					new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (SCFrameworkVersion)Proxy.newProxyInstance(SCFrameworkVersion.class.getClassLoader(),
+				new Class[] { SCFrameworkVersion.class },
+				new AutoEscapeBeanHandler(this));
 		}
 	}
 

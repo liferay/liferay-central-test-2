@@ -14,7 +14,7 @@
 
 package com.liferay.portal.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
@@ -354,25 +354,8 @@ public class RoleModelImpl extends BaseModelImpl<Role> {
 			return (Role)this;
 		}
 		else {
-			Role model = new RoleImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setRoleId(getRoleId());
-			model.setCompanyId(getCompanyId());
-			model.setClassNameId(getClassNameId());
-			model.setClassPK(getClassPK());
-			model.setName(HtmlUtil.escape(getName()));
-			model.setTitle(getTitle());
-			model.setDescription(HtmlUtil.escape(getDescription()));
-			model.setType(getType());
-			model.setSubtype(HtmlUtil.escape(getSubtype()));
-
-			model = (Role)Proxy.newProxyInstance(Role.class.getClassLoader(),
-					new Class[] { Role.class }, new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (Role)Proxy.newProxyInstance(Role.class.getClassLoader(),
+				new Class[] { Role.class }, new AutoEscapeBeanHandler(this));
 		}
 	}
 

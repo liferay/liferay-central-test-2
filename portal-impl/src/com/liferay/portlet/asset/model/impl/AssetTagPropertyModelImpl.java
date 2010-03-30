@@ -14,10 +14,9 @@
 
 package com.liferay.portlet.asset.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.impl.BaseModelImpl;
@@ -248,26 +247,9 @@ public class AssetTagPropertyModelImpl extends BaseModelImpl<AssetTagProperty> {
 			return (AssetTagProperty)this;
 		}
 		else {
-			AssetTagProperty model = new AssetTagPropertyImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setTagPropertyId(getTagPropertyId());
-			model.setCompanyId(getCompanyId());
-			model.setUserId(getUserId());
-			model.setUserName(HtmlUtil.escape(getUserName()));
-			model.setCreateDate(getCreateDate());
-			model.setModifiedDate(getModifiedDate());
-			model.setTagId(getTagId());
-			model.setKey(HtmlUtil.escape(getKey()));
-			model.setValue(HtmlUtil.escape(getValue()));
-
-			model = (AssetTagProperty)Proxy.newProxyInstance(AssetTagProperty.class.getClassLoader(),
-					new Class[] { AssetTagProperty.class },
-					new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (AssetTagProperty)Proxy.newProxyInstance(AssetTagProperty.class.getClassLoader(),
+				new Class[] { AssetTagProperty.class },
+				new AutoEscapeBeanHandler(this));
 		}
 	}
 

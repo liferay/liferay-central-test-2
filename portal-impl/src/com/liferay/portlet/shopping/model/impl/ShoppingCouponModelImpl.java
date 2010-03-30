@@ -14,11 +14,10 @@
 
 package com.liferay.portlet.shopping.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.impl.BaseModelImpl;
@@ -352,35 +351,9 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon> {
 			return (ShoppingCoupon)this;
 		}
 		else {
-			ShoppingCoupon model = new ShoppingCouponImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setCouponId(getCouponId());
-			model.setGroupId(getGroupId());
-			model.setCompanyId(getCompanyId());
-			model.setUserId(getUserId());
-			model.setUserName(HtmlUtil.escape(getUserName()));
-			model.setCreateDate(getCreateDate());
-			model.setModifiedDate(getModifiedDate());
-			model.setCode(HtmlUtil.escape(getCode()));
-			model.setName(HtmlUtil.escape(getName()));
-			model.setDescription(HtmlUtil.escape(getDescription()));
-			model.setStartDate(getStartDate());
-			model.setEndDate(getEndDate());
-			model.setActive(getActive());
-			model.setLimitCategories(HtmlUtil.escape(getLimitCategories()));
-			model.setLimitSkus(HtmlUtil.escape(getLimitSkus()));
-			model.setMinOrder(getMinOrder());
-			model.setDiscount(getDiscount());
-			model.setDiscountType(HtmlUtil.escape(getDiscountType()));
-
-			model = (ShoppingCoupon)Proxy.newProxyInstance(ShoppingCoupon.class.getClassLoader(),
-					new Class[] { ShoppingCoupon.class },
-					new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (ShoppingCoupon)Proxy.newProxyInstance(ShoppingCoupon.class.getClassLoader(),
+				new Class[] { ShoppingCoupon.class },
+				new AutoEscapeBeanHandler(this));
 		}
 	}
 

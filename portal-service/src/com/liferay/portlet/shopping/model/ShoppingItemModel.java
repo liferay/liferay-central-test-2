@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.shopping.model;
 
+import com.liferay.portal.kernel.annotation.AutoEscape;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.service.ServiceContext;
@@ -68,6 +69,7 @@ public interface ShoppingItemModel extends BaseModel<ShoppingItem> {
 
 	public void setUserUuid(String userUuid);
 
+	@AutoEscape
 	public String getUserName();
 
 	public void setUserName(String userName);
@@ -84,18 +86,22 @@ public interface ShoppingItemModel extends BaseModel<ShoppingItem> {
 
 	public void setCategoryId(long categoryId);
 
+	@AutoEscape
 	public String getSku();
 
 	public void setSku(String sku);
 
+	@AutoEscape
 	public String getName();
 
 	public void setName(String name);
 
+	@AutoEscape
 	public String getDescription();
 
 	public void setDescription(String description);
 
+	@AutoEscape
 	public String getProperties();
 
 	public void setProperties(String properties);
@@ -106,6 +112,7 @@ public interface ShoppingItemModel extends BaseModel<ShoppingItem> {
 
 	public void setFields(boolean fields);
 
+	@AutoEscape
 	public String getFieldsQuantities();
 
 	public void setFieldsQuantities(String fieldsQuantities);
@@ -174,6 +181,7 @@ public interface ShoppingItemModel extends BaseModel<ShoppingItem> {
 
 	public void setSmallImageId(long smallImageId);
 
+	@AutoEscape
 	public String getSmallImageURL();
 
 	public void setSmallImageURL(String smallImageURL);
@@ -188,6 +196,7 @@ public interface ShoppingItemModel extends BaseModel<ShoppingItem> {
 
 	public void setMediumImageId(long mediumImageId);
 
+	@AutoEscape
 	public String getMediumImageURL();
 
 	public void setMediumImageURL(String mediumImageURL);
@@ -202,6 +211,7 @@ public interface ShoppingItemModel extends BaseModel<ShoppingItem> {
 
 	public void setLargeImageId(long largeImageId);
 
+	@AutoEscape
 	public String getLargeImageURL();
 
 	public void setLargeImageURL(String largeImageURL);

@@ -14,6 +14,7 @@
 
 package com.liferay.portal.model;
 
+import com.liferay.portal.kernel.annotation.AutoEscape;
 import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
@@ -64,6 +65,7 @@ public interface OrganizationModel extends BaseModel<Organization> {
 
 	public void setRightOrganizationId(long rightOrganizationId);
 
+	@AutoEscape
 	public String getName();
 
 	public void setName(String name);
@@ -90,6 +92,7 @@ public interface OrganizationModel extends BaseModel<Organization> {
 
 	public void setStatusId(int statusId);
 
+	@AutoEscape
 	public String getComments();
 
 	public void setComments(String comments);

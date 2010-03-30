@@ -14,11 +14,10 @@
 
 package com.liferay.portal.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Phone;
@@ -271,28 +270,8 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> {
 			return (Phone)this;
 		}
 		else {
-			Phone model = new PhoneImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setPhoneId(getPhoneId());
-			model.setCompanyId(getCompanyId());
-			model.setUserId(getUserId());
-			model.setUserName(HtmlUtil.escape(getUserName()));
-			model.setCreateDate(getCreateDate());
-			model.setModifiedDate(getModifiedDate());
-			model.setClassNameId(getClassNameId());
-			model.setClassPK(getClassPK());
-			model.setNumber(HtmlUtil.escape(getNumber()));
-			model.setExtension(HtmlUtil.escape(getExtension()));
-			model.setTypeId(getTypeId());
-			model.setPrimary(getPrimary());
-
-			model = (Phone)Proxy.newProxyInstance(Phone.class.getClassLoader(),
-					new Class[] { Phone.class }, new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (Phone)Proxy.newProxyInstance(Phone.class.getClassLoader(),
+				new Class[] { Phone.class }, new AutoEscapeBeanHandler(this));
 		}
 	}
 

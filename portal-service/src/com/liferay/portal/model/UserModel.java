@@ -14,6 +14,7 @@
 
 package com.liferay.portal.model;
 
+import com.liferay.portal.kernel.annotation.AutoEscape;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.ServiceContext;
 
@@ -47,6 +48,7 @@ public interface UserModel extends BaseModel<User> {
 
 	public void setPrimaryKey(long pk);
 
+	@AutoEscape
 	public String getUuid();
 
 	public void setUuid(String uuid);
@@ -81,6 +83,7 @@ public interface UserModel extends BaseModel<User> {
 
 	public void setContactId(long contactId);
 
+	@AutoEscape
 	public String getPassword();
 
 	public void setPassword(String password);
@@ -101,10 +104,12 @@ public interface UserModel extends BaseModel<User> {
 
 	public void setPasswordModifiedDate(Date passwordModifiedDate);
 
+	@AutoEscape
 	public String getReminderQueryQuestion();
 
 	public void setReminderQueryQuestion(String reminderQueryQuestion);
 
+	@AutoEscape
 	public String getReminderQueryAnswer();
 
 	public void setReminderQueryAnswer(String reminderQueryAnswer);
@@ -113,14 +118,17 @@ public interface UserModel extends BaseModel<User> {
 
 	public void setGraceLoginCount(int graceLoginCount);
 
+	@AutoEscape
 	public String getScreenName();
 
 	public void setScreenName(String screenName);
 
+	@AutoEscape
 	public String getEmailAddress();
 
 	public void setEmailAddress(String emailAddress);
 
+	@AutoEscape
 	public String getOpenId();
 
 	public void setOpenId(String openId);
@@ -129,34 +137,42 @@ public interface UserModel extends BaseModel<User> {
 
 	public void setPortraitId(long portraitId);
 
+	@AutoEscape
 	public String getLanguageId();
 
 	public void setLanguageId(String languageId);
 
+	@AutoEscape
 	public String getTimeZoneId();
 
 	public void setTimeZoneId(String timeZoneId);
 
+	@AutoEscape
 	public String getGreeting();
 
 	public void setGreeting(String greeting);
 
+	@AutoEscape
 	public String getComments();
 
 	public void setComments(String comments);
 
+	@AutoEscape
 	public String getFirstName();
 
 	public void setFirstName(String firstName);
 
+	@AutoEscape
 	public String getMiddleName();
 
 	public void setMiddleName(String middleName);
 
+	@AutoEscape
 	public String getLastName();
 
 	public void setLastName(String lastName);
 
+	@AutoEscape
 	public String getJobTitle();
 
 	public void setJobTitle(String jobTitle);
@@ -165,6 +181,7 @@ public interface UserModel extends BaseModel<User> {
 
 	public void setLoginDate(Date loginDate);
 
+	@AutoEscape
 	public String getLoginIP();
 
 	public void setLoginIP(String loginIP);
@@ -173,6 +190,7 @@ public interface UserModel extends BaseModel<User> {
 
 	public void setLastLoginDate(Date lastLoginDate);
 
+	@AutoEscape
 	public String getLastLoginIP();
 
 	public void setLastLoginIP(String lastLoginIP);

@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.social.model;
 
+import com.liferay.portal.kernel.annotation.AutoEscape;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.service.ServiceContext;
@@ -88,6 +89,7 @@ public interface SocialActivityModel extends BaseModel<SocialActivity> {
 
 	public void setType(int type);
 
+	@AutoEscape
 	public String getExtraData();
 
 	public void setExtraData(String extraData);

@@ -14,10 +14,9 @@
 
 package com.liferay.portal.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.UserTracker;
@@ -221,25 +220,9 @@ public class UserTrackerModelImpl extends BaseModelImpl<UserTracker> {
 			return (UserTracker)this;
 		}
 		else {
-			UserTracker model = new UserTrackerImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setUserTrackerId(getUserTrackerId());
-			model.setCompanyId(getCompanyId());
-			model.setUserId(getUserId());
-			model.setModifiedDate(getModifiedDate());
-			model.setSessionId(HtmlUtil.escape(getSessionId()));
-			model.setRemoteAddr(HtmlUtil.escape(getRemoteAddr()));
-			model.setRemoteHost(HtmlUtil.escape(getRemoteHost()));
-			model.setUserAgent(HtmlUtil.escape(getUserAgent()));
-
-			model = (UserTracker)Proxy.newProxyInstance(UserTracker.class.getClassLoader(),
-					new Class[] { UserTracker.class },
-					new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (UserTracker)Proxy.newProxyInstance(UserTracker.class.getClassLoader(),
+				new Class[] { UserTracker.class },
+				new AutoEscapeBeanHandler(this));
 		}
 	}
 

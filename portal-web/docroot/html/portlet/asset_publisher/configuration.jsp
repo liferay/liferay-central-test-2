@@ -52,6 +52,8 @@ AssetRendererFactory rendererFactory = AssetRendererFactoryRegistryUtil.getAsset
 	.aui-form .lfr-form-row .aui-field.tags-selector, .aui-form .lfr-form-row .aui-field.categories-selector{
 		clear: both;
 		line-height: 1.5;
+		margin-top: 5px;
+		width: 100%;
 	}
 
 	.lfr-panel .lfr-panel-titlebar {

@@ -14,11 +14,10 @@
 
 package com.liferay.portlet.softwarecatalog.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.impl.BaseModelImpl;
@@ -354,33 +353,9 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry> {
 			return (SCProductEntry)this;
 		}
 		else {
-			SCProductEntry model = new SCProductEntryImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setProductEntryId(getProductEntryId());
-			model.setGroupId(getGroupId());
-			model.setCompanyId(getCompanyId());
-			model.setUserId(getUserId());
-			model.setUserName(HtmlUtil.escape(getUserName()));
-			model.setCreateDate(getCreateDate());
-			model.setModifiedDate(getModifiedDate());
-			model.setName(HtmlUtil.escape(getName()));
-			model.setType(HtmlUtil.escape(getType()));
-			model.setTags(HtmlUtil.escape(getTags()));
-			model.setShortDescription(HtmlUtil.escape(getShortDescription()));
-			model.setLongDescription(HtmlUtil.escape(getLongDescription()));
-			model.setPageURL(HtmlUtil.escape(getPageURL()));
-			model.setAuthor(HtmlUtil.escape(getAuthor()));
-			model.setRepoGroupId(HtmlUtil.escape(getRepoGroupId()));
-			model.setRepoArtifactId(HtmlUtil.escape(getRepoArtifactId()));
-
-			model = (SCProductEntry)Proxy.newProxyInstance(SCProductEntry.class.getClassLoader(),
-					new Class[] { SCProductEntry.class },
-					new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (SCProductEntry)Proxy.newProxyInstance(SCProductEntry.class.getClassLoader(),
+				new Class[] { SCProductEntry.class },
+				new AutoEscapeBeanHandler(this));
 		}
 	}
 

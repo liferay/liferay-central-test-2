@@ -14,7 +14,7 @@
 
 package com.liferay.portlet.ratings.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -199,23 +199,9 @@ public class RatingsStatsModelImpl extends BaseModelImpl<RatingsStats> {
 			return (RatingsStats)this;
 		}
 		else {
-			RatingsStats model = new RatingsStatsImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setStatsId(getStatsId());
-			model.setClassNameId(getClassNameId());
-			model.setClassPK(getClassPK());
-			model.setTotalEntries(getTotalEntries());
-			model.setTotalScore(getTotalScore());
-			model.setAverageScore(getAverageScore());
-
-			model = (RatingsStats)Proxy.newProxyInstance(RatingsStats.class.getClassLoader(),
-					new Class[] { RatingsStats.class },
-					new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (RatingsStats)Proxy.newProxyInstance(RatingsStats.class.getClassLoader(),
+				new Class[] { RatingsStats.class },
+				new AutoEscapeBeanHandler(this));
 		}
 	}
 

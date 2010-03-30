@@ -158,10 +158,18 @@ app.server.glassfish.zip.url=http://download.java.net/glassfish/v3-prelude/relea
 
 		<if>
 			<or>
-				<equals arg1="${shelf.drive}" arg2="$${shelf.drive}" />
-				<equals arg1="${shelf.path}" arg2="$${shelf.path}" />
-				<equals arg1="${shelf.branch}" arg2="$${shelf.branch}" />
-				<equals arg1="${shelf.version}" arg2="$${shelf.version}" />
+				<not>
+					<isset property="shelf.drive" />
+				</not>
+				<not>
+					<isset property="shelf.path" />
+				</not>
+				<not>
+					<isset property="shelf.branch" />
+				</not>
+				<not>
+					<isset property="shelf.version" />
+				</not>
 			</or>
 			<then>
 				<fail>
@@ -372,9 +380,7 @@ app.server.glassfish.zip.url=http://download.java.net/glassfish/v3-prelude/relea
 		<move file="${lp.plugins.dir}/dist/liferay-plugins-sdk-${lp.version}.zip" tofile="dist/liferay-plugins-sdk-${lp.version}.zip" />
 
 		<if>
-			<not>
-				<equals arg1="${dist.username}" arg2="$${dist.username}" />
-			</not>
+			<isset property="dist.username" />
 			<then>
 				<scp todir="${dist.username}:${dist.password}@${dist.host}:/home/${dist.username}" trust="yes">
 					<fileset dir="dist" />

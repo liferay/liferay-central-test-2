@@ -14,9 +14,8 @@
 
 package com.liferay.portal.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Image;
@@ -193,23 +192,8 @@ public class ImageModelImpl extends BaseModelImpl<Image> {
 			return (Image)this;
 		}
 		else {
-			Image model = new ImageImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setImageId(getImageId());
-			model.setModifiedDate(getModifiedDate());
-			model.setText(HtmlUtil.escape(getText()));
-			model.setType(HtmlUtil.escape(getType()));
-			model.setHeight(getHeight());
-			model.setWidth(getWidth());
-			model.setSize(getSize());
-
-			model = (Image)Proxy.newProxyInstance(Image.class.getClassLoader(),
-					new Class[] { Image.class }, new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (Image)Proxy.newProxyInstance(Image.class.getClassLoader(),
+				new Class[] { Image.class }, new AutoEscapeBeanHandler(this));
 		}
 	}
 

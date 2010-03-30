@@ -4,6 +4,7 @@ package ${packagePath}.model;
 	import ${packagePath}.service.persistence.${entity.name}PK;
 </#if>
 
+import com.liferay.portal.kernel.annotation.AutoEscape;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.service.ServiceContext;
@@ -61,9 +62,11 @@ public interface ${entity.name}Model extends BaseModel<${entity.name}> {
 				</#if>
 			</#if>
 		</#if>
+
 		<#if autoEscape && (column.type == "String") && (column.localized == false) >
-			@com.liferay.portal.kernel.annotation.AutoEscape
+			@AutoEscape
 		</#if>
+
 		public ${column.type} get${column.methodName}();
 
         <#if column.localized>

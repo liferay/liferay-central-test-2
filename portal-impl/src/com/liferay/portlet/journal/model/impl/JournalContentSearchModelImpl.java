@@ -14,9 +14,8 @@
 
 package com.liferay.portlet.journal.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.impl.BaseModelImpl;
@@ -243,24 +242,9 @@ public class JournalContentSearchModelImpl extends BaseModelImpl<JournalContentS
 			return (JournalContentSearch)this;
 		}
 		else {
-			JournalContentSearch model = new JournalContentSearchImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setContentSearchId(getContentSearchId());
-			model.setGroupId(getGroupId());
-			model.setCompanyId(getCompanyId());
-			model.setPrivateLayout(getPrivateLayout());
-			model.setLayoutId(getLayoutId());
-			model.setPortletId(HtmlUtil.escape(getPortletId()));
-			model.setArticleId(HtmlUtil.escape(getArticleId()));
-
-			model = (JournalContentSearch)Proxy.newProxyInstance(JournalContentSearch.class.getClassLoader(),
-					new Class[] { JournalContentSearch.class },
-					new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (JournalContentSearch)Proxy.newProxyInstance(JournalContentSearch.class.getClassLoader(),
+				new Class[] { JournalContentSearch.class },
+				new AutoEscapeBeanHandler(this));
 		}
 	}
 

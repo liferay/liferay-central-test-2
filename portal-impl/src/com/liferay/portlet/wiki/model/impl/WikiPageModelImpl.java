@@ -14,10 +14,9 @@
 
 package com.liferay.portlet.wiki.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.impl.BaseModelImpl;
@@ -462,40 +461,8 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage> {
 			return (WikiPage)this;
 		}
 		else {
-			WikiPage model = new WikiPageImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setUuid(HtmlUtil.escape(getUuid()));
-			model.setPageId(getPageId());
-			model.setResourcePrimKey(getResourcePrimKey());
-			model.setGroupId(getGroupId());
-			model.setCompanyId(getCompanyId());
-			model.setUserId(getUserId());
-			model.setUserName(HtmlUtil.escape(getUserName()));
-			model.setCreateDate(getCreateDate());
-			model.setModifiedDate(getModifiedDate());
-			model.setNodeId(getNodeId());
-			model.setTitle(HtmlUtil.escape(getTitle()));
-			model.setVersion(getVersion());
-			model.setMinorEdit(getMinorEdit());
-			model.setContent(HtmlUtil.escape(getContent()));
-			model.setStatus(getStatus());
-			model.setStatusByUserId(getStatusByUserId());
-			model.setStatusByUserName(HtmlUtil.escape(getStatusByUserName()));
-			model.setStatusDate(getStatusDate());
-			model.setSummary(HtmlUtil.escape(getSummary()));
-			model.setFormat(HtmlUtil.escape(getFormat()));
-			model.setHead(getHead());
-			model.setParentTitle(HtmlUtil.escape(getParentTitle()));
-			model.setRedirectTitle(HtmlUtil.escape(getRedirectTitle()));
-
-			model = (WikiPage)Proxy.newProxyInstance(WikiPage.class.getClassLoader(),
-					new Class[] { WikiPage.class },
-					new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (WikiPage)Proxy.newProxyInstance(WikiPage.class.getClassLoader(),
+				new Class[] { WikiPage.class }, new AutoEscapeBeanHandler(this));
 		}
 	}
 

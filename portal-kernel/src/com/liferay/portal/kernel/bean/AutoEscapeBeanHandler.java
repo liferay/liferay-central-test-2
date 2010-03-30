@@ -22,13 +22,13 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 /**
- * <a href="EscapedBeanHandler.java.html"><b><i>View Source</i></b></a>
+ * <a href="AutoEscapeBeanHandler.java.html"><b><i>View Source</i></b></a>
  *
  * @author Shuyang Zhou
  */
-public class EscapedBeanHandler implements InvocationHandler {
+public class AutoEscapeBeanHandler implements InvocationHandler {
 
-	public EscapedBeanHandler(Object bean) {
+	public AutoEscapeBeanHandler(Object bean) {
 		_bean = bean;
 	}
 
@@ -36,9 +36,10 @@ public class EscapedBeanHandler implements InvocationHandler {
 		throws Throwable {
 
 		String methodName = method.getName();
+
 		if (methodName.startsWith("set")) {
 			throw new IllegalAccessException(
-				"Setter methods cannot be called on a escaped bean");
+				"Setter methods cannot be called on an escaped bean");
 		}
 
 		if (methodName.endsWith("isEscapedModel")) {
@@ -46,6 +47,7 @@ public class EscapedBeanHandler implements InvocationHandler {
 		}
 
 		Object result = null;
+
 		try {
 			result = method.invoke(_bean, args);
 		}
@@ -54,7 +56,7 @@ public class EscapedBeanHandler implements InvocationHandler {
 		}
 
 		if (method.getAnnotation(AutoEscape.class) != null) {
-			result = HtmlUtil.escape((String) result);
+			result = HtmlUtil.escape((String)result);
 		}
 
 		return result;

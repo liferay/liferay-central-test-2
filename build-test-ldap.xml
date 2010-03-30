@@ -6,8 +6,12 @@
 	<target name="prepare-ldap-apache">
 		<if>
 			<or>
-				<equals arg1="${apache.directory.win32.dir}" arg2="$${apache.directory.win32.dir}" />
-				<equals arg1="${apache.directory.win32.install}" arg2="$${apache.directory.win32.install}" />
+				<not>
+					<isset property="apache.directory.win32.dir" />
+				</not>
+				<not>
+					<isset property="apache.directory.win32.install" />
+				</not>
 			</or>
 			<then>
 				<fail>

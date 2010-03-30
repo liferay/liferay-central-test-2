@@ -89,6 +89,7 @@ public class LangBuilder {
 				_createProps(content, "gl"); // Galician
 				_createProps(content, "de"); // German
 				_createProps(content, "el"); // Greek
+				_createProps(content, "hi_IN"); // Hindi (India)
 				_createProps(content, "hu"); // Hungarian
 				_createProps(content, "it"); // Italian
 				_createProps(content, "ja"); // Japanese
@@ -96,8 +97,8 @@ public class LangBuilder {
 				_createProps(content, "nb"); // Norwegian Bokmål
 				_createProps(content, "fa"); // Persian
 				_createProps(content, "pl"); // Polish
-				_createProps(content, "pt_BR"); // Brazilian Portuguese
-				_createProps(content, "pt_PT"); // Portuguese
+				_createProps(content, "pt_BR"); // Portuguese (Brazil)
+				_createProps(content, "pt_PT"); // Portuguese (Portugal)
 				_createProps(content, "ru"); // Russian
 				_createProps(content, "sk"); // Slovak
 				_createProps(content, "es"); // Spanish
@@ -146,6 +147,9 @@ public class LangBuilder {
 		}
 		else if (translationId.equals("en_zh_TW")) {
 			translationId = "en_zt";
+		}
+		else if (translationId.equals("en_hi_IN")) {
+			translationId = "en_hi";
 		}
 
 		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
@@ -351,6 +355,7 @@ public class LangBuilder {
 			translationId.equals("en_cs") ||
 			translationId.equals("en_fi") ||
 			translationId.equals("en_gl") ||
+			translationId.equals("en_hi") ||
 			translationId.equals("en_hu") ||
 			translationId.equals("en_nb") ||
 			translationId.equals("en_fa") ||
@@ -363,8 +368,9 @@ public class LangBuilder {
 			translationId.equals("en_et")) {
 
 			// Automatic translator does not support Arabic, Basque, Bulgarian,
-			// Catalan, Czech, Finnish, Galician, Hungarian, Norwegian Bokmål,
-			// Persian, Polish, Russian, Slovak, Swedish, Turkish, or Vietnamese
+			// Catalan, Czech, Finnish, Galician, Hindi, Hungarian,
+			// Norwegian Bokmål,Persian, Polish, Russian, Slovak, Swedish,
+			// Turkish, or Vietnamese
 
 			return null;
 		}

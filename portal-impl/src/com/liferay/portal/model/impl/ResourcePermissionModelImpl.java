@@ -14,9 +14,8 @@
 
 package com.liferay.portal.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.ResourcePermission;
@@ -237,24 +236,9 @@ public class ResourcePermissionModelImpl extends BaseModelImpl<ResourcePermissio
 			return (ResourcePermission)this;
 		}
 		else {
-			ResourcePermission model = new ResourcePermissionImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setResourcePermissionId(getResourcePermissionId());
-			model.setCompanyId(getCompanyId());
-			model.setName(HtmlUtil.escape(getName()));
-			model.setScope(getScope());
-			model.setPrimKey(HtmlUtil.escape(getPrimKey()));
-			model.setRoleId(getRoleId());
-			model.setActionIds(getActionIds());
-
-			model = (ResourcePermission)Proxy.newProxyInstance(ResourcePermission.class.getClassLoader(),
-					new Class[] { ResourcePermission.class },
-					new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (ResourcePermission)Proxy.newProxyInstance(ResourcePermission.class.getClassLoader(),
+				new Class[] { ResourcePermission.class },
+				new AutoEscapeBeanHandler(this));
 		}
 	}
 

@@ -78,7 +78,7 @@ else {
 
 		<aui:model-context bean="<%= emailAddress %>" model="<%= EmailAddress.class %>" />
 
-		<div class="lfr-form-row">
+		<div class="lfr-form-row lfr-form-row-inline">
 			<div class="row-fields">
 				<aui:input name='<%= "emailAddressId" + emailAddressesIndex %>' type="hidden" value="<%= emailAddress.getEmailAddressId() %>" />
 
@@ -86,9 +86,7 @@ else {
 
 				<aui:select label="type" name='<%= "emailAddressTypeId" + emailAddressesIndex %>' listType="<%= className + ListTypeConstants.EMAIL_ADDRESS %>" />
 
-				<aui:field-wrapper cssClass="primary-ctrl">
-					<aui:input checked="<%= emailAddress.isPrimary() %>" id='<%= "emailAddressPrimary" + emailAddressesIndex %>' inlineLabel="left" label="primary" name="emailAddressPrimary" type="radio" value="<%= emailAddressesIndex %>" />
-				</aui:field-wrapper>
+				<aui:input checked="<%= emailAddress.isPrimary() %>" cssClass="primary-ctrl" id='<%= "emailAddressPrimary" + emailAddressesIndex %>' inlineLabel="left" label="primary" name="emailAddressPrimary" type="radio" value="<%= emailAddressesIndex %>" />
 			</div>
 		</div>
 

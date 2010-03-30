@@ -157,7 +157,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		// Status
 
-		entry = updateWorkflowStatus(
+		entry = updateStatus(
 			userId, entryId, trackbacks, false, serviceContext);
 
 		return entry;
@@ -513,7 +513,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			pingOldTrackbacks = true;
 		}
 
-		entry = updateWorkflowStatus(
+		entry = updateStatus(
 			userId, entryId, trackbacks, pingOldTrackbacks, serviceContext);
 
 		return entry;
@@ -530,7 +530,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			communityPermissions, guestPermissions);
 	}
 
-	public BlogsEntry updateWorkflowStatus(
+	public BlogsEntry updateStatus(
 			long userId, long entryId, String[] trackbacks,
 			boolean pingOldTrackbaks, ServiceContext serviceContext)
 		throws PortalException, SystemException {

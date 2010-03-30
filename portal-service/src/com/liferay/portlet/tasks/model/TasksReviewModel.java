@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.tasks.model;
 
+import com.liferay.portal.kernel.annotation.AutoEscape;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.service.ServiceContext;
@@ -68,6 +69,7 @@ public interface TasksReviewModel extends BaseModel<TasksReview> {
 
 	public void setUserUuid(String userUuid);
 
+	@AutoEscape
 	public String getUserName();
 
 	public void setUserName(String userName);
@@ -92,6 +94,7 @@ public interface TasksReviewModel extends BaseModel<TasksReview> {
 
 	public void setAssignedByUserUuid(String assignedByUserUuid);
 
+	@AutoEscape
 	public String getAssignedByUserName();
 
 	public void setAssignedByUserName(String assignedByUserName);

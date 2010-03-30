@@ -33,6 +33,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.StatusConstants;
+import com.liferay.portal.kernel.workflow.WorkflowHandlerRegistryUtil;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
@@ -230,7 +231,15 @@ public class DLFileEntryLocalServiceImpl
 
 		// Status
 
-		fileEntry = updateWorkflowStatus(userId, fileEntryId, serviceContext);
+		fileEntry = updateStatus(userId, fileEntryId, serviceContext);
+
+		// Workflow
+
+		if (serviceContext.isStartWorkflow()) {
+			WorkflowHandlerRegistryUtil.startWorkflowInstance(
+				user.getCompanyId(), groupId, userId,
+				DLFileEntry.class.getName(), fileEntryId, fileEntry);
+		}
 
 		return fileEntry;
 	}
@@ -335,7 +344,7 @@ public class DLFileEntryLocalServiceImpl
 
 		// Workflow
 
-		workflowInstanceLinkLocalService.deleteWorkflowInstanceLink(
+		workflowInstanceLinkLocalService.deleteWorkflowInstanceLinks(
 			fileEntry.getCompanyId(), fileEntry.getGroupId(),
 			DLFileEntry.class.getName(), fileEntry.getFileEntryId());
 
@@ -798,6 +807,13 @@ public class DLFileEntryLocalServiceImpl
 
 			dlFileEntryPersistence.remove(fileEntry);
 
+			if (serviceContext.isStartWorkflow()) {
+				workflowInstanceLinkLocalService.updateClassPK(
+					fileEntry.getCompanyId(), fileEntry.getGroupId(),
+					DLFileEntry.class.getName(), oldFileEntryId,
+					newFileEntryId);
+			}
+
 			List<DLFileVersion> fileVersions =
 				dlFileVersionPersistence.findByG_F_N(
 					groupId, folderId, name);
@@ -921,6 +937,8 @@ public class DLFileEntryLocalServiceImpl
 		String version = getNextVersion(
 			fileEntry, majorVersion, serviceContext.getStatus());
 
+		boolean newFileVersion = true;
+
 		try {
 			DLFileVersion fileVersion =
 				dlFileVersionLocalService.getLatestFileVersion(
@@ -931,6 +949,8 @@ public class DLFileEntryLocalServiceImpl
 			}
 
 			if (fileVersion.getStatus() == StatusConstants.DRAFT) {
+				newFileVersion = true;
+
 				updateFileVersion(
 					user, fileVersion, serviceContext.getModifiedDate(now),
 					version, versionDescription, size,
@@ -1010,6 +1030,14 @@ public class DLFileEntryLocalServiceImpl
 			}
 		}
 
+		try {
+			dlService.deleteFile(
+				user.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
+				fileEntry.getRepositoryId(), fileEntry.getName(), version);
+		}
+		catch (NoSuchFileException nsfe) {
+		}
+
 		dlLocalService.updateFile(
 			user.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
 			fileEntry.getGroupId(), fileEntry.getRepositoryId(), name, false,
@@ -1019,13 +1047,22 @@ public class DLFileEntryLocalServiceImpl
 
 		// Status
 
-		fileEntry = updateWorkflowStatus(
+		fileEntry = updateStatus(
 			userId, fileEntry.getFileEntryId(), serviceContext);
+
+		// Workflow
+
+		if (newFileVersion && serviceContext.isStartWorkflow()) {
+			WorkflowHandlerRegistryUtil.startWorkflowInstance(
+				user.getCompanyId(), groupId, userId,
+				DLFileEntry.class.getName(), fileEntry.getFileEntryId(),
+				fileEntry);
+		}
 
 		return fileEntry;
 	}
 
-	public DLFileEntry updateWorkflowStatus(
+	public DLFileEntry updateStatus(
 			long userId, long fileEntryId, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 

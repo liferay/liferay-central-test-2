@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.wiki.model;
 
+import com.liferay.portal.kernel.annotation.AutoEscape;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.service.ServiceContext;
 
@@ -53,6 +54,7 @@ public interface WikiPageResourceModel extends BaseModel<WikiPageResource> {
 
 	public void setNodeId(long nodeId);
 
+	@AutoEscape
 	public String getTitle();
 
 	public void setTitle(String title);

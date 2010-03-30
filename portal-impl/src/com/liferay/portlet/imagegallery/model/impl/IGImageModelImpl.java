@@ -14,10 +14,9 @@
 
 package com.liferay.portlet.imagegallery.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.impl.BaseModelImpl;
@@ -337,31 +336,8 @@ public class IGImageModelImpl extends BaseModelImpl<IGImage> {
 			return (IGImage)this;
 		}
 		else {
-			IGImage model = new IGImageImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setUuid(HtmlUtil.escape(getUuid()));
-			model.setImageId(getImageId());
-			model.setGroupId(getGroupId());
-			model.setCompanyId(getCompanyId());
-			model.setUserId(getUserId());
-			model.setCreateDate(getCreateDate());
-			model.setModifiedDate(getModifiedDate());
-			model.setFolderId(getFolderId());
-			model.setName(HtmlUtil.escape(getName()));
-			model.setDescription(HtmlUtil.escape(getDescription()));
-			model.setSmallImageId(getSmallImageId());
-			model.setLargeImageId(getLargeImageId());
-			model.setCustom1ImageId(getCustom1ImageId());
-			model.setCustom2ImageId(getCustom2ImageId());
-
-			model = (IGImage)Proxy.newProxyInstance(IGImage.class.getClassLoader(),
-					new Class[] { IGImage.class },
-					new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (IGImage)Proxy.newProxyInstance(IGImage.class.getClassLoader(),
+				new Class[] { IGImage.class }, new AutoEscapeBeanHandler(this));
 		}
 	}
 

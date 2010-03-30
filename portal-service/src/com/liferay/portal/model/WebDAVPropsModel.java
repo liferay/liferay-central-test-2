@@ -14,6 +14,7 @@
 
 package com.liferay.portal.model;
 
+import com.liferay.portal.kernel.annotation.AutoEscape;
 import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
@@ -72,6 +73,7 @@ public interface WebDAVPropsModel extends BaseModel<WebDAVProps> {
 
 	public void setClassPK(long classPK);
 
+	@AutoEscape
 	public String getProps();
 
 	public void setProps(String props);

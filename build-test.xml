@@ -96,9 +96,7 @@ jdbc.default.numHelperThreads=1</echo>
 		</if>
 
 		<if>
-			<not>
-				<equals arg1="${custom.properties}" arg2="$${custom.properties}" />
-			</not>
+			<isset property="custom.properties" />
 			<then>
 				<echo file="portal-impl/src/portal-ext.properties" append="true">
 
@@ -158,9 +156,7 @@ ${custom.properties}</echo>
 
 	<target name="prepare-virtual-host-name-properties">
 		<if>
-			<not>
-				<equals arg1="${virtual.host.name}" arg2="$${virtual.host.name}" />
-			</not>
+			<isset property="virtual.host.name" />
 			<then>
 				<replace
 					file="portal-impl/test/test-portal-impl.properties"
@@ -220,7 +216,9 @@ ${custom.properties}</echo>
 
 	<target name="rebuild-database">
 		<if>
-			<equals arg1="${sql.legacy.zip}" arg2="$${sql.legacy.zip}" />
+			<not>
+				<isset property="sql.legacy.zip" />
+			</not>
 			<then>
 				<fail>
 .
@@ -254,7 +252,9 @@ file.
 				</if>
 
 				<if>
-					<equals arg1="${skip.rebuild-database}" arg2="$${skip.rebuild-database}" />
+					<not>
+						<isset property="skip.rebuild-database" />
+					</not>
 					<then>
 						<if>
 							<equals arg1="${db.type}" arg2="mysql" />
@@ -289,8 +289,12 @@ file.
 	<target name="rebuild-database-mysql">
 		<if>
 			<or>
-				<equals arg1="${sql.dir}" arg2="$${sql.dir}" />
-				<equals arg1="${sql.file}" arg2="$${sql.file}" />
+				<not>
+					<isset property="sql.dir" />
+				</not>
+				<not>
+					<isset property="sql.file" />
+				</not>
 			</or>
 			<then>
 				<ant dir="sql" target="rebuild-mysql" inheritAll="false" />
@@ -308,8 +312,12 @@ file.
 	<target name="rebuild-database-oracle">
 		<if>
 			<or>
-				<equals arg1="${sql.dir}" arg2="$${sql.dir}" />
-				<equals arg1="${sql.file}" arg2="$${sql.file}" />
+				<not>
+					<isset property="sql.dir" />
+				</not>
+				<not>
+					<isset property="sql.file" />
+				</not>
 			</or>
 			<then>
 				<property name="sql.dir" value="sql\create\" />
@@ -343,8 +351,12 @@ file.
 	<target name="rebuild-database-postgresql">
 		<if>
 			<or>
-				<equals arg1="${sql.dir}" arg2="$${sql.dir}" />
-				<equals arg1="${sql.file}" arg2="$${sql.file}" />
+				<not>
+					<isset property="sql.dir" />
+				</not>
+				<not>
+					<isset property="sql.file" />
+				</not>
 			</or>
 			<then>
 				<property name="sql.dir" value="sql\create\" />
@@ -388,8 +400,12 @@ file.
 	<target name="rebuild-database-sql-server">
 		<if>
 			<or>
-				<equals arg1="${sql.dir}" arg2="$${sql.dir}" />
-				<equals arg1="${sql.file}" arg2="$${sql.file}" />
+				<not>
+					<isset property="sql.dir" />
+				</not>
+				<not>
+					<isset property="sql.file" />
+				</not>
 			</or>
 			<then>
 				<property name="sql.dir" value="sql\create\" />
@@ -492,18 +508,14 @@ file.
 		</delete>
 
 		<if>
-			<not>
-				<equals arg1="${deploy.versioned.plugins}" arg2="$${deploy.versioned.plugins}" />
-			</not>
+			<isset property="deploy.versioned.plugins" />
 			<then>
 				<ant antfile="build-test-plugins.xml" target="deploy-versioned-simple-server-plugins" />
 			</then>
 		</if>
 
 		<if>
-			<not>
-				<equals arg1="${portlet.plugins.includes}" arg2="$${portlet.plugins.includes}" />
-			</not>
+			<isset property="portlet.plugins.includes" />
 			<then>
 				<ant antfile="build-test-plugins.xml" target="deploy-simple-server-plugins">
 					<property name="plugin.types" value="portlets" />
@@ -513,9 +525,7 @@ file.
 		</if>
 
 		<if>
-			<not>
-				<equals arg1="${theme.plugins.includes}" arg2="$${theme.plugins.includes}" />
-			</not>
+			<isset property="theme.plugins.includes" />
 			<then>
 				<ant antfile="build-test-plugins.xml" target="deploy-simple-server-plugins">
 					<property name="plugin.types" value="themes" />
@@ -536,12 +546,8 @@ file.
 
 				<if>
 					<or>
-						<not>
-							<equals arg1="${portlet.plugins.includes}" arg2="$${portlet.plugins.includes}" />
-						</not>
-						<not>
-							<equals arg1="${theme.plugins.includes}" arg2="$${theme.plugins.includes}" />
-						</not>
+						<isset property="portlet.plugins.includes" />
+						<isset property="theme.plugins.includes" />
 					</or>
 					<then>
 						<sleep seconds="30" />

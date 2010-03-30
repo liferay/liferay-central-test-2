@@ -14,7 +14,7 @@
 
 package com.liferay.portlet.shopping.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.model.impl.BaseModelImpl;
@@ -220,27 +220,9 @@ public class ShoppingItemPriceModelImpl extends BaseModelImpl<ShoppingItemPrice>
 			return (ShoppingItemPrice)this;
 		}
 		else {
-			ShoppingItemPrice model = new ShoppingItemPriceImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setItemPriceId(getItemPriceId());
-			model.setItemId(getItemId());
-			model.setMinQuantity(getMinQuantity());
-			model.setMaxQuantity(getMaxQuantity());
-			model.setPrice(getPrice());
-			model.setDiscount(getDiscount());
-			model.setTaxable(getTaxable());
-			model.setShipping(getShipping());
-			model.setUseShippingFormula(getUseShippingFormula());
-			model.setStatus(getStatus());
-
-			model = (ShoppingItemPrice)Proxy.newProxyInstance(ShoppingItemPrice.class.getClassLoader(),
-					new Class[] { ShoppingItemPrice.class },
-					new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (ShoppingItemPrice)Proxy.newProxyInstance(ShoppingItemPrice.class.getClassLoader(),
+				new Class[] { ShoppingItemPrice.class },
+				new AutoEscapeBeanHandler(this));
 		}
 	}
 

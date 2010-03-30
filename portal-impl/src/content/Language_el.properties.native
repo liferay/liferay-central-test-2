@@ -1324,6 +1324,7 @@ delete-category=Διαγραφή Κατηγορίας
 delete-data=Διαγράψτε τα στοιχεία
 delete-document=Διαγραφή Εγγράφου
 delete-entry=Διαγραφή Καταχώρησης
+delete-existing-data=Διαγράψτε τα υπάρχοντα στοιχεία (Automatic Translation)
 delete-folder=Διαγραφή Φακέλου
 delete-image=Διαγραφή Εικόνας
 delete-live-page=Διαγράψτε τη ζωντανή σελίδα. (Automatic Translation)

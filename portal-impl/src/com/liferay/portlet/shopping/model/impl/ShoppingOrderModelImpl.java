@@ -14,11 +14,10 @@
 
 package com.liferay.portlet.shopping.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.impl.BaseModelImpl;
@@ -836,70 +835,9 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 			return (ShoppingOrder)this;
 		}
 		else {
-			ShoppingOrder model = new ShoppingOrderImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setOrderId(getOrderId());
-			model.setGroupId(getGroupId());
-			model.setCompanyId(getCompanyId());
-			model.setUserId(getUserId());
-			model.setUserName(HtmlUtil.escape(getUserName()));
-			model.setCreateDate(getCreateDate());
-			model.setModifiedDate(getModifiedDate());
-			model.setNumber(HtmlUtil.escape(getNumber()));
-			model.setTax(getTax());
-			model.setShipping(getShipping());
-			model.setAltShipping(HtmlUtil.escape(getAltShipping()));
-			model.setRequiresShipping(getRequiresShipping());
-			model.setInsure(getInsure());
-			model.setInsurance(getInsurance());
-			model.setCouponCodes(HtmlUtil.escape(getCouponCodes()));
-			model.setCouponDiscount(getCouponDiscount());
-			model.setBillingFirstName(HtmlUtil.escape(getBillingFirstName()));
-			model.setBillingLastName(HtmlUtil.escape(getBillingLastName()));
-			model.setBillingEmailAddress(HtmlUtil.escape(
-					getBillingEmailAddress()));
-			model.setBillingCompany(HtmlUtil.escape(getBillingCompany()));
-			model.setBillingStreet(HtmlUtil.escape(getBillingStreet()));
-			model.setBillingCity(HtmlUtil.escape(getBillingCity()));
-			model.setBillingState(HtmlUtil.escape(getBillingState()));
-			model.setBillingZip(HtmlUtil.escape(getBillingZip()));
-			model.setBillingCountry(HtmlUtil.escape(getBillingCountry()));
-			model.setBillingPhone(HtmlUtil.escape(getBillingPhone()));
-			model.setShipToBilling(getShipToBilling());
-			model.setShippingFirstName(HtmlUtil.escape(getShippingFirstName()));
-			model.setShippingLastName(HtmlUtil.escape(getShippingLastName()));
-			model.setShippingEmailAddress(HtmlUtil.escape(
-					getShippingEmailAddress()));
-			model.setShippingCompany(HtmlUtil.escape(getShippingCompany()));
-			model.setShippingStreet(HtmlUtil.escape(getShippingStreet()));
-			model.setShippingCity(HtmlUtil.escape(getShippingCity()));
-			model.setShippingState(HtmlUtil.escape(getShippingState()));
-			model.setShippingZip(HtmlUtil.escape(getShippingZip()));
-			model.setShippingCountry(HtmlUtil.escape(getShippingCountry()));
-			model.setShippingPhone(HtmlUtil.escape(getShippingPhone()));
-			model.setCcName(HtmlUtil.escape(getCcName()));
-			model.setCcType(HtmlUtil.escape(getCcType()));
-			model.setCcNumber(HtmlUtil.escape(getCcNumber()));
-			model.setCcExpMonth(getCcExpMonth());
-			model.setCcExpYear(getCcExpYear());
-			model.setCcVerNumber(HtmlUtil.escape(getCcVerNumber()));
-			model.setComments(HtmlUtil.escape(getComments()));
-			model.setPpTxnId(HtmlUtil.escape(getPpTxnId()));
-			model.setPpPaymentStatus(HtmlUtil.escape(getPpPaymentStatus()));
-			model.setPpPaymentGross(getPpPaymentGross());
-			model.setPpReceiverEmail(HtmlUtil.escape(getPpReceiverEmail()));
-			model.setPpPayerEmail(HtmlUtil.escape(getPpPayerEmail()));
-			model.setSendOrderEmail(getSendOrderEmail());
-			model.setSendShippingEmail(getSendShippingEmail());
-
-			model = (ShoppingOrder)Proxy.newProxyInstance(ShoppingOrder.class.getClassLoader(),
-					new Class[] { ShoppingOrder.class },
-					new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (ShoppingOrder)Proxy.newProxyInstance(ShoppingOrder.class.getClassLoader(),
+				new Class[] { ShoppingOrder.class },
+				new AutoEscapeBeanHandler(this));
 		}
 	}
 

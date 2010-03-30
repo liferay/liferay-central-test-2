@@ -14,10 +14,9 @@
 
 package com.liferay.portal.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.UserIdMapper;
@@ -211,22 +210,9 @@ public class UserIdMapperModelImpl extends BaseModelImpl<UserIdMapper> {
 			return (UserIdMapper)this;
 		}
 		else {
-			UserIdMapper model = new UserIdMapperImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setUserIdMapperId(getUserIdMapperId());
-			model.setUserId(getUserId());
-			model.setType(HtmlUtil.escape(getType()));
-			model.setDescription(HtmlUtil.escape(getDescription()));
-			model.setExternalUserId(HtmlUtil.escape(getExternalUserId()));
-
-			model = (UserIdMapper)Proxy.newProxyInstance(UserIdMapper.class.getClassLoader(),
-					new Class[] { UserIdMapper.class },
-					new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (UserIdMapper)Proxy.newProxyInstance(UserIdMapper.class.getClassLoader(),
+				new Class[] { UserIdMapper.class },
+				new AutoEscapeBeanHandler(this));
 		}
 	}
 

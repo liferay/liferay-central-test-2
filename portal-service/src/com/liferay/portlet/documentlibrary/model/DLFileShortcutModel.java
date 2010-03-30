@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.documentlibrary.model;
 
+import com.liferay.portal.kernel.annotation.AutoEscape;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.service.ServiceContext;
@@ -48,6 +49,7 @@ public interface DLFileShortcutModel extends BaseModel<DLFileShortcut> {
 
 	public void setPrimaryKey(long pk);
 
+	@AutoEscape
 	public String getUuid();
 
 	public void setUuid(String uuid);
@@ -72,6 +74,7 @@ public interface DLFileShortcutModel extends BaseModel<DLFileShortcut> {
 
 	public void setUserUuid(String userUuid);
 
+	@AutoEscape
 	public String getUserName();
 
 	public void setUserName(String userName);
@@ -92,6 +95,7 @@ public interface DLFileShortcutModel extends BaseModel<DLFileShortcut> {
 
 	public void setToFolderId(long toFolderId);
 
+	@AutoEscape
 	public String getToName();
 
 	public void setToName(String toName);
@@ -108,6 +112,7 @@ public interface DLFileShortcutModel extends BaseModel<DLFileShortcut> {
 
 	public void setStatusByUserUuid(String statusByUserUuid);
 
+	@AutoEscape
 	public String getStatusByUserName();
 
 	public void setStatusByUserName(String statusByUserName);

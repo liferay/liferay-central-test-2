@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.shopping.model;
 
+import com.liferay.portal.kernel.annotation.AutoEscape;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.service.ServiceContext;
 
@@ -55,22 +56,27 @@ public interface ShoppingOrderItemModel extends BaseModel<ShoppingOrderItem> {
 
 	public void setOrderId(long orderId);
 
+	@AutoEscape
 	public String getItemId();
 
 	public void setItemId(String itemId);
 
+	@AutoEscape
 	public String getSku();
 
 	public void setSku(String sku);
 
+	@AutoEscape
 	public String getName();
 
 	public void setName(String name);
 
+	@AutoEscape
 	public String getDescription();
 
 	public void setDescription(String description);
 
+	@AutoEscape
 	public String getProperties();
 
 	public void setProperties(String properties);

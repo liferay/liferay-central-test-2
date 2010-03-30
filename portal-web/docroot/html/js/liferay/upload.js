@@ -78,6 +78,7 @@ AUI().add(
 			instance._cancelUploadsText = Liferay.Language.get('cancel-all-uploads');
 			instance._cancelFileText = Liferay.Language.get('cancel-upload');
 			instance._clearRecentUploadsText = Liferay.Language.get('clear-recent-uploads');
+			instance._duplicateFileText = Liferay.Language.get('please-enter-a-unique-document-name');
 			instance._fileListPendingText = Liferay.Language.get('x-files-ready-to-be-uploaded');
 			instance._fileListText = Liferay.Language.get('file-list');
 			instance._fileTypesDescriptionText = options.fileDescription || instance._allowedFileTypes;
@@ -288,6 +289,19 @@ AUI().add(
 
 				if (error_code == SWFUpload.UPLOAD_ERROR.FILE_CANCELLED) {
 					instance.fileCancelled(file, error_code, msg);
+				}
+
+				if (error_code == SWFUpload.UPLOAD_ERROR.HTTP_ERROR) {
+					var fileId = instance._namespace(file.id);
+					var li = A.one('#' + fileId);
+
+					if (li) {
+						li.hide();
+					}
+
+					var ul = instance.getFileListUl();
+
+					ul.append('<li class="upload-file upload-error"><span class="file-title">' + file.name + '</span><span class="error-message">' + instance._duplicateFileText + '</span></li>');
 				}
 
 				if (instance._onUploadError) {

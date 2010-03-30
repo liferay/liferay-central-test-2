@@ -14,6 +14,7 @@
 
 package com.liferay.portal.model;
 
+import com.liferay.portal.kernel.annotation.AutoEscape;
 import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
@@ -70,22 +71,27 @@ public interface LayoutModel extends BaseModel<Layout> {
 
 	public void setParentLayoutId(long parentLayoutId);
 
+	@AutoEscape
 	public String getName();
 
 	public void setName(String name);
 
+	@AutoEscape
 	public String getTitle();
 
 	public void setTitle(String title);
 
+	@AutoEscape
 	public String getDescription();
 
 	public void setDescription(String description);
 
+	@AutoEscape
 	public String getType();
 
 	public void setType(String type);
 
+	@AutoEscape
 	public String getTypeSettings();
 
 	public void setTypeSettings(String typeSettings);
@@ -96,6 +102,7 @@ public interface LayoutModel extends BaseModel<Layout> {
 
 	public void setHidden(boolean hidden);
 
+	@AutoEscape
 	public String getFriendlyURL();
 
 	public void setFriendlyURL(String friendlyURL);
@@ -110,22 +117,27 @@ public interface LayoutModel extends BaseModel<Layout> {
 
 	public void setIconImageId(long iconImageId);
 
+	@AutoEscape
 	public String getThemeId();
 
 	public void setThemeId(String themeId);
 
+	@AutoEscape
 	public String getColorSchemeId();
 
 	public void setColorSchemeId(String colorSchemeId);
 
+	@AutoEscape
 	public String getWapThemeId();
 
 	public void setWapThemeId(String wapThemeId);
 
+	@AutoEscape
 	public String getWapColorSchemeId();
 
 	public void setWapColorSchemeId(String wapColorSchemeId);
 
+	@AutoEscape
 	public String getCss();
 
 	public void setCss(String css);

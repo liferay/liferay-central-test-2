@@ -15,7 +15,7 @@ package ${packagePath}.model.impl;
 import ${packagePath}.model.${entity.name};
 import ${packagePath}.model.${entity.name}Soap;
 
-import com.liferay.portal.kernel.bean.EscapedBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.DateUtil;
@@ -421,7 +421,7 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> {
 			return (${entity.name})this;
 		}
 		else {
-			return (${entity.name})Proxy.newProxyInstance(${entity.name}.class.getClassLoader(), new Class[] {${entity.name}.class}, new EscapedBeanHandler(this));
+			return (${entity.name})Proxy.newProxyInstance(${entity.name}.class.getClassLoader(), new Class[] {${entity.name}.class}, new AutoEscapeBeanHandler(this));
 		}
 	}
 

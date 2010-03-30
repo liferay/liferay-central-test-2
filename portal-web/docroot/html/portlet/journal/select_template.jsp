@@ -16,17 +16,13 @@
 
 <%@ include file="/html/portlet/journal/init.jsp" %>
 
-<liferay-portlet:renderURL var="renderURL">
+<liferay-portlet:renderURL varImpl="portletURL">
 	<portlet:param name="struts_action" value="/journal/select_template" />
 </liferay-portlet:renderURL>
 
-<aui:form method="post" name="fm"  action="<%= renderURL %>">
+<aui:form action="<%= portletURL.toString() %>" method="post" name="fm">
 
 	<%
-	PortletURL portletURL = renderResponse.createRenderURL();
-
-	portletURL.setParameter("struts_action", "/journal/select_template");
-
 	TemplateSearch searchContainer = new TemplateSearch(renderRequest, portletURL);
 
 	searchContainer.setDelta(10);

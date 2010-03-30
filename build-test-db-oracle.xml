@@ -11,9 +11,7 @@
 		<ant dir="portal-impl" target="deploy-properties" inheritAll="false" />
 
 		<if>
-			<not>
-				<equals arg1="${sql.version}" arg2="$${sql.version}" />
-			</not>
+			<isset property="sql.version" />
 			<then>
 				<property name="sql.dir" value="sql\legacy\${sql.version}\create\" />
 				<property name="sql.file" value="create-oracle.sql" />

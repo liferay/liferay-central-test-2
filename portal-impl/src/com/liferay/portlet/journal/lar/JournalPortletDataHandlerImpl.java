@@ -1429,9 +1429,8 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		throws PortletDataException {
 
 		try {
-
 			if (context.getBooleanParameter(
-				_NAMESPACE, "delete-existing-data")) {
+					_NAMESPACE, "delete-existing-data")) {
 
 				deleteData(context, portletId, preferences);
  	 		}
@@ -1780,6 +1779,9 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 	private static final String _NAMESPACE = "journal";
 
+	private static final PortletDataHandlerBoolean _deleteExistingData =
+ 	 	new PortletDataHandlerBoolean(_NAMESPACE, "delete-existing-data");
+
 	private static final PortletDataHandlerBoolean _embeddedAssets =
 		new PortletDataHandlerBoolean(_NAMESPACE, "embedded-assets");
 
@@ -1791,9 +1793,6 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 	private static final PortletDataHandlerBoolean _comments =
 		new PortletDataHandlerBoolean(_NAMESPACE, "comments");
-
-	private static final PortletDataHandlerBoolean _deleteExistingData =
- 	 	new PortletDataHandlerBoolean(_NAMESPACE, "delete-existing-data");
 
 	private static final PortletDataHandlerBoolean _ratings =
 		new PortletDataHandlerBoolean(_NAMESPACE, "ratings");

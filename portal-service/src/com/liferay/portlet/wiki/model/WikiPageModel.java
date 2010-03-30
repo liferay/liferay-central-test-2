@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.wiki.model;
 
+import com.liferay.portal.kernel.annotation.AutoEscape;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.service.ServiceContext;
@@ -48,6 +49,7 @@ public interface WikiPageModel extends BaseModel<WikiPage> {
 
 	public void setPrimaryKey(long pk);
 
+	@AutoEscape
 	public String getUuid();
 
 	public void setUuid(String uuid);
@@ -76,6 +78,7 @@ public interface WikiPageModel extends BaseModel<WikiPage> {
 
 	public void setUserUuid(String userUuid);
 
+	@AutoEscape
 	public String getUserName();
 
 	public void setUserName(String userName);
@@ -92,6 +95,7 @@ public interface WikiPageModel extends BaseModel<WikiPage> {
 
 	public void setNodeId(long nodeId);
 
+	@AutoEscape
 	public String getTitle();
 
 	public void setTitle(String title);
@@ -106,6 +110,7 @@ public interface WikiPageModel extends BaseModel<WikiPage> {
 
 	public void setMinorEdit(boolean minorEdit);
 
+	@AutoEscape
 	public String getContent();
 
 	public void setContent(String content);
@@ -122,6 +127,7 @@ public interface WikiPageModel extends BaseModel<WikiPage> {
 
 	public void setStatusByUserUuid(String statusByUserUuid);
 
+	@AutoEscape
 	public String getStatusByUserName();
 
 	public void setStatusByUserName(String statusByUserName);
@@ -130,10 +136,12 @@ public interface WikiPageModel extends BaseModel<WikiPage> {
 
 	public void setStatusDate(Date statusDate);
 
+	@AutoEscape
 	public String getSummary();
 
 	public void setSummary(String summary);
 
+	@AutoEscape
 	public String getFormat();
 
 	public void setFormat(String format);
@@ -144,10 +152,12 @@ public interface WikiPageModel extends BaseModel<WikiPage> {
 
 	public void setHead(boolean head);
 
+	@AutoEscape
 	public String getParentTitle();
 
 	public void setParentTitle(String parentTitle);
 
+	@AutoEscape
 	public String getRedirectTitle();
 
 	public void setRedirectTitle(String redirectTitle);

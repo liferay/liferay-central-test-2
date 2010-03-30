@@ -105,7 +105,9 @@ web.server.display.node=true</echo>
 
 	<target name="run-selenium-tomcat">
 		<if>
-			<equals arg1="${build.app.server}" arg2="$${build.app.server}" />
+			<not>
+				<isset property="build.app.server" />
+			</not>
 			<then>
 				<ant antfile="build-dist.xml" target="build-dist-tomcat" />
 			</then>
@@ -134,9 +136,7 @@ web.server.display.node=true</echo>
 		<antcall target="revert-test-properties" />
 
 		<if>
-			<not>
-				<equals arg1="${legacy.theme.ids}" arg2="$${legacy.theme.ids}" />
-			</not>
+			<isset property="legacy.theme.ids" />
 			<then>
 				<replace
 					file="portal-web/test/test-portal-web.properties"
@@ -147,9 +147,7 @@ web.server.display.node=true</echo>
 		</if>
 
 		<if>
-			<not>
-				<equals arg1="${jdbc.drivers.optional.dir}" arg2="$${jdbc.drivers.optional.dir}" />
-			</not>
+			<isset property="jdbc.drivers.optional.dir" />
 			<then>
 				<antcall target="copy-optional-jars" inheritAll="false" />
 			</then>

@@ -17,11 +17,11 @@
 <%@ include file="/html/portlet/journal/init.jsp" %>
 
 <%
+String strutsAction = ParamUtil.getString(request, "struts_action");
+
 StructureSearch searchContainer = (StructureSearch)request.getAttribute("liferay-ui:search:searchContainer");
 
 StructureDisplayTerms displayTerms = (StructureDisplayTerms)searchContainer.getDisplayTerms();
-
-String strutsAction = ParamUtil.getString(request, "struts_action");
 %>
 
 <liferay-ui:search-toggle
@@ -45,10 +45,10 @@ String strutsAction = ParamUtil.getString(request, "struts_action");
 		<c:if test='<%= strutsAction.equalsIgnoreCase("/journal/select_structure") %>'>
 			<aui:column>
 				<aui:select label="my-places" name="<%= displayTerms.GROUP_ID %>">
-					<c:if test='<%= themeDisplay.getCompanyGroupId() != scopeGroupId %>'>
+					<c:if test="<%= themeDisplay.getCompanyGroupId() != scopeGroupId %>">
 						<aui:option label="global" selected="<%= displayTerms.getGroupId() == themeDisplay.getCompanyGroupId() %>" value="<%= themeDisplay.getCompanyGroupId() %>" />
 					</c:if>
-					<aui:option label='<%= themeDisplay.getScopeGroupName() %>' selected="<%= displayTerms.getGroupId() == scopeGroupId %>" value="<%= scopeGroupId %>" />
+					<aui:option label="<%= themeDisplay.getScopeGroupName() %>" selected="<%= displayTerms.getGroupId() == scopeGroupId %>" value="<%= scopeGroupId %>" />
 				</aui:select>
 			</aui:column>
 		</c:if>

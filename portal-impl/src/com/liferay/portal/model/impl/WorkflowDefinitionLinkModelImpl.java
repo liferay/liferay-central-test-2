@@ -14,10 +14,9 @@
 
 package com.liferay.portal.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.WorkflowDefinitionLink;
@@ -273,28 +272,9 @@ public class WorkflowDefinitionLinkModelImpl extends BaseModelImpl<WorkflowDefin
 			return (WorkflowDefinitionLink)this;
 		}
 		else {
-			WorkflowDefinitionLink model = new WorkflowDefinitionLinkImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setWorkflowDefinitionLinkId(getWorkflowDefinitionLinkId());
-			model.setGroupId(getGroupId());
-			model.setCompanyId(getCompanyId());
-			model.setUserId(getUserId());
-			model.setUserName(HtmlUtil.escape(getUserName()));
-			model.setCreateDate(getCreateDate());
-			model.setModifiedDate(getModifiedDate());
-			model.setClassNameId(getClassNameId());
-			model.setWorkflowDefinitionName(HtmlUtil.escape(
-					getWorkflowDefinitionName()));
-			model.setWorkflowDefinitionVersion(getWorkflowDefinitionVersion());
-
-			model = (WorkflowDefinitionLink)Proxy.newProxyInstance(WorkflowDefinitionLink.class.getClassLoader(),
-					new Class[] { WorkflowDefinitionLink.class },
-					new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (WorkflowDefinitionLink)Proxy.newProxyInstance(WorkflowDefinitionLink.class.getClassLoader(),
+				new Class[] { WorkflowDefinitionLink.class },
+				new AutoEscapeBeanHandler(this));
 		}
 	}
 

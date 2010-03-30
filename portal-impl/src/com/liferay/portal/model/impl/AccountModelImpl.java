@@ -14,10 +14,9 @@
 
 package com.liferay.portal.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Account;
@@ -331,33 +330,8 @@ public class AccountModelImpl extends BaseModelImpl<Account> {
 			return (Account)this;
 		}
 		else {
-			Account model = new AccountImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setAccountId(getAccountId());
-			model.setCompanyId(getCompanyId());
-			model.setUserId(getUserId());
-			model.setUserName(HtmlUtil.escape(getUserName()));
-			model.setCreateDate(getCreateDate());
-			model.setModifiedDate(getModifiedDate());
-			model.setParentAccountId(getParentAccountId());
-			model.setName(HtmlUtil.escape(getName()));
-			model.setLegalName(HtmlUtil.escape(getLegalName()));
-			model.setLegalId(HtmlUtil.escape(getLegalId()));
-			model.setLegalType(HtmlUtil.escape(getLegalType()));
-			model.setSicCode(HtmlUtil.escape(getSicCode()));
-			model.setTickerSymbol(HtmlUtil.escape(getTickerSymbol()));
-			model.setIndustry(HtmlUtil.escape(getIndustry()));
-			model.setType(HtmlUtil.escape(getType()));
-			model.setSize(HtmlUtil.escape(getSize()));
-
-			model = (Account)Proxy.newProxyInstance(Account.class.getClassLoader(),
-					new Class[] { Account.class },
-					new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (Account)Proxy.newProxyInstance(Account.class.getClassLoader(),
+				new Class[] { Account.class }, new AutoEscapeBeanHandler(this));
 		}
 	}
 

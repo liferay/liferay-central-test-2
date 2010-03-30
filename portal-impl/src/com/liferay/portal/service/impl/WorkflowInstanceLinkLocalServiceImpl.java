@@ -220,4 +220,37 @@ public class WorkflowInstanceLinkLocalServiceImpl
 		}
 	}
 
+	public void updateClassPK(
+			long companyId, long groupId, String className, long oldClassPK,
+			long newClassPK)
+		throws PortalException, SystemException {
+
+		List<WorkflowInstanceLink> workflowInstanceLinks =
+			getWorkflowInstanceLinks(companyId, groupId, className, oldClassPK);
+
+		for (WorkflowInstanceLink workflowInstanceLink :
+				workflowInstanceLinks) {
+
+			WorkflowInstance workflowInstance =
+				WorkflowInstanceManagerUtil.getWorkflowInstance(
+					workflowInstanceLink.getCompanyId(),
+					workflowInstanceLink.getWorkflowInstanceId());
+
+			workflowInstanceLink.setClassPK(newClassPK);
+
+			workflowInstanceLinkPersistence.update(
+				workflowInstanceLink, false);
+
+			Map<String, Serializable> context =
+				new HashMap<String, Serializable>(
+					workflowInstance.getContext());
+
+			context.put(ContextConstants.ENTRY_CLASS_PK, newClassPK);
+
+			WorkflowInstanceManagerUtil.updateContext(
+				workflowInstanceLink.getCompanyId(),
+				workflowInstanceLink.getWorkflowInstanceId(), context);
+		}
+	}
+
 }

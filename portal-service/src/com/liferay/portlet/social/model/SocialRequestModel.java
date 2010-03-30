@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.social.model;
 
+import com.liferay.portal.kernel.annotation.AutoEscape;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.service.ServiceContext;
@@ -46,6 +47,7 @@ public interface SocialRequestModel extends BaseModel<SocialRequest> {
 
 	public void setPrimaryKey(long pk);
 
+	@AutoEscape
 	public String getUuid();
 
 	public void setUuid(String uuid);
@@ -92,6 +94,7 @@ public interface SocialRequestModel extends BaseModel<SocialRequest> {
 
 	public void setType(int type);
 
+	@AutoEscape
 	public String getExtraData();
 
 	public void setExtraData(String extraData);

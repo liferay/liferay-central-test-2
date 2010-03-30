@@ -14,7 +14,7 @@
 
 package com.liferay.portlet.asset.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -181,21 +181,9 @@ public class AssetTagStatsModelImpl extends BaseModelImpl<AssetTagStats> {
 			return (AssetTagStats)this;
 		}
 		else {
-			AssetTagStats model = new AssetTagStatsImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setTagStatsId(getTagStatsId());
-			model.setTagId(getTagId());
-			model.setClassNameId(getClassNameId());
-			model.setAssetCount(getAssetCount());
-
-			model = (AssetTagStats)Proxy.newProxyInstance(AssetTagStats.class.getClassLoader(),
-					new Class[] { AssetTagStats.class },
-					new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (AssetTagStats)Proxy.newProxyInstance(AssetTagStats.class.getClassLoader(),
+				new Class[] { AssetTagStats.class },
+				new AutoEscapeBeanHandler(this));
 		}
 	}
 

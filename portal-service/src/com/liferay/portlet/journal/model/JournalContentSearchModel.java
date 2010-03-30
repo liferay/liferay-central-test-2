@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.journal.model;
 
+import com.liferay.portal.kernel.annotation.AutoEscape;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.service.ServiceContext;
 
@@ -67,10 +68,12 @@ public interface JournalContentSearchModel extends BaseModel<JournalContentSearc
 
 	public void setLayoutId(long layoutId);
 
+	@AutoEscape
 	public String getPortletId();
 
 	public void setPortletId(String portletId);
 
+	@AutoEscape
 	public String getArticleId();
 
 	public void setArticleId(String articleId);

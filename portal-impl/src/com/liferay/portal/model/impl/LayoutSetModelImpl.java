@@ -14,9 +14,8 @@
 
 package com.liferay.portal.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.LayoutSet;
@@ -316,31 +315,8 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet> {
 			return (LayoutSet)this;
 		}
 		else {
-			LayoutSet model = new LayoutSetImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setLayoutSetId(getLayoutSetId());
-			model.setGroupId(getGroupId());
-			model.setCompanyId(getCompanyId());
-			model.setPrivateLayout(getPrivateLayout());
-			model.setLogo(getLogo());
-			model.setLogoId(getLogoId());
-			model.setThemeId(HtmlUtil.escape(getThemeId()));
-			model.setColorSchemeId(HtmlUtil.escape(getColorSchemeId()));
-			model.setWapThemeId(HtmlUtil.escape(getWapThemeId()));
-			model.setWapColorSchemeId(HtmlUtil.escape(getWapColorSchemeId()));
-			model.setCss(HtmlUtil.escape(getCss()));
-			model.setPageCount(getPageCount());
-			model.setVirtualHost(HtmlUtil.escape(getVirtualHost()));
-			model.setLayoutSetPrototypeId(getLayoutSetPrototypeId());
-
-			model = (LayoutSet)Proxy.newProxyInstance(LayoutSet.class.getClassLoader(),
-					new Class[] { LayoutSet.class },
-					new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (LayoutSet)Proxy.newProxyInstance(LayoutSet.class.getClassLoader(),
+				new Class[] { LayoutSet.class }, new AutoEscapeBeanHandler(this));
 		}
 	}
 

@@ -14,6 +14,7 @@
 
 package com.liferay.portal.model;
 
+import com.liferay.portal.kernel.annotation.AutoEscape;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.ServiceContext;
 
@@ -79,10 +80,12 @@ public interface GroupModel extends BaseModel<Group> {
 
 	public void setLiveGroupId(long liveGroupId);
 
+	@AutoEscape
 	public String getName();
 
 	public void setName(String name);
 
+	@AutoEscape
 	public String getDescription();
 
 	public void setDescription(String description);
@@ -91,10 +94,12 @@ public interface GroupModel extends BaseModel<Group> {
 
 	public void setType(int type);
 
+	@AutoEscape
 	public String getTypeSettings();
 
 	public void setTypeSettings(String typeSettings);
 
+	@AutoEscape
 	public String getFriendlyURL();
 
 	public void setFriendlyURL(String friendlyURL);

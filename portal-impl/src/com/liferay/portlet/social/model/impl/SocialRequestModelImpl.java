@@ -14,10 +14,9 @@
 
 package com.liferay.portlet.social.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.impl.BaseModelImpl;
@@ -348,30 +347,9 @@ public class SocialRequestModelImpl extends BaseModelImpl<SocialRequest> {
 			return (SocialRequest)this;
 		}
 		else {
-			SocialRequest model = new SocialRequestImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setUuid(HtmlUtil.escape(getUuid()));
-			model.setRequestId(getRequestId());
-			model.setGroupId(getGroupId());
-			model.setCompanyId(getCompanyId());
-			model.setUserId(getUserId());
-			model.setCreateDate(getCreateDate());
-			model.setModifiedDate(getModifiedDate());
-			model.setClassNameId(getClassNameId());
-			model.setClassPK(getClassPK());
-			model.setType(getType());
-			model.setExtraData(HtmlUtil.escape(getExtraData()));
-			model.setReceiverUserId(getReceiverUserId());
-			model.setStatus(getStatus());
-
-			model = (SocialRequest)Proxy.newProxyInstance(SocialRequest.class.getClassLoader(),
-					new Class[] { SocialRequest.class },
-					new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (SocialRequest)Proxy.newProxyInstance(SocialRequest.class.getClassLoader(),
+				new Class[] { SocialRequest.class },
+				new AutoEscapeBeanHandler(this));
 		}
 	}
 

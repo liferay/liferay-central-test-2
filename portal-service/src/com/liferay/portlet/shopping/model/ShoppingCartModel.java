@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.shopping.model;
 
+import com.liferay.portal.kernel.annotation.AutoEscape;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.service.ServiceContext;
@@ -68,6 +69,7 @@ public interface ShoppingCartModel extends BaseModel<ShoppingCart> {
 
 	public void setUserUuid(String userUuid);
 
+	@AutoEscape
 	public String getUserName();
 
 	public void setUserName(String userName);
@@ -80,10 +82,12 @@ public interface ShoppingCartModel extends BaseModel<ShoppingCart> {
 
 	public void setModifiedDate(Date modifiedDate);
 
+	@AutoEscape
 	public String getItemIds();
 
 	public void setItemIds(String itemIds);
 
+	@AutoEscape
 	public String getCouponCodes();
 
 	public void setCouponCodes(String couponCodes);

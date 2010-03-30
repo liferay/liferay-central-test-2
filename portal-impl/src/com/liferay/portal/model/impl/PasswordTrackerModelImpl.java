@@ -14,11 +14,10 @@
 
 package com.liferay.portal.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.PasswordTracker;
@@ -170,21 +169,9 @@ public class PasswordTrackerModelImpl extends BaseModelImpl<PasswordTracker> {
 			return (PasswordTracker)this;
 		}
 		else {
-			PasswordTracker model = new PasswordTrackerImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setPasswordTrackerId(getPasswordTrackerId());
-			model.setUserId(getUserId());
-			model.setCreateDate(getCreateDate());
-			model.setPassword(HtmlUtil.escape(getPassword()));
-
-			model = (PasswordTracker)Proxy.newProxyInstance(PasswordTracker.class.getClassLoader(),
-					new Class[] { PasswordTracker.class },
-					new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (PasswordTracker)Proxy.newProxyInstance(PasswordTracker.class.getClassLoader(),
+				new Class[] { PasswordTracker.class },
+				new AutoEscapeBeanHandler(this));
 		}
 	}
 

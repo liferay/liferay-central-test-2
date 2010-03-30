@@ -139,7 +139,9 @@ public class LayoutCache {
 		return entityMap;
 	}
 
-	protected List<Role> getGroupRoles_4(long groupId) throws SystemException {
+	protected List<Role> getGroupRoles_1to4(long groupId)
+		throws SystemException {
+
 		List<Role> roles = groupRolesMap.get(groupId);
 
 		if (roles == null) {

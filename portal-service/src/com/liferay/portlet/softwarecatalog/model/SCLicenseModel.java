@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.softwarecatalog.model;
 
+import com.liferay.portal.kernel.annotation.AutoEscape;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.service.ServiceContext;
 
@@ -49,10 +50,12 @@ public interface SCLicenseModel extends BaseModel<SCLicense> {
 
 	public void setLicenseId(long licenseId);
 
+	@AutoEscape
 	public String getName();
 
 	public void setName(String name);
 
+	@AutoEscape
 	public String getUrl();
 
 	public void setUrl(String url);

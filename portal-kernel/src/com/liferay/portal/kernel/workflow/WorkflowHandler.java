@@ -14,6 +14,8 @@
 
 package com.liferay.portal.kernel.workflow;
 
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 
@@ -35,22 +37,21 @@ public interface WorkflowHandler {
 
 	public String getClassName();
 
-	public String getTitle(long classPK) throws Exception;
+	public String getTitle(long classPK);
 
 	public String getType();
 
 	public PortletURL getURLEdit(
-			long classPK, LiferayPortletRequest liferayPortletRequest,
-			LiferayPortletResponse liferayPortletResponse)
-		throws Exception;
+		long classPK, LiferayPortletRequest liferayPortletRequest,
+		LiferayPortletResponse liferayPortletResponse);
 
 	public void startWorkflowInstance(
 			long companyId, long groupId, long userId, long classPK,
 			Object model)
-		throws Exception;
+		throws PortalException, SystemException;
 
 	public Object updateStatus(
 			long companyId, long groupId, long userId, long classPK, int status)
-		throws Exception;
+		throws PortalException, SystemException;
 
 }

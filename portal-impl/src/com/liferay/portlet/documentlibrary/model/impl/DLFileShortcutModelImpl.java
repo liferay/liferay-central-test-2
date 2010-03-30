@@ -14,10 +14,9 @@
 
 package com.liferay.portlet.documentlibrary.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.impl.BaseModelImpl;
@@ -319,32 +318,9 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut> {
 			return (DLFileShortcut)this;
 		}
 		else {
-			DLFileShortcut model = new DLFileShortcutImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setUuid(HtmlUtil.escape(getUuid()));
-			model.setFileShortcutId(getFileShortcutId());
-			model.setGroupId(getGroupId());
-			model.setCompanyId(getCompanyId());
-			model.setUserId(getUserId());
-			model.setUserName(HtmlUtil.escape(getUserName()));
-			model.setCreateDate(getCreateDate());
-			model.setModifiedDate(getModifiedDate());
-			model.setFolderId(getFolderId());
-			model.setToFolderId(getToFolderId());
-			model.setToName(HtmlUtil.escape(getToName()));
-			model.setStatus(getStatus());
-			model.setStatusByUserId(getStatusByUserId());
-			model.setStatusByUserName(HtmlUtil.escape(getStatusByUserName()));
-			model.setStatusDate(getStatusDate());
-
-			model = (DLFileShortcut)Proxy.newProxyInstance(DLFileShortcut.class.getClassLoader(),
-					new Class[] { DLFileShortcut.class },
-					new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (DLFileShortcut)Proxy.newProxyInstance(DLFileShortcut.class.getClassLoader(),
+				new Class[] { DLFileShortcut.class },
+				new AutoEscapeBeanHandler(this));
 		}
 	}
 

@@ -14,9 +14,8 @@
 
 package com.liferay.portal.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.ClassName;
@@ -152,19 +151,8 @@ public class ClassNameModelImpl extends BaseModelImpl<ClassName> {
 			return (ClassName)this;
 		}
 		else {
-			ClassName model = new ClassNameImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setClassNameId(getClassNameId());
-			model.setValue(HtmlUtil.escape(getValue()));
-
-			model = (ClassName)Proxy.newProxyInstance(ClassName.class.getClassLoader(),
-					new Class[] { ClassName.class },
-					new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (ClassName)Proxy.newProxyInstance(ClassName.class.getClassLoader(),
+				new Class[] { ClassName.class }, new AutoEscapeBeanHandler(this));
 		}
 	}
 

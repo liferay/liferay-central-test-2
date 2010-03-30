@@ -14,7 +14,7 @@
 
 package com.liferay.portlet.expando.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.model.impl.BaseModelImpl;
@@ -166,21 +166,9 @@ public class ExpandoRowModelImpl extends BaseModelImpl<ExpandoRow> {
 			return (ExpandoRow)this;
 		}
 		else {
-			ExpandoRow model = new ExpandoRowImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setRowId(getRowId());
-			model.setCompanyId(getCompanyId());
-			model.setTableId(getTableId());
-			model.setClassPK(getClassPK());
-
-			model = (ExpandoRow)Proxy.newProxyInstance(ExpandoRow.class.getClassLoader(),
-					new Class[] { ExpandoRow.class },
-					new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (ExpandoRow)Proxy.newProxyInstance(ExpandoRow.class.getClassLoader(),
+				new Class[] { ExpandoRow.class },
+				new AutoEscapeBeanHandler(this));
 		}
 	}
 

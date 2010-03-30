@@ -14,6 +14,7 @@
 
 package com.liferay.portal.model;
 
+import com.liferay.portal.kernel.annotation.AutoEscape;
 import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
@@ -48,22 +49,27 @@ public interface CountryModel extends BaseModel<Country> {
 
 	public void setCountryId(long countryId);
 
+	@AutoEscape
 	public String getName();
 
 	public void setName(String name);
 
+	@AutoEscape
 	public String getA2();
 
 	public void setA2(String a2);
 
+	@AutoEscape
 	public String getA3();
 
 	public void setA3(String a3);
 
+	@AutoEscape
 	public String getNumber();
 
 	public void setNumber(String number);
 
+	@AutoEscape
 	public String getIdd();
 
 	public void setIdd(String idd);

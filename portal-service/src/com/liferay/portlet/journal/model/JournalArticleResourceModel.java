@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.journal.model;
 
+import com.liferay.portal.kernel.annotation.AutoEscape;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.service.ServiceContext;
 
@@ -53,6 +54,7 @@ public interface JournalArticleResourceModel extends BaseModel<JournalArticleRes
 
 	public void setGroupId(long groupId);
 
+	@AutoEscape
 	public String getArticleId();
 
 	public void setArticleId(String articleId);

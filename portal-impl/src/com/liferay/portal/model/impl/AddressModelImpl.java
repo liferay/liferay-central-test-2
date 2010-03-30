@@ -14,11 +14,10 @@
 
 package com.liferay.portal.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Address;
@@ -350,35 +349,8 @@ public class AddressModelImpl extends BaseModelImpl<Address> {
 			return (Address)this;
 		}
 		else {
-			Address model = new AddressImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setAddressId(getAddressId());
-			model.setCompanyId(getCompanyId());
-			model.setUserId(getUserId());
-			model.setUserName(HtmlUtil.escape(getUserName()));
-			model.setCreateDate(getCreateDate());
-			model.setModifiedDate(getModifiedDate());
-			model.setClassNameId(getClassNameId());
-			model.setClassPK(getClassPK());
-			model.setStreet1(HtmlUtil.escape(getStreet1()));
-			model.setStreet2(HtmlUtil.escape(getStreet2()));
-			model.setStreet3(HtmlUtil.escape(getStreet3()));
-			model.setCity(HtmlUtil.escape(getCity()));
-			model.setZip(HtmlUtil.escape(getZip()));
-			model.setRegionId(getRegionId());
-			model.setCountryId(getCountryId());
-			model.setTypeId(getTypeId());
-			model.setMailing(getMailing());
-			model.setPrimary(getPrimary());
-
-			model = (Address)Proxy.newProxyInstance(Address.class.getClassLoader(),
-					new Class[] { Address.class },
-					new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (Address)Proxy.newProxyInstance(Address.class.getClassLoader(),
+				new Class[] { Address.class }, new AutoEscapeBeanHandler(this));
 		}
 	}
 

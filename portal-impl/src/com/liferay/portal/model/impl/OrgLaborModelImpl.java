@@ -14,7 +14,7 @@
 
 package com.liferay.portal.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.model.OrgLabor;
@@ -280,34 +280,8 @@ public class OrgLaborModelImpl extends BaseModelImpl<OrgLabor> {
 			return (OrgLabor)this;
 		}
 		else {
-			OrgLabor model = new OrgLaborImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setOrgLaborId(getOrgLaborId());
-			model.setOrganizationId(getOrganizationId());
-			model.setTypeId(getTypeId());
-			model.setSunOpen(getSunOpen());
-			model.setSunClose(getSunClose());
-			model.setMonOpen(getMonOpen());
-			model.setMonClose(getMonClose());
-			model.setTueOpen(getTueOpen());
-			model.setTueClose(getTueClose());
-			model.setWedOpen(getWedOpen());
-			model.setWedClose(getWedClose());
-			model.setThuOpen(getThuOpen());
-			model.setThuClose(getThuClose());
-			model.setFriOpen(getFriOpen());
-			model.setFriClose(getFriClose());
-			model.setSatOpen(getSatOpen());
-			model.setSatClose(getSatClose());
-
-			model = (OrgLabor)Proxy.newProxyInstance(OrgLabor.class.getClassLoader(),
-					new Class[] { OrgLabor.class },
-					new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (OrgLabor)Proxy.newProxyInstance(OrgLabor.class.getClassLoader(),
+				new Class[] { OrgLabor.class }, new AutoEscapeBeanHandler(this));
 		}
 	}
 

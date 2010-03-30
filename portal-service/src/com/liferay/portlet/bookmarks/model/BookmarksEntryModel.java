@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.bookmarks.model;
 
+import com.liferay.portal.kernel.annotation.AutoEscape;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.service.ServiceContext;
@@ -48,6 +49,7 @@ public interface BookmarksEntryModel extends BaseModel<BookmarksEntry> {
 
 	public void setPrimaryKey(long pk);
 
+	@AutoEscape
 	public String getUuid();
 
 	public void setUuid(String uuid);
@@ -84,14 +86,17 @@ public interface BookmarksEntryModel extends BaseModel<BookmarksEntry> {
 
 	public void setFolderId(long folderId);
 
+	@AutoEscape
 	public String getName();
 
 	public void setName(String name);
 
+	@AutoEscape
 	public String getUrl();
 
 	public void setUrl(String url);
 
+	@AutoEscape
 	public String getComments();
 
 	public void setComments(String comments);

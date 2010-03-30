@@ -14,6 +14,8 @@
 
 package com.liferay.portlet.bookmarks.asset;
 
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.security.permission.ActionKeys;
@@ -42,7 +44,9 @@ public class BookmarksEntryAssetRendererFactory
 
 	public static final String TYPE = "bookmark";
 
-	public AssetRenderer getAssetRenderer(long classPK) throws Exception {
+	public AssetRenderer getAssetRenderer(long classPK)
+		throws PortalException, SystemException {
+
 		BookmarksEntry entry = BookmarksEntryLocalServiceUtil.getEntry(classPK);
 
 		return new BookmarksEntryAssetRenderer(entry);

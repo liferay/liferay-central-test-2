@@ -14,6 +14,7 @@
 
 package com.liferay.portal.model;
 
+import com.liferay.portal.kernel.annotation.AutoEscape;
 import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
@@ -52,6 +53,7 @@ public interface ResourceModel extends BaseModel<Resource> {
 
 	public void setCodeId(long codeId);
 
+	@AutoEscape
 	public String getPrimKey();
 
 	public void setPrimKey(String primKey);

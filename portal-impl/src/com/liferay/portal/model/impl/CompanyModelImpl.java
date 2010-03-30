@@ -14,9 +14,8 @@
 
 package com.liferay.portal.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Company;
@@ -263,26 +262,8 @@ public class CompanyModelImpl extends BaseModelImpl<Company> {
 			return (Company)this;
 		}
 		else {
-			Company model = new CompanyImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setCompanyId(getCompanyId());
-			model.setAccountId(getAccountId());
-			model.setWebId(HtmlUtil.escape(getWebId()));
-			model.setKey(HtmlUtil.escape(getKey()));
-			model.setVirtualHost(HtmlUtil.escape(getVirtualHost()));
-			model.setMx(HtmlUtil.escape(getMx()));
-			model.setHomeURL(HtmlUtil.escape(getHomeURL()));
-			model.setLogoId(getLogoId());
-			model.setSystem(getSystem());
-
-			model = (Company)Proxy.newProxyInstance(Company.class.getClassLoader(),
-					new Class[] { Company.class },
-					new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (Company)Proxy.newProxyInstance(Company.class.getClassLoader(),
+				new Class[] { Company.class }, new AutoEscapeBeanHandler(this));
 		}
 	}
 

@@ -14,6 +14,7 @@
 
 package com.liferay.portal.model;
 
+import com.liferay.portal.kernel.annotation.AutoEscape;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.ServiceContext;
 
@@ -63,6 +64,7 @@ public interface AccountModel extends BaseModel<Account> {
 
 	public void setUserUuid(String userUuid);
 
+	@AutoEscape
 	public String getUserName();
 
 	public void setUserName(String userName);
@@ -79,38 +81,47 @@ public interface AccountModel extends BaseModel<Account> {
 
 	public void setParentAccountId(long parentAccountId);
 
+	@AutoEscape
 	public String getName();
 
 	public void setName(String name);
 
+	@AutoEscape
 	public String getLegalName();
 
 	public void setLegalName(String legalName);
 
+	@AutoEscape
 	public String getLegalId();
 
 	public void setLegalId(String legalId);
 
+	@AutoEscape
 	public String getLegalType();
 
 	public void setLegalType(String legalType);
 
+	@AutoEscape
 	public String getSicCode();
 
 	public void setSicCode(String sicCode);
 
+	@AutoEscape
 	public String getTickerSymbol();
 
 	public void setTickerSymbol(String tickerSymbol);
 
+	@AutoEscape
 	public String getIndustry();
 
 	public void setIndustry(String industry);
 
+	@AutoEscape
 	public String getType();
 
 	public void setType(String type);
 
+	@AutoEscape
 	public String getSize();
 
 	public void setSize(String size);

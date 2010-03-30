@@ -19,7 +19,7 @@
 <%@ page import="java.text.Format" %>
 
 <%
-BaseModel bean = (BaseModel)request.getAttribute("aui:input:bean");
+Object bean = (Object)request.getAttribute("aui:input:bean");
 boolean changesContext = GetterUtil.getBoolean((String)request.getAttribute("aui:input:changesContext"));
 boolean checked = GetterUtil.getBoolean((String)request.getAttribute("aui:input:checked"));
 String cssClass = GetterUtil.getString((String)request.getAttribute("aui:input:cssClass"));
@@ -273,20 +273,24 @@ String labelTag = _buildLabel(inlineLabel, showForLabel, forLabel);
 </c:if>
 
 <%!
-private long _getClassPK(BaseModel bean, Map<String, Object> dynamicAttributes) {
+private long _getClassPK(Object bean, Map<String, Object> dynamicAttributes) {
 	long classPK = 0;
 
 	if (dynamicAttributes.get("classPK") != null) {
 		classPK = (Long)dynamicAttributes.get("classPK");
 	}
 	else if (bean != null) {
-		Serializable primaryKeyObj = bean.getPrimaryKeyObj();
+		if (bean instanceof BaseModel) {
+			BaseModel baseModel = (BaseModel)bean;
 
-		if (primaryKeyObj instanceof Long) {
-			classPK = (Long)primaryKeyObj;
-		}
-		else {
-			classPK = GetterUtil.getLong(primaryKeyObj.toString());
+			Serializable primaryKeyObj = baseModel.getPrimaryKeyObj();
+
+			if (primaryKeyObj instanceof Long) {
+				classPK = (Long)primaryKeyObj;
+			}
+			else {
+				classPK = GetterUtil.getLong(primaryKeyObj.toString());
+			}
 		}
 	}
 

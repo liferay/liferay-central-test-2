@@ -34,6 +34,8 @@ AUI().add(
 				instance._navigation.all('li a').on(
 					'click',
 					function(event) {
+						event.preventDefault();
+
 						var target = event.target;
 						var li = target.get('parentNode');
 
@@ -46,8 +48,6 @@ AUI().add(
 								location.hash = instance._hashKey + currentSection[1];
 							}
 						}
-
-						return false;
 					}
 				);
 			}

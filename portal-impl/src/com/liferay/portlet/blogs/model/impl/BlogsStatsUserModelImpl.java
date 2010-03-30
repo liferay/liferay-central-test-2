@@ -14,7 +14,7 @@
 
 package com.liferay.portlet.blogs.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -240,26 +240,9 @@ public class BlogsStatsUserModelImpl extends BaseModelImpl<BlogsStatsUser> {
 			return (BlogsStatsUser)this;
 		}
 		else {
-			BlogsStatsUser model = new BlogsStatsUserImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setStatsUserId(getStatsUserId());
-			model.setGroupId(getGroupId());
-			model.setCompanyId(getCompanyId());
-			model.setUserId(getUserId());
-			model.setEntryCount(getEntryCount());
-			model.setLastPostDate(getLastPostDate());
-			model.setRatingsTotalEntries(getRatingsTotalEntries());
-			model.setRatingsTotalScore(getRatingsTotalScore());
-			model.setRatingsAverageScore(getRatingsAverageScore());
-
-			model = (BlogsStatsUser)Proxy.newProxyInstance(BlogsStatsUser.class.getClassLoader(),
-					new Class[] { BlogsStatsUser.class },
-					new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (BlogsStatsUser)Proxy.newProxyInstance(BlogsStatsUser.class.getClassLoader(),
+				new Class[] { BlogsStatsUser.class },
+				new AutoEscapeBeanHandler(this));
 		}
 	}
 

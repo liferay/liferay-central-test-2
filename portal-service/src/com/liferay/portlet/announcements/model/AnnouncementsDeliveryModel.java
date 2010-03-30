@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.announcements.model;
 
+import com.liferay.portal.kernel.annotation.AutoEscape;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.service.ServiceContext;
@@ -62,6 +63,7 @@ public interface AnnouncementsDeliveryModel extends BaseModel<AnnouncementsDeliv
 
 	public void setUserUuid(String userUuid);
 
+	@AutoEscape
 	public String getType();
 
 	public void setType(String type);

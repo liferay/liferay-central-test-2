@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.journal.model;
 
+import com.liferay.portal.kernel.annotation.AutoEscape;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.service.ServiceContext;
 
@@ -53,6 +54,7 @@ public interface JournalArticleImageModel extends BaseModel<JournalArticleImage>
 
 	public void setGroupId(long groupId);
 
+	@AutoEscape
 	public String getArticleId();
 
 	public void setArticleId(String articleId);
@@ -61,14 +63,17 @@ public interface JournalArticleImageModel extends BaseModel<JournalArticleImage>
 
 	public void setVersion(double version);
 
+	@AutoEscape
 	public String getElInstanceId();
 
 	public void setElInstanceId(String elInstanceId);
 
+	@AutoEscape
 	public String getElName();
 
 	public void setElName(String elName);
 
+	@AutoEscape
 	public String getLanguageId();
 
 	public void setLanguageId(String languageId);

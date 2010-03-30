@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.softwarecatalog.model;
 
+import com.liferay.portal.kernel.annotation.AutoEscape;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.service.ServiceContext;
@@ -68,6 +69,7 @@ public interface SCProductEntryModel extends BaseModel<SCProductEntry> {
 
 	public void setUserUuid(String userUuid);
 
+	@AutoEscape
 	public String getUserName();
 
 	public void setUserName(String userName);
@@ -80,38 +82,47 @@ public interface SCProductEntryModel extends BaseModel<SCProductEntry> {
 
 	public void setModifiedDate(Date modifiedDate);
 
+	@AutoEscape
 	public String getName();
 
 	public void setName(String name);
 
+	@AutoEscape
 	public String getType();
 
 	public void setType(String type);
 
+	@AutoEscape
 	public String getTags();
 
 	public void setTags(String tags);
 
+	@AutoEscape
 	public String getShortDescription();
 
 	public void setShortDescription(String shortDescription);
 
+	@AutoEscape
 	public String getLongDescription();
 
 	public void setLongDescription(String longDescription);
 
+	@AutoEscape
 	public String getPageURL();
 
 	public void setPageURL(String pageURL);
 
+	@AutoEscape
 	public String getAuthor();
 
 	public void setAuthor(String author);
 
+	@AutoEscape
 	public String getRepoGroupId();
 
 	public void setRepoGroupId(String repoGroupId);
 
+	@AutoEscape
 	public String getRepoArtifactId();
 
 	public void setRepoArtifactId(String repoArtifactId);

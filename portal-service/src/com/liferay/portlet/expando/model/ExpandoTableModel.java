@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.expando.model;
 
+import com.liferay.portal.kernel.annotation.AutoEscape;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.service.ServiceContext;
 
@@ -57,6 +58,7 @@ public interface ExpandoTableModel extends BaseModel<ExpandoTable> {
 
 	public void setClassNameId(long classNameId);
 
+	@AutoEscape
 	public String getName();
 
 	public void setName(String name);

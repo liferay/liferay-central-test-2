@@ -14,6 +14,7 @@
 
 package com.liferay.portal.model;
 
+import com.liferay.portal.kernel.annotation.AutoEscape;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.ServiceContext;
 
@@ -67,18 +68,22 @@ public interface UserTrackerModel extends BaseModel<UserTracker> {
 
 	public void setModifiedDate(Date modifiedDate);
 
+	@AutoEscape
 	public String getSessionId();
 
 	public void setSessionId(String sessionId);
 
+	@AutoEscape
 	public String getRemoteAddr();
 
 	public void setRemoteAddr(String remoteAddr);
 
+	@AutoEscape
 	public String getRemoteHost();
 
 	public void setRemoteHost(String remoteHost);
 
+	@AutoEscape
 	public String getUserAgent();
 
 	public void setUserAgent(String userAgent);

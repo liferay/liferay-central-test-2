@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.messageboards.model;
 
+import com.liferay.portal.kernel.annotation.AutoEscape;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.service.ServiceContext;
@@ -48,6 +49,7 @@ public interface MBMessageModel extends BaseModel<MBMessage> {
 
 	public void setPrimaryKey(long pk);
 
+	@AutoEscape
 	public String getUuid();
 
 	public void setUuid(String uuid);
@@ -72,6 +74,7 @@ public interface MBMessageModel extends BaseModel<MBMessage> {
 
 	public void setUserUuid(String userUuid);
 
+	@AutoEscape
 	public String getUserName();
 
 	public void setUserName(String userName);
@@ -106,10 +109,12 @@ public interface MBMessageModel extends BaseModel<MBMessage> {
 
 	public void setParentMessageId(long parentMessageId);
 
+	@AutoEscape
 	public String getSubject();
 
 	public void setSubject(String subject);
 
+	@AutoEscape
 	public String getBody();
 
 	public void setBody(String body);
@@ -148,6 +153,7 @@ public interface MBMessageModel extends BaseModel<MBMessage> {
 
 	public void setStatusByUserUuid(String statusByUserUuid);
 
+	@AutoEscape
 	public String getStatusByUserName();
 
 	public void setStatusByUserName(String statusByUserName);

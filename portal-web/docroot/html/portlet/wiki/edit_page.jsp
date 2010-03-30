@@ -166,7 +166,6 @@ if (Validator.isNull(redirect)) {
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 	<aui:input name="originalRedirect" type="hidden" value="<%= originalRedirect %>" />
 	<aui:input name="nodeId" type="hidden" value="<%= nodeId %>" />
-	<aui:input name="status" type="hidden" value="<%= StatusConstants.APPROVED %>" />
 
 	<c:if test="<%= !editTitle %>">
 		<aui:input name="title" type="hidden" value="<%= title %>" />

@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.polls.model;
 
+import com.liferay.portal.kernel.annotation.AutoEscape;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.service.ServiceContext;
 
@@ -48,6 +49,7 @@ public interface PollsChoiceModel extends BaseModel<PollsChoice> {
 
 	public void setPrimaryKey(long pk);
 
+	@AutoEscape
 	public String getUuid();
 
 	public void setUuid(String uuid);
@@ -60,6 +62,7 @@ public interface PollsChoiceModel extends BaseModel<PollsChoice> {
 
 	public void setQuestionId(long questionId);
 
+	@AutoEscape
 	public String getName();
 
 	public void setName(String name);

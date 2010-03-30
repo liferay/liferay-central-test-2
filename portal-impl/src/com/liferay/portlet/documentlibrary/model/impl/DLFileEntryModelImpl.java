@@ -14,10 +14,9 @@
 
 package com.liferay.portlet.documentlibrary.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.impl.BaseModelImpl;
@@ -397,35 +396,9 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 			return (DLFileEntry)this;
 		}
 		else {
-			DLFileEntry model = new DLFileEntryImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setUuid(HtmlUtil.escape(getUuid()));
-			model.setFileEntryId(getFileEntryId());
-			model.setGroupId(getGroupId());
-			model.setCompanyId(getCompanyId());
-			model.setUserId(getUserId());
-			model.setUserName(HtmlUtil.escape(getUserName()));
-			model.setVersionUserId(getVersionUserId());
-			model.setVersionUserName(HtmlUtil.escape(getVersionUserName()));
-			model.setCreateDate(getCreateDate());
-			model.setModifiedDate(getModifiedDate());
-			model.setFolderId(getFolderId());
-			model.setName(HtmlUtil.escape(getName()));
-			model.setTitle(HtmlUtil.escape(getTitle()));
-			model.setDescription(HtmlUtil.escape(getDescription()));
-			model.setVersion(HtmlUtil.escape(getVersion()));
-			model.setSize(getSize());
-			model.setReadCount(getReadCount());
-			model.setExtraSettings(HtmlUtil.escape(getExtraSettings()));
-
-			model = (DLFileEntry)Proxy.newProxyInstance(DLFileEntry.class.getClassLoader(),
-					new Class[] { DLFileEntry.class },
-					new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (DLFileEntry)Proxy.newProxyInstance(DLFileEntry.class.getClassLoader(),
+				new Class[] { DLFileEntry.class },
+				new AutoEscapeBeanHandler(this));
 		}
 	}
 

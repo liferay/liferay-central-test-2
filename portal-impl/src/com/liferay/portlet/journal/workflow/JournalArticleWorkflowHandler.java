@@ -14,6 +14,8 @@
 
 package com.liferay.portlet.journal.workflow;
 
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.workflow.BaseWorkflowHandler;
 import com.liferay.portlet.asset.model.AssetRenderer;
@@ -42,7 +44,7 @@ public class JournalArticleWorkflowHandler extends BaseWorkflowHandler {
 
 	public JournalArticle updateStatus(
 			long companyId, long groupId, long userId, long classPK, int status)
-		throws Exception {
+		throws PortalException, SystemException {
 
 		ServiceContext serviceContext = new ServiceContext();
 
@@ -52,7 +54,9 @@ public class JournalArticleWorkflowHandler extends BaseWorkflowHandler {
 			userId, classPK, status, serviceContext);
 	}
 
-	protected AssetRenderer getAssetRenderer(long classPK) throws Exception {
+	protected AssetRenderer getAssetRenderer(long classPK)
+		throws PortalException, SystemException {
+
 		JournalArticle article = JournalArticleLocalServiceUtil.getArticle(
 			classPK);
 

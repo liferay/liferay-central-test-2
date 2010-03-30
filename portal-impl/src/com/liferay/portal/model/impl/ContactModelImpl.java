@@ -14,10 +14,9 @@
 
 package com.liferay.portal.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Contact;
@@ -520,47 +519,8 @@ public class ContactModelImpl extends BaseModelImpl<Contact> {
 			return (Contact)this;
 		}
 		else {
-			Contact model = new ContactImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setContactId(getContactId());
-			model.setCompanyId(getCompanyId());
-			model.setUserId(getUserId());
-			model.setUserName(HtmlUtil.escape(getUserName()));
-			model.setCreateDate(getCreateDate());
-			model.setModifiedDate(getModifiedDate());
-			model.setAccountId(getAccountId());
-			model.setParentContactId(getParentContactId());
-			model.setFirstName(HtmlUtil.escape(getFirstName()));
-			model.setMiddleName(HtmlUtil.escape(getMiddleName()));
-			model.setLastName(HtmlUtil.escape(getLastName()));
-			model.setPrefixId(getPrefixId());
-			model.setSuffixId(getSuffixId());
-			model.setMale(getMale());
-			model.setBirthday(getBirthday());
-			model.setSmsSn(HtmlUtil.escape(getSmsSn()));
-			model.setAimSn(HtmlUtil.escape(getAimSn()));
-			model.setFacebookSn(HtmlUtil.escape(getFacebookSn()));
-			model.setIcqSn(HtmlUtil.escape(getIcqSn()));
-			model.setJabberSn(HtmlUtil.escape(getJabberSn()));
-			model.setMsnSn(HtmlUtil.escape(getMsnSn()));
-			model.setMySpaceSn(HtmlUtil.escape(getMySpaceSn()));
-			model.setSkypeSn(HtmlUtil.escape(getSkypeSn()));
-			model.setTwitterSn(HtmlUtil.escape(getTwitterSn()));
-			model.setYmSn(HtmlUtil.escape(getYmSn()));
-			model.setEmployeeStatusId(HtmlUtil.escape(getEmployeeStatusId()));
-			model.setEmployeeNumber(HtmlUtil.escape(getEmployeeNumber()));
-			model.setJobTitle(HtmlUtil.escape(getJobTitle()));
-			model.setJobClass(HtmlUtil.escape(getJobClass()));
-			model.setHoursOfOperation(HtmlUtil.escape(getHoursOfOperation()));
-
-			model = (Contact)Proxy.newProxyInstance(Contact.class.getClassLoader(),
-					new Class[] { Contact.class },
-					new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (Contact)Proxy.newProxyInstance(Contact.class.getClassLoader(),
+				new Class[] { Contact.class }, new AutoEscapeBeanHandler(this));
 		}
 	}
 

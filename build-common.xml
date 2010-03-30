@@ -277,7 +277,9 @@ ECJ was automatically installed. Please rerun your task.
 		/>
 
 		<if>
-			<equals arg1="${test.suite.classes.available}" arg2="$${test.suite.classes.available}" />
+			<not>
+				<isset property="test.suite.classes.available" />
+			</not>
 			<then>
 				<junit dir="${project.dir}" fork="on" forkmode="once" printsummary="on">
 					<jvmarg value="-Xmx256m" />

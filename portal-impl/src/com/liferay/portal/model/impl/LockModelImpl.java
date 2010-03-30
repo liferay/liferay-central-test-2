@@ -14,10 +14,9 @@
 
 package com.liferay.portal.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Lock;
@@ -276,27 +275,8 @@ public class LockModelImpl extends BaseModelImpl<Lock> {
 			return (Lock)this;
 		}
 		else {
-			Lock model = new LockImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setUuid(HtmlUtil.escape(getUuid()));
-			model.setLockId(getLockId());
-			model.setCompanyId(getCompanyId());
-			model.setUserId(getUserId());
-			model.setUserName(HtmlUtil.escape(getUserName()));
-			model.setCreateDate(getCreateDate());
-			model.setClassName(HtmlUtil.escape(getClassName()));
-			model.setKey(HtmlUtil.escape(getKey()));
-			model.setOwner(HtmlUtil.escape(getOwner()));
-			model.setInheritable(getInheritable());
-			model.setExpirationDate(getExpirationDate());
-
-			model = (Lock)Proxy.newProxyInstance(Lock.class.getClassLoader(),
-					new Class[] { Lock.class }, new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (Lock)Proxy.newProxyInstance(Lock.class.getClassLoader(),
+				new Class[] { Lock.class }, new AutoEscapeBeanHandler(this));
 		}
 	}
 

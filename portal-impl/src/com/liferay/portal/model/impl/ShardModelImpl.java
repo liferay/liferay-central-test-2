@@ -14,9 +14,8 @@
 
 package com.liferay.portal.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Shard;
@@ -192,20 +191,8 @@ public class ShardModelImpl extends BaseModelImpl<Shard> {
 			return (Shard)this;
 		}
 		else {
-			Shard model = new ShardImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setShardId(getShardId());
-			model.setClassNameId(getClassNameId());
-			model.setClassPK(getClassPK());
-			model.setName(HtmlUtil.escape(getName()));
-
-			model = (Shard)Proxy.newProxyInstance(Shard.class.getClassLoader(),
-					new Class[] { Shard.class }, new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (Shard)Proxy.newProxyInstance(Shard.class.getClassLoader(),
+				new Class[] { Shard.class }, new AutoEscapeBeanHandler(this));
 		}
 	}
 

@@ -24,7 +24,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.KeyValuePair;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -78,6 +77,8 @@ import org.apache.commons.lang.time.StopWatch;
  * @author Raymond Augé
  * @author Jorge Ferrer
  * @author Bruno Farache
+ * @author Zsigmond Rab
+ * @author Douglas Wong
  */
 public class PortletImporter {
 
@@ -88,6 +89,8 @@ public class PortletImporter {
 
 		boolean deletePortletData = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.DELETE_PORTLET_DATA);
+		boolean importPermissions = MapUtil.getBoolean(
+			parameterMap, PortletDataHandlerKeys.PERMISSIONS);
 		boolean importPortletData = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.PORTLET_DATA);
 		boolean importPortletArchivedSetups = MapUtil.getBoolean(
@@ -176,7 +179,7 @@ public class PortletImporter {
 			throw new PortletIdException("Invalid portlet id " + rootPortletId);
 		}
 
-		// Import GroupId
+		// Import group id
 
 		long sourceGroupId = GetterUtil.getLong(
 			header.attributeValue("group-id"));
@@ -190,6 +193,10 @@ public class PortletImporter {
 		readComments(context, root);
 		readRatings(context, root);
 		readTags(context, root);
+
+		if (importPermissions) {
+			_permissionImporter.readPortletDataPermissions(context);
+		}
 
 		// Delete portlet data
 
@@ -753,51 +760,6 @@ public class PortletImporter {
 		}
 	}
 
-	protected void readPortletDataPermissions(PortletDataContext context)
-		throws SystemException {
-
-		try {
-			String xml = context.getZipEntryAsString(
-				context.getSourceRootPath() + "/portlet-data-permissions.xml");
-
-			if (xml == null) {
-				return;
-			}
-
-			Document doc = SAXReaderUtil.read(xml);
-
-			Element root = doc.getRootElement();
-
-			List<Element> portletDataEls = root.elements("portlet-data");
-
-			for (Element portletDataEl : portletDataEls) {
-				String className = portletDataEl.attributeValue("class-name");
-				long classPK = GetterUtil.getLong(
-					portletDataEl.attributeValue("class-pk"));
-
-				List<KeyValuePair> permissions = new ArrayList<KeyValuePair>();
-
-				List<Element> permissionsEls = portletDataEl.elements(
-					"permissions");
-
-				for (Element permissionsEl : permissionsEls) {
-					String roleName = permissionsEl.attributeValue("role-name");
-					String actions = permissionsEl.attributeValue("actions");
-
-					KeyValuePair permission = new KeyValuePair(
-						roleName, actions);
-
-					permissions.add(permission);
-				}
-
-				context.addPermissions(className, classPK, permissions);
-			}
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-	}
-
 	protected void readTags(PortletDataContext context, Element parentEl)
 		throws SystemException {
 
@@ -834,5 +796,7 @@ public class PortletImporter {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(PortletImporter.class);
+
+	private PermissionImporter _permissionImporter = new PermissionImporter();
 
 }

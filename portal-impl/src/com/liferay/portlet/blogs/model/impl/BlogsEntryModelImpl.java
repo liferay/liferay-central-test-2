@@ -14,11 +14,10 @@
 
 package com.liferay.portlet.blogs.model.impl;
 
-import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.impl.BaseModelImpl;
@@ -393,36 +392,9 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry> {
 			return (BlogsEntry)this;
 		}
 		else {
-			BlogsEntry model = new BlogsEntryImpl();
-
-			model.setNew(isNew());
-			model.setEscapedModel(true);
-
-			model.setUuid(HtmlUtil.escape(getUuid()));
-			model.setEntryId(getEntryId());
-			model.setGroupId(getGroupId());
-			model.setCompanyId(getCompanyId());
-			model.setUserId(getUserId());
-			model.setUserName(HtmlUtil.escape(getUserName()));
-			model.setCreateDate(getCreateDate());
-			model.setModifiedDate(getModifiedDate());
-			model.setTitle(HtmlUtil.escape(getTitle()));
-			model.setUrlTitle(HtmlUtil.escape(getUrlTitle()));
-			model.setContent(HtmlUtil.escape(getContent()));
-			model.setDisplayDate(getDisplayDate());
-			model.setAllowPingbacks(getAllowPingbacks());
-			model.setAllowTrackbacks(getAllowTrackbacks());
-			model.setTrackbacks(HtmlUtil.escape(getTrackbacks()));
-			model.setStatus(getStatus());
-			model.setStatusByUserId(getStatusByUserId());
-			model.setStatusByUserName(HtmlUtil.escape(getStatusByUserName()));
-			model.setStatusDate(getStatusDate());
-
-			model = (BlogsEntry)Proxy.newProxyInstance(BlogsEntry.class.getClassLoader(),
-					new Class[] { BlogsEntry.class },
-					new ReadOnlyBeanHandler(model));
-
-			return model;
+			return (BlogsEntry)Proxy.newProxyInstance(BlogsEntry.class.getClassLoader(),
+				new Class[] { BlogsEntry.class },
+				new AutoEscapeBeanHandler(this));
 		}
 	}
 

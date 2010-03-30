@@ -14,6 +14,7 @@
 
 package com.liferay.portal.model;
 
+import com.liferay.portal.kernel.annotation.AutoEscape;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.ServiceContext;
 
@@ -47,6 +48,7 @@ public interface LockModel extends BaseModel<Lock> {
 
 	public void setPrimaryKey(long pk);
 
+	@AutoEscape
 	public String getUuid();
 
 	public void setUuid(String uuid);
@@ -67,6 +69,7 @@ public interface LockModel extends BaseModel<Lock> {
 
 	public void setUserUuid(String userUuid);
 
+	@AutoEscape
 	public String getUserName();
 
 	public void setUserName(String userName);
@@ -75,14 +78,17 @@ public interface LockModel extends BaseModel<Lock> {
 
 	public void setCreateDate(Date createDate);
 
+	@AutoEscape
 	public String getClassName();
 
 	public void setClassName(String className);
 
+	@AutoEscape
 	public String getKey();
 
 	public void setKey(String key);
 
+	@AutoEscape
 	public String getOwner();
 
 	public void setOwner(String owner);

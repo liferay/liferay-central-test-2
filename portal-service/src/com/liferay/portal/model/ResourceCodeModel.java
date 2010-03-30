@@ -14,6 +14,7 @@
 
 package com.liferay.portal.model;
 
+import com.liferay.portal.kernel.annotation.AutoEscape;
 import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
@@ -52,6 +53,7 @@ public interface ResourceCodeModel extends BaseModel<ResourceCode> {
 
 	public void setCompanyId(long companyId);
 
+	@AutoEscape
 	public String getName();
 
 	public void setName(String name);

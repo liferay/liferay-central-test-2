@@ -79,7 +79,7 @@ Liferay.Util = {
 
 		var A = AUI();
 
-		instance.addInputType = function() {};
+		instance.addInputType = A.Lang.emptyFn;
 
 		if (Liferay.Browser.isIe() && Liferay.Browser.getMajorVersion() < 7) {
 			instance.addInputType = function(el) {
@@ -312,8 +312,7 @@ Liferay.Util = {
 
 	disableElements: function(obj) {
 		AUI().use(
-			'event',
-			'node',
+			'aui-base',
 			function(A) {
 				var el = A.one(obj);
 
@@ -322,7 +321,7 @@ Liferay.Util = {
 
 					var children = el.getElementsByTagName('*');
 
-					var emptyFn = function() { return false; };
+					var emptyFnFalse = A.Lang.emptyFnFalse;
 					var Event = A.Event;
 
 					for (var i = children.length - 1; i >= 0; i--) {
@@ -330,18 +329,18 @@ Liferay.Util = {
 
 						item.style.cursor = 'default';
 
-						el.onclick = emptyFn;
-						el.onmouseover = emptyFn;
-						el.onmouseout = emptyFn;
-						el.onmouseenter = emptyFn;
-						el.onmouseleave = emptyFn;
+						el.onclick = emptyFnFalse;
+						el.onmouseover = emptyFnFalse;
+						el.onmouseout = emptyFnFalse;
+						el.onmouseenter = emptyFnFalse;
+						el.onmouseleave = emptyFnFalse;
 
 						Event.purgeElement(el, false);
 
 						item.href = 'javascript:;';
 						item.disabled = true;
 						item.action = '';
-						item.onsubmit = emptyFn;
+						item.onsubmit = emptyFnFalse;
 					}
 				}
 			}

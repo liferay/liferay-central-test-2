@@ -244,9 +244,7 @@
 		</copy>
 
 		<if>
-			<not>
-				<equals arg1="${jdbc.drivers.optional.dir}" arg2="$${jdbc.drivers.optional.dir}" />
-			</not>
+			<isset property="jdbc.drivers.optional.dir" />
 			<then>
 				<copy todir="${app.server.lib.global.dir}">
 					<fileset

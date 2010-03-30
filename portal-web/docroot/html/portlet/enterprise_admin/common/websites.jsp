@@ -78,7 +78,7 @@ else {
 
 		<aui:model-context bean="<%= website %>" model="<%= Website.class %>" />
 
-		<div class="lfr-form-row">
+		<div class="lfr-form-row lfr-form-row-inline">
 			<div class="row-fields">
 
 				<aui:input name='<%= "websiteId" + websitesIndex %>' type="hidden" />
@@ -87,9 +87,7 @@ else {
 
 				<aui:select label="type" name='<%= "websiteTypeId" + websitesIndex %>' listType="<%= className + ListTypeConstants.WEBSITE %>" />
 
-				<aui:field-wrapper cssClass="primary-ctrl">
-					<aui:input checked="<%= website.isPrimary() %>" id='<%= "websitePrimary" + websitesIndex %>' inlineLabel="left" label="primary" name="websitePrimary" type="radio" value="<%= websitesIndex %>" />
-				</aui:field-wrapper>
+				<aui:input checked="<%= website.isPrimary() %>" cssClass="primary-ctrl" id='<%= "websitePrimary" + websitesIndex %>' inlineLabel="left" label="primary" name="websitePrimary" type="radio" value="<%= websitesIndex %>" />
 			</div>
 		</div>
 

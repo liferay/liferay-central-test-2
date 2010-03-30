@@ -14,6 +14,7 @@
 
 package com.liferay.portal.model;
 
+import com.liferay.portal.kernel.annotation.AutoEscape;
 import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
@@ -58,6 +59,7 @@ public interface ReleaseModel extends BaseModel<Release> {
 
 	public void setModifiedDate(Date modifiedDate);
 
+	@AutoEscape
 	public String getServletContextName();
 
 	public void setServletContextName(String servletContextName);
@@ -76,6 +78,7 @@ public interface ReleaseModel extends BaseModel<Release> {
 
 	public void setVerified(boolean verified);
 
+	@AutoEscape
 	public String getTestString();
 
 	public void setTestString(String testString);
