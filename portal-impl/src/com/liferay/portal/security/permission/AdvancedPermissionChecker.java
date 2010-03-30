@@ -635,9 +635,6 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 				PortletPermissionUtil.hasLayoutManagerPermission(
 					name, actionId);
 		}
-		else {
-			hasLayoutManagerPermission = false;
-		}
 
 		if (checkAdmin &&
 			(isCompanyAdminImpl(companyId) ||
