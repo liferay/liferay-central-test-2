@@ -2931,7 +2931,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	protected void setEmailAddress(
 			User user, String password, String firstName, String middleName,
 			String lastName, String emailAddress)
-	throws PortalException, SystemException {
+		throws PortalException, SystemException {
 
 		if (emailAddress.equalsIgnoreCase(user.getEmailAddress())) {
 			return;
