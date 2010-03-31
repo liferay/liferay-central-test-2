@@ -31,6 +31,12 @@ String editorParam = "emailEventReminderBody";
 String editorContent = emailEventReminderBody;
 %>
 
+<style type="text/css">
+	.aui-form fieldset {
+		margin-bottom: 0;
+	}
+</style>
+
 <liferay-portlet:renderURL var="portletURL" portletConfiguration="true">
 	<portlet:param name="tabs2" value="<%= tabs2 %>" />
 	<portlet:param name="redirect" value="<%= redirect %>" />
@@ -163,8 +169,6 @@ String editorContent = emailEventReminderBody;
 			</aui:fieldset>
 		</c:when>
 	</c:choose>
-
-	<br />
 
 	<aui:button-row>
 		<aui:button type="submit" />
