@@ -550,6 +550,8 @@ Liferay.Portlet = {
 						closeButton.on('click', dialog.close, dialog);
 					}
 
+					iframeBody.addClass('configuration-popup');
+
 					bodyNode.loadingmask.hide();
 				}
 			);
