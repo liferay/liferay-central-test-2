@@ -269,14 +269,14 @@ portletsList = ListUtil.sort(portletsList, new PortletTitleComparator(applicatio
 
 			<ul id="<portlet:namespace />permissionsUl">
 				<c:choose>
-					<c:when test="<%= PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5 %>">
+					<c:when test="<%= (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5) || (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) %>">
 						<li class="tree-item">
-							<aui:input checked="<%= true %>" cssClass="disabled" disabled="<%= true %>" inlineLabel="right" name="permissionsAssignedToRoles" type="checkbox" />
+							<aui:input cssClass="disabled" disabled="<%= true %>" inlineLabel="right" name="permissionsAssignedToRoles" type="checkbox" value="<%= true %>" />
 						</li>
 					</c:when>
 					<c:otherwise>
 						<li class="tree-item">
-							<aui:input checked="<%= true %>" cssClass="disabled" disabled="<%= true %>" inlineLabel="right" name="permissionsAssignedToOrganizationsUserGroupsRolesAndCommunities" type="checkbox" />
+							<aui:input cssClass="disabled" disabled="<%= true %>" inlineLabel="right" name="permissionsAssignedToOrganizationsUserGroupsRolesAndCommunities" type="checkbox" value="<%= true %>" />
 						</li>
 						<li class="tree-item">
 							<aui:input cssClass="disabled" disabled="<%= true %>" helpMessage="export-import-permissions-assigned-to-users-help" inlineLabel="right" label="permissions-assigned-to-users" name="<%= PortletDataHandlerKeys.USER_PERMISSIONS %>" type="checkbox" />
