@@ -15,7 +15,7 @@
 package com.liferay.portal.servlet.filters.strip;
 
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
-import com.liferay.portal.kernel.servlet.StringServletOutputStream;
+import com.liferay.portal.kernel.servlet.PipingServletOutputStream;
 import com.liferay.portal.kernel.util.StringPool;
 
 import java.io.IOException;
@@ -117,7 +117,7 @@ public class StripResponse extends HttpServletResponseWrapper {
 	protected ServletOutputStream createOutputStream() {
 		_unsyncByteArrayOutputStream = new UnsyncByteArrayOutputStream();
 
-		return new StringServletOutputStream(_unsyncByteArrayOutputStream);
+		return new PipingServletOutputStream(_unsyncByteArrayOutputStream);
 	}
 
 	private String _contentType;

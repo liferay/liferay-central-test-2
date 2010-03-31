@@ -14,33 +14,36 @@
 
 package com.liferay.portal.kernel.servlet;
 
-import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 
 import javax.servlet.ServletOutputStream;
 
 /**
- * <a href="StringServletOutputStream.java.html"><b><i>View Source</i></b></a>
+ * <a href="PipingServletOutputStream.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * @author Shuyang Zhou
  */
-public class StringServletOutputStream extends ServletOutputStream {
+public class PipingServletOutputStream extends ServletOutputStream {
 
-	public StringServletOutputStream(UnsyncByteArrayOutputStream ubaos) {
-		_ubaos = ubaos;
+	public PipingServletOutputStream(OutputStream outputStream) {
+		_outputStream = outputStream;
 	}
 
-	public void write(byte[] b) {
-		_ubaos.write(b);
+	public void write(byte[] byteArray) throws IOException {
+		_outputStream.write(byteArray);
 	}
 
-	public void write(byte[] b, int off, int len) {
-		_ubaos.write(b, off, len);
+	public void write(byte[] byteArray, int offset, int length)
+		throws IOException {
+
+		_outputStream.write(byteArray, offset, length);
 	}
 
-	public void write(int b) {
-		_ubaos.write(b);
+	public void write(int i) throws IOException {
+		_outputStream.write(i);
 	}
 
-	private UnsyncByteArrayOutputStream _ubaos = null;
+	private OutputStream _outputStream;
 
 }

@@ -53,8 +53,10 @@ public class WrapPortletTag extends ParamAndPropertyAncestorTagImpl {
 
 		RequestDispatcher requestDispatcher =
 			servletContext.getRequestDispatcher(portletPage);
+
 		StringServletResponse stringResponse =
 			new StringServletResponse(response);
+
 		requestDispatcher.include(request, stringResponse);
 
 		portletDisplay.setContent(stringResponse.getString());

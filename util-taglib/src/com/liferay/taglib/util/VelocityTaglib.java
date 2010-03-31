@@ -14,8 +14,7 @@
 
 package com.liferay.taglib.util;
 
-import com.liferay.portal.kernel.servlet.PageContextAdapter;
-import com.liferay.portal.kernel.servlet.PipingServletResponse;
+import com.liferay.portal.kernel.servlet.PipingPageContext;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.Layout;
@@ -62,6 +61,7 @@ import javax.portlet.WindowState;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.TagSupport;
 
@@ -78,28 +78,9 @@ public class VelocityTaglib {
 
 	public VelocityTaglib(
 		ServletContext servletContext, HttpServletRequest request,
-		PipingServletResponse pipingResponse, PageContext pageContext) {
+		HttpServletResponse response, PageContext pageContext) {
 
-		init(servletContext, request, pipingResponse, pageContext);
-	}
-
-	public VelocityTaglib init(
-		ServletContext servletContext, HttpServletRequest request,
-		PipingServletResponse pipingResponse, PageContext pageContext) {
-
-		_servletContext = servletContext;
-		_request = request;
-		_pipingResponse = pipingResponse;
-		_pageContext = pageContext;
-
-		return this;
-	}
-
-	public String actionURL(String portletName, String queryString)
-		throws Exception {
-
-		return actionURL(
-			LayoutConstants.DEFAULT_PLID, portletName, queryString);
+		init(servletContext, request, response, pageContext);
 	}
 
 	public String actionURL(long plid, String portletName, String queryString)
@@ -112,14 +93,33 @@ public class VelocityTaglib {
 			windowState, portletMode, plid, portletName, queryString);
 	}
 
-	public String actionURL(
-			String windowState, String portletMode, String portletName,
-			String queryString)
+	public String actionURL(String portletName, String queryString)
 		throws Exception {
 
 		return actionURL(
-			windowState, portletMode, LayoutConstants.DEFAULT_PLID, portletName,
+			LayoutConstants.DEFAULT_PLID, portletName, queryString);
+	}
+
+	public String actionURL(
+			String windowState, String portletMode, Boolean secure,
+			Boolean copyCurrentRenderParameters, Boolean escapeXml, String name,
+			long plid, String portletName, Boolean anchor, Boolean encrypt,
+			long doAsUserId, Boolean portletConfiguration, String queryString)
+		throws Exception {
+
+		String var = null;
+		String varImpl = null;
+		String resourceID = null;
+		String cacheability = null;
+		Map<String, String[]> params = HttpUtil.parameterMapFromString(
 			queryString);
+		boolean writeOutput = false;
+
+		return ActionURLTag.doTag(
+			PortletRequest.ACTION_PHASE, windowState, portletMode, var, varImpl,
+			secure, copyCurrentRenderParameters, escapeXml, name, resourceID,
+			cacheability, plid, portletName, anchor, encrypt, doAsUserId,
+			portletConfiguration, params, writeOutput, _pageContext);
 	}
 
 	public String actionURL(
@@ -143,25 +143,13 @@ public class VelocityTaglib {
 	}
 
 	public String actionURL(
-			String windowState, String portletMode, Boolean secure,
-			Boolean copyCurrentRenderParameters, Boolean escapeXml, String name,
-			long plid, String portletName, Boolean anchor, Boolean encrypt,
-			long doAsUserId, Boolean portletConfiguration, String queryString)
+			String windowState, String portletMode, String portletName,
+			String queryString)
 		throws Exception {
 
-		String var = null;
-		String varImpl = null;
-		String resourceID = null;
-		String cacheability = null;
-		Map<String, String[]> params = HttpUtil.parameterMapFromString(
+		return actionURL(
+			windowState, portletMode, LayoutConstants.DEFAULT_PLID, portletName,
 			queryString);
-		boolean writeOutput = false;
-
-		return ActionURLTag.doTag(
-			PortletRequest.ACTION_PHASE, windowState, portletMode, var, varImpl,
-			secure, copyCurrentRenderParameters, escapeXml, name, resourceID,
-			cacheability, plid, portletName, anchor, encrypt, doAsUserId,
-			portletConfiguration, params, writeOutput, _pageContext);
 	}
 
 	public void breadcrumb() throws Exception {
@@ -194,7 +182,7 @@ public class VelocityTaglib {
 		return DoAsURLTag.doTag(doAsUserId, null, false, _pageContext);
 	}
 
-	public BreadcrumbTag getBreadcrumbTag() {
+	public BreadcrumbTag getBreadcrumbTag() throws Exception {
 		BreadcrumbTag breadcrumbTag = new BreadcrumbTag();
 
 		setUp(breadcrumbTag);
@@ -202,7 +190,7 @@ public class VelocityTaglib {
 		return breadcrumbTag;
 	}
 
-	public MyPlacesTag getMyPlacesTag() {
+	public MyPlacesTag getMyPlacesTag() throws Exception {
 		MyPlacesTag myPlacesTag = new MyPlacesTag();
 
 		setUp(myPlacesTag);
@@ -210,7 +198,7 @@ public class VelocityTaglib {
 		return myPlacesTag;
 	}
 
-	public PngImageTag getPngImageTag() {
+	public PngImageTag getPngImageTag() throws Exception {
 		PngImageTag pngImageTag = new PngImageTag();
 
 		setUp(pngImageTag);
@@ -349,21 +337,32 @@ public class VelocityTaglib {
 		iconRefreshTag.runTag();
 	}
 
-	public void include(String page) throws Exception {
-
-		RequestDispatcher requestDispatcher =
-			_servletContext.getRequestDispatcher(page);
-
-		requestDispatcher.include(_request, _pipingResponse);
-	}
-
 	public void include(ServletContext servletContext, String page)
 		throws Exception {
 
 		RequestDispatcher requestDispatcher =
 			servletContext.getRequestDispatcher(page);
 
-		requestDispatcher.include(_request, _pipingResponse);
+		requestDispatcher.include(_request, _response);
+	}
+
+	public void include(String page) throws Exception {
+		RequestDispatcher requestDispatcher =
+			_servletContext.getRequestDispatcher(page);
+
+		requestDispatcher.include(_request, _response);
+	}
+
+	public VelocityTaglib init(
+		ServletContext servletContext, HttpServletRequest request,
+		HttpServletResponse response, PageContext pageContext) {
+
+		_servletContext = servletContext;
+		_request = request;
+		_response = response;
+		_pageContext = pageContext;
+
+		return this;
 	}
 
 	public void journalContentSearch() throws Exception {
@@ -418,13 +417,11 @@ public class VelocityTaglib {
 	}
 
 	public void layoutIcon(Layout layout) throws Exception {
-
-		LayoutIconTag.doTag(layout, _servletContext, _request, _pipingResponse);
+		LayoutIconTag.doTag(layout, _servletContext, _request, _response);
 	}
 
 	public void metaTags() throws Exception {
-
-		MetaTagsTag.doTag(_servletContext, _request, _pipingResponse);
+		MetaTagsTag.doTag(_servletContext, _request, _response);
 	}
 
 	public void myPlaces() throws Exception {
@@ -455,13 +452,6 @@ public class VelocityTaglib {
 			null, false, _pageContext);
 	}
 
-	public String renderURL(String portletName, String queryString)
-		throws Exception {
-
-		return renderURL(
-			LayoutConstants.DEFAULT_PLID, portletName, queryString);
-	}
-
 	public String renderURL(long plid, String portletName, String queryString)
 		throws Exception {
 
@@ -472,33 +462,11 @@ public class VelocityTaglib {
 			windowState, portletMode, plid, portletName, queryString);
 	}
 
-	public String renderURL(
-			String windowState, String portletMode, String portletName,
-			String queryString)
+	public String renderURL(String portletName, String queryString)
 		throws Exception {
 
 		return renderURL(
-			windowState, portletMode, LayoutConstants.DEFAULT_PLID, portletName,
-			queryString);
-	}
-
-	public String renderURL(
-			String windowState, String portletMode, long plid,
-			String portletName, String queryString)
-		throws Exception {
-
-		Boolean secure = null;
-		Boolean copyCurrentRenderParameters = null;
-		Boolean escapeXml = null;
-		Boolean anchor = null;
-		Boolean encrypt = null;
-		long doAsUserId = 0;
-		Boolean portletConfiguration = null;
-
-		return renderURL(
-			windowState, portletMode, secure, copyCurrentRenderParameters,
-			escapeXml, plid, portletName, anchor, encrypt, doAsUserId,
-			portletConfiguration, queryString);
+			LayoutConstants.DEFAULT_PLID, portletName, queryString);
 	}
 
 	public String renderURL(
@@ -524,6 +492,35 @@ public class VelocityTaglib {
 			portletConfiguration, params, writeOutput, _pageContext);
 	}
 
+	public String renderURL(
+			String windowState, String portletMode, long plid,
+			String portletName, String queryString)
+		throws Exception {
+
+		Boolean secure = null;
+		Boolean copyCurrentRenderParameters = null;
+		Boolean escapeXml = null;
+		Boolean anchor = null;
+		Boolean encrypt = null;
+		long doAsUserId = 0;
+		Boolean portletConfiguration = null;
+
+		return renderURL(
+			windowState, portletMode, secure, copyCurrentRenderParameters,
+			escapeXml, plid, portletName, anchor, encrypt, doAsUserId,
+			portletConfiguration, queryString);
+	}
+
+	public String renderURL(
+			String windowState, String portletMode, String portletName,
+			String queryString)
+		throws Exception {
+
+		return renderURL(
+			windowState, portletMode, LayoutConstants.DEFAULT_PLID, portletName,
+			queryString);
+	}
+
 	public void runtime(String portletName)
 		throws Exception {
 
@@ -535,7 +532,7 @@ public class VelocityTaglib {
 
 		RuntimeTag.doTag(
 			portletName, queryString, null, _servletContext, _request,
-			_pipingResponse);
+			_response);
 	}
 
 	public void runtime(
@@ -544,7 +541,7 @@ public class VelocityTaglib {
 
 		RuntimeTag.doTag(
 			portletName, queryString, defaultPreferences, null, _servletContext,
-			_request, _pipingResponse);
+			_request, _response);
 	}
 
 	public void search() throws Exception {
@@ -570,27 +567,25 @@ public class VelocityTaglib {
 
 		ToggleTag.doTag(
 			id, showImage, hideImage, showMessage, hideMessage,
-			defaultShowContent, null, _servletContext, _request,
-			_pipingResponse);
+			defaultShowContent, null, _servletContext, _request, _response);
 	}
 
 	public String wrapPortlet(String wrapPage, String portletPage)
 		throws Exception {
 
 		return WrapPortletTag.doTag(
-			wrapPage, portletPage, _servletContext, _request, _pipingResponse,
+			wrapPage, portletPage, _servletContext, _request, _response,
 			_pageContext);
 	}
 
-	protected void setUp(TagSupport tagSupport) {
-
+	protected void setUp(TagSupport tagSupport) throws Exception {
 		tagSupport.setPageContext(
-			new PageContextAdapter(_pageContext, _pipingResponse.getWriter()));
+			new PipingPageContext(_pageContext, _response.getWriter()));
 	}
 
-	private ServletContext _servletContext;
-	private HttpServletRequest _request;
-	private PipingServletResponse _pipingResponse;
 	private PageContext _pageContext;
+	private HttpServletRequest _request;
+	private HttpServletResponse _response;
+	private ServletContext _servletContext;
 
 }

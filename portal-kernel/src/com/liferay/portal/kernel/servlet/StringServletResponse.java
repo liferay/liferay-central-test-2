@@ -52,7 +52,7 @@ public class StringServletResponse extends HttpServletResponseWrapper {
 	public ServletOutputStream getOutputStream() {
 		if (_servletOutputStream == null) {
 			_unsyncByteArrayOutputStream = new UnsyncByteArrayOutputStream();
-			_servletOutputStream = new StringServletOutputStream(
+			_servletOutputStream = new PipingServletOutputStream(
 				_unsyncByteArrayOutputStream);
 		}
 

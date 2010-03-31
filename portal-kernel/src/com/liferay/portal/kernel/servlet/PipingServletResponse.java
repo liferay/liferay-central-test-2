@@ -30,47 +30,52 @@ import javax.servlet.http.HttpServletResponseWrapper;
 public class PipingServletResponse extends HttpServletResponseWrapper {
 
 	public PipingServletResponse(
-		HttpServletResponse response, Writer pipingWriter) {
+		HttpServletResponse response, OutputStream outputStream) {
+
 		super(response);
-		_pipingWriter = new PrintWriter(pipingWriter, true);
+
+		_servletOutputStream = new PipingServletOutputStream(outputStream);
 	}
 
 	public PipingServletResponse(
-		HttpServletResponse response, PrintWriter pipingWriter) {
+		HttpServletResponse response, PrintWriter printWriter) {
+
 		super(response);
-		_pipingWriter = pipingWriter;
+
+		_printWriter = printWriter;
 	}
 
 	public PipingServletResponse(
-		HttpServletResponse response, OutputStream pipingOutputStream) {
+		HttpServletResponse response, ServletOutputStream servletOutputStream) {
+
 		super(response);
-		_pipingOutputStream =
-			new ServletOutputStreamAdapter(pipingOutputStream);
+
+		_servletOutputStream = servletOutputStream;
 	}
 
-	public PipingServletResponse(
-		HttpServletResponse response, ServletOutputStream pipingOutputStream) {
+	public PipingServletResponse(HttpServletResponse response, Writer writer) {
 		super(response);
-		_pipingOutputStream = pipingOutputStream;
+
+		_printWriter = new PrintWriter(writer, true);
 	}
 
 	public ServletOutputStream getOutputStream() {
-		if (_pipingOutputStream == null) {
-			throw new IllegalStateException(
-				"This piping servlet response is for Writer output!");
+		if (_servletOutputStream == null) {
+			throw new IllegalStateException("Servlet output stream is null");
 		}
-		return  _pipingOutputStream;
+
+		return  _servletOutputStream;
 	}
 
 	public PrintWriter getWriter() {
-		if (_pipingWriter == null) {
-			throw new IllegalStateException(
-				"This piping servlet response is for OutputStream output!");
+		if (_printWriter == null) {
+			throw new IllegalStateException("Print writer is null");
 		}
-		return _pipingWriter;
+
+		return _printWriter;
 	}
 
-	private PrintWriter _pipingWriter;
-	private ServletOutputStream _pipingOutputStream;
+	private PrintWriter _printWriter;
+	private ServletOutputStream _servletOutputStream;
 
 }

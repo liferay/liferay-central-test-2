@@ -122,14 +122,6 @@ public class ThemeUtil {
 			return null;
 		}
 
-		Writer writer = null;
-		if (write) {
-			writer = pageContext.getOut();
-		}
-		else {
-			writer = new UnsyncStringWriter(true);
-		}
-
 		FreeMarkerContext freeMarkerContext =
 			FreeMarkerEngineUtil.getWrappedStandardToolsContext();
 
@@ -141,17 +133,28 @@ public class ThemeUtil {
 
 		ServletContext themeServletContext = VelocityContextPool.get(ctxName);
 
-		// liferay:include tag library
+		freeMarkerContext.put("themeServletContext", themeServletContext);
 
-		PipingServletResponse pipingResponse =
-			new PipingServletResponse(
-				(HttpServletResponse) pageContext.getResponse(), writer);
+		// Tag libraries
+
+		HttpServletResponse response =
+			(HttpServletResponse)pageContext.getResponse();
+
+		Writer writer = null;
+
+		if (write) {
+			writer = pageContext.getOut();
+		}
+		else {
+			writer = new UnsyncStringWriter(true);
+		}
+
 		VelocityTaglib velocityTaglib = new VelocityTaglib(
-			servletContext, request, pipingResponse, pageContext);
+			servletContext, request,
+			new PipingServletResponse(response, writer), pageContext);
 
 		request.setAttribute(WebKeys.VELOCITY_TAGLIB, velocityTaglib);
 
-		freeMarkerContext.put("themeServletContext", themeServletContext);
 		freeMarkerContext.put("taglibLiferay", velocityTaglib);
 		freeMarkerContext.put("theme", velocityTaglib);
 
@@ -168,9 +171,6 @@ public class ThemeUtil {
 		freeMarkerContext.put("ThemeJspTaglibs", themeTaglib);
 
 		// FreeMarker JSP tag library support
-
-		HttpServletResponse response =
-			(HttpServletResponse)pageContext.getResponse();
 
 		HttpRequestHashModel httpRequestHashModel = new HttpRequestHashModel(
 			request, response, ObjectWrapper.DEFAULT_WRAPPER);
@@ -284,14 +284,6 @@ public class ThemeUtil {
 			return null;
 		}
 
-		Writer writer = null;
-		if (write) {
-			writer = pageContext.getOut();
-		}
-		else {
-			writer = new UnsyncStringWriter(true);
-		}
-
 		VelocityContext velocityContext =
 			VelocityEngineUtil.getWrappedStandardToolsContext();
 
@@ -303,17 +295,28 @@ public class ThemeUtil {
 
 		ServletContext themeServletContext = VelocityContextPool.get(ctxName);
 
-		// liferay:include tag library
+		velocityContext.put("themeServletContext", themeServletContext);
 
-		PipingServletResponse pipingResponse =
-			new PipingServletResponse(
-				(HttpServletResponse) pageContext.getResponse(), writer);
+		// Tag libraries
+
+		HttpServletResponse response =
+			(HttpServletResponse)pageContext.getResponse();
+
+		Writer writer = null;
+
+		if (write) {
+			writer = pageContext.getOut();
+		}
+		else {
+			writer = new UnsyncStringWriter(true);
+		}
+
 		VelocityTaglib velocityTaglib = new VelocityTaglib(
-			servletContext, request, pipingResponse, pageContext);
+			servletContext, request,
+			new PipingServletResponse(response, writer), pageContext);
 
 		request.setAttribute(WebKeys.VELOCITY_TAGLIB, velocityTaglib);
 
-		velocityContext.put("themeServletContext", themeServletContext);
 		velocityContext.put("taglibLiferay", velocityTaglib);
 		velocityContext.put("theme", velocityTaglib);
 

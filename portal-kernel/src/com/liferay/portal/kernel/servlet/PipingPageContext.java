@@ -14,34 +14,28 @@
 
 package com.liferay.portal.kernel.servlet;
 
-import java.io.IOException;
-import java.io.OutputStream;
+import java.io.Writer;
 
-import javax.servlet.ServletOutputStream;
+import javax.servlet.jsp.JspWriter;
+import javax.servlet.jsp.PageContext;
 
 /**
- * <a href="ServletOutputStreamAdapter.java.html"><b><i>View Source</i></b></a>
+ * <a href="PipingPageContext.java.html"><b><i>View Source</i></b></a>
  *
  * @author Shuyang Zhou
  */
-public class ServletOutputStreamAdapter extends ServletOutputStream {
+public class PipingPageContext extends PageContextWrapper {
 
-	public ServletOutputStreamAdapter(OutputStream os) {
-		_os = os;
+	public PipingPageContext(PageContext pageContext, Writer writer) {
+		super(pageContext);
+
+		_jspWriter = new PipingJspWriter(writer);
 	}
 
-	public void write(int b) throws IOException {
-		_os.write(b);
+	public JspWriter getOut() {
+		return _jspWriter;
 	}
 
-	public void write(byte[] b) throws IOException {
-		_os.write(b);
-	}
-
-	public void write(byte[] b, int off, int len) throws IOException {
-		_os.write(b, off, len);
-	}
-
-	private OutputStream _os;
+	private JspWriter _jspWriter;
 
 }
