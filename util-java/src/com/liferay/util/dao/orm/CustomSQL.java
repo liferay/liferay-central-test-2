@@ -394,13 +394,23 @@ public class CustomSQL {
 	}
 
 	public String removeOrderBy(String sql) {
+
 		// See LPS-8719
-		AtomicReference<String> sqlRef = new AtomicReference<String>(sql);
-		int pos = sqlRef.get().indexOf(" ORDER BY ");
+
+		AtomicReference<String> sqlAtomicReference =
+			new AtomicReference<String>(sql);
+
+		int pos = sqlAtomicReference.get().indexOf(" ORDER BY ");
 
 		if (pos != -1) {
-			sql = sqlRef.get().substring(0, pos);
+			sql = sqlAtomicReference.get().substring(0, pos);
 		}
+
+		/*int pos = sql.indexOf(" ORDER BY ");
+
+		if (pos != -1) {
+			sql = sql.substring(0, pos);
+		}*/
 
 		return sql;
 	}
