@@ -726,12 +726,12 @@ ${exception.message}
 
 	<target name="build-upgrade-table">
 		<if>
-			<isset property="upgrade.table.path" />
+			<isset property="upgrade.table.dir" />
 			<then>
 				<for param="zip.file">
 					<path>
 						<fileset
-							dir="${upgrade.table.path}"
+							dir="${upgrade.table.dir}"
 							includes="*.zip"
 						/>
 					</path>
@@ -760,13 +760,13 @@ ${exception.message}
 							<not>
 								<uptodate
 									srcfile="@{zip.file}"
-									targetfile="${upgrade.table.path}/${zip.version}"
+									targetfile="${upgrade.table.dir}/${zip.version}"
 								/>
 							</not>
 							<then>
-								<mkdir dir="${upgrade.table.path}/${zip.version}" />
+								<mkdir dir="${upgrade.table.dir}/${zip.version}" />
 
-								<unzip src="@{zip.file}" dest="${upgrade.table.path}/${zip.version}">
+								<unzip src="@{zip.file}" dest="${upgrade.table.dir}/${zip.version}">
 									<patternset>
 										<include name="**/*ModelImpl.java" />
 									</patternset>
@@ -783,7 +783,7 @@ ${exception.message}
 					fork="true"
 					newenvironment="true"
 				>
-					<arg value="${upgrade.table.path}" />
+					<arg value="${upgrade.table.dir}" />
 				</java>
 			</then>
 		</if>
