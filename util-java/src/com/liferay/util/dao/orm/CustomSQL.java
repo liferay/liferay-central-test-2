@@ -42,6 +42,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Properties;
+import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * <a href="CustomSQL.java.html"><b><i>View Source</i></b></a>
@@ -393,10 +394,12 @@ public class CustomSQL {
 	}
 
 	public String removeOrderBy(String sql) {
-		int pos = sql.indexOf(" ORDER BY ");
+		// See LPS-8719
+		AtomicReference<String> sqlRef = new AtomicReference<String>(sql);
+		int pos = sqlRef.get().indexOf(" ORDER BY ");
 
 		if (pos != -1) {
-			sql = sql.substring(0, pos);
+			sql = sqlRef.get().substring(0, pos);
 		}
 
 		return sql;
