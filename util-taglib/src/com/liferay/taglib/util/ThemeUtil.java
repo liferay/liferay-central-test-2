@@ -53,6 +53,7 @@ import org.apache.struts.tiles.ComponentContext;
  * @author Brian Myunghun Kim
  * @author Raymond Augé
  * @author Mika Koivisto
+ * @author Shuyang Zhou
  */
 public class ThemeUtil {
 
@@ -138,7 +139,8 @@ public class ThemeUtil {
 			(HttpServletResponse)pageContext.getResponse());
 
 		VelocityTaglib velocityTaglib = new VelocityTaglib(
-			servletContext, request, stringResponse, pageContext);
+			servletContext, request, stringResponse, pageContext,
+			unsyncStringWriter);
 
 		request.setAttribute(WebKeys.VELOCITY_TAGLIB, velocityTaglib);
 
@@ -300,7 +302,8 @@ public class ThemeUtil {
 			(HttpServletResponse)pageContext.getResponse());
 
 		VelocityTaglib velocityTaglib = new VelocityTaglib(
-			servletContext, request, stringResponse, pageContext);
+			servletContext, request, stringResponse, pageContext,
+			unsyncStringWriter);
 
 		request.setAttribute(WebKeys.VELOCITY_TAGLIB, velocityTaglib);
 

@@ -14,28 +14,27 @@
 
 package com.liferay.portal.kernel.servlet;
 
+import java.io.Writer;
+
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.PageContext;
 
 /**
- * <a href="StringPageContext.java.html"><b><i>View Source</i></b></a>
+ * <a href="PageContextAdapter.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * @author Shuyang Zhou
  */
-public class StringPageContext extends PageContextWrapper {
+public class PageContextAdapter extends PageContextWrapper {
 
-	public StringPageContext(PageContext pageContext) {
+	public PageContextAdapter(PageContext pageContext, Writer writer) {
 		super(pageContext);
+		_jspWriterAdapter = new JspWriterAdapter(writer);
 	}
 
 	public JspWriter getOut() {
-		return _stringJspWriter;
+		return _jspWriterAdapter;
 	}
 
-	public String getString() {
-		return _stringJspWriter.getString();
-	}
-
-	private StringJspWriter _stringJspWriter = new StringJspWriter();
+	private JspWriterAdapter _jspWriterAdapter;
 
 }

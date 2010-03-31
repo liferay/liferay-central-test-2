@@ -55,6 +55,7 @@ import javax.servlet.jsp.PageContext;
  *
  * @author Brian Wing Shun Chan
  * @author Raymond Augé
+ * @author Shuyang Zhou
  */
 public class RuntimePortletUtil {
 
@@ -208,18 +209,19 @@ public class RuntimePortletUtil {
 		StringServletResponse stringResponse = new StringServletResponse(
 			response);
 
+		UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter(true);
+
 		MethodWrapper methodWrapper = new MethodWrapper(
 			"com.liferay.taglib.util.VelocityTaglib", "init",
 			new Object[] {
-				servletContext, request, stringResponse, pageContext
+				servletContext, request, stringResponse, pageContext,
+				unsyncStringWriter
 			});
 
 		Object velocityTaglib = MethodInvoker.invoke(methodWrapper);
 
 		velocityContext.put("taglibLiferay", velocityTaglib);
 		velocityContext.put("theme", velocityTaglib);
-
-		UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter(true);
 
 		try {
 			VelocityEngineUtil.mergeTemplate(

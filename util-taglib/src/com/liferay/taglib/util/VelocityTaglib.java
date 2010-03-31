@@ -14,7 +14,7 @@
 
 package com.liferay.taglib.util;
 
-import com.liferay.portal.kernel.servlet.StringPageContext;
+import com.liferay.portal.kernel.servlet.PageContextAdapter;
 import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -53,6 +53,8 @@ import com.liferay.taglib.ui.SearchTag;
 import com.liferay.taglib.ui.StagingTag;
 import com.liferay.taglib.ui.ToggleTag;
 
+import java.io.Writer;
+
 import java.util.Map;
 
 import javax.portlet.PortletMode;
@@ -69,6 +71,7 @@ import javax.servlet.jsp.tagext.TagSupport;
  * <a href="VelocityTaglib.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Shuyang Zhou
  */
 public class VelocityTaglib {
 
@@ -77,19 +80,22 @@ public class VelocityTaglib {
 
 	public VelocityTaglib(
 		ServletContext servletContext, HttpServletRequest request,
-		StringServletResponse stringResponse, PageContext pageContext) {
+		StringServletResponse stringResponse, PageContext pageContext,
+		Writer writer) {
 
-		init(servletContext, request, stringResponse, pageContext);
+		init(servletContext, request, stringResponse, pageContext, writer);
 	}
 
 	public VelocityTaglib init(
 		ServletContext servletContext, HttpServletRequest request,
-		StringServletResponse stringResponse, PageContext pageContext) {
+		StringServletResponse stringResponse, PageContext pageContext,
+		Writer writer) {
 
 		_servletContext = servletContext;
 		_request = request;
 		_stringResponse = stringResponse;
 		_pageContext = pageContext;
+		_writer = writer;
 
 		return this;
 	}
@@ -163,15 +169,15 @@ public class VelocityTaglib {
 			portletConfiguration, params, writeOutput, _pageContext);
 	}
 
-	public String breadcrumb() throws Exception {
+	public void breadcrumb() throws Exception {
 		BreadcrumbTag breadcrumbTag = new BreadcrumbTag();
 
 		setUp(breadcrumbTag);
 
-		return breadcrumbTag.runTag();
+		breadcrumbTag.runTag();
 	}
 
-	public String breadcrumb(
+	public void breadcrumb(
 			int displayStyle, boolean showGuestGroup, boolean showParentGroups,
 			boolean showLayout, boolean showPortletBreadcrumb)
 		throws Exception {
@@ -186,7 +192,7 @@ public class VelocityTaglib {
 		breadcrumbTag.setShowParentGroups(showParentGroups);
 		breadcrumbTag.setShowPortletBreadcrumb(showPortletBreadcrumb);
 
-		return breadcrumbTag.runTag();
+		breadcrumbTag.runTag();
 	}
 
 	public String doAsURL(long doAsUserId) throws Exception {
@@ -226,126 +232,126 @@ public class VelocityTaglib {
 		return theme.getSetting(name);
 	}
 
-	public String iconBack() throws Exception {
+	public void iconBack() throws Exception {
 		IconBackTag iconBackTag = new IconBackTag();
 
 		setUp(iconBackTag);
 
-		return iconBackTag.runTag();
+		iconBackTag.runTag();
 	}
 
-	public String iconClose() throws Exception {
+	public void iconClose() throws Exception {
 		IconCloseTag iconCloseTag = new IconCloseTag();
 
 		setUp(iconCloseTag);
 
-		return iconCloseTag.runTag();
+		iconCloseTag.runTag();
 	}
 
-	public String iconConfiguration() throws Exception {
+	public void iconConfiguration() throws Exception {
 		IconConfigurationTag iconConfigurationTag = new IconConfigurationTag();
 
 		setUp(iconConfigurationTag);
 
-		return iconConfigurationTag.runTag();
+		iconConfigurationTag.runTag();
 	}
 
-	public String iconEdit() throws Exception {
+	public void iconEdit() throws Exception {
 		IconEditTag iconEditTag = new IconEditTag();
 
 		setUp(iconEditTag);
 
-		return iconEditTag.runTag();
+		iconEditTag.runTag();
 	}
 
-	public String iconEditDefaults() throws Exception {
+	public void iconEditDefaults() throws Exception {
 		IconEditDefaultsTag iconEditDefaultsTag = new IconEditDefaultsTag();
 
 		setUp(iconEditDefaultsTag);
 
-		return iconEditDefaultsTag.runTag();
+		iconEditDefaultsTag.runTag();
 	}
 
-	public String iconEditGuest() throws Exception {
+	public void iconEditGuest() throws Exception {
 		IconEditGuestTag iconEditGuestTag = new IconEditGuestTag();
 
 		setUp(iconEditGuestTag);
 
-		return iconEditGuestTag.runTag();
+		iconEditGuestTag.runTag();
 	}
 
-	public String iconHelp() throws Exception {
+	public void iconHelp() throws Exception {
 		IconHelpTag iconHelpTag = new IconHelpTag();
 
 		setUp(iconHelpTag);
 
-		return iconHelpTag.runTag();
+		iconHelpTag.runTag();
 	}
 
-	public String iconMaximize() throws Exception {
+	public void iconMaximize() throws Exception {
 		IconMaximizeTag iconMaximizeTag = new IconMaximizeTag();
 
 		setUp(iconMaximizeTag);
 
-		return iconMaximizeTag.runTag();
+		iconMaximizeTag.runTag();
 	}
 
-	public String iconMinimize() throws Exception {
+	public void iconMinimize() throws Exception {
 		IconMinimizeTag iconMinimizeTag = new IconMinimizeTag();
 
 		setUp(iconMinimizeTag);
 
-		return iconMinimizeTag.runTag();
+		iconMinimizeTag.runTag();
 	}
 
-	public String iconOptions() throws Exception {
+	public void iconOptions() throws Exception {
 		IconOptionsTag iconOptionsTag = new IconOptionsTag();
 
 		setUp(iconOptionsTag);
 
-		return iconOptionsTag.runTag();
+		iconOptionsTag.runTag();
 	}
 
-	public String iconPortlet() throws Exception {
+	public void iconPortlet() throws Exception {
 		IconPortletTag iconPortletTag = new IconPortletTag();
 
 		setUp(iconPortletTag);
 
-		return iconPortletTag.runTag();
+		iconPortletTag.runTag();
 	}
 
-	public String iconPortlet(Portlet portlet) throws Exception {
+	public void iconPortlet(Portlet portlet) throws Exception {
 		IconPortletTag iconPortletTag = new IconPortletTag();
 
 		setUp(iconPortletTag);
 
 		iconPortletTag.setPortlet(portlet);
 
-		return iconPortletTag.runTag();
+		iconPortletTag.runTag();
 	}
 
-	public String iconPortletCss() throws Exception {
+	public void iconPortletCss() throws Exception {
 		IconPortletCssTag iconPortletCssTag = new IconPortletCssTag();
 
 		setUp(iconPortletCssTag);
 
-		return iconPortletCssTag.runTag();
+		iconPortletCssTag.runTag();
 	}
 
-	public String iconPrint() throws Exception {
+	public void iconPrint() throws Exception {
 		IconPrintTag iconPrintTag = new IconPrintTag();
 
 		setUp(iconPrintTag);
 
-		return iconPrintTag.runTag();
+		iconPrintTag.runTag();
 	}
 
-	public String iconRefresh() throws Exception {
+	public void iconRefresh() throws Exception {
 		IconRefreshTag iconRefreshTag = new IconRefreshTag();
 
 		setUp(iconRefreshTag);
 
-		return iconRefreshTag.runTag();
+		iconRefreshTag.runTag();
 	}
 
 	public String include(String page) throws Exception {
@@ -372,24 +378,24 @@ public class VelocityTaglib {
 		return _stringResponse.getString();
 	}
 
-	public String journalContentSearch() throws Exception {
+	public void journalContentSearch() throws Exception {
 		JournalContentSearchTag journalContentSearchTag =
 			new JournalContentSearchTag();
 
 		setUp(journalContentSearchTag);
 
-		return journalContentSearchTag.runTag();
+		journalContentSearchTag.runTag();
 	}
 
-	public String language() throws Exception {
+	public void language() throws Exception {
 		LanguageTag languageTag = new LanguageTag();
 
 		setUp(languageTag);
 
-		return languageTag.runTag();
+		languageTag.runTag();
 	}
 
-	public String language(
+	public void language(
 			String formName, String formAction, String name, int displayStyle)
 		throws Exception {
 
@@ -402,10 +408,10 @@ public class VelocityTaglib {
 		languageTag.setFormName(formName);
 		languageTag.setName(name);
 
-		return languageTag.runTag();
+		languageTag.runTag();
 	}
 
-	public String language(
+	public void language(
 			String formName, String formAction, String name,
 			String[] languageIds, int displayStyle)
 		throws Exception {
@@ -420,41 +426,41 @@ public class VelocityTaglib {
 		languageTag.setLanguageIds(languageIds);
 		languageTag.setName(name);
 
-		return languageTag.runTag();
+		languageTag.runTag();
 	}
 
-	public String layoutIcon(Layout layout) throws Exception {
+	public void layoutIcon(Layout layout) throws Exception {
 		_stringResponse.recycle();
 
 		LayoutIconTag.doTag(layout, _servletContext, _request, _stringResponse);
 
-		return _stringResponse.getString();
+		_stringResponse.getString();
 	}
 
-	public String metaTags() throws Exception {
+	public void metaTags() throws Exception {
 		_stringResponse.recycle();
 
 		MetaTagsTag.doTag(_servletContext, _request, _stringResponse);
 
-		return _stringResponse.getString();
+		_stringResponse.getString();
 	}
 
-	public String myPlaces() throws Exception {
+	public void myPlaces() throws Exception {
 		MyPlacesTag myPlacesTag = new MyPlacesTag();
 
 		setUp(myPlacesTag);
 
-		return myPlacesTag.runTag();
+		myPlacesTag.runTag();
 	}
 
-	public String myPlaces(int max) throws Exception {
+	public void myPlaces(int max) throws Exception {
 		MyPlacesTag myPlacesTag = new MyPlacesTag();
 
 		setUp(myPlacesTag);
 
 		myPlacesTag.setMax(max);
 
-		return myPlacesTag.runTag();
+		myPlacesTag.runTag();
 	}
 
 	public String permissionsURL(
@@ -567,20 +573,20 @@ public class VelocityTaglib {
 		return _stringResponse.getString();
 	}
 
-	public String search() throws Exception {
+	public void search() throws Exception {
 		SearchTag searchTag = new SearchTag();
 
 		setUp(searchTag);
 
-		return searchTag.runTag();
+		searchTag.runTag();
 	}
 
-	public String staging() throws Exception {
+	public void staging() throws Exception {
 		StagingTag stagingTag = new StagingTag();
 
 		setUp(stagingTag);
 
-		return stagingTag.runTag();
+		stagingTag.runTag();
 	}
 
 	public String toggle(
@@ -609,15 +615,15 @@ public class VelocityTaglib {
 	}
 
 	protected void setUp(TagSupport tagSupport) {
-		StringPageContext stringPageContext = new StringPageContext(
-			_pageContext);
 
-		tagSupport.setPageContext(stringPageContext);
+		tagSupport.setPageContext(
+			new PageContextAdapter(_pageContext, _writer));
 	}
 
 	private ServletContext _servletContext;
 	private HttpServletRequest _request;
 	private StringServletResponse _stringResponse;
 	private PageContext _pageContext;
+	private Writer _writer;
 
 }
