@@ -50,6 +50,15 @@ public class JobSchedulerImpl implements JobScheduler {
 			_log.error(e, e);
 		}
 
+		try {
+			if (!_scheduler.isStarted()) {
+				_scheduler.start();
+			}
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+
 		String jobName =
 			intervalJob.getClass().getName() + StringPool.AT +
 				intervalJob.hashCode();
@@ -84,7 +93,6 @@ public class JobSchedulerImpl implements JobScheduler {
 			SimpleTrigger.REPEAT_INDEFINITELY, intervalJob.getInterval());
 
 		try {
-			_scheduler.start();
 			_scheduler.scheduleJob(jobDetail, trigger);
 		}
 		catch (Exception e) {
