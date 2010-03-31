@@ -109,6 +109,7 @@ Liferay.Portlet = {
 
 			portletBound.setContent(html);
 			portletBound = portletBound.get('firstChild');
+
 			var id = portletBound.attr('id');
 
 			var portletId = Liferay.Util.getPortletId(id);
