@@ -37,6 +37,8 @@ import freemarker.ext.servlet.HttpRequestHashModel;
 
 import freemarker.template.ObjectWrapper;
 
+import java.io.Writer;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -120,7 +122,13 @@ public class ThemeUtil {
 			return null;
 		}
 
-		UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter(true);
+		Writer writer = null;
+		if (write) {
+			writer = pageContext.getOut();
+		}
+		else {
+			writer = new UnsyncStringWriter(true);
+		}
 
 		FreeMarkerContext freeMarkerContext =
 			FreeMarkerEngineUtil.getWrappedStandardToolsContext();
@@ -139,8 +147,7 @@ public class ThemeUtil {
 			(HttpServletResponse)pageContext.getResponse());
 
 		VelocityTaglib velocityTaglib = new VelocityTaglib(
-			servletContext, request, stringResponse, pageContext,
-			unsyncStringWriter);
+			servletContext, request, stringResponse, pageContext, writer);
 
 		request.setAttribute(WebKeys.VELOCITY_TAGLIB, velocityTaglib);
 
@@ -172,19 +179,13 @@ public class ThemeUtil {
 
 		// Merge templates
 
-		FreeMarkerEngineUtil.mergeTemplate(
-			source, freeMarkerContext, unsyncStringWriter);
+		FreeMarkerEngineUtil.mergeTemplate(source, freeMarkerContext, writer);
 
 		if (write) {
-			StringBundler unsyncStringWriterSB =
-				unsyncStringWriter.getStringBundler();
-
-			unsyncStringWriterSB.writeTo(pageContext.getOut());
-
 			return null;
 		}
 		else {
-			return unsyncStringWriter.toString();
+			return ((UnsyncStringWriter)writer).toString();
 		}
 	}
 
@@ -283,7 +284,13 @@ public class ThemeUtil {
 			return null;
 		}
 
-		UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter(true);
+		Writer writer = null;
+		if (write) {
+			writer = pageContext.getOut();
+		}
+		else {
+			writer = new UnsyncStringWriter(true);
+		}
 
 		VelocityContext velocityContext =
 			VelocityEngineUtil.getWrappedStandardToolsContext();
@@ -302,8 +309,7 @@ public class ThemeUtil {
 			(HttpServletResponse)pageContext.getResponse());
 
 		VelocityTaglib velocityTaglib = new VelocityTaglib(
-			servletContext, request, stringResponse, pageContext,
-			unsyncStringWriter);
+			servletContext, request, stringResponse, pageContext, writer);
 
 		request.setAttribute(WebKeys.VELOCITY_TAGLIB, velocityTaglib);
 
@@ -313,19 +319,14 @@ public class ThemeUtil {
 
 		// Merge templates
 
-		VelocityEngineUtil.mergeTemplate(
-			source, velocityContext, unsyncStringWriter);
+		VelocityEngineUtil.mergeTemplate(source, velocityContext, writer);
 
 		if (write) {
-			StringBundler unsyncStringWriterSB =
-				unsyncStringWriter.getStringBundler();
-
-			unsyncStringWriterSB.writeTo(pageContext.getOut());
 
 			return null;
 		}
 		else {
-			return unsyncStringWriter.toString();
+			return ((UnsyncStringWriter)writer).toString();
 		}
 	}
 
