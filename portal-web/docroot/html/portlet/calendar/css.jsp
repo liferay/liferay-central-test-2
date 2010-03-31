@@ -75,7 +75,7 @@
 	border-bottom: none;
 	font-size: 110px;
 	font-weight: normal;
-	padding-bottom: 12px;
+	padding-bottom: 5px;
 }
 
 .portlet-calendar .taglib-calendar {
