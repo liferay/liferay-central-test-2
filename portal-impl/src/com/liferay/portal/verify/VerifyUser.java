@@ -72,8 +72,6 @@ public class VerifyUser extends VerifyProcess {
 			contact.setLastName(user.getLastName());
 			contact.setPrefixId(0);
 			contact.setSuffixId(0);
-			contact.setMale(user.isMale());
-			contact.setBirthday(user.getBirthday());
 			contact.setJobTitle(user.getJobTitle());
 
 			ContactLocalServiceUtil.updateContact(contact);
