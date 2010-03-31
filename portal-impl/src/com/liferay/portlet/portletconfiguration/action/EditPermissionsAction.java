@@ -298,7 +298,7 @@ public class EditPermissionsAction extends EditConfigurationAction {
 			ParamUtil.getString(
 				actionRequest, "rolesSearchContainerPrimaryKeys"), 0L);
 
-		String selResource = portletResource;
+		String selResource = PortletConstants.getRootPortletId(portletResource);
 
 		if (Validator.isNotNull(modelResource)) {
 			selResource = modelResource;
