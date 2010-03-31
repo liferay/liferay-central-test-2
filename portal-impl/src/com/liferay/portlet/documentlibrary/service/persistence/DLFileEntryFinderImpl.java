@@ -58,9 +58,9 @@ public class DLFileEntryFinderImpl
 			sql = StringUtil.replace(
 				sql, "[$FOLDER_ID$]", getFolderIds(folderIds));
 
-			if (status != StatusConstants.APPROVED) {
+			if (status == StatusConstants.ANY) {
 				sql = StringUtil.replace(
-					sql, "(DLFileEntry.version > 0) AND", "");
+					sql, "(DLFileVersion.status = ?) AND", "");
 			}
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -70,6 +70,10 @@ public class DLFileEntryFinderImpl
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			qPos.add(groupId);
+
+			if (status != StatusConstants.ANY) {
+				qPos.add(status);
+			}
 
 			for (int i = 0; i < folderIds.size(); i++) {
 				Long folderId = folderIds.get(i);

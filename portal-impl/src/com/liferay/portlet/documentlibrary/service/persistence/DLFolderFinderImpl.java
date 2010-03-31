@@ -70,11 +70,9 @@ public class DLFolderFinderImpl
 				sql, "[$FILE_SHORTCUT_FOLDER_ID$]",
 				getFolderIds(folderIds, "DLFileShortcut"));
 
-			if (status != StatusConstants.APPROVED) {
+			if (status == StatusConstants.ANY) {
 				sql = StringUtil.replace(
-					sql, "(DLFileEntry.version > 0) AND", "");
-				sql = StringUtil.replace(
-					sql, "(DLFileShortcut.status = 0) AND", "");
+					sql, "(DLFileVersion.status = ?) AND", "");
 			}
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -84,6 +82,10 @@ public class DLFolderFinderImpl
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			qPos.add(groupId);
+
+			if (status != StatusConstants.ANY) {
+				qPos.add(status);
+			}
 
 			for (Long folderId : folderIds) {
 				qPos.add(folderId);
@@ -138,11 +140,9 @@ public class DLFolderFinderImpl
 				sql, "[$FILE_SHORTCUT_FOLDER_ID$]",
 				getFolderIds(folderIds, "DLFileShortcut"));
 
-			if (status != StatusConstants.APPROVED) {
+			if (status == StatusConstants.ANY) {
 				sql = StringUtil.replace(
-					sql, "(DLFileEntry.version > 0) AND", "");
-				sql = StringUtil.replace(
-					sql, "(DLFileShortcut.status = 0) AND", "");
+					sql, "(DLFileVersion.status = ?) AND", "");
 			}
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -152,6 +152,10 @@ public class DLFolderFinderImpl
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			qPos.add(groupId);
+
+			if (status != StatusConstants.ANY) {
+				qPos.add(status);
+			}
 
 			for (Long folderId : folderIds) {
 				qPos.add(folderId);
@@ -209,11 +213,9 @@ public class DLFolderFinderImpl
 				sql, "[$FILE_SHORTCUT_FOLDER_ID$]",
 				getFolderIds(folderIds, "DLFileShortcut"));
 
-			if (status != StatusConstants.APPROVED) {
+			if (status == StatusConstants.ANY) {
 				sql = StringUtil.replace(
-					sql, "(DLFileEntry.version > 0) AND", "");
-				sql = StringUtil.replace(
-					sql, "(DLFileShortcut.status = 0) AND", "");
+					sql, "(DLFileVersion.status = ?) AND", "");
 			}
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -226,6 +228,10 @@ public class DLFolderFinderImpl
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			qPos.add(groupId);
+
+			if (status != StatusConstants.ANY) {
+				qPos.add(status);
+			}
 
 			for (Long folderId : folderIds) {
 				qPos.add(folderId);
@@ -293,11 +299,9 @@ public class DLFolderFinderImpl
 				sql, "[$FILE_SHORTCUT_FOLDER_ID$]",
 				getFolderIds(folderIds, "DLFileShortcut"));
 
-			if (status != StatusConstants.APPROVED) {
+			if (status == StatusConstants.ANY) {
 				sql = StringUtil.replace(
-					sql, "(DLFileEntry.version > 0) AND", "");
-				sql = StringUtil.replace(
-					sql, "(DLFileShortcut.status = 0) AND", "");
+					sql, "(DLFileVersion.status = ?) AND", "");
 			}
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -311,6 +315,10 @@ public class DLFolderFinderImpl
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			qPos.add(groupId);
+
+			if (status != StatusConstants.ANY) {
+				qPos.add(status);
+			}
 
 			for (Long folderId : folderIds) {
 				qPos.add(folderId);
