@@ -432,7 +432,7 @@ body.lfr-has-sidebar {
 	box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.8);
 }
 
-.aui-combobox .aui-toolbar-first .aui-toolbar-item-content {
+.aui-combobox .aui-toolbar-first {
 	-moz-border-radius-topleft: 0;
 	-moz-border-radius-bottomleft: 0;
 	-webkit-border-top-left-radius: 0;
