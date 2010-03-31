@@ -115,27 +115,6 @@ public interface WikiPageModel extends BaseModel<WikiPage> {
 
 	public void setContent(String content);
 
-	public int getStatus();
-
-	public void setStatus(int status);
-
-	public long getStatusByUserId();
-
-	public void setStatusByUserId(long statusByUserId);
-
-	public String getStatusByUserUuid() throws SystemException;
-
-	public void setStatusByUserUuid(String statusByUserUuid);
-
-	@AutoEscape
-	public String getStatusByUserName();
-
-	public void setStatusByUserName(String statusByUserName);
-
-	public Date getStatusDate();
-
-	public void setStatusDate(Date statusDate);
-
 	@AutoEscape
 	public String getSummary();
 
@@ -161,6 +140,27 @@ public interface WikiPageModel extends BaseModel<WikiPage> {
 	public String getRedirectTitle();
 
 	public void setRedirectTitle(String redirectTitle);
+
+	public int getStatus();
+
+	public void setStatus(int status);
+
+	public long getStatusByUserId();
+
+	public void setStatusByUserId(long statusByUserId);
+
+	public String getStatusByUserUuid() throws SystemException;
+
+	public void setStatusByUserUuid(String statusByUserUuid);
+
+	@AutoEscape
+	public String getStatusByUserName();
+
+	public void setStatusByUserName(String statusByUserName);
+
+	public Date getStatusDate();
+
+	public void setStatusDate(Date statusDate);
 
 	public WikiPage toEscapedModel();
 

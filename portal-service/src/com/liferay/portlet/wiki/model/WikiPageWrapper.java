@@ -169,47 +169,6 @@ public class WikiPageWrapper implements WikiPage {
 		_wikiPage.setContent(content);
 	}
 
-	public int getStatus() {
-		return _wikiPage.getStatus();
-	}
-
-	public void setStatus(int status) {
-		_wikiPage.setStatus(status);
-	}
-
-	public long getStatusByUserId() {
-		return _wikiPage.getStatusByUserId();
-	}
-
-	public void setStatusByUserId(long statusByUserId) {
-		_wikiPage.setStatusByUserId(statusByUserId);
-	}
-
-	public java.lang.String getStatusByUserUuid()
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return _wikiPage.getStatusByUserUuid();
-	}
-
-	public void setStatusByUserUuid(java.lang.String statusByUserUuid) {
-		_wikiPage.setStatusByUserUuid(statusByUserUuid);
-	}
-
-	public java.lang.String getStatusByUserName() {
-		return _wikiPage.getStatusByUserName();
-	}
-
-	public void setStatusByUserName(java.lang.String statusByUserName) {
-		_wikiPage.setStatusByUserName(statusByUserName);
-	}
-
-	public java.util.Date getStatusDate() {
-		return _wikiPage.getStatusDate();
-	}
-
-	public void setStatusDate(java.util.Date statusDate) {
-		_wikiPage.setStatusDate(statusDate);
-	}
-
 	public java.lang.String getSummary() {
 		return _wikiPage.getSummary();
 	}
@@ -252,6 +211,47 @@ public class WikiPageWrapper implements WikiPage {
 
 	public void setRedirectTitle(java.lang.String redirectTitle) {
 		_wikiPage.setRedirectTitle(redirectTitle);
+	}
+
+	public int getStatus() {
+		return _wikiPage.getStatus();
+	}
+
+	public void setStatus(int status) {
+		_wikiPage.setStatus(status);
+	}
+
+	public long getStatusByUserId() {
+		return _wikiPage.getStatusByUserId();
+	}
+
+	public void setStatusByUserId(long statusByUserId) {
+		_wikiPage.setStatusByUserId(statusByUserId);
+	}
+
+	public java.lang.String getStatusByUserUuid()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _wikiPage.getStatusByUserUuid();
+	}
+
+	public void setStatusByUserUuid(java.lang.String statusByUserUuid) {
+		_wikiPage.setStatusByUserUuid(statusByUserUuid);
+	}
+
+	public java.lang.String getStatusByUserName() {
+		return _wikiPage.getStatusByUserName();
+	}
+
+	public void setStatusByUserName(java.lang.String statusByUserName) {
+		_wikiPage.setStatusByUserName(statusByUserName);
+	}
+
+	public java.util.Date getStatusDate() {
+		return _wikiPage.getStatusDate();
+	}
+
+	public void setStatusDate(java.util.Date statusDate) {
+		_wikiPage.setStatusDate(statusDate);
 	}
 
 	public com.liferay.portlet.wiki.model.WikiPage toEscapedModel() {

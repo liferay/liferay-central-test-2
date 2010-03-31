@@ -205,47 +205,6 @@ public class JournalArticleWrapper implements JournalArticle {
 		_journalArticle.setDisplayDate(displayDate);
 	}
 
-	public int getStatus() {
-		return _journalArticle.getStatus();
-	}
-
-	public void setStatus(int status) {
-		_journalArticle.setStatus(status);
-	}
-
-	public long getStatusByUserId() {
-		return _journalArticle.getStatusByUserId();
-	}
-
-	public void setStatusByUserId(long statusByUserId) {
-		_journalArticle.setStatusByUserId(statusByUserId);
-	}
-
-	public java.lang.String getStatusByUserUuid()
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return _journalArticle.getStatusByUserUuid();
-	}
-
-	public void setStatusByUserUuid(java.lang.String statusByUserUuid) {
-		_journalArticle.setStatusByUserUuid(statusByUserUuid);
-	}
-
-	public java.lang.String getStatusByUserName() {
-		return _journalArticle.getStatusByUserName();
-	}
-
-	public void setStatusByUserName(java.lang.String statusByUserName) {
-		_journalArticle.setStatusByUserName(statusByUserName);
-	}
-
-	public java.util.Date getStatusDate() {
-		return _journalArticle.getStatusDate();
-	}
-
-	public void setStatusDate(java.util.Date statusDate) {
-		_journalArticle.setStatusDate(statusDate);
-	}
-
 	public java.util.Date getExpirationDate() {
 		return _journalArticle.getExpirationDate();
 	}
@@ -300,6 +259,47 @@ public class JournalArticleWrapper implements JournalArticle {
 
 	public void setSmallImageURL(java.lang.String smallImageURL) {
 		_journalArticle.setSmallImageURL(smallImageURL);
+	}
+
+	public int getStatus() {
+		return _journalArticle.getStatus();
+	}
+
+	public void setStatus(int status) {
+		_journalArticle.setStatus(status);
+	}
+
+	public long getStatusByUserId() {
+		return _journalArticle.getStatusByUserId();
+	}
+
+	public void setStatusByUserId(long statusByUserId) {
+		_journalArticle.setStatusByUserId(statusByUserId);
+	}
+
+	public java.lang.String getStatusByUserUuid()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _journalArticle.getStatusByUserUuid();
+	}
+
+	public void setStatusByUserUuid(java.lang.String statusByUserUuid) {
+		_journalArticle.setStatusByUserUuid(statusByUserUuid);
+	}
+
+	public java.lang.String getStatusByUserName() {
+		return _journalArticle.getStatusByUserName();
+	}
+
+	public void setStatusByUserName(java.lang.String statusByUserName) {
+		_journalArticle.setStatusByUserName(statusByUserName);
+	}
+
+	public java.util.Date getStatusDate() {
+		return _journalArticle.getStatusDate();
+	}
+
+	public void setStatusDate(java.util.Date statusDate) {
+		_journalArticle.setStatusDate(statusDate);
 	}
 
 	public com.liferay.portlet.journal.model.JournalArticle toEscapedModel() {

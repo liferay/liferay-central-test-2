@@ -136,27 +136,6 @@ public interface JournalArticleModel extends BaseModel<JournalArticle> {
 
 	public void setDisplayDate(Date displayDate);
 
-	public int getStatus();
-
-	public void setStatus(int status);
-
-	public long getStatusByUserId();
-
-	public void setStatusByUserId(long statusByUserId);
-
-	public String getStatusByUserUuid() throws SystemException;
-
-	public void setStatusByUserUuid(String statusByUserUuid);
-
-	@AutoEscape
-	public String getStatusByUserName();
-
-	public void setStatusByUserName(String statusByUserName);
-
-	public Date getStatusDate();
-
-	public void setStatusDate(Date statusDate);
-
 	public Date getExpirationDate();
 
 	public void setExpirationDate(Date expirationDate);
@@ -185,6 +164,27 @@ public interface JournalArticleModel extends BaseModel<JournalArticle> {
 	public String getSmallImageURL();
 
 	public void setSmallImageURL(String smallImageURL);
+
+	public int getStatus();
+
+	public void setStatus(int status);
+
+	public long getStatusByUserId();
+
+	public void setStatusByUserId(long statusByUserId);
+
+	public String getStatusByUserUuid() throws SystemException;
+
+	public void setStatusByUserUuid(String statusByUserUuid);
+
+	@AutoEscape
+	public String getStatusByUserName();
+
+	public void setStatusByUserName(String statusByUserName);
+
+	public Date getStatusDate();
+
+	public void setStatusDate(Date statusDate);
 
 	public JournalArticle toEscapedModel();
 

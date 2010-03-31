@@ -601,16 +601,16 @@ create table JournalArticle (
 	structureId VARCHAR(75) null,
 	templateId VARCHAR(75) null,
 	displayDate DATE null,
-	status INTEGER,
-	statusByUserId LONG,
-	statusByUserName VARCHAR(75) null,
-	statusDate DATE null,
 	expirationDate DATE null,
 	reviewDate DATE null,
 	indexable BOOLEAN,
 	smallImage BOOLEAN,
 	smallImageId LONG,
-	smallImageURL STRING null
+	smallImageURL STRING null,
+	status INTEGER,
+	statusByUserId LONG,
+	statusByUserName VARCHAR(75) null,
+	statusDate DATE null
 );
 
 create table JournalArticleImage (
@@ -1743,15 +1743,15 @@ create table WikiPage (
 	version DOUBLE,
 	minorEdit BOOLEAN,
 	content TEXT null,
-	status INTEGER,
-	statusByUserId LONG,
-	statusByUserName VARCHAR(75) null,
-	statusDate DATE null,
 	summary STRING null,
 	format VARCHAR(75) null,
 	head BOOLEAN,
 	parentTitle VARCHAR(255) null,
-	redirectTitle VARCHAR(255) null
+	redirectTitle VARCHAR(255) null,
+	status INTEGER,
+	statusByUserId LONG,
+	statusByUserName VARCHAR(75) null,
+	statusDate DATE null
 );
 
 create table WikiPageResource (
