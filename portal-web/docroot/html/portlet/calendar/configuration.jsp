@@ -164,8 +164,6 @@ String editorContent = emailEventReminderBody;
 		</c:when>
 	</c:choose>
 
-	<br />
-
 	<aui:button-row>
 		<aui:button type="submit" />
 

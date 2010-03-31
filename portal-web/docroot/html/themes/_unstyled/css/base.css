@@ -1,5 +1,8 @@
 /* ---------- Browser normalization ---------- */
 
+article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
+}
+
 body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, p, blockquote, th, td {
 }
 
@@ -28,6 +31,9 @@ body {
 }
 
 body.portal-popup {
+}
+
+body.configuration-popup {
 }
 
 body.portal-iframe {
@@ -124,27 +130,7 @@ body.live-view {
 
 /* ---------- Main content body ---------- */
 
-#wrapper {
-}
-
-#main-content {
-}
-
 .portal-iframe #main-content {
-}
-
-/* ---------- Banner ---------- */
-
-#banner {
-}
-
-#banner .logo {
-}
-
-.current-community {
-}
-
-#banner .sign-in {
 }
 
 /* ---------- Alerts and popups ---------- */

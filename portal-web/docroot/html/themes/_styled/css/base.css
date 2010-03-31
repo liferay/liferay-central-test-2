@@ -52,6 +52,10 @@ body.portal-popup {
 	padding: 10px;
 }
 
+body.configuration-popup {
+	padding-bottom: 0;
+}
+
 body.portal-iframe {
 	padding: 0;
 }
