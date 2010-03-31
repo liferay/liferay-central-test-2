@@ -429,20 +429,20 @@ public class VelocityTaglib {
 		languageTag.runTag();
 	}
 
-	public void layoutIcon(Layout layout) throws Exception {
+	public String layoutIcon(Layout layout) throws Exception {
 		_stringResponse.recycle();
 
 		LayoutIconTag.doTag(layout, _servletContext, _request, _stringResponse);
 
-		_stringResponse.getString();
+		return _stringResponse.getString();
 	}
 
-	public void metaTags() throws Exception {
+	public String metaTags() throws Exception {
 		_stringResponse.recycle();
 
 		MetaTagsTag.doTag(_servletContext, _request, _stringResponse);
 
-		_stringResponse.getString();
+		return _stringResponse.getString();
 	}
 
 	public void myPlaces() throws Exception {
