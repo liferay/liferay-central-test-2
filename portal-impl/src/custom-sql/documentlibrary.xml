@@ -6,13 +6,14 @@
 			SELECT
 				COUNT(*) AS COUNT_VALUE
 			FROM
-				DLFileEntry, DLFileVersion
+				DLFileEntry
+			INNER JOIN
+				DLFileVersion ON
+					(DLFileVersion.folderId = DLFileEntry.folderId) AND
+					(DLFileVersion.name = DLFileEntry.name)
 			WHERE
 				(DLFileEntry.groupId = ?) AND
 				(DLFileEntry.version > 0) AND
-				(DLFileEntry.groupId = DLFileVersion.groupId) AND
-				(DLFileEntry.folderId = DLFileVersion.folderId) AND
-				(DLFileEntry.name = DLFileVersion.name) AND
 				(DLFileVersion.status = ?) AND
 				[$FOLDER_ID$]
 		]]>
@@ -40,13 +41,14 @@
 				SELECT
 					COUNT(*) AS COUNT_VALUE
 				FROM
-					DLFileEntry, DLFileVersion
+					DLFileEntry
+				INNER JOIN
+					DLFileVersion ON
+						(DLFileVersion.folderId = DLFileEntry.folderId) AND
+						(DLFileVersion.name = DLFileEntry.name)
 				WHERE
 					(DLFileEntry.groupId = ?) AND
 					(DLFileEntry.version > 0) AND
-					(DLFileEntry.groupId = DLFileVersion.groupId) AND
-					(DLFileEntry.folderId = DLFileVersion.folderId) AND
-					(DLFileEntry.name = DLFileVersion.name) AND
 					(DLFileVersion.status = ?) AND
 					[$FILE_ENTRY_FOLDER_ID$]
 			)
@@ -79,13 +81,14 @@
 				SELECT
 					COUNT(*) AS COUNT_VALUE
 				FROM
-					DLFileEntry, DLFileVersion
+					DLFileEntry
+				INNER JOIN
+					DLFileVersion ON
+						(DLFileVersion.folderId = DLFileEntry.folderId) AND
+						(DLFileVersion.name = DLFileEntry.name)
 				WHERE
 					(DLFileEntry.groupId = ?) AND
 					(DLFileEntry.version > 0) AND
-					(DLFileEntry.groupId = DLFileVersion.groupId) AND
-					(DLFileEntry.folderId = DLFileVersion.folderId) AND
-					(DLFileEntry.name = DLFileVersion.name) AND
 					(DLFileVersion.status = ?) AND
 					[$FILE_ENTRY_FOLDER_ID$]
 			)
@@ -108,13 +111,14 @@
 				SELECT
 					DLFileEntry.folderId AS modelFolderId, DLFileEntry.name AS name, title AS title, 0 AS fileShortcutId, 0 AS modelFolder
 				FROM
-					DLFileEntry, DLFileVersion
+					DLFileEntry
+				INNER JOIN
+					DLFileVersion ON
+						(DLFileVersion.folderId = DLFileEntry.folderId) AND
+						(DLFileVersion.name = DLFileEntry.name)
 				WHERE
 					(DLFileEntry.groupId = ?) AND
 					(DLFileEntry.version > 0) AND
-					(DLFileEntry.groupId = DLFileVersion.groupId) AND
-					(DLFileEntry.folderId = DLFileVersion.folderId) AND
-					(DLFileEntry.name = DLFileVersion.name) AND
 					(DLFileVersion.status = ?) AND
 					[$FILE_ENTRY_FOLDER_ID$]
 			)
@@ -151,15 +155,16 @@
 			UNION ALL
 			(
 				SELECT
-					folderId AS modelFolderId, name AS name, title AS title, 0 AS fileShortcutId, 0 AS modelFolder
+					DLFileEntry.folderId AS modelFolderId, DLFileEntry.name AS name, title AS title, 0 AS fileShortcutId, 0 AS modelFolder
 				FROM
-					DLFileEntry, DLFileVersion
+					DLFileEntry
+				INNER JOIN
+					DLFileVersion ON
+						(DLFileVersion.folderId = DLFileEntry.folderId) AND
+						(DLFileVersion.name = DLFileEntry.name)
 				WHERE
 					(DLFileEntry.groupId = ?) AND
 					(DLFileEntry.version > 0) AND
-					(DLFileEntry.groupId = DLFileVersion.groupId) AND
-					(DLFileEntry.folderId = DLFileVersion.folderId) AND
-					(DLFileEntry.name = DLFileVersion.name) AND
 					(DLFileVersion.status = ?) AND
 					[$FILE_ENTRY_FOLDER_ID$]
 			)
