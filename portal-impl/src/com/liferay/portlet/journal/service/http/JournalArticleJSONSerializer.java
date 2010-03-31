@@ -90,19 +90,6 @@ public class JournalArticleJSONSerializer {
 		}
 
 		jsonObj.put("displayDate", displayDateJSON);
-		jsonObj.put("status", model.getStatus());
-		jsonObj.put("statusByUserId", model.getStatusByUserId());
-		jsonObj.put("statusByUserName", model.getStatusByUserName());
-
-		Date statusDate = model.getStatusDate();
-
-		String statusDateJSON = StringPool.BLANK;
-
-		if (statusDate != null) {
-			statusDateJSON = String.valueOf(statusDate.getTime());
-		}
-
-		jsonObj.put("statusDate", statusDateJSON);
 
 		Date expirationDate = model.getExpirationDate();
 
@@ -127,6 +114,19 @@ public class JournalArticleJSONSerializer {
 		jsonObj.put("smallImage", model.getSmallImage());
 		jsonObj.put("smallImageId", model.getSmallImageId());
 		jsonObj.put("smallImageURL", model.getSmallImageURL());
+		jsonObj.put("status", model.getStatus());
+		jsonObj.put("statusByUserId", model.getStatusByUserId());
+		jsonObj.put("statusByUserName", model.getStatusByUserName());
+
+		Date statusDate = model.getStatusDate();
+
+		String statusDateJSON = StringPool.BLANK;
+
+		if (statusDate != null) {
+			statusDateJSON = String.valueOf(statusDate.getTime());
+		}
+
+		jsonObj.put("statusDate", statusDateJSON);
 
 		return jsonObj;
 	}

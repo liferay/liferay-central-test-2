@@ -1585,12 +1585,6 @@
 			<basic name="displayDate">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
-			<basic name="status" />
-			<basic name="statusByUserId" />
-			<basic name="statusByUserName" />
-			<basic name="statusDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
 			<basic name="expirationDate">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
@@ -1601,6 +1595,12 @@
 			<basic name="smallImage" />
 			<basic name="smallImageId" />
 			<basic name="smallImageURL" />
+			<basic name="status" />
+			<basic name="statusByUserId" />
+			<basic name="statusByUserName" />
+			<basic name="statusDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
 			<transient name="primaryKey" />
 			<transient name="statusByUserUuid" />
 			<transient name="userUuid" />
@@ -2498,17 +2498,17 @@
 			<basic name="version" />
 			<basic name="minorEdit" />
 			<basic name="content" />
+			<basic name="summary" />
+			<basic name="format" />
+			<basic name="head" />
+			<basic name="parentTitle" />
+			<basic name="redirectTitle" />
 			<basic name="status" />
 			<basic name="statusByUserId" />
 			<basic name="statusByUserName" />
 			<basic name="statusDate">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
-			<basic name="summary" />
-			<basic name="format" />
-			<basic name="head" />
-			<basic name="parentTitle" />
-			<basic name="redirectTitle" />
 			<transient name="primaryKey" />
 			<transient name="statusByUserUuid" />
 			<transient name="userUuid" />

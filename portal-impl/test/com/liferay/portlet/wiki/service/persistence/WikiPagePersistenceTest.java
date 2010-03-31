@@ -80,15 +80,15 @@ public class WikiPagePersistenceTest extends BasePersistenceTestCase {
 		newWikiPage.setVersion(nextDouble());
 		newWikiPage.setMinorEdit(randomBoolean());
 		newWikiPage.setContent(randomString());
-		newWikiPage.setStatus(nextInt());
-		newWikiPage.setStatusByUserId(nextLong());
-		newWikiPage.setStatusByUserName(randomString());
-		newWikiPage.setStatusDate(nextDate());
 		newWikiPage.setSummary(randomString());
 		newWikiPage.setFormat(randomString());
 		newWikiPage.setHead(randomBoolean());
 		newWikiPage.setParentTitle(randomString());
 		newWikiPage.setRedirectTitle(randomString());
+		newWikiPage.setStatus(nextInt());
+		newWikiPage.setStatusByUserId(nextLong());
+		newWikiPage.setStatusByUserName(randomString());
+		newWikiPage.setStatusDate(nextDate());
 
 		_persistence.update(newWikiPage, false);
 
@@ -111,13 +111,6 @@ public class WikiPagePersistenceTest extends BasePersistenceTestCase {
 		assertEquals(existingWikiPage.getVersion(), newWikiPage.getVersion());
 		assertEquals(existingWikiPage.getMinorEdit(), newWikiPage.getMinorEdit());
 		assertEquals(existingWikiPage.getContent(), newWikiPage.getContent());
-		assertEquals(existingWikiPage.getStatus(), newWikiPage.getStatus());
-		assertEquals(existingWikiPage.getStatusByUserId(),
-			newWikiPage.getStatusByUserId());
-		assertEquals(existingWikiPage.getStatusByUserName(),
-			newWikiPage.getStatusByUserName());
-		assertEquals(Time.getShortTimestamp(existingWikiPage.getStatusDate()),
-			Time.getShortTimestamp(newWikiPage.getStatusDate()));
 		assertEquals(existingWikiPage.getSummary(), newWikiPage.getSummary());
 		assertEquals(existingWikiPage.getFormat(), newWikiPage.getFormat());
 		assertEquals(existingWikiPage.getHead(), newWikiPage.getHead());
@@ -125,6 +118,13 @@ public class WikiPagePersistenceTest extends BasePersistenceTestCase {
 			newWikiPage.getParentTitle());
 		assertEquals(existingWikiPage.getRedirectTitle(),
 			newWikiPage.getRedirectTitle());
+		assertEquals(existingWikiPage.getStatus(), newWikiPage.getStatus());
+		assertEquals(existingWikiPage.getStatusByUserId(),
+			newWikiPage.getStatusByUserId());
+		assertEquals(existingWikiPage.getStatusByUserName(),
+			newWikiPage.getStatusByUserName());
+		assertEquals(Time.getShortTimestamp(existingWikiPage.getStatusDate()),
+			Time.getShortTimestamp(newWikiPage.getStatusDate()));
 	}
 
 	public void testFindByPrimaryKeyExisting() throws Exception {
@@ -211,15 +211,15 @@ public class WikiPagePersistenceTest extends BasePersistenceTestCase {
 		wikiPage.setVersion(nextDouble());
 		wikiPage.setMinorEdit(randomBoolean());
 		wikiPage.setContent(randomString());
-		wikiPage.setStatus(nextInt());
-		wikiPage.setStatusByUserId(nextLong());
-		wikiPage.setStatusByUserName(randomString());
-		wikiPage.setStatusDate(nextDate());
 		wikiPage.setSummary(randomString());
 		wikiPage.setFormat(randomString());
 		wikiPage.setHead(randomBoolean());
 		wikiPage.setParentTitle(randomString());
 		wikiPage.setRedirectTitle(randomString());
+		wikiPage.setStatus(nextInt());
+		wikiPage.setStatusByUserId(nextLong());
+		wikiPage.setStatusByUserName(randomString());
+		wikiPage.setStatusDate(nextDate());
 
 		_persistence.update(wikiPage, false);
 

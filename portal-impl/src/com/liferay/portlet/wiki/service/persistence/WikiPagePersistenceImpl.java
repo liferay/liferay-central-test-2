@@ -529,15 +529,15 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		wikiPageImpl.setVersion(wikiPage.getVersion());
 		wikiPageImpl.setMinorEdit(wikiPage.isMinorEdit());
 		wikiPageImpl.setContent(wikiPage.getContent());
-		wikiPageImpl.setStatus(wikiPage.getStatus());
-		wikiPageImpl.setStatusByUserId(wikiPage.getStatusByUserId());
-		wikiPageImpl.setStatusByUserName(wikiPage.getStatusByUserName());
-		wikiPageImpl.setStatusDate(wikiPage.getStatusDate());
 		wikiPageImpl.setSummary(wikiPage.getSummary());
 		wikiPageImpl.setFormat(wikiPage.getFormat());
 		wikiPageImpl.setHead(wikiPage.isHead());
 		wikiPageImpl.setParentTitle(wikiPage.getParentTitle());
 		wikiPageImpl.setRedirectTitle(wikiPage.getRedirectTitle());
+		wikiPageImpl.setStatus(wikiPage.getStatus());
+		wikiPageImpl.setStatusByUserId(wikiPage.getStatusByUserId());
+		wikiPageImpl.setStatusByUserName(wikiPage.getStatusByUserName());
+		wikiPageImpl.setStatusDate(wikiPage.getStatusDate());
 
 		return wikiPageImpl;
 	}

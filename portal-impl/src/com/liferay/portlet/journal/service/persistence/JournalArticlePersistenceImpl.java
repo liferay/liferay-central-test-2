@@ -602,16 +602,16 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		journalArticleImpl.setStructureId(journalArticle.getStructureId());
 		journalArticleImpl.setTemplateId(journalArticle.getTemplateId());
 		journalArticleImpl.setDisplayDate(journalArticle.getDisplayDate());
-		journalArticleImpl.setStatus(journalArticle.getStatus());
-		journalArticleImpl.setStatusByUserId(journalArticle.getStatusByUserId());
-		journalArticleImpl.setStatusByUserName(journalArticle.getStatusByUserName());
-		journalArticleImpl.setStatusDate(journalArticle.getStatusDate());
 		journalArticleImpl.setExpirationDate(journalArticle.getExpirationDate());
 		journalArticleImpl.setReviewDate(journalArticle.getReviewDate());
 		journalArticleImpl.setIndexable(journalArticle.isIndexable());
 		journalArticleImpl.setSmallImage(journalArticle.isSmallImage());
 		journalArticleImpl.setSmallImageId(journalArticle.getSmallImageId());
 		journalArticleImpl.setSmallImageURL(journalArticle.getSmallImageURL());
+		journalArticleImpl.setStatus(journalArticle.getStatus());
+		journalArticleImpl.setStatusByUserId(journalArticle.getStatusByUserId());
+		journalArticleImpl.setStatusByUserName(journalArticle.getStatusByUserName());
+		journalArticleImpl.setStatusDate(journalArticle.getStatusDate());
 
 		return journalArticleImpl;
 	}

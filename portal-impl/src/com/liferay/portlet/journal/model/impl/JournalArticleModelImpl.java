@@ -79,18 +79,18 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle> {
 			{ "structureId", new Integer(Types.VARCHAR) },
 			{ "templateId", new Integer(Types.VARCHAR) },
 			{ "displayDate", new Integer(Types.TIMESTAMP) },
-			{ "status", new Integer(Types.INTEGER) },
-			{ "statusByUserId", new Integer(Types.BIGINT) },
-			{ "statusByUserName", new Integer(Types.VARCHAR) },
-			{ "statusDate", new Integer(Types.TIMESTAMP) },
 			{ "expirationDate", new Integer(Types.TIMESTAMP) },
 			{ "reviewDate", new Integer(Types.TIMESTAMP) },
 			{ "indexable", new Integer(Types.BOOLEAN) },
 			{ "smallImage", new Integer(Types.BOOLEAN) },
 			{ "smallImageId", new Integer(Types.BIGINT) },
-			{ "smallImageURL", new Integer(Types.VARCHAR) }
+			{ "smallImageURL", new Integer(Types.VARCHAR) },
+			{ "status", new Integer(Types.INTEGER) },
+			{ "statusByUserId", new Integer(Types.BIGINT) },
+			{ "statusByUserName", new Integer(Types.VARCHAR) },
+			{ "statusDate", new Integer(Types.TIMESTAMP) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table JournalArticle (uuid_ VARCHAR(75) null,id_ LONG not null primary key,resourcePrimKey LONG,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,articleId VARCHAR(75) null,version DOUBLE,title VARCHAR(100) null,urlTitle VARCHAR(150) null,description STRING null,content TEXT null,type_ VARCHAR(75) null,structureId VARCHAR(75) null,templateId VARCHAR(75) null,displayDate DATE null,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null,expirationDate DATE null,reviewDate DATE null,indexable BOOLEAN,smallImage BOOLEAN,smallImageId LONG,smallImageURL STRING null)";
+	public static final String TABLE_SQL_CREATE = "create table JournalArticle (uuid_ VARCHAR(75) null,id_ LONG not null primary key,resourcePrimKey LONG,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,articleId VARCHAR(75) null,version DOUBLE,title VARCHAR(100) null,urlTitle VARCHAR(150) null,description STRING null,content TEXT null,type_ VARCHAR(75) null,structureId VARCHAR(75) null,templateId VARCHAR(75) null,displayDate DATE null,expirationDate DATE null,reviewDate DATE null,indexable BOOLEAN,smallImage BOOLEAN,smallImageId LONG,smallImageURL STRING null,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table JournalArticle";
 	public static final String ORDER_BY_JPQL = " ORDER BY journalArticle.articleId ASC, journalArticle.version DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY JournalArticle.articleId ASC, JournalArticle.version DESC";
@@ -126,16 +126,16 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle> {
 		model.setStructureId(soapModel.getStructureId());
 		model.setTemplateId(soapModel.getTemplateId());
 		model.setDisplayDate(soapModel.getDisplayDate());
-		model.setStatus(soapModel.getStatus());
-		model.setStatusByUserId(soapModel.getStatusByUserId());
-		model.setStatusByUserName(soapModel.getStatusByUserName());
-		model.setStatusDate(soapModel.getStatusDate());
 		model.setExpirationDate(soapModel.getExpirationDate());
 		model.setReviewDate(soapModel.getReviewDate());
 		model.setIndexable(soapModel.getIndexable());
 		model.setSmallImage(soapModel.getSmallImage());
 		model.setSmallImageId(soapModel.getSmallImageId());
 		model.setSmallImageURL(soapModel.getSmallImageURL());
+		model.setStatus(soapModel.getStatus());
+		model.setStatusByUserId(soapModel.getStatusByUserId());
+		model.setStatusByUserName(soapModel.getStatusByUserName());
+		model.setStatusDate(soapModel.getStatusDate());
 
 		return model;
 	}
@@ -414,52 +414,6 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle> {
 		_displayDate = displayDate;
 	}
 
-	public int getStatus() {
-		return _status;
-	}
-
-	public void setStatus(int status) {
-		_status = status;
-	}
-
-	public long getStatusByUserId() {
-		return _statusByUserId;
-	}
-
-	public void setStatusByUserId(long statusByUserId) {
-		_statusByUserId = statusByUserId;
-	}
-
-	public String getStatusByUserUuid() throws SystemException {
-		return PortalUtil.getUserValue(getStatusByUserId(), "uuid",
-			_statusByUserUuid);
-	}
-
-	public void setStatusByUserUuid(String statusByUserUuid) {
-		_statusByUserUuid = statusByUserUuid;
-	}
-
-	public String getStatusByUserName() {
-		if (_statusByUserName == null) {
-			return StringPool.BLANK;
-		}
-		else {
-			return _statusByUserName;
-		}
-	}
-
-	public void setStatusByUserName(String statusByUserName) {
-		_statusByUserName = statusByUserName;
-	}
-
-	public Date getStatusDate() {
-		return _statusDate;
-	}
-
-	public void setStatusDate(Date statusDate) {
-		_statusDate = statusDate;
-	}
-
 	public Date getExpirationDate() {
 		return _expirationDate;
 	}
@@ -521,6 +475,52 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle> {
 		_smallImageURL = smallImageURL;
 	}
 
+	public int getStatus() {
+		return _status;
+	}
+
+	public void setStatus(int status) {
+		_status = status;
+	}
+
+	public long getStatusByUserId() {
+		return _statusByUserId;
+	}
+
+	public void setStatusByUserId(long statusByUserId) {
+		_statusByUserId = statusByUserId;
+	}
+
+	public String getStatusByUserUuid() throws SystemException {
+		return PortalUtil.getUserValue(getStatusByUserId(), "uuid",
+			_statusByUserUuid);
+	}
+
+	public void setStatusByUserUuid(String statusByUserUuid) {
+		_statusByUserUuid = statusByUserUuid;
+	}
+
+	public String getStatusByUserName() {
+		if (_statusByUserName == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _statusByUserName;
+		}
+	}
+
+	public void setStatusByUserName(String statusByUserName) {
+		_statusByUserName = statusByUserName;
+	}
+
+	public Date getStatusDate() {
+		return _statusDate;
+	}
+
+	public void setStatusDate(Date statusDate) {
+		_statusDate = statusDate;
+	}
+
 	public JournalArticle toEscapedModel() {
 		if (isEscapedModel()) {
 			return (JournalArticle)this;
@@ -567,16 +567,16 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle> {
 		clone.setStructureId(getStructureId());
 		clone.setTemplateId(getTemplateId());
 		clone.setDisplayDate(getDisplayDate());
-		clone.setStatus(getStatus());
-		clone.setStatusByUserId(getStatusByUserId());
-		clone.setStatusByUserName(getStatusByUserName());
-		clone.setStatusDate(getStatusDate());
 		clone.setExpirationDate(getExpirationDate());
 		clone.setReviewDate(getReviewDate());
 		clone.setIndexable(getIndexable());
 		clone.setSmallImage(getSmallImage());
 		clone.setSmallImageId(getSmallImageId());
 		clone.setSmallImageURL(getSmallImageURL());
+		clone.setStatus(getStatus());
+		clone.setStatusByUserId(getStatusByUserId());
+		clone.setStatusByUserName(getStatusByUserName());
+		clone.setStatusDate(getStatusDate());
 
 		return clone;
 	}
@@ -678,14 +678,6 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle> {
 		sb.append(getTemplateId());
 		sb.append(", displayDate=");
 		sb.append(getDisplayDate());
-		sb.append(", status=");
-		sb.append(getStatus());
-		sb.append(", statusByUserId=");
-		sb.append(getStatusByUserId());
-		sb.append(", statusByUserName=");
-		sb.append(getStatusByUserName());
-		sb.append(", statusDate=");
-		sb.append(getStatusDate());
 		sb.append(", expirationDate=");
 		sb.append(getExpirationDate());
 		sb.append(", reviewDate=");
@@ -698,6 +690,14 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle> {
 		sb.append(getSmallImageId());
 		sb.append(", smallImageURL=");
 		sb.append(getSmallImageURL());
+		sb.append(", status=");
+		sb.append(getStatus());
+		sb.append(", statusByUserId=");
+		sb.append(getStatusByUserId());
+		sb.append(", statusByUserName=");
+		sb.append(getStatusByUserName());
+		sb.append(", statusDate=");
+		sb.append(getStatusDate());
 		sb.append("}");
 
 		return sb.toString();
@@ -787,22 +787,6 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle> {
 		sb.append(getDisplayDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>status</column-name><column-value><![CDATA[");
-		sb.append(getStatus());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>statusByUserId</column-name><column-value><![CDATA[");
-		sb.append(getStatusByUserId());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>statusByUserName</column-name><column-value><![CDATA[");
-		sb.append(getStatusByUserName());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>statusDate</column-name><column-value><![CDATA[");
-		sb.append(getStatusDate());
-		sb.append("]]></column-value></column>");
-		sb.append(
 			"<column><column-name>expirationDate</column-name><column-value><![CDATA[");
 		sb.append(getExpirationDate());
 		sb.append("]]></column-value></column>");
@@ -825,6 +809,22 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle> {
 		sb.append(
 			"<column><column-name>smallImageURL</column-name><column-value><![CDATA[");
 		sb.append(getSmallImageURL());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>status</column-name><column-value><![CDATA[");
+		sb.append(getStatus());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>statusByUserId</column-name><column-value><![CDATA[");
+		sb.append(getStatusByUserId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>statusByUserName</column-name><column-value><![CDATA[");
+		sb.append(getStatusByUserName());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>statusDate</column-name><column-value><![CDATA[");
+		sb.append(getStatusDate());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
@@ -858,16 +858,16 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle> {
 	private String _structureId;
 	private String _templateId;
 	private Date _displayDate;
-	private int _status;
-	private long _statusByUserId;
-	private String _statusByUserUuid;
-	private String _statusByUserName;
-	private Date _statusDate;
 	private Date _expirationDate;
 	private Date _reviewDate;
 	private boolean _indexable;
 	private boolean _smallImage;
 	private long _smallImageId;
 	private String _smallImageURL;
+	private int _status;
+	private long _statusByUserId;
+	private String _statusByUserUuid;
+	private String _statusByUserName;
+	private Date _statusDate;
 	private transient ExpandoBridge _expandoBridge;
 }

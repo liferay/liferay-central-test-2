@@ -81,15 +81,15 @@
 		<column name="version" type="double" />
 		<column name="minorEdit" type="boolean" />
 		<column name="content" type="String" />
-		<column name="status" type="int" />
-		<column name="statusByUserId" type="long" />
-		<column name="statusByUserName" type="String" />
-		<column name="statusDate" type="Date" />
 		<column name="summary" type="String" />
 		<column name="format" type="String" />
 		<column name="head" type="boolean" />
 		<column name="parentTitle" type="String" />
 		<column name="redirectTitle" type="String" />
+		<column name="status" type="int" />
+		<column name="statusByUserId" type="long" />
+		<column name="statusByUserName" type="String" />
+		<column name="statusDate" type="Date" />
 
 		<!-- Order -->
 

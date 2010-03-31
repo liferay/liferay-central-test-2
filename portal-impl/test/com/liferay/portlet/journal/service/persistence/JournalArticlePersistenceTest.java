@@ -86,16 +86,16 @@ public class JournalArticlePersistenceTest extends BasePersistenceTestCase {
 		newJournalArticle.setStructureId(randomString());
 		newJournalArticle.setTemplateId(randomString());
 		newJournalArticle.setDisplayDate(nextDate());
-		newJournalArticle.setStatus(nextInt());
-		newJournalArticle.setStatusByUserId(nextLong());
-		newJournalArticle.setStatusByUserName(randomString());
-		newJournalArticle.setStatusDate(nextDate());
 		newJournalArticle.setExpirationDate(nextDate());
 		newJournalArticle.setReviewDate(nextDate());
 		newJournalArticle.setIndexable(randomBoolean());
 		newJournalArticle.setSmallImage(randomBoolean());
 		newJournalArticle.setSmallImageId(nextLong());
 		newJournalArticle.setSmallImageURL(randomString());
+		newJournalArticle.setStatus(nextInt());
+		newJournalArticle.setStatusByUserId(nextLong());
+		newJournalArticle.setStatusByUserName(randomString());
+		newJournalArticle.setStatusDate(nextDate());
 
 		_persistence.update(newJournalArticle, false);
 
@@ -141,15 +141,6 @@ public class JournalArticlePersistenceTest extends BasePersistenceTestCase {
 		assertEquals(Time.getShortTimestamp(
 				existingJournalArticle.getDisplayDate()),
 			Time.getShortTimestamp(newJournalArticle.getDisplayDate()));
-		assertEquals(existingJournalArticle.getStatus(),
-			newJournalArticle.getStatus());
-		assertEquals(existingJournalArticle.getStatusByUserId(),
-			newJournalArticle.getStatusByUserId());
-		assertEquals(existingJournalArticle.getStatusByUserName(),
-			newJournalArticle.getStatusByUserName());
-		assertEquals(Time.getShortTimestamp(
-				existingJournalArticle.getStatusDate()),
-			Time.getShortTimestamp(newJournalArticle.getStatusDate()));
 		assertEquals(Time.getShortTimestamp(
 				existingJournalArticle.getExpirationDate()),
 			Time.getShortTimestamp(newJournalArticle.getExpirationDate()));
@@ -164,6 +155,15 @@ public class JournalArticlePersistenceTest extends BasePersistenceTestCase {
 			newJournalArticle.getSmallImageId());
 		assertEquals(existingJournalArticle.getSmallImageURL(),
 			newJournalArticle.getSmallImageURL());
+		assertEquals(existingJournalArticle.getStatus(),
+			newJournalArticle.getStatus());
+		assertEquals(existingJournalArticle.getStatusByUserId(),
+			newJournalArticle.getStatusByUserId());
+		assertEquals(existingJournalArticle.getStatusByUserName(),
+			newJournalArticle.getStatusByUserName());
+		assertEquals(Time.getShortTimestamp(
+				existingJournalArticle.getStatusDate()),
+			Time.getShortTimestamp(newJournalArticle.getStatusDate()));
 	}
 
 	public void testFindByPrimaryKeyExisting() throws Exception {
@@ -255,16 +255,16 @@ public class JournalArticlePersistenceTest extends BasePersistenceTestCase {
 		journalArticle.setStructureId(randomString());
 		journalArticle.setTemplateId(randomString());
 		journalArticle.setDisplayDate(nextDate());
-		journalArticle.setStatus(nextInt());
-		journalArticle.setStatusByUserId(nextLong());
-		journalArticle.setStatusByUserName(randomString());
-		journalArticle.setStatusDate(nextDate());
 		journalArticle.setExpirationDate(nextDate());
 		journalArticle.setReviewDate(nextDate());
 		journalArticle.setIndexable(randomBoolean());
 		journalArticle.setSmallImage(randomBoolean());
 		journalArticle.setSmallImageId(nextLong());
 		journalArticle.setSmallImageURL(randomString());
+		journalArticle.setStatus(nextInt());
+		journalArticle.setStatusByUserId(nextLong());
+		journalArticle.setStatusByUserName(randomString());
+		journalArticle.setStatusDate(nextDate());
 
 		_persistence.update(journalArticle, false);
 
