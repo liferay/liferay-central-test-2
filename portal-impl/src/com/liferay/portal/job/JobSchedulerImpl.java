@@ -84,6 +84,7 @@ public class JobSchedulerImpl implements JobScheduler {
 			SimpleTrigger.REPEAT_INDEFINITELY, intervalJob.getInterval());
 
 		try {
+			_scheduler.start();
 			_scheduler.scheduleJob(jobDetail, trigger);
 		}
 		catch (Exception e) {
