@@ -274,7 +274,7 @@
 						<aui:input cssClass="disabled" disabled="<%= true %>" inlineLabel="right" label="permissions-assigned-to-organizations-user-groups-roles-and-communities" name="permissionsAssignedToOrganizationsUserGroupsRolesAndCommunities" type="checkbox" value="<%= true %>" />
 					</li>
 					<li class="tree-item">
-						<aui:input cssClass="disabled" disabled="<%= true %>" inlineLabel="right" label="permissions-assigned-to-users" name="permissionsAssignedToUsers" type="checkbox" helpMessage="export-import-permissions-assigned-to-users-help" />
+						<aui:input cssClass="disabled" disabled="<%= true %>" helpMessage="export-import-permissions-assigned-to-users-help" inlineLabel="right" label="permissions-assigned-to-users" name="permissionsAssignedToUsers" type="checkbox" />
 					</li>
 				</c:otherwise>
 			</c:choose>
