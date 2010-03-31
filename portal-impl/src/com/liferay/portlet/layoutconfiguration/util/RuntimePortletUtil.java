@@ -17,7 +17,7 @@ package com.liferay.portlet.layoutconfiguration.util;
 import com.liferay.portal.kernel.io.unsync.UnsyncStringWriter;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.servlet.StringServletResponse;
+import com.liferay.portal.kernel.servlet.PipingServletResponse;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.MethodInvoker;
 import com.liferay.portal.kernel.util.MethodWrapper;
@@ -206,16 +206,14 @@ public class RuntimePortletUtil {
 
 		// liferay:include tag library
 
-		StringServletResponse stringResponse = new StringServletResponse(
-			response);
-
 		UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter(true);
 
 		MethodWrapper methodWrapper = new MethodWrapper(
 			"com.liferay.taglib.util.VelocityTaglib", "init",
 			new Object[] {
-				servletContext, request, stringResponse, pageContext,
-				unsyncStringWriter
+				servletContext, request,
+				new PipingServletResponse(response, unsyncStringWriter),
+				pageContext
 			});
 
 		Object velocityTaglib = MethodInvoker.invoke(methodWrapper);

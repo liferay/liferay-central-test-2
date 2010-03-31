@@ -20,7 +20,7 @@ import com.liferay.portal.kernel.freemarker.FreeMarkerEngineUtil;
 import com.liferay.portal.kernel.io.unsync.UnsyncStringWriter;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.servlet.StringServletResponse;
+import com.liferay.portal.kernel.servlet.PipingServletResponse;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -143,11 +143,11 @@ public class ThemeUtil {
 
 		// liferay:include tag library
 
-		StringServletResponse stringResponse = new StringServletResponse(
-			(HttpServletResponse)pageContext.getResponse());
-
+		PipingServletResponse pipingResponse =
+			new PipingServletResponse(
+				(HttpServletResponse) pageContext.getResponse(), writer);
 		VelocityTaglib velocityTaglib = new VelocityTaglib(
-			servletContext, request, stringResponse, pageContext, writer);
+			servletContext, request, pipingResponse, pageContext);
 
 		request.setAttribute(WebKeys.VELOCITY_TAGLIB, velocityTaglib);
 
@@ -305,11 +305,11 @@ public class ThemeUtil {
 
 		// liferay:include tag library
 
-		StringServletResponse stringResponse = new StringServletResponse(
-			(HttpServletResponse)pageContext.getResponse());
-
+		PipingServletResponse pipingResponse =
+			new PipingServletResponse(
+				(HttpServletResponse) pageContext.getResponse(), writer);
 		VelocityTaglib velocityTaglib = new VelocityTaglib(
-			servletContext, request, stringResponse, pageContext, writer);
+			servletContext, request, pipingResponse, pageContext);
 
 		request.setAttribute(WebKeys.VELOCITY_TAGLIB, velocityTaglib);
 

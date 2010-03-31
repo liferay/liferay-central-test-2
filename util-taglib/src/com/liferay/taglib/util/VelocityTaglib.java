@@ -15,7 +15,7 @@
 package com.liferay.taglib.util;
 
 import com.liferay.portal.kernel.servlet.PageContextAdapter;
-import com.liferay.portal.kernel.servlet.StringServletResponse;
+import com.liferay.portal.kernel.servlet.PipingServletResponse;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.Layout;
@@ -53,8 +53,6 @@ import com.liferay.taglib.ui.SearchTag;
 import com.liferay.taglib.ui.StagingTag;
 import com.liferay.taglib.ui.ToggleTag;
 
-import java.io.Writer;
-
 import java.util.Map;
 
 import javax.portlet.PortletMode;
@@ -80,22 +78,19 @@ public class VelocityTaglib {
 
 	public VelocityTaglib(
 		ServletContext servletContext, HttpServletRequest request,
-		StringServletResponse stringResponse, PageContext pageContext,
-		Writer writer) {
+		PipingServletResponse pipingResponse, PageContext pageContext) {
 
-		init(servletContext, request, stringResponse, pageContext, writer);
+		init(servletContext, request, pipingResponse, pageContext);
 	}
 
 	public VelocityTaglib init(
 		ServletContext servletContext, HttpServletRequest request,
-		StringServletResponse stringResponse, PageContext pageContext,
-		Writer writer) {
+		PipingServletResponse pipingResponse, PageContext pageContext) {
 
 		_servletContext = servletContext;
 		_request = request;
-		_stringResponse = stringResponse;
+		_pipingResponse = pipingResponse;
 		_pageContext = pageContext;
-		_writer = writer;
 
 		return this;
 	}
@@ -354,28 +349,21 @@ public class VelocityTaglib {
 		iconRefreshTag.runTag();
 	}
 
-	public String include(String page) throws Exception {
-		_stringResponse.recycle();
+	public void include(String page) throws Exception {
 
 		RequestDispatcher requestDispatcher =
 			_servletContext.getRequestDispatcher(page);
 
-		requestDispatcher.include(_request, _stringResponse);
-
-		return _stringResponse.getString();
+		requestDispatcher.include(_request, _pipingResponse);
 	}
 
-	public String include(ServletContext servletContext, String page)
+	public void include(ServletContext servletContext, String page)
 		throws Exception {
-
-		_stringResponse.recycle();
 
 		RequestDispatcher requestDispatcher =
 			servletContext.getRequestDispatcher(page);
 
-		requestDispatcher.include(_request, _stringResponse);
-
-		return _stringResponse.getString();
+		requestDispatcher.include(_request, _pipingResponse);
 	}
 
 	public void journalContentSearch() throws Exception {
@@ -429,20 +417,14 @@ public class VelocityTaglib {
 		languageTag.runTag();
 	}
 
-	public String layoutIcon(Layout layout) throws Exception {
-		_stringResponse.recycle();
+	public void layoutIcon(Layout layout) throws Exception {
 
-		LayoutIconTag.doTag(layout, _servletContext, _request, _stringResponse);
-
-		return _stringResponse.getString();
+		LayoutIconTag.doTag(layout, _servletContext, _request, _pipingResponse);
 	}
 
-	public String metaTags() throws Exception {
-		_stringResponse.recycle();
+	public void metaTags() throws Exception {
 
-		MetaTagsTag.doTag(_servletContext, _request, _stringResponse);
-
-		return _stringResponse.getString();
+		MetaTagsTag.doTag(_servletContext, _request, _pipingResponse);
 	}
 
 	public void myPlaces() throws Exception {
@@ -542,35 +524,27 @@ public class VelocityTaglib {
 			portletConfiguration, params, writeOutput, _pageContext);
 	}
 
-	public String runtime(String portletName)
+	public void runtime(String portletName)
 		throws Exception {
 
-		return runtime(portletName, null);
+		runtime(portletName, null);
 	}
 
-	public String runtime(String portletName, String queryString)
+	public void runtime(String portletName, String queryString)
 		throws Exception {
-
-		_stringResponse.recycle();
 
 		RuntimeTag.doTag(
 			portletName, queryString, null, _servletContext, _request,
-			_stringResponse);
-
-		return _stringResponse.getString();
+			_pipingResponse);
 	}
 
-	public String runtime(
+	public void runtime(
 			String portletName, String queryString, String defaultPreferences)
 		throws Exception {
 
-		_stringResponse.recycle();
-
 		RuntimeTag.doTag(
 			portletName, queryString, defaultPreferences, null, _servletContext,
-			_request, _stringResponse);
-
-		return _stringResponse.getString();
+			_request, _pipingResponse);
 	}
 
 	public void search() throws Exception {
@@ -589,41 +563,34 @@ public class VelocityTaglib {
 		stagingTag.runTag();
 	}
 
-	public String toggle(
+	public void toggle(
 			String id, String showImage, String hideImage, String showMessage,
 			String hideMessage, boolean defaultShowContent)
 		throws Exception {
 
-		_stringResponse.recycle();
-
 		ToggleTag.doTag(
 			id, showImage, hideImage, showMessage, hideMessage,
 			defaultShowContent, null, _servletContext, _request,
-			_stringResponse);
-
-		return _stringResponse.getString();
+			_pipingResponse);
 	}
 
 	public String wrapPortlet(String wrapPage, String portletPage)
 		throws Exception {
 
-		_stringResponse.recycle();
-
 		return WrapPortletTag.doTag(
-			wrapPage, portletPage, _servletContext, _request, _stringResponse,
+			wrapPage, portletPage, _servletContext, _request, _pipingResponse,
 			_pageContext);
 	}
 
 	protected void setUp(TagSupport tagSupport) {
 
 		tagSupport.setPageContext(
-			new PageContextAdapter(_pageContext, _writer));
+			new PageContextAdapter(_pageContext, _pipingResponse.getWriter()));
 	}
 
 	private ServletContext _servletContext;
 	private HttpServletRequest _request;
-	private StringServletResponse _stringResponse;
+	private PipingServletResponse _pipingResponse;
 	private PageContext _pageContext;
-	private Writer _writer;
 
 }

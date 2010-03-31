@@ -26,6 +26,7 @@ import com.liferay.taglib.util.ThemeUtil;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
 
@@ -38,7 +39,7 @@ public class WrapPortletTag extends ParamAndPropertyAncestorTagImpl {
 
 	public static String doTag(
 			String wrapPage, String portletPage, ServletContext servletContext,
-			HttpServletRequest request, StringServletResponse stringResponse,
+			HttpServletRequest request, HttpServletResponse response,
 			PageContext pageContext)
 		throws Exception {
 
@@ -52,14 +53,13 @@ public class WrapPortletTag extends ParamAndPropertyAncestorTagImpl {
 
 		RequestDispatcher requestDispatcher =
 			servletContext.getRequestDispatcher(portletPage);
-
+		StringServletResponse stringResponse =
+			new StringServletResponse(response);
 		requestDispatcher.include(request, stringResponse);
 
 		portletDisplay.setContent(stringResponse.getString());
 
 		// Page
-
-		stringResponse.recycle();
 
 		String content = ThemeUtil.includeVM(
 			servletContext, request, pageContext, wrapPage, theme, false);

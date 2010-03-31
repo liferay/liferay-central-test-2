@@ -29,18 +29,11 @@ import javax.servlet.jsp.PageContext;
  * <a href="PortalIncludeUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Shuyang Zhou
  */
 public class PortalIncludeUtil {
 
 	public static void include(PageContext pageContext, String path)
-		throws IOException, ServletException {
-
-		String s = toString(pageContext, path);
-
-		pageContext.getOut().print(s);
-	}
-
-	public static String toString(PageContext pageContext, String path)
 		throws IOException, ServletException {
 
 		HttpServletRequest request =
@@ -51,15 +44,11 @@ public class PortalIncludeUtil {
 		ServletContext servletContext = (ServletContext)request.getAttribute(
 			WebKeys.CTX);
 
-		StringServletResponse stringResponse = new StringServletResponse(
-			response);
-
 		RequestDispatcher requestDispatcher =
 			servletContext.getRequestDispatcher(path);
 
-		requestDispatcher.include(request, stringResponse);
-
-		return stringResponse.getString();
+		requestDispatcher.include(
+			request, new PipingServletResponse(response, pageContext.getOut()));
 	}
 
 }
