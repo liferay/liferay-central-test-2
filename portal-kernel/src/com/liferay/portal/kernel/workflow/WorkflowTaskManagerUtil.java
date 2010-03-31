@@ -181,8 +181,8 @@ public class WorkflowTaskManagerUtil {
 		throws WorkflowException {
 
 		return _workflowTaskManager.search(
-			companyId, userId, keywords, completed,	searchByUserRoles,
-			start, end, orderByComparator);
+			companyId, userId, keywords, completed,	searchByUserRoles, start,
+			end, orderByComparator);
 	}
 
 	public static List<WorkflowTask> search(

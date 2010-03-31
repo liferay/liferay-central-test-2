@@ -15,11 +15,9 @@
 %>
 
 <aui:form action="<%= portletURL.toString() %>" method="post" name="fm">
-
 	<liferay-ui:search-container
 		searchContainer="<%= new WorkflowTaskSearch(renderRequest, portletURL) %>"
 	>
-
 		<liferay-ui:search-form
 			page="/html/portlet/workflow_tasks/workflow_search_tasks.jsp"
 		/>
@@ -52,6 +50,8 @@
 			long groupId = ((Number)workflowInstanceContext.get(ContextConstants.GROUP_ID)).longValue();
 			String className = (String)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_NAME);
 			long classPK = ((Number)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_PK)).longValue();
+
+			WorkflowHandler workflowHandler = WorkflowHandlerRegistryUtil.getWorkflowHandler(className);
 			%>
 
 			<portlet:renderURL var="rowURL">
@@ -111,10 +111,6 @@
 				%>
 
 			</liferay-ui:search-container-column-text>
-
-			<%
-			WorkflowHandler workflowHandler = WorkflowHandlerRegistryUtil.getWorkflowHandler(className);
-			%>
 
 			<liferay-ui:search-container-column-text
 				buffer="buffer"
@@ -203,5 +199,4 @@
 
 		<liferay-ui:search-iterator />
 	</liferay-ui:search-container>
-
 </aui:form>

@@ -200,9 +200,6 @@ public class WorkflowInstanceLinkLocalServiceImpl
 			int workflowDefinitionVersion =
 				workflowDefinitionLink.getWorkflowDefinitionVersion();
 
-			WorkflowHandler workflowHandler =
-				WorkflowHandlerRegistryUtil.getWorkflowHandler(className);
-
 			Map<String, Serializable> context =
 				new HashMap<String, Serializable>();
 
@@ -210,6 +207,10 @@ public class WorkflowInstanceLinkLocalServiceImpl
 			context.put(ContextConstants.GROUP_ID, groupId);
 			context.put(ContextConstants.ENTRY_CLASS_NAME, className);
 			context.put(ContextConstants.ENTRY_CLASS_PK, classPK);
+
+			WorkflowHandler workflowHandler =
+				WorkflowHandlerRegistryUtil.getWorkflowHandler(className);
+
 			context.put(ContextConstants.ENTRY_TYPE, workflowHandler.getType());
 
 			WorkflowInstance workflowInstance =
