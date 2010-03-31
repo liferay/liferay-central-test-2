@@ -699,15 +699,13 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 	protected static String getFileEntryBinPath(
 		PortletDataContext context, DLFileEntry fileEntry) {
 
-		StringBundler sb = new StringBundler(7);
+		StringBundler sb = new StringBundler(5);
 
 		sb.append(context.getPortletPath(PortletKeys.DOCUMENT_LIBRARY));
 		sb.append("/bin/");
 		sb.append(fileEntry.getFileEntryId());
 		sb.append(StringPool.SLASH);
 		sb.append(fileEntry.getVersion());
-		sb.append(StringPool.SLASH);
-		sb.append(fileEntry.getTitle());
 
 		return sb.toString();
 	}
