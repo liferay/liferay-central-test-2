@@ -403,7 +403,6 @@ else if (tabs2.equals("page-updated-email")) {
 
 		<aui:button onClick="<%= redirect %>" type="cancel" />
 	</aui:button-row>
-
 </aui:form>
 
 <aui:script>
