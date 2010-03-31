@@ -16,13 +16,16 @@ package com.liferay.portal.service.permission;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Organization;
+import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
+import com.liferay.portal.service.UserGroupRoleLocalServiceUtil;
 
 import java.util.List;
 
@@ -51,6 +54,13 @@ public class GroupPermissionImpl implements GroupPermission {
 
 		if (group.isStagingGroup()) {
 			group = group.getLiveGroup();
+		}
+
+		if (hasWorkflowRolePermission(
+				permissionChecker.getCompanyId(), group,
+				permissionChecker.getUserId(), actionId)) {
+
+			return true;
 		}
 
 		if (group.isOrganization()) {
@@ -85,6 +95,61 @@ public class GroupPermissionImpl implements GroupPermission {
 
 		return permissionChecker.hasPermission(
 			groupId, Group.class.getName(), groupId, actionId);
+	}
+
+	protected boolean hasWorkflowRolePermission(
+			long companyId, Group group, long userId, String actionId)
+		throws PortalException, SystemException {
+
+		if (group.isWorkflowEnabled()) {
+			String[] workflowRoleNames = StringUtil.split(
+				group.getWorkflowRoleNames());
+
+			if (actionId == ActionKeys.APPROVE_PROPOSAL) {
+				for (String workflowRoleName : workflowRoleNames) {
+					if (UserGroupRoleLocalServiceUtil.hasUserGroupRole(
+							userId, group.getGroupId(), workflowRoleName) ||
+						isGroupMemberRole(group, userId, workflowRoleName)) {
+
+						return true;
+					}
+				}
+			}
+			else if (actionId == ActionKeys.MANAGE_STAGING) {
+				String stageTwoRoleName = workflowRoleNames[0];
+
+				String publisherRoleName =
+					workflowRoleNames[workflowRoleNames.length -1];
+
+				return UserGroupRoleLocalServiceUtil.hasUserGroupRole(
+						userId, group.getGroupId(), stageTwoRoleName) ||
+					UserGroupRoleLocalServiceUtil.hasUserGroupRole(
+						userId, group.getGroupId(), publisherRoleName) ||
+					isGroupMemberRole(group, userId, stageTwoRoleName) ||
+					isGroupMemberRole(group, userId, publisherRoleName);
+			}
+			else if (actionId == ActionKeys.PUBLISH_STAGING) {
+				String publisherRoleName =
+					workflowRoleNames[workflowRoleNames.length -1];
+
+				return UserGroupRoleLocalServiceUtil.hasUserGroupRole(
+						userId, group.getGroupId(), publisherRoleName) ||
+					isGroupMemberRole(group, userId, publisherRoleName);
+			}
+		}
+
+		return false;
+	}
+
+	protected boolean isGroupMemberRole(
+			Group group, long userId, String roleName)
+		throws SystemException {
+
+		return ((group.isCommunity() &&
+					(roleName.equals(RoleConstants.COMMUNITY_MEMBER))) ||
+				(group.isOrganization() &&
+					(roleName.equals(RoleConstants.ORGANIZATION_MEMBER)))) &&
+			GroupLocalServiceUtil.hasUserGroup(userId, group.getGroupId());
 	}
 
 }
