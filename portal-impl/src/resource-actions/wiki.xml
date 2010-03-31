@@ -27,11 +27,13 @@
 		</portlet-ref>
 		<supports>
 			<action-key>ADD_NODE</action-key>
+			<action-key>PERMISSIONS</action-key>
 		</supports>
 		<community-defaults />
 		<guest-defaults />
 		<guest-unsupported>
 			<action-key>ADD_NODE</action-key>
+			<action-key>PERMISSIONS</action-key>
 		</guest-unsupported>
 	</model-resource>
 	<model-resource>
