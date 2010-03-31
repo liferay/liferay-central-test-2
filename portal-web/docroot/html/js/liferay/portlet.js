@@ -542,6 +542,8 @@ Liferay.Portlet = {
 
 					var iframeBody = iframe.get('contentWindow.document.body');
 
+					iframeBody.addClass('configuration-popup');
+
 					iframe.set('height', iframeBody.get('scrollHeight'));
 
 					var closeButton = iframeBody.one('.aui-button-input-cancel');
@@ -549,8 +551,6 @@ Liferay.Portlet = {
 					if (closeButton) {
 						closeButton.on('click', dialog.close, dialog);
 					}
-
-					iframeBody.addClass('configuration-popup');
 
 					bodyNode.loadingmask.hide();
 				}
