@@ -28,6 +28,7 @@ import java.util.Map;
  * @author Micha Kiener
  * @author Shuyang Zhou
  * @author Brian Wing Shun Chan
+ * @author Marcellus Tavares
  */
 public class WorkflowTaskManagerUtil {
 
@@ -171,6 +172,50 @@ public class WorkflowTaskManagerUtil {
 		return _workflowTaskManager.getWorkflowTasksByWorkflowInstance(
 			companyId, workflowInstanceId, completed, start, end,
 			orderByComparator);
+	}
+
+	public static List<WorkflowTask> search(
+			long companyId, long userId, String keywords, Boolean completed,
+			Boolean searchByUserRoles, int start, int end,
+			OrderByComparator orderByComparator)
+		throws WorkflowException {
+
+		return _workflowTaskManager.search(
+			companyId, userId, keywords, completed,	searchByUserRoles,
+			start, end, orderByComparator);
+	}
+
+	public static List<WorkflowTask> search(
+			long companyId, long userId, String name, String type, String state,
+			Date dueDateGT, Date dueDateLT, Boolean completed,
+			Boolean searchByUserRoles, boolean andOperator, int start, int end,
+			OrderByComparator orderByComparator)
+		throws WorkflowException {
+
+		return _workflowTaskManager.search(
+			companyId, userId, name, type, state, dueDateGT, dueDateLT,
+			completed, searchByUserRoles, andOperator, start, end,
+			orderByComparator);
+	}
+
+	public static int searchCount(
+			long companyId, long userId, String keywords, Boolean completed,
+			Boolean searchByUserRoles)
+		throws WorkflowException {
+
+		return _workflowTaskManager.searchCount(
+			companyId, userId, keywords, completed,	searchByUserRoles);
+	}
+
+	public static int searchCount(
+			long companyId, long userId, String name, String type, String state,
+			Date dueDateGT, Date dueDateLT, Boolean completed,
+			Boolean searchByUserRoles, boolean andOperator)
+		throws WorkflowException {
+
+		return _workflowTaskManager.searchCount(
+			companyId, userId, name, type, state, dueDateGT, dueDateLT,
+			completed, searchByUserRoles, andOperator);
 	}
 
 	public static WorkflowTask updateDueDate(

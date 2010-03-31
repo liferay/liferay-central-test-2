@@ -32,6 +32,7 @@ import java.util.Map;
  * @author Micha Kiener
  * @author Shuyang Zhou
  * @author Brian Wing Shun Chan
+ * @author Marcellus Tavares
  */
 public class WorkflowTaskManagerProxyBean
 	extends BaseProxyBean implements WorkflowTaskManager {
@@ -130,6 +131,38 @@ public class WorkflowTaskManagerProxyBean
 	public List<WorkflowTask> getWorkflowTasksByWorkflowInstance(
 		long companyId, long workflowInstanceId, Boolean completed, int start,
 		int end, OrderByComparator orderByComparator) {
+
+		throw new UnsupportedOperationException();
+	}
+
+	public List<WorkflowTask> search(
+		long companyId, long userId, String keywords, Boolean completed,
+		Boolean searchByUserRoles, int start, int end,
+		OrderByComparator orderByComparator) {
+
+		throw new UnsupportedOperationException();
+	}
+
+	public List<WorkflowTask> search(
+		long companyId, long userId, String name, String type, String state,
+		Date dueDateGT, Date dueDateLT, Boolean completed,
+		Boolean searchByUserRoles, boolean andOperator, int start, int end,
+		OrderByComparator orderByComparator) {
+
+		throw new UnsupportedOperationException();
+	}
+
+	public int searchCount(
+		long companyId, long userId, String keywords, Boolean completed,
+		Boolean searchByUserRoles) {
+
+		throw new UnsupportedOperationException();
+	}
+
+	public int searchCount(
+		long companyId, long userId, String name, String type, String state,
+		Date dueDateGT, Date dueDateLT, Boolean completed,
+		Boolean searchByUserRoles, boolean andOperator) {
 
 		throw new UnsupportedOperationException();
 	}

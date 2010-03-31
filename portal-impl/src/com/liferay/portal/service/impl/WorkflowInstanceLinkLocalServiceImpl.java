@@ -19,6 +19,8 @@ import com.liferay.portal.NoSuchWorkflowInstanceLinkException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.workflow.ContextConstants;
+import com.liferay.portal.kernel.workflow.WorkflowHandler;
+import com.liferay.portal.kernel.workflow.WorkflowHandlerRegistryUtil;
 import com.liferay.portal.kernel.workflow.WorkflowInstance;
 import com.liferay.portal.kernel.workflow.WorkflowInstanceManagerUtil;
 import com.liferay.portal.model.User;
@@ -198,6 +200,9 @@ public class WorkflowInstanceLinkLocalServiceImpl
 			int workflowDefinitionVersion =
 				workflowDefinitionLink.getWorkflowDefinitionVersion();
 
+			WorkflowHandler workflowHandler =
+				WorkflowHandlerRegistryUtil.getWorkflowHandler(className);
+
 			Map<String, Serializable> context =
 				new HashMap<String, Serializable>();
 
@@ -205,6 +210,7 @@ public class WorkflowInstanceLinkLocalServiceImpl
 			context.put(ContextConstants.GROUP_ID, groupId);
 			context.put(ContextConstants.ENTRY_CLASS_NAME, className);
 			context.put(ContextConstants.ENTRY_CLASS_PK, classPK);
+			context.put(ContextConstants.ENTRY_TYPE, workflowHandler.getType());
 
 			WorkflowInstance workflowInstance =
 				WorkflowInstanceManagerUtil.startWorkflowInstance(

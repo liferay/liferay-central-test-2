@@ -14,186 +14,34 @@
  */
 %>
 
+<aui:form action="<%= portletURL.toString() %>" method="post" name="fm">
 
-<liferay-ui:search-container
-	headerNames="name,asset-title,last-activity-date,due-date,state"
-	iteratorURL="<%= portletURL %>"
->
-
-	<%
-	boolean allTasks = false;
-
-	List<WorkflowTask> resultsTasks = null;
-
-	int totalTasks = 0;
-
-	if (toolbarItem.equals("all") && PortletPermissionUtil.contains(permissionChecker, PortletKeys.WORKFLOW_TASKS, ActionKeys.VIEW_ALL_TASKS)) {
-		allTasks = true;
-
-		searchContainer.setEmptyResultsMessage("there-are-no-tasks");
-
-		resultsTasks = WorkflowTaskManagerUtil.getWorkflowTasks(company.getCompanyId(), null, searchContainer.getStart(), searchContainer.getEnd(), null);
-		totalTasks = WorkflowTaskManagerUtil.getWorkflowTaskCount(company.getCompanyId(), null);
-	}
-	else if (toolbarItem.equals("assigned-to-my-roles")) {
-		searchContainer.setEmptyResultsMessage("there-are-no-tasks-assigned-to-my-roles");
-
-		resultsTasks = WorkflowTaskManagerUtil.getWorkflowTasksByUserRoles(company.getCompanyId(), user.getUserId(), false, searchContainer.getStart(), searchContainer.getEnd(), null);
-		totalTasks = WorkflowTaskManagerUtil.getWorkflowTaskCountByUserRoles(company.getCompanyId(), user.getUserId(), false);
-	}
-	else {
-		boolean completedTasks = false;
-
-		if (toolbarItem.equals("my-completed-tasks")) {
-			completedTasks = true;
-
-			searchContainer.setEmptyResultsMessage("there-are-no-completed-tasks");
-		}
-		else {
-			searchContainer.setEmptyResultsMessage("there-are-no-pending-tasks-assigned-to-you");
-		}
-
-		resultsTasks = WorkflowTaskManagerUtil.getWorkflowTasksByUser(company.getCompanyId(), user.getUserId(), completedTasks, searchContainer.getStart(), searchContainer.getEnd(), null);
-		totalTasks = WorkflowTaskManagerUtil.getWorkflowTaskCountByUser(company.getCompanyId(), user.getUserId(), completedTasks);
-	}
-	%>
-
-	<liferay-ui:search-container-results
-		results="<%= resultsTasks %>"
-		total="<%= totalTasks %>"
-	/>
-
-	<liferay-ui:search-container-row
-		className="com.liferay.portal.kernel.workflow.WorkflowTask"
-		modelVar="workflowTask"
-		stringKey="<%= true %>"
+	<liferay-ui:search-container
+		searchContainer="<%= new WorkflowTaskSearch(renderRequest, portletURL) %>"
 	>
-		<liferay-ui:search-container-row-parameter
-			name="workflowTask"
-			value="<%= workflowTask %>"
+
+		<liferay-ui:search-form
+			page="/html/portlet/workflow_tasks/workflow_search_tasks.jsp"
 		/>
 
-		<portlet:renderURL var="rowURL">
-			<portlet:param name="struts_action" value="/workflow_tasks/edit_workflow_task" />
-			<portlet:param name="redirect" value="<%= currentURL %>" />
-			<portlet:param name="workflowTaskId" value="<%= String.valueOf(workflowTask.getWorkflowTaskId()) %>" />
-		</portlet:renderURL>
+		<div class="separator" />
 
-		<c:if test="<%= allTasks %>">
-			<liferay-ui:search-container-column-text
-				buffer="buffer"
-			>
+		<%@ include file="/html/portlet/workflow_tasks/workflow_search_results.jspf" %>
 
-				<%
-				if (workflowTask.getAssigneeUserId() != 0 ){
-					User assigneeUser = UserLocalServiceUtil.getUser(workflowTask.getAssigneeUserId());
+		<liferay-ui:search-container-results
+			results="<%= resultsTasks %>"
+			total="<%= totalTasks %>"
+		/>
 
-					buffer.append("<img alt=\"");
-					buffer.append(HtmlUtil.escape(assigneeUser.getFullName()));
-					buffer.append("\" class=\"user-avatar\" src=\"");
-					buffer.append(themeDisplay.getPathImage());
-					buffer.append("/user_");
-
-					if (assigneeUser.isFemale()) {
-						buffer.append("female");
-					}
-					else {
-						buffer.append("male");
-					}
-
-					buffer.append("_portrait?img_id=");
-					buffer.append(assigneeUser.getPortraitId());
-					buffer.append("&t=");
-					buffer.append(ImageServletTokenUtil.getToken(assigneeUser.getPortraitId()));
-					buffer.append("\" title=\"");
-					buffer.append(HtmlUtil.escape(assigneeUser.getFullName()));
-					buffer.append("\" />");
-				}
-				%>
-
-			</liferay-ui:search-container-column-text>
-		</c:if>
-
-		<liferay-ui:search-container-column-text
-			buffer="buffer"
-			href="<%= rowURL %>"
-			name="name"
+		<liferay-ui:search-container-row
+			className="com.liferay.portal.kernel.workflow.WorkflowTask"
+			modelVar="workflowTask"
+			stringKey="<%= true %>"
 		>
-
-			<%
-			buffer.append("<span class=\"name\" id=\"");
-			buffer.append(workflowTask.getWorkflowTaskId());
-			buffer.append("\">");
-			buffer.append(workflowTask.getName());
-			buffer.append("</span>");
-			%>
-
-		</liferay-ui:search-container-column-text>
-
-		<liferay-ui:search-container-column-text
-			buffer="buffer"
-			name="asset-title"
-			href="<%= rowURL %>"
-		>
-
-			<%
-			WorkflowInstance workflowInstance = WorkflowInstanceManagerUtil.getWorkflowInstance(company.getCompanyId(), workflowTask.getWorkflowInstanceId());
-
-			Map<String, Serializable> workflowInstanceContext = workflowInstance.getContext();
-
-			String className = (String)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_NAME);
-			long classPK = ((Number)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_PK)).longValue();
-
-			WorkflowHandler workflowHandler = WorkflowHandlerRegistryUtil.getWorkflowHandler(className);
-
-			buffer.append(workflowHandler.getTitle(classPK));
-			%>
-
-		</liferay-ui:search-container-column-text>
-
-		<liferay-ui:search-container-column-text
-			buffer="buffer"
-			name="last-activity-date"
-			href="<%= rowURL %>"
-		>
-
-			<%
-			List<WorkflowLog> workflowLogs = WorkflowLogManagerUtil.getWorkflowLogs(company.getCompanyId(), workflowTask.getWorkflowTaskId(), 0, 1, WorkflowComparatorFactoryUtil.getLogCreateDateComparator());
-
-			if (workflowLogs.isEmpty()) {
-				buffer.append(LanguageUtil.get(pageContext, "never"));
-			}
-			else {
-				WorkflowLog workflowLog = workflowLogs.get(0);
-
-				buffer.append(dateFormatDateTime.format(workflowLog.getCreateDate()));
-			}
-			%>
-
-		</liferay-ui:search-container-column-text>
-
-		<liferay-ui:search-container-column-text
-			buffer="buffer"
-			name="due-date"
-			href="<%= rowURL %>"
-		>
-
-			<%
-			if (workflowTask.getDueDate() == null) {
-				buffer.append(LanguageUtil.get(pageContext, "never"));
-			}
-			else {
-				buffer.append(dateFormatDateTime.format(workflowTask.getDueDate()));
-			}
-			%>
-
-		</liferay-ui:search-container-column-text>
-
-		<liferay-ui:search-container-column-text
-			buffer="buffer"
-			href="<%= rowURL %>"
-			name="state"
-		>
+			<liferay-ui:search-container-row-parameter
+				name="workflowTask"
+				value="<%= workflowTask %>"
+			/>
 
 			<%
 			WorkflowInstance workflowInstance = WorkflowInstanceManagerUtil.getWorkflowInstance(company.getCompanyId(), workflowTask.getWorkflowInstanceId());
@@ -204,21 +52,156 @@
 			long groupId = ((Number)workflowInstanceContext.get(ContextConstants.GROUP_ID)).longValue();
 			String className = (String)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_NAME);
 			long classPK = ((Number)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_PK)).longValue();
-
-			String state = WorkflowInstanceLinkLocalServiceUtil.getState(companyId, groupId, className, classPK);
-
-			buffer.append(state);
 			%>
 
-		</liferay-ui:search-container-column-text>
+			<portlet:renderURL var="rowURL">
+				<portlet:param name="struts_action" value="/workflow_tasks/edit_workflow_task" />
+				<portlet:param name="redirect" value="<%= currentURL %>" />
+				<portlet:param name="workflowTaskId" value="<%= String.valueOf(workflowTask.getWorkflowTaskId()) %>" />
+			</portlet:renderURL>
 
-		<c:if test="<%= !allTasks %>">
-			<liferay-ui:search-container-column-jsp
-				align="right"
-				path="/html/portlet/workflow_tasks/workflow_task_action.jsp"
-			/>
-		</c:if>
-	</liferay-ui:search-container-row>
+			<c:if test="<%= allTasks %>">
+				<liferay-ui:search-container-column-text
+					buffer="buffer"
+				>
 
-	<liferay-ui:search-iterator />
-</liferay-ui:search-container>
+					<%
+					if (workflowTask.getAssigneeUserId() != 0 ){
+						User assigneeUser = UserLocalServiceUtil.getUser(workflowTask.getAssigneeUserId());
+
+						buffer.append("<img alt=\"");
+						buffer.append(HtmlUtil.escape(assigneeUser.getFullName()));
+						buffer.append("\" class=\"user-avatar\" src=\"");
+						buffer.append(themeDisplay.getPathImage());
+						buffer.append("/user_");
+
+						if (assigneeUser.isFemale()) {
+							buffer.append("female");
+						}
+						else {
+							buffer.append("male");
+						}
+
+						buffer.append("_portrait?img_id=");
+						buffer.append(assigneeUser.getPortraitId());
+						buffer.append("&t=");
+						buffer.append(ImageServletTokenUtil.getToken(assigneeUser.getPortraitId()));
+						buffer.append("\" title=\"");
+						buffer.append(HtmlUtil.escape(assigneeUser.getFullName()));
+						buffer.append("\" />");
+					}
+					%>
+
+				</liferay-ui:search-container-column-text>
+			</c:if>
+
+			<liferay-ui:search-container-column-text
+				buffer="buffer"
+				href="<%= rowURL %>"
+				name="name"
+				orderable="<%= true %>"
+			>
+
+				<%
+				buffer.append("<span class=\"name\" id=\"");
+				buffer.append(workflowTask.getWorkflowTaskId());
+				buffer.append("\">");
+				buffer.append(workflowTask.getName());
+				buffer.append("</span>");
+				%>
+
+			</liferay-ui:search-container-column-text>
+
+			<%
+			WorkflowHandler workflowHandler = WorkflowHandlerRegistryUtil.getWorkflowHandler(className);
+			%>
+
+			<liferay-ui:search-container-column-text
+				buffer="buffer"
+				name="asset-title"
+				href="<%= rowURL %>"
+			>
+
+				<%
+				buffer.append(workflowHandler.getTitle(classPK));
+				%>
+
+			</liferay-ui:search-container-column-text>
+
+			<liferay-ui:search-container-column-text
+				buffer="buffer"
+				name="asset-type"
+				href="<%= rowURL %>"
+			>
+
+				<%
+				buffer.append(workflowHandler.getType());
+				%>
+
+			</liferay-ui:search-container-column-text>
+
+			<liferay-ui:search-container-column-text
+				buffer="buffer"
+				name="last-activity-date"
+				href="<%= rowURL %>"
+			>
+
+				<%
+				List<WorkflowLog> workflowLogs = WorkflowLogManagerUtil.getWorkflowLogs(company.getCompanyId(), workflowTask.getWorkflowTaskId(), 0, 1, WorkflowComparatorFactoryUtil.getLogCreateDateComparator());
+
+				if (workflowLogs.isEmpty()) {
+					buffer.append(LanguageUtil.get(pageContext, "never"));
+				}
+				else {
+					WorkflowLog workflowLog = workflowLogs.get(0);
+
+					buffer.append(dateFormatDateTime.format(workflowLog.getCreateDate()));
+				}
+				%>
+
+			</liferay-ui:search-container-column-text>
+
+			<liferay-ui:search-container-column-text
+				buffer="buffer"
+				name="due-date"
+				href="<%= rowURL %>"
+				orderable="<%= true %>"
+			>
+
+				<%
+				if (workflowTask.getDueDate() == null) {
+					buffer.append(LanguageUtil.get(pageContext, "never"));
+				}
+				else {
+					buffer.append(dateFormatDateTime.format(workflowTask.getDueDate()));
+				}
+				%>
+
+			</liferay-ui:search-container-column-text>
+
+			<liferay-ui:search-container-column-text
+				buffer="buffer"
+				href="<%= rowURL %>"
+				name="state"
+			>
+
+				<%
+				String state = WorkflowInstanceLinkLocalServiceUtil.getState(companyId, groupId, className, classPK);
+
+				buffer.append(state);
+				%>
+
+			</liferay-ui:search-container-column-text>
+
+			<c:if test="<%= !allTasks %>">
+				<liferay-ui:search-container-column-jsp
+					align="right"
+					path="/html/portlet/workflow_tasks/workflow_task_action.jsp"
+				/>
+			</c:if>
+		</liferay-ui:search-container-row>
+
+		<liferay-ui:search-iterator />
+	</liferay-ui:search-container>
+
+</aui:form>

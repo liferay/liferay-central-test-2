@@ -12,24 +12,25 @@
  * details.
  */
 
-package com.liferay.portal.kernel.workflow;
+package com.liferay.portlet.workflowtasks.search;
+
+import com.liferay.portal.kernel.dao.search.DAOParamUtil;
+
+import javax.portlet.PortletRequest;
 
 /**
- * <a href="ContextConstants.java.html"><b><i>View Source</i></b></a>
+ * <a href="WorkflowTaskSearchTerms.java.html"><b><i>View Source</i></b></a>
  *
- * @author Bruno Farache
  * @author Marcellus Tavares
  */
-public class ContextConstants {
+public class WorkflowTaskSearchTerms extends WorkflowTaskDisplayTerms {
 
-	public static final String COMPANY_ID = "companyId";
+	public WorkflowTaskSearchTerms(PortletRequest portletRequest) {
+		super(portletRequest);
 
-	public static final String ENTRY_CLASS_NAME = "entryClassName";
-
-	public static final String ENTRY_CLASS_PK = "entryClassPK";
-
-	public static final String ENTRY_TYPE = "entryType";
-
-	public static final String GROUP_ID = "groupId";
+		name = DAOParamUtil.getLike(portletRequest, NAME);
+		state = DAOParamUtil.getLike(portletRequest, STATE);
+		type = DAOParamUtil.getLike(portletRequest, TYPE);
+	}
 
 }

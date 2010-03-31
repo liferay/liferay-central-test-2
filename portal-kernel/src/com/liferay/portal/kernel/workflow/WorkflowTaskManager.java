@@ -31,6 +31,7 @@ import java.util.Map;
  * @author Micha Kiener
  * @author Shuyang Zhou
  * @author Brian Wing Shun Chan
+ * @author Marcellus Tavares
  */
 public interface WorkflowTaskManager {
 
@@ -103,6 +104,30 @@ public interface WorkflowTaskManager {
 	public List<WorkflowTask> getWorkflowTasksByWorkflowInstance(
 			long companyId, long workflowInstanceId, Boolean completed,
 			int start, int end, OrderByComparator orderByComparator)
+		throws WorkflowException;
+
+	public List<WorkflowTask> search(
+			long companyId, long userId, String keywords,
+			Boolean completed, Boolean searchByUserRoles, int start, int end,
+			OrderByComparator orderByComparator)
+		throws WorkflowException;
+
+	public List<WorkflowTask> search(
+			long companyId, long userId, String name, String type, String state,
+			Date dueDateGT, Date dueDateLT, Boolean completed,
+			Boolean searchByUserRoles, boolean andOperator, int start, int end,
+			OrderByComparator orderByComparator)
+		throws WorkflowException;
+
+	public int searchCount(
+			long companyId, long userId, String keywords, Boolean completed,
+			Boolean searchByUserRoles)
+		throws WorkflowException;
+
+	public int searchCount(
+			long companyId, long userId, String name, String type, String state,
+			Date dueDateGT, Date dueDateLT, Boolean completed,
+			Boolean searchByUserRoles, boolean andOperator)
 		throws WorkflowException;
 
 	public WorkflowTask updateDueDate(
