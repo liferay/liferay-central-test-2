@@ -437,27 +437,34 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 
 		List<MBMessage> messages = new ArrayList<MBMessage>();
 
-		MessageCreateDateComparator comparator =
-			new MessageCreateDateComparator(false);
+		MBThread thread = mbThreadLocalService.getThread(threadId);
 
-		Iterator<MBMessage> itr = mbMessageLocalService.getThreadMessages(
-			threadId, status, comparator).iterator();
+		if (MBMessagePermission.contains(
+				getPermissionChecker(), thread.getRootMessageId(),
+				ActionKeys.VIEW)) {
 
-		while (itr.hasNext() && (messages.size() < max)) {
-			MBMessage message = itr.next();
+			MessageCreateDateComparator comparator =
+				new MessageCreateDateComparator(false);
 
-			if (MBMessagePermission.contains(
-					getPermissionChecker(), message, ActionKeys.VIEW)) {
+			Iterator<MBMessage> itr = mbMessageLocalService.getThreadMessages(
+				threadId, status, comparator).iterator();
 
-				messages.add(message);
+			while (itr.hasNext() && (messages.size() < max)) {
+				MBMessage message = itr.next();
+
+				if (MBMessagePermission.contains(
+						getPermissionChecker(), message, ActionKeys.VIEW)) {
+
+					messages.add(message);
+				}
 			}
-		}
 
-		if (messages.size() > 0) {
-			MBMessage message = messages.get(messages.size() - 1);
+			if (messages.size() > 0) {
+				MBMessage message = messages.get(messages.size() - 1);
 
-			name = message.getSubject();
-			description = message.getSubject();
+				name = message.getSubject();
+				description = message.getSubject();
+			}
 		}
 
 		return exportToRSS(
