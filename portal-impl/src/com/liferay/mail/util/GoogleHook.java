@@ -15,9 +15,9 @@
 package com.liferay.mail.util;
 
 import com.liferay.mail.model.Filter;
-import com.liferay.portal.googleapps.GEmailSettingsService;
-import com.liferay.portal.googleapps.GNicknameService;
-import com.liferay.portal.googleapps.GUserService;
+import com.liferay.portal.googleapps.GEmailSettingsManager;
+import com.liferay.portal.googleapps.GNicknameManager;
+import com.liferay.portal.googleapps.GUserManager;
 import com.liferay.portal.googleapps.GoogleAppsFactoryUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -48,25 +48,25 @@ public class GoogleHook implements Hook {
 		try {
 			String nickname = _getNickname(emailAddress);
 
-			GUserService gUserService = GoogleAppsFactoryUtil.getGUserService(
+			GUserManager gUserManager = GoogleAppsFactoryUtil.getGUserManager(
 				companyId);
 
-			gUserService.addUser(userId, password, firstName, lastName);
+			gUserManager.addGUser(userId, password, firstName, lastName);
 
-			GNicknameService gNicknameService =
-				GoogleAppsFactoryUtil.getGNicknameService(
+			GNicknameManager gNicknameManager =
+				GoogleAppsFactoryUtil.getGNicknameManager(
 					companyId);
 
-			gNicknameService.addNickname(userId, nickname);
+			gNicknameManager.addGNickname(userId, nickname);
 
-			GEmailSettingsService gEmailSettingsService =
-				GoogleAppsFactoryUtil.getGEmailSettingsService(
+			GEmailSettingsManager gEmailSettingsManager =
+				GoogleAppsFactoryUtil.getGEmailSettingsManager(
 					companyId);
 
 			FullNameGenerator fullNameGenerator =
 				FullNameGeneratorFactory.getInstance();
 
-			gEmailSettingsService.addSendAs(
+			gEmailSettingsManager.addSendAs(
 				userId,
 				fullNameGenerator.getFullName(firstName, middleName, lastName),
 				emailAddress);
@@ -87,11 +87,11 @@ public class GoogleHook implements Hook {
 
 			String nickname = _getNickname(user.getEmailAddress());
 
-			GNicknameService gNicknameService =
-				GoogleAppsFactoryUtil.getGNicknameService(
+			GNicknameManager gNicknameManager =
+				GoogleAppsFactoryUtil.getGNicknameManager(
 					companyId);
 
-			gNicknameService.deleteNickname(nickname);
+			gNicknameManager.deleteGNickname(nickname);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -100,10 +100,10 @@ public class GoogleHook implements Hook {
 
 	public void deleteUser(long companyId, long userId) {
 		try {
-			GUserService gUserService = GoogleAppsFactoryUtil.getGUserService(
+			GUserManager gUserManager = GoogleAppsFactoryUtil.getGUserManager(
 				companyId);
 
-			gUserService.deleteUser(userId);
+			gUserManager.deleteGUser(userId);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -122,17 +122,17 @@ public class GoogleHook implements Hook {
 
 			deleteEmailAddress(companyId, userId);
 
-			GNicknameService gNicknameService =
-				GoogleAppsFactoryUtil.getGNicknameService(
+			GNicknameManager gNicknameManager =
+				GoogleAppsFactoryUtil.getGNicknameManager(
 					companyId);
 
-			gNicknameService.addNickname(userId, emailAddress);
+			gNicknameManager.addGNickname(userId, emailAddress);
 
-			GEmailSettingsService gEmailSettingsService =
-				GoogleAppsFactoryUtil.getGEmailSettingsService(
+			GEmailSettingsManager gEmailSettingsManager =
+				GoogleAppsFactoryUtil.getGEmailSettingsManager(
 					companyId);
 
-			gEmailSettingsService.addSendAs(
+			gEmailSettingsManager.addSendAs(
 				userId, user.getFullName(), emailAddress);
 		}
 		catch (Exception e) {
@@ -142,10 +142,10 @@ public class GoogleHook implements Hook {
 
 	public void updatePassword(long companyId, long userId, String password) {
 		try {
-			GUserService gUserService = GoogleAppsFactoryUtil.getGUserService(
+			GUserManager gUserManager = GoogleAppsFactoryUtil.getGUserManager(
 				companyId);
 
-			gUserService.updatePassword(userId, password);
+			gUserManager.updatePassword(userId, password);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

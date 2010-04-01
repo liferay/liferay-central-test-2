@@ -27,39 +27,37 @@ public class GoogleApps {
 		init();
 	}
 
-	public GoogleApps(String domain, String userName, String password) {
-		_gAuthenticator = new GAuthenticator(domain, userName, password);
-
-		init();
+	public GAuthenticator getGAuthenticator() {
+		return _gAuthenticator;
 	}
 
-	public GEmailSettingsService getGEmailSettingsService() {
-		return _gEmailSettingsService;
+	public GEmailSettingsManager getGEmailSettingsManager() {
+		return _gEmailSettingsManager;
 	}
 
-	public GGroupService getGGroupService() {
-		return _gGroupService;
+	public GGroupManager getGGroupManager() {
+		return _gGroupManager;
 	}
 
-	public GNicknameService getGNicknameService() {
-		return _gNicknameService;
+	public GNicknameManager getGNicknameManager() {
+		return _gNicknameManager;
 	}
 
-	public GUserService getGUserService() {
-		return _gUserService;
+	public GUserManager getGUserManager() {
+		return _gUserManager;
 	}
 
 	protected void init() {
-		_gEmailSettingsService = new GEmailSettingsServiceImpl(_gAuthenticator);
-		_gGroupService = new GGroupServiceImpl(_gAuthenticator);
-		_gNicknameService = new GNicknameServiceImpl(_gAuthenticator);
-		_gUserService = new GUserServiceImpl(_gAuthenticator);
+		_gEmailSettingsManager = new GEmailSettingsManagerImpl(this);
+		_gGroupManager = new GGroupManagerImpl(this);
+		_gNicknameManager = new GNicknameManagerImpl(this);
+		_gUserManager = new GUserManagerImpl(this);
 	}
 
 	private GAuthenticator _gAuthenticator;
-	private GEmailSettingsService _gEmailSettingsService;
-	private GGroupService _gGroupService;
-	private GNicknameService _gNicknameService;
-	private GUserService _gUserService;
+	private GEmailSettingsManager _gEmailSettingsManager;
+	private GGroupManager _gGroupManager;
+	private GNicknameManager _gNicknameManager;
+	private GUserManager _gUserManager;
 
 }

@@ -14,20 +14,30 @@
 
 package com.liferay.portal.googleapps;
 
-import java.util.List;
-
 /**
- * <a href="GGroupService.java.html"><b><i>View Source</i></b></a>
+ * <a href="GNickname.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public interface GGroupService {
+public class GNickname {
 
-	public void deleteGroup(String emailAddress) throws GoogleAppsException;
+	public String getNickname() {
+		return _nickname;
+	}
 
-	public List<GGroup> getGroups() throws GoogleAppsException;
+	public long getUserId() {
+		return _userId;
+	}
 
-	public List<GGroup> getGroups(long userId, boolean directOnly)
-		throws GoogleAppsException;
+	public void setNickname(String nickname) {
+		_nickname = nickname;
+	}
+
+	public void setUserId(long userId) {
+		_userId = userId;
+	}
+
+	private String _nickname;
+	private long _userId;
 
 }

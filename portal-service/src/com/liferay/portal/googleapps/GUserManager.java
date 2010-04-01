@@ -14,16 +14,31 @@
 
 package com.liferay.portal.googleapps;
 
+import java.util.List;
+
 /**
- * <a href="GNicknameService.java.html"><b><i>View Source</i></b></a>
+ * <a href="GUserManager.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public interface GNicknameService {
+public interface GUserManager {
 
-	public void addNickname(long userId, String nickname)
+	public void addGUser(
+			long userId, String password, String firstName, String lastName)
 		throws GoogleAppsException;
 
-	public void deleteNickname(String nickname) throws GoogleAppsException;
+	public void deleteGUser(long userId) throws GoogleAppsException;
+
+	public GUser getGUser(long userId) throws GoogleAppsException;
+
+	public GUser getGUser(String emailAddress) throws GoogleAppsException;
+
+	public List<GUser> getGUsers() throws GoogleAppsException;
+
+	public void updateActive(long userId, boolean active)
+		throws GoogleAppsException;
+
+	public void updatePassword(long userId, String password)
+		throws GoogleAppsException;
 
 }

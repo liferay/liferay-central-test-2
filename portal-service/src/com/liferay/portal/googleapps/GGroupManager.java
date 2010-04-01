@@ -14,19 +14,25 @@
 
 package com.liferay.portal.googleapps;
 
+import java.util.List;
+
 /**
- * <a href="GoogleAppsFactory.java.html"><b><i>View Source</i></b></a>
+ * <a href="GGroupManager.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public interface GoogleAppsFactory {
+public interface GGroupManager {
 
-	public GEmailSettingsManager getGEmailSettingsManager(long companyId);
+	public void deleteGGroup(String emailAddress) throws GoogleAppsException;
 
-	public GGroupManager getGGroupManager(long companyId);
+	public GGroup getGGroup(String emailAddress) throws GoogleAppsException;
 
-	public GNicknameManager getGNicknameManager(long companyId);
+	public List<GGroupMember> getGGroupMembers(String emailAddress)
+		throws GoogleAppsException;
 
-	public GUserManager getGUserManager(long companyId);
+	public List<GGroup> getGGroups() throws GoogleAppsException;
+
+	public List<GGroup> getGGroups(long userId, boolean directOnly)
+		throws GoogleAppsException;
 
 }

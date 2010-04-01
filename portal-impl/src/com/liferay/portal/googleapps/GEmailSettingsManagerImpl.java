@@ -14,43 +14,31 @@
 
 package com.liferay.portal.googleapps;
 
-import com.liferay.portal.kernel.util.ContentTypes;
-import com.liferay.portal.kernel.util.Http;
-import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 
 /**
- * <a href="GEmailSettingsServiceImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="GEmailSettingsManagerImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class GEmailSettingsServiceImpl
-	extends GBaseServiceImpl implements GEmailSettingsService {
+public class GEmailSettingsManagerImpl
+	extends GBaseManagerImpl implements GEmailSettingsManager {
 
-	public GEmailSettingsServiceImpl(GAuthenticator gAuthenticator) {
-		super(gAuthenticator);
+	public GEmailSettingsManagerImpl(GoogleApps googleApps) {
+		super(googleApps);
+
+		GAuthenticator gAuthenticator = googleApps.getGAuthenticator();
 
 		emailSettingsURL =
-			APPS_URL + "/emailsettings/2.0/" + gAuthenticator.getDomain();
+			APPS_URL.concat("/emailsettings/2.0/").concat(
+				gAuthenticator.getDomain());
 	}
 
 	public void addSendAs(long userId, String fullName, String emailAddress)
 		throws GoogleAppsException {
-
-		try {
-			doAddSendAs(userId, fullName, emailAddress);
-		}
-		catch (Exception e) {
-			throw new GoogleAppsException(e);
-		}
-	}
-
-	protected void doAddSendAs(
-			long userId, String fullName, String emailAddress)
-		throws Exception {
 
 		Document document = SAXReaderUtil.createDocument();
 
@@ -61,19 +49,12 @@ public class GEmailSettingsServiceImpl
 		addAppsProperty(
 			atomEntryElement, "makeDefault", Boolean.TRUE.toString());
 
-		Http.Options options = getOptions();
-
-		options.setBody(
-			document.formattedString(), ContentTypes.APPLICATION_ATOM_XML,
-			StringPool.UTF8);
-		options.setLocation(getEmailSettingsURL(userId) + "/sendas");
-		options.setPost(true);
-
-		HttpUtil.URLtoString(options);
+		submitUpdate(getEmailSettingsURL(userId).concat("/sendas"), document);
 	}
 
 	protected String getEmailSettingsURL(long userId) {
-		return emailSettingsURL + StringPool.SLASH + userId;
+		return emailSettingsURL.concat(StringPool.SLASH).concat(
+			String.valueOf(userId));
 	}
 
 	protected String emailSettingsURL;

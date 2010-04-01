@@ -41,18 +41,14 @@ public class GAuthenticator {
 		init(true);
 	}
 
-	public GAuthenticator(String domain, String userName, String password) {
-		_domain = domain;
-		_userName = userName;
-		_password = password;
-
-		init(true);
-	}
-
 	public String getAuthenticationToken() {
 		init(false);
 
 		return _authenticationToken;
+	}
+
+	public long getCompanyId() {
+		return _companyId;
 	}
 
 	public String getDomain() {
@@ -71,15 +67,13 @@ public class GAuthenticator {
 	}
 
 	protected void doInit() throws Exception {
-		if (_companyId > 0) {
-			Company company = CompanyLocalServiceUtil.getCompany(_companyId);
+		Company company = CompanyLocalServiceUtil.getCompany(_companyId);
 
-			_domain = company.getMx();
-			_userName = PrefsPropsUtil.getString(
-				_companyId, PropsKeys.GOOGLE_APPS_USERNAME);
-			_password = PrefsPropsUtil.getString(
-				_companyId, PropsKeys.GOOGLE_APPS_PASSWORD);
-		}
+		_domain = company.getMx();
+		_userName = PrefsPropsUtil.getString(
+			_companyId, PropsKeys.GOOGLE_APPS_USERNAME);
+		_password = PrefsPropsUtil.getString(
+			_companyId, PropsKeys.GOOGLE_APPS_PASSWORD);
 
 		if (!_userName.contains(StringPool.AT)) {
 			_userName += StringPool.AT + _domain;

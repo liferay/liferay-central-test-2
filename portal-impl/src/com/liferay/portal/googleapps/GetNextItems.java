@@ -14,24 +14,39 @@
 
 package com.liferay.portal.googleapps;
 
+import com.liferay.portal.kernel.xml.Element;
+
 import java.util.List;
 
 /**
- * <a href="GUserService.java.html"><b><i>View Source</i></b></a>
+ * <a href="GetNextItems.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public interface GUserService {
+public abstract class GetNextItems {
 
-	public void addUser(
-			long userId, String password, String firstName, String lastName)
-		throws GoogleAppsException;
+	public GetNextItems(String url, Element atomFeedElement)
+		throws GoogleAppsException {
 
-	public void deleteUser(long userId) throws GoogleAppsException;
+		List<Element> atomLinkElements = atomFeedElement.elements(
+			GHelperUtil.getAtomQName("link"));
 
-	public List<GUser> getUsers() throws GoogleAppsException;
+		for (Element atomLinkElement : atomLinkElements) {
+			String rel = atomLinkElement.attributeValue("rel");
 
-	public void updatePassword(long userId, String password)
+			if (rel.equals("next")) {
+				String href = atomLinkElement.attributeValue("href");
+
+				if (!href.equals(url)) {
+					getNextItems(href);
+				}
+
+				break;
+			}
+		}
+	}
+
+	public abstract void getNextItems(String nextURL)
 		throws GoogleAppsException;
 
 }

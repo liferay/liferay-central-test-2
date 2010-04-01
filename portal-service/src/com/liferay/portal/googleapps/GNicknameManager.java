@@ -14,14 +14,22 @@
 
 package com.liferay.portal.googleapps;
 
+import java.util.List;
+
 /**
- * <a href="GEmailSettingsService.java.html"><b><i>View Source</i></b></a>
+ * <a href="GNicknameManager.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public interface GEmailSettingsService {
+public interface GNicknameManager {
 
-	public void addSendAs(long userId, String fullName, String emailAddress)
+	public void addGNickname(long userId, String nickname)
 		throws GoogleAppsException;
+
+	public void deleteGNickname(String nickname) throws GoogleAppsException;
+
+	public GNickname getGNickname(String nickname) throws GoogleAppsException;
+
+	public List<GNickname> getGNicknames() throws GoogleAppsException;
 
 }

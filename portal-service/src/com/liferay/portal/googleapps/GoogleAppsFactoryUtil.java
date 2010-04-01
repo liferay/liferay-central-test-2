@@ -21,26 +21,26 @@ package com.liferay.portal.googleapps;
  */
 public class GoogleAppsFactoryUtil {
 
-	public static GEmailSettingsService getGEmailSettingsService(
+	public static GEmailSettingsManager getGEmailSettingsManager(
 		long companyId) {
 
-		return getGoogleAppsFactory().getGEmailSettingsService(companyId);
+		return getGoogleAppsFactory().getGEmailSettingsManager(companyId);
 	}
 
-	public static GGroupService getGGroupService(long companyId) {
-		return getGoogleAppsFactory().getGGroupService(companyId);
+	public static GGroupManager getGGroupManager(long companyId) {
+		return getGoogleAppsFactory().getGGroupManager(companyId);
 	}
 
-	public static GNicknameService getGNicknameService(long companyId) {
-		return getGoogleAppsFactory().getGNicknameService(companyId);
+	public static GNicknameManager getGNicknameManager(long companyId) {
+		return getGoogleAppsFactory().getGNicknameManager(companyId);
 	}
 
 	public static GoogleAppsFactory getGoogleAppsFactory() {
 		return _googleAppsFactory;
 	}
 
-	public static GUserService getGUserService(long companyId) {
-		return getGoogleAppsFactory().getGUserService(companyId);
+	public static GUserManager getGUserManager(long companyId) {
+		return getGoogleAppsFactory().getGUserManager(companyId);
 	}
 
 	public void setGoogleAppsFactory(GoogleAppsFactory googleAppsFactory) {

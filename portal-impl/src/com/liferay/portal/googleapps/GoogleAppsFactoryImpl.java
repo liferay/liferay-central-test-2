@@ -24,20 +24,20 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class GoogleAppsFactoryImpl implements GoogleAppsFactory {
 
-	public GEmailSettingsService getGEmailSettingsService(long companyId) {
-		return getGoogleApps(companyId).getGEmailSettingsService();
+	public GEmailSettingsManager getGEmailSettingsManager(long companyId) {
+		return getGoogleApps(companyId).getGEmailSettingsManager();
 	}
 
-	public GGroupService getGGroupService(long companyId) {
-		return getGoogleApps(companyId).getGGroupService();
+	public GGroupManager getGGroupManager(long companyId) {
+		return getGoogleApps(companyId).getGGroupManager();
 	}
 
-	public GNicknameService getGNicknameService(long companyId) {
-		return getGoogleApps(companyId).getGNicknameService();
+	public GNicknameManager getGNicknameManager(long companyId) {
+		return getGoogleApps(companyId).getGNicknameManager();
 	}
 
-	public GUserService getGUserService(long companyId) {
-		return getGoogleApps(companyId).getGUserService();
+	public GUserManager getGUserManager(long companyId) {
+		return getGoogleApps(companyId).getGUserManager();
 	}
 
 	protected GoogleApps getGoogleApps(long companyId) {

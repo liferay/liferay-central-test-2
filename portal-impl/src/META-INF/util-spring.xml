@@ -13,6 +13,11 @@
 			<bean class="com.liferay.portal.events.StartupHelper" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.googleapps.GoogleAppsFactoryUtil" class="com.liferay.portal.googleapps.GoogleAppsFactoryUtil">
+		<property name="googleAppsFactory">
+			<bean class="com.liferay.portal.googleapps.GoogleAppsFactoryImpl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.kernel.bean.BeanPropertiesUtil" class="com.liferay.portal.kernel.bean.BeanPropertiesUtil">
 		<property name="beanProperties">
 			<bean class="com.liferay.portal.bean.BeanPropertiesImpl" />
