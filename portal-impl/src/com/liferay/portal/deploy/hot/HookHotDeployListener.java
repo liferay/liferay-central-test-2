@@ -134,6 +134,7 @@ public class HookHotDeployListener
 		"default.landing.page.path",
 		"dl.hook.impl",
 		"dl.webdav.auto.unlock",
+		"dl.webdav.save.to.single.version",
 		"field.enable.com.liferay.portal.model.Contact.birthday",
 		"field.enable.com.liferay.portal.model.Contact.male",
 		"field.enable.com.liferay.portal.model.Organization.status",

@@ -485,6 +485,8 @@ public interface PropsKeys {
 
 	public static final String DL_WEBDAV_AUTO_UNLOCK = "dl.webdav.auto.unlock";
 
+	public static final String DL_WEBDAV_SAVE_TO_SINGLE_VERSION = "dl.webdav.save.to.single.version";
+
 	public static final String DOCKBAR_ADD_PORTLETS = "dockbar.add.portlets";
 
 	public static final String EDITOR_WYSIWYG_DEFAULT = "editor.wysiwyg.default";

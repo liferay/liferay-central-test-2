@@ -612,6 +612,10 @@ public class PropsValues {
 	public static boolean DL_WEBDAV_AUTO_UNLOCK = GetterUtil.getBoolean(
 		PropsUtil.get(PropsKeys.DL_WEBDAV_AUTO_UNLOCK));
 
+	public static boolean DL_WEBDAV_SAVE_TO_SINGLE_VERSION =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsKeys.DL_WEBDAV_SAVE_TO_SINGLE_VERSION));
+
 	public static final String[] DOCKBAR_ADD_PORTLETS =
 		PropsUtil.getArray(PropsKeys.DOCKBAR_ADD_PORTLETS);
 

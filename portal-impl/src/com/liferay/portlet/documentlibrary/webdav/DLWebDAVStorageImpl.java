@@ -626,7 +626,10 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			serviceContext.setAddCommunityPermissions(
 				isAddCommunityPermissions(groupId));
 			serviceContext.setAddGuestPermissions(true);
-			serviceContext.setStatus(StatusConstants.DRAFT);
+
+			if (PropsValues.DL_WEBDAV_SAVE_TO_SINGLE_VERSION) {
+				serviceContext.setStatus(StatusConstants.DRAFT);
+			}
 
 			try {
 				DLFileEntry entry = DLFileEntryServiceUtil.getFileEntryByTitle(
@@ -726,7 +729,9 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 					return true;
 				}
 
-				approveFileEntry(fileEntry);
+				if (PropsValues.DL_WEBDAV_SAVE_TO_SINGLE_VERSION) {
+					approveFileEntry(fileEntry);
+				}
 
 				DLFileEntryServiceUtil.unlockFileEntry(
 					fileEntry.getGroupId(), fileEntry.getFolderId(),
