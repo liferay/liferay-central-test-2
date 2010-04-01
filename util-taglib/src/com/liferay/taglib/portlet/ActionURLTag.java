@@ -24,7 +24,6 @@ import com.liferay.portal.kernel.portlet.WindowStateFactory;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.LayoutConstants;
 import com.liferay.taglib.util.ParamAndPropertyAncestorTagImpl;
@@ -45,15 +44,14 @@ import javax.servlet.jsp.PageContext;
  */
 public class ActionURLTag extends ParamAndPropertyAncestorTagImpl {
 
-	public static String doTag(
+	public static void doTag(
 			String lifecycle, String windowState, String portletMode,
 			String var, String varImpl, Boolean secure,
 			Boolean copyCurrentRenderParameters, Boolean escapeXml, String name,
 			String resourceID, String cacheability, long plid,
 			String portletName, Boolean anchor, Boolean encrypt,
 			long doAsUserId, Boolean portletConfiguration,
-			Map<String, String[]> params, boolean writeOutput,
-			PageContext pageContext)
+			Map<String, String[]> params, PageContext pageContext)
 		throws Exception {
 
 		HttpServletRequest request =
@@ -71,7 +69,7 @@ public class ActionURLTag extends ParamAndPropertyAncestorTagImpl {
 				"Render response is null because this tag is not being " +
 					"called within the context of a portlet");
 
-			return StringPool.BLANK;
+			return;
 		}
 
 		if (Validator.isNotNull(windowState)) {
@@ -156,11 +154,9 @@ public class ActionURLTag extends ParamAndPropertyAncestorTagImpl {
 		else if (Validator.isNotNull(varImpl)) {
 			pageContext.setAttribute(varImpl, portletURL);
 		}
-		else if (writeOutput) {
+		else {
 			pageContext.getOut().print(portletURLToString);
 		}
-
-		return portletURLToString;
 	}
 
 	public int doEndTag() throws JspException {
@@ -169,7 +165,7 @@ public class ActionURLTag extends ParamAndPropertyAncestorTagImpl {
 				getLifecycle(), _windowState, _portletMode, _var, _varImpl,
 				_secure, _copyCurrentRenderParameters, _escapeXml, _name,
 				_resourceID, _cacheability, _plid, _portletName, _anchor,
-				_encrypt, _doAsUserId, _portletConfiguration, getParams(), true,
+				_encrypt, _doAsUserId, _portletConfiguration, getParams(),
 				pageContext);
 
 			return EVAL_PAGE;

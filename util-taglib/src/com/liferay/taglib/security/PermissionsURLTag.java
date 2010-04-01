@@ -40,10 +40,10 @@ import javax.servlet.jsp.tagext.TagSupport;
  */
 public class PermissionsURLTag extends TagSupport {
 
-	public static String doTag(
+	public static void doTag(
 			String redirect, String modelResource,
 			String modelResourceDescription, String resourcePrimKey, String var,
-			boolean writeOutput, PageContext pageContext)
+			PageContext pageContext)
 		throws Exception {
 
 		HttpServletRequest request =
@@ -90,18 +90,16 @@ public class PermissionsURLTag extends TagSupport {
 		if (Validator.isNotNull(var)) {
 			pageContext.setAttribute(var, portletURLToString);
 		}
-		else if (writeOutput) {
+		else {
 			pageContext.getOut().print(portletURLToString);
 		}
-
-		return portletURLToString;
 	}
 
 	public int doEndTag() throws JspException {
 		try {
 			doTag(
 				_redirect, _modelResource, _modelResourceDescription,
-				_resourcePrimKey, _var, true, pageContext);
+				_resourcePrimKey, _var, pageContext);
 		}
 		catch (Exception e) {
 			throw new JspException(e);

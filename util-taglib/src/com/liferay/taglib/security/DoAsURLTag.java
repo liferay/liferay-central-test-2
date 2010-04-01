@@ -35,9 +35,8 @@ import javax.servlet.jsp.tagext.TagSupport;
  */
 public class DoAsURLTag extends TagSupport {
 
-	public static String doTag(
-			long doAsUserId, String var, boolean writeOutput,
-			PageContext pageContext)
+	public static void doTag(
+			long doAsUserId, String var, PageContext pageContext)
 		throws Exception {
 
 		HttpServletRequest request =
@@ -67,16 +66,14 @@ public class DoAsURLTag extends TagSupport {
 		if (Validator.isNotNull(var)) {
 			pageContext.setAttribute(var, doAsURL);
 		}
-		else if (writeOutput) {
+		else {
 			pageContext.getOut().print(doAsURL);
 		}
-
-		return doAsURL;
 	}
 
 	public int doEndTag() throws JspException {
 		try {
-			doTag(_doAsUserId, _var, true, pageContext);
+			doTag(_doAsUserId, _var, pageContext);
 		}
 		catch (Exception e) {
 			throw new JspException(e);

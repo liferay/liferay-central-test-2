@@ -83,24 +83,22 @@ public class VelocityTaglib {
 		init(servletContext, request, response, pageContext);
 	}
 
-	public String actionURL(long plid, String portletName, String queryString)
+	public void actionURL(long plid, String portletName, String queryString)
 		throws Exception {
 
 		String windowState = WindowState.NORMAL.toString();
 		String portletMode = PortletMode.VIEW.toString();
 
-		return actionURL(
-			windowState, portletMode, plid, portletName, queryString);
+		actionURL(windowState, portletMode, plid, portletName, queryString);
 	}
 
-	public String actionURL(String portletName, String queryString)
+	public void actionURL(String portletName, String queryString)
 		throws Exception {
 
-		return actionURL(
-			LayoutConstants.DEFAULT_PLID, portletName, queryString);
+		actionURL(LayoutConstants.DEFAULT_PLID, portletName, queryString);
 	}
 
-	public String actionURL(
+	public void actionURL(
 			String windowState, String portletMode, Boolean secure,
 			Boolean copyCurrentRenderParameters, Boolean escapeXml, String name,
 			long plid, String portletName, Boolean anchor, Boolean encrypt,
@@ -113,16 +111,15 @@ public class VelocityTaglib {
 		String cacheability = null;
 		Map<String, String[]> params = HttpUtil.parameterMapFromString(
 			queryString);
-		boolean writeOutput = false;
 
-		return ActionURLTag.doTag(
+		ActionURLTag.doTag(
 			PortletRequest.ACTION_PHASE, windowState, portletMode, var, varImpl,
 			secure, copyCurrentRenderParameters, escapeXml, name, resourceID,
 			cacheability, plid, portletName, anchor, encrypt, doAsUserId,
-			portletConfiguration, params, writeOutput, _pageContext);
+			portletConfiguration, params, _pageContext);
 	}
 
-	public String actionURL(
+	public void actionURL(
 			String windowState, String portletMode, long plid,
 			String portletName, String queryString)
 		throws Exception {
@@ -136,18 +133,18 @@ public class VelocityTaglib {
 		long doAsUserId = 0;
 		Boolean portletConfiguration = null;
 
-		return actionURL(
+		actionURL(
 			windowState, portletMode, secure, copyCurrentRenderParameters,
 			escapeXml, name, plid, portletName, anchor, encrypt, doAsUserId,
 			portletConfiguration, queryString);
 	}
 
-	public String actionURL(
+	public void actionURL(
 			String windowState, String portletMode, String portletName,
 			String queryString)
 		throws Exception {
 
-		return actionURL(
+		actionURL(
 			windowState, portletMode, LayoutConstants.DEFAULT_PLID, portletName,
 			queryString);
 	}
@@ -178,8 +175,8 @@ public class VelocityTaglib {
 		breadcrumbTag.runTag();
 	}
 
-	public String doAsURL(long doAsUserId) throws Exception {
-		return DoAsURLTag.doTag(doAsUserId, null, false, _pageContext);
+	public void doAsURL(long doAsUserId) throws Exception {
+		DoAsURLTag.doTag(doAsUserId, null, _pageContext);
 	}
 
 	public BreadcrumbTag getBreadcrumbTag() throws Exception {
@@ -442,34 +439,32 @@ public class VelocityTaglib {
 		myPlacesTag.runTag();
 	}
 
-	public String permissionsURL(
+	public void permissionsURL(
 			String redirect, String modelResource,
 			String modelResourceDescription, String resourcePrimKey)
 		throws Exception {
 
-		return PermissionsURLTag.doTag(
+		PermissionsURLTag.doTag(
 			redirect, modelResource, modelResourceDescription, resourcePrimKey,
-			null, false, _pageContext);
+			null, _pageContext);
 	}
 
-	public String renderURL(long plid, String portletName, String queryString)
+	public void renderURL(long plid, String portletName, String queryString)
 		throws Exception {
 
 		String windowState = WindowState.NORMAL.toString();
 		String portletMode = PortletMode.VIEW.toString();
 
-		return renderURL(
-			windowState, portletMode, plid, portletName, queryString);
+		renderURL(windowState, portletMode, plid, portletName, queryString);
 	}
 
-	public String renderURL(String portletName, String queryString)
+	public void renderURL(String portletName, String queryString)
 		throws Exception {
 
-		return renderURL(
-			LayoutConstants.DEFAULT_PLID, portletName, queryString);
+		renderURL(LayoutConstants.DEFAULT_PLID, portletName, queryString);
 	}
 
-	public String renderURL(
+	public void renderURL(
 			String windowState, String portletMode, Boolean secure,
 			Boolean copyCurrentRenderParameters, Boolean escapeXml,
 			long plid, String portletName, Boolean anchor, Boolean encrypt,
@@ -483,16 +478,15 @@ public class VelocityTaglib {
 		String cacheability = null;
 		Map<String, String[]> params = HttpUtil.parameterMapFromString(
 			queryString);
-		boolean writeOutput = false;
 
-		return ActionURLTag.doTag(
+		ActionURLTag.doTag(
 			PortletRequest.RENDER_PHASE, windowState, portletMode, var, varImpl,
 			secure, copyCurrentRenderParameters, escapeXml, name, resourceID,
 			cacheability, plid, portletName, anchor, encrypt, doAsUserId,
-			portletConfiguration, params, writeOutput, _pageContext);
+			portletConfiguration, params, _pageContext);
 	}
 
-	public String renderURL(
+	public void renderURL(
 			String windowState, String portletMode, long plid,
 			String portletName, String queryString)
 		throws Exception {
@@ -505,18 +499,18 @@ public class VelocityTaglib {
 		long doAsUserId = 0;
 		Boolean portletConfiguration = null;
 
-		return renderURL(
+		renderURL(
 			windowState, portletMode, secure, copyCurrentRenderParameters,
 			escapeXml, plid, portletName, anchor, encrypt, doAsUserId,
 			portletConfiguration, queryString);
 	}
 
-	public String renderURL(
+	public void renderURL(
 			String windowState, String portletMode, String portletName,
 			String queryString)
 		throws Exception {
 
-		return renderURL(
+		renderURL(
 			windowState, portletMode, LayoutConstants.DEFAULT_PLID, portletName,
 			queryString);
 	}
