@@ -352,8 +352,9 @@ public class VelocityVariables {
 
 		// Render request
 
-		PortletRequest portletRequest = (PortletRequest)request.getAttribute(
-			JavaConstants.JAVAX_PORTLET_REQUEST);
+		final PortletRequest portletRequest =
+			(PortletRequest)request.getAttribute(
+				JavaConstants.JAVAX_PORTLET_REQUEST);
 
 		if (portletRequest != null) {
 			if (portletRequest instanceof RenderRequest) {
@@ -363,8 +364,9 @@ public class VelocityVariables {
 
 		// Render response
 
-		PortletResponse portletResponse = (PortletResponse)request.getAttribute(
-			JavaConstants.JAVAX_PORTLET_RESPONSE);
+		final PortletResponse portletResponse =
+			(PortletResponse)request.getAttribute(
+				JavaConstants.JAVAX_PORTLET_RESPONSE);
 
 		if (portletResponse != null) {
 			if (portletResponse instanceof RenderResponse) {
@@ -375,10 +377,13 @@ public class VelocityVariables {
 		// XML request
 
 		if ((portletRequest != null) && (portletResponse != null)) {
-			String xmlRequest = PortletRequestUtil.toXML(
-				portletRequest, portletResponse);
 
-			velocityContext.put("xmlRequest", xmlRequest);
+			velocityContext.put("xmlRequest", new Object(){
+				public String toString() {
+					return PortletRequestUtil.toXML(
+						portletRequest, portletResponse);
+				}
+			});
 		}
 
 		// Theme display

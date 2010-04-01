@@ -312,8 +312,9 @@ public class FreeMarkerVariables {
 
 		// Render request
 
-		PortletRequest portletRequest = (PortletRequest)request.getAttribute(
-			JavaConstants.JAVAX_PORTLET_REQUEST);
+		final PortletRequest portletRequest =
+			(PortletRequest)request.getAttribute(
+				JavaConstants.JAVAX_PORTLET_REQUEST);
 
 		if (portletRequest != null) {
 			if (portletRequest instanceof RenderRequest) {
@@ -323,8 +324,9 @@ public class FreeMarkerVariables {
 
 		// Render response
 
-		PortletResponse portletResponse = (PortletResponse)request.getAttribute(
-			JavaConstants.JAVAX_PORTLET_RESPONSE);
+		final PortletResponse portletResponse =
+			(PortletResponse)request.getAttribute(
+				JavaConstants.JAVAX_PORTLET_RESPONSE);
 
 		if (portletResponse != null) {
 			if (portletResponse instanceof RenderResponse) {
@@ -335,10 +337,13 @@ public class FreeMarkerVariables {
 		// XML request
 
 		if ((portletRequest != null) && (portletResponse != null)) {
-			String xmlRequest = PortletRequestUtil.toXML(
-				portletRequest, portletResponse);
 
-			freeMarkerContext.put("xmlRequest", xmlRequest);
+			freeMarkerContext.put("xmlRequest", new Object(){
+				public String toString() {
+					return PortletRequestUtil.toXML(
+						portletRequest, portletResponse);
+				}
+			});
 		}
 
 		// Theme display
