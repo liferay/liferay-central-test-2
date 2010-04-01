@@ -23,6 +23,7 @@ String scroll = ParamUtil.getString(request, "scroll");
 <c:choose>
 	<c:when test="<%= themeDisplay.isFacebook() || themeDisplay.isStateExclusive() %>">
 		<%= request.getAttribute(WebKeys.LAYOUT_CONTENT) %>
+		<% request.removeAttribute(WebKeys.LAYOUT_CONTENT); %>
 	</c:when>
 	<c:when test="<%= themeDisplay.isStatePopUp() || themeDisplay.isWidget() %>">
 		<liferay-theme:include page="portal_pop_up.jsp" />
