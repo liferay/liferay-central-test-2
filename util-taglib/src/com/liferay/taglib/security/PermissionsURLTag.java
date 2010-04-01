@@ -94,7 +94,7 @@ public class PermissionsURLTag extends TagSupport {
 			pageContext.getOut().print(portletURLToString);
 		}
 
-		return portletURL.toString();
+		return portletURLToString;
 	}
 
 	public int doEndTag() throws JspException {

@@ -148,17 +148,19 @@ public class ActionURLTag extends ParamAndPropertyAncestorTagImpl {
 			portletURL.setParameters(params);
 		}
 
+		String portletURLToString = portletURL.toString();
+
 		if (Validator.isNotNull(var)) {
-			pageContext.setAttribute(var, portletURL.toString());
+			pageContext.setAttribute(var, portletURLToString);
 		}
 		else if (Validator.isNotNull(varImpl)) {
 			pageContext.setAttribute(varImpl, portletURL);
 		}
 		else if (writeOutput) {
-			pageContext.getOut().print(portletURL.toString());
+			pageContext.getOut().print(portletURLToString);
 		}
 
-		return portletURL.toString();
+		return portletURLToString;
 	}
 
 	public int doEndTag() throws JspException {
