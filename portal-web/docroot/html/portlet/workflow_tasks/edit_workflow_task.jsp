@@ -94,13 +94,22 @@ long classPK = ((Number)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS
 		<%= dateFormatDateTime.format(workflowTask.getCreateDate()) %>
 	</aui:field-wrapper>
 
-	<aui:input disabled="<%= true %>" name="dueDate" value="<%= dueDate %>" />
+	<c:choose>
+		<c:when test="<%= !workflowTask.isCompleted() %>">
+			<aui:input disabled="<%= true %>" name="dueDate" value="<%= dueDate %>" />
 
-	<%
-	String taglibChangeDueDate = renderResponse.getNamespace() + "disableDate('dueDate', !this.checked);";
-	%>
+			<%
+			String taglibChangeDueDate = renderResponse.getNamespace() + "disableDate('dueDate', !this.checked);";
+			%>
 
-	<aui:input inlineLabel="right" name="change-due-date" onClick="<%= taglibChangeDueDate %>" type="checkbox" />
+			<aui:input inlineLabel="right" name="change-due-date" onClick="<%= taglibChangeDueDate %>" type="checkbox" />
+		</c:when>
+		<c:otherwise>
+			<aui:field-wrapper inlineLabel="left" label="due-date">
+				<%= (workflowTask.getDueDate() == null) ? LanguageUtil.get(pageContext, "never") : dateFormatDateTime.format(workflowTask.getDueDate()) %>
+			</aui:field-wrapper>
+		</c:otherwise>
+	</c:choose>
 
 	<c:if test="<%= PortletPermissionUtil.contains(permissionChecker, PortletKeys.WORKFLOW_TASKS, ActionKeys.ASSIGN_USER_TASKS) %>">
 
@@ -215,34 +224,37 @@ long classPK = ((Number)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS
 	<br />
 
 	<aui:button-row>
-		<c:if test="<%= !workflowTask.isCompleted() && _isWorkflowTaskAssignedToUser(workflowTask, user) %>">
+		<c:if test="<%= !workflowTask.isCompleted() %>">
+			<c:if test="<%= _isWorkflowTaskAssignedToUser(workflowTask, user) %>">
 
-			<%
-			List<String> transitionNames = WorkflowTaskManagerUtil.getNextTransitionNames(company.getCompanyId(), user.getUserId(), workflowTask.getWorkflowTaskId());
+				<%
+				List<String> transitionNames = WorkflowTaskManagerUtil.getNextTransitionNames(company.getCompanyId(), user.getUserId(), workflowTask.getWorkflowTaskId());
 
-			for (String transitionName : transitionNames) {
-				String message = "proceed";
+				for (String transitionName : transitionNames) {
+					String message = "proceed";
 
-				if (Validator.isNotNull(transitionName)) {
-					message = transitionName;
+					if (Validator.isNotNull(transitionName)) {
+						message = transitionName;
+					}
+
+					String taglibSaveWorkflowTask = renderResponse.getNamespace() + "updateWorkflowTask('" + Constants.SAVE + "', '" + UnicodeFormatter.toString(message) + "');";
+				%>
+
+					<aui:button name='<%= message + "Button" %>' onClick="<%= taglibSaveWorkflowTask %>" type="button" value="<%= message %>" />
+
+				<%
 				}
+				%>
 
-				String taglibSaveWorkflowTask = renderResponse.getNamespace() + "updateWorkflowTask('" + Constants.SAVE + "', '" + UnicodeFormatter.toString(message) + "');";
-			%>
-
-				<aui:button name='<%= message + "Button" %>' onClick="<%= taglibSaveWorkflowTask %>" type="button" value="<%= message %>" />
+			</c:if>
 
 			<%
-			}
+			String taglibUpdateWorkflowTask = renderResponse.getNamespace() + "updateWorkflowTask('" + Constants.UPDATE +"');";
 			%>
+
+			<aui:button disabled="<%= true %>" name="updateButton" onClick="<%= taglibUpdateWorkflowTask %>" type="button" value="update" />
 
 		</c:if>
-
-		<%
-		String taglibUpdateWorkflowTask = renderResponse.getNamespace() + "updateWorkflowTask('" + Constants.UPDATE +"');";
-		%>
-
-		<aui:button disabled="<%= true %>" name="updateButton" onClick="<%= taglibUpdateWorkflowTask %>" type="button" value="update" />
 
 		<aui:button onClick="<%= redirect %>" type="cancel" />
 	</aui:button-row>
