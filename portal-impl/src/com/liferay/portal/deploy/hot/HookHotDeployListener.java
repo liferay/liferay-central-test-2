@@ -1440,6 +1440,7 @@ public class HookHotDeployListener
 		"auth.forward.by.last.path",
 		"captcha.check.portal.create_account",
 		"dl.webdav.auto.unlock",
+		"dl.webdav.save.to.single.version",
 		"field.enable.com.liferay.portal.model.Contact.birthday",
 		"field.enable.com.liferay.portal.model.Contact.male",
 		"field.enable.com.liferay.portal.model.Organization.status",
