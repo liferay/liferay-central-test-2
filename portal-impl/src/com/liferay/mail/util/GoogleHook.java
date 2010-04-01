@@ -15,8 +15,10 @@
 package com.liferay.mail.util;
 
 import com.liferay.mail.model.Filter;
-import com.liferay.portal.googleapps.GoogleApps;
-import com.liferay.portal.googleapps.GoogleAppsFactory;
+import com.liferay.portal.googleapps.GEmailSettingsService;
+import com.liferay.portal.googleapps.GNicknameService;
+import com.liferay.portal.googleapps.GUserService;
+import com.liferay.portal.googleapps.GoogleAppsFactoryUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -46,15 +48,25 @@ public class GoogleHook implements Hook {
 		try {
 			String nickname = _getNickname(emailAddress);
 
-			GoogleApps googleApps = GoogleAppsFactory.getGoogleApps(companyId);
+			GUserService gUserService = GoogleAppsFactoryUtil.getGUserService(
+				companyId);
 
-			googleApps.addUser(userId, password, firstName, lastName);
-			googleApps.addNickname(userId, nickname);
+			gUserService.addUser(userId, password, firstName, lastName);
+
+			GNicknameService gNicknameService =
+				GoogleAppsFactoryUtil.getGNicknameService(
+					companyId);
+
+			gNicknameService.addNickname(userId, nickname);
+
+			GEmailSettingsService gEmailSettingsService =
+				GoogleAppsFactoryUtil.getGEmailSettingsService(
+					companyId);
 
 			FullNameGenerator fullNameGenerator =
 				FullNameGeneratorFactory.getInstance();
 
-			googleApps.addSendAs(
+			gEmailSettingsService.addSendAs(
 				userId,
 				fullNameGenerator.getFullName(firstName, middleName, lastName),
 				emailAddress);
@@ -75,9 +87,11 @@ public class GoogleHook implements Hook {
 
 			String nickname = _getNickname(user.getEmailAddress());
 
-			GoogleApps googleApps = GoogleAppsFactory.getGoogleApps(companyId);
+			GNicknameService gNicknameService =
+				GoogleAppsFactoryUtil.getGNicknameService(
+					companyId);
 
-			googleApps.deleteNickname(nickname);
+			gNicknameService.deleteNickname(nickname);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -86,9 +100,10 @@ public class GoogleHook implements Hook {
 
 	public void deleteUser(long companyId, long userId) {
 		try {
-			GoogleApps googleApps = GoogleAppsFactory.getGoogleApps(companyId);
+			GUserService gUserService = GoogleAppsFactoryUtil.getGUserService(
+				companyId);
 
-			googleApps.deleteUser(userId);
+			gUserService.deleteUser(userId);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -107,10 +122,18 @@ public class GoogleHook implements Hook {
 
 			deleteEmailAddress(companyId, userId);
 
-			GoogleApps googleApps = GoogleAppsFactory.getGoogleApps(companyId);
+			GNicknameService gNicknameService =
+				GoogleAppsFactoryUtil.getGNicknameService(
+					companyId);
 
-			googleApps.addNickname(userId, emailAddress);
-			googleApps.addSendAs(userId, user.getFullName(), emailAddress);
+			gNicknameService.addNickname(userId, emailAddress);
+
+			GEmailSettingsService gEmailSettingsService =
+				GoogleAppsFactoryUtil.getGEmailSettingsService(
+					companyId);
+
+			gEmailSettingsService.addSendAs(
+				userId, user.getFullName(), emailAddress);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -119,9 +142,10 @@ public class GoogleHook implements Hook {
 
 	public void updatePassword(long companyId, long userId, String password) {
 		try {
-			GoogleApps googleApps = GoogleAppsFactory.getGoogleApps(companyId);
+			GUserService gUserService = GoogleAppsFactoryUtil.getGUserService(
+				companyId);
 
-			googleApps.updatePassword(userId, password);
+			gUserService.updatePassword(userId, password);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

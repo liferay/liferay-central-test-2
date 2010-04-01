@@ -14,31 +14,20 @@
 
 package com.liferay.portal.googleapps;
 
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.List;
 
 /**
- * <a href="GoogleAppsFactory.java.html"><b><i>View Source</i></b></a>
+ * <a href="GGroupService.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class GoogleAppsFactory {
+public interface GGroupService {
 
-	public static GoogleApps getGoogleApps(long companyId) throws Exception {
-		GoogleApps googleApps = _googleAppsMap.get(companyId);
+	public void deleteGroup(String emailAddress) throws GoogleAppsException;
 
-		if (googleApps == null) {
-			googleApps = new GoogleApps(companyId);
+	public List<GGroup> getGroups() throws GoogleAppsException;
 
-			_googleAppsMap.put(companyId, googleApps);
-		}
-
-		googleApps.init(false);
-
-		return googleApps;
-	}
-
-	private static Map<Long, GoogleApps> _googleAppsMap =
-		new ConcurrentHashMap<Long, GoogleApps>();
+	public List<GGroup> getGroups(long userId, boolean directOnly)
+		throws GoogleAppsException;
 
 }
