@@ -337,13 +337,17 @@ public class FreeMarkerVariables {
 		// XML request
 
 		if ((portletRequest != null) && (portletResponse != null)) {
+			freeMarkerContext.put(
+				"xmlRequest",
+				new Object() {
 
-			freeMarkerContext.put("xmlRequest", new Object(){
-				public String toString() {
-					return PortletRequestUtil.toXML(
-						portletRequest, portletResponse);
+					public String toString() {
+						return PortletRequestUtil.toXML(
+							portletRequest, portletResponse);
+					}
+
 				}
-			});
+			);
 		}
 
 		// Theme display

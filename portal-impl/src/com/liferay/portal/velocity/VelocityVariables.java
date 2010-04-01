@@ -377,13 +377,17 @@ public class VelocityVariables {
 		// XML request
 
 		if ((portletRequest != null) && (portletResponse != null)) {
+			velocityContext.put(
+				"xmlRequest",
+				new Object() {
 
-			velocityContext.put("xmlRequest", new Object(){
-				public String toString() {
-					return PortletRequestUtil.toXML(
-						portletRequest, portletResponse);
+					public String toString() {
+						return PortletRequestUtil.toXML(
+							portletRequest, portletResponse);
+					}
+
 				}
-			});
+			);
 		}
 
 		// Theme display
