@@ -253,7 +253,6 @@ long classPK = ((Number)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS
 			%>
 
 			<aui:button disabled="<%= true %>" name="updateButton" onClick="<%= taglibUpdateWorkflowTask %>" type="button" value="update" />
-
 		</c:if>
 
 		<aui:button onClick="<%= redirect %>" type="cancel" />
