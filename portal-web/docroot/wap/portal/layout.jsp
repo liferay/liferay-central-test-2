@@ -17,4 +17,7 @@
 <%@ include file="/html/portal/init.jsp" %>
 
 <%= request.getAttribute(WebKeys.LAYOUT_CONTENT) %>
-<% request.removeAttribute(WebKeys.LAYOUT_CONTENT); %>
+
+<%
+request.removeAttribute(WebKeys.LAYOUT_CONTENT);
+%>
