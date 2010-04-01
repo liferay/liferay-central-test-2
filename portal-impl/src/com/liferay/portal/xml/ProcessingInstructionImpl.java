@@ -81,6 +81,10 @@ public class ProcessingInstructionImpl
 		_processingInstruction.setValues(data);
 	}
 
+	public String toString() {
+		return _processingInstruction.toString();
+	}
+
 	private org.dom4j.ProcessingInstruction _processingInstruction;
 
 }

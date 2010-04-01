@@ -206,6 +206,10 @@ public class BranchImpl extends NodeImpl implements Branch {
 			SAXReaderImpl.toOldProcessingInstructions(processingInstructions));
 	}
 
+	public String toString() {
+		return _branch.toString();
+	}
+
 	private org.dom4j.Branch _branch;
 
 }

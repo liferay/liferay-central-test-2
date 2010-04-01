@@ -213,6 +213,10 @@ public class NodeImpl implements Node {
 		return _node.supportsParent();
 	}
 
+	public String toString() {
+		return _node.toString();
+	}
+
 	public String valueOf(String xpathExpression) {
 		return _node.valueOf(xpathExpression);
 	}

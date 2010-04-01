@@ -60,6 +60,10 @@ public class NamespaceImpl extends NodeImpl implements Namespace {
 		return _namespace.hashCode();
 	}
 
+	public String toString() {
+		return _namespace.toString();
+	}
+
 	private org.dom4j.Namespace _namespace;
 
 }

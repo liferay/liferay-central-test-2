@@ -43,6 +43,10 @@ public class TextImpl extends NodeImpl implements Text {
 		return _text.hashCode();
 	}
 
+	public String toString() {
+		return _text.toString();
+	}
+
 	private org.dom4j.Text _text;
 
 }

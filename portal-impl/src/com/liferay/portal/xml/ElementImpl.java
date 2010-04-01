@@ -444,6 +444,10 @@ public class ElementImpl extends BranchImpl implements Element {
 		_element.setQName(qNameImpl.getWrappedQName());
 	}
 
+	public String toString() {
+		return _element.toString();
+	}
+
 	private org.dom4j.Element _element;
 
 }

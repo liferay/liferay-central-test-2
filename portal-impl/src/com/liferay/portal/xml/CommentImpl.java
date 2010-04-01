@@ -43,6 +43,10 @@ public class CommentImpl extends NodeImpl implements Comment {
 		return _comment.hashCode();
 	}
 
+	public String toString() {
+		return _comment.toString();
+	}
+
 	private org.dom4j.Comment _comment;
 
 }

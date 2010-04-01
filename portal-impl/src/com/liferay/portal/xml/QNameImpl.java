@@ -73,6 +73,10 @@ public class QNameImpl implements QName {
 		return _qName.hashCode();
 	}
 
+	public String toString() {
+		return _qName.toString();
+	}
+
 	private org.dom4j.QName _qName;
 
 }

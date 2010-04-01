@@ -109,6 +109,10 @@ public class XPathImpl implements XPath {
 		_xPath.sort(SAXReaderImpl.toOldNodes(nodes), distinct);
 	}
 
+	public String toString() {
+		return _xPath.toString();
+	}
+
 	public String valueOf(Object context) {
 		return _xPath.valueOf(toOldContext(context));
 	}

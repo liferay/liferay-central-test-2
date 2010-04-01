@@ -43,6 +43,10 @@ public class CDATAImpl extends NodeImpl implements CDATA {
 		return _cdata.hashCode();
 	}
 
+	public String toString() {
+		return _cdata.toString();
+	}
+
 	private org.dom4j.CDATA _cdata;
 
 }

@@ -43,6 +43,10 @@ public class EntityImpl extends NodeImpl implements Entity {
 		return _entity.hashCode();
 	}
 
+	public String toString() {
+		return _entity.toString();
+	}
+
 	private org.dom4j.Entity _entity;
 
 }

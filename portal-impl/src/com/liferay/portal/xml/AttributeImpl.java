@@ -102,6 +102,10 @@ public class AttributeImpl extends NodeImpl implements Attribute {
 		_attribute.setValue(value);
 	}
 
+	public String toString() {
+		return _attribute.toString();
+	}
+
 	private org.dom4j.Attribute _attribute;
 
 }

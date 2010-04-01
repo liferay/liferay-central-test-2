@@ -91,6 +91,10 @@ public class DocumentImpl extends BranchImpl implements Document {
 		_document.setXMLEncoding(encoding);
 	}
 
+	public String toString() {
+		return _document.toString();
+	}
+
 	private org.dom4j.Document _document;
 
 }
