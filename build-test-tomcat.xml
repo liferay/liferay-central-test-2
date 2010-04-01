@@ -120,9 +120,7 @@ web.server.display.node=true</echo>
 		<antcall target="start-selenium" />
 
 		<antcall target="run-tomcat" inheritAll="false">
-			<param name="portlet.plugins.includes" value="${portlet.plugins.includes}" />
 			<param name="test.class" value="${test.name}" />
-			<param name="theme.plugins.includes" value="${theme.plugins.includes}" />
 		</antcall>
 
 		<antcall target="stop-selenium" />
