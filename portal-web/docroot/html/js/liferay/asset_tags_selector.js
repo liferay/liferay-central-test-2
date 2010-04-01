@@ -114,6 +114,8 @@ AUI().add(
 					instance._renderIcons();
 
 					instance.inputNode.addClass(CSS_INPUT_NODE);
+
+					instance._overlayAlign.node = instance.entryHolder;
 				},
 
 				bindUI: function() {
