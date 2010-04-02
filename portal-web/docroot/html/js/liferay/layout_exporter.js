@@ -128,6 +128,7 @@ Liferay.LayoutExporter = {
 			function(A) {
 				options = options || {};
 
+				var messageId = options.messageId;
 				var url = options.url;
 				var title = options.title;
 
@@ -135,6 +136,7 @@ Liferay.LayoutExporter = {
 					{
 						centered: true,
 						destroyOnClose: true,
+						id: messageId,
 						modal: true,
 						title: title,
 						width: 600,
