@@ -16,6 +16,7 @@ package com.liferay.util.servlet.filters;
 
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
+import com.liferay.portal.kernel.servlet.PipingServletOutputStream;
 import com.liferay.util.servlet.Header;
 
 import java.io.IOException;
@@ -269,8 +270,8 @@ public class CacheResponse extends HttpServletResponseWrapper {
 		return _ubaos.unsafeGetByteArray();
 	}
 
-	protected CacheResponseStream createOutputStream() {
-		return new CacheResponseStream(_ubaos);
+	protected PipingServletOutputStream createOutputStream() {
+		return new PipingServletOutputStream(_ubaos);
 	}
 
 	private int _bufferSize;
@@ -279,7 +280,7 @@ public class CacheResponse extends HttpServletResponseWrapper {
 	private Map<String, List<Header>> _headers =
 		new HashMap<String, List<Header>>();
 	private int _status = HttpServletResponse.SC_OK;
-	private CacheResponseStream _stream;
+	private PipingServletOutputStream _stream;
 	private UnsyncByteArrayOutputStream _ubaos =
 		new UnsyncByteArrayOutputStream();
 	private PrintWriter _writer;

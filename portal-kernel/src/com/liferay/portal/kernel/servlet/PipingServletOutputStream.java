@@ -30,6 +30,16 @@ public class PipingServletOutputStream extends ServletOutputStream {
 		_outputStream = outputStream;
 	}
 
+	public void close() throws IOException {
+		super.close();
+
+		_closed = true;
+	}
+
+	public boolean isClosed() {
+		return _closed;
+	}
+
 	public void write(byte[] byteArray) throws IOException {
 		_outputStream.write(byteArray);
 	}
@@ -44,6 +54,7 @@ public class PipingServletOutputStream extends ServletOutputStream {
 		_outputStream.write(i);
 	}
 
+	private boolean _closed;
 	private OutputStream _outputStream;
 
 }
