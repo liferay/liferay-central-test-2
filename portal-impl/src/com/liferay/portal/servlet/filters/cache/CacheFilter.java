@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
+import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.HttpUtil;
@@ -46,7 +47,6 @@ import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.util.servlet.filters.CacheResponse;
 import com.liferay.util.servlet.filters.CacheResponseData;
 import com.liferay.util.servlet.filters.CacheResponseUtil;
 
@@ -339,8 +339,9 @@ public class CacheFilter extends BasePortalFilter {
 		return true;
 	}
 
-	protected boolean isCacheableResponse(CacheResponse cacheResponse) {
-		if (cacheResponse.getStatus() == HttpServletResponse.SC_OK) {
+	protected boolean isCacheableResponse(
+		StringServletResponse stringResponse) {
+		if (stringResponse.getStatus() == HttpServletResponse.SC_OK) {
 			return true;
 		}
 		else {
@@ -393,16 +394,13 @@ public class CacheFilter extends BasePortalFilter {
 					_log.info("Caching request " + key);
 				}
 
-				CacheResponse cacheResponse = new CacheResponse(
-					response, StringPool.UTF8);
+				StringServletResponse stringResponse =
+					new StringServletResponse(response);
 
 				processFilter(
-					CacheFilter.class, request, cacheResponse, filterChain);
+					CacheFilter.class, request, stringResponse, filterChain);
 
-				cacheResponseData = new CacheResponseData(
-					cacheResponse.unsafeGetData(),
-					cacheResponse.getContentLength(),
-					cacheResponse.getContentType(), cacheResponse.getHeaders());
+				cacheResponseData = new CacheResponseData(stringResponse);
 
 				LastPath lastPath = (LastPath)request.getAttribute(
 					WebKeys.LAST_PATH);
@@ -417,7 +415,7 @@ public class CacheFilter extends BasePortalFilter {
 				// after the initial test.
 
 				if (isCacheableRequest(request) &&
-					isCacheableResponse(cacheResponse)) {
+					isCacheableResponse(stringResponse)) {
 
 					CacheUtil.putCacheResponseData(
 						companyId, key, cacheResponseData);

@@ -14,7 +14,9 @@
 
 package com.liferay.util.servlet.filters;
 
-import com.liferay.util.servlet.Header;
+import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
+import com.liferay.portal.kernel.servlet.Header;
+import com.liferay.portal.kernel.servlet.StringServletResponse;
 
 import java.io.Serializable;
 
@@ -28,6 +30,23 @@ import java.util.Map;
  * @author Michael Young
  */
 public class CacheResponseData implements Serializable {
+
+	public CacheResponseData(StringServletResponse stringResponse) {
+
+		if (stringResponse.isCalledGetOutputStream()) {
+			UnsyncByteArrayOutputStream unsyncByteArrayOutputStream =
+				stringResponse.getUnsyncByteArrayOutputStream();
+			_content = unsyncByteArrayOutputStream.unsafeGetByteArray();
+			_contentLength = unsyncByteArrayOutputStream.size();
+		}
+		else {
+			String content = stringResponse.getString();
+			_content = content.getBytes();
+			_contentLength = content.length();
+		}
+		_contentType = stringResponse.getContentType();
+		_headers = stringResponse.getHeaders();
+	}
 
 	public CacheResponseData(
 		byte[] content, int contentLength, String contentType,
