@@ -611,8 +611,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 				nextLayoutId = layout.getLayoutId() + 1;
 
 				counterLocalService.reset(
-					getCounterName(groupId, privateLayout),
-					layout.getLayoutId());
+					getCounterName(groupId, privateLayout), nextLayoutId);
 			}
 		}
 
