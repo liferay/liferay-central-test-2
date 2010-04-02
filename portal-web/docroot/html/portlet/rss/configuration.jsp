@@ -28,7 +28,7 @@ int assetOrder = ParamUtil.getInteger(request, "assetOrder", -1);
 PortletURL configurationActionURL = renderResponse.createActionURL();
 
 configurationActionURL.setParameter("struts_action", "/portlet_configuration/edit_configuration");
-configurationActionURL.setParameter("redirect", redirect);
+configurationActionURL.setParameter("redirect", currentURL);
 configurationActionURL.setParameter("backURL", redirect);
 configurationActionURL.setParameter("portletResource", portletResource);
 
