@@ -273,6 +273,8 @@ public class StringServletResponse extends HttpServletResponseWrapper {
 
 	public void setStatus(int status) {
 		_status = status;
+
+		super.setStatus(_status);
 	}
 
 	public void setString(String string) {
