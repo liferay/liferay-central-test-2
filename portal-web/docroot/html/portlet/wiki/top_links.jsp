@@ -120,7 +120,7 @@ boolean print = ParamUtil.getString(request, "viewMode").equals(Constants.PRINT)
 					<aui:input name="nodeId" type="hidden" value="<%= node.getNodeId() %>" />
 
 					<span class="aui-search-bar">
-						<aui:input inlineField="<%= true %>" label="" name="keywords" size="30" type="text" value="<%= keywords %>" />
+						<aui:input inlineField="<%= true %>" label="" name="keywords" size="30" title="search-pages" type="text" value="<%= keywords %>" />
 
 						<aui:button type="submit" value="search" />
 					</span>

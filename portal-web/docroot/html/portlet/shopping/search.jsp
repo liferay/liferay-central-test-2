@@ -183,7 +183,7 @@ String keywords = ParamUtil.getString(request, "keywords");
 	%>
 
 	<aui:fieldset>
-		<aui:input label="" name="keywords" size="30" value="<%= keywords %>" />
+		<aui:input label="" name="keywords" size="30" title="search" value="<%= keywords %>" />
 	</aui:fieldset>
 
 	<aui:button-row>

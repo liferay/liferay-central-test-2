@@ -68,7 +68,7 @@
 							<aui:input name="searchFolderIds" type="hidden" value="<%= folderId %>" />
 
 							<span class="aui-search-bar">
-								<aui:input id="keywords1" inlineField="<%= true %>" label="" name="keywords" size="30" type="text" />
+								<aui:input id="keywords1" inlineField="<%= true %>" label="" name="keywords" size="30" title="search-documents" type="text" />
 
 								<aui:button type="submit" value="search" />
 							</span>
@@ -105,7 +105,7 @@
 							<aui:input name="searchFolderIds" type="hidden" value="<%= folderId %>" />
 
 							<span class="aui-search-bar">
-								<aui:input id="keywords1" inlineField="<%= true %>" label="" name="keywords" size="30" type="text" />
+								<aui:input id="keywords1" inlineField="<%= true %>" label="" name="keywords" size="30" title="search-documents" type="text" />
 
 								<aui:button type="submit" value="search" />
 							</span>

@@ -64,7 +64,7 @@ PortletURL portletURL = renderResponse.createRenderURL();
 				<aui:input name="searchFolderIds" type="hidden" value="<%= folderId %>" />
 
 				<span class="aui-search-bar">
-					<aui:input inlineField="<%= true %>" id="keywords1" label="" name="keywords" size="30" type="text" />
+					<aui:input inlineField="<%= true %>" id="keywords1" label="" name="keywords" size="30" title="search-bookmarks" type="text" />
 
 					<aui:button type="submit" value="search" />
 				</span>

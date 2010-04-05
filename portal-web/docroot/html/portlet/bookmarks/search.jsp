@@ -153,7 +153,7 @@ String keywords = ParamUtil.getString(request, "keywords");
 	%>
 
 		<span class="aui-search-bar">
-			<aui:input inlineField="<%= true %>" label="" name="keywords" size="30" type="text" value="<%= keywords %>" />
+			<aui:input inlineField="<%= true %>" label="" name="keywords" size="30" title="search-bookmarks" type="text" value="<%= keywords %>" />
 
 			<aui:button type="submit" value="search" />
 		</span>
