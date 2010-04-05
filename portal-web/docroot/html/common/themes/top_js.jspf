@@ -203,24 +203,32 @@
 		%>
 
 		Liferay.AUI = {
-			getFilter: function() {
-				return '<%= alloyFilter %>';
-			},
-
 			getBasePath: function() {
 				return '<%= alloyBaseURL %>';
 			},
 
+			getCombine: function() {
+				return <%= themeDisplay.isThemeJsFastLoad() %>;
+			},
+
+			getComboPath: function() {
+				return '/combo/?';
+			},
+
 			getFilePath: function(file) {
 				return '<%= alloyURL %>'.replace('{file}', file);
+			},
+
+			getFilter: function() {
+				return '<%= alloyFilter %>';
 			}
 		};
 
 		window.YUI_config = {
-			base: Liferay.AUI.getBasePath(),
-			combine: false,
+			comboBase: Liferay.AUI.getComboPath(),
 			fetchCSS: false,
-			filter: Liferay.AUI.getFilter()
+			filter: Liferay.AUI.getFilter(),
+			root: Liferay.AUI.getBasePath()
 		};
 
 		<%

@@ -343,6 +343,10 @@
 	</filter-mapping>
 	<filter-mapping>
 		<filter-name>Header Filter</filter-name>
+		<url-pattern>/combo/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>Header Filter</filter-name>
 		<url-pattern>/image/*</url-pattern>
 	</filter-mapping>
 	<filter-mapping>
@@ -402,6 +406,12 @@
 	<filter-mapping>
 		<filter-name>Cache Filter - Layout</filter-name>
 		<url-pattern>/c/portal/layout</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>Cache Filter - Resource</filter-name>
+		<url-pattern>/combo/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
 	</filter-mapping>
 	<filter-mapping>
 		<filter-name>Cache Filter - Resource</filter-name>
@@ -498,6 +508,12 @@
 	<filter-mapping>
 		<filter-name>GZip Filter</filter-name>
 		<url-pattern>/c/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>GZip Filter</filter-name>
+		<url-pattern>/combo/*</url-pattern>
 		<dispatcher>REQUEST</dispatcher>
 		<dispatcher>FORWARD</dispatcher>
 	</filter-mapping>
@@ -635,6 +651,10 @@
 	</filter-mapping>
 	<filter-mapping>
 		<filter-name>ETag Filter</filter-name>
+		<url-pattern>/combo/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>ETag Filter</filter-name>
 		<url-pattern>/group/*</url-pattern>
 		<dispatcher>REQUEST</dispatcher>
 		<dispatcher>FORWARD</dispatcher>
@@ -742,6 +762,11 @@
 			<param-value>0</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet>
+		<servlet-name>Combo Servlet</servlet-name>
+		<servlet-class>com.liferay.portal.servlet.ComboServlet</servlet-class>
+		<load-on-startup>2</load-on-startup>
 	</servlet>
 	<servlet>
 		<servlet-name>Display Chart</servlet-name>
@@ -900,6 +925,10 @@
 	<servlet-mapping>
 		<servlet-name>Main Servlet</servlet-name>
 		<url-pattern>/c/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Combo Servlet</servlet-name>
+		<url-pattern>/combo/*</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>Display Chart</servlet-name>

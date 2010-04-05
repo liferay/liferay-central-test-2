@@ -405,6 +405,13 @@
 					/>
 				</replaceregexp>
 
+				<replaceregexp match="combine: ?false," replace="combine:Liferay.AUI.getCombine()," flags="g" byline="true">
+					<fileset
+						dir="docroot/html/js/aui/aui-base/"
+						includes="aui-base.js"
+					/>
+				</replaceregexp>
+
 				<replace file="docroot/html/js/aui/aui-base/aui-base.js">
 					<replacefilter token="var PATH_THEME_IMAGES = PATH_THEME_ROOT + '../images/';" value="var PATH_THEME_IMAGES = Liferay.ThemeDisplay.getPathThemeImages() + '/aui';" />
 				</replace>

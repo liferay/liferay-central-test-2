@@ -58,6 +58,7 @@ import javax.servlet.http.HttpSession;
  * @author Joel Kozikowski
  * @author Brian Wing Shun Chan
  * @author Raymond Augé
+ * @author Eduardo Lundgren
  */
 public class VirtualHostFilter extends BasePortalFilter {
 
@@ -80,6 +81,7 @@ public class VirtualHostFilter extends BasePortalFilter {
 				PortalUtil.getPathFriendlyURLPrivateUser() +
 					StringPool.SLASH) ||
 			friendlyURL.startsWith(_PATH_C) ||
+			friendlyURL.startsWith(_PATH_COMBO) ||
 			friendlyURL.startsWith(_PATH_DELEGATE) ||
 			friendlyURL.startsWith(_PATH_DISPLAY_CHART) ||
 			friendlyURL.startsWith(_PATH_DOCUMENTS) ||
@@ -322,6 +324,8 @@ public class VirtualHostFilter extends BasePortalFilter {
 	}
 
 	private static final String _PATH_C = "/c/";
+
+	private static final String _PATH_COMBO = "/combo/";
 
 	private static final String _PATH_DELEGATE = "/delegate/";
 
