@@ -206,6 +206,56 @@ public class EnterpriseAdminUtil {
 		return filteredGroups;
 	}
 
+	public static List<Role> filterGroupRoles(
+			PermissionChecker permissionChecker, long groupId,
+			List<Role> roles)
+		throws PortalException, SystemException {
+
+		List<Role> filteredGroupRoles =
+			ListUtil.copy(roles);
+
+		Iterator<Role> itr = filteredGroupRoles.iterator();
+
+		while (itr.hasNext()) {
+			Role groupRole = itr.next();
+
+			String name = groupRole.getName();
+
+			if (name.equals(RoleConstants.ORGANIZATION_MEMBER) ||
+				name.equals(RoleConstants.COMMUNITY_MEMBER)) {
+
+				itr.remove();
+			}
+		}
+
+		if (permissionChecker.isCompanyAdmin() ||
+			permissionChecker.isCommunityOwner(groupId)) {
+
+			return filteredGroupRoles;
+		}
+
+		itr = filteredGroupRoles.iterator();
+
+		while (itr.hasNext()) {
+			Role groupRole = itr.next();
+
+			String groupRoleName = groupRole.getName();
+
+			if (groupRoleName.equals(RoleConstants.COMMUNITY_ADMINISTRATOR) ||
+				groupRoleName.equals(RoleConstants.COMMUNITY_OWNER) ||
+				groupRoleName.equals(
+					RoleConstants.ORGANIZATION_ADMINISTRATOR) ||
+				groupRoleName.equals(RoleConstants.ORGANIZATION_OWNER) ||
+				!GroupPermissionUtil.contains(
+					permissionChecker, groupId, ActionKeys.ASSIGN_USER_ROLES)) {
+
+				itr.remove();
+			}
+		}
+
+		return filteredGroupRoles;
+	}
+
 	public static List<Organization> filterOrganizations(
 			PermissionChecker permissionChecker,
 			List<Organization> organizations)

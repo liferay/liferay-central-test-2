@@ -195,7 +195,7 @@ if (step == 1) {
 					if (filterManageableRoles) {
 						List<Role> roles = RoleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), new Integer[] {RoleConstants.TYPE_ORGANIZATION}, QueryUtil.ALL_POS, QueryUtil.ALL_POS, searchContainer.getOrderByComparator());
 
-						roles = EnterpriseAdminUtil.filterRoles(permissionChecker, roles);
+						roles = EnterpriseAdminUtil.filterGroupRoles(permissionChecker, organization.getGroup().getGroupId(), roles);
 
 						total = roles.size();
 						results = ListUtil.subList(roles, searchContainer.getStart(), searchContainer.getEnd());

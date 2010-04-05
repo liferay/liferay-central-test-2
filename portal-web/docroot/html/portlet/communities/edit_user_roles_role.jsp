@@ -51,7 +51,7 @@ RoleSearchTerms searchTerms = (RoleSearchTerms)searchContainer.getSearchTerms();
 
 List<Role> roles = RoleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), new Integer[] {roleType}, QueryUtil.ALL_POS, QueryUtil.ALL_POS, searchContainer.getOrderByComparator());
 
-roles = EnterpriseAdminUtil.filterRoles(permissionChecker, roles);
+roles = EnterpriseAdminUtil.filterGroupRoles(permissionChecker, group.getGroupId(), roles);
 
 int total = roles.size();
 
