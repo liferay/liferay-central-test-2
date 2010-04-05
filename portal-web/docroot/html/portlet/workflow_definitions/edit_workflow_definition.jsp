@@ -14,7 +14,7 @@
  */
 %>
 
-<%@ include file="/html/portlet/workflow_admin/init.jsp" %>
+<%@ include file="/html/portlet/workflow_definitions/init.jsp" %>
 
 <%
 String redirect = ParamUtil.getString(request, "redirect");
@@ -31,15 +31,15 @@ if (workflowDefinition != null) {
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
-portletURL.setParameter("struts_action", "/workflow_admin/view");
+portletURL.setParameter("struts_action", "/workflow_definitions/view");
 %>
 
-<liferay-util:include page="/html/portlet/workflow_admin/toolbar.jsp">
+<liferay-util:include page="/html/portlet/workflow_definitions/toolbar.jsp">
 	<liferay-util:param name="toolbarItem" value="add" />
 </liferay-util:include>
 
 <portlet:actionURL var="editWorkflowDefinitionURL">
-	<portlet:param name="struts_action" value="/workflow_admin/edit_workflow_definition" />
+	<portlet:param name="struts_action" value="/workflow_definitions/edit_workflow_definition" />
 	<portlet:param name="redirect" value="<%= redirect %>" />
 </portlet:actionURL>
 

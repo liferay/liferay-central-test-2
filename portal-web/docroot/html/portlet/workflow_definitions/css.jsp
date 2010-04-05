@@ -14,15 +14,21 @@
  */
 %>
 
-<%@ include file="/html/portlet/workflow_admin/init.jsp" %>
+<%@ include file="/html/portlet/css_init.jsp" %>
 
-<c:choose>
-	<c:when test="<%= WorkflowEngineManagerUtil.isDeployed() %>">
-		<%@ include file="/html/portlet/workflow_admin/view_definitions.jspf" %>
-	</c:when>
-	<c:otherwise>
-		<div class="portlet-msg-info">
-			<liferay-ui:message key="no-workflow-engine-is-deployed" />
-		</div>
-	</c:otherwise>
-</c:choose>
+.portlet-workflow-definitions .icon {
+	padding-left: 25px;
+}
+
+.portlet-workflow-definitions .unknown {
+	background: url(<%= themeImagesPath %>/common/page.png) no-repeat;
+
+}
+
+.portlet-workflow-definitions .content  {
+	background: url(<%= themeImagesPath %>/common/history.png) no-repeat;
+}
+
+.portlet-workflow-definitions .document  {
+	background: url(<%= themeImagesPath %>/common/page.png) no-repeat;
+}

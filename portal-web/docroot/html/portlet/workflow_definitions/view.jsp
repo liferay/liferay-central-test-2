@@ -14,9 +14,15 @@
  */
 %>
 
-<%@ include file="/html/portlet/workflow_admin/init.jsp" %>
+<%@ include file="/html/portlet/workflow_definitions/init.jsp" %>
 
-<liferay-ui:tabs names="error" backURL="javascript:history.go(-1);" />
-
-<liferay-ui:error exception="<%= RequiredWorkflowDefinitionException.class %>" message="you-cannot-deactivate-or-delete-this-definition" />
-<liferay-ui:error exception="<%= PrincipalException.class %>" message="you-do-not-have-the-required-permissions" />
+<c:choose>
+	<c:when test="<%= WorkflowEngineManagerUtil.isDeployed() %>">
+		<%@ include file="/html/portlet/workflow_definitions/view_definitions.jspf" %>
+	</c:when>
+	<c:otherwise>
+		<div class="portlet-msg-info">
+			<liferay-ui:message key="no-workflow-engine-is-deployed" />
+		</div>
+	</c:otherwise>
+</c:choose>

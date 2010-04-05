@@ -14,21 +14,9 @@
  */
 %>
 
-<%@ include file="/html/portlet/css_init.jsp" %>
+<%@ include file="/html/portlet/workflow_definitions/init.jsp" %>
 
-.portlet-workflow-admin .icon {
-	padding-left: 25px;
-}
+<liferay-ui:tabs names="error" backURL="javascript:history.go(-1);" />
 
-.portlet-workflow-admin .unknown {
-	background: url(<%= themeImagesPath %>/common/page.png) no-repeat;
-
-}
-
-.portlet-workflow-admin .content  {
-	background: url(<%= themeImagesPath %>/common/history.png) no-repeat;
-}
-
-.portlet-workflow-admin .document  {
-	background: url(<%= themeImagesPath %>/common/page.png) no-repeat;
-}
+<liferay-ui:error exception="<%= RequiredWorkflowDefinitionException.class %>" message="you-cannot-deactivate-or-delete-this-definition" />
+<liferay-ui:error exception="<%= PrincipalException.class %>" message="you-do-not-have-the-required-permissions" />

@@ -14,7 +14,7 @@
  */
 %>
 
-<%@ include file="/html/portlet/workflow_admin/init.jsp" %>
+<%@ include file="/html/portlet/workflow_definitions/init.jsp" %>
 
 <%
 String toolbarItem = ParamUtil.getString(request, "toolbarItem", "view-all");
@@ -23,7 +23,7 @@ String backURL = ParamUtil.getString(request, "backURL");
 
 <div class="lfr-portlet-toolbar">
 	<portlet:renderURL var="viewDefinitionsURL">
-		<portlet:param name="struts_action" value="/workflow_admin/view" />
+		<portlet:param name="struts_action" value="/workflow_definitions/view" />
 		<portlet:param name="tabs1" value="workflow-definitions" />
 	</portlet:renderURL>
 
@@ -32,7 +32,7 @@ String backURL = ParamUtil.getString(request, "backURL");
 	</span>
 
 	<portlet:renderURL var="addWorkflowDefinitionURL">
-		<portlet:param name="struts_action" value="/workflow_admin/edit_workflow_definition" />
+		<portlet:param name="struts_action" value="/workflow_definitions/edit_workflow_definition" />
 		<portlet:param name="tabs1" value="workflow-definitions" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
 		<portlet:param name="backURL" value="<%= currentURL %>" />

@@ -14,7 +14,7 @@
  */
 %>
 
-<%@ include file="/html/portlet/workflow_admin/init.jsp" %>
+<%@ include file="/html/portlet/workflow_definitions/init.jsp" %>
 
 <%
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
@@ -24,7 +24,7 @@ WorkflowDefinition workflowDefinition = (WorkflowDefinition)row.getObject();
 
 <liferay-ui:icon-menu>
 	<portlet:renderURL var="editURL">
-		<portlet:param name="struts_action" value="/workflow_admin/edit_workflow_definition" />
+		<portlet:param name="struts_action" value="/workflow_definitions/edit_workflow_definition" />
 		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.UPDATE %>" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
 		<portlet:param name="name" value="<%= workflowDefinition.getName() %>" />
@@ -35,7 +35,7 @@ WorkflowDefinition workflowDefinition = (WorkflowDefinition)row.getObject();
 
 	<c:if test="<%= !workflowDefinition.isActive() %>">
 		<portlet:actionURL var="restoreWorkflowDefinitionURL">
-			<portlet:param name="struts_action" value="/workflow_admin/edit_workflow_definition" />
+			<portlet:param name="struts_action" value="/workflow_definitions/edit_workflow_definition" />
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.RESTORE %>" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="name" value="<%= workflowDefinition.getName() %>" />
@@ -46,7 +46,7 @@ WorkflowDefinition workflowDefinition = (WorkflowDefinition)row.getObject();
 	</c:if>
 
 	<portlet:actionURL var="deleteURL">
-		<portlet:param name="struts_action" value="/workflow_admin/edit_workflow_definition" />
+		<portlet:param name="struts_action" value="/workflow_definitions/edit_workflow_definition" />
 		<portlet:param name="<%= Constants.CMD %>" value="<%= workflowDefinition.isActive() ? Constants.DEACTIVATE : Constants.DELETE %>" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
 		<portlet:param name="name" value="<%= workflowDefinition.getName() %>" />
