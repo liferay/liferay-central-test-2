@@ -21,11 +21,11 @@ String redirect = ParamUtil.getString(request, "redirect");
 %>
 
 <c:if test="<%= themeDisplay.isSignedIn() && (layout != null) && layout.getType().equals(LayoutConstants.TYPE_PORTLET) %>">
-	<aui:form action='<%= themeDisplay.getPathMain() + "/portal/update_layout?p_l_id=" + plid %>' method="post" name="layoutTemplates">
-		<input name="doAsUserId" type="hidden" value="<%= HtmlUtil.escapeAttribute(themeDisplay.getDoAsUserId()) %>" />
-		<input name="<%= Constants.CMD %>" type="hidden" value="template" />
-		<input name="<%= WebKeys.REFERER %>" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
-		<input name="refresh" type="hidden" value="true" />
+	<aui:form action='<%= themeDisplay.getPathMain() + "/portal/update_layout?p_l_id=" + plid %>' method="post" name="layoutTemplates" useNamespace="<%= false %>">
+		<aui:input name="doAsUserId" type="hidden" value="<%= themeDisplay.getDoAsUserId() %>" />
+		<aui:input name="<%= Constants.CMD %>" type="hidden" value="template" />
+		<aui:input name="<%= WebKeys.REFERER %>" type="hidden" value="<%= redirect %>" />
+		<aui:input name="refresh" type="hidden" value="<%= true %>" />
 
 		<aui:layout cssClass="lfr-page-layouts">
 
@@ -72,11 +72,9 @@ String redirect = ParamUtil.getString(request, "redirect");
 					%>
 
 						<div class="lfr-layout-template">
-							<img onclick="document.getElementById('layoutTemplateId<%= i %>').checked = true;" src="<%= layoutTemplate.getContextPath() %><%= layoutTemplate.getThumbnailPath() %>" /><br />
+							<img onclick="document.getElementById('layoutTemplateId<%= i %>').checked = true;" src="<%= layoutTemplate.getContextPath() %><%= layoutTemplate.getThumbnailPath() %>" />
 
-							<input <%= layoutTypePortlet.getLayoutTemplateId().equals(layoutTemplate.getLayoutTemplateId()) ? "checked" : "" %> id="layoutTemplateId<%= i %>" name="layoutTemplateId" type="radio" value="<%= layoutTemplate.getLayoutTemplateId() %>" />
-
-							<label for="layoutTemplateId<%= i %>"><%= layoutTemplate.getName() %></label>
+							<aui:input id='<%= "layoutTemplateId" + i %>' label="<%= layoutTemplate.getName() %>" name="layoutTemplateId" selected="<%= layoutTypePortlet.getLayoutTemplateId().equals(layoutTemplate.getLayoutTemplateId()) %>" type="radio" value="<%= layoutTemplate.getLayoutTemplateId() %>" />
 						</div>
 
 					<%

@@ -27,17 +27,17 @@
 
 		<div id="portal_add_content">
 			<div class="portal-add-content">
-				<aui:form action='<%= themeDisplay.getPathMain() + "/portal/update_layout?p_l_id=" + plid %>' method="post" name="fm">
-					<input name="doAsUserId" type="hidden" value="<%= HtmlUtil.escapeAttribute(themeDisplay.getDoAsUserId()) %>" />
-					<input name="<%= Constants.CMD %>" type="hidden" value="template" />
-					<input name="<%= WebKeys.REFERER %>" type="hidden" value="<%= refererURL.toString() %>" />
-					<input name="refresh" type="hidden" value="true" />
+				<aui:form action='<%= themeDisplay.getPathMain() + "/portal/update_layout?p_l_id=" + plid %>' method="post" name="fm" useNamespace="<%= false %>">
+					<aui:input name="doAsUserId" type="hidden" value="<%= themeDisplay.getDoAsUserId() %>" />
+					<aui:input name="<%= Constants.CMD %>" type="hidden" value="template" />
+					<aui:input name="<%= WebKeys.REFERER %>" type="hidden" value="<%= refererURL.toString() %>" />
+					<aui:input name="refresh" type="hidden" value="<%= true %>" />
 
 					<c:if test="<%= layout.getType().equals(LayoutConstants.TYPE_PORTLET) %>">
 						<div class="portal-add-content-search">
 							<span id="portal_add_content_title"><liferay-ui:message key="search-applications-searches-as-you-type" /></span>
 
-							<input class="lfr-auto-focus" id="layout_configuration_content" type="text" onKeyPress="if (event.keyCode == 13) { return false; }" />
+							<aui:input cssClass="lfr-auto-focus" id="layout_configuration_content" label="" name="layout_configuration_content" onKeyPress="if (event.keyCode == 13) { return false; }" />
 						</div>
 					</c:if>
 
@@ -116,10 +116,6 @@ private static PortletCategory _getRelevantPortletCategory(PortletCategory portl
 
 	for (PortletCategory curPortletCategory : portletCategory.getCategories()) {
 		Set<String> portletIds = new HashSet<String>();
-
-		if (curPortletCategory.getName().equals("category.hidden")) {
-			continue;
-		}
 
 		for (String portletId : curPortletCategory.getPortletIds()) {
 			Portlet portlet = PortletLocalServiceUtil.getPortletById(user.getCompanyId(), portletId);
