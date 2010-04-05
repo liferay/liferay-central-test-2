@@ -70,7 +70,7 @@ public class CalEventAssetRendererFactory extends BaseAssetRendererFactory {
 
 		if (CalendarPermission.contains(
 				themeDisplay.getPermissionChecker(),
-				themeDisplay.getScopeGroupId(), ActionKeys.ADD_ENTRY)) {
+				themeDisplay.getScopeGroupId(), ActionKeys.ADD_EVENT)) {
 
 			addAssetURL = liferayPortletResponse.createRenderURL(
 				PortletKeys.CALENDAR);
