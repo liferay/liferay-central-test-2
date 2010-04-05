@@ -319,7 +319,7 @@ List addresses = AddressServiceUtil.getAddresses(Contact.class.getName(), contac
 	</liferay-ui:panel-container>
 
 	<aui:button-row>
-		<aui:button type="button" value="continue" onClick='<%= "submitForm(document." + renderResponse.getNamespace() + "fm);" %>' />
+		<aui:button type="submit" value="continue" />
 	</aui:button-row>
 </aui:form>
 

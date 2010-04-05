@@ -118,7 +118,7 @@ for (int i = 0; i < values.size(); i++) {
 	<aui:button-row>
 		<aui:button onClick='<%= renderResponse.getNamespace() + "updateItemQuantities();" %>' type="button" value="update" />
 
-		<aui:button onClick="self.close();" type="button" value="cancel" />
+		<aui:button onClick="self.close();" type="cancel" />
 	</aui:button-row>
 </aui:form>
 

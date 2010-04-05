@@ -501,12 +501,6 @@ order = order.toEscapedModel();
 	</table>
 
 	<aui:button-row>
-		<aui:button onClick='<%= renderResponse.getNamespace() + "continueCheckout();" %>' type="button" value='<%= shoppingPrefs.usePayPal() ? "continue" : "finished" %>' />
+		<aui:button type="submit" value='<%= shoppingPrefs.usePayPal() ? "continue" : "finished" %>' />
 	</aui:button-row>
 </aui:form>
-
-<aui:script>
-	function <portlet:namespace />continueCheckout() {
-		submitForm(document.<portlet:namespace />fm);
-	}
-</aui:script>
