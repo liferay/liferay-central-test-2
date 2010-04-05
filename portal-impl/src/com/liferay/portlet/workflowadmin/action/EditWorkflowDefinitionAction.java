@@ -160,14 +160,28 @@ public class EditWorkflowDefinitionAction extends PortletAction {
 
 		File file = uploadRequest.getFile("file");
 
-		if (!file.exists()) {
-			throw new WorkflowDefinitionFileException();
-		}
+		WorkflowDefinition workflowDefinition = null;
 
-		WorkflowDefinition workflowDefinition =
-			WorkflowDefinitionManagerUtil.deployWorkflowDefinition(
+		if (!file.exists()) {
+
+			String name = ParamUtil.getString(actionRequest, "name");
+			String version = ParamUtil.getString(actionRequest, "version");
+
+			workflowDefinition =
+				WorkflowDefinitionManagerUtil.getWorkflowDefinition(
+				themeDisplay.getCompanyId(), name, Integer.parseInt(version));
+
+			WorkflowDefinitionManagerUtil.updateTitle(
 				themeDisplay.getCompanyId(), themeDisplay.getUserId(),
-				getTitle(titleMap), new FileInputStream(file));
+				name, Integer.parseInt(version),getTitle(titleMap));	
+
+		}
+		else {
+			workflowDefinition =
+				WorkflowDefinitionManagerUtil.deployWorkflowDefinition(
+					themeDisplay.getCompanyId(), themeDisplay.getUserId(),
+					getTitle(titleMap), new FileInputStream(file));
+		}
 
 		actionRequest.setAttribute(
 			WebKeys.WORKFLOW_DEFINITION, workflowDefinition);
