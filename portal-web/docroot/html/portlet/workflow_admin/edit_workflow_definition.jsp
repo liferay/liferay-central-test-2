@@ -17,8 +17,6 @@
 <%@ include file="/html/portlet/workflow_admin/init.jsp" %>
 
 <%
-String tabs1 = ParamUtil.getString(request, "tabs1", "workflow-definitions");
-
 String redirect = ParamUtil.getString(request, "redirect");
 
 WorkflowDefinition workflowDefinition = (WorkflowDefinition)request.getAttribute(WebKeys.WORKFLOW_DEFINITION);
@@ -34,13 +32,7 @@ if (workflowDefinition != null) {
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("struts_action", "/workflow_admin/view");
-portletURL.setParameter("tabs1", tabs1);
 %>
-
-<liferay-ui:tabs
-	names="resources,workflow-definitions"
-	url="<%= portletURL.toString() %>"
-/>
 
 <liferay-util:include page="/html/portlet/workflow_admin/toolbar.jsp">
 	<liferay-util:param name="toolbarItem" value="add" />
@@ -53,7 +45,6 @@ portletURL.setParameter("tabs1", tabs1);
 
 <aui:form action="<%= editWorkflowDefinitionURL %>" enctype="multipart/form-data" method="post">
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= workflowDefinition == null ? Constants.ADD : Constants.UPDATE %>" />
-	<aui:input name="tabs1" type="hidden" value="workflow-definitions" />
 
 	<liferay-ui:error exception="<%= WorkflowDefinitionFileException.class %>" message="please-enter-a-valid-file" />
 

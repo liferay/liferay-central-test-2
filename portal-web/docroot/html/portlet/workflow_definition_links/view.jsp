@@ -14,10 +14,15 @@
  */
 %>
 
-<%@ include file="/html/portlet/init.jsp" %>
+<%@ include file="/html/portlet/workflow_definition_links/init.jsp" %>
 
-<%@ page import="com.liferay.portal.kernel.workflow.RequiredWorkflowDefinitionException" %>
-<%@ page import="com.liferay.portal.kernel.workflow.WorkflowDefinition" %>
-<%@ page import="com.liferay.portal.kernel.workflow.WorkflowDefinitionFileException" %>
-<%@ page import="com.liferay.portal.kernel.workflow.WorkflowDefinitionManagerUtil" %>
-<%@ page import="com.liferay.portal.kernel.workflow.WorkflowEngineManagerUtil" %>
+<c:choose>
+	<c:when test="<%= WorkflowEngineManagerUtil.isDeployed() %>">
+		<%@ include file="/html/portlet/workflow_definition_links/view_resources.jspf" %>
+	</c:when>
+	<c:otherwise>
+		<div class="portlet-msg-info">
+			<liferay-ui:message key="no-workflow-engine-is-deployed" />
+		</div>
+	</c:otherwise>
+</c:choose>

@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portlet.workflowadmin.action;
+package com.liferay.portlet.workflowdefinitionlinks.action;
 
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -62,7 +62,8 @@ public class EditWorkflowDefinitionLinkAction extends PortletAction {
 			if (e instanceof WorkflowException) {
 				SessionErrors.add(actionRequest, e.getClass().getName());
 
-				setForward(actionRequest, "portlet.workflow_admin.error");
+				setForward(
+					actionRequest, "portlet.workflow_definition_links.error");
 			}
 			else {
 				throw e;

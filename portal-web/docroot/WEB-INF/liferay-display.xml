@@ -73,6 +73,7 @@
 		<portlet id="149" />
 		<portlet id="150" />
 		<portlet id="151" />
+		<portlet id="152" />
 	</category>
 	<category name="category.news">
 		<portlet id="39" />

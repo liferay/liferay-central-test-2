@@ -1908,11 +1908,15 @@
 			<forward name="portlet.workflow_admin.error" path="portlet.workflow_admin.error" />
 		</action>
 
-		<action path="/workflow_admin/edit_workflow_definition_link" type="com.liferay.portlet.workflowadmin.action.EditWorkflowDefinitionLinkAction">
-			<forward name="portlet.workflow_admin.error" path="portlet.workflow_admin.error" />
+		<action path="/workflow_admin/view" forward="portlet.workflow_admin.view" />
+
+		<!-- Workflow Definition Links -->
+
+		<action path="/workflow_definition_links/edit_workflow_definition_link" type="com.liferay.portlet.workflowdefinitionlinks.action.EditWorkflowDefinitionLinkAction">
+			<forward name="portlet.workflow_definition_links.error" path="portlet.workflow_definition_links.error" />
 		</action>
 
-		<action path="/workflow_admin/view" forward="portlet.workflow_admin.view" />
+		<action path="/workflow_definition_links/view" forward="portlet.workflow_definition_links.view" />
 
 		<!-- Workflow Tasks -->
 

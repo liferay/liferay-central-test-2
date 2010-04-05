@@ -1521,8 +1521,25 @@
 		<icon>/html/icons/default.png</icon>
 		<struts-path>workflow_admin</struts-path>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
-		<control-panel-entry-category>content</control-panel-entry-category>
+		<control-panel-entry-category>portal</control-panel-entry-category>
 		<control-panel-entry-weight>13.0</control-panel-entry-weight>
+		<use-default-template>false</use-default-template>
+		<restore-current-view>false</restore-current-view>
+		<private-request-attributes>false</private-request-attributes>
+		<private-session-attributes>false</private-session-attributes>
+		<render-weight>50</render-weight>
+		<ajaxable>false</ajaxable>
+		<header-portlet-css>/html/portlet/enterprise_admin/css.jsp</header-portlet-css>
+		<header-portlet-css>/html/portlet/workflow_admin/css.jsp</header-portlet-css>
+		<css-class-wrapper>portlet-workflow-admin</css-class-wrapper>
+	</portlet>
+	<portlet>
+		<portlet-name>152</portlet-name>
+		<icon>/html/icons/default.png</icon>
+		<struts-path>workflow_definition_links</struts-path>
+		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
+		<control-panel-entry-category>content</control-panel-entry-category>
+		<control-panel-entry-weight>14.0</control-panel-entry-weight>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>

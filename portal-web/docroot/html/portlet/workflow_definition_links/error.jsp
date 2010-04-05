@@ -14,10 +14,8 @@
  */
 %>
 
-<%@ include file="/html/portlet/init.jsp" %>
+<%@ include file="/html/portlet/workflow_definition_links/init.jsp" %>
 
-<%@ page import="com.liferay.portal.kernel.workflow.RequiredWorkflowDefinitionException" %>
-<%@ page import="com.liferay.portal.kernel.workflow.WorkflowDefinition" %>
-<%@ page import="com.liferay.portal.kernel.workflow.WorkflowDefinitionFileException" %>
-<%@ page import="com.liferay.portal.kernel.workflow.WorkflowDefinitionManagerUtil" %>
-<%@ page import="com.liferay.portal.kernel.workflow.WorkflowEngineManagerUtil" %>
+<liferay-ui:tabs names="error" backURL="javascript:history.go(-1);" />
+
+<liferay-ui:error exception="<%= PrincipalException.class %>" message="you-do-not-have-the-required-permissions" />
