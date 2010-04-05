@@ -124,6 +124,10 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 			return;
 		}
 
+		if (article.getStatus() != StatusConstants.APPROVED) {
+			return;
+		}
+
 		String path = getArticlePath(context, article);
 
 		if (!context.isPathNotProcessed(path)) {
