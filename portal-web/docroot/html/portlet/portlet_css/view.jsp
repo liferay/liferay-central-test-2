@@ -32,7 +32,7 @@ PortletURL portletURL = renderResponse.createRenderURL();
 			<input id="portlet-boundary-id" name="portlet-boundary-id" type="hidden" />
 
 			<div class="aui-tabview-content">
-				<aui:fieldset id="portlet-config" label="portlet-configuration">
+				<aui:fieldset id="portlet-config">
 					<span class="aui-field-row">
 						<aui:input inlineField="<%= true %>" label="portlet-title" name="custom-title" />
 
@@ -53,7 +53,7 @@ PortletURL portletURL = renderResponse.createRenderURL();
 						</aui:select>
 					</span>
 
-					<aui:input label="use-custom-title" name="use-custom-title" type="checkbox" />
+					<aui:input name="use-custom-title" type="checkbox" />
 
 					<aui:select label="link-portlet-urls-to-page" name="lfr-point-links">
 						<aui:option label="current-page" />
@@ -111,14 +111,14 @@ PortletURL portletURL = renderResponse.createRenderURL();
 
 					</aui:select>
 
-					<aui:input label="show-borders" name="show-borders" type="checkbox" />
+					<aui:input name="show-borders" type="checkbox" />
 
 					<span class="form-hint portlet-msg-info aui-helper-hidden" id="border-note">
 						<liferay-ui:message key="this-change-will-only-be-shown-after-you-refresh-the-page" />
 					</span>
 				</aui:fieldset>
 
-				<aui:fieldset id="text-styles" label="text-styles">
+				<aui:fieldset id="text-styles">
 					<aui:layout>
 						<aui:column columnWidth="30" first="<%= true %>">
 							<aui:select label="font" name="lfr-font-family" showEmptyOption="<%= true %>">
@@ -227,11 +227,11 @@ PortletURL portletURL = renderResponse.createRenderURL();
 					</aui:layout>
 				</aui:fieldset>
 
-				<aui:fieldset id="background-styles" label="background-styles">
+				<aui:fieldset id="background-styles">
 					<aui:input label="background-color" name="lfr-bg-color" />
 				</aui:fieldset>
 
-				<aui:fieldset id="border-styles" label="border-styling">
+				<aui:fieldset id="border-styles">
 					<aui:layout>
 						<aui:column columnWidth="33" cssClass="lfr-border-width use-for-all-column" first="<%= true %>">
 							<aui:fieldset label="border-width">
@@ -349,7 +349,7 @@ PortletURL portletURL = renderResponse.createRenderURL();
 					</aui:layout>
 				</aui:fieldset>
 
-				<aui:fieldset cssClass="spacing aui-fieldset" id="spacing-styles" label="spacing">
+				<aui:fieldset cssClass="spacing aui-fieldset" id="spacing-styles">
 					<aui:layout>
 						<aui:column columnWidth="50" cssClass="lfr-padding use-for-all-column" first="<%= true %>">
 							<aui:fieldset label="padding">
@@ -445,11 +445,11 @@ PortletURL portletURL = renderResponse.createRenderURL();
 					</aui:layout>
 				</aui:fieldset>
 
-				<aui:fieldset id="css-styling" label="advanced-css-styling">
+				<aui:fieldset id="css-styling">
 					<aui:input cssClass="lfr-textarea-container" label="enter-your-custom-css" name="lfr-custom-css" type="textarea" />
 				</aui:fieldset>
 
-				<aui:fieldset id="wap-styling" label="wap-styling">
+				<aui:fieldset id="wap-styling">
 					<aui:input label="title" name="lfr-wap-title" />
 
 					<aui:select label="initial-window-state" name="lfr-wap-initial-window-state">
