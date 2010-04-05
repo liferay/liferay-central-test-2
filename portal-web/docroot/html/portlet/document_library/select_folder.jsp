@@ -20,8 +20,11 @@
 DLFolder folder = (DLFolder)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FOLDER);
 
 long folderId = BeanParamUtil.getLong(folder, request, "folderId", DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
+String folderName = LanguageUtil.get(pageContext, "document-home");
 
 if (folder != null) {
+	folderName = folder.getName();
+
 	DLUtil.addPortletBreadcrumbEntries(folder, request, renderResponse);
 }
 %>
@@ -115,20 +118,26 @@ if (folder != null) {
 	showAddFolderButton = showAddFolderButton && DLFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.ADD_FOLDER);
 	%>
 
-	<c:if test="<%= showAddFolderButton %>">
-		<portlet:renderURL var="editFolderURL">
-			<portlet:param name="struts_action" value="/document_library/edit_folder" />
-			<portlet:param name="redirect" value="<%= currentURL %>" />
-			<portlet:param name="parentFolderId" value="<%= String.valueOf(folderId) %>" />
-		</portlet:renderURL>
+	<aui:button-row>
+		<c:if test="<%= showAddFolderButton %>">
+			<portlet:renderURL var="editFolderURL">
+				<portlet:param name="struts_action" value="/document_library/edit_folder" />
+				<portlet:param name="redirect" value="<%= currentURL %>" />
+				<portlet:param name="parentFolderId" value="<%= String.valueOf(folderId) %>" />
+			</portlet:renderURL>
 
-		<aui:button-row>
 			<aui:button onClick="<%= editFolderURL %>" value='<%= (folder == null) ? "add-folder" : "add-subfolder" %>' />
-		</aui:button-row>
-
-		<c:if test="<%= !results.isEmpty() %>">
-			<br />
 		</c:if>
+
+		<%
+		String taglibSelectOnClick = "opener." + renderResponse.getNamespace() + "selectFolder('" + folderId + "','" + folderName + "');window.close();";
+		%>
+
+		<aui:button onClick="<%= taglibSelectOnClick %>" value="choose-this-folder" />
+	</aui:button-row>
+
+	<c:if test="<%= !results.isEmpty() %>">
+		<br />
 	</c:if>
 
 	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
