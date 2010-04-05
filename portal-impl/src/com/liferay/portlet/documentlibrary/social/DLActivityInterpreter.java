@@ -111,7 +111,8 @@ public class DLActivityInterpreter extends BaseSocialActivityInterpreter {
 
 		String folderLink =
 			themeDisplay.getPortalURL() + themeDisplay.getPathMain() +
-				"/document_library/find_folder?folderId=" +
+				"/document_library/find_folder?groupId=" +
+					fileEntry.getGroupId() + "&folderId=" +
 					fileEntry.getFolderId();
 
 		sb.append(wrapLink(folderLink, "go-to-folder", themeDisplay));

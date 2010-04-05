@@ -53,9 +53,10 @@ public class FindFolderAction extends Action {
 
 		try {
 			long plid = ParamUtil.getLong(request, "p_l_id");
+			long groupId = ParamUtil.getLong(request,"groupId");
 			long folderId = ParamUtil.getLong(request, "folderId");
 
-			plid = getPlid(plid, folderId);
+			plid = getPlid(plid, groupId, folderId);
 
 			PortletURL portletURL = new PortletURLImpl(
 				request, PortletKeys.DOCUMENT_LIBRARY, plid,
@@ -79,7 +80,9 @@ public class FindFolderAction extends Action {
 		}
 	}
 
-	protected long getPlid(long plid, long folderId) throws Exception {
+	protected long getPlid(long plid, long groupId, long folderId)
+		throws Exception {
+
 		if (plid != LayoutConstants.DEFAULT_PLID) {
 			try {
 				Layout layout = LayoutLocalServiceUtil.getLayout(plid);
@@ -97,10 +100,14 @@ public class FindFolderAction extends Action {
 			}
 		}
 
-		DLFolder folder = DLFolderLocalServiceUtil.getFolder(folderId);
+		if (groupId <= 0) {
+			DLFolder folder = DLFolderLocalServiceUtil.getFolder(folderId);
+
+			groupId = folder.getGroupId();
+		}
 
 		plid = PortalUtil.getPlidFromPortletId(
-			folder.getGroupId(), PortletKeys.DOCUMENT_LIBRARY);
+			groupId, PortletKeys.DOCUMENT_LIBRARY);
 
 		if (plid != LayoutConstants.DEFAULT_PLID) {
 			return plid;
