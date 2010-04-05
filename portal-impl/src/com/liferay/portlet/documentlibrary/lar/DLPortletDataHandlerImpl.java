@@ -80,11 +80,12 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			return;
 		}
 
-		DLFileVersion dlfv = DLFileVersionLocalServiceUtil.getFileVersion(
-			context.getGroupId(), fileEntry.getFolderId(), fileEntry.getName(),
-			fileEntry.getVersion());
+		DLFileVersion fileVersion =
+			DLFileVersionLocalServiceUtil.getFileVersion(
+				context.getGroupId(), fileEntry.getFolderId(),
+				fileEntry.getName(), fileEntry.getVersion());
 
-		if (dlfv.getStatus() != StatusConstants.APPROVED) {
+		if (fileVersion.getStatus() != StatusConstants.APPROVED) {
 			return;
 		}
 
