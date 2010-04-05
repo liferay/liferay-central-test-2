@@ -31,7 +31,7 @@ if (group.isOrganization()) {
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
-portletURL.setParameter("struts_action", "/communties/view_teams");
+portletURL.setParameter("struts_action", "/communities/view_teams");
 portletURL.setParameter("groupId", String.valueOf(groupId));
 
 pageContext.setAttribute("portletURL", portletURL);
