@@ -43,6 +43,9 @@
 				<entry key="com.liferay.portal.language.LanguageResources">
 					<bean class="com.liferay.portal.cache.key.HashCodeCacheKeyGenerator" />
 				</entry>
+				<entry key="com.liferay.portal.servlet.ComboServlet">
+					<bean class="com.liferay.portal.cache.key.JavaMD5CacheKeyGenerator" />
+				</entry>
 			</map>
 		</property>
 		<property name="defaultCacheKeyGenerator">
