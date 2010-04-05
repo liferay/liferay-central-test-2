@@ -286,7 +286,7 @@ portletURL.setParameter("proposalId", String.valueOf(proposalId));
 			<c:if test="<%= ((review.getStage() == workflowStages) && GroupPermissionUtil.contains(permissionChecker, groupId, ActionKeys.PUBLISH_STAGING)) || GroupPermissionUtil.contains(permissionChecker, groupId, ActionKeys.MANAGE_STAGING) %>">
 
 				<%
-				String taglibPublishToLiveURL = "Liferay.LayoutExporter.publishToLive({url: '" + publishToLiveURL.toString() + "', title: '" + UnicodeLanguageUtil.get(pageContext, "publish-to-live") + "'});";
+				String taglibPublishToLiveURL = "Liferay.LayoutExporter.publishToLive({title: '" + UnicodeLanguageUtil.get(pageContext, "publish-to-live") + "', url: '" + publishToLiveURL.toString() + "'});";
 				%>
 
 				<aui:button onClick="<%= taglibPublishToLiveURL %>" value="publish-to-live" />
@@ -312,7 +312,7 @@ portletURL.setParameter("proposalId", String.valueOf(proposalId));
 		<c:when test="<%= (review == null) && GroupPermissionUtil.contains(permissionChecker, groupId, ActionKeys.MANAGE_STAGING) %>">
 
 			<%
-			String taglibPublishToLiveURL = "Liferay.LayoutExporter.publishToLive({url: '" + publishToLiveURL.toString() + "', title: '" + UnicodeLanguageUtil.get(pageContext, "publish-to-live") + "'});";
+			String taglibPublishToLiveURL = "Liferay.LayoutExporter.publishToLive({title: '" + UnicodeLanguageUtil.get(pageContext, "publish-to-live") + "', url: '" + publishToLiveURL.toString() + "'});";
 			%>
 
 			<aui:button onClick="<%= taglibPublishToLiveURL %>" value="publish-to-live" />

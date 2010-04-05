@@ -117,13 +117,13 @@ publishToRemoteURL.setParameter("localPublishing", "0");
 					</c:if>
 
 					<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.MANAGE_STAGING) %>">
-						<input type="button" value="<liferay-ui:message key="publish-to-remote" />" onClick="Liferay.LayoutExporter.publishToLive({url: '<%= publishToRemoteURL %>', messageId: 'publish-to-remote', title: '<%= UnicodeLanguageUtil.get(pageContext, "publish-to-remote") %>'});" />
+						<input type="button" value="<liferay-ui:message key="publish-to-remote" />" onClick="Liferay.LayoutExporter.publishToLive({messageId: 'publish-to-remote', title: '<%= UnicodeLanguageUtil.get(pageContext, "publish-to-remote") %>', url: '<%= publishToRemoteURL %>'});" />
 					</c:if>
 				</c:when>
 				<c:otherwise>
-					<input type="button" value="<liferay-ui:message key="publish-to-live" />" onClick="Liferay.LayoutExporter.publishToLive({url: '<%= publishToLiveURL %>', messageId: 'publish-to-live', title: '<%= UnicodeLanguageUtil.get(pageContext, "publish-to-live") %>'});" />
+					<input type="button" value="<liferay-ui:message key="publish-to-live" />" onClick="Liferay.LayoutExporter.publishToLive({messageId: 'publish-to-live', title: '<%= UnicodeLanguageUtil.get(pageContext, "publish-to-live") %>', url: '<%= publishToLiveURL %>'});" />
 
-					<input type="button" value="<liferay-ui:message key="publish-to-remote" />" onClick="Liferay.LayoutExporter.publishToLive({url: '<%= publishToRemoteURL %>', messageId: 'publish-to-remote', title: '<%= UnicodeLanguageUtil.get(pageContext, "publish-to-remote") %>'});" />
+					<input type="button" value="<liferay-ui:message key="publish-to-remote" />" onClick="Liferay.LayoutExporter.publishToLive({messageId: 'publish-to-remote', title: '<%= UnicodeLanguageUtil.get(pageContext, "publish-to-remote") %>', url: '<%= publishToRemoteURL %>'});" />
 				</c:otherwise>
 			</c:choose>
 		</c:if>
@@ -135,7 +135,7 @@ publishToRemoteURL.setParameter("localPublishing", "0");
 			<portlet:param name="groupId" value="<%= String.valueOf(liveGroupId) %>" />
 		</portlet:renderURL>
 
-		<input type="button" value="<liferay-ui:message key="copy-from-live" />" onClick="Liferay.LayoutExporter.publishToLive({url: '<%= importLayoutsURL %>', messageId: 'copy-from-live', title: '<%= UnicodeLanguageUtil.get(pageContext, "copy-from-live") %>'});" />
+		<input type="button" value="<liferay-ui:message key="copy-from-live" />" onClick="Liferay.LayoutExporter.publishToLive({messageId: 'copy-from-live', title: '<%= UnicodeLanguageUtil.get(pageContext, "copy-from-live") %>', url: '<%= importLayoutsURL %>'});" />
 
 		<br /><br />
 	</c:when>
@@ -144,7 +144,7 @@ publishToRemoteURL.setParameter("localPublishing", "0");
 			<input type="button" value="<liferay-ui:message key="view-pages" />" onClick="var liveGroupWindow = window.open('<%= viewPagesURL %>'); void(''); liveGroupWindow.focus();" />
 
 			<c:if test="<%= !selGroup.isLayoutSetPrototype() && GroupPermissionUtil.contains(permissionChecker, groupId, ActionKeys.PUBLISH_TO_REMOTE) %>">
-				<input type="button" value="<liferay-ui:message key="publish-to-remote" />" onClick="Liferay.LayoutExporter.publishToLive({url: '<%= publishToRemoteURL %>', messageId: 'publish-to-remote', title: '<%= UnicodeLanguageUtil.get(pageContext, "publish-to-remote") %>'});" />
+				<input type="button" value="<liferay-ui:message key="publish-to-remote" />" onClick="Liferay.LayoutExporter.publishToLive({messageId: 'publish-to-remote', title: '<%= UnicodeLanguageUtil.get(pageContext, "publish-to-remote") %>', url: '<%= publishToRemoteURL %>'});" />
 			</c:if>
 
 			<br /><br />
