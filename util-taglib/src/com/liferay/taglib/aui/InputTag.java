@@ -137,6 +137,10 @@ public class InputTag extends IncludeTag {
 		return _PAGE;
 	}
 
+	protected boolean isCleanUpSetAttributes() {
+		return _CLEAN_UP_SET_ATTRIBUTES;
+	}
+
 	protected void setAttributes(HttpServletRequest request) {
 		Object bean = _bean;
 
@@ -199,6 +203,8 @@ public class InputTag extends IncludeTag {
 		request.setAttribute("aui:input:type", _type);
 		request.setAttribute("aui:input:value", _value);
 	}
+
+	private static final boolean _CLEAN_UP_SET_ATTRIBUTES = true;
 
 	private static final String _PAGE = "/html/taglib/aui/input/page.jsp";
 
