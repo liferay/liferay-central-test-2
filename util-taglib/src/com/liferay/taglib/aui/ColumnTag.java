@@ -58,6 +58,10 @@ public class ColumnTag extends IncludeTag {
 		return _START_PAGE;
 	}
 
+	protected boolean isCleanUpSetAttributes() {
+		return _CLEAN_UP_SET_ATTRIBUTES;
+	}
+
 	protected void setAttributes(HttpServletRequest request) {
 		request.setAttribute(
 			"aui:column:columnWidth", String.valueOf(_columnWidth));
@@ -67,6 +71,8 @@ public class ColumnTag extends IncludeTag {
 		request.setAttribute("aui:column:first", String.valueOf(_first));
 		request.setAttribute("aui:column:last", String.valueOf(_last));
 	}
+
+	private static final boolean _CLEAN_UP_SET_ATTRIBUTES = true;
 
 	private static final String _END_PAGE =
 		"/html/taglib/aui/column/end.jsp";

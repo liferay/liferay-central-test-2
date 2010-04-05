@@ -79,6 +79,10 @@ public class FieldWrapperTag extends IncludeTag {
 		return _START_PAGE;
 	}
 
+	protected boolean isCleanUpSetAttributes() {
+		return _CLEAN_UP_SET_ATTRIBUTES;
+	}
+
 	protected void setAttributes(HttpServletRequest request) {
 		String label = _label;
 
@@ -98,6 +102,8 @@ public class FieldWrapperTag extends IncludeTag {
 		request.setAttribute("aui:field-wrapper:last", String.valueOf(_last));
 		request.setAttribute("aui:field-wrapper:name", _name);
 	}
+
+	private static final boolean _CLEAN_UP_SET_ATTRIBUTES = true;
 
 	private static final String _END_PAGE =
 		"/html/taglib/aui/field_wrapper/end.jsp";

@@ -124,6 +124,10 @@ public class SelectTag extends IncludeTag {
 		return _START_PAGE;
 	}
 
+	protected boolean isCleanUpSetAttributes() {
+		return _CLEAN_UP_SET_ATTRIBUTES;
+	}
+
 	protected void setAttributes(HttpServletRequest request) {
 		Object bean = _bean;
 
@@ -166,6 +170,8 @@ public class SelectTag extends IncludeTag {
 		request.setAttribute("aui:select:suffix", _suffix);
 		request.setAttribute("aui:select:title", _title);
 	}
+
+	private static final boolean _CLEAN_UP_SET_ATTRIBUTES = true;
 
 	private static final String _END_PAGE = "/html/taglib/aui/select/end.jsp";
 

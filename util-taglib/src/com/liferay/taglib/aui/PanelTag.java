@@ -77,6 +77,10 @@ public class PanelTag extends IncludeTag {
 		return _START_PAGE;
 	}
 
+	protected boolean isCleanUpSetAttributes() {
+		return _CLEAN_UP_SET_ATTRIBUTES;
+	}
+
 	protected void setAttributes(HttpServletRequest request) {
 		String id = _id;
 
@@ -90,6 +94,8 @@ public class PanelTag extends IncludeTag {
 		request.setAttribute("aui:panel:label", _label);
 		request.setAttribute("aui:panel:toolTags", _toolTags);
 	}
+
+	private static final boolean _CLEAN_UP_SET_ATTRIBUTES = true;
 
 	private static final String _END_PAGE = "/html/taglib/aui/panel/end.jsp";
 

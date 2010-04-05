@@ -59,6 +59,10 @@ public class OptionTag extends IncludeTag {
 		return _START_PAGE;
 	}
 
+	protected boolean isCleanUpSetAttributes() {
+		return _CLEAN_UP_SET_ATTRIBUTES;
+	}
+
 	protected void setAttributes(HttpServletRequest request) {
 		String value = _value;
 
@@ -74,6 +78,8 @@ public class OptionTag extends IncludeTag {
 			"aui:option:selected", String.valueOf(_selected));
 		request.setAttribute("aui:option:value", value);
 	}
+
+	private static final boolean _CLEAN_UP_SET_ATTRIBUTES = true;
 
 	private static final String _END_PAGE = "/html/taglib/aui/option/end.jsp";
 

@@ -53,6 +53,10 @@ public class FieldsetTag extends IncludeTag {
 		return _START_PAGE;
 	}
 
+	protected boolean isCleanUpSetAttributes() {
+		return _CLEAN_UP_SET_ATTRIBUTES;
+	}
+
 	protected void setAttributes(HttpServletRequest request) {
 		request.setAttribute("aui:fieldset:column", String.valueOf(_column));
 		request.setAttribute("aui:fieldset:cssClass", _cssClass);
@@ -60,6 +64,8 @@ public class FieldsetTag extends IncludeTag {
 			"aui:fieldset:dynamicAttributes", getDynamicAttributes());
 		request.setAttribute("aui:fieldset:label", _label);
 	}
+
+	private static final boolean _CLEAN_UP_SET_ATTRIBUTES = true;
 
 	private static final String _END_PAGE =
 		"/html/taglib/aui/fieldset/end.jsp";

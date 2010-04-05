@@ -51,6 +51,12 @@ public class LegendTag extends IncludeTag {
 		return _PAGE;
 	}
 
+	protected boolean isCleanUpSetAttributes() {
+		return _CLEAN_UP_SET_ATTRIBUTES;
+	}
+
+	private static final boolean _CLEAN_UP_SET_ATTRIBUTES = true;
+
 	private static final String _PAGE = "/html/taglib/aui/legend/page.jsp";
 
 	private String _cssClass;

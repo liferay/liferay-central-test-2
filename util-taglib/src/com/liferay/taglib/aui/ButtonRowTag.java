@@ -43,11 +43,17 @@ public class ButtonRowTag extends IncludeTag {
 		return _START_PAGE;
 	}
 
+	protected boolean isCleanUpSetAttributes() {
+		return _CLEAN_UP_SET_ATTRIBUTES;
+	}
+
 	protected void setAttributes(HttpServletRequest request) {
 		request.setAttribute("aui:button-row:cssClass", _cssClass);
 		request.setAttribute(
 			"aui:button-row:dynamicAttributes", getDynamicAttributes());
 	}
+
+	private static final boolean _CLEAN_UP_SET_ATTRIBUTES = true;
 
 	private static final String _END_PAGE =
 		"/html/taglib/aui/button_row/end.jsp";

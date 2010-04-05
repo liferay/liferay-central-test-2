@@ -68,6 +68,10 @@ public class ATag extends IncludeTag {
 		return _START_PAGE;
 	}
 
+	protected boolean isCleanUpSetAttributes() {
+		return _CLEAN_UP_SET_ATTRIBUTES;
+	}
+
 	protected void setAttributes(HttpServletRequest request) {
 		request.setAttribute("aui:a:cssClass", _cssClass);
 		request.setAttribute("aui:a:dynamicAttributes", getDynamicAttributes());
@@ -77,6 +81,8 @@ public class ATag extends IncludeTag {
 		request.setAttribute("aui:a:lang", _lang);
 		request.setAttribute("aui:a:target", _target);
 	}
+
+	private static final boolean _CLEAN_UP_SET_ATTRIBUTES = true;
 
 	private static final String _END_PAGE =
 		"/html/taglib/aui/a/end.jsp";

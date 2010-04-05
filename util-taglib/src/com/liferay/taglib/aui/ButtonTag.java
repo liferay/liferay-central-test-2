@@ -65,6 +65,10 @@ public class ButtonTag extends IncludeTag {
 		return _PAGE;
 	}
 
+	protected boolean isCleanUpSetAttributes() {
+		return _CLEAN_UP_SET_ATTRIBUTES;
+	}
+
 	protected void setAttributes(HttpServletRequest request) {
 		String value = _value;
 
@@ -89,6 +93,8 @@ public class ButtonTag extends IncludeTag {
 		request.setAttribute("aui:button:type", _type);
 		request.setAttribute("aui:button:value", value);
 	}
+
+	private static final boolean _CLEAN_UP_SET_ATTRIBUTES = true;
 
 	private static final String _PAGE = "/html/taglib/aui/button/page.jsp";
 
