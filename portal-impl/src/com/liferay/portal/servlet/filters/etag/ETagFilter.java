@@ -47,19 +47,18 @@ public class ETagFilter extends BasePortalFilter {
 			processFilter(
 				ETagFilter.class, request, stringResponse, filterChain);
 
-			CacheResponseData cacheResponseData =
-				new CacheResponseData(stringResponse);
+			CacheResponseData cacheResponseData = new CacheResponseData(
+				stringResponse);
 
-			if (!ETagUtil.processETag(request, response,
-				cacheResponseData.getContent(),
-				cacheResponseData.getContentLength())) {
+			if (!ETagUtil.processETag(
+					request, response, cacheResponseData.getContent(),
+					cacheResponseData.getContentLength())) {
 
 				CacheResponseUtil.write(response, cacheResponseData);
 			}
 		}
 		else {
-			processFilter(
-				ETagFilter.class, request, response, filterChain);
+			processFilter(ETagFilter.class, request, response, filterChain);
 		}
 	}
 

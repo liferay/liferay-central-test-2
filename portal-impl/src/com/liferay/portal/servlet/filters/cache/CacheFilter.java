@@ -341,6 +341,7 @@ public class CacheFilter extends BasePortalFilter {
 
 	protected boolean isCacheableResponse(
 		StringServletResponse stringResponse) {
+
 		if (stringResponse.getStatus() == HttpServletResponse.SC_OK) {
 			return true;
 		}

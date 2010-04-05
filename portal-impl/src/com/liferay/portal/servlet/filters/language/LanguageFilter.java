@@ -43,8 +43,8 @@ public class LanguageFilter extends BasePortalFilter {
 			FilterChain filterChain)
 		throws Exception {
 
-		StringServletResponse stringResponse =
-			new StringServletResponse(response);
+		StringServletResponse stringResponse = new StringServletResponse(
+			response);
 
 		processFilter(
 			LanguageFilter.class, request, stringResponse, filterChain);
@@ -65,6 +65,7 @@ public class LanguageFilter extends BasePortalFilter {
 		Locale locale = LocaleUtil.fromLanguageId(languageId);
 
 		String content = stringResponse.getString();
+
 		Matcher matcher = _pattern.matcher(content);
 
 		while (matcher.find()) {

@@ -32,18 +32,20 @@ import java.util.Map;
 public class CacheResponseData implements Serializable {
 
 	public CacheResponseData(StringServletResponse stringResponse) {
-
 		if (stringResponse.isCalledGetOutputStream()) {
 			UnsyncByteArrayOutputStream unsyncByteArrayOutputStream =
 				stringResponse.getUnsyncByteArrayOutputStream();
+
 			_content = unsyncByteArrayOutputStream.unsafeGetByteArray();
 			_contentLength = unsyncByteArrayOutputStream.size();
 		}
 		else {
 			String content = stringResponse.getString();
+
 			_content = content.getBytes();
 			_contentLength = content.length();
 		}
+
 		_contentType = stringResponse.getContentType();
 		_headers = stringResponse.getHeaders();
 	}
