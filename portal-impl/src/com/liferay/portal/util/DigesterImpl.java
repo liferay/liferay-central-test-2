@@ -38,12 +38,12 @@ public class DigesterImpl implements Digester {
 	}
 
 	public String digest(String algorithm, String text) {
-		MessageDigest digester = null;
+		MessageDigest messageDigest = null;
 
 		try{
-			digester = MessageDigest.getInstance(algorithm);
+			messageDigest = MessageDigest.getInstance(algorithm);
 
-			digester.update(text.getBytes(Digester.ENCODING));
+			messageDigest.update(text.getBytes(Digester.ENCODING));
 		}
 		catch (NoSuchAlgorithmException nsae) {
 			_log.error(nsae, nsae);
@@ -52,7 +52,7 @@ public class DigesterImpl implements Digester {
 			_log.error(uee, uee);
 		}
 
-		byte[] bytes = digester.digest();
+		byte[] bytes = messageDigest.digest();
 
 		if (_BASE_64) {
 			return Base64.encode(bytes);
