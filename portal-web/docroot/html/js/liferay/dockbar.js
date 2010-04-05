@@ -213,7 +213,7 @@ AUI().use(
 												uri: themeDisplay.getPathMain() + '/layout_configuration/templates'
 											},
 											name: 'manageLayouts',
-											width: '650px'
+											width: '670px'
 										}
 									);
 								}
