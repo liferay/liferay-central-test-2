@@ -131,7 +131,7 @@ public class DLFileEntryFinderImpl
 		StringBundler sb = new StringBundler(folderIds.size() * 2 - 1);
 
 		for (int i = 0; i < folderIds.size(); i++) {
-			sb.append("folderId = ? ");
+			sb.append("DLFileEntry.folderId = ? ");
 
 			if ((i + 1) != folderIds.size()) {
 				sb.append("OR ");
