@@ -21,6 +21,7 @@ import java.io.Writer;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletResponseWrapper;
+import javax.servlet.jsp.PageContext;
 
 /**
  * <a href="PipingServletResponse.java.html"><b><i>View Source</i></b></a>
@@ -57,6 +58,11 @@ public class PipingServletResponse extends HttpServletResponseWrapper {
 		super(response);
 
 		_printWriter = new PrintWriter(writer, true);
+	}
+
+	public PipingServletResponse(PageContext pageContext) {
+		this((HttpServletResponse)pageContext.getResponse(),
+			pageContext.getOut());
 	}
 
 	public ServletOutputStream getOutputStream() {

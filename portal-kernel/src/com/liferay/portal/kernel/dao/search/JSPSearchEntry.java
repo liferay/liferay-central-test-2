@@ -14,7 +14,7 @@
 
 package com.liferay.portal.kernel.dao.search;
 
-import com.liferay.portal.kernel.servlet.StringServletResponse;
+import com.liferay.portal.kernel.servlet.PipingServletResponse;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -65,12 +65,8 @@ public class JSPSearchEntry extends SearchEntry {
 			RequestDispatcher requestDispatcher =
 				_servletContext.getRequestDispatcher(_path);
 
-			StringServletResponse stringResponse = new StringServletResponse(
-				_response);
-
-			requestDispatcher.include(_request, stringResponse);
-
-			pageContext.getOut().print(stringResponse.getString());
+			requestDispatcher.include(
+				_request, new PipingServletResponse(pageContext));
 		}
 		else {
 			pageContext.include(_path);

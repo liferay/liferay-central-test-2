@@ -14,7 +14,6 @@
 
 package com.liferay.taglib.util;
 
-import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.util.servlet.DynamicServletRequest;
 
@@ -23,7 +22,6 @@ import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.tagext.BodyTagSupport;
 
 /**
@@ -128,11 +126,6 @@ public class ParamAndPropertyAncestorTagImpl
 		}
 
 		return request;
-	}
-
-	public StringServletResponse getServletResponse() {
-		return new StringServletResponse(
-			(HttpServletResponse)pageContext.getResponse());
 	}
 
 	public void setServletContext(ServletContext servletContext) {

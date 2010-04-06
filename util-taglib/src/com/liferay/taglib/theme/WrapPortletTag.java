@@ -14,6 +14,7 @@
 
 package com.liferay.taglib.theme;
 
+import com.liferay.portal.kernel.servlet.PipingServletResponse;
 import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -84,7 +85,6 @@ public class WrapPortletTag extends ParamAndPropertyAncestorTagImpl {
 		try {
 			ServletContext servletContext = getServletContext();
 			HttpServletRequest request = getServletRequest();
-			StringServletResponse stringResponse = getServletResponse();
 
 			ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 				WebKeys.THEME_DISPLAY);
@@ -99,10 +99,8 @@ public class WrapPortletTag extends ParamAndPropertyAncestorTagImpl {
 			// Page
 
 			ThemeUtil.include(
-				servletContext, request, stringResponse, pageContext, getPage(),
-				theme);
-
-			pageContext.getOut().print(stringResponse.getString());
+				servletContext, request, new PipingServletResponse(pageContext),
+				pageContext, getPage(), theme);
 
 			return EVAL_PAGE;
 		}

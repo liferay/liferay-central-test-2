@@ -18,7 +18,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.log.LogUtil;
-import com.liferay.portal.kernel.servlet.StringServletResponse;
+import com.liferay.portal.kernel.servlet.PipingServletResponse;
 import com.liferay.portal.kernel.servlet.TrackedServletRequest;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.Validator;
@@ -36,7 +36,6 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.DynamicAttributes;
 
 /**
@@ -169,18 +168,14 @@ public class IncludeTag
 	protected void include(String page) throws Exception {
 		ServletContext servletContext = getServletContext();
 		HttpServletRequest request = getServletRequest();
-		StringServletResponse stringResponse = getServletResponse();
 
 		servletContext = getServletContext(servletContext, request);
 
 		RequestDispatcher requestDispatcher =
 			servletContext.getRequestDispatcher(page);
 
-		requestDispatcher.include(request, stringResponse);
-
-		JspWriter jspWriter = pageContext.getOut();
-
-		jspWriter.print(stringResponse.getString());
+		requestDispatcher.include(
+			request, new PipingServletResponse(pageContext));
 	}
 
 	protected boolean isCleanUpSetAttributes() {

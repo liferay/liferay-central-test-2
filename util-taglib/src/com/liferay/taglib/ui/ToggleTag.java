@@ -14,7 +14,7 @@
 
 package com.liferay.taglib.ui;
 
-import com.liferay.portal.kernel.servlet.StringServletResponse;
+import com.liferay.portal.kernel.servlet.PipingServletResponse;
 import com.liferay.portal.kernel.util.DeterminateKeyGenerator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -127,14 +127,11 @@ public class ToggleTag extends IncludeTag {
 		try {
 			ServletContext servletContext = getServletContext();
 			HttpServletRequest request = getServletRequest();
-			StringServletResponse response = getServletResponse();
 
 			doTag(
 				getPage(), _id, _showImage, _hideImage, _showMessage,
 				_hideMessage, _defaultShowContent, _stateVar, servletContext,
-				request, response);
-
-			pageContext.getOut().print(response.getString());
+				request, new PipingServletResponse(pageContext));
 
 			return EVAL_PAGE;
 		}

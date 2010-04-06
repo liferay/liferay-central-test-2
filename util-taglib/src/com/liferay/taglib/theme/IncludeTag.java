@@ -14,14 +14,13 @@
 
 package com.liferay.taglib.theme;
 
-import com.liferay.portal.kernel.servlet.StringServletResponse;
+import com.liferay.portal.kernel.servlet.PipingServletResponse;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.Theme;
 import com.liferay.taglib.util.ThemeUtil;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.jsp.JspWriter;
 
 /**
  * <a href="IncludeTag.java.html"><b><i>View Source</i></b></a>
@@ -33,17 +32,12 @@ public class IncludeTag extends com.liferay.taglib.util.IncludeTag {
 	protected void include(String page) throws Exception {
 		ServletContext servletContext = getServletContext();
 		HttpServletRequest request = getServletRequest();
-		StringServletResponse stringResponse = getServletResponse();
 
 		Theme theme = (Theme)request.getAttribute(WebKeys.THEME);
 
 		ThemeUtil.include(
-			servletContext, request, stringResponse, pageContext, page,
-			theme);
-
-		JspWriter jspWriter = pageContext.getOut();
-
-		jspWriter.print(stringResponse.getString());
+			servletContext, request, new PipingServletResponse(pageContext),
+			pageContext, page, theme);
 	}
 
 }

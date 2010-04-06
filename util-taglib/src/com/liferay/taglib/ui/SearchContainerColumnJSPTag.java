@@ -16,6 +16,7 @@ package com.liferay.taglib.ui;
 
 import com.liferay.portal.kernel.dao.search.ResultRow;
 import com.liferay.portal.kernel.dao.search.SearchEntry;
+import com.liferay.portal.kernel.servlet.PipingServletResponse;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StringPool;
 
@@ -46,7 +47,7 @@ public class SearchContainerColumnJSPTag extends SearchContainerColumnTag {
 			row.addJSP(
 				index, getAlign(), getValign(), getColspan(), getPath(),
 				pageContext.getServletContext(), getServletRequest(),
-				getServletResponse());
+				new PipingServletResponse(pageContext));
 
 			return EVAL_PAGE;
 		}
