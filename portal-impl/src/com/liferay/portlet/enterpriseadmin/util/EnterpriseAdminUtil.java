@@ -180,39 +180,12 @@ public class EnterpriseAdminUtil {
 		return roleIds;
 	}
 
-	public static List<Group> filterGroups(
-			PermissionChecker permissionChecker, List<Group> groups)
-		throws PortalException, SystemException {
-
-		if (permissionChecker.isCompanyAdmin()) {
-			return groups;
-		}
-
-		List<Group> filteredGroups = ListUtil.copy(groups);
-
-		Iterator<Group> itr = filteredGroups.iterator();
-
-		while (itr.hasNext()) {
-			Group group = itr.next();
-
-			if (!GroupPermissionUtil.contains(
-					permissionChecker, group.getGroupId(),
-					ActionKeys.ASSIGN_MEMBERS)) {
-
-				itr.remove();
-			}
-		}
-
-		return filteredGroups;
-	}
-
 	public static List<Role> filterGroupRoles(
 			PermissionChecker permissionChecker, long groupId,
 			List<Role> roles)
 		throws PortalException, SystemException {
 
-		List<Role> filteredGroupRoles =
-			ListUtil.copy(roles);
+		List<Role> filteredGroupRoles = ListUtil.copy(roles);
 
 		Iterator<Role> itr = filteredGroupRoles.iterator();
 
@@ -254,6 +227,32 @@ public class EnterpriseAdminUtil {
 		}
 
 		return filteredGroupRoles;
+	}
+
+	public static List<Group> filterGroups(
+			PermissionChecker permissionChecker, List<Group> groups)
+		throws PortalException, SystemException {
+
+		if (permissionChecker.isCompanyAdmin()) {
+			return groups;
+		}
+
+		List<Group> filteredGroups = ListUtil.copy(groups);
+
+		Iterator<Group> itr = filteredGroups.iterator();
+
+		while (itr.hasNext()) {
+			Group group = itr.next();
+
+			if (!GroupPermissionUtil.contains(
+					permissionChecker, group.getGroupId(),
+					ActionKeys.ASSIGN_MEMBERS)) {
+
+				itr.remove();
+			}
+		}
+
+		return filteredGroups;
 	}
 
 	public static List<Organization> filterOrganizations(
