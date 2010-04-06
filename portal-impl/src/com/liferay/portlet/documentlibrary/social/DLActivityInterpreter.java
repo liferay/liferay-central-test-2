@@ -113,7 +113,7 @@ public class DLActivityInterpreter extends BaseSocialActivityInterpreter {
 			themeDisplay.getPortalURL() + themeDisplay.getPathMain() +
 				"/document_library/find_folder?groupId=" +
 					fileEntry.getGroupId() + "&folderId=" +
-					fileEntry.getFolderId();
+						fileEntry.getFolderId();
 
 		sb.append(wrapLink(folderLink, "go-to-folder", themeDisplay));
 
