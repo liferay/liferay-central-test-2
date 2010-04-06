@@ -17,6 +17,7 @@ package com.liferay.portal.action;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
@@ -92,7 +93,14 @@ public class LoginAction extends Action {
 		}
 
 		if (PropsValues.COMPANY_SECURITY_AUTH_REQUIRES_HTTPS) {
-			redirect = HttpUtil.protocolize(redirect, true);
+			String portalURL = PortalUtil.getPortalURL(request);
+
+			String portalURLSecure = PortalUtil.getPortalURL(request, true);
+
+			if (!portalURL.equals(portalURLSecure)) {
+				redirect = StringUtil.replaceFirst(
+					redirect, portalURL, portalURLSecure);
+			}
 		}
 
 		String loginRedirect = ParamUtil.getString(request, "redirect");
