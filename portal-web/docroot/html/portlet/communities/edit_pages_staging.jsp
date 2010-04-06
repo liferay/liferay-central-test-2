@@ -126,7 +126,7 @@ String[] workflowRoleNames = (String[])request.getAttribute("edit_pages.jsp-work
 								if (!workflowRoleName.equals(RoleConstants.COMMUNITY_MEMBER) && !workflowRoleName.equals(RoleConstants.ORGANIZATION_MEMBER)) {
 							%>
 
-									<option <%= (((i - 1) < workflowRoleNames.length) && workflowRoleNames[i - 1].equals(workflowRole.getName())) ? "selected" : "" %> value="<%= HtmlUtil.escape(workflowRole.getName()) %>"><%= HtmlUtil.escape(workflowRole.getTitle(locale)) %></option>
+									<option <%= (((i - 1) < workflowRoleNames.length) && workflowRoleNames[i - 1].equals(workflowRoleName)) ? "selected" : "" %> value="<%= HtmlUtil.escape(workflowRoleName) %>"><%= HtmlUtil.escape(workflowRole.getTitle(locale)) %></option>
 
 							<%
 								}
