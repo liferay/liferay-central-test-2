@@ -20,15 +20,10 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
@@ -46,92 +41,12 @@ public class StringServletResponse extends HttpServletResponseWrapper {
 		super(response);
 	}
 
-	public void addDateHeader(String name, long value) {
-		List<Header> values = _headers.get(name);
-
-		if (values == null) {
-			values = new ArrayList<Header>();
-
-			_headers.put(name, values);
-		}
-
-		Header header = new Header();
-
-		header.setType(Header.DATE_TYPE);
-		header.setDateValue(value);
-
-		values.add(header);
-	}
-
-	public void addHeader(String name, String value) {
-		List<Header> values = _headers.get(name);
-
-		if (values == null) {
-			values = new ArrayList<Header>();
-
-			_headers.put(name, values);
-		}
-
-		Header header = new Header();
-
-		header.setType(Header.STRING_TYPE);
-		header.setStringValue(value);
-
-		values.add(header);
-
-		if (name.equals(HttpHeaders.CONTENT_TYPE)) {
-			setContentType(value);
-		}
-	}
-
-	public void addIntHeader(String name, int value) {
-		List<Header> values = _headers.get(name);
-
-		if (values == null) {
-			values = new ArrayList<Header>();
-
-			_headers.put(name, values);
-		}
-
-		Header header = new Header();
-
-		header.setType(Header.INTEGER_TYPE);
-		header.setIntValue(value);
-
-		values.add(header);
-	}
-
 	public int getBufferSize() {
 		return _bufferSize;
 	}
 
 	public String getContentType() {
 		return _contentType;
-	}
-
-	public String getHeader(String name) {
-		List<Header> values = _headers.get(name);
-
-		if ((values == null) || values.isEmpty()) {
-			return null;
-		}
-
-		Header header = values.get(0);
-
-		return header.toString();
-	}
-
-	public Map<String, List<Header>> getHeaders() {
-		return _headers;
-	}
-	
-	public void flushBuffer() throws IOException {
-		if (_servletOutputStream != null) {
-			_unsyncByteArrayOutputStream.flush();
-		}
-		else if (_printWriter != null) {
-			_unsyncStringWriter.flush();
-		}
 	}
 
 	public ServletOutputStream getOutputStream() {
@@ -152,26 +67,22 @@ public class StringServletResponse extends HttpServletResponseWrapper {
 		if (_string != null) {
 			return _string;
 		}
-
-		if (_servletOutputStream != null) {
+		else if (_servletOutputStream != null) {
 			try {
-				_string = _unsyncByteArrayOutputStream.toString(
-					StringPool.UTF8);
+				return _unsyncByteArrayOutputStream.toString(StringPool.UTF8);
 			}
 			catch (UnsupportedEncodingException uee) {
 				_log.error(uee, uee);
 
-				_string = StringPool.BLANK;
+				return StringPool.BLANK;
 			}
 		}
 		else if (_printWriter != null) {
-			_string = _unsyncStringWriter.toString();
+			return _unsyncStringWriter.toString();
 		}
 		else {
-			_string = StringPool.BLANK;
+			return StringPool.BLANK;
 		}
-
-		return _string;
 	}
 
 	public UnsyncByteArrayOutputStream getUnsyncByteArrayOutputStream() {
@@ -212,18 +123,6 @@ public class StringServletResponse extends HttpServletResponseWrapper {
 		}
 	}
 
-	public void sendError(int status) throws IOException {
-		_status = status;
-
-		super.sendError(status);
-	}
-
-	public void sendError(int status, String msg) throws IOException {
-		_status = status;
-
-		super.sendError(status, msg);
-	}
-
 	public void setBufferSize(int bufferSize) {
 		_bufferSize = bufferSize;
 	}
@@ -234,56 +133,11 @@ public class StringServletResponse extends HttpServletResponseWrapper {
 		super.setContentType(contentType);
 	}
 
-	public void setDateHeader(String name, long value) {
-		List<Header> values = new ArrayList<Header>();
-
-		_headers.put(name, values);
-
-		Header header = new Header();
-
-		header.setType(Header.DATE_TYPE);
-		header.setDateValue(value);
-
-		values.add(header);
-	}
-
-	public void setHeader(String name, String value) {
-		List<Header> values = new ArrayList<Header>();
-
-		_headers.put(name, values);
-
-		Header header = new Header();
-
-		header.setType(Header.STRING_TYPE);
-		header.setStringValue(value);
-
-		values.add(header);
-
-		if (name.equals(HttpHeaders.CONTENT_TYPE)) {
-			setContentType(value);
-		}
-	}
-
-	public void setIntHeader(String name, int value) {
-		List<Header> values = new ArrayList<Header>();
-
-		_headers.put(name, values);
-
-		Header header = new Header();
-
-		header.setType(Header.INTEGER_TYPE);
-		header.setIntValue(value);
-
-		values.add(header);
-	}
-
 	public void setLocale(Locale locale) {
 	}
 
 	public void setStatus(int status) {
 		_status = status;
-
-		super.setStatus(_status);
 	}
 
 	public void setString(String string) {
@@ -295,8 +149,6 @@ public class StringServletResponse extends HttpServletResponseWrapper {
 
 	private int _bufferSize;
 	private String _contentType;
-	private Map<String, List<Header>> _headers =
-		new HashMap<String, List<Header>>();
 	private PrintWriter _printWriter;
 	private ServletOutputStream _servletOutputStream;
 	private int _status = SC_OK;

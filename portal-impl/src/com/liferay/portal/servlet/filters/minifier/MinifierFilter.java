@@ -19,7 +19,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.BrowserSniffer;
 import com.liferay.portal.kernel.servlet.ServletContextUtil;
-import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.FileUtil;
@@ -37,6 +36,7 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.util.SystemProperties;
 import com.liferay.util.servlet.ServletResponseUtil;
+import com.liferay.util.servlet.filters.CacheResponse;
 import com.liferay.util.servlet.filters.CacheResponseUtil;
 
 import java.io.File;
@@ -341,18 +341,20 @@ public class MinifierFilter extends BasePortalFilter {
 					_log.info("Minifying JSP " + file);
 				}
 
-				StringServletResponse stringResponse =
-					new StringServletResponse(response);
+				CacheResponse cacheResponse = new CacheResponse(
+					response, StringPool.UTF8);
 
 				processFilter(
-					MinifierFilter.class, request, stringResponse, filterChain);
+					MinifierFilter.class, request, cacheResponse, filterChain);
 
 				CacheResponseUtil.addHeaders(
-					response, stringResponse.getHeaders());
+					response, cacheResponse.getHeaders());
 
-				response.setContentType(stringResponse.getContentType());
+				response.setContentType(cacheResponse.getContentType());
 
-				minifiedContent = stringResponse.getString();
+				minifiedContent = new String(
+					cacheResponse.unsafeGetData(), 0,
+					cacheResponse.getContentLength(), StringPool.UTF8);
 
 				if (minifierType.equals("css")) {
 					minifiedContent = minifyCss(request, minifiedContent);
@@ -362,7 +364,7 @@ public class MinifierFilter extends BasePortalFilter {
 				}
 
 				FileUtil.write(
-					cacheContentTypeFile, stringResponse.getContentType());
+					cacheContentTypeFile, cacheResponse.getContentType());
 			}
 			else {
 				return null;
