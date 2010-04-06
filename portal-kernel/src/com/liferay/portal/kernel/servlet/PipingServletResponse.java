@@ -61,7 +61,8 @@ public class PipingServletResponse extends HttpServletResponseWrapper {
 	}
 
 	public PipingServletResponse(PageContext pageContext) {
-		this((HttpServletResponse)pageContext.getResponse(),
+		this(
+			(HttpServletResponse)pageContext.getResponse(),
 			pageContext.getOut());
 	}
 
