@@ -183,6 +183,23 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			UserModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countByC_EA",
 			new String[] { Long.class.getName(), String.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_C_A = new FinderPath(UserModelImpl.ENTITY_CACHE_ENABLED,
+			UserModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByC_A",
+			new String[] { Long.class.getName(), Boolean.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_C_A = new FinderPath(UserModelImpl.ENTITY_CACHE_ENABLED,
+			UserModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByC_A",
+			new String[] {
+				Long.class.getName(), Boolean.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_C_A = new FinderPath(UserModelImpl.ENTITY_CACHE_ENABLED,
+			UserModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByC_A",
+			new String[] { Long.class.getName(), Boolean.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(UserModelImpl.ENTITY_CACHE_ENABLED,
 			UserModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findAll", new String[0]);
@@ -2249,6 +2266,252 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 		}
 	}
 
+	public List<User> findByC_A(long companyId, boolean active)
+		throws SystemException {
+		Object[] finderArgs = new Object[] {
+				new Long(companyId), Boolean.valueOf(active)
+			};
+
+		List<User> list = (List<User>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_C_A,
+				finderArgs, this);
+
+		if (list == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBundler query = new StringBundler(3);
+
+				query.append(_SQL_SELECT_USER_WHERE);
+
+				query.append(_FINDER_COLUMN_C_A_COMPANYID_2);
+
+				query.append(_FINDER_COLUMN_C_A_ACTIVE_2);
+
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(companyId);
+
+				qPos.add(active);
+
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<User>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_A, finderArgs,
+					list);
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	public List<User> findByC_A(long companyId, boolean active, int start,
+		int end) throws SystemException {
+		return findByC_A(companyId, active, start, end, null);
+	}
+
+	public List<User> findByC_A(long companyId, boolean active, int start,
+		int end, OrderByComparator orderByComparator) throws SystemException {
+		Object[] finderArgs = new Object[] {
+				new Long(companyId), Boolean.valueOf(active),
+				
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
+			};
+
+		List<User> list = (List<User>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_C_A,
+				finderArgs, this);
+
+		if (list == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBundler query = null;
+
+				if (orderByComparator != null) {
+					query = new StringBundler(4 +
+							(orderByComparator.getOrderByFields().length * 3));
+				}
+				else {
+					query = new StringBundler(3);
+				}
+
+				query.append(_SQL_SELECT_USER_WHERE);
+
+				query.append(_FINDER_COLUMN_C_A_COMPANYID_2);
+
+				query.append(_FINDER_COLUMN_C_A_ACTIVE_2);
+
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
+				}
+
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(companyId);
+
+				qPos.add(active);
+
+				list = (List<User>)QueryUtil.list(q, getDialect(), start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<User>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_C_A,
+					finderArgs, list);
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	public User findByC_A_First(long companyId, boolean active,
+		OrderByComparator orderByComparator)
+		throws NoSuchUserException, SystemException {
+		List<User> list = findByC_A(companyId, active, 0, 1, orderByComparator);
+
+		if (list.isEmpty()) {
+			StringBundler msg = new StringBundler(6);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("companyId=");
+			msg.append(companyId);
+
+			msg.append(", active=");
+			msg.append(active);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchUserException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public User findByC_A_Last(long companyId, boolean active,
+		OrderByComparator orderByComparator)
+		throws NoSuchUserException, SystemException {
+		int count = countByC_A(companyId, active);
+
+		List<User> list = findByC_A(companyId, active, count - 1, count,
+				orderByComparator);
+
+		if (list.isEmpty()) {
+			StringBundler msg = new StringBundler(6);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("companyId=");
+			msg.append(companyId);
+
+			msg.append(", active=");
+			msg.append(active);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchUserException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public User[] findByC_A_PrevAndNext(long userId, long companyId,
+		boolean active, OrderByComparator orderByComparator)
+		throws NoSuchUserException, SystemException {
+		User user = findByPrimaryKey(userId);
+
+		int count = countByC_A(companyId, active);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(4 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(3);
+			}
+
+			query.append(_SQL_SELECT_USER_WHERE);
+
+			query.append(_FINDER_COLUMN_C_A_COMPANYID_2);
+
+			query.append(_FINDER_COLUMN_C_A_ACTIVE_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			String sql = query.toString();
+
+			Query q = session.createQuery(sql);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(companyId);
+
+			qPos.add(active);
+
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
+					orderByComparator, user);
+
+			User[] array = new UserImpl[3];
+
+			array[0] = (User)objArray[0];
+			array[1] = (User)objArray[1];
+			array[2] = (User)objArray[2];
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public List<User> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -2388,6 +2651,13 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 		User user = findByC_EA(companyId, emailAddress);
 
 		remove(user);
+	}
+
+	public void removeByC_A(long companyId, boolean active)
+		throws SystemException {
+		for (User user : findByC_A(companyId, active)) {
+			remove(user);
+		}
 	}
 
 	public void removeAll() throws SystemException {
@@ -2931,6 +3201,59 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 
 				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_EA,
 					finderArgs, count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	public int countByC_A(long companyId, boolean active)
+		throws SystemException {
+		Object[] finderArgs = new Object[] {
+				new Long(companyId), Boolean.valueOf(active)
+			};
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_A,
+				finderArgs, this);
+
+		if (count == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBundler query = new StringBundler(3);
+
+				query.append(_SQL_COUNT_USER_WHERE);
+
+				query.append(_FINDER_COLUMN_C_A_COMPANYID_2);
+
+				query.append(_FINDER_COLUMN_C_A_ACTIVE_2);
+
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(companyId);
+
+				qPos.add(active);
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_A, finderArgs,
+					count);
 
 				closeSession(session);
 			}
@@ -6258,6 +6581,8 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 	private static final String _FINDER_COLUMN_C_EA_EMAILADDRESS_1 = "user.emailAddress IS NULL";
 	private static final String _FINDER_COLUMN_C_EA_EMAILADDRESS_2 = "user.emailAddress = ?";
 	private static final String _FINDER_COLUMN_C_EA_EMAILADDRESS_3 = "(user.emailAddress IS NULL OR user.emailAddress = ?)";
+	private static final String _FINDER_COLUMN_C_A_COMPANYID_2 = "user.companyId = ? AND ";
+	private static final String _FINDER_COLUMN_C_A_ACTIVE_2 = "user.active = ?";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "user.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No User exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No User exists with the key {";

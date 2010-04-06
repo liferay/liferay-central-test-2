@@ -225,6 +225,37 @@ public interface UserPersistence extends BasePersistence<User> {
 		java.lang.String emailAddress, boolean retrieveFromCache)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	public java.util.List<com.liferay.portal.model.User> findByC_A(
+		long companyId, boolean active)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portal.model.User> findByC_A(
+		long companyId, boolean active, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portal.model.User> findByC_A(
+		long companyId, boolean active, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.portal.model.User findByC_A_First(long companyId,
+		boolean active,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.NoSuchUserException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.portal.model.User findByC_A_Last(long companyId,
+		boolean active,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.NoSuchUserException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.portal.model.User[] findByC_A_PrevAndNext(long userId,
+		long companyId, boolean active,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.NoSuchUserException,
+			com.liferay.portal.kernel.exception.SystemException;
+
 	public java.util.List<com.liferay.portal.model.User> findAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
 
@@ -273,6 +304,9 @@ public interface UserPersistence extends BasePersistence<User> {
 		throws com.liferay.portal.NoSuchUserException,
 			com.liferay.portal.kernel.exception.SystemException;
 
+	public void removeByC_A(long companyId, boolean active)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public void removeAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
 
@@ -304,6 +338,9 @@ public interface UserPersistence extends BasePersistence<User> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countByC_EA(long companyId, java.lang.String emailAddress)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public int countByC_A(long companyId, boolean active)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countAll()

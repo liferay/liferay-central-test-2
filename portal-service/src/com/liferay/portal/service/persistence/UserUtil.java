@@ -383,6 +383,54 @@ public class UserUtil {
 				   .fetchByC_EA(companyId, emailAddress, retrieveFromCache);
 	}
 
+	public static java.util.List<com.liferay.portal.model.User> findByC_A(
+		long companyId, boolean active)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().findByC_A(companyId, active);
+	}
+
+	public static java.util.List<com.liferay.portal.model.User> findByC_A(
+		long companyId, boolean active, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().findByC_A(companyId, active, start, end);
+	}
+
+	public static java.util.List<com.liferay.portal.model.User> findByC_A(
+		long companyId, boolean active, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByC_A(companyId, active, start, end, orderByComparator);
+	}
+
+	public static com.liferay.portal.model.User findByC_A_First(
+		long companyId, boolean active,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.NoSuchUserException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByC_A_First(companyId, active, orderByComparator);
+	}
+
+	public static com.liferay.portal.model.User findByC_A_Last(long companyId,
+		boolean active,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.NoSuchUserException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByC_A_Last(companyId, active, orderByComparator);
+	}
+
+	public static com.liferay.portal.model.User[] findByC_A_PrevAndNext(
+		long userId, long companyId, boolean active,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.NoSuchUserException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByC_A_PrevAndNext(userId, companyId, active,
+			orderByComparator);
+	}
+
 	public static java.util.List<com.liferay.portal.model.User> findAll()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll();
@@ -459,6 +507,11 @@ public class UserUtil {
 		getPersistence().removeByC_EA(companyId, emailAddress);
 	}
 
+	public static void removeByC_A(long companyId, boolean active)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getPersistence().removeByC_A(companyId, active);
+	}
+
 	public static void removeAll()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeAll();
@@ -512,6 +565,11 @@ public class UserUtil {
 	public static int countByC_EA(long companyId, java.lang.String emailAddress)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByC_EA(companyId, emailAddress);
+	}
+
+	public static int countByC_A(long companyId, boolean active)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().countByC_A(companyId, active);
 	}
 
 	public static int countAll()
