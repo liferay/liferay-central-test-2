@@ -33,6 +33,7 @@
 <%@ include file="/html/portal/css/portal/layout_templates.jspf" %>
 <%@ include file="/html/portal/css/portal/portlet_item.jspf" %>
 <%@ include file="/html/portal/css/portal/portlet_css_editor.jspf" %>
+<%@ include file="/html/portal/css/portal/portlet_toolbar.jspf" %>
 <%@ include file="/html/portal/css/portal/toolbar.jspf" %>
 <%@ include file="/html/portal/css/portal/tree.jspf" %>
 <%@ include file="/html/portal/css/portal/uploader.jspf" %>
