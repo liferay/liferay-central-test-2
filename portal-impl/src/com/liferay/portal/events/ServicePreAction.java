@@ -1656,18 +1656,13 @@ public class ServicePreAction extends Action {
 						permissionChecker, scopeGroupId,
 						ActionKeys.APPROVE_PROPOSAL);
 
-				boolean hasManageStagingPermission =
-					GroupPermissionUtil.contains(
-						permissionChecker, scopeGroupId,
-						ActionKeys.MANAGE_STAGING);
-
 				boolean hasPublishStagingPermission =
 					GroupPermissionUtil.contains(
 						permissionChecker, scopeGroupId,
 						ActionKeys.PUBLISH_STAGING);
 
 				if (hasApproveProposalPermission ||
-					hasManageStagingPermission || hasPublishStagingPermission) {
+					hasManageLayoutsPermission || hasPublishStagingPermission) {
 
 					themeDisplay.setShowStagingIcon(true);
 				}
