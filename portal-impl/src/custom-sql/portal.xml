@@ -11,7 +11,8 @@
 			WHERE
 				[$WHERE$]
 				(Group_.groupId = ?) AND
-				(Group_.liveGroupId = 0)
+				(Group_.liveGroupId = 0) AND
+				(Group_.type_ != 4)
 		]]>
 	</sql>
 	<sql id="com.liferay.portal.service.persistence.GroupFinder.countByC_N_D">
@@ -27,6 +28,7 @@
 				(Group_.classNameId = [$CLASS_NAME_ID_COM.LIFERAY.PORTAL.MODEL.GROUP$]) AND
 				(Group_.liveGroupId = 0) AND
 				(Group_.name != 'Control Panel') AND
+				(Group_.type_ != 4) AND
 				(lower(Group_.name) LIKE ? OR ? IS NULL) AND
 				(lower(Group_.description) LIKE ? OR ? IS NULL)
 		]]>
@@ -38,7 +40,8 @@
 			FROM
 				Group_
 			WHERE
-				(friendlyURL = '' OR friendlyURL IS NULL)
+				(friendlyURL = '' OR friendlyURL IS NULL) AND
+				(Group_.type_ != 4)
 		]]>
 	</sql>
 	<sql id="com.liferay.portal.service.persistence.GroupFinder.findByNoLayouts">
@@ -52,6 +55,7 @@
 					LayoutSet.groupId = Group_.groupId
 			WHERE
 				(Group_.classNameId = ?) AND
+				(Group_.type_ != 4) AND
 				(LayoutSet.privateLayout = ?) AND
 				(LayoutSet.pageCount = 0)
 		]]>
@@ -67,7 +71,8 @@
 					(Group_.companyId = ?) AND
 					(
 						(Group_.name = 'Control Panel') OR
-						(Group_.name = 'Guest')
+						(Group_.name = 'Guest') OR
+						(Group_.type_ = 4)
 					)
 			)
 		]]>
@@ -81,6 +86,7 @@
 			WHERE
 				(Group_.companyId = ?) AND
 				(Group_.liveGroupId = 0) AND
+				(Group_.type_ != 4) AND
 				(lower(Group_.name) = ?)
 		]]>
 	</sql>
@@ -97,6 +103,7 @@
 				(Group_.classNameId = [$CLASS_NAME_ID_COM.LIFERAY.PORTAL.MODEL.GROUP$]) AND
 				(Group_.liveGroupId = 0) AND
 				(Group_.name != 'Control Panel') AND
+				(Group_.type_ != 4) AND
 				(lower(Group_.name) LIKE ? OR ? IS NULL) AND
 				(lower(Group_.description) LIKE ? OR ? IS NULL)
 		]]>

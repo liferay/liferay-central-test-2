@@ -47,6 +47,10 @@ public class GroupConstants {
 
 	public static final String TYPE_COMMUNITY_RESTRICTED_LABEL = "restricted";
 
+	public static final int TYPE_COMMUNITY_SYSTEM = 4;
+
+	public static final String TYPE_COMMUNITY_SYSTEM_LABEL = "system";
+
 	public static String getTypeLabel(int type) {
 		if (type == TYPE_COMMUNITY_OPEN) {
 			return TYPE_COMMUNITY_OPEN_LABEL;
@@ -54,8 +58,11 @@ public class GroupConstants {
 		else if (type == TYPE_COMMUNITY_PRIVATE) {
 			return TYPE_COMMUNITY_PRIVATE_LABEL;
 		}
-		else {
+		else if (type == TYPE_COMMUNITY_RESTRICTED) {
 			return TYPE_COMMUNITY_RESTRICTED_LABEL;
+		}
+		else {
+			return TYPE_COMMUNITY_SYSTEM_LABEL;
 		}
 	}
 
