@@ -69,11 +69,16 @@ AUI().add(
 
 						event.halt();
 
-						//ARIA Support
-						trigger.one('a').setAttrs({
-							role: "button",
-							"aria-haspopup": true
-						});
+						var anchor = trigger.one('a');
+
+						if (anchor) {
+							anchor.setAttrs(
+								{
+									'aria-haspopup': true
+									role: 'button',
+								}
+							);
+						}
 					},
 					'.lfr-actions'
 				);
