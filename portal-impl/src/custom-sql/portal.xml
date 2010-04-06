@@ -28,9 +28,9 @@
 				(Group_.classNameId = [$CLASS_NAME_ID_COM.LIFERAY.PORTAL.MODEL.GROUP$]) AND
 				(Group_.liveGroupId = 0) AND
 				(Group_.name != 'Control Panel') AND
-				(Group_.type_ != 4) AND
 				(lower(Group_.name) LIKE ? OR ? IS NULL) AND
-				(lower(Group_.description) LIKE ? OR ? IS NULL)
+				(lower(Group_.description) LIKE ? OR ? IS NULL) AND
+				(Group_.type_ != 4)
 		]]>
 	</sql>
 	<sql id="com.liferay.portal.service.persistence.GroupFinder.findByNullFriendlyURL">
@@ -40,8 +40,8 @@
 			FROM
 				Group_
 			WHERE
-				(friendlyURL = '' OR friendlyURL IS NULL) AND
-				(Group_.type_ != 4)
+				(Group_.type_ != 4) AND
+				(friendlyURL = '' OR friendlyURL IS NULL)
 		]]>
 	</sql>
 	<sql id="com.liferay.portal.service.persistence.GroupFinder.findByNoLayouts">
@@ -86,8 +86,8 @@
 			WHERE
 				(Group_.companyId = ?) AND
 				(Group_.liveGroupId = 0) AND
-				(Group_.type_ != 4) AND
-				(lower(Group_.name) = ?)
+				(lower(Group_.name) = ?) AND
+				(Group_.type_ != 4)
 		]]>
 	</sql>
 	<sql id="com.liferay.portal.service.persistence.GroupFinder.findByC_N_D">
@@ -103,9 +103,9 @@
 				(Group_.classNameId = [$CLASS_NAME_ID_COM.LIFERAY.PORTAL.MODEL.GROUP$]) AND
 				(Group_.liveGroupId = 0) AND
 				(Group_.name != 'Control Panel') AND
-				(Group_.type_ != 4) AND
 				(lower(Group_.name) LIKE ? OR ? IS NULL) AND
-				(lower(Group_.description) LIKE ? OR ? IS NULL)
+				(lower(Group_.description) LIKE ? OR ? IS NULL) AND
+				(Group_.type_ != 4)
 		]]>
 	</sql>
 	<sql id="com.liferay.portal.service.persistence.GroupFinder.joinByActive">
