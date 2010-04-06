@@ -624,6 +624,10 @@
 		<priority value="ERROR" />
 	</category>
 
+	<category name="com.liferay.portlet.PortletPreferencesImpl">
+		<priority value="ERROR" />
+	</category>
+
 	<category name="com.liferay.portlet.RenderRequestFactory">
 		<priority value="ERROR" />
 	</category>
