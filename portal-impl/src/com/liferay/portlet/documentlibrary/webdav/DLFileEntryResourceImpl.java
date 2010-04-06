@@ -75,7 +75,10 @@ public class DLFileEntryResourceImpl extends BaseResourceImpl {
 		try {
 			String version = StringPool.BLANK;
 
-			if (!PropsValues.DL_WEBDAV_AUTO_UNLOCK) {
+			if (PropsValues.DL_WEBDAV_HOLD_LOCK) {
+
+				// Get last version regardless of status
+
 				DLFileVersion fileVersion =
 					DLFileVersionLocalServiceUtil.getLatestFileVersion(
 						_fileEntry.getGroupId(), _fileEntry.getFolderId(),

@@ -609,8 +609,8 @@ public class PropsValues {
 	public static final boolean DL_LAYOUTS_SYNC_ENABLED = GetterUtil.getBoolean(
 		PropsUtil.get(PropsKeys.DL_LAYOUTS_SYNC_ENABLED));
 
-	public static boolean DL_WEBDAV_AUTO_UNLOCK = GetterUtil.getBoolean(
-		PropsUtil.get(PropsKeys.DL_WEBDAV_AUTO_UNLOCK));
+	public static boolean DL_WEBDAV_HOLD_LOCK = GetterUtil.getBoolean(
+		PropsUtil.get(PropsKeys.DL_WEBDAV_HOLD_LOCK));
 
 	public static boolean DL_WEBDAV_SAVE_TO_SINGLE_VERSION =
 		GetterUtil.getBoolean(

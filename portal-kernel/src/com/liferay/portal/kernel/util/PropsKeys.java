@@ -483,7 +483,7 @@ public interface PropsKeys {
 
 	public static final String DL_LAYOUTS_SYNC_PUBLIC_FOLDER = "dl.layouts.sync.public.folder";
 
-	public static final String DL_WEBDAV_AUTO_UNLOCK = "dl.webdav.auto.unlock";
+	public static final String DL_WEBDAV_HOLD_LOCK = "dl.webdav.hold.lock";
 
 	public static final String DL_WEBDAV_SAVE_TO_SINGLE_VERSION = "dl.webdav.save.to.single.version";
 

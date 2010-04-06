@@ -725,7 +725,7 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			if (resource instanceof DLFileEntryResourceImpl) {
 				DLFileEntry fileEntry = (DLFileEntry)resource.getModel();
 
-				if (!PropsValues.DL_WEBDAV_AUTO_UNLOCK) {
+				if (PropsValues.DL_WEBDAV_HOLD_LOCK) {
 					return true;
 				}
 
