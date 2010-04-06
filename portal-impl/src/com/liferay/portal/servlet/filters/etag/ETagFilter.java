@@ -14,10 +14,9 @@
 
 package com.liferay.portal.servlet.filters.etag;
 
+import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
-import com.liferay.util.servlet.filters.CacheResponse;
 import com.liferay.util.servlet.filters.CacheResponseData;
 import com.liferay.util.servlet.filters.CacheResponseUtil;
 
@@ -42,26 +41,24 @@ public class ETagFilter extends BasePortalFilter {
 		boolean etag = ParamUtil.getBoolean(request, _ETAG, true);
 
 		if (etag) {
-			CacheResponse cacheResponse = new CacheResponse(
-				response, StringPool.UTF8);
+			StringServletResponse stringResponse =
+				new StringServletResponse(response);
 
 			processFilter(
-				ETagFilter.class, request, cacheResponse, filterChain);
+				ETagFilter.class, request, stringResponse, filterChain);
 
 			CacheResponseData cacheResponseData = new CacheResponseData(
-				cacheResponse.unsafeGetData(), cacheResponse.getContentLength(),
-				cacheResponse.getContentType(), cacheResponse.getHeaders());
+				stringResponse);
 
 			if (!ETagUtil.processETag(
-					request, response, cacheResponse.unsafeGetData(),
-					cacheResponse.getContentLength())) {
+					request, response, cacheResponseData.getContent(),
+					cacheResponseData.getContentLength())) {
 
 				CacheResponseUtil.write(response, cacheResponseData);
 			}
 		}
 		else {
-			processFilter(
-				ETagFilter.class, request, response, filterChain);
+			processFilter(ETagFilter.class, request, response, filterChain);
 		}
 	}
 

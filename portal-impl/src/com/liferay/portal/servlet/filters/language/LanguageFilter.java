@@ -16,10 +16,10 @@ package com.liferay.portal.servlet.filters.language;
 
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.language.UnicodeLanguageUtil;
+import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
-import com.liferay.util.servlet.filters.CacheResponse;
 import com.liferay.util.servlet.filters.CacheResponseData;
 import com.liferay.util.servlet.filters.CacheResponseUtil;
 
@@ -43,31 +43,28 @@ public class LanguageFilter extends BasePortalFilter {
 			FilterChain filterChain)
 		throws Exception {
 
-		CacheResponse cacheResponse = new CacheResponse(
-			response, StringPool.UTF8);
+		StringServletResponse stringResponse = new StringServletResponse(
+			response);
 
 		processFilter(
-			LanguageFilter.class, request, cacheResponse, filterChain);
+			LanguageFilter.class, request, stringResponse, filterChain);
 
-		byte[] bytes = translateResponse(
-			request, cacheResponse, cacheResponse.unsafeGetData(),
-			cacheResponse.getContentLength());
+		byte[] bytes = translateResponse(request, stringResponse);
 
 		CacheResponseData cacheResponseData = new CacheResponseData(
-			bytes, bytes.length, cacheResponse.getContentType(),
-			cacheResponse.getHeaders());
+			bytes, bytes.length, stringResponse.getContentType(),
+			stringResponse.getHeaders());
 
 		CacheResponseUtil.write(response, cacheResponseData);
 	}
 
 	protected byte[] translateResponse(
-		HttpServletRequest request, HttpServletResponse response,
-		byte[] bytes, int length) {
+		HttpServletRequest request, StringServletResponse stringResponse) {
 
 		String languageId = LanguageUtil.getLanguageId(request);
 		Locale locale = LocaleUtil.fromLanguageId(languageId);
 
-		String content = new String(bytes, 0 ,length);
+		String content = stringResponse.getString();
 
 		Matcher matcher = _pattern.matcher(content);
 
