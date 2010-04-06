@@ -140,7 +140,7 @@ public class ComboServlet extends HttpServlet {
 		ServletContext servletContext = getServletContext();
 
 		String basePath = ServletContextUtil.getRealPath(
-			servletContext, _ALLOY_DIR);
+			servletContext, _JAVASCRIPT_DIR);
 
 		if (basePath == null) {
 			return null;
@@ -180,9 +180,9 @@ public class ComboServlet extends HttpServlet {
 		return null;
 	}
 
-	private static final String _ALLOY_DIR = "html/js/aui";
-
 	private static final String _CSS_EXTENSION = "css";
+
+	private static final String _JAVASCRIPT_DIR = "html/js";
 
 	private static final String _TEMP_DIR =
 		SystemProperties.get(SystemProperties.TMP_DIR) + "/liferay/combo/";
