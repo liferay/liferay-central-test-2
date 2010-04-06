@@ -209,7 +209,7 @@ request.setAttribute("view_file_shortcut.jsp-fileShortcut", fileShortcut);
 							image='<%= "../file_system/small/" + conversion %>'
 							label="<%= true %>"
 							message="<%= conversion.toUpperCase() %>"
-							url='<%= themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + toFolder.getFolderId() + StringPool.SLASH + HttpUtil.encodeURL(toFileEntry.getTitle()) + "?targetExtension=" + conversion %>'
+							url='<%= themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + toFolder.getFolderId() + StringPool.SLASH + HttpUtil.encodeURL(HtmlUtil.unescape(toFileEntry.getTitle())) + "?targetExtension=" + conversion %>'
 						/>
 
 					<%

@@ -17,7 +17,7 @@
 <c:if test="<%= DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.VIEW) %>">
 
 	<%
-	String fileUrl = themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + folderId + StringPool.SLASH + HttpUtil.encodeURL(fileEntry.getTitle());
+	String fileUrl = themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + folderId + StringPool.SLASH + HttpUtil.encodeURL(HtmlUtil.unescape(fileEntry.getTitle()));
 	String webDavUrl = StringPool.BLANK;
 
 	if (portletDisplay.isWebDAVEnabled()) {
@@ -40,7 +40,7 @@
 		}
 
 		sb.append(StringPool.SLASH);
-		sb.append(HttpUtil.encodeURL(fileEntry.getTitle(), true));
+		sb.append(HttpUtil.encodeURL(HtmlUtil.unescape(fileEntry.getTitle()), true));
 
 		Group group = themeDisplay.getScopeGroup();
 

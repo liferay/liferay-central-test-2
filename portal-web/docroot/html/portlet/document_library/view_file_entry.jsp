@@ -64,7 +64,7 @@ try {
 catch (Exception e) {
 }
 
-String fileUrl = themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + folderId + StringPool.SLASH + HttpUtil.encodeURL(title);
+String fileUrl = themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + folderId + StringPool.SLASH + HttpUtil.encodeURL(HtmlUtil.unescape(title));
 String webDavUrl = StringPool.BLANK;
 
 if (portletDisplay.isWebDAVEnabled()) {
@@ -87,7 +87,7 @@ if (portletDisplay.isWebDAVEnabled()) {
 	}
 
 	sb.append(StringPool.SLASH);
-	sb.append(HttpUtil.encodeURL(title, true));
+	sb.append(HttpUtil.encodeURL(HtmlUtil.unescape(title), true));
 
 	Group group = themeDisplay.getScopeGroup();
 
@@ -334,7 +334,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 				sb.append(StringPool.SLASH);
 				sb.append(folderId);
 				sb.append(StringPool.SLASH);
-				sb.append(HttpUtil.encodeURL(title));
+				sb.append(HttpUtil.encodeURL(HtmlUtil.unescape(title)));
 				sb.append("?version=");
 				sb.append(String.valueOf(fileVersion.getVersion()));
 
