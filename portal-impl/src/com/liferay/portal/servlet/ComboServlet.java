@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.util.SystemProperties;
 import com.liferay.util.servlet.ServletResponseUtil;
 
@@ -76,7 +77,9 @@ public class ComboServlet extends HttpServlet {
 
 			content = sb.toString();
 
-			FileUtil.write(cacheFile, content);
+			if (Validator.isNotNull(content)) {
+				FileUtil.write(cacheFile, content);
+			}
 		}
 
 		String contentType = ContentTypes.TEXT_JAVASCRIPT;
