@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutTemplate;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.LayoutTypePortletConstants;
@@ -565,7 +566,9 @@ public class LayoutTypePortletImpl
 			}
 		}
 
-		if (hasStateMaxPortletId(portletId)) {
+		if (getLayout().getType().equals(LayoutConstants.TYPE_CONTROL_PANEL) &&
+			hasStateMaxPortletId(portletId)) {
+
 			return true;
 		}
 
