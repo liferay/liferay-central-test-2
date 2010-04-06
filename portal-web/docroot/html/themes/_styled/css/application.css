@@ -425,7 +425,7 @@
 	text-decoration: none;
 }
 
-.aui-menu-content li a:hover, .lfr-menu-list ul a:hover {
+.aui-menu-content li a:hover, .lfr-menu-list ul a:hover, .aui-menu-content li a.aui-focus, .lfr-menu-list ul a.aui-focus  {
 	background-color: #5B677D;
 	color: #FFF;
 	text-shadow: -1px -1px #2C2F34;

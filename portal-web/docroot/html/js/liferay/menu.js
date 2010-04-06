@@ -68,6 +68,12 @@ AUI().add(
 						}
 
 						event.halt();
+
+						//ARIA Support
+						trigger.one('a').setAttrs({
+							role: "button",
+							"aria-haspopup": true
+						});
 					},
 					'.lfr-actions'
 				);
@@ -167,6 +173,31 @@ AUI().add(
 						menu: menu,
 						trigger: trigger
 					};
+
+					menu.plug(A.Plugin.NodeFocusManager, {
+						descendants: "a",
+						keys: { next: "down:40", // Down arrow
+								previous: "down:38" },  //  Up arrow
+						focusClass: "aui-focus",
+						circular: true
+					 });
+
+					var firstItem = menu.one('a');
+
+					firstItem.focus();
+
+					A.on("key", function () {
+						instance._closeActiveMenu();
+						trigger.one('a').focus();
+					}, [menu] ,"down:27,9");   //Escape and tab keys
+
+					//ARIA support
+					menu.setAttrs({
+						role: "menu",
+						"aria-labelledby": trigger.one('a').get("id")
+					});
+
+					menu.all("a").set("role", "menuitem");
 				}
 			}
 		};
@@ -175,6 +206,6 @@ AUI().add(
 	},
 	'',
 	{
-		requires: ['aui-base', 'selector-css3']
+		requires: ['aui-base', 'node-focusmanager', 'selector-css3']
 	}
 );
