@@ -95,8 +95,8 @@ public class WikiIndexer extends BaseIndexer {
 			Object[] array = (Object[])obj;
 
 			long companyId = (Long)array[0];
-			String nodeId = (String)array[0];
-			String title = (String)array[0];
+			long nodeId = (Long)array[1];
+			String title = (String)array[2];
 
 			Document document = new DocumentImpl();
 
