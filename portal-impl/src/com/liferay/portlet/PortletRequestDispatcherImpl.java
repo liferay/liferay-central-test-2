@@ -158,7 +158,7 @@ public class PortletRequestDispatcherImpl implements PortletRequestDispatcher {
 		}
 
 		PortletRequestImpl portletRequestImpl =
-			(PortletRequestImpl)portletRequest;
+			PortletRequestImpl.getPortletRequestImpl(portletRequest);
 		PortletResponseImpl portletResponseImpl =
 			PortletResponseImpl.getPortletResponseImpl(portletResponse);
 

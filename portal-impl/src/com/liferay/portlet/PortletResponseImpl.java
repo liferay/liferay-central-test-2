@@ -89,7 +89,7 @@ public abstract class PortletResponseImpl implements LiferayPortletResponse {
 			}
 			catch (Exception e) {
 				throw new RuntimeException(
-					"Unable to get the HTTP servlet resuest from " +
+					"Unable to get the portlet response from " +
 						portletResponse.getClass().getName());
 			}
 		}

@@ -46,6 +46,7 @@ import com.liferay.portlet.portletconfiguration.util.PublicRenderParameterConfig
 import com.liferay.util.servlet.DynamicServletRequest;
 import com.liferay.util.servlet.SharedSessionServletRequest;
 
+import java.lang.reflect.Method;
 import java.security.Principal;
 
 import java.util.ArrayList;
@@ -81,6 +82,37 @@ import javax.servlet.http.HttpServletRequest;
  * @author Sergey Ponomarev
  */
 public abstract class PortletRequestImpl implements LiferayPortletRequest {
+
+	public static PortletRequestImpl getPortletRequestImpl(
+		PortletRequest portletRequest) {
+
+		PortletRequestImpl portletRequestImpl = null;
+
+		if (portletRequest instanceof PortletRequestImpl) {
+			portletRequestImpl = (PortletRequestImpl)portletRequest;
+		}
+		else {
+
+			// LPS-3311
+
+			try {
+				Method method = portletRequest.getClass().getMethod(
+					"getRequest");
+
+				Object obj = method.invoke(portletRequest, (Object[])null);
+
+				portletRequestImpl = getPortletRequestImpl(
+					(PortletRequest)obj);
+			}
+			catch (Exception e) {
+				throw new RuntimeException(
+					"Unable to get the portlet request from " +
+					portletRequest.getClass().getName());
+			}
+		}
+
+		return portletRequestImpl;
+	}
 
 	public void cleanUp() {
 		_request.removeAttribute(JavaConstants.JAVAX_PORTLET_CONFIG);
