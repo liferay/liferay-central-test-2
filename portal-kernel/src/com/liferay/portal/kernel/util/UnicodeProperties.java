@@ -53,6 +53,22 @@ public class UnicodeProperties extends HashMap<String, String> {
 		_safe = safe;
 	}
 
+	public void fastLoad(String props) {
+		if (Validator.isNull(props)) {
+			return;
+		}
+
+		int lastIndex = 0;
+		int index = props.indexOf(CharPool.NEW_LINE);
+		while (index != -1) {
+			put(props.substring(lastIndex, index));
+			lastIndex = index;
+			index = props.indexOf(CharPool.NEW_LINE, lastIndex + 1);
+		}
+
+		put(props.substring(lastIndex));
+	}
+
 	public String getProperty(String key) {
 		return get(key);
 	}
@@ -84,30 +100,7 @@ public class UnicodeProperties extends HashMap<String, String> {
 			String line = unsyncBufferedReader.readLine();
 
 			while (line != null) {
-				line = line.trim();
-
-				if (_isComment(line)) {
-					line = unsyncBufferedReader.readLine();
-
-					continue;
-				}
-
-				int pos = line.indexOf(StringPool.EQUAL);
-
-				if (pos != -1) {
-					String key = line.substring(0, pos).trim();
-					String value = line.substring(pos + 1).trim();
-
-					if (_safe) {
-						value = _decode(value);
-					}
-
-					setProperty(key, value);
-				}
-				else {
-					_log.error("Invalid property on line " + line);
-				}
-
+				put(line);
 				line = unsyncBufferedReader.readLine();
 			}
 		}
@@ -118,6 +111,28 @@ public class UnicodeProperties extends HashMap<String, String> {
 				}
 				catch (Exception e) {
 				}
+			}
+		}
+	}
+
+	private void put(String line) {
+		line = line.trim();
+
+		if (!_isComment(line)) {
+			int pos = line.indexOf(StringPool.EQUAL);
+
+			if (pos != -1) {
+				String key = line.substring(0, pos).trim();
+				String value = line.substring(pos + 1).trim();
+
+				if (_safe) {
+					value = _decode(value);
+				}
+
+				setProperty(key, value);
+			}
+			else {
+				_log.error("Invalid property on line " + line);
 			}
 		}
 	}

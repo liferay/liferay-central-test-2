@@ -433,12 +433,7 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 		if (_typeSettingsProperties == null) {
 			_typeSettingsProperties = new UnicodeProperties(true);
 
-			try {
-				_typeSettingsProperties.load(super.getTypeSettings());
-			}
-			catch (IOException ioe) {
-				_log.error(ioe, ioe);
-			}
+			_typeSettingsProperties.fastLoad(super.getTypeSettings());
 		}
 
 		return _typeSettingsProperties;
