@@ -124,6 +124,15 @@ public class StringServletResponse extends HttpServletResponseWrapper {
 	public Map<String, List<Header>> getHeaders() {
 		return _headers;
 	}
+	
+	public void flushBuffer() throws IOException {
+		if (_servletOutputStream != null) {
+			_unsyncByteArrayOutputStream.flush();
+		}
+		else if (_printWriter != null) {
+			_unsyncStringWriter.flush();
+		}
+	}
 
 	public ServletOutputStream getOutputStream() {
 		if (_servletOutputStream == null) {
