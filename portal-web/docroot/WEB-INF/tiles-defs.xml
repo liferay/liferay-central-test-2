@@ -277,6 +277,70 @@
 		<put name="portlet_content" value="/portlet/calendar/view_event.jsp" />
 	</definition>
 
+	<!-- Communities -->
+
+	<definition name="portlet.communities" extends="portlet" />
+
+	<definition name="portlet.communities.edit_community" extends="portlet.communities">
+		<put name="portlet_content" value="/portlet/communities/edit_community.jsp" />
+	</definition>
+
+	<definition name="portlet.communities.edit_community_assignments" extends="portlet.communities">
+		<put name="portlet_content" value="/portlet/communities/edit_community_assignments.jsp" />
+	</definition>
+
+	<definition name="portlet.communities.edit_pages" extends="portlet.communities">
+		<put name="portlet_content" value="/portlet/communities/edit_pages.jsp" />
+	</definition>
+
+	<definition name="portlet.communities.edit_proposal" extends="portlet.communities">
+		<put name="portlet_content" value="/portlet/communities/edit_proposal.jsp" />
+	</definition>
+
+	<definition name="portlet.communities.edit_team" extends="portlet.communities">
+		<put name="portlet_content" value="/portlet/communities/edit_team.jsp" />
+	</definition>
+
+	<definition name="portlet.communities.edit_team_assignments" extends="portlet.communities">
+		<put name="portlet_content" value="/portlet/communities/edit_team_assignments.jsp" />
+	</definition>
+
+	<definition name="portlet.communities.edit_user_roles" extends="portlet.communities">
+		<put name="portlet_content" value="/portlet/communities/edit_user_roles.jsp" />
+	</definition>
+
+	<definition name="portlet.communities.error" extends="portlet.communities">
+		<put name="portlet_content" value="/portlet/communities/error.jsp" />
+	</definition>
+
+	<definition name="portlet.communities.export_pages" extends="portlet.communities">
+		<put name="portlet_content" value="/portlet/communities/export_pages.jsp" />
+	</definition>
+
+	<definition name="portlet.communities.post_membership_request" extends="portlet.communities">
+		<put name="portlet_content" value="/portlet/communities/post_membership_request.jsp" />
+	</definition>
+
+	<definition name="portlet.communities.publish_portlet" extends="portlet.communities">
+		<put name="portlet_content" value="/portlet/communities/publish_portlet.jsp" />
+	</definition>
+
+	<definition name="portlet.communities.reply_membership_request" extends="portlet.communities">
+		<put name="portlet_content" value="/portlet/communities/reply_membership_request.jsp" />
+	</definition>
+
+	<definition name="portlet.communities.view" extends="portlet.communities">
+		<put name="portlet_content" value="/portlet/communities/view.jsp" />
+	</definition>
+
+	<definition name="portlet.communities.view_membership_requests" extends="portlet.communities">
+		<put name="portlet_content" value="/portlet/communities/view_membership_requests.jsp" />
+	</definition>
+
+	<definition name="portlet.communities.view_teams" extends="portlet.communities">
+		<put name="portlet_content" value="/portlet/communities/view_teams.jsp" />
+	</definition>
+
 	<!-- CSZ Search -->
 
 	<definition name="portlet.csz_search" extends="portlet" />
@@ -801,70 +865,6 @@
 
 	<definition name="portlet.my_account.view" extends="portlet.my_account">
 		<put name="portlet_content" value="/portlet/my_account/view.jsp" />
-	</definition>
-
-	<!-- My Communities -->
-
-	<definition name="portlet.communities" extends="portlet" />
-
-	<definition name="portlet.communities.edit_community" extends="portlet.communities">
-		<put name="portlet_content" value="/portlet/communities/edit_community.jsp" />
-	</definition>
-
-	<definition name="portlet.communities.edit_community_assignments" extends="portlet.communities">
-		<put name="portlet_content" value="/portlet/communities/edit_community_assignments.jsp" />
-	</definition>
-
-	<definition name="portlet.communities.edit_pages" extends="portlet.communities">
-		<put name="portlet_content" value="/portlet/communities/edit_pages.jsp" />
-	</definition>
-
-	<definition name="portlet.communities.edit_proposal" extends="portlet.communities">
-		<put name="portlet_content" value="/portlet/communities/edit_proposal.jsp" />
-	</definition>
-
-	<definition name="portlet.communities.edit_team" extends="portlet.communities">
-		<put name="portlet_content" value="/portlet/communities/edit_team.jsp" />
-	</definition>
-
-	<definition name="portlet.communities.edit_team_assignments" extends="portlet.communities">
-		<put name="portlet_content" value="/portlet/communities/edit_team_assignments.jsp" />
-	</definition>
-
-	<definition name="portlet.communities.edit_user_roles" extends="portlet.communities">
-		<put name="portlet_content" value="/portlet/communities/edit_user_roles.jsp" />
-	</definition>
-
-	<definition name="portlet.communities.error" extends="portlet.communities">
-		<put name="portlet_content" value="/portlet/communities/error.jsp" />
-	</definition>
-
-	<definition name="portlet.communities.export_pages" extends="portlet.communities">
-		<put name="portlet_content" value="/portlet/communities/export_pages.jsp" />
-	</definition>
-
-	<definition name="portlet.communities.post_membership_request" extends="portlet.communities">
-		<put name="portlet_content" value="/portlet/communities/post_membership_request.jsp" />
-	</definition>
-
-	<definition name="portlet.communities.publish_portlet" extends="portlet.communities">
-		<put name="portlet_content" value="/portlet/communities/publish_portlet.jsp" />
-	</definition>
-
-	<definition name="portlet.communities.reply_membership_request" extends="portlet.communities">
-		<put name="portlet_content" value="/portlet/communities/reply_membership_request.jsp" />
-	</definition>
-
-	<definition name="portlet.communities.view" extends="portlet.communities">
-		<put name="portlet_content" value="/portlet/communities/view.jsp" />
-	</definition>
-
-	<definition name="portlet.communities.view_membership_requests" extends="portlet.communities">
-		<put name="portlet_content" value="/portlet/communities/view_membership_requests.jsp" />
-	</definition>
-
-	<definition name="portlet.communities.view_teams" extends="portlet.communities">
-		<put name="portlet_content" value="/portlet/communities/view_teams.jsp" />
 	</definition>
 
 	<!-- My Places -->
