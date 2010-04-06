@@ -37,6 +37,7 @@ import com.liferay.portal.search.BaseIndexer;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
+
 import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeIndexerUtil;
@@ -258,10 +259,11 @@ public class MBIndexer extends BaseIndexer {
 			BooleanQuery contextQuery, SearchContext searchContext)
 		throws Exception {
 
-		Long threadId = (Long)searchContext.getAttribute("threadId");
+		long threadId = GetterUtil.getLong(
+			(String)searchContext.getAttribute("threadId"));
 
-		if ((threadId != null) && (threadId.longValue() > 0)) {
-			contextQuery.addTerm("threadId", threadId.longValue());
+		if (threadId > 0) {
+			contextQuery.addTerm("threadId", threadId);
 		}
 	}
 
