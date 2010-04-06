@@ -329,6 +329,8 @@ AUI().add(
 
 				if (portlet) {
 					layoutHandler.addDragTarget(portlet);
+
+					Liferay.Layout.updatePortletDropZones(portlet);
 				}
 			},
 
