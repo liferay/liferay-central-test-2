@@ -47,6 +47,7 @@ import com.liferay.util.servlet.DynamicServletRequest;
 import com.liferay.util.servlet.SharedSessionServletRequest;
 
 import java.lang.reflect.Method;
+
 import java.security.Principal;
 
 import java.util.ArrayList;
@@ -107,7 +108,7 @@ public abstract class PortletRequestImpl implements LiferayPortletRequest {
 			catch (Exception e) {
 				throw new RuntimeException(
 					"Unable to get the portlet request from " +
-					portletRequest.getClass().getName());
+						portletRequest.getClass().getName());
 			}
 		}
 
