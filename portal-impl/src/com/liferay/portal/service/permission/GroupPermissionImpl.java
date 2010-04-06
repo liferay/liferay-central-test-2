@@ -117,7 +117,7 @@ public class GroupPermissionImpl implements GroupPermission {
 				}
 			}
 		}
-		else if (actionId == ActionKeys.MANAGE_STAGING) {
+		else if (actionId == ActionKeys.MANAGE_LAYOUTS) {
 			String stageTwoRoleName = workflowRoleNames[0];
 
 			String publisherRoleName = workflowRoleNames[
