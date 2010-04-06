@@ -23,20 +23,19 @@ List<WorkflowTask> resultsTasks = null;
 
 int totalTasks = 0;
 
-if (toolbarItem.equals("all") && PortletPermissionUtil.contains(permissionChecker, PortletKeys.WORKFLOW_TASKS, ActionKeys.VIEW_ALL_TASKS)) {
+if (portletName.equals(PortletKeys.WORKFLOW_TASKS)) {
 	searchContainer.setEmptyResultsMessage("there-are-no-tasks");
 
 	allTasks = true;
 
 	if (searchTerms.isAdvancedSearch()){
-		resultsTasks = WorkflowTaskManagerUtil.search(company.getCompanyId(), -1l, searchTerms.getName(), searchTerms.getType(), searchTerms.getState(), null, null, null, null, searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
+		resultsTasks = WorkflowTaskManagerUtil.search(company.getCompanyId(), 0, searchTerms.getName(), searchTerms.getType(), searchTerms.getState(), null, null, null, null, searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
 		totalTasks = WorkflowTaskManagerUtil.searchCount(company.getCompanyId(), 0, searchTerms.getName(), searchTerms.getType(), searchTerms.getState(), null, null, null, null, searchTerms.isAndOperator());
 	}
 	else {
 		resultsTasks = WorkflowTaskManagerUtil.search(company.getCompanyId(), 0, searchTerms.getKeywords(), null, null, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
 		totalTasks = WorkflowTaskManagerUtil.searchCount(company.getCompanyId(), 0, searchTerms.getKeywords(), null, null);
 	}
-
 }
 else if (toolbarItem.equals("assigned-to-my-roles")) {
 	searchContainer.setEmptyResultsMessage("there-are-no-tasks-assigned-to-my-roles");

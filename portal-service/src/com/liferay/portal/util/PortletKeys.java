@@ -181,8 +181,6 @@ public class PortletKeys {
 
 	public static final String TAGS_ENTRIES_NAVIGATION = "141";
 
-	public static final String TASKS = "122";
-
 	public static final String TRANSLATOR = "26";
 
 	public static final String UNIT_CONVERTER = "27";
@@ -191,8 +189,12 @@ public class PortletKeys {
 
 	public static final String WIKI = "36";
 
-	public static final String WORKFLOW = "93";
-
 	public static final String WORKFLOW_TASKS = "150";
+
+	public static final String WORKFLOW_DEFINITIONS = "151";
+
+	public static final String WORKFLOW_CONFIGURATION = "152";
+
+	public static final String MY_WORKFLOW_TASKS = "153";
 
 }

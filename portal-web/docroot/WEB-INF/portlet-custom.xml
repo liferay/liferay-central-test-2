@@ -2140,19 +2140,33 @@
 		</supports>
 		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
 		<security-role-ref>
-			<role-name>power-user</role-name>
-		</security-role-ref>
-		<security-role-ref>
-			<role-name>user</role-name>
+			<role-name>administrator</role-name>
 		</security-role-ref>
 	</portlet>
 	<portlet>
 		<portlet-name>151</portlet-name>
-		<display-name>Workflow Admin</display-name>
+		<display-name>Workflow Definitions</display-name>
 		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>
 		<init-param>
 			<name>view-action</name>
 			<value>/workflow_definitions/view</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+		</supports>
+		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+	</portlet>
+	<portlet>
+		<portlet-name>152</portlet-name>
+		<display-name>Workflow Configuration</display-name>
+		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>
+		<init-param>
+			<name>view-action</name>
+			<value>/workflow_definition_links/view</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
@@ -2167,12 +2181,12 @@
 		</security-role-ref>
 	</portlet>
 	<portlet>
-		<portlet-name>152</portlet-name>
-		<display-name>Workflow Configuration</display-name>
+		<portlet-name>153</portlet-name>
+		<display-name>My Workflow Tasks</display-name>
 		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>
 		<init-param>
 			<name>view-action</name>
-			<value>/workflow_definition_links/view</value>
+			<value>/my_workflow_tasks/view</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>

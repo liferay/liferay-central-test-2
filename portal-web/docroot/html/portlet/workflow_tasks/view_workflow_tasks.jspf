@@ -15,16 +15,18 @@
 %>
 
 <%
-String toolbarItem = ParamUtil.getString(request, "toolbarItem", "all");
+String toolbarItem = ParamUtil.getString(request, "toolbarItem", "assigned-to-me");
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("toolbarItem", toolbarItem);
 %>
 
-<liferay-util:include page="/html/portlet/workflow_tasks/toolbar.jsp">
-	<liferay-util:param name="toolbarItem" value="<%= toolbarItem %>" />
-</liferay-util:include>
+<c:if test="<%= portletName.equals(PortletKeys.MY_WORKFLOW_TASKS) %>">
+	<liferay-util:include page="/html/portlet/workflow_tasks/toolbar.jsp">
+		<liferay-util:param name="toolbarItem" value="<%= toolbarItem %>" />
+	</liferay-util:include>
+</c:if>
 
 <%
 try {
