@@ -230,6 +230,7 @@ public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 		serviceContext.setModifiedDate(entry.getModifiedDate());
 		serviceContext.setScopeGroupId(context.getGroupId());
 		serviceContext.setStatus(status);
+		serviceContext.setStartWorkflow(false);
 
 		BlogsEntry existingEntry = null;
 

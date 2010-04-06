@@ -834,6 +834,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		serviceContext.setCreateDate(article.getCreateDate());
 		serviceContext.setModifiedDate(article.getModifiedDate());
 		serviceContext.setScopeGroupId(groupId);
+		serviceContext.setStartWorkflow(false);
 
 		JournalArticle existingArticle = null;
 

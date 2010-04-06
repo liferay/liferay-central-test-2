@@ -250,6 +250,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 		serviceContext.setCreateDate(fileEntry.getCreateDate());
 		serviceContext.setModifiedDate(fileEntry.getModifiedDate());
 		serviceContext.setScopeGroupId(groupId);
+		serviceContext.setStartWorkflow(false);
 
 		InputStream is = context.getZipEntryAsInputStream(binPath);
 
