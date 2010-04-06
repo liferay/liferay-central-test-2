@@ -634,8 +634,8 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 		serviceContext.setAddGuestPermissions(true);
 		serviceContext.setAssetTagNames(assetTagNames);
 		serviceContext.setScopeGroupId(context.getGroupId());
-		serviceContext.setStatus(message.getStatus());
 		serviceContext.setStartWorkflow(false);
+		serviceContext.setStatus(message.getStatus());
 
 		if ((categoryId != MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) &&
 			(categoryId == message.getCategoryId())) {
