@@ -117,6 +117,10 @@ private static PortletCategory _getRelevantPortletCategory(PortletCategory portl
 	for (PortletCategory curPortletCategory : portletCategory.getCategories()) {
 		Set<String> portletIds = new HashSet<String>();
 
+		if (curPortletCategory.getName().equals("category.hidden")) {
+			continue;
+		}
+
 		for (String portletId : curPortletCategory.getPortletIds()) {
 			Portlet portlet = PortletLocalServiceUtil.getPortletById(user.getCompanyId(), portletId);
 
