@@ -58,15 +58,18 @@ public class UnicodeProperties extends HashMap<String, String> {
 			return;
 		}
 
-		int lastIndex = 0;
-		int index = props.indexOf(CharPool.NEW_LINE);
-		while (index != -1) {
-			put(props.substring(lastIndex, index));
-			lastIndex = index;
-			index = props.indexOf(CharPool.NEW_LINE, lastIndex + 1);
+		int x = props.indexOf(CharPool.NEW_LINE);
+		int y = 0;
+
+		while (x != -1) {
+			put(props.substring(y, x));
+
+			y = x;
+
+			x = props.indexOf(CharPool.NEW_LINE, y + 1);
 		}
 
-		put(props.substring(lastIndex));
+		put(props.substring(y));
 	}
 
 	public String getProperty(String key) {
