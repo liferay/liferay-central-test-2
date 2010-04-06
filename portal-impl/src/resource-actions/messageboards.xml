@@ -31,6 +31,7 @@
 			<action-key>ADD_MESSAGE</action-key>
 			<action-key>BAN_USER</action-key>
 			<action-key>MOVE_THREAD</action-key>
+			<action-key>LOCK_THREAD</action-key>
 			<action-key>PERMISSIONS</action-key>
 			<action-key>REPLY_TO_MESSAGE</action-key>
 			<action-key>SUBSCRIBE</action-key>
