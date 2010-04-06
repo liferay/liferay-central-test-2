@@ -74,8 +74,8 @@ AUI().add(
 						if (anchor) {
 							anchor.setAttrs(
 								{
-									'aria-haspopup': true
-									role: 'button',
+									'aria-haspopup': true,
+									role: 'button'
 								}
 							);
 						}
@@ -179,30 +179,48 @@ AUI().add(
 						trigger: trigger
 					};
 
-					menu.plug(A.Plugin.NodeFocusManager, {
-						descendants: "a",
-						keys: { next: "down:40", // Down arrow
-								previous: "down:38" },  //  Up arrow
-						focusClass: "aui-focus",
-						circular: true
-					 });
+					menu.plug(
+						A.Plugin.NodeFocusManager,
+						{
+							circular: true,
+							descendants: 'a',
+							focusClass: 'aui-focus',
+							keys: {
+								next: 'down:40',
+								previous: 'down:38'
+							}
+						 }
+					);
 
 					var firstItem = menu.one('a');
 
-					firstItem.focus();
+					if (firstItem) {
+						firstItem.focus();
+					}
 
-					A.on("key", function () {
-						instance._closeActiveMenu();
-						trigger.one('a').focus();
-					}, [menu] ,"down:27,9");   //Escape and tab keys
+					var anchor = trigger.one('a');
 
-					//ARIA support
-					menu.setAttrs({
-						role: "menu",
-						"aria-labelledby": trigger.one('a').get("id")
-					});
+					A.on(
+						'key',
+						function(event) {
+							instance._closeActiveMenu();
 
-					menu.all("a").set("role", "menuitem");
+							if (anchor) {
+								anchor.focus();
+							}
+						},
+						[menu],
+						'down:27,9'
+					);
+
+					menu.setAttrs(
+						{
+							'aria-labelledby': (anchor && anchor.get('id')),
+							role: 'menu'
+						}
+					);
+
+					menu.all('a').set('role', 'menuitem');
 				}
 			}
 		};
