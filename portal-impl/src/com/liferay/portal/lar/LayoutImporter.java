@@ -435,6 +435,11 @@ public class LayoutImporter {
 			else {
 				layout = LayoutUtil.fetchByG_P_L(
 					groupId, privateLayout, layoutId);
+
+				if (layout == null) {
+					layoutId = LayoutLocalServiceUtil.getNextLayoutId(
+						groupId, privateLayout);
+				}
 			}
 
 			if (_log.isDebugEnabled()) {
