@@ -16,7 +16,6 @@
 
 <%@ include file="/html/taglib/init.jsp" %>
 
-<%@ page import="com.liferay.portal.model.RoleConstants" %>
 <%@ page import="com.liferay.portlet.tasks.NoSuchProposalException" %>
 <%@ page import="com.liferay.portlet.tasks.model.TasksProposal" %>
 <%@ page import="com.liferay.portlet.tasks.service.TasksProposalLocalServiceUtil" %>
@@ -113,11 +112,7 @@
 									userParams.put("usersGroups", new Long(liveGroup.getGroupId()));
 								}
 
-								String name = role.getName();
-
-								if (!name.equals(RoleConstants.COMMUNITY_MEMBER) && !name.equals(RoleConstants.ORGANIZATION_MEMBER)) {
-									userParams.put("userGroupRole", new Long[] {new Long(liveGroup.getGroupId()), new Long(role.getRoleId())});
-								}
+								userParams.put("userGroupRole", new Long[] {new Long(liveGroup.getGroupId()), new Long(role.getRoleId())});
 
 								List<User> reviewers = UserLocalServiceUtil.search(company.getCompanyId(), null, null, userParams, QueryUtil.ALL_POS, QueryUtil.ALL_POS, (OrderByComparator)null);
 
