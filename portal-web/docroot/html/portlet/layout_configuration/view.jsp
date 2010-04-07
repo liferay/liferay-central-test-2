@@ -59,7 +59,7 @@
 					while (itr.hasNext()) {
 						PortletCategory curPortletCategory = (PortletCategory)itr.next();
 
-						if (curPortletCategory.getName().equals("category.hidden")) {
+						if (curPortletCategory.isHidden()) {
 							continue;
 						}
 
@@ -117,7 +117,7 @@ private static PortletCategory _getRelevantPortletCategory(PortletCategory portl
 	for (PortletCategory curPortletCategory : portletCategory.getCategories()) {
 		Set<String> portletIds = new HashSet<String>();
 
-		if (curPortletCategory.getName().equals("category.hidden")) {
+		if (curPortletCategory.isHidden()) {
 			continue;
 		}
 

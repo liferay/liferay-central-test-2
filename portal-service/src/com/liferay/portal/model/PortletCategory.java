@@ -45,28 +45,33 @@ public class PortletCategory implements Serializable {
 		_portletIds = portletIds;
 	}
 
-	public String getName() {
-		return _name;
+	public void addCategory(PortletCategory portletCategory) {
+		_categories.put(portletCategory.getName(), portletCategory);
 	}
 
 	public Collection<PortletCategory> getCategories() {
 		return Collections.unmodifiableCollection(_categories.values());
 	}
 
-	public void addCategory(PortletCategory portletCategory) {
-		_categories.put(portletCategory.getName(), portletCategory);
-	}
-
 	public PortletCategory getCategory(String name) {
 		return _categories.get(name);
+	}
+
+	public String getName() {
+		return _name;
 	}
 
 	public Set<String> getPortletIds() {
 		return _portletIds;
 	}
 
-	public void setPortletIds(Set<String> portletIds) {
-		_portletIds = portletIds;
+	public boolean isHidden() {
+		if (_name.equals(PortletCategoryConstants.NAME_HIDDEN)) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	public void merge(PortletCategory newPortletCategory) {
@@ -92,6 +97,10 @@ public class PortletCategory implements Serializable {
 				portletIdsItr.remove();
 			}
 		}
+	}
+
+	public void setPortletIds(Set<String> portletIds) {
+		_portletIds = portletIds;
 	}
 
 	private void _merge(
@@ -120,8 +129,8 @@ public class PortletCategory implements Serializable {
 		portletIds1.addAll(portletIds2);
 	}
 
-	private String _name;
 	private Map<String, PortletCategory> _categories;
+	private String _name;
 	private Set<String> _portletIds;
 
 }

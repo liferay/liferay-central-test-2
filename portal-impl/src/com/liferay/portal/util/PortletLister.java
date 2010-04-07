@@ -98,7 +98,7 @@ public class PortletLister {
 		for (int i = 0; itr.hasNext();) {
 			PortletCategory portletCategory = itr.next();
 
-			if (portletCategory.getName().equals("category.hidden")) {
+			if (portletCategory.isHidden()) {
 				continue;
 			}
 
