@@ -37,6 +37,20 @@ public class PrefsPropsUtil {
 		}
 	}
 
+	public static String getString(String key)
+		throws Exception {
+
+		Object returnObj = PortalClassInvoker.invoke(
+			_CLASS, _METHOD_GET_STRING, key, false);
+
+		if (returnObj != null) {
+			return (String)returnObj;
+		}
+		else {
+			return null;
+		}
+	}
+
 	public static String[] getStringArray(
 			long companyId, String name, String delimiter)
 		throws Exception {
