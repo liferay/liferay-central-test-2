@@ -111,7 +111,7 @@ public class PollsPortletDataHandlerImpl extends BasePortletDataHandler {
 		long questionId = MapUtil.getLong(
 			questionPKs, choice.getQuestionId(), choice.getQuestionId());
 
-		PollsChoice existingChoice = null;
+		PollsChoice importedChoice = null;
 
 		try {
 			PollsQuestionUtil.findByPrimaryKey(questionId);
@@ -119,31 +119,32 @@ public class PollsPortletDataHandlerImpl extends BasePortletDataHandler {
 			if (context.getDataStrategy().equals(
 					PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
 
-				try {
-					existingChoice = PollsChoiceFinderUtil.findByUuid_G(
+				PollsChoice existingChoice =
+					PollsChoiceFinderUtil.fetchByUUID_G(
 						choice.getUuid(), context.getGroupId());
 
-					existingChoice = PollsChoiceLocalServiceUtil.updateChoice(
-						existingChoice.getChoiceId(), questionId,
-						choice.getName(), choice.getDescription());
-				}
-				catch (NoSuchChoiceException nsce) {
-					existingChoice = PollsChoiceLocalServiceUtil.addChoice(
+				if (existingChoice == null) {
+					importedChoice = PollsChoiceLocalServiceUtil.addChoice(
 						choice.getUuid(), questionId, choice.getName(),
 						choice.getDescription());
 				}
+				else {
+					importedChoice = PollsChoiceLocalServiceUtil.updateChoice(
+						existingChoice.getChoiceId(), questionId,
+						choice.getName(), choice.getDescription());
+				}
 			}
 			else {
-				existingChoice = PollsChoiceLocalServiceUtil.addChoice(
+				importedChoice = PollsChoiceLocalServiceUtil.addChoice(
 					null, questionId, choice.getName(),
 					choice.getDescription());
 			}
 
-			choicePKs.put(choice.getChoiceId(), existingChoice.getChoiceId());
+			choicePKs.put(choice.getChoiceId(), importedChoice.getChoiceId());
 
 			context.importPermissions(
 				PollsChoice.class, choice.getChoiceId(),
-				existingChoice.getChoiceId());
+				importedChoice.getChoiceId());
 		}
 		catch (NoSuchQuestionException nsqe) {
 			_log.error(
@@ -193,23 +194,23 @@ public class PollsPortletDataHandlerImpl extends BasePortletDataHandler {
 		serviceContext.setModifiedDate(question.getModifiedDate());
 		serviceContext.setScopeGroupId(context.getScopeGroupId());
 
-		PollsQuestion existingQuestion = null;
+		PollsQuestion importedQuestion = null;
 
 		if (context.getDataStrategy().equals(
 				PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
 
-			existingQuestion =  PollsQuestionUtil.fetchByUUID_G(
+			PollsQuestion existingQuestion =  PollsQuestionUtil.fetchByUUID_G(
 				question.getUuid(), context.getGroupId());
 
 			if (existingQuestion == null) {
-				existingQuestion = PollsQuestionLocalServiceUtil.addQuestion(
+				importedQuestion = PollsQuestionLocalServiceUtil.addQuestion(
 					question.getUuid(), userId, question.getTitleMap(),
 					question.getDescriptionMap(), expirationMonth,
 					expirationDay, expirationYear, expirationHour,
 					expirationMinute, neverExpire, null, serviceContext);
 			}
 			else {
-				existingQuestion = PollsQuestionLocalServiceUtil.updateQuestion(
+				importedQuestion = PollsQuestionLocalServiceUtil.updateQuestion(
 					userId, existingQuestion.getQuestionId(),
 					question.getTitleMap(), question.getDescriptionMap(),
 					expirationMonth, expirationDay, expirationYear,
@@ -217,7 +218,7 @@ public class PollsPortletDataHandlerImpl extends BasePortletDataHandler {
 			}
 		}
 		else {
-			existingQuestion = PollsQuestionLocalServiceUtil.addQuestion(
+			importedQuestion = PollsQuestionLocalServiceUtil.addQuestion(
 				null, userId, question.getTitleMap(),
 				question.getDescriptionMap(), expirationMonth, expirationDay,
 				expirationYear, expirationHour, expirationMinute, neverExpire,
@@ -225,11 +226,11 @@ public class PollsPortletDataHandlerImpl extends BasePortletDataHandler {
 		}
 
 		questionPKs.put(
-			question.getQuestionId(), existingQuestion.getQuestionId());
+			question.getQuestionId(), importedQuestion.getQuestionId());
 
 		context.importPermissions(
 			PollsQuestion.class, question.getQuestionId(),
-			existingQuestion.getQuestionId());
+			importedQuestion.getQuestionId());
 	}
 
 	public static void importVote(

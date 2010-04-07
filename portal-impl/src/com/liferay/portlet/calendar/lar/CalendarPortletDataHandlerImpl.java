@@ -218,16 +218,16 @@ public class CalendarPortletDataHandlerImpl extends BasePortletDataHandler {
 		serviceContext.setAddGuestPermissions(true);
 		serviceContext.setScopeGroupId(context.getGroupId());
 
-		CalEvent existingEvent = null;
+		CalEvent importedEvent = null;
 
 		if (context.getDataStrategy().equals(
 				PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
 
-			existingEvent = CalEventUtil.fetchByUUID_G(
+			CalEvent existingEvent = CalEventUtil.fetchByUUID_G(
 				event.getUuid(), context.getGroupId());
 
 			if (existingEvent == null) {
-				existingEvent = CalEventLocalServiceUtil.addEvent(
+				importedEvent = CalEventLocalServiceUtil.addEvent(
 					event.getUuid(), userId, event.getTitle(),
 					event.getDescription(), startDateMonth, startDateDay,
 					startDateYear, startDateHour, startDateMinute, endDateMonth,
@@ -239,7 +239,7 @@ public class CalendarPortletDataHandlerImpl extends BasePortletDataHandler {
 					event.getSecondReminder(), serviceContext);
 			}
 			else {
-				existingEvent = CalEventLocalServiceUtil.updateEvent(
+				importedEvent = CalEventLocalServiceUtil.updateEvent(
 					userId, existingEvent.getEventId(), event.getTitle(),
 					event.getDescription(), startDateMonth, startDateDay,
 					startDateYear, startDateHour, startDateMinute, endDateMonth,
@@ -252,7 +252,7 @@ public class CalendarPortletDataHandlerImpl extends BasePortletDataHandler {
 			}
 		}
 		else {
-			existingEvent = CalEventLocalServiceUtil.addEvent(
+			importedEvent = CalEventLocalServiceUtil.addEvent(
 				null, userId, event.getTitle(), event.getDescription(),
 				startDateMonth, startDateDay, startDateYear, startDateHour,
 				startDateMinute, endDateMonth, endDateDay, endDateYear,
@@ -264,7 +264,7 @@ public class CalendarPortletDataHandlerImpl extends BasePortletDataHandler {
 		}
 
 		context.importPermissions(
-			CalEvent.class, event.getEventId(), existingEvent.getEventId());
+			CalEvent.class, event.getEventId(), importedEvent.getEventId());
 	}
 
 	private static final String _NAMESPACE = "calendar";

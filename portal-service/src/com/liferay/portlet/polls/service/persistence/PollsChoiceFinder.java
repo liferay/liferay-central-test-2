@@ -20,7 +20,11 @@ package com.liferay.portlet.polls.service.persistence;
  * @author Brian Wing Shun Chan
  */
 public interface PollsChoiceFinder {
-	public com.liferay.portlet.polls.model.PollsChoice findByUuid_G(
+	public com.liferay.portlet.polls.model.PollsChoice fetchByUUID_G(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.portlet.polls.model.PollsChoice findByUUID_G(
 		java.lang.String uuid, long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.polls.NoSuchChoiceException;

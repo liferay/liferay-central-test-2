@@ -22,11 +22,17 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
  * @author Brian Wing Shun Chan
  */
 public class PollsChoiceFinderUtil {
-	public static com.liferay.portlet.polls.model.PollsChoice findByUuid_G(
+	public static com.liferay.portlet.polls.model.PollsChoice fetchByUUID_G(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getFinder().fetchByUUID_G(uuid, groupId);
+	}
+
+	public static com.liferay.portlet.polls.model.PollsChoice findByUUID_G(
 		java.lang.String uuid, long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.polls.NoSuchChoiceException {
-		return getFinder().findByUuid_G(uuid, groupId);
+		return getFinder().findByUUID_G(uuid, groupId);
 	}
 
 	public static PollsChoiceFinder getFinder() {

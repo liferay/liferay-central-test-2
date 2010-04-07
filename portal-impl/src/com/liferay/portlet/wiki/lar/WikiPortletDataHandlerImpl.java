@@ -107,17 +107,17 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 		serviceContext.setModifiedDate(node.getModifiedDate());
 		serviceContext.setScopeGroupId(context.getGroupId());
 
-		WikiNode existingNode = null;
+		WikiNode importedNode = null;
 
 		if (context.getDataStrategy().equals(
 				PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
 
-			existingNode = WikiNodeUtil.fetchByUUID_G(
+			WikiNode existingNode = WikiNodeUtil.fetchByUUID_G(
 				node.getUuid(), context.getGroupId());
 
 			String nodeName = PropsUtil.get(PropsKeys.WIKI_INITIAL_NODE_NAME);
 
-			if (existingNode == null && node.getName().equals(nodeName)) {
+			if ((existingNode == null) && node.getName().equals(nodeName)) {
 				try {
 					WikiNodeUtil.removeByG_N(
 						context.getGroupId(), node.getName());
@@ -127,12 +127,12 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 			}
 
 			if (existingNode == null) {
-				existingNode = WikiNodeLocalServiceUtil.addNode(
+				importedNode = WikiNodeLocalServiceUtil.addNode(
 					node.getUuid(), userId, node.getName(),
 					node.getDescription(), serviceContext);
 			}
 			else {
-				existingNode = WikiNodeLocalServiceUtil.updateNode(
+				importedNode = WikiNodeLocalServiceUtil.updateNode(
 					existingNode.getNodeId(), node.getName(),
 					node.getDescription(), serviceContext);
 			}
@@ -149,14 +149,14 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 				}
 			}
 
-			existingNode = WikiNodeLocalServiceUtil.addNode(
+			importedNode = WikiNodeLocalServiceUtil.addNode(
 				userId, node.getName(), node.getDescription(), serviceContext);
 		}
 
-		nodePKs.put(node.getNodeId(), existingNode.getNodeId());
+		nodePKs.put(node.getNodeId(), importedNode.getNodeId());
 
 		context.importPermissions(
-			WikiNode.class, node.getNodeId(), existingNode.getNodeId());
+			WikiNode.class, node.getNodeId(), importedNode.getNodeId());
 	}
 
 	public static void importPage(
@@ -190,7 +190,7 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 		serviceContext.setCreateDate(page.getCreateDate());
 		serviceContext.setModifiedDate(page.getModifiedDate());
 
-		WikiPage existingPage = null;
+		WikiPage importedPage = null;
 
 		try {
 			WikiNodeUtil.findByPrimaryKey(nodeId);
@@ -198,12 +198,8 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 			if (context.getDataStrategy().equals(
 					PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
 
-				try {
-					existingPage = WikiPageUtil.findByUUID_G(
-						page.getUuid(), context.getGroupId());
-				}
-				catch (NoSuchPageException nspe) {
-				}
+				WikiPage existingPage = WikiPageUtil.fetchByUUID_G(
+					page.getUuid(), context.getGroupId());
 
 				if (existingPage == null) {
 					try {
@@ -214,24 +210,24 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 					}
 				}
 
-				if (existingPage != null) {
-					existingPage = WikiPageLocalServiceUtil.updatePage(
-						userId, nodeId, existingPage.getTitle(), 0,
-						page.getContent(), page.getSummary(), true,
-						page.getFormat(), page.getParentTitle(),
-						page.getRedirectTitle(), serviceContext);
-				}
-				else {
-					existingPage = WikiPageLocalServiceUtil.addPage(
+				if (existingPage == null) {
+					importedPage = WikiPageLocalServiceUtil.addPage(
 						page.getUuid(), userId, nodeId, page.getTitle(),
 						page.getVersion(), page.getContent(), page.getSummary(),
 						true, page.getFormat(), page.getHead(),
 						page.getParentTitle(), page.getRedirectTitle(),
 						serviceContext);
 				}
+				else {
+					importedPage = WikiPageLocalServiceUtil.updatePage(
+						userId, nodeId, existingPage.getTitle(), 0,
+						page.getContent(), page.getSummary(), true,
+						page.getFormat(), page.getParentTitle(),
+						page.getRedirectTitle(), serviceContext);
+				}
 			}
 			else {
-				existingPage = WikiPageLocalServiceUtil.addPage(
+				importedPage = WikiPageLocalServiceUtil.addPage(
 					null, userId, nodeId, page.getTitle(), page.getVersion(),
 					page.getContent(), page.getSummary(), true,
 					page.getFormat(), page.getHead(), page.getParentTitle(),
@@ -263,20 +259,20 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 
 			context.importPermissions(
 				WikiPage.class, page.getResourcePrimKey(),
-				existingPage.getResourcePrimKey());
+				importedPage.getResourcePrimKey());
 
 			if (context.getBooleanParameter(_NAMESPACE, "comments") &&
 				page.isHead()) {
 
 				context.importComments(
 					WikiPage.class, page.getResourcePrimKey(),
-					existingPage.getResourcePrimKey(), context.getGroupId());
+					importedPage.getResourcePrimKey(), context.getGroupId());
 			}
 
 			if (context.getBooleanParameter(_NAMESPACE, "ratings")) {
 				context.importRatingsEntries(
 					WikiPage.class, page.getResourcePrimKey(),
-					existingPage.getResourcePrimKey());
+					importedPage.getResourcePrimKey());
 			}
 		}
 		catch (NoSuchNodeException nsne) {

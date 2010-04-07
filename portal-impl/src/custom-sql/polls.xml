@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 
 <custom-sql>
-	<sql id="com.liferay.portlet.polls.service.persistence.PollsChoiceFinder.findByUuid_G">
+	<sql id="com.liferay.portlet.polls.service.persistence.PollsChoiceFinder.findByUUID_G">
 		<![CDATA[
 			SELECT
 				DISTINCT {PollsChoice.*}

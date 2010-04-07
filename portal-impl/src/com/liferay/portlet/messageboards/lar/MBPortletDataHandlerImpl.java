@@ -495,7 +495,7 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 				category.getParentCategoryId());
 		}
 
-		MBCategory existingCategory = null;
+		MBCategory importedCategory = null;
 
 		try {
 			if (parentCategoryId !=
@@ -507,11 +507,11 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 			if (context.getDataStrategy().equals(
 					PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
 
-				existingCategory = MBCategoryUtil.fetchByUUID_G(
+				MBCategory existingCategory = MBCategoryUtil.fetchByUUID_G(
 					category.getUuid(), context.getGroupId());
 
 				if (existingCategory == null) {
-					existingCategory = MBCategoryLocalServiceUtil.addCategory(
+					importedCategory = MBCategoryLocalServiceUtil.addCategory(
 						category.getUuid(), userId, parentCategoryId,
 						category.getName(), category.getDescription(),
 						emailAddress, inProtocol, inServerName, inServerPort,
@@ -521,7 +521,7 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 						mailingListActive, serviceContext);
 				}
 				else {
-					existingCategory =
+					importedCategory =
 						MBCategoryLocalServiceUtil.updateCategory(
 							existingCategory.getCategoryId(), parentCategoryId,
 							category.getName(), category.getDescription(),
@@ -534,7 +534,7 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 				}
 			}
 			else {
-				existingCategory = MBCategoryLocalServiceUtil.addCategory(
+				importedCategory = MBCategoryLocalServiceUtil.addCategory(
 					userId, parentCategoryId, category.getName(),
 					category.getDescription(), emailAddress, inProtocol,
 					inServerName, inServerPort, inUseSSL, inUserName,
@@ -544,11 +544,11 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 			}
 
 			categoryPKs.put(
-				category.getCategoryId(), existingCategory.getCategoryId());
+				category.getCategoryId(), importedCategory.getCategoryId());
 
 			context.importPermissions(
 				MBCategory.class, category.getCategoryId(),
-				existingCategory.getCategoryId());
+				importedCategory.getCategoryId());
 		}
 		catch (NoSuchCategoryException nsce) {
 			_log.error(
@@ -650,7 +650,7 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 				categoryPKs, message.getCategoryId(), message.getCategoryId());
 		}
 
-		MBMessage existingMessage = null;
+		MBMessage importedMessage = null;
 
 		try {
 			MBCategoryUtil.findByPrimaryKey(categoryId);
@@ -665,18 +665,11 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 			if (context.getDataStrategy().equals(
 					PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
 
-				try {
-					existingMessage = MBMessageUtil.findByUUID_G(
-						message.getUuid(), context.getGroupId());
+				MBMessage existingMessage = MBMessageUtil.fetchByUUID_G(
+					message.getUuid(), context.getGroupId());
 
-					existingMessage = MBMessageLocalServiceUtil.updateMessage(
-						userId, existingMessage.getMessageId(),
-						message.getSubject(), message.getBody(), files,
-						existingFiles, message.getPriority(),
-						message.getAllowPingbacks(), serviceContext);
-				}
-				catch (NoSuchMessageException nsme) {
-					existingMessage = MBMessageLocalServiceUtil.addMessage(
+				if (existingMessage == null) {
+					importedMessage = MBMessageLocalServiceUtil.addMessage(
 						message.getUuid(), userId, userName,
 						message.getGroupId(), categoryId, threadId,
 						parentMessageId, message.getSubject(),
@@ -684,9 +677,16 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 						message.getPriority(), message.getAllowPingbacks(),
 						serviceContext);
 				}
+				else {
+					importedMessage = MBMessageLocalServiceUtil.updateMessage(
+						userId, existingMessage.getMessageId(),
+						message.getSubject(), message.getBody(), files,
+						existingFiles, message.getPriority(),
+						message.getAllowPingbacks(), serviceContext);
+				}
 			}
 			else {
-				existingMessage = MBMessageLocalServiceUtil.addMessage(
+				importedMessage = MBMessageLocalServiceUtil.addMessage(
 					userId, userName, message.getGroupId(), categoryId,
 					threadId, parentMessageId, message.getSubject(),
 					message.getBody(), files, message.getAnonymous(),
@@ -694,18 +694,18 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 					serviceContext);
 			}
 
-			threadPKs.put(message.getThreadId(), existingMessage.getThreadId());
+			threadPKs.put(message.getThreadId(), importedMessage.getThreadId());
 			messagePKs.put(
-				message.getMessageId(), existingMessage.getMessageId());
+				message.getMessageId(), importedMessage.getMessageId());
 
 			context.importPermissions(
 				MBMessage.class, message.getMessageId(),
-				existingMessage.getMessageId());
+				importedMessage.getMessageId());
 
 			if (context.getBooleanParameter(_NAMESPACE, "ratings")) {
 				context.importRatingsEntries(
 					MBMessage.class, message.getMessageId(),
-					existingMessage.getMessageId());
+					importedMessage.getMessageId());
 			}
 		}
 		catch (NoSuchCategoryException nsce) {

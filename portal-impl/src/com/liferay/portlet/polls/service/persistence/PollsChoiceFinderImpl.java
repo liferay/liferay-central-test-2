@@ -36,10 +36,10 @@ public class PollsChoiceFinderImpl
 	extends BasePersistenceImpl<PollsChoice> implements PollsChoiceFinder {
 
 	public static String FIND_BY_UUID_G =
-		PollsChoiceFinder.class.getName() + ".findByUuid_G";
+		PollsChoiceFinder.class.getName() + ".findByUUID_G";
 
-	public PollsChoice findByUuid_G(String uuid, long groupId)
-		throws NoSuchChoiceException, SystemException {
+	public PollsChoice fetchByUUID_G(String uuid, long groupId)
+		throws SystemException {
 
 		Session session = null;
 
@@ -59,29 +59,39 @@ public class PollsChoiceFinderImpl
 
 			List<PollsChoice> list = q.list();
 
-			if (list.size() == 0) {
-				StringBundler sb = new StringBundler(5);
-
-				sb.append("No PollsChoice exists with the key {uuid=");
-				sb.append(uuid);
-				sb.append(", groupId=");
-				sb.append(groupId);
-				sb.append("}");
-
-				throw new NoSuchChoiceException(sb.toString());
+			if (list.isEmpty()) {
+				return null;
 			}
 			else {
 				return list.get(0);
 			}
-		}
-		catch (NoSuchChoiceException nsce) {
-			throw nsce;
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
 		}
 		finally {
 			closeSession(session);
+		}
+	}
+
+	public PollsChoice findByUUID_G(String uuid, long groupId)
+		throws NoSuchChoiceException, SystemException {
+
+		PollsChoice choice = fetchByUUID_G(uuid, groupId);
+
+		if (choice == null) {
+			StringBundler sb = new StringBundler(5);
+
+			sb.append("No PollsChoice exists with the key {uuid=");
+			sb.append(uuid);
+			sb.append(", groupId=");
+			sb.append(groupId);
+			sb.append("}");
+
+			throw new NoSuchChoiceException(sb.toString());
+		}
+		else {
+			return choice;
 		}
 	}
 

@@ -36,7 +36,6 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.persistence.ImageUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.imagegallery.NoSuchFolderException;
-import com.liferay.portlet.imagegallery.NoSuchImageException;
 import com.liferay.portlet.imagegallery.model.IGFolder;
 import com.liferay.portlet.imagegallery.model.IGFolderConstants;
 import com.liferay.portlet.imagegallery.model.IGImage;
@@ -133,7 +132,7 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 				folder.getParentFolderId());
 		}
 
-		IGFolder existingFolder = null;
+		IGFolder importedFolder = null;
 
 		try {
 			if (parentFolderId != IGFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
@@ -143,7 +142,7 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 			if (context.getDataStrategy().equals(
 					PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
 
-				existingFolder = IGFolderUtil.fetchByUUID_G(
+				IGFolder existingFolder = IGFolderUtil.fetchByUUID_G(
 					folder.getUuid(), context.getGroupId());
 
 				if (existingFolder == null) {
@@ -151,12 +150,12 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 						context.getCompanyId(), context.getGroupId(),
 						parentFolderId, folder.getName(), 2);
 
-					existingFolder = IGFolderLocalServiceUtil.addFolder(
+					importedFolder = IGFolderLocalServiceUtil.addFolder(
 						folder.getUuid(), userId, parentFolderId, name,
 						folder.getDescription(), serviceContext);
 				}
 				else {
-					existingFolder = IGFolderLocalServiceUtil.updateFolder(
+					importedFolder = IGFolderLocalServiceUtil.updateFolder(
 						existingFolder.getFolderId(), parentFolderId,
 						folder.getName(), folder.getDescription(), false,
 						serviceContext);
@@ -167,16 +166,16 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 					context.getCompanyId(), context.getGroupId(),
 					parentFolderId, folder.getName(), 2);
 
-				existingFolder = IGFolderLocalServiceUtil.addFolder(
+				importedFolder = IGFolderLocalServiceUtil.addFolder(
 					null, userId, parentFolderId, name, folder.getDescription(),
 					serviceContext);
 			}
 
-			folderPKs.put(folder.getFolderId(), existingFolder.getFolderId());
+			folderPKs.put(folder.getFolderId(), importedFolder.getFolderId());
 
 			context.importPermissions(
 				IGFolder.class, folder.getFolderId(),
-				existingFolder.getFolderId());
+				importedFolder.getFolderId());
 		}
 		catch (NoSuchFolderException nsfe) {
 			_log.error(
@@ -241,37 +240,37 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 				folderPKs, image.getFolderId(), image.getFolderId());
 		}
 
-		IGImage existingImage = null;
+		IGImage importedImage = null;
 
 		try {
 			if (context.getDataStrategy().equals(
 					PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
 
-				try {
-					existingImage = IGImageUtil.findByUUID_G(
-						image.getUuid(), groupId);
+				IGImage existingImage = IGImageUtil.fetchByUUID_G(
+					image.getUuid(), groupId);
 
-					existingImage = IGImageLocalServiceUtil.updateImage(
-						userId, existingImage.getImageId(), groupId, folderId,
+				if (existingImage == null) {
+					importedImage = IGImageLocalServiceUtil.addImage(
+						image.getUuid(), userId, groupId, folderId,
 						image.getName(), image.getDescription(), imageFile,
 						image.getImageType(), serviceContext);
 				}
-				catch (NoSuchImageException nsie) {
-					existingImage = IGImageLocalServiceUtil.addImage(
-						image.getUuid(), userId, groupId, folderId,
+				else {
+					importedImage = IGImageLocalServiceUtil.updateImage(
+						userId, existingImage.getImageId(), groupId, folderId,
 						image.getName(), image.getDescription(), imageFile,
 						image.getImageType(), serviceContext);
 				}
 			}
 			else {
-				existingImage = IGImageLocalServiceUtil.addImage(
+				importedImage = IGImageLocalServiceUtil.addImage(
 					null, userId, groupId, folderId, image.getName(),
 					image.getDescription(), imageFile, image.getImageType(),
 					serviceContext);
 			}
 
 			context.importPermissions(
-				IGImage.class, image.getImageId(), existingImage.getImageId());
+				IGImage.class, image.getImageId(), importedImage.getImageId());
 		}
 		catch (NoSuchFolderException nsfe) {
 			_log.error(
