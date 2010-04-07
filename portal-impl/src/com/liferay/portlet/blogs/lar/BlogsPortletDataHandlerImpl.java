@@ -232,16 +232,16 @@ public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 		serviceContext.setStartWorkflow(false);
 		serviceContext.setStatus(status);
 
-		BlogsEntry existingEntry = null;
+		BlogsEntry importedEntry = null;
 
 		if (context.getDataStrategy().equals(
 				PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
 
-			existingEntry = BlogsEntryUtil.fetchByUUID_G(
+			BlogsEntry existingEntry = BlogsEntryUtil.fetchByUUID_G(
 				entry.getUuid(), context.getGroupId());
 
 			if (existingEntry == null) {
-				existingEntry = BlogsEntryLocalServiceUtil.addEntry(
+				importedEntry = BlogsEntryLocalServiceUtil.addEntry(
 					entry.getUuid(), userId, entry.getTitle(),
 					entry.getContent(), displayDateMonth, displayDateDay,
 					displayDateYear, displayDateHour, displayDateMinute,
@@ -249,7 +249,7 @@ public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 					serviceContext);
 			}
 			else {
-				existingEntry = BlogsEntryLocalServiceUtil.updateEntry(
+				importedEntry = BlogsEntryLocalServiceUtil.updateEntry(
 					userId, existingEntry.getEntryId(), entry.getTitle(),
 					entry.getContent(), displayDateMonth, displayDateDay,
 					displayDateYear, displayDateHour, displayDateMinute,
@@ -258,7 +258,7 @@ public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 			}
 		}
 		else {
-			existingEntry = BlogsEntryLocalServiceUtil.addEntry(
+			importedEntry = BlogsEntryLocalServiceUtil.addEntry(
 				null, userId, entry.getTitle(), entry.getContent(),
 				displayDateMonth, displayDateDay, displayDateYear,
 				displayDateHour, displayDateMinute, allowPingbacks,
@@ -266,18 +266,18 @@ public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 		}
 
 		context.importPermissions(
-			BlogsEntry.class, entry.getEntryId(), existingEntry.getEntryId());
+			BlogsEntry.class, entry.getEntryId(), importedEntry.getEntryId());
 
 		if (context.getBooleanParameter(_NAMESPACE, "comments")) {
 			context.importComments(
 				BlogsEntry.class, entry.getEntryId(),
-				existingEntry.getEntryId(), context.getGroupId());
+				importedEntry.getEntryId(), context.getGroupId());
 		}
 
 		if (context.getBooleanParameter(_NAMESPACE, "ratings")) {
 			context.importRatingsEntries(
 				BlogsEntry.class, entry.getEntryId(),
-				existingEntry.getEntryId());
+				importedEntry.getEntryId());
 		}
 	}
 

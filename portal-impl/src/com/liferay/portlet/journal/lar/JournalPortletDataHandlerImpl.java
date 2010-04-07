@@ -834,10 +834,9 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		serviceContext.setCreateDate(article.getCreateDate());
 		serviceContext.setModifiedDate(article.getModifiedDate());
 		serviceContext.setScopeGroupId(groupId);
-		serviceContext.setStatus(article.getStatus());
 		serviceContext.setStartWorkflow(false);
+		serviceContext.setStatus(article.getStatus());
 
-		JournalArticle existingArticle = null;
 		JournalArticle importedArticle = null;
 
 		if (Validator.isNotNull(article.getStructureId())) {
@@ -872,7 +871,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		if (context.getDataStrategy().equals(
 				PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
 
-			existingArticle = JournalArticleUtil.fetchByUUID_G(
+			JournalArticle existingArticle = JournalArticleUtil.fetchByUUID_G(
 				article.getUuid(), groupId);
 
 			if (existingArticle == null) {

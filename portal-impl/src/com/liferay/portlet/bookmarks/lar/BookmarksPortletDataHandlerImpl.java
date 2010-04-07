@@ -31,7 +31,6 @@ import com.liferay.portal.lar.PortletDataHandlerControl;
 import com.liferay.portal.lar.PortletDataHandlerKeys;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortletKeys;
-import com.liferay.portlet.bookmarks.NoSuchEntryException;
 import com.liferay.portlet.bookmarks.NoSuchFolderException;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
@@ -342,37 +341,37 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 				folderPKs, entry.getFolderId(), entry.getFolderId());
 		}
 
-		BookmarksEntry existingEntry = null;
+		BookmarksEntry importedEntry = null;
 
 		try {
 			if (context.getDataStrategy().equals(
 					PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
 
-				try {
-					existingEntry = BookmarksEntryUtil.findByUUID_G(
-						entry.getUuid(), groupId);
+				BookmarksEntry existingEntry = BookmarksEntryUtil.fetchByUUID_G(
+					entry.getUuid(), groupId);
 
-					existingEntry = BookmarksEntryLocalServiceUtil.updateEntry(
-						userId, existingEntry.getEntryId(), groupId, folderId,
+				if (existingEntry == null) {
+					importedEntry = BookmarksEntryLocalServiceUtil.addEntry(
+						entry.getUuid(), userId, groupId, folderId,
 						entry.getName(), entry.getUrl(), entry.getComments(),
 						serviceContext);
 				}
-				catch (NoSuchEntryException nsee) {
-					existingEntry = BookmarksEntryLocalServiceUtil.addEntry(
-						entry.getUuid(), userId, groupId, folderId,
+				else {
+					importedEntry = BookmarksEntryLocalServiceUtil.updateEntry(
+						userId, existingEntry.getEntryId(), groupId, folderId,
 						entry.getName(), entry.getUrl(), entry.getComments(),
 						serviceContext);
 				}
 			}
 			else {
-				existingEntry = BookmarksEntryLocalServiceUtil.addEntry(
+				importedEntry = BookmarksEntryLocalServiceUtil.addEntry(
 					null, userId, groupId, folderId, entry.getName(),
 					entry.getUrl(), entry.getComments(), serviceContext);
 			}
 
 			context.importPermissions(
 				BookmarksEntry.class, entry.getEntryId(),
-				existingEntry.getEntryId());
+				importedEntry.getEntryId());
 		}
 		catch (NoSuchFolderException nsfe) {
 			_log.error(
@@ -414,7 +413,7 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 				folder.getParentFolderId());
 		}
 
-		BookmarksFolder existingFolder = null;
+		BookmarksFolder importedFolder = null;
 
 		try {
 			if (parentFolderId !=
@@ -425,17 +424,19 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 
 			if (context.getDataStrategy().equals(
 					PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
-				existingFolder = BookmarksFolderUtil.fetchByUUID_G(
-					folder.getUuid(), context.getGroupId());
+
+				BookmarksFolder existingFolder =
+					BookmarksFolderUtil.fetchByUUID_G(
+						folder.getUuid(), context.getGroupId());
 
 				if (existingFolder == null) {
-					existingFolder = BookmarksFolderLocalServiceUtil.addFolder(
+					importedFolder = BookmarksFolderLocalServiceUtil.addFolder(
 						folder.getUuid(), userId, parentFolderId,
 						folder.getName(), folder.getDescription(),
 						serviceContext);
 				}
 				else {
-					existingFolder =
+					importedFolder =
 						BookmarksFolderLocalServiceUtil.updateFolder(
 							existingFolder.getFolderId(), parentFolderId,
 							folder.getName(), folder.getDescription(), false,
@@ -443,16 +444,16 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 				}
 			}
 			else {
-				existingFolder = BookmarksFolderLocalServiceUtil.addFolder(
+				importedFolder = BookmarksFolderLocalServiceUtil.addFolder(
 					null, userId, parentFolderId, folder.getName(),
 					folder.getDescription(), serviceContext);
 			}
 
-			folderPKs.put(folder.getFolderId(), existingFolder.getFolderId());
+			folderPKs.put(folder.getFolderId(), importedFolder.getFolderId());
 
 			context.importPermissions(
 				BookmarksFolder.class, folder.getFolderId(),
-				existingFolder.getFolderId());
+				importedFolder.getFolderId());
 		}
 		catch (NoSuchFolderException nsfe) {
 			_log.error(

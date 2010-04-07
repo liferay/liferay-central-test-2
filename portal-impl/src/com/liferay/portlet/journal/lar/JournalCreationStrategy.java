@@ -32,9 +32,9 @@ import com.liferay.portlet.journal.model.JournalArticle;
 public interface JournalCreationStrategy {
 
 	/**
-	 * Constant returned by getAuthorUserId() that
-	 * indicates the default portlet data import user id strategy that should be
-	 * used to determine the user id.
+	 * Constant returned by getAuthorUserId() that indicates the default portlet
+	 * data import user id strategy that should be used to determine the user
+	 * id.
 	 */
 	public static final long USE_DEFAULT_USER_ID_STRATEGY = 0;
 
