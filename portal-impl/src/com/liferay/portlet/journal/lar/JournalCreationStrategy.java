@@ -32,7 +32,7 @@ import com.liferay.portlet.journal.model.JournalArticle;
 public interface JournalCreationStrategy {
 
 	/**
-	 * Constant returned by getAuthorUserId() and/or getApprovalUserId() that
+	 * Constant returned by getAuthorUserId() that
 	 * indicates the default portlet data import user id strategy that should be
 	 * used to determine the user id.
 	 */
@@ -53,17 +53,6 @@ public interface JournalCreationStrategy {
 	 *		   default user id strategy
 	 */
 	public long getAuthorUserId(PortletDataContext context, Object journalObj)
-		throws Exception;
-
-	/**
-	 * Returns the approver's user id to assign to newly created content. If
-	 * zero is returned, the default user id import strategy will determine the
-	 * author id.
-	 *
-	 * @return the approver's user id or USE_DEFAULT_USER_ID_STRATEGY to use the
-	 *		   default user id strategy
-	 */
-	public long getApprovalUserId(PortletDataContext context, Object journalObj)
 		throws Exception;
 
 	/**

@@ -834,9 +834,11 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		serviceContext.setCreateDate(article.getCreateDate());
 		serviceContext.setModifiedDate(article.getModifiedDate());
 		serviceContext.setScopeGroupId(groupId);
+		serviceContext.setStatus(article.getStatus());
 		serviceContext.setStartWorkflow(false);
 
 		JournalArticle existingArticle = null;
+		JournalArticle importedArticle = null;
 
 		if (Validator.isNotNull(article.getStructureId())) {
 			JournalStructure structure = JournalStructureUtil.fetchByG_S(
@@ -874,7 +876,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 				article.getUuid(), groupId);
 
 			if (existingArticle == null) {
-				existingArticle = JournalArticleLocalServiceUtil.addArticle(
+				importedArticle = JournalArticleLocalServiceUtil.addArticle(
 					article.getUuid(), userId, groupId, articleId,
 					autoArticleId, article.getVersion(), article.getTitle(),
 					article.getDescription(), article.getContent(),
@@ -889,7 +891,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 					smallFile, images, articleURL, serviceContext);
 			}
 			else {
-				existingArticle = JournalArticleLocalServiceUtil.updateArticle(
+				importedArticle = JournalArticleLocalServiceUtil.updateArticle(
 					userId, existingArticle.getGroupId(),
 					existingArticle.getArticleId(),
 					existingArticle.getVersion(), incrementVersion,
@@ -907,7 +909,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 			}
 		}
 		else {
-			existingArticle = JournalArticleLocalServiceUtil.addArticle(
+			importedArticle = JournalArticleLocalServiceUtil.addArticle(
 				userId, groupId, articleId, autoArticleId, article.getVersion(),
 				article.getTitle(), article.getDescription(),
 				article.getContent(), article.getType(), parentStructureId,
@@ -921,50 +923,30 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 				images, articleURL, serviceContext);
 		}
 
-		long strategyApprovalUserId = creationStrategy.getApprovalUserId(
-			context, article);
-
-		if ((strategyApprovalUserId !=
-				JournalCreationStrategy.USE_DEFAULT_USER_ID_STRATEGY) ||
-			(article.isApproved() && !existingArticle.isApproved())) {
-
-			long approvedByUserId = strategyApprovalUserId;
-
-			if (approvedByUserId == 0) {
-				approvedByUserId = context.getUserId(
-					article.getStatusByUserUuid());
-			}
-
-			JournalArticleLocalServiceUtil.updateStatus(
-				approvedByUserId, groupId, existingArticle.getArticleId(),
-				existingArticle.getVersion(), StatusConstants.APPROVED,
-				articleURL, serviceContext);
-		}
-
 		context.importPermissions(
 			JournalArticle.class, article.getResourcePrimKey(),
-			existingArticle.getResourcePrimKey());
+			importedArticle.getResourcePrimKey());
 
 		if (context.getBooleanParameter(_NAMESPACE, "comments")) {
 			context.importComments(
 				JournalArticle.class, article.getResourcePrimKey(),
-				existingArticle.getResourcePrimKey(), groupId);
+				importedArticle.getResourcePrimKey(), groupId);
 		}
 
 		if (context.getBooleanParameter(_NAMESPACE, "ratings")) {
 			context.importRatingsEntries(
 				JournalArticle.class, article.getResourcePrimKey(),
-				existingArticle.getResourcePrimKey());
+				importedArticle.getResourcePrimKey());
 		}
 
-		articleIds.put(articleId, existingArticle.getArticleId());
+		articleIds.put(articleId, importedArticle.getArticleId());
 
-		if (!articleId.equals(existingArticle.getArticleId())) {
+		if (!articleId.equals(importedArticle.getArticleId())) {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
 					"An article with the ID " + articleId + " already " +
 						"exists. The new generated ID is " +
-							existingArticle.getArticleId());
+							importedArticle.getArticleId());
 			}
 		}
 	}

@@ -40,12 +40,6 @@ public class JournalCreationStrategyImpl implements JournalCreationStrategy {
 		return JournalCreationStrategy.USE_DEFAULT_USER_ID_STRATEGY;
 	}
 
-	public long getApprovalUserId(PortletDataContext context, Object journalObj)
-		throws Exception {
-
-		return JournalCreationStrategy.USE_DEFAULT_USER_ID_STRATEGY;
-	}
-
 	public String getTransformedContent(
 			PortletDataContext context, JournalArticle newArticle)
 		throws Exception {
