@@ -95,8 +95,12 @@ public class PortletLister {
 
 		Iterator<PortletCategory> itr = categories.iterator();
 
-		for (int i = 0; itr.hasNext(); i++) {
+		for (int i = 0; itr.hasNext();) {
 			PortletCategory portletCategory = itr.next();
+
+			if (portletCategory.getName().equals("category.hidden")) {
+				continue;
+			}
 
 			if (i == 0) {
 				depth++;
@@ -131,6 +135,8 @@ public class PortletLister {
 			_iteratePortlets(
 				portletCategory, portletCategory.getPortletIds(), _nodeId,
 				depth + 1);
+
+			i++;
 		}
 	}
 
@@ -160,7 +166,7 @@ public class PortletLister {
 						 !_includeInstanceablePortlets) {
 				}
 				else if (!portlet.isInstanceable() &&
-						_layoutTypePortlet.hasPortletId(
+						 _layoutTypePortlet.hasPortletId(
 							portlet.getPortletId())) {
 
 					portlets.add(portlet);
