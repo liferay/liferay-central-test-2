@@ -475,5 +475,6 @@
 /* ---------- Tree View ---------- */
 
 .aui-tree-node-selected .aui-tree-label {
+	background-color: transparent;
 	font-weight: bold;
 }
