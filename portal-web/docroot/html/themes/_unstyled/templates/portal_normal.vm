@@ -39,7 +39,7 @@
 		</hgroup>
 
 		#if(!$is_signed_in)
-			<a href="$sign_in_url" id="sign-in">$sign_in_text</a>
+			<a href="$sign_in_url" id="sign-in" rel="nofollow">$sign_in_text</a>
 		#end
 
 		#if ($update_available_url)
