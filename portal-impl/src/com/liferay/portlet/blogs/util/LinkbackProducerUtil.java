@@ -53,14 +53,7 @@ public class LinkbackProducerUtil {
 	public static void sendPingback(String sourceUri, String targetUri)
 		throws Exception {
 
-		String serverUri = _discoverPingbackServer(targetUri);
-
-		if (Validator.isNull(serverUri)) {
-			return;
-		}
-
-		_pingbackQueue.add(
-			new Tuple(new Date(), serverUri, sourceUri, targetUri));
+		_pingbackQueue.add(new Tuple(new Date(), sourceUri, targetUri));
 	}
 
 	public static synchronized void sendQueuedPingbacks()
@@ -80,9 +73,14 @@ public class LinkbackProducerUtil {
 			if (time.before(expiration)) {
 				_pingbackQueue.remove(0);
 
-				String serverUri = (String)tuple.getObject(1);
-				String sourceUri = (String)tuple.getObject(2);
-				String targetUri = (String)tuple.getObject(3);
+				String sourceUri = (String)tuple.getObject(1);
+				String targetUri = (String)tuple.getObject(2);
+
+				String serverUri = _discoverPingbackServer(targetUri);
+
+				if (Validator.isNull(serverUri)) {
+					continue;
+				}
 
 				if (_log.isInfoEnabled()) {
 					_log.info(
