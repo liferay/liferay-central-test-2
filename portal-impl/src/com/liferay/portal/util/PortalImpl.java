@@ -139,7 +139,6 @@ import com.liferay.util.JS;
 import com.liferay.util.PwdGenerator;
 import com.liferay.util.UniqueList;
 import com.liferay.util.servlet.DynamicServletRequest;
-import com.liferay.util.servlet.filters.CacheResponseUtil;
 
 import java.io.File;
 import java.io.IOException;
@@ -3404,8 +3403,6 @@ public class PortalImpl implements Portal {
 				request.removeAttribute(
 					WebKeys.PORTLET_CONFIGURATOR_VISIBILITY);
 			}
-
-			CacheResponseUtil.addHeaders(response, stringResponse.getHeaders());
 
 			if (showPortlet) {
 				return stringResponse.getString();

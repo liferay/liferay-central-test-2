@@ -197,7 +197,6 @@
 <%@ page import="com.liferay.util.servlet.DynamicServletRequest" %>
 <%@ page import="com.liferay.util.servlet.SessionParameters" %>
 <%@ page import="com.liferay.util.servlet.UploadException" %>
-<%@ page import="com.liferay.util.servlet.filters.CacheResponseUtil" %>
 <%@ page import="com.liferay.util.xml.XMLFormatter" %>
 
 <%@ page import="java.io.Serializable" %>
