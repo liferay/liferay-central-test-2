@@ -189,6 +189,8 @@ public class PollsPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		serviceContext.setAddCommunityPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
+		serviceContext.setCreateDate(question.getCreateDate());
+		serviceContext.setModifiedDate(question.getModifiedDate());
 		serviceContext.setScopeGroupId(context.getScopeGroupId());
 
 		PollsQuestion existingQuestion = null;
@@ -241,12 +243,16 @@ public class PollsPortletDataHandlerImpl extends BasePortletDataHandler {
 		long choiceId = MapUtil.getLong(
 			choicePKs, vote.getChoiceId(), vote.getChoiceId());
 
+		ServiceContext serviceContext = new ServiceContext();
+
+		serviceContext.setCreateDate(vote.getVoteDate());
+
 		try {
 			PollsQuestionUtil.findByPrimaryKey(questionId);
 			PollsChoiceUtil.findByPrimaryKey(choiceId);
 
 			PollsVoteLocalServiceUtil.addVote(
-				userId, questionId, choiceId);
+				userId, questionId, choiceId, serviceContext);
 		}
 		catch (DuplicateVoteException dve) {
 		}

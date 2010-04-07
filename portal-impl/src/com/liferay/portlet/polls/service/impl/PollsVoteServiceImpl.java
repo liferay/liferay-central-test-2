@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.polls.model.PollsVote;
 import com.liferay.portlet.polls.service.base.PollsVoteServiceBaseImpl;
 import com.liferay.portlet.polls.service.permission.PollsQuestionPermission;
@@ -44,7 +45,8 @@ public class PollsVoteServiceImpl extends PollsVoteServiceBaseImpl {
 		PollsQuestionPermission.check(
 			getPermissionChecker(), questionId, ActionKeys.ADD_VOTE);
 
-		return pollsVoteLocalService.addVote(userId, questionId, choiceId);
+		return pollsVoteLocalService.addVote(
+			userId, questionId, choiceId, new ServiceContext());
 	}
 
 }

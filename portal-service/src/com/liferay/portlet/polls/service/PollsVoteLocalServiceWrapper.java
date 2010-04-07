@@ -117,10 +117,12 @@ public class PollsVoteLocalServiceWrapper implements PollsVoteLocalService {
 	}
 
 	public com.liferay.portlet.polls.model.PollsVote addVote(long userId,
-		long questionId, long choiceId)
+		long questionId, long choiceId,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _pollsVoteLocalService.addVote(userId, questionId, choiceId);
+		return _pollsVoteLocalService.addVote(userId, questionId, choiceId,
+			serviceContext);
 	}
 
 	public java.util.List<com.liferay.portlet.polls.model.PollsVote> getChoiceVotes(

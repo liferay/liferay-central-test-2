@@ -16,6 +16,7 @@ package com.liferay.portlet.polls.service.impl;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.polls.DuplicateVoteException;
 import com.liferay.portlet.polls.NoSuchQuestionException;
 import com.liferay.portlet.polls.QuestionExpiredException;
@@ -34,7 +35,9 @@ import java.util.List;
  */
 public class PollsVoteLocalServiceImpl extends PollsVoteLocalServiceBaseImpl {
 
-	public PollsVote addVote(long userId, long questionId, long choiceId)
+	public PollsVote addVote(
+			long userId, long questionId, long choiceId,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Choice
@@ -56,7 +59,7 @@ public class PollsVoteLocalServiceImpl extends PollsVoteLocalServiceBaseImpl {
 			throw new QuestionExpiredException();
 		}
 
-		question.setLastVoteDate(now);
+		question.setLastVoteDate(serviceContext.getCreateDate(now));
 
 		pollsQuestionPersistence.update(question, false);
 
@@ -75,7 +78,7 @@ public class PollsVoteLocalServiceImpl extends PollsVoteLocalServiceBaseImpl {
 			vote.setUserId(userId);
 			vote.setQuestionId(questionId);
 			vote.setChoiceId(choiceId);
-			vote.setVoteDate(now);
+			vote.setVoteDate(serviceContext.getCreateDate(now));
 
 			pollsVotePersistence.update(vote, false);
 		}

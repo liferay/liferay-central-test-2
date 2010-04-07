@@ -81,8 +81,8 @@ public class PollsQuestionLocalServiceImpl
 		question.setCompanyId(user.getCompanyId());
 		question.setUserId(user.getUserId());
 		question.setUserName(user.getFullName());
-		question.setCreateDate(now);
-		question.setModifiedDate(now);
+		question.setCreateDate(serviceContext.getCreateDate(now));
+		question.setModifiedDate(serviceContext.getModifiedDate(now));
 		question.setTitleMap(titleMap);
 		question.setDescriptionMap(descriptionMap);
 		question.setExpirationDate(expirationDate);
@@ -267,7 +267,7 @@ public class PollsQuestionLocalServiceImpl
 		PollsQuestion question = pollsQuestionPersistence.findByPrimaryKey(
 			questionId);
 
-		question.setModifiedDate(new Date());
+		question.setModifiedDate(serviceContext.getModifiedDate(null));
 		question.setTitleMap(titleMap);
 		question.setDescriptionMap(descriptionMap);
 		question.setExpirationDate(expirationDate);
