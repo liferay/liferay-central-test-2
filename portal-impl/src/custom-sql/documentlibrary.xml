@@ -4,7 +4,7 @@
 	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder.countByG_F_S">
 		<![CDATA[
 			SELECT
-				COUNT(*) AS COUNT_VALUE
+				COUNT(DISTINCT fileEntryId) AS COUNT_VALUE
 			FROM
 				DLFileEntry
 			INNER JOIN
@@ -39,7 +39,7 @@
 		<![CDATA[
 			(
 				SELECT
-					COUNT(*) AS COUNT_VALUE
+					COUNT(DISTINCT fileEntryId) AS COUNT_VALUE
 				FROM
 					DLFileEntry
 				INNER JOIN
@@ -55,7 +55,7 @@
 			UNION ALL
 			(
 				SELECT
-					COUNT(*) AS COUNT_VALUE
+					COUNT(DISTINCT fileShortcutId) AS COUNT_VALUE
 				FROM
 					DLFileShortcut
 				WHERE
@@ -79,7 +79,7 @@
 			UNION ALL
 			(
 				SELECT
-					COUNT(*) AS COUNT_VALUE
+					COUNT(DISTINCT fileEntryId) AS COUNT_VALUE
 				FROM
 					DLFileEntry
 				INNER JOIN
@@ -95,7 +95,7 @@
 			UNION ALL
 			(
 				SELECT
-					COUNT(*) AS COUNT_VALUE
+					COUNT(DISTINCT fileShortcutId) AS COUNT_VALUE
 				FROM
 					DLFileShortcut
 				WHERE
@@ -109,7 +109,7 @@
 		<![CDATA[
 			(
 				SELECT
-					DLFileEntry.folderId AS modelFolderId, DLFileEntry.name AS name, title AS title, 0 AS fileShortcutId, 0 AS modelFolder
+					DISTINCT DLFileEntry.folderId AS modelFolderId, DLFileEntry.name AS name, title AS title, 0 AS fileShortcutId, 0 AS modelFolder
 				FROM
 					DLFileEntry
 				INNER JOIN
@@ -125,7 +125,7 @@
 			UNION ALL
 			(
 				SELECT
-					toFolderId AS modelFolderId, toName AS name, DLFileEntry.title AS title, fileShortcutId AS fileShortcutId, 0 AS modelFolder
+					DISTINCT toFolderId AS modelFolderId, toName AS name, DLFileEntry.title AS title, fileShortcutId AS fileShortcutId, 0 AS modelFolder
 				FROM
 					DLFileShortcut
 				INNER JOIN
@@ -155,7 +155,7 @@
 			UNION ALL
 			(
 				SELECT
-					DLFileEntry.folderId AS modelFolderId, DLFileEntry.name AS name, title AS title, 0 AS fileShortcutId, 0 AS modelFolder
+					DISTINCT DLFileEntry.folderId AS modelFolderId, DLFileEntry.name AS name, title AS title, 0 AS fileShortcutId, 0 AS modelFolder
 				FROM
 					DLFileEntry
 				INNER JOIN
@@ -171,7 +171,7 @@
 			UNION ALL
 			(
 				SELECT
-					toFolderId AS modelFolderId, toName AS name, DLFileEntry.title AS title, fileShortcutId AS fileShortcutId, 0 AS modelFolder
+					DISTINCT toFolderId AS modelFolderId, toName AS name, DLFileEntry.title AS title, fileShortcutId AS fileShortcutId, 0 AS modelFolder
 				FROM
 					DLFileShortcut
 				INNER JOIN
