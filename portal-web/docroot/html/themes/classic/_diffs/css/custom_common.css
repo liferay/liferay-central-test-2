@@ -1,3 +1,82 @@
+/* ---------- Breadcrumbs ---------- */
+
+.breadcrumbs {
+	margin-bottom: 1.5em;
+}
+
+.breadcrumbs li {
+	background: url(../images/arrows/05_right.png) no-repeat 100% 50%;
+	display: inline;
+	margin-right: 5px;
+	padding-right: 15px;
+}
+
+.breadcrumbs .last, .aui-tree-node-selected {
+	background-image: none;
+	margin-top: 0.2em;
+}
+
+.breadcrumbs .last a, .aui-tree-node-selected a {
+	color: #555;
+}
+
+/* ---------- Site breadcrumbs ---------- */
+
+.site-breadcrumbs {
+	margin: 0 0 5px;
+	width: auto;
+}
+
+.site-breadcrumbs ul {
+	background-color: #FFF;
+	border: 1px solid #DEDEDE;
+	border-color: #C0C2C5;
+	height: 1.8em;
+	margin: 0;
+}
+
+.site-breadcrumbs li {
+	background-image: none;
+	float: left;
+	line-height: 1.8em;
+	margin-right: 0;
+	padding-left: 0.75em;
+	padding-right: 0;
+}
+
+.site-breadcrumbs li span {
+	background: url(../images/common/breadcrumbs.png) no-repeat 100% 50%;
+	display: block;
+	line-height: 1.8em;
+	padding: 0 15px 0 0;
+}
+
+.site-breadcrumbs li span a {
+	text-decoration: none;
+}
+
+.site-breadcrumbs li.first a {
+	color: #369;
+	font-weight: bold;
+}
+
+.site-breadcrumbs li.last a {
+	color: #4B5567;
+	font-size: 1.3em;
+}
+
+.site-breadcrumbs .last {
+	display: inline;
+	font-size: 1em;
+	margin-top: 0;
+	padding-right: 0;
+}
+
+.site-breadcrumbs .last span {
+	background-image: none;
+	padding: 0;
+}
+
 /* ---------- Hidden Accessible ---------- */
 
 #skip-to-content, #banner h2, #banner h3, #navigation h1, .site-breadcrumbs h1 {
