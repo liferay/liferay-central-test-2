@@ -82,7 +82,7 @@ portletsList = ListUtil.sort(portletsList, new PortletTitleComparator(applicatio
 				<li class="tree-item">
 					<aui:input inlineLabel="right" label="user-preferences" name="<%= PortletDataHandlerKeys.PORTLET_USER_PREFERENCES %>" type="checkbox" value="<%= false %>" />
 				</li>
-				<li id="<portlet:namespace />deleteDataOption" class="tree-item" style="display: none;">
+				<li id="<portlet:namespace />deleteDataOption" class="tree-item">
 					<aui:input helpMessage="delete-portlet-data-help" inlineLabel="right" label="delete-portlet-data-before-importing" name="<%= PortletDataHandlerKeys.DELETE_PORTLET_DATA %>" type="checkbox" />
 				</li>
 				<li class="tree-item">
