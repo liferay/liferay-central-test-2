@@ -30,6 +30,10 @@ public class ReadOnlyBeanHandler implements InvocationHandler {
 		_bean = bean;
 	}
 
+	public Object getBean() {
+		return _bean;
+	}
+
 	public Object invoke(Object proxy, Method method, Object[] args)
 		throws Throwable {
 

@@ -32,6 +32,14 @@ public class ContextClassLoaderBeanHandler implements InvocationHandler {
 		_classLoader = classLoader;
 	}
 
+	public Object getBean() {
+		return _bean;
+	}
+
+	public ClassLoader getClassLoader() {
+		return _classLoader;
+	}
+
 	public Object invoke(Object proxy, Method method, Object[] args)
 		throws Throwable {
 
