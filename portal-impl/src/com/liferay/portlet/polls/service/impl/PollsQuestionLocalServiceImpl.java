@@ -237,7 +237,7 @@ public class PollsQuestionLocalServiceImpl
 		return updateQuestion(
 			userId, questionId, titleMap, descriptionMap, expirationDateMonth,
 			expirationDateDay, expirationDateYear, expirationDateHour,
-			expirationDateMinute, neverExpire, null, null);
+			expirationDateMinute, neverExpire, null, new ServiceContext());
 	}
 
 	public PollsQuestion updateQuestion(
