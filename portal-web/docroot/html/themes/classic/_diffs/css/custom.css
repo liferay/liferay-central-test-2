@@ -289,13 +289,12 @@ body.lfr-has-sidebar {
 	padding-right: 15px;
 }
 
-.breadcrumbs .last {
+.breadcrumbs .last, .aui-tree-node-selected {
 	background-image: none;
-	font-weight: bold;
 	margin-top: 0.2em;
 }
 
-.breadcrumbs .last a {
+.breadcrumbs .last a, .aui-tree-node-selected a {
 	color: #555;
 }
 
