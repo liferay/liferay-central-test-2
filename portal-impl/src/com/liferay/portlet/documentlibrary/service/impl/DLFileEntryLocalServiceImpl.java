@@ -178,7 +178,7 @@ public class DLFileEntryLocalServiceImpl
 		// Resources
 
 		if (serviceContext.getAddCommunityPermissions() ||
-				serviceContext.getAddGuestPermissions()) {
+			serviceContext.getAddGuestPermissions()) {
 
 			addFileEntryResources(
 				fileEntry, serviceContext.getAddCommunityPermissions(),
