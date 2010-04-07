@@ -41,12 +41,12 @@ public class StructureSearch extends SearchContainer<JournalStructure> {
 		"no-structures-were-found";
 
 	public StructureSearch(
-		PortletRequest portletRequest, PortletURL iteratorURL) {
+		PortletRequest portletRequest, int delta, PortletURL iteratorURL) {
 
 		super(
 			portletRequest, new StructureDisplayTerms(portletRequest),
-			new StructureSearchTerms(portletRequest), DEFAULT_CUR_PARAM,
-			DEFAULT_DELTA, iteratorURL, headerNames, EMPTY_RESULTS_MESSAGE);
+			new StructureSearchTerms(portletRequest), DEFAULT_CUR_PARAM, delta,
+			iteratorURL, headerNames, EMPTY_RESULTS_MESSAGE);
 
 		StructureDisplayTerms displayTerms =
 			(StructureDisplayTerms)getDisplayTerms();
@@ -60,6 +60,12 @@ public class StructureSearch extends SearchContainer<JournalStructure> {
 			StructureDisplayTerms.NAME, displayTerms.getName());
 		iteratorURL.setParameter(
 			StructureDisplayTerms.DESCRIPTION, displayTerms.getDescription());
+	}
+
+	public StructureSearch(
+		PortletRequest portletRequest, PortletURL iteratorURL) {
+
+		this(portletRequest, DEFAULT_DELTA, iteratorURL);
 	}
 
 }

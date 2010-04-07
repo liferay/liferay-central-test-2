@@ -23,9 +23,7 @@
 <aui:form action="<%= portletURL.toString() %>" method="post" name="fm">
 
 	<%
-	TemplateSearch searchContainer = new TemplateSearch(renderRequest, portletURL);
-
-	searchContainer.setDelta(10);
+	TemplateSearch searchContainer = new TemplateSearch(renderRequest, 10, portletURL);
 	%>
 
 	<liferay-ui:tabs

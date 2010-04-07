@@ -41,12 +41,12 @@ public class TemplateSearch extends SearchContainer<JournalTemplate> {
 		"no-templates-were-found";
 
 	public TemplateSearch(
-		PortletRequest portletRequest, PortletURL iteratorURL) {
+		PortletRequest portletRequest, int delta, PortletURL iteratorURL) {
 
 		super(
 			portletRequest, new TemplateDisplayTerms(portletRequest),
-			new TemplateSearchTerms(portletRequest), DEFAULT_CUR_PARAM,
-			DEFAULT_DELTA, iteratorURL, headerNames, EMPTY_RESULTS_MESSAGE);
+			new TemplateSearchTerms(portletRequest), DEFAULT_CUR_PARAM, delta,
+			iteratorURL, headerNames, EMPTY_RESULTS_MESSAGE);
 
 		TemplateDisplayTerms displayTerms =
 			(TemplateDisplayTerms)getDisplayTerms();
@@ -62,6 +62,12 @@ public class TemplateSearch extends SearchContainer<JournalTemplate> {
 			TemplateDisplayTerms.NAME, displayTerms.getName());
 		iteratorURL.setParameter(
 			TemplateDisplayTerms.DESCRIPTION, displayTerms.getDescription());
+	}
+
+	public TemplateSearch(
+		PortletRequest portletRequest, PortletURL iteratorURL) {
+
+		this(portletRequest, DEFAULT_DELTA, iteratorURL);
 	}
 
 }
