@@ -9,6 +9,29 @@
 		<parameter name="className" value="com.liferay.portlet.blogs.service.http.BlogsEntryServiceSoap"/>
 		<parameter name="wsdlPortType" value="BlogsEntryServiceSoap"/>
 		<parameter name="typeMappingVersion" value="1.2"/>
+		<operation xmlns:operNS="urn:http.service.blogs.portlet.liferay.com" xmlns:rtns="http://model.blogs.portlet.liferay.com" name="addEntry" qname="operNS:addEntry" returnQName="addEntryReturn" returnType="rtns:BlogsEntrySoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="title" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="content" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="displayDateMonth" type="tns:int"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="displayDateDay" type="tns:int"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="displayDateYear" type="tns:int"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="displayDateHour" type="tns:int"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="displayDateMinute" type="tns:int"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="allowPingbacks" type="tns:boolean"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="allowTrackbacks" type="tns:boolean"></parameter>
+			<parameter xmlns:tns="urn:http.service.blogs.portlet.liferay.com" qname="trackbacks" type="tns:ArrayOf_xsd_string"></parameter>
+			<parameter xmlns:tns="http://service.portal.liferay.com" qname="serviceContext" type="tns:ServiceContext"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.blogs.portlet.liferay.com" xmlns:rtns="http://model.blogs.portlet.liferay.com" name="getEntry" qname="operNS:getEntry" returnQName="getEntryReturn" returnType="rtns:BlogsEntrySoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="groupId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="urlTitle" type="tns:string"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.blogs.portlet.liferay.com" xmlns:rtns="http://model.blogs.portlet.liferay.com" name="getEntry" qname="operNS:getEntry" returnQName="getEntryReturn" returnType="rtns:BlogsEntrySoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="entryId" type="tns:long"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.blogs.portlet.liferay.com" name="deleteEntry" qname="operNS:deleteEntry" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="entryId" type="tns:long"></parameter>
+		</operation>
 		<operation xmlns:operNS="urn:http.service.blogs.portlet.liferay.com" xmlns:rtns="http://model.blogs.portlet.liferay.com" name="updateEntry" qname="operNS:updateEntry" returnQName="updateEntryReturn" returnType="rtns:BlogsEntrySoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="entryId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="title" type="tns:string"></parameter>
@@ -38,30 +61,7 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="status" type="tns:int"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="max" type="tns:int"></parameter>
 		</operation>
-		<operation xmlns:operNS="urn:http.service.blogs.portlet.liferay.com" xmlns:rtns="http://model.blogs.portlet.liferay.com" name="addEntry" qname="operNS:addEntry" returnQName="addEntryReturn" returnType="rtns:BlogsEntrySoap" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="title" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="content" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="displayDateMonth" type="tns:int"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="displayDateDay" type="tns:int"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="displayDateYear" type="tns:int"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="displayDateHour" type="tns:int"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="displayDateMinute" type="tns:int"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="allowPingbacks" type="tns:boolean"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="allowTrackbacks" type="tns:boolean"></parameter>
-			<parameter xmlns:tns="urn:http.service.blogs.portlet.liferay.com" qname="trackbacks" type="tns:ArrayOf_xsd_string"></parameter>
-			<parameter xmlns:tns="http://service.portal.liferay.com" qname="serviceContext" type="tns:ServiceContext"></parameter>
-		</operation>
-		<operation xmlns:operNS="urn:http.service.blogs.portlet.liferay.com" xmlns:rtns="http://model.blogs.portlet.liferay.com" name="getEntry" qname="operNS:getEntry" returnQName="getEntryReturn" returnType="rtns:BlogsEntrySoap" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="entryId" type="tns:long"></parameter>
-		</operation>
-		<operation xmlns:operNS="urn:http.service.blogs.portlet.liferay.com" xmlns:rtns="http://model.blogs.portlet.liferay.com" name="getEntry" qname="operNS:getEntry" returnQName="getEntryReturn" returnType="rtns:BlogsEntrySoap" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="groupId" type="tns:long"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="urlTitle" type="tns:string"></parameter>
-		</operation>
-		<operation xmlns:operNS="urn:http.service.blogs.portlet.liferay.com" name="deleteEntry" qname="operNS:deleteEntry" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="entryId" type="tns:long"></parameter>
-		</operation>
-		<parameter name="allowedMethods" value="getEntry getOrganizationEntries updateEntry addEntry deleteEntry getGroupEntries getCompanyEntries"/>
+		<parameter name="allowedMethods" value="getEntry getOrganizationEntries updateEntry addEntry getGroupEntries deleteEntry getCompanyEntries"/>
 		<typeMapping xmlns:ns="http://model.portal.liferay.com" qname="ns:PortletPreferencesIds" type="java:com.liferay.portal.model.PortletPreferencesIds" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
 		<arrayMapping xmlns:ns="urn:http.service.blogs.portlet.liferay.com" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema" qname="ns:ArrayOf_xsd_long" type="java:long[]" innerType="cmp-ns:long" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
 		<arrayMapping xmlns:ns="urn:http.service.blogs.portlet.liferay.com" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema" qname="ns:ArrayOf_xsd_string" type="java:java.lang.String[]" innerType="cmp-ns:string" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
