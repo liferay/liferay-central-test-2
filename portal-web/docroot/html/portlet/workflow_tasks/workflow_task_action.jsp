@@ -42,6 +42,7 @@ WorkflowTask workflowTask = (WorkflowTask)row.getParameter("workflowTask");
 				message = transitionName;
 			}
 		%>
+
 			<portlet:actionURL var="editURL">
 				<portlet:param name="struts_action" value="/workflow_tasks/edit_workflow_task" />
 				<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.SAVE %>" />
