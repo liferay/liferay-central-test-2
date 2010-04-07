@@ -6,7 +6,7 @@
 #set ($portlet_content = $portlet_display.getContent())
 #set ($portlet_back_url = $htmlUtil.escape($portlet_display.getURLBack()))
 #set ($show_portlet_description = $sessionClicks.get($request, "show-portlet-description-$portlet_id", "true"))
-#set ($valid_portlet_description = !$portlet_description.equals("") && $portlet_description.indexOf('javax.portlet.description') == -1)
+#set ($valid_portlet_description = $validator.isNotNull($portlet_description) && $portlet_description.indexOf('javax.portlet.description') == -1)
 
 <section class="portlet" id="portlet_$portlet_id">
 	<header class="portlet-topper">

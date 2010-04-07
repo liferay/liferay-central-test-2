@@ -77,6 +77,10 @@ try {
 catch (MissingResourceException mre) {
 }
 
+if (Validator.isNull(portletDescription)) {
+	portletDescription = PortalUtil.getPortletDescription(portlet.getPortletId(), locale);
+}
+
 portletDisplay.setDescription(portletDescription);
 
 Group group = layout.getGroup();
