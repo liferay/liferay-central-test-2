@@ -760,6 +760,8 @@ if (portlet.isActive() && access && supportsMimeType) {
 		if (themeDisplay.isFacebook() || themeDisplay.isStateExclusive()) {
 			renderRequestImpl.setAttribute(WebKeys.STRING_SERVLET_RESPONSE, stringResponse);
 		}
+
+		CacheResponseUtil.addHeaders(response, stringResponse.getHeaders());
 	}
 	catch (UnavailableException ue) {
 		portletException = true;

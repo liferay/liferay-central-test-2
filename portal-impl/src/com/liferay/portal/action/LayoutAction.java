@@ -93,6 +93,7 @@ import com.liferay.portlet.ResourceResponseImpl;
 import com.liferay.portlet.StateAwareResponseImpl;
 import com.liferay.portlet.login.util.LoginUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
+import com.liferay.util.servlet.filters.CacheResponseUtil;
 
 import java.io.InputStream;
 import java.io.Serializable;
@@ -341,6 +342,8 @@ public class LayoutAction extends Action {
 
 		request.setAttribute(
 			WebKeys.LAYOUT_CONTENT, stringResponse.getString());
+
+		CacheResponseUtil.addHeaders(response, stringResponse.getHeaders());
 	}
 
 	protected void processEvent(
