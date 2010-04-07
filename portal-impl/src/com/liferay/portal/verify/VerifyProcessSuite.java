@@ -30,6 +30,8 @@ public class VerifyProcessSuite extends VerifyProcess {
 		verify(new VerifyCounter());
 		verify(new VerifyUUID());
 
+		verify(new VerifyRole());
+
 		verify(new VerifyBlogs());
 		verify(new VerifyBookmarks());
 		verify(new VerifyCalendar());
@@ -40,7 +42,6 @@ public class VerifyProcessSuite extends VerifyProcess {
 		verify(new VerifyLayout());
 		verify(new VerifyMessageBoards());
 		verify(new VerifyOrganization());
-		verify(new VerifyRole());
 		verify(new VerifySocial());
 		verify(new VerifyUser());
 		verify(new VerifyWiki());

@@ -31,6 +31,8 @@ public class VerifyRole extends VerifyProcess {
 		long[] companyIds = PortalInstances.getCompanyIdsBySQL();
 
 		for (long companyId : companyIds) {
+			RoleLocalServiceUtil.checkSystemRoles(companyId);
+
 			try {
 				Role communityMemberRole = RoleLocalServiceUtil.getRole(
 					companyId, RoleConstants.COMMUNITY_MEMBER);
