@@ -185,13 +185,13 @@ JkShmFile logs/jk-runtime-status</echo>
 		</exec>
 
 		<exec executable="${plink.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${vm.host.cluster-node-1} cmd.exe /c C:\liferay-portal-${lp.version}\tomcat-6.0.24\bin\startup.bat" />
+			<arg line="-pw ${vm.password} ${vm.username}@${vm.host.cluster-node-1} cmd.exe /c C:\liferay-portal-${lp.version}\tomcat-6.0.26\bin\startup.bat" />
 		</exec>
 
 		<sleep seconds="60" />
 
 		<exec executable="${plink.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${vm.host.cluster-node-2} cmd.exe /c C:\liferay-portal-${lp.version}\tomcat-6.0.24\bin\startup.bat" />
+			<arg line="-pw ${vm.password} ${vm.username}@${vm.host.cluster-node-2} cmd.exe /c C:\liferay-portal-${lp.version}\tomcat-6.0.26\bin\startup.bat" />
 		</exec>
 
 		<sleep seconds="60" />
@@ -215,7 +215,7 @@ JkShmFile logs/jk-runtime-status</echo>
 		<antcall target="stop-selenium" />
 
 		<exec executable="${plink.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${vm.host.cluster-node-2} cmd.exe /c C:\liferay-portal-${lp.version}\tomcat-6.0.24\bin\shutdown.bat" />
+			<arg line="-pw ${vm.password} ${vm.username}@${vm.host.cluster-node-2} cmd.exe /c C:\liferay-portal-${lp.version}\tomcat-6.0.26\bin\shutdown.bat" />
 		</exec>
 
 		<sleep seconds="30" />
@@ -233,11 +233,11 @@ JkShmFile logs/jk-runtime-status</echo>
 		<antcall target="stop-selenium" />
 
 		<exec executable="${plink.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${vm.host.cluster-node-2} cmd.exe /c C:\liferay-portal-${lp.version}\tomcat-6.0.24\bin\startup.bat" />
+			<arg line="-pw ${vm.password} ${vm.username}@${vm.host.cluster-node-2} cmd.exe /c C:\liferay-portal-${lp.version}\tomcat-6.0.26\bin\startup.bat" />
 		</exec>
 
 		<exec executable="${plink.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${vm.host.cluster-node-1} cmd.exe /c C:\liferay-portal-${lp.version}\tomcat-6.0.24\bin\shutdown.bat" />
+			<arg line="-pw ${vm.password} ${vm.username}@${vm.host.cluster-node-1} cmd.exe /c C:\liferay-portal-${lp.version}\tomcat-6.0.26\bin\shutdown.bat" />
 		</exec>
 
 		<sleep seconds="30" />

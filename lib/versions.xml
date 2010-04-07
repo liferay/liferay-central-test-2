@@ -61,7 +61,7 @@
 	</library>
 	<library>
 		<file-name>development/catalina.jar</file-name>
-		<version>6.0.24</version>
+		<version>6.0.26</version>
 		<project-name>Tomcat</project-name>
 		<project-url>http://tomcat.apache.org</project-url>
 		<licenses>
@@ -824,7 +824,7 @@
 	</library>
 	<library>
 		<file-name>development/tomcat-coyote.jar</file-name>
-		<version>6.0.24</version>
+		<version>6.0.26</version>
 		<project-name>Tomcat</project-name>
 		<project-url>http://tomcat.apache.org</project-url>
 		<licenses>
