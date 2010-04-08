@@ -12,20 +12,16 @@
  * details.
  */
 
-package com.liferay.portal.pop;
+package com.liferay.portal.pop.messaging;
 
-import com.liferay.portal.kernel.job.IntervalJob;
-import com.liferay.portal.kernel.job.JobExecutionContext;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.mail.Account;
 import com.liferay.portal.kernel.pop.MessageListener;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.pop.POPServerUtil;
 import com.liferay.util.mail.MailEngine;
 
 import java.util.Iterator;
@@ -42,33 +38,34 @@ import javax.mail.Store;
 import javax.mail.internet.InternetAddress;
 
 /**
- * <a href="POPNotificationsJob.java.html"><b><i>View Source</i></b></a>
+ * <a href="POPNotificationsMessageListener.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author Brian Wing Shun Chan
  */
-public class POPNotificationsJob implements IntervalJob {
+public class POPNotificationsMessageListener
+	implements com.liferay.portal.kernel.messaging.MessageListener {
 
-	public static final long INTERVAL = GetterUtil.getLong(PropsUtil.get(
-		PropsKeys.POP_SERVER_NOTIFICATIONS_INTERVAL)) * Time.MINUTE;
-
-	public void execute(JobExecutionContext context) {
+	public void receive(com.liferay.portal.kernel.messaging.Message message) {
 		try {
-			if (_log.isDebugEnabled()) {
-				_log.debug("Executing");
-			}
-
-			pollPopServer();
+			doReceive(message);
 		}
 		catch (Exception e) {
-			_log.error(e, e);
-
-			_store = null;
-			_inboxFolder = null;
+			_log.error("Unable to process message " + message, e);
 		}
 	}
 
-	public long getInterval() {
-		return INTERVAL;
+	protected void doReceive(
+			com.liferay.portal.kernel.messaging.Message message)
+		throws Exception {
+
+		try {
+			pollPopServer();
+		}
+		finally {
+			_store = null;
+			_inboxFolder = null;
+		}
 	}
 
 	protected String getEmailAddress(Address[] addresses) {
@@ -200,9 +197,10 @@ public class POPNotificationsJob implements IntervalJob {
 		}
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(POPNotificationsJob.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		POPNotificationsMessageListener.class);
 
-	private Store _store;
 	private Folder _inboxFolder;
+	private Store _store;
 
 }

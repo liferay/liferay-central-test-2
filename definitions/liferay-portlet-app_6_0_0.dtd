@@ -18,7 +18,7 @@ The portlet element contains the declarative data of a portlet.
 -->
 <!ELEMENT portlet (portlet-name, icon?, virtual-path?, struts-path?,
 configuration-path?, configuration-action-class?, indexer-class?,
-open-search-class?, scheduler-class?, scheduler-entry*, portlet-url-class?,
+open-search-class?, scheduler-entry*, portlet-url-class?,
 friendly-url-mapper-class?, url-encoder-class?, portlet-data-handler-class?,
 portlet-layout-listener-class?, poller-processor-class?,
 pop-message-listener-class?, social-activity-interpreter-class?,
@@ -114,19 +114,6 @@ http://www.opensearch.org
 <!ELEMENT open-search-class (#PCDATA)>
 
 <!--
-The scheduler-class value must be a class that implements
-com.liferay.portal.kernel.job.Scheduler and is called to schedule jobs for this
-portlet.
-
-See:
-
-http://docs.liferay.com/portal/6.0/javadocs/portal-impl/com/liferay/portlet/calendar/job/CalendarScheduler.html
-http://docs.liferay.com/portal/6.0/javadocs/portal-kernel/com/liferay/portal/kernel/job/Scheduler.html
-http://www.opensymphony.com/quartz
--->
-<!ELEMENT scheduler-class (#PCDATA)>
-
-<!--
 The scheduler-entry element contains the declarative data of a scheduler.
 -->
 <!ELEMENT scheduler-entry (scheduler-description?,
@@ -184,8 +171,8 @@ a scheduler.
 
 <!--
 The time-unit value is the unit of measure for the time specified in
-property-key or simple-trigger-value. Valid values for this element are "DAY",
-"HOUR", "MINUTE", "SECOND", or "WEEK". The default value is "SECOND".
+property-key or simple-trigger-value. Valid values for this element are "day",
+"hour", "minute", "second", or "week". The default value is "second".
 -->
 <!ELEMENT time-unit (#PCDATA)>
 

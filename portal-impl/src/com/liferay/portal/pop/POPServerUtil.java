@@ -14,12 +14,18 @@
 
 package com.liferay.portal.pop;
 
-import com.liferay.portal.kernel.job.IntervalJob;
-import com.liferay.portal.kernel.job.JobSchedulerUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.pop.MessageListener;
+import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
+import com.liferay.portal.kernel.scheduler.SchedulerEntry;
+import com.liferay.portal.kernel.scheduler.SchedulerEntryImpl;
+import com.liferay.portal.kernel.scheduler.TimeUnit;
+import com.liferay.portal.kernel.scheduler.TriggerType;
+import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.UnmodifiableList;
+import com.liferay.portal.pop.messaging.POPNotificationsMessageListener;
+import com.liferay.portal.util.PropsValues;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -134,11 +140,17 @@ public class POPServerUtil {
 		}
 
 		try {
-			_popNotificationsJob = new POPNotificationsJob();
+			_schedulerEntry = new SchedulerEntryImpl();
 
-			JobSchedulerUtil.schedule(_popNotificationsJob);
+			_schedulerEntry.setEventListenerClass(
+				POPNotificationsMessageListener.class.getName());
+			_schedulerEntry.setTimeUnit(TimeUnit.MINUTE);
+			_schedulerEntry.setTriggerType(TriggerType.SIMPLE);
+			_schedulerEntry.setTriggerValue(
+				String.valueOf(PropsValues.POP_SERVER_NOTIFICATIONS_INTERVAL));
 
-			//_popNotificationsJob.pollPopServer();
+			SchedulerEngineUtil.schedule(
+				_schedulerEntry, PortalClassLoaderUtil.getClassLoader());
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -151,8 +163,8 @@ public class POPServerUtil {
 		}
 
 		try {
-			if (_popNotificationsJob != null) {
-				JobSchedulerUtil.unschedule(_popNotificationsJob);
+			if (_schedulerEntry != null) {
+				SchedulerEngineUtil.unschedule(_schedulerEntry);
 			}
 		}
 		catch (Exception e) {
@@ -164,7 +176,7 @@ public class POPServerUtil {
 
 	private static POPServerUtil _instance = new POPServerUtil();
 
-	private IntervalJob _popNotificationsJob;
 	private List<MessageListener> _listeners = new ArrayList<MessageListener>();
+	private SchedulerEntry _schedulerEntry;
 
 }

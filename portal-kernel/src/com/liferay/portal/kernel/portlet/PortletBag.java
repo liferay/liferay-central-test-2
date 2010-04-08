@@ -14,7 +14,6 @@
 
 package com.liferay.portal.kernel.portlet;
 
-import com.liferay.portal.kernel.job.Scheduler;
 import com.liferay.portal.kernel.poller.PollerProcessor;
 import com.liferay.portal.kernel.pop.MessageListener;
 import com.liferay.portal.kernel.search.Indexer;
@@ -64,8 +63,6 @@ public interface PortletBag extends Cloneable {
 	public ResourceBundle getResourceBundle(Locale locale);
 
 	public Map<String, ResourceBundle> getResourceBundles();
-
-	public Scheduler getSchedulerInstance();
 
 	public ServletContext getServletContext();
 

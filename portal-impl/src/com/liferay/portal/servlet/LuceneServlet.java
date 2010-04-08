@@ -14,14 +14,19 @@
 
 package com.liferay.portal.servlet;
 
-import com.liferay.portal.kernel.job.JobSchedulerUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
+import com.liferay.portal.kernel.scheduler.SchedulerEntry;
+import com.liferay.portal.kernel.scheduler.SchedulerEntryImpl;
+import com.liferay.portal.kernel.scheduler.TimeUnit;
+import com.liferay.portal.kernel.scheduler.TriggerType;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ObjectValuePair;
+import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
-import com.liferay.portal.search.lucene.CleanUpJob;
 import com.liferay.portal.search.lucene.LuceneIndexer;
+import com.liferay.portal.search.lucene.messaging.CleanUpMessageListener;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
@@ -79,7 +84,21 @@ public class LuceneServlet extends HttpServlet {
 			}
 
 			if (PropsValues.LUCENE_STORE_JDBC_AUTO_CLEAN_UP) {
-				JobSchedulerUtil.schedule(new CleanUpJob());
+				SchedulerEntry schedulerEntry = new SchedulerEntryImpl();
+
+				schedulerEntry.setEventListenerClass(
+					CleanUpMessageListener.class.getName());
+				schedulerEntry.setTimeUnit(TimeUnit.DAY);
+				schedulerEntry.setTriggerType(TriggerType.SIMPLE);
+				schedulerEntry.setTriggerValue("1");
+
+				try {
+					SchedulerEngineUtil.schedule(
+						schedulerEntry, PortalClassLoaderUtil.getClassLoader());
+				}
+				catch (Exception e) {
+					_log.error(e, e);
+				}
 			}
 		}
 	}

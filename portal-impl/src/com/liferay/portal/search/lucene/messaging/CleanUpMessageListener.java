@@ -12,46 +12,40 @@
  * details.
  */
 
-package com.liferay.portal.search.lucene;
+package com.liferay.portal.search.lucene.messaging;
 
-import com.liferay.portal.kernel.job.IntervalJob;
-import com.liferay.portal.kernel.job.JobExecutionContext;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.Time;
+import com.liferay.portal.kernel.messaging.Message;
+import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.util.SystemProperties;
 import com.liferay.util.ant.DeleteTask;
 
 /**
- * <a href="CleanUpJob.java.html"><b><i>View Source</i></b></a>
+ * <a href="CleanUpMessageListener.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class CleanUpJob implements IntervalJob {
+public class CleanUpMessageListener implements MessageListener {
 
-	public CleanUpJob() {
-		_interval = Time.DAY;
-	}
-
-	public void execute(JobExecutionContext context) {
+	public void receive(Message message) {
 		try {
-
-			// LEP-2180
-
-			DeleteTask.deleteFiles(
-				SystemProperties.TMP_DIR, "LUCENE_liferay_com*.ljt", null);
+			doReceive(message);
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error("Unable to process message " + message, e);
 		}
 	}
 
-	public long getInterval() {
-		return _interval;
+	protected void doReceive(Message message) throws Exception {
+
+		// LEP-2180
+
+		DeleteTask.deleteFiles(
+			SystemProperties.TMP_DIR, "LUCENE_liferay_com*.ljt", null);
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(CleanUpJob.class);
-
-	private long _interval;
+	private static Log _log = LogFactoryUtil.getLog(
+		CleanUpMessageListener.class);
 
 }

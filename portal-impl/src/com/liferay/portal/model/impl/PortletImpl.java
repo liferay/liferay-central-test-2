@@ -14,7 +14,6 @@
 
 package com.liferay.portal.model.impl;
 
-import com.liferay.portal.kernel.job.Scheduler;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.plugin.PluginPackage;
@@ -133,12 +132,11 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		String icon, String virtualPath, String strutsPath, String portletName,
 		String displayName, String portletClass,
 		String configurationActionClass, String indexerClass,
-		String openSearchClass, String schedulerClass,
-		List<SchedulerEntry> schedulerEntries, String portletURLClass,
-		String friendlyURLMapperClass, String urlEncoderClass,
-		String portletDataHandlerClass, String portletLayoutListenerClass,
-		String pollerProcessorClass, String popMessageListenerClass,
-		String socialActivityInterpreterClass,
+		String openSearchClass, List<SchedulerEntry> schedulerEntries,
+		String portletURLClass, String friendlyURLMapperClass,
+		String urlEncoderClass, String portletDataHandlerClass,
+		String portletLayoutListenerClass, String pollerProcessorClass,
+		String popMessageListenerClass, String socialActivityInterpreterClass,
 		String socialRequestInterpreterClass, String webDAVStorageToken,
 		String webDAVStorageClass, String xmlRpcMethodClass,
 		String controlPanelEntryCategory, double controlPanelEntryWeight,
@@ -184,7 +182,6 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		_configurationActionClass = configurationActionClass;
 		_indexerClass = indexerClass;
 		_openSearchClass = openSearchClass;
-		_schedulerClass = schedulerClass;
 		_schedulerEntries = schedulerEntries;
 		_portletURLClass = portletURLClass;
 		_friendlyURLMapperClass = friendlyURLMapperClass;
@@ -574,43 +571,6 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		}
 
 		return (OpenSearch)InstancePool.get(getOpenSearchClass());
-	}
-
-	/**
-	 * Gets the name of the scheduler class of the portlet.
-	 *
-	 * @return the name of the scheduler class of the portlet
-	 */
-	public String getSchedulerClass() {
-		return _schedulerClass;
-	}
-
-	/**
-	 * Sets the name of the scheduler class of the portlet.
-	 *
-	 * @param schedulerClass the name of the scheduler class of the portlet
-	 */
-	public void setSchedulerClass(String schedulerClass) {
-		_schedulerClass = schedulerClass;
-	}
-
-	/**
-	 * Gets the scheduler instance of the portlet.
-	 *
-	 * @return the scheduler instance of the portlet
-	 */
-	public Scheduler getSchedulerInstance() {
-		if (Validator.isNull(getSchedulerClass())) {
-			return null;
-		}
-
-		if (_portletApp.isWARFile()) {
-			PortletBag portletBag = PortletBagPool.get(getRootPortletId());
-
-			return portletBag.getSchedulerInstance();
-		}
-
-		return (Scheduler)InstancePool.get(getSchedulerClass());
 	}
 
 	/**
@@ -3044,11 +3004,11 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 			getCompanyId(), getTimestamp(), getIcon(), getVirtualPath(),
 			getStrutsPath(), getPortletName(), getDisplayName(),
 			getPortletClass(), getConfigurationActionClass(), getIndexerClass(),
-			getOpenSearchClass(), getSchedulerClass(), getSchedulerEntries(),
-			getPortletURLClass(), getFriendlyURLMapperClass(),
-			getURLEncoderClass(), getPortletDataHandlerClass(),
-			getPortletLayoutListenerClass(), getPollerProcessorClass(),
-			getPopMessageListenerClass(), getSocialActivityInterpreterClass(),
+			getOpenSearchClass(), getSchedulerEntries(), getPortletURLClass(),
+			getFriendlyURLMapperClass(), getURLEncoderClass(),
+			getPortletDataHandlerClass(), getPortletLayoutListenerClass(),
+			getPollerProcessorClass(), getPopMessageListenerClass(),
+			getSocialActivityInterpreterClass(),
 			getSocialRequestInterpreterClass(), getWebDAVStorageToken(),
 			getWebDAVStorageClass(), getXmlRpcMethodClass(),
 			getControlPanelEntryCategory(), getControlPanelEntryWeight(),
@@ -3169,11 +3129,6 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * The name of the open search class of the portlet.
 	 */
 	private String _openSearchClass;
-
-	/**
-	 * The name of the scheduler class of the portlet.
-	 */
-	private String _schedulerClass;
 
 	/**
 	 * The scheduler entries of the portlet.

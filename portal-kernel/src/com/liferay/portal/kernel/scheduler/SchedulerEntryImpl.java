@@ -12,18 +12,12 @@
  * details.
  */
 
-package com.liferay.portal.scheduler;
+package com.liferay.portal.kernel.scheduler;
 
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.messaging.MessageListener;
-import com.liferay.portal.kernel.scheduler.CronTrigger;
-import com.liferay.portal.kernel.scheduler.IntervalTrigger;
-import com.liferay.portal.kernel.scheduler.SchedulerEntry;
-import com.liferay.portal.kernel.scheduler.Trigger;
-import com.liferay.portal.kernel.scheduler.TriggerType;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.PrefsPropsUtil;
 import com.liferay.portal.kernel.util.Time;
-import com.liferay.portal.util.PrefsPropsUtil;
 
 /**
  * <a href="SchedulerEntryImpl.java.html"><b><i>View Source</i></b></a>
@@ -44,11 +38,11 @@ public class SchedulerEntryImpl implements SchedulerEntry {
 		return _eventListenerClass;
 	}
 
-	public String getTimeUnit() {
+	public TimeUnit getTimeUnit() {
 		return _timeUnit;
 	}
 
-	public Trigger getTrigger() throws SystemException {
+	public Trigger getTrigger() throws SchedulerException {
 		if (_trigger != null) {
 			return _trigger;
 		}
@@ -56,7 +50,13 @@ public class SchedulerEntryImpl implements SchedulerEntry {
 		String triggerValue = _triggerValue;
 
 		if (_readProperty) {
-			triggerValue = PrefsPropsUtil.getString(triggerValue);
+			try {
+				triggerValue = PrefsPropsUtil.getString(triggerValue);
+			}
+			catch (Exception e) {
+				throw new SchedulerException(
+					"Unable to get trigger value " + triggerValue, e);
+			}
 		}
 
 		if (_triggerType == TriggerType.CRON) {
@@ -66,16 +66,16 @@ public class SchedulerEntryImpl implements SchedulerEntry {
 		else if (_triggerType == TriggerType.SIMPLE) {
 			long intervalTime = GetterUtil.getLong(triggerValue);
 
-			if (_timeUnit.equalsIgnoreCase("DAY")) {
+			if (_timeUnit.equals(TimeUnit.DAY)) {
 				intervalTime = intervalTime * Time.DAY;
 			}
-			else if (_timeUnit.equalsIgnoreCase("HOUR")) {
+			else if (_timeUnit.equals(TimeUnit.HOUR)) {
 				intervalTime = intervalTime * Time.HOUR;
 			}
-			else if (_timeUnit.equalsIgnoreCase("MINUTE")) {
+			else if (_timeUnit.equals(TimeUnit.MINUTE)) {
 				intervalTime = intervalTime * Time.MINUTE;
 			}
-			else if (_timeUnit.equalsIgnoreCase("WEEK")) {
+			else if (_timeUnit.equals(TimeUnit.WEEK)) {
 				intervalTime = intervalTime * Time.WEEK;
 			}
 			else {
@@ -86,7 +86,8 @@ public class SchedulerEntryImpl implements SchedulerEntry {
 				_eventListenerClass, _eventListenerClass, intervalTime);
 		}
 		else {
-			throw new SystemException("Unsupport trigger type " + _triggerType);
+			throw new SchedulerException(
+				"Unsupport trigger type " + _triggerType);
 		}
 
 		return _trigger;
@@ -120,7 +121,7 @@ public class SchedulerEntryImpl implements SchedulerEntry {
 		_readProperty = readProperty;
 	}
 
-	public void setTimeUnit(String timeUnit) {
+	public void setTimeUnit(TimeUnit timeUnit) {
 		_timeUnit = timeUnit;
 	}
 
@@ -160,7 +161,7 @@ public class SchedulerEntryImpl implements SchedulerEntry {
 	private MessageListener _eventListener;
 	private String _eventListenerClass;
 	private boolean _readProperty;
-	private String _timeUnit;
+	private TimeUnit _timeUnit;
 	private Trigger _trigger;
 	private TriggerType _triggerType;
 	private String _triggerValue;

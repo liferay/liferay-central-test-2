@@ -21,17 +21,12 @@ import com.liferay.portal.events.StartupAction;
 import com.liferay.portal.kernel.deploy.hot.HotDeployUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.job.Scheduler;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.messaging.DestinationNames;
-import com.liferay.portal.kernel.messaging.MessageBusUtil;
-import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.poller.PollerProcessor;
 import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
 import com.liferay.portal.kernel.scheduler.SchedulerEntry;
-import com.liferay.portal.kernel.scheduler.messaging.SchedulerEventMessageListenerWrapper;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.servlet.PortletSessionTracker;
@@ -740,47 +735,9 @@ public class MainServlet extends ActionServlet {
 		}
 	}
 
-	protected void destroySchedulerEntry(SchedulerEntry schedulerEntry)
-		throws Exception {
-
-		MessageListener schedulerEventListener =
-			schedulerEntry.getEventListener();
-
-		MessageBusUtil.unregisterMessageListener(
-			DestinationNames.SCHEDULER_DISPATCH, schedulerEventListener);
-
-		SchedulerEngineUtil.unschedule(schedulerEntry.getTrigger());
-	}
-
 	protected void destroySchedulers(List<Portlet> portlets) throws Exception {
 		if (!PropsValues.SCHEDULER_ENABLED) {
 			return;
-		}
-
-		for (String className : PropsValues.SCHEDULER_CLASSES) {
-			Scheduler scheduler = (Scheduler)InstancePool.get(className, false);
-
-			if (scheduler != null) {
-				scheduler.unschedule();
-			}
-		}
-
-		Iterator<Portlet> itr = portlets.iterator();
-
-		while (itr.hasNext()) {
-			Portlet portlet = itr.next();
-
-			String className = portlet.getSchedulerClass();
-
-			if (!portlet.isActive() || Validator.isNull(className)) {
-				continue;
-			}
-
-			Scheduler scheduler = (Scheduler)InstancePool.get(className, false);
-
-			if (scheduler != null) {
-				scheduler.unschedule();
-			}
 		}
 
 		for (Portlet portlet : portlets) {
@@ -796,7 +753,7 @@ public class MainServlet extends ActionServlet {
 			}
 
 			for (SchedulerEntry schedulerEntry : schedulerEntries) {
-				destroySchedulerEntry(schedulerEntry);
+				SchedulerEngineUtil.unschedule(schedulerEntry);
 			}
 		}
 	}
@@ -1162,51 +1119,9 @@ public class MainServlet extends ActionServlet {
 		}
 	}
 
-	protected void initSchedulerEntry(SchedulerEntry schedulerEntry)
-		throws Exception {
-
-		MessageListener schedulerEventListener =
-			(MessageListener)InstancePool.get(
-				schedulerEntry.getEventListenerClass());
-
-		schedulerEventListener = new SchedulerEventMessageListenerWrapper(
-			schedulerEventListener);
-
-		schedulerEntry.setEventListener(schedulerEventListener);
-
-		MessageBusUtil.registerMessageListener(
-			DestinationNames.SCHEDULER_DISPATCH, schedulerEventListener);
-
-		SchedulerEngineUtil.schedule(
-			schedulerEntry.getTrigger(), schedulerEntry.getDescription(),
-			DestinationNames.SCHEDULER_DISPATCH, null);
-	}
-
 	protected void initSchedulers(List<Portlet> portlets) throws Exception {
 		if (!PropsValues.SCHEDULER_ENABLED) {
 			return;
-		}
-
-		for (String className : PropsValues.SCHEDULER_CLASSES) {
-			Scheduler scheduler = (Scheduler)InstancePool.get(className);
-
-			scheduler.schedule();
-		}
-
-		Iterator<Portlet> itr = portlets.iterator();
-
-		while (itr.hasNext()) {
-			Portlet portlet = itr.next();
-
-			String className = portlet.getSchedulerClass();
-
-			if (!portlet.isActive() || Validator.isNull(className)) {
-				continue;
-			}
-
-			Scheduler scheduler = (Scheduler)InstancePool.get(className);
-
-			scheduler.schedule();
 		}
 
 		for (Portlet portlet : portlets) {
@@ -1222,7 +1137,8 @@ public class MainServlet extends ActionServlet {
 			}
 
 			for (SchedulerEntry schedulerEntry : schedulerEntries) {
-				initSchedulerEntry(schedulerEntry);
+				SchedulerEngineUtil.schedule(
+					schedulerEntry, PortalClassLoaderUtil.getClassLoader());
 			}
 		}
 	}

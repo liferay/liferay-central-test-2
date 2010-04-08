@@ -105,12 +105,6 @@ public interface Portlet extends PortletModel {
 
 	public com.liferay.portal.kernel.search.OpenSearch getOpenSearchInstance();
 
-	public java.lang.String getSchedulerClass();
-
-	public void setSchedulerClass(java.lang.String schedulerClass);
-
-	public com.liferay.portal.kernel.job.Scheduler getSchedulerInstance();
-
 	public void addSchedulerEntry(
 		com.liferay.portal.kernel.scheduler.SchedulerEntry schedulerEntry);
 

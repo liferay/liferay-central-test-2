@@ -14,7 +14,6 @@
 
 package com.liferay.portal.kernel.scheduler;
 
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.messaging.MessageListener;
 
 /**
@@ -30,9 +29,9 @@ public interface SchedulerEntry {
 
 	public String getEventListenerClass();
 
-	public String getTimeUnit();
+	public TimeUnit getTimeUnit();
 
-	public Trigger getTrigger() throws SystemException;
+	public Trigger getTrigger() throws SchedulerException;
 
 	public TriggerType getTriggerType();
 
@@ -48,7 +47,7 @@ public interface SchedulerEntry {
 
 	public void setReadProperty(boolean readProperty);
 
-	public void setTimeUnit(String timeUnit);
+	public void setTimeUnit(TimeUnit timeUnit);
 
 	public void setTriggerType(TriggerType triggerType);
 

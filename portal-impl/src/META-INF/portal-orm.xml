@@ -2708,7 +2708,6 @@
 			<transient name="restoreCurrentView" />
 			<transient name="roleMappers" />
 			<transient name="rolesArray" />
-			<transient name="schedulerClass" />
 			<transient name="schedulerEntries" />
 			<transient name="scopeable" />
 			<transient name="showPortletAccessDenied" />

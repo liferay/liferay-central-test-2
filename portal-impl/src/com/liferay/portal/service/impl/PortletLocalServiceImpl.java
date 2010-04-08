@@ -26,6 +26,8 @@ import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
 import com.liferay.portal.kernel.portlet.LiferayPortletConfig;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.scheduler.SchedulerEntry;
+import com.liferay.portal.kernel.scheduler.SchedulerEntryImpl;
+import com.liferay.portal.kernel.scheduler.TimeUnit;
 import com.liferay.portal.kernel.scheduler.TriggerType;
 import com.liferay.portal.kernel.servlet.ServletContextUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
@@ -56,7 +58,6 @@ import com.liferay.portal.model.impl.PortletFilterImpl;
 import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.model.impl.PortletURLListenerImpl;
 import com.liferay.portal.model.impl.PublicRenderParameterImpl;
-import com.liferay.portal.scheduler.SchedulerEntryImpl;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.base.PortletLocalServiceBaseImpl;
@@ -1113,9 +1114,6 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				portletModel.setOpenSearchClass(GetterUtil.getString(
 					portlet.elementText("open-search-class"),
 					portletModel.getOpenSearchClass()));
-				portletModel.setSchedulerClass(GetterUtil.getString(
-					portlet.elementText("scheduler-class"),
-					portletModel.getSchedulerClass()));
 
 				Iterator<Element> itr2 = portlet.elementIterator(
 					"scheduler-entry");
@@ -1177,9 +1175,11 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 						}
 
 						String timeUnit = GetterUtil.getString(
-							simpleEl.elementText("time-unit"), "SECOND");
+							simpleEl.elementText("time-unit"),
+							TimeUnit.SECOND.getValue());
 
-						schedulerEntry.setTimeUnit(timeUnit);
+						schedulerEntry.setTimeUnit(
+							TimeUnit.parse(timeUnit.toLowerCase()));
 					}
 
 					portletModel.addSchedulerEntry(schedulerEntry);

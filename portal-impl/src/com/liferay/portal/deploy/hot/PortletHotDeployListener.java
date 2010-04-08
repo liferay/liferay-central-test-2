@@ -20,13 +20,9 @@ import com.liferay.portal.kernel.configuration.ConfigurationFactoryUtil;
 import com.liferay.portal.kernel.deploy.hot.BaseHotDeployListener;
 import com.liferay.portal.kernel.deploy.hot.HotDeployEvent;
 import com.liferay.portal.kernel.deploy.hot.HotDeployException;
-import com.liferay.portal.kernel.job.Scheduler;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.messaging.DestinationNames;
-import com.liferay.portal.kernel.messaging.MessageBusUtil;
-import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portal.kernel.poller.PollerProcessor;
 import com.liferay.portal.kernel.portlet.ConfigurationAction;
 import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
@@ -35,7 +31,6 @@ import com.liferay.portal.kernel.portlet.PortletBagPool;
 import com.liferay.portal.kernel.portlet.PortletLayoutListener;
 import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
 import com.liferay.portal.kernel.scheduler.SchedulerEntry;
-import com.liferay.portal.kernel.scheduler.messaging.SchedulerEventMessageListenerWrapper;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.search.OpenSearch;
@@ -147,18 +142,6 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 		}
 	}
 
-	protected void destroySchedulerEntry(SchedulerEntry schedulerEntry)
-		throws Exception {
-
-		MessageListener schedulerEventListener =
-			schedulerEntry.getEventListener();
-
-		MessageBusUtil.unregisterMessageListener(
-			DestinationNames.SCHEDULER_DISPATCH, schedulerEventListener);
-
-		SchedulerEngineUtil.unschedule(schedulerEntry.getTrigger());
-	}
-
 	protected void destroyPortlet(Portlet portlet, Set<String> portletIds)
 		throws Exception {
 
@@ -184,18 +167,12 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 		}
 
 		if (PropsValues.SCHEDULER_ENABLED){
-			Scheduler scheduler = portlet.getSchedulerInstance();
-
-			if (scheduler != null) {
-				scheduler.unschedule();
-			}
-
 			List<SchedulerEntry> schedulerEntries =
 				portlet.getSchedulerEntries();
 
 			if ((schedulerEntries != null) && !schedulerEntries.isEmpty()) {
 				for (SchedulerEntry schedulerEntry : schedulerEntries) {
-					destroySchedulerEntry(schedulerEntry);
+					SchedulerEngineUtil.unschedule(schedulerEntry);
 				}
 			}
 		}
@@ -535,25 +512,14 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 				portlet.getOpenSearchClass());
 		}
 
-		Scheduler schedulerInstance = null;
-
-		if (PropsValues.SCHEDULER_ENABLED &&
-			Validator.isNotNull(portlet.getSchedulerClass())) {
-
-			schedulerInstance = (Scheduler)newInstance(
-				portletClassLoader, Scheduler.class,
-				portlet.getSchedulerClass());
-
-			schedulerInstance.schedule();
-		}
-
 		if (PropsValues.SCHEDULER_ENABLED){
 			List<SchedulerEntry> schedulerEntries =
 				portlet.getSchedulerEntries();
 
 			if ((schedulerEntries != null) && !schedulerEntries.isEmpty()) {
 				for (SchedulerEntry schedulerEntry : schedulerEntries) {
-					initSchedulerEntry(schedulerEntry, portletClassLoader);
+					SchedulerEngineUtil.schedule(
+						schedulerEntry, portletClassLoader);
 				}
 			}
 		}
@@ -780,7 +746,7 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 		PortletBag portletBag = new PortletBagImpl(
 			portlet.getPortletId(), servletContext, portletInstance,
 			configurationActionInstance, indexerInstance, openSearchInstance,
-			schedulerInstance, friendlyURLMapperInstance, urlEncoderInstance,
+			friendlyURLMapperInstance, urlEncoderInstance,
 			portletDataHandlerInstance, portletLayoutListenerInstance,
 			pollerProcessorInstance, popMessageListenerInstance,
 			socialActivityInterpreterInstance, socialRequestInterpreterInstance,
@@ -805,27 +771,6 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 		catch (Exception e) {
 			_log.error(e, e);
 		}
-	}
-
-	protected void initSchedulerEntry(
-			SchedulerEntry schedulerEntry, ClassLoader portletClassLoader)
-		throws Exception {
-
-		MessageListener schedulerEventListener = (MessageListener)newInstance(
-			portletClassLoader, MessageListener.class,
-			schedulerEntry.getEventListenerClass());
-
-		schedulerEventListener = new SchedulerEventMessageListenerWrapper(
-			schedulerEventListener);
-
-		schedulerEntry.setEventListener(schedulerEventListener);
-
-		MessageBusUtil.registerMessageListener(
-			DestinationNames.SCHEDULER_DISPATCH, schedulerEventListener);
-
-		SchedulerEngineUtil.schedule(
-			schedulerEntry.getTrigger(), schedulerEntry.getDescription(),
-			DestinationNames.SCHEDULER_DISPATCH, null);
 	}
 
 	protected void initPortletApp(

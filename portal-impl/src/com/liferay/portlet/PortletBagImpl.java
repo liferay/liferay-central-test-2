@@ -14,7 +14,6 @@
 
 package com.liferay.portlet;
 
-import com.liferay.portal.kernel.job.Scheduler;
 import com.liferay.portal.kernel.poller.PollerProcessor;
 import com.liferay.portal.kernel.pop.MessageListener;
 import com.liferay.portal.kernel.portlet.ConfigurationAction;
@@ -57,7 +56,6 @@ public class PortletBagImpl implements PortletBag {
 		Portlet portletInstance,
 		ConfigurationAction configurationActionInstance,
 		Indexer indexerInstance, OpenSearch openSearchInstance,
-		Scheduler schedulerInstance,
 		FriendlyURLMapper friendlyURLMapperInstance,
 		URLEncoder urlEncoderInstance,
 		PortletDataHandler portletDataHandlerInstance,
@@ -80,7 +78,6 @@ public class PortletBagImpl implements PortletBag {
 		_configurationActionInstance = configurationActionInstance;
 		_indexerInstance = indexerInstance;
 		_openSearchInstance = openSearchInstance;
-		_schedulerInstance = schedulerInstance;
 		_friendlyURLMapperInstance = friendlyURLMapperInstance;
 		_urlEncoderInstance = urlEncoderInstance;
 		_portletDataHandlerInstance = portletDataHandlerInstance;
@@ -103,10 +100,10 @@ public class PortletBagImpl implements PortletBag {
 		return new PortletBagImpl(
 			getPortletName(), getServletContext(), getPortletInstance(),
 			getConfigurationActionInstance(), getIndexerInstance(),
-			getOpenSearchInstance(), getSchedulerInstance(),
-			getFriendlyURLMapperInstance(), getURLEncoderInstance(),
-			getPortletDataHandlerInstance(), getPortletLayoutListenerInstance(),
-			getPollerProcessorInstance(), getPopMessageListenerInstance(),
+			getOpenSearchInstance(), getFriendlyURLMapperInstance(),
+			getURLEncoderInstance(), getPortletDataHandlerInstance(),
+			getPortletLayoutListenerInstance(), getPollerProcessorInstance(),
+			getPopMessageListenerInstance(),
 			getSocialActivityInterpreterInstance(),
 			getSocialRequestInterpreterInstance(), getWebDAVStorageInstance(),
 			getXmlRpcMethodInstance(), getControlPanelEntryInstance(),
@@ -192,10 +189,6 @@ public class PortletBagImpl implements PortletBag {
 		return _resourceBundles;
 	}
 
-	public Scheduler getSchedulerInstance() {
-		return _schedulerInstance;
-	}
-
 	public ServletContext getServletContext() {
 		return _servletContext;
 	}
@@ -247,7 +240,6 @@ public class PortletBagImpl implements PortletBag {
 	private String _portletName;
 	private PreferencesValidator _preferencesValidatorInstance;
 	private Map<String, ResourceBundle> _resourceBundles;
-	private Scheduler _schedulerInstance;
 	private ServletContext _servletContext;
 	private SocialActivityInterpreter _socialActivityInterpreterInstance;
 	private SocialRequestInterpreter _socialRequestInterpreterInstance;

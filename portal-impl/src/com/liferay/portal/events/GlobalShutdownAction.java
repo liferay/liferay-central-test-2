@@ -24,7 +24,6 @@ import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.deploy.hot.HotDeployUtil;
 import com.liferay.portal.kernel.events.SimpleAction;
-import com.liferay.portal.kernel.job.JobSchedulerUtil;
 import com.liferay.portal.kernel.log.Jdk14LogFactoryImpl;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -133,12 +132,6 @@ public class GlobalShutdownAction extends SimpleAction {
 		}
 
 		// Scheduler
-
-		try {
-			JobSchedulerUtil.shutdown();
-		}
-		catch (Exception e) {
-		}
 
 		try {
 			SchedulerEngineUtil.shutdown();

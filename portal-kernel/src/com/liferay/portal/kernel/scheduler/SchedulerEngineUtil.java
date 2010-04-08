@@ -14,8 +14,15 @@
 
 package com.liferay.portal.kernel.scheduler;
 
+import com.liferay.portal.kernel.bean.ContextClassLoaderBeanHandler;
+import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.messaging.Message;
+import com.liferay.portal.kernel.messaging.MessageBusUtil;
+import com.liferay.portal.kernel.messaging.MessageListener;
+import com.liferay.portal.kernel.scheduler.messaging.SchedulerEventMessageListenerWrapper;
 import com.liferay.portal.kernel.scheduler.messaging.SchedulerRequest;
+
+import java.lang.reflect.Proxy;
 
 import java.util.List;
 
@@ -35,6 +42,38 @@ public class SchedulerEngineUtil {
 
 	public static void init(SchedulerEngine defaultScheduler) {
 		_instance._init(defaultScheduler);
+	}
+
+	public static void schedule(
+			SchedulerEntry schedulerEntry, ClassLoader classLoader)
+		throws SchedulerException {
+
+		MessageListener schedulerEventListener = null;
+
+		try {
+			schedulerEventListener = (MessageListener)classLoader.loadClass(
+				schedulerEntry.getEventListenerClass()).newInstance();
+
+			schedulerEventListener = (MessageListener)Proxy.newProxyInstance(
+				classLoader, new Class[] {MessageListener.class},
+				new ContextClassLoaderBeanHandler(
+					schedulerEventListener, classLoader));
+		}
+		catch (Exception e) {
+			throw new SchedulerException(e);
+		}
+
+		schedulerEventListener = new SchedulerEventMessageListenerWrapper(
+			schedulerEventListener);
+
+		schedulerEntry.setEventListener(schedulerEventListener);
+
+		MessageBusUtil.registerMessageListener(
+			DestinationNames.SCHEDULER_DISPATCH, schedulerEventListener);
+
+		schedule(
+			schedulerEntry.getTrigger(), schedulerEntry.getDescription(),
+			DestinationNames.SCHEDULER_DISPATCH, null);
 	}
 
 	public static void schedule(
@@ -63,6 +102,18 @@ public class SchedulerEngineUtil {
 
 	public static void start() throws SchedulerException {
 		_instance._start();
+	}
+
+	public static void unschedule(SchedulerEntry schedulerEntry)
+		throws SchedulerException {
+
+		MessageListener schedulerEventListener =
+			schedulerEntry.getEventListener();
+
+		MessageBusUtil.unregisterMessageListener(
+			DestinationNames.SCHEDULER_DISPATCH, schedulerEventListener);
+
+		unschedule(schedulerEntry.getTrigger());
 	}
 
 	public static void unschedule(Trigger trigger) throws SchedulerException {
