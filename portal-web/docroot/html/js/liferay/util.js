@@ -356,13 +356,6 @@ Liferay.Util = {
 	disableFormButtons: function(inputs, form) {
 		var instance = this;
 
-		instance._submitLocked = AUI().later(
-			10000,
-			instance,
-			instance.enableFormButtons,
-			[inputs, form]
-		);
-
 		inputs.set('disabled', true);
 		inputs.setStyle('opacity', 0.5);
 	},
@@ -1309,7 +1302,7 @@ Liferay.Util = {
 	}
 };
 
-function submitForm(form, action) {
+function submitForm(form, action, singleSubmit) {
 	if (!Liferay.Util._submitLocked) {
 		AUI().use(
 			'event',
@@ -1320,6 +1313,18 @@ function submitForm(form, action) {
 				var inputs = form.all('input[type=button], input[type=reset], input[type=submit]');
 
 				Liferay.Util.disableFormButtons(inputs, form);
+
+				if (singleSubmit === false) {
+					Liferay.Util._submitLocked = A.later(
+						10000,
+						Liferay.Util,
+						Liferay.Util.enableFormButtons,
+						[inputs, form]
+					);
+				}
+				else {
+					Liferay.Util._submitLocked = true;
+				}
 
 				if (action != null) {
 					form.attr('action', action);
