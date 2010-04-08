@@ -59,7 +59,7 @@ public class DataSourceFactoryBean extends AbstractFactoryBean<DataSource> {
 		}
 
 		Properties defaultProperties = PropsUtil.getProperties(
-			"jdbc.default", true);
+			"jdbc.default.", true);
 
 		PropertiesUtil.merge(defaultProperties, properties);
 
