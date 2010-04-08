@@ -145,6 +145,8 @@ public class PortletInstanceFactoryImpl implements PortletInstanceFactory {
 
 				PortletContext portletContext =
 					portletConfig.getPortletContext();
+				boolean checkAuthToken =
+					rootInvokerPortletInstance.isCheckAuthToken();
 				boolean facesPortlet =
 					rootInvokerPortletInstance.isFacesPortlet();
 				boolean strutsPortlet =
@@ -155,7 +157,8 @@ public class PortletInstanceFactoryImpl implements PortletInstanceFactory {
 				instanceInvokerPortletInstance =
 					_internalInvokerPortletPrototype.create(
 						portlet, portletInstance, portletConfig, portletContext,
-						facesPortlet, strutsPortlet, strutsBridgePortlet);
+						checkAuthToken, facesPortlet, strutsPortlet,
+						strutsBridgePortlet);
 
 				portletInstances.put(
 					portlet.getPortletId(), instanceInvokerPortletInstance);

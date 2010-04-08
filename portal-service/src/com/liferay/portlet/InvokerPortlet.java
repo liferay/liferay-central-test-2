@@ -40,7 +40,7 @@ public interface InvokerPortlet
 	public InvokerPortlet create(
 			com.liferay.portal.model.Portlet portletModel, Portlet portlet,
 			PortletConfig portletConfig, PortletContext portletContext,
-			boolean facesPortlet, boolean strutsPortlet,
+			boolean checkAuthToken, boolean facesPortlet, boolean strutsPortlet,
 			boolean strutsBridgePortlet)
 		throws PortletException;
 
@@ -55,6 +55,8 @@ public interface InvokerPortlet
 	public Portlet getPortletInstance();
 
 	public Integer getExpCache();
+
+	public boolean isCheckAuthToken();
 
 	public boolean isDestroyable();
 
@@ -72,7 +74,7 @@ public interface InvokerPortlet
 	public void prepare(
 			com.liferay.portal.model.Portlet portletModel, Portlet portlet,
 			PortletConfig portletConfig, PortletContext portletContext,
-			boolean facesPortlet, boolean strutsPortlet,
+			boolean checkAuthToken, boolean facesPortlet, boolean strutsPortlet,
 			boolean strutsBridgePortlet)
 		throws PortletException;
 

@@ -154,7 +154,7 @@ public class InvokerPortletImpl implements InvokerPortlet {
 	public InvokerPortlet create(
 			com.liferay.portal.model.Portlet portletModel, Portlet portlet,
 			PortletConfig portletConfig, PortletContext portletContext,
-			boolean facesPortlet, boolean strutsPortlet,
+			boolean checkAuthToken, boolean facesPortlet, boolean strutsPortlet,
 			boolean strutsBridgePortlet)
 		throws PortletException {
 
@@ -163,7 +163,8 @@ public class InvokerPortletImpl implements InvokerPortlet {
 
 			invokerPortlet.prepare(
 				portletModel, portlet, portletConfig, portletContext,
-				facesPortlet, strutsPortlet, strutsBridgePortlet);
+				checkAuthToken, facesPortlet, strutsPortlet,
+				strutsBridgePortlet);
 
 			return invokerPortlet;
 		}
@@ -253,6 +254,10 @@ public class InvokerPortletImpl implements InvokerPortlet {
 		_destroyable = true;
 	}
 
+	public boolean isCheckAuthToken() {
+		return _checkAuthToken;
+	}
+
 	public boolean isDestroyable() {
 		return _destroyable;
 	}
@@ -285,6 +290,11 @@ public class InvokerPortletImpl implements InvokerPortlet {
 					_portletContextImpl.getPortlet().getPortletId());
 		}
 
+		Map<String, String> initParams = portletModel.getInitParams();
+
+		_checkAuthToken = GetterUtil.getBoolean(
+			initParams.get("check-auth-token"), true);
+
 		if (ClassUtil.isSubclass(
 				_portlet.getClass(), PortletDeployer.JSF_MYFACES) ||
 			ClassUtil.isSubclass(
@@ -307,7 +317,7 @@ public class InvokerPortletImpl implements InvokerPortlet {
 	public void prepare(
 			com.liferay.portal.model.Portlet portletModel, Portlet portlet,
 			PortletConfig portletConfig, PortletContext portletContext,
-			boolean facesPortlet, boolean strutsPortlet,
+			boolean checkAuthToken, boolean facesPortlet, boolean strutsPortlet,
 			boolean strutsBridgePortlet)
 		throws PortletException {
 
@@ -317,6 +327,7 @@ public class InvokerPortletImpl implements InvokerPortlet {
 		_portlet = portlet;
 		_portletId = _portletModel.getPortletId();
 		_portletContextImpl = (PortletContextImpl)portletContext;
+		_checkAuthToken = checkAuthToken;
 		_facesPortlet = facesPortlet;
 		_strutsPortlet = strutsPortlet;
 		_strutsBridgePortlet = strutsBridgePortlet;
@@ -748,6 +759,7 @@ public class InvokerPortletImpl implements InvokerPortlet {
 	private PortletConfigImpl _portletConfigImpl;
 	private PortletContextImpl _portletContextImpl;
 	private Integer _expCache;
+	private boolean _checkAuthToken;
 	private boolean _destroyable;
 	private boolean _facesPortlet;
 	private boolean _strutsPortlet;

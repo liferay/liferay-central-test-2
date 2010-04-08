@@ -98,7 +98,7 @@ public class MonitoringPortlet implements InvokerPortlet {
 	public InvokerPortlet create(
 			com.liferay.portal.model.Portlet portletModel, Portlet portlet,
 			PortletConfig portletConfig, PortletContext portletContext,
-			boolean facesPortlet, boolean strutsPortlet,
+			boolean checkAuthToken, boolean facesPortlet, boolean strutsPortlet,
 			boolean strutsBridgePortlet)
 		throws PortletException {
 
@@ -109,8 +109,8 @@ public class MonitoringPortlet implements InvokerPortlet {
 			invokerPortlet, _singleDestinationMessageSender);
 
 		monitoringPortlet.prepare(
-			portletModel, portlet, portletConfig, portletContext, facesPortlet,
-			strutsPortlet, strutsBridgePortlet);
+			portletModel, portlet, portletConfig, portletContext,
+			checkAuthToken, facesPortlet, strutsPortlet, strutsBridgePortlet);
 
 		return monitoringPortlet;
 	}
@@ -163,6 +163,10 @@ public class MonitoringPortlet implements InvokerPortlet {
 		_invokerPortlet.init(portletConfig);
 	}
 
+	public boolean isCheckAuthToken() {
+		return _invokerPortlet.isCheckAuthToken();
+	}
+
 	public boolean isDestroyable() {
 		return _invokerPortlet.isDestroyable();
 	}
@@ -182,13 +186,13 @@ public class MonitoringPortlet implements InvokerPortlet {
 	public void prepare(
 			com.liferay.portal.model.Portlet portletModel, Portlet portlet,
 			PortletConfig portletConfig, PortletContext portletContext,
-			boolean facesPortlet, boolean strutsPortlet,
+			boolean checkAuthToken, boolean facesPortlet, boolean strutsPortlet,
 			boolean strutsBridgePortlet)
 		throws PortletException {
 
 		_invokerPortlet.prepare(
-			portletModel, portlet, portletConfig, portletContext, facesPortlet,
-			strutsPortlet, strutsBridgePortlet);
+			portletModel, portlet, portletConfig, portletContext,
+			checkAuthToken, facesPortlet, strutsPortlet, strutsBridgePortlet);
 	}
 
 	public void prepare(

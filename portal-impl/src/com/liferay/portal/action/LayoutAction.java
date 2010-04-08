@@ -717,7 +717,9 @@ public class LayoutAction extends Action {
 					}
 				}
 
-				if (PropsValues.AUTH_TOKEN_CHECK_ENABLED) {
+				if (PropsValues.AUTH_TOKEN_CHECK_ENABLED &&
+					invokerPortlet.isCheckAuthToken()) {
+
 					AuthTokenUtil.check(request);
 				}
 
