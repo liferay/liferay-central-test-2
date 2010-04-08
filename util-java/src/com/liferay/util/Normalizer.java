@@ -31,11 +31,11 @@ public class Normalizer {
 			normalizedText, _UNICODE_TEXT, _NORMALIZED_TEXT);
 	}
 
-	private static final Transliterator _transliterator =
-		Transliterator.getInstance("NFD; [:Nonspacing Mark:] Remove; NFC");
+	private static final String[] _NORMALIZED_TEXT = {"l"};
 
 	private static final String[] _UNICODE_TEXT = {"\u0142"};
 
-	private static final String[] _NORMALIZED_TEXT = {"l"};
+	private static Transliterator _transliterator =
+		Transliterator.getInstance("NFD; [:Nonspacing Mark:] Remove; NFC");
 
 }
