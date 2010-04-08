@@ -34,6 +34,7 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.messageboards.LockedThreadException;
 import com.liferay.portlet.messageboards.NoSuchCategoryException;
 import com.liferay.portlet.messageboards.model.MBCategory;
+import com.liferay.portlet.messageboards.model.MBCategoryConstants;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBMessageDisplay;
 import com.liferay.portlet.messageboards.model.MBThread;
@@ -219,12 +220,15 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 
 			name = category.getName();
 			description = category.getDescription();
+			groupId = category.getGroupId();
 		}
 		catch (NoSuchCategoryException nsce) {
 			Group group = groupLocalService.getGroup(categoryId);
 
 			name = group.getName();
 			description = group.getDescription();
+			groupId = group.getGroupId();
+			categoryId = MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID;
 		}
 
 		List<MBMessage> messages = new ArrayList<MBMessage>();
