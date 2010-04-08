@@ -138,12 +138,13 @@
 				<xs:element name="due-date-scale" minOccurs="0">
 					<xs:simpleType>
 						<xs:restriction base="xs:string">
-							<xs:enumeration value="seconds" />
-							<xs:enumeration value="minutes" />
-							<xs:enumeration value="hours" />
-							<xs:enumeration value="days" />
-							<xs:enumeration value="months" />
-							<xs:enumeration value="years" />
+							<xs:enumeration value="second" />
+							<xs:enumeration value="minute" />
+							<xs:enumeration value="hour" />
+							<xs:enumeration value="day" />
+							<xs:enumeration value="week" />
+							<xs:enumeration value="month" />
+							<xs:enumeration value="year" />
 						</xs:restriction>
 					</xs:simpleType>
 				</xs:element>
