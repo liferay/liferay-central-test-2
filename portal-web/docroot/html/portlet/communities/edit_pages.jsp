@@ -478,7 +478,7 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 
 	function <portlet:namespace />importPages() {
 		document.<portlet:namespace />fm.encoding = "multipart/form-data";
-		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL><portlet:param name="struts_action" value="/communities/import_pages" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /><portlet:param name="privateLayout" value="<%= String.valueOf(privateLayout) %>" /><portlet:param name="backURL" value="<%= backURL %>" /></portlet:actionURL>");
+		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL><portlet:param name="struts_action" value="/communities/import_pages" /><portlet:param name="backURL" value="<%= backURL %>" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /><portlet:param name="privateLayout" value="<%= String.valueOf(privateLayout) %>" /></portlet:actionURL>");
 	}
 
 	function <portlet:namespace />removePage(box) {
