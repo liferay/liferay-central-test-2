@@ -161,8 +161,7 @@ public class LDAPAuth implements Authenticator {
 							+ userDN + " and password " + password);
 				}
 
-				_log.error(
-					"Failed to bind to the LDAP server: " + e.getMessage());
+				_log.error("Failed to bind to the LDAP server", e);
 
 				ldapAuthResult.setAuthenticated(false);
 				ldapAuthResult.setErrorMessage(e.getMessage());
