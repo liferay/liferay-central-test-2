@@ -218,17 +218,17 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 			MBCategory category = mbCategoryLocalService.getCategory(
 				categoryId);
 
+			groupId = category.getGroupId();
 			name = category.getName();
 			description = category.getDescription();
-			groupId = category.getGroupId();
 		}
 		catch (NoSuchCategoryException nsce) {
 			Group group = groupLocalService.getGroup(categoryId);
 
-			name = group.getName();
-			description = group.getDescription();
 			groupId = group.getGroupId();
 			categoryId = MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID;
+			name = group.getName();
+			description = group.getDescription();
 		}
 
 		List<MBMessage> messages = new ArrayList<MBMessage>();
