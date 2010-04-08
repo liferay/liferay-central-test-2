@@ -480,7 +480,7 @@ AUI().add(
 				_createClone: function() {
 					var instance = this;
 
-					var clone = instance.get('contentBox').cloneNode(true);
+					var clone = instance.get('contentBox').clone();
 
 					if (!instance.get('url')) {
 						instance._resetMarkup(clone);
