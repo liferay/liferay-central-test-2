@@ -289,7 +289,7 @@ AUI().add(
 
 					instance.entries.add(instance.inputNode.val(), {});
 
-					instance.inputNode.focus();
+					Liferay.Util.focusFormField(instance.inputNode);
 				},
 
 				_onAddMultipleEntries: function(event) {
