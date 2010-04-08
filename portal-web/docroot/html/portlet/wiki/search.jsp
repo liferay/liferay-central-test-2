@@ -42,7 +42,7 @@ boolean createNewPage = true;
 </liferay-portlet:renderURL>
 
 <aui:form action="<%= searchURL %>" method="get" name="fm">
-	<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
+	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 	<aui:input name="nodeId" type="hidden" value="<%= nodeId %>" />
 
 	<h1 class="page-title"><liferay-ui:message key="search-results" /></h1>
@@ -51,7 +51,7 @@ boolean createNewPage = true;
 	PortletURL addPageURL = renderResponse.createRenderURL();
 
 	addPageURL.setParameter("struts_action", "/wiki/edit_page");
-	addPageURL.setParameter("redirect", currentURL);
+	addPageURL.setParameter("redirect", redirect);
 	addPageURL.setParameter("nodeId", String.valueOf(nodeId));
 	addPageURL.setParameter("title", keywords);
 	addPageURL.setParameter("editTitle", "1");
@@ -59,6 +59,7 @@ boolean createNewPage = true;
 	PortletURL portletURL = renderResponse.createRenderURL();
 
 	portletURL.setParameter("struts_action", "/wiki/search");
+	portletURL.setParameter("redirect", redirect);
 	portletURL.setParameter("nodeId", String.valueOf(nodeId));
 	portletURL.setParameter("keywords", keywords);
 
