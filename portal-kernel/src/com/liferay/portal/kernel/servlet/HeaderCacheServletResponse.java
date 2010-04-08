@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletResponseWrapper;
 
@@ -93,7 +94,7 @@ public abstract class HeaderCacheServletResponse
 
 		super.addIntHeader(name, value);
 	}
-	
+
 	public String getHeader(String name) {
 		List<Header> values = _headers.get(name);
 

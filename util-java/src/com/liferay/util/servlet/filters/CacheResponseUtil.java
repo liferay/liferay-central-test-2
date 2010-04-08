@@ -31,7 +31,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class CacheResponseUtil {
 
-	public static void addHeaders(
+	public static void setHeaders(
 		HttpServletResponse response, Map<String, List<Header>> headers) {
 
 		for (Map.Entry<String, List<Header>> entry : headers.entrySet()) {
@@ -58,7 +58,7 @@ public class CacheResponseUtil {
 			HttpServletResponse response, CacheResponseData cacheResponseData)
 		throws IOException {
 
-		addHeaders(response, cacheResponseData.getHeaders());
+		setHeaders(response, cacheResponseData.getHeaders());
 
 		response.setContentType(cacheResponseData.getContentType());
 

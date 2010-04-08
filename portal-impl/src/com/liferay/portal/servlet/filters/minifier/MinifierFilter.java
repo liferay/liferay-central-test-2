@@ -347,7 +347,7 @@ public class MinifierFilter extends BasePortalFilter {
 				processFilter(
 					MinifierFilter.class, request, stringResponse, filterChain);
 
-				CacheResponseUtil.addHeaders(
+				CacheResponseUtil.setHeaders(
 					response, stringResponse.getHeaders());
 
 				response.setContentType(stringResponse.getContentType());
