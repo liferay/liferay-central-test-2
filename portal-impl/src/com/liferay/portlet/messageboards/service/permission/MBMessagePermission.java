@@ -22,9 +22,11 @@ import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBMessage;
+import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.service.MBBanLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
+import com.liferay.portlet.messageboards.service.MBThreadLocalServiceUtil;
 
 /**
  * <a href="MBMessagePermission.java.html"><b><i>View Source</i></b></a>
@@ -87,15 +89,18 @@ public class MBMessagePermission {
 			}
 		}
 
+		MBThread thread = MBThreadLocalServiceUtil.getThread(
+			message.getThreadId());
+
 		if (permissionChecker.hasOwnerPermission(
 				message.getCompanyId(), MBMessage.class.getName(),
-				message.getMessageId(), message.getUserId(), actionId)) {
+				thread.getRootMessageId(), message.getUserId(), actionId)) {
 
 			return true;
 		}
 
 		return permissionChecker.hasPermission(
-			groupId, MBMessage.class.getName(), message.getMessageId(),
+			groupId, MBMessage.class.getName(), thread.getRootMessageId(),
 			actionId);
 	}
 
