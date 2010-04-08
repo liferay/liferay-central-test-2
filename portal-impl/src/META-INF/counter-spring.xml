@@ -7,6 +7,12 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"
 >
+
+    <!--<bean id="com.liferay.counter.service.CounterLocalService" class="com.liferay.counter.service.impl.CounterLocalServiceImpl" />
+	<bean id="com.liferay.counter.service.CounterService" class="com.liferay.counter.service.impl.CounterServiceImpl" />
+	<bean id="com.liferay.counter.service.persistence.CounterPersistence" class="com.liferay.counter.service.persistence.CounterPersistenceImpl" parent="basePersistence" />
+	<bean id="com.liferay.counter.service.persistence.CounterFinder" class="com.liferay.counter.service.persistence.CounterFinderImpl" parent="basePersistence" />-->
+
 	<bean id="com.liferay.counter.service.CounterLocalService" class="com.liferay.counter.service.impl.CounterLocalServiceImpl" />
 	<bean id="com.liferay.counter.service.CounterService" class="com.liferay.counter.service.impl.CounterServiceImpl" />
 	<bean id="com.liferay.counter.service.persistence.CounterPersistence" class="com.liferay.counter.service.persistence.CounterPersistenceImpl" parent="basePersistence">
@@ -20,7 +26,18 @@
 			</bean>
 		</property>
 	</bean>
-	<bean id="com.liferay.counter.service.persistence.CounterUtil" class="com.liferay.counter.service.persistence.CounterUtil">
+<!--	<bean id="com.liferay.counter.service.persistence.CounterUtil" class="com.liferay.counter.service.persistence.CounterUtil">
 		<property name="persistence" ref="com.liferay.counter.service.persistence.CounterPersistence" />
-	</bean>
+	</bean>-->
+    <bean id="com.liferay.counter.service.persistence.CounterFinder" class="com.liferay.counter.service.persistence.CounterFinderImpl" parent="basePersistence">
+		<property name="dataSource">
+			<bean class="org.springframework.jdbc.datasource.LazyConnectionDataSourceProxy">
+				<property name="targetDataSource">
+					<bean class="com.liferay.portal.dao.jdbc.util.DataSourceFactoryBean">
+						<property name="propertyPrefixLookup" value="counter.jdbc.prefix" />
+					</bean>
+				</property>
+			</bean>
+		</property>
+    </bean>
 </beans>

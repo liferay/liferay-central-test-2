@@ -574,6 +574,12 @@ ${exception.message}
 		<ant dir="../portal-service" target="compile" inheritAll="false" />
 	</target>
 
+	<target name="build-service-counter">
+		<antcall target="build-service">
+			<param name="service.file" value="src/com/liferay/counter/service.xml" />
+		</antcall>
+	</target>
+
 	<target name="build-service-portal">
 		<antcall target="build-service">
 			<param name="service.file" value="src/com/liferay/portal/service.xml" />
@@ -717,6 +723,7 @@ ${exception.message}
 
 	<target name="build-services">
 		<antcall target="build-service-portal" />
+        <antcall target="build-service-counter" />
 		<antcall target="build-service-portlets" />
 	</target>
 

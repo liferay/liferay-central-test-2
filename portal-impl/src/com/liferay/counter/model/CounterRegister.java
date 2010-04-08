@@ -33,6 +33,15 @@ public class CounterRegister {
 		_latch = new CompeteLatch();
 	}
 
+	public CounterRegister(
+		String name, CounterHolder holder, int rangeSize) {
+
+		_name = name;
+		_rangeSize = rangeSize;
+		_holder = holder;
+		_latch = new CompeteLatch();
+	}
+
 	public CompeteLatch getCompeteLatch() {
 		return _latch;
 	}

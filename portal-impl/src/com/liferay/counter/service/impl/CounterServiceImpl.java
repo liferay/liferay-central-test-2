@@ -14,6 +14,7 @@
 
 package com.liferay.counter.service.impl;
 
+import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.counter.service.CounterService;
 import com.liferay.counter.service.persistence.CounterUtil;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -28,31 +29,31 @@ import java.util.List;
 public class CounterServiceImpl implements CounterService {
 
 	public List<String> getNames() throws SystemException {
-		return CounterUtil.getNames();
+		return CounterLocalServiceUtil.getNames();
 	}
 
 	public long increment() throws SystemException {
-		return CounterUtil.increment();
+		return CounterLocalServiceUtil.increment();
 	}
 
 	public long increment(String name) throws SystemException {
-		return CounterUtil.increment(name);
+		return CounterLocalServiceUtil.increment(name);
 	}
 
 	public long increment(String name, int size) throws SystemException {
-		return CounterUtil.increment(name, size);
+		return CounterLocalServiceUtil.increment(name, size);
 	}
 
 	public void rename(String oldName, String newName) throws SystemException {
-		CounterUtil.rename(oldName, newName);
+		CounterLocalServiceUtil.rename(oldName, newName);
 	}
 
 	public void reset(String name) throws SystemException {
-		CounterUtil.reset(name);
+		CounterLocalServiceUtil.reset(name);
 	}
 
 	public void reset(String name, long size) throws SystemException {
-		CounterUtil.reset(name, size);
+		CounterLocalServiceUtil.reset(name, size);
 	}
 
 }

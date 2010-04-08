@@ -2121,6 +2121,14 @@ public class ServiceBuilder {
 	}
 
 	private void _createJsonJs() throws Exception {
+
+        //
+        //  LPS-8812
+        //
+        if (_packagePath.equals("com.liferay.counter")) {
+            return;
+        }
+        
 		StringBuilder content = new StringBuilder();
 
 		if (_ejbList.size() > 0) {
@@ -3180,6 +3188,13 @@ public class ServiceBuilder {
 
 	private void _createSpringXml() throws Exception {
 		Map<String, Object> context = _getContext();
+
+        //
+        //  LPS-8812
+        //
+        if (_packagePath.equals("com.liferay.counter")) {
+            return;
+        }
 
 		context.put("entities", _ejbList);
 
