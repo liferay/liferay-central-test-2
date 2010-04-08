@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 
@@ -72,7 +73,7 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 			actionRequest, "hiddenVariables");
 
 		String[] htmlAttributes = StringUtil.split(ParamUtil.getString(
-			actionRequest, "htmlAttributes"), "\n");
+			actionRequest, "htmlAttributes"), StringPool.NEW_LINE);
 
 		String portletResource = ParamUtil.getString(
 			actionRequest, "portletResource");
@@ -93,16 +94,18 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 		preferences.setValue("password-field", passwordField);
 		preferences.setValue("hidden-variables", hiddenVariables);
 
-		for (int i = 0; i < htmlAttributes.length; i++) {
-			int pos = htmlAttributes[i].indexOf("=");
+		for (String htmlAttribute : htmlAttributes) {
+			int pos = htmlAttribute.indexOf(StringPool.EQUAL);
 
-			if (pos != -1) {
-				String key = htmlAttributes[i].substring(0, pos);
-				String value = htmlAttributes[i].substring(
-					pos + 1, htmlAttributes[i].length());
-
-				preferences.setValue(key, value);
+			if (pos == -1) {
+				continue;
 			}
+
+			String key = htmlAttribute.substring(0, pos);
+			String value = htmlAttribute.substring(
+				pos + 1, htmlAttribute.length());
+
+			preferences.setValue(key, value);
 		}
 
 		preferences.store();
