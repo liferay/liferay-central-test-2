@@ -56,14 +56,6 @@
 	padding-right: 10px;
 }
 
-.portlet-document-library .file-entry-avatar img {
-	left: -45px;
-	position: relative;
-	top: -25px;
-	width: 200px;
-}
-
-
 .portlet-document-library .file-entry-categories .asset-category {
 	color: #555;
 }
@@ -85,11 +77,6 @@
 
 .portlet-document-library .file-entry-description, .portlet-document-library .folder-description {
 	margin: 0 auto 2em;
-}
-
-.portlet-document-library .file-entry-download .file-entry-name {
-	position: relative;
-	top: -30px;
 }
 
 .portlet-document-library .file-entry-download, .portlet-document-library .folder-icon {
@@ -182,7 +169,8 @@
 
 .portlet-document-library img.shortcut-icon {
 	display: inline;
-	margin-top: 100px;
+	margin-left: 10px;
+	margin-top: 75px;
 	position: absolute;
 	z-index: 10;
 }
