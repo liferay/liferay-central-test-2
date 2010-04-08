@@ -15,6 +15,7 @@
 package com.liferay.util;
 
 import com.liferay.ibm.icu.text.Transliterator;
+import com.liferay.portal.kernel.util.StringUtil;
 
 /**
  * <a href="Normalizer.java.html"><b><i>View Source</i></b></a>
@@ -24,10 +25,17 @@ import com.liferay.ibm.icu.text.Transliterator;
 public class Normalizer {
 
 	public static String normalizeToAscii(String s) {
-		return _transliterator.transform(s);
+		String normalizedText = _transliterator.transform(s);
+
+		return StringUtil.replace(
+			normalizedText, _UNICODE_TEXT, _NORMALIZED_TEXT);
 	}
 
 	private static final Transliterator _transliterator =
 		Transliterator.getInstance("NFD; [:Nonspacing Mark:] Remove; NFC");
+
+	private static final String[] _UNICODE_TEXT = {"\u0142"};
+
+	private static final String[] _NORMALIZED_TEXT = {"l"};
 
 }
