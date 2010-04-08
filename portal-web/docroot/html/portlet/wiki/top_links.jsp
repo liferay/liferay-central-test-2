@@ -116,7 +116,6 @@ boolean print = ParamUtil.getString(request, "viewMode").equals(Constants.PRINT)
 			<div class="page-search">
 				<aui:form action="<%= searchURL %>" method="get" name="searchFm">
 					<liferay-portlet:renderURLParams varImpl="searchURL" />
-					<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
 					<aui:input name="nodeId" type="hidden" value="<%= node.getNodeId() %>" />
 
 					<span class="aui-search-bar">
