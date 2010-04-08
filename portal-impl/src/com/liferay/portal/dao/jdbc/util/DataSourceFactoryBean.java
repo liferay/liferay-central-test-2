@@ -58,6 +58,13 @@ public class DataSourceFactoryBean extends AbstractFactoryBean<DataSource> {
 				properties, _propertyPrefix, true);
 		}
 
+		Properties defaultProperties = PropsUtil.getProperties(
+			"jdbc.default", true);
+
+		PropertiesUtil.merge(defaultProperties, properties);
+
+		properties = defaultProperties;
+
 		String jndiName = properties.getProperty("jndi.name");
 
 		if (Validator.isNotNull(jndiName)) {
