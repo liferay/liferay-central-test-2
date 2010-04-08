@@ -172,7 +172,8 @@ public class DataSourceFactoryBean extends AbstractFactoryBean<DataSource> {
 
 			if (key.equalsIgnoreCase("defaultTransactionIsolation") ||
 				key.equalsIgnoreCase("maxActive") ||
-				key.equalsIgnoreCase("minIdle")) {
+				key.equalsIgnoreCase("minIdle") ||
+				key.equalsIgnoreCase("removeAbandonedTimeout")) {
 
 				continue;
 			}
