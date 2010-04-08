@@ -24,15 +24,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpServletResponseWrapper;
 
 /**
  * <a href="StringServletResponse.java.html"><b><i>View Source</i></b></a>
@@ -40,65 +35,10 @@ import javax.servlet.http.HttpServletResponseWrapper;
  * @author Brian Wing Shun Chan
  * @auther Shuyang Zhou
  */
-public class StringServletResponse extends HttpServletResponseWrapper {
+public class StringServletResponse extends HeaderCacheServletResponse {
 
 	public StringServletResponse(HttpServletResponse response) {
 		super(response);
-	}
-
-	public void addDateHeader(String name, long value) {
-		List<Header> values = _headers.get(name);
-
-		if (values == null) {
-			values = new ArrayList<Header>();
-
-			_headers.put(name, values);
-		}
-
-		Header header = new Header();
-
-		header.setType(Header.DATE_TYPE);
-		header.setDateValue(value);
-
-		values.add(header);
-	}
-
-	public void addHeader(String name, String value) {
-		List<Header> values = _headers.get(name);
-
-		if (values == null) {
-			values = new ArrayList<Header>();
-
-			_headers.put(name, values);
-		}
-
-		Header header = new Header();
-
-		header.setType(Header.STRING_TYPE);
-		header.setStringValue(value);
-
-		values.add(header);
-
-		if (name.equals(HttpHeaders.CONTENT_TYPE)) {
-			setContentType(value);
-		}
-	}
-
-	public void addIntHeader(String name, int value) {
-		List<Header> values = _headers.get(name);
-
-		if (values == null) {
-			values = new ArrayList<Header>();
-
-			_headers.put(name, values);
-		}
-
-		Header header = new Header();
-
-		header.setType(Header.INTEGER_TYPE);
-		header.setIntValue(value);
-
-		values.add(header);
 	}
 
 	public int getBufferSize() {
@@ -107,22 +47,6 @@ public class StringServletResponse extends HttpServletResponseWrapper {
 
 	public String getContentType() {
 		return _contentType;
-	}
-
-	public String getHeader(String name) {
-		List<Header> values = _headers.get(name);
-
-		if ((values == null) || values.isEmpty()) {
-			return null;
-		}
-
-		Header header = values.get(0);
-
-		return header.toString();
-	}
-
-	public Map<String, List<Header>> getHeaders() {
-		return _headers;
 	}
 
 	public void flushBuffer() throws IOException {
@@ -234,49 +158,6 @@ public class StringServletResponse extends HttpServletResponseWrapper {
 		super.setContentType(contentType);
 	}
 
-	public void setDateHeader(String name, long value) {
-		List<Header> values = new ArrayList<Header>();
-
-		_headers.put(name, values);
-
-		Header header = new Header();
-
-		header.setType(Header.DATE_TYPE);
-		header.setDateValue(value);
-
-		values.add(header);
-	}
-
-	public void setHeader(String name, String value) {
-		List<Header> values = new ArrayList<Header>();
-
-		_headers.put(name, values);
-
-		Header header = new Header();
-
-		header.setType(Header.STRING_TYPE);
-		header.setStringValue(value);
-
-		values.add(header);
-
-		if (name.equals(HttpHeaders.CONTENT_TYPE)) {
-			setContentType(value);
-		}
-	}
-
-	public void setIntHeader(String name, int value) {
-		List<Header> values = new ArrayList<Header>();
-
-		_headers.put(name, values);
-
-		Header header = new Header();
-
-		header.setType(Header.INTEGER_TYPE);
-		header.setIntValue(value);
-
-		values.add(header);
-	}
-
 	public void setLocale(Locale locale) {
 	}
 
@@ -295,8 +176,6 @@ public class StringServletResponse extends HttpServletResponseWrapper {
 
 	private int _bufferSize;
 	private String _contentType;
-	private Map<String, List<Header>> _headers =
-		new HashMap<String, List<Header>>();
 	private PrintWriter _printWriter;
 	private ServletOutputStream _servletOutputStream;
 	private int _status = SC_OK;

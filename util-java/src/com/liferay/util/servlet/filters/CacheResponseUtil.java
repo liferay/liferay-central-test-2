@@ -42,13 +42,13 @@ public class CacheResponseUtil {
 				int type = header.getType();
 
 				if (type == Header.DATE_TYPE) {
-					response.addDateHeader(headerKey, header.getDateValue());
+					response.setDateHeader(headerKey, header.getDateValue());
 				}
 				else if (type == Header.INTEGER_TYPE) {
-					response.addIntHeader(headerKey, header.getIntValue());
+					response.setIntHeader(headerKey, header.getIntValue());
 				}
 				else if (type == Header.STRING_TYPE) {
-					response.addHeader(headerKey, header.getStringValue());
+					response.setHeader(headerKey, header.getStringValue());
 				}
 			}
 		}
