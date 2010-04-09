@@ -18,6 +18,7 @@
 
 <%
 String ppid = ParamUtil.getString(request, "p_p_id");
+Portlet portlet = null;	
 
 if (ppid.equals(PortletKeys.PORTLET_CONFIGURATION)) {
 	String portletResource = ParamUtil.getString(request, PortalUtil.getPortletNamespace(ppid) + "portletResource");
@@ -57,7 +58,7 @@ List<Layout> scopeLayouts = new ArrayList<Layout>();
 boolean denyAccess = false;
 
 if (Validator.isNotNull(ppid)) {
-	Portlet portlet = PortletLocalServiceUtil.getPortletById(ppid);
+	portlet = PortletLocalServiceUtil.getPortletById(ppid);
 
 	if ((portlet == null) ||
 		(!portlet.isSystem() && !_hasPortlet(ppid, category, themeDisplay))) {
