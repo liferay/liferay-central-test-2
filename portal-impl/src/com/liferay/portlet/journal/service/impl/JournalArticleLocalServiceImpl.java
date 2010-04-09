@@ -2873,11 +2873,11 @@ public class JournalArticleLocalServiceImpl
 		}
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(
-		JournalArticleLocalServiceImpl.class);
-
 	private static final String _TOKEN_PAGE_BREAK = PropsUtil.get(
 		PropsKeys.JOURNAL_ARTICLE_TOKEN_PAGE_BREAK);
+
+	private static Log _log = LogFactoryUtil.getLog(
+		JournalArticleLocalServiceImpl.class);
 
 	private long _journalArticleCheckInterval =
 		PropsValues.JOURNAL_ARTICLE_CHECK_INTERVAL * Time.MINUTE;
