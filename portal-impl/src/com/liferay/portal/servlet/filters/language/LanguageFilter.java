@@ -16,7 +16,10 @@ package com.liferay.portal.servlet.filters.language;
 
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.language.UnicodeLanguageUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.StringServletResponse;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -50,6 +53,12 @@ public class LanguageFilter extends BasePortalFilter {
 		processFilter(
 			LanguageFilter.class, request, stringResponse, filterChain);
 
+		if (_log.isDebugEnabled()) {
+			String completeURL = HttpUtil.getCompleteURL(request);
+
+			_log.debug("Translating response " + completeURL);
+		}
+
 		String content = translateResponse(request, stringResponse);
 
 		ServletResponseUtil.write(response, content);
@@ -63,25 +72,31 @@ public class LanguageFilter extends BasePortalFilter {
 
 		String content = stringResponse.getString();
 
-		StringBundler newContentSB = new StringBundler();
+		StringBundler sb = new StringBundler();
 
 		Matcher matcher = _pattern.matcher(content);
 
-		int lastIndex = 0;
+		int x = 0;
+
 		while (matcher.find()) {
-			int matchStart = matcher.start(0);
+			int y = matcher.start(0);
+
 			String key = matcher.group(1);
 
-			newContentSB.append(content.substring(lastIndex, matchStart));
-			newContentSB.append(StringPool.APOSTROPHE);
-			newContentSB.append(UnicodeLanguageUtil.get(locale, key));
-			newContentSB.append(StringPool.APOSTROPHE);
+			sb.append(content.substring(x, y));
+			sb.append(StringPool.APOSTROPHE);
+			sb.append(UnicodeLanguageUtil.get(locale, key));
+			sb.append(StringPool.APOSTROPHE);
 
-			lastIndex = matcher.end(0);
+			x = matcher.end(0);
 		}
-		newContentSB.append(content.substring(lastIndex));
-		return newContentSB.toString();
+
+		sb.append(content.substring(x));
+
+		return sb.toString();
 	}
+
+	private static Log _log = LogFactoryUtil.getLog(LanguageFilter.class);
 
 	private static Pattern _pattern = Pattern.compile(
 		"Liferay\\.Language\\.get\\([\"']([^)]+)[\"']\\)");
