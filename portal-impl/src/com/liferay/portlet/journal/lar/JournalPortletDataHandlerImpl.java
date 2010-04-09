@@ -1388,6 +1388,9 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 				}
 			}
 
+			context.addPermissions(
+				"com.liferay.portlet.journal", context.getGroupId());
+
 			return doc.formattedString();
 		}
 		catch (Exception e) {
@@ -1571,6 +1574,10 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 				IGPortletDataHandlerImpl.importImage(
 					context, igFolderPKs, image, binPath);
 			}
+
+			context.importPermissions(
+				"com.liferay.portlet.journal", context.getSourceGroupId(),
+				context.getGroupId());
 
 			return preferences;
 		}

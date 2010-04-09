@@ -185,6 +185,9 @@ public class JournalContentPortletDataHandlerImpl
 					igFoldersEl, igImagesEl, template);
 			}
 
+			context.addPermissions(
+				"com.liferay.portlet.journal", context.getGroupId());
+
 			return doc.formattedString();
 		}
 		catch (Exception e) {
@@ -390,6 +393,10 @@ public class JournalContentPortletDataHandlerImpl
 					context.getGroupId(), layout.isPrivateLayout(),
 					layout.getLayoutId(), portletId, articleId, true);
 			}
+
+			context.importPermissions(
+				"com.liferay.portlet.journal", context.getSourceGroupId(),
+				context.getGroupId());
 
 			return preferences;
 		}

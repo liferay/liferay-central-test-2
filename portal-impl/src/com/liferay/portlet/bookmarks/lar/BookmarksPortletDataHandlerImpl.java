@@ -105,6 +105,9 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 				exportEntry(context, null, entriesEl, entry);
 			}
 
+			context.addPermissions(
+				"com.liferay.portlet.bookmarks", context.getGroupId());
+
 			return doc.formattedString();
 		}
 		catch (Exception e) {
@@ -164,6 +167,10 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 
 				importEntry(context, folderPKs, entry);
 			}
+
+			context.importPermissions(
+				"com.liferay.portlet.bookmarks", context.getSourceGroupId(),
+				context.getGroupId());
 
 			return null;
 		}

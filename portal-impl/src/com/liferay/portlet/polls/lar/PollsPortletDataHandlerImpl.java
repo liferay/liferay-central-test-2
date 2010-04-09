@@ -311,6 +311,9 @@ public class PollsPortletDataHandlerImpl extends BasePortletDataHandler {
 					context, questionsEl, choicesEl, votesEl, question);
 			}
 
+			context.addPermissions(
+				"com.liferay.portlet.polls", context.getGroupId());
+
 			return doc.formattedString();
 		}
 		catch (Exception e) {
@@ -392,6 +395,10 @@ public class PollsPortletDataHandlerImpl extends BasePortletDataHandler {
 					importVote(context, questionPKs, choicePKs, vote);
 				}
 			}
+
+			context.importPermissions(
+				"com.liferay.portlet.polls", context.getSourceGroupId(),
+				context.getGroupId());
 
 			return null;
 		}

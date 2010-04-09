@@ -70,8 +70,11 @@ public interface PortletDataContext extends Serializable {
 	public void addPermissions(Class<?> classObj, long classPK)
 		throws PortalException, SystemException;
 
+	public void addPermissions(String resourceName, long resourcePK)
+		throws PortalException, SystemException;
+
 	public void addPermissions(
-		String className, long classPK, List<KeyValuePair> permissions);
+		String resourceName, long resourcePK, List<KeyValuePair> permissions);
 
 	public boolean addPrimaryKey(Class<?> classObj, String primaryKey);
 
@@ -190,6 +193,10 @@ public interface PortletDataContext extends Serializable {
 
 	public void importPermissions(
 			Class<?> classObj, long classPK, long newClassPK)
+		throws PortalException, SystemException;
+
+	public void importPermissions(
+			String resourceObj, long resourcePK, long newResourcePK)
 		throws PortalException, SystemException;
 
 	public void importRatingsEntries(

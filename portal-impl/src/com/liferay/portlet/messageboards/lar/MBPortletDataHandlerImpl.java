@@ -127,6 +127,9 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 				}
 			}
 
+			context.addPermissions(
+				"com.liferay.portlet.messageboards", context.getGroupId());
+
 			return doc.formattedString();
 		}
 		catch (Exception e) {
@@ -234,6 +237,10 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 					importBan(context, ban);
 				}
 			}
+
+			context.importPermissions(
+				"com.liferay.portlet.messageboards", context.getSourceGroupId(),
+				context.getGroupId());
 
 			return null;
 		}

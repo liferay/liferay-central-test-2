@@ -663,9 +663,10 @@ public class PermissionImporter {
 			List<Element> portletDataEls = root.elements("portlet-data");
 
 			for (Element portletDataEl : portletDataEls) {
-				String className = portletDataEl.attributeValue("class-name");
+				String className =
+					portletDataEl.attributeValue("resource-name");
 				long classPK = GetterUtil.getLong(
-					portletDataEl.attributeValue("class-pk"));
+					portletDataEl.attributeValue("resource-pk"));
 
 				List<KeyValuePair> permissions = new ArrayList<KeyValuePair>();
 

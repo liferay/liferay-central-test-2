@@ -230,6 +230,12 @@ public class PortletDataContextImpl implements PortletDataContext {
 	public void addPermissions(Class<?> classObj, long classPK)
 		throws PortalException, SystemException {
 
+		addPermissions(classObj.getName(), classPK);
+	}
+
+	public void addPermissions(String resourceName, long resourcePK)
+		throws PortalException, SystemException {
+
 		if (((PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM != 5) &&
 			 (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM != 6)) ||
 			(!MapUtil.getBoolean(
@@ -255,7 +261,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 
 				String name = role.getName();
 				String actionIds = getActionIds(
-					role, classObj.getName(), String.valueOf(classPK));
+					role, resourceName, String.valueOf(resourcePK));
 
 				KeyValuePair permission = new KeyValuePair(name, actionIds);
 
@@ -264,11 +270,11 @@ public class PortletDataContextImpl implements PortletDataContext {
 		}
 
 		_permissionsMap.put(
-			getPrimaryKeyString(classObj, classPK), permissions);
+			getPrimaryKeyString(resourceName, resourcePK), permissions);
 	}
 
 	public void addPermissions(
-		String className, long classPK, List<KeyValuePair> permissions) {
+		String resourceName, long resourcePK, List<KeyValuePair> permissions) {
 
 		if ((PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM != 5) &&
 			(PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM != 6)) {
@@ -277,7 +283,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 		}
 
 		_permissionsMap.put(
-			getPrimaryKeyString(className, classPK), permissions);
+			getPrimaryKeyString(resourceName, resourcePK), permissions);
 	}
 
 	public boolean addPrimaryKey(Class<?> classObj, String primaryKey) {
@@ -639,6 +645,13 @@ public class PortletDataContextImpl implements PortletDataContext {
 			Class<?> classObj, long classPK, long newClassPK)
 		throws PortalException, SystemException {
 
+		importPermissions(classObj.getName(), classPK, newClassPK);
+	}
+
+	public void importPermissions(
+			String resourceName, long resourcePK, long newResourcePK)
+		throws PortalException, SystemException {
+
 		if (((PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM != 5) &&
 			 (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM != 6)) ||
 			(!MapUtil.getBoolean(
@@ -648,7 +661,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 		}
 
 		List<KeyValuePair> permissions = _permissionsMap.get(
-			getPrimaryKeyString(classObj, classPK));
+			getPrimaryKeyString(resourceName, resourcePK));
 
 		if (permissions == null) {
 			return;
@@ -674,18 +687,18 @@ public class PortletDataContextImpl implements PortletDataContext {
 
 			if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5) {
 				Resource resource = ResourceLocalServiceUtil.getResource(
-					_companyId, classObj.getName(),
+					_companyId, resourceName,
 					ResourceConstants.SCOPE_INDIVIDUAL,
-					String.valueOf(newClassPK));
+					String.valueOf(newResourcePK));
 
 				PermissionLocalServiceUtil.setRolePermissions(
 					role.getRoleId(), actionIds, resource.getResourceId());
 			}
 			else if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
 				ResourcePermissionLocalServiceUtil.setResourcePermissions(
-					_companyId, classObj.getName(),
+					_companyId, resourceName,
 					ResourceConstants.SCOPE_INDIVIDUAL,
-					String.valueOf(newClassPK), role.getRoleId(), actionIds);
+					String.valueOf(newResourcePK), role.getRoleId(), actionIds);
 			}
 		}
 	}

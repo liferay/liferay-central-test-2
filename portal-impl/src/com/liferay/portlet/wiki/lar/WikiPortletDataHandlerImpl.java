@@ -321,6 +321,9 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 				exportNode(context, nodesEl, pagesEl, node);
 			}
 
+			context.addPermissions(
+				"com.liferay.portlet.wiki", context.getGroupId());
+
 			return doc.formattedString();
 		}
 		catch (Exception e) {
@@ -380,6 +383,10 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 
 				importPage(context, nodePKs, pageEl, page);
 			}
+
+			context.importPermissions(
+				"com.liferay.portlet.wiki", context.getSourceGroupId(),
+				context.getGroupId());
 
 			return null;
 		}
