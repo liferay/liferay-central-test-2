@@ -72,6 +72,9 @@ public class CalendarPortletDataHandlerImpl extends BasePortletDataHandler {
 		throws PortletDataException {
 
 		try {
+			context.addPermissions(
+				"com.liferay.portlet.calendar", context.getGroupId());
+
 			Document doc = SAXReaderUtil.createDocument();
 
 			Element root = doc.addElement("calendar-data");
@@ -106,6 +109,10 @@ public class CalendarPortletDataHandlerImpl extends BasePortletDataHandler {
 		throws PortletDataException {
 
 		try {
+			context.importPermissions(
+				"com.liferay.portlet.calendar", context.getSourceGroupId(),
+				context.getGroupId());
+
 			Document doc = SAXReaderUtil.read(data);
 
 			Element root = doc.getRootElement();

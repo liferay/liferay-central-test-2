@@ -305,6 +305,9 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 		throws PortletDataException {
 
 		try {
+			context.addPermissions(
+				"com.liferay.portlet.wiki", context.getGroupId());
+
 			Document doc = SAXReaderUtil.createDocument();
 
 			Element root = doc.addElement("wiki-data");
@@ -346,6 +349,10 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 		throws PortletDataException {
 
 		try {
+			context.importPermissions(
+				"com.liferay.portlet.wiki", context.getSourceGroupId(),
+				context.getGroupId());
+
 			Document doc = SAXReaderUtil.read(data);
 
 			Element root = doc.getRootElement();

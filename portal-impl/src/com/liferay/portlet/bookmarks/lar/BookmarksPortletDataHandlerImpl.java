@@ -81,6 +81,9 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 		throws PortletDataException {
 
 		try {
+			context.addPermissions(
+				"com.liferay.portlet.bookmarks", context.getGroupId());
+
 			Document doc = SAXReaderUtil.createDocument();
 
 			Element root = doc.addElement("bookmarks-data");
@@ -126,6 +129,10 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 		throws PortletDataException {
 
 		try {
+			context.importPermissions(
+				"com.liferay.portlet.bookmarks", context.getSourceGroupId(),
+				context.getGroupId());
+
 			Document doc = SAXReaderUtil.read(data);
 
 			Element root = doc.getRootElement();

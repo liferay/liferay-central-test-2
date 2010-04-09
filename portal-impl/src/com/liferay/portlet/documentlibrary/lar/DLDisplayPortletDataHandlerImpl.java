@@ -76,6 +76,9 @@ public class DLDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 		throws PortletDataException {
 
 		try {
+			context.addPermissions(
+				"com.liferay.portlet.documentlibrary", context.getGroupId());
+
 			long rootFolderId = GetterUtil.getLong(
 				preferences.getValue("rootFolderId", null));
 
@@ -134,6 +137,10 @@ public class DLDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 		throws PortletDataException {
 
 		try {
+			context.importPermissions(
+				"com.liferay.portlet.documentlibrary",
+				context.getSourceGroupId(), context.getGroupId());
+
 			Document doc = SAXReaderUtil.read(data);
 
 			Element root = doc.getRootElement();

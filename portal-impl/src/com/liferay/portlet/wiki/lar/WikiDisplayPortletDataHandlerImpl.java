@@ -108,6 +108,9 @@ public class WikiDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 				return StringPool.BLANK;
 			}
 
+			context.addPermissions(
+				"com.liferay.portlet.wiki", context.getGroupId());
+
 			Document doc = SAXReaderUtil.createDocument();
 
 			Element root = doc.addElement("wiki-display-data");
@@ -145,6 +148,10 @@ public class WikiDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 		throws PortletDataException {
 
 		try {
+			context.importPermissions(
+				"com.liferay.portlet.wiki", context.getSourceGroupId(),
+				context.getGroupId());
+
 			if (Validator.isNull(data)) {
 				return null;
 			}

@@ -293,6 +293,9 @@ public class PollsPortletDataHandlerImpl extends BasePortletDataHandler {
 		throws PortletDataException {
 
 		try {
+			context.addPermissions(
+				"com.liferay.portlet.polls", context.getGroupId());
+
 			Document doc = SAXReaderUtil.createDocument();
 
 			Element root = doc.addElement("polls-data");
@@ -332,6 +335,10 @@ public class PollsPortletDataHandlerImpl extends BasePortletDataHandler {
 		throws PortletDataException {
 
 		try {
+			context.importPermissions(
+				"com.liferay.portlet.polls", context.getSourceGroupId(),
+				context.getGroupId());
+
 			Document doc = SAXReaderUtil.read(data);
 
 			Element root = doc.getRootElement();

@@ -150,6 +150,9 @@ public class JournalContentPortletDataHandlerImpl
 				return StringPool.BLANK;
 			}
 
+			context.addPermissions(
+				"com.liferay.portlet.journal", context.getGroupId());
+
 			Document doc = SAXReaderUtil.createDocument();
 
 			Element root = doc.addElement("journal-content-data");
@@ -211,6 +214,10 @@ public class JournalContentPortletDataHandlerImpl
 		throws PortletDataException {
 
 		try {
+			context.importPermissions(
+				"com.liferay.portlet.journal", context.getSourceGroupId(),
+				context.getGroupId());
+
 			if (Validator.isNull(data)) {
 				return null;
 			}
