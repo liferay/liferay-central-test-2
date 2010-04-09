@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.dao.orm.Criterion;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.Order;
 import com.liferay.portal.kernel.dao.orm.Projection;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.UnmodifiableList;
@@ -69,11 +70,19 @@ public class DynamicQueryImpl implements DynamicQuery {
 
 		_criteria = _detachedCriteria.getExecutableCriteria(hibernateSession);
 
-		if ((_start != null) && (_end != null)) {
-			_criteria = _criteria.setFirstResult(_start.intValue());
-			_criteria = _criteria.setMaxResults(
-				_end.intValue() - _start.intValue());
+		if ((_start == null) || (_end == null)) {
+			return;
 		}
+
+		int start = _start.intValue();
+		int end = _end.intValue();
+
+		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS)) {
+			return;
+		}
+
+		_criteria = _criteria.setFirstResult(start);
+		_criteria = _criteria.setMaxResults(end - start);
 	}
 
 	public DetachedCriteria getDetachedCriteria() {
