@@ -645,13 +645,13 @@ public interface PropsKeys {
 
 	public static final String JOURNAL_ARTICLE_COMMENTS_ENABLED = "journal.article.comments.enabled";
 
-	public static final String JOURNAL_ARTICLE_FORCE_AUTOGENERATE_ID = "journal.article.force.autogenerate.id";
-
-	public static final String JOURNAL_ARTICLE_FORCE_INCREMENT_VERSION = "journal.article.force.increment.version";
-
 	public static final String JOURNAL_ARTICLE_CUSTOM_TOKEN_VALUE = "journal.article.custom.token.value";
 
 	public static final String JOURNAL_ARTICLE_CUSTOM_TOKENS = "journal.article.custom.tokens";
+
+	public static final String JOURNAL_ARTICLE_FORCE_AUTOGENERATE_ID = "journal.article.force.autogenerate.id";
+
+	public static final String JOURNAL_ARTICLE_FORCE_INCREMENT_VERSION = "journal.article.force.increment.version";
 
 	public static final String JOURNAL_ARTICLE_TOKEN_PAGE_BREAK = "journal.article.token.page.break";
 

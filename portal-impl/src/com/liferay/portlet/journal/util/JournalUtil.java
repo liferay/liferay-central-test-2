@@ -1306,23 +1306,25 @@ public class JournalUtil {
 	}
 
 	private static void _populateCustomTokens(Map<String, String> tokens) {
-		String[] customTokens = PropsValues.JOURNAL_ARTICLE_CUSTOM_TOKENS;
+		if (_customTokens == null) {
+			synchronized (JournalUtil.class) {
+				_customTokens = new HashMap<String, String>();
 
-		if (customTokens.length == 0) {
-			return;
-		}
+				for (String customToken :
+						PropsValues.JOURNAL_ARTICLE_CUSTOM_TOKENS) {
 
-		if (_custom_tokens.isEmpty()) {
-			for (String customToken : customTokens) {
-				String value = PropsUtil.get(
-					PropsKeys.JOURNAL_ARTICLE_CUSTOM_TOKEN_VALUE,
-					new Filter(customToken));
+					String value = PropsUtil.get(
+						PropsKeys.JOURNAL_ARTICLE_CUSTOM_TOKEN_VALUE,
+						new Filter(customToken));
 
-				_custom_tokens.put(customToken, value);
+					_customTokens.put(customToken, value);
+				}
 			}
 		}
 
-		tokens.putAll(_custom_tokens);
+		if (!_customTokens.isEmpty()) {
+			tokens.putAll(_customTokens);
+		}
 	}
 
 	private static void _populateTokens(
@@ -1530,9 +1532,6 @@ public class JournalUtil {
 		'.', '/'
 	};
 
-	private static Map<String, String> _custom_tokens =
-		new HashMap<String, String>();
-
 	private static Log _log = LogFactoryUtil.getLog(JournalUtil.class);
 
 	private static Log _logOutputAfterListener = LogFactoryUtil.getLog(
@@ -1561,5 +1560,7 @@ public class JournalUtil {
 
 	private static Log _logXmlBeforeListener = LogFactoryUtil.getLog(
 		JournalUtil.class.getName() + ".XmlBeforeListener");
+
+	private static Map<String, String> _customTokens = null;
 
 }
