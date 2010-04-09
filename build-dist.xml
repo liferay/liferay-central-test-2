@@ -944,13 +944,13 @@ app.server.glassfish.zip.url=http://download.java.net/glassfish/v3-prelude/relea
 
 		<unzip src="${app.server.parent.dir}/${app.server.jetty.zip.name}" dest="${app.server.parent.dir}">
 			<patternset
-				excludes="jetty-6.1.22/bin/**,jetty-6.1.22/contexts/**,jetty-6.1.22/contrib/**,jetty-6.1.22/distribution/**,jetty-6.1.22/examples/**,jetty-6.1.22/extras/**,jetty-6.1.22/javadoc/**,jetty-6.1.22/jxr/**,jetty-6.1.22/modules/**,jetty-6.1.22/patches/**,jetty-6.1.22/patches/**,jetty-6.1.22/project-website/**,jetty-6.1.22/webapps/**"
+				excludes="jetty-6.1.23/bin/**,jetty-6.1.23/contexts/**,jetty-6.1.23/contrib/**,jetty-6.1.23/distribution/**,jetty-6.1.23/examples/**,jetty-6.1.23/extras/**,jetty-6.1.23/javadoc/**,jetty-6.1.23/jxr/**,jetty-6.1.23/modules/**,jetty-6.1.23/patches/**,jetty-6.1.23/patches/**,jetty-6.1.23/project-website/**,jetty-6.1.23/webapps/**"
 			/>
 		</unzip>
 
-		<mkdir dir="${app.server.parent.dir}/jetty-6.1.22/bin" />
-		<mkdir dir="${app.server.parent.dir}/jetty-6.1.22/contexts" />
-		<mkdir dir="${app.server.parent.dir}/jetty-6.1.22/webapps" />
+		<mkdir dir="${app.server.parent.dir}/jetty-6.1.23/bin" />
+		<mkdir dir="${app.server.parent.dir}/jetty-6.1.23/contexts" />
+		<mkdir dir="${app.server.parent.dir}/jetty-6.1.23/webapps" />
 	</target>
 
 	<target name="unzip-jonas">
