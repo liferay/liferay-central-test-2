@@ -18,10 +18,10 @@ import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.language.UnicodeLanguageUtil;
 import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
-import com.liferay.util.servlet.filters.CacheResponseData;
-import com.liferay.util.servlet.filters.CacheResponseUtil;
+import com.liferay.util.servlet.ServletResponseUtil;
 
 import java.util.Locale;
 import java.util.regex.Matcher;
@@ -35,6 +35,7 @@ import javax.servlet.http.HttpServletResponse;
  * <a href="LanguageFilter.java.html"><b><i>View Source</i></b></a>
  *
  * @author Eduardo Lundgren
+ * @author Shuyang Zhou
  */
 public class LanguageFilter extends BasePortalFilter {
 
@@ -49,16 +50,12 @@ public class LanguageFilter extends BasePortalFilter {
 		processFilter(
 			LanguageFilter.class, request, stringResponse, filterChain);
 
-		byte[] bytes = translateResponse(request, stringResponse);
+		String content = translateResponse(request, stringResponse);
 
-		CacheResponseData cacheResponseData = new CacheResponseData(
-			bytes, bytes.length, stringResponse.getContentType(),
-			stringResponse.getHeaders());
-
-		CacheResponseUtil.write(response, cacheResponseData);
+		ServletResponseUtil.write(response, content);
 	}
 
-	protected byte[] translateResponse(
+	protected String translateResponse(
 		HttpServletRequest request, StringServletResponse stringResponse) {
 
 		String languageId = LanguageUtil.getLanguageId(request);
@@ -66,22 +63,24 @@ public class LanguageFilter extends BasePortalFilter {
 
 		String content = stringResponse.getString();
 
+		StringBundler newContentSB = new StringBundler();
+
 		Matcher matcher = _pattern.matcher(content);
 
+		int lastIndex = 0;
 		while (matcher.find()) {
-			String match = matcher.group(0);
+			int matchStart = matcher.start(0);
 			String key = matcher.group(1);
 
-			StringBuffer sb = new StringBuffer();
+			newContentSB.append(content.substring(lastIndex, matchStart));
+			newContentSB.append(StringPool.APOSTROPHE);
+			newContentSB.append(UnicodeLanguageUtil.get(locale, key));
+			newContentSB.append(StringPool.APOSTROPHE);
 
-			sb.append(StringPool.APOSTROPHE);
-			sb.append(UnicodeLanguageUtil.get(locale, key));
-			sb.append(StringPool.APOSTROPHE);
-
-			content = content.replace(match, sb.toString());
+			lastIndex = matcher.end(0);
 		}
-
-		return content.getBytes();
+		newContentSB.append(content.substring(lastIndex));
+		return newContentSB.toString();
 	}
 
 	private static Pattern _pattern = Pattern.compile(
