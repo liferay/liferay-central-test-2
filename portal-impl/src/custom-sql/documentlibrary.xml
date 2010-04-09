@@ -13,7 +13,6 @@
 					(DLFileVersion.name = DLFileEntry.name)
 			WHERE
 				(DLFileEntry.groupId = ?) AND
-				(DLFileEntry.version > 0) AND
 				(DLFileVersion.status = ?) AND
 				[$FOLDER_ID$]
 		]]>
@@ -48,7 +47,6 @@
 						(DLFileVersion.name = DLFileEntry.name)
 				WHERE
 					(DLFileEntry.groupId = ?) AND
-					(DLFileEntry.version > 0) AND
 					(DLFileVersion.status = ?) AND
 					[$FILE_ENTRY_FOLDER_ID$]
 			)
@@ -88,7 +86,6 @@
 						(DLFileVersion.name = DLFileEntry.name)
 				WHERE
 					(DLFileEntry.groupId = ?) AND
-					(DLFileEntry.version > 0) AND
 					(DLFileVersion.status = ?) AND
 					[$FILE_ENTRY_FOLDER_ID$]
 			)
@@ -118,7 +115,6 @@
 						(DLFileVersion.name = DLFileEntry.name)
 				WHERE
 					(DLFileEntry.groupId = ?) AND
-					(DLFileEntry.version > 0) AND
 					(DLFileVersion.status = ?) AND
 					[$FILE_ENTRY_FOLDER_ID$]
 			)
@@ -164,7 +160,6 @@
 						(DLFileVersion.name = DLFileEntry.name)
 				WHERE
 					(DLFileEntry.groupId = ?) AND
-					(DLFileEntry.version > 0) AND
 					(DLFileVersion.status = ?) AND
 					[$FILE_ENTRY_FOLDER_ID$]
 			)
