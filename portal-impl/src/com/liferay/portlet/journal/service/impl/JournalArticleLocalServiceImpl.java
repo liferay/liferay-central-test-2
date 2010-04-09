@@ -116,15 +116,6 @@ import javax.portlet.PortletPreferences;
 public class JournalArticleLocalServiceImpl
 	extends JournalArticleLocalServiceBaseImpl {
 
-	private static Log _log = LogFactoryUtil.getLog(
-		JournalArticleLocalServiceImpl.class);
-
-	private static final String _TOKEN_PAGE_BREAK = PropsUtil.get(
-		PropsKeys.JOURNAL_ARTICLE_TOKEN_PAGE_BREAK);
-
-	private long _journalArticleCheckInterval =
-		PropsValues.JOURNAL_ARTICLE_CHECK_INTERVAL * Time.MINUTE;
-
 	public JournalArticle addArticle(
 			long userId, long groupId, String articleId, boolean autoArticleId,
 			double version, String title, String description, String content,
@@ -2881,5 +2872,14 @@ public class JournalArticleLocalServiceImpl
 			throw new ArticleIdException();
 		}
 	}
+
+	private static Log _log = LogFactoryUtil.getLog(
+		JournalArticleLocalServiceImpl.class);
+
+	private static final String _TOKEN_PAGE_BREAK = PropsUtil.get(
+		PropsKeys.JOURNAL_ARTICLE_TOKEN_PAGE_BREAK);
+
+	private long _journalArticleCheckInterval =
+		PropsValues.JOURNAL_ARTICLE_CHECK_INTERVAL * Time.MINUTE;
 
 }
