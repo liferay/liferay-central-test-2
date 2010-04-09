@@ -369,8 +369,8 @@ public class PermissionExporter {
 
 				Element portletDataEl = root.addElement("portlet-data");
 
-				portletDataEl.addAttribute("class-name", permissionEntry[0]);
-				portletDataEl.addAttribute("class-pk", permissionEntry[1]);
+				portletDataEl.addAttribute("resource-name", permissionEntry[0]);
+				portletDataEl.addAttribute("resource-pk", permissionEntry[1]);
 
 				List<KeyValuePair> permissions = entry.getValue();
 
