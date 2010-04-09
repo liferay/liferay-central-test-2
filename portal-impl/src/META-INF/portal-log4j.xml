@@ -444,6 +444,10 @@
 		<priority value="ERROR" />
 	</category>
 
+	<category name="com.liferay.portal.servlet.filters.language">
+		<priority value="DEBUG" />
+	</category>
+
 	<category name="com.liferay.portal.servlet.filters.minifier">
 		<priority value="ERROR" />
 	</category>
