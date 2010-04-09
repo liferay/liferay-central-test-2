@@ -225,7 +225,7 @@ request.setAttribute("view_file_shortcut.jsp-fileShortcut", fileShortcut);
 </aui:layout>
 
 <div class="file-entry-panels">
-	<liferay-ui:panel-container extended="<%= false %>" persistState="<%= true %>">
+	<liferay-ui:panel-container extended="<%= false %>" id="documentPanelContainer" persistState="<%= true %>">
 		<liferay-ui:panel collapsible="<%= true %>" cssClass="version-history" extended="<%= true %>" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "version-history") %>'>
 
 			<%

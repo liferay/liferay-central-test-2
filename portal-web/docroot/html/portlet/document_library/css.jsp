@@ -127,7 +127,7 @@
 	padding-right: 2em;
 }
 
-.portlet-document-library .folder-column #documentLibraryPanelContainer, .portlet-document-library .file-entry-panels #documentPanels {
+.portlet-document-library .folder-column #documentLibraryPanelContainer, .portlet-document-library .file-entry-panels #documentPanelContainer {
 	border-width: 0;
 }
 
