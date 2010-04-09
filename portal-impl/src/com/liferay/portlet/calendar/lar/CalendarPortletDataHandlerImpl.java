@@ -85,9 +85,6 @@ public class CalendarPortletDataHandlerImpl extends BasePortletDataHandler {
 				exportEvent(context, root, event);
 			}
 
-			context.addPermissions(
-				"com.liferay.portlet.calendar", context.getGroupId());
-
 			return doc.formattedString();
 		}
 		catch (Exception e) {
@@ -126,10 +123,6 @@ public class CalendarPortletDataHandlerImpl extends BasePortletDataHandler {
 
 				importEvent(context, event);
 			}
-
-			context.importPermissions(
-				"com.liferay.portlet.calendar", context.getSourceGroupId(),
-				context.getGroupId());
 
 			return null;
 		}

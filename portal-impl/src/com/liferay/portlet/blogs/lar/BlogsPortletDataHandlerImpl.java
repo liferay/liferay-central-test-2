@@ -85,9 +85,6 @@ public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 				exportEntry(context, root, entry);
 			}
 
-			context.addPermissions(
-				"com.liferay.portlet.blogs", context.getGroupId());
-
 			return doc.formattedString();
 		}
 		catch (Exception e) {
@@ -131,10 +128,6 @@ public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 
 				importEntry(context, entry);
 			}
-
-			context.importPermissions(
-				"com.liferay.portlet.blogs", context.getSourceGroupId(),
-				context.getGroupId());
 
 			if (context.getBooleanParameter(_NAMESPACE, "wordpress")) {
 				WordPressImporter.importData(context);

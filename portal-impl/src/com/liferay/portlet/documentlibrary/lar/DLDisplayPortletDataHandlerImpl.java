@@ -109,9 +109,6 @@ public class DLDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 					fileRanksEl, folder);
 			}
 
-			context.addPermissions(
-				"com.liferay.portlet.documentlibrary", context.getGroupId());
-
 			return doc.formattedString();
 		}
 		catch (Exception e) {
@@ -231,10 +228,6 @@ public class DLDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 				preferences.setValue(
 					"rootFolderId", String.valueOf(rootFolderId));
 			}
-
-			context.importPermissions(
-				"com.liferay.portlet.documentlibrary",
-				context.getSourceGroupId(), context.getGroupId());
 
 			return preferences;
 		}

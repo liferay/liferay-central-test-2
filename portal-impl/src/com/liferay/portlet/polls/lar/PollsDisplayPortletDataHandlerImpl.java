@@ -109,9 +109,6 @@ public class PollsDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 			PollsPortletDataHandlerImpl.exportQuestion(
 				context, questionsEl, choicesEl, votesEl, question);
 
-			context.addPermissions(
-				"com.liferay.portlet.polls", context.getGroupId());
-
 			return doc.formattedString();
 		}
 		catch (Exception e) {
@@ -210,10 +207,6 @@ public class PollsDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 
 				preferences.setValue("question-id", String.valueOf(questionId));
 			}
-
-			context.importPermissions(
-				"com.liferay.portlet.polls", context.getSourceGroupId(),
-				context.getGroupId());
 
 			return preferences;
 		}

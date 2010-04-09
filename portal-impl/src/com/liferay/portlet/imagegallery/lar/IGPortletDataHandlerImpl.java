@@ -328,9 +328,6 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 				exportImage(context, null, imagesEl, image);
 			}
 
-			context.addPermissions(
-				"com.liferay.portlet.imagegallery", context.getGroupId());
-
 			return doc.formattedString();
 		}
 		catch (Exception e) {
@@ -389,10 +386,6 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 
 				importImage(context, folderPKs, image, binPath);
 			}
-
-			context.importPermissions(
-				"com.liferay.portlet.imagegallery",
-				context.getSourceGroupId(), context.getGroupId());
 
 			return null;
 		}

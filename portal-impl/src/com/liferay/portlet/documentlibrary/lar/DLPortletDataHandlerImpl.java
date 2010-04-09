@@ -516,9 +516,6 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 					context, foldersEl, fileEntriesEl, fileRanksEl, fileEntry);
 			}
 
-			context.addPermissions(
-				"com.liferay.portlet.documentlibrary", context.getGroupId());
-
 			return doc.formattedString();
 		}
 		catch (Exception e) {
@@ -628,10 +625,6 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 						context, folderPKs, fileEntryNames, fileRank);
 				}
 			}
-
-			context.importPermissions(
-				"com.liferay.portlet.documentlibrary",
-				context.getSourceGroupId(), context.getGroupId());
 
 			return null;
 		}
