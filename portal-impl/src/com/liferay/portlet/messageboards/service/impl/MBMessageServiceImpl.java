@@ -25,6 +25,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.User;
+import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceContext;
@@ -73,16 +74,16 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 			String subject, String body, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		User user = getUser();
+		long userId = getGuestOrUserId();
 
 		MBDiscussionPermission.check(
-			getPermissionChecker(), user.getCompanyId(),
+			getPermissionChecker(), CompanyThreadLocal.getCompanyId(),
 			serviceContext.getScopeGroupId(), permissionClassName,
-			permissionClassPK, user.getUserId(), ActionKeys.ADD_DISCUSSION);
+			permissionClassPK, userId, ActionKeys.ADD_DISCUSSION);
 
 		return mbMessageLocalService.addDiscussionMessage(
-			getUserId(), null, className, classPK, threadId,
-			parentMessageId, subject, body, serviceContext);
+			userId, null, className, classPK, threadId, parentMessageId,
+			subject, body, serviceContext);
 	}
 
 	public MBMessage addMessage(
