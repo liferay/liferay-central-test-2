@@ -14,7 +14,6 @@
 
 package com.liferay.portal.action;
 
-import com.liferay.counter.service.CounterServiceUtil;
 import com.liferay.documentlibrary.service.DLLocalServiceUtil;
 import com.liferay.documentlibrary.service.DLServiceUtil;
 import com.liferay.mail.service.MailServiceUtil;
@@ -113,7 +112,6 @@ public class JSONServiceAction extends JSONAction {
 	}
 
 	public JSONServiceAction() {
-		_invalidClassNames.add(CounterServiceUtil.class.getName());
 		_invalidClassNames.add(DLLocalServiceUtil.class.getName());
 		_invalidClassNames.add(DLServiceUtil.class.getName());
 		_invalidClassNames.add(MailServiceUtil.class.getName());

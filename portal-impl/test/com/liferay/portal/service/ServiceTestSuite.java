@@ -14,7 +14,7 @@
 
 package com.liferay.portal.service;
 
-import com.liferay.counter.service.CounterServiceTest;
+import com.liferay.counter.service.CounterLocalServiceTest;
 import com.liferay.portlet.bookmarks.service.BookmarksEntryServiceTest;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderServiceTest;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryServiceTest;
@@ -35,7 +35,7 @@ public class ServiceTestSuite extends TestSuite {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTestSuite(CounterServiceTest.class);
+		testSuite.addTestSuite(CounterLocalServiceTest.class);
 
 		testSuite.addTestSuite(ResourceLocalServiceTest.class);
 		testSuite.addTestSuite(UserServiceTest.class);

@@ -3,5 +3,5 @@
 
 <service-builder package-path="com.liferay.counter">
 	<namespace>Counter</namespace>
-	<entity name="Counter" local-service="true" remote-service="true" />
+	<entity name="Counter" local-service="true" remote-service="false" />
 </service-builder>

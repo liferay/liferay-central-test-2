@@ -19,11 +19,11 @@ import com.liferay.portal.service.BaseServiceTestCase;
 import com.liferay.portal.service.PortalServiceUtil;
 
 /**
- * <a href="CounterServiceTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="CounterLocalServiceTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael Young
  */
-public class CounterServiceTest extends BaseServiceTestCase {
+public class CounterLocalServiceTest extends BaseServiceTestCase {
 
 	public void testCounterRollback() throws Exception {
 		long counterValue = nextLong() + 1;
