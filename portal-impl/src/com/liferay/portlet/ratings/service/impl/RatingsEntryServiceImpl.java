@@ -16,6 +16,7 @@ package com.liferay.portlet.ratings.service.impl;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.ratings.model.RatingsEntry;
 import com.liferay.portlet.ratings.service.base.RatingsEntryServiceBaseImpl;
 
@@ -37,7 +38,7 @@ public class RatingsEntryServiceImpl extends RatingsEntryServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		return ratingsEntryLocalService.updateEntry(
-			getUserId(), className, classPK, score);
+			getUserId(), className, classPK, score, new ServiceContext());
 	}
 
 }

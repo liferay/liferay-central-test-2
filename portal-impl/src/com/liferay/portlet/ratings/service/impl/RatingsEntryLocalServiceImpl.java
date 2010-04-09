@@ -17,6 +17,7 @@ package com.liferay.portlet.ratings.service.impl;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.User;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.model.BlogsStatsUser;
@@ -92,7 +93,8 @@ public class RatingsEntryLocalServiceImpl
 	}
 
 	public RatingsEntry updateEntry(
-			long userId, String className, long classPK, double score)
+			long userId, String className, long classPK, double score,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Entry
@@ -109,7 +111,7 @@ public class RatingsEntryLocalServiceImpl
 		if (entry != null) {
 			oldScore = entry.getScore();
 
-			entry.setModifiedDate(now);
+			entry.setModifiedDate(serviceContext.getModifiedDate(now));
 			entry.setScore(score);
 
 			ratingsEntryPersistence.update(entry, false);
@@ -137,8 +139,8 @@ public class RatingsEntryLocalServiceImpl
 			entry.setCompanyId(user.getCompanyId());
 			entry.setUserId(user.getUserId());
 			entry.setUserName(user.getFullName());
-			entry.setCreateDate(now);
-			entry.setModifiedDate(now);
+			entry.setCreateDate(serviceContext.getCreateDate(now));
+			entry.setModifiedDate(serviceContext.getModifiedDate(now));
 			entry.setClassNameId(classNameId);
 			entry.setClassPK(classPK);
 			entry.setScore(score);

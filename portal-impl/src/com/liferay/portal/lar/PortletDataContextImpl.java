@@ -701,12 +701,17 @@ public class PortletDataContextImpl implements PortletDataContext {
 			return;
 		}
 
+		ServiceContext serviceContext = new ServiceContext();
+
 		for (RatingsEntry ratingsEntry : ratingsEntries) {
 			long userId = getUserId(ratingsEntry.getUserUuid());
 
+			serviceContext.setCreateDate(ratingsEntry.getCreateDate());
+			serviceContext.setModifiedDate(ratingsEntry.getModifiedDate());
+
 			RatingsEntryLocalServiceUtil.updateEntry(
 				userId, classObj.getName(), ((Long)newClassPK).longValue(),
-				ratingsEntry.getScore());
+				ratingsEntry.getScore(), serviceContext);
 		}
 	}
 
