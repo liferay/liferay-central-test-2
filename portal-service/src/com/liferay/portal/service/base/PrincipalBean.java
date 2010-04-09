@@ -45,6 +45,21 @@ public class PrincipalBean {
 		JRUN_ANONYMOUS, ORACLE_ANONYMOUS, SUN_ANONYMOUS, WEBLOGIC_ANONYMOUS
 	};
 
+	public User getGuestOrUser() throws PortalException, SystemException {
+		try {
+			return getUser();
+		}
+		catch (PrincipalException pe) {
+			try {
+				return UserLocalServiceUtil.getDefaultUser(
+					CompanyThreadLocal.getCompanyId());
+			}
+			catch (Exception e) {
+				throw pe;
+			}
+		}
+	}
+
 	public long getGuestOrUserId() throws PrincipalException {
 		try {
 			return getUserId();
