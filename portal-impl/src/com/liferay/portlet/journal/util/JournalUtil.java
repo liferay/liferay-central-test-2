@@ -1305,6 +1305,26 @@ public class JournalUtil {
 		}
 	}
 
+	private static void _populateCustomTokens(Map<String, String> tokens) {
+		String[] customTokens = PropsValues.JOURNAL_ARTICLE_CUSTOM_TOKENS;
+
+		if (customTokens.length == 0) {
+			return;
+		}
+
+		if (_custom_tokens.isEmpty()) {
+			for (String customToken : customTokens) {
+				String value = PropsUtil.get(
+					PropsKeys.JOURNAL_ARTICLE_CUSTOM_TOKEN_VALUE,
+					new Filter(customToken));
+
+				_custom_tokens.put(customToken, value);
+			}
+		}
+
+		tokens.putAll(_custom_tokens);
+	}
+
 	private static void _populateTokens(
 			Map<String, String> tokens, long groupId, String xmlRequest)
 		throws Exception {
@@ -1376,6 +1396,8 @@ public class JournalUtil {
 			"theme_image_path",
 			themeDisplayEl.elementText("path-theme-images"));
 
+		_populateCustomTokens(tokens);
+
 		// Deprecated tokens
 
 		tokens.put(
@@ -1444,6 +1466,8 @@ public class JournalUtil {
 		tokens.put("root_path", themeDisplay.getPathContext());
 		tokens.put("theme_image_path", themeDisplay.getPathThemeImages());
 
+		_populateCustomTokens(tokens);
+
 		// Deprecated tokens
 
 		tokens.put("friendly_url", themeDisplay.getPathFriendlyURLPublic());
@@ -1505,6 +1529,9 @@ public class JournalUtil {
 	private static final char[] _URL_TITLE_REPLACE_CHARS = new char[] {
 		'.', '/'
 	};
+
+	private static Map<String, String> _custom_tokens =
+		new HashMap<String, String>();
 
 	private static Log _log = LogFactoryUtil.getLog(JournalUtil.class);
 

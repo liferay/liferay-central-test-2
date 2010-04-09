@@ -776,6 +776,9 @@ public class PropsValues {
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.JOURNAL_ARTICLE_COMMENTS_ENABLED));
 
+	public static final String[] JOURNAL_ARTICLE_CUSTOM_TOKENS =
+		PropsUtil.getArray(PropsKeys.JOURNAL_ARTICLE_CUSTOM_TOKENS);
+
 	public static final boolean JOURNAL_ARTICLE_FORCE_AUTOGENERATE_ID =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.JOURNAL_ARTICLE_FORCE_AUTOGENERATE_ID));
