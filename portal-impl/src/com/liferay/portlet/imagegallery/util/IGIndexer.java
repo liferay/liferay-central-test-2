@@ -76,7 +76,7 @@ public class IGIndexer extends BaseIndexer {
 
 		String imageId = document.get(Field.ENTRY_CLASS_PK);
 
-		portletURL.setParameter("struts_action", "/image_gallery/edit_image");
+		portletURL.setParameter("struts_action", "/image_gallery/view_image");
 		portletURL.setParameter("imageId", imageId);
 
 		return new Summary(title, content, portletURL);
