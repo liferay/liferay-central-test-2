@@ -14,53 +14,45 @@
 
 package com.liferay.portal.spring;
 
-import java.lang.reflect.Field;
+import com.liferay.portal.util.BaseTestCase;
 
-import junit.framework.TestCase;
+import java.lang.reflect.Field;
 
 import org.springframework.aop.framework.AdvisedSupport;
 
 /**
- * We are using a few Spring internal things which may change in Spring's future
- * release without any notification. To prevent the incompatible break, this
- * unit test tests all Spring's internal logic we are depending on.
- *
- * We should run this unit test everytime when we are trying to upgrade Spring.
- *
  * <a href="SpringCompatibilityTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Shuyang Zhou
  */
-public class SpringCompatibilityTest extends TestCase {
+public class SpringCompatibilityTest extends BaseTestCase {
 
-	/**
-	 * Checking for existence of
-	 * org.springframework.aop.framework.JdkDynamicAopProxy and
-	 * its advised field
-	 */
-	public void testJdkDynamicProxyCompatibility() {
-		Class<?> proxyClass = null;
+	public void testJdkDynamicAopProxy() {
+		Class<?> jdkDynamicAopProxyClass = null;
+
 		try {
-			proxyClass = Class.forName(
+			jdkDynamicAopProxyClass = Class.forName(
 				"org.springframework.aop.framework.JdkDynamicAopProxy");
-		} catch (ClassNotFoundException ex) {
-			throw new RuntimeException(
-				"Class org.springframework.aop.framework.JdkDynamicAopProxy " +
-				"does not exist anymore");
+		}
+		catch (Exception e) {
+			fail(e.getMessage());
 		}
 
-		Field advisedSupportField = null;
+		Field advisedField = null;
+
 		try {
-			advisedSupportField = proxyClass.getDeclaredField("advised");
-		} catch (Exception ex) {
-			throw new RuntimeException("Field advised does not exist anymore");
+			advisedField = jdkDynamicAopProxyClass.getDeclaredField("advised");
+		}
+		catch (Exception e) {
+			fail(e.getMessage());
 		}
 
-		Class<?> advisedSupportClass = advisedSupportField.getType();
+		Class<?> advisedSupportClass = advisedField.getType();
+
 		if (!advisedSupportClass.equals(AdvisedSupport.class)) {
-			throw new RuntimeException("Field advised's type is no longer " +
-				AdvisedSupport.class.getName() + ", but " +
-				advisedSupportClass.getName());
+			fail(
+				advisedSupportClass.getClass().getName() + " is not " +
+					AdvisedSupport.class.getName());
 		}
 	}
 

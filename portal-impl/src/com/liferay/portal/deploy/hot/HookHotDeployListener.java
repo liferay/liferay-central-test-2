@@ -110,6 +110,7 @@ import java.util.Set;
 
 import javax.servlet.ServletContext;
 
+import org.springframework.aop.TargetSource;
 import org.springframework.aop.framework.AdvisedSupport;
 import org.springframework.aop.target.SingletonTargetSource;
 
@@ -314,6 +315,25 @@ public class HookHotDeployListener
 		}
 	}
 
+	protected void destroyServices(String servletContextName) throws Exception {
+		List<ServiceBag> serviceBags =
+			_servicesContainer.findByServletContextName(servletContextName);
+
+		for (ServiceBag serviceBag : serviceBags) {
+			Object serviceProxy = PortalBeanLocatorUtil.locate(
+				serviceBag.getServiceType());
+
+			AdvisedSupport advisedSupport = getAdvisedSupport(serviceProxy);
+
+			TargetSource originalTargetSource = new SingletonTargetSource(
+				serviceBag.getOriginalService());
+
+			advisedSupport.setTargetSource(originalTargetSource);
+		}
+
+		_servicesContainer.removeByServletContextName(servletContextName);
+	}
+
 	protected void doInvokeDeploy(HotDeployEvent event) throws Exception {
 		ServletContext servletContext = event.getServletContext();
 
@@ -501,19 +521,16 @@ public class HookHotDeployListener
 					new Class<?>[] {serviceTypeClass});
 
 			Object serviceProxy = PortalBeanLocatorUtil.locate(serviceType);
+
 			if (Proxy.isProxyClass(serviceProxy.getClass())) {
-				_installService(
-					servletContextName, serviceType, serviceProxy,
-					serviceImplConstructor, portletClassLoader,
-					serviceTypeClass);
+				initServices(
+					servletContextName, portletClassLoader, serviceType,
+					serviceTypeClass, serviceImplConstructor, serviceProxy);
 			}
 			else {
-				if (_log.isErrorEnabled()) {
-					_log.error("Spring is currently configured to use CGLIB " +
-						"proxy, ServiceHook can not work. No service " +
-						"implementation will be changed. Switch to " +
-						"JdkDynamicProxy to enable ServiceHook.");
-				}
+				_log.error(
+					"Service hooks require Spring to be configured to use " +
+						"JdkDynamicProxy and will not work with CGLIB");
 			}
 		}
 
@@ -661,13 +678,28 @@ public class HookHotDeployListener
 			destroyPortalProperties(servletContextName, portalProperties);
 		}
 
-		_uninstallServices(servletContextName);
+		destroyServices(servletContextName);
 
 		unregisterClpMessageListeners(servletContext);
 
 		if (_log.isInfoEnabled()) {
 			_log.info("Hook for " + servletContextName + " was unregistered");
 		}
+	}
+
+	protected AdvisedSupport getAdvisedSupport(Object serviceProxy)
+		throws Exception {
+
+		InvocationHandler invocationHandler = Proxy.getInvocationHandler(
+			serviceProxy);
+
+		Class<?> invocationHandlerClass = invocationHandler.getClass();
+
+		Field advisedField = invocationHandlerClass.getDeclaredField("advised");
+
+		advisedField.setAccessible(true);
+
+		return (AdvisedSupport)advisedField.get(invocationHandler);
 	}
 
 	protected void getCustomJsps(
@@ -1232,6 +1264,56 @@ public class HookHotDeployListener
 		}
 	}
 
+	protected void initServices(
+			String servletContextName, ClassLoader portletClassLoader,
+			String serviceType, Class<?> serviceTypeClass,
+			Constructor<?> serviceImplConstructor, Object serviceProxy)
+		throws Exception {
+
+		ServiceBag serviceBag = _servicesContainer.findByServiceType(
+			serviceType);
+
+		if (serviceBag != null) {
+			throw new IllegalStateException(
+				serviceType + " is already overridden by " +
+					serviceBag.getServletContextName());
+		}
+
+		AdvisedSupport advisedSupport = getAdvisedSupport(serviceProxy);
+
+		TargetSource targetSource = advisedSupport.getTargetSource();
+
+		Object originalService = targetSource.getTarget();
+
+		if (Proxy.isProxyClass(originalService.getClass())) {
+			InvocationHandler invocationHandler =
+				Proxy.getInvocationHandler(originalService);
+
+			if (invocationHandler instanceof ContextClassLoaderBeanHandler) {
+				ContextClassLoaderBeanHandler contextClassLoaderBeanHandler =
+					(ContextClassLoaderBeanHandler)invocationHandler;
+
+				originalService =  contextClassLoaderBeanHandler.getBean();
+			}
+		}
+
+		Object customService = serviceImplConstructor.newInstance(
+			originalService);
+
+		Object customTarget = Proxy.newProxyInstance(
+			portletClassLoader, new Class<?>[] {serviceTypeClass},
+			new ContextClassLoaderBeanHandler(
+				customService, portletClassLoader));
+
+		TargetSource customTargetSource = new SingletonTargetSource(
+			customTarget);
+
+		advisedSupport.setTargetSource(customTargetSource);
+
+		_servicesContainer.addServiceBag(
+			servletContextName, serviceType, originalService);
+	}
+
 	protected void resetPortalProperties(
 			String servletContextName, Properties portalProperties,
 			boolean initPhase)
@@ -1421,101 +1503,6 @@ public class HookHotDeployListener
 
 		ReleaseLocalServiceUtil.updateRelease(
 			release.getReleaseId(), buildNumber, null, true);
-	}
-
-	private AdvisedSupport _getAdvisedSupport(Object serviceProxy)
-		throws Exception {
-
-		InvocationHandler invocationHandler =
-			Proxy.getInvocationHandler(serviceProxy);
-		Field advisedSupportField =
-			invocationHandler.getClass().getDeclaredField("advised");
-		advisedSupportField.setAccessible(true);
-		return (AdvisedSupport) advisedSupportField.get(invocationHandler);
-	}
-
-	private Object _getService(Object serviceProxy)
-		throws Exception {
-
-		AdvisedSupport advisedSupport = _getAdvisedSupport(serviceProxy);
-		Object oldTarget = advisedSupport.getTargetSource().getTarget();
-		return _unwrapContextClassLoaderBeanHandler(oldTarget);
-	}
-
-	private void _installService(
-			String servletContextName, String serviceType, Object serviceProxy,
-			Constructor<?> serviceImplConstructor,
-			ClassLoader portletClassLoader, Class<?> serviceTypeClass)
-		throws Exception {
-
-		ServiceBag serviceBag = _servicesContainer.findByServiceType(
-			serviceType);
-		Object oldService = null;
-		if (serviceBag == null) {
-			// First time overwrite
-			oldService = _getService(serviceProxy);
-		}
-		else {
-			// An older version exist
-			oldService = serviceBag.getOldService();
-			_servicesContainer.removeByServiceType(serviceType);
-		}
-
-		Object newService = serviceImplConstructor.newInstance(oldService);
-
-		_servicesContainer.addServiceBag(servletContextName, serviceType,
-			oldService, newService);
-
-		_setWrappedService(serviceProxy, newService, portletClassLoader,
-			serviceTypeClass);
-	}
-
-	private void _setUnwrappedService(Object serviceProxy, Object service)
-		throws Exception {
-
-		AdvisedSupport advisedSupport = _getAdvisedSupport(serviceProxy);
-		advisedSupport.setTargetSource(new SingletonTargetSource(service));
-	}
-
-	private void _setWrappedService(
-			Object serviceProxy, Object service, ClassLoader portletClassLoader,
-			Class<?> serviceTypeClass)
-		throws Exception {
-
-		AdvisedSupport advisedSupport = _getAdvisedSupport(serviceProxy);
-		Object newTarget = Proxy.newProxyInstance(
-			portletClassLoader, new Class<?>[] {serviceTypeClass},
-			new ContextClassLoaderBeanHandler(service, portletClassLoader));
-		advisedSupport.setTargetSource(new SingletonTargetSource(newTarget));
-	}
-
-	private void _uninstallServices(String servletContextName)
-		throws Exception {
-
-		List<ServiceBag> serviceBags =
-			_servicesContainer.findByServletContextName(servletContextName);
-
-		for(ServiceBag serviceBag : serviceBags) {
-			Object serviceProxy = PortalBeanLocatorUtil.locate(
-				serviceBag.getServiceType());
-			_setUnwrappedService(serviceProxy, serviceBag.getOldService());
-		}
-	}
-
-	private Object _unwrapContextClassLoaderBeanHandler(Object oldTarget)
-		throws Exception {
-
-		if (Proxy.isProxyClass(oldTarget.getClass())) {
-			InvocationHandler invocationHandler =
-				Proxy.getInvocationHandler(oldTarget);
-			if (invocationHandler instanceof ContextClassLoaderBeanHandler) {
-				ContextClassLoaderBeanHandler contextClassLoaderBeanHandler =
-					(ContextClassLoaderBeanHandler) invocationHandler;
-				return contextClassLoaderBeanHandler.getBean();
-			}
-		}
-
-		return oldTarget;
 	}
 
 	private static final String[] _PROPS_KEYS_EVENTS = new String[] {
@@ -1880,21 +1867,16 @@ public class HookHotDeployListener
 	private class ServiceBag {
 
 		public ServiceBag(
-			String servletContextName, String serviceType, Object oldService,
-			Object newService) {
+			String servletContextName, String serviceType,
+			Object originalService) {
 
 			_servletContextName = servletContextName;
 			_serviceType = serviceType;
-			_oldService = oldService;
-			_newService = newService;
+			_originalService = originalService;
 		}
 
-		public Object getNewService() {
-			return _newService;
-		}
-
-		public Object getOldService() {
-			return _oldService;
+		public Object getOriginalService() {
+			return _originalService;
 		}
 
 		public String getServiceType() {
@@ -1905,63 +1887,62 @@ public class HookHotDeployListener
 			return _servletContextName;
 		}
 
-		private String _servletContextName;
+		private Object _originalService;
 		private String _serviceType;
-		private Object _oldService;
-		private Object _newService;
+		private String _servletContextName;
 
 	}
 
 	private class ServicesContainer {
 
 		public void addServiceBag(
-			String servletContextName, String serviceType, Object oldService,
-			Object newService) {
-			if (findByServiceType(serviceType) != null) {
-				throw new IllegalStateException("An old ServiceBag with type:" +
-					serviceType + " already exist!");
-			}
-			_serviceBags.add(new ServiceBag(servletContextName, serviceType,
-				oldService, newService));
+			String servletContextName, String serviceType,
+			Object originalService) {
+
+			ServiceBag serviceBag = new ServiceBag(
+				servletContextName, serviceType, originalService);
+
+			_serviceBags.add(serviceBag);
 		}
 
 		public ServiceBag findByServiceType(String serviceType) {
-			for(ServiceBag bag : _serviceBags) {
-				if (bag.getServiceType().equals(serviceType)) {
-					return bag;
+			for (ServiceBag serviceBag : _serviceBags) {
+				if (serviceBag.getServiceType().equals(serviceType)) {
+					return serviceBag;
 				}
 			}
+
 			return null;
 		}
 
 		public List<ServiceBag> findByServletContextName(
 			String servletContextName) {
-			List<ServiceBag> resultBags = new ArrayList<ServiceBag>();
-			for(ServiceBag bag : _serviceBags) {
-				if (bag.getServletContextName().equals(servletContextName)) {
-					resultBags.add(bag);
-				}
-			}
-			return resultBags;
-		}
 
-		public void removeByServiceType(String serviceType) {
-			Iterator<ServiceBag> iterator = _serviceBags.iterator();
-			while (iterator.hasNext()) {
-				ServiceBag bag = iterator.next();
-				if (bag.getServiceType().equals(serviceType)) {
-					iterator.remove();
+			List<ServiceBag> serviceBags = new ArrayList<ServiceBag>();
+
+			for (ServiceBag serviceBag : _serviceBags) {
+				if (serviceBag.getServletContextName().equals(
+						servletContextName)) {
+
+					serviceBags.add(serviceBag);
 				}
 			}
+
+			return serviceBags;
 		}
 
 		public void removeByServletContextName(
 			String servletContextName) {
-			Iterator<ServiceBag> iterator = _serviceBags.iterator();
-			while (iterator.hasNext()) {
-				ServiceBag bag = iterator.next();
-				if (bag.getServletContextName().equals(servletContextName)) {
-					iterator.remove();
+
+			Iterator<ServiceBag> itr = _serviceBags.iterator();
+
+			while (itr.hasNext()) {
+				ServiceBag serviceBag = itr.next();
+
+				if (serviceBag.getServletContextName().equals(
+						servletContextName)) {
+
+					itr.remove();
 				}
 			}
 		}
