@@ -15,7 +15,6 @@
 package com.liferay.taglib.portlet;
 
 import com.liferay.portal.kernel.util.JavaConstants;
-import com.liferay.portal.kernel.util.StringPool;
 
 import javax.portlet.PortletResponse;
 
@@ -39,13 +38,11 @@ public class NamespaceTag extends TagSupport {
 				(PortletResponse)request.getAttribute(
 					JavaConstants.JAVAX_PORTLET_RESPONSE);
 
-			String namespace = StringPool.BLANK;
-
 			if (portletResponse != null) {
-				namespace = portletResponse.getNamespace();
-			}
+				String namespace = portletResponse.getNamespace();
 
-			pageContext.getOut().print(namespace);
+				pageContext.getOut().print(namespace);
+			}
 		}
 		catch (Exception e) {
 			throw new JspException(e);
