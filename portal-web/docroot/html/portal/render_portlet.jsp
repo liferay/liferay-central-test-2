@@ -173,6 +173,9 @@ else if (themeDisplay.isStatePopUp()) {
 else if (stateMax) {
 	windowState = WindowState.MAXIMIZED;
 }
+else if (stateMin) {
+	windowState = WindowState.MINIMIZED;
+}
 
 PortletMode portletMode = PortletMode.VIEW;
 
@@ -225,6 +228,10 @@ if (Validator.isNotNull(queryString)) {
 StringServletResponse stringResponse = new StringServletResponse(response);
 
 RenderResponseImpl renderResponseImpl = RenderResponseFactory.create(renderRequestImpl, stringResponse, portletId, company.getCompanyId(), plid);
+
+if (stateMin) {
+	renderResponseImpl.setUseDefaultTemplate(true);
+}
 
 renderRequestImpl.defineObjects(portletConfig, renderResponseImpl);
 

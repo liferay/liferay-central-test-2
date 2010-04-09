@@ -293,11 +293,52 @@ Liferay.Portlet = {
 				}
 
 				AUI().use(
+					'aui-io-plugin',
 					'io',
 					function(A) {
+						var hasBodyContent = function() {
+							var html = null;
+							var portletBody = content.one('.portlet-body');
+ 
+							if (portletBody) {
+								html = portletBody.html();
+							}
+ 
+							return !!A.Lang.trim(html);
+						};
+ 
+						if (hasBodyContent(content)) {
+							content.unplug(A.Plugin.IO);
+						}
+						else {
+							content.plug(
+								A.Plugin.IO,
+								{
+									autoLoad: false,
+									data: {
+										doAsUserId: doAsUserId,
+										p_l_id: plid,
+										p_p_id: portlet.portletId,
+										p_p_state: 'exclusive'
+									},
+									uri: themeDisplay.getPathMain() + '/portal/render_portlet',
+									showLoading: false
+								}
+							);
+						}
+ 
 						A.io.request(
 							themeDisplay.getPathMain() + '/portal/update_layout',
 							{
+								after: {
+									success: function() {
+										if (restore) {
+											if (content.io) {
+												content.io.start();
+											}
+										}
+									}
+								},
 								data: {
 									cmd: 'minimize',
 									doAsUserId: doAsUserId,
@@ -568,12 +609,12 @@ Liferay.Portlet = {
 			var id = portlet.attr('portlet');
 
 			var placeHolder = AUI().Node.create('<div class="loading-animation" id="p_load' + id + '" />');
-
 			portlet.placeBefore(placeHolder);
 			portlet.remove();
 
 			instance.addHTML(
 				{
+					data: {p_p_state : 'normal' },
 					onComplete: function(portlet, portletId) {
 						portlet.refreshURL = url;
 					},
