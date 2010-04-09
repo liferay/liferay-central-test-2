@@ -388,7 +388,9 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 					<aui:input name="sourceVersion" type="hidden" value="<%= fileVersion.getVersion() %>" />
 					<aui:input name="targetVersion" type="hidden" value="<%= fileEntry.getVersion() %>" />
 
-					<aui:button type="submit" value="compare-versions" />
+					<aui:button-row>
+						<aui:button type="submit" value="compare-versions" />
+					</aui:button-row>
 				</aui:form>
 
 			<%

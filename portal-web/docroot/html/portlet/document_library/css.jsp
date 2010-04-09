@@ -111,7 +111,7 @@
 }
 
 .portlet-document-library .file-entry-panels .version-history {
-	margin-bottom: 3em;
+	margin-bottom: 2em;
 }
 
 .portlet-document-library .file-entry-tags .tag {
