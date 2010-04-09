@@ -230,7 +230,7 @@ AssetUtil.addLayoutTags(request, AssetTagLocalServiceUtil.getTags(WikiPage.class
 				<liferay-ui:icon image="add_article" label="<%= true %>" message="add-child-page" method="get" url="<%= addPageURL.toString() %>" />,
 			</c:if>
 
-			<liferay-ui:icon image="clip" label="<%= true %>" message='<%= attachments.length + " " + LanguageUtil.get(pageContext, attachments.length == 1 ? "attachment" : "attachments") %>' method="get" url="<%= viewAttachmentsURL.toString() %>" />
+			<liferay-ui:icon image="clip" label="<%= true %>" message='<%= attachments.length + " " + LanguageUtil.get(pageContext, (attachments.length == 1) ? "attachment" : "attachments") %>' method="get" url="<%= viewAttachmentsURL.toString() %>" />
 		</div>
 
 		<div class="stats">
