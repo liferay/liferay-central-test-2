@@ -15,7 +15,6 @@
 package com.liferay.portal.tools.samplesqlbuilder;
 
 import com.liferay.counter.model.Counter;
-import com.liferay.counter.model.impl.CounterImpl;
 import com.liferay.portal.kernel.util.IntegerWrapper;
 import com.liferay.portal.kernel.util.KeyValuePair;
 import com.liferay.portal.kernel.util.ListUtil;
@@ -610,7 +609,7 @@ public class DataFactory {
 
 		// Counter
 
-		Counter counter = new CounterImpl();
+		Counter counter = new Counter();
 
 		counter.setName(Counter.class.getName());
 		counter.setCurrentId(_counter.get());
@@ -619,7 +618,7 @@ public class DataFactory {
 
 		// Permission
 
-		counter = new CounterImpl();
+		counter = new Counter();
 
 		counter.setName(Permission.class.getName());
 		counter.setCurrentId(_permissionCounter.get());
@@ -628,7 +627,7 @@ public class DataFactory {
 
 		// Resource
 
-		counter = new CounterImpl();
+		counter = new Counter();
 
 		counter.setName(Resource.class.getName());
 		counter.setCurrentId(_resourceCounter.get());
@@ -637,7 +636,7 @@ public class DataFactory {
 
 		// ResourceCode
 
-		counter = new CounterImpl();
+		counter = new Counter();
 
 		counter.setName(ResourceCode.class.getName());
 		counter.setCurrentId(_resourceCodeCounter.get());

@@ -12,35 +12,30 @@
  * details.
  */
 
-package com.liferay.counter.service;
+package com.liferay.counter.service.persistence;
 
-import com.liferay.portal.kernel.annotation.Isolation;
-import com.liferay.portal.kernel.annotation.Propagation;
-import com.liferay.portal.kernel.annotation.Transactional;
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.model.Dummy;
+import com.liferay.portal.service.persistence.BasePersistence;
 
 import java.util.List;
 
-@Transactional(
-	isolation = Isolation.PORTAL,
-	rollbackFor = {PortalException.class, SystemException.class})
 /**
- * <a href="CounterLocalService.java.html"><b><i>View Source</i></b></a>
+ * <a href="CounterPersistence.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Harry Mark
+ * @author Michael Young
+ * @author Shuyang Zhou
  */
-public interface CounterLocalService {
+public interface CounterPersistence extends BasePersistence<Dummy> {
 
 	public List<String> getNames() throws SystemException;
 
-	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public long increment() throws SystemException;
 
-	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public long increment(String name) throws SystemException;
 
-	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public long increment(String name, int size) throws SystemException;
 
 	public void rename(String oldName, String newName) throws SystemException;

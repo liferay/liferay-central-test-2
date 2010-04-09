@@ -15,7 +15,6 @@
 package com.liferay.portal.convert;
 
 import com.liferay.counter.model.Counter;
-import com.liferay.counter.model.impl.CounterModelImpl;
 import com.liferay.mail.model.CyrusUser;
 import com.liferay.mail.model.CyrusVirtual;
 import com.liferay.portal.dao.jdbc.util.DataSourceFactoryBean;
@@ -218,8 +217,8 @@ public class ConvertDatabase extends ConvertProcess {
 
 	private static final Tuple[] _UNMAPPED_TABLES = new Tuple[] {
 		new Tuple(
-			CounterModelImpl.TABLE_NAME, CounterModelImpl.TABLE_COLUMNS,
-			CounterModelImpl.TABLE_SQL_CREATE),
+			Counter.TABLE_NAME, Counter.TABLE_COLUMNS,
+			Counter.TABLE_SQL_CREATE),
 		new Tuple(
 			CyrusUser.TABLE_NAME, CyrusUser.TABLE_COLUMNS,
 			CyrusUser.TABLE_SQL_CREATE),
