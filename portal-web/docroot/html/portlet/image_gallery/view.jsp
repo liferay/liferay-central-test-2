@@ -74,11 +74,11 @@ request.setAttribute("view.jsp-viewFolder", Boolean.TRUE.toString());
 							</div>
 
 							<div class="folder-subfolders">
-								<%= foldersCount %> <liferay-ui:message key="subfolders" />
+								<%= foldersCount %> <liferay-ui:message key='<%= (foldersCount == 1) ? "subfolder" : "subfolders" %>' />
 							</div>
 
 							<div class="folder-images">
-								<%= imagesCount %> <liferay-ui:message key="images" />
+								<%= imagesCount %> <liferay-ui:message key='<%= (imagesCount == 1) ? "image" : "images" %>' />
 							</div>
 						</div>
 
@@ -95,7 +95,7 @@ request.setAttribute("view.jsp-viewFolder", Boolean.TRUE.toString());
 					</c:if>
 
 					<c:if test="<%= foldersCount > 0 %>">
-						<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="subFoldersPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, folder != null ? "subfolders" : "folders") %>'>
+						<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="subFoldersPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, (folder != null) ? "subfolders" : "folders") %>'>
 							<liferay-util:include page="/html/portlet/image_gallery/view_folders.jsp" />
 						</liferay-ui:panel>
 					</c:if>
