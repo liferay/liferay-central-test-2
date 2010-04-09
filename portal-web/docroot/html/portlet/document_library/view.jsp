@@ -83,7 +83,7 @@ request.setAttribute("view.jsp-viewFolder", Boolean.TRUE.toString());
 								</div>
 
 								<div class="folder-file-entries">
-									<%= fileEntriesCount %> <liferay-ui:message key='<%= (imagesCount == 1) ? "document" : "documents" %>' />
+									<%= fileEntriesCount %> <liferay-ui:message key='<%= (fileEntriesCount == 1) ? "document" : "documents" %>' />
 								</div>
 							</div>
 
