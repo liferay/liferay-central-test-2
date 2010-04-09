@@ -15,7 +15,6 @@
 package com.liferay.portal.service.base;
 
 import com.liferay.counter.service.CounterLocalService;
-import com.liferay.counter.service.CounterService;
 
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.dao.db.DB;
@@ -1562,14 +1561,6 @@ public abstract class LayoutLocalServiceBaseImpl implements LayoutLocalService {
 		this.counterLocalService = counterLocalService;
 	}
 
-	public CounterService getCounterService() {
-		return counterService;
-	}
-
-	public void setCounterService(CounterService counterService) {
-		this.counterService = counterService;
-	}
-
 	public DLFolderLocalService getDLFolderLocalService() {
 		return dlFolderLocalService;
 	}
@@ -2049,8 +2040,6 @@ public abstract class LayoutLocalServiceBaseImpl implements LayoutLocalService {
 	protected WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
 	@BeanReference(type = CounterLocalService.class)
 	protected CounterLocalService counterLocalService;
-	@BeanReference(type = CounterService.class)
-	protected CounterService counterService;
 	@BeanReference(type = DLFolderLocalService.class)
 	protected DLFolderLocalService dlFolderLocalService;
 	@BeanReference(type = DLFolderService.class)

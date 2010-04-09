@@ -15,7 +15,6 @@
 package com.liferay.portlet.flags.service.base;
 
 import com.liferay.counter.service.CounterLocalService;
-import com.liferay.counter.service.CounterService;
 
 import com.liferay.mail.service.MailService;
 
@@ -83,14 +82,6 @@ public abstract class FlagsEntryServiceBaseImpl extends PrincipalBean
 
 	public void setCounterLocalService(CounterLocalService counterLocalService) {
 		this.counterLocalService = counterLocalService;
-	}
-
-	public CounterService getCounterService() {
-		return counterService;
-	}
-
-	public void setCounterService(CounterService counterService) {
-		this.counterService = counterService;
 	}
 
 	public MailService getMailService() {
@@ -404,8 +395,6 @@ public abstract class FlagsEntryServiceBaseImpl extends PrincipalBean
 	protected FlagsEntryService flagsEntryService;
 	@BeanReference(type = CounterLocalService.class)
 	protected CounterLocalService counterLocalService;
-	@BeanReference(type = CounterService.class)
-	protected CounterService counterService;
 	@BeanReference(type = MailService.class)
 	protected MailService mailService;
 	@BeanReference(type = CompanyLocalService.class)

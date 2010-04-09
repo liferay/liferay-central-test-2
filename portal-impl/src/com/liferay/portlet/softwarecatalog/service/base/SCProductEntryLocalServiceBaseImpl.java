@@ -15,7 +15,6 @@
 package com.liferay.portlet.softwarecatalog.service.base;
 
 import com.liferay.counter.service.CounterLocalService;
-import com.liferay.counter.service.CounterService;
 
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.dao.db.DB;
@@ -275,14 +274,6 @@ public abstract class SCProductEntryLocalServiceBaseImpl
 		this.counterLocalService = counterLocalService;
 	}
 
-	public CounterService getCounterService() {
-		return counterService;
-	}
-
-	public void setCounterService(CounterService counterService) {
-		this.counterService = counterService;
-	}
-
 	public GroupLocalService getGroupLocalService() {
 		return groupLocalService;
 	}
@@ -489,8 +480,6 @@ public abstract class SCProductEntryLocalServiceBaseImpl
 	protected SCProductVersionPersistence scProductVersionPersistence;
 	@BeanReference(type = CounterLocalService.class)
 	protected CounterLocalService counterLocalService;
-	@BeanReference(type = CounterService.class)
-	protected CounterService counterService;
 	@BeanReference(type = GroupLocalService.class)
 	protected GroupLocalService groupLocalService;
 	@BeanReference(type = GroupService.class)

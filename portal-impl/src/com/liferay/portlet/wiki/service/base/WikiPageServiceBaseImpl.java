@@ -15,7 +15,6 @@
 package com.liferay.portlet.wiki.service.base;
 
 import com.liferay.counter.service.CounterLocalService;
-import com.liferay.counter.service.CounterService;
 
 import com.liferay.documentlibrary.service.DLLocalService;
 import com.liferay.documentlibrary.service.DLService;
@@ -170,14 +169,6 @@ public abstract class WikiPageServiceBaseImpl extends PrincipalBean
 
 	public void setCounterLocalService(CounterLocalService counterLocalService) {
 		this.counterLocalService = counterLocalService;
-	}
-
-	public CounterService getCounterService() {
-		return counterService;
-	}
-
-	public void setCounterService(CounterService counterService) {
-		this.counterService = counterService;
 	}
 
 	public DLLocalService getDLLocalService() {
@@ -609,8 +600,6 @@ public abstract class WikiPageServiceBaseImpl extends PrincipalBean
 	protected WikiPageResourcePersistence wikiPageResourcePersistence;
 	@BeanReference(type = CounterLocalService.class)
 	protected CounterLocalService counterLocalService;
-	@BeanReference(type = CounterService.class)
-	protected CounterService counterService;
 	@BeanReference(type = DLLocalService.class)
 	protected DLLocalService dlLocalService;
 	@BeanReference(type = DLService.class)

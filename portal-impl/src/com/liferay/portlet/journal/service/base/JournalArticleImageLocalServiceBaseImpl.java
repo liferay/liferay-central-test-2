@@ -15,7 +15,6 @@
 package com.liferay.portlet.journal.service.base;
 
 import com.liferay.counter.service.CounterLocalService;
-import com.liferay.counter.service.CounterService;
 
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.dao.db.DB;
@@ -345,14 +344,6 @@ public abstract class JournalArticleImageLocalServiceBaseImpl
 		this.counterLocalService = counterLocalService;
 	}
 
-	public CounterService getCounterService() {
-		return counterService;
-	}
-
-	public void setCounterService(CounterService counterService) {
-		this.counterService = counterService;
-	}
-
 	public ImageLocalService getImageLocalService() {
 		return imageLocalService;
 	}
@@ -491,8 +482,6 @@ public abstract class JournalArticleImageLocalServiceBaseImpl
 	protected JournalTemplateFinder journalTemplateFinder;
 	@BeanReference(type = CounterLocalService.class)
 	protected CounterLocalService counterLocalService;
-	@BeanReference(type = CounterService.class)
-	protected CounterService counterService;
 	@BeanReference(type = ImageLocalService.class)
 	protected ImageLocalService imageLocalService;
 	@BeanReference(type = ImagePersistence.class)

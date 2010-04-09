@@ -15,7 +15,6 @@
 package com.liferay.portal.service.base;
 
 import com.liferay.counter.service.CounterLocalService;
-import com.liferay.counter.service.CounterService;
 
 import com.liferay.mail.service.MailService;
 
@@ -1553,14 +1552,6 @@ public abstract class MembershipRequestLocalServiceBaseImpl
 		this.counterLocalService = counterLocalService;
 	}
 
-	public CounterService getCounterService() {
-		return counterService;
-	}
-
-	public void setCounterService(CounterService counterService) {
-		this.counterService = counterService;
-	}
-
 	public MailService getMailService() {
 		return mailService;
 	}
@@ -1884,8 +1875,6 @@ public abstract class MembershipRequestLocalServiceBaseImpl
 	protected WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
 	@BeanReference(type = CounterLocalService.class)
 	protected CounterLocalService counterLocalService;
-	@BeanReference(type = CounterService.class)
-	protected CounterService counterService;
 	@BeanReference(type = MailService.class)
 	protected MailService mailService;
 }

@@ -15,7 +15,6 @@
 package com.liferay.portal.service.base;
 
 import com.liferay.counter.service.CounterLocalService;
-import com.liferay.counter.service.CounterService;
 
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.dao.db.DB;
@@ -1546,14 +1545,6 @@ public abstract class ResourceLocalServiceBaseImpl
 		this.counterLocalService = counterLocalService;
 	}
 
-	public CounterService getCounterService() {
-		return counterService;
-	}
-
-	public void setCounterService(CounterService counterService) {
-		this.counterService = counterService;
-	}
-
 	protected void runSQL(String sql) throws SystemException {
 		try {
 			DB db = DBFactoryUtil.getDB();
@@ -1869,6 +1860,4 @@ public abstract class ResourceLocalServiceBaseImpl
 	protected WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
 	@BeanReference(type = CounterLocalService.class)
 	protected CounterLocalService counterLocalService;
-	@BeanReference(type = CounterService.class)
-	protected CounterService counterService;
 }
