@@ -302,9 +302,9 @@ Liferay.Portlet = {
 							html = portletBody.html();
 						}
 
-						html = A.Lang.trim(html);
+						var hasBodyContent = !!(A.Lang.trim(html));
 
-						if (html) {
+						if (hasBodyContent) {
 							content.unplug(A.Plugin.IO);
 						}
 						else {
