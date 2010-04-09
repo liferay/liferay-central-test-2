@@ -72,11 +72,11 @@ request.setAttribute("view.jsp-viewFolder", Boolean.TRUE.toString());
 							</div>
 
 							<div class="folder-subfolders">
-								<%= foldersCount %> <liferay-ui:message key="subfolders" />
+								<%= foldersCount %> <liferay-ui:message key='<%= foldersCount == 1 ? "subfolder" : "subfolders" %>' />
 							</div>
 
 							<div class="folder-entries">
-								<%= entriesCount %> <liferay-ui:message key="entries" />
+								<%= entriesCount %> <liferay-ui:message key='<%= entriesCount == 1 ? "entry" : "entries" %>' />
 							</div>
 						</div>
 
