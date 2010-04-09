@@ -18,7 +18,6 @@
 
 <%
 String ppid = ParamUtil.getString(request, "p_p_id");
-Portlet portlet = null;	
 
 if (ppid.equals(PortletKeys.PORTLET_CONFIGURATION)) {
 	String portletResource = ParamUtil.getString(request, PortalUtil.getPortletNamespace(ppid) + "portletResource");
@@ -54,6 +53,8 @@ if (ppid.equals(PortletKeys.PLUGIN_INSTALLER)) {
 String category = PortalUtil.getControlPanelCategory(ppid, themeDisplay);
 
 List<Layout> scopeLayouts = new ArrayList<Layout>();
+
+Portlet portlet = null;
 
 boolean denyAccess = false;
 
