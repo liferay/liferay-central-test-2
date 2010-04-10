@@ -1561,6 +1561,6 @@ public class JournalUtil {
 	private static Log _logXmlBeforeListener = LogFactoryUtil.getLog(
 		JournalUtil.class.getName() + ".XmlBeforeListener");
 
-	private static Map<String, String> _customTokens = null;
+	private static Map<String, String> _customTokens;
 
 }
