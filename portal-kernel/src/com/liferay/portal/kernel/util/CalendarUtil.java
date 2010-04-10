@@ -237,7 +237,7 @@ public class CalendarUtil {
 		ltCal.set(Calendar.HOUR_OF_DAY, 23);
 		ltCal.set(Calendar.MINUTE, 59);
 		ltCal.set(Calendar.SECOND, 59);
-		ltCal.set(Calendar.MILLISECOND, 999);
+		ltCal.set(Calendar.MILLISECOND, 990);
 
 		return ltCal.getTime();
 	}

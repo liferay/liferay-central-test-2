@@ -170,7 +170,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		endDate.set(Calendar.HOUR_OF_DAY, 23);
 		endDate.set(Calendar.MINUTE, 59);
 		endDate.set(Calendar.SECOND, 59);
-		endDate.set(Calendar.MILLISECOND, 999);
+		endDate.set(Calendar.MILLISECOND, 990);
 
 		if (allDay) {
 			startDate.set(Calendar.HOUR_OF_DAY, 0);
@@ -729,7 +729,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		endDate.set(Calendar.HOUR_OF_DAY, 23);
 		endDate.set(Calendar.MINUTE, 59);
 		endDate.set(Calendar.SECOND, 59);
-		endDate.set(Calendar.MILLISECOND, 999);
+		endDate.set(Calendar.MILLISECOND, 990);
 
 		if (allDay) {
 			startDate.set(Calendar.HOUR_OF_DAY, 0);
