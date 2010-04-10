@@ -45,14 +45,7 @@ public class PwdEncryptor {
 		GetterUtil.getString(PropsUtil.get(
 			PropsKeys.PASSWORDS_ENCRYPTION_ALGORITHM)).toUpperCase();
 
-	/**
-	 * @deprecated Use {@link #TYPE_CRYPT_NORMAL}.
-	 */
 	public static final String TYPE_CRYPT = "CRYPT";
-
-	public static final String TYPE_CRYPT_NORMAL = "CRYPT_NORMAL";
-
-	public static final String TYPE_CRYPT_REVERSE = "CRYPT_REVERSE";
 
 	public static final String TYPE_MD2 = "MD2";
 
@@ -89,22 +82,15 @@ public class PwdEncryptor {
 			String algorithm, String clearTextPwd, String currentEncPwd)
 		throws PwdEncryptorException {
 
-		if (algorithm.equalsIgnoreCase(TYPE_CRYPT) ||
-			algorithm.equalsIgnoreCase(TYPE_CRYPT_REVERSE)) {
-
-			byte[] saltBytes = _getSaltFromReverseCrypt(currentEncPwd);
+		if (algorithm.equals(TYPE_CRYPT)) {
+			byte[] saltBytes = _getSaltFromCrypt(currentEncPwd);
 
 			return encodePassword(algorithm, clearTextPwd, saltBytes);
 		}
-		if (algorithm.equalsIgnoreCase(TYPE_CRYPT_NORMAL)) {
-			byte[] saltBytes = _getSaltFromNormalCrypt(currentEncPwd);
-
-			return encodePassword(algorithm, clearTextPwd, saltBytes);
-		}
-		else if (algorithm.equalsIgnoreCase(TYPE_NONE)) {
+		else if (algorithm.equals(TYPE_NONE)) {
 			return clearTextPwd;
 		}
-		else if (algorithm.equalsIgnoreCase(TYPE_SSHA)) {
+		else if (algorithm.equals(TYPE_SSHA)) {
 			byte[] saltBytes = _getSaltFromSSHA(currentEncPwd);
 
 			return encodePassword(algorithm, clearTextPwd, saltBytes);
@@ -119,17 +105,11 @@ public class PwdEncryptor {
 		throws PwdEncryptorException {
 
 		try {
-			if (algorithm.equalsIgnoreCase(TYPE_CRYPT) ||
-				algorithm.equalsIgnoreCase(TYPE_CRYPT_REVERSE)) {
-
-				return Crypt.crypt(
-					clearTextPwd.getBytes(Digester.ENCODING), saltBytes);
-			}
-			if (algorithm.equalsIgnoreCase(TYPE_CRYPT_NORMAL)) {
+			if (algorithm.equals(TYPE_CRYPT)) {
 				return Crypt.crypt(
 					saltBytes, clearTextPwd.getBytes(Digester.ENCODING));
 			}
-			else if (algorithm.equalsIgnoreCase(TYPE_SSHA)) {
+			else if (algorithm.equals(TYPE_SSHA)) {
 				byte[] clearTextPwdBytes =
 					clearTextPwd.getBytes(Digester.ENCODING);
 
@@ -181,7 +161,7 @@ public class PwdEncryptor {
 		}
 	}
 
-	private static byte[] _getSaltFromNormalCrypt(String cryptString)
+	private static byte[] _getSaltFromCrypt(String cryptString)
 		throws PwdEncryptorException {
 
 		byte[] saltBytes = null;
@@ -212,50 +192,6 @@ public class PwdEncryptor {
 				// Extract salt from encrypted password
 
 				String salt = cryptString.substring(0, 2);
-
-				saltBytes = salt.getBytes(Digester.ENCODING);
-			}
-		}
-		catch (UnsupportedEncodingException uee) {
-			throw new PwdEncryptorException(
-				"Unable to extract salt from encrypted password: " +
-					uee.getMessage());
-		}
-
-		return saltBytes;
-	}
-
-	private static byte[] _getSaltFromReverseCrypt(String cryptString)
-		throws PwdEncryptorException {
-
-		byte[] saltBytes = null;
-
-		try {
-			if (Validator.isNull(cryptString)) {
-
-				// Generate random salt
-
-				Random random = new Random();
-
-				int numSaltChars = saltChars.length;
-
-				StringBuilder sb = new StringBuilder();
-
-				int x = random.nextInt(Integer.MAX_VALUE) % numSaltChars;
-				int y = random.nextInt(Integer.MAX_VALUE) % numSaltChars;
-
-				sb.append(saltChars[x]);
-				sb.append(saltChars[y]);
-
-				String salt = sb.toString();
-
-				saltBytes = salt.getBytes(Digester.ENCODING);
-			}
-			else {
-
-				// Extract salt from encrypted password
-
-				String salt = cryptString.substring(0, 3);
 
 				saltBytes = salt.getBytes(Digester.ENCODING);
 			}
