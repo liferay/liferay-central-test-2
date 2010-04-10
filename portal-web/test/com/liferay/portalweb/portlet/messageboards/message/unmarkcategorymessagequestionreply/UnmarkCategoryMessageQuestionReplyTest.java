@@ -51,12 +51,11 @@ public class UnmarkCategoryMessageQuestionReplyTest extends BaseTestCase {
 		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Resolved"),
-			selenium.getText(
-				"//tr[@class='portlet-section-body results-row last']/td[2]"));
-		selenium.clickAt("link=T\u00e9st M\u00e9ssag\u00e9 Question",
-			RuntimeVariables.replace(""));
+			selenium.getText("//td[2]/a"));
+		selenium.clickAt("//td[1]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("Unmark"));
+		assertEquals(RuntimeVariables.replace("Unmark"),
+			selenium.getText("//td[2]/div[1]/div/div[2]/a"));
 		selenium.clickAt("//td[2]/div[1]/div/div[2]/a",
 			RuntimeVariables.replace(""));
 
@@ -77,14 +76,33 @@ public class UnmarkCategoryMessageQuestionReplyTest extends BaseTestCase {
 		}
 
 		assertFalse(selenium.isTextPresent("Unmark"));
-		selenium.clickAt("link=T\u00e9st Cat\u00e9gory",
+		selenium.open("/web/guest/home/");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent(
+							"link=M\u00e9ssag\u00e9 Boards T\u00e9st Pag\u00e9")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("link=M\u00e9ssag\u00e9 Boards T\u00e9st Pag\u00e9",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Waiting for an Answer"),
-			selenium.getText(
-				"//tr[@class='portlet-section-body results-row last']/td[2]"));
+			selenium.getText("//td[2]/a"));
 		assertNotEquals(RuntimeVariables.replace("Resolved"),
-			selenium.getText(
-				"//tr[@class='portlet-section-body results-row last']/td[2]"));
+			selenium.getText("//td[2]/a"));
 	}
 }

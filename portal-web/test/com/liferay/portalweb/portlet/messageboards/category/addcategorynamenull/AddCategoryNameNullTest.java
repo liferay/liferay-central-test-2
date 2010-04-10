@@ -49,13 +49,14 @@ public class AddCategoryNameNullTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Add Category']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.type("_19_name", RuntimeVariables.replace(""));
 		selenium.type("_19_description",
 			RuntimeVariables.replace("This is a t\u00e9st cat\u00e9gory."));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"You have entered invalid data. Please try again."));
-		assertTrue(selenium.isTextPresent("Please enter a valid name."));
+		assertEquals(RuntimeVariables.replace(
+				"You have entered invalid data. Please try again."),
+			selenium.getText("//section/div/div/div/div"));
+		assertEquals(RuntimeVariables.replace("Please enter a valid name."),
+			selenium.getText("//form/div[1]"));
 	}
 }

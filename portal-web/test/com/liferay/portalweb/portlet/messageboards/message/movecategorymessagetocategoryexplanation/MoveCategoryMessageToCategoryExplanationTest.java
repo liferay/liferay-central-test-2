@@ -50,7 +50,8 @@ public class MoveCategoryMessageToCategoryExplanationTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("link=T\u00e9st M\u00e9ssag\u00e9"));
+		assertEquals(RuntimeVariables.replace("T\u00e9st M\u00e9ssag\u00e9"),
+			selenium.getText("//td[1]/a"));
 		selenium.clickAt("//td[7]/ul/li/strong/a", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -59,7 +60,8 @@ public class MoveCategoryMessageToCategoryExplanationTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Move Thread")) {
+				if (selenium.isElementPresent(
+							"//div[@class='lfr-component lfr-menu-list']/ul/li[6]/a")) {
 					break;
 				}
 			}
@@ -69,7 +71,8 @@ public class MoveCategoryMessageToCategoryExplanationTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("link=Move Thread", RuntimeVariables.replace(""));
+		selenium.click(RuntimeVariables.replace(
+				"//div[@class='lfr-component lfr-menu-list']/ul/li[6]/a"));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("T\u00e9st1 Cat\u00e9gory1"),
 			selenium.getText("_19_categoryName"));
@@ -98,24 +101,10 @@ public class MoveCategoryMessageToCategoryExplanationTest extends BaseTestCase {
 		selenium.selectWindow("null");
 		assertEquals(RuntimeVariables.replace("T\u00e9st2 Cat\u00e9gory2"),
 			selenium.getText("_19_categoryName"));
+		assertFalse(selenium.isChecked("_19_addExplanationPostCheckbox"));
 		selenium.clickAt("_19_addExplanationPostCheckbox",
 			RuntimeVariables.replace(""));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible("//div[@class='lfr-toolbar']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
+		assertTrue(selenium.isChecked("_19_addExplanationPostCheckbox"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -189,15 +178,14 @@ public class MoveCategoryMessageToCategoryExplanationTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("//tr[4]/td[1]/a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("link=T\u00e9st M\u00e9ssag\u00e9"));
-		selenium.clickAt("link=T\u00e9st M\u00e9ssag\u00e9",
-			RuntimeVariables.replace(""));
+		assertEquals(RuntimeVariables.replace("T\u00e9st M\u00e9ssag\u00e9"),
+			selenium.getText("//td[1]/a"));
+		selenium.clickAt("//td[1]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Move Thread Explanation Post"),
 			selenium.getText("//tr[2]/td[1]/a"));
 		assertEquals(RuntimeVariables.replace("Move Thread Explanation Post"),
-			selenium.getText(
-				"//div[5]/table/tbody/tr[1]/td[2]/div[1]/div/a/strong"));
+			selenium.getText("//div[5]/table/tbody/tr[1]/td[2]/div[1]/div/a/b"));
 		assertEquals(RuntimeVariables.replace(
 				"This is a move thread explanation post."),
 			selenium.getText("//div[5]/table/tbody/tr[1]/td[2]/div[2]"));

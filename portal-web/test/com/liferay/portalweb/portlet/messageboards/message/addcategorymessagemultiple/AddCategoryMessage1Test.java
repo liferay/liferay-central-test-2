@@ -69,17 +69,17 @@ public class AddCategoryMessage1Test extends BaseTestCase {
 		}
 
 		selenium.type("_19_subject",
-			RuntimeVariables.replace("T\u00e9st M\u00e9ssag\u00e9"));
+			RuntimeVariables.replace("T\u00e9st1 M\u00e9ssag\u00e91"));
 		selenium.type("_19_textArea",
-			RuntimeVariables.replace("This is a t\u00e9st m\u00e9ssag\u00e9."));
+			RuntimeVariables.replace("This is a t\u00e9st1 m\u00e9ssag\u00e91."));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertEquals(RuntimeVariables.replace("T\u00e9st M\u00e9ssag\u00e9"),
+		assertEquals(RuntimeVariables.replace("T\u00e9st1 M\u00e9ssag\u00e91"),
 			selenium.getText("//form/div[2]"));
-		assertEquals(RuntimeVariables.replace("T\u00e9st M\u00e9ssag\u00e9"),
+		assertEquals(RuntimeVariables.replace("T\u00e9st1 M\u00e9ssag\u00e91"),
 			selenium.getText("//a/strong"));
 		assertEquals(RuntimeVariables.replace(
-				"This is a t\u00e9st m\u00e9ssag\u00e9."),
+				"This is a t\u00e9st1 m\u00e9ssag\u00e91."),
 			selenium.getText("//td[2]/div[2]"));
 		selenium.open("/web/guest/home/");
 
@@ -105,7 +105,7 @@ public class AddCategoryMessage1Test extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertEquals(RuntimeVariables.replace("T\u00e9st M\u00e9ssag\u00e9"),
+		assertEquals(RuntimeVariables.replace("T\u00e9st1 M\u00e9ssag\u00e91"),
 			selenium.getText("//td[1]/a"));
 	}
 }

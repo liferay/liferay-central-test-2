@@ -49,10 +49,9 @@ public class AddCategoryMessageQuestionReplyTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=T\u00e9st M\u00e9ssag\u00e9 Question",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("//td[1]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=Reply", RuntimeVariables.replace(""));
+		selenium.clickAt("//li[1]/span/a/span", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -85,10 +84,10 @@ public class AddCategoryMessageQuestionReplyTest extends BaseTestCase {
 				"RE: T\u00e9st M\u00e9ssag\u00e9 Question"),
 			selenium.getText(
 				"//div[5]/table/tbody/tr[1]/td[2]/div[1]/div/a/strong"));
-		assertEquals(RuntimeVariables.replace("This is an answer."),
-			selenium.getText("//div[5]/table/tbody/tr[1]/td[2]/div[2]"));
 		assertEquals(RuntimeVariables.replace("Mark as an Answer"),
 			selenium.getText(
 				"//div[5]/table/tbody/tr[1]/td[2]/div[1]/ul/li[1]/span/a/span"));
+		assertEquals(RuntimeVariables.replace("This is an answer."),
+			selenium.getText("//div[5]/table/tbody/tr[1]/td[2]/div[2]"));
 	}
 }

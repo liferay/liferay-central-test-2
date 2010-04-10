@@ -52,22 +52,19 @@ public class DeleteMarkAsAnswerCategoryMessageQuestionReplyTest
 		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Resolved"),
-			selenium.getText(
-				"//tr[@class='portlet-section-body results-row last']/td[2]"));
-		selenium.clickAt("link=T\u00e9st M\u00e9ssag\u00e9 Question",
-			RuntimeVariables.replace(""));
+			selenium.getText("//td[2]/a"));
+		selenium.clickAt("//td[1]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("//li[5]/span/a/span"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+		assertEquals(RuntimeVariables.replace(
+				"Your request processed successfully."),
+			selenium.getText("//section/div/div/div/div[1]"));
 		assertEquals(RuntimeVariables.replace("Waiting for an Answer"),
-			selenium.getText(
-				"//tr[@class='portlet-section-body results-row last']/td[2]"));
+			selenium.getText("//td[2]/a"));
 		assertNotEquals(RuntimeVariables.replace("Resolved"),
-			selenium.getText(
-				"//tr[@class='portlet-section-body results-row last']/td[2]"));
+			selenium.getText("//td[2]/a"));
 	}
 }

@@ -59,7 +59,8 @@ public class EditCategoryMessageBodyNullTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Edit")) {
+				if (selenium.isElementPresent(
+							"//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a")) {
 					break;
 				}
 			}
@@ -69,7 +70,8 @@ public class EditCategoryMessageBodyNullTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("link=Edit", RuntimeVariables.replace(""));
+		selenium.click(RuntimeVariables.replace(
+				"//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -91,8 +93,10 @@ public class EditCategoryMessageBodyNullTest extends BaseTestCase {
 		selenium.type("_19_textArea", RuntimeVariables.replace(""));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"You have entered invalid data. Please try again."));
-		assertTrue(selenium.isTextPresent("Please enter a valid message."));
+		assertEquals(RuntimeVariables.replace(
+				"You have entered invalid data. Please try again."),
+			selenium.getText("//section/div/div/div/div"));
+		assertEquals(RuntimeVariables.replace("Please enter a valid message."),
+			selenium.getText("//form/div[1]"));
 	}
 }

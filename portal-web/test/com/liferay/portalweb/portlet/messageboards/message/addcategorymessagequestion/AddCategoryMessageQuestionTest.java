@@ -88,11 +88,33 @@ public class AddCategoryMessageQuestionTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace(
 				"This is a t\u00e9st m\u00e9ssag\u00e9 question."),
 			selenium.getText("//td[2]/div[2]"));
-		selenium.clickAt("link=T\u00e9st Cat\u00e9gory",
+		assertEquals(RuntimeVariables.replace("T\u00e9st Cat\u00e9gory"),
+			selenium.getText("//nav/ul/li[3]/span/a"));
+		selenium.open("/web/guest/home/");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent(
+							"link=M\u00e9ssag\u00e9 Boards T\u00e9st Pag\u00e9")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("link=M\u00e9ssag\u00e9 Boards T\u00e9st Pag\u00e9",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Waiting for an Answer"),
-			selenium.getText(
-				"//tr[@class='portlet-section-body results-row last']/td[2]"));
+			selenium.getText("//td[2]/a"));
 	}
 }

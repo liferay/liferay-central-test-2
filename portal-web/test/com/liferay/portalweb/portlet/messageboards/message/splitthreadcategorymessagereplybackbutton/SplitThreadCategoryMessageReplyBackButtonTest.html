@@ -35,22 +35,27 @@
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>link=Tést Méssagé</td>
+	<td>//td[1]/a</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>assertText</td>
+	<td>//tr[2]/td[1]/a</td>
 	<td>RE: Tést Méssagé</td>
-	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>assertText</td>
+	<td>//div[5]/table/tbody/tr[1]/td[2]/div[1]/div/a/strong</td>
+	<td>exact:RE: Tést Méssagé</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[5]/table/tbody/tr[1]/td[2]/div[2]</td>
 	<td>This is a tést réply méssagé.</td>
-	<td></td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>link=Split Thread</td>
+	<td>//div[5]/table/tbody/tr[2]/td/ul/li[4]/span/a/span</td>
 	<td></td>
 </tr>
 <tr>
@@ -69,14 +74,14 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>assertText</td>
+	<td>//section/div/div/div/div</td>
 	<td>You have entered invalid data. Please try again.</td>
-	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>assertText</td>
+	<td>//form/div[1]</td>
 	<td>A thread cannot be split at its root message.</td>
-	<td></td>
 </tr>
 
 </tbody></table>

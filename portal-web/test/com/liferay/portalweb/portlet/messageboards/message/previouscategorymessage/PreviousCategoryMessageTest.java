@@ -48,16 +48,15 @@ public class PreviousCategoryMessageTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=T\u00e9st1 M\u00e9ssag\u00e91",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("//tr[5]/td[1]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("T\u00e9st1 M\u00e9ssag\u00e91"),
 			selenium.getText("//form/div[2]"));
-		selenium.clickAt("link=Previous", RuntimeVariables.replace(""));
+		selenium.clickAt("//form/div[1]/div[1]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("T\u00e9st2 M\u00e9ssag\u00e92"),
 			selenium.getText("//form/div[2]"));
-		selenium.clickAt("link=Previous", RuntimeVariables.replace(""));
+		selenium.clickAt("//form/div[1]/div[1]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("T\u00e9st3 M\u00e9ssag\u00e93"),
 			selenium.getText("//form/div[2]"));

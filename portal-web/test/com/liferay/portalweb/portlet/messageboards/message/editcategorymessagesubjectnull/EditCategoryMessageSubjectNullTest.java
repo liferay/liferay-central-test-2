@@ -93,8 +93,10 @@ public class EditCategoryMessageSubjectNullTest extends BaseTestCase {
 		selenium.type("_19_subject", RuntimeVariables.replace(""));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"You have entered invalid data. Please try again."));
-		assertTrue(selenium.isTextPresent("Please enter a valid subject."));
+		assertEquals(RuntimeVariables.replace(
+				"You have entered invalid data. Please try again."),
+			selenium.getText("//section/div/div/div/div"));
+		assertEquals(RuntimeVariables.replace("Please enter a valid subject."),
+			selenium.getText("//form/div[1]"));
 	}
 }

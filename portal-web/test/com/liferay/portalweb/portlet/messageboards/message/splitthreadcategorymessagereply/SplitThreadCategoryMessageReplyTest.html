@@ -35,22 +35,22 @@
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>link=Tést Méssagé</td>
+	<td>//td[1]/a</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>assertText</td>
+	<td>//tr[2]/td[1]/a</td>
 	<td>RE: Tést Méssagé</td>
-	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>assertText</td>
+	<td>//div[5]/table/tbody/tr[1]/td[2]/div[2]</td>
 	<td>This is a tést réply méssagé.</td>
-	<td></td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>link=Split Thread</td>
+	<td>//div[5]/table/tbody/tr[2]/td/ul/li[4]/span/a/span</td>
 	<td></td>
 </tr>
 <tr>
@@ -79,13 +79,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
-	<td>link=RE: Tést Méssagé</td>
-	<td></td>
+	<td>assertText</td>
+	<td>//tr[4]/td[1]/a</td>
+	<td>RE: Tést Méssagé</td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>link=Tést Méssagé</td>
+	<td>//tr[3]/td[1]/a</td>
 	<td></td>
 </tr>
 <tr>

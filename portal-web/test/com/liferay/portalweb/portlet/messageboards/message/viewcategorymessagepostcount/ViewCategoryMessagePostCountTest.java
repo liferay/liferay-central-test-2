@@ -73,7 +73,7 @@ public class ViewCategoryMessagePostCountTest extends BaseTestCase {
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully. "));
+				"Your request processed successfully."));
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
@@ -122,7 +122,7 @@ public class ViewCategoryMessagePostCountTest extends BaseTestCase {
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully. "));
+				"Your request processed successfully."));
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {

@@ -52,13 +52,19 @@ public class SplitThreadCategoryMessageReplyBackButtonTest extends BaseTestCase 
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isElementPresent(
 				"link=RE: T\u00e9st M\u00e9ssag\u00e9"));
-		selenium.clickAt("link=T\u00e9st M\u00e9ssag\u00e9",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("//td[1]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("RE: T\u00e9st M\u00e9ssag\u00e9"));
-		assertTrue(selenium.isTextPresent(
-				"This is a t\u00e9st r\u00e9ply m\u00e9ssag\u00e9."));
-		selenium.clickAt("link=Split Thread", RuntimeVariables.replace(""));
+		assertEquals(RuntimeVariables.replace("RE: T\u00e9st M\u00e9ssag\u00e9"),
+			selenium.getText("//tr[2]/td[1]/a"));
+		assertEquals(RuntimeVariables.replace(
+				"exact:RE: T\u00e9st M\u00e9ssag\u00e9"),
+			selenium.getText(
+				"//div[5]/table/tbody/tr[1]/td[2]/div[1]/div/a/strong"));
+		assertEquals(RuntimeVariables.replace(
+				"This is a t\u00e9st r\u00e9ply m\u00e9ssag\u00e9."),
+			selenium.getText("//div[5]/table/tbody/tr[1]/td[2]/div[2]"));
+		selenium.clickAt("//div[5]/table/tbody/tr[2]/td/ul/li[4]/span/a/span",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
@@ -66,9 +72,11 @@ public class SplitThreadCategoryMessageReplyBackButtonTest extends BaseTestCase 
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"You have entered invalid data. Please try again."));
-		assertTrue(selenium.isTextPresent(
-				"A thread cannot be split at its root message."));
+		assertEquals(RuntimeVariables.replace(
+				"You have entered invalid data. Please try again."),
+			selenium.getText("//section/div/div/div/div"));
+		assertEquals(RuntimeVariables.replace(
+				"A thread cannot be split at its root message."),
+			selenium.getText("//form/div[1]"));
 	}
 }

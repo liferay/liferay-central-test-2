@@ -53,13 +53,12 @@ public class AddSubcategory1Test extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_19_name",
 			RuntimeVariables.replace("T\u00e9st1 Subcat\u00e9gory1"));
-		selenium.type("_19_description",
-			RuntimeVariables.replace("This is a t\u00e9st1 subcat\u00e9gory1."));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
-		assertTrue(selenium.isTextPresent(
-				"T\u00e9st1 Subcat\u00e9gory1\nThis is a t\u00e9st1 subcat\u00e9gory1."));
+		assertEquals(RuntimeVariables.replace(
+				"Your request processed successfully."),
+			selenium.getText("//section/div/div/div/div[1]"));
+		assertEquals(RuntimeVariables.replace("T\u00e9st1 Subcat\u00e9gory1"),
+			selenium.getText("//a/strong"));
 	}
 }

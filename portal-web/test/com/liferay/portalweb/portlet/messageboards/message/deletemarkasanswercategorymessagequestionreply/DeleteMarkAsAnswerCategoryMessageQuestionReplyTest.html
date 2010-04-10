@@ -30,12 +30,12 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//tr[@class='portlet-section-body results-row last']/td[2]</td>
+	<td>//td[2]/a</td>
 	<td>Resolved</td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>link=Tést Méssagé Question</td>
+	<td>//td[1]/a</td>
 	<td></td>
 </tr>
 <tr>
@@ -49,18 +49,18 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>assertText</td>
+	<td>//section/div/div/div/div[1]</td>
 	<td>Your request processed successfully.</td>
-	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//tr[@class='portlet-section-body results-row last']/td[2]</td>
+	<td>//td[2]/a</td>
 	<td>Waiting for an Answer</td>
 </tr>
 <tr>
 	<td>assertNotText</td>
-	<td>//tr[@class='portlet-section-body results-row last']/td[2]</td>
+	<td>//td[2]/a</td>
 	<td>Resolved</td>
 </tr>
 

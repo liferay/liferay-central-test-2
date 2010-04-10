@@ -49,8 +49,7 @@ public class AddCategoryMessageReply2Test extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=T\u00e9st M\u00e9ssag\u00e9",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("//td[1]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("//div[5]/table/tbody/tr[1]/td[2]/div[1]/ul/li[1]/span/a/span",
 			RuntimeVariables.replace(""));
@@ -81,6 +80,9 @@ public class AddCategoryMessageReply2Test extends BaseTestCase {
 			selenium.getText("//form/div[2]"));
 		assertEquals(RuntimeVariables.replace("RE: T\u00e9st M\u00e9ssag\u00e9"),
 			selenium.getText("//a/strong"));
+		assertEquals(RuntimeVariables.replace("RE: T\u00e9st M\u00e9ssag\u00e9"),
+			selenium.getText(
+				"//div[6]/table/tbody/tr[1]/td[2]/div[1]/div/a/strong"));
 		assertEquals(RuntimeVariables.replace(
 				"This is a t\u00e9st2 r\u00e9ply2 m\u00e9ssag\u00e92."),
 			selenium.getText("//div[6]/table/tbody/tr[1]/td[2]/div[2]"));

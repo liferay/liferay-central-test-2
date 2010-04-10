@@ -49,6 +49,7 @@ public class ViewCategoryMessageMyPostsTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=My Posts", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("link=T\u00e9st M\u00e9ssag\u00e9"));
+		assertEquals(RuntimeVariables.replace("T\u00e9st M\u00e9ssag\u00e9"),
+			selenium.getText("//td[1]/a"));
 	}
 }

@@ -29,8 +29,8 @@ public class AddCategoryMultipleTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTestSuite(AddPageTest.class);
-		testSuite.addTestSuite(AddPortletTest.class);
+		testSuite.addTestSuite(AddPageMBTest.class);
+		testSuite.addTestSuite(AddPortletMBTest.class);
 		testSuite.addTestSuite(AddCategory1Test.class);
 		testSuite.addTestSuite(AddCategory2Test.class);
 		testSuite.addTestSuite(AddCategory3Test.class);

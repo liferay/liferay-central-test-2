@@ -51,16 +51,12 @@ public class AddCategoryTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_19_name",
 			RuntimeVariables.replace("T\u00e9st Cat\u00e9gory"));
-		selenium.type("_19_description",
-			RuntimeVariables.replace("This is a t\u00e9st cat\u00e9gory."));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+		assertEquals(RuntimeVariables.replace(
+				"Your request processed successfully."),
+			selenium.getText("//section/div/div/div/div[1]"));
 		assertEquals(RuntimeVariables.replace("T\u00e9st Cat\u00e9gory"),
 			selenium.getText("//a/strong"));
-		assertEquals(RuntimeVariables.replace(
-				"T\u00e9st Cat\u00e9gory\nThis is a t\u00e9st cat\u00e9gory."),
-			selenium.getText("//td[1]/a"));
 	}
 }

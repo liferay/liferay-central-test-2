@@ -265,8 +265,7 @@ public class TearDownTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isVisible(
-									"//div[@id='_88_Output']/ul/li/div")) {
+						if (selenium.isVisible("link=Guest")) {
 							break;
 						}
 					}
@@ -325,7 +324,7 @@ public class TearDownTest extends BaseTestCase {
 				selenium.clickAt("//li[2]/div/div[3]/a",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				selenium.clickAt("//li[@id='_88_tabs3pageTabsId']/span/a",
+				selenium.clickAt("//li[@id='_88_tabs3pageTabsId']/span/span/a",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				selenium.click(RuntimeVariables.replace(
@@ -335,43 +334,6 @@ public class TearDownTest extends BaseTestCase {
 								   .matches("^Are you sure you want to delete the selected page[\\s\\S]$"));
 
 			case 7:
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isVisible(
-									"//div[@id='_88_Output']/ul/li/div")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isVisible(
-									"//a[@class='lfr-tree-controls-label']")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
-				selenium.clickAt("//a[@class='lfr-tree-controls-label']",
-					RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -402,7 +364,7 @@ public class TearDownTest extends BaseTestCase {
 				selenium.clickAt("//li[2]/div/div[3]/a",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				selenium.clickAt("//li[@id='_88_tabs3pageTabsId']/span/a",
+				selenium.clickAt("//li[@id='_88_tabs3pageTabsId']/span/span/a",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				selenium.click(RuntimeVariables.replace(
@@ -412,43 +374,6 @@ public class TearDownTest extends BaseTestCase {
 								   .matches("^Are you sure you want to delete the selected page[\\s\\S]$"));
 
 			case 8:
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isVisible(
-									"//div[@id='_88_Output']/ul/li/div")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isVisible(
-									"//a[@class='lfr-tree-controls-label']")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
-				selenium.clickAt("//a[@class='lfr-tree-controls-label']",
-					RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -479,7 +404,7 @@ public class TearDownTest extends BaseTestCase {
 				selenium.clickAt("//li[2]/div/div[3]/a",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				selenium.clickAt("//li[@id='_88_tabs3pageTabsId']/span/a",
+				selenium.clickAt("//li[@id='_88_tabs3pageTabsId']/span/span/a",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				selenium.click(RuntimeVariables.replace(
@@ -489,43 +414,6 @@ public class TearDownTest extends BaseTestCase {
 								   .matches("^Are you sure you want to delete the selected page[\\s\\S]$"));
 
 			case 9:
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isVisible(
-									"//div[@id='_88_Output']/ul/li/div")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isVisible(
-									"//a[@class='lfr-tree-controls-label']")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
-				selenium.clickAt("//a[@class='lfr-tree-controls-label']",
-					RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -556,7 +444,7 @@ public class TearDownTest extends BaseTestCase {
 				selenium.clickAt("//li[2]/div/div[3]/a",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				selenium.clickAt("//li[@id='_88_tabs3pageTabsId']/span/a",
+				selenium.clickAt("//li[@id='_88_tabs3pageTabsId']/span/span/a",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				selenium.click(RuntimeVariables.replace(
@@ -566,43 +454,6 @@ public class TearDownTest extends BaseTestCase {
 								   .matches("^Are you sure you want to delete the selected page[\\s\\S]$"));
 
 			case 10:
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isVisible(
-									"//div[@id='_88_Output']/ul/li/div")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isVisible(
-									"//a[@class='lfr-tree-controls-label']")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
-				selenium.clickAt("//a[@class='lfr-tree-controls-label']",
-					RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -633,7 +484,7 @@ public class TearDownTest extends BaseTestCase {
 				selenium.clickAt("//li[2]/div/div[3]/a",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				selenium.clickAt("//li[@id='_88_tabs3pageTabsId']/span/a",
+				selenium.clickAt("//li[@id='_88_tabs3pageTabsId']/span/span/a",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				selenium.click(RuntimeVariables.replace(

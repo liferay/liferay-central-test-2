@@ -100,9 +100,6 @@ public class EditCategoryMessageSubjectTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace(
 				"T\u00e9st M\u00e9ssag\u00e9 Edit\u00e9d"),
 			selenium.getText("//a/strong"));
-		assertEquals(RuntimeVariables.replace(
-				"This is a t\u00e9st m\u00e9ssag\u00e9."),
-			selenium.getText("//td[2]/div[2]"));
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {

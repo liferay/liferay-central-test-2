@@ -52,33 +52,23 @@ public class SplitThreadCategoryMessageReplyExplanationTest extends BaseTestCase
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isElementPresent(
 				"link=RE: T\u00e9st M\u00e9ssag\u00e9"));
-		selenium.clickAt("link=T\u00e9st M\u00e9ssag\u00e9",
+		selenium.clickAt("//td[1]/a", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		assertEquals(RuntimeVariables.replace("RE: T\u00e9st M\u00e9ssag\u00e9"),
+			selenium.getText("//tr[2]/td[1]/a"));
+		assertEquals(RuntimeVariables.replace("RE: T\u00e9st M\u00e9ssag\u00e9"),
+			selenium.getText(
+				"//div[5]/table/tbody/tr[1]/td[2]/div[1]/div/a/strong"));
+		assertEquals(RuntimeVariables.replace(
+				"This is a t\u00e9st r\u00e9ply m\u00e9ssag\u00e9."),
+			selenium.getText("//div[5]/table/tbody/tr[1]/td[2]/div[2]"));
+		selenium.clickAt("//div[5]/table/tbody/tr[2]/td/ul/li[4]/span/a/span",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("RE: T\u00e9st M\u00e9ssag\u00e9"));
-		assertTrue(selenium.isTextPresent(
-				"This is a t\u00e9st r\u00e9ply m\u00e9ssag\u00e9."));
-		selenium.clickAt("link=Split Thread", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
+		assertFalse(selenium.isChecked("_19_addExplanationPostCheckbox"));
 		selenium.clickAt("_19_addExplanationPostCheckbox",
 			RuntimeVariables.replace(""));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible("//div[@class='lfr-toolbar']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		assertTrue(selenium.isChecked("_19_addExplanationPostCheckbox"));
 		selenium.type("_19_subject",
 			RuntimeVariables.replace("Thread Split Explanation"));
 		selenium.type("_19_textArea",
@@ -109,10 +99,9 @@ public class SplitThreadCategoryMessageReplyExplanationTest extends BaseTestCase
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent(
-				"link=RE: T\u00e9st M\u00e9ssag\u00e9"));
-		selenium.clickAt("link=T\u00e9st M\u00e9ssag\u00e9",
-			RuntimeVariables.replace(""));
+		assertEquals(RuntimeVariables.replace("RE: T\u00e9st M\u00e9ssag\u00e9"),
+			selenium.getText("//tr[4]/td[1]/a"));
+		selenium.clickAt("//td[1]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isTextPresent("RE: T\u00e9st M\u00e9ssag\u00e9"));
 		assertFalse(selenium.isTextPresent(

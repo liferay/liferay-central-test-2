@@ -51,7 +51,8 @@ public class SearchCategoryMessageTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Search']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("link=T\u00e9st M\u00e9ssag\u00e9"));
+		assertEquals(RuntimeVariables.replace("T\u00e9st M\u00e9ssag\u00e9"),
+			selenium.getText("//td[3]/a"));
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {

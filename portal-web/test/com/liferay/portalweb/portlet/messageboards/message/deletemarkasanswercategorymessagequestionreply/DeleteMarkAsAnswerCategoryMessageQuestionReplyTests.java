@@ -31,8 +31,8 @@ public class DeleteMarkAsAnswerCategoryMessageQuestionReplyTests
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTestSuite(AddPageTest.class);
-		testSuite.addTestSuite(AddPortletTest.class);
+		testSuite.addTestSuite(AddPageMBTest.class);
+		testSuite.addTestSuite(AddPortletMBTest.class);
 		testSuite.addTestSuite(AddCategoryTest.class);
 		testSuite.addTestSuite(AddCategoryMessageQuestionTest.class);
 		testSuite.addTestSuite(AddCategoryMessageQuestionReplyTest.class);

@@ -29,9 +29,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
-	<td>link=Tést Méssagé</td>
-	<td></td>
+	<td>assertText</td>
+	<td>//td[1]/a</td>
+	<td>Tést Méssagé</td>
 </tr>
 <tr>
 	<td>clickAt</td>
@@ -40,12 +40,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Move Thread</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[6]/a</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAtAndWait</td>
-	<td>link=Move Thread</td>
+	<td>clickAndWait</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[6]/a</td>
 	<td></td>
 </tr>
 <tr>
@@ -89,13 +89,18 @@
 	<td>Tést2 Catégory2</td>
 </tr>
 <tr>
+	<td>assertNotChecked</td>
+	<td>_19_addExplanationPostCheckbox</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAt</td>
 	<td>_19_addExplanationPostCheckbox</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForVisible</td>
-	<td>//div[@class='lfr-toolbar']</td>
+	<td>assertChecked</td>
+	<td>_19_addExplanationPostCheckbox</td>
 	<td></td>
 </tr>
 <tr>
@@ -164,13 +169,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
-	<td>link=Tést Méssagé</td>
-	<td></td>
+	<td>assertText</td>
+	<td>//td[1]/a</td>
+	<td>Tést Méssagé</td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>link=Tést Méssagé</td>
+	<td>//td[1]/a</td>
 	<td></td>
 </tr>
 <tr>
@@ -180,7 +185,7 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[5]/table/tbody/tr[1]/td[2]/div[1]/div/a/strong</td>
+	<td>//div[5]/table/tbody/tr[1]/td[2]/div[1]/div/a/b</td>
 	<td>Move Thread Explanation Post</td>
 </tr>
 <tr>

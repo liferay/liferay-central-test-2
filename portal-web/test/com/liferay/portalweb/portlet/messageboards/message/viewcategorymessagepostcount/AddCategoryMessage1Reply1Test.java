@@ -49,10 +49,9 @@ public class AddCategoryMessage1Reply1Test extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=T\u00e9st1 M\u00e9ssag\u00e91",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("//tr[5]/td[1]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=Reply", RuntimeVariables.replace(""));
+		selenium.clickAt("//li[1]/span/a/span", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
