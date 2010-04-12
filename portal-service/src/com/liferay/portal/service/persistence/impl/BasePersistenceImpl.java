@@ -20,7 +20,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.ORMException;
 import com.liferay.portal.kernel.dao.orm.OrderFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
-import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.SessionFactory;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -58,67 +57,6 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 		_sessionFactory.closeSession(session);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
-		throws SystemException {
-
-		return dynamicQuery(
-			dynamicQuery, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
-	}
-
-	public List<Object> dynamicQuery(
-			DynamicQuery dynamicQuery, int start, int end)
-		throws SystemException {
-
-		return dynamicQuery(dynamicQuery, start, end, null);
-	}
-
-	public List<Object> dynamicQuery(
-			DynamicQuery dynamicQuery, int start, int end,
-			OrderByComparator orderByComparator)
-		throws SystemException {
-
-		if (orderByComparator != null) {
-			OrderFactoryUtil.addOrderByComparator(
-				dynamicQuery, orderByComparator);
-		}
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			dynamicQuery.setLimit(start, end);
-
-			dynamicQuery.compile(session);
-
-			return dynamicQuery.list();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public int dynamicQueryCount(DynamicQuery dynamicQuery)
-		throws SystemException {
-
-		dynamicQuery.setProjection(ProjectionFactoryUtil.rowCount());
-
-		List<Object> results = dynamicQuery(dynamicQuery);
-
-		if (results.isEmpty()) {
-			return 0;
-		}
-		else {
-			return ((Integer)results.get(0));
-		}
-	}
-
-	/**
-	 * @deprecated Use <code>dynamicQueryCount</code>.
-	 */
 	public int countWithDynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 
@@ -146,9 +84,6 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 		throw new UnsupportedOperationException();
 	}
 
-	/**
-	 * @deprecated Use <code>dynamicQuery</code>.
-	 */
 	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 
@@ -169,9 +104,6 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 		}
 	}
 
-	/**
-	 * @deprecated Use <code>dynamicQuery</code>.
-	 */
 	public List<Object> findWithDynamicQuery(
 			DynamicQuery dynamicQuery, int start, int end)
 		throws SystemException {
@@ -195,9 +127,6 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 		}
 	}
 
-	/**
-	 * @deprecated Use <code>dynamicQuery</code>.
-	 */
 	public List<Object> findWithDynamicQuery(
 			DynamicQuery dynamicQuery, int start, int end,
 			OrderByComparator orderByComparator)

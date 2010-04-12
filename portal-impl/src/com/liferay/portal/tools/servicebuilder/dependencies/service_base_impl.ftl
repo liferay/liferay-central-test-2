@@ -71,30 +71,18 @@ import com.liferay.portal.kernel.exception.SystemException;
 		${entity.varName}Persistence.remove(${entity.varName});
 	}
 
-	/**
-	 * @deprecated Use {@link ${packagePath}.service.persistence.${entity.name}Persistence#findWithDynamicQuery}.
-	 */
 	public List<Object> dynamicQuery(DynamicQuery dynamicQuery) throws SystemException {
 		return ${entity.varName}Persistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	/**
-	 * @deprecated Use {@link ${packagePath}.service.persistence.${entity.name}Persistence#findWithDynamicQuery}.
-	 */
 	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start, int end) throws SystemException {
 		return ${entity.varName}Persistence.findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
-	/**
-	 * @deprecated Use {@link ${packagePath}.service.persistence.${entity.name}Persistence#findWithDynamicQuery}.
-	 */
 	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start, int end, OrderByComparator orderByComparator) throws SystemException {
 		return ${entity.varName}Persistence.findWithDynamicQuery(dynamicQuery, start, end, orderByComparator);
 	}
 
-	/**
-	 * @deprecated Use {@link ${packagePath}.service.persistence.${entity.name}Persistence#countWithDynamicQuery}.
-	 */
 	public int dynamicQueryCount(DynamicQuery dynamicQuery) throws SystemException {
 		return ${entity.varName}Persistence.countWithDynamicQuery(dynamicQuery);
 	}
