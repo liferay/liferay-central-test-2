@@ -30,59 +30,39 @@ public class ProjectionFactoryImpl implements ProjectionFactory {
 	public Projection alias(Projection projection, String alias) {
 		ProjectionImpl projectionImpl = (ProjectionImpl)projection;
 
-		String argument = projectionImpl.getArgument() + "-ALIAS-" + alias;
-
 		return new ProjectionImpl(
-			Projections.alias(projectionImpl.getWrappedProjection(), alias),
-			argument);
+			Projections.alias(projectionImpl.getWrappedProjection(), alias));
 	}
 
 	public Projection avg(String propertyName) {
-		String argument = "-AVG-" + propertyName;
-
-		return new ProjectionImpl(Projections.avg(propertyName), argument);
+		return new ProjectionImpl(Projections.avg(propertyName));
 	}
 
 	public Projection count(String propertyName) {
-		String argument = "-COUNT-" + propertyName;
-
-		return new ProjectionImpl(Projections.count(propertyName), argument);
+		return new ProjectionImpl(Projections.count(propertyName));
 	}
 
 	public Projection countDistinct(String propertyName) {
-		String argument = "-COUNTDISTINCT-" + propertyName;
-
-		return new ProjectionImpl(
-			Projections.countDistinct(propertyName), argument);
+		return new ProjectionImpl(Projections.countDistinct(propertyName));
 	}
 
 	public Projection distinct(Projection projection) {
 		ProjectionImpl projectionImpl = (ProjectionImpl)projection;
 
-		String argument = "-DISTINCT-" + projectionImpl.getArgument();
-
 		return new ProjectionImpl(
-			Projections.distinct(
-				projectionImpl.getWrappedProjection()), argument);
+			Projections.distinct(projectionImpl.getWrappedProjection()));
 	}
 
 	public Projection groupProperty(String propertyName) {
-		String argument = "-GROUPPROPERTY-" + propertyName;
-
-		return new ProjectionImpl(
-			Projections.groupProperty(propertyName), argument);
+		return new ProjectionImpl(Projections.groupProperty(propertyName));
 	}
 
 	public Projection max(String propertyName) {
-		String argument = "-MAX-" + propertyName;
-
-		return new ProjectionImpl(Projections.max(propertyName), argument);
+		return new ProjectionImpl(Projections.max(propertyName));
 	}
 
 	public Projection min(String propertyName) {
-		String argument = "-MIN-" + propertyName;
-
-		return new ProjectionImpl(Projections.min(propertyName), argument);
+		return new ProjectionImpl(Projections.min(propertyName));
 	}
 
 	public ProjectionList projectionList() {
@@ -90,21 +70,15 @@ public class ProjectionFactoryImpl implements ProjectionFactory {
 	}
 
 	public Projection property(String propertyName) {
-		String argument = "-PROPERTY-" + propertyName;
-
-		return new ProjectionImpl(Projections.property(propertyName), argument);
+		return new ProjectionImpl(Projections.property(propertyName));
 	}
 
 	public Projection rowCount() {
-		String argument = "-ROWCOUNT-";
-
-		return new ProjectionImpl(Projections.rowCount(), argument);
+		return new ProjectionImpl(Projections.rowCount());
 	}
 
 	public Projection sum(String propertyName) {
-		String argument = "-SUM-" + propertyName;
-
-		return new ProjectionImpl(Projections.sum(propertyName), argument);
+		return new ProjectionImpl(Projections.sum(propertyName));
 	}
 
 }

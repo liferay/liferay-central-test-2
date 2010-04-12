@@ -19,9 +19,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.Order;
 import com.liferay.portal.kernel.dao.orm.Projection;
 import com.liferay.portal.kernel.dao.orm.Property;
-import com.liferay.portal.kernel.util.ArrayUtil;
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.StringUtil;
 
 import java.util.Collection;
 
@@ -43,24 +40,15 @@ public class PropertyImpl extends ProjectionImpl implements Property {
 	}
 
 	public Projection avg() {
-		String argument = "-AVG-" + _property.getPropertyName();
-
-		return new ProjectionImpl(_property.avg(), argument);
+		return new ProjectionImpl(_property.avg());
 	}
 
 	public Criterion between(Object min, Object max) {
-		String[] arguments = new String[] {
-			_property.getPropertyName() + "-BETWEEN-" + String.valueOf(min) +
-				StringPool.DASH + String.valueOf(max)
-		};
-
-		return new CriterionImpl(_property.between(min, max), arguments);
+		return new CriterionImpl(_property.between(min, max));
 	}
 
 	public Projection count() {
-		String argument = "-COUNT-" + _property.getPropertyName();
-
-		return new ProjectionImpl(_property.count(), argument);
+		return new ProjectionImpl(_property.count());
 	}
 
 	public Order desc() {
@@ -70,60 +58,30 @@ public class PropertyImpl extends ProjectionImpl implements Property {
 	public Criterion eq(DynamicQuery subselect) {
 		DynamicQueryImpl dynamicQueryImpl = (DynamicQueryImpl)subselect;
 
-		String[] arguments = new String[] {
-			_property.getPropertyName() + "-EQ-"
-		};
-
-		arguments = ArrayUtil.append(
-			arguments, dynamicQueryImpl.getArguments());
-
 		return new CriterionImpl(
-			_property.eq(dynamicQueryImpl.getDetachedCriteria()), arguments);
+			_property.eq(dynamicQueryImpl.getDetachedCriteria()));
 	}
 
 	public Criterion eq(Object value) {
-		String[] arguments = new String[] {
-			_property.getPropertyName() + "-EQ-" + String.valueOf(value)
-		};
-
-		return new CriterionImpl(_property.eq(value), arguments);
+		return new CriterionImpl(_property.eq(value));
 	}
 
 	public Criterion eqAll(DynamicQuery subselect) {
 		DynamicQueryImpl dynamicQueryImpl = (DynamicQueryImpl)subselect;
 
-		String[] arguments = new String[] {
-			_property.getPropertyName() + "-EQALL-"
-		};
-
-		arguments = ArrayUtil.append(
-			arguments, dynamicQueryImpl.getArguments());
-
 		return new CriterionImpl(
-			_property.eqAll(dynamicQueryImpl.getDetachedCriteria()), arguments);
+			_property.eqAll(dynamicQueryImpl.getDetachedCriteria()));
 	}
 
 	public Criterion eqProperty(Property other) {
-		PropertyImpl otherPropertyImpl = (PropertyImpl)other;
-
-		String otherPropertyName =
-			otherPropertyImpl.getWrappedProperty().getPropertyName();
-
-		String[] arguments = new String[] {
-			_property.getPropertyName() + "-EQPROPERTY-" + otherPropertyName
-		};
+		PropertyImpl propertyImpl = (PropertyImpl)other;
 
 		return new CriterionImpl(
-			_property.eqProperty(otherPropertyImpl.getWrappedProperty()),
-			arguments);
+			_property.eqProperty(propertyImpl.getWrappedProperty()));
 	}
 
 	public Criterion eqProperty(String other) {
-		String[] arguments = new String[] {
-			_property.getPropertyName() + "-EQPROPERTY-" + other
-		};
-
-		return new CriterionImpl(_property.eqProperty(other), arguments);
+		return new CriterionImpl(_property.eqProperty(other));
 	}
 
 	public Property getProperty(String propertyName) {
@@ -135,450 +93,223 @@ public class PropertyImpl extends ProjectionImpl implements Property {
 	}
 
 	public Projection group() {
-		String argument = "-GROUP-" + _property.getPropertyName();
-
-		return new ProjectionImpl(_property.group(), argument);
+		return new ProjectionImpl(_property.group());
 	}
 
 	public Criterion ge(DynamicQuery subselect) {
 		DynamicQueryImpl dynamicQueryImpl = (DynamicQueryImpl)subselect;
 
-		String[] arguments = new String[] {
-			_property.getPropertyName() + "-GE-"
-		};
-
-		arguments = ArrayUtil.append(
-			arguments, dynamicQueryImpl.getArguments());
-
 		return new CriterionImpl(
-			_property.ge(dynamicQueryImpl.getDetachedCriteria()), arguments);
+			_property.ge(dynamicQueryImpl.getDetachedCriteria()));
 	}
 
 	public Criterion ge(Object value) {
-		String[] arguments = new String[] {
-			_property.getPropertyName() + "-GE-" + String.valueOf(value)
-		};
-
-		return new CriterionImpl(_property.ge(value), arguments);
+		return new CriterionImpl(_property.ge(value));
 	}
 
 	public Criterion geAll(DynamicQuery subselect) {
 		DynamicQueryImpl dynamicQueryImpl = (DynamicQueryImpl)subselect;
 
-		String[] arguments = new String[] {
-			_property.getPropertyName() + "-GEALL-"
-		};
-
-		arguments = ArrayUtil.append(
-			arguments, dynamicQueryImpl.getArguments());
-
 		return new CriterionImpl(
-			_property.geAll(dynamicQueryImpl.getDetachedCriteria()), arguments);
+			_property.geAll(dynamicQueryImpl.getDetachedCriteria()));
 	}
 
 	public Criterion geProperty(Property other) {
-		PropertyImpl otherPropertyImpl = (PropertyImpl)other;
-
-		String otherPropertyName =
-			otherPropertyImpl.getWrappedProperty().getPropertyName();
-
-		String[] arguments = new String[] {
-			_property.getPropertyName() + "-GEPROPERTY-" + otherPropertyName
-		};
+		PropertyImpl propertyImpl = (PropertyImpl)other;
 
 		return new CriterionImpl(
-			_property.geProperty(otherPropertyImpl.getWrappedProperty()),
-			arguments);
+			_property.geProperty(propertyImpl.getWrappedProperty()));
 	}
 
 	public Criterion geProperty(String other) {
-		String[] arguments = {
-			_property.getPropertyName() + "-GEPROPERTY-" + other
-		};
-
-		return new CriterionImpl(_property.geProperty(other), arguments);
+		return new CriterionImpl(_property.geProperty(other));
 	}
 
 	public Criterion geSome(DynamicQuery subselect) {
 		DynamicQueryImpl dynamicQueryImpl = (DynamicQueryImpl)subselect;
 
-		String[] arguments = new String[] {
-			_property.getPropertyName() + "-GESOME-"
-		};
-
-		arguments = ArrayUtil.append(
-			arguments, dynamicQueryImpl.getArguments());
-
 		return new CriterionImpl(
-			_property.geSome(dynamicQueryImpl.getDetachedCriteria()),
-			arguments);
+			_property.geSome(dynamicQueryImpl.getDetachedCriteria()));
 	}
 
 	public Criterion gt(DynamicQuery subselect) {
 		DynamicQueryImpl dynamicQueryImpl = (DynamicQueryImpl)subselect;
 
-		String[] arguments = new String[] {
-			_property.getPropertyName() + "-GT-"
-		};
-
-		arguments = ArrayUtil.append(
-			arguments, dynamicQueryImpl.getArguments());
-
 		return new CriterionImpl(
-			_property.gt(dynamicQueryImpl.getDetachedCriteria()), arguments);
+			_property.gt(dynamicQueryImpl.getDetachedCriteria()));
 	}
 
 	public Criterion gt(Object value) {
-		String[] arguments = new String[] {
-			_property.getPropertyName() + "-GT-" + String.valueOf(value)
-		};
-
-		return new CriterionImpl(_property.gt(value), arguments);
+		return new CriterionImpl(_property.gt(value));
 	}
 
 	public Criterion gtAll(DynamicQuery subselect) {
 		DynamicQueryImpl dynamicQueryImpl = (DynamicQueryImpl)subselect;
 
-		String[] arguments = new String[] {
-			_property.getPropertyName() + "-GTALL-"
-		};
-
-		arguments = ArrayUtil.append(
-			arguments, dynamicQueryImpl.getArguments());
-
 		return new CriterionImpl(
-			_property.gtAll(dynamicQueryImpl.getDetachedCriteria()), arguments);
+			_property.gtAll(dynamicQueryImpl.getDetachedCriteria()));
 	}
 
 	public Criterion gtProperty(Property other) {
-		PropertyImpl otherPropertyImpl = (PropertyImpl)other;
-
-		String otherPropertyName =
-			otherPropertyImpl.getWrappedProperty().getPropertyName();
-
-		String[] arguments = new String[] {
-			_property.getPropertyName() + "-GTPROPERTY-" + otherPropertyName
-		};
+		PropertyImpl propertyImpl = (PropertyImpl)other;
 
 		return new CriterionImpl(
-			_property.gtProperty(otherPropertyImpl.getWrappedProperty()),
-			arguments);
+			_property.gtProperty(propertyImpl.getWrappedProperty()));
 	}
 
 	public Criterion gtProperty(String other) {
-		String[] arguments = new String[] {
-			_property.getPropertyName() + "-GTPROPERTY-" + other
-		};
-
-		return new CriterionImpl(_property.gtProperty(other), arguments);
+		return new CriterionImpl(_property.gtProperty(other));
 	}
 
 	public Criterion gtSome(DynamicQuery subselect) {
 		DynamicQueryImpl dynamicQueryImpl = (DynamicQueryImpl)subselect;
 
-		String[] arguments = new String[] {
-			_property.getPropertyName() + "-GTSOME-"
-		};
-
-		arguments = ArrayUtil.append(
-			arguments, dynamicQueryImpl.getArguments());
-
 		return new CriterionImpl(
-			_property.gtSome(dynamicQueryImpl.getDetachedCriteria()),
-			arguments);
+			_property.gtSome(dynamicQueryImpl.getDetachedCriteria()));
 	}
 
 	public Criterion in(Collection<Object> values) {
-		String s = StringUtil.merge(values, StringPool.DASH);
-
-		String[] arguments = new String[] {
-			_property.getPropertyName() + "-IN-" + s
-		};
-
-		return new CriterionImpl(_property.in(values), arguments);
+		return new CriterionImpl(_property.in(values));
 	}
 
 	public Criterion in(DynamicQuery subselect) {
 		DynamicQueryImpl dynamicQueryImpl = (DynamicQueryImpl)subselect;
 
-		String[] arguments = new String[] {
-			_property.getPropertyName() + "-IN-"
-		};
-
-		arguments = ArrayUtil.append(
-			arguments, dynamicQueryImpl.getArguments());
-
 		return new CriterionImpl(
-			_property.in(dynamicQueryImpl.getDetachedCriteria()), arguments);
+			_property.in(dynamicQueryImpl.getDetachedCriteria()));
 	}
 
 	public Criterion in(Object[] values) {
-		String s = StringUtil.merge(values, StringPool.DASH);
-
-		String[] arguments = new String[] {
-			_property.getPropertyName() + "-IN-" + s
-		};
-
-		return new CriterionImpl(_property.in(values), arguments);
+		return new CriterionImpl(_property.in(values));
 	}
 
 	public Criterion isEmpty() {
-		String[] arguments = new String[] {
-			"-ISEMPTY-" + _property.getPropertyName()
-		};
-
-		return new CriterionImpl(_property.isEmpty(), arguments);
+		return new CriterionImpl(_property.isEmpty());
 	}
 
 	public Criterion isNotEmpty() {
-		String[] arguments = new String[] {
-			"-ISNOTEMPTY-" + _property.getPropertyName()
-		};
-
-		return new CriterionImpl(_property.isNotEmpty(), arguments);
+		return new CriterionImpl(_property.isNotEmpty());
 	}
 
 	public Criterion isNotNull() {
-		String[] arguments = new String[] {
-			"-ISNOTNULL-" + _property.getPropertyName()
-		};
-
-		return new CriterionImpl(_property.isNotNull(), arguments);
+		return new CriterionImpl(_property.isNotNull());
 	}
 
 	public Criterion isNull() {
-		String[] arguments = new String[] {
-			"-ISNULL-" + _property.getPropertyName()
-		};
-
-		return new CriterionImpl(_property.isNull(), arguments);
+		return new CriterionImpl(_property.isNull());
 	}
 
 	public Criterion le(DynamicQuery subselect) {
 		DynamicQueryImpl dynamicQueryImpl = (DynamicQueryImpl)subselect;
 
-		String[] arguments = new String[] {
-			_property.getPropertyName() + "-LE-"
-		};
-
-		arguments = ArrayUtil.append(
-			arguments, dynamicQueryImpl.getArguments());
-
 		return new CriterionImpl(
-			_property.le(dynamicQueryImpl.getDetachedCriteria()), arguments);
+			_property.le(dynamicQueryImpl.getDetachedCriteria()));
 	}
 
 	public Criterion le(Object value) {
-		String[] arguments = new String[] {
-			_property.getPropertyName() + "-LE-" + String.valueOf(value)
-		};
-
-		return new CriterionImpl(_property.le(value), arguments);
+		return new CriterionImpl(_property.le(value));
 	}
 
 	public Criterion leAll(DynamicQuery subselect) {
 		DynamicQueryImpl dynamicQueryImpl = (DynamicQueryImpl)subselect;
 
-		String[] arguments = new String[] {
-			_property.getPropertyName() + "-LEALL-"
-		};
-
-		arguments = ArrayUtil.append(
-			arguments, dynamicQueryImpl.getArguments());
-
 		return new CriterionImpl(
-			_property.leAll(dynamicQueryImpl.getDetachedCriteria()), arguments);
+			_property.leAll(dynamicQueryImpl.getDetachedCriteria()));
 	}
 
 	public Criterion leProperty(Property other) {
-		PropertyImpl otherPropertyImpl = (PropertyImpl)other;
-
-		String otherPropertyName =
-			otherPropertyImpl.getWrappedProperty().getPropertyName();
-
-		String[] arguments = new String[] {
-			_property.getPropertyName() + "-LEPROPERTY-" + otherPropertyName
-		};
+		PropertyImpl propertyImpl = (PropertyImpl)other;
 
 		return new CriterionImpl(
-			_property.leProperty(otherPropertyImpl.getWrappedProperty()),
-			arguments);
+			_property.leProperty(propertyImpl.getWrappedProperty()));
 	}
 
 	public Criterion leProperty(String other) {
-		String[] arguments = new String[] {
-			_property.getPropertyName() + "-LEPROPERTY-" + other
-		};
-
-		return new CriterionImpl(_property.leProperty(other), arguments);
+		return new CriterionImpl(_property.leProperty(other));
 	}
 
 	public Criterion leSome(DynamicQuery subselect) {
 		DynamicQueryImpl dynamicQueryImpl = (DynamicQueryImpl)subselect;
 
-		String[] arguments = new String[] {
-			_property.getPropertyName() + "-LESOME-"
-		};
-
-		arguments = ArrayUtil.append(
-			arguments, dynamicQueryImpl.getArguments());
-
 		return new CriterionImpl(
-			_property.leSome(dynamicQueryImpl.getDetachedCriteria()),
-			arguments);
+			_property.leSome(dynamicQueryImpl.getDetachedCriteria()));
 	}
 
 	public Criterion like(Object value) {
-		String[] arguments = new String[] {
-			_property.getPropertyName() + "-LIKE-" + String.valueOf(value)
-		};
-
-		return new CriterionImpl(_property.like(value), arguments);
+		return new CriterionImpl(_property.like(value));
 	}
 
 	public Criterion lt(DynamicQuery subselect) {
 		DynamicQueryImpl dynamicQueryImpl = (DynamicQueryImpl)subselect;
 
-		String[] arguments = new String[] {
-			_property.getPropertyName() + "-LT-"
-		};
-
-		arguments = ArrayUtil.append(
-			arguments, dynamicQueryImpl.getArguments());
-
 		return new CriterionImpl(
-			_property.lt(dynamicQueryImpl.getDetachedCriteria()), arguments);
+			_property.lt(dynamicQueryImpl.getDetachedCriteria()));
 	}
 
 	public Criterion lt(Object value) {
-		String[] arguments = new String[] {
-			_property.getPropertyName() + "-LT-" + String.valueOf(value)
-		};
-
-		return new CriterionImpl(_property.lt(value), arguments);
+		return new CriterionImpl(_property.lt(value));
 	}
 
 	public Criterion ltAll(DynamicQuery subselect) {
 		DynamicQueryImpl dynamicQueryImpl = (DynamicQueryImpl)subselect;
 
-		String[] arguments = new String[] {
-			_property.getPropertyName() + "-LTALL-"
-		};
-
-		arguments = ArrayUtil.append(
-			arguments, dynamicQueryImpl.getArguments());
-
 		return new CriterionImpl(
-			_property.ltAll(dynamicQueryImpl.getDetachedCriteria()), arguments);
+			_property.ltAll(dynamicQueryImpl.getDetachedCriteria()));
 	}
 
 	public Criterion ltProperty(Property other) {
-		PropertyImpl otherPropertyImpl = (PropertyImpl)other;
-
-		String otherPropertyName =
-			otherPropertyImpl.getWrappedProperty().getPropertyName();
-
-		String[] arguments = new String[] {
-			_property.getPropertyName() + "-LTPROPERTY-" + otherPropertyName
-		};
+		PropertyImpl propertyImpl = (PropertyImpl)other;
 
 		return new CriterionImpl(
-			_property.ltProperty(otherPropertyImpl.getWrappedProperty()),
-			arguments);
+			_property.ltProperty(propertyImpl.getWrappedProperty()));
 	}
 
 	public Criterion ltProperty(String other) {
-		String[] arguments = new String[] {
-			_property.getPropertyName() + "-LTPROPERTY-" + other
-		};
-
-		return new CriterionImpl(_property.ltProperty(other), arguments);
+		return new CriterionImpl(_property.ltProperty(other));
 	}
 
 	public Criterion ltSome(DynamicQuery subselect) {
 		DynamicQueryImpl dynamicQueryImpl = (DynamicQueryImpl)subselect;
 
-		String[] arguments = new String[] {
-			_property.getPropertyName() + "-LTSOME-"
-		};
-
-		arguments = ArrayUtil.append(
-			arguments, dynamicQueryImpl.getArguments());
-
 		return new CriterionImpl(
-			_property.ltSome(dynamicQueryImpl.getDetachedCriteria()),
-			arguments);
+			_property.ltSome(dynamicQueryImpl.getDetachedCriteria()));
 	}
 
 	public Projection max() {
-		String argument = "-MAX-" + _property.getPropertyName();
-
-		return new ProjectionImpl(_property.max(), argument);
+		return new ProjectionImpl(_property.max());
 	}
 
 	public Projection min() {
-		String argument = "-MIN-" + _property.getPropertyName();
-
-		return new ProjectionImpl(_property.min(), argument);
+		return new ProjectionImpl(_property.min());
 	}
 
 	public Criterion ne(DynamicQuery subselect) {
 		DynamicQueryImpl dynamicQueryImpl = (DynamicQueryImpl)subselect;
 
-		String[] arguments = new String[] {
-			_property.getPropertyName() + "-NE-"
-		};
-
-		arguments = ArrayUtil.append(
-			arguments, dynamicQueryImpl.getArguments());
-
 		return new CriterionImpl(
-			_property.ne(dynamicQueryImpl.getDetachedCriteria()), arguments);
+			_property.ne(dynamicQueryImpl.getDetachedCriteria()));
 	}
 
 	public Criterion ne(Object value) {
-		String[] arguments = new String[] {
-			_property.getPropertyName() + "-NE-" + String.valueOf(value)
-		};
-
-		return new CriterionImpl(_property.ne(value), arguments);
+		return new CriterionImpl(_property.ne(value));
 	}
 
 	public Criterion neProperty(Property other) {
-		PropertyImpl otherPropertyImpl = (PropertyImpl)other;
-
-		String otherPropertyName =
-			otherPropertyImpl.getWrappedProperty().getPropertyName();
-
-		String[] arguments = new String[] {
-			_property.getPropertyName() + "-NEPROPERTY-" + otherPropertyName
-		};
+		PropertyImpl propertyImpl = (PropertyImpl)other;
 
 		return new CriterionImpl(
-			_property.neProperty(otherPropertyImpl.getWrappedProperty()),
-			arguments);
+			_property.neProperty(propertyImpl.getWrappedProperty()));
 	}
 
 	public Criterion neProperty(String other) {
-		String[] arguments = new String[] {
-			_property.getPropertyName() + "-NEPROPERTY-" + other
-		};
-
-		return new CriterionImpl(_property.neProperty(other), arguments);
+		return new CriterionImpl(_property.neProperty(other));
 	}
 
 	public Criterion notIn(DynamicQuery subselect) {
 		DynamicQueryImpl dynamicQueryImpl = (DynamicQueryImpl)subselect;
 
-		String[] arguments = new String[] {
-			_property.getPropertyName() + "-NOTIN-"
-		};
-
-		arguments = ArrayUtil.append(
-			arguments, dynamicQueryImpl.getArguments());
-
 		return new CriterionImpl(
-			_property.notIn(dynamicQueryImpl.getDetachedCriteria()), arguments);
+			_property.notIn(dynamicQueryImpl.getDetachedCriteria()));
 	}
 
 	private org.hibernate.criterion.Property _property;

@@ -29,8 +29,6 @@ public interface DynamicQuery {
 
 	public void compile(Session session);
 
-	public String getKey();
-
 	@SuppressWarnings("unchecked")
 	public List list();
 

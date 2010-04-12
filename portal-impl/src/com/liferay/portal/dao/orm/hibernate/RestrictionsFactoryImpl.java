@@ -18,9 +18,6 @@ import com.liferay.portal.kernel.dao.orm.Conjunction;
 import com.liferay.portal.kernel.dao.orm.Criterion;
 import com.liferay.portal.kernel.dao.orm.Disjunction;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactory;
-import com.liferay.portal.kernel.util.ArrayUtil;
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.StringUtil;
 
 import java.util.Collection;
 import java.util.Map;
@@ -33,44 +30,22 @@ import java.util.Map;
 public class RestrictionsFactoryImpl implements RestrictionsFactory {
 
 	public Criterion allEq(Map<String, Criterion> propertyNameValues) {
-		String[] arguments = new String[] {"-ALLEQ-"};
-
-		for (Criterion criterion : propertyNameValues.values()) {
-			CriterionImpl criterionImpl = (CriterionImpl)criterion;
-
-			arguments = ArrayUtil.append(
-				arguments, criterionImpl.getArguments());
-		}
-
 		return new CriterionImpl(
-			org.hibernate.criterion.Restrictions.allEq(propertyNameValues),
-			arguments);
+			org.hibernate.criterion.Restrictions.allEq(propertyNameValues));
 	}
 
 	public Criterion and(Criterion lhs, Criterion rhs) {
 		CriterionImpl lhsImpl = (CriterionImpl)lhs;
 		CriterionImpl rhsImpl = (CriterionImpl)rhs;
 
-		String[] arguments = lhsImpl.getArguments();
-
-		arguments = ArrayUtil.append(arguments, new String[] {"-AND-"});
-		arguments = ArrayUtil.append(arguments, rhsImpl.getArguments());
-
 		return new CriterionImpl(
 			org.hibernate.criterion.Restrictions.and(
-				lhsImpl.getWrappedCriterion(), rhsImpl.getWrappedCriterion()),
-			arguments);
+				lhsImpl.getWrappedCriterion(), rhsImpl.getWrappedCriterion()));
 	}
 
 	public Criterion between(String propertyName, Object lo, Object hi) {
-		String[] arguments = new String[] {
-			propertyName + "-BETWEEN-" + String.valueOf(lo) + StringPool.DASH +
-				String.valueOf(hi)
-		};
-
 		return new CriterionImpl(
-			org.hibernate.criterion.Restrictions.between(propertyName, lo, hi),
-			arguments);
+			org.hibernate.criterion.Restrictions.between(propertyName, lo, hi));
 	}
 
 	public Conjunction conjunction() {
@@ -84,288 +59,156 @@ public class RestrictionsFactoryImpl implements RestrictionsFactory {
 	}
 
 	public Criterion eq(String propertyName, Object value) {
-		String[] arguments = new String[] {
-			propertyName + "-EQ-" + String.valueOf(value)
-		};
-
 		return new CriterionImpl(
-			org.hibernate.criterion.Restrictions.eq(propertyName, value),
-			arguments);
+			org.hibernate.criterion.Restrictions.eq(propertyName, value));
 	}
 
 	public Criterion eqProperty(String propertyName, String otherPropertyName) {
-		String[] arguments = new String[] {
-			propertyName + "-EQPROPERTY-" + otherPropertyName
-		};
-
 		return new CriterionImpl(
 			org.hibernate.criterion.Restrictions.eqProperty(
-				propertyName, otherPropertyName),
-			arguments);
+				propertyName, otherPropertyName));
 	}
 
 	public Criterion ge(String propertyName, Object value) {
-		String[] arguments = new String[] {
-			propertyName + "-GE-" + String.valueOf(value)
-		};
-
 		return new CriterionImpl(
-			org.hibernate.criterion.Restrictions.ge(propertyName, value),
-			arguments);
+			org.hibernate.criterion.Restrictions.ge(propertyName, value));
 	}
 
 	public Criterion geProperty(String propertyName, String otherPropertyName) {
-		String[] arguments = new String[] {
-			propertyName + "-GEPROPERTY-" + otherPropertyName
-		};
-
 		return new CriterionImpl(
 			org.hibernate.criterion.Restrictions.geProperty(
-				propertyName, otherPropertyName),
-			arguments);
+				propertyName, otherPropertyName));
 	}
 
 	public Criterion gt(String propertyName, Object value) {
-		String[] arguments = new String[] {
-			propertyName + "-GT-" + String.valueOf(value)
-		};
-
 		return new CriterionImpl(
-			org.hibernate.criterion.Restrictions.gt(propertyName, value),
-			arguments);
+			org.hibernate.criterion.Restrictions.gt(propertyName, value));
 	}
 
 	public Criterion gtProperty(String propertyName, String otherPropertyName) {
-		String[] arguments = new String[] {
-			propertyName + "-GTPROPERTY-" + otherPropertyName
-		};
-
 		return new CriterionImpl(
 			org.hibernate.criterion.Restrictions.gtProperty(
-				propertyName, otherPropertyName),
-			arguments);
+				propertyName, otherPropertyName));
 	}
 
 	public Criterion ilike(String propertyName, Object value) {
-		String[] arguments = new String[] {
-			propertyName + "-ILIKE-" + String.valueOf(value)
-		};
-
 		return new CriterionImpl(
-			org.hibernate.criterion.Restrictions.ilike(propertyName, value),
-			arguments);
+			org.hibernate.criterion.Restrictions.ilike(propertyName, value));
 	}
 
 	public Criterion in(String propertyName, Collection<Object> values) {
-		String s = StringUtil.merge(values, StringPool.DASH);
-
-		String[] arguments = new String[] {propertyName + "-IN-" + s};
-
 		return new CriterionImpl(
-			org.hibernate.criterion.Restrictions.in(propertyName, values),
-			arguments);
+			org.hibernate.criterion.Restrictions.in(propertyName, values));
 	}
 
 	public Criterion in(String propertyName, Object[] values) {
-		String s = StringUtil.merge(values, StringPool.PERIOD);
-
-		String[] arguments = new String[] {propertyName + "-IN-" + s};
-
 		return new CriterionImpl(
-			org.hibernate.criterion.Restrictions.in(propertyName, values),
-			arguments);
+			org.hibernate.criterion.Restrictions.in(propertyName, values));
 	}
 
 	public Criterion isEmpty(String propertyName) {
-		String[] arguments = new String[] {"-ISEMPTY-" + propertyName};
-
 		return new CriterionImpl(
-			org.hibernate.criterion.Restrictions.isEmpty(propertyName),
-			arguments);
+			org.hibernate.criterion.Restrictions.isEmpty(propertyName));
 	}
 
 	public Criterion isNotEmpty(String propertyName) {
-		String[] arguments = new String[] {"-ISNOTEMPTY-" + propertyName};
-
 		return new CriterionImpl(
-			org.hibernate.criterion.Restrictions.isNotEmpty(propertyName),
-			arguments);
+			org.hibernate.criterion.Restrictions.isNotEmpty(propertyName));
 	}
 
 	public Criterion isNotNull(String propertyName) {
-		String[] arguments = new String[] {"-ISNOTNULL-" + propertyName};
-
 		return new CriterionImpl(
-			org.hibernate.criterion.Restrictions.isNotNull(propertyName),
-			arguments);
+			org.hibernate.criterion.Restrictions.isNotNull(propertyName));
 	}
 
 	public Criterion isNull(String propertyName) {
-		String[] arguments = new String[] {"-ISNULL-" + propertyName};
-
 		return new CriterionImpl(
-			org.hibernate.criterion.Restrictions.isNull(propertyName),
-			arguments);
+			org.hibernate.criterion.Restrictions.isNull(propertyName));
 	}
 
 	public Criterion le(String propertyName, Object value) {
-		String[] arguments = new String[] {
-			propertyName + "-LE-" + String.valueOf(value)
-		};
-
 		return new CriterionImpl(
-			org.hibernate.criterion.Restrictions.le(propertyName, value),
-			arguments);
+			org.hibernate.criterion.Restrictions.le(propertyName, value));
 	}
 
 	public Criterion leProperty(String propertyName, String otherPropertyName) {
-		String[] arguments = new String[] {
-			propertyName + "-LEPROPERTY-" + otherPropertyName
-		};
-
 		return new CriterionImpl(
 			org.hibernate.criterion.Restrictions.leProperty(
-				propertyName, otherPropertyName),
-			arguments);
+				propertyName, otherPropertyName));
 	}
 
 	public Criterion like(String propertyName, Object value) {
-		String[] arguments = new String[] {
-			propertyName + "-LIKE-" + String.valueOf(value)
-		};
-
 		return new CriterionImpl(
-			org.hibernate.criterion.Restrictions.like(propertyName, value),
-			arguments);
+			org.hibernate.criterion.Restrictions.like(propertyName, value));
 	}
 
 	public Criterion lt(String propertyName, Object value) {
-		String[] arguments = new String[] {
-			propertyName + "-LT-" + String.valueOf(value)
-		};
-
 		return new CriterionImpl(
-			org.hibernate.criterion.Restrictions.lt(propertyName, value),
-			arguments);
+			org.hibernate.criterion.Restrictions.lt(propertyName, value));
 	}
 
 	public Criterion ltProperty(String propertyName, String otherPropertyName) {
-		String[] arguments = new String[] {
-			propertyName + "-LTPROPERTY-" + otherPropertyName
-		};
-
 		return new CriterionImpl(
 			org.hibernate.criterion.Restrictions.ltProperty(
-				propertyName, otherPropertyName),
-			arguments);
+				propertyName, otherPropertyName));
 	}
 
 	public Criterion ne(String propertyName, Object value) {
-		String[] arguments = new String[] {
-			propertyName + "-NE-" + String.valueOf(value)
-		};
-
 		return new CriterionImpl(
-			org.hibernate.criterion.Restrictions.ne(propertyName, value),arguments);
+			org.hibernate.criterion.Restrictions.ne(propertyName, value));
 	}
 
 	public Criterion neProperty(String propertyName, String otherPropertyName) {
-		String[] arguments = new String[] {
-			propertyName + "-NEPROPERTY-" + otherPropertyName
-		};
-
 		return new CriterionImpl(
 			org.hibernate.criterion.Restrictions.neProperty(
-				propertyName, otherPropertyName),
-			arguments);
+				propertyName, otherPropertyName));
 	}
 
 	public Criterion not(Criterion expression) {
 		CriterionImpl expressionImpl = (CriterionImpl)expression;
 
-		String[] arguments = new String[] {"-NOT-"};
-
-		arguments = ArrayUtil.append(arguments, expressionImpl.getArguments());
-
 		return new CriterionImpl(
 			org.hibernate.criterion.Restrictions.not(
-				expressionImpl.getWrappedCriterion()),
-			arguments);
+				expressionImpl.getWrappedCriterion()));
 	}
 
 	public Criterion or(Criterion lhs, Criterion rhs) {
 		CriterionImpl lhsImpl = (CriterionImpl)lhs;
 		CriterionImpl rhsImpl = (CriterionImpl)rhs;
 
-		String[] arguments = lhsImpl.getArguments();
-
-		arguments = ArrayUtil.append(arguments, new String[] {"-OR-"});
-		arguments = ArrayUtil.append(arguments, rhsImpl.getArguments());
-
 		return new CriterionImpl(
 			org.hibernate.criterion.Restrictions.or(
-				lhsImpl.getWrappedCriterion(), rhsImpl.getWrappedCriterion()),
-			arguments);
+				lhsImpl.getWrappedCriterion(), rhsImpl.getWrappedCriterion()));
 	}
 
 	public Criterion sizeEq(String propertyName, int size) {
-		String[] arguments = new String[] {
-			propertyName + "-SIZEEQ-" + String.valueOf(size)
-		};
-
 		return new CriterionImpl(
-			org.hibernate.criterion.Restrictions.sizeEq(propertyName, size),
-			arguments);
+			org.hibernate.criterion.Restrictions.sizeEq(propertyName, size));
 	}
 
 	public Criterion sizeGe(String propertyName, int size) {
-		String[] arguments = new String[] {
-			propertyName + "-SIZEGE-" + String.valueOf(size)
-		};
-
 		return new CriterionImpl(
-			org.hibernate.criterion.Restrictions.sizeGe(propertyName, size),
-			arguments);
+			org.hibernate.criterion.Restrictions.sizeGe(propertyName, size));
 	}
 
 	public Criterion sizeGt(String propertyName, int size) {
-		String[] arguments = new String[] {
-			propertyName + "-SIZEGT-" + String.valueOf(size)
-		};
-
 		return new CriterionImpl(
-			org.hibernate.criterion.Restrictions.sizeGe(propertyName, size),
-			arguments);
+			org.hibernate.criterion.Restrictions.sizeGe(propertyName, size));
 	}
 
 	public Criterion sizeLe(String propertyName, int size) {
-		String[] arguments = new String[] {
-			propertyName + "-SIZELE-" + String.valueOf(size)
-		};
-
 		return new CriterionImpl(
-			org.hibernate.criterion.Restrictions.sizeLe(propertyName, size),
-			arguments);
+			org.hibernate.criterion.Restrictions.sizeLe(propertyName, size));
 	}
 
 	public Criterion sizeLt(String propertyName, int size) {
-		String[] arguments = new String[] {
-			propertyName + "-SIZELT-" + String.valueOf(size)
-		};
-
 		return new CriterionImpl(
-			org.hibernate.criterion.Restrictions.sizeLt(propertyName, size),
-			arguments);
+			org.hibernate.criterion.Restrictions.sizeLt(propertyName, size));
 	}
 
 	public Criterion sizeNe(String propertyName, int size) {
-		String[] arguments = new String[] {
-			propertyName + "-SIZENE-" + String.valueOf(size)
-		};
-
 		return new CriterionImpl(
-			org.hibernate.criterion.Restrictions.sizeNe(propertyName, size),
-			arguments);
+			org.hibernate.criterion.Restrictions.sizeNe(propertyName, size));
 	}
 
 }

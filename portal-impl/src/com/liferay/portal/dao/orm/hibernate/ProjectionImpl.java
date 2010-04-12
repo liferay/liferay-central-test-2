@@ -15,7 +15,6 @@
 package com.liferay.portal.dao.orm.hibernate;
 
 import com.liferay.portal.kernel.dao.orm.Projection;
-import com.liferay.portal.kernel.util.StringPool;
 
 /**
  * <a href="ProjectionImpl.java.html"><b><i>View Source</i></b></a>
@@ -25,26 +24,13 @@ import com.liferay.portal.kernel.util.StringPool;
 public class ProjectionImpl implements Projection {
 
 	public ProjectionImpl(org.hibernate.criterion.Projection projection) {
-		_argument = StringPool.BLANK;
 		_projection = projection;
-	}
-
-	public ProjectionImpl(
-		org.hibernate.criterion.Projection projection, String argument) {
-
-		_argument = argument;
-		_projection = projection;
-	}
-
-	public String getArgument() {
-		return _argument;
 	}
 
 	public org.hibernate.criterion.Projection getWrappedProjection() {
 		return _projection;
 	}
 
-	private String _argument;
 	private org.hibernate.criterion.Projection _projection;
 
 }
