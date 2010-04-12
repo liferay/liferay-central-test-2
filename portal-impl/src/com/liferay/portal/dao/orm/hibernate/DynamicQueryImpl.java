@@ -20,7 +20,10 @@ import com.liferay.portal.kernel.dao.orm.Order;
 import com.liferay.portal.kernel.dao.orm.Projection;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.Session;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.ListUtil;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnmodifiableList;
 import com.liferay.portal.spring.hibernate.SessionInvocationHandler;
 
@@ -39,12 +42,21 @@ import org.hibernate.criterion.DetachedCriteria;
 public class DynamicQueryImpl implements DynamicQuery {
 
 	public DynamicQueryImpl(DetachedCriteria detachedCriteria) {
+		String[] arguments = new String[] {
+			"-ALIAS-" + detachedCriteria.getAlias()
+		};
+
+		_arguments = arguments;
 		_detachedCriteria = detachedCriteria;
 	}
 
 	public DynamicQuery add(Criterion criterion) {
 		CriterionImpl criterionImpl = (CriterionImpl)criterion;
 
+		String[] arguments = ArrayUtil.append(
+			_arguments, criterionImpl.getArguments());
+
+		_arguments = arguments;
 		_detachedCriteria.add(criterionImpl.getWrappedCriterion());
 
 		return this;
@@ -85,8 +97,16 @@ public class DynamicQueryImpl implements DynamicQuery {
 		_criteria = _criteria.setMaxResults(end - start);
 	}
 
+	public String[] getArguments() {
+		return _arguments;
+	}
+
 	public DetachedCriteria getDetachedCriteria() {
 		return _detachedCriteria;
+	}
+
+	public String getKey() {
+		return StringUtil.merge(_arguments, StringPool.UNDERLINE);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -114,11 +134,16 @@ public class DynamicQueryImpl implements DynamicQuery {
 	public DynamicQuery setProjection(Projection projection) {
 		ProjectionImpl projectionImpl = (ProjectionImpl)projection;
 
+		String[] arguments = ArrayUtil.append(
+			_arguments, projectionImpl.getArgument());
+
+		_arguments = arguments;
 		_detachedCriteria.setProjection(projectionImpl.getWrappedProjection());
 
 		return this;
 	}
 
+	private String[] _arguments;
 	private DetachedCriteria _detachedCriteria;
 	private Criteria _criteria;
 	private Integer _start;

@@ -24,13 +24,26 @@ import com.liferay.portal.kernel.dao.orm.Criterion;
 public class CriterionImpl implements Criterion {
 
 	public CriterionImpl(org.hibernate.criterion.Criterion criterion) {
+		_arguments = new String[0];
 		_criterion = criterion;
+	}
+
+	public CriterionImpl(
+		org.hibernate.criterion.Criterion criterion, String[] arguments) {
+
+		_arguments = arguments;
+		_criterion = criterion;
+	}
+
+	public String[] getArguments() {
+		return _arguments;
 	}
 
 	public org.hibernate.criterion.Criterion getWrappedCriterion() {
 		return _criterion;
 	}
 
+	private String[] _arguments;
 	private org.hibernate.criterion.Criterion _criterion;
 
 }
