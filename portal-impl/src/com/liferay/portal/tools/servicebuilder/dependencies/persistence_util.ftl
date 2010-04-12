@@ -4,11 +4,9 @@ import ${packagePath}.model.${entity.name};
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
-import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.SystemException;
 
 import java.util.Date;
-import java.util.List;
 
 /**
  * <a href="${entity.name}Util.java.html"><b><i>View Source</i></b></a>
@@ -30,20 +28,6 @@ public class ${entity.name}Util {
 	 */
 	public static void clearCache() {
 		getPersistence().clearCache();
-	}
-
-	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery)
-	 */
-	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery) throws SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery);
-	}
-
-	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery, int, int)
-	 */
-	public static List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery, int start, int end) throws SystemException {
-		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
 	/**

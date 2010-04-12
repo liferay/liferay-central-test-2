@@ -1572,9 +1572,7 @@ public class ServiceBuilder {
 	public boolean isBasePersistenceMethod(JavaMethod method) {
 		String methodName = method.getName();
 
-		if (methodName.equals("clearCache") ||
-			methodName.equals("findWithDynamicQuery")) {
-
+		if (methodName.equals("clearCache")) {
 			return true;
 		}
 		else if (methodName.equals("findByPrimaryKey") ||

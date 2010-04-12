@@ -34,6 +34,24 @@ public interface BasePersistence<T extends BaseModel<T>> {
 
 	public void clearCache();
 
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException;
+
+	public List<Object> dynamicQuery(
+			DynamicQuery dynamicQuery, int start, int end)
+		throws SystemException;
+
+	public List<Object> dynamicQuery(
+			DynamicQuery dynamicQuery, int start, int end,
+			OrderByComparator orderByComparator)
+		throws SystemException;
+
+	public int dynamicQueryCount(DynamicQuery dynamicQuery)
+		throws SystemException;
+
+	/**
+	 * @deprecated Use <code>dynamicQueryCount</code>.
+	 */
 	public int countWithDynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException;
 
@@ -42,13 +60,22 @@ public interface BasePersistence<T extends BaseModel<T>> {
 	public T findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException;
 
+	/**
+	 * @deprecated Use <code>dynamicQuery</code>.
+	 */
 	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException;
 
+	/**
+	 * @deprecated Use <code>dynamicQuery</code>.
+	 */
 	public List<Object> findWithDynamicQuery(
 			DynamicQuery dynamicQuery, int start, int end)
 		throws SystemException;
 
+	/**
+	 * @deprecated Use <code>dynamicQuery</code>.
+	 */
 	public List<Object> findWithDynamicQuery(
 			DynamicQuery dynamicQuery, int start, int end,
 			OrderByComparator orderByComparator)

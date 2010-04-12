@@ -25,6 +25,7 @@ import com.liferay.portal.kernel.dao.jdbc.MappingSqlQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.jdbc.RowMapper;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
@@ -165,6 +166,20 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 		FINDER_CLASS_NAME_LIST,
 		"countAll",
 		new String[0]);
+
+	public static final FinderPath FINDER_PATH_FIND_WITH_OBC_DYNAMIC_QUERY = new FinderPath(
+		${entity.name}ModelImpl.ENTITY_CACHE_ENABLED,
+		${entity.name}ModelImpl.FINDER_CACHE_ENABLED,
+		FINDER_CLASS_NAME_LIST,
+		"findWithDynamicQuery",
+		new String[] {String.class.getName(), Integer.class.getName(), Integer.class.getName(), OrderByComparator.class.getName()});
+
+	public static final FinderPath FINDER_PATH_COUNT_WITH_DYNAMIC_QUERY = new FinderPath(
+		${entity.name}ModelImpl.ENTITY_CACHE_ENABLED,
+		${entity.name}ModelImpl.FINDER_CACHE_ENABLED,
+		FINDER_CLASS_NAME_LIST,
+		"countWithDynamicQuery",
+		new String[] {String.class.getName()});
 
 	public void cacheResult(${entity.name} ${entity.varName}) {
 		EntityCacheUtil.putResult(${entity.name}ModelImpl.ENTITY_CACHE_ENABLED, ${entity.name}Impl.class, ${entity.varName}.getPrimaryKey(), ${entity.varName});
@@ -1306,6 +1321,32 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 		return list;
 	}
 
+	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery) throws SystemException {
+		return findWithDynamicQuery(dynamicQuery, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	}
+
+	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery, int start, int end) throws SystemException {
+		return findWithDynamicQuery(dynamicQuery, start, end, null);
+	}
+
+	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery, int start, int end, OrderByComparator orderByComparator) throws SystemException {
+		Object[] finderArgs = new Object[] {dynamicQuery.getKey(), String.valueOf(start), String.valueOf(end), String.valueOf(orderByComparator)};
+
+		List<?> list = (List<?>)FinderCacheUtil.getResult(FINDER_PATH_FIND_WITH_OBC_DYNAMIC_QUERY, finderArgs, this);
+
+		if (list == null) {
+			list = dynamicQuery(dynamicQuery, start, end, orderByComparator);
+
+			if (!list.isEmpty() && (list.get(0) instanceof ${entity.name})) {
+				cacheResult((List<${entity.name}>)list);
+			}
+
+			FinderCacheUtil.putResult(FINDER_PATH_FIND_WITH_OBC_DYNAMIC_QUERY, finderArgs, list);
+		}
+
+		return (List<Object>)list;
+	}
+
 	<#list entity.getFinderList() as finder>
 		<#assign finderColsList = finder.getColumns()>
 
@@ -1493,6 +1534,20 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 				closeSession(session);
 			}
+		}
+
+		return count.intValue();
+	}
+
+	public int countWithDynamicQuery(DynamicQuery dynamicQuery) throws SystemException {
+		Object[] finderArgs = new Object[] {dynamicQuery.getKey()};
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_WITH_DYNAMIC_QUERY, finderArgs, this);
+
+		if (count == null) {
+			count = new Long(dynamicQueryCount(dynamicQuery));
+
+			FinderCacheUtil.putResult(FINDER_PATH_COUNT_WITH_DYNAMIC_QUERY, finderArgs, count);
 		}
 
 		return count.intValue();
