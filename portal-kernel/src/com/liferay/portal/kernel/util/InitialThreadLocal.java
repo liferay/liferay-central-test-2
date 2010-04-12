@@ -17,27 +17,34 @@ package com.liferay.portal.kernel.util;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
-import java.lang.Cloneable;
 import java.lang.reflect.Method;
 
 /**
  * <a href="InitialThreadLocal.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Shuyang Zhou
  */
 public class InitialThreadLocal<T> extends ThreadLocal<T> {
 
 	public InitialThreadLocal(T initialValue) {
 		_initialValue = initialValue;
+
+		if (_initialValue instanceof Cloneable) {
+			try {
+				_cloneMethod = _initialValue.getClass().getMethod(
+					_METHOD_CLONE);
+			}
+			catch (Exception e) {
+				_log.error(e, e);
+			}
+		}
 	}
 
 	protected T initialValue() {
-		if (_initialValue instanceof Cloneable) {
+		if (_cloneMethod != null) {
 			try {
-				Method method = _initialValue.getClass().getMethod(
-					_METHOD_CLONE);
-
-				return (T)method.invoke(_initialValue);
+				return (T)_cloneMethod.invoke(_initialValue);
 			}
 			catch (Exception e) {
 				_log.error(e, e);
@@ -50,6 +57,8 @@ public class InitialThreadLocal<T> extends ThreadLocal<T> {
 	private static final String _METHOD_CLONE = "clone";
 
 	private static Log _log = LogFactoryUtil.getLog(InitialThreadLocal.class);
+
+	private Method _cloneMethod;
 
 	private T _initialValue;
 
