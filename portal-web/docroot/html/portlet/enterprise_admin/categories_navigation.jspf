@@ -55,7 +55,7 @@ for (int i = 0; i < categoryNames.length; i++) {
 
 					String cssClass = StringPool.BLANK;
 
-					if (curSection.equals(section)) {
+					if (curSection.equals(section) || curSection.equals(sectionId)) {
 						cssClass += "selected";
 					}
 

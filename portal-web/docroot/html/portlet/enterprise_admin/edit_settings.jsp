@@ -28,6 +28,12 @@ String[] allSections = ArrayUtil.append(configurationSections, ArrayUtil.append(
 String[][] categorySections = {configurationSections, identificationSections, miscellaneousSections};
 
 String curSection = configurationSections[0];
+
+String historyKey = ParamUtil.getString(request, "history_key", "");
+
+if (Validator.isNotNull(historyKey)) {
+	curSection = historyKey;
+}
 %>
 
 <div id="<portlet:namespace />sectionsContainer">
@@ -51,7 +57,7 @@ String curSection = configurationSections[0];
 				String sectionJsp = "/html/portlet/enterprise_admin/settings/" + _getSectionJsp(section) + ".jsp";
 			%>
 
-				<div class="form-section <%= curSection.equals(section)? "selected" : "aui-helper-hidden-accessible" %>" id="<%= sectionId %>">
+				<div class="form-section <%= curSection.equals(section) || curSection.equals(sectionId) ? "selected" : "aui-helper-hidden-accessible" %>" id="<%= sectionId %>">
 					<liferay-util:include page="<%= sectionJsp %>" />
 				</div>
 

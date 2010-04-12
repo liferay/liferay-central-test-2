@@ -27,16 +27,16 @@ AUI().add(
 
 			instance._container = A.one(options.container);
 
-			instance._navigation = instance._container.all('.form-navigation');
+			instance._navigation = instance._container.one('.form-navigation');
 			instance._sections = instance._container.all('.form-section');
 
 			if (instance._navigation) {
-				instance._navigation.all('li a').on(
+				instance._navigation.delegate(
 					'click',
 					function(event) {
 						event.preventDefault();
 
-						var target = event.target;
+						var target = event.currentTarget;
 						var li = target.get('parentNode');
 
 						if (li && !li.test('.selected')) {
@@ -45,10 +45,11 @@ AUI().add(
 							var currentSection = target.attr('href').split('#');
 
 							if (currentSection[1]) {
-								location.hash = instance._hashKey + currentSection[1];
+								A.later(0, instance, instance._updateHash, [currentSection[1]]);
 							}
 						}
-					}
+					},
+					'li a'
 				);
 			}
 
@@ -56,7 +57,7 @@ AUI().add(
 				instance._modifiedSections = A.all('[name=' + options.modifiedSections+ ']');
 
 				if (!instance._modifiedSections) {
-					instance._modifiedSections = A.Node.create('<input name="' + options.modifiedSections+ '" type="hidden" />')
+					instance._modifiedSections = A.Node.create('<input name="' + options.modifiedSections + '" type="hidden" />')
 					instance._container.append(instance._modifiedSections);
 				}
 			}
@@ -102,35 +103,70 @@ AUI().add(
 		};
 
 		FormNavigator.prototype = {
+			_addModifiedSection: function (section) {
+				var instance = this;
+
+				if (A.Array.indexOf(section, instance._modifiedSectionsArray) == -1) {
+					instance._modifiedSectionsArray.push(section);
+				}
+			},
+
+			_getId: function(id) {
+				var instance = this;
+
+				id = id || '';
+
+				if (id.indexOf('#') > -1) {
+					id = id.split('#')[1] || '';
+
+					id = id.replace(instance._hashKey, '');
+				}
+				else if (id.indexOf('history_key=') > -1) {
+					var idRE = new RegExp(instance._hashKey + '([^&#]+)');
+
+					id = id.match(idRE);
+					id = id && id[1];
+				}
+				else {
+					id = '';
+				}
+
+				return id;
+			},
+
 			_revealSection: function(id, currentNavItem) {
 				var instance = this;
 
-				id = id.replace(instance._hashKey, '');
+				id = instance._getId(id);
 
-				var li = currentNavItem || instance._navigation.one('[href$=' + id + ']').get('parentNode');
+				if (id) {
+					id = id.charAt(0) != '#' ? '#' + id : id;
 
-				id = id.split('#');
+					var li = currentNavItem || instance._navigation.one('[href$=' + id + ']').get('parentNode');
 
-				if (!id[1]) {
-					return;
+					id = id.split('#');
+
+					if (!id[1]) {
+						return;
+					}
+
+					id = '#' + id[1];
+
+					var section = A.one(id);
+					var selected = instance._navigation.all('.selected');
+
+					if (selected) {
+						selected.removeClass('selected');
+					}
+
+					instance._sections.removeClass('selected').hide('aui-helper-hidden-accessible');
+
+					if (section) {
+						section.addClass('selected').show('aui-helper-hidden-accessible');
+					}
+
+					li.addClass('selected');
 				}
-
-				id = '#' + id[1];
-
-				var section = A.one(id);
-				var selected = instance._navigation.all('.selected');
-
-				if (selected) {
-					selected.removeClass('selected');
-				}
-
-				instance._sections.removeClass('selected').hide('aui-helper-hidden-accessible');
-
-				if (section) {
-					section.addClass('selected').show('aui-helper-hidden-accessible');
-				}
-
-				li.addClass('selected');
 			},
 
 			_trackChanges: function(el) {
@@ -147,12 +183,10 @@ AUI().add(
 				instance._addModifiedSection(currentSection);
 			},
 
-			_addModifiedSection: function (section) {
+			_updateHash: function(section) {
 				var instance = this;
 
-				if (A.Array.indexOf(section, instance._modifiedSectionsArray) == -1) {
-					instance._modifiedSectionsArray.push(section);
-				}
+				location.hash = instance._hashKey + section;
 			},
 
 			_hashKey: '_LFR_FN_'
