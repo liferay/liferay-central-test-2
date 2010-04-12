@@ -55,12 +55,12 @@ public class ComboServlet extends HttpServlet {
 			return;
 		}
 
-		String content = null;
+		byte[] content = null;
 
 		File cacheFile = getCacheFile(request);
 
 		if (cacheFile.exists()) {
-			content = FileUtil.read(cacheFile);
+			content = FileUtil.getBytes(cacheFile);
 		}
 		else {
 			StringBundler sb = new StringBundler(parameterMap.size());
@@ -75,7 +75,7 @@ public class ComboServlet extends HttpServlet {
 				}
 			}
 
-			content = sb.toString();
+			content = sb.toString().getBytes();
 
 			if (Validator.isNotNull(content)) {
 				FileUtil.write(cacheFile, content);
