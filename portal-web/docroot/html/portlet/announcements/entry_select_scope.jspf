@@ -20,7 +20,7 @@
 	</c:if>
 
 	<%
-	List<Group> groups = GroupLocalServiceUtil.getUserGroups(user.getUserId());
+	List<Group> groups = GroupLocalServiceUtil.getUserGroups(user.getUserId(), true);
 	%>
 
 	<c:if test="<%= !groups.isEmpty() %>">
