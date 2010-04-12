@@ -267,7 +267,9 @@ public class FileSystemHook extends BaseHook {
 
 		String[] fileNames = FileUtil.listDirs(repistoryDir);
 
-		for (String fileName : fileNames) {
+		for (int i = 0; i < fileNames.length; i++) {
+			String fileName = fileNames[i];
+
 			try {
 				Indexer indexer = IndexerRegistryUtil.getIndexer(
 					FileModel.class);
@@ -371,16 +373,7 @@ public class FileSystemHook extends BaseHook {
 				companyId, repositoryId, fileName, versionNumber);
 
 			if (fileNameVersionFile.exists()) {
-				String extension =
-					StringPool.PERIOD + System.currentTimeMillis() + _ORPHAN;
-
-				_log.warn(
-					"An orphaned version " + fileNameVersionFile.getPath() +
-						" was found. It will be saved to " +
-							fileNameVersionFile.getPath() + extension);
-
-				fileNameVersionFile.renameTo(
-					new File(fileNameVersionFile.getPath() + extension));
+				throw new DuplicateFileException(fileNameVersionFile.getPath());
 			}
 
 			FileUtil.write(fileNameVersionFile, is);
@@ -480,8 +473,6 @@ public class FileSystemHook extends BaseHook {
 
 		return repositoryDir;
 	}
-
-	private static final String _ORPHAN = ".orphan";
 
 	private static final String _ROOT_DIR = PropsUtil.get(
 		PropsKeys.DL_HOOK_FILE_SYSTEM_ROOT_DIR);
