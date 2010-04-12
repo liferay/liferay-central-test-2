@@ -59,7 +59,6 @@ public class InitialThreadLocal<T> extends ThreadLocal<T> {
 	private static Log _log = LogFactoryUtil.getLog(InitialThreadLocal.class);
 
 	private Method _cloneMethod;
-
 	private T _initialValue;
 
 }
