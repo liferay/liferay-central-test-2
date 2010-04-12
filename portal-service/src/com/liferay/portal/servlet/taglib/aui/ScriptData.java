@@ -33,7 +33,9 @@ public class ScriptData {
 			_rawSB.append(content);
 		}
 		else {
-			_callbackSB.append("(function() {" + content + "})();");
+			_callbackSB.append("(function() {");
+			_callbackSB.append(content);
+			_callbackSB.append("})();");
 
 			String[] useArray = StringUtil.split(use);
 
