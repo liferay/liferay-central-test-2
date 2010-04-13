@@ -44,7 +44,7 @@ public class HotDeployMessageListener implements MessageListener {
 			if (command.equals("deploy")) {
 				_log.debug(servletContextName + " was deployed");
 			}
-			else if (command.equals("deploy")) {
+			else if (command.equals("undeploy")) {
 				_log.debug(servletContextName + " was undeployed");
 			}
 		}
