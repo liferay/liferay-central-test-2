@@ -48,7 +48,7 @@ String portletResource = ParamUtil.getString(request, "portletResource");
 if (Validator.isNotNull(portletResource)) {
 	preferences = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
 }
-else if (layout.getGroup().getName().equals(GroupConstants.CONTROL_PANEL)) {
+else if (layout.isTypeControlPanel()) {
 	preferences = PortletPreferencesLocalServiceUtil.getPreferences(themeDisplay.getCompanyId(), scopeGroupId, PortletKeys.PREFS_OWNER_TYPE_GROUP, 0, PortletKeys.BOOKMARKS, null);
 }
 

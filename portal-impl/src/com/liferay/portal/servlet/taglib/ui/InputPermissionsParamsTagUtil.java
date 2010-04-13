@@ -20,7 +20,6 @@ import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Group;
-import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.RoleConstants;
@@ -60,7 +59,7 @@ public class InputPermissionsParamsTagUtil {
 			ResourceActionsUtil.getModelResourceGuestDefaultActions(
 				modelName);
 
-		if (layoutGroup.getName().equals(GroupConstants.CONTROL_PANEL)) {
+		if (layoutGroup.isControlPanel()) {
 			Group group = themeDisplay.getScopeGroup();
 
 			if (!group.hasPrivateLayouts() &&

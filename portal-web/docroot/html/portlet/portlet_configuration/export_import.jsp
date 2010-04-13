@@ -43,7 +43,7 @@ boolean supportsSetup = Validator.isNotNull(selPortlet.getConfigurationActionCla
 
 boolean controlPanel = false;
 
-if (layout.getGroup().getName().equals(GroupConstants.CONTROL_PANEL)) {
+if (layout.isTypeControlPanel()) {
 	supportsSetup = false;
 
 	controlPanel = true;

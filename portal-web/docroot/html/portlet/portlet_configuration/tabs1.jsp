@@ -126,6 +126,6 @@ PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "con
 PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, tabs1), currentURL);
 %>
 
-<c:if test="<%= !layout.getGroup().getName().equals(GroupConstants.CONTROL_PANEL) %>">
+<c:if test="<%= !layout.isTypeControlPanel() %>">
 	<liferay-ui:tabs names="<%= tabs1Names %>" />
 </c:if>

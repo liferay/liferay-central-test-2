@@ -296,7 +296,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 					true, null);
 			}
 
-			if (group.getName().equals(GroupConstants.CONTROL_PANEL)) {
+			if (group.isControlPanel()) {
 				LayoutSet layoutSet = layoutSetLocalService.getLayoutSet(
 					group.getGroupId(), true);
 

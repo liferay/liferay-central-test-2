@@ -281,7 +281,7 @@ if (!portletId.equals(PortletKeys.PORTLET_CONFIGURATION)) {
 		boolean supportsLAR = Validator.isNotNull(portlet.getPortletDataHandlerClass());
 		boolean supportsSetup = Validator.isNotNull(portlet.getConfigurationActionClass());
 
-		if (supportsLAR || (supportsSetup && !group.getName().equals(GroupConstants.CONTROL_PANEL))) {
+		if (supportsLAR || (supportsSetup && !group.isControlPanel())) {
 			showExportImportIcon = true;
 		}
 
@@ -725,7 +725,7 @@ if (themeDisplay.isWidget()) {
 	portletDisplay.setShowBackIcon(false);
 }
 
-if (group.getName().equals(GroupConstants.CONTROL_PANEL)) {
+if (group.isControlPanel()) {
 	portletDisplay.setShowBackIcon(false);
 	portletDisplay.setShowConfigurationIcon(false);
 	portletDisplay.setShowMaxIcon(false);

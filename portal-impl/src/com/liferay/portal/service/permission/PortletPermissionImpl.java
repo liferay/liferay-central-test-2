@@ -19,7 +19,6 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.model.Group;
-import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletConstants;
@@ -148,7 +147,7 @@ public class PortletPermissionImpl implements PortletPermission {
 				Group group = GroupLocalServiceUtil.getGroup(
 					layout.getGroupId());
 
-				if (group.getName().equals(GroupConstants.CONTROL_PANEL)) {
+				if (group.isControlPanel()) {
 					return true;
 				}
 			}

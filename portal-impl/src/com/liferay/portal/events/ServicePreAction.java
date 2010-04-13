@@ -690,7 +690,7 @@ public class ServicePreAction extends Action {
 
 		// Control panel layouts are only viewable by authenticated users
 
-		if (group.getName().equals(GroupConstants.CONTROL_PANEL)) {
+		if (group.isControlPanel()) {
 			if (user.isDefaultUser()) {
 				return false;
 			}
@@ -1199,7 +1199,7 @@ public class ServicePreAction extends Action {
 						layout.getGroupId(), layout.isPrivateLayout(),
 						LayoutConstants.DEFAULT_PARENT_LAYOUT_ID);
 
-					if (!group.getName().equals(GroupConstants.CONTROL_PANEL)) {
+					if (!group.isControlPanel()) {
 						doAsGroupId = 0;
 					}
 				}
@@ -1230,7 +1230,7 @@ public class ServicePreAction extends Action {
 		if (layout != null) {
 			group = layout.getGroup();
 
-			if (!group.getName().equals(GroupConstants.CONTROL_PANEL)) {
+			if (!group.isControlPanel()) {
 				rememberVisitedGroupIds(request, group.getGroupId());
 			}
 		}
@@ -1358,7 +1358,7 @@ public class ServicePreAction extends Action {
 		boolean wapTheme = BrowserSnifferUtil.isWap(request);
 
 		if ((layout != null) &&
-			group.getName().equals(GroupConstants.CONTROL_PANEL)) {
+			group.isControlPanel()) {
 
 			String themeId = PrefsPropsUtil.getString(
 				companyId, PropsKeys.CONTROL_PANEL_LAYOUT_REGULAR_THEME_ID);
@@ -1643,7 +1643,7 @@ public class ServicePreAction extends Action {
 				themeDisplay.setURLPublishToLive(null);
 			}
 
-			if (group.getName().equals(GroupConstants.CONTROL_PANEL)) {
+			if (group.isControlPanel()) {
 				themeDisplay.setShowPageSettingsIcon(false);
 				themeDisplay.setURLPublishToLive(null);
 			}

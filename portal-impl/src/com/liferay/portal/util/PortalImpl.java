@@ -1774,7 +1774,7 @@ public class PortalImpl implements Portal {
 					}
 				}
 
-				if (layout.getGroup().getName().equals(GroupConstants.CONTROL_PANEL)) {
+				if (layout.isTypeControlPanel()) {
 					if (Validator.isNotNull(themeDisplay.getDoAsGroupId())) {
 						layoutFriendlyURL = HttpUtil.addParameter(
 							layoutFriendlyURL, "doAsGroupId",
@@ -1809,7 +1809,7 @@ public class PortalImpl implements Portal {
 			}
 		}
 
-		if (layout.getGroup().getName().equals(GroupConstants.CONTROL_PANEL)) {
+		if (layout.isTypeControlPanel()) {
 			if (Validator.isNotNull(themeDisplay.getDoAsGroupId())) {
 				layoutURL = HttpUtil.addParameter(
 					layoutURL, "doAsGroupId", themeDisplay.getDoAsGroupId());
@@ -2528,7 +2528,7 @@ public class PortalImpl implements Portal {
 		if (layout != null) {
 			Group group = layout.getGroup();
 
-			if (group.getName().equals(GroupConstants.CONTROL_PANEL)) {
+			if (group.isControlPanel()) {
 				long doAsGroupId = ParamUtil.getLong(request, "doAsGroupId");
 
 				if (doAsGroupId <= 0) {
