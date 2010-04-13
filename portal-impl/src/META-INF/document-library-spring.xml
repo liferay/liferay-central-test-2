@@ -10,63 +10,9 @@
 >
 	<bean id="com.liferay.documentlibrary.service.DLLocalService" class="com.liferay.documentlibrary.service.impl.DLLocalServiceImpl" />
 	<bean id="com.liferay.documentlibrary.service.DLService" class="com.liferay.documentlibrary.service.impl.DLServiceImpl" />
-
-	<!-- Advice -->
-
-	<aop:config>
-		<aop:aspect ref="messagingProxyAdvice">
-			<aop:around pointcut="bean(com.liferay.documentlibrary.util.HookProxyBean)" method="invoke" />
-		</aop:aspect>
-	</aop:config>
-
-	<!-- Proxy -->
-
-	<bean id="com.liferay.documentlibrary.util.HookProxyBean" class="com.liferay.documentlibrary.util.HookProxyBean">
-		<property name="singleDestinationSynchronousMessageSender">
-			<bean class="com.liferay.portal.kernel.messaging.sender.DefaultSingleDestinationSynchronousMessageSender">
-				<property name="destinationName" value="liferay/document_library_hook" />
-				<property name="synchronousMessageSender" ref="com.liferay.portal.kernel.messaging.sender.SynchronousMessageSender" />
-			</bean>
-		</property>
-		<property name="singleDestinationMessageSender">
-			<bean class="com.liferay.portal.kernel.messaging.sender.DefaultSingleDestinationMessageSender">
-				<property name="destinationName" value="liferay/document_library_hook" />
-				<property name="messageSender" ref="com.liferay.portal.kernel.messaging.sender.MessageSender" />
-			</bean>
-		</property>
-	</bean>
-
-	<!-- Messaging -->
-
-	<bean id="destination.document_library_hook" class="com.liferay.portal.kernel.messaging.ParallelDestination">
-		<property name="name" value="liferay/document_library_hook" />
-	</bean>
-	<bean id="messageListener.document_library_hook" class="com.liferay.portal.kernel.messaging.proxy.ProxyMessageListener">
-		<property name="manager">
-			<bean class="com.liferay.documentlibrary.util.SafeFileNameHookWrapper">
-				<constructor-arg>
-					<bean class="com.liferay.documentlibrary.util.HookProxyImpl" />
-				</constructor-arg>
-			</bean>
-		</property>
-	</bean>
-	<bean id="messagingConfigurator.document_library" class="com.liferay.portal.kernel.messaging.config.DefaultMessagingConfigurator">
-		<property name="destinations">
-			<list>
-				<ref bean="destination.document_library_hook" />
-			</list>
-		</property>
-		<property name="messageBus">
-			<ref bean="com.liferay.portal.kernel.messaging.MessageBus" />
-		</property>
-		<property name="messageListeners">
-			<map key-type="java.lang.String" value-type="java.util.List">
-				<entry key="liferay/document_library_hook">
-					<list value-type="com.liferay.portal.kernel.messaging.MessageListener">
-						<ref bean="messageListener.document_library_hook" />
-					</list>
-				</entry>
-			</map>
-		</property>
+	<bean id="com.liferay.documentlibrary.util.Hook" class="com.liferay.documentlibrary.util.SafeFileNameHookWrapper">
+		<constructor-arg>
+			<bean class="com.liferay.documentlibrary.util.HookProxyImpl" />
+		</constructor-arg>
 	</bean>
 </beans>

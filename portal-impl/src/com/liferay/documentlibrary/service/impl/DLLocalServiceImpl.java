@@ -325,14 +325,13 @@ public class DLLocalServiceImpl implements DLLocalService {
 		}
 	}
 
-	@BeanReference(name = "com.liferay.portal.service.GroupLocalService")
+	@BeanReference(type = GroupLocalService.class)
 	protected GroupLocalService groupLocalService;
 
-	@BeanReference(
-		name = "com.liferay.portlet.documentlibrary.service.DLFolderService")
+	@BeanReference(type = DLFolderService.class)
 	protected DLFolderService dlFolderService;
 
-	@BeanReference(name = "com.liferay.documentlibrary.util.HookProxyBean")
+	@BeanReference(type = Hook.class)
 	protected Hook hook;
 
 }

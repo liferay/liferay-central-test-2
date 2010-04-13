@@ -16,8 +16,6 @@ package com.liferay.documentlibrary.util;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.messaging.proxy.MessagingProxy;
-import com.liferay.portal.kernel.messaging.proxy.ProxyMode;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.service.ServiceContext;
 
@@ -26,7 +24,6 @@ import java.io.InputStream;
 
 import java.util.Date;
 
-@MessagingProxy(mode = ProxyMode.SYNC)
 /**
  * <a href="Hook.java.html"><b><i>View Source</i></b></a>
  *

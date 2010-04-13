@@ -190,10 +190,10 @@ public class DLServiceImpl implements DLService {
 			reindex);
 	}
 
-	@BeanReference(name = "com.liferay.documentlibrary.service.DLLocalService")
+	@BeanReference(type = DLLocalService.class)
 	protected DLLocalService dlLocalService;
 
-	@BeanReference(name = "com.liferay.documentlibrary.util.HookProxyBean")
+	@BeanReference(type = Hook.class)
 	protected Hook hook;
 
 }
