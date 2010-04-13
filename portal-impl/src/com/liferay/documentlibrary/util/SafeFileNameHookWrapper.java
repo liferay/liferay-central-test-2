@@ -42,7 +42,7 @@ public class SafeFileNameHookWrapper implements Hook {
 
 		String safeDirName = FileUtil.encodeSafeFileName(dirName);
 
-		if (!safeDirName.equals(dirName)) {
+		if ((safeDirName != null) && !safeDirName.equals(dirName)) {
 			try {
 				_hook.move(dirName, safeDirName);
 			}
@@ -114,7 +114,7 @@ public class SafeFileNameHookWrapper implements Hook {
 
 		String safeDirName = FileUtil.encodeSafeFileName(dirName);
 
-		if (!safeDirName.equals(dirName)) {
+		if ((safeDirName != null) && !safeDirName.equals(dirName)) {
 			try {
 				_hook.deleteDirectory(
 					companyId, portletId, repositoryId, dirName);
@@ -135,7 +135,7 @@ public class SafeFileNameHookWrapper implements Hook {
 
 		String safeFileName = FileUtil.encodeSafeFileName(fileName);
 
-		if (!safeFileName.equals(fileName) &&
+		if ((safeFileName != null) && !safeFileName.equals(fileName) &&
 			_hook.hasFile(
 				companyId, repositoryId, fileName,
 				DLFileEntryConstants.DEFAULT_VERSION)) {
@@ -155,7 +155,7 @@ public class SafeFileNameHookWrapper implements Hook {
 
 		String safeFileName = FileUtil.encodeSafeFileName(fileName);
 
-		if (!safeFileName.equals(fileName) &&
+		if ((safeFileName != null) && !safeFileName.equals(fileName) &&
 			_hook.hasFile(
 				companyId, repositoryId, fileName, versionNumber)) {
 
@@ -174,7 +174,7 @@ public class SafeFileNameHookWrapper implements Hook {
 
 		String safeFileName = FileUtil.encodeSafeFileName(fileName);
 
-		if (!safeFileName.equals(fileName) &&
+		if ((safeFileName != null) && !safeFileName.equals(fileName) &&
 			_hook.hasFile(
 				companyId, repositoryId, fileName,
 				DLFileEntryConstants.DEFAULT_VERSION)) {
@@ -192,7 +192,7 @@ public class SafeFileNameHookWrapper implements Hook {
 
 		String safeFileName = FileUtil.encodeSafeFileName(fileName);
 
-		if (!safeFileName.equals(fileName) &&
+		if ((safeFileName != null) && !safeFileName.equals(fileName) &&
 			_hook.hasFile(companyId, repositoryId, fileName, versionNumber)) {
 
 			return _hook.getFile(
@@ -209,7 +209,7 @@ public class SafeFileNameHookWrapper implements Hook {
 
 		String safeFileName = FileUtil.encodeSafeFileName(fileName);
 
-		if (!safeFileName.equals(fileName) &&
+		if ((safeFileName != null) && !safeFileName.equals(fileName) &&
 			_hook.hasFile(
 				companyId, repositoryId, fileName,
 				DLFileEntryConstants.DEFAULT_VERSION)) {
@@ -227,7 +227,7 @@ public class SafeFileNameHookWrapper implements Hook {
 
 		String safeFileName = FileUtil.encodeSafeFileName(fileName);
 
-		if (!safeFileName.equals(fileName) &&
+		if ((safeFileName != null) && !safeFileName.equals(fileName) &&
 			_hook.hasFile(
 				companyId, repositoryId, fileName, versionNumber)) {
 
@@ -245,7 +245,7 @@ public class SafeFileNameHookWrapper implements Hook {
 
 		String safeDirName = FileUtil.encodeSafeFileName(dirName);
 
-		if (!safeDirName.equals(dirName)) {
+		if ((safeDirName != null) && !safeDirName.equals(dirName)) {
 			try {
 				_hook.move(dirName, safeDirName);
 			}
@@ -271,7 +271,7 @@ public class SafeFileNameHookWrapper implements Hook {
 
 		String safeFileName = FileUtil.encodeSafeFileName(fileName);
 
-		if (!safeFileName.equals(fileName) &&
+		if ((safeFileName != null) && !safeFileName.equals(fileName) &&
 			_hook.hasFile(
 				companyId, repositoryId, fileName,
 				DLFileEntryConstants.DEFAULT_VERSION)) {
@@ -289,7 +289,7 @@ public class SafeFileNameHookWrapper implements Hook {
 
 		String safeFileName = FileUtil.encodeSafeFileName(fileName);
 
-		if (!safeFileName.equals(fileName) &&
+		if ((safeFileName != null) && !safeFileName.equals(fileName) &&
 			_hook.hasFile(companyId, repositoryId, fileName, versionNumber)) {
 
 			return true;
@@ -331,7 +331,7 @@ public class SafeFileNameHookWrapper implements Hook {
 		String safeFileName = FileUtil.encodeSafeFileName(fileName);
 		String safeNewFileName = FileUtil.encodeSafeFileName(newFileName);
 
-		if (!safeFileName.equals(fileName)) {
+		if ((safeFileName != null) && !safeFileName.equals(fileName)) {
 			if (_hook.hasFile(
 					companyId, repositoryId, fileName,
 					DLFileEntryConstants.DEFAULT_VERSION)) {
@@ -419,7 +419,7 @@ public class SafeFileNameHookWrapper implements Hook {
 			String fileName, String safeFileName)
 		throws PortalException, SystemException {
 
-		if (!safeFileName.equals(fileName)) {
+		if ((safeFileName != null) && !safeFileName.equals(fileName)) {
 			if (_hook.hasFile(
 					companyId, repositoryId, fileName,
 					DLFileEntryConstants.DEFAULT_VERSION)) {
