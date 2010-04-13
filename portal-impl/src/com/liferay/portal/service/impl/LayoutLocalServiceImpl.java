@@ -471,7 +471,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 				groupId, privateLayout);
 
 			for (Layout layout : layouts) {
-				if (layout.getType().equals(LayoutConstants.TYPE_PORTLET)) {
+				if (layout.isTypePortlet()) {
 					LayoutTypePortlet layoutTypePortlet =
 						(LayoutTypePortlet)layout.getLayoutType();
 

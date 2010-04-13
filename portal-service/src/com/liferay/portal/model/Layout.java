@@ -54,6 +54,20 @@ public interface Layout extends LayoutModel {
 
 	public boolean isPublicLayout();
 
+	public boolean isTypeArticle();
+
+	public boolean isTypeControlPanel();
+
+	public boolean isTypeEmbedded();
+
+	public boolean isTypeLinkToLayout();
+
+	public boolean isTypePanel();
+
+	public boolean isTypePortlet();
+
+	public boolean isTypeURL();
+
 	public long getAncestorPlid()
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;

@@ -1753,7 +1753,7 @@ public class PortalImpl implements Portal {
 			return themeDisplay.getPathMain() + PATH_PORTAL_LAYOUT;
 		}
 
-		if (!layout.getType().equals(LayoutConstants.TYPE_URL)) {
+		if (!layout.isTypeURL()) {
 			String layoutFriendlyURL = getLayoutFriendlyURL(
 				layout, themeDisplay);
 

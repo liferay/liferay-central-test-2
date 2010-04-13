@@ -34,7 +34,6 @@ import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
-import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutTypePortletConstants;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletConstants;
@@ -271,7 +270,7 @@ public class CacheFilter extends BasePortalFilter {
 
 			Layout layout = LayoutLocalServiceUtil.getLayout(plid);
 
-			if (!layout.getType().equals(LayoutConstants.TYPE_PORTLET)) {
+			if (!layout.isTypePortlet()) {
 				return false;
 			}
 

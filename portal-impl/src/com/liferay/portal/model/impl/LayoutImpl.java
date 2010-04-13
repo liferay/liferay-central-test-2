@@ -166,6 +166,69 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 		return !isPrivateLayout();
 	}
 
+	public boolean isTypeArticle() {
+		if (getType().equals(LayoutConstants.TYPE_ARTICLE)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public boolean isTypeControlPanel() {
+		if (getType().equals(LayoutConstants.TYPE_CONTROL_PANEL)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public boolean isTypeEmbedded() {
+		if (getType().equals(LayoutConstants.TYPE_EMBEDDED)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public boolean isTypeLinkToLayout() {
+		if (getType().equals(LayoutConstants.TYPE_LINK_TO_LAYOUT)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public boolean isTypePanel() {
+		if (getType().equals(LayoutConstants.TYPE_PANEL)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public boolean isTypePortlet() {
+		if (getType().equals(LayoutConstants.TYPE_PORTLET)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public boolean isTypeURL() {
+		if (getType().equals(LayoutConstants.TYPE_URL)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	public long getAncestorPlid() throws PortalException, SystemException {
 		long plid = 0;
 

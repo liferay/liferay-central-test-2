@@ -17,7 +17,7 @@
 <%@ include file="/html/portlet/layout_configuration/init.jsp" %>
 
 <c:choose>
-	<c:when test="<%= themeDisplay.isSignedIn() && (layout != null) && (layout.getType().equals(LayoutConstants.TYPE_PORTLET) || layout.getType().equals(LayoutConstants.TYPE_PANEL)) %>">
+	<c:when test="<%= themeDisplay.isSignedIn() && (layout != null) && (layout.isTypePortlet() || layout.isTypePanel()) %>">
 
 		<%
 		PortletURL refererURL = renderResponse.createActionURL();
@@ -33,7 +33,7 @@
 					<aui:input name="<%= WebKeys.REFERER %>" type="hidden" value="<%= refererURL.toString() %>" />
 					<aui:input name="refresh" type="hidden" value="<%= true %>" />
 
-					<c:if test="<%= layout.getType().equals(LayoutConstants.TYPE_PORTLET) %>">
+					<c:if test="<%= layout.isTypePortlet() %>">
 						<div class="portal-add-content-search">
 							<span id="portal_add_content_title"><liferay-ui:message key="search-applications-searches-as-you-type" /></span>
 
@@ -74,7 +74,7 @@
 					}
 					%>
 
-					<c:if test="<%= layout.getType().equals(LayoutConstants.TYPE_PORTLET) %>">
+					<c:if test="<%= layout.isTypePortlet() %>">
 						<div class="portlet-msg-info">
 							<liferay-ui:message key="to-add-a-portlet-to-the-page-just-drag-it" />
 						</div>
@@ -101,7 +101,7 @@
 			</div>
 		</div>
 	</c:when>
-	<c:when test="<%= themeDisplay.isSignedIn() && (layout != null) && (layout.getType().equals(LayoutConstants.TYPE_CONTROL_PANEL)) %>">
+	<c:when test="<%= themeDisplay.isSignedIn() && (layout != null) && (layout.isTypeControlPanel()) %>">
 		<liferay-util:include page="/html/portlet/layout_configuration/view_control_panel_menu.jsp" />
 	</c:when>
 </c:choose>
@@ -129,10 +129,10 @@ private static PortletCategory _getRelevantPortletCategory(PortletCategory portl
 				}
 				else if (!portlet.isActive() || portlet.isUndeployedPortlet()) {
 				}
-				else if (layout.getType().equals(LayoutConstants.TYPE_PANEL) && panelSelectedPortlets.contains(portlet.getRootPortletId())) {
+				else if (layout.isTypePanel() && panelSelectedPortlets.contains(portlet.getRootPortletId())) {
 					portletIds.add(portlet.getPortletId());
 				}
-				else if (layout.getType().equals(LayoutConstants.TYPE_PANEL) && !panelSelectedPortlets.contains(portlet.getRootPortletId())) {
+				else if (layout.isTypePanel() && !panelSelectedPortlets.contains(portlet.getRootPortletId())) {
 				}
 				else if (!portlet.hasAddPortletPermission(user.getUserId())) {
 				}

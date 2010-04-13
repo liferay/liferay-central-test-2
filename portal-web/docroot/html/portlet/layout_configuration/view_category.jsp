@@ -80,12 +80,12 @@ portlets = ListUtil.sort(portlets, new PortletTitleComparator(application, local
 if (!categories.isEmpty() || !portlets.isEmpty()) {
 %>
 
-	<div class="lfr-add-content <%= (layout.getType().equals(LayoutConstants.TYPE_PORTLET)) ? "collapsed" : "" %>" id="<portlet:namespace />portletCategory<%= portletCategoryIndex %>">
+	<div class="lfr-add-content <%= (layout.isTypePortlet()) ? "collapsed" : "" %>" id="<portlet:namespace />portletCategory<%= portletCategoryIndex %>">
 		<h2>
 			<span><%= Validator.isNotNull(externalPortletCategory) ? externalPortletCategory : LanguageUtil.get(pageContext, portletCategory.getName()) %></span>
 		</h2>
 
-		<div class="lfr-content-category <%= (layout.getType().equals(LayoutConstants.TYPE_PORTLET)) ? "aui-helper-hidden" : "" %>">
+		<div class="lfr-content-category <%= (layout.isTypePortlet()) ? "aui-helper-hidden" : "" %>">
 
 			<%
 			itr = categories.iterator();
@@ -124,13 +124,13 @@ if (!categories.isEmpty() || !portlets.isEmpty()) {
 				boolean portletUsed = layoutTypePortlet.hasPortletId(portlet.getPortletId());
 				boolean portletLocked = (!portletInstanceable && portletUsed);
 
-				if (portletInstanceable && layout.getType().equals(LayoutConstants.TYPE_PANEL)) {
+				if (portletInstanceable && layout.isTypePanel()) {
 					continue;
 				}
 			%>
 
 				<c:choose>
-					<c:when test="<%= layout.getType().equals(LayoutConstants.TYPE_PORTLET) %>">
+					<c:when test="<%= layout.isTypePortlet() %>">
 
 						<%
 						Set<String> headerPortalCssSet = new LinkedHashSet<String>();

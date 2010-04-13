@@ -44,6 +44,8 @@ public interface Group extends GroupModel {
 
 	public boolean isCompany();
 
+	public boolean isControlPanel();
+
 	public boolean isLayout();
 
 	public boolean isLayoutPrototype();

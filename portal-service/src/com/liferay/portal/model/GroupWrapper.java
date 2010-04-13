@@ -234,6 +234,10 @@ public class GroupWrapper implements Group {
 		return _group.isCompany();
 	}
 
+	public boolean isControlPanel() {
+		return _group.isControlPanel();
+	}
+
 	public boolean isLayout() {
 		return _group.isLayout();
 	}

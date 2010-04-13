@@ -20,7 +20,7 @@
 String redirect = ParamUtil.getString(request, "redirect");
 %>
 
-<c:if test="<%= themeDisplay.isSignedIn() && (layout != null) && layout.getType().equals(LayoutConstants.TYPE_PORTLET) %>">
+<c:if test="<%= themeDisplay.isSignedIn() && (layout != null) && layout.isTypePortlet() %>">
 	<aui:form action='<%= themeDisplay.getPathMain() + "/portal/update_layout?p_l_id=" + plid %>' method="post" name="layoutTemplates" useNamespace="<%= false %>">
 		<aui:input name="doAsUserId" type="hidden" value="<%= themeDisplay.getDoAsUserId() %>" />
 		<aui:input name="<%= Constants.CMD %>" type="hidden" value="template" />

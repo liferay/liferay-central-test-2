@@ -51,10 +51,10 @@ catch (NoSuchResourceException nsre) {
 	if (runtimePortlet) {
 		addDefaultResource = true;
 	}
-	else if (layout.getType().equals(LayoutConstants.TYPE_PANEL)) {
+	else if (layout.isTypePanel()) {
 		addDefaultResource = true;
 	}
-	else if (layout.getType().equals(LayoutConstants.TYPE_CONTROL_PANEL)) {
+	else if (layout.isTypeControlPanel()) {
 		addDefaultResource = true;
 	}
 	else if (layoutTypePortlet.hasPortletId(portletId)) {
@@ -341,7 +341,7 @@ if (!layoutTypePortlet.hasPortletId(portletId)) {
 
 // Portlets in the Control Panel cannot be moved
 
-if (layout.getType().equals(LayoutConstants.TYPE_CONTROL_PANEL)) {
+if (layout.isTypeControlPanel()) {
 	showCloseIcon = false;
 	showMoveIcon = false;
 }
@@ -780,7 +780,7 @@ if (portlet.isActive() && access && supportsMimeType) {
 	}
 }
 
-if ((layout.getType().equals(LayoutConstants.TYPE_PANEL) || layout.getType().equals(LayoutConstants.TYPE_CONTROL_PANEL)) && !portletDisplay.getId().equals(PortletKeys.LAYOUT_CONFIGURATION)) {
+if ((layout.isTypePanel() || layout.isTypeControlPanel()) && !portletDisplay.getId().equals(PortletKeys.LAYOUT_CONFIGURATION)) {
 	PortalUtil.setPageTitle(portletDisplay.getTitle(), request);
 }
 %>

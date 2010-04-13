@@ -1567,7 +1567,7 @@ public class ServicePreAction extends Action {
 		themeDisplay.setURLHome(urlHome);
 
 		if (layout != null) {
-			if (layout.getType().equals(LayoutConstants.TYPE_PORTLET)) {
+			if (layout.isTypePortlet()) {
 				boolean freeformLayout =
 					layoutTypePortlet.getLayoutTemplateId().equals(
 						"freeform");

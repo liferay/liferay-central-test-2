@@ -145,7 +145,7 @@ if (!StringUtil.contains(tabs4Names, tabs4)) {
 			</td>
 		</tr>
 
-		<c:if test="<%= (selLayout != null) && selLayout.getType().equals(LayoutConstants.TYPE_PORTLET) %>">
+		<c:if test="<%= (selLayout != null) && selLayout.isTypePortlet() %>">
 			<tr class="hidden-field">
 				<td class="lfr-label">
 					<liferay-ui:message key="copy-parent" />

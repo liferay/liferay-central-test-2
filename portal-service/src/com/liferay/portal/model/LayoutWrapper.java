@@ -323,6 +323,34 @@ public class LayoutWrapper implements Layout {
 		return _layout.isPublicLayout();
 	}
 
+	public boolean isTypeArticle() {
+		return _layout.isTypeArticle();
+	}
+
+	public boolean isTypeControlPanel() {
+		return _layout.isTypeControlPanel();
+	}
+
+	public boolean isTypeEmbedded() {
+		return _layout.isTypeEmbedded();
+	}
+
+	public boolean isTypeLinkToLayout() {
+		return _layout.isTypeLinkToLayout();
+	}
+
+	public boolean isTypePanel() {
+		return _layout.isTypePanel();
+	}
+
+	public boolean isTypePortlet() {
+		return _layout.isTypePortlet();
+	}
+
+	public boolean isTypeURL() {
+		return _layout.isTypeURL();
+	}
+
 	public long getAncestorPlid()
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {

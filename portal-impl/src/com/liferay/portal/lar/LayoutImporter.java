@@ -45,7 +45,6 @@ import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.kernel.zip.ZipReader;
 import com.liferay.portal.kernel.zip.ZipReaderFactoryUtil;
 import com.liferay.portal.model.Layout;
-import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.LayoutTemplate;
 import com.liferay.portal.model.LayoutTypePortlet;
@@ -474,11 +473,11 @@ public class LayoutImporter {
 			layout.setDescription(description);
 			layout.setType(type);
 
-			if (layout.getType().equals(LayoutConstants.TYPE_PORTLET) &&
-					Validator.isNotNull(layout.getTypeSettings()) &&
-						!portletsMergeMode.equals(
-							PortletDataHandlerKeys.
-								PORTLETS_MERGE_MODE_REPLACE)) {
+			if (layout.isTypePortlet() &&
+				Validator.isNotNull(layout.getTypeSettings()) &&
+				!portletsMergeMode.equals(
+					PortletDataHandlerKeys.PORTLETS_MERGE_MODE_REPLACE)) {
+
 				mergePortlets(layout, typeSettings, portletsMergeMode);
 			}
 			else {
@@ -729,7 +728,7 @@ public class LayoutImporter {
 	protected void fixTypeSettings(Layout layout)
 		throws PortalException, SystemException {
 
-		if (!layout.getType().equals(LayoutConstants.TYPE_URL)) {
+		if (!layout.isTypeURL()) {
 			return;
 		}
 

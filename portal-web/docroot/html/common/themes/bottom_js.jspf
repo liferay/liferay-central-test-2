@@ -83,7 +83,7 @@ if (layout != null) {
 			};
 		}
 
-		<c:if test="<%= layout.getType().equals(LayoutConstants.TYPE_PORTLET) %>">
+		<c:if test="<%= layout.isTypePortlet() %>">
 			Liferay.Layout.init(layoutOptions);
 		</c:if>
 

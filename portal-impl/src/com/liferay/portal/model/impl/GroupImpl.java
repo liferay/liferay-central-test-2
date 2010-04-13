@@ -67,6 +67,15 @@ public class GroupImpl extends GroupModelImpl implements Group {
 		return hasClassName(Company.class);
 	}
 
+	public boolean isControlPanel() {
+		if (getName().equals(GroupConstants.CONTROL_PANEL)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	public boolean isLayout() {
 		return hasClassName(Layout.class);
 	}

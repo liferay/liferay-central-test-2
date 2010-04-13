@@ -36,7 +36,6 @@ import com.liferay.portal.kernel.zip.ZipWriterFactoryUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.model.Layout;
-import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Portlet;
@@ -317,7 +316,7 @@ public class LayoutExporter {
 					exportUserPermissions);
 			}
 
-			if (layout.getType().equals(LayoutConstants.TYPE_PORTLET)) {
+			if (layout.isTypePortlet()) {
 				LayoutTypePortlet layoutTypePortlet =
 					(LayoutTypePortlet)layout.getLayoutType();
 
@@ -647,7 +646,7 @@ public class LayoutExporter {
 	protected void fixTypeSettings(Layout layout)
 		throws PortalException, SystemException {
 
-		if (!layout.getType().equals(LayoutConstants.TYPE_URL)) {
+		if (!layout.isTypeURL()) {
 			return;
 		}
 

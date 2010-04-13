@@ -283,7 +283,7 @@ public class LayoutAction extends Action {
 			groupId, privateLayout, LayoutConstants.TYPE_PORTLET);
 
 		for (Layout layout : layouts) {
-			if (!layout.getType().equals(LayoutConstants.TYPE_PORTLET)) {
+			if (!layout.isTypePortlet()) {
 				continue;
 			}
 
@@ -315,12 +315,10 @@ public class LayoutAction extends Action {
 		if (themeDisplay.isStateExclusive() ||
 			Validator.isNotNull(ParamUtil.getString(request, "p_p_id"))) {
 
-			if (layout.getType().equals(LayoutConstants.TYPE_PANEL)) {
+			if (layout.isTypePanel()) {
 				path += "/portal/layout/view/panel.jsp";
 			}
-			else if (layout.getType().equals(
-						LayoutConstants.TYPE_CONTROL_PANEL)) {
-
+			else if (layout.isTypeControlPanel()) {
 				path += "/portal/layout/view/control_panel.jsp";
 			}
 			else {
@@ -754,9 +752,7 @@ public class LayoutAction extends Action {
 							layout.getGroupId(), layout.isPrivateLayout());
 					}
 					else {
-						if (layout.getType().equals(
-								LayoutConstants.TYPE_PORTLET)) {
-
+						if (layout.isTypePortlet()) {
 							LayoutTypePortlet layoutTypePortlet =
 								(LayoutTypePortlet)layout.getLayoutType();
 

@@ -37,7 +37,6 @@ import com.liferay.portal.kernel.zip.ZipWriter;
 import com.liferay.portal.kernel.zip.ZipWriterFactoryUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
-import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletConstants;
@@ -149,14 +148,11 @@ public class PortletExporter {
 
 		Layout layout = LayoutLocalServiceUtil.getLayout(plid);
 
-		String type = layout.getType();
-
-		if (!type.equals(LayoutConstants.TYPE_CONTROL_PANEL) &&
-			!type.equals(LayoutConstants.TYPE_PANEL) &&
-			!type.equals(LayoutConstants.TYPE_PORTLET)) {
+		if (!layout.isTypeControlPanel() && !layout.isTypePanel() &&
+			!layout.isTypePortlet()) {
 
 			throw new LayoutImportException(
-				"Layout type " + type + " is not valid");
+				"Layout type " + layout.getType() + " is not valid");
 		}
 
 		long companyId = layout.getCompanyId();

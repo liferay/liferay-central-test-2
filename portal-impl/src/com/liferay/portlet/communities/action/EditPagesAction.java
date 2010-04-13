@@ -479,9 +479,7 @@ public class EditPagesAction extends PortletAction {
 					layout.getGroupId(), layout.isPrivateLayout(),
 					layout.getLayoutId(), parentLayout.getTypeSettings());
 
-				if (parentLayout.getType().equals(
-						LayoutConstants.TYPE_PORTLET)) {
-
+				if (parentLayout.isTypePortlet()) {
 					ActionUtil.copyPreferences(
 						actionRequest, layout, parentLayout);
 				}
@@ -543,9 +541,7 @@ public class EditPagesAction extends PortletAction {
 						Layout copyLayout = LayoutLocalServiceUtil.getLayout(
 							groupId, privateLayout, copyLayoutId);
 
-						if (copyLayout.getType().equals(
-								LayoutConstants.TYPE_PORTLET)) {
-
+						if (copyLayout.isTypePortlet()) {
 							LayoutServiceUtil.updateLayout(
 								groupId, privateLayout, layoutId,
 								copyLayout.getTypeSettings());

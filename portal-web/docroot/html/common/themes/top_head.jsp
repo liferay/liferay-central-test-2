@@ -33,9 +33,7 @@
 List<Portlet> portlets = null;
 
 if (layout != null) {
-	String type = layout.getType();
-
-	if (type.equals(LayoutConstants.TYPE_PORTLET)) {
+	if (layout.isTypePortlet()) {
 		portlets = layoutTypePortlet.getAllPortlets();
 
 		if (themeDisplay.isStateMaximized()) {
@@ -50,7 +48,7 @@ if (layout != null) {
 			}
 		}
 	}
-	else if (type.equals(LayoutConstants.TYPE_CONTROL_PANEL) || type.equals(LayoutConstants.TYPE_PANEL)) {
+	else if (layout.isTypeControlPanel() || layout.isTypePanel()) {
 		portlets = new ArrayList<Portlet>();
 
 		String ppid = ParamUtil.getString(request, "p_p_id");
