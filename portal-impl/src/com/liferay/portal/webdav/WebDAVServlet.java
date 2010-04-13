@@ -145,16 +145,16 @@ public class WebDAVServlet extends HttpServlet {
 
 		WebDAVStorage storage = null;
 
-		if (pathArray.length == 1) {
+		if (pathArray.length == 0) {
 			storage = (WebDAVStorage)InstancePool.get(
 				CompanyWebDAVStorageImpl.class.getName());
 		}
-		else if (pathArray.length == 2) {
+		else if (pathArray.length == 1) {
 			storage = (WebDAVStorage)InstancePool.get(
 				GroupWebDAVStorageImpl.class.getName());
 		}
-		else if (pathArray.length >= 3) {
-			storage = WebDAVUtil.getStorage(pathArray[2]);
+		else if (pathArray.length >= 2) {
+			storage = WebDAVUtil.getStorage(pathArray[1]);
 		}
 
 		if (storage == null) {
@@ -169,8 +169,8 @@ public class WebDAVServlet extends HttpServlet {
 		String[] pathArray = WebDAVUtil.getPathArray(
 			request.getPathInfo(), true);
 
-		if ((pathArray == null) || (pathArray.length <= 0)) {
-			return true;
+		if ((pathArray == null) || (pathArray.length == 0)) {
+			return false;
 		}
 
 		String resourceName = pathArray[pathArray.length - 1];

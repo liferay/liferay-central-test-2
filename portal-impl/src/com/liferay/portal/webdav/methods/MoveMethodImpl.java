@@ -38,6 +38,7 @@ public class MoveMethodImpl implements Method {
 		WebDAVStorage storage = webDavRequest.getWebDAVStorage();
 		HttpServletRequest request = webDavRequest.getHttpServletRequest();
 
+		long companyId = webDavRequest.getCompanyId();
 		String destination = WebDAVUtil.getDestination(
 			request, storage.getRootPath());
 
@@ -51,7 +52,7 @@ public class MoveMethodImpl implements Method {
 		int status = HttpServletResponse.SC_FORBIDDEN;
 
 		if ((!destination.equals(webDavRequest.getPath())) &&
-			(WebDAVUtil.getGroupId(destination) ==
+			(WebDAVUtil.getGroupId(companyId, destination) ==
 				webDavRequest.getGroupId())) {
 
 			Resource resource = storage.getResource(webDavRequest);

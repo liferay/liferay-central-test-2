@@ -37,8 +37,7 @@ public class CompanyWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 		String path = getRootPath() + webDavRequest.getPath();
 
-		return new BaseResourceImpl(
-			path, StringPool.BLANK, WebDAVUtil.getWebId(path));
+		return new BaseResourceImpl(path, StringPool.BLANK, StringPool.BLANK);
 	}
 
 	public List<Resource> getResources(WebDAVRequest webDavRequest)
@@ -48,9 +47,7 @@ public class CompanyWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			LinkedHashMap<String, Object> params =
 				new LinkedHashMap<String, Object>();
 
-			params.put("userGroup", webDavRequest.getUserId());
 			params.put("usersGroups", webDavRequest.getUserId());
-			params.put("usersOrgs", webDavRequest.getUserId());
 
 			List<Resource> resources = new ArrayList<Resource>();
 

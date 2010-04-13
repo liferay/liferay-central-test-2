@@ -223,7 +223,7 @@ public class BaseWebDAVTestCase extends TestCase {
 	private static String _DEFAULT_USER_AGENT = "Liferay-litmus";
 
 	private static String _PATH_INFO_PREFACE =
-		"/liferay.com/guest/document_library/WebDAVTest/";
+		"/guest/document_library/WebDAVTest/";
 
 	private static String _SERVLET_PATH = "";
 

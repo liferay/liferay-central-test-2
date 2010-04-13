@@ -24,10 +24,8 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.xml.Namespace;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
-import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.User;
-import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 
@@ -62,25 +60,6 @@ public class WebDAVUtil {
 		_instance._deleteStorage(storage);
 	}
 
-	public static long getCompanyId(String path) throws WebDAVException {
-		String[] pathArray = getPathArray(path);
-
-		return getCompanyId(pathArray);
-	}
-
-	public static long getCompanyId(String[] pathArray) throws WebDAVException {
-		try {
-			String webId = getWebId(pathArray);
-
-			Company company = CompanyLocalServiceUtil.getCompanyByWebId(webId);
-
-			return company.getCompanyId();
-		}
-		catch (Exception e) {
-			throw new WebDAVException(e);
-		}
-	}
-
 	public static long getDepth(HttpServletRequest request) {
 		String value = GetterUtil.getString(request.getHeader("Depth"));
 
@@ -113,21 +92,23 @@ public class WebDAVUtil {
 		return destination;
 	}
 
-	public static long getGroupId(String path) throws WebDAVException {
+	public static long getGroupId(long companyId, String path)
+		throws WebDAVException {
+
 		String[] pathArray = getPathArray(path);
 
-		return getGroupId(pathArray);
+		return getGroupId(companyId, pathArray);
 	}
 
-	public static long getGroupId(String[] pathArray) throws WebDAVException {
+	public static long getGroupId(long companyId, String[] pathArray)
+		throws WebDAVException {
+
 		try {
-			if (pathArray.length <= 1) {
+			if (pathArray.length == 0) {
 				return 0;
 			}
 
-			long companyId = getCompanyId(pathArray);
-
-			String name = pathArray[1];
+			String name = pathArray[0];
 
 			try {
 				Group group = GroupLocalServiceUtil.getGroup(companyId, name);
@@ -203,7 +184,7 @@ public class WebDAVUtil {
 	}
 
 	public static String getResourceName(String[] pathArray) {
-		if (pathArray.length <= 3) {
+		if (pathArray.length <= 2) {
 			return StringPool.BLANK;
 		}
 		else {
@@ -241,23 +222,6 @@ public class WebDAVUtil {
 		}
 
 		return timeout * Time.SECOND;
-	}
-
-	public static String getWebId(String path) throws WebDAVException {
-		String[] pathArray = getPathArray(path);
-
-		return getWebId(pathArray);
-	}
-
-	public static String getWebId(String[] pathArray) throws WebDAVException {
-		if (pathArray.length > 0) {
-			String webId = pathArray[0];
-
-			return webId;
-		}
-		else {
-			throw new WebDAVException();
-		}
 	}
 
 	public static boolean isOverwrite(HttpServletRequest request) {

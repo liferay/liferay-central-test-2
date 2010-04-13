@@ -94,19 +94,19 @@ public class JournalWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		try {
 			String[] pathArray = webDavRequest.getPathArray();
 
-			if (pathArray.length == 3) {
+			if (pathArray.length == 2) {
 				String path = getRootPath() + webDavRequest.getPath();
 
 				return new BaseResourceImpl(path, StringPool.BLANK, getToken());
 			}
-			else if (pathArray.length == 4) {
-				String type = pathArray[3];
+			else if (pathArray.length == 3) {
+				String type = pathArray[2];
 
 				return toResource(webDavRequest, type, false);
 			}
-			else if (pathArray.length == 5) {
-				String type = pathArray[3];
-				String journalTypeId = pathArray[4];
+			else if (pathArray.length == 4) {
+				String type = pathArray[2];
+				String journalTypeId = pathArray[3];
 
 				if (type.equals(_TYPE_STRUCTURES)) {
 					try {
@@ -149,11 +149,11 @@ public class JournalWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		try {
 			String[] pathArray = webDavRequest.getPathArray();
 
-			if (pathArray.length == 3) {
+			if (pathArray.length == 2) {
 				return getFolders(webDavRequest);
 			}
-			else if (pathArray.length == 4) {
-				String type = pathArray[3];
+			else if (pathArray.length == 3) {
+				String type = pathArray[2];
 
 				if (type.equals(_TYPE_STRUCTURES)) {
 					return getStructures(webDavRequest);

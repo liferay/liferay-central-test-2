@@ -172,7 +172,7 @@ if (row == null) {
 			%>
 
 			<liferay-ui:input-resource
-				url='<%= themeDisplay.getPortalURL() + "/tunnel-web/secure/webdav/" + company.getWebId() + group.getFriendlyURL() + "/image_gallery" + sb.toString() %>'
+				url='<%= themeDisplay.getPortalURL() + "/tunnel-web/secure/webdav" + group.getFriendlyURL() + "/image_gallery" + sb.toString() %>'
 			/>
 		</div>
 	</div>
