@@ -144,6 +144,10 @@
 		<priority value="ERROR" />
 	</category>
 
+	<category name="com.liferay.portal.deploy.hot.messaging.HotDeployMessageListener">
+		<priority value="ERROR" />
+	</category>
+
 	<category name="com.liferay.portal.editor">
 		<priority value="ERROR" />
 	</category>
