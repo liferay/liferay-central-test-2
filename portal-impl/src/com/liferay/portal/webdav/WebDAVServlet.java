@@ -63,8 +63,10 @@ public class WebDAVServlet extends HttpServlet {
 
 			WebDAVStorage storage = getStorage(request);
 
-			if (storage == null && _log.isDebugEnabled()) {
-				_log.debug("Invalid WebDAV path " + request.getPathInfo());
+			if (storage == null) {
+				if (_log.isDebugEnabled()) {
+					_log.debug("Invalid WebDAV path " + request.getPathInfo());
+				}
 				
 				return;
 			}
