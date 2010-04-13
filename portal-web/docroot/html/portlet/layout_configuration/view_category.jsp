@@ -80,12 +80,12 @@ portlets = ListUtil.sort(portlets, new PortletTitleComparator(application, local
 if (!categories.isEmpty() || !portlets.isEmpty()) {
 %>
 
-	<div class="lfr-add-content <%= (layout.isTypePortlet()) ? "collapsed" : "" %>" id="<portlet:namespace />portletCategory<%= portletCategoryIndex %>">
+	<div class="lfr-add-content <%= layout.isTypePortlet() ? "collapsed" : "" %>" id="<portlet:namespace />portletCategory<%= portletCategoryIndex %>">
 		<h2>
 			<span><%= Validator.isNotNull(externalPortletCategory) ? externalPortletCategory : LanguageUtil.get(pageContext, portletCategory.getName()) %></span>
 		</h2>
 
-		<div class="lfr-content-category <%= (layout.isTypePortlet()) ? "aui-helper-hidden" : "" %>">
+		<div class="lfr-content-category <%= layout.isTypePortlet() ? "aui-helper-hidden" : "" %>">
 
 			<%
 			itr = categories.iterator();
