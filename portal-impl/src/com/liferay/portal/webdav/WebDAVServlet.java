@@ -67,7 +67,7 @@ public class WebDAVServlet extends HttpServlet {
 				if (_log.isDebugEnabled()) {
 					_log.debug("Invalid WebDAV path " + request.getPathInfo());
 				}
-				
+
 				return;
 			}
 
