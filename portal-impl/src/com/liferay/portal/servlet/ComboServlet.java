@@ -78,7 +78,12 @@ public class ComboServlet extends HttpServlet {
 			String content = sb.toString();
 
 			if (Validator.isNotNull(content)) {
-				FileUtil.write(cacheFile, content.getBytes());
+				bytes = content.getBytes();
+
+				FileUtil.write(cacheFile, bytes);
+			}
+			else {
+				bytes = new byte[0];
 			}
 		}
 
