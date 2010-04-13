@@ -134,8 +134,198 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 	public LayoutImpl() {
 	}
 
+	public List<Layout> getAllChildren() throws SystemException {
+		List<Layout> layouts = new ArrayList<Layout>();
+
+		Iterator<Layout> itr = getChildren().iterator();
+
+		while (itr.hasNext()) {
+			Layout layout = itr.next();
+
+			layouts.add(layout);
+			layouts.addAll(layout.getChildren());
+		}
+
+		return layouts;
+	}
+
+	public long getAncestorLayoutId() throws PortalException, SystemException {
+		long layoutId = 0;
+
+		Layout layout = this;
+
+		while (true) {
+			if (!layout.isRootLayout()) {
+				layout = LayoutLocalServiceUtil.getLayout(
+					layout.getGroupId(), layout.isPrivateLayout(),
+					layout.getParentLayoutId());
+			}
+			else {
+				layoutId = layout.getLayoutId();
+
+				break;
+			}
+		}
+
+		return layoutId;
+	}
+
+	public long getAncestorPlid() throws PortalException, SystemException {
+		long plid = 0;
+
+		Layout layout = this;
+
+		while (true) {
+			if (!layout.isRootLayout()) {
+				layout = LayoutLocalServiceUtil.getLayout(
+					layout.getGroupId(), layout.isPrivateLayout(),
+					layout.getParentLayoutId());
+			}
+			else {
+				plid = layout.getPlid();
+
+				break;
+			}
+		}
+
+		return plid;
+	}
+
+	public List<Layout> getAncestors() throws PortalException, SystemException {
+		List<Layout> layouts = new ArrayList<Layout>();
+
+		Layout layout = this;
+
+		while (true) {
+			if (!layout.isRootLayout()) {
+				layout = LayoutLocalServiceUtil.getLayout(
+					layout.getGroupId(), layout.isPrivateLayout(),
+					layout.getParentLayoutId());
+
+				layouts.add(layout);
+			}
+			else {
+				break;
+			}
+		}
+
+		return layouts;
+	}
+
+	public List<Layout> getChildren() throws SystemException {
+		return LayoutLocalServiceUtil.getLayouts(
+			getGroupId(), isPrivateLayout(), getLayoutId());
+	}
+
+	public List<Layout> getChildren(PermissionChecker permissionChecker)
+		throws PortalException, SystemException {
+
+		List<Layout> layouts = ListUtil.copy(getChildren());
+
+		Iterator<Layout> itr = layouts.iterator();
+
+		while (itr.hasNext()) {
+			Layout layout = itr.next();
+
+			if (layout.isHidden() ||
+				!LayoutPermissionUtil.contains(
+					permissionChecker, layout, ActionKeys.VIEW)) {
+
+				itr.remove();
+			}
+		}
+
+		return layouts;
+	}
+
+	public ColorScheme getColorScheme()
+		throws PortalException, SystemException {
+
+		if (isInheritLookAndFeel()) {
+			return getLayoutSet().getColorScheme();
+		}
+		else {
+			return ThemeLocalServiceUtil.getColorScheme(
+				getCompanyId(), getTheme().getThemeId(), getColorSchemeId(),
+				false);
+		}
+	}
+
+	public String getCssText() throws PortalException, SystemException {
+		if (isInheritLookAndFeel()) {
+			return getLayoutSet().getCss();
+		}
+		else {
+			return getCss();
+		}
+	}
+
 	public Group getGroup() throws PortalException, SystemException {
 		return GroupLocalServiceUtil.getGroup(getGroupId());
+	}
+
+	public String getHTMLTitle(Locale locale) {
+		String localeLanguageId = LocaleUtil.toLanguageId(locale);
+
+		return getHTMLTitle(localeLanguageId);
+	}
+
+	public String getHTMLTitle(String localeLanguageId) {
+		String htmlTitle = getTitle(localeLanguageId);
+
+		if (Validator.isNull(htmlTitle)) {
+			htmlTitle = getName(localeLanguageId);
+		}
+
+		return htmlTitle;
+	}
+
+	public LayoutSet getLayoutSet() throws PortalException, SystemException {
+		return LayoutSetLocalServiceUtil.getLayoutSet(
+			getGroupId(), isPrivateLayout());
+	}
+
+	public LayoutType getLayoutType() {
+		return new LayoutTypePortletImpl(this);
+	}
+
+	public String getName(Locale locale) {
+		String localeLanguageId = LocaleUtil.toLanguageId(locale);
+
+		return getName(localeLanguageId);
+	}
+
+	public String getName(Locale locale, boolean useDefault) {
+		String localeLanguageId = LocaleUtil.toLanguageId(locale);
+
+		return getName(localeLanguageId, useDefault);
+	}
+
+	public String getName(String localeLanguageId) {
+		return LocalizationUtil.getLocalization(getName(), localeLanguageId);
+	}
+
+	public String getName(String localeLanguageId, boolean useDefault) {
+		return LocalizationUtil.getLocalization(
+			getName(), localeLanguageId, useDefault);
+	}
+
+	public String getRegularURL(HttpServletRequest request)
+		throws PortalException, SystemException {
+
+		return _getURL(request, false, false);
+	}
+
+	public String getResetLayoutURL(HttpServletRequest request)
+		throws PortalException, SystemException {
+
+		return _getURL(request, true, true);
+	}
+
+	public String getResetMaxStateURL(HttpServletRequest request)
+		throws PortalException, SystemException {
+
+		return _getURL(request, true, false);
 	}
 
 	public Group getScopeGroup() throws PortalException, SystemException {
@@ -151,6 +341,108 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 		return group;
 	}
 
+	public String getTarget() {
+		return PortalUtil.getLayoutTarget(this);
+	}
+
+	public Theme getTheme() throws PortalException, SystemException {
+		if (isInheritLookAndFeel()) {
+			return getLayoutSet().getTheme();
+		}
+		else {
+			return ThemeLocalServiceUtil.getTheme(
+				getCompanyId(), getThemeId(), false);
+		}
+	}
+
+	public String getTitle(Locale locale) {
+		String localeLanguageId = LocaleUtil.toLanguageId(locale);
+
+		return getTitle(localeLanguageId);
+	}
+
+	public String getTitle(Locale locale, boolean useDefault) {
+		String localeLanguageId = LocaleUtil.toLanguageId(locale);
+
+		return getTitle(localeLanguageId, useDefault);
+	}
+
+	public String getTitle(String localeLanguageId) {
+		return LocalizationUtil.getLocalization(getTitle(), localeLanguageId);
+	}
+
+	public String getTitle(String localeLanguageId, boolean useDefault) {
+		return LocalizationUtil.getLocalization(
+			getTitle(), localeLanguageId, useDefault);
+	}
+
+	public String getTypeSettings() {
+		if (_typeSettingsProperties == null) {
+			return super.getTypeSettings();
+		}
+		else {
+			return _typeSettingsProperties.toString();
+		}
+	}
+
+	public UnicodeProperties getTypeSettingsProperties() {
+		if (_typeSettingsProperties == null) {
+			_typeSettingsProperties = new UnicodeProperties(true);
+
+			_typeSettingsProperties.fastLoad(super.getTypeSettings());
+		}
+
+		return _typeSettingsProperties;
+	}
+
+	public ColorScheme getWapColorScheme()
+		throws PortalException, SystemException {
+
+		if (isInheritLookAndFeel()) {
+			return getLayoutSet().getWapColorScheme();
+		}
+		else {
+			return ThemeLocalServiceUtil.getColorScheme(
+				getCompanyId(), getWapTheme().getThemeId(),
+				getWapColorSchemeId(), true);
+		}
+	}
+
+	public Theme getWapTheme() throws PortalException, SystemException {
+		if (isInheritWapLookAndFeel()) {
+			return getLayoutSet().getWapTheme();
+		}
+		else {
+			return ThemeLocalServiceUtil.getTheme(
+				getCompanyId(), getWapThemeId(), true);
+		}
+	}
+
+	public boolean hasAncestor(long layoutId)
+		throws PortalException, SystemException {
+
+		long parentLayoutId = getParentLayoutId();
+
+		while (isRootLayout()) {
+			if (parentLayoutId == layoutId) {
+				return true;
+			}
+			else {
+				Layout parentLayout = LayoutLocalServiceUtil.getLayout(
+					getGroupId(), isPrivateLayout(), parentLayoutId);
+
+				parentLayoutId = parentLayout.getParentLayoutId();
+			}
+		}
+
+		return false;
+	}
+
+	public boolean hasChildren() throws SystemException {
+		return LayoutLocalServiceUtil.hasLayouts(
+			getGroupId(), isPrivateLayout(), getLayoutId());
+	}
+
 	public boolean hasScopeGroup() throws PortalException, SystemException {
 		Group group = getScopeGroup();
 
@@ -162,8 +454,89 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 		}
 	}
 
+	public boolean isChildSelected(boolean selectable, Layout layout)
+		throws PortalException, SystemException {
+
+		if (selectable) {
+			long plid = getPlid();
+
+			List<Layout> ancestors = layout.getAncestors();
+
+			for (Layout curLayout : ancestors) {
+				if (plid == curLayout.getPlid()) {
+					return true;
+				}
+			}
+		}
+
+		return false;
+	}
+
+	public boolean isFirstChild() {
+		if (getPriority() == 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public boolean isFirstParent() {
+		if (isFirstChild() && isRootLayout()) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public boolean isInheritLookAndFeel() {
+		if (Validator.isNull(getThemeId()) ||
+			Validator.isNull(getColorSchemeId())) {
+
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public boolean isInheritWapLookAndFeel() {
+		if (Validator.isNull(getWapThemeId()) ||
+			Validator.isNull(getWapColorSchemeId())) {
+
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	public boolean isPublicLayout() {
 		return !isPrivateLayout();
+	}
+
+	public boolean isRootLayout() {
+		if (getParentLayoutId() == LayoutConstants.DEFAULT_PARENT_LAYOUT_ID) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public boolean isSelected(
+		boolean selectable, Layout layout, long ancestorPlid) {
+
+		if (selectable) {
+			long plid = getPlid();
+
+			if ((plid == layout.getPlid()) || (plid == ancestorPlid)) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	public boolean isTypeArticle() {
@@ -229,183 +602,6 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 		}
 	}
 
-	public long getAncestorPlid() throws PortalException, SystemException {
-		long plid = 0;
-
-		Layout layout = this;
-
-		while (true) {
-			if (!layout.isRootLayout()) {
-				layout = LayoutLocalServiceUtil.getLayout(
-					layout.getGroupId(), layout.isPrivateLayout(),
-					layout.getParentLayoutId());
-			}
-			else {
-				plid = layout.getPlid();
-
-				break;
-			}
-		}
-
-		return plid;
-	}
-
-	public long getAncestorLayoutId() throws PortalException, SystemException {
-		long layoutId = 0;
-
-		Layout layout = this;
-
-		while (true) {
-			if (!layout.isRootLayout()) {
-				layout = LayoutLocalServiceUtil.getLayout(
-					layout.getGroupId(), layout.isPrivateLayout(),
-					layout.getParentLayoutId());
-			}
-			else {
-				layoutId = layout.getLayoutId();
-
-				break;
-			}
-		}
-
-		return layoutId;
-	}
-
-	public List<Layout> getAncestors() throws PortalException, SystemException {
-		List<Layout> layouts = new ArrayList<Layout>();
-
-		Layout layout = this;
-
-		while (true) {
-			if (!layout.isRootLayout()) {
-				layout = LayoutLocalServiceUtil.getLayout(
-					layout.getGroupId(), layout.isPrivateLayout(),
-					layout.getParentLayoutId());
-
-				layouts.add(layout);
-			}
-			else {
-				break;
-			}
-		}
-
-		return layouts;
-	}
-
-	public boolean hasAncestor(long layoutId)
-		throws PortalException, SystemException {
-
-		long parentLayoutId = getParentLayoutId();
-
-		while (isRootLayout()) {
-			if (parentLayoutId == layoutId) {
-				return true;
-			}
-			else {
-				Layout parentLayout = LayoutLocalServiceUtil.getLayout(
-					getGroupId(), isPrivateLayout(), parentLayoutId);
-
-				parentLayoutId = parentLayout.getParentLayoutId();
-			}
-		}
-
-		return false;
-	}
-
-	public boolean isFirstParent() {
-		if (isFirstChild() && isRootLayout()) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	public boolean isFirstChild() {
-		if (getPriority() == 0) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	public boolean isRootLayout() {
-		if (getParentLayoutId() == LayoutConstants.DEFAULT_PARENT_LAYOUT_ID) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	public List<Layout> getChildren() throws SystemException {
-		return LayoutLocalServiceUtil.getLayouts(
-			getGroupId(), isPrivateLayout(), getLayoutId());
-	}
-
-	public boolean hasChildren() throws SystemException {
-		return LayoutLocalServiceUtil.hasLayouts(
-			getGroupId(), isPrivateLayout(), getLayoutId());
-	}
-
-	public List<Layout> getAllChildren() throws SystemException {
-		List<Layout> layouts = new ArrayList<Layout>();
-
-		Iterator<Layout> itr = getChildren().iterator();
-
-		while (itr.hasNext()) {
-			Layout layout = itr.next();
-
-			layouts.add(layout);
-			layouts.addAll(layout.getChildren());
-		}
-
-		return layouts;
-	}
-
-	public List<Layout> getChildren(PermissionChecker permissionChecker)
-		throws PortalException, SystemException {
-
-		List<Layout> layouts = ListUtil.copy(getChildren());
-
-		Iterator<Layout> itr = layouts.iterator();
-
-		while (itr.hasNext()) {
-			Layout layout = itr.next();
-
-			if (layout.isHidden() ||
-				!LayoutPermissionUtil.contains(
-					permissionChecker, layout, ActionKeys.VIEW)) {
-
-				itr.remove();
-			}
-		}
-
-		return layouts;
-	}
-
-	public String getName(Locale locale) {
-		String localeLanguageId = LocaleUtil.toLanguageId(locale);
-
-		return getName(localeLanguageId);
-	}
-
-	public String getName(String localeLanguageId) {
-		return LocalizationUtil.getLocalization(getName(), localeLanguageId);
-	}
-
-	public String getName(Locale locale, boolean useDefault) {
-		String localeLanguageId = LocaleUtil.toLanguageId(locale);
-
-		return getName(localeLanguageId, useDefault);
-	}
-
-	public String getName(String localeLanguageId, boolean useDefault) {
-		return LocalizationUtil.getLocalization(
-			getName(), localeLanguageId, useDefault);
-	}
-
 	public void setName(String name, Locale locale) {
 		String localeLanguageId = LocaleUtil.toLanguageId(locale);
 
@@ -419,43 +615,6 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 				LocalizationUtil.removeLocalization(
 					getName(), "name", localeLanguageId));
 		}
-	}
-
-	public String getTitle(Locale locale) {
-		String localeLanguageId = LocaleUtil.toLanguageId(locale);
-
-		return getTitle(localeLanguageId);
-	}
-
-	public String getTitle(String localeLanguageId) {
-		return LocalizationUtil.getLocalization(getTitle(), localeLanguageId);
-	}
-
-	public String getTitle(Locale locale, boolean useDefault) {
-		String localeLanguageId = LocaleUtil.toLanguageId(locale);
-
-		return getTitle(localeLanguageId, useDefault);
-	}
-
-	public String getTitle(String localeLanguageId, boolean useDefault) {
-		return LocalizationUtil.getLocalization(
-			getTitle(), localeLanguageId, useDefault);
-	}
-
-	public String getHTMLTitle(Locale locale) {
-		String localeLanguageId = LocaleUtil.toLanguageId(locale);
-
-		return getHTMLTitle(localeLanguageId);
-	}
-
-	public String getHTMLTitle(String localeLanguageId) {
-		String htmlTitle = getTitle(localeLanguageId);
-
-		if (Validator.isNull(htmlTitle)) {
-			htmlTitle = getName(localeLanguageId);
-		}
-
-		return htmlTitle;
 	}
 
 	public void setTitle(String title, Locale locale) {
@@ -473,33 +632,10 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 		}
 	}
 
-	public LayoutType getLayoutType() {
-		return new LayoutTypePortletImpl(this);
-	}
-
-	public String getTypeSettings() {
-		if (_typeSettingsProperties == null) {
-			return super.getTypeSettings();
-		}
-		else {
-			return _typeSettingsProperties.toString();
-		}
-	}
-
 	public void setTypeSettings(String typeSettings) {
 		_typeSettingsProperties = null;
 
 		super.setTypeSettings(typeSettings);
-	}
-
-	public UnicodeProperties getTypeSettingsProperties() {
-		if (_typeSettingsProperties == null) {
-			_typeSettingsProperties = new UnicodeProperties(true);
-
-			_typeSettingsProperties.fastLoad(super.getTypeSettings());
-		}
-
-		return _typeSettingsProperties;
 	}
 
 	public void setTypeSettingsProperties(
@@ -508,142 +644,6 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 		_typeSettingsProperties = typeSettingsProperties;
 
 		super.setTypeSettings(_typeSettingsProperties.toString());
-	}
-
-	public LayoutSet getLayoutSet() throws PortalException, SystemException {
-		return LayoutSetLocalServiceUtil.getLayoutSet(
-			getGroupId(), isPrivateLayout());
-	}
-
-	public boolean isInheritLookAndFeel() {
-		if (Validator.isNull(getThemeId()) ||
-			Validator.isNull(getColorSchemeId())) {
-
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	public Theme getTheme() throws PortalException, SystemException {
-		if (isInheritLookAndFeel()) {
-			return getLayoutSet().getTheme();
-		}
-		else {
-			return ThemeLocalServiceUtil.getTheme(
-				getCompanyId(), getThemeId(), false);
-		}
-	}
-
-	public ColorScheme getColorScheme()
-		throws PortalException, SystemException {
-
-		if (isInheritLookAndFeel()) {
-			return getLayoutSet().getColorScheme();
-		}
-		else {
-			return ThemeLocalServiceUtil.getColorScheme(
-				getCompanyId(), getTheme().getThemeId(), getColorSchemeId(),
-				false);
-		}
-	}
-
-	public boolean isInheritWapLookAndFeel() {
-		if (Validator.isNull(getWapThemeId()) ||
-			Validator.isNull(getWapColorSchemeId())) {
-
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	public Theme getWapTheme() throws PortalException, SystemException {
-		if (isInheritWapLookAndFeel()) {
-			return getLayoutSet().getWapTheme();
-		}
-		else {
-			return ThemeLocalServiceUtil.getTheme(
-				getCompanyId(), getWapThemeId(), true);
-		}
-	}
-
-	public ColorScheme getWapColorScheme()
-		throws PortalException, SystemException {
-
-		if (isInheritLookAndFeel()) {
-			return getLayoutSet().getWapColorScheme();
-		}
-		else {
-			return ThemeLocalServiceUtil.getColorScheme(
-				getCompanyId(), getWapTheme().getThemeId(),
-				getWapColorSchemeId(), true);
-		}
-	}
-
-	public String getCssText() throws PortalException, SystemException {
-		if (isInheritLookAndFeel()) {
-			return getLayoutSet().getCss();
-		}
-		else {
-			return getCss();
-		}
-	}
-
-	public String getRegularURL(HttpServletRequest request)
-		throws PortalException, SystemException {
-
-		return _getURL(request, false, false);
-	}
-
-	public String getResetMaxStateURL(HttpServletRequest request)
-		throws PortalException, SystemException {
-
-		return _getURL(request, true, false);
-	}
-
-	public String getResetLayoutURL(HttpServletRequest request)
-		throws PortalException, SystemException {
-
-		return _getURL(request, true, true);
-	}
-
-	public String getTarget() {
-		return PortalUtil.getLayoutTarget(this);
-	}
-
-	public boolean isChildSelected(boolean selectable, Layout layout)
-		throws PortalException, SystemException {
-
-		if (selectable) {
-			long plid = getPlid();
-
-			List<Layout> ancestors = layout.getAncestors();
-
-			for (Layout curLayout : ancestors) {
-				if (plid == curLayout.getPlid()) {
-					return true;
-				}
-			}
-		}
-
-		return false;
-	}
-
-	public boolean isSelected(
-		boolean selectable, Layout layout, long ancestorPlid) {
-
-		if (selectable) {
-			long plid = getPlid();
-
-			if ((plid == layout.getPlid()) || (plid == ancestorPlid)) {
-				return true;
-			}
-		}
-
-		return false;
 	}
 
 	private LayoutTypePortlet _getLayoutTypePortletClone(
@@ -767,6 +767,6 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 
 	private static Log _log = LogFactoryUtil.getLog(LayoutImpl.class);
 
-	private UnicodeProperties _typeSettingsProperties = null;
+	private UnicodeProperties _typeSettingsProperties;
 
 }

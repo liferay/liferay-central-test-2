@@ -40,7 +40,72 @@ package com.liferay.portal.model;
  * @generated
  */
 public interface Layout extends LayoutModel {
+	public java.util.List<com.liferay.portal.model.Layout> getAllChildren()
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public long getAncestorLayoutId()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public long getAncestorPlid()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portal.model.Layout> getAncestors()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portal.model.Layout> getChildren()
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portal.model.Layout> getChildren(
+		com.liferay.portal.security.permission.PermissionChecker permissionChecker)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.portal.model.ColorScheme getColorScheme()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public java.lang.String getCssText()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
 	public com.liferay.portal.model.Group getGroup()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public java.lang.String getHTMLTitle(java.util.Locale locale);
+
+	public java.lang.String getHTMLTitle(java.lang.String localeLanguageId);
+
+	public com.liferay.portal.model.LayoutSet getLayoutSet()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.portal.model.LayoutType getLayoutType();
+
+	public java.lang.String getName(java.util.Locale locale);
+
+	public java.lang.String getName(java.util.Locale locale, boolean useDefault);
+
+	public java.lang.String getName(java.lang.String localeLanguageId);
+
+	public java.lang.String getName(java.lang.String localeLanguageId,
+		boolean useDefault);
+
+	public java.lang.String getRegularURL(
+		javax.servlet.http.HttpServletRequest request)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public java.lang.String getResetLayoutURL(
+		javax.servlet.http.HttpServletRequest request)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public java.lang.String getResetMaxStateURL(
+		javax.servlet.http.HttpServletRequest request)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -48,11 +113,63 @@ public interface Layout extends LayoutModel {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
+	public java.lang.String getTarget();
+
+	public com.liferay.portal.model.Theme getTheme()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public java.lang.String getTitle(java.util.Locale locale);
+
+	public java.lang.String getTitle(java.util.Locale locale, boolean useDefault);
+
+	public java.lang.String getTitle(java.lang.String localeLanguageId);
+
+	public java.lang.String getTitle(java.lang.String localeLanguageId,
+		boolean useDefault);
+
+	public java.lang.String getTypeSettings();
+
+	public com.liferay.portal.kernel.util.UnicodeProperties getTypeSettingsProperties();
+
+	public com.liferay.portal.model.ColorScheme getWapColorScheme()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.portal.model.Theme getWapTheme()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public boolean hasAncestor(long layoutId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public boolean hasChildren()
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public boolean hasScopeGroup()
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
+	public boolean isChildSelected(boolean selectable,
+		com.liferay.portal.model.Layout layout)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public boolean isFirstChild();
+
+	public boolean isFirstParent();
+
+	public boolean isInheritLookAndFeel();
+
+	public boolean isInheritWapLookAndFeel();
+
 	public boolean isPublicLayout();
+
+	public boolean isRootLayout();
+
+	public boolean isSelected(boolean selectable,
+		com.liferay.portal.model.Layout layout, long ancestorPlid);
 
 	public boolean isTypeArticle();
 
@@ -68,129 +185,12 @@ public interface Layout extends LayoutModel {
 
 	public boolean isTypeURL();
 
-	public long getAncestorPlid()
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	public long getAncestorLayoutId()
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	public java.util.List<com.liferay.portal.model.Layout> getAncestors()
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	public boolean hasAncestor(long layoutId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	public boolean isFirstParent();
-
-	public boolean isFirstChild();
-
-	public boolean isRootLayout();
-
-	public java.util.List<com.liferay.portal.model.Layout> getChildren()
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	public boolean hasChildren()
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	public java.util.List<com.liferay.portal.model.Layout> getAllChildren()
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	public java.util.List<com.liferay.portal.model.Layout> getChildren(
-		com.liferay.portal.security.permission.PermissionChecker permissionChecker)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	public java.lang.String getName(java.util.Locale locale);
-
-	public java.lang.String getName(java.lang.String localeLanguageId);
-
-	public java.lang.String getName(java.util.Locale locale, boolean useDefault);
-
-	public java.lang.String getName(java.lang.String localeLanguageId,
-		boolean useDefault);
-
 	public void setName(java.lang.String name, java.util.Locale locale);
-
-	public java.lang.String getTitle(java.util.Locale locale);
-
-	public java.lang.String getTitle(java.lang.String localeLanguageId);
-
-	public java.lang.String getTitle(java.util.Locale locale, boolean useDefault);
-
-	public java.lang.String getTitle(java.lang.String localeLanguageId,
-		boolean useDefault);
-
-	public java.lang.String getHTMLTitle(java.util.Locale locale);
-
-	public java.lang.String getHTMLTitle(java.lang.String localeLanguageId);
 
 	public void setTitle(java.lang.String title, java.util.Locale locale);
 
-	public com.liferay.portal.model.LayoutType getLayoutType();
-
-	public java.lang.String getTypeSettings();
-
 	public void setTypeSettings(java.lang.String typeSettings);
-
-	public com.liferay.portal.kernel.util.UnicodeProperties getTypeSettingsProperties();
 
 	public void setTypeSettingsProperties(
 		com.liferay.portal.kernel.util.UnicodeProperties typeSettingsProperties);
-
-	public com.liferay.portal.model.LayoutSet getLayoutSet()
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	public boolean isInheritLookAndFeel();
-
-	public com.liferay.portal.model.Theme getTheme()
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	public com.liferay.portal.model.ColorScheme getColorScheme()
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	public boolean isInheritWapLookAndFeel();
-
-	public com.liferay.portal.model.Theme getWapTheme()
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	public com.liferay.portal.model.ColorScheme getWapColorScheme()
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	public java.lang.String getCssText()
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	public java.lang.String getRegularURL(
-		javax.servlet.http.HttpServletRequest request)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	public java.lang.String getResetMaxStateURL(
-		javax.servlet.http.HttpServletRequest request)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	public java.lang.String getResetLayoutURL(
-		javax.servlet.http.HttpServletRequest request)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	public java.lang.String getTarget();
-
-	public boolean isChildSelected(boolean selectable,
-		com.liferay.portal.model.Layout layout)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	public boolean isSelected(boolean selectable,
-		com.liferay.portal.model.Layout layout, long ancestorPlid);
 }

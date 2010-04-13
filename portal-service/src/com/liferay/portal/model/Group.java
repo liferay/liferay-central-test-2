@@ -40,6 +40,47 @@ package com.liferay.portal.model;
  * @generated
  */
 public interface Group extends GroupModel {
+	public long getDefaultPrivatePlid();
+
+	public long getDefaultPublicPlid();
+
+	public java.lang.String getDescriptiveName()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.portal.model.Group getLiveGroup();
+
+	public java.lang.String getPathFriendlyURL(boolean privateLayout,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay);
+
+	public com.liferay.portal.model.LayoutSet getPrivateLayoutSet();
+
+	public int getPrivateLayoutsPageCount();
+
+	public com.liferay.portal.model.LayoutSet getPublicLayoutSet();
+
+	public int getPublicLayoutsPageCount();
+
+	public com.liferay.portal.model.Group getStagingGroup();
+
+	public java.lang.String getTypeLabel();
+
+	public java.lang.String getTypeSettings();
+
+	public com.liferay.portal.kernel.util.UnicodeProperties getTypeSettingsProperties();
+
+	public java.lang.String getTypeSettingsProperty(java.lang.String key);
+
+	public java.lang.String getWorkflowRoleNames();
+
+	public int getWorkflowStages();
+
+	public boolean hasPrivateLayouts();
+
+	public boolean hasPublicLayouts();
+
+	public boolean hasStagingGroup();
+
 	public boolean isCommunity();
 
 	public boolean isCompany();
@@ -54,57 +95,16 @@ public interface Group extends GroupModel {
 
 	public boolean isOrganization();
 
+	public boolean isStagingGroup();
+
 	public boolean isUser();
 
 	public boolean isUserGroup();
 
-	public com.liferay.portal.model.Group getLiveGroup();
-
-	public com.liferay.portal.model.Group getStagingGroup();
-
-	public boolean hasStagingGroup();
-
-	public boolean isStagingGroup();
-
-	public java.lang.String getDescriptiveName()
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	public java.lang.String getTypeLabel();
-
-	public java.lang.String getTypeSettings();
+	public boolean isWorkflowEnabled();
 
 	public void setTypeSettings(java.lang.String typeSettings);
 
-	public com.liferay.portal.kernel.util.UnicodeProperties getTypeSettingsProperties();
-
 	public void setTypeSettingsProperties(
 		com.liferay.portal.kernel.util.UnicodeProperties typeSettingsProperties);
-
-	public java.lang.String getTypeSettingsProperty(java.lang.String key);
-
-	public java.lang.String getPathFriendlyURL(boolean privateLayout,
-		com.liferay.portal.theme.ThemeDisplay themeDisplay);
-
-	public long getDefaultPrivatePlid();
-
-	public com.liferay.portal.model.LayoutSet getPrivateLayoutSet();
-
-	public int getPrivateLayoutsPageCount();
-
-	public boolean hasPrivateLayouts();
-
-	public long getDefaultPublicPlid();
-
-	public com.liferay.portal.model.LayoutSet getPublicLayoutSet();
-
-	public int getPublicLayoutsPageCount();
-
-	public boolean hasPublicLayouts();
-
-	public boolean isWorkflowEnabled();
-
-	public int getWorkflowStages();
-
-	public java.lang.String getWorkflowRoleNames();
 }

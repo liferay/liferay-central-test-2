@@ -59,111 +59,12 @@ public class GroupImpl extends GroupModelImpl implements Group {
 	public GroupImpl() {
 	}
 
-	public boolean isCommunity() {
-		return hasClassName(Group.class);
+	public long getDefaultPrivatePlid() {
+		return getDefaultPlid(true);
 	}
 
-	public boolean isCompany() {
-		return hasClassName(Company.class);
-	}
-
-	public boolean isControlPanel() {
-		if (getName().equals(GroupConstants.CONTROL_PANEL)) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	public boolean isLayout() {
-		return hasClassName(Layout.class);
-	}
-
-	public boolean isLayoutPrototype() {
-		return hasClassName(LayoutPrototype.class);
-	}
-
-	public boolean isLayoutSetPrototype() {
-		return hasClassName(LayoutSetPrototype.class);
-	}
-
-	public boolean isOrganization() {
-		return hasClassName(Organization.class);
-	}
-
-	public boolean isUser() {
-		return hasClassName(User.class);
-	}
-
-	public boolean isUserGroup() {
-		return hasClassName(UserGroup.class);
-	}
-
-	public Group getLiveGroup() {
-		if (!isStagingGroup()) {
-			return null;
-		}
-
-		try {
-			if (_liveGroup == null) {
-				_liveGroup = GroupLocalServiceUtil.getGroup(
-					getLiveGroupId());
-			}
-
-			return _liveGroup;
-		}
-		catch (Exception e) {
-			_log.error("Error getting live group for " + getLiveGroupId(), e);
-
-			return null;
-		}
-	}
-
-	public Group getStagingGroup() {
-		if (isStagingGroup()) {
-			return null;
-		}
-
-		try {
-			if (_stagingGroup == null) {
-				_stagingGroup =
-					GroupLocalServiceUtil.getStagingGroup(getGroupId());
-			}
-
-			return _stagingGroup;
-		}
-		catch (Exception e) {
-			_log.error("Error getting staging group for " + getGroupId(), e);
-
-			return null;
-		}
-	}
-
-	public boolean hasStagingGroup() {
-		if (isStagingGroup()) {
-			return false;
-		}
-
-		if (_stagingGroup != null) {
-			return true;
-		}
-
-		try {
-			return GroupLocalServiceUtil.hasStagingGroup(getGroupId());
-		}
-		catch (Exception e) {
-			return false;
-		}
-	}
-
-	public boolean isStagingGroup() {
-		if (getLiveGroupId() == GroupConstants.DEFAULT_LIVE_GROUP_ID) {
-			return false;
-		}
-		else {
-			return true;
-		}
+	public long getDefaultPublicPlid() {
+		return getDefaultPlid(false);
 	}
 
 	public String getDescriptiveName() throws PortalException, SystemException {
@@ -224,52 +125,24 @@ public class GroupImpl extends GroupModelImpl implements Group {
 		return name;
 	}
 
-	public String getTypeLabel() {
-		return GroupConstants.getTypeLabel(getType());
-	}
-
-	public String getTypeSettings() {
-		if (_typeSettingsProperties == null) {
-			return super.getTypeSettings();
+	public Group getLiveGroup() {
+		if (!isStagingGroup()) {
+			return null;
 		}
-		else {
-			return _typeSettingsProperties.toString();
-		}
-	}
 
-	public void setTypeSettings(String typeSettings) {
-		_typeSettingsProperties = null;
-
-		super.setTypeSettings(typeSettings);
-	}
-
-	public UnicodeProperties getTypeSettingsProperties() {
-		if (_typeSettingsProperties == null) {
-			_typeSettingsProperties = new UnicodeProperties(true);
-
-			try {
-				_typeSettingsProperties.load(super.getTypeSettings());
+		try {
+			if (_liveGroup == null) {
+				_liveGroup = GroupLocalServiceUtil.getGroup(
+					getLiveGroupId());
 			}
-			catch (IOException ioe) {
-				_log.error(ioe, ioe);
-			}
+
+			return _liveGroup;
 		}
+		catch (Exception e) {
+			_log.error("Error getting live group for " + getLiveGroupId(), e);
 
-		return _typeSettingsProperties;
-	}
-
-	public void setTypeSettingsProperties(
-		UnicodeProperties typeSettingsProperties) {
-
-		_typeSettingsProperties = typeSettingsProperties;
-
-		super.setTypeSettings(_typeSettingsProperties.toString());
-	}
-
-	public String getTypeSettingsProperty(String key) {
-		UnicodeProperties typeSettingsProperties = getTypeSettingsProperties();
-
-		return typeSettingsProperties.getProperty(key);
+			return null;
+		}
 	}
 
 	public String getPathFriendlyURL(
@@ -286,10 +159,6 @@ public class GroupImpl extends GroupModelImpl implements Group {
 		else {
 			return themeDisplay.getPathFriendlyURLPublic();
 		}
-	}
-
-	public long getDefaultPrivatePlid() {
-		return getDefaultPlid(true);
 	}
 
 	public LayoutSet getPrivateLayoutSet() {
@@ -319,19 +188,6 @@ public class GroupImpl extends GroupModelImpl implements Group {
 		return 0;
 	}
 
-	public boolean hasPrivateLayouts() {
-		if (getPrivateLayoutsPageCount() > 0) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	public long getDefaultPublicPlid() {
-		return getDefaultPlid(false);
-	}
-
 	public LayoutSet getPublicLayoutSet() {
 		LayoutSet layoutSet = null;
 
@@ -359,6 +215,81 @@ public class GroupImpl extends GroupModelImpl implements Group {
 		return 0;
 	}
 
+	public Group getStagingGroup() {
+		if (isStagingGroup()) {
+			return null;
+		}
+
+		try {
+			if (_stagingGroup == null) {
+				_stagingGroup =
+					GroupLocalServiceUtil.getStagingGroup(getGroupId());
+			}
+
+			return _stagingGroup;
+		}
+		catch (Exception e) {
+			_log.error("Error getting staging group for " + getGroupId(), e);
+
+			return null;
+		}
+	}
+
+	public String getTypeLabel() {
+		return GroupConstants.getTypeLabel(getType());
+	}
+
+	public String getTypeSettings() {
+		if (_typeSettingsProperties == null) {
+			return super.getTypeSettings();
+		}
+		else {
+			return _typeSettingsProperties.toString();
+		}
+	}
+
+	public UnicodeProperties getTypeSettingsProperties() {
+		if (_typeSettingsProperties == null) {
+			_typeSettingsProperties = new UnicodeProperties(true);
+
+			try {
+				_typeSettingsProperties.load(super.getTypeSettings());
+			}
+			catch (IOException ioe) {
+				_log.error(ioe, ioe);
+			}
+		}
+
+		return _typeSettingsProperties;
+	}
+
+	public String getTypeSettingsProperty(String key) {
+		UnicodeProperties typeSettingsProperties = getTypeSettingsProperties();
+
+		return typeSettingsProperties.getProperty(key);
+	}
+
+	public String getWorkflowRoleNames() {
+		return GetterUtil.getString(
+			getTypeSettingsProperty("workflowRoleNames"),
+			PropsValues.TASKS_DEFAULT_ROLE_NAMES);
+	}
+
+	public int getWorkflowStages() {
+		return GetterUtil.getInteger(
+			getTypeSettingsProperty("workflowStages"),
+			PropsValues.TASKS_DEFAULT_STAGES);
+	}
+
+	public boolean hasPrivateLayouts() {
+		if (getPrivateLayoutsPageCount() > 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	public boolean hasPublicLayouts() {
 		if (getPublicLayoutsPageCount() > 0) {
 			return true;
@@ -368,21 +299,90 @@ public class GroupImpl extends GroupModelImpl implements Group {
 		}
 	}
 
+	public boolean hasStagingGroup() {
+		if (isStagingGroup()) {
+			return false;
+		}
+
+		if (_stagingGroup != null) {
+			return true;
+		}
+
+		try {
+			return GroupLocalServiceUtil.hasStagingGroup(getGroupId());
+		}
+		catch (Exception e) {
+			return false;
+		}
+	}
+
+	public boolean isCommunity() {
+		return hasClassName(Group.class);
+	}
+
+	public boolean isCompany() {
+		return hasClassName(Company.class);
+	}
+
+	public boolean isControlPanel() {
+		if (getName().equals(GroupConstants.CONTROL_PANEL)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public boolean isLayout() {
+		return hasClassName(Layout.class);
+	}
+
+	public boolean isLayoutPrototype() {
+		return hasClassName(LayoutPrototype.class);
+	}
+
+	public boolean isLayoutSetPrototype() {
+		return hasClassName(LayoutSetPrototype.class);
+	}
+
+	public boolean isOrganization() {
+		return hasClassName(Organization.class);
+	}
+
+	public boolean isStagingGroup() {
+		if (getLiveGroupId() == GroupConstants.DEFAULT_LIVE_GROUP_ID) {
+			return false;
+		}
+		else {
+			return true;
+		}
+	}
+
+	public boolean isUser() {
+		return hasClassName(User.class);
+	}
+
+	public boolean isUserGroup() {
+		return hasClassName(UserGroup.class);
+	}
+
 	public boolean isWorkflowEnabled() {
 		return GetterUtil.getBoolean(
 			getTypeSettingsProperty("workflowEnabled"));
 	}
 
-	public int getWorkflowStages() {
-		return GetterUtil.getInteger(
-			getTypeSettingsProperty("workflowStages"),
-			PropsValues.TASKS_DEFAULT_STAGES);
+	public void setTypeSettings(String typeSettings) {
+		_typeSettingsProperties = null;
+
+		super.setTypeSettings(typeSettings);
 	}
 
-	public String getWorkflowRoleNames() {
-		return GetterUtil.getString(
-			getTypeSettingsProperty("workflowRoleNames"),
-			PropsValues.TASKS_DEFAULT_ROLE_NAMES);
+	public void setTypeSettingsProperties(
+		UnicodeProperties typeSettingsProperties) {
+
+		_typeSettingsProperties = typeSettingsProperties;
+
+		super.setTypeSettings(_typeSettingsProperties.toString());
 	}
 
 	protected long getDefaultPlid(boolean privateLayout) {
@@ -419,8 +419,8 @@ public class GroupImpl extends GroupModelImpl implements Group {
 
 	private static Log _log = LogFactoryUtil.getLog(GroupImpl.class);
 
-	private Group _stagingGroup;
 	private Group _liveGroup;
-	private UnicodeProperties _typeSettingsProperties = null;
+	private Group _stagingGroup;
+	private UnicodeProperties _typeSettingsProperties;
 
 }

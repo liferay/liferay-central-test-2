@@ -226,6 +226,81 @@ public class GroupWrapper implements Group {
 		return _group.toXmlString();
 	}
 
+	public long getDefaultPrivatePlid() {
+		return _group.getDefaultPrivatePlid();
+	}
+
+	public long getDefaultPublicPlid() {
+		return _group.getDefaultPublicPlid();
+	}
+
+	public java.lang.String getDescriptiveName()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _group.getDescriptiveName();
+	}
+
+	public com.liferay.portal.model.Group getLiveGroup() {
+		return _group.getLiveGroup();
+	}
+
+	public java.lang.String getPathFriendlyURL(boolean privateLayout,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay) {
+		return _group.getPathFriendlyURL(privateLayout, themeDisplay);
+	}
+
+	public com.liferay.portal.model.LayoutSet getPrivateLayoutSet() {
+		return _group.getPrivateLayoutSet();
+	}
+
+	public int getPrivateLayoutsPageCount() {
+		return _group.getPrivateLayoutsPageCount();
+	}
+
+	public com.liferay.portal.model.LayoutSet getPublicLayoutSet() {
+		return _group.getPublicLayoutSet();
+	}
+
+	public int getPublicLayoutsPageCount() {
+		return _group.getPublicLayoutsPageCount();
+	}
+
+	public com.liferay.portal.model.Group getStagingGroup() {
+		return _group.getStagingGroup();
+	}
+
+	public java.lang.String getTypeLabel() {
+		return _group.getTypeLabel();
+	}
+
+	public com.liferay.portal.kernel.util.UnicodeProperties getTypeSettingsProperties() {
+		return _group.getTypeSettingsProperties();
+	}
+
+	public java.lang.String getTypeSettingsProperty(java.lang.String key) {
+		return _group.getTypeSettingsProperty(key);
+	}
+
+	public java.lang.String getWorkflowRoleNames() {
+		return _group.getWorkflowRoleNames();
+	}
+
+	public int getWorkflowStages() {
+		return _group.getWorkflowStages();
+	}
+
+	public boolean hasPrivateLayouts() {
+		return _group.hasPrivateLayouts();
+	}
+
+	public boolean hasPublicLayouts() {
+		return _group.hasPublicLayouts();
+	}
+
+	public boolean hasStagingGroup() {
+		return _group.hasStagingGroup();
+	}
+
 	public boolean isCommunity() {
 		return _group.isCommunity();
 	}
@@ -254,6 +329,10 @@ public class GroupWrapper implements Group {
 		return _group.isOrganization();
 	}
 
+	public boolean isStagingGroup() {
+		return _group.isStagingGroup();
+	}
+
 	public boolean isUser() {
 		return _group.isUser();
 	}
@@ -262,92 +341,13 @@ public class GroupWrapper implements Group {
 		return _group.isUserGroup();
 	}
 
-	public com.liferay.portal.model.Group getLiveGroup() {
-		return _group.getLiveGroup();
-	}
-
-	public com.liferay.portal.model.Group getStagingGroup() {
-		return _group.getStagingGroup();
-	}
-
-	public boolean hasStagingGroup() {
-		return _group.hasStagingGroup();
-	}
-
-	public boolean isStagingGroup() {
-		return _group.isStagingGroup();
-	}
-
-	public java.lang.String getDescriptiveName()
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _group.getDescriptiveName();
-	}
-
-	public java.lang.String getTypeLabel() {
-		return _group.getTypeLabel();
-	}
-
-	public com.liferay.portal.kernel.util.UnicodeProperties getTypeSettingsProperties() {
-		return _group.getTypeSettingsProperties();
+	public boolean isWorkflowEnabled() {
+		return _group.isWorkflowEnabled();
 	}
 
 	public void setTypeSettingsProperties(
 		com.liferay.portal.kernel.util.UnicodeProperties typeSettingsProperties) {
 		_group.setTypeSettingsProperties(typeSettingsProperties);
-	}
-
-	public java.lang.String getTypeSettingsProperty(java.lang.String key) {
-		return _group.getTypeSettingsProperty(key);
-	}
-
-	public java.lang.String getPathFriendlyURL(boolean privateLayout,
-		com.liferay.portal.theme.ThemeDisplay themeDisplay) {
-		return _group.getPathFriendlyURL(privateLayout, themeDisplay);
-	}
-
-	public long getDefaultPrivatePlid() {
-		return _group.getDefaultPrivatePlid();
-	}
-
-	public com.liferay.portal.model.LayoutSet getPrivateLayoutSet() {
-		return _group.getPrivateLayoutSet();
-	}
-
-	public int getPrivateLayoutsPageCount() {
-		return _group.getPrivateLayoutsPageCount();
-	}
-
-	public boolean hasPrivateLayouts() {
-		return _group.hasPrivateLayouts();
-	}
-
-	public long getDefaultPublicPlid() {
-		return _group.getDefaultPublicPlid();
-	}
-
-	public com.liferay.portal.model.LayoutSet getPublicLayoutSet() {
-		return _group.getPublicLayoutSet();
-	}
-
-	public int getPublicLayoutsPageCount() {
-		return _group.getPublicLayoutsPageCount();
-	}
-
-	public boolean hasPublicLayouts() {
-		return _group.hasPublicLayouts();
-	}
-
-	public boolean isWorkflowEnabled() {
-		return _group.isWorkflowEnabled();
-	}
-
-	public int getWorkflowStages() {
-		return _group.getWorkflowStages();
-	}
-
-	public java.lang.String getWorkflowRoleNames() {
-		return _group.getWorkflowRoleNames();
 	}
 
 	public Group getWrappedGroup() {

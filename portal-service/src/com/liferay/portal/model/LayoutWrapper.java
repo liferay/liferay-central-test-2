@@ -301,10 +301,113 @@ public class LayoutWrapper implements Layout {
 		return _layout.toXmlString();
 	}
 
+	public java.util.List<com.liferay.portal.model.Layout> getAllChildren()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _layout.getAllChildren();
+	}
+
+	public long getAncestorLayoutId()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _layout.getAncestorLayoutId();
+	}
+
+	public long getAncestorPlid()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _layout.getAncestorPlid();
+	}
+
+	public java.util.List<com.liferay.portal.model.Layout> getAncestors()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _layout.getAncestors();
+	}
+
+	public java.util.List<com.liferay.portal.model.Layout> getChildren()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _layout.getChildren();
+	}
+
+	public java.util.List<com.liferay.portal.model.Layout> getChildren(
+		com.liferay.portal.security.permission.PermissionChecker permissionChecker)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _layout.getChildren(permissionChecker);
+	}
+
+	public com.liferay.portal.model.ColorScheme getColorScheme()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _layout.getColorScheme();
+	}
+
+	public java.lang.String getCssText()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _layout.getCssText();
+	}
+
 	public com.liferay.portal.model.Group getGroup()
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _layout.getGroup();
+	}
+
+	public java.lang.String getHTMLTitle(java.util.Locale locale) {
+		return _layout.getHTMLTitle(locale);
+	}
+
+	public java.lang.String getHTMLTitle(java.lang.String localeLanguageId) {
+		return _layout.getHTMLTitle(localeLanguageId);
+	}
+
+	public com.liferay.portal.model.LayoutSet getLayoutSet()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _layout.getLayoutSet();
+	}
+
+	public com.liferay.portal.model.LayoutType getLayoutType() {
+		return _layout.getLayoutType();
+	}
+
+	public java.lang.String getName(java.util.Locale locale) {
+		return _layout.getName(locale);
+	}
+
+	public java.lang.String getName(java.util.Locale locale, boolean useDefault) {
+		return _layout.getName(locale, useDefault);
+	}
+
+	public java.lang.String getName(java.lang.String localeLanguageId) {
+		return _layout.getName(localeLanguageId);
+	}
+
+	public java.lang.String getName(java.lang.String localeLanguageId,
+		boolean useDefault) {
+		return _layout.getName(localeLanguageId, useDefault);
+	}
+
+	public java.lang.String getRegularURL(
+		javax.servlet.http.HttpServletRequest request)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _layout.getRegularURL(request);
+	}
+
+	public java.lang.String getResetLayoutURL(
+		javax.servlet.http.HttpServletRequest request)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _layout.getResetLayoutURL(request);
+	}
+
+	public java.lang.String getResetMaxStateURL(
+		javax.servlet.http.HttpServletRequest request)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _layout.getResetMaxStateURL(request);
 	}
 
 	public com.liferay.portal.model.Group getScopeGroup()
@@ -313,14 +416,100 @@ public class LayoutWrapper implements Layout {
 		return _layout.getScopeGroup();
 	}
 
+	public java.lang.String getTarget() {
+		return _layout.getTarget();
+	}
+
+	public com.liferay.portal.model.Theme getTheme()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _layout.getTheme();
+	}
+
+	public java.lang.String getTitle(java.util.Locale locale) {
+		return _layout.getTitle(locale);
+	}
+
+	public java.lang.String getTitle(java.util.Locale locale, boolean useDefault) {
+		return _layout.getTitle(locale, useDefault);
+	}
+
+	public java.lang.String getTitle(java.lang.String localeLanguageId) {
+		return _layout.getTitle(localeLanguageId);
+	}
+
+	public java.lang.String getTitle(java.lang.String localeLanguageId,
+		boolean useDefault) {
+		return _layout.getTitle(localeLanguageId, useDefault);
+	}
+
+	public com.liferay.portal.kernel.util.UnicodeProperties getTypeSettingsProperties() {
+		return _layout.getTypeSettingsProperties();
+	}
+
+	public com.liferay.portal.model.ColorScheme getWapColorScheme()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _layout.getWapColorScheme();
+	}
+
+	public com.liferay.portal.model.Theme getWapTheme()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _layout.getWapTheme();
+	}
+
+	public boolean hasAncestor(long layoutId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _layout.hasAncestor(layoutId);
+	}
+
+	public boolean hasChildren()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _layout.hasChildren();
+	}
+
 	public boolean hasScopeGroup()
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _layout.hasScopeGroup();
 	}
 
+	public boolean isChildSelected(boolean selectable,
+		com.liferay.portal.model.Layout layout)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _layout.isChildSelected(selectable, layout);
+	}
+
+	public boolean isFirstChild() {
+		return _layout.isFirstChild();
+	}
+
+	public boolean isFirstParent() {
+		return _layout.isFirstParent();
+	}
+
+	public boolean isInheritLookAndFeel() {
+		return _layout.isInheritLookAndFeel();
+	}
+
+	public boolean isInheritWapLookAndFeel() {
+		return _layout.isInheritWapLookAndFeel();
+	}
+
 	public boolean isPublicLayout() {
 		return _layout.isPublicLayout();
+	}
+
+	public boolean isRootLayout() {
+		return _layout.isRootLayout();
+	}
+
+	public boolean isSelected(boolean selectable,
+		com.liferay.portal.model.Layout layout, long ancestorPlid) {
+		return _layout.isSelected(selectable, layout, ancestorPlid);
 	}
 
 	public boolean isTypeArticle() {
@@ -351,206 +540,17 @@ public class LayoutWrapper implements Layout {
 		return _layout.isTypeURL();
 	}
 
-	public long getAncestorPlid()
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _layout.getAncestorPlid();
-	}
-
-	public long getAncestorLayoutId()
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _layout.getAncestorLayoutId();
-	}
-
-	public java.util.List<com.liferay.portal.model.Layout> getAncestors()
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _layout.getAncestors();
-	}
-
-	public boolean hasAncestor(long layoutId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _layout.hasAncestor(layoutId);
-	}
-
-	public boolean isFirstParent() {
-		return _layout.isFirstParent();
-	}
-
-	public boolean isFirstChild() {
-		return _layout.isFirstChild();
-	}
-
-	public boolean isRootLayout() {
-		return _layout.isRootLayout();
-	}
-
-	public java.util.List<com.liferay.portal.model.Layout> getChildren()
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return _layout.getChildren();
-	}
-
-	public boolean hasChildren()
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return _layout.hasChildren();
-	}
-
-	public java.util.List<com.liferay.portal.model.Layout> getAllChildren()
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return _layout.getAllChildren();
-	}
-
-	public java.util.List<com.liferay.portal.model.Layout> getChildren(
-		com.liferay.portal.security.permission.PermissionChecker permissionChecker)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _layout.getChildren(permissionChecker);
-	}
-
-	public java.lang.String getName(java.util.Locale locale) {
-		return _layout.getName(locale);
-	}
-
-	public java.lang.String getName(java.lang.String localeLanguageId) {
-		return _layout.getName(localeLanguageId);
-	}
-
-	public java.lang.String getName(java.util.Locale locale, boolean useDefault) {
-		return _layout.getName(locale, useDefault);
-	}
-
-	public java.lang.String getName(java.lang.String localeLanguageId,
-		boolean useDefault) {
-		return _layout.getName(localeLanguageId, useDefault);
-	}
-
 	public void setName(java.lang.String name, java.util.Locale locale) {
 		_layout.setName(name, locale);
-	}
-
-	public java.lang.String getTitle(java.util.Locale locale) {
-		return _layout.getTitle(locale);
-	}
-
-	public java.lang.String getTitle(java.lang.String localeLanguageId) {
-		return _layout.getTitle(localeLanguageId);
-	}
-
-	public java.lang.String getTitle(java.util.Locale locale, boolean useDefault) {
-		return _layout.getTitle(locale, useDefault);
-	}
-
-	public java.lang.String getTitle(java.lang.String localeLanguageId,
-		boolean useDefault) {
-		return _layout.getTitle(localeLanguageId, useDefault);
-	}
-
-	public java.lang.String getHTMLTitle(java.util.Locale locale) {
-		return _layout.getHTMLTitle(locale);
-	}
-
-	public java.lang.String getHTMLTitle(java.lang.String localeLanguageId) {
-		return _layout.getHTMLTitle(localeLanguageId);
 	}
 
 	public void setTitle(java.lang.String title, java.util.Locale locale) {
 		_layout.setTitle(title, locale);
 	}
 
-	public com.liferay.portal.model.LayoutType getLayoutType() {
-		return _layout.getLayoutType();
-	}
-
-	public com.liferay.portal.kernel.util.UnicodeProperties getTypeSettingsProperties() {
-		return _layout.getTypeSettingsProperties();
-	}
-
 	public void setTypeSettingsProperties(
 		com.liferay.portal.kernel.util.UnicodeProperties typeSettingsProperties) {
 		_layout.setTypeSettingsProperties(typeSettingsProperties);
-	}
-
-	public com.liferay.portal.model.LayoutSet getLayoutSet()
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _layout.getLayoutSet();
-	}
-
-	public boolean isInheritLookAndFeel() {
-		return _layout.isInheritLookAndFeel();
-	}
-
-	public com.liferay.portal.model.Theme getTheme()
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _layout.getTheme();
-	}
-
-	public com.liferay.portal.model.ColorScheme getColorScheme()
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _layout.getColorScheme();
-	}
-
-	public boolean isInheritWapLookAndFeel() {
-		return _layout.isInheritWapLookAndFeel();
-	}
-
-	public com.liferay.portal.model.Theme getWapTheme()
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _layout.getWapTheme();
-	}
-
-	public com.liferay.portal.model.ColorScheme getWapColorScheme()
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _layout.getWapColorScheme();
-	}
-
-	public java.lang.String getCssText()
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _layout.getCssText();
-	}
-
-	public java.lang.String getRegularURL(
-		javax.servlet.http.HttpServletRequest request)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _layout.getRegularURL(request);
-	}
-
-	public java.lang.String getResetMaxStateURL(
-		javax.servlet.http.HttpServletRequest request)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _layout.getResetMaxStateURL(request);
-	}
-
-	public java.lang.String getResetLayoutURL(
-		javax.servlet.http.HttpServletRequest request)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _layout.getResetLayoutURL(request);
-	}
-
-	public java.lang.String getTarget() {
-		return _layout.getTarget();
-	}
-
-	public boolean isChildSelected(boolean selectable,
-		com.liferay.portal.model.Layout layout)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _layout.isChildSelected(selectable, layout);
-	}
-
-	public boolean isSelected(boolean selectable,
-		com.liferay.portal.model.Layout layout, long ancestorPlid) {
-		return _layout.isSelected(selectable, layout, ancestorPlid);
 	}
 
 	public Layout getWrappedLayout() {
