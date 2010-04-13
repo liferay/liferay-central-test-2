@@ -972,6 +972,35 @@ public class DLFileEntryLocalServiceImpl
 				versionDescription, size, serviceContext.getStatus());
 		}
 
+		if ((is == null) && !version.equals(fileEntry.getVersion())) {
+			int fetchFailures = 0;
+
+			while (is == null) {
+				try {
+					is = dlLocalService.getFileAsStream(
+						user.getCompanyId(), fileEntry.getRepositoryId(), name);
+				}
+				catch (NoSuchFileException nsfe) {
+					fetchFailures++;
+
+					if (PropsValues.DL_HOOK_IMPL.equals(
+							JCRHook.class.getName()) &&
+						(fetchFailures <
+							PropsValues.DL_HOOK_JCR_FETCH_MAX_FAILURES)) {
+
+						try {
+							Thread.sleep(PropsValues.DL_HOOK_JCR_FETCH_DELAY);
+						}
+						catch (InterruptedException ie) {
+						}
+					}
+					else {
+						throw nsfe;
+					}
+				}
+			}
+		}
+
 		if (serviceContext.getStatus() == StatusConstants.APPROVED) {
 			fileEntry.setVersion(version);
 		}
@@ -1001,49 +1030,22 @@ public class DLFileEntryLocalServiceImpl
 
 		// File
 
-		if (is == null) {
-			int fetchFailures = 0;
-
-			while (is == null) {
-				try {
-					is = dlLocalService.getFileAsStream(
-						user.getCompanyId(), fileEntry.getRepositoryId(), name);
-				}
-				catch (NoSuchFileException nsfe) {
-					fetchFailures++;
-
-					if (PropsValues.DL_HOOK_IMPL.equals(
-							JCRHook.class.getName()) &&
-						(fetchFailures <
-							PropsValues.DL_HOOK_JCR_FETCH_MAX_FAILURES)) {
-
-						try {
-							Thread.sleep(PropsValues.DL_HOOK_JCR_FETCH_DELAY);
-						}
-						catch (InterruptedException ie) {
-						}
-					}
-					else {
-						throw nsfe;
-					}
-				}
+		if (is != null) {
+			try {
+				dlService.deleteFile(
+					user.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
+					fileEntry.getRepositoryId(), fileEntry.getName(), version);
 			}
-		}
+			catch (NoSuchFileException nsfe) {
+			}
 
-		try {
-			dlService.deleteFile(
+			dlLocalService.updateFile(
 				user.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
-				fileEntry.getRepositoryId(), fileEntry.getName(), version);
+				fileEntry.getGroupId(), fileEntry.getRepositoryId(), name, false,
+				version, sourceFileName, fileEntry.getFileEntryId(),
+				fileEntry.getLuceneProperties(), fileEntry.getModifiedDate(),
+				serviceContext, is);
 		}
-		catch (NoSuchFileException nsfe) {
-		}
-
-		dlLocalService.updateFile(
-			user.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
-			fileEntry.getGroupId(), fileEntry.getRepositoryId(), name, false,
-			version, sourceFileName, fileEntry.getFileEntryId(),
-			fileEntry.getLuceneProperties(), fileEntry.getModifiedDate(),
-			serviceContext, is);
 
 		// Status
 
