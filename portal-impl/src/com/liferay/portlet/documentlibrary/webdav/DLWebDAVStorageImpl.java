@@ -74,9 +74,10 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		throws WebDAVException {
 
 		try {
-			long companyId = webDavRequest.getCompanyId();
 			String[] destinationArray = WebDAVUtil.getPathArray(
 				destination, true);
+
+			long companyId = webDavRequest.getCompanyId();
 
 			long parentFolderId = DLFolderConstants.DEFAULT_PARENT_FOLDER_ID;
 
@@ -141,9 +142,10 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		File file = null;
 
 		try {
-			long companyId = webDavRequest.getCompanyId();
 			String[] destinationArray = WebDAVUtil.getPathArray(
 				destination, true);
+
+			long companyId = webDavRequest.getCompanyId();
 
 			long parentFolderId = DLFolderConstants.DEFAULT_PARENT_FOLDER_ID;
 
@@ -261,9 +263,9 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		throws WebDAVException {
 
 		try {
-			long companyId = webDavRequest.getCompanyId();
 			String[] pathArray = webDavRequest.getPathArray();
 
+			long companyId = webDavRequest.getCompanyId();
 			long parentFolderId = getParentFolderId(companyId, pathArray);
 			String name = WebDAVUtil.getResourceName(pathArray);
 
@@ -477,8 +479,8 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			long companyId = webDavRequest.getCompanyId();
 			long groupId = WebDAVUtil.getGroupId(companyId, destinationArray);
 			long folderId = folder.getFolderId();
-			long parentFolderId =
-				getParentFolderId(companyId, destinationArray);
+			long parentFolderId = getParentFolderId(
+				companyId, destinationArray);
 			String name = WebDAVUtil.getResourceName(destinationArray);
 			String description = folder.getDescription();
 
@@ -529,8 +531,8 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			long companyId = webDavRequest.getCompanyId();
 			long groupId = WebDAVUtil.getGroupId(companyId, destinationArray);
 			long userId = webDavRequest.getUserId();
-			long parentFolderId =
-				getParentFolderId(companyId, destinationArray);
+			long parentFolderId = getParentFolderId(
+				companyId, destinationArray);
 			String name = fileEntry.getName();
 			String sourceFileName = null;
 			String title = WebDAVUtil.getResourceName(destinationArray);

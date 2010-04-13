@@ -65,9 +65,10 @@ public class IGWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		throws WebDAVException {
 
 		try {
-			long companyId = webDavRequest.getCompanyId();
 			String[] destinationArray = WebDAVUtil.getPathArray(
 				destination, true);
+
+			long companyId = webDavRequest.getCompanyId();
 
 			long parentFolderId = IGFolderConstants.DEFAULT_PARENT_FOLDER_ID;
 
@@ -130,9 +131,10 @@ public class IGWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		File file = null;
 
 		try {
-			long companyId = webDavRequest.getCompanyId();
 			String[] destinationArray = WebDAVUtil.getPathArray(
 				destination, true);
+
+			long companyId = webDavRequest.getCompanyId();
 
 			long parentFolderId = IGFolderConstants.DEFAULT_PARENT_FOLDER_ID;
 
@@ -233,9 +235,9 @@ public class IGWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		throws WebDAVException {
 
 		try {
-			long companyId = webDavRequest.getCompanyId();
 			String[] pathArray = webDavRequest.getPathArray();
 
+			long companyId = webDavRequest.getCompanyId();
 			long parentFolderId = getParentFolderId(companyId, pathArray);
 			String name = WebDAVUtil.getResourceName(pathArray);
 
@@ -363,8 +365,8 @@ public class IGWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			long companyId = webDavRequest.getCompanyId();
 			long groupId = WebDAVUtil.getGroupId(companyId, destinationArray);
 			long folderId = folder.getFolderId();
-			long parentFolderId =
-				getParentFolderId(companyId, destinationArray);
+			long parentFolderId = getParentFolderId(
+				companyId, destinationArray);
 			String name = WebDAVUtil.getResourceName(destinationArray);
 			String description = folder.getDescription();
 
@@ -408,8 +410,8 @@ public class IGWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 			long companyId = webDavRequest.getCompanyId();
 			long groupId = WebDAVUtil.getGroupId(companyId, destinationArray);
-			long parentFolderId =
-				getParentFolderId(companyId, destinationArray);
+			long parentFolderId = getParentFolderId(
+				companyId, destinationArray);
 			String name = WebDAVUtil.getResourceName(destinationArray);
 			String description = image.getDescription();
 			File file = null;
@@ -626,8 +628,7 @@ public class IGWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		return folderId;
 	}
 
-	protected long getParentFolderId(
-			long companyId, String[] pathArray)
+	protected long getParentFolderId(long companyId, String[] pathArray)
 		throws Exception {
 
 		return getFolderId(companyId, pathArray, true);
