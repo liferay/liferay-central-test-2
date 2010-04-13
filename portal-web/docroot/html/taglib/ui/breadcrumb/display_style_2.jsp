@@ -90,12 +90,12 @@ private String _getBreadcrumbLayoutURL(Layout selLayout, String selLayoutParam, 
 		portletURL.setParameter(selLayoutParam, String.valueOf(selLayout.getPlid()));
 
 		if (selLayout.isTypeControlPanel()) {
-			if (themeDisplay.getRefererPlid() != LayoutConstants.DEFAULT_PLID) {
-				portletURL.setParameter("refererPlid", String.valueOf(themeDisplay.getRefererPlid()));
+			if (themeDisplay.getDoAsGroupId() > 0) {
+				portletURL.setParameter("doAsGroupId", String.valueOf(themeDisplay.getDoAsGroupId()));
 			}
 
-			if (Validator.isNotNull(themeDisplay.getDoAsGroupId())) {
-				portletURL.setParameter("doAsGroupId", String.valueOf(themeDisplay.getDoAsGroupId()));
+			if (themeDisplay.getRefererPlid() != LayoutConstants.DEFAULT_PLID) {
+				portletURL.setParameter("refererPlid", String.valueOf(themeDisplay.getRefererPlid()));
 			}
 		}
 

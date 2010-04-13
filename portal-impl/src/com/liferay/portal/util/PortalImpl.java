@@ -1775,18 +1775,18 @@ public class PortalImpl implements Portal {
 				}
 
 				if (layout.isTypeControlPanel()) {
-					if (Validator.isNotNull(themeDisplay.getDoAsGroupId())) {
-						layoutFriendlyURL = HttpUtil.addParameter(
-							layoutFriendlyURL, "doAsGroupId",
-							themeDisplay.getDoAsGroupId());
-					}
-
 					if (themeDisplay.getRefererPlid() !=
 							LayoutConstants.DEFAULT_PLID) {
 
 						layoutFriendlyURL = HttpUtil.addParameter(
 							layoutFriendlyURL, "refererPlid",
 							themeDisplay.getRefererPlid());
+					}
+
+					if (themeDisplay.getDoAsGroupId() > 0) {
+						layoutFriendlyURL = HttpUtil.addParameter(
+							layoutFriendlyURL, "doAsGroupId",
+							themeDisplay.getDoAsGroupId());
 					}
 				}
 
@@ -1810,7 +1810,7 @@ public class PortalImpl implements Portal {
 		}
 
 		if (layout.isTypeControlPanel()) {
-			if (Validator.isNotNull(themeDisplay.getDoAsGroupId())) {
+			if (themeDisplay.getDoAsGroupId() > 0) {
 				layoutURL = HttpUtil.addParameter(
 					layoutURL, "doAsGroupId", themeDisplay.getDoAsGroupId());
 			}
