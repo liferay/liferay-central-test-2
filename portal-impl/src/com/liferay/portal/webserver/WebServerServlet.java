@@ -154,6 +154,9 @@ public class WebServerServlet extends HttpServlet {
 	}
 
 	protected List<Group> getGroups(User user) throws Exception {
+
+		// Guest
+
 		if (user.isDefaultUser()) {
 			List<Group> groups = new ArrayList<Group>();
 
@@ -164,6 +167,8 @@ public class WebServerServlet extends HttpServlet {
 
 			return groups;
 		}
+
+		// Communities
 
 		LinkedHashMap<String, Object> params =
 			new LinkedHashMap<String, Object>();
@@ -176,6 +181,14 @@ public class WebServerServlet extends HttpServlet {
 		List<Group> groups = GroupLocalServiceUtil.search(
 			user.getCompanyId(), null, null, params, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, orderByComparator);
+
+		// Organizations
+
+		groups.addAll(
+			GroupLocalServiceUtil.getUserOrganizationsGroups(
+				user.getUserId(), QueryUtil.ALL_POS, QueryUtil.ALL_POS));
+
+		// User
 
 		if (!user.isDefaultUser()) {
 			groups.add(user.getGroup());
