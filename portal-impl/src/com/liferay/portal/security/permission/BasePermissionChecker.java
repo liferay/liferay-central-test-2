@@ -40,6 +40,10 @@ public abstract class BasePermissionChecker implements PermissionChecker {
 		return ownerRole.getRoleId();
 	}
 
+	public long[] getRoleIds(long userId, long groupId) {
+		return PermissionChecker.NO_ROLES;
+	}
+
 	public long getUserId() {
 		return user.getUserId();
 	}

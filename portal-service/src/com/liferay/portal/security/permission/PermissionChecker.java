@@ -25,9 +25,13 @@ import javax.portlet.PortletRequest;
  */
 public interface PermissionChecker {
 
+	public static final long[] NO_ROLES = new long[] {0};
+
 	public long getCompanyId();
 
 	public long getOwnerRoleId();
+
+	public long[] getRoleIds(long userId, long groupId);
 
 	public long getUserId();
 

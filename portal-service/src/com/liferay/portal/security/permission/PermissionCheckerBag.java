@@ -39,6 +39,8 @@ public interface PermissionCheckerBag extends Serializable {
 
 	public List<Group> getGroups();
 
+	public long[] getRoleIds();
+
 	public List<Role> getRoles();
 
 	public boolean isCommunityAdmin(

@@ -26,6 +26,7 @@ import com.liferay.portal.service.UserGroupRoleLocalServiceUtil;
 import com.liferay.portal.service.permission.LayoutPrototypePermissionUtil;
 import com.liferay.portal.service.permission.LayoutSetPrototypePermissionUtil;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -76,6 +77,24 @@ public class PermissionCheckerBagImpl implements PermissionCheckerBag {
 
 	public List<Role> getRoles() {
 		return _roles;
+	}
+
+	public long[] getRoleIds() {
+		if (_roleIds == null) {
+			List<Role> roles = getRoles();
+
+			long[] roleIds = new long[roles.size()];
+
+			for (int i = 0, size = roles.size(); i < size; i++) {
+				roleIds[i] = roles.get(i).getRoleId();
+			}
+
+			Arrays.sort(roleIds);
+
+			_roleIds = roleIds;
+		}
+
+		return _roleIds;
 	}
 
 	public boolean isCommunityAdmin(
@@ -264,6 +283,7 @@ public class PermissionCheckerBagImpl implements PermissionCheckerBag {
 	private List<Group> _userOrgGroups;
 	private List<Group> _userUserGroupGroups;
 	private List<Group> _groups;
+	private long[] _roleIds;
 	private List<Role> _roles;
 	private Map<Long, Boolean> _communityAdmins = new HashMap<Long, Boolean>();
 	private Map<Long, Boolean> _communityOwners = new HashMap<Long, Boolean>();

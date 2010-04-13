@@ -287,6 +287,11 @@
 			<bean class="com.liferay.portal.service.permission.GroupPermissionImpl" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.permission.InlineSQLPermissionUtil" class="com.liferay.portal.service.permission.InlineSQLPermissionUtil">
+		<property name="inlineSQLPermission">
+			<bean class="com.liferay.portal.service.permission.InlineSQLPermissionImpl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.permission.LayoutPermissionUtil" class="com.liferay.portal.service.permission.LayoutPermissionUtil">
 		<property name="layoutPermission">
 			<bean class="com.liferay.portal.service.permission.LayoutPermissionImpl" />

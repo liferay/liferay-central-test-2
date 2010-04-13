@@ -1,6 +1,23 @@
 <?xml version="1.0"?>
 
 <custom-sql>
+	<sql id="permissions.user.check.algorithm.6.inline.check">
+		<![CDATA[
+			INNER JOIN
+				ResourcePermission ON
+					(
+						(ResourcePermission.name = '[$CLASS_NAME$]') AND
+						(ResourcePermission.primKey = [$CLASS_PK_FIELD$]) AND
+						(
+							(
+								(ResourcePermission.roleId IN ([$ROLE_IDS$])) AND
+								(1 = ResourcePermission.actionIds % 2)
+							)
+							[$OWNERSHIP_CHECK$]
+						)
+					)
+		]]>
+	</sql>
 	<sql id="com.liferay.portal.service.persistence.GroupFinder.countByGroupId">
 		<![CDATA[
 			SELECT
@@ -903,7 +920,7 @@
 	<sql id="com.liferay.portal.service.persistence.RoleFinder.countByUserGroupCommunity">
 		<![CDATA[
 			SELECT
-			 	COUNT(Role_.roleId) AS COUNT_VALUE
+				COUNT(Role_.roleId) AS COUNT_VALUE
 			FROM
 				Role_
 			INNER JOIN
@@ -923,7 +940,7 @@
 	<sql id="com.liferay.portal.service.persistence.RoleFinder.countByU_G_R">
 		<![CDATA[
 			SELECT
-			 	COUNT(Role_.roleId) AS COUNT_VALUE
+				COUNT(Role_.roleId) AS COUNT_VALUE
 			FROM
 				Role_
 			INNER JOIN
