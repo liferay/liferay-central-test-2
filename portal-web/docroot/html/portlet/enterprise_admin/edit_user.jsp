@@ -156,7 +156,7 @@ String[][] categorySections = {mainSections, identificationSections, miscellaneo
 
 String curSection = mainSections[0];
 
-String historyKey = ParamUtil.getString(request, "history_key", "");
+String historyKey = ParamUtil.getString(request, "historyKey");
 
 if (Validator.isNotNull(historyKey)) {
 	curSection = historyKey;
@@ -219,7 +219,7 @@ String taglibOnSubmit = renderResponse.getNamespace() + "saveUser('" + ((selUser
 					String sectionJsp = "/html/portlet/enterprise_admin/user/" + _getSectionJsp(section) + ".jsp";
 				%>
 
-					<div class="form-section <%= curSection.equals(section) || curSection.equals(sectionId) ? "selected" : "aui-helper-hidden-accessible" %>" id="<%= sectionId %>">
+					<div class="form-section <%= (curSection.equals(section) || curSection.equals(sectionId)) ? "selected" : "aui-helper-hidden-accessible" %>" id="<%= sectionId %>">
 						<liferay-util:include page="<%= sectionJsp %>" />
 					</div>
 
@@ -285,7 +285,7 @@ if (selUser != null) {
 		var redirect = "<portlet:renderURL><portlet:param name="struts_action" value="/enterprise_admin/edit_user" /><portlet:param name="backURL" value="<%= backURL %>"></portlet:param></portlet:renderURL>";
 
 		if (location.hash) {
-			redirect += location.hash.replace('#_LFR_FN_', '&<portlet:namespace />history_key=');
+			redirect += location.hash.replace('#_LFR_FN_', '&<portlet:namespace />historyKey=');
 		}
 
 		document.<portlet:namespace />fm.<portlet:namespace />redirect.value = redirect;

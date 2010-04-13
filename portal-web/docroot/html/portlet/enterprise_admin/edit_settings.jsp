@@ -29,7 +29,7 @@ String[][] categorySections = {configurationSections, identificationSections, mi
 
 String curSection = configurationSections[0];
 
-String historyKey = ParamUtil.getString(request, "history_key", "");
+String historyKey = ParamUtil.getString(request, "historyKey");
 
 if (Validator.isNotNull(historyKey)) {
 	curSection = historyKey;
@@ -57,7 +57,7 @@ if (Validator.isNotNull(historyKey)) {
 				String sectionJsp = "/html/portlet/enterprise_admin/settings/" + _getSectionJsp(section) + ".jsp";
 			%>
 
-				<div class="form-section <%= curSection.equals(section) || curSection.equals(sectionId) ? "selected" : "aui-helper-hidden-accessible" %>" id="<%= sectionId %>">
+				<div class="form-section <%= (curSection.equals(section) || curSection.equals(sectionId)) ? "selected" : "aui-helper-hidden-accessible" %>" id="<%= sectionId %>">
 					<liferay-util:include page="<%= sectionJsp %>" />
 				</div>
 

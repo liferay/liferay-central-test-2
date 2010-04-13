@@ -121,7 +121,7 @@ AUI().add(
 
 					id = id.replace(instance._hashKey, '');
 				}
-				else if (id.indexOf('history_key=') > -1) {
+				else if (id.indexOf('historyKey=') > -1) {
 					var idRE = new RegExp(instance._hashKey + '([^&#]+)');
 
 					id = id.match(idRE);
