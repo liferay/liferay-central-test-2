@@ -94,6 +94,16 @@ private String _getBreadcrumbLayoutURL(Layout selLayout, String selLayoutParam, 
 	else {
 		portletURL.setParameter(selLayoutParam, String.valueOf(selLayout.getPlid()));
 
+		if (selLayout.getGroup().getName().equals(GroupConstants.CONTROL_PANEL)) {
+			if (themeDisplay.getRefererPlid() != LayoutConstants.DEFAULT_PLID) {
+				portletURL.setParameter("refererPlid", String.valueOf(themeDisplay.getRefererPlid()));
+			}
+
+			if (Validator.isNotNull(themeDisplay.getDoAsGroupId())) {
+				portletURL.setParameter("doAsGroupId", String.valueOf(themeDisplay.getDoAsGroupId()));
+			}
+		}
+
 		return portletURL.toString();
 	}
 }
