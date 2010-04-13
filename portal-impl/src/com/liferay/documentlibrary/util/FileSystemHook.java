@@ -15,7 +15,6 @@
 package com.liferay.documentlibrary.util;
 
 import com.liferay.documentlibrary.DuplicateDirectoryException;
-import com.liferay.documentlibrary.DuplicateFileException;
 import com.liferay.documentlibrary.NoSuchDirectoryException;
 import com.liferay.documentlibrary.NoSuchFileException;
 import com.liferay.documentlibrary.model.FileModel;
@@ -86,7 +85,7 @@ public class FileSystemHook extends BaseHook {
 				companyId, repositoryId, fileName, DEFAULT_VERSION);
 
 			if (fileNameVersionFile.exists()) {
-				throw new DuplicateFileException(fileNameVersionFile.getPath());
+				fileNameVersionFile.delete();
 			}
 
 			FileUtil.write(fileNameVersionFile, is);
@@ -267,9 +266,7 @@ public class FileSystemHook extends BaseHook {
 
 		String[] fileNames = FileUtil.listDirs(repistoryDir);
 
-		for (int i = 0; i < fileNames.length; i++) {
-			String fileName = fileNames[i];
-
+		for (String fileName : fileNames) {
 			try {
 				Indexer indexer = IndexerRegistryUtil.getIndexer(
 					FileModel.class);
@@ -373,7 +370,7 @@ public class FileSystemHook extends BaseHook {
 				companyId, repositoryId, fileName, versionNumber);
 
 			if (fileNameVersionFile.exists()) {
-				throw new DuplicateFileException(fileNameVersionFile.getPath());
+				fileNameVersionFile.delete();
 			}
 
 			FileUtil.write(fileNameVersionFile, is);
