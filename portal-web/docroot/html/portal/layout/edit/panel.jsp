@@ -112,4 +112,5 @@ String panelTreeKey = "panelSelectedPortletsPanelTree";
 	<%
 	}
 	%>
+
 </aui:script>
