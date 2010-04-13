@@ -63,6 +63,12 @@ public class WebDAVServlet extends HttpServlet {
 
 			WebDAVStorage storage = getStorage(request);
 
+			if (storage == null && _log.isDebugEnabled()) {
+				_log.debug("Invalid WebDAV path " + request.getPathInfo());
+				
+				return;
+			}
+
 			// Set the path only if it has not already been set. This works
 			// if and only if the servlet is not mapped to more than one URL.
 
@@ -155,11 +161,6 @@ public class WebDAVServlet extends HttpServlet {
 		}
 		else if (pathArray.length >= 2) {
 			storage = WebDAVUtil.getStorage(pathArray[1]);
-		}
-
-		if (storage == null) {
-			throw new WebDAVException(
-				"Invalid WebDAV path " + request.getPathInfo());
 		}
 
 		return storage;
