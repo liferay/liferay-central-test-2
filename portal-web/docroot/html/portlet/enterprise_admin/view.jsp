@@ -248,6 +248,7 @@ request.setAttribute("view.jsp-portletURLString", portletURLString);
 	function <portlet:namespace />saveCompany() {
 		document.<portlet:namespace />fm.method = "post";
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.UPDATE %>";
+
 		var redirect = "<portlet:renderURL><portlet:param name="struts_action" value="/enterprise_admin/view" /><portlet:param name="tabs1" value="<%= tabs1 %>" /><portlet:param name="tabs2" value="<%= tabs2 %>" /><portlet:param name="tabs3" value="<%= tabs3 %>" /></portlet:renderURL>";
 
 		if (location.hash) {
