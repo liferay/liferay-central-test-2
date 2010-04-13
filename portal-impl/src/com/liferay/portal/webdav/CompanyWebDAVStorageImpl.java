@@ -32,9 +32,7 @@ import java.util.List;
  */
 public class CompanyWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
-	public Resource getResource(WebDAVRequest webDavRequest)
-		throws WebDAVException {
-
+	public Resource getResource(WebDAVRequest webDavRequest) {
 		String path = getRootPath() + webDavRequest.getPath();
 
 		return new BaseResourceImpl(path, StringPool.BLANK, StringPool.BLANK);
@@ -49,18 +47,6 @@ public class CompanyWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 			List<Resource> resources = new ArrayList<Resource>();
 
-			// Organizations
-
-			List<Group> groups =
-				GroupLocalServiceUtil.getUserOrganizationsGroups(
-					userId, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
-
-			for (Group group : groups) {
-				Resource resource = getResource(group);
-
-				resources.add(resource);
-			}
-
 			// Communities
 
 			LinkedHashMap<String, Object> params =
@@ -68,7 +54,7 @@ public class CompanyWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 			params.put("usersGroups", userId);
 
-			groups = GroupLocalServiceUtil.search(
+			List<Group> groups = GroupLocalServiceUtil.search(
 				companyId, null, null, params, QueryUtil.ALL_POS,
 				QueryUtil.ALL_POS);
 
@@ -78,7 +64,18 @@ public class CompanyWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 				resources.add(resource);
 			}
 
-			// Personal community
+			// Organizations
+
+			groups = GroupLocalServiceUtil.getUserOrganizationsGroups(
+				userId, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+
+			for (Group group : groups) {
+				Resource resource = getResource(group);
+
+				resources.add(resource);
+			}
+
+			// User
 
 			Group group = GroupLocalServiceUtil.getUserGroup(companyId, userId);
 
