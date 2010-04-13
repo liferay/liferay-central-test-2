@@ -300,3 +300,7 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 		</div>
 	</c:if>
 </div>
+
+<aui:script use="liferay-dockbar" position="inline">
+	Liferay.Dockbar.init();
+</aui:script>

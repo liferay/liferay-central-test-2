@@ -1,9 +1,5 @@
-AUI().use(
-	'aui-button-item',
-	'aui-io-plugin',
-	'aui-io-request',
-	'aui-overlay-context',
-	'aui-overlay-manager',
+AUI().add(
+	'liferay-dockbar',
 	function(A) {
 		Liferay.Dockbar = {
 			init: function() {
@@ -522,12 +518,9 @@ AUI().use(
 		);
 
 		Liferay.Dockbar.Underlay = Underlay;
-
-		A.on(
-			'available',
-			Liferay.Dockbar.init,
-			'#dockbar',
-			Liferay.Dockbar
-		);
+	},
+	'',
+	{
+		requires: ['aui-button-item', 'aui-io-plugin', 'aui-io-request', 'aui-overlay-context', 'aui-overlay-manager']
 	}
 );
