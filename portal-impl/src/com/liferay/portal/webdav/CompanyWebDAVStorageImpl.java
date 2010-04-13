@@ -44,16 +44,16 @@ public class CompanyWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		throws WebDAVException {
 
 		try {
-			LinkedHashMap<String, Object> params =
-				new LinkedHashMap<String, Object>();
-
-			params.put("usersGroups", webDavRequest.getUserId());
+			long companyId = webDavRequest.getCompanyId();
+			long userId = webDavRequest.getUserId();
 
 			List<Resource> resources = new ArrayList<Resource>();
 
-			List<Group> groups = GroupLocalServiceUtil.search(
-				webDavRequest.getCompanyId(), null, null, params,
-				QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+			// Organizations
+
+			List<Group> groups =
+				GroupLocalServiceUtil.getUserOrganizationsGroups(
+					userId, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
 			for (Group group : groups) {
 				Resource resource = getResource(group);
@@ -61,8 +61,26 @@ public class CompanyWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 				resources.add(resource);
 			}
 
-			Group group = GroupLocalServiceUtil.getUserGroup(
-				webDavRequest.getCompanyId(), webDavRequest.getUserId());
+			// Communities
+
+			LinkedHashMap<String, Object> params =
+				new LinkedHashMap<String, Object>();
+
+			params.put("usersGroups", userId);
+
+			groups = GroupLocalServiceUtil.search(
+				companyId, null, null, params, QueryUtil.ALL_POS,
+				QueryUtil.ALL_POS);
+
+			for (Group group : groups) {
+				Resource resource = getResource(group);
+
+				resources.add(resource);
+			}
+
+			// Personal community
+
+			Group group = GroupLocalServiceUtil.getUserGroup(companyId, userId);
 
 			Resource resource = getResource(group);
 
