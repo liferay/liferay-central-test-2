@@ -40,20 +40,6 @@
 String panelTreeKey = "panelSelectedPortletsPanelTree";
 %>
 
-<div class="lfr-tree-controls aui-helper-clearfix">
-	<div class="lfr-tree-controls-item" id="<portlet:namespace />panelTreeExpandAll">
-		<div class="aui-icon lfr-tree-controls-expand"></div>
-
-		<a href="javascript:;" class="lfr-tree-controls-label"><liferay-ui:message key="expand-all" /></a>
-	</div>
-
-	<div class="lfr-tree-controls-item" id="<portlet:namespace />panelTreeCollapseAll">
-		<div class="aui-icon lfr-tree-controls-collapse"></div>
-
-		<a href="javascript:;" class="lfr-tree-controls-label"><liferay-ui:message key="collapse-all" /></a>
-	</div>
-</div>
-
 <div id="<portlet:namespace />panelSelectPortletsOutput" style="margin: 4px;"></div>
 
 <aui:script use="aui-tree-view">
@@ -126,18 +112,4 @@ String panelTreeKey = "panelSelectedPortletsPanelTree";
 	<%
 	}
 	%>
-
-	A.on(
-		'click',
-		treeView.collapseAll,
-		'#<portlet:namespace />panelTreeCollapseAll',
-		treeView
-	);
-
-	A.on(
-		'click',
-		treeView.expandAll,
-		'#<portlet:namespace />panelTreeExpandAll',
-		treeView
-	);
 </aui:script>
