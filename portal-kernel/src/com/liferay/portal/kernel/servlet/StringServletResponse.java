@@ -61,8 +61,9 @@ public class StringServletResponse extends HeaderCacheServletResponse {
 	public ServletOutputStream getOutputStream() {
 		if (_printWriter != null) {
 			throw new IllegalStateException(
-				"getWriter() has been called on this ServletResponse");
+				"Cannot obtain OutputStream because Writer is already in use");
 		}
+
 		if (_servletOutputStream == null) {
 			_unsyncByteArrayOutputStream = new UnsyncByteArrayOutputStream();
 			_servletOutputStream = new PipingServletOutputStream(
@@ -109,8 +110,9 @@ public class StringServletResponse extends HeaderCacheServletResponse {
 	public PrintWriter getWriter() {
 		if (_servletOutputStream != null) {
 			throw new IllegalStateException(
-				"getOutputStream() has been called on this ServletResponse");
+				"Cannot obtain Writer because OutputStream is already in use");
 		}
+
 		if (_printWriter == null) {
 			_unsyncStringWriter = new UnsyncStringWriter(true);
 			_printWriter = new PrintWriter(_unsyncStringWriter);
