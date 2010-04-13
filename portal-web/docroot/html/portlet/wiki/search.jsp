@@ -35,15 +35,19 @@ String keywords = ParamUtil.getString(request, "keywords");
 boolean createNewPage = true;
 %>
 
-<liferay-util:include page="/html/portlet/wiki/top_links.jsp" />
-
 <liferay-portlet:renderURL varImpl="searchURL">
 	<portlet:param name="struts_action" value="/wiki/search" />
 </liferay-portlet:renderURL>
 
 <aui:form action="<%= searchURL %>" method="get" name="fm">
+	<liferay-portlet:renderURLParams varImpl="searchURL" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 	<aui:input name="nodeId" type="hidden" value="<%= nodeId %>" />
+
+	<liferay-ui:tabs
+		names="search"
+		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
+	/>
 
 	<h1 class="page-title"><liferay-ui:message key="search-results" /></h1>
 
@@ -140,6 +144,14 @@ boolean createNewPage = true;
 			resultRows.add(row);
 		}
 	%>
+
+		<span class="aui-search-bar">
+			<aui:input inlineField="<%= true %>" label="" name="keywords" size="30" title="search-pages" type="text" value="<%= keywords %>" />
+
+			<aui:button type="submit" value="search" />
+		</span>
+
+		<br /><br />
 
 		<c:if test="<%= createNewPage %>">
 			<strong><aui:a cssClass="new-page" href="<%= addPageURL.toString() %>" label="create-a-new-page-on-this-topic" /></strong>
