@@ -259,6 +259,10 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 	}
 
 	public String encodeSafeFileName(String fileName) {
+		if (fileName == null) {
+			return StringPool.BLANK;
+		}
+
 		return StringUtil.replace(
 			fileName, _SAFE_FILE_NAME_1, _SAFE_FILE_NAME_2);
 	}
