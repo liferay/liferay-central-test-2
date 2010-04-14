@@ -145,9 +145,7 @@ public class WebDAVServlet extends HttpServlet {
 		return contextPath.concat(ServletPath);
 	}
 
-	protected WebDAVStorage getStorage(HttpServletRequest request)
-		throws WebDAVException {
-
+	protected WebDAVStorage getStorage(HttpServletRequest request) {
 		String[] pathArray = WebDAVUtil.getPathArray(
 			request.getPathInfo(), true);
 

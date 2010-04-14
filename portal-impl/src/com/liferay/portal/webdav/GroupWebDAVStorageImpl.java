@@ -26,9 +26,7 @@ import java.util.List;
  */
 public class GroupWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
-	public Resource getResource(WebDAVRequest webDavRequest)
-		throws WebDAVException {
-
+	public Resource getResource(WebDAVRequest webDavRequest) {
 		String path = getRootPath() + webDavRequest.getPath();
 
 		return new BaseResourceImpl(path, StringPool.BLANK, StringPool.BLANK);
