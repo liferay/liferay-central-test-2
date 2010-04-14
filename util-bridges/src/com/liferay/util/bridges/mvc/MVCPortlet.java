@@ -45,32 +45,6 @@ import javax.portlet.ResourceResponse;
  */
 public class MVCPortlet extends LiferayPortlet {
 
-	public void init() throws PortletException {
-		super.init();
-
-		aboutJSP = getInitParameter("about-jsp");
-		configJSP = getInitParameter("config-jsp");
-		editJSP = getInitParameter("edit-jsp");
-		editDefaultsJSP = getInitParameter("edit-defaults-jsp");
-		editGuestJSP = getInitParameter("edit-guest-jsp");
-		helpJSP = getInitParameter("help-jsp");
-		previewJSP = getInitParameter("preview-jsp");
-		printJSP = getInitParameter("print-jsp");
-		viewJSP = getInitParameter("view-jsp");
-
-		clearRequestParameters = GetterUtil.getBoolean(
-			getInitParameter("clear-request-parameters"));
-		copyRequestParameters = GetterUtil.getBoolean(
-			getInitParameter("copy-request-parameters"));
-
-		String packagePrefix = getInitParameter(
-			ActionCommandCache.ACTION_PACKAGE_NAME);
-
-		if (Validator.isNotNull(packagePrefix)) {
-			_actionCommandCache = new ActionCommandCache(packagePrefix);
-		}
-	}
-
 	public void doAbout(
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
@@ -149,6 +123,52 @@ public class MVCPortlet extends LiferayPortlet {
 		include(viewJSP, renderRequest, renderResponse);
 	}
 
+	public void init() throws PortletException {
+		super.init();
+
+		aboutJSP = getInitParameter("about-jsp");
+		configJSP = getInitParameter("config-jsp");
+		editJSP = getInitParameter("edit-jsp");
+		editDefaultsJSP = getInitParameter("edit-defaults-jsp");
+		editGuestJSP = getInitParameter("edit-guest-jsp");
+		helpJSP = getInitParameter("help-jsp");
+		previewJSP = getInitParameter("preview-jsp");
+		printJSP = getInitParameter("print-jsp");
+		viewJSP = getInitParameter("view-jsp");
+
+		jspPath = getInitParameter("jsp-path");
+
+		if (Validator.isNull(jspPath)) {
+			jspPath = StringPool.SLASH;
+		}
+		else if (jspPath.contains(StringPool.BACK_SLASH) ||
+				 jspPath.contains(StringPool.DOUBLE_SLASH) ||
+				 jspPath.contains(StringPool.PERIOD) ||
+				 jspPath.contains(StringPool.SPACE)) {
+
+			throw new PortletException(
+				"jsp-path " + jspPath + " has invalid characters");
+		}
+		else if (jspPath.startsWith(StringPool.SLASH) &&
+				 jspPath.endsWith(StringPool.SLASH)) {
+
+			throw new PortletException(
+				"jsp-path " + jspPath + " must start and end with a /");
+		}
+
+		clearRequestParameters = GetterUtil.getBoolean(
+			getInitParameter("clear-request-parameters"));
+		copyRequestParameters = GetterUtil.getBoolean(
+			getInitParameter("copy-request-parameters"));
+
+		String packagePrefix = getInitParameter(
+			ActionCommandCache.ACTION_PACKAGE_NAME);
+
+		if (Validator.isNotNull(packagePrefix)) {
+			_actionCommandCache = new ActionCommandCache(packagePrefix);
+		}
+	}
+
 	public void processAction(
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws IOException, PortletException {
@@ -215,6 +235,15 @@ public class MVCPortlet extends LiferayPortlet {
 		return false;
 	}
 
+	protected void checkJSPPath(String path) throws PortletException {
+		if (!path.startsWith(jspPath) ||
+			path.contains(StringPool.DOUBLE_PERIOD)) {
+
+			throw new PortletException(
+				"Path " + path + " is not accessible by this portlet");
+		}
+	}
+
 	protected void doDispatch(
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
@@ -250,6 +279,8 @@ public class MVCPortlet extends LiferayPortlet {
 			_log.error(path + " is not a valid include");
 		}
 		else {
+			checkJSPPath(path);
+
 			portletRequestDispatcher.include(portletRequest, portletResponse);
 		}
 
@@ -260,19 +291,21 @@ public class MVCPortlet extends LiferayPortlet {
 		}
 	}
 
+	private static Log _log = LogFactoryUtil.getLog(MVCPortlet.class);
+
 	protected ActionCommandCache _actionCommandCache;
+
 	protected String aboutJSP;
+	protected boolean clearRequestParameters;
 	protected String configJSP;
-	protected String editJSP;
+	protected boolean copyRequestParameters;
 	protected String editDefaultsJSP;
 	protected String editGuestJSP;
+	protected String editJSP;
 	protected String helpJSP;
+	protected String jspPath;
 	protected String previewJSP;
 	protected String printJSP;
 	protected String viewJSP;
-	protected boolean clearRequestParameters;
-	protected boolean copyRequestParameters;
-
-	private static Log _log = LogFactoryUtil.getLog(MVCPortlet.class);
 
 }
