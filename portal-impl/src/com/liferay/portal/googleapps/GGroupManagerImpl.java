@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.xml.Attribute;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
@@ -245,6 +246,39 @@ public class GGroupManagerImpl
 		getGGroups(gGroups, sb.toString());
 
 		return gGroups;
+	}
+
+	public void updateDescription(String emailAddress, String description)
+		throws GoogleAppsException {
+
+		Document document = getDocument(getGroupURL(emailAddress));
+
+		if (hasError(document)) {
+			if (_log.isInfoEnabled()) {
+				_log.info(getErrorMessage(document));
+			}
+
+			return;
+		}
+
+		Element atomEntryElement = document.getRootElement();
+
+		List<Element> appsPropertyElements = atomEntryElement.elements(
+			getAppsQName("property"));
+
+		for (Element appsPropertyElement : appsPropertyElements) {
+			String name = appsPropertyElement.attributeValue("name");
+			String value = appsPropertyElement.attributeValue("value");
+
+			if (name.equals("description")) {
+				Attribute valueAttribute = appsPropertyElement.attribute(
+					"value");
+
+				valueAttribute.setValue(description);
+			}
+		}
+
+		submitUpdate(getGroupURL(emailAddress), document);
 	}
 
 	protected GGroup getGGroup(Element atomEntryElement) {

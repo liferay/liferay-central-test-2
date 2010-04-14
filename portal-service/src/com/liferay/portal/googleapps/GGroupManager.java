@@ -62,4 +62,7 @@ public interface GGroupManager {
 	public List<GGroup> getGGroups(long userId, boolean directOnly)
 		throws GoogleAppsException;
 
+	public void updateDescription(String emailAddress, String description)
+		throws GoogleAppsException;
+
 }
