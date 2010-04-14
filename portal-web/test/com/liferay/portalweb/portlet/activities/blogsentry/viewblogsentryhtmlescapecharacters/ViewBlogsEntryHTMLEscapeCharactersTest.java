@@ -47,8 +47,12 @@ public class ViewBlogsEntryHTMLEscapeCharactersTest extends BaseTestCase {
 		selenium.clickAt("link=Activities Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"Joe wrote a new blog entry, Blogs Entry &amp; Test, in Guest."));
-		assertTrue(selenium.isElementPresent("link=Blogs Entry &amp; Test"));
+		assertEquals(RuntimeVariables.replace(
+				"Joe wrote a new blog entry, &amp;, in Guest."),
+			selenium.getText("//td[2]/div[1]"));
+		assertEquals(RuntimeVariables.replace("&amp;"),
+			selenium.getText("//td[2]/div[1]/a[1]"));
+		assertEquals(RuntimeVariables.replace("Guest"),
+			selenium.getText("//td[2]/div[1]/a[2]"));
 	}
 }

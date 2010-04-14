@@ -31,7 +31,7 @@
 <tr>
 	<td>type</td>
 	<td>_33_title</td>
-	<td>Blogs Entry Test</td>
+	<td>Blogs Entry Title</td>
 </tr>
 <tr>
 	<td>pause</td>
@@ -66,7 +66,7 @@
 <tr>
 	<td>type</td>
 	<td>//body</td>
-	<td>This is a blogs entry test.</td>
+	<td>Blogs Entry Content</td>
 </tr>
 <tr>
 	<td>selectFrame</td>
@@ -79,19 +79,19 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>assertText</td>
+	<td>//section/div/div/div/div</td>
 	<td>Your request processed successfully.</td>
-	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[@class='entry-title']</td>
-	<td>Blogs Entry Test</td>
+	<td>//div[2]/div[1]/div[1]/a</td>
+	<td>Blogs Entry Title</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[@class='entry-body']</td>
-	<td>This is a blogs entry test.</td>
+	<td>//p</td>
+	<td>Blogs Entry Content</td>
 </tr>
 
 </tbody></table>

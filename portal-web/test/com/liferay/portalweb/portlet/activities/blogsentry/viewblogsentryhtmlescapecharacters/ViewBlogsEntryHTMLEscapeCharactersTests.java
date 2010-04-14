@@ -37,7 +37,7 @@ public class ViewBlogsEntryHTMLEscapeCharactersTests extends BaseTests {
 		testSuite.addTestSuite(AddBlogsEntryHTMLEscapeCharactersTest.class);
 		testSuite.addTestSuite(ViewBlogsEntryHTMLEscapeCharactersTest.class);
 		testSuite.addTestSuite(TearDownBlogsEntryTest.class);
-		testSuite.addTestSuite(TearDownGuestPublicPageTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 		testSuite.addTestSuite(TearDownMyCommunityPrivatePageTest.class);
 
 		return testSuite;

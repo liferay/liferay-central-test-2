@@ -45,9 +45,12 @@ public class ViewBlogsEntryXSSTest extends BaseTestCase {
 		selenium.clickAt("link=Activities Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"Joe wrote a new blog entry, <script>alert(hello)</script>, in Guest."));
-		assertTrue(selenium.isElementPresent(
-				"link=<script>alert(hello)</script>"));
+		assertEquals(RuntimeVariables.replace(
+				"Joe wrote a new blog entry, <script>alert(hello)</script>, in Guest."),
+			selenium.getText("//td[2]/div[1]"));
+		assertEquals(RuntimeVariables.replace("<script>alert(hello)</script>"),
+			selenium.getText("//td[2]/div[1]/a[1]"));
+		assertEquals(RuntimeVariables.replace("Guest"),
+			selenium.getText("//td[2]/div[1]/a[2]"));
 	}
 }

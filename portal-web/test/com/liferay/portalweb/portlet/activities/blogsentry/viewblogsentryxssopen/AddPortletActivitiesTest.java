@@ -46,6 +46,7 @@ public class AddPortletActivitiesTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("_145_addApplication", RuntimeVariables.replace(""));
+		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -53,8 +54,7 @@ public class AddPortletActivitiesTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible(
-							"//input[@id='layout_configuration_content']")) {
+				if (selenium.isVisible("layout_configuration_content")) {
 					break;
 				}
 			}
@@ -64,9 +64,7 @@ public class AddPortletActivitiesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("//input[@id='layout_configuration_content']",
-			RuntimeVariables.replace(""));
-		selenium.typeKeys("//input[@id='layout_configuration_content']",
+		selenium.typeKeys("layout_configuration_content",
 			RuntimeVariables.replace("a"));
 
 		for (int second = 0;; second++) {
@@ -75,7 +73,7 @@ public class AddPortletActivitiesTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("//div[@id='Social-Activities']/p/a")) {
+				if (selenium.isVisible("//div[@title='Activities']/p/a")) {
 					break;
 				}
 			}
@@ -85,7 +83,7 @@ public class AddPortletActivitiesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//div[@id='Social-Activities']/p/a",
+		selenium.clickAt("//div[@title='Activities']/p/a",
 			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -94,7 +92,7 @@ public class AddPortletActivitiesTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//td[1]/div/div/div")) {
+				if (selenium.isElementPresent("//td[1]/div/div[1]")) {
 					break;
 				}
 			}
@@ -104,6 +102,6 @@ public class AddPortletActivitiesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertTrue(selenium.isElementPresent("//td[1]/div/div/div"));
+		assertTrue(selenium.isElementPresent("//td[1]/div/div[1]"));
 	}
 }

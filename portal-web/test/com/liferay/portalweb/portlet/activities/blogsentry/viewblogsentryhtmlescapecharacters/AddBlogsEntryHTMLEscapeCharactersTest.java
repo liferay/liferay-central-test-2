@@ -49,8 +49,7 @@ public class AddBlogsEntryHTMLEscapeCharactersTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Add Blog Entry']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.type("_33_title",
-			RuntimeVariables.replace("Blogs Entry &amp; Test"));
+		selenium.type("_33_title", RuntimeVariables.replace("&amp;"));
 		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
@@ -103,17 +102,17 @@ public class AddBlogsEntryHTMLEscapeCharactersTest extends BaseTestCase {
 
 		selenium.selectFrame("//iframe[@id='_33_editor']");
 		selenium.selectFrame("//td[@id='cke_contents_CKEditor1']/iframe");
-		selenium.type("//body",
-			RuntimeVariables.replace("This is a blogs entry test."));
+		selenium.type("//body", RuntimeVariables.replace("Blogs Entry Content"));
 		selenium.selectFrame("relative=top");
 		selenium.clickAt("//input[@value='Publish']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
-		assertEquals(RuntimeVariables.replace("Blogs Entry &amp; Test"),
-			selenium.getText("//div[@class='entry-title']"));
-		assertEquals(RuntimeVariables.replace("This is a blogs entry test."),
-			selenium.getText("//div[@class='entry-body']"));
+		assertEquals(RuntimeVariables.replace(
+				"Your request processed successfully."),
+			selenium.getText("//section/div/div/div/div"));
+		assertEquals(RuntimeVariables.replace("&amp;"),
+			selenium.getText("//div[2]/div[1]/div[1]/a"));
+		assertEquals(RuntimeVariables.replace("Blogs Entry Content"),
+			selenium.getText("//p"));
 	}
 }

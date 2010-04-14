@@ -12,25 +12,24 @@
  * details.
  */
 
-package com.liferay.portalweb.portlet.activities.blogsentry.viewblogsentryhtmlescapecharacters;
+package com.liferay.portalweb.portlet.activities.blogsentry.viewblogsentryxssopen;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="TearDownMyCommunityPrivatePageTest.java.html"><b><i>View Source</i>
- * </b></a>
+ * <a href="TearDownPageTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class TearDownMyCommunityPrivatePageTest extends BaseTestCase {
-	public void testTearDownMyCommunityPrivatePage() throws Exception {
+public class TearDownPageTest extends BaseTestCase {
+	public void testTearDownPage() throws Exception {
 		int label = 1;
 
 		while (label >= 1) {
 			switch (label) {
 			case 1:
-				selenium.open("/group/joebloggs/home/");
+				selenium.open("/web/guest/home/");
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -59,7 +58,7 @@ public class TearDownMyCommunityPrivatePageTest extends BaseTestCase {
 					}
 
 					try {
-						if (RuntimeVariables.replace("Joe Bloggs")
+						if (RuntimeVariables.replace("Guest")
 												.equals(selenium.getText(
 										"//div/div[3]/a"))) {
 							break;
@@ -85,7 +84,7 @@ public class TearDownMyCommunityPrivatePageTest extends BaseTestCase {
 			case 2:
 
 				boolean page1Present = selenium.isElementPresent(
-						"//li[3]/div/div[3]/a");
+						"//li[2]/div/div[3]/a");
 
 				if (!page1Present) {
 					label = 3;
@@ -93,7 +92,7 @@ public class TearDownMyCommunityPrivatePageTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//li[3]/div/div[3]/a",
+				selenium.clickAt("//li[2]/div/div[3]/a",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				selenium.clickAt("//ul[2]/li[1]/span/span/a",
@@ -108,7 +107,7 @@ public class TearDownMyCommunityPrivatePageTest extends BaseTestCase {
 			case 3:
 
 				boolean page2Present = selenium.isElementPresent(
-						"//li[3]/div/div[3]/a");
+						"//li[2]/div/div[3]/a");
 
 				if (!page2Present) {
 					label = 4;
@@ -116,7 +115,7 @@ public class TearDownMyCommunityPrivatePageTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//li[3]/div/div[3]/a",
+				selenium.clickAt("//li[2]/div/div[3]/a",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				selenium.clickAt("//ul[2]/li[1]/span/span/a",
@@ -131,7 +130,7 @@ public class TearDownMyCommunityPrivatePageTest extends BaseTestCase {
 			case 4:
 
 				boolean page3Present = selenium.isElementPresent(
-						"//li[3]/div/div[3]/a");
+						"//li[2]/div/div[3]/a");
 
 				if (!page3Present) {
 					label = 5;
@@ -139,7 +138,7 @@ public class TearDownMyCommunityPrivatePageTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//li[3]/div/div[3]/a",
+				selenium.clickAt("//li[2]/div/div[3]/a",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				selenium.clickAt("//ul[2]/li[1]/span/span/a",
@@ -154,7 +153,7 @@ public class TearDownMyCommunityPrivatePageTest extends BaseTestCase {
 			case 5:
 
 				boolean page4Present = selenium.isElementPresent(
-						"//li[3]/div/div[3]/a");
+						"//li[2]/div/div[3]/a");
 
 				if (!page4Present) {
 					label = 6;
@@ -162,7 +161,7 @@ public class TearDownMyCommunityPrivatePageTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//li[3]/div/div[3]/a",
+				selenium.clickAt("//li[2]/div/div[3]/a",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				selenium.clickAt("//ul[2]/li[1]/span/span/a",
@@ -177,7 +176,7 @@ public class TearDownMyCommunityPrivatePageTest extends BaseTestCase {
 			case 6:
 
 				boolean page5Present = selenium.isElementPresent(
-						"//li[3]/div/div[3]/a");
+						"//li[2]/div/div[3]/a");
 
 				if (!page5Present) {
 					label = 7;
@@ -185,7 +184,7 @@ public class TearDownMyCommunityPrivatePageTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//li[3]/div/div[3]/a",
+				selenium.clickAt("//li[2]/div/div[3]/a",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				selenium.clickAt("//ul[2]/li[1]/span/span/a",

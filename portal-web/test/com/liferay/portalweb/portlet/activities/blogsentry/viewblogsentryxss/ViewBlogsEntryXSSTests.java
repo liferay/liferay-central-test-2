@@ -36,7 +36,7 @@ public class ViewBlogsEntryXSSTests extends BaseTests {
 		testSuite.addTestSuite(AddBlogsEntryXSSTest.class);
 		testSuite.addTestSuite(ViewBlogsEntryXSSTest.class);
 		testSuite.addTestSuite(TearDownBlogsEntryTest.class);
-		testSuite.addTestSuite(TearDownGuestPublicPageTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 		testSuite.addTestSuite(TearDownMyCommunityPrivatePageTest.class);
 
 		return testSuite;

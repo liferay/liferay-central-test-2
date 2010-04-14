@@ -45,8 +45,12 @@ public class ViewBlogsEntryTest extends BaseTestCase {
 		selenium.clickAt("link=Activities Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"Joe wrote a new blog entry, Blogs Entry Test, in Guest."));
-		assertTrue(selenium.isElementPresent("link=Blogs Entry Test"));
+		assertEquals(RuntimeVariables.replace(
+				"Joe wrote a new blog entry, Blogs Entry Title, in Guest."),
+			selenium.getText("//td[2]/div[1]"));
+		assertEquals(RuntimeVariables.replace("Blogs Entry Title"),
+			selenium.getText("//td[2]/div[1]/a[1]"));
+		assertEquals(RuntimeVariables.replace("Guest"),
+			selenium.getText("//td[2]/div[1]/a[2]"));
 	}
 }

@@ -24,14 +24,19 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>Joe wrote a new blog entry, Blogs Entry Test, in Guest.</td>
-	<td></td>
+	<td>assertText</td>
+	<td>//td[2]/div[1]</td>
+	<td>Joe wrote a new blog entry, Blogs Entry Title, in Guest.</td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
-	<td>link=Blogs Entry Test</td>
-	<td></td>
+	<td>assertText</td>
+	<td>//td[2]/div[1]/a[1]</td>
+	<td>Blogs Entry Title</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//td[2]/div[1]/a[2]</td>
+	<td>Guest</td>
 </tr>
 
 </tbody></table>
