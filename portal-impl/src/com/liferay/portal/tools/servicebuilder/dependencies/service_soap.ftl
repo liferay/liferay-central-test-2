@@ -4,7 +4,7 @@ import ${packagePath}.service.${entity.name}ServiceUtil;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.util.ListUtil;
+import com.liferay.portal.kernel.util.ListUtil;
 
 import java.rmi.RemoteException;
 
@@ -67,6 +67,7 @@ public class ${entity.name}ServiceSoap {
 			<#assign hasMethods = true>
 
 			<#assign returnValueName = method.returns.value>
+			<#assign returnValueNameGeneric = method.returns.toGenericString()>
 			<#assign returnValueDimension = serviceBuilder.getDimensions(method.returns.dimensions)>
 			<#assign extendedModelName = packagePath + ".model." + entity.name>
 			<#assign soapModelName = packagePath + ".model." + entity.name + "Soap">
@@ -77,7 +78,23 @@ public class ${entity.name}ServiceSoap {
 				${soapModelName}${returnValueDimension}
 			<#elseif returnValueName == "java.util.List">
 				<#if entity.hasColumns()>
-					${soapModelName}[]
+					<#if returnValueNameGeneric == "java.util.List<java.lang.Boolean>">
+						java.lang.Boolean[]
+					<#elseif returnValueNameGeneric == "java.util.List<java.lang.Double>">
+						java.lang.Double[]
+					<#elseif returnValueNameGeneric == "java.util.List<java.lang.Integer>">
+						java.lang.Integer[]
+					<#elseif returnValueNameGeneric == "java.util.List<java.lang.Float>">
+						java.lang.Float[]
+					<#elseif returnValueNameGeneric == "java.util.List<java.lang.Long>">
+						java.lang.Long[]
+					<#elseif returnValueNameGeneric == "java.util.List<java.lang.Short>">
+						java.lang.Short[]
+					<#elseif returnValueNameGeneric == "java.util.List<java.lang.String>">
+						java.lang.String[]
+					<#else>
+						${soapModelName}[]
+					</#if>
 				<#else>
 					java.util.List
 				</#if>
@@ -161,7 +178,23 @@ public class ${entity.name}ServiceSoap {
 						<#elseif (returnValueName == extendedModelName) && (returnValueDimension != "")>
 							return ${soapModelName}.toSoapModels(returnValue);
 						<#elseif entity.hasColumns() && returnValueName == "java.util.List">
-							return ${soapModelName}.toSoapModels(returnValue);
+							<#if returnValueNameGeneric == "java.util.List<java.lang.Boolean>">
+								return returnValue.toArray(new java.lang.Boolean[returnValue.size()]);
+							<#elseif returnValueNameGeneric == "java.util.List<java.lang.Double>">
+								return returnValue.toArray(new java.lang.Double[returnValue.size()]);
+							<#elseif returnValueNameGeneric == "java.util.List<java.lang.Integer>">
+								return returnValue.toArray(new java.lang.Integer[returnValue.size()]);
+							<#elseif returnValueNameGeneric == "java.util.List<java.lang.Float>">
+								return returnValue.toArray(new java.lang.Float[returnValue.size()]);
+							<#elseif returnValueNameGeneric == "java.util.List<java.lang.Long>">
+								return returnValue.toArray(new java.lang.Long[returnValue.size()]);
+							<#elseif returnValueNameGeneric == "java.util.List<java.lang.Short>">
+								return returnValue.toArray(new java.lang.Short[returnValue.size()]);
+							<#elseif returnValueNameGeneric == "java.util.List<java.lang.String>">
+								return returnValue.toArray(new java.lang.String[returnValue.size()]);
+							<#else>
+								return ${soapModelName}.toSoapModels(returnValue);
+							</#if>
 						<#else>
 							return returnValue;
 						</#if>
