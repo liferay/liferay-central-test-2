@@ -126,16 +126,6 @@ public class MVCPortlet extends LiferayPortlet {
 	public void init() throws PortletException {
 		super.init();
 
-		aboutJSP = getInitParameter("about-jsp");
-		configJSP = getInitParameter("config-jsp");
-		editJSP = getInitParameter("edit-jsp");
-		editDefaultsJSP = getInitParameter("edit-defaults-jsp");
-		editGuestJSP = getInitParameter("edit-guest-jsp");
-		helpJSP = getInitParameter("help-jsp");
-		previewJSP = getInitParameter("preview-jsp");
-		printJSP = getInitParameter("print-jsp");
-		viewJSP = getInitParameter("view-jsp");
-
 		jspPath = getInitParameter("jsp-path");
 
 		if (Validator.isNull(jspPath)) {
@@ -155,6 +145,16 @@ public class MVCPortlet extends LiferayPortlet {
 			throw new PortletException(
 				"jsp-path " + jspPath + " must start and end with a /");
 		}
+
+		aboutJSP = getInitParameter("about-jsp");
+		configJSP = getInitParameter("config-jsp");
+		editJSP = getInitParameter("edit-jsp");
+		editDefaultsJSP = getInitParameter("edit-defaults-jsp");
+		editGuestJSP = getInitParameter("edit-guest-jsp");
+		helpJSP = getInitParameter("help-jsp");
+		previewJSP = getInitParameter("preview-jsp");
+		printJSP = getInitParameter("print-jsp");
+		viewJSP = getInitParameter("view-jsp");
 
 		clearRequestParameters = GetterUtil.getBoolean(
 			getInitParameter("clear-request-parameters"));
