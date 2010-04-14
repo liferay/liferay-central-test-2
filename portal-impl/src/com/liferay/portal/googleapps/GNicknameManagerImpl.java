@@ -67,7 +67,7 @@ public class GNicknameManagerImpl
 
 		appsNicknameElement.addAttribute("name", nickname);
 
-		submitUpdate(nicknameURL, document);
+		submitAdd(nicknameURL, document);
 	}
 
 	public void deleteGNickname(String nickname) throws GoogleAppsException {

@@ -72,7 +72,7 @@ public class GUserManagerImpl extends GBaseManagerImpl implements GUserManager {
 		appsNameElement.addAttribute("familyName", lastName);
 		appsNameElement.addAttribute("givenName", firstName);
 
-		submitUpdate(userURL, document);
+		submitAdd(userURL, document);
 	}
 
 	public void deleteGUser(long userId) throws GoogleAppsException {

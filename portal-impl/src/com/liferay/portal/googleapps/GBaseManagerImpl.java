@@ -80,6 +80,12 @@ public class GBaseManagerImpl {
 		return GHelperUtil.hasError(document);
 	}
 
+	protected void submitAdd(String url, Document document)
+		throws GoogleAppsException {
+
+		GHelperUtil.submitAdd(googleApps.getGAuthenticator(), url, document);
+	}
+
 	protected void submitDelete(String url) throws GoogleAppsException {
 		GHelperUtil.submitDelete(googleApps.getGAuthenticator(), url);
 	}

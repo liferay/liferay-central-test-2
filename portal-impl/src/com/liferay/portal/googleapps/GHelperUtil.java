@@ -149,6 +149,26 @@ public class GHelperUtil {
 		}
 	}
 
+	public static void submitAdd(
+			GAuthenticator gAuthenticator, String url, Document document)
+		throws GoogleAppsException {
+
+		try {
+			Http.Options options = _getOptions(gAuthenticator);
+
+			options.setBody(
+				document.formattedString(), ContentTypes.APPLICATION_ATOM_XML,
+				StringPool.UTF8);
+			options.setLocation(url);
+			options.setPost(true);
+
+			HttpUtil.URLtoString(options);
+		}
+		catch (IOException ioe) {
+			throw new GoogleAppsException(ioe);
+		}
+	}
+
 	public static void submitDelete(GAuthenticator gAuthenticator, String url)
 		throws GoogleAppsException {
 

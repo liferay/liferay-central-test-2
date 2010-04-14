@@ -49,7 +49,7 @@ public class GEmailSettingsManagerImpl
 		addAppsProperty(
 			atomEntryElement, "makeDefault", Boolean.TRUE.toString());
 
-		submitUpdate(getEmailSettingsURL(userId).concat("/sendas"), document);
+		submitAdd(getEmailSettingsURL(userId).concat("/sendas"), document);
 	}
 
 	protected String getEmailSettingsURL(long userId) {

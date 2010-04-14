@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.SAXReaderUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,8 +43,78 @@ public class GGroupManagerImpl
 			gAuthenticator.getDomain());
 	}
 
+	public void addGGroupMember(
+			String groupEmailAddress, String memberEmailAddress)
+		throws GoogleAppsException {
+
+		Document document = SAXReaderUtil.createDocument();
+
+		Element atomEntryElement = addAtomEntry(document);
+
+		addAppsProperty(atomEntryElement, "memberId", memberEmailAddress);
+
+		StringBundler sb = new StringBundler(4);
+
+		sb.append(groupURL);
+		sb.append(StringPool.SLASH);
+		sb.append(groupEmailAddress);
+		sb.append("/member");
+
+		submitAdd(sb.toString(), document);
+	}
+
+	public void addGGroupOwner(
+			String groupEmailAddress, String ownerEmailAddress)
+		throws GoogleAppsException {
+
+		Document document = SAXReaderUtil.createDocument();
+
+		Element atomEntryElement = addAtomEntry(document);
+
+		addAppsProperty(atomEntryElement, "email", ownerEmailAddress);
+
+		StringBundler sb = new StringBundler(4);
+
+		sb.append(groupURL);
+		sb.append(StringPool.SLASH);
+		sb.append(groupEmailAddress);
+		sb.append("/owner");
+
+		submitAdd(sb.toString(), document);
+	}
+
 	public void deleteGGroup(String emailAddress) throws GoogleAppsException {
 		submitDelete(getGroupURL(emailAddress));
+	}
+
+	public void deleteGGroupMember(
+			String groupEmailAddress, String memberEmailAddress)
+		throws GoogleAppsException {
+
+		StringBundler sb = new StringBundler(5);
+
+		sb.append(groupURL);
+		sb.append(StringPool.SLASH);
+		sb.append(groupEmailAddress);
+		sb.append("/member/");
+		sb.append(memberEmailAddress);
+
+		submitDelete(sb.toString());
+	}
+
+	public void deleteGGroupOwner(
+			String groupEmailAddress, String ownerEmailAddress)
+		throws GoogleAppsException {
+
+		StringBundler sb = new StringBundler(5);
+
+		sb.append(groupURL);
+		sb.append(StringPool.SLASH);
+		sb.append(groupEmailAddress);
+		sb.append("/owner/");
+		sb.append(ownerEmailAddress);
+
+		submitDelete(sb.toString());
 	}
 
 	public GGroup getGGroup(String emailAddress) throws GoogleAppsException {
@@ -77,6 +148,23 @@ public class GGroupManagerImpl
 		getGGroupMembers(gGroupMembers, sb.toString());
 
 		return gGroupMembers;
+	}
+
+	public List<GGroupOwner> getGGroupOwners(String emailAddress)
+		throws GoogleAppsException {
+
+		List<GGroupOwner> gGroupOwners = new ArrayList<GGroupOwner>();
+
+		StringBundler sb = new StringBundler(4);
+
+		sb.append(groupURL);
+		sb.append(StringPool.SLASH);
+		sb.append(emailAddress);
+		sb.append("/owner");
+
+		getGGroupOwners(gGroupOwners, sb.toString());
+
+		return gGroupOwners;
 	}
 
 	public List<GGroup> getGGroups() throws GoogleAppsException {
@@ -135,6 +223,47 @@ public class GGroupManagerImpl
 		return gGroup;
 	}
 
+	protected GGroupMember getGGroupMember(Element atomEntryElement)
+		throws GoogleAppsException {
+
+		GGroupMember gGroupMember = new GGroupMember();
+
+		List<Element> appsPropertyElements = atomEntryElement.elements(
+			getAppsQName("property"));
+
+		for (Element appsPropertyElement : appsPropertyElements) {
+			String name = appsPropertyElement.attributeValue("name");
+			String value = appsPropertyElement.attributeValue("value");
+
+			if (name.equals("directMember")) {
+				gGroupMember.setDirect(GetterUtil.getBoolean(value));
+			}
+			else if (name.equals("memberId")) {
+				gGroupMember.setEmailAddress(value);
+			}
+			else if (name.equals("memberType")) {
+				gGroupMember.setType(value);
+			}
+		}
+
+		String type = gGroupMember.getType();
+
+		if (type.equals("Group")) {
+			GGroup gGroup = getGGroup(gGroupMember.getEmailAddress());
+
+			gGroupMember.setGGroup(gGroup);
+		}
+		else if (type.equals("User")) {
+			GUserManager gUserManager = googleApps.getGUserManager();
+
+			GUser gUser = gUserManager.getGUser(gGroupMember.getEmailAddress());
+
+			gGroupMember.setGUser(gUser);
+		}
+
+		return gGroupMember;
+	}
+
 	protected void getGGroupMembers(
 			final List<GGroupMember> gGroupMembers, String url)
 		throws GoogleAppsException {
@@ -147,43 +276,9 @@ public class GGroupManagerImpl
 			getAtomQName("entry"));
 
 		for (Element atomEntryElement : atomEntryElements) {
-			GGroupMember gGroupMember = new GGroupMember();
+			GGroupMember gGroupMember = getGGroupMember(atomEntryElement);
 
 			gGroupMembers.add(gGroupMember);
-
-			List<Element> appsPropertyElements = atomEntryElement.elements(
-				getAppsQName("property"));
-
-			for (Element appsPropertyElement : appsPropertyElements) {
-				String name = appsPropertyElement.attributeValue("name");
-				String value = appsPropertyElement.attributeValue("value");
-
-				if (name.equals("directMember")) {
-					gGroupMember.setDirect(GetterUtil.getBoolean(value));
-				}
-				else if (name.equals("memberId")) {
-					gGroupMember.setEmailAddress(value);
-				}
-				else if (name.equals("memberType")) {
-					gGroupMember.setType(value);
-				}
-			}
-
-			String type = gGroupMember.getType();
-
-			if (type.equals("Group")) {
-				GGroup gGroup = getGGroup(gGroupMember.getEmailAddress());
-
-				gGroupMember.setGGroup(gGroup);
-			}
-			else if (type.equals("User")) {
-				GUserManager gUserManager = googleApps.getGUserManager();
-
-				GUser gUser = gUserManager.getGUser(
-					gGroupMember.getEmailAddress());
-
-				gGroupMember.setGUser(gUser);
-			}
 		}
 
 		new GetNextItems(url, atomFeedElement) {
@@ -192,6 +287,72 @@ public class GGroupManagerImpl
 				throws GoogleAppsException {
 
 				getGGroupMembers(gGroupMembers, nextURL);
+			}
+
+		};
+	}
+
+	protected GGroupOwner getGGroupOwner(Element atomEntryElement)
+		throws GoogleAppsException {
+
+		GGroupOwner gGroupOwner = new GGroupOwner();
+
+		List<Element> appsPropertyElements = atomEntryElement.elements(
+			getAppsQName("property"));
+
+		for (Element appsPropertyElement : appsPropertyElements) {
+			String name = appsPropertyElement.attributeValue("name");
+			String value = appsPropertyElement.attributeValue("value");
+
+			if (name.equals("memberId")) {
+				gGroupOwner.setEmailAddress(value);
+			}
+			else if (name.equals("memberType")) {
+				gGroupOwner.setType(value);
+			}
+		}
+
+		String type = gGroupOwner.getType();
+
+		if (type.equals("Group")) {
+			GGroup gGroup = getGGroup(gGroupOwner.getEmailAddress());
+
+			gGroupOwner.setGGroup(gGroup);
+		}
+		else if (type.equals("User")) {
+			GUserManager gUserManager = googleApps.getGUserManager();
+
+			GUser gUser = gUserManager.getGUser(gGroupOwner.getEmailAddress());
+
+			gGroupOwner.setGUser(gUser);
+		}
+
+		return gGroupOwner;
+	}
+
+	protected void getGGroupOwners(
+			final List<GGroupOwner> gGroupOwners, String url)
+		throws GoogleAppsException {
+
+		Document document = getDocument(url);
+
+		Element atomFeedElement = document.getRootElement();
+
+		List<Element> atomEntryElements = atomFeedElement.elements(
+			getAtomQName("entry"));
+
+		for (Element atomEntryElement : atomEntryElements) {
+			GGroupOwner gGroupOwner = getGGroupOwner(atomEntryElement);
+
+			gGroupOwners.add(gGroupOwner);
+		}
+
+		new GetNextItems(url, atomFeedElement) {
+
+			public void getNextItems(String nextURL)
+				throws GoogleAppsException {
+
+				getGGroupOwners(gGroupOwners, nextURL);
 			}
 
 		};

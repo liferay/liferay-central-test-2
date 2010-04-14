@@ -23,11 +23,30 @@ import java.util.List;
  */
 public interface GGroupManager {
 
+	public void addGGroupMember(
+			String groupEmailAddress, String memberEmailAddress)
+		throws GoogleAppsException;
+
+	public void addGGroupOwner(
+			String groupEmailAddress, String ownerEmailAddress)
+		throws GoogleAppsException;
+
 	public void deleteGGroup(String emailAddress) throws GoogleAppsException;
+
+	public void deleteGGroupMember(
+			String groupEmailAddress, String memberEmailAddress)
+		throws GoogleAppsException;
+
+	public void deleteGGroupOwner(
+			String groupEmailAddress, String ownerEmailAddress)
+		throws GoogleAppsException;
 
 	public GGroup getGGroup(String emailAddress) throws GoogleAppsException;
 
 	public List<GGroupMember> getGGroupMembers(String emailAddress)
+		throws GoogleAppsException;
+
+	public List<GGroupOwner> getGGroupOwners(String emailAddress)
 		throws GoogleAppsException;
 
 	public List<GGroup> getGGroups() throws GoogleAppsException;
