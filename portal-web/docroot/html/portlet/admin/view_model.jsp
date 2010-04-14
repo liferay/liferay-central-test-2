@@ -68,11 +68,13 @@ try {
 catch (Exception e) {
 	modelString = e.toString();
 }
+
+String namespace = PwdGenerator.getPinNumber();
 %>
 
 <div style="overflow: auto; vertical-align: top;">
-	<liferay-ui:panel-container cssClass="model-details">
-		<liferay-ui:panel defaultState="closed" title="<%= resourceTitle %>">
+	<liferay-ui:panel-container cssClass="model-details" id='<%= "modelDetails" + namespace %>'>
+		<liferay-ui:panel defaultState="closed" id='<%= "modelDetails" + namespace + "Panel" %>' title="<%= resourceTitle %>">
 			<div style="height: 100px; width: 350px;"><%= modelString %></div>
 		</liferay-ui:panel>
 	</liferay-ui:panel-container>
