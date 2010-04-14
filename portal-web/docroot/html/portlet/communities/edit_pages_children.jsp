@@ -168,7 +168,7 @@ if (!StringUtil.contains(tabs4Names, tabs4)) {
 			</aui:script>
 
 			<c:if test="<%= !layoutPrototypes.isEmpty() %>">
-				<aui:script use="event,node">
+				<aui:script use="aui-base">
 					var layoutPrototypeIdSelect = A.one('#<portlet:namespace />layoutPrototypeId');
 
 					function showHiddenFields() {

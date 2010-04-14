@@ -508,7 +508,7 @@ for (int i = 0; i < PropsValues.LAYOUT_TYPES.length; i++) {
 	}
 </aui:script>
 
-<aui:script use="aui-base,event,node">
+<aui:script use="aui-base">
 	<portlet:namespace />toggleLayoutTypeFields('<%= selLayout.getType() %>');
 
 	<portlet:namespace />updateLanguageTemps(lastLanguageId);

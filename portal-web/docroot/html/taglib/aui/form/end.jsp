@@ -23,7 +23,7 @@ String onSubmit = GetterUtil.getString((String)request.getAttribute("aui:form:on
 
 </form>
 
-<aui:script use="node">
+<aui:script use="aui-base">
 	var form = A.one('#<%= namespace + name %>');
 
 	if (form) {

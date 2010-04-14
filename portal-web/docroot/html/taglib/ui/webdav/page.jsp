@@ -39,7 +39,7 @@ String path = (String)request.getAttribute("liferay-ui:webdav:path");
 	</table>
 </div>
 
-<aui:script use="event,node">
+<aui:script use="aui-base">
 	var webdavDiv = A.one('#<%= randomNamespace %>webdav');
 
 	if (webdavDiv) {

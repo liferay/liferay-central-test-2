@@ -21,7 +21,7 @@
 		<liferay-ui:message key="drag-portlets-below-to-nest-them" />
 	</div>
 
-	<aui:script use="event,node">
+	<aui:script use="aui-base">
 		var portletWrapper = A.one('#portlet-wrapper-<%= portletDisplay.getId() %>');
 
 		if (portletWrapper) {

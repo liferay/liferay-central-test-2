@@ -63,7 +63,7 @@ List<AssetRendererFactory> assetRendererFactories = AssetRendererFactoryRegistry
 	</aui:button-row>
 </aui:form>
 
-<aui:script use="event,node">
+<aui:script use="aui-base">
 	var showAssetCount = A.one('#<portlet:namespace />showAssetCountCheckbox');
 
 	function showHiddenFields() {

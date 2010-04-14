@@ -65,7 +65,7 @@ WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 	</div>
 </aui:form>
 
-<aui:script use="event,node">
+<aui:script use="aui-base">
 	var validateFile = function(fileField) {
 		var value = fileField.val();
 

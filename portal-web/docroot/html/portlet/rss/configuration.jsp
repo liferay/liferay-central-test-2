@@ -182,7 +182,7 @@ configurationRenderURL.setParameter("portletResource", portletResource);
 				<aui:button onClick="<%= redirect %>" type="cancel" />
 			</aui:button-row>
 
-			<aui:script use="event,node">
+			<aui:script use="aui-base">
 				var subscriptionsTable = A.one('#<portlet:namespace />subscriptions');
 
 				if (subscriptionsTable) {

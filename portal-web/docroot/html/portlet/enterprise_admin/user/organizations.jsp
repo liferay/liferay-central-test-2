@@ -132,7 +132,7 @@ List<Organization> organizations = (List<Organization>)request.getAttribute("use
 
 	function <portlet:namespace />trackChanges() {
 		AUI().use(
-			'event',
+			'aui-base',
 			function(A) {
 				A.fire(
 					'enterpriseAdmin:trackChanges',

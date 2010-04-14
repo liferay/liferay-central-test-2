@@ -484,7 +484,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 	}
 </aui:script>
 
-<aui:script use="event,node">
+<aui:script use="aui-base">
 	<portlet:namespace />initRowsChecked();
 
 	A.all('input[name=<portlet:namespace />rowIds]').on(

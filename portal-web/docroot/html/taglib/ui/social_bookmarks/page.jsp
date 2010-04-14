@@ -42,7 +42,7 @@
 		</ul>
 	</div>
 
-	<aui:script use="event,node">
+	<aui:script use="aui-base">
 		var socialBookmarks = A.one('#<%= randomNamespace %>socialBookmarks');
 
 		if (socialBookmarks) {

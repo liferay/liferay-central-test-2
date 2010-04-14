@@ -398,7 +398,7 @@ for (int i = 0; i < results.size(); i++) {
 		}
 	</aui:script>
 
-	<aui:script use="event,node">
+	<aui:script use="aui-base">
 		<portlet:namespace />initRowsChecked();
 
 		A.all('input[name=<portlet:namespace />rowIds]').on(

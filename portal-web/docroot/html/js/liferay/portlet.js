@@ -209,7 +209,7 @@ Liferay.Portlet = {
 				var url = themeDisplay.getPathMain() + '/portal/update_layout';
 
 				AUI().use(
-					'io',
+					'aui-io-request',
 					function(A) {
 						A.io.request(
 							url,

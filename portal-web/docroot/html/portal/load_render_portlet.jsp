@@ -37,7 +37,7 @@ String portletId = portlet.getPortletId();
 
 		<div class="loading-animation" id="p_load<%= portletDisplay.getNamespace() %>"></div>
 
-		<aui:script use="node">
+		<aui:script use="aui-base">
 			var ns = '<%= portletDisplay.getNamespace() %>';
 
 			Liferay.Portlet.addHTML(

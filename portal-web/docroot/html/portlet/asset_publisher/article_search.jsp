@@ -174,7 +174,7 @@ portletURL.setParameter("typeSelection", JournalArticle.class.getName());
 	</c:if>
 </aui:script>
 
-<aui:script use="node">
+<aui:script use="aui-base">
 	var fm = A.one(document.<portlet:namespace />fm);
 
 	if (fm) {

@@ -153,7 +153,7 @@ Liferay.Util = {
 
 	check: function(form, name, checked) {
 		AUI().use(
-			'node',
+			'aui-base',
 			function(A) {
 				var checkbox = A.one(form[name]);
 
@@ -166,7 +166,7 @@ Liferay.Util = {
 
 	checkAll: function(form, name, allBox) {
 		AUI().use(
-			'node',
+			'aui-base',
 			function(A) {
 				var selector;
 
@@ -229,9 +229,7 @@ Liferay.Util = {
 
 	createFlyouts: function(options) {
 		AUI().use(
-			'aui-delayed-task',
-			'event',
-			'node',
+			'aui-base',
 			function(A) {
 				options = options || {};
 
@@ -362,8 +360,7 @@ Liferay.Util = {
 
 	disableTextareaTabs: function(textarea) {
 		AUI().use(
-			'event',
-			'node',
+			'aui-base',
 			function(A) {
 				textarea = A.one(textarea);
 
@@ -378,7 +375,7 @@ Liferay.Util = {
 
 	disableToggleBoxes: function(checkBoxId, toggleBoxId, checkDisabled) {
 		AUI().use(
-			'node',
+			'aui-base',
 			function(A) {
 				var checkBox = A.one('#' + checkBoxId);
 				var toggleBox = A.one('#' + toggleBoxId);
@@ -416,8 +413,7 @@ Liferay.Util = {
 	enableTextareaTabs: function(textarea) {
 		var instance = this;
 		AUI().use(
-			'event',
-			'node',
+			'aui-base',
 			function(A) {
 				textarea = A.one(textarea);
 
@@ -495,7 +491,7 @@ Liferay.Util = {
 
 	forcePost: function(link) {
 		AUI().use(
-			'node',
+			'aui-base',
 			function(A) {
 				link = A.one(link);
 
@@ -1049,7 +1045,7 @@ Liferay.Util = {
 
 	sortBox: function(box) {
 		AUI().use(
-			'node',
+			'aui-base',
 			function(A) {
 				var newBox = [];
 
@@ -1174,7 +1170,7 @@ Liferay.Util = {
 
 	toggleBoxes: function(checkBoxId, toggleBoxId) {
 		AUI().use(
-			'node',
+			'aui-base',
 			function(A) {
 				var checkBox = A.one('#' + checkBoxId);
 				var toggleBox = A.one('#' + toggleBoxId);
@@ -1198,8 +1194,6 @@ Liferay.Util = {
 	toggleControls: function() {
 		AUI().use(
 			'aui-io-request',
-			'event',
-			'node',
 			function(A) {
 				var trigger = A.one('.toggle-controls');
 
@@ -1240,8 +1234,7 @@ Liferay.Util = {
 
 	toggleSelectBox: function(selectBoxId, value, toggleBoxId) {
 		AUI().use(
-			'event',
-			'node',
+			'aui-base',
 			function(A) {
 				var selectBox = A.one('#' + selectBoxId);
 				var toggleBox = A.one('#' + toggleBoxId);
@@ -1305,8 +1298,7 @@ Liferay.Util = {
 function submitForm(form, action, singleSubmit) {
 	if (!Liferay.Util._submitLocked) {
 		AUI().use(
-			'event',
-			'node',
+			'aui-base',
 			function(A) {
 				form = A.one(form);
 

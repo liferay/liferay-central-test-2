@@ -156,7 +156,7 @@
 	/>
 </aui:fieldset>
 
-<aui:script use="event,node">
+<aui:script use="aui-base">
 	var selectDisplayStyle = A.one('#<portlet:namespace />displayStyle');
 
 	function showHiddenFields () {

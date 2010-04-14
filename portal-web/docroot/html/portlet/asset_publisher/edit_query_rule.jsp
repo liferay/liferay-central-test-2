@@ -75,7 +75,7 @@ if (queryLogicIndex >= 0) {
 	</div>
 </div>
 
-<aui:script use="event,node">
+<aui:script use="aui-base">
 	var select = A.one('#<portlet:namespace /><%= randomNamespace %>selector');
 
 	if (select) {

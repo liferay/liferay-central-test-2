@@ -128,7 +128,7 @@ if (organizationId > 0) {
 	}
 </aui:script>
 
-<aui:script use="event,node">
+<aui:script use="aui-base">
 	var selectionMethod = A.one('#<portlet:namespace />selectionMethod');
 
 	function showHiddenFields() {

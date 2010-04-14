@@ -198,7 +198,7 @@ boolean deployed = false;
 	}
 </aui:script>
 
-<aui:script use="event,node">
+<aui:script use="aui-base">
 	var modifyLinks = A.all('span.modify-link');
 
 	if (modifyLinks) {

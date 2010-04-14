@@ -64,7 +64,7 @@
 	</aui:button-row>
 </aui:form>
 
-<aui:script use="event,node">
+<aui:script use="aui-base">
 	var reminderQueryQuestion = A.one('#reminderQueryQuestion');
 	var customQuestionContainer = A.one('#customQuestionContainer');
 

@@ -323,7 +323,7 @@ portletURL.setParameter("name", name);
 	</c:if>
 </aui:script>
 
-<aui:script use="event,node">
+<aui:script use="aui-base">
 	var validateFile = function(fileField) {
 		var value = fileField.val();
 

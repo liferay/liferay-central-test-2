@@ -119,7 +119,7 @@
 			</aui:script>
 		</c:if>
 
-		<aui:script use="event,node">
+		<aui:script use="aui-base">
 			var password = A.one('#<portlet:namespace />password');
 
 			if (password) {

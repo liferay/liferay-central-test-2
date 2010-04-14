@@ -116,7 +116,7 @@ String[] bulletStyleOptions = StringUtil.split(themeDisplay.getTheme().getSettin
 	</aui:button-row>
 </aui:form>
 
-<aui:script use="event,node">
+<aui:script use="aui-base">
 	var select = A.one('#<portlet:namespace/>displayStyle');
 
 	var toggleCustomFields = function() {

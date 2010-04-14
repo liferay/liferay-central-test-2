@@ -92,7 +92,7 @@
 	</c:choose>
 </div>
 
-<aui:script use="node">
+<aui:script use="aui-base">
 	var selectedPages = A.one('#<portlet:namespace />scope_selected_pages');
 
 	if (selectedPages && selectedPages.get('checked') && <%= !publish %>) {

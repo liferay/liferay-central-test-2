@@ -368,7 +368,7 @@ boolean allowPingbacks = PropsValues.MESSAGE_BOARDS_PINGBACK_ENABLED && BeanPara
 	</c:if>
 </aui:script>
 
-<aui:script use="event,node">
+<aui:script use="aui-base">
 
 	<%
 	for (int i = 1; i <= existingAttachments.length; i++) {

@@ -320,7 +320,7 @@ if (parentOrganization != null) {
 	}
 </aui:script>
 
-<aui:script use="event,node">
+<aui:script use="aui-base">
 	var modifyLinks = A.all('span.modify-link');
 
 	if (modifyLinks) {
@@ -370,7 +370,7 @@ if (parentOrganization != null) {
 </aui:script>
 
 <c:if test="<%= organization == null %>">
-	<aui:script use="node">
+	<aui:script use="aui-base">
 		A.one('#<portlet:namespace />type').on(
 			'change',
 			function(event) {

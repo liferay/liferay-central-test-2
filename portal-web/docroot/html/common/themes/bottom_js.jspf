@@ -16,7 +16,7 @@
 
 <%@ include file="/html/portal/layout/view/portlet_js.jspf" %>
 
-<aui:script use="node">
+<aui:script use="aui-base">
 	Liferay.Util.addInputType();
 
 	Liferay.Portlet.ready(

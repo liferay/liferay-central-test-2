@@ -129,7 +129,7 @@ boolean passwordReset = BeanParamUtil.getBoolean(selUser, request, "passwordRese
 		<aui:input label="answer" name="reminderQueryAnswer" size="50" value="<%= selUser.getReminderQueryAnswer() %>" />
 	</aui:fieldset>
 
-	<aui:script use="event,node">
+	<aui:script use="aui-base">
 		var reminderQueryQuestion = A.one('#<portlet:namespace />reminderQueryQuestion');
 		var customQuestionDiv = A.one('#<portlet:namespace />customQuestionDiv');
 
