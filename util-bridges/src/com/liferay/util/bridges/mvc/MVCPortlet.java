@@ -251,6 +251,19 @@ public class MVCPortlet extends LiferayPortlet {
 		String jspPage = renderRequest.getParameter("jspPage");
 
 		if (jspPage != null) {
+			if (!isProcessRenderRequest(renderRequest)) {
+				renderRequest.setAttribute(
+					WebKeys.PORTLET_DECORATE, Boolean.FALSE);
+
+				return;
+			}
+
+			WindowState windowState = renderRequest.getWindowState();
+
+			if (windowState.equals(WindowState.MINIMIZED)) {
+				return;
+			}
+
 			include(jspPage, renderRequest, renderResponse);
 		}
 		else {

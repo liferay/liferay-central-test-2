@@ -162,43 +162,43 @@ public class LiferayPortlet extends GenericPortlet {
 			return;
 		}
 
-		WindowState state = renderRequest.getWindowState();
+		WindowState windowState = renderRequest.getWindowState();
 
-		if (state.equals(WindowState.MINIMIZED)) {
+		if (windowState.equals(WindowState.MINIMIZED)) {
 			return;
 		}
 
-		PortletMode mode = renderRequest.getPortletMode();
+		PortletMode portletMode = renderRequest.getPortletMode();
 
-		if (mode.equals(PortletMode.VIEW)) {
+		if (portletMode.equals(PortletMode.VIEW)) {
 			doView(renderRequest, renderResponse);
 		}
-		else if (mode.equals(LiferayPortletMode.ABOUT)) {
+		else if (portletMode.equals(LiferayPortletMode.ABOUT)) {
 			doAbout(renderRequest, renderResponse);
 		}
-		else if (mode.equals(LiferayPortletMode.CONFIG)) {
+		else if (portletMode.equals(LiferayPortletMode.CONFIG)) {
 			doConfig(renderRequest, renderResponse);
 		}
-		else if (mode.equals(PortletMode.EDIT)) {
+		else if (portletMode.equals(PortletMode.EDIT)) {
 			doEdit(renderRequest, renderResponse);
 		}
-		else if (mode.equals(LiferayPortletMode.EDIT_DEFAULTS)) {
+		else if (portletMode.equals(LiferayPortletMode.EDIT_DEFAULTS)) {
 			doEditDefaults(renderRequest, renderResponse);
 		}
-		else if (mode.equals(LiferayPortletMode.EDIT_GUEST)) {
+		else if (portletMode.equals(LiferayPortletMode.EDIT_GUEST)) {
 			doEditGuest(renderRequest, renderResponse);
 		}
-		else if (mode.equals(PortletMode.HELP)) {
+		else if (portletMode.equals(PortletMode.HELP)) {
 			doHelp(renderRequest, renderResponse);
 		}
-		else if (mode.equals(LiferayPortletMode.PREVIEW)) {
+		else if (portletMode.equals(LiferayPortletMode.PREVIEW)) {
 			doPreview(renderRequest, renderResponse);
 		}
-		else if (mode.equals(LiferayPortletMode.PRINT)) {
+		else if (portletMode.equals(LiferayPortletMode.PRINT)) {
 			doPrint(renderRequest, renderResponse);
 		}
 		else {
-			throw new PortletException(mode.toString());
+			throw new PortletException(portletMode.toString());
 		}
 	}
 
