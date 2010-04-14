@@ -33,9 +33,6 @@ public class ActionKeys {
 
 	public static final String ADD_CATEGORY = "ADD_CATEGORY";
 
-	public static final String ADD_CATEGORY_VOCABULARY =
-		"ADD_CATEGORY_VOCABULARY";
-
 	public static final String ADD_COMMUNITY = "ADD_COMMUNITY";
 
 	public static final String ADD_COUPON = "ADD_COUPON";
