@@ -147,21 +147,6 @@ public class ServletResponseUtil {
 		sendFile(null, response, fileName, is, contentType);
 	}
 
-	public static void write(
-			HttpServletResponse response, StringServletResponse stringResponse)
-		throws IOException {
-
-		if (stringResponse.isCalledGetOutputStream()) {
-			UnsyncByteArrayOutputStream unsyncByteArrayInputStream =
-				stringResponse.getUnsyncByteArrayOutputStream();
-			write(response, unsyncByteArrayInputStream.unsafeGetByteArray(),
-				unsyncByteArrayInputStream.size());
-		}
-		else {
-			write(response, stringResponse.getString());
-		}
-	}
-
 	public static void write(HttpServletResponse response, byte[] bytes)
 		throws IOException {
 
@@ -231,6 +216,23 @@ public class ServletResponseUtil {
 		throws IOException {
 
 		write(response, s.getBytes(StringPool.UTF8));
+	}
+
+	public static void write(
+			HttpServletResponse response, StringServletResponse stringResponse)
+		throws IOException {
+
+		if (stringResponse.isCalledGetOutputStream()) {
+			UnsyncByteArrayOutputStream unsyncByteArrayInputStream =
+				stringResponse.getUnsyncByteArrayOutputStream();
+
+			write(
+				response, unsyncByteArrayInputStream.unsafeGetByteArray(),
+				unsyncByteArrayInputStream.size());
+		}
+		else {
+			write(response, stringResponse.getString());
+		}
 	}
 
 	protected static void setHeaders(
@@ -316,9 +318,9 @@ public class ServletResponseUtil {
 		}
 	}
 
+	private static Log _log = LogFactoryUtil.getLog(ServletResponseUtil.class);
+
 	private static final String _CLIENT_ABORT_EXCEPTION =
 		"org.apache.catalina.connector.ClientAbortException";
-
-	private static Log _log = LogFactoryUtil.getLog(ServletResponseUtil.class);
 
 }

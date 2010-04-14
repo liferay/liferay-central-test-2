@@ -31,21 +31,6 @@ public class ETagUtil {
 
 	public static boolean processETag(
 		HttpServletRequest request, HttpServletResponse response,
-		StringServletResponse stringResponse) {
-		if (stringResponse.isCalledGetOutputStream()) {
-			UnsyncByteArrayOutputStream unsyncByteArrayOutputStream =
-				stringResponse.getUnsyncByteArrayOutputStream();
-			return processETag(request, response,
-				unsyncByteArrayOutputStream.unsafeGetByteArray(),
-				unsyncByteArrayOutputStream.size());
-		}
-		else {
-			return processETag(request, response, stringResponse.getString());
-		}
-	}
-
-	public static boolean processETag(
-		HttpServletRequest request, HttpServletResponse response,
 		byte[] bytes) {
 
 		return _processETag(
@@ -71,6 +56,24 @@ public class ETagUtil {
 		HttpServletRequest request, HttpServletResponse response, String s) {
 
 		return _processETag(request, response, s.hashCode());
+	}
+
+	public static boolean processETag(
+		HttpServletRequest request, HttpServletResponse response,
+		StringServletResponse stringResponse) {
+
+		if (stringResponse.isCalledGetOutputStream()) {
+			UnsyncByteArrayOutputStream unsyncByteArrayOutputStream =
+				stringResponse.getUnsyncByteArrayOutputStream();
+
+			return processETag(
+				request, response,
+				unsyncByteArrayOutputStream.unsafeGetByteArray(),
+				unsyncByteArrayOutputStream.size());
+		}
+		else {
+			return processETag(request, response, stringResponse.getString());
+		}
 	}
 
 	private static int _hashCode(byte[] data, int offset, int length) {

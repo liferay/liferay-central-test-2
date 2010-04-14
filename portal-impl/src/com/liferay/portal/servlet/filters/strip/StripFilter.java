@@ -216,8 +216,8 @@ public class StripFilter extends BasePortalFilter {
 
 			request.setAttribute(SKIP_FILTER, Boolean.TRUE);
 
-			StringServletResponse stringResponse =
-				new StringServletResponse(response);
+			StringServletResponse stringResponse = new StringServletResponse(
+				response);
 
 			processFilter(
 				StripFilter.class, request, stringResponse, filterChain);
@@ -238,15 +238,18 @@ public class StripFilter extends BasePortalFilter {
 				if (stringResponse.isCalledGetOutputStream()) {
 					UnsyncByteArrayOutputStream unsyncByteArrayOutputStream =
 						stringResponse.getUnsyncByteArrayOutputStream();
+
 					oldByteArray =
 						unsyncByteArrayOutputStream.unsafeGetByteArray();
 					length = unsyncByteArrayOutputStream.size();
 				}
 				else {
 					String content = stringResponse.getString();
+
 					oldByteArray = content.getBytes(StringPool.UTF8);
 					length = oldByteArray.length;
 				}
+
 				strip(oldByteArray, length, response.getOutputStream());
 			}
 			else {
@@ -414,8 +417,8 @@ public class StripFilter extends BasePortalFilter {
 				}
 				else if (hasMarker(oldByteArray, i, _MARKER_SCRIPT_OPEN)) {
 					i = processJavaScript(
-							oldByteArray, outputStream, i, _MARKER_SCRIPT_OPEN)
-							- 1;
+							oldByteArray, outputStream, i,
+							_MARKER_SCRIPT_OPEN) - 1;
 
 					continue;
 				}
@@ -457,8 +460,6 @@ public class StripFilter extends BasePortalFilter {
 	private static final byte[] _CDATA_CLOSE = "/*]]>*/".getBytes();
 
 	private static final byte[] _CDATA_OPEN = "/*<![CDATA[*/".getBytes();
-
-	private static final double _COMPRESSION_RATE = 0.7;
 
 	private static final byte[] _MARKER_JS_OPEN =
 		"script type=\"text/javascript\">".getBytes();
