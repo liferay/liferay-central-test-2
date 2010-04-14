@@ -32,7 +32,7 @@ public class AddEntryPriorityNormalTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Announcements Test Page")) {
+				if (selenium.isVisible("link=Announcements Test Page")) {
 					break;
 				}
 			}
@@ -45,33 +45,36 @@ public class AddEntryPriorityNormalTest extends BaseTestCase {
 		selenium.clickAt("link=Announcements Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		Thread.sleep(5000);
 		selenium.clickAt("link=Manage Entries", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.select("_84_distributionScope",
 			RuntimeVariables.replace("label=General"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//input[@value='Add Entry']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.clickAt("//input[@value='Add Entry']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		Thread.sleep(5000);
+		selenium.type("_84_title",
+			RuntimeVariables.replace(
+				"Announcements Entry Title Priority Normal"));
+		selenium.type("_84_content",
+			RuntimeVariables.replace(
+				"Announcements Entry Content Priority Normal"));
+		selenium.select("_84_priority", RuntimeVariables.replace("label=Normal"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		assertEquals(RuntimeVariables.replace(
+				"Announcements Entry Title Priority Normal"),
+			selenium.getText("//td[1]/a"));
+		assertEquals(RuntimeVariables.replace("General"),
+			selenium.getText("//td[2]/a"));
+		selenium.clickAt("//td[1]/a", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		assertEquals("Announcements Entry Title Priority Normal",
+			selenium.getValue("_84_title"));
+		assertEquals("Announcements Entry Content Priority Normal",
+			selenium.getValue("_84_content"));
+		assertEquals("Normal", selenium.getSelectedLabel("_84_priority"));
+		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -79,7 +82,7 @@ public class AddEntryPriorityNormalTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_84_title")) {
+				if (selenium.isVisible("link=Announcements Test Page")) {
 					break;
 				}
 			}
@@ -89,41 +92,13 @@ public class AddEntryPriorityNormalTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("_84_title",
-			RuntimeVariables.replace("Normal Priority Announcement"));
-		selenium.type("_84_url", RuntimeVariables.replace("www.liferay.com"));
-		selenium.type("_84_content",
-			RuntimeVariables.replace(
-				"Hi everyone. This is a normal priority announcement."));
-		selenium.select("_84_priority", RuntimeVariables.replace("label=Normal"));
-		selenium.select("_84_priority",
-			RuntimeVariables.replace("label=Important"));
-		selenium.select("_84_displayDateMonth",
-			RuntimeVariables.replace("label=January"));
-		selenium.select("//select[3]", RuntimeVariables.replace("label=2005"));
-		selenium.select("//div[2]/select[1]",
-			RuntimeVariables.replace("label=12"));
-		selenium.select("//div[2]/select[2]",
-			RuntimeVariables.replace("label=:00"));
-		selenium.select("//div[2]/select[3]",
-			RuntimeVariables.replace("label=AM"));
-		selenium.select("//tr[12]/td[2]/div[1]/div[1]/select[3]",
-			RuntimeVariables.replace("label=2015"));
-		selenium.select("//tr[12]/td[2]/div[1]/div[1]/select[1]",
-			RuntimeVariables.replace("label=December"));
-		selenium.select("//tr[12]/td[2]/div[2]/select[1]",
-			RuntimeVariables.replace("label=11"));
-		selenium.select("//tr[12]/td[2]/div[2]/select[2]",
-			RuntimeVariables.replace("label=:59"));
-		selenium.select("//tr[12]/td[2]/div[2]/select[3]",
-			RuntimeVariables.replace("label=PM"));
-		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
+		selenium.clickAt("link=Announcements Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=Entries", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent(
-				"link=Normal Priority Announcement"));
-		assertTrue(selenium.isTextPresent(
-				"Hi everyone. This is a normal priority announcement."));
+		assertTrue(selenium.isPartialText("//div/h3",
+				"Announcements Entry Title Priority Normal"));
+		assertEquals(RuntimeVariables.replace(
+				"General Announcements Entry Content Priority Normal"),
+			selenium.getText("//p"));
 	}
 }

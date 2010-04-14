@@ -32,7 +32,7 @@ public class AssertPriorityOrderTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Announcements Test Page")) {
+				if (selenium.isVisible("link=Announcements Test Page")) {
 					break;
 				}
 			}
@@ -45,9 +45,9 @@ public class AssertPriorityOrderTest extends BaseTestCase {
 		selenium.clickAt("link=Announcements Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertEquals(RuntimeVariables.replace("Important Priority Announcement"),
-			selenium.getText("//div[1]/h3/a"));
-		assertEquals(RuntimeVariables.replace("Test General Announcement"),
-			selenium.getText("//div[2]/h3/a"));
+		assertTrue(selenium.isPartialText("//div[1]/h3",
+				"Announcements Entry Title Priority Important"));
+		assertTrue(selenium.isPartialText("//div[2]/h3",
+				"Announcements Entry Title Priority Normal"));
 	}
 }

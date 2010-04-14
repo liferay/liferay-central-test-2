@@ -25,7 +25,6 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class EditEntryGeneralTest extends BaseTestCase {
 	public void testEditEntryGeneral() throws Exception {
 		selenium.open("/web/guest/home/");
-		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -33,7 +32,7 @@ public class EditEntryGeneralTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Announcements Test Page")) {
+				if (selenium.isVisible("link=Announcements Test Page")) {
 					break;
 				}
 			}
@@ -46,21 +45,27 @@ public class EditEntryGeneralTest extends BaseTestCase {
 		selenium.clickAt("link=Announcements Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=Edit", RuntimeVariables.replace(""));
+		assertTrue(selenium.isPartialText("//div/h3",
+				"Announcements Entry Title"));
+		assertEquals(RuntimeVariables.replace(
+				"General Announcements Entry Content"), selenium.getText("//p"));
+		assertFalse(selenium.isPartialText("//div/h3",
+				"Edited Announcements Entry Title"));
+		assertNotEquals(RuntimeVariables.replace(
+				"General Edited Announcements Entry Content"),
+			selenium.getText("//p"));
+		selenium.clickAt("//td[1]/span/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		Thread.sleep(5000);
 		selenium.type("_84_title",
-			RuntimeVariables.replace(
-				"This Test General Annoucement has been edited."));
+			RuntimeVariables.replace("Edited Announcements Entry Title"));
 		selenium.type("_84_content",
-			RuntimeVariables.replace(
-				"Hello Everyone! This is test has been edited."));
+			RuntimeVariables.replace("Edited Announcements Entry Content"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		Thread.sleep(5000);
-		assertTrue(selenium.isElementPresent(
-				"link=This Test General Annoucement has been edited."));
-		assertTrue(selenium.isTextPresent(
-				"Hello Everyone! This is test has been edited."));
+		assertTrue(selenium.isPartialText("//div/h3",
+				"Edited Announcements Entry Title"));
+		assertEquals(RuntimeVariables.replace(
+				"General Edited Announcements Entry Content"),
+			selenium.getText("//p"));
 	}
 }

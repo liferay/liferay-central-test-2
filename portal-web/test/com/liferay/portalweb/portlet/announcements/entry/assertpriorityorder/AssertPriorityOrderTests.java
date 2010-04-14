@@ -29,12 +29,13 @@ public class AssertPriorityOrderTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTestSuite(AddPageTest.class);
-		testSuite.addTestSuite(AddPortletTest.class);
+		testSuite.addTestSuite(AddPageAnnouncementsTest.class);
+		testSuite.addTestSuite(AddPortletAnnouncementsTest.class);
 		testSuite.addTestSuite(AddEntryPriorityImportantTest.class);
-		testSuite.addTestSuite(AddEntryGeneralTest.class);
+		testSuite.addTestSuite(AddEntryPriorityNormalTest.class);
 		testSuite.addTestSuite(AssertPriorityOrderTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownAnnouncementsEntryTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

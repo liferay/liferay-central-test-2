@@ -32,7 +32,7 @@ public class HideEntryTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Announcements Test Page")) {
+				if (selenium.isVisible("link=Announcements Test Page")) {
 					break;
 				}
 			}
@@ -45,16 +45,51 @@ public class HideEntryTest extends BaseTestCase {
 		selenium.clickAt("link=Announcements Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=Show", RuntimeVariables.replace(""));
-		Thread.sleep(5000);
-		assertEquals(RuntimeVariables.replace(
-				"General Hello Everyone! This is a test general announcement for everyone! Yay."),
-			selenium.getText("//p"));
-		selenium.clickAt("link=Hide", RuntimeVariables.replace(""));
-		Thread.sleep(5000);
-		assertEquals(RuntimeVariables.replace(
-				"General Hello Everyone! This is a test general announcement for everyone! Yay."),
-			selenium.getText("//p"));
+		assertEquals(RuntimeVariables.replace("Show"),
+			selenium.getText("//td[3]/a"));
+		selenium.clickAt("//td[3]/a", RuntimeVariables.replace(""));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (RuntimeVariables.replace("Hide")
+										.equals(selenium.getText("//td[3]/a"))) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		assertEquals(RuntimeVariables.replace("Hide"),
+			selenium.getText("//td[3]/a"));
+		assertTrue(selenium.isVisible("//p"));
+		selenium.clickAt("//td[3]/a", RuntimeVariables.replace(""));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (RuntimeVariables.replace("Show")
+										.equals(selenium.getText("//td[3]/a"))) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		assertEquals(RuntimeVariables.replace("Show"),
+			selenium.getText("//td[3]/a"));
 		assertFalse(selenium.isVisible("//p"));
 	}
 }

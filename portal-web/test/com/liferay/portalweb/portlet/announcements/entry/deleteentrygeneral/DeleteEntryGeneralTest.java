@@ -32,7 +32,7 @@ public class DeleteEntryGeneralTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Announcements Test Page")) {
+				if (selenium.isVisible("link=Announcements Test Page")) {
 					break;
 				}
 			}
@@ -45,12 +45,16 @@ public class DeleteEntryGeneralTest extends BaseTestCase {
 		selenium.clickAt("link=Announcements Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		Thread.sleep(5000);
-		selenium.click(RuntimeVariables.replace("link=Delete"));
+		assertTrue(selenium.isPartialText("//div/h3",
+				"Announcements Entry Title"));
+		assertEquals(RuntimeVariables.replace(
+				"General Announcements Entry Content"), selenium.getText("//p"));
+		selenium.click(RuntimeVariables.replace("//td[2]/span/a"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
-		assertFalse(selenium.isElementPresent(
-				"link=This Test General Annoucement has been edited."));
+		assertFalse(selenium.isTextPresent("Announcements Entry Title"));
+		assertFalse(selenium.isTextPresent(
+				"General Announcements Entry Content"));
 	}
 }

@@ -14,18 +14,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>waitForVisible</td>
 	<td>link=Announcements Test Page</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
 	<td>link=Announcements Test Page</td>
-	<td></td>
-</tr>
-<tr>
-	<td>pause</td>
-	<td>5000</td>
 	<td></td>
 </tr>
 <tr>
@@ -39,89 +34,14 @@
 	<td>label=General</td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>//input[@value='Add Entry']</td>
-	<td></td>
-</tr>
-<tr>
 	<td>clickAtAndWait</td>
 	<td>//input[@value='Add Entry']</td>
 	<td></td>
 </tr>
 <tr>
-	<td>pause</td>
-	<td>5000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>_84_title</td>
-	<td></td>
-</tr>
-<tr>
 	<td>type</td>
 	<td>_84_title</td>
-	<td>Null Content Test Announcement</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>_84_url</td>
-	<td>www.liferay.com</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>_84_content</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>_84_displayDateMonth</td>
-	<td>label=January</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>//select[3]</td>
-	<td>label=2005</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>//div[2]/select[1]</td>
-	<td>label=12</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>//div[2]/select[2]</td>
-	<td>label=:00</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>//div[2]/select[3]</td>
-	<td>label=AM</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>//tr[12]/td[2]/div[1]/div[1]/select[3]</td>
-	<td>label=2015</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>//tr[12]/td[2]/div[1]/div[1]/select[1]</td>
-	<td>label=December</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>//tr[12]/td[2]/div[2]/select[1]</td>
-	<td>label=11</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>//tr[12]/td[2]/div[2]/select[2]</td>
-	<td>label=:59</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>//tr[12]/td[2]/div[2]/select[3]</td>
-	<td>label=PM</td>
+	<td>Announcements Entry Title Null</td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
@@ -129,14 +49,14 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>assertText</td>
+	<td>//section/div/div/div/div</td>
 	<td>You have entered invalid data. Please try again.</td>
-	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>assertText</td>
+	<td>//form/div[1]</td>
 	<td>Please enter valid content.</td>
-	<td></td>
 </tr>
 
 </tbody></table>

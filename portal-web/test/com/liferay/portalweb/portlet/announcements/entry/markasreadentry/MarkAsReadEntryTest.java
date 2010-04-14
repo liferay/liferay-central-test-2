@@ -32,7 +32,7 @@ public class MarkAsReadEntryTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Announcements Test Page")) {
+				if (selenium.isVisible("link=Announcements Test Page")) {
 					break;
 				}
 			}
@@ -45,8 +45,9 @@ public class MarkAsReadEntryTest extends BaseTestCase {
 		selenium.clickAt("link=Announcements Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		Thread.sleep(5000);
-		selenium.clickAt("link=Mark as Read", RuntimeVariables.replace(""));
+		assertEquals(RuntimeVariables.replace("Mark as Read"),
+			selenium.getText("//td[3]/a"));
+		selenium.clickAt("//td[3]/a", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -54,7 +55,8 @@ public class MarkAsReadEntryTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Show")) {
+				if (RuntimeVariables.replace("Show")
+										.equals(selenium.getText("//td[3]/a"))) {
 					break;
 				}
 			}
@@ -64,6 +66,7 @@ public class MarkAsReadEntryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertTrue(selenium.isElementPresent("link=Show"));
+		assertEquals(RuntimeVariables.replace("Show"),
+			selenium.getText("//td[3]/a"));
 	}
 }
