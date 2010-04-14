@@ -75,7 +75,7 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 			return bag.getRoleIds();
 		}
 
-		return PermissionChecker.NO_ROLES;
+		return PermissionChecker.DEFAULT_ROLE_IDS;
 	}
 
 	public PermissionCheckerBag getUserBag(long userId, long groupId)

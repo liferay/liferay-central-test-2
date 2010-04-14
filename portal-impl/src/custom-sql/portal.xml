@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 
 <custom-sql>
-	<sql id="permissions.user.check.algorithm.6.inline.check">
+	<sql id="com.liferay.portal.security.permission.InlineSQLHelper.joinResourcePermission">
 		<![CDATA[
 			INNER JOIN
 				ResourcePermission ON
@@ -11,9 +11,9 @@
 						(
 							(
 								(ResourcePermission.roleId IN ([$ROLE_IDS$])) AND
-								(1 = ResourcePermission.actionIds % 2)
+								((ResourcePermission.actionIds % 2) = 1)
 							)
-							[$OWNERSHIP_CHECK$]
+							[$OWNER_CHECK$]
 						)
 					)
 		]]>

@@ -36,12 +36,12 @@ public abstract class BasePermissionChecker implements PermissionChecker {
 		return user.getCompanyId();
 	}
 
-	public long getOwnerRoleId () {
+	public long getOwnerRoleId() {
 		return ownerRole.getRoleId();
 	}
 
 	public long[] getRoleIds(long userId, long groupId) {
-		return PermissionChecker.NO_ROLES;
+		return PermissionChecker.DEFAULT_ROLE_IDS;
 	}
 
 	public long getUserId() {

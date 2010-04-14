@@ -75,18 +75,16 @@ public class PermissionCheckerBagImpl implements PermissionCheckerBag {
 		return _groups;
 	}
 
-	public List<Role> getRoles() {
-		return _roles;
-	}
-
 	public long[] getRoleIds() {
 		if (_roleIds == null) {
 			List<Role> roles = getRoles();
 
 			long[] roleIds = new long[roles.size()];
 
-			for (int i = 0, size = roles.size(); i < size; i++) {
-				roleIds[i] = roles.get(i).getRoleId();
+			for (int i = 0; i < roles.size(); i++) {
+				Role role = roles.get(i);
+
+				roleIds[i] = role.getRoleId();
 			}
 
 			Arrays.sort(roleIds);
@@ -95,6 +93,10 @@ public class PermissionCheckerBagImpl implements PermissionCheckerBag {
 		}
 
 		return _roleIds;
+	}
+
+	public List<Role> getRoles() {
+		return _roles;
 	}
 
 	public boolean isCommunityAdmin(

@@ -267,6 +267,11 @@
 			<bean class="com.liferay.portal.security.auth.AuthTokenImpl" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.security.permission.InlineSQLHelperUtil" class="com.liferay.portal.security.permission.InlineSQLHelperUtil">
+		<property name="inlineSQLHelper">
+			<bean class="com.liferay.portal.security.permission.InlineSQLHelperImpl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.security.permission.PermissionCheckerFactoryUtil" class="com.liferay.portal.security.permission.PermissionCheckerFactoryUtil">
 		<property name="permissionCheckerFactory">
 			<bean class="com.liferay.portal.security.permission.PermissionCheckerFactoryImpl" />
@@ -285,11 +290,6 @@
 	<bean id="com.liferay.portal.service.permission.GroupPermissionUtil" class="com.liferay.portal.service.permission.GroupPermissionUtil">
 		<property name="groupPermission">
 			<bean class="com.liferay.portal.service.permission.GroupPermissionImpl" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portal.service.permission.InlineSQLPermissionUtil" class="com.liferay.portal.service.permission.InlineSQLPermissionUtil">
-		<property name="inlineSQLPermission">
-			<bean class="com.liferay.portal.service.permission.InlineSQLPermissionImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.permission.LayoutPermissionUtil" class="com.liferay.portal.service.permission.LayoutPermissionUtil">
