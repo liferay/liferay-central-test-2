@@ -31,7 +31,6 @@ import java.util.List;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletException;
-import javax.portlet.PortletMode;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletRequestDispatcher;
 import javax.portlet.PortletResponse;
@@ -142,8 +141,8 @@ public class MVCPortlet extends LiferayPortlet {
 			throw new PortletException(
 				"jsp-path " + jspPath + " has invalid characters");
 		}
-		else if (jspPath.startsWith(StringPool.SLASH) &&
-				 jspPath.endsWith(StringPool.SLASH)) {
+		else if (!jspPath.startsWith(StringPool.SLASH) ||
+				 !jspPath.endsWith(StringPool.SLASH)) {
 
 			throw new PortletException(
 				"jsp-path " + jspPath + " must start and end with a /");
