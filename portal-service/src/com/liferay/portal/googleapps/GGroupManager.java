@@ -43,7 +43,15 @@ public interface GGroupManager {
 
 	public GGroup getGGroup(String emailAddress) throws GoogleAppsException;
 
+	public GGroupMember getGGroupMember(
+			String groupEmailAddress, String memberEmailAddress)
+		throws GoogleAppsException;
+
 	public List<GGroupMember> getGGroupMembers(String emailAddress)
+		throws GoogleAppsException;
+
+	public GGroupOwner getGGroupOwner(
+			String groupEmailAddress, String ownerEmailAddress)
 		throws GoogleAppsException;
 
 	public List<GGroupOwner> getGGroupOwners(String emailAddress)

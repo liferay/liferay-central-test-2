@@ -133,6 +133,33 @@ public class GGroupManagerImpl
 		return getGGroup(atomEntryElement);
 	}
 
+	public GGroupMember getGGroupMember(
+			String groupEmailAddress, String memberEmailAddress)
+		throws GoogleAppsException {
+
+		StringBundler sb = new StringBundler(5);
+
+		sb.append(groupURL);
+		sb.append(StringPool.SLASH);
+		sb.append(groupEmailAddress);
+		sb.append("/member/");
+		sb.append(memberEmailAddress);
+
+		Document document = getDocument(sb.toString());
+
+		if (hasError(document)) {
+			if (_log.isInfoEnabled()) {
+				_log.info(getErrorMessage(document));
+			}
+
+			return null;
+		}
+
+		Element atomEntryElement = document.getRootElement();
+
+		return getGGroupMember(atomEntryElement);
+	}
+
 	public List<GGroupMember> getGGroupMembers(String emailAddress)
 		throws GoogleAppsException {
 
@@ -148,6 +175,33 @@ public class GGroupManagerImpl
 		getGGroupMembers(gGroupMembers, sb.toString());
 
 		return gGroupMembers;
+	}
+
+	public GGroupOwner getGGroupOwner(
+			String groupEmailAddress, String ownerEmailAddress)
+		throws GoogleAppsException {
+
+		StringBundler sb = new StringBundler(5);
+
+		sb.append(groupURL);
+		sb.append(StringPool.SLASH);
+		sb.append(groupEmailAddress);
+		sb.append("/owner/");
+		sb.append(ownerEmailAddress);
+
+		Document document = getDocument(sb.toString());
+
+		if (hasError(document)) {
+			if (_log.isInfoEnabled()) {
+				_log.info(getErrorMessage(document));
+			}
+
+			return null;
+		}
+
+		Element atomEntryElement = document.getRootElement();
+
+		return getGGroupOwner(atomEntryElement);
 	}
 
 	public List<GGroupOwner> getGGroupOwners(String emailAddress)
@@ -304,10 +358,10 @@ public class GGroupManagerImpl
 			String name = appsPropertyElement.attributeValue("name");
 			String value = appsPropertyElement.attributeValue("value");
 
-			if (name.equals("memberId")) {
+			if (name.equals("email")) {
 				gGroupOwner.setEmailAddress(value);
 			}
-			else if (name.equals("memberType")) {
+			else if (name.equals("type")) {
 				gGroupOwner.setType(value);
 			}
 		}
