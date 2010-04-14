@@ -58,7 +58,7 @@ boolean deletePortrait = ParamUtil.getBoolean(request, "deletePortrait");
 
 	<c:if test="<%= !PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE) || (selUser != null) %>">
 		<c:choose>
-			<c:when test="<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE) || !EnterpriseAdminUtil.hasUpdateScreenName(permissionChecker, selUser) %>">
+			<c:when test="<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE) || ((selUser != null) && !EnterpriseAdminUtil.hasUpdateScreenName(permissionChecker, selUser)) %>">
 				<aui:field-wrapper name="screenName">
 					<%= selUser.getScreenName() %>
 

@@ -949,11 +949,6 @@ public class EnterpriseAdminUtil {
 			PermissionChecker permissionChecker, User user)
 		throws PortalException, SystemException {
 
-		//For new user creation
-		if (user == null) {
-			return true;
-		}
-
 		String[] fieldEditiableUserScreenName =
 			PropsValues.
 				FIELD_EDITABLE_COM_LIFERAY_PORTAL_MODEL_USER_SCREENNAME;
