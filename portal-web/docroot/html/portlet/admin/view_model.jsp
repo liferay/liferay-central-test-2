@@ -17,6 +17,8 @@
 <%@ include file="/html/portlet/admin/init.jsp" %>
 
 <%
+String randomId = PwdGenerator.getPassword(PwdGenerator.KEY3, 4);
+
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
 ResourcePermission resourcePermission = (ResourcePermission)row.getObject();
@@ -68,13 +70,11 @@ try {
 catch (Exception e) {
 	modelString = e.toString();
 }
-
-String namespace = PwdGenerator.getPinNumber();
 %>
 
 <div style="overflow: auto; vertical-align: top;">
-	<liferay-ui:panel-container cssClass="model-details" id='<%= "modelDetails" + namespace %>'>
-		<liferay-ui:panel defaultState="closed" id='<%= "modelDetails" + namespace + "Panel" %>' title="<%= resourceTitle %>">
+	<liferay-ui:panel-container cssClass="model-details" id='<%= randomId + "modelDetails" %>'>
+		<liferay-ui:panel defaultState="closed" id='<%= randomId + "modelDetailsPanel" %>' title="<%= resourceTitle %>">
 			<div style="height: 100px; width: 350px;"><%= modelString %></div>
 		</liferay-ui:panel>
 	</liferay-ui:panel-container>
