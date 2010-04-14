@@ -1041,8 +1041,8 @@ public class DLFileEntryLocalServiceImpl
 
 			dlLocalService.updateFile(
 				user.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
-				fileEntry.getGroupId(), fileEntry.getRepositoryId(), name, false,
-				version, sourceFileName, fileEntry.getFileEntryId(),
+				fileEntry.getGroupId(), fileEntry.getRepositoryId(), name,
+				false, version, sourceFileName, fileEntry.getFileEntryId(),
 				fileEntry.getLuceneProperties(), fileEntry.getModifiedDate(),
 				serviceContext, is);
 		}
