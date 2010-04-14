@@ -2789,32 +2789,29 @@ public class PortalImpl implements Portal {
 
 		// Timestamp
 
-		boolean appendedTimestamp = false;
+		if ((parameterMap == null) || !parameterMap.containsKey("t")) {
+			if ((timestamp == 0) && uri.startsWith(StrutsUtil.TEXT_HTML_DIR)) {
+				ServletContext servletContext =
+					(ServletContext)request.getAttribute(WebKeys.CTX);
 
-		if (uri.startsWith(StrutsUtil.TEXT_HTML_DIR)) {
-			ServletContext servletContext =
-				(ServletContext)request.getAttribute(WebKeys.CTX);
+				String uriRealPath = ServletContextUtil.getRealPath(
+					servletContext, uri);
 
-			String uriRealPath = ServletContextUtil.getRealPath(
-				servletContext, uri);
+				if (uriRealPath != null) {
+					File uriFile = new File(uriRealPath);
 
-			if (uriRealPath != null) {
-				File uriFile = new File(uriRealPath);
-
-				if (uriFile.exists()) {
-					sb.append("&t=");
-					sb.append(uriFile.lastModified());
-
-					appendedTimestamp = true;
+					if (uriFile.exists()) {
+						timestamp = uriFile.lastModified();
+					}
 				}
 			}
-		}
 
-		if (!appendedTimestamp &&
-			((parameterMap == null) || !parameterMap.containsKey("t"))) {
+			if (timestamp == 0) {
+				timestamp = theme.getTimestamp();
+			}
 
 			sb.append("&t=");
-			sb.append(theme.getTimestamp());
+			sb.append(timestamp);
 		}
 
 		String url = sb.toString();
