@@ -14,6 +14,8 @@
  */
 %>
 
+<%@ include file="/html/portlet/css_init.jsp" %>
+
 <%@ taglib uri="http://liferay.com/tld/util" prefix="liferay-util" %>
 
 <%@ page import="com.liferay.portal.kernel.util.StringUtil" %>
