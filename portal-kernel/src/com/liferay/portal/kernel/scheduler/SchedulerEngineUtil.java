@@ -64,7 +64,7 @@ public class SchedulerEngineUtil {
 		}
 
 		schedulerEventListener = new SchedulerEventMessageListenerWrapper(
-			schedulerEventListener);
+			schedulerEventListener, schedulerEntry.getEventListenerClass());
 
 		schedulerEntry.setEventListener(schedulerEventListener);
 

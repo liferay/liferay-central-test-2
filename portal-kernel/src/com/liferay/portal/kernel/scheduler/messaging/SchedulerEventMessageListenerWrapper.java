@@ -32,9 +32,13 @@ public class SchedulerEventMessageListenerWrapper implements MessageListener {
 	public SchedulerEventMessageListenerWrapper(
 		MessageListener messageListener) {
 
-		_messageListener = messageListener;
+		this(messageListener, messageListener.getClass().getName());
+	}
 
-		String className = messageListener.getClass().getName();
+	public SchedulerEventMessageListenerWrapper(
+		MessageListener messageListener, String className) {
+
+		_messageListener = messageListener;
 
 		String jobName = className;
 
