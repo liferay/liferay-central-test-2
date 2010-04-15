@@ -181,8 +181,9 @@ public interface PortletLocalService {
 		javax.servlet.ServletContext servletContext, java.lang.String[] xmls,
 		com.liferay.portal.kernel.plugin.PluginPackage pluginPackage);
 
-	public com.liferay.portal.model.Portlet newPortlet(long companyId,
-		java.lang.String portletId);
+	public com.liferay.portal.model.Portlet clonePortlet(long companyId,
+		java.lang.String portletId)
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.Portlet updatePortlet(long companyId,
 		java.lang.String portletId, java.lang.String roles, boolean active)

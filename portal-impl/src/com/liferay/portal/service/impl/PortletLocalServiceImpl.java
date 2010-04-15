@@ -167,6 +167,15 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		_companyPortletsPool.removeAll();
 	}
 
+	public Portlet clonePortlet(long companyId, String portletId)
+		throws SystemException {
+
+		Portlet portlet = portletLocalService.getPortletById(
+			companyId, portletId);
+
+		return (Portlet) portlet.clone();
+	}
+
 	public Portlet deployRemotePortlet(Portlet portlet, String categoryName)
 		throws SystemException {
 
@@ -673,10 +682,6 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		clearCache();
 
 		return portlets;
-	}
-
-	public Portlet newPortlet(long companyId, String portletId) {
-		return new PortletImpl(companyId, portletId);
 	}
 
 	public Portlet updatePortlet(

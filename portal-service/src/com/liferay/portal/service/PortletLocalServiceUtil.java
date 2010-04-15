@@ -227,9 +227,10 @@ public class PortletLocalServiceUtil {
 			pluginPackage);
 	}
 
-	public static com.liferay.portal.model.Portlet newPortlet(long companyId,
-		java.lang.String portletId) {
-		return getService().newPortlet(companyId, portletId);
+	public static com.liferay.portal.model.Portlet clonePortlet(
+		long companyId, java.lang.String portletId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().clonePortlet(companyId, portletId);
 	}
 
 	public static com.liferay.portal.model.Portlet updatePortlet(
