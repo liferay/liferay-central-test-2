@@ -268,7 +268,6 @@ public class GGroupManagerImpl
 
 		for (Element appsPropertyElement : appsPropertyElements) {
 			String name = appsPropertyElement.attributeValue("name");
-			String value = appsPropertyElement.attributeValue("value");
 
 			if (name.equals("description")) {
 				Attribute valueAttribute = appsPropertyElement.attribute(
