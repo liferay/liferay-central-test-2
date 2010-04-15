@@ -76,12 +76,13 @@ public class AssetEntryQuery {
 		_publishDate = now;
 	}
 
-	public AssetEntryQuery(String className, SearchContainer<?> searchContainer)
+	public AssetEntryQuery(
+			long[] classNameIds, SearchContainer<?> searchContainer)
 		throws PortalException, SystemException {
 
 		this();
 
-		setClassName(className);
+		setClassNameIds(classNameIds);
 		_start = searchContainer.getStart();
 		_end = searchContainer.getEnd();
 
@@ -104,6 +105,13 @@ public class AssetEntryQuery {
 			_allTagIds = AssetTagLocalServiceUtil.getTagIds(
 				_groupIds[0], new String[] {tagName});
 		}
+	}
+
+	public AssetEntryQuery(String className, SearchContainer<?> searchContainer)
+		throws PortalException, SystemException {
+
+		this(
+			new long[] {PortalUtil.getClassNameId(className)}, searchContainer);
 	}
 
 	public long[] getAllCategoryIds() {
