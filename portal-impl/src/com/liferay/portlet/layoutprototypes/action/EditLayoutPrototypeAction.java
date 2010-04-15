@@ -17,12 +17,12 @@ package com.liferay.portlet.layoutprototypes.action;
 import com.liferay.portal.NoSuchLayoutPrototypeException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.kernel.util.LocalizationUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.LayoutPrototypeServiceUtil;
 import com.liferay.portal.struts.PortletAction;
-import com.liferay.util.LocalizationUtil;
 
 import java.util.Locale;
 import java.util.Map;

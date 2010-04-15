@@ -17,9 +17,9 @@ package com.liferay.portal.upgrade.v4_3_4.util;
 import com.liferay.portal.kernel.upgrade.util.BaseUpgradeColumnImpl;
 import com.liferay.portal.kernel.upgrade.util.UpgradeColumn;
 import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.kernel.util.LocalizationUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.util.LocalizationUtil;
 
 /**
  * <a href="JournalArticleContentUpgradeColumnImpl.java.html"><b><i>View Source

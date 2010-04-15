@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
+import com.liferay.portal.kernel.util.LocalizationUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropertiesParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
@@ -73,7 +74,6 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.communities.util.CommunitiesUtil;
 import com.liferay.portlet.communities.util.StagingUtil;
 import com.liferay.portlet.tasks.NoSuchProposalException;
-import com.liferay.util.LocalizationUtil;
 import com.liferay.util.servlet.UploadException;
 
 import java.io.File;
