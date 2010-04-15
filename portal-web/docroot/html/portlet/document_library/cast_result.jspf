@@ -29,6 +29,22 @@ else if (result instanceof DLFileEntry) {
 
 	fileEntry = fileEntry.toEscapedModel();
 }
+else if (result instanceof AssetEntry) {
+	if ((((AssetEntry)result).getClassName()).equals(DLFileEntry.class.getName())) {
+		fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(((AssetEntry)result).getClassPK());
+
+		fileEntry = fileEntry.toEscapedModel();
+	}
+	else {
+		fileShortcut = DLFileShortcutLocalServiceUtil.getFileShortcut(((AssetEntry)result).getClassPK());
+
+		fileShortcut = fileShortcut.toEscapedModel();
+
+		fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(fileShortcut.getGroupId(), fileShortcut.getToFolderId(), HtmlUtil.unescape(fileShortcut.getToName()));
+
+		fileEntry = fileEntry.toEscapedModel();
+	}
+}
 else {
 	fileShortcut = (DLFileShortcut)result;
 

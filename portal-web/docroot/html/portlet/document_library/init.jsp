@@ -31,9 +31,16 @@
 <%@ page import="com.liferay.portal.kernel.search.IndexerRegistryUtil" %>
 <%@ page import="com.liferay.portal.kernel.search.SearchContext" %>
 <%@ page import="com.liferay.portal.search.SearchContextFactory" %>
+<%@ page import="com.liferay.portlet.asset.model.AssetCategory" %>
+<%@ page import="com.liferay.portlet.asset.model.AssetEntry" %>
 <%@ page import="com.liferay.portlet.asset.model.AssetRenderer" %>
 <%@ page import="com.liferay.portlet.asset.model.AssetTag" %>
+<%@ page import="com.liferay.portlet.asset.model.AssetVocabulary" %>
+<%@ page import="com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.asset.service.AssetEntryLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.asset.service.AssetTagLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.asset.service.AssetVocabularyLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.asset.service.persistence.AssetEntryQuery" %>
 <%@ page import="com.liferay.portlet.asset.util.AssetUtil" %>
 <%@ page import="com.liferay.portlet.documentlibrary.DuplicateFolderNameException" %>
 <%@ page import="com.liferay.portlet.documentlibrary.FileShortcutPermissionException" %>
@@ -48,6 +55,7 @@
 <%@ page import="com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl" %>
 <%@ page import="com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl" %>
 <%@ page import="com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.documentlibrary.service.DLFileShortcutLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.documentlibrary.service.DLFileVersionLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.documentlibrary.service.permission.DLFileEntryPermission" %>
@@ -71,6 +79,8 @@ if (Validator.isNotNull(portletResource)) {
 else if (layout.isTypeControlPanel()) {
 	preferences = PortletPreferencesLocalServiceUtil.getPreferences(themeDisplay.getCompanyId(), scopeGroupId, PortletKeys.PREFS_OWNER_TYPE_GROUP, 0, PortletKeys.DOCUMENT_LIBRARY, null);
 }
+
+boolean filter = false;
 
 DLFolder rootFolder = null;
 

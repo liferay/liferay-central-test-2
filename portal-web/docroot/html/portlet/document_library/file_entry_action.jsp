@@ -30,6 +30,14 @@ if (row != null) {
 	if (result instanceof DLFileEntry) {
 		fileEntry = (DLFileEntry)result;
 	}
+	else if (result instanceof AssetEntry) {
+		if ((((AssetEntry)result).getClassName()).equals(DLFileEntry.class.getName())) {
+			fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(((AssetEntry)result).getClassPK());
+		}
+		else {
+			fileShortcut = DLFileShortcutLocalServiceUtil.getFileShortcut(((AssetEntry)result).getClassPK());
+		}
+	}
 	else {
 		fileShortcut = (DLFileShortcut)result;
 	}

@@ -17,7 +17,25 @@
 <%@ include file="/html/portlet/document_library/init.jsp" %>
 
 <%
+long categoryId = ParamUtil.getLong(request, "categoryId");
+String tagName = ParamUtil.getString(request, "tag");
+
+String categoryName = null;
+String vocabularyName = null;
+
+if (categoryId != 0) {
+	AssetCategory assetCategory = AssetCategoryLocalServiceUtil.getAssetCategory(categoryId);
+
+	categoryName = assetCategory.getName();
+
+	AssetVocabulary assetVocabulary = AssetVocabularyLocalServiceUtil.getAssetVocabulary(assetCategory.getVocabularyId());
+
+	vocabularyName = assetVocabulary.getName();
+}
+
 String topLink = ParamUtil.getString(request, "topLink", "document-home");
+
+filter = (categoryId > 0) || Validator.isNotNull(tagName);
 
 DLFolder folder = (DLFolder)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FOLDER);
 
@@ -59,6 +77,29 @@ request.setAttribute("view.jsp-viewFolder", Boolean.TRUE.toString());
 <liferay-util:include page="/html/portlet/document_library/top_links.jsp" />
 
 <c:choose>
+	<c:when test="<%= filter %>">
+		<c:if test="<%= Validator.isNotNull(categoryName) %>">
+			<h1 class="entry-title">
+				<%= LanguageUtil.format(pageContext, "documents-with-x-x", new String[] {vocabularyName, categoryName}) %>
+			</h1>
+		</c:if>
+
+		<c:if test="<%= Validator.isNotNull(tagName) %>">
+			<h1 class="entry-title">
+				<%= LanguageUtil.format(pageContext, "documents-with-tag-x", tagName) %>
+			</h1>
+		</c:if>
+
+		<%@ include file="/html/portlet/document_library/view_file_entries.jspf" %>
+
+		<%
+		if (portletName.equals(PortletKeys.DOCUMENT_LIBRARY)) {
+			PortalUtil.addPageKeywords(tagName, request);
+			PortalUtil.addPageKeywords(categoryName, request);
+		}
+		%>
+
+	</c:when>
 	<c:when test='<%= topLink.equals("document-home") %>'>
 		<aui:layout>
 			<c:if test="<%= folder != null %>">

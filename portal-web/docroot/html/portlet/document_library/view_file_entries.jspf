@@ -25,6 +25,12 @@
 	<liferay-ui:search-container-results>
 
 		<%
+		long[] classNameId = {PortalUtil.getClassNameId(DLFileShortcut.class.getName()),PortalUtil.getClassNameId(DLFileEntry.class.getName())};
+
+		AssetEntryQuery assetEntryQuery = new AssetEntryQuery(classNameId, searchContainer);
+
+		assetEntryQuery.setExcludeZeroViewCount(false);
+
 		if (mergedView) {
 			results = DLFolderLocalServiceUtil.getFoldersAndFileEntriesAndFileShortcuts(scopeGroupId, folderId, status, searchContainer.getStart(), searchContainer.getEnd());
 		}
@@ -37,6 +43,12 @@
 		}
 		else {
 			total = DLFolderLocalServiceUtil.getFileEntriesAndFileShortcutsCount(scopeGroupId, folderId, status);
+		}
+
+		if (filter) {
+			results = AssetEntryLocalServiceUtil.getEntries(assetEntryQuery);
+
+			total = AssetEntryLocalServiceUtil.getEntriesCount(assetEntryQuery);
 		}
 
 		pageContext.setAttribute("results", results);
