@@ -19,7 +19,25 @@ DLFolder curFolder = null;
 DLFileEntry fileEntry = null;
 DLFileShortcut fileShortcut = null;
 
-if (result instanceof DLFolder) {
+if (result instanceof AssetEntry) {
+	AssetEntry assetEntry = (AssetEntry)result;
+
+	if (assetEntry.getClassName().equals(DLFileEntry.class.getName())) {
+		fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(assetEntry.getClassPK());
+
+		fileEntry = fileEntry.toEscapedModel();
+	}
+	else {
+		fileShortcut = DLFileShortcutLocalServiceUtil.getFileShortcut(assetEntry.getClassPK());
+
+		fileShortcut = fileShortcut.toEscapedModel();
+
+		fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(fileShortcut.getGroupId(), fileShortcut.getToFolderId(), HtmlUtil.unescape(fileShortcut.getToName()));
+
+		fileEntry = fileEntry.toEscapedModel();
+	}
+}
+else if (result instanceof DLFolder) {
 	curFolder = (DLFolder)result;
 
 	curFolder = curFolder.toEscapedModel();
@@ -28,22 +46,6 @@ else if (result instanceof DLFileEntry) {
 	fileEntry = (DLFileEntry)result;
 
 	fileEntry = fileEntry.toEscapedModel();
-}
-else if (result instanceof AssetEntry) {
-	if ((((AssetEntry)result).getClassName()).equals(DLFileEntry.class.getName())) {
-		fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(((AssetEntry)result).getClassPK());
-
-		fileEntry = fileEntry.toEscapedModel();
-	}
-	else {
-		fileShortcut = DLFileShortcutLocalServiceUtil.getFileShortcut(((AssetEntry)result).getClassPK());
-
-		fileShortcut = fileShortcut.toEscapedModel();
-
-		fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(fileShortcut.getGroupId(), fileShortcut.getToFolderId(), HtmlUtil.unescape(fileShortcut.getToName()));
-
-		fileEntry = fileEntry.toEscapedModel();
-	}
 }
 else {
 	fileShortcut = (DLFileShortcut)result;

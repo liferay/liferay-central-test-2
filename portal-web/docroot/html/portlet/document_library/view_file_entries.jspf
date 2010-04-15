@@ -25,30 +25,30 @@
 	<liferay-ui:search-container-results>
 
 		<%
-		long[] classNameId = {PortalUtil.getClassNameId(DLFileShortcut.class.getName()),PortalUtil.getClassNameId(DLFileEntry.class.getName())};
+		if (useAssetEntryQuery) {
+			long[] classNameIds = {PortalUtil.getClassNameId(DLFileEntry.class.getName()), PortalUtil.getClassNameId(DLFileShortcut.class.getName())};
 
-		AssetEntryQuery assetEntryQuery = new AssetEntryQuery(classNameId, searchContainer);
+			AssetEntryQuery assetEntryQuery = new AssetEntryQuery(classNameIds, searchContainer);
 
-		assetEntryQuery.setExcludeZeroViewCount(false);
+			assetEntryQuery.setExcludeZeroViewCount(false);
 
-		if (mergedView) {
-			results = DLFolderLocalServiceUtil.getFoldersAndFileEntriesAndFileShortcuts(scopeGroupId, folderId, status, searchContainer.getStart(), searchContainer.getEnd());
-		}
-		else {
-			results = DLFolderLocalServiceUtil.getFileEntriesAndFileShortcuts(scopeGroupId, folderId, status, searchContainer.getStart(), searchContainer.getEnd());
-		}
-
-		if (mergedView) {
-			total = DLFolderLocalServiceUtil.getFoldersAndFileEntriesAndFileShortcutsCount(scopeGroupId, folderId, status);
-		}
-		else {
-			total = DLFolderLocalServiceUtil.getFileEntriesAndFileShortcutsCount(scopeGroupId, folderId, status);
-		}
-
-		if (filter) {
 			results = AssetEntryLocalServiceUtil.getEntries(assetEntryQuery);
-
 			total = AssetEntryLocalServiceUtil.getEntriesCount(assetEntryQuery);
+		}
+		else {
+			if (mergedView) {
+				results = DLFolderLocalServiceUtil.getFoldersAndFileEntriesAndFileShortcuts(scopeGroupId, folderId, status, searchContainer.getStart(), searchContainer.getEnd());
+			}
+			else {
+				results = DLFolderLocalServiceUtil.getFileEntriesAndFileShortcuts(scopeGroupId, folderId, status, searchContainer.getStart(), searchContainer.getEnd());
+			}
+
+			if (mergedView) {
+				total = DLFolderLocalServiceUtil.getFoldersAndFileEntriesAndFileShortcutsCount(scopeGroupId, folderId, status);
+			}
+			else {
+				total = DLFolderLocalServiceUtil.getFileEntriesAndFileShortcutsCount(scopeGroupId, folderId, status);
+			}
 		}
 
 		pageContext.setAttribute("results", results);

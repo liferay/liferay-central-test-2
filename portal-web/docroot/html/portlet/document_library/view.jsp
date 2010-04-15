@@ -17,25 +17,7 @@
 <%@ include file="/html/portlet/document_library/init.jsp" %>
 
 <%
-long categoryId = ParamUtil.getLong(request, "categoryId");
-String tagName = ParamUtil.getString(request, "tag");
-
-String categoryName = null;
-String vocabularyName = null;
-
-if (categoryId != 0) {
-	AssetCategory assetCategory = AssetCategoryLocalServiceUtil.getAssetCategory(categoryId);
-
-	categoryName = assetCategory.getName();
-
-	AssetVocabulary assetVocabulary = AssetVocabularyLocalServiceUtil.getAssetVocabulary(assetCategory.getVocabularyId());
-
-	vocabularyName = assetVocabulary.getName();
-}
-
 String topLink = ParamUtil.getString(request, "topLink", "document-home");
-
-filter = (categoryId > 0) || Validator.isNotNull(tagName);
 
 DLFolder folder = (DLFolder)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FOLDER);
 
@@ -61,6 +43,24 @@ if (permissionChecker.isCompanyAdmin() || permissionChecker.isCommunityAdmin(sco
 int foldersCount = DLFolderLocalServiceUtil.getFoldersCount(scopeGroupId, folderId);
 int fileEntriesCount = DLFolderLocalServiceUtil.getFileEntriesAndFileShortcutsCount(scopeGroupId, folderId, status);
 
+long categoryId = ParamUtil.getLong(request, "categoryId");
+String tagName = ParamUtil.getString(request, "tag");
+
+String categoryName = null;
+String vocabularyName = null;
+
+if (categoryId != 0) {
+	AssetCategory assetCategory = AssetCategoryLocalServiceUtil.getAssetCategory(categoryId);
+
+	categoryName = assetCategory.getName();
+
+	AssetVocabulary assetVocabulary = AssetVocabularyLocalServiceUtil.getAssetVocabulary(assetCategory.getVocabularyId());
+
+	vocabularyName = assetVocabulary.getName();
+}
+
+boolean useAssetEntryQuery = (categoryId > 0) || Validator.isNotNull(tagName);
+
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("struts_action", "/document_library/view");
@@ -72,12 +72,14 @@ request.setAttribute("view.jsp-folder", folder);
 request.setAttribute("view.jsp-folderId", String.valueOf(folderId));
 
 request.setAttribute("view.jsp-viewFolder", Boolean.TRUE.toString());
+
+request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntryQuery));
 %>
 
 <liferay-util:include page="/html/portlet/document_library/top_links.jsp" />
 
 <c:choose>
-	<c:when test="<%= filter %>">
+	<c:when test="<%= useAssetEntryQuery %>">
 		<c:if test="<%= Validator.isNotNull(categoryName) %>">
 			<h1 class="entry-title">
 				<%= LanguageUtil.format(pageContext, "documents-with-x-x", new String[] {vocabularyName, categoryName}) %>
