@@ -173,7 +173,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		Portlet portlet = portletLocalService.getPortletById(
 			companyId, portletId);
 
-		return (Portlet) portlet.clone();
+		return (Portlet)portlet.clone();
 	}
 
 	public Portlet deployRemotePortlet(Portlet portlet, String categoryName)
