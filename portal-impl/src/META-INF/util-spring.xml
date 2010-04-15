@@ -33,7 +33,7 @@
 				<entry key="com.liferay.portal.kernel.dao.orm.EntityCache">
 					<bean class="com.liferay.portal.cache.key.JavaMD5CacheKeyGenerator">
 						<property name="maxLength" value="200" />
-					</bean>						
+					</bean>
 				</entry>
 				<entry key="com.liferay.portal.kernel.dao.orm.FinderCache">
 					<bean class="com.liferay.portal.cache.key.JavaMD5CacheKeyGenerator">
@@ -207,6 +207,11 @@
 	<bean id="com.liferay.portal.kernel.util.HttpUtil" class="com.liferay.portal.kernel.util.HttpUtil">
 		<property name="http">
 			<bean class="com.liferay.portal.util.HttpImpl" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.kernel.util.LocalizationUtil" class="com.liferay.portal.kernel.util.LocalizationUtil">
+		<property name="localization">
+			<bean class="com.liferay.portal.util.LocalizationImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.kernel.util.MimeTypesUtil" class="com.liferay.portal.kernel.util.MimeTypesUtil">
