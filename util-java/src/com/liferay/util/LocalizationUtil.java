@@ -14,37 +14,6 @@
 
 package com.liferay.util;
 
-import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
-import com.liferay.portal.kernel.io.unsync.UnsyncStringWriter;
-import com.liferay.portal.kernel.json.JSONObject;
-import com.liferay.portal.kernel.language.LanguageUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.LocaleUtil;
-import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.util.Tuple;
-import com.liferay.portal.kernel.util.Validator;
-
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
-
-import javax.portlet.ActionRequest;
-import javax.portlet.PortletPreferences;
-import javax.portlet.PortletRequest;
-
-import javax.xml.stream.XMLInputFactory;
-import javax.xml.stream.XMLOutputFactory;
-import javax.xml.stream.XMLStreamConstants;
-import javax.xml.stream.XMLStreamException;
-import javax.xml.stream.XMLStreamReader;
-import javax.xml.stream.XMLStreamWriter;
-
-import org.apache.commons.collections.map.ReferenceMap;
-
 /**
  * <a href="LocalizationUtil.java.html"><b><i>View Source</i></b></a>
  *

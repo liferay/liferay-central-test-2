@@ -24,7 +24,7 @@ import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
 
 /**
- * <a href="LocalizationUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="Localization.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * This class is used to localize values stored in XML and is often used to add

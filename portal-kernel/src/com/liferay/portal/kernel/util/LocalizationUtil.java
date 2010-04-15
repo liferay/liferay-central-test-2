@@ -15,6 +15,7 @@
 package com.liferay.portal.kernel.util;
 
 import com.liferay.portal.kernel.json.JSONObject;
+
 import java.util.Locale;
 import java.util.Map;
 
@@ -64,7 +65,9 @@ public class LocalizationUtil {
 		return _localization;
 	}
 
-	public static String getLocalization(String xml, String requestedLanguageId) {
+	public static String getLocalization(
+		String xml, String requestedLanguageId) {
+
 		return getLocalization().getLocalization(xml, requestedLanguageId);
 	}
 
