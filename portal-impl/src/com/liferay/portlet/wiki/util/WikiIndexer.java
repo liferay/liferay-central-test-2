@@ -167,6 +167,7 @@ public class WikiIndexer extends BaseIndexer {
 		long companyId = page.getCompanyId();
 		long groupId = getParentGroupId(page.getGroupId());
 		long scopeGroupId = page.getGroupId();
+		long userId = page.getUserId();
 		long resourcePrimKey = page.getResourcePrimKey();
 		long nodeId = page.getNodeId();
 		String title = page.getTitle();
@@ -190,6 +191,7 @@ public class WikiIndexer extends BaseIndexer {
 		document.addKeyword(Field.PORTLET_ID, PORTLET_ID);
 		document.addKeyword(Field.GROUP_ID, groupId);
 		document.addKeyword(Field.SCOPE_GROUP_ID, scopeGroupId);
+		document.addKeyword(Field.USER_ID, userId);
 
 		document.addText(Field.TITLE, title);
 		document.addText(Field.CONTENT, content);

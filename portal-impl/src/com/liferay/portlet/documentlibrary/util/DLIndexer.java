@@ -143,6 +143,7 @@ public class DLIndexer extends BaseIndexer {
 
 		long companyId = fileEntry.getCompanyId();
 		long groupId = fileEntry.getGroupId();
+		long userId = fileEntry.getUserId();
 		long repositoryId = fileEntry.getRepositoryId();
 		String fileName = fileEntry.getName();
 		long fileEntryId = fileEntry.getFileEntryId();
@@ -162,6 +163,7 @@ public class DLIndexer extends BaseIndexer {
 		fileModel.setFileEntryId(fileEntryId);
 		fileModel.setFileName(fileName);
 		fileModel.setGroupId(groupId);
+		fileModel.setUserId(userId);
 		fileModel.setModifiedDate(modifiedDate);
 		fileModel.setPortletId(PORTLET_ID);
 		fileModel.setProperties(properties);

@@ -84,6 +84,7 @@ public class DLIndexer extends BaseIndexer {
 		String portletId = fileModel.getPortletId();
 		long groupId = getParentGroupId(fileModel.getGroupId());
 		long scopeGroupId = fileModel.getGroupId();
+		long userId = fileModel.getUserId();
 		long folderId = DLFileEntryImpl.getFolderId(
 			groupId, fileModel.getRepositoryId());
 		long repositoryId = fileModel.getRepositoryId();
@@ -169,6 +170,7 @@ public class DLIndexer extends BaseIndexer {
 		document.addKeyword(Field.PORTLET_ID, portletId);
 		document.addKeyword(Field.GROUP_ID, groupId);
 		document.addKeyword(Field.SCOPE_GROUP_ID, scopeGroupId);
+		document.addKeyword(Field.USER_ID, userId);
 
 		try {
 			document.addFile(Field.CONTENT, is, fileEntry.getTitle());

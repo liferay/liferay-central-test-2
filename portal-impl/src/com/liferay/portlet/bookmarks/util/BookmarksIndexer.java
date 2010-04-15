@@ -99,6 +99,7 @@ public class BookmarksIndexer extends BaseIndexer {
 		long companyId = entry.getCompanyId();
 		long groupId = getParentGroupId(entry.getGroupId());
 		long scopeGroupId = entry.getGroupId();
+		long userId = entry.getUserId();
 		long folderId = entry.getFolderId();
 		long entryId = entry.getEntryId();
 		String name = entry.getName();
@@ -121,6 +122,7 @@ public class BookmarksIndexer extends BaseIndexer {
 		document.addKeyword(Field.PORTLET_ID, PORTLET_ID);
 		document.addKeyword(Field.GROUP_ID, groupId);
 		document.addKeyword(Field.SCOPE_GROUP_ID, scopeGroupId);
+		document.addKeyword(Field.USER_ID, userId);
 
 		document.addText(Field.TITLE, name);
 		document.addKeyword(Field.ASSET_TAG_NAMES, assetTagNames);

@@ -64,6 +64,10 @@ public class FileModel implements Serializable {
 		return _repositoryId;
 	}
 
+	public long getUserId() {
+		return _userId;
+	}
+
 	public void setAssetCategoryIds(long[] assetCategoryIds) {
 		_assetCategoryIds = assetCategoryIds;
 	}
@@ -104,6 +108,10 @@ public class FileModel implements Serializable {
 		_repositoryId = repositoryId;
 	}
 
+	public void setUserId(long userId) {
+		_userId = userId;
+	}
+
 	private long[] _assetCategoryIds;
 	private String[] _assetTagNames;
 	private long _companyId;
@@ -114,5 +122,6 @@ public class FileModel implements Serializable {
 	private String _portletId;
 	private String _properties;
 	private long _repositoryId;
+	private long _userId;
 
 }

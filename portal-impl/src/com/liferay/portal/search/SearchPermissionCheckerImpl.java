@@ -308,6 +308,10 @@ public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 
 		BooleanQuery permissionQuery = BooleanQueryFactoryUtil.create();
 
+		if (userId > 0) {
+			permissionQuery.addTerm(Field.USER_ID, userId);
+		}
+
 		for (Role role : roles) {
 			if (role.getName().equals(RoleConstants.ADMINISTRATOR)) {
 				return query;
@@ -388,6 +392,10 @@ public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 		}
 
 		BooleanQuery permissionQuery = BooleanQueryFactoryUtil.create();
+
+		if (userId > 0) {
+			permissionQuery.addTerm(Field.USER_ID, userId);
+		}
 
 		for (Role role : roles) {
 			if (role.getName().equals(RoleConstants.ADMINISTRATOR)) {

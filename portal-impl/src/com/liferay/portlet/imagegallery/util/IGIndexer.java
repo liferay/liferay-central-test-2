@@ -106,6 +106,7 @@ public class IGIndexer extends BaseIndexer {
 		long companyId = image.getCompanyId();
 		long groupId = getParentGroupId(image.getGroupId());
 		long scopeGroupId = image.getGroupId();
+		long userId = image.getUserId();
 		long folderId = image.getFolderId();
 		long imageId = image.getImageId();
 		String name = image.getName();
@@ -129,6 +130,7 @@ public class IGIndexer extends BaseIndexer {
 		document.addKeyword(Field.PORTLET_ID, PORTLET_ID);
 		document.addKeyword(Field.GROUP_ID, groupId);
 		document.addKeyword(Field.SCOPE_GROUP_ID, scopeGroupId);
+		document.addKeyword(Field.USER_ID, userId);
 
 		document.addText(Field.TITLE, name);
 		document.addText(Field.DESCRIPTION, description);

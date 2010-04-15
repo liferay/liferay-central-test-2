@@ -108,6 +108,7 @@ public class JournalIndexer extends BaseIndexer {
 		long companyId = article.getCompanyId();
 		long groupId = getParentGroupId(article.getGroupId());
 		long scopeGroupId = article.getGroupId();
+		long userId = article.getUserId();
 		long resourcePrimKey = article.getResourcePrimKey();
 		String articleId = article.getArticleId();
 		double version = article.getVersion();
@@ -134,6 +135,7 @@ public class JournalIndexer extends BaseIndexer {
 		document.addKeyword(Field.PORTLET_ID, PORTLET_ID);
 		document.addKeyword(Field.GROUP_ID, groupId);
 		document.addKeyword(Field.SCOPE_GROUP_ID, scopeGroupId);
+		document.addKeyword(Field.USER_ID, userId);
 
 		document.addText(Field.TITLE, title);
 		document.addText(Field.CONTENT, processContent(document, content));
