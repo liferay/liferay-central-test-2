@@ -25,7 +25,6 @@
 	PortletURL portletURL = renderResponse.createRenderURL();
 
 	portletURL.setParameter("struts_action", "/enterprise_admin/select_community");
-
 	portletURL.setParameter("target", target);
 	%>
 
