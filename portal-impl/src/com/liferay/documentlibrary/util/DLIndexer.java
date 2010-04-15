@@ -122,6 +122,10 @@ public class DLIndexer extends BaseIndexer {
 			properties = fileEntry.getLuceneProperties();
 		}
 
+		if (modifiedDate == null) {
+			modifiedDate = fileEntry.getModifiedDate();
+		}
+
 		if (assetCategoryIds == null) {
 			assetCategoryIds = AssetCategoryLocalServiceUtil.getCategoryIds(
 				DLFileEntry.class.getName(), fileEntry.getFileEntryId());
