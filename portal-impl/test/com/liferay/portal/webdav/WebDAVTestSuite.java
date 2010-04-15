@@ -31,6 +31,7 @@ public class WebDAVTestSuite extends ServiceTestSuite {
 
 		testSuite.addTestSuite(WebDAVLitmusBasicTest.class);
 		testSuite.addTestSuite(WebDAVLitmusCopyMoveTest.class);
+		testSuite.addTestSuite(WebDAVOSXTest.class);
 
 		return new WebDAVTestSetup(testSuite);
 	}

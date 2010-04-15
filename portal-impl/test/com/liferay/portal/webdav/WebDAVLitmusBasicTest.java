@@ -39,7 +39,7 @@ public class WebDAVLitmusBasicTest extends BaseWebDAVTestCase {
 	public void test02Options() {
 		Tuple tuple = service(Method.OPTIONS, StringPool.BLANK, null, null);
 
-		assertEquals(HttpServletResponse.SC_OK, getStatusCode(tuple));
+		assertCode(HttpServletResponse.SC_OK, tuple);
 
 		Map<String, String> headers = getHeaders(tuple);
 
@@ -60,72 +60,62 @@ public class WebDAVLitmusBasicTest extends BaseWebDAVTestCase {
 	}
 
 	public void test05PutNoParent() {
-		Tuple tuple = service(Method.MKCOL, "409me/noparent", null, null);
+		assertCode(
+			HttpServletResponse.SC_CONFLICT,
+			service(Method.MKCOL, "409me/noparent", null, null));
 
-		assertEquals(HttpServletResponse.SC_CONFLICT, getStatusCode(tuple));
-
-		tuple = service(
-			Method.PUT, "409me/noparent.txt", null, _TEST_CONTENT.getBytes());
-
-		assertEquals(HttpServletResponse.SC_CONFLICT, getStatusCode(tuple));
+		assertCode(
+			HttpServletResponse.SC_CONFLICT,
+			servicePut("409me/noparent.txt", _TEST_CONTENT.getBytes()));
 	}
 
 	public void test06MkcolOverPlain() {
-		Tuple tuple = service(Method.MKCOL, "res-\u20AC", null, null);
-
-		assertEquals(
-			HttpServletResponse.SC_METHOD_NOT_ALLOWED, getStatusCode(tuple));
+		assertCode(
+			HttpServletResponse.SC_METHOD_NOT_ALLOWED,
+			service(Method.MKCOL, "res-\u20AC", null, null));
 	}
 
 	public void test07Delete() {
-		Tuple tuple = service(Method.DELETE, "res-\u20AC", null, null);
-
-		assertEquals(HttpServletResponse.SC_NO_CONTENT, getStatusCode(tuple));
+		assertCode(
+			HttpServletResponse.SC_NO_CONTENT, serviceDelete("res-\u20AC"));
 	}
 
 	public void test08DeleteNull() {
-		Tuple tuple = service(Method.DELETE, "404me", null, null);
-
-		assertEquals(HttpServletResponse.SC_NOT_FOUND, getStatusCode(tuple));
+		assertCode(
+			HttpServletResponse.SC_NOT_FOUND, serviceDelete("404me"));
 	}
 
 	public void test09DeleteFragment() {
-		Tuple tuple = service(Method.MKCOL, "frag", null, null);
+		assertCode(
+			HttpServletResponse.SC_CREATED,
+			service(Method.MKCOL, "frag", null, null));
 
-		assertEquals(HttpServletResponse.SC_CREATED, getStatusCode(tuple));
+		assertCode(
+			HttpServletResponse.SC_NOT_FOUND, serviceDelete("frag/#ment"));
 
-		tuple = service(Method.DELETE, "frag/#ment", null, null);
-
-		assertEquals(HttpServletResponse.SC_NOT_FOUND, getStatusCode(tuple));
-
-		tuple = service(Method.DELETE, "frag", null, null);
-
-		assertEquals(HttpServletResponse.SC_NO_CONTENT, getStatusCode(tuple));
+		assertCode(HttpServletResponse.SC_NO_CONTENT, serviceDelete("frag"));
 	}
 
 	public void test10Mkcol() {
-		Tuple tuple = service(Method.MKCOL, "col", null, null);
-
-		assertEquals(HttpServletResponse.SC_CREATED, getStatusCode(tuple));
+		assertCode(
+			HttpServletResponse.SC_CREATED,
+			service(Method.MKCOL, "col", null, null));
 	}
 
 	public void test11MkcolAgain() {
-		Tuple tuple = service(Method.MKCOL, "col", null, null);
-
-		assertEquals(
-			HttpServletResponse.SC_METHOD_NOT_ALLOWED, getStatusCode(tuple));
+		assertCode(
+			HttpServletResponse.SC_METHOD_NOT_ALLOWED,
+			service(Method.MKCOL, "col", null, null));
 	}
 
 	public void test12DeleteColl() {
-		Tuple tuple = service(Method.DELETE, "col", null, null);
-
-		assertEquals(HttpServletResponse.SC_NO_CONTENT, getStatusCode(tuple));
+		assertCode(HttpServletResponse.SC_NO_CONTENT, serviceDelete("col"));
 	}
 
 	public void test13MkcolNoParent() {
-		Tuple tuple = service(Method.MKCOL, "409me/col", null, null);
-
-		assertEquals(HttpServletResponse.SC_CONFLICT, getStatusCode(tuple));
+		assertCode(
+			HttpServletResponse.SC_CONFLICT,
+			service(Method.MKCOL, "409me/col", null, null));
 	}
 
 	public void test14MkcolWithBody() {
@@ -133,25 +123,22 @@ public class WebDAVLitmusBasicTest extends BaseWebDAVTestCase {
 
 		headers.put(HttpHeaders.CONTENT_TYPE, "xyz-foo/bar-512");
 
-		Tuple tuple = service(
-			Method.MKCOL, "mkcolbody", headers, _TEST_CONTENT.getBytes());
-
-		assertEquals(
+		assertCode(
 			HttpServletResponse.SC_UNSUPPORTED_MEDIA_TYPE,
-			getStatusCode(tuple));
+			service(
+				Method.MKCOL, "mkcolbody", headers, _TEST_CONTENT.getBytes()));
 	}
 
 	protected void putGet(String fileName) {
-		Tuple tuple = service(
-			Method.PUT, fileName, null, _TEST_CONTENT.getBytes());
+		assertCode(
+			HttpServletResponse.SC_CREATED,
+			servicePut(fileName, _TEST_CONTENT.getBytes()));
 
-		assertEquals(HttpServletResponse.SC_CREATED, getStatusCode(tuple));
+		Tuple tuple = serviceGet(fileName);
 
-		tuple = service(Method.GET, fileName, null, null);
+		assertCode(HttpServletResponse.SC_OK, tuple);
 
-		assertEquals(HttpServletResponse.SC_OK, getStatusCode(tuple));
-
-		assertEquals(_TEST_CONTENT, getResponseBodyString(tuple));
+		assertBytes(_TEST_CONTENT.getBytes(), getResponseBody(tuple));
 	}
 
 	private static final String _TEST_CONTENT =

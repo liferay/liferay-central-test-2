@@ -14,7 +14,6 @@
 
 package com.liferay.portal.webdav;
 
-import com.liferay.portal.kernel.util.Tuple;
 import com.liferay.portal.webdav.methods.Method;
 
 import javax.servlet.http.HttpServletResponse;
@@ -32,267 +31,220 @@ import javax.servlet.http.HttpServletResponse;
 public class WebDAVLitmusCopyMoveTest extends BaseWebDAVTestCase {
 
 	public void test02CopyInit() {
-		Tuple tuple = service(
-			Method.PUT, "copysrc", null, _TEST_CONTENT.getBytes());
+		assertCode(
+			HttpServletResponse.SC_CREATED,
+			servicePut("copysrc", _TEST_CONTENT.getBytes()));
 
-		assertEquals(HttpServletResponse.SC_CREATED, getStatusCode(tuple));
-
-		tuple = service(Method.MKCOL, "copycoll", null, null);
-
-		assertEquals(HttpServletResponse.SC_CREATED, getStatusCode(tuple));
+		assertCode(
+			HttpServletResponse.SC_CREATED,
+			service(Method.MKCOL, "copycoll", null, null));
 	}
 
 	public void test03CopySimple() {
-		Tuple tuple = serviceCopyOrMove(
-			Method.COPY, "copysrc", null, "copydest", 0, false);
-
-		assertEquals(HttpServletResponse.SC_CREATED, getStatusCode(tuple));
+		assertCode(
+			HttpServletResponse.SC_CREATED,
+			serviceCopyOrMove(Method.COPY, "copysrc", "copydest", false));
 	}
 
 	public void test04CopyOverwrite() {
-		Tuple tuple = serviceCopyOrMove(
-			Method.COPY, "copysrc", null, "copydest", 0, false);
+		assertCode(
+			HttpServletResponse.SC_PRECONDITION_FAILED,
+			serviceCopyOrMove(Method.COPY, "copysrc", "copydest", false));
 
-		assertEquals(
-			HttpServletResponse.SC_PRECONDITION_FAILED, getStatusCode(tuple));
+		assertCode(
+			HttpServletResponse.SC_NO_CONTENT,
+			serviceCopyOrMove(Method.COPY, "copysrc", "copydest", true));
 
-		tuple = serviceCopyOrMove(
-			Method.COPY, "copysrc", null, "copydest", 0, true);
-
-		assertEquals(HttpServletResponse.SC_NO_CONTENT, getStatusCode(tuple));
-
-		tuple = serviceCopyOrMove(
-			Method.COPY, "copysrc", null, "copycoll", 0, true);
-
-		assertEquals(HttpServletResponse.SC_NO_CONTENT, getStatusCode(tuple));
+		assertCode(
+			HttpServletResponse.SC_NO_CONTENT,
+			serviceCopyOrMove(Method.COPY, "copysrc", "copycoll", true));
 	}
 
 	public void test05NoDestColl() {
-		Tuple tuple = serviceCopyOrMove(
-			Method.COPY, "copysrc", null, "nonesuch/foo", 0, false);
-
-		assertEquals(HttpServletResponse.SC_CONFLICT, getStatusCode(tuple));
+		assertCode(
+			HttpServletResponse.SC_CONFLICT,
+			serviceCopyOrMove(Method.COPY, "copysrc", "nonesuch/foo", false));
 	}
 
 	public void test06CopyCleanup() {
-		Tuple tuple = service(Method.DELETE, "copysrc", null, null);
+		assertCode(
+			HttpServletResponse.SC_NO_CONTENT, serviceDelete("copysrc"));
 
-		assertEquals(HttpServletResponse.SC_NO_CONTENT, getStatusCode(tuple));
+		assertCode(
+			HttpServletResponse.SC_NO_CONTENT, serviceDelete("copydest"));
 
-		tuple = service(Method.DELETE, "copydest", null, null);
-
-		assertEquals(HttpServletResponse.SC_NO_CONTENT, getStatusCode(tuple));
-
-		tuple = service(Method.DELETE, "copycoll", null, null);
-
-		assertEquals(HttpServletResponse.SC_NO_CONTENT, getStatusCode(tuple));
+		assertCode(
+			HttpServletResponse.SC_NO_CONTENT, serviceDelete("copycoll"));
 	}
 
 	public void test07CopyColl() {
-		Tuple tuple = service(Method.MKCOL, "ccsrc", null, null);
-
-		assertEquals(HttpServletResponse.SC_CREATED, getStatusCode(tuple));
-
-		for (int i = 0; i < 10; i++) {
-			tuple = service(
-				Method.PUT, "ccsrc/foo." + i, null, _TEST_CONTENT.getBytes());
-
-			assertEquals(HttpServletResponse.SC_CREATED, getStatusCode(tuple));
-		}
-
-		tuple = service(Method.MKCOL, "ccsrc/subcoll", null, null);
-
-		assertEquals(HttpServletResponse.SC_CREATED, getStatusCode(tuple));
-
-		tuple = serviceCopyOrMove(
-			Method.COPY, "ccsrc", null, "ccdest", -1, false);
-
-		assertEquals(HttpServletResponse.SC_CREATED, getStatusCode(tuple));
-
-		tuple = serviceCopyOrMove(
-			Method.COPY, "ccsrc", null, "ccdest2", -1, false);
-
-		assertEquals(HttpServletResponse.SC_CREATED, getStatusCode(tuple));
-
-		tuple = serviceCopyOrMove(
-			Method.COPY, "ccsrc", null, "ccdest2", -1, false);
-
-		assertEquals(
-			HttpServletResponse.SC_PRECONDITION_FAILED, getStatusCode(tuple));
-
-		tuple = serviceCopyOrMove(
-			Method.COPY, "ccsrc", null, "ccdest", -1, true);
-
-		assertEquals(HttpServletResponse.SC_NO_CONTENT, getStatusCode(tuple));
-
-		tuple = service(Method.DELETE, "ccsrc", null, null);
-
-		assertEquals(HttpServletResponse.SC_NO_CONTENT, getStatusCode(tuple));
+		assertCode(
+			HttpServletResponse.SC_CREATED,
+			service(Method.MKCOL, "ccsrc", null, null));
 
 		for (int i = 0; i < 10; i++) {
-			tuple = service(Method.DELETE, "ccdest/foo." + i, null, null);
-
-			assertEquals(
-				HttpServletResponse.SC_NO_CONTENT, getStatusCode(tuple));
+			assertCode(
+				HttpServletResponse.SC_CREATED,
+				servicePut("ccsrc/foo." + i, _TEST_CONTENT.getBytes()));
 		}
 
-		tuple = service(Method.DELETE, "ccdest/subcoll", null, null);
+		assertCode(
+			HttpServletResponse.SC_CREATED,
+			service(Method.MKCOL, "ccsrc/subcoll", null, null));
 
-		assertEquals(HttpServletResponse.SC_NO_CONTENT, getStatusCode(tuple));
+		assertCode(
+			HttpServletResponse.SC_CREATED,
+			serviceCopyOrMove(Method.COPY, "ccsrc", null, "ccdest", -1, false));
 
-		tuple = service(Method.DELETE, "ccdest", null, null);
+		assertCode(
+			HttpServletResponse.SC_CREATED,
+			serviceCopyOrMove(
+				Method.COPY, "ccsrc", null, "ccdest2", -1, false));
 
-		assertEquals(HttpServletResponse.SC_NO_CONTENT, getStatusCode(tuple));
+		assertCode(
+			HttpServletResponse.SC_PRECONDITION_FAILED,
+			serviceCopyOrMove(
+				Method.COPY, "ccsrc", null, "ccdest2", -1, false));
 
-		tuple = service(Method.DELETE, "ccdest2", null, null);
+		assertCode(
+			HttpServletResponse.SC_NO_CONTENT,
+			serviceCopyOrMove(Method.COPY, "ccsrc", null, "ccdest", -1, true));
 
-		assertEquals(HttpServletResponse.SC_NO_CONTENT, getStatusCode(tuple));
+		assertCode(
+			HttpServletResponse.SC_NO_CONTENT, serviceDelete("ccsrc"));
+
+		for (int i = 0; i < 10; i++) {
+			assertCode(
+				HttpServletResponse.SC_NO_CONTENT,
+				serviceDelete("ccdest/foo." + i));
+		}
+
+		assertCode(
+			HttpServletResponse.SC_NO_CONTENT, serviceDelete("ccdest/subcoll"));
+
+		assertCode(HttpServletResponse.SC_NO_CONTENT, serviceDelete("ccdest"));
+
+		assertCode(HttpServletResponse.SC_NO_CONTENT, serviceDelete("ccdest2"));
 	}
 
 	public void test08CopyShallow() {
-		Tuple tuple = service(Method.MKCOL, "ccsrc", null, null);
+		assertCode(
+			HttpServletResponse.SC_CREATED,
+			service(Method.MKCOL, "ccsrc", null, null));
 
-		assertEquals(HttpServletResponse.SC_CREATED, getStatusCode(tuple));
+		assertCode(
+			HttpServletResponse.SC_CREATED,
+			servicePut("ccsrc/foo", _TEST_CONTENT.getBytes()));
 
-		tuple = service(
-			Method.PUT, "ccsrc/foo", null, _TEST_CONTENT.getBytes());
+		assertCode(
+			HttpServletResponse.SC_CREATED,
+			serviceCopyOrMove(Method.COPY, "ccsrc", "ccdest", false));
 
-		assertEquals(HttpServletResponse.SC_CREATED, getStatusCode(tuple));
+		assertCode(HttpServletResponse.SC_NO_CONTENT, serviceDelete("ccsrc"));
 
-		tuple = serviceCopyOrMove(
-			Method.COPY, "ccsrc", null, "ccdest", 0, false);
+		assertCode(HttpServletResponse.SC_NOT_FOUND, serviceDelete("foo"));
 
-		assertEquals(HttpServletResponse.SC_CREATED, getStatusCode(tuple));
-
-		tuple = service(Method.DELETE, "ccsrc", null, null);
-
-		assertEquals(HttpServletResponse.SC_NO_CONTENT, getStatusCode(tuple));
-
-		tuple = service(Method.DELETE, "foo", null, null);
-
-		assertEquals(HttpServletResponse.SC_NOT_FOUND, getStatusCode(tuple));
-
-		tuple = service(Method.DELETE, "ccdest", null, null);
-
-		assertEquals(HttpServletResponse.SC_NO_CONTENT, getStatusCode(tuple));
+		assertCode(HttpServletResponse.SC_NO_CONTENT, serviceDelete("ccdest"));
 	}
 
 	public void test09Move() {
-		Tuple tuple = service(
-			Method.PUT, "move", null, _TEST_CONTENT.getBytes());
+		assertCode(
+			HttpServletResponse.SC_CREATED,
+			servicePut("move", _TEST_CONTENT.getBytes()));
 
-		assertEquals(HttpServletResponse.SC_CREATED, getStatusCode(tuple));
+		assertCode(
+			HttpServletResponse.SC_CREATED,
+			servicePut("move2", _TEST_CONTENT.getBytes()));
 
-		tuple = service(Method.PUT, "move2", null, _TEST_CONTENT.getBytes());
+		assertCode(
+			HttpServletResponse.SC_CREATED,
+			service(Method.MKCOL, "movecoll", null, null));
 
-		assertEquals(HttpServletResponse.SC_CREATED, getStatusCode(tuple));
+		assertCode(
+			HttpServletResponse.SC_CREATED,
+			serviceCopyOrMove(Method.MOVE, "move", "movedest", false));
 
-		tuple = service(Method.MKCOL, "movecoll", null, null);
+		assertCode(
+			HttpServletResponse.SC_PRECONDITION_FAILED,
+			serviceCopyOrMove(Method.MOVE, "move2", "movedest", false));
 
-		assertEquals(HttpServletResponse.SC_CREATED, getStatusCode(tuple));
+		assertCode(
+			HttpServletResponse.SC_NO_CONTENT,
+			serviceCopyOrMove(Method.MOVE, "move2", "movedest", true));
 
-		tuple = serviceCopyOrMove(
-			Method.MOVE, "move", null, "movedest", 0, false);
+		assertCode(
+			HttpServletResponse.SC_NO_CONTENT,
+			serviceCopyOrMove(Method.MOVE, "movedest", "movecoll", true));
 
-		assertEquals(HttpServletResponse.SC_CREATED, getStatusCode(tuple));
-
-		tuple = serviceCopyOrMove(
-			Method.MOVE, "move2", null, "movedest", 0, false);
-
-		assertEquals(
-			HttpServletResponse.SC_PRECONDITION_FAILED, getStatusCode(tuple));
-
-		tuple = serviceCopyOrMove(
-			Method.MOVE, "move2", null, "movedest", 0, true);
-
-		assertEquals(HttpServletResponse.SC_NO_CONTENT, getStatusCode(tuple));
-
-		tuple = serviceCopyOrMove(
-			Method.MOVE, "movedest", null, "movecoll", 0, true);
-
-		assertEquals(HttpServletResponse.SC_NO_CONTENT, getStatusCode(tuple));
-
-		tuple = service(Method.DELETE, "movecoll", null, null);
-
-		assertEquals(HttpServletResponse.SC_NO_CONTENT, getStatusCode(tuple));
+		assertCode(
+			HttpServletResponse.SC_NO_CONTENT, serviceDelete("movecoll"));
 	}
 
 	public void test10MoveColl() {
-		Tuple tuple = service(Method.MKCOL, "mvsrc", null, null);
-
-		assertEquals(HttpServletResponse.SC_CREATED, getStatusCode(tuple));
-
-		for (int i = 0; i < 10; i++) {
-			tuple = service(
-				Method.PUT, "mvsrc/foo." + i, null, _TEST_CONTENT.getBytes());
-
-			assertEquals(HttpServletResponse.SC_CREATED, getStatusCode(tuple));
-		}
-
-		tuple = service(
-			Method.PUT, "mvnoncoll", null, _TEST_CONTENT.getBytes());
-
-		assertEquals(HttpServletResponse.SC_CREATED, getStatusCode(tuple));
-
-		tuple = service(Method.MKCOL, "mvsrc/subcoll", null, null);
-
-		assertEquals(HttpServletResponse.SC_CREATED, getStatusCode(tuple));
-
-		tuple = serviceCopyOrMove(
-			Method.COPY, "mvsrc", null, "mvdest2", -1, false);
-
-		assertEquals(HttpServletResponse.SC_CREATED, getStatusCode(tuple));
-
-		tuple = serviceCopyOrMove(
-			Method.MOVE, "mvsrc", null, "mvdest", -1, false);
-
-		assertEquals(HttpServletResponse.SC_CREATED, getStatusCode(tuple));
-
-		tuple = serviceCopyOrMove(
-			Method.MOVE, "mvdest", null, "mvdest2", -1, false);
-
-		assertEquals(
-			HttpServletResponse.SC_PRECONDITION_FAILED, getStatusCode(tuple));
-
-		tuple = serviceCopyOrMove(
-			Method.MOVE, "mvdest2", null, "mvdest", -1, true);
-
-		assertEquals(HttpServletResponse.SC_NO_CONTENT, getStatusCode(tuple));
-
-		tuple = serviceCopyOrMove(
-			Method.COPY, "mvdest", null, "mvdest2", -1, false);
-
-		assertEquals(HttpServletResponse.SC_CREATED, getStatusCode(tuple));
+		assertCode(
+			HttpServletResponse.SC_CREATED,
+			service(Method.MKCOL, "mvsrc", null, null));
 
 		for (int i = 0; i < 10; i++) {
-			tuple = service(Method.DELETE, "mvdest/foo." + i, null, null);
-
-			assertEquals(
-				HttpServletResponse.SC_NO_CONTENT, getStatusCode(tuple));
+			assertCode(
+				HttpServletResponse.SC_CREATED,
+				servicePut("mvsrc/foo." + i, _TEST_CONTENT.getBytes()));
 		}
 
-		tuple = service(Method.DELETE, "mvdest/subcoll", null, null);
+		assertCode(
+			HttpServletResponse.SC_CREATED,
+			servicePut("mvnoncoll", _TEST_CONTENT.getBytes()));
 
-		assertEquals(HttpServletResponse.SC_NO_CONTENT, getStatusCode(tuple));
+		assertCode(
+			HttpServletResponse.SC_CREATED,
+			service(Method.MKCOL, "mvsrc/subcoll", null, null));
 
-		tuple = serviceCopyOrMove(
-			Method.MOVE, "mvdest2", null, "mvnoncoll", -1, true);
+		assertCode(
+			HttpServletResponse.SC_CREATED,
+			serviceCopyOrMove(
+				Method.COPY, "mvsrc", null, "mvdest2", -1, false));
 
-		assertEquals(HttpServletResponse.SC_NO_CONTENT, getStatusCode(tuple));
+		assertCode(
+			HttpServletResponse.SC_CREATED,
+			serviceCopyOrMove(Method.MOVE, "mvsrc", null, "mvdest", -1, false));
+
+		assertCode(
+			HttpServletResponse.SC_PRECONDITION_FAILED,
+			serviceCopyOrMove(
+				Method.MOVE, "mvdest", null, "mvdest2", -1, false));
+
+		assertCode(
+			HttpServletResponse.SC_NO_CONTENT,
+			serviceCopyOrMove(
+				Method.MOVE, "mvdest2", null, "mvdest", -1, true));
+
+		assertCode(
+			HttpServletResponse.SC_CREATED,
+			serviceCopyOrMove(
+				Method.COPY, "mvdest", null, "mvdest2", -1, false));
+
+		for (int i = 0; i < 10; i++) {
+			assertCode(
+				HttpServletResponse.SC_NO_CONTENT,
+				serviceDelete("mvdest/foo." + i));
+		}
+
+		assertCode(
+			HttpServletResponse.SC_NO_CONTENT, serviceDelete("mvdest/subcoll"));
+
+		assertCode(
+			HttpServletResponse.SC_NO_CONTENT,
+			serviceCopyOrMove(
+				Method.MOVE, "mvdest2", null, "mvnoncoll", -1, true));
 	}
 
 	public void test11MoveCleanup() {
-		Tuple tuple = service(Method.DELETE, "mvdest", null, null);
+		assertCode(HttpServletResponse.SC_NO_CONTENT, serviceDelete("mvdest"));
 
-		assertEquals(HttpServletResponse.SC_NO_CONTENT, getStatusCode(tuple));
+		assertCode(HttpServletResponse.SC_NOT_FOUND, serviceDelete("mvdest2"));
 
-		tuple = service(Method.DELETE, "mvdest2", null, null);
-
-		assertEquals(HttpServletResponse.SC_NOT_FOUND, getStatusCode(tuple));
-
-		tuple = service(Method.DELETE, "mvnoncoll", null, null);
-
-		assertEquals(HttpServletResponse.SC_NO_CONTENT, getStatusCode(tuple));
+		assertCode(
+			HttpServletResponse.SC_NO_CONTENT, serviceDelete("mvnoncoll"));
 	}
 
 	private static final String _TEST_CONTENT =
