@@ -17,21 +17,18 @@
 <%@ include file="/html/portlet/image_gallery/init.jsp" %>
 
 <%
-long categoryId = ParamUtil.getLong(request, "categoryId");
-String tagName = ParamUtil.getString(request, "tag");
-
 String topLink = ParamUtil.getString(request, "topLink", "image-home");
 
 long folderId = GetterUtil.getLong((String)request.getAttribute("view.jsp-folderId"));
 
 boolean viewFolder = GetterUtil.getBoolean((String)request.getAttribute("view.jsp-viewFolder"));
 
+boolean useAssetEntryQuery = GetterUtil.getBoolean((String)request.getAttribute("view.jsp-useAssetEntryQuery"));
+
 PortletURL portletURL = renderResponse.createRenderURL();
 
-portletURL.setParameter("tag", StringPool.BLANK);
 portletURL.setParameter("categoryId", StringPool.BLANK);
-
-filter = (categoryId > 0) || Validator.isNotNull(tagName);
+portletURL.setParameter("tag", StringPool.BLANK);
 %>
 
 <div class="top-links-container">
@@ -42,13 +39,13 @@ filter = (categoryId > 0) || Validator.isNotNull(tagName);
 			portletURL.setParameter("topLink", "image-home");
 			%>
 
-			<liferay-ui:icon cssClass="top-link" image="../aui/home" label="<%= true %>" message="image-home" url='<%= (topLink.equals("image-home") && folderId == 0 && viewFolder && !filter) ? StringPool.BLANK : portletURL.toString() %>' />
+			<liferay-ui:icon cssClass="top-link" image="../aui/home" label="<%= true %>" message="image-home" url='<%= (topLink.equals("image-home") && folderId == 0 && viewFolder && !useAssetEntryQuery) ? StringPool.BLANK : portletURL.toString() %>' />
 
 			<%
 			portletURL.setParameter("topLink", "recent-images");
 			%>
 
-			<liferay-ui:icon cssClass='<%= "top-link" + (themeDisplay.isSignedIn() ? StringPool.BLANK : " last") %>' image="../aui/clock" label="<%= true %>" message="recent-images" url='<%= (topLink.equals("recent-images") && !filter) ? StringPool.BLANK : portletURL.toString() %>'/>
+			<liferay-ui:icon cssClass='<%= "top-link" + (themeDisplay.isSignedIn() ? StringPool.BLANK : " last") %>' image="../aui/clock" label="<%= true %>" message="recent-images" url='<%= (topLink.equals("recent-images") && !useAssetEntryQuery) ? StringPool.BLANK : portletURL.toString() %>'/>
 
 			<c:if test="<%= themeDisplay.isSignedIn() %>">
 
@@ -56,7 +53,7 @@ filter = (categoryId > 0) || Validator.isNotNull(tagName);
 				portletURL.setParameter("topLink", "my-images");
 				%>
 
-				<liferay-ui:icon cssClass="top-link last" image="../aui/person" label="<%= true %>" message="my-images" url='<%= (topLink.equals("my-images") && !filter) ? StringPool.BLANK : portletURL.toString() %>'/>
+				<liferay-ui:icon cssClass="top-link last" image="../aui/person" label="<%= true %>" message="my-images" url='<%= (topLink.equals("my-images") && !useAssetEntryQuery) ? StringPool.BLANK : portletURL.toString() %>'/>
 			</c:if>
 		</div>
 

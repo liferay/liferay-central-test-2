@@ -26,8 +26,10 @@
 	for (int i = 0; i < results.size(); i++) {
 		IGImage image = null;
 
-		if (filter) {
-			image = IGImageLocalServiceUtil.getIGImage(((AssetEntry)results.get(i)).getClassPK());
+		if (useAssetEntryQuery) {
+			AssetEntry assetEntry = (AssetEntry)results.get(i);
+
+			image = IGImageLocalServiceUtil.getIGImage(assetEntry.getClassPK());
 		}
 		else {
 			image = (IGImage)results.get(i);

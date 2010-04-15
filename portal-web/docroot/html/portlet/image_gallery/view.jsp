@@ -17,25 +17,7 @@
 <%@ include file="/html/portlet/image_gallery/init.jsp" %>
 
 <%
-long categoryId = ParamUtil.getLong(request, "categoryId");
-
-String categoryName = null;
-String vocabularyName = null;
-
-if (categoryId != 0) {
-	AssetCategory assetCategory = AssetCategoryLocalServiceUtil.getAssetCategory(categoryId);
-
-	categoryName = assetCategory.getName();
-
-	AssetVocabulary assetVocabulary = AssetVocabularyLocalServiceUtil.getAssetVocabulary(assetCategory.getVocabularyId());
-
-	vocabularyName = assetVocabulary.getName();
-}
-
-String tagName = ParamUtil.getString(request, "tag");
 String topLink = ParamUtil.getString(request, "topLink", "image-home");
-
-filter = (categoryId > 0) || Validator.isNotNull(tagName);
 
 IGFolder folder = (IGFolder)request.getAttribute(WebKeys.IMAGE_GALLERY_FOLDER);
 
@@ -55,6 +37,24 @@ if ((folder == null) && (defaultFolderId != IGFolderConstants.DEFAULT_PARENT_FOL
 int foldersCount = IGFolderLocalServiceUtil.getFoldersCount(scopeGroupId, folderId);
 int imagesCount = IGImageLocalServiceUtil.getImagesCount(scopeGroupId, folderId);
 
+long categoryId = ParamUtil.getLong(request, "categoryId");
+String tagName = ParamUtil.getString(request, "tag");
+
+String categoryName = null;
+String vocabularyName = null;
+
+if (categoryId != 0) {
+	AssetCategory assetCategory = AssetCategoryLocalServiceUtil.getAssetCategory(categoryId);
+
+	categoryName = assetCategory.getName();
+
+	AssetVocabulary assetVocabulary = AssetVocabularyLocalServiceUtil.getAssetVocabulary(assetCategory.getVocabularyId());
+
+	vocabularyName = assetVocabulary.getName();
+}
+
+boolean useAssetEntryQuery = (categoryId > 0) || Validator.isNotNull(tagName);
+
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("struts_action", "/image_gallery/view");
@@ -68,12 +68,14 @@ request.setAttribute("view.jsp-folderId", String.valueOf(folderId));
 request.setAttribute("view.jsp-portletURL", portletURL);
 
 request.setAttribute("view.jsp-viewFolder", Boolean.TRUE.toString());
+
+request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntryQuery));
 %>
 
 <liferay-util:include page="/html/portlet/image_gallery/top_links.jsp" />
 
 <c:choose>
-	<c:when test='<%= filter %>'>
+	<c:when test="<%= useAssetEntryQuery %>">
 		<c:if test="<%= Validator.isNotNull(categoryName) %>">
 			<h1 class="entry-title">
 				<%= LanguageUtil.format(pageContext, "images-with-x-x", new String[] {vocabularyName, categoryName}) %>
@@ -95,10 +97,11 @@ request.setAttribute("view.jsp-viewFolder", Boolean.TRUE.toString());
 
 		int total = AssetEntryLocalServiceUtil.getEntriesCount(assetEntryQuery);
 
+		searchContainer.setTotal(total);
+
 		List results = AssetEntryLocalServiceUtil.getEntries(assetEntryQuery);
 
 		searchContainer.setResults(results);
-		searchContainer.setTotal(total);
 
 		List scores = null;
 		%>

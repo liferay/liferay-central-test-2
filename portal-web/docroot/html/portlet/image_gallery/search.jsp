@@ -40,6 +40,8 @@ else {
 }
 
 String keywords = ParamUtil.getString(request, "keywords");
+
+boolean useAssetEntryQuery = false;
 %>
 
 <liferay-portlet:renderURL varImpl="searchURL"><portlet:param name="struts_action" value="/image_gallery/search" /></liferay-portlet:renderURL>
