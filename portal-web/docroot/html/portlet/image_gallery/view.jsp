@@ -17,7 +17,25 @@
 <%@ include file="/html/portlet/image_gallery/init.jsp" %>
 
 <%
+long categoryId = ParamUtil.getLong(request, "categoryId");
+
+String categoryName = null;
+String vocabularyName = null;
+
+if (categoryId != 0) {
+	AssetCategory assetCategory = AssetCategoryLocalServiceUtil.getAssetCategory(categoryId);
+
+	categoryName = assetCategory.getName();
+
+	AssetVocabulary assetVocabulary = AssetVocabularyLocalServiceUtil.getAssetVocabulary(assetCategory.getVocabularyId());
+
+	vocabularyName = assetVocabulary.getName();
+}
+
+String tagName = ParamUtil.getString(request, "tag");
 String topLink = ParamUtil.getString(request, "topLink", "image-home");
+
+filter = (categoryId > 0) || Validator.isNotNull(tagName);
 
 IGFolder folder = (IGFolder)request.getAttribute(WebKeys.IMAGE_GALLERY_FOLDER);
 
@@ -55,6 +73,46 @@ request.setAttribute("view.jsp-viewFolder", Boolean.TRUE.toString());
 <liferay-util:include page="/html/portlet/image_gallery/top_links.jsp" />
 
 <c:choose>
+	<c:when test='<%= filter %>'>
+		<c:if test="<%= Validator.isNotNull(categoryName) %>">
+			<h1 class="entry-title">
+				<%= LanguageUtil.format(pageContext, "images-with-x-x", new String[] {vocabularyName, categoryName}) %>
+			</h1>
+		</c:if>
+
+		<c:if test="<%= Validator.isNotNull(tagName) %>">
+			<h1 class="entry-title">
+				<%= LanguageUtil.format(pageContext, "images-with-tag-x", tagName) %>
+			</h1>
+		</c:if>
+
+		<%
+		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, "cur2", SearchContainer.DEFAULT_DELTA, portletURL, null, null);
+
+		AssetEntryQuery assetEntryQuery = new AssetEntryQuery(IGImage.class.getName(), searchContainer);
+
+		assetEntryQuery.setExcludeZeroViewCount(false);
+
+		int total = AssetEntryLocalServiceUtil.getEntriesCount(assetEntryQuery);
+
+		List results = AssetEntryLocalServiceUtil.getEntries(assetEntryQuery);
+
+		searchContainer.setResults(results);
+		searchContainer.setTotal(total);
+
+		List scores = null;
+		%>
+
+		<%@ include file="/html/portlet/image_gallery/view_images.jspf" %>
+
+		<%
+		if (portletName.equals(PortletKeys.IMAGE_GALLERY)) {
+			PortalUtil.addPageKeywords(tagName, request);
+			PortalUtil.addPageKeywords(categoryName, request);
+		}
+		%>
+
+	</c:when>
 	<c:when test='<%= topLink.equals("image-home") %>'>
 		<aui:layout>
 			<c:if test="<%= folder != null %>">

@@ -23,8 +23,16 @@
 <%@ page import="com.liferay.portal.kernel.search.IndexerRegistryUtil" %>
 <%@ page import="com.liferay.portal.kernel.search.SearchContext" %>
 <%@ page import="com.liferay.portal.search.SearchContextFactory" %>
+<%@ page import="com.liferay.portlet.asset.model.AssetCategory" %>
+<%@ page import="com.liferay.portlet.asset.model.AssetEntry" %>
 <%@ page import="com.liferay.portlet.asset.model.AssetRenderer" %>
+<%@ page import="com.liferay.portlet.asset.model.AssetVocabulary" %>
+<%@ page import="com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.asset.service.AssetEntryLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.asset.service.AssetTagServiceUtil" %>
+<%@ page import="com.liferay.portlet.asset.service.AssetVocabularyLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.asset.service.persistence.AssetEntryQuery" %>
+<%@ page import="com.liferay.portlet.asset.util.AssetUtil" %>
 <%@ page import="com.liferay.portlet.imagegallery.DuplicateFolderNameException" %>
 <%@ page import="com.liferay.portlet.imagegallery.DuplicateImageNameException" %>
 <%@ page import="com.liferay.portlet.imagegallery.FolderNameException" %>
@@ -40,6 +48,7 @@
 <%@ page import="com.liferay.portlet.imagegallery.service.IGImageServiceUtil" %>
 <%@ page import="com.liferay.portlet.imagegallery.service.permission.IGFolderPermission" %>
 <%@ page import="com.liferay.portlet.imagegallery.service.permission.IGImagePermission" %>
+<%@ page import="com.liferay.portlet.imagegallery.service.permission.IGPermission" %>
 <%@ page import="com.liferay.portlet.imagegallery.util.IGUtil" %>
 <%@ page import="com.liferay.portlet.imagegallery.webdav.IGWebDAVStorageImpl" %>
 
@@ -54,6 +63,8 @@ if (Validator.isNotNull(portletResource)) {
 else if (layout.isTypeControlPanel()) {
 	preferences = PortletPreferencesLocalServiceUtil.getPreferences(themeDisplay.getCompanyId(), scopeGroupId, PortletKeys.PREFS_OWNER_TYPE_GROUP, 0, PortletKeys.IMAGE_GALLERY, null);
 }
+
+boolean filter = false;
 
 long rootFolderId = PrefsParamUtil.getLong(preferences, request, "rootFolderId", IGFolderConstants.DEFAULT_PARENT_FOLDER_ID);
 
