@@ -133,6 +133,10 @@
 	overflow: hidden;
 }
 
+.ie6 .lfr-available-themes h3 {
+	height: 1%;
+}
+
 .portlet-communities .lfr-available-themes .lfr-theme-list,
 .portlet-enterprise-admin .lfr-available-themes .lfr-theme-list {
 	margin-top: 0.7em;
@@ -234,4 +238,9 @@
 
 .lfr-tree-controls-collapse {
 	background-image: url(<%= themeImagesPath %>/trees/collapse_all.png);
+}
+
+.ie6 .theme-thumbnail,
+.ie6 .no-png-fix {
+	behavior: none;
 }
