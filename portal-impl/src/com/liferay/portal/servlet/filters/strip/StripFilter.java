@@ -120,27 +120,20 @@ public class StripFilter extends BasePortalFilter {
 			// conditions is bad on performance the user will not start
 			// downloading the content until the entire content is modified.
 
-			String requestURI = request.getRequestURI();
-			
-			if (requestURI.endsWith(_DOCUMENT_LIBRARY_GET_FILE)) {
+			String lifecycle = ParamUtil.getString(request, "p_p_lifecycle");
+
+			if ((lifecycle.equals("1") &&
+				 LiferayWindowState.isExclusive(request)) ||
+				lifecycle.equals("2")) {
+
 				return false;
 			}
 			else {
-				String lifecycle = ParamUtil.getString(
-					request, "p_p_lifecycle");
-	
-				if ((lifecycle.equals("1") &&
-					 LiferayWindowState.isExclusive(request)) ||
-					lifecycle.equals("2")) {
-	
-					return false;
-				}
-				else {
-					return true;
-				}
+				return true;
 			}
 		}
 	}
+
 	protected int processCSS(
 			byte[] oldByteArray, OutputStream newBytes, int currentIndex)
 		throws IOException {
@@ -468,9 +461,6 @@ public class StripFilter extends BasePortalFilter {
 
 	private static final byte[] _CDATA_OPEN = "/*<![CDATA[*/".getBytes();
 
-	private static final String _DOCUMENT_LIBRARY_GET_FILE =
-		"/c/document_library/get_file";
-	
 	private static final byte[] _MARKER_JS_OPEN =
 		"script type=\"text/javascript\">".getBytes();
 
