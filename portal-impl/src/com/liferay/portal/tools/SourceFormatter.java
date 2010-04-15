@@ -486,6 +486,12 @@ public class SourceFormatter {
 					"com.liferay.portal.kernel.exception.SystemException");
 			}
 
+			if (newContent.contains("com.liferay.util.LocalizationUtil")) {
+				newContent = StringUtil.replace(
+					newContent, "com.liferay.util.LocalizationUtil",
+					"com.liferay.portal.kernel.util.LocalizationUtil");
+			}
+
 			newContent = stripImports(newContent, packagePath, className);
 
 			if (newContent.indexOf(";\n/**") != -1) {
