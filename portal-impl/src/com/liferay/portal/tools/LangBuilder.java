@@ -189,7 +189,8 @@ public class LangBuilder {
 					translatedText = "";
 				}
 				else if ((nativeValue != null) &&
-						(nativeValue.endsWith(_AUTOMATIC_TRANSLATION))) {
+						 (nativeValue.endsWith(_AUTOMATIC_TRANSLATION))) {
+
 					translatedText += _AUTOMATIC_TRANSLATION;
 				}
 
