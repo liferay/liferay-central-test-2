@@ -356,9 +356,13 @@ ${exception.message}
 		<copy file="${lang.dir}/${lang.file}_${lang.code}.properties.tmp" tofile="${lang.dir}/${lang.file}_${lang.code}.properties" overwrite="true">
 			<filterset begintoken=" (" endtoken=")">
 				<filter token="Automatic Translation" value=""/>
-				<filter token="Automatic Copy" value=""/>
 			</filterset>
 		</copy>
+
+		<replaceregexp byline="true" file="${lang.dir}/${lang.file}_${lang.code}.properties">
+			<regexp pattern=".*\(Automatic Copy\)$"/>
+  			<substitution expression=""/>
+		</replaceregexp>
 
 		<delete file="${lang.dir}/${lang.file}_${lang.code}.properties.tmp" />
 	</target>

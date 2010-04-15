@@ -188,13 +188,9 @@ public class LangBuilder {
 
 					translatedText = "";
 				}
-				else if (nativeValue != null) {
-					if (nativeValue.endsWith(_AUTOMATIC_COPY)) {
-						translatedText += _AUTOMATIC_COPY;
-					}
-					else if (nativeValue.endsWith(_AUTOMATIC_TRANSLATION)) {
-						translatedText += _AUTOMATIC_TRANSLATION;
-					}
+				else if ((nativeValue != null) &&
+						(nativeValue.endsWith(_AUTOMATIC_TRANSLATION))) {
+					translatedText += _AUTOMATIC_TRANSLATION;
 				}
 
 				if ((translatedText == null) || translatedText.equals("")) {
@@ -241,6 +237,10 @@ public class LangBuilder {
 					else {
 						translatedText = _translate(
 							translationId, key, value, 0);
+
+						if (Validator.isNull(translatedText)) {
+							translatedText = value + _AUTOMATIC_COPY;
+						}
 					}
 				}
 
