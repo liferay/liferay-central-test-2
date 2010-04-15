@@ -39,16 +39,6 @@ import org.springframework.mock.web.MockHttpServletResponse;
  */
 public class BaseWebDAVTestCase extends TestCase {
 
-	public static void assertCode(int statusCode, Tuple tuple) {
-		int returnedStatusCode = -1;
-
-		if (tuple != null) {
-			returnedStatusCode = getStatusCode(tuple);
-		}
-
-		assertEquals(statusCode, returnedStatusCode);
-	}
-
 	public static void assertBytes(byte[] expected, byte[] actual) {
 		if (expected == null && actual == null) {
 			return;
@@ -74,9 +64,79 @@ public class BaseWebDAVTestCase extends TestCase {
 			}
 		}
 
-	    fail(
-	    	"Content does not match.  Expected " + expected + ", Actual " +
-	    		actual);
+		fail(
+			"Content does not match.  Expected " + expected + ", Actual " +
+				actual);
+	}
+
+	public static void assertCode(int statusCode, Tuple tuple) {
+		int returnedStatusCode = -1;
+
+		if (tuple != null) {
+			returnedStatusCode = getStatusCode(tuple);
+		}
+
+		assertEquals(statusCode, returnedStatusCode);
+	}
+
+	protected static String getDepth(int depth) {
+		String depthString = "infinity";
+
+		if (depth == 0) {
+			depthString = "0";
+		}
+
+		return depthString;
+	}
+
+	protected static Map<String, String> getHeaders(Tuple tuple) {
+		return (Map<String, String>)tuple.getObject(2);
+	}
+
+	protected static String getLock(Tuple tuple) {
+		String token = "";
+
+		Map<String, String> headers = getHeaders(tuple);
+
+		String value = GetterUtil.getString(headers.get("Lock-Token"));
+
+		int beg = value.indexOf(WebDAVUtil.TOKEN_PREFIX);
+
+		if (beg >= 0) {
+			beg += WebDAVUtil.TOKEN_PREFIX.length();
+
+			if (beg < value.length()) {
+				int end = value.indexOf(">", beg);
+
+				token = GetterUtil.getString(value.substring(beg, end));
+			}
+		}
+
+		return token;
+	}
+
+	protected static String getOverwrite(boolean overwrite) {
+		String overwriteString = "F";
+
+		if (overwrite) {
+			overwriteString = "T";
+		}
+
+		return overwriteString;
+	}
+
+	protected static byte[] getResponseBody(Tuple tuple) {
+		return (byte[])tuple.getObject(1);
+	}
+
+	protected static String getResponseBodyString(Tuple tuple) {
+		byte[] data = getResponseBody(tuple);
+
+		return new String(data);
+	}
+
+	protected static int getStatusCode(Tuple tuple) {
+		return (Integer)tuple.getObject(0);
 	}
 
 	public Tuple service(
@@ -177,6 +237,21 @@ public class BaseWebDAVTestCase extends TestCase {
 	}
 
 	public Tuple serviceCopyOrMove(
+		String method, String path, Map<String, String> headers,
+		String destination, int depth, boolean overwrite) {
+
+		if (headers == null) {
+			headers = new HashMap<String, String>();
+		}
+
+		headers.put("Depth", getDepth(depth));
+		headers.put("Destination", _PATH_INFO_PREFACE + destination);
+		headers.put("Overwrite", getOverwrite(overwrite));
+
+		return service(method, path, headers, null);
+	}
+
+	public Tuple serviceCopyOrMove(
 		String method, String path, String destination) {
 
 		return serviceCopyOrMove(method, path, destination, false);
@@ -202,21 +277,6 @@ public class BaseWebDAVTestCase extends TestCase {
 		return serviceCopyOrMove(method, path, headers, destination, 0, false);
 	}
 
-	public Tuple serviceCopyOrMove(
-		String method, String path, Map<String, String> headers,
-		String destination, int depth, boolean overwrite) {
-
-		if (headers == null) {
-			headers = new HashMap<String, String>();
-		}
-
-		headers.put("Depth", getDepth(depth));
-		headers.put("Destination", _PATH_INFO_PREFACE + destination);
-		headers.put("Overwrite", getOverwrite(overwrite));
-
-		return service(method, path, headers, null);
-	}
-
 	public Tuple serviceDelete(String name) {
 		return service(Method.DELETE, name, null, null);
 	}
@@ -238,6 +298,10 @@ public class BaseWebDAVTestCase extends TestCase {
 		return service(Method.LOCK, path, headers, _LOCK_XML.getBytes());
 	}
 
+	public Tuple servicePropFind(String name) {
+		return service(Method.PROPFIND, name, null, _PROPFIND_XML.getBytes());
+	}
+
 	public Tuple servicePut(String name, byte[] data) {
 		return servicePut(name, data, null);
 	}
@@ -254,10 +318,6 @@ public class BaseWebDAVTestCase extends TestCase {
 		return service(Method.PUT, name, headers, data);
 	}
 
-	public Tuple servicePropFind(String name) {
-		return service(Method.PROPFIND, name, null, _PROPFIND_XML.getBytes());
-	}
-
 	public Tuple serviceUnlock(String path, String lock) {
 		Map<String, String> headers = null;
 
@@ -270,75 +330,15 @@ public class BaseWebDAVTestCase extends TestCase {
 		return service(Method.UNLOCK, path, headers, null);
 	}
 
-	protected static String getDepth(int depth) {
-		String depthString = "infinity";
-
-		if (depth == 0) {
-			depthString = "0";
-		}
-
-		return depthString;
-	}
-
-	protected static Map<String, String> getHeaders(Tuple tuple) {
-		return (Map<String, String>)tuple.getObject(2);
-	}
-
-	protected static String getLock(Tuple tuple) {
-		String token = "";
-
-		Map<String, String> headers = getHeaders(tuple);
-
-		String value = GetterUtil.getString(headers.get("Lock-Token"));
-
-		int beg = value.indexOf(WebDAVUtil.TOKEN_PREFIX);
-
-		if (beg >= 0) {
-			beg += WebDAVUtil.TOKEN_PREFIX.length();
-
-			if (beg < value.length()) {
-				int end = value.indexOf(">", beg);
-
-				token = GetterUtil.getString(value.substring(beg, end));
-			}
-		}
-
-		return token;
-	}
-
-	protected static String getOverwrite(boolean overwrite) {
-		String overwriteString = "F";
-
-		if (overwrite) {
-			overwriteString = "T";
-		}
-
-		return overwriteString;
-	}
-
-	protected static byte[] getResponseBody(Tuple tuple) {
-		return (byte[])tuple.getObject(1);
-	}
-
-	protected static String getResponseBodyString(Tuple tuple) {
-		byte[] data = getResponseBody(tuple);
-
-		return new String(data);
-	}
-
-	protected static int getStatusCode(Tuple tuple) {
-		return (Integer)tuple.getObject(0);
-	}
-
 	protected String getUserAgent() {
 		return _DEFAULT_USER_AGENT;
 	}
 
-	private static String _CONTEXT_PATH = "/webdav";
+	private static final String _CONTEXT_PATH = "/webdav";
 
-	private static String _DEFAULT_USER_AGENT = "Liferay-litmus";
+	private static final String _DEFAULT_USER_AGENT = "Liferay-litmus";
 
-	private static String _LOCK_XML =
+	private static final String _LOCK_XML =
 		"<?xml version=\"1.0\" encoding=\"utf-8\" ?>\n" +
 		"<D:lockinfo xmlns:D='DAV:'>\n" +
 		"<D:lockscope><D:exclusive/></D:lockscope>\n" +
@@ -348,15 +348,15 @@ public class BaseWebDAVTestCase extends TestCase {
 		"</D:owner>\n" +
 		"</D:lockinfo>\n";
 
-	private static String _PATH_INFO_PREFACE =
+	private static final String _PATH_INFO_PREFACE =
 		"/guest/document_library/WebDAVTest/";
 
-	private static String _PROPFIND_XML =
+	private static final String _PROPFIND_XML =
 		"<?xml version=\"1.0\" encoding=\"utf-8\" ?>\n"+
 		"<D:propfind xmlns:D=\"DAV:\">\n"+
 		"<D:allprop/>\n"+
 		"</D:propfind>";
 
-	private static String _SERVLET_PATH = "";
+	private static final String _SERVLET_PATH = "";
 
 }

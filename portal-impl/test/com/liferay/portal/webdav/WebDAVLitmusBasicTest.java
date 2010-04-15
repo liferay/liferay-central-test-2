@@ -63,7 +63,6 @@ public class WebDAVLitmusBasicTest extends BaseWebDAVTestCase {
 		assertCode(
 			HttpServletResponse.SC_CONFLICT,
 			service(Method.MKCOL, "409me/noparent", null, null));
-
 		assertCode(
 			HttpServletResponse.SC_CONFLICT,
 			servicePut("409me/noparent.txt", _TEST_CONTENT.getBytes()));
@@ -89,10 +88,8 @@ public class WebDAVLitmusBasicTest extends BaseWebDAVTestCase {
 		assertCode(
 			HttpServletResponse.SC_CREATED,
 			service(Method.MKCOL, "frag", null, null));
-
 		assertCode(
 			HttpServletResponse.SC_NOT_FOUND, serviceDelete("frag/#ment"));
-
 		assertCode(HttpServletResponse.SC_NO_CONTENT, serviceDelete("frag"));
 	}
 
@@ -137,7 +134,6 @@ public class WebDAVLitmusBasicTest extends BaseWebDAVTestCase {
 		Tuple tuple = serviceGet(fileName);
 
 		assertCode(HttpServletResponse.SC_OK, tuple);
-
 		assertBytes(_TEST_CONTENT.getBytes(), getResponseBody(tuple));
 	}
 

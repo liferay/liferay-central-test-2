@@ -34,7 +34,6 @@ public class WebDAVLitmusCopyMoveTest extends BaseWebDAVTestCase {
 		assertCode(
 			HttpServletResponse.SC_CREATED,
 			servicePut("copysrc", _TEST_CONTENT.getBytes()));
-
 		assertCode(
 			HttpServletResponse.SC_CREATED,
 			service(Method.MKCOL, "copycoll", null, null));
@@ -50,11 +49,9 @@ public class WebDAVLitmusCopyMoveTest extends BaseWebDAVTestCase {
 		assertCode(
 			HttpServletResponse.SC_PRECONDITION_FAILED,
 			serviceCopyOrMove(Method.COPY, "copysrc", "copydest", false));
-
 		assertCode(
 			HttpServletResponse.SC_NO_CONTENT,
 			serviceCopyOrMove(Method.COPY, "copysrc", "copydest", true));
-
 		assertCode(
 			HttpServletResponse.SC_NO_CONTENT,
 			serviceCopyOrMove(Method.COPY, "copysrc", "copycoll", true));
@@ -69,10 +66,8 @@ public class WebDAVLitmusCopyMoveTest extends BaseWebDAVTestCase {
 	public void test06CopyCleanup() {
 		assertCode(
 			HttpServletResponse.SC_NO_CONTENT, serviceDelete("copysrc"));
-
 		assertCode(
 			HttpServletResponse.SC_NO_CONTENT, serviceDelete("copydest"));
-
 		assertCode(
 			HttpServletResponse.SC_NO_CONTENT, serviceDelete("copycoll"));
 	}
@@ -91,25 +86,20 @@ public class WebDAVLitmusCopyMoveTest extends BaseWebDAVTestCase {
 		assertCode(
 			HttpServletResponse.SC_CREATED,
 			service(Method.MKCOL, "ccsrc/subcoll", null, null));
-
 		assertCode(
 			HttpServletResponse.SC_CREATED,
 			serviceCopyOrMove(Method.COPY, "ccsrc", null, "ccdest", -1, false));
-
 		assertCode(
 			HttpServletResponse.SC_CREATED,
 			serviceCopyOrMove(
 				Method.COPY, "ccsrc", null, "ccdest2", -1, false));
-
 		assertCode(
 			HttpServletResponse.SC_PRECONDITION_FAILED,
 			serviceCopyOrMove(
 				Method.COPY, "ccsrc", null, "ccdest2", -1, false));
-
 		assertCode(
 			HttpServletResponse.SC_NO_CONTENT,
 			serviceCopyOrMove(Method.COPY, "ccsrc", null, "ccdest", -1, true));
-
 		assertCode(
 			HttpServletResponse.SC_NO_CONTENT, serviceDelete("ccsrc"));
 
@@ -121,9 +111,7 @@ public class WebDAVLitmusCopyMoveTest extends BaseWebDAVTestCase {
 
 		assertCode(
 			HttpServletResponse.SC_NO_CONTENT, serviceDelete("ccdest/subcoll"));
-
 		assertCode(HttpServletResponse.SC_NO_CONTENT, serviceDelete("ccdest"));
-
 		assertCode(HttpServletResponse.SC_NO_CONTENT, serviceDelete("ccdest2"));
 	}
 
@@ -131,19 +119,14 @@ public class WebDAVLitmusCopyMoveTest extends BaseWebDAVTestCase {
 		assertCode(
 			HttpServletResponse.SC_CREATED,
 			service(Method.MKCOL, "ccsrc", null, null));
-
 		assertCode(
 			HttpServletResponse.SC_CREATED,
 			servicePut("ccsrc/foo", _TEST_CONTENT.getBytes()));
-
 		assertCode(
 			HttpServletResponse.SC_CREATED,
 			serviceCopyOrMove(Method.COPY, "ccsrc", "ccdest", false));
-
 		assertCode(HttpServletResponse.SC_NO_CONTENT, serviceDelete("ccsrc"));
-
 		assertCode(HttpServletResponse.SC_NOT_FOUND, serviceDelete("foo"));
-
 		assertCode(HttpServletResponse.SC_NO_CONTENT, serviceDelete("ccdest"));
 	}
 
@@ -151,31 +134,24 @@ public class WebDAVLitmusCopyMoveTest extends BaseWebDAVTestCase {
 		assertCode(
 			HttpServletResponse.SC_CREATED,
 			servicePut("move", _TEST_CONTENT.getBytes()));
-
 		assertCode(
 			HttpServletResponse.SC_CREATED,
 			servicePut("move2", _TEST_CONTENT.getBytes()));
-
 		assertCode(
 			HttpServletResponse.SC_CREATED,
 			service(Method.MKCOL, "movecoll", null, null));
-
 		assertCode(
 			HttpServletResponse.SC_CREATED,
 			serviceCopyOrMove(Method.MOVE, "move", "movedest", false));
-
 		assertCode(
 			HttpServletResponse.SC_PRECONDITION_FAILED,
 			serviceCopyOrMove(Method.MOVE, "move2", "movedest", false));
-
 		assertCode(
 			HttpServletResponse.SC_NO_CONTENT,
 			serviceCopyOrMove(Method.MOVE, "move2", "movedest", true));
-
 		assertCode(
 			HttpServletResponse.SC_NO_CONTENT,
 			serviceCopyOrMove(Method.MOVE, "movedest", "movecoll", true));
-
 		assertCode(
 			HttpServletResponse.SC_NO_CONTENT, serviceDelete("movecoll"));
 	}
@@ -194,30 +170,24 @@ public class WebDAVLitmusCopyMoveTest extends BaseWebDAVTestCase {
 		assertCode(
 			HttpServletResponse.SC_CREATED,
 			servicePut("mvnoncoll", _TEST_CONTENT.getBytes()));
-
 		assertCode(
 			HttpServletResponse.SC_CREATED,
 			service(Method.MKCOL, "mvsrc/subcoll", null, null));
-
 		assertCode(
 			HttpServletResponse.SC_CREATED,
 			serviceCopyOrMove(
 				Method.COPY, "mvsrc", null, "mvdest2", -1, false));
-
 		assertCode(
 			HttpServletResponse.SC_CREATED,
 			serviceCopyOrMove(Method.MOVE, "mvsrc", null, "mvdest", -1, false));
-
 		assertCode(
 			HttpServletResponse.SC_PRECONDITION_FAILED,
 			serviceCopyOrMove(
 				Method.MOVE, "mvdest", null, "mvdest2", -1, false));
-
 		assertCode(
 			HttpServletResponse.SC_NO_CONTENT,
 			serviceCopyOrMove(
 				Method.MOVE, "mvdest2", null, "mvdest", -1, true));
-
 		assertCode(
 			HttpServletResponse.SC_CREATED,
 			serviceCopyOrMove(
@@ -231,7 +201,6 @@ public class WebDAVLitmusCopyMoveTest extends BaseWebDAVTestCase {
 
 		assertCode(
 			HttpServletResponse.SC_NO_CONTENT, serviceDelete("mvdest/subcoll"));
-
 		assertCode(
 			HttpServletResponse.SC_NO_CONTENT,
 			serviceCopyOrMove(
@@ -240,9 +209,7 @@ public class WebDAVLitmusCopyMoveTest extends BaseWebDAVTestCase {
 
 	public void test11MoveCleanup() {
 		assertCode(HttpServletResponse.SC_NO_CONTENT, serviceDelete("mvdest"));
-
 		assertCode(HttpServletResponse.SC_NOT_FOUND, serviceDelete("mvdest2"));
-
 		assertCode(
 			HttpServletResponse.SC_NO_CONTENT, serviceDelete("mvnoncoll"));
 	}

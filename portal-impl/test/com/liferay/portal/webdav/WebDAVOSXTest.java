@@ -46,69 +46,87 @@ public class WebDAVOSXTest extends BaseWebDAVTestCase {
 		Tuple tuple = null;
 
 		assertCode(
-			HttpServletResponse.SC_NOT_FOUND, servicePropFind(_testFileName));
+			HttpServletResponse.SC_NOT_FOUND, servicePropFind(_TEST_FILE_NAME));
 		assertCode(
 			HttpServletResponse.SC_CREATED,
-			servicePut(_testFileName, _testFileBytes, getLock(_testFileName)));
+			servicePut(
+				_TEST_FILE_NAME, _testFileBytes, getLock(_TEST_FILE_NAME)));
 
 		for (int i = 0; i < 3; i++) {
-			lock(_testFileName);
-			unlock(_testFileName);
+			lock(_TEST_FILE_NAME);
+			unlock(_TEST_FILE_NAME);
 		}
 
-		lock(_testFileName);
+		lock(_TEST_FILE_NAME);
+
 		assertCode(
 			HttpServletResponse.SC_CREATED,
-			servicePut(_testFileName, _testFileBytes, getLock(_testFileName)));
-		unlock(_testFileName);
+			servicePut(
+				_TEST_FILE_NAME, _testFileBytes, getLock(_TEST_FILE_NAME)));
+
+		unlock(_TEST_FILE_NAME);
 
 		for (int i = 0 ; i < 3; i++) {
-			lock(_testFileName);
-			tuple = serviceGet(_testFileName);
+			lock(_TEST_FILE_NAME);
+
+			tuple = serviceGet(_TEST_FILE_NAME);
+
 			assertCode(HttpServletResponse.SC_OK, tuple);
 			assertBytes(_testFileBytes, getResponseBody(tuple));
-			unlock(_testFileName);
+
+			unlock(_TEST_FILE_NAME);
 		}
 
 		for (int i = 0; i < 2; i++) {
 			assertCode(
 				HttpServletResponse.SC_NOT_FOUND,
-				servicePropFind(_testMetaName));
+				servicePropFind(_TEST_META_NAME));
 			assertCode(
 				HttpServletResponse.SC_CREATED,
-				servicePut(_testMetaName, _testMetaBytes));
-			lock(_testMetaName);
+				servicePut(_TEST_META_NAME, _testMetaBytes));
+
+			lock(_TEST_META_NAME);
+
 			assertCode(
 				HttpServletResponse.SC_CREATED,
 				servicePut(
-					_testMetaName, _testMetaBytes, getLock(_testMetaName)));
+					_TEST_META_NAME, _testMetaBytes, getLock(_TEST_META_NAME)));
 			assertCode(
-				WebDAVUtil.SC_MULTI_STATUS, servicePropFind(_testMetaName));
-			unlock(_testMetaName);
-			lock(_testMetaName);
+				WebDAVUtil.SC_MULTI_STATUS, servicePropFind(_TEST_META_NAME));
+
+			unlock(_TEST_META_NAME);
+			lock(_TEST_META_NAME);
 
 			if (i == 0) {
-				unlock(_testMetaName);
+				unlock(_TEST_META_NAME);
+
 				assertCode(
 					HttpServletResponse.SC_NO_CONTENT,
-					serviceDelete(_testMetaName));
+					serviceDelete(_TEST_META_NAME));
 			}
 			else {
-				tuple = serviceGet(_testMetaName);
+				tuple = serviceGet(_TEST_META_NAME);
+
 				assertCode(HttpServletResponse.SC_OK, tuple);
 				assertBytes(_testMetaBytes, getResponseBody(tuple));
 				assertCode(
 					HttpServletResponse.SC_CREATED,
 					servicePut(
-						_testMetaName, _testMetaBytes, getLock(_testMetaName)));
+						_TEST_META_NAME, _testMetaBytes,
+						getLock(_TEST_META_NAME)));
 				assertCode(
-					WebDAVUtil.SC_MULTI_STATUS, servicePropFind(_testMetaName));
-				unlock(_testMetaName);
-				lock(_testMetaName);
-				tuple = serviceGet(_testMetaName);
+					WebDAVUtil.SC_MULTI_STATUS,
+					servicePropFind(_TEST_META_NAME));
+
+				unlock(_TEST_META_NAME);
+				lock(_TEST_META_NAME);
+
+				tuple = serviceGet(_TEST_META_NAME);
+
 				assertCode(HttpServletResponse.SC_OK, tuple);
 				assertBytes(_testMetaBytes, getResponseBody(tuple));
-				unlock(_testMetaName);
+
+				unlock(_TEST_META_NAME);
 			}
 		}
 	}
@@ -116,16 +134,23 @@ public class WebDAVOSXTest extends BaseWebDAVTestCase {
 	public void testMSOffice2Open() throws Exception {
 		Tuple tuple = null;
 
-		assertCode(WebDAVUtil.SC_MULTI_STATUS, servicePropFind(_testFileName));
+		assertCode(
+			WebDAVUtil.SC_MULTI_STATUS, servicePropFind(_TEST_FILE_NAME));
 		assertCode(
 			HttpServletResponse.SC_NOT_FOUND, servicePropFind("MCF-Test.docx"));
-		lock(_testFileName);
-		tuple = serviceGet(_testFileName);
+
+		lock(_TEST_FILE_NAME);
+
+		tuple = serviceGet(_TEST_FILE_NAME);
+
 		assertCode(HttpServletResponse.SC_OK, tuple);
 		assertBytes(_testFileBytes, getResponseBody(tuple));
-		unlock(_testFileName);
-		lock(_testFileName);
-		tuple = serviceGet(_testFileName);
+
+		unlock(_TEST_FILE_NAME);
+		lock(_TEST_FILE_NAME);
+
+		tuple = serviceGet(_TEST_FILE_NAME);
+
 		assertCode(HttpServletResponse.SC_OK, tuple);
 		assertBytes(_testFileBytes, getResponseBody(tuple));
 	}
@@ -134,79 +159,96 @@ public class WebDAVOSXTest extends BaseWebDAVTestCase {
 		Tuple tuple = null;
 
 		assertCode(
-			HttpServletResponse.SC_NOT_FOUND, servicePropFind(_tempFileName1));
+			HttpServletResponse.SC_NOT_FOUND,
+			servicePropFind(_TEMP_FILE_NAME_1));
 		assertCode(
 			HttpServletResponse.SC_NOT_FOUND,
 			servicePropFind("MCF-Word Work File D_1.tmp"));
 		assertCode(
-			HttpServletResponse.SC_NOT_FOUND, servicePropFind(_tempFileName1));
+			HttpServletResponse.SC_NOT_FOUND,
+			servicePropFind(_TEMP_FILE_NAME_1));
 		assertCode(
 			HttpServletResponse.SC_CREATED,
-			servicePut(_tempFileName1, _testDeltaBytes));
+			servicePut(_TEMP_FILE_NAME_1, _testDeltaBytes));
 		assertCode(
-			HttpServletResponse.SC_NOT_FOUND, servicePropFind(_tempMetaName1));
+			HttpServletResponse.SC_NOT_FOUND,
+			servicePropFind(_TEMP_META_NAME_1));
 		assertCode(
-			HttpServletResponse.SC_NOT_FOUND, servicePropFind(_tempMetaName1));
+			HttpServletResponse.SC_NOT_FOUND,
+			servicePropFind(_TEMP_META_NAME_1));
 		assertCode(
 			HttpServletResponse.SC_CREATED,
-			servicePut(_tempMetaName1, _testMetaBytes));
-		lock(_tempMetaName1);
+			servicePut(_TEMP_META_NAME_1, _testMetaBytes));
+
+		lock(_TEMP_META_NAME_1);
+
 		assertCode(
 			HttpServletResponse.SC_CREATED,
 			servicePut(
-				_tempMetaName1, _testMetaBytes, getLock(_tempMetaName1)));
+				_TEMP_META_NAME_1, _testMetaBytes, getLock(_TEMP_META_NAME_1)));
 		assertCode(
-			WebDAVUtil.SC_MULTI_STATUS, servicePropFind(_tempFileName1));
-		unlock(_tempMetaName1);
+			WebDAVUtil.SC_MULTI_STATUS, servicePropFind(_TEMP_FILE_NAME_1));
 
-		lock(_tempFileName1);
-		unlock(_tempFileName1);
-		lock(_tempFileName1);
+		unlock(_TEMP_META_NAME_1);
+		lock(_TEMP_FILE_NAME_1);
+		unlock(_TEMP_FILE_NAME_1);
+		lock(_TEMP_FILE_NAME_1);
+
 		assertCode(
 			HttpServletResponse.SC_CREATED,
 			servicePut(
-				_tempFileName1, _testDeltaBytes, getLock(_tempFileName1)));
+				_TEMP_FILE_NAME_1, _testDeltaBytes,
+				getLock(_TEMP_FILE_NAME_1)));
 		assertCode(
-			WebDAVUtil.SC_MULTI_STATUS, servicePropFind(_tempFileName1));
+			WebDAVUtil.SC_MULTI_STATUS, servicePropFind(_TEMP_FILE_NAME_1));
 
-		unlock(_testFileName);
-		lock(_testFileName);
-		tuple = serviceGet(_testFileName);
+		unlock(_TEST_FILE_NAME);
+		lock(_TEST_FILE_NAME);
+
+		tuple = serviceGet(_TEST_FILE_NAME);
+
 		assertCode(HttpServletResponse.SC_OK, tuple);
 		assertBytes(_testFileBytes, getResponseBody(tuple));
-
 		assertCode(
 			HttpServletResponse.SC_NOT_FOUND,
 			servicePropFind("Backup of Test.docx"));
 		assertCode(
-			HttpServletResponse.SC_NOT_FOUND, servicePropFind(_tempFileName2));
-		unlock(_testFileName);
+			HttpServletResponse.SC_NOT_FOUND,
+			servicePropFind(_TEMP_FILE_NAME_2));
+
+		unlock(_TEST_FILE_NAME);
+
 		assertCode(
-			HttpServletResponse.SC_NOT_FOUND, servicePropFind(_tempFileName2));
+			HttpServletResponse.SC_NOT_FOUND,
+			servicePropFind(_TEMP_FILE_NAME_2));
 		assertCode(
 			HttpServletResponse.SC_CREATED,
-			serviceCopyOrMove(Method.MOVE, _testFileName, _tempFileName2));
+			serviceCopyOrMove(Method.MOVE, _TEST_FILE_NAME, _TEMP_FILE_NAME_2));
 		assertCode(
-			HttpServletResponse.SC_NOT_FOUND, servicePropFind(_tempMetaName2));
+			HttpServletResponse.SC_NOT_FOUND,
+			servicePropFind(_TEMP_META_NAME_2));
 		assertCode(
 			HttpServletResponse.SC_CREATED,
-			serviceCopyOrMove(Method.MOVE, _testMetaName, _tempMetaName2));
+			serviceCopyOrMove(Method.MOVE, _TEST_META_NAME, _TEMP_META_NAME_2));
 
 		for (int i = 0; i < 2; i++) {
-			lock(_tempFileName2);
-			tuple = serviceGet(_tempFileName2);
+			lock(_TEMP_FILE_NAME_2);
+
+			tuple = serviceGet(_TEMP_FILE_NAME_2);
+
 			assertCode(HttpServletResponse.SC_OK, tuple);
 			assertBytes(_testFileBytes, getResponseBody(tuple));
-			unlock(_tempFileName2);
+
+			unlock(_TEMP_FILE_NAME_2);
 		}
 
 		for (int i = 0; i < 2; i++) {
-			String orig = _tempFileName1;
-			String dest = _testFileName;
+			String orig = _TEMP_FILE_NAME_1;
+			String dest = _TEST_FILE_NAME;
 
 			if (i == 1) {
-				orig = _tempMetaName1;
-				dest = _testMetaName;
+				orig = _TEMP_META_NAME_1;
+				dest = _TEST_META_NAME;
 			}
 
 			assertCode(HttpServletResponse.SC_NOT_FOUND, servicePropFind(dest));
@@ -214,43 +256,57 @@ public class WebDAVOSXTest extends BaseWebDAVTestCase {
 			assertCode(
 				HttpServletResponse.SC_CREATED,
 				serviceCopyOrMove(Method.MOVE, orig, dest, getLock(orig)));
+
 			moveLock(orig, dest);
 		}
 
 		for (int i = 0; i < 2; i++) {
-			lock(_testFileName);
-			tuple = serviceGet(_testFileName);
+			lock(_TEST_FILE_NAME);
+
+			tuple = serviceGet(_TEST_FILE_NAME);
+
 			assertCode(HttpServletResponse.SC_OK, tuple);
 			assertBytes(_testDeltaBytes, getResponseBody(tuple));
-			unlock(_testFileName);
+
+			unlock(_TEST_FILE_NAME);
 		}
 
-		lock(_testMetaName);
-		tuple = serviceGet(_testMetaName);
+		lock(_TEST_META_NAME);
+
+		tuple = serviceGet(_TEST_META_NAME);
+
 		assertCode(HttpServletResponse.SC_OK, tuple);
 		assertBytes(_testMetaBytes, getResponseBody(tuple));
 		assertCode(
 			HttpServletResponse.SC_CREATED,
-			servicePut(_testMetaName, _testMetaBytes, getLock(_testMetaName)));
+			servicePut(
+				_TEST_META_NAME, _testMetaBytes, getLock(_TEST_META_NAME)));
 		assertCode(
-			WebDAVUtil.SC_MULTI_STATUS, servicePropFind(_testMetaName));
-		unlock(_testMetaName);
+			WebDAVUtil.SC_MULTI_STATUS, servicePropFind(_TEST_META_NAME));
 
-		unlock(_tempFileName2);
+		unlock(_TEST_META_NAME);
+		unlock(_TEMP_FILE_NAME_2);
+
 		assertCode(
 			HttpServletResponse.SC_NO_CONTENT,
-			serviceDelete(_tempFileName2));
+			serviceDelete(_TEMP_FILE_NAME_2));
 		assertCode(
 			HttpServletResponse.SC_NO_CONTENT,
-			serviceDelete(_tempMetaName2));
+			serviceDelete(_TEMP_META_NAME_2));
 		assertCode(
-			HttpServletResponse.SC_NOT_FOUND, servicePropFind(_tempMetaName2));
+			HttpServletResponse.SC_NOT_FOUND,
+			servicePropFind(_TEMP_META_NAME_2));
 		assertCode(
-			HttpServletResponse.SC_NOT_FOUND, servicePropFind(_tempFileName2));
+			HttpServletResponse.SC_NOT_FOUND,
+			servicePropFind(_TEMP_FILE_NAME_2));
 	}
 
 	protected String getLock(String fileName) {
 		return _lockMap.get(fileName);
+	}
+
+	protected String getUserAgent() {
+		return _USER_AGENT;
 	}
 
 	protected void lock(String fileName) {
@@ -277,30 +333,6 @@ public class WebDAVOSXTest extends BaseWebDAVTestCase {
 			serviceUnlock(fileName, lock));
 	}
 
-	protected String getUserAgent() {
-		return _USER_AGENT;
-	}
-
-	private Map<String, String> _lockMap = new HashMap<String, String>();
-
-	private static byte[] _testDeltaBytes;
-
-	private static byte[] _testFileBytes;
-
-	private static byte[] _testMetaBytes;
-
-	private static final String _tempFileName1 = "Word Work File D_1.tmp";
-
-	private static final String _tempFileName2 = "Word Work File L_2.tmp";
-
-	private static final String _tempMetaName1 = "._Word Work File D_1.tmp";
-
-	private static final String _tempMetaName2 = "._Word Work File L_2.tmp";
-
-	private static final String _testFileName = "Test.docx";
-
-	private static final String _testMetaName = "._Test.docx";
-
 	private static final String _OFFICE_TEST_FILE_PREFIX =
 		"portal-impl/test/com/liferay/portal/webdav/dependencies/";
 
@@ -313,7 +345,25 @@ public class WebDAVOSXTest extends BaseWebDAVTestCase {
 	private static final String _OFFICE_TEST_META_DOCX =
 		_OFFICE_TEST_FILE_PREFIX + "OSX_Test_Meta.docx";
 
+	private static final String _TEMP_FILE_NAME_1 = "Word Work File D_1.tmp";
+
+	private static final String _TEMP_FILE_NAME_2 = "Word Work File L_2.tmp";
+
+	private static final String _TEMP_META_NAME_1 = "._Word Work File D_1.tmp";
+
+	private static final String _TEMP_META_NAME_2 = "._Word Work File L_2.tmp";
+
+	private static final String _TEST_FILE_NAME = "Test.docx";
+
+	private static final String _TEST_META_NAME = "._Test.docx";
+
 	private static final String _USER_AGENT =
 		"WebDAVFS/1.8 (01808000) Darwin/10.3.0 (i386)";
+
+	private static byte[] _testDeltaBytes;
+	private static byte[] _testFileBytes;
+	private static byte[] _testMetaBytes;
+
+	private Map<String, String> _lockMap = new HashMap<String, String>();
 
 }

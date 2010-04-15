@@ -48,14 +48,14 @@ public class WebDAVTestSetup extends TestSetup {
 
 		Tuple tuple = _baseWebDAVTestCase.service(Method.MKCOL, "", null, null);
 
-		int statusCode = _baseWebDAVTestCase.getStatusCode(tuple);
+		int statusCode = BaseWebDAVTestCase.getStatusCode(tuple);
 
 		if (statusCode == HttpServletResponse.SC_METHOD_NOT_ALLOWED) {
 			_baseWebDAVTestCase.service(Method.DELETE, "", null, null);
 
 			tuple = _baseWebDAVTestCase.service(Method.MKCOL, "", null, null);
 
-			statusCode = _baseWebDAVTestCase.getStatusCode(tuple);
+			statusCode = BaseWebDAVTestCase.getStatusCode(tuple);
 
 			assertEquals(HttpServletResponse.SC_CREATED, statusCode);
 		}
