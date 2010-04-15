@@ -956,7 +956,7 @@ ${exception.message}
 		<unzip src="${project.dir}/tools/yuicompressor-2.4.2.zip" dest="${tstamp.value}" />
 
 		<move todir="${tstamp.value}/rhino1_6R7/src/org">
-			<fileset dir="${tstamp.value}/yuicompressor-2.4.2/src/org" includes="**/*.java"/>
+			<fileset dir="${tstamp.value}/yuicompressor-2.4.2/src/org" includes="**/*.java" />
 		</move>
 
 		<move file="${tstamp.value}/rhino1_6R7/deprecatedsrc/org/mozilla" todir="${tstamp.value}/rhino1_6R7/deprecatedsrc/com/liferay" />
