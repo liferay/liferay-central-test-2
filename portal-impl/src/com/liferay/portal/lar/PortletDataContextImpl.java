@@ -14,6 +14,7 @@
 
 package com.liferay.portal.lar;
 
+import com.liferay.portal.NoSuchResourceException;
 import com.liferay.portal.NoSuchRoleException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -686,10 +687,20 @@ public class PortletDataContextImpl implements PortletDataContext {
 			String[] actionIds = StringUtil.split(permission.getValue());
 
 			if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5) {
-				Resource resource = ResourceLocalServiceUtil.getResource(
-					_companyId, resourceName,
-					ResourceConstants.SCOPE_INDIVIDUAL,
-					String.valueOf(newResourcePK));
+				Resource resource = null;
+
+				try {
+					resource = ResourceLocalServiceUtil.getResource(
+						_companyId, resourceName,
+						ResourceConstants.SCOPE_INDIVIDUAL,
+						String.valueOf(newResourcePK));
+				}
+				catch (NoSuchResourceException nsre) {
+					resource = ResourceLocalServiceUtil.addResource(
+							_companyId, resourceName,
+							ResourceConstants.SCOPE_INDIVIDUAL,
+							String.valueOf(newResourcePK));
+				}
 
 				PermissionLocalServiceUtil.setRolePermissions(
 					role.getRoleId(), actionIds, resource.getResourceId());
