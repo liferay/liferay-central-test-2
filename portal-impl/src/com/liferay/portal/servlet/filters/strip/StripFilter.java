@@ -36,7 +36,11 @@ import com.liferay.util.servlet.ServletResponseUtil;
 import java.io.IOException;
 import java.io.OutputStream;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -51,6 +55,14 @@ public class StripFilter extends BasePortalFilter {
 
 	public static final String SKIP_FILTER =
 		StripFilter.class.getName() + "SKIP_FILTER";
+
+	public void init(FilterConfig filterConfig) {
+		super.init(filterConfig);
+
+		for (String ignorePath : PropsValues.STRIP_IGNORE_PATHS) {
+			_ignorePaths.add(ignorePath);
+		}
+	}
 
 	protected int countContinuousWhiteSpace(byte[] oldByteArray, int offset) {
 		int count = 0;
@@ -114,23 +126,31 @@ public class StripFilter extends BasePortalFilter {
 		if (!ParamUtil.getBoolean(request, _STRIP, true)) {
 			return false;
 		}
+
+		String path = request.getPathInfo();
+
+		if (_ignorePaths.contains(path)) {
+			if (_log.isDebugEnabled()) {
+				_log.debug("Ignore path " + path);
+			}
+
+			return false;
+		}
+
+		// Modifying binary content through a servlet filter under certain
+		// conditions is bad on performance the user will not start downloading
+		// the content until the entire content is modified.
+
+		String lifecycle = ParamUtil.getString(request, "p_p_lifecycle");
+
+		if ((lifecycle.equals("1") &&
+			 LiferayWindowState.isExclusive(request)) ||
+			lifecycle.equals("2")) {
+
+			return false;
+		}
 		else {
-
-			// Modifying binary content through a servlet filter under certain
-			// conditions is bad on performance the user will not start
-			// downloading the content until the entire content is modified.
-
-			String lifecycle = ParamUtil.getString(request, "p_p_lifecycle");
-
-			if ((lifecycle.equals("1") &&
-				 LiferayWindowState.isExclusive(request)) ||
-				lifecycle.equals("2")) {
-
-				return false;
-			}
-			else {
-				return true;
-			}
+			return true;
 		}
 	}
 
@@ -508,5 +528,6 @@ public class StripFilter extends BasePortalFilter {
 	private ConcurrentLRUCache<String, String> _minifierCache =
 		new ConcurrentLRUCache<String, String>(
 			PropsValues.MINIFIER_INLINE_CONTENT_CACHE_SIZE);
+	private Set<String> _ignorePaths = new HashSet<String>();
 
 }
