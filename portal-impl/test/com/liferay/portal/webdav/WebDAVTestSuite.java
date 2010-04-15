@@ -14,8 +14,6 @@
 
 package com.liferay.portal.webdav;
 
-import com.liferay.portal.service.ServiceTestSuite;
-
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
@@ -24,7 +22,7 @@ import junit.framework.TestSuite;
  *
  * @author Brian Wing Shun Chan
  */
-public class WebDAVTestSuite extends ServiceTestSuite {
+public class WebDAVTestSuite extends TestSuite {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
