@@ -3849,10 +3849,10 @@ public class ServiceBuilder {
 			for (int j = 0; j < pkList.size(); j++) {
 				EntityColumn col = pkList.get(j);
 
-				String colName = col.getDBName();
+				String colDBName = col.getDBName();
 
 				String indexSpec =
-					entityMapping.getTable() + " (" + colName + ");";
+					entityMapping.getTable() + " (" + colDBName + ");";
 
 				String indexHash =
 					Integer.toHexString(indexSpec.hashCode()).toUpperCase();
@@ -3867,7 +3867,7 @@ public class ServiceBuilder {
 				indexSQLs.put(indexSpec, sb.toString());
 
 				String finderName =
-					entityMapping.getTable() + StringPool.PERIOD + colName;
+					entityMapping.getTable() + StringPool.PERIOD + colDBName;
 
 				indexProps.put(finderName, indexName);
 			}
@@ -3970,13 +3970,13 @@ public class ServiceBuilder {
 			for (int j = 0; j < pkList.size(); j++) {
 				EntityColumn col = pkList.get(j);
 
-				String colName = col.getDBName();
+				String colDBName = col.getDBName();
 
 				if ((i != 0) || (j != 0)) {
 					sb.append(", ");
 				}
 
-				sb.append(colName);
+				sb.append(colDBName);
 			}
 		}
 
