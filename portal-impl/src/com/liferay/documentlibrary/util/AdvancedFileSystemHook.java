@@ -14,6 +14,7 @@
 
 package com.liferay.documentlibrary.util;
 
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -32,6 +33,40 @@ import java.io.File;
  * @author Jorge Ferrer
  */
 public class AdvancedFileSystemHook extends FileSystemHook {
+
+	public void updateFile(
+			long companyId, String portletId, long groupId, long repositoryId,
+			String fileName, String newFileName, boolean reindex)
+		throws PortalException {
+
+		super.updateFile(
+			companyId, portletId, groupId, repositoryId, fileName, newFileName,
+			reindex);
+
+		File newFileNameDir = getFileNameDir(
+			companyId, repositoryId, newFileName);
+
+		String[] fileVersionNames = FileUtil.listFiles(newFileNameDir);
+
+		for (String fileVersionName : fileVersionNames) {
+			String ext = FileUtil.getExtension(fileVersionName);
+
+			if (ext.equals(HOOK_EXTENSION)) {
+				continue;
+			}
+
+			File fileVersion = new File(
+				newFileNameDir + StringPool.SLASH + fileVersionName);
+			File newFileVersion = new File(
+				newFileNameDir + StringPool.SLASH +
+					FileUtil.stripExtension(fileVersionName) +
+						StringPool.PERIOD + HOOK_EXTENSION);
+
+			FileUtil.copyFile(fileVersion, newFileVersion, false);
+
+			fileVersion.delete();
+		}
+	}
 
 	protected void buildPath(StringBundler sb, String fileNameFragment) {
 		int fileNameFragmentLength = fileNameFragment.length();
@@ -73,6 +108,10 @@ public class AdvancedFileSystemHook extends FileSystemHook {
 
 		String ext = StringPool.PERIOD + FileUtil.getExtension(fileName);
 
+		if (ext.equals(StringPool.PERIOD)) {
+			ext += HOOK_EXTENSION;
+		}
+
 		StringBundler sb = new StringBundler();
 
 		String fileNameFragment = FileUtil.stripExtension(fileName);
@@ -98,6 +137,10 @@ public class AdvancedFileSystemHook extends FileSystemHook {
 		long companyId, long repositoryId, String fileName, String version) {
 
 		String ext = StringPool.PERIOD + FileUtil.getExtension(fileName);
+
+		if (ext.equals(StringPool.PERIOD)) {
+			ext += HOOK_EXTENSION;
+		}
 
 		int pos = fileName.lastIndexOf(StringPool.SLASH);
 
@@ -166,5 +209,7 @@ public class AdvancedFileSystemHook extends FileSystemHook {
 
 		return headVersionNumber;
 	}
+
+	private static final String HOOK_EXTENSION = "afsh";
 
 }
