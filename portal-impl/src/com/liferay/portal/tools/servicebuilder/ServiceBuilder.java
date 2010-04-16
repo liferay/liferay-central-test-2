@@ -3849,7 +3849,7 @@ public class ServiceBuilder {
 			for (int j = 0; j < pkList.size(); j++) {
 				EntityColumn col = pkList.get(j);
 
-				String colName = col.getName();
+				String colName = col.getDBName();
 
 				String indexSpec =
 					entityMapping.getTable() + " (" + colName + ");";
@@ -3970,7 +3970,7 @@ public class ServiceBuilder {
 			for (int j = 0; j < pkList.size(); j++) {
 				EntityColumn col = pkList.get(j);
 
-				String colName = col.getName();
+				String colName = col.getDBName();
 
 				if ((i != 0) || (j != 0)) {
 					sb.append(", ");
