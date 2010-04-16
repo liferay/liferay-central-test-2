@@ -35,7 +35,7 @@ public class ConfigurePortletDynamicDisplayStyleAbstractsTests
 		testSuite.addTestSuite(AddPortletAPTest.class);
 		testSuite.addTestSuite(
 			ConfigurePortletDynamicDisplayStyleAbstractsTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

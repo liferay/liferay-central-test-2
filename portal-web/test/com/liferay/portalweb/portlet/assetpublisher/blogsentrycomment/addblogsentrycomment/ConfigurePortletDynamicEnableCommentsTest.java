@@ -26,59 +26,37 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class ConfigurePortletDynamicEnableCommentsTest extends BaseTestCase {
 	public void testConfigurePortletDynamicEnableComments()
 		throws Exception {
-		int label = 1;
+		selenium.open("/web/guest/home/");
 
-		while (label >= 1) {
-			switch (label) {
-			case 1:
-				selenium.open("/web/guest/home/");
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isElementPresent(
-									"link=Asset Publisher Test Page")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
-				selenium.clickAt("link=Asset Publisher Test Page",
-					RuntimeVariables.replace(""));
-				selenium.waitForPageToLoad("30000");
-				selenium.clickAt("link=Configuration",
-					RuntimeVariables.replace(""));
-				selenium.waitForPageToLoad("30000");
-
-				boolean enableCommentsChecked = selenium.isChecked(
-						"_86_enableCommentsCheckbox");
-
-				if (enableCommentsChecked) {
-					label = 2;
-
-					continue;
-				}
-
-				selenium.clickAt("_86_enableCommentsCheckbox",
-					RuntimeVariables.replace(""));
-
-			case 2:
-				selenium.clickAt("//input[@value='Save']",
-					RuntimeVariables.replace(""));
-				selenium.waitForPageToLoad("30000");
-				assertTrue(selenium.isTextPresent(
-						"You have successfully updated the setup."));
-
-			case 100:
-				label = -1;
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
 			}
+
+			try {
+				if (selenium.isVisible("link=Asset Publisher Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
 		}
+
+		selenium.clickAt("link=Asset Publisher Test Page",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("link=Configuration", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		assertFalse(selenium.isChecked("_86_enableCommentsCheckbox"));
+		selenium.clickAt("_86_enableCommentsCheckbox",
+			RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		assertEquals(RuntimeVariables.replace(
+				"You have successfully updated the setup."),
+			selenium.getText("//div[3]/div/div/div/div/div"));
+		assertTrue(selenium.isChecked("_86_enableCommentsCheckbox"));
 	}
 }

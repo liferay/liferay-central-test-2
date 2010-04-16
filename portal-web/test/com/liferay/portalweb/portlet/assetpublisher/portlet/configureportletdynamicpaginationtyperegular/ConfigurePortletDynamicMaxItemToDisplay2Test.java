@@ -34,7 +34,7 @@ public class ConfigurePortletDynamicMaxItemToDisplay2Test extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Asset Publisher Test Page")) {
+				if (selenium.isVisible("link=Asset Publisher Test Page")) {
 					break;
 				}
 			}
@@ -49,27 +49,12 @@ public class ConfigurePortletDynamicMaxItemToDisplay2Test extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Configuration", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible("_86_delta")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.select("_86_delta", RuntimeVariables.replace("label=2"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"You have successfully updated the setup."));
+		assertEquals(RuntimeVariables.replace(
+				"You have successfully updated the setup."),
+			selenium.getText("//div[3]/div/div/div/div/div"));
+		assertEquals("2", selenium.getSelectedLabel("_86_delta"));
 	}
 }

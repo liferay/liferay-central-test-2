@@ -36,10 +36,9 @@ public class RemoveBlogsEntryTests extends BaseTests {
 		testSuite.addTestSuite(AddBlogsEntryTest.class);
 		testSuite.addTestSuite(ConfigurePortletAssetSelectionManualTest.class);
 		testSuite.addTestSuite(SelectBlogsEntryTest.class);
-		testSuite.addTestSuite(ViewBlogsEntrySelectTest.class);
 		testSuite.addTestSuite(RemoveBlogsEntryTest.class);
-		testSuite.addTestSuite(ViewBlogsEntryRemoveTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownBlogsEntryTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

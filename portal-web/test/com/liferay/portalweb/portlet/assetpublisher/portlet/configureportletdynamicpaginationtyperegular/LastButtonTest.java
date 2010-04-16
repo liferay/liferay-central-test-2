@@ -51,7 +51,8 @@ public class LastButtonTest extends BaseTestCase {
 		assertTrue(selenium.isElementPresent("link=Previous"));
 		assertFalse(selenium.isElementPresent("link=Next"));
 		assertFalse(selenium.isElementPresent("link=Last"));
-		assertEquals("3", selenium.getSelectedLabel("//div[2]/select"));
+		assertEquals("3",
+			selenium.getSelectedLabel("//div[2]/span/span/span[1]/select"));
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
@@ -73,15 +74,18 @@ public class LastButtonTest extends BaseTestCase {
 		selenium.clickAt("link=Asset Publisher Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.select("//div[2]/select", RuntimeVariables.replace("2"));
+		selenium.select("//div[2]/span/span/span[1]/select",
+			RuntimeVariables.replace("2"));
 		selenium.waitForPageToLoad("30000");
-		assertEquals("2", selenium.getSelectedLabel("//div[2]/select"));
+		assertEquals("2",
+			selenium.getSelectedLabel("//div[2]/span/span/span[1]/select"));
 		selenium.clickAt("link=Last", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=First"));
 		assertTrue(selenium.isElementPresent("link=Previous"));
 		assertFalse(selenium.isElementPresent("link=Next"));
 		assertFalse(selenium.isElementPresent("link=Last"));
-		assertEquals("3", selenium.getSelectedLabel("//div[2]/select"));
+		assertEquals("3",
+			selenium.getSelectedLabel("//div[2]/span/span/span[1]/select"));
 	}
 }

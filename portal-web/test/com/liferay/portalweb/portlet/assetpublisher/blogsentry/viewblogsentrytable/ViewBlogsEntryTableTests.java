@@ -37,7 +37,8 @@ public class ViewBlogsEntryTableTests extends BaseTests {
 		testSuite.addTestSuite(
 			ConfigurePortletDynamicDisplayStyleTableTest.class);
 		testSuite.addTestSuite(ViewBlogsEntryTableTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownBlogsEntryTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

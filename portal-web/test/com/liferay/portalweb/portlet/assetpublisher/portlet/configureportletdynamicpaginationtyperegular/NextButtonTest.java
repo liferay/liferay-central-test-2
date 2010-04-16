@@ -49,20 +49,23 @@ public class NextButtonTest extends BaseTestCase {
 		assertFalse(selenium.isElementPresent("link=Previous"));
 		assertTrue(selenium.isElementPresent("link=Next"));
 		assertTrue(selenium.isElementPresent("link=Last"));
-		assertEquals("1", selenium.getSelectedLabel("//div[2]/select"));
+		assertEquals("1",
+			selenium.getSelectedLabel("//div[2]/span/span/span[1]/select"));
 		selenium.clickAt("link=Next", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=First"));
 		assertTrue(selenium.isElementPresent("link=Previous"));
 		assertTrue(selenium.isElementPresent("link=Next"));
 		assertTrue(selenium.isElementPresent("link=Last"));
-		assertEquals("2", selenium.getSelectedLabel("//div[2]/select"));
+		assertEquals("2",
+			selenium.getSelectedLabel("//div[2]/span/span/span[1]/select"));
 		selenium.clickAt("link=Next", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=First"));
 		assertTrue(selenium.isElementPresent("link=Previous"));
 		assertFalse(selenium.isElementPresent("link=Next"));
 		assertFalse(selenium.isElementPresent("link=Last"));
-		assertEquals("3", selenium.getSelectedLabel("//div[2]/select"));
+		assertEquals("3",
+			selenium.getSelectedLabel("//div[2]/span/span/span[1]/select"));
 	}
 }

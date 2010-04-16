@@ -35,7 +35,7 @@ public class ConfigurePortletDynamicAssetTypeBookmarksEntryTests
 		testSuite.addTestSuite(AddPortletAPTest.class);
 		testSuite.addTestSuite(
 			ConfigurePortletDynamicAssetTypeBookmarksEntryTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

@@ -14,7 +14,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>waitForVisible</td>
 	<td>link=Asset Publisher Test Page</td>
 	<td></td>
 </tr>
@@ -29,23 +29,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>store</td>
-	<td>eval(selenium.isChecked('_86_enableCommentsCheckbox'))</td>
-	<td>enableCommentsChecked</td>
-</tr>
-<tr>
-	<td>gotoIf</td>
-	<td>${enableCommentsChecked}</td>
-	<td>EnableCommentsChecked</td>
-</tr>
-<tr>
-	<td>clickAt</td>
+	<td>assertNotChecked</td>
 	<td>_86_enableCommentsCheckbox</td>
 	<td></td>
 </tr>
 <tr>
-	<td>label</td>
-	<td>EnableCommentsChecked</td>
+	<td>clickAt</td>
+	<td>_86_enableCommentsCheckbox</td>
 	<td></td>
 </tr>
 <tr>
@@ -54,8 +44,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>assertText</td>
+	<td>//div[3]/div/div/div/div/div</td>
 	<td>You have successfully updated the setup.</td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>_86_enableCommentsCheckbox</td>
 	<td></td>
 </tr>
 

@@ -32,7 +32,7 @@ public class AddMBMessage6Test extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Message Boards Test Page")) {
+				if (selenium.isVisible("link=Message Boards Test Page")) {
 					break;
 				}
 			}
@@ -45,7 +45,7 @@ public class AddMBMessage6Test extends BaseTestCase {
 		selenium.clickAt("link=Message Boards Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=AP Category Name", RuntimeVariables.replace(""));
+		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("//input[@value='Post New Thread']",
 			RuntimeVariables.replace(""));
@@ -56,5 +56,11 @@ public class AddMBMessage6Test extends BaseTestCase {
 			RuntimeVariables.replace("AP6 MB6 Message6 Body6."));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		assertEquals(RuntimeVariables.replace("AP6 MB6 Message6 Subject6"),
+			selenium.getText("//form/div[2]"));
+		assertEquals(RuntimeVariables.replace("AP6 MB6 Message6 Subject6"),
+			selenium.getText("//a/strong"));
+		assertEquals(RuntimeVariables.replace("AP6 MB6 Message6 Body6."),
+			selenium.getText("//td[2]/div[2]"));
 	}
 }

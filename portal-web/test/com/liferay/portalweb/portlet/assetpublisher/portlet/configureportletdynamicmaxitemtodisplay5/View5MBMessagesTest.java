@@ -45,11 +45,17 @@ public class View5MBMessagesTest extends BaseTestCase {
 		selenium.clickAt("link=Asset Publisher Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("//div[1]/h3/a"));
-		assertTrue(selenium.isElementPresent("//div[2]/h3/a"));
-		assertTrue(selenium.isElementPresent("//div[3]/h3/a"));
-		assertTrue(selenium.isElementPresent("//div[4]/h3/a"));
-		assertTrue(selenium.isElementPresent("//div[5]/h3/a"));
+		assertEquals(RuntimeVariables.replace("AP6 MB6 Message6 Subject6"),
+			selenium.getText("//div[1]/h3/a"));
+		assertEquals(RuntimeVariables.replace("AP5 MB5 Message5 Subject5"),
+			selenium.getText("//div[2]/h3/a"));
+		assertEquals(RuntimeVariables.replace("AP4 MB4 Message4 Subject4"),
+			selenium.getText("//div[3]/h3/a"));
+		assertEquals(RuntimeVariables.replace("AP3 MB3 Message3 Subject3"),
+			selenium.getText("//div[4]/h3/a"));
+		assertEquals(RuntimeVariables.replace("AP2 MB2 Message2 Subject2"),
+			selenium.getText("//div[5]/h3/a"));
 		assertFalse(selenium.isElementPresent("//div[6]/h3/a"));
+		assertFalse(selenium.isTextPresent("AP1 MB1 Message1 Subject1"));
 	}
 }

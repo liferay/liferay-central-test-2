@@ -38,7 +38,8 @@ public class RateBlogsEntryTests extends BaseTests {
 			ConfigurePortletDynamicDisplayStyleFullContentTest.class);
 		testSuite.addTestSuite(ConfigurePortletDynamicEnableRatingsTest.class);
 		testSuite.addTestSuite(RateBlogsEntryTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownBlogsEntryTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

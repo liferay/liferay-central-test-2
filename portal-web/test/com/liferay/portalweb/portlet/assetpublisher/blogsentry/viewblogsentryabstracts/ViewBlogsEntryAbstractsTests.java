@@ -38,7 +38,8 @@ public class ViewBlogsEntryAbstractsTests extends BaseTests {
 		testSuite.addTestSuite(
 			ConfigurePortletDynamicDisplayStyleAbstractsTest.class);
 		testSuite.addTestSuite(ViewBlogsEntryAbstractsTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownBlogsEntryTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

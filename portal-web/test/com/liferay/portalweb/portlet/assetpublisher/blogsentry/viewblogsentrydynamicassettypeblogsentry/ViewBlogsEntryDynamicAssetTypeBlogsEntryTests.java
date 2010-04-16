@@ -36,10 +36,13 @@ public class ViewBlogsEntryDynamicAssetTypeBlogsEntryTests extends BaseTests {
 		testSuite.addTestSuite(AddPortletBlogsTest.class);
 		testSuite.addTestSuite(AddBlogsEntryTest.class);
 		testSuite.addTestSuite(
-			ConfigurePortletDynamicAssetTypeBlogsEntryTest.class);
+			ConfigurePortletDynamicAvailableBlogsEntryTest.class);
+		testSuite.addTestSuite(ViewBlogsEntryAvailableTest.class);
 		testSuite.addTestSuite(
-			ViewBlogsEntryDynamicAssetTypeBlogsEntryTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+			ConfigurePortletDynamicCurrentBlogsEntryTest.class);
+		testSuite.addTestSuite(ViewBlogsEntryCurrentTest.class);
+		testSuite.addTestSuite(TearDownBlogsEntryTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

@@ -25,7 +25,6 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class AddPageMBTest extends BaseTestCase {
 	public void testAddPageMB() throws Exception {
 		selenium.open("/web/guest/home/");
-		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -63,7 +62,7 @@ public class AddPageMBTest extends BaseTestCase {
 
 		selenium.type("//input",
 			RuntimeVariables.replace("Message Boards Test Page"));
-		selenium.clickAt("//span[@id='save']/span", RuntimeVariables.replace(""));
+		selenium.clickAt("save", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -71,7 +70,7 @@ public class AddPageMBTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Message Boards Test Page")) {
+				if (selenium.isVisible("link=Message Boards Test Page")) {
 					break;
 				}
 			}

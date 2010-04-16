@@ -32,7 +32,7 @@ public class SaveArchivedSetupTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Asset Publisher Test Page")) {
+				if (selenium.isVisible("link=Asset Publisher Test Page")) {
 					break;
 				}
 			}
@@ -52,8 +52,9 @@ public class SaveArchivedSetupTest extends BaseTestCase {
 		selenium.type("_86_name", RuntimeVariables.replace("Archive Name"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+		assertEquals(RuntimeVariables.replace(
+				"Your request processed successfully."),
+			selenium.getText("//div[3]/div/div/div/div/div"));
 		assertEquals(RuntimeVariables.replace("Archive Name"),
 			selenium.getText("//tr[3]/td[1]"));
 		assertEquals(RuntimeVariables.replace("Joe Bloggs"),

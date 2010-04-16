@@ -32,7 +32,7 @@ public class RestoreArchivedSetupTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Asset Publisher Test Page")) {
+				if (selenium.isVisible("link=Asset Publisher Test Page")) {
 					break;
 				}
 			}
@@ -49,7 +49,7 @@ public class RestoreArchivedSetupTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Archived", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//strong/span", RuntimeVariables.replace(""));
+		selenium.clickAt("//td[4]/ul/li/strong/a", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -57,7 +57,7 @@ public class RestoreArchivedSetupTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Restore")) {
+				if (selenium.isVisible("//div[4]/ul/li[1]/a")) {
 					break;
 				}
 			}
@@ -67,9 +67,38 @@ public class RestoreArchivedSetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("link=Restore", RuntimeVariables.replace(""));
+		selenium.click(RuntimeVariables.replace("//div[4]/ul/li[1]/a"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+		assertEquals(RuntimeVariables.replace(
+				"Your request processed successfully."),
+			selenium.getText("//div[3]/div/div/div/div/div"));
+		selenium.open("/web/guest/home/");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Asset Publisher Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("link=Asset Publisher Test Page",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("link=Configuration", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		assertEquals("Manual", selenium.getSelectedLabel("_86_selectionStyle"));
+		assertEquals(RuntimeVariables.replace("Selection"),
+			selenium.getText("//div[1]/div[1]/div[1]/div/span"));
+		assertEquals(RuntimeVariables.replace("Display Settings"),
+			selenium.getText("//div[1]/div[2]/div[1]/div/span"));
 	}
 }

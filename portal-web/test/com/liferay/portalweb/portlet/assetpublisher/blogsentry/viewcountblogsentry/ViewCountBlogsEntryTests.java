@@ -39,7 +39,8 @@ public class ViewCountBlogsEntryTests extends BaseTests {
 		testSuite.addTestSuite(
 			ConfigurePortletDynamicShowMetadataViewCountTest.class);
 		testSuite.addTestSuite(ViewCountBlogsEntryTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownBlogsEntryTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

@@ -45,26 +45,32 @@ public class SelectPageTest extends BaseTestCase {
 		selenium.clickAt("link=Asset Publisher Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.select("//div[2]/select", RuntimeVariables.replace("label=3"));
+		selenium.select("//div[2]/span/span/span[1]/select",
+			RuntimeVariables.replace("label=3"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=First"));
 		assertTrue(selenium.isElementPresent("link=Previous"));
 		assertFalse(selenium.isElementPresent("link=Next"));
 		assertFalse(selenium.isElementPresent("link=Last"));
-		assertEquals("3", selenium.getSelectedLabel("//div[2]/select"));
-		selenium.select("//div[2]/select", RuntimeVariables.replace("label=2"));
+		assertEquals("3",
+			selenium.getSelectedLabel("//div[2]/span/span/span[1]/select"));
+		selenium.select("//div[2]/span/span/span[1]/select",
+			RuntimeVariables.replace("label=2"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=First"));
 		assertTrue(selenium.isElementPresent("link=Previous"));
 		assertTrue(selenium.isElementPresent("link=Next"));
 		assertTrue(selenium.isElementPresent("link=Last"));
-		assertEquals("2", selenium.getSelectedLabel("//div[2]/select"));
-		selenium.select("//div[2]/select", RuntimeVariables.replace("label=1"));
+		assertEquals("2",
+			selenium.getSelectedLabel("//div[2]/span/span/span[1]/select"));
+		selenium.select("//div[2]/span/span/span[1]/select",
+			RuntimeVariables.replace("label=1"));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isElementPresent("link=First"));
 		assertFalse(selenium.isElementPresent("link=Previous"));
 		assertTrue(selenium.isElementPresent("link=Next"));
 		assertTrue(selenium.isElementPresent("link=Last"));
-		assertEquals("1", selenium.getSelectedLabel("//div[2]/select"));
+		assertEquals("1",
+			selenium.getSelectedLabel("//div[2]/span/span/span[1]/select"));
 	}
 }

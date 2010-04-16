@@ -32,7 +32,7 @@ public class ViewCountBlogsEntryTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Asset Publisher Test Page")) {
+				if (selenium.isVisible("link=Asset Publisher Test Page")) {
 					break;
 				}
 			}
@@ -45,10 +45,27 @@ public class ViewCountBlogsEntryTest extends BaseTestCase {
 		selenium.clickAt("link=Asset Publisher Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("AP Blogs Entry Title"));
 
 		String viewCount = selenium.getIncrementedText("//div[3]/span");
 		RuntimeVariables.setValue("viewCount", viewCount);
+		selenium.open("/web/guest/home/");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("link=Asset Publisher Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.clickAt("link=Asset Publisher Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
@@ -57,6 +74,7 @@ public class ViewCountBlogsEntryTest extends BaseTestCase {
 
 		String viewCount2 = selenium.getIncrementedText("//div[3]/span");
 		RuntimeVariables.setValue("viewCount2", viewCount2);
+		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -64,7 +82,7 @@ public class ViewCountBlogsEntryTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Blogs Test Page")) {
+				if (selenium.isVisible("link=Blogs Test Page")) {
 					break;
 				}
 			}

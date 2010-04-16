@@ -48,7 +48,9 @@ public class ConfigurePortletDynamicPaginationTypeSimpleTests
 			ConfigurePortletDynamicPaginationTypeSimpleTest.class);
 		testSuite.addTestSuite(NextButtonTest.class);
 		testSuite.addTestSuite(PreviousButtonTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownMBCategoryTest.class);
+		testSuite.addTestSuite(TearDownMBMessageTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

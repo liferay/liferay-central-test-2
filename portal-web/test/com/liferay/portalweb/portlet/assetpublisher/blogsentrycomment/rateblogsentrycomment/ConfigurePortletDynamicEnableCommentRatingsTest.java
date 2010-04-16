@@ -40,8 +40,7 @@ public class ConfigurePortletDynamicEnableCommentRatingsTest
 					}
 
 					try {
-						if (selenium.isElementPresent(
-									"link=Asset Publisher Test Page")) {
+						if (selenium.isVisible("link=Asset Publisher Test Page")) {
 							break;
 						}
 					}
@@ -57,16 +56,8 @@ public class ConfigurePortletDynamicEnableCommentRatingsTest
 				selenium.clickAt("link=Configuration",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-
-				boolean enableCommentRatingsChecked = selenium.isChecked(
-						"_86_enableCommentRatingsCheckbox");
-
-				if (enableCommentRatingsChecked) {
-					label = 2;
-
-					continue;
-				}
-
+				assertFalse(selenium.isChecked(
+						"_86_enableCommentRatingsCheckbox"));
 				selenium.clickAt("_86_enableCommentRatingsCheckbox",
 					RuntimeVariables.replace(""));
 
@@ -74,8 +65,11 @@ public class ConfigurePortletDynamicEnableCommentRatingsTest
 				selenium.clickAt("//input[@value='Save']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				assertTrue(selenium.isTextPresent(
-						"You have successfully updated the setup."));
+				assertEquals(RuntimeVariables.replace(
+						"You have successfully updated the setup."),
+					selenium.getText("//div[3]/div/div/div/div/div"));
+				assertTrue(selenium.isChecked(
+						"_86_enableCommentRatingsCheckbox"));
 
 			case 100:
 				label = -1;

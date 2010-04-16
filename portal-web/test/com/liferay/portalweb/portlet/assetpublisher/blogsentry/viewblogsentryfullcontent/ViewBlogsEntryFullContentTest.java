@@ -33,7 +33,7 @@ public class ViewBlogsEntryFullContentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Asset Publisher Test Page")) {
+				if (selenium.isVisible("link=Asset Publisher Test Page")) {
 					break;
 				}
 			}
@@ -46,62 +46,17 @@ public class ViewBlogsEntryFullContentTest extends BaseTestCase {
 		selenium.clickAt("link=Asset Publisher Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isPartialText("//div/h3", "AP Blogs Entry Title"));
+		assertEquals(RuntimeVariables.replace("AP Blogs Entry Title"),
+			selenium.getText("//div/h3"));
 		assertEquals(RuntimeVariables.replace("AP Blogs Entry Content."),
 			selenium.getText("//p"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (RuntimeVariables.replace("View in Context \u00bb")
-										.equals(selenium.getText(
-								"//div[2]/div/a"))) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		assertEquals(RuntimeVariables.replace("View in Context \u00bb"),
 			selenium.getText("//div[2]/div/a"));
-		assertFalse(selenium.isElementPresent("link=Read More \u00bb"));
-		assertFalse(selenium.isElementPresent("//th[1]"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Asset Publisher Test Page")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("link=Asset Publisher Test Page",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("//div[2]/div/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=View in Context \u00bb",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		assertEquals(RuntimeVariables.replace("Blogs"),
-			selenium.getText("//td[1]/div/div/div/div[1]/span"));
 		assertEquals(RuntimeVariables.replace("AP Blogs Entry Title"),
 			selenium.getText("//form/div/div[1]/div[1]"));
 		assertEquals(RuntimeVariables.replace("AP Blogs Entry Content."),
 			selenium.getText("//p"));
-		assertEquals(RuntimeVariables.replace("By Joe Bloggs"),
-			selenium.getText("//form/div/div[4]/div[1]"));
 	}
 }

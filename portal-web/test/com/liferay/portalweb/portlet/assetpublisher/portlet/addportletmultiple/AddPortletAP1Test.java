@@ -32,7 +32,7 @@ public class AddPortletAP1Test extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Asset Publisher Test Page")) {
+				if (selenium.isVisible("link=Asset Publisher Test Page")) {
 					break;
 				}
 			}
@@ -45,24 +45,6 @@ public class AddPortletAP1Test extends BaseTestCase {
 		selenium.clickAt("link=Asset Publisher Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		Thread.sleep(5000);
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_145_addApplication")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.clickAt("_145_addApplication", RuntimeVariables.replace(""));
 		Thread.sleep(5000);
 
@@ -72,8 +54,7 @@ public class AddPortletAP1Test extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"//div[@id=\"ContentManagement-AssetPublisher\"]/p/a")) {
+				if (selenium.isVisible("layout_configuration_content")) {
 					break;
 				}
 			}
@@ -83,7 +64,27 @@ public class AddPortletAP1Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//div[@id=\"ContentManagement-AssetPublisher\"]/p/a",
+		selenium.typeKeys("layout_configuration_content",
+			RuntimeVariables.replace("a"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent(
+							"//div[@title='Asset Publisher']/p/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("//div[@title='Asset Publisher']/p/a",
 			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -92,7 +93,7 @@ public class AddPortletAP1Test extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//td[1]/div[1]/div")) {
+				if (selenium.isVisible("//td[1]/div/div[1]")) {
 					break;
 				}
 			}
@@ -102,6 +103,6 @@ public class AddPortletAP1Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertTrue(selenium.isElementPresent("//td[1]/div[1]/div"));
+		assertTrue(selenium.isVisible("//td[1]/div/div[1]"));
 	}
 }

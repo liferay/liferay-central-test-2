@@ -45,7 +45,9 @@ public class ConfigurePortletDynamicMaxItemToDisplay5Tests extends BaseTests {
 		testSuite.addTestSuite(
 			ConfigurePortletDynamicMaxItemToDisplay5Test.class);
 		testSuite.addTestSuite(View5MBMessagesTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownMBCategoryTest.class);
+		testSuite.addTestSuite(TearDownMBMessageTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

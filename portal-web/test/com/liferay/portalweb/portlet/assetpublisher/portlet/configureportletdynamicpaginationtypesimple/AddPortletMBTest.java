@@ -32,7 +32,7 @@ public class AddPortletMBTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Message Boards Test Page")) {
+				if (selenium.isVisible("link=Message Boards Test Page")) {
 					break;
 				}
 			}
@@ -45,26 +45,10 @@ public class AddPortletMBTest extends BaseTestCase {
 		selenium.clickAt("link=Message Boards Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		Thread.sleep(5000);
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_145_addApplication")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.clickAt("_145_addApplication", RuntimeVariables.replace(""));
 		Thread.sleep(5000);
+		selenium.typeKeys("layout_configuration_content",
+			RuntimeVariables.replace("m"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -72,8 +56,7 @@ public class AddPortletMBTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"//div[@id='Collaboration-MessageBoards']/p/a")) {
+				if (selenium.isVisible("//div[@title='Message Boards']/p/a")) {
 					break;
 				}
 			}
@@ -83,7 +66,7 @@ public class AddPortletMBTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//div[@id='Collaboration-MessageBoards']/p/a",
+		selenium.clickAt("//div[@title='Message Boards']/p/a",
 			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -92,7 +75,7 @@ public class AddPortletMBTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//td[1]/div/div/div")) {
+				if (selenium.isVisible("//td[1]/div/div[1]")) {
 					break;
 				}
 			}
@@ -102,6 +85,6 @@ public class AddPortletMBTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertTrue(selenium.isElementPresent("//td[1]/div/div/div"));
+		assertTrue(selenium.isElementPresent("//td[1]/div/div[1]"));
 	}
 }

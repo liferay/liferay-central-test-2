@@ -39,16 +39,16 @@ public class BlogsEntryTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(AddBlogsEntryTests.suite());
-		testSuite.addTest(RateBlogsEntryTests.suite());
-		testSuite.addTest(RemoveBlogsEntryTests.suite());
-		testSuite.addTest(SelectBlogsEntryTests.suite());
-		testSuite.addTest(ViewBlogsEntryAbstractsTests.suite());
-		testSuite.addTest(
-			ViewBlogsEntryDynamicAssetTypeBlogsEntryTests.suite());
-		testSuite.addTest(ViewBlogsEntryFullContentTests.suite());
-		testSuite.addTest(ViewBlogsEntryTableTests.suite());
-		testSuite.addTest(ViewBlogsEntryTitleListTests.suite());
+//		testSuite.addTest(AddBlogsEntryTests.suite());
+//		testSuite.addTest(RateBlogsEntryTests.suite());
+//		testSuite.addTest(RemoveBlogsEntryTests.suite());
+//		testSuite.addTest(SelectBlogsEntryTests.suite());
+//		testSuite.addTest(ViewBlogsEntryAbstractsTests.suite());
+//		testSuite.addTest(
+//			ViewBlogsEntryDynamicAssetTypeBlogsEntryTests.suite());
+//		testSuite.addTest(ViewBlogsEntryFullContentTests.suite());
+//		testSuite.addTest(ViewBlogsEntryTableTests.suite());
+//		testSuite.addTest(ViewBlogsEntryTitleListTests.suite());
 		testSuite.addTest(ViewCountBlogsEntryTests.suite());
 
 		return testSuite;

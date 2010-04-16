@@ -32,7 +32,7 @@ public class AddBlogsEntryCommentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Asset Publisher Test Page")) {
+				if (selenium.isVisible("link=Asset Publisher Test Page")) {
 					break;
 				}
 			}
@@ -53,7 +53,7 @@ public class AddBlogsEntryCommentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//textarea")) {
+				if (selenium.isVisible("//textarea")) {
 					break;
 				}
 			}

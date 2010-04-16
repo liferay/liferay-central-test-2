@@ -32,7 +32,7 @@ public class AddBlogsEntryTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Blogs Test Page")) {
+				if (selenium.isVisible("link=Asset Publisher Test Page")) {
 					break;
 				}
 			}
@@ -42,9 +42,11 @@ public class AddBlogsEntryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("link=Blogs Test Page", RuntimeVariables.replace(""));
+		selenium.clickAt("link=Asset Publisher Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("_33_addEntryButton", RuntimeVariables.replace(""));
+		selenium.select("//select",
+			RuntimeVariables.replace("label=Blogs Entry"));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_33_title",
 			RuntimeVariables.replace("AP Blogs Entry Title"));
@@ -72,7 +74,7 @@ public class AddBlogsEntryTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("FCKeditor1___Frame")) {
+				if (selenium.isElementPresent("cke_contents_CKEditor1")) {
 					break;
 				}
 			}
@@ -99,16 +101,15 @@ public class AddBlogsEntryTest extends BaseTestCase {
 		}
 
 		selenium.selectFrame("//iframe[@id='_33_editor']");
-		selenium.selectFrame("//iframe[@id='FCKeditor1___Frame']");
-		selenium.selectFrame("//iframe");
+		selenium.selectFrame("//td[@id='cke_contents_CKEditor1']/iframe");
 		selenium.type("//body",
 			RuntimeVariables.replace("AP Blogs Entry Content."));
 		selenium.selectFrame("relative=top");
 		selenium.clickAt("_33_saveButton", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("AP Blogs Entry Title"),
-			selenium.getText("//div[2]/div[1]/div[1]/a"));
+			selenium.getText("//div[1]/h3/a"));
 		assertEquals(RuntimeVariables.replace("AP Blogs Entry Content."),
-			selenium.getText("//p"));
+			selenium.getText("//div/div/div[1]/div[2]/div[1]"));
 	}
 }

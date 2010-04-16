@@ -38,7 +38,8 @@ public class ViewBlogsEntryFullContentTests extends BaseTests {
 		testSuite.addTestSuite(
 			ConfigurePortletDynamicDisplayStyleFullContentTest.class);
 		testSuite.addTestSuite(ViewBlogsEntryFullContentTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownBlogsEntryTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

@@ -32,7 +32,7 @@ public class RateBlogsEntryTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Asset Publisher Test Page")) {
+				if (selenium.isVisible("link=Asset Publisher Test Page")) {
 					break;
 				}
 			}
@@ -46,13 +46,19 @@ public class RateBlogsEntryTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
+		String voteCount = selenium.getIncrementedText(
+				"//div[2]/div/div[2]/div/div");
+		RuntimeVariables.setValue("voteCount", voteCount);
+		selenium.clickAt("//a[5]", RuntimeVariables.replace(""));
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("//div[2]/div[2]/div[2]/div/div")) {
+				if (selenium.isPartialText("//div[2]/div/div[2]/div/div",
+							RuntimeVariables.getValue("voteCount"))) {
 					break;
 				}
 			}
@@ -62,12 +68,7 @@ public class RateBlogsEntryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		String voteCount = selenium.getIncrementedText(
-				"//div[2]/div[2]/div[2]/div/div");
-		RuntimeVariables.setValue("voteCount", voteCount);
-		selenium.clickAt("//a[5]", RuntimeVariables.replace(""));
-		Thread.sleep(5000);
-		assertTrue(selenium.isPartialText("//div[2]/div[2]/div[2]/div/div",
+		assertTrue(selenium.isPartialText("//div[2]/div/div[2]/div/div",
 				RuntimeVariables.getValue("voteCount")));
 	}
 }

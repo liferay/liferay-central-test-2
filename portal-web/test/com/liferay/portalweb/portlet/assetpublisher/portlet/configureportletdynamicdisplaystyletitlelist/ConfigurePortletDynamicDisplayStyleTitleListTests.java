@@ -35,7 +35,7 @@ public class ConfigurePortletDynamicDisplayStyleTitleListTests
 		testSuite.addTestSuite(AddPortletAPTest.class);
 		testSuite.addTestSuite(
 			ConfigurePortletDynamicDisplayStyleTitleListTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

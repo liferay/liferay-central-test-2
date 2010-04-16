@@ -32,7 +32,7 @@ public class AddCategoryTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Message Boards Test Page")) {
+				if (selenium.isVisible("link=Message Boards Test Page")) {
 					break;
 				}
 			}
@@ -51,8 +51,9 @@ public class AddCategoryTest extends BaseTestCase {
 		selenium.type("_19_name", RuntimeVariables.replace("AP Category Name"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+		assertEquals(RuntimeVariables.replace(
+				"Your request processed successfully."),
+			selenium.getText("//section/div/div/div/div[1]"));
 		assertEquals(RuntimeVariables.replace("AP Category Name"),
 			selenium.getText("//a/strong"));
 	}

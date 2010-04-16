@@ -34,7 +34,7 @@ public class ConfigurePortletDynamicAssetTypeWebContentTests extends BaseTests {
 		testSuite.addTestSuite(AddPortletAPTest.class);
 		testSuite.addTestSuite(
 			ConfigurePortletDynamicAssetTypeWebContentTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

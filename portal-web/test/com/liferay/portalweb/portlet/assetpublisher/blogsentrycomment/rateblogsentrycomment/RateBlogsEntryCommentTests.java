@@ -41,7 +41,8 @@ public class RateBlogsEntryCommentTests extends BaseTests {
 			ConfigurePortletDynamicEnableCommentRatingsTest.class);
 		testSuite.addTestSuite(AddBlogsEntryCommentTest.class);
 		testSuite.addTestSuite(RateBlogsEntryCommentTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownBlogsEntryTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

@@ -38,7 +38,8 @@ public class AddBlogsEntryCommentTests extends BaseTests {
 			ConfigurePortletDynamicDisplayStyleFullContentTest.class);
 		testSuite.addTestSuite(ConfigurePortletDynamicEnableCommentsTest.class);
 		testSuite.addTestSuite(AddBlogsEntryCommentTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownBlogsEntryTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

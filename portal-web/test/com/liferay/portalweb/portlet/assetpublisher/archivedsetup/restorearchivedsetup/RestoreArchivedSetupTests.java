@@ -35,8 +35,8 @@ public class RestoreArchivedSetupTests extends BaseTests {
 		testSuite.addTestSuite(SaveArchivedSetupTest.class);
 		testSuite.addTestSuite(ConfigurePortletAssetSelectionDynamicTest.class);
 		testSuite.addTestSuite(RestoreArchivedSetupTest.class);
-		testSuite.addTestSuite(AssertRestoreArchivedSetupTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownAPArchivedSetupTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

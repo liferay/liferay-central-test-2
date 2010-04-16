@@ -14,19 +14,19 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>link=Blogs Test Page</td>
+	<td>waitForVisible</td>
+	<td>link=Asset Publisher Test Page</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>link=Blogs Test Page</td>
+	<td>link=Asset Publisher Test Page</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAtAndWait</td>
-	<td>_33_addEntryButton</td>
-	<td></td>
+	<td>selectAndWait</td>
+	<td>//select</td>
+	<td>label=Blogs Entry</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -45,7 +45,7 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>FCKeditor1___Frame</td>
+	<td>cke_contents_CKEditor1</td>
 	<td></td>
 </tr>
 <tr>
@@ -60,12 +60,7 @@
 </tr>
 <tr>
 	<td>selectFrame</td>
-	<td>//iframe[@id='FCKeditor1___Frame']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>selectFrame</td>
-	<td>//iframe</td>
+	<td>//td[@id='cke_contents_CKEditor1']/iframe</td>
 	<td></td>
 </tr>
 <tr>
@@ -85,12 +80,12 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[2]/div[1]/div[1]/a</td>
+	<td>//div[1]/h3/a</td>
 	<td>AP Blogs Entry Title</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//p</td>
+	<td>//div/div/div[1]/div[2]/div[1]</td>
 	<td>AP Blogs Entry Content.</td>
 </tr>
 

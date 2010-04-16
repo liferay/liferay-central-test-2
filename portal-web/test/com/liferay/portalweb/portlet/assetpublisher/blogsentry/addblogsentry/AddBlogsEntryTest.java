@@ -32,7 +32,7 @@ public class AddBlogsEntryTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Asset Publisher Test Page")) {
+				if (selenium.isVisible("link=Asset Publisher Test Page")) {
 					break;
 				}
 			}
@@ -74,7 +74,7 @@ public class AddBlogsEntryTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("FCKeditor1___Frame")) {
+				if (selenium.isElementPresent("cke_contents_CKEditor1")) {
 					break;
 				}
 			}
@@ -101,8 +101,7 @@ public class AddBlogsEntryTest extends BaseTestCase {
 		}
 
 		selenium.selectFrame("//iframe[@id='_33_editor']");
-		selenium.selectFrame("//iframe[@id='FCKeditor1___Frame']");
-		selenium.selectFrame("//iframe");
+		selenium.selectFrame("//td[@id='cke_contents_CKEditor1']/iframe");
 		selenium.type("//body",
 			RuntimeVariables.replace("AP Blogs Entry Content."));
 		selenium.selectFrame("relative=top");
@@ -110,5 +109,7 @@ public class AddBlogsEntryTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("AP Blogs Entry Title"),
 			selenium.getText("//div[1]/h3/a"));
+		assertEquals(RuntimeVariables.replace("AP Blogs Entry Content."),
+			selenium.getText("//div/div/div[1]/div[2]/div[1]"));
 	}
 }

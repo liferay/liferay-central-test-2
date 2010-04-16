@@ -32,7 +32,7 @@ public class RateBlogsEntryCommentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Asset Publisher Test Page")) {
+				if (selenium.isVisible("link=Asset Publisher Test Page")) {
 					break;
 				}
 			}
@@ -67,13 +67,55 @@ public class RateBlogsEntryCommentTest extends BaseTestCase {
 			selenium.getText("//td[2]/table[1]/tbody/tr/td[1]/div/div/div/div"));
 		selenium.clickAt("//table[1]/tbody/tr/td[1]/div/div/div/a[1]",
 			RuntimeVariables.replace(""));
-		Thread.sleep(5000);
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (RuntimeVariables.replace("+1 (1 Vote)")
+										.equals(selenium.getText(
+								"//td[2]/table[1]/tbody/tr/td[1]/div/div/div/div"))) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertEquals(RuntimeVariables.replace("+1 (1 Vote)"),
 			selenium.getText("//td[2]/table[1]/tbody/tr/td[1]/div/div/div/div"));
+		assertTrue(selenium.isElementPresent(
+				"//a[@class='aui-rating-element aui-rating-element-off aui-rating-thumb-up aui-rating-element-on']"));
 		selenium.clickAt("//td[1]/div/div/div/a[2]",
 			RuntimeVariables.replace(""));
-		Thread.sleep(5000);
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (RuntimeVariables.replace("-1 (1 Vote)")
+										.equals(selenium.getText(
+								"//td[2]/table[1]/tbody/tr/td[1]/div/div/div/div"))) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertEquals(RuntimeVariables.replace("-1 (1 Vote)"),
 			selenium.getText("//td[2]/table[1]/tbody/tr/td[1]/div/div/div/div"));
+		assertTrue(selenium.isElementPresent(
+				"//a[@class='aui-rating-element aui-rating-element-off aui-rating-thumb-down aui-rating-element-on']"));
+		selenium.clickAt("//td[1]/div/div/div/a[2]",
+			RuntimeVariables.replace(""));
 	}
 }
