@@ -51,7 +51,7 @@ public class AdvancedFileSystemHook extends FileSystemHook {
 		for (String fileVersionName : fileVersionNames) {
 			String ext = FileUtil.getExtension(fileVersionName);
 
-			if (ext.equals(HOOK_EXTENSION)) {
+			if (ext.equals(_HOOK_EXTENSION)) {
 				continue;
 			}
 
@@ -60,11 +60,9 @@ public class AdvancedFileSystemHook extends FileSystemHook {
 			File newFileVersion = new File(
 				newFileNameDir + StringPool.SLASH +
 					FileUtil.stripExtension(fileVersionName) +
-						StringPool.PERIOD + HOOK_EXTENSION);
+						StringPool.PERIOD + _HOOK_EXTENSION);
 
-			FileUtil.copyFile(fileVersion, newFileVersion, false);
-
-			fileVersion.delete();
+			fileVersion.renameTo(newFileVersion);
 		}
 	}
 
@@ -109,7 +107,7 @@ public class AdvancedFileSystemHook extends FileSystemHook {
 		String ext = StringPool.PERIOD + FileUtil.getExtension(fileName);
 
 		if (ext.equals(StringPool.PERIOD)) {
-			ext += HOOK_EXTENSION;
+			ext += _HOOK_EXTENSION;
 		}
 
 		StringBundler sb = new StringBundler();
@@ -139,7 +137,7 @@ public class AdvancedFileSystemHook extends FileSystemHook {
 		String ext = StringPool.PERIOD + FileUtil.getExtension(fileName);
 
 		if (ext.equals(StringPool.PERIOD)) {
-			ext += HOOK_EXTENSION;
+			ext += _HOOK_EXTENSION;
 		}
 
 		int pos = fileName.lastIndexOf(StringPool.SLASH);
@@ -210,6 +208,6 @@ public class AdvancedFileSystemHook extends FileSystemHook {
 		return headVersionNumber;
 	}
 
-	private static final String HOOK_EXTENSION = "afsh";
+	private static final String _HOOK_EXTENSION = "afsh";
 
 }
