@@ -30,35 +30,6 @@ String columnId = (String)request.getAttribute(WebKeys.RENDER_PORTLET_COLUMN_ID)
 Integer columnPos = (Integer)request.getAttribute(WebKeys.RENDER_PORTLET_COLUMN_POS);
 Integer columnCount = (Integer)request.getAttribute(WebKeys.RENDER_PORTLET_COLUMN_COUNT);
 Boolean renderPortletResource = (Boolean)request.getAttribute(WebKeys.RENDER_PORTLET_RESOURCE);
-String allowAddDefaultResourceEncrypted = ParamUtil.getString(request, "p_adr");
-
-boolean allowAddDefaultResource = false;
-
-if (Validator.isNotNull(allowAddDefaultResourceEncrypted)) {
-	try {
-		Key companyKey = company.getKeyObj();
-
-		allowAddDefaultResourceEncrypted = Encryptor.decrypt(companyKey, allowAddDefaultResourceEncrypted);
-
-		String[] allowAddDefaultResourceData = StringUtil.split(allowAddDefaultResourceEncrypted);
-
-		if ((allowAddDefaultResourceData.length == 3) &&
-			allowAddDefaultResourceData[0].equals(portletId) &&
-			allowAddDefaultResourceData[1].equals(String.valueOf(plid)) &&
-			allowAddDefaultResourceData[2].equals(Boolean.TRUE.toString())) {
-
-			// Propagate the use of p_adr to all portlet urls on the page,
-			// otherwise any subsequent urls will fall out of p_adr context and
-			// fail.
-			request.setAttribute(WebKeys.ADR_USED, Boolean.TRUE);
-
-			allowAddDefaultResource = true;
-		}
-	}
-	catch (Exception e) {
-		_log.error(e);
-	}
-}
 
 boolean runtimePortlet = (renderPortletResource != null) && renderPortletResource.booleanValue();
 
@@ -72,17 +43,6 @@ try {
 	}
 	else if (!portlet.isUndeployedPortlet()) {
 		ResourceLocalServiceUtil.getResource(company.getCompanyId(), rootPortletId, ResourceConstants.SCOPE_INDIVIDUAL, portletPrimaryKey);
-	}
-
-	if (portlet.isAddDefaultResource() &&
-		!portletId.equals(PortletKeys.DOCKBAR) &&
-		!portletId.equals(PortletKeys.LOGIN) &&
-		!portletId.equals(PortletKeys.PORTLET_CONFIGURATION) &&
-		!portletId.equals(PortletKeys.TAGS_COMPILER) &&
-		!layoutTypePortlet.hasPortletId(portletId) &&
-		!allowAddDefaultResource) {
-
-		denyAccess = true;
 	}
 }
 catch (NoSuchResourceException nsre) {
@@ -100,13 +60,7 @@ catch (NoSuchResourceException nsre) {
 	else if (layoutTypePortlet.hasPortletId(portletId)) {
 		addDefaultResource = true;
 	}
-	else if (portlet.isAddDefaultResource() &&
-			(portletId.equals(PortletKeys.DOCKBAR) ||
-			portletId.equals(PortletKeys.LOGIN) ||
-			portletId.equals(PortletKeys.PORTLET_CONFIGURATION) ||
-			portletId.equals(PortletKeys.TAGS_COMPILER) ||
-			allowAddDefaultResource)) {
-
+	else if (portlet.isAddDefaultResource()) {
 		addDefaultResource = true;
 	}
 	else if (themeDisplay.isSignedIn()) {
@@ -595,7 +549,6 @@ PortletURLImpl urlExportImport = new PortletURLImpl(request, PortletKeys.PORTLET
 
 urlExportImport.setWindowState(WindowState.MAXIMIZED);
 
-urlExportImport.setParameter("allowAdr", Boolean.TRUE.toString());
 urlExportImport.setParameter("struts_action", "/portlet_configuration/export_import");
 urlExportImport.setParameter("redirect", currentURL);
 urlExportImport.setParameter("returnToFullPageURL", currentURL);
