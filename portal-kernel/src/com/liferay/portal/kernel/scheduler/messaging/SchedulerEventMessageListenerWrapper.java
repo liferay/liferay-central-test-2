@@ -30,12 +30,6 @@ import com.liferay.portal.kernel.util.StringPool;
 public class SchedulerEventMessageListenerWrapper implements MessageListener {
 
 	public SchedulerEventMessageListenerWrapper(
-		MessageListener messageListener) {
-
-		this(messageListener, messageListener.getClass().getName());
-	}
-
-	public SchedulerEventMessageListenerWrapper(
 		MessageListener messageListener, String className) {
 
 		_messageListener = messageListener;
