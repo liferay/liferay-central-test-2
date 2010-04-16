@@ -82,7 +82,7 @@
 
 <#-- ---------- URLs ---------- -->
 
-<#assign show_add_content = theme_display.isShowAddContentIcon()/>
+<#assign show_add_content = theme_display.isShowAddContentIcon() && !theme_display.isStateMaximized()/>
 
 <#if show_add_content>
 	<#assign add_content_text = languageUtil.get(locale, "add-application")/>

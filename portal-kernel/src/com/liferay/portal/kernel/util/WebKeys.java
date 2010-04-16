@@ -103,4 +103,6 @@ public interface WebKeys {
 
 	public static final String VISITED_GROUP_ID_RECENT = "LIFERAY_SHARED_VISITED_GROUP_ID_RECENT";
 
+	public static final String WINDOW_STATE = "WINDOW_STATE";
+
 }

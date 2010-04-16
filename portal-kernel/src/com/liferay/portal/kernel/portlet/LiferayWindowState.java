@@ -14,6 +14,8 @@
 
 package com.liferay.portal.kernel.portlet;
 
+import com.liferay.portal.kernel.util.WebKeys;
+
 import javax.portlet.WindowState;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +24,7 @@ import javax.servlet.http.HttpServletRequest;
  * <a href="LiferayWindowState.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Zsolt Balogh
  */
 public class LiferayWindowState extends WindowState {
 
@@ -30,7 +33,7 @@ public class LiferayWindowState extends WindowState {
 	public final static WindowState POP_UP = new WindowState("pop_up");
 
 	public static boolean isExclusive(HttpServletRequest request) {
-		String state = request.getParameter("p_p_state");
+		String state = _getWindowState(request);
 
 		if ((state != null) && (state.equals(EXCLUSIVE.toString()))) {
 			return true;
@@ -41,7 +44,7 @@ public class LiferayWindowState extends WindowState {
 	}
 
 	public static boolean isMaximized(HttpServletRequest request) {
-		String state = request.getParameter("p_p_state");
+		String state = _getWindowState(request);
 
 		if ((state != null) &&
 			(state.equals(WindowState.MAXIMIZED.toString()))) {
@@ -54,7 +57,7 @@ public class LiferayWindowState extends WindowState {
 	}
 
 	public static boolean isPopUp(HttpServletRequest request) {
-		String state = request.getParameter("p_p_state");
+		String state = _getWindowState(request);
 
 		if ((state != null) && (state.equals(POP_UP.toString()))) {
 			return true;
@@ -89,6 +92,17 @@ public class LiferayWindowState extends WindowState {
 
 	public LiferayWindowState(String name) {
 		super(name);
+	}
+
+	private static String _getWindowState(HttpServletRequest request) {
+		WindowState windowState = (WindowState)request.getAttribute(
+			WebKeys.WINDOW_STATE);
+
+		if (windowState != null) {
+			return windowState.toString();
+		}
+
+		return request.getParameter("p_p_state");
 	}
 
 }

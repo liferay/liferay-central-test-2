@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
 import com.liferay.portal.kernel.portlet.FriendlyURLMapperThreadLocal;
 import com.liferay.portal.kernel.portlet.LiferayPortletMode;
+import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.portlet.PortletBag;
 import com.liferay.portal.kernel.portlet.PortletBagPool;
 import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
@@ -3766,13 +3767,13 @@ public class PortalImpl implements Portal {
 			(Validator.isNull(windowState.toString()))) {
 
 			if (layoutType.hasStateMaxPortletId(portletId)) {
-				return WindowState.MAXIMIZED;
+				windowState = WindowState.MAXIMIZED;
 			}
 			else if (layoutType.hasStateMinPortletId(portletId)) {
-				return WindowState.MINIMIZED;
+				windowState = WindowState.MINIMIZED;
 			}
 			else {
-				return WindowState.NORMAL;
+				windowState = WindowState.NORMAL;
 			}
 		}
 		else {
@@ -3816,9 +3817,21 @@ public class PortalImpl implements Portal {
 						request, layout.getPlid(), layout.getTypeSettings());
 				}
 			}
-
-			return windowState;
 		}
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		themeDisplay.setStateExclusive(
+			windowState.equals(LiferayWindowState.EXCLUSIVE));
+		themeDisplay.setStateMaximized(
+			windowState.equals(WindowState.MAXIMIZED));
+		themeDisplay.setStatePopUp(
+			windowState.equals(LiferayWindowState.POP_UP));
+
+		request.setAttribute(WebKeys.WINDOW_STATE, windowState);
+
+		return windowState;
 	}
 
 	protected List<Portlet> filterControlPanelPortlets(
