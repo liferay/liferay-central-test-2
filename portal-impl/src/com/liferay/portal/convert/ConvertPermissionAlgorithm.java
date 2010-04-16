@@ -18,7 +18,6 @@ import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.NoSuchResourceActionException;
 import com.liferay.portal.convert.util.PermissionView;
 import com.liferay.portal.convert.util.ResourcePermissionView;
-import com.liferay.portal.kernel.cache.CacheRegistry;
 import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
@@ -60,6 +59,7 @@ import com.liferay.portal.service.persistence.BatchSessionUtil;
 import com.liferay.portal.upgrade.util.Table;
 import com.liferay.portal.util.MaintenanceUtil;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.portal.util.ShutdownUtil;
 
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -659,14 +659,10 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 
 			MaintenanceUtil.appendStatus(
 				"Please set " + PropsKeys.PERMISSIONS_USER_CHECK_ALGORITHM +
-					" in your portal-ext.properties to use algorithm 6");
+					" in your portal-ext.properties to 6 and restart server.");
 		}
 		finally {
-			CacheRegistry.clear();
-
-			PermissionCacheUtil.clearCache();
-
-			BatchSessionUtil.setEnabled(false);
+			ShutdownUtil.shutdown(0);
 		}
 	}
 
