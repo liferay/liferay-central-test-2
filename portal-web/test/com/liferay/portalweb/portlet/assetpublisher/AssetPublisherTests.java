@@ -43,20 +43,20 @@ public class AssetPublisherTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-//		testSuite.addTest(ArchivedSetupTests.suite());
+		testSuite.addTest(ArchivedSetupTests.suite());
 		testSuite.addTest(BlogsEntryTests.suite());
-//		testSuite.addTest(BlogsEntryCommentTests.suite());
-//		testSuite.addTest(BookmarksEntryTests.suite());
-//		testSuite.addTest(DLDocumentTests.suite());
-//		testSuite.addTest(DLDocumentCommentTests.suite());
-//		testSuite.addTest(IGImageTests.suite());
-//		testSuite.addTest(LARTests.suite());
-//		testSuite.addTest(MBMessageTests.suite());
-//		testSuite.addTest(PortletTests.suite());
-//		testSuite.addTest(WebContentTests.suite());
-//		testSuite.addTest(WebContentCommentTests.suite());
-//		testSuite.addTest(WikiPageTests.suite());
-//		testSuite.addTest(WikiPageCommentTests.suite());
+		testSuite.addTest(BlogsEntryCommentTests.suite());
+		testSuite.addTest(BookmarksEntryTests.suite());
+		testSuite.addTest(DLDocumentTests.suite());
+		testSuite.addTest(DLDocumentCommentTests.suite());
+		testSuite.addTest(IGImageTests.suite());
+		testSuite.addTest(LARTests.suite());
+		testSuite.addTest(MBMessageTests.suite());
+		testSuite.addTest(PortletTests.suite());
+		testSuite.addTest(WebContentTests.suite());
+		testSuite.addTest(WebContentCommentTests.suite());
+		testSuite.addTest(WikiPageTests.suite());
+		testSuite.addTest(WikiPageCommentTests.suite());
 
 		return testSuite;
 	}
