@@ -31,6 +31,8 @@ import java.io.File;
  * </p>
  *
  * @author Jorge Ferrer
+ * @author Ryan Park
+ * @author Brian Wing Shun Chan
  */
 public class AdvancedFileSystemHook extends FileSystemHook {
 
@@ -46,23 +48,23 @@ public class AdvancedFileSystemHook extends FileSystemHook {
 		File newFileNameDir = getFileNameDir(
 			companyId, repositoryId, newFileName);
 
-		String[] fileVersionNames = FileUtil.listFiles(newFileNameDir);
+		String[] fileNameVersions = FileUtil.listFiles(newFileNameDir);
 
-		for (String fileVersionName : fileVersionNames) {
-			String ext = FileUtil.getExtension(fileVersionName);
+		for (String fileNameVersion : fileNameVersions) {
+			String ext = FileUtil.getExtension(fileNameVersion);
 
 			if (ext.equals(_HOOK_EXTENSION)) {
 				continue;
 			}
 
-			File fileVersion = new File(
-				newFileNameDir + StringPool.SLASH + fileVersionName);
-			File newFileVersion = new File(
+			File fileNameVersionFile = new File(
+				newFileNameDir + StringPool.SLASH + fileNameVersion);
+			File newFileNameVersionFile = new File(
 				newFileNameDir + StringPool.SLASH +
-					FileUtil.stripExtension(fileVersionName) +
+					FileUtil.stripExtension(fileNameVersion) +
 						StringPool.PERIOD + _HOOK_EXTENSION);
 
-			fileVersion.renameTo(newFileVersion);
+			fileNameVersionFile.renameTo(newFileNameVersionFile);
 		}
 	}
 
