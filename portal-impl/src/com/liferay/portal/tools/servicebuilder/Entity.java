@@ -201,6 +201,17 @@ public class Entity {
 		return _persistenceClass;
 	}
 
+	public String getPKDBName() {
+		if (hasCompoundPK()) {
+			return getVarName() + "PK";
+		}
+		else {
+			EntityColumn col = _pkList.get(0);
+
+			return col.getDBName();
+		}
+	}
+
 	public String getPKClassName() {
 		if (hasCompoundPK()) {
 			return _name + "PK";
@@ -224,17 +235,6 @@ public class Entity {
 			EntityColumn col = _pkList.get(0);
 
 			return col.getName();
-		}
-	}
-
-	public String getPKDBName() {
-		if (hasCompoundPK()) {
-			return getVarName() + "PK";
-		}
-		else {
-			EntityColumn col = _pkList.get(0);
-
-			return col.getDBName();
 		}
 	}
 
