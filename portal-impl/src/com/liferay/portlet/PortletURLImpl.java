@@ -438,8 +438,8 @@ public class PortletURLImpl
 			throw new IllegalArgumentException();
 		}
 
-		for (int i = 0; i < values.length; i++) {
-			if (values[i] == null) {
+		for (String value : values) {
+			if (value == null) {
 				throw new IllegalArgumentException();
 			}
 		}
