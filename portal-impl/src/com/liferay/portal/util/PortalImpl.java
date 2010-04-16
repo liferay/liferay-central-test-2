@@ -3829,6 +3829,18 @@ public class PortalImpl implements Portal {
 		themeDisplay.setStatePopUp(
 			windowState.equals(LiferayWindowState.POP_UP));
 
+		if (themeDisplay.isStateMaximized() &&
+			themeDisplay.isShowAddContentIcon()) {
+
+			themeDisplay.setShowAddContentIcon(false);
+		}
+		else if (!themeDisplay.isStateMaximized() &&
+				 !themeDisplay.isShowAddContentIcon() &&
+				 themeDisplay.isShowAddContentIconPermission()) {
+
+			themeDisplay.setShowAddContentIcon(true);
+		}
+
 		request.setAttribute(WebKeys.WINDOW_STATE, windowState);
 
 		return windowState;

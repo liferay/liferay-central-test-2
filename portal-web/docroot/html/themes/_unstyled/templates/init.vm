@@ -81,7 +81,7 @@
 
 ## ---------- URLs ---------- ##
 
-#set ($show_add_content = $theme_display.isShowAddContentIcon() && !$theme_display.isStateMaximized())
+#set ($show_add_content = $theme_display.isShowAddContentIcon())
 
 #if ($show_add_content)
 	#set ($add_content_text = $languageUtil.get($locale, "add-application"))

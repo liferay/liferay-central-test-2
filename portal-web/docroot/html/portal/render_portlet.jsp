@@ -302,13 +302,13 @@ if (portlet.hasPortletMode(responseContentType, PortletMode.EDIT)) {
 }
 
 if (portlet.hasPortletMode(responseContentType, LiferayPortletMode.EDIT_DEFAULTS)) {
-	if (showEditIcon && !layout.isPrivateLayout() && themeDisplay.isShowAddContentIcon() && !themeDisplay.isStateMaximized()) {
+	if (showEditIcon && !layout.isPrivateLayout() && themeDisplay.isShowAddContentIcon()) {
 		showEditDefaultsIcon = true;
 	}
 }
 
 if (portlet.hasPortletMode(responseContentType, LiferayPortletMode.EDIT_GUEST)) {
-	if (showEditIcon && !layout.isPrivateLayout() && themeDisplay.isShowAddContentIcon() && !themeDisplay.isStateMaximized()) {
+	if (showEditIcon && !layout.isPrivateLayout() && themeDisplay.isShowAddContentIcon()) {
 		showEditGuestIcon = true;
 	}
 }

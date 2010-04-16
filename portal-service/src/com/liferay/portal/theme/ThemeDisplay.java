@@ -797,6 +797,16 @@ public class ThemeDisplay implements Serializable {
 		_showAddContentIcon = showAddContentIcon;
 	}
 
+	public boolean isShowAddContentIconPermission() {
+		return _showAddContentIconPermission;
+	}
+
+	public void setShowAddContentIconPermission(
+		boolean showAddContentIconPermission) {
+
+		_showAddContentIconPermission = showAddContentIconPermission;
+	}
+
 	public boolean isShowControlPanelIcon() {
 		return _showControlPanelIcon;
 	}
@@ -1116,6 +1126,7 @@ public class ThemeDisplay implements Serializable {
 		_pathThemeRoot = StringPool.BLANK;
 		_pathThemeTemplates = StringPool.BLANK;
 		_showAddContentIcon = false;
+		_showAddContentIconPermission = false;
 		_showControlPanelIcon = false;
 		_showHomeIcon = false;
 		_showLayoutTemplatesIcon = false;
@@ -1223,6 +1234,7 @@ public class ThemeDisplay implements Serializable {
 	private String _pathThemeRoot = StringPool.BLANK;
 	private String _pathThemeTemplates = StringPool.BLANK;
 	private boolean _showAddContentIcon;
+	private boolean _showAddContentIconPermission;
 	private boolean _showControlPanelIcon;
 	private boolean _showHomeIcon;
 	private boolean _showLayoutTemplatesIcon;

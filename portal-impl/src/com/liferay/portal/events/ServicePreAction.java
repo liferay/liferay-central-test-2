@@ -1579,7 +1579,12 @@ public class ServicePreAction extends Action {
 						permissionChecker, layout, ActionKeys.UPDATE);
 
 				if (hasUpdateLayoutPermission) {
-					themeDisplay.setShowAddContentIcon(true);
+					themeDisplay.setShowAddContentIconPermission(true);
+
+					if (!LiferayWindowState.isMaximized(request)) {
+						themeDisplay.setShowAddContentIcon(true);
+					}
+
 					themeDisplay.setShowLayoutTemplatesIcon(true);
 
 					themeDisplay.setURLAddContent(
