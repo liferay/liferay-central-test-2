@@ -2671,7 +2671,7 @@ public class ServiceBuilder {
 
 				String entityName = beanId;
 
-				entityName = StringUtil.replace(entityName, ".service.", ".");
+				entityName = StringUtil.replaceLast(entityName, ".service.", ".");
 
 				int pos = entityName.lastIndexOf("Service");
 
@@ -2683,7 +2683,7 @@ public class ServiceBuilder {
 
 				String serviceMapping = serviceName;
 
-				serviceMapping = StringUtil.replace(
+				serviceMapping = StringUtil.replaceLast(
 					serviceMapping, ".service.", ".service.spring.");
 				serviceMapping = StringUtil.replace(
 					serviceMapping, StringPool.PERIOD, StringPool.UNDERLINE);
