@@ -38,7 +38,9 @@ public class ViewDLDocumentTableTests extends BaseTests {
 		testSuite.addTestSuite(
 			ConfigurePortletDynamicDisplayStyleTableTest.class);
 		testSuite.addTestSuite(ViewDLDocumentTableTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownDLFolderTest.class);
+		testSuite.addTestSuite(TearDownDocumentTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

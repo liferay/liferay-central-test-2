@@ -36,10 +36,10 @@ public class SelectBookmarksEntryTests extends BaseTests {
 		testSuite.addTestSuite(AddFolderTest.class);
 		testSuite.addTestSuite(AddBookmarksEntryTest.class);
 		testSuite.addTestSuite(ConfigurePortletAssetSelectionManualTest.class);
-		testSuite.addTestSuite(ViewBookmarksEntryUnselectTest.class);
 		testSuite.addTestSuite(SelectBookmarksEntryTest.class);
-		testSuite.addTestSuite(ViewBookmarksEntrySelectTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownBookmarksFolderTest.class);
+		testSuite.addTestSuite(TearDownBookmarksEntryTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

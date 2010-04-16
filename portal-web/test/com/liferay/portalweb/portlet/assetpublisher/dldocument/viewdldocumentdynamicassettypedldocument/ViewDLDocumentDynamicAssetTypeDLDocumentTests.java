@@ -37,10 +37,14 @@ public class ViewDLDocumentDynamicAssetTypeDLDocumentTests extends BaseTests {
 		testSuite.addTestSuite(AddFolderTest.class);
 		testSuite.addTestSuite(AddDLDocumentTest.class);
 		testSuite.addTestSuite(
-			ConfigurePortletDynamicAssetTypeDLDocumentTest.class);
+			ConfigurePortletDynamicAvailableDLDocumentTest.class);
+		testSuite.addTestSuite(ViewDLDocumentAvailableTest.class);
 		testSuite.addTestSuite(
-			ViewDLDocumentDynamicAssetTypeDLDocumentTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+			ConfigurePortletDynamicCurrentDLDocumentTest.class);
+		testSuite.addTestSuite(ViewDLDocumentCurrentTest.class);
+		testSuite.addTestSuite(TearDownDLFolderTest.class);
+		testSuite.addTestSuite(TearDownDocumentTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

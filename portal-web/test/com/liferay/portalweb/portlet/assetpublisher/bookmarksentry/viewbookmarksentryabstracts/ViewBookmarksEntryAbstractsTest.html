@@ -14,18 +14,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>waitForVisible</td>
 	<td>link=Asset Publisher Test Page</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
 	<td>link=Asset Publisher Test Page</td>
-	<td></td>
-</tr>
-<tr>
-	<td>pause</td>
-	<td>5000</td>
 	<td></td>
 </tr>
 <tr>
@@ -34,64 +29,39 @@
 	<td>AP Bookmarks Entry Name</td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>//div[1]/div[1]/div/a</td>
-	<td>Read More »</td>
-</tr>
-<tr>
-	<td>assertElementNotPresent</td>
-	<td>link=http://www.liferay.com</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementNotPresent</td>
-	<td>//th[1]</td>
-	<td>Title</td>
-</tr>
-<tr>
-	<td>assertElementNotPresent</td>
-	<td>link=View in Context »</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=Asset Publisher Test Page</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAtAndWait</td>
-	<td>link=Asset Publisher Test Page</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAtAndWait</td>
-	<td>link=AP Bookmarks Entry Name</td>
-	<td></td>
-</tr>
-<tr>
-	<td>pause</td>
-	<td>5000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//div[2]/div/div/div[1]/a</td>
-	<td>Back</td>
-</tr>
-<tr>
 	<td>assertPartialText</td>
+	<td>//div[2]/a</td>
+	<td>Read More</td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>//div[2]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
 	<td>//div/h3</td>
 	<td>AP Bookmarks Entry Name</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>//div[2]/a</td>
-	<td>AP Bookmarks Entry Name (http://www.liferay.com)</td>
+	<td>AP Bookmarks Entry Name (http://www.liferay.com) (Opens New Window)</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>//div[2]/div/a</td>
 	<td>View in Context »</td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>//div[2]/div/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>logo</td>
+	<td>Liferay.com</td>
 </tr>
 
 </tbody></table>

@@ -39,7 +39,9 @@ public class ViewBookmarksEntryTitleListTests extends BaseTests {
 		testSuite.addTestSuite(
 			ConfigurePortletDynamicDisplayStyleTitleListTest.class);
 		testSuite.addTestSuite(ViewBookmarksEntryTitleListTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownBookmarksFolderTest.class);
+		testSuite.addTestSuite(TearDownBookmarksEntryTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

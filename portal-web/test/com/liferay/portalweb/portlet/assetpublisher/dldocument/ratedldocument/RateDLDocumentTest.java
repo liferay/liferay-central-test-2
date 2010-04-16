@@ -32,7 +32,7 @@ public class RateDLDocumentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Asset Publisher Test Page")) {
+				if (selenium.isVisible("link=Asset Publisher Test Page")) {
 					break;
 				}
 			}
@@ -52,7 +52,7 @@ public class RateDLDocumentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//div[3]/div[2]/div/div")) {
+				if (selenium.isVisible("//div[3]/div/div[2]/div/div")) {
 					break;
 				}
 			}
@@ -63,11 +63,28 @@ public class RateDLDocumentTest extends BaseTestCase {
 		}
 
 		String voteCount = selenium.getIncrementedText(
-				"//div[3]/div[2]/div/div");
+				"//div[3]/div/div[2]/div/div");
 		RuntimeVariables.setValue("voteCount", voteCount);
 		selenium.clickAt("//a[5]", RuntimeVariables.replace(""));
-		Thread.sleep(5000);
-		assertTrue(selenium.isPartialText("//div[3]/div[2]/div/div",
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isPartialText("//div[3]/div/div[2]/div/div",
+							RuntimeVariables.getValue("voteCount"))) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		assertTrue(selenium.isPartialText("//div[3]/div/div[2]/div/div",
 				RuntimeVariables.getValue("voteCount")));
 	}
 }

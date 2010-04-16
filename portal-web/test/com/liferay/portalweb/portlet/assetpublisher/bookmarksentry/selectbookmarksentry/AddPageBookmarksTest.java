@@ -25,7 +25,6 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class AddPageBookmarksTest extends BaseTestCase {
 	public void testAddPageBookmarks() throws Exception {
 		selenium.open("/web/guest/home/");
-		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -33,7 +32,7 @@ public class AddPageBookmarksTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("addPage")) {
+				if (selenium.isVisible("addPage")) {
 					break;
 				}
 			}
@@ -62,7 +61,7 @@ public class AddPageBookmarksTest extends BaseTestCase {
 		}
 
 		selenium.type("//input", RuntimeVariables.replace("Bookmarks Test Page"));
-		selenium.clickAt("//span[@id='save']/span", RuntimeVariables.replace(""));
+		selenium.clickAt("save", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -70,7 +69,7 @@ public class AddPageBookmarksTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Bookmarks Test Page")) {
+				if (selenium.isVisible("link=Bookmarks Test Page")) {
 					break;
 				}
 			}

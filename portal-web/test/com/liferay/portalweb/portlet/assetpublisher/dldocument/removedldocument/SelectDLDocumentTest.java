@@ -32,7 +32,7 @@ public class SelectDLDocumentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Asset Publisher Test Page")) {
+				if (selenium.isVisible("link=Asset Publisher Test Page")) {
 					break;
 				}
 			}
@@ -50,12 +50,41 @@ public class SelectDLDocumentTest extends BaseTestCase {
 		selenium.select("_86_assetEntryType",
 			RuntimeVariables.replace("label=Document Library Document"));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=Folder Name", RuntimeVariables.replace(""));
+		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=AP DL Document Title",
+		selenium.clickAt("//td[1]/a", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		assertEquals(RuntimeVariables.replace(
+				"You have successfully updated the setup."),
+			selenium.getText("//div[3]/div/div/div/div/div"));
+		assertEquals(RuntimeVariables.replace("Document Library Document"),
+			selenium.getText("//td[1]/a"));
+		assertEquals(RuntimeVariables.replace("AP DL Document Title"),
+			selenium.getText("//td[2]/a"));
+		selenium.open("/web/guest/home/");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("link=Asset Publisher Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("link=Asset Publisher Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"You have successfully updated the setup."));
+		assertEquals(RuntimeVariables.replace("AP DL Document Title"),
+			selenium.getText("//div[1]/h3/a"));
+		assertEquals(RuntimeVariables.replace("AP DL Document Title"),
+			selenium.getText("//div[2]/div[1]/div/a"));
 	}
 }

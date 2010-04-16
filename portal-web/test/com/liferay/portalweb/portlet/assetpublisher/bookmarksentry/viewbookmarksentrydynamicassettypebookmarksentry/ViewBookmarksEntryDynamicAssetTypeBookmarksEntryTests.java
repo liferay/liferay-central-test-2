@@ -38,10 +38,14 @@ public class ViewBookmarksEntryDynamicAssetTypeBookmarksEntryTests
 		testSuite.addTestSuite(AddFolderTest.class);
 		testSuite.addTestSuite(AddBookmarksEntryTest.class);
 		testSuite.addTestSuite(
-			ConfigurePortletDynamicAssetTypeBookmarksEntryTest.class);
+			ConfigurePortletDynamicAvailableBookmarksEntryTest.class);
+		testSuite.addTestSuite(ViewBookmarksEntryAvailableTest.class);
 		testSuite.addTestSuite(
-			ViewBookmarksEntryDynamicAssetTypeBookmarksEntryTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+			ConfigurePortletDynamicCurrentBookmarksEntryTest.class);
+		testSuite.addTestSuite(ViewBookmarksEntryCurrentTest.class);
+		testSuite.addTestSuite(TearDownBookmarksFolderTest.class);
+		testSuite.addTestSuite(TearDownBookmarksEntryTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

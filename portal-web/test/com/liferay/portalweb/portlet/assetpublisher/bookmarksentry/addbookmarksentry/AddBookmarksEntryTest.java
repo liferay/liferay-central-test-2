@@ -37,8 +37,7 @@ public class AddBookmarksEntryTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent(
-									"link=Asset Publisher Test Page")) {
+						if (selenium.isVisible("link=Asset Publisher Test Page")) {
 							break;
 						}
 					}
@@ -105,7 +104,25 @@ public class AddBookmarksEntryTest extends BaseTestCase {
 
 			case 3:
 				selenium.selectWindow("null");
-				Thread.sleep(5000);
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (RuntimeVariables.replace("Folder Name")
+												.equals(selenium.getText(
+										"_28_folderName"))) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
 				selenium.type("_28_name",
 					RuntimeVariables.replace("AP Bookmarks Entry Name"));
 				selenium.type("_28_url",

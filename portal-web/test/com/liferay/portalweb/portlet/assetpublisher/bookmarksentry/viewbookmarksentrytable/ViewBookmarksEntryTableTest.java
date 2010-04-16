@@ -32,7 +32,7 @@ public class ViewBookmarksEntryTableTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Asset Publisher Test Page")) {
+				if (selenium.isVisible("link=Asset Publisher Test Page")) {
 					break;
 				}
 			}
@@ -45,44 +45,22 @@ public class ViewBookmarksEntryTableTest extends BaseTestCase {
 		selenium.clickAt("link=Asset Publisher Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		Thread.sleep(5000);
 		assertEquals(RuntimeVariables.replace("Title"),
 			selenium.getText("//th[1]"));
 		assertEquals(RuntimeVariables.replace("AP Bookmarks Entry Name"),
 			selenium.getText("//td[1]/a"));
-		assertFalse(selenium.isElementPresent("link=http://www.liferay.com"));
-		assertFalse(selenium.isElementPresent("link=View in Context \u00bb"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Asset Publisher Test Page")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("link=Asset Publisher Test Page",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("//td[1]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=AP Bookmarks Entry Name",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		Thread.sleep(5000);
-		assertEquals(RuntimeVariables.replace("Back"),
-			selenium.getText("//div[2]/div/div/div[1]/a"));
-		assertTrue(selenium.isPartialText("//div/h3", "AP Bookmarks Entry Name"));
+		assertEquals(RuntimeVariables.replace("AP Bookmarks Entry Name"),
+			selenium.getText("//div/h3"));
 		assertEquals(RuntimeVariables.replace(
-				"AP Bookmarks Entry Name (http://www.liferay.com)"),
+				"AP Bookmarks Entry Name (http://www.liferay.com) (Opens New Window)"),
 			selenium.getText("//div[2]/a"));
 		assertEquals(RuntimeVariables.replace("View in Context \u00bb"),
 			selenium.getText("//div[2]/div/a"));
+		selenium.clickAt("//div[2]/div/a", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		assertEquals(RuntimeVariables.replace("Liferay.com"),
+			selenium.getText("logo"));
 	}
 }

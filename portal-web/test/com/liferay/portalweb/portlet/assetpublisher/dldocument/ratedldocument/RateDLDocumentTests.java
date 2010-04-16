@@ -39,7 +39,9 @@ public class RateDLDocumentTests extends BaseTests {
 			ConfigurePortletDynamicDisplayStyleFullContentTest.class);
 		testSuite.addTestSuite(ConfigurePortletDynamicEnableRatingsTest.class);
 		testSuite.addTestSuite(RateDLDocumentTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownDLFolderTest.class);
+		testSuite.addTestSuite(TearDownDocumentTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

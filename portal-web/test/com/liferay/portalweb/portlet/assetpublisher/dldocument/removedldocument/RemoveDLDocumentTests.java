@@ -37,10 +37,10 @@ public class RemoveDLDocumentTests extends BaseTests {
 		testSuite.addTestSuite(AddDLDocumentTest.class);
 		testSuite.addTestSuite(ConfigurePortletAssetSelectionManualTest.class);
 		testSuite.addTestSuite(SelectDLDocumentTest.class);
-		testSuite.addTestSuite(ViewDLDocumentSelectTest.class);
 		testSuite.addTestSuite(RemoveDLDocumentTest.class);
-		testSuite.addTestSuite(ViewDLDocumentRemoveTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownDLFolderTest.class);
+		testSuite.addTestSuite(TearDownDocumentTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

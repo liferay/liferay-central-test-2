@@ -36,10 +36,10 @@ public class SelectDLDocumentTests extends BaseTests {
 		testSuite.addTestSuite(AddFolderTest.class);
 		testSuite.addTestSuite(AddDLDocumentTest.class);
 		testSuite.addTestSuite(ConfigurePortletAssetSelectionManualTest.class);
-		testSuite.addTestSuite(ViewDLDocumentUnselectTest.class);
 		testSuite.addTestSuite(SelectDLDocumentTest.class);
-		testSuite.addTestSuite(ViewDLDocumentSelectTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownDLFolderTest.class);
+		testSuite.addTestSuite(TearDownDocumentTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

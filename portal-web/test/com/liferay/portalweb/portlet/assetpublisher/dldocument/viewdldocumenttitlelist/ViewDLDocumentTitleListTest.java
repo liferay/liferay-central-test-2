@@ -32,7 +32,7 @@ public class ViewDLDocumentTitleListTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Asset Publisher Test Page")) {
+				if (selenium.isVisible("link=Asset Publisher Test Page")) {
 					break;
 				}
 			}
@@ -45,59 +45,15 @@ public class ViewDLDocumentTitleListTest extends BaseTestCase {
 		selenium.clickAt("link=Asset Publisher Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		Thread.sleep(5000);
 		assertEquals(RuntimeVariables.replace("AP DL Document Title"),
 			selenium.getText("//div[2]/div/div/ul/li/a"));
-		assertFalse(selenium.isElementPresent("link=Read More \u00bb"));
-		assertFalse(selenium.isElementPresent("link=View in Context \u00bb"));
-		assertFalse(selenium.isElementPresent("//th[1]"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Asset Publisher Test Page")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("link=Asset Publisher Test Page",
+		selenium.clickAt("//div[2]/div/div/ul/li/a",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=AP DL Document Title",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		Thread.sleep(5000);
-		assertEquals(RuntimeVariables.replace("Back"),
-			selenium.getText("//div/div[1]/div[1]/a"));
-		assertTrue(selenium.isPartialText("//div/h3", "AP DL Document Title"));
+		assertEquals(RuntimeVariables.replace("AP DL Document Title"),
+			selenium.getText("//div/h3"));
 		assertEquals(RuntimeVariables.replace("AP DL Document Title"),
 			selenium.getText("//div[2]/div[1]/a"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (RuntimeVariables.replace("View in Context \u00bb")
-										.equals(selenium.getText("//div[2]/a"))) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		assertEquals(RuntimeVariables.replace("View in Context \u00bb"),
 			selenium.getText("//div[2]/a"));
 	}

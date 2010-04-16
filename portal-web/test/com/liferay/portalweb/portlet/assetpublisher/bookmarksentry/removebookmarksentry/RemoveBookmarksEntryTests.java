@@ -37,10 +37,10 @@ public class RemoveBookmarksEntryTests extends BaseTests {
 		testSuite.addTestSuite(AddBookmarksEntryTest.class);
 		testSuite.addTestSuite(ConfigurePortletAssetSelectionManualTest.class);
 		testSuite.addTestSuite(SelectBookmarksEntryTest.class);
-		testSuite.addTestSuite(ViewBookmarksEntrySelectTest.class);
 		testSuite.addTestSuite(RemoveBookmarksEntryTest.class);
-		testSuite.addTestSuite(ViewBookmarksEntryRemoveTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownBookmarksFolderTest.class);
+		testSuite.addTestSuite(TearDownBookmarksEntryTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

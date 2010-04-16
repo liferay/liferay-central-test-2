@@ -32,7 +32,7 @@ public class AddFolderTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Bookmarks Test Page")) {
+				if (selenium.isVisible("link=Bookmarks Test Page")) {
 					break;
 				}
 			}
@@ -45,15 +45,14 @@ public class AddFolderTest extends BaseTestCase {
 		selenium.clickAt("link=Bookmarks Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//a[contains(text(),'Add Folder')]",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("//div[2]/ul/li[2]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		Thread.sleep(5000);
 		selenium.type("_28_name", RuntimeVariables.replace("Folder Name"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+		assertEquals(RuntimeVariables.replace(
+				"Your request processed successfully."),
+			selenium.getText("//section/div/div/div/div[1]"));
 		assertEquals(RuntimeVariables.replace("Folder Name"),
 			selenium.getText("//a/strong"));
 	}

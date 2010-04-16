@@ -37,8 +37,7 @@ public class AddDLDocumentTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent(
-									"link=Asset Publisher Test Page")) {
+						if (selenium.isVisible("link=Asset Publisher Test Page")) {
 							break;
 						}
 					}
@@ -90,8 +89,7 @@ public class AddDLDocumentTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent(
-									"//input[@value='Choose']")) {
+						if (selenium.isVisible("//input[@value='Choose']")) {
 							break;
 						}
 					}
@@ -114,9 +112,29 @@ public class AddDLDocumentTest extends BaseTestCase {
 				selenium.clickAt("//input[@value='Save']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (RuntimeVariables.replace("AP DL Document Title")
+												.equals(selenium.getText(
+										"//div[1]/h3/a"))) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
 				assertEquals(RuntimeVariables.replace("AP DL Document Title"),
 					selenium.getText("//div[1]/h3/a"));
-				selenium.selectWindow("null");
+				assertEquals(RuntimeVariables.replace("AP DL Document Title"),
+					selenium.getText("//div[2]/div[1]/div/a"));
 
 			case 100:
 				label = -1;

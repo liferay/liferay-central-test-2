@@ -33,7 +33,7 @@ public class ViewDLDocumentFullContentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Asset Publisher Test Page")) {
+				if (selenium.isVisible("link=Asset Publisher Test Page")) {
 					break;
 				}
 			}
@@ -46,13 +46,11 @@ public class ViewDLDocumentFullContentTest extends BaseTestCase {
 		selenium.clickAt("link=Asset Publisher Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		Thread.sleep(5000);
-		assertTrue(selenium.isPartialText("//div/h3", "AP DL Document Title"));
+		assertEquals(RuntimeVariables.replace("AP DL Document Title"),
+			selenium.getText("//div/h3"));
 		assertEquals(RuntimeVariables.replace("AP DL Document Title"),
 			selenium.getText("//div[2]/div[1]/a"));
 		assertEquals(RuntimeVariables.replace("View in Context \u00bb"),
 			selenium.getText("//div[2]/a"));
-		assertFalse(selenium.isElementPresent("link=Read More \u00bb"));
-		assertFalse(selenium.isElementPresent("//th[1]"));
 	}
 }

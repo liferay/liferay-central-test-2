@@ -32,7 +32,7 @@ public class AddPortletBookmarksTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Bookmarks Test Page")) {
+				if (selenium.isVisible("link=Bookmarks Test Page")) {
 					break;
 				}
 			}
@@ -45,24 +45,6 @@ public class AddPortletBookmarksTest extends BaseTestCase {
 		selenium.clickAt("link=Bookmarks Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		Thread.sleep(5000);
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_145_addApplication")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.clickAt("_145_addApplication", RuntimeVariables.replace(""));
 		Thread.sleep(5000);
 
@@ -72,8 +54,7 @@ public class AddPortletBookmarksTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"//div[@id='Community-Bookmarks']/p/a")) {
+				if (selenium.isVisible("layout_configuration_content")) {
 					break;
 				}
 			}
@@ -83,7 +64,26 @@ public class AddPortletBookmarksTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//div[@id='Community-Bookmarks']/p/a",
+		selenium.typeKeys("layout_configuration_content",
+			RuntimeVariables.replace("b"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("//div[@title='Bookmarks']/p/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("//div[@title='Bookmarks']/p/a",
 			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -92,7 +92,7 @@ public class AddPortletBookmarksTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//td[1]/div/div/div")) {
+				if (selenium.isVisible("//td[1]/div/div[1]")) {
 					break;
 				}
 			}
@@ -102,6 +102,6 @@ public class AddPortletBookmarksTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertTrue(selenium.isElementPresent("//td[1]/div/div/div"));
+		assertTrue(selenium.isVisible("//td[1]/div/div[1]"));
 	}
 }

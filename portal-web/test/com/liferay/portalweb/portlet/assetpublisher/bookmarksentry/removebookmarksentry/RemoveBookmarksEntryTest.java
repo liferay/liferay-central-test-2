@@ -32,7 +32,7 @@ public class RemoveBookmarksEntryTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Asset Publisher Test Page")) {
+				if (selenium.isVisible("link=Asset Publisher Test Page")) {
 					break;
 				}
 			}
@@ -47,16 +47,38 @@ public class RemoveBookmarksEntryTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Configuration", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("link=Bookmarks Entry"));
-		assertTrue(selenium.isElementPresent("link=AP Bookmarks Entry Name"));
+		assertEquals(RuntimeVariables.replace("Bookmarks Entry"),
+			selenium.getText("//td[1]/a"));
 		selenium.click(RuntimeVariables.replace("//img[@alt='Delete']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
-		assertTrue(selenium.isTextPresent(
-				"You have successfully updated the setup."));
-		assertFalse(selenium.isElementPresent("link=Bookmarks Entry"));
-		assertFalse(selenium.isElementPresent("link=AP Bookmarks Entry Name"));
-		assertTrue(selenium.isTextPresent("No assets selected."));
+		assertEquals(RuntimeVariables.replace(
+				"You have successfully updated the setup."),
+			selenium.getText("//div[3]/div/div/div/div/div"));
+		assertEquals(RuntimeVariables.replace("No assets selected."),
+			selenium.getText("//fieldset/div/div[2]"));
+		selenium.open("/web/guest/home/");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("link=Asset Publisher Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("link=Asset Publisher Test Page",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		assertFalse(selenium.isTextPresent("AP Bookmarks Entry Name"));
 	}
 }
