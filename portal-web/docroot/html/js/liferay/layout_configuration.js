@@ -80,8 +80,8 @@ AUI().add(
 							show: function(node) {
 								node.show();
 
-								var categoryParent = node.ancestor('.lfr-content-category');
-								var contentParent = node.ancestor('.lfr-add-content');
+								var categoryParent = node.ancestorsByClassName('lfr-content-category');
+								var contentParent = node.ancestorsByClassName('lfr-add-content');
 
 								if (categoryParent) {
 									categoryParent.show();
