@@ -75,7 +75,7 @@ import java.util.List;
  * For DLFileEntries, the naming convention for some of the variables is not
  * very informative, due to legacy code. Each DLFileEntry has a corresponding
  * name and title. The "name" is a unique identifier for a given file and
- * usually follows the format "DLFE-1234" whereas the "title" is the actual name
+ * usually follows the format "1234" whereas the "title" is the actual name
  * specified by the user (e.g., "Budget.xls").
  * </p>
  *
@@ -143,8 +143,8 @@ public class DLFileEntryLocalServiceImpl
 			title = name;
 		}
 
-		name = "DLFE-" +
-			counterLocalService.increment(DLFileEntry.class.getName());
+		name = String.valueOf(
+			counterLocalService.increment(DLFileEntry.class.getName()));
 
 		Date now = new Date();
 

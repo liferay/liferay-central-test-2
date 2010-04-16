@@ -26,6 +26,10 @@ import com.liferay.portal.kernel.util.FileUtil;
 public class DLFileEntryNameUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
 	public static String getNewName(String name) throws Exception {
+		if (name.startsWith("DLFE-")) {
+			name = name.substring("DLFE-".length());
+		}
+
 		name = FileUtil.stripExtension(name);
 
 		return name;

@@ -73,10 +73,6 @@ public class AdvancedFileSystemHook extends FileSystemHook {
 
 		String ext = StringPool.PERIOD + FileUtil.getExtension(fileName);
 
-		if (ext.equals(StringPool.PERIOD)) {
-			ext = StringPool.BLANK;
-		}
-
 		StringBundler sb = new StringBundler();
 
 		String fileNameFragment = FileUtil.stripExtension(fileName);
@@ -102,10 +98,6 @@ public class AdvancedFileSystemHook extends FileSystemHook {
 		long companyId, long repositoryId, String fileName, String version) {
 
 		String ext = StringPool.PERIOD + FileUtil.getExtension(fileName);
-
-		if (ext.equals(StringPool.PERIOD)) {
-			ext = StringPool.BLANK;
-		}
 
 		int pos = fileName.lastIndexOf(StringPool.SLASH);
 
