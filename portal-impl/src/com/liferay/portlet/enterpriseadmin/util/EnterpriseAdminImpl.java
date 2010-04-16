@@ -90,17 +90,15 @@ import javax.portlet.RenderResponse;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * <a href="EnterpriseAdminUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="EnterpriseAdminImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  * @author Jorge Ferrer
  * @author Julio Camarero
  */
-public class EnterpriseAdminUtil {
+public class EnterpriseAdminImpl implements EnterpriseAdmin {
 
-	public static final String CUSTOM_QUESTION = "write-my-own-question";
-
-	public static void addPortletBreadcrumbEntries(
+	public void addPortletBreadcrumbEntries(
 			Organization organization, HttpServletRequest request,
 			RenderResponse renderResponse)
 		throws Exception {
@@ -130,7 +128,7 @@ public class EnterpriseAdminUtil {
 			request, organization.getName(), portletURL.toString());
 	}
 
-	public static String getCssClassName(Role role) {
+	public String getCssClassName(Role role) {
 		String cssClassName = StringPool.BLANK;
 
 		String name = role.getName();
@@ -155,7 +153,7 @@ public class EnterpriseAdminUtil {
 		return "lfr-role " + cssClassName;
 	}
 
-	public static long[] addRequiredRoles(long userId, long[] roleIds)
+	public long[] addRequiredRoles(long userId, long[] roleIds)
 		throws PortalException, SystemException {
 
 		User user = UserLocalServiceUtil.getUser(userId);
@@ -163,7 +161,7 @@ public class EnterpriseAdminUtil {
 		return addRequiredRoles(user, roleIds);
 	}
 
-	public static long[] addRequiredRoles(User user, long[] roleIds)
+	public long[] addRequiredRoles(User user, long[] roleIds)
 		throws PortalException, SystemException {
 
 		if (user.isDefaultUser()) {
@@ -180,9 +178,8 @@ public class EnterpriseAdminUtil {
 		return roleIds;
 	}
 
-	public static List<Role> filterGroupRoles(
-			PermissionChecker permissionChecker, long groupId,
-			List<Role> roles)
+	public List<Role> filterGroupRoles(
+			PermissionChecker permissionChecker, long groupId, List<Role> roles)
 		throws PortalException, SystemException {
 
 		List<Role> filteredGroupRoles = ListUtil.copy(roles);
@@ -229,7 +226,7 @@ public class EnterpriseAdminUtil {
 		return filteredGroupRoles;
 	}
 
-	public static List<Group> filterGroups(
+	public List<Group> filterGroups(
 			PermissionChecker permissionChecker, List<Group> groups)
 		throws PortalException, SystemException {
 
@@ -255,7 +252,7 @@ public class EnterpriseAdminUtil {
 		return filteredGroups;
 	}
 
-	public static List<Organization> filterOrganizations(
+	public List<Organization> filterOrganizations(
 			PermissionChecker permissionChecker,
 			List<Organization> organizations)
 		throws PortalException, SystemException {
@@ -282,7 +279,7 @@ public class EnterpriseAdminUtil {
 		return filteredOrganizations;
 	}
 
-	public static List<Role> filterRoles(
+	public List<Role> filterRoles(
 		PermissionChecker permissionChecker, List<Role> roles) {
 
 		List<Role> filteredRoles = ListUtil.copy(roles);
@@ -324,7 +321,7 @@ public class EnterpriseAdminUtil {
 		return filteredRoles;
 	}
 
-	public static List<UserGroupRole> filterUserGroupRoles(
+	public List<UserGroupRole> filterUserGroupRoles(
 			PermissionChecker permissionChecker,
 			List<UserGroupRole> userGroupRoles)
 		throws PortalException, SystemException {
@@ -368,7 +365,7 @@ public class EnterpriseAdminUtil {
 		return filteredUserGroupRoles;
 	}
 
-	public static List<UserGroup> filterUserGroups(
+	public List<UserGroup> filterUserGroups(
 		PermissionChecker permissionChecker, List<UserGroup> userGroups) {
 
 		if (permissionChecker.isCompanyAdmin()) {
@@ -393,7 +390,7 @@ public class EnterpriseAdminUtil {
 		return filteredUserGroups;
 	}
 
-	public static List<Address> getAddresses(ActionRequest actionRequest) {
+	public List<Address> getAddresses(ActionRequest actionRequest) {
 		List<Address> addresses = new ArrayList<Address>();
 
 		int[] addressesIndexes = StringUtil.split(
@@ -459,9 +456,7 @@ public class EnterpriseAdminUtil {
 		return addresses;
 	}
 
-	public static List<EmailAddress> getEmailAddresses(
-		ActionRequest actionRequest) {
-
+	public List<EmailAddress> getEmailAddresses(ActionRequest actionRequest) {
 		List<EmailAddress> emailAddresses = new ArrayList<EmailAddress>();
 
 		int[] emailAddressesIndexes = StringUtil.split(
@@ -503,7 +498,7 @@ public class EnterpriseAdminUtil {
 		return emailAddresses;
 	}
 
-	public static OrderByComparator getGroupOrderByComparator(
+	public OrderByComparator getGroupOrderByComparator(
 		String orderByCol, String orderByType) {
 
 		boolean orderByAsc = false;
@@ -527,7 +522,7 @@ public class EnterpriseAdminUtil {
 		return orderByComparator;
 	}
 
-	public static Long[][] getLeftAndRightOrganizationIds(long organizationId)
+	public Long[][] getLeftAndRightOrganizationIds(long organizationId)
 		throws PortalException, SystemException {
 
 		Organization organization =
@@ -536,9 +531,7 @@ public class EnterpriseAdminUtil {
 		return getLeftAndRightOrganizationIds(organization);
 	}
 
-	public static Long[][] getLeftAndRightOrganizationIds(
-		Organization organization) {
-
+	public Long[][] getLeftAndRightOrganizationIds(Organization organization) {
 		return new Long[][] {
 			new Long[] {
 				organization.getLeftOrganizationId(),
@@ -547,7 +540,7 @@ public class EnterpriseAdminUtil {
 		};
 	}
 
-	public static Long[][] getLeftAndRightOrganizationIds(
+	public Long[][] getLeftAndRightOrganizationIds(
 		List<Organization> organizations) {
 
 		Long[][] leftAndRightOrganizationIds = new Long[organizations.size()][];
@@ -565,7 +558,7 @@ public class EnterpriseAdminUtil {
 		return leftAndRightOrganizationIds;
 	}
 
-	public static Long[] getOrganizationIds(List<Organization> organizations) {
+	public Long[] getOrganizationIds(List<Organization> organizations) {
 		if ((organizations == null) || organizations.isEmpty()) {
 			return new Long[0];
 		}
@@ -581,7 +574,7 @@ public class EnterpriseAdminUtil {
 		return organizationIds;
 	}
 
-	public static OrderByComparator getOrganizationOrderByComparator(
+	public OrderByComparator getOrganizationOrderByComparator(
 		String orderByCol, String orderByType) {
 
 		boolean orderByAsc = false;
@@ -605,7 +598,7 @@ public class EnterpriseAdminUtil {
 		return orderByComparator;
 	}
 
-	public static List<OrgLabor> getOrgLabors(ActionRequest actionRequest) {
+	public List<OrgLabor> getOrgLabors(ActionRequest actionRequest) {
 		List<OrgLabor> orgLabors = new ArrayList<OrgLabor>();
 
 		int[] orgLaborsIndexes = StringUtil.split(
@@ -676,7 +669,7 @@ public class EnterpriseAdminUtil {
 		return orgLabors;
 	}
 
-	public static OrderByComparator getPasswordPolicyOrderByComparator(
+	public OrderByComparator getPasswordPolicyOrderByComparator(
 		String orderByCol, String orderByType) {
 
 		boolean orderByAsc = false;
@@ -701,7 +694,7 @@ public class EnterpriseAdminUtil {
 		return orderByComparator;
 	}
 
-	public static List<Phone> getPhones(ActionRequest actionRequest) {
+	public List<Phone> getPhones(ActionRequest actionRequest) {
 		List<Phone> phones = new ArrayList<Phone>();
 
 		int[] phonesIndexes = StringUtil.split(
@@ -745,7 +738,7 @@ public class EnterpriseAdminUtil {
 		return phones;
 	}
 
-	public static OrderByComparator getRoleOrderByComparator(
+	public OrderByComparator getRoleOrderByComparator(
 		String orderByCol, String orderByType) {
 
 		boolean orderByAsc = false;
@@ -772,7 +765,7 @@ public class EnterpriseAdminUtil {
 		return orderByComparator;
 	}
 
-	public static OrderByComparator getUserGroupOrderByComparator(
+	public OrderByComparator getUserGroupOrderByComparator(
 		String orderByCol, String orderByType) {
 
 		boolean orderByAsc = false;
@@ -796,8 +789,7 @@ public class EnterpriseAdminUtil {
 		return orderByComparator;
 	}
 
-	public static List<UserGroupRole> getUserGroupRoles(
-			PortletRequest portletRequest)
+	public List<UserGroupRole> getUserGroupRoles(PortletRequest portletRequest)
 		throws SystemException, PortalException {
 
 		List<UserGroupRole> userGroupRoles = new UniqueList<UserGroupRole>();
@@ -838,7 +830,7 @@ public class EnterpriseAdminUtil {
 		return userGroupRoles;
 	}
 
-	public static OrderByComparator getUserOrderByComparator(
+	public OrderByComparator getUserOrderByComparator(
 		String orderByCol, String orderByType) {
 
 		boolean orderByAsc = false;
@@ -871,7 +863,7 @@ public class EnterpriseAdminUtil {
 		return orderByComparator;
 	}
 
-	public static List<Website> getWebsites(ActionRequest actionRequest) {
+	public List<Website> getWebsites(ActionRequest actionRequest) {
 		List<Website> websites = new ArrayList<Website>();
 
 		int[] websitesIndexes = StringUtil.split(
@@ -913,7 +905,7 @@ public class EnterpriseAdminUtil {
 		return websites;
 	}
 
-	public static boolean hasUpdateEmailAddress(
+	public boolean hasUpdateEmailAddress(
 			PermissionChecker permissionChecker, User user)
 		throws PortalException, SystemException {
 
@@ -945,7 +937,7 @@ public class EnterpriseAdminUtil {
 		return false;
 	}
 
-	public static boolean hasUpdateScreenName(
+	public boolean hasUpdateScreenName(
 			PermissionChecker permissionChecker, User user)
 		throws PortalException, SystemException {
 
@@ -977,7 +969,7 @@ public class EnterpriseAdminUtil {
 		return false;
 	}
 
-	public static long[] removeRequiredRoles(long userId, long[] roleIds)
+	public long[] removeRequiredRoles(long userId, long[] roleIds)
 		throws PortalException, SystemException {
 
 		User user = UserLocalServiceUtil.getUser(userId);
@@ -985,7 +977,7 @@ public class EnterpriseAdminUtil {
 		return removeRequiredRoles(user, roleIds);
 	}
 
-	public static long[] removeRequiredRoles(User user, long[] roleIds)
+	public long[] removeRequiredRoles(User user, long[] roleIds)
 		throws PortalException, SystemException {
 
 		Role role = RoleLocalServiceUtil.getRole(
@@ -996,7 +988,7 @@ public class EnterpriseAdminUtil {
 		return roleIds;
 	}
 
-	public static void updateAddresses(
+	public void updateAddresses(
 			String className, long classPK, List<Address> addresses)
 		throws PortalException, SystemException {
 
@@ -1041,7 +1033,7 @@ public class EnterpriseAdminUtil {
 		}
 	}
 
-	public static void updateEmailAddresses(
+	public void updateEmailAddresses(
 			String className, long classPK, List<EmailAddress> emailAddresses)
 		throws PortalException, SystemException {
 
@@ -1079,7 +1071,7 @@ public class EnterpriseAdminUtil {
 		}
 	}
 
-	public static void updateOrgLabors(long classPK, List<OrgLabor> orgLabors)
+	public void updateOrgLabors(long classPK, List<OrgLabor> orgLabors)
 		throws PortalException, SystemException {
 
 		Set<Long> orgLaborsIds = new HashSet<Long>();
@@ -1130,8 +1122,7 @@ public class EnterpriseAdminUtil {
 		}
 	}
 
-	public static void updatePhones(
-			String className, long classPK, List<Phone> phones)
+	public void updatePhones(String className, long classPK, List<Phone> phones)
 		throws PortalException, SystemException {
 
 		Set<Long> phoneIds = new HashSet<Long>();
@@ -1167,7 +1158,7 @@ public class EnterpriseAdminUtil {
 		}
 	}
 
-	public static void updateWebsites(
+	public void updateWebsites(
 			String className, long classPK, List<Website> websites)
 		throws PortalException, SystemException {
 

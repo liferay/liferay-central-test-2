@@ -367,6 +367,10 @@
 			<bean class="com.liferay.portal.asset.AssetRendererFactoryRegistryImpl" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.enterpriseadmin.util.EnterpriseAdmin" class="com.liferay.portlet.enterpriseadmin.util.EnterpriseAdminImpl" />
+	<bean id="com.liferay.portlet.enterpriseadmin.util.EnterpriseAdminUtil" class="com.liferay.portlet.enterpriseadmin.util.EnterpriseAdminUtil">
+		<property name="enterpriseAdmin" ref="com.liferay.portlet.enterpriseadmin.util.EnterpriseAdmin" />
+	</bean>
 	<bean id="com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil" class="com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil">
 		<property name="expandoBridgeFactory">
 			<bean class="com.liferay.portlet.expando.util.ExpandoBridgeFactoryImpl" />
