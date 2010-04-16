@@ -438,8 +438,8 @@ public class PortletURLImpl
 			throw new IllegalArgumentException();
 		}
 
-		for (int i = 0; i < values.length; i++) {
-			if (values[i] == null) {
+		for (String _value : values) {
+			if (_value == null) {
 				throw new IllegalArgumentException();
 			}
 		}
@@ -612,6 +612,60 @@ public class PortletURLImpl
 		}
 
 		writer.write(toString);
+	}
+
+	protected void addADRToken(StringBundler sb, Key key) {
+		// ADR is only needed in MAXIMIZED state.
+
+		if (_windowState != WindowState.MAXIMIZED) {
+			return;
+		}
+
+		// There are two cases we have to address.
+
+		// 1. The developer created a PortletURL with allowAdr.
+
+		boolean allowAdr = MapUtil.getBoolean(_params, "allowAdr");
+
+		// 2. The portlet is loaded with in ADR mode (ADR_USED), and so this
+		// mode needs to be propagated to every generated url on the page,
+		// otherwise the ADR context will be lost and the link will fail.
+
+		Boolean usedADR = (Boolean)_request.getAttribute(WebKeys.ADR_USED);
+
+		if (!allowAdr && (usedADR != null) && !usedADR) {
+			return;
+		}
+
+		// Check to see if the Company Key is already available.
+
+		if (key == null) {
+			try {
+				Company company = PortalUtil.getCompany(_request);
+
+				key = company.getKeyObj();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		if (key != null) {
+
+			// Include both the portletId and the plid into the hash so that it
+			// can't be spoofed via another page.
+
+			sb.append("p_adr");
+			sb.append(StringPool.EQUAL);
+			sb.append(processValue(
+				key, _portletId + StringPool.COMMA + _plid + StringPool.COMMA +
+					Boolean.TRUE.toString()));
+			sb.append(StringPool.AMPERSAND);
+		}
+
+		// Remove the allowAdr parameter since it's more of a flag.
+
+		_params.remove("allowAdr");
 	}
 
 	protected void addAuthToken(StringBundler sb, Key key) {
@@ -833,6 +887,8 @@ public class PortletURLImpl
 				sb.append(StringPool.AMPERSAND);
 			}
 		}
+
+		addADRToken(sb, key);
 
 		if (_doAsUserId > 0) {
 			try {
