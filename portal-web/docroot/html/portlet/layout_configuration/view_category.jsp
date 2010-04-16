@@ -92,7 +92,7 @@ if (!categories.isEmpty() || !portlets.isEmpty()) {
 
 			while (itr.hasNext()) {
 				request.setAttribute(WebKeys.PORTLET_CATEGORY, itr.next());
-				request.setAttribute(WebKeys.PORTLET_CATEGORY_INDEX, portletCategoryIndex);
+				request.setAttribute(WebKeys.PORTLET_CATEGORY_INDEX, String.valueOf(portletCategoryIndex));
 				request.setAttribute(WebKeys.PORTLET_CATEGORY_PATH, newCategoryPath);
 			%>
 
