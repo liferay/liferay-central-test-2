@@ -659,7 +659,7 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 
 			MaintenanceUtil.appendStatus(
 				"Please set " + PropsKeys.PERMISSIONS_USER_CHECK_ALGORITHM +
-					" in your portal-ext.properties to 6 and restart server.");
+					" in your portal-ext.properties to 6 and restart server");
 		}
 		finally {
 			ShutdownUtil.shutdown(0);
