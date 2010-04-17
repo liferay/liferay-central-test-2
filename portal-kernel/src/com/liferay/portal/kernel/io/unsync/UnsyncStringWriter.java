@@ -52,6 +52,10 @@ public class UnsyncStringWriter extends Writer {
 		}
 	}
 
+	public UnsyncStringWriter(int initialCapacity) {
+		this(true, initialCapacity);
+	}
+
 	public UnsyncStringWriter append(char c) {
 		write(c);
 
