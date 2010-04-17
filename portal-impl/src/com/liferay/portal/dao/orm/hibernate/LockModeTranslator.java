@@ -25,16 +25,31 @@ public class LockModeTranslator {
 
 	public static org.hibernate.LockMode translate(LockMode lockMode) {
 		if (lockMode == LockMode.FORCE) {
-			return org.hibernate.LockMode.FORCE;
+			return org.hibernate.LockMode.PESSIMISTIC_FORCE_INCREMENT;
 		}
 		else if (lockMode == LockMode.NONE) {
 			return org.hibernate.LockMode.NONE;
+		}
+		else if (lockMode == LockMode.OPTIMISTIC) {
+			return org.hibernate.LockMode.OPTIMISTIC;
+		}
+		else if (lockMode == LockMode.OPTIMISTIC_FORCE_INCREMENT) {
+			return org.hibernate.LockMode.OPTIMISTIC_FORCE_INCREMENT;
+		}
+		else if (lockMode == LockMode.PESSIMISTIC_FORCE_INCREMENT) {
+			return org.hibernate.LockMode.PESSIMISTIC_FORCE_INCREMENT;
+		}
+		else if (lockMode == LockMode.PESSIMISTIC_READ) {
+			return org.hibernate.LockMode.PESSIMISTIC_READ;
+		}
+		else if (lockMode == LockMode.PESSIMISTIC_WRITE) {
+			return org.hibernate.LockMode.PESSIMISTIC_WRITE;
 		}
 		else if (lockMode == LockMode.READ) {
 			return org.hibernate.LockMode.READ;
 		}
 		else if (lockMode == LockMode.UPGRADE) {
-			return org.hibernate.LockMode.UPGRADE;
+			return org.hibernate.LockMode.PESSIMISTIC_WRITE;
 		}
 		else if (lockMode == LockMode.UPGRADE_NOWAIT) {
 			return org.hibernate.LockMode.UPGRADE_NOWAIT;

@@ -22,9 +22,6 @@ import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.UnmodifiableList;
-import com.liferay.portal.spring.hibernate.SessionInvocationHandler;
-
-import java.lang.reflect.Proxy;
 
 import java.util.List;
 
@@ -61,12 +58,6 @@ public class DynamicQueryImpl implements DynamicQuery {
 	public void compile(Session session) {
 		org.hibernate.Session hibernateSession =
 			(org.hibernate.Session)session.getWrappedSession();
-
-		SessionInvocationHandler sessionInvocationHandler =
-			(SessionInvocationHandler)Proxy.getInvocationHandler(
-				hibernateSession);
-
-		hibernateSession = sessionInvocationHandler.getSession();
 
 		_criteria = _detachedCriteria.getExecutableCriteria(hibernateSession);
 

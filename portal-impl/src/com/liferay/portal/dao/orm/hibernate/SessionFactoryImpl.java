@@ -21,7 +21,6 @@ import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.SessionFactory;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.spring.hibernate.SessionInvocationHandler;
 import com.liferay.portal.util.PropsValues;
 
 import java.lang.reflect.Proxy;
@@ -66,12 +65,8 @@ public class SessionFactoryImpl implements SessionFactory {
 		}
 
 		if (_log.isDebugEnabled()) {
-			SessionInvocationHandler sessionInvocationHandler =
-				(SessionInvocationHandler)Proxy.getInvocationHandler(session);
-
 			org.hibernate.impl.SessionImpl sessionImpl =
-				(org.hibernate.impl.SessionImpl)
-					sessionInvocationHandler.getSession();
+				(org.hibernate.impl.SessionImpl)session;
 
 			_log.debug(
 				"Session is using connection release mode " +
