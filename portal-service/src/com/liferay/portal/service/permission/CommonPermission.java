@@ -26,13 +26,13 @@ import com.liferay.portal.security.permission.PermissionChecker;
 public interface CommonPermission {
 
 	public void check(
-			PermissionChecker permissionChecker, long classNameId,
-			long classPK, String actionId)
+			PermissionChecker permissionChecker, long classNameId, long classPK,
+			String actionId)
 		throws PortalException, SystemException;
 
 	public void check(
-			PermissionChecker permissionChecker, String className,
-			long classPK, String actionId)
+			PermissionChecker permissionChecker, String className, long classPK,
+			String actionId)
 		throws PortalException, SystemException;
 
 }

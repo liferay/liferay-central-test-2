@@ -26,8 +26,8 @@ import com.liferay.portal.security.permission.PermissionChecker;
 public class CommonPermissionUtil {
 
 	public static void check(
-			PermissionChecker permissionChecker, long classNameId,
-			long classPK, String actionId)
+			PermissionChecker permissionChecker, long classNameId, long classPK,
+			String actionId)
 		throws PortalException, SystemException {
 
 		getCommonPermission().check(
@@ -35,8 +35,8 @@ public class CommonPermissionUtil {
 	}
 
 	public static void check(
-			PermissionChecker permissionChecker, String className,
-			long classPK, String actionId)
+			PermissionChecker permissionChecker, String className, long classPK,
+			String actionId)
 		throws PortalException, SystemException {
 
 		getCommonPermission().check(

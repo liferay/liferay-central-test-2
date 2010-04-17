@@ -35,8 +35,8 @@ import com.liferay.portal.util.PortalUtil;
 public class CommonPermissionImpl implements CommonPermission {
 
 	public void check(
-			PermissionChecker permissionChecker, long classNameId,
-			long classPK, String actionId)
+			PermissionChecker permissionChecker, long classNameId, long classPK,
+			String actionId)
 		throws PortalException, SystemException {
 
 		String className = PortalUtil.getClassName(classNameId);
@@ -45,8 +45,8 @@ public class CommonPermissionImpl implements CommonPermission {
 	}
 
 	public void check(
-			PermissionChecker permissionChecker, String className,
-			long classPK, String actionId)
+			PermissionChecker permissionChecker, String className, long classPK,
+			String actionId)
 		throws PortalException, SystemException {
 
 		if (className.equals(Account.class.getName())) {
