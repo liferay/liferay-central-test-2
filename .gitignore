@@ -1,8 +1,6 @@
-# all file extensions
 *~
 *.bak
 
-# /
 /*.iml
 /*.ipr
 /*.iws
@@ -19,29 +17,23 @@
 /test.*.properties
 /WEB-INF
 
-# /benchmarks/
 /benchmarks/*.csv
 /benchmarks/*.sql
 /benchmarks/lib
 /benchmarks/log
 
-# /classes/
 /classes/Test.class
 
-# /lib/development/
 /lib/development/ojdbc14.jar
 
-# /nbproject/
 /nbproject/private
 
-# /portal-client/
 /portal-client/*.iml
 /portal-client/*.ipr
 /portal-client/*.iws
 /portal-client/classes
 /portal-client/src
 
-# /portal-impl/
 /portal-impl/*.iml
 /portal-impl/*.ipr
 /portal-impl/*.iws
@@ -52,18 +44,14 @@
 /portal-impl/test-classes
 /portal-impl/test-results
 
-# /portal-impl/src/
 /portal-impl/src/portal-ext.properties
 /portal-impl/src/system-ext.properties
 
-# /portal-impl/src/META-INF/
 /portal-impl/src/META-INF/MANIFEST.MF.JOnAS
 /portal-impl/src/META-INF/portal-log4j-ext.xml
 
-# /portal-impl/test/
 /portal-impl/test/test-portal-impl-ext.properties
 
-# /portal-kernel/
 /portal-kernel/*.iml
 /portal-kernel/*.ipr
 /portal-kernel/*.iws
@@ -72,14 +60,12 @@
 /portal-kernel/test-classes
 /portal-kernel/test-results
 
-# /portal-service/
 /portal-service/*.iml
 /portal-service/*.ipr
 /portal-service/*.iws
 /portal-service/classes
 /portal-service/portal-service.jar
 
-# /portal-web/
 /portal-web/*.iml
 /portal-web/*.ipr
 /portal-web/*.iws
@@ -91,11 +77,9 @@
 /portal-web/test-output
 /portal-web/test-results
 
-# /portal-web/docroot/
 /portal-web/docroot/dtd
 /portal-web/docroot/wsrp
 
-# /portal-web/docroot/WEB-INF/
 /portal-web/docroot/WEB-INF/classes
 /portal-web/docroot/WEB-INF/lib
 /portal-web/docroot/WEB-INF/liferay-portlet-ext.xml
@@ -103,49 +87,37 @@
 /portal-web/docroot/WEB-INF/src
 /portal-web/docroot/WEB-INF/tmp
 
-# /portal-web/docroot/WEB-INF/tld/
 /portal-web/docroot/WEB-INF/tld/liferay-*.tld
 
-# /portal-web/docroot/html/
 /portal-web/docroot/html/VAADIN
 
-# /portal-web/docroot/html/icons/
 /portal-web/docroot/html/icons/.sprite*
 
-# /portal-web/docroot/html/js/
 /portal-web/docroot/html/js/aui
 
-# /portal-web/docroot/html/js/editor/
 /portal-web/docroot/html/js/editor/ckeditor
 /portal-web/docroot/html/js/editor/codepress
 /portal-web/docroot/html/js/editor/fckeditor
 /portal-web/docroot/html/js/editor/tiny_mce
 
-# /portal-web/docroot/html/portal/
 /portal-web/docroot/html/portal/aui
 
-# /portal-web/docroot/html/themes/_unstyled/images/
 /portal-web/docroot/html/themes/_unstyled/images/aui
 
-# /portal-web/docroot/html/themes/classic/
 /portal-web/docroot/html/themes/classic/css
 /portal-web/docroot/html/themes/classic/images
 /portal-web/docroot/html/themes/classic/javascript
 /portal-web/docroot/html/themes/classic/templates
 
-# /portal-web/docroot/html/themes/classic/_diffs/css/
 /portal-web/docroot/html/themes/classic/_diffs/css/alloy.css
 
-# /portal-web/docroot/html/themes/control_panel/
 /portal-web/docroot/html/themes/control_panel/css
 /portal-web/docroot/html/themes/control_panel/images
 /portal-web/docroot/html/themes/control_panel/javascript
 /portal-web/docroot/html/themes/control_panel/templates
 
-# /portal-web/test/
 /portal-web/test/test-portal-web-ext.properties
 
-# /sql/
 /sql/create
 /sql/create-sharded
 /sql/create-minimal
@@ -169,44 +141,34 @@
 /sql/update-*
 /sql/velocity.log*
 
-# /support-maven/
 /support-maven/target
 
-# /support-maven/archetypes/liferay-portlet-archetype/
 /support-maven/archetypes/liferay-portlet-archetype/target
 
-# /support-maven/plugins/liferay-maven-plugin/
 /support-maven/plugins/liferay-maven-plugin/target
 
-# /support-tomcat/
 /support-tomcat/*.iml
 /support-tomcat/*.ipr
 /support-tomcat/*.iws
 /support-tomcat/classes
 /support-tomcat/support-tomcat.jar
 
-# /tools/
 /tools/tck
 
-# /tools/zip_tmpl/
 /tools/zip_tmpl/license
 
-# /tunnel-web/
 /tunnel-web/tunnel-web.war
 
-# /tunnel-web/docroot/WEB-INF/
 /tunnel-web/docroot/WEB-INF/classes
 /tunnel-web/docroot/WEB-INF/lib
 /tunnel-web/docroot/WEB-INF/remoting-servlet-ext.xml
 
-# /util-bridges/
 /util-bridges/*.iml
 /util-bridges/*.ipr
 /util-bridges/*.iws
 /util-bridges/classes
 /util-bridges/util-bridges.jar
 
-# /util-java/
 /util-java/*.iml
 /util-java/*.ipr
 /util-java/*.iws
@@ -215,7 +177,6 @@
 /util-java/test-results
 /util-java/util-java.jar
 
-# /util-taglib/
 /util-taglib/*.iml
 /util-taglib/*.ipr
 /util-taglib/*.iws
