@@ -30,6 +30,10 @@ import java.io.Writer;
  */
 public class UnsyncStringWriter extends Writer {
 
+	public UnsyncStringWriter() {
+		this(true);
+	}
+
 	public UnsyncStringWriter(boolean useStringBundler) {
 		if (useStringBundler) {
 			stringBundler = new StringBundler();
