@@ -17,7 +17,8 @@ package com.liferay.portal.servlet.filters.etag;
 import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
-import com.liferay.util.servlet.ServletResponseUtil;
+import com.liferay.util.servlet.filters.CacheResponseData;
+import com.liferay.util.servlet.filters.CacheResponseUtil;
 
 import javax.servlet.FilterChain;
 import javax.servlet.http.HttpServletRequest;
@@ -29,7 +30,6 @@ import javax.servlet.http.HttpServletResponse;
  * @author Eduardo Lundgren
  * @author Brian Wing Shun Chan
  * @author Raymond Augé
- * @author Shuyang Zhou
  */
 public class ETagFilter extends BasePortalFilter {
 
@@ -47,8 +47,14 @@ public class ETagFilter extends BasePortalFilter {
 			processFilter(
 				ETagFilter.class, request, stringResponse, filterChain);
 
-			if (!ETagUtil.processETag(request, response, stringResponse)) {
-				ServletResponseUtil.write(response, stringResponse);
+			CacheResponseData cacheResponseData = new CacheResponseData(
+				stringResponse);
+
+			if (!ETagUtil.processETag(
+					request, response, cacheResponseData.getContent(),
+					cacheResponseData.getContentLength())) {
+
+				CacheResponseUtil.write(response, cacheResponseData);
 			}
 		}
 		else {

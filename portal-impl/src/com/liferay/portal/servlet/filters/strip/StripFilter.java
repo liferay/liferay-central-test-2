@@ -19,22 +19,18 @@ import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
-import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.KMPSearch;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
+import com.liferay.portal.servlet.filters.etag.ETagUtil;
 import com.liferay.portal.util.MinifierUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.util.servlet.ServletResponseUtil;
-
-import java.io.IOException;
-import java.io.OutputStream;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -155,8 +151,8 @@ public class StripFilter extends BasePortalFilter {
 	}
 
 	protected int processCSS(
-			byte[] oldByteArray, OutputStream newBytes, int currentIndex)
-		throws IOException {
+		byte[] oldByteArray, UnsyncByteArrayOutputStream newBytes,
+		int currentIndex) {
 
 		int beginIndex = currentIndex + _MARKER_STYLE_OPEN.length + 1;
 
@@ -236,44 +232,35 @@ public class StripFilter extends BasePortalFilter {
 
 			request.setAttribute(SKIP_FILTER, Boolean.TRUE);
 
-			StringServletResponse stringResponse = new StringServletResponse(
-				response);
+			StripResponse stripResponse = new StripResponse(response);
 
 			processFilter(
-				StripFilter.class, request, stringResponse, filterChain);
+				StripFilter.class, request, stripResponse, filterChain);
 
 			String contentType = GetterUtil.getString(
-				stringResponse.getContentType()).toLowerCase();
+				stripResponse.getContentType()).toLowerCase();
 
-			if (_log.isDebugEnabled()) {
-				_log.debug("Stripping content of type " + contentType);
-			}
+			byte[] oldByteArray = stripResponse.getData();
 
-			response.setContentType(contentType);
+			if ((oldByteArray != null) && (oldByteArray.length > 0)) {
+				byte[] newByteArray = null;
 
-			if (contentType.indexOf("text/") != -1) {
-				byte[] oldByteArray = null;
-				int length = 0;
+				if (_log.isDebugEnabled()) {
+					_log.debug("Stripping content of type " + contentType);
+				}
 
-				if (stringResponse.isCalledGetOutputStream()) {
-					UnsyncByteArrayOutputStream unsyncByteArrayOutputStream =
-						stringResponse.getUnsyncByteArrayOutputStream();
-
-					oldByteArray =
-						unsyncByteArrayOutputStream.unsafeGetByteArray();
-					length = unsyncByteArrayOutputStream.size();
+				if (contentType.indexOf("text/") != -1) {
+					newByteArray = strip(oldByteArray);
 				}
 				else {
-					String content = stringResponse.getString();
-
-					oldByteArray = content.getBytes(StringPool.UTF8);
-					length = oldByteArray.length;
+					newByteArray = oldByteArray;
 				}
 
-				strip(oldByteArray, length, response.getOutputStream());
-			}
-			else {
-				ServletResponseUtil.write(response, stringResponse);
+				if (!ETagUtil.processETag(request, response, newByteArray)) {
+					response.setContentType(contentType);
+
+					ServletResponseUtil.write(response, newByteArray);
+				}
 			}
 		}
 		else {
@@ -288,9 +275,8 @@ public class StripFilter extends BasePortalFilter {
 	}
 
 	protected int processJavaScript(
-			byte[] oldByteArray, OutputStream newBytes, int currentIndex,
-			byte[] openTag)
-		throws IOException {
+		byte[] oldByteArray, UnsyncByteArrayOutputStream newBytes,
+		int currentIndex, byte[] openTag) {
 
 		int beginIndex = currentIndex + openTag.length + 1;
 
@@ -358,8 +344,8 @@ public class StripFilter extends BasePortalFilter {
 	}
 
 	protected int processPre(
-			byte[] oldByteArray, OutputStream newBytes, int currentIndex)
-		throws IOException {
+		byte[] oldByteArray, UnsyncByteArrayOutputStream newBytes,
+		int currentIndex) {
 
 		int beginIndex = currentIndex + _MARKER_PRE_OPEN.length + 1;
 
@@ -384,8 +370,8 @@ public class StripFilter extends BasePortalFilter {
 	}
 
 	protected int processTextArea(
-			byte[] oldByteArray, OutputStream newBytes, int currentIndex)
-		throws IOException {
+		byte[] oldByteArray, UnsyncByteArrayOutputStream newBytes,
+		int currentIndex) {
 
 		int beginIndex = currentIndex + _MARKER_TEXTAREA_OPEN.length + 1;
 
@@ -409,54 +395,53 @@ public class StripFilter extends BasePortalFilter {
 		return newBeginIndex;
 	}
 
-	protected void strip(
-			byte[] oldByteArray, int length, OutputStream outputStream)
-		throws IOException {
+	protected byte[] strip(byte[] oldByteArray) {
+		UnsyncByteArrayOutputStream newBytes = new UnsyncByteArrayOutputStream(
+			(int)(oldByteArray.length * _COMPRESSION_RATE));
 
 		int count = countContinuousWhiteSpace(oldByteArray, 0);
 
-		for (int i = count; i < length; i++) {
+		for (int i = count; i < oldByteArray.length; i++) {
 			byte b = oldByteArray[i];
 
 			if (b == CharPool.LESS_THAN) {
 				if (hasMarker(oldByteArray, i, _MARKER_PRE_OPEN)) {
-					i = processPre(oldByteArray, outputStream, i) - 1;
+					i = processPre(oldByteArray, newBytes, i) - 1;
 
 					continue;
 				}
 				else if (hasMarker(oldByteArray, i, _MARKER_TEXTAREA_OPEN)) {
-					i = processTextArea(oldByteArray, outputStream, i) - 1;
+					i = processTextArea(oldByteArray, newBytes, i) - 1;
 
 					continue;
 				}
 				else if (hasMarker(oldByteArray, i, _MARKER_JS_OPEN)) {
 					i = processJavaScript(
-							oldByteArray, outputStream, i, _MARKER_JS_OPEN) - 1;
+							oldByteArray, newBytes, i, _MARKER_JS_OPEN) - 1;
 
 					continue;
 				}
 				else if (hasMarker(oldByteArray, i, _MARKER_SCRIPT_OPEN)) {
 					i = processJavaScript(
-							oldByteArray, outputStream, i,
-							_MARKER_SCRIPT_OPEN) - 1;
+							oldByteArray, newBytes, i, _MARKER_SCRIPT_OPEN) - 1;
 
 					continue;
 				}
 				else if (hasMarker(oldByteArray, i, _MARKER_STYLE_OPEN)) {
-					i = processCSS(oldByteArray, outputStream, i) - 1;
+					i = processCSS(oldByteArray, newBytes, i) - 1;
 
 					continue;
 				}
 			}
 			else if (b == CharPool.GREATER_THAN) {
-				outputStream.write(b);
+				newBytes.write(b);
 
 				int spaceCount = countContinuousWhiteSpace(oldByteArray, i + 1);
 
 				if (spaceCount > 0) {
 					i = i + spaceCount;
 
-					outputStream.write(CharPool.SPACE);
+					newBytes.write(CharPool.SPACE);
 				}
 
 				continue;
@@ -465,21 +450,23 @@ public class StripFilter extends BasePortalFilter {
 			int spaceCount = countContinuousWhiteSpace(oldByteArray, i);
 
 			if (spaceCount > 0) {
-				outputStream.write(CharPool.SPACE);
+				newBytes.write(CharPool.SPACE);
 
 				i = i + spaceCount - 1;
 			}
 			else {
-				outputStream.write(b);
+				newBytes.write(b);
 			}
 		}
 
-		outputStream.flush();
+		return newBytes.toByteArray();
 	}
 
 	private static final byte[] _CDATA_CLOSE = "/*]]>*/".getBytes();
 
 	private static final byte[] _CDATA_OPEN = "/*<![CDATA[*/".getBytes();
+
+	private static final double _COMPRESSION_RATE = 0.7;
 
 	private static final byte[] _MARKER_JS_OPEN =
 		"script type=\"text/javascript\">".getBytes();
