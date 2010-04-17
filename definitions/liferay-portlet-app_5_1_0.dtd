@@ -486,6 +486,10 @@ value is set to true, the default portlet resources and permissions are added to
 the page. The user can then view the portlet. Most portlets are harmless and can
 benefit from this flexibility. However, to prevent security loop holes, the
 default value is false.
+
+The properties "portlet.add.default.resource.check.enabled" and
+"portlet.add.default.resource.check.whitelist" in portal.properties allow
+security checks to be configured around this behavior.
 -->
 <!ELEMENT add-default-resource (#PCDATA)>
 

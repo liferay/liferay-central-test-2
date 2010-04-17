@@ -29,4 +29,7 @@ public interface AuthToken {
 
 	public String getToken(HttpServletRequest request);
 
+	public String getToken(
+		HttpServletRequest request, long plid, String portletId);
+
 }

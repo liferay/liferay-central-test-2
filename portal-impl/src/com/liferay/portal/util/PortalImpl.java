@@ -58,6 +58,7 @@ import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.ReleaseInfo;
+import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringComparator;
 import com.liferay.portal.kernel.util.StringPool;
@@ -407,6 +408,11 @@ public class PortalImpl implements Portal {
 
 		Arrays.sort(_sortedSystemOrganizationRoles, new StringComparator());
 
+		// Portlet add default resource check white list
+
+		_portletAddDefaultResourceCheckWhitelist = SetUtil.fromArray(
+			PropsValues.PORTLET_ADD_DEFAULT_RESOURCE_CHECK_WHITELIST);
+
 		// Reserved parameter names
 
 		_reservedParams = new HashSet<String>();
@@ -414,6 +420,7 @@ public class PortalImpl implements Portal {
 		_reservedParams.add("p_auth");
 		_reservedParams.add("p_l_id");
 		_reservedParams.add("p_l_reset");
+		_reservedParams.add("p_p_auth");
 		_reservedParams.add("p_p_id");
 		_reservedParams.add("p_p_lifecycle");
 		_reservedParams.add("p_p_url_type");
@@ -2180,6 +2187,10 @@ public class PortalImpl implements Portal {
 
 	public String getPortalWebDir() {
 		return _portalWebDir;
+	}
+
+	public Set<String> getPortletAddDefaultResourceCheckWhitelist() {
+		return _portletAddDefaultResourceCheckWhitelist;
 	}
 
 	public List<KeyValuePair> getPortletBreadcrumbList(
@@ -4219,6 +4230,7 @@ public class PortalImpl implements Portal {
 	private volatile int _portalPort = -1;
 	private Lock _portalPortLock = new ReentrantLock();
 	private String _portalWebDir;
+	private Set<String> _portletAddDefaultResourceCheckWhitelist;
 	private Set<String> _reservedParams;
 	private String[] _sortedSystemCommunityRoles;
 	private String[] _sortedSystemGroups;

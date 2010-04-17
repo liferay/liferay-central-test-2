@@ -19,10 +19,13 @@ import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.PwdGenerator;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
@@ -48,10 +51,8 @@ public class SessionAuthToken implements AuthToken {
 		String requestAuthenticationToken = ParamUtil.getString(
 			request, "p_auth");
 
-		HttpSession session = request.getSession();
-
-		String sessionAuthenticationToken = (String)session.getAttribute(
-			WebKeys.AUTHENTICATION_TOKEN);
+		String sessionAuthenticationToken = getSessionAuthenticationToken(
+			request, _PORTAL);
 
 		if (!requestAuthenticationToken.equals(sessionAuthenticationToken)) {
 			throw new PrincipalException("Invalid authentication token");
@@ -59,19 +60,51 @@ public class SessionAuthToken implements AuthToken {
 	}
 
 	public String getToken(HttpServletRequest request) {
-		HttpSession session = request.getSession();
+		return getSessionAuthenticationToken(request, _PORTAL);
+	}
 
-		String sessionAuthenticationToken = (String)session.getAttribute(
-			WebKeys.AUTHENTICATION_TOKEN);
+	public String getToken(
+		HttpServletRequest request, long plid, String portletId) {
+
+		return getSessionAuthenticationToken(
+			request, PortletPermissionUtil.getPrimaryKey(plid, portletId));
+	}
+
+	protected String getSessionAuthenticationToken(
+		HttpServletRequest request, String key) {
+
+		Map<String, String> sessionAuthenticationTokensMap =
+			getSessionAuthenticationTokensMap(request);
+
+		String sessionAuthenticationToken = sessionAuthenticationTokensMap.get(
+			key);
 
 		if (Validator.isNull(sessionAuthenticationToken)) {
 			sessionAuthenticationToken = PwdGenerator.getPassword();
 
-			session.setAttribute(
-				WebKeys.AUTHENTICATION_TOKEN, sessionAuthenticationToken);
+			sessionAuthenticationTokensMap.put(key, sessionAuthenticationToken);
 		}
 
 		return sessionAuthenticationToken;
+	}
+
+	protected Map<String, String> getSessionAuthenticationTokensMap(
+		HttpServletRequest request) {
+
+		HttpSession session = request.getSession();
+
+		Map<String, String> sessionAuthenticationTokensMap =
+			(Map<String, String>)session.getAttribute(
+				WebKeys.AUTHENTICATION_TOKEN);
+
+		if (sessionAuthenticationTokensMap == null) {
+			sessionAuthenticationTokensMap = new HashMap<String, String>();
+
+			session.setAttribute(
+				WebKeys.AUTHENTICATION_TOKEN, sessionAuthenticationTokensMap);
+		}
+
+		return sessionAuthenticationTokensMap;
 	}
 
 	protected boolean isIgnoreAction(HttpServletRequest request) {
@@ -88,6 +121,8 @@ public class SessionAuthToken implements AuthToken {
 	protected boolean isIgnoreAction(String strutsAction) {
 		return _ignoreActions.contains(strutsAction);
 	}
+
+	private static final String _PORTAL = "PORTAL";
 
 	private Set<String> _ignoreActions;
 

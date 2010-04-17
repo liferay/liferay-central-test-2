@@ -1404,6 +1404,14 @@ public class PropsValues {
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.PORTAL_SECURITY_MANAGER_ENABLE));
 
+	public static final boolean PORTLET_ADD_DEFAULT_RESOURCE_CHECK_ENABLED =
+		GetterUtil.getBoolean(PropsUtil.get(PropsKeys.
+			PORTLET_ADD_DEFAULT_RESOURCE_CHECK_ENABLED));
+
+	public static final String[] PORTLET_ADD_DEFAULT_RESOURCE_CHECK_WHITELIST =
+		PropsUtil.getArray(
+			PropsKeys.PORTLET_ADD_DEFAULT_RESOURCE_CHECK_WHITELIST);
+
 	public static final boolean PORTLET_CSS_ENABLED = GetterUtil.getBoolean(
 		PropsUtil.get(PropsKeys.PORTLET_CSS_ENABLED));
 

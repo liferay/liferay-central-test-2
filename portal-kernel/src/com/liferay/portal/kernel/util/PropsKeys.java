@@ -137,12 +137,12 @@ public interface PropsKeys {
 
 	public static final String AUTO_DEPLOY_DEST_DIR = "auto.deploy.dest.dir";
 
-    public static final String AUTO_DEPLOY_ENABLED = "auto.deploy.enabled";
+	public static final String AUTO_DEPLOY_ENABLED = "auto.deploy.enabled";
 
 	public static final String AUTO_DEPLOY_INTERVAL = "auto.deploy.interval";
-    
-	public static final String AUTO_DEPLOY_JBOSS_PREFIX = "auto.deploy.jboss.prefix";
-    
+
+    public static final String AUTO_DEPLOY_JBOSS_PREFIX = "auto.deploy.jboss.prefix";
+
 	public static final String AUTO_DEPLOY_LISTENERS = "auto.deploy.listeners";
 
 	public static final String AUTO_DEPLOY_TOMCAT_CONF_DIR = "auto.deploy.tomcat.conf.dir";
@@ -1226,6 +1226,10 @@ public interface PropsKeys {
 	public static final String PORTAL_JAAS_STRICT_PASSWORD = "portal.jaas.strict.password";
 
 	public static final String PORTAL_SECURITY_MANAGER_ENABLE = "portal.security.manager.enable";
+
+	public static final String PORTLET_ADD_DEFAULT_RESOURCE_CHECK_ENABLED = "portlet.add.default.resource.check.enabled";
+
+	public static final String PORTLET_ADD_DEFAULT_RESOURCE_CHECK_WHITELIST = "portlet.add.default.resource.check.whitelist";
 
 	public static final String PORTLET_CSS_ENABLED = "portlet.css.enabled";
 

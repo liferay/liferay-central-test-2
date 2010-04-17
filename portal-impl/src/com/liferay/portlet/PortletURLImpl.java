@@ -614,7 +614,7 @@ public class PortletURLImpl
 		writer.write(toString);
 	}
 
-	protected void addAuthToken(StringBundler sb, Key key) {
+	protected void addPortalAuthToken(StringBundler sb, Key key) {
 		if (!PropsValues.AUTH_TOKEN_CHECK_ENABLED ||
 			!_lifecycle.equals(PortletRequest.ACTION_PHASE)) {
 
@@ -624,6 +624,41 @@ public class PortletURLImpl
 		sb.append("p_auth");
 		sb.append(StringPool.EQUAL);
 		sb.append(processValue(key, AuthTokenUtil.getToken(_request)));
+		sb.append(StringPool.AMPERSAND);
+	}
+
+	protected void addPortletAuthToken(StringBundler sb, Key key) {
+		if (!PropsValues.PORTLET_ADD_DEFAULT_RESOURCE_CHECK_ENABLED) {
+			return;
+		}
+
+		String ppauth = ParamUtil.getString(_request, "p_p_auth");
+
+		if (Validator.isNotNull(ppauth)) {
+			sb.append("p_p_auth");
+			sb.append(StringPool.EQUAL);
+			sb.append(processValue(key, ppauth));
+			sb.append(StringPool.AMPERSAND);
+
+			return;
+		}
+
+		Portlet portlet = (Portlet)_request.getAttribute(
+			WebKeys.RENDER_PORTLET);
+
+		if (portlet == null) {
+			return;
+		}
+
+		if (portlet.getPortletId().equals(_portletId)) {
+			return;
+		}
+
+		sb.append("p_p_auth");
+		sb.append(StringPool.EQUAL);
+		sb.append(
+			processValue(
+				key, AuthTokenUtil.getToken(_request, _plid, _portletId)));
 		sb.append(StringPool.AMPERSAND);
 	}
 
@@ -680,7 +715,7 @@ public class PortletURLImpl
 			sb.append(themeDisplay.getPathMain());
 			sb.append("/portal/layout?");
 
-			addAuthToken(sb, key);
+			addPortalAuthToken(sb, key);
 
 			sb.append("p_l_id");
 			sb.append(StringPool.EQUAL);
@@ -744,8 +779,10 @@ public class PortletURLImpl
 
 			sb.append(StringPool.QUESTION);
 
-			addAuthToken(sb, key);
+			addPortalAuthToken(sb, key);
 		}
+
+		addPortletAuthToken(sb, key);
 
 		if (!isParameterIncludedInPath("p_p_id")) {
 			sb.append("p_p_id");

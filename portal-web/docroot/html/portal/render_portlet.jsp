@@ -33,6 +33,28 @@ Boolean renderPortletResource = (Boolean)request.getAttribute(WebKeys.RENDER_POR
 
 boolean runtimePortlet = (renderPortletResource != null) && renderPortletResource.booleanValue();
 
+boolean allowAddDefaultResource = false;
+
+if (PropsValues.PORTLET_ADD_DEFAULT_RESOURCE_CHECK_ENABLED) {
+	if (PortalUtil.getPortletAddDefaultResourceCheckWhitelist().contains(portletId)) {
+		allowAddDefaultResource = true;
+	}
+	else {
+		String requestPortletAuthenticationToken = ParamUtil.getString(request, "p_p_auth");
+
+		if (Validator.isNotNull(requestPortletAuthenticationToken)) {
+			String actualPortletAuthenticationToken = AuthTokenUtil.getToken(request, plid, portletId);
+
+			if (requestPortletAuthenticationToken.equals(actualPortletAuthenticationToken)) {
+				allowAddDefaultResource = true;
+			}
+		}
+	}
+}
+else {
+	allowAddDefaultResource = true;
+}
+
 boolean denyAccess = false;
 
 try {
@@ -43,6 +65,10 @@ try {
 	}
 	else if (!portlet.isUndeployedPortlet()) {
 		ResourceLocalServiceUtil.getResource(company.getCompanyId(), rootPortletId, ResourceConstants.SCOPE_INDIVIDUAL, portletPrimaryKey);
+	}
+
+	if (portlet.isAddDefaultResource() && !allowAddDefaultResource && !layoutTypePortlet.hasPortletId(portletId)) {
+		denyAccess = true;
 	}
 }
 catch (NoSuchResourceException nsre) {
@@ -60,7 +86,7 @@ catch (NoSuchResourceException nsre) {
 	else if (layoutTypePortlet.hasPortletId(portletId)) {
 		addDefaultResource = true;
 	}
-	else if (portlet.isAddDefaultResource()) {
+	else if (portlet.isAddDefaultResource() && allowAddDefaultResource) {
 		addDefaultResource = true;
 	}
 	else if (themeDisplay.isSignedIn()) {
