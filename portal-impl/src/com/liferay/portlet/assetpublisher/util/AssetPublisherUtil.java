@@ -171,7 +171,7 @@ public class AssetPublisherUtil {
 	public static void removeRecentFolderId(
 		PortletRequest portletRequest, String className, long classPK) {
 
-		if (classPK == getRecentFolderId(portletRequest, className)) {
+		if (getRecentFolderId(portletRequest, className) == classPK) {
 			_getRecentFolderIds(portletRequest).remove(className);
 		}
 	}
