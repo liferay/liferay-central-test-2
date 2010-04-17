@@ -114,7 +114,7 @@ public class StringServletResponse extends HeaderCacheServletResponse {
 		}
 
 		if (_printWriter == null) {
-			_unsyncStringWriter = new UnsyncStringWriter(true);
+			_unsyncStringWriter = new UnsyncStringWriter();
 			_printWriter = new PrintWriter(_unsyncStringWriter);
 		}
 

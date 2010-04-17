@@ -42,7 +42,7 @@ public class MinifierUtil {
 	}
 
 	private String _minifyCss(String content) {
-		UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter(true);
+		UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter();
 
 		try {
 			CssCompressor cssCompressor = new CssCompressor(
@@ -60,7 +60,7 @@ public class MinifierUtil {
 	}
 
 	private String _minifyJavaScript(String content) {
-		UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter(true);
+		UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter();
 
 		try {
 			JavaScriptCompressor javaScriptCompressor =

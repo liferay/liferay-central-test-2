@@ -62,7 +62,7 @@ public class VelocityTemplateParser extends BaseTemplateParser {
 			String viewMode, String languageId,	String xml, String script)
 		throws Exception {
 
-		UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter(true);
+		UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter();
 
 		boolean load = false;
 

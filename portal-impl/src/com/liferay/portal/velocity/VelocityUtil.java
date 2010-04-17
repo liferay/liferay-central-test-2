@@ -57,7 +57,7 @@ public class VelocityUtil {
 			}
 		}
 
-		UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter(true);
+		UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter();
 
 		Velocity.evaluate(
 			velocityContext, unsyncStringWriter, VelocityUtil.class.getName(),

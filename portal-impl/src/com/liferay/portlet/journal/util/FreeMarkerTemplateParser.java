@@ -56,7 +56,7 @@ public class FreeMarkerTemplateParser extends VelocityTemplateParser {
 			String viewMode, String languageId, String xml, String script)
 		throws Exception {
 
-		UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter(true);
+		UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter();
 
 		boolean load = false;
 
@@ -125,7 +125,7 @@ public class FreeMarkerTemplateParser extends VelocityTemplateParser {
 						ContentUtil.get(
 							PropsValues.JOURNAL_ERROR_TEMPLATE_FREEMARKER);
 
-					unsyncStringWriter = new UnsyncStringWriter(true);
+					unsyncStringWriter = new UnsyncStringWriter();
 
 					load = FreeMarkerEngineUtil.mergeTemplate(
 						freeMarkerTemplateId, freemarkerTemplateContent,
@@ -150,7 +150,7 @@ public class FreeMarkerTemplateParser extends VelocityTemplateParser {
 					ContentUtil.get(
 						PropsValues.JOURNAL_ERROR_TEMPLATE_FREEMARKER);
 
-				unsyncStringWriter = new UnsyncStringWriter(true);
+				unsyncStringWriter = new UnsyncStringWriter();
 
 				load = FreeMarkerEngineUtil.mergeTemplate(
 					freeMarkerTemplateId, freemarkerTemplateContent,

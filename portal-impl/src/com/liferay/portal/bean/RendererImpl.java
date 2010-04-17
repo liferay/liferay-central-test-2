@@ -154,8 +154,7 @@ public class RendererImpl implements Renderer {
 		velocityContext.put(_BEAN, bean);
 
 		try {
-			UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter(
-				true);
+			UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter();
 
 			VelocityEngineUtil.mergeTemplate(
 				className, velocityTemplateContent, velocityContext,

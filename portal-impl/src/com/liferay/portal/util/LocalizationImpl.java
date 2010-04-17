@@ -394,8 +394,8 @@ public class LocalizationImpl implements Localization {
 				availableLocales = StringUtil.remove(
 					availableLocales, requestedLanguageId, StringPool.COMMA);
 
-				UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter(
-					true);
+				UnsyncStringWriter unsyncStringWriter =
+					new UnsyncStringWriter();
 
 				XMLOutputFactory xmlOutputFactory =
 					XMLOutputFactory.newInstance();
@@ -559,8 +559,7 @@ public class LocalizationImpl implements Localization {
 				}
 			}
 
-			UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter(
-				true);
+			UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter();
 
 			XMLOutputFactory xmlOutputFactory = XMLOutputFactory.newInstance();
 

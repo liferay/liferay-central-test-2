@@ -146,7 +146,7 @@ public class ThemeUtil {
 			writer = pageContext.getOut();
 		}
 		else {
-			writer = new UnsyncStringWriter(true);
+			writer = new UnsyncStringWriter();
 		}
 
 		VelocityTaglib velocityTaglib = new VelocityTaglib(
@@ -308,7 +308,7 @@ public class ThemeUtil {
 			writer = pageContext.getOut();
 		}
 		else {
-			writer = new UnsyncStringWriter(true);
+			writer = new UnsyncStringWriter();
 		}
 
 		VelocityTaglib velocityTaglib = new VelocityTaglib(

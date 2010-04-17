@@ -45,7 +45,7 @@ public class UnsyncStringWriterTest extends TestCase {
 
 		// StringBundler
 
-		unsyncStringWriter = new UnsyncStringWriter(true);
+		unsyncStringWriter = new UnsyncStringWriter();
 
 		assertNull(unsyncStringWriter.stringBuilder);
 		assertNotNull(unsyncStringWriter.stringBundler);
@@ -87,7 +87,7 @@ public class UnsyncStringWriterTest extends TestCase {
 
 		// StringBundler
 
-		unsyncStringWriter = new UnsyncStringWriter(true);
+		unsyncStringWriter = new UnsyncStringWriter();
 
 		assertNull(unsyncStringWriter.stringBuilder);
 		assertNotNull(unsyncStringWriter.stringBundler);
@@ -122,7 +122,7 @@ public class UnsyncStringWriterTest extends TestCase {
 
 		// StringBundler
 
-		unsyncStringWriter = new UnsyncStringWriter(true);
+		unsyncStringWriter = new UnsyncStringWriter();
 
 		assertNull(unsyncStringWriter.stringBuilder);
 		assertNotNull(unsyncStringWriter.stringBundler);
@@ -151,7 +151,7 @@ public class UnsyncStringWriterTest extends TestCase {
 
 		// StringBundler
 
-		unsyncStringWriter = new UnsyncStringWriter(true);
+		unsyncStringWriter = new UnsyncStringWriter();
 
 		unsyncStringWriter.write("test1");
 
@@ -183,7 +183,7 @@ public class UnsyncStringWriterTest extends TestCase {
 
 		// StringBundler
 
-		unsyncStringWriter = new UnsyncStringWriter(true);
+		unsyncStringWriter = new UnsyncStringWriter();
 
 		assertNull(unsyncStringWriter.stringBuilder);
 		assertNotNull(unsyncStringWriter.stringBundler);
@@ -221,7 +221,7 @@ public class UnsyncStringWriterTest extends TestCase {
 
 		// StringBundler
 
-		unsyncStringWriter = new UnsyncStringWriter(true);
+		unsyncStringWriter = new UnsyncStringWriter();
 
 		assertNull(unsyncStringWriter.stringBuilder);
 		assertNotNull(unsyncStringWriter.stringBundler);
@@ -263,7 +263,7 @@ public class UnsyncStringWriterTest extends TestCase {
 
 		// StringBundler
 
-		unsyncStringWriter = new UnsyncStringWriter(true);
+		unsyncStringWriter = new UnsyncStringWriter();
 
 		assertNull(unsyncStringWriter.stringBuilder);
 		assertNotNull(unsyncStringWriter.stringBundler);
@@ -305,7 +305,7 @@ public class UnsyncStringWriterTest extends TestCase {
 
 		// StringBundler
 
-		unsyncStringWriter = new UnsyncStringWriter(true);
+		unsyncStringWriter = new UnsyncStringWriter();
 
 		assertNull(unsyncStringWriter.stringBuilder);
 		assertNotNull(unsyncStringWriter.stringBundler);

@@ -32,8 +32,7 @@ public class StackTraceUtil {
 		PrintWriter printWriter = null;
 
 		try {
-			UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter(
-				true);
+			UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter();
 
 			printWriter = new PrintWriter(
 				new UnsyncBufferedWriter(unsyncStringWriter));

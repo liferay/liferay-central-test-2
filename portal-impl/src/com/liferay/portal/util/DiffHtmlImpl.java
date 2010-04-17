@@ -62,7 +62,7 @@ public class DiffHtmlImpl implements DiffHtml {
 		InputSource oldSource = new InputSource(source);
 		InputSource newSource = new InputSource(target);
 
-		UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter(true);
+		UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter();
 
 		SAXTransformerFactory saxTransformerFactory =
 			(SAXTransformerFactory)TransformerFactory.newInstance();

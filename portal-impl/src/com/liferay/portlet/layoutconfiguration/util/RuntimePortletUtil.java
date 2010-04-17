@@ -206,7 +206,7 @@ public class RuntimePortletUtil {
 
 		// liferay:include tag library
 
-		UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter(true);
+		UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter();
 
 		MethodWrapper methodWrapper = new MethodWrapper(
 			"com.liferay.taglib.util.VelocityTaglib", "init",
