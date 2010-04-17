@@ -21,8 +21,10 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.struts.PortletAction;
+import com.liferay.portlet.assetpublisher.util.AssetPublisherUtil;
 import com.liferay.portlet.bookmarks.FolderNameException;
 import com.liferay.portlet.bookmarks.NoSuchFolderException;
+import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderServiceUtil;
 
@@ -106,6 +108,9 @@ public class EditFolderAction extends PortletAction {
 		long folderId = ParamUtil.getLong(actionRequest, "folderId");
 
 		BookmarksFolderServiceUtil.deleteFolder(folderId);
+
+		AssetPublisherUtil.removeRecentFolderId(
+			actionRequest, BookmarksEntry.class.getName(), folderId);
 	}
 
 	protected void updateFolder(ActionRequest actionRequest) throws Exception {

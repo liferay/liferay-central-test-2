@@ -168,6 +168,14 @@ public class AssetPublisherUtil {
 		preferences.store();
 	}
 
+	public static void removeRecentFolderId(
+		PortletRequest portletRequest, String className, long classPK) {
+
+		if (classPK == getRecentFolderId(portletRequest, className)) {
+			_getRecentFolderIds(portletRequest).remove(className);
+		}
+	}
+
 	private static String _getAssetEntryXml(
 		String assetEntryType, long assetEntryId) {
 

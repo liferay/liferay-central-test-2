@@ -21,10 +21,12 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.struts.PortletAction;
+import com.liferay.portlet.assetpublisher.util.AssetPublisherUtil;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.imagegallery.DuplicateFolderNameException;
 import com.liferay.portlet.imagegallery.FolderNameException;
 import com.liferay.portlet.imagegallery.NoSuchFolderException;
+import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.service.IGFolderServiceUtil;
 
 import javax.portlet.ActionRequest;
@@ -109,6 +111,9 @@ public class EditFolderAction extends PortletAction {
 		long folderId = ParamUtil.getLong(actionRequest, "folderId");
 
 		IGFolderServiceUtil.deleteFolder(folderId);
+
+		AssetPublisherUtil.removeRecentFolderId(
+			actionRequest, IGImage.class.getName(), folderId);
 	}
 
 	protected void updateFolder(ActionRequest actionRequest) throws Exception {

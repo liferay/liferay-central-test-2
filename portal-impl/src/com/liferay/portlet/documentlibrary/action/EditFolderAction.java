@@ -24,9 +24,11 @@ import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.assetpublisher.util.AssetPublisherUtil;
 import com.liferay.portlet.documentlibrary.DuplicateFolderNameException;
 import com.liferay.portlet.documentlibrary.FolderNameException;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
+import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.service.DLFolderServiceUtil;
 
@@ -114,6 +116,9 @@ public class EditFolderAction extends PortletAction {
 		long folderId = ParamUtil.getLong(actionRequest, "folderId");
 
 		DLFolderServiceUtil.deleteFolder(folderId);
+
+		AssetPublisherUtil.removeRecentFolderId(
+			actionRequest, DLFileEntry.class.getName(), folderId);
 	}
 
 	protected void updateFolder(ActionRequest actionRequest) throws Exception {
