@@ -82,7 +82,9 @@ public PortletURL getAddPortletURL(RenderRequest renderRequest, PortletResponse 
 }
 
 public Map<String, PortletURL> getAddPortletURLs(RenderRequest renderRequest, PortletResponse portletResponse, String[] allAssetTagNames, long[] classNameIds) throws Exception {
-	Map<String, PortletURL> addPortletURLs = new HashMap<String, PortletURL>();
+	ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
+
+	Map<String, PortletURL> addPortletURLs = new TreeMap<String, PortletURL>(new ModelResourceComparator(themeDisplay.getLocale()));
 
 	for (long classNameId : classNameIds) {
 		ClassName className = ClassNameServiceUtil.getClassName(classNameId);
