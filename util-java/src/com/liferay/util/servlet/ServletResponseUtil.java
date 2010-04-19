@@ -14,10 +14,12 @@
 
 package com.liferay.util.servlet;
 
+import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
+import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -43,6 +45,7 @@ import org.apache.commons.lang.CharUtils;
  * <a href="ServletResponseUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Shuyang Zhou
  */
 public class ServletResponseUtil {
 
@@ -215,6 +218,23 @@ public class ServletResponseUtil {
 		write(response, s.getBytes(StringPool.UTF8));
 	}
 
+	public static void write(
+			HttpServletResponse response, StringServletResponse stringResponse)
+		throws IOException {
+
+		if (stringResponse.isCalledGetOutputStream()) {
+			UnsyncByteArrayOutputStream unsyncByteArrayInputStream =
+				stringResponse.getUnsyncByteArrayOutputStream();
+
+			write(
+				response, unsyncByteArrayInputStream.unsafeGetByteArray(),
+				unsyncByteArrayInputStream.size());
+		}
+		else {
+			write(response, stringResponse.getString());
+		}
+	}
+
 	protected static void setHeaders(
 		HttpServletRequest request, HttpServletResponse response,
 		String fileName, String contentType) {
@@ -298,9 +318,9 @@ public class ServletResponseUtil {
 		}
 	}
 
+	private static Log _log = LogFactoryUtil.getLog(ServletResponseUtil.class);
+
 	private static final String _CLIENT_ABORT_EXCEPTION =
 		"org.apache.catalina.connector.ClientAbortException";
-
-	private static Log _log = LogFactoryUtil.getLog(ServletResponseUtil.class);
 
 }

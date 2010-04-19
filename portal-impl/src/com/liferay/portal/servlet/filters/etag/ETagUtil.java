@@ -14,9 +14,9 @@
 
 package com.liferay.portal.servlet.filters.etag;
 
+import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.kernel.servlet.StringServletResponse;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -33,10 +33,6 @@ public class ETagUtil {
 		HttpServletRequest request, HttpServletResponse response,
 		byte[] bytes) {
 
-		if (!_ETAG_FILTER_ENABLED) {
-			return false;
-		}
-
 		return _processETag(
 			request, response, _hashCode(bytes, 0, bytes.length));
 	}
@@ -45,20 +41,12 @@ public class ETagUtil {
 		HttpServletRequest request, HttpServletResponse response, byte[] bytes,
 		int length) {
 
-		if (!_ETAG_FILTER_ENABLED) {
-			return false;
-		}
-
 		return _processETag(request, response, _hashCode(bytes, 0, length));
 	}
 
 	public static boolean processETag(
 		HttpServletRequest request, HttpServletResponse response, byte[] bytes,
 		int offset, int length) {
-
-		if (!_ETAG_FILTER_ENABLED) {
-			return false;
-		}
 
 		return _processETag(
 			request, response, _hashCode(bytes, offset, length));
@@ -67,11 +55,25 @@ public class ETagUtil {
 	public static boolean processETag(
 		HttpServletRequest request, HttpServletResponse response, String s) {
 
-		if (!_ETAG_FILTER_ENABLED) {
-			return false;
-		}
-
 		return _processETag(request, response, s.hashCode());
+	}
+
+	public static boolean processETag(
+		HttpServletRequest request, HttpServletResponse response,
+		StringServletResponse stringResponse) {
+
+		if (stringResponse.isCalledGetOutputStream()) {
+			UnsyncByteArrayOutputStream unsyncByteArrayOutputStream =
+				stringResponse.getUnsyncByteArrayOutputStream();
+
+			return processETag(
+				request, response,
+				unsyncByteArrayOutputStream.unsafeGetByteArray(),
+				unsyncByteArrayOutputStream.size());
+		}
+		else {
+			return processETag(request, response, stringResponse.getString());
+		}
 	}
 
 	private static int _hashCode(byte[] data, int offset, int length) {
@@ -87,10 +89,6 @@ public class ETagUtil {
 	private static boolean _processETag(
 		HttpServletRequest request, HttpServletResponse response,
 		int hashCode) {
-
-		if (!_ETAG_FILTER_ENABLED) {
-			return false;
-		}
 
 		String eTag = Integer.toHexString(hashCode);
 
@@ -108,8 +106,5 @@ public class ETagUtil {
 			return false;
 		}
 	}
-
-	private static final boolean _ETAG_FILTER_ENABLED = GetterUtil.getBoolean(
-		PropsUtil.get(ETagFilter.class.getName()), true);
 
 }
