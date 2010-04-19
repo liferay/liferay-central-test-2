@@ -168,9 +168,9 @@
 	<target name="dtddoc">
 		<taskdef classname="DTDDoc.DTDDocTask" classpathref="lib.classpath" name="DTDDoc" />
 
-		<antelope:stringutil string="${lp.version}" property="lp.version.dtd">
+		<!--<antelope:stringutil string="${lp.version}" property="lp.version.dtd">
 			<replace regex="\." replacement="_" />
-		</antelope:stringutil>
+		</antelope:stringutil>-->
 
 		<DTDDoc
 			destDir="api/definitions"
