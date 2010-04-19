@@ -213,6 +213,11 @@
 		<copy file="docroot/WEB-INF/web.xml" tofile="docroot/WEB-INF/web.xml.bak" />
 
 		<replace file="docroot/WEB-INF/web.xml">
+			<replacetoken><![CDATA[<web-app metadata-complete="true" version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">]]></replacetoken>
+			<replacevalue><![CDATA[<web-app xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd" version="2.4">]]></replacevalue>
+		</replace>
+
+		<replace file="docroot/WEB-INF/web.xml">
 			<replacefilter token="&lt;resource-ref&gt;" value="" />
 			<replacefilter token="&lt;/resource-ref&gt;" value="" />
 		</replace>
