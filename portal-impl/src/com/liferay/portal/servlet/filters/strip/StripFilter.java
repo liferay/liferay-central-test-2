@@ -273,7 +273,9 @@ public class StripFilter extends BasePortalFilter {
 				UnsyncByteArrayOutputStream outputStream =
 					new UnsyncByteArrayOutputStream(
 						(int)(length * _COMPRESSION_RATE));
+
 				strip(oldByteArray, length, outputStream);
+
 				ServletResponseUtil.write(
 					response, outputStream.unsafeGetByteArray(),
 					outputStream.size());
