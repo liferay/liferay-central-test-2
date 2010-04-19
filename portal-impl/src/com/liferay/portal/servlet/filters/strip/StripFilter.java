@@ -270,7 +270,13 @@ public class StripFilter extends BasePortalFilter {
 					length = oldByteArray.length;
 				}
 
-				strip(oldByteArray, length, response.getOutputStream());
+				UnsyncByteArrayOutputStream outputStream =
+					new UnsyncByteArrayOutputStream(
+						(int)(length * _COMPRESSION_RATE));
+				strip(oldByteArray, length, outputStream);
+				ServletResponseUtil.write(
+					response, outputStream.unsafeGetByteArray(),
+					outputStream.size());
 			}
 			else {
 				ServletResponseUtil.write(response, stringResponse);
@@ -480,6 +486,8 @@ public class StripFilter extends BasePortalFilter {
 	private static final byte[] _CDATA_CLOSE = "/*]]>*/".getBytes();
 
 	private static final byte[] _CDATA_OPEN = "/*<![CDATA[*/".getBytes();
+
+	private static final double _COMPRESSION_RATE = 0.7;
 
 	private static final byte[] _MARKER_JS_OPEN =
 		"script type=\"text/javascript\">".getBytes();
