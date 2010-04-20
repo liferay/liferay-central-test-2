@@ -499,6 +499,8 @@ Liferay.Util = {
 					var url = link.attr('href');
 
 					submitForm(document.hrefFm, url);
+
+					Liferay.Util._submitLocked = null;
 				}
 			}
 		);
