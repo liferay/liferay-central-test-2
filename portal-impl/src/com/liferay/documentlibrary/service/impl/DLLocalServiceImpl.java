@@ -220,7 +220,11 @@ public class DLLocalServiceImpl implements DLLocalService {
 			(fileName.indexOf("|") != -1) ||
 			(fileName.indexOf("[") != -1) ||
 			(fileName.indexOf("]") != -1) ||
-			(fileName.indexOf("'") != -1)) {
+			(fileName.indexOf("'") != -1) ||
+			(fileName.indexOf("..\\") != -1) ||
+			(fileName.indexOf("../") != -1) ||
+			(fileName.indexOf("\\..") != -1) ||
+			(fileName.indexOf("/..") != -1)) {
 
 			throw new FileNameException(fileName);
 		}

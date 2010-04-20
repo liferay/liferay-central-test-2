@@ -54,7 +54,11 @@ public class DLServiceImpl implements DLService {
 			(dirName.indexOf("|") != -1) ||
 			(dirName.indexOf("[") != -1) ||
 			(dirName.indexOf("]") != -1) ||
-			(dirName.indexOf("'") != -1)) {
+			(dirName.indexOf("'") != -1) ||
+			(dirName.indexOf("..\\") != -1) ||
+			(dirName.indexOf("../") != -1) ||
+			(dirName.indexOf("\\..") != -1) ||
+			(dirName.indexOf("/..") != -1)) {
 
 			throw new DirectoryNameException(dirName);
 		}
