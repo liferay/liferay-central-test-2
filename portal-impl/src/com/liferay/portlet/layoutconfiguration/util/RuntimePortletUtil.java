@@ -38,7 +38,6 @@ import com.liferay.portlet.layoutconfiguration.util.velocity.TemplateProcessor;
 import com.liferay.portlet.layoutconfiguration.util.xml.RuntimeLogic;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 import javax.portlet.PortletConfig;
@@ -233,20 +232,6 @@ public class RuntimePortletUtil {
 		}
 
 		String output = unsyncStringWriter.toString();
-
-		Map<String, String> columnsMap = processor.getColumnsMap();
-
-		Iterator<Map.Entry<String, String>> columnsMapItr =
-			columnsMap.entrySet().iterator();
-
-		while (columnsMapItr.hasNext()) {
-			Map.Entry<String, String> entry = columnsMapItr.next();
-
-			String key = entry.getKey();
-			String value = entry.getValue();
-
-			output = StringUtil.replace(output, key, value);
-		}
 
 		Map<Portlet, Object[]> portletsMap = processor.getPortletsMap();
 

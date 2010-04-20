@@ -31,6 +31,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Ivica Cardic
  * @author Brian Wing Shun Chan
+ * @author Shuyang Zhou
  */
 public class TemplateProcessor {
 
@@ -42,7 +43,6 @@ public class TemplateProcessor {
 		_request = request;
 		_response = response;
 		_portletId = portletId;
-		_columnsMap = new HashMap<String, String>();
 		_portletsMap = new TreeMap<Portlet, Object[]>(
 			new PortletRenderWeightComparator());
 	}
@@ -66,11 +66,7 @@ public class TemplateProcessor {
 
 		_portletsMap.putAll(logic.getPortletsMap());
 
-		String columnIdPlaceHolder = "[$TEMPLATE_COLUMN_" + columnId + "$]";
-
-		_columnsMap.put(columnIdPlaceHolder, content);
-
-		return columnIdPlaceHolder;
+		return content;
 	}
 
 	public String processMax() throws Exception {
@@ -95,10 +91,6 @@ public class TemplateProcessor {
 		return logic.processContent(new HashMap<String, String>());
 	}
 
-	public Map<String, String> getColumnsMap() {
-		return _columnsMap;
-	}
-
 	public Map<Portlet, Object[]> getPortletsMap() {
 		return _portletsMap;
 	}
@@ -107,7 +99,6 @@ public class TemplateProcessor {
 	private HttpServletRequest _request;
 	private HttpServletResponse _response;
 	private String _portletId;
-	private Map<String, String> _columnsMap;
 	private Map<Portlet, Object[]> _portletsMap;
 
 }
