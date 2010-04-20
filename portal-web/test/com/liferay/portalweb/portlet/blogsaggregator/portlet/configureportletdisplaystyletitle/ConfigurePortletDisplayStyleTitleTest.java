@@ -34,7 +34,7 @@ public class ConfigurePortletDisplayStyleTitleTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Blogs Aggregator Test Page")) {
+				if (selenium.isVisible("link=Blogs Aggregator Test Page")) {
 					break;
 				}
 			}
@@ -47,29 +47,17 @@ public class ConfigurePortletDisplayStyleTitleTest extends BaseTestCase {
 		selenium.clickAt("link=Blogs Aggregator Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		Thread.sleep(5000);
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//img[@alt='Configuration']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("//img[@alt='Configuration']",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("link=Configuration", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.select("_86_displayStyle",
 			RuntimeVariables.replace("label=Title"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		assertEquals(RuntimeVariables.replace(
+				"You have successfully updated the setup."),
+			selenium.getText("//div[3]/div/div/div/div/div"));
+		assertEquals("Title", selenium.getSelectedLabel("_86_displayStyle"));
+		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -77,7 +65,7 @@ public class ConfigurePortletDisplayStyleTitleTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//input[@value='Save']")) {
+				if (selenium.isVisible("link=Blogs Aggregator Test Page")) {
 					break;
 				}
 			}
@@ -87,14 +75,11 @@ public class ConfigurePortletDisplayStyleTitleTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		Thread.sleep(5000);
-		assertTrue(selenium.isTextPresent(
-				"You have successfully updated the setup."));
-		selenium.clickAt("link=Return to Full Page",
+		selenium.clickAt("link=Blogs Aggregator Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertFalse(selenium.isTextPresent("This is a BA setup test entry!"));
+		assertEquals(RuntimeVariables.replace("Blogs Entry Title"),
+			selenium.getText("//div/span[1]/a"));
+		assertFalse(selenium.isTextPresent("Blogs Entry Content"));
 	}
 }

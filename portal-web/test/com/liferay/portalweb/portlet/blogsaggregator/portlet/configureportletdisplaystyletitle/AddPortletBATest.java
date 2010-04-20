@@ -32,7 +32,7 @@ public class AddPortletBATest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Blogs Aggregator Test Page")) {
+				if (selenium.isVisible("link=Blogs Aggregator Test Page")) {
 					break;
 				}
 			}
@@ -45,24 +45,6 @@ public class AddPortletBATest extends BaseTestCase {
 		selenium.clickAt("link=Blogs Aggregator Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		Thread.sleep(5000);
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_145_addApplication")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.clickAt("_145_addApplication", RuntimeVariables.replace(""));
 		Thread.sleep(5000);
 
@@ -72,8 +54,7 @@ public class AddPortletBATest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"//div[@id='Collaboration-BlogsAggregator']/p/a")) {
+				if (selenium.isVisible("layout_configuration_content")) {
 					break;
 				}
 			}
@@ -83,7 +64,26 @@ public class AddPortletBATest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//div[@id='Collaboration-BlogsAggregator']/p/a",
+		selenium.typeKeys("layout_configuration_content",
+			RuntimeVariables.replace("b"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("//div[@title='Blogs Aggregator']/p/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("//div[@title='Blogs Aggregator']/p/a",
 			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -92,7 +92,7 @@ public class AddPortletBATest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//td[1]/div/div/div")) {
+				if (selenium.isVisible("//td[1]/div/div[1]")) {
 					break;
 				}
 			}
@@ -102,6 +102,6 @@ public class AddPortletBATest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertTrue(selenium.isElementPresent("//td[1]/div/div/div"));
+		assertTrue(selenium.isVisible("//td[1]/div/div[1]"));
 	}
 }

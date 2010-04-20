@@ -32,7 +32,7 @@ public class ViewEntryTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Blogs Aggregator Test Page")) {
+				if (selenium.isVisible("link=Blogs Aggregator Test Page")) {
 					break;
 				}
 			}
@@ -45,8 +45,16 @@ public class ViewEntryTest extends BaseTestCase {
 		selenium.clickAt("link=Blogs Aggregator Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		Thread.sleep(5000);
-		assertTrue(selenium.isElementPresent("link=BA Setup Test Entry"));
-		assertTrue(selenium.isTextPresent("This is a BA setup test entry!"));
+		assertEquals(RuntimeVariables.replace("Blogs Entry Title"),
+			selenium.getText("//div/span[1]/a"));
+		assertEquals(RuntimeVariables.replace("Blogs Entry Content"),
+			selenium.getText("//section/div/div/div/div[2]"));
+		assertTrue(selenium.isPartialText("//div/div[3]/a", "Read More"));
+		selenium.clickAt("//div/div[3]/a", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		assertEquals(RuntimeVariables.replace("Blogs Entry Title"),
+			selenium.getText("//form/div/div[1]/div[1]"));
+		assertEquals(RuntimeVariables.replace("Blogs Entry Content"),
+			selenium.getText("//p"));
 	}
 }

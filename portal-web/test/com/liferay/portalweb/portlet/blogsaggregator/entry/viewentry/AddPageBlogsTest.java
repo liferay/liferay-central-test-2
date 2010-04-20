@@ -25,7 +25,6 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class AddPageBlogsTest extends BaseTestCase {
 	public void testAddPageBlogs() throws Exception {
 		selenium.open("/web/guest/home/");
-		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -33,7 +32,7 @@ public class AddPageBlogsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("addPage")) {
+				if (selenium.isVisible("addPage")) {
 					break;
 				}
 			}
@@ -62,7 +61,7 @@ public class AddPageBlogsTest extends BaseTestCase {
 		}
 
 		selenium.type("//input", RuntimeVariables.replace("Blogs Test Page"));
-		selenium.clickAt("//span[@id='save']/span", RuntimeVariables.replace(""));
+		selenium.clickAt("save", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -70,7 +69,7 @@ public class AddPageBlogsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Blogs Test Page")) {
+				if (selenium.isVisible("link=Blogs Test Page")) {
 					break;
 				}
 			}
