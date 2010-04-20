@@ -67,7 +67,24 @@ public class RateEntryEntryDetailsTest extends BaseTestCase {
 				"//div[5]/div[2]/div/div");
 		RuntimeVariables.setValue("rateCount", rateCount);
 		selenium.clickAt("//a[5]", RuntimeVariables.replace(""));
-		Thread.sleep(5000);
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isPartialText("//div[5]/div[2]/div/div",
+							RuntimeVariables.getValue("rateCount"))) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertTrue(selenium.isPartialText("//div[5]/div[2]/div/div",
 				RuntimeVariables.getValue("rateCount")));
 	}

@@ -32,7 +32,7 @@ public class DeleteEntryTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Blogs Test Page")) {
+				if (selenium.isVisible("link=Blogs Test Page")) {
 					break;
 				}
 			}
@@ -54,25 +54,6 @@ public class DeleteEntryTest extends BaseTestCase {
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Blogs Test Page")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace("link=Blogs Test Page"));
-		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isTextPresent("Title"));
 		assertFalse(selenium.isTextPresent("Content."));
 	}

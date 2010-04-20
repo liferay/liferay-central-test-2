@@ -24,6 +24,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AssertImportLARTest extends BaseTestCase {
 	public void testAssertImportLAR() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -44,13 +46,13 @@ public class AssertImportLARTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Test Entry"),
 			selenium.getText("//div[2]/div[1]/div[1]/a"));
-		assertEquals(RuntimeVariables.replace("Read More ?"),
-			selenium.getText("//div[2]/div[3]/a"));
+		assertTrue(selenium.isPartialText("//div[2]/div[3]/a", "Read More"));
 		selenium.clickAt("link=Test Entry", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Test Entry"),
 			selenium.getText("//form/div/div[1]/div[1]"));
-		assertEquals(RuntimeVariables.replace("This is a test entry comment!"),
-			selenium.getText("//p"));
+		assertEquals(RuntimeVariables.replace(
+				"This is a test entry comment! \n Read More About Test Entry \u00bb"),
+			selenium.getText("//form/div/div[3]"));
 	}
 }

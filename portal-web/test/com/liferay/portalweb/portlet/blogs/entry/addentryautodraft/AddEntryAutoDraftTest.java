@@ -32,7 +32,7 @@ public class AddEntryAutoDraftTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Blogs Test Page")) {
+				if (selenium.isVisible("link=Blogs Test Page")) {
 					break;
 				}
 			}
@@ -71,7 +71,7 @@ public class AddEntryAutoDraftTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("FCKeditor1___Frame")) {
+				if (selenium.isElementPresent("cke_contents_CKEditor1")) {
 					break;
 				}
 			}
@@ -97,9 +97,8 @@ public class AddEntryAutoDraftTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.selectFrame("//iframe[@id=\"_33_editor\"]");
-		selenium.selectFrame("//iframe[@id=\"FCKeditor1___Frame\"]");
-		selenium.selectFrame("//iframe");
+		selenium.selectFrame("//iframe[@id='_33_editor']");
+		selenium.selectFrame("//td[@id='cke_contents_CKEditor1']/iframe");
 		selenium.type("//body", RuntimeVariables.replace("DraftContent."));
 		selenium.selectFrame("relative=top");
 		Thread.sleep(15000);
@@ -121,6 +120,24 @@ public class AddEntryAutoDraftTest extends BaseTestCase {
 		}
 
 		assertTrue(selenium.isTextPresent("Draft saved"));
+		selenium.open("/web/guest/home/");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("link=Blogs Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.clickAt("link=Blogs Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Draft"),

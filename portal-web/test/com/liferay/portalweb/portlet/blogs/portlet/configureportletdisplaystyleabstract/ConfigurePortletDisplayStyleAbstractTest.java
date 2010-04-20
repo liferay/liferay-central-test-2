@@ -46,25 +46,6 @@ public class ConfigurePortletDisplayStyleAbstractTest extends BaseTestCase {
 
 		selenium.clickAt("link=Blogs Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		Thread.sleep(5000);
-		selenium.clickAt("//strong/span", RuntimeVariables.replace(""));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible("link=Configuration")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.clickAt("link=Configuration", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Display Settings", RuntimeVariables.replace(""));
@@ -73,9 +54,10 @@ public class ConfigurePortletDisplayStyleAbstractTest extends BaseTestCase {
 			RuntimeVariables.replace("label=Abstract"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		Thread.sleep(5000);
 		assertEquals(RuntimeVariables.replace(
 				"You have successfully updated the setup."),
-			selenium.getText("//div[5]/div/div/div/div"));
+			selenium.getText("//div[3]/div/div/div/div/div"));
+		assertEquals("Abstract",
+			selenium.getSelectedLabel("_86_pageDisplayStyle"));
 	}
 }

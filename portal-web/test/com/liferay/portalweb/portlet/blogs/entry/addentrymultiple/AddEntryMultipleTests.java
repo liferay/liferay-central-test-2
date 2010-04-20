@@ -29,12 +29,13 @@ public class AddEntryMultipleTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTestSuite(AddPageTest.class);
-		testSuite.addTestSuite(AddPortletTest.class);
+		testSuite.addTestSuite(AddPageBlogsTest.class);
+		testSuite.addTestSuite(AddPortletBlogsTest.class);
 		testSuite.addTestSuite(AddEntry1Test.class);
 		testSuite.addTestSuite(AddEntry2Test.class);
 		testSuite.addTestSuite(AddEntry3Test.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownBlogsEntryTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

@@ -71,7 +71,7 @@ public class AddEntryTitleNullTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("FCKeditor1___Frame")) {
+				if (selenium.isElementPresent("cke_contents_CKEditor1")) {
 					break;
 				}
 			}
@@ -98,8 +98,7 @@ public class AddEntryTitleNullTest extends BaseTestCase {
 		}
 
 		selenium.selectFrame("//iframe[@id='_33_editor']");
-		selenium.selectFrame("//iframe[@id='FCKeditor1___Frame']");
-		selenium.selectFrame("//iframe");
+		selenium.selectFrame("//td[@id='cke_contents_CKEditor1']/iframe");
 		selenium.type("//body", RuntimeVariables.replace("Content."));
 		selenium.selectFrame("relative=top");
 		selenium.clickAt("_33_saveButton", RuntimeVariables.replace(""));
@@ -107,6 +106,7 @@ public class AddEntryTitleNullTest extends BaseTestCase {
 		assertTrue(selenium.isTextPresent(
 				"You have entered invalid data. Please try again."));
 		assertTrue(selenium.isTextPresent("Please enter a valid title."));
+		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

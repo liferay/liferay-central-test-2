@@ -30,13 +30,15 @@ public class ConfigurePortletDisplayStyleFullContentTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTestSuite(AddPageTest.class);
-		testSuite.addTestSuite(AddPortletTest.class);
+		testSuite.addTestSuite(AddPageBlogsTest.class);
+		testSuite.addTestSuite(AddPortletBlogsTest.class);
 		testSuite.addTestSuite(AddEntryTest.class);
 		testSuite.addTestSuite(
 			ConfigurePortletDisplayStyleFullContentTest.class);
 		testSuite.addTestSuite(ViewEntryDisplayStyleFullContentTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownBlogsConfigurationTest.class);
+		testSuite.addTestSuite(TearDownBlogsEntryTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

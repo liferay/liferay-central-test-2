@@ -14,18 +14,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>waitForVisible</td>
 	<td>link=Blogs Test Page</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
 	<td>link=Blogs Test Page</td>
-	<td></td>
-</tr>
-<tr>
-	<td>pause</td>
-	<td>5000</td>
 	<td></td>
 </tr>
 <tr>
@@ -40,8 +35,23 @@
 </tr>
 <tr>
 	<td>assertElementNotPresent</td>
-	<td>link=Read More »</td>
+	<td>link=Read More About Title »</td>
 	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>//div[2]/div[1]/div[1]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//form/div/div[1]/div[1]</td>
+	<td>Title</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//p</td>
+	<td>Content.</td>
 </tr>
 
 </tbody></table>

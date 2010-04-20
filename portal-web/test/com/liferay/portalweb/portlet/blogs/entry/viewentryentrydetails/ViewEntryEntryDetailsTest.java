@@ -57,10 +57,10 @@ public class ViewEntryEntryDetailsTest extends BaseTestCase {
 			selenium.getText("//div[4]/div[5]/div[1]/div/div"));
 		assertTrue(selenium.isElementPresent("//div[5]/div[2]/div/div"));
 		assertEquals(RuntimeVariables.replace("Previous"),
-			selenium.getText("//div[2]/div/div/div[1]/span[1]"));
+			selenium.getText("//section/div/div/div/div[1]/span[1]"));
 		assertEquals(RuntimeVariables.replace("Next"),
-			selenium.getText("//div[2]/div/div/div[1]/span[2]"));
+			selenium.getText("//section/div/div/div/div[1]/span[2]"));
 		assertEquals(RuntimeVariables.replace("Comments"),
-			selenium.getText("//div[2]/div/div/ul/li/span"));
+			selenium.getText("//li/span/span/span"));
 	}
 }

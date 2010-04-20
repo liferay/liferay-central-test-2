@@ -70,6 +70,7 @@ public class ViewCountEntryTest extends BaseTestCase {
 		RuntimeVariables.setValue("viewCount", viewCount);
 		selenium.clickAt("link=Title", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

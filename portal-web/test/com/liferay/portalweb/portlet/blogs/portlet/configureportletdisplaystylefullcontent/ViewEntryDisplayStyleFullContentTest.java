@@ -34,7 +34,7 @@ public class ViewEntryDisplayStyleFullContentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Blogs Test Page")) {
+				if (selenium.isVisible("link=Blogs Test Page")) {
 					break;
 				}
 			}
@@ -46,11 +46,18 @@ public class ViewEntryDisplayStyleFullContentTest extends BaseTestCase {
 
 		selenium.clickAt("link=Blogs Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		Thread.sleep(5000);
 		assertEquals(RuntimeVariables.replace("Title"),
 			selenium.getText("//div[2]/div[1]/div[1]/a"));
 		assertEquals(RuntimeVariables.replace("Content."),
 			selenium.getText("//p"));
-		assertFalse(selenium.isElementPresent("link=Read More \u00bb"));
+		assertFalse(selenium.isElementPresent(
+				"link=Read More About Title \u00bb"));
+		selenium.clickAt("//div[2]/div[1]/div[1]/a",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		assertEquals(RuntimeVariables.replace("Title"),
+			selenium.getText("//form/div/div[1]/div[1]"));
+		assertEquals(RuntimeVariables.replace("Content."),
+			selenium.getText("//p"));
 	}
 }

@@ -71,6 +71,7 @@ public class ViewCountEntryEntryDetailsTest extends BaseTestCase {
 
 		String viewCount = selenium.getIncrementedText("//div[2]/span[1]");
 		RuntimeVariables.setValue("viewCount", viewCount);
+		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

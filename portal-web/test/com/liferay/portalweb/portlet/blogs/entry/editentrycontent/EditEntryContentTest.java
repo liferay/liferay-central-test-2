@@ -74,7 +74,7 @@ public class EditEntryContentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("FCKeditor1___Frame")) {
+				if (selenium.isElementPresent("cke_contents_CKEditor1")) {
 					break;
 				}
 			}
@@ -101,8 +101,7 @@ public class EditEntryContentTest extends BaseTestCase {
 		}
 
 		selenium.selectFrame("//iframe[@id='_33_editor']");
-		selenium.selectFrame("//iframe[@id='FCKeditor1___Frame']");
-		selenium.selectFrame("//iframe");
+		selenium.selectFrame("//td[@id='cke_contents_CKEditor1']/iframe");
 		selenium.type("//body", RuntimeVariables.replace("ContentEdit."));
 		selenium.selectFrame("relative=top");
 		selenium.clickAt("_33_saveButton", RuntimeVariables.replace(""));

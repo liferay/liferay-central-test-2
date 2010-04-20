@@ -9,6 +9,11 @@
 <tr><td rowspan="1" colspan="3">AssertImportLARTest</td></tr>
 </thead><tbody>
 <tr>
+	<td>open</td>
+	<td>/web/guest/home/</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
 	<td>link=Blogs Test Page</td>
 	<td></td>
@@ -24,9 +29,9 @@
 	<td>Test Entry</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>assertPartialText</td>
 	<td>//div[2]/div[3]/a</td>
-	<td>Read More ?</td>
+	<td>Read More</td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
@@ -40,8 +45,8 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//p</td>
-	<td>This is a test entry comment!</td>
+	<td>//form/div/div[3]</td>
+	<td>This is a test entry comment! <br /> Read More About Test Entry »</td>
 </tr>
 
 </tbody></table>
