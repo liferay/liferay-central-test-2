@@ -260,6 +260,11 @@
 <%@ page import="org.apache.struts.Globals" %>
 
 <%@ page import="com.liferay.portal.kernel.util.StackTraceUtil" %>
+<%@ page import="com.liferay.portal.kernel.jsp.JspFactorySwapper" %>
+
+<%
+JspFactorySwapper.swap();
+%>
 
 <liferay-theme:defineObjects />
 

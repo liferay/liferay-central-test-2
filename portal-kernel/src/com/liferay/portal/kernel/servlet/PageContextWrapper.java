@@ -14,6 +14,8 @@
 
 package com.liferay.portal.kernel.servlet;
 
+import com.liferay.portal.kernel.io.unsync.UnsyncStringWriter;
+
 import java.io.IOException;
 
 import java.util.Enumeration;
@@ -29,11 +31,13 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.PageContext;
+import javax.servlet.jsp.tagext.BodyContent;
 
 /**
  * <a href="PageContextWrapper.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Shuyang Zhou
  */
 public class PageContextWrapper extends PageContext {
 
@@ -117,6 +121,10 @@ public class PageContextWrapper extends PageContext {
 		return _pageContext.getVariableResolver();
 	}
 
+	public PageContext getWrappedPageContext() {
+		return _pageContext;
+	}
+
 	public void handlePageException(Exception e)
 		throws IOException, ServletException {
 
@@ -150,6 +158,19 @@ public class PageContextWrapper extends PageContext {
 		_pageContext.initialize(
 			servlet, request, response, errorPageURL, needsSession, bufferSize,
 			autoFlush);
+	}
+
+	public JspWriter popBody() {
+		return _pageContext.popBody();
+	}
+
+	public BodyContent pushBody() {
+		UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter(true);
+
+		BodyContent bodyContent =
+			(BodyContent) _pageContext.pushBody(unsyncStringWriter);
+
+		return new BodyContentWrapper(bodyContent, unsyncStringWriter);
 	}
 
 	public void release() {
