@@ -34,7 +34,7 @@ public class ConfigurePortletAssetSelectionManualTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Asset Publisher Test Page")) {
+				if (selenium.isVisible("link=Asset Publisher Test Page")) {
 					break;
 				}
 			}
@@ -51,13 +51,34 @@ public class ConfigurePortletAssetSelectionManualTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.select("_86_selectionStyle",
 			RuntimeVariables.replace("label=Manual"));
-		Thread.sleep(5000);
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (RuntimeVariables.replace("Selection")
+										.equals(selenium.getText(
+								"//div[1]/div[1]/div[1]/div/span"))) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("//input[@value='Save'] ", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
 		assertEquals("Manual", selenium.getSelectedLabel("_86_selectionStyle"));
+		assertEquals(RuntimeVariables.replace(
+				"You have successfully updated the setup."),
+			selenium.getText("//div[3]/div/div/div/div/div"));
 		assertEquals(RuntimeVariables.replace("Selection"),
-			selenium.getText(
-				"//div[@id='assetPublisherSelection']/div[1]/div/span"));
+			selenium.getText("//div[1]/div[1]/div[1]/div/span"));
 		assertEquals(RuntimeVariables.replace("Display Settings"),
-			selenium.getText(
-				"//div[@id='assetPublisherDisplaySettings']/div[1]/div/span"));
+			selenium.getText("//div[1]/div[2]/div[1]/div/span"));
 	}
 }

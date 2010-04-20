@@ -37,10 +37,10 @@ public class RemoveIGImageTests extends BaseTests {
 		testSuite.addTestSuite(AddIGImageTest.class);
 		testSuite.addTestSuite(ConfigurePortletAssetSelectionManualTest.class);
 		testSuite.addTestSuite(SelectIGImageTest.class);
-		testSuite.addTestSuite(ViewIGImageSelectTest.class);
 		testSuite.addTestSuite(RemoveIGImageTest.class);
-		testSuite.addTestSuite(ViewIGImageRemoveTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownIGFolderTest.class);
+		testSuite.addTestSuite(TearDownIGImageTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

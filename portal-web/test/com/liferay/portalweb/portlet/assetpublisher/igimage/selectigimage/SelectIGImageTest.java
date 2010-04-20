@@ -32,7 +32,7 @@ public class SelectIGImageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Asset Publisher Test Page")) {
+				if (selenium.isVisible("link=Asset Publisher Test Page")) {
 					break;
 				}
 			}
@@ -50,11 +50,39 @@ public class SelectIGImageTest extends BaseTestCase {
 		selenium.select("_86_assetEntryType",
 			RuntimeVariables.replace("label=Image Gallery Image"));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=Folder Name", RuntimeVariables.replace(""));
+		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("//td[1]/a/img", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"You have successfully updated the setup."));
+		assertEquals(RuntimeVariables.replace(
+				"You have successfully updated the setup."),
+			selenium.getText("//div[3]/div/div/div/div/div"));
+		assertEquals(RuntimeVariables.replace("Image Gallery Image"),
+			selenium.getText("//td[1]/a"));
+		assertTrue(selenium.isElementPresent("//td[2]/a/img"));
+		selenium.open("/web/guest/home/");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("link=Asset Publisher Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("link=Asset Publisher Test Page",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		assertEquals(RuntimeVariables.replace("AP IG Image Name"),
+			selenium.getText("//h3/a"));
+		assertTrue(selenium.isElementPresent("//div[1]/a/img"));
 	}
 }

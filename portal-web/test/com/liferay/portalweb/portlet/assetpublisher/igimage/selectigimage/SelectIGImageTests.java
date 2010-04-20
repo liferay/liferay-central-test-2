@@ -36,9 +36,7 @@ public class SelectIGImageTests extends BaseTests {
 		testSuite.addTestSuite(AddFolderTest.class);
 		testSuite.addTestSuite(AddIGImageTest.class);
 		testSuite.addTestSuite(ConfigurePortletAssetSelectionManualTest.class);
-		testSuite.addTestSuite(ViewIGImageUnselectTest.class);
 		testSuite.addTestSuite(SelectIGImageTest.class);
-		testSuite.addTestSuite(ViewIGImageSelectTest.class);
 		testSuite.addTestSuite(TearDownTest.class);
 
 		return testSuite;
