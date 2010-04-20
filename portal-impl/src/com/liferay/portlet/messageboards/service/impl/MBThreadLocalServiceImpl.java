@@ -72,10 +72,6 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 
 			mbMessagePersistence.remove(message);
 
-			// Message flags
-
-			mbMessageFlagPersistence.removeByMessageId(message.getMessageId());
-
 			// Resources
 
 			if (!message.isDiscussion()) {
@@ -95,6 +91,10 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 
 			assetEntryLocalService.deleteEntry(
 				MBMessage.class.getName(), message.getMessageId());
+			
+			// Message flags
+
+			mbMessageFlagPersistence.removeByMessageId(message.getMessageId());
 
 			// Ratings
 
