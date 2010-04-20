@@ -37,8 +37,7 @@ public class AddIGImageTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent(
-									"link=Asset Publisher Test Page")) {
+						if (selenium.isVisible("link=Asset Publisher Test Page")) {
 							break;
 						}
 					}
@@ -108,13 +107,34 @@ public class AddIGImageTest extends BaseTestCase {
 				Thread.sleep(5000);
 				selenium.type("_31_file",
 					RuntimeVariables.replace(
-						"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\assetpublisher\\addigimage\\dependencies\\AP_test_image.jpg"));
+						"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\assetpublisher\\igimage\\addigimage\\dependencies\\AP_test_image.jpg"));
 				selenium.type("_31_name",
 					RuntimeVariables.replace("AP IG Image Name"));
 				selenium.clickAt("//input[@value='Save']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				assertTrue(selenium.isElementPresent("link=AP IG Image Name"));
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (RuntimeVariables.replace("AP IG Image Name")
+												.equals(selenium.getText(
+										"//h3/a"))) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+				assertEquals(RuntimeVariables.replace("AP IG Image Name"),
+					selenium.getText("//h3/a"));
+				assertTrue(selenium.isElementPresent("//div[1]/a/img"));
 
 			case 100:
 				label = -1;

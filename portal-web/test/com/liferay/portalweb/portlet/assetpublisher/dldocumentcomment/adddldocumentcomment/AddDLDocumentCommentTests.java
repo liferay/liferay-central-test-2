@@ -39,7 +39,9 @@ public class AddDLDocumentCommentTests extends BaseTests {
 			ConfigurePortletDynamicDisplayStyleFullContentTest.class);
 		testSuite.addTestSuite(ConfigurePortletDynamicEnableCommentsTest.class);
 		testSuite.addTestSuite(AddDLDocumentCommentTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownDLFolderTest.class);
+		testSuite.addTestSuite(TearDownDocumentTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

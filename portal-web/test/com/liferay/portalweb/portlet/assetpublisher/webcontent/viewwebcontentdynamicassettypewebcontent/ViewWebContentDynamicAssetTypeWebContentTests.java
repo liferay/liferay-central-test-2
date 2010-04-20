@@ -34,10 +34,13 @@ public class ViewWebContentDynamicAssetTypeWebContentTests extends BaseTests {
 		testSuite.addTestSuite(AddPortletAPTest.class);
 		testSuite.addTestSuite(AddWebContentTest.class);
 		testSuite.addTestSuite(
-			ConfigurePortletDynamicAssetTypeWebContentTest.class);
+			ConfigurePortletDynamicAvailableWebContentTest.class);
+		testSuite.addTestSuite(ViewWebContentAvailableTest.class);
 		testSuite.addTestSuite(
-			ViewWebContentDynamicAssetTypeWebContentTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+			ConfigurePortletDynamicCurrentWebContentTest.class);
+		testSuite.addTestSuite(ViewWebContentCurrentTest.class);
+		testSuite.addTestSuite(TearDownWebContentTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

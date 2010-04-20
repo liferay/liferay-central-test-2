@@ -106,7 +106,7 @@ public class AddDLDocumentTest extends BaseTestCase {
 				Thread.sleep(5000);
 				selenium.type("_20_file",
 					RuntimeVariables.replace(
-						"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\assetpublisher\\viewdldocumentabstracts\\dependencies\\AP_test_document.txt"));
+						"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\assetpublisher\\dldocument\\viewdldocumentabstracts\\dependencies\\AP_test_document.txt"));
 				selenium.type("_20_title",
 					RuntimeVariables.replace("AP DL Document Title"));
 				selenium.clickAt("//input[@value='Save']",

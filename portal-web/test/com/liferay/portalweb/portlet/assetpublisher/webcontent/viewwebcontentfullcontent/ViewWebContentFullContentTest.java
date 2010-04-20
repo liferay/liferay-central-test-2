@@ -33,7 +33,7 @@ public class ViewWebContentFullContentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Asset Publisher Test Page")) {
+				if (selenium.isVisible("link=Asset Publisher Test Page")) {
 					break;
 				}
 			}
@@ -49,7 +49,5 @@ public class ViewWebContentFullContentTest extends BaseTestCase {
 		assertTrue(selenium.isPartialText("//div[1]/h3", "AP Web Content Name"));
 		assertEquals(RuntimeVariables.replace("AP Web Content Body"),
 			selenium.getText("//p"));
-		assertFalse(selenium.isElementPresent("link=Read More \u00bb"));
-		assertFalse(selenium.isElementPresent("//th[1]"));
 	}
 }

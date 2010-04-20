@@ -37,7 +37,8 @@ public class ViewWikiPageAbstractsTests extends BaseTests {
 		testSuite.addTestSuite(
 			ConfigurePortletDynamicDisplayStyleAbstractsTest.class);
 		testSuite.addTestSuite(ViewWikiPageAbstractsTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownWikiNodeTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

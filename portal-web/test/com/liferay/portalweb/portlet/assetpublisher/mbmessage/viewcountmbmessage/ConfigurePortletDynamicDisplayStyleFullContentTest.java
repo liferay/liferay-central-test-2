@@ -35,7 +35,7 @@ public class ConfigurePortletDynamicDisplayStyleFullContentTest
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Asset Publisher Test Page")) {
+				if (selenium.isVisible("link=Asset Publisher Test Page")) {
 					break;
 				}
 			}
@@ -71,7 +71,10 @@ public class ConfigurePortletDynamicDisplayStyleFullContentTest
 			RuntimeVariables.replace("label=Full Content"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"You have successfully updated the setup."));
+		assertEquals(RuntimeVariables.replace(
+				"You have successfully updated the setup."),
+			selenium.getText("//div[3]/div/div/div/div/div"));
+		assertEquals("Full Content",
+			selenium.getSelectedLabel("_86_displayStyle"));
 	}
 }

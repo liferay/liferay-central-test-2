@@ -37,7 +37,8 @@ public class AddWebContentCommentTests extends BaseTests {
 			ConfigurePortletDynamicDisplayStyleFullContentTest.class);
 		testSuite.addTestSuite(ConfigurePortletDynamicEnableCommentsTest.class);
 		testSuite.addTestSuite(AddWebContentCommentTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownWebContentTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

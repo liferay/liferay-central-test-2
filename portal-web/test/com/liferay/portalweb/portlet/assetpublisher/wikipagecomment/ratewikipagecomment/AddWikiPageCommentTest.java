@@ -32,7 +32,7 @@ public class AddWikiPageCommentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Asset Publisher Test Page")) {
+				if (selenium.isVisible("link=Asset Publisher Test Page")) {
 					break;
 				}
 			}
@@ -53,7 +53,7 @@ public class AddWikiPageCommentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//textarea")) {
+				if (selenium.isVisible("//textarea")) {
 					break;
 				}
 			}
@@ -67,10 +67,11 @@ public class AddWikiPageCommentTest extends BaseTestCase {
 			RuntimeVariables.replace("AP Wiki Page Comment."));
 		selenium.keyPress("//textarea", RuntimeVariables.replace("\\48"));
 		selenium.keyPress("//textarea", RuntimeVariables.replace("\\8"));
-		selenium.clickAt("//tr[3]/td/input[1]", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Reply']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+		assertEquals(RuntimeVariables.replace(
+				"Your request processed successfully."),
+			selenium.getText("//section/div/div/div/div[1]"));
 		assertEquals(RuntimeVariables.replace("AP Wiki Page Comment."),
 			selenium.getText("//td[2]/div[1]"));
 	}

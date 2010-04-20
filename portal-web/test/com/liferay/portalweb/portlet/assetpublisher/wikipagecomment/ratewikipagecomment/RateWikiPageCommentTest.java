@@ -32,7 +32,7 @@ public class RateWikiPageCommentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Asset Publisher Test Page")) {
+				if (selenium.isVisible("link=Asset Publisher Test Page")) {
 					break;
 				}
 			}
@@ -45,6 +45,10 @@ public class RateWikiPageCommentTest extends BaseTestCase {
 		selenium.clickAt("link=Asset Publisher Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		assertEquals(RuntimeVariables.replace("0 (0 Votes)"),
+			selenium.getText("//td[2]/table[1]/tbody/tr/td[1]/div/div/div/div"));
+		selenium.clickAt("//table[1]/tbody/tr/td[1]/div/div/div/a[1]",
+			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -52,8 +56,55 @@ public class RateWikiPageCommentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"//td[2]/table[1]/tbody/tr/td[1]/div/div/div/div")) {
+				if (RuntimeVariables.replace("+1 (1 Vote)")
+										.equals(selenium.getText(
+								"//td[2]/table[1]/tbody/tr/td[1]/div/div/div/div"))) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		assertEquals(RuntimeVariables.replace("+1 (1 Vote)"),
+			selenium.getText("//td[2]/table[1]/tbody/tr/td[1]/div/div/div/div"));
+		selenium.clickAt("//td[1]/div/div/div/a[2]",
+			RuntimeVariables.replace(""));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (RuntimeVariables.replace("-1 (1 Vote)")
+										.equals(selenium.getText(
+								"//td[2]/table[1]/tbody/tr/td[1]/div/div/div/div"))) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		assertEquals(RuntimeVariables.replace("-1 (1 Vote)"),
+			selenium.getText("//td[2]/table[1]/tbody/tr/td[1]/div/div/div/div"));
+		selenium.clickAt("//td[1]/div/div/div/a[2]",
+			RuntimeVariables.replace(""));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (RuntimeVariables.replace("0 (0 Votes)")
+										.equals(selenium.getText(
+								"//td[2]/table[1]/tbody/tr/td[1]/div/div/div/div"))) {
 					break;
 				}
 			}
@@ -64,16 +115,6 @@ public class RateWikiPageCommentTest extends BaseTestCase {
 		}
 
 		assertEquals(RuntimeVariables.replace("0 (0 Votes)"),
-			selenium.getText("//td[2]/table[1]/tbody/tr/td[1]/div/div/div/div"));
-		selenium.clickAt("//table[1]/tbody/tr/td[1]/div/div/div/a[1]",
-			RuntimeVariables.replace(""));
-		Thread.sleep(5000);
-		assertEquals(RuntimeVariables.replace("+1 (1 Vote)"),
-			selenium.getText("//td[2]/table[1]/tbody/tr/td[1]/div/div/div/div"));
-		selenium.clickAt("//td[1]/div/div/div/a[2]",
-			RuntimeVariables.replace(""));
-		Thread.sleep(5000);
-		assertEquals(RuntimeVariables.replace("-1 (1 Vote)"),
 			selenium.getText("//td[2]/table[1]/tbody/tr/td[1]/div/div/div/div"));
 	}
 }

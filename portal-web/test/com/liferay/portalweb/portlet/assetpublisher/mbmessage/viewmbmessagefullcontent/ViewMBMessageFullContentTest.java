@@ -33,7 +33,7 @@ public class ViewMBMessageFullContentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Asset Publisher Test Page")) {
+				if (selenium.isVisible("link=Asset Publisher Test Page")) {
 					break;
 				}
 			}
@@ -44,60 +44,20 @@ public class ViewMBMessageFullContentTest extends BaseTestCase {
 		}
 
 		selenium.clickAt("link=Asset Publisher Test Page",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isPartialText("//div[1]/h3", "AP MB Message Subject"));
-		assertTrue(selenium.isPartialText("//div[2]/div/div/div",
-				"AP MB Message Body."));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (RuntimeVariables.replace("View in Context \u00bb")
-										.equals(selenium.getText(
-								"//div[2]/div/a"))) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		assertEquals(RuntimeVariables.replace("View in Context \u00bb"),
-			selenium.getText("//div[2]/div/a"));
-		assertFalse(selenium.isElementPresent("link=AP MB Message Subject"));
-		assertFalse(selenium.isElementPresent("link=Read More \u00bb"));
-		assertFalse(selenium.isElementPresent("//th[1]"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Asset Publisher Test Page")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("link=Asset Publisher Test Page",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=View in Context \u00bb",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("AP MB Message Subject"),
-			selenium.getText("//form/div[3]"));
+			selenium.getText("//div[1]/h3"));
+		assertTrue(selenium.isPartialText("//div/div/div/div[1]/div[2]",
+				"AP MB Message Body."));
+		assertEquals(RuntimeVariables.replace("View in Context \u00bb"),
+			selenium.getText("//div[2]/div/a"));
+		selenium.clickAt("//div[2]/div/a", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		assertEquals(RuntimeVariables.replace("AP MB Message Subject"),
+			selenium.getText("//form/div[2]"));
+		assertEquals(RuntimeVariables.replace("AP MB Message Subject"),
+			selenium.getText("//a/strong"));
 		assertEquals(RuntimeVariables.replace("AP MB Message Body."),
 			selenium.getText("//td[2]/div[2]"));
 	}

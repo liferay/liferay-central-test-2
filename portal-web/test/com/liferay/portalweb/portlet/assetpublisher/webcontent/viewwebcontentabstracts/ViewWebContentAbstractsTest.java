@@ -32,7 +32,7 @@ public class ViewWebContentAbstractsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Asset Publisher Test Page")) {
+				if (selenium.isVisible("link=Asset Publisher Test Page")) {
 					break;
 				}
 			}
@@ -47,64 +47,11 @@ public class ViewWebContentAbstractsTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("AP Web Content Name"),
 			selenium.getText("//div[1]/h3/a"));
-		assertEquals(RuntimeVariables.replace("AP Web Content Body"),
-			selenium.getText("//p"));
-		assertEquals(RuntimeVariables.replace("Read More \u00bb"),
-			selenium.getText("//div[1]/div[1]/div/a"));
-		assertFalse(selenium.isElementPresent("//th[1]"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Asset Publisher Test Page")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("link=Asset Publisher Test Page",
-			RuntimeVariables.replace(""));
+		assertTrue(selenium.isPartialText("//div[2]/a", "Read More"));
+		selenium.clickAt("//div[2]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=AP Web Content Name",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		assertEquals(RuntimeVariables.replace("Back"),
-			selenium.getText("//div[2]/div/div/div[1]/a"));
-		assertTrue(selenium.isPartialText("//div/h3", "AP Web Content Name"));
-		assertEquals(RuntimeVariables.replace("AP Web Content Body"),
-			selenium.getText("//p"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Asset Publisher Test Page")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("link=Asset Publisher Test Page",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=Read More \u00bb", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		assertEquals(RuntimeVariables.replace("Back"),
-			selenium.getText("//div[2]/div/div/div[1]/a"));
-		assertTrue(selenium.isPartialText("//div/h3", "AP Web Content Name"));
+		assertEquals(RuntimeVariables.replace("AP Web Content Name"),
+			selenium.getText("//div/h3"));
 		assertEquals(RuntimeVariables.replace("AP Web Content Body"),
 			selenium.getText("//p"));
 	}

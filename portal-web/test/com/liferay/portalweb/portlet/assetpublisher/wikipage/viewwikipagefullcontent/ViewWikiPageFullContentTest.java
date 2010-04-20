@@ -32,7 +32,7 @@ public class ViewWikiPageFullContentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Asset Publisher Test Page")) {
+				if (selenium.isVisible("link=Asset Publisher Test Page")) {
 					break;
 				}
 			}
@@ -45,38 +45,16 @@ public class ViewWikiPageFullContentTest extends BaseTestCase {
 		selenium.clickAt("link=Asset Publisher Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isPartialText("//div[1]/h3", "FrontPage"));
-		assertTrue(selenium.isPartialText("//div[2]/div/div/div[1]/div[2]",
+		assertEquals(RuntimeVariables.replace("FrontPage"),
+			selenium.getText("//div/h3"));
+		assertTrue(selenium.isPartialText("//div/div/div/div[1]/div[2]",
 				"AP Wiki Page Body"));
 		assertEquals(RuntimeVariables.replace("View in Context \u00bb"),
-			selenium.getText("//div[1]/div[1]/div/div/a"));
-		assertFalse(selenium.isElementPresent("link=Read More \u00bb"));
-		assertFalse(selenium.isElementPresent("//th[1]"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Asset Publisher Test Page")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("link=Asset Publisher Test Page",
-			RuntimeVariables.replace(""));
+			selenium.getText("//div[2]/div/a"));
+		selenium.clickAt("//div[2]/div/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=View in Context \u00bb",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isPartialText("//div[2]/div/div/h1", "FrontPage"));
+		assertTrue(selenium.isPartialText("//div/h1", "FrontPage"));
 		assertEquals(RuntimeVariables.replace("AP Wiki Page Body"),
-			selenium.getText("//div[2]/div/div/div[4]/div"));
+			selenium.getText("//div/div/div/div[3]/div"));
 	}
 }

@@ -41,7 +41,8 @@ public class RateWikiPageCommentTests extends BaseTests {
 			ConfigurePortletDynamicEnableCommentRatingsTest.class);
 		testSuite.addTestSuite(AddWikiPageCommentTest.class);
 		testSuite.addTestSuite(RateWikiPageCommentTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownWikiNodeTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

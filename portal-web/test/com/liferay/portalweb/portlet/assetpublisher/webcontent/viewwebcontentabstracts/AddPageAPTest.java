@@ -25,7 +25,6 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class AddPageAPTest extends BaseTestCase {
 	public void testAddPageAP() throws Exception {
 		selenium.open("/web/guest/home/");
-		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -33,7 +32,7 @@ public class AddPageAPTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("addPage")) {
+				if (selenium.isVisible("addPage")) {
 					break;
 				}
 			}
@@ -51,7 +50,7 @@ public class AddPageAPTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//input")) {
+				if (selenium.isVisible("//input")) {
 					break;
 				}
 			}
@@ -63,7 +62,7 @@ public class AddPageAPTest extends BaseTestCase {
 
 		selenium.type("//input",
 			RuntimeVariables.replace("Asset Publisher Test Page"));
-		selenium.clickAt("//span[@id='save']/span", RuntimeVariables.replace(""));
+		selenium.clickAt("save", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -71,7 +70,7 @@ public class AddPageAPTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Asset Publisher Test Page")) {
+				if (selenium.isVisible("link=Asset Publisher Test Page")) {
 					break;
 				}
 			}

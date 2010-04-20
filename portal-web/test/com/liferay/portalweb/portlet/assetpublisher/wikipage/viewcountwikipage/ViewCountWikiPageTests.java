@@ -39,7 +39,8 @@ public class ViewCountWikiPageTests extends BaseTests {
 		testSuite.addTestSuite(
 			ConfigurePortletDynamicShowMetadataViewCountTest.class);
 		testSuite.addTestSuite(ViewCountWikiPageTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownWikiNodeTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

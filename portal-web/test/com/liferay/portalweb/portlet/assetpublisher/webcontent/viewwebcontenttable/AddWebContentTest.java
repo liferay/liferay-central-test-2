@@ -32,7 +32,7 @@ public class AddWebContentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Asset Publisher Test Page")) {
+				if (selenium.isVisible("link=Asset Publisher Test Page")) {
 					break;
 				}
 			}
@@ -75,7 +75,7 @@ public class AddWebContentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("FCKeditor1___Frame")) {
+				if (selenium.isElementPresent("cke_contents_CKEditor1")) {
 					break;
 				}
 			}
@@ -103,8 +103,7 @@ public class AddWebContentTest extends BaseTestCase {
 
 		selenium.selectFrame(
 			"//iframe[@id='_15_structure_el_TextAreaField_content']");
-		selenium.selectFrame("//iframe[@id='FCKeditor1___Frame']");
-		selenium.selectFrame("//iframe");
+		selenium.selectFrame("//td[@id='cke_contents_CKEditor1']/iframe");
 		selenium.type("//body", RuntimeVariables.replace("AP Web Content Body"));
 		selenium.selectFrame("relative=top");
 		selenium.clickAt("//input[@value='Save and Approve']",

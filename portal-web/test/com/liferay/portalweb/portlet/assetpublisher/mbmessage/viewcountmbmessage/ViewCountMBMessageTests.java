@@ -40,7 +40,9 @@ public class ViewCountMBMessageTests extends BaseTests {
 		testSuite.addTestSuite(
 			ConfigurePortletDynamicShowMetadataViewCountTest.class);
 		testSuite.addTestSuite(ViewCountMBMessageTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownMBCategoryTest.class);
+		testSuite.addTestSuite(TearDownMBMessageTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

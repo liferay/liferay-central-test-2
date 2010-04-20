@@ -14,7 +14,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>waitForVisible</td>
 	<td>link=Asset Publisher Test Page</td>
 	<td></td>
 </tr>
@@ -24,7 +24,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>waitForVisible</td>
 	<td>//td[2]/table[1]/tbody/tr/td[1]/div/div/div/div</td>
 	<td></td>
 </tr>
@@ -39,9 +39,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>pause</td>
-	<td>5000</td>
-	<td></td>
+	<td>waitForText</td>
+	<td>//td[2]/table[1]/tbody/tr/td[1]/div/div/div/div</td>
+	<td>+1 (1 Vote)</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -54,14 +54,29 @@
 	<td></td>
 </tr>
 <tr>
-	<td>pause</td>
-	<td>5000</td>
-	<td></td>
+	<td>waitForText</td>
+	<td>//td[2]/table[1]/tbody/tr/td[1]/div/div/div/div</td>
+	<td>-1 (1 Vote)</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>//td[2]/table[1]/tbody/tr/td[1]/div/div/div/div</td>
 	<td>-1 (1 Vote)</td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>//td[1]/div/div/div/a[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//td[2]/table[1]/tbody/tr/td[1]/div/div/div/div</td>
+	<td>0 (0 Votes)</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//td[2]/table[1]/tbody/tr/td[1]/div/div/div/div</td>
+	<td>0 (0 Votes)</td>
 </tr>
 
 </tbody></table>

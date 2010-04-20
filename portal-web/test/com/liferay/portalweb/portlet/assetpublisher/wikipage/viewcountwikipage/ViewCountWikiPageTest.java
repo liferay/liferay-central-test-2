@@ -32,7 +32,7 @@ public class ViewCountWikiPageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Asset Publisher Test Page")) {
+				if (selenium.isVisible("link=Asset Publisher Test Page")) {
 					break;
 				}
 			}
@@ -45,10 +45,10 @@ public class ViewCountWikiPageTest extends BaseTestCase {
 		selenium.clickAt("link=Asset Publisher Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("FrontPage"));
 
 		String viewCount = selenium.getIncrementedText("//div[3]/span");
 		RuntimeVariables.setValue("viewCount", viewCount);
+		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -56,7 +56,7 @@ public class ViewCountWikiPageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Asset Publisher Test Page")) {
+				if (selenium.isVisible("link=Asset Publisher Test Page")) {
 					break;
 				}
 			}
@@ -71,6 +71,7 @@ public class ViewCountWikiPageTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isPartialText("//div[3]/span",
 				RuntimeVariables.getValue("viewCount")));
+		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -78,7 +79,7 @@ public class ViewCountWikiPageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Wiki Test Page")) {
+				if (selenium.isVisible("link=Wiki Test Page")) {
 					break;
 				}
 			}
@@ -91,8 +92,10 @@ public class ViewCountWikiPageTest extends BaseTestCase {
 		selenium.clickAt("link=Wiki Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
-		String viewCount2 = selenium.getIncrementedText("//div/div[5]/div[2]");
+		String viewCount2 = selenium.getIncrementedText(
+				"//section/div/div/div/div[4]/div[2]");
 		RuntimeVariables.setValue("viewCount2", viewCount2);
+		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -100,7 +103,7 @@ public class ViewCountWikiPageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Wiki Test Page")) {
+				if (selenium.isVisible("link=Wiki Test Page")) {
 					break;
 				}
 			}
@@ -112,6 +115,7 @@ public class ViewCountWikiPageTest extends BaseTestCase {
 
 		selenium.clickAt("link=Wiki Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -119,7 +123,7 @@ public class ViewCountWikiPageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Asset Publisher Test Page")) {
+				if (selenium.isVisible("link=Asset Publisher Test Page")) {
 					break;
 				}
 			}

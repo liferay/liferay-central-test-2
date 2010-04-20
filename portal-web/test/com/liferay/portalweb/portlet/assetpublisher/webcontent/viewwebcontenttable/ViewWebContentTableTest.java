@@ -32,7 +32,7 @@ public class ViewWebContentTableTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Asset Publisher Test Page")) {
+				if (selenium.isVisible("link=Asset Publisher Test Page")) {
 					break;
 				}
 			}
@@ -49,34 +49,10 @@ public class ViewWebContentTableTest extends BaseTestCase {
 			selenium.getText("//th[1]"));
 		assertEquals(RuntimeVariables.replace("AP Web Content Name"),
 			selenium.getText("//td[1]/a"));
-		assertFalse(selenium.isTextPresent("AP Web Content Body"));
-		assertFalse(selenium.isElementPresent("link=Read More \u00bb"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Asset Publisher Test Page")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("link=Asset Publisher Test Page",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("//td[1]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=AP Web Content Name",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		assertEquals(RuntimeVariables.replace("Back"),
-			selenium.getText("//div[2]/div/div/div[1]/a"));
-		assertTrue(selenium.isPartialText("//div/h3", "AP Web Content Name"));
+		assertEquals(RuntimeVariables.replace("AP Web Content Name"),
+			selenium.getText("//div[1]/h3"));
 		assertEquals(RuntimeVariables.replace("AP Web Content Body"),
 			selenium.getText("//p"));
 	}

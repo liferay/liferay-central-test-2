@@ -34,10 +34,9 @@ public class RemoveWebContentTests extends BaseTests {
 		testSuite.addTestSuite(AddWebContentTest.class);
 		testSuite.addTestSuite(ConfigurePortletAssetSelectionManualTest.class);
 		testSuite.addTestSuite(SelectWebContentTest.class);
-		testSuite.addTestSuite(ViewWebContentSelectTest.class);
 		testSuite.addTestSuite(RemoveWebContentTest.class);
-		testSuite.addTestSuite(ViewWebContentRemoveTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownWebContentTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

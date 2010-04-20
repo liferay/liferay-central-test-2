@@ -37,7 +37,8 @@ public class ViewWikiPageTableTests extends BaseTests {
 		testSuite.addTestSuite(
 			ConfigurePortletDynamicDisplayStyleTableTest.class);
 		testSuite.addTestSuite(ViewWikiPageTableTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownWikiNodeTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

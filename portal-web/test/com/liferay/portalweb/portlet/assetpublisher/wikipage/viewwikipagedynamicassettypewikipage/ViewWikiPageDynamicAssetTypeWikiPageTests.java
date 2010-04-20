@@ -36,9 +36,13 @@ public class ViewWikiPageDynamicAssetTypeWikiPageTests extends BaseTests {
 		testSuite.addTestSuite(AddPortletWikiTest.class);
 		testSuite.addTestSuite(AddWikiPageTest.class);
 		testSuite.addTestSuite(
-			ConfigurePortletDynamicAssetTypeWikiPageTest.class);
-		testSuite.addTestSuite(ViewWikiPageDynamicAssetTypeWikiPageTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+			ConfigurePortletDynamicAvailableWikiPageTest.class);
+		testSuite.addTestSuite(ViewWikiPageAvailableTest.class);
+		testSuite.addTestSuite(
+			ConfigurePortletDynamicCurrentWikiPageTest.class);
+		testSuite.addTestSuite(ViewWikiPageCurrentTest.class);
+		testSuite.addTestSuite(TearDownWikiNodeTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

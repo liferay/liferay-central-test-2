@@ -32,7 +32,7 @@ public class AddPageDLTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Welcome")) {
+				if (selenium.isVisible("link=Welcome")) {
 					break;
 				}
 			}
@@ -44,24 +44,6 @@ public class AddPageDLTest extends BaseTestCase {
 
 		selenium.clickAt("link=Welcome", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		Thread.sleep(5000);
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("addPage")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.clickAt("addPage", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -70,7 +52,7 @@ public class AddPageDLTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//input")) {
+				if (selenium.isVisible("//input")) {
 					break;
 				}
 			}
@@ -82,7 +64,7 @@ public class AddPageDLTest extends BaseTestCase {
 
 		selenium.type("//input",
 			RuntimeVariables.replace("Document Library Test Page"));
-		selenium.clickAt("//span[@id='save']/span", RuntimeVariables.replace(""));
+		selenium.clickAt("save", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -90,7 +72,7 @@ public class AddPageDLTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Document Library Test Page")) {
+				if (selenium.isVisible("link=Document Library Test Page")) {
 					break;
 				}
 			}

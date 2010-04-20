@@ -32,7 +32,7 @@ public class AddMBMessageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Message Boards Test Page")) {
+				if (selenium.isVisible("link=Message Boards Test Page")) {
 					break;
 				}
 			}
@@ -50,12 +50,17 @@ public class AddMBMessageTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Post New Thread']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		Thread.sleep(5000);
 		selenium.type("_19_subject",
 			RuntimeVariables.replace("AP MB Message Subject"));
 		selenium.type("_19_textArea",
 			RuntimeVariables.replace("AP MB Message Body."));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		assertEquals(RuntimeVariables.replace("AP MB Message Subject"),
+			selenium.getText("//form/div[2]"));
+		assertEquals(RuntimeVariables.replace("AP MB Message Subject"),
+			selenium.getText("//a/strong"));
+		assertEquals(RuntimeVariables.replace("AP MB Message Body."),
+			selenium.getText("//td[2]/div[2]"));
 	}
 }

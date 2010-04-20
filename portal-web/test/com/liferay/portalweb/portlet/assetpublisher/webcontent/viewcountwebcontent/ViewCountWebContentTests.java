@@ -37,7 +37,8 @@ public class ViewCountWebContentTests extends BaseTests {
 		testSuite.addTestSuite(
 			ConfigurePortletDynamicShowMetadataViewCountTest.class);
 		testSuite.addTestSuite(ViewCountWebContentTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownWebContentTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

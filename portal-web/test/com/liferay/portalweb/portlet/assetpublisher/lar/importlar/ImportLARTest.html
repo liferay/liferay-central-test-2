@@ -14,28 +14,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>waitForVisible</td>
 	<td>link=Asset Publisher Test Page</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
 	<td>link=Asset Publisher Test Page</td>
-	<td></td>
-</tr>
-<tr>
-	<td>pause</td>
-	<td>5000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAt</td>
-	<td>//strong/span</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=Configuration</td>
 	<td></td>
 </tr>
 <tr>
@@ -50,42 +35,42 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//form/div[2]/div[1]/div[1]</td>
+	<td>//div[1]/div[1]/div[1]/div/span</td>
 	<td>Selection</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[2]/div[2]/div[1]</td>
+	<td>//div[1]/div[2]/div[1]/div/span</td>
 	<td>Display Settings</td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>open</td>
+	<td>/web/guest/home/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
 	<td>link=Asset Publisher Test Page</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
 	<td>link=Asset Publisher Test Page</td>
-	<td></td>
-</tr>
-<tr>
-	<td>pause</td>
-	<td>5000</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAt</td>
-	<td>//strong/span</td>
+	<td>//strong/a</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>link=Export / Import</td>
+	<td>waitForVisible</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[3]/a</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAtAndWait</td>
-	<td>link=Export / Import</td>
+	<td>clickAndWait</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[3]/a</td>
 	<td></td>
 </tr>
 <tr>
@@ -96,7 +81,7 @@
 <tr>
 	<td>type</td>
 	<td>_86_importFileName</td>
-	<td>L:\portal\build\portal-web\test\com\liferay\portalweb\portlet\assetpublisher\importlar\dependencies\Asset_Publisher-Selenium.portlet.lar</td>
+	<td>L:\portal\build\portal-web\test\com\liferay\portalweb\portlet\assetpublisher\lar\importlar\dependencies\Asset_Publisher-Selenium.portlet.lar</td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
@@ -104,9 +89,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>assertText</td>
+	<td>//section/div/div/div/div</td>
 	<td>Your request processed successfully.</td>
-	<td></td>
 </tr>
 
 </tbody></table>

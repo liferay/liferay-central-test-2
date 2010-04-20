@@ -32,7 +32,7 @@ public class AddWikiPageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Wiki Test Page")) {
+				if (selenium.isVisible("link=Wiki Test Page")) {
 					break;
 				}
 			}
@@ -51,10 +51,11 @@ public class AddWikiPageTest extends BaseTestCase {
 			RuntimeVariables.replace("AP Wiki Page Body"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
-		assertTrue(selenium.isPartialText("//div[2]/div/div/h1", "FrontPage"));
+		assertEquals(RuntimeVariables.replace(
+				"Your request processed successfully."),
+			selenium.getText("//section/div/div/div/div[1]"));
+		assertTrue(selenium.isPartialText("//div/h1", "FrontPage"));
 		assertEquals(RuntimeVariables.replace("AP Wiki Page Body"),
-			selenium.getText("//div/div[5]/div"));
+			selenium.getText("//section/div/div/div/div[4]/div"));
 	}
 }

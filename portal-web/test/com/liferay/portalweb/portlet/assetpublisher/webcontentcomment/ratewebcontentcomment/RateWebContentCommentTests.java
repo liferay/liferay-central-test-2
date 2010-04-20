@@ -40,7 +40,8 @@ public class RateWebContentCommentTests extends BaseTests {
 			ConfigurePortletDynamicEnableCommentRatingsTest.class);
 		testSuite.addTestSuite(AddWebContentCommentTest.class);
 		testSuite.addTestSuite(RateWebContentCommentTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownWebContentTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

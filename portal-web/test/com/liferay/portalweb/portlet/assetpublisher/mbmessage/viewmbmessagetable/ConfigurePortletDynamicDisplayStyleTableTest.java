@@ -34,7 +34,7 @@ public class ConfigurePortletDynamicDisplayStyleTableTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Asset Publisher Test Page")) {
+				if (selenium.isVisible("link=Asset Publisher Test Page")) {
 					break;
 				}
 			}
@@ -70,7 +70,9 @@ public class ConfigurePortletDynamicDisplayStyleTableTest extends BaseTestCase {
 			RuntimeVariables.replace("label=Table"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"You have successfully updated the setup."));
+		assertEquals(RuntimeVariables.replace(
+				"You have successfully updated the setup."),
+			selenium.getText("//div[3]/div/div/div/div/div"));
+		assertEquals("Table", selenium.getSelectedLabel("_86_displayStyle"));
 	}
 }

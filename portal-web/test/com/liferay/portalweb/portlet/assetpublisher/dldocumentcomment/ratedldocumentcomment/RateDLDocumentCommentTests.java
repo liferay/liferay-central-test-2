@@ -42,7 +42,9 @@ public class RateDLDocumentCommentTests extends BaseTests {
 			ConfigurePortletDynamicEnableCommentRatingsTest.class);
 		testSuite.addTestSuite(AddDLDocumentCommentTest.class);
 		testSuite.addTestSuite(RateDLDocumentCommentTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownDLFolderTest.class);
+		testSuite.addTestSuite(TearDownDocumentTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

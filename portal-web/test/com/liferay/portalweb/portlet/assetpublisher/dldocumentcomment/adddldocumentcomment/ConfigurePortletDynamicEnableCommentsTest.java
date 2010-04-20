@@ -56,16 +56,7 @@ public class ConfigurePortletDynamicEnableCommentsTest extends BaseTestCase {
 				selenium.clickAt("link=Configuration",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-
-				boolean enableCommentsChecked = selenium.isChecked(
-						"_86_enableCommentsCheckbox");
-
-				if (enableCommentsChecked) {
-					label = 2;
-
-					continue;
-				}
-
+				assertFalse(selenium.isChecked("_86_enableCommentsCheckbox"));
 				selenium.clickAt("_86_enableCommentsCheckbox",
 					RuntimeVariables.replace(""));
 
@@ -73,8 +64,10 @@ public class ConfigurePortletDynamicEnableCommentsTest extends BaseTestCase {
 				selenium.clickAt("//input[@value='Save']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				assertTrue(selenium.isTextPresent(
-						"You have successfully updated the setup."));
+				assertEquals(RuntimeVariables.replace(
+						"You have successfully updated the setup."),
+					selenium.getText("//div[3]/div/div/div/div/div"));
+				assertTrue(selenium.isChecked("_86_enableCommentsCheckbox"));
 
 			case 100:
 				label = -1;

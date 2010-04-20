@@ -37,10 +37,14 @@ public class ViewMBMessageDynamicAssetTypeMBMessageTests extends BaseTests {
 		testSuite.addTestSuite(AddCategoryTest.class);
 		testSuite.addTestSuite(AddMBMessageTest.class);
 		testSuite.addTestSuite(
-			ConfigurePortletDynamicAssetTypeMBMessageTest.class);
+			ConfigurePortletDynamicAvailableMBMessageTest.class);
+		testSuite.addTestSuite(ViewMBMessageAvailableTest.class);
 		testSuite.addTestSuite(
-			ViewMBMessageDynamicAssetTypeMBMessageTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+			ConfigurePortletDynamicCurrentMBMessageTest.class);
+		testSuite.addTestSuite(ViewMBMessageCurrentTest.class);
+		testSuite.addTestSuite(TearDownMBCategoryTest.class);
+		testSuite.addTestSuite(TearDownMBMessageTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

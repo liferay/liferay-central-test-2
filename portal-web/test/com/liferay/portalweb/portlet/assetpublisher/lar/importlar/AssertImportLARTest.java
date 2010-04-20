@@ -32,7 +32,7 @@ public class AssertImportLARTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Asset Publisher Test Page")) {
+				if (selenium.isVisible("link=Asset Publisher Test Page")) {
 					break;
 				}
 			}
@@ -49,12 +49,12 @@ public class AssertImportLARTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertEquals("Dynamic", selenium.getSelectedLabel("_86_selectionStyle"));
 		assertEquals(RuntimeVariables.replace("Source"),
-			selenium.getText("//form/div[2]/div[1]/div[1]"));
+			selenium.getText("//div[1]/div[1]/div[1]/div/span"));
 		assertEquals(RuntimeVariables.replace("Filter"),
-			selenium.getText("//div[2]/div[2]/div[1]"));
+			selenium.getText("//div[1]/div[2]/div[1]/div/span"));
 		assertEquals(RuntimeVariables.replace("Ordering and Grouping"),
-			selenium.getText("//div[3]/div[1]/div/span"));
+			selenium.getText("//div[1]/div[3]/div[1]/div/span"));
 		assertEquals(RuntimeVariables.replace("Display Settings"),
-			selenium.getText("//div[2]/div[4]/div[1]"));
+			selenium.getText("//div[1]/div[4]/div[1]/div/span"));
 	}
 }

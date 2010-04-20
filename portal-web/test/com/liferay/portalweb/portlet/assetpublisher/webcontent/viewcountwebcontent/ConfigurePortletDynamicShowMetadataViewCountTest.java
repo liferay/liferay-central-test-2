@@ -35,7 +35,7 @@ public class ConfigurePortletDynamicShowMetadataViewCountTest
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Asset Publisher Test Page")) {
+				if (selenium.isVisible("link=Asset Publisher Test Page")) {
 					break;
 				}
 			}
@@ -69,14 +69,35 @@ public class ConfigurePortletDynamicShowMetadataViewCountTest
 
 		selenium.addSelection("_86_availableMetadataFields",
 			RuntimeVariables.replace("label=View Count"));
-		selenium.clickAt("//fieldset/div/table/tbody/tr/td[2]/a[2]/img",
+		selenium.clickAt("//fieldset[2]/div/div/table/tbody/tr/td[2]/a[2]/img",
 			RuntimeVariables.replace(""));
-		Thread.sleep(5000);
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (RuntimeVariables.replace("View Count")
+										.equals(selenium.getText(
+								"_86_currentMetadataFields"))) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertEquals(RuntimeVariables.replace("View Count"),
 			selenium.getText("_86_currentMetadataFields"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"You have successfully updated the setup."));
+		assertEquals(RuntimeVariables.replace(
+				"You have successfully updated the setup."),
+			selenium.getText("//div[3]/div/div/div/div/div"));
+		assertEquals(RuntimeVariables.replace("View Count"),
+			selenium.getText("_86_currentMetadataFields"));
 	}
 }

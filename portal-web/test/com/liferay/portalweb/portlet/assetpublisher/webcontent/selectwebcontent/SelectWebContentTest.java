@@ -32,7 +32,7 @@ public class SelectWebContentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Asset Publisher Test Page")) {
+				if (selenium.isVisible("link=Asset Publisher Test Page")) {
 					break;
 				}
 			}
@@ -50,11 +50,37 @@ public class SelectWebContentTest extends BaseTestCase {
 		selenium.select("_86_assetEntryType",
 			RuntimeVariables.replace("label=Web Content"));
 		selenium.waitForPageToLoad("30000");
-		Thread.sleep(5000);
-		selenium.clickAt("link=AP Web Content Name",
+		selenium.clickAt("//td[2]/a", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		assertEquals(RuntimeVariables.replace(
+				"You have successfully updated the setup."),
+			selenium.getText("//div[3]/div/div/div/div/div"));
+		assertEquals(RuntimeVariables.replace("Web Content"),
+			selenium.getText("//td[1]/a"));
+		assertEquals(RuntimeVariables.replace("AP Web Content Name"),
+			selenium.getText("//td[2]/a"));
+		selenium.open("/web/guest/home/");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("link=Asset Publisher Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("link=Asset Publisher Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"You have successfully updated the setup."));
+		assertEquals(RuntimeVariables.replace("AP Web Content Name"),
+			selenium.getText("//div[1]/h3/a"));
 	}
 }
