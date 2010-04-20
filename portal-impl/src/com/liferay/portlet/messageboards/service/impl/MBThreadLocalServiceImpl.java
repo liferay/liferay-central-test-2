@@ -61,26 +61,6 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 		MBMessage rootMessage = mbMessagePersistence.findByPrimaryKey(
 			thread.getRootMessageId());
 
-		// Indexer
-
-		Indexer indexer = IndexerRegistryUtil.getIndexer(MBMessage.class);
-
-		indexer.delete(thread);
-
-		// Attachments
-
-		long companyId = rootMessage.getCompanyId();
-		String portletId = CompanyConstants.SYSTEM_STRING;
-		long repositoryId = CompanyConstants.SYSTEM;
-		String dirName = thread.getAttachmentsDir();
-
-		try {
-			dlService.deleteDirectory(
-				companyId, portletId, repositoryId, dirName);
-		}
-		catch (NoSuchDirectoryException nsde) {
-		}
-
 		// Messages
 
 		List<MBMessage> messages = mbMessagePersistence.findByThreadId(
@@ -88,27 +68,9 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 
 		for (MBMessage message : messages) {
 
-			// Social
+			// Message
 
-			socialActivityLocalService.deleteActivities(
-				MBMessage.class.getName(), message.getMessageId());
-
-			// Ratings
-
-			ratingsStatsLocalService.deleteStats(
-				MBMessage.class.getName(), message.getMessageId());
-
-			// Asset
-
-			assetEntryLocalService.deleteEntry(
-				MBMessage.class.getName(), message.getMessageId());
-
-			// Statistics
-
-			if (!message.isDiscussion()) {
-				mbStatsUserLocalService.updateStatsUser(
-					message.getGroupId(), message.getUserId());
-			}
+			mbMessagePersistence.remove(message);
 
 			// Message flags
 
@@ -122,10 +84,32 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 					ResourceConstants.SCOPE_INDIVIDUAL, message.getMessageId());
 			}
 
-			// Message
+			// Statistics
 
-			mbMessagePersistence.remove(message);
+			if (!message.isDiscussion()) {
+				mbStatsUserLocalService.updateStatsUser(
+					message.getGroupId(), message.getUserId());
+			}
+
+			// Asset
+
+			assetEntryLocalService.deleteEntry(
+				MBMessage.class.getName(), message.getMessageId());
+
+			// Ratings
+
+			ratingsStatsLocalService.deleteStats(
+				MBMessage.class.getName(), message.getMessageId());
+
+			// Social
+
+			socialActivityLocalService.deleteActivities(
+				MBMessage.class.getName(), message.getMessageId());	
 		}
+
+		// Thread
+
+		mbThreadPersistence.remove(thread);
 
 		// Category
 
@@ -137,9 +121,25 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 			mbCategoryPersistence.update(category, false);
 		}
 
-		// Thread
+		// Indexer
 
-		mbThreadPersistence.remove(thread);
+		Indexer indexer = IndexerRegistryUtil.getIndexer(MBMessage.class);
+
+		indexer.delete(thread);
+		
+		// Attachments
+
+		long companyId = rootMessage.getCompanyId();
+		String portletId = CompanyConstants.SYSTEM_STRING;
+		long repositoryId = CompanyConstants.SYSTEM;
+		String dirName = thread.getAttachmentsDir();
+
+		try {
+			dlService.deleteDirectory(
+				companyId, portletId, repositoryId, dirName);
+		}
+		catch (NoSuchDirectoryException nsde) {
+		}
 	}
 
 	public void deleteThreads(long groupId, long categoryId)
