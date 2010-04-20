@@ -58,9 +58,9 @@ public class TimeZoneUtil {
 		}
 	}
 
-	private static TimeZoneUtil _instance = new TimeZoneUtil();
 	private static HashMap<String, TimeZone> _timeZoneCache =
 		new HashMap<String, TimeZone>();
+	private static TimeZoneUtil _instance = new TimeZoneUtil();
 
 	private TimeZone _timeZone;
 
