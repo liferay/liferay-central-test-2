@@ -80,6 +80,7 @@ import com.liferay.portal.servlet.filters.cache.CacheUtil;
 import com.liferay.portal.struts.MultiMessageResources;
 import com.liferay.portal.struts.MultiMessageResourcesFactory;
 import com.liferay.portal.upgrade.UpgradeProcessUtil;
+import com.liferay.portal.util.Portal;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
@@ -344,7 +345,7 @@ public class HookHotDeployListener
 		}
 
 		String xml = HttpUtil.URLtoString(
-			servletContext.getResource("/WEB-INF/liferay-hook.xml"));
+			servletContext.getResource("/WEB-INF/" + Portal.HOOK_XML_FILE_NAME_STANDARD));
 
 		if (xml == null) {
 			return;
