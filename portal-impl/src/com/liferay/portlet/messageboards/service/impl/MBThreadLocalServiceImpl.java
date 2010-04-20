@@ -91,7 +91,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 
 			assetEntryLocalService.deleteEntry(
 				MBMessage.class.getName(), message.getMessageId());
-			
+
 			// Message flags
 
 			mbMessageFlagPersistence.removeByMessageId(message.getMessageId());
@@ -104,7 +104,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 			// Social
 
 			socialActivityLocalService.deleteActivities(
-				MBMessage.class.getName(), message.getMessageId());	
+				MBMessage.class.getName(), message.getMessageId());
 		}
 
 		// Thread
@@ -126,7 +126,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 		Indexer indexer = IndexerRegistryUtil.getIndexer(MBMessage.class);
 
 		indexer.delete(thread);
-		
+
 		// Attachments
 
 		long companyId = rootMessage.getCompanyId();

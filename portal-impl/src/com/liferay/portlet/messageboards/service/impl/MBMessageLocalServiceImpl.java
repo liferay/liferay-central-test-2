@@ -614,7 +614,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		}
 
 		if (count == 1) {
-	
+
 			// Thread
 
 			mbThreadPersistence.remove(message.getThreadId());
@@ -728,14 +728,14 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		// Message
 
 		mbMessagePersistence.remove(message);
-		
+
 		// Resources
 
 		if (!message.isDiscussion()) {
 			resourceLocalService.deleteResource(
 				message.getCompanyId(), MBMessage.class.getName(),
 				ResourceConstants.SCOPE_INDIVIDUAL, message.getMessageId());
-		}	
+		}
 
 		// Statistics
 
