@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.DateFormatFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.TimeZoneUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.StatusConstants;
 import com.liferay.portal.kernel.xml.Document;
@@ -92,7 +93,7 @@ public class WordPressImporter {
 		DateFormat dateFormat = DateFormatFactoryUtil.getSimpleDateFormat(
 			_DATE_FORMAT);
 
-		dateFormat.setTimeZone(TimeZone.getTimeZone(StringPool.UTC));
+		dateFormat.setTimeZone(TimeZoneUtil.getTimeZone(StringPool.UTC));
 
 		for (Element entryEl : entryEls) {
 			importEntry(context, defaultUser, userMap, dateFormat, entryEl);

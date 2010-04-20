@@ -38,7 +38,7 @@ numberFormat.setMinimumIntegerDigits(2);
 
 	<%
 	for (int i = 0; i < timeZones.length; i++) {
-		TimeZone curTimeZone = TimeZone.getTimeZone(timeZones[i]);
+		TimeZone curTimeZone = TimeZoneUtil.getTimeZone(timeZones[i]);
 
 		int rawOffset = curTimeZone.getRawOffset();
 		String offset = StringPool.BLANK;

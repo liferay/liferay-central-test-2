@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.upgrade.util.BaseUpgradeColumnImpl;
 import com.liferay.portal.kernel.util.Base64;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.TimeZoneUtil;
 import com.liferay.portal.kernel.util.Validator;
 
 import java.util.TimeZone;
@@ -109,7 +110,7 @@ public class CalEventRecurrenceUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
 		recurrenceJSON.put("javaClass", TZSRecurrence.class.getName());
 
-		TimeZone timeZone = TimeZone.getTimeZone(StringPool.UTC);
+		TimeZone timeZone = TimeZoneUtil.getTimeZone(StringPool.UTC);
 
 		JSONObject timeZoneJSON = JSONFactoryUtil.createJSONObject(
 			JSONFactoryUtil.serialize(timeZone));

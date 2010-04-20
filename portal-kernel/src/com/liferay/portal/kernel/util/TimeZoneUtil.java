@@ -14,6 +14,7 @@
 
 package com.liferay.portal.kernel.util;
 
+import java.util.HashMap;
 import java.util.TimeZone;
 
 /**
@@ -28,7 +29,15 @@ public class TimeZoneUtil {
 	}
 
 	public static TimeZone getTimeZone(String timeZoneId) {
-		return TimeZone.getTimeZone(timeZoneId);
+		TimeZone timeZone = _timeZoneCache.get(timeZoneId);
+
+		if (timeZone == null) {
+			timeZone = TimeZone.getTimeZone(timeZoneId);
+
+			_timeZoneCache.put(timeZoneId, timeZone);
+		}
+
+		return timeZone;
 	}
 
 	public static void setDefault(String id) {
@@ -36,7 +45,7 @@ public class TimeZoneUtil {
 	}
 
 	private TimeZoneUtil() {
-		_timeZone = TimeZone.getTimeZone(StringPool.UTC);
+		_timeZone = getTimeZone(StringPool.UTC);
 	}
 
 	private TimeZone _getDefault() {
@@ -50,6 +59,8 @@ public class TimeZoneUtil {
 	}
 
 	private static TimeZoneUtil _instance = new TimeZoneUtil();
+	private static HashMap<String, TimeZone> _timeZoneCache =
+		new HashMap<String, TimeZone>();
 
 	private TimeZone _timeZone;
 

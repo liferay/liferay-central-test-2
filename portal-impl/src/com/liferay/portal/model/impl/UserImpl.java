@@ -534,7 +534,7 @@ public class UserImpl extends UserModelImpl implements User {
 			timeZoneId = TimeZoneUtil.getDefault().getID();
 		}
 
-		_timeZone = TimeZone.getTimeZone(timeZoneId);
+		_timeZone = TimeZoneUtil.getTimeZone(timeZoneId);
 
 		super.setTimeZoneId(timeZoneId);
 	}

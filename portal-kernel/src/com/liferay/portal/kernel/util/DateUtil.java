@@ -223,7 +223,7 @@ public class DateUtil {
 		}
 
 		return DateFormatFactoryUtil.getSimpleDateFormat(
-			pattern, TimeZone.getTimeZone(StringPool.UTC));
+			pattern, TimeZoneUtil.getTimeZone(StringPool.UTC));
 	}
 
 	public static Date newDate() {
