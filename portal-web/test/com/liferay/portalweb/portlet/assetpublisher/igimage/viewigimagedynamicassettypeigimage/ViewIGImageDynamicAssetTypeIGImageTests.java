@@ -37,10 +37,14 @@ public class ViewIGImageDynamicAssetTypeIGImageTests extends BaseTests {
 		testSuite.addTestSuite(AddFolderTest.class);
 		testSuite.addTestSuite(AddIGImageTest.class);
 		testSuite.addTestSuite(
-			ConfigurePortletDynamicAssetTypeIGImageTest.class);
+			ConfigurePortletDynamicAvailableIGImageTest.class);
+		testSuite.addTestSuite(ViewIGImageAvailableTest.class);
 		testSuite.addTestSuite(
-			ViewIGImageDynamicAssetTypeIGImageTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+			ConfigurePortletDynamicCurrentIGImageTest.class);
+		testSuite.addTestSuite(ViewIGImageCurrentTest.class);
+		testSuite.addTestSuite(TearDownIGFolderTest.class);
+		testSuite.addTestSuite(TearDownIGImageTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

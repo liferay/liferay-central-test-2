@@ -32,7 +32,7 @@ public class ViewIGImageAbstractsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Asset Publisher Test Page")) {
+				if (selenium.isVisible("link=Asset Publisher Test Page")) {
 					break;
 				}
 			}
@@ -43,178 +43,22 @@ public class ViewIGImageAbstractsTest extends BaseTestCase {
 		}
 
 		selenium.clickAt("link=Asset Publisher Test Page",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		Thread.sleep(5000);
-		assertEquals(RuntimeVariables.replace("AP IG Image Name"),
-			selenium.getText("//div[1]/h3/a"));
-		assertTrue(selenium.isElementPresent("//img[@alt='View Album']"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (RuntimeVariables.replace("Read More \u00bb")
-										.equals(selenium.getText("//div[2]/a"))) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		assertEquals(RuntimeVariables.replace("Read More \u00bb"),
-			selenium.getText("//div[2]/a"));
-		assertFalse(selenium.isElementPresent("link=View Album \u00bb"));
-		assertFalse(selenium.isElementPresent("//th[1]"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Asset Publisher Test Page")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("link=Asset Publisher Test Page",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=AP IG Image Name", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		Thread.sleep(5000);
-		assertEquals(RuntimeVariables.replace("Back"),
-			selenium.getText("//div[1]/div[1]/div/a"));
-		assertTrue(selenium.isPartialText("//div/h3", "AP IG Image Name"));
-		assertTrue(selenium.isElementPresent("//div/img"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (RuntimeVariables.replace("View Album \u00bb")
-										.equals(selenium.getText(
-								"//div[2]/div/a"))) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		assertEquals(RuntimeVariables.replace("View Album \u00bb"),
-			selenium.getText("//div[2]/div/a"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Asset Publisher Test Page")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("link=Asset Publisher Test Page",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//img[@alt='View Album']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("AP IG Image Name"),
-			selenium.getText("//div[2]/a/span"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Asset Publisher Test Page")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("link=Asset Publisher Test Page",
-			RuntimeVariables.replace(""));
+			selenium.getText("//div[1]/h3/a"));
+		assertTrue(selenium.isPartialText("//div[2]/a", "Read More"));
+		assertTrue(selenium.isElementPresent("//div[1]/a/img"));
+		selenium.clickAt("//div[2]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=Read More \u00bb", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		assertEquals(RuntimeVariables.replace("Back"),
-			selenium.getText("//div[1]/div[1]/div/a"));
-		assertTrue(selenium.isPartialText("//div/h3", "AP IG Image Name"));
-		assertTrue(selenium.isElementPresent("//div/img"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (RuntimeVariables.replace("View Album \u00bb")
-										.equals(selenium.getText(
-								"//div[2]/div/a"))) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		assertEquals(RuntimeVariables.replace("AP IG Image Name"),
+			selenium.getText("//div/h3"));
+		assertTrue(selenium.isElementPresent("//div[2]/img"));
 		assertEquals(RuntimeVariables.replace("View Album \u00bb"),
 			selenium.getText("//div[2]/div/a"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Asset Publisher Test Page")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("link=Asset Publisher Test Page",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("//div[2]/div/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=AP IG Image Name", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=View Album \u00bb", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isElementPresent("//div[2]/a/img"));
 		assertEquals(RuntimeVariables.replace("AP IG Image Name"),
 			selenium.getText("//div[2]/a/span"));
 	}

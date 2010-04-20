@@ -18,14 +18,12 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="ViewIGImageDynamicAssetTypeIGImageTest.java.html"><b><i>View Source
- * </i></b></a>
+ * <a href="ViewIGImageAvailableTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class ViewIGImageDynamicAssetTypeIGImageTest extends BaseTestCase {
-	public void testViewIGImageDynamicAssetTypeIGImage()
-		throws Exception {
+public class ViewIGImageAvailableTest extends BaseTestCase {
+	public void testViewIGImageAvailable() throws Exception {
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
@@ -34,7 +32,7 @@ public class ViewIGImageDynamicAssetTypeIGImageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Asset Publisher Test Page")) {
+				if (selenium.isVisible("link=Asset Publisher Test Page")) {
 					break;
 				}
 			}
@@ -47,8 +45,7 @@ public class ViewIGImageDynamicAssetTypeIGImageTest extends BaseTestCase {
 		selenium.clickAt("link=Asset Publisher Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		Thread.sleep(5000);
-		assertTrue(selenium.isElementPresent("link=AP IG Image Name"));
-		assertTrue(selenium.isElementPresent("link=View \u00bb"));
+		assertFalse(selenium.isTextPresent("AP IG Image Name"));
+		assertFalse(selenium.isElementPresent("//div[1]/a/img"));
 	}
 }

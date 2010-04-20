@@ -18,13 +18,13 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="ConfigurePortletDynamicAssetTypeIGImageTest.java.html"><b><i>View
+ * <a href="ConfigurePortletDynamicAvailableIGImageTest.java.html"><b><i>View
  * Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class ConfigurePortletDynamicAssetTypeIGImageTest extends BaseTestCase {
-	public void testConfigurePortletDynamicAssetTypeIGImage()
+public class ConfigurePortletDynamicAvailableIGImageTest extends BaseTestCase {
+	public void testConfigurePortletDynamicAvailableIGImage()
 		throws Exception {
 		selenium.open("/web/guest/home/");
 
@@ -34,7 +34,7 @@ public class ConfigurePortletDynamicAssetTypeIGImageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Asset Publisher Test Page")) {
+				if (selenium.isVisible("link=Asset Publisher Test Page")) {
 					break;
 				}
 			}
@@ -70,14 +70,35 @@ public class ConfigurePortletDynamicAssetTypeIGImageTest extends BaseTestCase {
 
 		selenium.addSelection("_86_currentClassNameIds",
 			RuntimeVariables.replace("label=Image Gallery Image"));
-		selenium.clickAt("//fieldset[2]/div/div/table/tbody/tr/td[2]/a[1]/img",
+		selenium.clickAt("//fieldset[2]/div/div/div/table/tbody/tr/td[2]/a[1]/img",
 			RuntimeVariables.replace(""));
-		Thread.sleep(5000);
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (RuntimeVariables.replace("Image Gallery Image")
+										.equals(selenium.getText(
+								"_86_availableClassNameIds"))) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertEquals(RuntimeVariables.replace("Image Gallery Image"),
 			selenium.getText("_86_availableClassNameIds"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"You have successfully updated the setup."));
+		assertEquals(RuntimeVariables.replace(
+				"You have successfully updated the setup."),
+			selenium.getText("//div[3]/div/div/div/div/div"));
+		assertEquals(RuntimeVariables.replace("Image Gallery Image"),
+			selenium.getText("_86_availableClassNameIds"));
 	}
 }

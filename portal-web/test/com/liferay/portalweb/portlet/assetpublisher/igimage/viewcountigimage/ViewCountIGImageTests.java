@@ -40,7 +40,9 @@ public class ViewCountIGImageTests extends BaseTests {
 		testSuite.addTestSuite(
 			ConfigurePortletDynamicShowMetadataViewCountTest.class);
 		testSuite.addTestSuite(ViewCountIGImageTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownIGFolderTest.class);
+		testSuite.addTestSuite(TearDownIGImageTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}
