@@ -278,25 +278,7 @@ public class PortalInstances {
 	}
 
 	private long _getDefaultCompanyId() {
-		
-        long result = _companyIds[0];
-
-        String companyDefaultWebId = PropsValues.COMPANY_DEFAULT_WEB_ID;
-
-		try {
-			if (Validator.isNotNull(companyDefaultWebId)) {
-				Company defaultCompany =
-					CompanyLocalServiceUtil.getCompanyByWebId(
-						companyDefaultWebId);
-
-                    result = defaultCompany.getCompanyId();
-			}
-		}
-		catch (Exception e) {
-			_log.error(e);
-		}
-
-        return result;
+		return _companyIds[0];
 	}
 
 	private LayoutSet _getLayoutSetByVirtualHosts(String host) {
@@ -332,7 +314,14 @@ public class PortalInstances {
 			List<String> webIdsList = new ArrayList<String>(companies.size());
 
 			for (Company company : companies) {
-				webIdsList.add(company.getWebId());
+				String webId = company.getWebId();
+
+				if (webId.equals(PropsValues.COMPANY_DEFAULT_WEB_ID)) {
+					webIdsList.add(0, webId);
+				}
+				else {
+					webIdsList.add(webId);
+				}
 			}
 
 			_webIds = webIdsList.toArray(new String[webIdsList.size()]);
