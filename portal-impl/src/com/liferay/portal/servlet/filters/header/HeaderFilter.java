@@ -30,7 +30,6 @@ import java.util.Enumeration;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.Map;
-import java.util.TimeZone;
 
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;

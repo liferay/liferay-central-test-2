@@ -15,6 +15,7 @@
 package com.liferay.portal.kernel.util;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.TimeZone;
 
 /**
@@ -29,19 +30,11 @@ public class TimeZoneUtil {
 	}
 
 	public static TimeZone getTimeZone(String timeZoneId) {
-		TimeZone timeZone = _timeZoneCache.get(timeZoneId);
-
-		if (timeZone == null) {
-			timeZone = TimeZone.getTimeZone(timeZoneId);
-
-			_timeZoneCache.put(timeZoneId, timeZone);
-		}
-
-		return timeZone;
+		return _instance._getTimeZone(timeZoneId);
 	}
 
-	public static void setDefault(String id) {
-		_instance._setDefault(id);
+	public static void setDefault(String timeZoneId) {
+		_instance._setDefault(timeZoneId);
 	}
 
 	private TimeZoneUtil() {
@@ -52,16 +45,27 @@ public class TimeZoneUtil {
 		return _timeZone;
 	}
 
-	private void _setDefault(String id) {
-		if (Validator.isNotNull(id)) {
-			_timeZone = TimeZone.getTimeZone(id);
+	private TimeZone _getTimeZone(String timeZoneId) {
+		TimeZone timeZone = _timeZones.get(timeZoneId);
+
+		if (timeZone == null) {
+			timeZone = TimeZone.getTimeZone(timeZoneId);
+
+			_timeZones.put(timeZoneId, timeZone);
+		}
+
+		return timeZone;
+	}
+
+	private void _setDefault(String timeZoneId) {
+		if (Validator.isNotNull(timeZoneId)) {
+			_timeZone = TimeZone.getTimeZone(timeZoneId);
 		}
 	}
 
-	private static HashMap<String, TimeZone> _timeZoneCache =
-		new HashMap<String, TimeZone>();
 	private static TimeZoneUtil _instance = new TimeZoneUtil();
 
 	private TimeZone _timeZone;
+	private Map<String, TimeZone> _timeZones = new HashMap<String, TimeZone>();
 
 }
