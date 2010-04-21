@@ -36,8 +36,6 @@ public class HookExplodedTomcatListener extends BaseExplodedTomcatListener {
 			_log.debug("Invoking deploy for " + file.getPath());
 		}
 
-		ExplodedTomcatDeployer deployer = null;
-
 		File docBaseDir = getDocBaseDir(file, "WEB-INF/liferay-hook.xml");
 
 		if (docBaseDir == null) {
