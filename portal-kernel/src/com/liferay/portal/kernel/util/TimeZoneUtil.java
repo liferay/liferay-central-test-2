@@ -38,7 +38,7 @@ public class TimeZoneUtil {
 	}
 
 	private TimeZoneUtil() {
-		_timeZone = getTimeZone(StringPool.UTC);
+		_timeZone = _getTimeZone(StringPool.UTC);
 	}
 
 	private TimeZone _getDefault() {
