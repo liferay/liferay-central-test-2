@@ -39,7 +39,7 @@ public class PortletServiceImpl extends PortletServiceBaseImpl {
 
 		List<Portlet> portlets = portletLocalService.getPortlets();
 
-		for(Portlet portlet : portlets) {
+		for (Portlet portlet : portlets) {
 			PortletApp portletApp = portlet.getPortletApp();
 
 			if (portletApp.isWARFile()) {

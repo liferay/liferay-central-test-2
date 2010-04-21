@@ -243,7 +243,7 @@ public class SessionImpl implements Session {
 	private void _setParameters(
 		javax.persistence.Query query, Map<Integer, Object> parameterMap) {
 
-		for(Map.Entry<Integer, Object> entry : parameterMap.entrySet()) {
+		for (Map.Entry<Integer, Object> entry : parameterMap.entrySet()) {
 			int position = entry.getKey() + 1;
 
 			Object value = entry.getValue();
