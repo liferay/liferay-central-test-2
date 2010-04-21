@@ -352,6 +352,29 @@ app.server.glassfish.zip.url=http://download.java.net/glassfish/v3-prelude/relea
 	</target>
 
 	<target name="dist">
+		<for param="pom.file">
+			<path>
+				<fileset
+					dir="support-maven"
+					includes="pom.xml,**/pom.xml"
+				/>
+			</path>
+			<sequential>
+				<loadfile property="pom.file.content" srcFile="@{pom.file}" />
+
+				<antelope:stringutil string="${pom.file.content}" property="pom.file.content.index">
+					<indexof string="${lp.version}-" fromindex="0" />
+				</antelope:stringutil>
+
+				<if>
+					<equals arg1="${pom.file.content.index}" arg2="-1" />
+					<then>
+						<fail>Please update pom.xml with the correct version.</fail>
+					</then>
+				</if>
+			</sequential>
+		</for>
+
 		<exec dir="${project.dir}" executable="cmd.exe" os="${os.windows}">
 			<arg line="/c svn update -r ${svn.revision}" />
 		</exec>
