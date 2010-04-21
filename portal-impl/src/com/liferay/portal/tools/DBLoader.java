@@ -52,9 +52,12 @@ public class DBLoader {
 	}
 
 	public DBLoader(String databaseType, String databaseName, String fileName) {
-		PortalClassLoaderUtil.setClassLoader(
-			Thread.currentThread().getContextClassLoader());
 		try {
+			Thread currentThread = Thread.currentThread();
+
+			PortalClassLoaderUtil.setClassLoader(
+				currentThread.getContextClassLoader());
+
 			_databaseType = databaseType;
 			_databaseName = databaseName;
 			_fileName = fileName;

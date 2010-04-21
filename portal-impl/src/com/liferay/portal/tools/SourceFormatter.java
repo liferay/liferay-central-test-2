@@ -50,9 +50,12 @@ import org.apache.tools.ant.DirectoryScanner;
 public class SourceFormatter {
 
 	public static void main(String[] args) {
-		PortalClassLoaderUtil.setClassLoader(
-			Thread.currentThread().getContextClassLoader());
 		try {
+			Thread currentThread = Thread.currentThread();
+
+			PortalClassLoaderUtil.setClassLoader(
+				currentThread.getContextClassLoader());
+
 			_readExclusions();
 
 			Thread thread1 = new Thread () {
