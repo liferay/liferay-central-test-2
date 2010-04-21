@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.ClassUtil;
 import com.liferay.portal.kernel.util.ListUtil;
+import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.util.ContentUtil;
@@ -49,6 +50,8 @@ import org.apache.tools.ant.DirectoryScanner;
 public class SourceFormatter {
 
 	public static void main(String[] args) {
+		PortalClassLoaderUtil.setClassLoader(
+			Thread.currentThread().getContextClassLoader());
 		try {
 			_readExclusions();
 

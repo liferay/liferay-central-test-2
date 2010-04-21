@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.io.unsync.UnsyncBufferedReader;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
 import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
+import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -51,6 +52,8 @@ public class DBLoader {
 	}
 
 	public DBLoader(String databaseType, String databaseName, String fileName) {
+		PortalClassLoaderUtil.setClassLoader(
+			Thread.currentThread().getContextClassLoader());
 		try {
 			_databaseType = databaseType;
 			_databaseName = databaseName;
