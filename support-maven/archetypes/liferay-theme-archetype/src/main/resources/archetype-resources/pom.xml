@@ -87,9 +87,9 @@
 		</dependency>
 	</dependencies>
 	<properties>
-		<liferay.auto.deploy.dir>../bundles/liferay-portal-6.0.0/deploy</liferay.auto.deploy.dir>
+		<liferay.auto.deploy.dir>../bundles/liferay-portal-6.0.1/deploy</liferay.auto.deploy.dir>
 		<liferay.theme.parent>_styled</liferay.theme.parent>
 		<liferay.theme.type>vm</liferay.theme.type>
-		<liferay.version>6.0.0-SNAPSHOT</liferay.version>
+		<liferay.version>6.0.1-SNAPSHOT</liferay.version>
 	</properties>
 </project>
