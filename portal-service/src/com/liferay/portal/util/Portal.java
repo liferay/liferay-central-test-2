@@ -69,8 +69,6 @@ public interface Portal {
 
 	public static final String FRIENDLY_URL_SEPARATOR = "/-/";
 
-	public static final String HOOK_XML_FILE_NAME_STANDARD = "liferay-hook.xml";
-
 	public static final String PATH_IMAGE = "/image";
 
 	public static final String PATH_MAIN = "/c";

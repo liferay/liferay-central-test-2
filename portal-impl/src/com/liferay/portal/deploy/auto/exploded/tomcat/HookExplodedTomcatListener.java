@@ -17,15 +17,13 @@ package com.liferay.portal.deploy.auto.exploded.tomcat;
 import com.liferay.portal.kernel.deploy.auto.AutoDeployException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.ServerDetector;
-import com.liferay.portal.util.Portal;
 
 import java.io.File;
 
 /**
- * <a href="HookExplodedTomcatListener.java.html"><b><i>View Source</i></b>
- * </a>
+ * <a href="HookExplodedTomcatListener.java.html"><b><i>View Source</i></b></a>
  *
+ * @author Gregory Amerson
  */
 public class HookExplodedTomcatListener extends BaseExplodedTomcatListener {
 
@@ -40,30 +38,23 @@ public class HookExplodedTomcatListener extends BaseExplodedTomcatListener {
 
 		ExplodedTomcatDeployer deployer = null;
 
-		File docBaseDir = getDocBaseDir(
-				file, "WEB-INF/" + Portal.HOOK_XML_FILE_NAME_STANDARD);
+		File docBaseDir = getDocBaseDir(file, "WEB-INF/liferay-hook.xml");
 
-		if (docBaseDir != null) {
-			deployer = _deployer;
-		}
-		else {
+		if (docBaseDir == null) {
 			return;
 		}
 
 		if (_log.isInfoEnabled()) {
-			_log.info("Modifying hooks for " + file.getPath());
+			_log.info("Modifying hook for " + file.getPath());
 		}
 
-		deployer.explodedTomcatDeploy(file, docBaseDir, null);
+		_deployer.explodedTomcatDeploy(file, docBaseDir, null);
 
 		if (_log.isInfoEnabled()) {
-			_log.info(
-				"Hooks for " + file.getPath() + " modified successfully");
+			_log.info("Hook for " + file.getPath() + " modified successfully");
 		}
 
-		if (ServerDetector.isTomcat() && !ServerDetector.isGlassfish()) {
-			copyContextFile(file);
-		}
+		copyContextFile(file);
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(

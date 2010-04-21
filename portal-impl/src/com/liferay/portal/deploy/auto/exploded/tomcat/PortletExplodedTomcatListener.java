@@ -17,7 +17,6 @@ package com.liferay.portal.deploy.auto.exploded.tomcat;
 import com.liferay.portal.kernel.deploy.auto.AutoDeployException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.util.Portal;
 
 import java.io.File;
@@ -70,9 +69,7 @@ public class PortletExplodedTomcatListener extends BaseExplodedTomcatListener {
 				"Portlets for " + file.getPath() + " modified successfully");
 		}
 
-		if (ServerDetector.isTomcat() && !ServerDetector.isGlassfish()) {
-			copyContextFile(file);
-		}
+		copyContextFile(file);
 	}
 
 	protected ExplodedTomcatDeployer getPhpDeployer()
