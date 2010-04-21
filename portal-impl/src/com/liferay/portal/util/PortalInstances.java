@@ -278,7 +278,25 @@ public class PortalInstances {
 	}
 
 	private long _getDefaultCompanyId() {
-		return _companyIds[0];
+		
+        long result = _companyIds[0];
+
+        String companyDefaultWebId = PropsValues.COMPANY_DEFAULT_WEB_ID;
+
+		try {
+			if (Validator.isNotNull(companyDefaultWebId)) {
+				Company defaultCompany =
+					CompanyLocalServiceUtil.getCompanyByWebId(
+						companyDefaultWebId);
+
+                    result = defaultCompany.getCompanyId();
+			}
+		}
+		catch (Exception e) {
+			_log.error(e);
+		}
+
+        return result;
 	}
 
 	private LayoutSet _getLayoutSetByVirtualHosts(String host) {
