@@ -165,10 +165,10 @@ public class PageContextWrapper extends PageContext {
 	}
 
 	public BodyContent pushBody() {
-		UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter(true);
+		UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter();
 
-		BodyContent bodyContent =
-			(BodyContent) _pageContext.pushBody(unsyncStringWriter);
+		BodyContent bodyContent = (BodyContent)_pageContext.pushBody(
+			unsyncStringWriter);
 
 		return new BodyContentWrapper(bodyContent, unsyncStringWriter);
 	}

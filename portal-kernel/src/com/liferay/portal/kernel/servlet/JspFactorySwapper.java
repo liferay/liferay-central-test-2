@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.kernel.jsp;
+package com.liferay.portal.kernel.servlet;
 
 import javax.servlet.jsp.JspFactory;
 
@@ -25,16 +25,20 @@ public class JspFactorySwapper {
 
 	public static void swap() {
 		JspFactory jspFactory = JspFactory.getDefaultFactory();
-		if(!(jspFactory instanceof JspFactoryWrapper)) {
-			synchronized(JspFactorySwapper.class) {
-				if(jspFactoryWrapper == null) {
-					jspFactoryWrapper = new JspFactoryWrapper(jspFactory);
-				}
-				JspFactory.setDefaultFactory(jspFactoryWrapper);
+
+		if (jspFactory instanceof JspFactoryWrapper) {
+			return;
+		}
+
+		synchronized (JspFactorySwapper.class) {
+			if (_jspFactoryWrapper == null) {
+				_jspFactoryWrapper = new JspFactoryWrapper(jspFactory);
 			}
+
+			JspFactory.setDefaultFactory(_jspFactoryWrapper);
 		}
 	}
 
-	private static JspFactoryWrapper jspFactoryWrapper;
-	
+	private static JspFactoryWrapper _jspFactoryWrapper;
+
 }

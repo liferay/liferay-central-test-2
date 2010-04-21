@@ -12,9 +12,8 @@
  * details.
  */
 
-package com.liferay.portal.kernel.jsp;
+package com.liferay.portal.kernel.servlet;
 
-import com.liferay.portal.kernel.servlet.PageContextWrapper;
 import javax.servlet.Servlet;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletRequest;
@@ -41,6 +40,7 @@ public class JspFactoryWrapper extends JspFactory {
 
 	public JspApplicationContext getJspApplicationContext(
 		ServletContext servletContext) {
+
 		return _jspFactory.getJspApplicationContext(servletContext);
 	}
 
@@ -48,7 +48,7 @@ public class JspFactoryWrapper extends JspFactory {
 		Servlet servlet, ServletRequest servletRequest,
 		ServletResponse servletResponse, String errorPageURL,
 		boolean needsSession, int buffer, boolean autoflush) {
-		
+
 		PageContext pageContext = _jspFactory.getPageContext(
 			servlet, servletRequest, servletResponse, errorPageURL,
 			needsSession, buffer, autoflush);
@@ -56,12 +56,15 @@ public class JspFactoryWrapper extends JspFactory {
 		return new PageContextWrapper(pageContext);
 	}
 
-	public void releasePageContext(PageContext pc) {
+	public void releasePageContext(PageContext pageContext) {
+		if (pageContext instanceof PageContextWrapper) {
+			PageContextWrapper pageContextWrapper =
+				(PageContextWrapper)pageContext;
 
-		if(pc instanceof PageContextWrapper) {
-			pc = ((PageContextWrapper)pc).getWrappedPageContext();
+			pageContext = pageContextWrapper.getWrappedPageContext();
 		}
-		_jspFactory.releasePageContext(pc);
+
+		_jspFactory.releasePageContext(pageContext);
 	}
 
 	private JspFactory _jspFactory;

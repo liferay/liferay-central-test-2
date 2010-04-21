@@ -34,21 +34,23 @@ public class BodyContentWrapper extends BodyContent {
 		BodyContent bodyContent, UnsyncStringWriter unsyncStringWriter) {
 
 		super(bodyContent.getEnclosingWriter());
-		_unsyncStringWriter = unsyncStringWriter;
+
 		_bodyContent = bodyContent;
+		_unsyncStringWriter = unsyncStringWriter;
 	}
 
 	public Writer append(char c) throws IOException {
 		return _bodyContent.append(c);
 	}
 
-	public Writer append(CharSequence csq) throws IOException {
-		return _bodyContent.append(csq);
+	public Writer append(CharSequence charSequence) throws IOException {
+		return _bodyContent.append(charSequence);
 	}
 
-	public Writer append(CharSequence csq, int start, int end)
+	public Writer append(CharSequence charSequence, int start, int end)
 		throws IOException {
-		return _bodyContent.append(csq, start, end);
+
+		return _bodyContent.append(charSequence, start, end);
 	}
 
 	public void clear() throws IOException {
@@ -59,7 +61,7 @@ public class BodyContentWrapper extends BodyContent {
 		_unsyncStringWriter.reset();
 	}
 
-	public void clearBuffer() throws IOException {
+	public void clearBuffer() {
 		_unsyncStringWriter.reset();
 	}
 
@@ -99,12 +101,12 @@ public class BodyContentWrapper extends BodyContent {
 		_bodyContent.newLine();
 	}
 
-	public void print(Object o) throws IOException {
-		_bodyContent.print(o);
+	public void print(boolean b) throws IOException {
+		_bodyContent.print(b);
 	}
 
-	public void print(String string) throws IOException {
-		_bodyContent.print(string);
+	public void print(char c) throws IOException {
+		_bodyContent.print(c);
 	}
 
 	public void print(char[] chars) throws IOException {
@@ -119,32 +121,36 @@ public class BodyContentWrapper extends BodyContent {
 		_bodyContent.print(f);
 	}
 
-	public void print(long l) throws IOException {
-		_bodyContent.print(l);
-	}
-
 	public void print(int i) throws IOException {
 		_bodyContent.print(i);
 	}
 
-	public void print(char c) throws IOException {
-		_bodyContent.print(c);
+	public void print(long l) throws IOException {
+		_bodyContent.print(l);
 	}
 
-	public void print(boolean bln) throws IOException {
-		_bodyContent.print(bln);
+	public void print(Object object) throws IOException {
+		_bodyContent.print(object);
 	}
 
-	public void println(Object o) throws IOException {
-		_bodyContent.println(o);
+	public void print(String string) throws IOException {
+		_bodyContent.print(string);
 	}
 
-	public void println(String string) throws IOException {
-		_bodyContent.println(string);
+	public void println() throws IOException {
+		_bodyContent.println();
 	}
 
-	public void println(char[] chars) throws IOException {
-		_bodyContent.println(chars);
+	public void println(boolean b) throws IOException {
+		_bodyContent.println(b);
+	}
+
+	public void println(char c) throws IOException {
+		_bodyContent.println(c);
+	}
+
+	public void println(char[] charArray) throws IOException {
+		_bodyContent.println(charArray);
 	}
 
 	public void println(double d) throws IOException {
@@ -155,51 +161,51 @@ public class BodyContentWrapper extends BodyContent {
 		_bodyContent.println(f);
 	}
 
-	public void println(long l) throws IOException {
-		_bodyContent.println(l);
-	}
-
 	public void println(int i) throws IOException {
 		_bodyContent.println(i);
 	}
 
-	public void println(char c) throws IOException {
-		_bodyContent.println(c);
+	public void println(long l) throws IOException {
+		_bodyContent.println(l);
 	}
 
-	public void println(boolean bln) throws IOException {
-		_bodyContent.println(bln);
+	public void println(Object object) throws IOException {
+		_bodyContent.println(object);
 	}
 
-	public void println() throws IOException {
-		_bodyContent.println();
+	public void println(String string) throws IOException {
+		_bodyContent.println(string);
 	}
 
-	public void write(String str, int off, int len) throws IOException {
-		_bodyContent.write(str, off, len);
+	public void write(char[] charArray) throws IOException {
+		_bodyContent.write(charArray);
 	}
 
-	public void write(String str) throws IOException {
-		_bodyContent.write(str);
-	}
+	public void write(char[] charArray, int offset, int length)
+		throws IOException {
 
-	public void write(char[] cbuf, int off, int len) throws IOException {
-		_bodyContent.write(cbuf, off, len);
-	}
-
-	public void write(char[] cbuf) throws IOException {
-		_bodyContent.write(cbuf);
+		_bodyContent.write(charArray, offset, length);
 	}
 
 	public void write(int c) throws IOException {
 		_bodyContent.write(c);
 	}
 
+	public void write(String string) throws IOException {
+		_bodyContent.write(string);
+	}
+
+	public void write(String string, int offset, int length)
+		throws IOException {
+
+		_bodyContent.write(string, offset, length);
+	}
+
 	public void writeOut(Writer writer) throws IOException {
 		_bodyContent.writeOut(writer);
 	}
 
-	private UnsyncStringWriter _unsyncStringWriter;
 	private BodyContent _bodyContent;
+	private UnsyncStringWriter _unsyncStringWriter;
 
 }
