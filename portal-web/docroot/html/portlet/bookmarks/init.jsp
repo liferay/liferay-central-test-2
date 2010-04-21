@@ -23,6 +23,13 @@
 <%@ page import="com.liferay.portal.kernel.search.IndexerRegistryUtil" %>
 <%@ page import="com.liferay.portal.kernel.search.SearchContext" %>
 <%@ page import="com.liferay.portal.search.SearchContextFactory" %>
+<%@ page import="com.liferay.portlet.asset.model.AssetCategory" %>
+<%@ page import="com.liferay.portlet.asset.model.AssetEntry" %>
+<%@ page import="com.liferay.portlet.asset.model.AssetVocabulary" %>
+<%@ page import="com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.asset.service.AssetEntryLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.asset.service.AssetVocabularyLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.asset.service.persistence.AssetEntryQuery" %>
 <%@ page import="com.liferay.portlet.bookmarks.EntryURLException" %>
 <%@ page import="com.liferay.portlet.bookmarks.FolderNameException" %>
 <%@ page import="com.liferay.portlet.bookmarks.NoSuchEntryException" %>
@@ -53,4 +60,8 @@ else if (layout.isTypeControlPanel()) {
 }
 
 long rootFolderId = PrefsParamUtil.getLong(preferences, request, "rootFolderId", BookmarksFolderConstants.DEFAULT_PARENT_FOLDER_ID);
+
+String defaultBookmarksEntryColumns = "name,url,visits,modified-date,action";
+
+String[] bookmarksEntryColumns = StringUtil.split(PrefsParamUtil.getString(preferences, request, "fileEntryColumns", defaultBookmarksEntryColumns));
 %>

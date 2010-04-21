@@ -24,7 +24,16 @@ BookmarksEntry entry = null;
 boolean view = false;
 
 if (row != null) {
-	entry = (BookmarksEntry)row.getObject();
+	Object result = row.getObject();
+
+	if (result instanceof AssetEntry) {
+		AssetEntry assetEntry = (AssetEntry)result;
+
+		entry = BookmarksEntryLocalServiceUtil.getBookmarksEntry(assetEntry.getClassPK());
+	}
+	else {
+		entry = (BookmarksEntry)result;
+	}
 }
 else {
 	entry = (BookmarksEntry)request.getAttribute("view_entry.jsp-entry");
