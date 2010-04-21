@@ -124,11 +124,21 @@ public class EditFileEntryAction extends PortletAction {
 
 				if (e instanceof DuplicateFileException) {
 					HttpServletResponse response =
-						PortalUtil.getHttpServletResponse(
-							actionResponse);
+						PortalUtil.getHttpServletResponse(actionResponse);
 
-					response.setStatus(
-						HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+					response.setStatus(1000);
+				}
+				else if (e instanceof FileNameException) {
+					HttpServletResponse response =
+						PortalUtil.getHttpServletResponse(actionResponse);
+
+					response.setStatus(1001);
+				}
+				else if (e instanceof FileSizeException) {
+					HttpServletResponse response =
+						PortalUtil.getHttpServletResponse(actionResponse);
+
+					response.setStatus(1002);
 				}
 
 				SessionErrors.add(actionRequest, e.getClass().getName());

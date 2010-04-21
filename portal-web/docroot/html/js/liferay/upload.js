@@ -82,10 +82,18 @@ AUI().add(
 			instance._fileListPendingText = Liferay.Language.get('x-files-ready-to-be-uploaded');
 			instance._fileListText = Liferay.Language.get('file-list');
 			instance._fileTypesDescriptionText = options.fileDescription || instance._allowedFileTypes;
+			instance._invalidFileNameText = Liferay.Language.get('please-enter-a-file-with-a-valid-file-name');
 			instance._invalidFileSizeText = Liferay.Language.get('please-enter-a-file-with-a-valid-file-size');
+			instance._unexpectedErrorText = Liferay.Language.get('an-unexpected-error-occurred-while-uploading-your-file');
 			instance._uploadsCompleteText = Liferay.Language.get('all-uploads-complete');
 			instance._uploadStatusText = Liferay.Language.get('uploading-file-x-of-x');
 			instance._uploadFilesText = Liferay.Language.get('upload-files');
+
+			instance._errorMessages = {
+				'1000': Liferay.Language.get('please-enter-a-unique-document-name'),
+				'1001': Liferay.Language.get('please-enter-a-file-with-a-valid-file-name'),
+				'1002': instance._invalidFileSizeText
+			};
 
 			if (instance._fallbackContainer) {
 				instance._useFallbackText = Liferay.Language.get('use-the-classic-uploader');
@@ -301,7 +309,9 @@ AUI().add(
 
 					var ul = instance.getFileListUl();
 
-					ul.append('<li class="upload-file upload-error"><span class="file-title">' + file.name + '</span><span class="error-message">' + instance._duplicateFileText + '</span></li>');
+					var message = instance._errorMessages[msg] || instance._unexpectedErrorText;
+
+					ul.append('<li class="upload-file upload-error"><span class="file-title">' + file.name + '</span><span class="error-message">' + message + '</span></li>');
 				}
 
 				if (instance._onUploadError) {
