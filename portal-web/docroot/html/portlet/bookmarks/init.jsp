@@ -61,7 +61,9 @@ else if (layout.isTypeControlPanel()) {
 
 long rootFolderId = PrefsParamUtil.getLong(preferences, request, "rootFolderId", BookmarksFolderConstants.DEFAULT_PARENT_FOLDER_ID);
 
-String defaultBookmarksEntryColumns = "name,url,visits,modified-date,action";
+String defaultEntryColumns = "name,url,visits,modified-date,action";
 
-String[] bookmarksEntryColumns = StringUtil.split(PrefsParamUtil.getString(preferences, request, "fileEntryColumns", defaultBookmarksEntryColumns));
+String[] entryColumns = StringUtil.split(PrefsParamUtil.getString(preferences, request, "entryColumns", defaultEntryColumns));
 %>
+
+<%@ include file="/html/portlet/bookmarks/init-ext.jsp" %>

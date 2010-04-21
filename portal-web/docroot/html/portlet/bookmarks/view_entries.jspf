@@ -32,7 +32,7 @@ OrderByComparator orderByComparator = BookmarksUtil.getEntriesOrderByComparator(
 
 <liferay-ui:search-container
 	curParam="cur2"
-	headerNames="<%= StringUtil.merge(bookmarksEntryColumns) %>"
+	headerNames="<%= StringUtil.merge(entryColumns) %>"
 	iteratorURL="<%= portletURL %>"
 	orderByCol="<%= orderByCol %>"
 	orderByType="<%= orderByType %>"
@@ -90,8 +90,7 @@ OrderByComparator orderByComparator = BookmarksUtil.getEntriesOrderByComparator(
 		}
 		%>
 
-		<%@ include file="/html/portlet/bookmarks/bookmarks_entry_columns.jspf" %>
-
+		<%@ include file="/html/portlet/bookmarks/entry_columns.jspf" %>
 
 	</liferay-ui:search-container-row>
 

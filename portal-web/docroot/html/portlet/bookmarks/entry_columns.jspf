@@ -15,8 +15,8 @@
 %>
 
 <%
-for (int j = 0; j < bookmarksEntryColumns.length; j++) {
-	String bookmarksEntryColumn = bookmarksEntryColumns[j];
+for (int j = 0; j < entryColumns.length; j++) {
+	String bookmarksEntryColumn = entryColumns[j];
 %>
 
 	<c:choose>
@@ -25,7 +25,7 @@ for (int j = 0; j < bookmarksEntryColumns.length; j++) {
 			<%
 			String align = SearchEntry.DEFAULT_ALIGN;
 
-			if ((j + 1) == bookmarksEntryColumns.length) {
+			if ((j + 1) == entryColumns.length) {
 				align = "right";
 			}
 			%>

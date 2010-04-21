@@ -86,7 +86,7 @@ request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntry
 			</h1>
 		</c:if>
 
-		<%@ include file="/html/portlet/bookmarks/view_bookmarks_entries.jspf" %>
+		<%@ include file="/html/portlet/bookmarks/view_entries.jspf" %>
 
 		<%
 		if (portletName.equals(PortletKeys.BOOKMARKS)) {
@@ -142,7 +142,7 @@ request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntry
 					</c:if>
 
 					<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="entriesPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "bookmarks") %>'>
-						<%@ include file="/html/portlet/bookmarks/view_bookmarks_entries.jspf" %>
+						<%@ include file="/html/portlet/bookmarks/view_entries.jspf" %>
 					</liferay-ui:panel>
 				</liferay-ui:panel-container>
 			</aui:column>
