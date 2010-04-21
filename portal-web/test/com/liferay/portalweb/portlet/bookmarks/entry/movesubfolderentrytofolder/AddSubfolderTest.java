@@ -32,7 +32,7 @@ public class AddSubfolderTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Bookmarks Test Page")) {
+				if (selenium.isVisible("link=Bookmarks Test Page")) {
 					break;
 				}
 			}
@@ -45,20 +45,22 @@ public class AddSubfolderTest extends BaseTestCase {
 		selenium.clickAt("link=Bookmarks Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//td[@class='col-1 first']/a/strong",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//div[@class='lfr-component lfr-menu-list right ']/ul/li[4]/a",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("//div[2]/ul/li[3]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_28_name", RuntimeVariables.replace("Test Subfolder"));
 		selenium.type("_28_description",
 			RuntimeVariables.replace("This is a test subfolder."));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
-		assertTrue(selenium.isTextPresent("Test Subfolder"));
-		assertTrue(selenium.isTextPresent("This is a test subfolder."));
+		assertEquals(RuntimeVariables.replace(
+				"Your request processed successfully."),
+			selenium.getText("//section/div/div/div/div[1]"));
+		assertEquals(RuntimeVariables.replace("Test Subfolder"),
+			selenium.getText("//td[1]/a/strong"));
+		assertEquals(RuntimeVariables.replace(
+				"Test Subfolder\nThis is a test subfolder."),
+			selenium.getText("//td[1]/a"));
 	}
 }

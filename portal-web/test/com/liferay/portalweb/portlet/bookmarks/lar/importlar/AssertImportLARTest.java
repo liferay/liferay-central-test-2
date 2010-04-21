@@ -46,8 +46,7 @@ public class AssertImportLARTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Edited Test Folder"));
-		selenium.clickAt("//td[@class='col-1 first']/a/strong",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Edited Test Bookmark"));
 		assertTrue(selenium.isElementPresent("link=http://www.narutofan.com"));

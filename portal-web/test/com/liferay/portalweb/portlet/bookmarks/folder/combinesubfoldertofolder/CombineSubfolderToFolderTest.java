@@ -33,7 +33,7 @@ public class CombineSubfolderToFolderTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Bookmarks Test Page")) {
+				if (selenium.isVisible("link=Bookmarks Test Page")) {
 					break;
 				}
 			}
@@ -46,11 +46,10 @@ public class CombineSubfolderToFolderTest extends BaseTestCase {
 		selenium.clickAt("link=Bookmarks Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//td[@class='col-1 first']/a/strong",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isElementPresent("link=Test Subfolder Entry"));
-		selenium.clickAt("//strong/a", RuntimeVariables.replace(""));
+		selenium.click("//td[4]/ul/li/strong/a");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

@@ -45,8 +45,7 @@ public class AddFolderNameNullTest extends BaseTestCase {
 		selenium.clickAt("link=Bookmarks Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//div[@class='lfr-component lfr-menu-list right ']/ul/li[2]/a",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("//div[2]/ul/li[2]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_28_name", RuntimeVariables.replace(""));
 		selenium.type("_28_description",

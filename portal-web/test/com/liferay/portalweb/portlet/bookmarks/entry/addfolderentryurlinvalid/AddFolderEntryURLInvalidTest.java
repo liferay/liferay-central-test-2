@@ -33,7 +33,7 @@ public class AddFolderEntryURLInvalidTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Bookmarks Test Page")) {
+				if (selenium.isVisible("link=Bookmarks Test Page")) {
 					break;
 				}
 			}
@@ -46,38 +46,20 @@ public class AddFolderEntryURLInvalidTest extends BaseTestCase {
 		selenium.clickAt("link=Bookmarks Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//td[@class='col-1 first']/a/strong",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//div[@class='lfr-component lfr-menu-list right ']/ul/li[5]/a",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("//div[2]/ul/li[4]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible(
-							"//span[@class='aui-icon-search aui-icon']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.type("_28_name", RuntimeVariables.replace("Test Folder Entry"));
 		selenium.type("_28_url", RuntimeVariables.replace("www.liferay.com"));
 		selenium.type("_28_comments",
 			RuntimeVariables.replace("This is a test folder entry."));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"You have entered invalid data. Please try again."));
-		assertTrue(selenium.isTextPresent("Please enter a valid URL."));
+		assertEquals(RuntimeVariables.replace(
+				"You have entered invalid data. Please try again."),
+			selenium.getText("//section/div/div/div/div[1]"));
+		assertEquals(RuntimeVariables.replace("Please enter a valid URL."),
+			selenium.getText("//form/div[1]"));
 	}
 }

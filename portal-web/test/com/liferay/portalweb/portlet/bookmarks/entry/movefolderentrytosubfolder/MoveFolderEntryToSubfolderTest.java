@@ -33,7 +33,7 @@ public class MoveFolderEntryToSubfolderTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Bookmarks Test Page")) {
+				if (selenium.isVisible("link=Bookmarks Test Page")) {
 					break;
 				}
 			}
@@ -46,8 +46,7 @@ public class MoveFolderEntryToSubfolderTest extends BaseTestCase {
 		selenium.clickAt("link=Bookmarks Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//td[@class='col-1 first']/a/strong",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=http://www.liferay.com"));
 		selenium.clickAt("//td[5]/ul/li/strong/a", RuntimeVariables.replace(""));
@@ -99,8 +98,9 @@ public class MoveFolderEntryToSubfolderTest extends BaseTestCase {
 			selenium.getText("_28_folderName"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+		assertEquals(RuntimeVariables.replace(
+				"Your request processed successfully."),
+			selenium.getText("//section/div/div/div/div[1]"));
 		assertFalse(selenium.isElementPresent("link=http://www.liferay.com"));
 		selenium.open("/web/guest/home/");
 
@@ -110,7 +110,7 @@ public class MoveFolderEntryToSubfolderTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Bookmarks Test Page")) {
+				if (selenium.isVisible("link=Bookmarks Test Page")) {
 					break;
 				}
 			}
@@ -123,11 +123,9 @@ public class MoveFolderEntryToSubfolderTest extends BaseTestCase {
 		selenium.clickAt("link=Bookmarks Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//td[@class='col-1 first']/a/strong",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//td[@class='col-1 first']/a/strong",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=http://www.liferay.com"));
 	}

@@ -32,7 +32,7 @@ public class AddFolder2Test extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Bookmarks Test Page")) {
+				if (selenium.isVisible("link=Bookmarks Test Page")) {
 					break;
 				}
 			}
@@ -45,17 +45,20 @@ public class AddFolder2Test extends BaseTestCase {
 		selenium.clickAt("link=Bookmarks Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//div[@class='lfr-component lfr-menu-list right ']/ul/li[2]/a",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("//div[2]/ul/li[2]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_28_name", RuntimeVariables.replace("Test2 Folder2"));
 		selenium.type("_28_description",
 			RuntimeVariables.replace("This is a test2 folder2."));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
-		assertTrue(selenium.isTextPresent("Test2 Folder2"));
-		assertTrue(selenium.isTextPresent("This is a test2 folder2."));
+		assertEquals(RuntimeVariables.replace(
+				"Your request processed successfully."),
+			selenium.getText("//section/div/div/div/div[1]"));
+		assertEquals(RuntimeVariables.replace("Test2 Folder2"),
+			selenium.getText("//tr[4]/td[1]/a/strong"));
+		assertEquals(RuntimeVariables.replace(
+				"Test2 Folder2\nThis is a test2 folder2."),
+			selenium.getText("//tr[4]/td[1]/a"));
 	}
 }

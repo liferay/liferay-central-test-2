@@ -32,7 +32,7 @@ public class MoveFolderEntryToFolderTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Bookmarks Test Page")) {
+				if (selenium.isVisible("link=Bookmarks Test Page")) {
 					break;
 				}
 			}
@@ -45,11 +45,13 @@ public class MoveFolderEntryToFolderTest extends BaseTestCase {
 		selenium.clickAt("link=Bookmarks Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//td[@class='col-1 first']/a/strong",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("link=http://www.liferay.com"));
-		selenium.clickAt("//strong/a", RuntimeVariables.replace(""));
+		assertEquals(RuntimeVariables.replace("Test Folder Entry"),
+			selenium.getText("//td[1]/a"));
+		assertEquals(RuntimeVariables.replace("http://www.liferay.com"),
+			selenium.getText("//td[2]/a"));
+		selenium.clickAt("//td[5]/ul/li/strong/a", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -100,9 +102,11 @@ public class MoveFolderEntryToFolderTest extends BaseTestCase {
 			selenium.getText("_28_folderName"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
-		assertFalse(selenium.isElementPresent("link=http://www.liferay.com"));
+		assertEquals(RuntimeVariables.replace(
+				"Your request processed successfully."),
+			selenium.getText("//section/div/div/div/div[1]"));
+		assertFalse(selenium.isTextPresent("Test Folder Entry"));
+		assertFalse(selenium.isTextPresent("http://www.liferay.com"));
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
@@ -111,7 +115,7 @@ public class MoveFolderEntryToFolderTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Bookmarks Test Page")) {
+				if (selenium.isVisible("link=Bookmarks Test Page")) {
 					break;
 				}
 			}
@@ -126,6 +130,9 @@ public class MoveFolderEntryToFolderTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("//tr[4]/td[1]/a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("link=http://www.liferay.com"));
+		assertEquals(RuntimeVariables.replace("Test Folder Entry"),
+			selenium.getText("//td[1]/a"));
+		assertEquals(RuntimeVariables.replace("http://www.liferay.com"),
+			selenium.getText("//td[2]/a"));
 	}
 }

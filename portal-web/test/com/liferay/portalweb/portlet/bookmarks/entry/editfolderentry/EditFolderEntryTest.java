@@ -32,7 +32,7 @@ public class EditFolderEntryTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Bookmarks Test Page")) {
+				if (selenium.isVisible("link=Bookmarks Test Page")) {
 					break;
 				}
 			}
@@ -45,12 +45,13 @@ public class EditFolderEntryTest extends BaseTestCase {
 		selenium.clickAt("link=Bookmarks Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//td[@class='col-1 first']/a/strong",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("link=Test Folder Entry"));
-		assertTrue(selenium.isElementPresent("link=http://www.liferay.com"));
-		selenium.clickAt("//strong/a", RuntimeVariables.replace(""));
+		assertEquals(RuntimeVariables.replace("Test Folder Entry"),
+			selenium.getText("//td[1]/a"));
+		assertEquals(RuntimeVariables.replace("http://www.liferay.com"),
+			selenium.getText("//td[2]/a"));
+		selenium.clickAt("//td[5]/ul/li/strong/a", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -72,24 +73,6 @@ public class EditFolderEntryTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible(
-							"//span[@class='aui-icon-search aui-icon']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.type("_28_name",
 			RuntimeVariables.replace("Test Folder Entry Edited"));
 		selenium.type("_28_url",
@@ -98,11 +81,16 @@ public class EditFolderEntryTest extends BaseTestCase {
 			RuntimeVariables.replace("This is a test folder entry. Edited."));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
-		assertTrue(selenium.isElementPresent("link=Test Folder Entry Edited"));
-		assertTrue(selenium.isElementPresent("link=http://www.alloyui.com"));
-		assertFalse(selenium.isElementPresent("link=Test Folder Entry"));
-		assertFalse(selenium.isElementPresent("link=http://www.liferay.com"));
+		assertEquals(RuntimeVariables.replace(
+				"Your request processed successfully."),
+			selenium.getText("//section/div/div/div/div[1]"));
+		assertEquals(RuntimeVariables.replace("Test Folder Entry Edited"),
+			selenium.getText("//td[1]/a"));
+		assertEquals(RuntimeVariables.replace("http://www.alloyui.com"),
+			selenium.getText("//td[2]/a"));
+		assertNotEquals(RuntimeVariables.replace("Test Folder Entry"),
+			selenium.getText("//td[1]/a"));
+		assertNotEquals(RuntimeVariables.replace("http://www.liferay.com"),
+			selenium.getText("//td[2]/a"));
 	}
 }

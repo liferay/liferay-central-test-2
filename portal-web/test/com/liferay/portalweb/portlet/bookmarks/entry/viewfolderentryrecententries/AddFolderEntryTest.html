@@ -14,28 +14,23 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>link=Bookmarks Test Page</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAtAndWait</td>
-	<td>link=Bookmarks Test Page</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAtAndWait</td>
-	<td>//td[@class='col-1 first']/a/strong</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAtAndWait</td>
-	<td>//div[@class='lfr-component lfr-menu-list right ']/ul/li[5]/a</td>
-	<td></td>
-</tr>
-<tr>
 	<td>waitForVisible</td>
-	<td>//span[@class='aui-icon-search aui-icon']</td>
+	<td>link=Bookmarks Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>link=Bookmarks Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>//a/strong</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>//div[2]/ul/li[4]/a</td>
 	<td></td>
 </tr>
 <tr>
@@ -59,19 +54,19 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>assertText</td>
+	<td>//section/div/div/div/div[1]</td>
 	<td>Your request processed successfully.</td>
-	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
-	<td>link=Test Folder Entry</td>
-	<td></td>
+	<td>assertText</td>
+	<td>//td[1]/a</td>
+	<td>Test Folder Entry</td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
-	<td>link=http://www.liferay.com</td>
-	<td></td>
+	<td>assertText</td>
+	<td>//td[2]/a</td>
+	<td>http://www.liferay.com</td>
 </tr>
 
 </tbody></table>
