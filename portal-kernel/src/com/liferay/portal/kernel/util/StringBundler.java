@@ -17,6 +17,8 @@ package com.liferay.portal.kernel.util;
 import java.io.IOException;
 import java.io.Writer;
 
+import java.lang.reflect.Constructor;
+
 /**
  * <a href="StringBundler.java.html"><b><i>View Source</i></b></a>
  *
@@ -179,32 +181,30 @@ public class StringBundler {
 			return StringPool.BLANK;
 		}
 
-		String s = null;
-
-		if (_arrayIndex <= 3) {
-			s = _array[0];
-
-			for (int i = 1; i < _arrayIndex; i++) {
-				s = s.concat(_array[i]);
-			}
-		}
-		else {
-			int length = 0;
-
-			for (int i = 0; i < _arrayIndex; i++) {
-				length += _array[i].length();
-			}
-
-			StringBuilder sb = new StringBuilder(length);
-
-			for (int i = 0; i < _arrayIndex; i++) {
-				sb.append(_array[i]);
-			}
-
-			s = sb.toString();
+		if (_arrayIndex == 1) {
+			return _array[0];
 		}
 
-		return s;
+		if (_arrayIndex == 2) {
+			return _array[0].concat(_array[1]);
+		}
+
+		int finalLength = 0;
+
+		for (int i = 0; i < _arrayIndex; i++) {
+			finalLength += _array[i].length();
+		}
+
+		if (_UNSAFE_STRING_CONSTRUCTOR != null &&
+			finalLength >= _UNSAFE_CREATE_THRESHOLD) {
+			return unsafeCreate(_array, _arrayIndex, finalLength);
+		}
+
+		if (_arrayIndex == 3) {
+			return _array[0].concat(_array[1]).concat(_array[2]);
+		}
+
+		return safeCreate(_array, _arrayIndex, finalLength);
 	}
 
 	public void writeTo(Writer writer) throws IOException {
@@ -221,11 +221,60 @@ public class StringBundler {
 		_array = newArray;
 	}
 
+	protected String safeCreate(
+		String[] array, int arrayIndex, int finalLength) {
+
+		StringBuilder sb = new StringBuilder(finalLength);
+
+		for (int i = 0; i < arrayIndex; i++) {
+			sb.append(array[i]);
+		}
+		return sb.toString();
+	}
+
+	protected String unsafeCreate(
+		String[] array, int arrayIndex, int finalLength) {
+
+		char[] content = new char[finalLength];
+		int offset = 0;
+		for(int i = 0; i < arrayIndex; i++) {
+			String element = array[i];
+			int elementLength = element.length();
+			element.getChars(0, elementLength, content, offset);
+			offset += elementLength;
+		}
+		try {
+			return _UNSAFE_STRING_CONSTRUCTOR.newInstance(0, finalLength,
+				content);
+		} catch (Exception ex) {
+			// This should never happen
+			throw new IllegalStateException(ex);
+		}
+	}
+
 	private static final int _DEFAULT_ARRAY_CAPACITY = 16;
 
 	private static final String _FALSE = "false";
 
 	private static final String _TRUE = "true";
+
+	private static final int _UNSAFE_CREATE_THRESHOLD = GetterUtil.getInteger(
+		PropsUtil.get(PropsKeys.STRINGBUNDLER_UNSAFE_CREATE_THRESHOLD), 0);
+
+	private static Constructor<String> _UNSAFE_STRING_CONSTRUCTOR;
+
+	static {
+		if (_UNSAFE_CREATE_THRESHOLD > 0) {
+			try {
+				_UNSAFE_STRING_CONSTRUCTOR =
+					String.class.getDeclaredConstructor(int.class, int.class,
+					char[].class);
+				_UNSAFE_STRING_CONSTRUCTOR.setAccessible(true);
+			} catch (Exception ex) {
+				// Will do normal String creation
+			}
+		}
+	}
 
 	private String[] _array;
 	private int _arrayIndex;
