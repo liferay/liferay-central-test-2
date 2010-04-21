@@ -123,11 +123,6 @@ public abstract class AnnouncementsEntryLocalServiceBaseImpl
 		return announcementsEntryPersistence.findByPrimaryKey(entryId);
 	}
 
-	public AnnouncementsEntry getAnnouncementsEntryByUuidAndGroupId(
-		String uuid, long groupId) throws PortalException, SystemException {
-		return announcementsEntryPersistence.findByUUID_G(uuid, groupId);
-	}
-
 	public List<AnnouncementsEntry> getAnnouncementsEntries(int start, int end)
 		throws SystemException {
 		return announcementsEntryPersistence.findAll(start, end);

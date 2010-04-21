@@ -90,13 +90,6 @@ public class LockLocalServiceWrapper implements LockLocalService {
 		return _lockLocalService.getLock(lockId);
 	}
 
-	public com.liferay.portal.model.Lock getLockByUuidAndGroupId(
-		java.lang.String uuid, long groupId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _lockLocalService.getLockByUuidAndGroupId(uuid, groupId);
-	}
-
 	public java.util.List<com.liferay.portal.model.Lock> getLocks(int start,
 		int end) throws com.liferay.portal.kernel.exception.SystemException {
 		return _lockLocalService.getLocks(start, end);

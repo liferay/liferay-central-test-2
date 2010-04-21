@@ -90,13 +90,6 @@ public class UserLocalServiceWrapper implements UserLocalService {
 		return _userLocalService.getUser(userId);
 	}
 
-	public com.liferay.portal.model.User getUserByUuidAndGroupId(
-		java.lang.String uuid, long groupId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _userLocalService.getUserByUuidAndGroupId(uuid, groupId);
-	}
-
 	public java.util.List<com.liferay.portal.model.User> getUsers(int start,
 		int end) throws com.liferay.portal.kernel.exception.SystemException {
 		return _userLocalService.getUsers(start, end);

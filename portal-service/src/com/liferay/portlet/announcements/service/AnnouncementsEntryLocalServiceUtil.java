@@ -94,13 +94,6 @@ public class AnnouncementsEntryLocalServiceUtil {
 		return getService().getAnnouncementsEntry(entryId);
 	}
 
-	public static com.liferay.portlet.announcements.model.AnnouncementsEntry getAnnouncementsEntryByUuidAndGroupId(
-		java.lang.String uuid, long groupId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getService().getAnnouncementsEntryByUuidAndGroupId(uuid, groupId);
-	}
-
 	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementsEntry> getAnnouncementsEntries(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {

@@ -91,13 +91,6 @@ public class UserLocalServiceUtil {
 		return getService().getUser(userId);
 	}
 
-	public static com.liferay.portal.model.User getUserByUuidAndGroupId(
-		java.lang.String uuid, long groupId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getService().getUserByUuidAndGroupId(uuid, groupId);
-	}
-
 	public static java.util.List<com.liferay.portal.model.User> getUsers(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {

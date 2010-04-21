@@ -227,11 +227,6 @@ public abstract class LockLocalServiceBaseImpl implements LockLocalService {
 		return lockPersistence.findByPrimaryKey(lockId);
 	}
 
-	public Lock getLockByUuidAndGroupId(String uuid, long groupId)
-		throws PortalException, SystemException {
-		return lockPersistence.findByUUID_G(uuid, groupId);
-	}
-
 	public List<Lock> getLocks(int start, int end) throws SystemException {
 		return lockPersistence.findAll(start, end);
 	}
