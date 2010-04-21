@@ -17,6 +17,7 @@ package com.liferay.portlet.journal.workflow;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.workflow.BaseWorkflowHandler;
 import com.liferay.portlet.asset.model.AssetRenderer;
 import com.liferay.portlet.journal.asset.JournalArticleAssetRenderer;
@@ -36,6 +37,10 @@ public class JournalArticleWorkflowHandler extends BaseWorkflowHandler {
 
 	public String getClassName() {
 		return CLASS_NAME;
+	}
+
+	public String getIconPath(ThemeDisplay themeDisplay) {
+		return themeDisplay.getPathThemeImages() + "/common/history.png";
 	}
 
 	public String getType() {

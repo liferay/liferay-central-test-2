@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
+import com.liferay.portal.theme.ThemeDisplay;
 
 import javax.portlet.PortletURL;
 
@@ -26,8 +27,11 @@ import javax.portlet.PortletURL;
  *
  * @author Bruno Farache
  * @author Macerllus Tavares
+ * @author Juan Fernández
  */
 public interface WorkflowHandler {
+
+	public static final String TYPE_BLOGS = "blogs";
 
 	public static final String TYPE_CONTENT = "content";
 
@@ -36,6 +40,8 @@ public interface WorkflowHandler {
 	public static final String TYPE_UNKNOWN = "unknown";
 
 	public String getClassName();
+
+	public String getIconPath(ThemeDisplay themeDisplay);
 
 	public String getTitle(long classPK);
 
