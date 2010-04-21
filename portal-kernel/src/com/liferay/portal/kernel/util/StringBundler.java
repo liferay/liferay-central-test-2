@@ -14,6 +14,9 @@
 
 package com.liferay.portal.kernel.util;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
 import java.io.IOException;
 import java.io.Writer;
 
@@ -64,8 +67,8 @@ public class StringBundler {
 		return append(String.valueOf(c));
 	}
 
-	public StringBundler append(char[] chars) {
-		return append(new String(chars));
+	public StringBundler append(char[] charArray) {
+		return append(new String(charArray));
 	}
 
 	public StringBundler append(double d) {
@@ -154,7 +157,7 @@ public class StringBundler {
 		}
 
 		if (_arrayIndex < newIndex) {
-			for( int i = _arrayIndex; i < newIndex; i++) {
+			for (int i = _arrayIndex; i < newIndex; i++) {
 				_array[i] = StringPool.BLANK;
 			}
 		}
@@ -189,26 +192,27 @@ public class StringBundler {
 			return _array[0].concat(_array[1]);
 		}
 
-		int finalLength = 0;
+		int length = 0;
 
 		for (int i = 0; i < _arrayIndex; i++) {
-			finalLength += _array[i].length();
+			length += _array[i].length();
 		}
 
-		if (_UNSAFE_STRING_CONSTRUCTOR != null &&
-			finalLength >= _UNSAFE_CREATE_THRESHOLD) {
-			return unsafeCreate(_array, _arrayIndex, finalLength);
-		}
+		if ((_unsafeStringConstructor != null) &&
+			(length >= _UNSAFE_CREATE_THRESHOLD)) {
 
-		if (_arrayIndex == 3) {
+			return unsafeCreate(_array, _arrayIndex, length);
+		}
+		else if (_arrayIndex == 3) {
 			return _array[0].concat(_array[1]).concat(_array[2]);
 		}
-
-		return safeCreate(_array, _arrayIndex, finalLength);
+		else {
+			return safeCreate(_array, _arrayIndex, length);
+		}
 	}
 
 	public void writeTo(Writer writer) throws IOException {
-		for(int i = 0; i < _arrayIndex; i++) {
+		for (int i = 0; i < _arrayIndex; i++) {
 			writer.write(_array[i]);
 		}
 	}
@@ -221,34 +225,34 @@ public class StringBundler {
 		_array = newArray;
 	}
 
-	protected String safeCreate(
-		String[] array, int arrayIndex, int finalLength) {
+	protected String safeCreate(String[] array, int index, int length) {
+		StringBuilder sb = new StringBuilder(length);
 
-		StringBuilder sb = new StringBuilder(finalLength);
-
-		for (int i = 0; i < arrayIndex; i++) {
+		for (int i = 0; i < index; i++) {
 			sb.append(array[i]);
 		}
+
 		return sb.toString();
 	}
 
-	protected String unsafeCreate(
-		String[] array, int arrayIndex, int finalLength) {
+	protected String unsafeCreate(String[] array, int index, int length) {
+		char[] charArray = new char[length];
 
-		char[] content = new char[finalLength];
 		int offset = 0;
-		for(int i = 0; i < arrayIndex; i++) {
-			String element = array[i];
-			int elementLength = element.length();
-			element.getChars(0, elementLength, content, offset);
-			offset += elementLength;
+
+		for (int i = 0; i < index; i++) {
+			String s = array[i];
+
+			s.getChars(0, s.length(), charArray, offset);
+
+			offset += s.length();
 		}
+
 		try {
-			return _UNSAFE_STRING_CONSTRUCTOR.newInstance(0, finalLength,
-				content);
-		} catch (Exception ex) {
-			// This should never happen
-			throw new IllegalStateException(ex);
+			return _unsafeStringConstructor.newInstance(0, length, charArray);
+		}
+		catch (Exception e) {
+			throw new IllegalStateException(e);
 		}
 	}
 
@@ -259,19 +263,22 @@ public class StringBundler {
 	private static final String _TRUE = "true";
 
 	private static final int _UNSAFE_CREATE_THRESHOLD = GetterUtil.getInteger(
-		PropsUtil.get(PropsKeys.STRINGBUNDLER_UNSAFE_CREATE_THRESHOLD), 0);
+		PropsUtil.get(PropsKeys.STRING_BUNDLER_UNSAFE_CREATE_THRESHOLD), 0);
 
-	private static Constructor<String> _UNSAFE_STRING_CONSTRUCTOR;
+	private static Log _log = LogFactoryUtil.getLog(StringBundler.class);
+
+	private static Constructor<String> _unsafeStringConstructor;
 
 	static {
 		if (_UNSAFE_CREATE_THRESHOLD > 0) {
 			try {
-				_UNSAFE_STRING_CONSTRUCTOR =
-					String.class.getDeclaredConstructor(int.class, int.class,
-					char[].class);
-				_UNSAFE_STRING_CONSTRUCTOR.setAccessible(true);
-			} catch (Exception ex) {
-				// Will do normal String creation
+				_unsafeStringConstructor = String.class.getDeclaredConstructor(
+					int.class, int.class, char[].class);
+
+				_unsafeStringConstructor.setAccessible(true);
+			}
+			catch (Exception e) {
+				_log.error(e, e);
 			}
 		}
 	}
