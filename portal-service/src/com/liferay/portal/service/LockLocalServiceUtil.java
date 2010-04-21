@@ -91,6 +91,13 @@ public class LockLocalServiceUtil {
 		return getService().getLock(lockId);
 	}
 
+	public static com.liferay.portal.model.Lock getLockByUuidAndGroupId(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getLockByUuidAndGroupId(uuid, groupId);
+	}
+
 	public static java.util.List<com.liferay.portal.model.Lock> getLocks(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {

@@ -94,6 +94,14 @@ public class MBCategoryLocalServiceWrapper implements MBCategoryLocalService {
 		return _mbCategoryLocalService.getMBCategory(categoryId);
 	}
 
+	public com.liferay.portlet.messageboards.model.MBCategory getMBCategoryByUuidAndGroupId(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _mbCategoryLocalService.getMBCategoryByUuidAndGroupId(uuid,
+			groupId);
+	}
+
 	public java.util.List<com.liferay.portlet.messageboards.model.MBCategory> getMBCategories(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {

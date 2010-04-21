@@ -94,6 +94,13 @@ public class MBMessageLocalServiceWrapper implements MBMessageLocalService {
 		return _mbMessageLocalService.getMBMessage(messageId);
 	}
 
+	public com.liferay.portlet.messageboards.model.MBMessage getMBMessageByUuidAndGroupId(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _mbMessageLocalService.getMBMessageByUuidAndGroupId(uuid, groupId);
+	}
+
 	public java.util.List<com.liferay.portlet.messageboards.model.MBMessage> getMBMessages(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {

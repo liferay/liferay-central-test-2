@@ -95,6 +95,14 @@ public class BookmarksEntryLocalServiceWrapper
 		return _bookmarksEntryLocalService.getBookmarksEntry(entryId);
 	}
 
+	public com.liferay.portlet.bookmarks.model.BookmarksEntry getBookmarksEntryByUuidAndGroupId(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _bookmarksEntryLocalService.getBookmarksEntryByUuidAndGroupId(uuid,
+			groupId);
+	}
+
 	public java.util.List<com.liferay.portlet.bookmarks.model.BookmarksEntry> getBookmarksEntries(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {

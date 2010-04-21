@@ -117,6 +117,11 @@ public abstract class JournalFeedLocalServiceBaseImpl
 		return journalFeedPersistence.findByPrimaryKey(id);
 	}
 
+	public JournalFeed getJournalFeedByUuidAndGroupId(String uuid, long groupId)
+		throws PortalException, SystemException {
+		return journalFeedPersistence.findByUUID_G(uuid, groupId);
+	}
+
 	public List<JournalFeed> getJournalFeeds(int start, int end)
 		throws SystemException {
 		return journalFeedPersistence.findAll(start, end);

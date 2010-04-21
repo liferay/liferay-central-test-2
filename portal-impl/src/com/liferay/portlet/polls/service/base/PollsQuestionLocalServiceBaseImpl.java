@@ -101,6 +101,11 @@ public abstract class PollsQuestionLocalServiceBaseImpl
 		return pollsQuestionPersistence.findByPrimaryKey(questionId);
 	}
 
+	public PollsQuestion getPollsQuestionByUuidAndGroupId(String uuid,
+		long groupId) throws PortalException, SystemException {
+		return pollsQuestionPersistence.findByUUID_G(uuid, groupId);
+	}
+
 	public List<PollsQuestion> getPollsQuestions(int start, int end)
 		throws SystemException {
 		return pollsQuestionPersistence.findAll(start, end);

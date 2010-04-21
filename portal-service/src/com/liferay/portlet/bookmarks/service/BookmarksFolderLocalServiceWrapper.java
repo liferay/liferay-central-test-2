@@ -96,6 +96,14 @@ public class BookmarksFolderLocalServiceWrapper
 		return _bookmarksFolderLocalService.getBookmarksFolder(folderId);
 	}
 
+	public com.liferay.portlet.bookmarks.model.BookmarksFolder getBookmarksFolderByUuidAndGroupId(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _bookmarksFolderLocalService.getBookmarksFolderByUuidAndGroupId(uuid,
+			groupId);
+	}
+
 	public java.util.List<com.liferay.portlet.bookmarks.model.BookmarksFolder> getBookmarksFolders(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {

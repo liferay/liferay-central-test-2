@@ -95,6 +95,14 @@ public class AssetCategoryLocalServiceWrapper
 		return _assetCategoryLocalService.getAssetCategory(categoryId);
 	}
 
+	public com.liferay.portlet.asset.model.AssetCategory getAssetCategoryByUuidAndGroupId(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _assetCategoryLocalService.getAssetCategoryByUuidAndGroupId(uuid,
+			groupId);
+	}
+
 	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> getAssetCategories(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {

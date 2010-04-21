@@ -94,6 +94,13 @@ public class MBMessageLocalServiceUtil {
 		return getService().getMBMessage(messageId);
 	}
 
+	public static com.liferay.portlet.messageboards.model.MBMessage getMBMessageByUuidAndGroupId(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getMBMessageByUuidAndGroupId(uuid, groupId);
+	}
+
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> getMBMessages(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {

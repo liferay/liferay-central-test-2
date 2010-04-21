@@ -94,6 +94,13 @@ public class SocialRequestLocalServiceUtil {
 		return getService().getSocialRequest(requestId);
 	}
 
+	public static com.liferay.portlet.social.model.SocialRequest getSocialRequestByUuidAndGroupId(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getSocialRequestByUuidAndGroupId(uuid, groupId);
+	}
+
 	public static java.util.List<com.liferay.portlet.social.model.SocialRequest> getSocialRequests(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {

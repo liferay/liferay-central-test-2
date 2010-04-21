@@ -94,6 +94,13 @@ public class MBCategoryLocalServiceUtil {
 		return getService().getMBCategory(categoryId);
 	}
 
+	public static com.liferay.portlet.messageboards.model.MBCategory getMBCategoryByUuidAndGroupId(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getMBCategoryByUuidAndGroupId(uuid, groupId);
+	}
+
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBCategory> getMBCategories(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {

@@ -155,6 +155,11 @@ public abstract class MBMessageLocalServiceBaseImpl
 		return mbMessagePersistence.findByPrimaryKey(messageId);
 	}
 
+	public MBMessage getMBMessageByUuidAndGroupId(String uuid, long groupId)
+		throws PortalException, SystemException {
+		return mbMessagePersistence.findByUUID_G(uuid, groupId);
+	}
+
 	public List<MBMessage> getMBMessages(int start, int end)
 		throws SystemException {
 		return mbMessagePersistence.findAll(start, end);

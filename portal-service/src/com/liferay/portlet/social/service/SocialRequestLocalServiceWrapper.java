@@ -95,6 +95,14 @@ public class SocialRequestLocalServiceWrapper
 		return _socialRequestLocalService.getSocialRequest(requestId);
 	}
 
+	public com.liferay.portlet.social.model.SocialRequest getSocialRequestByUuidAndGroupId(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _socialRequestLocalService.getSocialRequestByUuidAndGroupId(uuid,
+			groupId);
+	}
+
 	public java.util.List<com.liferay.portlet.social.model.SocialRequest> getSocialRequests(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {

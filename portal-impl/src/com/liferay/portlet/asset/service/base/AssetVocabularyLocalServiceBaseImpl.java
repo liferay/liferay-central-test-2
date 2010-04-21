@@ -124,6 +124,11 @@ public abstract class AssetVocabularyLocalServiceBaseImpl
 		return assetVocabularyPersistence.findByPrimaryKey(vocabularyId);
 	}
 
+	public AssetVocabulary getAssetVocabularyByUuidAndGroupId(String uuid,
+		long groupId) throws PortalException, SystemException {
+		return assetVocabularyPersistence.findByUUID_G(uuid, groupId);
+	}
+
 	public List<AssetVocabulary> getAssetVocabularies(int start, int end)
 		throws SystemException {
 		return assetVocabularyPersistence.findAll(start, end);

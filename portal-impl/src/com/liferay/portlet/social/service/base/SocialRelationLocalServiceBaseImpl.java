@@ -101,6 +101,11 @@ public abstract class SocialRelationLocalServiceBaseImpl
 		return socialRelationPersistence.findByPrimaryKey(relationId);
 	}
 
+	public SocialRelation getSocialRelationByUuidAndGroupId(String uuid,
+		long groupId) throws PortalException, SystemException {
+		return socialRelationPersistence.findByUUID_G(uuid, groupId);
+	}
+
 	public List<SocialRelation> getSocialRelations(int start, int end)
 		throws SystemException {
 		return socialRelationPersistence.findAll(start, end);

@@ -109,6 +109,11 @@ public abstract class IGFolderLocalServiceBaseImpl
 		return igFolderPersistence.findByPrimaryKey(folderId);
 	}
 
+	public IGFolder getIGFolderByUuidAndGroupId(String uuid, long groupId)
+		throws PortalException, SystemException {
+		return igFolderPersistence.findByUUID_G(uuid, groupId);
+	}
+
 	public List<IGFolder> getIGFolders(int start, int end)
 		throws SystemException {
 		return igFolderPersistence.findAll(start, end);

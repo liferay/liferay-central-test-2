@@ -91,6 +91,13 @@ public class WikiPageLocalServiceWrapper implements WikiPageLocalService {
 		return _wikiPageLocalService.getWikiPage(pageId);
 	}
 
+	public com.liferay.portlet.wiki.model.WikiPage getWikiPageByUuidAndGroupId(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _wikiPageLocalService.getWikiPageByUuidAndGroupId(uuid, groupId);
+	}
+
 	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> getWikiPages(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {

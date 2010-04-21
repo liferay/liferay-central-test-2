@@ -146,6 +146,11 @@ public abstract class DLFileEntryLocalServiceBaseImpl
 		return dlFileEntryPersistence.findByPrimaryKey(fileEntryId);
 	}
 
+	public DLFileEntry getDLFileEntryByUuidAndGroupId(String uuid, long groupId)
+		throws PortalException, SystemException {
+		return dlFileEntryPersistence.findByUUID_G(uuid, groupId);
+	}
+
 	public List<DLFileEntry> getDLFileEntries(int start, int end)
 		throws SystemException {
 		return dlFileEntryPersistence.findAll(start, end);

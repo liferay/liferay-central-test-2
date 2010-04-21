@@ -94,6 +94,13 @@ public class IGImageLocalServiceUtil {
 		return getService().getIGImage(imageId);
 	}
 
+	public static com.liferay.portlet.imagegallery.model.IGImage getIGImageByUuidAndGroupId(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getIGImageByUuidAndGroupId(uuid, groupId);
+	}
+
 	public static java.util.List<com.liferay.portlet.imagegallery.model.IGImage> getIGImages(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {

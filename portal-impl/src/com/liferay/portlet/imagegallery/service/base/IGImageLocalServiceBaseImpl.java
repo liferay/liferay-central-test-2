@@ -114,6 +114,11 @@ public abstract class IGImageLocalServiceBaseImpl implements IGImageLocalService
 		return igImagePersistence.findByPrimaryKey(imageId);
 	}
 
+	public IGImage getIGImageByUuidAndGroupId(String uuid, long groupId)
+		throws PortalException, SystemException {
+		return igImagePersistence.findByUUID_G(uuid, groupId);
+	}
+
 	public List<IGImage> getIGImages(int start, int end)
 		throws SystemException {
 		return igImagePersistence.findAll(start, end);

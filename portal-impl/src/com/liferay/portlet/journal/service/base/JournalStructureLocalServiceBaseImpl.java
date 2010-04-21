@@ -119,6 +119,11 @@ public abstract class JournalStructureLocalServiceBaseImpl
 		return journalStructurePersistence.findByPrimaryKey(id);
 	}
 
+	public JournalStructure getJournalStructureByUuidAndGroupId(String uuid,
+		long groupId) throws PortalException, SystemException {
+		return journalStructurePersistence.findByUUID_G(uuid, groupId);
+	}
+
 	public List<JournalStructure> getJournalStructures(int start, int end)
 		throws SystemException {
 		return journalStructurePersistence.findAll(start, end);

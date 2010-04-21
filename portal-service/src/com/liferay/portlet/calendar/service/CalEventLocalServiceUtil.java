@@ -94,6 +94,13 @@ public class CalEventLocalServiceUtil {
 		return getService().getCalEvent(eventId);
 	}
 
+	public static com.liferay.portlet.calendar.model.CalEvent getCalEventByUuidAndGroupId(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getCalEventByUuidAndGroupId(uuid, groupId);
+	}
+
 	public static java.util.List<com.liferay.portlet.calendar.model.CalEvent> getCalEvents(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {

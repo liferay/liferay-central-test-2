@@ -121,6 +121,11 @@ public abstract class JournalTemplateLocalServiceBaseImpl
 		return journalTemplatePersistence.findByPrimaryKey(id);
 	}
 
+	public JournalTemplate getJournalTemplateByUuidAndGroupId(String uuid,
+		long groupId) throws PortalException, SystemException {
+		return journalTemplatePersistence.findByUUID_G(uuid, groupId);
+	}
+
 	public List<JournalTemplate> getJournalTemplates(int start, int end)
 		throws SystemException {
 		return journalTemplatePersistence.findAll(start, end);

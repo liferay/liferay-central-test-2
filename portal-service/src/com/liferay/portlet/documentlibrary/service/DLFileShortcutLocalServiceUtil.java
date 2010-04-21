@@ -94,6 +94,13 @@ public class DLFileShortcutLocalServiceUtil {
 		return getService().getDLFileShortcut(fileShortcutId);
 	}
 
+	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut getDLFileShortcutByUuidAndGroupId(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getDLFileShortcutByUuidAndGroupId(uuid, groupId);
+	}
+
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileShortcut> getDLFileShortcuts(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {

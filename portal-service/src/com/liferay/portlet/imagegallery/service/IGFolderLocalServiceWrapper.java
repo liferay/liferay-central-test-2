@@ -94,6 +94,13 @@ public class IGFolderLocalServiceWrapper implements IGFolderLocalService {
 		return _igFolderLocalService.getIGFolder(folderId);
 	}
 
+	public com.liferay.portlet.imagegallery.model.IGFolder getIGFolderByUuidAndGroupId(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _igFolderLocalService.getIGFolderByUuidAndGroupId(uuid, groupId);
+	}
+
 	public java.util.List<com.liferay.portlet.imagegallery.model.IGFolder> getIGFolders(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {

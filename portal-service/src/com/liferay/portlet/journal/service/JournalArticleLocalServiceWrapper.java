@@ -95,6 +95,14 @@ public class JournalArticleLocalServiceWrapper
 		return _journalArticleLocalService.getJournalArticle(id);
 	}
 
+	public com.liferay.portlet.journal.model.JournalArticle getJournalArticleByUuidAndGroupId(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _journalArticleLocalService.getJournalArticleByUuidAndGroupId(uuid,
+			groupId);
+	}
+
 	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> getJournalArticles(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {

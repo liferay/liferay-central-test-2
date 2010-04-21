@@ -138,6 +138,11 @@ public abstract class WikiPageLocalServiceBaseImpl
 		return wikiPagePersistence.findByPrimaryKey(pageId);
 	}
 
+	public WikiPage getWikiPageByUuidAndGroupId(String uuid, long groupId)
+		throws PortalException, SystemException {
+		return wikiPagePersistence.findByUUID_G(uuid, groupId);
+	}
+
 	public List<WikiPage> getWikiPages(int start, int end)
 		throws SystemException {
 		return wikiPagePersistence.findAll(start, end);

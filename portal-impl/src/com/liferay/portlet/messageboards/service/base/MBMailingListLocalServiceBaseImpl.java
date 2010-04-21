@@ -116,6 +116,11 @@ public abstract class MBMailingListLocalServiceBaseImpl
 		return mbMailingListPersistence.findByPrimaryKey(mailingListId);
 	}
 
+	public MBMailingList getMBMailingListByUuidAndGroupId(String uuid,
+		long groupId) throws PortalException, SystemException {
+		return mbMailingListPersistence.findByUUID_G(uuid, groupId);
+	}
+
 	public List<MBMailingList> getMBMailingLists(int start, int end)
 		throws SystemException {
 		return mbMailingListPersistence.findAll(start, end);

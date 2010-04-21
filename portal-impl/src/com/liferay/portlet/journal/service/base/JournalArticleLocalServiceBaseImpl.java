@@ -154,6 +154,11 @@ public abstract class JournalArticleLocalServiceBaseImpl
 		return journalArticlePersistence.findByPrimaryKey(id);
 	}
 
+	public JournalArticle getJournalArticleByUuidAndGroupId(String uuid,
+		long groupId) throws PortalException, SystemException {
+		return journalArticlePersistence.findByUUID_G(uuid, groupId);
+	}
+
 	public List<JournalArticle> getJournalArticles(int start, int end)
 		throws SystemException {
 		return journalArticlePersistence.findAll(start, end);

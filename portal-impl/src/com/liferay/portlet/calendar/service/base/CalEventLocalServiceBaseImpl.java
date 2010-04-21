@@ -120,6 +120,11 @@ public abstract class CalEventLocalServiceBaseImpl
 		return calEventPersistence.findByPrimaryKey(eventId);
 	}
 
+	public CalEvent getCalEventByUuidAndGroupId(String uuid, long groupId)
+		throws PortalException, SystemException {
+		return calEventPersistence.findByUUID_G(uuid, groupId);
+	}
+
 	public List<CalEvent> getCalEvents(int start, int end)
 		throws SystemException {
 		return calEventPersistence.findAll(start, end);

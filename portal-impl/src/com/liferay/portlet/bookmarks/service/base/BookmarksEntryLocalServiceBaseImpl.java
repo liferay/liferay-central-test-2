@@ -110,6 +110,11 @@ public abstract class BookmarksEntryLocalServiceBaseImpl
 		return bookmarksEntryPersistence.findByPrimaryKey(entryId);
 	}
 
+	public BookmarksEntry getBookmarksEntryByUuidAndGroupId(String uuid,
+		long groupId) throws PortalException, SystemException {
+		return bookmarksEntryPersistence.findByUUID_G(uuid, groupId);
+	}
+
 	public List<BookmarksEntry> getBookmarksEntries(int start, int end)
 		throws SystemException {
 		return bookmarksEntryPersistence.findAll(start, end);

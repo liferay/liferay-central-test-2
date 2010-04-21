@@ -260,6 +260,11 @@ public abstract class UserLocalServiceBaseImpl implements UserLocalService {
 		return userPersistence.findByPrimaryKey(userId);
 	}
 
+	public User getUserByUuidAndGroupId(String uuid, long groupId)
+		throws PortalException, SystemException {
+		return userPersistence.findByUUID_G(uuid, groupId);
+	}
+
 	public List<User> getUsers(int start, int end) throws SystemException {
 		return userPersistence.findAll(start, end);
 	}

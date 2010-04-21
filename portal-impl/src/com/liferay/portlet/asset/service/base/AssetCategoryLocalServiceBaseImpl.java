@@ -120,6 +120,11 @@ public abstract class AssetCategoryLocalServiceBaseImpl
 		return assetCategoryPersistence.findByPrimaryKey(categoryId);
 	}
 
+	public AssetCategory getAssetCategoryByUuidAndGroupId(String uuid,
+		long groupId) throws PortalException, SystemException {
+		return assetCategoryPersistence.findByUUID_G(uuid, groupId);
+	}
+
 	public List<AssetCategory> getAssetCategories(int start, int end)
 		throws SystemException {
 		return assetCategoryPersistence.findAll(start, end);

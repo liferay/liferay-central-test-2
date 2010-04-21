@@ -94,6 +94,14 @@ public class PollsChoiceLocalServiceWrapper implements PollsChoiceLocalService {
 		return _pollsChoiceLocalService.getPollsChoice(choiceId);
 	}
 
+	public com.liferay.portlet.polls.model.PollsChoice getPollsChoiceByUuidAndGroupId(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _pollsChoiceLocalService.getPollsChoiceByUuidAndGroupId(uuid,
+			groupId);
+	}
+
 	public java.util.List<com.liferay.portlet.polls.model.PollsChoice> getPollsChoices(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {

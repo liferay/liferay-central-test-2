@@ -134,6 +134,11 @@ public abstract class BlogsEntryLocalServiceBaseImpl
 		return blogsEntryPersistence.findByPrimaryKey(entryId);
 	}
 
+	public BlogsEntry getBlogsEntryByUuidAndGroupId(String uuid, long groupId)
+		throws PortalException, SystemException {
+		return blogsEntryPersistence.findByUUID_G(uuid, groupId);
+	}
+
 	public List<BlogsEntry> getBlogsEntries(int start, int end)
 		throws SystemException {
 		return blogsEntryPersistence.findAll(start, end);

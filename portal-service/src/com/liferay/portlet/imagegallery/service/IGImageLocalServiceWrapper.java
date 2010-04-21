@@ -93,6 +93,13 @@ public class IGImageLocalServiceWrapper implements IGImageLocalService {
 		return _igImageLocalService.getIGImage(imageId);
 	}
 
+	public com.liferay.portlet.imagegallery.model.IGImage getIGImageByUuidAndGroupId(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _igImageLocalService.getIGImageByUuidAndGroupId(uuid, groupId);
+	}
+
 	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> getIGImages(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {

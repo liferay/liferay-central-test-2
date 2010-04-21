@@ -101,6 +101,11 @@ public abstract class SocialRequestLocalServiceBaseImpl
 		return socialRequestPersistence.findByPrimaryKey(requestId);
 	}
 
+	public SocialRequest getSocialRequestByUuidAndGroupId(String uuid,
+		long groupId) throws PortalException, SystemException {
+		return socialRequestPersistence.findByUUID_G(uuid, groupId);
+	}
+
 	public List<SocialRequest> getSocialRequests(int start, int end)
 		throws SystemException {
 		return socialRequestPersistence.findAll(start, end);

@@ -94,6 +94,13 @@ public class IGFolderLocalServiceUtil {
 		return getService().getIGFolder(folderId);
 	}
 
+	public static com.liferay.portlet.imagegallery.model.IGFolder getIGFolderByUuidAndGroupId(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getIGFolderByUuidAndGroupId(uuid, groupId);
+	}
+
 	public static java.util.List<com.liferay.portlet.imagegallery.model.IGFolder> getIGFolders(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {

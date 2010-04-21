@@ -94,6 +94,13 @@ public class DLFolderLocalServiceUtil {
 		return getService().getDLFolder(folderId);
 	}
 
+	public static com.liferay.portlet.documentlibrary.model.DLFolder getDLFolderByUuidAndGroupId(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getDLFolderByUuidAndGroupId(uuid, groupId);
+	}
+
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFolder> getDLFolders(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {

@@ -94,6 +94,13 @@ public class WikiPageLocalServiceUtil {
 		return getService().getWikiPage(pageId);
 	}
 
+	public static com.liferay.portlet.wiki.model.WikiPage getWikiPageByUuidAndGroupId(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getWikiPageByUuidAndGroupId(uuid, groupId);
+	}
+
 	public static java.util.List<com.liferay.portlet.wiki.model.WikiPage> getWikiPages(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {

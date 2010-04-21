@@ -129,6 +129,11 @@ public abstract class MBCategoryLocalServiceBaseImpl
 		return mbCategoryPersistence.findByPrimaryKey(categoryId);
 	}
 
+	public MBCategory getMBCategoryByUuidAndGroupId(String uuid, long groupId)
+		throws PortalException, SystemException {
+		return mbCategoryPersistence.findByUUID_G(uuid, groupId);
+	}
+
 	public List<MBCategory> getMBCategories(int start, int end)
 		throws SystemException {
 		return mbCategoryPersistence.findAll(start, end);

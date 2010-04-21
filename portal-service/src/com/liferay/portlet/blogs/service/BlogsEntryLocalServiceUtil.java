@@ -94,6 +94,13 @@ public class BlogsEntryLocalServiceUtil {
 		return getService().getBlogsEntry(entryId);
 	}
 
+	public static com.liferay.portlet.blogs.model.BlogsEntry getBlogsEntryByUuidAndGroupId(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getBlogsEntryByUuidAndGroupId(uuid, groupId);
+	}
+
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> getBlogsEntries(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {

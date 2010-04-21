@@ -94,6 +94,13 @@ public class WikiNodeLocalServiceUtil {
 		return getService().getWikiNode(nodeId);
 	}
 
+	public static com.liferay.portlet.wiki.model.WikiNode getWikiNodeByUuidAndGroupId(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getWikiNodeByUuidAndGroupId(uuid, groupId);
+	}
+
 	public static java.util.List<com.liferay.portlet.wiki.model.WikiNode> getWikiNodes(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {

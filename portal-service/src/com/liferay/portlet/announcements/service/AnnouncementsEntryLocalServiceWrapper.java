@@ -96,6 +96,14 @@ public class AnnouncementsEntryLocalServiceWrapper
 		return _announcementsEntryLocalService.getAnnouncementsEntry(entryId);
 	}
 
+	public com.liferay.portlet.announcements.model.AnnouncementsEntry getAnnouncementsEntryByUuidAndGroupId(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _announcementsEntryLocalService.getAnnouncementsEntryByUuidAndGroupId(uuid,
+			groupId);
+	}
+
 	public java.util.List<com.liferay.portlet.announcements.model.AnnouncementsEntry> getAnnouncementsEntries(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {

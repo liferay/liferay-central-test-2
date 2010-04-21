@@ -104,6 +104,11 @@ public abstract class WikiNodeLocalServiceBaseImpl
 		return wikiNodePersistence.findByPrimaryKey(nodeId);
 	}
 
+	public WikiNode getWikiNodeByUuidAndGroupId(String uuid, long groupId)
+		throws PortalException, SystemException {
+		return wikiNodePersistence.findByUUID_G(uuid, groupId);
+	}
+
 	public List<WikiNode> getWikiNodes(int start, int end)
 		throws SystemException {
 		return wikiNodePersistence.findAll(start, end);

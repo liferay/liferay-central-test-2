@@ -93,6 +93,13 @@ public class CalEventLocalServiceWrapper implements CalEventLocalService {
 		return _calEventLocalService.getCalEvent(eventId);
 	}
 
+	public com.liferay.portlet.calendar.model.CalEvent getCalEventByUuidAndGroupId(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _calEventLocalService.getCalEventByUuidAndGroupId(uuid, groupId);
+	}
+
 	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> getCalEvents(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {

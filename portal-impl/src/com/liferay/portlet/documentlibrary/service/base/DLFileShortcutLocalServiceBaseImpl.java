@@ -116,6 +116,11 @@ public abstract class DLFileShortcutLocalServiceBaseImpl
 		return dlFileShortcutPersistence.findByPrimaryKey(fileShortcutId);
 	}
 
+	public DLFileShortcut getDLFileShortcutByUuidAndGroupId(String uuid,
+		long groupId) throws PortalException, SystemException {
+		return dlFileShortcutPersistence.findByUUID_G(uuid, groupId);
+	}
+
 	public List<DLFileShortcut> getDLFileShortcuts(int start, int end)
 		throws SystemException {
 		return dlFileShortcutPersistence.findAll(start, end);

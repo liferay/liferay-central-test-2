@@ -94,6 +94,13 @@ public class PollsQuestionLocalServiceUtil {
 		return getService().getPollsQuestion(questionId);
 	}
 
+	public static com.liferay.portlet.polls.model.PollsQuestion getPollsQuestionByUuidAndGroupId(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getPollsQuestionByUuidAndGroupId(uuid, groupId);
+	}
+
 	public static java.util.List<com.liferay.portlet.polls.model.PollsQuestion> getPollsQuestions(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {

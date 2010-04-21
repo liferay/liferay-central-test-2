@@ -91,6 +91,13 @@ public class WikiNodeLocalServiceWrapper implements WikiNodeLocalService {
 		return _wikiNodeLocalService.getWikiNode(nodeId);
 	}
 
+	public com.liferay.portlet.wiki.model.WikiNode getWikiNodeByUuidAndGroupId(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _wikiNodeLocalService.getWikiNodeByUuidAndGroupId(uuid, groupId);
+	}
+
 	public java.util.List<com.liferay.portlet.wiki.model.WikiNode> getWikiNodes(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {

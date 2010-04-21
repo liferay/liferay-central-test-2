@@ -94,6 +94,13 @@ public class JournalTemplateLocalServiceUtil {
 		return getService().getJournalTemplate(id);
 	}
 
+	public static com.liferay.portlet.journal.model.JournalTemplate getJournalTemplateByUuidAndGroupId(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getJournalTemplateByUuidAndGroupId(uuid, groupId);
+	}
+
 	public static java.util.List<com.liferay.portlet.journal.model.JournalTemplate> getJournalTemplates(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {

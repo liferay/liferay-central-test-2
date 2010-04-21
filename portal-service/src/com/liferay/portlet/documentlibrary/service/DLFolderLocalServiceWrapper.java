@@ -94,6 +94,13 @@ public class DLFolderLocalServiceWrapper implements DLFolderLocalService {
 		return _dlFolderLocalService.getDLFolder(folderId);
 	}
 
+	public com.liferay.portlet.documentlibrary.model.DLFolder getDLFolderByUuidAndGroupId(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _dlFolderLocalService.getDLFolderByUuidAndGroupId(uuid, groupId);
+	}
+
 	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFolder> getDLFolders(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {

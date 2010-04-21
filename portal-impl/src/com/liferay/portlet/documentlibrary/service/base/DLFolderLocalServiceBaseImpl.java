@@ -123,6 +123,11 @@ public abstract class DLFolderLocalServiceBaseImpl
 		return dlFolderPersistence.findByPrimaryKey(folderId);
 	}
 
+	public DLFolder getDLFolderByUuidAndGroupId(String uuid, long groupId)
+		throws PortalException, SystemException {
+		return dlFolderPersistence.findByUUID_G(uuid, groupId);
+	}
+
 	public List<DLFolder> getDLFolders(int start, int end)
 		throws SystemException {
 		return dlFolderPersistence.findAll(start, end);

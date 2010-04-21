@@ -130,6 +130,12 @@ public class PortletLocalServiceUtil {
 		getService().clearCache();
 	}
 
+	public static com.liferay.portal.model.Portlet clonePortlet(
+		long companyId, java.lang.String portletId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().clonePortlet(companyId, portletId);
+	}
+
 	public static com.liferay.portal.model.Portlet deployRemotePortlet(
 		com.liferay.portal.model.Portlet portlet, java.lang.String categoryName)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -225,12 +231,6 @@ public class PortletLocalServiceUtil {
 		return getService()
 				   .initWAR(servletContextName, servletContext, xmls,
 			pluginPackage);
-	}
-
-	public static com.liferay.portal.model.Portlet clonePortlet(
-		long companyId, java.lang.String portletId)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().clonePortlet(companyId, portletId);
 	}
 
 	public static com.liferay.portal.model.Portlet updatePortlet(

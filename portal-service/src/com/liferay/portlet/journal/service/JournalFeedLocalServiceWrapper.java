@@ -93,6 +93,14 @@ public class JournalFeedLocalServiceWrapper implements JournalFeedLocalService {
 		return _journalFeedLocalService.getJournalFeed(id);
 	}
 
+	public com.liferay.portlet.journal.model.JournalFeed getJournalFeedByUuidAndGroupId(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _journalFeedLocalService.getJournalFeedByUuidAndGroupId(uuid,
+			groupId);
+	}
+
 	public java.util.List<com.liferay.portlet.journal.model.JournalFeed> getJournalFeeds(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
