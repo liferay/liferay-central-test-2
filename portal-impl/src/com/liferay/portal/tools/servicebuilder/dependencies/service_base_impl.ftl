@@ -91,7 +91,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 		return ${entity.varName}Persistence.findByPrimaryKey(${entity.PKVarName});
 	}
 
-	<#if entity.hasUuid()>
+	<#if entity.hasUuid() && entity.hasColumn("groupId")>
 		public ${entity.name} get${entity.name}ByUuidAndGroupId(String uuid, long groupId) ${serviceBuilder.getServiceBaseThrowsExceptions(methods, "get" + entity.name, [entity.PKClassName], ["PortalException", "SystemException"])} {
 			return ${entity.varName}Persistence.findByUUID_G(uuid, groupId);
 		}
