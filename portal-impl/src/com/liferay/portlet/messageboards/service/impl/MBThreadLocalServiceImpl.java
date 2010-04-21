@@ -61,66 +61,6 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 		MBMessage rootMessage = mbMessagePersistence.findByPrimaryKey(
 			thread.getRootMessageId());
 
-		// Messages
-
-		List<MBMessage> messages = mbMessagePersistence.findByThreadId(
-			thread.getThreadId());
-
-		for (MBMessage message : messages) {
-
-			// Message
-
-			mbMessagePersistence.remove(message);
-
-			// Resources
-
-			if (!message.isDiscussion()) {
-				resourceLocalService.deleteResource(
-					message.getCompanyId(), MBMessage.class.getName(),
-					ResourceConstants.SCOPE_INDIVIDUAL, message.getMessageId());
-			}
-
-			// Statistics
-
-			if (!message.isDiscussion()) {
-				mbStatsUserLocalService.updateStatsUser(
-					message.getGroupId(), message.getUserId());
-			}
-
-			// Asset
-
-			assetEntryLocalService.deleteEntry(
-				MBMessage.class.getName(), message.getMessageId());
-
-			// Message flags
-
-			mbMessageFlagPersistence.removeByMessageId(message.getMessageId());
-
-			// Ratings
-
-			ratingsStatsLocalService.deleteStats(
-				MBMessage.class.getName(), message.getMessageId());
-
-			// Social
-
-			socialActivityLocalService.deleteActivities(
-				MBMessage.class.getName(), message.getMessageId());
-		}
-
-		// Thread
-
-		mbThreadPersistence.remove(thread);
-
-		// Category
-
-		if (!rootMessage.isDiscussion()) {
-			category.setThreadCount(category.getThreadCount() - 1);
-			category.setMessageCount(
-				category.getMessageCount() - messages.size());
-
-			mbCategoryPersistence.update(category, false);
-		}
-
 		// Indexer
 
 		Indexer indexer = IndexerRegistryUtil.getIndexer(MBMessage.class);
@@ -140,6 +80,66 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 		}
 		catch (NoSuchDirectoryException nsde) {
 		}
+
+		// Messages
+
+		List<MBMessage> messages = mbMessagePersistence.findByThreadId(
+			thread.getThreadId());
+
+		for (MBMessage message : messages) {
+
+			// Social
+
+			socialActivityLocalService.deleteActivities(
+				MBMessage.class.getName(), message.getMessageId());
+
+			// Ratings
+
+			ratingsStatsLocalService.deleteStats(
+				MBMessage.class.getName(), message.getMessageId());
+
+			// Asset
+
+			assetEntryLocalService.deleteEntry(
+				MBMessage.class.getName(), message.getMessageId());
+
+			// Statistics
+
+			if (!message.isDiscussion()) {
+				mbStatsUserLocalService.updateStatsUser(
+					message.getGroupId(), message.getUserId());
+			}
+
+			// Message flags
+
+			mbMessageFlagPersistence.removeByMessageId(message.getMessageId());
+
+			// Resources
+
+			if (!message.isDiscussion()) {
+				resourceLocalService.deleteResource(
+					message.getCompanyId(), MBMessage.class.getName(),
+					ResourceConstants.SCOPE_INDIVIDUAL, message.getMessageId());
+			}
+
+			// Message
+
+			mbMessagePersistence.remove(message);
+		}
+
+		// Category
+
+		if (!rootMessage.isDiscussion()) {
+			category.setThreadCount(category.getThreadCount() - 1);
+			category.setMessageCount(
+				category.getMessageCount() - messages.size());
+
+			mbCategoryPersistence.update(category, false);
+		}
+
+		// Thread
+
+		mbThreadPersistence.remove(thread);
 	}
 
 	public void deleteThreads(long groupId, long categoryId)
