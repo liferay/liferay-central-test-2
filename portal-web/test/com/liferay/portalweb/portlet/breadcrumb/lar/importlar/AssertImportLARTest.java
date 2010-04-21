@@ -32,7 +32,7 @@ public class AssertImportLARTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Breadcrumb Test Page")) {
+				if (selenium.isVisible("link=Breadcrumb Test Page")) {
 					break;
 				}
 			}

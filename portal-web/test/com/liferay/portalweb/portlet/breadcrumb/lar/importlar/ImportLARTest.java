@@ -32,7 +32,7 @@ public class ImportLARTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Breadcrumb Test Page")) {
+				if (selenium.isVisible("link=Breadcrumb Test Page")) {
 					break;
 				}
 			}
@@ -69,7 +69,7 @@ public class ImportLARTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_86_importFileName",
 			RuntimeVariables.replace(
-				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\breadcrumb\\lar\\importlar\\dependencies\\Breadcrumb-Selenium.portlet.lar"));
+				"L:\\trunk\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\breadcrumb\\lar\\importlar\\dependencies\\Breadcrumb-Selenium.portlet.lar"));
 		selenium.clickAt("//input[@value='Import']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");

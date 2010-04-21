@@ -29,12 +29,12 @@ public class ViewPortletBreadcrumbTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTestSuite(AddPageTest.class);
-		testSuite.addTestSuite(AddPortletTest.class);
-		testSuite.addTestSuite(AddPageChildTest.class);
-		testSuite.addTestSuite(AddPortletPageChildTest.class);
+		testSuite.addTestSuite(AddPageBreadcrumbTest.class);
+		testSuite.addTestSuite(AddPortletBreadcrumbTest.class);
+		testSuite.addTestSuite(AddChildPageBreadcrumbTest.class);
+		testSuite.addTestSuite(AddPortletBreadcrumbChildPageTest.class);
 		testSuite.addTestSuite(ViewPortletBreadcrumbTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

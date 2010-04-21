@@ -30,11 +30,11 @@ public class ConfigurePortletDisplayStyle1Tests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTestSuite(AddPageTest.class);
-		testSuite.addTestSuite(AddPortletTest.class);
+		testSuite.addTestSuite(AddPageBreadcrumbTest.class);
+		testSuite.addTestSuite(AddPortletBreadcrumbTest.class);
 		testSuite.addTestSuite(ConfigurePortletDisplayStyle1Test.class);
 		testSuite.addTestSuite(AssertConfigurePortletDisplayStyle1Test.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

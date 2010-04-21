@@ -33,7 +33,7 @@ public class ConfigurePortletDisplayStyle1Test extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Breadcrumb Test Page")) {
+				if (selenium.isVisible("link=Breadcrumb Test Page")) {
 					break;
 				}
 			}
@@ -53,6 +53,7 @@ public class ConfigurePortletDisplayStyle1Test extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace(
 				"You have successfully updated the setup."),
-			selenium.getText("//div[@id='p_p_id_86_']/div/div[1]"));
+			selenium.getText("//div[3]/div/div/div/div/div[1]"));
+		assertEquals("1", selenium.getSelectedLabel("_86_displayStyle"));
 	}
 }
