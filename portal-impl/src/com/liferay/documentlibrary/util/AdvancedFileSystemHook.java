@@ -193,11 +193,12 @@ public class AdvancedFileSystemHook extends FileSystemHook {
 		for (int i = 0; i < versionNumbers.length; i++) {
 			String versionNumberFragment = versionNumbers[i];
 
-			int pos = versionNumberFragment.lastIndexOf(StringPool.UNDERLINE);
+			int x = versionNumberFragment.lastIndexOf(StringPool.UNDERLINE);
+			int y = versionNumberFragment.lastIndexOf(StringPool.PERIOD);
 
-			if (pos > -1) {
+			if (x > -1) {
 				versionNumberFragment = versionNumberFragment.substring(
-					pos + 1);
+					x + 1, y);
 			}
 
 			String versionNumber = versionNumberFragment;
