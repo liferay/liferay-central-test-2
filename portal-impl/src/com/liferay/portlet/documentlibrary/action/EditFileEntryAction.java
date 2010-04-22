@@ -19,6 +19,7 @@ import com.liferay.documentlibrary.FileNameException;
 import com.liferay.documentlibrary.FileSizeException;
 import com.liferay.documentlibrary.SourceFileNameException;
 import com.liferay.portal.DuplicateLockException;
+import com.liferay.portal.kernel.servlet.ServletResponseConstants;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.Constants;
@@ -126,19 +127,22 @@ public class EditFileEntryAction extends PortletAction {
 					HttpServletResponse response =
 						PortalUtil.getHttpServletResponse(actionResponse);
 
-					response.setStatus(1000);
+					response.setStatus(
+						ServletResponseConstants.SC_DUPLICATE_FILE_EXCEPTION);
 				}
 				else if (e instanceof FileNameException) {
 					HttpServletResponse response =
 						PortalUtil.getHttpServletResponse(actionResponse);
 
-					response.setStatus(1001);
+					response.setStatus(
+						ServletResponseConstants.SC_FILE_NAME_EXCEPTION);
 				}
 				else if (e instanceof FileSizeException) {
 					HttpServletResponse response =
 						PortalUtil.getHttpServletResponse(actionResponse);
 
-					response.setStatus(1002);
+					response.setStatus(
+						ServletResponseConstants.SC_FILE_SIZE_EXCEPTION);
 				}
 
 				SessionErrors.add(actionRequest, e.getClass().getName());
