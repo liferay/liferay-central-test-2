@@ -57,8 +57,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.portlet.PortletPreferences;
+import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
-import javax.portlet.RenderRequest;
 
 /**
  * <a href="WikiUtil.java.html"><b><i>View Source</i></b></a>
@@ -268,10 +268,10 @@ public class WikiUtil {
 		return sb.toString();
 	}
 
-	public static List<WikiNode> getNodes(RenderRequest renderRequest)
+	public static List<WikiNode> getNodes(PortletRequest portletRequest)
 		throws PortalException, SystemException {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(
+		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		long groupId = themeDisplay.getScopeGroupId();
@@ -280,9 +280,10 @@ public class WikiUtil {
 			WikiNodeLocalServiceUtil.getNodes(groupId), "name");
 
 		String[] visibleNodes = StringUtil.split(
-			renderRequest.getPreferences().getValue("visible-nodes", allNodes));
+			portletRequest.getPreferences().getValue(
+				"visible-nodes", allNodes));
 		String[] hiddenNodes = StringUtil.split(
-			renderRequest.getPreferences().getValue(
+			portletRequest.getPreferences().getValue(
 				"hidden-nodes", StringPool.BLANK));
 
 		return getNodes(

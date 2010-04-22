@@ -29,6 +29,7 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.wiki.NoSuchNodeException;
 import com.liferay.portlet.wiki.NoSuchPageException;
 import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
@@ -42,8 +43,8 @@ import com.liferay.portlet.wiki.util.WikiUtil;
 import java.util.List;
 
 import javax.portlet.ActionRequest;
+import javax.portlet.PortletRequest;
 import javax.portlet.RenderRequest;
-
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -54,10 +55,10 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class ActionUtil {
 
-	public static WikiNode getFirstVisibleNode(RenderRequest renderRequest)
+	public static WikiNode getFirstVisibleNode(PortletRequest portletRequest)
 		throws PortalException, SystemException {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(
+		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		WikiNode node = null;
@@ -71,7 +72,7 @@ public class ActionUtil {
 			Layout layout = themeDisplay.getLayout();
 
 			ServiceContext serviceContext = ServiceContextFactory.getInstance(
-				WikiNode.class.getName(), renderRequest);
+				WikiNode.class.getName(), portletRequest);
 
 			serviceContext.setAddCommunityPermissions(true);
 
@@ -87,7 +88,7 @@ public class ActionUtil {
 				serviceContext);
 		}
 		else {
-			List<WikiNode> nodes = WikiUtil.getNodes(renderRequest);
+			List<WikiNode> nodes = WikiUtil.getNodes(portletRequest);
 
 			if (nodes.size() == 0) {
 				throw new PrincipalException();
@@ -96,31 +97,16 @@ public class ActionUtil {
 			node = nodes.get(0);
 		}
 
-		renderRequest.setAttribute(WebKeys.WIKI_NODE, node);
+		portletRequest.setAttribute(WebKeys.WIKI_NODE, node);
 
 		return node;
 	}
 
-	public static WikiNode getNode(ActionRequest actionRequest)
+	public static WikiNode getNode(PortletRequest portletRequest)
 		throws Exception {
 
 		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			actionRequest);
-
-		return getNode(request);
-	}
-
-	public static WikiNode getNode(RenderRequest renderRequest)
-		throws Exception {
-
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			renderRequest);
-
-		return getNode(request);
-	}
-
-	public static WikiNode getNode(HttpServletRequest request)
-		throws Exception {
+			portletRequest);
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
@@ -130,12 +116,21 @@ public class ActionUtil {
 
 		WikiNode node = null;
 
-		if (nodeId > 0) {
-			node = WikiNodeServiceUtil.getNode(nodeId);
+		try {
+			if (nodeId > 0) {
+				node = WikiNodeServiceUtil.getNode(nodeId);
+			}
+			else if (Validator.isNotNull(nodeName)) {
+				node = WikiNodeServiceUtil.getNode(
+					themeDisplay.getScopeGroupId(), nodeName);
+			}
+
+			if (node == null) {
+				throw new NoSuchNodeException();
+			}
 		}
-		else if (Validator.isNotNull(nodeName)) {
-			node = WikiNodeServiceUtil.getNode(
-				themeDisplay.getScopeGroupId(), nodeName);
+		catch (NoSuchNodeException e) {
+			node = ActionUtil.getFirstVisibleNode(portletRequest);
 		}
 
 		request.setAttribute(WebKeys.WIKI_NODE, node);
@@ -165,8 +160,12 @@ public class ActionUtil {
 		String title = ParamUtil.getString(request, "title");
 		double version = ParamUtil.getDouble(request, "version");
 
-		if (nodeId == 0) {
-			WikiNode node = (WikiNode)request.getAttribute(WebKeys.WIKI_NODE);
+		try {
+			WikiNodeServiceUtil.getNode(nodeId);
+		}
+		catch (NoSuchNodeException e) {
+			WikiNode node =
+				(WikiNode)request.getAttribute(WebKeys.WIKI_NODE);
 
 			if (node != null) {
 				nodeId = node.getNodeId();

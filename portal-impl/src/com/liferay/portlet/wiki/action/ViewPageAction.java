@@ -59,11 +59,7 @@ public class ViewPageAction extends PortletAction {
 		}
 
 		try {
-			WikiNode node = ActionUtil.getNode(renderRequest);
-
-			if (node == null) {
-				ActionUtil.getFirstVisibleNode(renderRequest);
-			}
+			ActionUtil.getNode(renderRequest);
 
 			ActionUtil.getPage(renderRequest);
 		}
