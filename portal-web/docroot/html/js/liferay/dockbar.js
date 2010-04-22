@@ -321,15 +321,19 @@ AUI().add(
 
 					var focusManager = contentBox.focusManager;
 
-					contentBox.delegate("mouseenter", function (event) {
-						focusManager.focus(this.query("a"));
-					},
-					"li");
+					contentBox.delegate(
+						"mouseenter",
+						function (event) {
+							focusManager.focus(this.query("a"));
+						},
+						"li");
 
-					contentBox.delegate("mouseleave", function (event) {
+					contentBox.delegate(
+						"mouseleave",
+						function (event) {
 							focusManager.blur(this.query("a"));
-					},
-					"li");
+						},
+						"li");
 
 					Liferay.Dockbar.MenuManager.register(menu);
 

@@ -229,14 +229,17 @@ AUI().add(
 						'down:27,9'
 					);
 
-					menu.delegate("mouseenter", function (event) {
-						var focusManager = menu.focusManager;
-						
-						if (focusManager.get("focused")) {
-							focusManager.focus(this.query("a"));
-						}
+					menu.delegate(
+						"mouseenter",
+						function (event) {
+							var focusManager = menu.focusManager;
 							
-					}, "li");
+							if (focusManager.get("focused")) {
+								focusManager.focus(this.query("a"));
+							}
+								
+						},
+						"li");
 
 					menu.setAttrs(
 						{
