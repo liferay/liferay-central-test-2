@@ -153,15 +153,15 @@ public class DLFolderFinderImpl
 
 			qPos.add(groupId);
 
-			if (status != StatusConstants.ANY) {
-				qPos.add(status);
-			}
-
 			for (Long folderId : folderIds) {
 				qPos.add(folderId);
 			}
 
 			qPos.add(groupId);
+
+			if (status != StatusConstants.ANY) {
+				qPos.add(status);
+			}
 
 			for (Long folderId : folderIds) {
 				qPos.add(folderId);
@@ -316,15 +316,15 @@ public class DLFolderFinderImpl
 
 			qPos.add(groupId);
 
-			if (status != StatusConstants.ANY) {
-				qPos.add(status);
-			}
-
 			for (Long folderId : folderIds) {
 				qPos.add(folderId);
 			}
 
 			qPos.add(groupId);
+
+			if (status != StatusConstants.ANY) {
+				qPos.add(status);
+			}
 
 			for (Long folderId : folderIds) {
 				qPos.add(folderId);
