@@ -34,6 +34,10 @@ import java.lang.reflect.Constructor;
  */
 public class StringBundler {
 
+	public static final int UNSAFE_CREATE_THRESHOLD = GetterUtil.getInteger(
+		System.getProperty(
+			StringBundler.class.getName() + ".unsafe.create.threshold"));
+
 	public StringBundler() {
 		_array = new String[_DEFAULT_ARRAY_CAPACITY];
 	}
@@ -199,7 +203,7 @@ public class StringBundler {
 		}
 
 		if ((_unsafeStringConstructor != null) &&
-			(length >= _UNSAFE_CREATE_THRESHOLD)) {
+			(length >= UNSAFE_CREATE_THRESHOLD)) {
 
 			return unsafeCreate(_array, _arrayIndex, length);
 		}
@@ -262,15 +266,12 @@ public class StringBundler {
 
 	private static final String _TRUE = "true";
 
-	private static final int _UNSAFE_CREATE_THRESHOLD = GetterUtil.getInteger(
-		PropsUtil.get(PropsKeys.STRING_BUNDLER_UNSAFE_CREATE_THRESHOLD), 0);
-
 	private static Log _log = LogFactoryUtil.getLog(StringBundler.class);
 
 	private static Constructor<String> _unsafeStringConstructor;
 
 	static {
-		if (_UNSAFE_CREATE_THRESHOLD > 0) {
+		if (UNSAFE_CREATE_THRESHOLD > 0) {
 			try {
 				_unsafeStringConstructor = String.class.getDeclaredConstructor(
 					int.class, int.class, char[].class);
