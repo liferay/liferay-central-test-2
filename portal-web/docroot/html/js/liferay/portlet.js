@@ -582,6 +582,15 @@ Liferay.Portlet = {
 
 					iframe.set('height', iframeBody.get('scrollHeight'));
 
+					A.on(
+						'key',
+						function(event) {
+							dialog.close();
+						},
+						[iframeBody],
+						'down:27'
+					);
+
 					var closeButton = iframeBody.one('.aui-button-input-cancel');
 
 					if (closeButton) {
