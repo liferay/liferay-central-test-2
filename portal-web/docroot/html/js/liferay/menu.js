@@ -86,7 +86,7 @@ AUI().add(
 				instance._body.delegate(
 					'mouseenter',
 					function(event) {
-						this.query('a').focus();
+						event.currentTarget.one('a').focus();
 					},
 					'.lfr-menu-expanded li'
 				);
@@ -94,7 +94,7 @@ AUI().add(
 				instance._body.delegate(
 					'mouseleave',
 					function(event) {
-						this.query('a').blur();
+						event.currentTarget.one('a').blur();
 					},
 					'.lfr-menu-expanded li'
 				);
@@ -230,16 +230,16 @@ AUI().add(
 					);
 
 					menu.delegate(
-						"mouseenter",
+						'mouseenter',
 						function (event) {
 							var focusManager = menu.focusManager;
-							
-							if (focusManager.get("focused")) {
-								focusManager.focus(this.query("a"));
+
+							if (focusManager.get('focused')) {
+								focusManager.focus(event.currentTarget.one('a'));
 							}
-								
 						},
-						"li");
+						'li'
+					);
 
 					menu.setAttrs(
 						{
