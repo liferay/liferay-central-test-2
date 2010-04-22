@@ -36,9 +36,6 @@ WorkflowTaskDisplayTerms displayTerms = (WorkflowTaskDisplayTerms)searchContaine
 		<aui:column>
 			<aui:input name="<%= displayTerms.TYPE %>" size="20" value="<%= displayTerms.getType() %>" />
 		</aui:column>
-		<aui:column>
-			<aui:input name="<%= displayTerms.STATE %>" size="20" value="<%= displayTerms.getState() %>" />
-		</aui:column>
 	</aui:fieldset>
 </liferay-ui:search-toggle>
 

@@ -28,15 +28,12 @@ public class WorkflowTaskDisplayTerms extends DisplayTerms {
 
 	public static final String NAME = "name";
 
-	public static final String STATE = "state";
-
 	public static final String TYPE = "type";
 
 	public WorkflowTaskDisplayTerms(PortletRequest portletRequest) {
 		super(portletRequest);
 
 		name = ParamUtil.getString(portletRequest, NAME);
-		state = ParamUtil.getString(portletRequest, STATE);
 		type = ParamUtil.getString(portletRequest, TYPE);
 	}
 
@@ -44,16 +41,11 @@ public class WorkflowTaskDisplayTerms extends DisplayTerms {
 		return name;
 	}
 
-	public String getState() {
-		return state;
-	}
-
 	public String getType() {
 		return type;
 	}
 
 	protected String name;
-	protected String state;
 	protected String type;
 
 }

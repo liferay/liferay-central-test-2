@@ -63,8 +63,6 @@ public class WorkflowTaskSearch extends SearchContainer<WorkflowTask> {
 		iteratorURL.setParameter(
 			WorkflowTaskDisplayTerms.NAME, displayTerms.getName());
 		iteratorURL.setParameter(
-			WorkflowTaskDisplayTerms.STATE, displayTerms.getState());
-		iteratorURL.setParameter(
 			WorkflowTaskDisplayTerms.TYPE, displayTerms.getType());
 
 		String orderByCol = ParamUtil.getString(

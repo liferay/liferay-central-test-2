@@ -144,7 +144,7 @@ public class WorkflowTaskManagerProxyBean
 	}
 
 	public List<WorkflowTask> search(
-		long companyId, long userId, String name, String type, String state,
+		long companyId, long userId, String taskName, String assetType,
 		Date dueDateGT, Date dueDateLT, Boolean completed,
 		Boolean searchByUserRoles, boolean andOperator, int start, int end,
 		OrderByComparator orderByComparator) {
@@ -160,7 +160,7 @@ public class WorkflowTaskManagerProxyBean
 	}
 
 	public int searchCount(
-		long companyId, long userId, String name, String type, String state,
+		long companyId, long userId, String taskName, String assetType,
 		Date dueDateGT, Date dueDateLT, Boolean completed,
 		Boolean searchByUserRoles, boolean andOperator) {
 

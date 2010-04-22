@@ -29,7 +29,6 @@ public class WorkflowTaskSearchTerms extends WorkflowTaskDisplayTerms {
 		super(portletRequest);
 
 		name = DAOParamUtil.getLike(portletRequest, NAME);
-		state = DAOParamUtil.getLike(portletRequest, STATE);
 		type = DAOParamUtil.getLike(portletRequest, TYPE);
 	}
 
