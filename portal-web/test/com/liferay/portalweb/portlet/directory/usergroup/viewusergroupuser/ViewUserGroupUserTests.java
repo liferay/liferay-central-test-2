@@ -29,13 +29,15 @@ public class ViewUserGroupUserTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTestSuite(AddPageTest.class);
-		testSuite.addTestSuite(AddPortletTest.class);
+		testSuite.addTestSuite(AddPageDirectoryTest.class);
+		testSuite.addTestSuite(AddPortletDirectoryTest.class);
 		testSuite.addTestSuite(AddUserTest.class);
 		testSuite.addTestSuite(AddUserGroupTest.class);
 		testSuite.addTestSuite(AssignMembersUserGroupTest.class);
 		testSuite.addTestSuite(ViewUserGroupUserTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownUserTest.class);
+		testSuite.addTestSuite(TearDownUserGroupTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

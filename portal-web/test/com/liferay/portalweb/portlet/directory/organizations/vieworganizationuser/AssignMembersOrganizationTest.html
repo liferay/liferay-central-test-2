@@ -29,6 +29,31 @@
 	<td></td>
 </tr>
 <tr>
+	<td>store</td>
+	<td>eval(selenium.isVisible('link=« Basic'))</td>
+	<td>basic1Visible</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${basic1Visible}</td>
+	<td>Basic1NotVisible</td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>link=« Basic</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>Basic1NotVisible</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>_126_keywords</td>
+	<td></td>
+</tr>
+<tr>
 	<td>type</td>
 	<td>_126_keywords</td>
 	<td>Test Organization</td>
@@ -44,7 +69,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>waitForVisible</td>
 	<td>link=Assign Members</td>
 	<td></td>
 </tr>
@@ -56,6 +81,26 @@
 <tr>
 	<td>clickAtAndWait</td>
 	<td>link=Available</td>
+	<td></td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>eval(selenium.isVisible('link=« Basic'))</td>
+	<td>basic2Visible</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${basic2Visible}</td>
+	<td>Basic2NotVisible</td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>link=« Basic</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>Basic2NotVisible</td>
 	<td></td>
 </tr>
 <tr>
@@ -79,9 +124,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>assertText</td>
+	<td>//section/div/div/div/div[1]</td>
 	<td>Your request processed successfully.</td>
-	<td></td>
 </tr>
 
 </tbody></table>

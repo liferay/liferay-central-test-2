@@ -37,8 +37,7 @@ public class ViewSuborganizationTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent(
-									"link=Directory Test Page")) {
+						if (selenium.isVisible("link=Directory Test Page")) {
 							break;
 						}
 					}
@@ -72,7 +71,8 @@ public class ViewSuborganizationTest extends BaseTestCase {
 				selenium.clickAt("//input[@value='Search']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				selenium.clickAt("//strong/a", RuntimeVariables.replace(""));
+				selenium.clickAt("//td[7]/ul/li/strong/a",
+					RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -80,8 +80,8 @@ public class ViewSuborganizationTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent(
-									"link=View Suborganizations")) {
+						if (selenium.isVisible(
+									"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a")) {
 							break;
 						}
 					}
@@ -91,8 +91,8 @@ public class ViewSuborganizationTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.clickAt("link=View Suborganizations",
-					RuntimeVariables.replace(""));
+				selenium.click(RuntimeVariables.replace(
+						"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a"));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.isElementPresent("link=Test Child"));
 

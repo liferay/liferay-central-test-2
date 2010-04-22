@@ -32,7 +32,7 @@ public class SearchUserGroupTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Directory Test Page")) {
+				if (selenium.isVisible("link=Directory Test Page")) {
 					break;
 				}
 			}

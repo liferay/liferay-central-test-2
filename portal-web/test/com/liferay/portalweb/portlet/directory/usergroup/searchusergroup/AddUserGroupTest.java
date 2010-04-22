@@ -46,7 +46,7 @@ public class AddUserGroupTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=User Groups", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=Add", RuntimeVariables.replace(""));
+		selenium.clickAt("//span[2]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_127_name", RuntimeVariables.replace("Test User Group"));
 		selenium.type("_127_description",
@@ -54,7 +54,7 @@ public class AddUserGroupTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully. "));
+				"Your request processed successfully."));
 		assertTrue(selenium.isElementPresent("link=Test User Group"));
 	}
 }

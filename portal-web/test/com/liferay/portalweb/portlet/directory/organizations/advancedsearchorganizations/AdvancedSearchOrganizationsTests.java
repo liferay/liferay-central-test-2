@@ -30,11 +30,12 @@ public class AdvancedSearchOrganizationsTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTestSuite(AddPageTest.class);
-		testSuite.addTestSuite(AddPortletTest.class);
+		testSuite.addTestSuite(AddPageDirectoryTest.class);
+		testSuite.addTestSuite(AddPortletDirectoryTest.class);
 		testSuite.addTestSuite(AddOrganizationTest.class);
 		testSuite.addTestSuite(AdvancedSearchOrganizationsTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownOrganizationTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

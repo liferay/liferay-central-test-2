@@ -38,8 +38,7 @@ public class AdvancedSearchOrganizationsTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent(
-									"link=Directory Test Page")) {
+						if (selenium.isVisible("link=Directory Test Page")) {
 							break;
 						}
 					}
@@ -76,7 +75,7 @@ public class AdvancedSearchOrganizationsTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent("_11_name")) {
+						if (selenium.isVisible("_11_name")) {
 							break;
 						}
 					}
@@ -87,58 +86,58 @@ public class AdvancedSearchOrganizationsTest extends BaseTestCase {
 				}
 
 				selenium.type("_11_name", RuntimeVariables.replace("Test"));
-				selenium.clickAt("//div[@id='toggle_id_directory_organization_searchadvanced']/span[2]/span/input",
+				selenium.clickAt("//div[2]/span[2]/span/input",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.isTextPresent("Diamond Bar"));
 				selenium.type("_11_name", RuntimeVariables.replace("Test1"));
-				selenium.clickAt("//div[@id='toggle_id_directory_organization_searchadvanced']/span[2]/span/input",
+				selenium.clickAt("//div[2]/span[2]/span/input",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				assertFalse(selenium.isTextPresent("Diamond Bar"));
 				selenium.type("_11_name", RuntimeVariables.replace(""));
 				selenium.type("_11_street", RuntimeVariables.replace("Test"));
-				selenium.clickAt("//div[@id='toggle_id_directory_organization_searchadvanced']/span[2]/span/input",
+				selenium.clickAt("//div[2]/span[2]/span/input",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.isTextPresent("Diamond Bar"));
 				selenium.type("_11_street", RuntimeVariables.replace("Test1"));
-				selenium.clickAt("//div[@id='toggle_id_directory_organization_searchadvanced']/span[2]/span/input",
+				selenium.clickAt("//div[2]/span[2]/span/input",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				assertFalse(selenium.isTextPresent("Diamond Bar"));
 				selenium.type("_11_street", RuntimeVariables.replace(""));
 				selenium.type("_11_city", RuntimeVariables.replace("Diamond"));
-				selenium.clickAt("//div[@id='toggle_id_directory_organization_searchadvanced']/span[2]/span/input",
+				selenium.clickAt("//div[2]/span[2]/span/input",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.isTextPresent("Diamond Bar"));
 				selenium.type("_11_city", RuntimeVariables.replace("Diamond1"));
-				selenium.clickAt("//div[@id='toggle_id_directory_organization_searchadvanced']/span[2]/span/input",
+				selenium.clickAt("//div[2]/span[2]/span/input",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				assertFalse(selenium.isTextPresent("Diamond Bar"));
 				selenium.type("_11_city", RuntimeVariables.replace(""));
 				selenium.type("_11_zip", RuntimeVariables.replace("11111"));
-				selenium.clickAt("//div[@id='toggle_id_directory_organization_searchadvanced']/span[2]/span/input",
+				selenium.clickAt("//div[2]/span[2]/span/input",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.isTextPresent("Diamond Bar"));
 				selenium.type("_11_zip", RuntimeVariables.replace("111111"));
-				selenium.clickAt("//div[@id='toggle_id_directory_organization_searchadvanced']/span[2]/span/input",
+				selenium.clickAt("//div[2]/span[2]/span/input",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				assertFalse(selenium.isTextPresent("Diamond Bar"));
 				selenium.type("_11_zip", RuntimeVariables.replace(""));
 				selenium.select("_11_type",
 					RuntimeVariables.replace("label=Regular Organization"));
-				selenium.clickAt("//div[@id='toggle_id_directory_organization_searchadvanced']/span[2]/span/input",
+				selenium.clickAt("//div[2]/span[2]/span/input",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.isTextPresent("Diamond Bar"));
 				selenium.select("_11_type",
 					RuntimeVariables.replace("label=Location"));
-				selenium.clickAt("//div[@id='toggle_id_directory_organization_searchadvanced']/span[2]/span/input",
+				selenium.clickAt("//div[2]/span[2]/span/input",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				assertFalse(selenium.isTextPresent("Diamond Bar"));
@@ -146,28 +145,47 @@ public class AdvancedSearchOrganizationsTest extends BaseTestCase {
 					RuntimeVariables.replace("label=Any"));
 				selenium.select("_11_countryId",
 					RuntimeVariables.replace("label=United States"));
-				selenium.clickAt("//div[@id='toggle_id_directory_organization_searchadvanced']/span[2]/span/input",
+				selenium.clickAt("//div[2]/span[2]/span/input",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.isTextPresent("Diamond Bar"));
 				selenium.select("_11_countryId",
 					RuntimeVariables.replace("label=United Kingdom"));
-				selenium.clickAt("//div[@id='toggle_id_directory_organization_searchadvanced']/span[2]/span/input",
+				selenium.clickAt("//div[2]/span[2]/span/input",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				assertFalse(selenium.isTextPresent("Diamond Bar"));
 				selenium.select("_11_countryId",
 					RuntimeVariables.replace("label=United States"));
-				Thread.sleep(5000);
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (RuntimeVariables.replace(
+									"AlabamaAlaskaArizonaArkansasCaliforniaColoradoConnecticutDelawareDistrict of ColumbiaFloridaGeorgiaHawaiiIdahoIllinoisIndianaIowaKansasKentucky Louisiana MaineMarylandMassachusettsMichiganMinnesotaMississippiMissouriMontanaNebraskaNevadaNew HampshireNew JerseyNew MexicoNew YorkNorth CarolinaNorth DakotaOhioOklahoma OregonPennsylvaniaPuerto RicoRhode IslandSouth CarolinaSouth DakotaTennesseeTexasUtahVermontVirginiaWashingtonWest VirginiaWisconsinWyoming")
+												.equals(selenium.getText(
+										"_11_regionId"))) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
 				selenium.select("_11_regionId",
 					RuntimeVariables.replace("label=California"));
-				selenium.clickAt("//div[@id='toggle_id_directory_organization_searchadvanced']/span[2]/span/input",
+				selenium.clickAt("//div[2]/span[2]/span/input",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.isTextPresent("Diamond Bar"));
 				selenium.select("_11_regionId",
 					RuntimeVariables.replace("label=Hawaii"));
-				selenium.clickAt("//div[@id='toggle_id_directory_organization_searchadvanced']/span[2]/span/input",
+				selenium.clickAt("//div[2]/span[2]/span/input",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				assertFalse(selenium.isTextPresent("Diamond Bar"));

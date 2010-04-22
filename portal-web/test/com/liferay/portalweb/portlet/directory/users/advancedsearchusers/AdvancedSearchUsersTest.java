@@ -86,69 +86,69 @@ public class AdvancedSearchUsersTest extends BaseTestCase {
 
 				selenium.type("_11_firstName",
 					RuntimeVariables.replace("TestFirst"));
-				selenium.clickAt("//div[@id='toggle_id_directory_user_searchadvanced']/span[2]/span/input",
-					RuntimeVariables.replace(""));
+				selenium.click(RuntimeVariables.replace(
+						"//div[2]/span[2]/span/input"));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.isElementPresent("link=TestFirst1"));
 				selenium.type("_11_firstName",
 					RuntimeVariables.replace("TestFirstA"));
-				selenium.clickAt("//div[@id='toggle_id_directory_user_searchadvanced']/span[2]/span/input",
-					RuntimeVariables.replace(""));
+				selenium.click(RuntimeVariables.replace(
+						"//div[2]/span[2]/span/input"));
 				selenium.waitForPageToLoad("30000");
 				assertFalse(selenium.isElementPresent("link=TestFirst1"));
 				selenium.type("_11_firstName", RuntimeVariables.replace(""));
 				selenium.type("_11_middleName",
 					RuntimeVariables.replace("TestMiddle"));
-				selenium.clickAt("//div[@id='toggle_id_directory_user_searchadvanced']/span[2]/span/input",
-					RuntimeVariables.replace(""));
+				selenium.click(RuntimeVariables.replace(
+						"//div[2]/span[2]/span/input"));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.isElementPresent("link=TestFirst1"));
 				selenium.type("_11_middleName",
 					RuntimeVariables.replace("TestMiddleA"));
-				selenium.clickAt("//div[@id='toggle_id_directory_user_searchadvanced']/span[2]/span/input",
-					RuntimeVariables.replace(""));
+				selenium.click(RuntimeVariables.replace(
+						"//div[2]/span[2]/span/input"));
 				selenium.waitForPageToLoad("30000");
 				assertFalse(selenium.isElementPresent("link=TestFirst1"));
 				selenium.type("_11_middleName", RuntimeVariables.replace(""));
 				selenium.type("_11_lastName",
 					RuntimeVariables.replace("TestLast"));
-				selenium.clickAt("//div[@id='toggle_id_directory_user_searchadvanced']/span[2]/span/input",
-					RuntimeVariables.replace(""));
+				selenium.click(RuntimeVariables.replace(
+						"//div[2]/span[2]/span/input"));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.isElementPresent("link=TestFirst1"));
 				selenium.type("_11_lastName",
 					RuntimeVariables.replace("TestLastA"));
-				selenium.clickAt("//div[@id='toggle_id_directory_user_searchadvanced']/span[2]/span/input",
-					RuntimeVariables.replace(""));
+				selenium.click(RuntimeVariables.replace(
+						"//div[2]/span[2]/span/input"));
 				selenium.waitForPageToLoad("30000");
 				assertFalse(selenium.isElementPresent("link=TestFirst1"));
 				selenium.type("_11_lastName", RuntimeVariables.replace(""));
 				selenium.type("_11_screenName",
 					RuntimeVariables.replace("TestSN"));
-				selenium.clickAt("//div[@id='toggle_id_directory_user_searchadvanced']/span[2]/span/input",
-					RuntimeVariables.replace(""));
+				selenium.click(RuntimeVariables.replace(
+						"//div[2]/span[2]/span/input"));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.isElementPresent("link=TestFirst1"));
 				selenium.type("_11_screenName",
 					RuntimeVariables.replace("TestSNA"));
-				selenium.clickAt("//div[@id='toggle_id_directory_user_searchadvanced']/span[2]/span/input",
-					RuntimeVariables.replace(""));
+				selenium.click(RuntimeVariables.replace(
+						"//div[2]/span[2]/span/input"));
 				selenium.waitForPageToLoad("30000");
 				assertFalse(selenium.isElementPresent("link=TestFirst1"));
 				selenium.type("_11_screenName", RuntimeVariables.replace(""));
 				selenium.type("_11_emailAddress",
 					RuntimeVariables.replace("TestEMail1@liferay.com"));
-				selenium.clickAt("//div[@id='toggle_id_directory_user_searchadvanced']/span[2]/span/input",
-					RuntimeVariables.replace(""));
+				selenium.click(RuntimeVariables.replace(
+						"//div[2]/span[2]/span/input"));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.isElementPresent("link=TestFirst1"));
-				selenium.clickAt("//div[@id='toggle_id_directory_user_searchadvanced']/span[2]/span/input",
-					RuntimeVariables.replace(""));
+				selenium.click(RuntimeVariables.replace(
+						"//div[2]/span[2]/span/input"));
 				selenium.waitForPageToLoad("30000");
 				selenium.type("_11_emailAddress",
 					RuntimeVariables.replace("TestEMail@liferay.com"));
-				selenium.clickAt("//div[@id='toggle_id_directory_user_searchadvanced']/span[2]/span/input",
-					RuntimeVariables.replace(""));
+				selenium.click(RuntimeVariables.replace(
+						"//div[2]/span[2]/span/input"));
 				selenium.waitForPageToLoad("30000");
 				assertFalse(selenium.isElementPresent("link=TestFirst1"));
 				selenium.type("_11_emailAddress", RuntimeVariables.replace(""));

@@ -46,7 +46,7 @@ public class AddUserTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Users", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=Add", RuntimeVariables.replace(""));
+		selenium.clickAt("//span[2]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_125_screenName", RuntimeVariables.replace("TestSN1"));
 		selenium.type("_125_emailAddress",
@@ -56,7 +56,8 @@ public class AddUserTest extends BaseTestCase {
 		selenium.type("_125_lastName", RuntimeVariables.replace("TestLast1"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+		assertEquals(RuntimeVariables.replace(
+				"Your request processed successfully."),
+			selenium.getText("//section/div/div/div/div[1]"));
 	}
 }

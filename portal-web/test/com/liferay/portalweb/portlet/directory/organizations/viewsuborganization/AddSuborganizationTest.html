@@ -74,9 +74,14 @@
 	<td></td>
 </tr>
 <tr>
-	<td>pause</td>
-	<td>5000</td>
-	<td></td>
+	<td>waitForText</td>
+	<td>//td[1]/a</td>
+	<td>Test Organization</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//td[1]/a</td>
+	<td>Test Organization</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -89,34 +94,29 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>assertText</td>
+	<td>//section/div/div/div/div[1]</td>
 	<td>Your request processed successfully.</td>
-	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>//a[@id='addressesLink']</td>
+	<td>waitForVisible</td>
+	<td>addressesLink</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAt</td>
-	<td>//a[@id='addressesLink']</td>
+	<td>addressesLink</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>_126_addressStreet1_0</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>_126_addressStreet1_0</td>
 	<td>11111 Main Street USA</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>_126_addressCountryId0</td>
-	<td>label=United States</td>
-</tr>
-<tr>
-	<td>pause</td>
-	<td>5000</td>
-	<td></td>
 </tr>
 <tr>
 	<td>select</td>
@@ -139,9 +139,24 @@
 	<td></td>
 </tr>
 <tr>
+	<td>select</td>
+	<td>_126_addressCountryId0</td>
+	<td>label=United States</td>
+</tr>
+<tr>
 	<td>clickAt</td>
 	<td>_126_addressMailing0Checkbox</td>
 	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>_126_addressRegionId0</td>
+	<td>AlabamaAlaskaArizonaArkansasCaliforniaColoradoConnecticutDelawareDistrict of ColumbiaFloridaGeorgiaHawaiiIdahoIllinoisIndianaIowaKansasKentucky Louisiana MaineMarylandMassachusettsMichiganMinnesotaMississippiMissouriMontanaNebraskaNevadaNew HampshireNew JerseyNew MexicoNew YorkNorth CarolinaNorth DakotaOhioOklahoma OregonPennsylvaniaPuerto RicoRhode IslandSouth CarolinaSouth DakotaTennesseeTexasUtahVermontVirginiaWashingtonWest VirginiaWisconsinWyoming</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>_126_addressRegionId0</td>
+	<td>label=Florida</td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
@@ -149,9 +164,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>assertText</td>
+	<td>//section/div/div/div/div[1]</td>
 	<td>Your request processed successfully.</td>
-	<td></td>
 </tr>
 
 </tbody></table>

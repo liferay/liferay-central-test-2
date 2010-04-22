@@ -93,14 +93,6 @@ public class AddSuborganizationTest extends BaseTestCase {
 				selenium.clickAt("link=Add Regular Organization",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				Thread.sleep(5000);
-				selenium.type("_126_name",
-					RuntimeVariables.replace("Test Child"));
-				selenium.clickAt("//input[@value='Save']",
-					RuntimeVariables.replace(""));
-				selenium.waitForPageToLoad("30000");
-				assertTrue(selenium.isTextPresent(
-						"Your request processed successfully."));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -108,8 +100,9 @@ public class AddSuborganizationTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent(
-									"//a[@id='addressesLink']")) {
+						if (RuntimeVariables.replace("Test Organization")
+												.equals(selenium.getText(
+										"//td[1]/a"))) {
 							break;
 						}
 					}
@@ -119,13 +112,53 @@ public class AddSuborganizationTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.clickAt("//a[@id='addressesLink']",
+				assertEquals(RuntimeVariables.replace("Test Organization"),
+					selenium.getText("//td[1]/a"));
+				selenium.type("_126_name",
+					RuntimeVariables.replace("Test Child"));
+				selenium.clickAt("//input[@value='Save']",
 					RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
+				assertEquals(RuntimeVariables.replace(
+						"Your request processed successfully."),
+					selenium.getText("//section/div/div/div/div[1]"));
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isVisible("addressesLink")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+				selenium.clickAt("addressesLink", RuntimeVariables.replace(""));
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isVisible("_126_addressStreet1_0")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
 				selenium.type("_126_addressStreet1_0",
 					RuntimeVariables.replace("11111 Main Street USA"));
-				selenium.select("_126_addressCountryId0",
-					RuntimeVariables.replace("label=United States"));
-				Thread.sleep(5000);
 				selenium.select("_126_addressTypeId0",
 					RuntimeVariables.replace("label=Billing"));
 				selenium.type("_126_addressZip0",
@@ -134,13 +167,38 @@ public class AddSuborganizationTest extends BaseTestCase {
 					RuntimeVariables.replace("Cerritos"));
 				selenium.clickAt("_126_addressPrimary0",
 					RuntimeVariables.replace(""));
+				selenium.select("_126_addressCountryId0",
+					RuntimeVariables.replace("label=United States"));
 				selenium.clickAt("_126_addressMailing0Checkbox",
 					RuntimeVariables.replace(""));
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (RuntimeVariables.replace(
+									"AlabamaAlaskaArizonaArkansasCaliforniaColoradoConnecticutDelawareDistrict of ColumbiaFloridaGeorgiaHawaiiIdahoIllinoisIndianaIowaKansasKentucky Louisiana MaineMarylandMassachusettsMichiganMinnesotaMississippiMissouriMontanaNebraskaNevadaNew HampshireNew JerseyNew MexicoNew YorkNorth CarolinaNorth DakotaOhioOklahoma OregonPennsylvaniaPuerto RicoRhode IslandSouth CarolinaSouth DakotaTennesseeTexasUtahVermontVirginiaWashingtonWest VirginiaWisconsinWyoming")
+												.equals(selenium.getText(
+										"_126_addressRegionId0"))) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+				selenium.select("_126_addressRegionId0",
+					RuntimeVariables.replace("label=Florida"));
 				selenium.clickAt("//input[@value='Save']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				assertTrue(selenium.isTextPresent(
-						"Your request processed successfully."));
+				assertEquals(RuntimeVariables.replace(
+						"Your request processed successfully."),
+					selenium.getText("//section/div/div/div/div[1]"));
 
 			case 100:
 				label = -1;
