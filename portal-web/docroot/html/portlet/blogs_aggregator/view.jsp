@@ -32,7 +32,31 @@ if (selectionMethod.equals("users")) {
 		entries = BlogsEntryServiceUtil.getOrganizationEntries(organizationId, StatusConstants.APPROVED, max);
 	}
 	else {
-		entries = BlogsEntryServiceUtil.getCompanyEntries(company.getCompanyId(), StatusConstants.APPROVED, max);
+		List<Long> filterGroupIds = new ArrayList<Long>();
+
+		List<Group> filterGroups = GroupLocalServiceUtil.getCompanyGroups(company.getCompanyId(), 0, max);
+
+		Group group = GroupLocalServiceUtil.getGroup(scopeGroupId);
+
+		if (group.isStagingGroup()) {
+			filterGroupIds.add(group.getLiveGroup().getGroupId());
+		}
+
+		for (Group filterGroup : filterGroups) {
+			if (filterGroup.isStagingGroup() && !filterGroup.equals(group)) {
+				filterGroupIds.add(filterGroup.getGroupId());
+			}
+		}
+
+		List<BlogsEntry> companyEntries = BlogsEntryServiceUtil.getCompanyEntries(company.getCompanyId(), StatusConstants.APPROVED, max);
+
+		entries = new ArrayList<BlogsEntry>();
+
+		for (BlogsEntry companyEntry : companyEntries) {
+			if (!filterGroupIds.contains(companyEntry.getGroupId())) {
+				entries.add(companyEntry);
+			}
+		}
 	}
 }
 else {
