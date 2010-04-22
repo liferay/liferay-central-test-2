@@ -16,10 +16,8 @@ package com.liferay.portlet.journal.workflow;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.WebKeys;
 import com.liferay.portal.workflow.BaseWorkflowHandler;
 import com.liferay.portlet.asset.model.AssetRenderer;
 import com.liferay.portlet.journal.asset.JournalArticleAssetRenderer;
@@ -40,15 +38,6 @@ public class JournalArticleWorkflowHandler extends BaseWorkflowHandler {
 
 	public String getClassName() {
 		return CLASS_NAME;
-	}
-
-	public String getIconPath(LiferayPortletRequest liferayPortletRequest) {
-
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)liferayPortletRequest.getAttribute(
-				WebKeys.THEME_DISPLAY);
-
-		return themeDisplay.getPathThemeImages() + "/common/history.png";
 	}
 
 	public String getType() {
@@ -74,6 +63,10 @@ public class JournalArticleWorkflowHandler extends BaseWorkflowHandler {
 			classPK);
 
 		return new JournalArticleAssetRenderer(article);
+	}
+
+	protected String getIconPath(ThemeDisplay themeDisplay) {
+		return themeDisplay.getPathThemeImages() + "/common/history.png";
 	}
 
 }

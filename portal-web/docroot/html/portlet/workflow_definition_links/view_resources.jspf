@@ -56,7 +56,7 @@ List<WorkflowHandler> workflowHandlers = WorkflowHandlerRegistryUtil.getWorkflow
 				<%
 				buffer.append("<img align=\"left\" border=\"0\" src=\"");
 				buffer.append(workflowHandler.getIconPath((LiferayPortletRequest)renderRequest));
-				buffer.append("\" style=\"margin-right: 5px\">");
+				buffer.append("\" style=\"margin-right: 5px;\">");
 				buffer.append(LanguageUtil.get(pageContext, "model.resource." + workflowHandler.getClassName()));
 				%>
 

@@ -40,12 +40,11 @@ import javax.portlet.PortletURL;
 public abstract class BaseWorkflowHandler implements WorkflowHandler {
 
 	public String getIconPath(LiferayPortletRequest liferayPortletRequest) {
-
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)liferayPortletRequest.getAttribute(
 				WebKeys.THEME_DISPLAY);
 
-		return themeDisplay.getPathThemeImages() + "/common/page.png";
+		return getIconPath(themeDisplay);
 	}
 
 	public String getTitle(long classPK) {
@@ -112,6 +111,10 @@ public abstract class BaseWorkflowHandler implements WorkflowHandler {
 		else {
 			return null;
 		}
+	}
+
+	protected String getIconPath(ThemeDisplay themeDisplay) {
+		return themeDisplay.getPathThemeImages() + "/common/page.png";
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(BaseWorkflowHandler.class);
