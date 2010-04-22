@@ -20,8 +20,10 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
+import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.kernel.workflow.WorkflowHandler;
 import com.liferay.portal.service.WorkflowInstanceLinkLocalServiceUtil;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.asset.AssetRendererFactoryRegistryUtil;
 import com.liferay.portlet.asset.model.AssetRenderer;
 import com.liferay.portlet.asset.model.AssetRendererFactory;
@@ -33,8 +35,18 @@ import javax.portlet.PortletURL;
  *
  * @author Bruno Farache
  * @author Marcellus Tavares
+ * @author Juan Fernández
  */
 public abstract class BaseWorkflowHandler implements WorkflowHandler {
+
+	public String getIconPath(LiferayPortletRequest liferayPortletRequest) {
+
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)liferayPortletRequest.getAttribute(
+				WebKeys.THEME_DISPLAY);
+
+		return themeDisplay.getPathThemeImages() + "/common/page.png";
+	}
 
 	public String getTitle(long classPK) {
 		try {

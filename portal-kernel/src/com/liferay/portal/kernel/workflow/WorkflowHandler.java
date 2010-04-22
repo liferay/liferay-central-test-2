@@ -26,6 +26,7 @@ import javax.portlet.PortletURL;
  *
  * @author Bruno Farache
  * @author Macerllus Tavares
+ * @author Juan Fernández
  */
 public interface WorkflowHandler {
 
@@ -36,6 +37,8 @@ public interface WorkflowHandler {
 	public static final String TYPE_UNKNOWN = "unknown";
 
 	public String getClassName();
+
+	public String getIconPath(LiferayPortletRequest liferayPortletRequest);
 
 	public String getTitle(long classPK);
 
