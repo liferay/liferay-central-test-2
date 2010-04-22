@@ -5,6 +5,8 @@
 
 	<property file="${project.dir}/test.${user.name}.properties" />
 	<property file="${project.dir}/test.${env.COMPUTERNAME}.properties" />
+	<property file="${project.dir}/test.${env.HOST}.properties" />
+	<property file="${project.dir}/test.${env.HOSTNAME}.properties" />
 	<property file="${project.dir}/test.properties" />
 
 	<propertycopy name="db.host" from="db.${db.type}.host" silent="true" />

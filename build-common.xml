@@ -6,27 +6,35 @@
 	<property name="test.properties" value="com/liferay/portal/tools/dependencies/portal-tools.properties" />
 
 	<property environment="env" />
-	<property name="env.COMPUTERNAME" value="${env.HOST}" />
-	<property name="env.COMPUTERNAME" value="${env.HOSTNAME}" />
 
 	<property file="${project.dir}/app.server.${user.name}.properties" />
 	<property file="${project.dir}/app.server.${env.COMPUTERNAME}.properties" />
+	<property file="${project.dir}/app.server.${env.HOST}.properties" />
+	<property file="${project.dir}/app.server.${env.HOSTNAME}.properties" />
 	<property file="${project.dir}/app.server.properties" />
 
 	<property file="${project.dir}/build.${user.name}.properties" />
 	<property file="${project.dir}/build.${env.COMPUTERNAME}.properties" />
+	<property file="${project.dir}/build.${env.HOST}.properties" />
+	<property file="${project.dir}/build.${env.HOSTNAME}.properties" />
 	<property file="${project.dir}/build.properties" />
 
 	<property file="${project.dir}/release.${user.name}.properties" />
 	<property file="${project.dir}/release.${env.COMPUTERNAME}.properties" />
+	<property file="${project.dir}/release.${env.HOST}.properties" />
+	<property file="${project.dir}/release.${env.HOSTNAME}.properties" />
 	<property file="${project.dir}/release.properties" />
 
 	<property file="${project.dir}/benchmarks/benchmarks.${user.name}.properties" />
 	<property file="${project.dir}/benchmarks/benchmarks.${env.COMPUTERNAME}.properties" />
+	<property file="${project.dir}/benchmarks/benchmarks.${env.HOST}.properties" />
+	<property file="${project.dir}/benchmarks/benchmarks.${env.HOSTNAME}.properties" />
 	<property file="${project.dir}/benchmarks/benchmarks.properties" />
 
 	<property file="${project.dir}/sql/sql.${user.name}.properties" />
 	<property file="${project.dir}/sql/sql.${env.COMPUTERNAME}.properties" />
+	<property file="${project.dir}/sql/sql.${env.HOST}.properties" />
+	<property file="${project.dir}/sql/sql.${env.HOSTNAME}.properties" />
 	<property file="${project.dir}/sql/sql.properties" />
 
 	<property name="liferay.home" value="${app.server.parent.dir}" />
