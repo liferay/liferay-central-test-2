@@ -55,10 +55,10 @@ public class PortalSessionListener implements HttpSessionListener {
 	}
 
 	public void sessionDestroyed(HttpSessionEvent event) {
-		SessionListenerInitable sessionListenerInitable =
-			new SessionListenerInitable(event);
+		PortalSessionDestroyer portalSessionDestroyer =
+			new PortalSessionDestroyer(event);
 
-		PortalInitableUtil.init(sessionListenerInitable);
+		PortalInitableUtil.init(portalSessionDestroyer);
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(

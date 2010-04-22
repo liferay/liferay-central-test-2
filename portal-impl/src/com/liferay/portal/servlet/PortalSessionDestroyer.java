@@ -36,14 +36,13 @@ import javax.servlet.http.HttpSessionEvent;
 import org.apache.struts.Globals;
 
 /**
- * <a href="SessionListenerInitable.java.html"><b><i>View Source</i></b></a>
+ * <a href="PortalSessionDestroyer.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael Young
- *
  */
-public class SessionListenerInitable implements PortalInitable {
+public class PortalSessionDestroyer implements PortalInitable {
 
-	public SessionListenerInitable(HttpSessionEvent event) {
+	public PortalSessionDestroyer(HttpSessionEvent event) {
 		_event = event;
 	}
 
@@ -136,7 +135,7 @@ public class SessionListenerInitable implements PortalInitable {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
-		SessionListenerInitable.class);
+		PortalSessionDestroyer.class);
 
 	private HttpSessionEvent _event;
 
