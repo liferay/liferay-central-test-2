@@ -45,6 +45,7 @@ import java.util.List;
 import javax.portlet.ActionRequest;
 import javax.portlet.PortletRequest;
 import javax.portlet.RenderRequest;
+
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -124,12 +125,11 @@ public class ActionUtil {
 				node = WikiNodeServiceUtil.getNode(
 					themeDisplay.getScopeGroupId(), nodeName);
 			}
-
-			if (node == null) {
+			else {
 				throw new NoSuchNodeException();
 			}
 		}
-		catch (NoSuchNodeException e) {
+		catch (NoSuchNodeException nsne) {
 			node = ActionUtil.getFirstVisibleNode(portletRequest);
 		}
 
@@ -163,9 +163,8 @@ public class ActionUtil {
 		try {
 			WikiNodeServiceUtil.getNode(nodeId);
 		}
-		catch (NoSuchNodeException e) {
-			WikiNode node =
-				(WikiNode)request.getAttribute(WebKeys.WIKI_NODE);
+		catch (NoSuchNodeException nsne) {
+			WikiNode node = (WikiNode)request.getAttribute(WebKeys.WIKI_NODE);
 
 			if (node != null) {
 				nodeId = node.getNodeId();

@@ -60,7 +60,6 @@ public class ViewPageAction extends PortletAction {
 
 		try {
 			ActionUtil.getNode(renderRequest);
-
 			ActionUtil.getPage(renderRequest);
 		}
 		catch (Exception e) {

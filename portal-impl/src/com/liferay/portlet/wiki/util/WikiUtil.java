@@ -279,12 +279,12 @@ public class WikiUtil {
 		String allNodes = ListUtil.toString(
 			WikiNodeLocalServiceUtil.getNodes(groupId), "name");
 
+		PortletPreferences preferences = portletRequest.getPreferences();
+
 		String[] visibleNodes = StringUtil.split(
-			portletRequest.getPreferences().getValue(
-				"visible-nodes", allNodes));
+			preferences.getValue("visible-nodes", allNodes));
 		String[] hiddenNodes = StringUtil.split(
-			portletRequest.getPreferences().getValue(
-				"hidden-nodes", StringPool.BLANK));
+			preferences.getValue("hidden-nodes", StringPool.BLANK));
 
 		return getNodes(
 			groupId, visibleNodes, hiddenNodes,
