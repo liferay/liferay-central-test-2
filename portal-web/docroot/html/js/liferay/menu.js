@@ -83,6 +83,22 @@ AUI().add(
 					'.lfr-actions'
 				);
 
+				instance._body.delegate(
+					'mouseenter',
+					function(event) {
+						this.query('a').focus();
+					},
+					'.lfr-menu-expanded li'
+				);
+
+				instance._body.delegate(
+					'mouseleave',
+					function(event) {
+						this.query('a').blur();
+					},
+					'.lfr-menu-expanded li'
+				);
+
 				instance._document.on('click', instance._closeActiveMenu, instance);
 			}
 		};
@@ -212,6 +228,15 @@ AUI().add(
 						[menu],
 						'down:27,9'
 					);
+
+					menu.delegate("mouseenter", function (event) {
+						var focusManager = menu.focusManager;
+						
+						if (focusManager.get("focused")) {
+							focusManager.focus(this.query("a"));
+						}
+							
+					}, "li");
 
 					menu.setAttrs(
 						{

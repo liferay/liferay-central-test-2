@@ -109,11 +109,6 @@
 	text-decoration: none;
 }
 
-.lfr-menu-list li a:hover {
-	background-color: #828F95;
-	color: #fff;
-}
-
 .lfr-menu-list li a img {
 	padding: 0 3px;
 }

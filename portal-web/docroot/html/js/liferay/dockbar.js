@@ -304,6 +304,33 @@ AUI().add(
 
 					var menu = new A.OverlayContext(options);
 
+					var contentBox = menu.get('contentBox');
+
+					contentBox.plug(
+						A.Plugin.NodeFocusManager,
+						{
+							circular: true,
+							descendants: 'a',
+							focusClass: 'aui-focus',
+							keys: {
+								next: 'down:40',
+								previous: 'down:38'
+							}
+						 }
+					);
+
+					var focusManager = contentBox.focusManager;
+
+					contentBox.delegate("mouseenter", function (event) {
+						focusManager.focus(this.query("a"));
+					},
+					"li");
+
+					contentBox.delegate("mouseleave", function (event) {
+							focusManager.blur(this.query("a"));
+					},
+					"li");
+
 					Liferay.Dockbar.MenuManager.register(menu);
 
 					menu.on(
@@ -521,6 +548,6 @@ AUI().add(
 	},
 	'',
 	{
-		requires: ['aui-button-item', 'aui-io-plugin', 'aui-io-request', 'aui-overlay-context', 'aui-overlay-manager']
+		requires: ['aui-button-item', 'aui-io-plugin', 'aui-io-request', 'aui-overlay-context', 'aui-overlay-manager', 'node-focusmanager']
 	}
 );
