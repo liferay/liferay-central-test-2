@@ -221,7 +221,7 @@ public class EditEventAction extends PortletAction {
 			Calendar recStartCal = null;
 
 			if (timeZoneSensitive) {
-				recStartCal = CalendarFactoryUtil.getCalendar();
+				recStartCal = CalendarFactoryUtil.getCalendar(timeZone);
 
 				recStartCal.setTime(startDate.getTime());
 			}
@@ -364,7 +364,7 @@ public class EditEventAction extends PortletAction {
 				Calendar recEndCal = null;
 
 				if (timeZoneSensitive) {
-					recEndCal = CalendarFactoryUtil.getCalendar();
+					recEndCal = CalendarFactoryUtil.getCalendar(timeZone);
 
 					recEndCal.setTime(startDate.getTime());
 				}
