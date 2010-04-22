@@ -3644,6 +3644,10 @@ public class ServiceBuilder {
 					sqlFile, createMappingTableSQL, entityMapping, true);
 			}
 		}
+
+		String content = FileUtil.read(sqlFile);
+
+		FileUtil.write(sqlFile, content.trim());
 	}
 
 	private void _createSQLTables(
