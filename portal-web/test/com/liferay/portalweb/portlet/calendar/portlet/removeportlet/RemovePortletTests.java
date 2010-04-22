@@ -29,9 +29,9 @@ public class RemovePortletTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTestSuite(AddPageTest.class);
-		testSuite.addTestSuite(AddPortletTest.class);
-		testSuite.addTestSuite(RemovePortletTest.class);
+		testSuite.addTestSuite(AddPageCalendarTest.class);
+		testSuite.addTestSuite(AddPortletCalendarTest.class);
+		testSuite.addTestSuite(RemovePortletCalendarTest.class);
 		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;

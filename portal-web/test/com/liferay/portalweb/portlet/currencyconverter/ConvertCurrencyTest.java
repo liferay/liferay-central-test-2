@@ -69,7 +69,7 @@ public class ConvertCurrencyTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Convert']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("2.5"));
+		assertEquals("2.5", selenium.getValue("//input[2]"));
 		assertTrue(selenium.isTextPresent("KRW"));
 		assertTrue(selenium.isTextPresent("BHD"));
 	}

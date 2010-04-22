@@ -29,9 +29,9 @@ public class AddPortletDuplicateTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTestSuite(AddPageTest.class);
-		testSuite.addTestSuite(AddPortletTest.class);
-		testSuite.addTestSuite(AddPortletDuplicateTest.class);
+		testSuite.addTestSuite(AddPageCalendarTest.class);
+		testSuite.addTestSuite(AddPortletCalendarTest.class);
+		testSuite.addTestSuite(AddPortletCalendarDuplicateTest.class);
 		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;

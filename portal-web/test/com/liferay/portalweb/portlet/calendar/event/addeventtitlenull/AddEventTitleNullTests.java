@@ -29,8 +29,8 @@ public class AddEventTitleNullTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTestSuite(AddPageTest.class);
-		testSuite.addTestSuite(AddPortletTest.class);
+		testSuite.addTestSuite(AddPageCalendarTest.class);
+		testSuite.addTestSuite(AddPortletCalendarTest.class);
 		testSuite.addTestSuite(AddEventTitleNullTest.class);
 		testSuite.addTestSuite(TearDownEventTest.class);
 		testSuite.addTestSuite(TearDownPageTest.class);

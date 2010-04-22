@@ -29,15 +29,15 @@ public class CurrencyConverterTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTestSuite(AddPageTest.class);
-		testSuite.addTestSuite(AddPortletTest.class);
+		testSuite.addTestSuite(AddPageCCTest.class);
+		testSuite.addTestSuite(AddPortletCCTest.class);
 		testSuite.addTestSuite(ConvertCurrencyTest.class);
 		testSuite.addTestSuite(ViewGraphsTest.class);
 		testSuite.addTestSuite(ConfigurePreferencesTest.class);
 		testSuite.addTestSuite(VerifyConfigurationTest.class);
 		testSuite.addTestSuite(ReConfigurePreferencesTest.class);
 		testSuite.addTestSuite(VerifyReConfigurationTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

@@ -48,24 +48,6 @@ public class AssertEventSelectFieldEnabledTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Add Event']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible(
-							"//span[@class='aui-icon-search aui-icon']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		assertTrue(selenium.isElementPresent(
 				"//select[@name='_8_startDateMonth']"));
 		assertTrue(selenium.isElementPresent(

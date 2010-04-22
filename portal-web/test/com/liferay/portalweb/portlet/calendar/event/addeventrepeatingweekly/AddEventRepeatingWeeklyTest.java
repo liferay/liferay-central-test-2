@@ -47,24 +47,6 @@ public class AddEventRepeatingWeeklyTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Add Event']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible(
-							"//span[@class='aui-icon-search aui-icon']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.select("_8_startDateMonth",
 			RuntimeVariables.replace("label=January"));
 		selenium.select("_8_startDateDay", RuntimeVariables.replace("label=1"));
@@ -181,24 +163,6 @@ public class AddEventRepeatingWeeklyTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible(
-							"//span[@class='aui-icon-search aui-icon']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		assertEquals("January", selenium.getSelectedLabel("_8_startDateMonth"));
 		assertEquals("1", selenium.getSelectedLabel("_8_startDateDay"));
 		assertEquals("2010", selenium.getSelectedLabel("_8_startDateYear"));

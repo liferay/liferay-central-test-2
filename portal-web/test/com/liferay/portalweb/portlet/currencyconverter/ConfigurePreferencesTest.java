@@ -53,7 +53,7 @@ public class ConfigurePreferencesTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//strong/span")) {
+				if (selenium.isElementPresent("//strong/a")) {
 					break;
 				}
 			}
@@ -63,7 +63,7 @@ public class ConfigurePreferencesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//strong/span", RuntimeVariables.replace(""));
+		selenium.clickAt("//strong/a", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

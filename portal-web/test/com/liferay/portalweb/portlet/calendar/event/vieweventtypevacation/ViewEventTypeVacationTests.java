@@ -29,8 +29,8 @@ public class ViewEventTypeVacationTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTestSuite(AddPageTest.class);
-		testSuite.addTestSuite(AddPortletTest.class);
+		testSuite.addTestSuite(AddPageCalendarTest.class);
+		testSuite.addTestSuite(AddPortletCalendarTest.class);
 		testSuite.addTestSuite(AddEventTypeVacationTest.class);
 		testSuite.addTestSuite(ViewEventTypeVacationTest.class);
 		testSuite.addTestSuite(TearDownEventTest.class);
