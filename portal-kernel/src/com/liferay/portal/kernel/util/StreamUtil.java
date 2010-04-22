@@ -36,13 +36,11 @@ import java.nio.channels.WritableByteChannel;
 public class StreamUtil {
 
 	public static final int BUFFER_SIZE = GetterUtil.getInteger(
-		System.getProperty(
-			"com.liferay.portal.kernel.util.StreamUtil.buffer.size"),
+		System.getProperty(StreamUtil.class.getName() + ".buffer.size"),
 		8192);
 
 	public static final boolean USE_NIO = GetterUtil.getBoolean(
-		System.getProperty(
-			"com.liferay.portal.kernel.util.StreamUtil.use.nio"),
+		System.getProperty(StreamUtil.class.getName() + ".use.nio"),
 		false);
 
 	public static void cleanUp(Channel channel) {
