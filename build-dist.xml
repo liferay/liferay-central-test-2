@@ -391,6 +391,7 @@ app.server.glassfish.zip.url=http://download.java.net/glassfish/v3-prelude/relea
 
 		<delete dir="${lp.plugins.dir}/dist" />
 
+		<ant dir="${lp.plugins.dir}/hooks/default-site-templates-hook" target="all" inheritAll="false" />
 		<ant dir="${lp.plugins.dir}/hooks/sevencogs-hook" target="all" inheritAll="false" />
 		<ant dir="${lp.plugins.dir}/portlets/chat-portlet" target="all" inheritAll="false" />
 		<ant dir="${lp.plugins.dir}/portlets/google-maps-portlet" target="all" inheritAll="false" />
