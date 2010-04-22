@@ -50,8 +50,8 @@ public class PasswordPolicyToolkit extends BasicToolkit {
 			PasswordPolicy passwordPolicy)
 		throws PortalException, SystemException {
 
-		if (passwordPolicy.getCheckSyntax()) {
-			if (!passwordPolicy.getAllowDictionaryWords() &&
+		if (passwordPolicy.isCheckSyntax()) {
+			if (!passwordPolicy.isAllowDictionaryWords() &&
 					WordsUtil.isDictionaryWord(password1)) {
 
 				throw new UserPasswordException(
@@ -64,7 +64,7 @@ public class PasswordPolicyToolkit extends BasicToolkit {
 			}
 		}
 
-		if (!passwordPolicy.getChangeable()) {
+		if (!passwordPolicy.isChangeable()) {
 			throw new UserPasswordException(
 				UserPasswordException.PASSWORD_NOT_CHANGEABLE);
 		}
