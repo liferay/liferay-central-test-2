@@ -70,31 +70,29 @@ public class PasswordPolicyToolkit extends BasicToolkit {
 		}
 
 		if (userId != 0) {
-			if (passwordPolicy.getChangeable()) {
-				User user = UserLocalServiceUtil.getUserById(userId);
+			User user = UserLocalServiceUtil.getUserById(userId);
 
-				Date passwordModfiedDate = user.getPasswordModifiedDate();
+			Date passwordModfiedDate = user.getPasswordModifiedDate();
 
-				if (passwordModfiedDate != null) {
+			if (passwordModfiedDate != null) {
 
-					// LEP-2961
+				// LEP-2961
 
-					Date now = new Date();
+				Date now = new Date();
 
-					long passwordModificationElapsedTime =
-						now.getTime() - passwordModfiedDate.getTime();
+				long passwordModificationElapsedTime =
+					now.getTime() - passwordModfiedDate.getTime();
 
-					long userCreationElapsedTime =
-						now.getTime() - user.getCreateDate().getTime();
+				long userCreationElapsedTime =
+					now.getTime() - user.getCreateDate().getTime();
 
-					long minAge = passwordPolicy.getMinAge() * 1000;
+				long minAge = passwordPolicy.getMinAge() * 1000;
 
-					if ((passwordModificationElapsedTime < minAge) &&
-						(userCreationElapsedTime > minAge)) {
+				if ((passwordModificationElapsedTime < minAge) &&
+					(userCreationElapsedTime > minAge)) {
 
-						throw new UserPasswordException(
-							UserPasswordException.PASSWORD_TOO_YOUNG);
-					}
+					throw new UserPasswordException(
+						UserPasswordException.PASSWORD_TOO_YOUNG);
 				}
 			}
 
