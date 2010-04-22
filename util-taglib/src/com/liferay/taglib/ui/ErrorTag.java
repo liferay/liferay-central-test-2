@@ -21,7 +21,7 @@ import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 
-import javax.portlet.RenderRequest;
+import javax.portlet.PortletRequest;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
@@ -39,18 +39,18 @@ public class ErrorTag extends TagSupport {
 			HttpServletRequest request =
 				(HttpServletRequest)pageContext.getRequest();
 
-			RenderRequest renderRequest = (RenderRequest)request.getAttribute(
+			PortletRequest portletRequest = (PortletRequest)request.getAttribute(
 				JavaConstants.JAVAX_PORTLET_REQUEST);
 
 			boolean includeEndPage = false;
 
 			if (Validator.isNull(_key)) {
-				if (!SessionErrors.isEmpty(renderRequest)) {
+				if (!SessionErrors.isEmpty(portletRequest)) {
 					includeEndPage = true;
 				}
 			}
 			else {
-				if (SessionErrors.contains(renderRequest, _key)) {
+				if (SessionErrors.contains(portletRequest, _key)) {
 					includeEndPage = true;
 				}
 			}
@@ -82,7 +82,7 @@ public class ErrorTag extends TagSupport {
 			HttpServletRequest request =
 				(HttpServletRequest)pageContext.getRequest();
 
-			RenderRequest renderRequest = (RenderRequest)request.getAttribute(
+			PortletRequest portletRequest = (PortletRequest)request.getAttribute(
 				JavaConstants.JAVAX_PORTLET_REQUEST);
 
 			request.setAttribute("liferay-ui:error:key", _key);
@@ -93,13 +93,13 @@ public class ErrorTag extends TagSupport {
 				String.valueOf(_translateMessage));
 
 			if ((_exception != null) && (Validator.isNull(_message)) &&
-				(SessionErrors.contains(renderRequest, _exception.getName()))) {
+				(SessionErrors.contains(portletRequest, _exception.getName()))) {
 
 				PortalIncludeUtil.include(pageContext, getStartPage());
 
 				pageContext.setAttribute(
 					"errorException",
-					SessionErrors.get(renderRequest, _exception.getName()));
+					SessionErrors.get(portletRequest, _exception.getName()));
 
 				return EVAL_BODY_INCLUDE;
 			}

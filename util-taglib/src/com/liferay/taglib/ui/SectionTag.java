@@ -18,7 +18,7 @@ import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.taglib.util.IncludeTag;
 
-import javax.portlet.RenderResponse;
+import javax.portlet.PortletResponse;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
@@ -41,14 +41,14 @@ public class SectionTag extends IncludeTag {
 			HttpServletRequest request =
 				(HttpServletRequest)pageContext.getRequest();
 
-			RenderResponse renderResponse =
-				(RenderResponse)request.getAttribute(
+			PortletResponse portletResponse =
+				(PortletResponse)request.getAttribute(
 					JavaConstants.JAVAX_PORTLET_RESPONSE);
 
 			String namespace = StringPool.BLANK;
 
-			if (renderResponse != null) {
-				namespace = renderResponse.getNamespace();
+			if (portletResponse != null) {
+				namespace = portletResponse.getNamespace();
 			}
 
 			String sectionParam = _tabsTag.getParam();

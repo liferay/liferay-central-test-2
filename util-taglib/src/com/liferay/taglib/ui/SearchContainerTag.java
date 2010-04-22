@@ -26,10 +26,10 @@ import com.liferay.taglib.util.ParamAndPropertyAncestorTagImpl;
 
 import java.util.List;
 
+import javax.portlet.MimeResponse;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
 import javax.portlet.PortletURL;
-import javax.portlet.RenderResponse;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
@@ -81,7 +81,7 @@ public class SearchContainerTag extends ParamAndPropertyAncestorTagImpl {
 
 			if (_iteratorURL == null) {
 				_iteratorURL =
-					((RenderResponse)portletResponse).createRenderURL();
+					((MimeResponse)portletResponse).createRenderURL();
 			}
 
 			if (_searchContainer == null) {
