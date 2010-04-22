@@ -21,8 +21,8 @@ subfolderIds.add(new Long(curFolder.getFolderId()));
 
 BookmarksFolderLocalServiceUtil.getSubfolderIds(subfolderIds, scopeGroupId, curFolder.getFolderId());
 
-int subFoldersCount = subfolderIds.size() - 1;
-int subEntriesCount = BookmarksEntryLocalServiceUtil.getFoldersEntriesCount(scopeGroupId, subfolderIds);
+int curFoldersCount = subfolderIds.size() - 1;
+int curEntriesCount = BookmarksEntryLocalServiceUtil.getFoldersEntriesCount(scopeGroupId, subfolderIds);
 
 for (int j = 0; j < folderColumns.length; j++) {
 	String folderColumn = folderColumns[j];
@@ -118,14 +118,14 @@ for (int j = 0; j < folderColumns.length; j++) {
 			<liferay-ui:search-container-column-text
 				href="<%= rowURL %>"
 				name="num-of-entries"
-				value="<%= String.valueOf(subEntriesCount) %>"
+				value="<%= String.valueOf(curEntriesCount) %>"
 			/>
 		</c:when>
 		<c:when test='<%= folderColumn.equals("num-of-folders") %>'>
 			<liferay-ui:search-container-column-text
 				href="<%= rowURL %>"
 				name="num-of-folders"
-				value="<%= String.valueOf(subFoldersCount) %>"
+				value="<%= String.valueOf(curFoldersCount) %>"
 			/>
 		</c:when>
 	</c:choose>

@@ -82,8 +82,6 @@ String defaultFolderColumns = "folder,num-of-folders,num-of-entries";
 
 String portletId = portletDisplay.getId();
 
-
-
 if (portletId.equals(PortletKeys.PORTLET_CONFIGURATION)) {
 	portletId = portletResource;
 }

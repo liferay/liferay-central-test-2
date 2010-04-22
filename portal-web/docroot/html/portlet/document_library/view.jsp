@@ -228,20 +228,21 @@ request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntry
 		<aui:layout>
 			<h3 class="folder-title"><liferay-ui:message key="<%= topLink %>" /></h3>
 
-			<%
-			long groupFileEntriesUserId = 0;
-
-			if (topLink.equals("my-documents") && themeDisplay.isSignedIn()) {
-				groupFileEntriesUserId = user.getUserId();
-			}
-			%>
-
 			<liferay-ui:search-container
 				delta="<%= fileEntriesPerPage %>"
 				deltaConfigurable="<%= false %>"
 				emptyResultsMessage="there-are-no-documents"
 				iteratorURL="<%= portletURL %>"
 			>
+
+				<%
+				long groupFileEntriesUserId = 0;
+
+				if (topLink.equals("my-documents") && themeDisplay.isSignedIn()) {
+					groupFileEntriesUserId = user.getUserId();
+				}
+				%>
+
 				<liferay-ui:search-container-results
 					results="<%= DLFileEntryLocalServiceUtil.getGroupFileEntries(scopeGroupId, groupFileEntriesUserId, searchContainer.getStart(), searchContainer.getEnd()) %>"
 					total="<%= DLFileEntryLocalServiceUtil.getGroupFileEntriesCount(scopeGroupId, groupFileEntriesUserId) %>"

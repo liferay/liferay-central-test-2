@@ -140,6 +140,7 @@ request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntry
 							<liferay-ui:search-container
 								curParam="cur1"
 								delta="<%= foldersPerPage %>"
+								deltaConfigurable="<%= false %>"
 								headerNames="folder,num-of-folders,num-of-entries"
 								iteratorURL="<%= portletURL %>"
 							>
@@ -158,6 +159,7 @@ request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntry
 										<portlet:param name="struts_action" value="/bookmarks/view" />
 										<portlet:param name="folderId" value="<%= String.valueOf(curFolder.getFolderId()) %>" />
 									</liferay-portlet:renderURL>
+
 									<%@ include file="/html/portlet/bookmarks/folder_columns.jspf" %>
 								</liferay-ui:search-container-row>
 
@@ -210,6 +212,8 @@ request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntry
 			<h3 class="folder-title"><liferay-ui:message key="<%= topLink %>" /></h3>
 
 			<liferay-ui:search-container
+				delta="<%= entriesPerPage %>"
+				deltaConfigurable="<%= false %>"
 				headerNames="folder,num-of-folders,num-of-entries"
 				iteratorURL="<%= portletURL %>"
 			>

@@ -61,20 +61,22 @@ portletURL.setParameter("tag", StringPool.BLANK);
 			<portlet:param name="struts_action" value="/bookmarks/search" />
 		</liferay-portlet:renderURL>
 
-		<div class="folder-search">
-			<aui:form action="<%= searchURL %>" method="get" name="searchFm">
-				<liferay-portlet:renderURLParams varImpl="searchURL" />
-				<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
-				<aui:input name="breadcrumbsFolderId" type="hidden" value="<%= folderId %>" />
-				<aui:input name="searchFolderIds" type="hidden" value="<%= folderId %>" />
+		<c:if test="<%= showFoldersSearch %>">
+			<div class="folder-search">
+				<aui:form action="<%= searchURL %>" method="get" name="searchFm">
+					<liferay-portlet:renderURLParams varImpl="searchURL" />
+					<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
+					<aui:input name="breadcrumbsFolderId" type="hidden" value="<%= folderId %>" />
+					<aui:input name="searchFolderIds" type="hidden" value="<%= folderId %>" />
 
-				<span class="aui-search-bar">
-					<aui:input inlineField="<%= true %>" id="keywords1" label="" name="keywords" size="30" title="search-bookmarks" type="text" />
+					<span class="aui-search-bar">
+						<aui:input inlineField="<%= true %>" id="keywords1" label="" name="keywords" size="30" title="search-bookmarks" type="text" />
 
-					<aui:button type="submit" value="search" />
-				</span>
-			</aui:form>
-		</div>
+						<aui:button type="submit" value="search" />
+					</span>
+				</aui:form>
+			</div>
+		</c:if>
 	</div>
 </div>
 
