@@ -68,7 +68,7 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 			return 0;
 		}
 		else {
-			return ((Integer)results.get(0));
+			return ((Long)results.get(0)).intValue();
 		}
 	}
 
