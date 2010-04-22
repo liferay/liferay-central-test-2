@@ -20,7 +20,6 @@ import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.Indexer;
-import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.search.Summary;
@@ -79,10 +78,9 @@ public abstract class HitsOpenSearchImpl extends BaseOpenSearchImpl {
 			Portlet portlet = PortletLocalServiceUtil.getPortletById(
 				themeDisplay.getCompanyId(), getPortletId());
 
-			Indexer indexer = IndexerRegistryUtil.getIndexer(
-				portlet.getIndexerClass());
+			Indexer indexerInstance = portlet.getIndexerInstance();
 
-			Hits results = indexer.search(searchContext);
+			Hits results = indexerInstance.search(searchContext);
 
 			String[] queryTerms = results.getQueryTerms();
 
@@ -109,7 +107,7 @@ public abstract class HitsOpenSearchImpl extends BaseOpenSearchImpl {
 				PortletURL portletURL = getPortletURL(
 					request, portletId, resultGroupId);
 
-				Summary summary = indexer.getSummary(
+				Summary summary = indexerInstance.getSummary(
 					result, snippet, portletURL);
 
 				String title = summary.getTitle();
