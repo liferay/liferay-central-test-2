@@ -118,6 +118,10 @@ public class DLIndexer extends BaseIndexer {
 			return null;
 		}
 
+		if (userId == 0) {
+			userId = fileEntry.getUserId();
+		}
+
 		if (properties == null) {
 			properties = fileEntry.getLuceneProperties();
 		}
