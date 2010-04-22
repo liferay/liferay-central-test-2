@@ -59,11 +59,62 @@ else if (layout.isTypeControlPanel()) {
 	preferences = PortletPreferencesLocalServiceUtil.getPreferences(themeDisplay.getCompanyId(), scopeGroupId, PortletKeys.PREFS_OWNER_TYPE_GROUP, 0, PortletKeys.BOOKMARKS, null);
 }
 
-long rootFolderId = PrefsParamUtil.getLong(preferences, request, "rootFolderId", BookmarksFolderConstants.DEFAULT_PARENT_FOLDER_ID);
+BookmarksFolder rootFolder = null;
 
-String defaultEntryColumns = "name,url,visits,modified-date,action";
+long rootFolderId = PrefsParamUtil.getLong(preferences, request, "rootFolderId", BookmarksFolderConstants.DEFAULT_PARENT_FOLDER_ID);
+String rootFolderName = StringPool.BLANK;
+
+if (rootFolderId != BookmarksFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
+	try {
+		rootFolder = BookmarksFolderLocalServiceUtil.getFolder(rootFolderId);
+
+		rootFolderName = rootFolder.getName();
+	}
+	catch (NoSuchFolderException nsfe) {
+	}
+}
+
+boolean showFoldersSearch = PrefsParamUtil.getBoolean(preferences, request, "showFoldersSearch", true);
+boolean showSubfolders = PrefsParamUtil.getBoolean(preferences, request, "showSubfolders", true);
+int foldersPerPage = PrefsParamUtil.getInteger(preferences, request, "foldersPerPage", SearchContainer.DEFAULT_DELTA);
+
+String defaultFolderColumns = "folder,num-of-folders,num-of-entries";
+
+String portletId = portletDisplay.getId();
+
+
+
+if (portletId.equals(PortletKeys.PORTLET_CONFIGURATION)) {
+	portletId = portletResource;
+}
+
+if (portletId.equals(PortletKeys.BOOKMARKS)) {
+	defaultFolderColumns += ",action";
+}
+
+String allFolderColumns = defaultFolderColumns;
+
+String[] folderColumns = StringUtil.split(PrefsParamUtil.getString(preferences, request, "folderColumns", defaultFolderColumns));
+
+if (!portletId.equals(PortletKeys.BOOKMARKS)) {
+	folderColumns = ArrayUtil.remove(folderColumns, "action");
+}
+
+int entriesPerPage = PrefsParamUtil.getInteger(preferences, request, "entriesPerPage", SearchContainer.DEFAULT_DELTA);
+
+String defaultEntryColumns = "name,url,visits,modified-date";
+
+if (portletId.equals(PortletKeys.BOOKMARKS)) {
+	defaultEntryColumns += ",action";
+}
+
+String allEntryColumns = defaultEntryColumns;
 
 String[] entryColumns = StringUtil.split(PrefsParamUtil.getString(preferences, request, "entryColumns", defaultEntryColumns));
+
+if (!portletId.equals(PortletKeys.BOOKMARKS)) {
+	entryColumns = ArrayUtil.remove(entryColumns, "action");
+}
 %>
 
 <%@ include file="/html/portlet/bookmarks/init-ext.jsp" %>

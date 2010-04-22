@@ -309,6 +309,7 @@
 		<portlet-name>28</portlet-name>
 		<icon>/html/icons/default.png</icon>
 		<struts-path>bookmarks</struts-path>
+		<configuration-action-class>com.liferay.portlet.bookmarks.action.ConfigurationActionImpl</configuration-action-class>
 		<indexer-class>com.liferay.portlet.bookmarks.util.BookmarksIndexer</indexer-class>
 		<open-search-class>com.liferay.portlet.bookmarks.util.BookmarksOpenSearchImpl</open-search-class>
 		<portlet-data-handler-class>com.liferay.portlet.bookmarks.lar.BookmarksPortletDataHandlerImpl</portlet-data-handler-class>

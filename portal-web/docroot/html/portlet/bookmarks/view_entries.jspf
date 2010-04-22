@@ -32,6 +32,7 @@ OrderByComparator orderByComparator = BookmarksUtil.getEntriesOrderByComparator(
 
 <liferay-ui:search-container
 	curParam="cur2"
+	delta="<%= entriesPerPage %>"
 	headerNames="<%= StringUtil.merge(entryColumns) %>"
 	iteratorURL="<%= portletURL %>"
 	orderByCol="<%= orderByCol %>"

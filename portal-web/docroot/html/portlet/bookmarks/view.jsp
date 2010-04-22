@@ -137,7 +137,32 @@ request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntry
 
 					<c:if test="<%= foldersCount > 0 %>">
 						<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="subFoldersPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, (folder != null) ? "subfolders" : "folders") %>'>
-							<%@ include file="/html/portlet/bookmarks/folder_columns.jspf" %>
+							<liferay-ui:search-container
+								curParam="cur1"
+								delta="<%= foldersPerPage %>"
+								headerNames="folder,num-of-folders,num-of-entries"
+								iteratorURL="<%= portletURL %>"
+							>
+								<liferay-ui:search-container-results
+									results="<%= BookmarksFolderLocalServiceUtil.getFolders(scopeGroupId, folderId, searchContainer.getStart(), searchContainer.getEnd()) %>"
+									total="<%= BookmarksFolderLocalServiceUtil.getFoldersCount(scopeGroupId, folderId) %>"
+								/>
+
+								<liferay-ui:search-container-row
+									className="com.liferay.portlet.bookmarks.model.BookmarksFolder"
+									escapedModel="<%= true %>"
+									keyProperty="folderId"
+									modelVar="curFolder"
+								>
+									<liferay-portlet:renderURL varImpl="rowURL">
+										<portlet:param name="struts_action" value="/bookmarks/view" />
+										<portlet:param name="folderId" value="<%= String.valueOf(curFolder.getFolderId()) %>" />
+									</liferay-portlet:renderURL>
+									<%@ include file="/html/portlet/bookmarks/folder_columns.jspf" %>
+								</liferay-ui:search-container-row>
+
+								<liferay-ui:search-iterator />
+							</liferay-ui:search-container>
 						</liferay-ui:panel>
 					</c:if>
 
