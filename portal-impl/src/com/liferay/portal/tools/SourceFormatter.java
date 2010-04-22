@@ -51,11 +51,6 @@ public class SourceFormatter {
 
 	public static void main(String[] args) {
 		try {
-			Thread currentThread = Thread.currentThread();
-
-			PortalClassLoaderUtil.setClassLoader(
-				currentThread.getContextClassLoader());
-
 			_readExclusions();
 
 			Thread thread1 = new Thread () {
