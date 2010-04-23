@@ -724,12 +724,14 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 				resourceBundles, portlet, portletClassLoader,
 				LocaleUtil.getDefault());
 
-			Iterator<String> supportLocalesItr =
-				portlet.getSupportedLocales().iterator();
+			String[] supportedLocales = portlet.getSupportedLocales().toArray(
+				new String[0]);
 
-			while (supportLocalesItr.hasNext()) {
-				String supportedLocale = supportLocalesItr.next();
+			if (supportedLocales.length == 0) {
+				supportedLocales = PropsValues.LOCALES;
+			}
 
+			for (String supportedLocale : supportedLocales) {
 				Locale locale = LocaleUtil.fromLanguageId(supportedLocale);
 
 				initResourceBundle(
