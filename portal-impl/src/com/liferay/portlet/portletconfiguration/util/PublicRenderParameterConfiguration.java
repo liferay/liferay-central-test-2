@@ -29,28 +29,52 @@ public class PublicRenderParameterConfiguration {
 
 	public static final String MAPPING_PREFIX = "lfr-prp-mapping-";
 
+	public static String getIgnoreKey(
+		PublicRenderParameter publicRenderParameter) {
+
+		String publicRenderParameterName =
+			PortletQNameUtil.getPublicRenderParameterName(
+				publicRenderParameter.getQName());
+
+		return IGNORE_PREFIX.concat(publicRenderParameterName);
+	}
+
+	public static String getMappingKey(
+		PublicRenderParameter publicRenderParameter) {
+
+		String publicRenderParameterName =
+			PortletQNameUtil.getPublicRenderParameterName(
+				publicRenderParameter.getQName());
+
+		return MAPPING_PREFIX.concat(publicRenderParameterName);
+	}
+
 	public PublicRenderParameterConfiguration(
-		PublicRenderParameter publicRenderParameter, String mapping,
-		boolean ignore) {
+		PublicRenderParameter publicRenderParameter, String mappingValue,
+		boolean ignoreValue) {
 
 		_publicRenderParameter = publicRenderParameter;
 		_publicRenderParameterName =
 			PortletQNameUtil.getPublicRenderParameterName(
-				_publicRenderParameter.getQName());
-		_mapping = mapping;
-		_ignore = ignore;
+				publicRenderParameter.getQName());
+		_mappingValue = mappingValue;
+		_ignoreValue = ignoreValue;
 	}
 
 	public String getIgnoreKey() {
-		return IGNORE_PREFIX + _publicRenderParameterName;
+		return IGNORE_PREFIX.concat(_publicRenderParameterName);
 	}
 
-	public String getMapping() {
-		return _mapping;
+	public boolean getIgnoreValue() {
+		return _ignoreValue;
 	}
 
 	public String getMappingKey() {
-		return MAPPING_PREFIX + _publicRenderParameterName;
+		return MAPPING_PREFIX.concat(_publicRenderParameterName);
+	}
+
+	public String getMappingValue() {
+		return _mappingValue;
 	}
 
 	public PublicRenderParameter getPublicRenderParameter() {
@@ -61,12 +85,8 @@ public class PublicRenderParameterConfiguration {
 		return _publicRenderParameterName;
 	}
 
-	public boolean isIgnore() {
-		return _ignore;
-	}
-
-	private boolean _ignore;
-	private String _mapping;
+	private boolean _ignoreValue;
+	private String _mappingValue;
 	private PublicRenderParameter _publicRenderParameter;
 	private String _publicRenderParameterName;
 

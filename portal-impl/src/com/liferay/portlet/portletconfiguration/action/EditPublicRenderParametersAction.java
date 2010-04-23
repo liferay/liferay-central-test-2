@@ -24,7 +24,6 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
-import com.liferay.portlet.PortletQNameUtil;
 import com.liferay.portlet.portletconfiguration.util.PublicRenderParameterConfiguration;
 
 import java.util.Enumeration;
@@ -114,13 +113,15 @@ public class EditPublicRenderParametersAction extends EditConfigurationAction {
 			PortletPreferencesFactoryUtil.getLayoutPortletSetup(
 				layout, portlet.getPortletId());
 
-		Enumeration<String> preferenceNames = preferences.getNames();
+		Enumeration<String> enu = preferences.getNames();
 
-		while (preferenceNames.hasMoreElements()) {
-			String name = preferenceNames.nextElement();
+		while (enu.hasMoreElements()) {
+			String name = enu.nextElement();
 
-			if (name.startsWith(_IGNORE_PREFIX) ||
-				name.startsWith(_MAPPING_PREFIX)) {
+			if (name.startsWith(
+					PublicRenderParameterConfiguration.IGNORE_PREFIX) ||
+				name.startsWith(
+					PublicRenderParameterConfiguration.MAPPING_PREFIX)) {
 
 				preferences.reset(name);
 			}
@@ -129,21 +130,19 @@ public class EditPublicRenderParametersAction extends EditConfigurationAction {
 		for (PublicRenderParameter publicRenderParameter :
 				portlet.getPublicRenderParameters()) {
 
-			String ignoreKey =
-				_IGNORE_PREFIX + PortletQNameUtil.getPublicRenderParameterName(
-					publicRenderParameter.getQName());
+			String ignoreKey = PublicRenderParameterConfiguration.getIgnoreKey(
+				publicRenderParameter);
 
 			boolean ignoreValue = ParamUtil.getBoolean(
-					actionRequest, ignoreKey);
+				actionRequest, ignoreKey);
 
 			if (ignoreValue) {
 				preferences.setValue(ignoreKey, String.valueOf(Boolean.TRUE));
 			}
 			else {
 				String mappingKey =
-					_MAPPING_PREFIX +
-					PortletQNameUtil.getPublicRenderParameterName(
-						publicRenderParameter.getQName());
+					PublicRenderParameterConfiguration.getMappingKey(
+						publicRenderParameter);
 
 				String mappingValue = ParamUtil.getString(
 					actionRequest, mappingKey);
@@ -158,11 +157,5 @@ public class EditPublicRenderParametersAction extends EditConfigurationAction {
 			preferences.store();
 		}
 	}
-
-	private static final String _IGNORE_PREFIX =
-		PublicRenderParameterConfiguration.IGNORE_PREFIX;
-
-	private static final String _MAPPING_PREFIX =
-		PublicRenderParameterConfiguration.MAPPING_PREFIX;
 
 }

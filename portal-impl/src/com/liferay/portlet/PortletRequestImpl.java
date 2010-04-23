@@ -710,36 +710,40 @@ public abstract class PortletRequestImpl implements LiferayPortletRequest {
 			PublicRenderParameter publicRenderParameter =
 				publicRenderParameters.nextElement();
 
-			boolean ignore = GetterUtil.getBoolean(
-				preferences.getValue(
-					PublicRenderParameterConfiguration.IGNORE_PREFIX +
-						publicRenderParameter.getIdentifier(),
-					null));
+			String ignoreKey = PublicRenderParameterConfiguration.getIgnoreKey(
+				publicRenderParameter);
 
-			if (ignore) {
+			boolean ignoreValue = GetterUtil.getBoolean(
+				preferences.getValue(ignoreKey, null));
+
+			if (ignoreValue) {
 				continue;
 			}
 
-			QName qName = publicRenderParameter.getQName();
-			String[] values = _publicRenderParameters.get(
-				PortletQNameUtil.getKey(qName));
+			String mappingKey =
+				PublicRenderParameterConfiguration.getMappingKey(
+					publicRenderParameter);
 
-			String mappedTo = GetterUtil.getString(
-				preferences.getValue(
-					PublicRenderParameterConfiguration.MAPPING_PREFIX +
-						PortletQNameUtil.getPublicRenderParameterName(
-							publicRenderParameter.getQName()),
-					null));
-			String[] newValues = dynamicRequest.getRequest().getParameterValues(
-				mappedTo);
+			String mappingValue = GetterUtil.getString(
+				preferences.getValue(mappingKey, null));
 
-			if (newValues != null && newValues.length != 0) {
-				newValues = ArrayUtil.remove(newValues, "null");
+			HttpServletRequest request =
+				(HttpServletRequest)dynamicRequest.getRequest();
+
+			String[] newValues = request.getParameterValues(mappingValue);
+
+			if ((newValues != null) && (newValues.length != 0)) {
+				newValues = ArrayUtil.remove(newValues, StringPool.NULL);
 			}
 
 			String name = publicRenderParameter.getIdentifier();
 
-			if (newValues == null || newValues.length == 0) {
+			if ((newValues == null) || (newValues.length == 0)) {
+				QName qName = publicRenderParameter.getQName();
+
+				String[] values = _publicRenderParameters.get(
+					PortletQNameUtil.getKey(qName));
+
 				if ((values) == null || (values.length == 0)) {
 					continue;
 				}

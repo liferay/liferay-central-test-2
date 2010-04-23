@@ -67,34 +67,25 @@ editPublicRenderParameterURL.setParameter("portletResource", portletResource);
 			<liferay-ui:search-container-column-text
 				name="ignore"
 			>
-				<aui:input label="" name="<%= PublicRenderParameterConfiguration.IGNORE_PREFIX + publicRenderParameterConfiguration.getPublicRenderParameterName() %>" type="checkbox" value="<%= publicRenderParameterConfiguration.isIgnore() %>" />
+				<aui:input label="" name="<%= publicRenderParameterConfiguration.getIgnoreKey() %>" type="checkbox" value="<%= publicRenderParameterConfiguration.getIgnoreValue() %>" />
 			</liferay-ui:search-container-column-text>
 
 			<liferay-ui:search-container-column-text
 				name="mapping"
 			>
-				<aui:select label="" name="<%= PublicRenderParameterConfiguration.MAPPING_PREFIX + publicRenderParameterConfiguration.getPublicRenderParameterName() %>">
-
-					<%
-					String sharedParameterCurrentMapping = publicRenderParameterConfiguration.getMapping();
-					String sharedParameterName = publicRenderParameterConfiguration.getPublicRenderParameterName();
-					%>
-
+				<aui:select label="" name="<%= publicRenderParameterConfiguration.getMappingKey() %>">
 					<aui:option label="no-mapping" value="" />
 
 					<%
 					for (PublicRenderParameter publicRenderParameter : publicRenderParameters) {
-						String identifier = PortletQNameUtil.getPublicRenderParameterName(publicRenderParameter.getQName());
+						String publicRenderParameterName = PortletQNameUtil.getPublicRenderParameterName(publicRenderParameter.getQName());
 
-						if (identifier.equals(sharedParameterName)) {
+						if (publicRenderParameterName.equals(publicRenderParameterConfiguration.getPublicRenderParameterName())) {
 							continue;
 						}
-
-						String displayedIdentifier = publicRenderParameter.getIdentifier();
-
 					%>
 
-						<aui:option label="<%= displayedIdentifier %>" selected="<%= identifier.equals(sharedParameterCurrentMapping) %>" value="<%= identifier %>" />
+						<aui:option label="<%= publicRenderParameter.getIdentifier() %>" selected="<%= publicRenderParameterName.equals(publicRenderParameterConfiguration.getMappingValue()) %>" value="<%= publicRenderParameterName %>" />
 
 					<%
 					}
@@ -120,7 +111,7 @@ editPublicRenderParameterURL.setParameter("portletResource", portletResource);
 	for (PublicRenderParameterConfiguration publicRenderParameterConfiguration : publicRenderParameterConfigurations) {
 	%>
 
-		Liferay.Util.disableToggleBoxes("<portlet:namespace /><%= PublicRenderParameterConfiguration.IGNORE_PREFIX + publicRenderParameterConfiguration.getPublicRenderParameterName() %>" + "Checkbox", "<portlet:namespace /><%= PublicRenderParameterConfiguration.MAPPING_PREFIX + publicRenderParameterConfiguration.getPublicRenderParameterName() %>", true);
+		Liferay.Util.disableToggleBoxes('<portlet:namespace /><%= PublicRenderParameterConfiguration.IGNORE_PREFIX + publicRenderParameterConfiguration.getPublicRenderParameterName() %>' + 'Checkbox', '<portlet:namespace /><%= PublicRenderParameterConfiguration.MAPPING_PREFIX + publicRenderParameterConfiguration.getPublicRenderParameterName() %>', true);
 
 	<%
 	}

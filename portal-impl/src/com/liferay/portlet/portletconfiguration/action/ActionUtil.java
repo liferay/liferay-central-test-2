@@ -24,7 +24,6 @@ import com.liferay.portal.model.PublicRenderParameter;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
-import com.liferay.portlet.PortletQNameUtil;
 import com.liferay.portlet.portletconfiguration.util.PublicRenderParameterConfiguration;
 import com.liferay.portlet.portletconfiguration.util.PublicRenderParameterIdentifierComparator;
 import com.liferay.portlet.portletconfiguration.util.PublicRenderParameterIdentifierConfigurationComparator;
@@ -102,30 +101,29 @@ public class ActionUtil {
 		for (PublicRenderParameter publicRenderParameter:
 				portlet.getPublicRenderParameters()) {
 
-			boolean ignore = false;
-			String mapping = null;
-
-			String ignoreKey =
-				_IGNORE_PREFIX + PortletQNameUtil.getPublicRenderParameterName(
-					publicRenderParameter.getQName());
 			String mappingKey =
-				_MAPPING_PREFIX + PortletQNameUtil.getPublicRenderParameterName(
-					publicRenderParameter.getQName());
+				PublicRenderParameterConfiguration.getMappingKey(
+					publicRenderParameter);
+			String ignoreKey = PublicRenderParameterConfiguration.getIgnoreKey(
+				publicRenderParameter);
+
+			String mappingValue = null;
+			boolean ignoreValue = false;
 
 			if (SessionErrors.isEmpty(renderRequest)) {
-				ignore = GetterUtil.getBoolean(
+				mappingValue = preferences.getValue(mappingKey, null);
+				ignoreValue = GetterUtil.getBoolean(
 					preferences.getValue(ignoreKey, null));
-				mapping = preferences.getValue(mappingKey, null);
 			}
 			else {
-				ignore = GetterUtil.getBoolean(
+				mappingValue = ParamUtil.getString(renderRequest, mappingKey);
+				ignoreValue = GetterUtil.getBoolean(
 					ParamUtil.getString(renderRequest, ignoreKey));
-				mapping = ParamUtil.getString(renderRequest, mappingKey);
 			}
 
 			publicRenderParameterConfigurations.add(
 				new PublicRenderParameterConfiguration(
-					publicRenderParameter, mapping, ignore));
+					publicRenderParameter, mappingValue, ignoreValue));
 		}
 
 		Collections.sort(
@@ -136,11 +134,5 @@ public class ActionUtil {
 			WebKeys.PUBLIC_RENDER_PARAMETER_CONFIGURATIONS,
 			publicRenderParameterConfigurations);
 	}
-
-	private static final String _IGNORE_PREFIX =
-		PublicRenderParameterConfiguration.IGNORE_PREFIX;
-
-	private static final String _MAPPING_PREFIX =
-		PublicRenderParameterConfiguration.MAPPING_PREFIX;
 
 }
