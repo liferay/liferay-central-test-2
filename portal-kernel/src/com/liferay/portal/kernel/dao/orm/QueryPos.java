@@ -41,7 +41,7 @@ public class QueryPos {
 			_query.setBoolean(_pos++, value.booleanValue());
 		}
 		else {
-			addNull();
+			_addNull();
 		}
 	}
 
@@ -78,7 +78,7 @@ public class QueryPos {
 			_query.setDouble(_pos++, value.doubleValue());
 		}
 		else {
-			addNull();
+			_addNull();
 		}
 	}
 
@@ -115,7 +115,7 @@ public class QueryPos {
 			_query.setFloat(_pos++, value.intValue());
 		}
 		else {
-			addNull();
+			_addNull();
 		}
 	}
 
@@ -164,7 +164,7 @@ public class QueryPos {
 			_query.setInteger(_pos++, value.intValue());
 		}
 		else {
-			addNull();
+			_addNull();
 		}
 	}
 
@@ -189,7 +189,7 @@ public class QueryPos {
 			_query.setLong(_pos++, value.longValue());
 		}
 		else {
-			addNull();
+			_addNull();
 		}
 	}
 
@@ -217,6 +217,44 @@ public class QueryPos {
 		}
 	}
 
+	public void add(Object obj) {
+		Class<?> classObj = obj.getClass();
+
+		if (obj == null) {
+			_addNull();
+		}
+		else if (classObj == Boolean.class) {
+			add(((Boolean)obj).booleanValue());
+		}
+		else if (classObj == Date.class) {
+			add(CalendarUtil.getTimestamp((Date)obj));
+		}
+		else if (classObj == Double.class) {
+			add(((Double)obj).doubleValue());
+		}
+		else if (classObj == Float.class) {
+			add(((Float)obj).floatValue());
+		}
+		else if (classObj == Integer.class) {
+			add(((Integer)obj).intValue());
+		}
+		else if (classObj == Long.class) {
+			add(((Long)obj).longValue());
+		}
+		else if (classObj == Short.class) {
+			add(((Short)obj).shortValue());
+		}
+		else if (classObj == String.class) {
+			add((String)obj);
+		}
+		else if (classObj == Timestamp.class) {
+			add((Timestamp)obj);
+		}
+		else {
+			throw new RuntimeException("Unsupport type " + classObj.getName());
+		}
+	}
+
 	public void add(short value) {
 		_query.setShort(_pos++, value);
 	}
@@ -226,7 +264,7 @@ public class QueryPos {
 			_query.setShort(_pos++, value.shortValue());
 		}
 		else {
-			addNull();
+			_addNull();
 		}
 	}
 
@@ -286,57 +324,16 @@ public class QueryPos {
 		}
 	}
 
-	public void add(Object obj) {
-		Class<?> clazz = obj.getClass();
-
-		if (obj == null) {
-			addNull();
-		}
-		else if (clazz == Boolean.class) {
-			add(((Boolean) obj).booleanValue());
-		}
-		else if (clazz == Double.class) {
-			add(((Double) obj).doubleValue());
-		}
-		else if (clazz == Float.class) {
-			add(((Float) obj).floatValue());
-		}
-		else if (clazz == Integer.class) {
-			add(((Integer) obj).intValue());
-		}
-		else if (clazz == Long.class) {
-			add(((Long) obj).longValue());
-		}
-		else if (clazz == Short.class) {
-			add(((Short) obj).shortValue());
-		}
-		else if (clazz == String.class) {
-			add((String) obj);
-		}
-		else if (clazz == Timestamp.class) {
-			add((Timestamp) obj);
-		}
-		else if (clazz == Date.class) {
-			add(CalendarUtil.getTimestamp((Date) obj));
-		}
-		else if (clazz.isArray()) {
-			throw new RuntimeException("Can not add array type: " + obj);
-		}
-		else {
-			throw new RuntimeException("Unsupport object type: " + obj);
-		}
-	}
-
 	public int getPos() {
 		return _pos;
 	}
 
-	private void addNull() {
-		_query.setSerializable(_pos++, null);
-	}
-
 	private QueryPos(Query query) {
 		_query = query;
+	}
+
+	private void _addNull() {
+		_query.setSerializable(_pos++, null);
 	}
 
 	private static final int _DEFAULT_ARRAY_COUNT = 1;

@@ -945,17 +945,27 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 					${entity.name}[] array = new ${entity.name}Impl[3];
 
-					array[0] = getBy${finder.name}_PrevOrNext(session, ${entity.varName},
-						<#list finderColsList as finderCol>
-							${finderCol.name},
-						</#list>
-						orderByComparator, true);
+					array[0] =
+						getBy${finder.name}_PrevAndNext(
+							session, ${entity.varName},
+
+							<#list finderColsList as finderCol>
+								${finderCol.name},
+							</#list>
+
+							orderByComparator, true);
+
 					array[1] = ${entity.varName};
-					array[2] = getBy${finder.name}_PrevOrNext(session, ${entity.varName},
-						<#list finderColsList as finderCol>
-							${finderCol.name},
-						</#list>
-						orderByComparator, false);
+
+					array[2] =
+						getBy${finder.name}_PrevAndNext(
+							session, ${entity.varName},
+
+							<#list finderColsList as finderCol>
+								${finderCol.name},
+							</#list>
+
+							orderByComparator, false);
 
 					return array;
 				}
@@ -967,20 +977,19 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 				}
 			}
 
-			protected ${entity.name} getBy${finder.name}_PrevOrNext(
+			protected ${entity.name} getBy${finder.name}_PrevAndNext(
 				Session session, ${entity.name} ${entity.varName},
 
 				<#list finderColsList as finderCol>
 					${finderCol.type} ${finderCol.name},
 				</#list>
 
-				OrderByComparator orderByComparator, boolean prev) {
+				OrderByComparator orderByComparator, boolean previous) {
 
 				StringBundler query = null;
 
 				if (orderByComparator != null) {
-					query = new StringBundler(6 +
-							(orderByComparator.getOrderByFields().length * 6));
+					query = new StringBundler(6 + (orderByComparator.getOrderByFields().length * 6));
 				}
 				else {
 					query = new StringBundler(3);
@@ -991,7 +1000,59 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 				<#include "persistence_impl_finder_col.ftl">
 
 				if (orderByComparator != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, orderByComparator, prev);
+					String[] orderByFields = orderByComparator.getOrderByFields();
+
+					if (orderByFields.length > 0) {
+						query.append(WHERE_AND);
+					}
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append(_ORDER_BY_ENTITY_ALIAS);
+						query.append(orderByFields[i]);
+
+						if ((i + 1) < orderByFields.length) {
+							if (orderByComparator.isAscending() ^ previous) {
+								query.append(WHERE_GREATER_THAN_HAS_NEXT);
+							}
+							else {
+								query.append(WHERE_LESSER_THAN_HAS_NEXT);
+							}
+						}
+						else {
+							if (orderByComparator.isAscending() ^ previous) {
+								query.append(WHERE_GREATER_THAN);
+							}
+							else {
+								query.append(WHERE_LESSER_THAN);
+							}
+						}
+					}
+
+					query.append(ORDER_BY_CLAUSE);
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append(_ORDER_BY_ENTITY_ALIAS);
+						query.append(orderByFields[i]);
+
+						if ((i + 1) < orderByFields.length) {
+							if (orderByComparator.isAscending() ^ previous) {
+								query.append(ORDER_BY_ASC_HAS_NEXT);
+							}
+							else {
+								query.append(ORDER_BY_DESC_HAS_NEXT);
+							}
+						}
+						else {
+							if (orderByComparator.isAscending() ^ previous) {
+								query.append(ORDER_BY_ASC);
+							}
+							else {
+								query.append(ORDER_BY_DESC);
+							}
+						}
+					}
+
+					query.append(WHERE_LIMIT_2);
 				}
 
 				<#if entity.getOrder()??>
@@ -1031,12 +1092,17 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 				</#list>
 
-				if(orderByComparator != null) {
-					setOrderByComparatorValues(qPos, orderByComparator, ${entity.varName});
+				if (orderByComparator != null) {
+					Object[] values = orderByComparator.getOrderByValues(${entity.varName});
+
+					for (Object value : values) {
+						qPos.add(value);
+					}
 				}
 
 				List<${entity.name}> list = q.list();
-				if(list.size() == 2) {
+
+				if (list.size() == 2) {
 					return list.get(1);
 				}
 				else {

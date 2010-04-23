@@ -16,9 +16,9 @@ package com.liferay.portal.kernel.util;
 
 import java.io.Serializable;
 
-import java.lang.reflect.Method;
-
 import java.util.Comparator;
+
+import com.liferay.portal.kernel.bean.BeanPropertiesUtil;
 
 /**
  * <a href="OrderByComparator.java.html"><b><i>View Source</i></b></a>
@@ -62,30 +62,15 @@ public abstract class OrderByComparator implements Comparator, Serializable {
 	}
 
 	public Object[] getOrderByValues(Object obj) {
-		try {
-			Class<?> clazz = obj.getClass();
-			String[] fieldNames = getOrderByFields();
-			Object[] values = new Object[fieldNames.length];
-			for(int i = 0; i< fieldNames.length; i++) {
-				String fieldName = fieldNames[i];
+		String[] fields = getOrderByFields();
 
-				StringBuilder getterNameBuilder = new StringBuilder(
-					fieldName.length() + 3);
-				getterNameBuilder.append("get");
-				getterNameBuilder.append(
-					Character.toUpperCase(fieldName.charAt(0)));
-				getterNameBuilder.append(fieldName.substring(1));
+		Object[] values = new Object[fields.length];
 
-				String getterName = getterNameBuilder.toString();
-				Method getterMethod = clazz.getMethod(getterName);
-				getterMethod.setAccessible(true);
-				values[i] = getterMethod.invoke(obj);
-			}
-			return values;
+		for (int i = 0; i< fields.length; i++) {
+			values[i] = BeanPropertiesUtil.getObject(obj, fields[i]);
 		}
-		catch(Exception e) {
-			throw new RuntimeException(e);
-		}
+
+		return values;
 	}
 
 	public boolean isAscending() {
