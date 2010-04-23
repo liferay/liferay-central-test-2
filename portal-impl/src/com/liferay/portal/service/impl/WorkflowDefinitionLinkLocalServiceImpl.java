@@ -17,6 +17,7 @@ package com.liferay.portal.service.impl;
 import com.liferay.portal.NoSuchWorkflowDefinitionLinkException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.workflow.WorkflowEngineManagerUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.WorkflowDefinitionLink;
@@ -86,6 +87,10 @@ public class WorkflowDefinitionLinkLocalServiceImpl
 			long companyId, String className)
 		throws PortalException, SystemException {
 
+		if (!WorkflowEngineManagerUtil.isDeployed()) {
+		    throw new NoSuchWorkflowDefinitionLinkException();
+		}
+
 		Group group = groupLocalService.getCompanyGroup(companyId);
 		long classNameId = PortalUtil.getClassNameId(className);
 
@@ -97,6 +102,10 @@ public class WorkflowDefinitionLinkLocalServiceImpl
 			long companyId, long groupId, String className)
 		throws PortalException, SystemException {
 
+		if (!WorkflowEngineManagerUtil.isDeployed()) {
+		    throw new NoSuchWorkflowDefinitionLinkException();
+		}
+		
 		long classNameId = PortalUtil.getClassNameId(className);
 
 		WorkflowDefinitionLink workflowDefinitionLink = null;
@@ -129,6 +138,10 @@ public class WorkflowDefinitionLinkLocalServiceImpl
 			int workflowDefinitionVersion)
 		throws SystemException{
 
+		if (!WorkflowEngineManagerUtil.isDeployed()) {
+		    return 0;
+		}
+		
 		return workflowDefinitionLinkPersistence.countByC_W_W(
 			companyId, workflowDefinitionName, workflowDefinitionVersion);
 	}
@@ -136,6 +149,10 @@ public class WorkflowDefinitionLinkLocalServiceImpl
 	public boolean hasWorkflowDefinitionLink(
 			long companyId, long groupId, String className)
 		throws PortalException, SystemException {
+
+		if (!WorkflowEngineManagerUtil.isDeployed()) {
+		    return false;
+		}
 
 		try {
 			getWorkflowDefinitionLink(companyId, groupId, className);
