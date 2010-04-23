@@ -113,7 +113,7 @@ public interface WorkflowTaskManager {
 		throws WorkflowException;
 
 	public List<WorkflowTask> search(
-			long companyId, long userId, String taskName, String assetType, 
+			long companyId, long userId, String taskName, String assetType,
 			Date dueDateGT, Date dueDateLT, Boolean completed,
 			Boolean searchByUserRoles, boolean andOperator, int start, int end,
 			OrderByComparator orderByComparator)
