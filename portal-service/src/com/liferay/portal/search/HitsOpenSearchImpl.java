@@ -78,9 +78,9 @@ public abstract class HitsOpenSearchImpl extends BaseOpenSearchImpl {
 			Portlet portlet = PortletLocalServiceUtil.getPortletById(
 				themeDisplay.getCompanyId(), getPortletId());
 
-			Indexer indexerInstance = portlet.getIndexerInstance();
+			Indexer indexer = portlet.getIndexerInstance();
 
-			Hits results = indexerInstance.search(searchContext);
+			Hits results = indexer.search(searchContext);
 
 			String[] queryTerms = results.getQueryTerms();
 
@@ -107,7 +107,7 @@ public abstract class HitsOpenSearchImpl extends BaseOpenSearchImpl {
 				PortletURL portletURL = getPortletURL(
 					request, portletId, resultGroupId);
 
-				Summary summary = indexerInstance.getSummary(
+				Summary summary = indexer.getSummary(
 					result, snippet, portletURL);
 
 				String title = summary.getTitle();
