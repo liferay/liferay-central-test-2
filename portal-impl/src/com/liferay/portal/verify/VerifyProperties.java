@@ -186,7 +186,6 @@ public class VerifyProperties extends VerifyProcess {
 		"cas.validate.url",
 		"commons.pool.enabled",
 		"jbi.workflow.url",
-		"ldap.import.interval",
 		"message.boards.thread.locking.enabled",
 		"webdav.storage.class",
 		"webdav.storage.show.edit.url",
