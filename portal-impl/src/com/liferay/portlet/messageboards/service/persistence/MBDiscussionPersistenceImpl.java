@@ -561,48 +561,20 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 		throws NoSuchDiscussionException, SystemException {
 		MBDiscussion mbDiscussion = findByPrimaryKey(discussionId);
 
-		int count = countByClassNameId(classNameId);
-
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(3 +
-						(orderByComparator.getOrderByFields().length * 3));
-			}
-			else {
-				query = new StringBundler(2);
-			}
-
-			query.append(_SQL_SELECT_MBDISCUSSION_WHERE);
-
-			query.append(_FINDER_COLUMN_CLASSNAMEID_CLASSNAMEID_2);
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-
-			String sql = query.toString();
-
-			Query q = session.createQuery(sql);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(classNameId);
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
-					orderByComparator, mbDiscussion);
-
 			MBDiscussion[] array = new MBDiscussionImpl[3];
 
-			array[0] = (MBDiscussion)objArray[0];
-			array[1] = (MBDiscussion)objArray[1];
-			array[2] = (MBDiscussion)objArray[2];
+			array[0] = getByClassNameId_PrevAndNext(session, mbDiscussion,
+					classNameId, orderByComparator, true);
+
+			array[1] = mbDiscussion;
+
+			array[2] = getByClassNameId_PrevAndNext(session, mbDiscussion,
+					classNameId, orderByComparator, false);
 
 			return array;
 		}
@@ -611,6 +583,105 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 		}
 		finally {
 			closeSession(session);
+		}
+	}
+
+	protected MBDiscussion getByClassNameId_PrevAndNext(Session session,
+		MBDiscussion mbDiscussion, long classNameId,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_MBDISCUSSION_WHERE);
+
+		query.append(_FINDER_COLUMN_CLASSNAMEID_CLASSNAMEID_2);
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+
+			query.append(WHERE_LIMIT_2);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(classNameId);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(mbDiscussion);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<MBDiscussion> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
 		}
 	}
 

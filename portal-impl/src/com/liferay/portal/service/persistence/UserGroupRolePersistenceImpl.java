@@ -555,48 +555,20 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 		throws NoSuchUserGroupRoleException, SystemException {
 		UserGroupRole userGroupRole = findByPrimaryKey(userGroupRolePK);
 
-		int count = countByUserId(userId);
-
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(3 +
-						(orderByComparator.getOrderByFields().length * 3));
-			}
-			else {
-				query = new StringBundler(2);
-			}
-
-			query.append(_SQL_SELECT_USERGROUPROLE_WHERE);
-
-			query.append(_FINDER_COLUMN_USERID_USERID_2);
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-
-			String sql = query.toString();
-
-			Query q = session.createQuery(sql);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(userId);
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
-					orderByComparator, userGroupRole);
-
 			UserGroupRole[] array = new UserGroupRoleImpl[3];
 
-			array[0] = (UserGroupRole)objArray[0];
-			array[1] = (UserGroupRole)objArray[1];
-			array[2] = (UserGroupRole)objArray[2];
+			array[0] = getByUserId_PrevAndNext(session, userGroupRole, userId,
+					orderByComparator, true);
+
+			array[1] = userGroupRole;
+
+			array[2] = getByUserId_PrevAndNext(session, userGroupRole, userId,
+					orderByComparator, false);
 
 			return array;
 		}
@@ -605,6 +577,105 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 		}
 		finally {
 			closeSession(session);
+		}
+	}
+
+	protected UserGroupRole getByUserId_PrevAndNext(Session session,
+		UserGroupRole userGroupRole, long userId,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_USERGROUPROLE_WHERE);
+
+		query.append(_FINDER_COLUMN_USERID_USERID_2);
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+
+			query.append(WHERE_LIMIT_2);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(userId);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(userGroupRole);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<UserGroupRole> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
 		}
 	}
 
@@ -784,48 +855,20 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 		throws NoSuchUserGroupRoleException, SystemException {
 		UserGroupRole userGroupRole = findByPrimaryKey(userGroupRolePK);
 
-		int count = countByGroupId(groupId);
-
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(3 +
-						(orderByComparator.getOrderByFields().length * 3));
-			}
-			else {
-				query = new StringBundler(2);
-			}
-
-			query.append(_SQL_SELECT_USERGROUPROLE_WHERE);
-
-			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-
-			String sql = query.toString();
-
-			Query q = session.createQuery(sql);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(groupId);
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
-					orderByComparator, userGroupRole);
-
 			UserGroupRole[] array = new UserGroupRoleImpl[3];
 
-			array[0] = (UserGroupRole)objArray[0];
-			array[1] = (UserGroupRole)objArray[1];
-			array[2] = (UserGroupRole)objArray[2];
+			array[0] = getByGroupId_PrevAndNext(session, userGroupRole,
+					groupId, orderByComparator, true);
+
+			array[1] = userGroupRole;
+
+			array[2] = getByGroupId_PrevAndNext(session, userGroupRole,
+					groupId, orderByComparator, false);
 
 			return array;
 		}
@@ -834,6 +877,105 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 		}
 		finally {
 			closeSession(session);
+		}
+	}
+
+	protected UserGroupRole getByGroupId_PrevAndNext(Session session,
+		UserGroupRole userGroupRole, long groupId,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_USERGROUPROLE_WHERE);
+
+		query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+
+			query.append(WHERE_LIMIT_2);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(groupId);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(userGroupRole);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<UserGroupRole> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
 		}
 	}
 
@@ -1012,48 +1154,20 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 		throws NoSuchUserGroupRoleException, SystemException {
 		UserGroupRole userGroupRole = findByPrimaryKey(userGroupRolePK);
 
-		int count = countByRoleId(roleId);
-
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(3 +
-						(orderByComparator.getOrderByFields().length * 3));
-			}
-			else {
-				query = new StringBundler(2);
-			}
-
-			query.append(_SQL_SELECT_USERGROUPROLE_WHERE);
-
-			query.append(_FINDER_COLUMN_ROLEID_ROLEID_2);
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-
-			String sql = query.toString();
-
-			Query q = session.createQuery(sql);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(roleId);
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
-					orderByComparator, userGroupRole);
-
 			UserGroupRole[] array = new UserGroupRoleImpl[3];
 
-			array[0] = (UserGroupRole)objArray[0];
-			array[1] = (UserGroupRole)objArray[1];
-			array[2] = (UserGroupRole)objArray[2];
+			array[0] = getByRoleId_PrevAndNext(session, userGroupRole, roleId,
+					orderByComparator, true);
+
+			array[1] = userGroupRole;
+
+			array[2] = getByRoleId_PrevAndNext(session, userGroupRole, roleId,
+					orderByComparator, false);
 
 			return array;
 		}
@@ -1062,6 +1176,105 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 		}
 		finally {
 			closeSession(session);
+		}
+	}
+
+	protected UserGroupRole getByRoleId_PrevAndNext(Session session,
+		UserGroupRole userGroupRole, long roleId,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_USERGROUPROLE_WHERE);
+
+		query.append(_FINDER_COLUMN_ROLEID_ROLEID_2);
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+
+			query.append(WHERE_LIMIT_2);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(roleId);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(userGroupRole);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<UserGroupRole> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
 		}
 	}
 
@@ -1255,52 +1468,20 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 		throws NoSuchUserGroupRoleException, SystemException {
 		UserGroupRole userGroupRole = findByPrimaryKey(userGroupRolePK);
 
-		int count = countByU_G(userId, groupId);
-
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(4 +
-						(orderByComparator.getOrderByFields().length * 3));
-			}
-			else {
-				query = new StringBundler(3);
-			}
-
-			query.append(_SQL_SELECT_USERGROUPROLE_WHERE);
-
-			query.append(_FINDER_COLUMN_U_G_USERID_2);
-
-			query.append(_FINDER_COLUMN_U_G_GROUPID_2);
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-
-			String sql = query.toString();
-
-			Query q = session.createQuery(sql);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(userId);
-
-			qPos.add(groupId);
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
-					orderByComparator, userGroupRole);
-
 			UserGroupRole[] array = new UserGroupRoleImpl[3];
 
-			array[0] = (UserGroupRole)objArray[0];
-			array[1] = (UserGroupRole)objArray[1];
-			array[2] = (UserGroupRole)objArray[2];
+			array[0] = getByU_G_PrevAndNext(session, userGroupRole, userId,
+					groupId, orderByComparator, true);
+
+			array[1] = userGroupRole;
+
+			array[2] = getByU_G_PrevAndNext(session, userGroupRole, userId,
+					groupId, orderByComparator, false);
 
 			return array;
 		}
@@ -1309,6 +1490,109 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 		}
 		finally {
 			closeSession(session);
+		}
+	}
+
+	protected UserGroupRole getByU_G_PrevAndNext(Session session,
+		UserGroupRole userGroupRole, long userId, long groupId,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_USERGROUPROLE_WHERE);
+
+		query.append(_FINDER_COLUMN_U_G_USERID_2);
+
+		query.append(_FINDER_COLUMN_U_G_GROUPID_2);
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+
+			query.append(WHERE_LIMIT_2);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(userId);
+
+		qPos.add(groupId);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(userGroupRole);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<UserGroupRole> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
 		}
 	}
 
@@ -1502,52 +1786,20 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 		throws NoSuchUserGroupRoleException, SystemException {
 		UserGroupRole userGroupRole = findByPrimaryKey(userGroupRolePK);
 
-		int count = countByG_R(groupId, roleId);
-
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(4 +
-						(orderByComparator.getOrderByFields().length * 3));
-			}
-			else {
-				query = new StringBundler(3);
-			}
-
-			query.append(_SQL_SELECT_USERGROUPROLE_WHERE);
-
-			query.append(_FINDER_COLUMN_G_R_GROUPID_2);
-
-			query.append(_FINDER_COLUMN_G_R_ROLEID_2);
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-
-			String sql = query.toString();
-
-			Query q = session.createQuery(sql);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(groupId);
-
-			qPos.add(roleId);
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
-					orderByComparator, userGroupRole);
-
 			UserGroupRole[] array = new UserGroupRoleImpl[3];
 
-			array[0] = (UserGroupRole)objArray[0];
-			array[1] = (UserGroupRole)objArray[1];
-			array[2] = (UserGroupRole)objArray[2];
+			array[0] = getByG_R_PrevAndNext(session, userGroupRole, groupId,
+					roleId, orderByComparator, true);
+
+			array[1] = userGroupRole;
+
+			array[2] = getByG_R_PrevAndNext(session, userGroupRole, groupId,
+					roleId, orderByComparator, false);
 
 			return array;
 		}
@@ -1556,6 +1808,109 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 		}
 		finally {
 			closeSession(session);
+		}
+	}
+
+	protected UserGroupRole getByG_R_PrevAndNext(Session session,
+		UserGroupRole userGroupRole, long groupId, long roleId,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_USERGROUPROLE_WHERE);
+
+		query.append(_FINDER_COLUMN_G_R_GROUPID_2);
+
+		query.append(_FINDER_COLUMN_G_R_ROLEID_2);
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+
+			query.append(WHERE_LIMIT_2);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(groupId);
+
+		qPos.add(roleId);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(userGroupRole);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<UserGroupRole> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
 		}
 	}
 

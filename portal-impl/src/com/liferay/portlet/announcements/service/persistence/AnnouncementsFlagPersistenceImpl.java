@@ -558,52 +558,20 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 		throws NoSuchFlagException, SystemException {
 		AnnouncementsFlag announcementsFlag = findByPrimaryKey(flagId);
 
-		int count = countByEntryId(entryId);
-
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(3 +
-						(orderByComparator.getOrderByFields().length * 3));
-			}
-			else {
-				query = new StringBundler(3);
-			}
-
-			query.append(_SQL_SELECT_ANNOUNCEMENTSFLAG_WHERE);
-
-			query.append(_FINDER_COLUMN_ENTRYID_ENTRYID_2);
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-
-			else {
-				query.append(AnnouncementsFlagModelImpl.ORDER_BY_JPQL);
-			}
-
-			String sql = query.toString();
-
-			Query q = session.createQuery(sql);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(entryId);
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
-					orderByComparator, announcementsFlag);
-
 			AnnouncementsFlag[] array = new AnnouncementsFlagImpl[3];
 
-			array[0] = (AnnouncementsFlag)objArray[0];
-			array[1] = (AnnouncementsFlag)objArray[1];
-			array[2] = (AnnouncementsFlag)objArray[2];
+			array[0] = getByEntryId_PrevAndNext(session, announcementsFlag,
+					entryId, orderByComparator, true);
+
+			array[1] = announcementsFlag;
+
+			array[2] = getByEntryId_PrevAndNext(session, announcementsFlag,
+					entryId, orderByComparator, false);
 
 			return array;
 		}
@@ -612,6 +580,109 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 		}
 		finally {
 			closeSession(session);
+		}
+	}
+
+	protected AnnouncementsFlag getByEntryId_PrevAndNext(Session session,
+		AnnouncementsFlag announcementsFlag, long entryId,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_ANNOUNCEMENTSFLAG_WHERE);
+
+		query.append(_FINDER_COLUMN_ENTRYID_ENTRYID_2);
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+
+			query.append(WHERE_LIMIT_2);
+		}
+
+		else {
+			query.append(AnnouncementsFlagModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(entryId);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(announcementsFlag);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<AnnouncementsFlag> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
 		}
 	}
 

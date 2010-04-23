@@ -627,52 +627,20 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 		throws NoSuchReviewException, SystemException {
 		TasksReview tasksReview = findByPrimaryKey(reviewId);
 
-		int count = countByUserId(userId);
-
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(3 +
-						(orderByComparator.getOrderByFields().length * 3));
-			}
-			else {
-				query = new StringBundler(3);
-			}
-
-			query.append(_SQL_SELECT_TASKSREVIEW_WHERE);
-
-			query.append(_FINDER_COLUMN_USERID_USERID_2);
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-
-			else {
-				query.append(TasksReviewModelImpl.ORDER_BY_JPQL);
-			}
-
-			String sql = query.toString();
-
-			Query q = session.createQuery(sql);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(userId);
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
-					orderByComparator, tasksReview);
-
 			TasksReview[] array = new TasksReviewImpl[3];
 
-			array[0] = (TasksReview)objArray[0];
-			array[1] = (TasksReview)objArray[1];
-			array[2] = (TasksReview)objArray[2];
+			array[0] = getByUserId_PrevAndNext(session, tasksReview, userId,
+					orderByComparator, true);
+
+			array[1] = tasksReview;
+
+			array[2] = getByUserId_PrevAndNext(session, tasksReview, userId,
+					orderByComparator, false);
 
 			return array;
 		}
@@ -681,6 +649,109 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 		}
 		finally {
 			closeSession(session);
+		}
+	}
+
+	protected TasksReview getByUserId_PrevAndNext(Session session,
+		TasksReview tasksReview, long userId,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_TASKSREVIEW_WHERE);
+
+		query.append(_FINDER_COLUMN_USERID_USERID_2);
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+
+			query.append(WHERE_LIMIT_2);
+		}
+
+		else {
+			query.append(TasksReviewModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(userId);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(tasksReview);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<TasksReview> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
 		}
 	}
 
@@ -865,52 +936,20 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 		throws NoSuchReviewException, SystemException {
 		TasksReview tasksReview = findByPrimaryKey(reviewId);
 
-		int count = countByProposalId(proposalId);
-
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(3 +
-						(orderByComparator.getOrderByFields().length * 3));
-			}
-			else {
-				query = new StringBundler(3);
-			}
-
-			query.append(_SQL_SELECT_TASKSREVIEW_WHERE);
-
-			query.append(_FINDER_COLUMN_PROPOSALID_PROPOSALID_2);
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-
-			else {
-				query.append(TasksReviewModelImpl.ORDER_BY_JPQL);
-			}
-
-			String sql = query.toString();
-
-			Query q = session.createQuery(sql);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(proposalId);
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
-					orderByComparator, tasksReview);
-
 			TasksReview[] array = new TasksReviewImpl[3];
 
-			array[0] = (TasksReview)objArray[0];
-			array[1] = (TasksReview)objArray[1];
-			array[2] = (TasksReview)objArray[2];
+			array[0] = getByProposalId_PrevAndNext(session, tasksReview,
+					proposalId, orderByComparator, true);
+
+			array[1] = tasksReview;
+
+			array[2] = getByProposalId_PrevAndNext(session, tasksReview,
+					proposalId, orderByComparator, false);
 
 			return array;
 		}
@@ -919,6 +958,109 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 		}
 		finally {
 			closeSession(session);
+		}
+	}
+
+	protected TasksReview getByProposalId_PrevAndNext(Session session,
+		TasksReview tasksReview, long proposalId,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_TASKSREVIEW_WHERE);
+
+		query.append(_FINDER_COLUMN_PROPOSALID_PROPOSALID_2);
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+
+			query.append(WHERE_LIMIT_2);
+		}
+
+		else {
+			query.append(TasksReviewModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(proposalId);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(tasksReview);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<TasksReview> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
 		}
 	}
 
@@ -1236,56 +1378,20 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 		throws NoSuchReviewException, SystemException {
 		TasksReview tasksReview = findByPrimaryKey(reviewId);
 
-		int count = countByP_S(proposalId, stage);
-
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(4 +
-						(orderByComparator.getOrderByFields().length * 3));
-			}
-			else {
-				query = new StringBundler(4);
-			}
-
-			query.append(_SQL_SELECT_TASKSREVIEW_WHERE);
-
-			query.append(_FINDER_COLUMN_P_S_PROPOSALID_2);
-
-			query.append(_FINDER_COLUMN_P_S_STAGE_2);
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-
-			else {
-				query.append(TasksReviewModelImpl.ORDER_BY_JPQL);
-			}
-
-			String sql = query.toString();
-
-			Query q = session.createQuery(sql);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(proposalId);
-
-			qPos.add(stage);
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
-					orderByComparator, tasksReview);
-
 			TasksReview[] array = new TasksReviewImpl[3];
 
-			array[0] = (TasksReview)objArray[0];
-			array[1] = (TasksReview)objArray[1];
-			array[2] = (TasksReview)objArray[2];
+			array[0] = getByP_S_PrevAndNext(session, tasksReview, proposalId,
+					stage, orderByComparator, true);
+
+			array[1] = tasksReview;
+
+			array[2] = getByP_S_PrevAndNext(session, tasksReview, proposalId,
+					stage, orderByComparator, false);
 
 			return array;
 		}
@@ -1294,6 +1400,113 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 		}
 		finally {
 			closeSession(session);
+		}
+	}
+
+	protected TasksReview getByP_S_PrevAndNext(Session session,
+		TasksReview tasksReview, long proposalId, int stage,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_TASKSREVIEW_WHERE);
+
+		query.append(_FINDER_COLUMN_P_S_PROPOSALID_2);
+
+		query.append(_FINDER_COLUMN_P_S_STAGE_2);
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+
+			query.append(WHERE_LIMIT_2);
+		}
+
+		else {
+			query.append(TasksReviewModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(proposalId);
+
+		qPos.add(stage);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(tasksReview);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<TasksReview> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
 		}
 	}
 
@@ -1512,60 +1725,20 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 		throws NoSuchReviewException, SystemException {
 		TasksReview tasksReview = findByPrimaryKey(reviewId);
 
-		int count = countByP_S_C(proposalId, stage, completed);
-
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(5 +
-						(orderByComparator.getOrderByFields().length * 3));
-			}
-			else {
-				query = new StringBundler(5);
-			}
-
-			query.append(_SQL_SELECT_TASKSREVIEW_WHERE);
-
-			query.append(_FINDER_COLUMN_P_S_C_PROPOSALID_2);
-
-			query.append(_FINDER_COLUMN_P_S_C_STAGE_2);
-
-			query.append(_FINDER_COLUMN_P_S_C_COMPLETED_2);
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-
-			else {
-				query.append(TasksReviewModelImpl.ORDER_BY_JPQL);
-			}
-
-			String sql = query.toString();
-
-			Query q = session.createQuery(sql);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(proposalId);
-
-			qPos.add(stage);
-
-			qPos.add(completed);
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
-					orderByComparator, tasksReview);
-
 			TasksReview[] array = new TasksReviewImpl[3];
 
-			array[0] = (TasksReview)objArray[0];
-			array[1] = (TasksReview)objArray[1];
-			array[2] = (TasksReview)objArray[2];
+			array[0] = getByP_S_C_PrevAndNext(session, tasksReview, proposalId,
+					stage, completed, orderByComparator, true);
+
+			array[1] = tasksReview;
+
+			array[2] = getByP_S_C_PrevAndNext(session, tasksReview, proposalId,
+					stage, completed, orderByComparator, false);
 
 			return array;
 		}
@@ -1574,6 +1747,117 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 		}
 		finally {
 			closeSession(session);
+		}
+	}
+
+	protected TasksReview getByP_S_C_PrevAndNext(Session session,
+		TasksReview tasksReview, long proposalId, int stage, boolean completed,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_TASKSREVIEW_WHERE);
+
+		query.append(_FINDER_COLUMN_P_S_C_PROPOSALID_2);
+
+		query.append(_FINDER_COLUMN_P_S_C_STAGE_2);
+
+		query.append(_FINDER_COLUMN_P_S_C_COMPLETED_2);
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+
+			query.append(WHERE_LIMIT_2);
+		}
+
+		else {
+			query.append(TasksReviewModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(proposalId);
+
+		qPos.add(stage);
+
+		qPos.add(completed);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(tasksReview);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<TasksReview> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
 		}
 	}
 
@@ -1808,64 +2092,22 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 		throws NoSuchReviewException, SystemException {
 		TasksReview tasksReview = findByPrimaryKey(reviewId);
 
-		int count = countByP_S_C_R(proposalId, stage, completed, rejected);
-
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(6 +
-						(orderByComparator.getOrderByFields().length * 3));
-			}
-			else {
-				query = new StringBundler(6);
-			}
-
-			query.append(_SQL_SELECT_TASKSREVIEW_WHERE);
-
-			query.append(_FINDER_COLUMN_P_S_C_R_PROPOSALID_2);
-
-			query.append(_FINDER_COLUMN_P_S_C_R_STAGE_2);
-
-			query.append(_FINDER_COLUMN_P_S_C_R_COMPLETED_2);
-
-			query.append(_FINDER_COLUMN_P_S_C_R_REJECTED_2);
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-
-			else {
-				query.append(TasksReviewModelImpl.ORDER_BY_JPQL);
-			}
-
-			String sql = query.toString();
-
-			Query q = session.createQuery(sql);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(proposalId);
-
-			qPos.add(stage);
-
-			qPos.add(completed);
-
-			qPos.add(rejected);
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
-					orderByComparator, tasksReview);
-
 			TasksReview[] array = new TasksReviewImpl[3];
 
-			array[0] = (TasksReview)objArray[0];
-			array[1] = (TasksReview)objArray[1];
-			array[2] = (TasksReview)objArray[2];
+			array[0] = getByP_S_C_R_PrevAndNext(session, tasksReview,
+					proposalId, stage, completed, rejected, orderByComparator,
+					true);
+
+			array[1] = tasksReview;
+
+			array[2] = getByP_S_C_R_PrevAndNext(session, tasksReview,
+					proposalId, stage, completed, rejected, orderByComparator,
+					false);
 
 			return array;
 		}
@@ -1874,6 +2116,121 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 		}
 		finally {
 			closeSession(session);
+		}
+	}
+
+	protected TasksReview getByP_S_C_R_PrevAndNext(Session session,
+		TasksReview tasksReview, long proposalId, int stage, boolean completed,
+		boolean rejected, OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_TASKSREVIEW_WHERE);
+
+		query.append(_FINDER_COLUMN_P_S_C_R_PROPOSALID_2);
+
+		query.append(_FINDER_COLUMN_P_S_C_R_STAGE_2);
+
+		query.append(_FINDER_COLUMN_P_S_C_R_COMPLETED_2);
+
+		query.append(_FINDER_COLUMN_P_S_C_R_REJECTED_2);
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+
+			query.append(WHERE_LIMIT_2);
+		}
+
+		else {
+			query.append(TasksReviewModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(proposalId);
+
+		qPos.add(stage);
+
+		qPos.add(completed);
+
+		qPos.add(rejected);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(tasksReview);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<TasksReview> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
 		}
 	}
 

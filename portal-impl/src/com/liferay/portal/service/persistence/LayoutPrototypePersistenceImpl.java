@@ -509,48 +509,20 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 		throws NoSuchLayoutPrototypeException, SystemException {
 		LayoutPrototype layoutPrototype = findByPrimaryKey(layoutPrototypeId);
 
-		int count = countByCompanyId(companyId);
-
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(3 +
-						(orderByComparator.getOrderByFields().length * 3));
-			}
-			else {
-				query = new StringBundler(2);
-			}
-
-			query.append(_SQL_SELECT_LAYOUTPROTOTYPE_WHERE);
-
-			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-
-			String sql = query.toString();
-
-			Query q = session.createQuery(sql);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(companyId);
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
-					orderByComparator, layoutPrototype);
-
 			LayoutPrototype[] array = new LayoutPrototypeImpl[3];
 
-			array[0] = (LayoutPrototype)objArray[0];
-			array[1] = (LayoutPrototype)objArray[1];
-			array[2] = (LayoutPrototype)objArray[2];
+			array[0] = getByCompanyId_PrevAndNext(session, layoutPrototype,
+					companyId, orderByComparator, true);
+
+			array[1] = layoutPrototype;
+
+			array[2] = getByCompanyId_PrevAndNext(session, layoutPrototype,
+					companyId, orderByComparator, false);
 
 			return array;
 		}
@@ -559,6 +531,105 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 		}
 		finally {
 			closeSession(session);
+		}
+	}
+
+	protected LayoutPrototype getByCompanyId_PrevAndNext(Session session,
+		LayoutPrototype layoutPrototype, long companyId,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_LAYOUTPROTOTYPE_WHERE);
+
+		query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+
+			query.append(WHERE_LIMIT_2);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(companyId);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(layoutPrototype);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<LayoutPrototype> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
 		}
 	}
 
@@ -754,52 +825,20 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 		throws NoSuchLayoutPrototypeException, SystemException {
 		LayoutPrototype layoutPrototype = findByPrimaryKey(layoutPrototypeId);
 
-		int count = countByC_A(companyId, active);
-
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(4 +
-						(orderByComparator.getOrderByFields().length * 3));
-			}
-			else {
-				query = new StringBundler(3);
-			}
-
-			query.append(_SQL_SELECT_LAYOUTPROTOTYPE_WHERE);
-
-			query.append(_FINDER_COLUMN_C_A_COMPANYID_2);
-
-			query.append(_FINDER_COLUMN_C_A_ACTIVE_2);
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-
-			String sql = query.toString();
-
-			Query q = session.createQuery(sql);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(companyId);
-
-			qPos.add(active);
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
-					orderByComparator, layoutPrototype);
-
 			LayoutPrototype[] array = new LayoutPrototypeImpl[3];
 
-			array[0] = (LayoutPrototype)objArray[0];
-			array[1] = (LayoutPrototype)objArray[1];
-			array[2] = (LayoutPrototype)objArray[2];
+			array[0] = getByC_A_PrevAndNext(session, layoutPrototype,
+					companyId, active, orderByComparator, true);
+
+			array[1] = layoutPrototype;
+
+			array[2] = getByC_A_PrevAndNext(session, layoutPrototype,
+					companyId, active, orderByComparator, false);
 
 			return array;
 		}
@@ -808,6 +847,109 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 		}
 		finally {
 			closeSession(session);
+		}
+	}
+
+	protected LayoutPrototype getByC_A_PrevAndNext(Session session,
+		LayoutPrototype layoutPrototype, long companyId, boolean active,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_LAYOUTPROTOTYPE_WHERE);
+
+		query.append(_FINDER_COLUMN_C_A_COMPANYID_2);
+
+		query.append(_FINDER_COLUMN_C_A_ACTIVE_2);
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+
+			query.append(WHERE_LIMIT_2);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(companyId);
+
+		qPos.add(active);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(layoutPrototype);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<LayoutPrototype> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
 		}
 	}
 

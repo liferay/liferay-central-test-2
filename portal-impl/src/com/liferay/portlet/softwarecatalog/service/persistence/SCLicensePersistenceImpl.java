@@ -530,52 +530,20 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 		throws NoSuchLicenseException, SystemException {
 		SCLicense scLicense = findByPrimaryKey(licenseId);
 
-		int count = countByActive(active);
-
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(3 +
-						(orderByComparator.getOrderByFields().length * 3));
-			}
-			else {
-				query = new StringBundler(3);
-			}
-
-			query.append(_SQL_SELECT_SCLICENSE_WHERE);
-
-			query.append(_FINDER_COLUMN_ACTIVE_ACTIVE_2);
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-
-			else {
-				query.append(SCLicenseModelImpl.ORDER_BY_JPQL);
-			}
-
-			String sql = query.toString();
-
-			Query q = session.createQuery(sql);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(active);
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
-					orderByComparator, scLicense);
-
 			SCLicense[] array = new SCLicenseImpl[3];
 
-			array[0] = (SCLicense)objArray[0];
-			array[1] = (SCLicense)objArray[1];
-			array[2] = (SCLicense)objArray[2];
+			array[0] = getByActive_PrevAndNext(session, scLicense, active,
+					orderByComparator, true);
+
+			array[1] = scLicense;
+
+			array[2] = getByActive_PrevAndNext(session, scLicense, active,
+					orderByComparator, false);
 
 			return array;
 		}
@@ -584,6 +552,109 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 		}
 		finally {
 			closeSession(session);
+		}
+	}
+
+	protected SCLicense getByActive_PrevAndNext(Session session,
+		SCLicense scLicense, boolean active,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_SCLICENSE_WHERE);
+
+		query.append(_FINDER_COLUMN_ACTIVE_ACTIVE_2);
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+
+			query.append(WHERE_LIMIT_2);
+		}
+
+		else {
+			query.append(SCLicenseModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(active);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(scLicense);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<SCLicense> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
 		}
 	}
 
@@ -785,56 +856,20 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 		throws NoSuchLicenseException, SystemException {
 		SCLicense scLicense = findByPrimaryKey(licenseId);
 
-		int count = countByA_R(active, recommended);
-
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(4 +
-						(orderByComparator.getOrderByFields().length * 3));
-			}
-			else {
-				query = new StringBundler(4);
-			}
-
-			query.append(_SQL_SELECT_SCLICENSE_WHERE);
-
-			query.append(_FINDER_COLUMN_A_R_ACTIVE_2);
-
-			query.append(_FINDER_COLUMN_A_R_RECOMMENDED_2);
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-
-			else {
-				query.append(SCLicenseModelImpl.ORDER_BY_JPQL);
-			}
-
-			String sql = query.toString();
-
-			Query q = session.createQuery(sql);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(active);
-
-			qPos.add(recommended);
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
-					orderByComparator, scLicense);
-
 			SCLicense[] array = new SCLicenseImpl[3];
 
-			array[0] = (SCLicense)objArray[0];
-			array[1] = (SCLicense)objArray[1];
-			array[2] = (SCLicense)objArray[2];
+			array[0] = getByA_R_PrevAndNext(session, scLicense, active,
+					recommended, orderByComparator, true);
+
+			array[1] = scLicense;
+
+			array[2] = getByA_R_PrevAndNext(session, scLicense, active,
+					recommended, orderByComparator, false);
 
 			return array;
 		}
@@ -843,6 +878,113 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 		}
 		finally {
 			closeSession(session);
+		}
+	}
+
+	protected SCLicense getByA_R_PrevAndNext(Session session,
+		SCLicense scLicense, boolean active, boolean recommended,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_SCLICENSE_WHERE);
+
+		query.append(_FINDER_COLUMN_A_R_ACTIVE_2);
+
+		query.append(_FINDER_COLUMN_A_R_RECOMMENDED_2);
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+
+			query.append(WHERE_LIMIT_2);
+		}
+
+		else {
+			query.append(SCLicenseModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(active);
+
+		qPos.add(recommended);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(scLicense);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<SCLicense> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
 		}
 	}
 

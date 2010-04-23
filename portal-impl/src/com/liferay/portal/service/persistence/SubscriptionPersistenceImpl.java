@@ -590,48 +590,20 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 		throws NoSuchSubscriptionException, SystemException {
 		Subscription subscription = findByPrimaryKey(subscriptionId);
 
-		int count = countByUserId(userId);
-
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(3 +
-						(orderByComparator.getOrderByFields().length * 3));
-			}
-			else {
-				query = new StringBundler(2);
-			}
-
-			query.append(_SQL_SELECT_SUBSCRIPTION_WHERE);
-
-			query.append(_FINDER_COLUMN_USERID_USERID_2);
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-
-			String sql = query.toString();
-
-			Query q = session.createQuery(sql);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(userId);
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
-					orderByComparator, subscription);
-
 			Subscription[] array = new SubscriptionImpl[3];
 
-			array[0] = (Subscription)objArray[0];
-			array[1] = (Subscription)objArray[1];
-			array[2] = (Subscription)objArray[2];
+			array[0] = getByUserId_PrevAndNext(session, subscription, userId,
+					orderByComparator, true);
+
+			array[1] = subscription;
+
+			array[2] = getByUserId_PrevAndNext(session, subscription, userId,
+					orderByComparator, false);
 
 			return array;
 		}
@@ -640,6 +612,105 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 		}
 		finally {
 			closeSession(session);
+		}
+	}
+
+	protected Subscription getByUserId_PrevAndNext(Session session,
+		Subscription subscription, long userId,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_SUBSCRIPTION_WHERE);
+
+		query.append(_FINDER_COLUMN_USERID_USERID_2);
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+
+			query.append(WHERE_LIMIT_2);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(userId);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(subscription);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<Subscription> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
 		}
 	}
 
@@ -835,52 +906,20 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 		throws NoSuchSubscriptionException, SystemException {
 		Subscription subscription = findByPrimaryKey(subscriptionId);
 
-		int count = countByU_C(userId, classNameId);
-
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(4 +
-						(orderByComparator.getOrderByFields().length * 3));
-			}
-			else {
-				query = new StringBundler(3);
-			}
-
-			query.append(_SQL_SELECT_SUBSCRIPTION_WHERE);
-
-			query.append(_FINDER_COLUMN_U_C_USERID_2);
-
-			query.append(_FINDER_COLUMN_U_C_CLASSNAMEID_2);
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-
-			String sql = query.toString();
-
-			Query q = session.createQuery(sql);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(userId);
-
-			qPos.add(classNameId);
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
-					orderByComparator, subscription);
-
 			Subscription[] array = new SubscriptionImpl[3];
 
-			array[0] = (Subscription)objArray[0];
-			array[1] = (Subscription)objArray[1];
-			array[2] = (Subscription)objArray[2];
+			array[0] = getByU_C_PrevAndNext(session, subscription, userId,
+					classNameId, orderByComparator, true);
+
+			array[1] = subscription;
+
+			array[2] = getByU_C_PrevAndNext(session, subscription, userId,
+					classNameId, orderByComparator, false);
 
 			return array;
 		}
@@ -889,6 +928,109 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 		}
 		finally {
 			closeSession(session);
+		}
+	}
+
+	protected Subscription getByU_C_PrevAndNext(Session session,
+		Subscription subscription, long userId, long classNameId,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_SUBSCRIPTION_WHERE);
+
+		query.append(_FINDER_COLUMN_U_C_USERID_2);
+
+		query.append(_FINDER_COLUMN_U_C_CLASSNAMEID_2);
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+
+			query.append(WHERE_LIMIT_2);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(userId);
+
+		qPos.add(classNameId);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(subscription);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<Subscription> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
 		}
 	}
 
@@ -1099,56 +1241,20 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 		throws NoSuchSubscriptionException, SystemException {
 		Subscription subscription = findByPrimaryKey(subscriptionId);
 
-		int count = countByC_C_C(companyId, classNameId, classPK);
-
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(5 +
-						(orderByComparator.getOrderByFields().length * 3));
-			}
-			else {
-				query = new StringBundler(4);
-			}
-
-			query.append(_SQL_SELECT_SUBSCRIPTION_WHERE);
-
-			query.append(_FINDER_COLUMN_C_C_C_COMPANYID_2);
-
-			query.append(_FINDER_COLUMN_C_C_C_CLASSNAMEID_2);
-
-			query.append(_FINDER_COLUMN_C_C_C_CLASSPK_2);
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-
-			String sql = query.toString();
-
-			Query q = session.createQuery(sql);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(companyId);
-
-			qPos.add(classNameId);
-
-			qPos.add(classPK);
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
-					orderByComparator, subscription);
-
 			Subscription[] array = new SubscriptionImpl[3];
 
-			array[0] = (Subscription)objArray[0];
-			array[1] = (Subscription)objArray[1];
-			array[2] = (Subscription)objArray[2];
+			array[0] = getByC_C_C_PrevAndNext(session, subscription, companyId,
+					classNameId, classPK, orderByComparator, true);
+
+			array[1] = subscription;
+
+			array[2] = getByC_C_C_PrevAndNext(session, subscription, companyId,
+					classNameId, classPK, orderByComparator, false);
 
 			return array;
 		}
@@ -1157,6 +1263,113 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 		}
 		finally {
 			closeSession(session);
+		}
+	}
+
+	protected Subscription getByC_C_C_PrevAndNext(Session session,
+		Subscription subscription, long companyId, long classNameId,
+		long classPK, OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_SUBSCRIPTION_WHERE);
+
+		query.append(_FINDER_COLUMN_C_C_C_COMPANYID_2);
+
+		query.append(_FINDER_COLUMN_C_C_C_CLASSNAMEID_2);
+
+		query.append(_FINDER_COLUMN_C_C_C_CLASSPK_2);
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+
+			query.append(WHERE_LIMIT_2);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(companyId);
+
+		qPos.add(classNameId);
+
+		qPos.add(classPK);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(subscription);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<Subscription> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
 		}
 	}
 

@@ -583,52 +583,20 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 		throws NoSuchLinkException, SystemException {
 		AssetLink assetLink = findByPrimaryKey(linkId);
 
-		int count = countByE1(entryId1);
-
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(3 +
-						(orderByComparator.getOrderByFields().length * 3));
-			}
-			else {
-				query = new StringBundler(3);
-			}
-
-			query.append(_SQL_SELECT_ASSETLINK_WHERE);
-
-			query.append(_FINDER_COLUMN_E1_ENTRYID1_2);
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-
-			else {
-				query.append(AssetLinkModelImpl.ORDER_BY_JPQL);
-			}
-
-			String sql = query.toString();
-
-			Query q = session.createQuery(sql);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(entryId1);
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
-					orderByComparator, assetLink);
-
 			AssetLink[] array = new AssetLinkImpl[3];
 
-			array[0] = (AssetLink)objArray[0];
-			array[1] = (AssetLink)objArray[1];
-			array[2] = (AssetLink)objArray[2];
+			array[0] = getByE1_PrevAndNext(session, assetLink, entryId1,
+					orderByComparator, true);
+
+			array[1] = assetLink;
+
+			array[2] = getByE1_PrevAndNext(session, assetLink, entryId1,
+					orderByComparator, false);
 
 			return array;
 		}
@@ -637,6 +605,109 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 		}
 		finally {
 			closeSession(session);
+		}
+	}
+
+	protected AssetLink getByE1_PrevAndNext(Session session,
+		AssetLink assetLink, long entryId1,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_ASSETLINK_WHERE);
+
+		query.append(_FINDER_COLUMN_E1_ENTRYID1_2);
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+
+			query.append(WHERE_LIMIT_2);
+		}
+
+		else {
+			query.append(AssetLinkModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(entryId1);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(assetLink);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<AssetLink> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
 		}
 	}
 
@@ -819,52 +890,20 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 		throws NoSuchLinkException, SystemException {
 		AssetLink assetLink = findByPrimaryKey(linkId);
 
-		int count = countByE2(entryId2);
-
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(3 +
-						(orderByComparator.getOrderByFields().length * 3));
-			}
-			else {
-				query = new StringBundler(3);
-			}
-
-			query.append(_SQL_SELECT_ASSETLINK_WHERE);
-
-			query.append(_FINDER_COLUMN_E2_ENTRYID2_2);
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-
-			else {
-				query.append(AssetLinkModelImpl.ORDER_BY_JPQL);
-			}
-
-			String sql = query.toString();
-
-			Query q = session.createQuery(sql);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(entryId2);
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
-					orderByComparator, assetLink);
-
 			AssetLink[] array = new AssetLinkImpl[3];
 
-			array[0] = (AssetLink)objArray[0];
-			array[1] = (AssetLink)objArray[1];
-			array[2] = (AssetLink)objArray[2];
+			array[0] = getByE2_PrevAndNext(session, assetLink, entryId2,
+					orderByComparator, true);
+
+			array[1] = assetLink;
+
+			array[2] = getByE2_PrevAndNext(session, assetLink, entryId2,
+					orderByComparator, false);
 
 			return array;
 		}
@@ -873,6 +912,109 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 		}
 		finally {
 			closeSession(session);
+		}
+	}
+
+	protected AssetLink getByE2_PrevAndNext(Session session,
+		AssetLink assetLink, long entryId2,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_ASSETLINK_WHERE);
+
+		query.append(_FINDER_COLUMN_E2_ENTRYID2_2);
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+
+			query.append(WHERE_LIMIT_2);
+		}
+
+		else {
+			query.append(AssetLinkModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(entryId2);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(assetLink);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<AssetLink> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
 		}
 	}
 
@@ -1073,56 +1215,20 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 		throws NoSuchLinkException, SystemException {
 		AssetLink assetLink = findByPrimaryKey(linkId);
 
-		int count = countByE_E(entryId1, entryId2);
-
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(4 +
-						(orderByComparator.getOrderByFields().length * 3));
-			}
-			else {
-				query = new StringBundler(4);
-			}
-
-			query.append(_SQL_SELECT_ASSETLINK_WHERE);
-
-			query.append(_FINDER_COLUMN_E_E_ENTRYID1_2);
-
-			query.append(_FINDER_COLUMN_E_E_ENTRYID2_2);
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-
-			else {
-				query.append(AssetLinkModelImpl.ORDER_BY_JPQL);
-			}
-
-			String sql = query.toString();
-
-			Query q = session.createQuery(sql);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(entryId1);
-
-			qPos.add(entryId2);
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
-					orderByComparator, assetLink);
-
 			AssetLink[] array = new AssetLinkImpl[3];
 
-			array[0] = (AssetLink)objArray[0];
-			array[1] = (AssetLink)objArray[1];
-			array[2] = (AssetLink)objArray[2];
+			array[0] = getByE_E_PrevAndNext(session, assetLink, entryId1,
+					entryId2, orderByComparator, true);
+
+			array[1] = assetLink;
+
+			array[2] = getByE_E_PrevAndNext(session, assetLink, entryId1,
+					entryId2, orderByComparator, false);
 
 			return array;
 		}
@@ -1131,6 +1237,113 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 		}
 		finally {
 			closeSession(session);
+		}
+	}
+
+	protected AssetLink getByE_E_PrevAndNext(Session session,
+		AssetLink assetLink, long entryId1, long entryId2,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_ASSETLINK_WHERE);
+
+		query.append(_FINDER_COLUMN_E_E_ENTRYID1_2);
+
+		query.append(_FINDER_COLUMN_E_E_ENTRYID2_2);
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+
+			query.append(WHERE_LIMIT_2);
+		}
+
+		else {
+			query.append(AssetLinkModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(entryId1);
+
+		qPos.add(entryId2);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(assetLink);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<AssetLink> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
 		}
 	}
 
@@ -1329,56 +1542,20 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 		throws NoSuchLinkException, SystemException {
 		AssetLink assetLink = findByPrimaryKey(linkId);
 
-		int count = countByE1_T(entryId1, type);
-
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(4 +
-						(orderByComparator.getOrderByFields().length * 3));
-			}
-			else {
-				query = new StringBundler(4);
-			}
-
-			query.append(_SQL_SELECT_ASSETLINK_WHERE);
-
-			query.append(_FINDER_COLUMN_E1_T_ENTRYID1_2);
-
-			query.append(_FINDER_COLUMN_E1_T_TYPE_2);
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-
-			else {
-				query.append(AssetLinkModelImpl.ORDER_BY_JPQL);
-			}
-
-			String sql = query.toString();
-
-			Query q = session.createQuery(sql);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(entryId1);
-
-			qPos.add(type);
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
-					orderByComparator, assetLink);
-
 			AssetLink[] array = new AssetLinkImpl[3];
 
-			array[0] = (AssetLink)objArray[0];
-			array[1] = (AssetLink)objArray[1];
-			array[2] = (AssetLink)objArray[2];
+			array[0] = getByE1_T_PrevAndNext(session, assetLink, entryId1,
+					type, orderByComparator, true);
+
+			array[1] = assetLink;
+
+			array[2] = getByE1_T_PrevAndNext(session, assetLink, entryId1,
+					type, orderByComparator, false);
 
 			return array;
 		}
@@ -1387,6 +1564,113 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 		}
 		finally {
 			closeSession(session);
+		}
+	}
+
+	protected AssetLink getByE1_T_PrevAndNext(Session session,
+		AssetLink assetLink, long entryId1, int type,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_ASSETLINK_WHERE);
+
+		query.append(_FINDER_COLUMN_E1_T_ENTRYID1_2);
+
+		query.append(_FINDER_COLUMN_E1_T_TYPE_2);
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+
+			query.append(WHERE_LIMIT_2);
+		}
+
+		else {
+			query.append(AssetLinkModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(entryId1);
+
+		qPos.add(type);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(assetLink);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<AssetLink> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
 		}
 	}
 
@@ -1585,56 +1869,20 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 		throws NoSuchLinkException, SystemException {
 		AssetLink assetLink = findByPrimaryKey(linkId);
 
-		int count = countByE2_T(entryId2, type);
-
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(4 +
-						(orderByComparator.getOrderByFields().length * 3));
-			}
-			else {
-				query = new StringBundler(4);
-			}
-
-			query.append(_SQL_SELECT_ASSETLINK_WHERE);
-
-			query.append(_FINDER_COLUMN_E2_T_ENTRYID2_2);
-
-			query.append(_FINDER_COLUMN_E2_T_TYPE_2);
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-
-			else {
-				query.append(AssetLinkModelImpl.ORDER_BY_JPQL);
-			}
-
-			String sql = query.toString();
-
-			Query q = session.createQuery(sql);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(entryId2);
-
-			qPos.add(type);
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
-					orderByComparator, assetLink);
-
 			AssetLink[] array = new AssetLinkImpl[3];
 
-			array[0] = (AssetLink)objArray[0];
-			array[1] = (AssetLink)objArray[1];
-			array[2] = (AssetLink)objArray[2];
+			array[0] = getByE2_T_PrevAndNext(session, assetLink, entryId2,
+					type, orderByComparator, true);
+
+			array[1] = assetLink;
+
+			array[2] = getByE2_T_PrevAndNext(session, assetLink, entryId2,
+					type, orderByComparator, false);
 
 			return array;
 		}
@@ -1643,6 +1891,113 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 		}
 		finally {
 			closeSession(session);
+		}
+	}
+
+	protected AssetLink getByE2_T_PrevAndNext(Session session,
+		AssetLink assetLink, long entryId2, int type,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_ASSETLINK_WHERE);
+
+		query.append(_FINDER_COLUMN_E2_T_ENTRYID2_2);
+
+		query.append(_FINDER_COLUMN_E2_T_TYPE_2);
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+
+			query.append(WHERE_LIMIT_2);
+		}
+
+		else {
+			query.append(AssetLinkModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(entryId2);
+
+		qPos.add(type);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(assetLink);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<AssetLink> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
 		}
 	}
 
@@ -1858,60 +2213,20 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 		throws NoSuchLinkException, SystemException {
 		AssetLink assetLink = findByPrimaryKey(linkId);
 
-		int count = countByE_E_T(entryId1, entryId2, type);
-
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(5 +
-						(orderByComparator.getOrderByFields().length * 3));
-			}
-			else {
-				query = new StringBundler(5);
-			}
-
-			query.append(_SQL_SELECT_ASSETLINK_WHERE);
-
-			query.append(_FINDER_COLUMN_E_E_T_ENTRYID1_2);
-
-			query.append(_FINDER_COLUMN_E_E_T_ENTRYID2_2);
-
-			query.append(_FINDER_COLUMN_E_E_T_TYPE_2);
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-
-			else {
-				query.append(AssetLinkModelImpl.ORDER_BY_JPQL);
-			}
-
-			String sql = query.toString();
-
-			Query q = session.createQuery(sql);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(entryId1);
-
-			qPos.add(entryId2);
-
-			qPos.add(type);
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
-					orderByComparator, assetLink);
-
 			AssetLink[] array = new AssetLinkImpl[3];
 
-			array[0] = (AssetLink)objArray[0];
-			array[1] = (AssetLink)objArray[1];
-			array[2] = (AssetLink)objArray[2];
+			array[0] = getByE_E_T_PrevAndNext(session, assetLink, entryId1,
+					entryId2, type, orderByComparator, true);
+
+			array[1] = assetLink;
+
+			array[2] = getByE_E_T_PrevAndNext(session, assetLink, entryId1,
+					entryId2, type, orderByComparator, false);
 
 			return array;
 		}
@@ -1920,6 +2235,117 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 		}
 		finally {
 			closeSession(session);
+		}
+	}
+
+	protected AssetLink getByE_E_T_PrevAndNext(Session session,
+		AssetLink assetLink, long entryId1, long entryId2, int type,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_ASSETLINK_WHERE);
+
+		query.append(_FINDER_COLUMN_E_E_T_ENTRYID1_2);
+
+		query.append(_FINDER_COLUMN_E_E_T_ENTRYID2_2);
+
+		query.append(_FINDER_COLUMN_E_E_T_TYPE_2);
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+
+			query.append(WHERE_LIMIT_2);
+		}
+
+		else {
+			query.append(AssetLinkModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(entryId1);
+
+		qPos.add(entryId2);
+
+		qPos.add(type);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(assetLink);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<AssetLink> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
 		}
 	}
 

@@ -516,48 +516,20 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 		throws NoSuchUserTrackerException, SystemException {
 		UserTracker userTracker = findByPrimaryKey(userTrackerId);
 
-		int count = countByCompanyId(companyId);
-
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(3 +
-						(orderByComparator.getOrderByFields().length * 3));
-			}
-			else {
-				query = new StringBundler(2);
-			}
-
-			query.append(_SQL_SELECT_USERTRACKER_WHERE);
-
-			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-
-			String sql = query.toString();
-
-			Query q = session.createQuery(sql);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(companyId);
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
-					orderByComparator, userTracker);
-
 			UserTracker[] array = new UserTrackerImpl[3];
 
-			array[0] = (UserTracker)objArray[0];
-			array[1] = (UserTracker)objArray[1];
-			array[2] = (UserTracker)objArray[2];
+			array[0] = getByCompanyId_PrevAndNext(session, userTracker,
+					companyId, orderByComparator, true);
+
+			array[1] = userTracker;
+
+			array[2] = getByCompanyId_PrevAndNext(session, userTracker,
+					companyId, orderByComparator, false);
 
 			return array;
 		}
@@ -566,6 +538,105 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 		}
 		finally {
 			closeSession(session);
+		}
+	}
+
+	protected UserTracker getByCompanyId_PrevAndNext(Session session,
+		UserTracker userTracker, long companyId,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_USERTRACKER_WHERE);
+
+		query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+
+			query.append(WHERE_LIMIT_2);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(companyId);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(userTracker);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<UserTracker> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
 		}
 	}
 
@@ -743,48 +814,20 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 		throws NoSuchUserTrackerException, SystemException {
 		UserTracker userTracker = findByPrimaryKey(userTrackerId);
 
-		int count = countByUserId(userId);
-
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(3 +
-						(orderByComparator.getOrderByFields().length * 3));
-			}
-			else {
-				query = new StringBundler(2);
-			}
-
-			query.append(_SQL_SELECT_USERTRACKER_WHERE);
-
-			query.append(_FINDER_COLUMN_USERID_USERID_2);
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-
-			String sql = query.toString();
-
-			Query q = session.createQuery(sql);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(userId);
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
-					orderByComparator, userTracker);
-
 			UserTracker[] array = new UserTrackerImpl[3];
 
-			array[0] = (UserTracker)objArray[0];
-			array[1] = (UserTracker)objArray[1];
-			array[2] = (UserTracker)objArray[2];
+			array[0] = getByUserId_PrevAndNext(session, userTracker, userId,
+					orderByComparator, true);
+
+			array[1] = userTracker;
+
+			array[2] = getByUserId_PrevAndNext(session, userTracker, userId,
+					orderByComparator, false);
 
 			return array;
 		}
@@ -793,6 +836,105 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 		}
 		finally {
 			closeSession(session);
+		}
+	}
+
+	protected UserTracker getByUserId_PrevAndNext(Session session,
+		UserTracker userTracker, long userId,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_USERTRACKER_WHERE);
+
+		query.append(_FINDER_COLUMN_USERID_USERID_2);
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+
+			query.append(WHERE_LIMIT_2);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(userId);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(userTracker);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<UserTracker> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
 		}
 	}
 
@@ -995,60 +1137,20 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 		throws NoSuchUserTrackerException, SystemException {
 		UserTracker userTracker = findByPrimaryKey(userTrackerId);
 
-		int count = countBySessionId(sessionId);
-
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(3 +
-						(orderByComparator.getOrderByFields().length * 3));
-			}
-			else {
-				query = new StringBundler(2);
-			}
-
-			query.append(_SQL_SELECT_USERTRACKER_WHERE);
-
-			if (sessionId == null) {
-				query.append(_FINDER_COLUMN_SESSIONID_SESSIONID_1);
-			}
-			else {
-				if (sessionId.equals(StringPool.BLANK)) {
-					query.append(_FINDER_COLUMN_SESSIONID_SESSIONID_3);
-				}
-				else {
-					query.append(_FINDER_COLUMN_SESSIONID_SESSIONID_2);
-				}
-			}
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-
-			String sql = query.toString();
-
-			Query q = session.createQuery(sql);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			if (sessionId != null) {
-				qPos.add(sessionId);
-			}
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
-					orderByComparator, userTracker);
-
 			UserTracker[] array = new UserTrackerImpl[3];
 
-			array[0] = (UserTracker)objArray[0];
-			array[1] = (UserTracker)objArray[1];
-			array[2] = (UserTracker)objArray[2];
+			array[0] = getBySessionId_PrevAndNext(session, userTracker,
+					sessionId, orderByComparator, true);
+
+			array[1] = userTracker;
+
+			array[2] = getBySessionId_PrevAndNext(session, userTracker,
+					sessionId, orderByComparator, false);
 
 			return array;
 		}
@@ -1057,6 +1159,117 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 		}
 		finally {
 			closeSession(session);
+		}
+	}
+
+	protected UserTracker getBySessionId_PrevAndNext(Session session,
+		UserTracker userTracker, String sessionId,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_USERTRACKER_WHERE);
+
+		if (sessionId == null) {
+			query.append(_FINDER_COLUMN_SESSIONID_SESSIONID_1);
+		}
+		else {
+			if (sessionId.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_SESSIONID_SESSIONID_3);
+			}
+			else {
+				query.append(_FINDER_COLUMN_SESSIONID_SESSIONID_2);
+			}
+		}
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+
+			query.append(WHERE_LIMIT_2);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		if (sessionId != null) {
+			qPos.add(sessionId);
+		}
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(userTracker);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<UserTracker> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
 		}
 	}
 

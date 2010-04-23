@@ -633,52 +633,20 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 		throws NoSuchOrderException, SystemException {
 		ShoppingOrder shoppingOrder = findByPrimaryKey(orderId);
 
-		int count = countByGroupId(groupId);
-
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(3 +
-						(orderByComparator.getOrderByFields().length * 3));
-			}
-			else {
-				query = new StringBundler(3);
-			}
-
-			query.append(_SQL_SELECT_SHOPPINGORDER_WHERE);
-
-			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-
-			else {
-				query.append(ShoppingOrderModelImpl.ORDER_BY_JPQL);
-			}
-
-			String sql = query.toString();
-
-			Query q = session.createQuery(sql);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(groupId);
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
-					orderByComparator, shoppingOrder);
-
 			ShoppingOrder[] array = new ShoppingOrderImpl[3];
 
-			array[0] = (ShoppingOrder)objArray[0];
-			array[1] = (ShoppingOrder)objArray[1];
-			array[2] = (ShoppingOrder)objArray[2];
+			array[0] = getByGroupId_PrevAndNext(session, shoppingOrder,
+					groupId, orderByComparator, true);
+
+			array[1] = shoppingOrder;
+
+			array[2] = getByGroupId_PrevAndNext(session, shoppingOrder,
+					groupId, orderByComparator, false);
 
 			return array;
 		}
@@ -687,6 +655,109 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 		}
 		finally {
 			closeSession(session);
+		}
+	}
+
+	protected ShoppingOrder getByGroupId_PrevAndNext(Session session,
+		ShoppingOrder shoppingOrder, long groupId,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_SHOPPINGORDER_WHERE);
+
+		query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+
+			query.append(WHERE_LIMIT_2);
+		}
+
+		else {
+			query.append(ShoppingOrderModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(groupId);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(shoppingOrder);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<ShoppingOrder> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
 		}
 	}
 
@@ -1170,72 +1241,20 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 		throws NoSuchOrderException, SystemException {
 		ShoppingOrder shoppingOrder = findByPrimaryKey(orderId);
 
-		int count = countByG_U_PPPS(groupId, userId, ppPaymentStatus);
-
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(5 +
-						(orderByComparator.getOrderByFields().length * 3));
-			}
-			else {
-				query = new StringBundler(5);
-			}
-
-			query.append(_SQL_SELECT_SHOPPINGORDER_WHERE);
-
-			query.append(_FINDER_COLUMN_G_U_PPPS_GROUPID_2);
-
-			query.append(_FINDER_COLUMN_G_U_PPPS_USERID_2);
-
-			if (ppPaymentStatus == null) {
-				query.append(_FINDER_COLUMN_G_U_PPPS_PPPAYMENTSTATUS_1);
-			}
-			else {
-				if (ppPaymentStatus.equals(StringPool.BLANK)) {
-					query.append(_FINDER_COLUMN_G_U_PPPS_PPPAYMENTSTATUS_3);
-				}
-				else {
-					query.append(_FINDER_COLUMN_G_U_PPPS_PPPAYMENTSTATUS_2);
-				}
-			}
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-
-			else {
-				query.append(ShoppingOrderModelImpl.ORDER_BY_JPQL);
-			}
-
-			String sql = query.toString();
-
-			Query q = session.createQuery(sql);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(groupId);
-
-			qPos.add(userId);
-
-			if (ppPaymentStatus != null) {
-				qPos.add(ppPaymentStatus);
-			}
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
-					orderByComparator, shoppingOrder);
-
 			ShoppingOrder[] array = new ShoppingOrderImpl[3];
 
-			array[0] = (ShoppingOrder)objArray[0];
-			array[1] = (ShoppingOrder)objArray[1];
-			array[2] = (ShoppingOrder)objArray[2];
+			array[0] = getByG_U_PPPS_PrevAndNext(session, shoppingOrder,
+					groupId, userId, ppPaymentStatus, orderByComparator, true);
+
+			array[1] = shoppingOrder;
+
+			array[2] = getByG_U_PPPS_PrevAndNext(session, shoppingOrder,
+					groupId, userId, ppPaymentStatus, orderByComparator, false);
 
 			return array;
 		}
@@ -1244,6 +1263,130 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 		}
 		finally {
 			closeSession(session);
+		}
+	}
+
+	protected ShoppingOrder getByG_U_PPPS_PrevAndNext(Session session,
+		ShoppingOrder shoppingOrder, long groupId, long userId,
+		String ppPaymentStatus, OrderByComparator orderByComparator,
+		boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_SHOPPINGORDER_WHERE);
+
+		query.append(_FINDER_COLUMN_G_U_PPPS_GROUPID_2);
+
+		query.append(_FINDER_COLUMN_G_U_PPPS_USERID_2);
+
+		if (ppPaymentStatus == null) {
+			query.append(_FINDER_COLUMN_G_U_PPPS_PPPAYMENTSTATUS_1);
+		}
+		else {
+			if (ppPaymentStatus.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_G_U_PPPS_PPPAYMENTSTATUS_3);
+			}
+			else {
+				query.append(_FINDER_COLUMN_G_U_PPPS_PPPAYMENTSTATUS_2);
+			}
+		}
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+
+			query.append(WHERE_LIMIT_2);
+		}
+
+		else {
+			query.append(ShoppingOrderModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(groupId);
+
+		qPos.add(userId);
+
+		if (ppPaymentStatus != null) {
+			qPos.add(ppPaymentStatus);
+		}
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(shoppingOrder);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<ShoppingOrder> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
 		}
 	}
 

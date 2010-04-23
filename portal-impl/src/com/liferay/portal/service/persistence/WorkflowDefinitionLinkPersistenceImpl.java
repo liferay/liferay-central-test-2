@@ -590,52 +590,20 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 		throws NoSuchWorkflowDefinitionLinkException, SystemException {
 		WorkflowDefinitionLink workflowDefinitionLink = findByPrimaryKey(workflowDefinitionLinkId);
 
-		int count = countByCompanyId(companyId);
-
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(3 +
-						(orderByComparator.getOrderByFields().length * 3));
-			}
-			else {
-				query = new StringBundler(3);
-			}
-
-			query.append(_SQL_SELECT_WORKFLOWDEFINITIONLINK_WHERE);
-
-			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-
-			else {
-				query.append(WorkflowDefinitionLinkModelImpl.ORDER_BY_JPQL);
-			}
-
-			String sql = query.toString();
-
-			Query q = session.createQuery(sql);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(companyId);
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
-					orderByComparator, workflowDefinitionLink);
-
 			WorkflowDefinitionLink[] array = new WorkflowDefinitionLinkImpl[3];
 
-			array[0] = (WorkflowDefinitionLink)objArray[0];
-			array[1] = (WorkflowDefinitionLink)objArray[1];
-			array[2] = (WorkflowDefinitionLink)objArray[2];
+			array[0] = getByCompanyId_PrevAndNext(session,
+					workflowDefinitionLink, companyId, orderByComparator, true);
+
+			array[1] = workflowDefinitionLink;
+
+			array[2] = getByCompanyId_PrevAndNext(session,
+					workflowDefinitionLink, companyId, orderByComparator, false);
 
 			return array;
 		}
@@ -644,6 +612,109 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 		}
 		finally {
 			closeSession(session);
+		}
+	}
+
+	protected WorkflowDefinitionLink getByCompanyId_PrevAndNext(
+		Session session, WorkflowDefinitionLink workflowDefinitionLink,
+		long companyId, OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_WORKFLOWDEFINITIONLINK_WHERE);
+
+		query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+
+			query.append(WHERE_LIMIT_2);
+		}
+
+		else {
+			query.append(WorkflowDefinitionLinkModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(companyId);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(workflowDefinitionLink);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<WorkflowDefinitionLink> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
 		}
 	}
 
@@ -1025,73 +1096,22 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 		throws NoSuchWorkflowDefinitionLinkException, SystemException {
 		WorkflowDefinitionLink workflowDefinitionLink = findByPrimaryKey(workflowDefinitionLinkId);
 
-		int count = countByC_W_W(companyId, workflowDefinitionName,
-				workflowDefinitionVersion);
-
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(5 +
-						(orderByComparator.getOrderByFields().length * 3));
-			}
-			else {
-				query = new StringBundler(5);
-			}
-
-			query.append(_SQL_SELECT_WORKFLOWDEFINITIONLINK_WHERE);
-
-			query.append(_FINDER_COLUMN_C_W_W_COMPANYID_2);
-
-			if (workflowDefinitionName == null) {
-				query.append(_FINDER_COLUMN_C_W_W_WORKFLOWDEFINITIONNAME_1);
-			}
-			else {
-				if (workflowDefinitionName.equals(StringPool.BLANK)) {
-					query.append(_FINDER_COLUMN_C_W_W_WORKFLOWDEFINITIONNAME_3);
-				}
-				else {
-					query.append(_FINDER_COLUMN_C_W_W_WORKFLOWDEFINITIONNAME_2);
-				}
-			}
-
-			query.append(_FINDER_COLUMN_C_W_W_WORKFLOWDEFINITIONVERSION_2);
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-
-			else {
-				query.append(WorkflowDefinitionLinkModelImpl.ORDER_BY_JPQL);
-			}
-
-			String sql = query.toString();
-
-			Query q = session.createQuery(sql);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(companyId);
-
-			if (workflowDefinitionName != null) {
-				qPos.add(workflowDefinitionName);
-			}
-
-			qPos.add(workflowDefinitionVersion);
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
-					orderByComparator, workflowDefinitionLink);
-
 			WorkflowDefinitionLink[] array = new WorkflowDefinitionLinkImpl[3];
 
-			array[0] = (WorkflowDefinitionLink)objArray[0];
-			array[1] = (WorkflowDefinitionLink)objArray[1];
-			array[2] = (WorkflowDefinitionLink)objArray[2];
+			array[0] = getByC_W_W_PrevAndNext(session, workflowDefinitionLink,
+					companyId, workflowDefinitionName,
+					workflowDefinitionVersion, orderByComparator, true);
+
+			array[1] = workflowDefinitionLink;
+
+			array[2] = getByC_W_W_PrevAndNext(session, workflowDefinitionLink,
+					companyId, workflowDefinitionName,
+					workflowDefinitionVersion, orderByComparator, false);
 
 			return array;
 		}
@@ -1100,6 +1120,130 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 		}
 		finally {
 			closeSession(session);
+		}
+	}
+
+	protected WorkflowDefinitionLink getByC_W_W_PrevAndNext(Session session,
+		WorkflowDefinitionLink workflowDefinitionLink, long companyId,
+		String workflowDefinitionName, int workflowDefinitionVersion,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_WORKFLOWDEFINITIONLINK_WHERE);
+
+		query.append(_FINDER_COLUMN_C_W_W_COMPANYID_2);
+
+		if (workflowDefinitionName == null) {
+			query.append(_FINDER_COLUMN_C_W_W_WORKFLOWDEFINITIONNAME_1);
+		}
+		else {
+			if (workflowDefinitionName.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_C_W_W_WORKFLOWDEFINITIONNAME_3);
+			}
+			else {
+				query.append(_FINDER_COLUMN_C_W_W_WORKFLOWDEFINITIONNAME_2);
+			}
+		}
+
+		query.append(_FINDER_COLUMN_C_W_W_WORKFLOWDEFINITIONVERSION_2);
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+
+			query.append(WHERE_LIMIT_2);
+		}
+
+		else {
+			query.append(WorkflowDefinitionLinkModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(companyId);
+
+		if (workflowDefinitionName != null) {
+			qPos.add(workflowDefinitionName);
+		}
+
+		qPos.add(workflowDefinitionVersion);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(workflowDefinitionLink);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<WorkflowDefinitionLink> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
 		}
 	}
 

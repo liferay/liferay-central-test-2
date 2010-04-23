@@ -569,64 +569,20 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 		throws NoSuchResourceActionException, SystemException {
 		ResourceAction resourceAction = findByPrimaryKey(resourceActionId);
 
-		int count = countByName(name);
-
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(3 +
-						(orderByComparator.getOrderByFields().length * 3));
-			}
-			else {
-				query = new StringBundler(3);
-			}
-
-			query.append(_SQL_SELECT_RESOURCEACTION_WHERE);
-
-			if (name == null) {
-				query.append(_FINDER_COLUMN_NAME_NAME_1);
-			}
-			else {
-				if (name.equals(StringPool.BLANK)) {
-					query.append(_FINDER_COLUMN_NAME_NAME_3);
-				}
-				else {
-					query.append(_FINDER_COLUMN_NAME_NAME_2);
-				}
-			}
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-
-			else {
-				query.append(ResourceActionModelImpl.ORDER_BY_JPQL);
-			}
-
-			String sql = query.toString();
-
-			Query q = session.createQuery(sql);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			if (name != null) {
-				qPos.add(name);
-			}
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
-					orderByComparator, resourceAction);
-
 			ResourceAction[] array = new ResourceActionImpl[3];
 
-			array[0] = (ResourceAction)objArray[0];
-			array[1] = (ResourceAction)objArray[1];
-			array[2] = (ResourceAction)objArray[2];
+			array[0] = getByName_PrevAndNext(session, resourceAction, name,
+					orderByComparator, true);
+
+			array[1] = resourceAction;
+
+			array[2] = getByName_PrevAndNext(session, resourceAction, name,
+					orderByComparator, false);
 
 			return array;
 		}
@@ -635,6 +591,121 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 		}
 		finally {
 			closeSession(session);
+		}
+	}
+
+	protected ResourceAction getByName_PrevAndNext(Session session,
+		ResourceAction resourceAction, String name,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_RESOURCEACTION_WHERE);
+
+		if (name == null) {
+			query.append(_FINDER_COLUMN_NAME_NAME_1);
+		}
+		else {
+			if (name.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_NAME_NAME_3);
+			}
+			else {
+				query.append(_FINDER_COLUMN_NAME_NAME_2);
+			}
+		}
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+
+			query.append(WHERE_LIMIT_2);
+		}
+
+		else {
+			query.append(ResourceActionModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		if (name != null) {
+			qPos.add(name);
+		}
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(resourceAction);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<ResourceAction> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
 		}
 	}
 

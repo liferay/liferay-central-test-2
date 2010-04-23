@@ -505,64 +505,20 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl<ListType>
 		throws NoSuchListTypeException, SystemException {
 		ListType listType = findByPrimaryKey(listTypeId);
 
-		int count = countByType(type);
-
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(3 +
-						(orderByComparator.getOrderByFields().length * 3));
-			}
-			else {
-				query = new StringBundler(3);
-			}
-
-			query.append(_SQL_SELECT_LISTTYPE_WHERE);
-
-			if (type == null) {
-				query.append(_FINDER_COLUMN_TYPE_TYPE_1);
-			}
-			else {
-				if (type.equals(StringPool.BLANK)) {
-					query.append(_FINDER_COLUMN_TYPE_TYPE_3);
-				}
-				else {
-					query.append(_FINDER_COLUMN_TYPE_TYPE_2);
-				}
-			}
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-
-			else {
-				query.append(ListTypeModelImpl.ORDER_BY_JPQL);
-			}
-
-			String sql = query.toString();
-
-			Query q = session.createQuery(sql);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			if (type != null) {
-				qPos.add(type);
-			}
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
-					orderByComparator, listType);
-
 			ListType[] array = new ListTypeImpl[3];
 
-			array[0] = (ListType)objArray[0];
-			array[1] = (ListType)objArray[1];
-			array[2] = (ListType)objArray[2];
+			array[0] = getByType_PrevAndNext(session, listType, type,
+					orderByComparator, true);
+
+			array[1] = listType;
+
+			array[2] = getByType_PrevAndNext(session, listType, type,
+					orderByComparator, false);
 
 			return array;
 		}
@@ -571,6 +527,121 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl<ListType>
 		}
 		finally {
 			closeSession(session);
+		}
+	}
+
+	protected ListType getByType_PrevAndNext(Session session,
+		ListType listType, String type, OrderByComparator orderByComparator,
+		boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_LISTTYPE_WHERE);
+
+		if (type == null) {
+			query.append(_FINDER_COLUMN_TYPE_TYPE_1);
+		}
+		else {
+			if (type.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_TYPE_TYPE_3);
+			}
+			else {
+				query.append(_FINDER_COLUMN_TYPE_TYPE_2);
+			}
+		}
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+
+			query.append(WHERE_LIMIT_2);
+		}
+
+		else {
+			query.append(ListTypeModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		if (type != null) {
+			qPos.add(type);
+		}
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(listType);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<ListType> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
 		}
 	}
 

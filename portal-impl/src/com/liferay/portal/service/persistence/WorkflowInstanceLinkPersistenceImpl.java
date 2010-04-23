@@ -563,64 +563,22 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 		throws NoSuchWorkflowInstanceLinkException, SystemException {
 		WorkflowInstanceLink workflowInstanceLink = findByPrimaryKey(workflowInstanceLinkId);
 
-		int count = countByG_C_C_C(groupId, companyId, classNameId, classPK);
-
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(6 +
-						(orderByComparator.getOrderByFields().length * 3));
-			}
-			else {
-				query = new StringBundler(6);
-			}
-
-			query.append(_SQL_SELECT_WORKFLOWINSTANCELINK_WHERE);
-
-			query.append(_FINDER_COLUMN_G_C_C_C_GROUPID_2);
-
-			query.append(_FINDER_COLUMN_G_C_C_C_COMPANYID_2);
-
-			query.append(_FINDER_COLUMN_G_C_C_C_CLASSNAMEID_2);
-
-			query.append(_FINDER_COLUMN_G_C_C_C_CLASSPK_2);
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-
-			else {
-				query.append(WorkflowInstanceLinkModelImpl.ORDER_BY_JPQL);
-			}
-
-			String sql = query.toString();
-
-			Query q = session.createQuery(sql);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(groupId);
-
-			qPos.add(companyId);
-
-			qPos.add(classNameId);
-
-			qPos.add(classPK);
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
-					orderByComparator, workflowInstanceLink);
-
 			WorkflowInstanceLink[] array = new WorkflowInstanceLinkImpl[3];
 
-			array[0] = (WorkflowInstanceLink)objArray[0];
-			array[1] = (WorkflowInstanceLink)objArray[1];
-			array[2] = (WorkflowInstanceLink)objArray[2];
+			array[0] = getByG_C_C_C_PrevAndNext(session, workflowInstanceLink,
+					groupId, companyId, classNameId, classPK,
+					orderByComparator, true);
+
+			array[1] = workflowInstanceLink;
+
+			array[2] = getByG_C_C_C_PrevAndNext(session, workflowInstanceLink,
+					groupId, companyId, classNameId, classPK,
+					orderByComparator, false);
 
 			return array;
 		}
@@ -629,6 +587,122 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 		}
 		finally {
 			closeSession(session);
+		}
+	}
+
+	protected WorkflowInstanceLink getByG_C_C_C_PrevAndNext(Session session,
+		WorkflowInstanceLink workflowInstanceLink, long groupId,
+		long companyId, long classNameId, long classPK,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_WORKFLOWINSTANCELINK_WHERE);
+
+		query.append(_FINDER_COLUMN_G_C_C_C_GROUPID_2);
+
+		query.append(_FINDER_COLUMN_G_C_C_C_COMPANYID_2);
+
+		query.append(_FINDER_COLUMN_G_C_C_C_CLASSNAMEID_2);
+
+		query.append(_FINDER_COLUMN_G_C_C_C_CLASSPK_2);
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+
+			query.append(WHERE_LIMIT_2);
+		}
+
+		else {
+			query.append(WorkflowInstanceLinkModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(groupId);
+
+		qPos.add(companyId);
+
+		qPos.add(classNameId);
+
+		qPos.add(classPK);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(workflowInstanceLink);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<WorkflowInstanceLink> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
 		}
 	}
 

@@ -799,64 +799,20 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		throws NoSuchPageException, SystemException {
 		WikiPage wikiPage = findByPrimaryKey(pageId);
 
-		int count = countByUuid(uuid);
-
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(3 +
-						(orderByComparator.getOrderByFields().length * 3));
-			}
-			else {
-				query = new StringBundler(3);
-			}
-
-			query.append(_SQL_SELECT_WIKIPAGE_WHERE);
-
-			if (uuid == null) {
-				query.append(_FINDER_COLUMN_UUID_UUID_1);
-			}
-			else {
-				if (uuid.equals(StringPool.BLANK)) {
-					query.append(_FINDER_COLUMN_UUID_UUID_3);
-				}
-				else {
-					query.append(_FINDER_COLUMN_UUID_UUID_2);
-				}
-			}
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-
-			else {
-				query.append(WikiPageModelImpl.ORDER_BY_JPQL);
-			}
-
-			String sql = query.toString();
-
-			Query q = session.createQuery(sql);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			if (uuid != null) {
-				qPos.add(uuid);
-			}
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
-					orderByComparator, wikiPage);
-
 			WikiPage[] array = new WikiPageImpl[3];
 
-			array[0] = (WikiPage)objArray[0];
-			array[1] = (WikiPage)objArray[1];
-			array[2] = (WikiPage)objArray[2];
+			array[0] = getByUuid_PrevAndNext(session, wikiPage, uuid,
+					orderByComparator, true);
+
+			array[1] = wikiPage;
+
+			array[2] = getByUuid_PrevAndNext(session, wikiPage, uuid,
+					orderByComparator, false);
 
 			return array;
 		}
@@ -865,6 +821,121 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		}
 		finally {
 			closeSession(session);
+		}
+	}
+
+	protected WikiPage getByUuid_PrevAndNext(Session session,
+		WikiPage wikiPage, String uuid, OrderByComparator orderByComparator,
+		boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_WIKIPAGE_WHERE);
+
+		if (uuid == null) {
+			query.append(_FINDER_COLUMN_UUID_UUID_1);
+		}
+		else {
+			if (uuid.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_UUID_UUID_3);
+			}
+			else {
+				query.append(_FINDER_COLUMN_UUID_UUID_2);
+			}
+		}
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+
+			query.append(WHERE_LIMIT_2);
+		}
+
+		else {
+			query.append(WikiPageModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		if (uuid != null) {
+			qPos.add(uuid);
+		}
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(wikiPage);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<WikiPage> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
 		}
 	}
 
@@ -1175,52 +1246,20 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		throws NoSuchPageException, SystemException {
 		WikiPage wikiPage = findByPrimaryKey(pageId);
 
-		int count = countByNodeId(nodeId);
-
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(3 +
-						(orderByComparator.getOrderByFields().length * 3));
-			}
-			else {
-				query = new StringBundler(3);
-			}
-
-			query.append(_SQL_SELECT_WIKIPAGE_WHERE);
-
-			query.append(_FINDER_COLUMN_NODEID_NODEID_2);
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-
-			else {
-				query.append(WikiPageModelImpl.ORDER_BY_JPQL);
-			}
-
-			String sql = query.toString();
-
-			Query q = session.createQuery(sql);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(nodeId);
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
-					orderByComparator, wikiPage);
-
 			WikiPage[] array = new WikiPageImpl[3];
 
-			array[0] = (WikiPage)objArray[0];
-			array[1] = (WikiPage)objArray[1];
-			array[2] = (WikiPage)objArray[2];
+			array[0] = getByNodeId_PrevAndNext(session, wikiPage, nodeId,
+					orderByComparator, true);
+
+			array[1] = wikiPage;
+
+			array[2] = getByNodeId_PrevAndNext(session, wikiPage, nodeId,
+					orderByComparator, false);
 
 			return array;
 		}
@@ -1229,6 +1268,109 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		}
 		finally {
 			closeSession(session);
+		}
+	}
+
+	protected WikiPage getByNodeId_PrevAndNext(Session session,
+		WikiPage wikiPage, long nodeId, OrderByComparator orderByComparator,
+		boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_WIKIPAGE_WHERE);
+
+		query.append(_FINDER_COLUMN_NODEID_NODEID_2);
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+
+			query.append(WHERE_LIMIT_2);
+		}
+
+		else {
+			query.append(WikiPageModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(nodeId);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(wikiPage);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<WikiPage> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
 		}
 	}
 
@@ -1435,64 +1577,20 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		throws NoSuchPageException, SystemException {
 		WikiPage wikiPage = findByPrimaryKey(pageId);
 
-		int count = countByFormat(format);
-
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(3 +
-						(orderByComparator.getOrderByFields().length * 3));
-			}
-			else {
-				query = new StringBundler(3);
-			}
-
-			query.append(_SQL_SELECT_WIKIPAGE_WHERE);
-
-			if (format == null) {
-				query.append(_FINDER_COLUMN_FORMAT_FORMAT_1);
-			}
-			else {
-				if (format.equals(StringPool.BLANK)) {
-					query.append(_FINDER_COLUMN_FORMAT_FORMAT_3);
-				}
-				else {
-					query.append(_FINDER_COLUMN_FORMAT_FORMAT_2);
-				}
-			}
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-
-			else {
-				query.append(WikiPageModelImpl.ORDER_BY_JPQL);
-			}
-
-			String sql = query.toString();
-
-			Query q = session.createQuery(sql);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			if (format != null) {
-				qPos.add(format);
-			}
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
-					orderByComparator, wikiPage);
-
 			WikiPage[] array = new WikiPageImpl[3];
 
-			array[0] = (WikiPage)objArray[0];
-			array[1] = (WikiPage)objArray[1];
-			array[2] = (WikiPage)objArray[2];
+			array[0] = getByFormat_PrevAndNext(session, wikiPage, format,
+					orderByComparator, true);
+
+			array[1] = wikiPage;
+
+			array[2] = getByFormat_PrevAndNext(session, wikiPage, format,
+					orderByComparator, false);
 
 			return array;
 		}
@@ -1501,6 +1599,121 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		}
 		finally {
 			closeSession(session);
+		}
+	}
+
+	protected WikiPage getByFormat_PrevAndNext(Session session,
+		WikiPage wikiPage, String format, OrderByComparator orderByComparator,
+		boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_WIKIPAGE_WHERE);
+
+		if (format == null) {
+			query.append(_FINDER_COLUMN_FORMAT_FORMAT_1);
+		}
+		else {
+			if (format.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_FORMAT_FORMAT_3);
+			}
+			else {
+				query.append(_FINDER_COLUMN_FORMAT_FORMAT_2);
+			}
+		}
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+
+			query.append(WHERE_LIMIT_2);
+		}
+
+		else {
+			query.append(WikiPageModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		if (format != null) {
+			qPos.add(format);
+		}
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(wikiPage);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<WikiPage> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
 		}
 	}
 
@@ -1724,68 +1937,20 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		throws NoSuchPageException, SystemException {
 		WikiPage wikiPage = findByPrimaryKey(pageId);
 
-		int count = countByN_T(nodeId, title);
-
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(4 +
-						(orderByComparator.getOrderByFields().length * 3));
-			}
-			else {
-				query = new StringBundler(4);
-			}
-
-			query.append(_SQL_SELECT_WIKIPAGE_WHERE);
-
-			query.append(_FINDER_COLUMN_N_T_NODEID_2);
-
-			if (title == null) {
-				query.append(_FINDER_COLUMN_N_T_TITLE_1);
-			}
-			else {
-				if (title.equals(StringPool.BLANK)) {
-					query.append(_FINDER_COLUMN_N_T_TITLE_3);
-				}
-				else {
-					query.append(_FINDER_COLUMN_N_T_TITLE_2);
-				}
-			}
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-
-			else {
-				query.append(WikiPageModelImpl.ORDER_BY_JPQL);
-			}
-
-			String sql = query.toString();
-
-			Query q = session.createQuery(sql);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(nodeId);
-
-			if (title != null) {
-				qPos.add(title);
-			}
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
-					orderByComparator, wikiPage);
-
 			WikiPage[] array = new WikiPageImpl[3];
 
-			array[0] = (WikiPage)objArray[0];
-			array[1] = (WikiPage)objArray[1];
-			array[2] = (WikiPage)objArray[2];
+			array[0] = getByN_T_PrevAndNext(session, wikiPage, nodeId, title,
+					orderByComparator, true);
+
+			array[1] = wikiPage;
+
+			array[2] = getByN_T_PrevAndNext(session, wikiPage, nodeId, title,
+					orderByComparator, false);
 
 			return array;
 		}
@@ -1794,6 +1959,125 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		}
 		finally {
 			closeSession(session);
+		}
+	}
+
+	protected WikiPage getByN_T_PrevAndNext(Session session, WikiPage wikiPage,
+		long nodeId, String title, OrderByComparator orderByComparator,
+		boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_WIKIPAGE_WHERE);
+
+		query.append(_FINDER_COLUMN_N_T_NODEID_2);
+
+		if (title == null) {
+			query.append(_FINDER_COLUMN_N_T_TITLE_1);
+		}
+		else {
+			if (title.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_N_T_TITLE_3);
+			}
+			else {
+				query.append(_FINDER_COLUMN_N_T_TITLE_2);
+			}
+		}
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+
+			query.append(WHERE_LIMIT_2);
+		}
+
+		else {
+			query.append(WikiPageModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(nodeId);
+
+		if (title != null) {
+			qPos.add(title);
+		}
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(wikiPage);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<WikiPage> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
 		}
 	}
 
@@ -1993,56 +2277,20 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		throws NoSuchPageException, SystemException {
 		WikiPage wikiPage = findByPrimaryKey(pageId);
 
-		int count = countByN_H(nodeId, head);
-
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(4 +
-						(orderByComparator.getOrderByFields().length * 3));
-			}
-			else {
-				query = new StringBundler(4);
-			}
-
-			query.append(_SQL_SELECT_WIKIPAGE_WHERE);
-
-			query.append(_FINDER_COLUMN_N_H_NODEID_2);
-
-			query.append(_FINDER_COLUMN_N_H_HEAD_2);
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-
-			else {
-				query.append(WikiPageModelImpl.ORDER_BY_JPQL);
-			}
-
-			String sql = query.toString();
-
-			Query q = session.createQuery(sql);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(nodeId);
-
-			qPos.add(head);
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
-					orderByComparator, wikiPage);
-
 			WikiPage[] array = new WikiPageImpl[3];
 
-			array[0] = (WikiPage)objArray[0];
-			array[1] = (WikiPage)objArray[1];
-			array[2] = (WikiPage)objArray[2];
+			array[0] = getByN_H_PrevAndNext(session, wikiPage, nodeId, head,
+					orderByComparator, true);
+
+			array[1] = wikiPage;
+
+			array[2] = getByN_H_PrevAndNext(session, wikiPage, nodeId, head,
+					orderByComparator, false);
 
 			return array;
 		}
@@ -2051,6 +2299,113 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		}
 		finally {
 			closeSession(session);
+		}
+	}
+
+	protected WikiPage getByN_H_PrevAndNext(Session session, WikiPage wikiPage,
+		long nodeId, boolean head, OrderByComparator orderByComparator,
+		boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_WIKIPAGE_WHERE);
+
+		query.append(_FINDER_COLUMN_N_H_NODEID_2);
+
+		query.append(_FINDER_COLUMN_N_H_HEAD_2);
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+
+			query.append(WHERE_LIMIT_2);
+		}
+
+		else {
+			query.append(WikiPageModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(nodeId);
+
+		qPos.add(head);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(wikiPage);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<WikiPage> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
 		}
 	}
 
@@ -2275,68 +2630,20 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		throws NoSuchPageException, SystemException {
 		WikiPage wikiPage = findByPrimaryKey(pageId);
 
-		int count = countByN_P(nodeId, parentTitle);
-
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(4 +
-						(orderByComparator.getOrderByFields().length * 3));
-			}
-			else {
-				query = new StringBundler(4);
-			}
-
-			query.append(_SQL_SELECT_WIKIPAGE_WHERE);
-
-			query.append(_FINDER_COLUMN_N_P_NODEID_2);
-
-			if (parentTitle == null) {
-				query.append(_FINDER_COLUMN_N_P_PARENTTITLE_1);
-			}
-			else {
-				if (parentTitle.equals(StringPool.BLANK)) {
-					query.append(_FINDER_COLUMN_N_P_PARENTTITLE_3);
-				}
-				else {
-					query.append(_FINDER_COLUMN_N_P_PARENTTITLE_2);
-				}
-			}
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-
-			else {
-				query.append(WikiPageModelImpl.ORDER_BY_JPQL);
-			}
-
-			String sql = query.toString();
-
-			Query q = session.createQuery(sql);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(nodeId);
-
-			if (parentTitle != null) {
-				qPos.add(parentTitle);
-			}
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
-					orderByComparator, wikiPage);
-
 			WikiPage[] array = new WikiPageImpl[3];
 
-			array[0] = (WikiPage)objArray[0];
-			array[1] = (WikiPage)objArray[1];
-			array[2] = (WikiPage)objArray[2];
+			array[0] = getByN_P_PrevAndNext(session, wikiPage, nodeId,
+					parentTitle, orderByComparator, true);
+
+			array[1] = wikiPage;
+
+			array[2] = getByN_P_PrevAndNext(session, wikiPage, nodeId,
+					parentTitle, orderByComparator, false);
 
 			return array;
 		}
@@ -2345,6 +2652,125 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		}
 		finally {
 			closeSession(session);
+		}
+	}
+
+	protected WikiPage getByN_P_PrevAndNext(Session session, WikiPage wikiPage,
+		long nodeId, String parentTitle, OrderByComparator orderByComparator,
+		boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_WIKIPAGE_WHERE);
+
+		query.append(_FINDER_COLUMN_N_P_NODEID_2);
+
+		if (parentTitle == null) {
+			query.append(_FINDER_COLUMN_N_P_PARENTTITLE_1);
+		}
+		else {
+			if (parentTitle.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_N_P_PARENTTITLE_3);
+			}
+			else {
+				query.append(_FINDER_COLUMN_N_P_PARENTTITLE_2);
+			}
+		}
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+
+			query.append(WHERE_LIMIT_2);
+		}
+
+		else {
+			query.append(WikiPageModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(nodeId);
+
+		if (parentTitle != null) {
+			qPos.add(parentTitle);
+		}
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(wikiPage);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<WikiPage> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
 		}
 	}
 
@@ -2570,68 +2996,20 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		throws NoSuchPageException, SystemException {
 		WikiPage wikiPage = findByPrimaryKey(pageId);
 
-		int count = countByN_R(nodeId, redirectTitle);
-
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(4 +
-						(orderByComparator.getOrderByFields().length * 3));
-			}
-			else {
-				query = new StringBundler(4);
-			}
-
-			query.append(_SQL_SELECT_WIKIPAGE_WHERE);
-
-			query.append(_FINDER_COLUMN_N_R_NODEID_2);
-
-			if (redirectTitle == null) {
-				query.append(_FINDER_COLUMN_N_R_REDIRECTTITLE_1);
-			}
-			else {
-				if (redirectTitle.equals(StringPool.BLANK)) {
-					query.append(_FINDER_COLUMN_N_R_REDIRECTTITLE_3);
-				}
-				else {
-					query.append(_FINDER_COLUMN_N_R_REDIRECTTITLE_2);
-				}
-			}
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-
-			else {
-				query.append(WikiPageModelImpl.ORDER_BY_JPQL);
-			}
-
-			String sql = query.toString();
-
-			Query q = session.createQuery(sql);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(nodeId);
-
-			if (redirectTitle != null) {
-				qPos.add(redirectTitle);
-			}
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
-					orderByComparator, wikiPage);
-
 			WikiPage[] array = new WikiPageImpl[3];
 
-			array[0] = (WikiPage)objArray[0];
-			array[1] = (WikiPage)objArray[1];
-			array[2] = (WikiPage)objArray[2];
+			array[0] = getByN_R_PrevAndNext(session, wikiPage, nodeId,
+					redirectTitle, orderByComparator, true);
+
+			array[1] = wikiPage;
+
+			array[2] = getByN_R_PrevAndNext(session, wikiPage, nodeId,
+					redirectTitle, orderByComparator, false);
 
 			return array;
 		}
@@ -2640,6 +3018,125 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		}
 		finally {
 			closeSession(session);
+		}
+	}
+
+	protected WikiPage getByN_R_PrevAndNext(Session session, WikiPage wikiPage,
+		long nodeId, String redirectTitle, OrderByComparator orderByComparator,
+		boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_WIKIPAGE_WHERE);
+
+		query.append(_FINDER_COLUMN_N_R_NODEID_2);
+
+		if (redirectTitle == null) {
+			query.append(_FINDER_COLUMN_N_R_REDIRECTTITLE_1);
+		}
+		else {
+			if (redirectTitle.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_N_R_REDIRECTTITLE_3);
+			}
+			else {
+				query.append(_FINDER_COLUMN_N_R_REDIRECTTITLE_2);
+			}
+		}
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+
+			query.append(WHERE_LIMIT_2);
+		}
+
+		else {
+			query.append(WikiPageModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(nodeId);
+
+		if (redirectTitle != null) {
+			qPos.add(redirectTitle);
+		}
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(wikiPage);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<WikiPage> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
 		}
 	}
 
@@ -3023,72 +3520,20 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		throws NoSuchPageException, SystemException {
 		WikiPage wikiPage = findByPrimaryKey(pageId);
 
-		int count = countByN_T_H(nodeId, title, head);
-
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(5 +
-						(orderByComparator.getOrderByFields().length * 3));
-			}
-			else {
-				query = new StringBundler(5);
-			}
-
-			query.append(_SQL_SELECT_WIKIPAGE_WHERE);
-
-			query.append(_FINDER_COLUMN_N_T_H_NODEID_2);
-
-			if (title == null) {
-				query.append(_FINDER_COLUMN_N_T_H_TITLE_1);
-			}
-			else {
-				if (title.equals(StringPool.BLANK)) {
-					query.append(_FINDER_COLUMN_N_T_H_TITLE_3);
-				}
-				else {
-					query.append(_FINDER_COLUMN_N_T_H_TITLE_2);
-				}
-			}
-
-			query.append(_FINDER_COLUMN_N_T_H_HEAD_2);
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-
-			else {
-				query.append(WikiPageModelImpl.ORDER_BY_JPQL);
-			}
-
-			String sql = query.toString();
-
-			Query q = session.createQuery(sql);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(nodeId);
-
-			if (title != null) {
-				qPos.add(title);
-			}
-
-			qPos.add(head);
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
-					orderByComparator, wikiPage);
-
 			WikiPage[] array = new WikiPageImpl[3];
 
-			array[0] = (WikiPage)objArray[0];
-			array[1] = (WikiPage)objArray[1];
-			array[2] = (WikiPage)objArray[2];
+			array[0] = getByN_T_H_PrevAndNext(session, wikiPage, nodeId, title,
+					head, orderByComparator, true);
+
+			array[1] = wikiPage;
+
+			array[2] = getByN_T_H_PrevAndNext(session, wikiPage, nodeId, title,
+					head, orderByComparator, false);
 
 			return array;
 		}
@@ -3097,6 +3542,129 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		}
 		finally {
 			closeSession(session);
+		}
+	}
+
+	protected WikiPage getByN_T_H_PrevAndNext(Session session,
+		WikiPage wikiPage, long nodeId, String title, boolean head,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_WIKIPAGE_WHERE);
+
+		query.append(_FINDER_COLUMN_N_T_H_NODEID_2);
+
+		if (title == null) {
+			query.append(_FINDER_COLUMN_N_T_H_TITLE_1);
+		}
+		else {
+			if (title.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_N_T_H_TITLE_3);
+			}
+			else {
+				query.append(_FINDER_COLUMN_N_T_H_TITLE_2);
+			}
+		}
+
+		query.append(_FINDER_COLUMN_N_T_H_HEAD_2);
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+
+			query.append(WHERE_LIMIT_2);
+		}
+
+		else {
+			query.append(WikiPageModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(nodeId);
+
+		if (title != null) {
+			qPos.add(title);
+		}
+
+		qPos.add(head);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(wikiPage);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<WikiPage> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
 		}
 	}
 
@@ -3340,72 +3908,20 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		throws NoSuchPageException, SystemException {
 		WikiPage wikiPage = findByPrimaryKey(pageId);
 
-		int count = countByN_H_P(nodeId, head, parentTitle);
-
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(5 +
-						(orderByComparator.getOrderByFields().length * 3));
-			}
-			else {
-				query = new StringBundler(5);
-			}
-
-			query.append(_SQL_SELECT_WIKIPAGE_WHERE);
-
-			query.append(_FINDER_COLUMN_N_H_P_NODEID_2);
-
-			query.append(_FINDER_COLUMN_N_H_P_HEAD_2);
-
-			if (parentTitle == null) {
-				query.append(_FINDER_COLUMN_N_H_P_PARENTTITLE_1);
-			}
-			else {
-				if (parentTitle.equals(StringPool.BLANK)) {
-					query.append(_FINDER_COLUMN_N_H_P_PARENTTITLE_3);
-				}
-				else {
-					query.append(_FINDER_COLUMN_N_H_P_PARENTTITLE_2);
-				}
-			}
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-
-			else {
-				query.append(WikiPageModelImpl.ORDER_BY_JPQL);
-			}
-
-			String sql = query.toString();
-
-			Query q = session.createQuery(sql);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(nodeId);
-
-			qPos.add(head);
-
-			if (parentTitle != null) {
-				qPos.add(parentTitle);
-			}
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
-					orderByComparator, wikiPage);
-
 			WikiPage[] array = new WikiPageImpl[3];
 
-			array[0] = (WikiPage)objArray[0];
-			array[1] = (WikiPage)objArray[1];
-			array[2] = (WikiPage)objArray[2];
+			array[0] = getByN_H_P_PrevAndNext(session, wikiPage, nodeId, head,
+					parentTitle, orderByComparator, true);
+
+			array[1] = wikiPage;
+
+			array[2] = getByN_H_P_PrevAndNext(session, wikiPage, nodeId, head,
+					parentTitle, orderByComparator, false);
 
 			return array;
 		}
@@ -3414,6 +3930,129 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		}
 		finally {
 			closeSession(session);
+		}
+	}
+
+	protected WikiPage getByN_H_P_PrevAndNext(Session session,
+		WikiPage wikiPage, long nodeId, boolean head, String parentTitle,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_WIKIPAGE_WHERE);
+
+		query.append(_FINDER_COLUMN_N_H_P_NODEID_2);
+
+		query.append(_FINDER_COLUMN_N_H_P_HEAD_2);
+
+		if (parentTitle == null) {
+			query.append(_FINDER_COLUMN_N_H_P_PARENTTITLE_1);
+		}
+		else {
+			if (parentTitle.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_N_H_P_PARENTTITLE_3);
+			}
+			else {
+				query.append(_FINDER_COLUMN_N_H_P_PARENTTITLE_2);
+			}
+		}
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+
+			query.append(WHERE_LIMIT_2);
+		}
+
+		else {
+			query.append(WikiPageModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(nodeId);
+
+		qPos.add(head);
+
+		if (parentTitle != null) {
+			qPos.add(parentTitle);
+		}
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(wikiPage);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<WikiPage> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
 		}
 	}
 

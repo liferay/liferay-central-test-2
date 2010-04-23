@@ -926,52 +926,20 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 		throws NoSuchCountryException, SystemException {
 		Country country = findByPrimaryKey(countryId);
 
-		int count = countByActive(active);
-
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(3 +
-						(orderByComparator.getOrderByFields().length * 3));
-			}
-			else {
-				query = new StringBundler(3);
-			}
-
-			query.append(_SQL_SELECT_COUNTRY_WHERE);
-
-			query.append(_FINDER_COLUMN_ACTIVE_ACTIVE_2);
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-
-			else {
-				query.append(CountryModelImpl.ORDER_BY_JPQL);
-			}
-
-			String sql = query.toString();
-
-			Query q = session.createQuery(sql);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(active);
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
-					orderByComparator, country);
-
 			Country[] array = new CountryImpl[3];
 
-			array[0] = (Country)objArray[0];
-			array[1] = (Country)objArray[1];
-			array[2] = (Country)objArray[2];
+			array[0] = getByActive_PrevAndNext(session, country, active,
+					orderByComparator, true);
+
+			array[1] = country;
+
+			array[2] = getByActive_PrevAndNext(session, country, active,
+					orderByComparator, false);
 
 			return array;
 		}
@@ -980,6 +948,108 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 		}
 		finally {
 			closeSession(session);
+		}
+	}
+
+	protected Country getByActive_PrevAndNext(Session session, Country country,
+		boolean active, OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_COUNTRY_WHERE);
+
+		query.append(_FINDER_COLUMN_ACTIVE_ACTIVE_2);
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+
+			query.append(WHERE_LIMIT_2);
+		}
+
+		else {
+			query.append(CountryModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(active);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(country);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<Country> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
 		}
 	}
 

@@ -671,64 +671,20 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 		throws NoSuchEventException, SystemException {
 		CalEvent calEvent = findByPrimaryKey(eventId);
 
-		int count = countByUuid(uuid);
-
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(3 +
-						(orderByComparator.getOrderByFields().length * 3));
-			}
-			else {
-				query = new StringBundler(3);
-			}
-
-			query.append(_SQL_SELECT_CALEVENT_WHERE);
-
-			if (uuid == null) {
-				query.append(_FINDER_COLUMN_UUID_UUID_1);
-			}
-			else {
-				if (uuid.equals(StringPool.BLANK)) {
-					query.append(_FINDER_COLUMN_UUID_UUID_3);
-				}
-				else {
-					query.append(_FINDER_COLUMN_UUID_UUID_2);
-				}
-			}
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-
-			else {
-				query.append(CalEventModelImpl.ORDER_BY_JPQL);
-			}
-
-			String sql = query.toString();
-
-			Query q = session.createQuery(sql);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			if (uuid != null) {
-				qPos.add(uuid);
-			}
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
-					orderByComparator, calEvent);
-
 			CalEvent[] array = new CalEventImpl[3];
 
-			array[0] = (CalEvent)objArray[0];
-			array[1] = (CalEvent)objArray[1];
-			array[2] = (CalEvent)objArray[2];
+			array[0] = getByUuid_PrevAndNext(session, calEvent, uuid,
+					orderByComparator, true);
+
+			array[1] = calEvent;
+
+			array[2] = getByUuid_PrevAndNext(session, calEvent, uuid,
+					orderByComparator, false);
 
 			return array;
 		}
@@ -737,6 +693,121 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 		}
 		finally {
 			closeSession(session);
+		}
+	}
+
+	protected CalEvent getByUuid_PrevAndNext(Session session,
+		CalEvent calEvent, String uuid, OrderByComparator orderByComparator,
+		boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_CALEVENT_WHERE);
+
+		if (uuid == null) {
+			query.append(_FINDER_COLUMN_UUID_UUID_1);
+		}
+		else {
+			if (uuid.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_UUID_UUID_3);
+			}
+			else {
+				query.append(_FINDER_COLUMN_UUID_UUID_2);
+			}
+		}
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+
+			query.append(WHERE_LIMIT_2);
+		}
+
+		else {
+			query.append(CalEventModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		if (uuid != null) {
+			qPos.add(uuid);
+		}
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(calEvent);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<CalEvent> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
 		}
 	}
 
@@ -1048,52 +1119,20 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 		throws NoSuchEventException, SystemException {
 		CalEvent calEvent = findByPrimaryKey(eventId);
 
-		int count = countByCompanyId(companyId);
-
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(3 +
-						(orderByComparator.getOrderByFields().length * 3));
-			}
-			else {
-				query = new StringBundler(3);
-			}
-
-			query.append(_SQL_SELECT_CALEVENT_WHERE);
-
-			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-
-			else {
-				query.append(CalEventModelImpl.ORDER_BY_JPQL);
-			}
-
-			String sql = query.toString();
-
-			Query q = session.createQuery(sql);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(companyId);
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
-					orderByComparator, calEvent);
-
 			CalEvent[] array = new CalEventImpl[3];
 
-			array[0] = (CalEvent)objArray[0];
-			array[1] = (CalEvent)objArray[1];
-			array[2] = (CalEvent)objArray[2];
+			array[0] = getByCompanyId_PrevAndNext(session, calEvent, companyId,
+					orderByComparator, true);
+
+			array[1] = calEvent;
+
+			array[2] = getByCompanyId_PrevAndNext(session, calEvent, companyId,
+					orderByComparator, false);
 
 			return array;
 		}
@@ -1102,6 +1141,109 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 		}
 		finally {
 			closeSession(session);
+		}
+	}
+
+	protected CalEvent getByCompanyId_PrevAndNext(Session session,
+		CalEvent calEvent, long companyId, OrderByComparator orderByComparator,
+		boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_CALEVENT_WHERE);
+
+		query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+
+			query.append(WHERE_LIMIT_2);
+		}
+
+		else {
+			query.append(CalEventModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(companyId);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(calEvent);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<CalEvent> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
 		}
 	}
 
@@ -1284,52 +1426,20 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 		throws NoSuchEventException, SystemException {
 		CalEvent calEvent = findByPrimaryKey(eventId);
 
-		int count = countByGroupId(groupId);
-
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(3 +
-						(orderByComparator.getOrderByFields().length * 3));
-			}
-			else {
-				query = new StringBundler(3);
-			}
-
-			query.append(_SQL_SELECT_CALEVENT_WHERE);
-
-			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-
-			else {
-				query.append(CalEventModelImpl.ORDER_BY_JPQL);
-			}
-
-			String sql = query.toString();
-
-			Query q = session.createQuery(sql);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(groupId);
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
-					orderByComparator, calEvent);
-
 			CalEvent[] array = new CalEventImpl[3];
 
-			array[0] = (CalEvent)objArray[0];
-			array[1] = (CalEvent)objArray[1];
-			array[2] = (CalEvent)objArray[2];
+			array[0] = getByGroupId_PrevAndNext(session, calEvent, groupId,
+					orderByComparator, true);
+
+			array[1] = calEvent;
+
+			array[2] = getByGroupId_PrevAndNext(session, calEvent, groupId,
+					orderByComparator, false);
 
 			return array;
 		}
@@ -1338,6 +1448,109 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 		}
 		finally {
 			closeSession(session);
+		}
+	}
+
+	protected CalEvent getByGroupId_PrevAndNext(Session session,
+		CalEvent calEvent, long groupId, OrderByComparator orderByComparator,
+		boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_CALEVENT_WHERE);
+
+		query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+
+			query.append(WHERE_LIMIT_2);
+		}
+
+		else {
+			query.append(CalEventModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(groupId);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(calEvent);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<CalEvent> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
 		}
 	}
 
@@ -1521,52 +1734,20 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 		throws NoSuchEventException, SystemException {
 		CalEvent calEvent = findByPrimaryKey(eventId);
 
-		int count = countByRemindBy(remindBy);
-
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(3 +
-						(orderByComparator.getOrderByFields().length * 3));
-			}
-			else {
-				query = new StringBundler(3);
-			}
-
-			query.append(_SQL_SELECT_CALEVENT_WHERE);
-
-			query.append(_FINDER_COLUMN_REMINDBY_REMINDBY_2);
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-
-			else {
-				query.append(CalEventModelImpl.ORDER_BY_JPQL);
-			}
-
-			String sql = query.toString();
-
-			Query q = session.createQuery(sql);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(remindBy);
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
-					orderByComparator, calEvent);
-
 			CalEvent[] array = new CalEventImpl[3];
 
-			array[0] = (CalEvent)objArray[0];
-			array[1] = (CalEvent)objArray[1];
-			array[2] = (CalEvent)objArray[2];
+			array[0] = getByRemindBy_PrevAndNext(session, calEvent, remindBy,
+					orderByComparator, true);
+
+			array[1] = calEvent;
+
+			array[2] = getByRemindBy_PrevAndNext(session, calEvent, remindBy,
+					orderByComparator, false);
 
 			return array;
 		}
@@ -1575,6 +1756,109 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 		}
 		finally {
 			closeSession(session);
+		}
+	}
+
+	protected CalEvent getByRemindBy_PrevAndNext(Session session,
+		CalEvent calEvent, int remindBy, OrderByComparator orderByComparator,
+		boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_CALEVENT_WHERE);
+
+		query.append(_FINDER_COLUMN_REMINDBY_REMINDBY_2);
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+
+			query.append(WHERE_LIMIT_2);
+		}
+
+		else {
+			query.append(CalEventModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(remindBy);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(calEvent);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<CalEvent> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
 		}
 	}
 
@@ -1798,68 +2082,20 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 		throws NoSuchEventException, SystemException {
 		CalEvent calEvent = findByPrimaryKey(eventId);
 
-		int count = countByG_T(groupId, type);
-
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(4 +
-						(orderByComparator.getOrderByFields().length * 3));
-			}
-			else {
-				query = new StringBundler(4);
-			}
-
-			query.append(_SQL_SELECT_CALEVENT_WHERE);
-
-			query.append(_FINDER_COLUMN_G_T_GROUPID_2);
-
-			if (type == null) {
-				query.append(_FINDER_COLUMN_G_T_TYPE_1);
-			}
-			else {
-				if (type.equals(StringPool.BLANK)) {
-					query.append(_FINDER_COLUMN_G_T_TYPE_3);
-				}
-				else {
-					query.append(_FINDER_COLUMN_G_T_TYPE_2);
-				}
-			}
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-
-			else {
-				query.append(CalEventModelImpl.ORDER_BY_JPQL);
-			}
-
-			String sql = query.toString();
-
-			Query q = session.createQuery(sql);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(groupId);
-
-			if (type != null) {
-				qPos.add(type);
-			}
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
-					orderByComparator, calEvent);
-
 			CalEvent[] array = new CalEventImpl[3];
 
-			array[0] = (CalEvent)objArray[0];
-			array[1] = (CalEvent)objArray[1];
-			array[2] = (CalEvent)objArray[2];
+			array[0] = getByG_T_PrevAndNext(session, calEvent, groupId, type,
+					orderByComparator, true);
+
+			array[1] = calEvent;
+
+			array[2] = getByG_T_PrevAndNext(session, calEvent, groupId, type,
+					orderByComparator, false);
 
 			return array;
 		}
@@ -1868,6 +2104,125 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 		}
 		finally {
 			closeSession(session);
+		}
+	}
+
+	protected CalEvent getByG_T_PrevAndNext(Session session, CalEvent calEvent,
+		long groupId, String type, OrderByComparator orderByComparator,
+		boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_CALEVENT_WHERE);
+
+		query.append(_FINDER_COLUMN_G_T_GROUPID_2);
+
+		if (type == null) {
+			query.append(_FINDER_COLUMN_G_T_TYPE_1);
+		}
+		else {
+			if (type.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_G_T_TYPE_3);
+			}
+			else {
+				query.append(_FINDER_COLUMN_G_T_TYPE_2);
+			}
+		}
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+
+			query.append(WHERE_LIMIT_2);
+		}
+
+		else {
+			query.append(CalEventModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(groupId);
+
+		if (type != null) {
+			qPos.add(type);
+		}
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(calEvent);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<CalEvent> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
 		}
 	}
 
@@ -2068,56 +2423,20 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 		throws NoSuchEventException, SystemException {
 		CalEvent calEvent = findByPrimaryKey(eventId);
 
-		int count = countByG_R(groupId, repeating);
-
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(4 +
-						(orderByComparator.getOrderByFields().length * 3));
-			}
-			else {
-				query = new StringBundler(4);
-			}
-
-			query.append(_SQL_SELECT_CALEVENT_WHERE);
-
-			query.append(_FINDER_COLUMN_G_R_GROUPID_2);
-
-			query.append(_FINDER_COLUMN_G_R_REPEATING_2);
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-
-			else {
-				query.append(CalEventModelImpl.ORDER_BY_JPQL);
-			}
-
-			String sql = query.toString();
-
-			Query q = session.createQuery(sql);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(groupId);
-
-			qPos.add(repeating);
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
-					orderByComparator, calEvent);
-
 			CalEvent[] array = new CalEventImpl[3];
 
-			array[0] = (CalEvent)objArray[0];
-			array[1] = (CalEvent)objArray[1];
-			array[2] = (CalEvent)objArray[2];
+			array[0] = getByG_R_PrevAndNext(session, calEvent, groupId,
+					repeating, orderByComparator, true);
+
+			array[1] = calEvent;
+
+			array[2] = getByG_R_PrevAndNext(session, calEvent, groupId,
+					repeating, orderByComparator, false);
 
 			return array;
 		}
@@ -2126,6 +2445,113 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 		}
 		finally {
 			closeSession(session);
+		}
+	}
+
+	protected CalEvent getByG_R_PrevAndNext(Session session, CalEvent calEvent,
+		long groupId, boolean repeating, OrderByComparator orderByComparator,
+		boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_CALEVENT_WHERE);
+
+		query.append(_FINDER_COLUMN_G_R_GROUPID_2);
+
+		query.append(_FINDER_COLUMN_G_R_REPEATING_2);
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+
+			query.append(WHERE_LIMIT_2);
+		}
+
+		else {
+			query.append(CalEventModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(groupId);
+
+		qPos.add(repeating);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(calEvent);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<CalEvent> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
 		}
 	}
 

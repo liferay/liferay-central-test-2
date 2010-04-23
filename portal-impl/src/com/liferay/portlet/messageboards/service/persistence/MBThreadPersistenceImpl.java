@@ -598,52 +598,20 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		throws NoSuchThreadException, SystemException {
 		MBThread mbThread = findByPrimaryKey(threadId);
 
-		int count = countByGroupId(groupId);
-
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(3 +
-						(orderByComparator.getOrderByFields().length * 3));
-			}
-			else {
-				query = new StringBundler(3);
-			}
-
-			query.append(_SQL_SELECT_MBTHREAD_WHERE);
-
-			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-
-			else {
-				query.append(MBThreadModelImpl.ORDER_BY_JPQL);
-			}
-
-			String sql = query.toString();
-
-			Query q = session.createQuery(sql);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(groupId);
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
-					orderByComparator, mbThread);
-
 			MBThread[] array = new MBThreadImpl[3];
 
-			array[0] = (MBThread)objArray[0];
-			array[1] = (MBThread)objArray[1];
-			array[2] = (MBThread)objArray[2];
+			array[0] = getByGroupId_PrevAndNext(session, mbThread, groupId,
+					orderByComparator, true);
+
+			array[1] = mbThread;
+
+			array[2] = getByGroupId_PrevAndNext(session, mbThread, groupId,
+					orderByComparator, false);
 
 			return array;
 		}
@@ -652,6 +620,109 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		}
 		finally {
 			closeSession(session);
+		}
+	}
+
+	protected MBThread getByGroupId_PrevAndNext(Session session,
+		MBThread mbThread, long groupId, OrderByComparator orderByComparator,
+		boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_MBTHREAD_WHERE);
+
+		query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+
+			query.append(WHERE_LIMIT_2);
+		}
+
+		else {
+			query.append(MBThreadModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(groupId);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(mbThread);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<MBThread> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
 		}
 	}
 
@@ -852,56 +923,20 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		throws NoSuchThreadException, SystemException {
 		MBThread mbThread = findByPrimaryKey(threadId);
 
-		int count = countByG_C(groupId, categoryId);
-
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(4 +
-						(orderByComparator.getOrderByFields().length * 3));
-			}
-			else {
-				query = new StringBundler(4);
-			}
-
-			query.append(_SQL_SELECT_MBTHREAD_WHERE);
-
-			query.append(_FINDER_COLUMN_G_C_GROUPID_2);
-
-			query.append(_FINDER_COLUMN_G_C_CATEGORYID_2);
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-
-			else {
-				query.append(MBThreadModelImpl.ORDER_BY_JPQL);
-			}
-
-			String sql = query.toString();
-
-			Query q = session.createQuery(sql);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(groupId);
-
-			qPos.add(categoryId);
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
-					orderByComparator, mbThread);
-
 			MBThread[] array = new MBThreadImpl[3];
 
-			array[0] = (MBThread)objArray[0];
-			array[1] = (MBThread)objArray[1];
-			array[2] = (MBThread)objArray[2];
+			array[0] = getByG_C_PrevAndNext(session, mbThread, groupId,
+					categoryId, orderByComparator, true);
+
+			array[1] = mbThread;
+
+			array[2] = getByG_C_PrevAndNext(session, mbThread, groupId,
+					categoryId, orderByComparator, false);
 
 			return array;
 		}
@@ -910,6 +945,113 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		}
 		finally {
 			closeSession(session);
+		}
+	}
+
+	protected MBThread getByG_C_PrevAndNext(Session session, MBThread mbThread,
+		long groupId, long categoryId, OrderByComparator orderByComparator,
+		boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_MBTHREAD_WHERE);
+
+		query.append(_FINDER_COLUMN_G_C_GROUPID_2);
+
+		query.append(_FINDER_COLUMN_G_C_CATEGORYID_2);
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+
+			query.append(WHERE_LIMIT_2);
+		}
+
+		else {
+			query.append(MBThreadModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(groupId);
+
+		qPos.add(categoryId);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(mbThread);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<MBThread> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
 		}
 	}
 
@@ -1109,56 +1251,20 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		throws NoSuchThreadException, SystemException {
 		MBThread mbThread = findByPrimaryKey(threadId);
 
-		int count = countByG_S(groupId, status);
-
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(4 +
-						(orderByComparator.getOrderByFields().length * 3));
-			}
-			else {
-				query = new StringBundler(4);
-			}
-
-			query.append(_SQL_SELECT_MBTHREAD_WHERE);
-
-			query.append(_FINDER_COLUMN_G_S_GROUPID_2);
-
-			query.append(_FINDER_COLUMN_G_S_STATUS_2);
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-
-			else {
-				query.append(MBThreadModelImpl.ORDER_BY_JPQL);
-			}
-
-			String sql = query.toString();
-
-			Query q = session.createQuery(sql);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(groupId);
-
-			qPos.add(status);
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
-					orderByComparator, mbThread);
-
 			MBThread[] array = new MBThreadImpl[3];
 
-			array[0] = (MBThread)objArray[0];
-			array[1] = (MBThread)objArray[1];
-			array[2] = (MBThread)objArray[2];
+			array[0] = getByG_S_PrevAndNext(session, mbThread, groupId, status,
+					orderByComparator, true);
+
+			array[1] = mbThread;
+
+			array[2] = getByG_S_PrevAndNext(session, mbThread, groupId, status,
+					orderByComparator, false);
 
 			return array;
 		}
@@ -1167,6 +1273,113 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		}
 		finally {
 			closeSession(session);
+		}
+	}
+
+	protected MBThread getByG_S_PrevAndNext(Session session, MBThread mbThread,
+		long groupId, int status, OrderByComparator orderByComparator,
+		boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_MBTHREAD_WHERE);
+
+		query.append(_FINDER_COLUMN_G_S_GROUPID_2);
+
+		query.append(_FINDER_COLUMN_G_S_STATUS_2);
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+
+			query.append(WHERE_LIMIT_2);
+		}
+
+		else {
+			query.append(MBThreadModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(groupId);
+
+		qPos.add(status);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(mbThread);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<MBThread> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
 		}
 	}
 
@@ -1368,56 +1581,20 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		throws NoSuchThreadException, SystemException {
 		MBThread mbThread = findByPrimaryKey(threadId);
 
-		int count = countByC_P(categoryId, priority);
-
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(4 +
-						(orderByComparator.getOrderByFields().length * 3));
-			}
-			else {
-				query = new StringBundler(4);
-			}
-
-			query.append(_SQL_SELECT_MBTHREAD_WHERE);
-
-			query.append(_FINDER_COLUMN_C_P_CATEGORYID_2);
-
-			query.append(_FINDER_COLUMN_C_P_PRIORITY_2);
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-
-			else {
-				query.append(MBThreadModelImpl.ORDER_BY_JPQL);
-			}
-
-			String sql = query.toString();
-
-			Query q = session.createQuery(sql);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(categoryId);
-
-			qPos.add(priority);
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
-					orderByComparator, mbThread);
-
 			MBThread[] array = new MBThreadImpl[3];
 
-			array[0] = (MBThread)objArray[0];
-			array[1] = (MBThread)objArray[1];
-			array[2] = (MBThread)objArray[2];
+			array[0] = getByC_P_PrevAndNext(session, mbThread, categoryId,
+					priority, orderByComparator, true);
+
+			array[1] = mbThread;
+
+			array[2] = getByC_P_PrevAndNext(session, mbThread, categoryId,
+					priority, orderByComparator, false);
 
 			return array;
 		}
@@ -1426,6 +1603,113 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		}
 		finally {
 			closeSession(session);
+		}
+	}
+
+	protected MBThread getByC_P_PrevAndNext(Session session, MBThread mbThread,
+		long categoryId, double priority, OrderByComparator orderByComparator,
+		boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_MBTHREAD_WHERE);
+
+		query.append(_FINDER_COLUMN_C_P_CATEGORYID_2);
+
+		query.append(_FINDER_COLUMN_C_P_PRIORITY_2);
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+
+			query.append(WHERE_LIMIT_2);
+		}
+
+		else {
+			query.append(MBThreadModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(categoryId);
+
+		qPos.add(priority);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(mbThread);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<MBThread> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
 		}
 	}
 
@@ -1659,67 +1943,20 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		throws NoSuchThreadException, SystemException {
 		MBThread mbThread = findByPrimaryKey(threadId);
 
-		int count = countByG_C_L(groupId, categoryId, lastPostDate);
-
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(5 +
-						(orderByComparator.getOrderByFields().length * 3));
-			}
-			else {
-				query = new StringBundler(5);
-			}
-
-			query.append(_SQL_SELECT_MBTHREAD_WHERE);
-
-			query.append(_FINDER_COLUMN_G_C_L_GROUPID_2);
-
-			query.append(_FINDER_COLUMN_G_C_L_CATEGORYID_2);
-
-			if (lastPostDate == null) {
-				query.append(_FINDER_COLUMN_G_C_L_LASTPOSTDATE_1);
-			}
-			else {
-				query.append(_FINDER_COLUMN_G_C_L_LASTPOSTDATE_2);
-			}
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-
-			else {
-				query.append(MBThreadModelImpl.ORDER_BY_JPQL);
-			}
-
-			String sql = query.toString();
-
-			Query q = session.createQuery(sql);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(groupId);
-
-			qPos.add(categoryId);
-
-			if (lastPostDate != null) {
-				qPos.add(CalendarUtil.getTimestamp(lastPostDate));
-			}
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
-					orderByComparator, mbThread);
-
 			MBThread[] array = new MBThreadImpl[3];
 
-			array[0] = (MBThread)objArray[0];
-			array[1] = (MBThread)objArray[1];
-			array[2] = (MBThread)objArray[2];
+			array[0] = getByG_C_L_PrevAndNext(session, mbThread, groupId,
+					categoryId, lastPostDate, orderByComparator, true);
+
+			array[1] = mbThread;
+
+			array[2] = getByG_C_L_PrevAndNext(session, mbThread, groupId,
+					categoryId, lastPostDate, orderByComparator, false);
 
 			return array;
 		}
@@ -1728,6 +1965,124 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		}
 		finally {
 			closeSession(session);
+		}
+	}
+
+	protected MBThread getByG_C_L_PrevAndNext(Session session,
+		MBThread mbThread, long groupId, long categoryId, Date lastPostDate,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_MBTHREAD_WHERE);
+
+		query.append(_FINDER_COLUMN_G_C_L_GROUPID_2);
+
+		query.append(_FINDER_COLUMN_G_C_L_CATEGORYID_2);
+
+		if (lastPostDate == null) {
+			query.append(_FINDER_COLUMN_G_C_L_LASTPOSTDATE_1);
+		}
+		else {
+			query.append(_FINDER_COLUMN_G_C_L_LASTPOSTDATE_2);
+		}
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+
+			query.append(WHERE_LIMIT_2);
+		}
+
+		else {
+			query.append(MBThreadModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(groupId);
+
+		qPos.add(categoryId);
+
+		if (lastPostDate != null) {
+			qPos.add(CalendarUtil.getTimestamp(lastPostDate));
+		}
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(mbThread);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<MBThread> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
 		}
 	}
 
@@ -1943,60 +2298,20 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		throws NoSuchThreadException, SystemException {
 		MBThread mbThread = findByPrimaryKey(threadId);
 
-		int count = countByG_C_S(groupId, categoryId, status);
-
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(5 +
-						(orderByComparator.getOrderByFields().length * 3));
-			}
-			else {
-				query = new StringBundler(5);
-			}
-
-			query.append(_SQL_SELECT_MBTHREAD_WHERE);
-
-			query.append(_FINDER_COLUMN_G_C_S_GROUPID_2);
-
-			query.append(_FINDER_COLUMN_G_C_S_CATEGORYID_2);
-
-			query.append(_FINDER_COLUMN_G_C_S_STATUS_2);
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-
-			else {
-				query.append(MBThreadModelImpl.ORDER_BY_JPQL);
-			}
-
-			String sql = query.toString();
-
-			Query q = session.createQuery(sql);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(groupId);
-
-			qPos.add(categoryId);
-
-			qPos.add(status);
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
-					orderByComparator, mbThread);
-
 			MBThread[] array = new MBThreadImpl[3];
 
-			array[0] = (MBThread)objArray[0];
-			array[1] = (MBThread)objArray[1];
-			array[2] = (MBThread)objArray[2];
+			array[0] = getByG_C_S_PrevAndNext(session, mbThread, groupId,
+					categoryId, status, orderByComparator, true);
+
+			array[1] = mbThread;
+
+			array[2] = getByG_C_S_PrevAndNext(session, mbThread, groupId,
+					categoryId, status, orderByComparator, false);
 
 			return array;
 		}
@@ -2005,6 +2320,117 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		}
 		finally {
 			closeSession(session);
+		}
+	}
+
+	protected MBThread getByG_C_S_PrevAndNext(Session session,
+		MBThread mbThread, long groupId, long categoryId, int status,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_MBTHREAD_WHERE);
+
+		query.append(_FINDER_COLUMN_G_C_S_GROUPID_2);
+
+		query.append(_FINDER_COLUMN_G_C_S_CATEGORYID_2);
+
+		query.append(_FINDER_COLUMN_G_C_S_STATUS_2);
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+
+			query.append(WHERE_LIMIT_2);
+		}
+
+		else {
+			query.append(MBThreadModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(groupId);
+
+		qPos.add(categoryId);
+
+		qPos.add(status);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(mbThread);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<MBThread> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
 		}
 	}
 

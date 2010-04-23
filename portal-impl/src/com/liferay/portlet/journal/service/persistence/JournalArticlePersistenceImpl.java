@@ -874,64 +874,20 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		throws NoSuchArticleException, SystemException {
 		JournalArticle journalArticle = findByPrimaryKey(id);
 
-		int count = countByUuid(uuid);
-
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(3 +
-						(orderByComparator.getOrderByFields().length * 3));
-			}
-			else {
-				query = new StringBundler(3);
-			}
-
-			query.append(_SQL_SELECT_JOURNALARTICLE_WHERE);
-
-			if (uuid == null) {
-				query.append(_FINDER_COLUMN_UUID_UUID_1);
-			}
-			else {
-				if (uuid.equals(StringPool.BLANK)) {
-					query.append(_FINDER_COLUMN_UUID_UUID_3);
-				}
-				else {
-					query.append(_FINDER_COLUMN_UUID_UUID_2);
-				}
-			}
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-
-			else {
-				query.append(JournalArticleModelImpl.ORDER_BY_JPQL);
-			}
-
-			String sql = query.toString();
-
-			Query q = session.createQuery(sql);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			if (uuid != null) {
-				qPos.add(uuid);
-			}
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
-					orderByComparator, journalArticle);
-
 			JournalArticle[] array = new JournalArticleImpl[3];
 
-			array[0] = (JournalArticle)objArray[0];
-			array[1] = (JournalArticle)objArray[1];
-			array[2] = (JournalArticle)objArray[2];
+			array[0] = getByUuid_PrevAndNext(session, journalArticle, uuid,
+					orderByComparator, true);
+
+			array[1] = journalArticle;
+
+			array[2] = getByUuid_PrevAndNext(session, journalArticle, uuid,
+					orderByComparator, false);
 
 			return array;
 		}
@@ -940,6 +896,121 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 		finally {
 			closeSession(session);
+		}
+	}
+
+	protected JournalArticle getByUuid_PrevAndNext(Session session,
+		JournalArticle journalArticle, String uuid,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_JOURNALARTICLE_WHERE);
+
+		if (uuid == null) {
+			query.append(_FINDER_COLUMN_UUID_UUID_1);
+		}
+		else {
+			if (uuid.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_UUID_UUID_3);
+			}
+			else {
+				query.append(_FINDER_COLUMN_UUID_UUID_2);
+			}
+		}
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+
+			query.append(WHERE_LIMIT_2);
+		}
+
+		else {
+			query.append(JournalArticleModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		if (uuid != null) {
+			qPos.add(uuid);
+		}
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(journalArticle);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<JournalArticle> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
 		}
 	}
 
@@ -1252,52 +1323,20 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		throws NoSuchArticleException, SystemException {
 		JournalArticle journalArticle = findByPrimaryKey(id);
 
-		int count = countByGroupId(groupId);
-
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(3 +
-						(orderByComparator.getOrderByFields().length * 3));
-			}
-			else {
-				query = new StringBundler(3);
-			}
-
-			query.append(_SQL_SELECT_JOURNALARTICLE_WHERE);
-
-			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-
-			else {
-				query.append(JournalArticleModelImpl.ORDER_BY_JPQL);
-			}
-
-			String sql = query.toString();
-
-			Query q = session.createQuery(sql);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(groupId);
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
-					orderByComparator, journalArticle);
-
 			JournalArticle[] array = new JournalArticleImpl[3];
 
-			array[0] = (JournalArticle)objArray[0];
-			array[1] = (JournalArticle)objArray[1];
-			array[2] = (JournalArticle)objArray[2];
+			array[0] = getByGroupId_PrevAndNext(session, journalArticle,
+					groupId, orderByComparator, true);
+
+			array[1] = journalArticle;
+
+			array[2] = getByGroupId_PrevAndNext(session, journalArticle,
+					groupId, orderByComparator, false);
 
 			return array;
 		}
@@ -1306,6 +1345,109 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 		finally {
 			closeSession(session);
+		}
+	}
+
+	protected JournalArticle getByGroupId_PrevAndNext(Session session,
+		JournalArticle journalArticle, long groupId,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_JOURNALARTICLE_WHERE);
+
+		query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+
+			query.append(WHERE_LIMIT_2);
+		}
+
+		else {
+			query.append(JournalArticleModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(groupId);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(journalArticle);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<JournalArticle> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
 		}
 	}
 
@@ -1490,52 +1632,20 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		throws NoSuchArticleException, SystemException {
 		JournalArticle journalArticle = findByPrimaryKey(id);
 
-		int count = countByCompanyId(companyId);
-
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(3 +
-						(orderByComparator.getOrderByFields().length * 3));
-			}
-			else {
-				query = new StringBundler(3);
-			}
-
-			query.append(_SQL_SELECT_JOURNALARTICLE_WHERE);
-
-			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-
-			else {
-				query.append(JournalArticleModelImpl.ORDER_BY_JPQL);
-			}
-
-			String sql = query.toString();
-
-			Query q = session.createQuery(sql);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(companyId);
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
-					orderByComparator, journalArticle);
-
 			JournalArticle[] array = new JournalArticleImpl[3];
 
-			array[0] = (JournalArticle)objArray[0];
-			array[1] = (JournalArticle)objArray[1];
-			array[2] = (JournalArticle)objArray[2];
+			array[0] = getByCompanyId_PrevAndNext(session, journalArticle,
+					companyId, orderByComparator, true);
+
+			array[1] = journalArticle;
+
+			array[2] = getByCompanyId_PrevAndNext(session, journalArticle,
+					companyId, orderByComparator, false);
 
 			return array;
 		}
@@ -1544,6 +1654,109 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 		finally {
 			closeSession(session);
+		}
+	}
+
+	protected JournalArticle getByCompanyId_PrevAndNext(Session session,
+		JournalArticle journalArticle, long companyId,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_JOURNALARTICLE_WHERE);
+
+		query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+
+			query.append(WHERE_LIMIT_2);
+		}
+
+		else {
+			query.append(JournalArticleModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(companyId);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(journalArticle);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<JournalArticle> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
 		}
 	}
 
@@ -1729,52 +1942,20 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		throws NoSuchArticleException, SystemException {
 		JournalArticle journalArticle = findByPrimaryKey(id);
 
-		int count = countBySmallImageId(smallImageId);
-
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(3 +
-						(orderByComparator.getOrderByFields().length * 3));
-			}
-			else {
-				query = new StringBundler(3);
-			}
-
-			query.append(_SQL_SELECT_JOURNALARTICLE_WHERE);
-
-			query.append(_FINDER_COLUMN_SMALLIMAGEID_SMALLIMAGEID_2);
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-
-			else {
-				query.append(JournalArticleModelImpl.ORDER_BY_JPQL);
-			}
-
-			String sql = query.toString();
-
-			Query q = session.createQuery(sql);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(smallImageId);
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
-					orderByComparator, journalArticle);
-
 			JournalArticle[] array = new JournalArticleImpl[3];
 
-			array[0] = (JournalArticle)objArray[0];
-			array[1] = (JournalArticle)objArray[1];
-			array[2] = (JournalArticle)objArray[2];
+			array[0] = getBySmallImageId_PrevAndNext(session, journalArticle,
+					smallImageId, orderByComparator, true);
+
+			array[1] = journalArticle;
+
+			array[2] = getBySmallImageId_PrevAndNext(session, journalArticle,
+					smallImageId, orderByComparator, false);
 
 			return array;
 		}
@@ -1783,6 +1964,109 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 		finally {
 			closeSession(session);
+		}
+	}
+
+	protected JournalArticle getBySmallImageId_PrevAndNext(Session session,
+		JournalArticle journalArticle, long smallImageId,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_JOURNALARTICLE_WHERE);
+
+		query.append(_FINDER_COLUMN_SMALLIMAGEID_SMALLIMAGEID_2);
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+
+			query.append(WHERE_LIMIT_2);
+		}
+
+		else {
+			query.append(JournalArticleModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(smallImageId);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(journalArticle);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<JournalArticle> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
 		}
 	}
 
@@ -1984,56 +2268,20 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		throws NoSuchArticleException, SystemException {
 		JournalArticle journalArticle = findByPrimaryKey(id);
 
-		int count = countByR_S(resourcePrimKey, status);
-
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(4 +
-						(orderByComparator.getOrderByFields().length * 3));
-			}
-			else {
-				query = new StringBundler(4);
-			}
-
-			query.append(_SQL_SELECT_JOURNALARTICLE_WHERE);
-
-			query.append(_FINDER_COLUMN_R_S_RESOURCEPRIMKEY_2);
-
-			query.append(_FINDER_COLUMN_R_S_STATUS_2);
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-
-			else {
-				query.append(JournalArticleModelImpl.ORDER_BY_JPQL);
-			}
-
-			String sql = query.toString();
-
-			Query q = session.createQuery(sql);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(resourcePrimKey);
-
-			qPos.add(status);
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
-					orderByComparator, journalArticle);
-
 			JournalArticle[] array = new JournalArticleImpl[3];
 
-			array[0] = (JournalArticle)objArray[0];
-			array[1] = (JournalArticle)objArray[1];
-			array[2] = (JournalArticle)objArray[2];
+			array[0] = getByR_S_PrevAndNext(session, journalArticle,
+					resourcePrimKey, status, orderByComparator, true);
+
+			array[1] = journalArticle;
+
+			array[2] = getByR_S_PrevAndNext(session, journalArticle,
+					resourcePrimKey, status, orderByComparator, false);
 
 			return array;
 		}
@@ -2042,6 +2290,113 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 		finally {
 			closeSession(session);
+		}
+	}
+
+	protected JournalArticle getByR_S_PrevAndNext(Session session,
+		JournalArticle journalArticle, long resourcePrimKey, int status,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_JOURNALARTICLE_WHERE);
+
+		query.append(_FINDER_COLUMN_R_S_RESOURCEPRIMKEY_2);
+
+		query.append(_FINDER_COLUMN_R_S_STATUS_2);
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+
+			query.append(WHERE_LIMIT_2);
+		}
+
+		else {
+			query.append(JournalArticleModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(resourcePrimKey);
+
+		qPos.add(status);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(journalArticle);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<JournalArticle> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
 		}
 	}
 
@@ -2267,68 +2622,20 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		throws NoSuchArticleException, SystemException {
 		JournalArticle journalArticle = findByPrimaryKey(id);
 
-		int count = countByG_A(groupId, articleId);
-
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(4 +
-						(orderByComparator.getOrderByFields().length * 3));
-			}
-			else {
-				query = new StringBundler(4);
-			}
-
-			query.append(_SQL_SELECT_JOURNALARTICLE_WHERE);
-
-			query.append(_FINDER_COLUMN_G_A_GROUPID_2);
-
-			if (articleId == null) {
-				query.append(_FINDER_COLUMN_G_A_ARTICLEID_1);
-			}
-			else {
-				if (articleId.equals(StringPool.BLANK)) {
-					query.append(_FINDER_COLUMN_G_A_ARTICLEID_3);
-				}
-				else {
-					query.append(_FINDER_COLUMN_G_A_ARTICLEID_2);
-				}
-			}
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-
-			else {
-				query.append(JournalArticleModelImpl.ORDER_BY_JPQL);
-			}
-
-			String sql = query.toString();
-
-			Query q = session.createQuery(sql);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(groupId);
-
-			if (articleId != null) {
-				qPos.add(articleId);
-			}
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
-					orderByComparator, journalArticle);
-
 			JournalArticle[] array = new JournalArticleImpl[3];
 
-			array[0] = (JournalArticle)objArray[0];
-			array[1] = (JournalArticle)objArray[1];
-			array[2] = (JournalArticle)objArray[2];
+			array[0] = getByG_A_PrevAndNext(session, journalArticle, groupId,
+					articleId, orderByComparator, true);
+
+			array[1] = journalArticle;
+
+			array[2] = getByG_A_PrevAndNext(session, journalArticle, groupId,
+					articleId, orderByComparator, false);
 
 			return array;
 		}
@@ -2337,6 +2644,125 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 		finally {
 			closeSession(session);
+		}
+	}
+
+	protected JournalArticle getByG_A_PrevAndNext(Session session,
+		JournalArticle journalArticle, long groupId, String articleId,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_JOURNALARTICLE_WHERE);
+
+		query.append(_FINDER_COLUMN_G_A_GROUPID_2);
+
+		if (articleId == null) {
+			query.append(_FINDER_COLUMN_G_A_ARTICLEID_1);
+		}
+		else {
+			if (articleId.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_G_A_ARTICLEID_3);
+			}
+			else {
+				query.append(_FINDER_COLUMN_G_A_ARTICLEID_2);
+			}
+		}
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+
+			query.append(WHERE_LIMIT_2);
+		}
+
+		else {
+			query.append(JournalArticleModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(groupId);
+
+		if (articleId != null) {
+			qPos.add(articleId);
+		}
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(journalArticle);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<JournalArticle> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
 		}
 	}
 
@@ -2562,68 +2988,20 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		throws NoSuchArticleException, SystemException {
 		JournalArticle journalArticle = findByPrimaryKey(id);
 
-		int count = countByG_S(groupId, structureId);
-
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(4 +
-						(orderByComparator.getOrderByFields().length * 3));
-			}
-			else {
-				query = new StringBundler(4);
-			}
-
-			query.append(_SQL_SELECT_JOURNALARTICLE_WHERE);
-
-			query.append(_FINDER_COLUMN_G_S_GROUPID_2);
-
-			if (structureId == null) {
-				query.append(_FINDER_COLUMN_G_S_STRUCTUREID_1);
-			}
-			else {
-				if (structureId.equals(StringPool.BLANK)) {
-					query.append(_FINDER_COLUMN_G_S_STRUCTUREID_3);
-				}
-				else {
-					query.append(_FINDER_COLUMN_G_S_STRUCTUREID_2);
-				}
-			}
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-
-			else {
-				query.append(JournalArticleModelImpl.ORDER_BY_JPQL);
-			}
-
-			String sql = query.toString();
-
-			Query q = session.createQuery(sql);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(groupId);
-
-			if (structureId != null) {
-				qPos.add(structureId);
-			}
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
-					orderByComparator, journalArticle);
-
 			JournalArticle[] array = new JournalArticleImpl[3];
 
-			array[0] = (JournalArticle)objArray[0];
-			array[1] = (JournalArticle)objArray[1];
-			array[2] = (JournalArticle)objArray[2];
+			array[0] = getByG_S_PrevAndNext(session, journalArticle, groupId,
+					structureId, orderByComparator, true);
+
+			array[1] = journalArticle;
+
+			array[2] = getByG_S_PrevAndNext(session, journalArticle, groupId,
+					structureId, orderByComparator, false);
 
 			return array;
 		}
@@ -2632,6 +3010,125 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 		finally {
 			closeSession(session);
+		}
+	}
+
+	protected JournalArticle getByG_S_PrevAndNext(Session session,
+		JournalArticle journalArticle, long groupId, String structureId,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_JOURNALARTICLE_WHERE);
+
+		query.append(_FINDER_COLUMN_G_S_GROUPID_2);
+
+		if (structureId == null) {
+			query.append(_FINDER_COLUMN_G_S_STRUCTUREID_1);
+		}
+		else {
+			if (structureId.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_G_S_STRUCTUREID_3);
+			}
+			else {
+				query.append(_FINDER_COLUMN_G_S_STRUCTUREID_2);
+			}
+		}
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+
+			query.append(WHERE_LIMIT_2);
+		}
+
+		else {
+			query.append(JournalArticleModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(groupId);
+
+		if (structureId != null) {
+			qPos.add(structureId);
+		}
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(journalArticle);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<JournalArticle> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
 		}
 	}
 
@@ -2857,68 +3354,20 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		throws NoSuchArticleException, SystemException {
 		JournalArticle journalArticle = findByPrimaryKey(id);
 
-		int count = countByG_T(groupId, templateId);
-
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(4 +
-						(orderByComparator.getOrderByFields().length * 3));
-			}
-			else {
-				query = new StringBundler(4);
-			}
-
-			query.append(_SQL_SELECT_JOURNALARTICLE_WHERE);
-
-			query.append(_FINDER_COLUMN_G_T_GROUPID_2);
-
-			if (templateId == null) {
-				query.append(_FINDER_COLUMN_G_T_TEMPLATEID_1);
-			}
-			else {
-				if (templateId.equals(StringPool.BLANK)) {
-					query.append(_FINDER_COLUMN_G_T_TEMPLATEID_3);
-				}
-				else {
-					query.append(_FINDER_COLUMN_G_T_TEMPLATEID_2);
-				}
-			}
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-
-			else {
-				query.append(JournalArticleModelImpl.ORDER_BY_JPQL);
-			}
-
-			String sql = query.toString();
-
-			Query q = session.createQuery(sql);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(groupId);
-
-			if (templateId != null) {
-				qPos.add(templateId);
-			}
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
-					orderByComparator, journalArticle);
-
 			JournalArticle[] array = new JournalArticleImpl[3];
 
-			array[0] = (JournalArticle)objArray[0];
-			array[1] = (JournalArticle)objArray[1];
-			array[2] = (JournalArticle)objArray[2];
+			array[0] = getByG_T_PrevAndNext(session, journalArticle, groupId,
+					templateId, orderByComparator, true);
+
+			array[1] = journalArticle;
+
+			array[2] = getByG_T_PrevAndNext(session, journalArticle, groupId,
+					templateId, orderByComparator, false);
 
 			return array;
 		}
@@ -2927,6 +3376,125 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 		finally {
 			closeSession(session);
+		}
+	}
+
+	protected JournalArticle getByG_T_PrevAndNext(Session session,
+		JournalArticle journalArticle, long groupId, String templateId,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_JOURNALARTICLE_WHERE);
+
+		query.append(_FINDER_COLUMN_G_T_GROUPID_2);
+
+		if (templateId == null) {
+			query.append(_FINDER_COLUMN_G_T_TEMPLATEID_1);
+		}
+		else {
+			if (templateId.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_G_T_TEMPLATEID_3);
+			}
+			else {
+				query.append(_FINDER_COLUMN_G_T_TEMPLATEID_2);
+			}
+		}
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+
+			query.append(WHERE_LIMIT_2);
+		}
+
+		else {
+			query.append(JournalArticleModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(groupId);
+
+		if (templateId != null) {
+			qPos.add(templateId);
+		}
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(journalArticle);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<JournalArticle> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
 		}
 	}
 
@@ -3152,68 +3720,20 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		throws NoSuchArticleException, SystemException {
 		JournalArticle journalArticle = findByPrimaryKey(id);
 
-		int count = countByG_UT(groupId, urlTitle);
-
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(4 +
-						(orderByComparator.getOrderByFields().length * 3));
-			}
-			else {
-				query = new StringBundler(4);
-			}
-
-			query.append(_SQL_SELECT_JOURNALARTICLE_WHERE);
-
-			query.append(_FINDER_COLUMN_G_UT_GROUPID_2);
-
-			if (urlTitle == null) {
-				query.append(_FINDER_COLUMN_G_UT_URLTITLE_1);
-			}
-			else {
-				if (urlTitle.equals(StringPool.BLANK)) {
-					query.append(_FINDER_COLUMN_G_UT_URLTITLE_3);
-				}
-				else {
-					query.append(_FINDER_COLUMN_G_UT_URLTITLE_2);
-				}
-			}
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-
-			else {
-				query.append(JournalArticleModelImpl.ORDER_BY_JPQL);
-			}
-
-			String sql = query.toString();
-
-			Query q = session.createQuery(sql);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(groupId);
-
-			if (urlTitle != null) {
-				qPos.add(urlTitle);
-			}
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
-					orderByComparator, journalArticle);
-
 			JournalArticle[] array = new JournalArticleImpl[3];
 
-			array[0] = (JournalArticle)objArray[0];
-			array[1] = (JournalArticle)objArray[1];
-			array[2] = (JournalArticle)objArray[2];
+			array[0] = getByG_UT_PrevAndNext(session, journalArticle, groupId,
+					urlTitle, orderByComparator, true);
+
+			array[1] = journalArticle;
+
+			array[2] = getByG_UT_PrevAndNext(session, journalArticle, groupId,
+					urlTitle, orderByComparator, false);
 
 			return array;
 		}
@@ -3222,6 +3742,125 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 		finally {
 			closeSession(session);
+		}
+	}
+
+	protected JournalArticle getByG_UT_PrevAndNext(Session session,
+		JournalArticle journalArticle, long groupId, String urlTitle,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_JOURNALARTICLE_WHERE);
+
+		query.append(_FINDER_COLUMN_G_UT_GROUPID_2);
+
+		if (urlTitle == null) {
+			query.append(_FINDER_COLUMN_G_UT_URLTITLE_1);
+		}
+		else {
+			if (urlTitle.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_G_UT_URLTITLE_3);
+			}
+			else {
+				query.append(_FINDER_COLUMN_G_UT_URLTITLE_2);
+			}
+		}
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+
+			query.append(WHERE_LIMIT_2);
+		}
+
+		else {
+			query.append(JournalArticleModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(groupId);
+
+		if (urlTitle != null) {
+			qPos.add(urlTitle);
+		}
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(journalArticle);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<JournalArticle> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
 		}
 	}
 
@@ -3423,56 +4062,20 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		throws NoSuchArticleException, SystemException {
 		JournalArticle journalArticle = findByPrimaryKey(id);
 
-		int count = countByC_S(companyId, status);
-
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(4 +
-						(orderByComparator.getOrderByFields().length * 3));
-			}
-			else {
-				query = new StringBundler(4);
-			}
-
-			query.append(_SQL_SELECT_JOURNALARTICLE_WHERE);
-
-			query.append(_FINDER_COLUMN_C_S_COMPANYID_2);
-
-			query.append(_FINDER_COLUMN_C_S_STATUS_2);
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-
-			else {
-				query.append(JournalArticleModelImpl.ORDER_BY_JPQL);
-			}
-
-			String sql = query.toString();
-
-			Query q = session.createQuery(sql);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(companyId);
-
-			qPos.add(status);
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
-					orderByComparator, journalArticle);
-
 			JournalArticle[] array = new JournalArticleImpl[3];
 
-			array[0] = (JournalArticle)objArray[0];
-			array[1] = (JournalArticle)objArray[1];
-			array[2] = (JournalArticle)objArray[2];
+			array[0] = getByC_S_PrevAndNext(session, journalArticle, companyId,
+					status, orderByComparator, true);
+
+			array[1] = journalArticle;
+
+			array[2] = getByC_S_PrevAndNext(session, journalArticle, companyId,
+					status, orderByComparator, false);
 
 			return array;
 		}
@@ -3481,6 +4084,113 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 		finally {
 			closeSession(session);
+		}
+	}
+
+	protected JournalArticle getByC_S_PrevAndNext(Session session,
+		JournalArticle journalArticle, long companyId, int status,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_JOURNALARTICLE_WHERE);
+
+		query.append(_FINDER_COLUMN_C_S_COMPANYID_2);
+
+		query.append(_FINDER_COLUMN_C_S_STATUS_2);
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+
+			query.append(WHERE_LIMIT_2);
+		}
+
+		else {
+			query.append(JournalArticleModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(companyId);
+
+		qPos.add(status);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(journalArticle);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<JournalArticle> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
 		}
 	}
 
@@ -3864,72 +4574,20 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		throws NoSuchArticleException, SystemException {
 		JournalArticle journalArticle = findByPrimaryKey(id);
 
-		int count = countByG_A_S(groupId, articleId, status);
-
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(5 +
-						(orderByComparator.getOrderByFields().length * 3));
-			}
-			else {
-				query = new StringBundler(5);
-			}
-
-			query.append(_SQL_SELECT_JOURNALARTICLE_WHERE);
-
-			query.append(_FINDER_COLUMN_G_A_S_GROUPID_2);
-
-			if (articleId == null) {
-				query.append(_FINDER_COLUMN_G_A_S_ARTICLEID_1);
-			}
-			else {
-				if (articleId.equals(StringPool.BLANK)) {
-					query.append(_FINDER_COLUMN_G_A_S_ARTICLEID_3);
-				}
-				else {
-					query.append(_FINDER_COLUMN_G_A_S_ARTICLEID_2);
-				}
-			}
-
-			query.append(_FINDER_COLUMN_G_A_S_STATUS_2);
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-
-			else {
-				query.append(JournalArticleModelImpl.ORDER_BY_JPQL);
-			}
-
-			String sql = query.toString();
-
-			Query q = session.createQuery(sql);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(groupId);
-
-			if (articleId != null) {
-				qPos.add(articleId);
-			}
-
-			qPos.add(status);
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
-					orderByComparator, journalArticle);
-
 			JournalArticle[] array = new JournalArticleImpl[3];
 
-			array[0] = (JournalArticle)objArray[0];
-			array[1] = (JournalArticle)objArray[1];
-			array[2] = (JournalArticle)objArray[2];
+			array[0] = getByG_A_S_PrevAndNext(session, journalArticle, groupId,
+					articleId, status, orderByComparator, true);
+
+			array[1] = journalArticle;
+
+			array[2] = getByG_A_S_PrevAndNext(session, journalArticle, groupId,
+					articleId, status, orderByComparator, false);
 
 			return array;
 		}
@@ -3938,6 +4596,129 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 		finally {
 			closeSession(session);
+		}
+	}
+
+	protected JournalArticle getByG_A_S_PrevAndNext(Session session,
+		JournalArticle journalArticle, long groupId, String articleId,
+		int status, OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_JOURNALARTICLE_WHERE);
+
+		query.append(_FINDER_COLUMN_G_A_S_GROUPID_2);
+
+		if (articleId == null) {
+			query.append(_FINDER_COLUMN_G_A_S_ARTICLEID_1);
+		}
+		else {
+			if (articleId.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_G_A_S_ARTICLEID_3);
+			}
+			else {
+				query.append(_FINDER_COLUMN_G_A_S_ARTICLEID_2);
+			}
+		}
+
+		query.append(_FINDER_COLUMN_G_A_S_STATUS_2);
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+
+			query.append(WHERE_LIMIT_2);
+		}
+
+		else {
+			query.append(JournalArticleModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(groupId);
+
+		if (articleId != null) {
+			qPos.add(articleId);
+		}
+
+		qPos.add(status);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(journalArticle);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<JournalArticle> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
 		}
 	}
 
@@ -4181,72 +4962,20 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		throws NoSuchArticleException, SystemException {
 		JournalArticle journalArticle = findByPrimaryKey(id);
 
-		int count = countByG_UT_S(groupId, urlTitle, status);
-
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(5 +
-						(orderByComparator.getOrderByFields().length * 3));
-			}
-			else {
-				query = new StringBundler(5);
-			}
-
-			query.append(_SQL_SELECT_JOURNALARTICLE_WHERE);
-
-			query.append(_FINDER_COLUMN_G_UT_S_GROUPID_2);
-
-			if (urlTitle == null) {
-				query.append(_FINDER_COLUMN_G_UT_S_URLTITLE_1);
-			}
-			else {
-				if (urlTitle.equals(StringPool.BLANK)) {
-					query.append(_FINDER_COLUMN_G_UT_S_URLTITLE_3);
-				}
-				else {
-					query.append(_FINDER_COLUMN_G_UT_S_URLTITLE_2);
-				}
-			}
-
-			query.append(_FINDER_COLUMN_G_UT_S_STATUS_2);
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-
-			else {
-				query.append(JournalArticleModelImpl.ORDER_BY_JPQL);
-			}
-
-			String sql = query.toString();
-
-			Query q = session.createQuery(sql);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(groupId);
-
-			if (urlTitle != null) {
-				qPos.add(urlTitle);
-			}
-
-			qPos.add(status);
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count,
-					orderByComparator, journalArticle);
-
 			JournalArticle[] array = new JournalArticleImpl[3];
 
-			array[0] = (JournalArticle)objArray[0];
-			array[1] = (JournalArticle)objArray[1];
-			array[2] = (JournalArticle)objArray[2];
+			array[0] = getByG_UT_S_PrevAndNext(session, journalArticle,
+					groupId, urlTitle, status, orderByComparator, true);
+
+			array[1] = journalArticle;
+
+			array[2] = getByG_UT_S_PrevAndNext(session, journalArticle,
+					groupId, urlTitle, status, orderByComparator, false);
 
 			return array;
 		}
@@ -4255,6 +4984,129 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 		finally {
 			closeSession(session);
+		}
+	}
+
+	protected JournalArticle getByG_UT_S_PrevAndNext(Session session,
+		JournalArticle journalArticle, long groupId, String urlTitle,
+		int status, OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_JOURNALARTICLE_WHERE);
+
+		query.append(_FINDER_COLUMN_G_UT_S_GROUPID_2);
+
+		if (urlTitle == null) {
+			query.append(_FINDER_COLUMN_G_UT_S_URLTITLE_1);
+		}
+		else {
+			if (urlTitle.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_G_UT_S_URLTITLE_3);
+			}
+			else {
+				query.append(_FINDER_COLUMN_G_UT_S_URLTITLE_2);
+			}
+		}
+
+		query.append(_FINDER_COLUMN_G_UT_S_STATUS_2);
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+
+			query.append(WHERE_LIMIT_2);
+		}
+
+		else {
+			query.append(JournalArticleModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(groupId);
+
+		if (urlTitle != null) {
+			qPos.add(urlTitle);
+		}
+
+		qPos.add(status);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(journalArticle);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<JournalArticle> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
 		}
 	}
 
