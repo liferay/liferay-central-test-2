@@ -20,45 +20,52 @@
 	<c:when test="<%= windowState.equals(WindowState.NORMAL) %>">
 		<liferay-ui:success key="invitationSent" message="your-invitations-have-been-sent" />
 
-		<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/invitation/view" /></portlet:renderURL>">
+		<portlet:renderURL var="viewURL" windowState="<%= WindowState.MAXIMIZED.toString() %>">
+			<portlet:param name="struts_action" value="/invitation/view" />
+		</portlet:renderURL>
+
+		<aui:a href="<%= viewURL %>">
 			<liferay-ui:message key="invite-friends" />
-		</a>
+		</aui:a>
 	</c:when>
 	<c:otherwise>
-		<form action="<portlet:actionURL><portlet:param name="struts_action" value="/invitation/view" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
-		<input name="redirect" type="hidden" value="<portlet:renderURL windowState="<%= WindowState.NORMAL.toString() %>" />" />
+		<portlet:actionURL var="portletURL">
+			<portlet:param name="struts_action" value="/invitation/view" />
+		</portlet:actionURL>
 
-		<%= LanguageUtil.format(pageContext, "enter-up-to-x-email-addresses-of-friends-you-would-like-to-invite", String.valueOf(InvitationUtil.getEmailMessageMaxRecipients())) %>
+		<portlet:renderURL var="redirectURL" windowState="<%= WindowState.NORMAL.toString() %>" />
 
-		<br /><br />
+		<aui:form action="<%= portletURL %>" method="post" name="fm">
+			<aui:input name="redirect" type="hidden" value="<%= redirectURL %>" />
 
-		<%
-		Set invalidEmailAddresses = (Set)SessionErrors.get(renderRequest, "emailAddresses");
+			<liferay-ui:message arguments="<%= String.valueOf(InvitationUtil.getEmailMessageMaxRecipients()) %>" key="enter-up-to-x-email-addresses-of-friends-you-would-like-to-invite" />
 
-		int emailMessageMaxRecipients = InvitationUtil.getEmailMessageMaxRecipients();
+			<br /><br />
 
-		for (int i = 0; i < emailMessageMaxRecipients; i++) {
-			String emailAddress = ParamUtil.getString(request, "emailAddress" + i);
-		%>
+			<%
+			Set invalidEmailAddresses = (Set)SessionErrors.get(renderRequest, "emailAddresses");
 
-			<c:if test='<%= (invalidEmailAddresses != null) && invalidEmailAddresses.contains("emailAddress" + i) %>'>
-				<div class="portlet-msg-error">
-				<liferay-ui:message key="please-enter-a-valid-email-address" />
-				</div>
-			</c:if>
+			int emailMessageMaxRecipients = InvitationUtil.getEmailMessageMaxRecipients();
 
-			<input class="lfr-input-text" name="<portlet:namespace />emailAddress<%= i %>" type="text" value="<%= emailAddress %>" />
+			for (int i = 0; i < emailMessageMaxRecipients; i++) {
+				String emailAddress = ParamUtil.getString(request, "emailAddress" + i);
+			%>
 
-			<br />
+				<c:if test='<%= (invalidEmailAddresses != null) && invalidEmailAddresses.contains("emailAddress" + i) %>'>
+					<div class="portlet-msg-error">
+						<liferay-ui:message key="please-enter-a-valid-email-address" />
+					</div>
+				</c:if>
 
-		<%
-		}
-		%>
+				<aui:input cssClass="lfr-input-text-container" label="" name='<%= "emailAddress" + i %>' size="65" type="text" value="<%= emailAddress %>" />
 
-		<br />
+			<%
+			}
+			%>
 
-		<input type="button" value="<liferay-ui:message key="invite-friends" />" onClick="submitForm(document.<portlet:namespace />fm);" />
-
-		</form>
+			<aui:button-row>
+				<aui:button type="submit" value="invite-friends" />
+			</aui:button-row>
+		</aui:form>
 	</c:otherwise>
 </c:choose>
