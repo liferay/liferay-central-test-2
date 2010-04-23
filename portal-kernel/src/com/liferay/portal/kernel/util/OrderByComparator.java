@@ -16,12 +16,15 @@ package com.liferay.portal.kernel.util;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Method;
+
 import java.util.Comparator;
 
 /**
  * <a href="OrderByComparator.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Shuyang Zhou
  */
 public abstract class OrderByComparator implements Comparator, Serializable {
 
@@ -56,6 +59,33 @@ public abstract class OrderByComparator implements Comparator, Serializable {
 		}
 
 		return fields;
+	}
+
+	public Object[] getOrderByValues(Object obj) {
+		try {
+			Class<?> clazz = obj.getClass();
+			String[] fieldNames = getOrderByFields();
+			Object[] values = new Object[fieldNames.length];
+			for(int i = 0; i< fieldNames.length; i++) {
+				String fieldName = fieldNames[i];
+
+				StringBuilder getterNameBuilder = new StringBuilder(
+					fieldName.length() + 3);
+				getterNameBuilder.append("get");
+				getterNameBuilder.append(
+					Character.toUpperCase(fieldName.charAt(0)));
+				getterNameBuilder.append(fieldName.substring(1));
+
+				String getterName = getterNameBuilder.toString();
+				Method getterMethod = clazz.getMethod(getterName);
+				getterMethod.setAccessible(true);
+				values[i] = getterMethod.invoke(obj);
+			}
+			return values;
+		}
+		catch(Exception e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	public boolean isAscending() {

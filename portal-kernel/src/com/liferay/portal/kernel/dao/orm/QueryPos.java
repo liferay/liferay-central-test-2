@@ -14,12 +14,17 @@
 
 package com.liferay.portal.kernel.dao.orm;
 
+import com.liferay.portal.kernel.util.CalendarUtil;
+
 import java.sql.Timestamp;
+
+import java.util.Date;
 
 /**
  * <a href="QueryPos.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @auther Shuyang Zhou
  */
 public class QueryPos {
 
@@ -278,6 +283,47 @@ public class QueryPos {
 			for (int j = 0; j < count; j++) {
 				add(values[i]);
 			}
+		}
+	}
+
+	public void add(Object obj) {
+		Class<?> clazz = obj.getClass();
+
+		if (obj == null) {
+			addNull();
+		}
+		else if (clazz == Boolean.class) {
+			add(((Boolean) obj).booleanValue());
+		}
+		else if (clazz == Double.class) {
+			add(((Double) obj).doubleValue());
+		}
+		else if (clazz == Float.class) {
+			add(((Float) obj).floatValue());
+		}
+		else if (clazz == Integer.class) {
+			add(((Integer) obj).intValue());
+		}
+		else if (clazz == Long.class) {
+			add(((Long) obj).longValue());
+		}
+		else if (clazz == Short.class) {
+			add(((Short) obj).shortValue());
+		}
+		else if (clazz == String.class) {
+			add((String) obj);
+		}
+		else if (clazz == Timestamp.class) {
+			add((Timestamp) obj);
+		}
+		else if (clazz == Date.class) {
+			add(CalendarUtil.getTimestamp((Date) obj));
+		}
+		else if (clazz.isArray()) {
+			throw new RuntimeException("Can not add array type: " + obj);
+		}
+		else {
+			throw new RuntimeException("Unsupport object type: " + obj);
 		}
 	}
 

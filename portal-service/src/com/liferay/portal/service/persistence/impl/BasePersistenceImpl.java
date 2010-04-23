@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.ORMException;
 import com.liferay.portal.kernel.dao.orm.OrderFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.SessionFactory;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -44,6 +45,7 @@ import javax.sql.DataSource;
  * <a href="BasePersistenceImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Shuyang Zhou
  */
 public class BasePersistenceImpl<T extends BaseModel<T>>
 	implements BasePersistence<T>, SessionFactory {
@@ -282,6 +284,74 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 		}
 	}
 
+	protected void appendOrderByComparator(
+		StringBundler query, String entityAlias,
+		OrderByComparator orderByComparator, boolean reverse) {
+
+		String[] orderByFields = orderByComparator.getOrderByFields();
+
+		if (orderByFields.length > 0) {
+			query.append(WHERE_AND);
+		}
+
+		for (int i = 0; i < orderByFields.length; i++) {
+			query.append(entityAlias);
+			query.append(orderByFields[i]);
+
+			if ((i + 1) < orderByFields.length) {
+				if (orderByComparator.isAscending() ^ reverse) {
+					query.append(WHERE_BIGGER_THAN_HAS_NEXT);
+				}
+				else {
+					query.append(WHERE_LESSER_THAN_HAS_NEXT);
+				}
+			}
+			else {
+				if (orderByComparator.isAscending() ^ reverse) {
+					query.append(WHERE_BIGGER_THAN);
+				}
+				else {
+					query.append(WHERE_LESSER_THAN);
+				}
+			}
+		}
+
+		query.append(ORDER_BY_CLAUSE);
+
+		for (int i = 0; i < orderByFields.length; i++) {
+			query.append(entityAlias);
+			query.append(orderByFields[i]);
+
+			if ((i + 1) < orderByFields.length) {
+				if (orderByComparator.isAscending() ^ reverse) {
+					query.append(ORDER_BY_ASC_HAS_NEXT);
+				}
+				else {
+					query.append(ORDER_BY_DESC_HAS_NEXT);
+				}
+			}
+			else {
+				if (orderByComparator.isAscending() ^ reverse) {
+					query.append(ORDER_BY_ASC);
+				}
+				else {
+					query.append(ORDER_BY_DESC);
+				}
+			}
+		}
+		query.append(WHERE_LIMIT_2);
+	}
+
+	protected void setOrderByComparatorValues(
+		QueryPos qPos, OrderByComparator orderByComparator, T object) {
+
+		Object[] objects = orderByComparator.getOrderByValues(object);
+
+		for(Object obj: objects) {
+			qPos.add(obj);
+		}
+	}
+
 	protected static final String ORDER_BY_ASC = " ASC";
 
 	protected static final String ORDER_BY_ASC_HAS_NEXT = " ASC, ";
@@ -291,6 +361,18 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 	protected static final String ORDER_BY_DESC = " DESC";
 
 	protected static final String ORDER_BY_DESC_HAS_NEXT = " DESC, ";
+
+	protected static final String WHERE_AND = " and ";
+
+	protected static final String WHERE_BIGGER_THAN = " >= ? ";
+
+	protected static final String WHERE_BIGGER_THAN_HAS_NEXT = " >= ? and ";
+
+	protected static final String WHERE_LESSER_THAN = " <= ? ";
+
+	protected static final String WHERE_LESSER_THAN_HAS_NEXT = " <= ? and ";
+
+	protected static final String WHERE_LIMIT_2 = " limit 2";
 
 	protected ModelListener<T>[] listeners = new ModelListener[0];
 

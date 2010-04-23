@@ -938,84 +938,24 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 			OrderByComparator orderByComparator) throws ${noSuchEntity}Exception, SystemException {
 				${entity.name} ${entity.varName} = findByPrimaryKey(${entity.PKVarName});
 
-				int count = countBy${finder.name}(
-
-				<#list finderColsList as finderCol>
-					${finderCol.name}
-
-					<#if finderCol_has_next>
-						,
-					</#if>
-				</#list>
-
-				);
-
 				Session session = null;
 
 				try {
 					session = openSession();
 
-					StringBundler query = null;
-
-					if (orderByComparator != null) {
-						query = new StringBundler(${finderColsList?size + 2} + (orderByComparator.getOrderByFields().length * 3));
-					}
-					else {
-						query = new StringBundler(<#if entity.getOrder()??>${finderColsList?size + 2}<#else>${finderColsList?size + 1}</#if>);
-					}
-
-					query.append(_SQL_SELECT_${entity.alias?upper_case}_WHERE);
-
-					<#include "persistence_impl_finder_col.ftl">
-
-					if (orderByComparator != null) {
-						appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
-					}
-
-					<#if entity.getOrder()??>
-						else {
-							query.append(${entity.name}ModelImpl.ORDER_BY_JPQL);
-						}
-					</#if>
-
-					String sql = query.toString();
-
-					Query q = session.createQuery(sql);
-
-					QueryPos qPos = QueryPos.getInstance(q);
-
-					<#list finderColsList as finderCol>
-						<#if !finderCol.isPrimitiveType()>
-							if (${finderCol.name} != null) {
-						</#if>
-
-						qPos.add(
-
-						<#if finderCol.type == "Date">
-							CalendarUtil.getTimestamp(
-						</#if>
-
-						${finderCol.name}${serviceBuilder.getPrimitiveObjValue("${finderCol.type}")}
-
-						<#if finderCol.type == "Date">
-							)
-						</#if>
-
-						);
-
-						<#if !finderCol.isPrimitiveType()>
-							}
-						</#if>
-
-					</#list>
-
-					Object[] objArray = QueryUtil.getPrevAndNext(q, count, orderByComparator, ${entity.varName});
-
 					${entity.name}[] array = new ${entity.name}Impl[3];
 
-					array[0] = (${entity.name})objArray[0];
-					array[1] = (${entity.name})objArray[1];
-					array[2] = (${entity.name})objArray[2];
+					array[0] = getBy${finder.name}_PrevOrNext(session, ${entity.varName},
+						<#list finderColsList as finderCol>
+							${finderCol.name},
+						</#list>
+						orderByComparator, true);
+					array[1] = ${entity.varName};
+					array[2] = getBy${finder.name}_PrevOrNext(session, ${entity.varName},
+						<#list finderColsList as finderCol>
+							${finderCol.name},
+						</#list>
+						orderByComparator, false);
 
 					return array;
 				}
@@ -1024,6 +964,83 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 				}
 				finally {
 					closeSession(session);
+				}
+			}
+
+			protected ${entity.name} getBy${finder.name}_PrevOrNext(
+				Session session, ${entity.name} ${entity.varName},
+
+				<#list finderColsList as finderCol>
+					${finderCol.type} ${finderCol.name},
+				</#list>
+
+				OrderByComparator orderByComparator, boolean prev) {
+
+				StringBundler query = null;
+
+				if (orderByComparator != null) {
+					query = new StringBundler(6 +
+							(orderByComparator.getOrderByFields().length * 6));
+				}
+				else {
+					query = new StringBundler(3);
+				}
+
+				query.append(_SQL_SELECT_${entity.alias?upper_case}_WHERE);
+
+				<#include "persistence_impl_finder_col.ftl">
+
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, orderByComparator, prev);
+				}
+
+				<#if entity.getOrder()??>
+					else {
+						query.append(${entity.name}ModelImpl.ORDER_BY_JPQL);
+					}
+				</#if>
+
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				<#list finderColsList as finderCol>
+					<#if !finderCol.isPrimitiveType()>
+						if (${finderCol.name} != null) {
+					</#if>
+
+					qPos.add(
+
+					<#if finderCol.type == "Date">
+						CalendarUtil.getTimestamp(
+					</#if>
+
+					${finderCol.name}${serviceBuilder.getPrimitiveObjValue("${finderCol.type}")}
+
+					<#if finderCol.type == "Date">
+						)
+					</#if>
+
+					);
+
+					<#if !finderCol.isPrimitiveType()>
+						}
+					</#if>
+
+				</#list>
+
+				if(orderByComparator != null) {
+					setOrderByComparatorValues(qPos, orderByComparator, ${entity.varName});
+				}
+
+				List<${entity.name}> list = q.list();
+				if(list.size() == 2) {
+					return list.get(1);
+				}
+				else {
+					return null;
 				}
 			}
 		<#else>
