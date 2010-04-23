@@ -90,6 +90,9 @@ public class AssetPublisherFriendlyURLMapper extends BaseFriendlyURLMapper {
 				portletURL.addParameterIncludedInPath("assetEntryId");
 			}
 		}
+		else if (windowState.equals(WindowState.MAXIMIZED)) {
+				friendlyURLPath += StringPool.SLASH + windowState;
+		}
 
 		if (Validator.isNotNull(friendlyURLPath)) {
 			portletURL.addParameterIncludedInPath("p_p_id");
@@ -122,7 +125,7 @@ public class AssetPublisherFriendlyURLMapper extends BaseFriendlyURLMapper {
 			String assetEntryId = null;
 			String urlTitle = null;
 
-			if (urlFragments.length > 3) {
+			if (urlFragments.length > 3 && urlFragments[2].equals("id")) {
 				assetEntryId = urlFragments[3];
 			}
 			else {
@@ -131,18 +134,10 @@ public class AssetPublisherFriendlyURLMapper extends BaseFriendlyURLMapper {
 
 			String portletId = _PORTLET_ID + "_INSTANCE_" + instanceId;
 
-		   if (Validator.equals(portletId, _PORTLET_ID)) {
-				portletId = _PORTLET_DEFAULT_INSTANCE;
+			params.put("p_p_id", new String[] {portletId});
 
-				params.put("p_p_id", new String[] {portletId});
-				params.put(
-					"p_p_state",
-					new String[] {WindowState.MAXIMIZED.toString()});
-			}
-			else {
-				params.put("p_p_id", new String[] {portletId});
-				params.put(
-					"p_p_state", new String[] {WindowState.NORMAL.toString()});
+		  	if (friendlyURLPath.indexOf("maximized", x) != -1) {
+				addParam(params, "p_p_state", WindowState.MAXIMIZED);
 			}
 
 			params.put("p_p_lifecycle", new String[] {"0"});
