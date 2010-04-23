@@ -43,12 +43,12 @@ import org.apache.struts.util.RequestUtils;
  */
 public class PortletResourceBundles {
 
-	public static String getString(PageContext pageContext, String key) {
-		return _instance._getString(pageContext, key);
-	}
-
 	public static String getString(Locale locale, String key) {
 		return _instance._getString(locale, key);
+	}
+
+	public static String getString(PageContext pageContext, String key) {
+		return _instance._getString(pageContext, key);
 	}
 
 	public static String getString(String languageId, String key) {
@@ -62,58 +62,70 @@ public class PortletResourceBundles {
 	}
 
 	public static void put(
-		String servletContextName, String languageId, ResourceBundle bundle) {
+		String servletContextName, String languageId,
+		ResourceBundle resourceBundle) {
 
-		_instance._put(servletContextName, languageId, bundle);
+		_instance._put(servletContextName, languageId, resourceBundle);
 	}
 
 	public static void remove(String servletContextName) {
 		_instance._remove(servletContextName);
 	}
 
+	private Map<String, Map<String, ResourceBundle>> _resourceBundles;
+
 	private PortletResourceBundles() {
-		_contexts = new ConcurrentHashMap<String, Map<String, ResourceBundle>>(
-			new LinkedHashMap<String, Map<String, ResourceBundle>>());
+		_resourceBundles =
+			new ConcurrentHashMap<String, Map<String, ResourceBundle>>(
+				new LinkedHashMap<String, Map<String, ResourceBundle>>());
 	}
 
-	private ResourceBundle _getBundle(
-		String servletContextName, String languageId) {
+	private ResourceBundle _getResourceBundle(
+		Map<String, ResourceBundle> resourceBundles, String languageId) {
 
-		Map<String, ResourceBundle> bundles = _getBundles(servletContextName);
+		ResourceBundle resourceBundle = resourceBundles.get(languageId);
 
-		return _getBundle(bundles, languageId);
-	}
-
-	private ResourceBundle _getBundle(
-		Map<String, ResourceBundle> bundles, String languageId) {
-
-		ResourceBundle bundle = bundles.get(languageId);
-
-		if (bundle == null) {
+		if (resourceBundle == null) {
 			try {
-				bundle = new PropertyResourceBundle(
+				resourceBundle = new PropertyResourceBundle(
 					new UnsyncByteArrayInputStream(new byte[0]));
 
-				bundles.put(languageId, bundle);
+				resourceBundles.put(languageId, resourceBundle);
 			}
 			catch (IOException ioe) {
 				_log.error(ioe);
 			}
 		}
 
-		return bundle;
+		return resourceBundle;
 	}
 
-	private Map<String, ResourceBundle> _getBundles(String servletContextName) {
-		Map<String, ResourceBundle> bundles = _contexts.get(servletContextName);
+	private ResourceBundle _getResourceBundle(
+		String servletContextName, String languageId) {
 
-		if (bundles == null) {
-			bundles = new HashMap<String, ResourceBundle>();
+		Map<String, ResourceBundle> resourceBundles = _getResourceBundles(
+			servletContextName);
 
-			_contexts.put(servletContextName, bundles);
+		return _getResourceBundle(resourceBundles, languageId);
+	}
+
+	private Map<String, ResourceBundle> _getResourceBundles(
+		String servletContextName) {
+
+		Map<String, ResourceBundle> resourceBundles = _resourceBundles.get(
+			servletContextName);
+
+		if (resourceBundles == null) {
+			resourceBundles = new HashMap<String, ResourceBundle>();
+
+			_resourceBundles.put(servletContextName, resourceBundles);
 		}
 
-		return bundles;
+		return resourceBundles;
+	}
+
+	private String _getString(Locale locale, String key) {
+		return _getString(LocaleUtil.toLanguageId(locale), key);
 	}
 
 	private String _getString(PageContext pageContext, String key) {
@@ -121,10 +133,6 @@ public class PortletResourceBundles {
 			(HttpServletRequest)pageContext.getRequest(), null);
 
 		return _getString(locale, key);
-	}
-
-	private String _getString(Locale locale, String key) {
-		return _getString(LocaleUtil.toLanguageId(locale), key);
 	}
 
 	private String _getString(String languageId, String key) {
@@ -135,23 +143,25 @@ public class PortletResourceBundles {
 		String servletContextName, String languageId, String key) {
 
 		if (servletContextName != null) {
-			ResourceBundle bundle = _getBundle(servletContextName, languageId);
+			ResourceBundle resourceBundle = _getResourceBundle(
+				servletContextName, languageId);
 
-			return bundle.getString(key);
+			return resourceBundle.getString(key);
 		}
 
 		Iterator<Map.Entry<String, Map<String, ResourceBundle>>> itr =
-			_contexts.entrySet().iterator();
+			_resourceBundles.entrySet().iterator();
 
 		while (itr.hasNext()) {
 			Map.Entry<String, Map<String, ResourceBundle>> entry = itr.next();
 
-			Map<String, ResourceBundle> bundles = entry.getValue();
+			Map<String, ResourceBundle> resourceBundles = entry.getValue();
 
-			ResourceBundle bundle = _getBundle(bundles, languageId);
+			ResourceBundle resourceBundle = _getResourceBundle(
+				resourceBundles, languageId);
 
 			try {
-				return bundle.getString(key);
+				return resourceBundle.getString(key);
 			}
 			catch (MissingResourceException mre) {
 			}
@@ -161,15 +171,17 @@ public class PortletResourceBundles {
 	}
 
 	private void _put(
-		String servletContextName, String languageId, ResourceBundle bundle) {
+		String servletContextName, String languageId,
+		ResourceBundle resourceBundle) {
 
-		Map<String, ResourceBundle> bundles = _getBundles(servletContextName);
+		Map<String, ResourceBundle> resourceBundles = _getResourceBundles(
+			servletContextName);
 
-		bundles.put(languageId, bundle);
+		resourceBundles.put(languageId, resourceBundle);
 	}
 
 	private void _remove(String servletContextName) {
-		_contexts.remove(servletContextName);
+		_resourceBundles.remove(servletContextName);
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
@@ -177,7 +189,5 @@ public class PortletResourceBundles {
 
 	private static PortletResourceBundles _instance =
 		new PortletResourceBundles();
-
-	private Map<String, Map<String, ResourceBundle>> _contexts;
 
 }

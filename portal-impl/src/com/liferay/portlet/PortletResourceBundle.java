@@ -31,27 +31,27 @@ import java.util.ResourceBundle;
 public class PortletResourceBundle extends ResourceBundle {
 
 	public PortletResourceBundle(
-		ResourceBundle parentBundle, PortletInfo portletInfo) {
+		ResourceBundle parentResourceBundle, PortletInfo portletInfo) {
 
-		_parentBundle = parentBundle;
+		_parentResourceBundle = parentResourceBundle;
 		_portletInfo = portletInfo;
 	}
 
 	public Enumeration<String> getKeys() {
-		return _parentBundle.getKeys();
+		return _parentResourceBundle.getKeys();
 	}
 
 	public Locale getLocale() {
-		return _parentBundle.getLocale();
+		return _parentResourceBundle.getLocale();
 	}
 
 	protected Object handleGetObject(String key) {
 		try {
-			if (_parentBundle == null) {
+			if (_parentResourceBundle == null) {
 				return _getJavaxPortletString(key);
 			}
 			else {
-				return _parentBundle.getObject(key);
+				return _parentResourceBundle.getObject(key);
 			}
 		}
 		catch (MissingResourceException mre) {
@@ -65,7 +65,6 @@ public class PortletResourceBundle extends ResourceBundle {
 			}
 		}
 	}
-
 	private String _getJavaxPortletString(String key) {
 		if (key == null) {
 			return null;
@@ -86,7 +85,7 @@ public class PortletResourceBundle extends ResourceBundle {
 		return null;
 	}
 
-	private ResourceBundle _parentBundle;
+	private ResourceBundle _parentResourceBundle;
 	private PortletInfo _portletInfo;
 
 }

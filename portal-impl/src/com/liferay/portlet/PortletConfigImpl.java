@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.portlet.PortletBagPool;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletApp;
@@ -66,7 +67,7 @@ public class PortletConfigImpl implements LiferayPortletConfig {
 		}
 
 		_portletContext = portletContext;
-		_bundlePool = new HashMap<String, ResourceBundle>();
+		_resourceBundles = new HashMap<String, ResourceBundle>();
 	}
 
 	public Map<String, String[]> getContainerRuntimeOptions() {
@@ -128,37 +129,38 @@ public class PortletConfigImpl implements LiferayPortletConfig {
 		String resourceBundleClassName = _portlet.getResourceBundle();
 
 		if (Validator.isNull(resourceBundleClassName)) {
-			String poolId = _portlet.getPortletId();
+			String resourceBundleId = _portlet.getPortletId();
 
-			ResourceBundle bundle = _bundlePool.get(poolId);
+			ResourceBundle resourceBundle = _resourceBundles.get(
+				resourceBundleId);
 
-			if (bundle == null) {
+			if (resourceBundle == null) {
 				StringBundler sb = new StringBundler(16);
 
 				try {
 					PortletInfo portletInfo = _portlet.getPortletInfo();
 
 					sb.append(JavaConstants.JAVAX_PORTLET_TITLE);
-					sb.append("=");
+					sb.append(StringPool.EQUAL);
 					sb.append(portletInfo.getTitle());
-					sb.append("\n");
+					sb.append(StringPool.NEW_LINE);
 
 					sb.append(JavaConstants.JAVAX_PORTLET_SHORT_TITLE);
-					sb.append("=");
+					sb.append(StringPool.EQUAL);
 					sb.append(portletInfo.getShortTitle());
-					sb.append("\n");
+					sb.append(StringPool.NEW_LINE);
 
 					sb.append(JavaConstants.JAVAX_PORTLET_KEYWORDS);
-					sb.append("=");
+					sb.append(StringPool.EQUAL);
 					sb.append(portletInfo.getKeywords());
-					sb.append("\n");
+					sb.append(StringPool.NEW_LINE);
 
 					sb.append(JavaConstants.JAVAX_PORTLET_DESCRIPTION);
-					sb.append("=");
+					sb.append(StringPool.EQUAL);
 					sb.append(portletInfo.getDescription());
-					sb.append("\n");
+					sb.append(StringPool.NEW_LINE);
 
-					bundle = new PropertyResourceBundle(
+					resourceBundle = new PropertyResourceBundle(
 						new UnsyncByteArrayInputStream(
 							sb.toString().getBytes()));
 				}
@@ -166,37 +168,40 @@ public class PortletConfigImpl implements LiferayPortletConfig {
 					_log.error(e, e);
 				}
 
-				_bundlePool.put(poolId, bundle);
+				_resourceBundles.put(resourceBundleId, resourceBundle);
 			}
 
-			return bundle;
+			return resourceBundle;
 		}
 		else {
-			String poolId = _portlet.getPortletId() + "." + locale.toString();
+			String resourceBundleId = _portlet.getPortletId().concat(
+				StringPool.PERIOD).concat(locale.toString());
 
-			ResourceBundle bundle = _bundlePool.get(poolId);
+			ResourceBundle resourceBundle = _resourceBundles.get(
+				resourceBundleId);
 
-			if (bundle == null) {
+			if (resourceBundle == null) {
 				if (!_portletApp.isWARFile() &&
 					resourceBundleClassName.equals(
 						StrutsResourceBundle.class.getName())) {
 
-					bundle = new StrutsResourceBundle(_portletName, locale);
+					resourceBundle = new StrutsResourceBundle(
+						_portletName, locale);
 				}
 				else {
 					PortletBag portletBag = PortletBagPool.get(
 						_portlet.getRootPortletId());
 
-					bundle = portletBag.getResourceBundle(locale);
+					resourceBundle = portletBag.getResourceBundle(locale);
 				}
 
-				bundle = new PortletResourceBundle(
-					bundle, _portlet.getPortletInfo());
+				resourceBundle = new PortletResourceBundle(
+					resourceBundle, _portlet.getPortletInfo());
 
-				_bundlePool.put(poolId, bundle);
+				_resourceBundles.put(resourceBundleId, resourceBundle);
 			}
 
-			return bundle;
+			return resourceBundle;
 		}
 	}
 
@@ -234,10 +239,10 @@ public class PortletConfigImpl implements LiferayPortletConfig {
 
 	private static Log _log = LogFactoryUtil.getLog(PortletConfigImpl.class);
 
-	private PortletApp _portletApp;
 	private Portlet _portlet;
-	private String _portletName;
+	private PortletApp _portletApp;
 	private PortletContext _portletContext;
-	private Map<String, ResourceBundle> _bundlePool;
+	private String _portletName;
+	private Map<String, ResourceBundle> _resourceBundles;
 
 }
