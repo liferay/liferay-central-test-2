@@ -24,9 +24,7 @@
 			<portlet:param name="struts_action" value="/invitation/view" />
 		</portlet:renderURL>
 
-		<aui:a href="<%= viewURL %>">
-			<liferay-ui:message key="invite-friends" />
-		</aui:a>
+		<aui:a href="<%= viewURL %>" label="invite-friends" />
 	</c:when>
 	<c:otherwise>
 		<portlet:actionURL var="portletURL">
@@ -38,9 +36,9 @@
 		<aui:form action="<%= portletURL %>" method="post" name="fm">
 			<aui:input name="redirect" type="hidden" value="<%= redirectURL %>" />
 
-			<liferay-ui:message arguments="<%= String.valueOf(InvitationUtil.getEmailMessageMaxRecipients()) %>" key="enter-up-to-x-email-addresses-of-friends-you-would-like-to-invite" />
-
-			<br /><br />
+			<div class="portlet-msg-info">
+				<liferay-ui:message arguments="<%= String.valueOf(InvitationUtil.getEmailMessageMaxRecipients()) %>" key="enter-up-to-x-email-addresses-of-friends-you-would-like-to-invite" />
+			</div>
 
 			<%
 			Set invalidEmailAddresses = (Set)SessionErrors.get(renderRequest, "emailAddresses");
@@ -57,7 +55,7 @@
 					</div>
 				</c:if>
 
-				<aui:input cssClass="lfr-input-text-container" label="" name='<%= "emailAddress" + i %>' size="65" type="text" value="<%= emailAddress %>" />
+				<aui:input cssClass="lfr-input-text-container" label="" name='<%= "emailAddress" + i %>' size="65" title='<%= LanguageUtil.get(pageContext, "email-address") + StringPool.SPACE + (i + 1)%>' type="text" value="<%= emailAddress %>" />
 
 			<%
 			}
