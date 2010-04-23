@@ -15,6 +15,7 @@
 package com.liferay.portal.servlet;
 
 import com.liferay.portal.kernel.cache.key.CacheKeyGeneratorUtil;
+import com.liferay.portal.kernel.nio.charset.CharsetEncoderUtil;
 import com.liferay.portal.kernel.servlet.ServletContextUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.FileUtil;
@@ -27,6 +28,8 @@ import com.liferay.util.servlet.ServletResponseUtil;
 
 import java.io.File;
 import java.io.IOException;
+
+import java.nio.ByteBuffer;
 
 import java.util.Enumeration;
 import java.util.Map;
@@ -78,9 +81,12 @@ public class ComboServlet extends HttpServlet {
 			String content = sb.toString();
 
 			if (Validator.isNotNull(content)) {
-				bytes = content.getBytes();
+				ByteBuffer contentByteBuffer = CharsetEncoderUtil.encode(
+					StringPool.UTF8, content);
+				bytes = contentByteBuffer.array();
+				int length = contentByteBuffer.limit();
 
-				FileUtil.write(cacheFile, bytes);
+				FileUtil.write(cacheFile, bytes, 0, length);
 			}
 			else {
 				bytes = new byte[0];

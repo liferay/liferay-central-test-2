@@ -15,10 +15,14 @@
 package com.liferay.util.servlet.filters;
 
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
+import com.liferay.portal.kernel.nio.charset.CharsetEncoderUtil;
 import com.liferay.portal.kernel.servlet.Header;
 import com.liferay.portal.kernel.servlet.StringServletResponse;
+import com.liferay.portal.kernel.util.StringPool;
 
 import java.io.Serializable;
+
+import java.nio.ByteBuffer;
 
 import java.util.HashMap;
 import java.util.List;
@@ -42,8 +46,10 @@ public class CacheResponseData implements Serializable {
 		else {
 			String content = stringResponse.getString();
 
-			_content = content.getBytes();
-			_contentLength = _content.length;
+			ByteBuffer contentByteBuffer = CharsetEncoderUtil.encode(
+				StringPool.UTF8, content);
+			_content = contentByteBuffer.array();
+			_contentLength = contentByteBuffer.limit();
 		}
 
 		_contentType = stringResponse.getContentType();

@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.concurrent.ConcurrentLRUCache;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.nio.charset.CharsetEncoderUtil;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.portal.kernel.util.CharPool;
@@ -35,6 +36,8 @@ import com.liferay.util.servlet.ServletResponseUtil;
 
 import java.io.IOException;
 import java.io.OutputStream;
+
+import java.nio.ByteBuffer;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -213,8 +216,10 @@ public class StripFilter extends BasePortalFilter {
 			return newBeginIndex;
 		}
 
+		ByteBuffer contentByteBuffer = CharsetEncoderUtil.encode(
+			StringPool.UTF8, minifiedContent);
 		newBytes.write(_STYLE_TYPE_CSS);
-		newBytes.write(minifiedContent.getBytes());
+		newBytes.write(contentByteBuffer.array(), 0, contentByteBuffer.limit());
 		newBytes.write(_MARKER_STYLE_CLOSE);
 
 		return newBeginIndex;
@@ -266,8 +271,10 @@ public class StripFilter extends BasePortalFilter {
 				else {
 					String content = stringResponse.getString();
 
-					oldByteArray = content.getBytes(StringPool.UTF8);
-					length = oldByteArray.length;
+					ByteBuffer contentByteBuffer =
+						CharsetEncoderUtil.encode(StringPool.UTF8, content);
+					oldByteArray = contentByteBuffer.array();
+					length = contentByteBuffer.limit();
 				}
 
 				UnsyncByteArrayOutputStream outputStream =
@@ -356,9 +363,11 @@ public class StripFilter extends BasePortalFilter {
 			return newBeginIndex;
 		}
 
+		ByteBuffer contentByteBuffer = CharsetEncoderUtil.encode(
+			StringPool.UTF8, minifiedContent);
 		newBytes.write(_SCRIPT_TYPE_JAVASCRIPT);
 		newBytes.write(_CDATA_OPEN);
-		newBytes.write(minifiedContent.getBytes());
+		newBytes.write(contentByteBuffer.array(), 0, contentByteBuffer.limit());
 		newBytes.write(_CDATA_CLOSE);
 		newBytes.write(_MARKER_SCRIPT_CLOSE);
 
