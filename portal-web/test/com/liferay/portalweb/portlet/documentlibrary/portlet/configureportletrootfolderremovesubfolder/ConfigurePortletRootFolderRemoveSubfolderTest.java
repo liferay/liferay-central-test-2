@@ -96,19 +96,16 @@ public class ConfigurePortletRootFolderRemoveSubfolderTest extends BaseTestCase 
 		selenium.clickAt("link=Document Library Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertFalse(selenium.isElementPresent(
-				"//div[@class='site-breadcrumbs']/ul/li[4]/span/a"));
+		assertFalse(selenium.isElementPresent("//nav/ul/li[4]/span/a"));
 		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertFalse(selenium.isElementPresent(
-				"//div[@class='site-breadcrumbs']/ul/li[4]/span/a"));
+		assertFalse(selenium.isElementPresent("//nav/ul/li[4]/span/a"));
 		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Test1 Subfolder1"),
-			selenium.getText("//div[@class='site-breadcrumbs']/ul/li[4]/span/a"));
+			selenium.getText("//nav/ul/li[4]/span/a"));
 		selenium.clickAt("link=Document Home", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertFalse(selenium.isElementPresent(
-				"//div[@class='site-breadcrumbs']/ul/li[4]/span/a"));
+		assertFalse(selenium.isElementPresent("//nav/ul/li[4]/span/a"));
 	}
 }

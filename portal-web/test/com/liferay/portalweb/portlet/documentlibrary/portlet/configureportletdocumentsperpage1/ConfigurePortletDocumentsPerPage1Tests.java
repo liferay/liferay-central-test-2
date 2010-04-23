@@ -30,15 +30,17 @@ public class ConfigurePortletDocumentsPerPage1Tests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTestSuite(AddPageTest.class);
-		testSuite.addTestSuite(AddPortletTest.class);
+		testSuite.addTestSuite(AddPageDLTest.class);
+		testSuite.addTestSuite(AddPortletDLTest.class);
 		testSuite.addTestSuite(AddFolderTest.class);
 		testSuite.addTestSuite(AddFolderDocument1Test.class);
 		testSuite.addTestSuite(AddFolderDocument2Test.class);
 		testSuite.addTestSuite(AddFolderDocument3Test.class);
 		testSuite.addTestSuite(ConfigurePortletDocumentsPerPage20Test.class);
 		testSuite.addTestSuite(ConfigurePortletDocumentsPerPage1Test.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownDLFolderTest.class);
+		testSuite.addTestSuite(TearDownDocumentTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

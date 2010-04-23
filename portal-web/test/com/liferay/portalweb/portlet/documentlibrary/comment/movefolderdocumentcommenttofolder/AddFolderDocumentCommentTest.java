@@ -58,7 +58,7 @@ public class AddFolderDocumentCommentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_20_postReplyBody0")) {
+				if (selenium.isVisible("_20_postReplyBody0")) {
 					break;
 				}
 			}
@@ -74,6 +74,24 @@ public class AddFolderDocumentCommentTest extends BaseTestCase {
 		selenium.keyPress("_20_postReplyBody0", RuntimeVariables.replace("\\8"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Reply']"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isTextPresent(
+							"Your request processed successfully.")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 		assertEquals(RuntimeVariables.replace("This is a test1 comment1."),

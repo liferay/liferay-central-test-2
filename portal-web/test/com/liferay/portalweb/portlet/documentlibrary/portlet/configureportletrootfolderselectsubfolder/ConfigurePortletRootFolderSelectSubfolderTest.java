@@ -120,18 +120,18 @@ public class ConfigurePortletRootFolderSelectSubfolderTest extends BaseTestCase 
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Test1 Subfolder1"),
-			selenium.getText("//div[@class='site-breadcrumbs']/ul/li[4]/span/a"));
+			selenium.getText("//nav/ul/li[4]/span/a"));
 		selenium.clickAt("link=Test1 Subfolder1", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Test1 Subfolder1"),
-			selenium.getText("//div[@class='site-breadcrumbs']/ul/li[4]/span/a"));
+			selenium.getText("//nav/ul/li[4]/span/a"));
 		selenium.clickAt("link=Test1 Folder1", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Test1 Subfolder1"),
-			selenium.getText("//div[@class='site-breadcrumbs']/ul/li[4]/span/a"));
+			selenium.getText("//nav/ul/li[4]/span/a"));
 		selenium.clickAt("link=Document Home", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Test1 Subfolder1"),
-			selenium.getText("//div[@class='site-breadcrumbs']/ul/li[4]/span/a"));
+			selenium.getText("//nav/ul/li[4]/span/a"));
 	}
 }

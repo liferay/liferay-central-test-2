@@ -49,10 +49,8 @@ public class AddFolderDocumentDocumentInvalidTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//div[@class='lfr-component lfr-menu-list right ']/ul/li[4]/a",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("//div[2]/ul/li[4]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -60,7 +58,7 @@ public class AddFolderDocumentDocumentInvalidTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Use the classic uploader.")) {
+				if (selenium.isVisible("link=Use the classic uploader.")) {
 					break;
 				}
 			}
@@ -78,7 +76,7 @@ public class AddFolderDocumentDocumentInvalidTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_20_file")) {
+				if (selenium.isVisible("_20_file")) {
 					break;
 				}
 			}

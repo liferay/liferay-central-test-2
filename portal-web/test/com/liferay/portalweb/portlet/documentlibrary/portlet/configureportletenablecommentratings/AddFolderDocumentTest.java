@@ -47,10 +47,8 @@ public class AddFolderDocumentTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//div[@class='lfr-component lfr-menu-list right ']/ul/li[4]/a",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("//div[2]/ul/li[4]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -58,7 +56,7 @@ public class AddFolderDocumentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Use the classic uploader.")) {
+				if (selenium.isVisible("link=Use the classic uploader.")) {
 					break;
 				}
 			}
@@ -76,7 +74,7 @@ public class AddFolderDocumentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_20_file")) {
+				if (selenium.isVisible("_20_file")) {
 					break;
 				}
 			}
@@ -89,17 +87,53 @@ public class AddFolderDocumentTest extends BaseTestCase {
 		selenium.type("_20_file",
 			RuntimeVariables.replace(
 				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\documentlibrary\\portlet\\configureportletenablecommentratings\\dependencies\\test_document.txt"));
-		selenium.type("_20_file",
-			RuntimeVariables.replace(
-				"L:\\trunk\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\documentlibrary\\portlet\\configureportletenablecommentratings\\dependencies\\test_document.txt"));
 		selenium.type("_20_title", RuntimeVariables.replace("Test1 Document1"));
 		selenium.type("_20_description",
 			RuntimeVariables.replace("This is test1 document1."));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		Thread.sleep(5000);
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (RuntimeVariables.replace(
+							"Your request processed successfully.")
+										.equals(selenium.getText(
+								"//section/div/div/div/div[1]"))) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		assertEquals(RuntimeVariables.replace(
+				"Your request processed successfully."),
+			selenium.getText("//section/div/div/div/div[1]"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (RuntimeVariables.replace(
+							"Test1 Document1\nThis is test1 document1.")
+										.equals(selenium.getText("//td[1]/a"))) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertEquals(RuntimeVariables.replace(
 				"Test1 Document1\nThis is test1 document1."),
 			selenium.getText("//td[1]/a"));

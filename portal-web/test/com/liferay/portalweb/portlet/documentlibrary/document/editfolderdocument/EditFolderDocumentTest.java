@@ -71,6 +71,12 @@ public class EditFolderDocumentTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a"));
 		selenium.waitForPageToLoad("30000");
+		selenium.type("_20_title",
+			RuntimeVariables.replace("Test1 Document1 Edited1"));
+		selenium.type("_20_description",
+			RuntimeVariables.replace("This is test1 document1. Edited1."));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -78,8 +84,8 @@ public class EditFolderDocumentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible(
-							"//span[@class='aui-icon-search aui-icon']")) {
+				if (selenium.isTextPresent(
+							"Your request processed successfully.")) {
 					break;
 				}
 			}
@@ -89,15 +95,26 @@ public class EditFolderDocumentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("_20_title",
-			RuntimeVariables.replace("Test1 Document1 Edited1"));
-		selenium.type("_20_description",
-			RuntimeVariables.replace("This is test1 document1. Edited1."));
-		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		Thread.sleep(5000);
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isTextPresent(
+							"Test1 Document1 Edited1\nThis is test1 document1. Edited1.")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertTrue(selenium.isTextPresent(
 				"Test1 Document1 Edited1\nThis is test1 document1. Edited1."));
 	}

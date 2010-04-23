@@ -14,7 +14,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>waitForVisible</td>
 	<td>link=Document Library Test Page</td>
 	<td></td>
 </tr>
@@ -25,18 +25,13 @@
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>//div[@class='lfr-component lfr-menu-list right ']/ul/li[2]/a</td>
+	<td>//div[2]/ul/li[2]/a</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>_20_name</td>
-	<td>Test1 Folder1</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>_20_description</td>
-	<td>This is test1 folder1.</td>
+	<td>Folder Name</td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
@@ -44,14 +39,19 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>waitForText</td>
+	<td>//section/div/div/div/div[1]</td>
 	<td>Your request processed successfully.</td>
-	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//a/strong</td>
-	<td>Test1 Folder1</td>
+	<td>//section/div/div/div/div[1]</td>
+	<td>Your request processed successfully.</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//a[2]/strong</td>
+	<td>Folder Name</td>
 </tr>
 
 </tbody></table>
