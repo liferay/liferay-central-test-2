@@ -29,9 +29,9 @@ public class AddPortletTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTestSuite(AddPageTest.class);
-		testSuite.addTestSuite(AddPortletTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(AddPageLCTest.class);
+		testSuite.addTestSuite(AddPortletLCTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

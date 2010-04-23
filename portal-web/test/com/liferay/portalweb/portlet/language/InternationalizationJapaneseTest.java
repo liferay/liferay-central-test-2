@@ -46,15 +46,14 @@ public class InternationalizationJapaneseTest extends BaseTestCase {
 				"//img[@alt='\u65e5\u672c\u8a9e (\u65e5\u672c)']"));
 		selenium.waitForPageToLoad("30000");
 		Thread.sleep(5000);
-		selenium.clickAt("//div[2]/ul/li[2]/a/span",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("//nav/ul/li[2]/a/span", RuntimeVariables.replace(""));
 		selenium.typeKeys("//input",
 			RuntimeVariables.replace(
 				"\u8a00\u8a9e\u30c6\u30b9\u30c8\u30da\u30fc\u30b8"));
 		selenium.type("//input",
 			RuntimeVariables.replace(
 				"\u8a00\u8a9e\u30c6\u30b9\u30c8\u30da\u30fc\u30b8"));
-		selenium.clickAt("//span[@id='save']/span", RuntimeVariables.replace(""));
+		selenium.clickAt("save", RuntimeVariables.replace(""));
 		Thread.sleep(5000);
 		selenium.clickAt("//img[@alt='English (United States)']",
 			RuntimeVariables.replace(""));

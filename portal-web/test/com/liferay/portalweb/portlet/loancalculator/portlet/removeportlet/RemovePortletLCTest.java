@@ -12,27 +12,27 @@
  * details.
  */
 
-package com.liferay.portalweb.portlet.language;
+package com.liferay.portalweb.portlet.loancalculator.portlet.removeportlet;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="InternationalizationSpanishTest.java.html"><b><i>View Source</i></b>
- * </a>
+ * <a href="RemovePortletLCTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class InternationalizationSpanishTest extends BaseTestCase {
-	public void testInternationalizationSpanish() throws Exception {
+public class RemovePortletLCTest extends BaseTestCase {
+	public void testRemovePortletLC() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"//img[@alt='espa\u00f1ol (Espa\u00f1a)']")) {
+				if (selenium.isElementPresent("link=Loan Calculator Test Page")) {
 					break;
 				}
 			}
@@ -42,19 +42,29 @@ public class InternationalizationSpanishTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//img[@alt='espa\u00f1ol (Espa\u00f1a)']",
+		selenium.clickAt("link=Loan Calculator Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		Thread.sleep(5000);
-		selenium.clickAt("//nav/ul/li[2]/a/span", RuntimeVariables.replace(""));
-		selenium.typeKeys("//input",
-			RuntimeVariables.replace("P\u00e1gina de la prueba de lengua"));
-		selenium.type("//input",
-			RuntimeVariables.replace("P\u00e1gina de la prueba de lengua"));
-		selenium.clickAt("save", RuntimeVariables.replace(""));
-		Thread.sleep(5000);
-		selenium.clickAt("//img[@alt='English (United States)']",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
+		selenium.click("//img[@alt='Remove']");
+		assertTrue(selenium.getConfirmation()
+						   .matches("^Are you sure you want to remove this component[\\s\\S]$"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (!selenium.isElementPresent("//td[1]/div/div[1]")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		assertFalse(selenium.isElementPresent("//td[1]/div/div[1]"));
 	}
 }

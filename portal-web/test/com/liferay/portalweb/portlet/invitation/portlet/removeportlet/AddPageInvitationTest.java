@@ -12,27 +12,27 @@
  * details.
  */
 
-package com.liferay.portalweb.portlet.language;
+package com.liferay.portalweb.portlet.invitation.portlet.removeportlet;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="InternationalizationSpanishTest.java.html"><b><i>View Source</i></b>
- * </a>
+ * <a href="AddPageInvitationTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class InternationalizationSpanishTest extends BaseTestCase {
-	public void testInternationalizationSpanish() throws Exception {
+public class AddPageInvitationTest extends BaseTestCase {
+	public void testAddPageInvitation() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"//img[@alt='espa\u00f1ol (Espa\u00f1a)']")) {
+				if (selenium.isVisible("addPage")) {
 					break;
 				}
 			}
@@ -42,18 +42,45 @@ public class InternationalizationSpanishTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//img[@alt='espa\u00f1ol (Espa\u00f1a)']",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		Thread.sleep(5000);
-		selenium.clickAt("//nav/ul/li[2]/a/span", RuntimeVariables.replace(""));
-		selenium.typeKeys("//input",
-			RuntimeVariables.replace("P\u00e1gina de la prueba de lengua"));
+		selenium.clickAt("addPage", RuntimeVariables.replace(""));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("//input")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.type("//input",
-			RuntimeVariables.replace("P\u00e1gina de la prueba de lengua"));
+			RuntimeVariables.replace("Invitation Test Page"));
 		selenium.clickAt("save", RuntimeVariables.replace(""));
-		Thread.sleep(5000);
-		selenium.clickAt("//img[@alt='English (United States)']",
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("link=Invitation Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("link=Invitation Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 	}

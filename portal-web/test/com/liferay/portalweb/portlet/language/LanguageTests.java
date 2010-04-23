@@ -29,14 +29,14 @@ public class LanguageTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTestSuite(AddPageTest.class);
-		testSuite.addTestSuite(AddPortletTest.class);
+		testSuite.addTestSuite(AddPageLanguageTest.class);
+		testSuite.addTestSuite(AddPortletLanguageTest.class);
 		testSuite.addTestSuite(LanguageTest.class);
 		testSuite.addTestSuite(InternationalizationJapaneseTest.class);
 		testSuite.addTestSuite(InternationalizationSpanishTest.class);
 		testSuite.addTestSuite(InternationalizationVerifyTest.class);
 		testSuite.addTestSuite(ConfirmEnglishTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}
