@@ -48,6 +48,7 @@ public class CacheResponseData implements Serializable {
 
 			ByteBuffer contentByteBuffer = CharsetEncoderUtil.encode(
 				StringPool.UTF8, content);
+
 			_content = contentByteBuffer.array();
 			_contentLength = contentByteBuffer.limit();
 		}

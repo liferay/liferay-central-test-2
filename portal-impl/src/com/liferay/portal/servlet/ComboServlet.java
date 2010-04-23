@@ -83,10 +83,10 @@ public class ComboServlet extends HttpServlet {
 			if (Validator.isNotNull(content)) {
 				ByteBuffer contentByteBuffer = CharsetEncoderUtil.encode(
 					StringPool.UTF8, content);
-				bytes = contentByteBuffer.array();
-				int length = contentByteBuffer.limit();
 
-				FileUtil.write(cacheFile, bytes, 0, length);
+				bytes = contentByteBuffer.array();
+
+				FileUtil.write(cacheFile, bytes, 0, contentByteBuffer.limit());
 			}
 			else {
 				bytes = new byte[0];

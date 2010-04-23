@@ -28,28 +28,36 @@ import java.nio.charset.CodingErrorAction;
  */
 public class CharsetEncoderUtil {
 
-	public static ByteBuffer encode(String charsetName, String string) {
-		return encode(charsetName, CharBuffer.wrap(string));
-	}
-
 	public static ByteBuffer encode(
-		String charsetName, char[] chars, int offset, int length) {
-		return encode(charsetName, CharBuffer.wrap(chars, offset, length));
+		String charsetName, char[] charArray, int offset, int length) {
+
+		return encode(charsetName, CharBuffer.wrap(charArray, offset, length));
 	}
 
 	public static ByteBuffer encode(String charsetName, CharBuffer charBuffer) {
 		try {
-			return getCharsetEncoder(charsetName).encode(charBuffer);
-		} catch (CharacterCodingException cce) {
-			// Substitution is enabled, this should never happen
+			CharsetEncoder charsetEncoder = getCharsetEncoder(charsetName);
+
+			return charsetEncoder.encode(charBuffer);
+		}
+		catch (CharacterCodingException cce) {
 			throw new Error(cce);
 		}
 	}
 
+	public static ByteBuffer encode(String charsetName, String string) {
+		return encode(charsetName, CharBuffer.wrap(string));
+	}
+
 	private static CharsetEncoder getCharsetEncoder(String charsetName) {
-		return Charset.forName(charsetName).newEncoder()
-			.onMalformedInput(CodingErrorAction.REPLACE)
-			.onUnmappableCharacter(CodingErrorAction.REPLACE);
+		Charset charset = Charset.forName(charsetName);
+
+		CharsetEncoder charsetEncoder = charset.newEncoder();
+
+		charsetEncoder.onMalformedInput(CodingErrorAction.REPLACE);
+		charsetEncoder.onUnmappableCharacter(CodingErrorAction.REPLACE);
+
+		return charsetEncoder;
 	}
 
 }

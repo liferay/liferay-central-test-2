@@ -218,6 +218,7 @@ public class StripFilter extends BasePortalFilter {
 
 		ByteBuffer contentByteBuffer = CharsetEncoderUtil.encode(
 			StringPool.UTF8, minifiedContent);
+
 		newBytes.write(_STYLE_TYPE_CSS);
 		newBytes.write(contentByteBuffer.array(), 0, contentByteBuffer.limit());
 		newBytes.write(_MARKER_STYLE_CLOSE);
@@ -271,8 +272,9 @@ public class StripFilter extends BasePortalFilter {
 				else {
 					String content = stringResponse.getString();
 
-					ByteBuffer contentByteBuffer =
-						CharsetEncoderUtil.encode(StringPool.UTF8, content);
+					ByteBuffer contentByteBuffer = CharsetEncoderUtil.encode(
+						StringPool.UTF8, content);
+
 					oldByteArray = contentByteBuffer.array();
 					length = contentByteBuffer.limit();
 				}
@@ -365,6 +367,7 @@ public class StripFilter extends BasePortalFilter {
 
 		ByteBuffer contentByteBuffer = CharsetEncoderUtil.encode(
 			StringPool.UTF8, minifiedContent);
+
 		newBytes.write(_SCRIPT_TYPE_JAVASCRIPT);
 		newBytes.write(_CDATA_OPEN);
 		newBytes.write(contentByteBuffer.array(), 0, contentByteBuffer.limit());
