@@ -55,6 +55,9 @@ input[type="submit"]:hover, input[type="button"]:hover, input[type="reset"]:hove
 input[type="submit"], input[type="button"], input[type="reset"], button, .lfr-actions, .lfr-actions ul {
 }
 
+.aui-button-disabled input[type], .aui-button-disabled button, .aui-button-disabled input[type]:hover, .aui-button-disabled input[type]:focus, .aui-button-disabled button:hover, .aui-button-disabled button:focus {
+}
+
 input[type="submit"]:hover, input[type="button"]:hover, input[type="reset"]:hover, button:hover, .lfr-actions:hover, .lfr-actions:hover ul {
 }
 
@@ -66,8 +69,14 @@ input[type="submit"]:focus, input[type="button"]:focus, input[type="reset"]:focu
 .ie6 input.text, input.password, .ie6 input.submit, .ie6 input.file, .ie6 input.button, .ie6 button {
 }
 
-.ie6 input.submit, .ie6 input.button, .ie6 button {
+.ie6 input.submit, .ie6 input.button, .ie6 button, .ie6 .aui-button-disabled input.submit, .ie6 .aui-button-disabled input.button, .ie6 .aui-button-disabled button {
 }
 
 input.focus, textarea.focus, .ie6 input.focus, .ie6 textarea.focus {
+}
+
+.ie6 .aui-button-disabled input.submit, .ie6 .aui-button-disabled input.button, .ie6 .aui-button-disabled button {
+}
+
+.ie .aui-button-disabled input {
 }
