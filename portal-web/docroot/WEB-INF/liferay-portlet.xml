@@ -553,6 +553,7 @@
 		<restore-current-view>false</restore-current-view>
 		<layout-cacheable>true</layout-cacheable>
 		<instanceable>true</instanceable>
+		<scopeable>true</scopeable>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
