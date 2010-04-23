@@ -14,11 +14,11 @@
 
 package com.liferay.portal.kernel.util;
 
+import com.liferay.portal.kernel.bean.BeanPropertiesUtil;
+
 import java.io.Serializable;
 
 import java.util.Comparator;
-
-import com.liferay.portal.kernel.bean.BeanPropertiesUtil;
 
 /**
  * <a href="OrderByComparator.java.html"><b><i>View Source</i></b></a>
