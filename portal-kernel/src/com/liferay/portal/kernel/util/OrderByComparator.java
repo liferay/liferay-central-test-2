@@ -91,7 +91,9 @@ public abstract class OrderByComparator implements Comparator, Serializable {
 	public boolean isAscending() {
 		String orderBy = getOrderBy();
 
-		if ((orderBy == null) || orderBy.toUpperCase().endsWith(" DESC")) {
+		if ((orderBy == null) ||
+			(orderBy.toUpperCase().endsWith(_ORDER_BY_DESC))) {
+
 			return false;
 		}
 		else {
@@ -102,5 +104,7 @@ public abstract class OrderByComparator implements Comparator, Serializable {
 	public String toString() {
 		return getOrderBy();
 	}
+
+	private static final String _ORDER_BY_DESC = " DESC";
 
 }
