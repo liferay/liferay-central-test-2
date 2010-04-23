@@ -144,7 +144,9 @@ The cron element specifies a cron style trigger for a scheduler.
 
 <!--
 The property-key value specifies a property key that will be queried from
-portal.properties to create a trigger.
+portal.properties or portlet.properties to create a trigger. The property key
+will be queried from portal.properties for portlets that are part of the portal
+and from portlet.propeties for portlets that are plugins.
 
 For a cron trigger, the queried value should be a cron text.
 

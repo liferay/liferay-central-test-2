@@ -1149,9 +1149,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 						Element propertyKeyEl = cronEl.element("property-key");
 
 						if (propertyKeyEl != null) {
-							schedulerEntry.setReadProperty(true);
-
-							schedulerEntry.setTriggerValue(
+							schedulerEntry.setPropertyKey(
 								propertyKeyEl.getTextTrim());
 						}
 						else {
@@ -1166,9 +1164,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 							"property-key");
 
 						if (propertyKeyEl != null) {
-							schedulerEntry.setReadProperty(true);
-
-							schedulerEntry.setTriggerValue(
+							schedulerEntry.setPropertyKey(
 								propertyKeyEl.getTextTrim());
 						}
 						else {

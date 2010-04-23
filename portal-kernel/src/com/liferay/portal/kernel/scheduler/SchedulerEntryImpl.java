@@ -16,7 +16,6 @@ package com.liferay.portal.kernel.scheduler;
 
 import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.PrefsPropsUtil;
 import com.liferay.portal.kernel.util.Time;
 
 /**
@@ -38,6 +37,10 @@ public class SchedulerEntryImpl implements SchedulerEntry {
 		return _eventListenerClass;
 	}
 
+	public String getPropertyKey() {
+		return _propertyKey;
+	}
+
 	public TimeUnit getTimeUnit() {
 		return _timeUnit;
 	}
@@ -47,24 +50,12 @@ public class SchedulerEntryImpl implements SchedulerEntry {
 			return _trigger;
 		}
 
-		String triggerValue = _triggerValue;
-
-		if (_readProperty) {
-			try {
-				triggerValue = PrefsPropsUtil.getString(triggerValue);
-			}
-			catch (Exception e) {
-				throw new SchedulerException(
-					"Unable to get trigger value " + triggerValue, e);
-			}
-		}
-
 		if (_triggerType == TriggerType.CRON) {
 			_trigger = new CronTrigger(
-				_eventListenerClass, _eventListenerClass, triggerValue);
+				_eventListenerClass, _eventListenerClass, _triggerValue);
 		}
 		else if (_triggerType == TriggerType.SIMPLE) {
-			long intervalTime = GetterUtil.getLong(triggerValue);
+			long intervalTime = GetterUtil.getLong(_triggerValue);
 
 			if (_timeUnit.equals(TimeUnit.DAY)) {
 				intervalTime = intervalTime * Time.DAY;
@@ -101,10 +92,6 @@ public class SchedulerEntryImpl implements SchedulerEntry {
 		return _triggerValue;
 	}
 
-	public boolean isReadProperty() {
-		return _readProperty;
-	}
-
 	public void setDescription(String description) {
 		_description = description;
 	}
@@ -117,8 +104,8 @@ public class SchedulerEntryImpl implements SchedulerEntry {
 		_eventListenerClass = eventListenerClass;
 	}
 
-	public void setReadProperty(boolean readProperty) {
-		_readProperty = readProperty;
+	public void setPropertyKey(String propertyKey) {
+		_propertyKey = propertyKey;
 	}
 
 	public void setTimeUnit(TimeUnit timeUnit) {
@@ -142,8 +129,8 @@ public class SchedulerEntryImpl implements SchedulerEntry {
 		sb.append(_eventListener);
 		sb.append(", eventListenerClass=");
 		sb.append(_eventListenerClass);
-		sb.append(", readProperty=");
-		sb.append(_readProperty);
+		sb.append(", propertyKey=");
+		sb.append(_propertyKey);
 		sb.append(", timeUnit=");
 		sb.append(_timeUnit);
 		sb.append(", trigger=");
@@ -160,7 +147,7 @@ public class SchedulerEntryImpl implements SchedulerEntry {
 	private String _description;
 	private MessageListener _eventListener;
 	private String _eventListenerClass;
-	private boolean _readProperty;
+	private String _propertyKey;
 	private TimeUnit _timeUnit;
 	private Trigger _trigger;
 	private TriggerType _triggerType;

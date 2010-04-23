@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.poller.PollerProcessor;
 import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
 import com.liferay.portal.kernel.scheduler.SchedulerEntry;
+import com.liferay.portal.kernel.scheduler.SchedulerException;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.servlet.PortletSessionTracker;
@@ -38,6 +39,7 @@ import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.PortalInitableUtil;
+import com.liferay.portal.kernel.util.PrefsPropsUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.kernel.util.StringPool;
@@ -1137,6 +1139,26 @@ public class MainServlet extends ActionServlet {
 			}
 
 			for (SchedulerEntry schedulerEntry : schedulerEntries) {
+				String propertyKey = schedulerEntry.getPropertyKey();
+
+				if (Validator.isNotNull(propertyKey)) {
+					String triggerValue = PrefsPropsUtil.getString(propertyKey);
+
+					if (_log.isDebugEnabled()) {
+						_log.debug(
+							"Scheduler property key " + propertyKey +
+								" has trigger value " + triggerValue);
+					}
+
+					if (Validator.isNull(triggerValue)) {
+						throw new SchedulerException(
+							"Property key " + propertyKey +
+								" requires a value");
+					}
+
+					schedulerEntry.setTriggerValue(triggerValue);
+				}
+
 				SchedulerEngineUtil.schedule(
 					schedulerEntry, PortalClassLoaderUtil.getClassLoader());
 			}

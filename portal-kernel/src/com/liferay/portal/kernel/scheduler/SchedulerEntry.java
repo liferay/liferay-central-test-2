@@ -29,6 +29,8 @@ public interface SchedulerEntry {
 
 	public String getEventListenerClass();
 
+	public String getPropertyKey();
+
 	public TimeUnit getTimeUnit();
 
 	public Trigger getTrigger() throws SchedulerException;
@@ -37,15 +39,13 @@ public interface SchedulerEntry {
 
 	public String getTriggerValue();
 
-	public boolean isReadProperty();
-
 	public void setDescription(String description);
 
 	public void setEventListener(MessageListener eventListener);
 
 	public void setEventListenerClass(String eventListenerClass);
 
-	public void setReadProperty(boolean readProperty);
+	public void setPropertyKey(String propertyKey);
 
 	public void setTimeUnit(TimeUnit timeUnit);
 

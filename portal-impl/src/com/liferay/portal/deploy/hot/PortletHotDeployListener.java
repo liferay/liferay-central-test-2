@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.portlet.PortletBagPool;
 import com.liferay.portal.kernel.portlet.PortletLayoutListener;
 import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
 import com.liferay.portal.kernel.scheduler.SchedulerEntry;
+import com.liferay.portal.kernel.scheduler.SchedulerException;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.search.OpenSearch;
@@ -41,6 +42,8 @@ import com.liferay.portal.kernel.util.ClassUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.kernel.util.MethodInvoker;
+import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -90,6 +93,7 @@ import com.liferay.portlet.social.model.impl.SocialActivityInterpreterImpl;
 import com.liferay.portlet.social.model.impl.SocialRequestInterpreterImpl;
 import com.liferay.portlet.social.service.SocialActivityInterpreterLocalServiceUtil;
 import com.liferay.portlet.social.service.SocialRequestInterpreterLocalServiceUtil;
+import com.liferay.util.portlet.PortletProps;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -512,17 +516,7 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 				portlet.getOpenSearchClass());
 		}
 
-		if (PropsValues.SCHEDULER_ENABLED){
-			List<SchedulerEntry> schedulerEntries =
-				portlet.getSchedulerEntries();
-
-			if ((schedulerEntries != null) && !schedulerEntries.isEmpty()) {
-				for (SchedulerEntry schedulerEntry : schedulerEntries) {
-					SchedulerEngineUtil.schedule(
-						schedulerEntry, portletClassLoader);
-				}
-			}
-		}
+		initSchedulers(portlet, portletClassLoader);
 
 		FriendlyURLMapper friendlyURLMapperInstance = null;
 
@@ -857,6 +851,69 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 		}
 		catch (MissingResourceException mre) {
 			_log.warn(mre.getMessage());
+		}
+	}
+
+	protected void initScheduler(
+			SchedulerEntry schedulerEntry, ClassLoader portletClassLoader)
+		throws Exception {
+
+		String propertyKey = schedulerEntry.getPropertyKey();
+
+		if (Validator.isNotNull(propertyKey)) {
+			String triggerValue = null;
+
+			Thread currentThread = Thread.currentThread();
+
+			ClassLoader contextClassLoader =
+				currentThread.getContextClassLoader();
+
+			try {
+				currentThread.setContextClassLoader(portletClassLoader);
+
+				MethodWrapper methodWrapper = new MethodWrapper(
+					PortletProps.class.getName(), "get", propertyKey);
+
+				triggerValue = (String)MethodInvoker.invoke(
+					methodWrapper, false);
+			}
+			finally {
+				currentThread.setContextClassLoader(contextClassLoader);
+			}
+
+			if (_log.isDebugEnabled()) {
+				_log.debug(
+					"Scheduler property key " + propertyKey +
+						" has trigger value " + triggerValue);
+			}
+
+			if (Validator.isNull(triggerValue)) {
+				throw new SchedulerException(
+					"Property key " + propertyKey + " requires a value");
+			}
+
+			schedulerEntry.setTriggerValue(triggerValue);
+		}
+
+		SchedulerEngineUtil.schedule(schedulerEntry, portletClassLoader);
+	}
+
+	protected void initSchedulers(
+			Portlet portlet, ClassLoader portletClassLoader)
+		throws Exception {
+
+		if (!PropsValues.SCHEDULER_ENABLED){
+			return;
+		}
+
+		List<SchedulerEntry> schedulerEntries = portlet.getSchedulerEntries();
+
+		if ((schedulerEntries == null) || schedulerEntries.isEmpty()) {
+			return;
+		}
+
+		for (SchedulerEntry schedulerEntry : schedulerEntries) {
+			initScheduler(schedulerEntry, portletClassLoader);
 		}
 	}
 
