@@ -596,6 +596,11 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		user.setTimeZoneId(timeZoneId);
 
 		userPersistence.update(user, false);
+
+		Locale locale = LocaleUtil.fromLanguageId(languageId);
+
+		LocaleUtil.setDefault(
+			locale.getLanguage(), locale.getCountry(), locale.getVariant());
 	}
 
 	public void updateLogo(long companyId, byte[] bytes)
