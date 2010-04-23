@@ -950,12 +950,12 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 			Locale[] locales = LanguageUtil.getAvailableLocales();
 
 			for (int i = 0; i < locales.length; i++) {
-				ResourceBundle bundle = ResourceBundle.getBundle(
+				ResourceBundle resourceBundle = ResourceBundle.getBundle(
 					languageBundleName, locales[i], portletClassLoader);
 
 				PortletResourceBundles.put(
 					servletContextName, LocaleUtil.toLanguageId(locales[i]),
-					bundle);
+					resourceBundle);
 			}
 		}
 

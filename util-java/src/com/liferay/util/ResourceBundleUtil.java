@@ -25,22 +25,17 @@ import java.util.ResourceBundle;
 /**
  * <a href="ResourceBundleUtil.java.html"><b><i>View Source</i></b></a>
  *
- * <p>
- * This class provides a convenience routine named getString() that gets the
- * value of a ResourceBundle key, but also provides the ability to perform
- * search & replace on tokens within the value of the key.
- * </p>
- *
  * @author Neil Griffin
  */
 public class ResourceBundleUtil {
 
 	public static String getString(
-		ResourceBundle bundle, Locale locale, String key, Object[] args) {
+		ResourceBundle resourceBundle, Locale locale, String key,
+		Object[] arguments) {
 
 		String value = null;
 
-		if (bundle == null) {
+		if (resourceBundle == null) {
 			if (_log.isErrorEnabled()) {
 				_log.error("Resource bundle is null");
 			}
@@ -51,7 +46,7 @@ public class ResourceBundleUtil {
 			// any arguuments like {0}, {1}, {2}, etc. with the specified
 			// argument values.
 
-			value = bundle.getString(key);
+			value = resourceBundle.getString(key);
 
 			if (value == null) {
 				if (_log.isWarnEnabled()) {
@@ -59,10 +54,11 @@ public class ResourceBundleUtil {
 				}
 			}
 			else {
-				if ((args != null) && (args.length > 0)) {
-					MessageFormat format = new MessageFormat(value, locale);
+				if ((arguments != null) && (arguments.length > 0)) {
+					MessageFormat messageFormat = new MessageFormat(
+						value, locale);
 
-					value = format.format(args);
+					value = messageFormat.format(arguments);
 				}
 			}
 		}

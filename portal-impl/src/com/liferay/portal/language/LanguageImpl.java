@@ -271,10 +271,10 @@ public class LanguageImpl implements Language {
 
 				// LEP-4505
 
-				ResourceBundle bundle = ResourceBundle.getBundle(
+				ResourceBundle resourceBundle = ResourceBundle.getBundle(
 					"content/Language", locale);
 
-				value = bundle.getString(key);
+				value = resourceBundle.getString(key);
 			}
 			else {
 				value = LanguageResources.getMessage(locale, key);
@@ -367,10 +367,11 @@ public class LanguageImpl implements Language {
 			if (portletConfig != null) {
 				Locale locale = request.getLocale();
 
-				ResourceBundle bundle = portletConfig.getResourceBundle(locale);
+				ResourceBundle resourceBundle = portletConfig.getResourceBundle(
+					locale);
 
 				try {
-					value = bundle.getString(key);
+					value = resourceBundle.getString(key);
 				}
 				catch (MissingResourceException mre) {
 				}
@@ -591,9 +592,10 @@ public class LanguageImpl implements Language {
 
 			Locale locale = request.getLocale();
 
-			ResourceBundle bundle = portletConfig.getResourceBundle(locale);
+			ResourceBundle resourceBundle = portletConfig.getResourceBundle(
+				locale);
 
-			value = bundle.getString(key);
+			value = resourceBundle.getString(key);
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
