@@ -88,7 +88,7 @@ public class WorkflowDefinitionLinkLocalServiceImpl
 		throws PortalException, SystemException {
 
 		if (!WorkflowEngineManagerUtil.isDeployed()) {
-		    throw new NoSuchWorkflowDefinitionLinkException();
+			throw new NoSuchWorkflowDefinitionLinkException();
 		}
 
 		Group group = groupLocalService.getCompanyGroup(companyId);
@@ -103,9 +103,9 @@ public class WorkflowDefinitionLinkLocalServiceImpl
 		throws PortalException, SystemException {
 
 		if (!WorkflowEngineManagerUtil.isDeployed()) {
-		    throw new NoSuchWorkflowDefinitionLinkException();
+			throw new NoSuchWorkflowDefinitionLinkException();
 		}
-		
+
 		long classNameId = PortalUtil.getClassNameId(className);
 
 		WorkflowDefinitionLink workflowDefinitionLink = null;
@@ -139,9 +139,9 @@ public class WorkflowDefinitionLinkLocalServiceImpl
 		throws SystemException{
 
 		if (!WorkflowEngineManagerUtil.isDeployed()) {
-		    return 0;
+			return 0;
 		}
-		
+
 		return workflowDefinitionLinkPersistence.countByC_W_W(
 			companyId, workflowDefinitionName, workflowDefinitionVersion);
 	}
@@ -151,7 +151,7 @@ public class WorkflowDefinitionLinkLocalServiceImpl
 		throws PortalException, SystemException {
 
 		if (!WorkflowEngineManagerUtil.isDeployed()) {
-		    return false;
+			return false;
 		}
 
 		try {
