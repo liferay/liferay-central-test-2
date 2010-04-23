@@ -278,7 +278,6 @@
 .portlet-enterprise-admin .aui-form fieldset {
 	border: none;
 	padding: 0;
-	width: auto;
 }
 
 .portlet-enterprise-admin #addresses .aui-field {

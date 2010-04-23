@@ -55,7 +55,7 @@ if (organization != null) {
 
 <h3><liferay-ui:message key="details" /></h3>
 
-<aui:fieldset column="<%= true %>">
+<aui:fieldset column="<%= true %>" cssClass="aui-w50">
 	<liferay-ui:error exception="<%= DuplicateOrganizationException.class %>" message="the-organization-name-is-already-taken" />
 	<liferay-ui:error exception="<%= OrganizationNameException.class %>" message="please-enter-a-valid-name" />
 
@@ -112,7 +112,7 @@ if (organization != null) {
 	</c:if>
 </aui:fieldset>
 
-<aui:fieldset column="<%= true %>">
+<aui:fieldset column="<%= true %>" cssClass="aui-w50">
 	<div>
 		<c:if test="<%= organization != null %>">
 
