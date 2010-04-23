@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.util.PortletKeys;
 
 import java.util.Map;
@@ -62,7 +63,8 @@ public class AssetPublisherFriendlyURLMapper extends BaseFriendlyURLMapper {
 					portletId = _PORTLET_ID;
 				}
 
-				int pos = portletId.indexOf("_INSTANCE_");
+				int pos = portletId.indexOf(
+					PortletConstants.INSTANCE_SEPARATOR);
 
 				String instanceId = null;
 
@@ -91,7 +93,7 @@ public class AssetPublisherFriendlyURLMapper extends BaseFriendlyURLMapper {
 			}
 		}
 		else if (windowState.equals(WindowState.MAXIMIZED)) {
-				friendlyURLPath += StringPool.SLASH + windowState;
+			friendlyURLPath += StringPool.SLASH + windowState;
 		}
 
 		if (Validator.isNotNull(friendlyURLPath)) {
@@ -125,22 +127,23 @@ public class AssetPublisherFriendlyURLMapper extends BaseFriendlyURLMapper {
 			String assetEntryId = null;
 			String urlTitle = null;
 
-			if (urlFragments.length > 3 && urlFragments[2].equals("id")) {
+			if ((urlFragments.length > 3) && urlFragments[2].equals("id")) {
 				assetEntryId = urlFragments[3];
 			}
 			else {
 				urlTitle = urlFragments[2];
 			}
 
-			String portletId = _PORTLET_ID + "_INSTANCE_" + instanceId;
+			String portletId =
+				_PORTLET_ID + PortletConstants.INSTANCE_SEPARATOR + instanceId;
 
 			params.put("p_p_id", new String[] {portletId});
+			params.put("p_p_lifecycle", new String[] {"0"});
 
 		  	if (friendlyURLPath.indexOf("maximized", x) != -1) {
 				addParam(params, "p_p_state", WindowState.MAXIMIZED);
 			}
 
-			params.put("p_p_lifecycle", new String[] {"0"});
 			params.put("p_p_mode", new String[] {PortletMode.VIEW.toString()});
 
 			String namespace =
