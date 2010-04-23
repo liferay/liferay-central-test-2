@@ -16,7 +16,6 @@ package com.liferay.portlet.portletconfiguration.action;
 
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
@@ -25,6 +24,7 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
+import com.liferay.portlet.PortletQNameUtil;
 import com.liferay.portlet.portletconfiguration.util.PublicRenderParameterConfiguration;
 
 import java.util.Enumeration;
@@ -114,10 +114,10 @@ public class EditPublicRenderParametersAction extends EditConfigurationAction {
 			PortletPreferencesFactoryUtil.getLayoutPortletSetup(
 				layout, portlet.getPortletId());
 
-		Enumeration<String> enu = preferences.getNames();
+		Enumeration<String> preferenceNames = preferences.getNames();
 
-		while (enu.hasMoreElements()) {
-			String name = enu.nextElement();
+		while (preferenceNames.hasMoreElements()) {
+			String name = preferenceNames.nextElement();
 
 			if (name.startsWith(_IGNORE_PREFIX) ||
 				name.startsWith(_MAPPING_PREFIX)) {
@@ -129,35 +129,27 @@ public class EditPublicRenderParametersAction extends EditConfigurationAction {
 		for (PublicRenderParameter publicRenderParameter :
 				portlet.getPublicRenderParameters()) {
 
-			String ignoreName =
-				_IGNORE_PREFIX + publicRenderParameter.getIdentifier();
+			String ignoreKey =
+				_IGNORE_PREFIX + PortletQNameUtil.getPublicRenderParameterName(
+					publicRenderParameter.getQName());
 
-			if (Validator.isNotNull(
-					ParamUtil.getString(actionRequest, ignoreName))) {
+			boolean ignoreValue = ParamUtil.getBoolean(
+					actionRequest, ignoreKey);
 
-				preferences.setValue(ignoreName, StringPool.TRUE);
+			if (ignoreValue) {
+				preferences.setValue(ignoreKey, String.valueOf(Boolean.TRUE));
 			}
 			else {
-				String mappingName =
-					_MAPPING_PREFIX + publicRenderParameter.getIdentifier();
+				String mappingKey =
+					_MAPPING_PREFIX +
+					PortletQNameUtil.getPublicRenderParameterName(
+						publicRenderParameter.getQName());
 
 				String mappingValue = ParamUtil.getString(
-					actionRequest, mappingName);
+					actionRequest, mappingKey);
 
 				if (Validator.isNotNull(mappingValue)) {
-					String mappingKey = _MAPPING_PREFIX + mappingValue;
-
-					if (Validator.isNull(
-							preferences.getValue(mappingKey, null))) {
-
-						preferences.setValue(
-							mappingKey, publicRenderParameter.getIdentifier());
-					}
-					else {
-						SessionErrors.add(actionRequest, "duplicateMapping");
-
-						break;
-					}
+					preferences.setValue(mappingKey, mappingValue);
 				}
 			}
 		}

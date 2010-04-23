@@ -17,7 +17,6 @@ package com.liferay.portlet.portletconfiguration.action;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Portlet;
@@ -25,16 +24,15 @@ import com.liferay.portal.model.PublicRenderParameter;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
+import com.liferay.portlet.PortletQNameUtil;
 import com.liferay.portlet.portletconfiguration.util.PublicRenderParameterConfiguration;
 import com.liferay.portlet.portletconfiguration.util.PublicRenderParameterIdentifierComparator;
 import com.liferay.portlet.portletconfiguration.util.PublicRenderParameterIdentifierConfigurationComparator;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -97,38 +95,6 @@ public class ActionUtil {
 			PortletPreferencesFactoryUtil.getLayoutPortletSetup(
 				layout, portlet.getPortletId());
 
-		Map<String, String> mappings = new HashMap<String, String>();
-
-		if (SessionErrors.isEmpty(renderRequest)) {
-			Set<PublicRenderParameter> publicRenderParameters =
-				(Set<PublicRenderParameter>)renderRequest.getAttribute(
-					WebKeys.PUBLIC_RENDER_PARAMETERS);
-
-			for (PublicRenderParameter publicRenderParameter :
-					publicRenderParameters) {
-
-				String mapping = preferences.getValue(
-					_MAPPING_PREFIX + publicRenderParameter.getIdentifier(),
-					null);
-
-				if (Validator.isNotNull(mapping)) {
-					mappings.put(
-						mapping, publicRenderParameter.getIdentifier());
-				}
-			}
-		}
-		else {
-			for (PublicRenderParameter publicRenderParameter :
-					portlet.getPublicRenderParameters()) {
-
-				String mapping = ParamUtil.getString(
-					renderRequest,
-					_MAPPING_PREFIX + publicRenderParameter.getIdentifier());
-
-				mappings.put(publicRenderParameter.getIdentifier(), mapping);
-			}
-		}
-
 		List<PublicRenderParameterConfiguration>
 			publicRenderParameterConfigurations =
 				new ArrayList<PublicRenderParameterConfiguration>();
@@ -137,24 +103,29 @@ public class ActionUtil {
 				portlet.getPublicRenderParameters()) {
 
 			boolean ignore = false;
+			String mapping = null;
 
 			String ignoreKey =
-				_IGNORE_PREFIX + publicRenderParameter.getIdentifier();
+				_IGNORE_PREFIX + PortletQNameUtil.getPublicRenderParameterName(
+					publicRenderParameter.getQName());
+			String mappingKey =
+				_MAPPING_PREFIX + PortletQNameUtil.getPublicRenderParameterName(
+					publicRenderParameter.getQName());
 
 			if (SessionErrors.isEmpty(renderRequest)) {
 				ignore = GetterUtil.getBoolean(
 					preferences.getValue(ignoreKey, null));
+				mapping = preferences.getValue(mappingKey, null);
 			}
 			else {
 				ignore = GetterUtil.getBoolean(
 					ParamUtil.getString(renderRequest, ignoreKey));
+				mapping = ParamUtil.getString(renderRequest, mappingKey);
 			}
 
 			publicRenderParameterConfigurations.add(
 				new PublicRenderParameterConfiguration(
-					publicRenderParameter,
-					mappings.get(publicRenderParameter.getIdentifier()),
-					ignore));
+					publicRenderParameter, mapping, ignore));
 		}
 
 		Collections.sort(

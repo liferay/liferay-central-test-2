@@ -720,32 +720,36 @@ public abstract class PortletRequestImpl implements LiferayPortletRequest {
 				continue;
 			}
 
-			String name = GetterUtil.getString(
-				preferences.getValue(
-					PublicRenderParameterConfiguration.MAPPING_PREFIX +
-						publicRenderParameter.getIdentifier(),
-					null));
-
-			if (Validator.isNull(name)) {
-				name = publicRenderParameter.getIdentifier();
-			}
-
 			QName qName = publicRenderParameter.getQName();
-
 			String[] values = _publicRenderParameters.get(
 				PortletQNameUtil.getKey(qName));
 
-			if ((values) == null || (values.length == 0)) {
-				continue;
+			String mappedTo = GetterUtil.getString(
+				preferences.getValue(
+					PublicRenderParameterConfiguration.MAPPING_PREFIX +
+						PortletQNameUtil.getPublicRenderParameterName(
+							publicRenderParameter.getQName()),
+					null));
+			String[] newValues = dynamicRequest.getRequest().getParameterValues(
+				mappedTo);
+
+			if (newValues != null && newValues.length != 0) {
+				newValues = ArrayUtil.remove(newValues, "null");
 			}
 
-			String[] newValues = dynamicRequest.getParameterValues(name);
+			String name = publicRenderParameter.getIdentifier();
 
-			if (newValues != null) {
-				values = ArrayUtil.append(newValues, values);
+			if (newValues == null || newValues.length == 0) {
+				if ((values) == null || (values.length == 0)) {
+					continue;
+				}
+				else {
+					dynamicRequest.setParameterValues(name, values);
+				}
 			}
-
-			dynamicRequest.setParameterValues(name, values);
+			else {
+				dynamicRequest.setParameterValues(name, newValues);
+			}
 		}
 	}
 

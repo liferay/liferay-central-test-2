@@ -15,6 +15,7 @@
 package com.liferay.portlet.portletconfiguration.util;
 
 import com.liferay.portal.model.PublicRenderParameter;
+import com.liferay.portlet.PortletQNameUtil;
 
 /**
  * <a href="PublicRenderParameterConfiguration.java.html"><b><i>View Source</i>
@@ -33,12 +34,15 @@ public class PublicRenderParameterConfiguration {
 		boolean ignore) {
 
 		_publicRenderParameter = publicRenderParameter;
+		_publicRenderParameterName =
+			PortletQNameUtil.getPublicRenderParameterName(
+				_publicRenderParameter.getQName());
 		_mapping = mapping;
 		_ignore = ignore;
 	}
 
 	public String getIgnoreKey() {
-		return IGNORE_PREFIX + _publicRenderParameter.getIdentifier();
+		return IGNORE_PREFIX + _publicRenderParameterName;
 	}
 
 	public String getMapping() {
@@ -46,11 +50,15 @@ public class PublicRenderParameterConfiguration {
 	}
 
 	public String getMappingKey() {
-		return MAPPING_PREFIX + _publicRenderParameter.getIdentifier();
+		return MAPPING_PREFIX + _publicRenderParameterName;
 	}
 
 	public PublicRenderParameter getPublicRenderParameter() {
 		return _publicRenderParameter;
+	}
+
+	public String getPublicRenderParameterName() {
+		return _publicRenderParameterName;
 	}
 
 	public boolean isIgnore() {
@@ -60,5 +68,6 @@ public class PublicRenderParameterConfiguration {
 	private boolean _ignore;
 	private String _mapping;
 	private PublicRenderParameter _publicRenderParameter;
+	private String _publicRenderParameterName;
 
 }

@@ -39,6 +39,7 @@
 <%@ page import="com.liferay.portal.security.permission.comparator.ActionComparator" %>
 <%@ page import="com.liferay.portal.service.permission.RolePermissionUtil" %>
 <%@ page import="com.liferay.portlet.PortletContextImpl" %>
+<%@ page import="com.liferay.portlet.PortletQNameUtil" %>
 <%@ page import="com.liferay.portlet.enterpriseadmin.search.OrganizationSearch" %>
 <%@ page import="com.liferay.portlet.enterpriseadmin.search.OrganizationSearchTerms" %>
 <%@ page import="com.liferay.portlet.enterpriseadmin.search.RoleSearch" %>
