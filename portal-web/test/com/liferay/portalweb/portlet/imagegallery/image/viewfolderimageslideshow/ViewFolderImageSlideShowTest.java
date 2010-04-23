@@ -49,8 +49,7 @@ public class ViewFolderImageSlideShowTest extends BaseTestCase {
 		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		Thread.sleep(5000);
-		selenium.clickAt("//div[@class='lfr-component lfr-menu-list right ']/ul/li[6]/a",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("//div[2]/ul/li[5]/a", RuntimeVariables.replace(""));
 		selenium.waitForPopUp("slideShow", RuntimeVariables.replace("30000"));
 		selenium.selectWindow("name=slideShow");
 		Thread.sleep(5000);

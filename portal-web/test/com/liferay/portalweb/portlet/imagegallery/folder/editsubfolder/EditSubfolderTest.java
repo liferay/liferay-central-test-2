@@ -50,7 +50,6 @@ public class EditSubfolderTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace(
 				"Test1 Subfolder1\nThis is Test1 Subfolder1."),
 			selenium.getText("//td[1]/a"));
-		Thread.sleep(5000);
 		selenium.clickAt("//td[4]/ul/li/strong/a", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {

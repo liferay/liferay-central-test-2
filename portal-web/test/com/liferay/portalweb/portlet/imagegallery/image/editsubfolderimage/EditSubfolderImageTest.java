@@ -74,6 +74,12 @@ public class EditSubfolderImageTest extends BaseTestCase {
 
 		selenium.clickAt("//img[@alt='Edit']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.type("_31_name",
+			RuntimeVariables.replace("Test1 Image1 Edited1"));
+		selenium.type("_31_description",
+			RuntimeVariables.replace("This is Test1 Image1. Edited1."));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -81,8 +87,8 @@ public class EditSubfolderImageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible(
-							"//span[@class='aui-icon-search aui-icon']")) {
+				if (selenium.isTextPresent(
+							"Your request processed successfully.")) {
 					break;
 				}
 			}
@@ -92,17 +98,45 @@ public class EditSubfolderImageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("_31_name",
-			RuntimeVariables.replace("Test1 Image1 Edited1"));
-		selenium.type("_31_description",
-			RuntimeVariables.replace("This is Test1 Image1. Edited1."));
-		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		Thread.sleep(5000);
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent(
+							"//img[@alt='Test1 Image1 Edited1 - This is Test1 Image1. Edited1.']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertTrue(selenium.isElementPresent(
 				"//img[@alt='Test1 Image1 Edited1 - This is Test1 Image1. Edited1.']"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isTextPresent("Test1 Image1 Edited1")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertTrue(selenium.isTextPresent("Test1 Image1 Edited1"));
 	}
 }

@@ -48,10 +48,8 @@ public class AddFolderImageImageInvalidTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//div[@class='lfr-component lfr-menu-list right ']/ul/li[5]/a",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("//div[2]/ul/li[4]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -59,7 +57,7 @@ public class AddFolderImageImageInvalidTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Use the classic uploader.")) {
+				if (selenium.isVisible("link=Use the classic uploader.")) {
 					break;
 				}
 			}
@@ -77,8 +75,7 @@ public class AddFolderImageImageInvalidTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible(
-							"//span[@class='aui-icon-search aui-icon']")) {
+				if (selenium.isVisible("_31_file")) {
 					break;
 				}
 			}
@@ -88,7 +85,6 @@ public class AddFolderImageImageInvalidTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("_31_file", RuntimeVariables.replace(""));
 		selenium.type("_31_file",
 			RuntimeVariables.replace(
 				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\imagegallery\\image\\addfolderimageimageinvalid\\dependencies\\test_image.invalid"));

@@ -33,9 +33,9 @@ public class ImageGalleryTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(FolderTests.suite());
-		testSuite.addTest(ImageTests.suite());
-		testSuite.addTest(LARTests.suite());
+//		testSuite.addTest(FolderTests.suite());
+//		testSuite.addTest(ImageTests.suite());
+//		testSuite.addTest(LARTests.suite());
 		testSuite.addTest(PortletTests.suite());
 
 		return testSuite;
