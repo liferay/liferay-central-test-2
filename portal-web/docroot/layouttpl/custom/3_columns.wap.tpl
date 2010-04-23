@@ -15,7 +15,7 @@
 			</td>
 		</tr>
 		</table>
-	else
+	#else
 		<div class="portlet-layout">
 			<div class="aui-w33 portlet-column portlet-column-first" id="column-1">
 				$processor.processColumn("column-1", "portlet-column-content portlet-column-content-first")
