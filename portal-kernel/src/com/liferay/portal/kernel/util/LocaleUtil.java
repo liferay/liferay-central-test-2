@@ -157,6 +157,12 @@ public class LocaleUtil {
 	}
 
 	private Locale _getDefault() {
+		Locale locale = LocaleThreadLocal.getLocale();
+
+		if (locale != null) {
+			return locale;
+		}
+
 		return _locale;
 	}
 

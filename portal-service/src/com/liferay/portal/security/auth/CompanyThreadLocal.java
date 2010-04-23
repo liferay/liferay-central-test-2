@@ -17,7 +17,11 @@ package com.liferay.portal.security.auth;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.AutoResetThreadLocal;
+import com.liferay.portal.kernel.util.LocaleThreadLocal;
+import com.liferay.portal.kernel.util.TimeZoneThreadLocal;
+import com.liferay.portal.model.Company;
 import com.liferay.portal.model.CompanyConstants;
+import com.liferay.portal.service.CompanyLocalServiceUtil;
 
 /**
  * <a href="CompanyThreadLocal.java.html"><b><i>View Source</i></b></a>
@@ -42,9 +46,22 @@ public class CompanyThreadLocal {
 		}
 
 		if (companyId > 0) {
+			try {
+				Company company = CompanyLocalServiceUtil.getCompany(companyId);
+
+				LocaleThreadLocal.setLocale(company.getLocale());
+				TimeZoneThreadLocal.setTimeZone(company.getTimeZone());
+			}
+			catch (Exception e) {
+				_log.error(e, e);
+			}
+
 			_companyId.set(companyId);
 		}
 		else {
+			LocaleThreadLocal.setLocale(null);
+			TimeZoneThreadLocal.setTimeZone(null);
+
 			_companyId.set(CompanyConstants.SYSTEM);
 		}
 	}

@@ -42,6 +42,12 @@ public class TimeZoneUtil {
 	}
 
 	private TimeZone _getDefault() {
+		TimeZone timeZone = TimeZoneThreadLocal.getTimeZone();
+
+		if (timeZone != null) {
+			return timeZone;
+		}
+
 		return _timeZone;
 	}
 
