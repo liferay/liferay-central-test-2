@@ -39,8 +39,9 @@ public class ErrorTag extends TagSupport {
 			HttpServletRequest request =
 				(HttpServletRequest)pageContext.getRequest();
 
-			PortletRequest portletRequest = (PortletRequest)request.getAttribute(
-				JavaConstants.JAVAX_PORTLET_REQUEST);
+			PortletRequest portletRequest =
+				(PortletRequest)request.getAttribute(
+					JavaConstants.JAVAX_PORTLET_REQUEST);
 
 			boolean includeEndPage = false;
 
@@ -82,8 +83,9 @@ public class ErrorTag extends TagSupport {
 			HttpServletRequest request =
 				(HttpServletRequest)pageContext.getRequest();
 
-			PortletRequest portletRequest = (PortletRequest)request.getAttribute(
-				JavaConstants.JAVAX_PORTLET_REQUEST);
+			PortletRequest portletRequest =
+				(PortletRequest)request.getAttribute(
+					JavaConstants.JAVAX_PORTLET_REQUEST);
 
 			request.setAttribute("liferay-ui:error:key", _key);
 			request.setAttribute("liferay-ui:error:message", _message);
@@ -93,7 +95,8 @@ public class ErrorTag extends TagSupport {
 				String.valueOf(_translateMessage));
 
 			if ((_exception != null) && (Validator.isNull(_message)) &&
-				(SessionErrors.contains(portletRequest, _exception.getName()))) {
+				(SessionErrors.contains(
+					portletRequest, _exception.getName()))) {
 
 				PortalIncludeUtil.include(pageContext, getStartPage());
 
