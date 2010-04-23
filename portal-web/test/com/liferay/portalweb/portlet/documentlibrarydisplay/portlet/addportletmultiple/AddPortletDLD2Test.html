@@ -14,7 +14,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>waitForVisible</td>
 	<td>link=Document Library Display Test Page</td>
 	<td></td>
 </tr>
@@ -29,48 +29,48 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForVisible</td>
-	<td>//input[@id='layout_configuration_content']</td>
+	<td>pause</td>
+	<td>5000</td>
 	<td></td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>//input[@id='layout_configuration_content']</td>
+	<td>waitForVisible</td>
+	<td>layout_configuration_content</td>
 	<td></td>
 </tr>
 <tr>
 	<td>typeKeys</td>
-	<td>//input[@id='layout_configuration_content']</td>
+	<td>layout_configuration_content</td>
 	<td>d</td>
 </tr>
 <tr>
 	<td>waitForVisible</td>
-	<td>//div[@id='ContentManagement-DocumentLibraryDisplay']/p/a</td>
+	<td>//div[@title='Document Library Display']/p/a</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAt</td>
-	<td>//div[@id='ContentManagement-DocumentLibraryDisplay']/p/a</td>
+	<td>//div[@title='Document Library Display']/p/a</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForVisible</td>
-	<td>//td[1]/div[2]/div</td>
+	<td>//td[1]/div/div[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>//td[1]/div/div[1]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForVisible</td>
-	<td>//td[1]/div[1]/div</td>
+	<td>//td[1]/div/div[2]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
-	<td>//td[1]/div[2]/div</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>//td[1]/div[1]/div</td>
+	<td>assertVisible</td>
+	<td>//td[1]/div/div[2]</td>
 	<td></td>
 </tr>
 

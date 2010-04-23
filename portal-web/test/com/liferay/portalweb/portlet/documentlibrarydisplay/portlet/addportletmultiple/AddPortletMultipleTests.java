@@ -33,7 +33,7 @@ public class AddPortletMultipleTests extends BaseTests {
 		testSuite.addTestSuite(AddPortletDLD1Test.class);
 		testSuite.addTestSuite(AddPortletDLD2Test.class);
 		testSuite.addTestSuite(AddPortletDLD3Test.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

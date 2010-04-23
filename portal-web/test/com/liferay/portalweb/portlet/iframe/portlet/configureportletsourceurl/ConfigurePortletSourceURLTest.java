@@ -25,7 +25,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class ConfigurePortletSourceURLTest extends BaseTestCase {
 	public void testConfigurePortletSourceURL() throws Exception {
-		selenium.open("web/guest/home/");
+		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -67,7 +67,7 @@ public class ConfigurePortletSourceURLTest extends BaseTestCase {
 		selenium.type("_86_src", RuntimeVariables.replace("www.liferay.com"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.open("web/guest/home/");
+		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

@@ -46,10 +46,15 @@ public class SearchFolderDocumentTest extends BaseTestCase {
 		selenium.clickAt("link=Document Library Display Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.type("//div/input[1]", RuntimeVariables.replace("Test1"));
+		selenium.type("//span/input", RuntimeVariables.replace("test1"));
 		selenium.clickAt("//input[@value='Search']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Test1 Document1"));
+		selenium.type("//span/input", RuntimeVariables.replace("test2"));
+		selenium.clickAt("//input[@value='Search']",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		assertFalse(selenium.isElementPresent("link=Test1 Document1"));
 	}
 }

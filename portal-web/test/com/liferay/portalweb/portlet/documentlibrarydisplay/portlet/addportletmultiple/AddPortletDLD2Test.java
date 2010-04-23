@@ -32,7 +32,7 @@ public class AddPortletDLD2Test extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent(
+				if (selenium.isVisible(
 							"link=Document Library Display Test Page")) {
 					break;
 				}
@@ -47,6 +47,7 @@ public class AddPortletDLD2Test extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("_145_addApplication", RuntimeVariables.replace(""));
+		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -54,8 +55,7 @@ public class AddPortletDLD2Test extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible(
-							"//input[@id='layout_configuration_content']")) {
+				if (selenium.isVisible("layout_configuration_content")) {
 					break;
 				}
 			}
@@ -65,9 +65,7 @@ public class AddPortletDLD2Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("//input[@id='layout_configuration_content']",
-			RuntimeVariables.replace(""));
-		selenium.typeKeys("//input[@id='layout_configuration_content']",
+		selenium.typeKeys("layout_configuration_content",
 			RuntimeVariables.replace("d"));
 
 		for (int second = 0;; second++) {
@@ -77,7 +75,7 @@ public class AddPortletDLD2Test extends BaseTestCase {
 
 			try {
 				if (selenium.isVisible(
-							"//div[@id='ContentManagement-DocumentLibraryDisplay']/p/a")) {
+							"//div[@title='Document Library Display']/p/a")) {
 					break;
 				}
 			}
@@ -87,7 +85,7 @@ public class AddPortletDLD2Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//div[@id='ContentManagement-DocumentLibraryDisplay']/p/a",
+		selenium.clickAt("//div[@title='Document Library Display']/p/a",
 			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -96,7 +94,7 @@ public class AddPortletDLD2Test extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("//td[1]/div[2]/div")) {
+				if (selenium.isVisible("//td[1]/div/div[1]")) {
 					break;
 				}
 			}
@@ -105,6 +103,8 @@ public class AddPortletDLD2Test extends BaseTestCase {
 
 			Thread.sleep(1000);
 		}
+
+		assertTrue(selenium.isVisible("//td[1]/div/div[1]"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -112,7 +112,7 @@ public class AddPortletDLD2Test extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("//td[1]/div[1]/div")) {
+				if (selenium.isVisible("//td[1]/div/div[2]")) {
 					break;
 				}
 			}
@@ -122,7 +122,6 @@ public class AddPortletDLD2Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertTrue(selenium.isElementPresent("//td[1]/div[2]/div"));
-		assertTrue(selenium.isElementPresent("//td[1]/div[1]/div"));
+		assertTrue(selenium.isVisible("//td[1]/div/div[2]"));
 	}
 }

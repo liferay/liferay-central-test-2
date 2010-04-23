@@ -30,10 +30,10 @@ public class ConfigurePortletSourceURLTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTestSuite(AddPageTest.class);
-		testSuite.addTestSuite(AddPortletTest.class);
+		testSuite.addTestSuite(AddPageIFrameTest.class);
+		testSuite.addTestSuite(AddPortletIFrameTest.class);
 		testSuite.addTestSuite(ConfigurePortletSourceURLTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}
