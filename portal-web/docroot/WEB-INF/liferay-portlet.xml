@@ -57,7 +57,7 @@
 			<trigger>
 				<simple>
 					<property-key>calendar.event.check.interval</property-key>
-					<time-unit>MINUTE</time-unit>
+					<time-unit>minute</time-unit>
 				</simple>
 			</trigger>
 		</scheduler-entry>
@@ -88,7 +88,7 @@
 			<trigger>
 				<simple>
 					<simple-trigger-value>1</simple-trigger-value>
-					<time-unit>DAY</time-unit>
+					<time-unit>day</time-unit>
 				</simple>
 			</trigger>
 		</scheduler-entry>
@@ -97,7 +97,7 @@
 			<trigger>
 				<simple>
 					<property-key>ldap.import.interval</property-key>
-					<time-unit>MINUTE</time-unit>
+					<time-unit>minute</time-unit>
 				</simple>
 			</trigger>
 		</scheduler-entry>
@@ -147,7 +147,7 @@
 			<trigger>
 				<simple>
 					<property-key>journal.article.check.interval</property-key>
-					<time-unit>MINUTE</time-unit>
+					<time-unit>minute</time-unit>
 				</simple>
 			</trigger>
 		</scheduler-entry>
@@ -195,7 +195,7 @@
 			<trigger>
 				<simple>
 					<property-key>message.boards.expire.ban.job.interval</property-key>
-					<time-unit>MINUTE</time-unit>
+					<time-unit>minute</time-unit>
 				</simple>
 			</trigger>
 		</scheduler-entry>
@@ -388,7 +388,7 @@
 			<trigger>
 				<simple>
 					<property-key>blogs.linkback.job.interval</property-key>
-					<time-unit>MINUTE</time-unit>
+					<time-unit>minute</time-unit>
 				</simple>
 			</trigger>
 		</scheduler-entry>
@@ -753,7 +753,7 @@
 			<trigger>
 				<simple>
 					<property-key>announcements.entry.check.interval</property-key>
-					<time-unit>MINUTE</time-unit>
+					<time-unit>minute</time-unit>
 				</simple>
 			</trigger>
 		</scheduler-entry>
