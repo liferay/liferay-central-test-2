@@ -104,68 +104,70 @@ request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntry
 
 			<aui:column columnWidth="<%= 75 %>" cssClass="folder-column folder-column-first" first="<%= true %>">
 				<liferay-ui:panel-container extended="<%= false %>" id="bookmarksPanelContainer" persistState="<%= true %>">
-					<c:if test="<%= folder != null %>">
-						<div class="folder-description">
-							<%= folder.getDescription() %>
-						</div>
-
-						<div class="folder-metadata">
-							<div class="folder-date">
-								<%= LanguageUtil.format(pageContext, "last-updated-x", dateFormatDate.format(folder.getModifiedDate())) %>
+					<c:if test="<%= showSubfolders %>">
+						<c:if test="<%= folder != null %>">
+							<div class="folder-description">
+								<%= folder.getDescription() %>
 							</div>
 
-							<div class="folder-subfolders">
-								<%= foldersCount %> <liferay-ui:message key='<%= (foldersCount == 1) ? "subfolder" : "subfolders" %>' />
+							<div class="folder-metadata">
+								<div class="folder-date">
+									<%= LanguageUtil.format(pageContext, "last-updated-x", dateFormatDate.format(folder.getModifiedDate())) %>
+								</div>
+
+								<div class="folder-subfolders">
+									<%= foldersCount %> <liferay-ui:message key='<%= (foldersCount == 1) ? "subfolder" : "subfolders" %>' />
+								</div>
+
+								<div class="folder-entries">
+									<%= entriesCount %> <liferay-ui:message key='<%= (entriesCount == 1) ? "entry" : "entries" %>' />
+								</div>
 							</div>
 
-							<div class="folder-entries">
-								<%= entriesCount %> <liferay-ui:message key='<%= (entriesCount == 1) ? "entry" : "entries" %>' />
+							<div class="custom-attributes">
+								<liferay-ui:custom-attributes-available className="<%= BookmarksFolder.class.getName() %>">
+									<liferay-ui:custom-attribute-list
+										className="<%= BookmarksFolder.class.getName() %>"
+										classPK="<%= (folder != null) ? folder.getFolderId() : 0 %>"
+										editable="<%= false %>"
+										label="<%= true %>"
+									/>
+								</liferay-ui:custom-attributes-available>
 							</div>
-						</div>
+						</c:if>
 
-						<div class="custom-attributes">
-							<liferay-ui:custom-attributes-available className="<%= BookmarksFolder.class.getName() %>">
-								<liferay-ui:custom-attribute-list
-									className="<%= BookmarksFolder.class.getName() %>"
-									classPK="<%= (folder != null) ? folder.getFolderId() : 0 %>"
-									editable="<%= false %>"
-									label="<%= true %>"
-								/>
-							</liferay-ui:custom-attributes-available>
-						</div>
-					</c:if>
-
-					<c:if test="<%= foldersCount > 0 %>">
-						<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="subFoldersPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, (folder != null) ? "subfolders" : "folders") %>'>
-							<liferay-ui:search-container
-								curParam="cur1"
-								delta="<%= foldersPerPage %>"
-								deltaConfigurable="<%= false %>"
-								headerNames="folder,num-of-folders,num-of-entries"
-								iteratorURL="<%= portletURL %>"
-							>
-								<liferay-ui:search-container-results
-									results="<%= BookmarksFolderLocalServiceUtil.getFolders(scopeGroupId, folderId, searchContainer.getStart(), searchContainer.getEnd()) %>"
-									total="<%= BookmarksFolderLocalServiceUtil.getFoldersCount(scopeGroupId, folderId) %>"
-								/>
-
-								<liferay-ui:search-container-row
-									className="com.liferay.portlet.bookmarks.model.BookmarksFolder"
-									escapedModel="<%= true %>"
-									keyProperty="folderId"
-									modelVar="curFolder"
+						<c:if test="<%= foldersCount > 0 %>">
+							<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="subFoldersPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, (folder != null) ? "subfolders" : "folders") %>'>
+								<liferay-ui:search-container
+									curParam="cur1"
+									delta="<%= foldersPerPage %>"
+									deltaConfigurable="<%= false %>"
+									headerNames="<%= StringUtil.merge(folderColumns) %>"
+									iteratorURL="<%= portletURL %>"
 								>
-									<liferay-portlet:renderURL varImpl="rowURL">
-										<portlet:param name="struts_action" value="/bookmarks/view" />
-										<portlet:param name="folderId" value="<%= String.valueOf(curFolder.getFolderId()) %>" />
-									</liferay-portlet:renderURL>
+									<liferay-ui:search-container-results
+										results="<%= BookmarksFolderLocalServiceUtil.getFolders(scopeGroupId, folderId, searchContainer.getStart(), searchContainer.getEnd()) %>"
+										total="<%= BookmarksFolderLocalServiceUtil.getFoldersCount(scopeGroupId, folderId) %>"
+									/>
 
-									<%@ include file="/html/portlet/bookmarks/folder_columns.jspf" %>
-								</liferay-ui:search-container-row>
+									<liferay-ui:search-container-row
+										className="com.liferay.portlet.bookmarks.model.BookmarksFolder"
+										escapedModel="<%= true %>"
+										keyProperty="folderId"
+										modelVar="curFolder"
+									>
+										<liferay-portlet:renderURL varImpl="rowURL">
+											<portlet:param name="struts_action" value="/bookmarks/view" />
+											<portlet:param name="folderId" value="<%= String.valueOf(curFolder.getFolderId()) %>" />
+										</liferay-portlet:renderURL>
 
-								<liferay-ui:search-iterator />
-							</liferay-ui:search-container>
-						</liferay-ui:panel>
+										<%@ include file="/html/portlet/bookmarks/folder_columns.jspf" %>
+									</liferay-ui:search-container-row>
+
+									<liferay-ui:search-iterator />
+								</liferay-ui:search-container>
+							</liferay-ui:panel>
+						</c:if>
 					</c:if>
 
 					<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="entriesPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "bookmarks") %>'>
@@ -214,7 +216,7 @@ request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntry
 			<liferay-ui:search-container
 				delta="<%= entriesPerPage %>"
 				deltaConfigurable="<%= false %>"
-				headerNames="folder,num-of-folders,num-of-entries"
+				emptyResultsMessage="there-are-no-entries"
 				iteratorURL="<%= portletURL %>"
 			>
 

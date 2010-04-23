@@ -381,6 +381,24 @@
 			<mime-type>text/html</mime-type>
 		</supports>
 		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
+		<portlet-preferences>
+			<preference>
+				<name>showFoldersSearch</name>
+				<value>true</value>
+			</preference>
+			<preference>
+				<name>showSubfolders</name>
+				<value>true</value>
+			</preference>
+			<preference>
+				<name>folderColumns</name>
+				<value>folder,num-of-folders,num-of-entries</value>
+			</preference>
+			<preference>
+				<name>entryColumns</name>
+				<value>name,url,visits,modified-date</value>
+			</preference>
+		</portlet-preferences>
 		<security-role-ref>
 			<role-name>power-user</role-name>
 		</security-role-ref>
