@@ -59,11 +59,13 @@ public class ComboServlet extends HttpServlet {
 		}
 
 		byte[] bytes = null;
+		int length = 0;
 
 		File cacheFile = getCacheFile(request);
 
 		if (cacheFile.exists()) {
 			bytes = FileUtil.getBytes(cacheFile);
+			length = bytes.length;
 		}
 		else {
 			StringBundler sb = new StringBundler(parameterMap.size());
@@ -86,7 +88,9 @@ public class ComboServlet extends HttpServlet {
 
 				bytes = contentByteBuffer.array();
 
-				FileUtil.write(cacheFile, bytes, 0, contentByteBuffer.limit());
+				length = contentByteBuffer.limit();
+
+				FileUtil.write(cacheFile, bytes, 0, length);
 			}
 			else {
 				bytes = new byte[0];
@@ -106,7 +110,7 @@ public class ComboServlet extends HttpServlet {
 
 		response.setContentType(contentType);
 
-		ServletResponseUtil.write(response, bytes);
+		ServletResponseUtil.write(response, bytes, length);
 	}
 
 	protected File getCacheFile(HttpServletRequest request) throws IOException {
