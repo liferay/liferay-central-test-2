@@ -175,9 +175,17 @@ public class StringBundler {
 		_arrayIndex = newIndex;
 	}
 
+	public void setStringAt(String s, int index) {
+		if (index < 0 || index >= _arrayIndex) {
+			throw new ArrayIndexOutOfBoundsException(index);
+		}
+
+		_array[index] = s;
+	}
+
 	public String stringAt(int index) {
-		if (index >= _arrayIndex) {
-			throw new ArrayIndexOutOfBoundsException();
+		if (index < 0 || index >= _arrayIndex) {
+			throw new ArrayIndexOutOfBoundsException(index);
 		}
 
 		return _array[index];

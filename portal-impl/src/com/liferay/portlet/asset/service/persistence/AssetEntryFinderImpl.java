@@ -23,7 +23,6 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.CalendarUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portal.util.PropsValues;
@@ -181,7 +180,9 @@ public class AssetEntryFinderImpl
 			sb.append("AssetEntries_AssetCategories.categoryId) ");
 		}
 
-		sb.append("WHERE (1 = 1)");
+		sb.append("WHERE ");
+
+		int firstWhereCauseIndex = sb.index();
 
 		if (entryQuery.isVisible() != null) {
 			sb.append(" AND (visible = ?)");
@@ -269,6 +270,7 @@ public class AssetEntryFinderImpl
 
 		// Other conditions
 
+		int datesIndex = sb.index();
 		sb.append("[$DATES$]");
 		sb.append(getGroupIds(entryQuery.getGroupIds()));
 		sb.append(getClassNameIds(entryQuery.getClassNameIds()));
@@ -290,10 +292,18 @@ public class AssetEntryFinderImpl
 			}
 		}
 
-		String sql = sb.toString();
+		replaceDates(
+			sb, datesIndex, entryQuery.getPublishDate(),
+			entryQuery.getExpirationDate());
 
-		sql = getDates(
-			sql, entryQuery.getPublishDate(), entryQuery.getExpirationDate());
+		if (sb.index() > firstWhereCauseIndex) {
+			String firstWhereCause = sb.stringAt(firstWhereCauseIndex);
+			if (firstWhereCause.startsWith(" AND")) {
+				sb.setStringAt(firstWhereCause.substring(4),
+					firstWhereCauseIndex);
+			}
+		}
+		String sql = sb.toString();
 
 		SQLQuery q = session.createSQLQuery(sql);
 
@@ -390,10 +400,6 @@ public class AssetEntryFinderImpl
 			}
 		}
 
-		if (sb.length() == 0) {
-			sb.append("(1 = 1)");
-		}
-
 		return sb.toString();
 	}
 
@@ -413,24 +419,6 @@ public class AssetEntryFinderImpl
 		sb.append(") ");
 
 		return sb.toString();
-	}
-
-	protected String getDates(
-		String sql, Date publishDate, Date expirationDate) {
-
-		StringBundler sb = new StringBundler(1);
-
-		if (publishDate != null) {
-			sb.append(" AND (publishDate IS NULL OR publishDate < ?)");
-		}
-
-		if (expirationDate != null) {
-			sb.append(" AND (expirationDate IS NULL OR expirationDate > ?)");
-		}
-
-		sql = StringUtil.replace(sql, "[$DATES$]", sb.toString());
-
-		return sql;
 	}
 
 	protected String getGroupIds(long[] groupIds) {
@@ -492,9 +480,6 @@ public class AssetEntryFinderImpl
 	}
 
 	protected String getTagIds(long[] tagIds, String operator) {
-		if (tagIds.length == 0) {
-			return "(1 = 1)";
-		}
 
 		StringBundler sb = new StringBundler(tagIds.length * 4 - 1);
 
@@ -509,6 +494,23 @@ public class AssetEntryFinderImpl
 		}
 
 		return sb.toString();
+	}
+
+	protected void replaceDates(
+		StringBundler sql, int dateIndex, Date publishDate,
+		Date expirationDate) {
+
+		StringBundler sb = new StringBundler(2);
+
+		if (publishDate != null) {
+			sb.append(" AND (publishDate IS NULL OR publishDate < ?)");
+		}
+
+		if (expirationDate != null) {
+			sb.append(" AND (expirationDate IS NULL OR expirationDate > ?)");
+		}
+
+		sql.setStringAt(sb.toString(), dateIndex);
 	}
 
 	protected void setDates(
