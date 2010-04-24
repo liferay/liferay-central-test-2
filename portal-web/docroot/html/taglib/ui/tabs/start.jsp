@@ -24,6 +24,7 @@ LiferayPortletURL portletURL = (LiferayPortletURL)request.getAttribute("liferay-
 
 String url = GetterUtil.getString((String)request.getAttribute("liferay-ui:tabs:url"));
 String anchor = StringPool.BLANK;
+String separator = StringPool.AMPERSAND;
 
 if (url != null) {
 
@@ -32,19 +33,19 @@ if (url != null) {
 	int x = url.indexOf(param + "=");
 
 	if (x != -1) {
-		x = url.lastIndexOf("&", x);
-
-		if (x == -1) {
-			x = url.lastIndexOf("?", x);
-		}
-
-		int y = url.indexOf("&", x + 1);
+		int y = url.lastIndexOf("&", x);
 
 		if (y == -1) {
-			y = url.length();
+			y = url.lastIndexOf("?", x);
 		}
 
-		url = url.substring(0, x) + url.substring(y, url.length());
+		int z = url.indexOf("&", y + 1);
+
+		if (z == -1) {
+			z = url.length();
+		}
+
+		url = url.substring(0, y) + url.substring(z, url.length());
 	}
 
 	// Strip trailing &
@@ -60,6 +61,10 @@ if (url != null) {
 	if (x != -1) {
 		url = url.substring(0, x);
 		anchor = url.substring(x, url.length());
+	}
+	
+	if (!url.contains(StringPool.QUESTION)) {
+		separator = StringPool.QUESTION;
 	}
 }
 
@@ -116,10 +121,10 @@ String onClick = GetterUtil.getString((String)request.getAttribute("liferay-ui:t
 					}
 					else {
 						if (values[i].equals("&raquo;")) {
-							curURL = url + "&" + param + "=" + values[0] + anchor;
+							curURL = url + separator + param + "=" + values[0] + anchor;
 						}
 						else {
-							curURL = url + "&" + param + "=" + values[i] + anchor;
+							curURL = url + separator + param + "=" + values[i] + anchor;
 						}
 					}
 				}
