@@ -182,7 +182,7 @@ public class AssetEntryFinderImpl
 
 		sb.append("WHERE ");
 
-		int firstWhereCauseIndex = sb.index();
+		int whereIndex = sb.index();
 
 		if (entryQuery.isVisible() != null) {
 			sb.append(" AND (visible = ?)");
@@ -271,6 +271,7 @@ public class AssetEntryFinderImpl
 		// Other conditions
 
 		int datesIndex = sb.index();
+
 		sb.append("[$DATES$]");
 		sb.append(getGroupIds(entryQuery.getGroupIds()));
 		sb.append(getClassNameIds(entryQuery.getClassNameIds()));
@@ -292,17 +293,19 @@ public class AssetEntryFinderImpl
 			}
 		}
 
-		replaceDates(
-			sb, datesIndex, entryQuery.getPublishDate(),
-			entryQuery.getExpirationDate());
+		sb.setStringAt(
+			getDates(
+				entryQuery.getPublishDate(), entryQuery.getExpirationDate()),
+			datesIndex);
 
-		if (sb.index() > firstWhereCauseIndex) {
-			String firstWhereCause = sb.stringAt(firstWhereCauseIndex);
-			if (firstWhereCause.startsWith(" AND")) {
-				sb.setStringAt(firstWhereCause.substring(4),
-					firstWhereCauseIndex);
+		if (sb.index() > whereIndex) {
+			String where = sb.stringAt(whereIndex);
+
+			if (where.startsWith(" AND")) {
+				sb.setStringAt(where.substring(4), whereIndex);
 			}
 		}
+
 		String sql = sb.toString();
 
 		SQLQuery q = session.createSQLQuery(sql);
@@ -421,6 +424,20 @@ public class AssetEntryFinderImpl
 		return sb.toString();
 	}
 
+	protected String getDates(Date publishDate, Date expirationDate) {
+		StringBundler sb = new StringBundler(2);
+
+		if (publishDate != null) {
+			sb.append(" AND (publishDate IS NULL OR publishDate < ?)");
+		}
+
+		if (expirationDate != null) {
+			sb.append(" AND (expirationDate IS NULL OR expirationDate > ?)");
+		}
+
+		return sb.toString();
+	}
+
 	protected String getGroupIds(long[] groupIds) {
 		if (groupIds.length == 0) {
 			return StringPool.BLANK;
@@ -480,7 +497,6 @@ public class AssetEntryFinderImpl
 	}
 
 	protected String getTagIds(long[] tagIds, String operator) {
-
 		StringBundler sb = new StringBundler(tagIds.length * 4 - 1);
 
 		for (int i = 0; i < tagIds.length; i++) {
@@ -494,23 +510,6 @@ public class AssetEntryFinderImpl
 		}
 
 		return sb.toString();
-	}
-
-	protected void replaceDates(
-		StringBundler sql, int dateIndex, Date publishDate,
-		Date expirationDate) {
-
-		StringBundler sb = new StringBundler(2);
-
-		if (publishDate != null) {
-			sb.append(" AND (publishDate IS NULL OR publishDate < ?)");
-		}
-
-		if (expirationDate != null) {
-			sb.append(" AND (expirationDate IS NULL OR expirationDate > ?)");
-		}
-
-		sql.setStringAt(sb.toString(), dateIndex);
 	}
 
 	protected void setDates(
