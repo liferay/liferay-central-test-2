@@ -44,7 +44,7 @@ public class LanguageResources {
 		_instance._init(messageResources);
 	}
 
-	public static boolean isInitialized() {
+	public static boolean isInitializing() {
 		if (_instance._messageResources == null) {
 			return true;
 		}

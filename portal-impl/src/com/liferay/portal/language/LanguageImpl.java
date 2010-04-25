@@ -24,7 +24,6 @@ import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Time;
@@ -33,13 +32,11 @@ import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portal.service.PortletLocalServiceUtil;
-import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.CookieKeys;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsValues;
-import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletConfigFactory;
 
 import java.text.MessageFormat;
@@ -60,8 +57,6 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.PageContext;
-
-import org.apache.struts.taglib.TagUtils;
 
 /**
  * <a href="LanguageImpl.java.html"><b><i>View Source</i></b></a>
@@ -260,37 +255,16 @@ public class LanguageImpl implements Language {
 	}
 
 	public String get(Locale locale, String key, String defaultValue) {
-		if (key == null) {
-			return null;
-		}
-
-		String value = null;
-
 		try {
-			if (LanguageResources.isInitialized()) {
-
-				// LEP-4505
-
-				ResourceBundle resourceBundle = ResourceBundle.getBundle(
-					"content/Language", locale);
-
-				value = resourceBundle.getString(key);
-			}
-			else {
-				value = LanguageResources.getMessage(locale, key);
-			}
+			return _get(null, locale, key, defaultValue);
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
 				_log.warn(e, e);
 			}
-		}
 
-		if (value == null) {
-			value = defaultValue;
+			return defaultValue;
 		}
-
-		return value;
 	}
 
 	public String get(PageContext pageContext, String key) {
@@ -300,98 +274,16 @@ public class LanguageImpl implements Language {
 	public String get(
 		PageContext pageContext, String key, String defaultValue) {
 
-		HttpServletRequest request =
-			(HttpServletRequest)pageContext.getRequest();
-
-		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		PortletConfig portletConfig = (PortletConfig)request.getAttribute(
-			JavaConstants.JAVAX_PORTLET_CONFIG);
-
-		String value = null;
-
-		if (themeDisplay != null) {
-			if ((portletConfig != null) && (key != null) &&
-				(!key.endsWith(StringPool.CLOSE_BRACKET))) {
-
-				StringBundler sb = new StringBundler(4);
-
-				sb.append(key);
-				sb.append(StringPool.OPEN_BRACKET);
-				sb.append(portletConfig.getPortletName());
-				sb.append(StringPool.CLOSE_BRACKET);
-
-				key = sb.toString();
-			}
-
-			value = get(themeDisplay.getLocale(), key, defaultValue);
-
-			if (((value == null) || (value.equals(defaultValue))) &&
-				((key != null) && (key.endsWith(StringPool.CLOSE_BRACKET)))) {
-
-				int pos = key.lastIndexOf(StringPool.OPEN_BRACKET);
-
-				if (pos != -1) {
-					key = key.substring(0, pos);
-
-					value = get(themeDisplay.getLocale(), key, defaultValue);
-				}
-			}
-
-			// LEP-7292
-
-			if ((value != null) && !value.equals(defaultValue)) {
-				return value;
-			}
-		}
-
-		if (key == null) {
-			return null;
-		}
-
 		try {
-			value = TagUtils.getInstance().message(
-				pageContext, null, null, key);
+			return _get(pageContext, null, key, defaultValue);
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
-				_log.warn(e);
+				_log.warn(e, e);
 			}
+
+			return defaultValue;
 		}
-
-		if ((value == null) || value.equals(defaultValue)) {
-
-			// LEP-2849
-
-			if (portletConfig != null) {
-				Locale locale = request.getLocale();
-
-				ResourceBundle resourceBundle = portletConfig.getResourceBundle(
-					locale);
-
-				try {
-					value = resourceBundle.getString(key);
-				}
-				catch (MissingResourceException mre) {
-				}
-
-				// LEP-7393
-
-				if (((value == null) || (value.equals(defaultValue))) &&
-					(portletConfig.getPortletName().equals(
-						PortletKeys.PORTLET_CONFIGURATION))) {
-
-					value = _getPortletConfigurationValue(pageContext, key);
-				}
-			}
-		}
-
-		if (value == null) {
-			value = defaultValue;
-		}
-
-		return value;
 	}
 
 	public Locale[] getAvailableLocales() {
@@ -562,6 +454,88 @@ public class LanguageImpl implements Language {
 			pattern, StringPool.APOSTROPHE, StringPool.DOUBLE_APOSTROPHE);
 	}
 
+	private String _get(
+			PageContext pageContext, Locale locale, String key,
+			String defaultValue)
+		throws Exception {
+
+		if (key == null) {
+			return null;
+		}
+
+		String value = null;
+
+		if (pageContext != null) {
+			HttpServletRequest request =
+				(HttpServletRequest)pageContext.getRequest();
+
+			PortletConfig portletConfig = (PortletConfig)request.getAttribute(
+				JavaConstants.JAVAX_PORTLET_CONFIG);
+
+			locale = request.getLocale();
+
+			ResourceBundle resourceBundle = portletConfig.getResourceBundle(
+				locale);
+
+			try {
+				value = resourceBundle.getString(key);
+			}
+			catch (MissingResourceException mre) {
+			}
+
+			// LEP-7393
+
+			if (((value == null) || (value.equals(defaultValue))) &&
+				(portletConfig.getPortletName().equals(
+					PortletKeys.PORTLET_CONFIGURATION))) {
+
+				try {
+					value = _getPortletConfigurationValue(
+						pageContext, locale, key);
+				}
+				catch (MissingResourceException mre) {
+				}
+			}
+		}
+
+		if ((value == null) || value.equals(defaultValue)) {
+			if (LanguageResources.isInitializing()) {
+
+				// LEP-4505
+
+				ResourceBundle resourceBundle = ResourceBundle.getBundle(
+					"content/Language", locale);
+
+				try {
+					value = resourceBundle.getString(key);
+				}
+				catch (MissingResourceException mre) {
+				}
+			}
+			else {
+				value = LanguageResources.getMessage(locale, key);
+			}
+		}
+
+		if ((value == null) || value.equals(defaultValue)) {
+			if (key.endsWith(StringPool.CLOSE_BRACKET)) {
+				int pos = key.lastIndexOf(StringPool.OPEN_BRACKET);
+
+				if (pos != -1) {
+					key = key.substring(0, pos);
+
+					return _get(pageContext, locale, key, defaultValue);
+				}
+			}
+		}
+
+		if (value == null) {
+			value = defaultValue;
+		}
+
+		return value;
+	}
+
 	private String _getCharset(Locale locale) {
 		return StringPool.UTF8;
 	}
@@ -571,39 +545,27 @@ public class LanguageImpl implements Language {
 	}
 
 	private String _getPortletConfigurationValue(
-		PageContext pageContext, String key) {
+			PageContext pageContext, Locale locale, String key)
+		throws Exception {
 
-		String value = null;
+		HttpServletRequest request =
+			(HttpServletRequest)pageContext.getRequest();
 
-		try {
-			HttpServletRequest request =
-				(HttpServletRequest)pageContext.getRequest();
+		String portletResource = ParamUtil.getString(
+			request, "portletResource");
 
-			String portletResource = ParamUtil.getString(
-				request, "portletResource");
+		long companyId = PortalUtil.getCompanyId(request);
 
-			long companyId = PortalUtil.getCompanyId(request);
+		Portlet portlet = PortletLocalServiceUtil.getPortletById(
+			companyId, portletResource);
 
-			Portlet portlet = PortletLocalServiceUtil.getPortletById(
-				companyId, portletResource);
+		PortletConfig portletConfig = PortletConfigFactory.create(
+			portlet, pageContext.getServletContext());
 
-			PortletConfig portletConfig = PortletConfigFactory.create(
-				portlet, pageContext.getServletContext());
+		ResourceBundle resourceBundle = portletConfig.getResourceBundle(
+			locale);
 
-			Locale locale = request.getLocale();
-
-			ResourceBundle resourceBundle = portletConfig.getResourceBundle(
-				locale);
-
-			value = resourceBundle.getString(key);
-		}
-		catch (Exception e) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(e, e);
-			}
-		}
-
-		return value;
+		return resourceBundle.getString(key);
 	}
 
 	private void _resetAvailableLocales(long companyId) {
