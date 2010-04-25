@@ -87,7 +87,6 @@ public class ComboServlet extends HttpServlet {
 					StringPool.UTF8, content);
 
 				bytes = contentByteBuffer.array();
-
 				length = contentByteBuffer.limit();
 
 				FileUtil.write(cacheFile, bytes, 0, length);
