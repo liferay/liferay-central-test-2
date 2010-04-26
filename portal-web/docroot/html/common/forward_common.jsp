@@ -24,7 +24,7 @@ String forwardRequest = (String)request.getAttribute(WebKeys.FORWARD_URL);
 String forwardSession = (String)session.getAttribute(WebKeys.FORWARD_URL);
 
 if ((forwardParam != null) && (!forwardParam.equals(StringPool.NULL)) && (!forwardParam.equals(StringPool.BLANK))) {
-	forwardURL = forwardParam;
+	forwardURL = HtmlUtil.escape(forwardParam);
 }
 else if ((forwardRequest != null) && (!forwardRequest.equals(StringPool.NULL)) && (!forwardRequest.equals(StringPool.BLANK))) {
 	forwardURL = forwardRequest;
