@@ -18,7 +18,7 @@ import com.liferay.portal.kernel.io.unsync.UnsyncStringWriter;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.PipingServletResponse;
-import com.liferay.portal.kernel.servlet.SkipCacheJspWriterWrapper;
+import com.liferay.portal.kernel.servlet.UnbufferedJspWriter;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.MethodInvoker;
 import com.liferay.portal.kernel.util.MethodWrapper;
@@ -175,20 +175,20 @@ public class RuntimePortletUtil {
 	public static void processTemplate(
 			ServletContext servletContext, HttpServletRequest request,
 			HttpServletResponse response, PageContext pageContext,
-			String velocityTemplateId, String velocityTemplateContent,
-			JspWriter outputWriter)
+			JspWriter jspWriter, String velocityTemplateId,
+			String velocityTemplateContent)
 		throws Exception {
 
 		processTemplate(
-			servletContext, request, response, pageContext, null,
-			velocityTemplateId, velocityTemplateContent, outputWriter);
+			servletContext, request, response, pageContext, jspWriter, null,
+			velocityTemplateId, velocityTemplateContent);
 	}
 
 	public static void processTemplate(
 			ServletContext servletContext, HttpServletRequest request,
 			HttpServletResponse response, PageContext pageContext,
-			String portletId, String velocityTemplateId,
-			String velocityTemplateContent, JspWriter outputWriter)
+			JspWriter jspWriter, String portletId, String velocityTemplateId,
+			String velocityTemplateContent)
 		throws Exception {
 
 		if (Validator.isNull(velocityTemplateContent)) {
@@ -258,9 +258,10 @@ public class RuntimePortletUtil {
 			contentsMap.put(portlet.getPortletId(), content);
 		}
 
-		StringBundler content = StringUtil.replaceToStringBundler(
+		StringBundler sb = StringUtil.replaceToStringBundler(
 			output, "[$TEMPLATE_PORTLET_", "$]", contentsMap);
-		content.writeTo(new SkipCacheJspWriterWrapper(outputWriter));
+
+		sb.writeTo(new UnbufferedJspWriter(jspWriter));
 	}
 
 	public static String processXML(

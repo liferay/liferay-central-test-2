@@ -47,7 +47,8 @@ if (themeDisplay.isStateExclusive() || themeDisplay.isStatePopUp() || layoutType
 		velocityTemplateId = theme.getThemeId() + LayoutTemplateConstants.STANDARD_SEPARATOR + "max";
 		velocityTemplateContent = LayoutTemplateLocalServiceUtil.getContent("max", true, theme.getThemeId());
 	}
-	RuntimePortletUtil.processTemplate(application, request, response, pageContext, ppid, velocityTemplateId, velocityTemplateContent, out);
+
+	RuntimePortletUtil.processTemplate(application, request, response, pageContext, out, ppid, velocityTemplateId, velocityTemplateContent);
 }
 else {
 	String description = layout.getTypeSettingsProperties().getProperty("description");

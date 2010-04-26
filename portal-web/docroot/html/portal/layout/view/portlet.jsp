@@ -39,7 +39,8 @@ if (themeDisplay.isFacebook() || themeDisplay.isStateExclusive() || themeDisplay
 		velocityTemplateId = theme.getThemeId() + LayoutTemplateConstants.STANDARD_SEPARATOR + "max";
 		velocityTemplateContent = LayoutTemplateLocalServiceUtil.getContent("max", true, theme.getThemeId());
 	}
-	RuntimePortletUtil.processTemplate(application, request, response, pageContext, ppid, velocityTemplateId, velocityTemplateContent, out);
+
+	RuntimePortletUtil.processTemplate(application, request, response, pageContext, out, ppid, velocityTemplateId, velocityTemplateContent);
 }
 else {
 	String themeId = theme.getThemeId();
@@ -65,7 +66,7 @@ else {
 	</c:if>
 
 <%
-	RuntimePortletUtil.processTemplate(application, request, response, pageContext, velocityTemplateId, velocityTemplateContent, out);
+	RuntimePortletUtil.processTemplate(application, request, response, pageContext, out, velocityTemplateId, velocityTemplateContent);
 }
 %>
 

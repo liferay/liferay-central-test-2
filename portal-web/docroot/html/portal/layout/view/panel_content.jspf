@@ -46,7 +46,8 @@ if (!denyAccess && (themeDisplay.isStateExclusive() || themeDisplay.isStatePopUp
 
 		content = LayoutTemplateLocalServiceUtil.getContent("max", true, theme.getThemeId());
 	}
-	RuntimePortletUtil.processTemplate(application, request, response, pageContext, ppid, velocityTemplateId, content, out);
+
+	RuntimePortletUtil.processTemplate(application, request, response, pageContext, out, ppid, velocityTemplateId, content);
 }
 else {
 	String description = StringPool.BLANK;
