@@ -46,8 +46,7 @@ public class DeleteCommentTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("This is a test page comment."),
-			selenium.getText(
-				"//table[@class='lfr-table']/tbody/tr[2]/td[2]/div"));
+			selenium.getText("//td[2]/div[1]"));
 		selenium.click(RuntimeVariables.replace("link=Delete"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()

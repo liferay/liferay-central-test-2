@@ -54,8 +54,12 @@ public class EditCommentReplyBodySpaceTest extends BaseTestCase {
 		selenium.keyPress("_107_editReplyBody2",
 			RuntimeVariables.replace("\\48"));
 		selenium.keyPress("_107_editReplyBody2", RuntimeVariables.replace("\\8"));
-		selenium.clickAt("_107_editReplyButton2", RuntimeVariables.replace(""));
+		selenium.clickAt("//tr[5]/td[2]/table[2]/tbody/tr[2]/td/input[1]",
+			RuntimeVariables.replace(""));
 		Thread.sleep(5000);
+		assertTrue(selenium.isVisible("_107_editReplyBody2"));
+		assertTrue(selenium.isVisible(
+				"//tr[5]/td[2]/table[2]/tbody/tr[2]/td/input[1]"));
 		assertFalse(selenium.isTextPresent(
 				"Your request processed successfully."));
 		selenium.open("/web/guest/home/");

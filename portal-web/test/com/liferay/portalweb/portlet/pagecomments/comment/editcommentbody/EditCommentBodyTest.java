@@ -46,8 +46,7 @@ public class EditCommentBodyTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("This is a test page comment."),
-			selenium.getText(
-				"//table[@class='lfr-table']/tbody/tr[2]/td[2]/div"));
+			selenium.getText("//td[2]/div[1]"));
 		selenium.clickAt("link=Edit", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -71,13 +70,14 @@ public class EditCommentBodyTest extends BaseTestCase {
 		selenium.keyPress("_107_editReplyBody1",
 			RuntimeVariables.replace("\\48"));
 		selenium.keyPress("_107_editReplyBody1", RuntimeVariables.replace("\\8"));
-		selenium.clickAt("_107_editReplyButton1", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Update']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+		assertEquals(RuntimeVariables.replace(
+				"Your request processed successfully."),
+			selenium.getText("//section/div/div/div/div[1]"));
 		assertEquals(RuntimeVariables.replace(
 				"This is a test page comment. Edited."),
-			selenium.getText(
-				"//table[@class='lfr-table']/tbody/tr[2]/td[2]/div"));
+			selenium.getText("//td[2]/div[1]"));
 	}
 }

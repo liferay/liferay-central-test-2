@@ -54,10 +54,12 @@ public class EditCommentReplyBodyTest extends BaseTestCase {
 		selenium.keyPress("_107_editReplyBody2",
 			RuntimeVariables.replace("\\48"));
 		selenium.keyPress("_107_editReplyBody2", RuntimeVariables.replace("\\8"));
-		selenium.clickAt("_107_editReplyButton2", RuntimeVariables.replace(""));
+		selenium.clickAt("//tr[5]/td[2]/table[2]/tbody/tr[2]/td/input[1]",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+		assertEquals(RuntimeVariables.replace(
+				"Your request processed successfully."),
+			selenium.getText("//section/div/div/div/div[1]"));
 		assertEquals(RuntimeVariables.replace(
 				"This is a test reply comment. Edited."),
 			selenium.getText("//tr[5]/td[2]/div[1]"));

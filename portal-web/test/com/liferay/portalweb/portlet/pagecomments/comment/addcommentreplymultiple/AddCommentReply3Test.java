@@ -70,11 +70,17 @@ public class AddCommentReply3Test extends BaseTestCase {
 		selenium.keyPress("_107_postReplyBody3",
 			RuntimeVariables.replace("\\48"));
 		selenium.keyPress("_107_postReplyBody3", RuntimeVariables.replace("\\8"));
-		selenium.clickAt("_107_postReplyButton3", RuntimeVariables.replace(""));
+		selenium.clickAt("//tr[8]/td[2]/table[2]/tbody/tr[1]/td/input[1]",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
-		assertFalse(selenium.isVisible("_107_postReplyBody3"));
-		assertTrue(selenium.isTextPresent("This is a test reply3 comment3."));
+		assertEquals(RuntimeVariables.replace(
+				"Your request processed successfully."),
+			selenium.getText("//section/div/div/div/div[1]"));
+		assertEquals(RuntimeVariables.replace("This is a test reply1 comment1."),
+			selenium.getText("//tr[5]/td[2]/div[1]"));
+		assertEquals(RuntimeVariables.replace("This is a test reply2 comment2."),
+			selenium.getText("//tr[8]/td[2]/div[1]"));
+		assertEquals(RuntimeVariables.replace("This is a test reply3 comment3."),
+			selenium.getText("//tr[11]/td[2]/div[1]"));
 	}
 }

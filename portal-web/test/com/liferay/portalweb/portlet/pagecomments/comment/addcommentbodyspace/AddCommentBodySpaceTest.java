@@ -64,11 +64,11 @@ public class AddCommentBodySpaceTest extends BaseTestCase {
 		}
 
 		assertTrue(selenium.isVisible("_107_postReplyBody0"));
-		selenium.type("_107_postReplyBody0", RuntimeVariables.replace(" "));
+		selenium.type("_107_postReplyBody0", RuntimeVariables.replace(""));
 		selenium.keyPress("_107_postReplyBody0",
 			RuntimeVariables.replace("\\48"));
 		selenium.keyPress("_107_postReplyBody0", RuntimeVariables.replace("\\8"));
-		selenium.clickAt("_107_postReplyButton0", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Reply']", RuntimeVariables.replace(""));
 		Thread.sleep(5000);
 		assertFalse(selenium.isTextPresent(
 				"Your request processed successfully."));

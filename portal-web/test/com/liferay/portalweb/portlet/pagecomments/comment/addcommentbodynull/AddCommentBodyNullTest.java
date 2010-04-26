@@ -68,7 +68,7 @@ public class AddCommentBodyNullTest extends BaseTestCase {
 		selenium.keyPress("_107_postReplyBody0",
 			RuntimeVariables.replace("\\48"));
 		selenium.keyPress("_107_postReplyBody0", RuntimeVariables.replace("\\8"));
-		selenium.clickAt("_107_postReplyButton0", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Reply']", RuntimeVariables.replace(""));
 		Thread.sleep(5000);
 		selenium.open("/web/guest/home/");
 

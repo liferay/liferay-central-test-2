@@ -55,23 +55,23 @@
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>_107_postReplyButton0</td>
+	<td>//input[@value='Reply']</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>assertText</td>
+	<td>//section/div/div/div/div[1]</td>
 	<td>Your request processed successfully.</td>
-	<td></td>
 </tr>
 <tr>
-	<td>assertNotVisible</td>
-	<td>_107_postReplyBody0</td>
-	<td></td>
+	<td>assertText</td>
+	<td>//td[2]/div[1]</td>
+	<td>This is a test page1 comment1.</td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>assertText</td>
+	<td>//tr[5]/td[2]/div[1]</td>
 	<td>This is a test page2 comment2.</td>
-	<td></td>
 </tr>
 
 </tbody></table>

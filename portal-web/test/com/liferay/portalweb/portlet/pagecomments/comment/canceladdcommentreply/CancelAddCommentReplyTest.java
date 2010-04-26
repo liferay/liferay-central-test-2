@@ -69,7 +69,7 @@ public class CancelAddCommentReplyTest extends BaseTestCase {
 		selenium.keyPress("_107_postReplyBody1",
 			RuntimeVariables.replace("\\48"));
 		selenium.keyPress("_107_postReplyBody1", RuntimeVariables.replace("\\8"));
-		selenium.clickAt("//tr[@id='_107_postReplyForm1']/td/input[2]",
+		selenium.clickAt("//td[2]/table[2]/tbody/tr[1]/td/input[2]",
 			RuntimeVariables.replace(""));
 		assertFalse(selenium.isTextPresent("This is a test reply comment."));
 		assertFalse(selenium.isVisible("_107_postReplyBody1"));

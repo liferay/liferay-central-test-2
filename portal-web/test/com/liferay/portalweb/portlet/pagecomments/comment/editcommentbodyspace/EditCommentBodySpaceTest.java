@@ -46,8 +46,7 @@ public class EditCommentBodySpaceTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("This is a test page comment."),
-			selenium.getText(
-				"//table[@class='lfr-table']/tbody/tr[2]/td[2]/div"));
+			selenium.getText("//td[2]/div[1]"));
 		selenium.clickAt("link=Edit", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -66,16 +65,17 @@ public class EditCommentBodySpaceTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("_107_editReplyBody1", RuntimeVariables.replace(" "));
+		selenium.type("_107_editReplyBody1", RuntimeVariables.replace(""));
 		selenium.keyPress("_107_editReplyBody1",
 			RuntimeVariables.replace("\\48"));
 		selenium.keyPress("_107_editReplyBody1", RuntimeVariables.replace("\\8"));
-		selenium.clickAt("_107_editReplyButton1", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Update']",
+			RuntimeVariables.replace(""));
 		Thread.sleep(5000);
 		assertFalse(selenium.isTextPresent(
 				"Your request processed successfully."));
 		assertTrue(selenium.isVisible("_107_editReplyBody1"));
-		assertTrue(selenium.isVisible("_107_editReplyButton1"));
+		assertTrue(selenium.isVisible("//input[@value='Update']"));
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
@@ -98,7 +98,6 @@ public class EditCommentBodySpaceTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("This is a test page comment."),
-			selenium.getText(
-				"//table[@class='lfr-table']/tbody/tr[2]/td[2]/div"));
+			selenium.getText("//td[2]/div[1]"));
 	}
 }
