@@ -24,144 +24,164 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class SetDisplayOrderTest extends BaseTestCase {
 	public void testSetDisplayOrder() throws Exception {
-		selenium.open("/web/guest/home/");
+		int label = 1;
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+		while (label >= 1) {
+			switch (label) {
+			case 1:
+				selenium.open("/web/guest/home/");
 
-			try {
-				if (selenium.isElementPresent("link=Manage Pages Test Page")) {
-					break;
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isElementPresent(
+									"link=Manage Pages Test Page")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
-		}
+				selenium.clickAt("link=Manage Pages Test Page",
+					RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
+				assertEquals(RuntimeVariables.replace("Child1 Test1 Page1"),
+					selenium.getText(
+						"//nav[@id='navigation']/ul/li[2]/ul/li[1]"));
+				assertEquals(RuntimeVariables.replace("Child2 Test2 Page2"),
+					selenium.getText(
+						"//nav[@id='navigation']/ul/li[2]/ul/li[2]"));
+				assertEquals(RuntimeVariables.replace("Child3 Test3 Page3"),
+					selenium.getText(
+						"//nav[@id='navigation']/ul/li[2]/ul/li[3]"));
+				selenium.clickAt("//div/div[3]/div/ul/li[1]/a",
+					RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
 
-		selenium.clickAt("link=Manage Pages Test Page",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		assertEquals(RuntimeVariables.replace("Child1 Test1 Page1"),
-			selenium.getText("//nav[@id='navigation']/ul/li[2]/ul/li[1]"));
-		assertEquals(RuntimeVariables.replace("Child2 Test2 Page2"),
-			selenium.getText("//nav[@id='navigation']/ul/li[2]/ul/li[2]"));
-		assertEquals(RuntimeVariables.replace("Child3 Test3 Page3"),
-			selenium.getText("//nav[@id='navigation']/ul/li[2]/ul/li[3]"));
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+					try {
+						if (RuntimeVariables.replace("Guest")
+												.equals(selenium.getText(
+										"//div/div[3]/a"))) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
 
-			try {
-				if (selenium.isElementPresent(
-							"//li[@class='first manage-page']/a")) {
-					break;
+					Thread.sleep(1000);
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
-		}
+				boolean welcomePresent = selenium.isElementPresent(
+						"//li/ul/li[1]/div/div[3]/a");
 
-		selenium.click(RuntimeVariables.replace(
-				"//li[@class='first manage-page']/a"));
-		selenium.waitForPageToLoad("30000");
+				if (welcomePresent) {
+					label = 2;
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible(
-							"//div[@id='_88_layoutsTreeOutput']/ul/li")) {
-					break;
+					continue;
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
-		}
+				selenium.clickAt("//li/div/div[1]", RuntimeVariables.replace(""));
 
-		selenium.clickAt("//div[@id='_88_treeExpandAll']/a",
-			RuntimeVariables.replace(""));
+			case 2:
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+				boolean childPagePresent = selenium.isElementPresent(
+						"//li[2]/ul/li[1]/div/div[3]/a");
 
-			try {
-				if (selenium.isVisible(
-							"//div[@id='_88_layoutsTreeOutput']/ul/li/ul/li/div/div[3]/a")) {
-					break;
+				if (childPagePresent) {
+					label = 3;
+
+					continue;
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
-		}
+				selenium.clickAt("//li[2]/div/div[1]",
+					RuntimeVariables.replace(""));
 
-		selenium.clickAt("link=Children", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
+			case 3:
+				selenium.clickAt("link=Children", RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
+				selenium.clickAt("link=Display Order",
+					RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
 
-			try {
-				if (selenium.isVisible("//ul[@class='aui-tree-container']")) {
-					break;
+					try {
+						if (RuntimeVariables.replace(
+									"Child1 Test1 Page1 Child2 Test2 Page2 Child3 Test3 Page3")
+												.equals(selenium.getText(
+										"_88_layoutIdsBox"))) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
-		}
+				selenium.select("_88_layoutIdsBox",
+					RuntimeVariables.replace("label=Child2 Test2 Page2"));
+				selenium.clickAt("//td[2]/a[1]/img",
+					RuntimeVariables.replace(""));
 
-		selenium.clickAt("link=Display Order", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+					try {
+						if (RuntimeVariables.replace(
+									"Child2 Test2 Page2 Child1 Test1 Page1 Child3 Test3 Page3")
+												.equals(selenium.getText(
+										"_88_layoutIdsBox"))) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
 
-			try {
-				if (selenium.isVisible("//ul[@class='aui-tree-container']")) {
-					break;
+					Thread.sleep(1000);
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
+				assertEquals(RuntimeVariables.replace(
+						"Child2 Test2 Page2 Child1 Test1 Page1 Child3 Test3 Page3"),
+					selenium.getText("_88_layoutIdsBox"));
+				selenium.clickAt("//input[@value='Update Display Order']",
+					RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
+				assertEquals(RuntimeVariables.replace(
+						"Your request processed successfully."),
+					selenium.getText("//section/div/div/div/div"));
+				assertEquals(RuntimeVariables.replace("Child2 Test2 Page2"),
+					selenium.getText("//nav/ul/li[2]/ul/li[1]"));
+				assertEquals(RuntimeVariables.replace("Child1 Test1 Page1"),
+					selenium.getText("//nav/ul/li[2]/ul/li[2]"));
+				assertEquals(RuntimeVariables.replace("Child3 Test3 Page3"),
+					selenium.getText("//nav/ul/li[2]/ul/li[3]"));
+				assertEquals(RuntimeVariables.replace("Child2 Test2 Page2"),
+					selenium.getText("//li[2]/ul/li[1]/div/div[3]/a"));
+				assertEquals(RuntimeVariables.replace("Child1 Test1 Page1"),
+					selenium.getText("//li[2]/ul/li[2]/div/div[3]/a"));
+				assertEquals(RuntimeVariables.replace("Child3 Test3 Page3"),
+					selenium.getText("//li[2]/ul/li[3]/div/div[3]/a"));
+
+			case 100:
+				label = -1;
+			}
 		}
-
-		selenium.select("_88_layoutIdsBox",
-			RuntimeVariables.replace("label=Child2 Test2 Page2"));
-		selenium.clickAt("//td[2]/a[1]/img", RuntimeVariables.replace(""));
-		Thread.sleep(5000);
-		selenium.clickAt("//input[@value='Update Display Order']",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
-		assertEquals(RuntimeVariables.replace("Child2 Test2 Page2"),
-			selenium.getText("//nav[@id='navigation']/ul/li[2]/ul/li[1]"));
-		assertEquals(RuntimeVariables.replace("Child1 Test1 Page1"),
-			selenium.getText("//nav[@id='navigation']/ul/li[2]/ul/li[2]"));
-		assertEquals(RuntimeVariables.replace("Child3 Test3 Page3"),
-			selenium.getText("//nav[@id='navigation']/ul/li[2]/ul/li[3]"));
 	}
 }

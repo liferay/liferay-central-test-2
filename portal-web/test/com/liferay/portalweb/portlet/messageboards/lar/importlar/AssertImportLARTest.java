@@ -61,14 +61,13 @@ public class AssertImportLARTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace(
 				"S\u00e9cond T\u00e9st Subcat\u00e9gory"),
 			selenium.getText("//a/strong"));
-		assertEquals(RuntimeVariables.replace("RE: T\u00e9st M\u00e9ssag\u00e9"),
-			selenium.getText(
-				"//div[2]/div[2]/div/div[1]/table/tbody/tr[3]/td[1]/a"));
 		assertEquals(RuntimeVariables.replace(
 				"T\u00e9st M\u00e9ssag\u00e9 Edited"),
+			selenium.getText(
+				"//div[2]/div[2]/div/div[1]/table/tbody/tr[3]/td[1]/a"));
+		assertEquals(RuntimeVariables.replace("RE: T\u00e9st M\u00e9ssag\u00e9"),
 			selenium.getText("//tr[4]/td[1]/a"));
-		selenium.clickAt("//div[2]/div[2]/div/div[1]/table/tbody/tr[3]/td[1]/a",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("//tr[4]/td[1]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace(
 				"This is a t\u00e9st r\u00e9ply m\u00e9ssag\u00e9!"),

@@ -40,7 +40,9 @@ public class DeleteMarkAsAnswerCategoryMessageQuestionReplyTests
 			MarkAsAnswerCategoryMessageQuestionReplyTest.class);
 		testSuite.addTestSuite(
 			DeleteMarkAsAnswerCategoryMessageQuestionReplyTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownMBCategoryTest.class);
+		testSuite.addTestSuite(TearDownMBMessageTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

@@ -34,7 +34,8 @@ public class AddCategoryMultipleTests extends BaseTests {
 		testSuite.addTestSuite(AddCategory1Test.class);
 		testSuite.addTestSuite(AddCategory2Test.class);
 		testSuite.addTestSuite(AddCategory3Test.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownMBCategoryTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

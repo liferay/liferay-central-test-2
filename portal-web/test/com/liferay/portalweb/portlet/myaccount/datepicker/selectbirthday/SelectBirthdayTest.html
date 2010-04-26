@@ -24,6 +24,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForVisible</td>
 	<td>_2_birthdayMonth</td>
 	<td></td>
@@ -50,12 +55,12 @@
 </tr>
 <tr>
 	<td>clickAt</td>
-	<td>//span[@class='aui-icon-calendar aui-icon']</td>
+	<td>//button</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForVisible</td>
-	<td>//div[@class='aui-widget aui-component aui-overlay aui-contextoverlay aui-calendar aui-datepicker aui-widget-positioned aui-widget-stacked']</td>
+	<td>//div[2]/div/div[1]/div/div</td>
 	<td></td>
 </tr>
 <tr>
@@ -69,13 +74,18 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForVisible</td>
+	<td>link=31</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAt</td>
 	<td>link=31</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementNotPresent</td>
-	<td>//div[@class='aui-widget aui-component aui-overlay aui-contextoverlay aui-calendar aui-datepicker aui-widget-positioned aui-widget-stacked']</td>
+	<td>waitForNotVisible</td>
+	<td>//div[2]/div/div[1]/div/div</td>
 	<td></td>
 </tr>
 <tr>

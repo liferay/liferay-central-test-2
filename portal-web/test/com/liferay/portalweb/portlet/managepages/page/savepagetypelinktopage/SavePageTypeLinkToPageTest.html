@@ -14,44 +14,64 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>//li[@class='first manage-page']/a</td>
+	<td>waitForVisible</td>
+	<td>link=Manage Pages Test Page</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>//li[@class='first manage-page']/a</td>
+	<td>link=Manage Pages Test Page</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForVisible</td>
-	<td>//div[@id='_88_layoutsTreeOutput']/ul/li</td>
+	<td>clickAtAndWait</td>
+	<td>//div/div[3]/div/ul/li[1]/a</td>
 	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div/div[3]/a</td>
+	<td>Guest</td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>eval(selenium.isElementPresent('//li/ul/li[1]/div/div[3]/a'))</td>
+	<td>welcomePresent</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>${welcomePresent}</td>
+	<td>WelcomePresent</td>
 </tr>
 <tr>
 	<td>clickAt</td>
-	<td>//div[@id='_88_treeExpandAll']/a</td>
+	<td>//li/div/div[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>WelcomePresent</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForVisible</td>
-	<td>//div[@id='_88_layoutsTreeOutput']/ul/li/ul/li/div/div[3]/a</td>
+	<td>//li[2]/div/div[3]/a</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>//div[@id='_88_layoutsTreeOutput']/ul/li/ul/li[2]/div/div[3]/a</td>
+	<td>//li[2]/div/div[3]/a</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>//li[@id='_88_tabs3pageTabsId']/span/a</td>
+	<td>//ul[2]/li[1]/span/span/a</td>
 	<td></td>
 </tr>
 <tr>
-	<td>pause</td>
-	<td>5000</td>
-	<td></td>
+	<td>waitForText</td>
+	<td>_88_type</td>
+	<td>Portlet Panel Embedded Web Content URL Link to Page</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -59,12 +79,7 @@
 	<td>label=Link to Page</td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>TypeSettingsProperties(linkToLayoutId)</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
+	<td>waitForVisible</td>
 	<td>TypeSettingsProperties(linkToLayoutId)</td>
 	<td></td>
 </tr>
@@ -100,6 +115,11 @@
 </tr>
 <tr>
 	<td>assertText</td>
+	<td>//nav/ul/li[2]/span/a</td>
+	<td>Welcome</td>
+</tr>
+<tr>
+	<td>assertText</td>
 	<td>//section[@id='portlet_58']/header/h1</td>
 	<td>Sign In</td>
 </tr>
@@ -107,36 +127,6 @@
 	<td>assertText</td>
 	<td>//section[@id='portlet_47']/header/h1</td>
 	<td>Hello World</td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>link=Manage Pages Test Page</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementNotPresent</td>
-	<td>//td[@class='panel-page-content panel-page-frontpage']/h2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementNotPresent</td>
-	<td>//td[@class='panel-page-content panel-page-frontpage']/div</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextNotPresent</td>
-	<td>Please select a tool from the left menu.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextNotPresent</td>
-	<td>This is a test Web Content</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementNotPresent</td>
-	<td>//a[@id='logo']</td>
-	<td></td>
 </tr>
 
 </tbody></table>

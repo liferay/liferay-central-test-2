@@ -24,158 +24,179 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class CopyPageChildPageTest extends BaseTestCase {
 	public void testCopyPageChildPage() throws Exception {
-		selenium.open("/web/guest/home/");
+		int label = 1;
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+		while (label >= 1) {
+			switch (label) {
+			case 1:
+				selenium.open("/web/guest/home/");
 
-			try {
-				if (selenium.isElementPresent("link=Manage Pages Test Page")) {
-					break;
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isElementPresent(
+									"link=Manage Pages Test Page")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
-		}
+				selenium.clickAt("link=Manage Pages Test Page",
+					RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
+				selenium.clickAt("link=Child Test Page",
+					RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
+				assertEquals(RuntimeVariables.replace("Child Test Page"),
+					selenium.getText("//nav/ul/li[3]/span/a"));
+				assertFalse(selenium.isElementPresent(
+						"//section[@id='portlet_58']/header/h1"));
+				assertFalse(selenium.isElementPresent(
+						"//section[@id='portlet_47']/header/h1"));
+				assertFalse(selenium.isTextPresent("Sign In"));
+				assertFalse(selenium.isTextPresent("Hello World"));
+				selenium.clickAt("//div/div[3]/div/ul/li[1]/a",
+					RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
 
-		selenium.clickAt("link=Manage Pages Test Page",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=Child Test Page", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		assertEquals(RuntimeVariables.replace("Child Test Page"),
-			selenium.getText(
-				"//ul[@class='child-menu']/li[@class='selected yui-dd-drop aui-sortable-item aui-sortable-no-handles yui-dd-draggable']"));
-		assertFalse(selenium.isElementPresent(
-				"//section[@id='portlet_58']/header/h1"));
-		assertFalse(selenium.isElementPresent(
-				"//section[@id='portlet_47']/header/h1"));
-		assertFalse(selenium.isTextPresent("Sign In"));
-		assertFalse(selenium.isTextPresent("Hello World"));
-		selenium.clickAt("//li[@class='first manage-page']/a",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+					try {
+						if (RuntimeVariables.replace("Guest")
+												.equals(selenium.getText(
+										"//div/div[3]/a"))) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
 
-			try {
-				if (selenium.isVisible(
-							"//div[@id='_88_layoutsTreeOutput']/ul/li")) {
-					break;
+					Thread.sleep(1000);
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
-		}
+				boolean welcomePresent = selenium.isElementPresent(
+						"//li/ul/li[1]/div/div[3]/a");
 
-		selenium.clickAt("//div[@id='_88_treeExpandAll']/a",
-			RuntimeVariables.replace(""));
+				if (welcomePresent) {
+					label = 2;
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible(
-							"//div[@id='_88_layoutsTreeOutput']/ul/li/ul/li/div/div[3]/a")) {
-					break;
+					continue;
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
-		}
+				selenium.clickAt("//li/div/div[1]", RuntimeVariables.replace(""));
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+			case 2:
 
-			try {
-				if (selenium.isVisible(
-							"//div[@id='_88_layoutsTreeOutput']/ul/li/ul/li[2]/ul/li")) {
-					break;
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isVisible("//li[1]/ul/li/div/div[3]/a")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
-		}
+				boolean childPagePresent = selenium.isElementPresent(
+						"//li[2]/ul/li/div/div[3]/a");
 
-		selenium.clickAt("//div[@id='_88_layoutsTreeOutput']/ul/li/ul/li[2]/ul/li/div/div[3]/a",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//li[@id='_88_tabs3pageTabsId']/span/a",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
+				if (childPagePresent) {
+					label = 3;
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible("_88_type")) {
-					break;
+					continue;
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
-		}
+				selenium.clickAt("//li[2]/div/div[1]",
+					RuntimeVariables.replace(""));
 
-		selenium.select("_88_type", RuntimeVariables.replace("label=Portlet"));
-		assertEquals(RuntimeVariables.replace(
-				"- Welcome - Manage Pages Test Page - - Child Test Page"),
-			selenium.getText("_88_copyLayoutId"));
-		selenium.select("_88_copyLayoutId",
-			RuntimeVariables.replace("label=regexp:-\\sWelcome"));
-		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
-		selenium.open("/web/guest/home/");
+			case 3:
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
 
-			try {
-				if (selenium.isElementPresent("link=Manage Pages Test Page")) {
-					break;
+					try {
+						if (selenium.isVisible("//li[2]/ul/li/div/div[3]/a")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
+				selenium.clickAt("//li[2]/ul/li/div/div[3]/a",
+					RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
+				selenium.clickAt("//ul[2]/li[1]/span/span/a",
+					RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
+				selenium.select("_88_type",
+					RuntimeVariables.replace("label=Portlet"));
+				assertEquals(RuntimeVariables.replace(
+						"- Welcome - Manage Pages Test Page - - Child Test Page"),
+					selenium.getText("_88_copyLayoutId"));
+				selenium.select("_88_copyLayoutId",
+					RuntimeVariables.replace("label=regexp:-\\sWelcome"));
+				selenium.clickAt("//input[@value='Save']",
+					RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
+				assertEquals(RuntimeVariables.replace(
+						"Your request processed successfully."),
+					selenium.getText("//section/div/div/div/div"));
+				selenium.open("/web/guest/home/");
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isElementPresent(
+									"link=Manage Pages Test Page")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+				selenium.clickAt("link=Manage Pages Test Page",
+					RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
+				selenium.clickAt("link=Child Test Page",
+					RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
+				assertEquals(RuntimeVariables.replace("Child Test Page"),
+					selenium.getText("//nav/ul/li[3]/span/a"));
+				assertEquals(RuntimeVariables.replace("Sign In"),
+					selenium.getText("//section[@id='portlet_58']/header/h1"));
+				assertEquals(RuntimeVariables.replace("Hello World"),
+					selenium.getText("//section[@id='portlet_47']/header/h1"));
+
+			case 100:
+				label = -1;
+			}
 		}
-
-		selenium.clickAt("link=Manage Pages Test Page",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=Child Test Page", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		assertEquals(RuntimeVariables.replace("Child Test Page"),
-			selenium.getText(
-				"//ul[@class='child-menu']/li[@class='selected yui-dd-drop aui-sortable-item aui-sortable-no-handles yui-dd-draggable']"));
-		assertEquals(RuntimeVariables.replace("Sign In"),
-			selenium.getText("//section[@id='portlet_58']/header/h1"));
-		assertEquals(RuntimeVariables.replace("Hello World"),
-			selenium.getText("//section[@id='portlet_47']/header/h1"));
 	}
 }

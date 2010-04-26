@@ -29,9 +29,14 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAtAndWait</td>
-	<td>//li[@id='_15_tabs1web-contentTabsId']/span/a</td>
-	<td></td>
+	<td>store</td>
+	<td>eval(selenium.isElementPresent('_15_rowIds'))</td>
+	<td>webContentPresent</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${webContentPresent}</td>
+	<td>WebContentNotPresent</td>
 </tr>
 <tr>
 	<td>clickAt</td>
@@ -46,6 +51,11 @@
 <tr>
 	<td>assertConfirmation</td>
 	<td>Are you sure you want to delete the selected web content?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>WebContentNotPresent</td>
 	<td></td>
 </tr>
 

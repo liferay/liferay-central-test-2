@@ -40,7 +40,9 @@ public class ViewCategoryMessagePostCountTests extends BaseTests {
 		testSuite.addTestSuite(AddCategoryMessage1Reply2Test.class);
 		testSuite.addTestSuite(AddCategoryMessage1Reply3Test.class);
 		testSuite.addTestSuite(ViewCategoryMessagePostCountTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownMBCategoryTest.class);
+		testSuite.addTestSuite(TearDownMBMessageTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

@@ -37,7 +37,9 @@ public class MarkAsAnswerCategoryMessageQuestionReplyTests extends BaseTests {
 		testSuite.addTestSuite(AddCategoryMessageQuestionReplyTest.class);
 		testSuite.addTestSuite(
 			MarkAsAnswerCategoryMessageQuestionReplyTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownMBCategoryTest.class);
+		testSuite.addTestSuite(TearDownMBMessageTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

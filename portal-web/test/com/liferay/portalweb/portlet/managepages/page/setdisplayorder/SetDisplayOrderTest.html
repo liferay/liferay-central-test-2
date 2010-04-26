@@ -39,28 +39,53 @@
 	<td>Child3 Test3 Page3</td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>//li[@class='first manage-page']/a</td>
+	<td>clickAtAndWait</td>
+	<td>//div/div[3]/div/ul/li[1]/a</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>//li[@class='first manage-page']/a</td>
-	<td></td>
+	<td>waitForText</td>
+	<td>//div/div[3]/a</td>
+	<td>Guest</td>
 </tr>
 <tr>
-	<td>waitForVisible</td>
-	<td>//div[@id='_88_layoutsTreeOutput']/ul/li</td>
-	<td></td>
+	<td>store</td>
+	<td>eval(selenium.isElementPresent('//li/ul/li[1]/div/div[3]/a'))</td>
+	<td>welcomePresent</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>${welcomePresent}</td>
+	<td>WelcomePresent</td>
 </tr>
 <tr>
 	<td>clickAt</td>
-	<td>//div[@id='_88_treeExpandAll']/a</td>
+	<td>//li/div/div[1]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForVisible</td>
-	<td>//div[@id='_88_layoutsTreeOutput']/ul/li/ul/li/div/div[3]/a</td>
+	<td>label</td>
+	<td>WelcomePresent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>eval(selenium.isElementPresent('//li[2]/ul/li[1]/div/div[3]/a'))</td>
+	<td>childPagePresent</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>${childPagePresent}</td>
+	<td>ChildPagePresent</td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>//li[2]/div/div[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>ChildPagePresent</td>
 	<td></td>
 </tr>
 <tr>
@@ -69,19 +94,14 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForVisible</td>
-	<td>//ul[@class='aui-tree-container']</td>
-	<td></td>
-</tr>
-<tr>
 	<td>clickAtAndWait</td>
 	<td>link=Display Order</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForVisible</td>
-	<td>//ul[@class='aui-tree-container']</td>
-	<td></td>
+	<td>waitForText</td>
+	<td>_88_layoutIdsBox</td>
+	<td>Child1 Test1 Page1 Child2 Test2 Page2 Child3 Test3 Page3</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -94,9 +114,14 @@
 	<td></td>
 </tr>
 <tr>
-	<td>pause</td>
-	<td>5000</td>
-	<td></td>
+	<td>waitForText</td>
+	<td>_88_layoutIdsBox</td>
+	<td>Child2 Test2 Page2 Child1 Test1 Page1 Child3 Test3 Page3</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>_88_layoutIdsBox</td>
+	<td>Child2 Test2 Page2 Child1 Test1 Page1 Child3 Test3 Page3</td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
@@ -104,23 +129,38 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>assertText</td>
+	<td>//section/div/div/div/div</td>
 	<td>Your request processed successfully.</td>
-	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//nav[@id='navigation']/ul/li[2]/ul/li[1]</td>
+	<td>//nav/ul/li[2]/ul/li[1]</td>
 	<td>Child2 Test2 Page2</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//nav[@id='navigation']/ul/li[2]/ul/li[2]</td>
+	<td>//nav/ul/li[2]/ul/li[2]</td>
 	<td>Child1 Test1 Page1</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//nav[@id='navigation']/ul/li[2]/ul/li[3]</td>
+	<td>//nav/ul/li[2]/ul/li[3]</td>
+	<td>Child3 Test3 Page3</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//li[2]/ul/li[1]/div/div[3]/a</td>
+	<td>Child2 Test2 Page2</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//li[2]/ul/li[2]/div/div[3]/a</td>
+	<td>Child1 Test1 Page1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//li[2]/ul/li[3]/div/div[3]/a</td>
 	<td>Child3 Test3 Page3</td>
 </tr>
 

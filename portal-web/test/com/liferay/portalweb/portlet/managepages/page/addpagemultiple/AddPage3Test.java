@@ -24,99 +24,120 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddPage3Test extends BaseTestCase {
 	public void testAddPage3() throws Exception {
-		selenium.open("/web/guest/home/");
+		int label = 1;
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+		while (label >= 1) {
+			switch (label) {
+			case 1:
+				selenium.open("/web/guest/home/");
 
-			try {
-				if (selenium.isElementPresent(
-							"//li[@class='first manage-page']/a")) {
-					break;
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isElementPresent(
+									"//div/div[3]/div/ul/li[1]/a")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
-		}
+				selenium.clickAt("//div/div[3]/div/ul/li[1]/a",
+					RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
 
-		selenium.clickAt("//li[@class='first manage-page']/a",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+					try {
+						if (RuntimeVariables.replace("Guest")
+												.equals(selenium.getText(
+										"//div/div[3]/a"))) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
 
-			try {
-				if (selenium.isVisible(
-							"//div[@id='_88_layoutsTreeOutput']/ul/li")) {
-					break;
+					Thread.sleep(1000);
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
-		}
+				boolean welcomePresent = selenium.isElementPresent(
+						"//li/ul/li[1]/div/div[3]/a");
 
-		selenium.clickAt("//div[@id='_88_treeExpandAll']/a",
-			RuntimeVariables.replace(""));
+				if (welcomePresent) {
+					label = 2;
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible(
-							"//div[@id='_88_layoutsTreeOutput']/ul/li/ul/li/div/div[3]/a")) {
-					break;
+					continue;
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
-		}
+				selenium.clickAt("//li/div/div[1]", RuntimeVariables.replace(""));
 
-		selenium.clickAt("//div[@id='_88_layoutsTreeOutput']/ul/li/div/div[3]/a",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		selenium.type("_88_name_en_US",
-			RuntimeVariables.replace("Manage3 Pages3 Test3 Page3"));
-		selenium.clickAt("//input[@value='Add Page']",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isPartialText("//nav[@id='navigation']/ul/li[4]",
-				"Manage3 Pages3 Test3 Page3"));
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+			case 2:
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
 
-			try {
-				if (RuntimeVariables.replace("Manage3 Pages3 Test3 Page3")
-										.equals(selenium.getText(
-								"//div[@id='_88_layoutsTreeOutput']/ul/li/ul/li[4]/div/div[3]/a"))) {
-					break;
+					try {
+						if (selenium.isVisible("//li/ul/li[1]/div/div[3]/a")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
+				selenium.clickAt("//div/div[3]/a", RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
+				selenium.type("_88_name_en_US",
+					RuntimeVariables.replace("Manage3 Pages3 Test3 Page3"));
+				selenium.clickAt("//input[@value='Add Page']",
+					RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
+				assertTrue(selenium.isPartialText("//nav/ul/li[4]",
+						"Manage3 Pages3 Test3 Page3"));
+				assertEquals(RuntimeVariables.replace(
+						"Your request processed successfully."),
+					selenium.getText("//section/div/div/div/div"));
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (RuntimeVariables.replace(
+									"Manage3 Pages3 Test3 Page3")
+												.equals(selenium.getText(
+										"//li/ul/li[4]/div/div[3]/a"))) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+				assertEquals(RuntimeVariables.replace(
+						"Manage3 Pages3 Test3 Page3"),
+					selenium.getText("//li/ul/li[4]/div/div[3]/a"));
+
+			case 100:
+				label = -1;
+			}
 		}
-
-		assertEquals(RuntimeVariables.replace("Manage3 Pages3 Test3 Page3"),
-			selenium.getText(
-				"//div[@id='_88_layoutsTreeOutput']/ul/li/ul/li[4]/div/div[3]/a"));
 	}
 }

@@ -15,32 +15,47 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//li[@class='first manage-page']/a</td>
+	<td>//div/div[3]/div/ul/li[1]/a</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>//li[@class='first manage-page']/a</td>
+	<td>//div/div[3]/div/ul/li[1]/a</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForVisible</td>
-	<td>//div[@id='_88_layoutsTreeOutput']/ul/li</td>
-	<td></td>
+	<td>waitForText</td>
+	<td>//div/div[3]/a</td>
+	<td>Guest</td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>eval(selenium.isElementPresent('//li/ul/li[1]/div/div[3]/a'))</td>
+	<td>welcomePresent</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>${welcomePresent}</td>
+	<td>WelcomePresent</td>
 </tr>
 <tr>
 	<td>clickAt</td>
-	<td>//div[@id='_88_treeExpandAll']/a</td>
+	<td>//li/div/div[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>WelcomePresent</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForVisible</td>
-	<td>//div[@id='_88_layoutsTreeOutput']/ul/li/ul/li/div/div[3]/a</td>
+	<td>//li/ul/li[1]/div/div[3]/a</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>//div[@id='_88_layoutsTreeOutput']/ul/li/div/div[3]/a</td>
+	<td>//div/div[3]/a</td>
 	<td></td>
 </tr>
 <tr>
@@ -55,22 +70,22 @@
 </tr>
 <tr>
 	<td>assertPartialText</td>
-	<td>//nav[@id='navigation']/ul/li[3]</td>
-	<td>Manage2 Pages2 Test2 Page2</td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Your request processed successfully.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForText</td>
-	<td>//div[@id='_88_layoutsTreeOutput']/ul/li/ul/li[3]/div/div[3]/a</td>
+	<td>//nav/ul/li[3]</td>
 	<td>Manage2 Pages2 Test2 Page2</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[@id='_88_layoutsTreeOutput']/ul/li/ul/li[3]/div/div[3]/a</td>
+	<td>//section/div/div/div/div</td>
+	<td>Your request processed successfully.</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//li/ul/li[3]/div/div[3]/a</td>
+	<td>Manage2 Pages2 Test2 Page2</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//li/ul/li[3]/div/div[3]/a</td>
 	<td>Manage2 Pages2 Test2 Page2</td>
 </tr>
 

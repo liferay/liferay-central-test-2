@@ -25,17 +25,17 @@
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>//li[@class='first manage-page']/a</td>
+	<td>//div/div[3]/div/ul/li[1]/a</td>
 	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div/div[3]/a</td>
+	<td>Guest</td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
 	<td>link=Children</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>_88_name_en_US</td>
 	<td></td>
 </tr>
 <tr>
@@ -50,13 +50,43 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//nav[@id='navigation']/ul/li[2]/ul/li[2]</td>
+	<td>//section/div/div/div/div</td>
+	<td>Your request processed successfully.</td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>eval(selenium.isElementPresent('//li[2]/ul/li/div/div[3]/a'))</td>
+	<td>childPagePresent</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>${childPagePresent}</td>
+	<td>ChildPagePresent</td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>//li[2]/div/div[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>ChildPagePresent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//nav/ul/li[2]/ul/li[2]</td>
 	<td>Child2 Test2 Page2</td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>Your request processed successfully.</td>
-	<td></td>
+	<td>waitForText</td>
+	<td>//li[2]/ul/li[2]/div/div[3]/a</td>
+	<td>Child2 Test2 Page2</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//li[2]/ul/li[2]/div/div[3]/a</td>
+	<td>Child2 Test2 Page2</td>
 </tr>
 
 </tbody></table>

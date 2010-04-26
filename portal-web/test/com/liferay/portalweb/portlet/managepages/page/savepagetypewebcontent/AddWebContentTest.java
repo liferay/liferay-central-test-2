@@ -107,42 +107,6 @@ public class AddWebContentTest extends BaseTestCase {
 		selenium.type("//body",
 			RuntimeVariables.replace("This is a test Web Content"));
 		selenium.selectFrame("relative=top");
-		selenium.select("_15_type",
-			RuntimeVariables.replace("label=Announcements"));
-		selenium.select("_15_displayDateMonth",
-			RuntimeVariables.replace("label=April"));
-		selenium.select("_15_displayDateDay",
-			RuntimeVariables.replace("label=10"));
-		selenium.select("_15_displayDateYear",
-			RuntimeVariables.replace("label=2010"));
-		selenium.select("_15_displayDateHour",
-			RuntimeVariables.replace("label=12"));
-		selenium.select("_15_displayDateMinute",
-			RuntimeVariables.replace("label=:00"));
-		selenium.clickAt("_15_neverExpireCheckbox", RuntimeVariables.replace(""));
-		selenium.select("_15_expirationDateMonth",
-			RuntimeVariables.replace("label=January"));
-		selenium.select("_15_expirationDateDay",
-			RuntimeVariables.replace("label=27"));
-		selenium.select("_15_expirationDateYear",
-			RuntimeVariables.replace("label=2011"));
-		selenium.select("_15_expirationDateHour",
-			RuntimeVariables.replace("label=12"));
-		selenium.select("_15_expirationDateMinute",
-			RuntimeVariables.replace("label=:00"));
-		selenium.clickAt("_15_neverReviewCheckbox", RuntimeVariables.replace(""));
-		selenium.select("_15_reviewDateMonth",
-			RuntimeVariables.replace("label=September"));
-		selenium.select("_15_reviewDateDay",
-			RuntimeVariables.replace("label=16"));
-		selenium.select("_15_reviewDateYear",
-			RuntimeVariables.replace("label=2011"));
-		selenium.select("_15_reviewDateHour",
-			RuntimeVariables.replace("label=12"));
-		selenium.select("_15_reviewDateMinute",
-			RuntimeVariables.replace("label=:00"));
-		selenium.type("_15_description",
-			RuntimeVariables.replace("Test Description."));
 		selenium.clickAt("//input[@value='Save and Approve']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
@@ -173,8 +137,7 @@ public class AddWebContentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"//li[@id='_15_tabs1web-contentTabsId']/span/a")) {
+				if (selenium.isElementPresent("//span/span/a")) {
 					break;
 				}
 			}
@@ -184,8 +147,7 @@ public class AddWebContentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"//li[@id='_15_tabs1web-contentTabsId']/span/a"));
+		selenium.click(RuntimeVariables.replace("//span/span/a"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Test Web Content"));
 	}

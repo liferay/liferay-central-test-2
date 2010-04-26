@@ -44,6 +44,7 @@ public class SelectBirthdayTest extends BaseTestCase {
 
 		selenium.clickAt("link=Joe Bloggs", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -99,8 +100,7 @@ public class SelectBirthdayTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//span[@class='aui-icon-calendar aui-icon']",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("//button", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -108,8 +108,7 @@ public class SelectBirthdayTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible(
-							"//div[@class='aui-widget aui-component aui-overlay aui-contextoverlay aui-calendar aui-datepicker aui-widget-positioned aui-widget-stacked']")) {
+				if (selenium.isVisible("//div[2]/div/div[1]/div/div")) {
 					break;
 				}
 			}
@@ -121,6 +120,23 @@ public class SelectBirthdayTest extends BaseTestCase {
 
 		Thread.sleep(5000);
 		selenium.clickAt("link=Prev", RuntimeVariables.replace(""));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("link=31")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.clickAt("link=31", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -129,8 +145,7 @@ public class SelectBirthdayTest extends BaseTestCase {
 			}
 
 			try {
-				if (!selenium.isElementPresent(
-							"//div[@class='aui-widget aui-component aui-overlay aui-contextoverlay aui-calendar aui-datepicker aui-widget-positioned aui-widget-stacked']")) {
+				if (!selenium.isVisible("//div[2]/div/div[1]/div/div")) {
 					break;
 				}
 			}

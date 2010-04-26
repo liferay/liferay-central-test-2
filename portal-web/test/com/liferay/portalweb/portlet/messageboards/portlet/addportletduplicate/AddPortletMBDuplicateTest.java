@@ -32,7 +32,7 @@ public class AddPortletMBDuplicateTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent(
+				if (selenium.isVisible(
 							"link=M\u00e9ssag\u00e9 Boards T\u00e9st Pag\u00e9")) {
 					break;
 				}
@@ -47,6 +47,7 @@ public class AddPortletMBDuplicateTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("_145_addApplication", RuntimeVariables.replace(""));
+		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -54,8 +55,7 @@ public class AddPortletMBDuplicateTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible(
-							"//input[@id='layout_configuration_content']")) {
+				if (selenium.isVisible("layout_configuration_content")) {
 					break;
 				}
 			}
@@ -65,12 +65,8 @@ public class AddPortletMBDuplicateTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("//input[@id='layout_configuration_content']",
+		selenium.typeKeys("layout_configuration_content",
 			RuntimeVariables.replace("m"));
-		Thread.sleep(5000);
-		assertFalse(selenium.isVisible("//div[@title='Message Boards']/p/a"));
-		selenium.clickAt("//div[@title='Message Boards']/p/a",
-			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -78,7 +74,7 @@ public class AddPortletMBDuplicateTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("//td[1]/div[1]/div")) {
+				if (selenium.isVisible("//div[@title='Message Boards']")) {
 					break;
 				}
 			}
@@ -88,8 +84,6 @@ public class AddPortletMBDuplicateTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertTrue(selenium.isElementPresent("//td[1]/div[1]/div"));
-		Thread.sleep(5000);
-		assertFalse(selenium.isElementPresent("//td[1]/div[2]/div"));
+		assertFalse(selenium.isVisible("//div[@title='Message Boards']/p/a"));
 	}
 }
