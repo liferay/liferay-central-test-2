@@ -22,6 +22,8 @@ long classPK = -1;
 
 String[] distributionScopeArray = StringUtil.split(distributionScope);
 
+PortletURL distributionURL = PortletURLUtil.clone(portletURL, renderResponse);
+
 if (distributionScopeArray.length == 2) {
 	classNameId = GetterUtil.getLong(distributionScopeArray[0]);
 	classPK = GetterUtil.getLong(distributionScopeArray[1]);
@@ -125,7 +127,7 @@ if ((classNameId == 0) && (classPK == 0) && !permissionChecker.isOmniadmin()) {
 	}
 
 	function <portlet:namespace />selectDistributionScope(distributionScope) {
-		var url = "<%= portletURL.toString() %>&<portlet:namespace />distributionScope=" + distributionScope;
+		var url = "<%= distributionURL.toString() %>&<portlet:namespace />distributionScope=" + distributionScope;
 		submitForm(document.<portlet:namespace />fm, url);
 	}
 </aui:script>
