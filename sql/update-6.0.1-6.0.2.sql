@@ -1,1 +1,1 @@
-alter table LayoutSet add settings TEXT null;
+alter table LayoutSet add settings_ TEXT null;
