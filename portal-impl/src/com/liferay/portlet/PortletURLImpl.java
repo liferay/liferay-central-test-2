@@ -650,7 +650,9 @@ public class PortletURLImpl
 			return;
 		}
 
-		if (portlet.getPortletId().equals(_portletId)) {
+		if (portlet.getPortletId().equals(_portletId) &&
+			_windowState.equals(WindowState.NORMAL)) {
+
 			return;
 		}
 
