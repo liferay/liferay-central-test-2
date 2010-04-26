@@ -62,7 +62,7 @@ if (url != null) {
 		url = url.substring(0, x);
 		anchor = url.substring(x, url.length());
 	}
-	
+
 	if (!url.contains(StringPool.QUESTION)) {
 		separator = StringPool.QUESTION;
 	}
