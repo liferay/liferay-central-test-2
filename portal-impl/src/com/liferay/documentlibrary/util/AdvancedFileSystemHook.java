@@ -14,11 +14,21 @@
 
 package com.liferay.documentlibrary.util;
 
+import com.liferay.documentlibrary.model.FileModel;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Document;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchEngineUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portlet.documentlibrary.util.DLUtil;
 
 import java.io.File;
@@ -35,6 +45,23 @@ import java.io.File;
  * @author Brian Wing Shun Chan
  */
 public class AdvancedFileSystemHook extends FileSystemHook {
+
+	public void reindex(String[] ids) throws SearchException {
+		long companyId = GetterUtil.getLong(ids[0]);
+		String portletId = ids[1];
+		long groupId = GetterUtil.getLong(ids[2]);
+		long repositoryId = GetterUtil.getLong(ids[3]);
+
+		File repositoryDir = getRepositoryDir(companyId, repositoryId);
+
+		String[] fileNames = FileUtil.listDirs(repositoryDir);
+
+		for (int i = 0; i < fileNames.length; i++) {
+			reindex(
+				companyId, portletId, groupId, repositoryId,
+				repositoryDir.getPath() + StringPool.SLASH + fileNames[i]);
+		}
+	}
 
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
@@ -211,6 +238,56 @@ public class AdvancedFileSystemHook extends FileSystemHook {
 		return headVersionNumber;
 	}
 
+	protected void reindex(
+		long companyId, String portletId, long groupId, long repositoryId,
+		String folderName) throws SearchException {
+
+		String shortFileName = FileUtil.getShortFileName(folderName);
+
+		if (shortFileName.equals("DLFE") ||
+			Validator.isNumber(shortFileName)) {
+
+			String[] fileNames = FileUtil.listDirs(folderName);
+
+			for (int i = 0; i < fileNames.length; i++) {
+				reindex(
+					companyId, portletId, groupId, repositoryId,
+					folderName + StringPool.SLASH + fileNames[i]);
+			}
+		}
+		else {
+			try {
+				Indexer indexer = IndexerRegistryUtil.getIndexer(
+					FileModel.class);
+
+				FileModel fileModel = new FileModel();
+
+				if (shortFileName.endsWith(_HOOK_EXTENSION)) {
+					shortFileName = FileUtil.stripExtension(shortFileName);
+				}
+
+				fileModel.setCompanyId(companyId);
+				fileModel.setFileName(shortFileName);
+				fileModel.setGroupId(groupId);
+				fileModel.setPortletId(portletId);
+				fileModel.setRepositoryId(repositoryId);
+
+				Document document = indexer.getDocument(fileModel);
+
+				SearchEngineUtil.updateDocument(companyId, document);
+			}
+			catch (SearchException se) {
+				throw se;
+			}
+			catch (Exception e) {
+				_log.error("Reindexing " + shortFileName, e);
+			}
+		}
+	}
+
 	private static final String _HOOK_EXTENSION = "afsh";
+
+	private static Log _log = LogFactoryUtil.getLog(
+		AdvancedFileSystemHook.class);
 
 }
