@@ -28,7 +28,7 @@ public interface BlogsEntryFinder {
 		java.util.Date displayDate, int status)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findAggregatedGroups(
+	public java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findByGroupIds(
 		long companyId, long groupId, int status, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 

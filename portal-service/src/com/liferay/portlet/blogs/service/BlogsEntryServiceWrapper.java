@@ -56,14 +56,6 @@ public class BlogsEntryServiceWrapper implements BlogsEntryService {
 		_blogsEntryService.deleteEntry(entryId);
 	}
 
-	public java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> getAggregatedGroupEntries(
-		long companyId, long groupId, int status, int max)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _blogsEntryService.getAggregatedGroupEntries(companyId, groupId,
-			status, max);
-	}
-
 	public java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> getCompanyEntries(
 		long companyId, int status, int max)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -111,6 +103,14 @@ public class BlogsEntryServiceWrapper implements BlogsEntryService {
 			com.liferay.portal.kernel.exception.SystemException {
 		return _blogsEntryService.getGroupEntriesRSS(groupId, status, max,
 			type, version, displayStyle, feedURL, entryURL, themeDisplay);
+	}
+
+	public java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> getGroupsEntries(
+		long companyId, long groupId, int status, int max)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _blogsEntryService.getGroupsEntries(companyId, groupId, status,
+			max);
 	}
 
 	public java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> getOrganizationEntries(

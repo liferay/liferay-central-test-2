@@ -517,10 +517,10 @@ Liferay.Service.registerClass(
 	{
 		addEntry: true,
 		deleteEntry: true,
-		getAggregatedGroupEntries: true,
 		getCompanyEntries: true,
 		getEntry: true,
 		getGroupEntries: true,
+		getGroupsEntries: true,
 		getOrganizationEntries: true,
 		updateEntry: true
 	}

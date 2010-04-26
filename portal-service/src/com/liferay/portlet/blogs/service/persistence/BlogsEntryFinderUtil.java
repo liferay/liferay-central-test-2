@@ -36,11 +36,10 @@ public class BlogsEntryFinderUtil {
 				   .countByOrganizationIds(organizationIds, displayDate, status);
 	}
 
-	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findAggregatedGroups(
+	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findByGroupIds(
 		long companyId, long groupId, int status, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getFinder()
-				   .findAggregatedGroups(companyId, groupId, status, start, end);
+		return getFinder().findByGroupIds(companyId, groupId, status, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findByOrganizationId(

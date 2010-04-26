@@ -33,10 +33,10 @@ public class BlogsStatsUserFinderUtil {
 		return getFinder().countByOrganizationIds(organizationIds);
 	}
 
-	public static java.util.List<com.liferay.portlet.blogs.model.BlogsStatsUser> findAggregatedGroups(
+	public static java.util.List<com.liferay.portlet.blogs.model.BlogsStatsUser> findByGroupIds(
 		long companyId, long groupId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getFinder().findAggregatedGroups(companyId, groupId, start, end);
+		return getFinder().findByGroupIds(companyId, groupId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsStatsUser> findByOrganizationId(
