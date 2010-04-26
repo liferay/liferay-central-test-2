@@ -16,12 +16,17 @@ package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.model.ColorScheme;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.Theme;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.ThemeLocalServiceUtil;
+
+import java.io.IOException;
 
 /**
  * <a href="LayoutSetImpl.java.html"><b><i>View Source</i></b></a>
@@ -48,6 +53,36 @@ public class LayoutSetImpl extends LayoutSetModelImpl implements LayoutSet {
 		return GroupLocalServiceUtil.getGroup(getGroupId());
 	}
 
+	public String getSettings() {
+		if (_settingsProperties == null) {
+			return super.getSettings();
+		}
+		else {
+			return _settingsProperties.toString();
+		}
+	}
+
+	public UnicodeProperties getSettingsProperties() {
+		if (_settingsProperties == null) {
+			_settingsProperties = new UnicodeProperties(true);
+
+			try {
+				_settingsProperties.load(super.getSettings());
+			}
+			catch (IOException ioe) {
+				_log.error(ioe, ioe);
+			}
+		}
+
+		return _settingsProperties;
+	}
+
+	public String getSettingsProperty(String key) {
+		UnicodeProperties settingsProperties = getSettingsProperties();
+
+		return settingsProperties.getProperty(key);
+	}
+
 	public Theme getWapTheme() throws SystemException {
 		return ThemeLocalServiceUtil.getTheme(
 			getCompanyId(), getWapThemeId(), true);
@@ -58,5 +93,23 @@ public class LayoutSetImpl extends LayoutSetModelImpl implements LayoutSet {
 			getCompanyId(), getWapTheme().getThemeId(), getWapColorSchemeId(),
 			true);
 	}
+
+	public void setSettings(String settings) {
+		_settingsProperties = null;
+
+		super.setSettings(settings);
+	}
+
+	public void setSettingsProperties(
+		UnicodeProperties settingsProperties) {
+
+		_settingsProperties = settingsProperties;
+
+		super.setSettings(_settingsProperties.toString());
+	}
+
+	private static Log _log = LogFactoryUtil.getLog(LayoutSetImpl.class);
+
+	private UnicodeProperties _settingsProperties;
 
 }

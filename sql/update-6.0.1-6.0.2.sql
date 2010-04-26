@@ -1,0 +1,1 @@
+alter table LayoutSet add settings TEXT null;

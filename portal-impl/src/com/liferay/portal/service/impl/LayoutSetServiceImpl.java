@@ -56,6 +56,17 @@ public class LayoutSetServiceImpl extends LayoutSetServiceBaseImpl {
 			groupId, privateLayout, themeId, colorSchemeId, css, wapTheme);
 	}
 
+	public LayoutSet updateSettings(
+			long groupId, boolean privateLayout, String settings)
+		throws PortalException, SystemException {
+
+		GroupPermissionUtil.check(
+			getPermissionChecker(), groupId, ActionKeys.MANAGE_LAYOUTS);
+
+		return layoutSetLocalService.updateSettings(
+			groupId, privateLayout, settings);
+	}
+
 	public LayoutSet updateVirtualHost(
 			long groupId, boolean privateLayout, String virtualHost)
 		throws PortalException, SystemException {

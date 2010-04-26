@@ -239,6 +239,20 @@ public class LayoutSetLocalServiceImpl extends LayoutSetLocalServiceBaseImpl {
 		return layoutSet;
 	}
 
+	public LayoutSet updateSettings(
+			long groupId, boolean privateLayout, String settings)
+		throws PortalException, SystemException {
+
+		LayoutSet layoutSet = layoutSetPersistence.findByG_P(
+			groupId, privateLayout);
+
+		layoutSet.setSettings(settings);
+
+		layoutSetPersistence.update(layoutSet, false);
+
+		return layoutSet;
+	}
+
 	public LayoutSet updateVirtualHost(
 			long groupId, boolean privateLayout, String virtualHost)
 		throws PortalException, SystemException {

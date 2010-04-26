@@ -259,6 +259,7 @@
 		<field name="pageCount" type="int" />
 		<field name="virtualHost" type="String" />
 		<field name="layoutSetPrototypeId" type="long" />
+		<field name="settings" type="String" />
 	</model>
 	<model name="com.liferay.portal.model.LayoutSetPrototype">
 		<field name="layoutSetPrototypeId" type="long" />
