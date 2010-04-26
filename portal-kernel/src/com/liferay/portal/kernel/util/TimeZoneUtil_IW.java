@@ -32,8 +32,8 @@ public class TimeZoneUtil_IW {
 		return TimeZoneUtil.getTimeZone(timeZoneId);
 	}
 
-	public void setDefault(java.lang.String id) {
-		TimeZoneUtil.setDefault(id);
+	public void setDefault(java.lang.String timeZoneId) {
+		TimeZoneUtil.setDefault(timeZoneId);
 	}
 
 	private TimeZoneUtil_IW() {
