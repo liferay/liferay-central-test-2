@@ -14,6 +14,7 @@
 
 package com.liferay.portal.kernel.dao.search;
 
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.Validator;
 
@@ -107,7 +108,7 @@ public class TextSearchEntry extends SearchEntry {
 			StringBundler sb = new StringBundler();
 
 			sb.append("<a href=\"");
-			sb.append(_href);
+			sb.append(HtmlUtil.escape(_href));
 			sb.append("\"");
 
 			if (Validator.isNotNull(_target)) {
