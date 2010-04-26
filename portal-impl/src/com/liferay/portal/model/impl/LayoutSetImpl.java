@@ -100,9 +100,7 @@ public class LayoutSetImpl extends LayoutSetModelImpl implements LayoutSet {
 		super.setSettings(settings);
 	}
 
-	public void setSettingsProperties(
-		UnicodeProperties settingsProperties) {
-
+	public void setSettingsProperties(UnicodeProperties settingsProperties) {
 		_settingsProperties = settingsProperties;
 
 		super.setSettings(_settingsProperties.toString());
