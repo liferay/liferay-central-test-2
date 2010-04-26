@@ -78,6 +78,9 @@ else {
 		int addressesIndex = addressesIndexes[i];
 
 		Address address = addresses.get(i);
+
+		long countryId = BeanParamUtil.getLong(address, request, "addressCountryId" + addressesIndex);
+		long regionId = BeanParamUtil.getLong(address, request, "addressRegionId" + addressesIndex);
 	%>
 
 		<aui:model-context bean="<%= address %>" model="<%= Address.class %>" />
@@ -120,14 +123,14 @@ else {
 						selectData: Liferay.Address.getCountries,
 						selectDesc: 'name',
 						selectId: 'countryId',
-						selectVal: '<%= address.getCountryId() %>'
+						selectVal: '<%= countryId %>'
 					},
 					{
 						select: '<portlet:namespace />addressRegionId<%= addressesIndex %>',
 						selectData: Liferay.Address.getRegions,
 						selectDesc: 'name',
 						selectId: 'regionId',
-						selectVal: '<%= address.getRegionId() %>'
+						selectVal: '<%= regionId %>'
 					}
 				]
 			);
