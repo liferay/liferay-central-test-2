@@ -3756,6 +3756,12 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 
 	@BeanReference(type = SocialActivityPersistence.class)
 	protected SocialActivityPersistence socialActivityPersistence;
+	@BeanReference(type = SocialEquityHistoryPersistence.class)
+	protected SocialEquityHistoryPersistence socialEquityHistoryPersistence;
+	@BeanReference(type = SocialEquityLogPersistence.class)
+	protected SocialEquityLogPersistence socialEquityLogPersistence;
+	@BeanReference(type = SocialEquitySettingPersistence.class)
+	protected SocialEquitySettingPersistence socialEquitySettingPersistence;
 	@BeanReference(type = SocialRelationPersistence.class)
 	protected SocialRelationPersistence socialRelationPersistence;
 	@BeanReference(type = SocialRequestPersistence.class)

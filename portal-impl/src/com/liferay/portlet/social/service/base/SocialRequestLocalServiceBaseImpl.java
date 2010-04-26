@@ -35,11 +35,17 @@ import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portlet.social.model.SocialRequest;
 import com.liferay.portlet.social.service.SocialActivityInterpreterLocalService;
 import com.liferay.portlet.social.service.SocialActivityLocalService;
+import com.liferay.portlet.social.service.SocialEquityHistoryLocalService;
+import com.liferay.portlet.social.service.SocialEquityLogLocalService;
+import com.liferay.portlet.social.service.SocialEquitySettingLocalService;
 import com.liferay.portlet.social.service.SocialRelationLocalService;
 import com.liferay.portlet.social.service.SocialRequestInterpreterLocalService;
 import com.liferay.portlet.social.service.SocialRequestLocalService;
 import com.liferay.portlet.social.service.persistence.SocialActivityFinder;
 import com.liferay.portlet.social.service.persistence.SocialActivityPersistence;
+import com.liferay.portlet.social.service.persistence.SocialEquityHistoryPersistence;
+import com.liferay.portlet.social.service.persistence.SocialEquityLogPersistence;
+import com.liferay.portlet.social.service.persistence.SocialEquitySettingPersistence;
 import com.liferay.portlet.social.service.persistence.SocialRelationPersistence;
 import com.liferay.portlet.social.service.persistence.SocialRequestPersistence;
 
@@ -163,6 +169,60 @@ public abstract class SocialRequestLocalServiceBaseImpl
 	public void setSocialActivityInterpreterLocalService(
 		SocialActivityInterpreterLocalService socialActivityInterpreterLocalService) {
 		this.socialActivityInterpreterLocalService = socialActivityInterpreterLocalService;
+	}
+
+	public SocialEquityHistoryLocalService getSocialEquityHistoryLocalService() {
+		return socialEquityHistoryLocalService;
+	}
+
+	public void setSocialEquityHistoryLocalService(
+		SocialEquityHistoryLocalService socialEquityHistoryLocalService) {
+		this.socialEquityHistoryLocalService = socialEquityHistoryLocalService;
+	}
+
+	public SocialEquityHistoryPersistence getSocialEquityHistoryPersistence() {
+		return socialEquityHistoryPersistence;
+	}
+
+	public void setSocialEquityHistoryPersistence(
+		SocialEquityHistoryPersistence socialEquityHistoryPersistence) {
+		this.socialEquityHistoryPersistence = socialEquityHistoryPersistence;
+	}
+
+	public SocialEquityLogLocalService getSocialEquityLogLocalService() {
+		return socialEquityLogLocalService;
+	}
+
+	public void setSocialEquityLogLocalService(
+		SocialEquityLogLocalService socialEquityLogLocalService) {
+		this.socialEquityLogLocalService = socialEquityLogLocalService;
+	}
+
+	public SocialEquityLogPersistence getSocialEquityLogPersistence() {
+		return socialEquityLogPersistence;
+	}
+
+	public void setSocialEquityLogPersistence(
+		SocialEquityLogPersistence socialEquityLogPersistence) {
+		this.socialEquityLogPersistence = socialEquityLogPersistence;
+	}
+
+	public SocialEquitySettingLocalService getSocialEquitySettingLocalService() {
+		return socialEquitySettingLocalService;
+	}
+
+	public void setSocialEquitySettingLocalService(
+		SocialEquitySettingLocalService socialEquitySettingLocalService) {
+		this.socialEquitySettingLocalService = socialEquitySettingLocalService;
+	}
+
+	public SocialEquitySettingPersistence getSocialEquitySettingPersistence() {
+		return socialEquitySettingPersistence;
+	}
+
+	public void setSocialEquitySettingPersistence(
+		SocialEquitySettingPersistence socialEquitySettingPersistence) {
+		this.socialEquitySettingPersistence = socialEquitySettingPersistence;
 	}
 
 	public SocialRelationLocalService getSocialRelationLocalService() {
@@ -302,6 +362,18 @@ public abstract class SocialRequestLocalServiceBaseImpl
 	protected SocialActivityFinder socialActivityFinder;
 	@BeanReference(type = SocialActivityInterpreterLocalService.class)
 	protected SocialActivityInterpreterLocalService socialActivityInterpreterLocalService;
+	@BeanReference(type = SocialEquityHistoryLocalService.class)
+	protected SocialEquityHistoryLocalService socialEquityHistoryLocalService;
+	@BeanReference(type = SocialEquityHistoryPersistence.class)
+	protected SocialEquityHistoryPersistence socialEquityHistoryPersistence;
+	@BeanReference(type = SocialEquityLogLocalService.class)
+	protected SocialEquityLogLocalService socialEquityLogLocalService;
+	@BeanReference(type = SocialEquityLogPersistence.class)
+	protected SocialEquityLogPersistence socialEquityLogPersistence;
+	@BeanReference(type = SocialEquitySettingLocalService.class)
+	protected SocialEquitySettingLocalService socialEquitySettingLocalService;
+	@BeanReference(type = SocialEquitySettingPersistence.class)
+	protected SocialEquitySettingPersistence socialEquitySettingPersistence;
 	@BeanReference(type = SocialRelationLocalService.class)
 	protected SocialRelationLocalService socialRelationLocalService;
 	@BeanReference(type = SocialRelationPersistence.class)

@@ -140,7 +140,10 @@ create table AssetEntry (
 	height INTEGER,
 	width INTEGER,
 	priority DOUBLE,
-	viewCount INTEGER
+	viewCount INTEGER,
+	socialInformationK DOUBLE,
+	socialInformationB DOUBLE,
+	socialInformationEquity DOUBLE
 );
 
 create table AssetLink (
@@ -1473,6 +1476,40 @@ create table SocialActivity (
 	receiverUserId LONG
 );
 
+create table SocialEquityHistory (
+	equityHistoryId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
+	userId LONG,
+	createDate DATE null,
+	personalEquity INTEGER
+);
+
+create table SocialEquityLog (
+	equityLogId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
+	userId LONG,
+	assetEntryId LONG,
+	actionId VARCHAR(75) null,
+	actionDate INTEGER,
+	type_ INTEGER,
+	value INTEGER,
+	validity INTEGER
+);
+
+create table SocialEquitySetting (
+	equitySettingId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
+	classNameId LONG,
+	actionId VARCHAR(75) null,
+	type_ INTEGER,
+	value INTEGER,
+	validity INTEGER,
+	active_ BOOLEAN
+);
+
 create table SocialRelation (
 	uuid_ VARCHAR(75) null,
 	relationId LONG not null primary key,
@@ -1591,7 +1628,12 @@ create table User_ (
 	lockout BOOLEAN,
 	lockoutDate DATE null,
 	agreedToTermsOfUse BOOLEAN,
-	active_ BOOLEAN
+	active_ BOOLEAN,
+	socialContributionEquity DOUBLE,
+	socialParticipationK DOUBLE,
+	socialParticipationB DOUBLE,
+	socialParticipationEquity DOUBLE,
+	socialPersonalEquity DOUBLE
 );
 
 create table UserGroup (

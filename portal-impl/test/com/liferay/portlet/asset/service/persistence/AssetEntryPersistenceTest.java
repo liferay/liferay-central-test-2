@@ -89,6 +89,9 @@ public class AssetEntryPersistenceTest extends BasePersistenceTestCase {
 		newAssetEntry.setWidth(nextInt());
 		newAssetEntry.setPriority(nextDouble());
 		newAssetEntry.setViewCount(nextInt());
+		newAssetEntry.setSocialInformationK(nextDouble());
+		newAssetEntry.setSocialInformationB(nextDouble());
+		newAssetEntry.setSocialInformationEquity(nextDouble());
 
 		_persistence.update(newAssetEntry, false);
 
@@ -132,6 +135,12 @@ public class AssetEntryPersistenceTest extends BasePersistenceTestCase {
 			newAssetEntry.getPriority());
 		assertEquals(existingAssetEntry.getViewCount(),
 			newAssetEntry.getViewCount());
+		assertEquals(existingAssetEntry.getSocialInformationK(),
+			newAssetEntry.getSocialInformationK());
+		assertEquals(existingAssetEntry.getSocialInformationB(),
+			newAssetEntry.getSocialInformationB());
+		assertEquals(existingAssetEntry.getSocialInformationEquity(),
+			newAssetEntry.getSocialInformationEquity());
 	}
 
 	public void testFindByPrimaryKeyExisting() throws Exception {
@@ -227,6 +236,9 @@ public class AssetEntryPersistenceTest extends BasePersistenceTestCase {
 		assetEntry.setWidth(nextInt());
 		assetEntry.setPriority(nextDouble());
 		assetEntry.setViewCount(nextInt());
+		assetEntry.setSocialInformationK(nextDouble());
+		assetEntry.setSocialInformationB(nextDouble());
+		assetEntry.setSocialInformationEquity(nextDouble());
 
 		_persistence.update(assetEntry, false);
 

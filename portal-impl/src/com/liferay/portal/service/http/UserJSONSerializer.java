@@ -142,6 +142,13 @@ public class UserJSONSerializer {
 		jsonObj.put("lockoutDate", lockoutDateJSON);
 		jsonObj.put("agreedToTermsOfUse", model.getAgreedToTermsOfUse());
 		jsonObj.put("active", model.getActive());
+		jsonObj.put("socialContributionEquity",
+			model.getSocialContributionEquity());
+		jsonObj.put("socialParticipationK", model.getSocialParticipationK());
+		jsonObj.put("socialParticipationB", model.getSocialParticipationB());
+		jsonObj.put("socialParticipationEquity",
+			model.getSocialParticipationEquity());
+		jsonObj.put("socialPersonalEquity", model.getSocialPersonalEquity());
 
 		return jsonObj;
 	}
