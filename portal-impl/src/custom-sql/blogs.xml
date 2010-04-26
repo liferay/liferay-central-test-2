@@ -19,6 +19,32 @@
 				[$STATUS$]
 		]]>
 	</sql>
+	<sql id="com.liferay.portlet.blogs.service.persistence.BlogsEntryFinder.findAggregatedGroups">
+		<![CDATA[
+			SELECT
+				{BlogsEntry.*}
+			FROM
+				BlogsEntry
+			INNER JOIN
+				Group_ ON
+					(BlogsEntry.groupId = Group_.groupId)
+			WHERE
+				(BlogsEntry.status = ?) AND
+				(Group_.companyId = ?) AND
+				((Group_.groupId = ?) OR
+					((Group_.liveGroupId = 0) AND
+					(Group_.groupId NOT IN(
+						SELECT
+							liveGroupId
+						FROM
+							Group_
+						WHERE
+							groupId = ?
+					))))
+			ORDER BY
+				BlogsEntry.displayDate DESC
+		]]>
+	</sql>
 	<sql id="com.liferay.portlet.blogs.service.persistence.BlogsEntryFinder.findByOrganizationIds">
 		<![CDATA[
 			SELECT
@@ -71,6 +97,31 @@
 			WHERE
 				(BlogsStatsUser.entryCount != 0) AND
 				[$ORGANIZATION_ID$]
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.blogs.service.persistence.BlogsStatsUserFinder.findAggregatedGroups">
+		<![CDATA[
+			SELECT
+				{BlogsStatsUser.*}
+			FROM
+				BlogsStatsUser
+			INNER JOIN
+				Group_ ON
+					(BlogsStatsUser.groupId = Group_.groupId)
+			WHERE
+				(Group_.companyId = ?) AND
+				((Group_.groupId = ?) OR
+					((Group_.liveGroupId = 0) AND
+					(Group_.groupId NOT IN(
+						SELECT
+							liveGroupId
+						FROM
+							Group_
+						WHERE
+							groupId = ?
+					))))
+			ORDER BY
+				BlogsStatsUser.lastPostDate DESC
 		]]>
 	</sql>
 	<sql id="com.liferay.portlet.blogs.service.persistence.BlogsStatsUserFinder.findByOrganizationIds">

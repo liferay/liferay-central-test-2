@@ -130,6 +130,13 @@ public class BlogsStatsUserLocalServiceWrapper
 		_blogsStatsUserLocalService.deleteStatsUserByUserId(userId);
 	}
 
+	public java.util.List<com.liferay.portlet.blogs.model.BlogsStatsUser> getAggregatedGroupEntries(
+		long companyId, long groupId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _blogsStatsUserLocalService.getAggregatedGroupEntries(companyId,
+			groupId, start, end);
+	}
+
 	public java.util.List<com.liferay.portlet.blogs.model.BlogsStatsUser> getCompanyStatsUsers(
 		long companyId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {

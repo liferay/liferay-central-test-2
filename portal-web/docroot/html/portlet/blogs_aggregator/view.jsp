@@ -32,7 +32,7 @@ if (selectionMethod.equals("users")) {
 		entries = BlogsEntryServiceUtil.getOrganizationEntries(organizationId, StatusConstants.APPROVED, max);
 	}
 	else {
-		entries = BlogsEntryServiceUtil.getCompanyEntries(company.getCompanyId(), StatusConstants.APPROVED, max);
+		entries = BlogsEntryServiceUtil.getAggregatedGroupEntries(company.getCompanyId(), scopeGroupId, StatusConstants.APPROVED, max);
 	}
 }
 else {

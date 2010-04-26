@@ -194,6 +194,13 @@ public class BlogsEntryLocalServiceWrapper implements BlogsEntryLocalService {
 		_blogsEntryLocalService.deleteEntry(entryId);
 	}
 
+	public java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> getAggregatedGroupEntries(
+		long companyId, long groupId, int status, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _blogsEntryLocalService.getAggregatedGroupEntries(companyId,
+			groupId, status, start, end);
+	}
+
 	public java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> getCompanyEntries(
 		long companyId, int status, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {

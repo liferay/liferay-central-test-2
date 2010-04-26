@@ -26,6 +26,10 @@ public interface BlogsStatsUserFinder {
 	public int countByOrganizationIds(java.util.List<Long> organizationIds)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	public java.util.List<com.liferay.portlet.blogs.model.BlogsStatsUser> findAggregatedGroups(
+		long companyId, long groupId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public java.util.List<com.liferay.portlet.blogs.model.BlogsStatsUser> findByOrganizationId(
 		long organizationId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)

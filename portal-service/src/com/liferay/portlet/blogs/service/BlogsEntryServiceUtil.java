@@ -57,6 +57,14 @@ public class BlogsEntryServiceUtil {
 		getService().deleteEntry(entryId);
 	}
 
+	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> getAggregatedGroupEntries(
+		long companyId, long groupId, int status, int max)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .getAggregatedGroupEntries(companyId, groupId, status, max);
+	}
+
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> getCompanyEntries(
 		long companyId, int status, int max)
 		throws com.liferay.portal.kernel.exception.PortalException,

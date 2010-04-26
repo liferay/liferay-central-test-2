@@ -128,6 +128,13 @@ public class BlogsStatsUserLocalServiceUtil {
 		getService().deleteStatsUserByUserId(userId);
 	}
 
+	public static java.util.List<com.liferay.portlet.blogs.model.BlogsStatsUser> getAggregatedGroupEntries(
+		long companyId, long groupId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .getAggregatedGroupEntries(companyId, groupId, start, end);
+	}
+
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsStatsUser> getCompanyStatsUsers(
 		long companyId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {

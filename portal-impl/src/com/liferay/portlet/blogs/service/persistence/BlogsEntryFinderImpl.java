@@ -48,6 +48,9 @@ public class BlogsEntryFinderImpl
 	public static String COUNT_BY_ORGANIZATION_IDS =
 		BlogsEntryFinder.class.getName() + ".countByOrganizationIds";
 
+	public static String FIND_AGGREGATED_GROUPS =
+		BlogsEntryFinder.class.getName() + ".findAggregatedGroups";
+
 	public static String FIND_BY_ORGANIZATION_IDS =
 		BlogsEntryFinder.class.getName() + ".findByOrganizationIds";
 
@@ -119,6 +122,39 @@ public class BlogsEntryFinderImpl
 			}
 
 			return 0;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List<BlogsEntry> findAggregatedGroups(
+			long companyId, long groupId, int status, int start, int end)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = CustomSQLUtil.get(FIND_AGGREGATED_GROUPS);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity("BlogsEntry", BlogsEntryImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(status);
+			qPos.add(companyId);
+			qPos.add(groupId);
+			qPos.add(groupId);
+
+			return (List<BlogsEntry>)QueryUtil.list(
+				q, getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

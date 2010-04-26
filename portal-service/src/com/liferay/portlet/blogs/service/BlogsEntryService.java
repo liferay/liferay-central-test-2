@@ -61,6 +61,12 @@ public interface BlogsEntryService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> getAggregatedGroupEntries(
+		long companyId, long groupId, int status, int max)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> getCompanyEntries(
 		long companyId, int status, int max)
 		throws com.liferay.portal.kernel.exception.PortalException,

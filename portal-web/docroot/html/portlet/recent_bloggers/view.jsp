@@ -24,7 +24,7 @@ if (selectionMethod.equals("users")) {
 		statsUsers = BlogsStatsUserLocalServiceUtil.getOrganizationStatsUsers(organizationId, 0, max, new StatsUserLastPostDateComparator());
 	}
 	else {
-		statsUsers = BlogsStatsUserLocalServiceUtil.getCompanyStatsUsers(company.getCompanyId(), 0, max, new StatsUserLastPostDateComparator());
+		statsUsers = BlogsStatsUserLocalServiceUtil.getAggregatedGroupEntries(company.getCompanyId(), themeDisplay.getScopeGroupId(), 0, max);
 	}
 }
 else {

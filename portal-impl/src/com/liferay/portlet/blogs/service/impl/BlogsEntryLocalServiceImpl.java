@@ -271,6 +271,14 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		deleteEntry(entry);
 	}
 
+	public List<BlogsEntry> getAggregatedGroupEntries(
+			long companyId, long groupId, int status, int start, int end)
+		throws SystemException {
+
+		return blogsEntryFinder.findAggregatedGroups(
+			companyId, groupId, status, start, end);
+	}
+
 	public List<BlogsEntry> getCompanyEntries(
 			long companyId, int status, int start, int end)
 		throws SystemException {
