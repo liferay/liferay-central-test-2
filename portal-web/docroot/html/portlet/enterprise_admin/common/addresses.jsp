@@ -79,8 +79,8 @@ else {
 
 		Address address = addresses.get(i);
 
-		long countryId = BeanParamUtil.getLong(address, request, "addressCountryId" + addressesIndex);
-		long regionId = BeanParamUtil.getLong(address, request, "addressRegionId" + addressesIndex);
+		long countryId = ParamUtil.getLong(request, "addressCountryId" + addressesIndex, address.getCountryId());
+		long regionId = ParamUtil.getLong(request, "addressRegionId" + addressesIndex, address.getRegionId());
 	%>
 
 		<aui:model-context bean="<%= address %>" model="<%= Address.class %>" />
