@@ -175,7 +175,7 @@ List<String> primaryKeys = new ArrayList<String>();
 
 		<c:if test="<%= resultRows.isEmpty() && (emptyResultsMessage != null) %>">
 			<tr class="portlet-section-body results-row last">
-				<td align="center" class="only" colspan="<%= (headerNames == null) ? 1 : headerNames.size() %>">
+				<td class="align-center only" colspan="<%= (headerNames == null) ? 1 : headerNames.size() %>">
 					<%= LanguageUtil.get(pageContext, emptyResultsMessage) %>
 				</td>
 			</tr>
@@ -260,7 +260,7 @@ List<String> primaryKeys = new ArrayList<String>();
 				}
 			%>
 
-				<td align="<%= entry.getAlign() %>" class="col-<%= j + 1 %><%= row.isBold() ? " taglib-search-iterator-highlighted" : "" %><%= columnClassName %>" colspan="<%= entry.getColspan() %>" headers="<%= randomId %>_col-<%= j + 1 %>" valign="<%= entry.getValign() %>">
+				<td class="align-<%= entry.getAlign() %> col-<%= j + 1 %><%= row.isBold() ? " taglib-search-iterator-highlighted" : "" %><%= columnClassName %> valign-<%= entry.getValign() %>" colspan="<%= entry.getColspan() %>" headers="<%= randomId %>_col-<%= j + 1 %>">
 
 					<%
 					entry.print(pageContext);
