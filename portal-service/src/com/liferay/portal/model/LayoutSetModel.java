@@ -107,14 +107,14 @@ public interface LayoutSetModel extends BaseModel<LayoutSet> {
 
 	public void setVirtualHost(String virtualHost);
 
-	public long getLayoutSetPrototypeId();
-
-	public void setLayoutSetPrototypeId(long layoutSetPrototypeId);
-
 	@AutoEscape
 	public String getSettings();
 
 	public void setSettings(String settings);
+
+	public long getLayoutSetPrototypeId();
+
+	public void setLayoutSetPrototypeId(long layoutSetPrototypeId);
 
 	public LayoutSet toEscapedModel();
 

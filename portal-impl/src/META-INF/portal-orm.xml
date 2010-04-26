@@ -288,10 +288,10 @@
 			<basic name="css" />
 			<basic name="pageCount" />
 			<basic name="virtualHost" />
-			<basic name="layoutSetPrototypeId" />
 			<basic name="settings">
 				<column name="SETTINGS_" />
 			</basic>
+			<basic name="layoutSetPrototypeId" />
 			<transient name="primaryKey" />
 		</attributes>
 	</mapped-superclass>

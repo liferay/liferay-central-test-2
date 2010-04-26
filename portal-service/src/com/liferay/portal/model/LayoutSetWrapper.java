@@ -156,20 +156,20 @@ public class LayoutSetWrapper implements LayoutSet {
 		_layoutSet.setVirtualHost(virtualHost);
 	}
 
-	public long getLayoutSetPrototypeId() {
-		return _layoutSet.getLayoutSetPrototypeId();
-	}
-
-	public void setLayoutSetPrototypeId(long layoutSetPrototypeId) {
-		_layoutSet.setLayoutSetPrototypeId(layoutSetPrototypeId);
-	}
-
 	public java.lang.String getSettings() {
 		return _layoutSet.getSettings();
 	}
 
 	public void setSettings(java.lang.String settings) {
 		_layoutSet.setSettings(settings);
+	}
+
+	public long getLayoutSetPrototypeId() {
+		return _layoutSet.getLayoutSetPrototypeId();
+	}
+
+	public void setLayoutSetPrototypeId(long layoutSetPrototypeId) {
+		_layoutSet.setLayoutSetPrototypeId(layoutSetPrototypeId);
 	}
 
 	public com.liferay.portal.model.LayoutSet toEscapedModel() {

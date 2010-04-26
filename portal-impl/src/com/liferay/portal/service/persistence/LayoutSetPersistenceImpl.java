@@ -329,8 +329,8 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl<LayoutSet>
 		layoutSetImpl.setCss(layoutSet.getCss());
 		layoutSetImpl.setPageCount(layoutSet.getPageCount());
 		layoutSetImpl.setVirtualHost(layoutSet.getVirtualHost());
-		layoutSetImpl.setLayoutSetPrototypeId(layoutSet.getLayoutSetPrototypeId());
 		layoutSetImpl.setSettings(layoutSet.getSettings());
+		layoutSetImpl.setLayoutSetPrototypeId(layoutSet.getLayoutSetPrototypeId());
 
 		return layoutSetImpl;
 	}
