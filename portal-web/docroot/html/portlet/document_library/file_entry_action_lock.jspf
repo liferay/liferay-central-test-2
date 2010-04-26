@@ -28,7 +28,7 @@
 			<liferay-ui:icon image="lock" url="<%= lockURL %>" />
 		</c:when>
 		<c:otherwise>
-			<c:if test="<%= fileEntry.hasLock(user.getUserId()) || permissionChecker.isCompanyAdmin() || permissionChecker.isCommunityAdmin(fileEntry.getGroupId()) %>">
+			<c:if test="<%= fileEntry.hasLock(user.getUserId()) || permissionChecker.isCommunityAdmin(fileEntry.getGroupId()) %>">
 				<portlet:actionURL var ="unlockURL">
 					<portlet:param name="struts_action" value="/document_library/edit_file_entry" />
 					<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.UNLOCK %>" />
