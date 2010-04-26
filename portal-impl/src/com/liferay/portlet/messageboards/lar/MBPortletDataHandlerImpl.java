@@ -121,6 +121,15 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 					category);
 			}
 
+			List<MBMessage> messages = MBMessageUtil.findByG_C(
+				context.getGroupId(),
+				MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID);
+
+			for (MBMessage message : messages) {
+				exportMessage(
+					context, categoriesEl, messagesEl, messageFlagsEl, message);
+			}
+
 			if (context.getBooleanParameter(_NAMESPACE, "user-bans")) {
 				List<MBBan> bans = MBBanUtil.findByGroupId(
 					context.getGroupId());
