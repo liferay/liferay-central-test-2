@@ -15,27 +15,30 @@
 %>
 
 <c:if test="<%= DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.UPDATE) %>">
-	<c:if test="<%= !fileEntry.isLocked() %>">
-		<portlet:actionURL var ="lockURL">
-			<portlet:param name="struts_action" value="/document_library/edit_file_entry" />
-			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.LOCK %>" />
-			<portlet:param name="redirect" value="<%= currentURL %>" />
-			<portlet:param name="folderId" value="<%= String.valueOf(fileEntry.getFolderId()) %>" />
-			<portlet:param name="name" value="<%= HtmlUtil.unescape(fileEntry.getName()) %>" />
-		</portlet:actionURL>
+	<c:choose>
+		<c:when test="<%= !fileEntry.isLocked() %>">
+			<portlet:actionURL var ="lockURL">
+				<portlet:param name="struts_action" value="/document_library/edit_file_entry" />
+				<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.LOCK %>" />
+				<portlet:param name="redirect" value="<%= currentURL %>" />
+				<portlet:param name="folderId" value="<%= String.valueOf(fileEntry.getFolderId()) %>" />
+				<portlet:param name="name" value="<%= HtmlUtil.unescape(fileEntry.getName()) %>" />
+			</portlet:actionURL>
 
-		<liferay-ui:icon image="lock" url="<%= lockURL %>" />
-	</c:if>
+			<liferay-ui:icon image="lock" url="<%= lockURL %>" />
+		</c:when>
+		<c:otherwise>
+			<c:if test="<%= fileEntry.hasLock(user.getUserId()) || permissionChecker.isCompanyAdmin() || permissionChecker.isCommunityAdmin(fileEntry.getGroupId()) %>">
+				<portlet:actionURL var ="unlockURL">
+					<portlet:param name="struts_action" value="/document_library/edit_file_entry" />
+					<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.UNLOCK %>" />
+					<portlet:param name="redirect" value="<%= currentURL %>" />
+					<portlet:param name="folderId" value="<%= String.valueOf(fileEntry.getFolderId()) %>" />
+					<portlet:param name="name" value="<%= HtmlUtil.unescape(fileEntry.getName()) %>" />
+				</portlet:actionURL>
 
-	<c:if test="<%= fileEntry.hasLock(user.getUserId()) %>">
-		<portlet:actionURL var ="unlockURL">
-			<portlet:param name="struts_action" value="/document_library/edit_file_entry" />
-			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.UNLOCK %>" />
-			<portlet:param name="redirect" value="<%= currentURL %>" />
-			<portlet:param name="folderId" value="<%= String.valueOf(fileEntry.getFolderId()) %>" />
-			<portlet:param name="name" value="<%= HtmlUtil.unescape(fileEntry.getName()) %>" />
-		</portlet:actionURL>
-
-		<liferay-ui:icon image="unlock" url="<%= unlockURL %>" />
-	</c:if>
+				<liferay-ui:icon image="unlock" url="<%= unlockURL %>" />
+			</c:if>
+		</c:otherwise>
+	</c:choose>
 </c:if>
