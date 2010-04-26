@@ -745,10 +745,16 @@ public class StringUtil {
 	public static String replace(
 		String s, String begin, String end, Map<String, String> values) {
 
+		return replaceToStringBundler(s, begin, end, values).toString();
+	}
+
+	public static StringBundler replaceToStringBundler(
+		String s, String begin, String end, Map<String, String> values) {
+
 		if ((s == null) || (begin == null) || (end == null) ||
 			(values == null) || (values.size() == 0)) {
 
-			return s;
+			return new StringBundler(s);
 		}
 
 		StringBundler sb = new StringBundler(values.size() * 2 + 1);
@@ -781,7 +787,7 @@ public class StringUtil {
 			}
 		}
 
-		return sb.toString();
+		return sb;
 	}
 
 	public static String replace(String s, String[] oldSubs, String[] newSubs) {

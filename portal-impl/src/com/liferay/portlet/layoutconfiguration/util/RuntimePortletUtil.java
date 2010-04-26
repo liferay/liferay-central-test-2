@@ -18,9 +18,11 @@ import com.liferay.portal.kernel.io.unsync.UnsyncStringWriter;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.PipingServletResponse;
+import com.liferay.portal.kernel.servlet.SkipCacheJspWriterWrapper;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.MethodInvoker;
 import com.liferay.portal.kernel.util.MethodWrapper;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -47,6 +49,7 @@ import javax.portlet.RenderResponse;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.PageContext;
 
 /**
@@ -169,26 +172,27 @@ public class RuntimePortletUtil {
 		}
 	}
 
-	public static String processTemplate(
+	public static void processTemplate(
 			ServletContext servletContext, HttpServletRequest request,
 			HttpServletResponse response, PageContext pageContext,
-			String velocityTemplateId, String velocityTemplateContent)
+			String velocityTemplateId, String velocityTemplateContent,
+			JspWriter outputWriter)
 		throws Exception {
 
-		return processTemplate(
+		processTemplate(
 			servletContext, request, response, pageContext, null,
-			velocityTemplateId, velocityTemplateContent);
+			velocityTemplateId, velocityTemplateContent, outputWriter);
 	}
 
-	public static String processTemplate(
+	public static void processTemplate(
 			ServletContext servletContext, HttpServletRequest request,
 			HttpServletResponse response, PageContext pageContext,
 			String portletId, String velocityTemplateId,
-			String velocityTemplateContent)
+			String velocityTemplateContent, JspWriter outputWriter)
 		throws Exception {
 
 		if (Validator.isNull(velocityTemplateContent)) {
-			return StringPool.BLANK;
+			return;
 		}
 
 		TemplateProcessor processor = new TemplateProcessor(
@@ -254,8 +258,9 @@ public class RuntimePortletUtil {
 			contentsMap.put(portlet.getPortletId(), content);
 		}
 
-		return StringUtil.replace(
+		StringBundler content = StringUtil.replaceToStringBundler(
 			output, "[$TEMPLATE_PORTLET_", "$]", contentsMap);
+		content.writeTo(new SkipCacheJspWriterWrapper(outputWriter));
 	}
 
 	public static String processXML(
