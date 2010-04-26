@@ -52,6 +52,13 @@ public class LayoutSetServiceWrapper implements LayoutSetService {
 			themeId, colorSchemeId, css, wapTheme);
 	}
 
+	public com.liferay.portal.model.LayoutSet updateSettings(long groupId,
+		boolean privateLayout, java.lang.String settings)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _layoutSetService.updateSettings(groupId, privateLayout, settings);
+	}
+
 	public com.liferay.portal.model.LayoutSet updateVirtualHost(long groupId,
 		boolean privateLayout, java.lang.String virtualHost)
 		throws com.liferay.portal.kernel.exception.PortalException,

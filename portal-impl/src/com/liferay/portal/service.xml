@@ -577,6 +577,7 @@
 		<column name="pageCount" type="int" />
 		<column name="virtualHost" type="String" />
 		<column name="layoutSetPrototypeId" type="long" />
+		<column name="settings" type="String" />
 
 		<!-- Finder methods -->
 

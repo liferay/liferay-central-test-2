@@ -111,6 +111,11 @@ public interface LayoutSetModel extends BaseModel<LayoutSet> {
 
 	public void setLayoutSetPrototypeId(long layoutSetPrototypeId);
 
+	@AutoEscape
+	public String getSettings();
+
+	public void setSettings(String settings);
+
 	public LayoutSet toEscapedModel();
 
 	public boolean isNew();

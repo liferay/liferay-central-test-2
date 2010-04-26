@@ -54,6 +54,7 @@ public class LayoutSetSoap implements Serializable {
 		soapModel.setPageCount(model.getPageCount());
 		soapModel.setVirtualHost(model.getVirtualHost());
 		soapModel.setLayoutSetPrototypeId(model.getLayoutSetPrototypeId());
+		soapModel.setSettings(model.getSettings());
 
 		return soapModel;
 	}
@@ -226,6 +227,14 @@ public class LayoutSetSoap implements Serializable {
 		_layoutSetPrototypeId = layoutSetPrototypeId;
 	}
 
+	public String getSettings() {
+		return _settings;
+	}
+
+	public void setSettings(String settings) {
+		_settings = settings;
+	}
+
 	private long _layoutSetId;
 	private long _groupId;
 	private long _companyId;
@@ -240,4 +249,5 @@ public class LayoutSetSoap implements Serializable {
 	private int _pageCount;
 	private String _virtualHost;
 	private long _layoutSetPrototypeId;
+	private String _settings;
 }

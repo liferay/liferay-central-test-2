@@ -354,6 +354,7 @@
 		<property name="pageCount" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="virtualHost" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="layoutSetPrototypeId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="settings" column="settings_" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 	<class name="com.liferay.portal.model.impl.LayoutSetPrototypeImpl" table="LayoutSetPrototype">
 		<cache usage="read-write" />

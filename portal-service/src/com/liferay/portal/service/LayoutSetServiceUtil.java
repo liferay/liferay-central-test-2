@@ -54,6 +54,13 @@ public class LayoutSetServiceUtil {
 			colorSchemeId, css, wapTheme);
 	}
 
+	public static com.liferay.portal.model.LayoutSet updateSettings(
+		long groupId, boolean privateLayout, java.lang.String settings)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().updateSettings(groupId, privateLayout, settings);
+	}
+
 	public static com.liferay.portal.model.LayoutSet updateVirtualHost(
 		long groupId, boolean privateLayout, java.lang.String virtualHost)
 		throws com.liferay.portal.kernel.exception.PortalException,

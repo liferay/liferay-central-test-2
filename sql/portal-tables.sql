@@ -752,7 +752,8 @@ create table LayoutSet (
 	css STRING null,
 	pageCount INTEGER,
 	virtualHost VARCHAR(75) null,
-	layoutSetPrototypeId LONG
+	layoutSetPrototypeId LONG,
+	settings_ VARCHAR(75) null
 );
 
 create table LayoutSetPrototype (

@@ -179,6 +179,14 @@ public class LayoutSetLocalServiceWrapper implements LayoutSetLocalService {
 		return _layoutSetLocalService.updatePageCount(groupId, privateLayout);
 	}
 
+	public com.liferay.portal.model.LayoutSet updateSettings(long groupId,
+		boolean privateLayout, java.lang.String settings)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _layoutSetLocalService.updateSettings(groupId, privateLayout,
+			settings);
+	}
+
 	public com.liferay.portal.model.LayoutSet updateVirtualHost(long groupId,
 		boolean privateLayout, java.lang.String virtualHost)
 		throws com.liferay.portal.kernel.exception.PortalException,

@@ -88,6 +88,22 @@ public class LayoutSetServiceSoap {
 		}
 	}
 
+	public static com.liferay.portal.model.LayoutSetSoap updateSettings(
+		long groupId, boolean privateLayout, java.lang.String settings)
+		throws RemoteException {
+		try {
+			com.liferay.portal.model.LayoutSet returnValue = LayoutSetServiceUtil.updateSettings(groupId,
+					privateLayout, settings);
+
+			return com.liferay.portal.model.LayoutSetSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.portal.model.LayoutSetSoap updateVirtualHost(
 		long groupId, boolean privateLayout, java.lang.String virtualHost)
 		throws RemoteException {

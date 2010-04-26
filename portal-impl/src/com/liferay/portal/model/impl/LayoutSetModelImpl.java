@@ -69,9 +69,10 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet> {
 			{ "css", new Integer(Types.VARCHAR) },
 			{ "pageCount", new Integer(Types.INTEGER) },
 			{ "virtualHost", new Integer(Types.VARCHAR) },
-			{ "layoutSetPrototypeId", new Integer(Types.BIGINT) }
+			{ "layoutSetPrototypeId", new Integer(Types.BIGINT) },
+			{ "settings_", new Integer(Types.VARCHAR) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table LayoutSet (layoutSetId LONG not null primary key,groupId LONG,companyId LONG,privateLayout BOOLEAN,logo BOOLEAN,logoId LONG,themeId VARCHAR(75) null,colorSchemeId VARCHAR(75) null,wapThemeId VARCHAR(75) null,wapColorSchemeId VARCHAR(75) null,css STRING null,pageCount INTEGER,virtualHost VARCHAR(75) null,layoutSetPrototypeId LONG)";
+	public static final String TABLE_SQL_CREATE = "create table LayoutSet (layoutSetId LONG not null primary key,groupId LONG,companyId LONG,privateLayout BOOLEAN,logo BOOLEAN,logoId LONG,themeId VARCHAR(75) null,colorSchemeId VARCHAR(75) null,wapThemeId VARCHAR(75) null,wapColorSchemeId VARCHAR(75) null,css STRING null,pageCount INTEGER,virtualHost VARCHAR(75) null,layoutSetPrototypeId LONG,settings_ VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table LayoutSet";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -100,6 +101,7 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet> {
 		model.setPageCount(soapModel.getPageCount());
 		model.setVirtualHost(soapModel.getVirtualHost());
 		model.setLayoutSetPrototypeId(soapModel.getLayoutSetPrototypeId());
+		model.setSettings(soapModel.getSettings());
 
 		return model;
 	}
@@ -310,6 +312,19 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet> {
 		_layoutSetPrototypeId = layoutSetPrototypeId;
 	}
 
+	public String getSettings() {
+		if (_settings == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _settings;
+		}
+	}
+
+	public void setSettings(String settings) {
+		_settings = settings;
+	}
+
 	public LayoutSet toEscapedModel() {
 		if (isEscapedModel()) {
 			return (LayoutSet)this;
@@ -350,6 +365,7 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet> {
 		clone.setPageCount(getPageCount());
 		clone.setVirtualHost(getVirtualHost());
 		clone.setLayoutSetPrototypeId(getLayoutSetPrototypeId());
+		clone.setSettings(getSettings());
 
 		return clone;
 	}
@@ -397,7 +413,7 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet> {
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(29);
+		StringBundler sb = new StringBundler(31);
 
 		sb.append("{layoutSetId=");
 		sb.append(getLayoutSetId());
@@ -427,13 +443,15 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet> {
 		sb.append(getVirtualHost());
 		sb.append(", layoutSetPrototypeId=");
 		sb.append(getLayoutSetPrototypeId());
+		sb.append(", settings=");
+		sb.append(getSettings());
 		sb.append("}");
 
 		return sb.toString();
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(46);
+		StringBundler sb = new StringBundler(49);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portal.model.LayoutSet");
@@ -495,6 +513,10 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet> {
 			"<column><column-name>layoutSetPrototypeId</column-name><column-value><![CDATA[");
 		sb.append(getLayoutSetPrototypeId());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>settings</column-name><column-value><![CDATA[");
+		sb.append(getSettings());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -520,5 +542,6 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet> {
 	private String _virtualHost;
 	private String _originalVirtualHost;
 	private long _layoutSetPrototypeId;
+	private String _settings;
 	private transient ExpandoBridge _expandoBridge;
 }

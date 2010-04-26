@@ -289,6 +289,9 @@
 			<basic name="pageCount" />
 			<basic name="virtualHost" />
 			<basic name="layoutSetPrototypeId" />
+			<basic name="settings">
+				<column name="SETTINGS_" />
+			</basic>
 			<transient name="primaryKey" />
 		</attributes>
 	</mapped-superclass>
@@ -2580,7 +2583,9 @@
 	</entity>
 	<entity class="com.liferay.portal.model.impl.LayoutSetImpl" name="LayoutSet">
 		<table name="LayoutSet" />
-		<attributes />
+		<attributes>
+			<transient name="settingsProperties" />
+		</attributes>
 	</entity>
 	<entity class="com.liferay.portal.model.impl.LayoutSetPrototypeImpl" name="LayoutSetPrototype">
 		<table name="LayoutSetPrototype" />

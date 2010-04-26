@@ -116,6 +116,7 @@ Liferay.Service.registerClass(
 	Liferay.Service.Portal, "LayoutSet",
 	{
 		updateLookAndFeel: true,
+		updateSettings: true,
 		updateVirtualHost: true
 	}
 );

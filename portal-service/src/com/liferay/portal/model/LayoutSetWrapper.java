@@ -164,6 +164,14 @@ public class LayoutSetWrapper implements LayoutSet {
 		_layoutSet.setLayoutSetPrototypeId(layoutSetPrototypeId);
 	}
 
+	public java.lang.String getSettings() {
+		return _layoutSet.getSettings();
+	}
+
+	public void setSettings(java.lang.String settings) {
+		_layoutSet.setSettings(settings);
+	}
+
 	public com.liferay.portal.model.LayoutSet toEscapedModel() {
 		return _layoutSet.toEscapedModel();
 	}
@@ -241,6 +249,14 @@ public class LayoutSetWrapper implements LayoutSet {
 		return _layoutSet.getGroup();
 	}
 
+	public com.liferay.portal.kernel.util.UnicodeProperties getSettingsProperties() {
+		return _layoutSet.getSettingsProperties();
+	}
+
+	public java.lang.String getSettingsProperty(java.lang.String key) {
+		return _layoutSet.getSettingsProperty(key);
+	}
+
 	public com.liferay.portal.model.Theme getWapTheme()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _layoutSet.getWapTheme();
@@ -249,6 +265,11 @@ public class LayoutSetWrapper implements LayoutSet {
 	public com.liferay.portal.model.ColorScheme getWapColorScheme()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _layoutSet.getWapColorScheme();
+	}
+
+	public void setSettingsProperties(
+		com.liferay.portal.kernel.util.UnicodeProperties settingsProperties) {
+		_layoutSet.setSettingsProperties(settingsProperties);
 	}
 
 	public LayoutSet getWrappedLayoutSet() {

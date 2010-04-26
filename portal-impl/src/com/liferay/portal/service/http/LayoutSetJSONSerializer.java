@@ -55,6 +55,7 @@ public class LayoutSetJSONSerializer {
 		jsonObj.put("pageCount", model.getPageCount());
 		jsonObj.put("virtualHost", model.getVirtualHost());
 		jsonObj.put("layoutSetPrototypeId", model.getLayoutSetPrototypeId());
+		jsonObj.put("settings", model.getSettings());
 
 		return jsonObj;
 	}
