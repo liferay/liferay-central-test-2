@@ -22,8 +22,6 @@ long classPK = -1;
 
 String[] distributionScopeArray = StringUtil.split(distributionScope);
 
-PortletURL distributionURL = PortletURLUtil.clone(portletURL, renderResponse);
-
 if (distributionScopeArray.length == 2) {
 	classNameId = GetterUtil.getLong(distributionScopeArray[0]);
 	classPK = GetterUtil.getLong(distributionScopeArray[1]);
@@ -51,7 +49,9 @@ if ((classNameId == 0) && (classPK == 0) && !permissionChecker.isOmniadmin()) {
 		<div class="separator"><!-- --></div>
 
 		<%
-		portletURL.setParameter("distributionScope", distributionScope);
+		PortletURL iteratorURL = PortletURLUtil.clone(portletURL, renderResponse);
+
+		iteratorURL.setParameter("distributionScope", distributionScope);
 
 		List<String> headerNames = new ArrayList<String>();
 
@@ -62,7 +62,7 @@ if ((classNameId == 0) && (classPK == 0) && !permissionChecker.isOmniadmin()) {
 		headerNames.add("expiration-date");
 		headerNames.add(StringPool.BLANK);
 
-		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, "no-entries-were-found");
+		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, iteratorURL, headerNames, "no-entries-were-found");
 
 		int total = AnnouncementsEntryLocalServiceUtil.getEntriesCount(classNameId, classPK, portletName.equals(PortletKeys.ALERTS));
 
@@ -127,7 +127,7 @@ if ((classNameId == 0) && (classPK == 0) && !permissionChecker.isOmniadmin()) {
 	}
 
 	function <portlet:namespace />selectDistributionScope(distributionScope) {
-		var url = "<%= distributionURL.toString() %>&<portlet:namespace />distributionScope=" + distributionScope;
+		var url = "<%= portletURL.toString() %>&<portlet:namespace />distributionScope=" + distributionScope;
 		submitForm(document.<portlet:namespace />fm, url);
 	}
 </aui:script>
