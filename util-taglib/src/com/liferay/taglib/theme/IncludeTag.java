@@ -49,8 +49,8 @@ public class IncludeTag extends com.liferay.taglib.util.IncludeTag {
 				WebKeys.THEME_DISPLAY);
 
 			String tilesTitle = (String)componentContext.getAttribute("title");
-			String tilesContent =
-				(String)componentContext.getAttribute("content");
+			String tilesContent = (String)componentContext.getAttribute(
+				"content");
 			boolean tilesSelectable = GetterUtil.getBoolean(
 				(String)componentContext.getAttribute("selectable"));
 
