@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.kernel.velocity.VelocityContext;
 import com.liferay.portal.kernel.velocity.VelocityEngineUtil;
 import com.liferay.portal.model.Theme;
-import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.velocity.VelocityContextPool;
 import com.liferay.portal.velocity.VelocityVariables;
 
@@ -44,9 +43,6 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.PageContext;
-
-import org.apache.struts.taglib.tiles.ComponentConstants;
-import org.apache.struts.tiles.ComponentContext;
 
 /**
  * <a href="ThemeUtil.java.html"><b><i>View Source</i></b></a>
@@ -194,18 +190,6 @@ public class ThemeUtil {
 			HttpServletResponse response, String path, Theme theme)
 		throws Exception {
 
-		String tilesTitle = _getTilesVariables(request, "title");
-		String tilesContent = _getTilesVariables(request, "content");
-		boolean tilesSelectable = GetterUtil.getBoolean(
-			_getTilesVariables(request, "selectable"));
-
-		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		themeDisplay.setTilesTitle(tilesTitle);
-		themeDisplay.setTilesContent(tilesContent);
-		themeDisplay.setTilesSelectable(tilesSelectable);
-
 		if (theme.isWARFile()) {
 			ServletContext themeServletContext = servletContext.getContext(
 				theme.getContextPath());
@@ -331,22 +315,6 @@ public class ThemeUtil {
 		else {
 			return ((UnsyncStringWriter)writer).toString();
 		}
-	}
-
-	private static String _getTilesVariables(
-		HttpServletRequest request, String attributeName) {
-
-		ComponentContext componentContext =
-			(ComponentContext)request.getAttribute(
-				ComponentConstants.COMPONENT_CONTEXT);
-
-		String value = null;
-
-		if (componentContext != null) {
-			value = (String)componentContext.getAttribute(attributeName);
-		}
-
-		return value;
 	}
 
 	private static final String _TEMPLATE_EXTENSION_FTL = "ftl";

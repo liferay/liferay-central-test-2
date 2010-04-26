@@ -465,18 +465,11 @@ public class VelocityVariables {
 
 		// Tiles attributes
 
-		String tilesTitle = _insertTilesVariables(
-			velocityContext, request, "tilesTitle", "title");
-		String tilesContent = _insertTilesVariables(
+		_insertTilesVariables(velocityContext, request, "tilesTitle", "title");
+		_insertTilesVariables(
 			velocityContext, request, "tilesContent", "content");
-		boolean tilesSelectable = GetterUtil.getBoolean(_insertTilesVariables(
-			velocityContext, request, "tilesSelectable", "selectable"));
-
-		if (themeDisplay != null) {
-			themeDisplay.setTilesTitle(tilesTitle);
-			themeDisplay.setTilesContent(tilesContent);
-			themeDisplay.setTilesSelectable(tilesSelectable);
-		}
+		_insertTilesVariables(
+			velocityContext, request, "tilesSelectable", "selectable");
 
 		// Page title and subtitle
 
@@ -511,7 +504,7 @@ public class VelocityVariables {
 		}
 	}
 
-	private static String _insertTilesVariables(
+	private static void _insertTilesVariables(
 		VelocityContext velocityContext, HttpServletRequest request,
 		String attributeId, String attributeName) {
 
@@ -519,17 +512,13 @@ public class VelocityVariables {
 			(ComponentContext)request.getAttribute(
 				ComponentConstants.COMPONENT_CONTEXT);
 
-		String value = null;
-
 		if (componentContext != null) {
-			value = (String)componentContext.getAttribute(attributeName);
+			String value = (String)componentContext.getAttribute(attributeName);
 
 			if (value != null) {
 				velocityContext.put(attributeId, value);
 			}
 		}
-
-		return value;
 	}
 
 }

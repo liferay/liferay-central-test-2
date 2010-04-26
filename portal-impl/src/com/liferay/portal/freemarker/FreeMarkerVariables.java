@@ -427,18 +427,12 @@ public class FreeMarkerVariables {
 
 		// Tiles attributes
 
-		String tilesTitle = _insertTilesVariables(
+		_insertTilesVariables(
 			freeMarkerContext, request, "tilesTitle", "title");
-		String tilesContent = _insertTilesVariables(
+		_insertTilesVariables(
 			freeMarkerContext, request, "tilesContent", "content");
-		boolean tilesSelectable = GetterUtil.getBoolean(_insertTilesVariables(
-			freeMarkerContext, request, "tilesSelectable", "selectable"));
-
-		if (themeDisplay != null) {
-			themeDisplay.setTilesTitle(tilesTitle);
-			themeDisplay.setTilesContent(tilesContent);
-			themeDisplay.setTilesSelectable(tilesSelectable);
-		}
+		_insertTilesVariables(
+			freeMarkerContext, request, "tilesSelectable", "selectable");
 
 		// Page title and subtitle
 
@@ -478,7 +472,7 @@ public class FreeMarkerVariables {
 		}
 	}
 
-	private static String _insertTilesVariables(
+	private static void _insertTilesVariables(
 		FreeMarkerContext freeMarkerContext, HttpServletRequest request,
 		String attributeId, String attributeName) {
 
@@ -486,17 +480,13 @@ public class FreeMarkerVariables {
 			(ComponentContext)request.getAttribute(
 				ComponentConstants.COMPONENT_CONTEXT);
 
-		String value = null;
-
 		if (componentContext != null) {
-			value = (String)componentContext.getAttribute(attributeName);
+			String value = (String)componentContext.getAttribute(attributeName);
 
 			if (value != null) {
 				freeMarkerContext.put(attributeId, value);
 			}
 		}
-
-		return value;
 	}
 
 }
