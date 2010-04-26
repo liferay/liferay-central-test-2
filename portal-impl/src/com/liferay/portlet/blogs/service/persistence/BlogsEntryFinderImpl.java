@@ -48,8 +48,8 @@ public class BlogsEntryFinderImpl
 	public static String COUNT_BY_ORGANIZATION_IDS =
 		BlogsEntryFinder.class.getName() + ".countByOrganizationIds";
 
-	public static String FIND_AGGREGATED_GROUPS =
-		BlogsEntryFinder.class.getName() + ".findAggregatedGroups";
+	public static String FIND_BY_GROUP_IDS =
+		BlogsEntryFinder.class.getName() + ".findByGroupIds";
 
 	public static String FIND_BY_ORGANIZATION_IDS =
 		BlogsEntryFinder.class.getName() + ".findByOrganizationIds";
@@ -131,7 +131,7 @@ public class BlogsEntryFinderImpl
 		}
 	}
 
-	public List<BlogsEntry> findAggregatedGroups(
+	public List<BlogsEntry> findByGroupIds(
 			long companyId, long groupId, int status, int start, int end)
 		throws SystemException {
 
@@ -140,7 +140,15 @@ public class BlogsEntryFinderImpl
 		try {
 			session = openSession();
 
-			String sql = CustomSQLUtil.get(FIND_AGGREGATED_GROUPS);
+			String sql = CustomSQLUtil.get(FIND_BY_GROUP_IDS);
+
+			if (status != StatusConstants.ANY) {
+				sql = StringUtil.replace(
+					sql, "[$STATUS$]", "AND (BlogsEntry.status = ?)");
+			}
+			else {
+				sql = StringUtil.replace(sql, "[$STATUS$]", StringPool.BLANK);
+			}
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -148,10 +156,13 @@ public class BlogsEntryFinderImpl
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
-			qPos.add(status);
 			qPos.add(companyId);
 			qPos.add(groupId);
 			qPos.add(groupId);
+
+			if (status != StatusConstants.ANY) {
+				qPos.add(status);
+			}
 
 			return (List<BlogsEntry>)QueryUtil.list(
 				q, getDialect(), start, end);

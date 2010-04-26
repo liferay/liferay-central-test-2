@@ -32,11 +32,11 @@ if (selectionMethod.equals("users")) {
 		entries = BlogsEntryServiceUtil.getOrganizationEntries(organizationId, StatusConstants.APPROVED, max);
 	}
 	else {
-		entries = BlogsEntryServiceUtil.getAggregatedGroupEntries(company.getCompanyId(), scopeGroupId, StatusConstants.APPROVED, max);
+		entries = BlogsEntryServiceUtil.getGroupsEntries(company.getCompanyId(), scopeGroupId, StatusConstants.APPROVED, max);
 	}
 }
 else {
-	entries = BlogsEntryServiceUtil.getGroupEntries(themeDisplay.getScopeGroupId(), StatusConstants.APPROVED, max);
+	entries = BlogsEntryServiceUtil.getGroupEntries(scopeGroupId, StatusConstants.APPROVED, max);
 }
 
 int total = entries.size();

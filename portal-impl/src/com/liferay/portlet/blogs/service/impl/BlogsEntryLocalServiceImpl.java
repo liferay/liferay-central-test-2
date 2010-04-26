@@ -271,14 +271,6 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		deleteEntry(entry);
 	}
 
-	public List<BlogsEntry> getAggregatedGroupEntries(
-			long companyId, long groupId, int status, int start, int end)
-		throws SystemException {
-
-		return blogsEntryFinder.findAggregatedGroups(
-			companyId, groupId, status, start, end);
-	}
-
 	public List<BlogsEntry> getCompanyEntries(
 			long companyId, int status, int start, int end)
 		throws SystemException {
@@ -381,6 +373,14 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			return blogsEntryPersistence.countByG_D_S(
 				groupId, new Date(), status);
 		}
+	}
+
+	public List<BlogsEntry> getGroupsEntries(
+			long companyId, long groupId, int status, int start, int end)
+		throws SystemException {
+
+		return blogsEntryFinder.findByGroupIds(
+			companyId, groupId, status, start, end);
 	}
 
 	public List<BlogsEntry> getGroupUserEntries(

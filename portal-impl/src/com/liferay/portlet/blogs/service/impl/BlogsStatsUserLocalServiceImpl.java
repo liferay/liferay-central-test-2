@@ -47,14 +47,6 @@ public class BlogsStatsUserLocalServiceImpl
 		blogsStatsUserPersistence.removeByUserId(userId);
 	}
 
-	public List<BlogsStatsUser> getAggregatedGroupEntries(
-			long companyId, long groupId, int start, int end)
-		throws SystemException {
-
-		return blogsStatsUserFinder.findAggregatedGroups(
-			companyId, groupId, start, end);
-	}
-
 	public List<BlogsStatsUser> getCompanyStatsUsers(
 			long companyId, int start, int end)
 		throws SystemException {
@@ -75,6 +67,14 @@ public class BlogsStatsUserLocalServiceImpl
 		throws SystemException {
 
 		return blogsStatsUserPersistence.countByC_E(companyId, 0);
+	}
+
+	public List<BlogsStatsUser> getGroupsEntries(
+			long companyId, long groupId, int start, int end)
+		throws SystemException {
+
+		return blogsStatsUserFinder.findByGroupIds(
+			companyId, groupId, start, end);
 	}
 
 	public List<BlogsStatsUser> getGroupStatsUsers(

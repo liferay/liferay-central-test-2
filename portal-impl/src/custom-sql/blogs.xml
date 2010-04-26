@@ -19,7 +19,7 @@
 				[$STATUS$]
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.blogs.service.persistence.BlogsEntryFinder.findAggregatedGroups">
+	<sql id="com.liferay.portlet.blogs.service.persistence.BlogsEntryFinder.findByGroupIds">
 		<![CDATA[
 			SELECT
 				{BlogsEntry.*}
@@ -27,20 +27,26 @@
 				BlogsEntry
 			INNER JOIN
 				Group_ ON
-					(BlogsEntry.groupId = Group_.groupId)
+					(Group_.groupId = BlogsEntry.groupId)
 			WHERE
-				(BlogsEntry.status = ?) AND
-				(Group_.companyId = ?) AND
-				((Group_.groupId = ?) OR
-					((Group_.liveGroupId = 0) AND
-					(Group_.groupId NOT IN(
-						SELECT
-							liveGroupId
-						FROM
-							Group_
-						WHERE
-							groupId = ?
-					))))
+				(
+					(Group_.companyId = ?) AND
+					(Group_.groupId = ?) OR
+					(
+						(Group_.liveGroupId = 0) AND
+						(
+							Group_.groupId NOT IN(
+								SELECT
+									liveGroupId
+								FROM
+									Group_
+								WHERE
+									groupId = ?
+							)
+						)
+					)
+				)
+				[$STATUS$]
 			ORDER BY
 				BlogsEntry.displayDate DESC
 		]]>
@@ -99,7 +105,7 @@
 				[$ORGANIZATION_ID$]
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.blogs.service.persistence.BlogsStatsUserFinder.findAggregatedGroups">
+	<sql id="com.liferay.portlet.blogs.service.persistence.BlogsStatsUserFinder.findByGroupIds">
 		<![CDATA[
 			SELECT
 				{BlogsStatsUser.*}
@@ -109,17 +115,23 @@
 				Group_ ON
 					(BlogsStatsUser.groupId = Group_.groupId)
 			WHERE
-				(Group_.companyId = ?) AND
-				((Group_.groupId = ?) OR
-					((Group_.liveGroupId = 0) AND
-					(Group_.groupId NOT IN(
-						SELECT
-							liveGroupId
-						FROM
-							Group_
-						WHERE
-							groupId = ?
-					))))
+				(
+					(Group_.companyId = ?) AND
+					(Group_.groupId = ?) OR
+					(
+						(Group_.liveGroupId = 0) AND
+						(
+							Group_.groupId NOT IN(
+								SELECT
+									liveGroupId
+								FROM
+									Group_
+								WHERE
+									groupId = ?
+							)
+						)
+					)
+				)
 			ORDER BY
 				BlogsStatsUser.lastPostDate DESC
 		]]>

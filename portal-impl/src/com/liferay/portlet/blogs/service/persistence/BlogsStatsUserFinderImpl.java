@@ -45,8 +45,8 @@ public class BlogsStatsUserFinderImpl
 	public static String COUNT_BY_ORGANIZATION_IDS =
 		BlogsStatsUserFinder.class.getName() + ".countByOrganizationIds";
 
-	public static String FIND_AGGREGATED_GROUPS =
-		BlogsStatsUserFinder.class.getName() + ".findAggregatedGroups";
+	public static String FIND_BY_GROUP_IDS =
+		BlogsStatsUserFinder.class.getName() + ".findByGroupIds";
 
 	public static String FIND_BY_ORGANIZATION_IDS =
 		BlogsStatsUserFinder.class.getName() + ".findByOrganizationIds";
@@ -107,7 +107,7 @@ public class BlogsStatsUserFinderImpl
 		}
 	}
 
-	public List<BlogsStatsUser> findAggregatedGroups(
+	public List<BlogsStatsUser> findByGroupIds(
 			long companyId, long groupId, int start, int end)
 		throws SystemException {
 
@@ -116,7 +116,7 @@ public class BlogsStatsUserFinderImpl
 		try {
 			session = openSession();
 
-			String sql = CustomSQLUtil.get(FIND_AGGREGATED_GROUPS);
+			String sql = CustomSQLUtil.get(FIND_BY_GROUP_IDS);
 
 			SQLQuery q = session.createSQLQuery(sql);
 

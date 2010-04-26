@@ -84,40 +84,6 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 		blogsEntryLocalService.deleteEntry(entryId);
 	}
 
-	public List<BlogsEntry> getAggregatedGroupEntries(
-			long companyId, long groupId, int status, int max)
-		throws PortalException, SystemException {
-
-		List<BlogsEntry> entries = new ArrayList<BlogsEntry>();
-
-		int lastIntervalStart = 0;
-		boolean listNotExhausted = true;
-
-		while ((entries.size() < max) && listNotExhausted) {
-			List<BlogsEntry> entryList =
-				blogsEntryLocalService.getAggregatedGroupEntries(
-					companyId, groupId, status, lastIntervalStart,
-					lastIntervalStart + max);
-
-			Iterator<BlogsEntry> itr = entryList.iterator();
-
-			lastIntervalStart += max;
-			listNotExhausted = (entryList.size() == max);
-
-			while (itr.hasNext() && (entries.size() < max)) {
-				BlogsEntry entry = itr.next();
-
-				if (BlogsEntryPermission.contains(
-						getPermissionChecker(), entry, ActionKeys.VIEW)) {
-
-					entries.add(entry);
-				}
-			}
-		}
-
-		return entries;
-	}
-
 	public List<BlogsEntry> getCompanyEntries(
 			long companyId, int status, int max)
 		throws PortalException, SystemException {
@@ -238,6 +204,40 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 		return exportToRSS(
 			name, description, type, version, displayStyle, feedURL, entryURL,
 			blogsEntries, themeDisplay);
+	}
+
+	public List<BlogsEntry> getGroupsEntries(
+			long companyId, long groupId, int status, int max)
+		throws PortalException, SystemException {
+
+		List<BlogsEntry> entries = new ArrayList<BlogsEntry>();
+
+		int lastIntervalStart = 0;
+		boolean listNotExhausted = true;
+
+		while ((entries.size() < max) && listNotExhausted) {
+			List<BlogsEntry> entryList =
+				blogsEntryLocalService.getGroupsEntries(
+					companyId, groupId, status, lastIntervalStart,
+					lastIntervalStart + max);
+
+			Iterator<BlogsEntry> itr = entryList.iterator();
+
+			lastIntervalStart += max;
+			listNotExhausted = (entryList.size() == max);
+
+			while (itr.hasNext() && (entries.size() < max)) {
+				BlogsEntry entry = itr.next();
+
+				if (BlogsEntryPermission.contains(
+						getPermissionChecker(), entry, ActionKeys.VIEW)) {
+
+					entries.add(entry);
+				}
+			}
+		}
+
+		return entries;
 	}
 
 	public List<BlogsEntry> getOrganizationEntries(

@@ -24,11 +24,11 @@ if (selectionMethod.equals("users")) {
 		statsUsers = BlogsStatsUserLocalServiceUtil.getOrganizationStatsUsers(organizationId, 0, max, new StatsUserLastPostDateComparator());
 	}
 	else {
-		statsUsers = BlogsStatsUserLocalServiceUtil.getAggregatedGroupEntries(company.getCompanyId(), themeDisplay.getScopeGroupId(), 0, max);
+		statsUsers = BlogsStatsUserLocalServiceUtil.getGroupsEntries(company.getCompanyId(), scopeGroupId, 0, max);
 	}
 }
 else {
-	statsUsers = BlogsStatsUserLocalServiceUtil.getGroupStatsUsers(themeDisplay.getScopeGroupId(), 0, max);
+	statsUsers = BlogsStatsUserLocalServiceUtil.getGroupStatsUsers(scopeGroupId, 0, max);
 }
 %>
 
