@@ -80,6 +80,73 @@
 		<reference package-path="com.liferay.portal" entity="User" />
 	</entity>
 	<entity name="SocialActivityInterpreter" local-service="true" remote-service="false" tx-manager="none" />
+	<entity name="SocialEquityHistory" local-service="true" remote-service="false">
+
+		<!-- PK fields -->
+
+		<column name="equityHistoryId" type="long" primary="true" />
+
+		<!-- Group instance -->
+
+		<column name="groupId" type="long" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+		<column name="createDate" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="personalEquity" type="int" />
+	</entity>
+	<entity name="SocialEquityLog" local-service="true" remote-service="false">
+
+		<!-- PK fields -->
+
+		<column name="equityLogId" type="long" primary="true" />
+
+		<!-- Group instance -->
+
+		<column name="groupId" type="long" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+
+		<!-- Other fields -->
+
+		<column name="assetEntryId" type="long" />
+		<column name="actionId" type="String" />
+		<column name="actionDate" type="int" />
+		<column name="type" type="int" />
+		<column name="value" type="int" />
+		<column name="validity" type="int" />
+	</entity>
+	<entity name="SocialEquitySetting" local-service="true" remote-service="false">
+
+		<!-- PK fields -->
+
+		<column name="equitySettingId" type="long" primary="true" />
+
+		<!-- Group instance -->
+
+		<column name="groupId" type="long" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+
+		<!-- Other fields -->
+
+		<column name="classNameId" type="long" />
+		<column name="actionId" type="String" />
+		<column name="type" type="int" />
+		<column name="value" type="int" />
+		<column name="validity" type="int" />
+		<column name="active" type="boolean" />
+	</entity>
 	<entity name="SocialRelation" uuid="true" local-service="true" remote-service="false">
 
 		<!-- PK fields -->
