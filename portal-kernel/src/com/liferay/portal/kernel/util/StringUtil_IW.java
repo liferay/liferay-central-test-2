@@ -240,6 +240,12 @@ public class StringUtil_IW {
 		return StringUtil.replace(s, begin, end, values);
 	}
 
+	public com.liferay.portal.kernel.util.StringBundler replaceToStringBundler(
+		java.lang.String s, java.lang.String begin, java.lang.String end,
+		java.util.Map<String, String> values) {
+		return StringUtil.replaceToStringBundler(s, begin, end, values);
+	}
+
 	public java.lang.String replace(java.lang.String s,
 		java.lang.String[] oldSubs, java.lang.String[] newSubs) {
 		return StringUtil.replace(s, oldSubs, newSubs);

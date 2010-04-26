@@ -745,7 +745,9 @@ public class StringUtil {
 	public static String replace(
 		String s, String begin, String end, Map<String, String> values) {
 
-		return replaceToStringBundler(s, begin, end, values).toString();
+		StringBundler sb = replaceToStringBundler(s, begin, end, values);
+
+		return sb.toString();
 	}
 
 	public static StringBundler replaceToStringBundler(
