@@ -60,12 +60,12 @@ headerNames.add(StringPool.BLANK);
 
 	searchContainer.setResults(results);
 
-	PortletURL passwordPoliciesRedirect = PortletURLUtil.clone(portletURL, renderResponse);
+	PortletURL passwordPoliciesRedirectURL = PortletURLUtil.clone(portletURL, renderResponse);
 
-	passwordPoliciesRedirect.setParameter(searchContainer.getCurParam(), String.valueOf(searchContainer.getCur()));
+	passwordPoliciesRedirectURL.setParameter(searchContainer.getCurParam(), String.valueOf(searchContainer.getCur()));
 	%>
 
-	<aui:input name="passwordPoliciesRedirect" type="hidden" value="<%= passwordPoliciesRedirect.toString() %>" />
+	<aui:input name="passwordPoliciesRedirect" type="hidden" value="<%= passwordPoliciesRedirectURL.toString() %>" />
 
 	<div class="separator"><!-- --></div>
 
