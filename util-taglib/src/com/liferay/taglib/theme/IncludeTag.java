@@ -52,8 +52,9 @@ public class IncludeTag extends com.liferay.taglib.util.IncludeTag {
 				(String)componentContext.getAttribute("title"));
 			themeDisplay.setTilesContent(
 				(String)componentContext.getAttribute("content"));
-			themeDisplay.setTilesSelectable(GetterUtil.getBoolean(
-				(String)componentContext.getAttribute("selectable")));
+			themeDisplay.setTilesSelectable(
+				GetterUtil.getBoolean(
+					(String)componentContext.getAttribute("selectable")));
 		}
 
 		ThemeUtil.include(
