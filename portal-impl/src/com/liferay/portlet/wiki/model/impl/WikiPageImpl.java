@@ -21,7 +21,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.kernel.workflow.StatusConstants;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
@@ -146,7 +146,7 @@ public class WikiPageImpl extends WikiPageModelImpl implements WikiPage {
 	}
 
 	public boolean isApproved() {
-		if (getStatus() == StatusConstants.APPROVED) {
+		if (getStatus() == WorkflowConstants.STATUS_APPROVED) {
 			return true;
 		}
 		else {

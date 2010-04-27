@@ -203,7 +203,7 @@ if (articleDisplay != null) {
 						JournalArticle article = null;
 
 						try {
-							article = JournalArticleLocalServiceUtil.getLatestArticle(scopeGroupId, articleId, StatusConstants.ANY);
+							article = JournalArticleLocalServiceUtil.getLatestArticle(scopeGroupId, articleId, WorkflowConstants.STATUS_ANY);
 
 							if (article.isExpired()) {
 						%>
@@ -335,7 +335,7 @@ if (articleDisplay != null) {
 			<c:if test="<%= enableComments %>">
 
 				<%
-				int discussionMessagesCount = MBMessageLocalServiceUtil.getDiscussionMessagesCount(PortalUtil.getClassNameId(JournalArticle.class.getName()), articleDisplay.getResourcePrimKey(), StatusConstants.APPROVED);
+				int discussionMessagesCount = MBMessageLocalServiceUtil.getDiscussionMessagesCount(PortalUtil.getClassNameId(JournalArticle.class.getName()), articleDisplay.getResourcePrimKey(), WorkflowConstants.STATUS_APPROVED);
 				%>
 
 				<c:if test="<%= discussionMessagesCount > 0 %>">

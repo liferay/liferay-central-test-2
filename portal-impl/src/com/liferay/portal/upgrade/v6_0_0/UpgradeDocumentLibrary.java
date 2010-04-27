@@ -21,7 +21,7 @@ import com.liferay.portal.kernel.upgrade.util.UpgradeColumn;
 import com.liferay.portal.kernel.upgrade.util.UpgradeTable;
 import com.liferay.portal.kernel.upgrade.util.UpgradeTableFactoryUtil;
 import com.liferay.portal.kernel.util.StringBundler;
-import com.liferay.portal.kernel.workflow.StatusConstants;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.upgrade.v6_0_0.util.DLFileEntryNameUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v6_0_0.util.DLFileEntryTable;
 import com.liferay.portal.upgrade.v6_0_0.util.DLFileEntryTitleUpgradeColumnImpl;
@@ -80,7 +80,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 			ps.setString(8, name);
 			ps.setDouble(9, version);
 			ps.setInt(10, size);
-			ps.setInt(11, StatusConstants.APPROVED);
+			ps.setInt(11, WorkflowConstants.STATUS_APPROVED);
 			ps.setLong(12, userId);
 			ps.setString(13, userName);
 			ps.setTimestamp(14, now);

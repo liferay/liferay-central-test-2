@@ -25,7 +25,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.kernel.workflow.StatusConstants;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
@@ -142,7 +142,7 @@ public class SCProductEntryLocalServiceImpl
 			mbMessageLocalService.addDiscussionMessage(
 				userId, productEntry.getUserName(),
 				SCProductEntry.class.getName(), productEntryId,
-				StatusConstants.APPROVED);
+				WorkflowConstants.STATUS_APPROVED);
 		}
 
 		// Indexer

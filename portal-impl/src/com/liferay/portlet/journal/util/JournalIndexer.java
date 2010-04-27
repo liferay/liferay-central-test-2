@@ -29,7 +29,7 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.kernel.workflow.StatusConstants;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.search.BaseIndexer;
@@ -170,7 +170,7 @@ public class JournalIndexer extends BaseIndexer {
 	protected void doReindex(String className, long classPK) throws Exception {
 		JournalArticle article =
 			JournalArticleLocalServiceUtil.getLatestArticle(
-				classPK, StatusConstants.APPROVED);
+				classPK, WorkflowConstants.STATUS_APPROVED);
 
 		doReindex(article);
 	}
@@ -296,7 +296,7 @@ public class JournalIndexer extends BaseIndexer {
 
 	protected void reindexArticles(long companyId) throws Exception {
 		int count = JournalArticleLocalServiceUtil.getCompanyArticlesCount(
-			companyId, StatusConstants.APPROVED);
+			companyId, WorkflowConstants.STATUS_APPROVED);
 
 		int pages = count / Indexer.DEFAULT_INTERVAL;
 
@@ -313,7 +313,7 @@ public class JournalIndexer extends BaseIndexer {
 
 		List<JournalArticle> articles =
 			JournalArticleLocalServiceUtil.getCompanyArticles(
-				companyId, StatusConstants.APPROVED, start, end);
+				companyId, WorkflowConstants.STATUS_APPROVED, start, end);
 
 		if (articles.isEmpty()) {
 			return;

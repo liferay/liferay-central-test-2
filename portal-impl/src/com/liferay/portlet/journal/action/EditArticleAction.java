@@ -24,7 +24,7 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.kernel.workflow.StatusConstants;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
@@ -230,8 +230,8 @@ public class EditArticleAction extends PortletAction {
 			JournalArticle.class.getName(), actionRequest);
 
 		JournalArticleServiceUtil.updateStatus(
-			groupId, articleId, version, StatusConstants.APPROVED, articleURL,
-			serviceContext);
+			groupId, articleId, version, WorkflowConstants.STATUS_APPROVED,
+			articleURL, serviceContext);
 	}
 
 	protected void deleteArticles(ActionRequest actionRequest)
@@ -286,7 +286,7 @@ public class EditArticleAction extends PortletAction {
 				actionRequest, "articleURL");
 
 			JournalArticleServiceUtil.updateStatus(
-				groupId, articleId, version, StatusConstants.EXPIRED,
+				groupId, articleId, version, WorkflowConstants.STATUS_EXPIRED,
 				articleURL, serviceContext);
 		}
 	}
@@ -580,8 +580,8 @@ public class EditArticleAction extends PortletAction {
 		if (approve) {
 			JournalArticleServiceUtil.updateStatus(
 				article.getGroupId(), article.getArticleId(),
-				article.getVersion(), StatusConstants.APPROVED, articleURL,
-				serviceContext);
+				article.getVersion(), WorkflowConstants.STATUS_APPROVED,
+				articleURL, serviceContext);
 		}
 
 		// Recent articles

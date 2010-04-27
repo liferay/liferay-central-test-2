@@ -23,7 +23,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.CalendarUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.workflow.StatusConstants;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.impl.MBMessageImpl;
@@ -112,7 +112,7 @@ public class MBMessageFinderImpl
 
 			String sql = CustomSQLUtil.get(COUNT_BY_G_U_S);
 
-			if (status != StatusConstants.ANY) {
+			if (status != WorkflowConstants.STATUS_ANY) {
 				sql = StringUtil.replace(sql, "[$STATUS$]", "AND (status = ?)");
 			}
 			else {
@@ -128,7 +128,7 @@ public class MBMessageFinderImpl
 			qPos.add(groupId);
 			qPos.add(userId);
 
-			if (status != StatusConstants.ANY) {
+			if (status != WorkflowConstants.STATUS_ANY) {
 				qPos.add(status);
 			}
 
@@ -163,7 +163,7 @@ public class MBMessageFinderImpl
 
 			String sql = CustomSQLUtil.get(COUNT_BY_G_U_A_S);
 
-			if (status != StatusConstants.ANY) {
+			if (status != WorkflowConstants.STATUS_ANY) {
 				sql = StringUtil.replace(sql, "[$STATUS$]", "AND (status = ?)");
 			}
 			else {
@@ -180,7 +180,7 @@ public class MBMessageFinderImpl
 			qPos.add(userId);
 			qPos.add(anonymous);
 
-			if (status != StatusConstants.ANY) {
+			if (status != WorkflowConstants.STATUS_ANY) {
 				qPos.add(status);
 			}
 
@@ -237,7 +237,7 @@ public class MBMessageFinderImpl
 
 			String sql = CustomSQLUtil.get(FIND_BY_G_U_S);
 
-			if (status != StatusConstants.ANY) {
+			if (status != WorkflowConstants.STATUS_ANY) {
 				sql = StringUtil.replace(sql, "[$STATUS$]", "AND (status = ?)");
 			}
 			else {
@@ -253,7 +253,7 @@ public class MBMessageFinderImpl
 			qPos.add(groupId);
 			qPos.add(userId);
 
-			if (status != StatusConstants.ANY) {
+			if (status != WorkflowConstants.STATUS_ANY) {
 				qPos.add(status);
 			}
 
@@ -279,7 +279,7 @@ public class MBMessageFinderImpl
 
 			String sql = CustomSQLUtil.get(FIND_BY_G_U_A_S);
 
-			if (status != StatusConstants.ANY) {
+			if (status != WorkflowConstants.STATUS_ANY) {
 				sql = StringUtil.replace(sql, "[$STATUS$]", "AND (status = ?)");
 			}
 			else {
@@ -296,7 +296,7 @@ public class MBMessageFinderImpl
 			qPos.add(userId);
 			qPos.add(anonymous);
 
-			if (status != StatusConstants.ANY) {
+			if (status != WorkflowConstants.STATUS_ANY) {
 				qPos.add(status);
 			}
 

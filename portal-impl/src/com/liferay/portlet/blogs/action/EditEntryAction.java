@@ -24,7 +24,7 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.kernel.workflow.StatusConstants;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
@@ -141,7 +141,7 @@ public class EditEntryAction extends PortletAction {
 			}
 
 			if ((entry != null) &&
-				(entry.getStatus() == StatusConstants.DRAFT)) {
+				(entry.getStatus() == WorkflowConstants.STATUS_DRAFT)) {
 
 				JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
@@ -330,7 +330,9 @@ public class EditEntryAction extends PortletAction {
 				displayDateYear, displayDateHour, displayDateMinute,
 				allowPingbacks, allowTrackbacks, trackbacks, serviceContext);
 
-			if (serviceContext.getStatus() == StatusConstants.APPROVED) {
+			if (serviceContext.getStatus() ==
+					WorkflowConstants.STATUS_APPROVED) {
+
 				AssetPublisherUtil.addAndStoreSelection(
 					actionRequest, BlogsEntry.class.getName(),
 					entry.getEntryId(), -1);
@@ -354,8 +356,9 @@ public class EditEntryAction extends PortletAction {
 				oldUrlTitle = tempOldUrlTitle;
 			}
 
-			if ((oldStatus == StatusConstants.DRAFT) &&
-				(serviceContext.getStatus() == StatusConstants.APPROVED)) {
+			if ((oldStatus == WorkflowConstants.STATUS_DRAFT) &&
+				(serviceContext.getStatus() ==
+					WorkflowConstants.STATUS_APPROVED)) {
 
 				AssetPublisherUtil.addAndStoreSelection(
 					actionRequest, BlogsEntry.class.getName(),

@@ -18,7 +18,7 @@ import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.kernel.workflow.StatusConstants;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.Node;
@@ -67,7 +67,7 @@ public class GetArticleAction extends Action {
 
 			JournalArticle article =
 				JournalArticleLocalServiceUtil.getLatestArticle(
-					groupId, articleId, StatusConstants.APPROVED);
+					groupId, articleId, WorkflowConstants.STATUS_APPROVED);
 
 			ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 				WebKeys.THEME_DISPLAY);

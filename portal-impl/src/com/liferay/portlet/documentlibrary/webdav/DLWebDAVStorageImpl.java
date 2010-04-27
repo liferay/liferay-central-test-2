@@ -25,7 +25,7 @@ import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.kernel.workflow.StatusConstants;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.Lock;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ServiceContext;
@@ -641,7 +641,7 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			serviceContext.setAddGuestPermissions(true);
 
 			if (PropsValues.DL_WEBDAV_SAVE_TO_SINGLE_VERSION) {
-				serviceContext.setStatus(StatusConstants.DRAFT);
+				serviceContext.setStatus(WorkflowConstants.STATUS_DRAFT);
 			}
 
 			try {
@@ -782,7 +782,7 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 				fileEntry.getGroupId(), fileEntry.getFolderId(),
 				fileEntry.getName());
 
-		if (fileVersion.getStatus() != StatusConstants.DRAFT) {
+		if (fileVersion.getStatus() != WorkflowConstants.STATUS_DRAFT) {
 			return;
 		}
 
@@ -799,7 +799,7 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 		DLFileEntryLocalServiceUtil.updateStatus(
 			fileEntry.getUserId(), fileEntry.getFileEntryId(),
-			StatusConstants.APPROVED, serviceContext);
+			WorkflowConstants.STATUS_APPROVED, serviceContext);
 	}
 
 	protected boolean deleteResource(

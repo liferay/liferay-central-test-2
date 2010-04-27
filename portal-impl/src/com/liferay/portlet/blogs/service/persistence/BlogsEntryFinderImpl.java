@@ -24,7 +24,7 @@ import com.liferay.portal.kernel.util.CalendarUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.workflow.StatusConstants;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.model.impl.BlogsEntryImpl;
@@ -81,7 +81,7 @@ public class BlogsEntryFinderImpl
 
 			String sql = CustomSQLUtil.get(COUNT_BY_ORGANIZATION_IDS);
 
-			if (status != StatusConstants.ANY) {
+			if (status != WorkflowConstants.STATUS_ANY) {
 				sql = StringUtil.replace(
 					sql, "[$STATUS$]", "AND (BlogsEntry.status = ?)");
 			}
@@ -107,7 +107,7 @@ public class BlogsEntryFinderImpl
 
 			qPos.add(displayDate_TS);
 
-			if (status != StatusConstants.ANY) {
+			if (status != WorkflowConstants.STATUS_ANY) {
 				qPos.add(status);
 			}
 
@@ -142,7 +142,7 @@ public class BlogsEntryFinderImpl
 
 			String sql = CustomSQLUtil.get(FIND_BY_GROUP_IDS);
 
-			if (status != StatusConstants.ANY) {
+			if (status != WorkflowConstants.STATUS_ANY) {
 				sql = StringUtil.replace(
 					sql, "[$STATUS$]", "AND (BlogsEntry.status = ?)");
 			}
@@ -160,7 +160,7 @@ public class BlogsEntryFinderImpl
 			qPos.add(groupId);
 			qPos.add(groupId);
 
-			if (status != StatusConstants.ANY) {
+			if (status != WorkflowConstants.STATUS_ANY) {
 				qPos.add(status);
 			}
 
@@ -202,7 +202,7 @@ public class BlogsEntryFinderImpl
 
 			String sql = CustomSQLUtil.get(FIND_BY_ORGANIZATION_IDS);
 
-			if (status != StatusConstants.ANY) {
+			if (status != WorkflowConstants.STATUS_ANY) {
 				sql = StringUtil.replace(
 					sql, "[$STATUS$]", "AND (BlogsEntry.status = ?)");
 			}
@@ -228,7 +228,7 @@ public class BlogsEntryFinderImpl
 
 			qPos.add(displayDate_TS);
 
-			if (status != StatusConstants.ANY) {
+			if (status != WorkflowConstants.STATUS_ANY) {
 				qPos.add(status);
 			}
 

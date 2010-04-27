@@ -23,7 +23,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.TimeZoneUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.kernel.workflow.StatusConstants;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.DocumentException;
 import com.liferay.portal.kernel.xml.Element;
@@ -260,10 +260,10 @@ public class WordPressImporter {
 		String statusText = entryEl.elementTextTrim(
 			SAXReaderUtil.createQName("status", _NS_WP));
 
-		int status = StatusConstants.APPROVED;
+		int status = WorkflowConstants.STATUS_APPROVED;
 
 		if (statusText.equalsIgnoreCase("draft")) {
-			status = StatusConstants.DRAFT;
+			status = WorkflowConstants.STATUS_DRAFT;
 		}
 
 		String pingStatusText = entryEl.elementTextTrim(
@@ -305,7 +305,7 @@ public class WordPressImporter {
 		MBMessageDisplay messageDisplay =
 			MBMessageLocalServiceUtil.getDiscussionMessageDisplay(
 				userId, BlogsEntry.class.getName(), entry.getEntryId(),
-				StatusConstants.APPROVED);
+				WorkflowConstants.STATUS_APPROVED);
 
 		Map<Long, Long> messageIdMap = new HashMap<Long, Long>();
 

@@ -22,7 +22,7 @@ import com.liferay.portal.kernel.dao.orm.Type;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.workflow.StatusConstants;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.messageboards.model.MBThread;
@@ -56,7 +56,7 @@ public class MBThreadFinderImpl
 
 			String sql = CustomSQLUtil.get(COUNT_BY_S_G_U_S);
 
-			if (status != StatusConstants.ANY) {
+			if (status != WorkflowConstants.STATUS_ANY) {
 				sql = StringUtil.replace(
 					sql, "[$STATUS$]", "AND (MBThread.status = ?)");
 			}
@@ -73,7 +73,7 @@ public class MBThreadFinderImpl
 			qPos.add(PortalUtil.getClassNameId(MBThread.class.getName()));
 			qPos.add(groupId);
 
-			if (status != StatusConstants.ANY) {
+			if (status != WorkflowConstants.STATUS_ANY) {
 				qPos.add(status);
 			}
 
@@ -110,7 +110,7 @@ public class MBThreadFinderImpl
 
 			String sql = CustomSQLUtil.get(FIND_BY_S_G_U_S);
 
-			if (status != StatusConstants.ANY) {
+			if (status != WorkflowConstants.STATUS_ANY) {
 				sql = StringUtil.replace(
 					sql, "[$STATUS$]", "AND (MBThread.status = ?)");
 			}
@@ -127,7 +127,7 @@ public class MBThreadFinderImpl
 			qPos.add(PortalUtil.getClassNameId(MBThread.class.getName()));
 			qPos.add(groupId);
 
-			if (status != StatusConstants.ANY) {
+			if (status != WorkflowConstants.STATUS_ANY) {
 				qPos.add(status);
 			}
 

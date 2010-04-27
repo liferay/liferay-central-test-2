@@ -27,7 +27,7 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropertiesParamUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.kernel.workflow.StatusConstants;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
@@ -243,7 +243,7 @@ public class EditFileEntryAction extends PortletAction {
 			DLFileVersionLocalServiceUtil.getLatestFileVersion(
 				groupId, folderId, name);
 
-		if (fileVersion.getStatus() != StatusConstants.DRAFT) {
+		if (fileVersion.getStatus() != WorkflowConstants.STATUS_DRAFT) {
 			return;
 		}
 
@@ -313,7 +313,7 @@ public class EditFileEntryAction extends PortletAction {
 						themeDisplay.getCompanyId(), groupId,
 						DLFileEntry.class.getName())) {
 
-				serviceContext.setStatus(StatusConstants.DRAFT);
+				serviceContext.setStatus(WorkflowConstants.STATUS_DRAFT);
 			}
 
 			DLFileEntry fileEntry = DLFileEntryServiceUtil.addFileEntry(
@@ -335,7 +335,7 @@ public class EditFileEntryAction extends PortletAction {
 					themeDisplay.getCompanyId(), groupId,
 					DLFileEntry.class.getName(), fileEntry.getFileEntryId())) {
 
-				serviceContext.setStatus(StatusConstants.DRAFT);
+				serviceContext.setStatus(WorkflowConstants.STATUS_DRAFT);
 			}
 
 			DLFileEntryServiceUtil.updateFileEntry(

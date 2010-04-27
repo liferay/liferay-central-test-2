@@ -40,7 +40,7 @@ import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.kernel.workflow.StatusConstants;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.Group;
@@ -314,7 +314,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			thread.setStatusByUserName(userName);
 			thread.setStatusDate(now);
 
-			if ((serviceContext.getStatus() == StatusConstants.APPROVED) &&
+			if ((serviceContext.getStatus() ==
+					WorkflowConstants.STATUS_APPROVED) &&
 				(categoryId !=
 					MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID)) {
 
@@ -327,7 +328,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			}
 		}
 
-		if (serviceContext.getStatus() == StatusConstants.APPROVED) {
+		if (serviceContext.getStatus() == WorkflowConstants.STATUS_APPROVED) {
 			thread.setMessageCount(thread.getMessageCount() + 1);
 
 			if (anonymous) {
@@ -429,7 +430,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		}
 
 		if (!message.isDiscussion() &&
-			(serviceContext.getStatus() == StatusConstants.APPROVED)) {
+			(serviceContext.getStatus() == WorkflowConstants.STATUS_APPROVED)) {
 
 			// Statistics
 
@@ -465,7 +466,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		if (!message.isDiscussion() && !message.isAnonymous() &&
 			!user.isDefaultUser() &&
-			(serviceContext.getStatus() == StatusConstants.APPROVED)) {
+			(serviceContext.getStatus() == WorkflowConstants.STATUS_APPROVED)) {
 
 			int activityType = MBActivityKeys.ADD_MESSAGE;
 			long receiverUserId = 0;
@@ -797,7 +798,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			long groupId, long categoryId, int status, int start, int end)
 		throws SystemException {
 
-		if (status == StatusConstants.ANY) {
+		if (status == WorkflowConstants.STATUS_ANY) {
 			return mbMessagePersistence.findByG_C(
 				groupId, categoryId, start, end);
 		}
@@ -812,7 +813,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			OrderByComparator obc)
 		throws SystemException {
 
-		if (status == StatusConstants.ANY) {
+		if (status == WorkflowConstants.STATUS_ANY) {
 			return mbMessagePersistence.findByG_C(
 				groupId, categoryId, start, end, obc);
 		}
@@ -826,7 +827,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			long groupId, long categoryId, int status)
 		throws SystemException {
 
-		if (status == StatusConstants.ANY) {
+		if (status == WorkflowConstants.STATUS_ANY) {
 			return mbMessagePersistence.countByG_C(groupId, categoryId);
 		}
 		else {
@@ -839,7 +840,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			long companyId, int status, int start, int end)
 		throws SystemException {
 
-		if (status == StatusConstants.ANY) {
+		if (status == WorkflowConstants.STATUS_ANY) {
 			return mbMessagePersistence.findByCompanyId(companyId, start, end);
 		}
 		else {
@@ -853,7 +854,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			OrderByComparator obc)
 		throws SystemException {
 
-		if (status == StatusConstants.ANY) {
+		if (status == WorkflowConstants.STATUS_ANY) {
 			return mbMessagePersistence.findByCompanyId(
 				companyId, start, end, obc);
 		}
@@ -866,7 +867,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 	public int getCompanyMessagesCount(long companyId, int status)
 		throws SystemException {
 
-		if (status == StatusConstants.ANY) {
+		if (status == WorkflowConstants.STATUS_ANY) {
 			return mbMessagePersistence.countByCompanyId(companyId);
 		}
 		else {
@@ -946,7 +947,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		int count = 0;
 
-		if (status == StatusConstants.ANY) {
+		if (status == WorkflowConstants.STATUS_ANY) {
 			count = mbMessagePersistence.countByThreadId(
 				discussion.getThreadId());
 		}
@@ -975,7 +976,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			long groupId, int status, int start, int end)
 		throws SystemException {
 
-		if (status == StatusConstants.ANY) {
+		if (status == WorkflowConstants.STATUS_ANY) {
 			return mbMessagePersistence.findByGroupId(groupId, start, end);
 		}
 		else {
@@ -987,7 +988,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			long groupId, int status, int start, int end, OrderByComparator obc)
 		throws SystemException {
 
-		if (status == StatusConstants.ANY) {
+		if (status == WorkflowConstants.STATUS_ANY) {
 			return mbMessagePersistence.findByGroupId(groupId, start, end, obc);
 		}
 		else {
@@ -1000,7 +1001,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			long groupId, long userId, int status, int start, int end)
 		throws SystemException {
 
-		if (status == StatusConstants.ANY) {
+		if (status == WorkflowConstants.STATUS_ANY) {
 			return mbMessagePersistence.findByG_U(groupId, userId, start, end);
 		}
 		else {
@@ -1014,7 +1015,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			OrderByComparator obc)
 		throws SystemException {
 
-		if (status == StatusConstants.ANY) {
+		if (status == WorkflowConstants.STATUS_ANY) {
 			return mbMessagePersistence.findByG_U(
 				groupId, userId, start, end, obc);
 		}
@@ -1027,7 +1028,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 	public int getGroupMessagesCount(long groupId, int status)
 		throws SystemException {
 
-		if (status == StatusConstants.ANY) {
+		if (status == WorkflowConstants.STATUS_ANY) {
 			return mbMessagePersistence.countByGroupId(groupId);
 		}
 		else {
@@ -1038,7 +1039,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 	public int getGroupMessagesCount(long groupId, long userId, int status)
 		throws SystemException {
 
-		if (status == StatusConstants.ANY) {
+		if (status == WorkflowConstants.STATUS_ANY) {
 			return mbMessagePersistence.countByG_U(groupId, userId);
 		}
 		else {
@@ -1058,7 +1059,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		if (status == StatusConstants.ANY) {
+		if (status == WorkflowConstants.STATUS_ANY) {
 			return mbMessagePersistence.findByC_C(classNameId, classPK);
 		}
 		else {
@@ -1140,7 +1141,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		List<MBMessage> messages = null;
 
-		if (status == StatusConstants.ANY) {
+		if (status == WorkflowConstants.STATUS_ANY) {
 			messages = mbMessagePersistence.findByThreadId(threadId);
 		}
 		else {
@@ -1154,7 +1155,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			long threadId, int status, int start, int end)
 		throws SystemException {
 
-		if (status == StatusConstants.ANY) {
+		if (status == WorkflowConstants.STATUS_ANY) {
 			return mbMessagePersistence.findByThreadId(threadId, start, end);
 		}
 		else {
@@ -1165,7 +1166,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 	public int getThreadMessagesCount(long threadId, int status)
 		throws SystemException {
 
-		if (status == StatusConstants.ANY) {
+		if (status == WorkflowConstants.STATUS_ANY) {
 			return mbMessagePersistence.countByThreadId(threadId);
 		}
 		else {
@@ -1177,7 +1178,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			long threadId, int status, int start, int end)
 		throws SystemException {
 
-		if (status == StatusConstants.ANY) {
+		if (status == WorkflowConstants.STATUS_ANY) {
 			return mbMessagePersistence.findByThreadReplies(
 				threadId, start, end);
 		}
@@ -1216,7 +1217,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		boolean visible = false;
 
-		if (message.getStatus() == StatusConstants.APPROVED) {
+		if (message.getStatus() == WorkflowConstants.STATUS_APPROVED) {
 			visible = true;
 		}
 
@@ -1358,7 +1359,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		// Category
 
 		if (!message.isDiscussion() &&
-			(serviceContext.getStatus() == StatusConstants.APPROVED)) {
+			(serviceContext.getStatus() == WorkflowConstants.STATUS_APPROVED)) {
 
 			category.setLastPostDate(now);
 
@@ -1381,8 +1382,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		boolean update = true;
 
-		if ((oldStatus != StatusConstants.APPROVED) &&
-			(serviceContext.getStatus() == StatusConstants.APPROVED)) {
+		if ((oldStatus != WorkflowConstants.STATUS_APPROVED) &&
+			(serviceContext.getStatus() == WorkflowConstants.STATUS_APPROVED)) {
 
 			update = false;
 		}
@@ -1417,7 +1418,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		// Thread
 
-		if (message.getStatus() == StatusConstants.APPROVED) {
+		if (message.getStatus() == WorkflowConstants.STATUS_APPROVED) {
 			MBThread thread = mbThreadPersistence.findByPrimaryKey(
 				message.getThreadId());
 
@@ -1434,7 +1435,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		}
 
 		if (!message.isDiscussion() &&
-			(message.getStatus() == StatusConstants.APPROVED)) {
+			(message.getStatus() == WorkflowConstants.STATUS_APPROVED)) {
 
 			// Category
 
@@ -1497,8 +1498,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			thread.setStatusDate(now);
 		}
 
-		if ((serviceContext.getStatus() == StatusConstants.APPROVED) &&
-			(oldStatus != StatusConstants.APPROVED)) {
+		if ((serviceContext.getStatus() == WorkflowConstants.STATUS_APPROVED) &&
+			(oldStatus != WorkflowConstants.STATUS_APPROVED)) {
 
 			thread.setMessageCount(thread.getMessageCount() + 1);
 
@@ -1512,8 +1513,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			thread.setLastPostDate(now);
 		}
 
-		if ((serviceContext.getStatus() != StatusConstants.APPROVED) &&
-			(oldStatus == StatusConstants.APPROVED)) {
+		if ((serviceContext.getStatus() != WorkflowConstants.STATUS_APPROVED) &&
+			(oldStatus == WorkflowConstants.STATUS_APPROVED)) {
 
 			thread.setMessageCount(thread.getMessageCount() - 1);
 		}
@@ -1527,8 +1528,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		MBCategory category = mbCategoryPersistence.findByPrimaryKey(
 			thread.getCategoryId());
 
-		if ((serviceContext.getStatus() == StatusConstants.APPROVED) &&
-			(oldStatus != StatusConstants.APPROVED)) {
+		if ((serviceContext.getStatus() == WorkflowConstants.STATUS_APPROVED) &&
+			(oldStatus != WorkflowConstants.STATUS_APPROVED)) {
 
 			category.setMessageCount(category.getMessageCount() + 1);
 			category.setLastPostDate(now);
@@ -1536,8 +1537,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			mbCategoryPersistence.update(category, false);
 		}
 
-		if ((serviceContext.getStatus() != StatusConstants.APPROVED) &&
-			(oldStatus == StatusConstants.APPROVED)) {
+		if ((serviceContext.getStatus() != WorkflowConstants.STATUS_APPROVED) &&
+			(oldStatus == WorkflowConstants.STATUS_APPROVED)) {
 
 			category.setMessageCount(category.getMessageCount() - 1);
 
@@ -1546,8 +1547,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		// Asset
 
-		if ((serviceContext.getStatus() == StatusConstants.APPROVED) &&
-			(oldStatus != StatusConstants.APPROVED)) {
+		if ((serviceContext.getStatus() == WorkflowConstants.STATUS_APPROVED) &&
+			(oldStatus != WorkflowConstants.STATUS_APPROVED)) {
 
 			assetEntryLocalService.updateVisible(
 				MBMessage.class.getName(), message.getMessageId(), true);
@@ -1560,8 +1561,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			}
 		}
 
-		if ((serviceContext.getStatus() != StatusConstants.APPROVED) &&
-			(oldStatus == StatusConstants.APPROVED)) {
+		if ((serviceContext.getStatus() != WorkflowConstants.STATUS_APPROVED) &&
+			(oldStatus == WorkflowConstants.STATUS_APPROVED)) {
 
 			assetEntryLocalService.updateVisible(
 				MBMessage.class.getName(), message.getMessageId(), false);
@@ -1570,8 +1571,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		// Statistics
 
 		if (!message.isDiscussion()  &&
-			(serviceContext.getStatus() == StatusConstants.APPROVED) &&
-			(oldStatus != StatusConstants.APPROVED)) {
+			(serviceContext.getStatus() == WorkflowConstants.STATUS_APPROVED) &&
+			(oldStatus != WorkflowConstants.STATUS_APPROVED)) {
 
 			mbStatsUserLocalService.updateStatsUser(
 				message.getGroupId(), userId, now);
@@ -1581,8 +1582,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		if (!message.isDiscussion() && !message.isAnonymous() &&
 			!user.isDefaultUser() &&
-			(serviceContext.getStatus() == StatusConstants.APPROVED) &&
-			(oldStatus != StatusConstants.APPROVED)) {
+			(serviceContext.getStatus() == WorkflowConstants.STATUS_APPROVED) &&
+			(oldStatus != WorkflowConstants.STATUS_APPROVED)) {
 
 			int activityType = MBActivityKeys.ADD_MESSAGE;
 			long receiverUserId = 0;
@@ -1664,7 +1665,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			MBMessage message, ServiceContext serviceContext, boolean update)
 		throws PortalException, SystemException {
 
-		if (message.getStatus() != StatusConstants.APPROVED) {
+		if (message.getStatus() != WorkflowConstants.STATUS_APPROVED) {
 			return;
 		}
 
@@ -1938,7 +1939,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		if (!PropsValues.BLOGS_PINGBACK_ENABLED ||
 			!message.isAllowPingbacks() ||
-			(message.getStatus() != StatusConstants.APPROVED)) {
+			(message.getStatus() != WorkflowConstants.STATUS_APPROVED)) {
 
 			return;
 		}

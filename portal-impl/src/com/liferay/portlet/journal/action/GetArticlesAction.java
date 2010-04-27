@@ -26,7 +26,7 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.kernel.workflow.StatusConstants;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
@@ -139,7 +139,7 @@ public class GetArticlesAction extends Action {
 			_log.debug("displayDateLT is " + displayDateLT);
 		}
 
-		int status = StatusConstants.APPROVED;
+		int status = WorkflowConstants.STATUS_APPROVED;
 		Date reviewDate = null;
 		boolean andOperator = true;
 		int start = 0;

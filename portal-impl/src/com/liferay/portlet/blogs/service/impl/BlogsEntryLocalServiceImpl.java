@@ -34,7 +34,7 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.kernel.workflow.StatusConstants;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.ResourceConstants;
@@ -152,7 +152,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		if (PropsValues.BLOGS_ENTRY_COMMENTS_ENABLED) {
 			mbMessageLocalService.addDiscussionMessage(
 				userId, entry.getUserName(), BlogsEntry.class.getName(),
-				entryId, StatusConstants.APPROVED);
+				entryId, WorkflowConstants.STATUS_APPROVED);
 		}
 
 		// Status
@@ -275,7 +275,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			long companyId, int status, int start, int end)
 		throws SystemException {
 
-		if (status == StatusConstants.ANY) {
+		if (status == WorkflowConstants.STATUS_ANY) {
 			return blogsEntryPersistence.findByC_D(
 				companyId, new Date(), start, end);
 		}
@@ -290,7 +290,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			OrderByComparator obc)
 		throws SystemException {
 
-		if (status == StatusConstants.ANY) {
+		if (status == WorkflowConstants.STATUS_ANY) {
 			return blogsEntryPersistence.findByC_D(
 				companyId, new Date(), start, end, obc);
 		}
@@ -303,7 +303,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 	public int getCompanyEntriesCount(long companyId, int status)
 		throws SystemException {
 
-		if (status == StatusConstants.ANY) {
+		if (status == WorkflowConstants.STATUS_ANY) {
 			return blogsEntryPersistence.countByC_D(
 				companyId, new Date());
 		}
@@ -339,7 +339,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			long groupId, int status, int start, int end)
 		throws SystemException {
 
-		if (status == StatusConstants.ANY) {
+		if (status == WorkflowConstants.STATUS_ANY) {
 			return blogsEntryPersistence.findByG_D(
 				groupId, new Date(), start, end);
 		}
@@ -353,7 +353,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			long groupId, int status, int start, int end, OrderByComparator obc)
 		throws SystemException {
 
-		if (status == StatusConstants.ANY) {
+		if (status == WorkflowConstants.STATUS_ANY) {
 			return blogsEntryPersistence.findByG_D(
 				groupId, new Date(), start, end, obc);
 		}
@@ -366,7 +366,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 	public int getGroupEntriesCount(long groupId, int status)
 		throws SystemException {
 
-		if (status == StatusConstants.ANY) {
+		if (status == WorkflowConstants.STATUS_ANY) {
 			return blogsEntryPersistence.countByG_D(groupId, new Date());
 		}
 		else {
@@ -387,7 +387,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			long groupId, long userId, int status, int start, int end)
 		throws SystemException {
 
-		if (status == StatusConstants.ANY) {
+		if (status == WorkflowConstants.STATUS_ANY) {
 			return blogsEntryPersistence.findByG_U_D(
 				groupId, userId, new Date(), start, end);
 		}
@@ -402,7 +402,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			OrderByComparator obc)
 		throws SystemException {
 
-		if (status == StatusConstants.ANY) {
+		if (status == WorkflowConstants.STATUS_ANY) {
 			return blogsEntryPersistence.findByG_U_D(
 				groupId, userId, new Date(), start, end, obc);
 		}
@@ -415,7 +415,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 	public int getGroupUserEntriesCount(long groupId, long userId, int status)
 		throws SystemException {
 
-		if (status == StatusConstants.ANY) {
+		if (status == WorkflowConstants.STATUS_ANY) {
 			return blogsEntryPersistence.countByG_U_D(
 				groupId, userId, new Date());
 		}
@@ -451,7 +451,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		boolean visible = false;
 
-		if (entry.getStatus() == StatusConstants.APPROVED) {
+		if (entry.getStatus() == WorkflowConstants.STATUS_APPROVED) {
 			visible = true;
 		}
 

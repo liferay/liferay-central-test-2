@@ -16,7 +16,7 @@ package com.liferay.portlet.documentlibrary.workflow;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.workflow.ContextConstants;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.workflow.BaseWorkflowHandler;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
@@ -48,10 +48,10 @@ public class DLFileEntryWorkflowHandler extends BaseWorkflowHandler {
 			int status, Map<String, Serializable> workflowContext)
 		throws PortalException, SystemException {
 
-		long groupId = (Long)workflowContext.get(ContextConstants.GROUP_ID);
+		long groupId = (Long)workflowContext.get(WorkflowConstants.GROUP_ID);
 		long userId = (Long)workflowContext.get("userId");
 		long classPK = (Long)workflowContext.get(
-			ContextConstants.ENTRY_CLASS_PK);
+			WorkflowConstants.ENTRY_CLASS_PK);
 
 		ServiceContext serviceContext = new ServiceContext();
 

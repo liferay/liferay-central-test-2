@@ -18,7 +18,7 @@ import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.kernel.workflow.StatusConstants;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.PortletKeys;
@@ -81,7 +81,7 @@ public class ViewMessageAction extends PortletAction {
 
 			MBMessageDisplay messageDisplay =
 				MBMessageServiceUtil.getMessageDisplay(
-					messageId, StatusConstants.APPROVED, threadView);
+					messageId, WorkflowConstants.STATUS_APPROVED, threadView);
 
 			renderRequest.setAttribute(
 				WebKeys.MESSAGE_BOARDS_MESSAGE, messageDisplay);

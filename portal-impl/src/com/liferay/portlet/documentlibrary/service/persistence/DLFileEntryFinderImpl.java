@@ -22,7 +22,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.workflow.StatusConstants;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl;
@@ -58,7 +58,7 @@ public class DLFileEntryFinderImpl
 			sql = StringUtil.replace(
 				sql, "[$FOLDER_ID$]", getFolderIds(folderIds));
 
-			if (status == StatusConstants.ANY) {
+			if (status == WorkflowConstants.STATUS_ANY) {
 				sql = StringUtil.replace(
 					sql, "(DLFileVersion.status = ?) AND", "");
 			}
@@ -71,7 +71,7 @@ public class DLFileEntryFinderImpl
 
 			qPos.add(groupId);
 
-			if (status != StatusConstants.ANY) {
+			if (status != WorkflowConstants.STATUS_ANY) {
 				qPos.add(status);
 			}
 

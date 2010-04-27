@@ -38,7 +38,7 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.kernel.workflow.StatusConstants;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.Group;
@@ -206,7 +206,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		if (PropsValues.WIKI_PAGE_COMMENTS_ENABLED) {
 			mbMessageLocalService.addDiscussionMessage(
 				userId, page.getUserName(), WikiPage.class.getName(),
-				resourcePrimKey, StatusConstants.APPROVED);
+				resourcePrimKey, WorkflowConstants.STATUS_APPROVED);
 		}
 
 		// Social
@@ -960,7 +960,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		long groupId = page.getGroupId();
 		int status = serviceContext.getStatus();
 
-		boolean isApproved = (status == StatusConstants.APPROVED);
+		boolean isApproved = (status == WorkflowConstants.STATUS_APPROVED);
 
 		if (isApproved) {
 			page.setHead(false);
@@ -1087,7 +1087,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		page.setStatusByUserName(user.getFullName());
 		page.setStatusDate(now);
 
-		if (status == StatusConstants.APPROVED) {
+		if (status == WorkflowConstants.STATUS_APPROVED) {
 			page.setHead(true);
 
 			// Asset

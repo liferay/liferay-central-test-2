@@ -23,7 +23,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.workflow.StatusConstants;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.util.dao.orm.CustomSQLUtil;
@@ -70,7 +70,7 @@ public class DLFolderFinderImpl
 				sql, "[$FILE_SHORTCUT_FOLDER_ID$]",
 				getFolderIds(folderIds, "DLFileShortcut"));
 
-			if (status == StatusConstants.ANY) {
+			if (status == WorkflowConstants.STATUS_ANY) {
 				sql = StringUtil.replace(
 					sql, "(DLFileVersion.status = ?) AND", "");
 			}
@@ -83,7 +83,7 @@ public class DLFolderFinderImpl
 
 			qPos.add(groupId);
 
-			if (status != StatusConstants.ANY) {
+			if (status != WorkflowConstants.STATUS_ANY) {
 				qPos.add(status);
 			}
 
@@ -140,7 +140,7 @@ public class DLFolderFinderImpl
 				sql, "[$FILE_SHORTCUT_FOLDER_ID$]",
 				getFolderIds(folderIds, "DLFileShortcut"));
 
-			if (status == StatusConstants.ANY) {
+			if (status == WorkflowConstants.STATUS_ANY) {
 				sql = StringUtil.replace(
 					sql, "(DLFileVersion.status = ?) AND", "");
 			}
@@ -159,7 +159,7 @@ public class DLFolderFinderImpl
 
 			qPos.add(groupId);
 
-			if (status != StatusConstants.ANY) {
+			if (status != WorkflowConstants.STATUS_ANY) {
 				qPos.add(status);
 			}
 
@@ -213,7 +213,7 @@ public class DLFolderFinderImpl
 				sql, "[$FILE_SHORTCUT_FOLDER_ID$]",
 				getFolderIds(folderIds, "DLFileShortcut"));
 
-			if (status == StatusConstants.ANY) {
+			if (status == WorkflowConstants.STATUS_ANY) {
 				sql = StringUtil.replace(
 					sql, "(DLFileVersion.status = ?) AND", "");
 			}
@@ -229,7 +229,7 @@ public class DLFolderFinderImpl
 
 			qPos.add(groupId);
 
-			if (status != StatusConstants.ANY) {
+			if (status != WorkflowConstants.STATUS_ANY) {
 				qPos.add(status);
 			}
 
@@ -299,7 +299,7 @@ public class DLFolderFinderImpl
 				sql, "[$FILE_SHORTCUT_FOLDER_ID$]",
 				getFolderIds(folderIds, "DLFileShortcut"));
 
-			if (status == StatusConstants.ANY) {
+			if (status == WorkflowConstants.STATUS_ANY) {
 				sql = StringUtil.replace(
 					sql, "(DLFileVersion.status = ?) AND", "");
 			}
@@ -322,7 +322,7 @@ public class DLFolderFinderImpl
 
 			qPos.add(groupId);
 
-			if (status != StatusConstants.ANY) {
+			if (status != WorkflowConstants.STATUS_ANY) {
 				qPos.add(status);
 			}
 

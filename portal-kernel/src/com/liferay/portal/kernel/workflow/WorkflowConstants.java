@@ -15,21 +15,21 @@
 package com.liferay.portal.kernel.workflow;
 
 /**
- * <a href="StatusConstants.java.html"><b><i>View Source</i></b></a>
+ * <a href="WorkflowConstants.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
  */
-public class StatusConstants {
+public class WorkflowConstants {
 
-	public static final int ANY = -1;
+	public static final String COMPANY_ID = "companyId";
 
-	public static final int APPROVED = 0;
+	public static final String ENTRY_CLASS_NAME = "entryClassName";
 
-	public static final int DENIED = 4;
+	public static final String ENTRY_CLASS_PK = "entryClassPK";
 
-	public static final int DRAFT = 2;
+	public static final String ENTRY_TYPE = "entryType";
 
-	public static final int EXPIRED = 3;
+	public static final String GROUP_ID = "groupId";
 
 	public static final String LABEL_ANY = "any";
 
@@ -43,49 +43,59 @@ public class StatusConstants {
 
 	public static final String LABEL_PENDING = "pending";
 
-	public static final int PENDING = 1;
+	public static final int STATUS_ANY = -1;
+
+	public static final int STATUS_APPROVED = 0;
+
+	public static final int STATUS_DENIED = 4;
+
+	public static final int STATUS_DRAFT = 2;
+
+	public static final int STATUS_EXPIRED = 3;
+
+	public static final int STATUS_PENDING = 1;
 
 	public static int fromLabel(String status) {
 		if (status.equals(LABEL_ANY)) {
-			return ANY;
+			return STATUS_ANY;
 		}
 		else if (status.equals(LABEL_APPROVED)) {
-			return APPROVED;
+			return STATUS_APPROVED;
 		}
 		else if (status.equals(LABEL_DENIED)) {
-			return DENIED;
+			return STATUS_DENIED;
 		}
 		else if (status.equals(LABEL_DRAFT)) {
-			return DRAFT;
+			return STATUS_DRAFT;
 		}
 		else if (status.equals(LABEL_EXPIRED)) {
-			return EXPIRED;
+			return STATUS_EXPIRED;
 		}
 		else if (status.equals(LABEL_PENDING)) {
-			return PENDING;
+			return STATUS_PENDING;
 		}
 		else {
-			return ANY;
+			return STATUS_ANY;
 		}
 	}
 
 	public static String toLabel(int status) {
-		if (status == ANY) {
+		if (status == STATUS_ANY) {
 			return LABEL_ANY;
 		}
-		else if (status == APPROVED) {
+		else if (status == STATUS_APPROVED) {
 			return LABEL_APPROVED;
 		}
-		else if (status == DENIED) {
+		else if (status == STATUS_DENIED) {
 			return LABEL_DENIED;
 		}
-		else if (status == DRAFT) {
+		else if (status == STATUS_DRAFT) {
 			return LABEL_DRAFT;
 		}
-		else if (status == EXPIRED) {
+		else if (status == STATUS_EXPIRED) {
 			return LABEL_EXPIRED;
 		}
-		else if (status == PENDING) {
+		else if (status == STATUS_PENDING) {
 			return LABEL_PENDING;
 		}
 		else {

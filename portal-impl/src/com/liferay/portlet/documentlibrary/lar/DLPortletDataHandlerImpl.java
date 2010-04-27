@@ -22,7 +22,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.workflow.StatusConstants;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
@@ -83,7 +83,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 				context.getGroupId(), fileEntry.getFolderId(),
 				fileEntry.getName(), fileEntry.getVersion());
 
-		if (fileVersion.getStatus() != StatusConstants.APPROVED) {
+		if (fileVersion.getStatus() != WorkflowConstants.STATUS_APPROVED) {
 			return;
 		}
 

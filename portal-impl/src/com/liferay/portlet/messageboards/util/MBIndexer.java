@@ -31,7 +31,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.kernel.workflow.StatusConstants;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.search.BaseIndexer;
 import com.liferay.portal.service.GroupLocalServiceUtil;
@@ -214,7 +214,7 @@ public class MBIndexer extends BaseIndexer {
 		MBMessage message = (MBMessage)obj;
 
 		if (message.isDiscussion() ||
-			(message.getStatus() != StatusConstants.APPROVED)) {
+			(message.getStatus() != WorkflowConstants.STATUS_APPROVED)) {
 
 			return;
 		}
@@ -232,7 +232,7 @@ public class MBIndexer extends BaseIndexer {
 		if (message.isRoot()) {
 			List<MBMessage> messages =
 				MBMessageLocalServiceUtil.getThreadMessages(
-					message.getThreadId(), StatusConstants.APPROVED);
+					message.getThreadId(), WorkflowConstants.STATUS_APPROVED);
 
 			for (MBMessage curMessage : messages) {
 				reindex(curMessage);
@@ -308,7 +308,7 @@ public class MBIndexer extends BaseIndexer {
 
 			int messageCount =
 				MBMessageLocalServiceUtil.getCategoryMessagesCount(
-					groupId, categoryId, StatusConstants.APPROVED);
+					groupId, categoryId, WorkflowConstants.STATUS_APPROVED);
 
 			int messagePages = messageCount / Indexer.DEFAULT_INTERVAL;
 
@@ -329,8 +329,8 @@ public class MBIndexer extends BaseIndexer {
 
 		List<MBMessage> messages =
 			MBMessageLocalServiceUtil.getCategoryMessages(
-				groupId, categoryId, StatusConstants.APPROVED, messageStart,
-				messageEnd);
+				groupId, categoryId, WorkflowConstants.STATUS_APPROVED,
+				messageStart, messageEnd);
 
 		if (messages.isEmpty()) {
 			return;
@@ -371,7 +371,7 @@ public class MBIndexer extends BaseIndexer {
 			long categoryId = MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID;
 
 			int entryCount = MBMessageLocalServiceUtil.getCategoryMessagesCount(
-				groupId, categoryId, StatusConstants.APPROVED);
+				groupId, categoryId, WorkflowConstants.STATUS_APPROVED);
 
 			int entryPages = entryCount / Indexer.DEFAULT_INTERVAL;
 

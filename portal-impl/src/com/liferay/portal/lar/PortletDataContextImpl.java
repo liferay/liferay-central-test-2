@@ -25,7 +25,7 @@ import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.workflow.StatusConstants;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.kernel.zip.ZipReader;
 import com.liferay.portal.kernel.zip.ZipWriter;
 import com.liferay.portal.model.Group;
@@ -203,7 +203,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 		throws SystemException {
 
 		List<MBMessage> messages = MBMessageLocalServiceUtil.getMessages(
-			classObj.getName(), classPK, StatusConstants.ANY);
+			classObj.getName(), classPK, WorkflowConstants.STATUS_ANY);
 
 		if (messages.size() == 0) {
 			return;

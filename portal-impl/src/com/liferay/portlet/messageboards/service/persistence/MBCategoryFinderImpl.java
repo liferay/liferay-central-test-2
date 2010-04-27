@@ -23,7 +23,7 @@ import com.liferay.portal.kernel.dao.orm.Type;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.UnmodifiableList;
-import com.liferay.portal.kernel.workflow.StatusConstants;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.SubscriptionLocalServiceUtil;
@@ -139,11 +139,11 @@ public class MBCategoryFinderImpl
 				int threadCount =
 					MBThreadLocalServiceUtil.getCategoryThreadsCount(
 						groupId, MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID,
-						StatusConstants.APPROVED);
+						WorkflowConstants.STATUS_APPROVED);
 				int messageCount =
 					MBMessageLocalServiceUtil.getCategoryMessagesCount(
 						groupId, MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID,
-						StatusConstants.APPROVED);
+						WorkflowConstants.STATUS_APPROVED);
 
 				MBCategory category = new MBCategoryImpl();
 

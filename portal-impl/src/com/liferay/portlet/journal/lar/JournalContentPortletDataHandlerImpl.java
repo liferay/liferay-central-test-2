@@ -20,7 +20,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.kernel.workflow.StatusConstants;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
@@ -136,7 +136,8 @@ public class JournalContentPortletDataHandlerImpl
 
 			try {
 				article = JournalArticleLocalServiceUtil.getLatestArticle(
-					articleGroupId, articleId, StatusConstants.APPROVED);
+					articleGroupId, articleId,
+					WorkflowConstants.STATUS_APPROVED);
 			}
 			catch (NoSuchArticleException nsae) {
 				if (_log.isWarnEnabled()) {

@@ -48,7 +48,7 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 	<aui:input name="referringPortletResource" type="hidden" value="<%= referringPortletResource %>" />
 	<aui:input name="entryId" type="hidden" value="<%= entryId %>" />
-	<aui:input name="status" type="hidden" value="<%= StatusConstants.APPROVED %>" />
+	<aui:input name="status" type="hidden" value="<%= WorkflowConstants.STATUS_APPROVED %>" />
 
 	<liferay-ui:error exception="<%= EntryTitleException.class %>" message="please-enter-a-valid-title" />
 	<liferay-ui:asset-tags-error />
@@ -56,7 +56,7 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 	<aui:model-context bean="<%= entry %>" model="<%= BlogsEntry.class %>" />
 
 	<aui:fieldset>
-		<c:if test="<%= (entry == null) || (entry.getStatus() == StatusConstants.DRAFT) %>">
+		<c:if test="<%= (entry == null) || (entry.getStatus() == WorkflowConstants.STATUS_DRAFT) %>">
 			<div class="save-status" id="<portlet:namespace />saveStatus"></div>
 		</c:if>
 
@@ -109,7 +109,7 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 
 		<aui:input name="tags" type="assetTags" />
 
-		<c:if test="<%= (entry == null) || (entry.getStatus() == StatusConstants.DRAFT) %>">
+		<c:if test="<%= (entry == null) || (entry.getStatus() == WorkflowConstants.STATUS_DRAFT) %>">
 			<aui:field-wrapper label="permissions">
 				<liferay-ui:input-permissions
 					modelName="<%= BlogsEntry.class.getName() %>"
@@ -118,11 +118,11 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 		</c:if>
 
 		<aui:button-row>
-			<c:if test="<%= (entry == null) || (entry.getStatus() == StatusConstants.DRAFT) %>">
+			<c:if test="<%= (entry == null) || (entry.getStatus() == WorkflowConstants.STATUS_DRAFT) %>">
 				<aui:button name="saveDraftButton" onClick='<%= renderResponse.getNamespace() + "saveEntry(true);" %>' type="button" value="save-draft" />
 			</c:if>
 
-			<aui:button name="saveButton" type="submit" value='<%= ((entry == null) || (entry.getStatus() == StatusConstants.DRAFT)) ? "publish" : "save" %>' />
+			<aui:button name="saveButton" type="submit" value='<%= ((entry == null) || (entry.getStatus() == WorkflowConstants.STATUS_DRAFT)) ? "publish" : "save" %>' />
 
 			<aui:button name="cancelButton" onClick="<%= redirect %>" type="cancel" />
 		</aui:button-row>
@@ -195,7 +195,7 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 						<portlet:namespace />entryId: document.<portlet:namespace />fm.<portlet:namespace />entryId.value,
 						<portlet:namespace />redirect: document.<portlet:namespace />fm.<portlet:namespace />redirect.value,
 						<portlet:namespace />referringPortletResource: document.<portlet:namespace />fm.<portlet:namespace />referringPortletResource.value,
-						<portlet:namespace />status: <%= StatusConstants.DRAFT %>,
+						<portlet:namespace />status: <%= WorkflowConstants.STATUS_DRAFT %>,
 						<portlet:namespace />title: title
 					},
 					method: 'POST',
@@ -261,7 +261,7 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 
 			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= entry == null ? Constants.ADD : Constants.UPDATE %>";
 			document.<portlet:namespace />fm.<portlet:namespace />content.value = content;
-			document.<portlet:namespace />fm.<portlet:namespace />status.value = <%= StatusConstants.APPROVED %>;
+			document.<portlet:namespace />fm.<portlet:namespace />status.value = <%= WorkflowConstants.STATUS_APPROVED %>;
 			submitForm(document.<portlet:namespace />fm);
 		}
 	}
@@ -285,7 +285,7 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 		);
 	}
 
-	<c:if test="<%= (entry == null) || (entry.getStatus() == StatusConstants.DRAFT) %>">
+	<c:if test="<%= (entry == null) || (entry.getStatus() == WorkflowConstants.STATUS_DRAFT) %>">
 		<portlet:namespace />saveDraftIntervalId = setInterval('<portlet:namespace />saveEntry(true)', 30000);
 		<portlet:namespace />oldTitle = document.<portlet:namespace />fm.<portlet:namespace />title.value;
 		<portlet:namespace />oldContent = <portlet:namespace />initEditor();

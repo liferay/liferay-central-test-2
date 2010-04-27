@@ -253,10 +253,10 @@ request.setAttribute("view_file_shortcut.jsp-fileShortcut", fileShortcut);
 
 			searchContainer.setHeaderNames(headerNames);
 
-			int status = StatusConstants.APPROVED;
+			int status = WorkflowConstants.STATUS_APPROVED;
 
 			if (showNonApprovedDocuments) {
-				status = StatusConstants.ANY;
+				status = WorkflowConstants.STATUS_ANY;
 			}
 
 			List results = DLFileVersionLocalServiceUtil.getFileVersions(scopeGroupId, toFileEntry.getFolderId(), toFileEntry.getName(), status);
@@ -287,7 +287,7 @@ request.setAttribute("view_file_shortcut.jsp-fileShortcut", fileShortcut);
 				// Status
 
 				if (showNonApprovedDocuments) {
-					row.addText(LanguageUtil.get(pageContext, (fileVersion.getStatus() == StatusConstants.APPROVED)? "approved" : "not-approved"));
+					row.addText(LanguageUtil.get(pageContext, (fileVersion.getStatus() == WorkflowConstants.STATUS_APPROVED)? "approved" : "not-approved"));
 				}
 
 				// Action

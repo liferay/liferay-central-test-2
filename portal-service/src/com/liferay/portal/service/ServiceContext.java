@@ -16,7 +16,7 @@ package com.liferay.portal.service;
 
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.kernel.workflow.StatusConstants;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.PortletPreferencesIds;
 
 import java.io.Serializable;
@@ -307,7 +307,7 @@ public class ServiceContext implements Serializable {
 	private String _userDisplayURL;
 	private long _plid;
 	private boolean _startWorkflow = true;
-	private int _status = StatusConstants.APPROVED;
+	private int _status = WorkflowConstants.STATUS_APPROVED;
 	private long _userId;
 
 }

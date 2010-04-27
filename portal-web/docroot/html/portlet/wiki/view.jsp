@@ -265,7 +265,7 @@ AssetUtil.addLayoutTags(request, AssetTagLocalServiceUtil.getTags(WikiPage.class
 		int discussionMessagesCount = 0;
 
 		if (wikiPage != null) {
-			discussionMessagesCount = MBMessageLocalServiceUtil.getDiscussionMessagesCount(PortalUtil.getClassNameId(WikiPage.class.getName()), wikiPage.getResourcePrimKey(), StatusConstants.APPROVED);
+			discussionMessagesCount = MBMessageLocalServiceUtil.getDiscussionMessagesCount(PortalUtil.getClassNameId(WikiPage.class.getName()), wikiPage.getResourcePrimKey(), WorkflowConstants.STATUS_APPROVED);
 		}
 		%>
 

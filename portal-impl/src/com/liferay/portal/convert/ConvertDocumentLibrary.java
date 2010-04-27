@@ -24,7 +24,7 @@ import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.workflow.StatusConstants;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.service.ServiceContext;
@@ -142,7 +142,7 @@ public class ConvertDocumentLibrary extends ConvertProcess {
 
 		List<DLFileVersion> dlFileVersions =
 			DLFileVersionLocalServiceUtil.getFileVersions(
-				groupId, repositoryId, fileName, StatusConstants.ANY);
+				groupId, repositoryId, fileName, WorkflowConstants.STATUS_ANY);
 
 		if (dlFileVersions.isEmpty()) {
 			String versionNumber = Hook.DEFAULT_VERSION;

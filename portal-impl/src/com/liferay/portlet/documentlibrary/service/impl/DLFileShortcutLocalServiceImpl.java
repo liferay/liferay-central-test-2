@@ -17,7 +17,7 @@ package com.liferay.portlet.documentlibrary.service.impl;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.MimeTypesUtil;
-import com.liferay.portal.kernel.workflow.StatusConstants;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
@@ -68,7 +68,7 @@ public class DLFileShortcutLocalServiceImpl
 		fileShortcut.setFolderId(folderId);
 		fileShortcut.setToFolderId(toFolderId);
 		fileShortcut.setToName(toName);
-		fileShortcut.setStatus(StatusConstants.APPROVED);
+		fileShortcut.setStatus(WorkflowConstants.STATUS_APPROVED);
 		fileShortcut.setStatusByUserId(userId);
 		fileShortcut.setStatusByUserName(user.getFullName());
 		fileShortcut.setStatusDate(now);

@@ -16,7 +16,7 @@ package com.liferay.portlet.documentlibrary.service.impl;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.workflow.StatusConstants;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portlet.documentlibrary.NoSuchFileVersionException;
 import com.liferay.portlet.documentlibrary.model.DLFileVersion;
 import com.liferay.portlet.documentlibrary.service.base.DLFileVersionLocalServiceBaseImpl;
@@ -46,7 +46,7 @@ public class DLFileVersionLocalServiceImpl
 			long groupId, long folderId, String name, int status)
 		throws SystemException {
 
-		if (status == StatusConstants.ANY) {
+		if (status == WorkflowConstants.STATUS_ANY) {
 			return dlFileVersionPersistence.findByG_F_N(
 				groupId, folderId, name);
 		}

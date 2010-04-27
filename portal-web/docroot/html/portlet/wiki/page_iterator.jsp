@@ -220,7 +220,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	String status = null;
 
-	if (curWikiPage.getStatus() == StatusConstants.APPROVED) {
+	if (curWikiPage.getStatus() == WorkflowConstants.STATUS_APPROVED) {
 		status = "approved";
 	}
 	else {

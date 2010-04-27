@@ -17,7 +17,7 @@ package com.liferay.portlet.tasks.service.impl;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.workflow.StatusConstants;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.util.PortalUtil;
@@ -108,7 +108,7 @@ public class TasksProposalLocalServiceImpl
 
 		mbMessageLocalService.addDiscussionMessage(
 			userId, proposal.getUserName(), TasksProposal.class.getName(),
-			proposalId, StatusConstants.APPROVED);
+			proposalId, WorkflowConstants.STATUS_APPROVED);
 
 		// Social
 

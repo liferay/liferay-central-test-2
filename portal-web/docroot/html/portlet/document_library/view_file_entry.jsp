@@ -313,10 +313,10 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 				searchContainer.setRowChecker(new RowChecker(renderResponse, RowChecker.ALIGN, RowChecker.VALIGN, RowChecker.FORM_NAME, null, RowChecker.ROW_IDS));
 			}
 
-			int status = StatusConstants.APPROVED;
+			int status = WorkflowConstants.STATUS_APPROVED;
 
 			if (showNonApprovedDocuments) {
-				status = StatusConstants.ANY;
+				status = WorkflowConstants.STATUS_ANY;
 			}
 
 			List results = DLFileVersionLocalServiceUtil.getFileVersions(scopeGroupId, folderId, name, status);
@@ -351,7 +351,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 				// Status
 
 				if (showNonApprovedDocuments) {
-					row.addText(LanguageUtil.get(pageContext, (fileVersion.getStatus() == StatusConstants.APPROVED)? "approved" : "not-approved"));
+					row.addText(LanguageUtil.get(pageContext, (fileVersion.getStatus() == WorkflowConstants.STATUS_APPROVED)? "approved" : "not-approved"));
 				}
 
 				// Download

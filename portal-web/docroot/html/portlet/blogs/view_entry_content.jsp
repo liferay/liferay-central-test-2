@@ -24,15 +24,15 @@ BlogsEntry entry = (BlogsEntry)request.getAttribute("view_entry_content.jsp-entr
 AssetEntry assetEntry = (AssetEntry)request.getAttribute("view_entry_content.jsp-assetEntry");
 %>
 
-<c:if test="<%= BlogsEntryPermission.contains(permissionChecker, entry, ActionKeys.VIEW) && ((entry.getStatus() == StatusConstants.APPROVED) || BlogsEntryPermission.contains(permissionChecker, entry, ActionKeys.UPDATE)) %>">
-	<div class="entry <%= (entry.getStatus() == StatusConstants.APPROVED) ? "" : "draft" %>">
+<c:if test="<%= BlogsEntryPermission.contains(permissionChecker, entry, ActionKeys.VIEW) && ((entry.getStatus() == WorkflowConstants.STATUS_APPROVED) || BlogsEntryPermission.contains(permissionChecker, entry, ActionKeys.UPDATE)) %>">
+	<div class="entry <%= (entry.getStatus() == com.liferay.portal.kernel.workflow.WorkflowConstants.STATUS_APPROVED) ? "" : "draft" %>">
 		<div class="entry-content">
 
 			<%
 			String strutsAction = ParamUtil.getString(request, "struts_action");
 			%>
 
-			<c:if test="<%= (entry.getStatus() == StatusConstants.DRAFT) %>">
+			<c:if test="<%= (entry.getStatus() == WorkflowConstants.STATUS_DRAFT) %>">
 				<h3>
 					<liferay-ui:message key="draft" />
 				</h3>
@@ -169,7 +169,7 @@ AssetEntry assetEntry = (AssetEntry)request.getAttribute("view_entry_content.jsp
 						<%
 						long classNameId = PortalUtil.getClassNameId(BlogsEntry.class.getName());
 
-						int messagesCount = MBMessageLocalServiceUtil.getDiscussionMessagesCount(classNameId, entry.getEntryId(), StatusConstants.APPROVED);
+						int messagesCount = MBMessageLocalServiceUtil.getDiscussionMessagesCount(classNameId, entry.getEntryId(), WorkflowConstants.STATUS_APPROVED);
 						%>
 
 						<c:choose>

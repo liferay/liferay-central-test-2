@@ -22,7 +22,7 @@ import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.MimeTypesUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.kernel.workflow.StatusConstants;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.service.ImageLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
@@ -83,7 +83,7 @@ public class JournalRSSUtil {
 
 		Date displayDateGT = null;
 		Date displayDateLT = new Date();
-		int status = StatusConstants.APPROVED;
+		int status = WorkflowConstants.STATUS_APPROVED;
 		Date reviewDate = null;
 		boolean andOperator = true;
 		int start = 0;

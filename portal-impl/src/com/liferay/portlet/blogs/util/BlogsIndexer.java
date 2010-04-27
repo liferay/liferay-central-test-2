@@ -25,7 +25,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.kernel.workflow.StatusConstants;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.search.BaseIndexer;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
@@ -163,7 +163,7 @@ public class BlogsIndexer extends BaseIndexer {
 
 	protected void reindexEntries(long companyId) throws Exception {
 		int count = BlogsEntryLocalServiceUtil.getCompanyEntriesCount(
-			companyId, StatusConstants.APPROVED);
+			companyId, WorkflowConstants.STATUS_APPROVED);
 
 		int pages = count / Indexer.DEFAULT_INTERVAL;
 
@@ -179,7 +179,7 @@ public class BlogsIndexer extends BaseIndexer {
 		throws Exception {
 
 		List<BlogsEntry> entries = BlogsEntryLocalServiceUtil.getCompanyEntries(
-			companyId, StatusConstants.APPROVED, start, end);
+			companyId, WorkflowConstants.STATUS_APPROVED, start, end);
 
 		if (entries.isEmpty()) {
 			return;

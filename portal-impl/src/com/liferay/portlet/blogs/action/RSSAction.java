@@ -18,7 +18,7 @@ import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.workflow.StatusConstants;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.struts.PortletAction;
@@ -99,7 +99,7 @@ public class RSSAction extends PortletAction {
 		long companyId = ParamUtil.getLong(request, "companyId");
 		long groupId = ParamUtil.getLong(request, "groupId");
 		long organizationId = ParamUtil.getLong(request, "organizationId");
-		int status = StatusConstants.APPROVED;
+		int status = WorkflowConstants.STATUS_APPROVED;
 		int max = ParamUtil.getInteger(
 			request, "max", SearchContainer.DEFAULT_DELTA);
 		String type = ParamUtil.getString(

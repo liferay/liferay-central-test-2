@@ -72,9 +72,9 @@ else {
 					blogType = organization.getName();// + " " + LanguageUtil.get(pageContext, "organization");
 				}
 
-				int entryCount = BlogsEntryLocalServiceUtil.getGroupUserEntriesCount(group.getGroupId(), user2.getUserId(), StatusConstants.APPROVED);
+				int entryCount = BlogsEntryLocalServiceUtil.getGroupUserEntriesCount(group.getGroupId(), user2.getUserId(), WorkflowConstants.STATUS_APPROVED);
 
-				List entries = BlogsEntryLocalServiceUtil.getGroupUserEntries(group.getGroupId(), user2.getUserId(), StatusConstants.APPROVED, 0, 1);
+				List entries = BlogsEntryLocalServiceUtil.getGroupUserEntries(group.getGroupId(), user2.getUserId(), WorkflowConstants.STATUS_APPROVED, 0, 1);
 
 				if (entries.size() == 1) {
 					BlogsEntry entry = (BlogsEntry)entries.get(0);

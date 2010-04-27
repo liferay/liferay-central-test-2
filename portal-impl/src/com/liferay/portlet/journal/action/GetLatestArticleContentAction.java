@@ -17,7 +17,7 @@ package com.liferay.portlet.journal.action;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.workflow.StatusConstants;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
@@ -53,7 +53,7 @@ public class GetLatestArticleContentAction extends Action {
 
 			JournalArticle article =
 				JournalArticleLocalServiceUtil.getLatestArticle(
-					groupId, articleId, StatusConstants.APPROVED);
+					groupId, articleId, WorkflowConstants.STATUS_APPROVED);
 
 			String fileName = "content.xml";
 			byte[] bytes = article.getContentByLocale(languageId).getBytes();

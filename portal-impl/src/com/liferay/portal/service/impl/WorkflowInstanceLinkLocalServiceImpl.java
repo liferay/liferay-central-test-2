@@ -18,7 +18,7 @@ import com.liferay.portal.NoSuchWorkflowDefinitionLinkException;
 import com.liferay.portal.NoSuchWorkflowInstanceLinkException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.workflow.ContextConstants;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.kernel.workflow.WorkflowHandler;
 import com.liferay.portal.kernel.workflow.WorkflowHandlerRegistryUtil;
 import com.liferay.portal.kernel.workflow.WorkflowInstance;
@@ -208,16 +208,16 @@ public class WorkflowInstanceLinkLocalServiceImpl
 				workflowContext = new HashMap<String, Serializable>();
 			}
 
-			workflowContext.put(ContextConstants.COMPANY_ID, companyId);
-			workflowContext.put(ContextConstants.GROUP_ID, groupId);
-			workflowContext.put(ContextConstants.ENTRY_CLASS_NAME, className);
-			workflowContext.put(ContextConstants.ENTRY_CLASS_PK, classPK);
+			workflowContext.put(WorkflowConstants.COMPANY_ID, companyId);
+			workflowContext.put(WorkflowConstants.GROUP_ID, groupId);
+			workflowContext.put(WorkflowConstants.ENTRY_CLASS_NAME, className);
+			workflowContext.put(WorkflowConstants.ENTRY_CLASS_PK, classPK);
 
 			WorkflowHandler workflowHandler =
 				WorkflowHandlerRegistryUtil.getWorkflowHandler(className);
 
 			workflowContext.put(
-				ContextConstants.ENTRY_TYPE, workflowHandler.getType());
+				WorkflowConstants.ENTRY_TYPE, workflowHandler.getType());
 
 			WorkflowInstance workflowInstance =
 				WorkflowInstanceManagerUtil.startWorkflowInstance(
@@ -258,7 +258,7 @@ public class WorkflowInstanceLinkLocalServiceImpl
 				new HashMap<String, Serializable>(
 					workflowInstance.getWorkflowContext());
 
-			workflowContext.put(ContextConstants.ENTRY_CLASS_PK, newClassPK);
+			workflowContext.put(WorkflowConstants.ENTRY_CLASS_PK, newClassPK);
 
 			WorkflowInstanceManagerUtil.updateWorkflowContext(
 				workflowInstanceLink.getCompanyId(),

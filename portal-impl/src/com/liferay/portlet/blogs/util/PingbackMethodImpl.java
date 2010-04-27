@@ -25,7 +25,7 @@ import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.kernel.workflow.StatusConstants;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.kernel.xmlrpc.Method;
 import com.liferay.portal.kernel.xmlrpc.Response;
 import com.liferay.portal.kernel.xmlrpc.XmlRpcConstants;
@@ -109,7 +109,8 @@ public class PingbackMethodImpl implements Method {
 
 			MBMessageDisplay messageDisplay =
 				MBMessageLocalServiceUtil.getDiscussionMessageDisplay(
-					userId, className, classPK, StatusConstants.APPROVED);
+					userId, className, classPK,
+					WorkflowConstants.STATUS_APPROVED);
 
 			MBThread thread = messageDisplay.getThread();
 
@@ -122,7 +123,7 @@ public class PingbackMethodImpl implements Method {
 
 			List<MBMessage> messages =
 				MBMessageLocalServiceUtil.getThreadMessages(
-					threadId, StatusConstants.APPROVED);
+					threadId, WorkflowConstants.STATUS_APPROVED);
 
 			for (MBMessage message : messages) {
 				if (message.getBody().equals(body)) {

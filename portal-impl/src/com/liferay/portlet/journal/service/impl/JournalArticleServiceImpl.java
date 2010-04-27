@@ -16,7 +16,7 @@ package com.liferay.portlet.journal.service.impl;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.workflow.StatusConstants;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -263,11 +263,11 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 			String articleURL, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		if (status == StatusConstants.APPROVED) {
+		if (status == WorkflowConstants.STATUS_APPROVED) {
 			JournalPermission.check(
 				getPermissionChecker(), groupId, ActionKeys.APPROVE_ARTICLE);
 		}
-		else if (status == StatusConstants.EXPIRED) {
+		else if (status == WorkflowConstants.STATUS_EXPIRED) {
 			JournalPermission.check(
 				getPermissionChecker(), groupId, ActionKeys.EXPIRE);
 		}

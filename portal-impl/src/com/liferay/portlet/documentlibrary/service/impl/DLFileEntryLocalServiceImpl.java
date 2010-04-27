@@ -32,7 +32,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.kernel.workflow.StatusConstants;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.kernel.workflow.WorkflowHandlerRegistryUtil;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.ResourceConstants;
@@ -218,7 +218,7 @@ public class DLFileEntryLocalServiceImpl
 		if (PropsValues.DL_FILE_ENTRY_COMMENTS_ENABLED) {
 			mbMessageLocalService.addDiscussionMessage(
 				userId, fileEntry.getUserName(), DLFileEntry.class.getName(),
-				fileEntryId, StatusConstants.APPROVED);
+				fileEntryId, WorkflowConstants.STATUS_APPROVED);
 		}
 
 		// File
@@ -952,7 +952,7 @@ public class DLFileEntryLocalServiceImpl
 				size = fileVersion.getSize();
 			}
 
-			if (fileVersion.getStatus() == StatusConstants.DRAFT) {
+			if (fileVersion.getStatus() == WorkflowConstants.STATUS_DRAFT) {
 				newFileVersion = true;
 
 				updateFileVersion(
@@ -1005,7 +1005,7 @@ public class DLFileEntryLocalServiceImpl
 			}
 		}
 
-		if (serviceContext.getStatus() == StatusConstants.APPROVED) {
+		if (serviceContext.getStatus() == WorkflowConstants.STATUS_APPROVED) {
 			fileEntry.setVersion(version);
 		}
 
@@ -1113,7 +1113,7 @@ public class DLFileEntryLocalServiceImpl
 			List<DLFileVersion> approvedFileVersions =
 				dlFileVersionPersistence.findByG_F_N_S(
 					fileEntry.getGroupId(), fileEntry.getFolderId(),
-					fileEntry.getName(), StatusConstants.APPROVED);
+					fileEntry.getName(), WorkflowConstants.STATUS_APPROVED);
 
 			if (!approvedFileVersions.isEmpty()) {
 				newVersion = approvedFileVersions.get(0).getVersion();
@@ -1237,7 +1237,7 @@ public class DLFileEntryLocalServiceImpl
 			return DLFileEntryConstants.DEFAULT_VERSION;
 		}
 
-		if (status == StatusConstants.DRAFT) {
+		if (status == WorkflowConstants.STATUS_DRAFT) {
 			majorVersion = false;
 		}
 

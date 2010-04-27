@@ -26,7 +26,7 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.kernel.workflow.StatusConstants;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portlet.journal.NoSuchArticleException;
 import com.liferay.portlet.journal.model.JournalArticle;
@@ -173,7 +173,7 @@ public class JournalArticleFinderImpl
 			sql = CustomSQLUtil.replaceKeywords(
 				sql, "templateId", StringPool.EQUAL, false, templateIds);
 
-			if (status == StatusConstants.ANY) {
+			if (status == WorkflowConstants.STATUS_ANY) {
 				sql = StringUtil.replace(sql, "(status = ?) AND", "");
 			}
 
@@ -209,7 +209,7 @@ public class JournalArticleFinderImpl
 			qPos.add(displayDateLT_TS);
 			qPos.add(displayDateLT_TS);
 
-			if (status != StatusConstants.ANY) {
+			if (status != WorkflowConstants.STATUS_ANY) {
 				qPos.add(status);
 			}
 
@@ -252,7 +252,7 @@ public class JournalArticleFinderImpl
 
 			String sql = CustomSQLUtil.get(FIND_BY_EXPIRATION_DATE);
 
-			if (status == StatusConstants.ANY) {
+			if (status == WorkflowConstants.STATUS_ANY) {
 				sql = StringUtil.replace(sql, "(status = ?) AND", "");
 			}
 
@@ -262,7 +262,7 @@ public class JournalArticleFinderImpl
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
-			if (status != StatusConstants.ANY) {
+			if (status != WorkflowConstants.STATUS_ANY) {
 				qPos.add(status);
 			}
 
@@ -471,7 +471,7 @@ public class JournalArticleFinderImpl
 			sql = CustomSQLUtil.replaceKeywords(
 				sql, "templateId", StringPool.EQUAL, false, templateIds);
 
-			if (status == StatusConstants.ANY) {
+			if (status == WorkflowConstants.STATUS_ANY) {
 				sql = StringUtil.replace(sql, "(status = ?) AND", "");
 			}
 
@@ -508,7 +508,7 @@ public class JournalArticleFinderImpl
 			qPos.add(displayDateLT_TS);
 			qPos.add(displayDateLT_TS);
 
-			if (status != StatusConstants.ANY) {
+			if (status != WorkflowConstants.STATUS_ANY) {
 				qPos.add(status);
 			}
 

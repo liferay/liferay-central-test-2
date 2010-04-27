@@ -42,7 +42,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.kernel.workflow.StatusConstants;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.kernel.workflow.WorkflowHandlerRegistryUtil;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.DocumentException;
@@ -266,10 +266,10 @@ public class JournalArticleLocalServiceImpl
 		article.setDisplayDate(displayDate);
 
 		if ((expirationDate == null) || expirationDate.after(now)) {
-			article.setStatus(StatusConstants.PENDING);
+			article.setStatus(WorkflowConstants.STATUS_PENDING);
 		}
 		else {
-			article.setStatus(StatusConstants.EXPIRED);
+			article.setStatus(WorkflowConstants.STATUS_EXPIRED);
 		}
 
 		article.setExpirationDate(expirationDate);
@@ -321,7 +321,7 @@ public class JournalArticleLocalServiceImpl
 			mbMessageLocalService.addDiscussionMessage(
 				userId, article.getUserName(),
 				JournalArticle.class.getName(), resourcePrimKey,
-				StatusConstants.APPROVED);
+				WorkflowConstants.STATUS_APPROVED);
 		}
 
 		// Email
@@ -425,7 +425,7 @@ public class JournalArticleLocalServiceImpl
 
 		List<JournalArticle> articles =
 			journalArticleFinder.findByExpirationDate(
-				StatusConstants.APPROVED, now,
+				WorkflowConstants.STATUS_APPROVED, now,
 				new Date(now.getTime() - _journalArticleCheckInterval));
 
 		if (_log.isDebugEnabled()) {
@@ -435,7 +435,7 @@ public class JournalArticleLocalServiceImpl
 		Set<Long> companyIds = new HashSet<Long>();
 
 		for (JournalArticle article : articles) {
-			article.setStatus(StatusConstants.EXPIRED);
+			article.setStatus(WorkflowConstants.STATUS_EXPIRED);
 
 			journalArticlePersistence.update(article, false);
 
@@ -756,11 +756,11 @@ public class JournalArticleLocalServiceImpl
 
 		try {
 			return getLatestArticle(
-				groupId, articleId, StatusConstants.APPROVED);
+				groupId, articleId, WorkflowConstants.STATUS_APPROVED);
 		}
 		catch (NoSuchArticleException nsae) {
 			return getLatestArticle(
-				groupId, articleId, StatusConstants.PENDING);
+				groupId, articleId, WorkflowConstants.STATUS_PENDING);
 		}
 	}
 
@@ -780,11 +780,11 @@ public class JournalArticleLocalServiceImpl
 
 		try {
 			return getLatestArticleByUrlTitle(
-				groupId, urlTitle, StatusConstants.APPROVED);
+				groupId, urlTitle, WorkflowConstants.STATUS_APPROVED);
 		}
 		catch (NoSuchArticleException nsae) {
 			return getLatestArticleByUrlTitle(
-				groupId, urlTitle, StatusConstants.PENDING);
+				groupId, urlTitle, WorkflowConstants.STATUS_PENDING);
 		}
 	}
 
@@ -1156,7 +1156,7 @@ public class JournalArticleLocalServiceImpl
 			long companyId, int status, int start, int end)
 		throws SystemException {
 
-		if (status == StatusConstants.ANY) {
+		if (status == WorkflowConstants.STATUS_ANY) {
 			return journalArticlePersistence.findByCompanyId(
 				companyId, start, end, new ArticleIDComparator(true));
 		}
@@ -1169,7 +1169,7 @@ public class JournalArticleLocalServiceImpl
 	public int getCompanyArticlesCount(long companyId, int status)
 		throws SystemException {
 
-		if (status == StatusConstants.ANY) {
+		if (status == WorkflowConstants.STATUS_ANY) {
 			return journalArticlePersistence.countByCompanyId(companyId);
 		}
 		else {
@@ -1181,7 +1181,7 @@ public class JournalArticleLocalServiceImpl
 		throws PortalException, SystemException {
 
 		List<JournalArticle> articles = journalArticlePersistence.findByG_A_S(
-			groupId, articleId, StatusConstants.APPROVED);
+			groupId, articleId, WorkflowConstants.STATUS_APPROVED);
 
 		if (articles.size() == 0) {
 			throw new NoSuchArticleException();
@@ -1207,7 +1207,7 @@ public class JournalArticleLocalServiceImpl
 	public JournalArticle getLatestArticle(long resourcePrimKey)
 		throws PortalException, SystemException {
 
-		return getLatestArticle(resourcePrimKey, StatusConstants.ANY);
+		return getLatestArticle(resourcePrimKey, WorkflowConstants.STATUS_ANY);
 	}
 
 	public JournalArticle getLatestArticle(long resourcePrimKey, int status)
@@ -1217,14 +1217,14 @@ public class JournalArticleLocalServiceImpl
 
 		OrderByComparator orderByComparator = new ArticleVersionComparator();
 
-		if (status == StatusConstants.ANY) {
+		if (status == WorkflowConstants.STATUS_ANY) {
 			articles = journalArticlePersistence.findByR_S(
-				resourcePrimKey, StatusConstants.APPROVED, 0, 1,
+				resourcePrimKey, WorkflowConstants.STATUS_APPROVED, 0, 1,
 				orderByComparator);
 
 			if (articles.size() == 0) {
 				articles = journalArticlePersistence.findByR_S(
-					resourcePrimKey, StatusConstants.PENDING, 0, 1,
+					resourcePrimKey, WorkflowConstants.STATUS_PENDING, 0, 1,
 					orderByComparator);
 			}
 		}
@@ -1243,7 +1243,8 @@ public class JournalArticleLocalServiceImpl
 	public JournalArticle getLatestArticle(long groupId, String articleId)
 		throws PortalException, SystemException {
 
-		return getLatestArticle(groupId, articleId, StatusConstants.ANY);
+		return getLatestArticle(
+			groupId, articleId, WorkflowConstants.STATUS_ANY);
 	}
 
 	public JournalArticle getLatestArticle(
@@ -1254,7 +1255,7 @@ public class JournalArticleLocalServiceImpl
 
 		OrderByComparator orderByComparator = new ArticleVersionComparator();
 
-		if (status == StatusConstants.ANY) {
+		if (status == WorkflowConstants.STATUS_ANY) {
 			articles = journalArticlePersistence.findByG_A(
 				groupId, articleId, 0, 1, orderByComparator);
 		}
@@ -1278,7 +1279,7 @@ public class JournalArticleLocalServiceImpl
 
 		OrderByComparator orderByComparator = new ArticleVersionComparator();
 
-		if (status == StatusConstants.ANY) {
+		if (status == WorkflowConstants.STATUS_ANY) {
 			articles = journalArticlePersistence.findByG_UT(
 				groupId, urlTitle, 0, 1, orderByComparator);
 		}
@@ -1698,7 +1699,7 @@ public class JournalArticleLocalServiceImpl
 		int status = oldArticle.getStatus();
 
 		if (incrementVersion) {
-			status = StatusConstants.PENDING;
+			status = WorkflowConstants.STATUS_PENDING;
 		}
 
 		article.setModifiedDate(serviceContext.getModifiedDate(now));
@@ -1716,7 +1717,7 @@ public class JournalArticleLocalServiceImpl
 			article.setStatus(status);
 		}
 		else {
-			article.setStatus(StatusConstants.EXPIRED);
+			article.setStatus(WorkflowConstants.STATUS_EXPIRED);
 		}
 
 		article.setExpirationDate(expirationDate);
@@ -1812,7 +1813,7 @@ public class JournalArticleLocalServiceImpl
 			int approvedArticlesCount =
 				journalArticlePersistence.countByG_A_S(
 					article.getGroupId(), article.getArticleId(),
-					StatusConstants.APPROVED);
+					WorkflowConstants.STATUS_APPROVED);
 
 			if (approvedArticlesCount > 0) {
 				visible = true;
@@ -1871,7 +1872,7 @@ public class JournalArticleLocalServiceImpl
 				article.getGroupId(), article.getArticleId(),
 				article.getVersion())) {
 
-			if (status == StatusConstants.APPROVED) {
+			if (status == WorkflowConstants.STATUS_APPROVED) {
 
 				// Asset
 
@@ -1913,9 +1914,9 @@ public class JournalArticleLocalServiceImpl
 
 		// Email
 
-		if ((oldStatus == StatusConstants.PENDING) &&
-			((status == StatusConstants.APPROVED) ||
-			 (status == StatusConstants.DENIED))) {
+		if ((oldStatus == WorkflowConstants.STATUS_PENDING) &&
+			((status == WorkflowConstants.STATUS_APPROVED) ||
+			 (status == WorkflowConstants.STATUS_DENIED))) {
 
 			PortletPreferences preferences =
 				ServiceContextUtil.getPortletPreferences(serviceContext);
@@ -1923,7 +1924,7 @@ public class JournalArticleLocalServiceImpl
 			try {
 				String msg = "granted";
 
-				if (status == StatusConstants.DENIED) {
+				if (status == WorkflowConstants.STATUS_DENIED) {
 					msg = "denied";
 				}
 
@@ -2338,7 +2339,7 @@ public class JournalArticleLocalServiceImpl
 		Date[] dateInterval = new Date[2];
 
 		List<JournalArticle> articles = journalArticlePersistence.findByG_A_S(
-			groupId, articleId, StatusConstants.APPROVED);
+			groupId, articleId, WorkflowConstants.STATUS_APPROVED);
 
 		boolean expiringArticle = true;
 
