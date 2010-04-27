@@ -18,6 +18,10 @@ import com.liferay.portal.kernel.workflow.WorkflowException;
 import com.liferay.portal.kernel.workflow.WorkflowHandlerRegistryUtil;
 import com.liferay.portal.kernel.workflow.WorkflowStatusManager;
 
+import java.io.Serializable;
+
+import java.util.Map;
+
 /**
  * <a href="WorkflowStatusManagerImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -26,13 +30,11 @@ import com.liferay.portal.kernel.workflow.WorkflowStatusManager;
 public class WorkflowStatusManagerImpl implements WorkflowStatusManager {
 
 	public void updateStatus(
-			long companyId, long groupId, long userId, String className,
-			long classPK, int status)
+			int status, Map<String, Serializable> workflowContext)
 		throws WorkflowException {
 
 		try {
-			WorkflowHandlerRegistryUtil.updateStatus(
-				companyId, groupId, userId, className, classPK, status);
+			WorkflowHandlerRegistryUtil.updateStatus(status, workflowContext);
 		}
 		catch (Exception e) {
 			throw new WorkflowException(e);

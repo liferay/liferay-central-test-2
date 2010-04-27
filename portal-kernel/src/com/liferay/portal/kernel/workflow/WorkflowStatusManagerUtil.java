@@ -14,6 +14,10 @@
 
 package com.liferay.portal.kernel.workflow;
 
+import java.io.Serializable;
+
+import java.util.Map;
+
 /**
  * <a href="WorkflowStatusManagerUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -22,12 +26,10 @@ package com.liferay.portal.kernel.workflow;
 public class WorkflowStatusManagerUtil {
 
 	public static void updateStatus(
-			long companyId, long groupId, long userId, String className,
-			long classPK, int status)
+			int status, Map<String, Serializable> workflowContext)
 		throws WorkflowException {
 
-		_workflowStatusManager.updateStatus(
-			companyId, groupId, userId, className, classPK, status);
+		_workflowStatusManager.updateStatus(status, workflowContext);
 	}
 
 	public void setWorkflowStatusManager(

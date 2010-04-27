@@ -55,14 +55,14 @@ public class WorkflowHandlerRegistryUtil {
 	public static void startWorkflowInstance(
 			long companyId, long groupId, long userId, String className,
 			long classPK, Object model,
-			Map<String, Serializable> contextVariables)
+			Map<String, Serializable> workflowContext)
 		throws PortalException, SystemException {
 
 		WorkflowHandler workflowHandler = getWorkflowHandler(className);
 
 		if (workflowHandler != null) {
 			workflowHandler.startWorkflowInstance(
-				companyId, groupId, userId, classPK, model, contextVariables);
+				companyId, groupId, userId, classPK, model, workflowContext);
 		}
 	}
 
@@ -77,15 +77,16 @@ public class WorkflowHandlerRegistryUtil {
 	}
 
 	public static Object updateStatus(
-			long companyId, long groupId, long userId, String className,
-			long classPK, int status)
+			int status, Map<String, Serializable> workflowContext)
 		throws PortalException, SystemException {
+
+		String className = (String)workflowContext.get(
+			ContextConstants.ENTRY_CLASS_NAME);
 
 		WorkflowHandler workflowHandler = getWorkflowHandler(className);
 
 		if (workflowHandler != null) {
-			return workflowHandler.updateStatus(
-				companyId, groupId, userId, classPK, status);
+			return workflowHandler.updateStatus(status, workflowContext);
 		}
 
 		return null;

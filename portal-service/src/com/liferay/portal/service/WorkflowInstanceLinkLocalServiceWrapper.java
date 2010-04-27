@@ -188,11 +188,11 @@ public class WorkflowInstanceLinkLocalServiceWrapper
 
 	public void startWorkflowInstance(long companyId, long groupId,
 		long userId, java.lang.String className, long classPK,
-		java.util.Map<String, java.io.Serializable> contextVariables)
+		java.util.Map<String, java.io.Serializable> workflowContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_workflowInstanceLinkLocalService.startWorkflowInstance(companyId,
-			groupId, userId, className, classPK, contextVariables);
+			groupId, userId, className, classPK, workflowContext);
 	}
 
 	public void updateClassPK(long companyId, long groupId,

@@ -187,7 +187,7 @@ public class WorkflowInstanceLinkLocalServiceImpl
 
 	public void startWorkflowInstance(
 			long companyId, long groupId, long userId, String className,
-			long classPK, Map<String, Serializable> contextVariables)
+			long classPK, Map<String, Serializable> workflowContext)
 		throws PortalException, SystemException {
 
 		try {
@@ -202,27 +202,29 @@ public class WorkflowInstanceLinkLocalServiceImpl
 
 			Map<String, Serializable> context = null;
 
-			if ((contextVariables != null) && !contextVariables.isEmpty()) {
-				context = new HashMap<String, Serializable>(contextVariables);
+			if (workflowContext != null) {
+				workflowContext = new HashMap<String, Serializable>(
+					workflowContext);
 			}
 			else {
-				context = new HashMap<String, Serializable>();
+				workflowContext = new HashMap<String, Serializable>();
 			}
 
-			context.put(ContextConstants.COMPANY_ID, companyId);
-			context.put(ContextConstants.GROUP_ID, groupId);
-			context.put(ContextConstants.ENTRY_CLASS_NAME, className);
-			context.put(ContextConstants.ENTRY_CLASS_PK, classPK);
+			workflowContext.put(ContextConstants.COMPANY_ID, companyId);
+			workflowContext.put(ContextConstants.GROUP_ID, groupId);
+			workflowContext.put(ContextConstants.ENTRY_CLASS_NAME, className);
+			workflowContext.put(ContextConstants.ENTRY_CLASS_PK, classPK);
 
 			WorkflowHandler workflowHandler =
 				WorkflowHandlerRegistryUtil.getWorkflowHandler(className);
 
-			context.put(ContextConstants.ENTRY_TYPE, workflowHandler.getType());
+			workflowContext.put(
+				ContextConstants.ENTRY_TYPE, workflowHandler.getType());
 
 			WorkflowInstance workflowInstance =
 				WorkflowInstanceManagerUtil.startWorkflowInstance(
 					companyId, userId, workflowDefinitionName,
-					workflowDefinitionVersion, null, context);
+					workflowDefinitionVersion, null, workflowContext);
 
 			addWorkflowInstanceLink(
 				userId, companyId, groupId, className, classPK,
@@ -254,15 +256,15 @@ public class WorkflowInstanceLinkLocalServiceImpl
 			workflowInstanceLinkPersistence.update(
 				workflowInstanceLink, false);
 
-			Map<String, Serializable> context =
+			Map<String, Serializable> workflowContext =
 				new HashMap<String, Serializable>(
 					workflowInstance.getContext());
 
-			context.put(ContextConstants.ENTRY_CLASS_PK, newClassPK);
+			workflowContext.put(ContextConstants.ENTRY_CLASS_PK, newClassPK);
 
 			WorkflowInstanceManagerUtil.updateContext(
 				workflowInstanceLink.getCompanyId(),
-				workflowInstanceLink.getWorkflowInstanceId(), context);
+				workflowInstanceLink.getWorkflowInstanceId(), workflowContext);
 		}
 	}
 

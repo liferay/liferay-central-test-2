@@ -95,12 +95,12 @@ public abstract class BaseWorkflowHandler implements WorkflowHandler {
 
 	public void startWorkflowInstance(
 			long companyId, long groupId, long userId, long classPK,
-			Object model, Map<String, Serializable> contextVariables)
+			Object model, Map<String, Serializable> workflowContext)
 		throws PortalException, SystemException {
 
 		WorkflowInstanceLinkLocalServiceUtil.startWorkflowInstance(
 			companyId, groupId, userId, getClassName(), classPK,
-			contextVariables);
+			workflowContext);
 	}
 
 	protected AssetRenderer getAssetRenderer(long classPK)

@@ -17,6 +17,10 @@ package com.liferay.portal.kernel.workflow;
 import com.liferay.portal.kernel.messaging.proxy.MessagingProxy;
 import com.liferay.portal.kernel.messaging.proxy.ProxyMode;
 
+import java.io.Serializable;
+
+import java.util.Map;
+
 @MessagingProxy(mode = ProxyMode.ASYNC)
 /**
  * <a href="WorkflowStatusManager.java.html"><b><i>View Source</i></b></a>
@@ -26,8 +30,7 @@ import com.liferay.portal.kernel.messaging.proxy.ProxyMode;
 public interface WorkflowStatusManager {
 
 	public void updateStatus(
-			long companyId, long groupId, long userId, String className,
-			long classPK, int status)
+			int status, Map<String, Serializable> workflowContext)
 		throws WorkflowException;
 
 }

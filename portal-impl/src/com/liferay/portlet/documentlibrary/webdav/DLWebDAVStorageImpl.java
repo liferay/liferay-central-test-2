@@ -791,7 +791,6 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		serviceContext.setAddCommunityPermissions(
 			isAddCommunityPermissions(fileEntry.getGroupId()));
 		serviceContext.setAddGuestPermissions(true);
-		serviceContext.setStatus(StatusConstants.APPROVED);
 
 		String[] assetTagNames = AssetTagLocalServiceUtil.getTagNames(
 			DLFileEntry.class.getName(), fileEntry.getFileEntryId());
@@ -799,7 +798,8 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		serviceContext.setAssetTagNames(assetTagNames);
 
 		DLFileEntryLocalServiceUtil.updateStatus(
-			fileEntry.getUserId(), fileEntry.getFileEntryId(), serviceContext);
+			fileEntry.getUserId(), fileEntry.getFileEntryId(),
+			StatusConstants.APPROVED, serviceContext);
 	}
 
 	protected boolean deleteResource(
