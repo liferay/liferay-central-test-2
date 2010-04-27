@@ -54,23 +54,32 @@ portletURL.setParameter("struts_action", "/blogs/view");
 	searchContainer.setDelta(pageDelta);
 	searchContainer.setDeltaConfigurable(false);
 
-	AssetEntryQuery assetEntryQuery = new AssetEntryQuery(BlogsEntry.class.getName(), searchContainer);
-
-	assetEntryQuery.setExcludeZeroViewCount(false);
+	int status = WorkflowConstants.STATUS_APPROVED;
+	Boolean visible = Boolean.TRUE;
 
 	if (BlogsPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_ENTRY)) {
-		assetEntryQuery.setVisible(null);
+		status = WorkflowConstants.STATUS_ANY;
+		visible = null;
+	}
+
+	int total = 0;
+	List results = null;
+
+	if ((categoryId != 0) || Validator.isNotNull(tagName)) {
+		AssetEntryQuery assetEntryQuery = new AssetEntryQuery(BlogsEntry.class.getName(), searchContainer);
+
+		assetEntryQuery.setExcludeZeroViewCount(false);
+		assetEntryQuery.setVisible(visible);
+
+		total = AssetEntryLocalServiceUtil.getEntriesCount(assetEntryQuery);
+		results = AssetEntryLocalServiceUtil.getEntries(assetEntryQuery);
 	}
 	else {
-		assetEntryQuery.setVisible(true);
+		total = BlogsEntryLocalServiceUtil.getGroupEntriesCount(scopeGroupId, status);
+		results = BlogsEntryLocalServiceUtil.getGroupEntries(scopeGroupId, status, searchContainer.getStart(), searchContainer.getEnd());
 	}
 
-	int total = AssetEntryLocalServiceUtil.getEntriesCount(assetEntryQuery);
-
 	searchContainer.setTotal(total);
-
-	List<AssetEntry> results = AssetEntryLocalServiceUtil.getEntries(assetEntryQuery);
-
 	searchContainer.setResults(results);
 	%>
 

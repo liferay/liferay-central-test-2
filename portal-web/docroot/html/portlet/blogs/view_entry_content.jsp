@@ -152,16 +152,18 @@ AssetEntry assetEntry = (AssetEntry)request.getAttribute("view_entry_content.jsp
 			</div>
 
 			<div class="stats">
-				<span class="view-count">
-					<c:choose>
-						<c:when test="<%= assetEntry.getViewCount() == 1 %>">
-							<%= assetEntry.getViewCount() %> <liferay-ui:message key="view" />,
-						</c:when>
-						<c:when test="<%= assetEntry.getViewCount() > 1 %>">
-							<%= assetEntry.getViewCount() %> <liferay-ui:message key="views" />,
-						</c:when>
-					</c:choose>
-				</span>
+				<c:if test="<%= assetEntry != null%>">
+					<span class="view-count">
+						<c:choose>
+							<c:when test="<%= assetEntry.getViewCount() == 1 %>">
+								<%= assetEntry.getViewCount() %> <liferay-ui:message key="view" />,
+							</c:when>
+							<c:when test="<%= assetEntry.getViewCount() > 1 %>">
+								<%= assetEntry.getViewCount() %> <liferay-ui:message key="views" />,
+							</c:when>
+						</c:choose>
+					</span>
+				</c:if>
 
 				<c:if test="<%= enableComments %>">
 					<span class="comments">
