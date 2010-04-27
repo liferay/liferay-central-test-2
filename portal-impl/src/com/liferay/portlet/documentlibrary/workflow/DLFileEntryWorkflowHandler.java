@@ -54,10 +54,9 @@ public class DLFileEntryWorkflowHandler extends BaseWorkflowHandler {
 		ServiceContext serviceContext = new ServiceContext();
 
 		serviceContext.setScopeGroupId(groupId);
-		serviceContext.setStatus(status);
 
 		return DLFileEntryLocalServiceUtil.updateStatus(
-			userId, classPK, serviceContext);
+			userId, classPK, status, serviceContext);
 	}
 
 }

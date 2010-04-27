@@ -231,7 +231,8 @@ public class DLFileEntryLocalServiceImpl
 
 		// Status
 
-		fileEntry = updateStatus(userId, fileEntryId, serviceContext);
+		fileEntry = updateStatus(
+			userId, fileEntryId, serviceContext.getStatus(),serviceContext);
 
 		// Workflow
 
@@ -1053,7 +1054,8 @@ public class DLFileEntryLocalServiceImpl
 		// Status
 
 		fileEntry = updateStatus(
-			userId, fileEntry.getFileEntryId(), serviceContext);
+			userId, fileEntry.getFileEntryId(), serviceContext.getStatus(),
+			serviceContext);
 
 		// Workflow
 
@@ -1068,7 +1070,8 @@ public class DLFileEntryLocalServiceImpl
 	}
 
 	public DLFileEntry updateStatus(
-			long userId, long fileEntryId, ServiceContext serviceContext)
+			long userId, long fileEntryId, int status,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// File entry
@@ -1085,7 +1088,7 @@ public class DLFileEntryLocalServiceImpl
 				fileEntry.getGroupId(), fileEntry.getFolderId(),
 				fileEntry.getName());
 
-		fileVersion.setStatus(serviceContext.getStatus());
+		fileVersion.setStatus(status);
 		fileVersion.setStatusByUserId(user.getUserId());
 		fileVersion.setStatusByUserName(user.getFullName());
 		fileVersion.setStatusDate(new Date());
