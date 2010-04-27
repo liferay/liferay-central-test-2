@@ -91,8 +91,6 @@ boolean deletePortrait = ParamUtil.getBoolean(request, "deletePortrait");
 	<liferay-ui:error exception="<%= ContactFirstNameException.class %>" message="please-enter-a-valid-first-name" />
 	<liferay-ui:error exception="<%= ContactFullNameException.class %>" message="please-enter-a-valid-first-middle-and-last-name" />
 
-	<aui:model-context bean="<%= selContact %>" model="<%= Contact.class %>" />
-
 	<aui:input name="firstName" />
 
 	<aui:input name="middleName" />
