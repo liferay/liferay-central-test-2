@@ -455,11 +455,14 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			visible = true;
 		}
 
+		String summary = HtmlUtil.extractText(
+			StringUtil.shorten(entry.getContent(), 500));
+
 		assetEntryLocalService.updateEntry(
 			userId, entry.getGroupId(), BlogsEntry.class.getName(),
 			entry.getEntryId(), assetCategoryIds, assetTagNames, visible, null,
 			null, entry.getDisplayDate(), null, ContentTypes.TEXT_HTML,
-			entry.getTitle(), null, null, null, 0, 0, null, false);
+			entry.getTitle(), null, summary, null, 0, 0, null, false);
 	}
 
 	public BlogsEntry updateEntry(
