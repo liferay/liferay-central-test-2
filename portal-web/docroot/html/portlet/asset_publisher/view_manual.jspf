@@ -47,6 +47,10 @@ for (int assetEntryIndex = 0; assetEntryIndex < results.size(); assetEntryIndex+
 		continue;
 	}
 
+	if (!assetEntry.isVisible()) {
+		continue;
+	}
+
 	AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(assetEntry.getClassName());
 	AssetRenderer assetRenderer = assetRendererFactory.getAssetRenderer(assetEntry.getClassPK());
 
