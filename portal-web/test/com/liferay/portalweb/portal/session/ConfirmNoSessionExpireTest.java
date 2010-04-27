@@ -45,6 +45,7 @@ public class ConfirmNoSessionExpireTest extends BaseTestCase {
 
 		Thread.sleep(30000);
 		Thread.sleep(30000);
+		assertFalse(selenium.isElementPresent("//input[@value='Extend']"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

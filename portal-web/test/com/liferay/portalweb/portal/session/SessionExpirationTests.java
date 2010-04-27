@@ -35,7 +35,7 @@ public class SessionExpirationTests extends BaseTests {
 		testSuite.addTestSuite(ConfirmSessionExpireTest.class);
 		testSuite.addTestSuite(RememberMeLoginTest.class);
 		testSuite.addTestSuite(ConfirmNoSessionExpireTest.class);
-		testSuite.addTestSuite(DeletePageTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

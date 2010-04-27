@@ -63,6 +63,8 @@ public class ConfirmSessionExpireTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		Thread.sleep(5000);
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -83,21 +85,7 @@ public class ConfirmSessionExpireTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"link=Session Expiration Test Page"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_58_login")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
+		assertEquals(RuntimeVariables.replace("Sign In"),
+			selenium.getText("sign-in"));
 	}
 }
