@@ -200,8 +200,6 @@ public class WorkflowInstanceLinkLocalServiceImpl
 			int workflowDefinitionVersion =
 				workflowDefinitionLink.getWorkflowDefinitionVersion();
 
-			Map<String, Serializable> context = null;
-
 			if (workflowContext != null) {
 				workflowContext = new HashMap<String, Serializable>(
 					workflowContext);
@@ -258,7 +256,7 @@ public class WorkflowInstanceLinkLocalServiceImpl
 
 			Map<String, Serializable> workflowContext =
 				new HashMap<String, Serializable>(
-					workflowInstance.getContext());
+					workflowInstance.getWorkflowContext());
 
 			workflowContext.put(ContextConstants.ENTRY_CLASS_PK, newClassPK);
 

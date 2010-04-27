@@ -37,19 +37,20 @@ public interface WorkflowTaskManager {
 
 	public WorkflowTask assignWorkflowTaskToRole(
 			long companyId, long userId, long workflowTaskId, long roleId,
-			String comment, Date dueDate, Map<String, Serializable> context)
+			String comment, Date dueDate,
+			Map<String, Serializable> workflowContext)
 		throws WorkflowException;
 
 	public WorkflowTask assignWorkflowTaskToUser(
 			long companyId, long userId, long workflowTaskId,
 			long assigneeUserId, String comment, Date dueDate,
-			Map<String, Serializable> context)
+			Map<String, Serializable> workflowContext)
 		throws WorkflowException;
 
 	public WorkflowTask completeWorkflowTask(
 			long companyId, long userId, long workflowTaskId,
 			String transitionName, String comment,
-			Map<String, Serializable> context)
+			Map<String, Serializable> workflowContext)
 		throws WorkflowException;
 
 	public List<String> getNextTransitionNames(

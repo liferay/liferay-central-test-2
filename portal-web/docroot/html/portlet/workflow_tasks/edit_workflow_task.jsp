@@ -29,12 +29,12 @@ if (workflowTask.getDueDate() != null) {
 
 WorkflowInstance workflowInstance = WorkflowInstanceManagerUtil.getWorkflowInstance(company.getCompanyId(), workflowTask.getWorkflowInstanceId());
 
-Map<String, Serializable> workflowInstanceContext = workflowInstance.getContext();
+Map<String, Serializable> workflowContext = workflowInstance.getWorkflowContext();
 
-long companyId = ((Number)workflowInstanceContext.get(ContextConstants.COMPANY_ID)).longValue();
-long groupId = ((Number)workflowInstanceContext.get(ContextConstants.GROUP_ID)).longValue();
-String className = (String)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_NAME);
-long classPK = ((Number)workflowInstanceContext.get(ContextConstants.ENTRY_CLASS_PK)).longValue();
+long companyId = ((Number)workflowContext.get(ContextConstants.COMPANY_ID)).longValue();
+long groupId = ((Number)workflowContext.get(ContextConstants.GROUP_ID)).longValue();
+String className = (String)workflowContext.get(ContextConstants.ENTRY_CLASS_NAME);
+long classPK = ((Number)workflowContext.get(ContextConstants.ENTRY_CLASS_PK)).longValue();
 %>
 
 <h3 class="task-title"><%= workflowTask.getName() %></h3>

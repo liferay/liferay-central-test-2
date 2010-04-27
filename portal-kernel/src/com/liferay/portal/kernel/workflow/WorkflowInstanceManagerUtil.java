@@ -82,31 +82,32 @@ public class WorkflowInstanceManagerUtil {
 
 	public static WorkflowInstance signalWorkflowInstance(
 			long companyId, long userId, long workflowInstanceId,
-			String transitionName, Map<String, Serializable> context)
+			String transitionName, Map<String, Serializable> workflowContext)
 		throws WorkflowException {
 
 		return _workflowInstanceManager.signalWorkflowInstance(
-			companyId, userId, workflowInstanceId, transitionName, context);
+			companyId, userId, workflowInstanceId, transitionName,
+			workflowContext);
 	}
 
 	public static WorkflowInstance startWorkflowInstance(
 			long companyId, long userId, String workflowDefinitionName,
 			Integer workflowDefinitionVersion, String transitionName,
-			Map<String, Serializable> context)
+			Map<String, Serializable> workflowContext)
 		throws WorkflowException {
 
 		return _workflowInstanceManager.startWorkflowInstance(
 			companyId, userId, workflowDefinitionName,
-			workflowDefinitionVersion, transitionName, context);
+			workflowDefinitionVersion, transitionName, workflowContext);
 	}
 
 	public static WorkflowInstance updateContext(
 			long companyId, long workflowInstanceId,
-			Map<String, Serializable> context)
+			Map<String, Serializable> workflowContext)
 		throws WorkflowException {
 
 		return _workflowInstanceManager.updateContext(
-			companyId, workflowInstanceId, context);
+			companyId, workflowInstanceId, workflowContext);
 	}
 
 	public void setWorkflowInstanceManager(

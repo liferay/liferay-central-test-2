@@ -34,34 +34,35 @@ public class WorkflowTaskManagerUtil {
 
 	public static WorkflowTask assignWorkflowTaskToRole(
 			long companyId, long userId, long workflowTaskId, long roleId,
-			String comment, Date dueDate, Map<String, Serializable> context)
+			String comment, Date dueDate,
+			Map<String, Serializable> workflowContext)
 		throws WorkflowException {
 
 		return _workflowTaskManager.assignWorkflowTaskToRole(
 			companyId, userId, workflowTaskId, roleId, comment, dueDate,
-			context);
+			workflowContext);
 	}
 
 	public static WorkflowTask assignWorkflowTaskToUser(
 			long companyId, long userId, long workflowTaskId,
 			long assigneeUserId, String comment, Date dueDate,
-			Map<String, Serializable> context)
+			Map<String, Serializable> workflowContext)
 		throws WorkflowException {
 
 		return _workflowTaskManager.assignWorkflowTaskToUser(
 			companyId, userId, workflowTaskId, assigneeUserId, comment, dueDate,
-			context);
+			workflowContext);
 	}
 
 	public static WorkflowTask completeWorkflowTask(
 			long companyId, long userId, long workflowTaskId,
 			String transitionName, String comment,
-			Map<String, Serializable> context)
+			Map<String, Serializable> workflowContext)
 		throws WorkflowException {
 
 		return _workflowTaskManager.completeWorkflowTask(
 			companyId, userId, workflowTaskId, transitionName, comment,
-			context);
+			workflowContext);
 	}
 
 	public static List<String> getNextTransitionNames(

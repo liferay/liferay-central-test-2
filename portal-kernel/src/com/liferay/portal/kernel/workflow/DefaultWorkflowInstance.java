@@ -43,10 +43,6 @@ public class DefaultWorkflowInstance implements Serializable, WorkflowInstance {
 		return _childrenWorkflowInstances;
 	}
 
-	public Map<String, Serializable> getContext() {
-		return _context;
-	}
-
 	public Date getEndDate() {
 		return _endDate;
 	}
@@ -71,6 +67,10 @@ public class DefaultWorkflowInstance implements Serializable, WorkflowInstance {
 		return _state;
 	}
 
+	public Map<String, Serializable> getWorkflowContext() {
+		return _workflowContext;
+	}
+
 	public String getWorkflowDefinitionName() {
 		return _workflowDefinitionName;
 	}
@@ -87,10 +87,6 @@ public class DefaultWorkflowInstance implements Serializable, WorkflowInstance {
 		List<WorkflowInstance> childrenWorkflowInstances) {
 
 		_childrenWorkflowInstances = childrenWorkflowInstances;
-	}
-
-	public void setContext(Map<String, Serializable> context) {
-		_context = context;
 	}
 
 	public void setEndDate(Date endDate) {
@@ -111,6 +107,10 @@ public class DefaultWorkflowInstance implements Serializable, WorkflowInstance {
 		_state = state;
 	}
 
+	public void setWorkflowContext(Map<String, Serializable> workflowContext) {
+		_workflowContext = workflowContext;
+	}
+
 	public void setWorkflowDefinitionName(String workflowDefinitionName) {
 		_workflowDefinitionName = workflowDefinitionName;
 	}
@@ -125,11 +125,11 @@ public class DefaultWorkflowInstance implements Serializable, WorkflowInstance {
 
 	private List<WorkflowInstance> _childrenWorkflowInstances =
 		new ArrayList<WorkflowInstance>();
-	private Map<String, Serializable> _context;
 	private Date _endDate;
 	private WorkflowInstance _parentWorkflowInstance;
 	private Date _startDate;
 	private String _state;
+	private Map<String, Serializable> _workflowContext;
 	private String _workflowDefinitionName;
 	private int _workflowDefinitionVersion;
 	private long _workflowInstanceId;

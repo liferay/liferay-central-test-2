@@ -36,8 +36,6 @@ public interface WorkflowInstance {
 
 	public List<WorkflowInstance> getChildrenWorkflowInstances();
 
-	public Map<String, Serializable> getContext();
-
 	public Date getEndDate();
 
 	public WorkflowInstance getParentWorkflowInstance();
@@ -47,6 +45,8 @@ public interface WorkflowInstance {
 	public Date getStartDate();
 
 	public String getState();
+
+	public Map<String, Serializable> getWorkflowContext();
 
 	public String getWorkflowDefinitionName();
 
