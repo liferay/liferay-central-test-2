@@ -18,6 +18,8 @@
 
 <aui:input name="filesCount" type="hidden" value="3" />
 
+<liferay-ui:error exception="<%= PortalException.class %>" message="please-provide-all-mandatory-files-and-make-sure-the-file-types-are-valid" />
+
 <aui:fieldset>
 	<aui:input helpMessage="import-wiki-pages-help" label="pages-file" name="file0" type="file" />
 

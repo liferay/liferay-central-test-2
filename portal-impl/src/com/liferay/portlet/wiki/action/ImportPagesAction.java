@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.wiki.action;
 
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.NotificationThreadLocal;
@@ -67,6 +68,7 @@ public class ImportPagesAction extends PortletAction {
 				setForward(actionRequest, "portlet.wiki.error");
 			}
 			else if (e instanceof ImportFilesException ||
+					 e instanceof PortalException ||
 					 e instanceof NoSuchNodeException) {
 
 				SessionErrors.add(actionRequest, e.getClass().getName());
