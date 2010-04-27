@@ -24,6 +24,10 @@ import com.liferay.portlet.journal.asset.JournalArticleAssetRenderer;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 
+import java.io.Serializable;
+
+import java.util.Map;
+
 /**
  * <a href="JournalArticleWorkflowHandler.java.html"><b><i>View Source</i></b>
  * </a>
@@ -45,8 +49,12 @@ public class JournalArticleWorkflowHandler extends BaseWorkflowHandler {
 	}
 
 	public JournalArticle updateStatus(
-			long companyId, long groupId, long userId, long classPK, int status)
+			int status, Map<String, Serializable> contextVariables)
 		throws PortalException, SystemException {
+
+		long userId = (Long) contextVariables.get("userId");
+		long classPK = (Long) contextVariables.get("classPK");
+		long groupId = (Long) contextVariables.get("groupId");
 
 		ServiceContext serviceContext = new ServiceContext();
 

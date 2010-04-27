@@ -21,10 +21,15 @@ import com.liferay.portal.workflow.BaseWorkflowHandler;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 
+import java.io.Serializable;
+
+import java.util.Map;
+
 /**
  * <a href="DLFileEntryWorkflowHandler.java.html"><b><i>View Source</i></b></a>
  *
  * @author Bruno Farache
+ * @author Jorge Ferrer
  */
 public class DLFileEntryWorkflowHandler extends BaseWorkflowHandler {
 
@@ -39,11 +44,16 @@ public class DLFileEntryWorkflowHandler extends BaseWorkflowHandler {
 	}
 
 	public DLFileEntry updateStatus(
-			long companyId, long groupId, long userId, long classPK, int status)
+			int status, Map<String, Serializable> workflowContext)
 		throws PortalException, SystemException {
+
+		long userId = (Long) workflowContext.get("userId");
+		long classPK = (Long) workflowContext.get("classPK");
+		long groupId = (Long) workflowContext.get("groupId");
 
 		ServiceContext serviceContext = new ServiceContext();
 
+		serviceContext.setScopeGroupId(groupId);
 		serviceContext.setStatus(status);
 
 		return DLFileEntryLocalServiceUtil.updateStatus(

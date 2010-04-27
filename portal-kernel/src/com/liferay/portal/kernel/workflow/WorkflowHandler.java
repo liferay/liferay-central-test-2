@@ -58,7 +58,7 @@ public interface WorkflowHandler {
 		throws PortalException, SystemException;
 
 	public Object updateStatus(
-			long companyId, long groupId, long userId, long classPK, int status)
+			int status, Map<String, Serializable> workflowContext)
 		throws PortalException, SystemException;
 
 }
