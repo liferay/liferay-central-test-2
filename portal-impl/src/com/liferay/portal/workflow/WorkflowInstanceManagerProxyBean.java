@@ -81,7 +81,7 @@ public class WorkflowInstanceManagerProxyBean
 		throw new UnsupportedOperationException();
 	}
 
-	public WorkflowInstance updateContext(
+	public WorkflowInstance updateWorkflowContext(
 		long companyId, long workflowInstanceId,
 		Map<String, Serializable> workflowContext) {
 

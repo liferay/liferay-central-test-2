@@ -101,12 +101,12 @@ public class WorkflowInstanceManagerUtil {
 			workflowDefinitionVersion, transitionName, workflowContext);
 	}
 
-	public static WorkflowInstance updateContext(
+	public static WorkflowInstance updateWorkflowContext(
 			long companyId, long workflowInstanceId,
 			Map<String, Serializable> workflowContext)
 		throws WorkflowException {
 
-		return _workflowInstanceManager.updateContext(
+		return _workflowInstanceManager.updateWorkflowContext(
 			companyId, workflowInstanceId, workflowContext);
 	}
 

@@ -66,7 +66,7 @@ public interface WorkflowInstanceManager {
 			Map<String, Serializable> workflowContext)
 		throws WorkflowException;
 
-	public WorkflowInstance updateContext(
+	public WorkflowInstance updateWorkflowContext(
 			long companyId, long workflowInstanceId,
 			Map<String, Serializable> workflowContext)
 		throws WorkflowException;

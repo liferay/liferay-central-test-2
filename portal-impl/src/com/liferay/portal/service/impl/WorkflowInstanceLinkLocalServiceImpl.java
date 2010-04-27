@@ -260,7 +260,7 @@ public class WorkflowInstanceLinkLocalServiceImpl
 
 			workflowContext.put(ContextConstants.ENTRY_CLASS_PK, newClassPK);
 
-			WorkflowInstanceManagerUtil.updateContext(
+			WorkflowInstanceManagerUtil.updateWorkflowContext(
 				workflowInstanceLink.getCompanyId(),
 				workflowInstanceLink.getWorkflowInstanceId(), workflowContext);
 		}
