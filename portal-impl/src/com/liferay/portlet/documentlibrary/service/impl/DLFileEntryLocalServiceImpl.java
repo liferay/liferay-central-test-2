@@ -237,8 +237,8 @@ public class DLFileEntryLocalServiceImpl
 		// Workflow
 
 		WorkflowHandlerRegistryUtil.startWorkflowInstance(
-			user.getCompanyId(), groupId, userId,
-			DLFileEntry.class.getName(), fileEntryId, fileEntry, null);
+			user.getCompanyId(), groupId, userId, DLFileEntry.class.getName(),
+			fileEntryId, fileEntry, null);
 
 		return fileEntry;
 	}
@@ -811,8 +811,7 @@ public class DLFileEntryLocalServiceImpl
 
 			workflowInstanceLinkLocalService.updateClassPK(
 				fileEntry.getCompanyId(), fileEntry.getGroupId(),
-				DLFileEntry.class.getName(), oldFileEntryId,
-				newFileEntryId);
+				DLFileEntry.class.getName(), oldFileEntryId, newFileEntryId);
 
 			List<DLFileVersion> fileVersions =
 				dlFileVersionPersistence.findByG_F_N(
