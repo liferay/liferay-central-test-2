@@ -14,10 +14,10 @@
 
 package com.liferay.portlet.asset.action;
 
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
-import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.struts.JSONAction;
 import com.liferay.portlet.asset.model.AssetCategory;
@@ -73,12 +73,14 @@ public class GetCategoriesAction extends JSONAction {
 
 		long categoryId = ParamUtil.getLong(request, "categoryId");
 		long vocabularyId = ParamUtil.getLong(request, "vocabularyId");
+		int start = ParamUtil.getInteger(request, "start", QueryUtil.ALL_POS);
+		int end = ParamUtil.getInteger(request, "end", QueryUtil.ALL_POS);
 
-		List<AssetCategory> categories = null;
+		List<AssetCategory> categories = Collections.EMPTY_LIST;
 
 		if (categoryId > 0) {
 			categories = AssetCategoryLocalServiceUtil.getChildCategories(
-				categoryId);
+				categoryId, start, end, null);
 		}
 		else if (vocabularyId > 0) {
 			long parentCategoryId = ParamUtil.getLong(
@@ -86,17 +88,7 @@ public class GetCategoriesAction extends JSONAction {
 				AssetCategoryConstants.DEFAULT_PARENT_CATEGORY_ID);
 
 			categories = AssetCategoryLocalServiceUtil.getVocabularyCategories(
-				parentCategoryId, vocabularyId);
-		}
-		else {
-			categories = Collections.EMPTY_LIST;
-		}
-
-		int start = ParamUtil.getInteger(request, "start");
-		int limit = ParamUtil.getInteger(request, "limit");
-
-		if (limit > 0) {
-			categories = ListUtil.subList(categories, start, start + limit);
+				parentCategoryId, vocabularyId, start, end, null);
 		}
 
 		return categories;

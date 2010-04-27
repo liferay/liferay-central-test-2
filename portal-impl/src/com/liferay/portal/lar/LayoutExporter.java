@@ -14,6 +14,7 @@
 
 package com.liferay.portal.lar;
 
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
@@ -524,7 +525,8 @@ public class LayoutExporter {
 
 				List<AssetCategory> assetCategories =
 					AssetCategoryLocalServiceUtil.getVocabularyCategories(
-						assetVocabulary.getVocabularyId());
+						assetVocabulary.getVocabularyId(), QueryUtil.ALL_POS,
+						QueryUtil.ALL_POS, null);
 
 				assetCategories = ListUtil.copy(assetCategories);
 

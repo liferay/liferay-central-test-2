@@ -237,14 +237,27 @@ public class AssetCategoryServiceHttp {
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetCategory> getChildCategories(
-		HttpPrincipal httpPrincipal, long parentCategoryId)
+		HttpPrincipal httpPrincipal, long parentCategoryId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(parentCategoryId);
 
+			Object paramObj1 = new IntegerWrapper(start);
+
+			Object paramObj2 = new IntegerWrapper(end);
+
+			Object paramObj3 = obc;
+
+			if (obc == null) {
+				paramObj3 = new NullWrapper(
+						"com.liferay.portal.kernel.util.OrderByComparator");
+			}
+
 			MethodWrapper methodWrapper = new MethodWrapper(AssetCategoryServiceUtil.class.getName(),
-					"getChildCategories", new Object[] { paramObj0 });
+					"getChildCategories",
+					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
 
 			Object returnObj = null;
 
@@ -273,14 +286,27 @@ public class AssetCategoryServiceHttp {
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetCategory> getVocabularyCategories(
-		HttpPrincipal httpPrincipal, long vocabularyId)
+		HttpPrincipal httpPrincipal, long vocabularyId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(vocabularyId);
 
+			Object paramObj1 = new IntegerWrapper(start);
+
+			Object paramObj2 = new IntegerWrapper(end);
+
+			Object paramObj3 = obc;
+
+			if (obc == null) {
+				paramObj3 = new NullWrapper(
+						"com.liferay.portal.kernel.util.OrderByComparator");
+			}
+
 			MethodWrapper methodWrapper = new MethodWrapper(AssetCategoryServiceUtil.class.getName(),
-					"getVocabularyCategories", new Object[] { paramObj0 });
+					"getVocabularyCategories",
+					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
 
 			Object returnObj = null;
 
@@ -309,14 +335,27 @@ public class AssetCategoryServiceHttp {
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetCategory> getVocabularyRootCategories(
-		HttpPrincipal httpPrincipal, long vocabularyId)
+		HttpPrincipal httpPrincipal, long vocabularyId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(vocabularyId);
 
+			Object paramObj1 = new IntegerWrapper(start);
+
+			Object paramObj2 = new IntegerWrapper(end);
+
+			Object paramObj3 = obc;
+
+			if (obc == null) {
+				paramObj3 = new NullWrapper(
+						"com.liferay.portal.kernel.util.OrderByComparator");
+			}
+
 			MethodWrapper methodWrapper = new MethodWrapper(AssetCategoryServiceUtil.class.getName(),
-					"getVocabularyRootCategories", new Object[] { paramObj0 });
+					"getVocabularyRootCategories",
+					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
 
 			Object returnObj = null;
 

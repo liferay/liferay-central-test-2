@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.util.ListUtil;
+import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.ServiceContext;
@@ -81,26 +82,31 @@ public class AssetCategoryServiceImpl extends AssetCategoryServiceBaseImpl {
 		return assetCategoryLocalService.getCategory(categoryId);
 	}
 
-	public List<AssetCategory> getChildCategories(long parentCategoryId)
+	public List<AssetCategory> getChildCategories(
+			long parentCategoryId, int start, int end, OrderByComparator obc)
 		throws PortalException, SystemException {
 
 		return filterCategories(
-			assetCategoryLocalService.getChildCategories(parentCategoryId));
+			assetCategoryLocalService.getChildCategories(
+				parentCategoryId, start, end, obc));
 	}
 
-	public List<AssetCategory> getVocabularyCategories(long vocabularyId)
+	public List<AssetCategory> getVocabularyCategories(
+			long vocabularyId, int start, int end, OrderByComparator obc)
 		throws PortalException, SystemException {
 
 		return filterCategories(
-			assetCategoryLocalService.getVocabularyCategories(vocabularyId));
+			assetCategoryLocalService.getVocabularyCategories(
+				vocabularyId, start, end, obc));
 	}
 
-	public List<AssetCategory> getVocabularyRootCategories(long vocabularyId)
+	public List<AssetCategory> getVocabularyRootCategories(
+			long vocabularyId, int start, int end, OrderByComparator obc)
 		throws PortalException, SystemException {
 
 		return filterCategories(
 			assetCategoryLocalService.getVocabularyRootCategories(
-				vocabularyId));
+				vocabularyId, start, end, obc));
 	}
 
 	public JSONArray search(

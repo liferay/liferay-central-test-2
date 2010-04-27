@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -241,11 +242,12 @@ public class AssetCategoryLocalServiceImpl
 		return getCategoryIds(getCategories(className, classPK));
 	}
 
-	public List<AssetCategory> getChildCategories(long parentCategoryId)
+	public List<AssetCategory> getChildCategories(
+			long parentCategoryId, int start, int end, OrderByComparator obc)
 		throws SystemException {
 
 		return assetCategoryPersistence.findByParentCategoryId(
-			parentCategoryId);
+			parentCategoryId, start, end, obc);
 	}
 
 	public int getChildCategoriesCount(long parentCategoryId)
@@ -261,25 +263,30 @@ public class AssetCategoryLocalServiceImpl
 		return assetCategoryFinder.findByEntryId(entryId);
 	}
 
-	public List<AssetCategory> getVocabularyCategories(long vocabularyId)
+	public List<AssetCategory> getVocabularyCategories(
+			long vocabularyId, int start, int end, OrderByComparator obc)
 		throws SystemException {
 
-		return assetCategoryPersistence.findByVocabularyId(vocabularyId);
+		return assetCategoryPersistence.findByVocabularyId(
+			vocabularyId, start, end, obc);
 	}
 
 	public List<AssetCategory> getVocabularyCategories(
-			long parentCategoryId, long vocabularyId)
+			long parentCategoryId, long vocabularyId, int start, int end,
+			OrderByComparator obc)
 		throws SystemException {
 
 		return assetCategoryPersistence.findByP_V(
-			parentCategoryId, vocabularyId);
+			parentCategoryId, vocabularyId, start, end, obc);
 	}
 
-	public List<AssetCategory> getVocabularyRootCategories(long vocabularyId)
+	public List<AssetCategory> getVocabularyRootCategories(
+			long vocabularyId, int start, int end, OrderByComparator obc)
 		throws SystemException {
 
 		return getVocabularyCategories(
-			AssetCategoryConstants.DEFAULT_PARENT_CATEGORY_ID, vocabularyId);
+			AssetCategoryConstants.DEFAULT_PARENT_CATEGORY_ID, vocabularyId,
+			start, end, obc);
 	}
 
 	public void mergeCategories(long fromCategoryId, long toCategoryId)

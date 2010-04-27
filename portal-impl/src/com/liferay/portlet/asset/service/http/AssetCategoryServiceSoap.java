@@ -114,10 +114,13 @@ public class AssetCategoryServiceSoap {
 	}
 
 	public static com.liferay.portlet.asset.model.AssetCategorySoap[] getChildCategories(
-		long parentCategoryId) throws RemoteException {
+		long parentCategoryId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws RemoteException {
 		try {
 			java.util.List<com.liferay.portlet.asset.model.AssetCategory> returnValue =
-				AssetCategoryServiceUtil.getChildCategories(parentCategoryId);
+				AssetCategoryServiceUtil.getChildCategories(parentCategoryId,
+					start, end, obc);
 
 			return com.liferay.portlet.asset.model.AssetCategorySoap.toSoapModels(returnValue);
 		}
@@ -129,10 +132,13 @@ public class AssetCategoryServiceSoap {
 	}
 
 	public static com.liferay.portlet.asset.model.AssetCategorySoap[] getVocabularyCategories(
-		long vocabularyId) throws RemoteException {
+		long vocabularyId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws RemoteException {
 		try {
 			java.util.List<com.liferay.portlet.asset.model.AssetCategory> returnValue =
-				AssetCategoryServiceUtil.getVocabularyCategories(vocabularyId);
+				AssetCategoryServiceUtil.getVocabularyCategories(vocabularyId,
+					start, end, obc);
 
 			return com.liferay.portlet.asset.model.AssetCategorySoap.toSoapModels(returnValue);
 		}
@@ -144,10 +150,13 @@ public class AssetCategoryServiceSoap {
 	}
 
 	public static com.liferay.portlet.asset.model.AssetCategorySoap[] getVocabularyRootCategories(
-		long vocabularyId) throws RemoteException {
+		long vocabularyId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws RemoteException {
 		try {
 			java.util.List<com.liferay.portlet.asset.model.AssetCategory> returnValue =
-				AssetCategoryServiceUtil.getVocabularyRootCategories(vocabularyId);
+				AssetCategoryServiceUtil.getVocabularyRootCategories(vocabularyId,
+					start, end, obc);
 
 			return com.liferay.portlet.asset.model.AssetCategorySoap.toSoapModels(returnValue);
 		}
