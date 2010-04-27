@@ -907,26 +907,24 @@ public class LayoutAction extends Action {
 
 		renderResponseImpl.transferHeaders(response);
 
-		if (Validator.isNotNull(stringResponse)) {
-			if (stringResponse.isCalledGetOutputStream()) {
-				UnsyncByteArrayOutputStream ubaos =
-					stringResponse.getUnsyncByteArrayOutputStream();
+		if (stringResponse.isCalledGetOutputStream()) {
+			UnsyncByteArrayOutputStream ubaos =
+				stringResponse.getUnsyncByteArrayOutputStream();
 
-				InputStream is = new UnsyncByteArrayInputStream(
-					ubaos.unsafeGetByteArray(), 0, ubaos.size());
+			InputStream is = new UnsyncByteArrayInputStream(
+				ubaos.unsafeGetByteArray(), 0, ubaos.size());
 
-				ServletResponseUtil.sendFile(
-					request, response, renderResponseImpl.getResourceName(), is,
-					renderResponseImpl.getContentType());
-			}
-			else {
-				byte[] content = stringResponse.getString().getBytes(
-					StringPool.UTF8);
+			ServletResponseUtil.sendFile(
+				request, response, renderResponseImpl.getResourceName(), is,
+				renderResponseImpl.getContentType());
+		}
+		else {
+			byte[] content = stringResponse.getString().getBytes(
+				StringPool.UTF8);
 
-				ServletResponseUtil.sendFile(
-					request, response, renderResponseImpl.getResourceName(),
-					content, renderResponseImpl.getContentType());
-			}
+			ServletResponseUtil.sendFile(
+				request, response, renderResponseImpl.getResourceName(),
+				content, renderResponseImpl.getContentType());
 		}
 
 		renderRequestImpl.cleanUp();
