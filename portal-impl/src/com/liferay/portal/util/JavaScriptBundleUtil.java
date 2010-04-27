@@ -20,7 +20,7 @@ import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.util.UniqueList;
 
-import java.util.Iterator;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -38,11 +38,25 @@ public class JavaScriptBundleUtil {
 	}
 
 	public static String[] getFileNames(String bundleId) {
-		String[] fileNames =
-			(String[])SingleVMPoolUtil.get(CACHE_NAME, bundleId);
+		String[] fileNames = (String[])SingleVMPoolUtil.get(
+			CACHE_NAME, bundleId);
 
 		if (fileNames == null) {
-			fileNames = _instance._getFileNames(bundleId);
+			List<String> fileNamesList = new ArrayList<String>();
+
+			List<String> dependencies = _getDependencies(
+				bundleId, new UniqueList<String>());
+
+			for (String dependency : dependencies) {
+				String[] dependencyFileNames = PropsUtil.getArray(dependency);
+
+				for (String dependencyFileName : dependencyFileNames) {
+					fileNamesList.add(dependencyFileName);
+				}
+			}
+
+			fileNames = fileNamesList.toArray(
+				new String[fileNamesList.size()]);
 
 			SingleVMPoolUtil.put(CACHE_NAME, bundleId, fileNames);
 		}
@@ -50,57 +64,31 @@ public class JavaScriptBundleUtil {
 		return fileNames;
 	}
 
-	public static List<String> getRequires(String bundleId) {
-		return _instance._getRequires(bundleId, new UniqueList<String>());
-	}
-
-	private JavaScriptBundleUtil() {
-	}
-
-	private String[] _getFileNames(String bundleId) {
-		String[] result = {};
-
-		List<String> requires = JavaScriptBundleUtil.getRequires(bundleId);
-
-		Iterator<String> itr = requires.iterator();
-
-		while (itr.hasNext()) {
-			String id = itr.next();
-
-			String[] fileNames = PropsUtil.getArray(id);
-
-			result = ArrayUtil.append(result, fileNames);
-		}
-
-		return result;
-	}
-
-	private List<String> _getRequires(
-		String bundleId, List<String> requires) {
+	private static List<String> _getDependencies(
+		String bundleId, List<String> dependencies) {
 
 		if (!ArrayUtil.contains(PropsValues.JAVASCRIPT_BUNDLE_IDS, bundleId)) {
-			return requires;
+			return dependencies;
 		}
 
-		String[] modules = PropsUtil.getArray(
-			PropsKeys.JAVASCRIPT_BUNDLE_REQUIRES, new Filter(bundleId));
+		String[] bundleDependencies = PropsUtil.getArray(
+			PropsKeys.JAVASCRIPT_BUNDLE_DEPENDENCIES, new Filter(bundleId));
 
-		for (String moduleName : modules) {
-			String[] dependencies = PropsUtil.getArray(
-				PropsKeys.JAVASCRIPT_BUNDLE_REQUIRES, new Filter(moduleName));
+		for (String bundleDependency : bundleDependencies) {
+			String[] bundleDependencyDependencies = PropsUtil.getArray(
+				PropsKeys.JAVASCRIPT_BUNDLE_DEPENDENCIES,
+				new Filter(bundleDependency));
 
-			if (!ArrayUtil.contains(dependencies, bundleId)) {
-				_getRequires(moduleName, requires);
+			if (!ArrayUtil.contains(bundleDependencyDependencies, bundleId)) {
+				_getDependencies(bundleDependency, dependencies);
 			}
 
-			requires.add(moduleName);
+			dependencies.add(bundleDependency);
 		}
 
-		requires.add(bundleId);
+		dependencies.add(bundleId);
 
-		return requires;
+		return dependencies;
 	}
-
-	private static JavaScriptBundleUtil _instance = new JavaScriptBundleUtil();
 
 }

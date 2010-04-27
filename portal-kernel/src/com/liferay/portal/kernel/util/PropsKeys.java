@@ -615,11 +615,11 @@ public interface PropsKeys {
 
 	public static final String JAVASCRIPT_BAREBONE_FILES = "javascript.barebone.files";
 
+	public static final String JAVASCRIPT_BUNDLE_DEPENDENCIES = "javascript.bundle.dependencies";
+
 	public static final String JAVASCRIPT_BUNDLE_DIR = "javascript.bundle.dir";
 
 	public static final String JAVASCRIPT_BUNDLE_IDS = "javascript.bundle.ids";
-	
-	public static final String JAVASCRIPT_BUNDLE_REQUIRES = "javascript.bundle.requires";
 
 	public static final String JAVASCRIPT_EVERYTHING_FILES = "javascript.everything.files";
 

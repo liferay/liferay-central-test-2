@@ -182,8 +182,8 @@ public class MinifierFilter extends BasePortalFilter {
 
 		String cacheFileName = sb.toString();
 
-		String[] fileNames =
-			JavaScriptBundleUtil.getFileNames(minifierBundleId);
+		String[] fileNames = JavaScriptBundleUtil.getFileNames(
+			minifierBundleId);
 
 		File cacheFile = new File(cacheFileName);
 
