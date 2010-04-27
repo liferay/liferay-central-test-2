@@ -19,27 +19,17 @@
 <liferay-ui:error key="invalidUrl" message="please-enter-a-valid-url" />
 <liferay-ui:error key="errorConnectingToUrl" message="an-unexpected-error-occurred-while-connecting-to-the-specified-url" />
 
-<liferay-ui:message key="specify-a-url-for-a-remote-layout-template,-portlet,-or-theme" />
+<aui:fieldset>
+	<aui:input helpMessage='<%= LanguageUtil.format(pageContext, "for-example-x", "http://easynews.dl.sourceforge.net/sourceforge/lportal/sample-jsp-portlet-" + ReleaseInfo.getVersion() + ".war") %>' label="specify-a-url-for-a-remote-layout-template,-portlet,-or-theme" name="url" size="75" type="text" />
+</aui:fieldset>
 
-<%= LanguageUtil.format(pageContext, "for-example-x", "<em>http://easynews.dl.sourceforge.net/sourceforge/lportal/sample-jsp-portlet-" + ReleaseInfo.getVersion() + ".war</em>") %>
+<aui:fieldset>
+	<aui:input helpMessage='<%= LanguageUtil.format(pageContext, "for-example-x", "sample-jsp-portlet") %>' label="specify-an-optional-context-for-deployment" name="deploymentContext" size="20" type="text" />
+</aui:fieldset>
 
-<br /><br />
-
-<input name="<portlet:namespace />url" size="75" type="text" />
-
-<br /><br />
-
-<liferay-ui:message key="specify-an-optional-context-for-deployment" />
-
-<%= LanguageUtil.format(pageContext, "for-example-x", "<em>sample-jsp-portlet</em>") %>
-
-<br /><br />
-
-<input name="<portlet:namespace />deploymentContext" size="20" type="text" />
-
-<br /><br />
-
-<input type="button" value="<liferay-ui:message key="install" />" onClick="<%= uploadProgressId %>.startProgress(); <portlet:namespace />installPluginPackage('remoteDeploy');" />
+<aui:button-row>
+	<aui:button onClick='<%= uploadProgressId + ".startProgress();" + renderResponse.getNamespace() + "installPluginPackage(" + StringPool.APOSTROPHE + "remoteDeploy" + StringPool.APOSTROPHE + ");" %>' value="install" />
+</aui:button-row>
 
 <liferay-ui:upload-progress
 	id="<%= uploadProgressId %>"
