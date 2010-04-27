@@ -29,8 +29,8 @@ public class TranslatorTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTestSuite(AddPageTest.class);
-		testSuite.addTestSuite(AddPortletTest.class);
+		testSuite.addTestSuite(AddPageTranslatorTest.class);
+		testSuite.addTestSuite(AddPortletTranslatorTest.class);
 		testSuite.addTestSuite(TranslateEnglishChineseCTest.class);
 		testSuite.addTestSuite(TranslateEnglishChineseTTest.class);
 		testSuite.addTestSuite(TranslateEnglishDutchTest.class);
@@ -51,7 +51,7 @@ public class TranslatorTests extends BaseTests {
 		testSuite.addTestSuite(TranslateJapaneseEnglishTest.class);
 		testSuite.addTestSuite(TranslatePortugueseEnglishTest.class);
 		testSuite.addTestSuite(TranslateSpanishEnglishTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}
