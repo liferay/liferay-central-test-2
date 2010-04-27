@@ -77,6 +77,10 @@ public class SelectTag extends IncludeTag {
 		_listType = listType;
 	}
 
+	public void setListTypeFieldName(String listTypeFieldName) {
+		_listTypeFieldName = listTypeFieldName;
+	}
+
 	public void setName(String name) {
 		_name = name;
 	}
@@ -109,6 +113,7 @@ public class SelectTag extends IncludeTag {
 		_label = null;
 		_last = false;
 		_listType = null;
+		_listTypeFieldName = null;
 		_name = null;
 		_prefix = null;
 		_showEmptyOption = false;
@@ -147,6 +152,14 @@ public class SelectTag extends IncludeTag {
 			label = TextFormatter.format(_name, TextFormatter.K);
 		}
 
+		String listTypeFieldName = _listTypeFieldName;
+
+		if (Validator.isNotNull(_listType) &&
+			Validator.isNull(listTypeFieldName)) {
+
+			listTypeFieldName = "typeId";
+		}
+
 		request.setAttribute("aui:select:bean", bean);
 		request.setAttribute(
 			"aui:select:changesContext", String.valueOf(_changesContext));
@@ -163,6 +176,7 @@ public class SelectTag extends IncludeTag {
 		request.setAttribute("aui:select:label", label);
 		request.setAttribute("aui:select:last", String.valueOf(_last));
 		request.setAttribute("aui:select:listType", _listType);
+		request.setAttribute("aui:select:listTypeFieldName", listTypeFieldName);
 		request.setAttribute("aui:select:name", _name);
 		request.setAttribute("aui:select:prefix", _prefix);
 		request.setAttribute(
@@ -190,6 +204,7 @@ public class SelectTag extends IncludeTag {
 	private String _label;
 	private boolean _last;
 	private String _listType;
+	private String _listTypeFieldName;
 	private String _name;
 	private String _prefix;
 	private boolean _showEmptyOption;

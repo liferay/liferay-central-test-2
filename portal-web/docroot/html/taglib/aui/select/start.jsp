@@ -30,6 +30,7 @@ String id = namespace + GetterUtil.getString((String)request.getAttribute("aui:s
 String label = GetterUtil.getString((String)request.getAttribute("aui:select:label"));
 boolean last = GetterUtil.getBoolean((String)request.getAttribute("aui:select:last"));
 String listType = GetterUtil.getString((String)request.getAttribute("aui:select:listType"));
+String listTypeFieldName = GetterUtil.getString((String)request.getAttribute("aui:select:listTypeFieldName"));
 String name = GetterUtil.getString((String)request.getAttribute("aui:select:name"));
 String prefix = GetterUtil.getString((String)request.getAttribute("aui:select:prefix"));
 boolean showEmptyOption = GetterUtil.getBoolean((String)request.getAttribute("aui:select:showEmptyOption"));
@@ -85,7 +86,7 @@ String inputCss = _buildCss(INPUT_PREFIX, "select", false, false, false, false, 
 				<c:if test="<%= Validator.isNotNull(listType) %>">
 
 					<%
-					int listTypeId = ParamUtil.getInteger(request, (String)request.getAttribute("aui:select:name"), BeanParamUtil.getInteger(bean, request, "typeId"));
+					int listTypeId = ParamUtil.getInteger(request, (String)request.getAttribute("aui:select:name"), BeanParamUtil.getInteger(bean, request, listTypeFieldName));
 
 					List<ListType> listTypeModels = ListTypeServiceUtil.getListTypes(listType);
 
