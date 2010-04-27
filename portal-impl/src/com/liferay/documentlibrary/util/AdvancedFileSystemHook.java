@@ -16,8 +16,6 @@ package com.liferay.documentlibrary.util;
 
 import com.liferay.documentlibrary.model.FileModel;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
@@ -32,6 +30,9 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portlet.documentlibrary.util.DLUtil;
 
 import java.io.File;
+
+import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * <a href="AdvancedFileSystemHook.java.html"><b><i>View Source</i></b></a>
@@ -57,9 +58,11 @@ public class AdvancedFileSystemHook extends FileSystemHook {
 		String[] fileNames = FileUtil.listDirs(repositoryDir);
 
 		for (String fileName : fileNames) {
-			reindex(
+			Collection<Document> documents = getDocuments(
 				companyId, portletId, groupId, repositoryId,
 				repositoryDir.getPath() + StringPool.SLASH + fileName);
+
+			SearchEngineUtil.updateDocuments(companyId, documents);
 		}
 	}
 
@@ -238,10 +241,12 @@ public class AdvancedFileSystemHook extends FileSystemHook {
 		return headVersionNumber;
 	}
 
-	protected void reindex(
+	protected Collection<Document> getDocuments(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName)
 		throws SearchException {
+
+		Collection<Document> documents = new ArrayList<Document>();
 
 		String shortFileName = FileUtil.getShortFileName(fileName);
 
@@ -251,43 +256,37 @@ public class AdvancedFileSystemHook extends FileSystemHook {
 			String[] curFileNames = FileUtil.listDirs(fileName);
 
 			for (String curFileName : curFileNames) {
-				reindex(
-					companyId, portletId, groupId, repositoryId,
-					fileName + StringPool.SLASH + curFileName);
+				documents.addAll(
+					getDocuments(
+						companyId, portletId, groupId, repositoryId,
+						fileName + StringPool.SLASH + curFileName));
 			}
 		}
 		else {
-			try {
-				Indexer indexer = IndexerRegistryUtil.getIndexer(
-					FileModel.class);
+			Indexer indexer = IndexerRegistryUtil.getIndexer(FileModel.class);
 
-				FileModel fileModel = new FileModel();
+			FileModel fileModel = new FileModel();
 
-				if (shortFileName.endsWith(_HOOK_EXTENSION)) {
-					shortFileName = FileUtil.stripExtension(shortFileName);
-				}
-
-				fileModel.setCompanyId(companyId);
-				fileModel.setFileName(shortFileName);
-				fileModel.setGroupId(groupId);
-				fileModel.setPortletId(portletId);
-				fileModel.setRepositoryId(repositoryId);
-
-				Document document = indexer.getDocument(fileModel);
-
-				if (document != null) {
-					SearchEngineUtil.updateDocument(companyId, document);
-				}
+			if (shortFileName.endsWith(_HOOK_EXTENSION)) {
+				shortFileName = FileUtil.stripExtension(shortFileName);
 			}
-			catch (Exception e) {
-				_log.error("Reindexing " + shortFileName, e);
+
+			fileModel.setCompanyId(companyId);
+			fileModel.setFileName(shortFileName);
+			fileModel.setGroupId(groupId);
+			fileModel.setPortletId(portletId);
+			fileModel.setRepositoryId(repositoryId);
+
+			Document document = indexer.getDocument(fileModel);
+
+			if (document != null) {
+				documents.add(document);
 			}
 		}
+
+		return documents;
 	}
 
 	private static final String _HOOK_EXTENSION = "afsh";
-
-	private static Log _log = LogFactoryUtil.getLog(
-		AdvancedFileSystemHook.class);
 
 }
