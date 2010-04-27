@@ -206,7 +206,7 @@ public class Entity {
 			return getVarName() + "PK";
 		}
 		else {
-			EntityColumn col = _pkList.get(0);
+			EntityColumn col = _getPKColumn();
 
 			return col.getDBName();
 		}
@@ -217,7 +217,7 @@ public class Entity {
 			return _name + "PK";
 		}
 		else {
-			EntityColumn col = _pkList.get(0);
+			EntityColumn col = _getPKColumn();
 
 			return col.getType();
 		}
@@ -232,7 +232,7 @@ public class Entity {
 			return getVarName() + "PK";
 		}
 		else {
-			EntityColumn col = _pkList.get(0);
+			EntityColumn col = _getPKColumn();
 
 			return col.getName();
 		}
@@ -365,7 +365,7 @@ public class Entity {
 			return false;
 		}
 		else {
-			EntityColumn col = _pkList.get(0);
+			EntityColumn col = _getPKColumn();
 
 			if (col.isPrimitiveType()) {
 				return true;
@@ -420,7 +420,7 @@ public class Entity {
 			return false;
 		}
 
-		EntityColumn col = _pkList.get(0);
+		EntityColumn col = _getPKColumn();
 
 		if ((_columnList.indexOf(
 				new EntityColumn("parent" + col.getMethodName())) != -1) &&
@@ -459,6 +459,15 @@ public class Entity {
 
 	public void setTransients(List<String> transients) {
 		_transients = transients;
+	}
+
+	private EntityColumn _getPKColumn() {
+		if (_pkList.isEmpty()) {
+			throw new RuntimeException(
+				"There is no primary key for entity " + _name);
+		}
+
+		return _pkList.get(0);
 	}
 
 	private String _alias;
