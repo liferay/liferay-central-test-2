@@ -260,10 +260,18 @@ public class AssetCategoryLocalServiceImpl
 		return assetCategoryPersistence.findByVocabularyId(vocabularyId);
 	}
 
-	public List<AssetCategory> getVocabularyRootCategories(long vocabularyId)
+	public List<AssetCategory> getVocabularyCategories(
+			long parentCategoryId, long vocabularyId)
 		throws SystemException {
 
 		return assetCategoryPersistence.findByP_V(
+			parentCategoryId, vocabularyId);
+	}
+
+	public List<AssetCategory> getVocabularyRootCategories(long vocabularyId)
+		throws SystemException {
+
+		return getVocabularyCategories(
 			AssetCategoryConstants.DEFAULT_PARENT_CATEGORY_ID, vocabularyId);
 	}
 

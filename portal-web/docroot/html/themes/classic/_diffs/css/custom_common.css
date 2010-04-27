@@ -11,7 +11,7 @@
 	padding-right: 15px;
 }
 
-.breadcrumbs .last, .aui-tree-node-selected {
+.breadcrumbs .last {
 	background-image: none;
 	margin-top: 0.2em;
 }

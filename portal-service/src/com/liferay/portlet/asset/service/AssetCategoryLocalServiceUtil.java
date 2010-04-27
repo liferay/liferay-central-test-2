@@ -224,6 +224,13 @@ public class AssetCategoryLocalServiceUtil {
 		return getService().getVocabularyCategories(vocabularyId);
 	}
 
+	public static java.util.List<com.liferay.portlet.asset.model.AssetCategory> getVocabularyCategories(
+		long parentCategoryId, long vocabularyId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .getVocabularyCategories(parentCategoryId, vocabularyId);
+	}
+
 	public static java.util.List<com.liferay.portlet.asset.model.AssetCategory> getVocabularyRootCategories(
 		long vocabularyId)
 		throws com.liferay.portal.kernel.exception.SystemException {
