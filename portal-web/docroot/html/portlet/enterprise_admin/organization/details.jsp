@@ -65,7 +65,7 @@ if (organization != null) {
 		<c:when test="<%= PropsValues.FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_ORGANIZATION_STATUS %>">
 			<liferay-ui:error key="<%= NoSuchListTypeException.class.getName() + Organization.class.getName() + ListTypeConstants.ORGANIZATION_STATUS %>" message="please-select-a-type" />
 
-			<aui:select label="status" name="statusId" listType="<%= ListTypeConstants.ORGANIZATION_STATUS %>" showEmptyOption="<%= true %>" />
+			<aui:select label="status" name="statusId" listType="<%= ListTypeConstants.ORGANIZATION_STATUS %>" listTypeFieldName="statusId" showEmptyOption="<%= true %>" />
 		</c:when>
 		<c:otherwise>
 			<aui:input name="statusId" type="hidden" value="<%= (organization != null) ? organization.getStatusId() : ListTypeConstants.ORGANIZATION_STATUS_DEFAULT %>" />
