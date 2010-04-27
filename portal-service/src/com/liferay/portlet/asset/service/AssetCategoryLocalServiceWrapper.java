@@ -208,9 +208,11 @@ public class AssetCategoryLocalServiceWrapper
 	}
 
 	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> getChildCategories(
-		long parentCategoryId)
+		long parentCategoryId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _assetCategoryLocalService.getChildCategories(parentCategoryId);
+		return _assetCategoryLocalService.getChildCategories(parentCategoryId,
+			start, end, obc);
 	}
 
 	public int getChildCategoriesCount(long parentCategoryId)
@@ -225,22 +227,27 @@ public class AssetCategoryLocalServiceWrapper
 	}
 
 	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> getVocabularyCategories(
-		long vocabularyId)
+		long vocabularyId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _assetCategoryLocalService.getVocabularyCategories(vocabularyId);
+		return _assetCategoryLocalService.getVocabularyCategories(vocabularyId,
+			start, end, obc);
 	}
 
 	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> getVocabularyCategories(
-		long parentCategoryId, long vocabularyId)
+		long parentCategoryId, long vocabularyId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _assetCategoryLocalService.getVocabularyCategories(parentCategoryId,
-			vocabularyId);
+			vocabularyId, start, end, obc);
 	}
 
 	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> getVocabularyRootCategories(
-		long vocabularyId)
+		long vocabularyId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _assetCategoryLocalService.getVocabularyRootCategories(vocabularyId);
+		return _assetCategoryLocalService.getVocabularyRootCategories(vocabularyId,
+			start, end, obc);
 	}
 
 	public void mergeCategories(long fromCategoryId, long toCategoryId)
