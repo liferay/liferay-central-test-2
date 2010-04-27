@@ -283,7 +283,7 @@ public class SourceFormatter {
 			String jspVariable = matcher.group(1);
 
 			String inputVulnerability =
-				"<input[^>]* value=\"<%= " + jspVariable + " %>";
+				"input[^>]* value=\"<%= " + jspVariable + " %>";
 
 			Pattern inputVulnerabilityPattern =
 				Pattern.compile(inputVulnerability, Pattern.CASE_INSENSITIVE);
@@ -1067,6 +1067,6 @@ public class SourceFormatter {
 	private static FileImpl _fileUtil = FileImpl.getInstance();
 	private static Properties _exclusions;
 	private static Pattern _xssPattern = Pattern.compile(
-		"String\\s+([^\\s]+)\\s*=\\s*ParamUtil\\.getString\\(");
+		"String\\s+([^\\s]+)\\s*=\\s*(Bean)?ParamUtil\\.getString\\(");
 
 }
