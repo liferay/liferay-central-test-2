@@ -103,7 +103,7 @@
 					<%
 					long classNameId = PortalUtil.getClassNameId(BlogsEntry.class.getName());
 
-					int messagesCount = MBMessageLocalServiceUtil.getDiscussionMessagesCount(classNameId, entry.getEntryId(), StatusConstants.APPROVED);
+					int messagesCount = MBMessageLocalServiceUtil.getDiscussionMessagesCount(classNameId, entry.getEntryId(), WorkflowConstants.STATUS_APPROVED);
 					%>
 
 					<a href="<%= viewEntryURL %>#<portlet:namespace />messageScroll0"><%= messagesCount %> <liferay-ui:message key="comments" /></a>

@@ -39,11 +39,11 @@ if (threadView.equals(MBThreadConstants.THREAD_VIEW_FLAT)) {
 
 	searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, cur, delta, portletURL, null, null);
 
-	int total = MBMessageLocalServiceUtil.getThreadMessagesCount(message.getThreadId(), StatusConstants.APPROVED);
+	int total = MBMessageLocalServiceUtil.getThreadMessagesCount(message.getThreadId(), WorkflowConstants.STATUS_APPROVED);
 
 	searchContainer.setTotal(total);
 
-	messages = MBMessageLocalServiceUtil.getThreadMessages(message.getThreadId(), StatusConstants.APPROVED, searchContainer.getStart(), searchContainer.getEnd());
+	messages = MBMessageLocalServiceUtil.getThreadMessages(message.getThreadId(), WorkflowConstants.STATUS_APPROVED, searchContainer.getStart(), searchContainer.getEnd());
 
 	searchContainer.setResults(messages);
 }

@@ -148,11 +148,11 @@ portletURL.setParameter("typeSelection", BlogsEntry.class.getName());
 
 		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, "there-are-no-entries");
 
-		int total = BlogsEntryLocalServiceUtil.getGroupEntriesCount(groupId, StatusConstants.APPROVED);
+		int total = BlogsEntryLocalServiceUtil.getGroupEntriesCount(groupId, WorkflowConstants.STATUS_APPROVED);
 
 		searchContainer.setTotal(total);
 
-		List results = BlogsEntryLocalServiceUtil.getGroupEntries(groupId, StatusConstants.APPROVED, searchContainer.getStart(), searchContainer.getEnd());
+		List results = BlogsEntryLocalServiceUtil.getGroupEntries(groupId, WorkflowConstants.STATUS_APPROVED, searchContainer.getStart(), searchContainer.getEnd());
 
 		searchContainer.setResults(results);
 
