@@ -240,20 +240,20 @@ public class AdvancedFileSystemHook extends FileSystemHook {
 
 	protected void reindex(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String dirName)
+			String fileName)
 		throws SearchException {
 
-		String shortFileName = FileUtil.getShortFileName(dirName);
+		String shortFileName = FileUtil.getShortFileName(fileName);
 
 		if (shortFileName.equals("DLFE") ||
 			Validator.isNumber(shortFileName)) {
 
-			String[] fileNames = FileUtil.listDirs(dirName);
+			String[] curFileNames = FileUtil.listDirs(fileName);
 
-			for (String fileName : fileNames) {
+			for (String curFileName : curFileNames) {
 				reindex(
 					companyId, portletId, groupId, repositoryId,
-					dirName + StringPool.SLASH + fileName);
+					fileName + StringPool.SLASH + curFileName);
 			}
 		}
 		else {
