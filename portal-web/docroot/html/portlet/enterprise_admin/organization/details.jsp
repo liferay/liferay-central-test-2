@@ -275,7 +275,7 @@ if (parentOrganization != null) {
 				var type = document.<portlet:namespace />fm.<portlet:namespace />type.value;
 			</c:when>
 			<c:otherwise>
-				var type = '<%= type %>';
+				var type = '<%= HtmlUtil.escape(type) %>';
 			</c:otherwise>
 		</c:choose>
 

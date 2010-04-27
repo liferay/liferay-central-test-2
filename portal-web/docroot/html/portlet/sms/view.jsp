@@ -39,7 +39,7 @@
 				<liferay-ui:message key="to" />
 			</td>
 			<td>
-				<input class="lfr-input-text" name="<portlet:namespace />to" type="text" value="<%= to %>" />
+				<input class="lfr-input-text" name="<portlet:namespace />to" type="text" value="<%= HtmlUtil.escape(to) %>" />
 			</td>
 		</tr>
 		<tr>

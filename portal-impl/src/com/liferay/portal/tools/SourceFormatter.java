@@ -283,7 +283,7 @@ public class SourceFormatter {
 			String jspVariable = matcher.group(1);
 
 			String inputVulnerability =
-				"<input[^>]* value=\"<%= " + jspVariable + " %>";
+				"<input.* value=\"<%= " + jspVariable + " %>";
 
 			Pattern inputVulnerabilityPattern =
 				Pattern.compile(inputVulnerability, Pattern.CASE_INSENSITIVE);

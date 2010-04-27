@@ -293,7 +293,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 						</c:when>
 						<c:otherwise>
 							<aui:field-wrapper label="id">
-								<%= articleId %>
+								<%= HtmlUtil.escape(articleId) %>
 							</aui:field-wrapper>
 						</c:otherwise>
 					</c:choose>
@@ -729,7 +729,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 	Liferay.Portlet.Journal.PROXY.pathThemeCss = '<%= HttpUtil.encodeURL(themeDisplay.getPathThemeCss()) %>';
 	Liferay.Portlet.Journal.PROXY.portletNamespace = '<portlet:namespace />';
 
-	new Liferay.Portlet.Journal(Liferay.Portlet.Journal.PROXY.portletNamespace, '<%= articleId %>');
+	new Liferay.Portlet.Journal(Liferay.Portlet.Journal.PROXY.portletNamespace, '<%= HtmlUtil.escape(articleId) %>');
 </aui:script>
 
 <%!
