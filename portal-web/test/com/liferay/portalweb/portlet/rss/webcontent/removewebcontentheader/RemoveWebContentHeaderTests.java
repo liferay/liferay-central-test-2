@@ -29,12 +29,13 @@ public class RemoveWebContentHeaderTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTestSuite(AddPageTest.class);
-		testSuite.addTestSuite(AddPortletTest.class);
+		testSuite.addTestSuite(AddPageRSSTest.class);
+		testSuite.addTestSuite(AddPortletRSSTest.class);
 		testSuite.addTestSuite(AddWebContentHeaderTest.class);
 		testSuite.addTestSuite(SelectWebContentHeaderTest.class);
 		testSuite.addTestSuite(RemoveWebContentHeaderTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownWebContentTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

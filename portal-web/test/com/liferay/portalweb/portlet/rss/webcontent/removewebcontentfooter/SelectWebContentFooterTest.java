@@ -68,10 +68,12 @@ public class SelectWebContentFooterTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Footer Web Content", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"You have successfully updated the setup."));
-		assertEquals(RuntimeVariables.replace("Footer Web Content"),
-			selenium.getText("//tr[12]/td[2]"));
+		assertEquals(RuntimeVariables.replace(
+				"You have successfully updated the setup."),
+			selenium.getText("//div[3]/div/div/div/div/div"));
+		assertEquals(RuntimeVariables.replace(
+				"Footer Web Content Footer Web Content"),
+			selenium.getText("//div[2]/fieldset/div/div[2]/div"));
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
@@ -99,7 +101,7 @@ public class SelectWebContentFooterTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//div[2]/div/div/p")) {
+				if (selenium.isElementPresent("//section/div/div/div/p")) {
 					break;
 				}
 			}
@@ -110,6 +112,6 @@ public class SelectWebContentFooterTest extends BaseTestCase {
 		}
 
 		assertEquals(RuntimeVariables.replace("This is footer web content."),
-			selenium.getText("//div[2]/div/div/p"));
+			selenium.getText("//section/div/div/div/p"));
 	}
 }

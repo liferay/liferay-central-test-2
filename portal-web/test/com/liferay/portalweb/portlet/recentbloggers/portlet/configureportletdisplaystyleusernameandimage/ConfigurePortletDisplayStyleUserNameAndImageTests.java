@@ -31,11 +31,11 @@ public class ConfigurePortletDisplayStyleUserNameAndImageTests
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTestSuite(AddPageTest.class);
-		testSuite.addTestSuite(AddPortletTest.class);
+		testSuite.addTestSuite(AddPageRBTest.class);
+		testSuite.addTestSuite(AddPortletRBTest.class);
 		testSuite.addTestSuite(
 			ConfigurePortletDisplayStyleUserNameAndImageTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

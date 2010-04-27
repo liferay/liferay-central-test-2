@@ -29,11 +29,12 @@ public class DeleteArchivedSetupTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTestSuite(AddPageTest.class);
-		testSuite.addTestSuite(AddPortletTest.class);
+		testSuite.addTestSuite(AddPagePDTest.class);
+		testSuite.addTestSuite(AddPortletPDTest.class);
 		testSuite.addTestSuite(SaveArchivedSetupTest.class);
 		testSuite.addTestSuite(DeleteArchivedSetupTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownArchivedSetupTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

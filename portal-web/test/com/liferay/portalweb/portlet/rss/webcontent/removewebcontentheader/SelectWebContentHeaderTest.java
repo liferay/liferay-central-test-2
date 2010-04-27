@@ -68,10 +68,13 @@ public class SelectWebContentHeaderTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Header Web Content", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"You have successfully updated the setup."));
-		assertEquals(RuntimeVariables.replace("Header Web Content"),
-			selenium.getText("//tr[11]/td[2]"));
+		assertEquals(RuntimeVariables.replace(
+				"You have successfully updated the setup."),
+			selenium.getText("//div[3]/div/div/div/div/div"));
+		assertEquals(RuntimeVariables.replace(
+				"Header Web Content Header Web Content"),
+			selenium.getText("//div[2]/fieldset/div/div[1]/div"));
+		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

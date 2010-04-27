@@ -63,7 +63,7 @@ public class AddFeedTest extends BaseTestCase {
 
 		selenium.clickAt("link=Configuration", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//a/img", RuntimeVariables.replace(""));
+		selenium.click("add");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -71,7 +71,8 @@ public class AddFeedTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//tr[5]/td[2]/input")) {
+				if (selenium.isElementPresent(
+							"//div[2]/div/div/span[2]/span/span/input")) {
 					break;
 				}
 			}
@@ -81,12 +82,10 @@ public class AddFeedTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("//tr[5]/td[2]/input",
+		selenium.type("//div[2]/div/div/span[2]/span/span/input",
 			RuntimeVariables.replace("http://feeds.digg.com/digg/popular.rss"));
 		selenium.select("_86_entriesPerFeed",
 			RuntimeVariables.replace("label=4"));
-		assertTrue(selenium.isTextPresent(
-				"You have successfully updated the setup. "));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace(

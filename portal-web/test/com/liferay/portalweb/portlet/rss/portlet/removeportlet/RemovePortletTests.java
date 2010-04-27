@@ -29,10 +29,10 @@ public class RemovePortletTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTestSuite(AddPageTest.class);
-		testSuite.addTestSuite(AddPortletTest.class);
-		testSuite.addTestSuite(RemovePortletTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(AddPageRSSTest.class);
+		testSuite.addTestSuite(AddPortletRSSTest.class);
+		testSuite.addTestSuite(RemovePortletRSSTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

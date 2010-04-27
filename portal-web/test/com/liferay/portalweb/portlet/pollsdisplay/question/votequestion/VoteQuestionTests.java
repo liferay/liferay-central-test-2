@@ -29,12 +29,13 @@ public class VoteQuestionTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTestSuite(AddPageTest.class);
-		testSuite.addTestSuite(AddPortletTest.class);
+		testSuite.addTestSuite(AddPagePDTest.class);
+		testSuite.addTestSuite(AddPortletPDTest.class);
 		testSuite.addTestSuite(AddQuestionTest.class);
 		testSuite.addTestSuite(SelectQuestionTest.class);
 		testSuite.addTestSuite(VoteQuestionTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownQuestionTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

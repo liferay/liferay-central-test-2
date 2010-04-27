@@ -76,7 +76,7 @@ public class AddWebContentFooterTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("FCKeditor1___Frame")) {
+				if (selenium.isElementPresent("cke_contents_CKEditor1")) {
 					break;
 				}
 			}
@@ -103,9 +103,8 @@ public class AddWebContentFooterTest extends BaseTestCase {
 		}
 
 		selenium.selectFrame(
-			"//iframe[@id=\"_15_structure_el_TextAreaField_content\"]");
-		selenium.selectFrame("//iframe[@id=\"FCKeditor1___Frame\"]");
-		selenium.selectFrame("//iframe");
+			"//iframe[@id='_15_structure_el_TextAreaField_content']");
+		selenium.selectFrame("//td[@id='cke_contents_CKEditor1']/iframe");
 		selenium.type("//body",
 			RuntimeVariables.replace("This is footer web content."));
 		selenium.selectFrame("relative=top");
@@ -114,8 +113,7 @@ public class AddWebContentFooterTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		selenium.click(RuntimeVariables.replace(
-				"//li[@id='_15_tabs1web-contentTabsId']/span/a"));
+		selenium.clickAt("//span/span/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Footer Web Content"));
 	}

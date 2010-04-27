@@ -32,7 +32,7 @@ public class AddPortletRBTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Recent Bloggers Test Page")) {
+				if (selenium.isVisible("link=Recent Bloggers Test Page")) {
 					break;
 				}
 			}
@@ -46,6 +46,7 @@ public class AddPortletRBTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("_145_addApplication", RuntimeVariables.replace(""));
+		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -53,8 +54,7 @@ public class AddPortletRBTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible(
-							"//input[@id='layout_configuration_content']")) {
+				if (selenium.isVisible("layout_configuration_content")) {
 					break;
 				}
 			}
@@ -64,9 +64,7 @@ public class AddPortletRBTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("//input[@id='layout_configuration_content']",
-			RuntimeVariables.replace(""));
-		selenium.typeKeys("//input[@id='layout_configuration_content']",
+		selenium.typeKeys("layout_configuration_content",
 			RuntimeVariables.replace("r"));
 
 		for (int second = 0;; second++) {
@@ -75,8 +73,7 @@ public class AddPortletRBTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible(
-							"//div[@id=\"Collaboration-RecentBloggers\"]/p/a")) {
+				if (selenium.isVisible("//div[@title='Recent Bloggers']/p/a")) {
 					break;
 				}
 			}
@@ -86,7 +83,7 @@ public class AddPortletRBTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//div[@id=\"Collaboration-RecentBloggers\"]/p/a",
+		selenium.clickAt("//div[@title='Recent Bloggers']/p/a",
 			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -95,7 +92,7 @@ public class AddPortletRBTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("//td[1]/div[1]/div")) {
+				if (selenium.isVisible("//section")) {
 					break;
 				}
 			}
@@ -105,6 +102,6 @@ public class AddPortletRBTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertTrue(selenium.isElementPresent("//td[1]/div[1]/div"));
+		assertTrue(selenium.isElementPresent("//section"));
 	}
 }

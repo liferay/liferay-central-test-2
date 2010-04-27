@@ -37,7 +37,8 @@ public class ViewUserNameAndImageTests extends BaseTests {
 		testSuite.addTestSuite(
 			ConfigurePortletDisplayStyleUserNameAndImageTest.class);
 		testSuite.addTestSuite(ViewUserNameAndImageTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownBlogsEntryTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

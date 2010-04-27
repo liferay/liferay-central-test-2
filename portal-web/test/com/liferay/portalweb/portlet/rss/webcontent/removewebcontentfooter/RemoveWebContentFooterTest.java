@@ -51,7 +51,7 @@ public class RemoveWebContentFooterTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//div[2]/div/div/p")) {
+				if (selenium.isElementPresent("//section/div/div/div/p")) {
 					break;
 				}
 			}
@@ -62,13 +62,15 @@ public class RemoveWebContentFooterTest extends BaseTestCase {
 		}
 
 		assertEquals(RuntimeVariables.replace("This is footer web content."),
-			selenium.getText("//div[2]/div/div/p"));
+			selenium.getText("//section/div/div/div/p"));
 		selenium.clickAt("link=Configuration", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//tr[12]/td[2]/input[2]", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@id='_86_removeButton' and @value='Remove' and @type='button' and @onclick='_86_removeSelectionForFooter();']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"You have successfully updated the setup."));
+		assertEquals(RuntimeVariables.replace(
+				"You have successfully updated the setup."),
+			selenium.getText("//div[3]/div/div/div/div/div"));
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
