@@ -17,10 +17,10 @@
 	<defaultCache
 		maxElementsInMemory="10000"
 		eternal="false"
-        timeToIdleSeconds="600"
+		timeToIdleSeconds="600"
 		overflowToDisk="false"
 	>
-        <cacheEventListenerFactory
+		<cacheEventListenerFactory
 			class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
 			properties="replicatePuts=false,replicateUpdatesViaCopy=false"
 			propertySeparator=","
@@ -31,10 +31,10 @@
 		name="com.liferay.portal.kernel.dao.orm.EntityCache"
 		maxElementsInMemory="10000"
 		eternal="false"
-        timeToIdleSeconds="600"
+		timeToIdleSeconds="600"
 		overflowToDisk="false"
 	>
-        <cacheEventListenerFactory
+		<cacheEventListenerFactory
 			class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
 			properties="replicatePuts=false,replicateUpdatesViaCopy=false"
 			propertySeparator=","
@@ -45,10 +45,10 @@
 		name="com.liferay.portal.kernel.dao.orm.FinderCache"
 		maxElementsInMemory="10000"
 		eternal="false"
-        timeToIdleSeconds="600"
+		timeToIdleSeconds="600"
 		overflowToDisk="false"
 	>
-        <cacheEventListenerFactory
+		<cacheEventListenerFactory
 			class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
 			properties="replicatePuts=false,replicateUpdatesViaCopy=false"
 			propertySeparator=","
@@ -59,10 +59,10 @@
 		name="com.liferay.portal.security.permission.PermissionCacheUtil"
 		maxElementsInMemory="10000"
 		eternal="false"
-        timeToIdleSeconds="600"
+		timeToIdleSeconds="600"
 		overflowToDisk="false"
 	>
-        <cacheEventListenerFactory
+		<cacheEventListenerFactory
 			class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
 			properties="replicatePuts=false,replicateUpdatesViaCopy=false"
 			propertySeparator=","
@@ -87,10 +87,10 @@
 		name="com.liferay.portal.service.impl.PortletPreferencesLocalUtil"
 		maxElementsInMemory="10000"
 		eternal="false"
-        timeToIdleSeconds="600"
+		timeToIdleSeconds="600"
 		overflowToDisk="false"
 	>
-        <cacheEventListenerFactory
+		<cacheEventListenerFactory
 			class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
 			properties="replicatePuts=false,replicateUpdatesViaCopy=false"
 			propertySeparator=","
@@ -104,7 +104,7 @@
 		timeToLiveSeconds="3600"
 		overflowToDisk="false"
 	>
-        <cacheEventListenerFactory
+		<cacheEventListenerFactory
 			class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
 			properties="replicatePuts=false,replicateUpdatesViaCopy=false"
 			propertySeparator=","
@@ -129,10 +129,10 @@
 		name="com.liferay.portlet.calendar.service.impl.CalEventLocalUtil"
 		maxElementsInMemory="10000"
 		eternal="false"
-        timeToIdleSeconds="600"
+		timeToIdleSeconds="600"
 		overflowToDisk="false"
 	>
-        <cacheEventListenerFactory
+		<cacheEventListenerFactory
 			class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
 			properties="replicatePuts=false,replicateUpdatesViaCopy=false"
 			propertySeparator=","
@@ -146,7 +146,7 @@
 		timeToLiveSeconds="3600"
 		overflowToDisk="false"
 	>
-        <cacheEventListenerFactory
+		<cacheEventListenerFactory
 			class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
 			properties="replicatePuts=false,replicateUpdatesViaCopy=false"
 			propertySeparator=","

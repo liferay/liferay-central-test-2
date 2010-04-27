@@ -9,14 +9,14 @@
 	<defaultCache
 		maxElementsInMemory="10000"
 		eternal="false"
-        timeToIdleSeconds="600"
+		timeToIdleSeconds="600"
 		overflowToDisk="false"
 	/>
 	<cache
 		name="com.liferay.portal.security.permission.PermissionCacheUtil"
 		maxElementsInMemory="10000"
 		eternal="false"
-        timeToIdleSeconds="600"
+		timeToIdleSeconds="600"
 		overflowToDisk="false"
 	/>
 	<cache
@@ -30,7 +30,7 @@
 		name="com.liferay.portal.service.impl.PortletPreferencesLocalUtil"
 		maxElementsInMemory="10000"
 		eternal="false"
-        timeToIdleSeconds="600"
+		timeToIdleSeconds="600"
 		overflowToDisk="false"
 	/>
 	<cache
@@ -51,7 +51,7 @@
 		name="com.liferay.portlet.calendar.service.impl.CalEventLocalUtil"
 		maxElementsInMemory="10000"
 		eternal="false"
-        timeToIdleSeconds="600"
+		timeToIdleSeconds="600"
 		overflowToDisk="false"
 	/>
 	<cache

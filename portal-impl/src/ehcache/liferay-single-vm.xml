@@ -8,7 +8,7 @@
 	<defaultCache
 		maxElementsInMemory="10000"
 		eternal="false"
-        timeToIdleSeconds="600"
+		timeToIdleSeconds="600"
 		overflowToDisk="false"
 	/>
 	<cache

@@ -10,17 +10,17 @@
 	<defaultCache
 		maxElementsInMemory="10000"
 		eternal="false"
-        timeToIdleSeconds="600"
+		timeToIdleSeconds="600"
 		overflowToDisk="false"
 	/>
 
 	<!--
-    Tracks the timestamps of the most recent updates to particular tables. It is
-    important that the cache timeout of the underlying cache implementation be
-    set to a higher value than the timeouts of any of the query caches. In fact,
-    it is recommend that the the underlying cache not be configured for expiry
-    at all.
-    -->
+	Tracks the timestamps of the most recent updates to particular tables. It is
+	important that the cache timeout of the underlying cache implementation be
+	set to a higher value than the timeouts of any of the query caches. In fact,
+	it is recommend that the the underlying cache not be configured for expiry
+	at all.
+	-->
 
 	<cache
 		name="org.hibernate.cache.UpdateTimestampsCache"
@@ -38,7 +38,7 @@
 		name="com.liferay.portal.model.impl.UserImpl"
 		maxElementsInMemory="10000"
 		eternal="false"
-        timeToIdleSeconds="600"
+		timeToIdleSeconds="600"
 		overflowToDisk="false"
 	/>
 </ehcache>
