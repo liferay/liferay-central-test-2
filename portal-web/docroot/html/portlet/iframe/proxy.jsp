@@ -23,84 +23,79 @@ hiddenVariablesList.addAll(iframeVariables);
 %>
 
 <html dir="<liferay-ui:message key="lang.dir" />">
+	<head>
+		<meta content="no-cache" http-equiv="Cache-Control" />
+		<meta content="no-cache" http-equiv="Pragma" />
+		<meta content="0" http-equiv="Expires" />
+	</head>
 
-<head>
-	<meta content="no-cache" http-equiv="Cache-Control" />
-	<meta content="no-cache" http-equiv="Pragma" />
-	<meta content="0" http-equiv="Expires" />
-</head>
+	<body onLoad="setTimeout('document.fm.submit()', 100);">
+		<aui:form action="<%= src %>" method="<%= formMethod %>" name="fm">
 
-<body onLoad="setTimeout('document.fm.submit()', 100);">
+			<%
+			for (String hiddenVariable : hiddenVariablesList) {
+				String hiddenKey = StringPool.BLANK;
+				String hiddenValue = StringPool.BLANK;
 
-<form action="<%= src %>" method="<%= formMethod %>" name="fm">
+				int pos = hiddenVariable.indexOf(StringPool.EQUAL);
 
-<%
-for (String hiddenVariable : hiddenVariablesList) {
-	String hiddenKey = StringPool.BLANK;
-	String hiddenValue = StringPool.BLANK;
+				if (pos != -1) {
+					hiddenKey = hiddenVariable.substring(0, pos);
+					hiddenValue = hiddenVariable.substring(pos + 1, hiddenVariable.length());
+				}
+			%>
 
-	int pos = hiddenVariable.indexOf(StringPool.EQUAL);
+				<aui:input name="<%= hiddenKey %>" type="hidden" value="<%= hiddenValue %>" />
 
-	if (pos != -1) {
-		hiddenKey = hiddenVariable.substring(0, pos);
-		hiddenValue = hiddenVariable.substring(pos + 1, hiddenVariable.length());
-	}
-%>
+			<%
+			}
 
-	<input name="<%= hiddenKey %>" type="hidden" value="<%= hiddenValue %>" />
+			if (Validator.isNull(userNameField)) {
+				int pos = userName.indexOf(StringPool.EQUAL);
 
-<%
-}
+				if (pos != -1) {
+					String fieldValuePair = userName;
 
-if (Validator.isNull(userNameField)) {
-	int pos = userName.indexOf(StringPool.EQUAL);
+					userNameField = fieldValuePair.substring(0, pos);
+					userName = fieldValuePair.substring(pos + 1);
 
-	if (pos != -1) {
-		String fieldValuePair = userName;
+					preferences.setValue("user-name", userName);
+					preferences.setValue("user-name-field", userNameField);
 
-		userNameField = fieldValuePair.substring(0, pos);
-		userName = fieldValuePair.substring(pos + 1);
+					preferences.store();
+				}
+			}
 
-		preferences.setValue("user-name", userName);
-		preferences.setValue("user-name-field", userNameField);
+			if (Validator.isNotNull(userNameField)) {
+				userName = IFrameUtil.getUserName(renderRequest, userName);
+			}
+			%>
 
-		preferences.store();
-	}
-}
+			<aui:input name="<%= userNameField %>" type="hidden" value="<%= userName %>" />
 
-if (Validator.isNotNull(userNameField)) {
-	userName = IFrameUtil.getUserName(renderRequest, userName);
-}
-%>
+			<%
+			if (Validator.isNull(passwordField)) {
+				int pos = password.indexOf(StringPool.EQUAL);
 
-<input name="<%= userNameField %>" type="hidden" value="<%= userName %>" />
+				if (pos != -1) {
+					String fieldValuePair = password;
 
-<%
-if (Validator.isNull(passwordField)) {
-	int pos = password.indexOf(StringPool.EQUAL);
+					passwordField = fieldValuePair.substring(0, pos);
+					password = fieldValuePair.substring(pos + 1);
 
-	if (pos != -1) {
-		String fieldValuePair = password;
+					preferences.setValue("password", password);
+					preferences.setValue("password-field", passwordField);
 
-		passwordField = fieldValuePair.substring(0, pos);
-		password = fieldValuePair.substring(pos + 1);
+					preferences.store();
+				}
+			}
 
-		preferences.setValue("password", password);
-		preferences.setValue("password-field", passwordField);
+			if (Validator.isNotNull(passwordField)) {
+				password = IFrameUtil.getPassword(renderRequest, password);
+			}
+			%>
 
-		preferences.store();
-	}
-}
-
-if (Validator.isNotNull(passwordField)) {
-	password = IFrameUtil.getPassword(renderRequest, password);
-}
-%>
-
-<input name="<%= passwordField %>" type="hidden" value="<%= password %>" />
-
-</form>
-
-</body>
-
+			<aui:input name="<%= passwordField %>" type="hidden" value="<%= password %>" />
+		</aui:form>
+	</body>
 </html>
