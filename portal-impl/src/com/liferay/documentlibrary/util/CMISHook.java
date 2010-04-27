@@ -262,29 +262,24 @@ public class CMISHook extends BaseHook {
 			List<String> fileNames = CMISUtil.getFolders(repositoryFolderEntry);
 
 			for (String fileName : fileNames) {
-				try {
-					Indexer indexer = IndexerRegistryUtil.getIndexer(
-						FileModel.class);
+				Indexer indexer = IndexerRegistryUtil.getIndexer(
+					FileModel.class);
 
-					FileModel fileModel = new FileModel();
+				FileModel fileModel = new FileModel();
 
-					fileModel.setCompanyId(companyId);
-					fileModel.setFileName(fileName);
-					fileModel.setGroupId(groupId);
-					fileModel.setPortletId(portletId);
-					fileModel.setRepositoryId(repositoryId);
+				fileModel.setCompanyId(companyId);
+				fileModel.setFileName(fileName);
+				fileModel.setGroupId(groupId);
+				fileModel.setPortletId(portletId);
+				fileModel.setRepositoryId(repositoryId);
 
-					Document document = indexer.getDocument(fileModel);
+				Document document = indexer.getDocument(fileModel);
 
-					if (document == null) {
-						continue;
-					}
-
-					documents.add(document);
+				if (document == null) {
+					continue;
 				}
-				catch (Exception e) {
-					_log.error("Reindexing " + fileName, e);
-				}
+
+				documents.add(document);
 			}
 		}
 		catch (CMISException cmise) {

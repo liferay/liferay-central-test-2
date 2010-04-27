@@ -563,29 +563,24 @@ public class JCRHook extends BaseHook {
 				if (node.getPrimaryNodeType().getName().equals(
 						JCRConstants.NT_FILE)) {
 
-					try {
-						Indexer indexer = IndexerRegistryUtil.getIndexer(
-							FileModel.class);
+					Indexer indexer = IndexerRegistryUtil.getIndexer(
+						FileModel.class);
 
-						FileModel fileModel = new FileModel();
+					FileModel fileModel = new FileModel();
 
-						fileModel.setCompanyId(companyId);
-						fileModel.setFileName(node.getName());
-						fileModel.setGroupId(groupId);
-						fileModel.setPortletId(portletId);
-						fileModel.setRepositoryId(repositoryId);
+					fileModel.setCompanyId(companyId);
+					fileModel.setFileName(node.getName());
+					fileModel.setGroupId(groupId);
+					fileModel.setPortletId(portletId);
+					fileModel.setRepositoryId(repositoryId);
 
-						Document document = indexer.getDocument(fileModel);
+					Document document = indexer.getDocument(fileModel);
 
-						if (document == null) {
-							continue;
-						}
-
-						documents.add(document);
+					if (document == null) {
+						continue;
 					}
-					catch (Exception e2) {
-						_log.error("Reindexing " + node.getName(), e2);
-					}
+
+					documents.add(document);
 				}
 			}
 		}
