@@ -22,7 +22,6 @@ import com.liferay.portal.kernel.mail.Account;
 import com.liferay.portal.kernel.mail.MailMessage;
 import com.liferay.portal.kernel.mail.SMTPAccount;
 import com.liferay.portal.kernel.messaging.MessageListener;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Subscription;
@@ -68,7 +67,7 @@ public class MBMessageListener implements MessageListener {
 		long userId = message.getLong("userId");
 		long groupId = message.getLong("groupId");
 		String categoryIds = message.getString("categoryIds");
-		String threadId = message.getString("threadId");
+		long threadId = message.getLong("threadId");
 		String fromName = message.getString("fromName");
 		String fromAddress = message.getString("fromAddress");
 		String subject = message.getString("subject");
@@ -95,8 +94,7 @@ public class MBMessageListener implements MessageListener {
 
 		List<Subscription> subscriptions =
 			SubscriptionLocalServiceUtil.getSubscriptions(
-				companyId, MBThread.class.getName(),
-				GetterUtil.getLong(threadId));
+				companyId, MBThread.class.getName(), threadId);
 
 		sendEmail(
 			userId, fromName, fromAddress, subject, body, subscriptions, sent,

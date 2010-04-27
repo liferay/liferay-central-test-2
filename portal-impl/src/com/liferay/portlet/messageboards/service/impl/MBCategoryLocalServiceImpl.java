@@ -231,6 +231,12 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 		catch (NoSuchMailingListException nsmle) {
 		}
 
+		// Subscriptions
+
+		subscriptionLocalService.deleteSubscriptions(
+			category.getCompanyId(), MBCategory.class.getName(),
+			category.getCategoryId());
+
 		// Expando
 
 		expandoValueLocalService.deleteValues(

@@ -63,7 +63,9 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.comparator.GroupNameComparator;
+import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.communities.util.StagingUtil;
+import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.util.UniqueList;
 
 import java.io.File;
@@ -353,6 +355,15 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		// Membership requests
 
 		membershipRequestLocalService.deleteMembershipRequests(
+			group.getGroupId());
+
+		// Subscriptions
+
+		subscriptionLocalService.deleteSubscriptions(
+			group.getCompanyId(), BlogsEntry.class.getName(),
+			group.getGroupId());
+		subscriptionLocalService.deleteSubscriptions(
+			group.getCompanyId(), JournalArticle.class.getName(),
 			group.getGroupId());
 
 		/// Teams

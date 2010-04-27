@@ -421,7 +421,8 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		// Subscriptions
 
 		subscriptionLocalService.deleteSubscriptions(
-			page.getCompanyId(), WikiPage.class.getName(), page.getPageId());
+			page.getCompanyId(), WikiPage.class.getName(),
+			page.getResourcePrimKey());
 
 		// Social
 
