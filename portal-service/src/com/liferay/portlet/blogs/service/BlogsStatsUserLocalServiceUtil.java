@@ -146,10 +146,10 @@ public class BlogsStatsUserLocalServiceUtil {
 		return getService().getCompanyStatsUsersCount(companyId);
 	}
 
-	public static java.util.List<com.liferay.portlet.blogs.model.BlogsStatsUser> getGroupsEntries(
+	public static java.util.List<com.liferay.portlet.blogs.model.BlogsStatsUser> getGroupsStatsUsers(
 		long companyId, long groupId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getGroupsEntries(companyId, groupId, start, end);
+		return getService().getGroupsStatsUsers(companyId, groupId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsStatsUser> getGroupStatsUsers(
