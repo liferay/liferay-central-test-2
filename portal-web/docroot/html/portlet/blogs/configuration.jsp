@@ -200,13 +200,13 @@ else if (tabs2.equals("entry-updated-email")) {
 						[$FROM_ADDRESS$]
 					</dt>
 					<dd>
-						<%= emailFromAddress %>
+						<%= HtmlUtil.escape(emailFromAddress) %>
 					</dd>
 					<dt>
 						[$FROM_NAME$]
 					</dt>
 					<dd>
-						<%= emailFromName %>
+						<%= HtmlUtil.escape(emailFromName) %>
 					</dd>
 					<dt>
 						[$PORTAL_URL$]
