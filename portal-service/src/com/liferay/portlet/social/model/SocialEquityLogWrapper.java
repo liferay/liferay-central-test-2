@@ -133,7 +133,7 @@ public class SocialEquityLogWrapper implements SocialEquityLog {
 		_socialEquityLog.setValidity(validity);
 	}
 
-	public SocialEquityLog toEscapedModel() {
+	public com.liferay.portlet.social.model.SocialEquityLog toEscapedModel() {
 		return _socialEquityLog.toEscapedModel();
 	}
 
@@ -178,7 +178,8 @@ public class SocialEquityLogWrapper implements SocialEquityLog {
 		return _socialEquityLog.clone();
 	}
 
-	public int compareTo(SocialEquityLog socialEquityLog) {
+	public int compareTo(
+		com.liferay.portlet.social.model.SocialEquityLog socialEquityLog) {
 		return _socialEquityLog.compareTo(socialEquityLog);
 	}
 

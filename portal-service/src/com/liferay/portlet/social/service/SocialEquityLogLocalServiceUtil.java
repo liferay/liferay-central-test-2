@@ -118,6 +118,19 @@ public class SocialEquityLogLocalServiceUtil {
 		return getService().updateSocialEquityLog(socialEquityLog, merge);
 	}
 
+	public static com.liferay.portlet.social.model.SocialEquityLog addEquityLog(
+		long userId, long assetEntryId, java.lang.String actionId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().addEquityLog(userId, assetEntryId, actionId);
+	}
+
+	public static void checkEquityLogs()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().checkEquityLogs();
+	}
+
 	public static SocialEquityLogLocalService getService() {
 		if (_service == null) {
 			_service = (SocialEquityLogLocalService)PortalBeanLocatorUtil.locate(SocialEquityLogLocalService.class.getName());

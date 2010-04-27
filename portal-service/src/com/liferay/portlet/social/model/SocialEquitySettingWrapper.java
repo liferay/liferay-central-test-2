@@ -124,7 +124,7 @@ public class SocialEquitySettingWrapper implements SocialEquitySetting {
 		_socialEquitySetting.setActive(active);
 	}
 
-	public SocialEquitySetting toEscapedModel() {
+	public com.liferay.portlet.social.model.SocialEquitySetting toEscapedModel() {
 		return _socialEquitySetting.toEscapedModel();
 	}
 
@@ -169,7 +169,8 @@ public class SocialEquitySettingWrapper implements SocialEquitySetting {
 		return _socialEquitySetting.clone();
 	}
 
-	public int compareTo(SocialEquitySetting socialEquitySetting) {
+	public int compareTo(
+		com.liferay.portlet.social.model.SocialEquitySetting socialEquitySetting) {
 		return _socialEquitySetting.compareTo(socialEquitySetting);
 	}
 

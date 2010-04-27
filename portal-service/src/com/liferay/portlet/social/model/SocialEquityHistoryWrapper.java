@@ -101,7 +101,7 @@ public class SocialEquityHistoryWrapper implements SocialEquityHistory {
 		_socialEquityHistory.setPersonalEquity(personalEquity);
 	}
 
-	public SocialEquityHistory toEscapedModel() {
+	public com.liferay.portlet.social.model.SocialEquityHistory toEscapedModel() {
 		return _socialEquityHistory.toEscapedModel();
 	}
 
@@ -146,7 +146,8 @@ public class SocialEquityHistoryWrapper implements SocialEquityHistory {
 		return _socialEquityHistory.clone();
 	}
 
-	public int compareTo(SocialEquityHistory socialEquityHistory) {
+	public int compareTo(
+		com.liferay.portlet.social.model.SocialEquityHistory socialEquityHistory) {
 		return _socialEquityHistory.compareTo(socialEquityHistory);
 	}
 

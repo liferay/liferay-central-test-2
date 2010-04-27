@@ -121,6 +121,20 @@ public class SocialEquityLogLocalServiceWrapper
 			merge);
 	}
 
+	public com.liferay.portlet.social.model.SocialEquityLog addEquityLog(
+		long userId, long assetEntryId, java.lang.String actionId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _socialEquityLogLocalService.addEquityLog(userId, assetEntryId,
+			actionId);
+	}
+
+	public void checkEquityLogs()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_socialEquityLogLocalService.checkEquityLogs();
+	}
+
 	public SocialEquityLogLocalService getWrappedSocialEquityLogLocalService() {
 		return _socialEquityLogLocalService;
 	}
