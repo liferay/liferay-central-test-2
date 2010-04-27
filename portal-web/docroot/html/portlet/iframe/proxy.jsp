@@ -23,79 +23,84 @@ hiddenVariablesList.addAll(iframeVariables);
 %>
 
 <html dir="<liferay-ui:message key="lang.dir" />">
-	<head>
-		<meta content="no-cache" http-equiv="Cache-Control" />
-		<meta content="no-cache" http-equiv="Pragma" />
-		<meta content="0" http-equiv="Expires" />
-	</head>
 
-	<body onLoad="setTimeout('document.fm.submit()', 100);">
-		<aui:form action="<%= src %>" method="<%= formMethod %>" name="fm">
+<head>
+	<meta content="no-cache" http-equiv="Cache-Control" />
+	<meta content="no-cache" http-equiv="Pragma" />
+	<meta content="0" http-equiv="Expires" />
+</head>
 
-			<%
-			for (String hiddenVariable : hiddenVariablesList) {
-				String hiddenKey = StringPool.BLANK;
-				String hiddenValue = StringPool.BLANK;
+<body onLoad="setTimeout('document.fm.submit()', 100);">
 
-				int pos = hiddenVariable.indexOf(StringPool.EQUAL);
+<form action="<%= src %>" method="<%= formMethod %>" name="fm">
 
-				if (pos != -1) {
-					hiddenKey = hiddenVariable.substring(0, pos);
-					hiddenValue = hiddenVariable.substring(pos + 1, hiddenVariable.length());
-				}
-			%>
+<%
+for (String hiddenVariable : hiddenVariablesList) {
+	String hiddenKey = StringPool.BLANK;
+	String hiddenValue = StringPool.BLANK;
 
-				<aui:input name="<%= hiddenKey %>" type="hidden" value="<%= hiddenValue %>" />
+	int pos = hiddenVariable.indexOf(StringPool.EQUAL);
 
-			<%
-			}
+	if (pos != -1) {
+		hiddenKey = hiddenVariable.substring(0, pos);
+		hiddenValue = hiddenVariable.substring(pos + 1, hiddenVariable.length());
+	}
+%>
 
-			if (Validator.isNull(userNameField)) {
-				int pos = userName.indexOf(StringPool.EQUAL);
+	<input name="<%= hiddenKey %>" type="hidden" value="<%= hiddenValue %>" />
 
-				if (pos != -1) {
-					String fieldValuePair = userName;
+<%
+}
 
-					userNameField = fieldValuePair.substring(0, pos);
-					userName = fieldValuePair.substring(pos + 1);
+if (Validator.isNull(userNameField)) {
+	int pos = userName.indexOf(StringPool.EQUAL);
 
-					preferences.setValue("user-name", userName);
-					preferences.setValue("user-name-field", userNameField);
+	if (pos != -1) {
+		String fieldValuePair = userName;
 
-					preferences.store();
-				}
-			}
+		userNameField = fieldValuePair.substring(0, pos);
+		userName = fieldValuePair.substring(pos + 1);
 
-			if (Validator.isNotNull(userNameField)) {
-				userName = IFrameUtil.getUserName(renderRequest, userName);
-			}
-			%>
+		preferences.setValue("user-name", userName);
+		preferences.setValue("user-name-field", userNameField);
 
-			<aui:input name="<%= userNameField %>" type="hidden" value="<%= userName %>" />
+		preferences.store();
+	}
+}
 
-			<%
-			if (Validator.isNull(passwordField)) {
-				int pos = password.indexOf(StringPool.EQUAL);
+if (Validator.isNotNull(userNameField)) {
+	userName = IFrameUtil.getUserName(renderRequest, userName);
+}
+%>
 
-				if (pos != -1) {
-					String fieldValuePair = password;
+<input name="<%= userNameField %>" type="hidden" value="<%= userName %>" />
 
-					passwordField = fieldValuePair.substring(0, pos);
-					password = fieldValuePair.substring(pos + 1);
+<%
+if (Validator.isNull(passwordField)) {
+	int pos = password.indexOf(StringPool.EQUAL);
 
-					preferences.setValue("password", password);
-					preferences.setValue("password-field", passwordField);
+	if (pos != -1) {
+		String fieldValuePair = password;
 
-					preferences.store();
-				}
-			}
+		passwordField = fieldValuePair.substring(0, pos);
+		password = fieldValuePair.substring(pos + 1);
 
-			if (Validator.isNotNull(passwordField)) {
-				password = IFrameUtil.getPassword(renderRequest, password);
-			}
-			%>
+		preferences.setValue("password", password);
+		preferences.setValue("password-field", passwordField);
 
-			<aui:input name="<%= passwordField %>" type="hidden" value="<%= password %>" />
-		</aui:form>
-	</body>
+		preferences.store();
+	}
+}
+
+if (Validator.isNotNull(passwordField)) {
+	password = IFrameUtil.getPassword(renderRequest, password);
+}
+%>
+
+<input name="<%= passwordField %>" type="hidden" value="<%= password %>" />
+
+</form>
+
+</body>
+
 </html>
