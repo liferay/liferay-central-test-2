@@ -238,7 +238,7 @@ public class DLFileEntryLocalServiceImpl
 		if (serviceContext.isStartWorkflow()) {
 			WorkflowHandlerRegistryUtil.startWorkflowInstance(
 				user.getCompanyId(), groupId, userId,
-				DLFileEntry.class.getName(), fileEntryId, fileEntry);
+				DLFileEntry.class.getName(), fileEntryId, fileEntry, null);
 		}
 
 		return fileEntry;
@@ -1061,7 +1061,7 @@ public class DLFileEntryLocalServiceImpl
 			WorkflowHandlerRegistryUtil.startWorkflowInstance(
 				user.getCompanyId(), groupId, userId,
 				DLFileEntry.class.getName(), fileEntry.getFileEntryId(),
-				fileEntry);
+				fileEntry, null);
 		}
 
 		return fileEntry;

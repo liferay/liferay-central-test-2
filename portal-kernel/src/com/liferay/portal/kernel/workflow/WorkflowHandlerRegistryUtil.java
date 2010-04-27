@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 
 import java.io.Serializable;
+
 import java.util.List;
 import java.util.Map;
 
@@ -49,19 +50,6 @@ public class WorkflowHandlerRegistryUtil {
 
 	public static void register(WorkflowHandler workflowHandler) {
 		getWorkflowHandlerRegistry().register(workflowHandler);
-	}
-
-	public static void startWorkflowInstance(
-			long companyId, long groupId, long userId, String className,
-			long classPK, Object model)
-		throws PortalException, SystemException {
-
-		WorkflowHandler workflowHandler = getWorkflowHandler(className);
-
-		if (workflowHandler != null) {
-			workflowHandler.startWorkflowInstance(
-				companyId, groupId, userId, classPK, model, null);
-		}
 	}
 
 	public static void startWorkflowInstance(

@@ -29,6 +29,7 @@ import com.liferay.portlet.asset.model.AssetRenderer;
 import com.liferay.portlet.asset.model.AssetRendererFactory;
 
 import java.io.Serializable;
+
 import java.util.Map;
 
 import javax.portlet.PortletURL;

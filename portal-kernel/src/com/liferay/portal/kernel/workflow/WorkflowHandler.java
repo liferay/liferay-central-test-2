@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 
 import java.io.Serializable;
+
 import java.util.Map;
 
 import javax.portlet.PortletURL;
