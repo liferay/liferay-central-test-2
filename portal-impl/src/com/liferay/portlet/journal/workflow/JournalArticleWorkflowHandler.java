@@ -55,7 +55,8 @@ public class JournalArticleWorkflowHandler extends BaseWorkflowHandler {
 
 		long groupId = (Long)workflowContext.get(
 			WorkflowConstants.CONTEXT_GROUP_ID);
-		long userId = (Long)workflowContext.get("userId");
+		long userId = (Long)workflowContext.get(
+			WorkflowConstants.CONTEXT_USER_ID);
 		long classPK = (Long)workflowContext.get(
 			WorkflowConstants.CONTEXT_ENTRY_CLASS_PK);
 
