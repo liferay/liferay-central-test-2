@@ -217,6 +217,9 @@ public class ConvertDatabase extends ConvertProcess {
 
 	private static final Tuple[] _UNMAPPED_TABLES = new Tuple[] {
 		new Tuple(
+			Counter.TABLE_NAME, Counter.TABLE_COLUMNS,
+			Counter.TABLE_SQL_CREATE),
+		new Tuple(
 			CyrusUser.TABLE_NAME, CyrusUser.TABLE_COLUMNS,
 			CyrusUser.TABLE_SQL_CREATE),
 		new Tuple(

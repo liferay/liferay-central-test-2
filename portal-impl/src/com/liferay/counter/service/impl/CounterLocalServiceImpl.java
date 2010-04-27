@@ -14,10 +14,8 @@
 
 package com.liferay.counter.service.impl;
 
-import com.liferay.counter.service.base.CounterLocalServiceBaseImpl;
-import com.liferay.portal.kernel.annotation.Isolation;
-import com.liferay.portal.kernel.annotation.Propagation;
-import com.liferay.portal.kernel.annotation.Transactional;
+import com.liferay.counter.service.CounterLocalService;
+import com.liferay.counter.service.persistence.CounterUtil;
 import com.liferay.portal.kernel.exception.SystemException;
 
 import java.util.List;
@@ -27,40 +25,34 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  */
-public class CounterLocalServiceImpl extends CounterLocalServiceBaseImpl {
+public class CounterLocalServiceImpl implements CounterLocalService {
 
 	public List<String> getNames() throws SystemException {
-		return counterFinder.getNames();
+		return CounterUtil.getNames();
 	}
 
-    @Transactional(propagation = Propagation.REQUIRES_NEW, isolation = Isolation.SERIALIZABLE)
 	public long increment() throws SystemException {
-		return counterFinder.increment();
+		return CounterUtil.increment();
 	}
 
-    @Transactional(propagation = Propagation.REQUIRES_NEW, isolation = Isolation.SERIALIZABLE)
 	public long increment(String name) throws SystemException {
-		return counterFinder.increment(name);
+		return CounterUtil.increment(name);
 	}
 
-    @Transactional(propagation = Propagation.REQUIRES_NEW, isolation = Isolation.SERIALIZABLE)
 	public long increment(String name, int size) throws SystemException {
-		return counterFinder.increment(name, size);
+		return CounterUtil.increment(name, size);
 	}
 
-    @Transactional(propagation = Propagation.REQUIRES_NEW, isolation = Isolation.SERIALIZABLE)
 	public void rename(String oldName, String newName) throws SystemException {
-		counterFinder.rename(oldName, newName);
+		CounterUtil.rename(oldName, newName);
 	}
 
-    @Transactional(propagation = Propagation.REQUIRES_NEW, isolation = Isolation.SERIALIZABLE)
 	public void reset(String name) throws SystemException {
-		counterFinder.reset(name);
+		CounterUtil.reset(name);
 	}
 
-    @Transactional(propagation = Propagation.REQUIRES_NEW, isolation = Isolation.SERIALIZABLE)
 	public void reset(String name, long size) throws SystemException {
-		counterFinder.reset(name, size);
+		CounterUtil.reset(name, size);
 	}
 
 }

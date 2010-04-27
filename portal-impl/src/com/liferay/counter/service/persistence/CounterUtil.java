@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.counter.service;
+package com.liferay.counter.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -20,55 +20,57 @@ import com.liferay.portal.kernel.exception.SystemException;
 import java.util.List;
 
 /**
- * <a href="CounterLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="CounterUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class CounterLocalServiceUtil {
+public class CounterUtil {
 
 	public static List<String> getNames() throws SystemException {
-		return getService().getNames();
+		return getPersistence().getNames();
 	}
 
-	public static CounterLocalService getService() {
-		if (_service == null) {
-			_service = (CounterLocalService)PortalBeanLocatorUtil.locate(
-				CounterLocalService.class.getName());
+	public static CounterPersistence getPersistence() {
+		if (_persistence == null) {
+			_persistence = (CounterPersistence)PortalBeanLocatorUtil.locate(
+				CounterPersistence.class.getName());
 		}
 
-		return _service;
+		return _persistence;
 	}
 
 	public static long increment() throws SystemException {
-		return getService().increment();
+		return getPersistence().increment();
 	}
 
 	public static long increment(String name) throws SystemException {
-		return getService().increment(name);
+		return getPersistence().increment(name);
 	}
 
-	public static long increment(String name, int size) throws SystemException {
-		return getService().increment(name, size);
+	public static long increment(String name, int size)
+		throws SystemException {
+
+		return getPersistence().increment(name, size);
 	}
 
 	public static void rename(String oldName, String newName)
 		throws SystemException {
 
-		getService().rename(oldName, newName);
+		getPersistence().rename(oldName, newName);
 	}
 
 	public static void reset(String name) throws SystemException {
-		getService().reset(name);
+		getPersistence().reset(name);
 	}
 
 	public static void reset(String name, long size) throws SystemException {
-		getService().reset(name, size);
+		getPersistence().reset(name, size);
 	}
 
-	public void setService(CounterLocalService service) {
-		_service = service;
+	public void setPersistence(CounterPersistence persistence) {
+		_persistence = persistence;
 	}
 
-	private static CounterLocalService _service;
+	private static CounterPersistence _persistence;
 
 }
