@@ -102,7 +102,7 @@ AssetRendererFactory rendererFactory = AssetRendererFactoryRegistryUtil.getAsset
 
 								<%@ include file="/html/portlet/asset_publisher/add_asset.jspf" %>
 
-								<aui:select name="assetEntryType" onChange='<%= renderResponse.getNamespace() + "selectionForType(this.options[this.selectedIndex].value);" %>'>
+								<aui:select label="" name="assetEntryType" onChange='<%= renderResponse.getNamespace() + "selectionForType(this.options[this.selectedIndex].value);" %>'>
 									<aui:option label="select-existing" value="" />
 
 									<%

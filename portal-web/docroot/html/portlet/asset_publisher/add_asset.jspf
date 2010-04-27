@@ -66,6 +66,7 @@ public PortletURL getAddPortletURL(RenderRequest renderRequest, PortletResponse 
 
 			addPortletURL.setParameter("redirect", themeDisplay.getURLCurrent());
 			addPortletURL.setParameter("backURL", themeDisplay.getURLCurrent());
+			addPortletURL.setParameter("configurationPortlet", Boolean.TRUE.toString());
 
 			String referringPortletResource = ParamUtil.getString(renderRequest, "portletResource");
 
