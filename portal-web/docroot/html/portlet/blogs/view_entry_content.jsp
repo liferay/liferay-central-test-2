@@ -25,7 +25,7 @@ AssetEntry assetEntry = (AssetEntry)request.getAttribute("view_entry_content.jsp
 %>
 
 <c:if test="<%= BlogsEntryPermission.contains(permissionChecker, entry, ActionKeys.VIEW) && ((entry.getStatus() == WorkflowConstants.STATUS_APPROVED) || BlogsEntryPermission.contains(permissionChecker, entry, ActionKeys.UPDATE)) %>">
-	<div class="entry <%= (entry.getStatus() == com.liferay.portal.kernel.workflow.WorkflowConstants.STATUS_APPROVED) ? "" : "draft" %>">
+	<div class="entry <%= (entry.getStatus() == WorkflowConstants.STATUS_APPROVED) ? "" : "draft" %>">
 		<div class="entry-content">
 
 			<%

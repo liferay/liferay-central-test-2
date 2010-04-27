@@ -48,10 +48,11 @@ public class DLFileEntryWorkflowHandler extends BaseWorkflowHandler {
 			int status, Map<String, Serializable> workflowContext)
 		throws PortalException, SystemException {
 
-		long groupId = (Long)workflowContext.get(WorkflowConstants.GROUP_ID);
+		long groupId = (Long)workflowContext.get(
+			WorkflowConstants.CONTEXT_GROUP_ID);
 		long userId = (Long)workflowContext.get("userId");
 		long classPK = (Long)workflowContext.get(
-			WorkflowConstants.ENTRY_CLASS_PK);
+			WorkflowConstants.CONTEXT_ENTRY_CLASS_PK);
 
 		ServiceContext serviceContext = new ServiceContext();
 

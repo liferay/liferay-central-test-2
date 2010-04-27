@@ -85,7 +85,7 @@ public class WorkflowHandlerRegistryUtil {
 		throws PortalException, SystemException {
 
 		String className = (String)workflowContext.get(
-			WorkflowConstants.ENTRY_CLASS_NAME);
+			WorkflowConstants.CONTEXT_ENTRY_CLASS_NAME);
 
 		WorkflowHandler workflowHandler = getWorkflowHandler(className);
 

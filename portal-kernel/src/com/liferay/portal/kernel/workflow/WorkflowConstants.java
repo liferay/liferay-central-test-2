@@ -21,15 +21,15 @@ package com.liferay.portal.kernel.workflow;
  */
 public class WorkflowConstants {
 
-	public static final String COMPANY_ID = "companyId";
+	public static final String CONTEXT_COMPANY_ID = "companyId";
 
-	public static final String ENTRY_CLASS_NAME = "entryClassName";
+	public static final String CONTEXT_ENTRY_CLASS_NAME = "entryClassName";
 
-	public static final String ENTRY_CLASS_PK = "entryClassPK";
+	public static final String CONTEXT_ENTRY_CLASS_PK = "entryClassPK";
 
-	public static final String ENTRY_TYPE = "entryType";
+	public static final String CONTEXT_ENTRY_TYPE = "entryType";
 
-	public static final String GROUP_ID = "groupId";
+	public static final String CONTEXT_GROUP_ID = "groupId";
 
 	public static final String LABEL_ANY = "any";
 
@@ -55,30 +55,6 @@ public class WorkflowConstants {
 
 	public static final int STATUS_PENDING = 1;
 
-	public static int fromLabel(String status) {
-		if (status.equals(LABEL_ANY)) {
-			return STATUS_ANY;
-		}
-		else if (status.equals(LABEL_APPROVED)) {
-			return STATUS_APPROVED;
-		}
-		else if (status.equals(LABEL_DENIED)) {
-			return STATUS_DENIED;
-		}
-		else if (status.equals(LABEL_DRAFT)) {
-			return STATUS_DRAFT;
-		}
-		else if (status.equals(LABEL_EXPIRED)) {
-			return STATUS_EXPIRED;
-		}
-		else if (status.equals(LABEL_PENDING)) {
-			return STATUS_PENDING;
-		}
-		else {
-			return STATUS_ANY;
-		}
-	}
-
 	public static String toLabel(int status) {
 		if (status == STATUS_ANY) {
 			return LABEL_ANY;
@@ -100,6 +76,30 @@ public class WorkflowConstants {
 		}
 		else {
 			return LABEL_ANY;
+		}
+	}
+
+	public static int toStatus(String label) {
+		if (label.equals(LABEL_ANY)) {
+			return STATUS_ANY;
+		}
+		else if (label.equals(LABEL_APPROVED)) {
+			return STATUS_APPROVED;
+		}
+		else if (label.equals(LABEL_DENIED)) {
+			return STATUS_DENIED;
+		}
+		else if (label.equals(LABEL_DRAFT)) {
+			return STATUS_DRAFT;
+		}
+		else if (label.equals(LABEL_EXPIRED)) {
+			return STATUS_EXPIRED;
+		}
+		else if (label.equals(LABEL_PENDING)) {
+			return STATUS_PENDING;
+		}
+		else {
+			return STATUS_ANY;
 		}
 	}
 

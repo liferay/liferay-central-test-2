@@ -213,16 +213,21 @@ public class WorkflowInstanceLinkLocalServiceImpl
 				workflowContext = new HashMap<String, Serializable>();
 			}
 
-			workflowContext.put(WorkflowConstants.COMPANY_ID, companyId);
-			workflowContext.put(WorkflowConstants.GROUP_ID, groupId);
-			workflowContext.put(WorkflowConstants.ENTRY_CLASS_NAME, className);
-			workflowContext.put(WorkflowConstants.ENTRY_CLASS_PK, classPK);
+			workflowContext.put(
+				WorkflowConstants.CONTEXT_COMPANY_ID, companyId);
+			workflowContext.put(
+				WorkflowConstants.CONTEXT_GROUP_ID, groupId);
+			workflowContext.put(
+				WorkflowConstants.CONTEXT_ENTRY_CLASS_NAME, className);
+			workflowContext.put(
+				WorkflowConstants.CONTEXT_ENTRY_CLASS_PK, classPK);
 
 			WorkflowHandler workflowHandler =
 				WorkflowHandlerRegistryUtil.getWorkflowHandler(className);
 
 			workflowContext.put(
-				WorkflowConstants.ENTRY_TYPE, workflowHandler.getType());
+				WorkflowConstants.CONTEXT_ENTRY_TYPE,
+				workflowHandler.getType());
 
 			WorkflowInstance workflowInstance =
 				WorkflowInstanceManagerUtil.startWorkflowInstance(
@@ -267,7 +272,8 @@ public class WorkflowInstanceLinkLocalServiceImpl
 				new HashMap<String, Serializable>(
 					workflowInstance.getWorkflowContext());
 
-			workflowContext.put(WorkflowConstants.ENTRY_CLASS_PK, newClassPK);
+			workflowContext.put(
+				WorkflowConstants.CONTEXT_ENTRY_CLASS_PK, newClassPK);
 
 			WorkflowInstanceManagerUtil.updateWorkflowContext(
 				workflowInstanceLink.getCompanyId(),
