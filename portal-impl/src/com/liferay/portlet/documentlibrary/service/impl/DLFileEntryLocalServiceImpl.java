@@ -232,7 +232,7 @@ public class DLFileEntryLocalServiceImpl
 		// Status
 
 		fileEntry = updateStatus(
-			userId, fileEntryId, serviceContext.getStatus(),serviceContext);
+			userId, fileEntryId, serviceContext.getStatus(), serviceContext);
 
 		// Workflow
 
