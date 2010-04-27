@@ -113,7 +113,7 @@
 				BlogsStatsUser
 			INNER JOIN
 				Group_ ON
-					(BlogsStatsUser.groupId = Group_.groupId)
+					(Group_.groupId = BlogsStatsUser.groupId)
 			WHERE
 				(
 					(Group_.companyId = ?) AND
