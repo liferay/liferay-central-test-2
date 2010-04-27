@@ -212,6 +212,11 @@ public class AssetCategoryLocalServiceUtil {
 		return getService().getChildCategories(parentCategoryId);
 	}
 
+	public static int getChildCategoriesCount(long parentCategoryId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getChildCategoriesCount(parentCategoryId);
+	}
+
 	public static java.util.List<com.liferay.portlet.asset.model.AssetCategory> getEntryCategories(
 		long entryId)
 		throws com.liferay.portal.kernel.exception.SystemException {

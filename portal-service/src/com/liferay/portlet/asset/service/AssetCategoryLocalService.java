@@ -174,6 +174,10 @@ public interface AssetCategoryLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getChildCategoriesCount(long parentCategoryId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> getEntryCategories(
 		long entryId)
 		throws com.liferay.portal.kernel.exception.SystemException;

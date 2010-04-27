@@ -248,6 +248,13 @@ public class AssetCategoryLocalServiceImpl
 			parentCategoryId);
 	}
 
+	public int getChildCategoriesCount(long parentCategoryId)
+		throws SystemException {
+
+		return assetCategoryPersistence.countByParentCategoryId(
+			parentCategoryId);
+	}
+
 	public List<AssetCategory> getEntryCategories(long entryId)
 		throws SystemException {
 

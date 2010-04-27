@@ -333,7 +333,7 @@ AUI().add(
 									data: A.bind(instance._formatRequestData, instance)
 								},
 								formatter: A.bind(instance._formatJSONResult, instance),
-								url: themeDisplay.getPathMain() + '/portal/get_categories'
+								url: themeDisplay.getPathMain() + '/asset/get_categories'
 							},
 							paginator: {
 								limit: 50,
