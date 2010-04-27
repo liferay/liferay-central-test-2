@@ -48,7 +48,7 @@ public class MoveCategoryItemToCategoryTest extends BaseTestCase {
 		selenium.clickAt("//td[1]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Item Test"));
-		selenium.clickAt("//strong", RuntimeVariables.replace(""));
+		selenium.clickAt("//td[5]/ul/li/strong/a", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

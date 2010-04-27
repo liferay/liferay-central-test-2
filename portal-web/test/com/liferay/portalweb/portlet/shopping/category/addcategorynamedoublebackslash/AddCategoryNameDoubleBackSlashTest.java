@@ -50,7 +50,7 @@ public class AddCategoryNameDoubleBackSlashTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Add Category']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.type("_34_name", RuntimeVariables.replace("Category Test\\\\"));
+		selenium.type("_34_name", RuntimeVariables.replace("\\\\"));
 		selenium.type("_34_description",
 			RuntimeVariables.replace("This is a category test."));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));

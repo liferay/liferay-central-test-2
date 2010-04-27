@@ -29,11 +29,11 @@ public class SearchUserTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTestSuite(AddPageTest.class);
-		testSuite.addTestSuite(AddPortletTest.class);
+		testSuite.addTestSuite(AddPageSearchTest.class);
+		testSuite.addTestSuite(AddPortletSearchTest.class);
 		testSuite.addTestSuite(AddUserTest.class);
 		testSuite.addTestSuite(SearchUserTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

@@ -30,8 +30,8 @@ public class AddToShoppingCartCategoryItemMultipleTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTestSuite(AddPageTest.class);
-		testSuite.addTestSuite(AddPortletTest.class);
+		testSuite.addTestSuite(AddPageShoppingTest.class);
+		testSuite.addTestSuite(AddPortletShoppingTest.class);
 		testSuite.addTestSuite(AddCategoryTest.class);
 		testSuite.addTestSuite(AddCategoryItem1Test.class);
 		testSuite.addTestSuite(AddCategoryItem2Test.class);
@@ -39,7 +39,9 @@ public class AddToShoppingCartCategoryItemMultipleTests extends BaseTests {
 		testSuite.addTestSuite(AddToShoppingCartCategoryItem1Test.class);
 		testSuite.addTestSuite(AddToShoppingCartCategoryItem2Test.class);
 		testSuite.addTestSuite(AddToShoppingCartCategoryItem3Test.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownCartTest.class);
+		testSuite.addTestSuite(TearDownShoppingCategoryTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

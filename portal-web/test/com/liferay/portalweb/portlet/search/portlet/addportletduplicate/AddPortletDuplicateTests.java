@@ -29,10 +29,10 @@ public class AddPortletDuplicateTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTestSuite(AddPageTest.class);
-		testSuite.addTestSuite(AddPortletTest.class);
-		testSuite.addTestSuite(AddPortletDuplicateTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(AddPageSearchTest.class);
+		testSuite.addTestSuite(AddPortletSearchTest.class);
+		testSuite.addTestSuite(AddPortletSearchDuplicateTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

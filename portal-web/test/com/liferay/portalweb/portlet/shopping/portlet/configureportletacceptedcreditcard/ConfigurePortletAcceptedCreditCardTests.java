@@ -30,13 +30,11 @@ public class ConfigurePortletAcceptedCreditCardTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTestSuite(AddPageTest.class);
-		testSuite.addTestSuite(AddPortletTest.class);
-		testSuite.addTestSuite(
-			AssertAcceptedCreditCardBeforeConfigurationTest.class);
+		testSuite.addTestSuite(AddPageShoppingTest.class);
+		testSuite.addTestSuite(AddPortletShoppingTest.class);
 		testSuite.addTestSuite(ConfigurePortletAcceptedCreditCardTest.class);
-		testSuite.addTestSuite(AssertAcceptedCreditCardTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownConfigurationTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

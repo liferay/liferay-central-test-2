@@ -47,7 +47,7 @@ public class EditCouponTest extends BaseTestCase {
 		selenium.clickAt("link=Coupons", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Coupon Test\nThis is a coupon test."));
-		selenium.clickAt("//strong/a", RuntimeVariables.replace(""));
+		selenium.clickAt("//td[7]/ul/li/strong/a", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -55,7 +55,8 @@ public class EditCouponTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Edit")) {
+				if (selenium.isVisible(
+							"//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a")) {
 					break;
 				}
 			}
@@ -65,7 +66,8 @@ public class EditCouponTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("link=Edit", RuntimeVariables.replace(""));
+		selenium.click(RuntimeVariables.replace(
+				"//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a"));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_34_name", RuntimeVariables.replace("Coupon Test Edited"));
 		selenium.type("_34_description",

@@ -30,16 +30,16 @@ public class ConfigurePortletInsuranceFlatRateTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTestSuite(AddPageTest.class);
-		testSuite.addTestSuite(AddPortletTest.class);
+		testSuite.addTestSuite(AddPageShoppingTest.class);
+		testSuite.addTestSuite(AddPortletShoppingTest.class);
 		testSuite.addTestSuite(AddCategoryTest.class);
 		testSuite.addTestSuite(AddCategoryItemTest.class);
 		testSuite.addTestSuite(AddToShoppingCartCategoryItemTest.class);
-		testSuite.addTestSuite(
-			AssertInsuranceFlatRateBeforeConfigurationTest.class);
 		testSuite.addTestSuite(ConfigurePortletInsuranceFlatRateTest.class);
-		testSuite.addTestSuite(AssertInsuranceFlatRateTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownConfigurationTest.class);
+		testSuite.addTestSuite(TearDownCartTest.class);
+		testSuite.addTestSuite(TearDownShoppingCategoryTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

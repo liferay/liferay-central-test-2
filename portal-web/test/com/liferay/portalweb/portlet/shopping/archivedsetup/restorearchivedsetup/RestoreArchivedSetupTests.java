@@ -29,14 +29,15 @@ public class RestoreArchivedSetupTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTestSuite(AddPageTest.class);
-		testSuite.addTestSuite(AddPortletTest.class);
+		testSuite.addTestSuite(AddPageShoppingTest.class);
+		testSuite.addTestSuite(AddPortletShoppingTest.class);
 		testSuite.addTestSuite(SaveArchivedSetupTest.class);
 		testSuite.addTestSuite(ConfigurePortletAcceptedCreditCardTest.class);
 		testSuite.addTestSuite(AssertAcceptedCreditCardTest.class);
 		testSuite.addTestSuite(RestoreArchivedSetupTest.class);
 		testSuite.addTestSuite(AssertRestoreArchivedSetupTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownArchivedSetupTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

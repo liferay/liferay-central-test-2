@@ -29,10 +29,11 @@ public class AddCouponNameNullTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTestSuite(AddPageTest.class);
-		testSuite.addTestSuite(AddPortletTest.class);
+		testSuite.addTestSuite(AddPageShoppingTest.class);
+		testSuite.addTestSuite(AddPortletShoppingTest.class);
 		testSuite.addTestSuite(AddCouponNameNullTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownCouponTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

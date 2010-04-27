@@ -1,0 +1,284 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>TearDownConfigurationTest</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">TearDownConfigurationTest</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/web/guest/home/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Shopping Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>link=Shopping Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>link=Configuration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>link=Payment Settings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>_86_current_cc_types</td>
+	<td></td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>eval(selenium.isPartialText('_86_available_cc_types','American Express'))</td>
+	<td>amexAvailable</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${amexAvailable}</td>
+	<td>AmexNotAvailable</td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>_86_available_cc_types</td>
+	<td>label=American Express</td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>//div/table/tbody/tr/td[2]/a[2]/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPartialText</td>
+	<td>_86_current_cc_types</td>
+	<td>American Express</td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>AmexNotAvailable</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>_86_current_cc_types</td>
+	<td></td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>eval(selenium.isPartialText('_86_available_cc_types','Discover'))</td>
+	<td>discoverAvailable</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${discoverAvailable}</td>
+	<td>DiscoverNotAvailable</td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>_86_available_cc_types</td>
+	<td>label=Discover</td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>//div/table/tbody/tr/td[2]/a[2]/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPartialText</td>
+	<td>_86_current_cc_types</td>
+	<td>Discover</td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>DiscoverNotAvailable</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>_86_current_cc_types</td>
+	<td></td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>eval(selenium.isPartialText('_86_available_cc_types','MasterCard'))</td>
+	<td>masterCardAvailable</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${masterCardAvailable}</td>
+	<td>MasterCardNotAvailable</td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>_86_available_cc_types</td>
+	<td>label=MasterCard</td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>//div/table/tbody/tr/td[2]/a[2]/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPartialText</td>
+	<td>_86_current_cc_types</td>
+	<td>MasterCard</td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>MasterCardNotAvailable</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>_86_current_cc_types</td>
+	<td></td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>eval(selenium.isPartialText('_86_available_cc_types','Visa'))</td>
+	<td>visaAvailable</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${visaAvailable}</td>
+	<td>VisaNotAvailable</td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>_86_available_cc_types</td>
+	<td>label=Visa</td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>//div/table/tbody/tr/td[2]/a[2]/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPartialText</td>
+	<td>_86_current_cc_types</td>
+	<td>Visa</td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>VisaNotAvailable</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>_86_currencyId</td>
+	<td>label=USD</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>_86_taxState</td>
+	<td>label=California</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_86_taxRate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_86_minOrder</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>//div[3]/span[1]/span/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>link=Shipping Calculation</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>_86_shippingFormula</td>
+	<td>label=Flat Amount</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_86_shipping0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_86_shipping1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_86_shipping2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_86_shipping3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_86_shipping4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>//div[2]/span[1]/span/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>link=Insurance Calculation</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>_86_insuranceFormula</td>
+	<td>label=Flat Amount</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_86_insurance0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_86_insurance1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_86_insurance2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_86_insurance3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_86_insurance4</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>//div[2]/span[1]/span/input</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

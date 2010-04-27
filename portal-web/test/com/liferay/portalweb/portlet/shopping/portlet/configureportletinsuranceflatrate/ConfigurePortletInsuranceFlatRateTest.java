@@ -46,6 +46,30 @@ public class ConfigurePortletInsuranceFlatRateTest extends BaseTestCase {
 
 		selenium.clickAt("link=Shopping Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("link=Cart", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		assertFalse(selenium.isTextPresent("Insurance"));
+		assertFalse(selenium.isElementPresent("_34_insure"));
+		selenium.open("/web/guest/home/");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Shopping Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("link=Shopping Test Page", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Configuration", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Insurance Calculation",
@@ -63,5 +87,31 @@ public class ConfigurePortletInsuranceFlatRateTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace(
 				"You have successfully updated the setup."),
 			selenium.getText("//div[@id='p_p_id_86_']/div/div"));
+		selenium.open("/web/guest/home/");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Shopping Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("link=Shopping Test Page", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("link=Cart", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		assertEquals(RuntimeVariables.replace("Insurance"),
+			selenium.getText("//span/label"));
+		assertEquals(RuntimeVariables.replace("None $2.00"),
+			selenium.getText("_34_insure"));
 	}
 }

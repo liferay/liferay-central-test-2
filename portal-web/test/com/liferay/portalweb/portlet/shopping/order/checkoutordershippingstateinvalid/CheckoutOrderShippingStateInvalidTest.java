@@ -106,9 +106,10 @@ public class CheckoutOrderShippingStateInvalidTest extends BaseTestCase {
 				selenium.clickAt("//input[@value='Continue']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				assertTrue(selenium.isTextPresent(
-						"You have entered invalid data. Please try again."));
-				assertTrue(selenium.isTextPresent("Please enter a valid state."));
+				assertEquals(RuntimeVariables.replace("CA"),
+					selenium.getText("//tr[7]/td[2]"));
+				assertEquals(RuntimeVariables.replace("outside-us"),
+					selenium.getText("//td[2]/table/tbody/tr[7]/td[2]"));
 
 			case 100:
 				label = -1;

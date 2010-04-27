@@ -46,6 +46,32 @@ public class ConfigurePortletAcceptedCreditCardTest extends BaseTestCase {
 
 		selenium.clickAt("link=Shopping Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("link=Cart", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isElementPresent("//img[@alt='visa']"));
+		assertTrue(selenium.isElementPresent("//img[@alt='discover']"));
+		assertTrue(selenium.isElementPresent("//img[@alt='mastercard']"));
+		assertTrue(selenium.isElementPresent("//img[@alt='amex']"));
+		selenium.open("/web/guest/home/");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Shopping Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("link=Shopping Test Page", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Configuration", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.addSelection("_86_current_cc_types",
@@ -66,5 +92,31 @@ public class ConfigurePortletAcceptedCreditCardTest extends BaseTestCase {
 			selenium.getText("_86_current_cc_types"));
 		assertEquals(RuntimeVariables.replace("MasterCard American Express"),
 			selenium.getText("_86_available_cc_types"));
+		selenium.open("/web/guest/home/");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Shopping Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("link=Shopping Test Page", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("link=Cart", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isElementPresent("//img[@alt='visa']"));
+		assertTrue(selenium.isElementPresent("//img[@alt='discover']"));
+		assertFalse(selenium.isElementPresent("//img[@alt='mastercard']"));
+		assertFalse(selenium.isElementPresent("//img[@alt='amex']"));
 	}
 }
