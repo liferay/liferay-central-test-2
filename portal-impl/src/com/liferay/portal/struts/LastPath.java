@@ -14,71 +14,24 @@
 
 package com.liferay.portal.struts;
 
-import com.liferay.portal.kernel.util.StringBundler;
-
-import java.io.Serializable;
-
-import java.util.Collections;
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
  * <a href="LastPath.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * @author	   Brian Wing Shun Chan
+  @deprecated {@link com.liferay.portal.kernel.struts.LastPath}
  */
-public class LastPath implements Serializable {
+public class LastPath extends com.liferay.portal.kernel.struts.LastPath {
 
 	public LastPath(String contextPath, String path) {
-		this(contextPath, path, Collections.EMPTY_MAP);
+		super(contextPath, path);
 	}
 
 	public LastPath(
 		String contextPath, String path, Map<String, String[]> parameterMap) {
 
-		_contextPath = contextPath;
-		_path = path;
-		_parameterMap = new LinkedHashMap<String, String[]>(parameterMap);
+		super(contextPath, path, parameterMap);
 	}
-
-	public String getContextPath() {
-		return _contextPath;
-	}
-
-	public void setContextPath(String contextPath) {
-		_contextPath = contextPath;
-	}
-
-	public String getPath() {
-		return _path;
-	}
-
-	public void setPath(String path) {
-		_path = path;
-	}
-
-	public Map<String, String[]> getParameterMap() {
-		return _parameterMap;
-	}
-
-	public void setParameterMap(Map<String, String[]> parameterMap) {
-		_parameterMap = parameterMap;
-	}
-
-	public String toString() {
-		StringBundler sb = new StringBundler(5);
-
-		sb.append("{contextPath=");
-		sb.append(_contextPath);
-		sb.append(", path=");
-		sb.append(_path);
-		sb.append("}");
-
-		return sb.toString();
-	}
-
-	private String _contextPath;
-	private String _path;
-	private Map<String, String[]> _parameterMap;
 
 }
