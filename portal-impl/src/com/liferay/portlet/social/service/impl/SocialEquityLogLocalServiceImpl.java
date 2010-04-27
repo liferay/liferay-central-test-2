@@ -14,14 +14,29 @@
 
 package com.liferay.portlet.social.service.impl;
 
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portlet.social.model.SocialEquityLog;
 import com.liferay.portlet.social.service.base.SocialEquityLogLocalServiceBaseImpl;
 
 /**
  * <a href="SocialEquityLogLocalServiceImpl.java.html"><b><i>View Source</i></b>
  * </a>
  *
+ * @author Zsolt Berentey
  * @author Brian Wing Shun Chan
  */
 public class SocialEquityLogLocalServiceImpl
 	extends SocialEquityLogLocalServiceBaseImpl {
+
+	public SocialEquityLog addEquityLog(
+			long userId, long assetEntryId, String actionId)
+		throws PortalException, SystemException {
+
+		return null;
+	}
+
+	public void checkEquityLogs() throws PortalException, SystemException {
+	}
+
 }
