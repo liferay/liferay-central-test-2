@@ -28,6 +28,9 @@ import com.liferay.portlet.asset.AssetRendererFactoryRegistryUtil;
 import com.liferay.portlet.asset.model.AssetRenderer;
 import com.liferay.portlet.asset.model.AssetRendererFactory;
 
+import java.io.Serializable;
+import java.util.Map;
+
 import javax.portlet.PortletURL;
 
 /**
@@ -91,11 +94,12 @@ public abstract class BaseWorkflowHandler implements WorkflowHandler {
 
 	public void startWorkflowInstance(
 			long companyId, long groupId, long userId, long classPK,
-			Object model)
+			Object model, Map<String, Serializable> contextVariables)
 		throws PortalException, SystemException {
 
 		WorkflowInstanceLinkLocalServiceUtil.startWorkflowInstance(
-			companyId, groupId, userId, getClassName(), classPK);
+			companyId, groupId, userId, getClassName(), classPK,
+			contextVariables);
 	}
 
 	protected AssetRenderer getAssetRenderer(long classPK)

@@ -17,7 +17,9 @@ package com.liferay.portal.kernel.workflow;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 
+import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <a href="WorkflowHandlerRegistryUtil.java.html"><b><i>View Source</i></b></a>
@@ -58,7 +60,21 @@ public class WorkflowHandlerRegistryUtil {
 
 		if (workflowHandler != null) {
 			workflowHandler.startWorkflowInstance(
-				companyId, groupId, userId, classPK, model);
+				companyId, groupId, userId, classPK, model, null);
+		}
+	}
+
+	public static void startWorkflowInstance(
+			long companyId, long groupId, long userId, String className,
+			long classPK, Object model,
+			Map<String, Serializable> contextVariables)
+		throws PortalException, SystemException {
+
+		WorkflowHandler workflowHandler = getWorkflowHandler(className);
+
+		if (workflowHandler != null) {
+			workflowHandler.startWorkflowInstance(
+				companyId, groupId, userId, classPK, model, contextVariables);
 		}
 	}
 

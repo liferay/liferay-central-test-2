@@ -187,7 +187,7 @@ public class WorkflowInstanceLinkLocalServiceImpl
 
 	public void startWorkflowInstance(
 			long companyId, long groupId, long userId, String className,
-			long classPK)
+			long classPK, Map<String, Serializable> contextVariables)
 		throws PortalException, SystemException {
 
 		try {
@@ -200,8 +200,13 @@ public class WorkflowInstanceLinkLocalServiceImpl
 			int workflowDefinitionVersion =
 				workflowDefinitionLink.getWorkflowDefinitionVersion();
 
-			Map<String, Serializable> context =
-				new HashMap<String, Serializable>();
+			Map<String, Serializable> context = null;
+			if ((contextVariables != null) && !contextVariables.isEmpty()) {
+				context = new HashMap<String, Serializable>(contextVariables);
+			}
+			else {
+				context = new HashMap<String, Serializable>();
+			}
 
 			context.put(ContextConstants.COMPANY_ID, companyId);
 			context.put(ContextConstants.GROUP_ID, groupId);

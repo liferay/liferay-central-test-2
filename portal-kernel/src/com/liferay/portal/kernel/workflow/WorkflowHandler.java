@@ -19,6 +19,9 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 
+import java.io.Serializable;
+import java.util.Map;
+
 import javax.portlet.PortletURL;
 
 /**
@@ -50,7 +53,7 @@ public interface WorkflowHandler {
 
 	public void startWorkflowInstance(
 			long companyId, long groupId, long userId, long classPK,
-			Object model)
+			Object model, Map<String, Serializable> contextVariables)
 		throws PortalException, SystemException;
 
 	public Object updateStatus(

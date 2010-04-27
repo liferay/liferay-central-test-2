@@ -150,7 +150,8 @@ public interface WorkflowInstanceLinkLocalService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public void startWorkflowInstance(long companyId, long groupId,
-		long userId, java.lang.String className, long classPK)
+		long userId, java.lang.String className, long classPK,
+		java.util.Map<String, java.io.Serializable> contextVariables)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
