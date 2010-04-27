@@ -335,15 +335,6 @@ public class LayoutAction extends Action {
 		StringServletResponse stringResponse = new StringServletResponse(
 			response);
 
-		if (themeDisplay.isStateExclusive()) {
-			RenderRequestImpl renderRequestImpl =
-				(RenderRequestImpl)request.getAttribute(
-					JavaConstants.JAVAX_PORTLET_REQUEST);
-
-			renderRequestImpl.setAttribute(
-				WebKeys.STRING_SERVLET_RESPONSE, stringResponse);
-		}
-
 		requestDispatcher.include(request, stringResponse);
 
 		request.setAttribute(
