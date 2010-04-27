@@ -178,7 +178,7 @@ public class ListUtil {
 			return newList;
 		}
 
-		for (int i = start; i < end && i <= normalizedSize; i++) {
+		for (int i = start; (i < end) && (i <= normalizedSize); i++) {
 			newList.add(list.get(i));
 		}
 

@@ -42,14 +42,9 @@ public class GetLayoutsAction extends JSONAction {
 			HttpServletResponse response)
 		throws Exception {
 
-		long groupId = ParamUtil.getLong(request, "groupId");
-		boolean privateLayout = ParamUtil.getBoolean(request, "privateLayout");
-		long parentLayoutId = ParamUtil.getLong(request, "parentLayoutId");
-
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
-		List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(
-			groupId, privateLayout, parentLayoutId);
+		List<Layout> layouts = getLayouts(request);
 
 		for (Layout layout : layouts) {
 			JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
@@ -67,6 +62,17 @@ public class GetLayoutsAction extends JSONAction {
 		}
 
 		return jsonArray.toString();
+	}
+
+	protected List<Layout> getLayouts(HttpServletRequest request)
+		throws Exception {
+
+		long groupId = ParamUtil.getLong(request, "groupId");
+		boolean privateLayout = ParamUtil.getBoolean(request, "privateLayout");
+		long parentLayoutId = ParamUtil.getLong(request, "parentLayoutId");
+
+		return LayoutLocalServiceUtil.getLayouts(
+			groupId, privateLayout, parentLayoutId);
 	}
 
 }
