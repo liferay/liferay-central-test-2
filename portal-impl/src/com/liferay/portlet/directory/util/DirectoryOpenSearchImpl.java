@@ -14,16 +14,10 @@
 
 package com.liferay.portlet.directory.util;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.Document;
-import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Indexer;
-import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.search.Summary;
 import com.liferay.portal.search.HitsOpenSearchImpl;
-import com.liferay.portal.security.auth.FullNameGenerator;
-import com.liferay.portal.security.auth.FullNameGeneratorFactory;
 import com.liferay.portlet.enterpriseadmin.util.UserIndexer;
 
 import javax.portlet.PortletURL;
@@ -48,36 +42,21 @@ public class DirectoryOpenSearchImpl extends HitsOpenSearchImpl {
 	}
 
 	public Summary getSummary(
-			Indexer indexer, Document document, String snippet,
-			PortletURL portletURL)
-		throws SearchException {
+		Indexer indexer, Document document, String snippet,
+		PortletURL portletURL) {
 
-		String emailAddress = document.get("emailAddress");
-		String firstName = document.get("firstName");
-		String middleName = document.get("middleName");
-		String lastName = document.get("lastName");
+		Summary summary = super.getSummary(
+			indexer, document, snippet, portletURL);
 
-		FullNameGenerator fullNameGenerator =
-			FullNameGeneratorFactory.getInstance();
-
-		String title = fullNameGenerator.getFullName(
-			firstName, middleName, lastName);
-
-		String content = title + " <" + emailAddress + ">";
-
-		String userId = document.get(Field.USER_ID);
+		portletURL = summary.getPortletURL();
 
 		portletURL.setParameter("struts_action", "/directory/view_user");
-		portletURL.setParameter("p_u_i_d", String.valueOf(userId));
 
-		return new Summary(title, content, portletURL);
+		return summary;
 	}
 
 	public String getTitle(String keywords) {
 		return TITLE + keywords;
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(
-		DirectoryOpenSearchImpl.class);
 
 }
