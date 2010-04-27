@@ -588,9 +588,9 @@ public class PropsValues {
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.DL_FILE_ENTRY_COMMENTS_ENABLED));
 
-	public static final boolean DL_FILE_ENTRY_READCOUNT_ENABLED =
+	public static final boolean DL_FILE_ENTRY_READ_COUNT_ENABLED =
 		GetterUtil.getBoolean(
-			PropsUtil.get(PropsKeys.DL_FILE_ENTRY_READCOUNT_ENABLED));
+			PropsUtil.get(PropsKeys.DL_FILE_ENTRY_READ_COUNT_ENABLED));
 
 	public static final String[] DL_FILE_EXTENSIONS =
 		PropsUtil.getArray(PropsKeys.DL_FILE_EXTENSIONS);

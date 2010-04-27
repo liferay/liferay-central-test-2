@@ -149,7 +149,7 @@ request.setAttribute("view_file_shortcut.jsp-fileShortcut", fileShortcut);
 			<%= dateFormatDateTime.format(toFileEntry.getModifiedDate()) %>
 		</div>
 
-		<c:if test="<%= PropsValues.DL_FILE_ENTRY_READCOUNT_ENABLED %>">
+		<c:if test="<%= PropsValues.DL_FILE_ENTRY_READ_COUNT_ENABLED %>">
 			<div class="file-entry-downloads">
 				<%= toFileEntry.getReadCount() %> <liferay-ui:message key="downloads" />
 			</div>

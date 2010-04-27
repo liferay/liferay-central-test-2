@@ -112,7 +112,7 @@ if (folder != null) {
 	headerNames.add("document");
 	headerNames.add("size");
 
-	if (PropsValues.DL_FILE_ENTRY_READCOUNT_ENABLED) {
+	if (PropsValues.DL_FILE_ENTRY_READ_COUNT_ENABLED) {
 		headerNames.add("downloads");
 	}
 
@@ -155,7 +155,7 @@ if (folder != null) {
 
 		row.addText(TextFormatter.formatKB(fileEntry.getSize(), locale) + "k", rowHREF);
 
-		if (PropsValues.DL_FILE_ENTRY_READCOUNT_ENABLED) {
+		if (PropsValues.DL_FILE_ENTRY_READ_COUNT_ENABLED) {
 			row.addText(String.valueOf(fileEntry.getReadCount()), rowHREF);
 		}
 

@@ -499,7 +499,7 @@ public class DLFileEntryLocalServiceImpl
 				new ServiceContext());
 		}
 
-		if (PropsValues.DL_FILE_ENTRY_READCOUNT_ENABLED) {
+		if (PropsValues.DL_FILE_ENTRY_READ_COUNT_ENABLED) {
 			fileEntry.setReadCount(fileEntry.getReadCount() + 1);
 
 			dlFileEntryPersistence.update(fileEntry, false);

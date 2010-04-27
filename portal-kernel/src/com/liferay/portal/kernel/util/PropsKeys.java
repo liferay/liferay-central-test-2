@@ -455,7 +455,7 @@ public interface PropsKeys {
 
 	public static final String DL_FILE_ENTRY_COMMENTS_ENABLED = "dl.file.entry.comments.enabled";
 
-	public static final String DL_FILE_ENTRY_READCOUNT_ENABLED = "dl.file.entry.readcount.enabled";
+	public static final String DL_FILE_ENTRY_READ_COUNT_ENABLED = "dl.file.entry.read.count.enabled";
 
 	public static final String DL_FILE_EXTENSIONS = "dl.file.extensions";
 

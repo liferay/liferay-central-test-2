@@ -123,9 +123,11 @@ int fileEntriesPerPage = PrefsParamUtil.getInteger(preferences, request, "fileEn
 
 String defaultFileEntryColumns = "name,size";
 
-if (PropsValues.DL_FILE_ENTRY_READCOUNT_ENABLED) {
+if (PropsValues.DL_FILE_ENTRY_READ_COUNT_ENABLED) {
 	defaultFileEntryColumns += ",downloads";
 }
+
+defaultFileEntryColumns += ",locked";
 
 if (portletId.equals(PortletKeys.DOCUMENT_LIBRARY)) {
 	defaultFileEntryColumns += ",action";
