@@ -69,7 +69,7 @@ public class BlogsStatsUserLocalServiceImpl
 		return blogsStatsUserPersistence.countByC_E(companyId, 0);
 	}
 
-	public List<BlogsStatsUser> getGroupsEntries(
+	public List<BlogsStatsUser> getGroupsStatsUsers(
 			long companyId, long groupId, int start, int end)
 		throws SystemException {
 
