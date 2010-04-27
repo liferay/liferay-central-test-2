@@ -238,16 +238,26 @@
 
 <c:choose>
 	<c:when test="<%= themeDisplay.isThemeJsFastLoad() %>">
-		<script src="<%= HtmlUtil.escape(PortalUtil.getStaticResourceURL(request, themeDisplay.getPathJavaScript() + "/barebone.jsp", "minifierBundleId=" + HttpUtil.encodeURL("javascript.barebone.files"), javaScriptLastModified)) %>" type="text/javascript"></script>
-
-		<c:if test="<%= !themeDisplay.isThemeJsBarebone() %>">
-			<script src="<%= HtmlUtil.escape(PortalUtil.getStaticResourceURL(request, themeDisplay.getPathJavaScript() + "/everything.jsp", "minifierBundleId=" + HttpUtil.encodeURL("javascript.everything.files"), javaScriptLastModified)) %>" type="text/javascript"></script>
-		</c:if>
+		<c:choose>
+			<c:when test="<%= themeDisplay.isThemeJsBarebone() %>">
+				<script src="<%= HtmlUtil.escape(PortalUtil.getStaticResourceURL(request, themeDisplay.getPathJavaScript() + "/barebone.jsp", "minifierBundleId=" + HttpUtil.encodeURL("javascript.barebone.files"), javaScriptLastModified)) %>" type="text/javascript"></script>
+			</c:when>
+			<c:otherwise>
+				<script src="<%= HtmlUtil.escape(PortalUtil.getStaticResourceURL(request, themeDisplay.getPathJavaScript() + "/everything.jsp", "minifierBundleId=" + HttpUtil.encodeURL("javascript.everything.files"), javaScriptLastModified)) %>" type="text/javascript"></script>
+			</c:otherwise>
+		</c:choose>
 	</c:when>
 	<c:otherwise>
 
 		<%
-		String[] javaScriptFiles = PropsValues.JAVASCRIPT_BAREBONE_FILES;
+		String[] javaScriptFiles = null;
+
+		if (themeDisplay.isThemeJsBarebone()) {
+			javaScriptFiles = JavaScriptBundleUtil.getFileNames(PropsKeys.JAVASCRIPT_BAREBONE_FILES);
+		}
+		else {
+			javaScriptFiles = JavaScriptBundleUtil.getFileNames(PropsKeys.JAVASCRIPT_EVERYTHING_FILES);
+		}
 
 		for (String javaScriptFile : javaScriptFiles) {
 		%>
@@ -255,18 +265,6 @@
 			<script src="<%= themeDisplay.getPathJavaScript() %>/<%= javaScriptFile %>?t=<%= javaScriptLastModified %>" type="text/javascript"></script>
 
 		<%
-		}
-
-		if (!themeDisplay.isThemeJsBarebone()) {
-			javaScriptFiles = PropsValues.JAVASCRIPT_EVERYTHING_FILES;
-
-			for (String javaScriptFile : javaScriptFiles) {
-		%>
-
-				<script src="<%= themeDisplay.getPathJavaScript() %>/<%= javaScriptFile %>?t=<%= javaScriptLastModified %>" type="text/javascript"></script>
-
-		<%
-			}
 		}
 		%>
 

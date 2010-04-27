@@ -153,6 +153,7 @@
 <%@ page import="com.liferay.portal.theme.ThemeDisplay" %>
 <%@ page import="com.liferay.portal.util.ContentUtil" %>
 <%@ page import="com.liferay.portal.util.CookieKeys" %>
+<%@ page import="com.liferay.portal.util.JavaScriptBundleUtil" %>
 <%@ page import="com.liferay.portal.util.Portal" %>
 <%@ page import="com.liferay.portal.util.PortalUtil" %>
 <%@ page import="com.liferay.portal.util.PortletCategoryKeys" %>

@@ -80,6 +80,7 @@ import com.liferay.portal.servlet.filters.cache.CacheUtil;
 import com.liferay.portal.struts.MultiMessageResources;
 import com.liferay.portal.struts.MultiMessageResourcesFactory;
 import com.liferay.portal.upgrade.UpgradeProcessUtil;
+import com.liferay.portal.util.JavaScriptBundleUtil;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
@@ -1446,6 +1447,8 @@ public class HookHotDeployListener
 		}
 
 		CacheUtil.clearCache();
+
+		JavaScriptBundleUtil.clearCache();
 	}
 
 	protected void updateRelease(

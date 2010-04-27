@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
+import com.liferay.portal.util.JavaScriptBundleUtil;
 import com.liferay.portal.util.MinifierUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
@@ -181,7 +182,8 @@ public class MinifierFilter extends BasePortalFilter {
 
 		String cacheFileName = sb.toString();
 
-		String[] fileNames = PropsUtil.getArray(minifierBundleId);
+		String[] fileNames =
+			JavaScriptBundleUtil.getFileNames(minifierBundleId);
 
 		File cacheFile = new File(cacheFileName);
 
