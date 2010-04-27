@@ -299,7 +299,9 @@ AUI().add(
 						instance._bindSearchHandle.detach();
 					}
 
-					instance._bindSearchHandle = popup.searchField.on('focus', A.bind(instance._initSearch, instance));
+					var searchField = popup.searchField.get('boundingBox');
+
+					instance._bindSearchHandle = searchField.on('focus', A.bind(instance._initSearch, instance));
 				},
 
 				_vocabulariesIterator: function(item, index, collection) {
@@ -334,7 +336,7 @@ AUI().add(
 								url: themeDisplay.getPathMain() + '/portal/get_categories'
 							},
 							paginator: {
-								limit: 200,
+								limit: 50,
 								offsetParam: 'start'
 							}
 						}
