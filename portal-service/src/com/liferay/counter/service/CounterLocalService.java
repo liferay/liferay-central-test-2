@@ -20,33 +20,106 @@ import com.liferay.portal.kernel.annotation.Transactional;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 
-import java.util.List;
-
-@Transactional(
-	isolation = Isolation.PORTAL,
-	rollbackFor = {PortalException.class, SystemException.class})
 /**
  * <a href="CounterLocalService.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface defines the service. The default implementation is
+ * {@link
+ * com.liferay.counter.service.impl.CounterLocalServiceImpl}}.
+ * Modify methods in that class and rerun ServiceBuilder to populate this class
+ * and all other generated classes.
+ * </p>
+ *
+ * <p>
+ * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
+ * </p>
+ *
+ * @author    Brian Wing Shun Chan
+ * @see       CounterLocalServiceUtil
+ * @generated
  */
+@Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
+	PortalException.class, SystemException.class})
 public interface CounterLocalService {
+	public com.liferay.counter.model.Counter addCounter(
+		com.liferay.counter.model.Counter counter)
+		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public List<String> getNames() throws SystemException;
+	public com.liferay.counter.model.Counter createCounter(
+		java.lang.String name);
 
-	@Transactional(propagation = Propagation.REQUIRES_NEW)
-	public long increment() throws SystemException;
+	public void deleteCounter(java.lang.String name)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
-	@Transactional(propagation = Propagation.REQUIRES_NEW)
-	public long increment(String name) throws SystemException;
+	public void deleteCounter(com.liferay.counter.model.Counter counter)
+		throws com.liferay.portal.kernel.exception.SystemException;
 
-	@Transactional(propagation = Propagation.REQUIRES_NEW)
-	public long increment(String name, int size) throws SystemException;
+	public java.util.List<Object> dynamicQuery(
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
+		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public void rename(String oldName, String newName) throws SystemException;
+	public java.util.List<Object> dynamicQuery(
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
+		int end) throws com.liferay.portal.kernel.exception.SystemException;
 
-	public void reset(String name) throws SystemException;
+	public java.util.List<Object> dynamicQuery(
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
+		int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public void reset(String name, long size) throws SystemException;
+	public int dynamicQueryCount(
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
+		throws com.liferay.portal.kernel.exception.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.counter.model.Counter getCounter(java.lang.String name)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.counter.model.Counter> getCounters(
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCountersCount()
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.counter.model.Counter updateCounter(
+		com.liferay.counter.model.Counter counter)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.counter.model.Counter updateCounter(
+		com.liferay.counter.model.Counter counter, boolean merge)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<String> getNames()
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public long increment()
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public long increment(java.lang.String name)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public long increment(java.lang.String name, int size)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public void rename(java.lang.String oldName, java.lang.String newName)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public void reset(java.lang.String name)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public void reset(java.lang.String name, long size)
+		throws com.liferay.portal.kernel.exception.SystemException;
 }

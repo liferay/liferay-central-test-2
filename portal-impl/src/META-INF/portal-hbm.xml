@@ -134,6 +134,7 @@
 	<import class="com.liferay.portlet.wiki.model.WikiNode" />
 	<import class="com.liferay.portlet.wiki.model.WikiPage" />
 	<import class="com.liferay.portlet.wiki.model.WikiPageResource" />
+	<import class="com.liferay.counter.model.Counter" />
 	<class name="com.liferay.portal.model.impl.AccountImpl" table="Account_">
 		<cache usage="read-write" />
 		<id name="accountId" type="long">
@@ -2088,5 +2089,11 @@
 		</id>
 		<property name="nodeId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="title" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.liferay.counter.model.impl.CounterImpl" table="Counter">
+		<id name="name" type="java.lang.String">
+			<generator class="assigned" />
+		</id>
+		<property name="currentId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 	</class>
 </hibernate-mapping>

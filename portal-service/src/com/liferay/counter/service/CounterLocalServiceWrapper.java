@@ -14,7 +14,6 @@
 
 package com.liferay.counter.service;
 
-import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="CounterLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
@@ -25,143 +24,134 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
  * </p>
  *
  * <p>
- * This class provides static methods for the
- * {@link CounterLocalService} bean. The static methods of
- * this class calls the same methods of the bean instance. It's convenient to be
- * able to just write one line to call a method on a bean instead of writing a
- * lookup call and a method call.
+ * This class is a wrapper for {@link CounterLocalService}.
  * </p>
  *
  * @author    Brian Wing Shun Chan
  * @see       CounterLocalService
  * @generated
  */
-public class CounterLocalServiceUtil {
-	public static com.liferay.counter.model.Counter addCounter(
+public class CounterLocalServiceWrapper implements CounterLocalService {
+	public CounterLocalServiceWrapper(CounterLocalService counterLocalService) {
+		_counterLocalService = counterLocalService;
+	}
+
+	public com.liferay.counter.model.Counter addCounter(
 		com.liferay.counter.model.Counter counter)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().addCounter(counter);
+		return _counterLocalService.addCounter(counter);
 	}
 
-	public static com.liferay.counter.model.Counter createCounter(
+	public com.liferay.counter.model.Counter createCounter(
 		java.lang.String name) {
-		return getService().createCounter(name);
+		return _counterLocalService.createCounter(name);
 	}
 
-	public static void deleteCounter(java.lang.String name)
+	public void deleteCounter(java.lang.String name)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		getService().deleteCounter(name);
+		_counterLocalService.deleteCounter(name);
 	}
 
-	public static void deleteCounter(com.liferay.counter.model.Counter counter)
+	public void deleteCounter(com.liferay.counter.model.Counter counter)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		getService().deleteCounter(counter);
+		_counterLocalService.deleteCounter(counter);
 	}
 
-	public static java.util.List<Object> dynamicQuery(
+	public java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().dynamicQuery(dynamicQuery);
+		return _counterLocalService.dynamicQuery(dynamicQuery);
 	}
 
-	public static java.util.List<Object> dynamicQuery(
+	public java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().dynamicQuery(dynamicQuery, start, end);
+		return _counterLocalService.dynamicQuery(dynamicQuery, start, end);
 	}
 
-	public static java.util.List<Object> dynamicQuery(
+	public java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService()
-				   .dynamicQuery(dynamicQuery, start, end, orderByComparator);
+		return _counterLocalService.dynamicQuery(dynamicQuery, start, end,
+			orderByComparator);
 	}
 
-	public static int dynamicQueryCount(
+	public int dynamicQueryCount(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().dynamicQueryCount(dynamicQuery);
+		return _counterLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
-	public static com.liferay.counter.model.Counter getCounter(
-		java.lang.String name)
+	public com.liferay.counter.model.Counter getCounter(java.lang.String name)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getService().getCounter(name);
+		return _counterLocalService.getCounter(name);
 	}
 
-	public static java.util.List<com.liferay.counter.model.Counter> getCounters(
+	public java.util.List<com.liferay.counter.model.Counter> getCounters(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getCounters(start, end);
+		return _counterLocalService.getCounters(start, end);
 	}
 
-	public static int getCountersCount()
+	public int getCountersCount()
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getCountersCount();
+		return _counterLocalService.getCountersCount();
 	}
 
-	public static com.liferay.counter.model.Counter updateCounter(
+	public com.liferay.counter.model.Counter updateCounter(
 		com.liferay.counter.model.Counter counter)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().updateCounter(counter);
+		return _counterLocalService.updateCounter(counter);
 	}
 
-	public static com.liferay.counter.model.Counter updateCounter(
+	public com.liferay.counter.model.Counter updateCounter(
 		com.liferay.counter.model.Counter counter, boolean merge)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().updateCounter(counter, merge);
+		return _counterLocalService.updateCounter(counter, merge);
 	}
 
-	public static java.util.List<String> getNames()
+	public java.util.List<String> getNames()
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getNames();
+		return _counterLocalService.getNames();
 	}
 
-	public static long increment()
+	public long increment()
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().increment();
+		return _counterLocalService.increment();
 	}
 
-	public static long increment(java.lang.String name)
+	public long increment(java.lang.String name)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().increment(name);
+		return _counterLocalService.increment(name);
 	}
 
-	public static long increment(java.lang.String name, int size)
+	public long increment(java.lang.String name, int size)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().increment(name, size);
+		return _counterLocalService.increment(name, size);
 	}
 
-	public static void rename(java.lang.String oldName, java.lang.String newName)
+	public void rename(java.lang.String oldName, java.lang.String newName)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		getService().rename(oldName, newName);
+		_counterLocalService.rename(oldName, newName);
 	}
 
-	public static void reset(java.lang.String name)
+	public void reset(java.lang.String name)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		getService().reset(name);
+		_counterLocalService.reset(name);
 	}
 
-	public static void reset(java.lang.String name, long size)
+	public void reset(java.lang.String name, long size)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		getService().reset(name, size);
+		_counterLocalService.reset(name, size);
 	}
 
-	public static CounterLocalService getService() {
-		if (_service == null) {
-			_service = (CounterLocalService)PortalBeanLocatorUtil.locate(CounterLocalService.class.getName());
-		}
-
-		return _service;
+	public CounterLocalService getWrappedCounterLocalService() {
+		return _counterLocalService;
 	}
 
-	public void setService(CounterLocalService service) {
-		_service = service;
-	}
-
-	private static CounterLocalService _service;
+	private CounterLocalService _counterLocalService;
 }
