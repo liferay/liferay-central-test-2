@@ -19,7 +19,6 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.workflow.WorkflowThreadLocal;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
@@ -238,8 +237,6 @@ public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 		serviceContext.setModifiedDate(entry.getModifiedDate());
 		serviceContext.setScopeGroupId(context.getGroupId());
 		serviceContext.setStatus(status);
-
-		WorkflowThreadLocal.setEnabled(false);
 
 		BlogsEntry importedEntry = null;
 

@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.workflow.WorkflowThreadLocal;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.DocumentException;
 import com.liferay.portal.kernel.xml.Element;
@@ -463,6 +464,7 @@ public class PortletImporter {
 
 		try {
 			SocialActivityThreadLocal.setEnabled(false);
+			WorkflowThreadLocal.setEnabled(false);
 
 			preferencesImpl =
 				(PortletPreferencesImpl)portletDataHandler.importData(
@@ -475,6 +477,7 @@ public class PortletImporter {
 			context.setGroupId(groupId);
 
 			SocialActivityThreadLocal.setEnabled(true);
+			WorkflowThreadLocal.setEnabled(true);
 		}
 
 		if (preferencesImpl == null) {
