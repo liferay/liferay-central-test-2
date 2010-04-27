@@ -78,11 +78,12 @@ public class EditUserAction
 		String newPassword = ParamUtil.getString(actionRequest, "password1");
 
 		if (Validator.isNotNull(newPassword)) {
-			String userPassword = PortalUtil.getUserPassword(actionRequest);
-			String typedPassword = ParamUtil.getString(
+			String requestPassword = ParamUtil.getString(
 				actionRequest, "password0");
 
-			if (!Validator.equals(userPassword, typedPassword)) {
+			String sessionPassword = PortalUtil.getUserPassword(actionRequest);
+
+			if (!requestPassword.equals(sessionPassword)) {
 				throw new UserPasswordException(
 					UserPasswordException.PASSWORD_INVALID);
 			}

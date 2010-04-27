@@ -71,7 +71,7 @@ boolean passwordReset = BeanParamUtil.getBoolean(selUser, request, "passwordRese
 
 <aui:fieldset>
 	<c:if test="<%= portletName.equals(PortletKeys.MY_ACCOUNT) %>">
-		<aui:input autocomplete="off" label="password" name="password0" size="30" type="password" />
+		<aui:input autocomplete="off" label="current-password" name="password0" size="30" type="password" />
 	</c:if>
 
 	<aui:input autocomplete="off" label="new-password" name="password1" size="30" type="password" />
