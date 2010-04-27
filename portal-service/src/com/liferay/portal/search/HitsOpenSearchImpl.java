@@ -53,6 +53,13 @@ public abstract class HitsOpenSearchImpl extends BaseOpenSearchImpl {
 
 	public abstract String getTitle(String keywords);
 
+	public Summary getSummary(
+		Indexer indexer, Document document, String snippet,
+		PortletURL portletURL) throws SearchException {
+
+		return indexer.getSummary(document, snippet, portletURL);
+	}
+
 	public String search(
 			HttpServletRequest request, long groupId, long userId,
 			String keywords, int startPage, int itemsPerPage, String format)
@@ -107,8 +114,8 @@ public abstract class HitsOpenSearchImpl extends BaseOpenSearchImpl {
 				PortletURL portletURL = getPortletURL(
 					request, portletId, resultGroupId);
 
-				Summary summary = indexer.getSummary(
-					result, snippet, portletURL);
+				Summary summary = getSummary(
+					indexer, result, snippet, portletURL);
 
 				String title = summary.getTitle();
 				String url = getURL(
