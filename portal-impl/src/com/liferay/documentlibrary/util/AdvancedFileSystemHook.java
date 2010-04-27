@@ -133,6 +133,52 @@ public class AdvancedFileSystemHook extends FileSystemHook {
 		return new File(repositoryDir + StringPool.SLASH + dirName);
 	}
 
+	protected Collection<Document> getDocuments(
+			long companyId, String portletId, long groupId, long repositoryId,
+			String fileName)
+		throws SearchException {
+
+		Collection<Document> documents = new ArrayList<Document>();
+
+		String shortFileName = FileUtil.getShortFileName(fileName);
+
+		if (shortFileName.equals("DLFE") ||
+			Validator.isNumber(shortFileName)) {
+
+			String[] curFileNames = FileUtil.listDirs(fileName);
+
+			for (String curFileName : curFileNames) {
+				documents.addAll(
+					getDocuments(
+						companyId, portletId, groupId, repositoryId,
+						fileName + StringPool.SLASH + curFileName));
+			}
+		}
+		else {
+			Indexer indexer = IndexerRegistryUtil.getIndexer(FileModel.class);
+
+			FileModel fileModel = new FileModel();
+
+			if (shortFileName.endsWith(_HOOK_EXTENSION)) {
+				shortFileName = FileUtil.stripExtension(shortFileName);
+			}
+
+			fileModel.setCompanyId(companyId);
+			fileModel.setFileName(shortFileName);
+			fileModel.setGroupId(groupId);
+			fileModel.setPortletId(portletId);
+			fileModel.setRepositoryId(repositoryId);
+
+			Document document = indexer.getDocument(fileModel);
+
+			if (document != null) {
+				documents.add(document);
+			}
+		}
+
+		return documents;
+	}
+
 	protected File getFileNameDir(
 		long companyId, long repositoryId, String fileName) {
 
@@ -239,52 +285,6 @@ public class AdvancedFileSystemHook extends FileSystemHook {
 		}
 
 		return headVersionNumber;
-	}
-
-	protected Collection<Document> getDocuments(
-			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName)
-		throws SearchException {
-
-		Collection<Document> documents = new ArrayList<Document>();
-
-		String shortFileName = FileUtil.getShortFileName(fileName);
-
-		if (shortFileName.equals("DLFE") ||
-			Validator.isNumber(shortFileName)) {
-
-			String[] curFileNames = FileUtil.listDirs(fileName);
-
-			for (String curFileName : curFileNames) {
-				documents.addAll(
-					getDocuments(
-						companyId, portletId, groupId, repositoryId,
-						fileName + StringPool.SLASH + curFileName));
-			}
-		}
-		else {
-			Indexer indexer = IndexerRegistryUtil.getIndexer(FileModel.class);
-
-			FileModel fileModel = new FileModel();
-
-			if (shortFileName.endsWith(_HOOK_EXTENSION)) {
-				shortFileName = FileUtil.stripExtension(shortFileName);
-			}
-
-			fileModel.setCompanyId(companyId);
-			fileModel.setFileName(shortFileName);
-			fileModel.setGroupId(groupId);
-			fileModel.setPortletId(portletId);
-			fileModel.setRepositoryId(repositoryId);
-
-			Document document = indexer.getDocument(fileModel);
-
-			if (document != null) {
-				documents.add(document);
-			}
-		}
-
-		return documents;
 	}
 
 	private static final String _HOOK_EXTENSION = "afsh";
