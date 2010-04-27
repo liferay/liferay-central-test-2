@@ -70,7 +70,11 @@ boolean passwordReset = BeanParamUtil.getBoolean(selUser, request, "passwordRese
 </liferay-ui:error>
 
 <aui:fieldset>
-	<aui:input autocomplete="off" label="password" name="password1" size="30" type="password" />
+	<c:if test="<%= portletName.equals(PortletKeys.MY_ACCOUNT) %>">
+		<aui:input autocomplete="off" label="password" name="password0" size="30" type="password" />
+	</c:if>
+
+	<aui:input autocomplete="off" label="new-password" name="password1" size="30" type="password" />
 
 	<aui:input autocomplete="off" label="enter-again" name="password2" size="30" type="password" />
 

@@ -14,6 +14,9 @@
 
 package com.liferay.portlet.myaccount.action;
 
+import com.liferay.portal.UserPasswordException;
+import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.RenderRequestImpl;
@@ -67,6 +70,25 @@ public class EditUserAction
 
 		return super.render(
 			mapping, form, portletConfig, renderRequest, renderResponse);
+	}
+
+	protected Object[] updateUser(ActionRequest actionRequest)
+		throws Exception {
+
+		String newPassword = ParamUtil.getString(actionRequest, "password1");
+
+		if (Validator.isNotNull(newPassword)) {
+			String userPassword = PortalUtil.getUserPassword(actionRequest);
+			String typedPassword = ParamUtil.getString(
+				actionRequest, "password0");
+
+			if (!Validator.equals(userPassword, typedPassword)) {
+				throw new UserPasswordException(
+					UserPasswordException.PASSWORD_INVALID);
+			}
+		}
+
+		return super.updateUser(actionRequest);
 	}
 
 }
