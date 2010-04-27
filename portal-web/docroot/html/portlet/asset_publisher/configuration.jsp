@@ -70,6 +70,58 @@ AssetRendererFactory rendererFactory = AssetRendererFactoryRegistryUtil.getAsset
 	}
 </style>
 
+<liferay-util:buffer var="assetType">
+	<aui:select label='<%= selectionStyle.equals("manual") ? "asset-type" : StringPool.BLANK %>' name="anyAssetType">
+		<aui:option label="any" selected="<%= anyAssetType %>" value="<%= true %>" />
+		<aui:option label='<%= LanguageUtil.get(pageContext, "filter[action]") + "..." %>' selected="<%= !anyAssetType %>" value="<%= false %>" />
+	</aui:select>
+
+	<aui:input name="classNameIds" type="hidden" />
+
+	<%
+	Set<Long> availableClassNameIdsSet = SetUtil.fromArray(availableClassNameIds);
+
+	// Left list
+
+	List<KeyValuePair> typesLeftList = new ArrayList<KeyValuePair>();
+
+	for (long classNameId : classNameIds) {
+		ClassName className = ClassNameServiceUtil.getClassName(classNameId);
+
+		typesLeftList.add(new KeyValuePair(String.valueOf(classNameId), LanguageUtil.get(pageContext, "model.resource." + className.getValue())));
+	}
+
+	// Right list
+
+	List<KeyValuePair> typesRightList = new ArrayList<KeyValuePair>();
+
+	Arrays.sort(classNameIds);
+
+	for (long classNameId : availableClassNameIdsSet) {
+		if (Arrays.binarySearch(classNameIds, classNameId) < 0) {
+			ClassName className = ClassNameServiceUtil.getClassName(classNameId);
+
+			typesRightList.add(new KeyValuePair(String.valueOf(classNameId), LanguageUtil.get(pageContext, "model.resource." + className.getValue())));
+		}
+	}
+
+	typesRightList = ListUtil.sort(typesRightList, new KeyValuePairComparator(false, true));
+	%>
+
+	<div class="<%= anyAssetType ? "aui-helper-hidden" : "" %>" id="<portlet:namespace />classNamesBoxes">
+		<liferay-ui:input-move-boxes
+			formName="fm"
+			leftTitle="current"
+			rightTitle="available"
+			leftBoxName="currentClassNameIds"
+			rightBoxName="availableClassNameIds"
+			leftReorder="true"
+			leftList="<%= typesLeftList %>"
+			rightList="<%= typesRightList %>"
+		/>
+	</div>
+</liferay-util:buffer>
+
 <liferay-portlet:actionURL portletConfiguration="true" var="configurationActionURL" />
 <liferay-portlet:renderURL portletConfiguration="true" varImpl="configurationRenderURL" />
 
@@ -99,6 +151,8 @@ AssetRendererFactory rendererFactory = AssetRendererFactoryRegistryUtil.getAsset
 								<%
 								String portletId = portletResource;
 								%>
+
+								<%= assetType %>
 
 								<%@ include file="/html/portlet/asset_publisher/add_asset.jspf" %>
 
@@ -308,55 +362,7 @@ AssetRendererFactory rendererFactory = AssetRendererFactoryRegistryUtil.getAsset
 							</aui:fieldset>
 
 							<aui:fieldset label="asset-entry-type">
-								<aui:select label="" name="anyAssetType">
-									<aui:option label="any" selected="<%= anyAssetType %>" value="<%= true %>" />
-									<aui:option label='<%= LanguageUtil.get(pageContext, "filter[action]") + "..." %>' selected="<%= !anyAssetType %>" value="<%= false %>" />
-								</aui:select>
-
-								<aui:input name="classNameIds" type="hidden" />
-
-								<%
-								Set<Long> availableClassNameIdsSet = SetUtil.fromArray(availableClassNameIds);
-
-								// Left list
-
-								List<KeyValuePair> typesLeftList = new ArrayList<KeyValuePair>();
-
-								for (long classNameId : classNameIds) {
-									ClassName className = ClassNameServiceUtil.getClassName(classNameId);
-
-									typesLeftList.add(new KeyValuePair(String.valueOf(classNameId), LanguageUtil.get(pageContext, "model.resource." + className.getValue())));
-								}
-
-								// Right list
-
-								List<KeyValuePair> typesRightList = new ArrayList<KeyValuePair>();
-
-								Arrays.sort(classNameIds);
-
-								for (long classNameId : availableClassNameIdsSet) {
-									if (Arrays.binarySearch(classNameIds, classNameId) < 0) {
-										ClassName className = ClassNameServiceUtil.getClassName(classNameId);
-
-										typesRightList.add(new KeyValuePair(String.valueOf(classNameId), LanguageUtil.get(pageContext, "model.resource." + className.getValue())));
-									}
-								}
-
-								typesRightList = ListUtil.sort(typesRightList, new KeyValuePairComparator(false, true));
-								%>
-
-								<div class="<%= anyAssetType ? "aui-helper-hidden" : "" %>" id="<portlet:namespace />classNamesBoxes">
-									<liferay-ui:input-move-boxes
-										formName="fm"
-										leftTitle="current"
-										rightTitle="available"
-										leftBoxName="currentClassNameIds"
-										rightBoxName="availableClassNameIds"
-										leftReorder="true"
-										leftList="<%= typesLeftList %>"
-										rightList="<%= typesRightList %>"
-									/>
-								</div>
+								<%= assetType %>
 							</aui:fieldset>
 						</liferay-ui:panel>
 
@@ -432,7 +438,6 @@ AssetRendererFactory rendererFactory = AssetRendererFactoryRegistryUtil.getAsset
 								).render();
 
 								Liferay.Util.toggleSelectBox('<portlet:namespace />defaultScope','false','<portlet:namespace />scopesBoxes');
-								Liferay.Util.toggleSelectBox('<portlet:namespace />anyAssetType','false','<portlet:namespace />classNamesBoxes');
 							</aui:script>
 						</liferay-ui:panel>
 						<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="orderingAndGroupingPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "ordering-and-grouping") %>'>
@@ -635,6 +640,7 @@ AssetRendererFactory rendererFactory = AssetRendererFactoryRegistryUtil.getAsset
 		submitForm(document.<portlet:namespace />fm, '<%= configurationRenderURL.toString() %>');
 	}
 
+	Liferay.Util.toggleSelectBox('<portlet:namespace />anyAssetType','false','<portlet:namespace />classNamesBoxes');
 	Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />selectionStyle);
 </aui:script>
 
