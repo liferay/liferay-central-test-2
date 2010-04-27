@@ -46,11 +46,11 @@ public class ConfigurePortletRootLayoutTest extends BaseTestCase {
 		selenium.clickAt("link=Site Map Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Welcome"),
-			selenium.getText("//div[2]/div/div/ul/li[1]/a"));
+			selenium.getText("//section/div/div/div/ul/li[1]/a"));
 		assertEquals(RuntimeVariables.replace("Site Map Test Page"),
-			selenium.getText("//div[2]/div/div/ul/li[2]/a"));
+			selenium.getText("//section/div/div/div/ul/li[2]/a"));
 		assertEquals(RuntimeVariables.replace("Child Test Page"),
-			selenium.getText("//div[2]/div/div/ul/li[2]/ul/li/a"));
+			selenium.getText("//div/ul/li[2]/ul/li/a"));
 		selenium.clickAt("link=Configuration", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.select("_86_rootLayoutId",
@@ -82,6 +82,6 @@ public class ConfigurePortletRootLayoutTest extends BaseTestCase {
 		selenium.clickAt("link=Site Map Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Child Test Page"),
-			selenium.getText("//div[2]/div/div/ul/li[1]/a"));
+			selenium.getText("//section/div/div/div/ul/li[1]/a"));
 	}
 }

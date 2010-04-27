@@ -16,8 +16,8 @@ package com.liferay.portalweb.portlet.sitemap.portlet;
 
 import com.liferay.portalweb.portal.BaseTests;
 import com.liferay.portalweb.portlet.sitemap.portlet.addportlet.AddPortletTests;
+import com.liferay.portalweb.portlet.sitemap.portlet.addportletchildpage.AddPortletChildPageTests;
 import com.liferay.portalweb.portlet.sitemap.portlet.addportletmultiple.AddPortletMultipleTests;
-import com.liferay.portalweb.portlet.sitemap.portlet.addportletpagechild.AddPortletPageChildTests;
 import com.liferay.portalweb.portlet.sitemap.portlet.configureportletrootlayout.ConfigurePortletRootLayoutTests;
 import com.liferay.portalweb.portlet.sitemap.portlet.removeportlet.RemovePortletTests;
 import com.liferay.portalweb.portlet.sitemap.portlet.viewportletsitemap.ViewPortletSiteMapTests;
@@ -36,8 +36,8 @@ public class PortletTests extends BaseTests {
 		TestSuite testSuite = new TestSuite();
 
 		testSuite.addTest(AddPortletTests.suite());
+		testSuite.addTest(AddPortletChildPageTests.suite());
 		testSuite.addTest(AddPortletMultipleTests.suite());
-		testSuite.addTest(AddPortletPageChildTests.suite());
 		testSuite.addTest(ConfigurePortletRootLayoutTests.suite());
 		testSuite.addTest(RemovePortletTests.suite());
 		testSuite.addTest(ViewPortletSiteMapTests.suite());

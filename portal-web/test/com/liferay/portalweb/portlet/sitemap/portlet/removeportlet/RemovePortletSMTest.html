@@ -1,12 +1,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>AssertImportLARTest</title>
+<title>RemovePortletSMTest</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">AssertImportLARTest</td></tr>
+<tr><td rowspan="1" colspan="3">RemovePortletSMTest</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
@@ -14,7 +14,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>waitForVisible</td>
 	<td>link=Site Map Test Page</td>
 	<td></td>
 </tr>
@@ -24,19 +24,24 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>//section/div/div/div/ul/li[1]/a</td>
-	<td>Welcome</td>
+	<td>click</td>
+	<td>//img[@alt='Remove']</td>
+	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>//section/div/div/div/ul/li[2]/a</td>
-	<td>Site Map Test Page</td>
+	<td>assertConfirmation</td>
+	<td>Are you sure you want to remove this component?</td>
+	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>//div/ul/li[2]/ul/li/a</td>
-	<td>Child Test Page</td>
+	<td>waitForElementNotPresent</td>
+	<td>//section</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>//section</td>
+	<td></td>
 </tr>
 
 </tbody></table>

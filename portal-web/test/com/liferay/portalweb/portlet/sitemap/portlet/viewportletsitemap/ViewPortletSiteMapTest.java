@@ -32,7 +32,7 @@ public class ViewPortletSiteMapTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Site Map Test Page")) {
+				if (selenium.isVisible("link=Site Map Test Page")) {
 					break;
 				}
 			}
@@ -45,16 +45,16 @@ public class ViewPortletSiteMapTest extends BaseTestCase {
 		selenium.clickAt("link=Site Map Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Welcome"),
-			selenium.getText("//div[2]/div/div/ul/li[1]/a"));
-		selenium.clickAt("//div[2]/div/div/ul/li[1]/a",
+			selenium.getText("//section/div/div/div/ul/li[1]/a"));
+		selenium.clickAt("//section/div/div/div/ul/li[1]/a",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Sign In"),
-			selenium.getText("//td[1]/div/div/div/div[1]/span"));
+			selenium.getText("//h1/span[2]"));
 		assertEquals(RuntimeVariables.replace("Hello World"),
-			selenium.getText("//td[2]/div/div/div/div[1]/span"));
-		assertTrue(selenium.isElementPresent("//td[1]/div[1]/div"));
-		assertTrue(selenium.isElementPresent("//td[2]/div[1]/div"));
+			selenium.getText("//div[2]/div/div/section/header/h1/span[2]"));
+		assertTrue(selenium.isVisible("//section"));
+		assertTrue(selenium.isVisible("//div[2]/div/div/section"));
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
@@ -63,7 +63,7 @@ public class ViewPortletSiteMapTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Site Map Test Page")) {
+				if (selenium.isVisible("link=Site Map Test Page")) {
 					break;
 				}
 			}
@@ -76,13 +76,13 @@ public class ViewPortletSiteMapTest extends BaseTestCase {
 		selenium.clickAt("link=Site Map Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Site Map Test Page"),
-			selenium.getText("//div[2]/div/div/ul/li[2]/a"));
-		selenium.clickAt("//div[2]/div/div/ul/li[2]/a",
+			selenium.getText("//section/div/div/div/ul/li[2]/a"));
+		selenium.clickAt("//section/div/div/div/ul/li[2]/a",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Site Map"),
-			selenium.getText("//td[1]/div/div/div/div[1]/span"));
-		assertTrue(selenium.isElementPresent("//td[1]/div[1]/div"));
+			selenium.getText("//h1/span[2]"));
+		assertTrue(selenium.isVisible("//section"));
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
@@ -91,7 +91,7 @@ public class ViewPortletSiteMapTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Site Map Test Page")) {
+				if (selenium.isVisible("link=Site Map Test Page")) {
 					break;
 				}
 			}
@@ -104,10 +104,9 @@ public class ViewPortletSiteMapTest extends BaseTestCase {
 		selenium.clickAt("link=Site Map Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Child Test Page"),
-			selenium.getText("//div[2]/div/div/ul/li[2]/ul/li/a"));
-		selenium.clickAt("//div[2]/div/div/ul/li[2]/ul/li/a",
-			RuntimeVariables.replace(""));
+			selenium.getText("//div/ul/li[2]/ul/li/a"));
+		selenium.clickAt("//div/ul/li[2]/ul/li/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertFalse(selenium.isElementPresent("//td[1]/div[1]/div"));
+		assertFalse(selenium.isElementPresent("//section"));
 	}
 }

@@ -29,11 +29,11 @@ public class AddPortletMultipleTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTestSuite(AddPageTest.class);
-		testSuite.addTestSuite(AddPortlet1Test.class);
-		testSuite.addTestSuite(AddPortlet2Test.class);
-		testSuite.addTestSuite(AddPortlet3Test.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(AddPageSMTest.class);
+		testSuite.addTestSuite(AddPortletSM1Test.class);
+		testSuite.addTestSuite(AddPortletSM2Test.class);
+		testSuite.addTestSuite(AddPortletSM3Test.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

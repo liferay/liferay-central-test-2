@@ -29,13 +29,13 @@ public class ImportLARTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTestSuite(AddPageTest.class);
-		testSuite.addTestSuite(AddPortletTest.class);
-		testSuite.addTestSuite(AddPageChildTest.class);
+		testSuite.addTestSuite(AddPageSMTest.class);
+		testSuite.addTestSuite(AddPortletSMTest.class);
+		testSuite.addTestSuite(AddChildPageTest.class);
 		testSuite.addTestSuite(ConfigurePortletRootLayoutTest.class);
 		testSuite.addTestSuite(ImportLARTest.class);
 		testSuite.addTestSuite(AssertImportLARTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

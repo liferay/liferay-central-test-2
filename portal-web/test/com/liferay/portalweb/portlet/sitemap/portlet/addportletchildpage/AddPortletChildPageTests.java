@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portalweb.portlet.sitemap.portlet.viewportletsitemap;
+package com.liferay.portalweb.portlet.sitemap.portlet.addportletchildpage;
 
 import com.liferay.portalweb.portal.BaseTests;
 
@@ -20,19 +20,18 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * <a href="ViewPortletSiteMapTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddPortletChildPageTests.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class ViewPortletSiteMapTests extends BaseTests {
+public class AddPortletChildPageTests extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
 		testSuite.addTestSuite(AddPageSMTest.class);
-		testSuite.addTestSuite(AddPortletSMTest.class);
 		testSuite.addTestSuite(AddChildPageTest.class);
-		testSuite.addTestSuite(ViewPortletSiteMapTest.class);
+		testSuite.addTestSuite(AddPortletChildPageTest.class);
 		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;

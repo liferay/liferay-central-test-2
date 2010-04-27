@@ -12,18 +12,18 @@
  * details.
  */
 
-package com.liferay.portalweb.portlet.sitemap.lar.importlar;
+package com.liferay.portalweb.portlet.sitemap.portlet.removeportlet;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AssertImportLARTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="RemovePortletSMTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class AssertImportLARTest extends BaseTestCase {
-	public void testAssertImportLAR() throws Exception {
+public class RemovePortletSMTest extends BaseTestCase {
+	public void testRemovePortletSM() throws Exception {
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
@@ -32,7 +32,7 @@ public class AssertImportLARTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Site Map Test Page")) {
+				if (selenium.isVisible("link=Site Map Test Page")) {
 					break;
 				}
 			}
@@ -44,11 +44,26 @@ public class AssertImportLARTest extends BaseTestCase {
 
 		selenium.clickAt("link=Site Map Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertEquals(RuntimeVariables.replace("Welcome"),
-			selenium.getText("//section/div/div/div/ul/li[1]/a"));
-		assertEquals(RuntimeVariables.replace("Site Map Test Page"),
-			selenium.getText("//section/div/div/div/ul/li[2]/a"));
-		assertEquals(RuntimeVariables.replace("Child Test Page"),
-			selenium.getText("//div/ul/li[2]/ul/li/a"));
+		selenium.click("//img[@alt='Remove']");
+		assertTrue(selenium.getConfirmation()
+						   .matches("^Are you sure you want to remove this component[\\s\\S]$"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (!selenium.isElementPresent("//section")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		assertFalse(selenium.isElementPresent("//section"));
 	}
 }
