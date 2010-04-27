@@ -38,7 +38,6 @@ import com.liferay.portal.model.Role;
 import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroupRole;
-import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.AdvancedPermissionChecker;
 import com.liferay.portal.security.permission.PermissionChecker;
@@ -176,15 +175,14 @@ public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 			companyId, className, ResourceConstants.SCOPE_INDIVIDUAL,
 			classPK);
 
-		Group group = new GroupImpl();
-
-		group.setCompanyId(companyId);
+		Group group = null;
 
 		if (groupId > 0) {
 			group = GroupLocalServiceUtil.getGroup(groupId);
 		}
 
-		List<Role> roles = ResourceActionsUtil.getRoles(group, className);
+		List<Role> roles = ResourceActionsUtil.getRoles(
+			companyId, group, className);
 
 		List<Long> roleIds = new ArrayList<Long>();
 		List<String> groupRoleIds = new ArrayList<String>();
@@ -216,15 +214,14 @@ public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 			Document doc)
 		throws Exception {
 
-		Group group = new GroupImpl();
-
-		group.setCompanyId(companyId);
+		Group group = null;
 
 		if (groupId > 0) {
 			group = GroupLocalServiceUtil.getGroup(groupId);
 		}
 
-		List<Role> roles = ResourceActionsUtil.getRoles(group, className);
+		List<Role> roles = ResourceActionsUtil.getRoles(
+			companyId, group, className);
 
 		List<Long> roleIds = new ArrayList<Long>();
 		List<String> groupRoleIds = new ArrayList<String>();
