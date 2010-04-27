@@ -537,17 +537,6 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 			}
 		}
 
-		MBCategory toCategory = mbCategoryPersistence.findByPrimaryKey(
-			toCategoryId);
-
-		toCategory.setThreadCount(
-				fromCategory.getThreadCount() + toCategory.getThreadCount());
-
-		toCategory.setMessageCount(
-				fromCategory.getMessageCount() + toCategory.getMessageCount());
-
-		mbCategoryPersistence.update(toCategory, false);
-
 		deleteCategory(fromCategory);
 	}
 
