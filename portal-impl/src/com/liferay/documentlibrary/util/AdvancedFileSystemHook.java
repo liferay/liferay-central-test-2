@@ -56,10 +56,10 @@ public class AdvancedFileSystemHook extends FileSystemHook {
 
 		String[] fileNames = FileUtil.listDirs(repositoryDir);
 
-		for (int i = 0; i < fileNames.length; i++) {
+		for (String fileName : fileNames) {
 			reindex(
 				companyId, portletId, groupId, repositoryId,
-				repositoryDir.getPath() + StringPool.SLASH + fileNames[i]);
+				repositoryDir.getPath() + StringPool.SLASH + fileName);
 		}
 	}
 
@@ -239,20 +239,21 @@ public class AdvancedFileSystemHook extends FileSystemHook {
 	}
 
 	protected void reindex(
-		long companyId, String portletId, long groupId, long repositoryId,
-		String folderName) throws SearchException {
+			long companyId, String portletId, long groupId, long repositoryId,
+			String dirName)
+		throws SearchException {
 
-		String shortFileName = FileUtil.getShortFileName(folderName);
+		String shortFileName = FileUtil.getShortFileName(dirName);
 
 		if (shortFileName.equals("DLFE") ||
 			Validator.isNumber(shortFileName)) {
 
-			String[] fileNames = FileUtil.listDirs(folderName);
+			String[] fileNames = FileUtil.listDirs(dirName);
 
-			for (int i = 0; i < fileNames.length; i++) {
+			for (String fileName : fileNames) {
 				reindex(
 					companyId, portletId, groupId, repositoryId,
-					folderName + StringPool.SLASH + fileNames[i]);
+					dirName + StringPool.SLASH + fileName);
 			}
 		}
 		else {
@@ -274,10 +275,9 @@ public class AdvancedFileSystemHook extends FileSystemHook {
 
 				Document document = indexer.getDocument(fileModel);
 
-				SearchEngineUtil.updateDocument(companyId, document);
-			}
-			catch (SearchException se) {
-				throw se;
+				if (document != null) {
+					SearchEngineUtil.updateDocument(companyId, document);
+				}
 			}
 			catch (Exception e) {
 				_log.error("Reindexing " + shortFileName, e);
