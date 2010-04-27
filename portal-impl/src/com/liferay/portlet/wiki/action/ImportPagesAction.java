@@ -24,7 +24,6 @@ import com.liferay.portal.kernel.util.ProgressTrackerThreadLocal;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portlet.wiki.ImportFilesException;
 import com.liferay.portlet.wiki.NoSuchNodeException;
 import com.liferay.portlet.wiki.service.WikiNodeServiceUtil;
 import com.liferay.portlet.wiki.util.WikiCacheThreadLocal;
@@ -67,10 +66,7 @@ public class ImportPagesAction extends PortletAction {
 
 				setForward(actionRequest, "portlet.wiki.error");
 			}
-			else if (e instanceof ImportFilesException ||
-					 e instanceof PortalException ||
-					 e instanceof NoSuchNodeException) {
-
+			else if (e instanceof PortalException) {
 				SessionErrors.add(actionRequest, e.getClass().getName());
 			}
 			else {
