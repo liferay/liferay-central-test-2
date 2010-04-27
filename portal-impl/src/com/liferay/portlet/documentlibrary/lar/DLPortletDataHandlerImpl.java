@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
+import com.liferay.portal.kernel.workflow.WorkflowThreadLocal;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
@@ -248,7 +249,8 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 		serviceContext.setCreateDate(fileEntry.getCreateDate());
 		serviceContext.setModifiedDate(fileEntry.getModifiedDate());
 		serviceContext.setScopeGroupId(groupId);
-		serviceContext.setStartWorkflow(false);
+
+		WorkflowThreadLocal.setEnabled(false);
 
 		InputStream is = context.getZipEntryAsInputStream(binPath);
 

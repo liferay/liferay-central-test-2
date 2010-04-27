@@ -338,16 +338,14 @@ public class JournalArticleLocalServiceImpl
 
 		// Workflow
 
-		if (serviceContext.isStartWorkflow()) {
-			try {
-				WorkflowHandlerRegistryUtil.startWorkflowInstance(
-					user.getCompanyId(), groupId, userId,
-					JournalArticle.class.getName(), article.getId(), article,
-					null);
-			}
-			catch (Exception e) {
-				throw new SystemException(e);
-			}
+		try {
+			WorkflowHandlerRegistryUtil.startWorkflowInstance(
+				user.getCompanyId(), groupId, userId,
+				JournalArticle.class.getName(), article.getId(), article,
+				null);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
 		}
 
 		return article;
@@ -1775,7 +1773,7 @@ public class JournalArticleLocalServiceImpl
 
 		// Workflow
 
-		if (incrementVersion && serviceContext.isStartWorkflow()) {
+		if (incrementVersion) {
 			try {
 				WorkflowHandlerRegistryUtil.startWorkflowInstance(
 					user.getCompanyId(), groupId, userId,

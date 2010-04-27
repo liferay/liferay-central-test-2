@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.workflow.WorkflowThreadLocal;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
@@ -650,8 +651,9 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 		serviceContext.setAddGuestPermissions(true);
 		serviceContext.setAssetTagNames(assetTagNames);
 		serviceContext.setScopeGroupId(context.getGroupId());
-		serviceContext.setStartWorkflow(false);
 		serviceContext.setStatus(message.getStatus());
+
+		WorkflowThreadLocal.setEnabled(false);
 
 		if ((categoryId != MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) &&
 			(categoryId == message.getCategoryId())) {

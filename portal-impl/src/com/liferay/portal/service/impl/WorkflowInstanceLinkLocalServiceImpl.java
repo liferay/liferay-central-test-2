@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.workflow.WorkflowHandler;
 import com.liferay.portal.kernel.workflow.WorkflowHandlerRegistryUtil;
 import com.liferay.portal.kernel.workflow.WorkflowInstance;
 import com.liferay.portal.kernel.workflow.WorkflowInstanceManagerUtil;
+import com.liferay.portal.kernel.workflow.WorkflowThreadLocal;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.WorkflowDefinitionLink;
 import com.liferay.portal.model.WorkflowInstanceLink;
@@ -190,6 +191,10 @@ public class WorkflowInstanceLinkLocalServiceImpl
 			long classPK, Map<String, Serializable> workflowContext)
 		throws PortalException, SystemException {
 
+		if (!WorkflowThreadLocal.isEnabled()) {
+			return;
+		}
+
 		try {
 			WorkflowDefinitionLink workflowDefinitionLink =
 				workflowDefinitionLinkLocalService.getWorkflowDefinitionLink(
@@ -237,6 +242,10 @@ public class WorkflowInstanceLinkLocalServiceImpl
 			long companyId, long groupId, String className, long oldClassPK,
 			long newClassPK)
 		throws PortalException, SystemException {
+
+		if (!WorkflowThreadLocal.isEnabled()) {
+			return;
+		}
 
 		List<WorkflowInstanceLink> workflowInstanceLinks =
 			getWorkflowInstanceLinks(companyId, groupId, className, oldClassPK);
