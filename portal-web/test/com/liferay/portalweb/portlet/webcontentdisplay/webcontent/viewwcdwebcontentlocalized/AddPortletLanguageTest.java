@@ -32,7 +32,7 @@ public class AddPortletLanguageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Language Test Page")) {
+				if (selenium.isVisible("link=Language Test Page")) {
 					break;
 				}
 			}
@@ -103,6 +103,6 @@ public class AddPortletLanguageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertTrue(selenium.isElementPresent("//td[1]/div[1]/div"));
+		assertTrue(selenium.isVisible("//td[1]/div[1]/div"));
 	}
 }

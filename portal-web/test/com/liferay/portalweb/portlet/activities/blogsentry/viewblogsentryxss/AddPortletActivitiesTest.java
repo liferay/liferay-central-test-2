@@ -32,7 +32,7 @@ public class AddPortletActivitiesTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Activities Test Page")) {
+				if (selenium.isVisible("link=Activities Test Page")) {
 					break;
 				}
 			}
@@ -92,7 +92,7 @@ public class AddPortletActivitiesTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//td[1]/div/div[1]")) {
+				if (selenium.isVisible("//section")) {
 					break;
 				}
 			}
@@ -102,6 +102,6 @@ public class AddPortletActivitiesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertTrue(selenium.isElementPresent("//td[1]/div/div[1]"));
+		assertTrue(selenium.isVisible("//section"));
 	}
 }

@@ -32,7 +32,7 @@ public class AddPortletRSSTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=RSS Test Page")) {
+				if (selenium.isVisible("link=RSS Test Page")) {
 					break;
 				}
 			}
@@ -100,6 +100,6 @@ public class AddPortletRSSTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertTrue(selenium.isElementPresent("//section"));
+		assertTrue(selenium.isVisible("//section"));
 	}
 }

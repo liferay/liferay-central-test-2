@@ -32,7 +32,7 @@ public class RemovePortletMBTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent(
+				if (selenium.isVisible(
 							"link=M\u00e9ssag\u00e9 Boards T\u00e9st Pag\u00e9")) {
 					break;
 				}
@@ -56,7 +56,7 @@ public class RemovePortletMBTest extends BaseTestCase {
 			}
 
 			try {
-				if (!selenium.isElementPresent("//td[1]/div[1]/div")) {
+				if (!selenium.isElementPresent("//section")) {
 					break;
 				}
 			}
@@ -66,6 +66,6 @@ public class RemovePortletMBTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertFalse(selenium.isElementPresent("//td[1]/div[1]/div"));
+		assertFalse(selenium.isElementPresent("//section"));
 	}
 }

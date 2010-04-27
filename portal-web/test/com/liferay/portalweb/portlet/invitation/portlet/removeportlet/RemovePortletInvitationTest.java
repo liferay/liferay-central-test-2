@@ -32,7 +32,7 @@ public class RemovePortletInvitationTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Invitation Test Page")) {
+				if (selenium.isVisible("link=Invitation Test Page")) {
 					break;
 				}
 			}
@@ -55,7 +55,7 @@ public class RemovePortletInvitationTest extends BaseTestCase {
 			}
 
 			try {
-				if (!selenium.isElementPresent("//td[1]/div/div[1]")) {
+				if (!selenium.isElementPresent("//section")) {
 					break;
 				}
 			}
@@ -65,6 +65,6 @@ public class RemovePortletInvitationTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertFalse(selenium.isElementPresent("//td[1]/div/div[1]"));
+		assertFalse(selenium.isElementPresent("//section"));
 	}
 }

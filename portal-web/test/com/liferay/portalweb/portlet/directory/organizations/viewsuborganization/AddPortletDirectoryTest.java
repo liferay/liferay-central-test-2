@@ -92,7 +92,7 @@ public class AddPortletDirectoryTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("//td[1]/div[1]/div")) {
+				if (selenium.isVisible("//section")) {
 					break;
 				}
 			}
@@ -102,6 +102,6 @@ public class AddPortletDirectoryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertTrue(selenium.isVisible("//td[1]/div[1]/div"));
+		assertTrue(selenium.isVisible("//section"));
 	}
 }

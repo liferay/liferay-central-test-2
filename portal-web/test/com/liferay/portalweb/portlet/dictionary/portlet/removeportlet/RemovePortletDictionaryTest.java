@@ -55,7 +55,7 @@ public class RemovePortletDictionaryTest extends BaseTestCase {
 			}
 
 			try {
-				if (!selenium.isElementPresent("//td[1]/div/div[1]")) {
+				if (!selenium.isElementPresent("//section")) {
 					break;
 				}
 			}
@@ -65,6 +65,6 @@ public class RemovePortletDictionaryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertFalse(selenium.isElementPresent("//td[1]/div/div[1]"));
+		assertFalse(selenium.isElementPresent("//section"));
 	}
 }

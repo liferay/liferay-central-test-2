@@ -33,7 +33,7 @@ public class AddPortletBreadcrumbChildPageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Breadcrumb Test Page")) {
+				if (selenium.isVisible("link=Breadcrumb Test Page")) {
 					break;
 				}
 			}
@@ -95,7 +95,7 @@ public class AddPortletBreadcrumbChildPageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("//td[1]/div/div[1]")) {
+				if (selenium.isVisible("//section")) {
 					break;
 				}
 			}
@@ -105,6 +105,6 @@ public class AddPortletBreadcrumbChildPageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertTrue(selenium.isElementPresent("//td[1]/div/div[1]"));
+		assertTrue(selenium.isVisible("//section"));
 	}
 }

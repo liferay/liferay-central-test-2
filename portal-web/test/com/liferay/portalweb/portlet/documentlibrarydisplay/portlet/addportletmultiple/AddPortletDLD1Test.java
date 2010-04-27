@@ -94,7 +94,7 @@ public class AddPortletDLD1Test extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("//td[1]/div/div[1]")) {
+				if (selenium.isVisible("//section")) {
 					break;
 				}
 			}
@@ -104,6 +104,6 @@ public class AddPortletDLD1Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertTrue(selenium.isVisible("//td[1]/div/div[1]"));
+		assertTrue(selenium.isVisible("//section"));
 	}
 }

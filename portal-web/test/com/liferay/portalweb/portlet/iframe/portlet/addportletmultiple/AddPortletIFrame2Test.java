@@ -91,7 +91,7 @@ public class AddPortletIFrame2Test extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("//td[1]/div/div[1]")) {
+				if (selenium.isVisible("//section")) {
 					break;
 				}
 			}
@@ -101,7 +101,7 @@ public class AddPortletIFrame2Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertTrue(selenium.isVisible("//td[1]/div/div[1]"));
+		assertTrue(selenium.isVisible("//section"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -109,7 +109,7 @@ public class AddPortletIFrame2Test extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("//td[1]/div/div[2]")) {
+				if (selenium.isVisible("//div[2]/section")) {
 					break;
 				}
 			}
@@ -119,6 +119,6 @@ public class AddPortletIFrame2Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertTrue(selenium.isVisible("//td[1]/div/div[2]"));
+		assertTrue(selenium.isVisible("//div[2]/section"));
 	}
 }

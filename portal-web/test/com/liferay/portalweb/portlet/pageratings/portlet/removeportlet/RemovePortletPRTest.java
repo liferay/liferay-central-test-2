@@ -32,7 +32,7 @@ public class RemovePortletPRTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Page Ratings Test Page")) {
+				if (selenium.isVisible("link=Page Ratings Test Page")) {
 					break;
 				}
 			}

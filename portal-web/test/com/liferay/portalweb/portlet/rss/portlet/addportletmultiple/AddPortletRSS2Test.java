@@ -32,7 +32,7 @@ public class AddPortletRSS2Test extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=RSS Test Page")) {
+				if (selenium.isVisible("link=RSS Test Page")) {
 					break;
 				}
 			}

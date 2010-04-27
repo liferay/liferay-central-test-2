@@ -32,7 +32,7 @@ public class RemovePortletDLTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Document Library Test Page")) {
+				if (selenium.isVisible("link=Document Library Test Page")) {
 					break;
 				}
 			}
@@ -55,7 +55,7 @@ public class RemovePortletDLTest extends BaseTestCase {
 			}
 
 			try {
-				if (!selenium.isElementPresent("//td[1]/div[1]/div")) {
+				if (!selenium.isElementPresent("//section")) {
 					break;
 				}
 			}
@@ -65,6 +65,6 @@ public class RemovePortletDLTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertFalse(selenium.isElementPresent("//td[1]/div[1]/div"));
+		assertFalse(selenium.isElementPresent("//section"));
 	}
 }

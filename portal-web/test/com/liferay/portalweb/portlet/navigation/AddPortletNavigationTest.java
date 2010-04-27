@@ -32,7 +32,7 @@ public class AddPortletNavigationTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Navigation Test Page")) {
+				if (selenium.isVisible("link=Navigation Test Page")) {
 					break;
 				}
 			}

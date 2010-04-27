@@ -102,6 +102,6 @@ public class AddPortletRBTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertTrue(selenium.isElementPresent("//section"));
+		assertTrue(selenium.isVisible("//section"));
 	}
 }

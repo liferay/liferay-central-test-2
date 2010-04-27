@@ -32,7 +32,7 @@ public class RemovePortletBreadcrumbTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Breadcrumb Test Page")) {
+				if (selenium.isVisible("link=Breadcrumb Test Page")) {
 					break;
 				}
 			}
@@ -55,7 +55,7 @@ public class RemovePortletBreadcrumbTest extends BaseTestCase {
 			}
 
 			try {
-				if (!selenium.isElementPresent("//td[1]/div/div[1]")) {
+				if (!selenium.isElementPresent("//section")) {
 					break;
 				}
 			}
@@ -65,6 +65,6 @@ public class RemovePortletBreadcrumbTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertFalse(selenium.isElementPresent("//td[1]/div/div[1]"));
+		assertFalse(selenium.isElementPresent("//section"));
 	}
 }

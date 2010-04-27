@@ -32,7 +32,7 @@ public class RemovePortletRFTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Reverend Fun Test Page")) {
+				if (selenium.isVisible("link=Reverend Fun Test Page")) {
 					break;
 				}
 			}

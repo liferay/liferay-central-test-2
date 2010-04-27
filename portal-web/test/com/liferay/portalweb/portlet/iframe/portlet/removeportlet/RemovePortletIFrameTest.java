@@ -32,7 +32,7 @@ public class RemovePortletIFrameTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=IFrame Test Page")) {
+				if (selenium.isVisible("link=IFrame Test Page")) {
 					break;
 				}
 			}
@@ -54,7 +54,7 @@ public class RemovePortletIFrameTest extends BaseTestCase {
 			}
 
 			try {
-				if (!selenium.isElementPresent("//td[1]/div/div[1]")) {
+				if (!selenium.isElementPresent("//section")) {
 					break;
 				}
 			}
@@ -64,6 +64,6 @@ public class RemovePortletIFrameTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertFalse(selenium.isElementPresent("//td[1]/div/div[1]"));
+		assertFalse(selenium.isElementPresent("//section"));
 	}
 }

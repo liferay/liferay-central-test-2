@@ -91,7 +91,7 @@ public class AddPortletARDuplicateTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("//td[1]/div/div[1]")) {
+				if (selenium.isVisible("//section")) {
 					break;
 				}
 			}
@@ -101,8 +101,8 @@ public class AddPortletARDuplicateTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertTrue(selenium.isVisible("//td[1]/div/div[1]"));
+		assertTrue(selenium.isVisible("//section"));
 		Thread.sleep(5000);
-		assertFalse(selenium.isElementPresent("//td[1]/div/div[2]"));
+		assertFalse(selenium.isElementPresent("//div[2]/section"));
 	}
 }

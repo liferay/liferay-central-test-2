@@ -92,7 +92,7 @@ public class AddPortletBreadcrumb3Test extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("//td[1]/div/div[1]")) {
+				if (selenium.isVisible("//section")) {
 					break;
 				}
 			}
@@ -102,7 +102,7 @@ public class AddPortletBreadcrumb3Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertTrue(selenium.isVisible("//td[1]/div/div[1]"));
+		assertTrue(selenium.isVisible("//section"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -110,7 +110,7 @@ public class AddPortletBreadcrumb3Test extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("//td[1]/div/div[2]")) {
+				if (selenium.isVisible("//div[2]/section")) {
 					break;
 				}
 			}
@@ -120,7 +120,7 @@ public class AddPortletBreadcrumb3Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertTrue(selenium.isVisible("//td[1]/div/div[2]"));
+		assertTrue(selenium.isVisible("//div[2]/section"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -128,7 +128,7 @@ public class AddPortletBreadcrumb3Test extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("//td[1]/div/div[3]")) {
+				if (selenium.isVisible("//div[3]/section")) {
 					break;
 				}
 			}
@@ -138,6 +138,6 @@ public class AddPortletBreadcrumb3Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertTrue(selenium.isVisible("//td[1]/div/div[3]"));
+		assertTrue(selenium.isVisible("//div[3]/section"));
 	}
 }
