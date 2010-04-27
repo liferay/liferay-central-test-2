@@ -170,9 +170,11 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 			<%= dateFormatDateTime.format(fileEntry.getModifiedDate()) %>
 		</div>
 
-		<div class="file-entry-downloads">
-			<%= fileEntry.getReadCount() %> <liferay-ui:message key="downloads" />
-		</div>
+		<c:if test="<%= PropsValues.DL_FILE_ENTRY_READCOUNT_ENABLED %>">
+			<div class="file-entry-downloads">
+				<%= fileEntry.getReadCount() %> <liferay-ui:message key="downloads" />
+			</div>
+		</c:if>
 
 		<div class="file-entry-ratings">
 			<liferay-ui:ratings

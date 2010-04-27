@@ -499,20 +499,23 @@ public class DLFileEntryLocalServiceImpl
 				new ServiceContext());
 		}
 
-		fileEntry.setReadCount(fileEntry.getReadCount() + 1);
+		if (PropsValues.DL_FILE_ENTRY_READCOUNT_ENABLED) {
+			fileEntry.setReadCount(fileEntry.getReadCount() + 1);
 
-		dlFileEntryPersistence.update(fileEntry, false);
+			dlFileEntryPersistence.update(fileEntry, false);
 
-		assetEntryLocalService.incrementViewCounter(
-			DLFileEntry.class.getName(), fileEntry.getFileEntryId());
-
-		List<DLFileShortcut> fileShortcuts =
-			dlFileShortcutPersistence.findByG_TF_TN(groupId, folderId, name);
-
-		for (DLFileShortcut fileShortcut : fileShortcuts) {
 			assetEntryLocalService.incrementViewCounter(
-				DLFileShortcut.class.getName(),
-				fileShortcut.getFileShortcutId());
+				DLFileEntry.class.getName(), fileEntry.getFileEntryId());
+
+			List<DLFileShortcut> fileShortcuts =
+				dlFileShortcutPersistence.findByG_TF_TN(
+					groupId, folderId, name);
+
+			for (DLFileShortcut fileShortcut : fileShortcuts) {
+				assetEntryLocalService.incrementViewCounter(
+					DLFileShortcut.class.getName(),
+					fileShortcut.getFileShortcutId());
+			}
 		}
 
 		if (Validator.isNotNull(version)) {

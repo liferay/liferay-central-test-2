@@ -115,7 +115,11 @@ if (folder != null) {
 
 	headerNames.add("document");
 	headerNames.add("size");
-	headerNames.add("downloads");
+
+	if (PropsValues.DL_FILE_ENTRY_READCOUNT_ENABLED) {
+		headerNames.add("downloads");
+	}
+
 	headerNames.add("locked");
 
 	searchContainer = new SearchContainer(renderRequest, null, null, "cur2", SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
@@ -168,7 +172,10 @@ if (folder != null) {
 		// Statistics
 
 		row.addText(TextFormatter.formatKB(fileEntry.getSize(), locale) + "k", rowHREF);
-		row.addText(String.valueOf(fileEntry.getReadCount()), rowHREF);
+
+		if (PropsValues.DL_FILE_ENTRY_READCOUNT_ENABLED) {
+			row.addText(String.valueOf(fileEntry.getReadCount()), rowHREF);
+		}
 
 		// Locked
 

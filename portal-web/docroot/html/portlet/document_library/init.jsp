@@ -121,7 +121,11 @@ if (!portletId.equals(PortletKeys.DOCUMENT_LIBRARY)) {
 
 int fileEntriesPerPage = PrefsParamUtil.getInteger(preferences, request, "fileEntriesPerPage", SearchContainer.DEFAULT_DELTA);
 
-String defaultFileEntryColumns = "name,size,downloads,locked";
+String defaultFileEntryColumns = "name,size";
+
+if (PropsValues.DL_FILE_ENTRY_READCOUNT_ENABLED) {
+	defaultFileEntryColumns += ",downloads";
+}
 
 if (portletId.equals(PortletKeys.DOCUMENT_LIBRARY)) {
 	defaultFileEntryColumns += ",action";
