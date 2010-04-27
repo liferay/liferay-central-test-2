@@ -51,14 +51,15 @@ public abstract class HitsOpenSearchImpl extends BaseOpenSearchImpl {
 
 	public abstract String getSearchPath();
 
-	public abstract String getTitle(String keywords);
-
 	public Summary getSummary(
-		Indexer indexer, Document document, String snippet,
-		PortletURL portletURL) throws SearchException {
+			Indexer indexer, Document document, String snippet,
+			PortletURL portletURL)
+		throws SearchException {
 
 		return indexer.getSummary(document, snippet, portletURL);
 	}
+
+	public abstract String getTitle(String keywords);
 
 	public String search(
 			HttpServletRequest request, long groupId, long userId,
