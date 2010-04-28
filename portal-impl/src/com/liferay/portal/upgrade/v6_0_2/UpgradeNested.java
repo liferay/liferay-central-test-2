@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.upgrade.v6_0_0;
+package com.liferay.portal.upgrade.v6_0_2;
 
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
@@ -33,10 +33,6 @@ import java.sql.ResultSet;
 public class UpgradeNested extends UpgradeProcess {
 
 	protected void doUpgrade() throws Exception {
-		updateNestedPortletColumnId();
-	}
-
-	protected void updateNestedPortletColumnId() throws Exception {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -44,21 +40,19 @@ public class UpgradeNested extends UpgradeProcess {
 		try {
 			con = DataAccess.getConnection();
 
-			ps = con.prepareStatement(UpgradeNested._GET_LAYOUT);
+			ps = con.prepareStatement(_GET_LAYOUT);
 
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
-				String typeSettings = rs.getString("typeSettings");
 				long plid = rs.getLong("plid");
+				String typeSettings = rs.getString("typeSettings");
 
 				String newTypeSettings = typeSettings.replaceAll(
 					_REPLACE_PATTERN, "_$1_$2");
 
 				if (!newTypeSettings.equals(typeSettings)) {
-					runSQL(
-						"update Layout set typeSettings = '" + newTypeSettings +
-							"' where plid = " + plid);
+					updateTypeSettings(plid, newTypeSettings);
 				}
 			}
 		}
@@ -67,13 +61,34 @@ public class UpgradeNested extends UpgradeProcess {
 		}
 	}
 
+	protected void updateTypeSettings(long plid, String typeSettings)
+		throws Exception {
+
+		Connection con = null;
+		PreparedStatement ps = null;
+
+		try {
+			con = DataAccess.getConnection();
+
+			ps = con.prepareStatement(
+				"update Layout set typeSettings = ? where plid = " + plid);
+
+			ps.setString(1, typeSettings);
+
+			ps.executeUpdate();
+		}
+		finally {
+			DataAccess.cleanUp(con, ps);
+		}
+	}
+
 	private static final String _GET_LAYOUT =
 		"select plid, typeSettings from Layout where typeSettings like " +
-			"'%nested-column-ids="+ PortletKeys.NESTED_PORTLETS +
+			"'%nested-column-ids=" + PortletKeys.NESTED_PORTLETS +
 				PortletConstants.INSTANCE_SEPARATOR + "%'";
 
-	private static final String _REPLACE_PATTERN = "(" +
-		PortletKeys.NESTED_PORTLETS + PortletConstants.INSTANCE_SEPARATOR +
-			".+?_)([^,]*)";
+	private static final String _REPLACE_PATTERN =
+		"(" + PortletKeys.NESTED_PORTLETS +
+			PortletConstants.INSTANCE_SEPARATOR + ".+?_)([^,]*)";
 
 }
