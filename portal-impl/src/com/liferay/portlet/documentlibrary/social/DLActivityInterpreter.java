@@ -70,8 +70,9 @@ public class DLActivityInterpreter extends BaseSocialActivityInterpreter {
 
 		String link =
 			themeDisplay.getPortalURL() + themeDisplay.getPathMain() +
-				"/document_library/get_file?folderId=" +
-					fileEntry.getFolderId() + "&name=" + fileEntry.getName();
+				"/document_library/get_file?groupId=" + fileEntry.getGroupId() +
+					"&folderId=" + fileEntry.getFolderId() + "&name=" +
+						fileEntry.getName();
 
 		// Title
 
