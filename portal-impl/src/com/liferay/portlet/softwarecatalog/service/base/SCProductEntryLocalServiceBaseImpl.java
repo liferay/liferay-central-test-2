@@ -91,24 +91,25 @@ public abstract class SCProductEntryLocalServiceBaseImpl
 		scProductEntryPersistence.remove(scProductEntry);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
+	public List<SCProductEntry> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return scProductEntryPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end) throws SystemException {
+	public List<SCProductEntry> dynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end) throws SystemException {
 		return scProductEntryPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end, OrderByComparator orderByComparator) throws SystemException {
+	public List<SCProductEntry> dynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
 		return scProductEntryPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end, orderByComparator);
 	}
 
-	public int dynamicQueryCount(DynamicQuery dynamicQuery)
+	public long dynamicQueryCount(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return scProductEntryPersistence.countWithDynamicQuery(dynamicQuery);
 	}

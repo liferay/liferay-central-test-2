@@ -78,19 +78,16 @@ public class MBStatsUserLocalServiceImpl
 		mbStatsUserPersistence.removeByUserId(userId);
 	}
 
-	public int getMessageCountByUserId(long userId) throws SystemException {
-		DynamicQuery query = DynamicQueryFactoryUtil.forClass(
+	public long getMessageCountByUserId(long userId) throws SystemException {
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
 			MBStatsUser.class, MBStatsUserImpl.TABLE_NAME,
 			PortalClassLoaderUtil.getClassLoader());
 
-		query = query.setProjection(
-			ProjectionFactoryUtil.sum("messageCount"));
+		dynamicQuery.setProjection(ProjectionFactoryUtil.sum("messageCount"));
 
-		query = query.add(PropertyFactoryUtil.forName("userId").eq(userId));
+		dynamicQuery.add(PropertyFactoryUtil.forName("userId").eq(userId));
 
-		List<Object> results = dynamicQuery(query);
-
-		return (Integer)results.get(0);
+		return dynamicQueryCount(dynamicQuery);
 	}
 
 	public MBStatsUser getStatsUser(long groupId, long userId)

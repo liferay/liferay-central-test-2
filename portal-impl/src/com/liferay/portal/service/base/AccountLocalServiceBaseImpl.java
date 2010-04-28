@@ -205,23 +205,23 @@ public abstract class AccountLocalServiceBaseImpl implements AccountLocalService
 		accountPersistence.remove(account);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
+	public List<Account> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return accountPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
+	public List<Account> dynamicQuery(DynamicQuery dynamicQuery, int start,
 		int end) throws SystemException {
 		return accountPersistence.findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
+	public List<Account> dynamicQuery(DynamicQuery dynamicQuery, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		return accountPersistence.findWithDynamicQuery(dynamicQuery, start,
 			end, orderByComparator);
 	}
 
-	public int dynamicQueryCount(DynamicQuery dynamicQuery)
+	public long dynamicQueryCount(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return accountPersistence.countWithDynamicQuery(dynamicQuery);
 	}

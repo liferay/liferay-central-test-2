@@ -136,11 +136,11 @@ public class AnnouncementsFlagPersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("flagId",
 				newAnnouncementsFlag.getFlagId()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<AnnouncementsFlag> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(1, result.size());
 
-		AnnouncementsFlag existingAnnouncementsFlag = (AnnouncementsFlag)result.get(0);
+		AnnouncementsFlag existingAnnouncementsFlag = result.get(0);
 
 		assertEquals(existingAnnouncementsFlag, newAnnouncementsFlag);
 	}
@@ -151,7 +151,7 @@ public class AnnouncementsFlagPersistenceTest extends BasePersistenceTestCase {
 
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("flagId", nextLong()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<AnnouncementsFlag> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

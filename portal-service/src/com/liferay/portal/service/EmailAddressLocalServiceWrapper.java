@@ -60,19 +60,19 @@ public class EmailAddressLocalServiceWrapper implements EmailAddressLocalService
 		_emailAddressLocalService.deleteEmailAddress(emailAddress);
 	}
 
-	public java.util.List<Object> dynamicQuery(
+	public java.util.List<com.liferay.portal.model.EmailAddress> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _emailAddressLocalService.dynamicQuery(dynamicQuery);
 	}
 
-	public java.util.List<Object> dynamicQuery(
+	public java.util.List<com.liferay.portal.model.EmailAddress> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.kernel.exception.SystemException {
 		return _emailAddressLocalService.dynamicQuery(dynamicQuery, start, end);
 	}
 
-	public java.util.List<Object> dynamicQuery(
+	public java.util.List<com.liferay.portal.model.EmailAddress> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -81,7 +81,7 @@ public class EmailAddressLocalServiceWrapper implements EmailAddressLocalService
 			orderByComparator);
 	}
 
-	public int dynamicQueryCount(
+	public long dynamicQueryCount(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _emailAddressLocalService.dynamicQueryCount(dynamicQuery);

@@ -210,24 +210,25 @@ public abstract class ResourcePermissionLocalServiceBaseImpl
 		resourcePermissionPersistence.remove(resourcePermission);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
+	public List<ResourcePermission> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return resourcePermissionPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end) throws SystemException {
+	public List<ResourcePermission> dynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end) throws SystemException {
 		return resourcePermissionPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end, OrderByComparator orderByComparator) throws SystemException {
+	public List<ResourcePermission> dynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
 		return resourcePermissionPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end, orderByComparator);
 	}
 
-	public int dynamicQueryCount(DynamicQuery dynamicQuery)
+	public long dynamicQueryCount(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return resourcePermissionPersistence.countWithDynamicQuery(dynamicQuery);
 	}

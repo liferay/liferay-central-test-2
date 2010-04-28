@@ -142,11 +142,11 @@ public class UserTrackerPersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("userTrackerId",
 				newUserTracker.getUserTrackerId()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<UserTracker> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(1, result.size());
 
-		UserTracker existingUserTracker = (UserTracker)result.get(0);
+		UserTracker existingUserTracker = result.get(0);
 
 		assertEquals(existingUserTracker, newUserTracker);
 	}
@@ -157,7 +157,7 @@ public class UserTrackerPersistenceTest extends BasePersistenceTestCase {
 
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("userTrackerId", nextLong()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<UserTracker> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

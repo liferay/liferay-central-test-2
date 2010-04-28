@@ -161,11 +161,11 @@ public class TasksProposalPersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("proposalId",
 				newTasksProposal.getProposalId()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<TasksProposal> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(1, result.size());
 
-		TasksProposal existingTasksProposal = (TasksProposal)result.get(0);
+		TasksProposal existingTasksProposal = result.get(0);
 
 		assertEquals(existingTasksProposal, newTasksProposal);
 	}
@@ -176,7 +176,7 @@ public class TasksProposalPersistenceTest extends BasePersistenceTestCase {
 
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("proposalId", nextLong()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<TasksProposal> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

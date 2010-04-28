@@ -144,11 +144,11 @@ public class PhonePersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("phoneId",
 				newPhone.getPhoneId()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<Phone> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(1, result.size());
 
-		Phone existingPhone = (Phone)result.get(0);
+		Phone existingPhone = result.get(0);
 
 		assertEquals(existingPhone, newPhone);
 	}
@@ -159,7 +159,7 @@ public class PhonePersistenceTest extends BasePersistenceTestCase {
 
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("phoneId", nextLong()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<Phone> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

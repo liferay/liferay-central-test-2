@@ -205,23 +205,23 @@ public abstract class WebsiteLocalServiceBaseImpl implements WebsiteLocalService
 		websitePersistence.remove(website);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
+	public List<Website> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return websitePersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
+	public List<Website> dynamicQuery(DynamicQuery dynamicQuery, int start,
 		int end) throws SystemException {
 		return websitePersistence.findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
+	public List<Website> dynamicQuery(DynamicQuery dynamicQuery, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		return websitePersistence.findWithDynamicQuery(dynamicQuery, start,
 			end, orderByComparator);
 	}
 
-	public int dynamicQueryCount(DynamicQuery dynamicQuery)
+	public long dynamicQueryCount(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return websitePersistence.countWithDynamicQuery(dynamicQuery);
 	}

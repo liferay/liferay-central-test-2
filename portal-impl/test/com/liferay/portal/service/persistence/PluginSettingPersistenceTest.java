@@ -136,11 +136,11 @@ public class PluginSettingPersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("pluginSettingId",
 				newPluginSetting.getPluginSettingId()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<PluginSetting> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(1, result.size());
 
-		PluginSetting existingPluginSetting = (PluginSetting)result.get(0);
+		PluginSetting existingPluginSetting = result.get(0);
 
 		assertEquals(existingPluginSetting, newPluginSetting);
 	}
@@ -152,7 +152,7 @@ public class PluginSettingPersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("pluginSettingId",
 				nextLong()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<PluginSetting> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

@@ -209,24 +209,24 @@ public abstract class WebDAVPropsLocalServiceBaseImpl
 		webDAVPropsPersistence.remove(webDAVProps);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
+	public List<WebDAVProps> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return webDAVPropsPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
+	public List<WebDAVProps> dynamicQuery(DynamicQuery dynamicQuery, int start,
 		int end) throws SystemException {
 		return webDAVPropsPersistence.findWithDynamicQuery(dynamicQuery, start,
 			end);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
+	public List<WebDAVProps> dynamicQuery(DynamicQuery dynamicQuery, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		return webDAVPropsPersistence.findWithDynamicQuery(dynamicQuery, start,
 			end, orderByComparator);
 	}
 
-	public int dynamicQueryCount(DynamicQuery dynamicQuery)
+	public long dynamicQueryCount(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return webDAVPropsPersistence.countWithDynamicQuery(dynamicQuery);
 	}

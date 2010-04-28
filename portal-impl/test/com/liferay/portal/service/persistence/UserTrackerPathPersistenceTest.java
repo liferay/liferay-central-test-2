@@ -132,11 +132,11 @@ public class UserTrackerPathPersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("userTrackerPathId",
 				newUserTrackerPath.getUserTrackerPathId()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<UserTrackerPath> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(1, result.size());
 
-		UserTrackerPath existingUserTrackerPath = (UserTrackerPath)result.get(0);
+		UserTrackerPath existingUserTrackerPath = result.get(0);
 
 		assertEquals(existingUserTrackerPath, newUserTrackerPath);
 	}
@@ -148,7 +148,7 @@ public class UserTrackerPathPersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("userTrackerPathId",
 				nextLong()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<UserTrackerPath> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

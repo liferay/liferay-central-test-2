@@ -94,23 +94,23 @@ public abstract class CalEventLocalServiceBaseImpl
 		calEventPersistence.remove(calEvent);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
+	public List<CalEvent> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return calEventPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
+	public List<CalEvent> dynamicQuery(DynamicQuery dynamicQuery, int start,
 		int end) throws SystemException {
 		return calEventPersistence.findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
+	public List<CalEvent> dynamicQuery(DynamicQuery dynamicQuery, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		return calEventPersistence.findWithDynamicQuery(dynamicQuery, start,
 			end, orderByComparator);
 	}
 
-	public int dynamicQueryCount(DynamicQuery dynamicQuery)
+	public long dynamicQueryCount(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return calEventPersistence.countWithDynamicQuery(dynamicQuery);
 	}

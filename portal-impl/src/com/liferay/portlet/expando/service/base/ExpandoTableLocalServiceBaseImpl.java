@@ -75,24 +75,25 @@ public abstract class ExpandoTableLocalServiceBaseImpl
 		expandoTablePersistence.remove(expandoTable);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
+	public List<ExpandoTable> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return expandoTablePersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end) throws SystemException {
+	public List<ExpandoTable> dynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end) throws SystemException {
 		return expandoTablePersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end, OrderByComparator orderByComparator) throws SystemException {
+	public List<ExpandoTable> dynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
 		return expandoTablePersistence.findWithDynamicQuery(dynamicQuery,
 			start, end, orderByComparator);
 	}
 
-	public int dynamicQueryCount(DynamicQuery dynamicQuery)
+	public long dynamicQueryCount(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return expandoTablePersistence.countWithDynamicQuery(dynamicQuery);
 	}

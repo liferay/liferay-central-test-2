@@ -140,11 +140,11 @@ public class AssetTagPersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("tagId",
 				newAssetTag.getTagId()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<AssetTag> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(1, result.size());
 
-		AssetTag existingAssetTag = (AssetTag)result.get(0);
+		AssetTag existingAssetTag = result.get(0);
 
 		assertEquals(existingAssetTag, newAssetTag);
 	}
@@ -155,7 +155,7 @@ public class AssetTagPersistenceTest extends BasePersistenceTestCase {
 
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("tagId", nextLong()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<AssetTag> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

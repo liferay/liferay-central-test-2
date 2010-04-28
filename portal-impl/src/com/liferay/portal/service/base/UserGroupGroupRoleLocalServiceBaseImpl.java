@@ -212,24 +212,25 @@ public abstract class UserGroupGroupRoleLocalServiceBaseImpl
 		userGroupGroupRolePersistence.remove(userGroupGroupRole);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
+	public List<UserGroupGroupRole> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return userGroupGroupRolePersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end) throws SystemException {
+	public List<UserGroupGroupRole> dynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end) throws SystemException {
 		return userGroupGroupRolePersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end, OrderByComparator orderByComparator) throws SystemException {
+	public List<UserGroupGroupRole> dynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
 		return userGroupGroupRolePersistence.findWithDynamicQuery(dynamicQuery,
 			start, end, orderByComparator);
 	}
 
-	public int dynamicQueryCount(DynamicQuery dynamicQuery)
+	public long dynamicQueryCount(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return userGroupGroupRolePersistence.countWithDynamicQuery(dynamicQuery);
 	}

@@ -127,11 +127,11 @@ public class BrowserTrackerPersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("browserTrackerId",
 				newBrowserTracker.getBrowserTrackerId()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<BrowserTracker> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(1, result.size());
 
-		BrowserTracker existingBrowserTracker = (BrowserTracker)result.get(0);
+		BrowserTracker existingBrowserTracker = result.get(0);
 
 		assertEquals(existingBrowserTracker, newBrowserTracker);
 	}
@@ -143,7 +143,7 @@ public class BrowserTrackerPersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("browserTrackerId",
 				nextLong()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<BrowserTracker> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

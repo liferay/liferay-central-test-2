@@ -141,11 +141,11 @@ public class SCProductScreenshotPersistenceTest extends BasePersistenceTestCase 
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("productScreenshotId",
 				newSCProductScreenshot.getProductScreenshotId()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<SCProductScreenshot> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(1, result.size());
 
-		SCProductScreenshot existingSCProductScreenshot = (SCProductScreenshot)result.get(0);
+		SCProductScreenshot existingSCProductScreenshot = result.get(0);
 
 		assertEquals(existingSCProductScreenshot, newSCProductScreenshot);
 	}
@@ -157,7 +157,7 @@ public class SCProductScreenshotPersistenceTest extends BasePersistenceTestCase 
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("productScreenshotId",
 				nextLong()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<SCProductScreenshot> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

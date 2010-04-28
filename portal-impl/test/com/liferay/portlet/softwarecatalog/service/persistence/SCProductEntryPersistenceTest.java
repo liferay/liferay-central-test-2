@@ -170,11 +170,11 @@ public class SCProductEntryPersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("productEntryId",
 				newSCProductEntry.getProductEntryId()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<SCProductEntry> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(1, result.size());
 
-		SCProductEntry existingSCProductEntry = (SCProductEntry)result.get(0);
+		SCProductEntry existingSCProductEntry = result.get(0);
 
 		assertEquals(existingSCProductEntry, newSCProductEntry);
 	}
@@ -185,7 +185,7 @@ public class SCProductEntryPersistenceTest extends BasePersistenceTestCase {
 
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("productEntryId", nextLong()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<SCProductEntry> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

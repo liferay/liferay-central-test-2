@@ -209,24 +209,25 @@ public abstract class UserIdMapperLocalServiceBaseImpl
 		userIdMapperPersistence.remove(userIdMapper);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
+	public List<UserIdMapper> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return userIdMapperPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end) throws SystemException {
+	public List<UserIdMapper> dynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end) throws SystemException {
 		return userIdMapperPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end, OrderByComparator orderByComparator) throws SystemException {
+	public List<UserIdMapper> dynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
 		return userIdMapperPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end, orderByComparator);
 	}
 
-	public int dynamicQueryCount(DynamicQuery dynamicQuery)
+	public long dynamicQueryCount(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return userIdMapperPersistence.countWithDynamicQuery(dynamicQuery);
 	}

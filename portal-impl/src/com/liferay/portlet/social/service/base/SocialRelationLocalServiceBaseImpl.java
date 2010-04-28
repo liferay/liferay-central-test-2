@@ -80,24 +80,25 @@ public abstract class SocialRelationLocalServiceBaseImpl
 		socialRelationPersistence.remove(socialRelation);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
+	public List<SocialRelation> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return socialRelationPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end) throws SystemException {
+	public List<SocialRelation> dynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end) throws SystemException {
 		return socialRelationPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end, OrderByComparator orderByComparator) throws SystemException {
+	public List<SocialRelation> dynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
 		return socialRelationPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end, orderByComparator);
 	}
 
-	public int dynamicQueryCount(DynamicQuery dynamicQuery)
+	public long dynamicQueryCount(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return socialRelationPersistence.countWithDynamicQuery(dynamicQuery);
 	}

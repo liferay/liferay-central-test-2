@@ -88,23 +88,23 @@ public abstract class IGImageLocalServiceBaseImpl implements IGImageLocalService
 		igImagePersistence.remove(igImage);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
+	public List<IGImage> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return igImagePersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
+	public List<IGImage> dynamicQuery(DynamicQuery dynamicQuery, int start,
 		int end) throws SystemException {
 		return igImagePersistence.findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
+	public List<IGImage> dynamicQuery(DynamicQuery dynamicQuery, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		return igImagePersistence.findWithDynamicQuery(dynamicQuery, start,
 			end, orderByComparator);
 	}
 
-	public int dynamicQueryCount(DynamicQuery dynamicQuery)
+	public long dynamicQueryCount(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return igImagePersistence.countWithDynamicQuery(dynamicQuery);
 	}

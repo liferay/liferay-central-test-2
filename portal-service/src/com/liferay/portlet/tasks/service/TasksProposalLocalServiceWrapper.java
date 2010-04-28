@@ -61,19 +61,19 @@ public class TasksProposalLocalServiceWrapper
 		_tasksProposalLocalService.deleteTasksProposal(tasksProposal);
 	}
 
-	public java.util.List<Object> dynamicQuery(
+	public java.util.List<com.liferay.portlet.tasks.model.TasksProposal> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _tasksProposalLocalService.dynamicQuery(dynamicQuery);
 	}
 
-	public java.util.List<Object> dynamicQuery(
+	public java.util.List<com.liferay.portlet.tasks.model.TasksProposal> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.kernel.exception.SystemException {
 		return _tasksProposalLocalService.dynamicQuery(dynamicQuery, start, end);
 	}
 
-	public java.util.List<Object> dynamicQuery(
+	public java.util.List<com.liferay.portlet.tasks.model.TasksProposal> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -82,7 +82,7 @@ public class TasksProposalLocalServiceWrapper
 			end, orderByComparator);
 	}
 
-	public int dynamicQueryCount(
+	public long dynamicQueryCount(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _tasksProposalLocalService.dynamicQueryCount(dynamicQuery);

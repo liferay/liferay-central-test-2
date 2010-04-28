@@ -83,23 +83,23 @@ public abstract class IGFolderLocalServiceBaseImpl
 		igFolderPersistence.remove(igFolder);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
+	public List<IGFolder> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return igFolderPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
+	public List<IGFolder> dynamicQuery(DynamicQuery dynamicQuery, int start,
 		int end) throws SystemException {
 		return igFolderPersistence.findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
+	public List<IGFolder> dynamicQuery(DynamicQuery dynamicQuery, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		return igFolderPersistence.findWithDynamicQuery(dynamicQuery, start,
 			end, orderByComparator);
 	}
 
-	public int dynamicQueryCount(DynamicQuery dynamicQuery)
+	public long dynamicQueryCount(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return igFolderPersistence.countWithDynamicQuery(dynamicQuery);
 	}

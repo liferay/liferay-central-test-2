@@ -125,11 +125,11 @@ public class ShardPersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("shardId",
 				newShard.getShardId()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<Shard> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(1, result.size());
 
-		Shard existingShard = (Shard)result.get(0);
+		Shard existingShard = result.get(0);
 
 		assertEquals(existingShard, newShard);
 	}
@@ -140,7 +140,7 @@ public class ShardPersistenceTest extends BasePersistenceTestCase {
 
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("shardId", nextLong()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<Shard> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

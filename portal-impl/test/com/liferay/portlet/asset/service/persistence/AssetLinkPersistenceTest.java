@@ -139,11 +139,11 @@ public class AssetLinkPersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("linkId",
 				newAssetLink.getLinkId()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<AssetLink> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(1, result.size());
 
-		AssetLink existingAssetLink = (AssetLink)result.get(0);
+		AssetLink existingAssetLink = result.get(0);
 
 		assertEquals(existingAssetLink, newAssetLink);
 	}
@@ -154,7 +154,7 @@ public class AssetLinkPersistenceTest extends BasePersistenceTestCase {
 
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("linkId", nextLong()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<AssetLink> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

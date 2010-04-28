@@ -70,24 +70,25 @@ public abstract class RatingsStatsLocalServiceBaseImpl
 		ratingsStatsPersistence.remove(ratingsStats);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
+	public List<RatingsStats> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return ratingsStatsPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end) throws SystemException {
+	public List<RatingsStats> dynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end) throws SystemException {
 		return ratingsStatsPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end, OrderByComparator orderByComparator) throws SystemException {
+	public List<RatingsStats> dynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
 		return ratingsStatsPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end, orderByComparator);
 	}
 
-	public int dynamicQueryCount(DynamicQuery dynamicQuery)
+	public long dynamicQueryCount(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return ratingsStatsPersistence.countWithDynamicQuery(dynamicQuery);
 	}

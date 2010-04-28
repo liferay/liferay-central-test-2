@@ -196,11 +196,11 @@ public class MBMailingListPersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("mailingListId",
 				newMBMailingList.getMailingListId()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<MBMailingList> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(1, result.size());
 
-		MBMailingList existingMBMailingList = (MBMailingList)result.get(0);
+		MBMailingList existingMBMailingList = result.get(0);
 
 		assertEquals(existingMBMailingList, newMBMailingList);
 	}
@@ -211,7 +211,7 @@ public class MBMailingListPersistenceTest extends BasePersistenceTestCase {
 
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("mailingListId", nextLong()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<MBMailingList> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

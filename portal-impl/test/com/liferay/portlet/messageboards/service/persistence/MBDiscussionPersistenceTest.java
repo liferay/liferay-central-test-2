@@ -130,11 +130,11 @@ public class MBDiscussionPersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("discussionId",
 				newMBDiscussion.getDiscussionId()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<MBDiscussion> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(1, result.size());
 
-		MBDiscussion existingMBDiscussion = (MBDiscussion)result.get(0);
+		MBDiscussion existingMBDiscussion = result.get(0);
 
 		assertEquals(existingMBDiscussion, newMBDiscussion);
 	}
@@ -145,7 +145,7 @@ public class MBDiscussionPersistenceTest extends BasePersistenceTestCase {
 
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("discussionId", nextLong()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<MBDiscussion> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

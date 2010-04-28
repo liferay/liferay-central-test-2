@@ -209,24 +209,25 @@ public abstract class ResourceActionLocalServiceBaseImpl
 		resourceActionPersistence.remove(resourceAction);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
+	public List<ResourceAction> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return resourceActionPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end) throws SystemException {
+	public List<ResourceAction> dynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end) throws SystemException {
 		return resourceActionPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end, OrderByComparator orderByComparator) throws SystemException {
+	public List<ResourceAction> dynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
 		return resourceActionPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end, orderByComparator);
 	}
 
-	public int dynamicQueryCount(DynamicQuery dynamicQuery)
+	public long dynamicQueryCount(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return resourceActionPersistence.countWithDynamicQuery(dynamicQuery);
 	}

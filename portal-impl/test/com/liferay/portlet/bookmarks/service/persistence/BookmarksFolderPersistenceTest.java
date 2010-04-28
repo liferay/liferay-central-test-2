@@ -152,11 +152,11 @@ public class BookmarksFolderPersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("folderId",
 				newBookmarksFolder.getFolderId()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<BookmarksFolder> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(1, result.size());
 
-		BookmarksFolder existingBookmarksFolder = (BookmarksFolder)result.get(0);
+		BookmarksFolder existingBookmarksFolder = result.get(0);
 
 		assertEquals(existingBookmarksFolder, newBookmarksFolder);
 	}
@@ -167,7 +167,7 @@ public class BookmarksFolderPersistenceTest extends BasePersistenceTestCase {
 
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("folderId", nextLong()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<BookmarksFolder> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

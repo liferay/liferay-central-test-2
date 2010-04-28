@@ -136,11 +136,11 @@ public class CompanyPersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("companyId",
 				newCompany.getCompanyId()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<Company> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(1, result.size());
 
-		Company existingCompany = (Company)result.get(0);
+		Company existingCompany = result.get(0);
 
 		assertEquals(existingCompany, newCompany);
 	}
@@ -151,7 +151,7 @@ public class CompanyPersistenceTest extends BasePersistenceTestCase {
 
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("companyId", nextLong()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<Company> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

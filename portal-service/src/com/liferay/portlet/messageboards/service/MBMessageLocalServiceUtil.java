@@ -60,19 +60,19 @@ public class MBMessageLocalServiceUtil {
 		getService().deleteMBMessage(mbMessage);
 	}
 
-	public static java.util.List<Object> dynamicQuery(
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().dynamicQuery(dynamicQuery);
 	}
 
-	public static java.util.List<Object> dynamicQuery(
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().dynamicQuery(dynamicQuery, start, end);
 	}
 
-	public static java.util.List<Object> dynamicQuery(
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -81,7 +81,7 @@ public class MBMessageLocalServiceUtil {
 				   .dynamicQuery(dynamicQuery, start, end, orderByComparator);
 	}
 
-	public static int dynamicQueryCount(
+	public static long dynamicQueryCount(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().dynamicQueryCount(dynamicQuery);
@@ -127,12 +127,12 @@ public class MBMessageLocalServiceUtil {
 
 	public static com.liferay.portlet.messageboards.model.MBMessage addDiscussionMessage(
 		long userId, java.lang.String userName, java.lang.String className,
-		long classPK, int status)
+		long classPK, int workflowAction)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .addDiscussionMessage(userId, userName, className, classPK,
-			status);
+			workflowAction);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage addDiscussionMessage(
@@ -457,12 +457,12 @@ public class MBMessageLocalServiceUtil {
 
 	public static com.liferay.portlet.messageboards.model.MBMessage updateDiscussionMessage(
 		long userId, long messageId, java.lang.String subject,
-		java.lang.String body, int status)
+		java.lang.String body, int workflowAction)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .updateDiscussionMessage(userId, messageId, subject, body,
-			status);
+			workflowAction);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage updateMessage(

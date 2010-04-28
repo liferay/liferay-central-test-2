@@ -149,11 +149,11 @@ public class SocialEquityLogPersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("equityLogId",
 				newSocialEquityLog.getEquityLogId()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<SocialEquityLog> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(1, result.size());
 
-		SocialEquityLog existingSocialEquityLog = (SocialEquityLog)result.get(0);
+		SocialEquityLog existingSocialEquityLog = result.get(0);
 
 		assertEquals(existingSocialEquityLog, newSocialEquityLog);
 	}
@@ -164,7 +164,7 @@ public class SocialEquityLogPersistenceTest extends BasePersistenceTestCase {
 
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("equityLogId", nextLong()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<SocialEquityLog> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

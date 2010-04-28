@@ -60,19 +60,19 @@ public class MBMessageLocalServiceWrapper implements MBMessageLocalService {
 		_mbMessageLocalService.deleteMBMessage(mbMessage);
 	}
 
-	public java.util.List<Object> dynamicQuery(
+	public java.util.List<com.liferay.portlet.messageboards.model.MBMessage> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _mbMessageLocalService.dynamicQuery(dynamicQuery);
 	}
 
-	public java.util.List<Object> dynamicQuery(
+	public java.util.List<com.liferay.portlet.messageboards.model.MBMessage> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.kernel.exception.SystemException {
 		return _mbMessageLocalService.dynamicQuery(dynamicQuery, start, end);
 	}
 
-	public java.util.List<Object> dynamicQuery(
+	public java.util.List<com.liferay.portlet.messageboards.model.MBMessage> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -81,7 +81,7 @@ public class MBMessageLocalServiceWrapper implements MBMessageLocalService {
 			orderByComparator);
 	}
 
-	public int dynamicQueryCount(
+	public long dynamicQueryCount(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _mbMessageLocalService.dynamicQueryCount(dynamicQuery);
@@ -127,11 +127,11 @@ public class MBMessageLocalServiceWrapper implements MBMessageLocalService {
 
 	public com.liferay.portlet.messageboards.model.MBMessage addDiscussionMessage(
 		long userId, java.lang.String userName, java.lang.String className,
-		long classPK, int status)
+		long classPK, int workflowAction)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _mbMessageLocalService.addDiscussionMessage(userId, userName,
-			className, classPK, status);
+			className, classPK, workflowAction);
 	}
 
 	public com.liferay.portlet.messageboards.model.MBMessage addDiscussionMessage(
@@ -457,11 +457,11 @@ public class MBMessageLocalServiceWrapper implements MBMessageLocalService {
 
 	public com.liferay.portlet.messageboards.model.MBMessage updateDiscussionMessage(
 		long userId, long messageId, java.lang.String subject,
-		java.lang.String body, int status)
+		java.lang.String body, int workflowAction)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _mbMessageLocalService.updateDiscussionMessage(userId,
-			messageId, subject, body, status);
+			messageId, subject, body, workflowAction);
 	}
 
 	public com.liferay.portlet.messageboards.model.MBMessage updateMessage(

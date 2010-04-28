@@ -154,11 +154,11 @@ public class WorkflowDefinitionLinkPersistenceTest
 				"workflowDefinitionLinkId",
 				newWorkflowDefinitionLink.getWorkflowDefinitionLinkId()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<WorkflowDefinitionLink> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(1, result.size());
 
-		WorkflowDefinitionLink existingWorkflowDefinitionLink = (WorkflowDefinitionLink)result.get(0);
+		WorkflowDefinitionLink existingWorkflowDefinitionLink = result.get(0);
 
 		assertEquals(existingWorkflowDefinitionLink, newWorkflowDefinitionLink);
 	}
@@ -170,7 +170,7 @@ public class WorkflowDefinitionLinkPersistenceTest
 		dynamicQuery.add(RestrictionsFactoryUtil.eq(
 				"workflowDefinitionLinkId", nextLong()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<WorkflowDefinitionLink> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

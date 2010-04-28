@@ -129,11 +129,11 @@ public class PermissionPersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("permissionId",
 				newPermission.getPermissionId()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<Permission> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(1, result.size());
 
-		Permission existingPermission = (Permission)result.get(0);
+		Permission existingPermission = result.get(0);
 
 		assertEquals(existingPermission, newPermission);
 	}
@@ -144,7 +144,7 @@ public class PermissionPersistenceTest extends BasePersistenceTestCase {
 
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("permissionId", nextLong()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<Permission> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

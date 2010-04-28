@@ -134,11 +134,11 @@ public class TicketPersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("ticketId",
 				newTicket.getTicketId()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<Ticket> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(1, result.size());
 
-		Ticket existingTicket = (Ticket)result.get(0);
+		Ticket existingTicket = result.get(0);
 
 		assertEquals(existingTicket, newTicket);
 	}
@@ -149,7 +149,7 @@ public class TicketPersistenceTest extends BasePersistenceTestCase {
 
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("ticketId", nextLong()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<Ticket> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

@@ -173,11 +173,11 @@ public class WikiPagePersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("pageId",
 				newWikiPage.getPageId()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<WikiPage> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(1, result.size());
 
-		WikiPage existingWikiPage = (WikiPage)result.get(0);
+		WikiPage existingWikiPage = result.get(0);
 
 		assertEquals(existingWikiPage, newWikiPage);
 	}
@@ -188,7 +188,7 @@ public class WikiPagePersistenceTest extends BasePersistenceTestCase {
 
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("pageId", nextLong()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<WikiPage> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

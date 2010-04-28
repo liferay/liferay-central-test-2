@@ -174,11 +174,11 @@ public class CalEventPersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("eventId",
 				newCalEvent.getEventId()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<CalEvent> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(1, result.size());
 
-		CalEvent existingCalEvent = (CalEvent)result.get(0);
+		CalEvent existingCalEvent = result.get(0);
 
 		assertEquals(existingCalEvent, newCalEvent);
 	}
@@ -189,7 +189,7 @@ public class CalEventPersistenceTest extends BasePersistenceTestCase {
 
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("eventId", nextLong()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<CalEvent> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

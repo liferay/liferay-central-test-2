@@ -128,24 +128,24 @@ public abstract class MBMessageLocalServiceBaseImpl
 		mbMessagePersistence.remove(mbMessage);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
+	public List<MBMessage> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return mbMessagePersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
+	public List<MBMessage> dynamicQuery(DynamicQuery dynamicQuery, int start,
 		int end) throws SystemException {
 		return mbMessagePersistence.findWithDynamicQuery(dynamicQuery, start,
 			end);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
+	public List<MBMessage> dynamicQuery(DynamicQuery dynamicQuery, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		return mbMessagePersistence.findWithDynamicQuery(dynamicQuery, start,
 			end, orderByComparator);
 	}
 
-	public int dynamicQueryCount(DynamicQuery dynamicQuery)
+	public long dynamicQueryCount(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return mbMessagePersistence.countWithDynamicQuery(dynamicQuery);
 	}

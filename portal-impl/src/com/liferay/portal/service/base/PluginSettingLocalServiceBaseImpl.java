@@ -209,24 +209,25 @@ public abstract class PluginSettingLocalServiceBaseImpl
 		pluginSettingPersistence.remove(pluginSetting);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
+	public List<PluginSetting> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return pluginSettingPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end) throws SystemException {
+	public List<PluginSetting> dynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end) throws SystemException {
 		return pluginSettingPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end, OrderByComparator orderByComparator) throws SystemException {
+	public List<PluginSetting> dynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
 		return pluginSettingPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end, orderByComparator);
 	}
 
-	public int dynamicQueryCount(DynamicQuery dynamicQuery)
+	public long dynamicQueryCount(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return pluginSettingPersistence.countWithDynamicQuery(dynamicQuery);
 	}

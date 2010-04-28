@@ -132,11 +132,11 @@ public class UserGroupRolePersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("id.roleId",
 				newUserGroupRole.getRoleId()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<UserGroupRole> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(1, result.size());
 
-		UserGroupRole existingUserGroupRole = (UserGroupRole)result.get(0);
+		UserGroupRole existingUserGroupRole = result.get(0);
 
 		assertEquals(existingUserGroupRole, newUserGroupRole);
 	}
@@ -149,7 +149,7 @@ public class UserGroupRolePersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("id.groupId", nextLong()));
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("id.roleId", nextLong()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<UserGroupRole> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

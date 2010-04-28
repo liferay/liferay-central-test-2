@@ -133,11 +133,11 @@ public class OrgGroupPermissionPersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("id.permissionId",
 				newOrgGroupPermission.getPermissionId()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<OrgGroupPermission> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(1, result.size());
 
-		OrgGroupPermission existingOrgGroupPermission = (OrgGroupPermission)result.get(0);
+		OrgGroupPermission existingOrgGroupPermission = result.get(0);
 
 		assertEquals(existingOrgGroupPermission, newOrgGroupPermission);
 	}
@@ -152,7 +152,7 @@ public class OrgGroupPermissionPersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("id.permissionId",
 				nextLong()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<OrgGroupPermission> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

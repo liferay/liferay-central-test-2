@@ -130,11 +130,11 @@ public class ResourceActionPersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("resourceActionId",
 				newResourceAction.getResourceActionId()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<ResourceAction> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(1, result.size());
 
-		ResourceAction existingResourceAction = (ResourceAction)result.get(0);
+		ResourceAction existingResourceAction = result.get(0);
 
 		assertEquals(existingResourceAction, newResourceAction);
 	}
@@ -146,7 +146,7 @@ public class ResourceActionPersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("resourceActionId",
 				nextLong()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<ResourceAction> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

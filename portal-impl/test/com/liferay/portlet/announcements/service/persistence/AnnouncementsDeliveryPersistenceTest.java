@@ -141,11 +141,11 @@ public class AnnouncementsDeliveryPersistenceTest
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("deliveryId",
 				newAnnouncementsDelivery.getDeliveryId()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<AnnouncementsDelivery> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(1, result.size());
 
-		AnnouncementsDelivery existingAnnouncementsDelivery = (AnnouncementsDelivery)result.get(0);
+		AnnouncementsDelivery existingAnnouncementsDelivery = result.get(0);
 
 		assertEquals(existingAnnouncementsDelivery, newAnnouncementsDelivery);
 	}
@@ -156,7 +156,7 @@ public class AnnouncementsDeliveryPersistenceTest
 
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("deliveryId", nextLong()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<AnnouncementsDelivery> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

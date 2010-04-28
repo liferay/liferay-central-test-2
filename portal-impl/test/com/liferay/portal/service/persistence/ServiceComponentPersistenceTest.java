@@ -133,11 +133,11 @@ public class ServiceComponentPersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("serviceComponentId",
 				newServiceComponent.getServiceComponentId()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<ServiceComponent> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(1, result.size());
 
-		ServiceComponent existingServiceComponent = (ServiceComponent)result.get(0);
+		ServiceComponent existingServiceComponent = result.get(0);
 
 		assertEquals(existingServiceComponent, newServiceComponent);
 	}
@@ -149,7 +149,7 @@ public class ServiceComponentPersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("serviceComponentId",
 				nextLong()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<ServiceComponent> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

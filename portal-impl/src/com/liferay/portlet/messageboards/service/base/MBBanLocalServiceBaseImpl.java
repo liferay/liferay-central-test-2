@@ -84,23 +84,23 @@ public abstract class MBBanLocalServiceBaseImpl implements MBBanLocalService {
 		mbBanPersistence.remove(mbBan);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
+	public List<MBBan> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return mbBanPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
+	public List<MBBan> dynamicQuery(DynamicQuery dynamicQuery, int start,
 		int end) throws SystemException {
 		return mbBanPersistence.findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
+	public List<MBBan> dynamicQuery(DynamicQuery dynamicQuery, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		return mbBanPersistence.findWithDynamicQuery(dynamicQuery, start, end,
 			orderByComparator);
 	}
 
-	public int dynamicQueryCount(DynamicQuery dynamicQuery)
+	public long dynamicQueryCount(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return mbBanPersistence.countWithDynamicQuery(dynamicQuery);
 	}

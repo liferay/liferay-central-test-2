@@ -133,11 +133,11 @@ public class SCLicensePersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("licenseId",
 				newSCLicense.getLicenseId()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<SCLicense> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(1, result.size());
 
-		SCLicense existingSCLicense = (SCLicense)result.get(0);
+		SCLicense existingSCLicense = result.get(0);
 
 		assertEquals(existingSCLicense, newSCLicense);
 	}
@@ -148,7 +148,7 @@ public class SCLicensePersistenceTest extends BasePersistenceTestCase {
 
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("licenseId", nextLong()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<SCLicense> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

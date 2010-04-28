@@ -136,11 +136,11 @@ public class LayoutPrototypePersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("layoutPrototypeId",
 				newLayoutPrototype.getLayoutPrototypeId()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<LayoutPrototype> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(1, result.size());
 
-		LayoutPrototype existingLayoutPrototype = (LayoutPrototype)result.get(0);
+		LayoutPrototype existingLayoutPrototype = result.get(0);
 
 		assertEquals(existingLayoutPrototype, newLayoutPrototype);
 	}
@@ -152,7 +152,7 @@ public class LayoutPrototypePersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("layoutPrototypeId",
 				nextLong()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<LayoutPrototype> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

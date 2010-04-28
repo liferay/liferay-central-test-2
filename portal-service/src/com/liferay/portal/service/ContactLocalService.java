@@ -60,21 +60,21 @@ public interface ContactLocalService {
 	public void deleteContact(com.liferay.portal.model.Contact contact)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public java.util.List<Object> dynamicQuery(
+	public java.util.List<com.liferay.portal.model.Contact> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public java.util.List<Object> dynamicQuery(
+	public java.util.List<com.liferay.portal.model.Contact> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.kernel.exception.SystemException;
 
-	public java.util.List<Object> dynamicQuery(
+	public java.util.List<com.liferay.portal.model.Contact> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public int dynamicQueryCount(
+	public long dynamicQueryCount(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException;
 

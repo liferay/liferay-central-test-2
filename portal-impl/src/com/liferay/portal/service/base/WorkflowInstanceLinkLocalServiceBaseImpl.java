@@ -211,24 +211,25 @@ public abstract class WorkflowInstanceLinkLocalServiceBaseImpl
 		workflowInstanceLinkPersistence.remove(workflowInstanceLink);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
+	public List<WorkflowInstanceLink> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return workflowInstanceLinkPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end) throws SystemException {
+	public List<WorkflowInstanceLink> dynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end) throws SystemException {
 		return workflowInstanceLinkPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end, OrderByComparator orderByComparator) throws SystemException {
+	public List<WorkflowInstanceLink> dynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
 		return workflowInstanceLinkPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end, orderByComparator);
 	}
 
-	public int dynamicQueryCount(DynamicQuery dynamicQuery)
+	public long dynamicQueryCount(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return workflowInstanceLinkPersistence.countWithDynamicQuery(dynamicQuery);
 	}

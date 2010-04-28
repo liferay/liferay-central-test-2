@@ -219,11 +219,11 @@ public class ShoppingItemPersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("itemId",
 				newShoppingItem.getItemId()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<ShoppingItem> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(1, result.size());
 
-		ShoppingItem existingShoppingItem = (ShoppingItem)result.get(0);
+		ShoppingItem existingShoppingItem = result.get(0);
 
 		assertEquals(existingShoppingItem, newShoppingItem);
 	}
@@ -234,7 +234,7 @@ public class ShoppingItemPersistenceTest extends BasePersistenceTestCase {
 
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("itemId", nextLong()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<ShoppingItem> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

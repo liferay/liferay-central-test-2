@@ -177,11 +177,11 @@ public class ShoppingCouponPersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("couponId",
 				newShoppingCoupon.getCouponId()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<ShoppingCoupon> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(1, result.size());
 
-		ShoppingCoupon existingShoppingCoupon = (ShoppingCoupon)result.get(0);
+		ShoppingCoupon existingShoppingCoupon = result.get(0);
 
 		assertEquals(existingShoppingCoupon, newShoppingCoupon);
 	}
@@ -192,7 +192,7 @@ public class ShoppingCouponPersistenceTest extends BasePersistenceTestCase {
 
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("couponId", nextLong()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<ShoppingCoupon> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

@@ -148,11 +148,11 @@ public class DLFolderPersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("folderId",
 				newDLFolder.getFolderId()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<DLFolder> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(1, result.size());
 
-		DLFolder existingDLFolder = (DLFolder)result.get(0);
+		DLFolder existingDLFolder = result.get(0);
 
 		assertEquals(existingDLFolder, newDLFolder);
 	}
@@ -163,7 +163,7 @@ public class DLFolderPersistenceTest extends BasePersistenceTestCase {
 
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("folderId", nextLong()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<DLFolder> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

@@ -82,24 +82,25 @@ public abstract class SCProductScreenshotLocalServiceBaseImpl
 		scProductScreenshotPersistence.remove(scProductScreenshot);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
+	public List<SCProductScreenshot> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return scProductScreenshotPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end) throws SystemException {
+	public List<SCProductScreenshot> dynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end) throws SystemException {
 		return scProductScreenshotPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end, OrderByComparator orderByComparator) throws SystemException {
+	public List<SCProductScreenshot> dynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
 		return scProductScreenshotPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end, orderByComparator);
 	}
 
-	public int dynamicQueryCount(DynamicQuery dynamicQuery)
+	public long dynamicQueryCount(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return scProductScreenshotPersistence.countWithDynamicQuery(dynamicQuery);
 	}

@@ -199,11 +199,11 @@ public class PasswordPolicyPersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("passwordPolicyId",
 				newPasswordPolicy.getPasswordPolicyId()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<PasswordPolicy> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(1, result.size());
 
-		PasswordPolicy existingPasswordPolicy = (PasswordPolicy)result.get(0);
+		PasswordPolicy existingPasswordPolicy = result.get(0);
 
 		assertEquals(existingPasswordPolicy, newPasswordPolicy);
 	}
@@ -215,7 +215,7 @@ public class PasswordPolicyPersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("passwordPolicyId",
 				nextLong()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<PasswordPolicy> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

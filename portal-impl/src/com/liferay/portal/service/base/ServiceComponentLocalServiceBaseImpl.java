@@ -209,24 +209,25 @@ public abstract class ServiceComponentLocalServiceBaseImpl
 		serviceComponentPersistence.remove(serviceComponent);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
+	public List<ServiceComponent> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return serviceComponentPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end) throws SystemException {
+	public List<ServiceComponent> dynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end) throws SystemException {
 		return serviceComponentPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end, OrderByComparator orderByComparator) throws SystemException {
+	public List<ServiceComponent> dynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
 		return serviceComponentPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end, orderByComparator);
 	}
 
-	public int dynamicQueryCount(DynamicQuery dynamicQuery)
+	public long dynamicQueryCount(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return serviceComponentPersistence.countWithDynamicQuery(dynamicQuery);
 	}

@@ -168,11 +168,11 @@ public class DLFileShortcutPersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("fileShortcutId",
 				newDLFileShortcut.getFileShortcutId()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<DLFileShortcut> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(1, result.size());
 
-		DLFileShortcut existingDLFileShortcut = (DLFileShortcut)result.get(0);
+		DLFileShortcut existingDLFileShortcut = result.get(0);
 
 		assertEquals(existingDLFileShortcut, newDLFileShortcut);
 	}
@@ -183,7 +183,7 @@ public class DLFileShortcutPersistenceTest extends BasePersistenceTestCase {
 
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("fileShortcutId", nextLong()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<DLFileShortcut> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

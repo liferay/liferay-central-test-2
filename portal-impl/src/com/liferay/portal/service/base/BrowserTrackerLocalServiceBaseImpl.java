@@ -209,24 +209,25 @@ public abstract class BrowserTrackerLocalServiceBaseImpl
 		browserTrackerPersistence.remove(browserTracker);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
+	public List<BrowserTracker> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return browserTrackerPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end) throws SystemException {
+	public List<BrowserTracker> dynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end) throws SystemException {
 		return browserTrackerPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end, OrderByComparator orderByComparator) throws SystemException {
+	public List<BrowserTracker> dynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
 		return browserTrackerPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end, orderByComparator);
 	}
 
-	public int dynamicQueryCount(DynamicQuery dynamicQuery)
+	public long dynamicQueryCount(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return browserTrackerPersistence.countWithDynamicQuery(dynamicQuery);
 	}

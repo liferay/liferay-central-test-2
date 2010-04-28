@@ -154,11 +154,11 @@ public class IGImagePersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("imageId",
 				newIGImage.getImageId()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<IGImage> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(1, result.size());
 
-		IGImage existingIGImage = (IGImage)result.get(0);
+		IGImage existingIGImage = result.get(0);
 
 		assertEquals(existingIGImage, newIGImage);
 	}
@@ -169,7 +169,7 @@ public class IGImagePersistenceTest extends BasePersistenceTestCase {
 
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("imageId", nextLong()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<IGImage> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

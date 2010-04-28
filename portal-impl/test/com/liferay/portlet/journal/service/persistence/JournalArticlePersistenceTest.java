@@ -212,11 +212,11 @@ public class JournalArticlePersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("id",
 				newJournalArticle.getId()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<JournalArticle> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(1, result.size());
 
-		JournalArticle existingJournalArticle = (JournalArticle)result.get(0);
+		JournalArticle existingJournalArticle = result.get(0);
 
 		assertEquals(existingJournalArticle, newJournalArticle);
 	}
@@ -227,7 +227,7 @@ public class JournalArticlePersistenceTest extends BasePersistenceTestCase {
 
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("id", nextLong()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<JournalArticle> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

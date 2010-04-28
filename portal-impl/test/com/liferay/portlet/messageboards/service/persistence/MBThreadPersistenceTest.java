@@ -153,11 +153,11 @@ public class MBThreadPersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("threadId",
 				newMBThread.getThreadId()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<MBThread> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(1, result.size());
 
-		MBThread existingMBThread = (MBThread)result.get(0);
+		MBThread existingMBThread = result.get(0);
 
 		assertEquals(existingMBThread, newMBThread);
 	}
@@ -168,7 +168,7 @@ public class MBThreadPersistenceTest extends BasePersistenceTestCase {
 
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("threadId", nextLong()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<MBThread> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

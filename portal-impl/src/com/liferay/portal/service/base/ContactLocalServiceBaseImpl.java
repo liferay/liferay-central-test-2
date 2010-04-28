@@ -205,23 +205,23 @@ public abstract class ContactLocalServiceBaseImpl implements ContactLocalService
 		contactPersistence.remove(contact);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
+	public List<Contact> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return contactPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
+	public List<Contact> dynamicQuery(DynamicQuery dynamicQuery, int start,
 		int end) throws SystemException {
 		return contactPersistence.findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
+	public List<Contact> dynamicQuery(DynamicQuery dynamicQuery, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		return contactPersistence.findWithDynamicQuery(dynamicQuery, start,
 			end, orderByComparator);
 	}
 
-	public int dynamicQueryCount(DynamicQuery dynamicQuery)
+	public long dynamicQueryCount(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return contactPersistence.countWithDynamicQuery(dynamicQuery);
 	}

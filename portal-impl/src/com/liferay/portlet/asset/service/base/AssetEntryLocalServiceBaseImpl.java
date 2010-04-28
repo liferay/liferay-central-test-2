@@ -132,24 +132,24 @@ public abstract class AssetEntryLocalServiceBaseImpl
 		assetEntryPersistence.remove(assetEntry);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
+	public List<AssetEntry> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return assetEntryPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
+	public List<AssetEntry> dynamicQuery(DynamicQuery dynamicQuery, int start,
 		int end) throws SystemException {
 		return assetEntryPersistence.findWithDynamicQuery(dynamicQuery, start,
 			end);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
+	public List<AssetEntry> dynamicQuery(DynamicQuery dynamicQuery, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		return assetEntryPersistence.findWithDynamicQuery(dynamicQuery, start,
 			end, orderByComparator);
 	}
 
-	public int dynamicQueryCount(DynamicQuery dynamicQuery)
+	public long dynamicQueryCount(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return assetEntryPersistence.countWithDynamicQuery(dynamicQuery);
 	}

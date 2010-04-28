@@ -150,11 +150,11 @@ public class AssetCategoryPropertyPersistenceTest
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("categoryPropertyId",
 				newAssetCategoryProperty.getCategoryPropertyId()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<AssetCategoryProperty> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(1, result.size());
 
-		AssetCategoryProperty existingAssetCategoryProperty = (AssetCategoryProperty)result.get(0);
+		AssetCategoryProperty existingAssetCategoryProperty = result.get(0);
 
 		assertEquals(existingAssetCategoryProperty, newAssetCategoryProperty);
 	}
@@ -166,7 +166,7 @@ public class AssetCategoryPropertyPersistenceTest
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("categoryPropertyId",
 				nextLong()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<AssetCategoryProperty> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

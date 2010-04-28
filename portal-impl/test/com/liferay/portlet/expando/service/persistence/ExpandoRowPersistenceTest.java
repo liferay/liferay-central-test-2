@@ -127,11 +127,11 @@ public class ExpandoRowPersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("rowId",
 				newExpandoRow.getRowId()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<ExpandoRow> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(1, result.size());
 
-		ExpandoRow existingExpandoRow = (ExpandoRow)result.get(0);
+		ExpandoRow existingExpandoRow = result.get(0);
 
 		assertEquals(existingExpandoRow, newExpandoRow);
 	}
@@ -142,7 +142,7 @@ public class ExpandoRowPersistenceTest extends BasePersistenceTestCase {
 
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("rowId", nextLong()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<ExpandoRow> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

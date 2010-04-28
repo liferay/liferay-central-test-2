@@ -85,24 +85,25 @@ public abstract class DLFileVersionLocalServiceBaseImpl
 		dlFileVersionPersistence.remove(dlFileVersion);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
+	public List<DLFileVersion> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return dlFileVersionPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end) throws SystemException {
+	public List<DLFileVersion> dynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end) throws SystemException {
 		return dlFileVersionPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end, OrderByComparator orderByComparator) throws SystemException {
+	public List<DLFileVersion> dynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
 		return dlFileVersionPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end, orderByComparator);
 	}
 
-	public int dynamicQueryCount(DynamicQuery dynamicQuery)
+	public long dynamicQueryCount(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return dlFileVersionPersistence.countWithDynamicQuery(dynamicQuery);
 	}

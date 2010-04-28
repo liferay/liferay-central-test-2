@@ -122,11 +122,11 @@ public class ClassNamePersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("classNameId",
 				newClassName.getClassNameId()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<ClassName> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(1, result.size());
 
-		ClassName existingClassName = (ClassName)result.get(0);
+		ClassName existingClassName = result.get(0);
 
 		assertEquals(existingClassName, newClassName);
 	}
@@ -137,7 +137,7 @@ public class ClassNamePersistenceTest extends BasePersistenceTestCase {
 
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("classNameId", nextLong()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<ClassName> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

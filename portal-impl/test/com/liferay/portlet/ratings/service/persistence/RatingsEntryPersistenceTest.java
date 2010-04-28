@@ -147,11 +147,11 @@ public class RatingsEntryPersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("entryId",
 				newRatingsEntry.getEntryId()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<RatingsEntry> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(1, result.size());
 
-		RatingsEntry existingRatingsEntry = (RatingsEntry)result.get(0);
+		RatingsEntry existingRatingsEntry = result.get(0);
 
 		assertEquals(existingRatingsEntry, newRatingsEntry);
 	}
@@ -162,7 +162,7 @@ public class RatingsEntryPersistenceTest extends BasePersistenceTestCase {
 
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("entryId", nextLong()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<RatingsEntry> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

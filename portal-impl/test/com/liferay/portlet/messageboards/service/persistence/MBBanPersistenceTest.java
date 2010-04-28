@@ -136,11 +136,11 @@ public class MBBanPersistenceTest extends BasePersistenceTestCase {
 
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("banId", newMBBan.getBanId()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<MBBan> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(1, result.size());
 
-		MBBan existingMBBan = (MBBan)result.get(0);
+		MBBan existingMBBan = result.get(0);
 
 		assertEquals(existingMBBan, newMBBan);
 	}
@@ -151,7 +151,7 @@ public class MBBanPersistenceTest extends BasePersistenceTestCase {
 
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("banId", nextLong()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<MBBan> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

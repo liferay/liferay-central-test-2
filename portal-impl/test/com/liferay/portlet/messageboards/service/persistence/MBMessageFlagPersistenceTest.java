@@ -138,11 +138,11 @@ public class MBMessageFlagPersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("messageFlagId",
 				newMBMessageFlag.getMessageFlagId()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<MBMessageFlag> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(1, result.size());
 
-		MBMessageFlag existingMBMessageFlag = (MBMessageFlag)result.get(0);
+		MBMessageFlag existingMBMessageFlag = result.get(0);
 
 		assertEquals(existingMBMessageFlag, newMBMessageFlag);
 	}
@@ -153,7 +153,7 @@ public class MBMessageFlagPersistenceTest extends BasePersistenceTestCase {
 
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("messageFlagId", nextLong()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<MBMessageFlag> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

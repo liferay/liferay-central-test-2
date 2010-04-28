@@ -143,11 +143,11 @@ public class IGFolderPersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("folderId",
 				newIGFolder.getFolderId()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<IGFolder> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(1, result.size());
 
-		IGFolder existingIGFolder = (IGFolder)result.get(0);
+		IGFolder existingIGFolder = result.get(0);
 
 		assertEquals(existingIGFolder, newIGFolder);
 	}
@@ -158,7 +158,7 @@ public class IGFolderPersistenceTest extends BasePersistenceTestCase {
 
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("folderId", nextLong()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<IGFolder> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

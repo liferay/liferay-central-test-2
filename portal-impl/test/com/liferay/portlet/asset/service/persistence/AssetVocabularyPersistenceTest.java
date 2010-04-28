@@ -158,11 +158,11 @@ public class AssetVocabularyPersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("vocabularyId",
 				newAssetVocabulary.getVocabularyId()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<AssetVocabulary> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(1, result.size());
 
-		AssetVocabulary existingAssetVocabulary = (AssetVocabulary)result.get(0);
+		AssetVocabulary existingAssetVocabulary = result.get(0);
 
 		assertEquals(existingAssetVocabulary, newAssetVocabulary);
 	}
@@ -173,7 +173,7 @@ public class AssetVocabularyPersistenceTest extends BasePersistenceTestCase {
 
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("vocabularyId", nextLong()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<AssetVocabulary> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

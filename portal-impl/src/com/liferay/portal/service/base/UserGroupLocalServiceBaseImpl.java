@@ -208,24 +208,24 @@ public abstract class UserGroupLocalServiceBaseImpl
 		userGroupPersistence.remove(userGroup);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
+	public List<UserGroup> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return userGroupPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
+	public List<UserGroup> dynamicQuery(DynamicQuery dynamicQuery, int start,
 		int end) throws SystemException {
 		return userGroupPersistence.findWithDynamicQuery(dynamicQuery, start,
 			end);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
+	public List<UserGroup> dynamicQuery(DynamicQuery dynamicQuery, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		return userGroupPersistence.findWithDynamicQuery(dynamicQuery, start,
 			end, orderByComparator);
 	}
 
-	public int dynamicQueryCount(DynamicQuery dynamicQuery)
+	public long dynamicQueryCount(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return userGroupPersistence.countWithDynamicQuery(dynamicQuery);
 	}

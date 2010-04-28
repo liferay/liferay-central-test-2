@@ -139,11 +139,11 @@ public class ReleasePersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("releaseId",
 				newRelease.getReleaseId()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<Release> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(1, result.size());
 
-		Release existingRelease = (Release)result.get(0);
+		Release existingRelease = result.get(0);
 
 		assertEquals(existingRelease, newRelease);
 	}
@@ -154,7 +154,7 @@ public class ReleasePersistenceTest extends BasePersistenceTestCase {
 
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("releaseId", nextLong()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<Release> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

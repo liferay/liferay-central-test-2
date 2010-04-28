@@ -153,11 +153,11 @@ public class EmailAddressPersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("emailAddressId",
 				newEmailAddress.getEmailAddressId()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<EmailAddress> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(1, result.size());
 
-		EmailAddress existingEmailAddress = (EmailAddress)result.get(0);
+		EmailAddress existingEmailAddress = result.get(0);
 
 		assertEquals(existingEmailAddress, newEmailAddress);
 	}
@@ -168,7 +168,7 @@ public class EmailAddressPersistenceTest extends BasePersistenceTestCase {
 
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("emailAddressId", nextLong()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<EmailAddress> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

@@ -153,11 +153,11 @@ public class OrgLaborPersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("orgLaborId",
 				newOrgLabor.getOrgLaborId()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<OrgLabor> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(1, result.size());
 
-		OrgLabor existingOrgLabor = (OrgLabor)result.get(0);
+		OrgLabor existingOrgLabor = result.get(0);
 
 		assertEquals(existingOrgLabor, newOrgLabor);
 	}
@@ -168,7 +168,7 @@ public class OrgLaborPersistenceTest extends BasePersistenceTestCase {
 
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("orgLaborId", nextLong()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<OrgLabor> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

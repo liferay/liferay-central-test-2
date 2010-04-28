@@ -205,23 +205,23 @@ public abstract class TicketLocalServiceBaseImpl implements TicketLocalService {
 		ticketPersistence.remove(ticket);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
+	public List<Ticket> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return ticketPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
+	public List<Ticket> dynamicQuery(DynamicQuery dynamicQuery, int start,
 		int end) throws SystemException {
 		return ticketPersistence.findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
+	public List<Ticket> dynamicQuery(DynamicQuery dynamicQuery, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		return ticketPersistence.findWithDynamicQuery(dynamicQuery, start, end,
 			orderByComparator);
 	}
 
-	public int dynamicQueryCount(DynamicQuery dynamicQuery)
+	public long dynamicQueryCount(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return ticketPersistence.countWithDynamicQuery(dynamicQuery);
 	}

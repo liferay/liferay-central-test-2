@@ -124,11 +124,11 @@ public class ListTypePersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("listTypeId",
 				newListType.getListTypeId()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<ListType> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(1, result.size());
 
-		ListType existingListType = (ListType)result.get(0);
+		ListType existingListType = result.get(0);
 
 		assertEquals(existingListType, newListType);
 	}
@@ -139,7 +139,7 @@ public class ListTypePersistenceTest extends BasePersistenceTestCase {
 
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("listTypeId", nextInt()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<ListType> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

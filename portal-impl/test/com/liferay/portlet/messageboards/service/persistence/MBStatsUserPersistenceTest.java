@@ -134,11 +134,11 @@ public class MBStatsUserPersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("statsUserId",
 				newMBStatsUser.getStatsUserId()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<MBStatsUser> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(1, result.size());
 
-		MBStatsUser existingMBStatsUser = (MBStatsUser)result.get(0);
+		MBStatsUser existingMBStatsUser = result.get(0);
 
 		assertEquals(existingMBStatsUser, newMBStatsUser);
 	}
@@ -149,7 +149,7 @@ public class MBStatsUserPersistenceTest extends BasePersistenceTestCase {
 
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("statsUserId", nextLong()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<MBStatsUser> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

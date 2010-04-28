@@ -147,11 +147,11 @@ public class SubscriptionPersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("subscriptionId",
 				newSubscription.getSubscriptionId()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<Subscription> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(1, result.size());
 
-		Subscription existingSubscription = (Subscription)result.get(0);
+		Subscription existingSubscription = result.get(0);
 
 		assertEquals(existingSubscription, newSubscription);
 	}
@@ -162,7 +162,7 @@ public class SubscriptionPersistenceTest extends BasePersistenceTestCase {
 
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("subscriptionId", nextLong()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<Subscription> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

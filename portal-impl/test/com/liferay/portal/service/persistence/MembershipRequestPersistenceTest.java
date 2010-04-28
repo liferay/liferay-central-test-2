@@ -152,11 +152,11 @@ public class MembershipRequestPersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("membershipRequestId",
 				newMembershipRequest.getMembershipRequestId()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<MembershipRequest> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(1, result.size());
 
-		MembershipRequest existingMembershipRequest = (MembershipRequest)result.get(0);
+		MembershipRequest existingMembershipRequest = result.get(0);
 
 		assertEquals(existingMembershipRequest, newMembershipRequest);
 	}
@@ -168,7 +168,7 @@ public class MembershipRequestPersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("membershipRequestId",
 				nextLong()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<MembershipRequest> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

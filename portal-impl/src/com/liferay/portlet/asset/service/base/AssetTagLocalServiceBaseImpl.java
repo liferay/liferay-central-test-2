@@ -91,23 +91,23 @@ public abstract class AssetTagLocalServiceBaseImpl
 		assetTagPersistence.remove(assetTag);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
+	public List<AssetTag> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return assetTagPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
+	public List<AssetTag> dynamicQuery(DynamicQuery dynamicQuery, int start,
 		int end) throws SystemException {
 		return assetTagPersistence.findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
+	public List<AssetTag> dynamicQuery(DynamicQuery dynamicQuery, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		return assetTagPersistence.findWithDynamicQuery(dynamicQuery, start,
 			end, orderByComparator);
 	}
 
-	public int dynamicQueryCount(DynamicQuery dynamicQuery)
+	public long dynamicQueryCount(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return assetTagPersistence.countWithDynamicQuery(dynamicQuery);
 	}

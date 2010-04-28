@@ -209,24 +209,25 @@ public abstract class PasswordPolicyLocalServiceBaseImpl
 		passwordPolicyPersistence.remove(passwordPolicy);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
+	public List<PasswordPolicy> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return passwordPolicyPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end) throws SystemException {
+	public List<PasswordPolicy> dynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end) throws SystemException {
 		return passwordPolicyPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end, OrderByComparator orderByComparator) throws SystemException {
+	public List<PasswordPolicy> dynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
 		return passwordPolicyPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end, orderByComparator);
 	}
 
-	public int dynamicQueryCount(DynamicQuery dynamicQuery)
+	public long dynamicQueryCount(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return passwordPolicyPersistence.countWithDynamicQuery(dynamicQuery);
 	}

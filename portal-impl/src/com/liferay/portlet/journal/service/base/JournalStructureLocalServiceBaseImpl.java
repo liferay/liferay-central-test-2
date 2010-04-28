@@ -92,24 +92,25 @@ public abstract class JournalStructureLocalServiceBaseImpl
 		journalStructurePersistence.remove(journalStructure);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
+	public List<JournalStructure> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return journalStructurePersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end) throws SystemException {
+	public List<JournalStructure> dynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end) throws SystemException {
 		return journalStructurePersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end, OrderByComparator orderByComparator) throws SystemException {
+	public List<JournalStructure> dynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
 		return journalStructurePersistence.findWithDynamicQuery(dynamicQuery,
 			start, end, orderByComparator);
 	}
 
-	public int dynamicQueryCount(DynamicQuery dynamicQuery)
+	public long dynamicQueryCount(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return journalStructurePersistence.countWithDynamicQuery(dynamicQuery);
 	}

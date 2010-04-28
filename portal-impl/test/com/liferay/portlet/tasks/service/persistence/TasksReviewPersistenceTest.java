@@ -157,11 +157,11 @@ public class TasksReviewPersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("reviewId",
 				newTasksReview.getReviewId()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<TasksReview> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(1, result.size());
 
-		TasksReview existingTasksReview = (TasksReview)result.get(0);
+		TasksReview existingTasksReview = result.get(0);
 
 		assertEquals(existingTasksReview, newTasksReview);
 	}
@@ -172,7 +172,7 @@ public class TasksReviewPersistenceTest extends BasePersistenceTestCase {
 
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("reviewId", nextLong()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<TasksReview> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

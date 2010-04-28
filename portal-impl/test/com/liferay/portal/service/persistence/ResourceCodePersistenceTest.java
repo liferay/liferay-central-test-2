@@ -127,11 +127,11 @@ public class ResourceCodePersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("codeId",
 				newResourceCode.getCodeId()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<ResourceCode> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(1, result.size());
 
-		ResourceCode existingResourceCode = (ResourceCode)result.get(0);
+		ResourceCode existingResourceCode = result.get(0);
 
 		assertEquals(existingResourceCode, newResourceCode);
 	}
@@ -142,7 +142,7 @@ public class ResourceCodePersistenceTest extends BasePersistenceTestCase {
 
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("codeId", nextLong()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<ResourceCode> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

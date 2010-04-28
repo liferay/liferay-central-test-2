@@ -83,24 +83,25 @@ public abstract class BookmarksEntryLocalServiceBaseImpl
 		bookmarksEntryPersistence.remove(bookmarksEntry);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
+	public List<BookmarksEntry> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return bookmarksEntryPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end) throws SystemException {
+	public List<BookmarksEntry> dynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end) throws SystemException {
 		return bookmarksEntryPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end, OrderByComparator orderByComparator) throws SystemException {
+	public List<BookmarksEntry> dynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
 		return bookmarksEntryPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end, orderByComparator);
 	}
 
-	public int dynamicQueryCount(DynamicQuery dynamicQuery)
+	public long dynamicQueryCount(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return bookmarksEntryPersistence.countWithDynamicQuery(dynamicQuery);
 	}

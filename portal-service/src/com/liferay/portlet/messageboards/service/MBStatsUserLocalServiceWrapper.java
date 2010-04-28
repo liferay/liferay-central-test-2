@@ -60,19 +60,19 @@ public class MBStatsUserLocalServiceWrapper implements MBStatsUserLocalService {
 		_mbStatsUserLocalService.deleteMBStatsUser(mbStatsUser);
 	}
 
-	public java.util.List<Object> dynamicQuery(
+	public java.util.List<com.liferay.portlet.messageboards.model.MBStatsUser> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _mbStatsUserLocalService.dynamicQuery(dynamicQuery);
 	}
 
-	public java.util.List<Object> dynamicQuery(
+	public java.util.List<com.liferay.portlet.messageboards.model.MBStatsUser> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.kernel.exception.SystemException {
 		return _mbStatsUserLocalService.dynamicQuery(dynamicQuery, start, end);
 	}
 
-	public java.util.List<Object> dynamicQuery(
+	public java.util.List<com.liferay.portlet.messageboards.model.MBStatsUser> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -81,7 +81,7 @@ public class MBStatsUserLocalServiceWrapper implements MBStatsUserLocalService {
 			orderByComparator);
 	}
 
-	public int dynamicQueryCount(
+	public long dynamicQueryCount(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _mbStatsUserLocalService.dynamicQueryCount(dynamicQuery);
@@ -134,7 +134,7 @@ public class MBStatsUserLocalServiceWrapper implements MBStatsUserLocalService {
 		_mbStatsUserLocalService.deleteStatsUsersByUserId(userId);
 	}
 
-	public int getMessageCountByUserId(long userId)
+	public long getMessageCountByUserId(long userId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _mbStatsUserLocalService.getMessageCountByUserId(userId);
 	}

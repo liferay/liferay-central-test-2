@@ -85,24 +85,24 @@ public abstract class DLFileRankLocalServiceBaseImpl
 		dlFileRankPersistence.remove(dlFileRank);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
+	public List<DLFileRank> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return dlFileRankPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
+	public List<DLFileRank> dynamicQuery(DynamicQuery dynamicQuery, int start,
 		int end) throws SystemException {
 		return dlFileRankPersistence.findWithDynamicQuery(dynamicQuery, start,
 			end);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
+	public List<DLFileRank> dynamicQuery(DynamicQuery dynamicQuery, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		return dlFileRankPersistence.findWithDynamicQuery(dynamicQuery, start,
 			end, orderByComparator);
 	}
 
-	public int dynamicQueryCount(DynamicQuery dynamicQuery)
+	public long dynamicQueryCount(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return dlFileRankPersistence.countWithDynamicQuery(dynamicQuery);
 	}

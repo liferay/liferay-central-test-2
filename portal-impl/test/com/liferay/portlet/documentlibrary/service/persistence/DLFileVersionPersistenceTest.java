@@ -165,11 +165,11 @@ public class DLFileVersionPersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("fileVersionId",
 				newDLFileVersion.getFileVersionId()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<DLFileVersion> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(1, result.size());
 
-		DLFileVersion existingDLFileVersion = (DLFileVersion)result.get(0);
+		DLFileVersion existingDLFileVersion = result.get(0);
 
 		assertEquals(existingDLFileVersion, newDLFileVersion);
 	}
@@ -180,7 +180,7 @@ public class DLFileVersionPersistenceTest extends BasePersistenceTestCase {
 
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("fileVersionId", nextLong()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<DLFileVersion> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

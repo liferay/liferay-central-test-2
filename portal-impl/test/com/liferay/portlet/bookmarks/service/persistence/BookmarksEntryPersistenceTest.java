@@ -160,11 +160,11 @@ public class BookmarksEntryPersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("entryId",
 				newBookmarksEntry.getEntryId()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<BookmarksEntry> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(1, result.size());
 
-		BookmarksEntry existingBookmarksEntry = (BookmarksEntry)result.get(0);
+		BookmarksEntry existingBookmarksEntry = result.get(0);
 
 		assertEquals(existingBookmarksEntry, newBookmarksEntry);
 	}
@@ -175,7 +175,7 @@ public class BookmarksEntryPersistenceTest extends BasePersistenceTestCase {
 
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("entryId", nextLong()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<BookmarksEntry> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

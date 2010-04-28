@@ -139,11 +139,11 @@ public class WebDAVPropsPersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("webDavPropsId",
 				newWebDAVProps.getWebDavPropsId()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<WebDAVProps> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(1, result.size());
 
-		WebDAVProps existingWebDAVProps = (WebDAVProps)result.get(0);
+		WebDAVProps existingWebDAVProps = result.get(0);
 
 		assertEquals(existingWebDAVProps, newWebDAVProps);
 	}
@@ -154,7 +154,7 @@ public class WebDAVPropsPersistenceTest extends BasePersistenceTestCase {
 
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("webDavPropsId", nextLong()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<WebDAVProps> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

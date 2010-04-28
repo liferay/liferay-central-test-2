@@ -149,11 +149,11 @@ public class ShoppingItemPricePersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("itemPriceId",
 				newShoppingItemPrice.getItemPriceId()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<ShoppingItemPrice> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(1, result.size());
 
-		ShoppingItemPrice existingShoppingItemPrice = (ShoppingItemPrice)result.get(0);
+		ShoppingItemPrice existingShoppingItemPrice = result.get(0);
 
 		assertEquals(existingShoppingItemPrice, newShoppingItemPrice);
 	}
@@ -164,7 +164,7 @@ public class ShoppingItemPricePersistenceTest extends BasePersistenceTestCase {
 
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("itemPriceId", nextLong()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<ShoppingItemPrice> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

@@ -209,24 +209,24 @@ public abstract class PermissionLocalServiceBaseImpl
 		permissionPersistence.remove(permission);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
+	public List<Permission> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return permissionPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
+	public List<Permission> dynamicQuery(DynamicQuery dynamicQuery, int start,
 		int end) throws SystemException {
 		return permissionPersistence.findWithDynamicQuery(dynamicQuery, start,
 			end);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
+	public List<Permission> dynamicQuery(DynamicQuery dynamicQuery, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		return permissionPersistence.findWithDynamicQuery(dynamicQuery, start,
 			end, orderByComparator);
 	}
 
-	public int dynamicQueryCount(DynamicQuery dynamicQuery)
+	public long dynamicQueryCount(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return permissionPersistence.countWithDynamicQuery(dynamicQuery);
 	}

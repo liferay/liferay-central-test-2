@@ -131,11 +131,11 @@ public class UserIdMapperPersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("userIdMapperId",
 				newUserIdMapper.getUserIdMapperId()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<UserIdMapper> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(1, result.size());
 
-		UserIdMapper existingUserIdMapper = (UserIdMapper)result.get(0);
+		UserIdMapper existingUserIdMapper = result.get(0);
 
 		assertEquals(existingUserIdMapper, newUserIdMapper);
 	}
@@ -146,7 +146,7 @@ public class UserIdMapperPersistenceTest extends BasePersistenceTestCase {
 
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("userIdMapperId", nextLong()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<UserIdMapper> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

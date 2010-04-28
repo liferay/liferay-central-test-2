@@ -209,24 +209,24 @@ public abstract class UserTrackerLocalServiceBaseImpl
 		userTrackerPersistence.remove(userTracker);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
+	public List<UserTracker> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return userTrackerPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
+	public List<UserTracker> dynamicQuery(DynamicQuery dynamicQuery, int start,
 		int end) throws SystemException {
 		return userTrackerPersistence.findWithDynamicQuery(dynamicQuery, start,
 			end);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
+	public List<UserTracker> dynamicQuery(DynamicQuery dynamicQuery, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		return userTrackerPersistence.findWithDynamicQuery(dynamicQuery, start,
 			end, orderByComparator);
 	}
 
-	public int dynamicQueryCount(DynamicQuery dynamicQuery)
+	public long dynamicQueryCount(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return userTrackerPersistence.countWithDynamicQuery(dynamicQuery);
 	}

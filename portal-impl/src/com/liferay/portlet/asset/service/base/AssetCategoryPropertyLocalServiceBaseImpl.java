@@ -95,24 +95,25 @@ public abstract class AssetCategoryPropertyLocalServiceBaseImpl
 		assetCategoryPropertyPersistence.remove(assetCategoryProperty);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
+	public List<AssetCategoryProperty> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return assetCategoryPropertyPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end) throws SystemException {
+	public List<AssetCategoryProperty> dynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end) throws SystemException {
 		return assetCategoryPropertyPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end, OrderByComparator orderByComparator) throws SystemException {
+	public List<AssetCategoryProperty> dynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
 		return assetCategoryPropertyPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end, orderByComparator);
 	}
 
-	public int dynamicQueryCount(DynamicQuery dynamicQuery)
+	public long dynamicQueryCount(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return assetCategoryPropertyPersistence.countWithDynamicQuery(dynamicQuery);
 	}

@@ -155,11 +155,11 @@ public class SCFrameworkVersionPersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("frameworkVersionId",
 				newSCFrameworkVersion.getFrameworkVersionId()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<SCFrameworkVersion> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(1, result.size());
 
-		SCFrameworkVersion existingSCFrameworkVersion = (SCFrameworkVersion)result.get(0);
+		SCFrameworkVersion existingSCFrameworkVersion = result.get(0);
 
 		assertEquals(existingSCFrameworkVersion, newSCFrameworkVersion);
 	}
@@ -171,7 +171,7 @@ public class SCFrameworkVersionPersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("frameworkVersionId",
 				nextLong()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<SCFrameworkVersion> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

@@ -208,24 +208,24 @@ public abstract class ClassNameLocalServiceBaseImpl
 		classNamePersistence.remove(className);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
+	public List<ClassName> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return classNamePersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
+	public List<ClassName> dynamicQuery(DynamicQuery dynamicQuery, int start,
 		int end) throws SystemException {
 		return classNamePersistence.findWithDynamicQuery(dynamicQuery, start,
 			end);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
+	public List<ClassName> dynamicQuery(DynamicQuery dynamicQuery, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		return classNamePersistence.findWithDynamicQuery(dynamicQuery, start,
 			end, orderByComparator);
 	}
 
-	public int dynamicQueryCount(DynamicQuery dynamicQuery)
+	public long dynamicQueryCount(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return classNamePersistence.countWithDynamicQuery(dynamicQuery);
 	}

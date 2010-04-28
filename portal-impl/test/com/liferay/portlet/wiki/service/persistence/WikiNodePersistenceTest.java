@@ -145,11 +145,11 @@ public class WikiNodePersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("nodeId",
 				newWikiNode.getNodeId()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<WikiNode> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(1, result.size());
 
-		WikiNode existingWikiNode = (WikiNode)result.get(0);
+		WikiNode existingWikiNode = result.get(0);
 
 		assertEquals(existingWikiNode, newWikiNode);
 	}
@@ -160,7 +160,7 @@ public class WikiNodePersistenceTest extends BasePersistenceTestCase {
 
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("nodeId", nextLong()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<WikiNode> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

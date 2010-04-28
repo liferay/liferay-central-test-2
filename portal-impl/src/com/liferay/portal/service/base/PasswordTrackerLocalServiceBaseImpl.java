@@ -209,24 +209,25 @@ public abstract class PasswordTrackerLocalServiceBaseImpl
 		passwordTrackerPersistence.remove(passwordTracker);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
+	public List<PasswordTracker> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return passwordTrackerPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end) throws SystemException {
+	public List<PasswordTracker> dynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end) throws SystemException {
 		return passwordTrackerPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end, OrderByComparator orderByComparator) throws SystemException {
+	public List<PasswordTracker> dynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
 		return passwordTrackerPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end, orderByComparator);
 	}
 
-	public int dynamicQueryCount(DynamicQuery dynamicQuery)
+	public long dynamicQueryCount(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return passwordTrackerPersistence.countWithDynamicQuery(dynamicQuery);
 	}

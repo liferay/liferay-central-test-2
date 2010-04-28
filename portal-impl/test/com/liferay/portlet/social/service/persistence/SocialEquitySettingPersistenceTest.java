@@ -146,11 +146,11 @@ public class SocialEquitySettingPersistenceTest extends BasePersistenceTestCase 
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("equitySettingId",
 				newSocialEquitySetting.getEquitySettingId()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<SocialEquitySetting> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(1, result.size());
 
-		SocialEquitySetting existingSocialEquitySetting = (SocialEquitySetting)result.get(0);
+		SocialEquitySetting existingSocialEquitySetting = result.get(0);
 
 		assertEquals(existingSocialEquitySetting, newSocialEquitySetting);
 	}
@@ -162,7 +162,7 @@ public class SocialEquitySettingPersistenceTest extends BasePersistenceTestCase 
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("equitySettingId",
 				nextLong()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<SocialEquitySetting> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

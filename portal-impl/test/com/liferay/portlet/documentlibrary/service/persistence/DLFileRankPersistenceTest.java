@@ -137,11 +137,11 @@ public class DLFileRankPersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("fileRankId",
 				newDLFileRank.getFileRankId()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<DLFileRank> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(1, result.size());
 
-		DLFileRank existingDLFileRank = (DLFileRank)result.get(0);
+		DLFileRank existingDLFileRank = result.get(0);
 
 		assertEquals(existingDLFileRank, newDLFileRank);
 	}
@@ -152,7 +152,7 @@ public class DLFileRankPersistenceTest extends BasePersistenceTestCase {
 
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("fileRankId", nextLong()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<DLFileRank> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

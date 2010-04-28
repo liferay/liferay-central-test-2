@@ -209,24 +209,25 @@ public abstract class SubscriptionLocalServiceBaseImpl
 		subscriptionPersistence.remove(subscription);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
+	public List<Subscription> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return subscriptionPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end) throws SystemException {
+	public List<Subscription> dynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end) throws SystemException {
 		return subscriptionPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end, OrderByComparator orderByComparator) throws SystemException {
+	public List<Subscription> dynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
 		return subscriptionPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end, orderByComparator);
 	}
 
-	public int dynamicQueryCount(DynamicQuery dynamicQuery)
+	public long dynamicQueryCount(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return subscriptionPersistence.countWithDynamicQuery(dynamicQuery);
 	}

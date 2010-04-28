@@ -204,23 +204,23 @@ public abstract class LockLocalServiceBaseImpl implements LockLocalService {
 		lockPersistence.remove(lock);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
+	public List<Lock> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return lockPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end) throws SystemException {
+	public List<Lock> dynamicQuery(DynamicQuery dynamicQuery, int start, int end)
+		throws SystemException {
 		return lockPersistence.findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
+	public List<Lock> dynamicQuery(DynamicQuery dynamicQuery, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		return lockPersistence.findWithDynamicQuery(dynamicQuery, start, end,
 			orderByComparator);
 	}
 
-	public int dynamicQueryCount(DynamicQuery dynamicQuery)
+	public long dynamicQueryCount(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return lockPersistence.countWithDynamicQuery(dynamicQuery);
 	}

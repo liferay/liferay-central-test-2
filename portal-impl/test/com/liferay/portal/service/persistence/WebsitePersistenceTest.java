@@ -143,11 +143,11 @@ public class WebsitePersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("websiteId",
 				newWebsite.getWebsiteId()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<Website> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(1, result.size());
 
-		Website existingWebsite = (Website)result.get(0);
+		Website existingWebsite = result.get(0);
 
 		assertEquals(existingWebsite, newWebsite);
 	}
@@ -158,7 +158,7 @@ public class WebsitePersistenceTest extends BasePersistenceTestCase {
 
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("websiteId", nextLong()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<Website> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

@@ -156,11 +156,11 @@ public class SocialRequestPersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("requestId",
 				newSocialRequest.getRequestId()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<SocialRequest> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(1, result.size());
 
-		SocialRequest existingSocialRequest = (SocialRequest)result.get(0);
+		SocialRequest existingSocialRequest = result.get(0);
 
 		assertEquals(existingSocialRequest, newSocialRequest);
 	}
@@ -171,7 +171,7 @@ public class SocialRequestPersistenceTest extends BasePersistenceTestCase {
 
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("requestId", nextLong()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<SocialRequest> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

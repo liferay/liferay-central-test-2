@@ -143,11 +143,11 @@ public class JournalArticleImagePersistenceTest extends BasePersistenceTestCase 
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("articleImageId",
 				newJournalArticleImage.getArticleImageId()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<JournalArticleImage> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(1, result.size());
 
-		JournalArticleImage existingJournalArticleImage = (JournalArticleImage)result.get(0);
+		JournalArticleImage existingJournalArticleImage = result.get(0);
 
 		assertEquals(existingJournalArticleImage, newJournalArticleImage);
 	}
@@ -158,7 +158,7 @@ public class JournalArticleImagePersistenceTest extends BasePersistenceTestCase 
 
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("articleImageId", nextLong()));
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<JournalArticleImage> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}
