@@ -326,22 +326,21 @@ public class ThemeUtil {
 			(ComponentContext)request.getAttribute(
 				ComponentConstants.COMPONENT_CONTEXT);
 
-		if (componentContext != null) {
-			ThemeDisplay themeDisplay =
-				(ThemeDisplay)request.getAttribute(
-					WebKeys.THEME_DISPLAY);
-
-			String tilesTitle = (String)componentContext.getAttribute(
-				"title");
-			String tilesContent = (String)componentContext.getAttribute(
-				"content");
-			boolean tilesSelectable = GetterUtil.getBoolean(
-				(String)componentContext.getAttribute("selectable"));
-
-			themeDisplay.setTilesTitle(tilesTitle);
-			themeDisplay.setTilesContent(tilesContent);
-			themeDisplay.setTilesSelectable(tilesSelectable);
+		if (componentContext == null) {
+			return;
 		}
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		String tilesTitle = (String)componentContext.getAttribute("title");
+		String tilesContent = (String)componentContext.getAttribute("content");
+		boolean tilesSelectable = GetterUtil.getBoolean(
+			(String)componentContext.getAttribute("selectable"));
+
+		themeDisplay.setTilesTitle(tilesTitle);
+		themeDisplay.setTilesContent(tilesContent);
+		themeDisplay.setTilesSelectable(tilesSelectable);
 	}
 
 	private static final String _TEMPLATE_EXTENSION_FTL = "ftl";
