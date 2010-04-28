@@ -16,6 +16,7 @@ package com.liferay.portal.upgrade.v6_0_2;
 
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.util.PortletKeys;
 
@@ -23,12 +24,15 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * <a href="UpgradeNestedPortlets.java.html"><b><i>View Source</i></b></a>
  *
+ * @author Wesley Gong
  * @author Bijan Vakili
  * @author Douglas Wong
- * @author Wesley Gong
  * @author Brian Wing Shun Chan
  */
 public class UpgradeNestedPortlets extends UpgradeProcess {
@@ -49,8 +53,23 @@ public class UpgradeNestedPortlets extends UpgradeProcess {
 				long plid = rs.getLong("plid");
 				String typeSettings = rs.getString("typeSettings");
 
-				String newTypeSettings = typeSettings.replaceAll(
-					_REPLACE_PATTERN, "_$1_$2");
+				Matcher matcher = _pattern.matcher(typeSettings);
+				String newTypeSettings = typeSettings;
+
+				while (matcher.find()) {
+					String colVariable = matcher.group();
+
+					int expectedNumOfUnderscores = StringUtil.count(
+						PortletConstants.INSTANCE_SEPARATOR, "_") + 1;
+					int numOfUnderscores = StringUtil.count(colVariable, "_");
+
+					if (expectedNumOfUnderscores == numOfUnderscores) {
+						String newColVariable = colVariable.replaceAll(
+							_pattern.pattern(), "_$1_$2");
+						newTypeSettings = newTypeSettings.replaceAll(
+							colVariable, newColVariable);
+					}
+				}
 
 				if (!newTypeSettings.equals(typeSettings)) {
 					updateTypeSettings(plid, newTypeSettings);
@@ -88,8 +107,9 @@ public class UpgradeNestedPortlets extends UpgradeProcess {
 			"'%nested-column-ids=" + PortletKeys.NESTED_PORTLETS +
 				PortletConstants.INSTANCE_SEPARATOR + "%'";
 
-	private static final String _REPLACE_PATTERN =
+	private static Pattern _pattern = Pattern.compile(
 		"(" + PortletKeys.NESTED_PORTLETS +
-			PortletConstants.INSTANCE_SEPARATOR + ".+?_)([^,]*)";
+			PortletConstants.INSTANCE_SEPARATOR +
+				"[^_,\\s=]+_)([^_,\\s=]+)");
 
 }
