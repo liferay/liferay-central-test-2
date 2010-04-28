@@ -1462,7 +1462,7 @@ AUI().add(
 
 					if (canSubmit) {
 						if (cmd == 'publish') {
-							workflowActionInput.val(0);
+							workflowActionInput.val(Liferay.Workflow.STATUS_APPROVED);
 
 							cmd = instance.articleId ? 'update' : 'add';
 						}
