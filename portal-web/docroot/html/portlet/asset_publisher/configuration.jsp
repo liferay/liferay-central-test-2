@@ -70,7 +70,7 @@ AssetRendererFactory rendererFactory = AssetRendererFactoryRegistryUtil.getAsset
 	}
 </style>
 
-<liferay-util:buffer var="assetType">
+<liferay-util:buffer var="selectAssetTypeInput">
 	<aui:select label='<%= selectionStyle.equals("manual") ? "asset-type" : StringPool.BLANK %>' name="anyAssetType">
 		<aui:option label="any" selected="<%= anyAssetType %>" value="<%= true %>" />
 		<aui:option label='<%= LanguageUtil.get(pageContext, "filter[action]") + "..." %>' selected="<%= !anyAssetType %>" value="<%= false %>" />
@@ -152,7 +152,7 @@ AssetRendererFactory rendererFactory = AssetRendererFactoryRegistryUtil.getAsset
 								String portletId = portletResource;
 								%>
 
-								<%= assetType %>
+								<%= selectAssetTypeInput %>
 
 								<%@ include file="/html/portlet/asset_publisher/add_asset.jspf" %>
 
@@ -362,7 +362,7 @@ AssetRendererFactory rendererFactory = AssetRendererFactoryRegistryUtil.getAsset
 							</aui:fieldset>
 
 							<aui:fieldset label="asset-entry-type">
-								<%= assetType %>
+								<%= selectAssetTypeInput %>
 							</aui:fieldset>
 						</liferay-ui:panel>
 
