@@ -33,6 +33,49 @@ Group group = themeDisplay.getScopeGroup();
 String keywords = ParamUtil.getString(request, "keywords");
 
 String format = ParamUtil.getString(request, "format");
+
+List<Portlet> portlets = PortletLocalServiceUtil.getPortlets(company.getCompanyId(), includeSystemPortlets, false);
+
+portlets = ListUtil.sort(portlets, new PortletTitleComparator(application, locale));
+
+Iterator itr = portlets.iterator();
+
+List<String> portletTitles = new ArrayList<String>();
+
+while (itr.hasNext()) {
+	Portlet portlet = (Portlet)itr.next();
+
+	if (Validator.isNull(portlet.getOpenSearchClass())) {
+		itr.remove();
+
+		continue;
+	}
+
+	OpenSearch openSearch = portlet.getOpenSearchInstance();
+
+	if (!openSearch.isEnabled()) {
+		itr.remove();
+
+		continue;
+	}
+
+	portletTitles.add(PortalUtil.getPortletTitle(portlet, application, locale));
+}
+
+if (Validator.isNotNull(primarySearch)) {
+	for (int i = 0; i < portlets.size(); i++) {
+		Portlet portlet = (Portlet)portlets.get(i);
+
+		if (portlet.getOpenSearchClass().equals(primarySearch)) {
+			if (i != 0) {
+				portlets.remove(i);
+				portlets.add(0, portlet);
+			}
+
+			break;
+		}
+	}
+}
 %>
 
 <portlet:renderURL var="searchURL">
@@ -56,51 +99,6 @@ String format = ParamUtil.getString(request, "format");
 	<aui:button-row>
 		<aui:button onClick='<%= renderResponse.getNamespace() + "addSearchProvider();" %>' type="button" value='<%= LanguageUtil.format(pageContext, "add-x-as-a-search-provider", company.getName(), false) %>' />
 	</aui:button-row>
-
-	<%
-	List<Portlet> portlets = PortletLocalServiceUtil.getPortlets(company.getCompanyId(), includeSystemPortlets, false);
-
-	portlets = ListUtil.sort(portlets, new PortletTitleComparator(application, locale));
-
-	Iterator itr = portlets.iterator();
-
-	List<String> portletTitles = new ArrayList<String>();
-
-	while (itr.hasNext()) {
-		Portlet portlet = (Portlet)itr.next();
-
-		if (Validator.isNull(portlet.getOpenSearchClass())) {
-			itr.remove();
-
-			continue;
-		}
-
-		OpenSearch openSearch = portlet.getOpenSearchInstance();
-
-		if (!openSearch.isEnabled()) {
-			itr.remove();
-
-			continue;
-		}
-
-		portletTitles.add(PortalUtil.getPortletTitle(portlet, application, locale));
-	}
-
-	if (Validator.isNotNull(primarySearch)) {
-		for (int i = 0; i < portlets.size(); i++) {
-			Portlet portlet = (Portlet)portlets.get(i);
-
-			if (portlet.getOpenSearchClass().equals(primarySearch)) {
-				if (i != 0) {
-					portlets.remove(i);
-					portlets.add(0, portlet);
-				}
-
-				break;
-			}
-		}
-	}
-	%>
 
 	<div class="search-msg">
 		<c:choose>
