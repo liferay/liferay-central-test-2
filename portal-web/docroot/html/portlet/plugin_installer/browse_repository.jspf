@@ -13,12 +13,6 @@
  * details.
  */
 %>
-<style type="text/css">
-	.search-params.aui-field-row .aui-field {
-		float: left;
-		margin-bottom: 1em;
-	}
-</style>
 
 <%
 String keywords = ParamUtil.getString(request, "keywords");
@@ -27,6 +21,13 @@ String searchRepositoryURL = ParamUtil.getString(request, "searchRepositoryURL")
 String license = ParamUtil.getString(request, "license");
 String installStatus = ParamUtil.getString(request, "installStatus", PluginPackageImpl.STATUS_NOT_INSTALLED_OR_OLDER_VERSION_INSTALLED);
 %>
+
+<style type="text/css">
+	.search-params.aui-field-row .aui-field {
+		float: left;
+		margin-bottom: 1em;
+	}
+</style>
 
 <liferay-ui:tabs
 	names="portlet-plugins,theme-plugins,layout-template-plugins,hook-plugins,web-plugins"
@@ -37,6 +38,7 @@ String installStatus = ParamUtil.getString(request, "installStatus", PluginPacka
 <%
 try {
 %>
+
 	<aui:fieldset cssClass="aui-field-row search-params">
 		<aui:input name="keywords" size="30" type="text" value="<%= HtmlUtil.escape(keywords) %>" />
 
