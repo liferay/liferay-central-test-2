@@ -156,7 +156,7 @@ definePermissionsURL.setParameter(Constants.CMD, Constants.VIEW);
 		<%
 		List<String> actions = ResourceActionsUtil.getResourceActions(portletResource, modelResource);
 
-		List<Role> roles = ResourceActionsUtil.getRoles(group, modelResource);
+		List<Role> roles = ResourceActionsUtil.getRoles(company.getCompanyId(), group, modelResource);
 
 		Role administrator = RoleLocalServiceUtil.getRole(company.getCompanyId(), RoleConstants.ADMINISTRATOR);
 
