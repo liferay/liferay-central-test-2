@@ -25,6 +25,7 @@ import com.liferay.portal.upgrade.v6_0_0.UpgradeBlogs;
 import com.liferay.portal.upgrade.v6_0_0.UpgradeDocumentLibrary;
 import com.liferay.portal.upgrade.v6_0_0.UpgradeExpando;
 import com.liferay.portal.upgrade.v6_0_0.UpgradeJournal;
+import com.liferay.portal.upgrade.v6_0_0.UpgradeNested;
 import com.liferay.portal.upgrade.v6_0_0.UpgradePolls;
 import com.liferay.portal.upgrade.v6_0_0.UpgradePortletId;
 import com.liferay.portal.upgrade.v6_0_0.UpgradeResourceAction;
@@ -34,6 +35,7 @@ import com.liferay.portal.upgrade.v6_0_0.UpgradeShopping;
  * <a href="UpgradeProcess_5_2_5_to_6_0_0.java.html"><b><i>View Source</i></b>
  * </a>
  *
+ * @author Bijan Vakili
  * @author Douglas Wong
  */
 public class UpgradeProcess_5_2_5_to_6_0_0 extends UpgradeProcess {
@@ -51,6 +53,7 @@ public class UpgradeProcess_5_2_5_to_6_0_0 extends UpgradeProcess {
 		upgrade(UpgradeExpando.class);
 		upgrade(UpgradeGroup.class);
 		upgrade(UpgradeJournal.class);
+		upgrade(UpgradeNested.class);
 		upgrade(UpgradePolls.class);
 		upgrade(UpgradePortletId.class);
 		upgrade(UpgradeResourceAction.class);
