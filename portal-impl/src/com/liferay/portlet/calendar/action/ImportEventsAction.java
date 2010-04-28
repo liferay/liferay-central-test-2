@@ -70,7 +70,9 @@ public class ImportEventsAction extends PortletAction {
 			if (!(e instanceof ImportEventsException)) {
 				_log.error(e, e);
 			}
+
 			SessionErrors.add(actionRequest, e.getClass().getName());
+
 			setForward(actionRequest, "portlet.calendar.error");
 		}
 	}
