@@ -890,13 +890,12 @@ public class MainServlet extends ActionServlet {
 				if (GetterUtil.getBoolean(
 						PropsUtil.get(
 							"asset.renderer.enabled." +
-								assetRendererFactory.getClass().getName()))) {
+								assetRendererFactory.getClass().getName()),
+									true)) {
 
-					continue;
+					AssetRendererFactoryRegistryUtil.register(
+						assetRendererFactory);
 				}
-
-				AssetRendererFactoryRegistryUtil.register(
-					assetRendererFactory);
 			}
 		}
 	}
