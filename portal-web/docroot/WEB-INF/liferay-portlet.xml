@@ -875,7 +875,6 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
-		<ajaxable>false</ajaxable>
 		<header-portlet-css>/html/portlet/asset_tags_admin/css.jsp</header-portlet-css>
 		<footer-portal-javascript>/html/js/liferay/service.js</footer-portal-javascript>
 		<footer-portlet-javascript>/html/portlet/asset_tags_admin/javascript.js</footer-portlet-javascript>
@@ -1447,7 +1446,6 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
-		<ajaxable>false</ajaxable>
 		<header-portlet-css>/html/portlet/communities/css.jsp</header-portlet-css>
 		<header-portlet-css>/html/portlet/enterprise_admin/css.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-enterprise-admin</css-class-wrapper>
@@ -1464,7 +1462,6 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
-		<ajaxable>false</ajaxable>
 		<header-portlet-css>/html/portlet/asset_category_admin/css.jsp</header-portlet-css>
 		<footer-portal-javascript>/html/js/liferay/service.js</footer-portal-javascript>
 		<footer-portlet-javascript>/html/portlet/asset_category_admin/javascript.js</footer-portlet-javascript>
@@ -1496,7 +1493,6 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
-		<ajaxable>false</ajaxable>
 		<header-portlet-css>/html/portlet/communities/css.jsp</header-portlet-css>
 		<header-portlet-css>/html/portlet/enterprise_admin/css.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-enterprise-admin</css-class-wrapper>
@@ -1513,7 +1509,6 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
-		<ajaxable>false</ajaxable>
 		<header-portlet-css>/html/portlet/workflow_tasks/css.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-workflow-tasks</css-class-wrapper>
 	</portlet>
@@ -1529,7 +1524,6 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
-		<ajaxable>false</ajaxable>
 		<header-portlet-css>/html/portlet/workflow_definitions/css.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-workflow-definitions</css-class-wrapper>
 	</portlet>
@@ -1545,7 +1539,6 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
-		<ajaxable>false</ajaxable>
 		<header-portlet-css>/html/portlet/workflow_definitions/css.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-workflow-definitions</css-class-wrapper>
 	</portlet>
@@ -1561,7 +1554,6 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
-		<ajaxable>false</ajaxable>
 		<header-portlet-css>/html/portlet/enterprise_admin/css.jsp</header-portlet-css>
 		<header-portlet-css>/html/portlet/workflow_tasks/css.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-workflow-tasks</css-class-wrapper>
