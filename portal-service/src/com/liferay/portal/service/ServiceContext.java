@@ -147,16 +147,16 @@ public class ServiceContext implements Serializable {
 		return _scopeGroupId;
 	}
 
-	public int getStatus() {
-		return _status;
-	}
-
 	public String getUserDisplayURL() {
 		return _userDisplayURL;
 	}
 
 	public long getUserId() {
 		return _userId;
+	}
+
+	public int getWorkflowAction() {
+		return _workflowAction;
 	}
 
 	public boolean isCommandAdd() {
@@ -265,16 +265,16 @@ public class ServiceContext implements Serializable {
 		_scopeGroupId = scopeGroupId;
 	}
 
-	public void setStatus(int status) {
-		_status = status;
-	}
-
 	public void setUserDisplayURL(String userDisplayURL) {
 		_userDisplayURL = userDisplayURL;
 	}
 
 	public void setUserId(long userId) {
 		_userId = userId;
+	}
+
+	public void setWorkflowAction(int workflowAction) {
+		_workflowAction = workflowAction;
 	}
 
 	private boolean _addCommunityPermissions;
@@ -298,7 +298,7 @@ public class ServiceContext implements Serializable {
 	private long _scopeGroupId;
 	private String _userDisplayURL;
 	private long _plid;
-	private int _status = WorkflowConstants.STATUS_APPROVED;
+	private int _workflowAction = WorkflowConstants.ACTION_PUBLISH;
 	private long _userId;
 
 }

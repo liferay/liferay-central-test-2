@@ -262,10 +262,6 @@
 
 					<br /><br />
 
-					<c:if test="<%= !article.isApproved() && !WorkflowInstanceLinkLocalServiceUtil.hasWorkflowInstanceLink(company.getCompanyId(), groupId, JournalArticle.class.getName(), article.getId()) && JournalPermission.contains(permissionChecker, scopeGroupId, ActionKeys.APPROVE_ARTICLE) %>">
-						<aui:button onClick='<%= renderResponse.getNamespace() + "approveArticle();" %>' value="approve" />
-					</c:if>
-
 					<c:if test="<%= !article.isExpired() && JournalArticlePermission.contains(permissionChecker, article, ActionKeys.EXPIRE) %>">
 						<aui:button onClick='<%= renderResponse.getNamespace() + "expireArticle();" %>' value="expire" />
 					</c:if>

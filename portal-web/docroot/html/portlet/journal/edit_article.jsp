@@ -252,7 +252,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 	<aui:input name="defaultLocale" type="hidden" value="<%= defaultLanguageId %>" />
 	<aui:input name="parentStructureId" type="hidden" value="<%= parentStructureId %>" />
 	<aui:input name="articleURL" type="hidden" value="<%= editArticleRenderURL %>" />
-	<aui:input name="approve" type="hidden" />
+	<aui:input name="workflowAction" type="hidden" value="<%= String.valueOf(WorkflowConstants.ACTION_SAVE_DRAFT) %>" />
 	<aui:input name="saveAndContinue" type="hidden" />
 	<aui:input name="deleteArticleIds" type="hidden" value="<%= articleId + EditArticleAction.VERSION_SEPARATOR + version %>" />
 	<aui:input name="expireArticleIds" type="hidden" value="<%= articleId + EditArticleAction.VERSION_SEPARATOR + version %>" />
@@ -566,22 +566,22 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 					<aui:button name="saveArticleAndContinueBtn" value="save-and-continue" />
 
 					<%
-					boolean showSaveAndApproveButton = false;
+					boolean publishButton = false;
 
 					if (JournalPermission.contains(permissionChecker, scopeGroupId, ActionKeys.APPROVE_ARTICLE)) {
 						if (article == null) {
 							if (!WorkflowDefinitionLinkLocalServiceUtil.hasWorkflowDefinitionLink(company.getCompanyId(), groupId, JournalArticle.class.getName())) {
-								showSaveAndApproveButton = true;
+								publishButton = true;
 							}
 						}
 						else if (!article.isApproved() && !WorkflowInstanceLinkLocalServiceUtil.hasWorkflowInstanceLink(company.getCompanyId(), groupId, JournalArticle.class.getName(), article.getId())) {
-							showSaveAndApproveButton = true;
+							publishButton = true;
 						}
 					}
 					%>
 
-					<c:if test="<%= showSaveAndApproveButton %>">
-						<aui:button name="saveArticleAndApproveBtn" value="save-and-approve" />
+					<c:if test="<%= publishButton %>">
+						<aui:button name="publishBtn" value="publish" />
 					</c:if>
 				</c:if>
 

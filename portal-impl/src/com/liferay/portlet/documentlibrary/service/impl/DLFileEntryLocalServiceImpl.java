@@ -192,10 +192,17 @@ public class DLFileEntryLocalServiceImpl
 
 		// File version
 
+		int status =  WorkflowConstants.STATUS_DRAFT;
+
+		if (serviceContext.getWorkflowAction() ==
+				WorkflowConstants.ACTION_PUBLISH) {
+
+			status =  WorkflowConstants.STATUS_PENDING;
+		}
+
 		addFileVersion(
 			user, fileEntry, serviceContext.getModifiedDate(now),
-			DLFileEntryConstants.DEFAULT_VERSION, null, size,
-			serviceContext.getStatus());
+			DLFileEntryConstants.DEFAULT_VERSION, null, size, status);
 
 		// Folder
 
@@ -218,7 +225,7 @@ public class DLFileEntryLocalServiceImpl
 		if (PropsValues.DL_FILE_ENTRY_COMMENTS_ENABLED) {
 			mbMessageLocalService.addDiscussionMessage(
 				userId, fileEntry.getUserName(), DLFileEntry.class.getName(),
-				fileEntryId, WorkflowConstants.STATUS_APPROVED);
+				fileEntryId, WorkflowConstants.ACTION_PUBLISH);
 		}
 
 		// File
@@ -229,16 +236,15 @@ public class DLFileEntryLocalServiceImpl
 			fileEntryId, fileEntry.getLuceneProperties(),
 			fileEntry.getModifiedDate(), serviceContext, is);
 
-		// Status
-
-		fileEntry = updateStatus(
-			userId, fileEntryId, serviceContext.getStatus(), serviceContext);
-
 		// Workflow
 
-		WorkflowHandlerRegistryUtil.startWorkflowInstance(
-			user.getCompanyId(), groupId, userId, DLFileEntry.class.getName(),
-			fileEntryId, fileEntry, null);
+		if (serviceContext.getWorkflowAction() ==
+				WorkflowConstants.ACTION_PUBLISH) {
+
+			WorkflowHandlerRegistryUtil.startWorkflowInstance(
+				user.getCompanyId(), groupId, userId,
+				DLFileEntry.class.getName(), fileEntryId, fileEntry, null);
+		}
 
 		return fileEntry;
 	}
@@ -934,9 +940,7 @@ public class DLFileEntryLocalServiceImpl
 		// File version
 
 		String version = getNextVersion(
-			fileEntry, majorVersion, serviceContext.getStatus());
-
-		boolean newFileVersion = true;
+			fileEntry, majorVersion, serviceContext.getWorkflowAction());
 
 		try {
 			DLFileVersion fileVersion =
@@ -947,28 +951,35 @@ public class DLFileEntryLocalServiceImpl
 				size = fileVersion.getSize();
 			}
 
-			if (fileVersion.getStatus() == WorkflowConstants.STATUS_DRAFT) {
-				newFileVersion = true;
+			if (serviceContext.getWorkflowAction() ==
+					WorkflowConstants.ACTION_SAVE_DRAFT) {
 
 				updateFileVersion(
 					user, fileVersion, serviceContext.getModifiedDate(now),
-					version, versionDescription, size,
-					serviceContext.getStatus());
+					version, versionDescription, size, fileVersion.getStatus());
 			}
 			else if (is != null) {
 				addFileVersion(
 					user, fileEntry, serviceContext.getModifiedDate(now),
 					version, versionDescription, size,
-					serviceContext.getStatus());
+					WorkflowConstants.STATUS_PENDING);
 			}
 			else {
 				version = fileEntry.getVersion();
 			}
 		}
 		catch (NoSuchFileVersionException nsfve) {
+			int status =  WorkflowConstants.STATUS_DRAFT;
+
+			if (serviceContext.getWorkflowAction() ==
+					WorkflowConstants.ACTION_PUBLISH) {
+
+				status =  WorkflowConstants.STATUS_PENDING;
+			}
+
 			addFileVersion(
 				user, fileEntry, serviceContext.getModifiedDate(now), version,
-				versionDescription, size, serviceContext.getStatus());
+				versionDescription, size, status);
 		}
 
 		if ((is == null) && !version.equals(fileEntry.getVersion())) {
@@ -998,10 +1009,6 @@ public class DLFileEntryLocalServiceImpl
 					}
 				}
 			}
-		}
-
-		if (serviceContext.getStatus() == WorkflowConstants.STATUS_APPROVED) {
-			fileEntry.setVersion(version);
 		}
 
 		// File entry
@@ -1046,15 +1053,11 @@ public class DLFileEntryLocalServiceImpl
 				serviceContext, is);
 		}
 
-		// Status
-
-		fileEntry = updateStatus(
-			userId, fileEntry.getFileEntryId(), serviceContext.getStatus(),
-			serviceContext);
-
 		// Workflow
 
-		if (newFileVersion) {
+		if (serviceContext.getWorkflowAction() ==
+				WorkflowConstants.ACTION_PUBLISH) {
+
 			WorkflowHandlerRegistryUtil.startWorkflowInstance(
 				user.getCompanyId(), groupId, userId,
 				DLFileEntry.class.getName(), fileEntry.getFileEntryId(),
@@ -1078,94 +1081,89 @@ public class DLFileEntryLocalServiceImpl
 
 		// File version
 
-		DLFileVersion fileVersion =
+		DLFileVersion latestFileVersion =
 			dlFileVersionLocalService.getLatestFileVersion(
 				fileEntry.getGroupId(), fileEntry.getFolderId(),
 				fileEntry.getName());
 
-		fileVersion.setStatus(status);
-		fileVersion.setStatusByUserId(user.getUserId());
-		fileVersion.setStatusByUserName(user.getFullName());
-		fileVersion.setStatusDate(new Date());
+		latestFileVersion.setStatus(status);
+		latestFileVersion.setStatusByUserId(user.getUserId());
+		latestFileVersion.setStatusByUserName(user.getFullName());
+		latestFileVersion.setStatusDate(new Date());
 
-		dlFileVersionPersistence.update(fileVersion, false);
-
-		// File entry
-
-		if (fileVersion.isApproved() &&
-			(DLUtil.compareVersions(
-				fileEntry.getVersion(), fileVersion.getVersion()) < 0)) {
-
-			fileEntry.setVersion(fileVersion.getVersion());
-
-			dlFileEntryPersistence.update(fileEntry, false);
-		}
-		else if (!fileVersion.isApproved() &&
-				 fileEntry.getVersion().equals(fileVersion.getVersion())) {
-
-			String newVersion = DLFileEntryConstants.DEFAULT_VERSION;
-
-			List<DLFileVersion> approvedFileVersions =
-				dlFileVersionPersistence.findByG_F_N_S(
-					fileEntry.getGroupId(), fileEntry.getFolderId(),
-					fileEntry.getName(), WorkflowConstants.STATUS_APPROVED);
-
-			if (!approvedFileVersions.isEmpty()) {
-				newVersion = approvedFileVersions.get(0).getVersion();
-			}
-
-			fileEntry.setVersion(newVersion);
-
-			dlFileEntryPersistence.update(fileEntry, false);
-		}
-
-		// Asset
-
-		if (fileVersion.isApproved() &&
-			fileEntry.getVersion().equals(fileVersion.getVersion())) {
-
-			assetEntryLocalService.updateVisible(
-				DLFileEntry.class.getName(), fileEntry.getFileEntryId(),
-				true);
-		}
-		else if (Validator.isNull(fileEntry.getVersion())) {
-			assetEntryLocalService.updateVisible(
-				DLFileEntry.class.getName(), fileEntry.getFileEntryId(),
-				false);
-		}
-
-		// Social
-
-		if (fileVersion.isApproved()) {
-			if (fileVersion.getVersion().equals(
-					DLFileEntryConstants.DEFAULT_VERSION)) {
-
-				socialActivityLocalService.addUniqueActivity(
-					fileVersion.getUserId(), fileVersion.getGroupId(),
-					fileVersion.getCreateDate(), DLFileEntry.class.getName(),
-					fileEntryId, DLActivityKeys.ADD_FILE_ENTRY,
-					StringPool.BLANK, 0);
-			}
-			else {
-				socialActivityLocalService.addUniqueActivity(
-					fileVersion.getUserId(), fileVersion.getGroupId(),
-					fileVersion.getCreateDate(), DLFileEntry.class.getName(),
-					fileEntryId, DLActivityKeys.UPDATE_FILE_ENTRY,
-					StringPool.BLANK, 0);
-			}
-		}
-
-		// Indexer
+		dlFileVersionPersistence.update(latestFileVersion, false);
 
 		Indexer indexer = IndexerRegistryUtil.getIndexer(DLFileEntry.class);
 
-		if (fileVersion.isApproved()) {
+		if (status == WorkflowConstants.STATUS_APPROVED) {
+
+			// File entry
+
+			if (DLUtil.compareVersions(
+					fileEntry.getVersion(),
+					latestFileVersion.getVersion()) < 0) {
+
+				fileEntry.setVersion(latestFileVersion.getVersion());
+
+				dlFileEntryPersistence.update(fileEntry, false);
+			}
+
+			// Asset
+
+			if (fileEntry.getVersion().equals(latestFileVersion.getVersion())) {
+				assetEntryLocalService.updateVisible(
+					DLFileEntry.class.getName(), fileEntry.getFileEntryId(),
+					true);
+			}
+
+			// Social
+
+			socialActivityLocalService.addUniqueActivity(
+				latestFileVersion.getUserId(), latestFileVersion.getGroupId(),
+				latestFileVersion.getCreateDate(), DLFileEntry.class.getName(),
+				fileEntryId, DLActivityKeys.ADD_FILE_ENTRY,
+				StringPool.BLANK, 0);
+
+			// Indexer
+
 			indexer.reindex(fileEntry);
 		}
-		else if (fileVersion.getVersion().equals(
+		else {
+
+			// File entry
+
+			if (fileEntry.getVersion().equals(latestFileVersion.getVersion())) {
+				String newVersion = DLFileEntryConstants.DEFAULT_VERSION;
+
+				List<DLFileVersion> approvedFileVersions =
+					dlFileVersionPersistence.findByG_F_N_S(
+						fileEntry.getGroupId(), fileEntry.getFolderId(),
+						fileEntry.getName(), WorkflowConstants.STATUS_APPROVED);
+
+				if (!approvedFileVersions.isEmpty()) {
+					newVersion = approvedFileVersions.get(0).getVersion();
+				}
+
+				fileEntry.setVersion(newVersion);
+
+				dlFileEntryPersistence.update(fileEntry, false);
+			}
+
+			// Asset
+
+			if (Validator.isNull(fileEntry.getVersion())) {
+				assetEntryLocalService.updateVisible(
+					DLFileEntry.class.getName(), fileEntry.getFileEntryId(),
+					false);
+			}
+
+			// Indexer
+
+			if (latestFileVersion.getVersion().equals(
 					DLFileEntryConstants.DEFAULT_VERSION)) {
 
-			indexer.delete(fileEntry);
+				indexer.delete(fileEntry);
+			}
 		}
 
 		return fileEntry;
@@ -1226,13 +1224,13 @@ public class DLFileEntryLocalServiceImpl
 	}
 
 	protected String getNextVersion(
-		DLFileEntry fileEntry, boolean majorVersion, int status) {
+		DLFileEntry fileEntry, boolean majorVersion, int workflowAction) {
 
 		if (Validator.isNull(fileEntry.getVersion())) {
 			return DLFileEntryConstants.DEFAULT_VERSION;
 		}
 
-		if (status == WorkflowConstants.STATUS_DRAFT) {
+		if (workflowAction == WorkflowConstants.ACTION_SAVE_DRAFT) {
 			majorVersion = false;
 		}
 

@@ -1456,14 +1456,14 @@ AUI().add(
 					var newArticleIdInput = instance.getByName(form, 'newArticleId');
 					var articleIdInput = instance.getByName(form, 'articleId');
 					var contentInput = instance.getByName(form, 'content');
-					var approveInput = instance.getByName(form, 'approve');
+					var workflowActionInput = instance.getByName(form, 'workflowAction');
 					var saveAndContinueInput = instance.getByName(form, 'saveAndContinue');
 
 					var canSubmit = instance.validateRequiredFields();
 
 					if (canSubmit) {
-						if (cmd == 'approve') {
-							approveInput.val(1);
+						if (cmd == 'publish') {
+							workflowActionInput.val('0');
 
 							cmd = instance.articleId ? 'update' : 'add';
 						}
@@ -2245,7 +2245,7 @@ AUI().add(
 				var downloadArticleContentBtn = instance.getById('downloadArticleContentBtn');
 				var languageIdSelect = instance.getById('languageIdSelect');
 				var previewArticleBtn = instance.getById('previewArticleBtn');
-				var saveArticleAndApproveBtn = instance.getById('saveArticleAndApproveBtn');
+				var publishBtn = instance.getById('publishBtn');
 				var saveArticleAndContinueBtn = instance.getById('saveArticleAndContinueBtn');
 				var saveArticleBtn = instance.getById('saveArticleBtn');
 				var variableName = instance.getById('variableName');
@@ -2256,8 +2256,8 @@ AUI().add(
 				languageIdSelect.detach('change');
 				repeatableButtons.detach('click');
 
-				if (saveArticleAndApproveBtn) {
-					saveArticleAndApproveBtn.detach('click');
+				if (publishBtn) {
+					publishBtn.detach('click');
 				}
 
 				saveArticleAndContinueBtn.detach('click');
@@ -2297,11 +2297,11 @@ AUI().add(
 					}
 				);
 
-				if (saveArticleAndApproveBtn) {
-					saveArticleAndApproveBtn.on(
+				if (publishBtn) {
+					publishBtn.on(
 						'click',
 						function() {
-							instance.saveArticle('approve');
+							instance.saveArticle('publish');
 						}
 					);
 				}

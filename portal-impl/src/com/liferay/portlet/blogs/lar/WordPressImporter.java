@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.TimeZoneUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
+import com.liferay.portal.kernel.workflow.WorkflowThreadLocal;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.DocumentException;
 import com.liferay.portal.kernel.xml.Element;
@@ -260,10 +261,10 @@ public class WordPressImporter {
 		String statusText = entryEl.elementTextTrim(
 			SAXReaderUtil.createQName("status", _NS_WP));
 
-		int status = WorkflowConstants.STATUS_APPROVED;
+		int workflowAction = WorkflowConstants.ACTION_PUBLISH;
 
 		if (statusText.equalsIgnoreCase("draft")) {
-			status = WorkflowConstants.STATUS_DRAFT;
+			workflowAction = WorkflowConstants.ACTION_SAVE_DRAFT;
 		}
 
 		String pingStatusText = entryEl.elementTextTrim(
@@ -286,7 +287,9 @@ public class WordPressImporter {
 		serviceContext.setAddGuestPermissions(true);
 		serviceContext.setAssetTagNames(assetTagNames);
 		serviceContext.setScopeGroupId(context.getGroupId());
-		serviceContext.setStatus(status);
+		serviceContext.setWorkflowAction(workflowAction);
+
+		WorkflowThreadLocal.setEnabled(false);
 
 		BlogsEntry entry = null;
 

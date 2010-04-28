@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 
 import java.io.Serializable;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -61,14 +62,29 @@ public class WorkflowHandlerRegistryUtil {
 		WorkflowHandler workflowHandler = getWorkflowHandler(className);
 
 		if (workflowHandler == null) {
-			return;
+			throw new SystemException(
+				"No workflow handler was found for " + className);
 		}
 
-		if (!WorkflowThreadLocal.isEnabled()) {
+		if (!WorkflowThreadLocal.isEnabled() ||
+			!WorkflowEngineManagerUtil.isDeployed()) {
+
+			if (workflowContext == null) {
+				workflowContext = new HashMap<String, Serializable>();
+			}
+			workflowContext.put(
+				WorkflowConstants.CONTEXT_COMPANY_ID, companyId);
+			workflowContext.put(
+				WorkflowConstants.CONTEXT_GROUP_ID, groupId);
+			workflowContext.put(
+				WorkflowConstants.CONTEXT_USER_ID, userId);
+			workflowContext.put(
+				WorkflowConstants.CONTEXT_ENTRY_CLASS_NAME, className);
+			workflowContext.put(
+				WorkflowConstants.CONTEXT_ENTRY_CLASS_PK, classPK);
+
 			workflowHandler.updateStatus(
 				WorkflowConstants.STATUS_APPROVED, workflowContext);
-
-			return;
 		}
 
 		workflowHandler.startWorkflowInstance(

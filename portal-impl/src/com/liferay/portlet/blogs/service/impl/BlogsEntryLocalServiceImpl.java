@@ -118,9 +118,6 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		entry.setDisplayDate(displayDate);
 		entry.setAllowPingbacks(allowPingbacks);
 		entry.setAllowTrackbacks(allowTrackbacks);
-		entry.setStatus(serviceContext.getStatus());
-		entry.setStatusByUserId(user.getUserId());
-		entry.setStatusByUserName(user.getFullName());
 		entry.setStatusDate(serviceContext.getModifiedDate(now));
 		entry.setExpandoBridgeAttributes(serviceContext);
 
@@ -152,13 +149,21 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		if (PropsValues.BLOGS_ENTRY_COMMENTS_ENABLED) {
 			mbMessageLocalService.addDiscussionMessage(
 				userId, entry.getUserName(), BlogsEntry.class.getName(),
-				entryId, WorkflowConstants.STATUS_APPROVED);
+				entryId, WorkflowConstants.ACTION_PUBLISH);
 		}
 
 		// Status
 
+		int status = WorkflowConstants.STATUS_DRAFT;
+
+		if (serviceContext.getWorkflowAction() ==
+				WorkflowConstants.ACTION_PUBLISH) {
+
+			status = WorkflowConstants.STATUS_APPROVED;
+		}
+
 		entry = updateStatus(
-			userId, entryId, trackbacks, false, serviceContext);
+			userId, entryId, trackbacks, false, status, serviceContext);
 
 		return entry;
 	}
@@ -524,8 +529,17 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			pingOldTrackbacks = true;
 		}
 
+		int status = WorkflowConstants.STATUS_DRAFT;
+
+		if (serviceContext.getWorkflowAction() ==
+				WorkflowConstants.ACTION_PUBLISH) {
+
+			status = WorkflowConstants.STATUS_APPROVED;
+		}
+
 		entry = updateStatus(
-			userId, entryId, trackbacks, pingOldTrackbacks, serviceContext);
+			userId, entryId, trackbacks, pingOldTrackbacks, status,
+			serviceContext);
 
 		return entry;
 	}
@@ -543,7 +557,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 	public BlogsEntry updateStatus(
 			long userId, long entryId, String[] trackbacks,
-			boolean pingOldTrackbaks, ServiceContext serviceContext)
+			boolean pingOldTrackbaks, int status, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Entry
@@ -553,61 +567,63 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		BlogsEntry entry = blogsEntryPersistence.findByPrimaryKey(entryId);
 
+		int oldStatus = entry.getStatus();
+
 		entry.setModifiedDate(serviceContext.getModifiedDate(now));
-		entry.setStatus(serviceContext.getStatus());
+		entry.setStatus(status);
 		entry.setStatusByUserId(user.getUserId());
 		entry.setStatusByUserName(user.getFullName());
 		entry.setStatusDate(serviceContext.getModifiedDate(now));
 
 		blogsEntryPersistence.update(entry, false);
 
-		// Statistics
+		Indexer indexer = IndexerRegistryUtil.getIndexer(BlogsEntry.class);
 
-		if (entry.isApproved()) {
+		if ((oldStatus != WorkflowConstants.STATUS_APPROVED) &&
+				status == WorkflowConstants.STATUS_APPROVED) {
+
+			// Statistics
+
 			blogsStatsUserLocalService.updateStatsUser(
 				entry.getGroupId(), entry.getUserId(), entry.getDisplayDate());
-		}
 
-		// Asset
+			// Asset
 
-		if (entry.isApproved()) {
 			assetEntryLocalService.updateVisible(
 				BlogsEntry.class.getName(), entryId, true);
-		}
-		else {
-			assetEntryLocalService.updateVisible(
-				BlogsEntry.class.getName(), entryId, false);
-		}
 
-		// Social
+			// Social
 
-		if (entry.isApproved()) {
 			socialActivityLocalService.addUniqueActivity(
 				entry.getUserId(), entry.getGroupId(),
 				BlogsEntry.class.getName(), entryId,
 				BlogsActivityKeys.ADD_ENTRY, StringPool.BLANK, 0);
-		}
 
-		// Indexer
+			// Indexer
 
-		Indexer indexer = IndexerRegistryUtil.getIndexer(BlogsEntry.class);
-
-		if (entry.isApproved()) {
 			indexer.reindex(entry);
+
+			// Subscriptions
+
+			notifySubscribers(entry, serviceContext);
+
+			// Ping
+
+			pingGoogle(entry, serviceContext);
+			pingPingback(entry, serviceContext);
+			pingTrackbacks(entry, trackbacks, pingOldTrackbaks, serviceContext);
 		}
-		else {
+		else if (status != WorkflowConstants.STATUS_APPROVED) {
+
+			// Asset
+
+			assetEntryLocalService.updateVisible(
+				BlogsEntry.class.getName(), entryId, false);
+
+			// Indexer
+
 			indexer.delete(entry);
 		}
-
-		// Subscriptions
-
-		notifySubscribers(entry, serviceContext);
-
-		// Ping
-
-		pingGoogle(entry, serviceContext);
-		pingPingback(entry, serviceContext);
-		pingTrackbacks(entry, trackbacks, pingOldTrackbaks, serviceContext);
 
 		return entry;
 	}

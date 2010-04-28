@@ -313,7 +313,8 @@ public class EditFileEntryAction extends PortletAction {
 						themeDisplay.getCompanyId(), groupId,
 						DLFileEntry.class.getName())) {
 
-				serviceContext.setStatus(WorkflowConstants.STATUS_DRAFT);
+				serviceContext.setWorkflowAction(
+					WorkflowConstants.ACTION_SAVE_DRAFT);
 			}
 
 			DLFileEntry fileEntry = DLFileEntryServiceUtil.addFileEntry(
@@ -335,7 +336,8 @@ public class EditFileEntryAction extends PortletAction {
 					themeDisplay.getCompanyId(), groupId,
 					DLFileEntry.class.getName(), fileEntry.getFileEntryId())) {
 
-				serviceContext.setStatus(WorkflowConstants.STATUS_DRAFT);
+				serviceContext.setWorkflowAction(
+					WorkflowConstants.ACTION_SAVE_DRAFT);
 			}
 
 			DLFileEntryServiceUtil.updateFileEntry(

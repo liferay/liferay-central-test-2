@@ -321,7 +321,7 @@ public class JournalArticleLocalServiceImpl
 			mbMessageLocalService.addDiscussionMessage(
 				userId, article.getUserName(),
 				JournalArticle.class.getName(), resourcePrimKey,
-				WorkflowConstants.STATUS_APPROVED);
+				WorkflowConstants.ACTION_PUBLISH);
 		}
 
 		// Email
@@ -338,9 +338,13 @@ public class JournalArticleLocalServiceImpl
 
 		// Workflow
 
-		WorkflowHandlerRegistryUtil.startWorkflowInstance(
-			user.getCompanyId(), groupId, userId,
-			JournalArticle.class.getName(), article.getId(), article, null);
+		if (serviceContext.getWorkflowAction() ==
+				WorkflowConstants.ACTION_PUBLISH) {
+
+			WorkflowHandlerRegistryUtil.startWorkflowInstance(
+				user.getCompanyId(), groupId, userId,
+				JournalArticle.class.getName(), article.getId(), article, null);
+		}
 
 		return article;
 	}
@@ -1691,7 +1695,14 @@ public class JournalArticleLocalServiceImpl
 		int status = oldArticle.getStatus();
 
 		if (incrementVersion) {
-			status = WorkflowConstants.STATUS_PENDING;
+			if (serviceContext.getWorkflowAction() ==
+					WorkflowConstants.ACTION_PUBLISH) {
+
+				status = WorkflowConstants.STATUS_PENDING;
+			}
+			else {
+				status = WorkflowConstants.STATUS_DRAFT;
+			}
 		}
 
 		article.setModifiedDate(serviceContext.getModifiedDate(now));
@@ -1759,15 +1770,11 @@ public class JournalArticleLocalServiceImpl
 			}
 		}
 
-		// Indexer
-
-		Indexer indexer = IndexerRegistryUtil.getIndexer(JournalArticle.class);
-
-		indexer.reindex(article);
-
 		// Workflow
 
-		if (incrementVersion) {
+		if (serviceContext.getWorkflowAction() ==
+				WorkflowConstants.ACTION_PUBLISH) {
+
 			WorkflowHandlerRegistryUtil.startWorkflowInstance(
 				user.getCompanyId(), groupId, userId,
 				JournalArticle.class.getName(), article.getId(), article, null);

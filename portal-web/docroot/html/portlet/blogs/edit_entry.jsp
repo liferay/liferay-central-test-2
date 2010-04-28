@@ -48,7 +48,7 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 	<aui:input name="referringPortletResource" type="hidden" value="<%= referringPortletResource %>" />
 	<aui:input name="entryId" type="hidden" value="<%= entryId %>" />
-	<aui:input name="status" type="hidden" value="<%= WorkflowConstants.STATUS_APPROVED %>" />
+	<aui:input name="workflowAction" type="hidden" value="<%= WorkflowConstants.ACTION_PUBLISH %>" />
 
 	<liferay-ui:error exception="<%= EntryTitleException.class %>" message="please-enter-a-valid-title" />
 	<liferay-ui:asset-tags-error />
@@ -195,7 +195,7 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 						<portlet:namespace />entryId: document.<portlet:namespace />fm.<portlet:namespace />entryId.value,
 						<portlet:namespace />redirect: document.<portlet:namespace />fm.<portlet:namespace />redirect.value,
 						<portlet:namespace />referringPortletResource: document.<portlet:namespace />fm.<portlet:namespace />referringPortletResource.value,
-						<portlet:namespace />status: <%= WorkflowConstants.STATUS_DRAFT %>,
+						<portlet:namespace />workflowAction: <%= WorkflowConstants.ACTION_SAVE_DRAFT %>,
 						<portlet:namespace />title: title
 					},
 					method: 'POST',
@@ -261,7 +261,7 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 
 			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= entry == null ? Constants.ADD : Constants.UPDATE %>";
 			document.<portlet:namespace />fm.<portlet:namespace />content.value = content;
-			document.<portlet:namespace />fm.<portlet:namespace />status.value = <%= WorkflowConstants.STATUS_APPROVED %>;
+			document.<portlet:namespace />fm.<portlet:namespace />workflowAction.value = <%= WorkflowConstants.ACTION_PUBLISH %>;
 			submitForm(document.<portlet:namespace />fm);
 		}
 	}

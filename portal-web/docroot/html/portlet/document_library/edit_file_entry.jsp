@@ -41,7 +41,6 @@ if (Validator.isNotNull(title)) {
 	extension = FileUtil.getExtension(title);
 }
 
-
 String assetTagNames = ParamUtil.getString(request, "assetTagNames");
 
 String[] conversions = new String[0];

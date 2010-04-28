@@ -74,7 +74,7 @@ public class ServiceContextUtil {
 
 		// Workflow
 
-		serviceContext.setStatus(jsonObject.getInt("status"));
+		serviceContext.setWorkflowAction(jsonObject.getInt("workflowAction"));
 
 		return serviceContext;
 	}

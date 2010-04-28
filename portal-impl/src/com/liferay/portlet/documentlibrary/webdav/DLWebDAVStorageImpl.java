@@ -641,7 +641,8 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			serviceContext.setAddGuestPermissions(true);
 
 			if (PropsValues.DL_WEBDAV_SAVE_TO_SINGLE_VERSION) {
-				serviceContext.setStatus(WorkflowConstants.STATUS_DRAFT);
+				serviceContext.setWorkflowAction(
+					WorkflowConstants.ACTION_SAVE_DRAFT);
 			}
 
 			try {

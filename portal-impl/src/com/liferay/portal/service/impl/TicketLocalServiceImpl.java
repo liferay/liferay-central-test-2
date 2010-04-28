@@ -14,14 +14,14 @@
 
 package com.liferay.portal.service.impl;
 
-import java.util.Date;
-import java.util.UUID;
-
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.Ticket;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.base.TicketLocalServiceBaseImpl;
+
+import java.util.Date;
+import java.util.UUID;
 
 /**
  * <a href="TicketLocalServiceImpl.java.html"><b><i>View Source</i></b></a>

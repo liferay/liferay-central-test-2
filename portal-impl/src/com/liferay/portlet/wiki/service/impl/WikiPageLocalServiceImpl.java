@@ -142,7 +142,13 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		long resourcePrimKey =
 			wikiPageResourceLocalService.getPageResourcePrimKey(nodeId, title);
 
-		int status = serviceContext.getStatus();
+		int status = WorkflowConstants.STATUS_DRAFT;
+
+		if (serviceContext.getWorkflowAction() ==
+				WorkflowConstants.ACTION_PUBLISH) {
+
+			status = WorkflowConstants.STATUS_APPROVED;
+		}
 
 		WikiPage page = wikiPagePersistence.create(pageId);
 
@@ -206,7 +212,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		if (PropsValues.WIKI_PAGE_COMMENTS_ENABLED) {
 			mbMessageLocalService.addDiscussionMessage(
 				userId, page.getUserName(), WikiPage.class.getName(),
-				resourcePrimKey, WorkflowConstants.STATUS_APPROVED);
+				resourcePrimKey, WorkflowConstants.ACTION_PUBLISH);
 		}
 
 		// Social
@@ -958,7 +964,14 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		long resourcePrimKey = page.getResourcePrimKey();
 		long groupId = page.getGroupId();
-		int status = serviceContext.getStatus();
+
+		int status = WorkflowConstants.STATUS_DRAFT;
+
+		if (serviceContext.getWorkflowAction() ==
+				WorkflowConstants.ACTION_PUBLISH) {
+
+			status = WorkflowConstants.STATUS_APPROVED;
+		}
 
 		boolean isApproved = (status == WorkflowConstants.STATUS_APPROVED);
 

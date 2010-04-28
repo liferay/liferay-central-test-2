@@ -108,7 +108,7 @@ public class TasksProposalLocalServiceImpl
 
 		mbMessageLocalService.addDiscussionMessage(
 			userId, proposal.getUserName(), TasksProposal.class.getName(),
-			proposalId, WorkflowConstants.STATUS_APPROVED);
+			proposalId, WorkflowConstants.ACTION_PUBLISH);
 
 		// Social
 

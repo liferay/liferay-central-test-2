@@ -142,7 +142,7 @@ public class SCProductEntryLocalServiceImpl
 			mbMessageLocalService.addDiscussionMessage(
 				userId, productEntry.getUserName(),
 				SCProductEntry.class.getName(), productEntryId,
-				WorkflowConstants.STATUS_APPROVED);
+				WorkflowConstants.ACTION_PUBLISH);
 		}
 
 		// Indexer

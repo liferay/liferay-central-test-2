@@ -174,7 +174,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		if (PropsValues.LAYOUT_COMMENTS_ENABLED) {
 			mbMessageLocalService.addDiscussionMessage(
 				userId, user.getFullName(), Layout.class.getName(), plid,
-				WorkflowConstants.STATUS_APPROVED);
+				WorkflowConstants.ACTION_PUBLISH);
 		}
 
 		return layout;

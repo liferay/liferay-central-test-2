@@ -330,13 +330,9 @@ public class EditEntryAction extends PortletAction {
 				displayDateYear, displayDateHour, displayDateMinute,
 				allowPingbacks, allowTrackbacks, trackbacks, serviceContext);
 
-			if (serviceContext.getStatus() ==
-					WorkflowConstants.STATUS_APPROVED) {
-
-				AssetPublisherUtil.addAndStoreSelection(
-					actionRequest, BlogsEntry.class.getName(),
-					entry.getEntryId(), -1);
-			}
+			AssetPublisherUtil.addAndStoreSelection(
+				actionRequest, BlogsEntry.class.getName(),
+				entry.getEntryId(), -1);
 		}
 		else {
 
@@ -345,7 +341,6 @@ public class EditEntryAction extends PortletAction {
 			entry = BlogsEntryLocalServiceUtil.getEntry(entryId);
 
 			String tempOldUrlTitle = entry.getUrlTitle();
-			int oldStatus = entry.getStatus();
 
 			entry = BlogsEntryServiceUtil.updateEntry(
 				entryId, title, content, displayDateMonth, displayDateDay,
@@ -356,14 +351,9 @@ public class EditEntryAction extends PortletAction {
 				oldUrlTitle = tempOldUrlTitle;
 			}
 
-			if ((oldStatus == WorkflowConstants.STATUS_DRAFT) &&
-				(serviceContext.getStatus() ==
-					WorkflowConstants.STATUS_APPROVED)) {
-
-				AssetPublisherUtil.addAndStoreSelection(
-					actionRequest, BlogsEntry.class.getName(),
-					entry.getEntryId(), -1);
-			}
+			AssetPublisherUtil.addAndStoreSelection(
+				actionRequest, BlogsEntry.class.getName(),
+				entry.getEntryId(), -1);
 		}
 
 		return new Object[] {entry, oldUrlTitle};

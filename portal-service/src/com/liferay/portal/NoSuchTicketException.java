@@ -14,8 +14,6 @@
 
 package com.liferay.portal;
 
-import com.liferay.portal.NoSuchModelException;
-
 /**
  * <a href="NoSuchTicketException.java.html"><b><i>View Source</i></b></a>
  *
