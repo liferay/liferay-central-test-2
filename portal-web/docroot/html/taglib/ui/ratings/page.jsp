@@ -159,7 +159,7 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 		};
 
 		var fixScore = function(score) {
-			return (score == 1) ? '+1' : (score + '');
+			return (score > 0) ? ('+' + score) : (score + '');
 		};
 
 		var convertToIndex = function(score) {
@@ -223,7 +223,7 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 			</c:when>
 			<c:when test='<%= type.equals("thumbs") && themeDisplay.isSignedIn() %>'>
 
-				var label = getLabel(fixScore(<%= stats.getAverageScore() %>), <%= stats.getTotalEntries() %>);
+				var label = getLabel(fixScore(<%= stats.getTotalScore() %>), <%= stats.getTotalEntries() %>, <%= stats.getAverageScore() %>);
 				var yourScoreindex = convertToIndex(<%= yourScore %>);
 
 				var ratingThumb = new A.ThumbRating(
