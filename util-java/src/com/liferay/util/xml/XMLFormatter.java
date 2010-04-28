@@ -16,6 +16,7 @@ package com.liferay.util.xml;
 
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
 import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -42,16 +43,10 @@ public class XMLFormatter {
 		// LEP-1921
 
 		if (xml != null) {
-			char[] charArray = xml.toCharArray();
+			int pos = xml.indexOf(CharPool.LESS_THAN);
 
-			for (int i = 0; i < charArray.length; i++) {
-				if (charArray[i] == '<') {
-					if (i != 0) {
-						xml = xml.substring(i, xml.length());
-					}
-
-					break;
-				}
+			if (pos > 0) {
+				xml = xml.substring(pos);
 			}
 		}
 
