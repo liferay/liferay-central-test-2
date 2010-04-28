@@ -81,6 +81,10 @@ public class SelectTag extends IncludeTag {
 		_listTypeFieldName = listTypeFieldName;
 	}
 
+	public void setMultiple(boolean multiple) {
+		_multiple = multiple;
+	}
+
 	public void setName(String name) {
 		_name = name;
 	}
@@ -114,6 +118,7 @@ public class SelectTag extends IncludeTag {
 		_last = false;
 		_listType = null;
 		_listTypeFieldName = null;
+		_multiple = false;
 		_name = null;
 		_prefix = null;
 		_showEmptyOption = false;
@@ -177,6 +182,7 @@ public class SelectTag extends IncludeTag {
 		request.setAttribute("aui:select:last", String.valueOf(_last));
 		request.setAttribute("aui:select:listType", _listType);
 		request.setAttribute("aui:select:listTypeFieldName", listTypeFieldName);
+		request.setAttribute("aui:select:multiple", String.valueOf(_multiple));
 		request.setAttribute("aui:select:name", _name);
 		request.setAttribute("aui:select:prefix", _prefix);
 		request.setAttribute(
@@ -205,6 +211,7 @@ public class SelectTag extends IncludeTag {
 	private boolean _last;
 	private String _listType;
 	private String _listTypeFieldName;
+	private boolean _multiple;
 	private String _name;
 	private String _prefix;
 	private boolean _showEmptyOption;
