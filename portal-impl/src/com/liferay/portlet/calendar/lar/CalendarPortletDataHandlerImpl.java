@@ -223,6 +223,8 @@ public class CalendarPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		serviceContext.setAddCommunityPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
+		serviceContext.setCreateDate(event.getCreateDate());
+		serviceContext.setModifiedDate(event.getModifiedDate());
 		serviceContext.setScopeGroupId(context.getGroupId());
 
 		CalEvent importedEvent = null;

@@ -194,8 +194,8 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		event.setCompanyId(user.getCompanyId());
 		event.setUserId(user.getUserId());
 		event.setUserName(user.getFullName());
-		event.setCreateDate(now);
-		event.setModifiedDate(now);
+		event.setCreateDate(serviceContext.getCreateDate(now));
+		event.setModifiedDate(serviceContext.getModifiedDate(now));
 		event.setTitle(title);
 		event.setDescription(description);
 		event.setStartDate(startDate.getTime());
@@ -746,7 +746,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 		CalEvent event = calEventPersistence.findByPrimaryKey(eventId);
 
-		event.setModifiedDate(new Date());
+		event.setModifiedDate(serviceContext.getModifiedDate(null));
 		event.setTitle(title);
 		event.setDescription(description);
 		event.setStartDate(startDate.getTime());
