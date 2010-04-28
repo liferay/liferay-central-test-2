@@ -1423,7 +1423,7 @@ AUI().add(
 				}
 			},
 
-			saveArticle: function(cmd, saveAndContinue) {
+			saveArticle: function(cmd) {
 				var instance = this;
 
 				var form = instance.getPrincipalForm();
@@ -1457,7 +1457,6 @@ AUI().add(
 					var articleIdInput = instance.getByName(form, 'articleId');
 					var contentInput = instance.getByName(form, 'content');
 					var workflowActionInput = instance.getByName(form, 'workflowAction');
-					var saveAndContinueInput = instance.getByName(form, 'saveAndContinue');
 
 					var canSubmit = instance.validateRequiredFields();
 
@@ -1469,10 +1468,6 @@ AUI().add(
 						}
 
 						cmdInput.val(cmd);
-
-						if (saveAndContinue) {
-							saveAndContinueInput.val(1);
-						}
 
 						if (!instance.articleId) {
 							articleIdInput.val(newArticleIdInput.val());
@@ -2246,7 +2241,6 @@ AUI().add(
 				var languageIdSelect = instance.getById('languageIdSelect');
 				var previewArticleBtn = instance.getById('previewArticleBtn');
 				var publishBtn = instance.getById('publishBtn');
-				var saveArticleAndContinueBtn = instance.getById('saveArticleAndContinueBtn');
 				var saveArticleBtn = instance.getById('saveArticleBtn');
 				var variableName = instance.getById('variableName');
 
@@ -2260,7 +2254,6 @@ AUI().add(
 					publishBtn.detach('click');
 				}
 
-				saveArticleAndContinueBtn.detach('click');
 				saveArticleBtn.detach('click');
 
 				editButtons.on(
@@ -2305,15 +2298,6 @@ AUI().add(
 						}
 					);
 				}
-
-				saveArticleAndContinueBtn.on(
-					'click',
-					function() {
-						var saveAndContinue = true;
-
-						instance.saveArticle(null, saveAndContinue);
-					}
-				);
 
 				if (downloadArticleContentBtn) {
 					downloadArticleContentBtn.detach('click');

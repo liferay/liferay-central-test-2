@@ -253,7 +253,6 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 	<aui:input name="parentStructureId" type="hidden" value="<%= parentStructureId %>" />
 	<aui:input name="articleURL" type="hidden" value="<%= editArticleRenderURL %>" />
 	<aui:input name="workflowAction" type="hidden" value="<%= String.valueOf(WorkflowConstants.ACTION_SAVE_DRAFT) %>" />
-	<aui:input name="saveAndContinue" type="hidden" />
 	<aui:input name="deleteArticleIds" type="hidden" value="<%= articleId + EditArticleAction.VERSION_SEPARATOR + version %>" />
 	<aui:input name="expireArticleIds" type="hidden" value="<%= articleId + EditArticleAction.VERSION_SEPARATOR + version %>" />
 
@@ -563,25 +562,18 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 				<c:if test="<%= hasSavePermission %>">
 					<aui:button name="saveArticleBtn" value="save" />
 
-					<aui:button name="saveArticleAndContinueBtn" value="save-and-continue" />
-
 					<%
-					boolean publishButton = false;
+					boolean workflowInProgress = false;
 
-					if (JournalPermission.contains(permissionChecker, scopeGroupId, ActionKeys.APPROVE_ARTICLE)) {
-						if (article == null) {
-							if (!WorkflowDefinitionLinkLocalServiceUtil.hasWorkflowDefinitionLink(company.getCompanyId(), groupId, JournalArticle.class.getName())) {
-								publishButton = true;
-							}
-						}
-						else if (!article.isApproved() && !WorkflowInstanceLinkLocalServiceUtil.hasWorkflowInstanceLink(company.getCompanyId(), groupId, JournalArticle.class.getName(), article.getId())) {
-							publishButton = true;
-						}
+					if (article != null) {
+						workflowInProgress = WorkflowInstanceLinkLocalServiceUtil.hasWorkflowInstanceLink(company.getCompanyId(), groupId, JournalArticle.class.getName(), article.getId());
 					}
 					%>
 
-					<c:if test="<%= publishButton %>">
-						<aui:button name="publishBtn" value="publish" />
+					<aui:button name="publishBtn" value="publish" disabled="<%= workflowInProgress %>" />
+
+					<c:if test="<%= workflowInProgress %>">
+						<liferay-ui:icon-help message="there-is-a-publication-workflow-in-process" />
 					</c:if>
 				</c:if>
 

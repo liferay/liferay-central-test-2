@@ -242,7 +242,7 @@
 						String state = WorkflowInstanceLinkLocalServiceUtil.getState(article.getCompanyId(), article.getGroupId(), JournalArticle.class.getName(), article.getId());
 					%>
 
-					<br />
+						<br />
 
 						<aui:field-wrapper label="workflow-state">
 							<strong><%= state %></strong>

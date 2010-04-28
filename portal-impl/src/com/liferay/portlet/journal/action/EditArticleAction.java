@@ -105,9 +105,6 @@ public class EditArticleAction extends PortletAction {
 			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
 				article = updateArticle(actionRequest);
 			}
-			else if (cmd.equals(Constants.APPROVE)) {
-				approveArticle(actionRequest);
-			}
 			else if (cmd.equals(Constants.DELETE)) {
 				deleteArticles(actionRequest);
 			}
@@ -127,15 +124,15 @@ public class EditArticleAction extends PortletAction {
 			if (Validator.isNotNull(cmd)) {
 				String redirect = ParamUtil.getString(
 					actionRequest, "redirect");
+				int workflowAction = ParamUtil.getInteger(
+					actionRequest, "workflowAction",
+					WorkflowConstants.ACTION_PUBLISH);
 
-				if (article != null) {
-					boolean saveAndContinue = ParamUtil.getBoolean(
-						actionRequest, "saveAndContinue");
+				if ((article != null) &&
+					(workflowAction == WorkflowConstants.ACTION_SAVE_DRAFT)) {
 
-					if (saveAndContinue) {
-						redirect = getSaveAndContinueRedirect(
-							portletConfig, actionRequest, article, redirect);
-					}
+					redirect = getSaveAndContinueRedirect(
+						portletConfig, actionRequest, article, redirect);
 				}
 
 				String referringPortletResource = ParamUtil.getString(
@@ -215,23 +212,6 @@ public class EditArticleAction extends PortletAction {
 
 		return mapping.findForward(
 			getForward(renderRequest, "portlet.journal.edit_article"));
-	}
-
-	protected void approveArticle(ActionRequest actionRequest)
-		throws Exception {
-
-		long groupId = ParamUtil.getLong(actionRequest, "groupId");
-		String articleId = ParamUtil.getString(actionRequest, "articleId");
-		double version = ParamUtil.getDouble(actionRequest, "version");
-
-		String articleURL = ParamUtil.getString(actionRequest, "articleURL");
-
-		ServiceContext serviceContext = ServiceContextFactory.getInstance(
-			JournalArticle.class.getName(), actionRequest);
-
-		JournalArticleServiceUtil.updateStatus(
-			groupId, articleId, version, WorkflowConstants.STATUS_APPROVED,
-			articleURL, serviceContext);
 	}
 
 	protected void deleteArticles(ActionRequest actionRequest)
