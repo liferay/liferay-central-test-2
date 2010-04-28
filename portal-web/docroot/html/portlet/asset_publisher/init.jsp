@@ -168,7 +168,7 @@ boolean anyAssetType = GetterUtil.getBoolean(preferences.getValue("any-asset-typ
 
 long[] classNameIds = availableClassNameIds;
 
-if (!anyAssetType && (preferences.getValues("class-name-ids", null) != null)) {
+if (Validator.equals(selectionStyle, "dynamic") && !anyAssetType && (preferences.getValues("class-name-ids", null) != null)) {
 	classNameIds = GetterUtil.getLongValues(preferences.getValues("class-name-ids", null));
 }
 

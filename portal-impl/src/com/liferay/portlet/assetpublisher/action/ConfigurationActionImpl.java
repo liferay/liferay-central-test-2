@@ -318,10 +318,6 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 
 		String displayStyle = ParamUtil.getString(
 			actionRequest, "displayStyle");
-		boolean anyAssetType = ParamUtil.getBoolean(
-			actionRequest, "anyAssetType");
-		long[] classNameIds = StringUtil.split(
-			ParamUtil.getString(actionRequest, "classNameIds"), 0L);
 		boolean showAssetTitle = ParamUtil.getBoolean(
 			actionRequest, "showAssetTitle");
 		boolean showContextLink = ParamUtil.getBoolean(
@@ -350,9 +346,6 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 
 		preferences.setValue("selection-style", "manual");
 		preferences.setValue("display-style", displayStyle);
-		preferences.setValue("any-asset-type", String.valueOf(anyAssetType));
-		preferences.setValues(
-			"class-name-ids", ArrayUtil.toStringArray(classNameIds));
 		preferences.setValue(
 			"show-asset-title", String.valueOf(showAssetTitle));
 		preferences.setValue(
