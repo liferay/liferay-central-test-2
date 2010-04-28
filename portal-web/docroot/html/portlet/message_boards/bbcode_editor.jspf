@@ -22,6 +22,10 @@
 	function <portlet:namespace />getHTML() {
 		return <portlet:namespace />bbCode.getHTML();
 	}
+
+	function <portlet:namespace />setHTML(content) {
+		return <portlet:namespace />bbCode.setHTML(content);
+	}
 </aui:script>
 
 <aui:script use="liferay-bbcode-editor">
