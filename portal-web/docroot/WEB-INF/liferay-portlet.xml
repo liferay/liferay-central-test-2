@@ -67,7 +67,6 @@
 		<control-panel-entry-weight>5.0</control-panel-entry-weight>
 		<asset-renderer-factory>com.liferay.portlet.calendar.asset.CalEventAssetRendererFactory</asset-renderer-factory>
 		<custom-attributes-display>com.liferay.portlet.calendar.CalEventCustomAttributesDisplay</custom-attributes-display>
-		<preferences-unique-per-layout>false</preferences-unique-per-layout>
 		<use-default-template>false</use-default-template>
 		<show-portlet-access-denied>true</show-portlet-access-denied>
 		<show-portlet-inactive>true</show-portlet-inactive>
@@ -159,7 +158,6 @@
 		<control-panel-entry-weight>1.0</control-panel-entry-weight>
 		<asset-renderer-factory>com.liferay.portlet.journal.asset.JournalArticleAssetRendererFactory</asset-renderer-factory>
 		<workflow-handler>com.liferay.portlet.journal.workflow.JournalArticleWorkflowHandler</workflow-handler>
-		<preferences-unique-per-layout>false</preferences-unique-per-layout>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<scopeable>true</scopeable>
@@ -208,7 +206,6 @@
 		<asset-renderer-factory>com.liferay.portlet.messageboards.asset.MBMessageAssetRendererFactory</asset-renderer-factory>
 		<custom-attributes-display>com.liferay.portlet.messageboards.MBCategoryCustomAttributesDisplay</custom-attributes-display>
 		<custom-attributes-display>com.liferay.portlet.messageboards.MBMessageCustomAttributesDisplay</custom-attributes-display>
-		<preferences-unique-per-layout>false</preferences-unique-per-layout>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<scopeable>true</scopeable>
@@ -400,7 +397,6 @@
 		<control-panel-entry-weight>7.0</control-panel-entry-weight>
 		<asset-renderer-factory>com.liferay.portlet.blogs.asset.BlogsEntryAssetRendererFactory</asset-renderer-factory>
 		<custom-attributes-display>com.liferay.portlet.blogs.BlogsEntryCustomAttributesDisplay</custom-attributes-display>
-		<preferences-unique-per-layout>false</preferences-unique-per-layout>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<scopeable>true</scopeable>
@@ -416,7 +412,6 @@
 		<icon>/html/icons/shopping.png</icon>
 		<struts-path>shopping</struts-path>
 		<configuration-action-class>com.liferay.portlet.shopping.action.ConfigurationActionImpl</configuration-action-class>
-		<preferences-unique-per-layout>false</preferences-unique-per-layout>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<scopeable>true</scopeable>
@@ -1082,7 +1077,6 @@
 		<icon>/html/icons/default.png</icon>
 		<struts-path>tasks</struts-path>
 		<social-activity-interpreter-class>com.liferay.portlet.tasks.social.TasksActivityInterpreter</social-activity-interpreter-class>
-		<preferences-unique-per-layout>false</preferences-unique-per-layout>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
