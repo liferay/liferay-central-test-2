@@ -76,19 +76,20 @@ showSearch = showSearch && !results.isEmpty();
 </c:if>
 
 <%
-for (Object resultsEntry : results) {
+for (Object result : results) {
 	BlogsEntry entry = null;
+
 	AssetEntry assetEntry = null;
 
 	if (entry instanceof AssetEntry) {
-		assetEntry = (AssetEntry)resultsEntry;
+		assetEntry = (AssetEntry)result;
 
 		entry = BlogsEntryLocalServiceUtil.getEntry(assetEntry.getClassPK());
 
 		AssetUtil.addLayoutTags(request, assetEntry.getTags());
 	}
 	else {
-		entry = (BlogsEntry)resultsEntry;
+		entry = (BlogsEntry)result;
 	}
 
 	request.setAttribute("view_entry_content.jsp-redirect", redirect);

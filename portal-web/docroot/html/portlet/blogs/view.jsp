@@ -54,14 +54,6 @@ portletURL.setParameter("struts_action", "/blogs/view");
 	searchContainer.setDelta(pageDelta);
 	searchContainer.setDeltaConfigurable(false);
 
-	int status = WorkflowConstants.STATUS_APPROVED;
-	Boolean visible = Boolean.TRUE;
-
-	if (BlogsPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_ENTRY)) {
-		status = WorkflowConstants.STATUS_ANY;
-		visible = null;
-	}
-
 	int total = 0;
 	List results = null;
 
@@ -69,12 +61,21 @@ portletURL.setParameter("struts_action", "/blogs/view");
 		AssetEntryQuery assetEntryQuery = new AssetEntryQuery(BlogsEntry.class.getName(), searchContainer);
 
 		assetEntryQuery.setExcludeZeroViewCount(false);
-		assetEntryQuery.setVisible(visible);
+
+		if (BlogsPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_ENTRY)) {
+			assetEntryQuery.setVisible(Boolean.TRUE);
+		}
 
 		total = AssetEntryLocalServiceUtil.getEntriesCount(assetEntryQuery);
 		results = AssetEntryLocalServiceUtil.getEntries(assetEntryQuery);
 	}
 	else {
+		int status = WorkflowConstants.STATUS_APPROVED;
+
+		if (BlogsPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_ENTRY)) {
+			status = WorkflowConstants.STATUS_ANY;
+		}
+
 		total = BlogsEntryLocalServiceUtil.getGroupEntriesCount(scopeGroupId, status);
 		results = BlogsEntryLocalServiceUtil.getGroupEntries(scopeGroupId, status, searchContainer.getStart(), searchContainer.getEnd());
 	}

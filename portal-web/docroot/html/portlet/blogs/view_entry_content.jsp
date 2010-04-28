@@ -152,7 +152,7 @@ AssetEntry assetEntry = (AssetEntry)request.getAttribute("view_entry_content.jsp
 			</div>
 
 			<div class="stats">
-				<c:if test="<%= assetEntry != null%>">
+				<c:if test="<%= assetEntry != null %>">
 					<span class="view-count">
 						<c:choose>
 							<c:when test="<%= assetEntry.getViewCount() == 1 %>">
