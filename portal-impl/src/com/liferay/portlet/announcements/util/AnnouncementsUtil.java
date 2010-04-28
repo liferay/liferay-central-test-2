@@ -94,8 +94,10 @@ public class AnnouncementsUtil {
 
 		// Role announcements
 
+		List<Role> roles = new ArrayList<Role>();
+
 		if (groupsList.size() > 0) {
-			List<Role> roles = RoleLocalServiceUtil.getUserRelatedRoles(
+			roles = RoleLocalServiceUtil.getUserRelatedRoles(
 				userId, groupsList);
 
 			roles = ListUtil.copy(roles);
@@ -108,10 +110,13 @@ public class AnnouncementsUtil {
 					RoleLocalServiceUtil.getUserGroupGroupRoles(
 						userId, group.getGroupId()));
 			}
+		}
+		else {
+			roles = RoleLocalServiceUtil.getUserRoles(userId);
+		}
 
-			if (roles.size() > 0) {
-				scopes.put(_ROLE_CLASS_NAME_ID, _getRoleIds(roles));
-			}
+		if (roles.size() > 0) {
+			scopes.put(_ROLE_CLASS_NAME_ID, _getRoleIds(roles));
 		}
 
 		return scopes;
