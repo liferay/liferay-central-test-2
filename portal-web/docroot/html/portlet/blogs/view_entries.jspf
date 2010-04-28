@@ -81,7 +81,7 @@ for (Object result : results) {
 
 	AssetEntry assetEntry = null;
 
-	if (entry instanceof AssetEntry) {
+	if (result instanceof AssetEntry) {
 		assetEntry = (AssetEntry)result;
 
 		entry = BlogsEntryLocalServiceUtil.getEntry(assetEntry.getClassPK());
