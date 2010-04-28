@@ -1611,13 +1611,17 @@
 	</portlet>
 	<portlet>
 		<portlet-name>119</portlet-name>
-		<display-name>Tags</display-name>
+		<display-name>Asset</display-name>
 		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>
 		<expiration-cache>0</expiration-cache>
 		<supports>
 			<mime-type>text/html</mime-type>
 		</supports>
-		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
+		<portlet-info>
+			<title>Asset</title>
+			<short-title>Asset</short-title>
+			<keywords>Asset</keywords>
+		</portlet-info>
 		<security-role-ref>
 			<role-name>power-user</role-name>
 		</security-role-ref>

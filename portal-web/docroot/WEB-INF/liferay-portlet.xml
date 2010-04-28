@@ -997,7 +997,7 @@
 	<portlet>
 		<portlet-name>119</portlet-name>
 		<icon>/html/icons/default.png</icon>
-		<struts-path>tags</struts-path>
+		<struts-path>asset</struts-path>
 		<use-default-template>false</use-default-template>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
