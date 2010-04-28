@@ -435,7 +435,9 @@ public class PortalImpl implements Portal {
 		_reservedParams.add("p_p_static");
 		_reservedParams.add("p_p_static");
 		_reservedParams.add("p_p_isolated");
+		_reservedParams.add("maintainDialog");
 		_reservedParams.add("saveLastPath");
+		_reservedParams.add("scroll");
 	}
 
 	/**

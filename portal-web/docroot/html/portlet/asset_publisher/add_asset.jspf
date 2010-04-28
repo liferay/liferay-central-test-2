@@ -29,7 +29,7 @@ Map<String, PortletURL> addPortletURLs = getAddPortletURLs(renderRequest, render
 				PortletURL addPortletURL = entry.getValue();
 			%>
 
-				<aui:option label='<%= "model.resource." + className %>' value="<%= addPortletURL.toString() %>" />
+				<aui:option label='<%= "model.resource." + className %>' value="<%= HttpUtil.addParameter(addPortletURL.toString(), "maintainDialog", Boolean.TRUE.toString()) %>" />
 
 			<%
 			}
@@ -66,7 +66,6 @@ public PortletURL getAddPortletURL(RenderRequest renderRequest, PortletResponse 
 
 			addPortletURL.setParameter("redirect", themeDisplay.getURLCurrent());
 			addPortletURL.setParameter("backURL", themeDisplay.getURLCurrent());
-			addPortletURL.setParameter("configurationPortlet", Boolean.TRUE.toString());
 
 			String referringPortletResource = ParamUtil.getString(renderRequest, "portletResource");
 

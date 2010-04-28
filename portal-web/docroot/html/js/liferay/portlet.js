@@ -573,8 +573,8 @@ Liferay.Portlet = {
 					iframe.get('contentDocument.documentElement').setStyle('overflow', 'visible');
 
 					if ((iframe.get('contentWindow.location.search').indexOf('p_p_id=86') == -1) &&
-						(iframe.get('contentWindow.location.search').indexOf('configurationPortlet=true') == -1))
-					{
+						(iframe.get('contentWindow.location.search').indexOf('maintainDialog=true') == -1)) {
+
 						dialog.close();
 					}
 
