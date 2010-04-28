@@ -884,7 +884,20 @@ public class MainServlet extends ActionServlet {
 				continue;
 			}
 
-			AssetRendererFactoryRegistryUtil.register(assetRendererFactories);
+			for (AssetRendererFactory assetRendererFactory :
+					assetRendererFactories) {
+
+				if (GetterUtil.getBoolean(
+						PropsUtil.get(
+							"asset.renderer.enabled." +
+								assetRendererFactory.getClass().getName()))) {
+
+					continue;
+				}
+
+				AssetRendererFactoryRegistryUtil.register(
+					assetRendererFactory);
+			}
 		}
 	}
 
