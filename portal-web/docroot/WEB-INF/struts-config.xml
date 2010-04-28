@@ -1909,6 +1909,20 @@
 	 		<forward name="portlet.wiki.view_node" path="portlet.wiki.view_tagged_pages" />
 		</action>
 
+		<!-- Wiki Admin -->
+
+		<action path="/wiki_admin/view" forward="portlet.wiki.view_nodes" />
+
+		<action path="/wiki_admin/edit_node" type="com.liferay.portlet.wiki.action.EditNodeAction">
+			<forward name="portlet.wiki.edit_node" path="portlet.wiki.edit_node" />
+			<forward name="portlet.wiki.error" path="portlet.wiki.error" />
+		</action>
+
+		<action path="/wiki_admin/import_pages" type="com.liferay.portlet.wiki.action.ImportPagesAction">
+			<forward name="portlet.wiki.error" path="portlet.wiki.error" />
+			<forward name="portlet.wiki.import_pages" path="portlet.wiki.import_pages" />
+		</action>
+
 		<!-- Words -->
 
 		<action path="/words/view" type="com.liferay.portlet.words.action.ViewAction">
