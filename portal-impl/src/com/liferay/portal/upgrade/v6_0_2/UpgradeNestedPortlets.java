@@ -24,13 +24,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 /**
- * <a href="UpgradeNested.java.html"><b><i>View Source</i></b></a>
+ * <a href="UpgradeNestedPortlets.java.html"><b><i>View Source</i></b></a>
  *
  * @author Bijan Vakili
  * @author Douglas Wong
  * @author Wesley Gong
+ * @author Brian Wing Shun Chan
  */
-public class UpgradeNested extends UpgradeProcess {
+public class UpgradeNestedPortlets extends UpgradeProcess {
 
 	protected void doUpgrade() throws Exception {
 		Connection con = null;

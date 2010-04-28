@@ -16,7 +16,7 @@ package com.liferay.portal.upgrade;
 
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.util.ReleaseInfo;
-import com.liferay.portal.upgrade.v6_0_2.UpgradeNested;
+import com.liferay.portal.upgrade.v6_0_2.UpgradeNestedPortlets;
 import com.liferay.portal.upgrade.v6_0_2.UpgradeSchema;
 
 /**
@@ -32,7 +32,7 @@ public class UpgradeProcess_6_0_2 extends UpgradeProcess {
 
 	protected void doUpgrade() throws Exception {
 		upgrade(UpgradeSchema.class);
-		upgrade(UpgradeNested.class);
+		upgrade(UpgradeNestedPortlets.class);
 	}
 
 }
