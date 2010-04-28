@@ -435,8 +435,6 @@
 		<friendly-url-mapper-class>com.liferay.portlet.wiki.WikiFriendlyURLMapper</friendly-url-mapper-class>
 		<portlet-data-handler-class>com.liferay.portlet.wiki.lar.WikiPortletDataHandlerImpl</portlet-data-handler-class>
 		<social-activity-interpreter-class>com.liferay.portlet.wiki.social.WikiActivityInterpreter</social-activity-interpreter-class>
-		<control-panel-entry-category>content</control-panel-entry-category>
-		<control-panel-entry-weight>8.0</control-panel-entry-weight>
 		<asset-renderer-factory>com.liferay.portlet.wiki.asset.WikiPageAssetRendererFactory</asset-renderer-factory>
 		<custom-attributes-display>com.liferay.portlet.wiki.WikiPageCustomAttributesDisplay</custom-attributes-display>
 		<use-default-template>false</use-default-template>
@@ -1557,6 +1555,21 @@
 		<header-portlet-css>/html/portlet/enterprise_admin/css.jsp</header-portlet-css>
 		<header-portlet-css>/html/portlet/workflow_tasks/css.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-workflow-tasks</css-class-wrapper>
+	</portlet>
+	<portlet>
+		<portlet-name>154</portlet-name>
+		<icon>/html/icons/wiki.png</icon>
+		<struts-path>wiki_admin</struts-path>
+		<configuration-action-class>com.liferay.portlet.wiki.action.ConfigurationActionImpl</configuration-action-class>
+		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
+		<control-panel-entry-category>content</control-panel-entry-category>
+		<control-panel-entry-weight>8.0</control-panel-entry-weight>
+		<scopeable>true</scopeable>
+		<private-request-attributes>false</private-request-attributes>
+		<private-session-attributes>false</private-session-attributes>
+		<header-portlet-css>/html/portlet/wiki/css.jsp</header-portlet-css>
+		<footer-portal-javascript>/html/js/misc/swfupload/swfupload.js</footer-portal-javascript>
+		<css-class-wrapper>portlet-wiki</css-class-wrapper>
 	</portlet>
 	<role-mapper>
 		<role-name>administrator</role-name>
