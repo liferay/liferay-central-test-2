@@ -1592,6 +1592,16 @@ create table Team (
 	description STRING null
 );
 
+create table Ticket (
+	ticketId LONG not null primary key,
+	companyId LONG,
+	createDate DATE null,
+	classNameId LONG,
+	classPK LONG,
+	key_ VARCHAR(75) null,
+	expirationDate DATE null
+);
+
 create table User_ (
 	uuid_ VARCHAR(75) null,
 	userId LONG not null primary key,

@@ -725,8 +725,8 @@ public class ShoppingOrderLocalServiceImpl
 	}
 
 	protected String getNumber() throws SystemException {
-		String number =
-			PwdGenerator.getPassword(PwdGenerator.KEY1 + PwdGenerator.KEY2, 12);
+		String number = PwdGenerator.getPassword(
+			PwdGenerator.KEY1 + PwdGenerator.KEY2, 12);
 
 		try {
 			shoppingOrderPersistence.findByNumber(number);

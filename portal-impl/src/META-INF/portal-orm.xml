@@ -704,6 +704,24 @@
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portal.model.impl.TicketModelImpl">
+		<attributes>
+			<id name="ticketId" />
+			<basic name="companyId" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="classNameId" />
+			<basic name="classPK" />
+			<basic name="key">
+				<column name="KEY_" />
+			</basic>
+			<basic name="expirationDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<transient name="primaryKey" />
+		</attributes>
+	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portal.model.impl.TeamModelImpl">
 		<attributes>
 			<id name="teamId" />
@@ -2845,6 +2863,10 @@
 	</entity>
 	<entity class="com.liferay.portal.model.impl.SubscriptionImpl" name="Subscription">
 		<table name="Subscription" />
+		<attributes />
+	</entity>
+	<entity class="com.liferay.portal.model.impl.TicketImpl" name="Ticket">
+		<table name="Ticket" />
 		<attributes />
 	</entity>
 	<entity class="com.liferay.portal.model.impl.TeamImpl" name="Team">

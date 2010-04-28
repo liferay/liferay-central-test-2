@@ -100,12 +100,14 @@ public interface TicketLocalService {
 		com.liferay.portal.model.Ticket ticket, boolean merge)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public com.liferay.portal.model.Ticket addTicket(long expirationTime,
+	public com.liferay.portal.model.Ticket addTicket(long companyId,
 		java.lang.String className, long classPK,
+		java.util.Date expirationDate,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public com.liferay.portal.model.Ticket findByKey(java.lang.String key)
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portal.model.Ticket getTicket(java.lang.String key)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 }

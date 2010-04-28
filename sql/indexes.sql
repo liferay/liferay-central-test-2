@@ -565,6 +565,8 @@ create unique index IX_5C6BE4C7 on TasksReview (userId, proposalId);
 create index IX_AE6E9907 on Team (groupId);
 create unique index IX_143DC786 on Team (groupId, name);
 
+create index IX_B2468446 on Ticket (key_);
+
 create index IX_524FEFCE on UserGroup (companyId);
 create unique index IX_23EAD0D on UserGroup (companyId, name);
 create index IX_69771487 on UserGroup (companyId, parentUserGroupId);

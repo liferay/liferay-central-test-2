@@ -2680,6 +2680,8 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	protected ShardPersistence shardPersistence;
 	@BeanReference(type = SubscriptionPersistence.class)
 	protected SubscriptionPersistence subscriptionPersistence;
+	@BeanReference(type = TicketPersistence.class)
+	protected TicketPersistence ticketPersistence;
 	@BeanReference(type = TeamPersistence.class)
 	protected TeamPersistence teamPersistence;
 	@BeanReference(type = UserPersistence.class)

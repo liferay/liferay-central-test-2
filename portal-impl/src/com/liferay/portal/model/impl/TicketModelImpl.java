@@ -15,7 +15,6 @@
 package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
-import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -62,15 +61,15 @@ public class TicketModelImpl extends BaseModelImpl<Ticket> {
 			{ "ticketId", new Integer(Types.BIGINT) },
 			{ "companyId", new Integer(Types.BIGINT) },
 			{ "createDate", new Integer(Types.TIMESTAMP) },
-			{ "expirationDate", new Integer(Types.BIGINT) },
 			{ "classNameId", new Integer(Types.BIGINT) },
 			{ "classPK", new Integer(Types.BIGINT) },
-			{ "key_", new Integer(Types.VARCHAR) }
+			{ "key_", new Integer(Types.VARCHAR) },
+			{ "expirationDate", new Integer(Types.TIMESTAMP) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table Ticket (ticketId LONG not null primary key,companyId LONG,createDate DATE null,expirationDate LONG,classNameId LONG,classPK LONG,key_ VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table Ticket (ticketId LONG not null primary key,companyId LONG,createDate DATE null,classNameId LONG,classPK LONG,key_ VARCHAR(75) null,expirationDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table Ticket";
-	public static final String ORDER_BY_JPQL = " ORDER BY ticket.createDate ASC";
-	public static final String ORDER_BY_SQL = " ORDER BY Ticket.createDate ASC";
+	public static final String ORDER_BY_JPQL = " ORDER BY ticket.ticketId ASC";
+	public static final String ORDER_BY_SQL = " ORDER BY Ticket.ticketId ASC";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
@@ -87,10 +86,10 @@ public class TicketModelImpl extends BaseModelImpl<Ticket> {
 		model.setTicketId(soapModel.getTicketId());
 		model.setCompanyId(soapModel.getCompanyId());
 		model.setCreateDate(soapModel.getCreateDate());
-		model.setExpirationDate(soapModel.getExpirationDate());
 		model.setClassNameId(soapModel.getClassNameId());
 		model.setClassPK(soapModel.getClassPK());
 		model.setKey(soapModel.getKey());
+		model.setExpirationDate(soapModel.getExpirationDate());
 
 		return model;
 	}
@@ -147,14 +146,6 @@ public class TicketModelImpl extends BaseModelImpl<Ticket> {
 		_createDate = createDate;
 	}
 
-	public long getExpirationDate() {
-		return _expirationDate;
-	}
-
-	public void setExpirationDate(long expirationDate) {
-		_expirationDate = expirationDate;
-	}
-
 	public String getClassName() {
 		if (getClassNameId() <= 0) {
 			return StringPool.BLANK;
@@ -200,6 +191,14 @@ public class TicketModelImpl extends BaseModelImpl<Ticket> {
 		return GetterUtil.getString(_originalKey);
 	}
 
+	public Date getExpirationDate() {
+		return _expirationDate;
+	}
+
+	public void setExpirationDate(Date expirationDate) {
+		_expirationDate = expirationDate;
+	}
+
 	public Ticket toEscapedModel() {
 		if (isEscapedModel()) {
 			return (Ticket)this;
@@ -229,10 +228,10 @@ public class TicketModelImpl extends BaseModelImpl<Ticket> {
 		clone.setTicketId(getTicketId());
 		clone.setCompanyId(getCompanyId());
 		clone.setCreateDate(getCreateDate());
-		clone.setExpirationDate(getExpirationDate());
 		clone.setClassNameId(getClassNameId());
 		clone.setClassPK(getClassPK());
 		clone.setKey(getKey());
+		clone.setExpirationDate(getExpirationDate());
 
 		return clone;
 	}
@@ -240,7 +239,15 @@ public class TicketModelImpl extends BaseModelImpl<Ticket> {
 	public int compareTo(Ticket ticket) {
 		int value = 0;
 
-		value = DateUtil.compareTo(getCreateDate(), ticket.getCreateDate());
+		if (getTicketId() < ticket.getTicketId()) {
+			value = -1;
+		}
+		else if (getTicketId() > ticket.getTicketId()) {
+			value = 1;
+		}
+		else {
+			value = 0;
+		}
 
 		if (value != 0) {
 			return value;
@@ -286,14 +293,14 @@ public class TicketModelImpl extends BaseModelImpl<Ticket> {
 		sb.append(getCompanyId());
 		sb.append(", createDate=");
 		sb.append(getCreateDate());
-		sb.append(", expirationDate=");
-		sb.append(getExpirationDate());
 		sb.append(", classNameId=");
 		sb.append(getClassNameId());
 		sb.append(", classPK=");
 		sb.append(getClassPK());
 		sb.append(", key=");
 		sb.append(getKey());
+		sb.append(", expirationDate=");
+		sb.append(getExpirationDate());
 		sb.append("}");
 
 		return sb.toString();
@@ -319,10 +326,6 @@ public class TicketModelImpl extends BaseModelImpl<Ticket> {
 		sb.append(getCreateDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>expirationDate</column-name><column-value><![CDATA[");
-		sb.append(getExpirationDate());
-		sb.append("]]></column-value></column>");
-		sb.append(
 			"<column><column-name>classNameId</column-name><column-value><![CDATA[");
 		sb.append(getClassNameId());
 		sb.append("]]></column-value></column>");
@@ -334,6 +337,10 @@ public class TicketModelImpl extends BaseModelImpl<Ticket> {
 			"<column><column-name>key</column-name><column-value><![CDATA[");
 		sb.append(getKey());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>expirationDate</column-name><column-value><![CDATA[");
+		sb.append(getExpirationDate());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -343,10 +350,10 @@ public class TicketModelImpl extends BaseModelImpl<Ticket> {
 	private long _ticketId;
 	private long _companyId;
 	private Date _createDate;
-	private long _expirationDate;
 	private long _classNameId;
 	private long _classPK;
 	private String _key;
 	private String _originalKey;
+	private Date _expirationDate;
 	private transient ExpandoBridge _expandoBridge;
 }

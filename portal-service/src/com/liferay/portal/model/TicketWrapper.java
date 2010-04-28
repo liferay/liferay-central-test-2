@@ -68,14 +68,6 @@ public class TicketWrapper implements Ticket {
 		_ticket.setCreateDate(createDate);
 	}
 
-	public long getExpirationDate() {
-		return _ticket.getExpirationDate();
-	}
-
-	public void setExpirationDate(long expirationDate) {
-		_ticket.setExpirationDate(expirationDate);
-	}
-
 	public java.lang.String getClassName() {
 		return _ticket.getClassName();
 	}
@@ -102,6 +94,14 @@ public class TicketWrapper implements Ticket {
 
 	public void setKey(java.lang.String key) {
 		_ticket.setKey(key);
+	}
+
+	public java.util.Date getExpirationDate() {
+		return _ticket.getExpirationDate();
+	}
+
+	public void setExpirationDate(java.util.Date expirationDate) {
+		_ticket.setExpirationDate(expirationDate);
 	}
 
 	public com.liferay.portal.model.Ticket toEscapedModel() {

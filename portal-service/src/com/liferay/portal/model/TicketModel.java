@@ -59,10 +59,6 @@ public interface TicketModel extends BaseModel<Ticket> {
 
 	public void setCreateDate(Date createDate);
 
-	public long getExpirationDate();
-
-	public void setExpirationDate(long expirationDate);
-
 	public String getClassName();
 
 	public long getClassNameId();
@@ -77,6 +73,10 @@ public interface TicketModel extends BaseModel<Ticket> {
 	public String getKey();
 
 	public void setKey(String key);
+
+	public Date getExpirationDate();
+
+	public void setExpirationDate(Date expirationDate);
 
 	public Ticket toEscapedModel();
 

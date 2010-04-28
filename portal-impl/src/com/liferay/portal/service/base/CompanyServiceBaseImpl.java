@@ -89,6 +89,7 @@ import com.liferay.portal.service.TeamLocalService;
 import com.liferay.portal.service.TeamService;
 import com.liferay.portal.service.ThemeLocalService;
 import com.liferay.portal.service.ThemeService;
+import com.liferay.portal.service.TicketLocalService;
 import com.liferay.portal.service.UserGroupGroupRoleLocalService;
 import com.liferay.portal.service.UserGroupGroupRoleService;
 import com.liferay.portal.service.UserGroupLocalService;
@@ -157,6 +158,7 @@ import com.liferay.portal.service.persistence.ShardPersistence;
 import com.liferay.portal.service.persistence.SubscriptionPersistence;
 import com.liferay.portal.service.persistence.TeamFinder;
 import com.liferay.portal.service.persistence.TeamPersistence;
+import com.liferay.portal.service.persistence.TicketPersistence;
 import com.liferay.portal.service.persistence.UserFinder;
 import com.liferay.portal.service.persistence.UserGroupFinder;
 import com.liferay.portal.service.persistence.UserGroupGroupRolePersistence;
@@ -1155,6 +1157,22 @@ public abstract class CompanyServiceBaseImpl extends PrincipalBean
 		this.subscriptionPersistence = subscriptionPersistence;
 	}
 
+	public TicketLocalService getTicketLocalService() {
+		return ticketLocalService;
+	}
+
+	public void setTicketLocalService(TicketLocalService ticketLocalService) {
+		this.ticketLocalService = ticketLocalService;
+	}
+
+	public TicketPersistence getTicketPersistence() {
+		return ticketPersistence;
+	}
+
+	public void setTicketPersistence(TicketPersistence ticketPersistence) {
+		this.ticketPersistence = ticketPersistence;
+	}
+
 	public TeamLocalService getTeamLocalService() {
 		return teamLocalService;
 	}
@@ -1712,6 +1730,10 @@ public abstract class CompanyServiceBaseImpl extends PrincipalBean
 	protected SubscriptionLocalService subscriptionLocalService;
 	@BeanReference(type = SubscriptionPersistence.class)
 	protected SubscriptionPersistence subscriptionPersistence;
+	@BeanReference(type = TicketLocalService.class)
+	protected TicketLocalService ticketLocalService;
+	@BeanReference(type = TicketPersistence.class)
+	protected TicketPersistence ticketPersistence;
 	@BeanReference(type = TeamLocalService.class)
 	protected TeamLocalService teamLocalService;
 	@BeanReference(type = TeamService.class)

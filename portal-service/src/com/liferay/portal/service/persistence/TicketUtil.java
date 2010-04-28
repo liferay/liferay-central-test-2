@@ -111,155 +111,6 @@ public class TicketUtil {
 		return getPersistence().fetchByPrimaryKey(ticketId);
 	}
 
-	public static java.util.List<com.liferay.portal.model.Ticket> findByCompanyId(
-		long companyId)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByCompanyId(companyId);
-	}
-
-	public static java.util.List<com.liferay.portal.model.Ticket> findByCompanyId(
-		long companyId, int start, int end)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByCompanyId(companyId, start, end);
-	}
-
-	public static java.util.List<com.liferay.portal.model.Ticket> findByCompanyId(
-		long companyId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence()
-				   .findByCompanyId(companyId, start, end, orderByComparator);
-	}
-
-	public static com.liferay.portal.model.Ticket findByCompanyId_First(
-		long companyId,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.NoSuchTicketException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence()
-				   .findByCompanyId_First(companyId, orderByComparator);
-	}
-
-	public static com.liferay.portal.model.Ticket findByCompanyId_Last(
-		long companyId,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.NoSuchTicketException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence()
-				   .findByCompanyId_Last(companyId, orderByComparator);
-	}
-
-	public static com.liferay.portal.model.Ticket[] findByCompanyId_PrevAndNext(
-		long ticketId, long companyId,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.NoSuchTicketException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence()
-				   .findByCompanyId_PrevAndNext(ticketId, companyId,
-			orderByComparator);
-	}
-
-	public static java.util.List<com.liferay.portal.model.Ticket> findByC_C(
-		long companyId, long classNameId)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByC_C(companyId, classNameId);
-	}
-
-	public static java.util.List<com.liferay.portal.model.Ticket> findByC_C(
-		long companyId, long classNameId, int start, int end)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByC_C(companyId, classNameId, start, end);
-	}
-
-	public static java.util.List<com.liferay.portal.model.Ticket> findByC_C(
-		long companyId, long classNameId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence()
-				   .findByC_C(companyId, classNameId, start, end,
-			orderByComparator);
-	}
-
-	public static com.liferay.portal.model.Ticket findByC_C_First(
-		long companyId, long classNameId,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.NoSuchTicketException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence()
-				   .findByC_C_First(companyId, classNameId, orderByComparator);
-	}
-
-	public static com.liferay.portal.model.Ticket findByC_C_Last(
-		long companyId, long classNameId,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.NoSuchTicketException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence()
-				   .findByC_C_Last(companyId, classNameId, orderByComparator);
-	}
-
-	public static com.liferay.portal.model.Ticket[] findByC_C_PrevAndNext(
-		long ticketId, long companyId, long classNameId,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.NoSuchTicketException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence()
-				   .findByC_C_PrevAndNext(ticketId, companyId, classNameId,
-			orderByComparator);
-	}
-
-	public static java.util.List<com.liferay.portal.model.Ticket> findByC_C_C(
-		long companyId, long classNameId, long classPK)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByC_C_C(companyId, classNameId, classPK);
-	}
-
-	public static java.util.List<com.liferay.portal.model.Ticket> findByC_C_C(
-		long companyId, long classNameId, long classPK, int start, int end)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence()
-				   .findByC_C_C(companyId, classNameId, classPK, start, end);
-	}
-
-	public static java.util.List<com.liferay.portal.model.Ticket> findByC_C_C(
-		long companyId, long classNameId, long classPK, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence()
-				   .findByC_C_C(companyId, classNameId, classPK, start, end,
-			orderByComparator);
-	}
-
-	public static com.liferay.portal.model.Ticket findByC_C_C_First(
-		long companyId, long classNameId, long classPK,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.NoSuchTicketException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence()
-				   .findByC_C_C_First(companyId, classNameId, classPK,
-			orderByComparator);
-	}
-
-	public static com.liferay.portal.model.Ticket findByC_C_C_Last(
-		long companyId, long classNameId, long classPK,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.NoSuchTicketException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence()
-				   .findByC_C_C_Last(companyId, classNameId, classPK,
-			orderByComparator);
-	}
-
-	public static com.liferay.portal.model.Ticket[] findByC_C_C_PrevAndNext(
-		long ticketId, long companyId, long classNameId, long classPK,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.NoSuchTicketException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence()
-				   .findByC_C_C_PrevAndNext(ticketId, companyId, classNameId,
-			classPK, orderByComparator);
-	}
-
 	public static com.liferay.portal.model.Ticket findByKey(
 		java.lang.String key)
 		throws com.liferay.portal.NoSuchTicketException,
@@ -297,22 +148,6 @@ public class TicketUtil {
 		return getPersistence().findAll(start, end, orderByComparator);
 	}
 
-	public static void removeByCompanyId(long companyId)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		getPersistence().removeByCompanyId(companyId);
-	}
-
-	public static void removeByC_C(long companyId, long classNameId)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		getPersistence().removeByC_C(companyId, classNameId);
-	}
-
-	public static void removeByC_C_C(long companyId, long classNameId,
-		long classPK)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		getPersistence().removeByC_C_C(companyId, classNameId, classPK);
-	}
-
 	public static void removeByKey(java.lang.String key)
 		throws com.liferay.portal.NoSuchTicketException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -322,22 +157,6 @@ public class TicketUtil {
 	public static void removeAll()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeAll();
-	}
-
-	public static int countByCompanyId(long companyId)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().countByCompanyId(companyId);
-	}
-
-	public static int countByC_C(long companyId, long classNameId)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().countByC_C(companyId, classNameId);
-	}
-
-	public static int countByC_C_C(long companyId, long classNameId,
-		long classPK)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().countByC_C_C(companyId, classNameId, classPK);
 	}
 
 	public static int countByKey(java.lang.String key)

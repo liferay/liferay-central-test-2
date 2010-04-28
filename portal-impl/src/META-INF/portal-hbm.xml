@@ -46,6 +46,7 @@
 	<import class="com.liferay.portal.model.ServiceComponent" />
 	<import class="com.liferay.portal.model.Shard" />
 	<import class="com.liferay.portal.model.Subscription" />
+	<import class="com.liferay.portal.model.Ticket" />
 	<import class="com.liferay.portal.model.Team" />
 	<import class="com.liferay.portal.model.Theme" />
 	<import class="com.liferay.portal.model.User" />
@@ -693,6 +694,18 @@
 		<property name="classNameId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="classPK" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="frequency" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.liferay.portal.model.impl.TicketImpl" table="Ticket">
+		<cache usage="read-write" />
+		<id name="ticketId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+		<property name="classNameId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="classPK" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="key" column="key_" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="expirationDate" type="org.hibernate.type.TimestampType" />
 	</class>
 	<class name="com.liferay.portal.model.impl.TeamImpl" table="Team">
 		<cache usage="read-write" />

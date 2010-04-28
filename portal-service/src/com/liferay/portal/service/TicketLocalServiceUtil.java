@@ -114,19 +114,21 @@ public class TicketLocalServiceUtil {
 		return getService().updateTicket(ticket, merge);
 	}
 
-	public static com.liferay.portal.model.Ticket addTicket(
-		long expirationTime, java.lang.String className, long classPK,
+	public static com.liferay.portal.model.Ticket addTicket(long companyId,
+		java.lang.String className, long classPK,
+		java.util.Date expirationDate,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .addTicket(expirationTime, className, classPK, serviceContext);
+				   .addTicket(companyId, className, classPK, expirationDate,
+			serviceContext);
 	}
 
-	public static com.liferay.portal.model.Ticket findByKey(
+	public static com.liferay.portal.model.Ticket getTicket(
 		java.lang.String key)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getService().findByKey(key);
+		return getService().getTicket(key);
 	}
 
 	public static TicketLocalService getService() {
