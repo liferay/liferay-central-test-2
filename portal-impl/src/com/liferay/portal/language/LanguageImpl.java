@@ -469,31 +469,33 @@ public class LanguageImpl implements Language {
 			HttpServletRequest request =
 				(HttpServletRequest)pageContext.getRequest();
 
+			locale = request.getLocale();
+
 			PortletConfig portletConfig = (PortletConfig)request.getAttribute(
 				JavaConstants.JAVAX_PORTLET_CONFIG);
 
-			locale = request.getLocale();
-
-			ResourceBundle resourceBundle = portletConfig.getResourceBundle(
-				locale);
-
-			try {
-				value = resourceBundle.getString(key);
-			}
-			catch (MissingResourceException mre) {
-			}
-
-			// LEP-7393
-
-			if (((value == null) || (value.equals(defaultValue))) &&
-				(portletConfig.getPortletName().equals(
-					PortletKeys.PORTLET_CONFIGURATION))) {
+			if (portletConfig != null) {
+				ResourceBundle resourceBundle = portletConfig.getResourceBundle(
+					locale);
 
 				try {
-					value = _getPortletConfigurationValue(
-						pageContext, locale, key);
+					value = resourceBundle.getString(key);
 				}
 				catch (MissingResourceException mre) {
+				}
+
+				// LEP-7393
+
+				if (((value == null) || (value.equals(defaultValue))) &&
+					(portletConfig.getPortletName().equals(
+						PortletKeys.PORTLET_CONFIGURATION))) {
+
+					try {
+						value = _getPortletConfigurationValue(
+							pageContext, locale, key);
+					}
+					catch (MissingResourceException mre) {
+					}
 				}
 			}
 		}
