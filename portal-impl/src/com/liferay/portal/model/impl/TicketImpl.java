@@ -16,23 +16,27 @@ package com.liferay.portal.model.impl;
 
 import com.liferay.portal.model.Ticket;
 
+import java.util.Date;
+
 /**
  * <a href="TicketImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
 public class TicketImpl extends TicketModelImpl implements Ticket {
+
 	public TicketImpl() {
 	}
 
 	public boolean isExpired() {
-		if ((System.currentTimeMillis() > getExpirationDate()) &&
-			(getExpirationDate() > 0)) {
+		Date expirationDate = getExpirationDate();
 
+		if ((expirationDate != null) && (expirationDate.before(new Date()))) {
 			return true;
 		}
 		else {
 			return false;
 		}
 	}
+
 }

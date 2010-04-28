@@ -16,12 +16,13 @@ package com.liferay.portal.service.impl;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.model.Ticket;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.base.TicketLocalServiceBaseImpl;
+import com.liferay.portal.util.PortalUtil;
 
 import java.util.Date;
-import java.util.UUID;
 
 /**
  * <a href="TicketLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -29,35 +30,35 @@ import java.util.UUID;
  * @author Mika Koivisto
  */
 public class TicketLocalServiceImpl extends TicketLocalServiceBaseImpl {
-	public Ticket addTicket(
-		long expirationTime, String className, long classPK,
-		ServiceContext serviceContext) throws SystemException {
 
-		long ticketId = counterLocalService.increment(Ticket.class.getName());
-		long classNameId = classNameLocalService.getClassNameId(className);
+	public Ticket addTicket(
+			long companyId, String className, long classPK, Date expirationDate,
+			ServiceContext serviceContext)
+		throws SystemException {
+
+		long classNameId = PortalUtil.getClassNameId(className);
 		Date now = new Date();
+
+		long ticketId = counterLocalService.increment();
 
 		Ticket ticket = ticketPersistence.create(ticketId);
 
-		ticket.setCompanyId(serviceContext.getCompanyId());
+		ticket.setCompanyId(companyId);
 		ticket.setCreateDate(now);
-		if (expirationTime == 0) {
-			ticket.setExpirationDate(expirationTime);
-		}
-		else {
-			ticket.setExpirationDate(now.getTime() + expirationTime);
-		}
-
 		ticket.setClassNameId(classNameId);
 		ticket.setClassPK(classPK);
-		ticket.setKey(UUID.randomUUID().toString());
+		ticket.setKey(PortalUUIDUtil.generate());
+		ticket.setExpirationDate(expirationDate);
 
 		ticketPersistence.update(ticket, false);
 
 		return ticket;
 	}
 
-	public Ticket findByKey(String key) throws PortalException, SystemException {
+	public Ticket getTicket(String key)
+		throws PortalException, SystemException {
+
 		return ticketPersistence.findByKey(key);
 	}
+
 }

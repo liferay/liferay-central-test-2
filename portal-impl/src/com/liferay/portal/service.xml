@@ -1507,34 +1507,22 @@
 
 		<column name="companyId" type="long" />
 		<column name="createDate" type="Date" />
-		<column name="expirationDate" type="long" />
 
 		<!-- Other fields -->
 
 		<column name="classNameId" type="long" />
 		<column name="classPK" type="long" />
 		<column name="key" type="String" />
+		<column name="expirationDate" type="Date" />
 
 		<!-- Order -->
 
 		<order by="asc">
-			<order-column name="createDate" />
+			<order-column name="ticketId" />
 		</order>
 
 		<!-- Finder methods -->
 
-		<finder name="CompanyId" return-type="Collection">
-			<finder-column name="companyId" />
-		</finder>
-		<finder name="C_C" return-type="Collection">
-			<finder-column name="companyId" />
-			<finder-column name="classNameId" />
-		</finder>
-		<finder name="C_C_C" return-type="Collection">
-			<finder-column name="companyId" />
-			<finder-column name="classNameId" />
-			<finder-column name="classPK" />
-		</finder>
 		<finder name="Key" return-type="Ticket">
 			<finder-column name="key" />
 		</finder>

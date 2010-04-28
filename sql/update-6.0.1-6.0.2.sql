@@ -38,6 +38,16 @@ create table SocialEquitySetting (
 	active_ BOOLEAN
 );
 
+create table Ticket (
+	ticketId LONG not null primary key,
+	companyId LONG,
+	createDate DATE null,
+	classNameId LONG,
+	classPK LONG,
+	key_ VARCHAR(75) null,
+	expirationDate DATE null
+);
+
 alter table User_ add socialContributionEquity DOUBLE;
 alter table User_ add socialParticipationK DOUBLE;
 alter table User_ add socialParticipationB DOUBLE;
