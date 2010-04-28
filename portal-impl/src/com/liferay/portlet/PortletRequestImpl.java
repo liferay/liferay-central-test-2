@@ -745,7 +745,7 @@ public abstract class PortletRequestImpl implements LiferayPortletRequest {
 					PortletQNameUtil.getKey(qName));
 
 				if ((values) == null || (values.length == 0) ||
-						Validator.isNull(values[0])) {
+					(Validator.isNull(values[0]))) {
 
 					continue;
 				}
