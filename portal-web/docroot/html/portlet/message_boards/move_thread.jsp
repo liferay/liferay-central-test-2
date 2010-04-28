@@ -91,10 +91,6 @@ boolean quote = false;
 				<%@ include file="/html/portlet/message_boards/bbcode_editor.jspf" %>
 
 				<aui:input name="body" type="hidden" />
-
-				<aui:script use="liferay-bbcode-editor">
-					<portlet:namespace />setHTML('<%= LanguageUtil.format(pageContext, "the-new-thread-can-be-found-at-x", "[url=[$NEW_THREAD_URL$]][$NEW_THREAD_URL$][/url]") %>');
-				</aui:script>
 			</aui:field-wrapper>
 		</div>
 	</aui:fieldset>
