@@ -101,7 +101,7 @@ private void _buildCategoriesNavigation(List<AssetCategory> categories, long cur
 		long categoryId = category.getCategoryId();
 		String name = category.getName();
 
-		List<AssetCategory> categoriesChildren = AssetCategoryServiceUtil.getChildCategories(category.getCategoryId());
+		List<AssetCategory> categoriesChildren = AssetCategoryServiceUtil.getChildCategories(category.getCategoryId(), QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 
 		sb.append("<li><span>");
 
@@ -135,7 +135,7 @@ private void _buildCategoriesNavigation(List<AssetCategory> categories, long cur
 }
 
 private String _buildVocabularyNavigation(AssetVocabulary vocabulary, long categoryId, PortletURL portletURL) throws Exception {
-	List<AssetCategory> categories = AssetCategoryServiceUtil.getVocabularyRootCategories(vocabulary.getVocabularyId());
+	List<AssetCategory> categories = AssetCategoryServiceUtil.getVocabularyRootCategories(vocabulary.getVocabularyId(), QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 
 	if (categories.isEmpty()) {
 		return null;

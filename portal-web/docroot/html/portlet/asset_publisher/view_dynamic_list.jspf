@@ -44,7 +44,7 @@ int total = 0;
 if (assetVocabularyId > 0) {
 	AssetVocabulary assetVocabulary = AssetVocabularyLocalServiceUtil.getVocabulary(assetVocabularyId);
 
-	List<AssetCategory> assetCategories = AssetCategoryLocalServiceUtil.getVocabularyRootCategories(assetVocabulary.getVocabularyId());
+	List<AssetCategory> assetCategories = AssetCategoryLocalServiceUtil.getVocabularyRootCategories(assetVocabulary.getVocabularyId(), QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 
 	for (AssetCategory assetCategory : assetCategories) {
 		long[] newAllAssetCategoryIds = ArrayUtil.append(allAssetCategoryIds, assetCategory.getCategoryId());
