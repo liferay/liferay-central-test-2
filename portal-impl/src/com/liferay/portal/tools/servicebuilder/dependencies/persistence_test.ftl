@@ -273,11 +273,11 @@ public class ${entity.name}PersistenceTest extends BasePersistenceTestCase {
 			dynamicQuery.add(RestrictionsFactoryUtil.eq("${column.name}", new${entity.name}.get${column.methodName}()));
 		</#if>
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<${entity.name}> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(1, result.size());
 
-		${entity.name} existing${entity.name} = (${entity.name})result.get(0);
+		${entity.name} existing${entity.name} = result.get(0);
 
 		assertEquals(existing${entity.name}, new${entity.name});
 	}
@@ -315,7 +315,7 @@ public class ${entity.name}PersistenceTest extends BasePersistenceTestCase {
 			));
 		</#if>
 
-		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+		List<${entity.name}> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

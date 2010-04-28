@@ -34,7 +34,7 @@ public interface BasePersistence<T extends BaseModel<T>> {
 
 	public void clearCache();
 
-	public int countWithDynamicQuery(DynamicQuery dynamicQuery)
+	public long countWithDynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException;
 
 	public T fetchByPrimaryKey(Serializable primaryKey) throws SystemException;
@@ -42,14 +42,14 @@ public interface BasePersistence<T extends BaseModel<T>> {
 	public T findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException;
 
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
+	public List<T> findWithDynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException;
 
-	public List<Object> findWithDynamicQuery(
+	public List<T> findWithDynamicQuery(
 			DynamicQuery dynamicQuery, int start, int end)
 		throws SystemException;
 
-	public List<Object> findWithDynamicQuery(
+	public List<T> findWithDynamicQuery(
 			DynamicQuery dynamicQuery, int start, int end,
 			OrderByComparator orderByComparator)
 		throws SystemException;

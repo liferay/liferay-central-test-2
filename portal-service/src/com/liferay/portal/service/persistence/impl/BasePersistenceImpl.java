@@ -58,18 +58,18 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 		_sessionFactory.closeSession(session);
 	}
 
-	public int countWithDynamicQuery(DynamicQuery dynamicQuery)
+	public long countWithDynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 
 		dynamicQuery.setProjection(ProjectionFactoryUtil.rowCount());
 
-		List<Object> results = findWithDynamicQuery(dynamicQuery);
+		List<?> results = findWithDynamicQuery(dynamicQuery);
 
 		if (results.isEmpty()) {
 			return 0;
 		}
 		else {
-			return ((Long)results.get(0)).intValue();
+			return ((Long)results.get(0)).longValue();
 		}
 	}
 
@@ -85,7 +85,7 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 		throw new UnsupportedOperationException();
 	}
 
-	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
+	public List<T> findWithDynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 
 		Session session = null;
@@ -105,7 +105,7 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 		}
 	}
 
-	public List<Object> findWithDynamicQuery(
+	public List<T> findWithDynamicQuery(
 			DynamicQuery dynamicQuery, int start, int end)
 		throws SystemException {
 
@@ -128,7 +128,7 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 		}
 	}
 
-	public List<Object> findWithDynamicQuery(
+	public List<T> findWithDynamicQuery(
 			DynamicQuery dynamicQuery, int start, int end,
 			OrderByComparator orderByComparator)
 		throws SystemException {

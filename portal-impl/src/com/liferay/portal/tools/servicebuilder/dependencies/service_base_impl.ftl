@@ -71,19 +71,19 @@ import com.liferay.portal.kernel.exception.SystemException;
 		${entity.varName}Persistence.remove(${entity.varName});
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery) throws SystemException {
+	public List<${entity.name}> dynamicQuery(DynamicQuery dynamicQuery) throws SystemException {
 		return ${entity.varName}Persistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start, int end) throws SystemException {
+	public List<${entity.name}> dynamicQuery(DynamicQuery dynamicQuery, int start, int end) throws SystemException {
 		return ${entity.varName}Persistence.findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start, int end, OrderByComparator orderByComparator) throws SystemException {
+	public List<${entity.name}> dynamicQuery(DynamicQuery dynamicQuery, int start, int end, OrderByComparator orderByComparator) throws SystemException {
 		return ${entity.varName}Persistence.findWithDynamicQuery(dynamicQuery, start, end, orderByComparator);
 	}
 
-	public int dynamicQueryCount(DynamicQuery dynamicQuery) throws SystemException {
+	public long dynamicQueryCount(DynamicQuery dynamicQuery) throws SystemException {
 		return ${entity.varName}Persistence.countWithDynamicQuery(dynamicQuery);
 	}
 
