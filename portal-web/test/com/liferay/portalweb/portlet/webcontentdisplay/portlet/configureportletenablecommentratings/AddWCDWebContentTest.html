@@ -45,7 +45,7 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>FCKeditor1___Frame</td>
+	<td>cke_contents_CKEditor1</td>
 	<td></td>
 </tr>
 <tr>
@@ -55,17 +55,12 @@
 </tr>
 <tr>
 	<td>selectFrame</td>
-	<td>//iframe[@id="_15_structure_el_TextAreaField_content"]</td>
+	<td>//iframe[@id='_15_structure_el_TextAreaField_content']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>selectFrame</td>
-	<td>//iframe[@id="FCKeditor1___Frame"]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>selectFrame</td>
-	<td>//iframe</td>
+	<td>//td[@id='cke_contents_CKEditor1']/iframe</td>
 	<td></td>
 </tr>
 <tr>
@@ -90,13 +85,13 @@
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>//input[@value='Save and Approve']</td>
+	<td>//input[@value='Publish']</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>assertText</td>
+	<td>//p</td>
 	<td>This is a test wcd web content.</td>
-	<td></td>
 </tr>
 
 </tbody></table>

@@ -29,11 +29,12 @@ public class SearchWCDWebContentTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTestSuite(AddPageTest.class);
-		testSuite.addTestSuite(AddPortletTest.class);
+		testSuite.addTestSuite(AddPageWCDTest.class);
+		testSuite.addTestSuite(AddPortletWCDTest.class);
 		testSuite.addTestSuite(AddWCDWebContentTest.class);
 		testSuite.addTestSuite(SearchWCDWebContentTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownWebContentTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

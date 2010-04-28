@@ -45,6 +45,7 @@ public class AddPortletLanguageTest extends BaseTestCase {
 		selenium.clickAt("link=Language Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("_145_addApplication", RuntimeVariables.replace(""));
+		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -52,8 +53,7 @@ public class AddPortletLanguageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible(
-							"//input[@id='layout_configuration_content']")) {
+				if (selenium.isVisible("layout_configuration_content")) {
 					break;
 				}
 			}
@@ -63,9 +63,7 @@ public class AddPortletLanguageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("//input[@id='layout_configuration_content']",
-			RuntimeVariables.replace(""));
-		selenium.typeKeys("//input[@id='layout_configuration_content']",
+		selenium.typeKeys("layout_configuration_content",
 			RuntimeVariables.replace("l"));
 
 		for (int second = 0;; second++) {
@@ -74,7 +72,7 @@ public class AddPortletLanguageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("//div[@id='Tools-Language']/p/a")) {
+				if (selenium.isVisible("//div[@title='Language']/p/a")) {
 					break;
 				}
 			}
@@ -84,7 +82,7 @@ public class AddPortletLanguageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//div[@id='Tools-Language']/p/a",
+		selenium.clickAt("//div[@title='Language']/p/a",
 			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -93,7 +91,7 @@ public class AddPortletLanguageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("//td[1]/div[1]/div")) {
+				if (selenium.isVisible("//section")) {
 					break;
 				}
 			}
@@ -103,6 +101,6 @@ public class AddPortletLanguageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertTrue(selenium.isVisible("//td[1]/div[1]/div"));
+		assertTrue(selenium.isVisible("//section"));
 	}
 }

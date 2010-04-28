@@ -83,7 +83,7 @@ public class AddWebContentLocalizedTest extends BaseTestCase {
 
 				selenium.click("link=LOCALIZED");
 				selenium.selectWindow("null");
-				Thread.sleep(5000);
+				Thread.sleep(10000);
 				assertTrue(selenium.isTextPresent("Test Localized Structure"));
 				assertTrue(selenium.isElementPresent(
 						"link=Test Localized Template"));
@@ -232,9 +232,9 @@ public class AddWebContentLocalizedTest extends BaseTestCase {
 				}
 
 				Thread.sleep(5000);
-				selenium.type("_15_text",
+				selenium.type("page-name",
 					RuntimeVariables.replace("Hello World Page Name"));
-				selenium.type("//li[2]/span[2]/div/div[2]/span/span/span/input",
+				selenium.type("page-description",
 					RuntimeVariables.replace("Hello World Page Description"));
 				selenium.type("_15_title",
 					RuntimeVariables.replace("Hello World Localized Article"));
@@ -245,8 +245,7 @@ public class AddWebContentLocalizedTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent(
-									"//input[@value=\"Save and Continue\"]")) {
+						if (selenium.isElementPresent("_15_saveArticleBtn")) {
 							break;
 						}
 					}
@@ -256,8 +255,9 @@ public class AddWebContentLocalizedTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.clickAt("//input[@value=\"Save and Continue\"]",
+				selenium.clickAt("_15_saveArticleBtn",
 					RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -287,13 +287,13 @@ public class AddWebContentLocalizedTest extends BaseTestCase {
 				assertEquals("Chinese (China)",
 					selenium.getSelectedLabel("_15_languageId"));
 				Thread.sleep(5000);
-				selenium.type("_15_text",
+				selenium.type("page-name",
 					RuntimeVariables.replace(
 						"\u4e16\u754c\u60a8\u597d Page Name"));
-				selenium.type("//li[2]/span[2]/div/div[2]/span/span/span/input",
+				selenium.type("page-description",
 					RuntimeVariables.replace(
 						"\u4e16\u754c\u60a8\u597d Page Description"));
-				selenium.clickAt("//input[@value=\"Save and Approve\"]",
+				selenium.clickAt("//input[@value='Publish']",
 					RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {

@@ -29,10 +29,10 @@ public class ConvertUnitTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTestSuite(AddPageTest.class);
-		testSuite.addTestSuite(AddPortletTest.class);
+		testSuite.addTestSuite(AddPageUCTest.class);
+		testSuite.addTestSuite(AddPortletUCTest.class);
 		testSuite.addTestSuite(ConvertUnitTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

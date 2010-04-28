@@ -39,7 +39,9 @@ public class ViewWCDWebContentLocalizedTests extends BaseTests {
 		testSuite.addTestSuite(AddWebContentLocalizedTest.class);
 		testSuite.addTestSuite(SelectWebContentLocalizedTest.class);
 		testSuite.addTestSuite(ViewWCDWebContentLocalizedTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownLanguageTest.class);
+		testSuite.addTestSuite(TearDownWebContentTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

@@ -83,7 +83,8 @@ public class ConfigurePortletEnableCommentRatingsTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace(
 				"This is a test wcd web content comment."),
 			selenium.getText("//td[2]/div[1]"));
-		assertEquals(RuntimeVariables.replace("0 (0 Votes)"),
-			selenium.getText("//div[@class='aui-rating-label-element']"));
+		assertEquals(RuntimeVariables.replace(
+				"0 (0 Votes) The average rating is 0 stars out of 5."),
+			selenium.getText("//td[1]/div/div/div/div"));
 	}
 }

@@ -32,8 +32,7 @@ public class AddPortletWCDTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"link=Web Content Display Test Page")) {
+				if (selenium.isVisible("link=Web Content Display Test Page")) {
 					break;
 				}
 			}
@@ -47,6 +46,7 @@ public class AddPortletWCDTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("_145_addApplication", RuntimeVariables.replace(""));
+		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -54,8 +54,7 @@ public class AddPortletWCDTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible(
-							"//input[@id='layout_configuration_content']")) {
+				if (selenium.isVisible("layout_configuration_content")) {
 					break;
 				}
 			}
@@ -65,9 +64,7 @@ public class AddPortletWCDTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("//input[@id='layout_configuration_content']",
-			RuntimeVariables.replace(""));
-		selenium.typeKeys("//input[@id='layout_configuration_content']",
+		selenium.typeKeys("layout_configuration_content",
 			RuntimeVariables.replace("w"));
 
 		for (int second = 0;; second++) {
@@ -77,7 +74,7 @@ public class AddPortletWCDTest extends BaseTestCase {
 
 			try {
 				if (selenium.isVisible(
-							"//div[@id=\"ContentManagement-WebContentDisplay\"]/p/a")) {
+							"//div[@title='Web Content Display']/p/a")) {
 					break;
 				}
 			}
@@ -87,7 +84,7 @@ public class AddPortletWCDTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//div[@id=\"ContentManagement-WebContentDisplay\"]/p/a",
+		selenium.clickAt("//div[@title='Web Content Display']/p/a",
 			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -96,7 +93,7 @@ public class AddPortletWCDTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("//td[1]/div[1]/div")) {
+				if (selenium.isVisible("//section")) {
 					break;
 				}
 			}
@@ -106,6 +103,6 @@ public class AddPortletWCDTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertTrue(selenium.isElementPresent("//td[1]/div[1]/div"));
+		assertTrue(selenium.isVisible("//section"));
 	}
 }

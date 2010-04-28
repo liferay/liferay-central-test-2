@@ -75,7 +75,7 @@ public class AddWebContentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("FCKeditor1___Frame")) {
+				if (selenium.isElementPresent("cke_contents_CKEditor1")) {
 					break;
 				}
 			}
@@ -102,9 +102,8 @@ public class AddWebContentTest extends BaseTestCase {
 		}
 
 		selenium.selectFrame(
-			"//iframe[@id=\"_15_structure_el_TextAreaField_content\"]");
-		selenium.selectFrame("//iframe[@id=\"FCKeditor1___Frame\"]");
-		selenium.selectFrame("//iframe");
+			"//iframe[@id='_15_structure_el_TextAreaField_content']");
+		selenium.selectFrame("//td[@id='cke_contents_CKEditor1']/iframe");
 		selenium.type("//body",
 			RuntimeVariables.replace("This is a test web content."));
 		selenium.selectFrame("relative=top");
@@ -112,7 +111,7 @@ public class AddWebContentTest extends BaseTestCase {
 			RuntimeVariables.replace("label=Announcements"));
 		selenium.type("_15_description",
 			RuntimeVariables.replace("Test Description."));
-		selenium.clickAt("//input[@value='Save and Approve']",
+		selenium.clickAt("//input[@value='Publish']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
