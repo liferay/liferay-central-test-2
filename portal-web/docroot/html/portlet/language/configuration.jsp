@@ -39,7 +39,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 		for (int i = 0; i < languageIds.length; i++) {
 			String languageId = languageIds[i];
 
-			leftList.add(new KeyValuePair(languageId, LocaleUtil.fromLanguageId(languageId).getDisplayName()));
+			leftList.add(new KeyValuePair(languageId, LocaleUtil.fromLanguageId(languageId).getDisplayName(locale)));
 		}
 
 		// Right list
@@ -54,7 +54,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 			String languageId = (String)itr.next();
 
 			if (Arrays.binarySearch(languageIds, languageId) < 0) {
-				rightList.add(new KeyValuePair(languageId, LocaleUtil.fromLanguageId(languageId).getDisplayName()));
+				rightList.add(new KeyValuePair(languageId, LocaleUtil.fromLanguageId(languageId).getDisplayName(locale)));
 			}
 		}
 
