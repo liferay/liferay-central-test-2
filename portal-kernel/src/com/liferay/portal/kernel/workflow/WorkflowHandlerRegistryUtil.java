@@ -58,16 +58,21 @@ public class WorkflowHandlerRegistryUtil {
 			Map<String, Serializable> workflowContext)
 		throws PortalException, SystemException {
 
+		WorkflowHandler workflowHandler = getWorkflowHandler(className);
+
+		if (workflowHandler == null) {
+			return;
+		}
+		
 		if (!WorkflowThreadLocal.isEnabled()) {
+			workflowHandler.updateStatus(
+				WorkflowConstants.STATUS_APPROVED, workflowContext);
+
 			return;
 		}
 
-		WorkflowHandler workflowHandler = getWorkflowHandler(className);
-
-		if (workflowHandler != null) {
-			workflowHandler.startWorkflowInstance(
-				companyId, groupId, userId, classPK, model, workflowContext);
-		}
+		workflowHandler.startWorkflowInstance(
+			companyId, groupId, userId, classPK, model, workflowContext);
 	}
 
 	public static void unregister(List<WorkflowHandler> workflowHandlers) {
