@@ -189,8 +189,6 @@ public class PortletKeys {
 
 	public static final String WIKI = "36";
 
-	public static final String WIKI_ADMIN = "154";
-
 	public static final String WORKFLOW_TASKS = "150";
 
 	public static final String WORKFLOW_DEFINITIONS = "151";

@@ -38,6 +38,17 @@ boolean print = ParamUtil.getString(request, "viewMode").equals(Constants.PRINT)
 	%>
 
 	<div class="top-links-container">
+		<c:if test="<%= themeDisplay.isSignedIn() && (WikiPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_NODE) || GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.PERMISSIONS)) %>">
+
+			<%
+			portletURL.setParameter("struts_action", "/wiki/view_nodes");
+			%>
+
+			<div class="top-links-configuration">
+				<liferay-ui:icon cssClass="top-link" image="manage_nodes" message="manage-wikis" url="<%= portletURL.toString() %>" />
+			</div>
+		</c:if>
+
 		<c:if test="<%= nodes.size() > 1 %>">
 			<div class="top-links-nodes">
 
