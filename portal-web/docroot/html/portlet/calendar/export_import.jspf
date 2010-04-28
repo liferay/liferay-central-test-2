@@ -38,7 +38,7 @@
 	</c:if>
 
 	<aui:fieldset label="import">
-		<aui:input cssClass="lfr-input-text-container" name="file" type="file" />
+		<aui:input cssClass="lfr-input-text-container" label="" name="file" type="file" />
 	</aui:fieldset>
 
 	<portlet:actionURL var="importEventsURL">

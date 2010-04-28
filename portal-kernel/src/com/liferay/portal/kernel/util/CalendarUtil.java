@@ -38,6 +38,8 @@ public class CalendarUtil {
 		"saturday-abbreviation"
 	};
 
+	public static final String ICAL_EXTENSION = "ics";
+
 	public static int[] MONTH_IDS = new int[] {
 		Calendar.JANUARY, Calendar.FEBRUARY, Calendar.MARCH, Calendar.APRIL,
 		Calendar.MAY, Calendar.JUNE, Calendar.JULY, Calendar.AUGUST,

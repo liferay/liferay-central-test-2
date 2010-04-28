@@ -1,4 +1,3 @@
-<%
 /**
  * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
  *
@@ -12,12 +11,33 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-%>
 
-<%@ include file="/html/portlet/calendar/init.jsp" %>
+package com.liferay.portlet.calendar;
 
-<liferay-ui:tabs names="error" backURL="javascript:history.go(-1);" />
+import com.liferay.portal.kernel.exception.PortalException;
 
-<liferay-ui:error exception="<%= ImportEventsException.class %>" message="please-enter-a-file-with-a-valid-file-type" />
-<liferay-ui:error exception="<%= NoSuchEventException.class %>" message="the-event-could-not-be-found" />
-<liferay-ui:error exception="<%= PrincipalException.class %>" message="you-do-not-have-the-required-permissions" />
+/**
+ * <a href="ImportEventsException.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ * @author Juan Fernández
+ */
+public class ImportEventsException extends PortalException {
+
+	public ImportEventsException() {
+		super();
+	}
+
+	public ImportEventsException(String msg) {
+		super(msg);
+	}
+
+	public ImportEventsException(String msg, Throwable cause) {
+		super(msg, cause);
+	}
+
+	public ImportEventsException(Throwable cause) {
+		super(cause);
+	}
+
+}

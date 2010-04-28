@@ -82,5 +82,6 @@
 		<exception>EventEndDate</exception>
 		<exception>EventStartDate</exception>
 		<exception>EventTitle</exception>
+		<exception>ImportEvents</exception>
 	</exceptions>
 </service-builder>

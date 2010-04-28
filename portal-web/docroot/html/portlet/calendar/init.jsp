@@ -21,6 +21,7 @@
 <%@ page import="com.liferay.portlet.calendar.EventEndDateException" %>
 <%@ page import="com.liferay.portlet.calendar.EventStartDateException" %>
 <%@ page import="com.liferay.portlet.calendar.EventTitleException" %>
+<%@ page import="com.liferay.portlet.calendar.ImportEventsException" %>
 <%@ page import="com.liferay.portlet.calendar.NoSuchEventException" %>
 <%@ page import="com.liferay.portlet.calendar.model.CalEvent" %>
 <%@ page import="com.liferay.portlet.calendar.model.CalEventConstants" %>
