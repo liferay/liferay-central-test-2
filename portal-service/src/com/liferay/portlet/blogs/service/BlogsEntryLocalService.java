@@ -259,7 +259,7 @@ public interface BlogsEntryLocalService {
 
 	public com.liferay.portlet.blogs.model.BlogsEntry updateStatus(
 		long userId, long entryId, java.lang.String[] trackbacks,
-		boolean pingOldTrackbaks,
+		boolean pingOldTrackbaks, int status,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
