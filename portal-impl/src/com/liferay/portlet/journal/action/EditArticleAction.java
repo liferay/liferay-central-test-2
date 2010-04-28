@@ -124,6 +124,7 @@ public class EditArticleAction extends PortletAction {
 			if (Validator.isNotNull(cmd)) {
 				String redirect = ParamUtil.getString(
 					actionRequest, "redirect");
+
 				int workflowAction = ParamUtil.getInteger(
 					actionRequest, "workflowAction",
 					WorkflowConstants.ACTION_PUBLISH);

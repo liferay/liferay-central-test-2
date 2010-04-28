@@ -20,7 +20,6 @@ import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
-import com.liferay.portal.kernel.workflow.WorkflowThreadLocal;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
@@ -218,10 +217,10 @@ public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 			displayDateHour += 12;
 		}
 
-		int status = entry.getStatus();
 		boolean allowPingbacks = entry.isAllowPingbacks();
 		boolean allowTrackbacks = entry.isAllowTrackbacks();
 		String[] trackbacks = StringUtil.split(entry.getTrackbacks());
+		int status = entry.getStatus();
 
 		String[] assetTagNames = null;
 
@@ -243,8 +242,6 @@ public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 			serviceContext.setWorkflowAction(
 				WorkflowConstants.ACTION_SAVE_DRAFT);
 		}
-
-		WorkflowThreadLocal.setEnabled(false);
 
 		BlogsEntry importedEntry = null;
 

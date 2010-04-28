@@ -35,6 +35,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
+import com.liferay.portal.kernel.workflow.WorkflowHandlerRegistryUtil;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.ResourceConstants;
@@ -56,6 +57,7 @@ import com.liferay.portlet.blogs.util.LinkbackProducerUtil;
 import com.liferay.portlet.blogs.util.comparator.EntryDisplayDateComparator;
 
 import java.io.IOException;
+import java.io.Serializable;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -152,18 +154,21 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 				entryId, WorkflowConstants.ACTION_PUBLISH);
 		}
 
-		// Status
-
-		int status = WorkflowConstants.STATUS_DRAFT;
+		// Workflow
 
 		if (serviceContext.getWorkflowAction() ==
 				WorkflowConstants.ACTION_PUBLISH) {
 
-			status = WorkflowConstants.STATUS_APPROVED;
-		}
+			Map<String, Serializable> workflowContext =
+				new HashMap<String, Serializable>();
 
-		entry = updateStatus(
-			userId, entryId, trackbacks, false, status, serviceContext);
+			workflowContext.put("trackbacks", trackbacks);
+
+			WorkflowHandlerRegistryUtil.startWorkflowInstance(
+				user.getCompanyId(), groupId, userId,
+				BlogsEntry.class.getName(), entry.getEntryId(), entry,
+				workflowContext);
+		}
 
 		return entry;
 	}
@@ -521,7 +526,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			userId, entry, serviceContext.getAssetCategoryIds(),
 			serviceContext.getAssetTagNames());
 
-		// Status
+		// Workflow
 
 		boolean pingOldTrackbacks = false;
 
@@ -529,17 +534,20 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			pingOldTrackbacks = true;
 		}
 
-		int status = WorkflowConstants.STATUS_DRAFT;
-
 		if (serviceContext.getWorkflowAction() ==
 				WorkflowConstants.ACTION_PUBLISH) {
 
-			status = WorkflowConstants.STATUS_APPROVED;
-		}
+			Map<String, Serializable> workflowContext =
+				new HashMap<String, Serializable>();
 
-		entry = updateStatus(
-			userId, entryId, trackbacks, pingOldTrackbacks, status,
-			serviceContext);
+			workflowContext.put("pingOldTrackbacks", pingOldTrackbacks);
+			workflowContext.put("trackbacks", trackbacks);
+
+			WorkflowHandlerRegistryUtil.startWorkflowInstance(
+				user.getCompanyId(), entry.getGroupId(), userId,
+				BlogsEntry.class.getName(), entry.getEntryId(), entry,
+				workflowContext);
+		}
 
 		return entry;
 	}
@@ -580,7 +588,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		Indexer indexer = IndexerRegistryUtil.getIndexer(BlogsEntry.class);
 
 		if ((oldStatus != WorkflowConstants.STATUS_APPROVED) &&
-				status == WorkflowConstants.STATUS_APPROVED) {
+			(status == WorkflowConstants.STATUS_APPROVED)) {
 
 			// Statistics
 

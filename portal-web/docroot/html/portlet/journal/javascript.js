@@ -1462,7 +1462,7 @@ AUI().add(
 
 					if (canSubmit) {
 						if (cmd == 'publish') {
-							workflowActionInput.val('0');
+							workflowActionInput.val(0);
 
 							cmd = instance.articleId ? 'update' : 'add';
 						}

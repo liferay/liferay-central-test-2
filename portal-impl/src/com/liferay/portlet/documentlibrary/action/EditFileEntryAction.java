@@ -31,7 +31,6 @@ import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
-import com.liferay.portal.service.WorkflowDefinitionLinkLocalServiceUtil;
 import com.liferay.portal.service.WorkflowInstanceLinkLocalServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -307,15 +306,6 @@ public class EditFileEntryAction extends PortletAction {
 		if (cmd.equals(Constants.ADD)) {
 
 			// Add file entry
-
-			if (WorkflowDefinitionLinkLocalServiceUtil.
-					hasWorkflowDefinitionLink(
-						themeDisplay.getCompanyId(), groupId,
-						DLFileEntry.class.getName())) {
-
-				serviceContext.setWorkflowAction(
-					WorkflowConstants.ACTION_SAVE_DRAFT);
-			}
 
 			DLFileEntry fileEntry = DLFileEntryServiceUtil.addFileEntry(
 				groupId, newFolderId, sourceFileName, title, description,

@@ -331,8 +331,8 @@ public class EditEntryAction extends PortletAction {
 				allowPingbacks, allowTrackbacks, trackbacks, serviceContext);
 
 			AssetPublisherUtil.addAndStoreSelection(
-				actionRequest, BlogsEntry.class.getName(),
-				entry.getEntryId(), -1);
+				actionRequest, BlogsEntry.class.getName(), entry.getEntryId(),
+				-1);
 		}
 		else {
 
@@ -352,8 +352,8 @@ public class EditEntryAction extends PortletAction {
 			}
 
 			AssetPublisherUtil.addAndStoreSelection(
-				actionRequest, BlogsEntry.class.getName(),
-				entry.getEntryId(), -1);
+				actionRequest, BlogsEntry.class.getName(), entry.getEntryId(),
+				-1);
 		}
 
 		return new Object[] {entry, oldUrlTitle};

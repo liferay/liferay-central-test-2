@@ -62,30 +62,30 @@ public class WorkflowHandlerRegistryUtil {
 		WorkflowHandler workflowHandler = getWorkflowHandler(className);
 
 		if (workflowHandler == null) {
-			throw new SystemException(
-				"No workflow handler was found for " + className);
+			throw new WorkflowException(
+				"No workflow handler found for " + className);
 		}
+
+		int status = WorkflowConstants.STATUS_PENDING;
 
 		if (!WorkflowThreadLocal.isEnabled() ||
 			!WorkflowEngineManagerUtil.isDeployed()) {
 
-			if (workflowContext == null) {
-				workflowContext = new HashMap<String, Serializable>();
-			}
-			workflowContext.put(
-				WorkflowConstants.CONTEXT_COMPANY_ID, companyId);
-			workflowContext.put(
-				WorkflowConstants.CONTEXT_GROUP_ID, groupId);
-			workflowContext.put(
-				WorkflowConstants.CONTEXT_USER_ID, userId);
-			workflowContext.put(
-				WorkflowConstants.CONTEXT_ENTRY_CLASS_NAME, className);
-			workflowContext.put(
-				WorkflowConstants.CONTEXT_ENTRY_CLASS_PK, classPK);
-
-			workflowHandler.updateStatus(
-				WorkflowConstants.STATUS_APPROVED, workflowContext);
+			status = WorkflowConstants.STATUS_APPROVED;
 		}
+
+		if (workflowContext == null) {
+			workflowContext = new HashMap<String, Serializable>();
+		}
+
+		workflowContext.put(WorkflowConstants.CONTEXT_COMPANY_ID, companyId);
+		workflowContext.put(WorkflowConstants.CONTEXT_GROUP_ID, groupId);
+		workflowContext.put(WorkflowConstants.CONTEXT_USER_ID, userId);
+		workflowContext.put(
+			WorkflowConstants.CONTEXT_ENTRY_CLASS_NAME, className);
+		workflowContext.put(WorkflowConstants.CONTEXT_ENTRY_CLASS_PK, classPK);
+
+		workflowHandler.updateStatus(status, workflowContext);
 
 		workflowHandler.startWorkflowInstance(
 			companyId, groupId, userId, classPK, model, workflowContext);

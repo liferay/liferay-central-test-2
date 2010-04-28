@@ -24,7 +24,6 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.TimeZoneUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
-import com.liferay.portal.kernel.workflow.WorkflowThreadLocal;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.DocumentException;
 import com.liferay.portal.kernel.xml.Element;
@@ -258,6 +257,12 @@ public class WordPressImporter {
 		int displayDateHour = cal.get(Calendar.HOUR_OF_DAY);
 		int displayDateMinute = cal.get(Calendar.MINUTE);
 
+		String pingStatusText = entryEl.elementTextTrim(
+			SAXReaderUtil.createQName("ping_status", _NS_WP));
+
+		boolean allowPingbacks = pingStatusText.equalsIgnoreCase("open");
+		boolean allowTrackbacks = allowPingbacks;
+
 		String statusText = entryEl.elementTextTrim(
 			SAXReaderUtil.createQName("status", _NS_WP));
 
@@ -266,12 +271,6 @@ public class WordPressImporter {
 		if (statusText.equalsIgnoreCase("draft")) {
 			workflowAction = WorkflowConstants.ACTION_SAVE_DRAFT;
 		}
-
-		String pingStatusText = entryEl.elementTextTrim(
-			SAXReaderUtil.createQName("ping_status", _NS_WP));
-
-		boolean allowPingbacks = pingStatusText.equalsIgnoreCase("open");
-		boolean allowTrackbacks = allowPingbacks;
 
 		String[] assetTagNames = null;
 
@@ -288,8 +287,6 @@ public class WordPressImporter {
 		serviceContext.setAssetTagNames(assetTagNames);
 		serviceContext.setScopeGroupId(context.getGroupId());
 		serviceContext.setWorkflowAction(workflowAction);
-
-		WorkflowThreadLocal.setEnabled(false);
 
 		BlogsEntry entry = null;
 

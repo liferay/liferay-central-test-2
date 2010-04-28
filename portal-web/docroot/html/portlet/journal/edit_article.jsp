@@ -563,16 +563,16 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 					<aui:button name="saveArticleBtn" value="save" />
 
 					<%
-					boolean workflowInProgress = false;
+					boolean hasWorkflowInstanceLink = false;
 
 					if (article != null) {
-						workflowInProgress = WorkflowInstanceLinkLocalServiceUtil.hasWorkflowInstanceLink(company.getCompanyId(), groupId, JournalArticle.class.getName(), article.getId());
+						hasWorkflowInstanceLink = WorkflowInstanceLinkLocalServiceUtil.hasWorkflowInstanceLink(company.getCompanyId(), groupId, JournalArticle.class.getName(), article.getId());
 					}
 					%>
 
-					<aui:button name="publishBtn" value="publish" disabled="<%= workflowInProgress %>" />
+					<aui:button name="publishBtn" value="publish" disabled="<%= hasWorkflowInstanceLink %>" />
 
-					<c:if test="<%= workflowInProgress %>">
+					<c:if test="<%= hasWorkflowInstanceLink %>">
 						<liferay-ui:icon-help message="there-is-a-publication-workflow-in-process" />
 					</c:if>
 				</c:if>

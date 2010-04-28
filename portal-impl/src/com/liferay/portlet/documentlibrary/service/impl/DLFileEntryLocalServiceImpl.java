@@ -192,17 +192,10 @@ public class DLFileEntryLocalServiceImpl
 
 		// File version
 
-		int status =  WorkflowConstants.STATUS_DRAFT;
-
-		if (serviceContext.getWorkflowAction() ==
-				WorkflowConstants.ACTION_PUBLISH) {
-
-			status =  WorkflowConstants.STATUS_PENDING;
-		}
-
 		addFileVersion(
 			user, fileEntry, serviceContext.getModifiedDate(now),
-			DLFileEntryConstants.DEFAULT_VERSION, null, size, status);
+			DLFileEntryConstants.DEFAULT_VERSION, null, size,
+			WorkflowConstants.STATUS_DRAFT);
 
 		// Folder
 
@@ -962,24 +955,16 @@ public class DLFileEntryLocalServiceImpl
 				addFileVersion(
 					user, fileEntry, serviceContext.getModifiedDate(now),
 					version, versionDescription, size,
-					WorkflowConstants.STATUS_PENDING);
+					WorkflowConstants.STATUS_DRAFT);
 			}
 			else {
 				version = fileEntry.getVersion();
 			}
 		}
 		catch (NoSuchFileVersionException nsfve) {
-			int status =  WorkflowConstants.STATUS_DRAFT;
-
-			if (serviceContext.getWorkflowAction() ==
-					WorkflowConstants.ACTION_PUBLISH) {
-
-				status =  WorkflowConstants.STATUS_PENDING;
-			}
-
 			addFileVersion(
 				user, fileEntry, serviceContext.getModifiedDate(now), version,
-				versionDescription, size, status);
+				versionDescription, size, WorkflowConstants.STATUS_DRAFT);
 		}
 
 		if ((is == null) && !version.equals(fileEntry.getVersion())) {
@@ -1093,8 +1078,6 @@ public class DLFileEntryLocalServiceImpl
 
 		dlFileVersionPersistence.update(latestFileVersion, false);
 
-		Indexer indexer = IndexerRegistryUtil.getIndexer(DLFileEntry.class);
-
 		if (status == WorkflowConstants.STATUS_APPROVED) {
 
 			// File entry
@@ -1125,6 +1108,8 @@ public class DLFileEntryLocalServiceImpl
 				StringPool.BLANK, 0);
 
 			// Indexer
+
+			Indexer indexer = IndexerRegistryUtil.getIndexer(DLFileEntry.class);
 
 			indexer.reindex(fileEntry);
 		}
@@ -1161,6 +1146,9 @@ public class DLFileEntryLocalServiceImpl
 
 			if (latestFileVersion.getVersion().equals(
 					DLFileEntryConstants.DEFAULT_VERSION)) {
+
+				Indexer indexer = IndexerRegistryUtil.getIndexer(
+					DLFileEntry.class);
 
 				indexer.delete(fileEntry);
 			}
