@@ -104,7 +104,7 @@ AUI().add(
 
 					A.each(
 						json,
-						function(item) {
+						function(item, index, collection) {
 							var checked = false;
 							var treeId = 'category' + item.categoryId;
 
@@ -288,8 +288,8 @@ AUI().add(
 
 							A.each(
 								instance.TREEVIEWS,
-								function(treeView) {
-									treeView.expandAll();
+								function(item, index, collection) {
+									item.expandAll();
 								}
 							);
 						}
