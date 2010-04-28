@@ -29,6 +29,7 @@
 <%@ page import="com.liferay.portlet.calendar.service.permission.CalEventPermission" %>
 <%@ page import="com.liferay.portlet.calendar.util.CalUtil" %>
 <%@ page import="com.liferay.portlet.calendar.util.comparator.EventTimeComparator" %>
+<%@ page import="com.liferay.portlet.wiki.ImportFilesException" %>
 
 <%
 PortletPreferences preferences = renderRequest.getPreferences();
