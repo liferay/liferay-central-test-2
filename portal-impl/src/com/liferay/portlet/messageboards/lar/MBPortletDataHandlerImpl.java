@@ -691,7 +691,7 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 				if (existingMessage == null) {
 					importedMessage = MBMessageLocalServiceUtil.addMessage(
 						message.getUuid(), userId, userName,
-						message.getGroupId(), categoryId, threadId,
+						context.getGroupId(), categoryId, threadId,
 						parentMessageId, message.getSubject(),
 						message.getBody(), files, message.getAnonymous(),
 						message.getPriority(), message.getAllowPingbacks(),
@@ -707,7 +707,7 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 			}
 			else {
 				importedMessage = MBMessageLocalServiceUtil.addMessage(
-					userId, userName, message.getGroupId(), categoryId,
+					userId, userName, context.getGroupId(), categoryId,
 					threadId, parentMessageId, message.getSubject(),
 					message.getBody(), files, message.getAnonymous(),
 					message.getPriority(), message.getAllowPingbacks(),
