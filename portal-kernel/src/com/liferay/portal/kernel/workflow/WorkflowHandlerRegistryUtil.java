@@ -63,7 +63,7 @@ public class WorkflowHandlerRegistryUtil {
 		if (workflowHandler == null) {
 			return;
 		}
-		
+
 		if (!WorkflowThreadLocal.isEnabled()) {
 			workflowHandler.updateStatus(
 				WorkflowConstants.STATUS_APPROVED, workflowContext);
