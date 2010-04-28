@@ -327,32 +327,13 @@ String format = ParamUtil.getString(request, "format");
 			<%= LanguageUtil.format(pageContext, "no-results-were-found-that-matched-the-keywords-x", "<strong>" + HtmlUtil.escape(keywords) + "</strong>") %>
 		</div>
 	</c:if>
-
-	<%
-	String pageSubtitle = LanguageUtil.get(pageContext, "search-results");
-	String pageDescription = LanguageUtil.get(pageContext, "search-results");
-	String pageKeywords = LanguageUtil.get(pageContext, "search");
-
-	if (!portletTitles.isEmpty()) {
-		pageDescription = LanguageUtil.get(pageContext, "searched") + StringPool.SPACE + StringUtil.merge(portletTitles, StringPool.COMMA_AND_SPACE);
-	}
-
-	if (Validator.isNotNull(keywords)) {
-		pageKeywords = keywords;
-
-		if (StringUtil.startsWith(pageKeywords, Field.ASSET_TAG_NAMES + StringPool.COLON)) {
-			pageKeywords = StringUtil.replace(pageKeywords, Field.ASSET_TAG_NAMES + StringPool.COLON, StringPool.BLANK);
-		}
-	}
-
-	PortalUtil.setPageSubtitle(pageSubtitle, request);
-	PortalUtil.setPageDescription(pageDescription, request);
-	PortalUtil.setPageKeywords(pageKeywords, request);
-	%>
-
 </aui:form>
 
 <aui:script>
+	function <portlet:namespace />addSearchProvider() {
+		window.external.AddSearchProvider("<%= themeDisplay.getPortalURL() %><%= PortalUtil.getPathMain() %>/search/open_search_description.xml?p_l_id=<%= themeDisplay.getPlid() %>&groupId=<%= groupId %>");
+	}
+
 	function <portlet:namespace />search() {
 		var keywords = document.<portlet:namespace />fm.<portlet:namespace />keywords.value;
 
@@ -363,14 +344,32 @@ String format = ParamUtil.getString(request, "format");
 		}
 	}
 
-	function <portlet:namespace />addSearchProvider() {
-		window.external.AddSearchProvider("<%= themeDisplay.getPortalURL() %><%= PortalUtil.getPathMain() %>/search/open_search_description.xml?p_l_id=<%= themeDisplay.getPlid() %>&groupId=<%= groupId %>");
-	}
-
 	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />keywords);
 	</c:if>
 </aui:script>
+
+<%
+String pageSubtitle = LanguageUtil.get(pageContext, "search-results");
+String pageDescription = LanguageUtil.get(pageContext, "search-results");
+String pageKeywords = LanguageUtil.get(pageContext, "search");
+
+if (!portletTitles.isEmpty()) {
+	pageDescription = LanguageUtil.get(pageContext, "searched") + StringPool.SPACE + StringUtil.merge(portletTitles, StringPool.COMMA_AND_SPACE);
+}
+
+if (Validator.isNotNull(keywords)) {
+	pageKeywords = keywords;
+
+	if (StringUtil.startsWith(pageKeywords, Field.ASSET_TAG_NAMES + StringPool.COLON)) {
+		pageKeywords = StringUtil.replace(pageKeywords, Field.ASSET_TAG_NAMES + StringPool.COLON, StringPool.BLANK);
+	}
+}
+
+PortalUtil.setPageSubtitle(pageSubtitle, request);
+PortalUtil.setPageDescription(pageDescription, request);
+PortalUtil.setPageKeywords(pageKeywords, request);
+%>
 
 <%!
 private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portlet.search.search.jsp");
