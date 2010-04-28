@@ -15,17 +15,12 @@
 package com.liferay.taglib.theme;
 
 import com.liferay.portal.kernel.servlet.PipingServletResponse;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.Theme;
-import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.taglib.util.ThemeUtil;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
-
-import org.apache.struts.taglib.tiles.ComponentConstants;
-import org.apache.struts.tiles.ComponentContext;
 
 /**
  * <a href="IncludeTag.java.html"><b><i>View Source</i></b></a>
@@ -40,24 +35,7 @@ public class IncludeTag extends com.liferay.taglib.util.IncludeTag {
 
 		Theme theme = (Theme)request.getAttribute(WebKeys.THEME);
 
-		ComponentContext componentContext =
-			(ComponentContext)request.getAttribute(
-				ComponentConstants.COMPONENT_CONTEXT);
-
-		if (componentContext != null) {
-			ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
-				WebKeys.THEME_DISPLAY);
-
-			String tilesTitle = (String)componentContext.getAttribute("title");
-			String tilesContent = (String)componentContext.getAttribute(
-				"content");
-			boolean tilesSelectable = GetterUtil.getBoolean(
-				(String)componentContext.getAttribute("selectable"));
-
-			themeDisplay.setTilesTitle(tilesTitle);
-			themeDisplay.setTilesContent(tilesContent);
-			themeDisplay.setTilesSelectable(tilesSelectable);
-		}
+		ThemeUtil.insertTilesVariables(request);
 
 		ThemeUtil.include(
 			servletContext, request, new PipingServletResponse(pageContext),

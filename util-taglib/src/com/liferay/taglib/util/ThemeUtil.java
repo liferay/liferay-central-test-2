@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.kernel.velocity.VelocityContext;
 import com.liferay.portal.kernel.velocity.VelocityEngineUtil;
 import com.liferay.portal.model.Theme;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.velocity.VelocityContextPool;
 import com.liferay.portal.velocity.VelocityVariables;
 
@@ -43,6 +44,9 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.PageContext;
+
+import org.apache.struts.taglib.tiles.ComponentConstants;
+import org.apache.struts.tiles.ComponentContext;
 
 /**
  * <a href="ThemeUtil.java.html"><b><i>View Source</i></b></a>
@@ -314,6 +318,29 @@ public class ThemeUtil {
 		}
 		else {
 			return ((UnsyncStringWriter)writer).toString();
+		}
+	}
+
+	public static void insertTilesVariables(HttpServletRequest request) {
+		ComponentContext componentContext =
+			(ComponentContext)request.getAttribute(
+				ComponentConstants.COMPONENT_CONTEXT);
+
+		if (componentContext != null) {
+			ThemeDisplay themeDisplay =
+				(ThemeDisplay)request.getAttribute(
+					WebKeys.THEME_DISPLAY);
+
+			String tilesTitle = (String)componentContext.getAttribute(
+				"title");
+			String tilesContent = (String)componentContext.getAttribute(
+				"content");
+			boolean tilesSelectable = GetterUtil.getBoolean(
+				(String)componentContext.getAttribute("selectable"));
+
+			themeDisplay.setTilesTitle(tilesTitle);
+			themeDisplay.setTilesContent(tilesContent);
+			themeDisplay.setTilesSelectable(tilesSelectable);
 		}
 	}
 
