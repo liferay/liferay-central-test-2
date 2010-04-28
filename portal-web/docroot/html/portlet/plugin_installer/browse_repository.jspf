@@ -23,7 +23,7 @@ String installStatus = ParamUtil.getString(request, "installStatus", PluginPacka
 %>
 
 <style type="text/css">
-	.search-params.aui-field-row .aui-field {
+	.search-params .aui-field {
 		float: left;
 		margin-bottom: 1em;
 	}
