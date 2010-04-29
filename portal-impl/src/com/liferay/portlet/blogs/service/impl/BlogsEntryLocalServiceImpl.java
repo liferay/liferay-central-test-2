@@ -120,6 +120,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		entry.setDisplayDate(displayDate);
 		entry.setAllowPingbacks(allowPingbacks);
 		entry.setAllowTrackbacks(allowTrackbacks);
+		entry.setStatus(WorkflowConstants.STATUS_DRAFT);
 		entry.setStatusDate(serviceContext.getModifiedDate(now));
 		entry.setExpandoBridgeAttributes(serviceContext);
 
@@ -271,6 +272,12 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		Indexer indexer = IndexerRegistryUtil.getIndexer(BlogsEntry.class);
 
 		indexer.delete(entry);
+
+		// Workflow
+
+		workflowInstanceLinkLocalService.deleteWorkflowInstanceLink(
+			entry.getCompanyId(), entry.getGroupId(),
+			BlogsEntry.class.getName(), entry.getEntryId());
 	}
 
 	public void deleteEntry(long entryId)

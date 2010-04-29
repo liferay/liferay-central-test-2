@@ -196,7 +196,8 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 						<portlet:namespace />redirect: document.<portlet:namespace />fm.<portlet:namespace />redirect.value,
 						<portlet:namespace />referringPortletResource: document.<portlet:namespace />fm.<portlet:namespace />referringPortletResource.value,
 						<portlet:namespace />title: title,
-						<portlet:namespace />workflowAction: <%= WorkflowConstants.ACTION_SAVE_DRAFT %>
+						<portlet:namespace />workflowAction: <%= WorkflowConstants.ACTION_SAVE_DRAFT %>,
+						<portlet:namespace />json: '1'
 					},
 					method: 'POST',
 					on: {

@@ -156,6 +156,10 @@ public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 			return;
 		}
 
+		if (entry.getStatus() != WorkflowConstants.STATUS_APPROVED) {
+			return;
+		}
+
 		String path = getEntryPath(context, entry);
 
 		if (!context.isPathNotProcessed(path)) {

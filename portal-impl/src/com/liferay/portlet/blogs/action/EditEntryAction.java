@@ -24,7 +24,6 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
@@ -140,9 +139,9 @@ public class EditEntryAction extends PortletAction {
 				updateRedirect = true;
 			}
 
-			if ((entry != null) &&
-				(entry.getStatus() == WorkflowConstants.STATUS_DRAFT)) {
+			boolean json = ParamUtil.getBoolean(actionRequest, "json", false);
 
+			if ((entry != null) && json) {
 				JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
 				jsonObj.put("entryId", entry.getEntryId());
