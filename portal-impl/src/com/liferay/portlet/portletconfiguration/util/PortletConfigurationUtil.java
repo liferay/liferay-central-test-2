@@ -14,12 +14,14 @@
 
 package com.liferay.portlet.portletconfiguration.util;
 
+import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portlet.PortletSetupUtil;
 
 import javax.portlet.PortletPreferences;
 
@@ -29,6 +31,30 @@ import javax.portlet.PortletPreferences;
  * @author Brian Wing Shun Chan
  */
 public class PortletConfigurationUtil {
+
+	public static String getPortletCustomCSSClassName(
+			PortletPreferences portletSetup)
+		throws Exception {
+
+		String classNames = StringPool.BLANK;
+
+		String css = portletSetup.getValue(
+			"portlet-setup-css", StringPool.BLANK);
+
+		if (Validator.isNotNull(css)) {
+			JSONObject portletCSSJSON = PortletSetupUtil.cssToJSON(
+				portletSetup, css);
+
+			JSONObject advancedData = portletCSSJSON.getJSONObject(
+				"advancedData");
+
+			if (advancedData != null) {
+				classNames = advancedData.getString("customCSSClassName");
+			}
+		}
+
+		return classNames;
+	}
 
 	public static String getPortletTitle(
 		PortletPreferences portletSetup, String languageId) {

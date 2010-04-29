@@ -49,6 +49,12 @@ if (portletDecorateObj != null) {
 	request.removeAttribute(WebKeys.PORTLET_DECORATE);
 }
 
+//Portlet custom CSS className
+
+String customCSSClassName = PortletConfigurationUtil.getPortletCustomCSSClassName(portletSetup);
+
+portletDisplay.setCustomCSSClassName(customCSSClassName);
+
 // Portlet title
 
 String portletTitle = PortletConfigurationUtil.getPortletTitle(portletSetup, themeDisplay.getLanguageId());

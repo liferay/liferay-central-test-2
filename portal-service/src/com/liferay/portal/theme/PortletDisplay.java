@@ -120,6 +120,14 @@ public class PortletDisplay implements Serializable {
 		_description = description;
 	}
 
+	public String getCustomCSSClassName() {
+		return _customCSSClassName;
+	}
+
+	public void setCustomCSSClassName(String _customCSSClassName) {
+		this._customCSSClassName = _customCSSClassName;
+	}
+
 	public boolean isAccess() {
 		return _access;
 	}
@@ -541,6 +549,7 @@ public class PortletDisplay implements Serializable {
 		_namespace = StringPool.BLANK;
 		_title = StringPool.BLANK;
 		_description = StringPool.BLANK;
+		_customCSSClassName = StringPool.BLANK;
 		_access = false;
 		_active = false;
 		_columnId = StringPool.BLANK;
@@ -601,6 +610,7 @@ public class PortletDisplay implements Serializable {
 		_namespace = master.getNamespace();
 		_title = master.getTitle();
 		_description = master.getDescription();
+		_customCSSClassName = master.getCustomCSSClassName();
 		_access = master.isAccess();
 		_active = master.isActive();
 		_columnId = master.getColumnId();
@@ -660,6 +670,7 @@ public class PortletDisplay implements Serializable {
 		slave.setNamespace(_namespace);
 		slave.setTitle(_title);
 		slave.setDescription(_description);
+		slave.setCustomCSSClassName(_customCSSClassName);
 		slave.setAccess(_access);
 		slave.setActive(_active);
 		slave.setColumnId(_columnId);
@@ -721,6 +732,7 @@ public class PortletDisplay implements Serializable {
 	private String _namespace = StringPool.BLANK;
 	private String _title = StringPool.BLANK;
 	private String _description = StringPool.BLANK;
+	private String _customCSSClassName = StringPool.BLANK;
 	private boolean _access;
 	private boolean _active;
 	private String _columnId = StringPool.BLANK;

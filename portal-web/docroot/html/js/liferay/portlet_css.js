@@ -428,7 +428,9 @@ AUI().add(
 				var portlet = instance._curPortlet;
 
 				var customCSS = instance._getNodeById('lfr-custom-css');
+				var customCSSClassName = instance._getNodeById('lfr-custom-css-class-name');
 				var customCSSContainer = customCSS.ancestor('.aui-field');
+				var customCSSClassNameContainer = customCSSClassName.ancestor('.aui-field');
 				var customPortletNoteHTML = '<p class="portlet-msg-info form-hint"></p>';
 				var customPortletNote = A.one('#lfr-portlet-info');
 				var refreshText = '';
@@ -458,7 +460,7 @@ AUI().add(
 
 				if (!customPortletNote) {
 					customPortletNote = A.Node.create(customPortletNoteHTML);
-					customCSSContainer.placeBefore(customPortletNote);
+					customCSSClassNameContainer.placeBefore(customPortletNote);
 
 					customPortletNote.attr('id', 'lfr-portlet-info');
 				}
@@ -719,6 +721,7 @@ AUI().add(
 					// Advanced CSS
 
 					instance._customCSS = instance._getNodeById('lfr-custom-css');
+					instance._customCSSClassName = instance._getNodeById('lfr-custom-css-class-name');
 
 					instance._saveButton = instance._getNodeById('lfr-lookfeel-save');
 					instance._resetButton = instance._getNodeById('lfr-lookfeel-reset');
@@ -941,6 +944,15 @@ AUI().add(
 
 					useForAll.each(handleForms);
 
+					var updatePortletCSSClassName = function() {
+						var portlet = instance._curPortlet;
+						var customCSSClassName = instance._customCSSClassName.val();
+
+						portlet.set('className', 'portlet');
+
+						portlet.addClass(customCSSClassName);
+					};
+
 					var saveHandler = function(event, id, obj) {
 						var ajaxResponseMsg = instance._portletMsgResponse;
 						var ajaxResponseHTML = '<div id="lfr-portlet-css-response"></div>';
@@ -979,6 +991,9 @@ AUI().add(
 						'click',
 						function() {
 							instance._objData.advancedData.customCSS = instance._customCSS.val();
+							instance._objData.advancedData.customCSSClassName = instance._customCSSClassName.val();
+
+							updatePortletCSSClassName();
 
 							instance._objData.wapData.title = instance._wapTitleInput.val();
 							instance._objData.wapData.initialWindowState = instance._wapInitialWindowStateSelect.val();
@@ -1351,6 +1366,8 @@ AUI().add(
 				}
 
 				instance._setTextarea(instance._customCSS, customStyles);
+
+				instance._setTextarea(instance._customCSSClassName, objData.advancedData.customCSSClassName);
 
 				// WAP styling
 

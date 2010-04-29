@@ -446,6 +446,7 @@ PortletURL portletURL = renderResponse.createRenderURL();
 				</aui:fieldset>
 
 				<aui:fieldset id="css-styling">
+					<aui:input label="enter-your-custom-css-class-names" name="lfr-custom-css-class-name" type="text" />
 					<aui:input cssClass="lfr-textarea-container" label="enter-your-custom-css" name="lfr-custom-css" type="textarea" />
 				</aui:fieldset>
 
