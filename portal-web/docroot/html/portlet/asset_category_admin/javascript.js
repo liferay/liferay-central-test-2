@@ -190,7 +190,7 @@ AUI().add(
 										}
 										else {
 											if (exception.indexOf('auth.PrincipalException') > -1) {
-												instance._sendMessage('error', 'you-do-not-have-permission-to-access-the-requested-resource');
+												instance._sendMessage('error', Liferay.Language.get('you-do-not-have-permission-to-access-the-requested-resource'));
 											}
 										}
 									}
@@ -214,7 +214,7 @@ AUI().add(
 										}
 										else {
 											if (exception.indexOf('auth.PrincipalException') > -1) {
-												instance._sendMessage('error', 'you-do-not-have-permission-to-access-the-requested-resource');
+												instance._sendMessage('error', Liferay.Language.get('you-do-not-have-permission-to-access-the-requested-resource'));
 											}
 										}
 									}
@@ -429,7 +429,7 @@ AUI().add(
 													var exception = message.exception;
 													if (exception) {
 														if (exception.indexOf('auth.PrincipalException') > -1) {
-															instance._sendMessage('error', 'you-do-not-have-permission-to-access-the-requested-resource');
+															instance._sendMessage('error', Liferay.Language.get('you-do-not-have-permission-to-access-the-requested-resource'));
 														}
 													}
 													else {
@@ -540,7 +540,7 @@ AUI().add(
 							var exception = message.exception;
 
 							if (!exception && message.categoryId) {
-								instance._sendMessage('success', 'your-request-processed-successfully');
+								instance._sendMessage('success', Liferay.Language.get('your-request-processed-successfully'));
 
 								instance._selectVocabulary(vocabularyId);
 
@@ -575,7 +575,7 @@ AUI().add(
 									errorKey = 'you-do-not-have-permission-to-access-the-requested-resource';
 								}
 								if (errorKey) {
-									instance._sendMessage('error', errorKey);
+									instance._sendMessage('error', Liferay.Language.get(errorKey));
 								}
 							}
 						}
@@ -640,7 +640,7 @@ AUI().add(
 							var exception = message.exception;
 
 							if (!message.exception) {
-								instance._sendMessage('success', 'your-request-processed-successfully');
+								instance._sendMessage('success', Liferay.Language.get('your-request-processed-successfully'));
 
 								instance._displayList(
 									function() {
@@ -679,7 +679,7 @@ AUI().add(
 								}
 
 								if (errorKey) {
-									instance._sendMessage('error', errorKey);
+									instance._sendMessage('error', Liferay.Language.get(errorKey));
 								}
 							}
 						}
@@ -1312,7 +1312,7 @@ AUI().add(
 								}
 
 								if (errorText) {
-									instance._sendMessage('error', errorText);
+									instance._sendMessage('error', Liferay.Language.get(errorText));
 								}
 							}
 
