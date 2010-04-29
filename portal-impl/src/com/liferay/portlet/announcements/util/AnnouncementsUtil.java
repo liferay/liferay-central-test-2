@@ -58,7 +58,7 @@ public class AnnouncementsUtil {
 
 		List<Group> groups = GroupLocalServiceUtil.getUserGroups(userId, true);
 
-		if (groups.size() > 0) {
+		if (!groups.isEmpty()) {
 			scopes.put(_GROUP_CLASS_NAME_ID, _getGroupIds(groups));
 
 			groupsList.addAll(groups);
@@ -69,7 +69,7 @@ public class AnnouncementsUtil {
 		List<Organization> organizations =
 			OrganizationLocalServiceUtil.getUserOrganizations(userId, true);
 
-		if (organizations.size() > 0) {
+		if (!organizations.isEmpty()) {
 			scopes.put(
 				_ORGANIZATION_CLASS_NAME_ID,
 				_getOrganizationIds(organizations));
@@ -84,7 +84,7 @@ public class AnnouncementsUtil {
 		List<UserGroup> userGroups =
 			UserGroupLocalServiceUtil.getUserUserGroups(userId);
 
-		if (userGroups.size() > 0) {
+		if (!userGroups.isEmpty()) {
 			scopes.put(_USER_GROUP_CLASS_NAME_ID, _getUserGroupIds(userGroups));
 
 			for (UserGroup userGroup : userGroups) {
@@ -96,7 +96,7 @@ public class AnnouncementsUtil {
 
 		List<Role> roles = new ArrayList<Role>();
 
-		if (groupsList.size() > 0) {
+		if (!groupsList.isEmpty()) {
 			roles = RoleLocalServiceUtil.getUserRelatedRoles(
 				userId, groupsList);
 
