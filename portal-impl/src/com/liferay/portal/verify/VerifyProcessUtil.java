@@ -18,7 +18,9 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.NotificationThreadLocal;
 import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.workflow.WorkflowThreadLocal;
 import com.liferay.portal.service.persistence.BatchSessionUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
@@ -54,6 +56,8 @@ public class VerifyProcessUtil {
 				PropsKeys.VERIFY_PROCESSES);
 
 			BatchSessionUtil.setEnabled(true);
+			NotificationThreadLocal.setEnabled(false);
+			WorkflowThreadLocal.setEnabled(false);
 
 			boolean tempIndexReadOnly = SearchEngineUtil.isIndexReadOnly();
 
@@ -71,6 +75,8 @@ public class VerifyProcessUtil {
 			}
 			finally {
 				BatchSessionUtil.setEnabled(false);
+				NotificationThreadLocal.setEnabled(true);
+				WorkflowThreadLocal.setEnabled(true);
 
 				SearchEngineUtil.setIndexReadOnly(tempIndexReadOnly);
 			}
