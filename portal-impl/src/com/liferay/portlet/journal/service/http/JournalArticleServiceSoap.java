@@ -139,6 +139,24 @@ public class JournalArticleServiceSoap {
 		}
 	}
 
+	public static com.liferay.portlet.journal.model.JournalArticleSoap expireArticle(
+		long groupId, java.lang.String articleId, double version,
+		java.lang.String articleURL,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.liferay.portlet.journal.model.JournalArticle returnValue = JournalArticleServiceUtil.expireArticle(groupId,
+					articleId, version, articleURL, serviceContext);
+
+			return com.liferay.portlet.journal.model.JournalArticleSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.portlet.journal.model.JournalArticleSoap getArticle(
 		long groupId, java.lang.String articleId) throws RemoteException {
 		try {
@@ -236,24 +254,6 @@ public class JournalArticleServiceSoap {
 		try {
 			com.liferay.portlet.journal.model.JournalArticle returnValue = JournalArticleServiceUtil.updateContent(groupId,
 					articleId, version, content);
-
-			return com.liferay.portlet.journal.model.JournalArticleSoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.portlet.journal.model.JournalArticleSoap updateStatus(
-		long groupId, java.lang.String articleId, double version, int status,
-		java.lang.String articleURL,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws RemoteException {
-		try {
-			com.liferay.portlet.journal.model.JournalArticle returnValue = JournalArticleServiceUtil.updateStatus(groupId,
-					articleId, version, status, articleURL, serviceContext);
 
 			return com.liferay.portlet.journal.model.JournalArticleSoap.toSoapModel(returnValue);
 		}

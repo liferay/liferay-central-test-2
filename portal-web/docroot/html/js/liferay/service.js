@@ -678,12 +678,12 @@ Liferay.Service.registerClass(
 		addArticle: true,
 		copyArticle: true,
 		deleteArticle: true,
+		expireArticle: true,
 		getArticle: true,
 		getArticleByUrlTitle: true,
 		removeArticleLocale: true,
 		updateArticle: true,
-		updateContent: true,
-		updateStatus: true
+		updateContent: true
 	}
 );
 

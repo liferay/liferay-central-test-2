@@ -108,6 +108,16 @@ public class JournalArticleServiceWrapper implements JournalArticleService {
 			articleURL, serviceContext);
 	}
 
+	public com.liferay.portlet.journal.model.JournalArticle expireArticle(
+		long groupId, java.lang.String articleId, double version,
+		java.lang.String articleURL,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _journalArticleService.expireArticle(groupId, articleId,
+			version, articleURL, serviceContext);
+	}
+
 	public com.liferay.portlet.journal.model.JournalArticle getArticle(
 		long groupId, java.lang.String articleId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -207,16 +217,6 @@ public class JournalArticleServiceWrapper implements JournalArticleService {
 			com.liferay.portal.kernel.exception.SystemException {
 		return _journalArticleService.updateContent(groupId, articleId,
 			version, content);
-	}
-
-	public com.liferay.portlet.journal.model.JournalArticle updateStatus(
-		long groupId, java.lang.String articleId, double version, int status,
-		java.lang.String articleURL,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _journalArticleService.updateStatus(groupId, articleId, version,
-			status, articleURL, serviceContext);
 	}
 
 	public JournalArticleService getWrappedJournalArticleService() {

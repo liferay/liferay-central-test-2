@@ -112,6 +112,17 @@ public class JournalArticleServiceUtil {
 			serviceContext);
 	}
 
+	public static com.liferay.portlet.journal.model.JournalArticle expireArticle(
+		long groupId, java.lang.String articleId, double version,
+		java.lang.String articleURL,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .expireArticle(groupId, articleId, version, articleURL,
+			serviceContext);
+	}
+
 	public static com.liferay.portlet.journal.model.JournalArticle getArticle(
 		long groupId, java.lang.String articleId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -215,17 +226,6 @@ public class JournalArticleServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService().updateContent(groupId, articleId, version, content);
-	}
-
-	public static com.liferay.portlet.journal.model.JournalArticle updateStatus(
-		long groupId, java.lang.String articleId, double version, int status,
-		java.lang.String articleURL,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getService()
-				   .updateStatus(groupId, articleId, version, status,
-			articleURL, serviceContext);
 	}
 
 	public static JournalArticleService getService() {

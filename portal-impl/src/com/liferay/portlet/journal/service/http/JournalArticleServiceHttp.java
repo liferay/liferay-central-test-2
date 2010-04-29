@@ -501,6 +501,68 @@ public class JournalArticleServiceHttp {
 		}
 	}
 
+	public static com.liferay.portlet.journal.model.JournalArticle expireArticle(
+		HttpPrincipal httpPrincipal, long groupId, java.lang.String articleId,
+		double version, java.lang.String articleURL,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		try {
+			Object paramObj0 = new LongWrapper(groupId);
+
+			Object paramObj1 = articleId;
+
+			if (articleId == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = new DoubleWrapper(version);
+
+			Object paramObj3 = articleURL;
+
+			if (articleURL == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj4 = serviceContext;
+
+			if (serviceContext == null) {
+				paramObj4 = new NullWrapper(
+						"com.liferay.portal.service.ServiceContext");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(JournalArticleServiceUtil.class.getName(),
+					"expireArticle",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
+					});
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
+					throw (com.liferay.portal.kernel.exception.SystemException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+
+			return (com.liferay.portlet.journal.model.JournalArticle)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	public static com.liferay.portlet.journal.model.JournalArticle getArticle(
 		HttpPrincipal httpPrincipal, long groupId, java.lang.String articleId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -1097,71 +1159,6 @@ public class JournalArticleServiceHttp {
 			MethodWrapper methodWrapper = new MethodWrapper(JournalArticleServiceUtil.class.getName(),
 					"updateContent",
 					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
-
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
-				}
-
-				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
-					throw (com.liferay.portal.kernel.exception.SystemException)e;
-				}
-
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
-			}
-
-			return (com.liferay.portlet.journal.model.JournalArticle)returnObj;
-		}
-		catch (com.liferay.portal.kernel.exception.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
-	public static com.liferay.portlet.journal.model.JournalArticle updateStatus(
-		HttpPrincipal httpPrincipal, long groupId, java.lang.String articleId,
-		double version, int status, java.lang.String articleURL,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = articleId;
-
-			if (articleId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = new DoubleWrapper(version);
-
-			Object paramObj3 = new IntegerWrapper(status);
-
-			Object paramObj4 = articleURL;
-
-			if (articleURL == null) {
-				paramObj4 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj5 = serviceContext;
-
-			if (serviceContext == null) {
-				paramObj5 = new NullWrapper(
-						"com.liferay.portal.service.ServiceContext");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(JournalArticleServiceUtil.class.getName(),
-					"updateStatus",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5
-					});
 
 			Object returnObj = null;
 
