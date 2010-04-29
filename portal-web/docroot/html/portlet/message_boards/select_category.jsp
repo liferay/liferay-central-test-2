@@ -22,6 +22,10 @@ MBCategory category = (MBCategory)request.getAttribute(WebKeys.MESSAGE_BOARDS_CA
 long categoryId = BeanParamUtil.getLong(category, request, "mbCategoryId", MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID);
 
 MBCategoryDisplay categoryDisplay = new MBCategoryDisplayImpl(scopeGroupId, categoryId);
+
+if (category != null) {
+	MBUtil.addPortletBreadcrumbEntries(category, request, renderResponse);
+}
 %>
 
 <aui:form method="post" name="fm">
@@ -108,9 +112,3 @@ MBCategoryDisplay categoryDisplay = new MBCategoryDisplayImpl(scopeGroupId, cate
 
 	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 </aui:form>
-
-<%
-if (category != null) {
-	MBUtil.addPortletBreadcrumbEntries(category, request, renderResponse);
-}
-%>
