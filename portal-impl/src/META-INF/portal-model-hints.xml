@@ -780,6 +780,7 @@
 		<field name="title" type="String" />
 		<field name="content" type="String">
 			<hint-collection name="TEXTAREA" />
+			<sanitize content-type="text/html" modes="ALL" />
 		</field>
 		<field name="url" type="String">
 			<hint-collection name="URL" />
