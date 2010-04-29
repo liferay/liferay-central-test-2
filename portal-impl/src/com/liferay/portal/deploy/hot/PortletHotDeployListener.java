@@ -15,6 +15,7 @@
 package com.liferay.portal.deploy.hot;
 
 import com.liferay.portal.apache.bridges.struts.LiferayServletContextProvider;
+import com.liferay.portal.dao.shard.ShardPollerProcessorWrapper;
 import com.liferay.portal.kernel.configuration.Configuration;
 import com.liferay.portal.kernel.configuration.ConfigurationFactoryUtil;
 import com.liferay.portal.kernel.deploy.hot.BaseHotDeployListener;
@@ -558,7 +559,8 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 				portlet.getPollerProcessorClass());
 
 			PollerProcessorUtil.addPollerProcessor(
-				portlet.getPortletId(), pollerProcessorInstance);
+				portlet.getPortletId(),
+				new ShardPollerProcessorWrapper(pollerProcessorInstance));
 		}
 
 		com.liferay.portal.kernel.pop.MessageListener
