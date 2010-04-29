@@ -58,11 +58,11 @@ public class MBBanLocalServiceImpl extends MBBanLocalServiceBaseImpl {
 			ban.setCompanyId(user.getCompanyId());
 			ban.setUserId(user.getUserId());
 			ban.setUserName(user.getFullName());
-			ban.setCreateDate(now);
+			ban.setCreateDate(serviceContext.getCreateDate(now));
 			ban.setBanUserId(banUserId);
 		}
 
-		ban.setModifiedDate(now);
+		ban.setModifiedDate(serviceContext.getModifiedDate(now));
 
 		mbBanPersistence.update(ban, false);
 

@@ -133,7 +133,8 @@ public class MBMailingListLocalServiceUtil {
 		int inReadInterval, java.lang.String outEmailAddress,
 		boolean outCustom, java.lang.String outServerName, int outServerPort,
 		boolean outUseSSL, java.lang.String outUserName,
-		java.lang.String outPassword, boolean active)
+		java.lang.String outPassword, boolean active,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
@@ -141,7 +142,7 @@ public class MBMailingListLocalServiceUtil {
 			emailAddress, inProtocol, inServerName, inServerPort, inUseSSL,
 			inUserName, inPassword, inReadInterval, outEmailAddress, outCustom,
 			outServerName, outServerPort, outUseSSL, outUserName, outPassword,
-			active);
+			active, serviceContext);
 	}
 
 	public static void deleteCategoryMailingList(long groupId, long categoryId)
@@ -178,14 +179,15 @@ public class MBMailingListLocalServiceUtil {
 		java.lang.String outEmailAddress, boolean outCustom,
 		java.lang.String outServerName, int outServerPort, boolean outUseSSL,
 		java.lang.String outUserName, java.lang.String outPassword,
-		boolean active)
+		boolean active, com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .updateMailingList(mailingListId, emailAddress, inProtocol,
 			inServerName, inServerPort, inUseSSL, inUserName, inPassword,
 			inReadInterval, outEmailAddress, outCustom, outServerName,
-			outServerPort, outUseSSL, outUserName, outPassword, active);
+			outServerPort, outUseSSL, outUserName, outPassword, active,
+			serviceContext);
 	}
 
 	public static MBMailingListLocalService getService() {

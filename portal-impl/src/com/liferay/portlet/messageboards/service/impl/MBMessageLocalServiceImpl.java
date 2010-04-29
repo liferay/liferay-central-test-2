@@ -284,13 +284,13 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		message.setCompanyId(user.getCompanyId());
 		message.setUserId(user.getUserId());
 		message.setUserName(userName);
-		message.setCreateDate(now);
-		message.setModifiedDate(now);
+		message.setCreateDate(serviceContext.getCreateDate(now));
+		message.setModifiedDate(serviceContext.getModifiedDate(now));
 		message.setAllowPingbacks(allowPingbacks);
 		message.setStatus(status);
 		message.setStatusByUserId(user.getUserId());
 		message.setStatusByUserName(userName);
-		message.setStatusDate(now);
+		message.setStatusDate(serviceContext.getModifiedDate(now));
 
 		// Thread
 
@@ -320,7 +320,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			thread.setStatus(status);
 			thread.setStatusByUserId(user.getUserId());
 			thread.setStatusByUserName(userName);
-			thread.setStatusDate(now);
+			thread.setStatusDate(serviceContext.getModifiedDate(now));
 
 			if ((status ==
 					WorkflowConstants.STATUS_APPROVED) &&
@@ -346,7 +346,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				thread.setLastPostByUserId(userId);
 			}
 
-			thread.setLastPostDate(now);
+			thread.setLastPostDate(serviceContext.getModifiedDate(now));
 		}
 
 		if ((priority != MBThreadConstants.PRIORITY_NOT_GIVEN) &&
@@ -443,7 +443,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			// Statistics
 
 			mbStatsUserLocalService.updateStatsUser(
-				message.getGroupId(), userId, now);
+				message.getGroupId(), userId,
+				serviceContext.getModifiedDate(now));
 
 			// Category
 
@@ -452,7 +453,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 					categoryId);
 
 				category.setMessageCount(category.getMessageCount() + 1);
-				category.setLastPostDate(now);
+				category.setLastPostDate(serviceContext.getModifiedDate(now));
 
 				mbCategoryPersistence.update(category, false);
 			}
@@ -1280,7 +1281,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		int oldStatus = message.getStatus();
 
-		message.setModifiedDate(now);
+		message.setModifiedDate(serviceContext.getModifiedDate(now));
 		message.setSubject(subject);
 		message.setBody(body);
 		message.setAttachments(!files.isEmpty() || !existingFiles.isEmpty());
@@ -1377,7 +1378,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		if (!message.isDiscussion() &&
 			(status == WorkflowConstants.STATUS_APPROVED)) {
 
-			category.setLastPostDate(now);
+			category.setLastPostDate(serviceContext.getModifiedDate(now));
 
 			mbCategoryPersistence.update(category, false);
 		}
@@ -1504,7 +1505,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		message.setStatus(status);
 		message.setStatusByUserId(userId);
 		message.setStatusByUserName(user.getFullName());
-		message.setStatusDate(now);
+		message.setStatusDate(serviceContext.getModifiedDate(now));
 
 		mbMessagePersistence.update(message, false);
 
@@ -1519,7 +1520,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			thread.setStatus(status);
 			thread.setStatusByUserId(userId);
 			thread.setStatusByUserName(user.getFullName());
-			thread.setStatusDate(now);
+			thread.setStatusDate(serviceContext.getModifiedDate(now));
 		}
 
 		if ((status == WorkflowConstants.STATUS_APPROVED) &&
@@ -1534,7 +1535,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				thread.setLastPostByUserId(message.getUserId());
 			}
 
-			thread.setLastPostDate(now);
+			thread.setLastPostDate(serviceContext.getModifiedDate(now));
 		}
 
 		if ((status != WorkflowConstants.STATUS_APPROVED) &&
@@ -1556,7 +1557,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			(oldStatus != WorkflowConstants.STATUS_APPROVED)) {
 
 			category.setMessageCount(category.getMessageCount() + 1);
-			category.setLastPostDate(now);
+			category.setLastPostDate(serviceContext.getModifiedDate(now));
 
 			mbCategoryPersistence.update(category, false);
 		}
@@ -1599,7 +1600,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			(oldStatus != WorkflowConstants.STATUS_APPROVED)) {
 
 			mbStatsUserLocalService.updateStatsUser(
-				message.getGroupId(), userId, now);
+				message.getGroupId(), userId,
+				serviceContext.getModifiedDate(now));
 		}
 
 		// Social

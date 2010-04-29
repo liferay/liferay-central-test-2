@@ -92,8 +92,8 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 		category.setCompanyId(user.getCompanyId());
 		category.setUserId(user.getUserId());
 		category.setUserName(user.getFullName());
-		category.setCreateDate(now);
-		category.setModifiedDate(now);
+		category.setCreateDate(serviceContext.getCreateDate(now));
+		category.setModifiedDate(serviceContext.getModifiedDate(now));
 		category.setParentCategoryId(parentCategoryId);
 		category.setName(name);
 		category.setDescription(description);
@@ -122,7 +122,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 			inProtocol, inServerName, inServerPort, inUseSSL, inUserName,
 			inPassword, inReadInterval, outEmailAddress, outCustom,
 			outServerName, outServerPort, outUseSSL, outUserName, outPassword,
-			mailingListActive);
+			mailingListActive, serviceContext);
 
 		// Expando
 
@@ -400,7 +400,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 
 		validate(name);
 
-		category.setModifiedDate(new Date());
+		category.setModifiedDate(serviceContext.getModifiedDate(null));
 		category.setParentCategoryId(parentCategoryId);
 		category.setName(name);
 		category.setDescription(description);
@@ -418,7 +418,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 				inServerName, inServerPort, inUseSSL, inUserName, inPassword,
 				inReadInterval, outEmailAddress, outCustom, outServerName,
 				outServerPort, outUseSSL, outUserName, outPassword,
-				mailingListActive);
+				mailingListActive, serviceContext);
 		}
 		else {
 			mbMailingListLocalService.addMailingList(
@@ -427,7 +427,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 				inServerName, inServerPort, inUseSSL, inUserName, inPassword,
 				inReadInterval, outEmailAddress, outCustom, outServerName,
 				outServerPort, outUseSSL, outUserName, outPassword,
-				mailingListActive);
+				mailingListActive, serviceContext);
 		}
 
 		// Expando

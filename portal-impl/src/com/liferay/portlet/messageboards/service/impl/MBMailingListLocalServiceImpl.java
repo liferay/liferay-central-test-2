@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.messageboards.MailingListEmailAddressException;
 import com.liferay.portlet.messageboards.MailingListInServerNameException;
 import com.liferay.portlet.messageboards.MailingListInUserNameException;
@@ -56,7 +57,7 @@ public class MBMailingListLocalServiceImpl
 			String inPassword, int inReadInterval, String outEmailAddress,
 			boolean outCustom, String outServerName, int outServerPort,
 			boolean outUseSSL, String outUserName, String outPassword,
-			boolean active)
+			boolean active, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Mailing list
@@ -78,8 +79,8 @@ public class MBMailingListLocalServiceImpl
 		mailingList.setCompanyId(user.getCompanyId());
 		mailingList.setUserId(user.getUserId());
 		mailingList.setUserName(user.getFullName());
-		mailingList.setCreateDate(now);
-		mailingList.setModifiedDate(now);
+		mailingList.setCreateDate(serviceContext.getCreateDate(now));
+		mailingList.setModifiedDate(serviceContext.getModifiedDate(now));
 		mailingList.setCategoryId(categoryId);
 		mailingList.setEmailAddress(emailAddress);
 		mailingList.setInProtocol(inUseSSL ? inProtocol + "s" : inProtocol);
@@ -147,7 +148,7 @@ public class MBMailingListLocalServiceImpl
 			String inUserName, String inPassword, int inReadInterval,
 			String outEmailAddress, boolean outCustom, String outServerName,
 			int outServerPort, boolean outUseSSL, String outUserName,
-			String outPassword, boolean active)
+			String outPassword, boolean active, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Mailing list
@@ -161,7 +162,7 @@ public class MBMailingListLocalServiceImpl
 
 		boolean oldActive = mailingList.isActive();
 
-		mailingList.setModifiedDate(new Date());
+		mailingList.setModifiedDate(serviceContext.getModifiedDate(null));
 		mailingList.setEmailAddress(emailAddress);
 		mailingList.setInProtocol(inUseSSL ? inProtocol + "s" : inProtocol);
 		mailingList.setInServerName(inServerName);

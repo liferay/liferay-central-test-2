@@ -445,6 +445,8 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		ServiceContext serviceContext = new ServiceContext();
 
+		serviceContext.setCreateDate(ban.getCreateDate());
+		serviceContext.setModifiedDate(ban.getModifiedDate());
 		serviceContext.setScopeGroupId(context.getGroupId());
 
 		List<User> users = UserUtil.findByUuid(ban.getBanUserUuid());
@@ -494,6 +496,8 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		serviceContext.setAddCommunityPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
+		serviceContext.setCreateDate(category.getCreateDate());
+		serviceContext.setModifiedDate(category.getModifiedDate());
 		serviceContext.setScopeGroupId(context.getGroupId());
 
 		if ((parentCategoryId !=
@@ -650,6 +654,8 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 		serviceContext.setAddCommunityPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
 		serviceContext.setAssetTagNames(assetTagNames);
+		serviceContext.setCreateDate(message.getCreateDate());
+		serviceContext.setModifiedDate(message.getModifiedDate());
 		serviceContext.setScopeGroupId(context.getGroupId());
 
 		if (message.getStatus() != WorkflowConstants.STATUS_APPROVED) {
