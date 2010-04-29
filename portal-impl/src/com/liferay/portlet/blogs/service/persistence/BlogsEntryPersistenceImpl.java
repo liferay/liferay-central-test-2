@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.sanitizer.Sanitizer;
 import com.liferay.portal.kernel.sanitizer.SanitizerException;
 import com.liferay.portal.kernel.sanitizer.SanitizerUtil;
 import com.liferay.portal.kernel.util.CalendarUtil;
@@ -558,17 +559,17 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 			}
 
 			try {
-				blogsEntry.setContent(SanitizerUtil.sanitize(companyId,
-						groupId, userId,
-						com.liferay.portlet.blogs.model.BlogsEntry.class.getName(),
-						entryId, ContentTypes.TEXT_HTML,
-						StringUtil.split("ALL"), blogsEntry.getContent(), null));
-
 				blogsEntry.setTitle(SanitizerUtil.sanitize(companyId, groupId,
 						userId,
 						com.liferay.portlet.blogs.model.BlogsEntry.class.getName(),
-						entryId, ContentTypes.TEXT_PLAIN,
-						StringUtil.split("ALL"), blogsEntry.getTitle(), null));
+						entryId, ContentTypes.TEXT_PLAIN, Sanitizer.MODE_ALL,
+						blogsEntry.getTitle(), null));
+
+				blogsEntry.setContent(SanitizerUtil.sanitize(companyId,
+						groupId, userId,
+						com.liferay.portlet.blogs.model.BlogsEntry.class.getName(),
+						entryId, ContentTypes.TEXT_HTML, Sanitizer.MODE_ALL,
+						blogsEntry.getContent(), null));
 			}
 			catch (SanitizerException se) {
 				throw new SystemException(se);
