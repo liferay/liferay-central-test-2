@@ -30,11 +30,11 @@ public interface ModelHints {
 
 	public Element getFieldsEl(String model, String field);
 
+	public Map<String, String> getHints(String model, String field);
+
 	public List<String> getModels();
 
 	public String getType(String model, String field);
-
-	public Map<String, String> getHints(String model, String field);
 
 	public boolean isLocalized(String model, String field);
 

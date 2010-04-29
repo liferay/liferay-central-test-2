@@ -88,6 +88,18 @@ public class ModelHintsImpl implements ModelHints {
 		}
 	}
 
+	public Map<String, String> getHints(String model, String field) {
+		Map<String, Object> fields =
+			(Map<String, Object>)_modelFields.get(model);
+
+		if (fields == null) {
+			return null;
+		}
+		else {
+			return (Map<String, String>)fields.get(field + _HINTS_SUFFIX);
+		}
+	}
+
 	public List<String> getModels() {
 		return ListUtil.fromCollection(_models);
 	}
@@ -101,18 +113,6 @@ public class ModelHintsImpl implements ModelHints {
 		}
 		else {
 			return (String)fields.get(field + _TYPE_SUFFIX);
-		}
-	}
-
-	public Map<String, String> getHints(String model, String field) {
-		Map<String, Object> fields =
-			(Map<String, Object>)_modelFields.get(model);
-
-		if (fields == null) {
-			return null;
-		}
-		else {
-			return (Map<String, String>)fields.get(field + _HINTS_SUFFIX);
 		}
 	}
 
@@ -291,16 +291,16 @@ public class ModelHintsImpl implements ModelHints {
 
 	private static final String _ELEMENTS_SUFFIX = "_ELEMENTS";
 
-	private static final String _TYPE_SUFFIX = "_TYPE";
+	private static final String _HINTS_SUFFIX = "_HINTS";
 
 	private static final String _LOCALIZATION_SUFFIX = "_LOCALIZATION";
 
-	private static final String _HINTS_SUFFIX = "_HINTS";
+	private static final String _TYPE_SUFFIX = "_TYPE";
 
 	private static Log _log = LogFactoryUtil.getLog(ModelHintsImpl.class);
 
-	private Map<String, Map<String, String>> _hintCollections;
 	private Map<String, Map<String, String>> _defaultHints;
+	private Map<String, Map<String, String>> _hintCollections;
 	private Map<String, Object> _modelFields;
 	private Set<String> _models;
 	private SAXReader _saxReader;

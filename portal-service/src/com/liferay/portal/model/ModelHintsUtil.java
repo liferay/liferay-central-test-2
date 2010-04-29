@@ -34,6 +34,10 @@ public class ModelHintsUtil {
 		return getModelHints().getFieldsEl(model, field);
 	}
 
+	public static Map<String, String> getHints(String model, String field) {
+		return getModelHints().getHints(model, field);
+	}
+
 	public static ModelHints getModelHints() {
 		return _modelHints;
 	}
@@ -44,10 +48,6 @@ public class ModelHintsUtil {
 
 	public static String getType(String model, String field) {
 		return getModelHints().getType(model, field);
-	}
-
-	public static Map<String, String> getHints(String model, String field) {
-		return getModelHints().getHints(model, field);
 	}
 
 	public static boolean isLocalized(String model, String field) {
