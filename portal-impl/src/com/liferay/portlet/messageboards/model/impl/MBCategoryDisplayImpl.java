@@ -159,14 +159,14 @@ public class MBCategoryDisplayImpl implements MBCategoryDisplay {
 
 		MBCategory category = node.getValue();
 
-		List<MBCategory> categories = categoriesMap.get(
-			category.getCategoryId());
-
 		if (category.getCategoryId() ==
 				MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) {
 
 			_categoryNodesMap.put(category.getCategoryId(), node);
 		}
+
+		List<MBCategory> categories = categoriesMap.get(
+			category.getCategoryId());
 
 		if (categories == null) {
 			return;
