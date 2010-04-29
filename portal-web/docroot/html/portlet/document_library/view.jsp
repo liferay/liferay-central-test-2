@@ -110,82 +110,80 @@ request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntry
 
 			<aui:column columnWidth="<%= showFolderMenu ? 75 : 100 %>" cssClass="folder-column folder-column-first" first="<%= true %>">
 				<liferay-ui:panel-container extended="<%= false %>" id="documentLibraryPanelContainer" persistState="<%= true %>">
-					<c:if test="<%= showSubfolders %>">
-						<c:if test="<%= folder != null %>">
-							<div class="folder-description">
-								<%= folder.getDescription() %>
+					<c:if test="<%= folder != null %>">
+						<div class="folder-description">
+							<%= folder.getDescription() %>
+						</div>
+
+						<div class="folder-metadata">
+							<div class="folder-date">
+								<%= LanguageUtil.format(pageContext, "last-updated-x", dateFormatDateTime.format(folder.getModifiedDate())) %>
 							</div>
 
-							<div class="folder-metadata">
-								<div class="folder-date">
-									<%= LanguageUtil.format(pageContext, "last-updated-x", dateFormatDateTime.format(folder.getModifiedDate())) %>
-								</div>
-
-								<div class="folder-subfolders">
-									<%= foldersCount %> <liferay-ui:message key='<%= (foldersCount == 1) ? "subfolder" : "subfolders" %>' />
-								</div>
-
-								<div class="folder-file-entries">
-									<%= fileEntriesCount %> <liferay-ui:message key='<%= (fileEntriesCount == 1) ? "document" : "documents" %>' />
-								</div>
+							<div class="folder-subfolders">
+								<%= foldersCount %> <liferay-ui:message key='<%= (foldersCount == 1) ? "subfolder" : "subfolders" %>' />
 							</div>
 
-							<div class="custom-attributes">
-								<liferay-ui:custom-attributes-available className="<%= DLFolder.class.getName() %>">
-									<liferay-ui:custom-attribute-list
-										className="<%= DLFolder.class.getName() %>"
-										classPK="<%= (folder != null) ? folder.getFolderId() : 0 %>"
-										editable="<%= false %>"
-										label="<%= true %>"
-									/>
-								</liferay-ui:custom-attributes-available>
+							<div class="folder-file-entries">
+								<%= fileEntriesCount %> <liferay-ui:message key='<%= (fileEntriesCount == 1) ? "document" : "documents" %>' />
 							</div>
-						</c:if>
+						</div>
 
-						<c:if test="<%= foldersCount > 0 %>">
-							<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="subFoldersPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, (folder != null) ? "subfolders" : "folders") %>'>
-								<liferay-ui:search-container
-									curParam="cur1"
-									delta="<%= foldersPerPage %>"
-									deltaConfigurable="<%= false %>"
-									headerNames="<%= StringUtil.merge(folderColumns) %>"
-									iteratorURL="<%= portletURL %>"
-								>
-									<liferay-ui:search-container-results
-										results="<%= DLFolderLocalServiceUtil.getFolders(scopeGroupId, folderId, searchContainer.getStart(), searchContainer.getEnd()) %>"
-										total="<%= DLFolderLocalServiceUtil.getFoldersCount(scopeGroupId, folderId) %>"
-									/>
-
-									<liferay-ui:search-container-row
-										className="com.liferay.portlet.documentlibrary.model.DLFolder"
-										escapedModel="<%= true %>"
-										keyProperty="folderId"
-										modelVar="curFolder"
-									>
-										<liferay-portlet:renderURL varImpl="rowURL">
-											<portlet:param name="struts_action" value="/document_library/view" />
-											<portlet:param name="folderId" value="<%= String.valueOf(curFolder.getFolderId()) %>" />
-										</liferay-portlet:renderURL>
-
-										<%@ include file="/html/portlet/document_library/folder_columns.jspf" %>
-									</liferay-ui:search-container-row>
-
-									<liferay-ui:search-iterator />
-								</liferay-ui:search-container>
-							</liferay-ui:panel>
-						</c:if>
-
-						<c:choose>
-							<c:when test="<%= showTabs %>">
-								<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="documentsPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "documents") %>'>
-									<%@ include file="/html/portlet/document_library/view_file_entries.jspf" %>
-								</liferay-ui:panel>
-							</c:when>
-							<c:otherwise>
-								<%@ include file="/html/portlet/document_library/view_file_entries.jspf" %>
-							</c:otherwise>
-						</c:choose>
+						<div class="custom-attributes">
+							<liferay-ui:custom-attributes-available className="<%= DLFolder.class.getName() %>">
+								<liferay-ui:custom-attribute-list
+									className="<%= DLFolder.class.getName() %>"
+									classPK="<%= (folder != null) ? folder.getFolderId() : 0 %>"
+									editable="<%= false %>"
+									label="<%= true %>"
+								/>
+							</liferay-ui:custom-attributes-available>
+						</div>
 					</c:if>
+
+					<c:if test="<%= foldersCount > 0 %>">
+						<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="subFoldersPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, (folder != null) ? "subfolders" : "folders") %>'>
+							<liferay-ui:search-container
+								curParam="cur1"
+								delta="<%= foldersPerPage %>"
+								deltaConfigurable="<%= false %>"
+								headerNames="<%= StringUtil.merge(folderColumns) %>"
+								iteratorURL="<%= portletURL %>"
+							>
+								<liferay-ui:search-container-results
+									results="<%= DLFolderLocalServiceUtil.getFolders(scopeGroupId, folderId, searchContainer.getStart(), searchContainer.getEnd()) %>"
+									total="<%= DLFolderLocalServiceUtil.getFoldersCount(scopeGroupId, folderId) %>"
+								/>
+
+								<liferay-ui:search-container-row
+									className="com.liferay.portlet.documentlibrary.model.DLFolder"
+									escapedModel="<%= true %>"
+									keyProperty="folderId"
+									modelVar="curFolder"
+								>
+									<liferay-portlet:renderURL varImpl="rowURL">
+										<portlet:param name="struts_action" value="/document_library/view" />
+										<portlet:param name="folderId" value="<%= String.valueOf(curFolder.getFolderId()) %>" />
+									</liferay-portlet:renderURL>
+
+									<%@ include file="/html/portlet/document_library/folder_columns.jspf" %>
+								</liferay-ui:search-container-row>
+
+								<liferay-ui:search-iterator />
+							</liferay-ui:search-container>
+						</liferay-ui:panel>
+					</c:if>
+
+					<c:choose>
+						<c:when test="<%= showTabs %>">
+							<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="documentsPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "documents") %>'>
+								<%@ include file="/html/portlet/document_library/view_file_entries.jspf" %>
+							</liferay-ui:panel>
+						</c:when>
+						<c:otherwise>
+							<%@ include file="/html/portlet/document_library/view_file_entries.jspf" %>
+						</c:otherwise>
+					</c:choose>
 				</liferay-ui:panel-container>
 			</aui:column>
 
