@@ -777,33 +777,6 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		return false;
 	}
 
-	protected void publishFileEntry(DLFileEntry fileEntry) throws Exception {
-		DLFileVersion latestFileVersion =
-			DLFileVersionLocalServiceUtil.getLatestFileVersion(
-				fileEntry.getGroupId(), fileEntry.getFolderId(),
-				fileEntry.getName());
-
-		if (latestFileVersion.getStatus() ==
-				WorkflowConstants.STATUS_APPROVED) {
-
-			return;
-		}
-
-		ServiceContext serviceContext = new ServiceContext();
-
-		serviceContext.setAddCommunityPermissions(
-			isAddCommunityPermissions(fileEntry.getGroupId()));
-		serviceContext.setAddGuestPermissions(true);
-
-		DLFileEntryLocalServiceUtil.updateFileEntry(
-			latestFileVersion.getUserId(), latestFileVersion.getGroupId(),
-			latestFileVersion.getFolderId(), latestFileVersion.getFolderId(),
-			latestFileVersion.getName(), fileEntry.getTitle(),
-			fileEntry.getTitle(), fileEntry.getDescription(),
-			latestFileVersion.getDescription(), true,
-			fileEntry.getExtraSettings(), null, 0, serviceContext);
-	}
-
 	protected boolean deleteResource(
 			long groupId, long parentFolderId, String name, String lockUuid)
 		throws Exception {
@@ -949,6 +922,33 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 				return false;
 			}
 		}
+	}
+
+	protected void publishFileEntry(DLFileEntry fileEntry) throws Exception {
+		DLFileVersion latestFileVersion =
+			DLFileVersionLocalServiceUtil.getLatestFileVersion(
+				fileEntry.getGroupId(), fileEntry.getFolderId(),
+				fileEntry.getName());
+
+		if (latestFileVersion.getStatus() ==
+				WorkflowConstants.STATUS_APPROVED) {
+
+			return;
+		}
+
+		ServiceContext serviceContext = new ServiceContext();
+
+		serviceContext.setAddCommunityPermissions(
+			isAddCommunityPermissions(fileEntry.getGroupId()));
+		serviceContext.setAddGuestPermissions(true);
+
+		DLFileEntryLocalServiceUtil.updateFileEntry(
+			latestFileVersion.getUserId(), latestFileVersion.getGroupId(),
+			latestFileVersion.getFolderId(), latestFileVersion.getFolderId(),
+			latestFileVersion.getName(), fileEntry.getTitle(),
+			fileEntry.getTitle(), fileEntry.getDescription(),
+			latestFileVersion.getDescription(), true,
+			fileEntry.getExtraSettings(), null, 0, serviceContext);
 	}
 
 	protected Resource toResource(
