@@ -16,7 +16,6 @@ package com.liferay.portlet.journal.service.impl;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -127,9 +126,9 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 		JournalPermission.check(
 			getPermissionChecker(), groupId, ActionKeys.EXPIRE);
 
-		return journalArticleLocalService.updateStatus(
-			getUserId(), groupId, articleId, version,
-			WorkflowConstants.STATUS_EXPIRED, articleURL, serviceContext);
+		return journalArticleLocalService.expireArticle(
+			getUserId(), groupId, articleId, version, articleURL,
+			serviceContext);
 	}
 
 	public JournalArticle getArticle(long groupId, String articleId)

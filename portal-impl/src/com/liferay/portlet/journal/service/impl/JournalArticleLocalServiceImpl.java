@@ -738,6 +738,16 @@ public class JournalArticleLocalServiceImpl
 		}
 	}
 
+	public JournalArticle expireArticle(
+			long userId, long groupId, String articleId, double version,
+			String articleURL, ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		return updateStatus(
+			userId, groupId, articleId, version,
+			WorkflowConstants.STATUS_EXPIRED, articleURL, serviceContext);
+	}
+
 	public JournalArticle getArticle(long id)
 		throws PortalException, SystemException {
 
