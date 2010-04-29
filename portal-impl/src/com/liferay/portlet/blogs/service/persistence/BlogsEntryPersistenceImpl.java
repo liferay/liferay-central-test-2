@@ -27,7 +27,10 @@ import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.sanitizer.SanitizerException;
+import com.liferay.portal.kernel.sanitizer.SanitizerUtil;
 import com.liferay.portal.kernel.util.CalendarUtil;
+import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -36,6 +39,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.model.ModelListener;
+import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.service.persistence.BatchSessionUtil;
 import com.liferay.portal.service.persistence.CompanyPersistence;
 import com.liferay.portal.service.persistence.GroupPersistence;
@@ -537,6 +541,37 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 			String uuid = PortalUUIDUtil.generate();
 
 			blogsEntry.setUuid(uuid);
+		}
+
+		long userId = GetterUtil.getLong(PrincipalThreadLocal.getName());
+
+		if (userId > 0) {
+			long companyId = blogsEntry.getCompanyId();
+
+			long groupId = blogsEntry.getGroupId();
+
+			long entryId = 0;
+
+			if (!isNew) {
+				entryId = blogsEntry.getPrimaryKey();
+			}
+
+			try {
+				blogsEntry.setContent(SanitizerUtil.sanitize(companyId,
+						groupId, userId,
+						com.liferay.portlet.blogs.model.BlogsEntry.class.getName(),
+						entryId, ContentTypes.TEXT_HTML,
+						StringUtil.split("ALL"), blogsEntry.getContent(), null));
+
+				blogsEntry.setTitle(SanitizerUtil.sanitize(companyId, groupId,
+						userId,
+						com.liferay.portlet.blogs.model.BlogsEntry.class.getName(),
+						entryId, ContentTypes.TEXT_PLAIN,
+						StringUtil.split("ALL"), blogsEntry.getTitle(), null));
+			}
+			catch (SanitizerException se) {
+				throw new SystemException(se);
+			}
 		}
 
 		Session session = null;
