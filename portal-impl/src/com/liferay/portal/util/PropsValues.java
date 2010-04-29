@@ -738,8 +738,8 @@ public class PropsValues {
 	public static final String IMAGE_HOOK_FILE_SYSTEM_ROOT_DIR =
 		PropsUtil.get(PropsKeys.IMAGE_HOOK_FILE_SYSTEM_ROOT_DIR);
 
-	public static final String IMAGE_HOOK_IMPL =
-		PropsUtil.get(PropsKeys.IMAGE_HOOK_IMPL);
+	public static final String IMAGE_HOOK_IMPL = PropsUtil.get(
+		PropsKeys.IMAGE_HOOK_IMPL);
 
 	public static final int INDEX_ON_STARTUP_DELAY = GetterUtil.getInteger(
 		PropsUtil.get(PropsKeys.INDEX_ON_STARTUP_DELAY));
@@ -1490,6 +1490,9 @@ public class PropsValues {
 	public static final boolean SC_PRODUCT_COMMENTS_ENABLED =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.SC_PRODUCT_COMMENTS_ENABLED));
+
+	public static final String SANITIZER_IMPL = PropsUtil.get(
+		PropsKeys.SANITIZER_IMPL);
 
 	public static final String[] SCHEDULER_CLASSES =
 		PropsUtil.getArray(PropsKeys.SCHEDULER_CLASSES);

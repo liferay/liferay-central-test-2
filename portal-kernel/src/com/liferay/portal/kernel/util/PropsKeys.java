@@ -1287,6 +1287,8 @@ public interface PropsKeys {
 
 	public static final String SC_PRODUCT_COMMENTS_ENABLED = "sc.product.comments.enabled";
 
+	public static final String SANITIZER_IMPL = "sanitizer.impl";
+
 	public static final String SCHEDULER_CLASSES = "scheduler.classes";
 
 	public static final String SCHEDULER_ENABLED = "scheduler.enabled";

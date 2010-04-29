@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Tuple;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReader;
@@ -28,6 +29,8 @@ import com.liferay.portal.util.PropsUtil;
 
 import java.io.InputStream;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -102,6 +105,40 @@ public class ModelHintsImpl implements ModelHints {
 
 	public List<String> getModels() {
 		return ListUtil.fromCollection(_models);
+	}
+
+	public Tuple getSanitizeTuple(String model, String field) {
+		Map<String, Object> fields = (Map<String, Object>)_modelFields.get(
+			model);
+
+		if (fields == null) {
+			return null;
+		}
+		else {
+			return (Tuple)fields.get(field + _SANITIZE_SUFFIX);
+		}
+	}
+
+	public List<Tuple> getSanitizeTuples(String model) {
+		Map<String, Object> fields = (Map<String, Object>)_modelFields.get(
+			model);
+
+		if (fields == null) {
+			return Collections.EMPTY_LIST;
+		}
+		else {
+			List<Tuple> sanitizeTuples = new ArrayList<Tuple>();
+
+			for (String key : fields.keySet()) {
+				if (key.endsWith(_SANITIZE_SUFFIX)) {
+					Tuple sanitizeTuple = (Tuple)fields.get(key);
+
+					sanitizeTuples.add(sanitizeTuple);
+				}
+			}
+
+			return sanitizeTuples;
+		}
 	}
 
 	public String getType(String model, String field) {
@@ -253,10 +290,26 @@ public class ModelHintsImpl implements ModelHints {
 					fieldHints.put(hintName, hintValue);
 				}
 
+				Tuple fieldSanitize = null;
+
+				Element sanitize = field.element("sanitize");
+
+				if (sanitize != null) {
+					String contentType = sanitize.attributeValue(
+						"content-type");
+					String modes = sanitize.attributeValue("modes");
+
+					fieldSanitize = new Tuple(fieldName, contentType, modes);
+				}
+
 				fields.put(fieldName + _ELEMENTS_SUFFIX, field);
 				fields.put(fieldName + _TYPE_SUFFIX, fieldType);
 				fields.put(fieldName + _LOCALIZATION_SUFFIX, fieldLocalized);
 				fields.put(fieldName + _HINTS_SUFFIX, fieldHints);
+
+				if (fieldSanitize != null) {
+					fields.put(fieldName + _SANITIZE_SUFFIX, fieldSanitize);
+				}
 			}
 		}
 	}
@@ -294,6 +347,8 @@ public class ModelHintsImpl implements ModelHints {
 	private static final String _HINTS_SUFFIX = "_HINTS";
 
 	private static final String _LOCALIZATION_SUFFIX = "_LOCALIZATION";
+
+	private static final String _SANITIZE_SUFFIX = "_SANITIZE_SUFFIX";
 
 	private static final String _TYPE_SUFFIX = "_TYPE";
 

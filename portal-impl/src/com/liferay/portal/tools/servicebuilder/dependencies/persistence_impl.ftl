@@ -37,6 +37,10 @@ import com.liferay.portal.kernel.dao.orm.Type;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.sanitizer.Sanitizer;
+import com.liferay.portal.kernel.sanitizer.SanitizerException;
+import com.liferay.portal.kernel.sanitizer.SanitizerUtil;
+import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.CalendarUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -47,6 +51,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.model.ModelListener;
+import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.service.persistence.BatchSessionUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
@@ -407,6 +412,65 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 				if (${entity.varName}.getParent${pkColumn.methodName}() != ${entity.varName}ModelImpl.getOriginalParent${pkColumn.methodName}()) {
 					shrinkTree(${entity.varName});
 					expandTree(${entity.varName});
+				}
+			}
+		</#if>
+
+		<#assign sanitizeTuples = modelHintsUtil.getSanitizeTuples("${packagePath}.model.${entity.name}")>
+
+		<#if sanitizeTuples?size != 0>
+			long userId = GetterUtil.getLong(PrincipalThreadLocal.getName());
+
+			if (userId > 0) {
+				<#assign companyId = 0>
+
+				<#if entity.hasColumn("companyId")>
+					long companyId = ${entity.varName}.getCompanyId();
+				<#else>
+					long companyId = 0;
+				</#if>
+
+				<#if entity.hasColumn("groupId")>
+					long groupId = ${entity.varName}.getGroupId();
+				<#else>
+					long groupId = 0;
+				</#if>
+
+				long ${entity.PKVarName} = 0;
+
+				if (!isNew) {
+					${entity.PKVarName} = ${entity.varName}.getPrimaryKey();
+				}
+
+				try {
+					<#list sanitizeTuples as sanitizeTuple>
+						<#assign colMethodName = textFormatter.format(sanitizeTuple.getObject(0), 6)>
+
+						<#assign contentType = "\"" + sanitizeTuple.getObject(1) + "\"">
+
+						<#if contentType == "\"text/html\"">
+							<#assign contentType = "ContentTypes.TEXT_HTML">
+						<#elseif contentType == "\"text/plain\"">
+							<#assign contentType = "ContentTypes.TEXT_PLAIN">
+						</#if>
+
+						<#assign modes = "\"" + sanitizeTuple.getObject(2) + "\"">
+
+						<#if modes == "\"ALL\"">
+							<#assign modes = "Sanitizer.MODE_ALL">
+						<#elseif modes == "\"BAD_WORDS\"">
+							<#assign modes = "Sanitizer.MODE_BAD_WORDS">
+						<#elseif modes == "\"XSS\"">
+							<#assign modes = "Sanitizer.MODE_XSS">
+						<#else>
+							<#assign modes = "StringUtil.split(\"" + sanitizeTuple.getObject(2) + "\")">
+						</#if>
+
+						${entity.varName}.set${colMethodName}(SanitizerUtil.sanitize(companyId, groupId, userId, ${packagePath}.model.${entity.name}.class.getName(), ${entity.PKVarName}, ${contentType}, ${modes}, ${entity.varName}.get${colMethodName}(), null));
+					</#list>
+				}
+				catch (SanitizerException se) {
+					throw new SystemException(se);
 				}
 			}
 		</#if>

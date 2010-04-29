@@ -23,25 +23,47 @@
 						localized="true"
 					</#if>
 
+					<#assign closeField = false>
+
 					<#if modelHintsUtil.getFieldsEl(modelName, column.name)??>
 						<#assign field = modelHintsUtil.getFieldsEl(modelName, column.name)>
 						<#assign hints = field.elements()>
 
 						<#if hints?size gt 0>
-							>
+							<#assign closeField = true>
+						</#if>
+					</#if>
+
+					<#if modelHintsUtil.getSanitizeTuple(modelName, column.name)??>
+						<#assign closeField = true>
+					</#if>
+
+					<#if closeField>
+						>
+
+						<#if modelHintsUtil.getFieldsEl(modelName, column.name)??>
+							<#assign field = modelHintsUtil.getFieldsEl(modelName, column.name)>
+							<#assign hints = field.elements()>
 
 							<#list hints as hint>
 								<#if hint.name == "hint">
 									<hint name="${hint.attributeValue("name")}">${hint.text}</hint>
-								<#else>
+								<#elseif hint.name == "hint-collection">
 									<hint-collection name="${hint.attributeValue("name")}" />
 								</#if>
 							</#list>
-
-							</field>
-						<#else>
-							/>
 						</#if>
+
+						<#if modelHintsUtil.getSanitizeTuple(modelName, column.name)??>
+							<#assign sanitizeTuple = modelHintsUtil.getSanitizeTuple(modelName, column.name)>
+
+							<#assign contentType = sanitizeTuple.getObject(1)>
+							<#assign modes = sanitizeTuple.getObject(2)>
+
+							<sanitize content-type="${contentType}" modes="${modes}" />
+						</#if>
+
+						</field>
 					<#else>
 						/>
 					</#if>

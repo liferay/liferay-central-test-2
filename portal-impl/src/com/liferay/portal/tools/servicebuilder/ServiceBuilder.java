@@ -3824,6 +3824,9 @@ public class ServiceBuilder {
 		context.put("system", staticModels.get("java.lang.System"));
 		context.put("tempMap", wrapper.wrap(new HashMap<String, Object>()));
 		context.put(
+			"textFormatter",
+			staticModels.get("com.liferay.util.TextFormatter"));
+		context.put(
 			"validator",
 			staticModels.get("com.liferay.portal.kernel.util.Validator"));
 

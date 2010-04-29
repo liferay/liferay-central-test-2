@@ -54,6 +54,7 @@ my.places.show.user.private.sites.with.no.layouts
 my.places.show.user.public.sites.with.no.layouts
 passwords.passwordpolicytoolkit.generator
 passwords.passwordpolicytoolkit.static
+sanitizer.impl
 servlet.session.create.events
 servlet.session.destroy.events
 servlet.service.events.post

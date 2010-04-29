@@ -14,6 +14,7 @@
 
 package com.liferay.portal.model;
 
+import com.liferay.portal.kernel.util.Tuple;
 import com.liferay.portal.kernel.xml.Element;
 
 import java.util.List;
@@ -44,6 +45,14 @@ public class ModelHintsUtil {
 
 	public static List<String> getModels() {
 		return getModelHints().getModels();
+	}
+
+	public static Tuple getSanitizeTuple(String model, String field) {
+		return getModelHints().getSanitizeTuple(model, field);
+	}
+
+	public static List<Tuple> getSanitizeTuples(String model) {
+		return getModelHints().getSanitizeTuples(model);
 	}
 
 	public static String getType(String model, String field) {

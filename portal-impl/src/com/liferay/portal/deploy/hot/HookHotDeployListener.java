@@ -37,6 +37,9 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.sanitizer.Sanitizer;
+import com.liferay.portal.kernel.sanitizer.SanitizerUtil;
+import com.liferay.portal.kernel.sanitizer.SanitizerWrapper;
 import com.liferay.portal.kernel.upgrade.UpgradeException;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.FileUtil;
@@ -169,6 +172,7 @@ public class HookHotDeployListener
 		"my.places.show.user.public.sites.with.no.layouts",
 		"passwords.passwordpolicytoolkit.generator",
 		"passwords.passwordpolicytoolkit.static",
+		"sanitizer.impl",
 		"servlet.session.create.events",
 		"servlet.session.destroy.events",
 		"servlet.service.events.post",
@@ -287,6 +291,13 @@ public class HookHotDeployListener
 
 		if (portalProperties.containsKey(PropsKeys.MAIL_HOOK_IMPL)) {
 			com.liferay.mail.util.HookFactory.setInstance(null);
+		}
+
+		if (portalProperties.containsKey(PropsKeys.SANITIZER_IMPL)) {
+			SanitizerWrapper sanitizerWrapper =
+				(SanitizerWrapper)SanitizerUtil.getSanitizer();
+
+			sanitizerWrapper.setSanitizer(null);
 		}
 
 		if (portalProperties.containsKey(
@@ -1188,6 +1199,19 @@ public class HookHotDeployListener
 					mailHookClassName);
 
 			com.liferay.mail.util.HookFactory.setInstance(mailHook);
+		}
+
+		if (portalProperties.containsKey(PropsKeys.SANITIZER_IMPL)) {
+			String sanitizerClassName = portalProperties.getProperty(
+				PropsKeys.SANITIZER_IMPL);
+
+			Sanitizer sanitizer = (Sanitizer)newInstance(
+				portletClassLoader, Sanitizer.class, sanitizerClassName);
+
+			SanitizerWrapper sanitizerWrapper =
+				(SanitizerWrapper)SanitizerUtil.getSanitizer();
+
+			sanitizerWrapper.setSanitizer(sanitizer);
 		}
 
 		if (portalProperties.containsKey(

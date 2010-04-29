@@ -928,12 +928,14 @@
 		<field name="modifiedDate" type="Date" />
 		<field name="title" type="String">
 			<hint name="max-length">150</hint>
+			<sanitize content-type="text/plain" modes="ALL" />
 		</field>
 		<field name="urlTitle" type="String">
 			<hint name="max-length">150</hint>
 		</field>
 		<field name="content" type="String">
 			<hint-collection name="CLOB" />
+			<sanitize content-type="text/html" modes="ALL" />
 		</field>
 		<field name="displayDate" type="Date" />
 		<field name="allowPingbacks" type="boolean" />
