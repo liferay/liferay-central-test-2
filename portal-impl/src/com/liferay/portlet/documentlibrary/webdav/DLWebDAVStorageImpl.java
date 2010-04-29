@@ -744,7 +744,7 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 				}
 
 				if (PropsValues.DL_WEBDAV_SAVE_TO_SINGLE_VERSION) {
-					approveFileEntry(fileEntry);
+					publishFileEntry(fileEntry);
 				}
 
 				DLFileEntryServiceUtil.unlockFileEntry(
@@ -777,13 +777,15 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		return false;
 	}
 
-	protected void approveFileEntry(DLFileEntry fileEntry) throws Exception {
-		DLFileVersion fileVersion =
+	protected void publishFileEntry(DLFileEntry fileEntry) throws Exception {
+		DLFileVersion latestFileVersion =
 			DLFileVersionLocalServiceUtil.getLatestFileVersion(
 				fileEntry.getGroupId(), fileEntry.getFolderId(),
 				fileEntry.getName());
 
-		if (fileVersion.getStatus() != WorkflowConstants.STATUS_DRAFT) {
+		if (latestFileVersion.getStatus() ==
+				WorkflowConstants.STATUS_APPROVED) {
+
 			return;
 		}
 
@@ -793,14 +795,13 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			isAddCommunityPermissions(fileEntry.getGroupId()));
 		serviceContext.setAddGuestPermissions(true);
 
-		String[] assetTagNames = AssetTagLocalServiceUtil.getTagNames(
-			DLFileEntry.class.getName(), fileEntry.getFileEntryId());
-
-		serviceContext.setAssetTagNames(assetTagNames);
-
-		DLFileEntryLocalServiceUtil.updateStatus(
-			fileEntry.getUserId(), fileEntry.getFileEntryId(),
-			WorkflowConstants.STATUS_APPROVED, serviceContext);
+		DLFileEntryLocalServiceUtil.updateFileEntry(
+			latestFileVersion.getUserId(), latestFileVersion.getGroupId(),
+			latestFileVersion.getFolderId(), latestFileVersion.getFolderId(),
+			latestFileVersion.getName(), fileEntry.getTitle(),
+			fileEntry.getTitle(), fileEntry.getDescription(),
+			latestFileVersion.getDescription(), true,
+			fileEntry.getExtraSettings(), null, 0, serviceContext);
 	}
 
 	protected boolean deleteResource(
