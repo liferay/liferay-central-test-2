@@ -41,5 +41,6 @@
 		<property name="dataSource" ref="liferayDataSource" />
 		<property name="dynamicDataSourceTargetSource" ref="dynamicDataSourceTargetSource" />
 		<property name="mailSession" ref="mailSession" />
+		<property name="transactionManager" ref="liferayTransactionManager" />
 	</bean>	
 </beans>
