@@ -16,6 +16,7 @@ package com.liferay.portal.upgrade.v6_0_2;
 
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.util.PortletKeys;
@@ -53,21 +54,22 @@ public class UpgradeNestedPortlets extends UpgradeProcess {
 				long plid = rs.getLong("plid");
 				String typeSettings = rs.getString("typeSettings");
 
-				Matcher matcher = _pattern.matcher(typeSettings);
 				String newTypeSettings = typeSettings;
 
+				Matcher matcher = _pattern.matcher(typeSettings);
+
 				while (matcher.find()) {
-					String colVariable = matcher.group();
+					String nestedColumnIds = matcher.group();
 
-					int expectedNumOfUnderscores = StringUtil.count(
-						PortletConstants.INSTANCE_SEPARATOR, "_") + 1;
-					int numOfUnderscores = StringUtil.count(colVariable, "_");
+					int underlineCount = StringUtil.count(
+						nestedColumnIds, StringPool.UNDERLINE);
 
-					if (expectedNumOfUnderscores == numOfUnderscores) {
-						String newColVariable = colVariable.replaceAll(
+					if (underlineCount == _UNDERLINE_COUNT) {
+						String newNestedColumnIds = nestedColumnIds.replaceAll(
 							_pattern.pattern(), "_$1_$2");
+
 						newTypeSettings = newTypeSettings.replaceAll(
-							colVariable, newColVariable);
+							nestedColumnIds, newNestedColumnIds);
 					}
 				}
 
@@ -107,9 +109,11 @@ public class UpgradeNestedPortlets extends UpgradeProcess {
 			"'%nested-column-ids=" + PortletKeys.NESTED_PORTLETS +
 				PortletConstants.INSTANCE_SEPARATOR + "%'";
 
+	private static final int _UNDERLINE_COUNT = StringUtil.count(
+		PortletConstants.INSTANCE_SEPARATOR, StringPool.UNDERLINE) + 1;
+
 	private static Pattern _pattern = Pattern.compile(
 		"(" + PortletKeys.NESTED_PORTLETS +
-			PortletConstants.INSTANCE_SEPARATOR +
-				"[^_,\\s=]+_)([^_,\\s=]+)");
+			PortletConstants.INSTANCE_SEPARATOR + "[^_,\\s=]+_)([^_,\\s=]+)");
 
 }
