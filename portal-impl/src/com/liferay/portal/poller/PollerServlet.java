@@ -248,7 +248,8 @@ public class PollerServlet extends HttpServlet {
 		}
 
 		return new PollerHeader(
-			userId, browserKey, portletIds, initialRequest, startPolling);
+			companyId, userId, browserKey, portletIds, initialRequest,
+			startPolling);
 	}
 
 	protected String getPollerRequestString(HttpServletRequest request)

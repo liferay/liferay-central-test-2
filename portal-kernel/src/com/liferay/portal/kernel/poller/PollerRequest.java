@@ -64,6 +64,10 @@ public class PollerRequest {
 		return _chunkId;
 	}
 
+	public long getCompanyId() {
+		return _pollerHeader.getCompanyId();
+	}
+
 	public Map<String, String> getParameterMap() {
 		return _parameterMap;
 	}

@@ -24,9 +24,10 @@ import com.liferay.portal.kernel.util.StringBundler;
 public class PollerHeader {
 
 	public PollerHeader(
-		long userId, long browserKey, String[] portletIds,
+		long companyId, long userId, long browserKey, String[] portletIds,
 		boolean initialRequest, boolean startPolling) {
 
+		_companyId = companyId;
 		_userId = userId;
 		_browserKey = browserKey;
 		_portletIds = portletIds;
@@ -36,6 +37,10 @@ public class PollerHeader {
 
 	public long getBrowserKey() {
 		return _browserKey;
+	}
+
+	public long getCompanyId() {
+		return _companyId;
 	}
 
 	public String[] getPortletIds() {
@@ -63,6 +68,8 @@ public class PollerHeader {
 
 		sb.append("{_browserKey=");
 		sb.append(_browserKey);
+		sb.append(", companyId=");
+		sb.append(_companyId);
 		sb.append(", initialRequest=");
 		sb.append(_initialRequest);
 		sb.append(", portletIds=");
@@ -79,6 +86,7 @@ public class PollerHeader {
 	}
 
 	private long _browserKey;
+	private long _companyId;
 	private boolean _initialRequest;
 	private String[] _portletIds;
 	private boolean _startPolling;
