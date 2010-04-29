@@ -289,7 +289,7 @@
 	</category>
 
 	<category name="com.liferay.portal.sanitizer.DummySanitizerImpl">
-		<priority value="DEBUG" />
+		<priority value="ERROR" />
 	</category>
 
 	<category name="com.liferay.portal.scheduler.quartz.PortalJobStore">
