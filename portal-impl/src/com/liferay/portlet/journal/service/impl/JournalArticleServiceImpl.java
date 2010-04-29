@@ -119,6 +119,19 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 			groupId, articleId, version, articleURL, serviceContext);
 	}
 
+	public JournalArticle expireArticle(
+			long groupId, String articleId, double version, String articleURL,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		JournalPermission.check(
+			getPermissionChecker(), groupId, ActionKeys.EXPIRE);
+
+		return journalArticleLocalService.updateStatus(
+			getUserId(), groupId, articleId, version,
+			WorkflowConstants.STATUS_EXPIRED, articleURL, serviceContext);
+	}
+
 	public JournalArticle getArticle(long groupId, String articleId)
 		throws PortalException, SystemException {
 
@@ -256,25 +269,6 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 
 		return journalArticleLocalService.updateContent(
 			groupId, articleId, version, content);
-	}
-
-	public JournalArticle updateStatus(
-			long groupId, String articleId, double version, int status,
-			String articleURL, ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		if (status == WorkflowConstants.STATUS_APPROVED) {
-			JournalPermission.check(
-				getPermissionChecker(), groupId, ActionKeys.APPROVE_ARTICLE);
-		}
-		else if (status == WorkflowConstants.STATUS_EXPIRED) {
-			JournalPermission.check(
-				getPermissionChecker(), groupId, ActionKeys.EXPIRE);
-		}
-
-		return journalArticleLocalService.updateStatus(
-			getUserId(), groupId, articleId, version, status, articleURL,
-			serviceContext);
 	}
 
 }

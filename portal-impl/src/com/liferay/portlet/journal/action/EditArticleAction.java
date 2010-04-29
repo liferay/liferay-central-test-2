@@ -266,9 +266,8 @@ public class EditArticleAction extends PortletAction {
 			String articleURL = ParamUtil.getString(
 				actionRequest, "articleURL");
 
-			JournalArticleServiceUtil.updateStatus(
-				groupId, articleId, version, WorkflowConstants.STATUS_EXPIRED,
-				articleURL, serviceContext);
+			JournalArticleServiceUtil.expireArticle(
+				groupId, articleId, version, articleURL, serviceContext);
 		}
 	}
 
@@ -554,15 +553,6 @@ public class EditArticleAction extends PortletAction {
 				reviewDateDay, reviewDateYear, reviewDateHour, reviewDateMinute,
 				neverReview, indexable, smallImage, smallImageURL, smallFile,
 				images, articleURL, serviceContext);
-		}
-
-		boolean approve = ParamUtil.getBoolean(uploadRequest, "approve");
-
-		if (approve) {
-			JournalArticleServiceUtil.updateStatus(
-				article.getGroupId(), article.getArticleId(),
-				article.getVersion(), WorkflowConstants.STATUS_APPROVED,
-				articleURL, serviceContext);
 		}
 
 		// Recent articles
