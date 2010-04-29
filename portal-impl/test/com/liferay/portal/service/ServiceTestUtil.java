@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.scheduler.SchedulerEngine;
 import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.workflow.WorkflowHandlerRegistryUtil;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletCategory;
 import com.liferay.portal.model.User;
@@ -44,8 +45,10 @@ import com.liferay.portal.util.WebAppPool;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.bookmarks.util.BookmarksIndexer;
 import com.liferay.portlet.documentlibrary.util.DLIndexer;
+import com.liferay.portlet.documentlibrary.workflow.DLFileEntryWorkflowHandler;
 import com.liferay.portlet.enterpriseadmin.util.UserIndexer;
 import com.liferay.portlet.imagegallery.util.IGIndexer;
+import com.liferay.portlet.journal.workflow.JournalArticleWorkflowHandler;
 import com.liferay.portlet.messageboards.util.MBIndexer;
 
 import java.util.HashMap;
@@ -169,6 +172,12 @@ public class ServiceTestUtil {
 		IndexerRegistryUtil.register(new DLIndexer());
 		IndexerRegistryUtil.register(new IGIndexer());
 		IndexerRegistryUtil.register(new MBIndexer());
+
+		// Workflow
+
+		WorkflowHandlerRegistryUtil.register(new DLFileEntryWorkflowHandler());
+		WorkflowHandlerRegistryUtil.register(
+			new JournalArticleWorkflowHandler());
 
 		// Company
 
