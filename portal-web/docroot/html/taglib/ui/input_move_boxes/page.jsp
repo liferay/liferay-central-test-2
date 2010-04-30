@@ -17,14 +17,16 @@
 <%@ include file="/html/taglib/init.jsp" %>
 
 <%
+String randomNamespace = PortalUtil.generateRandomKey(request, "taglib_ui_input_move_boxes_page") + StringPool.UNDERLINE;
+
 String cssClass = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-move-boxes:cssClass"));
-String formName = namespace + request.getAttribute("liferay-ui:input-move-boxes:formName");
+String formName = (String)request.getAttribute("liferay-ui:input-move-boxes:formName");
 
 String leftTitle = LanguageUtil.get(pageContext, (String)request.getAttribute("liferay-ui:input-move-boxes:leftTitle"));
 String rightTitle = LanguageUtil.get(pageContext, (String)request.getAttribute("liferay-ui:input-move-boxes:rightTitle"));
 
-String leftBoxName = namespace + request.getAttribute("liferay-ui:input-move-boxes:leftBoxName");
-String rightBoxName = namespace + request.getAttribute("liferay-ui:input-move-boxes:rightBoxName");
+String leftBoxName = (String)request.getAttribute("liferay-ui:input-move-boxes:leftBoxName");
+String rightBoxName = (String)request.getAttribute("liferay-ui:input-move-boxes:rightBoxName");
 
 String leftOnChange = (String)request.getAttribute("liferay-ui:input-move-boxes:leftOnChange");
 String rightOnChange = (String)request.getAttribute("liferay-ui:input-move-boxes:rightOnChange");
@@ -36,82 +38,66 @@ List leftList = (List)request.getAttribute("liferay-ui:input-move-boxes:leftList
 List rightList = (List)request.getAttribute("liferay-ui:input-move-boxes:rightList");
 %>
 
-<div class="taglib-move-boxes <%= cssClass %>">
-	<table class="lfr-table">
-	<tr>
-		<td>
-			<strong class="category-header"><%= leftTitle %></strong>
+<div class="taglib-move-boxes <%= cssClass %> <%= leftReorder ? "left-reorder" : StringPool.BLANK %> <%= rightReorder ? "right-reorder" : StringPool.BLANK %>" id="<%= randomNamespace + "input-move-boxes" %>">
+	<aui:layout>
+		<aui:column>
+			<aui:select cssClass="choice-selector left-selector " label="<%= leftTitle %>" multiple="<%= true %>" name="<%= leftBoxName %>" size="10" onChange="<%= Validator.isNotNull(leftOnChange) ? leftOnChange : StringPool.BLANK %>">
 
-			<table>
-			<tr>
-				<td>
-					<select class="choice-selector" multiple name="<%= leftBoxName %>" size="10" <%= Validator.isNotNull(leftOnChange) ? "onChange=\"" + leftOnChange + "\"" : "" %> onFocus="document.<%= formName %>.<%= rightBoxName %>.selectedIndex = '-1';">
+				<%
+				for (int i = 0; i < leftList.size(); i++) {
+					KeyValuePair kvp = (KeyValuePair)leftList.get(i);
+				%>
 
-					<%
-					for (int i = 0; i < leftList.size(); i++) {
-						KeyValuePair kvp = (KeyValuePair)leftList.get(i);
-					%>
+					<aui:option label="<%= kvp.getValue() %>" value="<%= kvp.getKey() %>" />
 
-						<option value="<%= kvp.getKey() %>"><%= kvp.getValue() %></option>
+				<%
+				}
+				%>
 
-					<%
-					}
-					%>
+			</aui:select>
 
-					</select>
-				</td>
+			<c:if test="<%= leftReorder %>">
+				<a class="arrow-button left-reorder-up" href="javascript:"><img alt="<liferay-ui:message arguments="<%= new Object[] {leftTitle} %>" key="move-selected-item-in-x-one-position-up" />" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_up.png" /></a>
 
-				<c:if test="<%= leftReorder %>">
-					<td class="lfr-top">
-						<a href="javascript:Liferay.Util.reorder(document.<%= formName %>.<%= leftBoxName %>, 0);"><img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_up.png" vspace="2" width="16" /></a><br />
+				<a class="arrow-button left-reorder-down" href="javascript:"><img alt="<liferay-ui:message arguments="<%= new Object[] {leftTitle} %>" key="move-selected-item-in-x-one-position-down" />" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_down.png" /></a>
+			</c:if>
+		</aui:column>
 
-						<a href="javascript:Liferay.Util.reorder(document.<%= formName %>.<%= leftBoxName %>, 1);"><img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_down.png" vspace="2" width="16" /></a>
-					</td>
-				</c:if>
+		<aui:column cssClass="move-arrow-buttons">
+			<a class="arrow-button left-move" href="javascript:"><img alt="<liferay-ui:message arguments="<%= new Object[] {leftTitle, rightTitle} %>" key="move-selected-items-from-x-to-x" />" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_right.png" onClick="self.focus();" /></a>
 
-			</tr>
-			</table>
-		</td>
-		<td>
-			<a href="javascript:Liferay.Util.moveItem(document.<%= formName %>.<%= leftBoxName %>, document.<%= formName %>.<%= rightBoxName %>, <%= !rightReorder %>);"><img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_right.png" vspace="2" width="16" onClick="self.focus();" /></a>
+			<a class="arrow-button right-move" href="javascript:"><img alt="<liferay-ui:message arguments="<%= new Object[] {rightTitle, leftTitle} %>" key="move-selected-items-from-x-to-x" />" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_left.png" onClick="self.focus();" /></a>
+		</aui:column>
 
-			<br /><br />
+		<aui:column>
+			<aui:select cssClass="choice-selector right-selector" label="<%= rightTitle %>" multiple="<%= true %>" name="<%= rightBoxName %>" size="10" onChange="<%= Validator.isNotNull(rightOnChange) ? rightOnChange : StringPool.BLANK %>">
 
-			<a href="javascript:Liferay.Util.moveItem(document.<%= formName %>.<%= rightBoxName %>, document.<%= formName %>.<%= leftBoxName %>, <%= !leftReorder %>);"><img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_left.png" vspace="2" width="16" onClick="self.focus();" /></a>
-		</td>
-		<td>
-			<strong class="category-header"><%= rightTitle %></strong>
+				<%
+				for (int i = 0; i < rightList.size(); i++) {
+					KeyValuePair kvp = (KeyValuePair)rightList.get(i);
+				%>
 
-			<table>
-			<tr>
-				<td>
-					<select class="choice-selector" multiple name="<%= rightBoxName %>" size="10" <%= Validator.isNotNull(rightOnChange) ? "onChange=\"" + rightOnChange + "\"" : "" %> onFocus="document.<%= formName %>.<%= leftBoxName %>.selectedIndex = '-1';">
+					<option value="<%= kvp.getKey() %>"><%= kvp.getValue() %></option>
 
-					<%
-					for (int i = 0; i < rightList.size(); i++) {
-						KeyValuePair kvp = (KeyValuePair)rightList.get(i);
-					%>
+				<%
+				}
+				%>
 
-						<option value="<%= kvp.getKey() %>"><%= kvp.getValue() %></option>
+				</aui:select>
 
-					<%
-					}
-					%>
+			<c:if test="<%= rightReorder %>">
+				<a class="arrow-button right-reorder-up" href="javascript:"><img alt="<liferay-ui:message arguments="<%= new Object[] {rightTitle} %>" key="move-selected-item-in-x-one-position-up" />" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_up.png" /></a>
 
-					</select>
-				</td>
-
-				<c:if test="<%= rightReorder %>">
-					<td class="lfr-top">
-						<a href="javascript:Liferay.Util.reorder(document.<%= formName %>.<%= rightBoxName %>, 0);"><img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_up.png" vspace="2" width="16" /></a><br />
-
-						<a href="javascript:Liferay.Util.reorder(document.<%= formName %>.<%= rightBoxName %>, 1);"><img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_down.png" vspace="2" width="16" /></a>
-					</td>
-				</c:if>
-
-			</tr>
-			</table>
-		</td>
-	</tr>
-	</table>
+				<a class="arrow-button right-reorder-down" href="javascript:"><img alt="<liferay-ui:message arguments="<%= new Object[] {rightTitle} %>" key="move-selected-item-in-x-one-position-down" />" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_down.png" /></a>
+			</c:if>
+		</aui:column>
+	</aui:layout>
 </div>
+
+<aui:script use="liferay-input-move-boxes">
+	new Liferay.InputMoveBoxes(
+		{
+			container: '#<%= randomNamespace + "input-move-boxes" %>',
+		}
+	);
+</aui:script>
