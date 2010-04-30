@@ -1333,11 +1333,6 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 			throw lfurle;
 		}
-
-		if (friendlyURL.length() > 100) {
-			throw new LayoutFriendlyURLException(
-				LayoutFriendlyURLException.TOO_LONG);
-		}
 	}
 
 	protected void validateName(String name) throws PortalException {

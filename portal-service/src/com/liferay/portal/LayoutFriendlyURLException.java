@@ -39,8 +39,6 @@ public class LayoutFriendlyURLException extends PortalException {
 
 	public static final int TOO_DEEP = 9;
 
-	public static final int TOO_LONG = 10;
-
 	public static final int TOO_SHORT = 3;
 
 	public LayoutFriendlyURLException(int type) {
