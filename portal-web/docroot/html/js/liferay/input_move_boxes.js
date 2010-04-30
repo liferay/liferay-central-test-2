@@ -34,7 +34,6 @@ AUI().add(
 					arrowButtonLeftReorderUp.on(
 						'click',
 						function(event) {
-							alert('up');
 							Liferay.Util.reorder(leftBox, 0);
 						}
 					);
