@@ -93,9 +93,11 @@ import com.liferay.portlet.journalcontent.util.JournalContentUtil;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -266,7 +268,7 @@ public class JournalArticleLocalServiceImpl
 		article.setDisplayDate(displayDate);
 
 		if ((expirationDate == null) || expirationDate.after(now)) {
-			article.setStatus(WorkflowConstants.STATUS_PENDING);
+			article.setStatus(WorkflowConstants.STATUS_DRAFT);
 		}
 		else {
 			article.setStatus(WorkflowConstants.STATUS_EXPIRED);
@@ -341,9 +343,15 @@ public class JournalArticleLocalServiceImpl
 		if (serviceContext.getWorkflowAction() ==
 				WorkflowConstants.ACTION_PUBLISH) {
 
+			Map<String, Serializable> workflowContext =
+				new HashMap<String, Serializable>();
+
+			workflowContext.put("serviceContext", serviceContext);
+
 			WorkflowHandlerRegistryUtil.startWorkflowInstance(
 				user.getCompanyId(), groupId, userId,
-				JournalArticle.class.getName(), article.getId(), article, null);
+				JournalArticle.class.getName(), article.getId(), article,
+				workflowContext);
 		}
 
 		return article;
@@ -766,7 +774,7 @@ public class JournalArticleLocalServiceImpl
 		}
 		catch (NoSuchArticleException nsae) {
 			return getLatestArticle(
-				groupId, articleId, WorkflowConstants.STATUS_PENDING);
+				groupId, articleId, WorkflowConstants.STATUS_ANY);
 		}
 	}
 
@@ -1785,9 +1793,15 @@ public class JournalArticleLocalServiceImpl
 		if (serviceContext.getWorkflowAction() ==
 				WorkflowConstants.ACTION_PUBLISH) {
 
+			Map<String, Serializable> workflowContext =
+				new HashMap<String, Serializable>();
+
+			workflowContext.put("serviceContext", serviceContext);
+
 			WorkflowHandlerRegistryUtil.startWorkflowInstance(
 				user.getCompanyId(), groupId, userId,
-				JournalArticle.class.getName(), article.getId(), article, null);
+				JournalArticle.class.getName(), article.getId(), article,
+				workflowContext);
 		}
 
 		return article;
