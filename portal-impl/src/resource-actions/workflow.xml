@@ -3,76 +3,84 @@
 <resource-action-mapping>
 	<portlet-resource>
 		<portlet-name>150</portlet-name>
-		<supports>
-			<action-key>ACCESS_IN_CONTROL_PANEL</action-key>
-			<action-key>ASSIGN_USER_TASKS</action-key>
-			<action-key>CONFIGURATION</action-key>
-			<action-key>VIEW</action-key>
-		</supports>
-		<community-defaults>
-			<action-key>VIEW</action-key>
-		</community-defaults>
-		<guest-defaults>
-			<action-key>VIEW</action-key>
-		</guest-defaults>
-		<guest-unsupported>
-			<action-key>ACCESS_IN_CONTROL_PANEL</action-key>
-			<action-key>ASSIGN_USER_TASKS</action-key>
-			<action-key>CONFIGURATION</action-key>
-		</guest-unsupported>
+		<permissions>
+			<supports>
+				<action-key>ACCESS_IN_CONTROL_PANEL</action-key>
+				<action-key>ASSIGN_USER_TASKS</action-key>
+				<action-key>CONFIGURATION</action-key>
+				<action-key>VIEW</action-key>
+			</supports>
+			<community-defaults>
+				<action-key>VIEW</action-key>
+			</community-defaults>
+			<guest-defaults>
+				<action-key>VIEW</action-key>
+			</guest-defaults>
+			<guest-unsupported>
+				<action-key>ACCESS_IN_CONTROL_PANEL</action-key>
+				<action-key>ASSIGN_USER_TASKS</action-key>
+				<action-key>CONFIGURATION</action-key>
+			</guest-unsupported>
+		</permissions>
 	</portlet-resource>
 	<portlet-resource>
 		<portlet-name>151</portlet-name>
-		<supports>
-			<action-key>ACCESS_IN_CONTROL_PANEL</action-key>
-			<action-key>CONFIGURATION</action-key>
-			<action-key>VIEW</action-key>
-		</supports>
-		<community-defaults>
-			<action-key>VIEW</action-key>
-		</community-defaults>
-		<guest-defaults>
-			<action-key>VIEW</action-key>
-		</guest-defaults>
-		<guest-unsupported>
-			<action-key>ACCESS_IN_CONTROL_PANEL</action-key>
-			<action-key>CONFIGURATION</action-key>
-		</guest-unsupported>
+		<permissions>
+			<supports>
+				<action-key>ACCESS_IN_CONTROL_PANEL</action-key>
+				<action-key>CONFIGURATION</action-key>
+				<action-key>VIEW</action-key>
+			</supports>
+			<community-defaults>
+				<action-key>VIEW</action-key>
+			</community-defaults>
+			<guest-defaults>
+				<action-key>VIEW</action-key>
+			</guest-defaults>
+			<guest-unsupported>
+				<action-key>ACCESS_IN_CONTROL_PANEL</action-key>
+				<action-key>CONFIGURATION</action-key>
+			</guest-unsupported>
+		</permissions>
 	</portlet-resource>
 	<portlet-resource>
 		<portlet-name>152</portlet-name>
-		<supports>
-			<action-key>ACCESS_IN_CONTROL_PANEL</action-key>
-			<action-key>CONFIGURATION</action-key>
-			<action-key>VIEW</action-key>
-		</supports>
-		<community-defaults>
-			<action-key>VIEW</action-key>
-		</community-defaults>
-		<guest-defaults>
-			<action-key>VIEW</action-key>
-		</guest-defaults>
-		<guest-unsupported>
-			<action-key>ACCESS_IN_CONTROL_PANEL</action-key>
-			<action-key>CONFIGURATION</action-key>
-		</guest-unsupported>
+		<permissions>
+			<supports>
+				<action-key>ACCESS_IN_CONTROL_PANEL</action-key>
+				<action-key>CONFIGURATION</action-key>
+				<action-key>VIEW</action-key>
+			</supports>
+			<community-defaults>
+				<action-key>VIEW</action-key>
+			</community-defaults>
+			<guest-defaults>
+				<action-key>VIEW</action-key>
+			</guest-defaults>
+			<guest-unsupported>
+				<action-key>ACCESS_IN_CONTROL_PANEL</action-key>
+				<action-key>CONFIGURATION</action-key>
+			</guest-unsupported>
+		</permissions>
 	</portlet-resource>
 	<portlet-resource>
 		<portlet-name>153</portlet-name>
-		<supports>
-			<action-key>ACCESS_IN_CONTROL_PANEL</action-key>
-			<action-key>CONFIGURATION</action-key>
-			<action-key>VIEW</action-key>
-		</supports>
-		<community-defaults>
-			<action-key>VIEW</action-key>
-		</community-defaults>
-		<guest-defaults>
-			<action-key>VIEW</action-key>
-		</guest-defaults>
-		<guest-unsupported>
-			<action-key>ACCESS_IN_CONTROL_PANEL</action-key>
-			<action-key>CONFIGURATION</action-key>
-		</guest-unsupported>
+		<permissions>
+			<supports>
+				<action-key>ACCESS_IN_CONTROL_PANEL</action-key>
+				<action-key>CONFIGURATION</action-key>
+				<action-key>VIEW</action-key>
+			</supports>
+			<community-defaults>
+				<action-key>VIEW</action-key>
+			</community-defaults>
+			<guest-defaults>
+				<action-key>VIEW</action-key>
+			</guest-defaults>
+			<guest-unsupported>
+				<action-key>ACCESS_IN_CONTROL_PANEL</action-key>
+				<action-key>CONFIGURATION</action-key>
+			</guest-unsupported>
+		</permissions>
 	</portlet-resource>
 </resource-action-mapping>

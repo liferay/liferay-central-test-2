@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
@@ -47,6 +48,7 @@ import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.PortletResourceBundles;
 import com.liferay.portlet.expando.model.ExpandoColumn;
+import com.liferay.portlet.social.model.SocialEquityActionMapping;
 import com.liferay.util.UniqueList;
 
 import java.io.InputStream;
@@ -385,6 +387,18 @@ public class ResourceActionsUtil {
 		return roles;
 	}
 
+	public static SocialEquityActionMapping getSocialEquityActionMapping(
+		String name, String actionId) {
+
+		return _instance._getSocialEquityActionMapping(name, actionId);
+	}
+
+	public static List<SocialEquityActionMapping> getSocialEquityActionMappings(
+		String name) {
+
+		return _instance._getSocialEquityActionMappings(name);
+	}
+
 	public static void init() {
 		_instance._init();
 	}
@@ -437,6 +451,8 @@ public class ResourceActionsUtil {
 			new HashMap<String, List<String>>();
 		_modelResourceOwnerDefaultActions =
 			new HashMap<String, List<String>>();
+		_socialEquityActionMappings =
+			new HashMap<String, Map<String, SocialEquityActionMapping>>();
 
 		try {
 			ClassLoader classLoader = getClass().getClassLoader();
@@ -734,6 +750,41 @@ public class ResourceActionsUtil {
 		return actions;
 	}
 
+	private SocialEquityActionMapping _getSocialEquityActionMapping(
+		String name, String actionId) {
+
+		Map<String, SocialEquityActionMapping> socialEquityActionMappings =
+			_socialEquityActionMappings.get(name);
+
+		if (socialEquityActionMappings == null) {
+			return null;
+		}
+
+		return socialEquityActionMappings.get(actionId);
+	}
+
+	private List<SocialEquityActionMapping> _getSocialEquityActionMappings(
+		String name) {
+
+		Map<String, SocialEquityActionMapping> socialEquityActionMappings =
+			_socialEquityActionMappings.get(name);
+
+		if (socialEquityActionMappings == null) {
+			return Collections.EMPTY_LIST;
+		}
+
+		List<SocialEquityActionMapping> socialEquityActionMappingList =
+			new ArrayList<SocialEquityActionMapping>();
+
+		for (Map.Entry<String, SocialEquityActionMapping> entry :
+				socialEquityActionMappings.entrySet()) {
+
+			socialEquityActionMappingList.add(entry.getValue());
+		}
+
+		return socialEquityActionMappingList;
+	}
+
 	private void _init() {
 	}
 
@@ -930,6 +981,8 @@ public class ResourceActionsUtil {
 
 		_readOwnerDefaultActions(
 			modelResourceElement, _modelResourceOwnerDefaultActions, name);
+
+		_readSocialEquity(modelResourceElement, name);
 	}
 
 	private void _readOwnerDefaultActions(
@@ -985,6 +1038,67 @@ public class ResourceActionsUtil {
 			supportsActions);
 	}
 
+	private void _readSocialEquity(Element parentElement, String name) {
+		Element socialEquityElement = parentElement.element("social-equity");
+
+		if (socialEquityElement == null) {
+			return;
+		}
+
+		for (Element socialEquityMappingElement :
+				socialEquityElement.elements("social-equity-mapping")) {
+
+			_readSocialEquityMapping(socialEquityMappingElement, name);
+		}
+	}
+
+	private void _readSocialEquityMapping(
+		Element socialEquityMappingElement, String name) {
+
+		Element actionKeyElement =
+			socialEquityMappingElement.element("action-key");
+
+		if (actionKeyElement == null) {
+			return;
+		}
+
+		String actionKey = actionKeyElement.getTextTrim();
+
+		if (Validator.isNull(actionKey)) {
+			return;
+		}
+
+		int informationValue = GetterUtil.getInteger(
+			socialEquityMappingElement.elementText("information-value"));
+		int informationLifespan = GetterUtil.getInteger(
+			socialEquityMappingElement.elementText("information-lifespan"));
+		int participationValue = GetterUtil.getInteger(
+			socialEquityMappingElement.elementText("participation-value"));
+		int participationLifespan = GetterUtil.getInteger(
+			socialEquityMappingElement.elementText("participation-lifespan"));
+
+		SocialEquityActionMapping socialEquityActionMapping =
+			new SocialEquityActionMapping();
+
+		socialEquityActionMapping.setInformationValue(informationValue);
+		socialEquityActionMapping.setInformationLifespan(informationLifespan);
+		socialEquityActionMapping.setParticipationValue(participationValue);
+		socialEquityActionMapping.setParticipationLifespan(
+			participationLifespan);
+
+		Map<String, SocialEquityActionMapping> socialEquityActionMappings =
+			_socialEquityActionMappings.get(name);
+
+		if (socialEquityActionMappings == null) {
+			socialEquityActionMappings =
+				new HashMap<String, SocialEquityActionMapping>();
+
+			_socialEquityActionMappings.put(name, socialEquityActionMappings);
+		}
+
+		socialEquityActionMappings.put(actionKey, socialEquityActionMapping);
+	}
+
 	private List<String> _readSupportsActions(
 		Element parentElement, Map<String, List<String>> actionsMap,
 		String name) {
@@ -1017,5 +1131,7 @@ public class ResourceActionsUtil {
 	private Map<String, List<String>> _portletResourceGuestDefaultActions;
 	private Map<String, List<String>> _portletResourceGuestUnsupportedActions;
 	private Map<String, List<String>> _portletResourceLayoutManagerActions;
+	private Map<String, Map<String, SocialEquityActionMapping>>
+		_socialEquityActionMappings;
 
 }

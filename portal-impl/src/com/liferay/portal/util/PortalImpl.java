@@ -94,6 +94,7 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.security.permission.PermissionCheckerFactoryUtil;
+import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.ClassNameLocalServiceUtil;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
@@ -134,6 +135,7 @@ import com.liferay.portlet.expando.action.EditExpandoAction;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.messageboards.model.MBMessage;
+import com.liferay.portlet.social.model.SocialEquityActionMapping;
 import com.liferay.portlet.social.util.FacebookUtil;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.util.Encryptor;
@@ -2690,6 +2692,18 @@ public class PortalImpl implements Portal {
 			(PortletContextImpl)portletConfig.getPortletContext();
 
 		return portletContextImpl.getServletContext();
+	}
+
+	public SocialEquityActionMapping getSocialEquityActionMapping(
+		String name, String actionId) {
+
+		return ResourceActionsUtil.getSocialEquityActionMapping(name, actionId);
+	}
+
+	public List<SocialEquityActionMapping> getSocialEquityActionMappings(
+		String name) {
+
+		return ResourceActionsUtil.getSocialEquityActionMappings(name);
 	}
 
 	public String getStaticResourceURL(
