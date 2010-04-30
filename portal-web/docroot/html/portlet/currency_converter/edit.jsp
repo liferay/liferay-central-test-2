@@ -55,7 +55,6 @@ rightList = ListUtil.sort(rightList, new KeyValuePairComparator(false, true));
 %>
 
 <liferay-ui:input-move-boxes
-	formName="fm"
 	leftTitle="current"
 	rightTitle="available"
 	leftBoxName="current_actions"

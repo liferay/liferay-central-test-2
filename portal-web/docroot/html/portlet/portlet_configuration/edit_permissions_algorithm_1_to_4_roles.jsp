@@ -194,7 +194,6 @@ else if (tabs2.equals("organization-roles")) {
 
 		<div class="assign-permissions">
 			<liferay-ui:input-move-boxes
-				formName="fm"
 				leftTitle="what-they-can-do"
 				rightTitle="what-they-cant-do"
 				leftBoxName="current_actions"

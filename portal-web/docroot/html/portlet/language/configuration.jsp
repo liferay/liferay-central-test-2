@@ -62,7 +62,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 		%>
 
 		<liferay-ui:input-move-boxes
-			formName="fm"
 			leftTitle="current"
 			rightTitle="available"
 			leftBoxName="currentLanguageIds"

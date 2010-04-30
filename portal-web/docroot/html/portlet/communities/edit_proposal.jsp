@@ -203,7 +203,6 @@ portletURL.setParameter("proposalId", String.valueOf(proposalId));
 						%>
 
 						<liferay-ui:input-move-boxes
-							formName="fm1"
 							leftTitle="current"
 							rightTitle="available"
 							leftBoxName='<%= "current_reviewers_" + i %>'

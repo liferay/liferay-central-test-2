@@ -153,7 +153,6 @@ int userGroupIdsPos = ParamUtil.getInteger(request, "userGroupIdsPos");
 
 		<div class="assign-permissions">
 			<liferay-ui:input-move-boxes
-				formName="fm"
 				leftTitle="what-they-can-do"
 				rightTitle="what-they-cant-do"
 				leftBoxName="current_actions"

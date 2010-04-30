@@ -356,7 +356,6 @@ else if (tabs2.equals("page-updated-email")) {
 				%>
 
 				<liferay-ui:input-move-boxes
-					formName="fm"
 					leftTitle="visible"
 					rightTitle="hidden"
 					leftBoxName="currentVisibleNodes"

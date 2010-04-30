@@ -110,7 +110,6 @@ AssetRendererFactory rendererFactory = AssetRendererFactoryRegistryUtil.getAsset
 
 	<div class="<%= anyAssetType ? "aui-helper-hidden" : "" %>" id="<portlet:namespace />classNamesBoxes">
 		<liferay-ui:input-move-boxes
-			formName="fm"
 			leftTitle="current"
 			rightTitle="available"
 			leftBoxName="currentClassNameIds"
@@ -349,7 +348,6 @@ AssetRendererFactory rendererFactory = AssetRendererFactoryRegistryUtil.getAsset
 
 								<div class="<%= defaultScope ? "aui-helper-hidden" : "" %>" id="<portlet:namespace />scopesBoxes">
 									<liferay-ui:input-move-boxes
-										formName="fm"
 										leftTitle="current"
 										rightTitle="available"
 										leftBoxName="currentScopeIds"

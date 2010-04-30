@@ -238,7 +238,6 @@ request.setAttribute("edit_permissions_algorithm_1_to_4.jsp-portletURL", portlet
 
 				<div class="assign-permissions">
 					<liferay-ui:input-move-boxes
-						formName="fm"
 						leftTitle="what-they-can-do"
 						rightTitle="what-they-cant-do"
 						leftBoxName="current_actions"
@@ -298,7 +297,6 @@ request.setAttribute("edit_permissions_algorithm_1_to_4.jsp-portletURL", portlet
 
 				<div class="assign-permissions">
 					<liferay-ui:input-move-boxes
-						formName="fm"
 						leftTitle="what-they-can-do"
 						rightTitle="what-they-cant-do"
 						leftBoxName="current_actions"
