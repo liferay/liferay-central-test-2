@@ -58,14 +58,14 @@ public class BlogsEntryWorkflowHandler extends BaseWorkflowHandler {
 		long classPK = (Long)workflowContext.get(
 			WorkflowConstants.CONTEXT_ENTRY_CLASS_PK);
 
-		Boolean pingOldTrackbacks =
-			(Boolean)workflowContext.get("pingOldTrackbacks");
+		String[] trackbacks = (String[])workflowContext.get("trackbacks");
+
+		Boolean pingOldTrackbacks = (Boolean)workflowContext.get(
+			"pingOldTrackbacks");
 
 		if (pingOldTrackbacks == null) {
 			pingOldTrackbacks = Boolean.FALSE;
 		}
-
-		String[] trackbacks = (String[])workflowContext.get("trackbacks");
 
 		ServiceContext serviceContext = new ServiceContext();
 

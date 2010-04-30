@@ -21,9 +21,9 @@ package com.liferay.portal.kernel.workflow;
  */
 public class WorkflowConstants {
 
-	public static final int ACTION_PUBLISH = 0;
+	public static final int ACTION_PUBLISH = 1;
 
-	public static final int ACTION_SAVE_DRAFT = 1;
+	public static final int ACTION_SAVE_DRAFT = 2;
 
 	public static final String CONTEXT_COMPANY_ID = "companyId";
 
