@@ -459,6 +459,12 @@ portletDisplay.setRestoreCurrentView(portlet.isRestoreCurrentView());
 
 portletDisplay.setPortletSetup(portletSetup);
 
+//Portlet custom CSS className
+
+String customCSSClassName = PortletConfigurationUtil.getPortletCustomCSSClassName(portletSetup);
+
+portletDisplay.setCustomCSSClassName(customCSSClassName);
+
 // Portlet icon
 
 String portletIcon = null;
@@ -845,7 +851,7 @@ if ((layout.isTypePanel() || layout.isTypeControlPanel()) && !portletDisplay.get
 		cssClasses += " portlet-minimized";
 	}
 
-	cssClasses = "portlet-boundary portlet-boundary" + HtmlUtil.escapeAttribute(PortalUtil.getPortletNamespace(rootPortletId)) + StringPool.SPACE + cssClasses + StringPool.SPACE + portlet.getCssClassWrapper();
+	cssClasses = "portlet-boundary portlet-boundary" + HtmlUtil.escapeAttribute(PortalUtil.getPortletNamespace(rootPortletId)) + StringPool.SPACE + cssClasses + StringPool.SPACE + portlet.getCssClassWrapper() + StringPool.SPACE + customCSSClassName;
 	%>
 
 	<div id="p_p_id<%= HtmlUtil.escapeAttribute(renderResponseImpl.getNamespace()) %>" class="<%= cssClasses %>" <%= freeformStyles %>>

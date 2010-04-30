@@ -3,10 +3,9 @@
 #set ($portlet_id = $htmlUtil.escapeAttribute($portlet_display.getId()))
 #set ($portlet_title = $portlet_display.getTitle())
 #set ($portlet_content = $portlet_display.getContent())
-#set ($portlet_custom_css_class_name = $portlet_display.getCustomCSSClassName())
 #set ($portlet_back_url = $htmlUtil.escape($portlet_display.getURLBack()))
 
-<section class="portlet $portlet_custom_css_class_name" id="portlet_$portlet_id">
+<section class="portlet" id="portlet_$portlet_id">
 	<header class="portlet-topper">
 		<h1 class="portlet-title">
 			$theme.iconPortlet() <span class="portlet-title-text">$portlet_title</span>

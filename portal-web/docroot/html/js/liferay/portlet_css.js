@@ -14,6 +14,8 @@ AUI().add(
 					instance._portletId = portletId;
 					instance._curPortlet = obj.one('.portlet');
 
+					instance._portletBoundary = obj;
+
 					if (!instance._curPortlet) {
 						instance._curPortlet = obj;
 						instance._curPortletWrapperId = curPortletBoundaryId;
@@ -944,13 +946,11 @@ AUI().add(
 
 					useForAll.each(handleForms);
 
-					var updatePortletCSSClassName = function() {
-						var portlet = instance._curPortlet;
-						var customCSSClassName = instance._customCSSClassName.val();
+					var updatePortletCSSClassName = function(previousCSSClass, newCSSClass) {
+						var portlet = instance._portletBoundary;
 
-						portlet.set('className', 'portlet');
-
-						portlet.addClass(customCSSClassName);
+						portlet.removeClass(previousCSSClass);
+						portlet.addClass(newCSSClass);
 					};
 
 					var saveHandler = function(event, id, obj) {
@@ -991,9 +991,13 @@ AUI().add(
 						'click',
 						function() {
 							instance._objData.advancedData.customCSS = instance._customCSS.val();
-							instance._objData.advancedData.customCSSClassName = instance._customCSSClassName.val();
 
-							updatePortletCSSClassName();
+							var previousCSSClass = instance._objData.advancedData.customCSSClassName;
+							var newCSSClass = instance._customCSSClassName.val();
+
+							instance._objData.advancedData.customCSSClassName = newCSSClass;
+
+							updatePortletCSSClassName(previousCSSClass, newCSSClass);
 
 							instance._objData.wapData.title = instance._wapTitleInput.val();
 							instance._objData.wapData.initialWindowState = instance._wapInitialWindowStateSelect.val();
