@@ -140,7 +140,7 @@ public class AssetPublisherFriendlyURLMapper extends BaseFriendlyURLMapper {
 			params.put("p_p_id", new String[] {portletId});
 			params.put("p_p_lifecycle", new String[] {"0"});
 
-		  	if (friendlyURLPath.indexOf("maximized", x) != -1) {
+			if (friendlyURLPath.indexOf("maximized", x) != -1) {
 				addParam(params, "p_p_state", WindowState.MAXIMIZED);
 			}
 
