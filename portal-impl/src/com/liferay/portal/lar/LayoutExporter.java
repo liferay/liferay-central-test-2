@@ -463,6 +463,10 @@ public class LayoutExporter {
 
 		_portletExporter.exportComments(context, root);
 
+		// Locks
+
+		_portletExporter.exportLocks(context, root);
+
 		// Portlet data permissions
 
 		_permissionExporter.exportPortletDataPermissions(context);

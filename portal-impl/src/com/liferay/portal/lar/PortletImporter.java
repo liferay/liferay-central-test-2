@@ -36,6 +36,7 @@ import com.liferay.portal.kernel.zip.ZipReader;
 import com.liferay.portal.kernel.zip.ZipReaderFactoryUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.Lock;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.model.PortletItem;
@@ -187,11 +188,12 @@ public class PortletImporter {
 
 		context.setSourceGroupId(sourceGroupId);
 
-		// Read categories, comments, ratings, and tags to make them available
-		// to the data handlers through the context
+		// Read categories, comments, locks, ratings, and tags to make them
+		// available to the data handlers through the context
 
 		readCategories(context, root);
 		readComments(context, root);
+		readLocks(context, root);
 		readRatings(context, root);
 		readTags(context, root);
 
@@ -658,6 +660,40 @@ public class PortletImporter {
 				}
 
 				context.addComments(className, classPK, messages);
+			}
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+	}
+
+	protected void readLocks(PortletDataContext context, Element parentEl)
+		throws SystemException {
+
+		try {
+			String xml = context.getZipEntryAsString(
+				context.getSourceRootPath() + "/locks.xml");
+
+			if (xml == null) {
+				return;
+			}
+
+			Document doc = SAXReaderUtil.read(xml);
+
+			Element root = doc.getRootElement();
+
+			List<Element> assets = root.elements("asset");
+
+			for (Element asset : assets) {
+				String className = asset.attributeValue("class-name");
+				String key = asset.attributeValue("key");
+				String path = asset.attributeValue("path");
+
+				Lock lock = (Lock)context.getZipEntryAsObject(path);
+
+				if (lock != null) {
+					context.addLocks(className, key, lock);
+				}
 			}
 		}
 		catch (Exception e) {

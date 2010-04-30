@@ -38,6 +38,7 @@ import com.liferay.portal.kernel.zip.ZipWriterFactoryUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutTypePortlet;
+import com.liferay.portal.model.Lock;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.model.PortletItem;
@@ -227,6 +228,10 @@ public class PortletExporter {
 
 		exportComments(context, root);
 
+		// Locks
+
+		exportLocks(context, root);
+
 		// Portlet data permissions
 
 		if (exportPermissions) {
@@ -330,6 +335,46 @@ public class PortletExporter {
 
 			context.addZipEntry(
 				context.getRootPath() + "/comments.xml", doc.formattedString());
+		}
+		catch (IOException ioe) {
+			throw new SystemException(ioe);
+		}
+	}
+
+	protected void exportLocks(PortletDataContext context, Element parentEl)
+		throws SystemException {
+
+		try {
+			Document doc = SAXReaderUtil.createDocument();
+
+			Element root = doc.addElement("locks");
+
+			Map<String, Lock> locksMap = context.getLocks();
+
+			for (Map.Entry<String, Lock> entry : locksMap.entrySet()) {
+				Lock lock = entry.getValue();
+
+				String entryKey = entry.getKey();
+
+				int index = entryKey.indexOf(StringPool.POUND);
+
+				String className = entryKey.substring(0, index);
+				String key = entryKey.substring(index + 1);
+				String path = getLocksPath(context, className, key, lock);
+
+				Element asset = root.addElement("asset");
+
+				asset.addAttribute("class-name", className);
+				asset.addAttribute("key", key);
+				asset.addAttribute("path", path);
+
+				if (context.isPathNotProcessed(path)) {
+					context.addZipEntry(path, lock);
+				}
+			}
+
+			context.addZipEntry(
+				context.getRootPath() + "/locks.xml", doc.formattedString());
 		}
 		catch (IOException ioe) {
 			throw new SystemException(ioe);
@@ -753,6 +798,23 @@ public class PortletExporter {
 		sb.append(classPK);
 		sb.append(CharPool.FORWARD_SLASH);
 		sb.append(message.getMessageId());
+		sb.append(".xml");
+
+		return sb.toString();
+	}
+
+	protected String getLocksPath(
+		PortletDataContext context, String className, String key, Lock lock) {
+
+		StringBundler sb = new StringBundler(8);
+
+		sb.append(context.getRootPath());
+		sb.append("/locks/");
+		sb.append(PortalUtil.getClassNameId(className));
+		sb.append(CharPool.FORWARD_SLASH);
+		sb.append(key);
+		sb.append(CharPool.FORWARD_SLASH);
+		sb.append(lock.getLockId());
 		sb.append(".xml");
 
 		return sb.toString();

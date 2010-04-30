@@ -29,12 +29,15 @@ import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.kernel.zip.ZipReader;
 import com.liferay.portal.kernel.zip.ZipWriter;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.model.Lock;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.RoleConstants;
+import com.liferay.portal.model.impl.LockImpl;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.service.LockLocalServiceUtil;
 import com.liferay.portal.service.PermissionLocalServiceUtil;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.ResourcePermissionLocalServiceUtil;
@@ -226,6 +229,22 @@ public class PortletDataContextImpl implements PortletDataContext {
 		String className, long classPK, List<MBMessage> messages) {
 
 		_commentsMap.put(getPrimaryKeyString(className, classPK), messages);
+	}
+
+	public void addLocks(Class<?> classObj, String key)
+		throws PortalException, SystemException {
+
+		if (!_locksMap.containsKey(getPrimaryKeyString(classObj, key)) &&
+			LockLocalServiceUtil.isLocked(classObj.getName(), key)) {
+
+			Lock lock = LockLocalServiceUtil.getLock(classObj.getName(), key);
+
+			addLocks(classObj.getName(), key, lock);
+		}
+	}
+
+	public void addLocks(String className, String key, Lock lock) {
+		_locksMap.put(getPrimaryKeyString(className, key), lock);
 	}
 
 	public void addPermissions(Class<?> classObj, long classPK)
@@ -443,6 +462,10 @@ public class PortletDataContextImpl implements PortletDataContext {
 		return getRootPath() + ROOT_PATH_LAYOUTS + layoutId;
 	}
 
+	public Map<String, Lock> getLocks() {
+		return _locksMap;
+	}
+
 	public Map<?, ?> getNewPrimaryKeysMap(Class<?> classObj) {
 		Map<?, ?> map = _newPrimaryKeysMaps.get(classObj.getName());
 
@@ -640,6 +663,22 @@ public class PortletDataContextImpl implements PortletDataContext {
 				MBMessage.class, message.getPrimaryKey(),
 				messagePKs.get(message.getPrimaryKey()));
 		}
+	}
+
+	public void importLocks(Class<?> classObj, String key, String newKey)
+		throws PortalException, SystemException {
+
+		Lock lock = _locksMap.get(getPrimaryKeyString(classObj, key));
+
+		if (lock == null) {
+			return;
+		}
+
+		long userId = getUserId(lock.getUserUuid());
+
+		LockLocalServiceUtil.lock(
+			userId, classObj.getName(), newKey, lock.getOwner(),
+			lock.getInheritable(), lock.getExpirationDate().getTime());
 	}
 
 	public void importPermissions(
@@ -867,6 +906,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 		_xStream.alias("JournalFeed", JournalFeedImpl.class);
 		_xStream.alias("JournalStructure", JournalStructureImpl.class);
 		_xStream.alias("JournalTemplate", JournalTemplateImpl.class);
+		_xStream.alias("Lock", LockImpl.class);
 		_xStream.alias("MBCategory", MBCategoryImpl.class);
 		_xStream.alias("MBMessage", MBMessageImpl.class);
 		_xStream.alias("MBMessageFlag", MBMessageFlagImpl.class);
@@ -917,6 +957,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 	private String _dataStrategy;
 	private Date _endDate;
 	private long _groupId;
+	private Map<String, Lock> _locksMap = new HashMap<String, Lock>();
 	private Map<String, Map<?, ?>> _newPrimaryKeysMaps =
 		new HashMap<String, Map<?, ?>>();
 	private Set<String> _notUniquePerLayout = new HashSet<String>();

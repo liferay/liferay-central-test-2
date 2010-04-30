@@ -316,6 +316,9 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 
 			context.addPermissions(MBMessage.class, message.getMessageId());
 
+			context.addLocks(
+				MBThread.class, String.valueOf(message.getThreadId()));
+
 			if (context.getBooleanParameter(_NAMESPACE, "ratings")) {
 				context.addRatingsEntries(
 					MBMessage.class, message.getMessageId());
@@ -723,6 +726,10 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 			threadPKs.put(message.getThreadId(), importedMessage.getThreadId());
 			messagePKs.put(
 				message.getMessageId(), importedMessage.getMessageId());
+
+			context.importLocks(
+				MBThread.class, String.valueOf(message.getThreadId()),
+				String.valueOf(importedMessage.getThreadId()));
 
 			context.importPermissions(
 				MBMessage.class, message.getMessageId(),

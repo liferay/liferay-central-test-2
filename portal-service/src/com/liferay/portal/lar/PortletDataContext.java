@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.KeyValuePair;
 import com.liferay.portal.kernel.zip.ZipReader;
 import com.liferay.portal.kernel.zip.ZipWriter;
+import com.liferay.portal.model.Lock;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.ratings.model.RatingsEntry;
 
@@ -66,6 +67,11 @@ public interface PortletDataContext extends Serializable {
 
 	public void addComments(
 		String className, long classPK, List<MBMessage> messages);
+
+	public void addLocks(Class<?> classObj, String key)
+		throws PortalException, SystemException;
+
+	public void addLocks(String className, String key, Lock lock);
 
 	public void addPermissions(Class<?> classObj, long classPK)
 		throws PortalException, SystemException;
@@ -126,6 +132,8 @@ public interface PortletDataContext extends Serializable {
 	public long getGroupId();
 
 	public String getLayoutPath(long layoutId);
+
+	public Map<String, Lock> getLocks();
 
 	public Map<?, ?> getNewPrimaryKeysMap(Class<?> classObj);
 
@@ -189,6 +197,9 @@ public interface PortletDataContext extends Serializable {
 
 	public void importComments(
 			Class<?> classObj, long classPK, long newClassPK, long groupId)
+		throws PortalException, SystemException;
+
+	public void importLocks(Class<?> classObj, String key, String newKey)
 		throws PortalException, SystemException;
 
 	public void importPermissions(

@@ -104,6 +104,12 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 
 			fileEntry.setUserUuid(fileEntry.getUserUuid());
 
+			context.addLocks(
+				DLFileEntry.class,
+				DLUtil.getLockId(
+					fileEntry.getGroupId(), fileEntry.getFolderId(),
+					fileEntry.getName()));
+
 			context.addPermissions(
 				DLFileEntry.class, fileEntry.getFileEntryId());
 
@@ -309,6 +315,16 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 
 			fileEntryNames.put(
 				fileEntry.getName(), importedFileEntry.getName());
+
+			String lockKey = DLUtil.getLockId(
+				fileEntry.getGroupId(), fileEntry.getFolderId(),
+				fileEntry.getName());
+
+			String newLockKey = DLUtil.getLockId(
+				importedFileEntry.getGroupId(), importedFileEntry.getFolderId(),
+				importedFileEntry.getName());
+
+			context.importLocks(DLFileEntry.class, lockKey, newLockKey);
 
 			context.importPermissions(
 				DLFileEntry.class, fileEntry.getFileEntryId(),

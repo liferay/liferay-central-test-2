@@ -279,8 +279,8 @@ public class LayoutImporter {
 			groupId, privateLayout, themeId, colorSchemeId, StringPool.BLANK,
 			wapTheme);
 
-		// Read categories, comments, ratings, and tags to make them available
-		// to the data handlers through the context
+		// Read categories, comments, locks, ratings, and tags to make them
+		// available to the data handlers through the context
 
 		if (importCategories) {
 			importCategories(context);
@@ -288,6 +288,7 @@ public class LayoutImporter {
 
 		_portletImporter.readCategories(context, root);
 		_portletImporter.readComments(context, root);
+		_portletImporter.readLocks(context, root);
 
 		if (importPermissions) {
 			_permissionImporter.readPortletDataPermissions(context);
