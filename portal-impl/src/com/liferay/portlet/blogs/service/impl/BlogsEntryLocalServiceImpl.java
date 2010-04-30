@@ -547,7 +547,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			Map<String, Serializable> workflowContext =
 				new HashMap<String, Serializable>();
 
-			workflowContext.put("pingOldTrackbacks", pingOldTrackbacks);
+			workflowContext.put(
+				"pingOldTrackbacks", String.valueOf(pingOldTrackbacks));
 			workflowContext.put("trackbacks", trackbacks);
 
 			WorkflowHandlerRegistryUtil.startWorkflowInstance(

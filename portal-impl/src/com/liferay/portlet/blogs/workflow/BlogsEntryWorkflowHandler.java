@@ -16,6 +16,7 @@ package com.liferay.portlet.blogs.workflow;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -51,21 +52,17 @@ public class BlogsEntryWorkflowHandler extends BaseWorkflowHandler {
 			int status, Map<String, Serializable> workflowContext)
 		throws PortalException, SystemException {
 
-		long groupId = (Long)workflowContext.get(
-			WorkflowConstants.CONTEXT_GROUP_ID);
-		long userId = (Long)workflowContext.get(
-			WorkflowConstants.CONTEXT_USER_ID);
-		long classPK = (Long)workflowContext.get(
-			WorkflowConstants.CONTEXT_ENTRY_CLASS_PK);
+		long groupId = GetterUtil.getLong(
+			(String)workflowContext.get(WorkflowConstants.CONTEXT_GROUP_ID));
+		long userId = GetterUtil.getLong(
+			(String)workflowContext.get(WorkflowConstants.CONTEXT_USER_ID));
+		long classPK = GetterUtil.getLong(
+			(String)workflowContext.get(
+				WorkflowConstants.CONTEXT_ENTRY_CLASS_PK));
 
 		String[] trackbacks = (String[])workflowContext.get("trackbacks");
-
-		Boolean pingOldTrackbacks = (Boolean)workflowContext.get(
-			"pingOldTrackbacks");
-
-		if (pingOldTrackbacks == null) {
-			pingOldTrackbacks = Boolean.FALSE;
-		}
+		Boolean pingOldTrackbacks = GetterUtil.getBoolean(
+			(String)workflowContext.get("pingOldTrackbacks"));
 
 		ServiceContext serviceContext = new ServiceContext();
 

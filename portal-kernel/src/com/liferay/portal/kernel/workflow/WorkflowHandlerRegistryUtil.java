@@ -78,12 +78,16 @@ public class WorkflowHandlerRegistryUtil {
 			workflowContext = new HashMap<String, Serializable>();
 		}
 
-		workflowContext.put(WorkflowConstants.CONTEXT_COMPANY_ID, companyId);
-		workflowContext.put(WorkflowConstants.CONTEXT_GROUP_ID, groupId);
-		workflowContext.put(WorkflowConstants.CONTEXT_USER_ID, userId);
+		workflowContext.put(
+			WorkflowConstants.CONTEXT_COMPANY_ID, String.valueOf(companyId));
+		workflowContext.put(
+			WorkflowConstants.CONTEXT_GROUP_ID, String.valueOf(groupId));
+		workflowContext.put(
+			WorkflowConstants.CONTEXT_USER_ID, String.valueOf(userId));
 		workflowContext.put(
 			WorkflowConstants.CONTEXT_ENTRY_CLASS_NAME, className);
-		workflowContext.put(WorkflowConstants.CONTEXT_ENTRY_CLASS_PK, classPK);
+		workflowContext.put(
+			WorkflowConstants.CONTEXT_ENTRY_CLASS_PK, String.valueOf(classPK));
 
 		workflowHandler.updateStatus(status, workflowContext);
 
