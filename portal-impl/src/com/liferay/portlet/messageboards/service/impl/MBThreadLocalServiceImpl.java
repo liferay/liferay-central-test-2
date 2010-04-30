@@ -31,11 +31,8 @@ import com.liferay.portlet.messageboards.SplitThreadException;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBCategoryConstants;
 import com.liferay.portlet.messageboards.model.MBMessage;
-import com.liferay.portlet.messageboards.model.MBMessageFlag;
-import com.liferay.portlet.messageboards.model.MBMessageFlagConstants;
 import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.model.MBThreadConstants;
-import com.liferay.portlet.messageboards.service.MBMessageFlagLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.base.MBThreadLocalServiceBaseImpl;
 
 import java.util.ArrayList;
@@ -429,21 +426,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 
 		// Message flags
 
-		MBMessageFlagLocalServiceUtil.deleteAnswerFlags(
-			oldThreadId, message.getMessageId());
-
-		int count = mbMessageFlagPersistence.countByT_F(
-			oldThreadId, MBMessageFlagConstants.ANSWER_FLAG);
-
-		if (count == 1) {
-			MBMessageFlag messageFlag = mbMessageFlagPersistence.fetchByU_M_F(
-				message.getUserId(), message.getThread().getRootMessageId(),
-				MBMessageFlagConstants.ANSWER_FLAG);
-
-			messageFlag.setFlag(MBMessageFlagConstants.QUESTION_FLAG);
-
-			mbMessageFlagPersistence.update(messageFlag, false);
-		}
+		mbMessageFlagLocalService.deleteThreadFlags(oldThreadId);
 
 		// Create new thread
 

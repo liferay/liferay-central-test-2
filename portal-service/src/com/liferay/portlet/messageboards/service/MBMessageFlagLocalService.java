@@ -113,9 +113,6 @@ public interface MBMessageFlagLocalService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public void deleteAnswerFlags(long threadId, long messageId)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
 	public void deleteFlags(long userId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
