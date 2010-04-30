@@ -651,7 +651,8 @@ public class PortletURLImpl
 		}
 
 		if (portlet.getPortletId().equals(_portletId) &&
-			_windowState.equals(WindowState.NORMAL)) {
+			((_windowState == null) ||
+			 _windowState.equals(WindowState.NORMAL))) {
 
 			return;
 		}
