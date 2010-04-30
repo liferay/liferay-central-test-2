@@ -303,11 +303,16 @@ AUI().add(
 					if (text && text.indexOf(',') > -1) {
 						var items = text.split(',');
 
-						A.each(
-							items,
-							function(item, index, collection) {
-								instance.entries.add(item, {});
-							}
+						setTimeout(
+							function() {
+								A.each(
+									items,
+									function(item, index, collection) {
+										instance.entries.add(item, {});
+									}
+								);
+							},
+							0
 						);
 
 						instance.inputNode.val('');
