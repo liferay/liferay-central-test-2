@@ -840,50 +840,55 @@ Liferay.Util = {
 	},
 
 	reorder: function(box, down) {
-		var si = box.selectedIndex;
+		var A = AUI();
+
+		box = A.one(box);
+		var si = box.get('selectedIndex');
 
 		if (si == -1) {
-			box.selectedIndex = 0;
+			box.set('selectedIndex', 0);
 		}
 		else {
-			sText = box.options[si].text;
-			sValue = box.options[si].value;
+			var options = box.get('options');
 
-			if ((box.options[si].value > '') && (si > 0) && (down == 0)) {
-				box.options[si].text = box.options[si - 1].text;
-				box.options[si].value = box.options[si - 1].value;
-				box.options[si - 1].text = sText;
-				box.options[si - 1].value = sValue;
-				box.selectedIndex--;
+			sText = options.item(si).get('text');
+			sValue = options.item(si).get('value');
+
+			if ((options.item(si).get('value') > '') && (si > 0) && (down == 0)) {
+				options.item(si).set('text', options.item(si - 1).get('text'));
+				options.item(si).set('value', options.item(si - 1).get('value'));
+				options.item(si - 1).set('text', sText);
+				options.item(si-1).set('value', sValue);
+				box.set('selectedIndex', box.get('selectedIndex') - 1);
 			}
-			else if ((si < box.length - 1) && (box.options[si + 1].value > '') && (down == 1)) {
-				box.options[si].text = box.options[si + 1].text;
-				box.options[si].value = box.options[si + 1].value;
-				box.options[si + 1].text = sText;
-				box.options[si + 1].value = sValue;
-				box.selectedIndex++;
+			else if ((si < (box.get('length') - 1)) && (options.item(si + 1).get('value') > '') && (down == 1)) {
+				options.item(si).set('text', options.item(si + 1).get('text'));
+				options.item(si).set('value', options.item(si + 1).get('value'));
+				options.item(si + 1).set('text', sText);
+				options.item(si + 1).set('value', sValue);
+				box.set('selectedIndex', box.get('selectedIndex') + 1);
 			}
 			else if (si == 0) {
-				for (var i = 0; i < (box.length - 1); i++) {
-					box.options[i].text = box.options[i + 1].text;
-					box.options[i].value = box.options[i + 1].value;
+				for (var i = 0; i < (box.get('length') - 1); i++) {
+					options.item(i).set('text', options.item(i + 1).get('text'));
+					options.item(i).set('value',options.item(i + 1).get('value'));
 				}
 
-				box.options[box.length - 1].text = sText;
-				box.options[box.length - 1].value = sValue;
+				options.item(box.get('length') - 1).set('text', sText);
+				options.item(box.get('length') - 1).set('value', sValue);
 
-				box.selectedIndex = box.length - 1;
+				box.set('selectedIndex', box.get('length') - 1);
 			}
-			else if (si == (box.length - 1)) {
-				for (var j = (box.length - 1); j > 0; j--) {
-					box.options[j].text = box.options[j - 1].text;
-					box.options[j].value = box.options[j - 1].value;
+			else if (si == (box.get('length') - 1)) {
+				for (var j = (box.get('length') - 1); j > 0; j--) {
+					options.item(j).set('text',  options.item(j - 1).get('text'));
+					options.item(j).set('value', options.item(j - 1).get('value'));
 				}
 
-				box.options[0].text = sText;
-				box.options[0].value = sValue;
+				options.item(0).set('text', sText);
+				options.item(0).set('value', sValue);
 
-				box.selectedIndex = 0;
+				box.set('selectedIndex', 0);
 			}
 		}
 	},
