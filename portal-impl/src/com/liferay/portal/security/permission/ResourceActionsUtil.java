@@ -513,14 +513,14 @@ public class ResourceActionsUtil {
 	}
 
 	private List<String> _getActions(
-		Map<String, List<String>> map, String name) {
+		Map<String, List<String>> actionsMap, String name) {
 
-		List<String> actions = map.get(name);
+		List<String> actions = actionsMap.get(name);
 
 		if (actions == null) {
 			actions = new UniqueList<String>();
 
-			map.put(name, actions);
+			actionsMap.put(name, actions);
 		}
 
 		return actions;
@@ -561,6 +561,19 @@ public class ResourceActionsUtil {
 
 	private List<String> _getModelResourceOwnerDefaultActions(String name) {
 		return _getActions(_modelResourceOwnerDefaultActions, name);
+	}
+
+	private Element _getPermissionsChildElement(
+		Element parentElement, String childElementName) {
+
+		Element permissionsElement = parentElement.element("permissions");
+
+		if (permissionsElement != null) {
+			return permissionsElement.element(childElementName);
+		}
+		else {
+			return parentElement.element(childElementName);
+		}
 	}
 
 	private List<String> _getPortletMimeTypeActions(String name) {
@@ -746,9 +759,9 @@ public class ResourceActionsUtil {
 			String servletContextName, ClassLoader classLoader, String source)
 		throws Exception {
 
-		InputStream is = classLoader.getResourceAsStream(source);
+		InputStream inputStream = classLoader.getResourceAsStream(source);
 
-		if (is == null) {
+		if (inputStream == null) {
 			if (_log.isWarnEnabled() && !source.endsWith("-ext.xml")) {
 				_log.warn("Cannot load " + source);
 			}
@@ -760,16 +773,12 @@ public class ResourceActionsUtil {
 			_log.debug("Loading " + source);
 		}
 
-		Document doc = SAXReaderUtil.read(is);
+		Document document = SAXReaderUtil.read(inputStream);
 
-		Element root = doc.getRootElement();
+		Element rootElement = document.getRootElement();
 
-		Iterator<Element> itr1 = root.elements("resource").iterator();
-
-		while (itr1.hasNext()) {
-			Element resource = itr1.next();
-
-			String file = resource.attributeValue("file").trim();
+		for (Element resourceElement : rootElement.elements("resource")) {
+			String file = resourceElement.attributeValue("file").trim();
 
 			_read(servletContextName, classLoader, file);
 
@@ -778,293 +787,228 @@ public class ResourceActionsUtil {
 			_read(servletContextName, classLoader, extFile);
 		}
 
-		itr1 = root.elements("portlet-resource").iterator();
+		for (Element portletResourceElement :
+				rootElement.elements("portlet-resource")) {
 
-		while (itr1.hasNext()) {
-			Element resource = itr1.next();
+			_readPortletResource(servletContextName, portletResourceElement);
+		}
 
-			String name = resource.elementTextTrim("portlet-name");
+		for (Element modelResourceElement :
+				rootElement.elements("model-resource")) {
+
+			_readModelResource(servletContextName, modelResourceElement);
+		}
+	}
+
+	private void _readActionKeys(Element parentElement, List<String> actions) {
+		for (Element actionKeyElement : parentElement.elements("action-key")) {
+			String actionKey = actionKeyElement.getTextTrim();
+
+			if (Validator.isNull(actionKey)) {
+				continue;
+			}
+
+			actions.add(actionKey);
+		}
+	}
+
+	private void _readCommunityDefaultActions(
+		Element parentElement, Map<String, List<String>> actionsMap,
+		String name) {
+
+		List<String> communityDefaultActions = _getActions(actionsMap, name);
+
+		Element communityDefaultsElement = _getPermissionsChildElement(
+			parentElement, "community-defaults");
+
+		_readActionKeys(communityDefaultsElement, communityDefaultActions);
+	}
+
+	private List<String> _readGuestDefaultActions(
+		Element parentElement, Map<String, List<String>> actionsMap,
+		String name) {
+
+		List<String> guestDefaultActions = _getActions(actionsMap, name);
+
+		Element guestDefaultsElement = _getPermissionsChildElement(
+			parentElement, "guest-defaults");
+
+		_readActionKeys(guestDefaultsElement, guestDefaultActions);
+
+		return guestDefaultActions;
+	}
+
+	private void _readGuestUnsupportedActions(
+		Element parentElement, Map<String, List<String>> actionsMap,
+		String name, List<String> guestDefaultActions) {
+
+		List<String> guestUnsupportedActions = _getActions(actionsMap, name);
+
+		Element guestUnsupportedElement = _getPermissionsChildElement(
+			parentElement, "guest-unsupported");
+
+		_readActionKeys(guestUnsupportedElement, guestUnsupportedActions);
+
+		_checkGuestUnsupportedActions(
+			guestUnsupportedActions, guestDefaultActions);
+	}
+
+	private void _readLayoutManagerActions(
+		Element parentElement, Map<String, List<String>> actionsMap,
+		String name, List<String> supportsActions) {
+
+		List<String> layoutManagerActions = _getActions(actionsMap, name);
+
+		Element layoutManagerElement = _getPermissionsChildElement(
+			parentElement, "layout-manager");
+
+		if (layoutManagerElement != null) {
+			_readActionKeys(layoutManagerElement, layoutManagerActions);
+		}
+		else {
+			layoutManagerActions.addAll(supportsActions);
+		}
+	}
+
+	private void _readModelResource(
+		String servletContextName, Element modelResourceElement) {
+
+		String name = modelResourceElement.elementTextTrim("model-name");
+
+		Element portletRefElement = modelResourceElement.element("portlet-ref");
+
+		for (Element portletNameElement :
+				portletRefElement.elements("portlet-name")) {
+
+			String portletName = portletNameElement.getTextTrim();
 
 			if (servletContextName != null) {
-				name =
-					name + PortletConstants.WAR_SEPARATOR + servletContextName;
+				portletName =
+					portletName.concat(PortletConstants.WAR_SEPARATOR).concat(
+						servletContextName);
 			}
 
-			name = PortalUtil.getJsSafePortletId(name);
+			portletName = PortalUtil.getJsSafePortletId(portletName);
 
-			// Actions
+			// Reference for a portlet to child models
 
-			List<String> actions = _getActions(_portletResourceActions, name);
+			Set<String> modelResources = _portletModelResources.get(
+				portletName);
 
-			Element supports = resource.element("supports");
+			if (modelResources == null) {
+				modelResources = new HashSet<String>();
 
-			Iterator<Element> itr2 = supports.elements("action-key").iterator();
-
-			while (itr2.hasNext()) {
-				Element actionKey = itr2.next();
-
-				String actionKeyText = actionKey.getTextTrim();
-
-				if (Validator.isNotNull(actionKeyText)) {
-					actions.add(actionKeyText);
-				}
+				_portletModelResources.put(portletName, modelResources);
 			}
 
-			actions.addAll(_getPortletMimeTypeActions(name));
+			modelResources.add(name);
 
-			if (!name.equals(PortletKeys.PORTAL)) {
-				_checkPortletActions(actions);
+			// Reference for a model to parent portlets
+
+			Set<String> portletResources = _modelPortletResources.get(name);
+
+			if (portletResources == null) {
+				portletResources = new HashSet<String>();
+
+				_modelPortletResources.put(name, portletResources);
 			}
 
-			// Community default actions
-
-			List<String> communityDefaultActions = _getActions(
-				_portletResourceCommunityDefaultActions, name);
-
-			Element communityDefaults = resource.element("community-defaults");
-
-			itr2 = communityDefaults.elements("action-key").iterator();
-
-			while (itr2.hasNext()) {
-				Element actionKey = itr2.next();
-
-				String actionKeyText = actionKey.getTextTrim();
-
-				if (Validator.isNotNull(actionKeyText)) {
-					communityDefaultActions.add(actionKeyText);
-				}
-			}
-
-			// Guest default actions
-
-			List<String> guestDefaultActions = _getActions(
-				_portletResourceGuestDefaultActions, name);
-
-			Element guestDefaults = resource.element("guest-defaults");
-
-			itr2 = guestDefaults.elements("action-key").iterator();
-
-			while (itr2.hasNext()) {
-				Element actionKey = itr2.next();
-
-				String actionKeyText = actionKey.getTextTrim();
-
-				if (Validator.isNotNull(actionKeyText)) {
-					guestDefaultActions.add(actionKeyText);
-				}
-			}
-
-			// Guest unsupported actions
-
-			List<String> guestUnsupportedActions = _getActions(
-				_portletResourceGuestUnsupportedActions, name);
-
-			Element guestUnsupported = resource.element("guest-unsupported");
-
-			if (guestUnsupported != null) {
-				itr2 = guestUnsupported.elements("action-key").iterator();
-
-				while (itr2.hasNext()) {
-					Element actionKey = itr2.next();
-
-					String actionKeyText = actionKey.getTextTrim();
-
-					if (Validator.isNotNull(actionKeyText)) {
-						guestUnsupportedActions.add(actionKeyText);
-					}
-				}
-			}
-
-			_checkGuestUnsupportedActions(
-				guestUnsupportedActions, guestDefaultActions);
-
-			// Layout manager actions
-
-			List<String> layoutManagerActions = _getActions(
-				_portletResourceLayoutManagerActions, name);
-
-			Element layoutManager = resource.element("layout-manager");
-
-			if (layoutManager != null) {
-				itr2 = layoutManager.elements("action-key").iterator();
-
-				while (itr2.hasNext()) {
-					Element actionKey = itr2.next();
-
-					String actionKeyText = actionKey.getTextTrim();
-
-					if (Validator.isNotNull(actionKeyText)) {
-						layoutManagerActions.add(actionKeyText);
-					}
-				}
-			}
-			else {
-
-				// Set the layout manager actions to contain all the portlet
-				// resource actions if the element is not specified
-
-				layoutManagerActions.addAll(actions);
-			}
+			portletResources.add(portletName);
 		}
 
-		itr1 = root.elements("model-resource").iterator();
+		_readSupportsActions(modelResourceElement, _modelResourceActions, name);
 
-		while (itr1.hasNext()) {
-			Element resource = itr1.next();
+		_readCommunityDefaultActions(
+			modelResourceElement, _modelResourceCommunityDefaultActions,  name);
 
-			String name = resource.elementTextTrim("model-name");
+		List<String> guestDefaultActions = _readGuestDefaultActions(
+			modelResourceElement, _modelResourceGuestDefaultActions, name);
 
-			Element portletRef = resource.element("portlet-ref");
+		_readGuestUnsupportedActions(
+			modelResourceElement, _modelResourceGuestUnsupportedActions, name,
+			guestDefaultActions);
 
-			Iterator<Element> itr2 = portletRef.elements(
-				"portlet-name").iterator();
+		_readOwnerDefaultActions(
+			modelResourceElement, _modelResourceOwnerDefaultActions, name);
+	}
 
-			while (itr2.hasNext()) {
-				Element portletName = itr2.next();
+	private void _readOwnerDefaultActions(
+		Element parentElement, Map<String, List<String>> actionsMap,
+		String name) {
 
-				String portletNameString = portletName.getTextTrim();
+		List<String> ownerDefaultActions = _getActions(actionsMap, name);
 
-				if (servletContextName != null) {
-					portletNameString =
-						portletNameString + PortletConstants.WAR_SEPARATOR +
-							servletContextName;
-				}
+		Element ownerDefaultsElement = _getPermissionsChildElement(
+			parentElement, "owner-defaults");
 
-				portletNameString = PortalUtil.getJsSafePortletId(
-					portletNameString);
-
-				// Reference for a portlet to child models
-
-				Set<String> modelResources = _portletModelResources.get(
-					portletNameString);
-
-				if (modelResources == null) {
-					modelResources = new HashSet<String>();
-
-					_portletModelResources.put(
-						portletNameString, modelResources);
-				}
-
-				modelResources.add(name);
-
-				// Reference for a model to parent portlets
-
-				Set<String> portletResources = _modelPortletResources.get(name);
-
-				if (portletResources == null) {
-					portletResources = new HashSet<String>();
-
-					_modelPortletResources.put(name, portletResources);
-				}
-
-				portletResources.add(portletNameString);
-			}
-
-			// Actions
-
-			List<String> actions = _getActions(_modelResourceActions, name);
-
-			Element supports = resource.element("supports");
-
-			itr2 = supports.elements("action-key").iterator();
-
-			while (itr2.hasNext()) {
-				Element actionKey = itr2.next();
-
-				String actionKeyText = actionKey.getTextTrim();
-
-				if (Validator.isNotNull(actionKeyText)) {
-					actions.add(actionKeyText);
-				}
-			}
-
-			// Community default actions
-
-			List<String> communityDefaultActions = _getActions(
-				_modelResourceCommunityDefaultActions, name);
-
-			Element communityDefaults = resource.element("community-defaults");
-
-			itr2 = communityDefaults.elements("action-key").iterator();
-
-			while (itr2.hasNext()) {
-				Element actionKey = itr2.next();
-
-				String actionKeyText = actionKey.getTextTrim();
-
-				if (Validator.isNotNull(actionKeyText)) {
-					communityDefaultActions.add(actionKeyText);
-				}
-			}
-
-			// Guest default actions
-
-			List<String> guestDefaultActions = _getActions(
-				_modelResourceGuestDefaultActions, name);
-
-			Element guestDefaults = resource.element("guest-defaults");
-
-			itr2 = guestDefaults.elements("action-key").iterator();
-
-			while (itr2.hasNext()) {
-				Element actionKey = itr2.next();
-
-				String actionKeyText = actionKey.getTextTrim();
-
-				if (Validator.isNotNull(actionKeyText)) {
-					guestDefaultActions.add(actionKeyText);
-				}
-			}
-
-			// Guest unsupported actions
-
-			List<String> guestUnsupportedActions = _getActions(
-				_modelResourceGuestUnsupportedActions, name);
-
-			Element guestUnsupported = resource.element("guest-unsupported");
-
-			itr2 = guestUnsupported.elements("action-key").iterator();
-
-			while (itr2.hasNext()) {
-				Element actionKey = itr2.next();
-
-				String actionKeyText = actionKey.getTextTrim();
-
-				if (Validator.isNotNull(actionKeyText)) {
-					guestUnsupportedActions.add(actionKeyText);
-				}
-			}
-
-			_checkGuestUnsupportedActions(
-				guestUnsupportedActions, guestDefaultActions);
-
-			// Owner default actions
-
-			List<String> ownerDefaultActions = _getActions(
-				_modelResourceOwnerDefaultActions, name);
-
-			Element ownerDefaults = resource.element("owner-defaults");
-
-			if (ownerDefaults != null) {
-				itr2 = ownerDefaults.elements("action-key").iterator();
-
-				while (itr2.hasNext()) {
-					Element actionKey = itr2.next();
-
-					String actionKeyText = actionKey.getTextTrim();
-
-					if (Validator.isNotNull(actionKeyText)) {
-						ownerDefaultActions.add(actionKeyText);
-					}
-				}
-			}
+		if (ownerDefaultsElement == null) {
+			return;
 		}
+
+		_readActionKeys(ownerDefaultsElement, ownerDefaultActions);
+	}
+
+	private void _readPortletResource(
+		String servletContextName, Element portletResourceElement) {
+
+		String name = portletResourceElement.elementTextTrim("portlet-name");
+
+		if (servletContextName != null) {
+			name = name.concat(PortletConstants.WAR_SEPARATOR).concat(
+				servletContextName);
+		}
+
+		name = PortalUtil.getJsSafePortletId(name);
+
+		List<String> supportsActions = _readSupportsActions(
+			portletResourceElement, _portletResourceActions, name);
+
+		supportsActions.addAll(_getPortletMimeTypeActions(name));
+
+		if (!name.equals(PortletKeys.PORTAL)) {
+			_checkPortletActions(supportsActions);
+		}
+
+		_readCommunityDefaultActions(
+			portletResourceElement, _portletResourceCommunityDefaultActions,
+			name);
+
+		List<String> guestDefaultActions = _readGuestDefaultActions(
+			portletResourceElement, _portletResourceGuestDefaultActions, name);
+
+		_readGuestUnsupportedActions(
+			portletResourceElement, _portletResourceGuestUnsupportedActions,
+			name, guestDefaultActions);
+
+		_readLayoutManagerActions(
+			portletResourceElement, _portletResourceLayoutManagerActions, name,
+			supportsActions);
+	}
+
+	private List<String> _readSupportsActions(
+		Element parentElement, Map<String, List<String>> actionsMap,
+		String name) {
+
+		List<String> supportsActions = _getActions(actionsMap, name);
+
+		Element supportsElement = _getPermissionsChildElement(
+			parentElement, "supports");
+
+		_readActionKeys(supportsElement, supportsActions);
+
+		return supportsActions;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(ResourceActionsUtil.class);
 
 	private static ResourceActionsUtil _instance = new ResourceActionsUtil();
 
+	private Map<String, Set<String>> _modelPortletResources;
+	private Map<String, List<String>> _modelResourceActions;
+	private Map<String, List<String>> _modelResourceCommunityDefaultActions;
+	private Map<String, List<String>> _modelResourceGuestDefaultActions;
+	private Map<String, List<String>> _modelResourceGuestUnsupportedActions;
+	private Map<String, List<String>> _modelResourceOwnerDefaultActions;
 	private Set<String> _organizationModelResources;
 	private Set<String> _portalModelResources;
 	private Map<String, Set<String>> _portletModelResources;
@@ -1073,11 +1017,5 @@ public class ResourceActionsUtil {
 	private Map<String, List<String>> _portletResourceGuestDefaultActions;
 	private Map<String, List<String>> _portletResourceGuestUnsupportedActions;
 	private Map<String, List<String>> _portletResourceLayoutManagerActions;
-	private Map<String, Set<String>> _modelPortletResources;
-	private Map<String, List<String>> _modelResourceActions;
-	private Map<String, List<String>> _modelResourceCommunityDefaultActions;
-	private Map<String, List<String>> _modelResourceGuestDefaultActions;
-	private Map<String, List<String>> _modelResourceGuestUnsupportedActions;
-	private Map<String, List<String>> _modelResourceOwnerDefaultActions;
 
 }
