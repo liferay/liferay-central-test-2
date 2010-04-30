@@ -125,7 +125,7 @@ public class PortletDisplay implements Serializable {
 	}
 
 	public void setCustomCSSClassName(String _customCSSClassName) {
-		this._customCSSClassName = _customCSSClassName;
+		_customCSSClassName = _customCSSClassName;
 	}
 
 	public boolean isAccess() {

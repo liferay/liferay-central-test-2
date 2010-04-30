@@ -447,6 +447,7 @@ PortletURL portletURL = renderResponse.createRenderURL();
 
 				<aui:fieldset id="css-styling">
 					<aui:input label="enter-your-custom-css-class-names" name="lfr-custom-css-class-name" type="text" />
+
 					<aui:input cssClass="lfr-textarea-container" label="enter-your-custom-css" name="lfr-custom-css" type="textarea" />
 				</aui:fieldset>
 
@@ -461,6 +462,7 @@ PortletURL portletURL = renderResponse.createRenderURL();
 
 				<aui:button-row>
 					<aui:button name="lfr-lookfeel-save" value="save" />
+
 					<aui:button name="lfr-lookfeel-reset" value="reset" />
 				</aui:button-row>
 			</div>

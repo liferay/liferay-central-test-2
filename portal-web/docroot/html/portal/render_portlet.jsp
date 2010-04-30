@@ -459,7 +459,7 @@ portletDisplay.setRestoreCurrentView(portlet.isRestoreCurrentView());
 
 portletDisplay.setPortletSetup(portletSetup);
 
-//Portlet custom CSS className
+// Portlet custom CSS class name
 
 String customCSSClassName = PortletConfigurationUtil.getPortletCustomCSSClassName(portletSetup);
 

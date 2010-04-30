@@ -36,24 +36,23 @@ public class PortletConfigurationUtil {
 			PortletPreferences portletSetup)
 		throws Exception {
 
-		String classNames = StringPool.BLANK;
+		String customCSSClassName = StringPool.BLANK;
 
 		String css = portletSetup.getValue(
 			"portlet-setup-css", StringPool.BLANK);
 
 		if (Validator.isNotNull(css)) {
-			JSONObject portletCSSJSON = PortletSetupUtil.cssToJSON(
-				portletSetup, css);
+			JSONObject cssJSON = PortletSetupUtil.cssToJSON(portletSetup, css);
 
-			JSONObject advancedData = portletCSSJSON.getJSONObject(
-				"advancedData");
+			JSONObject advancedDataJSON = cssJSON.getJSONObject("advancedData");
 
-			if (advancedData != null) {
-				classNames = advancedData.getString("customCSSClassName");
+			if (advancedDataJSON != null) {
+				customCSSClassName = advancedDataJSON.getString(
+					"customCSSClassName");
 			}
 		}
 
-		return classNames;
+		return customCSSClassName;
 	}
 
 	public static String getPortletTitle(
