@@ -16,6 +16,7 @@ package com.liferay.portal.kernel.workflow;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.service.ServiceContext;
 
 import java.io.Serializable;
 
@@ -57,7 +58,7 @@ public class WorkflowHandlerRegistryUtil {
 			long companyId, long groupId, long userId, String className,
 			long classPK, Object model,
 			Map<String, Serializable> workflowContext,
-			Serializable serviceContext)
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		WorkflowHandler workflowHandler = getWorkflowHandler(className);
