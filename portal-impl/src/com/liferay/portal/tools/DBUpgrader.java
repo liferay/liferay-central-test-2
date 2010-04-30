@@ -20,6 +20,8 @@ import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
 import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.model.Release;
@@ -69,9 +71,17 @@ public class DBUpgrader {
 
 		// Disable database caching before upgrade
 
+		if (_log.isDebugEnabled()) {
+			_log.debug("Disable cache registry");
+		}
+
 		CacheRegistry.setActive(false);
 
 		// Upgrade
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Run upgrade process");
+		}
 
 		int buildNumber = ReleaseLocalServiceUtil.getBuildNumberOrCreate();
 
@@ -87,9 +97,17 @@ public class DBUpgrader {
 
 		// Class names
 
+		if (_log.isDebugEnabled()) {
+			_log.debug("Check class names");
+		}
+
 		ClassNameLocalServiceUtil.checkClassNames();
 
 		// Resource actions
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Check resource actions");
+		}
 
 		ResourceActionsUtil.init();
 
@@ -97,13 +115,25 @@ public class DBUpgrader {
 
 		// Resource codes
 
+		if (_log.isDebugEnabled()) {
+			_log.debug("Check resource codes");
+		}
+
 		ResourceCodeLocalServiceUtil.checkResourceCodes();
 
 		// Delete temporary images
 
+		if (_log.isDebugEnabled()) {
+			_log.debug("Delete temporary images");
+		}
+
 		_deleteTempImages();
 
 		// Clear the caches only if the upgrade process was run
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Clear cache if upgrade process was run");
+		}
 
 		if (StartupHelperUtil.isUpgraded()) {
 			MultiVMPoolUtil.clear();
@@ -165,5 +195,7 @@ public class DBUpgrader {
 
 	private static final String _DELETE_TEMP_IMAGES_2 =
 		"delete from JournalArticleImage where tempImage = TRUE";
+
+	private static Log _log = LogFactoryUtil.getLog(DBUpgrader.class);
 
 }
