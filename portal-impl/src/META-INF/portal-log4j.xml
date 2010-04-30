@@ -204,6 +204,10 @@
 		<priority value="ERROR" />
 	</category>
 
+	<category name="com.liferay.portal.events.StartupAction">
+		<priority value="ERROR" />
+	</category>
+
 	<category name="com.liferay.portal.events.StartupHelper">
 		<priority value="INFO" />
 	</category>
@@ -538,6 +542,10 @@
 
 	<category name="com.liferay.portal.tools.BaseDeployer">
 		<priority value="INFO" />
+	</category>
+
+	<category name="com.liferay.portal.tools.DBUpgrader">
+		<priority value="ERROR" />
 	</category>
 
 	<category name="com.liferay.portal.tools.PortletDeployer">

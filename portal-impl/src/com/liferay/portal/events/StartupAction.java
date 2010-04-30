@@ -62,6 +62,10 @@ public class StartupAction extends SimpleAction {
 
 		// Clear locks
 
+		if (_log.isDebugEnabled()) {
+			_log.debug("Clear locks");
+		}
+
 		try {
 			LockLocalServiceUtil.clear();
 		}
@@ -73,6 +77,10 @@ public class StartupAction extends SimpleAction {
 		}
 
 		// Shutdown hook
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Add shutdown hook");
+		}
 
 		Runtime.getRuntime().addShutdownHook(new Thread(new ShutdownHook()));
 
@@ -86,17 +94,33 @@ public class StartupAction extends SimpleAction {
 
 		// FreeMarker
 
+		if (_log.isDebugEnabled()) {
+			_log.debug("Initialize FreeMarker engine");
+		}
+
 		FreeMarkerEngineUtil.init();
 
 		// Velocity
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Initialize Velocity engine");
+		}
 
 		VelocityEngineUtil.init();
 
 		// Upgrade
 
+		if (_log.isDebugEnabled()) {
+			_log.debug("Upgrade database");
+		}
+
 		DBUpgrader.upgrade();
 
 		// Messaging
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Initialize message bus");
+		}
 
 		MessageBus messageBus = (MessageBus)PortalBeanLocatorUtil.locate(
 			MessageBus.class.getName());
@@ -112,11 +136,19 @@ public class StartupAction extends SimpleAction {
 
 		// Scheduler
 
+		if (_log.isDebugEnabled()) {
+			_log.debug("Initialize scheduler engine");
+		}
+
 		SchedulerEngineUtil.init(new SchedulerEngineProxy());
 
 		SchedulerEngineUtil.start();
 
 		// Verify
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Verify database");
+		}
 
 		DBUpgrader.verify();
 	}

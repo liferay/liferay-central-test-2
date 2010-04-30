@@ -221,7 +221,7 @@ public class MainServlet extends ActionServlet {
 		}
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Initialize velocity");
+			_log.debug("Initialize Velocity");
 		}
 
 		try {
