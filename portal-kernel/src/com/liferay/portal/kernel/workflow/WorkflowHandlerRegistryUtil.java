@@ -91,8 +91,12 @@ public class WorkflowHandlerRegistryUtil {
 
 		workflowHandler.updateStatus(status, workflowContext);
 
-		workflowHandler.startWorkflowInstance(
-			companyId, groupId, userId, classPK, model, workflowContext);
+		if (WorkflowThreadLocal.isEnabled() &&
+			WorkflowEngineManagerUtil.isDeployed()) {
+
+			workflowHandler.startWorkflowInstance(
+				companyId, groupId, userId, classPK, model, workflowContext);
+		}
 	}
 
 	public static void unregister(List<WorkflowHandler> workflowHandlers) {
