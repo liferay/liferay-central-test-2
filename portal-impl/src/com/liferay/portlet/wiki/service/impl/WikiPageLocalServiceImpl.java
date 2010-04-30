@@ -137,15 +137,10 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		validate(title, nodeId, content, format);
 
-		// LPS-6950
-
-		String upperCaseTitle = StringUtil.upperCaseFirstLetter(title);
-
 		long pageId = counterLocalService.increment();
 
 		long resourcePrimKey =
-			wikiPageResourceLocalService.getPageResourcePrimKey(
-				nodeId, upperCaseTitle);
+			wikiPageResourceLocalService.getPageResourcePrimKey(nodeId, title);
 
 		int status = WorkflowConstants.STATUS_DRAFT;
 
@@ -166,7 +161,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		page.setCreateDate(serviceContext.getCreateDate(now));
 		page.setModifiedDate(serviceContext.getModifiedDate(now));
 		page.setNodeId(nodeId);
-		page.setTitle(upperCaseTitle);
+		page.setTitle(title);
 		page.setVersion(version);
 		page.setMinorEdit(minorEdit);
 		page.setContent(content);
