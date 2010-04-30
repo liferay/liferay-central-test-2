@@ -64,12 +64,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.io.Serializable;
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * <a href="DLFileEntryLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -237,14 +234,10 @@ public class DLFileEntryLocalServiceImpl
 		if (serviceContext.getWorkflowAction() ==
 				WorkflowConstants.ACTION_PUBLISH) {
 
-			Map<String, Serializable> workflowContext =
-				new HashMap<String, Serializable>();
-
-			workflowContext.put("serviceContext", serviceContext);
-
 			WorkflowHandlerRegistryUtil.startWorkflowInstance(
 				user.getCompanyId(), groupId, userId,
-				DLFileEntry.class.getName(), fileEntryId, fileEntry, null);
+				DLFileEntry.class.getName(), fileEntryId, fileEntry, null,
+				serviceContext);
 		}
 
 		return fileEntry;
@@ -1051,15 +1044,10 @@ public class DLFileEntryLocalServiceImpl
 		if (serviceContext.getWorkflowAction() ==
 				WorkflowConstants.ACTION_PUBLISH) {
 
-			Map<String, Serializable> workflowContext =
-				new HashMap<String, Serializable>();
-
-			workflowContext.put("serviceContext", serviceContext);
-
 			WorkflowHandlerRegistryUtil.startWorkflowInstance(
 				user.getCompanyId(), groupId, userId,
 				DLFileEntry.class.getName(), fileEntry.getFileEntryId(),
-				fileEntry, null);
+				fileEntry, null, serviceContext);
 		}
 
 		return fileEntry;

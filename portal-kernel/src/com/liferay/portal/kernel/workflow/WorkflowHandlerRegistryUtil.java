@@ -56,7 +56,8 @@ public class WorkflowHandlerRegistryUtil {
 	public static void startWorkflowInstance(
 			long companyId, long groupId, long userId, String className,
 			long classPK, Object model,
-			Map<String, Serializable> workflowContext)
+			Map<String, Serializable> workflowContext,
+			Serializable serviceContext)
 		throws PortalException, SystemException {
 
 		WorkflowHandler workflowHandler = getWorkflowHandler(className);
@@ -88,6 +89,8 @@ public class WorkflowHandlerRegistryUtil {
 			WorkflowConstants.CONTEXT_ENTRY_CLASS_NAME, className);
 		workflowContext.put(
 			WorkflowConstants.CONTEXT_ENTRY_CLASS_PK, String.valueOf(classPK));
+		workflowContext.put(
+			WorkflowConstants.CONTEXT_SERVICE_CONTEXT, serviceContext);
 
 		workflowHandler.updateStatus(status, workflowContext);
 

@@ -343,15 +343,10 @@ public class JournalArticleLocalServiceImpl
 		if (serviceContext.getWorkflowAction() ==
 				WorkflowConstants.ACTION_PUBLISH) {
 
-			Map<String, Serializable> workflowContext =
-				new HashMap<String, Serializable>();
-
-			workflowContext.put("serviceContext", serviceContext);
-
 			WorkflowHandlerRegistryUtil.startWorkflowInstance(
 				user.getCompanyId(), groupId, userId,
-				JournalArticle.class.getName(), article.getId(), article,
-				workflowContext);
+				JournalArticle.class.getName(), article.getId(), article, null,
+				serviceContext);
 		}
 
 		return article;
@@ -1793,15 +1788,10 @@ public class JournalArticleLocalServiceImpl
 		if (serviceContext.getWorkflowAction() ==
 				WorkflowConstants.ACTION_PUBLISH) {
 
-			Map<String, Serializable> workflowContext =
-				new HashMap<String, Serializable>();
-
-			workflowContext.put("serviceContext", serviceContext);
-
 			WorkflowHandlerRegistryUtil.startWorkflowInstance(
 				user.getCompanyId(), groupId, userId,
-				JournalArticle.class.getName(), article.getId(), article,
-				workflowContext);
+				JournalArticle.class.getName(), article.getId(), article, null,
+				serviceContext);
 		}
 
 		return article;

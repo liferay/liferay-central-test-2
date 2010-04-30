@@ -35,6 +35,8 @@ public class WorkflowConstants {
 
 	public static final String CONTEXT_GROUP_ID = "groupId";
 
+	public static final String CONTEXT_SERVICE_CONTEXT = "serviceContext";
+
 	public static final String CONTEXT_USER_ID = "userId";
 
 	public static final String LABEL_ANY = "any";
