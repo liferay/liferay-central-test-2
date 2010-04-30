@@ -52,14 +52,6 @@
 
 /portal-impl/test/test-portal-impl-ext.properties
 
-/portal-kernel/*.iml
-/portal-kernel/*.ipr
-/portal-kernel/*.iws
-/portal-kernel/classes
-/portal-kernel/portal-kernel.jar
-/portal-kernel/test-classes
-/portal-kernel/test-results
-
 /portal-service/*.iml
 /portal-service/*.ipr
 /portal-service/*.iws

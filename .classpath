@@ -2,9 +2,8 @@
 <classpath>
 	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="portal-impl/src"/>
 	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="portal-impl/test"/>
-	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="portal-kernel/src"/>
-	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="portal-kernel/test"/>
 	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="portal-service/src"/>
+	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="portal-service/test"/>
 	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="portal-web/test"/>
 	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="support-tomcat/src"/>
 	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="util-bridges/src"/>

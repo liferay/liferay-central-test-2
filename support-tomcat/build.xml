@@ -16,7 +16,6 @@
 		<mkdir dir="classes" />
 
 		<path id="web-lib.classpath">
-			<pathelement path="${project.dir}/portal-kernel/classes" />
 			<fileset dir="${project.dir}/lib/development" includes="catalina.jar,tomcat-coyote.jar" />
 		</path>
 

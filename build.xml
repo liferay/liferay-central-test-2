@@ -30,7 +30,6 @@
 	<target name="clean">
 		<ant dir="classes" target="clean" inheritAll="false" />
 
-		<ant dir="portal-kernel" target="clean" inheritAll="false" />
 		<ant dir="portal-service" target="clean" inheritAll="false" />
 
 		<ant dir="util-bridges" target="clean" inheritAll="false" />
@@ -140,7 +139,6 @@
 	</target>
 
 	<target name="compile">
-		<ant dir="portal-kernel" target="compile" inheritAll="false" />
 		<ant dir="portal-service" target="compile" inheritAll="false" />
 
 		<ant dir="util-java" target="compile" inheritAll="false" />
@@ -150,7 +148,6 @@
 	</target>
 
 	<target name="jar">
-		<ant dir="portal-kernel" target="jar" inheritAll="false" />
 		<ant dir="portal-service" target="jar" inheritAll="false" />
 
 		<ant dir="util-bridges" target="jar" inheritAll="false" />
@@ -185,7 +182,6 @@
 	<target name="java2html">
 		<delete dir="api" />
 
-		<ant dir="portal-kernel" target="java2html" inheritAll="false" />
 		<ant dir="portal-service" target="java2html" inheritAll="false" />
 
 		<ant dir="util-bridges" target="java2html" inheritAll="false" />
@@ -198,7 +194,6 @@
 	</target>
 
 	<target name="javadoc">
-		<ant dir="portal-kernel" target="javadoc" inheritAll="false" />
 		<ant dir="portal-service" target="javadoc" inheritAll="false" />
 
 		<ant dir="util-bridges" target="javadoc" inheritAll="false" />
@@ -217,7 +212,6 @@
 			</then>
 		</if>
 
-		<ant dir="portal-kernel" target="deploy" inheritAll="false" />
 		<ant dir="portal-service" target="deploy" inheritAll="false" />
 
 		<ant dir="util-bridges" target="deploy" inheritAll="false" />

@@ -179,7 +179,6 @@ ${exception.message}
 	</target>
 
 	<target name="deploy">
-		<ant dir="../portal-kernel" target="deploy" inheritAll="false" />
 		<ant dir="../portal-service" target="deploy" inheritAll="false" />
 
 		<antcall target="deploy-properties" />

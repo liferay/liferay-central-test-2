@@ -220,7 +220,6 @@ public class PluginsEnvironmentBuilder {
 			_addClasspathEntry(sb, "/portal/lib/portal/" + jar);
 		}
 
-		_addClasspathEntry(sb, "/portal/portal-kernel/portal-kernel.jar");
 		_addClasspathEntry(sb, "/portal/portal-service/portal-service.jar");
 		_addClasspathEntry(sb, "/portal/util-bridges/util-bridges.jar");
 		_addClasspathEntry(sb, "/portal/util-java/util-java.jar");

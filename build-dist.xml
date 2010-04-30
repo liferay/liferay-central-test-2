@@ -513,10 +513,6 @@ app.server.glassfish.zip.url=http://download.java.net/glassfish/v3-prelude/relea
 				includes="portal-impl.jar"
 			/>
 			<fileset
-				dir="portal-kernel"
-				includes="portal-kernel.jar"
-			/>
-			<fileset
 				dir="portal-service"
 				includes="portal-service.jar"
 			/>
@@ -676,11 +672,6 @@ app.server.glassfish.zip.url=http://download.java.net/glassfish/v3-prelude/relea
 				prefix="liferay-portal-dependencies-${lp.version}"
 			/>
 			<zipfileset
-				dir="portal-kernel"
-				includes="portal-kernel.jar"
-				prefix="liferay-portal-dependencies-${lp.version}"
-			/>
-			<zipfileset
 				dir="portal-service"
 				includes="portal-service.jar"
 				prefix="liferay-portal-dependencies-${lp.version}"
@@ -738,7 +729,7 @@ app.server.glassfish.zip.url=http://download.java.net/glassfish/v3-prelude/relea
 		<copy todir="${tstamp.value}/WEB-INF/lib">
 			<fileset
 				dir="${app.server.lib.global.dir}"
-				includes="annotations.jar,portal-kernel.jar,portal-service.jar,portlet.jar"
+				includes="annotations.jar,portal-service.jar,portlet.jar"
 			/>
 		</copy>
 
@@ -800,7 +791,7 @@ app.server.glassfish.zip.url=http://download.java.net/glassfish/v3-prelude/relea
 		<copy todir="${tstamp.value}/WEB-INF/lib">
 			<fileset
 				dir="${app.server.lib.global.dir}"
-				includes="annotations.jar,portal-kernel.jar,portal-service.jar,portlet.jar"
+				includes="annotations.jar,portal-service.jar,portlet.jar"
 			/>
 		</copy>
 
