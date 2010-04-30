@@ -93,11 +93,9 @@ import com.liferay.portlet.journalcontent.util.JournalContentUtil;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.Serializable;
 
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
