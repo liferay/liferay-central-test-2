@@ -48,16 +48,6 @@ AUI().add(
 
 				}
 
-				var leftReorder = new A.Toolbar(
-					{
-						activeState: true,
-						children: [
-							{icon: 'circle-arrow-t'},
-							{icon: 'circle-arrow-b'},
-						]
-					}
-				).render('#demo3');
-
 				var arrowButtonRightReorderUp = instance._container.one('a.right-reorder-up');
 				var arrowButtonRightReorderDown = instance._container.one('a.right-reorder-down');
 
