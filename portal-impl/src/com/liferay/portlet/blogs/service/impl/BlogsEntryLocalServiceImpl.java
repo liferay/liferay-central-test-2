@@ -164,6 +164,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 				new HashMap<String, Serializable>();
 
 			workflowContext.put("trackbacks", trackbacks);
+			workflowContext.put("serviceContext", serviceContext);
 
 			WorkflowHandlerRegistryUtil.startWorkflowInstance(
 				user.getCompanyId(), groupId, userId,
@@ -550,6 +551,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			workflowContext.put(
 				"pingOldTrackbacks", String.valueOf(pingOldTrackbacks));
 			workflowContext.put("trackbacks", trackbacks);
+			workflowContext.put("serviceContext", serviceContext);
 
 			WorkflowHandlerRegistryUtil.startWorkflowInstance(
 				user.getCompanyId(), entry.getGroupId(), userId,

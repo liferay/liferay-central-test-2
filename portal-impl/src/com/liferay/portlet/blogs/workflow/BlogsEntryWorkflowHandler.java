@@ -52,8 +52,6 @@ public class BlogsEntryWorkflowHandler extends BaseWorkflowHandler {
 			int status, Map<String, Serializable> workflowContext)
 		throws PortalException, SystemException {
 
-		long groupId = GetterUtil.getLong(
-			(String)workflowContext.get(WorkflowConstants.CONTEXT_GROUP_ID));
 		long userId = GetterUtil.getLong(
 			(String)workflowContext.get(WorkflowConstants.CONTEXT_USER_ID));
 		long classPK = GetterUtil.getLong(
@@ -64,9 +62,8 @@ public class BlogsEntryWorkflowHandler extends BaseWorkflowHandler {
 		Boolean pingOldTrackbacks = GetterUtil.getBoolean(
 			(String)workflowContext.get("pingOldTrackbacks"));
 
-		ServiceContext serviceContext = new ServiceContext();
-
-		serviceContext.setScopeGroupId(groupId);
+		ServiceContext serviceContext = (ServiceContext)workflowContext.get(
+			"serviceContext");
 
 		return BlogsEntryLocalServiceUtil.updateStatus(
 			userId, classPK, trackbacks, pingOldTrackbacks, status,
