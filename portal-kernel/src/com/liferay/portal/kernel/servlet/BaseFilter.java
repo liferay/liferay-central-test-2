@@ -183,6 +183,10 @@ public abstract class BaseFilter implements Filter {
 
 			depther = (String)request.getAttribute(_DEPTHER);
 
+			if (depther == null) {
+				return;
+			}
+
 			log.debug(
 				"[" + threadName + "]" + depther + "< " +
 					filterClass.getName() + " " + path + " " +
