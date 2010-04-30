@@ -24,6 +24,7 @@ import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBMessageFlag;
 import com.liferay.portlet.messageboards.model.MBMessageFlagConstants;
 import com.liferay.portlet.messageboards.model.MBThread;
+import com.liferay.portlet.messageboards.service.MBMessageFlagLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.base.MBMessageFlagLocalServiceBaseImpl;
 
 import java.util.Date;
@@ -128,6 +129,33 @@ public class MBMessageFlagLocalServiceImpl
 			questionMessageFlag.setFlag(MBMessageFlagConstants.QUESTION_FLAG);
 
 			mbMessageFlagPersistence.update(questionMessageFlag, false);
+		}
+	}
+
+	public void deleteAnswerFlags(long threadId, long messageId)
+		throws SystemException {
+
+		if (MBMessageFlagLocalServiceUtil.hasAnswerFlag(messageId)) {
+			mbMessageFlagPersistence.removeByM_F(
+				messageId, MBMessageFlagConstants.ANSWER_FLAG);
+		}
+
+		List<MBMessage> messages = mbMessagePersistence.findByT_P(
+			threadId, messageId);
+
+		for (MBMessage message : messages) {
+			if (MBMessageFlagLocalServiceUtil.hasAnswerFlag(
+					message.getMessageId())) {
+
+				mbMessageFlagPersistence.removeByM_F(
+					message.getMessageId(),
+					MBMessageFlagConstants.ANSWER_FLAG);
+			}
+
+			if (mbMessagePersistence.countByT_P(
+					threadId, message.getMessageId()) > 0) {
+				deleteAnswerFlags(threadId, message.getMessageId());
+			}
 		}
 	}
 
