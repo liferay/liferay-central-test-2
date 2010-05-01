@@ -61,20 +61,58 @@ scheduledPublishEventsURL.setParameter("destinationName", localPublishing ? Dest
 </aui:fieldset>
 
 <aui:script>
-	function <portlet:namespace />schedulePublishEvent() {
-		var oldCmd = document.<portlet:namespace />exportPagesFm.<portlet:namespace /><%= Constants.CMD %>.value;
+	Liferay.provide(
+		window,
+		'<portlet:namespace />schedulePublishEvent',
+		function() {
+			var A = AUI();
 
-		document.<portlet:namespace />exportPagesFm.<portlet:namespace /><%= Constants.CMD %>.value = '<%= scheduleCMD %>';
+			var oldCmd = document.<portlet:namespace />exportPagesFm.<portlet:namespace /><%= Constants.CMD %>.value;
 
-		var addButton = AUI().one('#<portlet:namespace />addButton');
+			document.<portlet:namespace />exportPagesFm.<portlet:namespace /><%= Constants.CMD %>.value = '<%= scheduleCMD %>';
 
-		if (addButton) {
-			addButton.set('disabled', true);
-		}
+			var addButton = A.one('#<portlet:namespace />addButton');
 
-		AUI().use(
-			'aui-io-request',
-			function(A) {
+			if (addButton) {
+				addButton.set('disabled', true);
+			}
+
+			var form = A.get(document.<portlet:namespace />exportPagesFm);
+
+			var uri = form.getAttribute('action');
+
+			A.io.request(
+				uri,
+				{
+					form: {
+						id: form
+					},
+					method: 'POST',
+					on: {
+						success: function(event, id, obj) {
+							<portlet:namespace />updateScheduledPublishEventsDiv();
+						}
+					}
+				}
+			);
+
+			document.<portlet:namespace />exportPagesFm.<portlet:namespace /><%= Constants.CMD %>.value = oldCmd;
+		},
+		['aui-io']
+	);
+
+	Liferay.provide(
+		window,
+		'<portlet:namespace />unschedulePublishEvent',
+		function(jobName) {
+			var A = AUI();
+
+			if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-delete-the-scheduled-event") %>')) {
+				var oldCmd = document.<portlet:namespace />exportPagesFm.<portlet:namespace /><%= Constants.CMD %>.value;
+
+				document.<portlet:namespace />exportPagesFm.<portlet:namespace /><%= Constants.CMD %>.value = '<%= unscheduleCMD %>';
+				document.<portlet:namespace />exportPagesFm.<portlet:namespace />jobName.value = jobName;
+
 				var form = A.get(document.<portlet:namespace />exportPagesFm);
 
 				var uri = form.getAttribute('action');
@@ -93,84 +131,52 @@ scheduledPublishEventsURL.setParameter("destinationName", localPublishing ? Dest
 						}
 					}
 				);
+
+				document.<portlet:namespace />exportPagesFm.<portlet:namespace /><%= Constants.CMD %>.value = oldCmd;
 			}
-		);
+		},
+		['aui-io']
+	);
 
-		document.<portlet:namespace />exportPagesFm.<portlet:namespace /><%= Constants.CMD %>.value = oldCmd;
-	}
+	Liferay.provide(
+		window,
+		'<portlet:namespace />updateScheduledPublishEventsDiv',
+		function() {
+			var A = AUI();
 
-	function <portlet:namespace />unschedulePublishEvent(jobName) {
-		if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-delete-the-scheduled-event") %>')) {
-			var oldCmd = document.<portlet:namespace />exportPagesFm.<portlet:namespace /><%= Constants.CMD %>.value;
+			var form = A.get(document.<portlet:namespace />exportPagesFm);
 
-			document.<portlet:namespace />exportPagesFm.<portlet:namespace /><%= Constants.CMD %>.value = '<%= unscheduleCMD %>';
-			document.<portlet:namespace />exportPagesFm.<portlet:namespace />jobName.value = jobName;
+			var uri = form.getAttribute('action');
 
-			AUI().use(
-				'aui-io-request',
-				function(A) {
-					var form = A.get(document.<portlet:namespace />exportPagesFm);
+			A.io.request(
+				'<%= scheduledPublishEventsURL %>',
+				{
+					form: {
+						id: form
+					},
+					method: 'POST',
+					on: {
+						success: function(event, id, obj) {
+							var responseData = this.get('responseData');
 
-					var uri = form.getAttribute('action');
+							var scheduledPublishEventsDiv = A.one('#<portlet:namespace />scheduledPublishEventsDiv');
 
-					A.io.request(
-						uri,
-						{
-							form: {
-								id: form
-							},
-							method: 'POST',
-							on: {
-								success: function(event, id, obj) {
-									<portlet:namespace />updateScheduledPublishEventsDiv();
-								}
+							if (scheduledPublishEventsDiv) {
+								scheduledPublishEventsDiv.html(responseData);
 							}
-						}
-					);
-				}
-			);
 
-			document.<portlet:namespace />exportPagesFm.<portlet:namespace /><%= Constants.CMD %>.value = oldCmd;
-		}
-	}
+							var addButton = A.one('#<portlet:namespace />addButton');
 
-	function <portlet:namespace />updateScheduledPublishEventsDiv() {
-		AUI().use(
-			'aui-io-request',
-			function(A) {
-				var form = A.get(document.<portlet:namespace />exportPagesFm);
-
-				var uri = form.getAttribute('action');
-
-				A.io.request(
-					'<%= scheduledPublishEventsURL %>',
-					{
-						form: {
-							id: form
-						},
-						method: 'POST',
-						on: {
-							success: function(event, id, obj) {
-								var responseData = this.get('responseData');
-
-								var scheduledPublishEventsDiv = A.one('#<portlet:namespace />scheduledPublishEventsDiv');
-
-								if (scheduledPublishEventsDiv) {
-									scheduledPublishEventsDiv.html(responseData);
-								}
-
-								var addButton = A.one('#<portlet:namespace />addButton');
-
-								if (addButton) {
-									addButton.set('disabled', false);
-								}
+							if (addButton) {
+								addButton.set('disabled', false);
 							}
 						}
 					}
-				);
-			}
-		);
-	}
+				}
+			);
+		},
+		['aui-io']
+	);
 
 	<portlet:namespace />updateScheduledPublishEventsDiv();
 </aui:script>

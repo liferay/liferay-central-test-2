@@ -1,64 +1,63 @@
-Liferay.PortletSharing = {
-	showNetvibesInfo: function(netvibesURL) {
-		AUI().use(
-			'aui-dialog',
-			'liferay-portlet-url',
-			function(A) {
-				var portletURL = Liferay.PortletURL.createResourceURL();
+Liferay.namespace('PortletSharing');
 
-				portletURL.setPortletId(133);
+Liferay.provide(
+	Liferay.PortletSharing,
+	'showNetvibesInfo',
+	function(netvibesURL) {
+		var portletURL = Liferay.PortletURL.createResourceURL();
 
-				portletURL.setParameter("netvibesURL", netvibesURL);
+		portletURL.setPortletId(133);
 
-				var dialog = new A.Dialog(
-					{
-						centered: true,
-						destroyOnClose: true,
-						modal: true,
-						title: Liferay.Language.get('add-to-netvibes'),
-						width: 550
-					}
-				)
-				.render();
+		portletURL.setParameter('netvibesURL', netvibesURL);
 
-				dialog.plug(
-					A.Plugin.IO,
-					{
-						uri: portletURL.toString()
-					}
-				);
+		var dialog = new A.Dialog(
+			{
+				centered: true,
+				destroyOnClose: true,
+				modal: true,
+				title: Liferay.Language.get('add-to-netvibes'),
+				width: 550
+			}
+		)
+		.render();
+
+		dialog.plug(
+			A.Plugin.IO,
+			{
+				uri: portletURL.toString()
 			}
 		);
 	},
-	showWidgetInfo: function(widgetURL) {
-		AUI().use(
-			'aui-dialog',
-			'liferay-portlet-url',
-			function(A) {
-				var portletURL = Liferay.PortletURL.createResourceURL();
+	['aui-dialog', 'liferay-portlet-url']
+);
 
-				portletURL.setPortletId(133);
+Liferay.provide(
+	Liferay.PortletSharing,
+	'showWidgetInfo',
+	function(widgetURL) {
+		var portletURL = Liferay.PortletURL.createResourceURL();
 
-				portletURL.setParameter("widgetURL", widgetURL);
+		portletURL.setPortletId(133);
 
-				var dialog = new A.Dialog(
-					{
-						centered: true,
-						destroyOnClose: true,
-						modal: true,
-						title: Liferay.Language.get('add-to-any-website'),
-						width: 550
-					}
-				)
-				.render();
+		portletURL.setParameter('widgetURL', widgetURL);
 
-				dialog.plug(
-					A.Plugin.IO,
-					{
-						uri: portletURL.toString()
-					}
-				);
+		var dialog = new A.Dialog(
+			{
+				centered: true,
+				destroyOnClose: true,
+				modal: true,
+				title: Liferay.Language.get('add-to-any-website'),
+				width: 550
+			}
+		)
+		.render();
+
+		dialog.plug(
+			A.Plugin.IO,
+			{
+				uri: portletURL.toString()
 			}
 		);
-	}
-};
+	},
+	['aui-dialog', 'liferay-portlet-url']
+);

@@ -66,49 +66,62 @@ boolean useEditorCodepress = editorType.equals("codepress");
 		return <portlet:namespace />getXsd();
 	}
 
-	function <portlet:namespace />updateEditorType() {
+	Liferay.provide(
+		window,
+		'<portlet:namespace />updateEditorType',
+		function() {
+			var A = AUI();
 
-		<%
-		String newEditorType = "codepress";
+			<%
+			String newEditorType = "codepress";
 
-		if (useEditorCodepress) {
-			newEditorType = "html";
-		}
-		%>
-
-		var editorForm = AUI().one(document.<portlet:namespace />editorForm);
-
-		if (editorForm) {
-			var popup = editorForm.ancestor('.aui-widget-bd');
-
-			if (popup) {
-				popup = popup.getDOM();
+			if (useEditorCodepress) {
+				newEditorType = "html";
 			}
-		}
+			%>
 
-		Liferay.Util.switchEditor(
-			{
-				popup: popup,
-				textarea: '<portlet:namespace />xsdContent',
-				url: '<portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/journal/edit_structure_xsd" /><portlet:param name="editorType" value="<%= newEditorType %>" /></portlet:renderURL>'
+			var editorForm = A.one(document.<portlet:namespace />editorForm);
+
+			if (editorForm) {
+				var popup = editorForm.ancestor('.aui-widget-bd');
+
+				if (popup) {
+					popup = popup.getDOM();
+				}
 			}
-		);
-	}
 
-	function <portlet:namespace />updateStructureXsd() {
-		document.<portlet:namespace />fm1.scroll.value = "<portlet:namespace />xsd";
+			Liferay.Util.switchEditor(
+				{
+					popup: popup,
+					textarea: '<portlet:namespace />xsdContent',
+					url: '<portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/journal/edit_structure_xsd" /><portlet:param name="editorType" value="<%= newEditorType %>" /></portlet:renderURL>'
+				}
+			);
+		},
+		['aui-base']
+	);
 
-		var xsdContent = AUI().one('input[name=<portlet:namespace />xsd]');
-		var content = '';
+	Liferay.provide(
+		window,
+		'<portlet:namespace />updateStructureXsd',
+		function() {
+			var A = AUI();
 
-		content = document.<portlet:namespace />editorForm.<portlet:namespace />xsdContent.value;
+			document.<portlet:namespace />fm1.scroll.value = "<portlet:namespace />xsd";
 
-		xsdContent.attr('value', content);
+			var xsdContent = A.one('input[name=<portlet:namespace />xsd]');
+			var content = '';
 
-		AUI().DialogManager.closeByChild(document.<portlet:namespace />editorForm);
+			content = document.<portlet:namespace />editorForm.<portlet:namespace />xsdContent.value;
 
-		submitForm(document.<portlet:namespace />fm1);
-	}
+			xsdContent.attr('value', content);
+
+			A.DialogManager.closeByChild(document.<portlet:namespace />editorForm);
+
+			submitForm(document.<portlet:namespace />fm1);
+		},
+		['aui-dialog']
+	);
 
 	document.<portlet:namespace />editorForm.<portlet:namespace />xsdContent.value = getEditorContent();
 

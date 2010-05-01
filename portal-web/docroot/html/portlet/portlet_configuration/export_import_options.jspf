@@ -231,11 +231,25 @@
 </ul>
 
 <aui:script>
-	function <portlet:namespace />hideDateRange() {
-		AUI().one('#<portlet:namespace />startEndDate').hide();
-	}
+	Liferay.provide(
+		window,
+		'<portlet:namespace />hideDateRange',
+		function() {
+			var A = AUI();
 
-	function <portlet:namespace />showDateRange() {
-		AUI().one('#<portlet:namespace />startEndDate').show();
-	}
+			A.one('#<portlet:namespace />startEndDate').hide();
+		},
+		['aui-base']
+	);
+
+	Liferay.provide(
+		window,
+		'<portlet:namespace />showDateRange',
+		function() {
+			var A = AUI();
+
+			A.one('#<portlet:namespace />startEndDate').show();
+		},
+		['aui-base']
+	);
 </aui:script>

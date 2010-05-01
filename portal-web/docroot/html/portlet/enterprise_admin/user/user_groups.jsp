@@ -75,36 +75,40 @@ List<UserGroup> userGroups = (List<UserGroup>)request.getAttribute("user.userGro
 		userGroupWindow.focus();
 	}
 
-	function <portlet:namespace />selectUserGroup(userGroupId, name) {
-		AUI().use(
-			'liferay-search-container',
-			function(A) {
-				var searchContainer = Liferay.SearchContainer.get('<portlet:namespace />userGroupsSearchContainer');
+	Liferay.provide(
+		window,
+		'<portlet:namespace />selectUserGroup',
+		function(userGroupId, name) {
+			var A = AUI();
 
-				var rowColumns = [];
+			var searchContainer = Liferay.SearchContainer.get('<portlet:namespace />userGroupsSearchContainer');
 
-				rowColumns.push(name);
-				rowColumns.push('<a class="modify-link" data-rowId="' + userGroupId + '" href="javascript:;"><%= UnicodeFormatter.toString(removeUserGroupIcon) %></a>');
+			var rowColumns = [];
 
-				searchContainer.addRow(rowColumns, userGroupId);
-				searchContainer.updateDataStore();
+			rowColumns.push(name);
+			rowColumns.push('<a class="modify-link" data-rowId="' + userGroupId + '" href="javascript:;"><%= UnicodeFormatter.toString(removeUserGroupIcon) %></a>');
 
-				<portlet:namespace />trackChanges();
-			}
-		);
-	}
+			searchContainer.addRow(rowColumns, userGroupId);
+			searchContainer.updateDataStore();
 
-	function <portlet:namespace />trackChanges() {
-		AUI().use(
-			'event',
-			function(A) {
-				A.fire(
-					'enterpriseAdmin:trackChanges',
-					A.one('.selected .modify-link')
-				);
-			}
-		);
-	}
+			<portlet:namespace />trackChanges();
+		},
+		['liferay-search-container']
+	);
+
+	Liferay.provide(
+		window,
+		'<portlet:namespace />trackChanges',
+		function() {
+			var A = AUI();
+
+			A.fire(
+				'enterpriseAdmin:trackChanges',
+				A.one('.selected .modify-link')
+			);
+		},
+		['aui-base']
+	);
 </aui:script>
 
 <aui:script use="liferay-search-container">

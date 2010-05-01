@@ -247,20 +247,6 @@ if (parentOrganization != null) {
 />
 
 <aui:script>
-	function <portlet:namespace />changeLogo(newLogoURL) {
-		AUI().one('#<portlet:namespace />avatar').attr('src', newLogoURL);
-		AUI().one('.avatar').attr('src', newLogoURL);
-
-		AUI().one('#<portlet:namespace />deleteLogo').val(false);
-	}
-
-	function <portlet:namespace />deleteLogo(defaultLogoURL) {
-		AUI().one('#<portlet:namespace />deleteLogo').val(true);
-
-		AUI().one('#<portlet:namespace />avatar').attr('src', defaultLogoURL);
-		AUI().one('.avatar').attr('src', defaultLogoURL);
-	}
-
 	function <portlet:namespace />openEditOrganizationLogoWindow(editOrganizationLogoURL) {
 		var editOrganizationLogoWindow = window.open(editOrganizationLogoURL, 'change', 'directories=no,height=400,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=500');
 
@@ -284,40 +270,72 @@ if (parentOrganization != null) {
 		organizationWindow.focus();
 	}
 
-	function <portlet:namespace />selectOrganization(organizationId, name, type) {
-		AUI().use(
-			'liferay-search-container',
-			function(A) {
-				var searchContainer = Liferay.SearchContainer.get('<portlet:namespace />parentOrganizationSearchContainer');
+	Liferay.provide(
+		window,
+		'<portlet:namespace />changeLogo',
+		function(newLogoURL) {
+			var A = AUI();
 
-				var rowColumns = [];
+			A.one('#<portlet:namespace />avatar').attr('src', newLogoURL);
+			A.one('.avatar').attr('src', newLogoURL);
 
-				var href = "<portlet:renderURL><portlet:param name="struts_action" value="/enterprise_admin/edit_organization" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>&<portlet:namespace />organizationId=" + organizationId;
+			A.one('#<portlet:namespace />deleteLogo').val(false);
+		},
+		['aui-base']
+	);
 
-				rowColumns.push(<portlet:namespace />createURL(href, name));
-				rowColumns.push(<portlet:namespace />createURL(href, type));
-				rowColumns.push('<a class="modify-link" data-rowId="' + organizationId + '" href="javascript:;"><%= UnicodeFormatter.toString(removeOrganizationIcon) %></a>');
+	Liferay.provide(
+		window,
+		'<portlet:namespace />deleteLogo',
+		function(defaultLogoURL) {
+			var A = AUI();
 
-				searchContainer.deleteRow(1, searchContainer.getData());
-				searchContainer.addRow(rowColumns, organizationId);
-				searchContainer.updateDataStore(organizationId);
+			A.one('#<portlet:namespace />deleteLogo').val(true);
 
-				<portlet:namespace />trackChanges();
-			}
-		);
-	}
+			A.one('#<portlet:namespace />avatar').attr('src', defaultLogoURL);
+			A.one('.avatar').attr('src', defaultLogoURL);
+		},
+		['aui-base']
+	);
 
-	function <portlet:namespace />trackChanges() {
-		AUI().use(
-			'event',
-			function(A) {
-				A.fire(
-					'enterpriseAdmin:trackChanges',
-					A.one('.selected .modify-link')
-				);
-			}
-		);
-	}
+	Liferay.provide(
+		window,
+		'<portlet:namespace />selectOrganization',
+		function(organizationId, name, type) {
+			var A = AUI();
+
+			var searchContainer = Liferay.SearchContainer.get('<portlet:namespace />parentOrganizationSearchContainer');
+
+			var rowColumns = [];
+
+			var href = "<portlet:renderURL><portlet:param name="struts_action" value="/enterprise_admin/edit_organization" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>&<portlet:namespace />organizationId=" + organizationId;
+
+			rowColumns.push(<portlet:namespace />createURL(href, name));
+			rowColumns.push(<portlet:namespace />createURL(href, type));
+			rowColumns.push('<a class="modify-link" data-rowId="' + organizationId + '" href="javascript:;"><%= UnicodeFormatter.toString(removeOrganizationIcon) %></a>');
+
+			searchContainer.deleteRow(1, searchContainer.getData());
+			searchContainer.addRow(rowColumns, organizationId);
+			searchContainer.updateDataStore(organizationId);
+
+			<portlet:namespace />trackChanges();
+		},
+		['liferay-search-container']
+	);
+
+	Liferay.provide(
+		window,
+		'<portlet:namespace />trackChanges',
+		function() {
+			var A = AUI();
+
+			A.fire(
+				'enterpriseAdmin:trackChanges',
+				A.one('.selected .modify-link')
+			);
+		},
+		['aui-base']
+	);
 </aui:script>
 
 <aui:script use="aui-base">

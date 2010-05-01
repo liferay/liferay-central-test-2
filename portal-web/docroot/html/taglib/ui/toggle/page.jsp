@@ -46,60 +46,67 @@ String defaultMessage = (String)request.getAttribute("liferay-ui:toggle:defaultM
 <aui:script>
 	var <%= stateVar %> = "<%= defaultStateValue %>";
 
-	function <%= stateVar %>Toggle(state, saveState) {
-		if (state == null) {
-			state = <%= stateVar %>;
-		}
+	Liferay.provide(
+		window,
+		'<%= stateVar %>Toggle',
+		function(state, saveState) {
+			var A = AUI();
 
-		if (state == "") {
-			<%= stateVar %> = "none";
-
-			document.getElementById("<%= id %>").style.display = "none";
-
-			<c:choose>
-				<c:when test="<%= Validator.isNotNull(showMessage) %>">
-					document.getElementById("<%= id %>_message").innerHTML = "<%= showMessage %>";
-				</c:when>
-				<c:otherwise>
-					document.getElementById("<%= id %>_image").src = "<%= showImage %>";
-				</c:otherwise>
-			</c:choose>
-
-			if ((saveState == null) || saveState) {
-				AUI().io(
-					themeDisplay.getPathMain() + '/portal/session_click',
-					{
-						data: {
-							'<%= id %>': 'none'
-						}
-					}
-				);
+			if (state == null) {
+				state = <%= stateVar %>;
 			}
-		}
-		else {
-			<%= stateVar %> = "";
 
-			document.getElementById("<%= id %>").style.display = "";
+			if (state == "") {
+				<%= stateVar %> = "none";
 
-			<c:choose>
-				<c:when test="<%= Validator.isNotNull(showMessage) %>">
-					document.getElementById("<%= id %>_message").innerHTML = "<%= hideMessage %>";
-				</c:when>
-				<c:otherwise>
-					document.getElementById("<%= id %>_image").src = "<%= hideImage %>";
-				</c:otherwise>
-			</c:choose>
+				document.getElementById("<%= id %>").style.display = "none";
 
-			if ((saveState == null) || saveState) {
-				AUI().io(
-					themeDisplay.getPathMain() + '/portal/session_click',
-					{
-						data: {
-							'<%= id %>': ''
+				<c:choose>
+					<c:when test="<%= Validator.isNotNull(showMessage) %>">
+						document.getElementById("<%= id %>_message").innerHTML = "<%= showMessage %>";
+					</c:when>
+					<c:otherwise>
+						document.getElementById("<%= id %>_image").src = "<%= showImage %>";
+					</c:otherwise>
+				</c:choose>
+
+				if ((saveState == null) || saveState) {
+					A.io(
+						themeDisplay.getPathMain() + '/portal/session_click',
+						{
+							data: {
+								'<%= id %>': 'none'
+							}
 						}
-					}
-				);
+					);
+				}
 			}
-		}
-	}
+			else {
+				<%= stateVar %> = "";
+
+				document.getElementById("<%= id %>").style.display = "";
+
+				<c:choose>
+					<c:when test="<%= Validator.isNotNull(showMessage) %>">
+						document.getElementById("<%= id %>_message").innerHTML = "<%= hideMessage %>";
+					</c:when>
+					<c:otherwise>
+						document.getElementById("<%= id %>_image").src = "<%= hideImage %>";
+					</c:otherwise>
+				</c:choose>
+
+				if ((saveState == null) || saveState) {
+					A.io(
+						themeDisplay.getPathMain() + '/portal/session_click',
+						{
+							data: {
+								'<%= id %>': ''
+							}
+						}
+					);
+				}
+			}
+		},
+		['aui-io']
+	);
 </aui:script>

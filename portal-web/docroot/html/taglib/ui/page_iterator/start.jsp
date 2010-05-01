@@ -294,35 +294,49 @@ NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 
 <c:if test='<%= type.equals("regular") && !themeDisplay.isFacebook() %>'>
 	<aui:script>
-		function <%= namespace %><%= curParam %>updateCur(box) {
-			var cur = AUI().one(box).val();
+		Liferay.provide(
+			window,
+			'<%= namespace %><%= curParam %>updateCur',
+			function(box) {
+				var A = AUI();
 
-			if (<%= Validator.isNotNull(url) %>) {
-				var href = "<%= url %><%= namespace %><%= curParam %>=" + cur + "<%= urlAnchor %>";
+				var cur = A.one(box).val();
 
-				location.href = href;
-			}
-			else {
-				document.<%= formName %>.<%= curParam %>.value = cur;
+				if (<%= Validator.isNotNull(url) %>) {
+					var href = "<%= url %><%= namespace %><%= curParam %>=" + cur + "<%= urlAnchor %>";
 
-				<%= jsCall %>;
-			}
-		}
+					location.href = href;
+				}
+				else {
+					document.<%= formName %>.<%= curParam %>.value = cur;
 
-		function <%= namespace %><%= deltaParam %>updateDelta(box) {
-			var delta = AUI().one(box).val();
+					<%= jsCall %>;
+				}
+			},
+			['aui-base']
+		);
 
-			if (<%= Validator.isNotNull(url) %>) {
-				var href = "<%= deltaURL %>&<%= namespace %><%= deltaParam %>=" + delta + "<%= urlAnchor %>";
+		Liferay.provide(
+			window,
+			'<%= namespace %><%= deltaParam %>updateDelta',
+			function(box) {
+				var A = AUI();
 
-				location.href = href;
-			}
-			else {
-				document.<%= formName %>.<%= deltaParam %>.value = delta;
+				var delta = A.one(box).val();
 
-				<%= jsCall %>;
-			}
-		}
+				if (<%= Validator.isNotNull(url) %>) {
+					var href = "<%= deltaURL %>&<%= namespace %><%= deltaParam %>=" + delta + "<%= urlAnchor %>";
+
+					location.href = href;
+				}
+				else {
+					document.<%= formName %>.<%= deltaParam %>.value = delta;
+
+					<%= jsCall %>;
+				}
+			},
+			['aui-base']
+		);
 	</aui:script>
 </c:if>
 

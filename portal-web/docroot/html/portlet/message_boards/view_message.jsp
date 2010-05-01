@@ -80,64 +80,85 @@ MBThread thread = messageDisplay.getThread();
 </c:if>
 
 <aui:script>
-	function <portlet:namespace />addAnswerFlag(messageId) {
-		Liferay.Service.MB.MBMessageFlag.addAnswerFlag(
-			{
-				messageId: messageId
+	Liferay.provide(
+		window,
+		'<portlet:namespace />addAnswerFlag',
+		function(messageId) {
+			var A = AUI();
+
+			Liferay.Service.MB.MBMessageFlag.addAnswerFlag(
+				{
+					messageId: messageId
+				}
+			);
+
+			var addAnswerFlagDiv = A.one('#<portlet:namespace />addAnswerFlagDiv').cloneNode(true);
+
+			var html = addAnswerFlagDiv.html();
+
+			html = '<div class="answer" id="<portlet:namespace />deleteAnswerFlag_' + messageId + '">' + html + '</div>';
+			html = html.replace(/@MESSAGE_ID@/g, messageId);
+
+			var tags = A.one('#<portlet:namespace />message_' + messageId).one('div.tags');
+
+			if (tags) {
+				tags.html(html);
 			}
-		);
 
-		var addAnswerFlagDiv = AUI().one('#<portlet:namespace />addAnswerFlagDiv').cloneNode(true);
+			A.one('#<portlet:namespace />addAnswerFlag_' + messageId).remove();
+		},
+		['aui-base']
+	);
 
-		var html = addAnswerFlagDiv.html();
+	Liferay.provide(
+		window,
+		'<portlet:namespace />addQuickReply',
+		function(cmd, messageId) {
+			var A = AUI();
 
-		html = '<div class="answer" id="<portlet:namespace />deleteAnswerFlag_' + messageId + '">' + html + '</div>';
-		html = html.replace(/@MESSAGE_ID@/g, messageId);
+			var addQuickReplyDiv = A.one('#<portlet:namespace />addQuickReplyDiv');
 
-		var tags = AUI().one('#<portlet:namespace />message_' + messageId).one('div.tags');
-
-		if (tags) {
-			tags.html(html);
-		}
-
-		AUI().one('#<portlet:namespace />addAnswerFlag_' + messageId).remove();
-	}
-
-	function <portlet:namespace />addQuickReply(cmd, messageId) {
-		var addQuickReplyDiv = AUI().one('#<portlet:namespace />addQuickReplyDiv');
-
-		if (cmd == 'reply') {
-			addQuickReplyDiv.show();
-			addQuickReplyDiv.one('#<portlet:namespace />parentMessageId').val(messageId);
-			addQuickReplyDiv.one('textarea').focus();
-		}
-		else {
-			addQuickReplyDiv.hide();
-		}
-	}
-
-	function <portlet:namespace />deleteAnswerFlag(messageId) {
-		Liferay.Service.MB.MBMessageFlag.deleteAnswerFlag(
-			{
-				messageId: messageId
+			if (cmd == 'reply') {
+				addQuickReplyDiv.show();
+				addQuickReplyDiv.one('#<portlet:namespace />parentMessageId').val(messageId);
+				addQuickReplyDiv.one('textarea').focus();
 			}
-		);
+			else {
+				addQuickReplyDiv.hide();
+			}
+		},
+		['aui-base']
+	);
 
-		var deleteAnswerFlagDiv = AUI().one('#<portlet:namespace />deleteAnswerFlagDiv').cloneNode(true);
+	Liferay.provide(
+		window,
+		'<portlet:namespace />deleteAnswerFlag',
+		function(messageId) {
+			var A = AUI();
 
-		var html = deleteAnswerFlagDiv.html();
+			Liferay.Service.MB.MBMessageFlag.deleteAnswerFlag(
+				{
+					messageId: messageId
+				}
+			);
 
-		html = '<li id="<portlet:namespace />addAnswerFlag_' + messageId + '">' + html + '</li>';
-		html = html.replace(/@MESSAGE_ID@/g, messageId);
+			var deleteAnswerFlagDiv = A.one('#<portlet:namespace />deleteAnswerFlagDiv').cloneNode(true);
 
-		var editControls = AUI().one('#<portlet:namespace />message_' + messageId).one('ul.edit-controls');
+			var html = deleteAnswerFlagDiv.html();
 
-		if (editControls) {
-			editControls.prepend(html);
-		}
+			html = '<li id="<portlet:namespace />addAnswerFlag_' + messageId + '">' + html + '</li>';
+			html = html.replace(/@MESSAGE_ID@/g, messageId);
 
-		AUI().one('#<portlet:namespace />deleteAnswerFlag_' + messageId).remove();
-	}
+			var editControls = A.one('#<portlet:namespace />message_' + messageId).one('ul.edit-controls');
+
+			if (editControls) {
+				editControls.prepend(html);
+			}
+
+			A.one('#<portlet:namespace />deleteAnswerFlag_' + messageId).remove();
+		},
+		['aui-base']
+	);
 
 	<c:if test="<%= thread.getRootMessageId() != message.getMessageId() %>">
 		document.getElementById("<portlet:namespace />message_" + <%= message.getMessageId() %>).scrollIntoView(true);

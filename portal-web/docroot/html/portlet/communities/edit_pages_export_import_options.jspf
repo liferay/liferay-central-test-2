@@ -336,10 +336,6 @@
 		document.getElementById("<portlet:namespace />exportLessDiv").style.display = "";
 	}
 
-	function <portlet:namespace />hideDateRange() {
-		AUI().one('#<portlet:namespace />startEndDate').hide();
-	}
-
 	function <portlet:namespace />importLess() {
 		document.getElementById("<portlet:namespace />deleteDataOption").style.display = "none";
 		document.getElementById("<portlet:namespace />portletDataStrategies").style.display = "none";
@@ -358,27 +354,52 @@
 		document.getElementById("<portlet:namespace />importLessDiv").style.display = "";
 	}
 
-	function <portlet:namespace />showDateRange() {
-		AUI().one('#<portlet:namespace />startEndDate').show();
-	}
+	Liferay.provide(
+		window,
+		'<portlet:namespace />hideDateRange',
+		function() {
+			var A = AUI();
 
-	function <portlet:namespace />toggleChildren(checkbox, parentDivId) {
-		var parentDiv = AUI().one('#' + parentDivId);
+			A.one('#<portlet:namespace />startEndDate').hide();
+		},
+		['aui-base']
+	);
 
-		var enabled = checkbox.checked;
+	Liferay.provide(
+		window,
+		'<portlet:namespace />showDateRange',
+		function() {
+			var A = AUI();
 
-		if (parentDiv) {
-			parentDiv.all('input').each(
-				function(item, index, collection) {
-					var disabled = !enabled;
+			A.one('#<portlet:namespace />startEndDate').show();
+		},
+		['aui-base']
+	);
 
-					if (enabled && item.hasClass('disabled')) {
-						disabled = true;
+	Liferay.provide(
+		window,
+		'<portlet:namespace />toggleChildren',
+		function(checkbox, parentDivId) {
+			var A = AUI();
+
+			var parentDiv = A.one('#' + parentDivId);
+
+			var enabled = checkbox.checked;
+
+			if (parentDiv) {
+				parentDiv.all('input').each(
+					function(item, index, collection) {
+						var disabled = !enabled;
+
+						if (enabled && item.hasClass('disabled')) {
+							disabled = true;
+						}
+
+						item.set('disabled', disabled);
 					}
-
-					item.set('disabled', disabled);
-				}
-			);
-		}
-	}
+				);
+			}
+		},
+		['aui-base']
+	);
 </aui:script>

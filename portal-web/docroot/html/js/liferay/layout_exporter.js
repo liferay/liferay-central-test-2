@@ -1,5 +1,16 @@
 Liferay.LayoutExporter = {
-	all: function(options) {
+	icons: {
+		minus: themeDisplay.getPathThemeImages() + '/arrows/01_minus.png',
+		plus: themeDisplay.getPathThemeImages() + '/arrows/01_plus.png'
+	}
+};
+
+Liferay.provide(
+	Liferay.LayoutExporter,
+	'all',
+	function(options) {
+		var A = AUI();
+
 		options = options || {};
 
 		var pane = options.pane;
@@ -7,15 +18,15 @@ Liferay.LayoutExporter = {
 		var publish = options.publish;
 
 		if (obj && obj.checked) {
-			pane = AUI().one(pane);
+			pane = A.one(pane);
 
 			if (pane) {
 				pane.hide();
 			}
 
 			if (!publish) {
-				var publishBtn = AUI().one('#publishBtn');
-				var selectBtn = AUI().one('#selectBtn');
+				var publishBtn = A.one('#publishBtn');
+				var selectBtn = A.one('#selectBtn');
 
 				if (publishBtn) {
 					publishBtn.show();
@@ -26,7 +37,7 @@ Liferay.LayoutExporter = {
 				}
 			}
 			else {
-				var changeBtn = AUI().one('#changeBtn');
+				var changeBtn = A.one('#changeBtn');
 
 				if (changeBtn) {
 					changeBtn.hide();
@@ -34,12 +45,19 @@ Liferay.LayoutExporter = {
 			}
 		}
 	},
+	['aui-base']
+);
 
-	details: function(options) {
+Liferay.provide(
+	Liferay.LayoutExporter,
+	'details',
+	function(options) {
+		var A = AUI();
+
 		options = options || {};
 
-		var detail = AUI().one(options.detail);
-		var img = AUI().one(options.toggle);
+		var detail = A.one(options.detail);
+		var img = A.one(options.toggle);
 
 		if (detail && img) {
 			var icon = Liferay.LayoutExporter.icons.plus;
@@ -55,13 +73,15 @@ Liferay.LayoutExporter = {
 			img.attr('src', icon);
 		}
 	},
+	['aui-dialog']
+);
 
-	icons: {
-		minus: themeDisplay.getPathThemeImages() + '/arrows/01_minus.png',
-		plus: themeDisplay.getPathThemeImages() + '/arrows/01_plus.png'
-	},
+Liferay.provide(
+	Liferay.LayoutExporter,
+	'proposeLayout',
+	function(options) {
+		var A = AUI();
 
-	proposeLayout: function(options) {
 		options = options || {};
 
 		var url = options.url;
@@ -96,73 +116,75 @@ Liferay.LayoutExporter = {
 				"</form>" +
 			"</div>";
 
-		AUI().use(
-			'aui-dialog',
-			function(A) {
-				new A.Dialog(
+		new A.Dialog(
+			{
+				bodyContent: contents,
+				centered: true,
+				destroyOnClose: true,
+				modal: true,
+				title: title,
+				width: 300,
+				buttons: [
 					{
-						bodyContent: contents,
-						centered: true,
-						destroyOnClose: true,
-						modal: true,
-						title: title,
-						width: 300,
-						buttons: [
-							{
-								handler: function() {
-									this.close();
-								},
-								text: Liferay.Language.get('close')
-							}
-						]
+						handler: function() {
+							this.close();
+						},
+						text: Liferay.Language.get('close')
 					}
-				)
-				.render();
+				]
+			}
+		).render();
+	},
+	['aui-dialog']
+);
+
+Liferay.provide(
+	Liferay.LayoutExporter,
+	'publishToLive',
+	function(options) {
+		var A = AUI();
+
+		options = options || {};
+
+		var messageId = options.messageId;
+		var url = options.url;
+		var title = options.title;
+
+		var dialog = new A.Dialog(
+			{
+				centered: true,
+				destroyOnClose: true,
+				id: messageId,
+				modal: true,
+				title: title,
+				width: 600,
+				buttons: [
+					{
+						handler: function() {
+							this.close();
+						},
+						text: Liferay.Language.get('close')
+					}
+				]
+			}
+		).render();
+
+		dialog.plug(
+			A.Plugin.IO,
+			{
+				uri: url
 			}
 		);
 	},
+	['aui-dialog', 'aui-io']
+);
 
-	publishToLive: function(options) {
-		AUI().use(
-			'aui-dialog',
-			function(A) {
-				options = options || {};
+Liferay.provide(
+	Liferay.LayoutExporter,
+	'selected',
+	function(options) {
+		var A = AUI();
 
-				var messageId = options.messageId;
-				var url = options.url;
-				var title = options.title;
-
-				var dialog = new A.Dialog(
-					{
-						centered: true,
-						destroyOnClose: true,
-						id: messageId,
-						modal: true,
-						title: title,
-						width: 600,
-						buttons: [
-							{
-								handler: function() {
-									this.close();
-								},
-								text: Liferay.Language.get('close')
-							}
-						]
-					}
-				)
-				.render();
-
-				dialog.plug(
-					A.Plugin.IO,
-					{
-						uri: url
-					}
-				);
-			}
-		);
-	},
-
-	selected: function(options) {
 		options = options || {};
 
 		var pane = options.pane;
@@ -170,15 +192,15 @@ Liferay.LayoutExporter = {
 		var publish = options.publish;
 
 		if (obj && obj.checked) {
-			pane = AUI().one(pane);
+			pane = A.one(pane);
 
 			if (pane) {
 				pane.show();
 			}
 
 			if (!publish) {
-				var publishBtn = AUI().one('#publishBtn');
-				var selectBtn = AUI().one('#selectBtn');
+				var publishBtn = A.one('#publishBtn');
+				var selectBtn = A.one('#selectBtn');
 
 				if (publishBtn) {
 					publishBtn.hide();
@@ -189,12 +211,13 @@ Liferay.LayoutExporter = {
 				}
 			}
 			else {
-				var changeBtn = AUI().one('#changeBtn');
+				var changeBtn = A.one('#changeBtn');
 
 				if (changeBtn) {
 					changeBtn.show();
 				}
 			}
 		}
-	}
-};
+	},
+	['aui-base']
+);

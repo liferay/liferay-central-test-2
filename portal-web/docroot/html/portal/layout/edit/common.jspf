@@ -269,117 +269,129 @@
 		descriptionChanged = true;
 	}
 
-	function <portlet:namespace />updateMetaLanguage() {
-		var robotsNode = AUI().one('#<portlet:namespace />meta-robots_temp');
-		var keywordsNode = AUI().one('#<portlet:namespace />meta-keywords_temp');
-		var descriptionNode = AUI().one('#<portlet:namespace />meta-description_temp');
+	Liferay.provide(
+		window,
+		'<portlet:namespace />updateMetaLanguage',
+		function() {
+			var A = AUI();
 
-		if (lastMetaLanguageId != "<%= defaultLanguageId %>") {
-			if (robotsChanged) {
+			var robotsNode = A.one('#<portlet:namespace />meta-robots_temp');
+			var keywordsNode = A.one('#<portlet:namespace />meta-keywords_temp');
+			var descriptionNode = A.one('#<portlet:namespace />meta-description_temp');
+
+			if (lastMetaLanguageId != "<%= defaultLanguageId %>") {
+				if (robotsChanged) {
+					var robotsValue = (robotsNode && robotsNode.val()) || '';
+
+					var lastRobotsNode = A.one('#<portlet:namespace />meta-robots_' + lastMetaLanguageId);
+
+					if (lastRobotsNode) {
+						lastRobotsNode.val(robotsValue);
+					}
+
+					robotsChanged = false;
+				}
+
+				if (keywordsChanged) {
+					var keywordsValue = (keywordsNode && keywordsNode.val()) || '';
+
+					var lastKeywordsNode = A.one('#<portlet:namespace />meta-keywords_' + lastMetaLanguageId);
+
+					if (lastKeywordsNode) {
+						lastKeywordsNode.val(keywordsValue);
+					}
+
+					keywordsChanged = false;
+				}
+
+				if (descriptionChanged) {
+					var descriptionValue = (descriptionNode && descriptionNode.val()) || '';
+
+					var lastDescriptionNode = A.one('#<portlet:namespace />meta-description_' + lastMetaLanguageId);
+
+					if (lastDescriptionNode) {
+						lastDescriptionNode.val(descriptionValue);
+					}
+
+					descriptionChanged = false;
+				}
+			}
+
+			var selLanguageId = '';
+
+			for (var i = 0; i < document.<portlet:namespace />fm.<portlet:namespace />metaLanguageId.length; i++) {
+				if (document.<portlet:namespace />fm.<portlet:namespace />metaLanguageId.options[i].selected) {
+					selLanguageId = document.<portlet:namespace />fm.<portlet:namespace />metaLanguageId.options[i].value;
+
+					break;
+				}
+			}
+
+			var action = 'hide';
+
+			if (selLanguageId != '') {
+				<portlet:namespace />updateMetaLanguageTemps(selLanguageId);
+
+				action = 'show';
+			}
+
+			if (robotsNode) {
+				robotsNode[action]();
+			}
+
+			if (keywordsNode) {
+				keywordsNode[action]();
+			}
+
+			if (descriptionNode) {
+				descriptionNode[action]();
+			}
+
+			lastMetaLanguageId = selLanguageId;
+		},
+		['aui-base']
+	);
+
+	Liferay.provide(
+		window,
+		'<portlet:namespace />updateMetaLanguageTemps',
+		function(lang) {
+			var A = AUI();
+
+			if (lang != "<%= defaultLanguageId %>") {
+				var robotsNode = A.one('#<portlet:namespace />meta-robots_' + lang);
+				var keywordsNode = A.one('#<portlet:namespace />meta-keywords_' + lang);
+				var descriptionNode = A.one('#<portlet:namespace />meta-description_' + lang);
+				var defaultRobotsNode = A.one('#<portlet:namespace />meta-robots_<%= defaultLanguageId %>');
+				var defaultKeywordsNode = A.one('#<portlet:namespace />meta-keywords_<%= defaultLanguageId %>');
+				var defaultDescriptionNode = A.one('#<portlet:namespace />meta-description_<%= defaultLanguageId %>');
+
 				var robotsValue = (robotsNode && robotsNode.val()) || '';
-
-				var lastRobotsNode = AUI().one('#<portlet:namespace />meta-robots_' + lastMetaLanguageId);
-
-				if (lastRobotsNode) {
-					lastRobotsNode.val(robotsValue);
-				}
-
-				robotsChanged = false;
-			}
-
-			if (keywordsChanged) {
 				var keywordsValue = (keywordsNode && keywordsNode.val()) || '';
-
-				var lastKeywordsNode = AUI().one('#<portlet:namespace />meta-keywords_' + lastMetaLanguageId);
-
-				if (lastKeywordsNode) {
-					lastKeywordsNode.val(keywordsValue);
-				}
-
-				keywordsChanged = false;
-			}
-
-			if (descriptionChanged) {
 				var descriptionValue = (descriptionNode && descriptionNode.val()) || '';
+				var defaultRobotsValue = (defaultRobotsNode && defaultRobotsNode.val()) || '';
+				var defaultKeywordsValue = (defaultKeywordsNode && defaultKeywordsNode.val()) || '';
+				var defaultDescriptionValue = (defaultDescriptionNode && defaultDescriptionNode.val()) || '';
 
-				var lastDescriptionNode = AUI().one('#<portlet:namespace />meta-description_' + lastMetaLanguageId);
+				var robotsTempNode = A.one('#<portlet:namespace />meta-robots_temp');
+				var keywordsTempNode = A.one('#<portlet:namespace />meta-keywords_temp');
+				var descriptionTempNode = A.one('#<portlet:namespace />meta-description_temp');
 
-				if (lastDescriptionNode) {
-					lastDescriptionNode.val(descriptionValue);
+				if (robotsTempNode) {
+					robotsTempNode.val(robotsValue || defaultRobotsValue);
 				}
 
-				descriptionChanged = false;
+				if (keywordsTempNode) {
+					keywordsTempNode.val(keywordsValue || defaultKeywordsValue)
+				}
+
+				if (descriptionTempNode) {
+					descriptionTempNode.val(descriptionValue || defaultDescriptionValue);
+				}
 			}
-		}
-
-		var selLanguageId = '';
-
-		for (var i = 0; i < document.<portlet:namespace />fm.<portlet:namespace />metaLanguageId.length; i++) {
-			if (document.<portlet:namespace />fm.<portlet:namespace />metaLanguageId.options[i].selected) {
-				selLanguageId = document.<portlet:namespace />fm.<portlet:namespace />metaLanguageId.options[i].value;
-
-				break;
-			}
-		}
-
-		var action = 'hide';
-
-		if (selLanguageId != '') {
-			<portlet:namespace />updateMetaLanguageTemps(selLanguageId);
-
-			action = 'show';
-		}
-
-		if (robotsNode) {
-			robotsNode[action]();
-		}
-
-		if (keywordsNode) {
-			keywordsNode[action]();
-		}
-
-		if (descriptionNode) {
-			descriptionNode[action]();
-		}
-
-		lastMetaLanguageId = selLanguageId;
-
-		return null;
-	}
-
-	function <portlet:namespace />updateMetaLanguageTemps(lang) {
-		if (lang != "<%= defaultLanguageId %>") {
-			var robotsNode = AUI().one('#<portlet:namespace />meta-robots_' + lang);
-			var keywordsNode = AUI().one('#<portlet:namespace />meta-keywords_' + lang);
-			var descriptionNode = AUI().one('#<portlet:namespace />meta-description_' + lang);
-			var defaultRobotsNode = AUI().one('#<portlet:namespace />meta-robots_<%= defaultLanguageId %>');
-			var defaultKeywordsNode = AUI().one('#<portlet:namespace />meta-keywords_<%= defaultLanguageId %>');
-			var defaultDescriptionNode = AUI().one('#<portlet:namespace />meta-description_<%= defaultLanguageId %>');
-
-			var robotsValue = (robotsNode && robotsNode.val()) || '';
-			var keywordsValue = (keywordsNode && keywordsNode.val()) || '';
-			var descriptionValue = (descriptionNode && descriptionNode.val()) || '';
-			var defaultRobotsValue = (defaultRobotsNode && defaultRobotsNode.val()) || '';
-			var defaultKeywordsValue = (defaultKeywordsNode && defaultKeywordsNode.val()) || '';
-			var defaultDescriptionValue = (defaultDescriptionNode && defaultDescriptionNode.val()) || '';
-
-			var robotsTempNode = AUI().one('#<portlet:namespace />meta-robots_temp');
-			var keywordsTempNode = AUI().one('#<portlet:namespace />meta-keywords_temp');
-			var descriptionTempNode = AUI().one('#<portlet:namespace />meta-description_temp');
-
-			if (robotsTempNode) {
-				robotsTempNode.val(robotsValue || defaultRobotsValue);
-			}
-
-			if (keywordsTempNode) {
-				keywordsTempNode.val(keywordsValue || defaultKeywordsValue)
-			}
-
-			if (descriptionTempNode) {
-				descriptionTempNode.val(descriptionValue || defaultDescriptionValue);
-			}
-		}
-	}
+		},
+		['aui-base']
+	);
 
 	<portlet:namespace />updateMetaLanguageTemps(lastMetaLanguageId);
 </aui:script>

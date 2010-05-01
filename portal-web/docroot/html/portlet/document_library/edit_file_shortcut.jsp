@@ -193,26 +193,33 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 		titleEl.innerHTML = title;
 	}
 
-	function <portlet:namespace />selectGroup(groupId, groupName) {
-		if (document.<portlet:namespace />fm.<portlet:namespace />toGroupId.value != groupId) {
-			<portlet:namespace />selectFileEntry("", "", "");
-		}
+	Liferay.provide(
+		window,
+		'<portlet:namespace />selectGroup',
+		function(groupId, groupName) {
+			var A = AUI();
 
-		document.<portlet:namespace />fm.<portlet:namespace />toGroupId.value = groupId;
-		document.<portlet:namespace />fm.<portlet:namespace />toFolderId.value = "";
-		document.<portlet:namespace />fm.<portlet:namespace />toName.value = "";
+			if (document.<portlet:namespace />fm.<portlet:namespace />toGroupId.value != groupId) {
+				<portlet:namespace />selectFileEntry("", "", "");
+			}
 
-		var nameEl = document.getElementById("<portlet:namespace />toGroupName");
+			document.<portlet:namespace />fm.<portlet:namespace />toGroupId.value = groupId;
+			document.<portlet:namespace />fm.<portlet:namespace />toFolderId.value = "";
+			document.<portlet:namespace />fm.<portlet:namespace />toName.value = "";
 
-		nameEl.innerHTML = groupName + "&nbsp;";
+			var nameEl = document.getElementById("<portlet:namespace />toGroupName");
 
-		var button = AUI().one('#<portlet:namespace />selectToFileEntryButton');
+			nameEl.innerHTML = groupName + "&nbsp;";
 
-		if (button) {
-			button.set('disabled', false);
-			button.get('parentNode').removeClass('aui-input-disabled');
-		}
-	}
+			var button = A.one('#<portlet:namespace />selectToFileEntryButton');
+
+			if (button) {
+				button.set('disabled', false);
+				button.get('parentNode').removeClass('aui-input-disabled');
+			}
+		},
+		['aui-base']
+	);
 </aui:script>
 
 <%

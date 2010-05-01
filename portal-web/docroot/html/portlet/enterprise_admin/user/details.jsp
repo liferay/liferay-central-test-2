@@ -169,25 +169,39 @@ boolean deletePortrait = ParamUtil.getBoolean(request, "deletePortrait");
 </aui:fieldset>
 
 <aui:script>
-	function <portlet:namespace />changePortrait(newPortraitURL) {
-		AUI().one('#<portlet:namespace />avatar').attr('src', newPortraitURL);
-		AUI().one('.avatar').attr('src', newPortraitURL);
-
-		AUI().one('#<portlet:namespace />deletePortrait').val(false);
-	}
-
-	function <portlet:namespace />deletePortrait(defaultPortraitURL) {
-		AUI().one('#<portlet:namespace />deletePortrait').val(true);
-
-		AUI().one('#<portlet:namespace />avatar').attr('src', defaultPortraitURL);
-		AUI().one('.avatar').attr('src', defaultPortraitURL);
-	}
-
 	function <portlet:namespace />openEditUserPortraitWindow(editUserPortraitURL) {
 		var editUserPortraitWindow = window.open(editUserPortraitURL, 'change', 'directories=no,height=400,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=500');
 
 		editUserPortraitWindow.focus();
 	}
+
+	Liferay.provide(
+		window,
+		'<portlet:namespace />changePortrait',
+		function(newPortraitURL) {
+			var A = AUI();
+
+			A.one('#<portlet:namespace />avatar').attr('src', newPortraitURL);
+			A.one('.avatar').attr('src', newPortraitURL);
+
+			A.one('#<portlet:namespace />deletePortrait').val(false);
+		},
+		['aui-base']
+	);
+
+	Liferay.provide(
+		window,
+		'<portlet:namespace />deletePortrait',
+		function(defaultPortraitURL) {
+			var A = AUI();
+
+			A.one('#<portlet:namespace />deletePortrait').val(true);
+
+			A.one('#<portlet:namespace />avatar').attr('src', defaultPortraitURL);
+			A.one('.avatar').attr('src', defaultPortraitURL);
+		},
+		['aui-base']
+	);
 </aui:script>
 
 <aui:script use="aui-base">

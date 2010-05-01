@@ -172,25 +172,32 @@ if (choiceName > 0) {
 		submitForm(document.<portlet:namespace />fm);
 	}
 
-	function <portlet:namespace />disableInputDate(date, checked) {
-		document.<portlet:namespace />fm["<portlet:namespace />" + date + "Month"].disabled = checked;
-		document.<portlet:namespace />fm["<portlet:namespace />" + date + "Day"].disabled = checked;
-		document.<portlet:namespace />fm["<portlet:namespace />" + date + "Year"].disabled = checked;
-		document.<portlet:namespace />fm["<portlet:namespace />" + date + "Hour"].disabled = checked;
-		document.<portlet:namespace />fm["<portlet:namespace />" + date + "Minute"].disabled = checked;
-		document.<portlet:namespace />fm["<portlet:namespace />" + date + "AmPm"].disabled = checked;
-
-		var imageInputId = AUI().one(document.<portlet:namespace />fm["<portlet:namespace />" + date + "ImageInputIdInput"]);
-
-		if (imageInputId) {
-			imageInputId.toggleClass('disabled');
-		}
-	}
-
 	function <portlet:namespace />saveQuestion() {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= question == null ? Constants.ADD : Constants.UPDATE %>";
 		submitForm(document.<portlet:namespace />fm);
 	}
+
+	Liferay.provide(
+		window,
+		'<portlet:namespace />disableInputDate',
+		function(date, checked) {
+			var A = AUI();
+
+			document.<portlet:namespace />fm["<portlet:namespace />" + date + "Month"].disabled = checked;
+			document.<portlet:namespace />fm["<portlet:namespace />" + date + "Day"].disabled = checked;
+			document.<portlet:namespace />fm["<portlet:namespace />" + date + "Year"].disabled = checked;
+			document.<portlet:namespace />fm["<portlet:namespace />" + date + "Hour"].disabled = checked;
+			document.<portlet:namespace />fm["<portlet:namespace />" + date + "Minute"].disabled = checked;
+			document.<portlet:namespace />fm["<portlet:namespace />" + date + "AmPm"].disabled = checked;
+
+			var imageInputId = A.one(document.<portlet:namespace />fm["<portlet:namespace />" + date + "ImageInputIdInput"]);
+
+			if (imageInputId) {
+				imageInputId.toggleClass('disabled');
+			}
+		},
+		['aui-base']
+	);
 
 	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />title);

@@ -70,21 +70,28 @@ function UploadProgress_updateBar(percent, filename) {
 	this.currentPercent = percent;
 }
 
-function UploadProgress_updateIFrame(height) {
-	var uploadPollerIFrame = document.getElementById(this.uploadProgressId + "-iframe");
-
-	height += 40;
-
-	var uploadIframe = AUI().one(uploadPollerIFrame).setStyle('height', height + 'px');
-
-	var iframeBody = AUI().one(uploadPollerIFrame.contentWindow.document.body);
-
-	iframeBody.replaceClass('portal-popup', 'portal-iframe');
-	iframeBody.setStyle('height', height + 'px');
-}
-
 function UploadProgress_updateProgress() {
 	var uploadProgressPoller = document.getElementById(this.uploadProgressId + "-poller");
 
 	uploadProgressPoller.src = themeDisplay.getPathMain() + "/portal/upload_progress_poller?uploadProgressId=" + this.uploadProgressId;
 }
+
+Liferay.provide(
+	window,
+	'UploadProgress_updateIFrame',
+	function(height) {
+		var A = AUI();
+
+		var uploadPollerIFrame = document.getElementById(this.uploadProgressId + "-iframe");
+
+		height += 40;
+
+		var uploadIframe = A.one(uploadPollerIFrame).setStyle('height', height + 'px');
+
+		var iframeBody = A.one(uploadPollerIFrame.contentWindow.document.body);
+
+		iframeBody.replaceClass('portal-popup', 'portal-iframe');
+		iframeBody.setStyle('height', height + 'px');
+	},
+	['aui-base']
+);

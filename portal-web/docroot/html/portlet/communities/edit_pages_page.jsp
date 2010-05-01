@@ -400,112 +400,131 @@ for (int i = 0; i < PropsValues.LAYOUT_TYPES.length; i++) {
 		titleChanged = true;
 	}
 
-	function <portlet:namespace />toggleLayoutTypeFields(type) {
-		var layoutTypeForms = AUI().all('.layout-type-form');
-		var currentType = 'layout-type-form-' + type;
+	Liferay.provide(
+		window,
+		'<portlet:namespace />toggleLayoutTypeFields',
+		function(type) {
+			var A = AUI();
 
-		layoutTypeForms.each(
-			function(item, index, collection) {
-				var action = 'hide';
-				var disabled = true;
+			var layoutTypeForms = A.all('.layout-type-form');
+			var currentType = 'layout-type-form-' + type;
 
-				if (item.hasClass(currentType)) {
-					action = 'show';
-					disabled = false;
+			layoutTypeForms.each(
+				function(item, index, collection) {
+					var action = 'hide';
+					var disabled = true;
+
+					if (item.hasClass(currentType)) {
+						action = 'show';
+						disabled = false;
+					}
+
+					item[action]();
+
+					item.all('input, select, textarea').set('disabled', disabled);
+				}
+			);
+		},
+		['aui-base']
+	);
+
+	Liferay.provide(
+		window,
+		'<portlet:namespace />updateLanguage',
+		function(type) {
+			var A = AUI();
+
+			var nameNode = A.one('#<portlet:namespace />name_temp');
+			var titleNode = A.one('#<portlet:namespace />title_temp');
+
+			if (lastLanguageId != "<%= defaultLanguageId %>") {
+				if (nameChanged) {
+					var nameValue = (nameNode && nameNode.val()) || '';
+
+					var lastLanguageNameNode = A.one('#<portlet:namespace />name_' + lastLanguageId);
+
+					if (lastLanguageNameNode) {
+						lastLanguageNameNode.val(nameValue);
+					}
+
+					nameChanged = false;
 				}
 
-				item[action]();
+				if (titleChanged) {
+					var titleValue = (titleNode && titleNode.val()) || '';
 
-				item.all('input, select, textarea').set('disabled', disabled);
+					var lastLanguageTitleNode = A.one('#<portlet:namespace />title_' + lastLanguageId);
+
+					if (lastLanguageTitleNode) {
+						lastLanguageTitleNode.val(titleValue);
+					}
+
+					titleChanged = false;
+				}
 			}
-		);
-	}
 
-	function <portlet:namespace />updateLanguage() {
-		var nameNode = AUI().one('#<portlet:namespace />name_temp');
-		var titleNode = AUI().one('#<portlet:namespace />title_temp');
+			var selLanguageId = "";
 
-		if (lastLanguageId != "<%= defaultLanguageId %>") {
-			if (nameChanged) {
+			for (var i = 0; i < document.<portlet:namespace />fm.<portlet:namespace />languageId.length; i++) {
+				if (document.<portlet:namespace />fm.<portlet:namespace />languageId.options[i].selected) {
+					selLanguageId = document.<portlet:namespace />fm.<portlet:namespace />languageId.options[i].value;
+
+					break;
+				}
+			}
+
+			var action = 'hide';
+
+			if (selLanguageId != "") {
+				<portlet:namespace />updateLanguageTemps(selLanguageId);
+
+				action = 'show';
+			}
+
+			if (nameNode) {
+				nameNode[action]();
+			}
+
+			if (titleNode) {
+				titleNode[action]();
+			}
+
+			lastLanguageId = selLanguageId;
+		},
+		['aui-base']
+	);
+
+	Liferay.provide(
+		window,
+		'<portlet:namespace />updateLanguageTemps',
+		function(lang) {
+			var A = AUI();
+
+			if (lang != "<%= defaultLanguageId %>") {
+				var nameNode = A.one('#<portlet:namespace />name_' + lang);
+				var titleNode = A.one('#<portlet:namespace />title_' + lang);
+				var defaultName = A.one('#<portlet:namespace />name_<%= defaultLanguageId %>');
+				var defaultTitle = A.one('#<portlet:namespace />title_<%= defaultLanguageId %>');
+
 				var nameValue = (nameNode && nameNode.val()) || '';
-
-				var lastLanguageNameNode = AUI().one('#<portlet:namespace />name_' + lastLanguageId);
-
-				if (lastLanguageNameNode) {
-					lastLanguageNameNode.val(nameValue);
-				}
-
-				nameChanged = false;
-			}
-
-			if (titleChanged) {
 				var titleValue = (titleNode && titleNode.val()) || '';
+				var defaultNameValue = (defaultName && defaultName.val()) || '';
+				var defaultTitleValue = (defaultTitle && defaultTitle.val()) || '';
 
-				var lastLanguageTitleNode = AUI().one('#<portlet:namespace />title_' + lastLanguageId);
+				var nameTempNode = A.one('#<portlet:namespace />name_temp');
+				var titleTempNode = A.one('#<portlet:namespace />title_temp');
 
-				if (lastLanguageTitleNode) {
-					lastLanguageTitleNode.val(titleValue);
+				if (nameTempNode) {
+					nameTempNode.val(nameValue || defaultNameValue);
 				}
 
-				titleChanged = false;
+				if (titleTempNode) {
+					titleTempNode.val(titleValue || defaultTitleValue);
+				}
 			}
-		}
-
-		var selLanguageId = "";
-
-		for (var i = 0; i < document.<portlet:namespace />fm.<portlet:namespace />languageId.length; i++) {
-			if (document.<portlet:namespace />fm.<portlet:namespace />languageId.options[i].selected) {
-				selLanguageId = document.<portlet:namespace />fm.<portlet:namespace />languageId.options[i].value;
-
-				break;
-			}
-		}
-
-		var action = 'hide';
-
-		if (selLanguageId != "") {
-			<portlet:namespace />updateLanguageTemps(selLanguageId);
-
-			action = 'show';
-		}
-
-		if (nameNode) {
-			nameNode[action]();
-		}
-
-		if (titleNode) {
-			titleNode[action]();
-		}
-
-		lastLanguageId = selLanguageId;
-
-		return null;
-	}
-
-	function <portlet:namespace />updateLanguageTemps(lang) {
-		if (lang != "<%= defaultLanguageId %>") {
-			var nameNode = AUI().one('#<portlet:namespace />name_' + lang);
-			var titleNode = AUI().one('#<portlet:namespace />title_' + lang);
-			var defaultName = AUI().one('#<portlet:namespace />name_<%= defaultLanguageId %>');
-			var defaultTitle = AUI().one('#<portlet:namespace />title_<%= defaultLanguageId %>');
-
-			var nameValue = (nameNode && nameNode.val()) || '';
-			var titleValue = (titleNode && titleNode.val()) || '';
-			var defaultNameValue = (defaultName && defaultName.val()) || '';
-			var defaultTitleValue = (defaultTitle && defaultTitle.val()) || '';
-
-			var nameTempNode = AUI().one('#<portlet:namespace />name_temp');
-			var titleTempNode = AUI().one('#<portlet:namespace />title_temp');
-
-			if (nameTempNode) {
-				nameTempNode.val(nameValue || defaultNameValue);
-			}
-
-			if (titleTempNode) {
-				titleTempNode.val(titleValue || defaultTitleValue);
-			}
-		}
-	}
+		},
+		['aui-base']
+	);
 </aui:script>
 
 <aui:script use="aui-base">

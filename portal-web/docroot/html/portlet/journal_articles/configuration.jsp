@@ -178,15 +178,29 @@ if (Validator.isNotNull(structureId)) {
 </aui:form>
 
 <aui:script>
-	function <portlet:namespace />removeStructure() {
-		document.<portlet:namespace />fm1.<portlet:namespace />structureId.value = "";
+	Liferay.provide(
+		window,
+		'<portlet:namespace />removeStructure',
+		function() {
+			var A = AUI();
 
-		AUI().one('#<portlet:namespace/>structure').html('<liferay-ui:message key="any" />');
-	}
+			document.<portlet:namespace />fm1.<portlet:namespace />structureId.value = "";
 
-	function <portlet:namespace />selectStructure(structureId) {
-		document.<portlet:namespace />fm1.<portlet:namespace />structureId.value = structureId;
+			A.one('#<portlet:namespace/>structure').html('<liferay-ui:message key="any" />');
+		},
+		['aui-base']
+	);
 
-		AUI().one('#<portlet:namespace/>structure').html(structureId);
-	}
+	Liferay.provide(
+		window,
+		'<portlet:namespace />selectStructure',
+		function(structureId) {
+			var A = AUI();
+
+			document.<portlet:namespace />fm1.<portlet:namespace />structureId.value = structureId;
+
+			A.one('#<portlet:namespace/>structure').html(structureId);
+		},
+		['aui-base']
+	);
 </aui:script>

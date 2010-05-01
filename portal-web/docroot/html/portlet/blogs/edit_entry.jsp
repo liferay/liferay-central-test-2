@@ -153,118 +153,125 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 		return "<%= UnicodeFormatter.toString(content) %>";
 	}
 
-	function <portlet:namespace />saveEntry(draft) {
-		var title = document.<portlet:namespace />fm.<portlet:namespace />title.value;
-		var content = window.<portlet:namespace />editor.getHTML();
+	Liferay.provide(
+		window,
+		'<portlet:namespace />saveEntry',
+		function(draft) {
+			var A = AUI();
 
-		var saveButton = AUI().one('#<portlet:namespace />saveButton');
-		var cancelButton = AUI().one('#<portlet:namespace />cancelButton');
+			var title = document.<portlet:namespace />fm.<portlet:namespace />title.value;
+			var content = window.<portlet:namespace />editor.getHTML();
 
-		var saveStatus = AUI().one('#<portlet:namespace />saveStatus');
-		var saveText = '<%= UnicodeLanguageUtil.format(pageContext, "draft-saved-at-x", "[TIME]", false) %>';
+			var saveButton = A.one('#<portlet:namespace />saveButton');
+			var cancelButton = A.one('#<portlet:namespace />cancelButton');
 
-		if (draft) {
-			if ((title == '') || (content == '')) {
-				return;
-			}
+			var saveStatus = A.one('#<portlet:namespace />saveStatus');
+			var saveText = '<%= UnicodeLanguageUtil.format(pageContext, "draft-saved-at-x", "[TIME]", false) %>';
 
-			if ((<portlet:namespace />oldTitle == title) &&
-				(<portlet:namespace />oldContent == content)) {
+			if (draft) {
+				if ((title == '') || (content == '')) {
+					return;
+				}
 
-				return;
-			}
+				if ((<portlet:namespace />oldTitle == title) &&
+					(<portlet:namespace />oldContent == content)) {
 
-			<portlet:namespace />oldTitle = title;
-			<portlet:namespace />oldContent = content;
+					return;
+				}
 
-			var url = '<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/blogs/edit_entry" /></portlet:actionURL>';
+				<portlet:namespace />oldTitle = title;
+				<portlet:namespace />oldContent = content;
 
-			AUI().io(
-				url,
-				{
-					data: {
-						<portlet:namespace />assetTagNames: document.<portlet:namespace />fm.<portlet:namespace />assetTagNames.value,
-						<portlet:namespace /><%= Constants.CMD %>: '<%= Constants.ADD %>',
-						<portlet:namespace />content: content,
-						<portlet:namespace />displayDateAmPm: document.<portlet:namespace />fm.<portlet:namespace />displayDateAmPm.value,
-						<portlet:namespace />displayDateDay: document.<portlet:namespace />fm.<portlet:namespace />displayDateDay.value,
-						<portlet:namespace />displayDateHour: document.<portlet:namespace />fm.<portlet:namespace />displayDateHour.value,
-						<portlet:namespace />displayDateMinute: document.<portlet:namespace />fm.<portlet:namespace />displayDateMinute.value,
-						<portlet:namespace />displayDateMonth: document.<portlet:namespace />fm.<portlet:namespace />displayDateMonth.value,
-						<portlet:namespace />displayDateYear: document.<portlet:namespace />fm.<portlet:namespace />displayDateYear.value,
-						<portlet:namespace />entryId: document.<portlet:namespace />fm.<portlet:namespace />entryId.value,
-						<portlet:namespace />redirect: document.<portlet:namespace />fm.<portlet:namespace />redirect.value,
-						<portlet:namespace />referringPortletResource: document.<portlet:namespace />fm.<portlet:namespace />referringPortletResource.value,
-						<portlet:namespace />title: title,
-						<portlet:namespace />workflowAction: <%= WorkflowConstants.ACTION_SAVE_DRAFT %>
-					},
-					method: 'POST',
-					on: {
-						failure: function() {
-							if (saveStatus) {
-								saveStatus.set('className', 'save-status portlet-msg-error');
-								saveStatus.html('<%= UnicodeLanguageUtil.get(pageContext, "could-not-save-draft-to-the-server") %>');
-							}
+				var url = '<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/blogs/edit_entry" /></portlet:actionURL>';
+
+				A.io(
+					url,
+					{
+						data: {
+							<portlet:namespace />assetTagNames: document.<portlet:namespace />fm.<portlet:namespace />assetTagNames.value,
+							<portlet:namespace /><%= Constants.CMD %>: '<%= Constants.ADD %>',
+							<portlet:namespace />content: content,
+							<portlet:namespace />displayDateAmPm: document.<portlet:namespace />fm.<portlet:namespace />displayDateAmPm.value,
+							<portlet:namespace />displayDateDay: document.<portlet:namespace />fm.<portlet:namespace />displayDateDay.value,
+							<portlet:namespace />displayDateHour: document.<portlet:namespace />fm.<portlet:namespace />displayDateHour.value,
+							<portlet:namespace />displayDateMinute: document.<portlet:namespace />fm.<portlet:namespace />displayDateMinute.value,
+							<portlet:namespace />displayDateMonth: document.<portlet:namespace />fm.<portlet:namespace />displayDateMonth.value,
+							<portlet:namespace />displayDateYear: document.<portlet:namespace />fm.<portlet:namespace />displayDateYear.value,
+							<portlet:namespace />entryId: document.<portlet:namespace />fm.<portlet:namespace />entryId.value,
+							<portlet:namespace />redirect: document.<portlet:namespace />fm.<portlet:namespace />redirect.value,
+							<portlet:namespace />referringPortletResource: document.<portlet:namespace />fm.<portlet:namespace />referringPortletResource.value,
+							<portlet:namespace />title: title,
+							<portlet:namespace />workflowAction: <%= WorkflowConstants.ACTION_SAVE_DRAFT %>
 						},
-						start: function() {
-							if (saveButton) {
-								saveButton.attr('disabled', true);
-							}
+						method: 'POST',
+						on: {
+							failure: function() {
+								if (saveStatus) {
+									saveStatus.set('className', 'save-status portlet-msg-error');
+									saveStatus.html('<%= UnicodeLanguageUtil.get(pageContext, "could-not-save-draft-to-the-server") %>');
+								}
+							},
+							start: function() {
+								if (saveButton) {
+									saveButton.attr('disabled', true);
+								}
 
-							if (saveStatus) {
-								saveStatus.set('className', 'save-status portlet-msg-info pending');
-								saveStatus.html('<%= UnicodeLanguageUtil.get(pageContext, "saving-draft") %>');
-							}
-						},
-						success: function(id, obj) {
-							var instance = this;
+								if (saveStatus) {
+									saveStatus.set('className', 'save-status portlet-msg-info pending');
+									saveStatus.html('<%= UnicodeLanguageUtil.get(pageContext, "saving-draft") %>');
+								}
+							},
+							success: function(id, obj) {
+								var instance = this;
 
-							var message = AUI().JSON.parse(obj.responseText);
+								var message = A.JSON.parse(obj.responseText);
 
-							document.<portlet:namespace />fm.<portlet:namespace />entryId.value = message.entryId;
-							document.<portlet:namespace />fm.<portlet:namespace />redirect.value = message.redirect;
+								document.<portlet:namespace />fm.<portlet:namespace />entryId.value = message.entryId;
+								document.<portlet:namespace />fm.<portlet:namespace />redirect.value = message.redirect;
 
-							if (saveButton) {
-								saveButton.attr('disabled', false);
-							}
+								if (saveButton) {
+									saveButton.attr('disabled', false);
+								}
 
-							var tabs1BackButton = AUI().one('#<portlet:namespace />tabs1TabsBack');
+								var tabs1BackButton = A.one('#<portlet:namespace />tabs1TabsBack');
 
-							if (tabs1BackButton) {
-								tabs1BackButton.attr('href', message.redirect);
-							}
+								if (tabs1BackButton) {
+									tabs1BackButton.attr('href', message.redirect);
+								}
 
-							if (cancelButton) {
-								cancelButton.detach('click');
+								if (cancelButton) {
+									cancelButton.detach('click');
 
-								cancelButton.on(
-									'click',
-									function() {
-										location.href = message.redirect;
-									}
-								);
-							}
+									cancelButton.on(
+										'click',
+										function() {
+											location.href = message.redirect;
+										}
+									);
+								}
 
-							var now = saveText.replace(/\[TIME\]/gim, (new Date()).toString());
+								var now = saveText.replace(/\[TIME\]/gim, (new Date()).toString());
 
-							if (saveStatus) {
-								saveStatus.set('className', 'save-status portlet-msg-success');
-								saveStatus.html(now);
+								if (saveStatus) {
+									saveStatus.set('className', 'save-status portlet-msg-success');
+									saveStatus.html(now);
+								}
 							}
 						}
 					}
-				}
-			);
-		}
-		else {
-			<portlet:namespace />clearSaveDraftIntervalId();
+				);
+			}
+			else {
+				<portlet:namespace />clearSaveDraftIntervalId();
 
-			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= entry == null ? Constants.ADD : Constants.UPDATE %>";
-			document.<portlet:namespace />fm.<portlet:namespace />content.value = content;
-			document.<portlet:namespace />fm.<portlet:namespace />workflowAction.value = <%= WorkflowConstants.ACTION_PUBLISH %>;
-			submitForm(document.<portlet:namespace />fm);
-		}
-	}
+				document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= entry == null ? Constants.ADD : Constants.UPDATE %>";
+				document.<portlet:namespace />fm.<portlet:namespace />content.value = content;
+				document.<portlet:namespace />fm.<portlet:namespace />workflowAction.value = <%= WorkflowConstants.ACTION_PUBLISH %>;
+				submitForm(document.<portlet:namespace />fm);
+			}
+		},
+		['aui-io']
+	);
 
 	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />title);

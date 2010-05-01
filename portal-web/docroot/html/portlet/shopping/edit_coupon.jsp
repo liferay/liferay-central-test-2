@@ -178,25 +178,32 @@ String discountType = BeanParamUtil.getString(coupon, request, "discountType");
 </aui:form>
 
 <aui:script>
-	function <portlet:namespace />disableInputDate(date, checked) {
-		document.<portlet:namespace />fm["<portlet:namespace />" + date + "Month"].disabled = checked;
-		document.<portlet:namespace />fm["<portlet:namespace />" + date + "Day"].disabled = checked;
-		document.<portlet:namespace />fm["<portlet:namespace />" + date + "Year"].disabled = checked;
-		document.<portlet:namespace />fm["<portlet:namespace />" + date + "Hour"].disabled = checked;
-		document.<portlet:namespace />fm["<portlet:namespace />" + date + "Minute"].disabled = checked;
-		document.<portlet:namespace />fm["<portlet:namespace />" + date + "AmPm"].disabled = checked;
-
-		var imageInputId = AUI().one(document.<portlet:namespace />fm["<portlet:namespace />" + date + "ImageInputIdInput"]);
-
-		if (imageInputId) {
-			imageInputId.toggleClass('disabled');
-		}
-	}
-
 	function <portlet:namespace />saveCoupon() {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= coupon == null ? Constants.ADD : Constants.UPDATE %>";
 		submitForm(document.<portlet:namespace />fm);
 	}
+
+	Liferay.provide(
+		window,
+		'<portlet:namespace />disableInputDate',
+		function(date, checked) {
+			var A = AUI();
+
+			document.<portlet:namespace />fm["<portlet:namespace />" + date + "Month"].disabled = checked;
+			document.<portlet:namespace />fm["<portlet:namespace />" + date + "Day"].disabled = checked;
+			document.<portlet:namespace />fm["<portlet:namespace />" + date + "Year"].disabled = checked;
+			document.<portlet:namespace />fm["<portlet:namespace />" + date + "Hour"].disabled = checked;
+			document.<portlet:namespace />fm["<portlet:namespace />" + date + "Minute"].disabled = checked;
+			document.<portlet:namespace />fm["<portlet:namespace />" + date + "AmPm"].disabled = checked;
+
+			var imageInputId = A.one(document.<portlet:namespace />fm["<portlet:namespace />" + date + "ImageInputIdInput"]);
+
+			if (imageInputId) {
+				imageInputId.toggleClass('disabled');
+			}
+		},
+		['aui-base']
+	);
 
 	Liferay.Util.disableToggleBoxes('<portlet:namespace />autoCodeCheckbox', '<portlet:namespace />code', true);
 

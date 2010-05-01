@@ -472,107 +472,119 @@ else if (tabs2.equals("message-updated-email")) {
 					changed = true;
 				}
 
-				function <portlet:namespace />updateLanguage() {
-					if (lastLanguageId != "<%= defaultLanguageId %>") {
-						if (changed) {
+				Liferay.provide(
+					window,
+					'<portlet:namespace />updateLanguage',
+					function() {
+						var A = AUI();
+
+						if (lastLanguageId != "<%= defaultLanguageId %>") {
+							if (changed) {
+								for (var i = 0; i < 10; i++) {
+									var priorityName = A.one("#<portlet:namespace />priorityName" + i + "_temp").attr("value");
+									var priorityImage = A.one("#<portlet:namespace />priorityImage" + i + "_temp").attr("value");
+									var priorityValue = A.one("#<portlet:namespace />priorityValue" + i + "_temp").attr("value");
+
+									if (priorityName == null) {
+										priorityName = "";
+									}
+
+									A.one("#<portlet:namespace />priorityName" + i + "_" + lastLanguageId).attr("value", priorityName);
+
+									if (priorityImage == null) {
+										priorityImage = "";
+									}
+
+									A.one("#<portlet:namespace />priorityImage" + i + "_" + lastLanguageId).attr("value", priorityImage);
+
+									if (priorityValue == null) {
+										priorityValue = "";
+									}
+
+									A.one("#<portlet:namespace />priorityValue" + i + "_" + lastLanguageId).attr("value", priorityValue);
+								}
+
+								changed = false;
+							}
+						}
+
+						var selLanguageId = "";
+
+						for (var i = 0; i < document.<portlet:namespace />fm.<portlet:namespace />languageId.length; i++) {
+							if (document.<portlet:namespace />fm.<portlet:namespace />languageId.options[i].selected) {
+								selLanguageId = document.<portlet:namespace />fm.<portlet:namespace />languageId.options[i].value;
+
+								break;
+							}
+						}
+
+						if (selLanguageId != "") {
+							<portlet:namespace />updateLanguageTemps(selLanguageId);
+
+							A.one("#<portlet:namespace />localized-priorities-table").show();
+						}
+						else {
+							A.one("#<portlet:namespace />localized-priorities-table").hide();
+						}
+
+						lastLanguageId = selLanguageId;
+					},
+					['aui-base']
+				);
+
+				Liferay.provide(
+					window,
+					'<portlet:namespace />updateLanguageTemps',
+					function(lang) {
+						var A = AUI();
+
+						if (lang != "<%= defaultLanguageId %>") {
 							for (var i = 0; i < 10; i++) {
-								var priorityName = AUI().one("#<portlet:namespace />priorityName" + i + "_temp").attr("value");
-								var priorityImage = AUI().one("#<portlet:namespace />priorityImage" + i + "_temp").attr("value");
-								var priorityValue = AUI().one("#<portlet:namespace />priorityValue" + i + "_temp").attr("value");
+								var priorityName = A.one("#<portlet:namespace />priorityName" + i + "_" + lang).attr("value");
+								var priorityImage = A.one("#<portlet:namespace />priorityImage" + i + "_" + lang).attr("value");
+								var priorityValue = A.one("#<portlet:namespace />priorityValue" + i + "_" + lang).attr("value");
 
-								if (priorityName == null) {
-									priorityName = "";
+								var defaultName = A.one("#<portlet:namespace />priorityName" + i + "_" + "<%= defaultLanguageId %>").attr("value");
+								var defaultImage = A.one("#<portlet:namespace />priorityImage" + i + "_" + "<%= defaultLanguageId %>").attr("value");
+								var defaultValue = A.one("#<portlet:namespace />priorityValue" + i + "_" + "<%= defaultLanguageId %>").attr("value");
+
+								if (defaultName == null) {
+									defaultName = "";
 								}
 
-								AUI().one("#<portlet:namespace />priorityName" + i + "_" + lastLanguageId).attr("value", priorityName);
-
-								if (priorityImage == null) {
-									priorityImage = "";
+								if (defaultImage == null) {
+									defaultImage = "";
 								}
 
-								AUI().one("#<portlet:namespace />priorityImage" + i + "_" + lastLanguageId).attr("value", priorityImage);
-
-								if (priorityValue == null) {
-									priorityValue = "";
+								if (defaultValue == null) {
+									defaultValue = "";
 								}
 
-								AUI().one("#<portlet:namespace />priorityValue" + i + "_" + lastLanguageId).attr("value", priorityValue);
-							}
+								if ((priorityName == null) || (priorityName == "")) {
+									A.one("#<portlet:namespace />priorityName" + i + "_temp").attr("value", defaultName);
+								}
+								else {
+									A.one("#<portlet:namespace />priorityName" + i + "_temp").attr("value", priorityName);
+								}
 
-							changed = false;
-						}
-					}
+								if ((priorityImage == null) || (priorityImage == "")) {
+									A.one("#<portlet:namespace />priorityImage" + i + "_temp").attr("value", defaultImage);
+								}
+								else {
+									A.one("#<portlet:namespace />priorityImage" + i + "_temp").attr("value", priorityImage);
+								}
 
-					var selLanguageId = "";
-
-					for (var i = 0; i < document.<portlet:namespace />fm.<portlet:namespace />languageId.length; i++) {
-						if (document.<portlet:namespace />fm.<portlet:namespace />languageId.options[i].selected) {
-							selLanguageId = document.<portlet:namespace />fm.<portlet:namespace />languageId.options[i].value;
-
-							break;
-						}
-					}
-
-					if (selLanguageId != "") {
-						<portlet:namespace />updateLanguageTemps(selLanguageId);
-
-						AUI().one("#<portlet:namespace />localized-priorities-table").show();
-					}
-					else {
-						AUI().one("#<portlet:namespace />localized-priorities-table").hide();
-					}
-
-					lastLanguageId = selLanguageId;
-
-					return null;
-				}
-
-				function <portlet:namespace />updateLanguageTemps(lang) {
-					if (lang != "<%= defaultLanguageId %>") {
-						for (var i = 0; i < 10; i++) {
-							var priorityName = AUI().one("#<portlet:namespace />priorityName" + i + "_" + lang).attr("value");
-							var priorityImage = AUI().one("#<portlet:namespace />priorityImage" + i + "_" + lang).attr("value");
-							var priorityValue = AUI().one("#<portlet:namespace />priorityValue" + i + "_" + lang).attr("value");
-
-							var defaultName = AUI().one("#<portlet:namespace />priorityName" + i + "_" + "<%= defaultLanguageId %>").attr("value");
-							var defaultImage = AUI().one("#<portlet:namespace />priorityImage" + i + "_" + "<%= defaultLanguageId %>").attr("value");
-							var defaultValue = AUI().one("#<portlet:namespace />priorityValue" + i + "_" + "<%= defaultLanguageId %>").attr("value");
-
-							if (defaultName == null) {
-								defaultName = "";
-							}
-
-							if (defaultImage == null) {
-								defaultImage = "";
-							}
-
-							if (defaultValue == null) {
-								defaultValue = "";
-							}
-
-							if ((priorityName == null) || (priorityName == "")) {
-								AUI().one("#<portlet:namespace />priorityName" + i + "_temp").attr("value", defaultName);
-							}
-							else {
-								AUI().one("#<portlet:namespace />priorityName" + i + "_temp").attr("value", priorityName);
-							}
-
-							if ((priorityImage == null) || (priorityImage == "")) {
-								AUI().one("#<portlet:namespace />priorityImage" + i + "_temp").attr("value", defaultImage);
-							}
-							else {
-								AUI().one("#<portlet:namespace />priorityImage" + i + "_temp").attr("value", priorityImage);
-							}
-
-							if ((priorityValue == null) || (priorityValue == "")) {
-								AUI().one("#<portlet:namespace />priorityValue" + i + "_temp").attr("value", defaultValue);
-							}
-							else {
-								AUI().one("#<portlet:namespace />priorityValue" + i + "_temp").attr("value", priorityValue);
+								if ((priorityValue == null) || (priorityValue == "")) {
+									A.one("#<portlet:namespace />priorityValue" + i + "_temp").attr("value", defaultValue);
+								}
+								else {
+									A.one("#<portlet:namespace />priorityValue" + i + "_temp").attr("value", priorityValue);
+								}
 							}
 						}
-					}
-				}
+					},
+					['aui-base']
+				);
 
 				<portlet:namespace />updateLanguageTemps(lastLanguageId);
 			</aui:script>
@@ -642,62 +654,74 @@ else if (tabs2.equals("message-updated-email")) {
 					ranksChanged = true;
 				}
 
-				function <portlet:namespace />updateLanguage() {
-					if (lastLanguageId != "<%= defaultLanguageId %>") {
-						if (ranksChanged) {
-							var ranksValue = AUI().one("#<portlet:namespace />ranks_temp").attr("value");
+				Liferay.provide(
+					window,
+					'<portlet:namespace />updateLanguage',
+					function() {
+						var A = AUI();
 
-							if (ranksValue == null) {
-								ranksValue = "";
+						if (lastLanguageId != "<%= defaultLanguageId %>") {
+							if (ranksChanged) {
+								var ranksValue = A.one("#<portlet:namespace />ranks_temp").attr("value");
+
+								if (ranksValue == null) {
+									ranksValue = "";
+								}
+
+								A.one("#<portlet:namespace />ranks_" + lastLanguageId).attr("value", ranksValue);
+
+								ranksChanged = false;
 							}
-
-							AUI().one("#<portlet:namespace />ranks_" + lastLanguageId).attr("value", ranksValue);
-
-							ranksChanged = false;
-						}
-					}
-
-					var selLanguageId = "";
-
-					for (var i = 0; i < document.<portlet:namespace />fm.<portlet:namespace />languageId.length; i++) {
-						if (document.<portlet:namespace />fm.<portlet:namespace />languageId.options[i].selected) {
-							selLanguageId = document.<portlet:namespace />fm.<portlet:namespace />languageId.options[i].value;
-
-							break;
-						}
-					}
-
-					if (selLanguageId != "") {
-						<portlet:namespace />updateLanguageTemps(selLanguageId);
-
-						AUI().one("#<portlet:namespace />ranks_temp").show();
-					}
-					else {
-						AUI().one("#<portlet:namespace />ranks_temp").hide();
-					}
-
-					lastLanguageId = selLanguageId;
-
-					return null;
-				}
-
-				function <portlet:namespace />updateLanguageTemps(lang) {
-					if (lang != "<%= defaultLanguageId %>") {
-						var ranksValue = AUI().one("#<portlet:namespace />ranks_" + lang).attr("value");
-						var defaultRanksValue = AUI().one("#<portlet:namespace />ranks_<%= defaultLanguageId %>").attr("value");
-
-						if (defaultRanksValue == null) {
-							defaultRanksValue = "";
 						}
 
-						if ((ranksValue == null) || (ranksValue == "")) {
-							AUI().one("#<portlet:namespace />ranks_temp").attr("value", defaultRanksValue);
+						var selLanguageId = "";
+
+						for (var i = 0; i < document.<portlet:namespace />fm.<portlet:namespace />languageId.length; i++) {
+							if (document.<portlet:namespace />fm.<portlet:namespace />languageId.options[i].selected) {
+								selLanguageId = document.<portlet:namespace />fm.<portlet:namespace />languageId.options[i].value;
+
+								break;
+							}
+						}
+
+						if (selLanguageId != "") {
+							<portlet:namespace />updateLanguageTemps(selLanguageId);
+
+							A.one("#<portlet:namespace />ranks_temp").show();
 						}
 						else {
-							AUI().one("#<portlet:namespace />ranks_temp").attr("value", ranksValue);
+							A.one("#<portlet:namespace />ranks_temp").hide();
 						}
-					}
-				}
+
+						lastLanguageId = selLanguageId;
+					},
+					['aui-base']
+				);
+
+				Liferay.provide(
+					window,
+					'<portlet:namespace />updateLanguageTemps',
+					function(lang) {
+						var A = AUI();
+
+						if (lang != "<%= defaultLanguageId %>") {
+							var ranksValue = A.one("#<portlet:namespace />ranks_" + lang).attr("value");
+							var defaultRanksValue = A.one("#<portlet:namespace />ranks_<%= defaultLanguageId %>").attr("value");
+
+							if (defaultRanksValue == null) {
+								defaultRanksValue = "";
+							}
+
+							if ((ranksValue == null) || (ranksValue == "")) {
+								A.one("#<portlet:namespace />ranks_temp").attr("value", defaultRanksValue);
+							}
+							else {
+								A.one("#<portlet:namespace />ranks_temp").attr("value", ranksValue);
+							}
+						}
+					},
+					['aui-base']
+				);
 
 				<portlet:namespace />updateLanguageTemps(lastLanguageId);
 			</aui:script>

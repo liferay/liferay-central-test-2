@@ -159,18 +159,7 @@ AUI().add(
 													p_p_state: 'exclusive'
 												},
 												on: {
-													success: function(event, id, obj) {
-														AUI().use(
-															'liferay-layout-configuration',
-															function(A) {
-																var contentBox = Liferay.Dockbar.addApplication.get('contentBox');
-
-																Liferay.LayoutConfiguration._dialogBody = contentBox;
-
-																Liferay.LayoutConfiguration._loadContent();
-															}
-														);
-													}
+													success: Liferay.Dockbar._loadAddApplications
 												},
 												uri: themeDisplay.getPathMain() + '/portal/render_portlet'
 											},
@@ -551,6 +540,19 @@ AUI().add(
 		);
 
 		Liferay.Dockbar.Underlay = Underlay;
+
+		Liferay.provide(
+			Liferay.Dockbar,
+			'_loadAddApplications',
+			function(event, id, obj) {
+				var contentBox = Liferay.Dockbar.addApplication.get('contentBox');
+
+				Liferay.LayoutConfiguration._dialogBody = contentBox;
+
+				Liferay.LayoutConfiguration._loadContent();
+			},
+			['liferay-layout-configuration']
+		);
 	},
 	'',
 	{

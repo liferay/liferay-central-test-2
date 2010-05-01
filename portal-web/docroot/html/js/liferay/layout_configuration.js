@@ -1,37 +1,39 @@
 Liferay.LayoutConfiguration = {
-	showTemplates: function() {
+	toggle: function(){}
+};
+
+Liferay.provide(
+	Liferay.LayoutConfiguration,
+	'showTemplates',
+	function() {
+		var A = AUI();
+
 		var url = themeDisplay.getPathMain() + '/layout_configuration/templates';
 
-		AUI().use(
-			'aui-dialog',
-			function(A) {
-				var dialog = new A.Dialog(
-					{
-						centered: true,
-						modal: true,
-						title: Liferay.Language.get('layout'),
-						width: 700
-					}
-				)
-				.render();
+		var dialog = new A.Dialog(
+			{
+				centered: true,
+				modal: true,
+				title: Liferay.Language.get('layout'),
+				width: 700
+			}
+		)
+		.render();
 
-				dialog.plug(
-					A.Plugin.IO,
-					{
-						data: {
-							doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
-							p_l_id: themeDisplay.getPlid(),
-							redirect: Liferay.currentURL
-						},
-						uri: url
-					}
-				);
+		dialog.plug(
+			A.Plugin.IO,
+			{
+				data: {
+					doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
+					p_l_id: themeDisplay.getPlid(),
+					redirect: Liferay.currentURL
+				},
+				uri: url
 			}
 		);
 	},
-
-	toggle: function(){}
-};
+	['aui-dialog']
+);
 
 AUI().add(
 	'liferay-layout-configuration',

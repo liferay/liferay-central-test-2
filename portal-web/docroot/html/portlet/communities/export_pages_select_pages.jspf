@@ -101,39 +101,53 @@
 </aui:script>
 
 <aui:script>
-	function <portlet:namespace />hideTabs() {
-		var optionsTab = AUI().one('#<portlet:namespace />exportPagesTabsoptionsTabsId');
-		var schedulerTab = AUI().one('#<portlet:namespace />exportPagesTabsschedulerTabsId');
-		var remoteOptionsTab = AUI().one('#<portlet:namespace />exportPagesTabsremote-optionsTabsId');
+	Liferay.provide(
+		window,
+		'<portlet:namespace />hideTabs',
+		function() {
+			var A = AUI();
 
-		if (optionsTab) {
-			optionsTab.hide();
-		}
+			var optionsTab = A.one('#<portlet:namespace />exportPagesTabsoptionsTabsId');
+			var schedulerTab = A.one('#<portlet:namespace />exportPagesTabsschedulerTabsId');
+			var remoteOptionsTab = A.one('#<portlet:namespace />exportPagesTabsremote-optionsTabsId');
 
-		if (schedulerTab) {
-			schedulerTab.hide();
-		}
+			if (optionsTab) {
+				optionsTab.hide();
+			}
 
-		if (remoteOptionsTab) {
-			remoteOptionsTab.hide();
-		}
-	}
+			if (schedulerTab) {
+				schedulerTab.hide();
+			}
 
-	function <portlet:namespace />showTabs() {
-		var optionsTab = AUI().one('#<portlet:namespace />exportPagesTabsoptionsTabsId');
-		var schedulerTab = AUI().one('#<portlet:namespace />exportPagesTabsschedulerTabsId');
-		var remoteOptionsTab = AUI().one('#<portlet:namespace />exportPagesTabsremote-optionsTabsId');
+			if (remoteOptionsTab) {
+				remoteOptionsTab.hide();
+			}
+		},
+		['aui-base']
+	);
 
-		if (optionsTab) {
-			optionsTab.show();
-		}
+	Liferay.provide(
+		window,
+		'<portlet:namespace />showTabs',
+		function() {
+			var A = AUI();
 
-		if (schedulerTab) {
-			schedulerTab.show();
-		}
+			var optionsTab = A.one('#<portlet:namespace />exportPagesTabsoptionsTabsId');
+			var schedulerTab = A.one('#<portlet:namespace />exportPagesTabsschedulerTabsId');
+			var remoteOptionsTab = A.one('#<portlet:namespace />exportPagesTabsremote-optionsTabsId');
 
-		if (remoteOptionsTab) {
-			remoteOptionsTab.show();
-		}
-	}
+			if (optionsTab) {
+				optionsTab.show();
+			}
+
+			if (schedulerTab) {
+				schedulerTab.show();
+			}
+
+			if (remoteOptionsTab) {
+				remoteOptionsTab.show();
+			}
+		},
+		['aui-base']
+	);
 </aui:script>

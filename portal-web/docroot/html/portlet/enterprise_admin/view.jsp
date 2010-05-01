@@ -223,28 +223,6 @@ request.setAttribute("view.jsp-portletURLString", portletURLString);
 		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL><portlet:param name="struts_action" value="/enterprise_admin/edit_user_group" /></portlet:actionURL>");
 	}
 
-	function <portlet:namespace />getUsersCount(className, ids, active, callback) {
-		AUI().use(
-			'aui-io-request',
-			function(A) {
-				A.io.request(
-					'<%= themeDisplay.getPathMain() %>/enterprise_admin/get_users_count',
-					{
-						data: {
-							active: active,
-							className: className,
-							ids: ids
-						},
-						method: 'POST',
-						on: {
-							success: callback
-						}
-					}
-				);
-			}
-		);
-	}
-
 	function <portlet:namespace />saveCompany() {
 		document.<portlet:namespace />fm.method = "post";
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.UPDATE %>";
@@ -262,6 +240,30 @@ request.setAttribute("view.jsp-portletURLString", portletURLString);
 
 		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL><portlet:param name="struts_action" value="/enterprise_admin/edit_company" /></portlet:actionURL>");
 	}
+
+	Liferay.provide(
+		window,
+		'<portlet:namespace />getUsersCount',
+		function(className, ids, active, callback) {
+			var A = AUI();
+
+			A.io.request(
+				'<%= themeDisplay.getPathMain() %>/enterprise_admin/get_users_count',
+				{
+					data: {
+						active: active,
+						className: className,
+						ids: ids
+					},
+					method: 'POST',
+					on: {
+						success: callback
+					}
+				}
+			);
+		},
+		['aui-io']
+	);
 </aui:script>
 
 <%!

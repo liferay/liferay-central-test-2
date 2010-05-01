@@ -65,28 +65,6 @@ if (windowState.equals(WindowState.MAXIMIZED)) {
 </c:choose>
 
 <aui:script>
-	function <portlet:namespace />init() {
-		var hash = document.location.hash;
-
-		if ((hash != '#') && (hash != '')) {
-			var src = '';
-
-			var path = hash.substring(1);
-
-			if (path.indexOf('http://') != 0) {
-				src = '<%= baseSrc %>';
-			}
-
-			src += path;
-
-			var iframe = AUI().one('#<portlet:namespace />iframe');
-
-			if (iframe) {
-				iframe.attr('src', src);
-			}
-		}
-	}
-
 	function <portlet:namespace />maximizeIframe(iframe) {
 		var winHeight = 0;
 
@@ -171,33 +149,69 @@ if (windowState.equals(WindowState.MAXIMIZED)) {
 		return true;
 	}
 
-	function <portlet:namespace />updateHash(url) {
-		document.location.hash = url;
+	Liferay.provide(
+		window,
+		'<portlet:namespace />init'
+		function() {
+			var A = AUI();
 
-		var maximize = AUI().one('#p_p_id<portlet:namespace /> .portlet-maximize-icon a');
+			var hash = document.location.hash;
 
-		if (maximize) {
-			var href = maximize.attr('href');
+			if ((hash != '#') && (hash != '')) {
+				var src = '';
 
-			if (href.indexOf('#') != -1) {
-				href = href.substring(0, href.indexOf('#'));
+				var path = hash.substring(1);
+
+				if (path.indexOf('http://') != 0) {
+					src = '<%= baseSrc %>';
+				}
+
+				src += path;
+
+				var iframe = A.one('#<portlet:namespace />iframe');
+
+				if (iframe) {
+					iframe.attr('src', src);
+				}
+			}
+		},
+		['aui-base']
+	);
+
+	Liferay.provide(
+		window,
+		'<portlet:namespace />updateHash'
+		function(url) {
+			var A = AUI();
+
+			document.location.hash = url;
+
+			var maximize = A.one('#p_p_id<portlet:namespace /> .portlet-maximize-icon a');
+
+			if (maximize) {
+				var href = maximize.attr('href');
+
+				if (href.indexOf('#') != -1) {
+					href = href.substring(0, href.indexOf('#'));
+				}
+
+				maximize.attr('href', href + '#' + url);
 			}
 
-			maximize.attr('href', href + '#' + url);
-		}
+			var restore = A.one('#p_p_id<portlet:namespace /> a.portlet-icon-back');
 
-		var restore = AUI().one('#p_p_id<portlet:namespace /> a.portlet-icon-back');
+			if (restore) {
+				var href = restore.attr('href');
 
-		if (restore) {
-			var href = restore.attr('href');
+				if (href.indexOf('#') != -1) {
+					href = href.substring(0, href.indexOf('#'));
+				}
 
-			if (href.indexOf('#') != -1) {
-				href = href.substring(0, href.indexOf('#'));
+				restore.attr('href', href + '#' + url);
 			}
-
-			restore.attr('href', href + '#' + url);
-		}
-	}
+		},
+		['aui-base']
+	);
 
 	<portlet:namespace />init();
 </aui:script>

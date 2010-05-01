@@ -279,54 +279,63 @@ long classPK = GetterUtil.getLong((String)workflowContext.get(WorkflowConstants.
 />
 
 <aui:script>
-	function <portlet:namespace />disableDate(date, checked) {
-		document.<portlet:namespace />fm["<portlet:namespace />" + date + "Month"].disabled = checked;
-		document.<portlet:namespace />fm["<portlet:namespace />" + date + "Day"].disabled = checked;
-		document.<portlet:namespace />fm["<portlet:namespace />" + date + "Year"].disabled = checked;
-		document.<portlet:namespace />fm["<portlet:namespace />" + date + "Hour"].disabled = checked;
-		document.<portlet:namespace />fm["<portlet:namespace />" + date + "Minute"].disabled = checked;
-		document.<portlet:namespace />fm["<portlet:namespace />" + date + "AmPm"].disabled = checked;
+	Liferay.provide(
+		window,
+		'<portlet:namespace />disableDate',
+		function(date, checked) {
+			var A = AUI();
 
-		document.<portlet:namespace />fm["<portlet:namespace />updateButton"].disabled = checked;
+			document.<portlet:namespace />fm["<portlet:namespace />" + date + "Month"].disabled = checked;
+			document.<portlet:namespace />fm["<portlet:namespace />" + date + "Day"].disabled = checked;
+			document.<portlet:namespace />fm["<portlet:namespace />" + date + "Year"].disabled = checked;
+			document.<portlet:namespace />fm["<portlet:namespace />" + date + "Hour"].disabled = checked;
+			document.<portlet:namespace />fm["<portlet:namespace />" + date + "Minute"].disabled = checked;
+			document.<portlet:namespace />fm["<portlet:namespace />" + date + "AmPm"].disabled = checked;
 
-		var imageInputId = AUI().one(document.<portlet:namespace />fm["<portlet:namespace />" + date + "ImageInputIdInput"]);
+			document.<portlet:namespace />fm["<portlet:namespace />updateButton"].disabled = checked;
 
-		if (imageInputId) {
-			imageInputId.toggleClass('disabled');
-		}
-	}
+			var imageInputId = A.one(document.<portlet:namespace />fm["<portlet:namespace />" + date + "ImageInputIdInput"]);
 
-	function <portlet:namespace />updateWorkflowTask(cmd, transitionName) {
-		AUI().use(
-			'aui-dialog',
-			function(A) {
-				var dialog = new A.Dialog(
-					{
-						bodyContent: '<textarea id="<%= renderResponse.getNamespace() + "comment" %>" rows="10" cols="55"></textarea>',
-						buttons: [
-							{
-								handler: function() {
-									document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = cmd;
-									document.<portlet:namespace />fm.<portlet:namespace />transitionName.value = transitionName;
-									document.<portlet:namespace />fm.<portlet:namespace />comment.value = A.one('#<%= renderResponse.getNamespace() + "comment" %>').val();
-									submitForm(document.<portlet:namespace />fm);
-								},
-								text: '<liferay-ui:message key="ok" />'
-							},
-							{
-								handler: function() {
-									this.close();
-								},
-								text: '<liferay-ui:message key="cancel" />'
-							}
-						],
-						centered: true,
-						modal: true,
-						title: '<liferay-ui:message key="comments" />',
-						width: 400
-					}
-				).render();
+			if (imageInputId) {
+				imageInputId.toggleClass('disabled');
 			}
-		);
-	}
+		},
+		['aui-base']
+	);
+
+	Liferay.provide(
+		window,
+		'<portlet:namespace />updateWorkflowTask',
+		function(cmd, transitionName) {
+			var A = AUI();
+
+			var dialog = new A.Dialog(
+				{
+					bodyContent: '<textarea id="<%= renderResponse.getNamespace() + "comment" %>" rows="10" cols="55"></textarea>',
+					buttons: [
+						{
+							handler: function() {
+								document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = cmd;
+								document.<portlet:namespace />fm.<portlet:namespace />transitionName.value = transitionName;
+								document.<portlet:namespace />fm.<portlet:namespace />comment.value = A.one('#<%= renderResponse.getNamespace() + "comment" %>').val();
+								submitForm(document.<portlet:namespace />fm);
+							},
+							text: '<liferay-ui:message key="ok" />'
+						},
+						{
+							handler: function() {
+								this.close();
+							},
+							text: '<liferay-ui:message key="cancel" />'
+						}
+					],
+					centered: true,
+					modal: true,
+					title: '<liferay-ui:message key="comments" />',
+					width: 400
+				}
+			).render();
+		},
+		['aui-base']
+	);
 </aui:script>

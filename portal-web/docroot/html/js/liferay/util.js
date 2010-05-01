@@ -36,44 +36,6 @@ Liferay.Util = {
 		};
 	},
 
-	addInputFocus: function() {
-		var instance = this;
-
-		AUI().use(
-			'aui-base',
-			function(A) {
-				var handleFocus = function(event) {
-					var target = event.target;
-
-					var tagName = target.get('tagName');
-
-					if (tagName) {
-						tagName = tagName.toLowerCase();
-					}
-
-					var nodeType = target.get('type');
-
-					if (((tagName == 'input') && (/text|password/).test(nodeType)) ||
-						(tagName == 'textarea')) {
-
-						var action = 'addClass';
-
-						if (/blur|focusout/.test(event.type)) {
-							action = 'removeClass';
-						}
-
-						target[action]('focus');
-					}
-				};
-
-				A.on('focus', handleFocus, document);
-				A.on('blur', handleFocus, document);
-			}
-		);
-
-		instance.addInputFocus = function(){};
-	},
-
 	addInputType: function(el) {
 		var instance = this;
 
@@ -151,69 +113,6 @@ Liferay.Util = {
 		}
 	},
 
-	check: function(form, name, checked) {
-		AUI().use(
-			'aui-base',
-			function(A) {
-				var checkbox = A.one(form[name]);
-
-				if (checkbox) {
-					checkbox.set('checked', checked);
-				}
-			}
-		);
-	},
-
-	checkAll: function(form, name, allBox) {
-		AUI().use(
-			'aui-base',
-			function(A) {
-				var selector;
-
-				if (Liferay.Util.isArray(name)) {
-					selector = 'input[name='+ name.join('], input[name=') + ']';
-				}
-				else {
-					selector = 'input[name=' + name + ']';
-				}
-
-				form = A.one(form);
-
-				form.all(selector).set('checked', A.one(allBox).get('checked'));
-			}
-		);
-	},
-
-	checkAllBox: function(form, name, allBox) {
-		var A = AUI();
-
-		var totalBoxes = 0;
-		var totalOn = 0;
-		var inputs = A.one(form).all('input[type=checkbox]');
-
-		allBox = A.one(allBox);
-
-		if (!A.Lang.isArray(name)) {
-			name = [name];
-		}
-
-		inputs.each(
-			function(item, index, collection) {
-				if (!item.compareTo(allBox)) {
-					if (A.Array.indexOf(name, item.getAttribute('name')) > -1) {
-						totalBoxes++;
-					}
-
-					if (item.get('checked')) {
-						totalOn++;
-					}
-				}
-			}
-		);
-
-		allBox.set('checked', (totalBoxes == totalOn));
-	},
-
 	checkTab: function(box) {
 		if ((document.all) && (event.keyCode == 9)) {
 			box.selection = document.selection.createRange();
@@ -225,124 +124,6 @@ Liferay.Util = {
 				0
 			);
 		}
-	},
-
-	createFlyouts: function(options) {
-		AUI().use(
-			'aui-base',
-			function(A) {
-				options = options || {};
-
-				var flyout = A.one(options.container);
-				var containers = [];
-
-				if (flyout) {
-					var lis = flyout.all('li');
-
-					lis.each(
-						function(item, index, collection) {
-							var childUL = item.one('ul');
-
-							if (childUL) {
-								childUL.hide();
-
-								item.addClass('lfr-flyout');
-								item.addClass('has-children lfr-flyout-has-children');
-							}
-						}
-					);
-
-					var hideTask = new A.DelayedTask(
-						function(event) {
-							showTask.cancel();
-
-							var li = event.currentTarget;
-
-							if (li.hasClass('has-children')) {
-								var childUL = event.currentTarget.one('> ul');
-
-								if (childUL) {
-									childUL.hide();
-
-									if (options.mouseOut) {
-										options.mouseOut.apply(event.currentTarget, [event]);
-									}
-								}
-							}
-						}
-					);
-
-					var showTask = new A.DelayedTask(
-						function(event) {
-							hideTask.cancel();
-
-							var li = event.currentTarget;
-
-							if (li.hasClass('has-children')) {
-								var childUL = event.currentTarget.one('> ul');
-
-								if (childUL) {
-									childUL.show();
-
-									if (options.mouseOver) {
-										options.mouseOver.apply(event.currentTarget, [event]);
-									}
-								}
-							}
-						}
-					);
-
-					lis.on(
-						'mouseenter',
-						A.bind(showTask.delay, showTask, 0, null, null),
-						'li'
-					);
-
-					lis.on(
-						'mouseleave',
-						A.bind(hideTask.delay, hideTask, 300, null, null),
-						'li'
-					);
-				}
-			}
-		)
-	},
-
-	disableElements: function(obj) {
-		AUI().use(
-			'aui-base',
-			function(A) {
-				var el = A.one(obj);
-
-				if (el) {
-					el = el.getDOM();
-
-					var children = el.getElementsByTagName('*');
-
-					var emptyFnFalse = A.Lang.emptyFnFalse;
-					var Event = A.Event;
-
-					for (var i = children.length - 1; i >= 0; i--) {
-						var item = children[i];
-
-						item.style.cursor = 'default';
-
-						el.onclick = emptyFnFalse;
-						el.onmouseover = emptyFnFalse;
-						el.onmouseout = emptyFnFalse;
-						el.onmouseenter = emptyFnFalse;
-						el.onmouseleave = emptyFnFalse;
-
-						Event.purgeElement(el, false);
-
-						item.href = 'javascript:;';
-						item.disabled = true;
-						item.action = '';
-						item.onsubmit = emptyFnFalse;
-					}
-				}
-			}
-		);
 	},
 
 	disableEsc: function() {
@@ -358,47 +139,6 @@ Liferay.Util = {
 		inputs.setStyle('opacity', 0.5);
 	},
 
-	disableTextareaTabs: function(textarea) {
-		AUI().use(
-			'aui-base',
-			function(A) {
-				textarea = A.one(textarea);
-
-				if (textarea && textarea.attr('textareatabs') != 'enabled') {
-					textarea.attr('textareatabs', 'disabled');
-
-					textarea.detach('keydown', Liferay.Util.textareaTabs);
-				}
-			}
-		);
-	},
-
-	disableToggleBoxes: function(checkBoxId, toggleBoxId, checkDisabled) {
-		AUI().use(
-			'aui-base',
-			function(A) {
-				var checkBox = A.one('#' + checkBoxId);
-				var toggleBox = A.one('#' + toggleBoxId);
-
-				if (checkBox && toggleBox) {
-					if (checkBox.get('checked') && checkDisabled) {
-						toggleBox.set('disabled', true);
-					}
-					else {
-						toggleBox.set('disabled', false);
-					}
-
-					checkBox.on(
-						'click',
-						function() {
-							toggleBox.set('disabled', !toggleBox.get('disabled'));
-						}
-					);
-				}
-			}
-		);
-	},
-
 	enableFormButtons: function(inputs, form) {
 		var instance = this;
 
@@ -408,22 +148,6 @@ Liferay.Util = {
 
 		inputs.set('disabled', false);
 		inputs.setStyle('opacity', 1);
-	},
-
-	enableTextareaTabs: function(textarea) {
-		var instance = this;
-		AUI().use(
-			'aui-base',
-			function(A) {
-				textarea = A.one(textarea);
-
-				if (textarea && textarea.attr('textareatabs') != 'enabled') {
-					textarea.attr('textareatabs', 'disabled');
-
-					textarea.on('keydown', Liferay.Util.textareaTabs);
-				}
-			}
-		);
 	},
 
 	endsWith: function(str, x) {
@@ -453,55 +177,6 @@ Liferay.Util = {
 				}
 
 				return str;
-			}
-		);
-	},
-
-	focusFormField: function(el, caretPosition) {
-		var instance = this;
-
-		instance.addInputFocus();
-
-		AUI().ready(
-			'aui-base',
-			function(A) {
-				var interacting = false;
-
-				var clickHandle = A.getDoc().on(
-					'click',
-					function(event) {
-						interacting = true;
-
-						clickHandle.detach();
-					}
-				);
-
-				if (!interacting) {
-					el = A.one(el);
-
-					try {
-						el.focus();
-					}
-					catch (e) {
-					}
-				}
-			}
-		);
-	},
-
-	forcePost: function(link) {
-		AUI().use(
-			'aui-base',
-			function(A) {
-				link = A.one(link);
-
-				if (link) {
-					var url = link.attr('href');
-
-					submitForm(document.hrefFm, url);
-
-					Liferay.Util._submitLocked = null;
-				}
 			}
 		);
 	},
@@ -554,73 +229,6 @@ Liferay.Util = {
 		}
 
 		return url + sessionId;
-	},
-
-	/**
-	 * OPTIONS
-	 *
-	 * Required
-	 * button {string|object}: The button that opens the popup when clicked.
-	 * height {number}: The height to set the popup to.
-	 * textarea {string}: the name of the textarea to auto-resize.
-	 * url {string}: The url to open that sets the editor.
-	 * width {number}: The width to set the popup to.
-	 */
-
-	inlineEditor: function(options) {
-		var instance = this;
-
-		AUI().ready(
-			'aui-dialog',
-			'aui-io-plugin',
-			function(A) {
-				if (options.url && options.button) {
-					var url = options.url;
-					var button = options.button;
-					var width = options.width || 680;
-					var height = options.height || 640;
-					var textarea = options.textarea;
-					var clicked = false;
-
-					var editorButton = A.one(button);
-					var popup = null;
-
-					if (editorButton) {
-						editorButton.on(
-							'click',
-							function(event) {
-								if (!clicked) {
-									popup = new A.Dialog(
-										{
-											centered: true,
-											height: 640,
-											title: Liferay.Language.get('editor'),
-											width: 680
-										}
-									).render();
-
-									popup.plug(
-										A.Plugin.IO,
-										{
-											uri: url + '&rt=' + Liferay.Util.randomInt()
-										}
-									);
-
-									clicked = true;
-								}
-								else {
-									popup.show();
-
-									popup._setAlignCenter(true);
-
-									popup.io.start();
-								}
-							}
-						);
-					}
-				}
-			}
-		);
 	},
 
 	isArray: function(object) {
@@ -720,7 +328,565 @@ Liferay.Util = {
 		return s.join(',');
 	},
 
-	moveItem: function(fromBox, toBox, sort) {
+	processTab: function(id) {
+		document.all[id].selection.text = String.fromCharCode(9);
+		document.all[id].focus();
+	},
+
+	randomInt: function() {
+		return (Math.ceil(Math.random() * (new Date).getTime()));
+	},
+
+	randomMinMax: function(min, max) {
+		return (Math.round(Math.random() * (max - min))) + min;
+	},
+
+	selectAndCopy: function(el) {
+		el.focus();
+		el.select();
+
+		if (document.all) {
+			var textRange = el.createTextRange();
+
+			textRange.execCommand('copy');
+		}
+	},
+
+	setBox: function(oldBox, newBox) {
+		for (var i = oldBox.length - 1; i > -1; i--) {
+			oldBox.options[i] = null;
+		}
+
+		for (var i = 0; i < newBox.length; i++) {
+			oldBox.options[i] = new Option(newBox[i].value, i);
+		}
+
+		oldBox.options[0].selected = true;
+	},
+
+	showCapsLock: function(event, span) {
+		var keyCode = event.keyCode ? event.keyCode : event.which;
+		var shiftKey = event.shiftKey ? event.shiftKey : ((keyCode == 16) ? true : false);
+
+		if (((keyCode >= 65 && keyCode <= 90) && !shiftKey) ||
+			((keyCode >= 97 && keyCode <= 122) && shiftKey)) {
+
+			document.getElementById(span).style.display = '';
+		}
+		else {
+			document.getElementById(span).style.display = 'none';
+		}
+	},
+
+	sortByAscending: function(a, b) {
+		a = a[1].toLowerCase();
+		b = b[1].toLowerCase();
+
+		if (a > b) {
+			return 1;
+		}
+
+		if (a < b) {
+			return -1;
+		}
+
+		return 0;
+	},
+
+	startsWith: function(str, x) {
+		return (str.indexOf(x) === 0);
+	},
+
+	textareaTabs: function(event) {
+		var el = event.currentTarget.getDOM();
+		var pressedKey = event.keyCode;
+
+		if(pressedKey == 9) {
+			event.halt();
+
+			var oldscroll = el.scrollTop;
+
+			if (el.setSelectionRange) {
+				var caretPos = el.selectionStart + 1;
+				var elValue = el.value;
+
+				el.value = elValue.substring(0, el.selectionStart) + '\t' + elValue.substring(el.selectionEnd, elValue.length);
+
+				setTimeout(
+					function() {
+						el.focus();
+						el.setSelectionRange(caretPos, caretPos);
+					}, 0);
+
+			}
+			else {
+				document.selection.createRange().text='\t';
+			}
+
+	        el.scrollTop = oldscroll;
+
+			return false;
+	    }
+	},
+
+	uncamelize: function(value, separator) {
+		separator = separator || ' ';
+
+		value = value.replace(/([a-zA-Z][a-zA-Z])([A-Z])([a-z])/g, '$1' + separator + '$2$3');
+		value = value.replace(/([a-z])([A-Z])/g, '$1' + separator + '$2');
+
+		return value;
+	},
+
+	unescapeHTML: function(str) {
+		return str.replace(
+			/&lt;|&gt;|&amp;|&#034;|&#039;/gi,
+			function(match) {
+				var str = '';
+
+				if (match == '&lt;') {
+					str = '<';
+				}
+				else if (match == '&gt;') {
+					str = '>';
+				}
+				else if (match == '&amp;') {
+					str = '&';
+				}
+				else if (match == '&#034;') {
+					str = '\"';
+				}
+				else if (match == '&#039;') {
+					str = '\'';
+				}
+
+				return str;
+			}
+		);
+	}
+};
+
+Liferay.provide(
+	Liferay.Util,
+	'addInputFocus',
+	{
+		fn: function() {
+			var A = AUI();
+
+			var handleFocus = function(event) {
+				var target = event.target;
+
+				var tagName = target.get('tagName');
+
+				if (tagName) {
+					tagName = tagName.toLowerCase();
+				}
+
+				var nodeType = target.get('type');
+
+				if (((tagName == 'input') && (/text|password/).test(nodeType)) ||
+					(tagName == 'textarea')) {
+
+					var action = 'addClass';
+
+					if (/blur|focusout/.test(event.type)) {
+						action = 'removeClass';
+					}
+
+					target[action]('focus');
+				}
+			};
+
+			A.on('focus', handleFocus, document);
+			A.on('blur', handleFocus, document);
+		},
+		once: true
+	},
+	['aui-base']
+);
+
+
+Liferay.provide(
+	Liferay.Util,
+	'check',
+	function(form, name, checked) {
+		var A = AUI();
+
+		var checkbox = A.one(form[name]);
+
+		if (checkbox) {
+			checkbox.set('checked', checked);
+		}
+	},
+	['aui-base']
+);
+
+Liferay.provide(
+	Liferay.Util,
+	'checkAll',
+	function(form, name, allBox) {
+		var A = AUI();
+
+		var selector;
+
+		if (Liferay.Util.isArray(name)) {
+			selector = 'input[name='+ name.join('], input[name=') + ']';
+		}
+		else {
+			selector = 'input[name=' + name + ']';
+		}
+
+		form = A.one(form);
+
+		form.all(selector).set('checked', A.one(allBox).get('checked'));
+	},
+	['aui-base']
+);
+
+Liferay.provide(
+	Liferay.Util,
+	'checkAllBox',
+	function(form, name, allBox) {
+		var A = AUI();
+
+		var totalBoxes = 0;
+		var totalOn = 0;
+		var inputs = A.one(form).all('input[type=checkbox]');
+
+		allBox = A.one(allBox);
+
+		if (!A.Lang.isArray(name)) {
+			name = [name];
+		}
+
+		inputs.each(
+			function(item, index, collection) {
+				if (!item.compareTo(allBox)) {
+					if (A.Array.indexOf(name, item.getAttribute('name')) > -1) {
+						totalBoxes++;
+					}
+
+					if (item.get('checked')) {
+						totalOn++;
+					}
+				}
+			}
+		);
+
+		allBox.set('checked', (totalBoxes == totalOn));
+	},
+	['aui-base']
+);
+
+Liferay.provide(
+	Liferay.Util,
+	'createFlyouts',
+	function(options) {
+		var A = AUI();
+
+		options = options || {};
+
+		var flyout = A.one(options.container);
+		var containers = [];
+
+		if (flyout) {
+			var lis = flyout.all('li');
+
+			lis.each(
+				function(item, index, collection) {
+					var childUL = item.one('ul');
+
+					if (childUL) {
+						childUL.hide();
+
+						item.addClass('lfr-flyout');
+						item.addClass('has-children lfr-flyout-has-children');
+					}
+				}
+			);
+
+			var hideTask = new A.DelayedTask(
+				function(event) {
+					showTask.cancel();
+
+					var li = event.currentTarget;
+
+					if (li.hasClass('has-children')) {
+						var childUL = event.currentTarget.one('> ul');
+
+						if (childUL) {
+							childUL.hide();
+
+							if (options.mouseOut) {
+								options.mouseOut.apply(event.currentTarget, [event]);
+							}
+						}
+					}
+				}
+			);
+
+			var showTask = new A.DelayedTask(
+				function(event) {
+					hideTask.cancel();
+
+					var li = event.currentTarget;
+
+					if (li.hasClass('has-children')) {
+						var childUL = event.currentTarget.one('> ul');
+
+						if (childUL) {
+							childUL.show();
+
+							if (options.mouseOver) {
+								options.mouseOver.apply(event.currentTarget, [event]);
+							}
+						}
+					}
+				}
+			);
+
+			lis.on(
+				'mouseenter',
+				A.bind(showTask.delay, showTask, 0, null, null),
+				'li'
+			);
+
+			lis.on(
+				'mouseleave',
+				A.bind(hideTask.delay, hideTask, 300, null, null),
+				'li'
+			);
+		}
+	},
+	['aui-base']
+);
+
+Liferay.provide(
+	Liferay.Util,
+	'disableElements',
+	function(obj) {
+		var A = AUI();
+
+		var el = A.one(obj);
+
+		if (el) {
+			el = el.getDOM();
+
+			var children = el.getElementsByTagName('*');
+
+			var emptyFnFalse = A.Lang.emptyFnFalse;
+			var Event = A.Event;
+
+			for (var i = children.length - 1; i >= 0; i--) {
+				var item = children[i];
+
+				item.style.cursor = 'default';
+
+				el.onclick = emptyFnFalse;
+				el.onmouseover = emptyFnFalse;
+				el.onmouseout = emptyFnFalse;
+				el.onmouseenter = emptyFnFalse;
+				el.onmouseleave = emptyFnFalse;
+
+				Event.purgeElement(el, false);
+
+				item.href = 'javascript:;';
+				item.disabled = true;
+				item.action = '';
+				item.onsubmit = emptyFnFalse;
+			}
+		}
+	},
+	['aui-base']
+);
+
+Liferay.provide(
+	Liferay.Util,
+	'disableTextareaTabs',
+	function(textarea) {
+		var A = AUI();
+
+		textarea = A.one(textarea);
+
+		if (textarea && textarea.attr('textareatabs') != 'enabled') {
+			textarea.attr('textareatabs', 'disabled');
+
+			textarea.detach('keydown', Liferay.Util.textareaTabs);
+		}
+	},
+	['aui-base']
+);
+
+Liferay.provide(
+	Liferay.Util,
+	'disableToggleBoxes',
+	function(checkBoxId, toggleBoxId, checkDisabled) {
+		var A = AUI();
+
+		var checkBox = A.one('#' + checkBoxId);
+		var toggleBox = A.one('#' + toggleBoxId);
+
+		if (checkBox && toggleBox) {
+			if (checkBox.get('checked') && checkDisabled) {
+				toggleBox.set('disabled', true);
+			}
+			else {
+				toggleBox.set('disabled', false);
+			}
+
+			checkBox.on(
+				'click',
+				function() {
+					toggleBox.set('disabled', !toggleBox.get('disabled'));
+				}
+			);
+		}
+	},
+	['aui-base']
+);
+
+Liferay.provide(
+	Liferay.Util,
+	'enableTextareaTabs',
+	function(textarea) {
+		var A = AUI();
+
+		textarea = A.one(textarea);
+
+		if (textarea && textarea.attr('textareatabs') != 'enabled') {
+			textarea.attr('textareatabs', 'disabled');
+
+			textarea.on('keydown', Liferay.Util.textareaTabs);
+		}
+	},
+	['aui-base']
+);
+
+Liferay.provide(
+	Liferay.Util,
+	'focusFormField',
+	function(el, caretPosition) {
+		var instance = this;
+
+		var A = AUI();
+
+		instance.addInputFocus();
+
+		var interacting = false;
+
+		var clickHandle = A.getDoc().on(
+			'click',
+			function(event) {
+				interacting = true;
+
+				clickHandle.detach();
+			}
+		);
+
+		if (!interacting) {
+			el = A.one(el);
+
+			try {
+				el.focus();
+			}
+			catch (e) {
+			}
+		}
+	},
+	['aui-base']
+);
+
+Liferay.provide(
+	Liferay.Util,
+	'forcePost',
+	function(link) {
+		var A = AUI();
+
+		link = A.one(link);
+
+		if (link) {
+			var url = link.attr('href');
+
+			submitForm(document.hrefFm, url);
+
+			Liferay.Util._submitLocked = null;
+		}
+	},
+	['aui-base']
+);
+
+/**
+ * OPTIONS
+ *
+ * Required
+ * button {string|object}: The button that opens the popup when clicked.
+ * height {number}: The height to set the popup to.
+ * textarea {string}: the name of the textarea to auto-resize.
+ * url {string}: The url to open that sets the editor.
+ * width {number}: The width to set the popup to.
+ */
+
+Liferay.provide(
+	Liferay.Util,
+	'inlineEditor',
+	function(options) {
+		var instance = this;
+
+		var A = AUI();
+
+		if (options.url && options.button) {
+			var url = options.url;
+			var button = options.button;
+			var width = options.width || 680;
+			var height = options.height || 640;
+			var textarea = options.textarea;
+			var clicked = false;
+
+			var editorButton = A.one(button);
+			var popup = null;
+
+			if (editorButton) {
+				editorButton.on(
+					'click',
+					function(event) {
+						if (!clicked) {
+							popup = new A.Dialog(
+								{
+									centered: true,
+									height: 640,
+									title: Liferay.Language.get('editor'),
+									width: 680
+								}
+							).render();
+
+							popup.plug(
+								A.Plugin.IO,
+								{
+									uri: url + '&rt=' + Liferay.Util.randomInt()
+								}
+							);
+
+							clicked = true;
+						}
+						else {
+							popup.show();
+
+							popup._setAlignCenter(true);
+
+							popup.io.start();
+						}
+					}
+				);
+			}
+		}
+	},
+	['aui-dialog', 'aui-io']
+);
+
+Liferay.provide(
+	Liferay.Util,
+	'moveItem',
+	function(fromBox, toBox, sort) {
 		var A = AUI();
 
 		fromBox = A.one(fromBox);
@@ -748,9 +914,14 @@ Liferay.Util = {
 			Liferay.Util.sortBox(toBox);
 		}
 	},
+	['aui-base']
+);
 
-	portletTitleEdit: function(options) {
-		var instance = this;
+Liferay.provide(
+	Liferay.Util,
+	'portletTitleEdit',
+	function(options) {
+		var A = AUI();
 
 		var obj = options.obj;
 		var plid = options.plid;
@@ -763,71 +934,59 @@ Liferay.Util = {
 		var re = new RegExp('<\/?[^>]+>|\n|\r|\t', 'gim');
 
 		if (title && !title.hasClass('not-editable')) {
-			AUI().use(
-				'aui-editable',
-				'event',
-				function(A) {
-					var editableTitle = new A.Editable(
-						{
-							after: {
-								contentTextChange: function(event) {
-									var instance = this;
+			var editableTitle = new A.Editable(
+				{
+					after: {
+						contentTextChange: function(event) {
+							var instance = this;
 
-									if (!event.initial) {
-										Liferay.Util.savePortletTitle(
-											{
-												doAsUserId: doAsUserId,
-												plid: plid,
-												portletId: portletId,
-												title: event.newVal
-											}
-										);
+							if (!event.initial) {
+								Liferay.Util.savePortletTitle(
+									{
+										doAsUserId: doAsUserId,
+										plid: plid,
+										portletId: portletId,
+										title: event.newVal
 									}
-								},
-								startEditing: function(event) {
-									var instance = this;
+								);
+							}
+						},
+						startEditing: function(event) {
+							var instance = this;
 
-									if (Liferay.Layout) {
-										instance._dragListener = Liferay.Layout.layoutHandler.on(
-											'drag:start',
-											function(event) {
-												instance.fire('save');
-											}
-										);
+							if (Liferay.Layout) {
+								instance._dragListener = Liferay.Layout.layoutHandler.on(
+									'drag:start',
+									function(event) {
+										instance.fire('save');
 									}
-								},
-								stopEditing: function(event) {
-									var instance = this;
+								);
+							}
+						},
+						stopEditing: function(event) {
+							var instance = this;
 
-									if (instance._dragListener) {
-										instance._dragListener.detach();
-									}
-								}
-							},
-							cssClass: 'lfr-portlet-title-editable',
-							node: title
+							if (instance._dragListener) {
+								instance._dragListener.detach();
+							}
 						}
-					);
+					},
+					cssClass: 'lfr-portlet-title-editable',
+					node: title
 				}
 			);
 		}
 	},
+	['aui-editable']
+);
 
-	processTab: function(id) {
-		document.all[id].selection.text = String.fromCharCode(9);
-		document.all[id].focus();
-	},
+Liferay.provide(
+	Liferay.Util,
+	'removeItem',
+	function(box) {
+		var A = AUI();
 
-	randomInt: function() {
-		return (Math.ceil(Math.random() * (new Date).getTime()));
-	},
-
-	randomMinMax: function(min, max) {
-		return (Math.round(Math.random() * (max - min))) + min;
-	},
-
-	removeItem: function(box, value) {
-		box = AUI().one(box);
+		box = A.one(box);
 
 		var selectedIndex =  box.get('selectedIndex');
 
@@ -838,8 +997,13 @@ Liferay.Util = {
 			box.all('option[value=' + value + ']').item(selectedIndex).remove();
 		}
 	},
+	['aui-base']
+);
 
-	reorder: function(box, down) {
+Liferay.provide(
+	Liferay.Util,
+	'reorder',
+	function(box) {
 		var A = AUI();
 
 		box = A.one(box);
@@ -892,455 +1056,354 @@ Liferay.Util = {
 			}
 		}
 	},
+	['aui-base']
+);
 
-	resizeTextarea: function(elString, usingRichEditor, resizeToInlinePopup) {
-		AUI().ready(
-			function(A) {
-				var el = A.one('#' + elString);
+Liferay.provide(
+	Liferay.Util,
+	'resizeTextarea',
+	function(elString, usingRichEditor, resizeToInlinePopup) {
+		var A = AUI();
 
-				if (!el) {
-					el = A.one('textarea[name=' + elString + ']');
+		var el = A.one('#' + elString);
+
+		if (!el) {
+			el = A.one('textarea[name=' + elString + ']');
+		}
+
+		if (el) {
+			var pageBody;
+
+			if (resizeToInlinePopup) {
+				pageBody = el.ancestor('.aui-dialog-bd');
+			}
+			else {
+				pageBody = A.getBody();
+			}
+
+			var resize = function() {
+				var pageBodyHeight = pageBody.get('offsetHeight');
+
+				if (usingRichEditor) {
+					try {
+						if (el.get('nodeName').toLowerCase() != 'iframe') {
+							el = window[elString];
+						}
+					}
+					catch (e) {
+					}
+				}
+
+				var diff = 170;
+
+				if (!resizeToInlinePopup) {
+					diff = 100;
+				}
+
+				el = A.one(el);
+
+				var styles = {
+					height: (pageBodyHeight - diff) + 'px',
+					width: '98%'
+				};
+
+				if (usingRichEditor) {
+					if (!el || !A.DOM.inDoc(el)) {
+						A.on(
+							'available',
+							function(event) {
+								el = A.one(window[elString]);
+
+								if (el) {
+									el.setStyles(styles);
+								}
+							},
+							'#' + elString + '_cp'
+						);
+
+						return;
+					}
 				}
 
 				if (el) {
-					var pageBody;
-
-					if (resizeToInlinePopup) {
-						pageBody = el.ancestor('.aui-dialog-bd');
-					}
-					else {
-						pageBody = A.getBody();
-					}
-
-					var resize = function() {
-						var pageBodyHeight = pageBody.get('offsetHeight');
-
-						if (usingRichEditor) {
-							try {
-								if (el.get('nodeName').toLowerCase() != 'iframe') {
-									el = window[elString];
-								}
-							}
-							catch (e) {
-							}
-						}
-
-						var diff = 170;
-
-						if (!resizeToInlinePopup) {
-							diff = 100;
-						}
-
-						el = A.one(el);
-
-						var styles = {
-							height: (pageBodyHeight - diff) + 'px',
-							width: '98%'
-						};
-
-						if (usingRichEditor) {
-							if (!el || !A.DOM.inDoc(el)) {
-								A.on(
-									'available',
-									function(event) {
-										el = A.one(window[elString]);
-
-										if (el) {
-											el.setStyles(styles);
-										}
-									},
-									'#' + elString + '_cp'
-								);
-
-								return;
-							}
-						}
-
-						if (el) {
-							el.setStyles(styles);
-						}
-					};
-
-					resize();
-
-					if (resizeToInlinePopup) {
-						A.on('popupResize', resize);
-					}
-					else {
-						A.getWin().on('resize', resize);
-					}
+					el.setStyles(styles);
 				}
+			};
+
+			resize();
+
+			if (resizeToInlinePopup) {
+				A.on('popupResize', resize);
+			}
+			else {
+				A.getWin().on('resize', resize);
+			}
+		}
+	},
+	['aui-base']
+);
+
+Liferay.provide(
+	Liferay.Util,
+	'savePortletTitle',
+	function(params) {
+		var A = AUI();
+
+		A.mix(
+			params,
+			{
+				doAsUserId: 0,
+				plid: 0,
+				portletId: 0,
+				title: '',
+				url: themeDisplay.getPathMain() + '/portlet_configuration/update_title'
+			}
+		);
+
+		A.io.request(
+			params.url,
+			{
+				data: {
+					doAsUserId: params.doAsUserId,
+					p_l_id: params.plid,
+					portletId: params.portletId,
+					title: params.title
+				},
+				method: 'POST'
 			}
 		);
 	},
+	['aui-io']
+);
 
-	savePortletTitle: function(params) {
-		AUI().use(
-			'io',
-			function(A) {
-				A.mix(
-					params,
-					{
-						doAsUserId: 0,
-						plid: 0,
-						portletId: 0,
-						title: '',
-						url: themeDisplay.getPathMain() + '/portlet_configuration/update_title'
-					}
-				);
+Liferay.provide(
+	Liferay.Util,
+	'setSelectedValue',
+	function(col, value) {
+		var A = AUI();
 
-				A.io.request(
-					params.url,
-					{
-						data: {
-							doAsUserId: params.doAsUserId,
-							p_l_id: params.plid,
-							portletId: params.portletId,
-							title: params.title
-						},
-						method: 'POST'
-					}
-				);
-			}
-		);
-	},
-
-	selectAndCopy: function(el) {
-		el.focus();
-		el.select();
-
-		if (document.all) {
-			var textRange = el.createTextRange();
-
-			textRange.execCommand('copy');
-		}
-	},
-
-	setBox: function(oldBox, newBox) {
-		for (var i = oldBox.length - 1; i > -1; i--) {
-			oldBox.options[i] = null;
-		}
-
-		for (var i = 0; i < newBox.length; i++) {
-			oldBox.options[i] = new Option(newBox[i].value, i);
-		}
-
-		oldBox.options[0].selected = true;
-	},
-
-	setSelectedValue: function(col, value) {
-		var option = AUI().one(col).one('option[value=' + value + ']');
+		var option = A.one(col).one('option[value=' + value + ']');
 
 		if (option) {
 			option.set('selected', true);
 		}
 	},
+	['aui-base']
+);
 
-	showCapsLock: function(event, span) {
-		var keyCode = event.keyCode ? event.keyCode : event.which;
-		var shiftKey = event.shiftKey ? event.shiftKey : ((keyCode == 16) ? true : false);
+Liferay.provide(
+	Liferay.Util,
+	'sortBox',
+	function(box) {
+		var A = AUI();
 
-		if (((keyCode >= 65 && keyCode <= 90) && !shiftKey) ||
-			((keyCode >= 97 && keyCode <= 122) && shiftKey)) {
+		var newBox = [];
 
-			document.getElementById(span).style.display = '';
+		var options = box.all('option');
+
+		for (var i = 0; i < options.size(); i++) {
+			newBox[i] = [options.item(i).val(), options.item(i).text()];
 		}
-		else {
-			document.getElementById(span).style.display = 'none';
-		}
-	},
 
-	sortBox: function(box) {
-		AUI().use(
-			'aui-base',
-			function(A) {
-				var newBox = [];
+		newBox.sort(Liferay.Util.sortByAscending);
 
-				var options = box.all('option');
+		var boxObj = A.one(box);
 
-				for (var i = 0; i < options.size(); i++) {
-					newBox[i] = [options.item(i).val(), options.item(i).text()];
-				}
+		boxObj.all('option').remove();
 
-				newBox.sort(Liferay.Util.sortByAscending);
-
-				var boxObj = A.one(box);
-
-				boxObj.all('option').remove();
-
-				A.each(
-					newBox,
-					function(item, index, collection) {
-						boxObj.append('<option value="' + item[0] + '">' + item[1] + '</option>');
-					}
-				);
-
-				if (Liferay.Browser.isIe()) {
-					var currentWidth = boxObj.getStyle('width');
-
-					if (currentWidth == 'auto') {
-						boxObj.setStyle('width', 'auto');
-					}
-				}
+		A.each(
+			newBox,
+			function(item, index, collection) {
+				boxObj.append('<option value="' + item[0] + '">' + item[1] + '</option>');
 			}
 		);
-	},
 
-	sortByAscending: function(a, b) {
-		a = a[1].toLowerCase();
-		b = b[1].toLowerCase();
+		if (Liferay.Browser.isIe()) {
+			var currentWidth = boxObj.getStyle('width');
 
-		if (a > b) {
-			return 1;
+			if (currentWidth == 'auto') {
+				boxObj.setStyle('width', 'auto');
+			}
 		}
-
-		if (a < b) {
-			return -1;
-		}
-
-		return 0;
 	},
+	['aui-base']
+);
 
-	startsWith: function(str, x) {
-		return (str.indexOf(x) === 0);
-	},
+/**
+ * OPTIONS
+ *
+ * Required
+ * popup {string|object}: A selector or DOM element of the popup that contains the editor.
+ * textarea {string}: the name of the textarea to auto-resize.
+ * url {string}: The url to open that sets the editor.
+ */
 
-	/**
-	 * OPTIONS
-	 *
-	 * Required
-	 * popup {string|object}: A selector or DOM element of the popup that contains the editor.
-	 * textarea {string}: the name of the textarea to auto-resize.
-	 * url {string}: The url to open that sets the editor.
-	 */
+Liferay.provide(
+	Liferay.Util,
+	'switchEditor',
+	function(options) {
+		var A = AUI();
 
-	switchEditor: function(options) {
-		if (options.url && options.popup) {
-			AUI().use(
-				'aui-io-plugin',
-				function(A) {
-					var url = options.url;
-					var popup = A.one(options.popup);
-					var textarea = options.textarea;
+		var url = options.url;
+		var popup = A.one(options.popup);
+		var textarea = options.textarea;
 
-					if (popup) {
-						if (!popup.io) {
-							popup.plug(
-								A.Plugin.IO,
-								{
-									uri: url
-								}
-							);
-						}
-						else {
-							popup.io.set('uri', url);
-
-							popup.io.start();
-						}
+		if (popup) {
+			if (!popup.io) {
+				popup.plug(
+					A.Plugin.IO,
+					{
+						uri: url
 					}
+				);
+			}
+			else {
+				popup.io.set('uri', url);
+
+				popup.io.start();
+			}
+		}
+	},
+	['aui-io']
+);
+
+Liferay.provide(
+	Liferay.Util,
+	'toggleBoxes',
+	function(checkBoxId, toggleBoxId) {
+		var A = AUI();
+
+		var checkBox = A.one('#' + checkBoxId);
+		var toggleBox = A.one('#' + toggleBoxId);
+
+		if (checkBox && toggleBox) {
+			if (!checkBox.get('checked')) {
+				toggleBox.hide();
+			}
+
+			checkBox.on(
+				'click',
+				function() {
+					toggleBox.toggle();
 				}
 			);
 		}
 	},
+	['aui-base']
+);
 
-	textareaTabs: function(event) {
-		var el = event.currentTarget.getDOM();
-		var pressedKey = event.keyCode;
+Liferay.provide(
+	Liferay.Util,
+	'toggleControls',
+	function() {
+		var A = AUI();
 
-		if(pressedKey == 9) {
-			event.halt();
+		var trigger = A.one('.toggle-controls');
 
-			var oldscroll = el.scrollTop;
+		if (trigger) {
+			var docBody = A.getBody();
+			var hiddenClass = 'controls-hidden';
+			var visibleClass = 'controls-visible';
+			var currentClass = visibleClass;
 
-			if (el.setSelectionRange) {
-				var caretPos = el.selectionStart + 1;
-				var elValue = el.value;
+			if (Liferay._editControlsState != 'visible') {
+				currentClass = hiddenClass;
+			}
 
-				el.value = elValue.substring(0, el.selectionStart) + '\t' + elValue.substring(el.selectionEnd, elValue.length);
+			docBody.addClass(currentClass);
 
-				setTimeout(
-					function() {
-						el.focus();
-						el.setSelectionRange(caretPos, caretPos);
-					}, 0);
+			trigger.on(
+				'click',
+				function(event) {
+					docBody.toggleClass(visibleClass).toggleClass(hiddenClass);
 
+					Liferay._editControlsState = (docBody.hasClass(visibleClass) ? 'visible' : 'hidden');
+
+					A.io.request(
+						themeDisplay.getPathMain() + '/portal/session_click',
+						{
+							data: {
+								'liferay_toggle_controls': Liferay._editControlsState
+							},
+							method: 'POST'
+						}
+					);
+				}
+			);
+		}
+	},
+	['aui-io']
+);
+
+Liferay.provide(
+	Liferay.Util,
+	'toggleSelectBox',
+	function(selectBoxId, value, toggleBoxId) {
+		var A = AUI();
+
+		var selectBox = A.one('#' + selectBoxId);
+		var toggleBox = A.one('#' + toggleBoxId);
+
+		if (selectBox && toggleBox) {
+			var toggle = function() {
+				var action = 'show';
+
+				if (selectBox.val() != value) {
+					action = 'hide';
+				}
+
+				toggleBox[action]();
+			};
+
+			toggle();
+
+			selectBox.on('change', toggle);
+		}
+	},
+	['aui-base']
+);
+
+Liferay.provide(
+	window,
+	'submitForm',
+	function(form, action, singleSubmit) {
+		var A = AUI();
+
+		if (!Liferay.Util._submitLocked) {
+			form = A.one(form);
+
+			var inputs = form.all('input[type=button], input[type=reset], input[type=submit]');
+
+			Liferay.Util.disableFormButtons(inputs, form);
+
+			if (singleSubmit === false) {
+				Liferay.Util._submitLocked = A.later(
+					10000,
+					Liferay.Util,
+					Liferay.Util.enableFormButtons,
+					[inputs, form]
+				);
 			}
 			else {
-				document.selection.createRange().text='\t';
+				Liferay.Util._submitLocked = true;
 			}
 
-	        el.scrollTop = oldscroll;
+			if (action != null) {
+				form.attr('action', action);
+			}
 
-			return false;
-	    }
+			Liferay.fire(
+				'submitForm',
+				{
+					form: form
+				}
+			);
+
+			form.submit();
+		}
 	},
-
-	toggleBoxes: function(checkBoxId, toggleBoxId) {
-		AUI().use(
-			'aui-base',
-			function(A) {
-				var checkBox = A.one('#' + checkBoxId);
-				var toggleBox = A.one('#' + toggleBoxId);
-
-				if (checkBox && toggleBox) {
-					if (!checkBox.get('checked')) {
-						toggleBox.hide();
-					}
-
-					checkBox.on(
-						'click',
-						function() {
-							toggleBox.toggle();
-						}
-					);
-				}
-			}
-		);
-	},
-
-	toggleControls: function() {
-		AUI().use(
-			'aui-io-request',
-			function(A) {
-				var trigger = A.one('.toggle-controls');
-
-				if (trigger) {
-					var docBody = A.getBody();
-					var hiddenClass = 'controls-hidden';
-					var visibleClass = 'controls-visible';
-					var currentClass = visibleClass;
-
-					if (Liferay._editControlsState != 'visible') {
-						currentClass = hiddenClass;
-					}
-
-					docBody.addClass(currentClass);
-
-					trigger.on(
-						'click',
-						function(event) {
-							docBody.toggleClass(visibleClass).toggleClass(hiddenClass);
-
-							Liferay._editControlsState = (docBody.hasClass(visibleClass) ? 'visible' : 'hidden');
-
-							A.io.request(
-								themeDisplay.getPathMain() + '/portal/session_click',
-								{
-									data: {
-										'liferay_toggle_controls': Liferay._editControlsState
-									},
-									method: 'POST'
-								}
-							);
-						}
-					);
-				}
-			}
-		);
-	},
-
-	toggleSelectBox: function(selectBoxId, value, toggleBoxId) {
-		AUI().use(
-			'aui-base',
-			function(A) {
-				var selectBox = A.one('#' + selectBoxId);
-				var toggleBox = A.one('#' + toggleBoxId);
-
-				if (selectBox && toggleBox) {
-					var toggle = function() {
-						var action = 'show';
-
-						if (selectBox.val() != value) {
-							action = 'hide';
-						}
-
-						toggleBox[action]();
-					};
-
-					toggle();
-
-					selectBox.on('change', toggle);
-				}
-			}
-		);
-	},
-
-	uncamelize: function(value, separator) {
-		separator = separator || ' ';
-
-		value = value.replace(/([a-zA-Z][a-zA-Z])([A-Z])([a-z])/g, '$1' + separator + '$2$3');
-		value = value.replace(/([a-z])([A-Z])/g, '$1' + separator + '$2');
-
-		return value;
-	},
-
-	unescapeHTML: function(str) {
-		return str.replace(
-			/&lt;|&gt;|&amp;|&#034;|&#039;/gi,
-			function(match) {
-				var str = '';
-
-				if (match == '&lt;') {
-					str = '<';
-				}
-				else if (match == '&gt;') {
-					str = '>';
-				}
-				else if (match == '&amp;') {
-					str = '&';
-				}
-				else if (match == '&#034;') {
-					str = '\"';
-				}
-				else if (match == '&#039;') {
-					str = '\'';
-				}
-
-				return str;
-			}
-		);
-	}
-};
-
-function submitForm(form, action, singleSubmit) {
-	if (!Liferay.Util._submitLocked) {
-		AUI().use(
-			'aui-base',
-			function(A) {
-				form = A.one(form);
-
-				var inputs = form.all('input[type=button], input[type=reset], input[type=submit]');
-
-				Liferay.Util.disableFormButtons(inputs, form);
-
-				if (singleSubmit === false) {
-					Liferay.Util._submitLocked = A.later(
-						10000,
-						Liferay.Util,
-						Liferay.Util.enableFormButtons,
-						[inputs, form]
-					);
-				}
-				else {
-					Liferay.Util._submitLocked = true;
-				}
-
-				if (action != null) {
-					form.attr('action', action);
-				}
-
-				Liferay.fire(
-					'submitForm',
-					{
-						form: form
-					}
-				);
-
-				form.submit();
-			}
-		);
-	}
-}
+	['aui-base']
+);
 
 // 0-200: Theme Developer
 // 200-400: Portlet Developer

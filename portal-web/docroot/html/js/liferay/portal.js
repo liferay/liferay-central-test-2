@@ -1,24 +1,9 @@
-Liferay.Portal = {};
+Liferay.namespace('Portal.Tabs');
 
-Liferay.Portal.Tabs = {
-	show: function() {
-		var instance = this;
-
-		var args = arguments;
-
-		AUI().use(
-			'aui-base',
-			function(A) {
-				instance.show = instance._show;
-
-				instance.show.apply(instance, args);
-			}
-		);
-	},
-
-	_show: function(namespace, names, id) {
-		var instance = this;
-
+Liferay.provide(
+	Liferay.Portal.Tabs,
+	'show',
+	function(namespace, names, id) {
 		var A = AUI();
 
 		var tab = A.one('#' + namespace + id + 'TabsId');
@@ -46,36 +31,28 @@ Liferay.Portal.Tabs = {
 				el.hide();
 			}
 		}
-	}
-};
+	},
+	['aui-base']
+);
 
-Liferay.Portal.ToolTip = {
-	show: function() {
+Liferay.namespace('Portal.ToolTip');
+
+Liferay.provide(
+	Liferay.Portal.ToolTip,
+	'show',
+	function(obj, text) {
 		var instance = this;
+
+		var A = AUI();
 
 		if (!instance._cached) {
-			var args = arguments;
-
-			AUI().use(
-				'aui-tooltip',
-				function(A) {
-					instance._cached = new A.Tooltip(
-						{
-							trigger: '.liferay-tooltip',
-							zIndex: 10000
-						}
-					).render();
-
-					instance.show = instance._show;
-
-					instance.show.apply(instance, args);
+			instance._cached = new A.Tooltip(
+				{
+					trigger: '.liferay-tooltip',
+					zIndex: 10000
 				}
-			);
+			).render();
 		}
-	},
-
-	_show: function(obj, text) {
-		var instance = this;
 
 		var cached = instance._cached;
 
@@ -90,5 +67,6 @@ Liferay.Portal.ToolTip = {
 		}
 
 		cached.refreshAlign();
-	}
-};
+	},
+	['aui-tooltip']
+);

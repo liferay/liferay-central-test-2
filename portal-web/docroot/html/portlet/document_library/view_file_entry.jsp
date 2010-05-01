@@ -424,66 +424,77 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 </div>
 
 <aui:script>
-	function <portlet:namespace />compare() {
-		AUI().use(
-			'selector-css3',
-			function(A) {
-				var rowIds = A.all('input[name=<portlet:namespace />rowIds]:checked');
-				var sourceVersion = A.one('input[name="<portlet:namespace />sourceVersion"]');
-				var targetVersion = A.one('input[name="<portlet:namespace />targetVersion"]');
+	Liferay.provide(
+		window,
+		'<portlet:namespace />compare',
+		function() {
+			var A = AUI();
 
-				var rowIdsSize = rowIds.size();
+			var rowIds = A.all('input[name=<portlet:namespace />rowIds]:checked');
+			var sourceVersion = A.one('input[name="<portlet:namespace />sourceVersion"]');
+			var targetVersion = A.one('input[name="<portlet:namespace />targetVersion"]');
 
-				if (rowIdsSize == 1) {
-					if (sourceVersion) {
-						sourceVersion.val(rowIds.item(0).val());
-					}
-				}
-				else if (rowIdsSize == 2) {
-					if (sourceVersion) {
-						sourceVersion.val(rowIds.item(1).val());
-					}
+			var rowIdsSize = rowIds.size();
 
-					if (targetVersion) {
-						targetVersion.val(rowIds.item(0).val());
-					}
-				}
-
-				submitForm(document.<portlet:namespace />fm1);
-			}
-		);
-	}
-
-	function <portlet:namespace />initRowsChecked() {
-		var rowIds = AUI().all('input[name=<portlet:namespace />rowIds]');
-
-		rowIds.each(
-			function(item, index, collection) {
-				if (index >= 2) {
-					item.set('checked', false);
+			if (rowIdsSize == 1) {
+				if (sourceVersion) {
+					sourceVersion.val(rowIds.item(0).val());
 				}
 			}
-		);
-	}
+			else if (rowIdsSize == 2) {
+				if (sourceVersion) {
+					sourceVersion.val(rowIds.item(1).val());
+				}
 
-	function <portlet:namespace />updateRowsChecked(element) {
-		AUI().use(
-			'selector-css3',
-			function(A) {
-				var rowsChecked = A.all('input[name=<portlet:namespace />rowIds]:checked');
-
-				if (rowsChecked.size() > 2) {
-					var index = 2;
-
-					if (rowsChecked.item(2).compareTo(element)) {
-						index = 1;
-					}
-
-					rowsChecked.item(index).set('checked', false);
+				if (targetVersion) {
+					targetVersion.val(rowIds.item(0).val());
 				}
 			}
-		);
-	}
+
+			submitForm(document.<portlet:namespace />fm1);
+		},
+		['aui-base', 'selector-css3']
+	);
+
+	Liferay.provide(
+		window,
+		'<portlet:namespace />initRowsChecked',
+		function() {
+			var A = AUI();
+
+			var rowIds = A.all('input[name=<portlet:namespace />rowIds]');
+
+			rowIds.each(
+				function(item, index, collection) {
+					if (index >= 2) {
+						item.set('checked', false);
+					}
+				}
+			);
+		},
+		['aui-base']
+	);
+
+	Liferay.provide(
+		window,
+		'<portlet:namespace />updateRowsChecked',
+		function(element) {
+			var A = AUI();
+
+			var rowsChecked = A.all('input[name=<portlet:namespace />rowIds]:checked');
+
+			if (rowsChecked.size() > 2) {
+				var index = 2;
+
+				if (rowsChecked.item(2).compareTo(element)) {
+					index = 1;
+				}
+
+				rowsChecked.item(index).set('checked', false);
+			}
+		},
+		['aui-base', 'selector-css3']
+	);
 </aui:script>
 
 <aui:script use="aui-base">

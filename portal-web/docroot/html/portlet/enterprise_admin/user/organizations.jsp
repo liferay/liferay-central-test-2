@@ -109,38 +109,42 @@ List<Organization> organizations = (List<Organization>)request.getAttribute("use
 		organizationWindow.focus();
 	}
 
-	function <portlet:namespace />selectOrganization(organizationId, name, type) {
-		AUI().use(
-			'liferay-search-container',
-			function(A) {
-				var searchContainer = Liferay.SearchContainer.get('<portlet:namespace />organizationsSearchContainer');
+	Liferay.provide(
+		window,
+		'<portlet:namespace />selectOrganization',
+		function(organizationId, name, type) {
+			var A = AUI();
 
-				var rowColumns = [];
+			var searchContainer = Liferay.SearchContainer.get('<portlet:namespace />organizationsSearchContainer');
 
-				rowColumns.push(name);
-				rowColumns.push(type);
-				rowColumns.push('<%= RoleConstants.ORGANIZATION_MEMBER %>');
-				rowColumns.push('<a class="modify-link" data-rowId="' + organizationId + '" href="javascript:;"><%= UnicodeFormatter.toString(removeOrganizationIcon) %></a>');
+			var rowColumns = [];
 
-				searchContainer.addRow(rowColumns, organizationId);
-				searchContainer.updateDataStore();
+			rowColumns.push(name);
+			rowColumns.push(type);
+			rowColumns.push('<%= RoleConstants.ORGANIZATION_MEMBER %>');
+			rowColumns.push('<a class="modify-link" data-rowId="' + organizationId + '" href="javascript:;"><%= UnicodeFormatter.toString(removeOrganizationIcon) %></a>');
 
-				<portlet:namespace />trackChanges();
-			}
-		);
-	}
+			searchContainer.addRow(rowColumns, organizationId);
+			searchContainer.updateDataStore();
 
-	function <portlet:namespace />trackChanges() {
-		AUI().use(
-			'aui-base',
-			function(A) {
-				A.fire(
-					'enterpriseAdmin:trackChanges',
-					A.one('.selected .modify-link')
-				);
-			}
-		);
-	}
+			<portlet:namespace />trackChanges();
+		},
+		['liferay-search-container']
+	);
+
+	Liferay.provide(
+		window,
+		'<portlet:namespace />trackChanges',
+		function() {
+			var A = AUI();
+
+			A.fire(
+				'enterpriseAdmin:trackChanges',
+				A.one('.selected .modify-link')
+			);
+		},
+		['aui-base']
+	);
 </aui:script>
 
 <aui:script use="liferay-search-container">

@@ -15,40 +15,47 @@
 %>
 
 <aui:script>
-	function resizeIframe() {
-		var winHeight = 0;
+	Liferay.provide(
+		window,
+		'resizeIframe',
+		function() {
+			var A = AUI();
 
-		if (typeof(window.innerWidth) == 'number') {
+			var winHeight = 0;
 
-			// Non-IE
+			if (typeof(window.innerWidth) == 'number') {
 
-			winHeight = window.innerHeight;
-		}
-		else if ((document.documentElement) &&
-				 (document.documentElement.clientWidth || document.documentElement.clientHeight)) {
+				// Non-IE
 
-			// IE 6+
+				winHeight = window.innerHeight;
+			}
+			else if ((document.documentElement) &&
+					 (document.documentElement.clientWidth || document.documentElement.clientHeight)) {
 
-			winHeight = document.documentElement.clientHeight;
-		}
-		else if ((document.body) &&
-				 (document.body.clientWidth || document.body.clientHeight)) {
+				// IE 6+
 
-			// IE 4 compatible
+				winHeight = document.documentElement.clientHeight;
+			}
+			else if ((document.body) &&
+					 (document.body.clientWidth || document.body.clientHeight)) {
 
-			winHeight = document.body.clientHeight;
-		}
+				// IE 4 compatible
 
-		// The value 139 here is derived (tab_height * num_tab_levels) +
-		// height_of_banner + bottom_spacer. 139 just happend to work in
-		// this instance in IE and Firefox at the time.
+				winHeight = document.body.clientHeight;
+			}
 
-		//var iFrame = document.getElementById('iframe');
+			// The value 139 here is derived (tab_height * num_tab_levels) +
+			// height_of_banner + bottom_spacer. 139 just happend to work in
+			// this instance in IE and Firefox at the time.
 
-		//iFrame.style.height = (winHeight - 139);
+			//var iFrame = document.getElementById('iframe');
 
-		AUI().all('iframe').setStyle('height', winHeight - 139 + 'px');
-	}
+			//iFrame.style.height = (winHeight - 139);
+
+			A.all('iframe').setStyle('height', winHeight - 139 + 'px');
+		},
+		['aui-base']
+	);
 
 	window.onresize = resizeIframe;
 </aui:script>

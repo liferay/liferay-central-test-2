@@ -293,31 +293,52 @@ portletsList = ListUtil.sort(portletsList, new PortletTitleComparator(applicatio
 </div>
 
 <aui:script>
-	function <portlet:namespace />hideDateRange() {
-		AUI().one('#<portlet:namespace />startEndDate').hide();
-	}
+	Liferay.provide(
+		window,
+		'<portlet:namespace />hideDateRange',
+		function() {
+			var A = AUI();
 
-	function <portlet:namespace />showDateRange() {
-		AUI().one('#<portlet:namespace />startEndDate').show();
-	}
+			A.one('#<portlet:namespace />startEndDate').hide();
+		},
+		['aui-base']
+	);
 
-	function <portlet:namespace />toggleChildren(checkbox, parentDivId) {
-		var parentDiv = AUI().one('#' + parentDivId);
+	Liferay.provide(
+		window,
+		'<portlet:namespace />showDateRange',
+		function() {
+			var A = AUI();
 
-		var enabled = checkbox.checked;
+			A.one('#<portlet:namespace />startEndDate').show();
+		},
+		['aui-base']
+	);
 
-		if (parentDiv) {
-			parentDiv.all('input').each(
-				function(item, index, collection) {
-					var disabled = !enabled;
+	Liferay.provide(
+		window,
+		'<portlet:namespace />toggleChildren',
+		function(checkbox, parentDivId) {
+			var A = AUI();
 
-					if (enabled && item.hasClass('disabled')) {
-						disabled = true;
+			var parentDiv = A.one('#' + parentDivId);
+
+			var enabled = checkbox.checked;
+
+			if (parentDiv) {
+				parentDiv.all('input').each(
+					function(item, index, collection) {
+						var disabled = !enabled;
+
+						if (enabled && item.hasClass('disabled')) {
+							disabled = true;
+						}
+
+						item.set('disabled', disabled);
 					}
-
-					item.set('disabled', disabled);
-				}
-			);
-		}
-	}
+				);
+			}
+		},
+		['aui-base']
+	);
 </aui:script>

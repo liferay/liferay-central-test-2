@@ -56,67 +56,88 @@ hasResults = hasResults || (total > 0);
 </c:if>
 
 <aui:script>
-	function <portlet:namespace />handleEntry(entryId) {
-		var entry = AUI().one('#<portlet:namespace/>' + entryId);
+	Liferay.provide(
+		window,
+		'<portlet:namespace />handleEntry',
+		function(entryId) {
+			var A = AUI();
 
-		if (entry) {
-			var container = entry.get('parentNode');
+			var entry = A.one('#<portlet:namespace/>' + entryId);
 
-			if (container) {
-				if (container.hasClass('unread-entries')) {
-					<portlet:namespace />markEntry(entry, entryId);
-				}
-				else {
-					<portlet:namespace />toggleContent(entry);
+			if (entry) {
+				var container = entry.get('parentNode');
+
+				if (container) {
+					if (container.hasClass('unread-entries')) {
+						<portlet:namespace />markEntry(entry, entryId);
+					}
+					else {
+						<portlet:namespace />toggleContent(entry);
+					}
 				}
 			}
-		}
-	}
+		},
+		['aui-base']
+	);
 
-	function <portlet:namespace />markEntry(entry, entryId) {
-		Liferay.Service.Announcements.AnnouncementsFlag.addFlag({entryId : entryId, flag: <%= AnnouncementsFlagConstants.HIDDEN %>});
+	Liferay.provide(
+		window,
+		'<portlet:namespace />markEntry',
+		function(entry, entryId) {
+			var A = AUI();
 
-		var readContainer = AUI().all('#p_p_id<portlet:namespace /> .read-entries');
-		var control = entry.all('.control-entry a');
+			Liferay.Service.Announcements.AnnouncementsFlag.addFlag({entryId : entryId, flag: <%= AnnouncementsFlagConstants.HIDDEN %>});
 
-		if (readContainer) {
-			readContainer.append(entry);
-		}
+			var readContainer = A.all('#p_p_id<portlet:namespace /> .read-entries');
+			var control = entry.all('.control-entry a');
 
-		if (control) {
-			control.html('<liferay-ui:message key="show" />');
-		}
-
-		entry.show();
-	}
-
-	function <portlet:namespace />toggleContent(entry) {
-		var content = entry.all('.entry-content');
-		var control = entry.all('.control-entry a');
-
-		if (entry.hasClass('visible')) {
-			entry.removeClass('visible');
-
-			if (content) {
-				content.hide();
+			if (readContainer) {
+				readContainer.append(entry);
 			}
 
 			if (control) {
 				control.html('<liferay-ui:message key="show" />');
 			}
-		}
-		else {
-			entry.addClass('visible');
 
-			if (content) {
-				content.show();
-			}
+			entry.show();
+		},
+		['aui-base']
+	);
 
-			if (control) {
-				control.html('<liferay-ui:message key="hide" />');
+	Liferay.provide(
+		window,
+		'<portlet:namespace />toggleContent',
+		function(entry) {
+			var A = AUI();
+
+			var content = entry.all('.entry-content');
+			var control = entry.all('.control-entry a');
+
+			if (entry.hasClass('visible')) {
+				entry.removeClass('visible');
+
+				if (content) {
+					content.hide();
+				}
+
+				if (control) {
+					control.html('<liferay-ui:message key="show" />');
+				}
 			}
-		}
-	}
+			else {
+				entry.addClass('visible');
+
+				if (content) {
+					content.show();
+				}
+
+				if (control) {
+					control.html('<liferay-ui:message key="hide" />');
+				}
+			}
+		},
+		['aui-base']
+	);
 </aui:script>
 
 <c:if test="<%= !hasResults && portletName.equals(PortletKeys.ALERTS) && !PortletPermissionUtil.contains(permissionChecker, plid, PortletKeys.ANNOUNCEMENTS, ActionKeys.ADD_ENTRY) %>">

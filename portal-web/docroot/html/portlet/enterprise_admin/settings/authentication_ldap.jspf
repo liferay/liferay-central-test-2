@@ -198,18 +198,6 @@ if (ldapAuthEnabled && (ldapServerIds.length <= 0)) {
 		swapLdapServer.setAttribute('data-ldapServerId', ldapServerId);
 	}
 
-	function <portlet:namespace />changeLDAPServerPriority(ldapServerId, action) {
-		var ldapServer = AUI().one('.ldap-servers tr[data-ldapServerId="' + ldapServerId + '"]');
-
-		if (ldapServer) {
-			var swapLdapServer = ldapServer[action]();
-
-			if (swapLdapServer) {
-				<portlet:namespace />changePriority(ldapServer, swapLdapServer);
-			}
-		}
-	}
-
 	function <portlet:namespace />lowerLDAPServerPriority(ldapServerId) {
 		<portlet:namespace />changeLDAPServerPriority(ldapServerId, 'next');
 	}
@@ -218,17 +206,43 @@ if (ldapAuthEnabled && (ldapServerIds.length <= 0)) {
 		<portlet:namespace />changeLDAPServerPriority(ldapServerId, 'previous');
 	}
 
-	function <portlet:namespace />saveLdap() {
-		var ldapServerIds = [];
+	Liferay.provide(
+		window,
+		'<portlet:namespace />changeLDAPServerPriority',
+		function(ldapServerId, action) {
+			var A = AUI();
 
-		AUI().all('.ldap-servers .results-row').each(
-			function(item, index, collection) {
-				ldapServerIds.push(item.getAttribute('data-ldapServerId'));
+			var ldapServer = A.one('.ldap-servers tr[data-ldapServerId="' + ldapServerId + '"]');
+
+			if (ldapServer) {
+				var swapLdapServer = ldapServer[action]();
+
+				if (swapLdapServer) {
+					<portlet:namespace />changePriority(ldapServer, swapLdapServer);
+				}
 			}
-		);
+		},
+		['aui-base']
+	);
 
-		document.<portlet:namespace />fm['<portlet:namespace />settings(ldap.server.ids)'].value = ldapServerIds.join(',');
-	}
+	Liferay.provide(
+		window,
+		'<portlet:namespace />saveLdap',
+		function() {
+			var A = AUI();
+
+			var ldapServerIds = [];
+
+			A.all('.ldap-servers .results-row').each(
+				function(item, index, collection) {
+					ldapServerIds.push(item.getAttribute('data-ldapServerId'));
+				}
+			);
+
+			document.<portlet:namespace />fm['<portlet:namespace />settings(ldap.server.ids)'].value = ldapServerIds.join(',');
+		},
+		['aui-base']
+	);
 
 	Liferay.Util.toggleBoxes('<portlet:namespace />ldapImportEnabledCheckbox', '<portlet:namespace />importEnabledSettings');
 	Liferay.Util.toggleBoxes('<portlet:namespace />ldapExportEnabledCheckbox', '<portlet:namespace />exportEnabledSettings');

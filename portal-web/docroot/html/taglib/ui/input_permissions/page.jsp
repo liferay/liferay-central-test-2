@@ -177,40 +177,61 @@ String modelName = (String)request.getAttribute("liferay-ui:input-permissions:mo
 		</table>
 
 		<aui:script>
-			function <%= randomNamespace %>inputPermissionsShowOptions() {
-				AUI().one("#<%= randomNamespace %>inputPermissionsHideOptionsLink").show();
-				AUI().one("#<%= randomNamespace %>inputPermissionsTable").show();
+			Liferay.provide(
+				window,
+				'<%= randomNamespace %>inputPermissionsShowOptions',
+				function() {
+					var A = AUI();
 
-				AUI().one("#<%= randomNamespace %>inputPermissionsShowOptionsLink").hide();
-				AUI().one("#<%= randomNamespace %>inputPermissionsShowOptions").val("true");
-			}
+					A.one("#<%= randomNamespace %>inputPermissionsHideOptionsLink").show();
+					A.one("#<%= randomNamespace %>inputPermissionsTable").show();
 
-			function <%= randomNamespace %>inputPermissionsHideOptions() {
-				AUI().one("#<%= randomNamespace %>inputPermissionsShowOptionsLink").show();
-				AUI().one("#<%= randomNamespace %>inputPermissionsTable").hide();
+					A.one("#<%= randomNamespace %>inputPermissionsShowOptionsLink").hide();
+					A.one("#<%= randomNamespace %>inputPermissionsShowOptions").val("true");
+				},
+				['aui-base']
+			);
 
-				AUI().one("#<%= randomNamespace %>inputPermissionsHideOptionsLink").hide();
-				AUI().one("#<%= randomNamespace %>inputPermissionsShowOptions").val("false");
-			}
+			Liferay.provide(
+				window,
+				'<%= randomNamespace %>inputPermissionsHideOptions',
+				function() {
+					var A = AUI();
 
-			function <%= randomNamespace %>updatePermissionsView() {
-				var viewableBySelect = AUI().one("#<%= namespace %>inputPermissionsViewRole");
-				var guestViewCheckbox = AUI().one('input[name="<%= namespace %>guestPermissions"][value="VIEW"]');
-				var communityViewCheckbox = AUI().one('input[name="<%= namespace %>communityPermissions"][value="VIEW"]');
+					A.one("#<%= randomNamespace %>inputPermissionsShowOptionsLink").show();
+					A.one("#<%= randomNamespace %>inputPermissionsTable").hide();
 
-				if (viewableBySelect.val() == '<%= RoleConstants.GUEST %>') {
-					guestViewCheckbox.set("checked", true);
-					communityViewCheckbox.set("checked", false);
-				}
-				else if (viewableBySelect.val() == '<%= defaultGroupRole.getName() %>') {
-					guestViewCheckbox.set("checked", false);
-					communityViewCheckbox.set("checked", true);
-				}
-				else {
-					guestViewCheckbox.set("checked", false);
-					communityViewCheckbox.set("checked", false);
-				}
-			}
+					A.one("#<%= randomNamespace %>inputPermissionsHideOptionsLink").hide();
+					A.one("#<%= randomNamespace %>inputPermissionsShowOptions").val("false");
+				},
+				['aui-base']
+			);
+
+			Liferay.provide(
+				window,
+				'<%= randomNamespace %>updatePermissionsView',
+				function() {
+					var A = AUI();
+
+					var viewableBySelect = A.one("#<%= namespace %>inputPermissionsViewRole");
+					var guestViewCheckbox = A.one('input[name="<%= namespace %>guestPermissions"][value="VIEW"]');
+					var communityViewCheckbox = A.one('input[name="<%= namespace %>communityPermissions"][value="VIEW"]');
+
+					if (viewableBySelect.val() == '<%= RoleConstants.GUEST %>') {
+						guestViewCheckbox.set("checked", true);
+						communityViewCheckbox.set("checked", false);
+					}
+					else if (viewableBySelect.val() == '<%= defaultGroupRole.getName() %>') {
+						guestViewCheckbox.set("checked", false);
+						communityViewCheckbox.set("checked", true);
+					}
+					else {
+						guestViewCheckbox.set("checked", false);
+						communityViewCheckbox.set("checked", false);
+					}
+				},
+				['aui-base']
+			);
 		</aui:script>
 	</c:when>
 	<c:otherwise>

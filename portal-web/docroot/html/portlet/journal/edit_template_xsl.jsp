@@ -80,45 +80,58 @@ String defaultContent = ContentUtil.get(PropsUtil.get(PropsKeys.JOURNAL_TEMPLATE
 		return content;
 	}
 
-	function <portlet:namespace />updateEditorType() {
+	Liferay.provide(
+		window,
+		'<portlet:namespace />updateEditorType',
+		function() {
+			var A = AUI();
 
-		<%
-		String newEditorType = "codepress";
+			<%
+			String newEditorType = "codepress";
 
-		if (useEditorCodepress) {
-			newEditorType = "html";
-		}
-		%>
-
-		var editorForm = AUI().one(document.<portlet:namespace />editorForm);
-
-		if (editorForm) {
-			var popup = editorForm.ancestor('.aui-widget-bd');
-
-			if (popup) {
-				popup = popup.getDOM();
+			if (useEditorCodepress) {
+				newEditorType = "html";
 			}
-		}
+			%>
 
-		Liferay.Util.switchEditor(
-			{
-				popup: popup,
-				textarea: '<portlet:namespace />xslContent',
-				url: '<portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/journal/edit_template_xsl" /><portlet:param name="langType" value="<%= langType %>" /><portlet:param name="editorType" value="<%= newEditorType %>" /></portlet:renderURL>'
+			var editorForm = A.one(document.<portlet:namespace />editorForm);
+
+			if (editorForm) {
+				var popup = editorForm.ancestor('.aui-widget-bd');
+
+				if (popup) {
+					popup = popup.getDOM();
+				}
 			}
-		);
-	}
 
-	function <portlet:namespace />updateTemplateXsl() {
-		var xslContent = AUI().one('input[name=<portlet:namespace />xslContent]');
-		var content = '';
+			Liferay.Util.switchEditor(
+				{
+					popup: popup,
+					textarea: '<portlet:namespace />xslContent',
+					url: '<portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/journal/edit_template_xsl" /><portlet:param name="langType" value="<%= langType %>" /><portlet:param name="editorType" value="<%= newEditorType %>" /></portlet:renderURL>'
+				}
+			);
+		},
+		['aui-base']
+	);
 
-		content = encodeURIComponent(document.<portlet:namespace />editorForm.<portlet:namespace />xslContent.value);
+	Liferay.provide(
+		window,
+		'<portlet:namespace />updateTemplateXsl',
+		function() {
+			var A = AUI();
 
-		xslContent.attr('value', content);
+			var xslContent = A.one('input[name=<portlet:namespace />xslContent]');
+			var content = '';
 
-		AUI().DialogManager.closeByChild(document.<portlet:namespace />editorForm);
-	}
+			content = encodeURIComponent(document.<portlet:namespace />editorForm.<portlet:namespace />xslContent.value);
+
+			xslContent.attr('value', content);
+
+			A.DialogManager.closeByChild(document.<portlet:namespace />editorForm);
+		},
+		['aui-dialog']
+	);
 
 	document.<portlet:namespace />editorForm.<portlet:namespace />xslContent.value = <portlet:namespace />getEditorContent();
 

@@ -186,66 +186,67 @@ if (portletDisplay.isWebDAVEnabled()) {
 <aui:script>
 	var maxDimension = <%= PrefsPropsUtil.getInteger(PropsKeys.IG_IMAGE_THUMBNAIL_MAX_DIMENSION) %>;
 
-	function <portlet:namespace />viewImage(id, token, name, description, width, height) {
-		var page = AUI().getBody().get('viewportRegion');
+	Liferay.provide(
+		window,
+		'<portlet:namespace />viewImage',
+		function(id, token, name, description, width, height) {
+			var A = AUI();
 
-		var maxWidth = Math.max(page.right - 150, maxDimension);
-		var maxHeight = Math.max(page.bottom - 150, maxDimension);
+			var page = A.getBody().get('viewportRegion');
 
-		var imgWidth = width;
-		var imgHeight = height;
+			var maxWidth = Math.max(page.right - 150, maxDimension);
+			var maxHeight = Math.max(page.bottom - 150, maxDimension);
 
-		if (imgWidth > maxWidth || imgHeight > maxHeight) {
-			if (imgWidth > maxWidth) {
-				var x = maxWidth / imgWidth;
+			var imgWidth = width;
+			var imgHeight = height;
 
-				imgWidth = maxWidth;
-				imgHeight = x * imgHeight;
+			if (imgWidth > maxWidth || imgHeight > maxHeight) {
+				if (imgWidth > maxWidth) {
+					var x = maxWidth / imgWidth;
+
+					imgWidth = maxWidth;
+					imgHeight = x * imgHeight;
+				}
+
+				if (imgHeight > maxHeight) {
+					var y = maxHeight / imgHeight;
+
+					imgHeight = maxHeight;
+					imgWidth = y * imgWidth;
+				}
 			}
 
-			if (imgHeight > maxHeight) {
-				var y = maxHeight / imgHeight;
+			var winWidth = imgWidth + 36;
 
-				imgHeight = maxHeight;
-				imgWidth = y * imgWidth;
+			if (winWidth < maxDimension) {
+				winWidth = maxDimension;
 			}
-		}
 
-		var winWidth = imgWidth + 36;
+			var messageId = "<portlet:namespace />popup_" + id;
 
-		if (winWidth < maxDimension) {
-			winWidth = maxDimension;
-		}
+			var html = "";
 
-		var messageId = "<portlet:namespace />popup_" + id;
+			html += "<div class='image-content'>";
+			html += "<img alt='" + name + ". " + description + "' src='<%= themeDisplay.getPathImage() %>/image_gallery?img_id=" + id + "&t=" + token + "' style='height: " + imgHeight + "px; width" + imgWidth + "px;' />"
+			html += "</div>"
 
-		var html = "";
+			var popup = new A.Dialog(
+				{
+					bodyContent: html,
+					centered: true,
+					destroyOnClose: true,
+					draggable: false,
+					modal: true,
+					title: false,
+					width: winWidth
+				}
+			).render();
 
-		html += "<div class='image-content'>";
-		html += "<img alt='" + name + ". " + description + "' src='<%= themeDisplay.getPathImage() %>/image_gallery?img_id=" + id + "&t=" + token + "' style='height: " + imgHeight + "px; width" + imgWidth + "px;' />"
-		html += "</div>"
-
-		AUI().use(
-			'aui-dialog',
-			function(A) {
-				var popup = new A.Dialog(
-					{
-						bodyContent: html,
-						centered: true,
-						destroyOnClose: true,
-						draggable: false,
-						modal: true,
-						title: false,
-						width: winWidth
-					}
-				)
-				.render();
-
-				popup.get('boundingBox').addClass('portlet-image-gallery');
-				popup.get('contentBox').addClass('image-popup');
-			}
-		);
-	}
+			popup.get('boundingBox').addClass('portlet-image-gallery');
+			popup.get('contentBox').addClass('image-popup');
+		},
+		['aui-dialog']
+	);
 </aui:script>
 
 <%

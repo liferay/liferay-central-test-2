@@ -481,24 +481,6 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL><portlet:param name="struts_action" value="/communities/import_pages" /><portlet:param name="backURL" value="<%= backURL %>" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /><portlet:param name="privateLayout" value="<%= String.valueOf(privateLayout) %>" /></portlet:actionURL>");
 	}
 
-	function <portlet:namespace />removePage(box) {
-		var selectEl = AUI().one(box);
-
-		var layoutId = <%= ((refererLayout == null) ? layout.getLayoutId() : refererLayout.getLayoutId()) %>;
-		var currentValue = null;
-
-		if (selectEl) {
-			currentValue = selectEl.val();
-		}
-
-		if (layoutId == currentValue) {
-			alert('<%= UnicodeLanguageUtil.get(pageContext, "you-cannot-delete-this-page-because-you-are-currently-accessing-this-page") %>');
-		}
-		else {
-			Liferay.Util.removeItem(box);
-		}
-	}
-
 	function <portlet:namespace />savePage() {
 		document.<portlet:namespace />fm.encoding = "multipart/form-data";
 
@@ -542,28 +524,6 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 		submitForm(document.<portlet:namespace />fm);
 	}
 
-	function <portlet:namespace />updateLookAndFeel(themeId, colorSchemeId, sectionParam, sectionName) {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "look_and_feel";
-
-		var themeRadio = AUI().one(document.<portlet:namespace />fm.<portlet:namespace />themeId);
-
-		if (themeRadio) {
-			themeRadio.val(themeId);
-		}
-
-		var colorSchemeRadio = AUI().one(document.<portlet:namespace />fm.<portlet:namespace />colorSchemeId);
-
-		if (colorSchemeRadio) {
-			colorSchemeRadio.val(colorSchemeId);
-		}
-
-		if ((sectionParam != null) && (sectionName != null)) {
-			document.<portlet:namespace />fm.<portlet:namespace />pagesRedirect.value += "&" + sectionParam + "=" + sectionName;
-		}
-
-		submitForm(document.<portlet:namespace />fm);
-	}
-
 	function <portlet:namespace />updateStaging() {
 		var checked = document.<portlet:namespace />fm.<portlet:namespace />stagingEnabled.checked;
 
@@ -599,4 +559,59 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 			document.<portlet:namespace />fm.<portlet:namespace />workflowEnabled.checked = !checked;
 		}
 	}
+
+	Liferay.provide(
+		window,
+		'<portlet:namespace />removePage',
+		function(box) {
+			var A = AUI();
+
+			var selectEl = A.one(box);
+
+			var layoutId = <%= ((refererLayout == null) ? layout.getLayoutId() : refererLayout.getLayoutId()) %>;
+			var currentValue = null;
+
+			if (selectEl) {
+				currentValue = selectEl.val();
+			}
+
+			if (layoutId == currentValue) {
+				alert('<%= UnicodeLanguageUtil.get(pageContext, "you-cannot-delete-this-page-because-you-are-currently-accessing-this-page") %>');
+			}
+			else {
+				Liferay.Util.removeItem(box);
+			}
+		},
+		['aui-base']
+	);
+
+	Liferay.provide(
+		window,
+		'<portlet:namespace />updateLookAndFeel',
+		function(themeId, colorSchemeId, sectionParam, sectionName) {
+			var A = AUI();
+
+			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "look_and_feel";
+
+			var themeRadio = A.one(document.<portlet:namespace />fm.<portlet:namespace />themeId);
+
+			if (themeRadio) {
+				themeRadio.val(themeId);
+			}
+
+			var colorSchemeRadio = A.one(document.<portlet:namespace />fm.<portlet:namespace />colorSchemeId);
+
+			if (colorSchemeRadio) {
+				colorSchemeRadio.val(colorSchemeId);
+			}
+
+			if ((sectionParam != null) && (sectionName != null)) {
+				document.<portlet:namespace />fm.<portlet:namespace />pagesRedirect.value += "&" + sectionParam + "=" + sectionName;
+			}
+
+			submitForm(document.<portlet:namespace />fm);
+		},
+		['aui-base']
+	);
+
 </aui:script>

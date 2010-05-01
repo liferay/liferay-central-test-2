@@ -276,54 +276,58 @@ userGroupRoles.addAll(organizationRoles);
 		roleWindow.focus();
 	}
 
-	function <portlet:namespace />selectRole(roleId, name, searchContainer, groupName, groupId) {
-		AUI().use(
-			'liferay-search-container',
-			function(A) {
-				var searchContainerName = '<portlet:namespace />' + searchContainer + 'SearchContainer';
+	Liferay.provide(
+		window,
+		'<portlet:namespace />selectRole',
+		function(roleId, name, searchContainer, groupName, groupId) {
+			var A = AUI();
 
-				searchContainer = Liferay.SearchContainer.get(searchContainerName);
+			var searchContainerName = '<portlet:namespace />' + searchContainer + 'SearchContainer';
 
-				var rowColumns = [];
+			searchContainer = Liferay.SearchContainer.get(searchContainerName);
 
-				rowColumns.push(name);
+			var rowColumns = [];
 
-				if (groupName) {
-					rowColumns.push(groupName);
-				}
+			rowColumns.push(name);
 
-				if (groupId) {
-					rowColumns.push('<a class="modify-link" data-groupId="' + groupId + '" data-rowId="' + roleId + '" href="javascript:;"><%= UnicodeFormatter.toString(removeRoleIcon) %></a>');
-
-					<portlet:namespace />groupRolesRoleIds.push(roleId);
-					<portlet:namespace />groupRolesGroupIds.push(groupId);
-
-					document.<portlet:namespace />fm.<portlet:namespace />groupRolesRoleIds.value = <portlet:namespace />groupRolesRoleIds.join(',');
-					document.<portlet:namespace />fm.<portlet:namespace />groupRolesGroupIds.value = <portlet:namespace />groupRolesGroupIds.join(',');
-				}
-				else {
-					rowColumns.push('<a class="modify-link" data-rowId="' + roleId + '" href="javascript:;"><%= UnicodeFormatter.toString(removeRoleIcon) %></a>');
-				}
-
-				searchContainer.addRow(rowColumns, roleId);
-				searchContainer.updateDataStore();
-
-				<portlet:namespace />trackChanges();
+			if (groupName) {
+				rowColumns.push(groupName);
 			}
-		);
-	}
 
-	function <portlet:namespace />trackChanges() {
-		AUI().use(
-			'event',
-			function(A) {
-				A.fire(
-					'enterpriseAdmin:trackChanges',
-					A.one('.selected .modify-link')
-				);
+			if (groupId) {
+				rowColumns.push('<a class="modify-link" data-groupId="' + groupId + '" data-rowId="' + roleId + '" href="javascript:;"><%= UnicodeFormatter.toString(removeRoleIcon) %></a>');
+
+				<portlet:namespace />groupRolesRoleIds.push(roleId);
+				<portlet:namespace />groupRolesGroupIds.push(groupId);
+
+				document.<portlet:namespace />fm.<portlet:namespace />groupRolesRoleIds.value = <portlet:namespace />groupRolesRoleIds.join(',');
+				document.<portlet:namespace />fm.<portlet:namespace />groupRolesGroupIds.value = <portlet:namespace />groupRolesGroupIds.join(',');
 			}
-		);
-	}
+			else {
+				rowColumns.push('<a class="modify-link" data-rowId="' + roleId + '" href="javascript:;"><%= UnicodeFormatter.toString(removeRoleIcon) %></a>');
+			}
+
+			searchContainer.addRow(rowColumns, roleId);
+			searchContainer.updateDataStore();
+
+			<portlet:namespace />trackChanges();
+		},
+		['liferay-search-container']
+	);
+
+	Liferay.provide(
+		window,
+		'<portlet:namespace />trackChanges',
+		function() {
+			var A = AUI();
+
+			A.fire(
+				'enterpriseAdmin:trackChanges',
+				A.one('.selected .modify-link')
+			);
+		},
+		['aui-base']
+	);
 </aui:script>
 
 <aui:script use="liferay-search-container">

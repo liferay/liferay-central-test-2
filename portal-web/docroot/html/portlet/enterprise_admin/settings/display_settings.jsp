@@ -177,25 +177,39 @@ boolean deployed = false;
 </aui:fieldset>
 
 <aui:script>
-	function <portlet:namespace />changeLogo(newLogoURL) {
-		AUI().one('#<portlet:namespace />avatar').attr('src', newLogoURL);
-		AUI().one('.company-logo').attr('src', newLogoURL);
-
-		AUI().one('#<portlet:namespace />deleteLogo').val(false);
-	}
-
-	function <portlet:namespace />deleteLogo(defaultLogoURL) {
-		AUI().one('#<portlet:namespace />deleteLogo').val(true);
-
-		AUI().one('#<portlet:namespace />avatar').attr('src', defaultLogoURL);
-		AUI().one('.company-logo').attr('src', defaultLogoURL);
-	}
-
 	function <portlet:namespace />openEditCompanyLogoWindow(editCompanyLogoURL) {
 		var editCompanyLogoWindow = window.open(editCompanyLogoURL, 'changeLogo', 'directories=no,height=400,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=500');
 
 		editCompanyLogoWindow.focus();
 	}
+
+	Liferay.provide(
+		window,
+		'<portlet:namespace />changeLogo',
+		function(newLogoURL) {
+			var A = AUI();
+
+			A.one('#<portlet:namespace />avatar').attr('src', newLogoURL);
+			A.one('.company-logo').attr('src', newLogoURL);
+
+			A.one('#<portlet:namespace />deleteLogo').val(false);
+		},
+		['aui-base']
+	);
+
+	Liferay.provide(
+		window,
+		'<portlet:namespace />deleteLogo',
+		function(defaultLogoURL) {
+			var A = AUI();
+
+			A.one('#<portlet:namespace />deleteLogo').val(true);
+
+			A.one('#<portlet:namespace />avatar').attr('src', defaultLogoURL);
+			A.one('.company-logo').attr('src', defaultLogoURL);
+		},
+		['aui-base']
+	);
 </aui:script>
 
 <aui:script use="aui-base">

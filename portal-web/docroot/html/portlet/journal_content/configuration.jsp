@@ -260,16 +260,23 @@ type = ParamUtil.getString(request, "type", type);
 </aui:form>
 
 <aui:script>
-	function <portlet:namespace />selectArticle(articleId) {
-		document.<portlet:namespace />fm.<portlet:namespace />articleId.value = articleId;
-		document.<portlet:namespace />fm.<portlet:namespace />templateId.value = "";
+	Liferay.provide(
+		window,
+		'<portlet:namespace />selectArticle',
+		function(articleId) {
+			var A = AUI();
 
-		AUI().one('.displaying-article-id-holder').show();
-		AUI().one('.displaying-help-message-holder').hide();
+			document.<portlet:namespace />fm.<portlet:namespace />articleId.value = articleId;
+			document.<portlet:namespace />fm.<portlet:namespace />templateId.value = "";
 
-		var displayArticleId = AUI().one('.displaying-article-id');
+			A.one('.displaying-article-id-holder').show();
+			A.one('.displaying-help-message-holder').hide();
 
-		displayArticleId.set('innerHTML', articleId + ' (<%= LanguageUtil.get(pageContext, "modified") %>)');
-		displayArticleId.addClass('modified');
-	}
+			var displayArticleId = A.one('.displaying-article-id');
+
+			displayArticleId.set('innerHTML', articleId + ' (<%= LanguageUtil.get(pageContext, "modified") %>)');
+			displayArticleId.addClass('modified');
+		},
+		['aui-base']
+	);
 </aui:script>

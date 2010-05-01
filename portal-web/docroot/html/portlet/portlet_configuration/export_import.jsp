@@ -336,23 +336,30 @@ if (layout.isTypeControlPanel()) {
 		}
 	}
 
-	function <portlet:namespace />toggleChildren(checkbox, parentDivId) {
-		var parentDiv = AUI().one('#' + parentDivId);
+	Liferay.provide(
+		window,
+		'<portlet:namespace />toggleChildren',
+		function(checkbox, parentDivId) {
+			var A = AUI();
 
-		var enabled = checkbox.checked;
+			var parentDiv = A.one('#' + parentDivId);
 
-		if (parentDiv) {
-			parentDiv.all('input').each(
-				function(item, index, collection) {
-					var disabled = !enabled;
+			var enabled = checkbox.checked;
 
-					if (enabled && item.hasClass('disabled')) {
-						disabled = true;
+			if (parentDiv) {
+				parentDiv.all('input').each(
+					function(item, index, collection) {
+						var disabled = !enabled;
+
+						if (enabled && item.hasClass('disabled')) {
+							disabled = true;
+						}
+
+						item.set('disabled', disabled);
 					}
-
-					item.set('disabled', disabled);
-				}
-			);
-		}
-	}
+				);
+			}
+		},
+		['aui-base']
+	);
 </aui:script>

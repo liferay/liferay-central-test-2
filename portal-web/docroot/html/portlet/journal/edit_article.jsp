@@ -618,21 +618,6 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 		}
 	}
 
-	function <portlet:namespace />disableInputDate(date, checked) {
-		document.<portlet:namespace />fm1["<portlet:namespace />" + date + "Month"].disabled = checked;
-		document.<portlet:namespace />fm1["<portlet:namespace />" + date + "Day"].disabled = checked;
-		document.<portlet:namespace />fm1["<portlet:namespace />" + date + "Year"].disabled = checked;
-		document.<portlet:namespace />fm1["<portlet:namespace />" + date + "Hour"].disabled = checked;
-		document.<portlet:namespace />fm1["<portlet:namespace />" + date + "Minute"].disabled = checked;
-		document.<portlet:namespace />fm1["<portlet:namespace />" + date + "AmPm"].disabled = checked;
-
-		var imageInputIdInput = AUI().one(document.<portlet:namespace />fm1["<portlet:namespace />" + date + "ImageInputIdInput"]);
-
-		if (imageInputIdInput) {
-			imageInputIdInput.toggleClass('disabled');
-		}
-	}
-
 	function <portlet:namespace />editorContentChanged(text) {
 		<portlet:namespace />contentChanged();
 	}
@@ -689,6 +674,28 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 		document.<portlet:namespace />fm1.<portlet:namespace />templateId.value = templateId;
 		submitForm(document.<portlet:namespace />fm1);
 	}
+
+	Liferay.provide(
+		window,
+		'<portlet:namespace />disableInputDate',
+		function(date, checked) {
+			var A = AUI();
+
+			document.<portlet:namespace />fm1["<portlet:namespace />" + date + "Month"].disabled = checked;
+			document.<portlet:namespace />fm1["<portlet:namespace />" + date + "Day"].disabled = checked;
+			document.<portlet:namespace />fm1["<portlet:namespace />" + date + "Year"].disabled = checked;
+			document.<portlet:namespace />fm1["<portlet:namespace />" + date + "Hour"].disabled = checked;
+			document.<portlet:namespace />fm1["<portlet:namespace />" + date + "Minute"].disabled = checked;
+			document.<portlet:namespace />fm1["<portlet:namespace />" + date + "AmPm"].disabled = checked;
+
+			var imageInputIdInput = A.one(document.<portlet:namespace />fm1["<portlet:namespace />" + date + "ImageInputIdInput"]);
+
+			if (imageInputIdInput) {
+				imageInputIdInput.toggleClass('disabled');
+			}
+		},
+		['aui-base']
+	);
 
 	Liferay.Util.disableToggleBoxes('<portlet:namespace />autoArticleIdCheckbox','<portlet:namespace />newArticleId', true);
 
