@@ -36,6 +36,44 @@ Liferay.Util = {
 		};
 	},
 
+	addInputFocus: function() {
+		var instance = this;
+
+		AUI().use(
+			'aui-base',
+			function(A) {
+				var handleFocus = function(event) {
+					var target = event.target;
+
+					var tagName = target.get('tagName');
+
+					if (tagName) {
+						tagName = tagName.toLowerCase();
+					}
+
+					var nodeType = target.get('type');
+
+					if (((tagName == 'input') && (/text|password/).test(nodeType)) ||
+						(tagName == 'textarea')) {
+
+						var action = 'addClass';
+
+						if (/blur|focusout/.test(event.type)) {
+							action = 'removeClass';
+						}
+
+						target[action]('focus');
+					}
+				};
+
+				A.on('focus', handleFocus, document);
+				A.on('blur', handleFocus, document);
+			}
+		);
+
+		instance.addInputFocus = function(){};
+	},
+
 	addInputType: function(el) {
 		var instance = this;
 
@@ -465,46 +503,6 @@ Liferay.Util = {
 		);
 	}
 };
-
-Liferay.provide(
-	Liferay.Util,
-	'addInputFocus',
-	{
-		fn: function() {
-			var A = AUI();
-
-			var handleFocus = function(event) {
-				var target = event.target;
-
-				var tagName = target.get('tagName');
-
-				if (tagName) {
-					tagName = tagName.toLowerCase();
-				}
-
-				var nodeType = target.get('type');
-
-				if (((tagName == 'input') && (/text|password/).test(nodeType)) ||
-					(tagName == 'textarea')) {
-
-					var action = 'addClass';
-
-					if (/blur|focusout/.test(event.type)) {
-						action = 'removeClass';
-					}
-
-					target[action]('focus');
-				}
-			};
-
-			A.on('focus', handleFocus, document);
-			A.on('blur', handleFocus, document);
-		},
-		once: true
-	},
-	['aui-base']
-);
-
 
 Liferay.provide(
 	Liferay.Util,

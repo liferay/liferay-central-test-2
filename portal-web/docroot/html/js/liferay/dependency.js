@@ -1,5 +1,5 @@
 (function(){
-	var A = AUI();
+	var A = AUI().use('oop');
 
 	var usedModules = {};
 	var emptyFn = function(){};
@@ -12,14 +12,12 @@
 
 			var guid = A.guid();
 			var before;
-			var once;
 
 			if (A.Lang.isObject(methodFn, true)) {
 				var config = methodFn;
 
 				methodFn = config.fn;
 				before = config.before;
-				once = config.once;
 
 				if (!A.Lang.isFunction(before)) {
 					before = null;
@@ -37,7 +35,7 @@
 
 				if (modules.length == 1) {
 					if (modules[0] in usedModules) {
-						Dependency._replaceMethod(obj, methodName, methodFn, once);
+						Dependency._replaceMethod(obj, methodName, methodFn);
 
 						methodFn.apply(obj, args);
 
@@ -58,7 +56,7 @@
 				queue.add(args);
 
 				if (firstLoad) {
-					modules.push(A.bind(Dependency._proxy, Liferay, obj, methodName, methodFn, once, guid));
+					modules.push(A.bind(Dependency._proxy, Liferay, obj, methodName, methodFn, guid));
 
 					A.use.apply(A, modules);
 
@@ -81,32 +79,27 @@
 			return obj._yuid && A.Do.objs[obj._yuid] && A.Do.objs[obj._yuid][methodName];
 		},
 
-		_proxy: function(obj, methodName, methodFn, once, guid, A) {
+		_proxy: function(obj, methodName, methodFn, guid, A) {
 			var queue = Dependency._proxyLoaders[guid];
 			var args;
 
-			Dependency._replaceMethod(obj, methodName, methodFn, once);
+			Dependency._replaceMethod(obj, methodName, methodFn);
 
 			while ((args = queue.next())) {
 		        methodFn.apply(obj, args);
 		    }
 		},
 
-		_replaceMethod: function(obj, methodName, methodFn, once) {
+		_replaceMethod: function(obj, methodName, methodFn) {
 			var instance = this;
 
-			if (!once) {
-				var AOP = Dependency._getAOP(obj, methodName);
+			var AOP = Dependency._getAOP(obj, methodName);
 
-				if (AOP) {
-					AOP.method = methodFn;
-				}
-				else {
-					obj[methodName] = methodFn;
-				}
+			if (AOP) {
+				AOP.method = methodFn;
 			}
 			else {
-				obj[methodName] = emptyFn;
+				obj[methodName] = methodFn;
 			}
 		},
 
