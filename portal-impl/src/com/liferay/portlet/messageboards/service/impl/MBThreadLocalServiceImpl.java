@@ -31,6 +31,8 @@ import com.liferay.portlet.messageboards.SplitThreadException;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBCategoryConstants;
 import com.liferay.portlet.messageboards.model.MBMessage;
+import com.liferay.portlet.messageboards.model.MBMessageFlag;
+import com.liferay.portlet.messageboards.model.MBMessageFlagConstants;
 import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.model.MBThreadConstants;
 import com.liferay.portlet.messageboards.service.base.MBThreadLocalServiceBaseImpl;
@@ -423,10 +425,26 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 		MBCategory category = message.getCategory();
 		long oldThreadId = message.getThreadId();
 		String oldAttachmentsDir = message.getAttachmentsDir();
+		long userId = mbMessagePersistence.findByPrimaryKey(
+				message.getThread().getRootMessageId()).getUserId();
 
 		// Message flags
 
-		mbMessageFlagLocalService.deleteThreadFlags(oldThreadId);
+		mbMessageFlagLocalService.deleteAnswerFlags(
+				oldThreadId, message.getMessageId());
+
+		int count = mbMessageFlagPersistence.countByT_F(
+			oldThreadId, MBMessageFlagConstants.ANSWER_FLAG);
+
+		if (count == 1) {
+			MBMessageFlag messageFlag = mbMessageFlagPersistence.fetchByU_M_F(
+					userId, message.getThread().getRootMessageId(),
+				MBMessageFlagConstants.ANSWER_FLAG);
+
+			messageFlag.setFlag(MBMessageFlagConstants.QUESTION_FLAG);
+
+			mbMessageFlagPersistence.update(messageFlag, false);
+		}
 
 		// Create new thread
 

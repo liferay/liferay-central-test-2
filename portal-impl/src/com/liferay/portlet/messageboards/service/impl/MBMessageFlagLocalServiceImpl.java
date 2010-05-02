@@ -131,6 +131,20 @@ public class MBMessageFlagLocalServiceImpl
 		}
 	}
 
+	public void deleteAnswerFlags(long threadId, long messageId)
+		throws SystemException {
+
+		mbMessageFlagPersistence.removeByM_F(
+				messageId, MBMessageFlagConstants.ANSWER_FLAG);
+
+		List<MBMessage> messages = mbMessagePersistence.findByT_P(
+				threadId, messageId);
+
+		for (MBMessage message : messages) {
+			deleteAnswerFlags(threadId, message.getMessageId());
+		}
+	}
+
 	public void deleteFlags(long userId) throws SystemException {
 		mbMessageFlagPersistence.removeByUserId(userId);
 	}

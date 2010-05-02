@@ -133,6 +133,11 @@ public class MBMessageFlagLocalServiceWrapper
 		_mbMessageFlagLocalService.addQuestionFlag(messageId);
 	}
 
+	public void deleteAnswerFlags(long threadId, long messageId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		_mbMessageFlagLocalService.deleteAnswerFlags(threadId, messageId);
+	}
+
 	public void deleteFlags(long userId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_mbMessageFlagLocalService.deleteFlags(userId);
