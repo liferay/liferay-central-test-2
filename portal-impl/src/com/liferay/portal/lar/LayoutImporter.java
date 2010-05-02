@@ -279,8 +279,8 @@ public class LayoutImporter {
 			groupId, privateLayout, themeId, colorSchemeId, StringPool.BLANK,
 			wapTheme);
 
-		// Read categories, comments, locks, ratings, and tags to make them
-		// available to the data handlers through the context
+		// Read categories, comments, locks, permissions, ratings, and tags to
+		// make them available to the data handlers through the context
 
 		if (importCategories) {
 			importCategories(context);
