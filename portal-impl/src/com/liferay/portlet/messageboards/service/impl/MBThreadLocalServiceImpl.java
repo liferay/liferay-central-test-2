@@ -423,22 +423,22 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 		}
 
 		MBCategory category = message.getCategory();
-		long oldThreadId = message.getThreadId();
+		MBThread oldThread = message.getThread();
+		MBMessage rootMessage = mbMessagePersistence.findByPrimaryKey(
+			oldThread.getRootMessageId());
 		String oldAttachmentsDir = message.getAttachmentsDir();
-		long userId = mbMessagePersistence.findByPrimaryKey(
-				message.getThread().getRootMessageId()).getUserId();
 
 		// Message flags
 
 		mbMessageFlagLocalService.deleteAnswerFlags(
-				oldThreadId, message.getMessageId());
+			oldThread.getThreadId(), message.getMessageId());
 
 		int count = mbMessageFlagPersistence.countByT_F(
-			oldThreadId, MBMessageFlagConstants.ANSWER_FLAG);
+			oldThread.getThreadId(), MBMessageFlagConstants.ANSWER_FLAG);
 
 		if (count == 1) {
 			MBMessageFlag messageFlag = mbMessageFlagPersistence.fetchByU_M_F(
-					userId, message.getThread().getRootMessageId(),
+				rootMessage.getUserId(), rootMessage.getMessageId(),
 				MBMessageFlagConstants.ANSWER_FLAG);
 
 			messageFlag.setFlag(MBMessageFlagConstants.QUESTION_FLAG);
@@ -475,7 +475,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 		int messagesMoved = 1;
 
 		messagesMoved += moveChildrenMessages(
-			message, category, oldThreadId);
+			message, category, oldThread.getThreadId());
 
 		// Update new thread
 
@@ -484,8 +484,6 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 		mbThreadPersistence.update(thread, false);
 
 		// Update old thread
-
-		MBThread oldThread = mbThreadPersistence.findByPrimaryKey(oldThreadId);
 
 		oldThread.setMessageCount(oldThread.getMessageCount() - messagesMoved);
 
