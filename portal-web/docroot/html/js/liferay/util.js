@@ -1001,7 +1001,7 @@ Liferay.provide(
 Liferay.provide(
 	Liferay.Util,
 	'reorder',
-	function(box) {
+	function(box, down) {
 		var A = AUI();
 
 		box = A.one(box);
