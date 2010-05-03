@@ -145,7 +145,6 @@
 	%>
 
 	<liferay-ui:input-move-boxes
-		formName="fm"
 		leftTitle="current"
 		rightTitle="available"
 		leftBoxName="currentMetadataFields"
