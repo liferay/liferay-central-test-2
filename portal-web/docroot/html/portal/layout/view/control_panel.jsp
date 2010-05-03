@@ -185,16 +185,6 @@ request.setAttribute("control_panel.jsp-ppid", ppid);
 									</h2>
 
 									<liferay-ui:panel-floating-container paging="<%= true %>" trigger=".lfr-group-selector">
-										<c:if test="<%= permissionChecker.isCompanyAdmin() %>">
-											<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="sharedPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "shared") %>'>
-												<ul>
-													<li>
-														<a href="<%= HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", themeDisplay.getCompanyGroupId()) %>"><liferay-ui:message key="global" /></a>
-													</li>
-												</ul>
-											</liferay-ui:panel>
-										</c:if>
-
 										<%
 										List<Group> manageableGroups = GroupServiceUtil.getManageableGroups(ActionKeys.MANAGE_LAYOUTS, PropsValues.CONTROL_PANEL_NAVIGATION_MAX_COMMUNITIES);
 										List<Organization> manageableOrganizations = OrganizationServiceUtil.getManageableOrganizations(ActionKeys.MANAGE_LAYOUTS, PropsValues.CONTROL_PANEL_NAVIGATION_MAX_ORGANIZATIONS);
@@ -248,6 +238,28 @@ request.setAttribute("control_panel.jsp-ppid", ppid);
 													}
 													%>
 
+												</ul>
+											</liferay-ui:panel>
+										</c:if>
+
+										<%
+										boolean showGlobal= permissionChecker.isCompanyAdmin();
+										boolean showMyCommunity = user.getGroup().hasPublicLayouts() || user.getGroup().hasPrivateLayouts();
+										%>
+
+										<c:if test="<%= showGlobal || showMyCommunity %>">
+											<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="sharedPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "other[plural]") %>'>
+												<ul>
+													<c:if test="<%= showGlobal %>">
+														<li>
+															<a href="<%= HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", themeDisplay.getCompanyGroupId()) %>"><liferay-ui:message key="global" /></a>
+														</li>
+													</c:if>
+													<c:if test="<%= showMyCommunity %>">
+														<li>
+															<a href="<%= HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", user.getGroup().getGroupId()) %>"><liferay-ui:message key="my-community" /></a>
+														</li>
+													</c:if>
 												</ul>
 											</liferay-ui:panel>
 										</c:if>
