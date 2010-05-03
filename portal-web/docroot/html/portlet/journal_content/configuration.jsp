@@ -108,7 +108,11 @@ type = ParamUtil.getString(request, "type", type);
 							<portlet:param name="templateId" value="<%= tableIteratorObj.getTemplateId() %>" />
 						</portlet:renderURL>
 
-						<aui:a href="<%= editTemplateURL %>" id="tableIteratorObjName"><%= tableIteratorObj.getName() %></aui:a>
+						<liferay-util:buffer var="link">
+							<aui:a href="<%= editTemplateURL %>" id="tableIteratorObjName"><%= tableIteratorObj.getName() %></aui:a>
+						</liferay-util:buffer>
+
+						<aui:input checked="<%= templateChecked %>" inlineLabel="right" name="overideTemplateId" label="<%= link %>" type="radio" value="<%= tableIteratorObj.getTemplateId() %>" onchange='<%= "if (this.checked) {document." + renderResponse.getNamespace() + "fm." + renderResponse.getNamespace() + "templateId.value = this.value;}" %>' />
 
 						<c:if test="<%= tableIteratorObj.isSmallImage() %>">
 							<br />
