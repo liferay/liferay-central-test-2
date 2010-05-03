@@ -24,6 +24,10 @@ public class ${entity.name}${sessionTypeName}ServiceWrapper implements ${entity.
 
 	<#list methods as method>
 		<#if !method.isConstructor() && method.isPublic() && serviceBuilder.isCustomMethod(method)>
+			<#if method.name = "dynamicQuery">
+				@SuppressWarnings("unchecked")
+			</#if>
+
 			public ${method.returns.value}${method.returnsGenericsName}${serviceBuilder.getDimensions(method.returns.dimensions)} ${method.name}(
 
 			<#list method.parameters as parameter>
