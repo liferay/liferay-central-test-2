@@ -112,10 +112,10 @@ if (Validator.isNotNull(structureId)) {
 						</c:if>
 					</div>
 
-					<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" var="selectStructureURL">
-						<portlet:param name="struts_action" value="/portlet_configuration/select_structure" />
+					<liferay-portlet:renderURL portletName="<%= PortletKeys.JOURNAL %>" windowState="<%= LiferayWindowState.POP_UP.toString() %>" var="selectStructureURL">
+						<portlet:param name="struts_action" value="/journal/select_structure" />
 						<portlet:param name="structureId" value="<%= structureId %>" />
-					</portlet:renderURL>
+					</liferay-portlet:renderURL>
 
 					<%
 					String taglibOpenStructureWindow = "var folderWindow = window.open('" + selectStructureURL + "','structure', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680'); void(''); folderWindow.focus();";
@@ -193,13 +193,13 @@ if (Validator.isNotNull(structureId)) {
 
 	Liferay.provide(
 		window,
-		'<portlet:namespace />selectStructure',
-		function(structureId) {
+		'_<%= PortletKeys.JOURNAL %>_selectStructure',
+		function(structureId, name) {
 			var A = AUI();
 
 			document.<portlet:namespace />fm1.<portlet:namespace />structureId.value = structureId;
 
-			A.one('#<portlet:namespace/>structure').html(structureId);
+			A.one('#<portlet:namespace/>structure').html(structureId + ' <em>(' + name + ')</em>');
 		},
 		['aui-base']
 	);
