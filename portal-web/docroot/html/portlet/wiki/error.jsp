@@ -26,12 +26,20 @@
 	String nodeId = ParamUtil.getString(request, "nodeId");
 	String title = ParamUtil.getString(request, "title");
 
+	WikiNode node = null;
+
 	if (Validator.isNull(nodeId) || nodeId.equals("0")) {
-		WikiNode node = (WikiNode)request.getAttribute(WebKeys.WIKI_NODE);
+		node = (WikiNode)request.getAttribute(WebKeys.WIKI_NODE);
 
 		if (node != null) {
 			nodeId = String.valueOf(node.getNodeId());
 		}
+	}
+
+	boolean hasDraftPage = false;
+
+	if (node != null) {
+		hasDraftPage = WikiPageLocalServiceUtil.hasDraftPage(node.getNodeId(), title);
 	}
 
 	PortletURL searchURL = renderResponse.createRenderURL();
@@ -49,15 +57,48 @@
 	editPageURL.setParameter("title", title);
 	%>
 
-	<div class="portlet-msg-info">
-		<liferay-ui:message key="this-page-is-empty.-use-the-buttons-below-to-create-it-or-to-search-for-the-words-in-the-title" />
-	</div>
+	<c:choose>
+		<c:when test="<%= hasDraftPage %>">
 
-	<div>
-		<input onclick="location.href = '<%= searchURL.toString() %>'" type="button" value="<%= LanguageUtil.format(pageContext, "search-for-x", title) %>" />
+			<%
+			WikiPage draftPage = WikiPageLocalServiceUtil.getDraftPage(node.getNodeId(), title);
 
-		<input onclick="location.href = '<%= editPageURL.toString() %>'" type="button" value="<%= LanguageUtil.format(pageContext, "create-page-x", title) %>" />
-	</div>
+			boolean editableDraft = true;
+
+			if (permissionChecker.isCompanyAdmin() || permissionChecker.isCommunityAdmin(scopeGroupId) || (draftPage.getUserId() == user.getUserId())) {
+				editableDraft = true;
+			}
+			%>
+
+			<c:choose>
+				<c:when test="<%= editableDraft %>">
+					<div class="portlet-msg-info">
+						<liferay-ui:message key="this-page-has-an-associated-draft-that-is-not-yet-published" />
+					</div>
+
+					<div>
+						<input onclick="location.href = '<%= editPageURL.toString() %>'" type="button" value="<%= LanguageUtil.get(pageContext, "edit-draft") %>" />
+					</div>
+				</c:when>
+				<c:otherwise>
+					<div class="portlet-msg-info">
+						<liferay-ui:message key="this-page-has-already-been-started-by-another-author" />
+					</div>
+				</c:otherwise>
+			</c:choose>
+		</c:when>
+		<c:otherwise>
+			<div class="portlet-msg-info">
+				<liferay-ui:message key="this-page-is-empty.-use-the-buttons-below-to-create-it-or-to-search-for-the-words-in-the-title" />
+			</div>
+
+			<div>
+				<input onclick="location.href = '<%= searchURL.toString() %>'" type="button" value="<%= LanguageUtil.format(pageContext, "search-for-x", title) %>" />
+
+				<input onclick="location.href = '<%= editPageURL.toString() %>'" type="button" value="<%= LanguageUtil.format(pageContext, "create-page-x", title) %>" />
+			</div>
+		</c:otherwise>
+	</c:choose>
 </c:if>
 
 <liferay-ui:error exception="<%= PageTitleException.class %>" message="please-enter-a-valid-page-title" />

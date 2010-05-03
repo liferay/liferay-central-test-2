@@ -142,6 +142,15 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 		wikiPageLocalService.deletePageAttachment(nodeId, title, fileName);
 	}
 
+	public WikiPage getDraftPage(long nodeId, String title)
+		throws PortalException, SystemException {
+
+		WikiPagePermission.check(
+			getPermissionChecker(), nodeId, title, ActionKeys.VIEW);
+
+		return wikiPageLocalService.getDraftPage(nodeId, title);
+	}
+
 	public List<WikiPage> getNodePages(long nodeId, int max)
 		throws PortalException, SystemException {
 
@@ -202,6 +211,16 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 			getPermissionChecker(), nodeId, title, ActionKeys.VIEW);
 
 		return wikiPageLocalService.getPage(nodeId, title);
+	}
+
+	public WikiPage getPage(
+			long nodeId, String title, boolean head)
+		throws PortalException, SystemException {
+
+		WikiPagePermission.check(
+			getPermissionChecker(), nodeId, title, ActionKeys.VIEW);
+
+		return wikiPageLocalService.getPage(nodeId, title, head);
 	}
 
 	public WikiPage getPage(long nodeId, String title, double version)

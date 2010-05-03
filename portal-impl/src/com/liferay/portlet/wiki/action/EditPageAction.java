@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ServiceContext;
@@ -38,6 +39,7 @@ import com.liferay.portlet.wiki.PageVersionException;
 import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.model.WikiPageConstants;
+import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
 import com.liferay.portlet.wiki.service.WikiPageServiceUtil;
 
 import javax.portlet.ActionRequest;
@@ -46,7 +48,6 @@ import javax.portlet.PortletConfig;
 import javax.portlet.PortletRequest;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
-import javax.portlet.WindowState;
 
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -90,11 +91,12 @@ public class EditPageAction extends PortletAction {
 				String redirect = ParamUtil.getString(
 					actionRequest, "redirect");
 
-				if (page != null) {
-					boolean saveAndContinue = ParamUtil.getBoolean(
-						actionRequest, "saveAndContinue");
+				int workflowAction = ParamUtil.getInteger(
+					actionRequest, "workflowAction",
+					WorkflowConstants.ACTION_PUBLISH);
 
-					if (saveAndContinue) {
+				if (page != null) {
+					if (workflowAction == WorkflowConstants.ACTION_SAVE_DRAFT) {
 						redirect = getSaveAndContinueRedirect(
 							portletConfig, actionRequest, page, redirect);
 					}
@@ -195,20 +197,34 @@ public class EditPageAction extends PortletAction {
 
 		if (Validator.isNotNull(title)) {
 			try {
-				page = WikiPageServiceUtil.getPage(nodeId, title, version);
-			}
-			catch (NoSuchPageException nspe) {
-				if ((title.equals(WikiPageConstants.FRONT_PAGE)) &&
-					(version == 0)) {
 
-					ServiceContext serviceContext = new ServiceContext();
+				if ((version == 0) &&
+					WikiPageLocalServiceUtil.hasDraftPage(nodeId, title)) {
 
-					page = WikiPageServiceUtil.addPage(
-						nodeId, title, null, WikiPageConstants.NEW, true,
-						serviceContext);
+					page = WikiPageServiceUtil.getDraftPage(nodeId, title);
 				}
 				else {
-					throw nspe;
+					page = WikiPageServiceUtil.getPage(nodeId, title, version);
+				}
+			}
+			catch (NoSuchPageException nspe1) {
+				try {
+					page = WikiPageServiceUtil.getPage(
+						nodeId, title, false);
+				}
+				catch (NoSuchPageException nspe2) {
+					if ((title.equals(WikiPageConstants.FRONT_PAGE)) &&
+						(version == 0)) {
+
+						ServiceContext serviceContext = new ServiceContext();
+
+						page = WikiPageServiceUtil.addPage(
+							nodeId, title, null, WikiPageConstants.NEW, true,
+							serviceContext);
+					}
+					else {
+						throw nspe2;
+					}
 				}
 			}
 
@@ -237,8 +253,6 @@ public class EditPageAction extends PortletAction {
 		PortletURLImpl portletURL = new PortletURLImpl(
 			(ActionRequestImpl)actionRequest, portletConfig.getPortletName(),
 			themeDisplay.getPlid(), PortletRequest.RENDER_PHASE);
-
-		portletURL.setWindowState(WindowState.MAXIMIZED);
 
 		portletURL.setParameter("struts_action", "/wiki/edit_page");
 		portletURL.setParameter(Constants.CMD, Constants.UPDATE, false);

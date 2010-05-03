@@ -25,6 +25,7 @@ import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
@@ -164,6 +165,10 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 			WikiPage page)
 		throws Exception {
 
+		if (page.getStatus() != WorkflowConstants.STATUS_APPROVED) {
+			return;
+		}
+
 		long userId = context.getUserId(page.getUserUuid());
 		long nodeId = MapUtil.getLong(
 			nodePKs, page.getNodeId(), page.getNodeId());
@@ -189,6 +194,11 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 		serviceContext.setAssetTagNames(assetTagNames);
 		serviceContext.setCreateDate(page.getCreateDate());
 		serviceContext.setModifiedDate(page.getModifiedDate());
+
+		if (page.getStatus() != WorkflowConstants.STATUS_APPROVED) {
+			serviceContext.setWorkflowAction(
+				WorkflowConstants.ACTION_SAVE_DRAFT);
+		}
 
 		WikiPage importedPage = null;
 

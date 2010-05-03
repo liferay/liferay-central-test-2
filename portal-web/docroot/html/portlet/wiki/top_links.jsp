@@ -95,7 +95,13 @@ boolean print = ParamUtil.getString(request, "viewMode").equals(Constants.PRINT)
 				portletURL.setParameter("struts_action", "/wiki/view_orphan_pages");
 				%>
 
-				<liferay-ui:icon cssClass="top-link last" image="../aui/document-b" label="<%= true %>" message="orphan-pages" url='<%= strutsAction.equals("/wiki/view_orphan_pages") ? StringPool.BLANK : portletURL.toString() %>' />
+				<liferay-ui:icon cssClass="top-link" image="../aui/document-b" label="<%= true %>" message="orphan-pages" url='<%= strutsAction.equals("/wiki/view_orphan_pages") ? StringPool.BLANK : portletURL.toString() %>' />
+
+				<%
+				portletURL.setParameter("struts_action", "/wiki/view_draft_pages");
+				%>
+
+				<liferay-ui:icon cssClass="top-link last" image="../aui/document-b" label="<%= true %>" message="draft-pages" url='<%= strutsAction.equals("/wiki/view_draft") ? StringPool.BLANK : portletURL.toString() %>' />
 			</div>
 
 			<liferay-portlet:renderURL varImpl="searchURL">

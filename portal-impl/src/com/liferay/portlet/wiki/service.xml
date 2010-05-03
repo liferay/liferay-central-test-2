@@ -123,6 +123,10 @@
 			<finder-column name="nodeId" />
 			<finder-column name="redirectTitle" />
 		</finder>
+		<finder name="N_S" return-type="Collection">
+			<finder-column name="nodeId" />
+			<finder-column name="status" />
+		</finder>
 		<finder name="N_T_V" return-type="WikiPage" unique="true">
 			<finder-column name="nodeId" />
 			<finder-column name="title" />
@@ -133,10 +137,20 @@
 			<finder-column name="title" />
 			<finder-column name="head" />
 		</finder>
+		<finder name="N_T_S" return-type="Collection">
+			<finder-column name="nodeId" />
+			<finder-column name="title" />
+			<finder-column name="status" />
+		</finder>
 		<finder name="N_H_P" return-type="Collection">
 			<finder-column name="nodeId" />
 			<finder-column name="head" />
 			<finder-column name="parentTitle" />
+		</finder>
+		<finder name="N_U_S" return-type="Collection">
+			<finder-column name="nodeId" />
+			<finder-column name="userId" />
+			<finder-column name="status" />
 		</finder>
 
 		<!-- References -->

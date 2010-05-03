@@ -44,6 +44,7 @@ public class WikiFriendlyURLMapper extends BaseFriendlyURLMapper {
 
 		if (strutsAction.equals("/wiki/view") ||
 			strutsAction.equals("/wiki/view_all_pages") ||
+			strutsAction.equals("/wiki/view_draft_pages") ||
 			strutsAction.equals("/wiki/view_orphan_pages") ||
 			strutsAction.equals("/wiki/view_recent_changes")) {
 
@@ -174,6 +175,7 @@ public class WikiFriendlyURLMapper extends BaseFriendlyURLMapper {
 					String urlFragments1 = HttpUtil.decodeURL(urlFragments[1]);
 
 					if (urlFragments1.equals("all_pages") ||
+						urlFragments1.equals("draft_pages") ||
 						urlFragments1.equals("orphan_pages") ||
 						urlFragments1.equals("recent_changes")) {
 

@@ -65,6 +65,11 @@ else if (type.equals("incoming_links")) {
 
 	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "incoming-links"), portletURL.toString());
 }
+else if (type.equals("draft_pages")) {
+	portletURL.setParameter("struts_action", "/wiki/view_draft_pages");
+
+	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "draft-pages"), portletURL.toString());
+}
 else if (type.equals("orphan_pages")) {
 	portletURL.setParameter("struts_action", "/wiki/view_orphan_pages");
 
@@ -105,7 +110,7 @@ if (type.equals("history") || type.equals("recent_changes")) {
 	headerNames.add("summary");
 }
 
-if (type.equals("all_pages") || type.equals("categorized_pages") || type.equals("history") || type.equals("orphan_pages") || type.equals("recent_changes") || type.equals("tagged_pages")) {
+if (type.equals("all_pages") || type.equals("categorized_pages") || type.equals("draft_pages") || type.equals("history") || type.equals("orphan_pages") || type.equals("recent_changes") || type.equals("tagged_pages")) {
 	headerNames.add(StringPool.BLANK);
 }
 
@@ -113,6 +118,9 @@ String emptyResultsMessage = null;
 
 if (type.equals("categorized_pages")) {
 	emptyResultsMessage = "there-are-no-pages-with-this-category";
+}
+else if (type.equals("draft_pages")) {
+	emptyResultsMessage = "there-are-no-drafts";
 }
 else if (type.equals("incoming_links")) {
 	emptyResultsMessage = "there-are-no-pages-that-link-to-this-page";
@@ -155,6 +163,16 @@ else if (type.equals("categorized_pages") || type.equals("tagged_pages")) {
 
 		results.add(assetPage);
 	}
+}
+else if (type.equals("draft_pages")) {
+	long authorId = user.getUserId();
+
+	if (permissionChecker.isCompanyAdmin() || permissionChecker.isCommunityAdmin(scopeGroupId)) {
+		authorId = 0;
+	}
+
+	total = WikiPageLocalServiceUtil.getDraftPagesCount(node.getNodeId(), authorId);
+	results = WikiPageLocalServiceUtil.getDraftPages(node.getNodeId(), authorId, searchContainer.getStart(), searchContainer.getEnd());
 }
 else if (type.equals("orphan_pages")) {
 	List<WikiPage> orphans = WikiPageLocalServiceUtil.getOrphans(node.getNodeId());
@@ -284,7 +302,7 @@ for (int i = 0; i < results.size(); i++) {
 		}
 	}
 
-	if (type.equals("all_pages") || type.equals("orphan_pages") || type.equals("recent_changes") || type.equals("tagged_pages")) {
+	if (type.equals("all_pages") || type.equals("draft_pages") || type.equals("orphan_pages") || type.equals("recent_changes") || type.equals("tagged_pages")) {
 		row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/wiki/page_action.jsp");
 	}
 
