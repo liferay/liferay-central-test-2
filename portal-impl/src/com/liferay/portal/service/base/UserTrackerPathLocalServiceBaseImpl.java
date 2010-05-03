@@ -209,20 +209,22 @@ public abstract class UserTrackerPathLocalServiceBaseImpl
 		userTrackerPathPersistence.remove(userTrackerPath);
 	}
 
-	public List<UserTrackerPath> dynamicQuery(DynamicQuery dynamicQuery)
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return userTrackerPathPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<UserTrackerPath> dynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end)
+		throws SystemException {
 		return userTrackerPathPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}
 
-	public List<UserTrackerPath> dynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end, OrderByComparator orderByComparator)
-		throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		return userTrackerPathPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end, orderByComparator);
 	}

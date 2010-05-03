@@ -89,20 +89,22 @@ public abstract class MBMailingListLocalServiceBaseImpl
 		mbMailingListPersistence.remove(mbMailingList);
 	}
 
-	public List<MBMailingList> dynamicQuery(DynamicQuery dynamicQuery)
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return mbMailingListPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<MBMailingList> dynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end)
+		throws SystemException {
 		return mbMailingListPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}
 
-	public List<MBMailingList> dynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end, OrderByComparator orderByComparator)
-		throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		return mbMailingListPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end, orderByComparator);
 	}

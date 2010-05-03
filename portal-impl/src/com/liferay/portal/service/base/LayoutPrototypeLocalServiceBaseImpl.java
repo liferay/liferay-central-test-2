@@ -209,20 +209,22 @@ public abstract class LayoutPrototypeLocalServiceBaseImpl
 		layoutPrototypePersistence.remove(layoutPrototype);
 	}
 
-	public List<LayoutPrototype> dynamicQuery(DynamicQuery dynamicQuery)
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return layoutPrototypePersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<LayoutPrototype> dynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end)
+		throws SystemException {
 		return layoutPrototypePersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}
 
-	public List<LayoutPrototype> dynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end, OrderByComparator orderByComparator)
-		throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		return layoutPrototypePersistence.findWithDynamicQuery(dynamicQuery,
 			start, end, orderByComparator);
 	}

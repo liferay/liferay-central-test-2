@@ -127,20 +127,22 @@ public abstract class JournalArticleLocalServiceBaseImpl
 		journalArticlePersistence.remove(journalArticle);
 	}
 
-	public List<JournalArticle> dynamicQuery(DynamicQuery dynamicQuery)
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return journalArticlePersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<JournalArticle> dynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end)
+		throws SystemException {
 		return journalArticlePersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}
 
-	public List<JournalArticle> dynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end, OrderByComparator orderByComparator)
-		throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		return journalArticlePersistence.findWithDynamicQuery(dynamicQuery,
 			start, end, orderByComparator);
 	}

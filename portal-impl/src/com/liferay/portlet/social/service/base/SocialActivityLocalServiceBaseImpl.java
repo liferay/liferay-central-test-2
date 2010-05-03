@@ -88,20 +88,22 @@ public abstract class SocialActivityLocalServiceBaseImpl
 		socialActivityPersistence.remove(socialActivity);
 	}
 
-	public List<SocialActivity> dynamicQuery(DynamicQuery dynamicQuery)
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return socialActivityPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<SocialActivity> dynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end)
+		throws SystemException {
 		return socialActivityPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}
 
-	public List<SocialActivity> dynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end, OrderByComparator orderByComparator)
-		throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		return socialActivityPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end, orderByComparator);
 	}

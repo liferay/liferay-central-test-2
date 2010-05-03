@@ -97,18 +97,21 @@ public abstract class DLFolderLocalServiceBaseImpl
 		dlFolderPersistence.remove(dlFolder);
 	}
 
-	public List<DLFolder> dynamicQuery(DynamicQuery dynamicQuery)
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return dlFolderPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<DLFolder> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end) throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end)
+		throws SystemException {
 		return dlFolderPersistence.findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
-	public List<DLFolder> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end, OrderByComparator orderByComparator) throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		return dlFolderPersistence.findWithDynamicQuery(dynamicQuery, start,
 			end, orderByComparator);
 	}

@@ -209,20 +209,22 @@ public abstract class EmailAddressLocalServiceBaseImpl
 		emailAddressPersistence.remove(emailAddress);
 	}
 
-	public List<EmailAddress> dynamicQuery(DynamicQuery dynamicQuery)
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return emailAddressPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<EmailAddress> dynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end)
+		throws SystemException {
 		return emailAddressPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}
 
-	public List<EmailAddress> dynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end, OrderByComparator orderByComparator)
-		throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		return emailAddressPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end, orderByComparator);
 	}

@@ -210,20 +210,22 @@ public abstract class ResourcePermissionLocalServiceBaseImpl
 		resourcePermissionPersistence.remove(resourcePermission);
 	}
 
-	public List<ResourcePermission> dynamicQuery(DynamicQuery dynamicQuery)
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return resourcePermissionPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<ResourcePermission> dynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end)
+		throws SystemException {
 		return resourcePermissionPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}
 
-	public List<ResourcePermission> dynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end, OrderByComparator orderByComparator)
-		throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		return resourcePermissionPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end, orderByComparator);
 	}

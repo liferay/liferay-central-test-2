@@ -75,19 +75,22 @@ public abstract class TasksReviewLocalServiceBaseImpl
 		tasksReviewPersistence.remove(tasksReview);
 	}
 
-	public List<TasksReview> dynamicQuery(DynamicQuery dynamicQuery)
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return tasksReviewPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<TasksReview> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end) throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end)
+		throws SystemException {
 		return tasksReviewPersistence.findWithDynamicQuery(dynamicQuery, start,
 			end);
 	}
 
-	public List<TasksReview> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end, OrderByComparator orderByComparator) throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		return tasksReviewPersistence.findWithDynamicQuery(dynamicQuery, start,
 			end, orderByComparator);
 	}

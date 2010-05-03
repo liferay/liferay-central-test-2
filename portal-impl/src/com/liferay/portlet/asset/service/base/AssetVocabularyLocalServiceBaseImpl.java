@@ -97,20 +97,22 @@ public abstract class AssetVocabularyLocalServiceBaseImpl
 		assetVocabularyPersistence.remove(assetVocabulary);
 	}
 
-	public List<AssetVocabulary> dynamicQuery(DynamicQuery dynamicQuery)
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return assetVocabularyPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<AssetVocabulary> dynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end)
+		throws SystemException {
 		return assetVocabularyPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}
 
-	public List<AssetVocabulary> dynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end, OrderByComparator orderByComparator)
-		throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		return assetVocabularyPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end, orderByComparator);
 	}

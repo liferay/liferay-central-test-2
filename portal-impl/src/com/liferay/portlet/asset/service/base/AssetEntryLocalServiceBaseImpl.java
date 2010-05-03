@@ -132,19 +132,22 @@ public abstract class AssetEntryLocalServiceBaseImpl
 		assetEntryPersistence.remove(assetEntry);
 	}
 
-	public List<AssetEntry> dynamicQuery(DynamicQuery dynamicQuery)
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return assetEntryPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<AssetEntry> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end) throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end)
+		throws SystemException {
 		return assetEntryPersistence.findWithDynamicQuery(dynamicQuery, start,
 			end);
 	}
 
-	public List<AssetEntry> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end, OrderByComparator orderByComparator) throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		return assetEntryPersistence.findWithDynamicQuery(dynamicQuery, start,
 			end, orderByComparator);
 	}

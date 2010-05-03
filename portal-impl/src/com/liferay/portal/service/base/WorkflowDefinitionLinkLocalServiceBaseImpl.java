@@ -213,20 +213,21 @@ public abstract class WorkflowDefinitionLinkLocalServiceBaseImpl
 		workflowDefinitionLinkPersistence.remove(workflowDefinitionLink);
 	}
 
-	public List<WorkflowDefinitionLink> dynamicQuery(DynamicQuery dynamicQuery)
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return workflowDefinitionLinkPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<WorkflowDefinitionLink> dynamicQuery(
-		DynamicQuery dynamicQuery, int start, int end)
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end)
 		throws SystemException {
 		return workflowDefinitionLinkPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}
 
-	public List<WorkflowDefinitionLink> dynamicQuery(
-		DynamicQuery dynamicQuery, int start, int end,
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		return workflowDefinitionLinkPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end, orderByComparator);

@@ -92,19 +92,22 @@ public abstract class AssetLinkLocalServiceBaseImpl
 		assetLinkPersistence.remove(assetLink);
 	}
 
-	public List<AssetLink> dynamicQuery(DynamicQuery dynamicQuery)
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return assetLinkPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<AssetLink> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end) throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end)
+		throws SystemException {
 		return assetLinkPersistence.findWithDynamicQuery(dynamicQuery, start,
 			end);
 	}
 
-	public List<AssetLink> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end, OrderByComparator orderByComparator) throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		return assetLinkPersistence.findWithDynamicQuery(dynamicQuery, start,
 			end, orderByComparator);
 	}

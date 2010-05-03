@@ -89,20 +89,22 @@ public abstract class DLFileShortcutLocalServiceBaseImpl
 		dlFileShortcutPersistence.remove(dlFileShortcut);
 	}
 
-	public List<DLFileShortcut> dynamicQuery(DynamicQuery dynamicQuery)
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return dlFileShortcutPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<DLFileShortcut> dynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end)
+		throws SystemException {
 		return dlFileShortcutPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}
 
-	public List<DLFileShortcut> dynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end, OrderByComparator orderByComparator)
-		throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		return dlFileShortcutPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end, orderByComparator);
 	}

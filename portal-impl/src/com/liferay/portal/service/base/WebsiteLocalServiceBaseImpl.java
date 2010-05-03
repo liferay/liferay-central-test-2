@@ -205,18 +205,21 @@ public abstract class WebsiteLocalServiceBaseImpl implements WebsiteLocalService
 		websitePersistence.remove(website);
 	}
 
-	public List<Website> dynamicQuery(DynamicQuery dynamicQuery)
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return websitePersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<Website> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end) throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end)
+		throws SystemException {
 		return websitePersistence.findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
-	public List<Website> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end, OrderByComparator orderByComparator) throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		return websitePersistence.findWithDynamicQuery(dynamicQuery, start,
 			end, orderByComparator);
 	}

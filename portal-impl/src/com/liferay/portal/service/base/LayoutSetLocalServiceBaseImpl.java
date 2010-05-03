@@ -208,19 +208,22 @@ public abstract class LayoutSetLocalServiceBaseImpl
 		layoutSetPersistence.remove(layoutSet);
 	}
 
-	public List<LayoutSet> dynamicQuery(DynamicQuery dynamicQuery)
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return layoutSetPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<LayoutSet> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end) throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end)
+		throws SystemException {
 		return layoutSetPersistence.findWithDynamicQuery(dynamicQuery, start,
 			end);
 	}
 
-	public List<LayoutSet> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end, OrderByComparator orderByComparator) throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		return layoutSetPersistence.findWithDynamicQuery(dynamicQuery, start,
 			end, orderByComparator);
 	}

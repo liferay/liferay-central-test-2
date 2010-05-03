@@ -60,19 +60,22 @@ public class MBMessageFlagLocalServiceUtil {
 		getService().deleteMBMessageFlag(mbMessageFlag);
 	}
 
-	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessageFlag> dynamicQuery(
+	@SuppressWarnings("unchecked")
+	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().dynamicQuery(dynamicQuery);
 	}
 
-	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessageFlag> dynamicQuery(
+	@SuppressWarnings("unchecked")
+	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().dynamicQuery(dynamicQuery, start, end);
 	}
 
-	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessageFlag> dynamicQuery(
+	@SuppressWarnings("unchecked")
+	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)

@@ -75,19 +75,22 @@ public abstract class ExpandoRowLocalServiceBaseImpl
 		expandoRowPersistence.remove(expandoRow);
 	}
 
-	public List<ExpandoRow> dynamicQuery(DynamicQuery dynamicQuery)
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return expandoRowPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<ExpandoRow> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end) throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end)
+		throws SystemException {
 		return expandoRowPersistence.findWithDynamicQuery(dynamicQuery, start,
 			end);
 	}
 
-	public List<ExpandoRow> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end, OrderByComparator orderByComparator) throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		return expandoRowPersistence.findWithDynamicQuery(dynamicQuery, start,
 			end, orderByComparator);
 	}

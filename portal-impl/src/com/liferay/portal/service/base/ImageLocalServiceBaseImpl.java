@@ -205,18 +205,21 @@ public abstract class ImageLocalServiceBaseImpl implements ImageLocalService {
 		imagePersistence.remove(image);
 	}
 
-	public List<Image> dynamicQuery(DynamicQuery dynamicQuery)
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return imagePersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<Image> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end) throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end)
+		throws SystemException {
 		return imagePersistence.findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
-	public List<Image> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end, OrderByComparator orderByComparator) throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		return imagePersistence.findWithDynamicQuery(dynamicQuery, start, end,
 			orderByComparator);
 	}

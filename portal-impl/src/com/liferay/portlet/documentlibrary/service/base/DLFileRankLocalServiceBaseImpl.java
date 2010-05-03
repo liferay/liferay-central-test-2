@@ -85,19 +85,22 @@ public abstract class DLFileRankLocalServiceBaseImpl
 		dlFileRankPersistence.remove(dlFileRank);
 	}
 
-	public List<DLFileRank> dynamicQuery(DynamicQuery dynamicQuery)
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return dlFileRankPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<DLFileRank> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end) throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end)
+		throws SystemException {
 		return dlFileRankPersistence.findWithDynamicQuery(dynamicQuery, start,
 			end);
 	}
 
-	public List<DLFileRank> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end, OrderByComparator orderByComparator) throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		return dlFileRankPersistence.findWithDynamicQuery(dynamicQuery, start,
 			end, orderByComparator);
 	}

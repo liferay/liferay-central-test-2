@@ -205,18 +205,21 @@ public abstract class PhoneLocalServiceBaseImpl implements PhoneLocalService {
 		phonePersistence.remove(phone);
 	}
 
-	public List<Phone> dynamicQuery(DynamicQuery dynamicQuery)
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return phonePersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<Phone> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end) throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end)
+		throws SystemException {
 		return phonePersistence.findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
-	public List<Phone> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end, OrderByComparator orderByComparator) throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		return phonePersistence.findWithDynamicQuery(dynamicQuery, start, end,
 			orderByComparator);
 	}

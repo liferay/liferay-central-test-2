@@ -74,20 +74,22 @@ public abstract class PollsQuestionLocalServiceBaseImpl
 		pollsQuestionPersistence.remove(pollsQuestion);
 	}
 
-	public List<PollsQuestion> dynamicQuery(DynamicQuery dynamicQuery)
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return pollsQuestionPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<PollsQuestion> dynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end)
+		throws SystemException {
 		return pollsQuestionPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}
 
-	public List<PollsQuestion> dynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end, OrderByComparator orderByComparator)
-		throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		return pollsQuestionPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end, orderByComparator);
 	}

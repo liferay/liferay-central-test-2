@@ -205,18 +205,21 @@ public abstract class ReleaseLocalServiceBaseImpl implements ReleaseLocalService
 		releasePersistence.remove(release);
 	}
 
-	public List<Release> dynamicQuery(DynamicQuery dynamicQuery)
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return releasePersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<Release> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end) throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end)
+		throws SystemException {
 		return releasePersistence.findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
-	public List<Release> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end, OrderByComparator orderByComparator) throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		return releasePersistence.findWithDynamicQuery(dynamicQuery, start,
 			end, orderByComparator);
 	}

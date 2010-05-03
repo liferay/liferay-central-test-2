@@ -91,20 +91,22 @@ public abstract class SCProductEntryLocalServiceBaseImpl
 		scProductEntryPersistence.remove(scProductEntry);
 	}
 
-	public List<SCProductEntry> dynamicQuery(DynamicQuery dynamicQuery)
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return scProductEntryPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<SCProductEntry> dynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end)
+		throws SystemException {
 		return scProductEntryPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}
 
-	public List<SCProductEntry> dynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end, OrderByComparator orderByComparator)
-		throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		return scProductEntryPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end, orderByComparator);
 	}

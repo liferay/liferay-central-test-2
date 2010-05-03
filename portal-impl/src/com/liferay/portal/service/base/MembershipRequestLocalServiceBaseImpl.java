@@ -211,20 +211,22 @@ public abstract class MembershipRequestLocalServiceBaseImpl
 		membershipRequestPersistence.remove(membershipRequest);
 	}
 
-	public List<MembershipRequest> dynamicQuery(DynamicQuery dynamicQuery)
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return membershipRequestPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<MembershipRequest> dynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end)
+		throws SystemException {
 		return membershipRequestPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}
 
-	public List<MembershipRequest> dynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end, OrderByComparator orderByComparator)
-		throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		return membershipRequestPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end, orderByComparator);
 	}

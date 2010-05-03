@@ -61,19 +61,22 @@ public class SocialRequestLocalServiceWrapper
 		_socialRequestLocalService.deleteSocialRequest(socialRequest);
 	}
 
-	public java.util.List<com.liferay.portlet.social.model.SocialRequest> dynamicQuery(
+	@SuppressWarnings("unchecked")
+	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _socialRequestLocalService.dynamicQuery(dynamicQuery);
 	}
 
-	public java.util.List<com.liferay.portlet.social.model.SocialRequest> dynamicQuery(
+	@SuppressWarnings("unchecked")
+	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.kernel.exception.SystemException {
 		return _socialRequestLocalService.dynamicQuery(dynamicQuery, start, end);
 	}
 
-	public java.util.List<com.liferay.portlet.social.model.SocialRequest> dynamicQuery(
+	@SuppressWarnings("unchecked")
+	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)

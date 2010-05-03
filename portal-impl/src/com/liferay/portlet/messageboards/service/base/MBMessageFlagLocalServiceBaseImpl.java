@@ -89,20 +89,22 @@ public abstract class MBMessageFlagLocalServiceBaseImpl
 		mbMessageFlagPersistence.remove(mbMessageFlag);
 	}
 
-	public List<MBMessageFlag> dynamicQuery(DynamicQuery dynamicQuery)
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return mbMessageFlagPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<MBMessageFlag> dynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end)
+		throws SystemException {
 		return mbMessageFlagPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}
 
-	public List<MBMessageFlag> dynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end, OrderByComparator orderByComparator)
-		throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		return mbMessageFlagPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end, orderByComparator);
 	}

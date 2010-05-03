@@ -60,19 +60,22 @@ public class MBStatsUserLocalServiceWrapper implements MBStatsUserLocalService {
 		_mbStatsUserLocalService.deleteMBStatsUser(mbStatsUser);
 	}
 
-	public java.util.List<com.liferay.portlet.messageboards.model.MBStatsUser> dynamicQuery(
+	@SuppressWarnings("unchecked")
+	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _mbStatsUserLocalService.dynamicQuery(dynamicQuery);
 	}
 
-	public java.util.List<com.liferay.portlet.messageboards.model.MBStatsUser> dynamicQuery(
+	@SuppressWarnings("unchecked")
+	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.kernel.exception.SystemException {
 		return _mbStatsUserLocalService.dynamicQuery(dynamicQuery, start, end);
 	}
 
-	public java.util.List<com.liferay.portlet.messageboards.model.MBStatsUser> dynamicQuery(
+	@SuppressWarnings("unchecked")
+	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)

@@ -76,20 +76,22 @@ public abstract class AnnouncementsDeliveryLocalServiceBaseImpl
 		announcementsDeliveryPersistence.remove(announcementsDelivery);
 	}
 
-	public List<AnnouncementsDelivery> dynamicQuery(DynamicQuery dynamicQuery)
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return announcementsDeliveryPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<AnnouncementsDelivery> dynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end)
+		throws SystemException {
 		return announcementsDeliveryPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}
 
-	public List<AnnouncementsDelivery> dynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end, OrderByComparator orderByComparator)
-		throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		return announcementsDeliveryPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end, orderByComparator);
 	}

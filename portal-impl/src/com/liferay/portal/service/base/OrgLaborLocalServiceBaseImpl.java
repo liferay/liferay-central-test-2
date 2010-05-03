@@ -207,18 +207,21 @@ public abstract class OrgLaborLocalServiceBaseImpl
 		orgLaborPersistence.remove(orgLabor);
 	}
 
-	public List<OrgLabor> dynamicQuery(DynamicQuery dynamicQuery)
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return orgLaborPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<OrgLabor> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end) throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end)
+		throws SystemException {
 		return orgLaborPersistence.findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
-	public List<OrgLabor> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end, OrderByComparator orderByComparator) throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		return orgLaborPersistence.findWithDynamicQuery(dynamicQuery, start,
 			end, orderByComparator);
 	}

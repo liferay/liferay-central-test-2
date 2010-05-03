@@ -74,20 +74,22 @@ public abstract class WikiPageResourceLocalServiceBaseImpl
 		wikiPageResourcePersistence.remove(wikiPageResource);
 	}
 
-	public List<WikiPageResource> dynamicQuery(DynamicQuery dynamicQuery)
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return wikiPageResourcePersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<WikiPageResource> dynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end)
+		throws SystemException {
 		return wikiPageResourcePersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}
 
-	public List<WikiPageResource> dynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end, OrderByComparator orderByComparator)
-		throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		return wikiPageResourcePersistence.findWithDynamicQuery(dynamicQuery,
 			start, end, orderByComparator);
 	}

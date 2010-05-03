@@ -89,20 +89,22 @@ public abstract class MBDiscussionLocalServiceBaseImpl
 		mbDiscussionPersistence.remove(mbDiscussion);
 	}
 
-	public List<MBDiscussion> dynamicQuery(DynamicQuery dynamicQuery)
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return mbDiscussionPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<MBDiscussion> dynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end)
+		throws SystemException {
 		return mbDiscussionPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}
 
-	public List<MBDiscussion> dynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end, OrderByComparator orderByComparator)
-		throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		return mbDiscussionPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end, orderByComparator);
 	}

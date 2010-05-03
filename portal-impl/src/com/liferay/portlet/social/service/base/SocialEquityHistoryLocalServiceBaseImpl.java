@@ -80,20 +80,22 @@ public abstract class SocialEquityHistoryLocalServiceBaseImpl
 		socialEquityHistoryPersistence.remove(socialEquityHistory);
 	}
 
-	public List<SocialEquityHistory> dynamicQuery(DynamicQuery dynamicQuery)
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return socialEquityHistoryPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<SocialEquityHistory> dynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end)
+		throws SystemException {
 		return socialEquityHistoryPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}
 
-	public List<SocialEquityHistory> dynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end, OrderByComparator orderByComparator)
-		throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		return socialEquityHistoryPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end, orderByComparator);
 	}

@@ -79,20 +79,22 @@ public abstract class SCFrameworkVersionLocalServiceBaseImpl
 		scFrameworkVersionPersistence.remove(scFrameworkVersion);
 	}
 
-	public List<SCFrameworkVersion> dynamicQuery(DynamicQuery dynamicQuery)
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return scFrameworkVersionPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<SCFrameworkVersion> dynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end)
+		throws SystemException {
 		return scFrameworkVersionPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}
 
-	public List<SCFrameworkVersion> dynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end, OrderByComparator orderByComparator)
-		throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		return scFrameworkVersionPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end, orderByComparator);
 	}

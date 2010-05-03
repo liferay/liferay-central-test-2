@@ -205,18 +205,21 @@ public abstract class CompanyLocalServiceBaseImpl implements CompanyLocalService
 		companyPersistence.remove(company);
 	}
 
-	public List<Company> dynamicQuery(DynamicQuery dynamicQuery)
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return companyPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<Company> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end) throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end)
+		throws SystemException {
 		return companyPersistence.findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
-	public List<Company> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end, OrderByComparator orderByComparator) throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		return companyPersistence.findWithDynamicQuery(dynamicQuery, start,
 			end, orderByComparator);
 	}

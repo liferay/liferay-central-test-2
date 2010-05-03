@@ -209,20 +209,22 @@ public abstract class UserIdMapperLocalServiceBaseImpl
 		userIdMapperPersistence.remove(userIdMapper);
 	}
 
-	public List<UserIdMapper> dynamicQuery(DynamicQuery dynamicQuery)
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return userIdMapperPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<UserIdMapper> dynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end)
+		throws SystemException {
 		return userIdMapperPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}
 
-	public List<UserIdMapper> dynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end, OrderByComparator orderByComparator)
-		throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		return userIdMapperPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end, orderByComparator);
 	}

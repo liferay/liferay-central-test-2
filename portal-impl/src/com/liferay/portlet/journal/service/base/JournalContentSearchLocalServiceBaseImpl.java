@@ -100,20 +100,22 @@ public abstract class JournalContentSearchLocalServiceBaseImpl
 		journalContentSearchPersistence.remove(journalContentSearch);
 	}
 
-	public List<JournalContentSearch> dynamicQuery(DynamicQuery dynamicQuery)
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return journalContentSearchPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<JournalContentSearch> dynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end)
+		throws SystemException {
 		return journalContentSearchPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}
 
-	public List<JournalContentSearch> dynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end, OrderByComparator orderByComparator)
-		throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		return journalContentSearchPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end, orderByComparator);
 	}

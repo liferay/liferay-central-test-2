@@ -60,19 +60,22 @@ public class RatingsStatsLocalServiceWrapper implements RatingsStatsLocalService
 		_ratingsStatsLocalService.deleteRatingsStats(ratingsStats);
 	}
 
-	public java.util.List<com.liferay.portlet.ratings.model.RatingsStats> dynamicQuery(
+	@SuppressWarnings("unchecked")
+	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _ratingsStatsLocalService.dynamicQuery(dynamicQuery);
 	}
 
-	public java.util.List<com.liferay.portlet.ratings.model.RatingsStats> dynamicQuery(
+	@SuppressWarnings("unchecked")
+	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.kernel.exception.SystemException {
 		return _ratingsStatsLocalService.dynamicQuery(dynamicQuery, start, end);
 	}
 
-	public java.util.List<com.liferay.portlet.ratings.model.RatingsStats> dynamicQuery(
+	@SuppressWarnings("unchecked")
+	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)

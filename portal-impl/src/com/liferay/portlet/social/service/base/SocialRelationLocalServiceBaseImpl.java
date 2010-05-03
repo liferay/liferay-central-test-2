@@ -80,20 +80,22 @@ public abstract class SocialRelationLocalServiceBaseImpl
 		socialRelationPersistence.remove(socialRelation);
 	}
 
-	public List<SocialRelation> dynamicQuery(DynamicQuery dynamicQuery)
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return socialRelationPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<SocialRelation> dynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end)
+		throws SystemException {
 		return socialRelationPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}
 
-	public List<SocialRelation> dynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end, OrderByComparator orderByComparator)
-		throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		return socialRelationPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end, orderByComparator);
 	}

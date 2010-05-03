@@ -209,20 +209,22 @@ public abstract class ResourceCodeLocalServiceBaseImpl
 		resourceCodePersistence.remove(resourceCode);
 	}
 
-	public List<ResourceCode> dynamicQuery(DynamicQuery dynamicQuery)
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return resourceCodePersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<ResourceCode> dynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end)
+		throws SystemException {
 		return resourceCodePersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}
 
-	public List<ResourceCode> dynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end, OrderByComparator orderByComparator)
-		throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		return resourceCodePersistence.findWithDynamicQuery(dynamicQuery,
 			start, end, orderByComparator);
 	}

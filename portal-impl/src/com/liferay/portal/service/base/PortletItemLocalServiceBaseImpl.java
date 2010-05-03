@@ -209,19 +209,22 @@ public abstract class PortletItemLocalServiceBaseImpl
 		portletItemPersistence.remove(portletItem);
 	}
 
-	public List<PortletItem> dynamicQuery(DynamicQuery dynamicQuery)
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return portletItemPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<PortletItem> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end) throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end)
+		throws SystemException {
 		return portletItemPersistence.findWithDynamicQuery(dynamicQuery, start,
 			end);
 	}
 
-	public List<PortletItem> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end, OrderByComparator orderByComparator) throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		return portletItemPersistence.findWithDynamicQuery(dynamicQuery, start,
 			end, orderByComparator);
 	}

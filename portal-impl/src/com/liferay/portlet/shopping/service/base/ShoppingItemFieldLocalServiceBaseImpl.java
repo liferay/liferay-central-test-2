@@ -88,20 +88,22 @@ public abstract class ShoppingItemFieldLocalServiceBaseImpl
 		shoppingItemFieldPersistence.remove(shoppingItemField);
 	}
 
-	public List<ShoppingItemField> dynamicQuery(DynamicQuery dynamicQuery)
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return shoppingItemFieldPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<ShoppingItemField> dynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end)
+		throws SystemException {
 		return shoppingItemFieldPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}
 
-	public List<ShoppingItemField> dynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end, OrderByComparator orderByComparator)
-		throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		return shoppingItemFieldPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end, orderByComparator);
 	}

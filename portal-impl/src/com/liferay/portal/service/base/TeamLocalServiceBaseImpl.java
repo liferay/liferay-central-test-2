@@ -204,18 +204,21 @@ public abstract class TeamLocalServiceBaseImpl implements TeamLocalService {
 		teamPersistence.remove(team);
 	}
 
-	public List<Team> dynamicQuery(DynamicQuery dynamicQuery)
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return teamPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<Team> dynamicQuery(DynamicQuery dynamicQuery, int start, int end)
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end)
 		throws SystemException {
 		return teamPersistence.findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
-	public List<Team> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end, OrderByComparator orderByComparator) throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		return teamPersistence.findWithDynamicQuery(dynamicQuery, start, end,
 			orderByComparator);
 	}

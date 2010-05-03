@@ -205,18 +205,21 @@ public abstract class AddressLocalServiceBaseImpl implements AddressLocalService
 		addressPersistence.remove(address);
 	}
 
-	public List<Address> dynamicQuery(DynamicQuery dynamicQuery)
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return addressPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<Address> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end) throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end)
+		throws SystemException {
 		return addressPersistence.findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
-	public List<Address> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end, OrderByComparator orderByComparator) throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		return addressPersistence.findWithDynamicQuery(dynamicQuery, start,
 			end, orderByComparator);
 	}

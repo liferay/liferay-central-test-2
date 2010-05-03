@@ -93,20 +93,22 @@ public abstract class AssetTagPropertyLocalServiceBaseImpl
 		assetTagPropertyPersistence.remove(assetTagProperty);
 	}
 
-	public List<AssetTagProperty> dynamicQuery(DynamicQuery dynamicQuery)
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return assetTagPropertyPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<AssetTagProperty> dynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end)
+		throws SystemException {
 		return assetTagPropertyPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}
 
-	public List<AssetTagProperty> dynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end, OrderByComparator orderByComparator)
-		throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		return assetTagPropertyPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end, orderByComparator);
 	}

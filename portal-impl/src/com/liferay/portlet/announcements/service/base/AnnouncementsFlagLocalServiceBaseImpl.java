@@ -75,20 +75,22 @@ public abstract class AnnouncementsFlagLocalServiceBaseImpl
 		announcementsFlagPersistence.remove(announcementsFlag);
 	}
 
-	public List<AnnouncementsFlag> dynamicQuery(DynamicQuery dynamicQuery)
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return announcementsFlagPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<AnnouncementsFlag> dynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end)
+		throws SystemException {
 		return announcementsFlagPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}
 
-	public List<AnnouncementsFlag> dynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end, OrderByComparator orderByComparator)
-		throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		return announcementsFlagPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end, orderByComparator);
 	}

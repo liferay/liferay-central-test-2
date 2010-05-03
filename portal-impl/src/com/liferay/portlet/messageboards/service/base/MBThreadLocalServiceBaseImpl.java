@@ -101,18 +101,21 @@ public abstract class MBThreadLocalServiceBaseImpl
 		mbThreadPersistence.remove(mbThread);
 	}
 
-	public List<MBThread> dynamicQuery(DynamicQuery dynamicQuery)
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return mbThreadPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<MBThread> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end) throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end)
+		throws SystemException {
 		return mbThreadPersistence.findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
-	public List<MBThread> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end, OrderByComparator orderByComparator) throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		return mbThreadPersistence.findWithDynamicQuery(dynamicQuery, start,
 			end, orderByComparator);
 	}

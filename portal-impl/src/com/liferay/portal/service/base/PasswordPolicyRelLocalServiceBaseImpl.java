@@ -209,20 +209,22 @@ public abstract class PasswordPolicyRelLocalServiceBaseImpl
 		passwordPolicyRelPersistence.remove(passwordPolicyRel);
 	}
 
-	public List<PasswordPolicyRel> dynamicQuery(DynamicQuery dynamicQuery)
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return passwordPolicyRelPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<PasswordPolicyRel> dynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end)
+		throws SystemException {
 		return passwordPolicyRelPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}
 
-	public List<PasswordPolicyRel> dynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end, OrderByComparator orderByComparator)
-		throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		return passwordPolicyRelPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end, orderByComparator);
 	}

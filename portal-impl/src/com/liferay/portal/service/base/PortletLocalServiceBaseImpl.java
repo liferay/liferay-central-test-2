@@ -204,18 +204,21 @@ public abstract class PortletLocalServiceBaseImpl implements PortletLocalService
 		portletPersistence.remove(portlet);
 	}
 
-	public List<Portlet> dynamicQuery(DynamicQuery dynamicQuery)
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return portletPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<Portlet> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end) throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end)
+		throws SystemException {
 		return portletPersistence.findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
-	public List<Portlet> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end, OrderByComparator orderByComparator) throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		return portletPersistence.findWithDynamicQuery(dynamicQuery, start,
 			end, orderByComparator);
 	}

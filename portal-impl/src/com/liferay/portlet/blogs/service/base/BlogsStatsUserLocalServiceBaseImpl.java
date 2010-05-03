@@ -76,20 +76,22 @@ public abstract class BlogsStatsUserLocalServiceBaseImpl
 		blogsStatsUserPersistence.remove(blogsStatsUser);
 	}
 
-	public List<BlogsStatsUser> dynamicQuery(DynamicQuery dynamicQuery)
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return blogsStatsUserPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<BlogsStatsUser> dynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end)
+		throws SystemException {
 		return blogsStatsUserPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}
 
-	public List<BlogsStatsUser> dynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end, OrderByComparator orderByComparator)
-		throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		return blogsStatsUserPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end, orderByComparator);
 	}
