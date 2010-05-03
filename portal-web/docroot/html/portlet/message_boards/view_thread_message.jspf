@@ -117,19 +117,15 @@
 						/>
 					</div>
 
-					<c:choose>
-						<c:when test="<%= !message.isRoot() && MBMessageFlagLocalServiceUtil.hasAnswerFlag(message.getMessageId()) %>">
-							<div class="answer" id="<portlet:namespace />deleteAnswerFlag_<%= message.getMessageId() %>">
-								<liferay-ui:icon
-									image="checked"
-									label="<%= true %>"
-									message="answer"
-								/>
+					<div class="answer <%= !message.isRoot() && MBMessageFlagLocalServiceUtil.hasAnswerFlag(message.getMessageId()) ? "" : "aui-helper-hidden" %>" id="<portlet:namespace />deleteAnswerFlag_<%= message.getMessageId() %>">
+						<liferay-ui:icon
+							image="checked"
+							label="<%= true %>"
+							message="answer"
+						/>
 
-								(<a href="javascript:<portlet:namespace />deleteAnswerFlag('<%= message.getMessageId() %>');"><liferay-ui:message key="unmark" /></a>)
-							</div>
-						</c:when>
-					</c:choose>
+						(<a href="javascript:<portlet:namespace />deleteAnswerFlag('<%= message.getMessageId() %>');"><liferay-ui:message key="unmark" /></a>)
+					</div>
 
 					<%= dateFormatDateTime.format(message.getModifiedDate()) %>
 
@@ -172,21 +168,19 @@
 
 					<c:if test="<%= showAnswerFlag || hasReplyPermission %>">
 						<ul class="edit-controls lfr-component">
-							<c:if test="<%= showAnswerFlag %>">
-								<li id="<portlet:namespace />addAnswerFlag_<%= message.getMessageId() %>">
+							<li class="<%= showAnswerFlag ? "" : "aui-helper-hidden" %>" id="<portlet:namespace />addAnswerFlag_<%= message.getMessageId() %>">
 
-									<%
-									String taglibMarkAsAnswerURL = "javascript:" + renderResponse.getNamespace() + "addAnswerFlag('" + message.getMessageId() + "');";
-									%>
+								<%
+								String taglibMarkAsAnswerURL = "javascript:" + renderResponse.getNamespace() + "addAnswerFlag('" + message.getMessageId() + "');";
+								%>
 
-									<liferay-ui:icon
-										image="checked"
-										label="<%= true %>"
-										message="mark-as-an-answer"
-										url="<%= taglibMarkAsAnswerURL %>"
-									/>
-								</li>
-							</c:if>
+								<liferay-ui:icon
+									image="checked"
+									label="<%= true %>"
+									message="mark-as-an-answer"
+									url="<%= taglibMarkAsAnswerURL %>"
+								/>
+							</li>
 
 							<c:if test="<%= hasReplyPermission && !thread.isLocked() %>">
 								<li>

@@ -105,7 +105,9 @@ MBThread thread = messageDisplay.getThread();
 				tags.html(html);
 			}
 
-			A.one('#<portlet:namespace />addAnswerFlag_' + messageId).remove();
+			A.one('#<portlet:namespace />addAnswerFlag_' + messageId).hide();
+
+			A.one('#<portlet:namespace />deleteAnswerFlag_' + messageId).show();
 		},
 		['aui-base']
 	);
@@ -155,7 +157,9 @@ MBThread thread = messageDisplay.getThread();
 				editControls.prepend(html);
 			}
 
-			A.one('#<portlet:namespace />deleteAnswerFlag_' + messageId).remove();
+			A.one('#<portlet:namespace />deleteAnswerFlag_' + messageId).hide();
+
+			A.one('#<portlet:namespace />addAnswerFlag_' + messageId).show();
 		},
 		['aui-base']
 	);
