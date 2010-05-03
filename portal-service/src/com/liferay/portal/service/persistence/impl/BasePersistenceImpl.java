@@ -85,7 +85,8 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 		throw new UnsupportedOperationException();
 	}
 
-	public List<T> findWithDynamicQuery(DynamicQuery dynamicQuery)
+	@SuppressWarnings("unchecked")
+	public List findWithDynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 
 		Session session = null;
@@ -105,7 +106,8 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 		}
 	}
 
-	public List<T> findWithDynamicQuery(
+	@SuppressWarnings("unchecked")
+	public List findWithDynamicQuery(
 			DynamicQuery dynamicQuery, int start, int end)
 		throws SystemException {
 
@@ -128,7 +130,8 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 		}
 	}
 
-	public List<T> findWithDynamicQuery(
+	@SuppressWarnings("unchecked")
+	public List findWithDynamicQuery(
 			DynamicQuery dynamicQuery, int start, int end,
 			OrderByComparator orderByComparator)
 		throws SystemException {

@@ -42,14 +42,17 @@ public interface BasePersistence<T extends BaseModel<T>> {
 	public T findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException;
 
-	public List<T> findWithDynamicQuery(DynamicQuery dynamicQuery)
+	@SuppressWarnings("unchecked")
+	public List findWithDynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException;
 
-	public List<T> findWithDynamicQuery(
+	@SuppressWarnings("unchecked")
+	public List findWithDynamicQuery(
 			DynamicQuery dynamicQuery, int start, int end)
 		throws SystemException;
 
-	public List<T> findWithDynamicQuery(
+	@SuppressWarnings("unchecked")
+	public List findWithDynamicQuery(
 			DynamicQuery dynamicQuery, int start, int end,
 			OrderByComparator orderByComparator)
 		throws SystemException;

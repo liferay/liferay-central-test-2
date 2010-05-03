@@ -36,6 +36,10 @@ public interface ${entity.name}${sessionTypeName}Service {
 
 	<#list methods as method>
 		<#if !method.isConstructor() && !method.isStatic() && method.isPublic() && serviceBuilder.isCustomMethod(method) && !serviceBuilder.isDuplicateMethod(method, tempMap)>
+			<#if method.name = "dynamicQuery">
+				@SuppressWarnings("unchecked")
+			</#if>
+
 			<#if serviceBuilder.isServiceReadOnlyMethod(method, entity.txRequiredList)>
 				@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 			</#if>

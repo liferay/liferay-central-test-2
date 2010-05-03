@@ -71,15 +71,18 @@ import com.liferay.portal.kernel.exception.SystemException;
 		${entity.varName}Persistence.remove(${entity.varName});
 	}
 
-	public List<${entity.name}> dynamicQuery(DynamicQuery dynamicQuery) throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery) throws SystemException {
 		return ${entity.varName}Persistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<${entity.name}> dynamicQuery(DynamicQuery dynamicQuery, int start, int end) throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end) throws SystemException {
 		return ${entity.varName}Persistence.findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
-	public List<${entity.name}> dynamicQuery(DynamicQuery dynamicQuery, int start, int end, OrderByComparator orderByComparator) throws SystemException {
+	@SuppressWarnings("unchecked")
+	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end, OrderByComparator orderByComparator) throws SystemException {
 		return ${entity.varName}Persistence.findWithDynamicQuery(dynamicQuery, start, end, orderByComparator);
 	}
 

@@ -28,6 +28,10 @@ public class ${entity.name}${sessionTypeName}ServiceUtil {
 
 	<#list methods as method>
 		<#if !method.isConstructor() && !method.isStatic() && method.isPublic() && serviceBuilder.isCustomMethod(method)>
+			<#if method.name = "dynamicQuery">
+				@SuppressWarnings("unchecked")
+			</#if>
+
 			public static ${method.returns.value}${method.returnsGenericsName}${serviceBuilder.getDimensions(method.returns.dimensions)} ${method.name}(
 
 			<#list method.parameters as parameter>
