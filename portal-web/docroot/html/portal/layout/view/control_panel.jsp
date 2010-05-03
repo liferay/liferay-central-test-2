@@ -243,8 +243,8 @@ request.setAttribute("control_panel.jsp-ppid", ppid);
 										</c:if>
 
 										<%
-										boolean showGlobal= permissionChecker.isCompanyAdmin();
-										boolean showMyCommunity = user.getGroup().hasPublicLayouts() || user.getGroup().hasPrivateLayouts();
+										boolean showGlobal = permissionChecker.isCompanyAdmin();
+										boolean showMyCommunity = user.getGroup().hasPrivateLayouts() || user.getGroup().hasPublicLayouts();
 										%>
 
 										<c:if test="<%= showGlobal || showMyCommunity %>">
