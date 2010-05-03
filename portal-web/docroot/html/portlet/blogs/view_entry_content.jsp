@@ -227,4 +227,6 @@ AssetEntry assetEntry = (AssetEntry)request.getAttribute("view_entry_content.jsp
 			</c:if>
 		</div>
 	</div>
+
+	<div class="separator"><!-- --></div>
 </c:if>
