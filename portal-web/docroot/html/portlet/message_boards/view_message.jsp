@@ -106,7 +106,6 @@ MBThread thread = messageDisplay.getThread();
 			}
 
 			A.one('#<portlet:namespace />addAnswerFlag_' + messageId).hide();
-
 			A.one('#<portlet:namespace />deleteAnswerFlag_' + messageId).show();
 		},
 		['aui-base']
