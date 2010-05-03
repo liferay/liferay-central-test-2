@@ -1005,32 +1005,35 @@ Liferay.provide(
 		var A = AUI();
 
 		box = A.one(box);
-		var si = box.get('selectedIndex');
 
-		if (si == -1) {
+		var selectedIndex = box.get('selectedIndex');
+
+		if (selectedIndex == -1) {
 			box.set('selectedIndex', 0);
 		}
 		else {
 			var options = box.get('options');
 
-			sText = options.item(si).get('text');
-			sValue = options.item(si).get('value');
+			var sText = options.item(selectedIndex).get('text');
+			var sValue = options.item(selectedIndex).get('value');
 
-			if ((options.item(si).get('value') > '') && (si > 0) && (down == 0)) {
-				options.item(si).set('text', options.item(si - 1).get('text'));
-				options.item(si).set('value', options.item(si - 1).get('value'));
-				options.item(si - 1).set('text', sText);
-				options.item(si-1).set('value', sValue);
+			if ((options.item(selectedIndex).get('value') > '') && (selectedIndex > 0) && (down == 0)) {
+				options.item(selectedIndex).set('text', options.item(selectedIndex - 1).get('text'));
+				options.item(selectedIndex).set('value', options.item(selectedIndex - 1).get('value'));
+				options.item(selectedIndex - 1).set('text', sText);
+				options.item(selectedIndex-1).set('value', sValue);
+
 				box.set('selectedIndex', box.get('selectedIndex') - 1);
 			}
-			else if ((si < (box.get('length') - 1)) && (options.item(si + 1).get('value') > '') && (down == 1)) {
-				options.item(si).set('text', options.item(si + 1).get('text'));
-				options.item(si).set('value', options.item(si + 1).get('value'));
-				options.item(si + 1).set('text', sText);
-				options.item(si + 1).set('value', sValue);
+			else if ((selectedIndex < (box.get('length') - 1)) && (options.item(selectedIndex + 1).get('value') > '') && (down == 1)) {
+				options.item(selectedIndex).set('text', options.item(selectedIndex + 1).get('text'));
+				options.item(selectedIndex).set('value', options.item(selectedIndex + 1).get('value'));
+				options.item(selectedIndex + 1).set('text', sText);
+				options.item(selectedIndex + 1).set('value', sValue);
+
 				box.set('selectedIndex', box.get('selectedIndex') + 1);
 			}
-			else if (si == 0) {
+			else if (selectedIndex == 0) {
 				for (var i = 0; i < (box.get('length') - 1); i++) {
 					options.item(i).set('text', options.item(i + 1).get('text'));
 					options.item(i).set('value',options.item(i + 1).get('value'));
@@ -1041,10 +1044,10 @@ Liferay.provide(
 
 				box.set('selectedIndex', box.get('length') - 1);
 			}
-			else if (si == (box.get('length') - 1)) {
-				for (var j = (box.get('length') - 1); j > 0; j--) {
-					options.item(j).set('text',  options.item(j - 1).get('text'));
-					options.item(j).set('value', options.item(j - 1).get('value'));
+			else if (selectedIndex == (box.get('length') - 1)) {
+				for (var i = (box.get('length') - 1); i > 0; i--) {
+					options.item(i).set('text',  options.item(i - 1).get('text'));
+					options.item(i).set('value', options.item(i - 1).get('value'));
 				}
 
 				options.item(0).set('text', sText);
