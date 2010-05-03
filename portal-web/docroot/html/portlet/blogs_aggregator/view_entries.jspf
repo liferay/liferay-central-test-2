@@ -29,8 +29,6 @@
 
 			<%@ include file="/html/portlet/blogs_aggregator/view_entry_content.jspf" %>
 
-			<div class="separator"><!-- --></div>
-
 		<%
 		}
 		%>

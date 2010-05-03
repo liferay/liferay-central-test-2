@@ -111,4 +111,6 @@
 			</c:choose>
 		</div>
 	</c:if>
+
+	<div class="separator"><!-- --></div>
 </c:if>
