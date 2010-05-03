@@ -111,7 +111,9 @@ Format dateFormatMonthAndDay = FastDateFormatFactoryUtil.getSimpleDateFormat("M/
 		<portlet:param name="year" value="<%= String.valueOf(curYear) %>" />
 	</portlet:renderURL>
 
-	<aui:button onClick="<%= viewURL %>" value="today" />
+	<c:if test="<%= (curDay != selDay) || (curMonth != selMonth) || (curYear != selYear) %>">
+		<aui:button onClick="<%= viewURL %>" value="this-week" />
+	</c:if>
 </div>
 
 <br />

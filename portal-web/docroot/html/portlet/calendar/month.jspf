@@ -94,7 +94,9 @@ Format timeFormat = FastDateFormatFactoryUtil.getSimpleDateFormat("h:mma", local
 		<portlet:param name="year" value="<%= String.valueOf(curYear) %>" />
 	</portlet:renderURL>
 
-	<aui:button onClick="<%= viewURL %>" value="today" />
+	<c:if test="<%= (curMonth != selMonth) || (curYear != selYear) %>">
+		<aui:button onClick="<%= viewURL %>" value="this-month" />
+	</c:if>	
 </div>
 
 <br />
