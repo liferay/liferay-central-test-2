@@ -892,7 +892,7 @@ public class MainServlet extends ActionServlet {
 						assetRendererFactory.getClass().getName();
 
 				boolean assetRendererEnabledValue = GetterUtil.getBoolean(
-					assetRendererEnabledKey, true);
+						PropsUtil.get(assetRendererEnabledKey), true);
 
 				if (assetRendererEnabledValue) {
 					AssetRendererFactoryRegistryUtil.register(
