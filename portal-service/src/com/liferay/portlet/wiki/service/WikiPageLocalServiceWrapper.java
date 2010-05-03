@@ -229,6 +229,24 @@ public class WikiPageLocalServiceWrapper implements WikiPageLocalService {
 		return _wikiPageLocalService.getChildren(nodeId, head, parentTitle);
 	}
 
+	public com.liferay.portlet.wiki.model.WikiPage getDraftPage(long nodeId,
+		java.lang.String title)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _wikiPageLocalService.getDraftPage(nodeId, title);
+	}
+
+	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> getDraftPages(
+		long nodeId, long userId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _wikiPageLocalService.getDraftPages(nodeId, userId, start, end);
+	}
+
+	public int getDraftPagesCount(long nodeId, long userId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _wikiPageLocalService.getDraftPagesCount(nodeId, userId);
+	}
+
 	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> getIncomingLinks(
 		long nodeId, java.lang.String title)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -266,6 +284,13 @@ public class WikiPageLocalServiceWrapper implements WikiPageLocalService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _wikiPageLocalService.getPage(nodeId, title);
+	}
+
+	public com.liferay.portlet.wiki.model.WikiPage getPage(long nodeId,
+		java.lang.String title, boolean head)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _wikiPageLocalService.getPage(nodeId, title, head);
 	}
 
 	public com.liferay.portlet.wiki.model.WikiPage getPage(long nodeId,
@@ -359,6 +384,12 @@ public class WikiPageLocalServiceWrapper implements WikiPageLocalService {
 		return _wikiPageLocalService.getRecentChangesCount(nodeId);
 	}
 
+	public boolean hasDraftPage(long nodeId, java.lang.String title)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _wikiPageLocalService.hasDraftPage(nodeId, title);
+	}
+
 	public void movePage(long userId, long nodeId, java.lang.String title,
 		java.lang.String newTitle,
 		com.liferay.portal.service.ServiceContext serviceContext)
@@ -421,18 +452,21 @@ public class WikiPageLocalServiceWrapper implements WikiPageLocalService {
 	}
 
 	public com.liferay.portlet.wiki.model.WikiPage updateStatus(long userId,
-		long resourcePrimKey, int status)
+		long resourcePrimKey, int status,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _wikiPageLocalService.updateStatus(userId, resourcePrimKey,
-			status);
+			status, serviceContext);
 	}
 
 	public com.liferay.portlet.wiki.model.WikiPage updateStatus(long userId,
-		com.liferay.portlet.wiki.model.WikiPage page, int status)
+		com.liferay.portlet.wiki.model.WikiPage page, int status,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _wikiPageLocalService.updateStatus(userId, page, status);
+		return _wikiPageLocalService.updateStatus(userId, page, status,
+			serviceContext);
 	}
 
 	public void validateTitle(java.lang.String title)

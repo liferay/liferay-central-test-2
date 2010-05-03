@@ -88,6 +88,13 @@ public class WikiPageServiceUtil {
 		getService().deletePageAttachment(nodeId, title, fileName);
 	}
 
+	public static com.liferay.portlet.wiki.model.WikiPage getDraftPage(
+		long nodeId, java.lang.String title)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getDraftPage(nodeId, title);
+	}
+
 	public static java.util.List<com.liferay.portlet.wiki.model.WikiPage> getNodePages(
 		long nodeId, int max)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -110,6 +117,13 @@ public class WikiPageServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService().getPage(nodeId, title);
+	}
+
+	public static com.liferay.portlet.wiki.model.WikiPage getPage(long nodeId,
+		java.lang.String title, boolean head)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getPage(nodeId, title, head);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPage getPage(long nodeId,

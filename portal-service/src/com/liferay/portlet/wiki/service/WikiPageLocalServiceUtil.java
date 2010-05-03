@@ -238,6 +238,24 @@ public class WikiPageLocalServiceUtil {
 		return getService().getChildren(nodeId, head, parentTitle);
 	}
 
+	public static com.liferay.portlet.wiki.model.WikiPage getDraftPage(
+		long nodeId, java.lang.String title)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getDraftPage(nodeId, title);
+	}
+
+	public static java.util.List<com.liferay.portlet.wiki.model.WikiPage> getDraftPages(
+		long nodeId, long userId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getDraftPages(nodeId, userId, start, end);
+	}
+
+	public static int getDraftPagesCount(long nodeId, long userId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getDraftPagesCount(nodeId, userId);
+	}
+
 	public static java.util.List<com.liferay.portlet.wiki.model.WikiPage> getIncomingLinks(
 		long nodeId, java.lang.String title)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -276,6 +294,13 @@ public class WikiPageLocalServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService().getPage(nodeId, title);
+	}
+
+	public static com.liferay.portlet.wiki.model.WikiPage getPage(long nodeId,
+		java.lang.String title, boolean head)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getPage(nodeId, title, head);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPage getPage(long nodeId,
@@ -371,6 +396,12 @@ public class WikiPageLocalServiceUtil {
 		return getService().getRecentChangesCount(nodeId);
 	}
 
+	public static boolean hasDraftPage(long nodeId, java.lang.String title)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().hasDraftPage(nodeId, title);
+	}
+
 	public static void movePage(long userId, long nodeId,
 		java.lang.String title, java.lang.String newTitle,
 		com.liferay.portal.service.ServiceContext serviceContext)
@@ -434,17 +465,20 @@ public class WikiPageLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPage updateStatus(
-		long userId, long resourcePrimKey, int status)
+		long userId, long resourcePrimKey, int status,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getService().updateStatus(userId, resourcePrimKey, status);
+		return getService()
+				   .updateStatus(userId, resourcePrimKey, status, serviceContext);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPage updateStatus(
-		long userId, com.liferay.portlet.wiki.model.WikiPage page, int status)
+		long userId, com.liferay.portlet.wiki.model.WikiPage page, int status,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getService().updateStatus(userId, page, status);
+		return getService().updateStatus(userId, page, status, serviceContext);
 	}
 
 	public static void validateTitle(java.lang.String title)
