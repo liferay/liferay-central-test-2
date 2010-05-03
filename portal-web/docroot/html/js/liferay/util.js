@@ -1014,46 +1014,72 @@ Liferay.provide(
 		else {
 			var options = box.get('options');
 
-			var sText = options.item(selectedIndex).get('text');
-			var sValue = options.item(selectedIndex).get('value');
+			var selectedOption = options.item(selectedIndex);
+			var lastIndex = box.get('length') - 1;
 
-			if ((options.item(selectedIndex).get('value') > '') && (selectedIndex > 0) && (down == 0)) {
-				options.item(selectedIndex).set('text', options.item(selectedIndex - 1).get('text'));
-				options.item(selectedIndex).set('value', options.item(selectedIndex - 1).get('value'));
-				options.item(selectedIndex - 1).set('text', sText);
-				options.item(selectedIndex-1).set('value', sValue);
+			var currentOption;
+			var newOption;
+			var newIndex;
 
-				box.set('selectedIndex', box.get('selectedIndex') - 1);
+			var text = selectedOption.get('text');
+			var value = selectedOption.val();
+
+			if (value && (selectedIndex > 0) && (down == 0)) {
+				var previousOption = options.item(selectedIndex - 1);
+
+				selectedOption.set('text', previousOption.get('text'));
+				selectedOption.val(previousOption.val());
+
+				newOption = previousOption;
+				newIndex = selectedIndex - 1;
 			}
-			else if ((selectedIndex < (box.get('length') - 1)) && (options.item(selectedIndex + 1).get('value') > '') && (down == 1)) {
-				options.item(selectedIndex).set('text', options.item(selectedIndex + 1).get('text'));
-				options.item(selectedIndex).set('value', options.item(selectedIndex + 1).get('value'));
-				options.item(selectedIndex + 1).set('text', sText);
-				options.item(selectedIndex + 1).set('value', sValue);
+			else if ((selectedIndex < lastIndex) && (options.item(selectedIndex + 1).val()) && (down == 1)) {
+				var nextOption = options.item(selectedIndex + 1);
 
-				box.set('selectedIndex', box.get('selectedIndex') + 1);
+				selectedOption.set('text', nextOption.get('text'));
+				selectedOption.val(nextOption.val());
+
+				newOption = nextOption;
+				newIndex = selectedIndex + 1;
 			}
 			else if (selectedIndex == 0) {
-				for (var i = 0; i < (box.get('length') - 1); i++) {
-					options.item(i).set('text', options.item(i + 1).get('text'));
-					options.item(i).set('value',options.item(i + 1).get('value'));
+				var nextIndex;
+				var nextOption;
+
+				for (var i = 0; i < lastIndex; i++) {
+					nextIndex = i + 1;
+					currentOption = options.item(i);
+					nextOption = options.item(nextIndex);
+
+					currentOption.set('text', nextOption.get('text'));
+					currentOption.val(nextOption.val());
 				}
 
-				options.item(box.get('length') - 1).set('text', sText);
-				options.item(box.get('length') - 1).set('value', sValue);
-
-				box.set('selectedIndex', box.get('length') - 1);
+				newOption = options.item(lastIndex);
+				newIndex = lastIndex;
 			}
-			else if (selectedIndex == (box.get('length') - 1)) {
-				for (var i = (box.get('length') - 1); i > 0; i--) {
-					options.item(i).set('text',  options.item(i - 1).get('text'));
-					options.item(i).set('value', options.item(i - 1).get('value'));
+			else if (selectedIndex == lastIndex) {
+				var previousIndex;
+				var previousOption;
+
+				for (var i = lastIndex; i > 0; i--) {
+					previousIndex = i - 1;
+					currentOption = options.item(i);
+					previousOption = options.item(previousIndex);
+
+					currentOption.set('text', previousOption.get('text'));
+					currentOption.val(previousOption.val());
 				}
 
-				options.item(0).set('text', sText);
-				options.item(0).set('value', sValue);
+				newOption = options.item(0);
+				newIndex = 0;
+			}
 
-				box.set('selectedIndex', 0);
+			if (newOption) {
+				newOption.set('text', text);
+				newOption.val(value);
+
+				box.set('selectedIndex', newIndex);
 			}
 		}
 	},

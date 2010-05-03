@@ -39,8 +39,8 @@ List rightList = (List)request.getAttribute("liferay-ui:input-move-boxes:rightLi
 
 <div class="taglib-move-boxes <%= cssClass %> <%= leftReorder ? "left-reorder" : StringPool.BLANK %> <%= rightReorder ? "right-reorder" : StringPool.BLANK %>" id="<%= randomNamespace + "input-move-boxes" %>">
 	<aui:layout>
-		<aui:column>
-			<aui:select cssClass="choice-selector left-selector " label="<%= leftTitle %>" multiple="<%= true %>" name="<%= leftBoxName %>" size="10" onChange="<%= Validator.isNotNull(leftOnChange) ? leftOnChange : StringPool.BLANK %>">
+		<aui:column cssClass="left-selector-column">
+			<aui:select cssClass="choice-selector left-selector" label="<%= leftTitle %>" multiple="<%= true %>" name="<%= leftBoxName %>" size="10" onChange="<%= Validator.isNotNull(leftOnChange) ? leftOnChange : StringPool.BLANK %>">
 
 				<%
 				for (int i = 0; i < leftList.size(); i++) {
@@ -54,21 +54,11 @@ List rightList = (List)request.getAttribute("liferay-ui:input-move-boxes:rightLi
 				%>
 
 			</aui:select>
-
-			<c:if test="<%= leftReorder %>">
-				<a class="arrow-button left-reorder-up" href="javascript:"><img alt="<liferay-ui:message arguments="<%= new Object[] {leftTitle} %>" key="move-selected-item-in-x-one-position-up" />" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_up.png" /></a>
-
-				<a class="arrow-button left-reorder-down" href="javascript:"><img alt="<liferay-ui:message arguments="<%= new Object[] {leftTitle} %>" key="move-selected-item-in-x-one-position-down" />" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_down.png" /></a>
-			</c:if>
 		</aui:column>
 
-		<aui:column cssClass="move-arrow-buttons">
-			<a class="arrow-button left-move" href="javascript:"><img alt="<liferay-ui:message arguments="<%= new Object[] {leftTitle, rightTitle} %>" key="move-selected-items-from-x-to-x" />" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_right.png" onClick="self.focus();" /></a>
+		<aui:column cssClass="move-arrow-buttons"></aui:column>
 
-			<a class="arrow-button right-move" href="javascript:"><img alt="<liferay-ui:message arguments="<%= new Object[] {rightTitle, leftTitle} %>" key="move-selected-items-from-x-to-x" />" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_left.png" onClick="self.focus();" /></a>
-		</aui:column>
-
-		<aui:column>
+		<aui:column cssClass="right-selector-column">
 			<aui:select cssClass="choice-selector right-selector" label="<%= rightTitle %>" multiple="<%= true %>" name="<%= rightBoxName %>" size="10" onChange="<%= Validator.isNotNull(rightOnChange) ? rightOnChange : StringPool.BLANK %>">
 
 				<%
@@ -83,12 +73,6 @@ List rightList = (List)request.getAttribute("liferay-ui:input-move-boxes:rightLi
 				%>
 
 				</aui:select>
-
-			<c:if test="<%= rightReorder %>">
-				<a class="arrow-button right-reorder-up" href="javascript:"><img alt="<liferay-ui:message arguments="<%= new Object[] {rightTitle} %>" key="move-selected-item-in-x-one-position-up" />" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_up.png" /></a>
-
-				<a class="arrow-button right-reorder-down" href="javascript:"><img alt="<liferay-ui:message arguments="<%= new Object[] {rightTitle} %>" key="move-selected-item-in-x-one-position-down" />" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_down.png" /></a>
-			</c:if>
 		</aui:column>
 	</aui:layout>
 </div>
@@ -96,7 +80,15 @@ List rightList = (List)request.getAttribute("liferay-ui:input-move-boxes:rightLi
 <aui:script use="liferay-input-move-boxes">
 	new Liferay.InputMoveBoxes(
 		{
-			container: '#<%= randomNamespace + "input-move-boxes" %>',
+			contentBox: '#<%= randomNamespace + "input-move-boxes" %>',
+			strings: {
+				LEFT_MOVE_DOWN: '<liferay-ui:message arguments="<%= new Object[] {leftTitle} %>" key="move-selected-item-in-x-one-position-down" />',
+				LEFT_MOVE_UP: '<liferay-ui:message arguments="<%= new Object[] {leftTitle} %>" key="move-selected-item-in-x-one-position-up" />',
+				MOVE_LEFT: '<liferay-ui:message arguments="<%= new Object[] {leftTitle, rightTitle} %>" key="move-selected-items-from-x-to-x" />',
+				MOVE_RIGHT: '<liferay-ui:message arguments="<%= new Object[] {rightTitle, leftTitle} %>" key="move-selected-items-from-x-to-x" />',
+				RIGHT_MOVE_DOWN: '<liferay-ui:message arguments="<%= new Object[] {rightTitle} %>" key="move-selected-item-in-x-one-position-down" />',
+				RIGHT_MOVE_UP: '<liferay-ui:message arguments="<%= new Object[] {rightTitle} %>" key="move-selected-item-in-x-one-position-up" />'
+			}
 		}
-	);
+	).render();
 </aui:script>

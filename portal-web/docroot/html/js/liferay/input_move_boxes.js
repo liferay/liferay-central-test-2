@@ -1,100 +1,200 @@
 AUI().add(
 	'liferay-input-move-boxes',
 	function(A) {
-		var InputMoveBoxes = function(options) {
-			var instance = this;
+		var Lang = A.Lang;
 
-			instance._container = A.one(options.container);
+		var getClassName = A.ClassNameManager.getClassName;
 
-			instance._leftReorder = instance._container.hasClass('left-reorder');
-			instance._rightReorder = instance._container.hasClass('right-reorder');
+		var	NAME = 'inputmoveboxes';
 
-			var leftBox = instance._container.one('.left-selector select');
-			var rightBox = instance._container.one('.right-selector select');
-
-			if(leftBox && rightBox) {
-				leftBox.on(
-					'focus',
-					function(event) {
-						rightBox.set('selectedIndex', '-1');
-					}
-				);
-
-				rightBox.on(
-					'focus',
-					function(event) {
-						leftBox.set('selectedIndex', '-1');
-					}
-				);
-
-				var arrowButtonLeftReorderUp = instance._container.one('a.left-reorder-up');
-				var arrowButtonLeftReorderDown = instance._container.one('a.left-reorder-down');
-
-				if(arrowButtonLeftReorderUp && arrowButtonLeftReorderDown) {
-					arrowButtonLeftReorderUp.on(
-						'click',
-						function(event) {
-							Liferay.Util.reorder(leftBox, 0);
-						}
-					);
-
-					arrowButtonLeftReorderDown.on(
-						'click',
-						function(event) {
-							Liferay.Util.reorder(leftBox, 1);
-						}
-					);
-
+		var CONFIG_REORDER = {
+			children: [
+				{
+					cssClass: 'reorder-up',
+					icon: 'circle-arrow-t'
+				},
+				{
+					cssClass: 'reorder-down',
+					icon: 'circle-arrow-b'
 				}
-
-				var arrowButtonRightReorderUp = instance._container.one('a.right-reorder-up');
-				var arrowButtonRightReorderDown = instance._container.one('a.right-reorder-down');
-
-				if(arrowButtonRightReorderUp && arrowButtonRightReorderDown) {
-					arrowButtonRightReorderUp.on(
-						'click',
-						function(event) {
-							Liferay.Util.reorder(rightBox, 0);
-						}
-					);
-
-					arrowButtonRightReorderDown.on(
-						'click',
-						function(event) {
-							Liferay.Util.reorder(rightBox, 1);
-						}
-					);
-
-				}
-
-				var arrowButtonLeftMove = instance._container.one('a.left-move');
-				var arrowButtonRightMove = instance._container.one('a.right-move');
-
-				if(arrowButtonLeftMove && arrowButtonRightMove) {
-					arrowButtonLeftMove.on(
-						'click',
-						function(event) {
-							Liferay.Util.moveItem(leftBox, rightBox, !instance._rightReorder);
-						}
-					);
-
-					arrowButtonRightMove.on(
-						'click',
-						function(event) {
-							Liferay.Util.moveItem(rightBox, leftBox, !instance._leftReorder);
-						}
-					);
-
-				}
-
-			}
-
+			]
 		};
-		Liferay.InputMoveBoxes = InputMoveBoxes;
 
+		var	CSS_INPUTMOVEBOXES = getClassName(NAME);
+
+		var CSS_LEFT_REORDER = 'left-reorder';
+
+		var CSS_RIGHT_REORDER = 'right-reorder';
+
+		var InputMoveBoxes = function() {
+			InputMoveBoxes.superclass.constructor.apply(this, arguments);
+		};
+
+		InputMoveBoxes.NAME = NAME;
+
+		InputMoveBoxes.ATTRS = {
+			leftReorder: {
+			},
+
+			rightReorder: {
+			},
+
+			strings: {
+				LEFT_MOVE_DOWN: '',
+				LEFT_MOVE_UP: '',
+				MOVE_LEFT: '',
+				MOVE_RIGHT: '',
+				RIGHT_MOVE_DOWN: '',
+				RIGHT_MOVE_UP: ''
+			}
+		};
+
+		InputMoveBoxes.HTML_PARSER = {
+			leftReorder: function(contentBox) {
+				return contentBox.hasClass(CSS_LEFT_REORDER);
+			},
+
+			rightReorder: function(contentBox) {
+				return contentBox.hasClass(CSS_RIGHT_REORDER);
+			}
+		};
+
+		A.extend(
+			InputMoveBoxes,
+			A.Component,
+			{
+				renderUI: function() {
+					var instance = this;
+
+					instance._renderBoxes();
+					instance._renderButtons();
+				},
+
+				bindUI: function() {
+					var instance = this;
+
+					var leftReorderToolbar = instance._leftReorderToolbar;
+
+					if (leftReorderToolbar) {
+						leftReorderToolbar.after('buttonitem:click', A.rbind(instance._afterOrderClick, instance, instance._leftBox));
+					}
+
+					var rightReorderToolbar = instance._rightReorderToolbar;
+
+					if (rightReorderToolbar) {
+						rightReorderToolbar.after('buttonitem:click', A.rbind(instance._afterOrderClick, instance, instance._rightBox));
+					}
+
+					instance._moveToolbar.on('buttonitem:click', instance._afterMoveClick, instance);
+
+					instance._leftBox.on('focus', A.rbind(instance._onSelectFocus, instance, instance._rightBox));
+					instance._rightBox.on('focus', A.rbind(instance._onSelectFocus, instance, instance._leftBox));
+				},
+
+				_afterMoveClick: function(event) {
+					var instance = this;
+
+					var cssClass = event.target.get('cssClass');
+
+					var from = instance._leftBox;
+					var to = instance._rightBox;
+					var sort;
+
+					if (cssClass.indexOf('move-right') != -1) {
+						from = instance._rightBox;
+						to = instance._leftBox;
+						sort = !instance.get('leftReorder');
+					}
+					else {
+						sort = !instance.get('rightReorder');
+					}
+
+					Liferay.Util.moveItem(from, to, sort);
+				},
+
+				_afterOrderClick: function(event, box) {
+					var instance = this;
+
+					var cssClass = event.target.get('cssClass');
+
+					var direction = 1;
+
+					if (cssClass.indexOf('reorder-up') != -1) {
+						direction = 0;
+					}
+
+					Liferay.Util.reorder(box, direction);
+				},
+
+				_onSelectFocus: function(event, box) {
+					var instance = this;
+
+					box.set('selectedIndex', '-1');
+				},
+
+				_renderBoxes: function() {
+					var instance = this;
+
+					var contentBox = instance.get('contentBox');
+
+					instance._leftBox = contentBox.one('.left-selector select');
+					instance._rightBox = contentBox.one('.right-selector select');
+				},
+
+				_renderButtons: function() {
+					var instance = this;
+
+					var contentBox = instance.get('contentBox');
+
+					var moveButtonsColumn = contentBox.one('.move-arrow-buttons-content');
+
+					var strings = instance.get('strings');
+
+					if (moveButtonsColumn) {
+						instance._moveToolbar = new A.Toolbar(
+							{
+								children: [
+									{
+										cssClass: 'move-left',
+										icon: 'circle-arrow-r',
+										title: strings.MOVE_LEFT
+									},
+									{
+										cssClass: 'move-right',
+										icon: 'circle-arrow-l',
+										title: strings.MOVE_RIGHT
+									}
+								],
+								orientation: 'vertical'
+							}
+						).render(moveButtonsColumn);
+					}
+
+					if (instance.get('leftReorder')) {
+						var leftColumn = contentBox.one('.left-selector-column-content');
+
+						CONFIG_REORDER.children[0].title = strings.LEFT_MOVE_UP;
+						CONFIG_REORDER.children[1].title = strings.LEFT_MOVE_DOWN;
+
+						instance._leftReorderToolbar = new A.Toolbar(CONFIG_REORDER).render(leftColumn);
+					}
+
+					if (instance.get('rightReorder')) {
+						var rightColumn = contentBox.one('.right-selector-column-content');
+
+						CONFIG_REORDER.children[0].title = strings.RIGHT_MOVE_UP;
+						CONFIG_REORDER.children[1].title = strings.RIGHT_MOVE_DOWN;
+
+						instance._rightReorderToolbar = new A.Toolbar(CONFIG_REORDER).render(rightColumn);
+					}
+				}
+			}
+		);
+
+		Liferay.InputMoveBoxes = InputMoveBoxes;
 	},
 	'',
 	{
-		requires: ['aui-base']
+		requires: ['aui-base', 'aui-toolbar']
 	}
 );
