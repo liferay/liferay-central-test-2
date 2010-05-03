@@ -200,10 +200,6 @@ List updatablePackageIds = new ArrayList();
 							redirect="<%= currentURL %>"
 						/>
 
-						<c:if test="<%= !pluginPackages.isEmpty() %>">
-							<br />
-						</c:if>
-
 						<aui:button-row>
 							<aui:button onClick='<%= "submitForm(document.hrefFm," + StringPool.APOSTROPHE + pluginInstallerURL.toString() + StringPool.APOSTROPHE + ");" %>' value="install-more-plugins" />
 
@@ -227,8 +223,6 @@ List updatablePackageIds = new ArrayList();
 							</c:if>
 
 							<aui:button onClick='<%= renderResponse.getNamespace() + "<portlet:namespace/>reloadRepositories();" %>' value="refresh" />
-
-							<br />
 
 							<liferay-util:include page="/html/portlet/plugin_installer/repository_report.jsp" />
 						</div>
