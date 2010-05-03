@@ -216,15 +216,10 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		if (serviceContext.getWorkflowAction() ==
 				WorkflowConstants.ACTION_PUBLISH) {
 
-			Map<String, Serializable> workflowContext =
-				new HashMap<String, Serializable>();
-
-			workflowContext.put("serviceContext", serviceContext);
-
 			WorkflowHandlerRegistryUtil.startWorkflowInstance(
 				user.getCompanyId(), page.getGroupId(), userId,
 				WikiPage.class.getName(), page.getResourcePrimKey(), page,
-				workflowContext, serviceContext);
+				serviceContext);
 		}
 
 		return page;
@@ -1091,15 +1086,10 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		if (serviceContext.getWorkflowAction() ==
 				WorkflowConstants.ACTION_PUBLISH) {
 
-			Map<String, Serializable> workflowContext =
-				new HashMap<String, Serializable>();
-
-			workflowContext.put("serviceContext", serviceContext);
-
 			WorkflowHandlerRegistryUtil.startWorkflowInstance(
 				user.getCompanyId(), page.getGroupId(), userId,
 				WikiPage.class.getName(), page.getResourcePrimKey(), page,
-				workflowContext, serviceContext);
+				serviceContext);
 		}
 
 		return page;

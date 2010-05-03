@@ -58,16 +58,11 @@ public class BlogsEntryWorkflowHandler extends BaseWorkflowHandler {
 			(String)workflowContext.get(
 				WorkflowConstants.CONTEXT_ENTRY_CLASS_PK));
 
-		String[] trackbacks = (String[])workflowContext.get("trackbacks");
-		Boolean pingOldTrackbacks = GetterUtil.getBoolean(
-			(String)workflowContext.get("pingOldTrackbacks"));
-
 		ServiceContext serviceContext = (ServiceContext)workflowContext.get(
 			"serviceContext");
 
 		return BlogsEntryLocalServiceUtil.updateStatus(
-			userId, classPK, trackbacks, pingOldTrackbacks, status,
-			serviceContext);
+			userId, classPK, status, serviceContext);
 	}
 
 	protected AssetRenderer getAssetRenderer(long classPK)

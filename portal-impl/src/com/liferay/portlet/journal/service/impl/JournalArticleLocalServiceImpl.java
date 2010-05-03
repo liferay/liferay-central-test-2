@@ -343,7 +343,7 @@ public class JournalArticleLocalServiceImpl
 
 			WorkflowHandlerRegistryUtil.startWorkflowInstance(
 				user.getCompanyId(), groupId, userId,
-				JournalArticle.class.getName(), article.getId(), article, null,
+				JournalArticle.class.getName(), article.getId(), article,
 				serviceContext);
 		}
 
@@ -1788,7 +1788,7 @@ public class JournalArticleLocalServiceImpl
 
 			WorkflowHandlerRegistryUtil.startWorkflowInstance(
 				user.getCompanyId(), groupId, userId,
-				JournalArticle.class.getName(), article.getId(), article, null,
+				JournalArticle.class.getName(), article.getId(), article,
 				serviceContext);
 		}
 

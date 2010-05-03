@@ -25,6 +25,7 @@ import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
@@ -160,15 +161,12 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		if (serviceContext.getWorkflowAction() ==
 				WorkflowConstants.ACTION_PUBLISH) {
 
-			Map<String, Serializable> workflowContext =
-				new HashMap<String, Serializable>();
-
-			workflowContext.put("trackbacks", trackbacks);
+			serviceContext.addAttribute("trackbacks", trackbacks);
 
 			WorkflowHandlerRegistryUtil.startWorkflowInstance(
 				user.getCompanyId(), groupId, userId,
 				BlogsEntry.class.getName(), entry.getEntryId(), entry,
-				workflowContext, serviceContext);
+				serviceContext);
 		}
 
 		return entry;
@@ -547,14 +545,14 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			Map<String, Serializable> workflowContext =
 				new HashMap<String, Serializable>();
 
-			workflowContext.put(
+			serviceContext.addAttribute(
 				"pingOldTrackbacks", String.valueOf(pingOldTrackbacks));
-			workflowContext.put("trackbacks", trackbacks);
+			serviceContext.addAttribute("trackbacks", trackbacks);
 
 			WorkflowHandlerRegistryUtil.startWorkflowInstance(
 				user.getCompanyId(), entry.getGroupId(), userId,
 				BlogsEntry.class.getName(), entry.getEntryId(), entry,
-				workflowContext, serviceContext);
+				serviceContext);
 		}
 
 		return entry;
@@ -572,8 +570,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 	}
 
 	public BlogsEntry updateStatus(
-			long userId, long entryId, String[] trackbacks,
-			boolean pingOldTrackbaks, int status, ServiceContext serviceContext)
+			long userId, long entryId, int status,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Entry
@@ -625,9 +623,14 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 			// Ping
 
+			String[] trackbacks = (String[])serviceContext.getAttribute(
+				"trackbacks");
+			Boolean pingOldTrackbacks = GetterUtil.getBoolean(
+				(String)serviceContext.getAttribute("pingOldTrackbacks"));
+
 			pingGoogle(entry, serviceContext);
 			pingPingback(entry, serviceContext);
-			pingTrackbacks(entry, trackbacks, pingOldTrackbaks, serviceContext);
+			pingTrackbacks(entry, trackbacks, pingOldTrackbacks, serviceContext);
 		}
 		else if (status != WorkflowConstants.STATUS_APPROVED) {
 

@@ -336,14 +336,11 @@ public class BlogsEntryLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsEntry updateStatus(
-		long userId, long entryId, java.lang.String[] trackbacks,
-		boolean pingOldTrackbaks, int status,
+		long userId, long entryId, int status,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getService()
-				   .updateStatus(userId, entryId, trackbacks, pingOldTrackbaks,
-			status, serviceContext);
+		return getService().updateStatus(userId, entryId, status, serviceContext);
 	}
 
 	public static BlogsEntryLocalService getService() {
