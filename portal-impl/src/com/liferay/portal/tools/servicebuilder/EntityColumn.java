@@ -14,6 +14,10 @@
 
 package com.liferay.portal.tools.servicebuilder;
 
+import java.util.Arrays;
+import java.util.Set;
+import java.util.HashSet;
+
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.util.TextFormatter;
 
@@ -187,7 +191,8 @@ public class EntityColumn implements Cloneable {
 	}
 
 	public boolean isPrimitiveType() {
-		if (Character.isLowerCase(_type.charAt(0))) {
+		if (Character.isLowerCase(_type.charAt(0)) ||
+			_primitiveWrappers.contains(_type)) {
 			return true;
 		}
 		else {
@@ -255,6 +260,10 @@ public class EntityColumn implements Cloneable {
 	private String _name;
 	private boolean _orderByAscending;
 	private boolean _primary;
+	private Set _primitiveWrappers = new HashSet(
+		Arrays.asList(
+			new String[]{"Boolean", "Double", "Float",
+				"Integer", "Long", "Short"}));
 	private String _type;
 
 }
