@@ -981,7 +981,7 @@ Liferay.provide(
 Liferay.provide(
 	Liferay.Util,
 	'removeItem',
-	function(box) {
+	function(box, value) {
 		var A = AUI();
 
 		box = A.one(box);
