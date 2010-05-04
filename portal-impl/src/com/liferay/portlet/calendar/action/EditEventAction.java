@@ -30,6 +30,7 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.assetpublisher.util.AssetPublisherUtil;
 import com.liferay.portlet.calendar.EventDurationException;
 import com.liferay.portlet.calendar.EventEndDateException;
 import com.liferay.portlet.calendar.EventStartDateException;
@@ -393,12 +394,16 @@ public class EditEventAction extends PortletAction {
 
 			// Add event
 
-			CalEventServiceUtil.addEvent(
+			CalEvent event = CalEventServiceUtil.addEvent(
 				title, description, startDateMonth, startDateDay, startDateYear,
 				startDateHour, startDateMinute, endDateMonth, endDateDay,
 				endDateYear, durationHour, durationMinute, allDay,
 				timeZoneSensitive, type, repeating, recurrence, remindBy,
 				firstReminder, secondReminder, serviceContext);
+
+			AssetPublisherUtil.addAndStoreSelection(
+				actionRequest, CalEvent.class.getName(), event.getEventId(),
+					-1);
 		}
 		else {
 

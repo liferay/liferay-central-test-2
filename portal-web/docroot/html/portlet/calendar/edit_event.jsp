@@ -19,6 +19,8 @@
 <%
 String redirect = ParamUtil.getString(request, "redirect");
 
+String referringPortletResource = ParamUtil.getString(request, "referringPortletResource");
+
 CalEvent event = (CalEvent)request.getAttribute(WebKeys.CALENDAR_EVENT);
 
 long eventId = BeanParamUtil.getLong(event, request, "eventId");
@@ -100,6 +102,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 <aui:form action="<%= editEventURL %>" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveEvent();" %>'>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
+	<aui:input name="referringPortletResource" type="hidden" value="<%= referringPortletResource %>" />
 	<aui:input name="eventId" type="hidden" value="<%= eventId %>" />
 
 	<liferay-ui:tabs
