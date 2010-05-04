@@ -1346,22 +1346,22 @@ public class ServiceBuilder {
 	}
 
 	public String getPrimitiveObj(String type) {
-		if (type.matches("[Bb]oolean")) {
+		if (type.equals("boolean")) {
 			return "Boolean";
 		}
-		else if (type.matches("[Dd]ouble")) {
+		else if (type.equals("double")) {
 			return "Double";
 		}
-		else if (type.matches("[Ff]loat")) {
+		else if (type.equals("float")) {
 			return "Float";
 		}
-		else if (type.matches("int|Integer")) {
+		else if (type.equals("int")) {
 			return "Integer";
 		}
-		else if (type.matches("[Ll]ong")) {
+		else if (type.equals("long")) {
 			return "Long";
 		}
-		else if (type.matches("[Ss]hort")) {
+		else if (type.equals("short")) {
 			return "Short";
 		}
 		else {

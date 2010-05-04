@@ -156,8 +156,8 @@ public class ClpSerializer {
 								method${column_index}.invoke(oldModel, (Object[])null);
 
 								newModel.set${column.methodName}(value${column_index}
- 
-								<#if column.isPrimitiveType() && column.type?matches("^[a-z].*")>
+
+								<#if column.isPrimitiveType()>
 									.${column.type}Value()
 								</#if>
 
