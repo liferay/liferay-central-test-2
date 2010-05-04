@@ -193,7 +193,7 @@ if (Validator.isNotNull(structureId)) {
 
 	Liferay.provide(
 		window,
-		'_<%= PortletKeys.JOURNAL %>_selectStructure',
+		'<%= PortalUtil.getPortletNamespace(PortletKeys.JOURNAL) %>selectStructure',
 		function(structureId, name) {
 			var A = AUI();
 
