@@ -1,5 +1,5 @@
 AUI().ready(
-	'hudcrumbs',
+	'liferay-hudcrumbs',
 	function(A) {
 		if (Liferay.Browser.isIe() && Liferay.Browser.getMajorVersion() < 7) {
 			var navigation = A.one('#navigation > ul');

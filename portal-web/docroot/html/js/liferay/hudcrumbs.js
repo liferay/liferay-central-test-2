@@ -1,5 +1,5 @@
 AUI().add(
-	'hudcrumbs',
+	'liferay-hudcrumbs',
 	function(A) {
 		var Lang = A.Lang,
 
