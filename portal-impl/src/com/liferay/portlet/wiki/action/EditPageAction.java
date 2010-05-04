@@ -197,7 +197,6 @@ public class EditPageAction extends PortletAction {
 
 		if (Validator.isNotNull(title)) {
 			try {
-
 				if ((version == 0) &&
 					WikiPageLocalServiceUtil.hasDraftPage(nodeId, title)) {
 

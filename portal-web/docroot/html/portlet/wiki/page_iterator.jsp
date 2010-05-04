@@ -43,6 +43,11 @@ else if (type.equals("categorized_pages")) {
 
 	AssetUtil.addPortletBreadcrumbEntries(categoryId, request, PortletURLUtil.clone(portletURL, renderResponse));
 }
+else if (type.equals("draft_pages")) {
+	portletURL.setParameter("struts_action", "/wiki/view_draft_pages");
+
+	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "draft-pages"), portletURL.toString());
+}
 else if (type.equals("history")) {
 	if (wikiPage != null) {
 		portletURL.setParameter("struts_action", "/wiki/view");
@@ -64,11 +69,6 @@ else if (type.equals("incoming_links")) {
 	portletURL.setParameter("struts_action", "/wiki/view_page_incoming_links");
 
 	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "incoming-links"), portletURL.toString());
-}
-else if (type.equals("draft_pages")) {
-	portletURL.setParameter("struts_action", "/wiki/view_draft_pages");
-
-	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "draft-pages"), portletURL.toString());
 }
 else if (type.equals("orphan_pages")) {
 	portletURL.setParameter("struts_action", "/wiki/view_orphan_pages");
@@ -165,14 +165,14 @@ else if (type.equals("categorized_pages") || type.equals("tagged_pages")) {
 	}
 }
 else if (type.equals("draft_pages")) {
-	long authorId = user.getUserId();
+	long draftUserId = user.getUserId();
 
 	if (permissionChecker.isCompanyAdmin() || permissionChecker.isCommunityAdmin(scopeGroupId)) {
-		authorId = 0;
+		draftUserId = 0;
 	}
 
-	total = WikiPageLocalServiceUtil.getDraftPagesCount(node.getNodeId(), authorId);
-	results = WikiPageLocalServiceUtil.getDraftPages(node.getNodeId(), authorId, searchContainer.getStart(), searchContainer.getEnd());
+	total = WikiPageLocalServiceUtil.getDraftPagesCount(draftUserId, node.getNodeId());
+	results = WikiPageLocalServiceUtil.getDraftPages(draftUserId, node.getNodeId(), searchContainer.getStart(), searchContainer.getEnd());
 }
 else if (type.equals("orphan_pages")) {
 	List<WikiPage> orphans = WikiPageLocalServiceUtil.getOrphans(node.getNodeId());

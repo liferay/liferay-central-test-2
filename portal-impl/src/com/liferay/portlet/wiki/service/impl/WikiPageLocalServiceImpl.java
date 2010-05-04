@@ -75,12 +75,9 @@ import com.liferay.portlet.wiki.util.comparator.PageCreateDateComparator;
 import com.liferay.portlet.wiki.util.comparator.PageVersionComparator;
 import com.liferay.util.UniqueList;
 
-import java.io.Serializable;
-
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -515,11 +512,11 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 	}
 
 	public List<WikiPage> getDraftPages(
-			long nodeId, long userId, int start, int end)
+			long userId, long nodeId, int start, int end)
 		throws SystemException {
 
 		if (userId > 0) {
-			return wikiPagePersistence.findByN_U_S(
+			return wikiPagePersistence.findByU_N_S(
 				nodeId, userId, WorkflowConstants.STATUS_DRAFT, start, end,
 				new PageCreateDateComparator(false));
 		}
@@ -530,11 +527,11 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		}
 	}
 
-	public int getDraftPagesCount(long nodeId, long userId)
+	public int getDraftPagesCount(long userId, long nodeId)
 		throws SystemException {
 
 		if (userId > 0) {
-			return wikiPagePersistence.countByN_U_S(
+			return wikiPagePersistence.countByU_N_S(
 				nodeId, userId, WorkflowConstants.STATUS_DRAFT);
 		}
 		else {
@@ -813,7 +810,6 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		else {
 			return false;
 		}
-
 	}
 
 	public void movePage(
@@ -1025,6 +1021,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		long groupId = oldPage.getGroupId();
 
 		WikiPage page = oldPage;
+
 		double newVersion = oldVersion;
 
 		if (oldPage.isApproved()) {
@@ -1136,7 +1133,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		if (status == WorkflowConstants.STATUS_APPROVED) {
 
-			// Last Approved Page
+			// Last approved page
 
 			List<WikiPage> pages = wikiPagePersistence.findByN_T_H(
 				page.getNodeId(), page.getTitle(), true, 0, 1);

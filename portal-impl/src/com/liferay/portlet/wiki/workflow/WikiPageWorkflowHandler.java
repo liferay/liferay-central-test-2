@@ -67,8 +67,7 @@ public class WikiPageWorkflowHandler extends BaseWorkflowHandler {
 	protected AssetRenderer getAssetRenderer(long classPK)
 		throws PortalException, SystemException {
 
-		WikiPage page = WikiPageLocalServiceUtil.getPage(
-			classPK);
+		WikiPage page = WikiPageLocalServiceUtil.getPage(classPK);
 
 		return new WikiPageAssetRenderer(page);
 	}
