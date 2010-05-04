@@ -68,6 +68,10 @@ AssetRendererFactory rendererFactory = AssetRendererFactoryRegistryUtil.getAsset
 	.aui-form .general-display-settings {
 		margin-bottom: 1em;
 	}
+
+	.asset-search {
+		margin-bottom: 1em;
+	}
 </style>
 
 <liferay-portlet:actionURL portletConfiguration="true" var="configurationActionURL" />
@@ -523,71 +527,9 @@ AssetRendererFactory rendererFactory = AssetRendererFactoryRegistryUtil.getAsset
 </aui:form>
 
 <c:if test="<%= Validator.isNotNull(typeSelection) %>">
-	<c:choose>
-		<c:when test="<%= typeSelection.equals(BlogsEntry.class.getName()) %>">
-			<aui:input name="assetEntryType" type="hidden" value="<%= BlogsEntry.class.getName() %>" />
+	<liferay-ui:message key="select" />: <liferay-ui:message key='<%= "model.resource." + typeSelection %>' />
 
-			<liferay-ui:message key="select" />: <liferay-ui:message key='<%= "model.resource." + BlogsEntry.class.getName() %>' />
-
-			<br /><br />
-
-			<%@ include file="/html/portlet/asset_publisher/select_blogs_entry.jspf" %>
-		</c:when>
-		<c:when test="<%= typeSelection.equals(BookmarksEntry.class.getName()) %>">
-			<aui:input name="assetEntryType" type="hidden" value="<%= BookmarksEntry.class.getName() %>" />
-
-			<liferay-ui:message key="select" />: <liferay-ui:message key='<%= "model.resource." + BookmarksEntry.class.getName() %>' />
-
-			<br /><br />
-
-			<%@ include file="/html/portlet/asset_publisher/select_bookmarks_entry.jspf" %>
-		</c:when>
-		<c:when test="<%= typeSelection.equals(DLFileEntry.class.getName()) %>">
-			<aui:input name="assetEntryType" type="hidden" value="<%= DLFileEntry.class.getName() %>" />
-
-			<liferay-ui:message key="select" />: <liferay-ui:message key='<%= "model.resource." + DLFileEntry.class.getName() %>' />
-
-			<br /><br />
-
-			<%@ include file="/html/portlet/asset_publisher/select_document_library_file_entry.jspf" %>
-		</c:when>
-		<c:when test="<%= typeSelection.equals(IGImage.class.getName()) %>">
-			<aui:input name="assetEntryType" type="hidden" value="<%= IGImage.class.getName() %>" />
-
-			<liferay-ui:message key="select" />: <liferay-ui:message key='<%= "model.resource." + IGImage.class.getName() %>' />
-
-			<br /><br />
-
-			<%@ include file="/html/portlet/asset_publisher/select_image_gallery_image_entry.jspf" %>
-		</c:when>
-		<c:when test="<%= typeSelection.equals(JournalArticle.class.getName()) %>">
-			<aui:input name="assetEntryType" type="hidden" value="<%= JournalArticle.class.getName() %>" />
-
-			<liferay-ui:message key="select" />: <liferay-ui:message key='<%= "model.resource." + JournalArticle.class.getName() %>' />
-
-			<br /><br />
-
-			<%@ include file="/html/portlet/asset_publisher/select_journal_article.jspf" %>
-		</c:when>
-		<c:when test="<%= typeSelection.equals(MBMessage.class.getName()) %>">
-			<aui:input name="assetEntryType" type="hidden" value="<%= MBMessage.class.getName() %>" />
-
-			<liferay-ui:message key="select" />: <liferay-ui:message key='<%= "model.resource." + MBMessage.class.getName() %>' />
-
-			<br /><br />
-
-			<%@ include file="/html/portlet/asset_publisher/select_message_boards_message.jspf" %>
-		</c:when>
-		<c:when test="<%= typeSelection.equals(WikiPage.class.getName()) %>">
-			<aui:input name="assetEntryType" type="hidden" value="<%= WikiPage.class.getName() %>" />
-
-			<liferay-ui:message key="select" />: <liferay-ui:message key='<%= "model.resource." + WikiPage.class.getName() %>' />
-
-			<br /><br />
-
-			<%@ include file="/html/portlet/asset_publisher/select_wiki_page.jspf" %>
-		</c:when>
-	</c:choose>
+	<%@ include file="/html/portlet/asset_publisher/select_asset.jspf" %>
 </c:if>
 
 <aui:script>

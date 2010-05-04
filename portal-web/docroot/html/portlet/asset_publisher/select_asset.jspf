@@ -15,9 +15,12 @@
 %>
 
 <%
-String tabs1 = ParamUtil.getString(request, "tabs1", "entries");
+String resourceName = LanguageUtil.get(pageContext, "model.resource." +  typeSelection);
 
-long groupId = tabs1.equals("entries") ? scopeGroupId : themeDisplay.getCompanyGroupId();
+String tabs1 = ParamUtil.getString(request, "tabs1", resourceName);
+String tabNames = resourceName + StringPool.COMMA + "shared-entries";
+
+long groupId = tabs1.equals(resourceName) ? scopeGroupId : themeDisplay.getCompanyGroupId();
 long userId = 0;
 
 int assetEntryOrder = ParamUtil.getInteger(request, "assetEntryOrder", -1);
@@ -30,24 +33,33 @@ portletURL.setParameter("struts_action", "/portlet_configuration/edit_configurat
 portletURL.setParameter("redirect", redirect);
 portletURL.setParameter("backURL", redirect);
 portletURL.setParameter("portletResource", portletResource);
-portletURL.setParameter("typeSelection", BlogsEntry.class.getName());
+portletURL.setParameter("typeSelection", typeSelection);
 %>
 
 <liferay-ui:tabs
 	backURL="<%= configurationRenderURL.toString() %>"
-	names="entries,shared-entries"
+	names="<%= tabNames %>"
 	url="<%= portletURL.toString() %>"
 />
 
-<div>
-	<label for="<portlet:namespace />keywords"><liferay-ui:message key="search" /></label>
+<div class="asset-search">
+	<liferay-portlet:renderURL varImpl="searchURL">
+		<portlet:param name="struts_action" value="/portlet_configuration/edit_configuration" />
+	</liferay-portlet:renderURL>
 
-	<input id="<portlet:namespace />keywords" name="<portlet:namespace />keywords" size="30" type="text" value="<%= HtmlUtil.escape(keywords) %>" onkeypress="if (event.keyCode == 13) { submitForm(document.<portlet:namespace />fm, '<%= portletURL.toString() %>'); }" />
+	<aui:form action="<%= searchURL %>" method="post" name="searchFm">
+		<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
+		<aui:input name="backURL" type="hidden" value="<%= redirect %>" />
+		<aui:input name="portletResource" type="hidden" value="<%= portletResource %>" />
+		<aui:input name="typeSelection" type="hidden" value="<%= typeSelection %>" />
 
-	<input type="button" value="<liferay-ui:message key="search" />" onclick="submitForm(document.<portlet:namespace />fm, '<%= portletURL.toString() %>');" />
+		<span class="aui-search-bar">
+			<aui:input inlineField="<%= true %>" id="keywords" label="" name="keywords" size="30" title="search-assets" type="text" />
+
+			<aui:button type="submit" value="search" />
+		</span>
+	</aui:form>
 </div>
-
-<div class="separator"><!-- --></div>
 
 <c:choose>
 	<c:when test="<%= Validator.isNotNull(keywords) %>">
@@ -55,25 +67,18 @@ portletURL.setParameter("typeSelection", BlogsEntry.class.getName());
 		<%
 		List<String> headerNames = new ArrayList<String>();
 
-		headerNames.add("entry");
+		headerNames.add("title");
+		headerNames.add("description");
 		headerNames.add("user-name");
 		headerNames.add("modified-date");
 		headerNames.add("score");
 
-		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.format(pageContext, "no-entries-were-found-that-matched-the-keywords-x", "<strong>" + HtmlUtil.escape(keywords) + "</strong>"));
+		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.format(pageContext, "no-x-was-found-that-matched-the-keywords-x", new Object[]{resourceName, "<strong>" + HtmlUtil.escape(keywords) + "</strong>"}));
 
 		try {
-			Indexer indexer = IndexerRegistryUtil.getIndexer(BlogsEntry.class);
+			AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(typeSelection);
 
-			SearchContext searchContext = SearchContextFactory.getInstance(request);
-
-			searchContext.setEnd(searchContainer.getEnd());
-			searchContext.setGroupId(groupId);
-			searchContext.setKeywords(keywords);
-			searchContext.setOwnerUserId(userId);
-			searchContext.setStart(searchContainer.getStart());
-
-			Hits results = indexer.search(searchContext);
+			Hits results = AssetEntryLocalServiceUtil.search(company.getCompanyId(), assetRendererFactory.getPortletId(), keywords, searchContainer.getStart(), searchContainer.getEnd());
 
 			int total = results.getLength();
 
@@ -88,22 +93,20 @@ portletURL.setParameter("typeSelection", BlogsEntry.class.getName());
 
 				long entryId = GetterUtil.getLong(doc.get(Field.ENTRY_CLASS_PK));
 
-				BlogsEntry entry = BlogsEntryLocalServiceUtil.getEntry(entryId);
+				AssetEntry entry = AssetEntryLocalServiceUtil.getEntry(typeSelection, entryId);
 
 				entry = entry.toEscapedModel();
-
-				AssetEntry assetEntry = AssetEntryLocalServiceUtil.getEntry(BlogsEntry.class.getName(), entry.getEntryId());
 
 				StringBundler sb = new StringBundler(11);
 
 				sb.append("javascript:");
 				sb.append(renderResponse.getNamespace());
 				sb.append("selectAsset('");
-				sb.append(assetEntry.getEntryId());
+				sb.append(entry.getEntryId());
 				sb.append("', '");
-				sb.append(assetEntry.getEntryId());
+				sb.append(entry.getEntryId());
 				sb.append("', '");
-				sb.append(UnicodeFormatter.toString(assetEntry.getTitle()));
+				sb.append(UnicodeFormatter.toString(entry.getTitle()));
 				sb.append("', '");
 				sb.append(assetEntryOrder);
 				sb.append("');");
@@ -113,6 +116,10 @@ portletURL.setParameter("typeSelection", BlogsEntry.class.getName());
 				// Title
 
 				row.addText(entry.getTitle(), rowHREF);
+
+				// Description
+
+				row.addText(entry.getDescription(), rowHREF);
 
 				// User name
 
@@ -142,41 +149,47 @@ portletURL.setParameter("typeSelection", BlogsEntry.class.getName());
 		<%
 		List<String> headerNames = new ArrayList<String>();
 
-		headerNames.add("entry");
+		headerNames.add("title");
+		headerNames.add("description");
 		headerNames.add("user-name");
 		headerNames.add("modified-date");
 
-		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, "there-are-no-entries");
+		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.format(pageContext, "there-is-not-any-x", resourceName));
 
-		int total = BlogsEntryLocalServiceUtil.getGroupEntriesCount(groupId, WorkflowConstants.STATUS_APPROVED);
+		AssetEntryQuery assetEntryQuery = new AssetEntryQuery();
+
+		assetEntryQuery.setClassName(typeSelection);
+		assetEntryQuery.setGroupIds(new long[] {groupId});
+		assetEntryQuery.setEnd(searchContainer.getEnd());
+		assetEntryQuery.setStart(searchContainer.getStart());
+
+		int total = AssetEntryLocalServiceUtil.getEntriesCount(assetEntryQuery);
 
 		searchContainer.setTotal(total);
 
-		List results = BlogsEntryLocalServiceUtil.getGroupEntries(groupId, WorkflowConstants.STATUS_APPROVED, searchContainer.getStart(), searchContainer.getEnd());
+		List results = AssetEntryLocalServiceUtil.getEntries(assetEntryQuery);
 
 		searchContainer.setResults(results);
 
 		List resultRows = searchContainer.getResultRows();
 
 		for (int i = 0; i < results.size(); i++) {
-			BlogsEntry entry = (BlogsEntry)results.get(i);
+			AssetEntry entry = (AssetEntry)results.get(i);
 
 			entry = entry.toEscapedModel();
 
 			ResultRow row = new ResultRow(entry, entry.getEntryId(), i);
-
-			AssetEntry assetEntry = AssetEntryLocalServiceUtil.getEntry(BlogsEntry.class.getName(), entry.getEntryId());
 
 			StringBundler sb = new StringBundler(11);
 
 			sb.append("javascript:");
 			sb.append(renderResponse.getNamespace());
 			sb.append("selectAsset('");
-			sb.append(assetEntry.getEntryId());
+			sb.append(entry.getEntryId());
 			sb.append("', '");
-			sb.append(assetEntry.getEntryId());
+			sb.append(entry.getEntryId());
 			sb.append("', '");
-			sb.append(UnicodeFormatter.toString(assetEntry.getTitle()));
+			sb.append(UnicodeFormatter.toString(entry.getTitle()));
 			sb.append("', '");
 			sb.append(assetEntryOrder);
 			sb.append("');");
@@ -186,6 +199,10 @@ portletURL.setParameter("typeSelection", BlogsEntry.class.getName());
 			// Title
 
 			row.addText(entry.getTitle(), rowHREF);
+
+			// Description
+
+			row.addText(entry.getDescription(), rowHREF);
 
 			// User name
 
@@ -209,6 +226,6 @@ portletURL.setParameter("typeSelection", BlogsEntry.class.getName());
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 	<aui:script>
-		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />keywords);
+		Liferay.Util.focusFormField(document.<portlet:namespace />searchFm.<portlet:namespace />keywords);
 	</aui:script>
 </c:if>
