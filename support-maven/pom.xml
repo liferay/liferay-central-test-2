@@ -18,7 +18,7 @@
 			</plugin>
 			<plugin>
 				<artifactId>maven-javadoc-plugin</artifactId>
-			</plugin>
+			</plugin>			
 		</plugins>
 	</build>
 	<modules>
@@ -27,40 +27,31 @@
 	</modules>
 	<repositories>
 		<repository>
-			<id>sonatype-release</id>
-			<name>Sonatype Repository</name>
-			<url>http://oss.sonatype.org/content/groups/public</url>
+			<id>liferay</id>
+			<name>Liferay Repository</name>
+			<url>http://localhost/nexus/content/groups/public</url>
 			<releases>
-				<enabled>true</enabled>
+				<updatePolicy>never</updatePolicy>
 			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
 		</repository>
 	</repositories>
 	<pluginRepositories>
 		<pluginRepository>
-			<id>sonatype-release</id>
-			<name>Sonatype Repository</name>
-			<url>http://oss.sonatype.org/content/groups/public</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
+			<id>liferay</id>
+			<name>Liferay Repository</name>
+			<url>http://localhost/nexus/content/groups/public</url>
 		</pluginRepository>
 	</pluginRepositories>
 	<distributionManagement>
 		<repository>
-			<id>sonatype-staging</id>
-			<name>Sonatype Staging Repository</name>
-			<url>http://oss.sonatype.org/service/local/staging/deploy/maven2</url>
+			<id>liferay</id>
+			<name>Liferay Releases Repository</name>
+			<url>http://localhost/nexus/content/repositories/liferay-ce-releases</url>
 		</repository>
 		<snapshotRepository>
-			<id>sonatype-snapshot</id>
-			<name>Sonatype Snapshot Repository</name>
-			<url>http://oss.sonatype.org/content/repositories/snapshots</url>
+			<id>liferay</id>
+			<name>Liferay Snapshot Repository</name>
+			<url>http://localhost/nexus/content/repositories/liferay-ce-snapshots</url>
 		</snapshotRepository>
 	</distributionManagement>
 	<properties>
