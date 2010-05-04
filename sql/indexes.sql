@@ -649,8 +649,7 @@ create index IX_E745EA26 on WikiPage (nodeId, title, head);
 create index IX_EA22A30C on WikiPage (nodeId, title, head, status);
 create index IX_BEA33AB8 on WikiPage (nodeId, title, status);
 create unique index IX_3D4AF476 on WikiPage (nodeId, title, version);
-create index IX_F5EE46B0 on WikiPage (nodeId, userId);
-create index IX_5592D596 on WikiPage (nodeId, userId, status);
+create index IX_FBBE7C96 on WikiPage (userId, nodeId, status);
 create index IX_9C0E478F on WikiPage (uuid_);
 create unique index IX_899D3DFB on WikiPage (uuid_, groupId);
 

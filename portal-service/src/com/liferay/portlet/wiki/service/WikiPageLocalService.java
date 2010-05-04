@@ -189,11 +189,11 @@ public interface WikiPageLocalService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> getDraftPages(
-		long nodeId, long userId, int start, int end)
+		long userId, long nodeId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getDraftPagesCount(long nodeId, long userId)
+	public int getDraftPagesCount(long userId, long nodeId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)

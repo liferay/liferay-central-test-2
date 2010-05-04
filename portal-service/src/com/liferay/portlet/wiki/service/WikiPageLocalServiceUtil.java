@@ -246,14 +246,14 @@ public class WikiPageLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.wiki.model.WikiPage> getDraftPages(
-		long nodeId, long userId, int start, int end)
+		long userId, long nodeId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getDraftPages(nodeId, userId, start, end);
+		return getService().getDraftPages(userId, nodeId, start, end);
 	}
 
-	public static int getDraftPagesCount(long nodeId, long userId)
+	public static int getDraftPagesCount(long userId, long nodeId)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getDraftPagesCount(nodeId, userId);
+		return getService().getDraftPagesCount(userId, nodeId);
 	}
 
 	public static java.util.List<com.liferay.portlet.wiki.model.WikiPage> getIncomingLinks(

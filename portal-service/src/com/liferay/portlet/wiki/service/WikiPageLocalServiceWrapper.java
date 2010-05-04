@@ -237,14 +237,14 @@ public class WikiPageLocalServiceWrapper implements WikiPageLocalService {
 	}
 
 	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> getDraftPages(
-		long nodeId, long userId, int start, int end)
+		long userId, long nodeId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _wikiPageLocalService.getDraftPages(nodeId, userId, start, end);
+		return _wikiPageLocalService.getDraftPages(userId, nodeId, start, end);
 	}
 
-	public int getDraftPagesCount(long nodeId, long userId)
+	public int getDraftPagesCount(long userId, long nodeId)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _wikiPageLocalService.getDraftPagesCount(nodeId, userId);
+		return _wikiPageLocalService.getDraftPagesCount(userId, nodeId);
 	}
 
 	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> getIncomingLinks(
