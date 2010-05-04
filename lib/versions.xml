@@ -2795,7 +2795,9 @@
 			</license>
 		</licenses>
 		<comments>
-			Removed org.w3c.* because it conflicts with xml-apis.jar.
+			Removed org.w3c.* because it conflicts with xml-apis.jar. Removed
+			META-INF/INDEX.LIST because of complications with class loading in
+			Windows. See LPS-9385.
 		</comments>
 	</library>
 	<library>
