@@ -3516,7 +3516,10 @@ public class PortalImpl implements Portal {
 					e.getMessage());
 		}
 
-		if (_log.isWarnEnabled()) {
+		if ((e instanceof PortalException) && _log.isInfoEnabled()) {
+			_log.info(e, e);
+		}
+		else if ((e instanceof SystemException) && _log.isWarnEnabled()) {
 			_log.warn(e, e);
 		}
 
