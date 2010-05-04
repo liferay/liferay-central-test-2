@@ -232,7 +232,6 @@
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
 		<header-portlet-css>/html/portlet/document_library/css.jsp</header-portlet-css>
-		<footer-portal-javascript>/html/js/misc/swfupload/swfupload.js</footer-portal-javascript>
 		<css-class-wrapper>portlet-document-library</css-class-wrapper>
 		<add-default-resource>true</add-default-resource>
 	</portlet>
@@ -349,7 +348,6 @@
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
 		<header-portlet-css>/html/portlet/image_gallery/css.jsp</header-portlet-css>
-		<footer-portal-javascript>/html/js/misc/swfupload/swfupload.js</footer-portal-javascript>
 		<css-class-wrapper>portlet-image-gallery</css-class-wrapper>
 		<add-default-resource>true</add-default-resource>
 	</portlet>
@@ -417,7 +415,6 @@
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
 		<header-portlet-css>/html/portlet/wiki/css.jsp</header-portlet-css>
-		<footer-portal-javascript>/html/js/misc/swfupload/swfupload.js</footer-portal-javascript>
 		<css-class-wrapper>portlet-wiki</css-class-wrapper>
 		<add-default-resource>true</add-default-resource>
 	</portlet>
@@ -501,7 +498,6 @@
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
 		<header-portlet-css>/html/portlet/wiki/css.jsp</header-portlet-css>
-		<footer-portal-javascript>/html/js/misc/swfupload/swfupload.js</footer-portal-javascript>
 		<css-class-wrapper>portlet-wiki</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -1463,7 +1459,6 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<header-portlet-css>/html/portlet/wiki/css.jsp</header-portlet-css>
-		<footer-portal-javascript>/html/js/misc/swfupload/swfupload.js</footer-portal-javascript>
 		<css-class-wrapper>portlet-wiki</css-class-wrapper>
 	</portlet>
 	<role-mapper>

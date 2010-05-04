@@ -721,6 +721,6 @@ AUI().add(
 	},
 	'',
 	{
-		requires: ['aui-base', 'collection', 'substitute']
+		requires: ['aui-base', 'collection', 'substitute', 'swfupload']
 	}
 );
