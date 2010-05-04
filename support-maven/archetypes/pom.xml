@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>com.liferay.maven</groupId>
 		<artifactId>maven-support</artifactId>
-		<version>6.0.1-SNAPSHOT</version>
+		<version>6.0.2-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
@@ -12,7 +12,7 @@
 	<artifactId>liferay-archetypes</artifactId>
 	<packaging>pom</packaging>
 	<name>Liferay Maven 2 Archetypes</name>
-	<version>6.0.1-SNAPSHOT</version>
+	<version>6.0.2-SNAPSHOT</version>
 	<modules>
 		 <module>liferay-layouttpl-archetype</module>
 		 <module>liferay-portlet-archetype</module>
