@@ -69,7 +69,17 @@ if (image != null) {
 	</aui:script>
 </c:if>
 
-<liferay-util:include page="/html/portlet/image_gallery/top_links.jsp" />
+<c:choose>
+	<c:when test="<%= Validator.isNull(referringPortletResource) %>">
+		<liferay-util:include page="/html/portlet/image_gallery/top_links.jsp" />
+	</c:when>
+	<c:otherwise>
+		<liferay-ui:tabs
+			names="image"
+			backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
+		/>
+	</c:otherwise>
+</c:choose>
 
 <portlet:actionURL var="editImageURL">
 	<portlet:param name="struts_action" value="/image_gallery/edit_image" />

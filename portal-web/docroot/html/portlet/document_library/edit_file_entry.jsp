@@ -80,7 +80,18 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 portletURL.setParameter("name", name);
 %>
 
-<liferay-util:include page="/html/portlet/document_library/top_links.jsp" />
+<c:choose>
+	<c:when test="<%= Validator.isNull(referringPortletResource) %>">
+		<liferay-util:include page="/html/portlet/document_library/top_links.jsp" />
+	</c:when>
+	<c:otherwise>
+		<liferay-ui:tabs
+			names="document"
+			backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
+		/>
+	</c:otherwise>
+</c:choose>
+
 
 <c:if test="<%= isLocked.booleanValue() %>">
 	<c:choose>

@@ -28,7 +28,17 @@ long entryId = BeanParamUtil.getLong(entry, request, "entryId");
 long folderId = BeanParamUtil.getLong(entry, request, "folderId");
 %>
 
-<liferay-util:include page="/html/portlet/bookmarks/top_links.jsp" />
+<c:choose>
+	<c:when test="<%= Validator.isNull(referringPortletResource) %>">
+		<liferay-util:include page="/html/portlet/bookmarks/top_links.jsp" />
+	</c:when>
+	<c:otherwise>
+		<liferay-ui:tabs
+			names="entry"
+			backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
+		/>
+	</c:otherwise>
+</c:choose>
 
 <portlet:actionURL var="editEntryURL">
 	<portlet:param name="struts_action" value="/bookmarks/edit_entry" />
