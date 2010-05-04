@@ -39,10 +39,6 @@ public class ServiceContext implements Serializable {
 		_expandoBridgeAttributes = new LinkedHashMap<String, Serializable>();
 	}
 
-	public void addAttribute(String name, Serializable value) {
-		_attributes.put(name, value);
-	}
-
 	public boolean getAddCommunityPermissions() {
 		return _addCommunityPermissions;
 	}

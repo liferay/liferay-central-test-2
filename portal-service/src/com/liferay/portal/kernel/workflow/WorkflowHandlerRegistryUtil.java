@@ -56,8 +56,7 @@ public class WorkflowHandlerRegistryUtil {
 
 	public static void startWorkflowInstance(
 			long companyId, long groupId, long userId, String className,
-			long classPK, Object model,
-			ServiceContext serviceContext)
+			long classPK, Object model, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		WorkflowHandler workflowHandler = getWorkflowHandler(className);
