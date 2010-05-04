@@ -630,7 +630,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 			pingGoogle(entry, serviceContext);
 			pingPingback(entry, serviceContext);
-			pingTrackbacks(entry, trackbacks, pingOldTrackbacks, serviceContext);
+			pingTrackbacks(
+				entry, trackbacks, pingOldTrackbacks, serviceContext);
 		}
 		else if (status != WorkflowConstants.STATUS_APPROVED) {
 
