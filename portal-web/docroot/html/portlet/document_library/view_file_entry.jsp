@@ -402,24 +402,22 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 			<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" paginate="<%= false %>" />
 		</liferay-ui:panel>
 
-		<c:if test="<%= PropsValues.DL_FILE_ENTRY_COMMENTS_ENABLED && DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.ADD_DISCUSSION) %>">
-			<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "comments") %>'>
-				<portlet:actionURL var="discussionURL">
-					<portlet:param name="struts_action" value="/document_library/edit_file_entry_discussion" />
-				</portlet:actionURL>
+		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "comments") %>'>
+			<portlet:actionURL var="discussionURL">
+				<portlet:param name="struts_action" value="/document_library/edit_file_entry_discussion" />
+			</portlet:actionURL>
 
-				<liferay-ui:discussion
-					className="<%= DLFileEntry.class.getName() %>"
-					classPK="<%= fileEntryId %>"
-					formAction="<%= discussionURL %>"
-					formName="fm2"
-					ratingsEnabled="<%= enableCommentRatings %>"
-					redirect="<%= currentURL %>"
-					subject="<%= fileEntry.getTitle() %>"
-					userId="<%= fileEntry.getUserId() %>"
-				/>
-			</liferay-ui:panel>
-		</c:if>
+			<liferay-ui:discussion
+				className="<%= DLFileEntry.class.getName() %>"
+				classPK="<%= fileEntryId %>"
+				formAction="<%= discussionURL %>"
+				formName="fm2"
+				ratingsEnabled="<%= enableCommentRatings %>"
+				redirect="<%= currentURL %>"
+				subject="<%= fileEntry.getTitle() %>"
+				userId="<%= fileEntry.getUserId() %>"
+			/>
+		</liferay-ui:panel>
 	</liferay-ui:panel-container>
 </div>
 
