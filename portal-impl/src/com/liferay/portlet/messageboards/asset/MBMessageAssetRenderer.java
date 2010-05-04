@@ -113,7 +113,8 @@ public class MBMessageAssetRenderer extends BaseAssetRenderer {
 			String template)
 		throws Exception {
 
-		if (template.equals(TEMPLATE_FULL_CONTENT)) {
+		if (template.equals(TEMPLATE_FULL_CONTENT) ||
+			template.equals(TEMPLATE_ABSTRACT)) {
 			renderRequest.setAttribute(
 				WebKeys.MESSAGE_BOARDS_MESSAGE, _message);
 

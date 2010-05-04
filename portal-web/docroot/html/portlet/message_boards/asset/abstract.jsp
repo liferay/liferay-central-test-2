@@ -17,11 +17,15 @@
 <%@ include file="/html/portlet/message_boards/init.jsp" %>
 
 <%
+
+int abstractLength = (Integer)request.getAttribute(WebKeys.ASSET_PUBLISHER_ABSTRACT_LENGTH);
+
 MBMessage message = (MBMessage)request.getAttribute(WebKeys.MESSAGE_BOARDS_MESSAGE);
 
-String body = BBCodeUtil.getHTML(message);
+String summary = StringUtil.shorten(message.getBody(), abstractLength);
 
-body = StringUtil.replace(body, "@theme_images_path@/emoticons", themeDisplay.getPathThemeImages() + "/emoticons");
+summary = BBCodeUtil.getHTML(summary);
+summary = StringUtil.replace(summary, "@theme_images_path@/emoticons", themeDisplay.getPathThemeImages() + "/emoticons");
 %>
 
-<%= body %>
+<%= summary %>
