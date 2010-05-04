@@ -29,7 +29,6 @@ public class OrganizationTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTestSuite(ControlPanelTest.class);
 		testSuite.addTestSuite(AddUserTest.class);
 		testSuite.addTestSuite(AddUser2Test.class);
 		testSuite.addTestSuite(AddOrganizationTest.class);
@@ -61,13 +60,9 @@ public class OrganizationTests extends BaseTests {
 		testSuite.addTestSuite(AssertApplyOrganizationTest.class);
 		testSuite.addTestSuite(AssertCannotDeleteApplyOrganizationTest.class);
 		testSuite.addTestSuite(AddOrganizationPageTest.class);
-		testSuite.addTestSuite(EndControlPanelTest.class);
 		testSuite.addTestSuite(AssertNotMergeOrganizationPageTest.class);
-		testSuite.addTestSuite(ControlPanelTest.class);
 		testSuite.addTestSuite(MergeOrganizationPageTest.class);
-		testSuite.addTestSuite(EndControlPanelTest.class);
 		testSuite.addTestSuite(AssertMergeOrganizationPageTest.class);
-		testSuite.addTestSuite(ControlPanelTest.class);
 		testSuite.addTestSuite(RemoveApplyOrganizationTest.class);
 		testSuite.addTestSuite(AssertRemoveApplyOrganizationTest.class);
 		testSuite.addTestSuite(SearchOrganizationTest.class);
@@ -75,7 +70,6 @@ public class OrganizationTests extends BaseTests {
 		testSuite.addTestSuite(AddTemporaryOrganizationTest.class);
 		testSuite.addTestSuite(DeleteTemporaryOrganizationTest.class);
 		testSuite.addTestSuite(TearDownTest.class);
-		testSuite.addTestSuite(EndControlPanelTest.class);
 
 		return testSuite;
 	}

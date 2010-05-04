@@ -29,13 +29,11 @@ public class CommunitiesTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTestSuite(ControlPanelTest.class);
-		testSuite.addTestSuite(SetupTest.class);
+		testSuite.addTestSuite(AddUserTest.class);
 		testSuite.addTestSuite(AddCommunitiesTest.class);
 		testSuite.addTestSuite(AddCommunitiesPublicPageTest.class);
 		testSuite.addTestSuite(AddCommunitiesPrivatePageTest.class);
 		testSuite.addTestSuite(AssertCommunityDropDownTest.class);
-		testSuite.addTestSuite(ControlPanelTest.class);
 		testSuite.addTestSuite(AddAsteriskCommunityNameTest.class);
 		testSuite.addTestSuite(AddCommaCommunityNameTest.class);
 		testSuite.addTestSuite(AddDuplicateCommunityNameTest.class);
@@ -54,9 +52,8 @@ public class CommunitiesTests extends BaseTests {
 		testSuite.addTestSuite(AssertNoLARCommunityContentTest.class);
 		testSuite.addTestSuite(ImportCommunityLARTest.class);
 		testSuite.addTestSuite(AssertCommunityLARImportTest.class);
-		testSuite.addTestSuite(ControlPanelTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
-		testSuite.addTestSuite(EndControlPanelTest.class);
+		testSuite.addTestSuite(TearDownUserTest.class);
+		testSuite.addTestSuite(TearDownCommunityTest.class);
 
 		return testSuite;
 	}

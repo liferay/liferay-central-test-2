@@ -25,13 +25,15 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class BrowseServerPluginsInstallationTest extends BaseTestCase {
 	public void testBrowseServerPluginsInstallation() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Plugins Installation")) {
+				if (selenium.isElementPresent("link=Control Panel")) {
 					break;
 				}
 			}
@@ -41,6 +43,8 @@ public class BrowseServerPluginsInstallationTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Plugins Installation",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
@@ -63,7 +67,7 @@ public class BrowseServerPluginsInstallationTest extends BaseTestCase {
 
 		assertTrue(selenium.isElementPresent(
 				"//input[@value='Install More Portlets']"));
-		selenium.select("//div[2]/select", RuntimeVariables.replace("label=4"));
+		selenium.select("_136_page", RuntimeVariables.replace("label=4"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Wiki"));
 		selenium.clickAt("link=Theme Plugins", RuntimeVariables.replace(""));
@@ -75,7 +79,5 @@ public class BrowseServerPluginsInstallationTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent(
 				"//input[@value='Install More Layout Templates']"));
-		selenium.clickAt("link=Web Plugins", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
 	}
 }

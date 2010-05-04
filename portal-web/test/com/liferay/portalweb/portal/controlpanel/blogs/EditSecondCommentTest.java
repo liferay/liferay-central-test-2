@@ -24,13 +24,15 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class EditSecondCommentTest extends BaseTestCase {
 	public void testEditSecondComment() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Blogs")) {
+				if (selenium.isElementPresent("link=Control Panel")) {
 					break;
 				}
 			}
@@ -40,45 +42,13 @@ public class EditSecondCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Blogs", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible("link=Second Test Entry")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.clickAt("link=Second Test Entry", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible("//td[4]/span/a[2]")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("//td[4]/span/a[2]", RuntimeVariables.replace(""));
+		selenium.click("//td[4]/span/a/span");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -98,7 +68,10 @@ public class EditSecondCommentTest extends BaseTestCase {
 
 		selenium.type("_33_editReplyBody1",
 			RuntimeVariables.replace("This is an edited second entry comment."));
-		selenium.clickAt("_33_editReplyButton1", RuntimeVariables.replace(""));
+		selenium.keyPress("_33_editReplyBody1", RuntimeVariables.replace("\\48"));
+		selenium.keyPress("_33_editReplyBody1", RuntimeVariables.replace("\\8"));
+		selenium.clickAt("//input[@value='Update']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isVisible("_33_editReplyBody1"));
 		assertTrue(selenium.isTextPresent(

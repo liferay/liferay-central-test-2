@@ -24,13 +24,15 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class WorkflowTest extends BaseTestCase {
 	public void testWorkflow() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Web Content")) {
+				if (selenium.isElementPresent("link=Control Panel")) {
 					break;
 				}
 			}
@@ -40,10 +42,9 @@ public class WorkflowTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("link=Web Content", RuntimeVariables.replace(""));
+		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//li[@id='_15_tabs1web-contentTabsId']/a",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("link=Web Content", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("Link=Test Web Content Article 2",
 			RuntimeVariables.replace(""));
@@ -68,10 +69,12 @@ public class WorkflowTest extends BaseTestCase {
 
 		selenium.clickAt("_15_incrementVersionCheckbox",
 			RuntimeVariables.replace(""));
-		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
+		selenium.clickAt("_15_saveArticleBtn", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("Link=1.1"));
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
+		selenium.click(RuntimeVariables.replace("//div[3]/span[3]/span/input"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isElementPresent("Link=1.1"));
 	}
 }

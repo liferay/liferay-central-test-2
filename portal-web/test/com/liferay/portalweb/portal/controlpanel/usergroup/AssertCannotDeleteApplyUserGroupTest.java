@@ -31,6 +31,7 @@ public class AssertCannotDeleteApplyUserGroupTest extends BaseTestCase {
 		while (label >= 1) {
 			switch (label) {
 			case 1:
+				selenium.open("/web/guest/home/");
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -38,7 +39,7 @@ public class AssertCannotDeleteApplyUserGroupTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent("link=User Groups")) {
+						if (selenium.isElementPresent("link=Control Panel")) {
 							break;
 						}
 					}
@@ -48,83 +49,10 @@ public class AssertCannotDeleteApplyUserGroupTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.clickAt("link=Control Panel",
+					RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
 				selenium.clickAt("link=User Groups",
-					RuntimeVariables.replace(""));
-				selenium.waitForPageToLoad("30000");
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isVisible("_127_name")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
-				selenium.type("_127_name", RuntimeVariables.replace("Selenium"));
-				selenium.clickAt("//input[@value='Search']",
-					RuntimeVariables.replace(""));
-				selenium.waitForPageToLoad("30000");
-				Thread.sleep(2500);
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isVisible("//strong/span")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
-				selenium.clickAt("//strong/span", RuntimeVariables.replace(""));
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isElementPresent("//div[4]/ul/li[5]/a")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
-				selenium.clickAt("//div[4]/ul/li[5]/a",
-					RuntimeVariables.replace(""));
-				selenium.waitForPageToLoad("30000");
-
-				boolean NoUsersAssigned = selenium.isTextPresent(
-						"No users were found.");
-
-				if (NoUsersAssigned) {
-					label = 2;
-
-					continue;
-				}
-
-				selenium.clickAt("link=View All", RuntimeVariables.replace(""));
-				selenium.waitForPageToLoad("30000");
-				selenium.type("_127_name", RuntimeVariables.replace("Selenium"));
-				selenium.clickAt("//input[@value='Search']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				selenium.clickAt("_127_allRowIds", RuntimeVariables.replace(""));

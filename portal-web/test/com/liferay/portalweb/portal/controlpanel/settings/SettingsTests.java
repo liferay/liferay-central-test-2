@@ -29,7 +29,6 @@ public class SettingsTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTestSuite(ControlPanelTest.class);
 		testSuite.addTestSuite(EditGeneralSettingsTest.class);
 		testSuite.addTestSuite(AssertAuthenticationCASTest.class);
 		testSuite.addTestSuite(AssertAuthenticationGeneralTest.class);
@@ -72,7 +71,6 @@ public class SettingsTests extends BaseTests {
 		testSuite.addTestSuite(MonitoringTest.class);
 		testSuite.addTestSuite(PluginsConfigurationTest.class);
 		testSuite.addTestSuite(TearDownTest.class);
-		testSuite.addTestSuite(EndControlPanelTest.class);
 
 		return testSuite;
 	}

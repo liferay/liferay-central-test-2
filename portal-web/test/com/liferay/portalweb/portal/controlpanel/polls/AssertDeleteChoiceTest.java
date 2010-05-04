@@ -24,13 +24,15 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AssertDeleteChoiceTest extends BaseTestCase {
 	public void testAssertDeleteChoice() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Polls")) {
+				if (selenium.isElementPresent("link=Control Panel")) {
 					break;
 				}
 			}
@@ -40,6 +42,8 @@ public class AssertDeleteChoiceTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Polls", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("//input[@value='Add Question']",
@@ -77,9 +81,23 @@ public class AssertDeleteChoiceTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Delete']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		assertEquals("Delete Choice C",
+			selenium.getValue("_25_choiceDescriptionc_en_US"));
 		assertEquals("Delete Choice D",
 			selenium.getValue("_25_choiceDescriptiond_en_US"));
-		assertEquals("Delete Choice E",
-			selenium.getValue("_25_choiceDescriptione_en_US"));
+		assertFalse(selenium.isElementPresent("_25_choiceDescriptione_en_US"));
+		selenium.clickAt("//input[@value='Delete']",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		assertEquals("Delete Choice C",
+			selenium.getValue("_25_choiceDescriptionc_en_US"));
+		assertFalse(selenium.isElementPresent("_25_choiceDescriptiond_en_US"));
+		assertFalse(selenium.isElementPresent("_25_choiceDescriptione_en_US"));
+		selenium.clickAt("//input[@value='Delete']",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		assertFalse(selenium.isElementPresent("_25_choiceDescriptionc_en_US"));
+		assertFalse(selenium.isElementPresent("_25_choiceDescriptiond_en_US"));
+		assertFalse(selenium.isElementPresent("_25_choiceDescriptione_en_US"));
 	}
 }

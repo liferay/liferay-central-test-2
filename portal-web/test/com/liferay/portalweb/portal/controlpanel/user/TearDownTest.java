@@ -29,6 +29,7 @@ public class TearDownTest extends BaseTestCase {
 		while (label >= 1) {
 			switch (label) {
 			case 1:
+				selenium.open("/web/guest/home/");
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -36,7 +37,7 @@ public class TearDownTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent("link=Users")) {
+						if (selenium.isElementPresent("link=Control Panel")) {
 							break;
 						}
 					}
@@ -46,6 +47,9 @@ public class TearDownTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.clickAt("link=Control Panel",
+					RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
 				selenium.clickAt("link=Users", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 
@@ -65,9 +69,9 @@ public class TearDownTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				boolean Basic1Present = selenium.isVisible("link=\u00ab Basic");
+				boolean basicVisible = selenium.isVisible("link=\u00ab Basic");
 
-				if (!Basic1Present) {
+				if (!basicVisible) {
 					label = 2;
 
 					continue;
@@ -86,7 +90,7 @@ public class TearDownTest extends BaseTestCase {
 				boolean UserPresent = selenium.isElementPresent("_125_rowIds");
 
 				if (!UserPresent) {
-					label = 5;
+					label = 3;
 
 					continue;
 				}
@@ -97,20 +101,8 @@ public class TearDownTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to deactivate the selected users[\\s\\S]$"));
-
-				boolean AdvancedPresent = selenium.isVisible(
-						"link=Advanced \u00bb");
-
-				if (!AdvancedPresent) {
-					label = 3;
-
-					continue;
-				}
-
 				selenium.clickAt("link=Advanced \u00bb",
 					RuntimeVariables.replace(""));
-
-			case 3:
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -130,7 +122,7 @@ public class TearDownTest extends BaseTestCase {
 
 				selenium.select("_125_active",
 					RuntimeVariables.replace("label=No"));
-				selenium.clickAt("//input[@value='Search']",
+				selenium.clickAt("//div[2]/span[2]/span/input",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				selenium.clickAt("_125_allRowIds", RuntimeVariables.replace(""));
@@ -139,20 +131,10 @@ public class TearDownTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to permanently delete the selected users[\\s\\S]$"));
-
-				boolean Basic2Present = selenium.isVisible("link=\u00ab Basic");
-
-				if (!Basic2Present) {
-					label = 4;
-
-					continue;
-				}
-
 				selenium.clickAt("link=\u00ab Basic",
 					RuntimeVariables.replace(""));
 
-			case 4:
-			case 5:
+			case 3:
 			case 100:
 				label = -1;
 			}

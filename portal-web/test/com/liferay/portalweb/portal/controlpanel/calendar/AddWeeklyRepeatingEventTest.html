@@ -9,53 +9,48 @@
 <tr><td rowspan="1" colspan="3">AddWeeklyRepeatingEventTest</td></tr>
 </thead><tbody>
 <tr>
+	<td>open</td>
+	<td>/web/guest/home/</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
+	<td>link=Control Panel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>link=Control Panel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
 	<td>link=Calendar</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>link=Calendar</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForVisible</td>
 	<td>link=Events</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAtAndWait</td>
-	<td>link=Events</td>
-	<td></td>
-</tr>
-<tr>
-	<td>pause</td>
-	<td>5000</td>
+	<td>clickAt</td>
+	<td>//td[5]/ul/li/strong/a</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForVisible</td>
-	<td>//td[5]/ul/li/strong/span</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAt</td>
-	<td>//td[5]/ul/li/strong/span</td>
+	<td>clickAndWait</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>//div[5]/ul/li[1]/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAtAndWait</td>
-	<td>//div[5]/ul/li[1]/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAt</td>
-	<td>//td[1]/input[3]</td>
+	<td>click</td>
+	<td>//div/div/span[3]/span/span/input</td>
 	<td></td>
 </tr>
 <tr>
@@ -69,13 +64,143 @@
 	<td>1</td>
 </tr>
 <tr>
-	<td>clickAt</td>
-	<td>_8_weeklyDayPos5</td>
-	<td></td>
+	<td>store</td>
+	<td>eval(selenium.isChecked('_8_weeklyDayPos1Checkbox'))</td>
+	<td>sundayChecked</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${sundayChecked}</td>
+	<td>SundayNotChecked</td>
 </tr>
 <tr>
 	<td>clickAt</td>
-	<td>//td[2]/table/tbody/tr/td/input[2]</td>
+	<td>_8_weeklyDayPos1Checkbox</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>SundayNotChecked</td>
+	<td></td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>eval(selenium.isChecked('_8_weeklyDayPos2Checkbox'))</td>
+	<td>mondayChecked</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${mondayChecked}</td>
+	<td>MondayNotChecked</td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>_8_weeklyDayPos2Checkbox</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>MondayNotChecked</td>
+	<td></td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>eval(selenium.isChecked('_8_weeklyDayPos3Checkbox'))</td>
+	<td>tuesdayChecked</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${tuesdayChecked}</td>
+	<td>TuesdayNotChecked</td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>_8_weeklyDayPos3Checkbox</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>TuesdayNotChecked</td>
+	<td></td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>eval(selenium.isChecked('_8_weeklyDayPos4Checkbox'))</td>
+	<td>wednesdayChecked</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${wednesdayChecked}</td>
+	<td>WednesdayNotChecked</td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>_8_weeklyDayPos4Checkbox</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>WednesdayNotChecked</td>
+	<td></td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>eval(selenium.isChecked('_8_weeklyDayPos5Checkbox'))</td>
+	<td>thursdayChecked</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>${thursdayChecked}</td>
+	<td>ThursdayChecked</td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>_8_weeklyDayPos5Checkbox</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>ThursdayChecked</td>
+	<td></td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>eval(selenium.isChecked('_8_weeklyDayPos6Checkbox'))</td>
+	<td>fridayChecked</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${fridayChecked}</td>
+	<td>FridayNotChecked</td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>_8_weeklyDayPos6Checkbox</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>FridayNotChecked</td>
+	<td></td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>eval(selenium.isChecked('_8_weeklyDayPos7Checkbox'))</td>
+	<td>saturdayChecked</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${saturdayChecked}</td>
+	<td>SaturdayNotChecked</td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>_8_weeklyDayPos7Checkbox</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>SaturdayNotChecked</td>
 	<td></td>
 </tr>
 <tr>
@@ -91,7 +216,7 @@
 <tr>
 	<td>select</td>
 	<td>_8_endDateYear</td>
-	<td>label=2010</td>
+	<td>label=2011</td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
@@ -121,16 +246,16 @@
 <tr>
 	<td>select</td>
 	<td>//select</td>
-	<td>label=2009</td>
+	<td>label=2010</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=8</td>
+	<td>//a[contains(@href, 'javascript:_8_updateCalendar(0, 7, 2010);')]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>link=8</td>
+	<td>//a[contains(@href, 'javascript:_8_updateCalendar(0, 7, 2010);')]</td>
 	<td></td>
 </tr>
 <tr>
@@ -151,16 +276,16 @@
 <tr>
 	<td>select</td>
 	<td>//select</td>
-	<td>label=2009</td>
+	<td>label=2010</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=15</td>
+	<td>//a[contains(@href, 'javascript:_8_updateCalendar(0, 14, 2010);')]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>link=15</td>
+	<td>//a[contains(@href, 'javascript:_8_updateCalendar(0, 14, 2010);')]</td>
 	<td></td>
 </tr>
 <tr>
@@ -181,16 +306,16 @@
 <tr>
 	<td>select</td>
 	<td>//select</td>
-	<td>label=2009</td>
+	<td>label=2010</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=16</td>
+	<td>//a[contains(@href, 'javascript:_8_updateCalendar(0, 15, 2010);')]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>link=16</td>
+	<td>//a[contains(@href, 'javascript:_8_updateCalendar(0, 15, 2010);')]</td>
 	<td></td>
 </tr>
 <tr>

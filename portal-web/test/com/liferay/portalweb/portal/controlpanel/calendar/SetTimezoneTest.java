@@ -24,13 +24,15 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class SetTimezoneTest extends BaseTestCase {
 	public void testSetTimezone() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("link=My Account")) {
+				if (selenium.isElementPresent("link=Joe Bloggs")) {
 					break;
 				}
 			}
@@ -40,7 +42,7 @@ public class SetTimezoneTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("link=My Account", RuntimeVariables.replace(""));
+		selenium.clickAt("link=Joe Bloggs", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -67,7 +69,7 @@ public class SetTimezoneTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("_2__2_timeZoneId")) {
+				if (selenium.isVisible("_2_timeZoneId")) {
 					break;
 				}
 			}
@@ -77,11 +79,13 @@ public class SetTimezoneTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.select("_2__2_timeZoneId",
+		selenium.select("_2_timeZoneId",
 			RuntimeVariables.replace("label=(UTC -08:00) Pacific Standard Time"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
+		assertEquals("(UTC -08:00) Pacific Standard Time",
+			selenium.getSelectedLabel("_2_timeZoneId"));
 	}
 }

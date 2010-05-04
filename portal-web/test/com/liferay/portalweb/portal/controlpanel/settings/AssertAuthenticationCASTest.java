@@ -24,13 +24,15 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AssertAuthenticationCASTest extends BaseTestCase {
 	public void testAssertAuthenticationCAS() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Settings")) {
+				if (selenium.isElementPresent("link=Control Panel")) {
 					break;
 				}
 			}
@@ -40,6 +42,8 @@ public class AssertAuthenticationCASTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Settings", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
@@ -103,7 +107,7 @@ public class AssertAuthenticationCASTest extends BaseTestCase {
 		assertTrue(selenium.isTextPresent("Login URL"));
 		assertTrue(selenium.isTextPresent("Logout URL"));
 		assertTrue(selenium.isTextPresent("Server Name"));
+		assertTrue(selenium.isTextPresent("Server URL"));
 		assertTrue(selenium.isTextPresent("Service URL"));
-		assertTrue(selenium.isTextPresent("Validate URL"));
 	}
 }

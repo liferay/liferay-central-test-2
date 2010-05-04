@@ -9,13 +9,18 @@
 <tr><td rowspan="1" colspan="3">SetTimezoneTest</td></tr>
 </thead><tbody>
 <tr>
+	<td>open</td>
+	<td>/web/guest/home/</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
-	<td>link=My Account</td>
+	<td>link=Joe Bloggs</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>link=My Account</td>
+	<td>link=Joe Bloggs</td>
 	<td></td>
 </tr>
 <tr>
@@ -30,12 +35,12 @@
 </tr>
 <tr>
 	<td>waitForVisible</td>
-	<td>_2__2_timeZoneId</td>
+	<td>_2_timeZoneId</td>
 	<td></td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>_2__2_timeZoneId</td>
+	<td>_2_timeZoneId</td>
 	<td>label=(UTC -08:00) Pacific Standard Time</td>
 </tr>
 <tr>
@@ -47,6 +52,11 @@
 	<td>assertTextPresent</td>
 	<td>Your request processed successfully.</td>
 	<td></td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>_2_timeZoneId</td>
+	<td>(UTC -08:00) Pacific Standard Time</td>
 </tr>
 
 </tbody></table>

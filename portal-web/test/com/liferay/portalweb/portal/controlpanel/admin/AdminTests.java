@@ -29,7 +29,6 @@ public class AdminTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTestSuite(ControlPanelTest.class);
 		testSuite.addTestSuite(AddServerCategoryTest.class);
 		testSuite.addTestSuite(EditServerCategoryTest.class);
 		testSuite.addTestSuite(BrowseServerTest.class);
@@ -44,7 +43,6 @@ public class AdminTests extends BaseTests {
 		testSuite.addTestSuite(EditServerInstanceTest.class);
 		testSuite.addTestSuite(BrowseServerPluginsInstallationTest.class);
 		testSuite.addTestSuite(BrowseInstallMorePluginsTest.class);
-		testSuite.addTestSuite(EndControlPanelTest.class);
 
 		return testSuite;
 	}

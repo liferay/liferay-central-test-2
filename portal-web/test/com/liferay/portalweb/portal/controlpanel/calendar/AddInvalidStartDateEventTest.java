@@ -25,13 +25,15 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddInvalidStartDateEventTest extends BaseTestCase {
 	public void testAddInvalidStartDateEvent() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Calendar")) {
+				if (selenium.isElementPresent("link=Control Panel")) {
 					break;
 				}
 			}
@@ -41,6 +43,8 @@ public class AddInvalidStartDateEventTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Calendar", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
@@ -85,6 +89,8 @@ public class AddInvalidStartDateEventTest extends BaseTestCase {
 		selenium.select("_8_startDateMonth",
 			RuntimeVariables.replace("label=February"));
 		Thread.sleep(5000);
+		selenium.select("_8_startDateMonth",
+			RuntimeVariables.replace("label=February"));
 		assertFalse(selenium.isPartialText("_8_startDateDay", "30"));
 	}
 }

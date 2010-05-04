@@ -26,25 +26,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class AssertWebContentDisplayLocalizationTest extends BaseTestCase {
 	public void testAssertWebContentDisplayLocalization()
 		throws Exception {
-		selenium.clickAt("link=Back to My Community",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=Home", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=Manage Pages", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//div[@id='_88_layoutsTreeOutput']/ul/li/a/span",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_88_name_en_US",
-			RuntimeVariables.replace(
-				"Web Content Display Localization Test Page"));
-		selenium.type("_88_name_en_US",
-			RuntimeVariables.replace(
-				"Web Content Display Localization Test Page"));
-		selenium.clickAt("//input[@value='Add Page']",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
+		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -52,7 +34,46 @@ public class AssertWebContentDisplayLocalizationTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent(
+				if (selenium.isVisible("addPage")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("addPage", RuntimeVariables.replace(""));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("//input")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.type("//input",
+			RuntimeVariables.replace(
+				"Web Content Display Localization Test Page"));
+		selenium.clickAt("save", RuntimeVariables.replace(""));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible(
 							"link=Web Content Display Localization Test Page")) {
 					break;
 				}
@@ -66,7 +87,10 @@ public class AssertWebContentDisplayLocalizationTest extends BaseTestCase {
 		selenium.clickAt("link=Web Content Display Localization Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=Application", RuntimeVariables.replace(""));
+		selenium.clickAt("_145_addApplication", RuntimeVariables.replace(""));
+		Thread.sleep(5000);
+		selenium.typeKeys("layout_configuration_content",
+			RuntimeVariables.replace("w"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -75,7 +99,7 @@ public class AssertWebContentDisplayLocalizationTest extends BaseTestCase {
 
 			try {
 				if (selenium.isElementPresent(
-							"//div[@id='ContentManagement-WebContentDisplay']/p")) {
+							"//div[@title='Web Content Display']/p/a")) {
 					break;
 				}
 			}
@@ -85,7 +109,7 @@ public class AssertWebContentDisplayLocalizationTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//div[@id='ContentManagement-WebContentDisplay']/p/a",
+		selenium.clickAt("//div[@title='Web Content Display']/p/a",
 			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -94,7 +118,7 @@ public class AssertWebContentDisplayLocalizationTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//div[@id='Tools-Language']/p")) {
+				if (selenium.isVisible("//section")) {
 					break;
 				}
 			}
@@ -104,7 +128,30 @@ public class AssertWebContentDisplayLocalizationTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//div[@id='Tools-Language']/p/a",
+		assertTrue(selenium.isVisible("//section"));
+		selenium.type("layout_configuration_content",
+			RuntimeVariables.replace(""));
+		Thread.sleep(5000);
+		selenium.typeKeys("layout_configuration_content",
+			RuntimeVariables.replace("l"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//div[@title='Language']/p/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("//div[@title='Language']/p/a",
 			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -113,7 +160,7 @@ public class AssertWebContentDisplayLocalizationTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Configuration")) {
+				if (selenium.isVisible("//section")) {
 					break;
 				}
 			}
@@ -123,12 +170,71 @@ public class AssertWebContentDisplayLocalizationTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		assertTrue(selenium.isVisible("//section"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("//div[2]/section")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		assertTrue(selenium.isVisible("//div[2]/section"));
 		selenium.clickAt("//img[@alt='Select Web Content']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Hello World Localized Article",
 			RuntimeVariables.replace(""));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isPartialText("//form[@id='_86_fm1']/div[1]/",
+							"Modified")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		assertTrue(selenium.isPartialText("//form[@id='_86_fm1']/div[1]/",
+				"Modified"));
+		selenium.click(RuntimeVariables.replace("//div/span[1]/span/input"));
 		selenium.waitForPageToLoad("30000");
+		selenium.open("/web/guest/home/");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible(
+							"link=Web Content Display Localization Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.clickAt("link=Web Content Display Localization Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");

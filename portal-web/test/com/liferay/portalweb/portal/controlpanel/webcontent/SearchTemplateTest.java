@@ -24,97 +24,132 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class SearchTemplateTest extends BaseTestCase {
 	public void testSearchTemplate() throws Exception {
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+		int label = 1;
 
-			try {
-				if (selenium.isElementPresent("link=Web Content")) {
-					break;
+		while (label >= 1) {
+			switch (label) {
+			case 1:
+				selenium.open("/web/guest/home/");
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isElementPresent("link=Control Panel")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
-		}
+				selenium.clickAt("link=Control Panel",
+					RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
+				selenium.clickAt("link=Web Content",
+					RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
+				selenium.clickAt("link=Templates", RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
 
-		selenium.clickAt("link=Web Content", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=Templates", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=Advanced \u00bb", RuntimeVariables.replace(""));
+				boolean advancedVisible = selenium.isVisible(
+						"link=Advanced \u00bb");
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+				if (!advancedVisible) {
+					label = 2;
 
-			try {
-				if (selenium.isElementPresent("_15_searchTemplateId")) {
-					break;
+					continue;
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
-		}
+				selenium.clickAt("link=Advanced \u00bb",
+					RuntimeVariables.replace(""));
 
-		selenium.typeKeys("_15_searchTemplateId",
-			RuntimeVariables.replace("Test"));
-		selenium.type("_15_searchTemplateId", RuntimeVariables.replace("Test"));
-		selenium.clickAt("//input[@value='Search']",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("Test Web Content Template"));
-		selenium.type("_15_searchTemplateId", RuntimeVariables.replace("Test1"));
-		selenium.clickAt("//input[@value='Search']",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("No templates were found."));
-		selenium.type("_15_searchTemplateId", RuntimeVariables.replace(""));
-		selenium.type("_15_name", RuntimeVariables.replace("Test"));
-		selenium.clickAt("//input[@value='Search']",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("Test Web Content Template"));
-		selenium.type("_15_name", RuntimeVariables.replace("Test1"));
-		selenium.clickAt("//input[@value='Search']",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("No templates were found."));
-		selenium.type("_15_name", RuntimeVariables.replace(""));
-		selenium.type("_15_description",
-			RuntimeVariables.replace("This is a test web content template!"));
-		selenium.clickAt("//input[@value='Search']",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("Test Web Content Template"));
-		selenium.type("_15_description",
-			RuntimeVariables.replace("This is a test web content template!!"));
-		selenium.clickAt("//input[@value='Search']",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("No templates were found."));
-		selenium.type("_15_description", RuntimeVariables.replace(""));
-		selenium.clickAt("link=\u00ab Basic", RuntimeVariables.replace(""));
+			case 2:
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
 
-			try {
-				if (selenium.isElementPresent("_15_keywords")) {
-					break;
+					try {
+						if (selenium.isElementPresent("_15_searchTemplateId")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
+				selenium.typeKeys("_15_searchTemplateId",
+					RuntimeVariables.replace("Test"));
+				selenium.type("_15_searchTemplateId",
+					RuntimeVariables.replace("Test"));
+				selenium.clickAt("//div[2]/span[2]/span/input",
+					RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
+				assertTrue(selenium.isTextPresent("Test Web Content Template"));
+				selenium.type("_15_searchTemplateId",
+					RuntimeVariables.replace("Test1"));
+				selenium.clickAt("//div[2]/span[2]/span/input",
+					RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
+				assertTrue(selenium.isTextPresent("No templates were found."));
+				selenium.type("_15_searchTemplateId",
+					RuntimeVariables.replace(""));
+				selenium.type("_15_name", RuntimeVariables.replace("Test"));
+				selenium.clickAt("//div[2]/span[2]/span/input",
+					RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
+				assertTrue(selenium.isTextPresent("Test Web Content Template"));
+				selenium.type("_15_name", RuntimeVariables.replace("Test1"));
+				selenium.clickAt("//div[2]/span[2]/span/input",
+					RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
+				assertTrue(selenium.isTextPresent("No templates were found."));
+				selenium.type("_15_name", RuntimeVariables.replace(""));
+				selenium.type("_15_description",
+					RuntimeVariables.replace(
+						"This is a test web content template!"));
+				selenium.clickAt("//div[2]/span[2]/span/input",
+					RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
+				assertTrue(selenium.isTextPresent("Test Web Content Template"));
+				selenium.type("_15_description",
+					RuntimeVariables.replace(
+						"This is a test web content template!!"));
+				selenium.clickAt("//div[2]/span[2]/span/input",
+					RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
+				assertTrue(selenium.isTextPresent("No templates were found."));
+				selenium.type("_15_description", RuntimeVariables.replace(""));
+				selenium.clickAt("link=\u00ab Basic",
+					RuntimeVariables.replace(""));
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isElementPresent("_15_keywords")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+			case 100:
+				label = -1;
+			}
 		}
 	}
 }

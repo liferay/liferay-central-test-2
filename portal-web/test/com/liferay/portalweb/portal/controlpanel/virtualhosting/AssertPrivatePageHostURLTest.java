@@ -41,12 +41,8 @@ public class AssertPrivatePageHostURLTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.typeKeys("_58_login",
-					RuntimeVariables.replace("test@lifera.com"));
 				selenium.type("_58_login",
 					RuntimeVariables.replace("test@liferay.com"));
-				selenium.typeKeys("_58_password",
-					RuntimeVariables.replace("test"));
 				selenium.type("_58_password", RuntimeVariables.replace("test"));
 				selenium.clickAt("_58_rememberMeCheckbox",
 					RuntimeVariables.replace(""));
@@ -59,7 +55,7 @@ public class AssertPrivatePageHostURLTest extends BaseTestCase {
 					selenium.getLocation());
 				assertEquals(RuntimeVariables.replace(
 						"Virtual Hosting Community"),
-					selenium.getText("//h1/span"));
+					selenium.getText("//li[2]/span/a"));
 				assertTrue(selenium.isElementPresent("link=Private Page"));
 				selenium.clickAt("link=Private Page",
 					RuntimeVariables.replace(""));

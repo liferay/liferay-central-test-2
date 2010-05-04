@@ -24,13 +24,15 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AssertExpiredQuestionTest extends BaseTestCase {
 	public void testAssertExpiredQuestion() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Polls")) {
+				if (selenium.isElementPresent("link=Control Panel")) {
 					break;
 				}
 			}
@@ -40,17 +42,19 @@ public class AssertExpiredQuestionTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Polls", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Edited Test Question 2",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertFalse(selenium.isElementPresent("//label[1]/input"));
-		assertFalse(selenium.isElementPresent("//label[2]/input"));
-		assertFalse(selenium.isElementPresent("//label[3]/input"));
-		assertFalse(selenium.isElementPresent("//label[4]/input"));
+		assertFalse(selenium.isElementPresent("//span[1]/span/span/input"));
+		assertFalse(selenium.isElementPresent("//span[2]/span/span/input"));
+		assertFalse(selenium.isElementPresent("//span[3]/span/span/input"));
+		assertFalse(selenium.isElementPresent("//span[4]/span/span/input"));
 		assertEquals(RuntimeVariables.replace(
-				"Voting is disabled because this poll expired on 1/1/08 12:00 AM.."),
-			selenium.getText("//div[5]"));
+				"Voting is disabled because this poll expired on 1/1/08 12:00 AM."),
+			selenium.getText("//fieldset/div/div[4]"));
 	}
 }

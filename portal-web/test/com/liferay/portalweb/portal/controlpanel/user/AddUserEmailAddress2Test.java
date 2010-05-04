@@ -24,13 +24,15 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddUserEmailAddress2Test extends BaseTestCase {
 	public void testAddUserEmailAddress2() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Users")) {
+				if (selenium.isElementPresent("link=Control Panel")) {
 					break;
 				}
 			}
@@ -40,6 +42,8 @@ public class AddUserEmailAddress2Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Users", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
@@ -109,7 +113,7 @@ public class AddUserEmailAddress2Test extends BaseTestCase {
 
 			try {
 				if (selenium.isVisible(
-							"//div[@id='additionalEmailAddresses']/fieldset/div[2]/div[1]/span/a[1]")) {
+							"//div[11]/div/fieldset/div[2]/div/span/span/button[1]")) {
 					break;
 				}
 			}
@@ -119,7 +123,7 @@ public class AddUserEmailAddress2Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//div[@id='additionalEmailAddresses']/fieldset/div[2]/div[1]/span/a[1]",
+		selenium.clickAt("//div[11]/div/fieldset/div[2]/div/span/span/button[1]",
 			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -128,7 +132,7 @@ public class AddUserEmailAddress2Test extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("_125_emailAddressAddress2")) {
+				if (selenium.isVisible("_125_emailAddressAddress3")) {
 					break;
 				}
 			}
@@ -138,9 +142,9 @@ public class AddUserEmailAddress2Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("_125_emailAddressAddress2",
+		selenium.type("_125_emailAddressAddress3",
 			RuntimeVariables.replace("testuser01@selenium.com"));
-		selenium.select("_125_emailAddressTypeId2",
+		selenium.select("_125_emailAddressTypeId3",
 			RuntimeVariables.replace("label=E-mail 2"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");

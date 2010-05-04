@@ -24,13 +24,15 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddUserAddress2Test extends BaseTestCase {
 	public void testAddUserAddress2() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Users")) {
+				if (selenium.isElementPresent("link=Control Panel")) {
 					break;
 				}
 			}
@@ -40,6 +42,8 @@ public class AddUserAddress2Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Users", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
@@ -107,7 +111,7 @@ public class AddUserAddress2Test extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("link=Add Row")) {
+				if (selenium.isVisible("//div[2]/div/span/span/button[1]")) {
 					break;
 				}
 			}
@@ -117,7 +121,8 @@ public class AddUserAddress2Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("link=Add Row", RuntimeVariables.replace(""));
+		selenium.clickAt("//div[2]/div/span/span/button[1]",
+			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -125,7 +130,7 @@ public class AddUserAddress2Test extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("_125_addressStreet1_2")) {
+				if (selenium.isVisible("_125_addressStreet1_3")) {
 					break;
 				}
 			}
@@ -135,18 +140,18 @@ public class AddUserAddress2Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("_125_addressStreet1_2",
+		selenium.type("_125_addressStreet1_3",
 			RuntimeVariables.replace("17730 Antonio Ave"));
 		Thread.sleep(5000);
-		selenium.select("_125_addressCountryId2",
+		selenium.select("_125_addressCountryId3",
 			RuntimeVariables.replace("label=United States"));
 		Thread.sleep(5000);
-		selenium.select("_125_addressRegionId2",
+		selenium.select("_125_addressRegionId3",
 			RuntimeVariables.replace("label=California"));
-		selenium.select("_125_addressTypeId2",
+		selenium.select("_125_addressTypeId3",
 			RuntimeVariables.replace("label=Personal"));
-		selenium.type("_125_addressZip2", RuntimeVariables.replace("90703"));
-		selenium.type("_125_addressCity2", RuntimeVariables.replace("Cerritos"));
+		selenium.type("_125_addressZip3", RuntimeVariables.replace("90703"));
+		selenium.type("_125_addressCity3", RuntimeVariables.replace("Cerritos"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(

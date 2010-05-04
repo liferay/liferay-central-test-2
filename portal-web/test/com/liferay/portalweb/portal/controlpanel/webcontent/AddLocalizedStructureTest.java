@@ -24,6 +24,26 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddLocalizedStructureTest extends BaseTestCase {
 	public void testAddLocalizedStructure() throws Exception {
+		selenium.open("/web/guest/home/");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Control Panel")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Web Content", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Structures", RuntimeVariables.replace(""));
@@ -40,34 +60,17 @@ public class AddLocalizedStructureTest extends BaseTestCase {
 		selenium.type("_15_description",
 			RuntimeVariables.replace("This is a test localized structure."));
 		selenium.clickAt("_15_editorButton", RuntimeVariables.replace(""));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_15_xsdContent")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		Thread.sleep(5000);
 		selenium.type("_15_xsdContent",
 			RuntimeVariables.replace(
-				"<root> \n\n  <dynamic-element name='page-name' type='text'></dynamic-element> \n\n  <dynamic-element name='page-description' type='text'></dynamic-element> \n\n</root> "));
+				"<root> \n\n <dynamic-element name='page-name' type='text'></dynamic-element> \n\n <dynamic-element name='page-description' type='text'></dynamic-element> \n\n</root>"));
 		selenium.clickAt("//input[@value='Update']",
 			RuntimeVariables.replace(""));
 		Thread.sleep(5000);
 		assertEquals("page-name", selenium.getValue("_15_structure_el0_name"));
 		assertEquals("page-description",
 			selenium.getValue("_15_structure_el1_name"));
-		selenium.clickAt("//input[@value=\"Save\"]",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=LOCALIZED"));
 		assertTrue(selenium.isTextPresent("Test Localized Structure"));

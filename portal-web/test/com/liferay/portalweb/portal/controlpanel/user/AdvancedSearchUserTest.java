@@ -29,6 +29,7 @@ public class AdvancedSearchUserTest extends BaseTestCase {
 		while (label >= 1) {
 			switch (label) {
 			case 1:
+				selenium.open("/web/guest/home/");
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -36,7 +37,7 @@ public class AdvancedSearchUserTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent("link=Users")) {
+						if (selenium.isElementPresent("link=Control Panel")) {
 							break;
 						}
 					}
@@ -46,6 +47,9 @@ public class AdvancedSearchUserTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.clickAt("link=Control Panel",
+					RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
 				selenium.clickAt("link=Users", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 
@@ -81,14 +85,14 @@ public class AdvancedSearchUserTest extends BaseTestCase {
 
 				selenium.type("_125_firstName",
 					RuntimeVariables.replace("Selen"));
-				selenium.clickAt("//input[@value='Search']",
+				selenium.clickAt("//div[2]/span[2]/span/input",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.isTextPresent("selenium01"));
 				assertTrue(selenium.isTextPresent("selenium02"));
 				selenium.type("_125_firstName",
 					RuntimeVariables.replace("Selen1"));
-				selenium.clickAt("//input[@value='Search']",
+				selenium.clickAt("//div[2]/span[2]/span/input",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				assertFalse(selenium.isTextPresent("selenium01"));
@@ -96,27 +100,27 @@ public class AdvancedSearchUserTest extends BaseTestCase {
 				selenium.type("_125_firstName", RuntimeVariables.replace(""));
 				selenium.type("_125_middleName",
 					RuntimeVariables.replace("lenn"));
-				selenium.clickAt("//input[@value='Search']",
+				selenium.clickAt("//div[2]/span[2]/span/input",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.isTextPresent("selenium01"));
 				assertTrue(selenium.isTextPresent("selenium02"));
 				selenium.type("_125_middleName",
 					RuntimeVariables.replace("lenn1"));
-				selenium.clickAt("//input[@value='Search']",
+				selenium.clickAt("//div[2]/span[2]/span/input",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				assertFalse(selenium.isTextPresent("selenium01"));
 				assertFalse(selenium.isTextPresent("selenium02"));
 				selenium.type("_125_middleName", RuntimeVariables.replace(""));
 				selenium.type("_125_lastName", RuntimeVariables.replace("nium"));
-				selenium.clickAt("//input[@value='Search']",
+				selenium.clickAt("//div[2]/span[2]/span/input",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.isTextPresent("selenium01"));
 				assertTrue(selenium.isTextPresent("selenium02"));
 				selenium.type("_125_lastName", RuntimeVariables.replace("nium1"));
-				selenium.clickAt("//input[@value='Search']",
+				selenium.clickAt("//div[2]/span[2]/span/input",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				assertFalse(selenium.isTextPresent("selenium01"));
@@ -124,14 +128,14 @@ public class AdvancedSearchUserTest extends BaseTestCase {
 				selenium.type("_125_lastName", RuntimeVariables.replace(""));
 				selenium.type("_125_screenName",
 					RuntimeVariables.replace("selenium"));
-				selenium.clickAt("//input[@value='Search']",
+				selenium.clickAt("//div[2]/span[2]/span/input",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.isTextPresent("selenium01"));
 				assertTrue(selenium.isTextPresent("selenium02"));
 				selenium.type("_125_screenName",
 					RuntimeVariables.replace("selenium1"));
-				selenium.clickAt("//input[@value='Search']",
+				selenium.clickAt("//div[2]/span[2]/span/input",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				assertFalse(selenium.isTextPresent("selenium01"));
@@ -139,14 +143,14 @@ public class AdvancedSearchUserTest extends BaseTestCase {
 				selenium.type("_125_screenName", RuntimeVariables.replace(""));
 				selenium.type("_125_emailAddress",
 					RuntimeVariables.replace("selenium.com"));
-				selenium.clickAt("//input[@value='Search']",
+				selenium.clickAt("//div[2]/span[2]/span/input",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.isTextPresent("selenium01"));
 				assertTrue(selenium.isTextPresent("selenium02"));
 				selenium.type("_125_emailAddress",
 					RuntimeVariables.replace("selenium.com1"));
-				selenium.clickAt("//input[@value='Search']",
+				selenium.clickAt("//div[2]/span[2]/span/input",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				assertFalse(selenium.isTextPresent("selenium01"));

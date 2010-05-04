@@ -9,8 +9,18 @@
 <tr><td rowspan="1" colspan="3">AddYearlyDateRepeatingEventTest</td></tr>
 </thead><tbody>
 <tr>
+	<td>open</td>
+	<td>/web/guest/home/</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
-	<td>link=Calendar</td>
+	<td>link=Control Panel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>link=Control Panel</td>
 	<td></td>
 </tr>
 <tr>
@@ -19,38 +29,23 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForVisible</td>
-	<td>link=Events</td>
-	<td></td>
-</tr>
-<tr>
 	<td>clickAtAndWait</td>
 	<td>link=Events</td>
-	<td></td>
-</tr>
-<tr>
-	<td>pause</td>
-	<td>5000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForVisible</td>
-	<td>//td[5]/ul/li/strong/span</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAt</td>
-	<td>//td[5]/ul/li/strong/span</td>
+	<td>//td[5]/ul/li/strong/a</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>//div[5]/ul/li[1]/a</td>
+	<td>waitForVisible</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAtAndWait</td>
-	<td>//div[5]/ul/li[1]/a</td>
+	<td>clickAndWait</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a</td>
 	<td></td>
 </tr>
 <tr>
@@ -76,22 +71,17 @@
 <tr>
 	<td>select</td>
 	<td>_8_yearlyMonth0</td>
-	<td>label=January</td>
+	<td>label=May</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>_8_yearlyDay0</td>
-	<td>1</td>
+	<td>31</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>_8_yearlyInterval0</td>
 	<td>1</td>
-</tr>
-<tr>
-	<td>clickAt</td>
-	<td>//td[2]/table/tbody/tr/td/input[2]</td>
-	<td></td>
 </tr>
 <tr>
 	<td>select</td>
@@ -136,16 +126,16 @@
 <tr>
 	<td>select</td>
 	<td>//select</td>
-	<td>label=2009</td>
+	<td>label=2010</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//td[5]/a</td>
+	<td>//a[contains(@href, 'javascript:_8_updateCalendar(4, 31, 2010);')]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>//td[5]/a</td>
+	<td>//a[contains(@href, 'javascript:_8_updateCalendar(4, 31, 2010);')]</td>
 	<td></td>
 </tr>
 <tr>
@@ -166,16 +156,16 @@
 <tr>
 	<td>selectAndWait</td>
 	<td>//select</td>
-	<td>label=2010</td>
+	<td>label=2011</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//td[6]/a</td>
+	<td>//a[contains(@href, 'javascript:_8_updateCalendar(4, 31, 2011);')]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>//td[6]/a</td>
+	<td>//a[contains(@href, 'javascript:_8_updateCalendar(4, 31, 2011);')]</td>
 	<td></td>
 </tr>
 <tr>
@@ -196,16 +186,46 @@
 <tr>
 	<td>select</td>
 	<td>//select</td>
-	<td>label=2010</td>
+	<td>label=2012</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//tr[3]/td[2]/a/span</td>
+	<td>//a[contains(@href, 'javascript:_8_updateCalendar(4, 31, 2012);')]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>//tr[3]/td[2]/a/span</td>
+	<td>//a[contains(@href, 'javascript:_8_updateCalendar(4, 31, 2012);')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>link=Repeating Test Event</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>link=Year</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>//select</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//select</td>
+	<td>label=2013</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//a[contains(@href, 'javascript:_8_updateCalendar(4, 31, 2013);')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>//a[contains(@href, 'javascript:_8_updateCalendar(4, 31, 2013);')]</td>
 	<td></td>
 </tr>
 <tr>

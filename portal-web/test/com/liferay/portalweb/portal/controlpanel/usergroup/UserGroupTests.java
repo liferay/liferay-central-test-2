@@ -29,7 +29,6 @@ public class UserGroupTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTestSuite(ControlPanelTest.class);
 		testSuite.addTestSuite(AddUserTest.class);
 		testSuite.addTestSuite(AddUser2Test.class);
 		testSuite.addTestSuite(AddUserGroupTest.class);
@@ -47,7 +46,6 @@ public class UserGroupTests extends BaseTests {
 		testSuite.addTestSuite(AddTemporaryUserGroupTest.class);
 		testSuite.addTestSuite(DeleteTemporaryUserGroupTest.class);
 		testSuite.addTestSuite(TearDownTest.class);
-		testSuite.addTestSuite(EndControlPanelTest.class);
 
 		return testSuite;
 	}

@@ -25,13 +25,15 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AssertRemoveApplyCommunityTest extends BaseTestCase {
 	public void testAssertRemoveApplyCommunity() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Communities")) {
+				if (selenium.isElementPresent("link=Control Panel")) {
 					break;
 				}
 			}
@@ -41,6 +43,8 @@ public class AssertRemoveApplyCommunityTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Communities", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
@@ -71,7 +75,7 @@ public class AssertRemoveApplyCommunityTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("//td[6]/ul/li/strong/span")) {
+				if (selenium.isVisible("//td[6]/ul/li/strong/a")) {
 					break;
 				}
 			}
@@ -81,8 +85,7 @@ public class AssertRemoveApplyCommunityTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//td[6]/ul/li/strong/span",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("//td[6]/ul/li/strong/a", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

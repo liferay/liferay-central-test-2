@@ -24,13 +24,15 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class BrowseServerTest extends BaseTestCase {
 	public void testBrowseServer() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Server Administration")) {
+				if (selenium.isElementPresent("link=Control Panel")) {
 					break;
 				}
 			}
@@ -40,6 +42,8 @@ public class BrowseServerTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Server Administration",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
@@ -86,7 +90,7 @@ public class BrowseServerTest extends BaseTestCase {
 		selenium.clickAt("link=Next", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Showing 21 - 40"));
-		assertTrue(selenium.isTextPresent("env.CLIENTNAME"));
+		assertTrue(selenium.isTextPresent("env.BASEDIR"));
 		selenium.clickAt("link=Portal Properties", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Showing 1 - 20"));

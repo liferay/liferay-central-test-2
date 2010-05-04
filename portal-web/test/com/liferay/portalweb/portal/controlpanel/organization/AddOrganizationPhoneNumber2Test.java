@@ -25,7 +25,25 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddOrganizationPhoneNumber2Test extends BaseTestCase {
 	public void testAddOrganizationPhoneNumber2() throws Exception {
-		selenium.clickAt("link=Organizations", RuntimeVariables.replace(""));
+		selenium.open("/web/guest/home/");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Control Panel")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Organizations", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
@@ -78,7 +96,7 @@ public class AddOrganizationPhoneNumber2Test extends BaseTestCase {
 
 			try {
 				if (selenium.isVisible(
-							"//div[@id='phoneNumbers']/fieldset/div[2]/div/span/a[1]")) {
+							"//div[5]/div/fieldset/div[2]/div/span/span/button[1]")) {
 					break;
 				}
 			}
@@ -88,7 +106,7 @@ public class AddOrganizationPhoneNumber2Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//div[@id='phoneNumbers']/fieldset/div[2]/div/span/a[1]",
+		selenium.clickAt("//div[5]/div/fieldset/div[2]/div/span/span/button[1]",
 			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -97,7 +115,7 @@ public class AddOrganizationPhoneNumber2Test extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("_126_phoneNumber2")) {
+				if (selenium.isVisible("_126_phoneNumber3")) {
 					break;
 				}
 			}
@@ -107,10 +125,10 @@ public class AddOrganizationPhoneNumber2Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("_126_phoneNumber2",
+		selenium.type("_126_phoneNumber3",
 			RuntimeVariables.replace("444-444-4444"));
-		selenium.type("_126_phoneExtension2", RuntimeVariables.replace("444"));
-		selenium.select("_126_phoneTypeId2",
+		selenium.type("_126_phoneExtension3", RuntimeVariables.replace("444"));
+		selenium.select("_126_phoneTypeId3",
 			RuntimeVariables.replace("label=Local"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");

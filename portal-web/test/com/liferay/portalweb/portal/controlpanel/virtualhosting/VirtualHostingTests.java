@@ -29,25 +29,20 @@ public class VirtualHostingTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTestSuite(ControlPanelTest.class);
 		testSuite.addTestSuite(AddVirtualHostingCommunityTest.class);
 		testSuite.addTestSuite(AddVirtualHostingPublicPageTest.class);
 		testSuite.addTestSuite(AddVirtualHostingPrivatePageTest.class);
 		testSuite.addTestSuite(EditFriendlyURLTest.class);
 		testSuite.addTestSuite(AssertPublicPageFriendlyURLTest.class);
 		testSuite.addTestSuite(AssertPrivatePageFriendlyURLTest.class);
-		testSuite.addTestSuite(ControlPanelTest.class);
 		testSuite.addTestSuite(RestoreFriendlyURLTest.class);
 		testSuite.addTestSuite(EditPublicPageURLTest.class);
 		testSuite.addTestSuite(AssertPublicPageHostURLTest.class);
-		testSuite.addTestSuite(ControlPanelTest.class);
 		testSuite.addTestSuite(RestorePublicPageURLTest.class);
 		testSuite.addTestSuite(EditPrivatePageURLTest.class);
 		testSuite.addTestSuite(AssertPrivatePageHostURLTest.class);
-		testSuite.addTestSuite(ControlPanelTest.class);
 		testSuite.addTestSuite(RestorePrivatePageURLTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
-		testSuite.addTestSuite(EndControlPanelTest.class);
+		testSuite.addTestSuite(TearDownCommunityTest.class);
 
 		return testSuite;
 	}

@@ -29,7 +29,6 @@ public class BlogsTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTestSuite(ControlPanelTest.class);
 		testSuite.addTestSuite(AddEntryTest.class);
 		testSuite.addTestSuite(AddEntryCommentTest.class);
 		testSuite.addTestSuite(AssertViewCountTest.class);
@@ -45,14 +44,12 @@ public class BlogsTests extends BaseTests {
 		testSuite.addTestSuite(AddNullTitleTest.class);
 		testSuite.addTestSuite(AddEscapeCharacterEntryTest.class);
 		testSuite.addTestSuite(DeleteEscapeCharacterEntryTest.class);
-		testSuite.addTestSuite(ConfigureDisplaySettingsTest.class);
 		testSuite.addTestSuite(DeleteEntryTest.class);
 		testSuite.addTestSuite(AddDraftEntryTest.class);
 		testSuite.addTestSuite(PublishDraftEntryTest.class);
 		testSuite.addTestSuite(ImportLARTest.class);
 		testSuite.addTestSuite(AssertImportLARTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
-		testSuite.addTestSuite(EndControlPanelTest.class);
+		testSuite.addTestSuite(TearDownBlogsEntryCPTest.class);
 
 		return testSuite;
 	}

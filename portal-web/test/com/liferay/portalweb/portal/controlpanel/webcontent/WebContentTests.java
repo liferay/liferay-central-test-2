@@ -29,7 +29,6 @@ public class WebContentTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTestSuite(ControlPanelTest.class);
 		testSuite.addTestSuite(AddArticleTest.class);
 		testSuite.addTestSuite(AddArticle2Test.class);
 		testSuite.addTestSuite(WorkflowTest.class);
@@ -38,19 +37,14 @@ public class WebContentTests extends BaseTests {
 		testSuite.addTestSuite(DeleteArticleTest.class);
 		testSuite.addTestSuite(AddStructuresTest.class);
 		testSuite.addTestSuite(AddTemplateTest.class);
-		//testSuite.addTestSuite(AddFeedTest.class);
 		testSuite.addTestSuite(SearchArticleTest.class);
 		testSuite.addTestSuite(SearchStructuresTest.class);
 		testSuite.addTestSuite(SearchTemplateTest.class);
-		//testSuite.addTestSuite(AddNullArticleTest.class);
 		testSuite.addTestSuite(AddNullTitleTest.class);
 		testSuite.addTestSuite(AddEscapeCharacterArticleTest.class);
 		testSuite.addTestSuite(DeleteEscapeCharacterArticleTest.class);
 		testSuite.addTestSuite(RecentPageTest.class);
 		testSuite.addTestSuite(CancelPopupTest.class);
-		testSuite.addTestSuite(DeleteAllTest.class);
-		testSuite.addTestSuite(ImportLARTest.class);
-		testSuite.addTestSuite(AssertImportLARTest.class);
 		testSuite.addTestSuite(AddAssociatedTemplateTest.class);
 		testSuite.addTestSuite(AssertStructureTemplateAssociationTest.class);
 		testSuite.addTestSuite(AddLocalizedStructureTest.class);
@@ -58,8 +52,12 @@ public class WebContentTests extends BaseTests {
 		testSuite.addTestSuite(AddLocalizedArticleTest.class);
 		testSuite.addTestSuite(AssertSavedLocalizationTest.class);
 		testSuite.addTestSuite(AssertWebContentDisplayLocalizationTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
-		testSuite.addTestSuite(EndControlPanelTest.class);
+		testSuite.addTestSuite(TearDownLanguageTest.class);
+		testSuite.addTestSuite(TearDownWebContentTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
+		testSuite.addTestSuite(ImportLARTest.class);
+		testSuite.addTestSuite(AssertImportLARTest.class);
+		testSuite.addTestSuite(TearDownWebContentTest.class);
 
 		return testSuite;
 	}

@@ -30,6 +30,7 @@ public class DeleteNullTestOrganizationTest extends BaseTestCase {
 		while (label >= 1) {
 			switch (label) {
 			case 1:
+				selenium.open("/web/guest/home/");
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -37,7 +38,7 @@ public class DeleteNullTestOrganizationTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent("link=Organizations")) {
+						if (selenium.isElementPresent("link=Control Panel")) {
 							break;
 						}
 					}
@@ -47,6 +48,9 @@ public class DeleteNullTestOrganizationTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.clickAt("link=Control Panel",
+					RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
 				selenium.clickAt("link=Organizations",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");

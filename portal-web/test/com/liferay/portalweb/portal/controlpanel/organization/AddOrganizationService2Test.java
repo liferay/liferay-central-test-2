@@ -24,7 +24,25 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddOrganizationService2Test extends BaseTestCase {
 	public void testAddOrganizationService2() throws Exception {
-		selenium.clickAt("link=Organizations", RuntimeVariables.replace(""));
+		selenium.open("/web/guest/home/");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Control Panel")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Organizations", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
@@ -43,7 +61,7 @@ public class AddOrganizationService2Test extends BaseTestCase {
 
 			try {
 				if (selenium.isVisible(
-							"//div[@id='services']/fieldset/div[2]/div/span/a[1]")) {
+							"//div[8]/div/fieldset/div[2]/div[1]/span/span/button[1]")) {
 					break;
 				}
 			}
@@ -53,7 +71,7 @@ public class AddOrganizationService2Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//div[@id='services']/fieldset/div[2]/div/span/a[1]",
+		selenium.clickAt("//div[8]/div/fieldset/div[2]/div/span/span/button[1]",
 			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -62,7 +80,7 @@ public class AddOrganizationService2Test extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("_126_orgLaborTypeId2")) {
+				if (selenium.isVisible("_126_orgLaborTypeId3")) {
 					break;
 				}
 			}
@@ -72,28 +90,28 @@ public class AddOrganizationService2Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.select("_126_orgLaborTypeId2",
+		selenium.select("_126_orgLaborTypeId3",
 			RuntimeVariables.replace("label=Administrative"));
-		selenium.select("_126_sunOpen2", RuntimeVariables.replace("label=08:00"));
-		selenium.select("_126_sunClose2",
+		selenium.select("_126_sunOpen3", RuntimeVariables.replace("label=08:00"));
+		selenium.select("_126_sunClose3",
 			RuntimeVariables.replace("label=04:00"));
-		selenium.select("_126_monOpen2", RuntimeVariables.replace("label=08:00"));
-		selenium.select("_126_monClose2",
+		selenium.select("_126_monOpen3", RuntimeVariables.replace("label=08:00"));
+		selenium.select("_126_monClose3",
 			RuntimeVariables.replace("label=04:00"));
-		selenium.select("_126_tueOpen2", RuntimeVariables.replace("label=08:00"));
-		selenium.select("_126_tueClose2",
+		selenium.select("_126_tueOpen3", RuntimeVariables.replace("label=08:00"));
+		selenium.select("_126_tueClose3",
 			RuntimeVariables.replace("label=04:00"));
-		selenium.select("_126_wedOpen2", RuntimeVariables.replace("label=08:00"));
-		selenium.select("_126_wedClose2",
+		selenium.select("_126_wedOpen3", RuntimeVariables.replace("label=08:00"));
+		selenium.select("_126_wedClose3",
 			RuntimeVariables.replace("label=04:00"));
-		selenium.select("_126_thuOpen2", RuntimeVariables.replace("label=08:00"));
-		selenium.select("_126_thuClose2",
+		selenium.select("_126_thuOpen3", RuntimeVariables.replace("label=08:00"));
+		selenium.select("_126_thuClose3",
 			RuntimeVariables.replace("label=04:00"));
-		selenium.select("_126_friOpen2", RuntimeVariables.replace("label=08:00"));
-		selenium.select("_126_friClose2",
+		selenium.select("_126_friOpen3", RuntimeVariables.replace("label=08:00"));
+		selenium.select("_126_friClose3",
 			RuntimeVariables.replace("label=04:00"));
-		selenium.select("_126_satOpen2", RuntimeVariables.replace("label=08:00"));
-		selenium.select("_126_satClose2",
+		selenium.select("_126_satOpen3", RuntimeVariables.replace("label=08:00"));
+		selenium.select("_126_satClose3",
 			RuntimeVariables.replace("label=04:00"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");

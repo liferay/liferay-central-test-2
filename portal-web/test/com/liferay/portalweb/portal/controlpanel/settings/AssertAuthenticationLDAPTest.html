@@ -9,8 +9,18 @@
 <tr><td rowspan="1" colspan="3">AssertAuthenticationLDAPTest</td></tr>
 </thead><tbody>
 <tr>
+	<td>open</td>
+	<td>/web/guest/home/</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
-	<td>link=Settings</td>
+	<td>link=Control Panel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>link=Control Panel</td>
 	<td></td>
 </tr>
 <tr>
@@ -51,6 +61,11 @@
 <tr>
 	<td>assertElementPresent</td>
 	<td>_130_settings(ldap.auth.required)Checkbox</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>_130_addButton</td>
 	<td></td>
 </tr>
 <tr>
@@ -96,6 +111,21 @@
 <tr>
 	<td>assertElementPresent</td>
 	<td>//input[@value='Test LDAP Groups']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>_130_cancelButton</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>link=LDAP</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>link=LDAP</td>
 	<td></td>
 </tr>
 <tr>

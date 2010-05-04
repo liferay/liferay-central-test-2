@@ -26,13 +26,15 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class AddInvalidOrganizationURLWebsiteTest extends BaseTestCase {
 	public void testAddInvalidOrganizationURLWebsite()
 		throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Organizations")) {
+				if (selenium.isElementPresent("link=Control Panel")) {
 					break;
 				}
 			}
@@ -42,11 +44,12 @@ public class AddInvalidOrganizationURLWebsiteTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Organizations", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_126_keywords",
 			RuntimeVariables.replace("Nullorganization"));
-		Thread.sleep(5000);
 		selenium.clickAt("//input[@value='Search']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");

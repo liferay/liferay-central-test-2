@@ -24,13 +24,15 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddNullUserURLWebsiteTest extends BaseTestCase {
 	public void testAddNullUserURLWebsite() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Users")) {
+				if (selenium.isElementPresent("link=Control Panel")) {
 					break;
 				}
 			}
@@ -40,11 +42,14 @@ public class AddNullUserURLWebsiteTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Users"));
+		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.type("toggle_id_enterprise_admin_user_searchkeywords",
+		selenium.clickAt("link=Users", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		selenium.type("_125_keywords",
 			RuntimeVariables.replace("nullscreenname"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
+		selenium.clickAt("//input[@value='Search']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=nullselen01"));
 		selenium.waitForPageToLoad("30000");
@@ -71,6 +76,7 @@ public class AddNullUserURLWebsiteTest extends BaseTestCase {
 		Thread.sleep(5000);
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
+		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -78,7 +84,7 @@ public class AddNullUserURLWebsiteTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Users")) {
+				if (selenium.isElementPresent("link=Control Panel")) {
 					break;
 				}
 			}
@@ -88,11 +94,14 @@ public class AddNullUserURLWebsiteTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Users"));
+		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.type("toggle_id_enterprise_admin_user_searchkeywords",
+		selenium.clickAt("link=Users", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		selenium.type("_125_keywords",
 			RuntimeVariables.replace("nullscreenname"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
+		selenium.clickAt("//input[@value='Search']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=nullselen01"));
 		selenium.waitForPageToLoad("30000");

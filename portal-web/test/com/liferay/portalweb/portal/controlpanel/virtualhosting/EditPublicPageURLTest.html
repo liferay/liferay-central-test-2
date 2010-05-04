@@ -9,24 +9,24 @@
 <tr><td rowspan="1" colspan="3">EditPublicPageURLTest</td></tr>
 </thead><tbody>
 <tr>
+	<td>open</td>
+	<td>/web/guest/home/</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
-	<td>link=Communities</td>
+	<td>link=Control Panel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>link=Control Panel</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
 	<td>link=Communities</td>
 	<td></td>
-</tr>
-<tr>
-	<td>waitForVisible</td>
-	<td>_134_name</td>
-	<td></td>
-</tr>
-<tr>
-	<td>typeKeys</td>
-	<td>_134_name</td>
-	<td>Virtual Hosting Communit</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -39,43 +39,28 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForVisible</td>
-	<td>//strong/span</td>
-	<td></td>
-</tr>
-<tr>
 	<td>clickAt</td>
-	<td>//strong/span</td>
+	<td>//strong/a</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Manage Pages</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAtAndWait</td>
-	<td>link=Manage Pages</td>
+	<td>clickAndWait</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForVisible</td>
-	<td>//li[@id='_134_tabs1settingsTabsId']/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAtAndWait</td>
-	<td>//li[@id='_134_tabs1settingsTabsId']/a</td>
+	<td>clickAndWait</td>
+	<td>//li[3]/span/span/a</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
 	<td>link=Virtual Host</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForVisible</td>
-	<td>_134_publicVirtualHost</td>
 	<td></td>
 </tr>
 <tr>

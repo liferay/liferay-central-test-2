@@ -24,248 +24,340 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddWeeklyRepeatingEventTest extends BaseTestCase {
 	public void testAddWeeklyRepeatingEvent() throws Exception {
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+		int label = 1;
 
-			try {
-				if (selenium.isElementPresent("link=Calendar")) {
-					break;
+		while (label >= 1) {
+			switch (label) {
+			case 1:
+				selenium.open("/web/guest/home/");
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isElementPresent("link=Control Panel")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
-		}
+				selenium.clickAt("link=Control Panel",
+					RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
+				selenium.clickAt("link=Calendar", RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
+				selenium.clickAt("link=Events", RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
+				selenium.clickAt("//td[5]/ul/li/strong/a",
+					RuntimeVariables.replace(""));
 
-		selenium.clickAt("link=Calendar", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+					try {
+						if (selenium.isVisible(
+									"//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
 
-			try {
-				if (selenium.isVisible("link=Events")) {
-					break;
+					Thread.sleep(1000);
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
-		}
+				selenium.click(RuntimeVariables.replace(
+						"//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a"));
+				selenium.waitForPageToLoad("30000");
+				selenium.click("//div/div/span[3]/span/span/input");
 
-		selenium.clickAt("link=Events", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		Thread.sleep(5000);
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+					try {
+						if (selenium.isElementPresent("_8_weeklyInterval")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
 
-			try {
-				if (selenium.isVisible("//td[5]/ul/li/strong/span")) {
-					break;
+					Thread.sleep(1000);
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
-		}
+				selenium.type("_8_weeklyInterval", RuntimeVariables.replace("1"));
 
-		selenium.clickAt("//td[5]/ul/li/strong/span",
-			RuntimeVariables.replace(""));
+				boolean sundayChecked = selenium.isChecked(
+						"_8_weeklyDayPos1Checkbox");
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+				if (!sundayChecked) {
+					label = 2;
 
-			try {
-				if (selenium.isElementPresent("//div[5]/ul/li[1]/a")) {
-					break;
+					continue;
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
-		}
+				selenium.clickAt("_8_weeklyDayPos1Checkbox",
+					RuntimeVariables.replace(""));
 
-		selenium.clickAt("//div[5]/ul/li[1]/a", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//td[1]/input[3]", RuntimeVariables.replace(""));
+			case 2:
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+				boolean mondayChecked = selenium.isChecked(
+						"_8_weeklyDayPos2Checkbox");
 
-			try {
-				if (selenium.isElementPresent("_8_weeklyInterval")) {
-					break;
+				if (!mondayChecked) {
+					label = 3;
+
+					continue;
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
-		}
+				selenium.clickAt("_8_weeklyDayPos2Checkbox",
+					RuntimeVariables.replace(""));
 
-		selenium.type("_8_weeklyInterval", RuntimeVariables.replace("1"));
-		selenium.clickAt("_8_weeklyDayPos5", RuntimeVariables.replace(""));
-		selenium.clickAt("//td[2]/table/tbody/tr/td/input[2]",
-			RuntimeVariables.replace(""));
-		selenium.select("_8_endDateMonth",
-			RuntimeVariables.replace("label=January"));
-		selenium.select("_8_endDateDay", RuntimeVariables.replace("label=1"));
-		selenium.select("_8_endDateYear", RuntimeVariables.replace("label=2010"));
-		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+			case 3:
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+				boolean tuesdayChecked = selenium.isChecked(
+						"_8_weeklyDayPos3Checkbox");
 
-			try {
-				if (selenium.isVisible("link=Year")) {
-					break;
+				if (!tuesdayChecked) {
+					label = 4;
+
+					continue;
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
-		}
+				selenium.clickAt("_8_weeklyDayPos3Checkbox",
+					RuntimeVariables.replace(""));
 
-		selenium.clickAt("link=Year", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
+			case 4:
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+				boolean wednesdayChecked = selenium.isChecked(
+						"_8_weeklyDayPos4Checkbox");
 
-			try {
-				if (selenium.isVisible("//select")) {
-					break;
+				if (!wednesdayChecked) {
+					label = 5;
+
+					continue;
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
-		}
+				selenium.clickAt("_8_weeklyDayPos4Checkbox",
+					RuntimeVariables.replace(""));
 
-		selenium.select("//select", RuntimeVariables.replace("label=2009"));
+			case 5:
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+				boolean thursdayChecked = selenium.isChecked(
+						"_8_weeklyDayPos5Checkbox");
 
-			try {
-				if (selenium.isElementPresent("link=8")) {
-					break;
+				if (thursdayChecked) {
+					label = 6;
+
+					continue;
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
-		}
+				selenium.clickAt("_8_weeklyDayPos5Checkbox",
+					RuntimeVariables.replace(""));
 
-		selenium.clickAt("link=8", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("link=Repeating Test Event"));
-		selenium.clickAt("link=Year", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
+			case 6:
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+				boolean fridayChecked = selenium.isChecked(
+						"_8_weeklyDayPos6Checkbox");
 
-			try {
-				if (selenium.isVisible("//select")) {
-					break;
+				if (!fridayChecked) {
+					label = 7;
+
+					continue;
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
-		}
+				selenium.clickAt("_8_weeklyDayPos6Checkbox",
+					RuntimeVariables.replace(""));
 
-		selenium.select("//select", RuntimeVariables.replace("label=2009"));
+			case 7:
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+				boolean saturdayChecked = selenium.isChecked(
+						"_8_weeklyDayPos7Checkbox");
 
-			try {
-				if (selenium.isElementPresent("link=15")) {
-					break;
+				if (!saturdayChecked) {
+					label = 8;
+
+					continue;
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
-		}
+				selenium.clickAt("_8_weeklyDayPos7Checkbox",
+					RuntimeVariables.replace(""));
 
-		selenium.clickAt("link=15", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("link=Repeating Test Event"));
-		selenium.clickAt("link=Year", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
+			case 8:
+				selenium.select("_8_endDateMonth",
+					RuntimeVariables.replace("label=January"));
+				selenium.select("_8_endDateDay",
+					RuntimeVariables.replace("label=1"));
+				selenium.select("_8_endDateYear",
+					RuntimeVariables.replace("label=2011"));
+				selenium.clickAt("//input[@value='Save']",
+					RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
+				assertTrue(selenium.isTextPresent(
+						"Your request processed successfully."));
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
 
-			try {
-				if (selenium.isVisible("//select")) {
-					break;
+					try {
+						if (selenium.isVisible("link=Year")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
-		}
+				selenium.clickAt("link=Year", RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
 
-		selenium.select("//select", RuntimeVariables.replace("label=2009"));
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+					try {
+						if (selenium.isVisible("//select")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
 
-			try {
-				if (selenium.isElementPresent("link=16")) {
-					break;
+					Thread.sleep(1000);
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
+				selenium.select("//select",
+					RuntimeVariables.replace("label=2010"));
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isElementPresent(
+									"//a[contains(@href, 'javascript:_8_updateCalendar(0, 7, 2010);')]")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+				selenium.clickAt("//a[contains(@href, 'javascript:_8_updateCalendar(0, 7, 2010);')]",
+					RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
+				assertTrue(selenium.isElementPresent(
+						"link=Repeating Test Event"));
+				selenium.clickAt("link=Year", RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isVisible("//select")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+				selenium.select("//select",
+					RuntimeVariables.replace("label=2010"));
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isElementPresent(
+									"//a[contains(@href, 'javascript:_8_updateCalendar(0, 14, 2010);')]")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+				selenium.clickAt("//a[contains(@href, 'javascript:_8_updateCalendar(0, 14, 2010);')]",
+					RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
+				assertTrue(selenium.isElementPresent(
+						"link=Repeating Test Event"));
+				selenium.clickAt("link=Year", RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isVisible("//select")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+				selenium.select("//select",
+					RuntimeVariables.replace("label=2010"));
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isElementPresent(
+									"//a[contains(@href, 'javascript:_8_updateCalendar(0, 15, 2010);')]")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+				selenium.clickAt("//a[contains(@href, 'javascript:_8_updateCalendar(0, 15, 2010);')]",
+					RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
+				assertFalse(selenium.isElementPresent(
+						"link=Repeating Test Event"));
+
+			case 100:
+				label = -1;
+			}
 		}
-
-		selenium.clickAt("link=16", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		assertFalse(selenium.isElementPresent("link=Repeating Test Event"));
 	}
 }

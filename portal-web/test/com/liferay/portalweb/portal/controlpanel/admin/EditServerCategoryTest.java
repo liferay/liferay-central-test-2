@@ -24,13 +24,15 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class EditServerCategoryTest extends BaseTestCase {
 	public void testEditServerCategory() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Server Administration")) {
+				if (selenium.isElementPresent("link=Control Panel")) {
 					break;
 				}
 			}
@@ -40,6 +42,8 @@ public class EditServerCategoryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Server Administration",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
@@ -64,12 +68,16 @@ public class EditServerCategoryTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Update Categories", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("CategoryTest!"));
+		assertEquals(RuntimeVariables.replace("CategoryTest!"),
+			selenium.getText("//tr[3]/td[1]"));
 		selenium.select("_137_logLevelCategoryTest!",
 			RuntimeVariables.replace("label=ALL"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+		assertEquals(RuntimeVariables.replace(
+				"Your request processed successfully."),
+			selenium.getText("//section/div/div/div/div"));
+		assertEquals("ALL",
+			selenium.getSelectedLabel("_137_logLevelCategoryTest!"));
 	}
 }

@@ -29,6 +29,7 @@ public class DeleteNullTestUserTest extends BaseTestCase {
 		while (label >= 1) {
 			switch (label) {
 			case 1:
+				selenium.open("/web/guest/home/");
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -36,7 +37,7 @@ public class DeleteNullTestUserTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent("link=Users")) {
+						if (selenium.isElementPresent("link=Control Panel")) {
 							break;
 						}
 					}
@@ -46,6 +47,9 @@ public class DeleteNullTestUserTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.clickAt("link=Control Panel",
+					RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
 				selenium.clickAt("link=Users", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 
@@ -81,7 +85,7 @@ public class DeleteNullTestUserTest extends BaseTestCase {
 
 				selenium.select("_125_active",
 					RuntimeVariables.replace("label=No"));
-				selenium.clickAt("//input[@value='Search']",
+				selenium.clickAt("//div[2]/span[2]/span/input",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				selenium.clickAt("_125_allRowIds", RuntimeVariables.replace(""));

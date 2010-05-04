@@ -24,36 +24,14 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AssertCommunityDropDownTest extends BaseTestCase {
 	public void testAssertCommunityDropDown() throws Exception {
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Back to My Community")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("link=Back to My Community",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
+		selenium.open("/web/guest/home/");
 		assertEquals(RuntimeVariables.replace("Test Community"),
-			selenium.getText(
-				"//div[@id='_145_myPlacesContainer']/ul/li[6]/a/span[1]"));
+			selenium.getText("//li[6]/a/span[1]"));
 		assertEquals(RuntimeVariables.replace("Public"),
-			selenium.getText(
-				"//div[@id='_145_myPlacesContainer']/ul/li[6]/a/span[2]"));
+			selenium.getText("//li[6]/a/span[2]"));
 		assertEquals(RuntimeVariables.replace("Test Community"),
-			selenium.getText(
-				"//div[@id='_145_myPlacesContainer']/ul/li[7]/a/span[1]"));
+			selenium.getText("//li[7]/a/span[1]"));
 		assertEquals(RuntimeVariables.replace("Private"),
-			selenium.getText(
-				"//div[@id='_145_myPlacesContainer']/ul/li[7]/a/span[2]"));
+			selenium.getText("//li[7]/a/span[2]"));
 	}
 }

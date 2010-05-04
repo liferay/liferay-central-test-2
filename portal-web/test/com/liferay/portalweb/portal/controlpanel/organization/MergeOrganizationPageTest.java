@@ -24,13 +24,15 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class MergeOrganizationPageTest extends BaseTestCase {
 	public void testMergeOrganizationPage() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Organizations")) {
+				if (selenium.isElementPresent("link=Control Panel")) {
 					break;
 				}
 			}
@@ -40,6 +42,8 @@ public class MergeOrganizationPageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Organizations", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
@@ -70,7 +74,7 @@ public class MergeOrganizationPageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("//td[8]/ul/li/strong/span")) {
+				if (selenium.isVisible("//td[8]/ul/li/strong/a")) {
 					break;
 				}
 			}
@@ -80,8 +84,7 @@ public class MergeOrganizationPageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//td[8]/ul/li/strong/span",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("//td[8]/ul/li/strong/a", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -101,8 +104,7 @@ public class MergeOrganizationPageTest extends BaseTestCase {
 
 		selenium.clickAt("link=Manage Pages", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//li[@id='_126_tabs1settingsTabsId']/a",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("//li[3]/span/span/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Merge Pages", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");

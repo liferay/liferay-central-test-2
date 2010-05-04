@@ -29,7 +29,6 @@ public class CalendarTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTestSuite(ControlPanelTest.class);
 		testSuite.addTestSuite(SetTimezoneTest.class);
 		testSuite.addTestSuite(AddAppointmentEventTest.class);
 		testSuite.addTestSuite(AddConcertEventTest.class);
@@ -40,15 +39,15 @@ public class CalendarTests extends BaseTests {
 		testSuite.addTestSuite(EditEventTest.class);
 		testSuite.addTestSuite(AddTemporaryEventTest.class);
 		testSuite.addTestSuite(DeleteTemporaryEventTest.class);
-		testSuite.addTestSuite(AssertConfigurationTest.class);
 		testSuite.addTestSuite(AddNullTitleEventTest.class);
 		testSuite.addTestSuite(AddInvalidStartDateEventTest.class);
 		testSuite.addTestSuite(AddInvalidEndDateEventTest.class);
 		testSuite.addTestSuite(AddInvalidDurationEventTest.class);
 		testSuite.addTestSuite(AddInvalidRepeatEventTest.class);
-		testSuite.addTestSuite(DeleteAllEventsTest.class);
+		testSuite.addTestSuite(TearDownEventCPTest.class);
 		testSuite.addTestSuite(ImportLARTest.class);
 		testSuite.addTestSuite(AssertImportLARTest.class);
+		testSuite.addTestSuite(TearDownEventCPTest.class);
 		testSuite.addTestSuite(AddRepeatingEventTest.class);
 		testSuite.addTestSuite(AddDailyRepeatingEventTest.class);
 		testSuite.addTestSuite(AddWeeklyRepeatingEventTest.class);
@@ -57,8 +56,7 @@ public class CalendarTests extends BaseTests {
 		testSuite.addTestSuite(AddMonthlyDayRepeatingEventTest.class);
 		testSuite.addTestSuite(AddYearlyDateRepeatingEventTest.class);
 		testSuite.addTestSuite(AddYearlyDayRepeatingEventTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
-		testSuite.addTestSuite(EndControlPanelTest.class);
+		testSuite.addTestSuite(TearDownEventCPTest.class);
 
 		return testSuite;
 	}

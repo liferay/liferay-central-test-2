@@ -9,8 +9,18 @@
 <tr><td rowspan="1" colspan="3">AddArticleTest</td></tr>
 </thead><tbody>
 <tr>
+	<td>open</td>
+	<td>/web/guest/home/</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
-	<td>link=Web Content</td>
+	<td>link=Control Panel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>link=Control Panel</td>
 	<td></td>
 </tr>
 <tr>
@@ -24,11 +34,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>typeKeys</td>
-	<td>_15_title</td>
-	<td>Test Web Content Article</td>
-</tr>
-<tr>
 	<td>type</td>
 	<td>_15_title</td>
 	<td>Test Web Content Article</td>
@@ -40,12 +45,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>_15_editor</td>
+	<td>_15_structure_el_TextAreaField_content</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>FCKeditor1___Frame</td>
+	<td>cke_contents_CKEditor1</td>
 	<td></td>
 </tr>
 <tr>
@@ -55,23 +60,13 @@
 </tr>
 <tr>
 	<td>selectFrame</td>
-	<td>//iframe[@id="_15_editor"]</td>
+	<td>//iframe[@id='_15_structure_el_TextAreaField_content']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>selectFrame</td>
-	<td>//iframe[@id="FCKeditor1___Frame"]</td>
+	<td>//td[@id='cke_contents_CKEditor1']/iframe</td>
 	<td></td>
-</tr>
-<tr>
-	<td>selectFrame</td>
-	<td>//iframe</td>
-	<td></td>
-</tr>
-<tr>
-	<td>typeKeys</td>
-	<td>//body</td>
-	<td>This is a test Web Content Article</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -180,7 +175,7 @@
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>//input[@value='Save and Approve']</td>
+	<td>//input[@value='Publish']</td>
 	<td></td>
 </tr>
 <tr>
@@ -190,12 +185,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//li[@id='_15_tabs1web-contentTabsId']/a</td>
+	<td>//span/span/a</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>//li[@id='_15_tabs1web-contentTabsId']/a</td>
+	<td>//span/span/a</td>
 	<td></td>
 </tr>
 <tr>

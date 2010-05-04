@@ -29,6 +29,7 @@ public class MoveThreadTest extends BaseTestCase {
 		while (label >= 1) {
 			switch (label) {
 			case 1:
+				selenium.open("/web/guest/home/");
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -36,7 +37,7 @@ public class MoveThreadTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent("link=Message Boards")) {
+						if (selenium.isElementPresent("link=Control Panel")) {
 							break;
 						}
 					}
@@ -46,110 +47,28 @@ public class MoveThreadTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.clickAt("link=Control Panel",
+					RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
 				selenium.clickAt("link=Message Boards",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				selenium.clickAt("//tr[4]/td[1]/a[1]/b",
+				selenium.clickAt("//tr[4]/td[1]/a[1]/strong",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isElementPresent("//li[5]/span/a")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
-				selenium.clickAt("//b", RuntimeVariables.replace(""));
+				selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isElementPresent("//li[6]/span/a")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
-				selenium.clickAt("//b", RuntimeVariables.replace(""));
+				selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isElementPresent("//li[7]/span/a")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
 				selenium.clickAt("link=T\u00e9st M\u00e9ssag\u00e9 to b\u00e9 D\u00e9l\u00e9t\u00e9d",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isElementPresent("//li[8]/span/a")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
 				assertTrue(selenium.isTextPresent(
 						"This m\u00e9ssag\u00e9 will b\u00e9 d\u00e9l\u00e9t\u00e9d!"));
 				selenium.clickAt("link=Move Thread",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isElementPresent("//li[9]/span/a")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
-				selenium.clickAt("_19_addExplanationPost",
+				selenium.clickAt("_19_addExplanationPostCheckbox",
 					RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
@@ -158,7 +77,7 @@ public class MoveThreadTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent("_19_subject")) {
+						if (selenium.isVisible("_19_subject")) {
 							break;
 						}
 					}
@@ -199,7 +118,7 @@ public class MoveThreadTest extends BaseTestCase {
 				selenium.selectWindow("null");
 				Thread.sleep(5000);
 				assertTrue(selenium.isElementPresent("link=Sujr"));
-				selenium.clickAt("//input[@value=\"Move Thread\"]",
+				selenium.clickAt("//input[@value='Move Thread']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.isElementPresent("link=Sujr"));

@@ -24,137 +24,176 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class SearchArticleTest extends BaseTestCase {
 	public void testSearchArticle() throws Exception {
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+		int label = 1;
 
-			try {
-				if (selenium.isElementPresent("link=Web Content")) {
-					break;
+		while (label >= 1) {
+			switch (label) {
+			case 1:
+				selenium.open("/web/guest/home/");
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isElementPresent("link=Control Panel")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
-		}
+				selenium.clickAt("link=Control Panel",
+					RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
+				selenium.clickAt("link=Web Content",
+					RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
 
-		selenium.clickAt("link=Web Content", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//li[@id='_15_tabs1web-contentTabsId']/a",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=Advanced \u00bb", RuntimeVariables.replace(""));
+				boolean advancedVisible = selenium.isVisible(
+						"link=Advanced \u00bb");
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+				if (!advancedVisible) {
+					label = 2;
 
-			try {
-				if (selenium.isElementPresent("_15_searchArticleId")) {
-					break;
+					continue;
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
-		}
+				selenium.clickAt("link=Advanced \u00bb",
+					RuntimeVariables.replace(""));
 
-		selenium.typeKeys("_15_searchArticleId",
-			RuntimeVariables.replace("Test"));
-		selenium.type("_15_searchArticleId", RuntimeVariables.replace("Test"));
-		selenium.clickAt("//input[@value='Search']",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("No Web Content was found."));
-		selenium.type("_15_searchArticleId", RuntimeVariables.replace(""));
-		selenium.type("_15_version", RuntimeVariables.replace("1.0"));
-		selenium.clickAt("//input[@value='Search']",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("link=Test Web Content Article"));
-		selenium.type("_15_version", RuntimeVariables.replace("1.1"));
-		selenium.clickAt("//input[@value='Search']",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("No Web Content was found."));
-		selenium.type("_15_version", RuntimeVariables.replace(""));
-		selenium.type("_15_title", RuntimeVariables.replace("Test"));
-		selenium.clickAt("//input[@value='Search']",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("link=Test Web Content Article"));
-		selenium.type("_15_title", RuntimeVariables.replace("Test1"));
-		selenium.clickAt("//input[@value='Search']",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("No Web Content was found."));
-		selenium.type("_15_title", RuntimeVariables.replace(""));
-		selenium.type("_15_description", RuntimeVariables.replace("test"));
-		selenium.clickAt("//input[@value='Search']",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("link=Test Web Content Article"));
-		selenium.type("_15_description", RuntimeVariables.replace("test1"));
-		selenium.clickAt("//input[@value='Search']",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("No Web Content was found."));
-		selenium.type("_15_description", RuntimeVariables.replace(""));
-		selenium.type("_15_content", RuntimeVariables.replace("test"));
-		selenium.clickAt("//input[@value='Search']",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("link=Test Web Content Article"));
-		selenium.type("_15_content", RuntimeVariables.replace("test1"));
-		selenium.clickAt("//input[@value='Search']",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("No Web Content was found."));
-		selenium.type("_15_content", RuntimeVariables.replace(""));
-		selenium.select("_15_type",
-			RuntimeVariables.replace("label=Announcements"));
-		selenium.clickAt("//input[@value='Search']",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("link=Test Web Content Article"));
-		selenium.select("_15_type", RuntimeVariables.replace("label=Blogs"));
-		selenium.clickAt("//input[@value='Search']",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("No Web Content was found."));
-		selenium.select("_15_type", RuntimeVariables.replace("label="));
-		selenium.select("_15_status", RuntimeVariables.replace("label=Approved"));
-		selenium.clickAt("//input[@value='Search']",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("link=Test Web Content Article"));
-		selenium.select("_15_status",
-			RuntimeVariables.replace("label=Not Approved"));
-		selenium.clickAt("//input[@value='Search']",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("No Web Content was found."));
-		selenium.select("_15_status", RuntimeVariables.replace("label="));
-		selenium.clickAt("link=\u00ab Basic", RuntimeVariables.replace(""));
+			case 2:
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
 
-			try {
-				if (selenium.isElementPresent("_15_keywords")) {
-					break;
+					try {
+						if (selenium.isElementPresent("_15_searchArticleId")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
+				selenium.typeKeys("_15_searchArticleId",
+					RuntimeVariables.replace("Test"));
+				selenium.type("_15_searchArticleId",
+					RuntimeVariables.replace("Test"));
+				selenium.clickAt("//div[2]/span[2]/span/input",
+					RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
+				assertTrue(selenium.isTextPresent("No Web Content was found."));
+				selenium.type("_15_searchArticleId",
+					RuntimeVariables.replace(""));
+				selenium.type("_15_version", RuntimeVariables.replace("1.0"));
+				selenium.clickAt("//div[2]/span[2]/span/input",
+					RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
+				assertTrue(selenium.isElementPresent(
+						"link=Test Web Content Article"));
+				selenium.type("_15_version", RuntimeVariables.replace("1.1"));
+				selenium.clickAt("//div[2]/span[2]/span/input",
+					RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
+				assertTrue(selenium.isTextPresent("No Web Content was found."));
+				selenium.type("_15_version", RuntimeVariables.replace(""));
+				selenium.type("_15_title", RuntimeVariables.replace("Test"));
+				selenium.clickAt("//div[2]/span[2]/span/input",
+					RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
+				assertTrue(selenium.isElementPresent(
+						"link=Test Web Content Article"));
+				selenium.type("_15_title", RuntimeVariables.replace("Test1"));
+				selenium.clickAt("//div[2]/span[2]/span/input",
+					RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
+				assertTrue(selenium.isTextPresent("No Web Content was found."));
+				selenium.type("_15_title", RuntimeVariables.replace(""));
+				selenium.type("_15_description",
+					RuntimeVariables.replace("test"));
+				selenium.clickAt("//div[2]/span[2]/span/input",
+					RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
+				assertTrue(selenium.isElementPresent(
+						"link=Test Web Content Article"));
+				selenium.type("_15_description",
+					RuntimeVariables.replace("test1"));
+				selenium.clickAt("//div[2]/span[2]/span/input",
+					RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
+				assertTrue(selenium.isTextPresent("No Web Content was found."));
+				selenium.type("_15_description", RuntimeVariables.replace(""));
+				selenium.type("_15_content", RuntimeVariables.replace("test"));
+				selenium.clickAt("//div[2]/span[2]/span/input",
+					RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
+				assertTrue(selenium.isElementPresent(
+						"link=Test Web Content Article"));
+				selenium.type("_15_content", RuntimeVariables.replace("test1"));
+				selenium.clickAt("//div[2]/span[2]/span/input",
+					RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
+				assertTrue(selenium.isTextPresent("No Web Content was found."));
+				selenium.type("_15_content", RuntimeVariables.replace(""));
+				selenium.select("_15_type",
+					RuntimeVariables.replace("label=Announcements"));
+				selenium.clickAt("//div[2]/span[2]/span/input",
+					RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
+				assertTrue(selenium.isElementPresent(
+						"link=Test Web Content Article"));
+				selenium.select("_15_type",
+					RuntimeVariables.replace("label=Blogs"));
+				selenium.clickAt("//div[2]/span[2]/span/input",
+					RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
+				assertTrue(selenium.isTextPresent("No Web Content was found."));
+				selenium.select("_15_type", RuntimeVariables.replace("label="));
+				selenium.select("_15_status",
+					RuntimeVariables.replace("label=Approved"));
+				selenium.clickAt("//div[2]/span[2]/span/input",
+					RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
+				assertTrue(selenium.isElementPresent(
+						"link=Test Web Content Article"));
+				selenium.select("_15_status",
+					RuntimeVariables.replace("label=Not Approved"));
+				selenium.clickAt("//div[2]/span[2]/span/input",
+					RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
+				assertTrue(selenium.isTextPresent("No Web Content was found."));
+				selenium.select("_15_status", RuntimeVariables.replace("label="));
+				selenium.clickAt("link=\u00ab Basic",
+					RuntimeVariables.replace(""));
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isElementPresent("_15_keywords")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+			case 100:
+				label = -1;
+			}
 		}
 	}
 }

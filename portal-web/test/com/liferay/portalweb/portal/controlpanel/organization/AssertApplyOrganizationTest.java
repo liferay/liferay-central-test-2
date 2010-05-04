@@ -29,6 +29,7 @@ public class AssertApplyOrganizationTest extends BaseTestCase {
 		while (label >= 1) {
 			switch (label) {
 			case 1:
+				selenium.open("/web/guest/home/");
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -36,7 +37,7 @@ public class AssertApplyOrganizationTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent("link=Organizations")) {
+						if (selenium.isElementPresent("link=Control Panel")) {
 							break;
 						}
 					}
@@ -46,6 +47,9 @@ public class AssertApplyOrganizationTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.clickAt("link=Control Panel",
+					RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
 				selenium.clickAt("link=Organizations",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
@@ -84,7 +88,6 @@ public class AssertApplyOrganizationTest extends BaseTestCase {
 				selenium.clickAt("//input[@value='Search']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				Thread.sleep(2500);
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -92,7 +95,7 @@ public class AssertApplyOrganizationTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isVisible("//td[8]/ul/li/strong/span")) {
+						if (selenium.isVisible("//td[8]/ul/li/strong/a")) {
 							break;
 						}
 					}
@@ -102,7 +105,7 @@ public class AssertApplyOrganizationTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.clickAt("//td[8]/ul/li/strong/span",
+				selenium.clickAt("//td[8]/ul/li/strong/a",
 					RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
@@ -111,7 +114,7 @@ public class AssertApplyOrganizationTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent("//div[4]/ul/li[6]/a")) {
+						if (selenium.isElementPresent("link=View Users")) {
 							break;
 						}
 					}
@@ -121,8 +124,7 @@ public class AssertApplyOrganizationTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.clickAt("//div[4]/ul/li[6]/a",
-					RuntimeVariables.replace(""));
+				selenium.clickAt("link=View Users", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.isElementPresent("link=joebloggs"));
 				assertTrue(selenium.isElementPresent("link=selenium01"));

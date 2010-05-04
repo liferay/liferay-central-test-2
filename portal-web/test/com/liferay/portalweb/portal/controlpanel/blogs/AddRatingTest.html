@@ -9,8 +9,18 @@
 <tr><td rowspan="1" colspan="3">AddRatingTest</td></tr>
 </thead><tbody>
 <tr>
+	<td>open</td>
+	<td>/web/guest/home/</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
-	<td>link=Blogs</td>
+	<td>link=Control Panel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>link=Control Panel</td>
 	<td></td>
 </tr>
 <tr>
@@ -19,24 +29,29 @@
 	<td></td>
 </tr>
 <tr>
-	<td>storeIncrementedText</td>
-	<td>//td[3]/div[1]</td>
-	<td>votes</td>
+	<td>assertText</td>
+	<td>//div[5]/div[2]/div/div</td>
+	<td>Average (0 Votes) The average rating is 0 stars out of 5.</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//img[5]</td>
+	<td>//a[5]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAt</td>
-	<td>//img[5]</td>
+	<td>//a[5]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForPartialText</td>
-	<td>//td[3]/div[1]</td>
-	<td>${votes}</td>
+	<td>waitForText</td>
+	<td>//div[5]/div[2]/div/div</td>
+	<td>Average (1 Vote) The average rating is 5 stars out of 5.</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[5]/div[2]/div/div</td>
+	<td>Average (1 Vote) The average rating is 5 stars out of 5.</td>
 </tr>
 
 </tbody></table>

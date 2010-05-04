@@ -25,13 +25,15 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AssertAuthenticationLDAPTest extends BaseTestCase {
 	public void testAssertAuthenticationLDAP() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Settings")) {
+				if (selenium.isElementPresent("link=Control Panel")) {
 					break;
 				}
 			}
@@ -41,6 +43,8 @@ public class AssertAuthenticationLDAPTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Settings", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
@@ -101,6 +105,8 @@ public class AssertAuthenticationLDAPTest extends BaseTestCase {
 				"_130_settings(ldap.auth.enabled)Checkbox"));
 		assertTrue(selenium.isElementPresent(
 				"_130_settings(ldap.auth.required)Checkbox"));
+		selenium.clickAt("_130_addButton", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("_130_defaultLdap", RuntimeVariables.replace(""));
 		selenium.clickAt("//input[@value='Reset Values']",
 			RuntimeVariables.replace(""));
@@ -118,6 +124,26 @@ public class AssertAuthenticationLDAPTest extends BaseTestCase {
 				"//input[@value='Test LDAP Users']"));
 		assertTrue(selenium.isElementPresent(
 				"//input[@value='Test LDAP Groups']"));
+		selenium.clickAt("_130_cancelButton", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("link=LDAP")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("link=LDAP", RuntimeVariables.replace(""));
 		assertTrue(selenium.isElementPresent("_130_ldapImportEnabledCheckbox"));
 		assertTrue(selenium.isElementPresent("_130_ldapExportEnabledCheckbox"));
 		assertTrue(selenium.isElementPresent(

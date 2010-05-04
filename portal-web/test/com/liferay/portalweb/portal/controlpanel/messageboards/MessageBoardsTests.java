@@ -29,7 +29,6 @@ public class MessageBoardsTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTestSuite(ControlPanelTest.class);
 		testSuite.addTestSuite(AddCategoryTest.class);
 		testSuite.addTestSuite(AddSubcategoryTest.class);
 		testSuite.addTestSuite(AddMessageTest.class);
@@ -48,13 +47,12 @@ public class MessageBoardsTests extends BaseTests {
 		testSuite.addTestSuite(DeleteMessageTest.class);
 		testSuite.addTestSuite(EditCategoryTest.class);
 		testSuite.addTestSuite(EditMessageTest.class);
-		testSuite.addTestSuite(DeleteAllTest.class);
+		testSuite.addTestSuite(TearDownMBCategoryCPTest.class);
 		testSuite.addTestSuite(ImportLARTest.class);
 		testSuite.addTestSuite(AssertImportLARTest.class);
 		testSuite.addTestSuite(AddQuestionThreadTest.class);
 		testSuite.addTestSuite(AddAnswerThreadTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
-		testSuite.addTestSuite(EndControlPanelTest.class);
+		testSuite.addTestSuite(TearDownMBCategoryCPTest.class);
 
 		return testSuite;
 	}

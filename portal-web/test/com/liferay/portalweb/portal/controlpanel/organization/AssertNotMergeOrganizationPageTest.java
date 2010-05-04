@@ -25,14 +25,17 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AssertNotMergeOrganizationPageTest extends BaseTestCase {
 	public void testAssertNotMergeOrganizationPage() throws Exception {
+		selenium.open("/web/guest/home/");
+		assertTrue(selenium.isElementPresent("link=Welcome"));
+		assertFalse(selenium.isElementPresent("link=Selenium Test Home Page"));
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"//div[@id='_145_myPlacesContainer']/ul/li[6]/a")) {
+				if (selenium.isElementPresent("//div[4]/div/ul/li[3]/a/span")) {
 					break;
 				}
 			}
@@ -42,9 +45,10 @@ public class AssertNotMergeOrganizationPageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"//div[@id='_145_myPlacesContainer']/ul/li[6]/a"));
+		selenium.clickAt("//div[4]/div/ul/li[3]/a/span",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertFalse(selenium.isElementPresent("link=Selenium Test Home Page"));
+		assertFalse(selenium.isElementPresent("link=Welcome"));
+		assertTrue(selenium.isElementPresent("link=Selenium Test Home Page"));
 	}
 }

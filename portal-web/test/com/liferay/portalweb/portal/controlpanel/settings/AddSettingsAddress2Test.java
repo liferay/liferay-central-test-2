@@ -24,13 +24,15 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddSettingsAddress2Test extends BaseTestCase {
 	public void testAddSettingsAddress2() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Settings")) {
+				if (selenium.isElementPresent("link=Control Panel")) {
 					break;
 				}
 			}
@@ -40,6 +42,8 @@ public class AddSettingsAddress2Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Settings", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
@@ -67,7 +71,7 @@ public class AddSettingsAddress2Test extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("link=Add Row")) {
+				if (selenium.isVisible("add")) {
 					break;
 				}
 			}
@@ -77,7 +81,7 @@ public class AddSettingsAddress2Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("link=Add Row", RuntimeVariables.replace(""));
+		selenium.clickAt("add", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -85,7 +89,7 @@ public class AddSettingsAddress2Test extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("_130_addressStreet1_2")) {
+				if (selenium.isVisible("_130_addressStreet1_3")) {
 					break;
 				}
 			}
@@ -95,18 +99,18 @@ public class AddSettingsAddress2Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("_130_addressStreet1_2",
+		selenium.type("_130_addressStreet1_3",
 			RuntimeVariables.replace("321 Selenium St."));
-		selenium.type("_130_addressCity2",
+		selenium.type("_130_addressCity3",
 			RuntimeVariables.replace("Selenium Sity"));
-		selenium.type("_130_addressZip2", RuntimeVariables.replace("54321"));
+		selenium.type("_130_addressZip3", RuntimeVariables.replace("54321"));
 		Thread.sleep(5000);
-		selenium.select("_130_addressCountryId2",
+		selenium.select("_130_addressCountryId3",
 			RuntimeVariables.replace("label=United States"));
 		Thread.sleep(5000);
-		selenium.select("_130_addressRegionId2",
+		selenium.select("_130_addressRegionId3",
 			RuntimeVariables.replace("label=California"));
-		selenium.select("_130_addressTypeId2",
+		selenium.select("_130_addressTypeId3",
 			RuntimeVariables.replace("label=Other"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");

@@ -24,13 +24,15 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddUserWebsite2Test extends BaseTestCase {
 	public void testAddUserWebsite2() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Users")) {
+				if (selenium.isElementPresent("link=Control Panel")) {
 					break;
 				}
 			}
@@ -40,6 +42,8 @@ public class AddUserWebsite2Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Users", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
@@ -108,7 +112,7 @@ public class AddUserWebsite2Test extends BaseTestCase {
 
 			try {
 				if (selenium.isVisible(
-							"//div[@id='websites']/fieldset/div[2]/div/span/a[1]")) {
+							"//div[12]/div/fieldset/div[2]/div/span/span/button[1]")) {
 					break;
 				}
 			}
@@ -118,7 +122,7 @@ public class AddUserWebsite2Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//div[@id='websites']/fieldset/div[2]/div/span/a[1]",
+		selenium.clickAt("//div[12]/div/fieldset/div[2]/div/span/span/button[1]",
 			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -127,7 +131,7 @@ public class AddUserWebsite2Test extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("_125_websiteUrl2")) {
+				if (selenium.isVisible("_125_websiteUrl3")) {
 					break;
 				}
 			}
@@ -137,9 +141,9 @@ public class AddUserWebsite2Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("_125_websiteUrl2",
+		selenium.type("_125_websiteUrl3",
 			RuntimeVariables.replace("http://www.seleniumuser01.com"));
-		selenium.select("_125_websiteTypeId2",
+		selenium.select("_125_websiteTypeId3",
 			RuntimeVariables.replace("label=Blog"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");

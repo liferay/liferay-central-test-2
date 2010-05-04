@@ -24,13 +24,15 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddSettingsPhoneNumber2Test extends BaseTestCase {
 	public void testAddSettingsPhoneNumber2() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Settings")) {
+				if (selenium.isElementPresent("link=Control Panel")) {
 					break;
 				}
 			}
@@ -40,6 +42,8 @@ public class AddSettingsPhoneNumber2Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Settings", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
@@ -68,7 +72,7 @@ public class AddSettingsPhoneNumber2Test extends BaseTestCase {
 
 			try {
 				if (selenium.isVisible(
-							"//div[@id='phoneNumbers']/fieldset/div[2]/div/span/a[1]")) {
+							"//div[7]/div/fieldset/div[2]/div/span/span/button[1]")) {
 					break;
 				}
 			}
@@ -78,7 +82,7 @@ public class AddSettingsPhoneNumber2Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//div[@id='phoneNumbers']/fieldset/div[2]/div/span/a[1]",
+		selenium.clickAt("//div[7]/div/fieldset/div[2]/div/span/span/button[1]",
 			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -87,7 +91,7 @@ public class AddSettingsPhoneNumber2Test extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("_130_phoneNumber2")) {
+				if (selenium.isVisible("_130_phoneNumber3")) {
 					break;
 				}
 			}
@@ -97,10 +101,10 @@ public class AddSettingsPhoneNumber2Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("_130_phoneNumber2",
+		selenium.type("_130_phoneNumber3",
 			RuntimeVariables.replace("321-321-4321"));
-		selenium.type("_130_phoneExtension2", RuntimeVariables.replace("321"));
-		selenium.select("_130_phoneTypeId2",
+		selenium.type("_130_phoneExtension3", RuntimeVariables.replace("321"));
+		selenium.select("_130_phoneTypeId3",
 			RuntimeVariables.replace("label=Fax"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");

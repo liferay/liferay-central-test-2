@@ -29,14 +29,12 @@ public class PageTemplatesTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTestSuite(ControlPanelTest.class);
 		testSuite.addTestSuite(AddPageTemplateTest.class);
 		testSuite.addTestSuite(DeactivatePageTemplateTest.class);
 		testSuite.addTestSuite(ActivatePageTemplateTest.class);
 		testSuite.addTestSuite(EditPageTemplateTest.class);
 		testSuite.addTestSuite(DeletePageTemplateTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
-		testSuite.addTestSuite(EndControlPanelTest.class);
+		testSuite.addTestSuite(TearDownPageTemplateTest.class);
 
 		return testSuite;
 	}

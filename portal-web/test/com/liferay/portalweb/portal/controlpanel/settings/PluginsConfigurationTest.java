@@ -24,13 +24,15 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class PluginsConfigurationTest extends BaseTestCase {
 	public void testPluginsConfiguration() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Plugins Configuration")) {
+				if (selenium.isElementPresent("link=Control Panel")) {
 					break;
 				}
 			}
@@ -40,6 +42,8 @@ public class PluginsConfigurationTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Plugins Configuration",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
@@ -51,9 +55,5 @@ public class PluginsConfigurationTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Freeform"));
-		selenium.clickAt("link=Hook Plugins", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=Web Plugins", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
 	}
 }

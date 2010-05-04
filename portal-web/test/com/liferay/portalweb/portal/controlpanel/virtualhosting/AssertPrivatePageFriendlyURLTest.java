@@ -30,7 +30,7 @@ public class AssertPrivatePageFriendlyURLTest extends BaseTestCase {
 		assertEquals("http://localhost:8080/group/alpha/",
 			selenium.getLocation());
 		assertEquals(RuntimeVariables.replace("Virtual Hosting Community"),
-			selenium.getText("//h1/span"));
+			selenium.getText("//li[2]/span/a"));
 		assertTrue(selenium.isElementPresent("link=Private Page"));
 		selenium.clickAt("link=Private Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");

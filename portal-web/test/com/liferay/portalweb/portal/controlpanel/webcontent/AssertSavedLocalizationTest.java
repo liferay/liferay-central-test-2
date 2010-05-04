@@ -24,6 +24,26 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AssertSavedLocalizationTest extends BaseTestCase {
 	public void testAssertSavedLocalization() throws Exception {
+		selenium.open("/web/guest/home/");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Control Panel")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Web Content", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Hello World Localized Article",
@@ -32,16 +52,19 @@ public class AssertSavedLocalizationTest extends BaseTestCase {
 		selenium.select("_15_languageId",
 			RuntimeVariables.replace("label=Chinese (China)"));
 		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.getConfirmation()
+						   .matches("^Are you sure you want to switch the language view[\\s\\S] Changes made to this language will not be saved.$"));
 		assertEquals("\u4e16\u754c\u60a8\u597d Page Name",
-			selenium.getValue("_15_structure_el0_content"));
+			selenium.getValue("page-name"));
 		assertEquals("\u4e16\u754c\u60a8\u597d Page Description",
-			selenium.getValue("_15_structure_el1_content"));
+			selenium.getValue("page-description"));
 		selenium.select("_15_languageId",
 			RuntimeVariables.replace("label=English (United States)"));
 		selenium.waitForPageToLoad("30000");
-		assertEquals("Hello World Page Name",
-			selenium.getValue("_15_structure_el0_content"));
+		assertTrue(selenium.getConfirmation()
+						   .matches("^Are you sure you want to switch the language view[\\s\\S] Changes made to this language will not be saved.$"));
+		assertEquals("Hello World Page Name", selenium.getValue("page-name"));
 		assertEquals("Hello World Page Description",
-			selenium.getValue("_15_structure_el1_content"));
+			selenium.getValue("page-description"));
 	}
 }

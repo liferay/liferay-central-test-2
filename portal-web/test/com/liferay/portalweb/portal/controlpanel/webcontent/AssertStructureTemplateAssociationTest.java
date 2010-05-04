@@ -31,6 +31,7 @@ public class AssertStructureTemplateAssociationTest extends BaseTestCase {
 		while (label >= 1) {
 			switch (label) {
 			case 1:
+				selenium.open("/web/guest/home/");
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -38,7 +39,7 @@ public class AssertStructureTemplateAssociationTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent("link=Web Content")) {
+						if (selenium.isElementPresent("link=Control Panel")) {
 							break;
 						}
 					}
@@ -48,10 +49,10 @@ public class AssertStructureTemplateAssociationTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.clickAt("link=Web Content",
+				selenium.clickAt("link=Control Panel",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				selenium.clickAt("//li[@id='_15_tabs1web-contentTabsId']/a",
+				selenium.clickAt("link=Web Content",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				selenium.clickAt("//input[@value='Add Web Content']",
@@ -78,14 +79,14 @@ public class AssertStructureTemplateAssociationTest extends BaseTestCase {
 
 				selenium.click("//input[@value='Select']");
 				assertTrue(selenium.getConfirmation()
-								   .matches("^Selecting a new structure will change the available input fields and available templates[\\s\\S] Do you want to proceed[\\s\\S]$"));
-				selenium.waitForPopUp("structure",
+								   .matches("^Selecting a template will change the structure, available input fields, and available templates[\\s\\S] Do you want to proceed[\\s\\S]$"));
+				selenium.waitForPopUp("template",
 					RuntimeVariables.replace("30000"));
-				selenium.selectWindow("name=structure");
+				selenium.selectWindow("name=template");
 				Thread.sleep(5000);
 
 				boolean TemplateRestoredA = selenium.isElementPresent(
-						"link=TEST");
+						"link=TESTB");
 
 				if (TemplateRestoredA) {
 					label = 2;
@@ -99,7 +100,7 @@ public class AssertStructureTemplateAssociationTest extends BaseTestCase {
 			case 2:
 
 				boolean TemplateRestoredB = selenium.isElementPresent(
-						"link=TEST");
+						"link=TESTB");
 
 				if (!TemplateRestoredB) {
 					label = 3;
@@ -113,7 +114,7 @@ public class AssertStructureTemplateAssociationTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent("link=TEST")) {
+						if (selenium.isElementPresent("link=TESTB")) {
 							break;
 						}
 					}
@@ -123,7 +124,7 @@ public class AssertStructureTemplateAssociationTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click("link=TEST");
+				selenium.click("link=TESTB");
 				selenium.selectWindow("null");
 
 			case 3:

@@ -29,7 +29,6 @@ public class PollsTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTestSuite(ControlPanelTest.class);
 		testSuite.addTestSuite(AddQuestionTest.class);
 		testSuite.addTestSuite(AddVoteTest.class);
 		//testSuite.addTestSuite(ViewQuestionGraphsTest.class);
@@ -41,8 +40,7 @@ public class PollsTests extends BaseTests {
 		testSuite.addTestSuite(AddNullTitlePollTest.class);
 		testSuite.addTestSuite(AddNullDescriptionPollTest.class);
 		testSuite.addTestSuite(AddNullChoicePollTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
-		testSuite.addTestSuite(EndControlPanelTest.class);
+		testSuite.addTestSuite(TearDownQuestionTest.class);
 
 		return testSuite;
 	}

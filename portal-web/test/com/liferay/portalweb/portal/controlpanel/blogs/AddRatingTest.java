@@ -24,13 +24,15 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddRatingTest extends BaseTestCase {
 	public void testAddRating() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Blogs")) {
+				if (selenium.isElementPresent("link=Control Panel")) {
 					break;
 				}
 			}
@@ -40,11 +42,13 @@ public class AddRatingTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Blogs", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		String votes = selenium.getIncrementedText("//td[3]/div[1]");
-		RuntimeVariables.setValue("votes", votes);
+		assertEquals(RuntimeVariables.replace(
+				"Average (0 Votes) The average rating is 0 stars out of 5."),
+			selenium.getText("//div[5]/div[2]/div/div"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -52,7 +56,7 @@ public class AddRatingTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//img[5]")) {
+				if (selenium.isElementPresent("//a[5]")) {
 					break;
 				}
 			}
@@ -62,7 +66,7 @@ public class AddRatingTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//img[5]", RuntimeVariables.replace(""));
+		selenium.clickAt("//a[5]", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -70,8 +74,10 @@ public class AddRatingTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isPartialText("//td[3]/div[1]",
-							RuntimeVariables.getValue("votes"))) {
+				if (RuntimeVariables.replace(
+							"Average (1 Vote) The average rating is 5 stars out of 5.")
+										.equals(selenium.getText(
+								"//div[5]/div[2]/div/div"))) {
 					break;
 				}
 			}
@@ -80,5 +86,9 @@ public class AddRatingTest extends BaseTestCase {
 
 			Thread.sleep(1000);
 		}
+
+		assertEquals(RuntimeVariables.replace(
+				"Average (1 Vote) The average rating is 5 stars out of 5."),
+			selenium.getText("//div[5]/div[2]/div/div"));
 	}
 }

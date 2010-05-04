@@ -29,7 +29,6 @@ public class PasswordPoliciesTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTestSuite(ControlPanelTest.class);
 		testSuite.addTestSuite(AddPasswordPoliciesTest.class);
 		testSuite.addTestSuite(AddAsteriskPasswordPolicyNameTest.class);
 		testSuite.addTestSuite(AddCommaPasswordPolicyNameTest.class);
@@ -38,8 +37,7 @@ public class PasswordPoliciesTests extends BaseTests {
 		testSuite.addTestSuite(AddNumberPasswordPolicyNameTest.class);
 		testSuite.addTestSuite(AddTemporaryPasswordPoliciesTest.class);
 		testSuite.addTestSuite(DeleteTemporaryPasswordPoliciesTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
-		testSuite.addTestSuite(EndControlPanelTest.class);
+		testSuite.addTestSuite(TearDownPasswordPolicyTest.class);
 
 		return testSuite;
 	}

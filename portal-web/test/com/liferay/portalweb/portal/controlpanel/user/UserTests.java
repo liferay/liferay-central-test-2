@@ -29,7 +29,6 @@ public class UserTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTestSuite(ControlPanelTest.class);
 		testSuite.addTestSuite(AddUserTest.class);
 		testSuite.addTestSuite(AddUserPasswordTest.class);
 		testSuite.addTestSuite(AddUserAddressTest.class);
@@ -84,7 +83,6 @@ public class UserTests extends BaseTests {
 		testSuite.addTestSuite(DeactivateTemporaryUserTest.class);
 		testSuite.addTestSuite(DeleteTemporaryUserTest.class);
 		testSuite.addTestSuite(TearDownTest.class);
-		testSuite.addTestSuite(EndControlPanelTest.class);
 
 		return testSuite;
 	}

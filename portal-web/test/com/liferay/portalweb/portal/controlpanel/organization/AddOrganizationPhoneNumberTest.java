@@ -25,7 +25,25 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddOrganizationPhoneNumberTest extends BaseTestCase {
 	public void testAddOrganizationPhoneNumber() throws Exception {
-		selenium.clickAt("link=Organizations", RuntimeVariables.replace(""));
+		selenium.open("/web/guest/home/");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Control Panel")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Organizations", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");

@@ -24,13 +24,15 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AssertImportLARTest extends BaseTestCase {
 	public void testAssertImportLAR() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Blogs")) {
+				if (selenium.isElementPresent("link=Control Panel")) {
 					break;
 				}
 			}
@@ -40,6 +42,8 @@ public class AssertImportLARTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Blogs", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
@@ -82,7 +86,7 @@ public class AssertImportLARTest extends BaseTestCase {
 
 		assertEquals(RuntimeVariables.replace("Test Entry"),
 			selenium.getText("//form/div/div[1]/div[1]"));
-		assertEquals(RuntimeVariables.replace("This is a test entry comment!"),
+		assertEquals(RuntimeVariables.replace("This is a test entry comment."),
 			selenium.getText("//td[2]/div[1]"));
 	}
 }
