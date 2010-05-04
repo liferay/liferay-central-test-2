@@ -69,6 +69,12 @@ AssetRendererFactory rendererFactory = AssetRendererFactoryRegistryUtil.getAsset
 		margin-bottom: 1em;
 	}
 
+	.dl-file-icon {
+		margin-right: 0.3em;
+		position: relative;
+		top: 0.4em;
+	}
+
 	.asset-search {
 		margin-bottom: 1em;
 	}
@@ -258,9 +264,11 @@ AssetRendererFactory rendererFactory = AssetRendererFactoryRegistryUtil.getAsset
 
 									image = image.toEscapedModel();
 
-									StringBundler sb = new StringBundler(9);
+									StringBundler sb = new StringBundler(11);
 
-									sb.append("<img border=\"1\" src=\"");
+									sb.append("<img alt=\"");
+									sb.append(image.getName());
+									sb.append("\" border=\"1\" src=\"");
 									sb.append(themeDisplay.getPathImage());
 									sb.append("/image_gallery?img_id=");
 									sb.append(image.getSmallImageId());
@@ -269,6 +277,22 @@ AssetRendererFactory rendererFactory = AssetRendererFactoryRegistryUtil.getAsset
 									sb.append("\" title=\"");
 									sb.append(image.getDescription());
 									sb.append("\" />");
+
+									row.addText(sb.toString(), rowURL);
+								}
+								else if (assetEntryClassName.equals(DLFileEntry.class.getName())) {
+									DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(assetEntry.getClassPK());
+
+									fileEntry = fileEntry.toEscapedModel();
+
+									StringBundler sb = new StringBundler(6);
+
+									sb.append("<img alt=\"\" class=\"dl-file-icon\" src=\"");
+									sb.append(themeDisplay.getPathThemeImages());
+									sb.append("/file_system/small/");
+									sb.append(DLUtil.getFileIcon(assetEntry.getTitle()));
+									sb.append(".png\" />");
+									sb.append(assetEntry.getTitle());
 
 									row.addText(sb.toString(), rowURL);
 								}
