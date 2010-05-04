@@ -799,7 +799,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 	}
 
 	public boolean hasDraftPage(long nodeId, String title)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		int count = wikiPagePersistence.countByN_T_S(
 			nodeId, title, WorkflowConstants.STATUS_DRAFT);

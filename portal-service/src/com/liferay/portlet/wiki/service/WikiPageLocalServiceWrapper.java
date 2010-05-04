@@ -385,8 +385,7 @@ public class WikiPageLocalServiceWrapper implements WikiPageLocalService {
 	}
 
 	public boolean hasDraftPage(long nodeId, java.lang.String title)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _wikiPageLocalService.hasDraftPage(nodeId, title);
 	}
 

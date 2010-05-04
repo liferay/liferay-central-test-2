@@ -397,8 +397,7 @@ public class WikiPageLocalServiceUtil {
 	}
 
 	public static boolean hasDraftPage(long nodeId, java.lang.String title)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().hasDraftPage(nodeId, title);
 	}
 

@@ -58,7 +58,6 @@ import com.liferay.portlet.blogs.util.LinkbackProducerUtil;
 import com.liferay.portlet.blogs.util.comparator.EntryDisplayDateComparator;
 
 import java.io.IOException;
-import java.io.Serializable;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -541,9 +540,6 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		if (serviceContext.getWorkflowAction() ==
 				WorkflowConstants.ACTION_PUBLISH) {
-
-			Map<String, Serializable> workflowContext =
-				new HashMap<String, Serializable>();
 
 			serviceContext.setAttribute(
 				"pingOldTrackbacks", String.valueOf(pingOldTrackbacks));
