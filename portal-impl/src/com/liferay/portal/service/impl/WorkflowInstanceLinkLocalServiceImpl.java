@@ -129,14 +129,14 @@ public class WorkflowInstanceLinkLocalServiceImpl
 			long companyId, long groupId, String className, long classPK)
 		throws PortalException, SystemException {
 
-		List<WorkflowInstanceLink> workflowInstaneLinks =
+		List<WorkflowInstanceLink> workflowInstanceLinks =
 			getWorkflowInstanceLinks(companyId, groupId, className, classPK);
 
-		if (workflowInstaneLinks.isEmpty()) {
+		if (workflowInstanceLinks.isEmpty()) {
 			throw new NoSuchWorkflowInstanceLinkException();
 		}
 		else {
-			return workflowInstaneLinks.get(0);
+			return workflowInstanceLinks.get(0);
 		}
 	}
 
