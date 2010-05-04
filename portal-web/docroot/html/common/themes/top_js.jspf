@@ -158,6 +158,9 @@
 				getPathImage: function() {
 					return "<%= themeDisplay.getPathImage() %>";
 				},
+				getPathJavaScript: function() {
+					return "<%= themeDisplay.getPathJavaScript() %>";
+				},
 				getPathMain: function() {
 					return "<%= themeDisplay.getPathMain() %>";
 				},
