@@ -14,6 +14,7 @@
 
 package com.liferay.portal.kernel.messaging.jmx;
 
+import com.liferay.portal.kernel.jmx.MBeanRegistry;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.BaseDestinationEventListener;
@@ -21,10 +22,6 @@ import com.liferay.portal.kernel.messaging.Destination;
 import com.liferay.portal.kernel.messaging.MessageBus;
 
 import java.util.Collection;
-
-import javax.management.InstanceAlreadyExistsException;
-import javax.management.MBeanServer;
-import javax.management.ObjectName;
 
 /**
  * <a href="JMXMessageListener.java.html"><b><i>View Source</i></b></a>
@@ -35,13 +32,14 @@ import javax.management.ObjectName;
 public class JMXMessageListener extends BaseDestinationEventListener {
 
 	public void afterPropertiesSet() throws Exception {
-		if ((_mBeanServer == null) || (_messageBus == null)) {
+		if ((_mBeanRegistry == null) || (_messageBus == null)) {
 			throw new IllegalStateException(
 				"MBean server and message bus are not configured");
 		}
 
 		try {
-			_replaceMBeanRegistration(
+			_mBeanRegistry.replace(
+				_MESSAGE_BUS_MANAGER_OBJECT_NAME_CACHE_KEY,
 				new MessageBusManager(_messageBus),
 				MessageBusManager.createObjectName());
 		}
@@ -106,7 +104,8 @@ public class JMXMessageListener extends BaseDestinationEventListener {
 		}
 
 		try {
-			_mBeanServer.unregisterMBean(
+			_mBeanRegistry.unregister(
+				_MESSAGE_BUS_MANAGER_OBJECT_NAME_CACHE_KEY,
 				MessageBusManager.createObjectName());
 		}
 		catch (Exception e) {
@@ -123,26 +122,12 @@ public class JMXMessageListener extends BaseDestinationEventListener {
 		afterPropertiesSet();
 	}
 
-	public void setMBeanServer(MBeanServer mBeanServer) {
-		_mBeanServer = mBeanServer;
+	public void setMbeanRegistry(MBeanRegistry mbeanRegistry) {
+		_mBeanRegistry = mbeanRegistry;
 	}
 
 	public void setMessageBus(MessageBus messageBus) {
 		_messageBus = messageBus;
-	}
-
-	protected void registerDestination(Destination destination)
-		throws Exception {
-
-		String destinationName = destination.getName();
-
-		_replaceMBeanRegistration(
-			new DestinationManager(destination),
-			DestinationManager.createObjectName(destinationName));
-
-		_replaceMBeanRegistration(
-			new DestinationStatisticsManager(destination),
-			DestinationStatisticsManager.createObjectName(destinationName));
 	}
 
 	protected void unregisterDestination(Destination destination)
@@ -150,29 +135,37 @@ public class JMXMessageListener extends BaseDestinationEventListener {
 
 		String destinationName = destination.getName();
 
-		_mBeanServer.unregisterMBean(
+		_mBeanRegistry.unregister(
+			destinationName,
 			DestinationManager.createObjectName(destinationName));
 
-		_mBeanServer.unregisterMBean(
+		_mBeanRegistry.unregister(
+			_getStatisticsObjectNameCacheKey(destinationName),
 			DestinationStatisticsManager.createObjectName(destinationName));
 	}
 
-	private void _replaceMBeanRegistration(Object object, ObjectName objectName)
+	protected void registerDestination(Destination destination)
 		throws Exception {
 
-		try {
-			_mBeanServer.registerMBean(object, objectName);
-		}
-		catch (InstanceAlreadyExistsException iaee) {
-			_mBeanServer.unregisterMBean(objectName);
+		String destinationName = destination.getName();
 
-			_mBeanServer.registerMBean(object, objectName);
-		}
+		_mBeanRegistry.replace(
+			destinationName, new DestinationManager(destination),
+			DestinationManager.createObjectName(destinationName));
+
+		_mBeanRegistry.replace(
+			_getStatisticsObjectNameCacheKey(destinationName),
+			new DestinationStatisticsManager(destination),
+			DestinationStatisticsManager.createObjectName(destinationName));
+	}
+
+	private String _getStatisticsObjectNameCacheKey(String destinationName) {
+		return destinationName + "statistics";
 	}
 
 	private static Log log = LogFactoryUtil.getLog(JMXMessageListener.class);
 
-	private MBeanServer _mBeanServer;
+	private MBeanRegistry _mBeanRegistry;
 	private MessageBus _messageBus;
-
+	private static final String _MESSAGE_BUS_MANAGER_OBJECT_NAME_CACHE_KEY = "messageBusManager";
 }

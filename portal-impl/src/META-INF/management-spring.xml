@@ -10,4 +10,14 @@
 	<bean id="mbeanServer" class="org.springframework.jmx.support.MBeanServerFactoryBean">
 		 <property name="locateExistingServerIfPossible" value="true" />
 	</bean>
+
+	<bean id="mbeanRegistry" class="com.liferay.portal.kernel.jmx.MBeanRegistry">
+		 <property name="mbeanServer" ref="mbeanServer"/>
+	</bean>
+
+	<bean id="registryAwareMBeanServer" class="com.liferay.portal.kernel.jmx.RegistryAwareMBeanServer">
+		<property name="mbeanServer" ref="mbeanServer" />
+		<property name="mbeanRegistry" ref="mbeanRegistry" />
+	</bean>
+
 </beans>
