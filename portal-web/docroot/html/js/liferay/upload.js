@@ -58,7 +58,7 @@ AUI().add(
 
 			instance._queueCancelled = false;
 
-			instance._flashVersion = deconcept.SWFObjectUtil.getPlayerVersion().major;
+			instance._flashVersion = A.SWF.getFlashVersion();
 
 			// Check for an override via the query string
 
@@ -100,7 +100,7 @@ AUI().add(
 				instance._useNewUploaderText = Liferay.Language.get('use-the-new-uploader');
 			}
 
-			if (instance._flashVersion < 9 && instance._fallbackContainer) {
+			if (!A.SWF.isFlashVersionAtLeast(9) && instance._fallbackContainer) {
 				instance._fallbackContainer.show();
 
 				instance._setupIframe();
@@ -721,6 +721,6 @@ AUI().add(
 	},
 	'',
 	{
-		requires: ['aui-base', 'collection', 'substitute', 'swfupload']
+		requires: ['aui-base', 'aui-swf', 'collection', 'substitute', 'swfupload']
 	}
 );

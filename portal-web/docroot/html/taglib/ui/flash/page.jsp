@@ -42,21 +42,30 @@ String wmode = (String)request.getAttribute("liferay-ui:flash:wmode");
 
 <div id="<%= randomNamespace %>flashcontent" style="height: <%= height %>; width: <%= width %>;"></div>
 
-<aui:script>
-	var <%= randomNamespace %>swfObj = new SWFObject("<%= movie %>", "<%= id %>", "<%= width %>", "<%= height %>", "<%= version %>", "<%= bgcolor %>");
-
-	<%= randomNamespace %>swfObj.addParam("allowScriptAccess", "<%= allowScriptAccess %>");
-	<%= randomNamespace %>swfObj.addParam("base", "<%= base %>");
-	<%= randomNamespace %>swfObj.addParam("devicefont", "<%= devicefont %>");
-	<%= randomNamespace %>swfObj.addParam("flashvars", "<%= flashvars %>");
-	<%= randomNamespace %>swfObj.addParam("loop", "<%= loop %>");
-	<%= randomNamespace %>swfObj.addParam("menu", "<%= menu %>");
-	<%= randomNamespace %>swfObj.addParam("play", "<%= play %>");
-	<%= randomNamespace %>swfObj.addParam("quality", "<%= quality %>");
-	<%= randomNamespace %>swfObj.addParam("salign", "<%= salign %>");
-	<%= randomNamespace %>swfObj.addParam("scale", "<%= scale %>");
-	<%= randomNamespace %>swfObj.addParam("swliveconnect", "<%= swliveconnect %>");
-	<%= randomNamespace %>swfObj.addParam("wmode", "<%= wmode %>");
-
-	<%= randomNamespace %>swfObj.write("<%= randomNamespace %>flashcontent");
+<aui:script use="aui-swf">
+	new A.SWF(
+		{
+			boundingBox: '#<%= randomNamespace %>flashcontent',
+			fixedAttributes: {
+				allowScriptAccess: '<%= allowScriptAccess %>',
+				base: '<%= base %>',
+				bgcolor: '<%= bgcolor %>',
+				devicefont: '<%= devicefont %>',
+				flashvars: '<%= flashvars %>',
+				loop: '<%= loop %>',
+				menu: '<%= menu %>',
+				play: '<%= play %>',
+				quality: '<%= quality %>',
+				salign: '<%= salign %>',
+				scale: '<%= scale %>',
+				swliveconnect: '<%= swliveconnect %>',
+				wmode: '<%= wmode %>'
+			},
+			height: '<%= height %>',
+			id: '<%= id %>',
+			url: '<%= movie %>',
+			version: '<%= version %>',
+			width: '<%= width %>'
+		}
+	).render();
 </aui:script>
