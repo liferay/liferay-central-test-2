@@ -945,9 +945,7 @@ public class DLFileEntryLocalServiceImpl
 				size = fileVersion.getSize();
 			}
 
-			if (serviceContext.getWorkflowAction() ==
-					WorkflowConstants.ACTION_SAVE_DRAFT) {
-
+			if (fileVersion.getStatus() != WorkflowConstants.STATUS_APPROVED) {
 				updateFileVersion(
 					user, fileVersion, serviceContext.getModifiedDate(now),
 					version, versionDescription, size, fileVersion.getStatus());
