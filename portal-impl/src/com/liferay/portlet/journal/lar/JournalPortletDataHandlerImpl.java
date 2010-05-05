@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.MapUtil;
@@ -38,8 +39,10 @@ import com.liferay.portal.lar.PortletDataException;
 import com.liferay.portal.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.lar.PortletDataHandlerControl;
 import com.liferay.portal.lar.PortletDataHandlerKeys;
+import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.model.User;
+import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.persistence.ImageUtil;
@@ -108,6 +111,7 @@ import javax.portlet.PortletPreferences;
  * @author Brian Wing Shun Chan
  * @author Bruno Farache
  * @author Karthik Sudarshan
+ * @author Wesley Gong
  * @see	   com.liferay.portal.lar.PortletDataHandler
  * @see	   com.liferay.portlet.journal.lar.JournalContentPortletDataHandlerImpl
  * @see	   com.liferay.portlet.journal.lar.JournalCreationStrategy
@@ -216,6 +220,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 				article.getGroupId(), content);
 			content = exportIGImages(context, igFoldersEl, igImagesEl,
 				article.getGroupId(), content);
+			content = exportLayoutFriendlyURLs(article.getGroupId(), content);
 
 			article.setContent(content);
 		}
@@ -523,6 +528,135 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		return sb.toString();
 	}
 
+	public static String exportLayoutFriendlyURLs(
+		long entityGroupId, String content) {
+
+		Group group = null;
+
+		try {
+			group = GroupLocalServiceUtil.getGroup(entityGroupId);
+		}
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(e);
+			}
+
+			return content;
+		}
+
+		StringBuilder sb = new StringBuilder(content);
+
+		String friendlyURLPrivateGroupPath =
+			PropsValues.LAYOUT_FRIENDLY_URL_PRIVATE_GROUP_SERVLET_MAPPING;
+		String friendlyURLPrivateUserPath =
+			PropsValues.LAYOUT_FRIENDLY_URL_PRIVATE_USER_SERVLET_MAPPING;
+		String friendlyURLPublicPath =
+			PropsValues.LAYOUT_FRIENDLY_URL_PUBLIC_SERVLET_MAPPING;
+
+		String href = "href=";
+
+		int beginPos = content.length();
+
+		while (true) {
+			int hrefLength = href.length();
+
+			beginPos = content.lastIndexOf(href, beginPos);
+
+			if (beginPos == -1) {
+				break;
+			}
+
+			char c = content.charAt(beginPos + hrefLength);
+
+			if ((c == CharPool.APOSTROPHE) || (c == CharPool.QUOTE)) {
+				hrefLength++;
+			}
+
+			int endPos1 = content.indexOf(
+				StringPool.APOSTROPHE, beginPos + hrefLength);
+			int endPos2 = content.indexOf(
+				StringPool.CLOSE_BRACKET, beginPos + hrefLength);
+			int endPos3 = content.indexOf(
+				StringPool.CLOSE_PARENTHESIS, beginPos + hrefLength);
+			int endPos4 = content.indexOf(
+				StringPool.LESS_THAN, beginPos + hrefLength);
+			int endPos5 = content.indexOf(
+				StringPool.QUOTE, beginPos + hrefLength);
+			int endPos6 = content.indexOf(
+				StringPool.SPACE, beginPos + hrefLength);
+
+			int endPos = endPos1;
+
+			if ((endPos == -1) || ((endPos2 != -1) && (endPos2 < endPos))) {
+				endPos = endPos2;
+			}
+
+			if ((endPos == -1) || ((endPos3 != -1) && (endPos3 < endPos))) {
+				endPos = endPos3;
+			}
+
+			if ((endPos == -1) || ((endPos4 != -1) && (endPos4 < endPos))) {
+				endPos = endPos4;
+			}
+
+			if ((endPos == -1) || ((endPos5 != -1) && (endPos5 < endPos))) {
+				endPos = endPos5;
+			}
+
+			if ((endPos == -1) || ((endPos6 != -1) && (endPos6 < endPos))) {
+				endPos = endPos6;
+			}
+
+			if (endPos == -1) {
+				beginPos--;
+
+				continue;
+			}
+
+			String url = content.substring(beginPos + hrefLength, endPos);
+
+			if (!url.startsWith(friendlyURLPrivateGroupPath) &&
+				!url.startsWith(friendlyURLPrivateUserPath) &&
+				!url.startsWith(friendlyURLPublicPath)) {
+
+				beginPos--;
+
+				continue;
+			}
+
+			int beginGroupPos =
+				content.indexOf(StringPool.SLASH, beginPos + hrefLength + 1);
+
+			if (beginGroupPos == -1) {
+				beginPos--;
+
+				continue;
+			}
+
+			int endGroupPos =
+				content.indexOf(StringPool.SLASH, beginGroupPos + 1);
+
+			if (endGroupPos == -1) {
+				beginPos--;
+
+				continue;
+			}
+
+			String groupFriendlyURL =
+				content.substring(beginGroupPos, endGroupPos);
+
+			if (groupFriendlyURL.equals(group.getFriendlyURL())) {
+				sb.replace(
+					beginGroupPos, endGroupPos,
+					"@data_handler_group_friendly_url@");
+			}
+
+			beginPos--;
+		}
+
+		return sb.toString();
+	}
+
 	public static void exportStructure(
 			PortletDataContext context, Element structuresEl,
 			JournalStructure structure)
@@ -597,6 +731,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 			content = exportIGImages(
 				context, igFoldersEl, igImagesEl, template.getGroupId(),
 				content);
+			content = exportLayoutFriendlyURLs(template.getGroupId(), content);
 
 			content = StringUtil.replace(
 				content, StringPool.AMPERSAND_ENCODED, StringPool.AMPERSAND);
@@ -656,9 +791,18 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		String content = article.getContent();
 
-		article.setContent(
+		content =
 			StringUtil.replace(
-				content, "@data_handler_group_id@", String.valueOf(groupId)));
+				content, "@data_handler_group_id@", String.valueOf(groupId));
+
+		Group group = GroupLocalServiceUtil.getGroup(groupId);
+
+		content =
+			StringUtil.replace(
+				content, "@data_handler_group_friendly_url@",
+				group.getFriendlyURL());
+
+		article.setContent(content);
 
 		String parentStructureId = MapUtil.getString(
 			structureIds, article.getStructureId(), article.getStructureId());
