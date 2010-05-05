@@ -17,8 +17,10 @@ package com.liferay.portlet.calendar.service.impl;
 import com.liferay.portal.kernel.cal.TZSRecurrence;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portlet.calendar.model.CalEvent;
 import com.liferay.portlet.calendar.service.base.CalEventServiceBaseImpl;
 import com.liferay.portlet.calendar.service.permission.CalEventPermission;
@@ -80,8 +82,18 @@ public class CalEventServiceImpl extends CalEventServiceBaseImpl {
 		CalendarPermission.check(
 			getPermissionChecker(), groupId, ActionKeys.EXPORT_ALL_EVENTS);
 
+		long userId = 0;
+
+		try {
+			userId = getUserId();
+		}
+		catch (Exception e) {
+			userId = UserLocalServiceUtil.getDefaultUserId(
+				CompanyThreadLocal.getCompanyId());
+		}
+
 		return calEventLocalService.exportGroupEvents(
-			getUserId(), groupId, fileName);
+			userId, groupId, fileName);
 	}
 
 	public CalEvent getEvent(long eventId)
