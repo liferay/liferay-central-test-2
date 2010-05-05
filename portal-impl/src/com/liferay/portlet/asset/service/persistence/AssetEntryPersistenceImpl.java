@@ -358,6 +358,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 		assetEntryImpl.setWidth(assetEntry.getWidth());
 		assetEntryImpl.setPriority(assetEntry.getPriority());
 		assetEntryImpl.setViewCount(assetEntry.getViewCount());
+		assetEntryImpl.setSocialInformationEquity(assetEntry.getSocialInformationEquity());
 
 		return assetEntryImpl;
 	}

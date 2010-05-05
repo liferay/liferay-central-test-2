@@ -155,6 +155,10 @@ public interface AssetEntryModel extends BaseModel<AssetEntry> {
 
 	public void setViewCount(int viewCount);
 
+	public double getSocialInformationEquity();
+
+	public void setSocialInformationEquity(double socialInformationEquity);
+
 	public AssetEntry toEscapedModel();
 
 	public boolean isNew();

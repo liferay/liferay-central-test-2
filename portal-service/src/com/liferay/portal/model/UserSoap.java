@@ -77,6 +77,9 @@ public class UserSoap implements Serializable {
 		soapModel.setLockoutDate(model.getLockoutDate());
 		soapModel.setAgreedToTermsOfUse(model.getAgreedToTermsOfUse());
 		soapModel.setActive(model.getActive());
+		soapModel.setSocialContributionEquity(model.getSocialContributionEquity());
+		soapModel.setSocialParticipationEquity(model.getSocialParticipationEquity());
+		soapModel.setSocialPersonalEquity(model.getSocialPersonalEquity());
 
 		return soapModel;
 	}
@@ -441,6 +444,30 @@ public class UserSoap implements Serializable {
 		_active = active;
 	}
 
+	public double getSocialContributionEquity() {
+		return _socialContributionEquity;
+	}
+
+	public void setSocialContributionEquity(double socialContributionEquity) {
+		_socialContributionEquity = socialContributionEquity;
+	}
+
+	public double getSocialParticipationEquity() {
+		return _socialParticipationEquity;
+	}
+
+	public void setSocialParticipationEquity(double socialParticipationEquity) {
+		_socialParticipationEquity = socialParticipationEquity;
+	}
+
+	public double getSocialPersonalEquity() {
+		return _socialPersonalEquity;
+	}
+
+	public void setSocialPersonalEquity(double socialPersonalEquity) {
+		_socialPersonalEquity = socialPersonalEquity;
+	}
+
 	private String _uuid;
 	private long _userId;
 	private long _companyId;
@@ -477,4 +504,7 @@ public class UserSoap implements Serializable {
 	private Date _lockoutDate;
 	private boolean _agreedToTermsOfUse;
 	private boolean _active;
+	private double _socialContributionEquity;
+	private double _socialParticipationEquity;
+	private double _socialPersonalEquity;
 }

@@ -799,6 +799,9 @@
 			<basic name="active">
 				<column name="ACTIVE_" />
 			</basic>
+			<basic name="socialContributionEquity" />
+			<basic name="socialParticipationEquity" />
+			<basic name="socialPersonalEquity" />
 			<transient name="primaryKey" />
 			<transient name="userUuid" />
 		</attributes>
@@ -1101,6 +1104,7 @@
 			<basic name="width" />
 			<basic name="priority" />
 			<basic name="viewCount" />
+			<basic name="socialInformationEquity" />
 			<transient name="primaryKey" />
 			<transient name="userUuid" />
 		</attributes>

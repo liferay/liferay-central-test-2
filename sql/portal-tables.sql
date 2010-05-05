@@ -140,7 +140,8 @@ create table AssetEntry (
 	height INTEGER,
 	width INTEGER,
 	priority DOUBLE,
-	viewCount INTEGER
+	viewCount INTEGER,
+	socialInformationEquity DOUBLE
 );
 
 create table AssetLink (
@@ -1656,7 +1657,10 @@ create table User_ (
 	lockout BOOLEAN,
 	lockoutDate DATE null,
 	agreedToTermsOfUse BOOLEAN,
-	active_ BOOLEAN
+	active_ BOOLEAN,
+	socialContributionEquity DOUBLE,
+	socialParticipationEquity DOUBLE,
+	socialPersonalEquity DOUBLE
 );
 
 create table UserGroup (

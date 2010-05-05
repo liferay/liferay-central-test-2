@@ -365,6 +365,30 @@ public class UserWrapper implements User {
 		_user.setActive(active);
 	}
 
+	public double getSocialContributionEquity() {
+		return _user.getSocialContributionEquity();
+	}
+
+	public void setSocialContributionEquity(double socialContributionEquity) {
+		_user.setSocialContributionEquity(socialContributionEquity);
+	}
+
+	public double getSocialParticipationEquity() {
+		return _user.getSocialParticipationEquity();
+	}
+
+	public void setSocialParticipationEquity(double socialParticipationEquity) {
+		_user.setSocialParticipationEquity(socialParticipationEquity);
+	}
+
+	public double getSocialPersonalEquity() {
+		return _user.getSocialPersonalEquity();
+	}
+
+	public void setSocialPersonalEquity(double socialPersonalEquity) {
+		_user.setSocialPersonalEquity(socialPersonalEquity);
+	}
+
 	public com.liferay.portal.model.User toEscapedModel() {
 		return _user.toEscapedModel();
 	}

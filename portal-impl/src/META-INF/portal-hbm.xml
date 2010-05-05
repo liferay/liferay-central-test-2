@@ -763,6 +763,9 @@
 		<property name="lockoutDate" type="org.hibernate.type.TimestampType" />
 		<property name="agreedToTermsOfUse" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 		<property name="active" column="active_" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="socialContributionEquity" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="socialParticipationEquity" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="socialPersonalEquity" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
 	</class>
 	<class name="com.liferay.portal.model.impl.UserGroupImpl" table="UserGroup">
 		<cache usage="read-write" />
@@ -984,6 +987,7 @@
 		<property name="width" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="priority" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
 		<property name="viewCount" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="socialInformationEquity" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
 	</class>
 	<class name="com.liferay.portlet.asset.model.impl.AssetLinkImpl" table="AssetLink">
 		<cache usage="read-write" />
