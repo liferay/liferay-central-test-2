@@ -25,6 +25,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class Guest_AssertCannotViewFolderTest extends BaseTestCase {
 	public void testGuest_AssertCannotViewFolder() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -45,7 +47,7 @@ public class Guest_AssertCannotViewFolderTest extends BaseTestCase {
 		selenium.clickAt("link=Image Gallery Permissions Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//b", RuntimeVariables.replace(""));
+		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"You do not have the required permissions."));

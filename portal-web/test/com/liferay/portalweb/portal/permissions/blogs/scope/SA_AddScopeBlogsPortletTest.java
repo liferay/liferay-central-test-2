@@ -44,7 +44,8 @@ public class SA_AddScopeBlogsPortletTest extends BaseTestCase {
 		selenium.clickAt("link=Blogs Scope Permissions Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=Application", RuntimeVariables.replace(""));
+		selenium.clickAt("_145_addApplication", RuntimeVariables.replace(""));
+		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -52,8 +53,7 @@ public class SA_AddScopeBlogsPortletTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"//div[@id='Collaboration-Blogs']/p/a")) {
+				if (selenium.isVisible("layout_configuration_content")) {
 					break;
 				}
 			}
@@ -63,7 +63,26 @@ public class SA_AddScopeBlogsPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//div[@id='Collaboration-Blogs']/p/a",
+		selenium.type("layout_configuration_content",
+			RuntimeVariables.replace("b"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//div[@title='Blogs']/p/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("//div[@title='Blogs']/p/a",
 			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -72,7 +91,7 @@ public class SA_AddScopeBlogsPortletTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//td[1]/div/div[1]/div")) {
+				if (selenium.isElementPresent("//section")) {
 					break;
 				}
 			}
@@ -82,6 +101,6 @@ public class SA_AddScopeBlogsPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertTrue(selenium.isElementPresent("//td[1]/div/div[1]/div"));
+		assertTrue(selenium.isElementPresent("//section"));
 	}
 }

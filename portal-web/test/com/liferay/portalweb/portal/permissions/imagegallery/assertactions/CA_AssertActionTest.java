@@ -24,6 +24,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class CA_AssertActionTest extends BaseTestCase {
 	public void testCA_AssertAction() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -48,14 +50,31 @@ public class CA_AssertActionTest extends BaseTestCase {
 		assertTrue(selenium.isElementPresent("link=Look and Feel"));
 		assertTrue(selenium.isElementPresent("link=Export / Import"));
 		assertTrue(selenium.isElementPresent("//img[@alt='Remove']"));
-		assertTrue(selenium.isElementPresent("//input[@value='Add Subfolder']"));
+		assertEquals(RuntimeVariables.replace("Add Folder"),
+			selenium.getText("//div[2]/div/span/a/span"));
 		selenium.clickAt("//td[4]/ul/li/strong", RuntimeVariables.replace(""));
-		assertTrue(selenium.isElementPresent("//div[5]/ul/li[1]/a"));
-		assertTrue(selenium.isElementPresent("//div[5]/ul/li[2]/a"));
-		assertTrue(selenium.isElementPresent("//div[5]/ul/li[3]/a"));
-		selenium.clickAt("//b", RuntimeVariables.replace(""));
+		assertEquals(RuntimeVariables.replace("Edit"),
+			selenium.getText(
+				"//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a"));
+		assertEquals(RuntimeVariables.replace("Permissions"),
+			selenium.getText(
+				"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a"));
+		assertEquals(RuntimeVariables.replace("Delete"),
+			selenium.getText(
+				"//div[@class='lfr-component lfr-menu-list']/ul/li[3]/a"));
+		assertEquals(RuntimeVariables.replace("Add Subfolder"),
+			selenium.getText(
+				"//div[@class='lfr-component lfr-menu-list']/ul/li[4]/a"));
+		assertEquals(RuntimeVariables.replace("Add Image"),
+			selenium.getText(
+				"//div[@class='lfr-component lfr-menu-list']/ul/li[5]/a"));
+		assertEquals(RuntimeVariables.replace("Access from Desktop"),
+			selenium.getText(
+				"//div[@class='lfr-component lfr-menu-list']/ul/li[6]/a"));
+		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("//input[@value='Add Subfolder']"));
+		assertEquals(RuntimeVariables.replace("Add Subfolder"),
+			selenium.getText("//div[2]/ul/li[3]/a"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -86,7 +105,7 @@ public class CA_AssertActionTest extends BaseTestCase {
 		selenium.clickAt("link=Image Gallery Permissions Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//strong/span", RuntimeVariables.replace(""));
+		selenium.clickAt("//strong/a", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

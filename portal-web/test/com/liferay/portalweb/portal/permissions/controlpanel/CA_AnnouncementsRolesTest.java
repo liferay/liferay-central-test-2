@@ -26,7 +26,7 @@ public class CA_AnnouncementsRolesTest extends BaseTestCase {
 	public void testCA_AnnouncementsRoles() throws Exception {
 		selenium.clickAt("link=Define Permissions", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.select("add-permissions",
+		selenium.select("_128_add-permissions",
 			RuntimeVariables.replace("label=Announcements"));
 		selenium.waitForPageToLoad("30000");
 		selenium.check("_128_rowIds");
@@ -37,8 +37,10 @@ public class CA_AnnouncementsRolesTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("The role permissions were updated."));
-		selenium.typeKeys("add-permissions", RuntimeVariables.replace("aaaaa"));
-		selenium.keyPress("add-permissions", RuntimeVariables.replace("\\13"));
+		selenium.typeKeys("_128_add-permissions",
+			RuntimeVariables.replace("aaaaa"));
+		selenium.keyPress("_128_add-permissions",
+			RuntimeVariables.replace("\\13"));
 		selenium.waitForPageToLoad("30000");
 		selenium.check("_128_rowIds");
 		selenium.check(

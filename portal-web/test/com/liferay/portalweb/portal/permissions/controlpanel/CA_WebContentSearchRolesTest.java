@@ -27,7 +27,7 @@ public class CA_WebContentSearchRolesTest extends BaseTestCase {
 	public void testCA_WebContentSearchRoles() throws Exception {
 		selenium.clickAt("link=Define Permissions", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.select("add-permissions",
+		selenium.select("_128_add-permissions",
 			RuntimeVariables.replace("label=Web Content Search"));
 		selenium.waitForPageToLoad("30000");
 		selenium.check("_128_rowIds");

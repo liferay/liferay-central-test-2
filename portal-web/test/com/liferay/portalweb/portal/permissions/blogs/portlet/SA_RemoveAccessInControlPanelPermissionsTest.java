@@ -56,7 +56,7 @@ public class SA_RemoveAccessInControlPanelPermissionsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("//input[@value='Submit']")) {
+				if (selenium.isVisible("//input[@value='Save']")) {
 					break;
 				}
 			}
@@ -67,11 +67,11 @@ public class SA_RemoveAccessInControlPanelPermissionsTest extends BaseTestCase {
 		}
 
 		selenium.uncheck("//tr[7]/td[2]/input");
-		selenium.clickAt("//input[@value='Submit']",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+		assertEquals(RuntimeVariables.replace(
+				"Your request processed successfully."),
+			selenium.getText("//div[@id='p_p_id_86_']/div/div[1]"));
 		assertFalse(selenium.isChecked("//tr[7]/td[2]/input"));
 	}
 }

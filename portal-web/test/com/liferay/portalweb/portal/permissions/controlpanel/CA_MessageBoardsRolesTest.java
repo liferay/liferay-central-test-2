@@ -26,7 +26,7 @@ public class CA_MessageBoardsRolesTest extends BaseTestCase {
 	public void testCA_MessageBoardsRoles() throws Exception {
 		selenium.clickAt("link=Define Permissions", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.select("add-permissions",
+		selenium.select("_128_add-permissions",
 			RuntimeVariables.replace("label=Message Boards"));
 		selenium.waitForPageToLoad("30000");
 		selenium.check("_128_rowIds");

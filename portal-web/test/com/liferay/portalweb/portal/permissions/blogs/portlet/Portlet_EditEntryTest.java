@@ -46,23 +46,6 @@ public class Portlet_EditEntryTest extends BaseTestCase {
 		selenium.clickAt("link=Portlet1 Temporary1 Entry1",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//div[3]/ul/li[3]/span/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		assertEquals(RuntimeVariables.replace("Portlet1 Temporary1 Entry1"),
 			selenium.getText("//form/div/div[1]/div[1]"));
 		assertEquals(RuntimeVariables.replace(
@@ -96,7 +79,7 @@ public class Portlet_EditEntryTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("FCKeditor1___Frame")) {
+				if (selenium.isElementPresent("cke_contents_CKEditor1")) {
 					break;
 				}
 			}
@@ -122,9 +105,8 @@ public class Portlet_EditEntryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.selectFrame("//iframe[@id=\"_33_editor\"]");
-		selenium.selectFrame("//iframe[@id=\"FCKeditor1___Frame\"]");
-		selenium.selectFrame("//iframe");
+		selenium.selectFrame("//iframe[@id='_33_editor']");
+		selenium.selectFrame("//td[@id='cke_contents_CKEditor1']/iframe");
 		selenium.type("//body",
 			RuntimeVariables.replace(
 				"This is an edited temporary portlet permissions entry!"));

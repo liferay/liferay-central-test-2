@@ -26,6 +26,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class Portlet_AssertEditFolderPermissionsTest extends BaseTestCase {
 	public void testPortlet_AssertEditFolderPermissions()
 		throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -47,13 +49,32 @@ public class Portlet_AssertEditFolderPermissionsTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Permissions"));
-		selenium.clickAt("link=Permissions", RuntimeVariables.replace(""));
+		selenium.clickAt("//strong/a", RuntimeVariables.replace(""));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent(
+							"//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace(
+				"//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isPartialText("//form/div[1]",
 				"Edit Permissions for Image Gallery Folder:"));
-		assertTrue(selenium.isElementPresent("//input[@value='Submit']"));
-		selenium.clickAt("//input[@value='Submit']",
-			RuntimeVariables.replace(""));
+		assertTrue(selenium.isElementPresent("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

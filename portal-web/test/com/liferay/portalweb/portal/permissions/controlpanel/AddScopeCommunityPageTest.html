@@ -35,7 +35,7 @@
 </tr>
 <tr>
 	<td>clickAt</td>
-	<td>//strong</td>
+	<td>//strong/a</td>
 	<td></td>
 </tr>
 <tr>
@@ -69,8 +69,38 @@
 	<td></td>
 </tr>
 <tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>eval(selenium.isElementPresent('//li/ul/li/div/div[3]/a'))</td>
+	<td>pageVisible</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>${pageVisible}</td>
+	<td>PageVisible</td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>//li/div/div[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>PageVisible</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>//li/ul/li/div/div[3]/a</td>
+	<td>Scope Test Page</td>
+</tr>
+<tr>
 	<td>assertText</td>
-	<td>//div[@id='_134_layoutsTreeOutput']/ul/li[2]/ul/li/a/span</td>
+	<td>//li/ul/li/div/div[3]/a</td>
 	<td>Scope Test Page</td>
 </tr>
 

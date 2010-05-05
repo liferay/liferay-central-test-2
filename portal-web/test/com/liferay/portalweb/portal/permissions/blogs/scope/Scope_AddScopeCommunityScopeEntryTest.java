@@ -26,14 +26,15 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class Scope_AddScopeCommunityScopeEntryTest extends BaseTestCase {
 	public void testScope_AddScopeCommunityScopeEntry()
 		throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"//div[@id='_145_myPlacesContainer']/ul/li[3]/a/span")) {
+				if (selenium.isElementPresent("//li[3]/a/span")) {
 					break;
 				}
 			}
@@ -43,26 +44,8 @@ public class Scope_AddScopeCommunityScopeEntryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//div[@id='_145_myPlacesContainer']/ul/li[3]/a/span",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("//li[3]/a/span", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//div[3]/ul/li[3]/span/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.clickAt("link=Blogs Scope Permissions Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
@@ -114,7 +97,7 @@ public class Scope_AddScopeCommunityScopeEntryTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("FCKeditor1___Frame")) {
+				if (selenium.isElementPresent("cke_contents_CKEditor1")) {
 					break;
 				}
 			}
@@ -140,9 +123,8 @@ public class Scope_AddScopeCommunityScopeEntryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.selectFrame("//iframe[@id=\"_33_editor\"]");
-		selenium.selectFrame("//iframe[@id=\"FCKeditor1___Frame\"]");
-		selenium.selectFrame("//iframe");
+		selenium.selectFrame("//iframe[@id='_33_editor']");
+		selenium.selectFrame("//td[@id='cke_contents_CKEditor1']/iframe");
 		selenium.type("//body",
 			RuntimeVariables.replace(
 				"This is a scope community scope permissions blogs entry"));

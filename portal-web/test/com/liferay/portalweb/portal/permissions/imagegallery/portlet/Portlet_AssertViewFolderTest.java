@@ -48,28 +48,9 @@ public class Portlet_AssertViewFolderTest extends BaseTestCase {
 		selenium.clickAt("link=Portlet2 Temporary2 Folder2",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//li[4]/span/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		assertFalse(selenium.isTextPresent(
 				"You do not have the required permissions."));
-		assertEquals(RuntimeVariables.replace("Image Home"),
-			selenium.getText("//div[3]/ul/li[3]/span/a"));
 		assertEquals(RuntimeVariables.replace("Portlet2 Temporary2 Folder2"),
-			selenium.getText("//li[4]/span/a"));
+			selenium.getText("//div/h3"));
 	}
 }

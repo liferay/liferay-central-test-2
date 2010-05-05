@@ -25,6 +25,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class Guest_AssertCannotAddImageTest extends BaseTestCase {
 	public void testGuest_AssertCannotAddImage() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -45,25 +47,8 @@ public class Guest_AssertCannotAddImageTest extends BaseTestCase {
 		selenium.clickAt("link=Image Gallery Permissions Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//b", RuntimeVariables.replace(""));
+		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//li[4]/span/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		assertFalse(selenium.isElementPresent("//input[@value='Add Image']"));
+		assertFalse(selenium.isTextPresent("Add Image"));
 	}
 }

@@ -25,6 +25,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class Guest_AssertCannotEditFolderTest extends BaseTestCase {
 	public void testGuest_AssertCannotEditFolder() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -45,7 +47,7 @@ public class Guest_AssertCannotEditFolderTest extends BaseTestCase {
 		selenium.clickAt("link=Image Gallery Permissions Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertFalse(selenium.isElementPresent("//tr[4]/td[4]/ul/li/strong/span"));
+		assertFalse(selenium.isElementPresent("//tr[4]/td[4]/ul/li/strong/a"));
 		assertFalse(selenium.isElementPresent("link=Edit"));
 		assertFalse(selenium.isElementPresent("link=Permissions"));
 		assertFalse(selenium.isElementPresent("link=Delete"));

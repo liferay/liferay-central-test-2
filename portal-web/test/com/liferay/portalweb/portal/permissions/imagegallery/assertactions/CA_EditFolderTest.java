@@ -24,6 +24,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class CA_EditFolderTest extends BaseTestCase {
 	public void testCA_EditFolder() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -44,24 +46,7 @@ public class CA_EditFolderTest extends BaseTestCase {
 		selenium.clickAt("link=Image Gallery Permissions Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible("//tr[4]/td[4]/ul/li/strong/span")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("//tr[4]/td[4]/ul/li/strong/span",
+		selenium.clickAt("//tr[4]/td[4]/ul/li/strong/a",
 			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -70,7 +55,8 @@ public class CA_EditFolderTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//div[5]/ul/li[1]/a")) {
+				if (selenium.isElementPresent(
+							"//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a")) {
 					break;
 				}
 			}
@@ -80,27 +66,9 @@ public class CA_EditFolderTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//div[5]/ul/li[1]/a", RuntimeVariables.replace(""));
+		selenium.click(RuntimeVariables.replace(
+				"//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//li[4]/span/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.typeKeys("_31_name",
-			RuntimeVariables.replace("Edited Image Permissions Folder 2"));
 		selenium.type("_31_name",
 			RuntimeVariables.replace("Edited Image Permissions Folder 2"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));

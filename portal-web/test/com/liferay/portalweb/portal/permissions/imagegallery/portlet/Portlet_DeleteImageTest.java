@@ -24,6 +24,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class Portlet_DeleteImageTest extends BaseTestCase {
 	public void testPortlet_DeleteImage() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -47,6 +49,7 @@ public class Portlet_DeleteImageTest extends BaseTestCase {
 		selenium.clickAt("link=Portlet2 Temporary2 Folder2",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("//div[2]/a/img", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -54,7 +57,7 @@ public class Portlet_DeleteImageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//li[4]/span/a")) {
+				if (selenium.isElementPresent("//a[3]")) {
 					break;
 				}
 			}
@@ -64,36 +67,16 @@ public class Portlet_DeleteImageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertTrue(selenium.isPartialText("//form[2]/div[3]/div/div[1]",
-				"Portlet2 Temporary2 Image2"));
-		selenium.clickAt("//div/a/img", RuntimeVariables.replace(""));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Close")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		assertTrue(selenium.isElementPresent("link=Delete"));
-		selenium.click(RuntimeVariables.replace("link=Delete"));
+		assertTrue(selenium.isElementPresent("//img[@alt='Delete']"));
+		selenium.click(RuntimeVariables.replace("//img[@alt='Delete']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 		assertFalse(selenium.isElementPresent(
-				"//img[@alt='Edited2 Portlet2 Temporary2 Image2. ']"));
+				"//img[@alt='Edited2 Portlet2 Temporary2 Image2 - ']"));
 		assertFalse(selenium.isElementPresent(
-				"//img[@alt='Portlet2 Temporary2 Image2. ']"));
+				"//img[@alt='Portlet2 Temporary2 Image2 - ']"));
 	}
 }

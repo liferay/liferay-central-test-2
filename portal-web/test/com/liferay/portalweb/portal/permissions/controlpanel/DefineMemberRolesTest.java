@@ -49,7 +49,7 @@ public class DefineMemberRolesTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("//tr[9]/td[4]/ul/li/strong/span")) {
+				if (selenium.isVisible("//tr[9]/td[4]/ul/li/strong/a")) {
 					break;
 				}
 			}
@@ -59,7 +59,7 @@ public class DefineMemberRolesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//tr[9]/td[4]/ul/li/strong/span",
+		selenium.clickAt("//tr[9]/td[4]/ul/li/strong/a",
 			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -68,7 +68,8 @@ public class DefineMemberRolesTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//div[4]/ul/li[3]/a")) {
+				if (selenium.isElementPresent(
+							"//div[@class='lfr-component lfr-menu-list']/ul/li[3]/a")) {
 					break;
 				}
 			}
@@ -78,11 +79,11 @@ public class DefineMemberRolesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//div[4]/ul/li[3]/a", RuntimeVariables.replace(""));
+		selenium.click(RuntimeVariables.replace(
+				"//div[@class='lfr-component lfr-menu-list']/ul/li[3]/a"));
 		selenium.waitForPageToLoad("30000");
-		assertEquals(RuntimeVariables.replace("Add Permissions"),
-			selenium.getText("//label"));
 		assertEquals(RuntimeVariables.replace("Member"),
-			selenium.getText("//strong"));
+			selenium.getText("//h3[1]"));
+		assertTrue(selenium.isPartialText("//label", "Add Permissions"));
 	}
 }

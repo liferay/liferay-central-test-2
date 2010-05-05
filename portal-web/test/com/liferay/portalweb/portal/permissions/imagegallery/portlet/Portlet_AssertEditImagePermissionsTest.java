@@ -26,6 +26,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class Portlet_AssertEditImagePermissionsTest extends BaseTestCase {
 	public void testPortlet_AssertEditImagePermissions()
 		throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -49,24 +51,7 @@ public class Portlet_AssertEditImagePermissionsTest extends BaseTestCase {
 		selenium.clickAt("link=Portlet2 Temporary2 Folder2",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//li[4]/span/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("//img[@alt='Portlet2 Temporary2 Image2. ']",
+		selenium.clickAt("//img[@alt='Portlet2 Temporary2 Image2 - ']",
 			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -75,7 +60,7 @@ public class Portlet_AssertEditImagePermissionsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Close")) {
+				if (selenium.isElementPresent("//a[3]")) {
 					break;
 				}
 			}
@@ -85,14 +70,14 @@ public class Portlet_AssertEditImagePermissionsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertTrue(selenium.isElementPresent("link=Permissions"));
-		selenium.clickAt("link=Permissions", RuntimeVariables.replace(""));
+		assertTrue(selenium.isElementPresent("//img[@alt='Permissions']"));
+		selenium.clickAt("//img[@alt='Permissions']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isPartialText("//form/div[1]",
 				"Edit Permissions for Image Gallery Image:"));
-		assertTrue(selenium.isElementPresent("//input[@value='Submit']"));
-		selenium.clickAt("//input[@value='Submit']",
-			RuntimeVariables.replace(""));
+		assertTrue(selenium.isElementPresent("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

@@ -25,6 +25,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class Member_AssertCannotAddFolderTest extends BaseTestCase {
 	public void testMember_AssertCannotAddFolder() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -45,6 +47,6 @@ public class Member_AssertCannotAddFolderTest extends BaseTestCase {
 		selenium.clickAt("link=Image Gallery Permissions Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertFalse(selenium.isElementPresent("//input[@value='Add Subfolder']"));
+		assertFalse(selenium.isTextPresent("Add Folder"));
 	}
 }

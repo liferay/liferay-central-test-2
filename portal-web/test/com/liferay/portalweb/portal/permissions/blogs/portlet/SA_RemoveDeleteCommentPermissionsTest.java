@@ -48,23 +48,6 @@ public class SA_RemoveDeleteCommentPermissionsTest extends BaseTestCase {
 		selenium.clickAt("link=Portlet1 Temporary1 Entry1",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//div[3]/ul/li[3]/span/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.clickAt("link=Permissions", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
@@ -74,7 +57,7 @@ public class SA_RemoveDeleteCommentPermissionsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("//input[@value='Submit']")) {
+				if (selenium.isVisible("//input[@value='Save']")) {
 					break;
 				}
 			}
@@ -85,8 +68,7 @@ public class SA_RemoveDeleteCommentPermissionsTest extends BaseTestCase {
 		}
 
 		selenium.uncheck("//tr[7]/td[4]/input");
-		selenium.clickAt("//input[@value='Submit']",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

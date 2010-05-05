@@ -27,7 +27,7 @@ public class Publisher_WebContentRolesTest extends BaseTestCase {
 	public void testPublisher_WebContentRoles() throws Exception {
 		selenium.clickAt("link=Define Permissions", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.select("add-permissions",
+		selenium.select("_128_add-permissions",
 			RuntimeVariables.replace("label=Web Content"));
 		selenium.waitForPageToLoad("30000");
 		selenium.uncheck("_128_rowIds");
@@ -80,8 +80,10 @@ public class Publisher_WebContentRolesTest extends BaseTestCase {
 		assertTrue(selenium.isTextPresent("The role permissions were updated."));
 		selenium.clickAt("link=Define Permissions", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("add-permissions", RuntimeVariables.replace("www"));
-		selenium.keyPress("add-permissions", RuntimeVariables.replace("\\13"));
+		selenium.typeKeys("_128_add-permissions",
+			RuntimeVariables.replace("www"));
+		selenium.keyPress("_128_add-permissions",
+			RuntimeVariables.replace("\\13"));
 		selenium.waitForPageToLoad("30000");
 		selenium.check("_128_rowIds");
 		selenium.uncheck(

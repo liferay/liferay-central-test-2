@@ -73,7 +73,8 @@ public class AssignScopeMemberToScopeCommunityTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Assign Members")) {
+				if (selenium.isElementPresent(
+							"//div[@class='lfr-component lfr-menu-list']/ul/li[5]/a")) {
 					break;
 				}
 			}
@@ -83,7 +84,8 @@ public class AssignScopeMemberToScopeCommunityTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("link=Assign Members", RuntimeVariables.replace(""));
+		selenium.click(RuntimeVariables.replace(
+				"//div[@class='lfr-component lfr-menu-list']/ul/li[5]/a"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

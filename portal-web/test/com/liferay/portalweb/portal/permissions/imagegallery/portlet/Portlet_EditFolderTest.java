@@ -24,6 +24,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class Portlet_EditFolderTest extends BaseTestCase {
 	public void testPortlet_EditFolder() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -45,9 +47,28 @@ public class Portlet_EditFolderTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Portlet2 Temporary2 Folder2"),
-			selenium.getText("//b"));
-		assertTrue(selenium.isElementPresent("link=Edit"));
-		selenium.clickAt("link=Edit", RuntimeVariables.replace(""));
+			selenium.getText("//a/strong"));
+		selenium.clickAt("//strong/a", RuntimeVariables.replace(""));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent(
+							"//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace(
+				"//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a"));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_31_name",
 			RuntimeVariables.replace("Edited2 Portlet2 Temporary2 Folder2"));
@@ -56,8 +77,9 @@ public class Portlet_EditFolderTest extends BaseTestCase {
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 		assertNotEquals(RuntimeVariables.replace("Portlet2 Temporary2 Folder2"),
-			selenium.getText("//b"));
+			selenium.getText("//a/strong"));
 		assertEquals(RuntimeVariables.replace(
-				"Edited2 Portlet2 Temporary2 Folder2"), selenium.getText("//b"));
+				"Edited2 Portlet2 Temporary2 Folder2"),
+			selenium.getText("//a/strong"));
 	}
 }

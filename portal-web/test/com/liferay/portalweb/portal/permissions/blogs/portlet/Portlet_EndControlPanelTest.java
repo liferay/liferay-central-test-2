@@ -15,7 +15,6 @@
 package com.liferay.portalweb.portal.permissions.blogs.portlet;
 
 import com.liferay.portalweb.portal.BaseTestCase;
-import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="Portlet_EndControlPanelTest.java.html"><b><i>View Source</i></b></a>
@@ -24,33 +23,6 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class Portlet_EndControlPanelTest extends BaseTestCase {
 	public void testPortlet_EndControlPanel() throws Exception {
-		int label = 1;
-
-		while (label >= 1) {
-			switch (label) {
-			case 1:
-
-				boolean InControlPanel = selenium.isElementPresent(
-						"link=Back to Guest");
-
-				if (!InControlPanel) {
-					label = 2;
-
-					continue;
-				}
-
-				selenium.clickAt("link=Back to Guest",
-					RuntimeVariables.replace(""));
-				selenium.waitForPageToLoad("30000");
-
-			case 2:
-				selenium.clickAt("link=Welcome - Liferay",
-					RuntimeVariables.replace(""));
-				selenium.waitForPageToLoad("30000");
-
-			case 100:
-				label = -1;
-			}
-		}
+		selenium.open("/web/guest/home/");
 	}
 }

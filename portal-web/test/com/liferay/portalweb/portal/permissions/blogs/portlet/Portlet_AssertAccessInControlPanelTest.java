@@ -48,6 +48,7 @@ public class Portlet_AssertAccessInControlPanelTest extends BaseTestCase {
 		selenium.clickAt("link=Blogs", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Showing 0 results."));
-		assertTrue(selenium.isElementPresent("link=Subscribe to this blog."));
+		assertEquals(RuntimeVariables.replace("RSS"),
+			selenium.getText("//span[1]/a/span[1]"));
 	}
 }

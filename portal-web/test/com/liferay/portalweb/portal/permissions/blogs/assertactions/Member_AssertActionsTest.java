@@ -45,8 +45,8 @@ public class Member_AssertActionsTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent(
 				"link=Permissions Blogs Test Entry"));
-		assertTrue(selenium.isElementPresent("//span[2]/a"));
-		assertTrue(selenium.isElementPresent("link=Subscribe to this blog."));
+		assertEquals(RuntimeVariables.replace("RSS"),
+			selenium.getText("//div[4]/span/a/span[1]"));
 		assertFalse(selenium.isElementPresent("link=Delete"));
 		assertFalse(selenium.isElementPresent(
 				"//input[@value='Add Blog Entry']"));
@@ -55,23 +55,6 @@ public class Member_AssertActionsTest extends BaseTestCase {
 		selenium.clickAt("link=Permissions Blogs Test Entry",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//div[3]/ul/li[3]/span/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		assertFalse(selenium.isElementPresent("link=Delete"));
 		assertFalse(selenium.isElementPresent(
 				"//input[@value='Add Blog Entry']"));

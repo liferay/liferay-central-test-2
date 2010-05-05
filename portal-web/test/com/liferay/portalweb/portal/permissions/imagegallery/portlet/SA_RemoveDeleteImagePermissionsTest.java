@@ -25,6 +25,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class SA_RemoveDeleteImagePermissionsTest extends BaseTestCase {
 	public void testSA_RemoveDeleteImagePermissions() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -48,6 +50,7 @@ public class SA_RemoveDeleteImagePermissionsTest extends BaseTestCase {
 		selenium.clickAt("link=Portlet2 Temporary2 Folder2",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("//div[2]/a/img", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -55,7 +58,7 @@ public class SA_RemoveDeleteImagePermissionsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//li[4]/span/a")) {
+				if (selenium.isVisible("//img[@alt='Permissions']")) {
 					break;
 				}
 			}
@@ -65,34 +68,15 @@ public class SA_RemoveDeleteImagePermissionsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertTrue(selenium.isPartialText("//form[2]/div[3]/div/div[1]",
-				"Portlet2 Temporary2 Image2"));
-		selenium.clickAt("//div/a/img", RuntimeVariables.replace(""));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Permissions")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("link=Permissions", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		selenium.uncheck("//tr[7]/td[2]/input");
-		selenium.clickAt("//input[@value='Submit']",
+		selenium.clickAt("//img[@alt='Permissions']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+		selenium.uncheck("//tr[7]/td[2]/input");
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		assertEquals(RuntimeVariables.replace(
+				"Your request processed successfully."),
+			selenium.getText("//section/div/div/div/div[1]"));
 		assertFalse(selenium.isChecked("//tr[7]/td[2]/input"));
 	}
 }

@@ -24,14 +24,15 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class SA_AddPortletTest extends BaseTestCase {
 	public void testSA_AddPortlet() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"link=Announcements Permissions Page")) {
+				if (selenium.isVisible("link=Announcements Permissions Page")) {
 					break;
 				}
 			}
@@ -44,7 +45,27 @@ public class SA_AddPortletTest extends BaseTestCase {
 		selenium.clickAt("link=Announcements Permissions Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=Application", RuntimeVariables.replace(""));
+		selenium.clickAt("_145_addApplication", RuntimeVariables.replace(""));
+		Thread.sleep(5000);
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("layout_configuration_content")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.type("layout_configuration_content",
+			RuntimeVariables.replace("a"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -53,7 +74,7 @@ public class SA_AddPortletTest extends BaseTestCase {
 
 			try {
 				if (selenium.isElementPresent(
-							"//div[@id=\"News-Announcements\"]/p/a")) {
+							"//div[@title='Announcements']/p/a")) {
 					break;
 				}
 			}
@@ -63,7 +84,7 @@ public class SA_AddPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//div[@id=\"News-Announcements\"]/p/a",
+		selenium.clickAt("//div[@title='Announcements']/p/a",
 			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -72,7 +93,7 @@ public class SA_AddPortletTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//td[1]/div/div[1]/div")) {
+				if (selenium.isElementPresent("//section")) {
 					break;
 				}
 			}
@@ -82,6 +103,6 @@ public class SA_AddPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertTrue(selenium.isElementPresent("//td[1]/div/div[1]/div"));
+		assertTrue(selenium.isElementPresent("//section"));
 	}
 }

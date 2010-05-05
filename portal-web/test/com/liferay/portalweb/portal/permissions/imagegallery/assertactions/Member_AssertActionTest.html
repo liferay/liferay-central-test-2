@@ -9,6 +9,11 @@
 <tr><td rowspan="1" colspan="3">Member_AssertActionTest</td></tr>
 </thead><tbody>
 <tr>
+	<td>open</td>
+	<td>/web/guest/home/</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
 	<td>link=Image Gallery Permissions Test Page</td>
 	<td></td>
@@ -60,12 +65,7 @@
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>//b</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//li[4]/span/a</td>
+	<td>//a/strong</td>
 	<td></td>
 </tr>
 <tr>
@@ -74,8 +74,18 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
-	<td>//input[@value='Add Image']</td>
+	<td>assertText</td>
+	<td>//div[2]/ul/li[1]/a</td>
+	<td>Add Image</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/web/guest/home/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Image Gallery Permissions Test Page</td>
 	<td></td>
 </tr>
 <tr>
@@ -86,11 +96,6 @@
 <tr>
 	<td>clickAtAndWait</td>
 	<td>link=My Images</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//div[3]/ul/li[3]/span/a</td>
 	<td></td>
 </tr>
 <tr>
@@ -105,7 +110,7 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//img[@alt='Second Permissions Image Test. ']</td>
+	<td>//img[@alt='Second Permissions Image Test - ']</td>
 	<td></td>
 </tr>
 <tr>

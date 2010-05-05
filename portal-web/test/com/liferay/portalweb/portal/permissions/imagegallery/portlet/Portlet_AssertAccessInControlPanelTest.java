@@ -26,6 +26,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class Portlet_AssertAccessInControlPanelTest extends BaseTestCase {
 	public void testPortlet_AssertAccessInControlPanel()
 		throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");

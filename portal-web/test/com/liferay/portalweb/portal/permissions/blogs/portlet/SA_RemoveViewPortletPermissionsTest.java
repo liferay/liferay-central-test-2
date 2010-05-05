@@ -55,7 +55,7 @@ public class SA_RemoveViewPortletPermissionsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("//input[@value='Submit']")) {
+				if (selenium.isVisible("//input[@value='Save']")) {
 					break;
 				}
 			}
@@ -66,13 +66,13 @@ public class SA_RemoveViewPortletPermissionsTest extends BaseTestCase {
 		}
 
 		selenium.uncheck("15_ACTION_VIEW");
-		selenium.uncheck("//tr[7]/td[4]/input");
-		selenium.clickAt("//input[@value='Submit']",
-			RuntimeVariables.replace(""));
+		selenium.uncheck("//tr[7]/td[5]/input");
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+		assertEquals(RuntimeVariables.replace(
+				"Your request processed successfully."),
+			selenium.getText("//div[@id='p_p_id_86_']/div/div[1]"));
 		assertFalse(selenium.isChecked("15_ACTION_VIEW"));
-		assertFalse(selenium.isChecked("//tr[7]/td[4]/input"));
+		assertFalse(selenium.isChecked("//tr[7]/td[5]/input"));
 	}
 }

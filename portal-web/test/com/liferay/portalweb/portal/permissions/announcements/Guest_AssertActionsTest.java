@@ -24,14 +24,15 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class Guest_AssertActionsTest extends BaseTestCase {
 	public void testGuest_AssertActions() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"link=Announcements Permissions Page")) {
+				if (selenium.isVisible("link=Announcements Permissions Page")) {
 					break;
 				}
 			}

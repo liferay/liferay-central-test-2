@@ -110,7 +110,7 @@ public class AddWriterTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//div[@id='roles']/span/a[2]")) {
+				if (selenium.isVisible("//div[6]/span/a/span")) {
 					break;
 				}
 			}
@@ -120,8 +120,7 @@ public class AddWriterTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//div[@id='roles']/span/a[2]",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("//div[6]/span/a/span", RuntimeVariables.replace(""));
 		Thread.sleep(5000);
 		selenium.waitForPopUp("role", RuntimeVariables.replace("30000"));
 		selenium.selectWindow("name=role");

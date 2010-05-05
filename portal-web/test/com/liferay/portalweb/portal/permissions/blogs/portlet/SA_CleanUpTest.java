@@ -80,8 +80,28 @@ public class SA_CleanUpTest extends BaseTestCase {
 								   .matches("^Are you sure you want to remove this component[\\s\\S]$"));
 
 			case 3:
-				selenium.clickAt("link=Application",
+				selenium.clickAt("_145_addApplication",
 					RuntimeVariables.replace(""));
+				Thread.sleep(5000);
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isVisible("layout_configuration_content")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+				selenium.type("layout_configuration_content",
+					RuntimeVariables.replace("b"));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -90,7 +110,7 @@ public class SA_CleanUpTest extends BaseTestCase {
 
 					try {
 						if (selenium.isElementPresent(
-									"//div[@id='Collaboration-Blogs']/p/a")) {
+									"//div[@title='Blogs']/p/a")) {
 							break;
 						}
 					}
@@ -100,7 +120,7 @@ public class SA_CleanUpTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.clickAt("//div[@id='Collaboration-Blogs']/p/a",
+				selenium.clickAt("//div[@title='Blogs']/p/a",
 					RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
@@ -109,7 +129,7 @@ public class SA_CleanUpTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent("//td[1]/div/div[1]/div")) {
+						if (selenium.isElementPresent("//section")) {
 							break;
 						}
 					}
@@ -119,7 +139,7 @@ public class SA_CleanUpTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				assertTrue(selenium.isElementPresent("//td[1]/div/div[1]/div"));
+				assertTrue(selenium.isElementPresent("//section"));
 
 			case 100:
 				label = -1;

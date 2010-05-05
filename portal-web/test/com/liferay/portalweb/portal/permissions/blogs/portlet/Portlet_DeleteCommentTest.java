@@ -46,23 +46,6 @@ public class Portlet_DeleteCommentTest extends BaseTestCase {
 		selenium.clickAt("link=Portlet1 Temporary1 Entry1",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//div[3]/ul/li[3]/span/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		assertTrue(selenium.isPartialText("//td[2]/div[1]",
 				"This is a portlet comment!"));
 		selenium.click(RuntimeVariables.replace("link=Delete"));

@@ -26,6 +26,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class SA_RemoveConfigurePortletPermissionsTest extends BaseTestCase {
 	public void testSA_RemoveConfigurePortletPermissions()
 		throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -48,14 +50,12 @@ public class SA_RemoveConfigurePortletPermissionsTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Configuration", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=Permissions", RuntimeVariables.replace(""));
+		selenium.uncheck("//tr[7]/td[4]/input");
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.uncheck("//tr[7]/td[3]/input");
-		selenium.clickAt("//input[@value='Submit']",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
-		assertFalse(selenium.isChecked("//tr[7]/td[3]/input"));
+		assertEquals(RuntimeVariables.replace(
+				"Your request processed successfully."),
+			selenium.getText("//div[@id='p_p_id_86_']/div/div[1]"));
+		assertFalse(selenium.isChecked("//tr[7]/td[4]/input"));
 	}
 }

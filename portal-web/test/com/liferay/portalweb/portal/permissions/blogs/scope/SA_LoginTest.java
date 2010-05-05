@@ -24,8 +24,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class SA_LoginTest extends BaseTestCase {
 	public void testSA_Login() throws Exception {
-		selenium.clickAt("link=Welcome", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
+		selenium.open("/web/guest/home/");
 		selenium.type("_58_login", RuntimeVariables.replace("test@liferay.com"));
 		selenium.type("_58_password", RuntimeVariables.replace("test"));
 		selenium.clickAt("_58_rememberMeCheckbox", RuntimeVariables.replace(""));

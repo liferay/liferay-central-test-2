@@ -48,8 +48,6 @@ public class SA_TearDownTest extends BaseTestCase {
 
 				selenium.clickAt("link=Welcome", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				selenium.typeKeys("_58_login",
-					RuntimeVariables.replace("test@lifera.com"));
 				selenium.type("_58_login",
 					RuntimeVariables.replace("test@liferay.com"));
 				selenium.type("_58_password", RuntimeVariables.replace("test"));
@@ -101,7 +99,7 @@ public class SA_TearDownTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 
 				boolean GuestAnnouncementPresent = selenium.isElementPresent(
-						"//strong/span");
+						"//td[6]/ul/li/strong/a");
 
 				if (!GuestAnnouncementPresent) {
 					label = 2;
@@ -109,7 +107,8 @@ public class SA_TearDownTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//strong/span", RuntimeVariables.replace(""));
+				selenium.clickAt("//td[6]/ul/li/strong/a",
+					RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -138,7 +137,7 @@ public class SA_TearDownTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 
 				boolean GeneralAnnouncementPresent = selenium.isElementPresent(
-						"//strong/span");
+						"//td[6]/ul/li/strong/a");
 
 				if (!GeneralAnnouncementPresent) {
 					label = 3;
@@ -146,7 +145,8 @@ public class SA_TearDownTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//strong/span", RuntimeVariables.replace(""));
+				selenium.clickAt("//td[6]/ul/li/strong/a",
+					RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -175,7 +175,7 @@ public class SA_TearDownTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 
 				boolean CAAnnouncementPresent = selenium.isElementPresent(
-						"//strong/span");
+						"//td[6]/ul/li/strong/a");
 
 				if (!CAAnnouncementPresent) {
 					label = 4;
@@ -183,7 +183,8 @@ public class SA_TearDownTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//strong/span", RuntimeVariables.replace(""));
+				selenium.clickAt("//td[6]/ul/li/strong/a",
+					RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -212,7 +213,7 @@ public class SA_TearDownTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 
 				boolean MemberAnnouncementPresent = selenium.isElementPresent(
-						"//strong/span");
+						"//td[6]/ul/li/strong/a");
 
 				if (!MemberAnnouncementPresent) {
 					label = 5;
@@ -220,7 +221,8 @@ public class SA_TearDownTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//strong/span", RuntimeVariables.replace(""));
+				selenium.clickAt("//td[6]/ul/li/strong/a",
+					RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -252,31 +254,13 @@ public class SA_TearDownTest extends BaseTestCase {
 								   .matches("^Are you sure you want to remove this component[\\s\\S]$"));
 				selenium.clickAt("link=Welcome", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				selenium.clickAt("link=Manage Pages",
+				selenium.clickAt("//div/div[3]/div/ul/li[1]/a",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isVisible(
-									"//div[@id='_88_layoutsTreeOutput']/ul/li[2]/ul/li[2]/a/span")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
-				selenium.clickAt("//div[@id='_88_layoutsTreeOutput']/ul/li[2]/ul/li[2]/a/span",
+				selenium.clickAt("//li[2]/div/div[3]/a",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				selenium.clickAt("//li[@id='_88_tabs3pageTabsId']/a",
+				selenium.clickAt("//ul[2]/li[1]/span/span/a",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				selenium.click(RuntimeVariables.replace(

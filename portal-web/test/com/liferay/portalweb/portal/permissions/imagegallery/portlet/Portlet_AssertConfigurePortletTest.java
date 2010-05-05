@@ -25,6 +25,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class Portlet_AssertConfigurePortletTest extends BaseTestCase {
 	public void testPortlet_AssertConfigurePortlet() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -51,14 +53,12 @@ public class Portlet_AssertConfigurePortletTest extends BaseTestCase {
 		assertTrue(selenium.isElementPresent("link=Permissions"));
 		assertTrue(selenium.isElementPresent("link=Sharing"));
 		assertTrue(selenium.isElementPresent("link=Scope"));
-		selenium.clickAt("link=Permissions", RuntimeVariables.replace(""));
+		assertTrue(selenium.isElementPresent("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("//input[@value='Submit']"));
-		selenium.clickAt("//input[@value='Submit']",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+		assertEquals(RuntimeVariables.replace(
+				"Your request processed successfully."),
+			selenium.getText("//div[@id='p_p_id_86_']/div/div[1]"));
 		selenium.clickAt("link=Sharing", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Any Website"));
@@ -71,7 +71,8 @@ public class Portlet_AssertConfigurePortletTest extends BaseTestCase {
 		assertTrue(selenium.isElementPresent("//input[@value='Save']"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+		assertEquals(RuntimeVariables.replace(
+				"Your request processed successfully."),
+			selenium.getText("//div[@id='p_p_id_86_']/div/div[1]"));
 	}
 }

@@ -9,6 +9,11 @@
 <tr><td rowspan="1" colspan="3">CA_RemoveGuestViewImagePermissionsTest</td></tr>
 </thead><tbody>
 <tr>
+	<td>open</td>
+	<td>/web/guest/home/</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
 	<td>link=Image Gallery Permissions Test Page</td>
 	<td></td>
@@ -20,37 +25,27 @@
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>//tr[4]/td[1]/a[1]/b</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//li[4]/span/a</td>
+	<td>//tr[4]/td[1]/a[1]/strong</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>//b</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//li[5]/span/a</td>
+	<td>//a/strong</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAt</td>
-	<td>//img[@alt='Edited Permissions Image. ']</td>
+	<td>//div[2]/a/img</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>link=Permissions</td>
+	<td>waitForVisible</td>
+	<td>//span[4]/a/img</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAt</td>
-	<td>link=Permissions</td>
+	<td>clickAndWait</td>
+	<td>//span[4]/a/img</td>
 	<td></td>
 </tr>
 <tr>
@@ -59,23 +54,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>store</td>
-	<td>eval(selenium.isChecked('15_ACTION_VIEW'))</td>
-	<td>AbleToView</td>
-</tr>
-<tr>
-	<td>gotoIf</td>
-	<td>!${AbleToView}</td>
-	<td>Able To View</td>
-</tr>
-<tr>
-	<td>clickAt</td>
+	<td>uncheck</td>
 	<td>15_ACTION_VIEW</td>
-	<td></td>
-</tr>
-<tr>
-	<td>label</td>
-	<td>Able To View</td>
 	<td></td>
 </tr>
 <tr>
@@ -85,12 +65,17 @@
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>//input[@value='Submit']</td>
+	<td>//input[@value='Save']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
 	<td>Your request processed successfully.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotChecked</td>
+	<td>15_ACTION_VIEW</td>
 	<td></td>
 </tr>
 

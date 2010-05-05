@@ -24,91 +24,135 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddScopeCommunityPageTest extends BaseTestCase {
 	public void testAddScopeCommunityPage() throws Exception {
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+		int label = 1;
 
-			try {
-				if (selenium.isElementPresent("link=Communities")) {
-					break;
+		while (label >= 1) {
+			switch (label) {
+			case 1:
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isElementPresent("link=Communities")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
-		}
+				selenium.clickAt("link=Communities",
+					RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
 
-		selenium.clickAt("link=Communities", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+					try {
+						if (selenium.isVisible("_134_name")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
 
-			try {
-				if (selenium.isVisible("_134_name")) {
-					break;
+					Thread.sleep(1000);
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
-		}
+				selenium.type("_134_name",
+					RuntimeVariables.replace("Scope Community"));
+				selenium.clickAt("//input[@value='Search']",
+					RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
+				selenium.clickAt("//strong/a", RuntimeVariables.replace(""));
 
-		selenium.type("_134_name", RuntimeVariables.replace("Scope Community"));
-		selenium.clickAt("//input[@value='Search']",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//strong", RuntimeVariables.replace(""));
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+					try {
+						if (selenium.isElementPresent("link=Manage Pages")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
 
-			try {
-				if (selenium.isElementPresent("link=Manage Pages")) {
-					break;
+					Thread.sleep(1000);
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
-		}
+				selenium.clickAt("link=Manage Pages",
+					RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
 
-		selenium.clickAt("link=Manage Pages", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+					try {
+						if (selenium.isVisible("_134_name_en_US")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
 
-			try {
-				if (selenium.isVisible("_134_name_en_US")) {
-					break;
+					Thread.sleep(1000);
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
+				selenium.type("_134_name_en_US",
+					RuntimeVariables.replace("Scope Test Page"));
+				selenium.clickAt("//input[@value='Add Page']",
+					RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
+				assertTrue(selenium.isTextPresent(
+						"Your request processed successfully."));
+				Thread.sleep(5000);
+
+				boolean pageVisible = selenium.isElementPresent(
+						"//li/ul/li/div/div[3]/a");
+
+				if (pageVisible) {
+					label = 2;
+
+					continue;
+				}
+
+				selenium.clickAt("//li/div/div[1]", RuntimeVariables.replace(""));
+
+			case 2:
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isVisible("//li/ul/li/div/div[3]/a")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+				assertEquals(RuntimeVariables.replace("Scope Test Page"),
+					selenium.getText("//li/ul/li/div/div[3]/a"));
+
+			case 100:
+				label = -1;
+			}
 		}
-
-		selenium.type("_134_name_en_US",
-			RuntimeVariables.replace("Scope Test Page"));
-		selenium.clickAt("//input[@value='Add Page']",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
-		assertEquals(RuntimeVariables.replace("Scope Test Page"),
-			selenium.getText(
-				"//div[@id='_134_layoutsTreeOutput']/ul/li[2]/ul/li/a/span"));
 	}
 }

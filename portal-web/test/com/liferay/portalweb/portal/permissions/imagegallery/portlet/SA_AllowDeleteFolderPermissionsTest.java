@@ -25,6 +25,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class SA_AllowDeleteFolderPermissionsTest extends BaseTestCase {
 	public void testSA_AllowDeleteFolderPermissions() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -45,8 +47,7 @@ public class SA_AllowDeleteFolderPermissionsTest extends BaseTestCase {
 		selenium.clickAt("link=Image Gallery Permissions Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//td[4]/ul/li/strong/span",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("//td[4]/ul/li/strong/a", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -54,7 +55,8 @@ public class SA_AllowDeleteFolderPermissionsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Permissions")) {
+				if (selenium.isElementPresent(
+							"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a")) {
 					break;
 				}
 			}
@@ -64,14 +66,15 @@ public class SA_AllowDeleteFolderPermissionsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("link=Permissions", RuntimeVariables.replace(""));
+		selenium.click(RuntimeVariables.replace(
+				"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a"));
 		selenium.waitForPageToLoad("30000");
 		selenium.check("//tr[7]/td[5]/input");
-		selenium.clickAt("//input[@value='Submit']",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+		assertEquals(RuntimeVariables.replace(
+				"Your request processed successfully."),
+			selenium.getText("//section/div/div/div/div[1]"));
 		assertTrue(selenium.isChecked("//tr[7]/td[5]/input"));
 	}
 }

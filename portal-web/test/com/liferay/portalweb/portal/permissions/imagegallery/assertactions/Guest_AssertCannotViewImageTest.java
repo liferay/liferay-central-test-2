@@ -25,6 +25,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class Guest_AssertCannotViewImageTest extends BaseTestCase {
 	public void testGuest_AssertCannotViewImage() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -45,8 +47,16 @@ public class Guest_AssertCannotViewImageTest extends BaseTestCase {
 		selenium.clickAt("link=Image Gallery Permissions Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//tr[4]/td[1]/a[1]/b", RuntimeVariables.replace(""));
+		selenium.clickAt("//tr[4]/td[1]/a[1]/strong",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		assertFalse(selenium.isTextPresent("Edited Permissions Image"));
+		selenium.type("_31_keywords1", RuntimeVariables.replace("image"));
+		selenium.click("//input[@value='Search']");
+		assertFalse(selenium.isTextPresent("Edited Permissions Image"));
+		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -54,7 +64,8 @@ public class Guest_AssertCannotViewImageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//li[4]/span/a")) {
+				if (selenium.isElementPresent(
+							"link=Image Gallery Permissions Test Page")) {
 					break;
 				}
 			}
@@ -64,25 +75,11 @@ public class Guest_AssertCannotViewImageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//b", RuntimeVariables.replace(""));
+		selenium.clickAt("link=Image Gallery Permissions Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//li[5]/span/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		selenium.clickAt("link=Recent Images", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isTextPresent("Edited Permissions Image"));
 	}
 }

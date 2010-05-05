@@ -32,30 +32,16 @@ public class CA_AssertActionsTest extends BaseTestCase {
 		assertTrue(selenium.isElementPresent("link=Edit"));
 		assertTrue(selenium.isElementPresent("link=Permissions"));
 		assertTrue(selenium.isElementPresent("link=Delete"));
-		assertTrue(selenium.isElementPresent("link=Subscribe to this blog."));
+		assertEquals(RuntimeVariables.replace("RSS"),
+			selenium.getText("//div[4]/span/a/span[1]"));
 		selenium.clickAt("link=Permissions Blogs Test Entry",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//div[3]/ul/li[3]/span/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		assertEquals(RuntimeVariables.replace("Edit"),
-			selenium.getText("//td[1]/span/a[2]"));
+			selenium.getText("//td[1]/span/a/span"));
+		assertEquals(RuntimeVariables.replace("Permissions"),
+			selenium.getText("//td[2]/span/a/span"));
 		assertEquals(RuntimeVariables.replace("Delete"),
-			selenium.getText("//td[3]/span/a[2]"));
+			selenium.getText("//td[3]/span/a/span"));
 	}
 }

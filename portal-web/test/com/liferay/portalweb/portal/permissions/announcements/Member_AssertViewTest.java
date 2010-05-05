@@ -24,6 +24,24 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class Member_AssertViewTest extends BaseTestCase {
 	public void testMember_AssertView() throws Exception {
+		selenium.open("/web/guest/home/");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("link=Announcements Permissions Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.clickAt("link=Announcements Permissions Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");

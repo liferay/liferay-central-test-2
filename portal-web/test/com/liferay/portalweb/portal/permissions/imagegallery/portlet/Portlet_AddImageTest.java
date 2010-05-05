@@ -24,105 +24,116 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class Portlet_AddImageTest extends BaseTestCase {
 	public void testPortlet_AddImage() throws Exception {
-		int label = 1;
+		selenium.open("/web/guest/home/");
 
-		while (label >= 1) {
-			switch (label) {
-			case 1:
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isElementPresent(
-									"link=Image Gallery Permissions Test Page")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
-				selenium.clickAt("link=Image Gallery Permissions Test Page",
-					RuntimeVariables.replace(""));
-				selenium.waitForPageToLoad("30000");
-				selenium.clickAt("link=Portlet2 Temporary2 Folder2",
-					RuntimeVariables.replace(""));
-				selenium.waitForPageToLoad("30000");
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isElementPresent("//li[4]/span/a")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
-				assertTrue(selenium.isElementPresent(
-						"//input[@value='Add Image']"));
-				selenium.clickAt("//input[@value='Add Image']",
-					RuntimeVariables.replace(""));
-				selenium.waitForPageToLoad("30000");
-				Thread.sleep(5000);
-
-				boolean ClassicUploaderPresent = selenium.isElementPresent(
-						"link=Use the classic uploader.");
-
-				if (!ClassicUploaderPresent) {
-					label = 2;
-
-					continue;
-				}
-
-				selenium.click("link=Use the classic uploader.");
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isElementPresent("_31_file")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
-				selenium.type("_31_file",
-					RuntimeVariables.replace(
-						"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portal\\permissions\\imagegallery\\portlet\\dependencies\\Portlet_TestImage.jpg"));
-				selenium.type("_31_name",
-					RuntimeVariables.replace("Portlet1 Permissions1 Image1"));
-				selenium.clickAt("//input[@value='Save']",
-					RuntimeVariables.replace(""));
-				selenium.waitForPageToLoad("30000");
-				Thread.sleep(5000);
-
-			case 2:
-				assertTrue(selenium.isTextPresent(
-						"Your request processed successfully."));
-				assertTrue(selenium.isElementPresent(
-						"//img[@alt='Portlet1 Permissions1 Image1. ']"));
-
-			case 100:
-				label = -1;
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
 			}
+
+			try {
+				if (selenium.isElementPresent(
+							"link=Image Gallery Permissions Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
 		}
+
+		selenium.clickAt("link=Image Gallery Permissions Test Page",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("link=Portlet2 Temporary2 Folder2",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		assertEquals(RuntimeVariables.replace("Add Image"),
+			selenium.getText("//div[2]/ul/li[1]/a"));
+		selenium.clickAt("//div[2]/ul/li[1]/a", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("link=Use the classic uploader.")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("link=Use the classic uploader.");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("_31_file")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.type("_31_file",
+			RuntimeVariables.replace(
+				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portal\\permissions\\imagegallery\\portlet\\dependencies\\Portlet_TestImage.jpg"));
+		selenium.type("_31_name",
+			RuntimeVariables.replace("Portlet1 Permissions1 Image1"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isTextPresent(
+							"Your request processed successfully.")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent(
+							"//img[@alt='Portlet1 Permissions1 Image1 - ']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		assertTrue(selenium.isElementPresent(
+				"//img[@alt='Portlet1 Permissions1 Image1 - ']"));
 	}
 }

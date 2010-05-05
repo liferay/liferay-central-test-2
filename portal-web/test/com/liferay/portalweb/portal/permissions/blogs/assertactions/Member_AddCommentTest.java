@@ -46,23 +46,6 @@ public class Member_AddCommentTest extends BaseTestCase {
 		selenium.clickAt("link=Permissions Blogs Test Entry",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//div[3]/ul/li[3]/span/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.clickAt("link=Add Comment", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -83,6 +66,8 @@ public class Member_AddCommentTest extends BaseTestCase {
 
 		selenium.type("_33_postReplyBody0",
 			RuntimeVariables.replace("Member Permissions Blogs Test Comment"));
+		selenium.keyPress("_33_postReplyBody0", RuntimeVariables.replace("\\48"));
+		selenium.keyPress("_33_postReplyBody0", RuntimeVariables.replace("\\8"));
 		selenium.clickAt("//input[@value='Reply']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(

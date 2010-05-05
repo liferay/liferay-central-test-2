@@ -44,28 +44,11 @@ public class SA_AllowDeleteEntryPermissionsTest extends BaseTestCase {
 		selenium.clickAt("link=Blogs Permissions Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isPartialText("//div[2]/div[1]/div[1]/a",
+		assertTrue(selenium.isPartialText("//form/div[2]/div[1]/div[1]/a",
 				"Portlet1 Temporary1 Entry1"));
-		selenium.clickAt("//div[2]/div[1]/div[1]/a",
+		selenium.clickAt("//form/div[2]/div[1]/div[1]/a",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//div[3]/ul/li[3]/span/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.clickAt("link=Permissions", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
@@ -75,7 +58,7 @@ public class SA_AllowDeleteEntryPermissionsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("//input[@value='Submit']")) {
+				if (selenium.isVisible("//input[@value='Save']")) {
 					break;
 				}
 			}
@@ -86,8 +69,7 @@ public class SA_AllowDeleteEntryPermissionsTest extends BaseTestCase {
 		}
 
 		selenium.check("//tr[7]/td[3]/input");
-		selenium.clickAt("//input[@value='Submit']",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

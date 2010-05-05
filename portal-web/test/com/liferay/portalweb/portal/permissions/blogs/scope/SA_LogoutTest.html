@@ -9,23 +9,13 @@
 <tr><td rowspan="1" colspan="3">SA_LogoutTest</td></tr>
 </thead><tbody>
 <tr>
-	<td>store</td>
-	<td>eval(selenium.isElementPresent('link=Back to Guest'))</td>
-	<td>InControlPanel</td>
-</tr>
-<tr>
-	<td>gotoIf</td>
-	<td>!${InControlPanel}</td>
-	<td>NotInControlPanel</td>
-</tr>
-<tr>
-	<td>clickAtAndWait</td>
-	<td>link=Back to Guest</td>
+	<td>open</td>
+	<td>/web/guest/home/</td>
 	<td></td>
 </tr>
 <tr>
-	<td>label</td>
-	<td>NotInControlPanel</td>
+	<td>waitForElementPresent</td>
+	<td>link=Sign Out</td>
 	<td></td>
 </tr>
 <tr>

@@ -27,7 +27,7 @@ public class Member_AnnouncementsRolesTest extends BaseTestCase {
 	public void testMember_AnnouncementsRoles() throws Exception {
 		selenium.clickAt("link=Define Permissions", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.select("add-permissions",
+		selenium.select("_128_add-permissions",
 			RuntimeVariables.replace("label=Announcements"));
 		selenium.waitForPageToLoad("30000");
 		selenium.uncheck("_128_rowIds");

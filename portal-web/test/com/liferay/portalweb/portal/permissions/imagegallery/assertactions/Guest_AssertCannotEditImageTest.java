@@ -25,6 +25,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class Guest_AssertCannotEditImageTest extends BaseTestCase {
 	public void testGuest_AssertCannotEditImage() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -45,45 +47,11 @@ public class Guest_AssertCannotEditImageTest extends BaseTestCase {
 		selenium.clickAt("link=Image Gallery Permissions Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//b", RuntimeVariables.replace(""));
+		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//li[4]/span/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("//b", RuntimeVariables.replace(""));
+		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//li[5]/span/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("//img[@alt='Second Permissions Image Test. ']",
+		selenium.clickAt("//img[@alt='Second Permissions Image Test - ']",
 			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -92,7 +60,7 @@ public class Guest_AssertCannotEditImageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Close")) {
+				if (selenium.isElementPresent("//a[3]")) {
 					break;
 				}
 			}
@@ -102,10 +70,12 @@ public class Guest_AssertCannotEditImageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertFalse(selenium.isElementPresent("link=Edit"));
-		assertFalse(selenium.isElementPresent("link=Permissions"));
-		assertFalse(selenium.isElementPresent("link=Delete"));
-		selenium.clickAt("link=Close", RuntimeVariables.replace(""));
+		assertTrue(selenium.isElementPresent("//img[@alt='Download (29.9k)']"));
+		assertTrue(selenium.isElementPresent("//img[@alt='View']"));
+		assertFalse(selenium.isElementPresent("//img[@alt='Edit']"));
+		assertFalse(selenium.isElementPresent("//img[@alt='Permissions']"));
+		assertFalse(selenium.isElementPresent("//img[@alt='Delete']"));
+		selenium.clickAt("//a[3]", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -113,8 +83,8 @@ public class Guest_AssertCannotEditImageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"//img[@alt='Second Permissions Image Test. ']")) {
+				if (selenium.isVisible(
+							"//img[@alt='Second Permissions Image Test - ']")) {
 					break;
 				}
 			}

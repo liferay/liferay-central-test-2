@@ -47,6 +47,7 @@ public class Portlet_AssertViewPortletTest extends BaseTestCase {
 		assertFalse(selenium.isTextPresent(
 				"You do not have the roles required to access this portlet."));
 		assertTrue(selenium.isTextPresent("Showing 0 results."));
-		assertTrue(selenium.isElementPresent("link=Subscribe to this blog."));
+		assertEquals(RuntimeVariables.replace("RSS"),
+			selenium.getText("//span/a/span[1]"));
 	}
 }

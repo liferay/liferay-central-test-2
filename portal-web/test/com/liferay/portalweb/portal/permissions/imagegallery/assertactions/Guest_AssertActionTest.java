@@ -24,6 +24,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class Guest_AssertActionTest extends BaseTestCase {
 	public void testGuest_AssertAction() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -52,25 +54,8 @@ public class Guest_AssertActionTest extends BaseTestCase {
 		assertFalse(selenium.isElementPresent("//div[5]/ul/li[1]/a"));
 		assertFalse(selenium.isElementPresent("//div[5]/ul/li[2]/a"));
 		assertFalse(selenium.isElementPresent("//div[5]/ul/li[3]/a"));
-		selenium.clickAt("//b", RuntimeVariables.replace(""));
+		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//li[4]/span/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		assertFalse(selenium.isElementPresent("//input[@value='Add Subfolder']"));
 		assertFalse(selenium.isElementPresent("//input[@value='Add Image']"));
 		selenium.clickAt("link=Image Gallery Permissions Test Page",
@@ -78,23 +63,6 @@ public class Guest_AssertActionTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Recent Images", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//li[3]/span/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		assertTrue(selenium.isTextPresent("Second Permissions Image Test"));
 	}
 }

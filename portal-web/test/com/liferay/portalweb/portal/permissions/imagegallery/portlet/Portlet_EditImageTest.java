@@ -24,6 +24,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class Portlet_EditImageTest extends BaseTestCase {
 	public void testPortlet_EditImage() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -47,26 +49,7 @@ public class Portlet_EditImageTest extends BaseTestCase {
 		selenium.clickAt("link=Portlet2 Temporary2 Folder2",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//li[4]/span/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		assertTrue(selenium.isElementPresent(
-				"//img[@alt='Portlet2 Temporary2 Image2. ']"));
-		selenium.clickAt("//img[@alt='Portlet2 Temporary2 Image2. ']",
+		selenium.clickAt("//img[@alt='Portlet2 Temporary2 Image2 - ']",
 			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -75,7 +58,7 @@ public class Portlet_EditImageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Close")) {
+				if (selenium.isElementPresent("//a[3]")) {
 					break;
 				}
 			}
@@ -85,19 +68,36 @@ public class Portlet_EditImageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertTrue(selenium.isElementPresent("link=Edit"));
-		selenium.clickAt("link=Edit", RuntimeVariables.replace(""));
+		assertTrue(selenium.isElementPresent("//img[@alt='Edit']"));
+		selenium.clickAt("//img[@alt='Edit']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_31_name",
 			RuntimeVariables.replace("Edited2 Portlet2 Temporary2 Image2"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		Thread.sleep(5000);
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isTextPresent(
+							"Your request processed successfully.")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 		assertFalse(selenium.isElementPresent(
-				"//img[@alt='Portlet2 Temporary2 Image2. ']"));
+				"//img[@alt='Portlet2 Temporary2 Image2 - ']"));
 		assertTrue(selenium.isElementPresent(
-				"//img[@alt='Edited2 Portlet2 Temporary2 Image2. ']"));
+				"//img[@alt='Edited2 Portlet2 Temporary2 Image2 - ']"));
 	}
 }

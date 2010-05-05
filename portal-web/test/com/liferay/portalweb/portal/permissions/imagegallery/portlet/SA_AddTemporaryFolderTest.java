@@ -24,6 +24,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class SA_AddTemporaryFolderTest extends BaseTestCase {
 	public void testSA_AddTemporaryFolder() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -44,26 +46,8 @@ public class SA_AddTemporaryFolderTest extends BaseTestCase {
 		selenium.clickAt("link=Image Gallery Permissions Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//input[@value='Add Subfolder']",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("//div[2]/ul/li[2]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible("_31_name")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.type("_31_name",
 			RuntimeVariables.replace("Portlet2 Temporary2 Folder2"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
@@ -71,6 +55,6 @@ public class SA_AddTemporaryFolderTest extends BaseTestCase {
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 		assertEquals(RuntimeVariables.replace("Portlet2 Temporary2 Folder2"),
-			selenium.getText("//b"));
+			selenium.getText("//a/strong"));
 	}
 }

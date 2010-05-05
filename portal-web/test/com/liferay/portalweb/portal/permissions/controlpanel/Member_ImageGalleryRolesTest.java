@@ -27,7 +27,7 @@ public class Member_ImageGalleryRolesTest extends BaseTestCase {
 	public void testMember_ImageGalleryRoles() throws Exception {
 		selenium.clickAt("link=Define Permissions", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.select("add-permissions",
+		selenium.select("_128_add-permissions",
 			RuntimeVariables.replace("label=Image Gallery"));
 		selenium.waitForPageToLoad("30000");
 		selenium.uncheck("_128_rowIds");

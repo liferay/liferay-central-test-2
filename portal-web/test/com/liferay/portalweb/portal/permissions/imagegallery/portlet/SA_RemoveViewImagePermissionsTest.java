@@ -25,6 +25,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class SA_RemoveViewImagePermissionsTest extends BaseTestCase {
 	public void testSA_RemoveViewImagePermissions() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -48,24 +50,7 @@ public class SA_RemoveViewImagePermissionsTest extends BaseTestCase {
 		selenium.clickAt("link=Portlet2 Temporary2 Folder2",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//li[4]/span/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("//img[@alt='Portlet2 Temporary2 Image2. ']",
+		selenium.clickAt("//img[@alt='Portlet2 Temporary2 Image2 - ']",
 			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -74,7 +59,7 @@ public class SA_RemoveViewImagePermissionsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Permissions")) {
+				if (selenium.isVisible("//img[@alt='Permissions']")) {
 					break;
 				}
 			}
@@ -84,15 +69,16 @@ public class SA_RemoveViewImagePermissionsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("link=Permissions", RuntimeVariables.replace(""));
+		selenium.clickAt("//img[@alt='Permissions']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.uncheck("15_ACTION_VIEW");
 		selenium.uncheck("//tr[7]/td[5]/input");
-		selenium.clickAt("//input[@value='Submit']",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+		assertEquals(RuntimeVariables.replace(
+				"Your request processed successfully."),
+			selenium.getText("//section/div/div/div/div[1]"));
 		assertFalse(selenium.isChecked("15_ACTION_VIEW"));
 		assertFalse(selenium.isChecked("//tr[7]/td[5]/input"));
 	}

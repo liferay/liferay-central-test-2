@@ -9,6 +9,11 @@
 <tr><td rowspan="1" colspan="3">CA_AddImageTest</td></tr>
 </thead><tbody>
 <tr>
+	<td>open</td>
+	<td>/web/guest/home/</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
 	<td>link=Image Gallery Permissions Test Page</td>
 	<td></td>
@@ -20,36 +25,21 @@
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>//b</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//li[4]/span/a</td>
+	<td>//a/strong</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>//b</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//li[5]/span/a</td>
+	<td>//a/strong</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>//input[@value='Add Image']</td>
+	<td>//div[2]/ul/li[4]/a</td>
 	<td></td>
 </tr>
 <tr>
-	<td>pause</td>
-	<td>5000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
+	<td>waitForVisible</td>
 	<td>link=Use the classic uploader.</td>
 	<td></td>
 </tr>
@@ -59,7 +49,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>waitForVisible</td>
 	<td>_31_file</td>
 	<td></td>
 </tr>
@@ -67,11 +57,6 @@
 	<td>type</td>
 	<td>_31_file</td>
 	<td>L:\portal\build\portal-web\test\com\liferay\portalweb\portal\permissions\imagegallery\assertactions\dependencies\DLP_test_image.jpg</td>
-</tr>
-<tr>
-	<td>typeKeys</td>
-	<td>_31_name</td>
-	<td>Permissions Image Test</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -84,13 +69,18 @@
 	<td></td>
 </tr>
 <tr>
-	<td>pause</td>
-	<td>5000</td>
+	<td>waitForTextPresent</td>
+	<td>Your request processed successfully.</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
 	<td>Your request processed successfully.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Permissions Image Test</td>
 	<td></td>
 </tr>
 <tr>

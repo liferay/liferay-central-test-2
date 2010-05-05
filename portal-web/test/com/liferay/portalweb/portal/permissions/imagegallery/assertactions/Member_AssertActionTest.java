@@ -24,6 +24,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class Member_AssertActionTest extends BaseTestCase {
 	public void testMember_AssertAction() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -52,8 +54,12 @@ public class Member_AssertActionTest extends BaseTestCase {
 		assertFalse(selenium.isElementPresent("//div[5]/ul/li[1]/a"));
 		assertFalse(selenium.isElementPresent("//div[5]/ul/li[2]/a"));
 		assertFalse(selenium.isElementPresent("//div[5]/ul/li[3]/a"));
-		selenium.clickAt("//b", RuntimeVariables.replace(""));
+		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		assertFalse(selenium.isElementPresent("//input[@value='Add Subfolder']"));
+		assertEquals(RuntimeVariables.replace("Add Image"),
+			selenium.getText("//div[2]/ul/li[1]/a"));
+		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -61,7 +67,8 @@ public class Member_AssertActionTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//li[4]/span/a")) {
+				if (selenium.isElementPresent(
+							"link=Image Gallery Permissions Test Page")) {
 					break;
 				}
 			}
@@ -71,30 +78,11 @@ public class Member_AssertActionTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertFalse(selenium.isElementPresent("//input[@value='Add Subfolder']"));
-		assertTrue(selenium.isElementPresent("//input[@value='Add Image']"));
 		selenium.clickAt("link=Image Gallery Permissions Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=My Images", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//div[3]/ul/li[3]/span/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		assertTrue(selenium.isTextPresent("Edited Third Permissions Image"));
 		selenium.clickAt("link=Recent Images", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
@@ -106,7 +94,7 @@ public class Member_AssertActionTest extends BaseTestCase {
 
 			try {
 				if (selenium.isElementPresent(
-							"//img[@alt='Second Permissions Image Test. ']")) {
+							"//img[@alt='Second Permissions Image Test - ']")) {
 					break;
 				}
 			}

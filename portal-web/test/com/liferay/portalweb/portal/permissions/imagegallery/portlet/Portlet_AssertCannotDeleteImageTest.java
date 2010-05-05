@@ -25,6 +25,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class Portlet_AssertCannotDeleteImageTest extends BaseTestCase {
 	public void testPortlet_AssertCannotDeleteImage() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -48,6 +50,7 @@ public class Portlet_AssertCannotDeleteImageTest extends BaseTestCase {
 		selenium.clickAt("link=Portlet2 Temporary2 Folder2",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("//div[2]/a/img", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -55,7 +58,7 @@ public class Portlet_AssertCannotDeleteImageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//li[4]/span/a")) {
+				if (selenium.isElementPresent("//a[3]")) {
 					break;
 				}
 			}
@@ -65,9 +68,8 @@ public class Portlet_AssertCannotDeleteImageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertTrue(selenium.isPartialText("//form[2]/div[3]/div/div[1]",
-				"Portlet2 Temporary2 Image2"));
-		selenium.clickAt("//div/a/img", RuntimeVariables.replace(""));
+		assertFalse(selenium.isElementPresent("//img[@alt='Delete']"));
+		selenium.clickAt("//a[3]", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -75,26 +77,7 @@ public class Portlet_AssertCannotDeleteImageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Close")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		assertFalse(selenium.isElementPresent("link=Delete"));
-		selenium.clickAt("link=Close", RuntimeVariables.replace(""));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//div/a/img")) {
+				if (selenium.isElementPresent("//div[2]/a/img")) {
 					break;
 				}
 			}

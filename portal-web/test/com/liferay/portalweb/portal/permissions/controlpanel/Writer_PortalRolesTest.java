@@ -26,7 +26,7 @@ public class Writer_PortalRolesTest extends BaseTestCase {
 	public void testWriter_PortalRoles() throws Exception {
 		selenium.clickAt("link=Define Permissions", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.select("add-permissions",
+		selenium.select("_128_add-permissions",
 			RuntimeVariables.replace("label=Communities"));
 		selenium.waitForPageToLoad("30000");
 		selenium.uncheck("_128_rowIds");
@@ -53,7 +53,7 @@ public class Writer_PortalRolesTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("The role permissions were updated."));
-		selenium.select("add-permissions",
+		selenium.select("_128_add-permissions",
 			RuntimeVariables.replace("label=Organizations"));
 		selenium.waitForPageToLoad("30000");
 		selenium.uncheck("_128_rowIds");
@@ -86,7 +86,7 @@ public class Writer_PortalRolesTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("The role permissions were updated."));
-		selenium.select("add-permissions",
+		selenium.select("_128_add-permissions",
 			RuntimeVariables.replace("label=Roles"));
 		selenium.waitForPageToLoad("30000");
 		selenium.uncheck("_128_rowIds");
@@ -105,7 +105,7 @@ public class Writer_PortalRolesTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("The role permissions were updated."));
-		selenium.select("add-permissions",
+		selenium.select("_128_add-permissions",
 			RuntimeVariables.replace("label=User Groups"));
 		selenium.waitForPageToLoad("30000");
 		selenium.uncheck("_128_rowIds");

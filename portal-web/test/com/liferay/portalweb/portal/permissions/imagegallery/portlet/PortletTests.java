@@ -59,18 +59,14 @@ public class PortletTests extends BaseTests {
 			SA_RemoveAccessInControlPanelPermissionsTest.class);
 		testSuite.addTestSuite(SA_LogoutTest.class);
 		testSuite.addTestSuite(Portlet_LoginTest.class);
-		testSuite.addTestSuite(Portlet_ControlPanelTest.class);
 		testSuite.addTestSuite(Portlet_AssertNoAccessInControlPanelTest.class);
-		testSuite.addTestSuite(Portlet_EndControlPanelTest.class);
 		testSuite.addTestSuite(Portlet_LogoutTest.class);
 		testSuite.addTestSuite(SA_LoginTest.class);
 		testSuite.addTestSuite(
 			SA_AllowAccessInControlPanelPermissionsTest.class);
 		testSuite.addTestSuite(SA_LogoutTest.class);
 		testSuite.addTestSuite(Portlet_LoginTest.class);
-		testSuite.addTestSuite(Portlet_ControlPanelTest.class);
 		testSuite.addTestSuite(Portlet_AssertAccessInControlPanelTest.class);
-		testSuite.addTestSuite(Portlet_EndControlPanelTest.class);
 		testSuite.addTestSuite(Portlet_LogoutTest.class);
 		testSuite.addTestSuite(SA_LoginTest.class);
 		testSuite.addTestSuite(

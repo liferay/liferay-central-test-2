@@ -46,24 +46,7 @@ public class Portlet_AddCommentTest extends BaseTestCase {
 		selenium.clickAt("link=Portlet1 Temporary1 Entry1",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//div[3]/ul/li[3]/span/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("link=Add Comment", RuntimeVariables.replace(""));
+		selenium.clickAt("link=Be the first.", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -83,7 +66,9 @@ public class Portlet_AddCommentTest extends BaseTestCase {
 
 		selenium.type("_33_postReplyBody0",
 			RuntimeVariables.replace("This is a portlet comment!"));
-		selenium.clickAt("_33_postReplyButton0", RuntimeVariables.replace(""));
+		selenium.keyPress("_33_postReplyBody0", RuntimeVariables.replace("\\48"));
+		selenium.keyPress("_33_postReplyBody0", RuntimeVariables.replace("\\8"));
+		selenium.clickAt("//input[@value='Reply']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

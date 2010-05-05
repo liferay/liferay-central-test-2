@@ -26,10 +26,18 @@ public class CA_DocumentLibraryRolesTest extends BaseTestCase {
 	public void testCA_DocumentLibraryRoles() throws Exception {
 		selenium.clickAt("link=Define Permissions", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.select("add-permissions",
+		selenium.select("_128_add-permissions",
 			RuntimeVariables.replace("label=Document Library"));
 		selenium.waitForPageToLoad("30000");
 		selenium.check("_128_rowIds");
+		selenium.check(
+			"//input[@value='com.liferay.portlet.documentlibraryADD_FOLDER']");
+		selenium.check(
+			"//input[@value='com.liferay.portlet.documentlibraryADD_SHORTCUT']");
+		selenium.check(
+			"//input[@value='com.liferay.portlet.documentlibraryPERMISSIONS']");
+		selenium.check(
+			"//input[@value='com.liferay.portlet.documentlibraryVIEW']");
 		selenium.check(
 			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.documentlibrary.model.DLFileEntryADD_DISCUSSION']");
 		selenium.check(

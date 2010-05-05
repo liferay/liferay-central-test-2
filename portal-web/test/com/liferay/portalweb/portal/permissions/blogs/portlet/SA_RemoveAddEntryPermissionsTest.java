@@ -54,7 +54,7 @@ public class SA_RemoveAddEntryPermissionsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("//input[@value='Submit']")) {
+				if (selenium.isVisible("//input[@value='Save']")) {
 					break;
 				}
 			}
@@ -65,8 +65,7 @@ public class SA_RemoveAddEntryPermissionsTest extends BaseTestCase {
 		}
 
 		selenium.uncheck("//tr[7]/td[2]/input");
-		selenium.clickAt("//input[@value='Submit']",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

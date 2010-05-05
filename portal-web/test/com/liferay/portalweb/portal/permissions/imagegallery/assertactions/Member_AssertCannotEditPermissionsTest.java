@@ -26,6 +26,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class Member_AssertCannotEditPermissionsTest extends BaseTestCase {
 	public void testMember_AssertCannotEditPermissions()
 		throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -46,8 +48,9 @@ public class Member_AssertCannotEditPermissionsTest extends BaseTestCase {
 		selenium.clickAt("link=Image Gallery Permissions Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//b", RuntimeVariables.replace(""));
+		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("//div[2]/a/img", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -55,7 +58,7 @@ public class Member_AssertCannotEditPermissionsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//li[4]/span/a")) {
+				if (selenium.isVisible("//img[@alt='Permissions']")) {
 					break;
 				}
 			}
@@ -65,27 +68,8 @@ public class Member_AssertCannotEditPermissionsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//img[@alt='Edited Third Permissions Image. ']",
-			RuntimeVariables.replace(""));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Permissions")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("link=Permissions", RuntimeVariables.replace(""));
-		Thread.sleep(5000);
+		selenium.click(RuntimeVariables.replace("//img[@alt='Permissions']"));
+		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"You do not have the required permissions."));
 	}

@@ -26,6 +26,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class Scope_AssertCannotAddPortalScopeEntryTest extends BaseTestCase {
 	public void testScope_AssertCannotAddPortalScopeEntry()
 		throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");

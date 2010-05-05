@@ -27,7 +27,7 @@ public class Member_DocumentLibraryRolesTest extends BaseTestCase {
 	public void testMember_DocumentLibraryRoles() throws Exception {
 		selenium.clickAt("link=Define Permissions", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.select("add-permissions",
+		selenium.select("_128_add-permissions",
 			RuntimeVariables.replace("label=Document Library"));
 		selenium.waitForPageToLoad("30000");
 		selenium.uncheck("_128_rowIds");
