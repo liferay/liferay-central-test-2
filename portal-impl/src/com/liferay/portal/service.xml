@@ -1613,6 +1613,9 @@
 		<column name="lockoutDate" type="Date" />
 		<column name="agreedToTermsOfUse" type="boolean" />
 		<column name="active" type="boolean" />
+		<column name="socialContributionEquity" type="double" />
+		<column name="socialParticipationEquity" type="double" />
+		<column name="socialPersonalEquity" type="double" />
 
 		<!-- Relationships -->
 

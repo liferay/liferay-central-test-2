@@ -1,3 +1,5 @@
+alter table AssetEntry add socialInformationEquity DOUBLE;
+
 alter table LayoutSet add settings_ TEXT null;
 
 create table SocialEquityAssetEntry (
@@ -64,3 +66,7 @@ create table Ticket (
 	key_ VARCHAR(75) null,
 	expirationDate DATE null
 );
+
+alter table User_ add socialContributionEquity DOUBLE;
+alter table User_ add socialParticipationEquity DOUBLE;
+alter table User_ add socialPersonalEquity DOUBLE;
