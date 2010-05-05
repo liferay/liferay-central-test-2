@@ -154,6 +154,8 @@ type = ParamUtil.getString(request, "type", type);
 	OrderByComparator orderByComparator = JournalUtil.getArticleOrderByComparator(searchContainer.getOrderByCol(), searchContainer.getOrderByType());
 
 	ArticleSearchTerms searchTerms = (ArticleSearchTerms)searchContainer.getSearchTerms();
+
+	searchTerms.setVersion(-1);
 	%>
 
 	<%@ include file="/html/portlet/journal/article_search_results.jspf" %>
