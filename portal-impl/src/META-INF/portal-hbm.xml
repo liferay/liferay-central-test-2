@@ -119,9 +119,11 @@
 	<import class="com.liferay.portlet.shopping.model.ShoppingOrderItem" />
 	<import class="com.liferay.portlet.social.model.SocialActivity" />
 	<import class="com.liferay.portlet.social.model.SocialActivityInterpreter" />
+	<import class="com.liferay.portlet.social.model.SocialEquityAssetEntry" />
 	<import class="com.liferay.portlet.social.model.SocialEquityHistory" />
 	<import class="com.liferay.portlet.social.model.SocialEquityLog" />
 	<import class="com.liferay.portlet.social.model.SocialEquitySetting" />
+	<import class="com.liferay.portlet.social.model.SocialEquityUser" />
 	<import class="com.liferay.portlet.social.model.SocialRelation" />
 	<import class="com.liferay.portlet.social.model.SocialRequest" />
 	<import class="com.liferay.portlet.social.model.SocialRequestInterpreter" />
@@ -761,11 +763,6 @@
 		<property name="lockoutDate" type="org.hibernate.type.TimestampType" />
 		<property name="agreedToTermsOfUse" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 		<property name="active" column="active_" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
-		<property name="socialContributionEquity" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
-		<property name="socialParticipationK" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
-		<property name="socialParticipationB" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
-		<property name="socialParticipationEquity" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
-		<property name="socialPersonalEquity" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
 	</class>
 	<class name="com.liferay.portal.model.impl.UserGroupImpl" table="UserGroup">
 		<cache usage="read-write" />
@@ -987,9 +984,6 @@
 		<property name="width" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="priority" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
 		<property name="viewCount" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
-		<property name="socialInformationK" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
-		<property name="socialInformationB" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
-		<property name="socialInformationEquity" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
 	</class>
 	<class name="com.liferay.portlet.asset.model.impl.AssetLinkImpl" table="AssetLink">
 		<cache usage="read-write" />
@@ -1867,6 +1861,18 @@
 		<property name="extraData" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="receiverUserId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 	</class>
+	<class name="com.liferay.portlet.social.model.impl.SocialEquityAssetEntryImpl" table="SocialEquityAssetEntry">
+		<cache usage="read-write" />
+		<id name="equityAssetEntryId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="assetEntryId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="informationK" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="informationB" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="informationEquity" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+	</class>
 	<class name="com.liferay.portlet.social.model.impl.SocialEquityHistoryImpl" table="SocialEquityHistory">
 		<cache usage="read-write" />
 		<id name="equityHistoryId" type="long">
@@ -1892,6 +1898,7 @@
 		<property name="type" column="type_" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="value" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="validity" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="active" column="active_" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 	</class>
 	<class name="com.liferay.portlet.social.model.impl.SocialEquitySettingImpl" table="SocialEquitySetting">
 		<cache usage="read-write" />
@@ -1905,7 +1912,19 @@
 		<property name="type" column="type_" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="value" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="validity" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
-		<property name="active" column="active_" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+	</class>
+	<class name="com.liferay.portlet.social.model.impl.SocialEquityUserImpl" table="SocialEquityUser">
+		<cache usage="read-write" />
+		<id name="equityUserId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="contributionEquity" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="participationK" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="participationB" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="participationEquity" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="personalEquity" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
 	</class>
 	<class name="com.liferay.portlet.social.model.impl.SocialRelationImpl" table="SocialRelation">
 		<cache usage="read-write" />

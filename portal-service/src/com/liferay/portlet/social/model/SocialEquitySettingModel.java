@@ -81,12 +81,6 @@ public interface SocialEquitySettingModel extends BaseModel<SocialEquitySetting>
 
 	public void setValidity(int validity);
 
-	public boolean getActive();
-
-	public boolean isActive();
-
-	public void setActive(boolean active);
-
 	public SocialEquitySetting toEscapedModel();
 
 	public boolean isNew();

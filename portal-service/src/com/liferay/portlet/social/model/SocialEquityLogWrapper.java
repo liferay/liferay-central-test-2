@@ -133,6 +133,18 @@ public class SocialEquityLogWrapper implements SocialEquityLog {
 		_socialEquityLog.setValidity(validity);
 	}
 
+	public boolean getActive() {
+		return _socialEquityLog.getActive();
+	}
+
+	public boolean isActive() {
+		return _socialEquityLog.isActive();
+	}
+
+	public void setActive(boolean active) {
+		_socialEquityLog.setActive(active);
+	}
+
 	public com.liferay.portlet.social.model.SocialEquityLog toEscapedModel() {
 		return _socialEquityLog.toEscapedModel();
 	}

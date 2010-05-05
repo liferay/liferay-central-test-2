@@ -112,18 +112,6 @@ public class SocialEquitySettingWrapper implements SocialEquitySetting {
 		_socialEquitySetting.setValidity(validity);
 	}
 
-	public boolean getActive() {
-		return _socialEquitySetting.getActive();
-	}
-
-	public boolean isActive() {
-		return _socialEquitySetting.isActive();
-	}
-
-	public void setActive(boolean active) {
-		_socialEquitySetting.setActive(active);
-	}
-
 	public com.liferay.portlet.social.model.SocialEquitySetting toEscapedModel() {
 		return _socialEquitySetting.toEscapedModel();
 	}

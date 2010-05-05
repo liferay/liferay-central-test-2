@@ -799,11 +799,6 @@
 			<basic name="active">
 				<column name="ACTIVE_" />
 			</basic>
-			<basic name="socialContributionEquity" />
-			<basic name="socialParticipationK" />
-			<basic name="socialParticipationB" />
-			<basic name="socialParticipationEquity" />
-			<basic name="socialPersonalEquity" />
 			<transient name="primaryKey" />
 			<transient name="userUuid" />
 		</attributes>
@@ -1106,9 +1101,6 @@
 			<basic name="width" />
 			<basic name="priority" />
 			<basic name="viewCount" />
-			<basic name="socialInformationK" />
-			<basic name="socialInformationB" />
-			<basic name="socialInformationEquity" />
 			<transient name="primaryKey" />
 			<transient name="userUuid" />
 		</attributes>
@@ -2291,6 +2283,19 @@
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portlet.social.model.impl.SocialEquityAssetEntryModelImpl">
+		<attributes>
+			<id name="equityAssetEntryId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="assetEntryId" />
+			<basic name="informationK" />
+			<basic name="informationB" />
+			<basic name="informationEquity" />
+			<transient name="primaryKey" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portlet.social.model.impl.SocialEquityHistoryModelImpl">
 		<attributes>
 			<id name="equityHistoryId" />
@@ -2319,6 +2324,9 @@
 			</basic>
 			<basic name="value" />
 			<basic name="validity" />
+			<basic name="active">
+				<column name="ACTIVE_" />
+			</basic>
 			<transient name="primaryKey" />
 			<transient name="userUuid" />
 		</attributes>
@@ -2335,10 +2343,22 @@
 			</basic>
 			<basic name="value" />
 			<basic name="validity" />
-			<basic name="active">
-				<column name="ACTIVE_" />
-			</basic>
 			<transient name="primaryKey" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portlet.social.model.impl.SocialEquityUserModelImpl">
+		<attributes>
+			<id name="equityUserId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="contributionEquity" />
+			<basic name="participationK" />
+			<basic name="participationB" />
+			<basic name="participationEquity" />
+			<basic name="personalEquity" />
+			<transient name="equityUserUuid" />
+			<transient name="primaryKey" />
+			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portlet.social.model.impl.SocialRelationModelImpl">
@@ -3179,6 +3199,10 @@
 		<table name="SocialActivity" />
 		<attributes />
 	</entity>
+	<entity class="com.liferay.portlet.social.model.impl.SocialEquityAssetEntryImpl" name="SocialEquityAssetEntry">
+		<table name="SocialEquityAssetEntry" />
+		<attributes />
+	</entity>
 	<entity class="com.liferay.portlet.social.model.impl.SocialEquityHistoryImpl" name="SocialEquityHistory">
 		<table name="SocialEquityHistory" />
 		<attributes />
@@ -3189,6 +3213,10 @@
 	</entity>
 	<entity class="com.liferay.portlet.social.model.impl.SocialEquitySettingImpl" name="SocialEquitySetting">
 		<table name="SocialEquitySetting" />
+		<attributes />
+	</entity>
+	<entity class="com.liferay.portlet.social.model.impl.SocialEquityUserImpl" name="SocialEquityUser">
+		<table name="SocialEquityUser" />
 		<attributes />
 	</entity>
 	<entity class="com.liferay.portlet.social.model.impl.SocialRelationImpl" name="SocialRelation">

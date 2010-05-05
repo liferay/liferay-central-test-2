@@ -65,10 +65,9 @@ public class SocialEquitySettingModelImpl extends BaseModelImpl<SocialEquitySett
 			{ "actionId", new Integer(Types.VARCHAR) },
 			{ "type_", new Integer(Types.INTEGER) },
 			{ "value", new Integer(Types.INTEGER) },
-			{ "validity", new Integer(Types.INTEGER) },
-			{ "active_", new Integer(Types.BOOLEAN) }
+			{ "validity", new Integer(Types.INTEGER) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table SocialEquitySetting (equitySettingId LONG not null primary key,groupId LONG,companyId LONG,classNameId LONG,actionId VARCHAR(75) null,type_ INTEGER,value INTEGER,validity INTEGER,active_ BOOLEAN)";
+	public static final String TABLE_SQL_CREATE = "create table SocialEquitySetting (equitySettingId LONG not null primary key,groupId LONG,companyId LONG,classNameId LONG,actionId VARCHAR(75) null,type_ INTEGER,value INTEGER,validity INTEGER)";
 	public static final String TABLE_SQL_DROP = "drop table SocialEquitySetting";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -91,7 +90,6 @@ public class SocialEquitySettingModelImpl extends BaseModelImpl<SocialEquitySett
 		model.setType(soapModel.getType());
 		model.setValue(soapModel.getValue());
 		model.setValidity(soapModel.getValidity());
-		model.setActive(soapModel.getActive());
 
 		return model;
 	}
@@ -202,18 +200,6 @@ public class SocialEquitySettingModelImpl extends BaseModelImpl<SocialEquitySett
 		_validity = validity;
 	}
 
-	public boolean getActive() {
-		return _active;
-	}
-
-	public boolean isActive() {
-		return _active;
-	}
-
-	public void setActive(boolean active) {
-		_active = active;
-	}
-
 	public SocialEquitySetting toEscapedModel() {
 		if (isEscapedModel()) {
 			return (SocialEquitySetting)this;
@@ -249,7 +235,6 @@ public class SocialEquitySettingModelImpl extends BaseModelImpl<SocialEquitySett
 		clone.setType(getType());
 		clone.setValue(getValue());
 		clone.setValidity(getValidity());
-		clone.setActive(getActive());
 
 		return clone;
 	}
@@ -297,7 +282,7 @@ public class SocialEquitySettingModelImpl extends BaseModelImpl<SocialEquitySett
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(19);
+		StringBundler sb = new StringBundler(17);
 
 		sb.append("{equitySettingId=");
 		sb.append(getEquitySettingId());
@@ -315,15 +300,13 @@ public class SocialEquitySettingModelImpl extends BaseModelImpl<SocialEquitySett
 		sb.append(getValue());
 		sb.append(", validity=");
 		sb.append(getValidity());
-		sb.append(", active=");
-		sb.append(getActive());
 		sb.append("}");
 
 		return sb.toString();
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(31);
+		StringBundler sb = new StringBundler(28);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portlet.social.model.SocialEquitySetting");
@@ -361,10 +344,6 @@ public class SocialEquitySettingModelImpl extends BaseModelImpl<SocialEquitySett
 			"<column><column-name>validity</column-name><column-value><![CDATA[");
 		sb.append(getValidity());
 		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>active</column-name><column-value><![CDATA[");
-		sb.append(getActive());
-		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -379,6 +358,5 @@ public class SocialEquitySettingModelImpl extends BaseModelImpl<SocialEquitySett
 	private int _type;
 	private int _value;
 	private int _validity;
-	private boolean _active;
 	private transient ExpandoBridge _expandoBridge;
 }

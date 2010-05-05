@@ -525,6 +525,15 @@ create index IX_1F00C374 on SocialActivity (mirrorActivityId, classNameId, class
 create index IX_121CA3CB on SocialActivity (receiverUserId);
 create index IX_3504B8BC on SocialActivity (userId);
 
+create unique index IX_22F6B5CB on SocialEquityAssetEntry (assetEntryId);
+
+create index IX_CA8ECBE0 on SocialEquityLog (assetEntryId, active_);
+create index IX_60CD2F21 on SocialEquityLog (userId, assetEntryId, actionId, active_);
+
+create index IX_5E81DA6F on SocialEquitySetting (classNameId, actionId);
+
+create unique index IX_6ECBD5D on SocialEquityUser (userId);
+
 create index IX_61171E99 on SocialRelation (companyId);
 create index IX_95135D1C on SocialRelation (companyId, type_);
 create index IX_C31A64C6 on SocialRelation (type_);

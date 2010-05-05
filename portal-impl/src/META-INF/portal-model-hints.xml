@@ -651,11 +651,6 @@
 		<field name="lockoutDate" type="Date" />
 		<field name="agreedToTermsOfUse" type="boolean" />
 		<field name="active" type="boolean" />
-		<field name="socialContributionEquity" type="double" />
-		<field name="socialParticipationK" type="double" />
-		<field name="socialParticipationB" type="double" />
-		<field name="socialParticipationEquity" type="double" />
-		<field name="socialPersonalEquity" type="double" />
 	</model>
 	<model name="com.liferay.portal.model.UserGroup">
 		<field name="userGroupId" type="long" />
@@ -856,9 +851,6 @@
 		<field name="width" type="int" />
 		<field name="priority" type="double" />
 		<field name="viewCount" type="int" />
-		<field name="socialInformationK" type="double" />
-		<field name="socialInformationB" type="double" />
-		<field name="socialInformationEquity" type="double" />
 	</model>
 	<model name="com.liferay.portlet.asset.model.AssetLink">
 		<field name="linkId" type="long" />
@@ -1767,6 +1759,15 @@
 		</field>
 		<field name="receiverUserId" type="long" />
 	</model>
+	<model name="com.liferay.portlet.social.model.SocialEquityAssetEntry">
+		<field name="equityAssetEntryId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="assetEntryId" type="long" />
+		<field name="informationK" type="double" />
+		<field name="informationB" type="double" />
+		<field name="informationEquity" type="double" />
+	</model>
 	<model name="com.liferay.portlet.social.model.SocialEquityHistory">
 		<field name="equityHistoryId" type="long" />
 		<field name="groupId" type="long" />
@@ -1786,6 +1787,7 @@
 		<field name="type" type="int" />
 		<field name="value" type="int" />
 		<field name="validity" type="int" />
+		<field name="active" type="boolean" />
 	</model>
 	<model name="com.liferay.portlet.social.model.SocialEquitySetting">
 		<field name="equitySettingId" type="long" />
@@ -1796,7 +1798,16 @@
 		<field name="type" type="int" />
 		<field name="value" type="int" />
 		<field name="validity" type="int" />
-		<field name="active" type="boolean" />
+	</model>
+	<model name="com.liferay.portlet.social.model.SocialEquityUser">
+		<field name="equityUserId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="contributionEquity" type="double" />
+		<field name="participationK" type="double" />
+		<field name="participationB" type="double" />
+		<field name="participationEquity" type="double" />
+		<field name="personalEquity" type="double" />
 	</model>
 	<model name="com.liferay.portlet.social.model.SocialRelation">
 		<field name="uuid" type="String" />

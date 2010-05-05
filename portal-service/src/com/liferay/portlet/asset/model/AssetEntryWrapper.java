@@ -245,30 +245,6 @@ public class AssetEntryWrapper implements AssetEntry {
 		_assetEntry.setViewCount(viewCount);
 	}
 
-	public double getSocialInformationK() {
-		return _assetEntry.getSocialInformationK();
-	}
-
-	public void setSocialInformationK(double socialInformationK) {
-		_assetEntry.setSocialInformationK(socialInformationK);
-	}
-
-	public double getSocialInformationB() {
-		return _assetEntry.getSocialInformationB();
-	}
-
-	public void setSocialInformationB(double socialInformationB) {
-		_assetEntry.setSocialInformationB(socialInformationB);
-	}
-
-	public double getSocialInformationEquity() {
-		return _assetEntry.getSocialInformationEquity();
-	}
-
-	public void setSocialInformationEquity(double socialInformationEquity) {
-		_assetEntry.setSocialInformationEquity(socialInformationEquity);
-	}
-
 	public com.liferay.portlet.asset.model.AssetEntry toEscapedModel() {
 		return _assetEntry.toEscapedModel();
 	}

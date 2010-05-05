@@ -48,7 +48,6 @@ public class SocialEquitySettingSoap implements Serializable {
 		soapModel.setType(model.getType());
 		soapModel.setValue(model.getValue());
 		soapModel.setValidity(model.getValidity());
-		soapModel.setActive(model.getActive());
 
 		return soapModel;
 	}
@@ -168,18 +167,6 @@ public class SocialEquitySettingSoap implements Serializable {
 		_validity = validity;
 	}
 
-	public boolean getActive() {
-		return _active;
-	}
-
-	public boolean isActive() {
-		return _active;
-	}
-
-	public void setActive(boolean active) {
-		_active = active;
-	}
-
 	private long _equitySettingId;
 	private long _groupId;
 	private long _companyId;
@@ -188,5 +175,4 @@ public class SocialEquitySettingSoap implements Serializable {
 	private int _type;
 	private int _value;
 	private int _validity;
-	private boolean _active;
 }

@@ -225,26 +225,6 @@ public interface UserModel extends BaseModel<User> {
 
 	public void setActive(boolean active);
 
-	public double getSocialContributionEquity();
-
-	public void setSocialContributionEquity(double socialContributionEquity);
-
-	public double getSocialParticipationK();
-
-	public void setSocialParticipationK(double socialParticipationK);
-
-	public double getSocialParticipationB();
-
-	public void setSocialParticipationB(double socialParticipationB);
-
-	public double getSocialParticipationEquity();
-
-	public void setSocialParticipationEquity(double socialParticipationEquity);
-
-	public double getSocialPersonalEquity();
-
-	public void setSocialPersonalEquity(double socialPersonalEquity);
-
 	public User toEscapedModel();
 
 	public boolean isNew();

@@ -82,12 +82,9 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry> {
 			{ "height", new Integer(Types.INTEGER) },
 			{ "width", new Integer(Types.INTEGER) },
 			{ "priority", new Integer(Types.DOUBLE) },
-			{ "viewCount", new Integer(Types.INTEGER) },
-			{ "socialInformationK", new Integer(Types.DOUBLE) },
-			{ "socialInformationB", new Integer(Types.DOUBLE) },
-			{ "socialInformationEquity", new Integer(Types.DOUBLE) }
+			{ "viewCount", new Integer(Types.INTEGER) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table AssetEntry (entryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,visible BOOLEAN,startDate DATE null,endDate DATE null,publishDate DATE null,expirationDate DATE null,mimeType VARCHAR(75) null,title VARCHAR(255) null,description STRING null,summary STRING null,url STRING null,height INTEGER,width INTEGER,priority DOUBLE,viewCount INTEGER,socialInformationK DOUBLE,socialInformationB DOUBLE,socialInformationEquity DOUBLE)";
+	public static final String TABLE_SQL_CREATE = "create table AssetEntry (entryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,visible BOOLEAN,startDate DATE null,endDate DATE null,publishDate DATE null,expirationDate DATE null,mimeType VARCHAR(75) null,title VARCHAR(255) null,description STRING null,summary STRING null,url STRING null,height INTEGER,width INTEGER,priority DOUBLE,viewCount INTEGER)";
 	public static final String TABLE_SQL_DROP = "drop table AssetEntry";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -125,9 +122,6 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry> {
 		model.setWidth(soapModel.getWidth());
 		model.setPriority(soapModel.getPriority());
 		model.setViewCount(soapModel.getViewCount());
-		model.setSocialInformationK(soapModel.getSocialInformationK());
-		model.setSocialInformationB(soapModel.getSocialInformationB());
-		model.setSocialInformationEquity(soapModel.getSocialInformationEquity());
 
 		return model;
 	}
@@ -435,30 +429,6 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry> {
 		_viewCount = viewCount;
 	}
 
-	public double getSocialInformationK() {
-		return _socialInformationK;
-	}
-
-	public void setSocialInformationK(double socialInformationK) {
-		_socialInformationK = socialInformationK;
-	}
-
-	public double getSocialInformationB() {
-		return _socialInformationB;
-	}
-
-	public void setSocialInformationB(double socialInformationB) {
-		_socialInformationB = socialInformationB;
-	}
-
-	public double getSocialInformationEquity() {
-		return _socialInformationEquity;
-	}
-
-	public void setSocialInformationEquity(double socialInformationEquity) {
-		_socialInformationEquity = socialInformationEquity;
-	}
-
 	public AssetEntry toEscapedModel() {
 		if (isEscapedModel()) {
 			return (AssetEntry)this;
@@ -509,9 +479,6 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry> {
 		clone.setWidth(getWidth());
 		clone.setPriority(getPriority());
 		clone.setViewCount(getViewCount());
-		clone.setSocialInformationK(getSocialInformationK());
-		clone.setSocialInformationB(getSocialInformationB());
-		clone.setSocialInformationEquity(getSocialInformationEquity());
 
 		return clone;
 	}
@@ -559,7 +526,7 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry> {
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(53);
+		StringBundler sb = new StringBundler(47);
 
 		sb.append("{entryId=");
 		sb.append(getEntryId());
@@ -607,19 +574,13 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry> {
 		sb.append(getPriority());
 		sb.append(", viewCount=");
 		sb.append(getViewCount());
-		sb.append(", socialInformationK=");
-		sb.append(getSocialInformationK());
-		sb.append(", socialInformationB=");
-		sb.append(getSocialInformationB());
-		sb.append(", socialInformationEquity=");
-		sb.append(getSocialInformationEquity());
 		sb.append("}");
 
 		return sb.toString();
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(82);
+		StringBundler sb = new StringBundler(73);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portlet.asset.model.AssetEntry");
@@ -717,18 +678,6 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry> {
 			"<column><column-name>viewCount</column-name><column-value><![CDATA[");
 		sb.append(getViewCount());
 		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>socialInformationK</column-name><column-value><![CDATA[");
-		sb.append(getSocialInformationK());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>socialInformationB</column-name><column-value><![CDATA[");
-		sb.append(getSocialInformationB());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>socialInformationEquity</column-name><column-value><![CDATA[");
-		sb.append(getSocialInformationEquity());
-		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -763,8 +712,5 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry> {
 	private int _width;
 	private double _priority;
 	private int _viewCount;
-	private double _socialInformationK;
-	private double _socialInformationB;
-	private double _socialInformationEquity;
 	private transient ExpandoBridge _expandoBridge;
 }

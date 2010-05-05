@@ -60,6 +60,37 @@ public interface SocialEquitySettingPersistence extends BasePersistence<SocialEq
 		long equitySettingId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	public java.util.List<com.liferay.portlet.social.model.SocialEquitySetting> findByC_A(
+		long classNameId, java.lang.String actionId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.social.model.SocialEquitySetting> findByC_A(
+		long classNameId, java.lang.String actionId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.social.model.SocialEquitySetting> findByC_A(
+		long classNameId, java.lang.String actionId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.portlet.social.model.SocialEquitySetting findByC_A_First(
+		long classNameId, java.lang.String actionId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.social.NoSuchEquitySettingException;
+
+	public com.liferay.portlet.social.model.SocialEquitySetting findByC_A_Last(
+		long classNameId, java.lang.String actionId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.social.NoSuchEquitySettingException;
+
+	public com.liferay.portlet.social.model.SocialEquitySetting[] findByC_A_PrevAndNext(
+		long equitySettingId, long classNameId, java.lang.String actionId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.social.NoSuchEquitySettingException;
+
 	public java.util.List<com.liferay.portlet.social.model.SocialEquitySetting> findAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
 
@@ -72,7 +103,13 @@ public interface SocialEquitySettingPersistence extends BasePersistence<SocialEq
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	public void removeByC_A(long classNameId, java.lang.String actionId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public void removeAll()
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public int countByC_A(long classNameId, java.lang.String actionId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countAll()

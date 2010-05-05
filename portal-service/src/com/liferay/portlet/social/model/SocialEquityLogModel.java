@@ -92,6 +92,12 @@ public interface SocialEquityLogModel extends BaseModel<SocialEquityLog> {
 
 	public void setValidity(int validity);
 
+	public boolean getActive();
+
+	public boolean isActive();
+
+	public void setActive(boolean active);
+
 	public SocialEquityLog toEscapedModel();
 
 	public boolean isNew();

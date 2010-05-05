@@ -657,11 +657,6 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 		userImpl.setLockoutDate(user.getLockoutDate());
 		userImpl.setAgreedToTermsOfUse(user.isAgreedToTermsOfUse());
 		userImpl.setActive(user.isActive());
-		userImpl.setSocialContributionEquity(user.getSocialContributionEquity());
-		userImpl.setSocialParticipationK(user.getSocialParticipationK());
-		userImpl.setSocialParticipationB(user.getSocialParticipationB());
-		userImpl.setSocialParticipationEquity(user.getSocialParticipationEquity());
-		userImpl.setSocialPersonalEquity(user.getSocialPersonalEquity());
 
 		return userImpl;
 	}

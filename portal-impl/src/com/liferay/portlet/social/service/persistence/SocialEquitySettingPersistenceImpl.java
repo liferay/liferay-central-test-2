@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.Query;
+import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -29,6 +30,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.BatchSessionUtil;
@@ -65,6 +67,23 @@ public class SocialEquitySettingPersistenceImpl extends BasePersistenceImpl<Soci
 	public static final String FINDER_CLASS_NAME_ENTITY = SocialEquitySettingImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
+	public static final FinderPath FINDER_PATH_FIND_BY_C_A = new FinderPath(SocialEquitySettingModelImpl.ENTITY_CACHE_ENABLED,
+			SocialEquitySettingModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByC_A",
+			new String[] { Long.class.getName(), String.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_C_A = new FinderPath(SocialEquitySettingModelImpl.ENTITY_CACHE_ENABLED,
+			SocialEquitySettingModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByC_A",
+			new String[] {
+				Long.class.getName(), String.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_C_A = new FinderPath(SocialEquitySettingModelImpl.ENTITY_CACHE_ENABLED,
+			SocialEquitySettingModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByC_A",
+			new String[] { Long.class.getName(), String.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(SocialEquitySettingModelImpl.ENTITY_CACHE_ENABLED,
 			SocialEquitySettingModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "findAll", new String[0]);
@@ -245,7 +264,6 @@ public class SocialEquitySettingPersistenceImpl extends BasePersistenceImpl<Soci
 		socialEquitySettingImpl.setType(socialEquitySetting.getType());
 		socialEquitySettingImpl.setValue(socialEquitySetting.getValue());
 		socialEquitySettingImpl.setValidity(socialEquitySetting.getValidity());
-		socialEquitySettingImpl.setActive(socialEquitySetting.isActive());
 
 		return socialEquitySettingImpl;
 	}
@@ -303,6 +321,362 @@ public class SocialEquitySettingPersistenceImpl extends BasePersistenceImpl<Soci
 		}
 
 		return socialEquitySetting;
+	}
+
+	public List<SocialEquitySetting> findByC_A(long classNameId, String actionId)
+		throws SystemException {
+		Object[] finderArgs = new Object[] { new Long(classNameId), actionId };
+
+		List<SocialEquitySetting> list = (List<SocialEquitySetting>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_C_A,
+				finderArgs, this);
+
+		if (list == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBundler query = new StringBundler(3);
+
+				query.append(_SQL_SELECT_SOCIALEQUITYSETTING_WHERE);
+
+				query.append(_FINDER_COLUMN_C_A_CLASSNAMEID_2);
+
+				if (actionId == null) {
+					query.append(_FINDER_COLUMN_C_A_ACTIONID_1);
+				}
+				else {
+					if (actionId.equals(StringPool.BLANK)) {
+						query.append(_FINDER_COLUMN_C_A_ACTIONID_3);
+					}
+					else {
+						query.append(_FINDER_COLUMN_C_A_ACTIONID_2);
+					}
+				}
+
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(classNameId);
+
+				if (actionId != null) {
+					qPos.add(actionId);
+				}
+
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<SocialEquitySetting>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_A, finderArgs,
+					list);
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	public List<SocialEquitySetting> findByC_A(long classNameId,
+		String actionId, int start, int end) throws SystemException {
+		return findByC_A(classNameId, actionId, start, end, null);
+	}
+
+	public List<SocialEquitySetting> findByC_A(long classNameId,
+		String actionId, int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
+		Object[] finderArgs = new Object[] {
+				new Long(classNameId),
+				
+				actionId,
+				
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
+			};
+
+		List<SocialEquitySetting> list = (List<SocialEquitySetting>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_C_A,
+				finderArgs, this);
+
+		if (list == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBundler query = null;
+
+				if (orderByComparator != null) {
+					query = new StringBundler(4 +
+							(orderByComparator.getOrderByFields().length * 3));
+				}
+				else {
+					query = new StringBundler(3);
+				}
+
+				query.append(_SQL_SELECT_SOCIALEQUITYSETTING_WHERE);
+
+				query.append(_FINDER_COLUMN_C_A_CLASSNAMEID_2);
+
+				if (actionId == null) {
+					query.append(_FINDER_COLUMN_C_A_ACTIONID_1);
+				}
+				else {
+					if (actionId.equals(StringPool.BLANK)) {
+						query.append(_FINDER_COLUMN_C_A_ACTIONID_3);
+					}
+					else {
+						query.append(_FINDER_COLUMN_C_A_ACTIONID_2);
+					}
+				}
+
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
+				}
+
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(classNameId);
+
+				if (actionId != null) {
+					qPos.add(actionId);
+				}
+
+				list = (List<SocialEquitySetting>)QueryUtil.list(q,
+						getDialect(), start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<SocialEquitySetting>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_C_A,
+					finderArgs, list);
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	public SocialEquitySetting findByC_A_First(long classNameId,
+		String actionId, OrderByComparator orderByComparator)
+		throws NoSuchEquitySettingException, SystemException {
+		List<SocialEquitySetting> list = findByC_A(classNameId, actionId, 0, 1,
+				orderByComparator);
+
+		if (list.isEmpty()) {
+			StringBundler msg = new StringBundler(6);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("classNameId=");
+			msg.append(classNameId);
+
+			msg.append(", actionId=");
+			msg.append(actionId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchEquitySettingException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public SocialEquitySetting findByC_A_Last(long classNameId,
+		String actionId, OrderByComparator orderByComparator)
+		throws NoSuchEquitySettingException, SystemException {
+		int count = countByC_A(classNameId, actionId);
+
+		List<SocialEquitySetting> list = findByC_A(classNameId, actionId,
+				count - 1, count, orderByComparator);
+
+		if (list.isEmpty()) {
+			StringBundler msg = new StringBundler(6);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("classNameId=");
+			msg.append(classNameId);
+
+			msg.append(", actionId=");
+			msg.append(actionId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchEquitySettingException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public SocialEquitySetting[] findByC_A_PrevAndNext(long equitySettingId,
+		long classNameId, String actionId, OrderByComparator orderByComparator)
+		throws NoSuchEquitySettingException, SystemException {
+		SocialEquitySetting socialEquitySetting = findByPrimaryKey(equitySettingId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SocialEquitySetting[] array = new SocialEquitySettingImpl[3];
+
+			array[0] = getByC_A_PrevAndNext(session, socialEquitySetting,
+					classNameId, actionId, orderByComparator, true);
+
+			array[1] = socialEquitySetting;
+
+			array[2] = getByC_A_PrevAndNext(session, socialEquitySetting,
+					classNameId, actionId, orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected SocialEquitySetting getByC_A_PrevAndNext(Session session,
+		SocialEquitySetting socialEquitySetting, long classNameId,
+		String actionId, OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_SOCIALEQUITYSETTING_WHERE);
+
+		query.append(_FINDER_COLUMN_C_A_CLASSNAMEID_2);
+
+		if (actionId == null) {
+			query.append(_FINDER_COLUMN_C_A_ACTIONID_1);
+		}
+		else {
+			if (actionId.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_C_A_ACTIONID_3);
+			}
+			else {
+				query.append(_FINDER_COLUMN_C_A_ACTIONID_2);
+			}
+		}
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+
+			query.append(WHERE_LIMIT_2);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(classNameId);
+
+		if (actionId != null) {
+			qPos.add(actionId);
+		}
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(socialEquitySetting);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<SocialEquitySetting> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
 	}
 
 	public List<SocialEquitySetting> findAll() throws SystemException {
@@ -379,10 +753,81 @@ public class SocialEquitySettingPersistenceImpl extends BasePersistenceImpl<Soci
 		return list;
 	}
 
+	public void removeByC_A(long classNameId, String actionId)
+		throws SystemException {
+		for (SocialEquitySetting socialEquitySetting : findByC_A(classNameId,
+				actionId)) {
+			remove(socialEquitySetting);
+		}
+	}
+
 	public void removeAll() throws SystemException {
 		for (SocialEquitySetting socialEquitySetting : findAll()) {
 			remove(socialEquitySetting);
 		}
+	}
+
+	public int countByC_A(long classNameId, String actionId)
+		throws SystemException {
+		Object[] finderArgs = new Object[] { new Long(classNameId), actionId };
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_A,
+				finderArgs, this);
+
+		if (count == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBundler query = new StringBundler(3);
+
+				query.append(_SQL_COUNT_SOCIALEQUITYSETTING_WHERE);
+
+				query.append(_FINDER_COLUMN_C_A_CLASSNAMEID_2);
+
+				if (actionId == null) {
+					query.append(_FINDER_COLUMN_C_A_ACTIONID_1);
+				}
+				else {
+					if (actionId.equals(StringPool.BLANK)) {
+						query.append(_FINDER_COLUMN_C_A_ACTIONID_3);
+					}
+					else {
+						query.append(_FINDER_COLUMN_C_A_ACTIONID_2);
+					}
+				}
+
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(classNameId);
+
+				if (actionId != null) {
+					qPos.add(actionId);
+				}
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_A, finderArgs,
+					count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
 	}
 
 	public int countAll() throws SystemException {
@@ -443,12 +888,16 @@ public class SocialEquitySettingPersistenceImpl extends BasePersistenceImpl<Soci
 
 	@BeanReference(type = SocialActivityPersistence.class)
 	protected SocialActivityPersistence socialActivityPersistence;
+	@BeanReference(type = SocialEquityAssetEntryPersistence.class)
+	protected SocialEquityAssetEntryPersistence socialEquityAssetEntryPersistence;
 	@BeanReference(type = SocialEquityHistoryPersistence.class)
 	protected SocialEquityHistoryPersistence socialEquityHistoryPersistence;
 	@BeanReference(type = SocialEquityLogPersistence.class)
 	protected SocialEquityLogPersistence socialEquityLogPersistence;
 	@BeanReference(type = SocialEquitySettingPersistence.class)
 	protected SocialEquitySettingPersistence socialEquitySettingPersistence;
+	@BeanReference(type = SocialEquityUserPersistence.class)
+	protected SocialEquityUserPersistence socialEquityUserPersistence;
 	@BeanReference(type = SocialRelationPersistence.class)
 	protected SocialRelationPersistence socialRelationPersistence;
 	@BeanReference(type = SocialRequestPersistence.class)
@@ -458,8 +907,15 @@ public class SocialEquitySettingPersistenceImpl extends BasePersistenceImpl<Soci
 	@BeanReference(type = UserPersistence.class)
 	protected UserPersistence userPersistence;
 	private static final String _SQL_SELECT_SOCIALEQUITYSETTING = "SELECT socialEquitySetting FROM SocialEquitySetting socialEquitySetting";
+	private static final String _SQL_SELECT_SOCIALEQUITYSETTING_WHERE = "SELECT socialEquitySetting FROM SocialEquitySetting socialEquitySetting WHERE ";
 	private static final String _SQL_COUNT_SOCIALEQUITYSETTING = "SELECT COUNT(socialEquitySetting) FROM SocialEquitySetting socialEquitySetting";
+	private static final String _SQL_COUNT_SOCIALEQUITYSETTING_WHERE = "SELECT COUNT(socialEquitySetting) FROM SocialEquitySetting socialEquitySetting WHERE ";
+	private static final String _FINDER_COLUMN_C_A_CLASSNAMEID_2 = "socialEquitySetting.classNameId = ? AND ";
+	private static final String _FINDER_COLUMN_C_A_ACTIONID_1 = "socialEquitySetting.actionId IS NULL";
+	private static final String _FINDER_COLUMN_C_A_ACTIONID_2 = "socialEquitySetting.actionId = ?";
+	private static final String _FINDER_COLUMN_C_A_ACTIONID_3 = "(socialEquitySetting.actionId IS NULL OR socialEquitySetting.actionId = ?)";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "socialEquitySetting.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No SocialEquitySetting exists with the primary key ";
+	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No SocialEquitySetting exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(SocialEquitySettingPersistenceImpl.class);
 }
