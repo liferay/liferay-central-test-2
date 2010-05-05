@@ -20,12 +20,12 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.PrefsPropsUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
-import com.liferay.portal.util.PropsValues;
 
 /**
  * <a href="DefaultScreenNameGenerator.java.html"><b><i>View Source</i></b></a>
@@ -62,7 +62,7 @@ public class DefaultScreenNameGenerator implements ScreenNameGenerator {
 
 		String[] reservedScreenNames = PrefsPropsUtil.getStringArray(
 			companyId, PropsKeys.ADMIN_RESERVED_SCREEN_NAMES,
-			StringPool.NEW_LINE, PropsValues.ADMIN_RESERVED_SCREEN_NAMES);
+			StringPool.NEW_LINE, _ADMIN_RESERVED_SCREEN_NAMES);
 
 		for (String reservedScreenName : reservedScreenNames) {
 			if (screenName.equalsIgnoreCase(reservedScreenName)) {
@@ -111,5 +111,10 @@ public class DefaultScreenNameGenerator implements ScreenNameGenerator {
 
 		return screenName;
 	}
+
+	private static final String[] _ADMIN_RESERVED_SCREEN_NAMES =
+		StringUtil.split(
+			PropsUtil.get(PropsKeys.ADMIN_RESERVED_SCREEN_NAMES),
+			StringPool.NEW_LINE);
 
 }
