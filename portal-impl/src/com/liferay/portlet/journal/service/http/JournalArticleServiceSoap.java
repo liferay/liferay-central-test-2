@@ -203,6 +203,22 @@ public class JournalArticleServiceSoap {
 		}
 	}
 
+	public static com.liferay.portlet.journal.model.JournalArticleSoap getLatestArticle(
+		long groupId, java.lang.String articleId, int status)
+		throws RemoteException {
+		try {
+			com.liferay.portlet.journal.model.JournalArticle returnValue = JournalArticleServiceUtil.getLatestArticle(groupId,
+					articleId, status);
+
+			return com.liferay.portlet.journal.model.JournalArticleSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static void removeArticleLocale(long companyId,
 		java.lang.String languageId) throws RemoteException {
 		try {
@@ -233,11 +249,10 @@ public class JournalArticleServiceSoap {
 
 	public static com.liferay.portlet.journal.model.JournalArticleSoap updateArticle(
 		long groupId, java.lang.String articleId, double version,
-		boolean incrementVersion, java.lang.String content)
-		throws RemoteException {
+		java.lang.String content) throws RemoteException {
 		try {
 			com.liferay.portlet.journal.model.JournalArticle returnValue = JournalArticleServiceUtil.updateArticle(groupId,
-					articleId, version, incrementVersion, content);
+					articleId, version, content);
 
 			return com.liferay.portlet.journal.model.JournalArticleSoap.toSoapModel(returnValue);
 		}

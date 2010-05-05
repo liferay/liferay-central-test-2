@@ -681,6 +681,7 @@ Liferay.Service.registerClass(
 		expireArticle: true,
 		getArticle: true,
 		getArticleByUrlTitle: true,
+		getLatestArticle: true,
 		removeArticleLocale: true,
 		updateArticle: true,
 		updateContent: true

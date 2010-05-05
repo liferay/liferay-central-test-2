@@ -386,8 +386,16 @@ public class JournalArticleWrapper implements JournalArticle {
 		return _journalArticle.isApproved();
 	}
 
+	public boolean isDraft() {
+		return _journalArticle.isDraft();
+	}
+
 	public boolean isExpired() {
 		return _journalArticle.isExpired();
+	}
+
+	public boolean isPending() {
+		return _journalArticle.isPending();
 	}
 
 	public boolean isTemplateDriven() {
