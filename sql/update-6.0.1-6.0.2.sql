@@ -1,8 +1,14 @@
-alter table AssetEntry add socialInformationK DOUBLE;
-alter table AssetEntry add socialInformationB DOUBLE;
-alter table AssetEntry add socialInformationEquity DOUBLE;
-
 alter table LayoutSet add settings_ TEXT null;
+
+create table SocialEquityAssetEntry (
+	equityAssetEntryId LONG not null primary key,
+	companyId LONG,
+	userId LONG,
+	assetEntryId LONG,
+	informationK DOUBLE,
+	informationB DOUBLE,
+	informationEquity DOUBLE
+);
 
 create table SocialEquityHistory (
 	equityHistoryId LONG not null primary key,
@@ -23,7 +29,8 @@ create table SocialEquityLog (
 	actionDate INTEGER,
 	type_ INTEGER,
 	value INTEGER,
-	validity INTEGER
+	validity INTEGER,
+	active_ BOOLEAN
 );
 
 create table SocialEquitySetting (
@@ -34,8 +41,18 @@ create table SocialEquitySetting (
 	actionId VARCHAR(75) null,
 	type_ INTEGER,
 	value INTEGER,
-	validity INTEGER,
-	active_ BOOLEAN
+	validity INTEGER
+);
+
+create table SocialEquityUser (
+	equityUserId LONG not null primary key,
+	companyId LONG,
+	userId LONG,
+	contributionEquity DOUBLE,
+	participationK DOUBLE,
+	participationB DOUBLE,
+	participationEquity DOUBLE,
+	personalEquity DOUBLE
 );
 
 create table Ticket (
@@ -47,9 +64,3 @@ create table Ticket (
 	key_ VARCHAR(75) null,
 	expirationDate DATE null
 );
-
-alter table User_ add socialContributionEquity DOUBLE;
-alter table User_ add socialParticipationK DOUBLE;
-alter table User_ add socialParticipationB DOUBLE;
-alter table User_ add socialParticipationEquity DOUBLE;
-alter table User_ add socialPersonalEquity DOUBLE;

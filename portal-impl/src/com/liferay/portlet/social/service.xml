@@ -80,6 +80,30 @@
 		<reference package-path="com.liferay.portal" entity="User" />
 	</entity>
 	<entity name="SocialActivityInterpreter" local-service="true" remote-service="false" tx-manager="none" />
+	<entity name="SocialEquityAssetEntry" local-service="false" remote-service="false">
+
+		<!-- PK fields -->
+
+		<column name="equityAssetEntryId" type="long" primary="true" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+
+		<!-- Other fields -->
+
+		<column name="assetEntryId" type="long" />
+		<column name="informationK" type="double" />
+		<column name="informationB" type="double" />
+		<column name="informationEquity" type="double" />
+
+		<!-- Finder methods -->
+
+		<finder name="AssetEntryId" return-type="SocialEquityAssetEntry" unique="true">
+			<finder-column name="assetEntryId" />
+		</finder>
+	</entity>
 	<entity name="SocialEquityHistory" local-service="true" remote-service="false">
 
 		<!-- PK fields -->
@@ -123,6 +147,20 @@
 		<column name="type" type="int" />
 		<column name="value" type="int" />
 		<column name="validity" type="int" />
+		<column name="active" type="boolean" />
+
+		<!-- Finder methods -->
+
+		<finder name="AEI_A" return-type="Collection">
+			<finder-column name="assetEntryId" />
+			<finder-column name="active" />
+		</finder>
+		<finder name="U_AEI_A_A" return-type="Collection">
+			<finder-column name="userId" />
+			<finder-column name="assetEntryId" />
+			<finder-column name="actionId" />
+			<finder-column name="active" />
+		</finder>
 	</entity>
 	<entity name="SocialEquitySetting" local-service="true" remote-service="false">
 
@@ -145,7 +183,38 @@
 		<column name="type" type="int" />
 		<column name="value" type="int" />
 		<column name="validity" type="int" />
-		<column name="active" type="boolean" />
+
+		<!-- Finder methods -->
+
+		<finder name="C_A" return-type="Collection">
+			<finder-column name="classNameId" />
+			<finder-column name="actionId" />
+		</finder>
+	</entity>
+	<entity name="SocialEquityUser" local-service="false" remote-service="false">
+
+		<!-- PK fields -->
+
+		<column name="equityUserId" type="long" primary="true" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+
+ 		<!-- Other fields -->
+
+		<column name="contributionEquity" type="double" />
+		<column name="participationK" type="double" />
+		<column name="participationB" type="double" />
+		<column name="participationEquity" type="double" />
+		<column name="personalEquity" type="double" />
+
+		<!-- Finder methods -->
+
+		<finder name="UserId" return-type="SocialEquityUser" unique="true">
+			<finder-column name="userId" />
+		</finder>
 	</entity>
 	<entity name="SocialRelation" uuid="true" local-service="true" remote-service="false">
 

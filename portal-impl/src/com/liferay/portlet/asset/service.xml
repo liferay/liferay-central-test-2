@@ -148,9 +148,6 @@
 		<column name="width" type="int" />
 		<column name="priority" type="double" />
 		<column name="viewCount" type="int" />
-		<column name="socialInformationK" type="double" />
-		<column name="socialInformationB" type="double" />
-		<column name="socialInformationEquity" type="double" />
 
 		<!-- Relationships -->
 
