@@ -88,9 +88,10 @@ public class LuceneServlet extends HttpServlet {
 
 				schedulerEntry.setEventListenerClass(
 					CleanUpMessageListener.class.getName());
-				schedulerEntry.setTimeUnit(TimeUnit.DAY);
+				schedulerEntry.setTimeUnit(TimeUnit.MINUTE);
 				schedulerEntry.setTriggerType(TriggerType.SIMPLE);
-				schedulerEntry.setTriggerValue("1");
+				schedulerEntry.setTriggerValue(
+					PropsValues.LUCENE_STORE_JDBC_AUTO_CLEAN_UP_INTERVAL);
 
 				try {
 					SchedulerEngineUtil.schedule(

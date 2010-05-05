@@ -1029,6 +1029,9 @@ public class PropsValues {
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.LUCENE_STORE_JDBC_AUTO_CLEAN_UP));
 
+	public static final String LUCENE_STORE_JDBC_AUTO_CLEAN_UP_INTERVAL =
+		PropsUtil.get(PropsKeys.LUCENE_STORE_JDBC_AUTO_CLEAN_UP_INTERVAL);
+
 	public static final String LUCENE_STORE_TYPE = PropsUtil.get(
 		PropsKeys.LUCENE_STORE_TYPE);
 
