@@ -9,7 +9,7 @@
 <tr><td rowspan="1" colspan="3">EditTagNameTest</td></tr>
 </thead><tbody>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>waitForVisible</td>
 	<td>link=Tags</td>
 	<td></td>
 </tr>
@@ -19,9 +19,14 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>waitForVisible</td>
 	<td>//div[4]/ul/li/span/a</td>
 	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[4]/ul/li/span/a</td>
+	<td>selenium</td>
 </tr>
 <tr>
 	<td>clickAt</td>
@@ -34,24 +39,19 @@
 	<td>selenium ide</td>
 </tr>
 <tr>
-	<td>pause</td>
-	<td>500</td>
-	<td></td>
-</tr>
-<tr>
 	<td>clickAt</td>
-	<td>//td[2]/div[2]/div[3]/input[1]</td>
+	<td>//div[3]/input[1]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>link=selenium ide</td>
-	<td></td>
+	<td>waitForText</td>
+	<td>//div[4]/ul/li/span/a</td>
+	<td>selenium ide</td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
-	<td>link=selenium ide</td>
-	<td></td>
+	<td>assertText</td>
+	<td>//div[4]/ul/li/span/a</td>
+	<td>selenium ide</td>
 </tr>
 
 </tbody></table>

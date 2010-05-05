@@ -49,7 +49,7 @@ public class AssertEditBodyCancelTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//div[4]/ul/li/span/a")) {
+				if (selenium.isVisible("//div[4]/ul/li/span/a")) {
 					break;
 				}
 			}
@@ -60,8 +60,6 @@ public class AssertEditBodyCancelTest extends BaseTestCase {
 		}
 
 		selenium.clickAt("//div[4]/ul/li/span/a", RuntimeVariables.replace(""));
-		Thread.sleep(500);
-		assertTrue(selenium.isVisible("//td[2]/div[2]/div[3]/input[2]"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -69,7 +67,7 @@ public class AssertEditBodyCancelTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//td[2]/div[2]/div[3]/input[2]")) {
+				if (selenium.isVisible("//td[2]/div[2]/div[3]/input[2]")) {
 					break;
 				}
 			}
@@ -79,6 +77,7 @@ public class AssertEditBodyCancelTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		assertTrue(selenium.isVisible("//td[2]/div[2]/div[3]/input[2]"));
 		selenium.clickAt("//td[2]/div[2]/div[3]/input[2]",
 			RuntimeVariables.replace(""));
 		assertFalse(selenium.isVisible("//td[2]/div[2]/div[3]/input[2]"));
@@ -89,26 +88,7 @@ public class AssertEditBodyCancelTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Tags")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("link=Tags", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//div[4]/ul/li/span/a")) {
+				if (selenium.isVisible("//div[4]/ul/li/span/a")) {
 					break;
 				}
 			}
@@ -126,7 +106,7 @@ public class AssertEditBodyCancelTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//div[3]/div[2]/input[1]")) {
+				if (selenium.isVisible("//div[3]/div[2]/input[1]")) {
 					break;
 				}
 			}

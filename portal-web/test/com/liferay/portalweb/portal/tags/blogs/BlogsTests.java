@@ -30,9 +30,7 @@ public class BlogsTests extends BaseTests {
 		TestSuite testSuite = new TestSuite();
 
 		testSuite.addTestSuite(SetupTest.class);
-		testSuite.addTestSuite(ControlPanelTest.class);
 		testSuite.addTestSuite(AssertNoTagsInTagsAdminTest.class);
-		testSuite.addTestSuite(EndControlPanelTest.class);
 		testSuite.addTestSuite(AssertNoTagsInSelectTagsTest.class);
 		testSuite.addTestSuite(AddTagTest.class);
 		testSuite.addTestSuite(AddAmpersandTagTest.class);
@@ -57,9 +55,7 @@ public class BlogsTests extends BaseTests {
 		testSuite.addTestSuite(AddTildeTagTest.class);
 		testSuite.addTestSuite(AddTagThroughJavaScriptTest.class);
 		testSuite.addTestSuite(AddMultipleTagsTest.class);
-		testSuite.addTestSuite(ControlPanelTest.class);
 		testSuite.addTestSuite(AssertTagsInTagsAdminTest.class);
-		testSuite.addTestSuite(EndControlPanelTest.class);
 		testSuite.addTestSuite(AssertTagsInSelectTagsTest.class);
 		testSuite.addTestSuite(SelectTagsTest.class);
 		testSuite.addTestSuite(RemoveTagThroughSelectTagTest.class);
@@ -69,13 +65,12 @@ public class BlogsTests extends BaseTests {
 		testSuite.addTestSuite(SearchPartialTagsTest.class);
 		testSuite.addTestSuite(RemoveTagThroughJavaScriptTest.class);
 		testSuite.addTestSuite(SearchRemovedTagTest.class);
-		testSuite.addTestSuite(ControlPanelTest.class);
 		testSuite.addTestSuite(DeleteTagTest.class);
-		testSuite.addTestSuite(EndControlPanelTest.class);
 		testSuite.addTestSuite(AssertDeletedTagDoesNotPersistTest.class);
 		testSuite.addTestSuite(SuggestionTagTest.class);
 		testSuite.addTestSuite(AddUTFTagTest.class);
 		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

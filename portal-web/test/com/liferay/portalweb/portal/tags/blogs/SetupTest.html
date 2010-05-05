@@ -9,43 +9,38 @@
 <tr><td rowspan="1" colspan="3">SetupTest</td></tr>
 </thead><tbody>
 <tr>
+	<td>open</td>
+	<td>/web/guest/home/</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id='_145_myPlacesContainer']/ul/li[2]/a/span[1]</td>
+	<td>addPage</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAtAndWait</td>
-	<td>//div[@id='_145_myPlacesContainer']/ul/li[2]/a/span[1]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAtAndWait</td>
-	<td>link=Manage Pages</td>
+	<td>clickAt</td>
+	<td>addPage</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForVisible</td>
-	<td>//div[@id='_88_layoutsTreeOutput']/ul/li/a/span</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAtAndWait</td>
-	<td>//div[@id='_88_layoutsTreeOutput']/ul/li/a/span</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForVisible</td>
-	<td>_88_name_en_US</td>
+	<td>//input</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>_88_name_en_US</td>
+	<td>//input</td>
 	<td>Blogs Tags Test Page</td>
 </tr>
 <tr>
-	<td>clickAtAndWait</td>
-	<td>//input[@value='Add Page']</td>
+	<td>clickAt</td>
+	<td>save</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>link=Blogs Tags Test Page</td>
 	<td></td>
 </tr>
 <tr>
@@ -55,17 +50,32 @@
 </tr>
 <tr>
 	<td>clickAt</td>
-	<td>link=Application</td>
+	<td>_145_addApplication</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>//div[@id="Collaboration-Blogs"]</td>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>layout_configuration_content</td>
+	<td></td>
+</tr>
+<tr>
+	<td>typeKeys</td>
+	<td>layout_configuration_content</td>
+	<td>b</td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>//div[@title='Blogs']/p/a</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAt</td>
-	<td>//div[@id="Collaboration-Blogs"]/p/a</td>
+	<td>//div[@title='Blogs']/p/a</td>
 	<td></td>
 </tr>
 <tr>
@@ -100,7 +110,7 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>FCKeditor1___Frame</td>
+	<td>cke_contents_CKEditor1</td>
 	<td></td>
 </tr>
 <tr>
@@ -110,17 +120,12 @@
 </tr>
 <tr>
 	<td>selectFrame</td>
-	<td>//iframe[@id="_33_editor"]</td>
+	<td>//iframe[@id='_33_editor']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>selectFrame</td>
-	<td>//iframe[@id="FCKeditor1___Frame"]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>selectFrame</td>
-	<td>//iframe</td>
+	<td>//td[@id='cke_contents_CKEditor1']/iframe</td>
 	<td></td>
 </tr>
 <tr>
@@ -175,7 +180,7 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>FCKeditor1___Frame</td>
+	<td>cke_contents_CKEditor1</td>
 	<td></td>
 </tr>
 <tr>
@@ -185,17 +190,12 @@
 </tr>
 <tr>
 	<td>selectFrame</td>
-	<td>//iframe[@id="_33_editor"]</td>
+	<td>//iframe[@id='_33_editor']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>selectFrame</td>
-	<td>//iframe[@id="FCKeditor1___Frame"]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>selectFrame</td>
-	<td>//iframe</td>
+	<td>//td[@id='cke_contents_CKEditor1']/iframe</td>
 	<td></td>
 </tr>
 <tr>
@@ -250,7 +250,7 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>FCKeditor1___Frame</td>
+	<td>cke_contents_CKEditor1</td>
 	<td></td>
 </tr>
 <tr>
@@ -260,17 +260,12 @@
 </tr>
 <tr>
 	<td>selectFrame</td>
-	<td>//iframe[@id="_33_editor"]</td>
+	<td>//iframe[@id='_33_editor']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>selectFrame</td>
-	<td>//iframe[@id="FCKeditor1___Frame"]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>selectFrame</td>
-	<td>//iframe</td>
+	<td>//td[@id='cke_contents_CKEditor1']/iframe</td>
 	<td></td>
 </tr>
 <tr>

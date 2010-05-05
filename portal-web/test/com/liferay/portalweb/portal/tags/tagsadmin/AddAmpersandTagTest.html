@@ -9,7 +9,7 @@
 <tr><td rowspan="1" colspan="3">AddAmpersandTagTest</td></tr>
 </thead><tbody>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>waitForVisible</td>
 	<td>link=Tags</td>
 	<td></td>
 </tr>
@@ -19,29 +19,19 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>add-tag-button</td>
-	<td></td>
-</tr>
-<tr>
 	<td>clickAt</td>
 	<td>add-tag-button</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>waitForVisible</td>
 	<td>new-tag-name</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>new-tag-name</td>
-	<td>&test</td>
-</tr>
-<tr>
-	<td>pause</td>
-	<td>500</td>
-	<td></td>
+	<td>&amp;test</td>
 </tr>
 <tr>
 	<td>clickAt</td>
@@ -49,18 +39,18 @@
 	<td></td>
 </tr>
 <tr>
-	<td>pause</td>
-	<td>500</td>
-	<td></td>
+	<td>waitForText</td>
+	<td>tag-portlet-messages</td>
+	<td>One of your fields contains invalid characters.</td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>assertText</td>
+	<td>tag-portlet-messages</td>
 	<td>One of your fields contains invalid characters.</td>
-	<td></td>
 </tr>
 <tr>
 	<td>assertElementNotPresent</td>
-	<td>link=&test</td>
+	<td>link=&amp;test</td>
 	<td></td>
 </tr>
 

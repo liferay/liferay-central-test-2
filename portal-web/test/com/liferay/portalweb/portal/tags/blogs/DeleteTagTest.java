@@ -24,13 +24,15 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class DeleteTagTest extends BaseTestCase {
 	public void testDeleteTag() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Tags")) {
+				if (selenium.isElementPresent("link=Control Panel")) {
 					break;
 				}
 			}
@@ -40,11 +42,10 @@ public class DeleteTagTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Tags", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		Thread.sleep(500);
-		selenium.clickAt("link=selenium2 liferay2", RuntimeVariables.replace(""));
-		Thread.sleep(500);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -52,7 +53,25 @@ public class DeleteTagTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//input[@value='Delete']")) {
+				if (selenium.isVisible("link=selenium2 liferay2")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("link=selenium2 liferay2", RuntimeVariables.replace(""));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("//input[@value='Delete']")) {
 					break;
 				}
 			}
@@ -66,7 +85,23 @@ public class DeleteTagTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete this tag[\\s\\S]$"));
-		Thread.sleep(500);
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (!selenium.isTextPresent("link=selenium2 liferay2")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertFalse(selenium.isTextPresent("link=selenium2 liferay2"));
 	}
 }

@@ -63,23 +63,6 @@ public class AddTagThroughJavaScriptTest extends BaseTestCase {
 		selenium.clickAt("link=Tags1 Blogs1 Test1 Entry1",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//li[5]/span/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.clickAt("link=Edit", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		Thread.sleep(5000);
@@ -90,7 +73,8 @@ public class AddTagThroughJavaScriptTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//div[7]/div/input[2]")) {
+				if (selenium.isElementPresent(
+							"//span[7]/span/span/div/div/ul/li/span/span/input")) {
 					break;
 				}
 			}
@@ -100,11 +84,9 @@ public class AddTagThroughJavaScriptTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("//div[7]/div/input[2]",
-			RuntimeVariables.replace("selenium2 lifera2"));
-		selenium.type("//div[7]/div/input[2]",
+		selenium.type("//span[7]/span/span/div/div/ul/li/span/span/input",
 			RuntimeVariables.replace("selenium2 liferay2"));
-		selenium.clickAt("//div[7]/div/input[3]", RuntimeVariables.replace(""));
+		selenium.clickAt("add", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -112,7 +94,7 @@ public class AddTagThroughJavaScriptTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//span/span[2]")) {
+				if (selenium.isElementPresent("//li[2]/span/span[1]")) {
 					break;
 				}
 			}
@@ -122,8 +104,8 @@ public class AddTagThroughJavaScriptTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertEquals(RuntimeVariables.replace("selenium2 liferay2x"),
-			selenium.getText("//span/span[2]"));
+		assertEquals(RuntimeVariables.replace("selenium2 liferay2"),
+			selenium.getText("//li[2]/span/span[1]"));
 		selenium.clickAt("_33_saveButton", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(

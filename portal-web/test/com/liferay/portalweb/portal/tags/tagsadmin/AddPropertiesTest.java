@@ -30,7 +30,7 @@ public class AddPropertiesTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Tags")) {
+				if (selenium.isVisible("link=Tags")) {
 					break;
 				}
 			}
@@ -49,7 +49,7 @@ public class AddPropertiesTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//div[4]/ul/li/span/a")) {
+				if (selenium.isVisible("//div[4]/ul/li/span/a")) {
 					break;
 				}
 			}
@@ -67,7 +67,7 @@ public class AddPropertiesTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//div[3]/div[2]/input[1]")) {
+				if (selenium.isVisible("//div[3]/div[2]/input[1]")) {
 					break;
 				}
 			}
@@ -110,7 +110,7 @@ public class AddPropertiesTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//div[4]/ul/li/span/a")) {
+				if (selenium.isVisible("//div[4]/ul/li/span/a")) {
 					break;
 				}
 			}
@@ -128,7 +128,7 @@ public class AddPropertiesTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//div[3]/div[2]/input[1]")) {
+				if (selenium.isVisible("//div[3]/div[2]/input[1]")) {
 					break;
 				}
 			}

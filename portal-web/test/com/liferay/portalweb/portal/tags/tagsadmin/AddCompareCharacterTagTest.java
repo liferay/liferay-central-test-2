@@ -30,7 +30,7 @@ public class AddCompareCharacterTagTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Tags")) {
+				if (selenium.isVisible("link=Tags")) {
 					break;
 				}
 			}
@@ -42,23 +42,6 @@ public class AddCompareCharacterTagTest extends BaseTestCase {
 
 		selenium.clickAt("link=Tags", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("add-tag-button")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.clickAt("add-tag-button", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -67,7 +50,7 @@ public class AddCompareCharacterTagTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("new-tag-name")) {
+				if (selenium.isVisible("new-tag-name")) {
 					break;
 				}
 			}
@@ -78,11 +61,30 @@ public class AddCompareCharacterTagTest extends BaseTestCase {
 		}
 
 		selenium.type("new-tag-name", RuntimeVariables.replace("<test>"));
-		Thread.sleep(500);
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
-		Thread.sleep(500);
-		assertTrue(selenium.isTextPresent(
-				"One of your fields contains invalid characters."));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (RuntimeVariables.replace(
+							"One of your fields contains invalid characters.")
+										.equals(selenium.getText(
+								"tag-portlet-messages"))) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		assertEquals(RuntimeVariables.replace(
+				"One of your fields contains invalid characters."),
+			selenium.getText("tag-portlet-messages"));
 		assertFalse(selenium.isElementPresent("link=<test>"));
 	}
 }

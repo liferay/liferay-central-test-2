@@ -18,12 +18,12 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="TearDownTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="TearDownTagTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class TearDownTest extends BaseTestCase {
-	public void testTearDown() throws Exception {
+public class TearDownTagTest extends BaseTestCase {
+	public void testTearDownTag() throws Exception {
 		int label = 1;
 
 		while (label >= 1) {
@@ -47,18 +47,20 @@ public class TearDownTest extends BaseTestCase {
 				}
 
 				selenium.clickAt("link=Tags", RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
 				Thread.sleep(500);
 
-				boolean BluePresent = selenium.isElementPresent("link=blue");
+				boolean tag1Present = selenium.isElementPresent(
+						"//div[4]/ul/li/span/a");
 
-				if (!BluePresent) {
+				if (!tag1Present) {
 					label = 2;
 
 					continue;
 				}
 
-				selenium.clickAt("link=blue", RuntimeVariables.replace(""));
-				Thread.sleep(500);
+				selenium.clickAt("//div[4]/ul/li/span/a",
+					RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -66,8 +68,7 @@ public class TearDownTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent(
-									"//input[@value='Delete']")) {
+						if (selenium.isVisible("//input[@value='Delete']")) {
 							break;
 						}
 					}
@@ -85,17 +86,17 @@ public class TearDownTest extends BaseTestCase {
 			case 2:
 				Thread.sleep(500);
 
-				boolean BlueCarPresent = selenium.isElementPresent(
-						"link=blue car");
+				boolean tag2Present = selenium.isElementPresent(
+						"//div[4]/ul/li/span/a");
 
-				if (!BlueCarPresent) {
+				if (!tag2Present) {
 					label = 3;
 
 					continue;
 				}
 
-				selenium.clickAt("link=blue car", RuntimeVariables.replace(""));
-				Thread.sleep(500);
+				selenium.clickAt("//div[4]/ul/li/span/a",
+					RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -103,8 +104,7 @@ public class TearDownTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent(
-									"//input[@value='Delete']")) {
+						if (selenium.isVisible("//input[@value='Delete']")) {
 							break;
 						}
 					}
@@ -122,17 +122,17 @@ public class TearDownTest extends BaseTestCase {
 			case 3:
 				Thread.sleep(500);
 
-				boolean BlueGreenPresent = selenium.isElementPresent(
-						"link=blue green");
+				boolean tag3Present = selenium.isElementPresent(
+						"//div[4]/ul/li/span/a");
 
-				if (!BlueGreenPresent) {
+				if (!tag3Present) {
 					label = 4;
 
 					continue;
 				}
 
-				selenium.clickAt("link=blue green", RuntimeVariables.replace(""));
-				Thread.sleep(500);
+				selenium.clickAt("//div[4]/ul/li/span/a",
+					RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -140,8 +140,7 @@ public class TearDownTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent(
-									"//input[@value='Delete']")) {
+						if (selenium.isVisible("//input[@value='Delete']")) {
 							break;
 						}
 					}
@@ -159,16 +158,17 @@ public class TearDownTest extends BaseTestCase {
 			case 4:
 				Thread.sleep(500);
 
-				boolean GreenPresent = selenium.isElementPresent("link=green");
+				boolean tag4Present = selenium.isElementPresent(
+						"//div[4]/ul/li/span/a");
 
-				if (!GreenPresent) {
+				if (!tag4Present) {
 					label = 5;
 
 					continue;
 				}
 
-				selenium.clickAt("link=green", RuntimeVariables.replace(""));
-				Thread.sleep(500);
+				selenium.clickAt("//div[4]/ul/li/span/a",
+					RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -176,8 +176,7 @@ public class TearDownTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent(
-									"//input[@value='Delete']")) {
+						if (selenium.isVisible("//input[@value='Delete']")) {
 							break;
 						}
 					}
@@ -195,17 +194,17 @@ public class TearDownTest extends BaseTestCase {
 			case 5:
 				Thread.sleep(500);
 
-				boolean GreenTreePresent = selenium.isElementPresent(
-						"link=green tree");
+				boolean tag5Present = selenium.isElementPresent(
+						"//div[4]/ul/li/span/a");
 
-				if (!GreenTreePresent) {
+				if (!tag5Present) {
 					label = 6;
 
 					continue;
 				}
 
-				selenium.clickAt("link=green tree", RuntimeVariables.replace(""));
-				Thread.sleep(500);
+				selenium.clickAt("//div[4]/ul/li/span/a",
+					RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -213,8 +212,7 @@ public class TearDownTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent(
-									"//input[@value='Delete']")) {
+						if (selenium.isVisible("//input[@value='Delete']")) {
 							break;
 						}
 					}
@@ -232,17 +230,17 @@ public class TearDownTest extends BaseTestCase {
 			case 6:
 				Thread.sleep(500);
 
-				boolean SeleniumPresent = selenium.isElementPresent(
-						"link=selenium");
+				boolean tag6Present = selenium.isElementPresent(
+						"//div[4]/ul/li/span/a");
 
-				if (!SeleniumPresent) {
+				if (!tag6Present) {
 					label = 7;
 
 					continue;
 				}
 
-				selenium.clickAt("link=selenium", RuntimeVariables.replace(""));
-				Thread.sleep(500);
+				selenium.clickAt("//div[4]/ul/li/span/a",
+					RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -250,8 +248,7 @@ public class TearDownTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent(
-									"//input[@value='Delete']")) {
+						if (selenium.isVisible("//input[@value='Delete']")) {
 							break;
 						}
 					}
@@ -269,18 +266,17 @@ public class TearDownTest extends BaseTestCase {
 			case 7:
 				Thread.sleep(500);
 
-				boolean SeleniumIDEPresent = selenium.isElementPresent(
-						"link=selenium ide");
+				boolean tag7Present = selenium.isElementPresent(
+						"//div[4]/ul/li/span/a");
 
-				if (!SeleniumIDEPresent) {
+				if (!tag7Present) {
 					label = 8;
 
 					continue;
 				}
 
-				selenium.clickAt("link=selenium ide",
+				selenium.clickAt("//div[4]/ul/li/span/a",
 					RuntimeVariables.replace(""));
-				Thread.sleep(500);
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -288,8 +284,7 @@ public class TearDownTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent(
-									"//input[@value='Delete']")) {
+						if (selenium.isVisible("//input[@value='Delete']")) {
 							break;
 						}
 					}
@@ -305,6 +300,114 @@ public class TearDownTest extends BaseTestCase {
 								   .matches("^Are you sure you want to delete this tag[\\s\\S]$"));
 
 			case 8:
+				Thread.sleep(500);
+
+				boolean tag8Present = selenium.isElementPresent(
+						"//div[4]/ul/li/span/a");
+
+				if (!tag8Present) {
+					label = 9;
+
+					continue;
+				}
+
+				selenium.clickAt("//div[4]/ul/li/span/a",
+					RuntimeVariables.replace(""));
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isVisible("//input[@value='Delete']")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+				selenium.clickAt("//input[@value='Delete']",
+					RuntimeVariables.replace(""));
+				assertTrue(selenium.getConfirmation()
+								   .matches("^Are you sure you want to delete this tag[\\s\\S]$"));
+
+			case 9:
+				Thread.sleep(500);
+
+				boolean tag9Present = selenium.isElementPresent(
+						"//div[4]/ul/li/span/a");
+
+				if (!tag9Present) {
+					label = 10;
+
+					continue;
+				}
+
+				selenium.clickAt("//div[4]/ul/li/span/a",
+					RuntimeVariables.replace(""));
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isVisible("//input[@value='Delete']")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+				selenium.clickAt("//input[@value='Delete']",
+					RuntimeVariables.replace(""));
+				assertTrue(selenium.getConfirmation()
+								   .matches("^Are you sure you want to delete this tag[\\s\\S]$"));
+
+			case 10:
+				Thread.sleep(500);
+
+				boolean tag10Present = selenium.isElementPresent(
+						"//div[4]/ul/li/span/a");
+
+				if (!tag10Present) {
+					label = 11;
+
+					continue;
+				}
+
+				selenium.clickAt("//div[4]/ul/li/span/a",
+					RuntimeVariables.replace(""));
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isVisible("//input[@value='Delete']")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+				selenium.clickAt("//input[@value='Delete']",
+					RuntimeVariables.replace(""));
+				assertTrue(selenium.getConfirmation()
+								   .matches("^Are you sure you want to delete this tag[\\s\\S]$"));
+
+			case 11:
 			case 100:
 				label = -1;
 			}

@@ -24,14 +24,15 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class SetupTest extends BaseTestCase {
 	public void testSetup() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"//div[@id='_145_myPlacesContainer']/ul/li[2]/a/span[1]")) {
+				if (selenium.isElementPresent("addPage")) {
 					break;
 				}
 			}
@@ -41,11 +42,7 @@ public class SetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//div[@id='_145_myPlacesContainer']/ul/li[2]/a/span[1]",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=Manage Pages", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("addPage", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -53,8 +50,7 @@ public class SetupTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible(
-							"//div[@id='_88_layoutsTreeOutput']/ul/li/a/span")) {
+				if (selenium.isVisible("//input")) {
 					break;
 				}
 			}
@@ -64,35 +60,31 @@ public class SetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//div[@id='_88_layoutsTreeOutput']/ul/li/a/span",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible("_88_name_en_US")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.type("_88_name_en_US",
+		selenium.type("//input",
 			RuntimeVariables.replace("Blogs Tags Test Page"));
-		selenium.clickAt("//input[@value='Add Page']",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("save", RuntimeVariables.replace(""));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("link=Blogs Tags Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.clickAt("link=Blogs Tags Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=Application", RuntimeVariables.replace(""));
+		selenium.clickAt("_145_addApplication", RuntimeVariables.replace(""));
+		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -100,8 +92,7 @@ public class SetupTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"//div[@id=\"Collaboration-Blogs\"]")) {
+				if (selenium.isVisible("layout_configuration_content")) {
 					break;
 				}
 			}
@@ -111,7 +102,26 @@ public class SetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//div[@id=\"Collaboration-Blogs\"]/p/a",
+		selenium.typeKeys("layout_configuration_content",
+			RuntimeVariables.replace("b"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("//div[@title='Blogs']/p/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("//div[@title='Blogs']/p/a",
 			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -177,7 +187,7 @@ public class SetupTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("FCKeditor1___Frame")) {
+				if (selenium.isElementPresent("cke_contents_CKEditor1")) {
 					break;
 				}
 			}
@@ -203,9 +213,8 @@ public class SetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.selectFrame("//iframe[@id=\"_33_editor\"]");
-		selenium.selectFrame("//iframe[@id=\"FCKeditor1___Frame\"]");
-		selenium.selectFrame("//iframe");
+		selenium.selectFrame("//iframe[@id='_33_editor']");
+		selenium.selectFrame("//td[@id='cke_contents_CKEditor1']/iframe");
 		selenium.type("//body",
 			RuntimeVariables.replace("This is a test entry for tags!"));
 		selenium.selectFrame("relative=top");
@@ -292,7 +301,7 @@ public class SetupTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("FCKeditor1___Frame")) {
+				if (selenium.isElementPresent("cke_contents_CKEditor1")) {
 					break;
 				}
 			}
@@ -318,9 +327,8 @@ public class SetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.selectFrame("//iframe[@id=\"_33_editor\"]");
-		selenium.selectFrame("//iframe[@id=\"FCKeditor1___Frame\"]");
-		selenium.selectFrame("//iframe");
+		selenium.selectFrame("//iframe[@id='_33_editor']");
+		selenium.selectFrame("//td[@id='cke_contents_CKEditor1']/iframe");
 		selenium.type("//body",
 			RuntimeVariables.replace("This is a second test entry for tags!"));
 		selenium.selectFrame("relative=top");
@@ -407,7 +415,7 @@ public class SetupTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("FCKeditor1___Frame")) {
+				if (selenium.isElementPresent("cke_contents_CKEditor1")) {
 					break;
 				}
 			}
@@ -433,9 +441,8 @@ public class SetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.selectFrame("//iframe[@id=\"_33_editor\"]");
-		selenium.selectFrame("//iframe[@id=\"FCKeditor1___Frame\"]");
-		selenium.selectFrame("//iframe");
+		selenium.selectFrame("//iframe[@id='_33_editor']");
+		selenium.selectFrame("//td[@id='cke_contents_CKEditor1']/iframe");
 		selenium.type("//body",
 			RuntimeVariables.replace("This is a third test entry for tags!"));
 		selenium.selectFrame("relative=top");

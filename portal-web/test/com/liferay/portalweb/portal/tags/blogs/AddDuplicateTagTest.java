@@ -63,28 +63,11 @@ public class AddDuplicateTagTest extends BaseTestCase {
 		selenium.clickAt("link=Tags1 Blogs1 Test1 Entry1",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//li[5]/span/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.clickAt("link=Edit", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		Thread.sleep(5000);
-		assertFalse(selenium.isElementPresent("//span/span[2]"));
-		selenium.type("//div[7]/div/input[2]",
+		assertFalse(selenium.isElementPresent("//li[2]/span/span[2]"));
+		selenium.type("//span[7]/span/span/div/div/ul/li/span/span/input",
 			RuntimeVariables.replace("selenium1 liferay1"));
 		selenium.clickAt("_33_saveButton", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
@@ -93,6 +76,6 @@ public class AddDuplicateTagTest extends BaseTestCase {
 		selenium.clickAt("link=Edit", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		Thread.sleep(5000);
-		assertFalse(selenium.isElementPresent("//span/span[2]"));
+		assertFalse(selenium.isElementPresent("//li[2]/span/span[2]"));
 	}
 }

@@ -30,7 +30,7 @@ public class EditTagNameTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Tags")) {
+				if (selenium.isVisible("link=Tags")) {
 					break;
 				}
 			}
@@ -49,7 +49,7 @@ public class EditTagNameTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//div[4]/ul/li/span/a")) {
+				if (selenium.isVisible("//div[4]/ul/li/span/a")) {
 					break;
 				}
 			}
@@ -59,11 +59,11 @@ public class EditTagNameTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		assertEquals(RuntimeVariables.replace("selenium"),
+			selenium.getText("//div[4]/ul/li/span/a"));
 		selenium.clickAt("//div[4]/ul/li/span/a", RuntimeVariables.replace(""));
 		selenium.type("tag-name", RuntimeVariables.replace("selenium ide"));
-		Thread.sleep(500);
-		selenium.clickAt("//td[2]/div[2]/div[3]/input[1]",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("//div[3]/input[1]", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -71,7 +71,9 @@ public class EditTagNameTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=selenium ide")) {
+				if (RuntimeVariables.replace("selenium ide")
+										.equals(selenium.getText(
+								"//div[4]/ul/li/span/a"))) {
 					break;
 				}
 			}
@@ -81,6 +83,7 @@ public class EditTagNameTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertTrue(selenium.isElementPresent("link=selenium ide"));
+		assertEquals(RuntimeVariables.replace("selenium ide"),
+			selenium.getText("//div[4]/ul/li/span/a"));
 	}
 }

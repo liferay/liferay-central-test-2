@@ -64,6 +64,9 @@ public class AssertAutoSuggestionDropDownTest extends BaseTestCase {
 		selenium.clickAt("link=Tags3 Blogs3 Test3 Entry3",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("link=Edit", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -71,7 +74,7 @@ public class AssertAutoSuggestionDropDownTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//li[5]/span/a")) {
+				if (selenium.isElementPresent("//li[2]/span/span/input")) {
 					break;
 				}
 			}
@@ -81,27 +84,25 @@ public class AssertAutoSuggestionDropDownTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("link=Edit", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		Thread.sleep(5000);
-		selenium.type("//div[7]/div/input[2]", RuntimeVariables.replace(""));
-		selenium.typeKeys("//div[7]/div/input[2]",
+		selenium.type("//li[2]/span/span/input", RuntimeVariables.replace(""));
+		selenium.typeKeys("//li[2]/span/span/input",
 			RuntimeVariables.replace("selenium"));
 		Thread.sleep(5000);
 		assertEquals(RuntimeVariables.replace("selenium1 liferay1"),
-			selenium.getText("//div[6]/div[1]/div[2]/ul/li[1]"));
+			selenium.getText("//div[7]/div/div/ul/li[1]"));
 		assertEquals(RuntimeVariables.replace("selenium2 liferay2"),
-			selenium.getText("//div[6]/div[1]/div[2]/ul/li[2]"));
+			selenium.getText("//div[7]/div/div/ul/li[2]"));
 		assertEquals(RuntimeVariables.replace("selenium3 liferay3"),
-			selenium.getText("//div[6]/div[1]/div[2]/ul/li[3]"));
+			selenium.getText("//div[7]/div/div/ul/li[3]"));
 		assertEquals(RuntimeVariables.replace("selenium4 liferay4"),
-			selenium.getText("//div[6]/div[1]/div[2]/ul/li[4]"));
-		selenium.typeKeys("//div[6]/input[2]", RuntimeVariables.replace("2"));
+			selenium.getText("//div[7]/div/div/ul/li[4]"));
+		selenium.typeKeys("//li[2]/span/span/input",
+			RuntimeVariables.replace("2 "));
 		Thread.sleep(5000);
 		assertEquals(RuntimeVariables.replace("selenium2 liferay2"),
-			selenium.getText("//div[6]/div[1]/div[2]/ul/li[1]"));
-		assertFalse(selenium.isVisible("//div[6]/div[1]/div[2]/ul/li[2]"));
-		assertFalse(selenium.isVisible("//div[6]/div[1]/div[2]/ul/li[3]"));
-		assertFalse(selenium.isVisible("//div[6]/div[1]/div[2]/ul/li[4]"));
+			selenium.getText("//div[7]/div/div/ul/li[1]"));
+		assertFalse(selenium.isVisible("//div[7]/div/div/ul/li[2]"));
+		assertFalse(selenium.isVisible("//div[7]/div/div/ul/li[3]"));
+		assertFalse(selenium.isVisible("//div[7]/div/div/ul/li[4]"));
 	}
 }

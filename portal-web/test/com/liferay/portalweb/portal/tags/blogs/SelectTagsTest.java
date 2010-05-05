@@ -63,44 +63,10 @@ public class SelectTagsTest extends BaseTestCase {
 		selenium.clickAt("link=Tags3 Blogs3 Test3 Entry3",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//li[5]/span/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.clickAt("link=Edit", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		Thread.sleep(5000);
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//div/input[4]")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("//div/input[4]", RuntimeVariables.replace(""));
+		selenium.click("select");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -118,9 +84,9 @@ public class SelectTagsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.check("//label[1]/input");
-		selenium.check("//label[2]/input");
-		selenium.clickAt("//div[2]/div/input", RuntimeVariables.replace(""));
+		selenium.clickAt("//label[1]/input", RuntimeVariables.replace(""));
+		selenium.clickAt("//label[2]/input", RuntimeVariables.replace(""));
+		selenium.click("close");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -128,7 +94,9 @@ public class SelectTagsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//div[7]/div/span/span[1]")) {
+				if (RuntimeVariables.replace("selenium1 liferay1")
+										.equals(selenium.getText(
+								"//span[7]/span/span/div/div/ul/li[1]/span/span[1]"))) {
 					break;
 				}
 			}
@@ -138,10 +106,30 @@ public class SelectTagsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertEquals(RuntimeVariables.replace("selenium1 liferay1x"),
-			selenium.getText("//div[7]/div/span/span[1]"));
-		assertEquals(RuntimeVariables.replace("selenium2 liferay2x"),
-			selenium.getText("//div[7]/div/span/span[2]"));
+		assertEquals(RuntimeVariables.replace("selenium1 liferay1"),
+			selenium.getText(
+				"//span[7]/span/span/div/div/ul/li[1]/span/span[1]"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (RuntimeVariables.replace("selenium2 liferay2")
+										.equals(selenium.getText(
+								"//li[2]/span/span[1]"))) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		assertEquals(RuntimeVariables.replace("selenium2 liferay2"),
+			selenium.getText("//li[2]/span/span[1]"));
 		selenium.clickAt("_33_saveButton", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(

@@ -34,9 +34,9 @@ public class AddWikiPageTagMultipleTests extends BaseTests {
 		testSuite.addTestSuite(AddWikiPage1Test.class);
 		testSuite.addTestSuite(AddWikiPage2Test.class);
 		testSuite.addTestSuite(AddWikiPage3Test.class);
-		testSuite.addTestSuite(AddWikiPageTag1Test.class);
-		testSuite.addTestSuite(AddWikiPageTag2Test.class);
-		testSuite.addTestSuite(AddWikiPageTag3Test.class);
+		testSuite.addTestSuite(AddWikiPage1Tag1Test.class);
+		testSuite.addTestSuite(AddWikiPage2Tag1Test.class);
+		testSuite.addTestSuite(AddWikiPage3Tag1Test.class);
 		testSuite.addTestSuite(ViewWikiPageTagMultipleTest.class);
 		testSuite.addTestSuite(TearDownTagTest.class);
 		testSuite.addTestSuite(TearDownWikiNodeTest.class);

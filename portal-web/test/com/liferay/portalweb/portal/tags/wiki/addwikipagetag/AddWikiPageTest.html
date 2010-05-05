@@ -34,11 +34,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForVisible</td>
-	<td>//span[@class='aui-icon-search aui-icon']</td>
-	<td></td>
-</tr>
-<tr>
 	<td>type</td>
 	<td>_36_title</td>
 	<td>Wiki Page Test</td>
@@ -50,12 +45,22 @@
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>//input[@value='Save']</td>
+	<td>//input[@value='Publish']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
 	<td>Your request processed successfully.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//td[1]/a</td>
+	<td>Wiki Page Test</td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>//td[1]/a</td>
 	<td></td>
 </tr>
 <tr>

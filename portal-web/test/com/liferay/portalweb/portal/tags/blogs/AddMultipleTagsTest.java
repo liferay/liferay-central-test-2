@@ -63,23 +63,6 @@ public class AddMultipleTagsTest extends BaseTestCase {
 		selenium.clickAt("link=Tags2 Blogs2 Test2 Entry2",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//li[5]/span/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.clickAt("link=Edit", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		Thread.sleep(5000);
@@ -90,7 +73,8 @@ public class AddMultipleTagsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//div[7]/div/input[2]")) {
+				if (selenium.isElementPresent(
+							"//span[7]/span/span/div/div/ul/li/span/span/input")) {
 					break;
 				}
 			}
@@ -100,8 +84,53 @@ public class AddMultipleTagsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("//div[7]/div/input[2]",
+		selenium.type("//span[7]/span/span/div/div/ul/li/span/span/input",
 			RuntimeVariables.replace("selenium3 liferay3, selenium4 liferay4"));
+		selenium.clickAt("add", RuntimeVariables.replace(""));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (RuntimeVariables.replace("selenium3 liferay3")
+										.equals(selenium.getText(
+								"//span[7]/span/span/div/div/ul/li[1]/span/span[1]"))) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		assertEquals(RuntimeVariables.replace("selenium3 liferay3"),
+			selenium.getText(
+				"//span[7]/span/span/div/div/ul/li[1]/span/span[1]"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (RuntimeVariables.replace("selenium4 liferay4")
+										.equals(selenium.getText(
+								"//li[2]/span/span[1]"))) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		assertEquals(RuntimeVariables.replace("selenium4 liferay4"),
+			selenium.getText("//li[2]/span/span[1]"));
+		Thread.sleep(5000);
 		selenium.clickAt("_33_saveButton", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(

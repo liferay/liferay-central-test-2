@@ -60,7 +60,6 @@ public class DeleteTagTest extends BaseTestCase {
 		}
 
 		selenium.clickAt("//div[4]/ul/li/span/a", RuntimeVariables.replace(""));
-		Thread.sleep(500);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -68,7 +67,7 @@ public class DeleteTagTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//input[@value='Delete']")) {
+				if (selenium.isVisible("//input[@value='Delete']")) {
 					break;
 				}
 			}
@@ -82,8 +81,41 @@ public class DeleteTagTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete this tag[\\s\\S]$"));
-		Thread.sleep(500);
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (!selenium.isElementPresent("link=selenium ide")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertFalse(selenium.isElementPresent("link=selenium ide"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (!selenium.isElementPresent("link=selenium")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertFalse(selenium.isElementPresent("link=selenium"));
 	}
 }

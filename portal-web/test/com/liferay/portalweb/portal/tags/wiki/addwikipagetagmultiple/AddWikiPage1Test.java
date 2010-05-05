@@ -49,31 +49,17 @@ public class AddWikiPage1Test extends BaseTestCase {
 		selenium.clickAt("//input[@value='Add Page']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible(
-							"//span[@class='aui-icon-search aui-icon']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.type("_36_title", RuntimeVariables.replace("Wiki1 Page1 Test1"));
 		selenium.type("_36_content",
 			RuntimeVariables.replace("This is a wiki1 page1 test1."));
-		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Publish']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
+		assertTrue(selenium.isElementPresent("link=Wiki1 Page1 Test1"));
+		selenium.clickAt("link=Wiki1 Page1 Test1", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isPartialText("//h1[@class='page-title']",
 				"Wiki1 Page1 Test1"));
 		assertEquals(RuntimeVariables.replace("This is a wiki1 page1 test1."),

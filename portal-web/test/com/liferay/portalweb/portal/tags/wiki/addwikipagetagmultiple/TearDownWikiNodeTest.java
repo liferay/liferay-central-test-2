@@ -37,7 +37,7 @@ public class TearDownWikiNodeTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent("link=Wiki Test Page")) {
+						if (selenium.isElementPresent("link=Control Panel")) {
 							break;
 						}
 					}
@@ -47,11 +47,10 @@ public class TearDownWikiNodeTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.clickAt("link=Wiki Test Page",
+				selenium.clickAt("link=Control Panel",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				selenium.clickAt("//img[@alt='Manage Wikis']",
-					RuntimeVariables.replace(""));
+				selenium.clickAt("link=Wiki", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 
 				boolean wikiNode1Present = selenium.isElementPresent(

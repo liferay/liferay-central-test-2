@@ -50,7 +50,7 @@ public class AddTag4Test extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("new-tag-name")) {
+				if (selenium.isVisible("new-tag-name")) {
 					break;
 				}
 			}
@@ -61,9 +61,30 @@ public class AddTag4Test extends BaseTestCase {
 		}
 
 		selenium.type("new-tag-name", RuntimeVariables.replace("Blue Car"));
-		Thread.sleep(500);
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
-		Thread.sleep(500);
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (RuntimeVariables.replace(
+							"Your request processed successfully.")
+										.equals(selenium.getText(
+								"tag-portlet-messages"))) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		assertEquals(RuntimeVariables.replace(
+				"Your request processed successfully."),
+			selenium.getText("tag-portlet-messages"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

@@ -29,7 +29,6 @@ public class TagsAdminTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTestSuite(ControlPanelTest.class);
 		testSuite.addTestSuite(AddTagTest.class);
 		testSuite.addTestSuite(AddAmpersandTagTest.class);
 		testSuite.addTestSuite(AddApostropheTagTest.class);
@@ -63,8 +62,7 @@ public class TagsAdminTests extends BaseTests {
 		testSuite.addTestSuite(AddTag5Test.class);
 		testSuite.addTestSuite(AssertTagOrderTest.class);
 		testSuite.addTestSuite(SearchTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
-		testSuite.addTestSuite(EndControlPanelTest.class);
+		testSuite.addTestSuite(TearDownTagTest.class);
 
 		return testSuite;
 	}

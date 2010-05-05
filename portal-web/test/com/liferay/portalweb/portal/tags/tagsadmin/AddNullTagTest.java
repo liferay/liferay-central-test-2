@@ -78,7 +78,6 @@ public class AddNullTagTest extends BaseTestCase {
 		}
 
 		selenium.type("new-tag-name", RuntimeVariables.replace(""));
-		Thread.sleep(500);
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		Thread.sleep(5000);
 		assertFalse(selenium.isElementPresent("//li[2]/span/a"));

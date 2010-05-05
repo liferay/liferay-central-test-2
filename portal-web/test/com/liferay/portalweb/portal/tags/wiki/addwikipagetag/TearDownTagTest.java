@@ -87,8 +87,6 @@ public class TearDownTagTest extends BaseTestCase {
 								   .matches("^Are you sure you want to delete this tag[\\s\\S]$"));
 				Thread.sleep(5000);
 
-			case 2:
-
 				boolean tag2Present = selenium.isElementPresent(
 						"//div[4]/ul/li[1]/span/a");
 
@@ -121,8 +119,6 @@ public class TearDownTagTest extends BaseTestCase {
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this tag[\\s\\S]$"));
 				Thread.sleep(5000);
-
-			case 3:
 
 				boolean tag3Present = selenium.isElementPresent(
 						"//div[4]/ul/li[1]/span/a");
@@ -157,8 +153,6 @@ public class TearDownTagTest extends BaseTestCase {
 								   .matches("^Are you sure you want to delete this tag[\\s\\S]$"));
 				Thread.sleep(5000);
 
-			case 4:
-
 				boolean tag4Present = selenium.isElementPresent(
 						"//div[4]/ul/li[1]/span/a");
 
@@ -192,8 +186,6 @@ public class TearDownTagTest extends BaseTestCase {
 								   .matches("^Are you sure you want to delete this tag[\\s\\S]$"));
 				Thread.sleep(5000);
 
-			case 5:
-
 				boolean tag5Present = selenium.isElementPresent(
 						"//div[4]/ul/li[1]/span/a");
 
@@ -225,8 +217,11 @@ public class TearDownTagTest extends BaseTestCase {
 				selenium.click("//input[@value='Delete']");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this tag[\\s\\S]$"));
-				Thread.sleep(5000);
 
+			case 2:
+			case 3:
+			case 4:
+			case 5:
 			case 6:
 			case 100:
 				label = -1;

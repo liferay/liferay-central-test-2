@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portalweb.portal.tags.wiki.addfrontpagetag;
+package com.liferay.portalweb.portal.tags.blogs;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;

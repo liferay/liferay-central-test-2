@@ -24,6 +24,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AssertTagsInSelectTagsTest extends BaseTestCase {
 	public void testAssertTagsInSelectTags() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -43,72 +45,26 @@ public class AssertTagsInSelectTagsTest extends BaseTestCase {
 		selenium.clickAt("link=Blogs Tags Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Tags1 Blogs1 Test1 Entry1")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.clickAt("link=Tags1 Blogs1 Test1 Entry1",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Edit", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//div[6]/input[4]")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("//div[6]/input[4]", RuntimeVariables.replace(""));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//label[1]/input")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		selenium.clickAt("select", RuntimeVariables.replace(""));
+		Thread.sleep(5000);
+		assertEquals(RuntimeVariables.replace("selenium1 liferay1"),
+			selenium.getText("//label[1]"));
 		assertTrue(selenium.isElementPresent("//label[1]/input"));
-		assertTrue(selenium.isTextPresent("selenium1 liferay1"));
+		assertEquals(RuntimeVariables.replace("selenium2 liferay2"),
+			selenium.getText("//label[2]"));
 		assertTrue(selenium.isElementPresent("//label[2]/input"));
-		assertTrue(selenium.isTextPresent("selenium2 liferay2"));
+		assertEquals(RuntimeVariables.replace("selenium3 liferay3"),
+			selenium.getText("//label[3]"));
 		assertTrue(selenium.isElementPresent("//label[3]/input"));
-		assertTrue(selenium.isTextPresent("selenium3 liferay3"));
+		assertEquals(RuntimeVariables.replace("selenium4 liferay4"),
+			selenium.getText("//label[4]"));
 		assertTrue(selenium.isElementPresent("//label[4]/input"));
-		assertTrue(selenium.isTextPresent("selenium4 liferay4"));
-		selenium.clickAt("link=Close", RuntimeVariables.replace(""));
+		selenium.clickAt("close", RuntimeVariables.replace(""));
 		selenium.clickAt("_33_cancelButton", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 	}

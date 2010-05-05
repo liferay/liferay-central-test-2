@@ -30,7 +30,7 @@ public class AddDuplicateTagTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Tags")) {
+				if (selenium.isVisible("link=Tags")) {
 					break;
 				}
 			}
@@ -42,23 +42,6 @@ public class AddDuplicateTagTest extends BaseTestCase {
 
 		selenium.clickAt("link=Tags", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("add-tag-button")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.clickAt("add-tag-button", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -67,7 +50,7 @@ public class AddDuplicateTagTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("new-tag-name")) {
+				if (selenium.isVisible("new-tag-name")) {
 					break;
 				}
 			}
@@ -78,10 +61,28 @@ public class AddDuplicateTagTest extends BaseTestCase {
 		}
 
 		selenium.type("new-tag-name", RuntimeVariables.replace("selenium"));
-		Thread.sleep(500);
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
-		Thread.sleep(500);
-		assertTrue(selenium.isTextPresent("That tag already exists."));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (RuntimeVariables.replace("That tag already exists.")
+										.equals(selenium.getText(
+								"tag-portlet-messages"))) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		assertEquals(RuntimeVariables.replace("That tag already exists."),
+			selenium.getText("tag-portlet-messages"));
 		assertFalse(selenium.isElementPresent("//li[2]/span/a"));
 	}
 }
