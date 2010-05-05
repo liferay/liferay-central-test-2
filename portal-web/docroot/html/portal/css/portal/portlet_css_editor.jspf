@@ -75,3 +75,8 @@
 #portlet-set-properties .aui-legend {
 	width: 100%;
 }
+
+#portlet-set-properties .aui-colorpicker-trigger {
+	margin-top: 0;
+	vertical-align: top;
+}
