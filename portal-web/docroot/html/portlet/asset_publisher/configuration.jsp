@@ -259,7 +259,23 @@ AssetRendererFactory rendererFactory = AssetRendererFactoryRegistryUtil.getAsset
 
 								// Title
 
-								if (assetEntryClassName.equals(IGImage.class.getName())) {
+								if (assetEntryClassName.equals(DLFileEntry.class.getName())) {
+									DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(assetEntry.getClassPK());
+
+									fileEntry = fileEntry.toEscapedModel();
+
+									StringBundler sb = new StringBundler(6);
+
+									sb.append("<img alt=\"\" class=\"dl-file-icon\" src=\"");
+									sb.append(themeDisplay.getPathThemeImages());
+									sb.append("/file_system/small/");
+									sb.append(DLUtil.getFileIcon(assetEntry.getTitle()));
+									sb.append(".png\" />");
+									sb.append(assetEntry.getTitle());
+
+									row.addText(sb.toString(), rowURL);
+								}
+								else if (assetEntryClassName.equals(IGImage.class.getName())) {
 									IGImage image = IGImageLocalServiceUtil.getImage(assetEntry.getClassPK());
 
 									image = image.toEscapedModel();
@@ -277,22 +293,6 @@ AssetRendererFactory rendererFactory = AssetRendererFactoryRegistryUtil.getAsset
 									sb.append("\" title=\"");
 									sb.append(image.getDescription());
 									sb.append("\" />");
-
-									row.addText(sb.toString(), rowURL);
-								}
-								else if (assetEntryClassName.equals(DLFileEntry.class.getName())) {
-									DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(assetEntry.getClassPK());
-
-									fileEntry = fileEntry.toEscapedModel();
-
-									StringBundler sb = new StringBundler(6);
-
-									sb.append("<img alt=\"\" class=\"dl-file-icon\" src=\"");
-									sb.append(themeDisplay.getPathThemeImages());
-									sb.append("/file_system/small/");
-									sb.append(DLUtil.getFileIcon(assetEntry.getTitle()));
-									sb.append(".png\" />");
-									sb.append(assetEntry.getTitle());
 
 									row.addText(sb.toString(), rowURL);
 								}
