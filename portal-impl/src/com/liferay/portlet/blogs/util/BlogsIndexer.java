@@ -104,10 +104,9 @@ public class BlogsIndexer extends BaseIndexer {
 		String content = HtmlUtil.extractText(entry.getContent());
 		Date displayDate = entry.getDisplayDate();
 
-		String[] assetTagNames = AssetTagLocalServiceUtil.getTagNames(
-			BlogsEntry.class.getName(), entryId);
-
 		long[] assetCategoryIds = AssetCategoryLocalServiceUtil.getCategoryIds(
+			BlogsEntry.class.getName(), entryId);
+		String[] assetTagNames = AssetTagLocalServiceUtil.getTagNames(
 			BlogsEntry.class.getName(), entryId);
 
 		ExpandoBridge expandoBridge = entry.getExpandoBridge();

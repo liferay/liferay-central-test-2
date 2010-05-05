@@ -110,7 +110,6 @@ public class BookmarksIndexer extends BaseIndexer {
 
 		long[] assetCategoryIds = AssetCategoryLocalServiceUtil.getCategoryIds(
 			BookmarksEntry.class.getName(), entryId);
-
 		String[] assetTagNames = AssetTagLocalServiceUtil.getTagNames(
 			BookmarksEntry.class.getName(), entryId);
 

@@ -196,7 +196,6 @@ public class UserIndexer extends BaseIndexer {
 
 		long[] assetCategoryIds = AssetCategoryLocalServiceUtil.getCategoryIds(
 			User.class.getName(), userId);
-
 		String[] assetTagNames = AssetTagLocalServiceUtil.getTagNames(
 			User.class.getName(), userId);
 

@@ -102,7 +102,6 @@ public class CalIndexer extends BaseIndexer {
 
 		long[] assetCategoryIds = AssetCategoryLocalServiceUtil.getCategoryIds(
 			CalEvent.class.getName(), eventId);
-
 		String[] assetTagNames = AssetTagLocalServiceUtil.getTagNames(
 			CalEvent.class.getName(), eventId);
 
