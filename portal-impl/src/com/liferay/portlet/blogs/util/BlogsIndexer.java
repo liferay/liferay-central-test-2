@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.search.BaseIndexer;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
+import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
 import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
@@ -106,6 +107,9 @@ public class BlogsIndexer extends BaseIndexer {
 		String[] assetTagNames = AssetTagLocalServiceUtil.getTagNames(
 			BlogsEntry.class.getName(), entryId);
 
+		long[] assetCategoryIds = AssetCategoryLocalServiceUtil.getCategoryIds(
+			BlogsEntry.class.getName(), entryId);
+
 		ExpandoBridge expandoBridge = entry.getExpandoBridge();
 
 		Document document = new DocumentImpl();
@@ -123,6 +127,7 @@ public class BlogsIndexer extends BaseIndexer {
 
 		document.addText(Field.TITLE, title);
 		document.addText(Field.CONTENT, content);
+		document.addKeyword(Field.ASSET_CATEGORY_IDS, assetCategoryIds);
 		document.addKeyword(Field.ASSET_TAG_NAMES, assetTagNames);
 
 		document.addKeyword(Field.ENTRY_CLASS_NAME, BlogsEntry.class.getName());

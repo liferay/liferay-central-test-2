@@ -35,6 +35,7 @@ import com.liferay.portal.security.auth.FullNameGeneratorFactory;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PortletKeys;
+import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
 import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.model.ExpandoColumnConstants;
@@ -193,6 +194,9 @@ public class UserIndexer extends BaseIndexer {
 		long[] teamIds = user.getTeamIds();
 		long[] userGroupIds = user.getUserGroupIds();
 
+		long[] assetCategoryIds = AssetCategoryLocalServiceUtil.getCategoryIds(
+			User.class.getName(), userId);
+
 		String[] assetTagNames = AssetTagLocalServiceUtil.getTagNames(
 			User.class.getName(), userId);
 
@@ -224,6 +228,7 @@ public class UserIndexer extends BaseIndexer {
 		document.addKeyword("teamIds", teamIds);
 		document.addKeyword("userGroupIds", userGroupIds);
 
+		document.addKeyword(Field.ASSET_CATEGORY_IDS, assetCategoryIds);
 		document.addKeyword(Field.ASSET_TAG_NAMES, assetTagNames);
 
 		document.addKeyword(Field.ENTRY_CLASS_NAME, User.class.getName());

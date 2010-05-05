@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.search.BaseIndexer;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
+import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
 import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
 import com.liferay.portlet.calendar.model.CalEvent;
 import com.liferay.portlet.calendar.service.CalEventLocalServiceUtil;
@@ -99,6 +100,9 @@ public class CalIndexer extends BaseIndexer {
 		String description = HtmlUtil.extractText(event.getDescription());
 		Date modifiedDate = event.getModifiedDate();
 
+		long[] assetCategoryIds = AssetCategoryLocalServiceUtil.getCategoryIds(
+			CalEvent.class.getName(), eventId);
+
 		String[] assetTagNames = AssetTagLocalServiceUtil.getTagNames(
 			CalEvent.class.getName(), eventId);
 
@@ -119,6 +123,7 @@ public class CalIndexer extends BaseIndexer {
 
 		document.addText(Field.TITLE, title);
 		document.addText(Field.DESCRIPTION, description);
+		document.addKeyword(Field.ASSET_CATEGORY_IDS, assetCategoryIds);
 		document.addKeyword(Field.ASSET_TAG_NAMES, assetTagNames);
 
 		document.addKeyword(Field.ENTRY_CLASS_NAME, CalEvent.class.getName());

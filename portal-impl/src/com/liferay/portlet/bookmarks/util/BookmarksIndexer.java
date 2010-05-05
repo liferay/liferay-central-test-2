@@ -26,6 +26,7 @@ import com.liferay.portal.model.Group;
 import com.liferay.portal.search.BaseIndexer;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.util.PortletKeys;
+import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
 import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
@@ -107,6 +108,9 @@ public class BookmarksIndexer extends BaseIndexer {
 		String comments = entry.getComments();
 		Date modifiedDate = entry.getModifiedDate();
 
+		long[] assetCategoryIds = AssetCategoryLocalServiceUtil.getCategoryIds(
+			BookmarksEntry.class.getName(), entryId);
+
 		String[] assetTagNames = AssetTagLocalServiceUtil.getTagNames(
 			BookmarksEntry.class.getName(), entryId);
 
@@ -125,6 +129,7 @@ public class BookmarksIndexer extends BaseIndexer {
 		document.addKeyword(Field.USER_ID, userId);
 
 		document.addText(Field.TITLE, name);
+		document.addKeyword(Field.ASSET_CATEGORY_IDS, assetCategoryIds);
 		document.addKeyword(Field.ASSET_TAG_NAMES, assetTagNames);
 
 		document.addKeyword(Field.FOLDER_ID, folderId);
