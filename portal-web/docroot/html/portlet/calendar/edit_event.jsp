@@ -152,7 +152,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 
 		<aui:input inlineLabel="left" name="timeZoneSensitive" type="checkbox" value="<%= event == null ? true : event.isTimeZoneSensitive() %>" />
 
-		<aui:input name="title" value='<%= event == null ? StringPool.BLANK : event.getTitle() %>' />
+		<aui:input name="title" />
 
 		<aui:input name="description" />
 
