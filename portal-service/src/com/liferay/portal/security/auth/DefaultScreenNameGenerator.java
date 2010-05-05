@@ -25,6 +25,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.util.PropsValues;
 
 /**
  * <a href="DefaultScreenNameGenerator.java.html"><b><i>View Source</i></b></a>
@@ -61,8 +62,7 @@ public class DefaultScreenNameGenerator implements ScreenNameGenerator {
 
 		String[] reservedScreenNames = PrefsPropsUtil.getStringArray(
 			companyId, PropsKeys.ADMIN_RESERVED_SCREEN_NAMES,
-			StringPool.NEW_LINE,
-			PropsValues.ADMIN_RESERVED_SCREEN_NAMES_VALUES);
+			StringPool.NEW_LINE, PropsValues.ADMIN_RESERVED_SCREEN_NAMES);
 
 		for (String reservedScreenName : reservedScreenNames) {
 			if (screenName.equalsIgnoreCase(reservedScreenName)) {
