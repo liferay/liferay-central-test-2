@@ -20,7 +20,7 @@
 			</filterset>
 		</copy>
 
-		<exec dir="." executable="${maven.executable}">
+		<exec dir="." executable="${maven.executable}" failonerror="true">
 			<arg value="deploy:deploy-file" />
 			<arg value="-DartifactId=${artifact.id}" />
 			<arg value="-Dfile=${artifact.id}/${artifact.id}.${packaging}" />
@@ -85,7 +85,7 @@
 	</target>
 
 	<target name="deploy-dependency">
-		<exec dir="." executable="${maven.executable}">
+		<exec dir="." executable="${maven.executable}" failonerror="true">
 			<arg value="deploy:deploy-file" />
 			<arg value="-DartifactId=${artifact.id}" />
 			<arg value="-Dfile=lib/${file}" />
@@ -121,7 +121,7 @@
 			</filterset>
 		</copy>
 
-		<exec dir="." executable="${maven.executable}">
+		<exec dir="." executable="${maven.executable}" failonerror="true">
 			<arg value="install:install-file" />
 			<arg value="-DartifactId=${artifact.id}" />
 			<arg value="-Dfile=${artifact.id}/${artifact.id}.${packaging}" />
@@ -184,7 +184,7 @@
 	</target>
 
 	<target name="install-dependency">
-		<exec dir="." executable="${maven.executable}">
+		<exec dir="." executable="${maven.executable}" failonerror="true">
 			<arg value="install:install-file" />
 			<arg value="-DartifactId=${artifact.id}" />
 			<arg value="-Dfile=lib/${file}" />
