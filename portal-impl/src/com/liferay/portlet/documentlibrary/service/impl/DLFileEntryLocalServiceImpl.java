@@ -109,7 +109,7 @@ public class DLFileEntryLocalServiceImpl
 			String extraSettings, File file, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		if (file == null) {
+		if (file == null || file.length() == 0) {
 			throw new FileSizeException();
 		}
 
