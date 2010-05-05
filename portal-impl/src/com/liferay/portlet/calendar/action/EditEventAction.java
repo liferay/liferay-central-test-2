@@ -403,7 +403,7 @@ public class EditEventAction extends PortletAction {
 
 			AssetPublisherUtil.addAndStoreSelection(
 				actionRequest, CalEvent.class.getName(), event.getEventId(),
-					-1);
+				-1);
 		}
 		else {
 
