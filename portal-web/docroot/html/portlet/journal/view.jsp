@@ -57,6 +57,8 @@ portletURL.setParameter("tabs1", tabs1);
 
 			<%
 			ArticleSearchTerms searchTerms = (ArticleSearchTerms)searchContainer.getSearchTerms();
+
+			searchTerms.setVersion(-1);
 			%>
 
 			<%@ include file="/html/portlet/journal/article_search_results.jspf" %>
@@ -113,8 +115,11 @@ portletURL.setParameter("tabs1", tabs1);
 				else if (article.isApproved()) {
 					status = "approved";
 				}
-				else {
-					status = "not-approved";
+				else if (article.isDraft()) {
+					status = "draft";
+				}
+				else if (article.isPending()) {
+					status = "pending";
 				}
 
 				row.addText(LanguageUtil.get(pageContext, status), rowURL);

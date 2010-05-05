@@ -50,6 +50,7 @@ import com.liferay.portlet.journal.ArticleSmallImageNameException;
 import com.liferay.portlet.journal.ArticleSmallImageSizeException;
 import com.liferay.portlet.journal.ArticleTitleException;
 import com.liferay.portlet.journal.ArticleTypeException;
+import com.liferay.portlet.journal.ArticleVersionException;
 import com.liferay.portlet.journal.DuplicateArticleIdException;
 import com.liferay.portlet.journal.NoSuchArticleException;
 import com.liferay.portlet.journal.NoSuchStructureException;
@@ -167,6 +168,7 @@ public class EditArticleAction extends PortletAction {
 					 e instanceof ArticleSmallImageSizeException ||
 					 e instanceof ArticleTitleException ||
 					 e instanceof ArticleTypeException ||
+					 e instanceof ArticleVersionException ||
 					 e instanceof DuplicateArticleIdException) {
 
 				SessionErrors.add(actionRequest, e.getClass().getName());
@@ -404,8 +406,6 @@ public class EditArticleAction extends PortletAction {
 			uploadRequest, "autoArticleId");
 
 		double version = ParamUtil.getDouble(uploadRequest, "version");
-		boolean incrementVersion = ParamUtil.getBoolean(
-			uploadRequest, "incrementVersion");
 
 		String title = ParamUtil.getString(uploadRequest, "title");
 		String description = ParamUtil.getString(uploadRequest, "description");
@@ -544,15 +544,14 @@ public class EditArticleAction extends PortletAction {
 			// Update article
 
 			article = JournalArticleServiceUtil.updateArticle(
-				groupId, articleId, version, incrementVersion, title,
-				description, content, type, structureId, templateId,
-				displayDateMonth, displayDateDay, displayDateYear,
-				displayDateHour, displayDateMinute, expirationDateMonth,
-				expirationDateDay, expirationDateYear, expirationDateHour,
-				expirationDateMinute, neverExpire, reviewDateMonth,
-				reviewDateDay, reviewDateYear, reviewDateHour, reviewDateMinute,
-				neverReview, indexable, smallImage, smallImageURL, smallFile,
-				images, articleURL, serviceContext);
+				groupId, articleId, version, title, description, content, type,
+				structureId, templateId, displayDateMonth, displayDateDay,
+				displayDateYear, displayDateHour, displayDateMinute,
+				expirationDateMonth, expirationDateDay, expirationDateYear,
+				expirationDateHour, expirationDateMinute, neverExpire,
+				reviewDateMonth, reviewDateDay, reviewDateYear, reviewDateHour,
+				reviewDateMinute, neverReview, indexable, smallImage,
+				smallImageURL, smallFile, images, articleURL, serviceContext);
 		}
 
 		// Recent articles

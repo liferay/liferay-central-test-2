@@ -654,8 +654,6 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 			autoArticleId = false;
 		}
 
-		boolean incrementVersion = false;
-
 		String content = article.getContent();
 
 		article.setContent(
@@ -896,18 +894,17 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 				importedArticle = JournalArticleLocalServiceUtil.updateArticle(
 					userId, existingArticle.getGroupId(),
 					existingArticle.getArticleId(),
-					existingArticle.getVersion(), incrementVersion,
-					article.getTitle(), article.getDescription(),
-					article.getContent(), article.getType(), parentStructureId,
-					parentTemplateId, displayDateMonth, displayDateDay,
-					displayDateYear, displayDateHour, displayDateMinute,
-					expirationDateMonth, expirationDateDay, expirationDateYear,
-					expirationDateHour, expirationDateMinute, neverExpire,
-					reviewDateMonth, reviewDateDay, reviewDateYear,
-					reviewDateHour,	reviewDateMinute, neverReview,
-					article.isIndexable(),	article.isSmallImage(),
-					article.getSmallImageURL(), smallFile, images, articleURL,
-					serviceContext);
+					existingArticle.getVersion(), article.getTitle(),
+					article.getDescription(), article.getContent(),
+					article.getType(), parentStructureId, parentTemplateId,
+					displayDateMonth, displayDateDay, displayDateYear,
+					displayDateHour, displayDateMinute, expirationDateMonth,
+					expirationDateDay, expirationDateYear, expirationDateHour,
+					expirationDateMinute, neverExpire, reviewDateMonth,
+					reviewDateDay, reviewDateYear, reviewDateHour,
+					reviewDateMinute, neverReview, article.isIndexable(),
+					article.isSmallImage(), article.getSmallImageURL(),
+					smallFile, images, articleURL, serviceContext);
 			}
 		}
 		else {

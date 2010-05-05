@@ -63,6 +63,10 @@ public class ArticleSearchTerms extends ArticleDisplayTerms {
 		}
 	}
 
+	public void setVersion(double version) {
+		this.version = version;
+	}
+
 	public void setType(String type) {
 		this.type = type;
 	}
@@ -79,14 +83,14 @@ public class ArticleSearchTerms extends ArticleDisplayTerms {
 		if (status.equals("approved")) {
 			return WorkflowConstants.STATUS_APPROVED;
 		}
-		else if (status.equals("not-approved")) {
-			return WorkflowConstants.STATUS_PENDING;
+		else if (status.equals("draft")) {
+			return WorkflowConstants.STATUS_DRAFT;
 		}
 		else if (status.equals("expired")) {
 			return WorkflowConstants.STATUS_EXPIRED;
 		}
-		else if (status.equals("review")) {
-			return WorkflowConstants.STATUS_ANY;
+		else if (status.equals("pending")) {
+			return WorkflowConstants.STATUS_PENDING;
 		}
 		else {
 			return WorkflowConstants.STATUS_ANY;

@@ -58,7 +58,6 @@ String newArticleId = ParamUtil.getString(request, "newArticleId");
 String instanceIdKey = PwdGenerator.KEY1 + PwdGenerator.KEY2 + PwdGenerator.KEY3;
 
 double version = BeanParamUtil.getDouble(article, request, "version", JournalArticleConstants.DEFAULT_VERSION);
-boolean incrementVersion = ParamUtil.getBoolean(request, "incrementVersion");
 
 Calendar displayDate = CalendarFactoryUtil.getCalendar(timeZone, locale);
 
@@ -201,22 +200,6 @@ if (Validator.isNotNull(content)) {
 	}
 }
 
-boolean disableIncrementVersion = false;
-
-if (PropsValues.JOURNAL_ARTICLE_FORCE_INCREMENT_VERSION || ((article != null) && WorkflowInstanceLinkLocalServiceUtil.isEnded(company.getCompanyId(), groupId, JournalArticle.class.getName(), article.getId()))) {
-	boolean latestVersion = (article == null) || (article != null && JournalArticleLocalServiceUtil.isLatestVersion(article.getGroupId(), articleId, version));
-
-	if (!latestVersion) {
-		incrementVersion = true;
-		disableIncrementVersion = true;
-	}
-
-	if ((article != null) && article.isApproved()) {
-		incrementVersion = true;
-		disableIncrementVersion = true;
-	}
-}
-
 boolean smallImage = BeanParamUtil.getBoolean(article, request, "smallImage");
 String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL");
 %>
@@ -270,6 +253,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 			<liferay-ui:error exception="<%= ArticleContentException.class %>" message="please-enter-valid-content" />
 			<liferay-ui:error exception="<%= ArticleIdException.class %>" message="please-enter-a-valid-id" />
 			<liferay-ui:error exception="<%= ArticleTitleException.class %>" message="please-enter-a-valid-name" />
+			<liferay-ui:error exception="<%= ArticleVersionException.class %>" message="another-user-has-made-changes-since-you-started-editing-please-copy-your-changes-and-try-again" />
 			<liferay-ui:error exception="<%= DuplicateArticleIdException.class %>" message="please-enter-a-unique-id" />
 			<liferay-ui:asset-tags-error />
 
@@ -291,8 +275,48 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 							</c:choose>
 						</c:when>
 						<c:otherwise>
-							<aui:field-wrapper label="id">
-								<%= HtmlUtil.escape(articleId) %>
+							<aui:field-wrapper label="">
+								<span class="journal-article-id"><liferay-ui:message key="id" />: <%= HtmlUtil.escape(articleId) %></span>
+
+								<span class="journal-article-version"><liferay-ui:message key="version" />: <strong><liferay-ui:message key="<%= String.valueOf(article.getVersion()) %>" /></strong></span>
+
+								<%
+								String status = null;
+
+								if (article.isExpired()) {
+									status = "expired";
+								}
+								else if (article.isApproved()) {
+									status = "approved";
+								}
+								else if (article.isDraft()) {
+									status = "draft";
+								}
+								else if (article.isPending()) {
+									StringBundler statusBundler = new StringBundler(5);
+
+									statusBundler.append("pending");
+
+									try {
+										String workflowStatus = WorkflowInstanceLinkLocalServiceUtil.getState(article.getCompanyId(), article.getGroupId(), JournalArticle.class.getName(), article.getId());
+
+										statusBundler.append(StringPool.SPACE);
+										statusBundler.append(StringPool.OPEN_PARENTHESIS);
+										statusBundler.append(workflowStatus);
+										statusBundler.append(StringPool.CLOSE_PARENTHESIS);
+									}
+									catch (NoSuchWorkflowInstanceLinkException nswile) {
+									}
+
+									status = statusBundler.toString();
+								}
+								%>
+
+								<span class="journal-article-status"><liferay-ui:message key="status" />: <strong class="journal-article-status-<%= status %>"><liferay-ui:message key="<%= status %>" /></strong></span>
+
+								<c:if test="<%= article.isApproved() %>">
+									<liferay-ui:icon-help message="if-this-article-is-modified-a-new-version-will-be-created-automatically" />
+								</c:if>
 							</aui:field-wrapper>
 						</c:otherwise>
 					</c:choose>
@@ -585,6 +609,14 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 					<aui:button name="downloadArticleContentBtn" value="download" />
 				</c:if>
 
+				<c:if test="<%= (article != null) && !article.isExpired() && JournalArticlePermission.contains(permissionChecker, article, ActionKeys.EXPIRE) %>">
+					<aui:button onClick='<%= renderResponse.getNamespace() + "expireArticle();" %>' value="expire" />
+				</c:if>
+
+				<c:if test="<%= (article != null) && JournalArticlePermission.contains(permissionChecker, article, ActionKeys.DELETE) %>">
+					<aui:button onClick='<%= renderResponse.getNamespace() + "deleteArticle();" %>' value="delete" />
+				</c:if>
+
 				<aui:button onClick="<%= redirect %>" type="cancel" />
 			</aui:button-row>
 		</td>
@@ -602,10 +634,6 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 	var <portlet:namespace />documentLibraryInput = null;
 	var <portlet:namespace />imageGalleryInput = null;
 	var <portlet:namespace />contentChangedFlag = false;
-
-	function <portlet:namespace />changeVersionView(version) {
-		location.href = "<liferay-portlet:renderURL><portlet:param name="struts_action" value="/journal/edit_article" /><portlet:param name="redirect" value="<%= redirect %>" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /><portlet:param name="articleId" value="<%= articleId %>" /></liferay-portlet:renderURL>&<portlet:namespace />version=" + version;
-	}
 
 	function <portlet:namespace />contentChanged() {
 		<portlet:namespace />contentChangedFlag = true;

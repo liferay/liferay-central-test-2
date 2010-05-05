@@ -439,6 +439,7 @@
 		<exception>ArticleSmallImageSize</exception>
 		<exception>ArticleTitle</exception>
 		<exception>ArticleType</exception>
+		<exception>ArticleVersion</exception>
 		<exception>DuplicateArticleId</exception>
 		<exception>DuplicateArticleImageId</exception>
 		<exception>DuplicateFeedId</exception>

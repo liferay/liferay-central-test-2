@@ -34,6 +34,7 @@
 <%@ page import="com.liferay.portlet.journal.ArticleSmallImageSizeException" %>
 <%@ page import="com.liferay.portlet.journal.ArticleTitleException" %>
 <%@ page import="com.liferay.portlet.journal.ArticleTypeException" %>
+<%@ page import="com.liferay.portlet.journal.ArticleVersionException" %>
 <%@ page import="com.liferay.portlet.journal.DuplicateArticleIdException" %>
 <%@ page import="com.liferay.portlet.journal.DuplicateFeedIdException" %>
 <%@ page import="com.liferay.portlet.journal.DuplicateStructureIdException" %>

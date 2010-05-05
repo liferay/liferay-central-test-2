@@ -52,7 +52,11 @@ public interface JournalArticle extends JournalArticleModel {
 
 	public boolean isApproved();
 
+	public boolean isDraft();
+
 	public boolean isExpired();
+
+	public boolean isPending();
 
 	public boolean isTemplateDriven();
 

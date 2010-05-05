@@ -781,10 +781,6 @@ public class PropsValues {
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.JOURNAL_ARTICLE_FORCE_AUTOGENERATE_ID));
 
-	public static final boolean JOURNAL_ARTICLE_FORCE_INCREMENT_VERSION =
-		GetterUtil.getBoolean(
-			PropsUtil.get(PropsKeys.JOURNAL_ARTICLE_FORCE_INCREMENT_VERSION));
-
 	public static final boolean JOURNAL_ARTICLE_VIEW_PERMISSION_CHECK_ENABLED =
 		GetterUtil.getBoolean(PropsUtil.get(PropsKeys.
 			JOURNAL_ARTICLE_VIEW_PERMISSION_CHECK_ENABLED));

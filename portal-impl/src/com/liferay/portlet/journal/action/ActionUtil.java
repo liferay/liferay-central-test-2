@@ -16,10 +16,10 @@ package com.liferay.portlet.journal.action;
 
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.journal.model.JournalArticle;
-import com.liferay.portlet.journal.model.JournalArticleConstants;
 import com.liferay.portlet.journal.model.JournalFeed;
 import com.liferay.portlet.journal.model.JournalStructure;
 import com.liferay.portlet.journal.model.JournalTemplate;
@@ -72,14 +72,12 @@ public class ActionUtil {
 	public static void getArticle(HttpServletRequest request) throws Exception {
 		long groupId = ParamUtil.getLong(request, "groupId");
 		String articleId = ParamUtil.getString(request, "articleId");
-		double version = ParamUtil.getDouble(
-			request, "version", JournalArticleConstants.DEFAULT_VERSION);
 
 		JournalArticle article = null;
 
 		if (Validator.isNotNull(articleId)) {
-			article = JournalArticleServiceUtil.getArticle(
-				groupId, articleId, version);
+			article = JournalArticleServiceUtil.getLatestArticle(
+				groupId, articleId, WorkflowConstants.STATUS_ANY);
 		}
 
 		request.setAttribute(WebKeys.JOURNAL_ARTICLE, article);

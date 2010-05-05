@@ -74,6 +74,7 @@ import com.liferay.portlet.journal.ArticleSmallImageNameException;
 import com.liferay.portlet.journal.ArticleSmallImageSizeException;
 import com.liferay.portlet.journal.ArticleTitleException;
 import com.liferay.portlet.journal.ArticleTypeException;
+import com.liferay.portlet.journal.ArticleVersionException;
 import com.liferay.portlet.journal.DuplicateArticleIdException;
 import com.liferay.portlet.journal.NoSuchArticleException;
 import com.liferay.portlet.journal.NoSuchArticleResourceException;
@@ -1506,7 +1507,7 @@ public class JournalArticleLocalServiceImpl
 
 	public JournalArticle updateArticle(
 			long userId, long groupId, String articleId, double version,
-			boolean incrementVersion, String content)
+			String content)
 		throws PortalException, SystemException {
 
 		User user = userPersistence.findByPrimaryKey(userId);
@@ -1603,11 +1604,10 @@ public class JournalArticleLocalServiceImpl
 		serviceContext.setPortletPreferencesIds(portletPreferencesIds);
 
 		return updateArticle(
-			userId, groupId, articleId, version, incrementVersion,
-			article.getTitle(), article.getDescription(), content,
-			article.getType(), article.getStructureId(),
-			article.getTemplateId(), displayDateMonth, displayDateDay,
-			displayDateYear, displayDateHour, displayDateMinute,
+			userId, groupId, articleId, version, article.getTitle(),
+			article.getDescription(), content, article.getType(),
+			article.getStructureId(), article.getTemplateId(), displayDateMonth,
+			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
 			expirationDateMonth, expirationDateDay, expirationDateYear,
 			expirationDateHour, expirationDateMinute, neverExpire,
 			reviewDateMonth, reviewDateDay, reviewDateYear, reviewDateHour,
@@ -1618,10 +1618,10 @@ public class JournalArticleLocalServiceImpl
 
 	public JournalArticle updateArticle(
 			long userId, long groupId, String articleId, double version,
-			boolean incrementVersion, String title, String description,
-			String content, String type, String structureId, String templateId,
-			int displayDateMonth, int displayDateDay, int displayDateYear,
-			int displayDateHour, int displayDateMinute, int expirationDateMonth,
+			String title, String description, String content, String type,
+			String structureId, String templateId, int displayDateMonth,
+			int displayDateDay, int displayDateYear, int displayDateHour,
+			int displayDateMinute, int expirationDateMonth,
 			int expirationDateDay, int expirationDateYear,
 			int expirationDateHour, int expirationDateMinute,
 			boolean neverExpire, int reviewDateMonth, int reviewDateDay,
@@ -1673,13 +1673,25 @@ public class JournalArticleLocalServiceImpl
 			groupId, title, content, type, structureId, templateId, smallImage,
 			smallImageURL, smallFile, smallBytes);
 
-		JournalArticle oldArticle = journalArticlePersistence.findByG_A_V(
-			groupId, articleId, version);
+		JournalArticle oldArticle = getLatestArticle(
+			groupId, articleId, WorkflowConstants.STATUS_ANY);
+
+		double oldVersion = oldArticle.getVersion();
+
+		if ((version > 0) && (version != oldVersion)) {
+			throw new ArticleVersionException();
+		}
+
+		boolean incrementVersion = false;
+
+		if (oldArticle.isApproved() || oldArticle.isExpired()) {
+			incrementVersion = true;
+		}
 
 		JournalArticle article = null;
 
 		if (incrementVersion) {
-			double latestVersion = getLatestVersion(groupId, articleId);
+			double newVersion = MathUtil.format(oldVersion + 0.1, 1, 1);
 
 			long id = counterLocalService.increment();
 
@@ -1692,7 +1704,7 @@ public class JournalArticleLocalServiceImpl
 			article.setUserName(user.getFullName());
 			article.setCreateDate(serviceContext.getModifiedDate(now));
 			article.setArticleId(articleId);
-			article.setVersion(MathUtil.format(latestVersion + 0.1, 1, 1));
+			article.setVersion(newVersion);
 			article.setSmallImageId(oldArticle.getSmallImageId());
 		}
 		else {
@@ -1700,21 +1712,8 @@ public class JournalArticleLocalServiceImpl
 		}
 
 		content = format(
-			groupId, articleId, article.getVersion(), incrementVersion, content,
-			structureId, images);
-
-		int status = oldArticle.getStatus();
-
-		if (incrementVersion) {
-			if (serviceContext.getWorkflowAction() ==
-					WorkflowConstants.ACTION_PUBLISH) {
-
-				status = WorkflowConstants.STATUS_PENDING;
-			}
-			else {
-				status = WorkflowConstants.STATUS_DRAFT;
-			}
-		}
+			groupId, articleId, article.getVersion(), incrementVersion,
+			content, structureId, images);
 
 		article.setModifiedDate(serviceContext.getModifiedDate(now));
 		article.setTitle(title);
@@ -1728,7 +1727,7 @@ public class JournalArticleLocalServiceImpl
 		article.setDisplayDate(displayDate);
 
 		if ((expirationDate == null) || expirationDate.after(now)) {
-			article.setStatus(status);
+			article.setStatus(WorkflowConstants.STATUS_DRAFT);
 		}
 		else {
 			article.setStatus(WorkflowConstants.STATUS_EXPIRED);
@@ -1772,19 +1771,17 @@ public class JournalArticleLocalServiceImpl
 		PortletPreferences preferences =
 			ServiceContextUtil.getPortletPreferences(serviceContext);
 
-		if (incrementVersion) {
+		// Workflow
+
+		if (serviceContext.getWorkflowAction() ==
+				WorkflowConstants.ACTION_PUBLISH) {
+
 			try {
 				sendEmail(article, articleURL, preferences, "requested");
 			}
 			catch (IOException ioe) {
 				throw new SystemException(ioe);
 			}
-		}
-
-		// Workflow
-
-		if (serviceContext.getWorkflowAction() ==
-				WorkflowConstants.ACTION_PUBLISH) {
 
 			WorkflowHandlerRegistryUtil.startWorkflowInstance(
 				user.getCompanyId(), groupId, userId,

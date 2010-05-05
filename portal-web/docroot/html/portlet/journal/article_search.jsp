@@ -60,10 +60,10 @@ ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDispl
 				<c:when test="<%= portletName.equals(PortletKeys.JOURNAL) %>">
 					<aui:select name="<%= displayTerms.STATUS %>">
 						<aui:option value=""></aui:option>
+						<aui:option label="draft" selected='<%= displayTerms.getStatus().equals("draft") %>' />
+						<aui:option label="pending" selected='<%= displayTerms.getStatus().equals("pending") %>' />
 						<aui:option label="approved" selected='<%= displayTerms.getStatus().equals("approved") %>' />
-						<aui:option label="not-approved" selected='<%= displayTerms.getStatus().equals("not-approved") %>' />
 						<aui:option label="expired" selected='<%= displayTerms.getStatus().equals("expired") %>' />
-						<aui:option label="review" selected='<%= displayTerms.getStatus().equals("review") %>' />
 					</aui:select>
 				</c:when>
 				<c:otherwise>
