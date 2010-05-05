@@ -506,7 +506,15 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			return pages.get(0);
 		}
 		else {
-			throw new NoSuchPageException();
+			pages = wikiPagePersistence.findByN_T_S(
+				nodeId, title, WorkflowConstants.STATUS_PENDING, 0, 1);
+
+			if (pages.size() > 0) {
+				return pages.get(0);
+			}
+			else {
+				throw new NoSuchPageException();
+			}
 		}
 
 	}
@@ -996,11 +1004,11 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		WikiPage oldPage = null;
 
 		try {
-			oldPage = getPage(nodeId, title);
+			oldPage = getDraftPage(nodeId, title);
 		}
 		catch (NoSuchPageException nspe1) {
 			try {
-				oldPage = getDraftPage(nodeId, title);
+				oldPage = getPage(nodeId, title);
 			}
 			catch (NoSuchPageException nspe2) {
 				return addPage(
