@@ -15,12 +15,12 @@
 %>
 
 <%
-String resourceName = LanguageUtil.get(pageContext, "model.resource." +  typeSelection);
+String modelResourceName = ResourceActionsUtil.getModelResource(locale, typeSelection);
 
-String tabs1 = ParamUtil.getString(request, "tabs1", resourceName);
-String tabNames = resourceName + StringPool.COMMA + "shared-entries";
+String tabs1 = ParamUtil.getString(request, "tabs1", modelResourceName);
+String tabNames = modelResourceName + StringPool.COMMA + "shared-entries";
 
-long groupId = tabs1.equals(resourceName) ? scopeGroupId : themeDisplay.getCompanyGroupId();
+long groupId = tabs1.equals(modelResourceName) ? scopeGroupId : themeDisplay.getCompanyGroupId();
 long userId = 0;
 
 int assetEntryOrder = ParamUtil.getInteger(request, "assetEntryOrder", -1);
@@ -73,7 +73,7 @@ portletURL.setParameter("typeSelection", typeSelection);
 		headerNames.add("modified-date");
 		headerNames.add("score");
 
-		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.format(pageContext, "no-x-was-found-that-matched-the-keywords-x", new Object[]{resourceName, "<strong>" + HtmlUtil.escape(keywords) + "</strong>"}));
+		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.format(pageContext, "no-results-were-found-that-matched-the-keywords-x", "<strong>" + HtmlUtil.escape(keywords) + "</strong>"));
 
 		try {
 			AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(typeSelection);
@@ -154,7 +154,7 @@ portletURL.setParameter("typeSelection", typeSelection);
 		headerNames.add("user-name");
 		headerNames.add("modified-date");
 
-		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.format(pageContext, "there-is-not-any-x", resourceName));
+		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, "there-are-no-results");
 
 		AssetEntryQuery assetEntryQuery = new AssetEntryQuery();
 
