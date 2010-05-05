@@ -24,6 +24,7 @@ import java.util.Map;
  * <a href="SearchContext.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Julio Camarero
  */
 public class SearchContext implements Serializable {
 
@@ -77,6 +78,10 @@ public class SearchContext implements Serializable {
 
 	public long getOwnerUserId() {
 		return _ownerUserId;
+	}
+
+	public long[] getPortletIds() {
+		return _portletIds;
 	}
 
 	public Sort[] getSorts() {
@@ -147,6 +152,10 @@ public class SearchContext implements Serializable {
 		_ownerUserId = ownerUserId;
 	}
 
+	public void setPortletIds(long[] portletIds) {
+		this._portletIds = portletIds;
+	}
+
 	public void setScopeStrict(boolean scopeStrict) {
 		_scopeStrict = scopeStrict;
 	}
@@ -175,6 +184,7 @@ public class SearchContext implements Serializable {
 	private String _keywords;
 	private long[] _nodeIds;
 	private long _ownerUserId;
+	private long[] _portletIds;
 	private boolean _scopeStrict = true;
 	private Sort[] _sorts;
 	private int _start = QueryUtil.ALL_POS;

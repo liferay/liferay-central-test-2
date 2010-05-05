@@ -135,6 +135,7 @@ public abstract class BaseIndexer implements Indexer {
 			addSearchCategoryIds(contextQuery, searchContext);
 			addSearchNodeIds(contextQuery, searchContext);
 			addSearchFolderIds(contextQuery, searchContext);
+			addSearchPortletIds(contextQuery, searchContext);
 
 			BooleanQuery fullQuery = createFullQuery(
 				contextQuery, searchContext);
@@ -363,6 +364,32 @@ public abstract class BaseIndexer implements Indexer {
 
 		if (ownerUserId > 0) {
 			contextQuery.addRequiredTerm(Field.USER_ID, ownerUserId);
+		}
+	}
+
+	protected void addSearchPortletIds(
+			BooleanQuery contextQuery, SearchContext searchContext)
+		throws Exception {
+
+		long[] portletIds = searchContext.getPortletIds();
+
+		if ((portletIds == null) || (portletIds.length == 0)) {
+			return;
+		}
+
+		BooleanQuery portletIdsQuery = BooleanQueryFactoryUtil.create();
+
+		for (long portletId : portletIds) {
+			if (portletId > 0) {
+				TermQuery termQuery = TermQueryFactoryUtil.create(
+				Field.PORTLET_ID, portletId);
+
+				portletIdsQuery.add(termQuery, BooleanClauseOccur.SHOULD);
+			}
+		}
+
+		if (!portletIdsQuery.clauses().isEmpty()) {
+			contextQuery.add(portletIdsQuery, BooleanClauseOccur.MUST);
 		}
 	}
 
