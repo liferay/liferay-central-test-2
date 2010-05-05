@@ -18,7 +18,7 @@
 
 <%
 String articleId = ParamUtil.getString(request, "articleId");
-double version = ParamUtil.getDouble(request, "version");
+double version = ParamUtil.getDouble(request, "version", -1);
 %>
 
 <c:choose>
@@ -73,6 +73,7 @@ double version = ParamUtil.getDouble(request, "version");
 
 		searchTerms.setDisplayDateLT(new Date());
 		searchTerms.setStatus(status);
+		searchTerms.setVersion(version);
 		%>
 
 		<%@ include file="/html/portlet/journal/article_search_results.jspf" %>
