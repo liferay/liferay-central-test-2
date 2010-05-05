@@ -15,6 +15,8 @@
 package com.liferay.portal.search;
 
 import com.liferay.portal.kernel.search.SearchContext;
+import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.theme.ThemeDisplay;
 
@@ -68,6 +70,17 @@ public class SearchContextFactory {
 		}
 
 		searchContext.setAttributes(attributes);
+
+		// Asset
+
+		long[] assetCategoryIds = StringUtil.split(
+			ParamUtil.getString(request, "assetCategoryIds"), 0L);
+
+		String[] assetTagNames = StringUtil.split(
+			ParamUtil.getString(request, "assetTagNames"));
+
+		searchContext.setAssetCategoryIds(assetCategoryIds);
+		searchContext.setAssetTagNames(assetTagNames);
 
 		return searchContext;
 	}

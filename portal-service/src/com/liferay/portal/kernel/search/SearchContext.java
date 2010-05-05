@@ -27,6 +27,14 @@ import java.util.Map;
  */
 public class SearchContext implements Serializable {
 
+	public long[] getAssetCategoryIds() {
+		return _assetCategoryIds;
+	}
+
+	public String[] getAssetTagNames() {
+		return _assetTagNames;
+	}
+
 	public Serializable getAttribute(String name) {
 		return _attributes.get(name);
 	}
@@ -85,6 +93,14 @@ public class SearchContext implements Serializable {
 
 	public boolean isScopeStrict() {
 		return _scopeStrict;
+	}
+
+	public void setAssetCategoryIds(long[] assetCategoryIds) {
+		this._assetCategoryIds = assetCategoryIds;
+	}
+
+	public void setAssetTagNames(String[] assetTagNames) {
+		this._assetTagNames = assetTagNames;
 	}
 
 	public void setAttribute(String name, Serializable value) {
@@ -147,6 +163,8 @@ public class SearchContext implements Serializable {
 		_userId = userId;
 	}
 
+	private long[] _assetCategoryIds;
+	private String[] _assetTagNames;
 	private Map<String, Serializable> _attributes;
 	private BooleanClause[] _booleanClauses;
 	private long[] _categoryIds;
