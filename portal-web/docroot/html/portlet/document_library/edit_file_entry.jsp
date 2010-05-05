@@ -92,7 +92,6 @@ portletURL.setParameter("name", name);
 	</c:otherwise>
 </c:choose>
 
-
 <c:if test="<%= isLocked.booleanValue() %>">
 	<c:choose>
 		<c:when test="<%= hasLock.booleanValue() %>">

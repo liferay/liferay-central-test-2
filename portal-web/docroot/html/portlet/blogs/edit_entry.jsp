@@ -39,6 +39,11 @@ boolean allowPingbacks = PropsValues.BLOGS_PINGBACK_ENABLED && BeanParamUtil.get
 boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.getBoolean(entry, request, "allowTrackbacks", true);
 %>
 
+<liferay-ui:tabs
+	names="entry"
+	backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
+/>
+
 <portlet:actionURL var="editEntryURL">
 	<portlet:param name="struts_action" value="/blogs/edit_entry" />
 </portlet:actionURL>
@@ -49,11 +54,6 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 	<aui:input name="referringPortletResource" type="hidden" value="<%= referringPortletResource %>" />
 	<aui:input name="entryId" type="hidden" value="<%= entryId %>" />
 	<aui:input name="workflowAction" type="hidden" value="<%= WorkflowConstants.ACTION_PUBLISH %>" />
-
-	<liferay-ui:tabs
-		names="entry"
-		backURL="<%= PortalUtil.escapeRedirect(redirect) %>"
-	/>
 
 	<liferay-ui:error exception="<%= EntryTitleException.class %>" message="please-enter-a-valid-title" />
 	<liferay-ui:asset-tags-error />
