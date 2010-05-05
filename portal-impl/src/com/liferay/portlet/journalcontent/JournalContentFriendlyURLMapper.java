@@ -110,7 +110,7 @@ public class JournalContentFriendlyURLMapper implements FriendlyURLMapper {
 		String namespace =
 			StringPool.UNDERLINE + portletId + StringPool.UNDERLINE;
 
-		if (Validator.equals(portletId, _PORTLET_ID)) {
+		if (portletId.equals(_PORTLET_ID)) {
 			portletId = _PORTLET_DEFAULT_INSTANCE;
 
 			namespace = StringPool.UNDERLINE + portletId + StringPool.UNDERLINE;
