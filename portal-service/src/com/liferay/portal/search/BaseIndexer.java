@@ -371,7 +371,7 @@ public abstract class BaseIndexer implements Indexer {
 			BooleanQuery contextQuery, SearchContext searchContext)
 		throws Exception {
 
-		long[] portletIds = searchContext.getPortletIds();
+		String[] portletIds = searchContext.getPortletIds();
 
 		if ((portletIds == null) || (portletIds.length == 0)) {
 			return;
@@ -379,8 +379,8 @@ public abstract class BaseIndexer implements Indexer {
 
 		BooleanQuery portletIdsQuery = BooleanQueryFactoryUtil.create();
 
-		for (long portletId : portletIds) {
-			if (portletId > 0) {
+		for (String portletId : portletIds) {
+			if (Validator.isNotNull(portletId)) {
 				TermQuery termQuery = TermQueryFactoryUtil.create(
 				Field.PORTLET_ID, portletId);
 

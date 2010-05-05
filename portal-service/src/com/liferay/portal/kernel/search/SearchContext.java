@@ -80,7 +80,7 @@ public class SearchContext implements Serializable {
 		return _ownerUserId;
 	}
 
-	public long[] getPortletIds() {
+	public String[] getPortletIds() {
 		return _portletIds;
 	}
 
@@ -152,7 +152,7 @@ public class SearchContext implements Serializable {
 		_ownerUserId = ownerUserId;
 	}
 
-	public void setPortletIds(long[] portletIds) {
+	public void setPortletIds(String[] portletIds) {
 		this._portletIds = portletIds;
 	}
 
@@ -184,7 +184,7 @@ public class SearchContext implements Serializable {
 	private String _keywords;
 	private long[] _nodeIds;
 	private long _ownerUserId;
-	private long[] _portletIds;
+	private String[] _portletIds;
 	private boolean _scopeStrict = true;
 	private Sort[] _sorts;
 	private int _start = QueryUtil.ALL_POS;
