@@ -33,6 +33,7 @@ import com.liferay.portal.kernel.search.TermQueryFactoryUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portlet.asset.service.AssetCategoryServiceUtil;
 
 /**
  * <a href="BaseIndexer.java.html"><b><i>View Source</i></b></a>
@@ -127,6 +128,8 @@ public abstract class BaseIndexer implements Indexer {
 			contextQuery.addRequiredTerm(
 				Field.PORTLET_ID, getPortletId(searchContext));
 
+			addSearchAssetCategoryIds(contextQuery, searchContext);
+			addSearchAssetTagNames(contextQuery, searchContext);
 			addSearchGroupId(contextQuery, searchContext);
 			addSearchOwnerUserId(contextQuery, searchContext);
 			addSearchCategoryIds(contextQuery, searchContext);
@@ -147,6 +150,63 @@ public abstract class BaseIndexer implements Indexer {
 		}
 		catch (Exception e) {
 			throw new SearchException(e);
+		}
+	}
+
+	protected void addSearchAssetCategoryIds(
+			BooleanQuery contextQuery, SearchContext searchContext)
+		throws Exception {
+
+		long[] assetCategoryIds = searchContext.getAssetCategoryIds();
+
+		if ((assetCategoryIds == null) || (assetCategoryIds.length == 0)) {
+			return;
+		}
+
+		BooleanQuery assetCategoryIdsQuery = BooleanQueryFactoryUtil.create();
+
+		for (long assetCategoryId : assetCategoryIds) {
+			if (searchContext.getUserId() > 0) {
+				try {
+					AssetCategoryServiceUtil.getCategory(assetCategoryId);
+				}
+				catch (Exception e) {
+					continue;
+				}
+			}
+
+			TermQuery termQuery = TermQueryFactoryUtil.create(
+				Field.ASSET_CATEGORY_IDS, assetCategoryId);
+
+			 assetCategoryIdsQuery.add(termQuery, BooleanClauseOccur.MUST);
+		}
+
+		if (!assetCategoryIdsQuery.clauses().isEmpty()) {
+			contextQuery.add(assetCategoryIdsQuery, BooleanClauseOccur.MUST);
+		}
+	}
+
+	protected void addSearchAssetTagNames(
+			BooleanQuery contextQuery, SearchContext searchContext)
+		throws Exception {
+
+		String[] assetTagNames = searchContext.getAssetTagNames();
+
+		if ((assetTagNames == null) || (assetTagNames.length == 0)) {
+			return;
+		}
+
+		BooleanQuery assetTagNamesQuery = BooleanQueryFactoryUtil.create();
+
+		for (String assetTagName : assetTagNames) {
+			TermQuery termQuery = TermQueryFactoryUtil.create(
+				Field.ASSET_TAG_NAMES, assetTagName);
+
+			assetTagNamesQuery.add(termQuery, BooleanClauseOccur.MUST);
+		}
+
+		if (!assetTagNamesQuery.clauses().isEmpty()) {
+			contextQuery.add(assetTagNamesQuery, BooleanClauseOccur.MUST);
 		}
 	}
 
