@@ -15,7 +15,6 @@
 package com.liferay.portlet.journal.service.persistence;
 
 import com.liferay.portal.kernel.dao.orm.QueryPos;
-import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.Type;
@@ -35,6 +34,7 @@ import com.liferay.util.dao.orm.CustomSQLUtil;
 
 import java.sql.Timestamp;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -161,6 +161,13 @@ public class JournalArticleFinderImpl
 				sql = StringUtil.replace(
 					sql, "(version = ?) [$AND_OR_CONNECTOR$]", "");
 			}
+			else if (version <= 0) {
+				sql = StringUtil.replace(
+					sql, "COUNT(*", "COUNT(DISTINCT articleId");
+
+				sql = StringUtil.replace(
+					sql, "(version = ?) [$AND_OR_CONNECTOR$]", "");
+			}
 
 			sql = CustomSQLUtil.replaceKeywords(
 				sql, "lower(title)", StringPool.LIKE, false, titles);
@@ -193,7 +200,7 @@ public class JournalArticleFinderImpl
 
 			qPos.add(articleIds, 2);
 
-			if (version != null) {
+			if ((version != null) && (version > 0)) {
 				qPos.add(version);
 			}
 
@@ -459,6 +466,13 @@ public class JournalArticleFinderImpl
 				sql = StringUtil.replace(
 					sql, "(version = ?) [$AND_OR_CONNECTOR$]", "");
 			}
+			else if (version <= 0) {
+				sql = StringUtil.replace(
+					sql, "id_ AS id", "DISTINCT articleId");
+
+				sql = StringUtil.replace(
+					sql, "(version = ?) [$AND_OR_CONNECTOR$]", "");
+			}
 
 			sql = CustomSQLUtil.replaceKeywords(
 				sql, "lower(title)", StringPool.LIKE, false, titles);
@@ -480,7 +494,12 @@ public class JournalArticleFinderImpl
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity("JournalArticle", JournalArticleImpl.class);
+			if ((version != null) && (version <= 0)) {
+				q.addScalar("articleId", Type.STRING);
+			}
+			else {
+				q.addScalar("id", Type.LONG);
+			}
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -492,7 +511,7 @@ public class JournalArticleFinderImpl
 
 			qPos.add(articleIds, 2);
 
-			if (version != null) {
+			if ((version != null) && (version > 0)) {
 				qPos.add(version);
 			}
 
@@ -515,8 +534,32 @@ public class JournalArticleFinderImpl
 			qPos.add(reviewDate_TS);
 			qPos.add(reviewDate_TS);
 
-			return (List<JournalArticle>)QueryUtil.list(
-				q, getDialect(), start, end);
+			List<JournalArticle> articles = new ArrayList<JournalArticle>();
+
+			Iterator<Object[]> itr = q.list().iterator();
+
+			while (itr.hasNext()) {
+				Object value = itr.next();
+
+				JournalArticle article = null;
+
+				if ((version != null) && (version <= 0)) {
+					String articleId = (String)value;
+
+					article = getLatestArticle(groupId, articleId, status);
+				}
+				else {
+					long id = (Long)value;
+
+					article = JournalArticleUtil.findByPrimaryKey(id);
+				}
+
+				if (article != null) {
+					articles.add(article);
+				}
+			}
+
+			return articles;
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -524,6 +567,27 @@ public class JournalArticleFinderImpl
 		finally {
 			closeSession(session);
 		}
+	}
+
+	protected JournalArticle getLatestArticle(
+			long groupId, String articleId, int status)
+		throws SystemException {
+
+		List<JournalArticle> articles = null;
+
+		if (status == WorkflowConstants.STATUS_ANY) {
+			articles = JournalArticleUtil.findByG_A(groupId, articleId, 0, 1);
+		}
+		else {
+			articles = JournalArticleUtil.findByG_A_S(
+				groupId, articleId, status, 0, 1);
+		}
+
+		if (articles.isEmpty()) {
+			return null;
+		}
+
+		return articles.get(0);
 	}
 
 }
