@@ -20,7 +20,6 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.PrefsPropsUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
-import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -60,15 +59,14 @@ public class DefaultScreenNameGenerator implements ScreenNameGenerator {
 			screenName = String.valueOf(userId);
 		}
 
-		// LPS-9164
-
 		String[] reservedScreenNames = PrefsPropsUtil.getStringArray(
 			companyId, PropsKeys.ADMIN_RESERVED_SCREEN_NAMES,
-			StringPool.NEW_LINE, _ADMIN_RESERVED_SCREEN_NAMES_VALUES);
+			StringPool.NEW_LINE,
+			PropsValues.ADMIN_RESERVED_SCREEN_NAMES_VALUES);
 
-		for (int i = 0; i < reservedScreenNames.length; i++) {
-			if (screenName.equalsIgnoreCase(reservedScreenNames[i])) {
-				return _checkScreenName(companyId, screenName);
+		for (String reservedScreenName : reservedScreenNames) {
+			if (screenName.equalsIgnoreCase(reservedScreenName)) {
+				return getUnusedScreenName(companyId, screenName);
 			}
 		}
 
@@ -85,10 +83,10 @@ public class DefaultScreenNameGenerator implements ScreenNameGenerator {
 			}
 		}
 
-		return _checkScreenName(companyId, screenName);
+		return getUnusedScreenName(companyId, screenName);
 	}
 
-	private String _checkScreenName(long companyId, String screenName)
+	protected String getUnusedScreenName(long companyId, String screenName)
 		throws PortalException, SystemException {
 
 		for (int i = 1;; i++) {
@@ -113,9 +111,5 @@ public class DefaultScreenNameGenerator implements ScreenNameGenerator {
 
 		return screenName;
 	}
-
-	String[] _ADMIN_RESERVED_SCREEN_NAMES_VALUES = StringUtil.split(
-		PropsUtil.get(PropsKeys.ADMIN_RESERVED_SCREEN_NAMES),
-		StringPool.NEW_LINE);
 
 }
