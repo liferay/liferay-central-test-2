@@ -30,6 +30,11 @@ fieldset {
 	margin-right: 0;
 }
 
+.aui-search-bar .aui-field-content, .aui-search-bar .aui-button-content {
+	display: inline-block;
+	vertical-align: middle;
+}
+
 .aui-field-choice .aui-field-label {
 	display: inline-block;
 }

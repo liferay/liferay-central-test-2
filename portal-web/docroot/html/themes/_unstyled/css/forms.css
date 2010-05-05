@@ -19,6 +19,9 @@ fieldset {
 .aui-search-bar .aui-field-content {
 }
 
+.aui-search-bar .aui-field-content, .aui-search-bar .aui-button-content {
+}
+
 .aui-field-choice .aui-field-label {
 }
 
