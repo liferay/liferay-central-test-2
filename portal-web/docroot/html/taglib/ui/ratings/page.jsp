@@ -196,7 +196,7 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 								sendVoteRequest(url, score, saveCallback);
 							}
 						},
-						autoRender: false,
+						render: null,
 						boundingBox: '#<%= randomNamespace %>ratingStar',
 						canReset: false,
 						defaultSelected: <%= yourScore %>,
@@ -206,7 +206,7 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 
 				var ratingScore = new A.StarRating(
 					{
-						autoRender: false,
+						render: null,
 						boundingBox: '#<%= randomNamespace %>ratingScore',
 						canReset: false,
 						defaultSelected: <%= stats.getAverageScore() %>,
