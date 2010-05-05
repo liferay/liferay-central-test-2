@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
@@ -15,6 +15,7 @@
 package com.liferay.portal.kernel.jmx;
 
 import java.io.ObjectInputStream;
+
 import java.util.Set;
 
 import javax.management.Attribute;
@@ -46,314 +47,335 @@ import javax.management.loading.ClassLoaderRepository;
  */
 public class RegistryAwareMBeanServer implements MBeanServer {
 
-	public void setMbeanServer(MBeanServer delegate) {
-		_delegate = delegate;
-	}
-
-	public void setMbeanRegistry(MBeanRegistry mbeanRegistry) {
-		_registry = mbeanRegistry;
-	}
-
-	public ObjectInstance createMBean(String className, ObjectName name)
-		throws ReflectionException, InstanceAlreadyExistsException,
-			   MBeanRegistrationException, MBeanException,
-			   NotCompliantMBeanException {
-
-		return _delegate.createMBean(className, name);
-	}
-
-	public ObjectInstance createMBean(
-			String className, ObjectName name, ObjectName loaderName)
-		throws ReflectionException, InstanceAlreadyExistsException,
-			   MBeanRegistrationException, MBeanException,
-			   NotCompliantMBeanException, InstanceNotFoundException {
-
-		return _delegate.createMBean(className, name, loaderName);
-	}
-
-	public ObjectInstance createMBean(
-			String className, ObjectName name, Object[]
-			params, String[] signature)
-		throws ReflectionException, InstanceAlreadyExistsException,
-			   MBeanRegistrationException, MBeanException,
-			   NotCompliantMBeanException {
-
-		return _delegate.createMBean(className, name, params, signature);
-	}
-
-	public ObjectInstance createMBean(
-			String className, ObjectName name, ObjectName loaderName,
-			Object[] params, String[] signature)
-		throws ReflectionException, InstanceAlreadyExistsException,
-			   MBeanRegistrationException, MBeanException,
-			   NotCompliantMBeanException, InstanceNotFoundException {
-
-		return _delegate.createMBean(
-			className, name, loaderName, params, signature);
-
-	}
-
-	public ObjectInstance registerMBean(Object object, ObjectName name)
-		throws InstanceAlreadyExistsException, MBeanRegistrationException,
-			   NotCompliantMBeanException {
-
-		return _registry.register(name.getCanonicalName(), object, name);
-	}
-
-	public void unregisterMBean(ObjectName name)
-		throws InstanceNotFoundException, MBeanRegistrationException {
-
-		_registry.unregister(name.getCanonicalName(), name);
-	}
-
-	public ObjectInstance getObjectInstance(ObjectName name)
+	public void addNotificationListener(
+			ObjectName objectName, NotificationListener notificationListener,
+			NotificationFilter notificationFilter, Object handback)
 		throws InstanceNotFoundException {
 
-		ObjectName objectName = getPlatformObjectName(name);
+		ObjectName platformObjectName = getPlatformObjectName(objectName);
 
-		return _delegate.getObjectInstance(objectName);
+		_mBeanServer.addNotificationListener(
+			platformObjectName, notificationListener, notificationFilter,
+			handback);
 	}
 
-	public Set<ObjectInstance> queryMBeans(ObjectName name, QueryExp query) {
-		return _delegate.queryMBeans(name, query);
+	public void addNotificationListener(
+			ObjectName objectName, ObjectName listenerObjectName,
+			NotificationFilter notificationFilter, Object handback)
+		throws InstanceNotFoundException {
+
+		ObjectName platformObjectName = getPlatformObjectName(objectName);
+		ObjectName platformListenerObjectName = getPlatformObjectName(
+			listenerObjectName);
+
+		_mBeanServer.addNotificationListener(
+			platformObjectName, platformListenerObjectName, notificationFilter,
+			handback);
 
 	}
 
-	public Set<ObjectName> queryNames(ObjectName name, QueryExp query) {
-		return _delegate.queryNames(name, query);
-
-	}
-
-	public boolean isRegistered(ObjectName name) {
-
-		ObjectName objectName = getPlatformObjectName(name);
-
-		return _delegate.isRegistered(objectName);
-	}
-
-	public Integer getMBeanCount() {
-		return _delegate.getMBeanCount();
-	}
-
-	public Object getAttribute(ObjectName name, String attribute)
-		throws MBeanException, AttributeNotFoundException,
-			   InstanceNotFoundException, ReflectionException {
-
-		ObjectName objectName = getPlatformObjectName(name);
-
-		return _delegate.getAttribute(objectName, attribute);
-	}
-
-	public AttributeList getAttributes(ObjectName name, String[] attributes)
-		throws InstanceNotFoundException, ReflectionException {
-
-		ObjectName objectName = getPlatformObjectName(name);
-
-		return _delegate.getAttributes(objectName, attributes);
-	}
-
-	public void setAttribute(ObjectName name, Attribute attribute)
-		throws InstanceNotFoundException, AttributeNotFoundException,
-			   InvalidAttributeValueException, MBeanException,
+	public ObjectInstance createMBean(String className, ObjectName objectName)
+		throws InstanceAlreadyExistsException, MBeanException,
+			   MBeanRegistrationException, NotCompliantMBeanException,
 			   ReflectionException {
 
-		ObjectName objectName = getPlatformObjectName(name);
-
-		_delegate.setAttribute(objectName, attribute);
+		return _mBeanServer.createMBean(className, objectName);
 	}
 
-	public AttributeList setAttributes(
-		ObjectName name, AttributeList attributes)
+	public ObjectInstance createMBean(
+			String className, ObjectName objectName, Object[] params,
+			String[] signature)
+		throws InstanceAlreadyExistsException, MBeanException,
+			   MBeanRegistrationException, NotCompliantMBeanException,
+			   ReflectionException {
+
+		return _mBeanServer.createMBean(
+			className, objectName, params, signature);
+	}
+
+	public ObjectInstance createMBean(
+			String className, ObjectName objectName, ObjectName loaderName)
+		throws InstanceAlreadyExistsException, InstanceNotFoundException,
+			   MBeanException, MBeanRegistrationException,
+			   NotCompliantMBeanException, ReflectionException {
+
+		return _mBeanServer.createMBean(className, objectName, loaderName);
+	}
+
+	public ObjectInstance createMBean(
+			String className, ObjectName objectName,
+			ObjectName loaderObjectName, Object[] params, String[] signature)
+		throws InstanceAlreadyExistsException, InstanceNotFoundException,
+			   MBeanException, MBeanRegistrationException,
+			   NotCompliantMBeanException, ReflectionException {
+
+		return _mBeanServer.createMBean(
+			className, objectName, loaderObjectName, params, signature);
+	}
+
+	/**
+	 * @deprecated
+	 */
+	public ObjectInputStream deserialize(ObjectName objectName, byte[] data)
+		throws InstanceNotFoundException, OperationsException {
+
+		ObjectName platformObjectName = getPlatformObjectName(objectName);
+
+		return _mBeanServer.deserialize(platformObjectName, data);
+	}
+
+	/**
+	 * @deprecated
+	 */
+	public ObjectInputStream deserialize(String className, byte[] data)
+		throws OperationsException, ReflectionException {
+
+		return _mBeanServer.deserialize(className, data);
+	}
+
+	/**
+	 * @deprecated
+	 */
+	public ObjectInputStream deserialize(
+			String className, ObjectName loaderObjectName, byte[] data)
+		throws InstanceNotFoundException, OperationsException,
+			   ReflectionException {
+
+		return _mBeanServer.deserialize(className, loaderObjectName, data);
+	}
+
+	public Object getAttribute(ObjectName objectName, String attribute)
+		throws AttributeNotFoundException, InstanceNotFoundException,
+			   MBeanException, ReflectionException {
+
+		ObjectName platformObjectName = getPlatformObjectName(objectName);
+
+		return _mBeanServer.getAttribute(platformObjectName, attribute);
+	}
+
+	public AttributeList getAttributes(
+			ObjectName objectName, String[] attributes)
 		throws InstanceNotFoundException, ReflectionException {
 
-		ObjectName objectName = getPlatformObjectName(name);
+		ObjectName platformObjectName = getPlatformObjectName(objectName);
 
-		return _delegate.setAttributes(objectName, attributes);
+		return _mBeanServer.getAttributes(platformObjectName, attributes);
 	}
 
-	public Object invoke(
-			ObjectName name, String operationName, Object[] params,
-			String[] signature)
-		throws InstanceNotFoundException, MBeanException, ReflectionException {
+	public ClassLoader getClassLoader(ObjectName loaderObjectName)
+		throws InstanceNotFoundException {
 
-		ObjectName objectName = getPlatformObjectName(name);
+		return _mBeanServer.getClassLoader(loaderObjectName);
+	}
 
-		return _delegate.invoke(objectName, operationName, params, signature);
+	public ClassLoader getClassLoaderFor(ObjectName objectName)
+		throws InstanceNotFoundException {
+
+		ObjectName platformObjectName = getPlatformObjectName(objectName);
+
+		return _mBeanServer.getClassLoaderFor(platformObjectName);
+	}
+
+	public ClassLoaderRepository getClassLoaderRepository() {
+		return _mBeanServer.getClassLoaderRepository();
 	}
 
 	public String getDefaultDomain() {
-		return _delegate.getDefaultDomain();		
+		return _mBeanServer.getDefaultDomain();
 	}
 
 	public String[] getDomains() {
-		return _delegate.getDomains();
+		return _mBeanServer.getDomains();
 	}
 
-	public void addNotificationListener(
-			ObjectName name, NotificationListener listener,
-			NotificationFilter filter, Object handback)
-		throws InstanceNotFoundException {
-
-		ObjectName objectName = getPlatformObjectName(name);
-
-		_delegate.addNotificationListener(
-			objectName, listener, filter, handback);
+	public Integer getMBeanCount() {
+		return _mBeanServer.getMBeanCount();
 	}
 
-	public void addNotificationListener(
-			ObjectName name, ObjectName listener, NotificationFilter filter,
-			Object handback)
-		throws InstanceNotFoundException {
-
-		ObjectName objectName = getPlatformObjectName(name);
-		ObjectName listenerName = getPlatformObjectName(listener);
-
-		_delegate.addNotificationListener(
-			objectName, listenerName, filter, handback);
-
-	}
-
-	public void removeNotificationListener(ObjectName name, ObjectName listener)
-		throws InstanceNotFoundException, ListenerNotFoundException {
-
-		ObjectName objectName = getPlatformObjectName(name);
-		ObjectName listenerName = getPlatformObjectName(listener);
-
-		_delegate.removeNotificationListener(objectName, listenerName);
-	}
-
-	public void removeNotificationListener(
-			ObjectName name, ObjectName listener, NotificationFilter filter,
-			Object handback)
-		throws InstanceNotFoundException, ListenerNotFoundException {
-
-		ObjectName objectName = getPlatformObjectName(name);
-		ObjectName listenerName = getPlatformObjectName(listener);
-
-		_delegate.removeNotificationListener(
-			objectName, listenerName, filter, handback);
-
-	}
-
-	public void removeNotificationListener(
-			ObjectName name, NotificationListener listener)
-		throws InstanceNotFoundException, ListenerNotFoundException {
-
-		ObjectName objectName = getPlatformObjectName(name);
-
-		_delegate.removeNotificationListener(
-			objectName, listener);
-	}
-
-	public void removeNotificationListener(
-			ObjectName name, NotificationListener listener,
-			NotificationFilter filter, Object handback)
-		throws InstanceNotFoundException, ListenerNotFoundException {
-
-		ObjectName objectName = getPlatformObjectName(name);
-
-		_delegate.removeNotificationListener(
-			objectName, listener, filter, handback);
-	}
-
-	public MBeanInfo getMBeanInfo(ObjectName name)
+	public MBeanInfo getMBeanInfo(ObjectName objectName)
 		throws InstanceNotFoundException, IntrospectionException,
 			   ReflectionException {
 
-		ObjectName objectName = getPlatformObjectName(name);
+		ObjectName platformObjectName = getPlatformObjectName(objectName);
 
-		return _delegate.getMBeanInfo(objectName);
+		return _mBeanServer.getMBeanInfo(platformObjectName);
 	}
 
-	public boolean isInstanceOf(ObjectName name, String className)
+	public ObjectInstance getObjectInstance(ObjectName objectName)
 		throws InstanceNotFoundException {
 
-		ObjectName objectName = getPlatformObjectName(name);
+		ObjectName platformObjectName = getPlatformObjectName(objectName);
 
-		return _delegate.isInstanceOf(objectName, className);
+		return _mBeanServer.getObjectInstance(platformObjectName);
 	}
 
 	public Object instantiate(String className)
-		throws ReflectionException, MBeanException {
+		throws MBeanException, ReflectionException {
 
-		return _delegate.instantiate(className);
-	}
-
-	public Object instantiate(String className, ObjectName loaderName)
-		throws ReflectionException, MBeanException, InstanceNotFoundException {
-
-		return _delegate.instantiate(className, loaderName);
+		return _mBeanServer.instantiate(className);
 	}
 
 	public Object instantiate(
-		String className, Object[] params, String[] signature)
-		throws ReflectionException, MBeanException {
+			String className, Object[] params, String[] signature)
+		throws MBeanException, ReflectionException {
 
-		return _delegate.instantiate(className, params, signature);
+		return _mBeanServer.instantiate(className, params, signature);
+	}
+
+	public Object instantiate(String className, ObjectName loaderObjectName)
+		throws InstanceNotFoundException, MBeanException, ReflectionException {
+
+		return _mBeanServer.instantiate(className, loaderObjectName);
 	}
 
 	public Object instantiate(
 			String className, ObjectName loaderName, Object[] params,
 			String[] signature)
-		throws ReflectionException, MBeanException, InstanceNotFoundException {
+		throws InstanceNotFoundException, MBeanException, ReflectionException {
 
-		return _delegate.instantiate(className, loaderName, params, signature);
+		return _mBeanServer.instantiate(
+			className, loaderName, params, signature);
 	}
 
-	@Deprecated
-	public ObjectInputStream deserialize(ObjectName name, byte[] data)
-		throws InstanceNotFoundException, OperationsException {
+	public Object invoke(
+			ObjectName objectName, String operationName, Object[] params,
+			String[] signature)
+		throws InstanceNotFoundException, MBeanException, ReflectionException {
 
-		ObjectName objectName = getPlatformObjectName(name);
+		ObjectName platformObjectName = getPlatformObjectName(objectName);
 
-		return _delegate.deserialize(objectName, data);
+		return _mBeanServer.invoke(
+			platformObjectName, operationName, params, signature);
 	}
 
-	@Deprecated
-	public ObjectInputStream deserialize(String className, byte[] data)
-		throws OperationsException, ReflectionException {
+	public boolean isInstanceOf(ObjectName objectName, String className)
+		throws InstanceNotFoundException {
 
-		return _delegate.deserialize(className, data);
+		ObjectName platformObjectName = getPlatformObjectName(objectName);
+
+		return _mBeanServer.isInstanceOf(platformObjectName, className);
 	}
 
-	@Deprecated
-	public ObjectInputStream deserialize(
-			String className, ObjectName loaderName, byte[] data)
-		throws InstanceNotFoundException, OperationsException,
+	public boolean isRegistered(ObjectName objectName) {
+		ObjectName platformObjectName = getPlatformObjectName(objectName);
+
+		return _mBeanServer.isRegistered(platformObjectName);
+	}
+
+	public Set<ObjectInstance> queryMBeans(
+		ObjectName objectName, QueryExp queryExp) {
+
+		return _mBeanServer.queryMBeans(objectName, queryExp);
+	}
+
+	public Set<ObjectName> queryNames(
+		ObjectName objectName, QueryExp queryExp) {
+
+		return _mBeanServer.queryNames(objectName, queryExp);
+	}
+
+	public ObjectInstance registerMBean(Object object, ObjectName objectName)
+		throws InstanceAlreadyExistsException, MBeanRegistrationException,
+			   NotCompliantMBeanException {
+
+		return _mBeanRegistry.register(
+			objectName.getCanonicalName(), object, objectName);
+	}
+
+	public void removeNotificationListener(
+			ObjectName name, NotificationListener notificationListener)
+		throws InstanceNotFoundException, ListenerNotFoundException {
+
+		ObjectName platformObjectName = getPlatformObjectName(name);
+
+		_mBeanServer.removeNotificationListener(
+			platformObjectName, notificationListener);
+	}
+
+	public void removeNotificationListener(
+			ObjectName objectName, NotificationListener notificationListener,
+			NotificationFilter notificationFilter, Object handback)
+		throws InstanceNotFoundException, ListenerNotFoundException {
+
+		ObjectName platformObjectName = getPlatformObjectName(objectName);
+
+		_mBeanServer.removeNotificationListener(
+			platformObjectName, notificationListener, notificationFilter,
+			handback);
+	}
+
+	public void removeNotificationListener(
+			ObjectName objectName, ObjectName listenerObjectName)
+		throws InstanceNotFoundException, ListenerNotFoundException {
+
+		ObjectName platformObjectName = getPlatformObjectName(objectName);
+		ObjectName platformListenerObjectName = getPlatformObjectName(
+			listenerObjectName);
+
+		_mBeanServer.removeNotificationListener(
+			platformObjectName, platformListenerObjectName);
+	}
+
+	public void removeNotificationListener(
+			ObjectName objectName, ObjectName listenerObjectName,
+			NotificationFilter notificationFilter, Object handback)
+		throws InstanceNotFoundException, ListenerNotFoundException {
+
+		ObjectName platformObjectName = getPlatformObjectName(objectName);
+		ObjectName platformListenerObjectName = getPlatformObjectName(
+			listenerObjectName);
+
+		_mBeanServer.removeNotificationListener(
+			platformObjectName, platformListenerObjectName, notificationFilter,
+			handback);
+
+	}
+
+	public void setAttribute(ObjectName objectName, Attribute attribute)
+		throws AttributeNotFoundException, InstanceNotFoundException,
+			   InvalidAttributeValueException, MBeanException,
 			   ReflectionException {
 
-		return _delegate.deserialize(className, loaderName, data);
+		ObjectName platformObjectName = getPlatformObjectName(objectName);
+
+		_mBeanServer.setAttribute(platformObjectName, attribute);
 	}
 
-	public ClassLoader getClassLoaderFor(ObjectName mbeanName)
-		throws InstanceNotFoundException {
+	public AttributeList setAttributes(
+			ObjectName objectName, AttributeList attributeList)
+		throws InstanceNotFoundException, ReflectionException {
 
-		ObjectName objectName = getPlatformObjectName(mbeanName);
-		
-		return _delegate.getClassLoaderFor(objectName);
+		ObjectName platformObjectName = getPlatformObjectName(objectName);
+
+		return _mBeanServer.setAttributes(platformObjectName, attributeList);
 	}
 
-	public ClassLoader getClassLoader(ObjectName loaderName)
-		throws InstanceNotFoundException {
-
-		return _delegate.getClassLoader(loaderName);
+	public void setMBeanRegistry(MBeanRegistry mBeanRegistry) {
+		_mBeanRegistry = mBeanRegistry;
 	}
 
-	public ClassLoaderRepository getClassLoaderRepository() {
-		return _delegate.getClassLoaderRepository();
-
+	public void setMBeanServer(MBeanServer mBeanServer) {
+		_mBeanServer = mBeanServer;
 	}
 
-	protected ObjectName getPlatformObjectName(ObjectName name) {
-		ObjectName objectName = _registry.getObjectName(
-			name.getCanonicalName());
+	public void unregisterMBean(ObjectName objectName)
+		throws InstanceNotFoundException, MBeanRegistrationException {
 
-		if (objectName == null) {
-			objectName = name;
+		_mBeanRegistry.unregister(objectName.getCanonicalName(), objectName);
+	}
+
+	protected ObjectName getPlatformObjectName(ObjectName objectName) {
+		ObjectName platformObjectName = _mBeanRegistry.getObjectName(
+			objectName.getCanonicalName());
+
+		if (platformObjectName == null) {
+			platformObjectName = objectName;
 		}
-		return objectName;
+
+		return platformObjectName;
 	}
 
-	private MBeanRegistry _registry;
-	private MBeanServer _delegate;
+	private MBeanRegistry _mBeanRegistry;
+	private MBeanServer _mBeanServer;
+
 }

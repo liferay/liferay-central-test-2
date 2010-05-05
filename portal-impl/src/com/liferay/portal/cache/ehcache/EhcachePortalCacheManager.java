@@ -47,7 +47,7 @@ public class EhcachePortalCacheManager implements PortalCacheManager {
 
 		if (PropsValues.EHCACHE_PORTAL_CACHE_MANAGER_JMX_ENABLED) {
 			ManagementService.registerMBeans(
-				_cacheManager, _mbeanServer, _registerCacheManager,
+				_cacheManager, _mBeanServer, _registerCacheManager,
 				_registerCaches, _registerCacheConfigurations,
 				_registerCacheStatistics);
 		}
@@ -110,8 +110,8 @@ public class EhcachePortalCacheManager implements PortalCacheManager {
 		_configPropertyKey = configPropertyKey;
 	}
 
-	public void setMBeanServer(MBeanServer server) {
-		_mbeanServer = server;
+	public void setMBeanServer(MBeanServer mBeanServer) {
+		_mBeanServer = mBeanServer;
 	}
 
 	public void setRegisterCacheConfigurations(
@@ -137,7 +137,7 @@ public class EhcachePortalCacheManager implements PortalCacheManager {
 
 	private String _configPropertyKey;
 	private CacheManager _cacheManager;
-	private MBeanServer _mbeanServer;
+	private MBeanServer _mBeanServer;
 	private boolean _registerCacheManager = true;
 	private boolean _registerCaches = true;
 	private boolean _registerCacheConfigurations = true;

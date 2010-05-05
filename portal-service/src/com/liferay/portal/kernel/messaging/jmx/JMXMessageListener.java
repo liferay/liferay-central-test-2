@@ -122,8 +122,8 @@ public class JMXMessageListener extends BaseDestinationEventListener {
 		afterPropertiesSet();
 	}
 
-	public void setMbeanRegistry(MBeanRegistry mbeanRegistry) {
-		_mBeanRegistry = mbeanRegistry;
+	public void setMBeanRegistry(MBeanRegistry mBeanRegistry) {
+		_mBeanRegistry = mBeanRegistry;
 	}
 
 	public void setMessageBus(MessageBus messageBus) {
@@ -163,9 +163,12 @@ public class JMXMessageListener extends BaseDestinationEventListener {
 		return destinationName + "statistics";
 	}
 
+	private static final String _MESSAGE_BUS_MANAGER_OBJECT_NAME_CACHE_KEY =
+		"messageBusManager";
+
 	private static Log log = LogFactoryUtil.getLog(JMXMessageListener.class);
 
 	private MBeanRegistry _mBeanRegistry;
 	private MessageBus _messageBus;
-	private static final String _MESSAGE_BUS_MANAGER_OBJECT_NAME_CACHE_KEY = "messageBusManager";
+
 }

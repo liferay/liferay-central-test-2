@@ -31,20 +31,20 @@ import org.jmock.integration.junit4.JUnit4Mockery;
 public class MessageBusManagerTest extends TestCase {
 
 	public void setUp() throws Exception {
-		_mockery = new JUnit4Mockery();
+		_jUnit4Mockery = new JUnit4Mockery();
 		_mBeanServer = ManagementFactory.getPlatformMBeanServer();
 	}
 
 	public void testRegisterMBean() throws Exception {
 		_mBeanServer.registerMBean(
-			new MessageBusManager(_mockery.mock(MessageBus.class)),
+			new MessageBusManager(_jUnit4Mockery.mock(MessageBus.class)),
 			MessageBusManager.createObjectName());
 
 		assertTrue(
 			_mBeanServer.isRegistered(MessageBusManager.createObjectName()));
 	}
 
-	private JUnit4Mockery _mockery;
+	private JUnit4Mockery _jUnit4Mockery;
 	private MBeanServer _mBeanServer;
 
 }
