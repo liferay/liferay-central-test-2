@@ -266,10 +266,20 @@ public abstract class BaseCommandReceiver implements CommandReceiver {
 
 			foldersEl.appendChild(folderEl);
 
-			folderEl.setAttribute(
-				"name",
-				group.getGroupId() + " - " +
-					HtmlUtil.escape(group.getDescriptiveName()));
+			if (group.hasStagingGroup()) {
+				Group stagingGroup = group.getStagingGroup();
+
+				folderEl.setAttribute(
+					"name",
+					stagingGroup.getGroupId() + " - " +
+						HtmlUtil.escape(stagingGroup.getDescriptiveName()));
+			}
+			else {
+				folderEl.setAttribute(
+					"name",
+					group.getGroupId() + " - " +
+						HtmlUtil.escape(group.getDescriptiveName()));
+			}
 		}
 	}
 
