@@ -456,6 +456,9 @@ app.server.glassfish.zip.url=http://download.java.net/glassfish/v3-prelude/relea
 				</scp>
 			</then>
 		</if>
+
+		<echo>Manually run "ant -buildfile build-maven.xml deploy-release-artifacts" if the
+release was successful.</echo>
 	</target>
 
 	<target name="prepare-generated-files">
