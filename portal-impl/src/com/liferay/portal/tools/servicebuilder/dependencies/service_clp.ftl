@@ -21,6 +21,10 @@ public class ${entity.name}${sessionTypeName}ServiceClp implements ${entity.name
 			<#assign returnTypeName = method.returns.value + method.returnsGenericsName + serviceBuilder.getDimensions(method.returns.dimensions)>
 			<#assign parameters = method.parameters>
 
+			<#if method.name = "dynamicQuery">
+				@SuppressWarnings("unchecked")
+			</#if>
+
 			public ${method.returns.value}${method.returnsGenericsName}${serviceBuilder.getDimensions(method.returns.dimensions)} ${method.name}(
 
 			<#list parameters as parameter>
