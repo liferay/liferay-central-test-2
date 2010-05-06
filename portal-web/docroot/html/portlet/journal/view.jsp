@@ -109,14 +109,14 @@ portletURL.setParameter("tabs1", tabs1);
 
 				String status = null;
 
-				if (article.isExpired()) {
-					status = "expired";
-				}
-				else if (article.isApproved()) {
+				if (article.isApproved()) {
 					status = "approved";
 				}
 				else if (article.isDraft()) {
 					status = "draft";
+				}
+				else if (article.isExpired()) {
+					status = "expired";
 				}
 				else if (article.isPending()) {
 					status = "pending";
