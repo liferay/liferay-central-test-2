@@ -31,8 +31,7 @@ public class Writer_ConfigureWCLPortletTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"link=Web Content List Permissions Test Page")) {
+				if (selenium.isElementPresent("link=Web Content List Test Page")) {
 					break;
 				}
 			}
@@ -42,7 +41,7 @@ public class Writer_ConfigureWCLPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("link=Web Content List Permissions Test Page",
+		selenium.clickAt("link=Web Content List Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Please configure this portlet to make it visible to all users.",

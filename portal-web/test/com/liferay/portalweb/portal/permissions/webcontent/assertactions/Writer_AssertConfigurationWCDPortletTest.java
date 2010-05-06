@@ -26,6 +26,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class Writer_AssertConfigurationWCDPortletTest extends BaseTestCase {
 	public void testWriter_AssertConfigurationWCDPortlet()
 		throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -33,7 +35,7 @@ public class Writer_AssertConfigurationWCDPortletTest extends BaseTestCase {
 
 			try {
 				if (selenium.isElementPresent(
-							"link=Web Content Display Permissions Test Page")) {
+							"link=Web Content Display Test Page")) {
 					break;
 				}
 			}
@@ -43,12 +45,13 @@ public class Writer_AssertConfigurationWCDPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("link=Web Content Display Permissions Test Page",
+		selenium.clickAt("link=Web Content Display Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("//span/a/img"));
-		assertTrue(selenium.isElementPresent("//img[@alt='Print']"));
-		assertTrue(selenium.isElementPresent("link=Add Comment"));
+		assertEquals(RuntimeVariables.replace(
+				"Print CA Permissions Web Content Test"),
+			selenium.getText("//span/a/span"));
+		assertTrue(selenium.isElementPresent("link=Be the first."));
 		assertTrue(selenium.isTextPresent("Your Rating"));
 	}
 }

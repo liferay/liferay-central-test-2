@@ -26,88 +26,59 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class CA_RemoveMemberWCDViewPermissionsTest extends BaseTestCase {
 	public void testCA_RemoveMemberWCDViewPermissions()
 		throws Exception {
-		int label = 1;
+		selenium.open("/web/guest/home/");
 
-		while (label >= 1) {
-			switch (label) {
-			case 1:
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isElementPresent(
-									"link=Web Content Display Permissions Test Page")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
-				selenium.clickAt("link=Web Content Display Permissions Test Page",
-					RuntimeVariables.replace(""));
-				selenium.waitForPageToLoad("30000");
-				selenium.clickAt("link=Configuration",
-					RuntimeVariables.replace(""));
-				selenium.waitForPageToLoad("30000");
-				selenium.clickAt("link=Permissions",
-					RuntimeVariables.replace(""));
-				selenium.waitForPageToLoad("30000");
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isElementPresent("15_ACTION_VIEW")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
-				boolean Checked1 = selenium.isChecked("15_ACTION_VIEW");
-
-				if (!Checked1) {
-					label = 2;
-
-					continue;
-				}
-
-				selenium.clickAt("15_ACTION_VIEW", RuntimeVariables.replace(""));
-
-			case 2:
-
-				boolean Checked2 = selenium.isChecked("//tr[11]/td[3]/input");
-
-				if (!Checked2) {
-					label = 3;
-
-					continue;
-				}
-
-				selenium.clickAt("//tr[11]/td[3]/input",
-					RuntimeVariables.replace(""));
-
-			case 3:
-				selenium.clickAt("//input[@value='Submit']",
-					RuntimeVariables.replace(""));
-				selenium.waitForPageToLoad("30000");
-				assertTrue(selenium.isTextPresent(
-						"Your request processed successfully."));
-
-			case 100:
-				label = -1;
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
 			}
+
+			try {
+				if (selenium.isElementPresent(
+							"link=Web Content Display Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
 		}
+
+		selenium.clickAt("link=Web Content Display Test Page",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("link=Configuration", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("link=Permissions", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("15_ACTION_VIEW")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.uncheck("15_ACTION_VIEW");
+		selenium.uncheck("//tr[5]/td[2]/input");
+		selenium.uncheck("//tr[13]/td[2]/input");
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		assertEquals(RuntimeVariables.replace(
+				"Your request processed successfully."),
+			selenium.getText("//div[@id='p_p_id_86_']/div/div[1]"));
+		assertFalse(selenium.isChecked("15_ACTION_VIEW"));
+		assertFalse(selenium.isChecked("//tr[5]/td[2]/input"));
+		assertFalse(selenium.isChecked("//tr[13]/td[2]/input"));
 	}
 }

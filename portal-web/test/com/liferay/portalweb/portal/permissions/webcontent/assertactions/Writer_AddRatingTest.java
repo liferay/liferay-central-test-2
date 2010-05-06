@@ -24,6 +24,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class Writer_AddRatingTest extends BaseTestCase {
 	public void testWriter_AddRating() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -31,7 +33,7 @@ public class Writer_AddRatingTest extends BaseTestCase {
 
 			try {
 				if (selenium.isElementPresent(
-							"link=Web Content Display Permissions Test Page")) {
+							"link=Web Content Display Test Page")) {
 					break;
 				}
 			}
@@ -41,12 +43,10 @@ public class Writer_AddRatingTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("link=Web Content Display Permissions Test Page",
+		selenium.clickAt("link=Web Content Display Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		String Count = selenium.getIncrementedText("//td[3]/div[1]");
-		RuntimeVariables.setValue("Count", Count);
+		assertTrue(selenium.isTextPresent("Average (3 Votes)"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -54,7 +54,7 @@ public class Writer_AddRatingTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//img[5]")) {
+				if (selenium.isElementPresent("//a[5]")) {
 					break;
 				}
 			}
@@ -64,7 +64,7 @@ public class Writer_AddRatingTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//img[5]", RuntimeVariables.replace(""));
+		selenium.clickAt("//a[5]", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -72,8 +72,7 @@ public class Writer_AddRatingTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isPartialText("//td[3]/div[1]",
-							RuntimeVariables.getValue("Count"))) {
+				if (selenium.isTextPresent("Average (4 Votes)")) {
 					break;
 				}
 			}
@@ -82,5 +81,7 @@ public class Writer_AddRatingTest extends BaseTestCase {
 
 			Thread.sleep(1000);
 		}
+
+		assertTrue(selenium.isTextPresent("Average (4 Votes)"));
 	}
 }

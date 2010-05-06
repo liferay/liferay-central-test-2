@@ -24,6 +24,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class Member_AddCommentTest extends BaseTestCase {
 	public void testMember_AddComment() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -31,7 +33,7 @@ public class Member_AddCommentTest extends BaseTestCase {
 
 			try {
 				if (selenium.isElementPresent(
-							"link=Web Content Display Permissions Test Page")) {
+							"link=Web Content Display Test Page")) {
 					break;
 				}
 			}
@@ -41,7 +43,7 @@ public class Member_AddCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("link=Web Content Display Permissions Test Page",
+		selenium.clickAt("link=Web Content Display Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Add Comment", RuntimeVariables.replace(""));
@@ -52,7 +54,7 @@ public class Member_AddCommentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//textarea")) {
+				if (selenium.isVisible("//textarea")) {
 					break;
 				}
 			}
@@ -62,10 +64,10 @@ public class Member_AddCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("//textarea",
-			RuntimeVariables.replace("This is a member test comment!"));
 		selenium.type("//textarea",
 			RuntimeVariables.replace("This is a member test comment!"));
+		selenium.keyPress("//textarea", RuntimeVariables.replace("\\48"));
+		selenium.keyPress("//textarea", RuntimeVariables.replace("\\8"));
 		selenium.clickAt("//tr[3]/td/input[1]", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(

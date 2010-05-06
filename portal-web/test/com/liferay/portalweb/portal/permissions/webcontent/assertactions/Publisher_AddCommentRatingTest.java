@@ -25,6 +25,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class Publisher_AddCommentRatingTest extends BaseTestCase {
 	public void testPublisher_AddCommentRating() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -32,7 +34,7 @@ public class Publisher_AddCommentRatingTest extends BaseTestCase {
 
 			try {
 				if (selenium.isElementPresent(
-							"link=Web Content Display Permissions Test Page")) {
+							"link=Web Content Display Test Page")) {
 					break;
 				}
 			}
@@ -42,17 +44,69 @@ public class Publisher_AddCommentRatingTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("link=Web Content Display Permissions Test Page",
+		selenium.clickAt("link=Web Content Display Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//td[1]/ul/li[2]/a[1]", RuntimeVariables.replace(""));
-		Thread.sleep(5000);
-		assertTrue(selenium.isTextPresent("+1"));
-		selenium.clickAt("//td[1]/ul/li[2]/a[2]", RuntimeVariables.replace(""));
-		Thread.sleep(5000);
-		assertTrue(selenium.isTextPresent("-1"));
-		selenium.clickAt("//td[1]/ul/li[2]/a[2]", RuntimeVariables.replace(""));
-		Thread.sleep(5000);
-		assertTrue(selenium.isTextPresent("\u00b10"));
+		assertTrue(selenium.isTextPresent("0 (0 Votes)"));
+		selenium.clickAt("//table[1]/tbody/tr/td[1]/div/div/div/a[1]",
+			RuntimeVariables.replace(""));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isTextPresent("+1 (1 Vote)")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		assertTrue(selenium.isTextPresent("+1 (1 Vote)"));
+		selenium.clickAt("//table[1]/tbody/tr/td[1]/div/div/div/a[2]",
+			RuntimeVariables.replace(""));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isTextPresent("-1 (1 Vote)")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		assertTrue(selenium.isTextPresent("-1 (1 Vote)"));
+		selenium.clickAt("//table[1]/tbody/tr/td[1]/div/div/div/a[2]",
+			RuntimeVariables.replace(""));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isTextPresent("0 (0 Votes)")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		assertTrue(selenium.isTextPresent("0 (0 Votes)"));
 	}
 }

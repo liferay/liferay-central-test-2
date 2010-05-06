@@ -24,6 +24,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class Writer_EditWCDArticleTest extends BaseTestCase {
 	public void testWriter_EditWCDArticle() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -31,7 +33,7 @@ public class Writer_EditWCDArticleTest extends BaseTestCase {
 
 			try {
 				if (selenium.isElementPresent(
-							"link=Web Content Display Permissions Test Page")) {
+							"link=Web Content Display Test Page")) {
 					break;
 				}
 			}
@@ -41,7 +43,7 @@ public class Writer_EditWCDArticleTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("link=Web Content Display Permissions Test Page",
+		selenium.clickAt("link=Web Content Display Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("//img[@alt='Edit Web Content']",
@@ -58,7 +60,8 @@ public class Writer_EditWCDArticleTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_15_editor")) {
+				if (selenium.isElementPresent(
+							"_15_structure_el_TextAreaField_content")) {
 					break;
 				}
 			}
@@ -74,7 +77,7 @@ public class Writer_EditWCDArticleTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("FCKeditor1___Frame")) {
+				if (selenium.isElementPresent("cke_contents_CKEditor1")) {
 					break;
 				}
 			}
@@ -100,14 +103,15 @@ public class Writer_EditWCDArticleTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.selectFrame("//iframe[@id=\"_15_editor\"]");
-		selenium.selectFrame("//iframe[@id=\"FCKeditor1___Frame\"]");
-		selenium.selectFrame("//iframe");
+		selenium.selectFrame(
+			"//iframe[@id='_15_structure_el_TextAreaField_content']");
+		selenium.selectFrame("//td[@id='cke_contents_CKEditor1']/iframe");
 		selenium.type("//body",
 			RuntimeVariables.replace(
 				"This is an edited ca permissions wcd article! By the writer..."));
 		selenium.selectFrame("relative=top");
-		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Publish']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"This is an edited ca permissions wcd article! By the writer..."));

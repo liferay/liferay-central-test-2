@@ -26,6 +26,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class Writer_AssertCannotApproveArticleTest extends BaseTestCase {
 	public void testWriter_AssertCannotApproveArticle()
 		throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -51,7 +53,6 @@ public class Writer_AssertCannotApproveArticleTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		Thread.sleep(5000);
 		assertFalse(selenium.isElementPresent("//input[@value='Approve']"));
-		assertFalse(selenium.isElementPresent(
-				"//input[@value='Save and Approve']"));
+		assertFalse(selenium.isElementPresent("//input[@value='Publish']"));
 	}
 }

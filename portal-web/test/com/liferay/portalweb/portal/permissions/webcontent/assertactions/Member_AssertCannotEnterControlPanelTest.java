@@ -26,13 +26,15 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class Member_AssertCannotEnterControlPanelTest extends BaseTestCase {
 	public void testMember_AssertCannotEnterControlPanel()
 		throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Welcome")) {
+				if (selenium.isElementPresent("link=Control Panel")) {
 					break;
 				}
 			}
@@ -42,8 +44,8 @@ public class Member_AssertCannotEnterControlPanelTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("link=Welcome", RuntimeVariables.replace(""));
+		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertFalse(selenium.isElementPresent("link=Control Panel"));
+		assertFalse(selenium.isElementPresent("link=Web Content"));
 	}
 }

@@ -9,28 +9,18 @@
 <tr><td rowspan="1" colspan="3">CA_AddWCDArticleTest</td></tr>
 </thead><tbody>
 <tr>
-	<td>store</td>
-	<td>eval(selenium.isElementPresent('link=Back to Guest'))</td>
-	<td>InControlPanel</td>
-</tr>
-<tr>
-	<td>gotoIf</td>
-	<td>!${InControlPanel}</td>
-	<td>NotInControlPanel</td>
-</tr>
-<tr>
-	<td>clickAtAndWait</td>
-	<td>link=Back to Guest</td>
+	<td>open</td>
+	<td>/web/guest/home/</td>
 	<td></td>
 </tr>
 <tr>
-	<td>label</td>
-	<td>NotInControlPanel</td>
+	<td>waitForVisible</td>
+	<td>link=Web Content Display Test Page</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>link=Web Content Display Permissions Test Page</td>
+	<td>link=Web Content Display Test Page</td>
 	<td></td>
 </tr>
 <tr>
@@ -50,12 +40,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>_15_editor</td>
+	<td>_15_structure_el_TextAreaField_content</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>FCKeditor1___Frame</td>
+	<td>cke_contents_CKEditor1</td>
 	<td></td>
 </tr>
 <tr>
@@ -65,17 +55,12 @@
 </tr>
 <tr>
 	<td>selectFrame</td>
-	<td>//iframe[@id="_15_editor"]</td>
+	<td>//iframe[@id='_15_structure_el_TextAreaField_content']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>selectFrame</td>
-	<td>//iframe[@id="FCKeditor1___Frame"]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>selectFrame</td>
-	<td>//iframe</td>
+	<td>//td[@id='cke_contents_CKEditor1']/iframe</td>
 	<td></td>
 </tr>
 <tr>
@@ -90,7 +75,7 @@
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>//input[@value='Save and Approve']</td>
+	<td>//input[@value='Publish']</td>
 	<td></td>
 </tr>
 <tr>

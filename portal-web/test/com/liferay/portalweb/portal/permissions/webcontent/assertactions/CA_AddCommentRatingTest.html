@@ -9,58 +9,68 @@
 <tr><td rowspan="1" colspan="3">CA_AddCommentRatingTest</td></tr>
 </thead><tbody>
 <tr>
+	<td>open</td>
+	<td>/web/guest/home/</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
-	<td>link=Web Content Display Permissions Test Page</td>
+	<td>link=Web Content Display Test Page</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>link=Web Content Display Permissions Test Page</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAt</td>
-	<td>//td[1]/ul/li[2]/a[1]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>pause</td>
-	<td>5000</td>
+	<td>link=Web Content Display Test Page</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>+1</td>
+	<td>0 (0 Votes)</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAt</td>
-	<td>//td[1]/ul/li[2]/a[2]</td>
+	<td>//table[1]/tbody/tr/td[1]/div/div/div/a[1]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>pause</td>
-	<td>5000</td>
+	<td>waitForTextPresent</td>
+	<td>+1 (1 Vote)</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>-1</td>
+	<td>+1 (1 Vote)</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAt</td>
-	<td>//td[1]/ul/li[2]/a[2]</td>
+	<td>//table[1]/tbody/tr/td[1]/div/div/div/a[2]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>pause</td>
-	<td>5000</td>
+	<td>waitForTextPresent</td>
+	<td>-1 (1 Vote)</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>±0</td>
+	<td>-1 (1 Vote)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>//table[1]/tbody/tr/td[1]/div/div/div/a[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>0 (0 Votes)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>0 (0 Votes)</td>
 	<td></td>
 </tr>
 

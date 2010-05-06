@@ -32,8 +32,7 @@ public class Guest_AssertCannotViewWCLPreApprovalTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"link=Web Content List Permissions Test Page")) {
+				if (selenium.isElementPresent("link=Web Content List Test Page")) {
 					break;
 				}
 			}
@@ -43,7 +42,7 @@ public class Guest_AssertCannotViewWCLPreApprovalTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("link=Web Content List Permissions Test Page",
+		selenium.clickAt("link=Web Content List Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("No Web Content was found."));

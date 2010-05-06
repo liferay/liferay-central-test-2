@@ -26,6 +26,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class Publisher_AssertExportImportWCSLARTest extends BaseTestCase {
 	public void testPublisher_AssertExportImportWCSLAR()
 		throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -33,7 +35,7 @@ public class Publisher_AssertExportImportWCSLARTest extends BaseTestCase {
 
 			try {
 				if (selenium.isElementPresent(
-							"link=Web Content Search Permissions Test Page")) {
+							"link=Web Content Search Test Page")) {
 					break;
 				}
 			}
@@ -43,10 +45,10 @@ public class Publisher_AssertExportImportWCSLARTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("link=Web Content Search Permissions Test Page",
+		selenium.clickAt("link=Web Content Search Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//strong/span", RuntimeVariables.replace(""));
+		selenium.clickAt("//strong/a", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

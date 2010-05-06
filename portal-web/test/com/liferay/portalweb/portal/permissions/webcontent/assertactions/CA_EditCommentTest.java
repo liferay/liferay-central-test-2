@@ -24,6 +24,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class CA_EditCommentTest extends BaseTestCase {
 	public void testCA_EditComment() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -31,7 +33,7 @@ public class CA_EditCommentTest extends BaseTestCase {
 
 			try {
 				if (selenium.isElementPresent(
-							"link=Web Content Display Permissions Test Page")) {
+							"link=Web Content Display Test Page")) {
 					break;
 				}
 			}
@@ -41,7 +43,7 @@ public class CA_EditCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("link=Web Content Display Permissions Test Page",
+		selenium.clickAt("link=Web Content Display Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Edit", RuntimeVariables.replace(""));
@@ -52,7 +54,7 @@ public class CA_EditCommentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//tr[2]/td/div/textarea")) {
+				if (selenium.isVisible("//tr[2]/td/div/textarea")) {
 					break;
 				}
 			}
@@ -62,12 +64,13 @@ public class CA_EditCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("//tr[2]/td/div/textarea",
-			RuntimeVariables.replace(
-				"This is a ca test WCD comment! That is now edited."));
 		selenium.type("//tr[2]/td/div/textarea",
 			RuntimeVariables.replace(
 				"This is a ca test WCD comment! That is now edited."));
+		selenium.keyPress("//tr[2]/td/div/textarea",
+			RuntimeVariables.replace("\\48"));
+		selenium.keyPress("//tr[2]/td/div/textarea",
+			RuntimeVariables.replace("\\8"));
 		selenium.clickAt("//tr[2]/td/input[1]", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(

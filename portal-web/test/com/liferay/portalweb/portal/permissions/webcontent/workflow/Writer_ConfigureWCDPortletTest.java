@@ -53,7 +53,7 @@ public class Writer_ConfigureWCDPortletTest extends BaseTestCase {
 
 					try {
 						if (selenium.isElementPresent(
-									"link=Web Content Display Permissions Test Page")) {
+									"link=Web Content Display Test Page")) {
 							break;
 						}
 					}
@@ -63,7 +63,7 @@ public class Writer_ConfigureWCDPortletTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.clickAt("link=Web Content Display Permissions Test Page",
+				selenium.clickAt("link=Web Content Display Test Page",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				selenium.clickAt("//img[@alt='Select Web Content']",

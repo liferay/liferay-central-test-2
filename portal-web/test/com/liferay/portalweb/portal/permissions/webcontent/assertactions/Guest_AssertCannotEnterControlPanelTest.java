@@ -15,7 +15,6 @@
 package com.liferay.portalweb.portal.permissions.webcontent.assertactions;
 
 import com.liferay.portalweb.portal.BaseTestCase;
-import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="Guest_AssertCannotEnterControlPanelTest.java.html"><b><i>View Source
@@ -26,24 +25,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class Guest_AssertCannotEnterControlPanelTest extends BaseTestCase {
 	public void testGuest_AssertCannotEnterControlPanel()
 		throws Exception {
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Welcome")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("link=Welcome", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
+		selenium.open("/web/guest/home/");
 		assertFalse(selenium.isElementPresent("link=Control Panel"));
 	}
 }

@@ -24,6 +24,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class Member_AssertViewWCSTest extends BaseTestCase {
 	public void testMember_AssertViewWCS() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -31,7 +33,7 @@ public class Member_AssertViewWCSTest extends BaseTestCase {
 
 			try {
 				if (selenium.isElementPresent(
-							"link=Web Content Search Permissions Test Page")) {
+							"link=Web Content Search Test Page")) {
 					break;
 				}
 			}
@@ -41,7 +43,7 @@ public class Member_AssertViewWCSTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("link=Web Content Search Permissions Test Page",
+		selenium.clickAt("link=Web Content Search Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isTextPresent(

@@ -25,14 +25,15 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class CA_AssertRemoveWCLPortletTest extends BaseTestCase {
 	public void testCA_AssertRemoveWCLPortlet() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"link=Web Content List Permissions Test Page")) {
+				if (selenium.isElementPresent("link=Web Content List Test Page")) {
 					break;
 				}
 			}
@@ -42,7 +43,7 @@ public class CA_AssertRemoveWCLPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("link=Web Content List Permissions Test Page",
+		selenium.clickAt("link=Web Content List Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("//img[@alt='Remove']"));

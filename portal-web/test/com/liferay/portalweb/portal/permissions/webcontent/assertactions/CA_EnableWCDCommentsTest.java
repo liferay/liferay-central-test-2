@@ -24,52 +24,37 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class CA_EnableWCDCommentsTest extends BaseTestCase {
 	public void testCA_EnableWCDComments() throws Exception {
-		int label = 1;
+		selenium.open("/web/guest/home/");
 
-		while (label >= 1) {
-			switch (label) {
-			case 1:
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isElementPresent(
-									"link=Web Content Display Permissions Test Page")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
-				selenium.clickAt("link=Web Content Display Permissions Test Page",
-					RuntimeVariables.replace(""));
-				selenium.waitForPageToLoad("30000");
-				selenium.clickAt("link=Configuration",
-					RuntimeVariables.replace(""));
-				selenium.waitForPageToLoad("30000");
-
-				boolean Checked = selenium.isChecked(
-						"_86_enableCommentsCheckbox");
-
-				if (Checked) {
-					label = 2;
-
-					continue;
-				}
-
-				selenium.clickAt("_86_enableCommentsCheckbox",
-					RuntimeVariables.replace(""));
-
-			case 2:
-			case 100:
-				label = -1;
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
 			}
+
+			try {
+				if (selenium.isElementPresent(
+							"link=Web Content Display Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
 		}
+
+		selenium.clickAt("link=Web Content Display Test Page",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("link=Configuration", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		selenium.check("_86_enableCommentsCheckbox");
+		selenium.clickAt("//div/span[1]/span/input",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		assertEquals(RuntimeVariables.replace(
+				"You have successfully updated the setup."),
+			selenium.getText("//div[@id='p_p_id_86_']/div/div"));
+		assertTrue(selenium.isChecked("_86_enableCommentsCheckbox"));
 	}
 }

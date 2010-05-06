@@ -51,7 +51,7 @@ public class SA_CleanUpTest extends BaseTestCase {
 						   .matches("^Are you sure you want to delete the selected web content[\\s\\S]$"));
 		selenium.clickAt("link=Back to Guest", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=Web Content Display Permissions Test Page",
+		selenium.clickAt("link=Web Content Display Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//img[@alt='Remove']");
@@ -95,7 +95,7 @@ public class SA_CleanUpTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("link=Web Content List Permissions Test Page",
+		selenium.clickAt("link=Web Content List Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//img[@alt='Remove']");
@@ -139,7 +139,7 @@ public class SA_CleanUpTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("link=Web Content Search Permissions Test Page",
+		selenium.clickAt("link=Web Content Search Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//img[@alt='Remove']");

@@ -33,7 +33,7 @@ public class Publisher_AssertCannotSearchWCSPreApprovalTest extends BaseTestCase
 
 			try {
 				if (selenium.isElementPresent(
-							"link=Web Content Search Permissions Test Page")) {
+							"link=Web Content Search Test Page")) {
 					break;
 				}
 			}
@@ -43,7 +43,7 @@ public class Publisher_AssertCannotSearchWCSPreApprovalTest extends BaseTestCase
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("link=Web Content Search Permissions Test Page",
+		selenium.clickAt("link=Web Content Search Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_77_keywords", RuntimeVariables.replace("test"));

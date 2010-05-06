@@ -25,6 +25,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class Guest_AssertCannotAddRatingTest extends BaseTestCase {
 	public void testGuest_AssertCannotAddRating() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -32,7 +34,7 @@ public class Guest_AssertCannotAddRatingTest extends BaseTestCase {
 
 			try {
 				if (selenium.isElementPresent(
-							"link=Web Content Display Permissions Test Page")) {
+							"link=Web Content Display Test Page")) {
 					break;
 				}
 			}
@@ -42,7 +44,7 @@ public class Guest_AssertCannotAddRatingTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("link=Web Content Display Permissions Test Page",
+		selenium.clickAt("link=Web Content Display Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("(1 Vote)"));
@@ -53,7 +55,7 @@ public class Guest_AssertCannotAddRatingTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//img[5]")) {
+				if (selenium.isElementPresent("//a[5]")) {
 					break;
 				}
 			}
@@ -63,22 +65,8 @@ public class Guest_AssertCannotAddRatingTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//img[5]", RuntimeVariables.replace(""));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isTextPresent("(1 Vote)")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
+		selenium.clickAt("//a[5]", RuntimeVariables.replace(""));
+		Thread.sleep(5000);
+		assertTrue(selenium.isTextPresent("(1 Vote)"));
 	}
 }

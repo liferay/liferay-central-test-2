@@ -26,6 +26,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class Publisher_AssertCannotEditArticleTest extends BaseTestCase {
 	public void testPublisher_AssertCannotEditArticle()
 		throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -50,8 +52,7 @@ public class Publisher_AssertCannotEditArticleTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		Thread.sleep(5000);
-		assertFalse(selenium.isElementPresent("//input[@value='Save']"));
-		assertFalse(selenium.isElementPresent(
-				"//input[@value='Save and Continue']"));
+		assertFalse(selenium.isElementPresent("_15_saveArticleBtn"));
+		assertFalse(selenium.isElementPresent("//input[@value='Publish']"));
 	}
 }

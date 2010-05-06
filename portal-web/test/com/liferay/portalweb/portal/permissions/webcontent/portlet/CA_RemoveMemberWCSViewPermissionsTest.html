@@ -9,13 +9,18 @@
 <tr><td rowspan="1" colspan="3">CA_RemoveMemberWCSViewPermissionsTest</td></tr>
 </thead><tbody>
 <tr>
+	<td>open</td>
+	<td>/web/guest/home/</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
-	<td>link=Web Content Search Permissions Test Page</td>
+	<td>link=Web Content Search Test Page</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>link=Web Content Search Permissions Test Page</td>
+	<td>link=Web Content Search Test Page</td>
 	<td></td>
 </tr>
 <tr>
@@ -34,53 +39,43 @@
 	<td></td>
 </tr>
 <tr>
-	<td>store</td>
-	<td>eval(selenium.isChecked('15_ACTION_VIEW'))</td>
-	<td>Checked1</td>
-</tr>
-<tr>
-	<td>gotoIf</td>
-	<td>!${Checked1}</td>
-	<td>IsNotChecked1</td>
-</tr>
-<tr>
-	<td>clickAt</td>
+	<td>uncheck</td>
 	<td>15_ACTION_VIEW</td>
 	<td></td>
 </tr>
 <tr>
-	<td>label</td>
-	<td>IsNotChecked1</td>
+	<td>uncheck</td>
+	<td>//tr[5]/td[2]/input</td>
 	<td></td>
 </tr>
 <tr>
-	<td>store</td>
-	<td>eval(selenium.isChecked('//tr[11]/td[2]/input'))</td>
-	<td>Checked2</td>
-</tr>
-<tr>
-	<td>gotoIf</td>
-	<td>!${Checked2}</td>
-	<td>IsNotChecked2</td>
-</tr>
-<tr>
-	<td>clickAt</td>
-	<td>//tr[11]/td[2]/input</td>
-	<td></td>
-</tr>
-<tr>
-	<td>label</td>
-	<td>IsNotChecked2</td>
+	<td>uncheck</td>
+	<td>//tr[13]/td[2]/input</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>//input[@value='Submit']</td>
+	<td>//input[@value='Save']</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>assertText</td>
+	<td>//div[@id='p_p_id_86_']/div/div[1]</td>
 	<td>Your request processed successfully.</td>
+</tr>
+<tr>
+	<td>assertNotChecked</td>
+	<td>15_ACTION_VIEW</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotChecked</td>
+	<td>//tr[5]/td[2]/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotChecked</td>
+	<td>//tr[13]/td[2]/input</td>
 	<td></td>
 </tr>
 

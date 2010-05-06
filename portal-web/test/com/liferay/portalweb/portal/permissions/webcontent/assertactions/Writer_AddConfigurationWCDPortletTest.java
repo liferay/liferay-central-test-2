@@ -26,6 +26,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class Writer_AddConfigurationWCDPortletTest extends BaseTestCase {
 	public void testWriter_AddConfigurationWCDPortlet()
 		throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -33,7 +35,7 @@ public class Writer_AddConfigurationWCDPortletTest extends BaseTestCase {
 
 			try {
 				if (selenium.isElementPresent(
-							"link=Web Content Display Permissions Test Page")) {
+							"link=Web Content Display Test Page")) {
 					break;
 				}
 			}
@@ -43,24 +45,35 @@ public class Writer_AddConfigurationWCDPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("link=Web Content Display Permissions Test Page",
+		selenium.clickAt("link=Web Content Display Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("//img[@alt='Select Web Content']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		assertFalse(selenium.isChecked("_86_showAvailableLocalesCheckbox"));
 		selenium.clickAt("_86_showAvailableLocalesCheckbox",
 			RuntimeVariables.replace(""));
-		Thread.sleep(500);
+		assertFalse(selenium.isChecked("_86_enablePrintCheckbox"));
 		selenium.clickAt("_86_enablePrintCheckbox", RuntimeVariables.replace(""));
-		Thread.sleep(500);
+		assertFalse(selenium.isChecked("_86_enableRatingsCheckbox"));
 		selenium.clickAt("_86_enableRatingsCheckbox",
 			RuntimeVariables.replace(""));
-		Thread.sleep(500);
+		assertFalse(selenium.isChecked("_86_enableCommentsCheckbox"));
 		selenium.clickAt("_86_enableCommentsCheckbox",
 			RuntimeVariables.replace(""));
-		Thread.sleep(500);
+		assertFalse(selenium.isChecked("_86_enableCommentRatingsCheckbox"));
 		selenium.clickAt("_86_enableCommentRatingsCheckbox",
 			RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		assertEquals(RuntimeVariables.replace(
+				"You have successfully updated the setup."),
+			selenium.getText("//div[@id='p_p_id_86_']/div/div"));
+		assertTrue(selenium.isChecked("_86_showAvailableLocalesCheckbox"));
+		assertTrue(selenium.isChecked("_86_enablePrintCheckbox"));
+		assertTrue(selenium.isChecked("_86_enableRatingsCheckbox"));
+		assertTrue(selenium.isChecked("_86_enableCommentsCheckbox"));
+		assertTrue(selenium.isChecked("_86_enableCommentRatingsCheckbox"));
 	}
 }
