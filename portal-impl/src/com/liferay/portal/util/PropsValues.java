@@ -1131,10 +1131,6 @@ public class PropsValues {
 		GetterUtil.getLong(
 			PropsUtil.get(PropsKeys.MESSAGE_BOARDS_EXPIRE_BAN_JOB_INTERVAL));
 
-	public static final boolean MESSAGE_BOARDS_UPDATE_USER_NAME_ENABLED =
-		GetterUtil.getBoolean(
-			PropsUtil.get(PropsKeys.MESSAGE_BOARDS_UPDATE_USER_NAME_ENABLED));
-
 	public static final boolean MESSAGE_BOARDS_PINGBACK_ENABLED =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.MESSAGE_BOARDS_PINGBACK_ENABLED));
@@ -1144,6 +1140,10 @@ public class PropsValues {
 
 	public static final String MESSAGE_BOARDS_THREAD_VIEWS_DEFAULT =
 		PropsUtil.get(PropsKeys.MESSAGE_BOARDS_THREAD_VIEWS_DEFAULT);
+
+	public static final boolean MESSAGE_BOARDS_UPDATE_USER_NAME_ENABLED =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsKeys.MESSAGE_BOARDS_UPDATE_USER_NAME_ENABLED));
 
 	public static final String[] MIME_TYPES_CONTENT_DISPOSITION_INLINE =
 		PropsUtil.getArray(PropsKeys.MIME_TYPES_CONTENT_DISPOSITION_INLINE);
