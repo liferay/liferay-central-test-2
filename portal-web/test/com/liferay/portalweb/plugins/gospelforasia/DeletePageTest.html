@@ -9,33 +9,53 @@
 <tr><td rowspan="1" colspan="3">DeletePageTest</td></tr>
 </thead><tbody>
 <tr>
-	<td>waitForVisible</td>
-	<td>link=Home</td>
+	<td>open</td>
+	<td>/web/guest/home/</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>link=Home</td>
+	<td>waitForElementPresent</td>
+	<td>//div/div[3]/div/ul/li[1]/a</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>link=Manage Pages</td>
+	<td>clickAtAndWait</td>
+	<td>//div/div[3]/div/ul/li[1]/a</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForVisible</td>
-	<td>//div[@id='_88_layoutsTreeOutput']/ul/li[2]/ul/li[3]/a/span</td>
+	<td>waitForText</td>
+	<td>//div/div[3]/a</td>
+	<td>Guest</td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>eval(selenium.isElementPresent('//li/ul/li[1]/div/div[3]/a'))</td>
+	<td>welcomePresent</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>${welcomePresent}</td>
+	<td>WelcomePresent</td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>//li/div/div[1]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>//div[@id='_88_layoutsTreeOutput']/ul/li[2]/ul/li[3]/a/span</td>
+	<td>label</td>
+	<td>WelcomePresent</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>//li[@id='_88_tabs3pageTabsId']/a</td>
+	<td>clickAtAndWait</td>
+	<td>//li[2]/div/div[3]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>//ul[2]/li[1]/span/span/a</td>
 	<td></td>
 </tr>
 <tr>
@@ -46,11 +66,6 @@
 <tr>
 	<td>assertConfirmation</td>
 	<td>Are you sure you want to delete the selected page?</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Return to Full Page</td>
 	<td></td>
 </tr>
 

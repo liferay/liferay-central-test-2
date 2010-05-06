@@ -32,7 +32,7 @@ public class AddPageWSRPBlogsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//a[@id='addPage']")) {
+				if (selenium.isVisible("addPage")) {
 					break;
 				}
 			}
@@ -42,7 +42,7 @@ public class AddPageWSRPBlogsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//a[@id='addPage']", RuntimeVariables.replace(""));
+		selenium.clickAt("addPage", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -50,7 +50,7 @@ public class AddPageWSRPBlogsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//input")) {
+				if (selenium.isVisible("//input")) {
 					break;
 				}
 			}
@@ -62,7 +62,7 @@ public class AddPageWSRPBlogsTest extends BaseTestCase {
 
 		selenium.type("//input",
 			RuntimeVariables.replace("WSRP Blogs Test Page"));
-		selenium.clickAt("//span[@id='save']/span", RuntimeVariables.replace(""));
+		selenium.clickAt("save", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -70,7 +70,7 @@ public class AddPageWSRPBlogsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=WSRP Blogs Test Page")) {
+				if (selenium.isVisible("link=WSRP Blogs Test Page")) {
 					break;
 				}
 			}

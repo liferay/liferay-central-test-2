@@ -32,7 +32,7 @@ public class AddPortletMBTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent(
+				if (selenium.isVisible(
 							"link=M\u00e9ssag\u00e9 Boards T\u00e9st Pag\u00e9")) {
 					break;
 				}
@@ -47,6 +47,7 @@ public class AddPortletMBTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("_145_addApplication", RuntimeVariables.replace(""));
+		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -54,8 +55,7 @@ public class AddPortletMBTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible(
-							"//input[@id='layout_configuration_content']")) {
+				if (selenium.isVisible("layout_configuration_content")) {
 					break;
 				}
 			}
@@ -65,9 +65,7 @@ public class AddPortletMBTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("//input[@id='layout_configuration_content']",
-			RuntimeVariables.replace(""));
-		selenium.typeKeys("//input[@id='layout_configuration_content']",
+		selenium.typeKeys("layout_configuration_content",
 			RuntimeVariables.replace("m"));
 
 		for (int second = 0;; second++) {
@@ -76,8 +74,7 @@ public class AddPortletMBTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"//div[@id=\"Collaboration-MessageBoards\"]/p/a")) {
+				if (selenium.isVisible("//div[@title='Message Boards']/p/a")) {
 					break;
 				}
 			}
@@ -87,7 +84,7 @@ public class AddPortletMBTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//div[@id=\"Collaboration-MessageBoards\"]/p/a",
+		selenium.clickAt("//div[@title='Message Boards']/p/a",
 			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -96,7 +93,7 @@ public class AddPortletMBTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//td[1]/div/div[1]")) {
+				if (selenium.isVisible("//section")) {
 					break;
 				}
 			}
@@ -106,6 +103,6 @@ public class AddPortletMBTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertTrue(selenium.isElementPresent("//td[1]/div/div[1]"));
+		assertTrue(selenium.isVisible("//section"));
 	}
 }

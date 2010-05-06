@@ -24,14 +24,15 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddFriendsPortletTest extends BaseTestCase {
 	public void testAddFriendsPortlet() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"link=Social Networking Test Page")) {
+				if (selenium.isVisible("link=Social Networking Test Page")) {
 					break;
 				}
 			}
@@ -44,7 +45,8 @@ public class AddFriendsPortletTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"link=Social Networking Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Application");
+		selenium.clickAt("_145_addApplication", RuntimeVariables.replace(""));
+		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -52,7 +54,7 @@ public class AddFriendsPortletTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//div[@id='Social-Friends']/p/a")) {
+				if (selenium.isVisible("layout_configuration_content")) {
 					break;
 				}
 			}
@@ -62,7 +64,8 @@ public class AddFriendsPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//div[@id='Social-Friends']/p/a");
+		selenium.typeKeys("layout_configuration_content",
+			RuntimeVariables.replace("f"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -70,7 +73,7 @@ public class AddFriendsPortletTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//td[1]/div/div[1]/div")) {
+				if (selenium.isElementPresent("//div[@title='Friends']/p/a")) {
 					break;
 				}
 			}
@@ -80,6 +83,24 @@ public class AddFriendsPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertTrue(selenium.isElementPresent("//td[1]/div/div[1]/div"));
+		selenium.click("//div[@title='Friends']/p/a");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("//section")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		assertTrue(selenium.isVisible("//section"));
 	}
 }

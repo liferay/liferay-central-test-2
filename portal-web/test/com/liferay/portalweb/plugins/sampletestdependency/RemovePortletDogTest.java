@@ -24,14 +24,15 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class RemovePortletDogTest extends BaseTestCase {
 	public void testRemovePortletDog() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"link=Sample Test Dependency Page")) {
+				if (selenium.isVisible("link=Sample Test Dependency Page")) {
 					break;
 				}
 			}

@@ -32,7 +32,7 @@ public class AddPortletDuplicateTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Test CLP Test Page")) {
+				if (selenium.isVisible("link=Test CLP Test Page")) {
 					break;
 				}
 			}
@@ -45,6 +45,7 @@ public class AddPortletDuplicateTest extends BaseTestCase {
 		selenium.clickAt("link=Test CLP Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("_145_addApplication", RuntimeVariables.replace(""));
+		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -52,8 +53,7 @@ public class AddPortletDuplicateTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible(
-							"//input[@id='layout_configuration_content']")) {
+				if (selenium.isVisible("layout_configuration_content")) {
 					break;
 				}
 			}
@@ -63,9 +63,7 @@ public class AddPortletDuplicateTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("//input[@id='layout_configuration_content']",
-			RuntimeVariables.replace(""));
-		selenium.typeKeys("//input[@id='layout_configuration_content']",
+		selenium.typeKeys("layout_configuration_content",
 			RuntimeVariables.replace("t"));
 
 		for (int second = 0;; second++) {
@@ -74,7 +72,7 @@ public class AddPortletDuplicateTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("//div[@id='Test-TestCLP']")) {
+				if (selenium.isVisible("//div[@title='Test CLP']")) {
 					break;
 				}
 			}
@@ -84,27 +82,6 @@ public class AddPortletDuplicateTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//div[@id='Test-TestCLP']/p/a",
-			RuntimeVariables.replace(""));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//td[1]/div/div[1]")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		assertTrue(selenium.isElementPresent("//td[1]/div/div[1]"));
-		Thread.sleep(5000);
-		assertFalse(selenium.isElementPresent("//td[1]/div/div[2]"));
+		assertFalse(selenium.isVisible("//div[@title='Test CLP']/p/a"));
 	}
 }

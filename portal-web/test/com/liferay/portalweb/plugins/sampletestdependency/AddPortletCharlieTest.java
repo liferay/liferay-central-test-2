@@ -24,14 +24,15 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddPortletCharlieTest extends BaseTestCase {
 	public void testAddPortletCharlie() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"link=Sample Test Dependency Page")) {
+				if (selenium.isVisible("link=Sample Test Dependency Page")) {
 					break;
 				}
 			}
@@ -44,7 +45,8 @@ public class AddPortletCharlieTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"link=Sample Test Dependency Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Application");
+		selenium.clickAt("_145_addApplication", RuntimeVariables.replace(""));
+		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -52,8 +54,7 @@ public class AddPortletCharlieTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"//div[@id='Undefined-SampleTestDependencyCharlie']/p/a")) {
+				if (selenium.isVisible("layout_configuration_content")) {
 					break;
 				}
 			}
@@ -63,7 +64,8 @@ public class AddPortletCharlieTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//div[@id='Undefined-SampleTestDependencyCharlie']/p/a");
+		selenium.typeKeys("layout_configuration_content",
+			RuntimeVariables.replace("s"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -71,7 +73,8 @@ public class AddPortletCharlieTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//td[1]/div/div[1]/div")) {
+				if (selenium.isVisible(
+							"//div[@title='Sample Test Dependency Charlie']/p/a")) {
 					break;
 				}
 			}
@@ -81,6 +84,25 @@ public class AddPortletCharlieTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertTrue(selenium.isElementPresent("//td[1]/div/div[1]/div"));
+		selenium.clickAt("//div[@title='Sample Test Dependency Charlie']/p/a",
+			RuntimeVariables.replace(""));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("//section")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		assertTrue(selenium.isVisible("//section"));
 	}
 }
