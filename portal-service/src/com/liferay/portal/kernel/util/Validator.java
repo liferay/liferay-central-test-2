@@ -17,6 +17,9 @@ package com.liferay.portal.kernel.util;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -480,6 +483,21 @@ public class Validator {
 
 	public static boolean isPhoneNumber(String phoneNumber) {
 		return isNumber(StringUtil.extractDigits(phoneNumber));
+	}
+
+	public static boolean isUrl(String url) {
+		if (Validator.isNull(url)) {
+			return false;
+		}
+		else {
+			try {
+				new URL(url);
+				return true;
+			}
+			catch (MalformedURLException murle) {
+				return false;
+			}
+		}
 	}
 
 	public static boolean isVariableTerm(String s) {
