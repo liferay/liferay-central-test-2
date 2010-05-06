@@ -49,7 +49,6 @@ import com.liferay.portalweb.plugins.samplejson.SampleJSONTests;
 import com.liferay.portalweb.plugins.samplejsp.SampleJSPTests;
 import com.liferay.portalweb.plugins.samplelar.SampleLARTests;
 import com.liferay.portalweb.plugins.samplelaszlo.SampleLaszloTests;
-import com.liferay.portalweb.plugins.samplelocalized.SampleLocalizedTests;
 import com.liferay.portalweb.portal.login.LoginTests;
 
 import junit.framework.Test;
@@ -101,7 +100,6 @@ public class Plugins1TestSuite extends BaseTests {
 		testSuite.addTest(SampleJSPTests.suite());
 		testSuite.addTest(SampleLARTests.suite());
 		testSuite.addTest(SampleLaszloTests.suite());
-		testSuite.addTest(SampleLocalizedTests.suite());
 
 		testSuite.addTestSuite(StopSeleniumTest.class);
 
