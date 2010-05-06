@@ -70,7 +70,7 @@ public class BookmarksFolderServiceTest extends BaseBookmarksServiceTestCase {
 
 		searchContext.setCompanyId(companyId);
 		searchContext.setFolderIds(new long[] {folderId});
-		searchContext.setGroupId(groupId);
+		searchContext.setGroupIds(new long[]{groupId});
 		searchContext.setKeywords(keywords);
 
 		Indexer indexer = IndexerRegistryUtil.getIndexer(BookmarksEntry.class);

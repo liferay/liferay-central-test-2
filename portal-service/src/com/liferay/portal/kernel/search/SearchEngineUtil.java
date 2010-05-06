@@ -146,39 +146,39 @@ public class SearchEngineUtil {
 	}
 
 	public static Hits search(
-			long companyId, long groupId, long userId, String className,
+			long companyId, long[] groupIds, long userId, String className,
 			Query query, int start, int end)
 		throws SearchException {
 
 		if (userId > 0) {
 			query = _searchPermissionChecker.getPermissionQuery(
-				companyId, groupId, userId, className, query);
+				companyId, groupIds, userId, className, query);
 		}
 
 		return search(companyId, query, _DEFAULT_SORT, start, end);
 	}
 
 	public static Hits search(
-			long companyId, long groupId, long userId, String className,
+			long companyId, long[] groupIds, long userId, String className,
 			Query query, Sort sort, int start, int end)
 		throws SearchException {
 
 		if (userId > 0) {
 			query = _searchPermissionChecker.getPermissionQuery(
-				companyId, groupId, userId, className, query);
+				companyId, groupIds, userId, className, query);
 		}
 
 		return search(companyId, query, sort, start, end);
 	}
 
 	public static Hits search(
-			long companyId, long groupId, long userId, String className,
+			long companyId, long[] groupIds, long userId, String className,
 			Query query, Sort[] sorts, int start, int end)
 		throws SearchException {
 
 		if (userId > 0) {
 			query = _searchPermissionChecker.getPermissionQuery(
-				companyId, groupId, userId, className, query);
+				companyId, groupIds, userId, className, query);
 		}
 
 		return search(companyId, query, sorts, start, end);

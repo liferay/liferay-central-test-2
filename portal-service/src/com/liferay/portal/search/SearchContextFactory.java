@@ -44,7 +44,7 @@ public class SearchContextFactory {
 			WebKeys.THEME_DISPLAY);
 
 		searchContext.setCompanyId(themeDisplay.getCompanyId());
-		searchContext.setGroupId(themeDisplay.getScopeGroupId());
+		searchContext.setGroupIds(new long[]{themeDisplay.getScopeGroupId()});
 		searchContext.setUserId(themeDisplay.getUserId());
 
 		// Attributes

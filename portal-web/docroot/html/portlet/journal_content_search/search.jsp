@@ -58,7 +58,7 @@
 				SearchContext searchContext = SearchContextFactory.getInstance(request);
 
 				searchContext.setAttribute("type", type);
-				searchContext.setGroupId(0);
+				searchContext.setGroupIds(null);
 				searchContext.setKeywords(keywords);
 
 				Hits results = indexer.search(searchContext);

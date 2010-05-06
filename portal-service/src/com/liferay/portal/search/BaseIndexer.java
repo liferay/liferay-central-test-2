@@ -138,7 +138,7 @@ public abstract class BaseIndexer implements Indexer {
 				contextQuery, searchContext);
 
 			return SearchEngineUtil.search(
-				searchContext.getCompanyId(), searchContext.getGroupId(),
+				searchContext.getCompanyId(), searchContext.getGroupIds(),
 				searchContext.getUserId(), className, fullQuery,
 				searchContext.getSorts(), searchContext.getStart(),
 				searchContext.getEnd());
@@ -278,27 +278,54 @@ public abstract class BaseIndexer implements Indexer {
 			BooleanQuery contextQuery, SearchContext searchContext)
 		throws Exception {
 
-		long groupId = searchContext.getGroupId();
+		long[] groupIds = searchContext.getGroupIds();
 
-		if (groupId <= 0) {
+		if ((groupIds == null) || (groupIds.length == 0) || (groupIds[0] == 0)){
 			return;
 		}
 
-		Group group = GroupLocalServiceUtil.getGroup(groupId);
+		BooleanQuery groupIdsQuery = BooleanQueryFactoryUtil.create();
 
-		long parentGroupId = groupId;
+		for (int i = 0; i < groupIds.length; i ++) {
+			long groupId = groupIds[i];
 
-		if (group.isLayout() || searchContext.isScopeStrict()) {
-			contextQuery.addRequiredTerm(Field.SCOPE_GROUP_ID, groupId);
+			if (groupId <= 0) {
+				continue;
+			}
+
+			try {
+				Group group = GroupLocalServiceUtil.getGroup(groupId);
+
+				long parentGroupId = groupId;
+
+				if (group.isLayout() || searchContext.isScopeStrict()) {
+					contextQuery.addRequiredTerm(
+						Field.SCOPE_GROUP_ID, groupId);
+				}
+
+				if (group.isLayout()) {
+					parentGroupId = group.getParentGroupId();
+				}
+
+				contextQuery.addRequiredTerm(Field.GROUP_ID, parentGroupId);
+
+				groupIds[i] = parentGroupId;
+			}
+			catch (Exception e) {
+				continue;
+			}
+
+			TermQuery termQuery = TermQueryFactoryUtil.create(
+			Field.GROUP_ID, groupId);
+
+			groupIdsQuery.add(termQuery, BooleanClauseOccur.SHOULD);
 		}
 
-		if (group.isLayout()) {
-			parentGroupId = group.getParentGroupId();
+		searchContext.setGroupIds(groupIds);
+
+		if (!groupIdsQuery.clauses().isEmpty()) {
+			contextQuery.add(groupIdsQuery, BooleanClauseOccur.MUST);
 		}
-
-		contextQuery.addRequiredTerm(Field.GROUP_ID, parentGroupId);
-
-		searchContext.setGroupId(parentGroupId);
 	}
 
 	protected void addSearchKeywords(

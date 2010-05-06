@@ -75,7 +75,7 @@ public abstract class HitsOpenSearchImpl extends BaseOpenSearchImpl {
 			SearchContext searchContext = SearchContextFactory.getInstance(
 				request);
 
-			searchContext.setGroupId(groupId);
+			searchContext.setGroupIds(new long[]{groupId});
 			searchContext.setEnd(end);
 			searchContext.setKeywords(keywords);
 			searchContext.setScopeStrict(false);

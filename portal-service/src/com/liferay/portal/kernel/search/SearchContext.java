@@ -64,8 +64,8 @@ public class SearchContext implements Serializable {
 		return _folderIds;
 	}
 
-	public long getGroupId() {
-		return _groupId;
+	public long[] getGroupIds() {
+		return _groupIds;
 	}
 
 	public String getKeywords() {
@@ -136,8 +136,8 @@ public class SearchContext implements Serializable {
 		_folderIds = folderIds;
 	}
 
-	public void setGroupId(long groupId) {
-		_groupId = groupId;
+	public void setGroupIds(long[] groupIds) {
+		_groupIds = groupIds;
 	}
 
 	public void setKeywords(String keywords) {
@@ -180,7 +180,7 @@ public class SearchContext implements Serializable {
 	private long _companyId;
 	private int _end = QueryUtil.ALL_POS;
 	private long[] _folderIds;
-	private long _groupId;
+	private long[] _groupIds;
 	private String _keywords;
 	private long[] _nodeIds;
 	private long _ownerUserId;
