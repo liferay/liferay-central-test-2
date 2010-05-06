@@ -110,7 +110,7 @@ public class SocialEquityAssetEntryWrapper implements SocialEquityAssetEntry {
 		_socialEquityAssetEntry.setInformationEquity(informationEquity);
 	}
 
-	public SocialEquityAssetEntry toEscapedModel() {
+	public com.liferay.portlet.social.model.SocialEquityAssetEntry toEscapedModel() {
 		return _socialEquityAssetEntry.toEscapedModel();
 	}
 
@@ -155,7 +155,8 @@ public class SocialEquityAssetEntryWrapper implements SocialEquityAssetEntry {
 		return _socialEquityAssetEntry.clone();
 	}
 
-	public int compareTo(SocialEquityAssetEntry socialEquityAssetEntry) {
+	public int compareTo(
+		com.liferay.portlet.social.model.SocialEquityAssetEntry socialEquityAssetEntry) {
 		return _socialEquityAssetEntry.compareTo(socialEquityAssetEntry);
 	}
 

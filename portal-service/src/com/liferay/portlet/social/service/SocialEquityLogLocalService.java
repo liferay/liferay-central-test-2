@@ -107,12 +107,11 @@ public interface SocialEquityLogLocalService {
 		boolean merge)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public com.liferay.portlet.social.model.SocialEquityLog addEquityLog(
-		long userId, long assetEntryId, java.lang.String actionId)
+	public void addEquityLogs(long userId, long assetEntryId,
+		java.lang.String actionId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public void checkEquityLogs()
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 }
