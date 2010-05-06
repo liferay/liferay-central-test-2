@@ -2647,11 +2647,11 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		User user = userPersistence.findByPrimaryKey(userId);
 		Company company = companyPersistence.findByPrimaryKey(
 			user.getCompanyId());
-		String fullName = user.getFullName();
 		String password = oldPassword;
 		screenName = getScreenName(screenName);
 		emailAddress = emailAddress.trim().toLowerCase();
 		openId = openId.trim();
+		String oldFullName = user.getFullName();
 		aimSn = aimSn.trim().toLowerCase();
 		facebookSn = facebookSn.trim().toLowerCase();
 		icqSn = icqSn.trim().toLowerCase();
@@ -2818,17 +2818,17 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		user.setExpandoBridgeAttributes(serviceContext);
 
+		// Message boards
+
+		if (!oldFullName.equals(user.getFullName())) {
+			mbMessageLocalService.updateUserName(userId, user.getFullName());
+		}
+
 		// Indexer
 
 		Indexer indexer = IndexerRegistryUtil.getIndexer(User.class);
 
 		indexer.reindex(user);
-
-		// MBMessage
-
-		if (!fullName.equals(user.getFullName())) {
-			mbMessageLocalService.updateUserName(userId, user.getFullName());
-		}
 
 		// Permission cache
 
