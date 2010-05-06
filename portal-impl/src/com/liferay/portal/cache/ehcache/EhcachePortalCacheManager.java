@@ -46,10 +46,12 @@ public class EhcachePortalCacheManager implements PortalCacheManager {
 		_cacheManager = new CacheManager(url);
 
 		if (PropsValues.EHCACHE_PORTAL_CACHE_MANAGER_JMX_ENABLED) {
-			ManagementService.registerMBeans(
+			_managementService = new ManagementService(
 				_cacheManager, _mBeanServer, _registerCacheManager,
 				_registerCaches, _registerCacheConfigurations,
 				_registerCacheStatistics);
+
+			_managementService.init();
 		}
 	}
 
@@ -58,7 +60,14 @@ public class EhcachePortalCacheManager implements PortalCacheManager {
 	}
 
 	public void destroy() throws Exception {
-		_cacheManager.shutdown();
+		try {
+			_cacheManager.shutdown();
+		}
+		finally {
+			if (_managementService != null) {
+				_managementService.dispose();				
+			}
+		}
 	}
 
 	public PortalCache getCache(String name) {
@@ -143,4 +152,5 @@ public class EhcachePortalCacheManager implements PortalCacheManager {
 	private boolean _registerCacheConfigurations = true;
 	private boolean _registerCacheStatistics = true;
 
+	private ManagementService _managementService;
 }
