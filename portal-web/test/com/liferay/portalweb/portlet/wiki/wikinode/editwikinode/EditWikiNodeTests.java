@@ -29,8 +29,8 @@ public class EditWikiNodeTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTestSuite(AddPageTest.class);
-		testSuite.addTestSuite(AddPortletTest.class);
+		testSuite.addTestSuite(AddPageWikiTest.class);
+		testSuite.addTestSuite(AddPortletWikiTest.class);
 		testSuite.addTestSuite(AddWikiNodeTest.class);
 		testSuite.addTestSuite(EditWikiNodeTest.class);
 		testSuite.addTestSuite(TearDownTest.class);

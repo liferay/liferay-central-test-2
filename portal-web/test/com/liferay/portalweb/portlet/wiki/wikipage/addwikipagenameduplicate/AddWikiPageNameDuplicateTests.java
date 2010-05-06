@@ -30,8 +30,8 @@ public class AddWikiPageNameDuplicateTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTestSuite(AddPageTest.class);
-		testSuite.addTestSuite(AddPortletTest.class);
+		testSuite.addTestSuite(AddPageWikiTest.class);
+		testSuite.addTestSuite(AddPortletWikiTest.class);
 		testSuite.addTestSuite(AddWikiPageTest.class);
 		testSuite.addTestSuite(AddWikiPageNameDuplicateTest.class);
 		testSuite.addTestSuite(TearDownTest.class);

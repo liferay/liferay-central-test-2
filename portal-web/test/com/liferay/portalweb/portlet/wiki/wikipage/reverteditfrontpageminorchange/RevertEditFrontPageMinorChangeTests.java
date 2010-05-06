@@ -30,8 +30,8 @@ public class RevertEditFrontPageMinorChangeTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTestSuite(AddPageTest.class);
-		testSuite.addTestSuite(AddPortletTest.class);
+		testSuite.addTestSuite(AddPageWikiTest.class);
+		testSuite.addTestSuite(AddPortletWikiTest.class);
 		testSuite.addTestSuite(AddFrontPageTest.class);
 		testSuite.addTestSuite(EditFrontPageMinorChangeTest.class);
 		testSuite.addTestSuite(RevertEditFrontPageMinorChangeTest.class);

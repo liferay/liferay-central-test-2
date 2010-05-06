@@ -30,8 +30,8 @@ public class RevertChangeParentWikiPageToWikiPageTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTestSuite(AddPageTest.class);
-		testSuite.addTestSuite(AddPortletTest.class);
+		testSuite.addTestSuite(AddPageWikiTest.class);
+		testSuite.addTestSuite(AddPortletWikiTest.class);
 		testSuite.addTestSuite(AddWikiPage1Test.class);
 		testSuite.addTestSuite(AddWikiPage2Test.class);
 		testSuite.addTestSuite(ChangeParentWikiPageToWikiPageTest.class);

@@ -30,8 +30,8 @@ public class AddFrontPageChildPageName255CharacterTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTestSuite(AddPageTest.class);
-		testSuite.addTestSuite(AddPortletTest.class);
+		testSuite.addTestSuite(AddPageWikiTest.class);
+		testSuite.addTestSuite(AddPortletWikiTest.class);
 		testSuite.addTestSuite(AddFrontPageTest.class);
 		testSuite.addTestSuite(AddFrontPageChildPageName255CharacterTest.class);
 		testSuite.addTestSuite(TearDownTest.class);

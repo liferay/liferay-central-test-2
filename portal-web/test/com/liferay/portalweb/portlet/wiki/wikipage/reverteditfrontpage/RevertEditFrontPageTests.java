@@ -29,8 +29,8 @@ public class RevertEditFrontPageTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTestSuite(AddPageTest.class);
-		testSuite.addTestSuite(AddPortletTest.class);
+		testSuite.addTestSuite(AddPageWikiTest.class);
+		testSuite.addTestSuite(AddPortletWikiTest.class);
 		testSuite.addTestSuite(AddFrontPageTest.class);
 		testSuite.addTestSuite(EditFrontPageTest.class);
 		testSuite.addTestSuite(RevertEditFrontPageTest.class);

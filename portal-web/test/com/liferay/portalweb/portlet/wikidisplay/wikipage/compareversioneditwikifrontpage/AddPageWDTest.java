@@ -32,7 +32,7 @@ public class AddPageWDTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//a[@id='addPage']")) {
+				if (selenium.isVisible("addPage")) {
 					break;
 				}
 			}
@@ -42,7 +42,7 @@ public class AddPageWDTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//a[@id='addPage']", RuntimeVariables.replace(""));
+		selenium.clickAt("addPage", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -50,7 +50,7 @@ public class AddPageWDTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//input")) {
+				if (selenium.isVisible("//input")) {
 					break;
 				}
 			}
@@ -62,7 +62,7 @@ public class AddPageWDTest extends BaseTestCase {
 
 		selenium.type("//input",
 			RuntimeVariables.replace("Wiki Display Test Page"));
-		selenium.clickAt("//span[@id='save']/span", RuntimeVariables.replace(""));
+		selenium.clickAt("save", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -70,7 +70,7 @@ public class AddPageWDTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Wiki Display Test Page")) {
+				if (selenium.isVisible("link=Wiki Display Test Page")) {
 					break;
 				}
 			}
@@ -80,8 +80,20 @@ public class AddPageWDTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("link=Wiki Display Test Page",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("link=Wiki Display Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
 	}
 }
