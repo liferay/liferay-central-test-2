@@ -56,13 +56,9 @@
 				queue.add(args);
 
 				if (firstLoad) {
-					modules.push(A.bind(Dependency._proxy, Liferay, obj, methodName, methodFn, guid));
+					modules.push(A.bind(Dependency._proxy, Liferay, obj, methodName, methodFn, guid, modules));
 
 					A.use.apply(A, modules);
-
-					for (var i = modules.length - 1; i >= 0; i--) {
-						usedModules[modules[i]] = true;
-					}
 				}
 			};
 
@@ -79,7 +75,7 @@
 			return obj._yuid && A.Do.objs[obj._yuid] && A.Do.objs[obj._yuid][methodName];
 		},
 
-		_proxy: function(obj, methodName, methodFn, guid, A) {
+		_proxy: function(obj, methodName, methodFn, guid, modules, A) {
 			var queue = Dependency._proxyLoaders[guid];
 			var args;
 
@@ -88,6 +84,10 @@
 			while ((args = queue.next())) {
 		        methodFn.apply(obj, args);
 		    }
+
+			for (var i = modules.length - 1; i >= 0; i--) {
+				usedModules[modules[i]] = true;
+			}
 		},
 
 		_replaceMethod: function(obj, methodName, methodFn) {
