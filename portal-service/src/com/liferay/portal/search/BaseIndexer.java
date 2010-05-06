@@ -125,9 +125,6 @@ public abstract class BaseIndexer implements Indexer {
 
 			BooleanQuery contextQuery = BooleanQueryFactoryUtil.create();
 
-			contextQuery.addRequiredTerm(
-				Field.PORTLET_ID, getPortletId(searchContext));
-
 			addSearchAssetCategoryIds(contextQuery, searchContext);
 			addSearchAssetTagNames(contextQuery, searchContext);
 			addSearchGroupId(contextQuery, searchContext);
@@ -374,24 +371,26 @@ public abstract class BaseIndexer implements Indexer {
 		String[] portletIds = searchContext.getPortletIds();
 
 		if ((portletIds == null) || (portletIds.length == 0)) {
-			return;
+			contextQuery.addRequiredTerm(
+				Field.PORTLET_ID, getPortletId(searchContext));
 		}
+		else {
+			BooleanQuery portletIdsQuery = BooleanQueryFactoryUtil.create();
 
-		BooleanQuery portletIdsQuery = BooleanQueryFactoryUtil.create();
+			for (String portletId : portletIds) {
+				if (Validator.isNull(portletId)) {
+					continue;
+				}
 
-		for (String portletId : portletIds) {
-			if (Validator.isNull(portletId)) {
-				continue;
+				TermQuery termQuery = TermQueryFactoryUtil.create(
+					Field.PORTLET_ID, portletId);
+
+				portletIdsQuery.add(termQuery, BooleanClauseOccur.SHOULD);
 			}
 
-			TermQuery termQuery = TermQueryFactoryUtil.create(
-				Field.PORTLET_ID, portletId);
-
-			portletIdsQuery.add(termQuery, BooleanClauseOccur.SHOULD);
-		}
-
-		if (!portletIdsQuery.clauses().isEmpty()) {
-			contextQuery.add(portletIdsQuery, BooleanClauseOccur.MUST);
+			if (!portletIdsQuery.clauses().isEmpty()) {
+				contextQuery.add(portletIdsQuery, BooleanClauseOccur.MUST);
+			}
 		}
 	}
 
