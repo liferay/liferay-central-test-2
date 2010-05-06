@@ -78,7 +78,7 @@ body #banner .logo a {
 	left: auto;
 	width: auto;
 	right: 0;
-	z-index: 1000;
+	z-index: 200;
 }
 
 #sign-in {
@@ -157,7 +157,7 @@ body #banner .logo a {
 	display: block;
 	position: absolute;
 	width: 200px;
-	z-index: 300;
+	z-index: 200;
 }
 
 .ie6 #navigation li.hover .child-menu {
@@ -165,7 +165,7 @@ body #banner .logo a {
 	display: block;
 	position: absolute;
 	width: 200px;
-	z-index: 300;
+	z-index: 200;
 }
 
 #navigation .child-menu {
