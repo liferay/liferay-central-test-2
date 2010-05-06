@@ -24,13 +24,15 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class CA_AddMessageTest extends BaseTestCase {
 	public void testCA_AddMessage() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Permissions Test 1")) {
+				if (selenium.isVisible("link=Message Boards Permissions Page")) {
 					break;
 				}
 			}
@@ -40,118 +42,24 @@ public class CA_AddMessageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.clickAt("link=Message Boards Permissions Page",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Permissions Test 1", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//div[3]/ul/li[3]/span/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		assertTrue(selenium.isElementPresent(
-				"//input[@value='Post New Thread']"));
 		selenium.clickAt("//input[@value='Post New Thread']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//li[4]/span/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_19_subject")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_19_textArea")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//input[@value='Save']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.type("_19_subject", RuntimeVariables.replace("Test Thread 1"));
 		selenium.type("_19_textArea",
 			RuntimeVariables.replace("Test Thread Message 1"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("Test Thread Message 1"));
-		selenium.clickAt("link=Categories", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (!selenium.isElementPresent("//li[4]/span/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
+		assertEquals(RuntimeVariables.replace("Test Thread 1"),
+			selenium.getText("//form/div[2]"));
+		assertEquals(RuntimeVariables.replace("Test Thread 1"),
+			selenium.getText("//a/strong"));
+		assertEquals(RuntimeVariables.replace("Test Thread Message 1"),
+			selenium.getText("//td[2]/div[2]"));
 	}
 }

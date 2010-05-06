@@ -37,7 +37,7 @@ public class MessageBoardsTests extends BaseTests {
 		testSuite.addTestSuite(CA_AssertActionsTest.class);
 		testSuite.addTestSuite(CA_DeleteMessageTest.class);
 		testSuite.addTestSuite(CA_DeleteCategoryTest.class);
-		testSuite.addTestSuite(CA_AddSecondCategoryTest.class);
+		testSuite.addTestSuite(CA_AddCategoryTest.class);
 		testSuite.addTestSuite(CA_AddMessageTest.class);
 		testSuite.addTestSuite(CA_LogoutTest.class);
 		testSuite.addTestSuite(Member_LoginTest.class);
@@ -50,7 +50,10 @@ public class MessageBoardsTests extends BaseTests {
 		testSuite.addTestSuite(Member_LogoutTest.class);
 		testSuite.addTestSuite(Guest_ViewTest.class);
 		testSuite.addTestSuite(Guest_AssertActionsTest.class);
-		testSuite.addTestSuite(DeletePageTest.class);
+		testSuite.addTestSuite(SA_LoginTest.class);
+		testSuite.addTestSuite(TearDownMBCategoryTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
+		testSuite.addTestSuite(SA_LogoutTest.class);
 
 		return testSuite;
 	}

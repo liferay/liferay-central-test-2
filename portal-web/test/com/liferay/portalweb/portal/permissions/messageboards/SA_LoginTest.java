@@ -18,21 +18,19 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="Member_LogoutTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="SA_LoginTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class Member_LogoutTest extends BaseTestCase {
-	public void testMember_Logout() throws Exception {
-		selenium.open("/web/guest/home/");
-
+public class SA_LoginTest extends BaseTestCase {
+	public void testSA_Login() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Sign Out")) {
+				if (selenium.isElementPresent("link=Welcome")) {
 					break;
 				}
 			}
@@ -42,23 +40,13 @@ public class Member_LogoutTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("link=Sign Out", RuntimeVariables.replace(""));
+		selenium.clickAt("link=Welcome", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_58_login")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
+		selenium.type("_58_login", RuntimeVariables.replace("test@liferay.com"));
+		selenium.type("_58_password", RuntimeVariables.replace("test"));
+		selenium.clickAt("_58_rememberMeCheckbox", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Sign In']",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
 	}
 }

@@ -24,13 +24,15 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class Member_PostNewThreadTest extends BaseTestCase {
 	public void testMember_PostNewThread() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Categories")) {
+				if (selenium.isVisible("link=Message Boards Permissions Page")) {
 					break;
 				}
 			}
@@ -40,28 +42,18 @@ public class Member_PostNewThreadTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.clickAt("link=Message Boards Permissions Page",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		assertEquals(RuntimeVariables.replace("Permissions Test 1"),
+			selenium.getText("//a/strong"));
+		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent(
 				"//input[@value='Post New Thread']"));
 		selenium.clickAt("//input[@value='Post New Thread']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//li[4]/span/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.type("_19_subject", RuntimeVariables.replace("Test Thread 2"));
 		selenium.type("_19_textArea", RuntimeVariables.replace("Test Thread 2"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));

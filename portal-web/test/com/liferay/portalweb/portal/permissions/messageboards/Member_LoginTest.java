@@ -24,17 +24,30 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class Member_LoginTest extends BaseTestCase {
 	public void testMember_Login() throws Exception {
-		selenium.clickAt("link=Welcome", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
+		selenium.open("/web/guest/home/");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("_58_login")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.type("_58_login",
 			RuntimeVariables.replace("member@liferay.com"));
 		selenium.type("_58_password", RuntimeVariables.replace("test"));
+		selenium.clickAt("_58_rememberMeCheckbox", RuntimeVariables.replace(""));
 		selenium.clickAt("//input[@value='Sign In']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=Message Boards Permissions Page",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("link=Categories"));
 	}
 }

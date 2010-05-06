@@ -24,13 +24,15 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class Guest_AssertActionsTest extends BaseTestCase {
 	public void testGuest_AssertActions() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Categories")) {
+				if (selenium.isVisible("link=Message Boards Permissions Page")) {
 					break;
 				}
 			}
@@ -40,6 +42,9 @@ public class Guest_AssertActionsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.clickAt("link=Message Boards Permissions Page",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isElementPresent("//input[@value='Add Category']"));
 		assertFalse(selenium.isElementPresent("//img[@alt='Edit']"));
 		assertFalse(selenium.isElementPresent("//img[@alt='Permissions']"));
@@ -65,7 +70,5 @@ public class Guest_AssertActionsTest extends BaseTestCase {
 		assertFalse(selenium.isElementPresent("link=Delete"));
 		assertTrue(selenium.isElementPresent("link=Sign in to vote."));
 		assertFalse(selenium.isElementPresent("link=Split Thread"));
-		selenium.clickAt("link=Categories", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
 	}
 }

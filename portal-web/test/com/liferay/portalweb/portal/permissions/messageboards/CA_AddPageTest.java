@@ -24,14 +24,15 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class CA_AddPageTest extends BaseTestCase {
 	public void testCA_AddPage() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"//div[@id='_145_myPlacesContainer']/ul/li[3]/a/span")) {
+				if (selenium.isVisible("addPage")) {
 					break;
 				}
 			}
@@ -41,11 +42,7 @@ public class CA_AddPageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//div[@id='_145_myPlacesContainer']/ul/li[3]/a/span",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=Manage Pages", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("addPage", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -53,8 +50,7 @@ public class CA_AddPageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible(
-							"//div[@id='_88_layoutsTreeOutput']/ul/li[2]/a/span")) {
+				if (selenium.isVisible("//input")) {
 					break;
 				}
 			}
@@ -64,31 +60,26 @@ public class CA_AddPageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//div[@id='_88_layoutsTreeOutput']/ul/li[2]/a/span",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible("_88_name_en_US")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.type("_88_name_en_US",
+		selenium.type("//input",
 			RuntimeVariables.replace("Message Boards Permissions Page"));
-		selenium.clickAt("//input[@value='Add Page']",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("save", RuntimeVariables.replace(""));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("link=Message Boards Permissions Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.clickAt("link=Message Boards Permissions Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");

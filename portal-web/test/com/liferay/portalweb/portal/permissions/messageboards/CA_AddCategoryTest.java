@@ -24,13 +24,15 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class CA_AddCategoryTest extends BaseTestCase {
 	public void testCA_AddCategory() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Configuration")) {
+				if (selenium.isVisible("link=Message Boards Permissions Page")) {
 					break;
 				}
 			}
@@ -40,48 +42,18 @@ public class CA_AddCategoryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertTrue(selenium.isElementPresent("//input[@value='Add Category']"));
+		selenium.clickAt("link=Message Boards Permissions Page",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("//input[@value='Add Category']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//div[3]/ul/li[3]/span/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.type("_19_name", RuntimeVariables.replace("Permissions Test 1"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//input[@value='Save']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
+		assertEquals(RuntimeVariables.replace("Permissions Test 1"),
+			selenium.getText("//a/strong"));
 	}
 }

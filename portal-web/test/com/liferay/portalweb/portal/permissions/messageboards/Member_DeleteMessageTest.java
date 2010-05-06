@@ -24,13 +24,15 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class Member_DeleteMessageTest extends BaseTestCase {
 	public void testMember_DeleteMessage() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Categories")) {
+				if (selenium.isVisible("link=Message Boards Permissions Page")) {
 					break;
 				}
 			}
@@ -40,7 +42,16 @@ public class Member_DeleteMessageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertTrue(selenium.isTextPresent("Test Thread 2 Edited"));
+		selenium.clickAt("link=Message Boards Permissions Page",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		assertEquals(RuntimeVariables.replace("Permissions Test 1"),
+			selenium.getText("//a/strong"));
+		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isPartialText("//td[1]/a", "Test Thread 2"));
+		selenium.clickAt("//td[1]/a", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Delete"));
 		selenium.click(RuntimeVariables.replace("link=Delete"));
 		selenium.waitForPageToLoad("30000");
@@ -65,5 +76,6 @@ public class Member_DeleteMessageTest extends BaseTestCase {
 		}
 
 		assertFalse(selenium.isElementPresent("link=Test Thread 2"));
+		assertFalse(selenium.isElementPresent("link=Test Thread 2 Edited"));
 	}
 }

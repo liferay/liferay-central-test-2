@@ -9,6 +9,21 @@
 <tr><td rowspan="1" colspan="3">CA_AssertActionsTest</td></tr>
 </thead><tbody>
 <tr>
+	<td>open</td>
+	<td>/web/guest/home/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>link=Message Boards Permissions Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>link=Message Boards Permissions Page</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
 	<td>link=Permissions Test 1</td>
 	<td></td>
@@ -20,12 +35,12 @@
 </tr>
 <tr>
 	<td>assertElementPresent</td>
-	<td>//img[@alt='Edit']</td>
+	<td>link=Edit</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAt</td>
-	<td>//td[5]/ul/li/strong/span</td>
+	<td>//td[5]/ul/li/strong/a</td>
 	<td></td>
 </tr>
 <tr>
@@ -44,8 +59,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>//li[4]/span/a</td>
+	<td>open</td>
+	<td>/web/guest/home/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>link=Message Boards Permissions Page</td>
 	<td></td>
 </tr>
 <tr>
@@ -54,49 +74,49 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementNotPresent</td>
-	<td>//li[4]/span/a</td>
-	<td></td>
-</tr>
-<tr>
 	<td>assertElementPresent</td>
-	<td>//img[@alt='Permissions']</td>
+	<td>link=Permissions</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAt</td>
-	<td>//td[5]/ul/li/strong/span</td>
+	<td>//td[5]/ul/li/strong/a</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>//img[@alt='Permissions']</td>
+	<td>link=Permissions</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>link=Permissions Test 1</td>
+	<td>assertText</td>
+	<td>//form/div[1]</td>
+	<td>Edit Permissions for Message Boards Category: Permissions Test 1</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//input[@value='Save']</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>//input[@value='Submit']</td>
+	<td>open</td>
+	<td>/web/guest/home/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>link=Message Boards Permissions Page</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>link=Return to Full Page</td>
+	<td>link=Message Boards Permissions Page</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
-	<td>//img[@alt='RSS']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>link=Subscribe</td>
-	<td></td>
+	<td>assertText</td>
+	<td>//div[2]/div/span/a/span[1]</td>
+	<td>RSS</td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
@@ -104,23 +124,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>//div[3]/ul/li[3]/span/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
+	<td>assertTextPresent</td>
 	<td>There are no banned users.</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>link=Categories</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementNotPresent</td>
-	<td>//div[3]/ul/li[3]/span/a</td>
+	<td>link=Message Boards Home</td>
 	<td></td>
 </tr>
 <tr>
@@ -129,23 +139,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>//div[3]/ul/li[3]/span/a</td>
-	<td></td>
-</tr>
-<tr>
 	<td>assertElementPresent</td>
-	<td>//img[@alt='Edit']</td>
+	<td>link=Edit</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertElementPresent</td>
 	<td>link=Permissions</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>link=RSS</td>
 	<td></td>
 </tr>
 <tr>
@@ -169,18 +169,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>//li[4]/span/a</td>
-	<td></td>
-</tr>
-<tr>
 	<td>assertElementPresent</td>
 	<td>link=Reply</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAtAndWait</td>
-	<td>link=Categories</td>
 	<td></td>
 </tr>
 

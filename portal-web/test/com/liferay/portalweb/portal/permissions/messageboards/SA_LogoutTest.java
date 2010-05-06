@@ -18,19 +18,19 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="CA_AddSecondCategoryTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="SA_LogoutTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class CA_AddSecondCategoryTest extends BaseTestCase {
-	public void testCA_AddSecondCategory() throws Exception {
+public class SA_LogoutTest extends BaseTestCase {
+	public void testSA_Logout() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Configuration")) {
+				if (selenium.isElementPresent("link=Sign Out")) {
 					break;
 				}
 			}
@@ -40,9 +40,7 @@ public class CA_AddSecondCategoryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertTrue(selenium.isElementPresent("//input[@value='Add Category']"));
-		selenium.clickAt("//input[@value='Add Category']",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("link=Sign Out", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -51,7 +49,7 @@ public class CA_AddSecondCategoryTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//div[3]/ul/li[3]/span/a")) {
+				if (selenium.isElementPresent("_58_login")) {
 					break;
 				}
 			}
@@ -60,28 +58,5 @@ public class CA_AddSecondCategoryTest extends BaseTestCase {
 
 			Thread.sleep(1000);
 		}
-
-		selenium.type("_19_name", RuntimeVariables.replace("Permissions Test 1"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//input[@value='Save']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
 	}
 }

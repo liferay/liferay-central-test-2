@@ -24,6 +24,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class Guest_ViewTest extends BaseTestCase {
 	public void testGuest_View() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -40,8 +42,27 @@ public class Guest_ViewTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		assertTrue(selenium.isElementPresent("_58_login"));
 		assertTrue(selenium.isElementPresent("//input[@value='Sign In']"));
 		assertTrue(selenium.isElementPresent("link=Sign In"));
+		selenium.open("/web/guest/home/");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("link=Message Boards Permissions Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.clickAt("link=Message Boards Permissions Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
@@ -52,7 +73,5 @@ public class Guest_ViewTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Test Thread Message 1"));
 		assertTrue(selenium.isTextPresent("Test Thread Message Reply 1"));
-		selenium.clickAt("link=Categories", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
 	}
 }

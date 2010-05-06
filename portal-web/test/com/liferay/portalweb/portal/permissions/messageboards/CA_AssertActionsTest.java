@@ -24,6 +24,28 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class CA_AssertActionsTest extends BaseTestCase {
 	public void testCA_AssertActions() throws Exception {
+		selenium.open("/web/guest/home/");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("link=Message Boards Permissions Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("link=Message Boards Permissions Page",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -41,9 +63,8 @@ public class CA_AssertActionsTest extends BaseTestCase {
 		}
 
 		assertTrue(selenium.isElementPresent("//input[@value='Add Category']"));
-		assertTrue(selenium.isElementPresent("//img[@alt='Edit']"));
-		selenium.clickAt("//td[5]/ul/li/strong/span",
-			RuntimeVariables.replace(""));
+		assertTrue(selenium.isElementPresent("link=Edit"));
+		selenium.clickAt("//td[5]/ul/li/strong/a", RuntimeVariables.replace(""));
 		selenium.clickAt("link=Edit", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
@@ -79,13 +100,15 @@ public class CA_AssertActionsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("//li[4]/span/a")) {
+				if (selenium.isVisible("link=Message Boards Permissions Page")) {
 					break;
 				}
 			}
@@ -98,6 +121,15 @@ public class CA_AssertActionsTest extends BaseTestCase {
 		selenium.clickAt("link=Message Boards Permissions Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isElementPresent("link=Permissions"));
+		selenium.clickAt("//td[5]/ul/li/strong/a", RuntimeVariables.replace(""));
+		selenium.clickAt("link=Permissions", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		assertEquals(RuntimeVariables.replace(
+				"Edit Permissions for Message Boards Category: Permissions Test 1"),
+			selenium.getText("//form/div[1]"));
+		assertTrue(selenium.isElementPresent("//input[@value='Save']"));
+		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -105,7 +137,7 @@ public class CA_AssertActionsTest extends BaseTestCase {
 			}
 
 			try {
-				if (!selenium.isElementPresent("//li[4]/span/a")) {
+				if (selenium.isVisible("link=Message Boards Permissions Page")) {
 					break;
 				}
 			}
@@ -115,150 +147,26 @@ public class CA_AssertActionsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertTrue(selenium.isElementPresent("//img[@alt='Permissions']"));
-		selenium.clickAt("//td[5]/ul/li/strong/span",
-			RuntimeVariables.replace(""));
-		selenium.clickAt("//img[@alt='Permissions']",
+		selenium.clickAt("link=Message Boards Permissions Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Permissions Test 1")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//input[@value='Submit']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("link=Return to Full Page",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("//img[@alt='RSS']"));
-		assertTrue(selenium.isElementPresent("link=Subscribe"));
+		assertEquals(RuntimeVariables.replace("RSS"),
+			selenium.getText("//div[2]/div/span/a/span[1]"));
 		selenium.clickAt("link=Banned Users", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//div[3]/ul/li[3]/span/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isTextPresent("There are no banned users.")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("link=Categories", RuntimeVariables.replace(""));
+		assertTrue(selenium.isTextPresent("There are no banned users."));
+		selenium.clickAt("link=Message Boards Home",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (!selenium.isElementPresent("//div[3]/ul/li[3]/span/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.clickAt("link=Permissions Test 1", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//div[3]/ul/li[3]/span/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		assertTrue(selenium.isElementPresent("//img[@alt='Edit']"));
+		assertTrue(selenium.isElementPresent("link=Edit"));
 		assertTrue(selenium.isElementPresent("link=Permissions"));
-		assertTrue(selenium.isElementPresent("link=RSS"));
 		assertTrue(selenium.isElementPresent("link=Subscribe"));
 		assertTrue(selenium.isElementPresent("link=Move Thread"));
 		assertTrue(selenium.isElementPresent("link=Delete"));
 		selenium.clickAt("link=Test Thread 1", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//li[4]/span/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		assertTrue(selenium.isElementPresent("link=Reply"));
-		selenium.clickAt("link=Categories", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
 	}
 }

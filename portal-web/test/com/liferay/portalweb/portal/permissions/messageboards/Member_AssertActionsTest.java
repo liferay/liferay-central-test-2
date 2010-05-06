@@ -24,13 +24,15 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class Member_AssertActionsTest extends BaseTestCase {
 	public void testMember_AssertActions() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Categories")) {
+				if (selenium.isVisible("link=Message Boards Permissions Page")) {
 					break;
 				}
 			}
@@ -40,9 +42,12 @@ public class Member_AssertActionsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertTrue(selenium.isElementPresent(
-				"//input[@value='Search Categories']"));
-		assertTrue(selenium.isElementPresent("link=RSS"));
+		selenium.clickAt("link=Message Boards Permissions Page",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isElementPresent("//input[@value='Search']"));
+		assertEquals(RuntimeVariables.replace("RSS"),
+			selenium.getText("//div[2]/div/span/a/span[1]"));
 		assertTrue(selenium.isElementPresent("link=Subscribe"));
 		assertFalse(selenium.isElementPresent("//input[@value='Add Category']"));
 		assertFalse(selenium.isElementPresent("link=Delete"));
@@ -52,23 +57,6 @@ public class Member_AssertActionsTest extends BaseTestCase {
 		assertTrue(selenium.isElementPresent("link=Permissions Test 1"));
 		selenium.clickAt("link=Permissions Test 1", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//div[3]/ul/li[3]/span/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		assertTrue(selenium.isElementPresent("link=Test Thread 1"));
 		assertFalse(selenium.isElementPresent("link=Edit"));
 		assertFalse(selenium.isElementPresent("link=Move"));
@@ -77,29 +65,10 @@ public class Member_AssertActionsTest extends BaseTestCase {
 				"//input[@value='Post New Thread']"));
 		selenium.clickAt("link=Test Thread 1", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//li[4]/span/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		assertTrue(selenium.isElementPresent("link=Reply"));
 		assertTrue(selenium.isElementPresent("link=Reply with Quote"));
 		assertFalse(selenium.isElementPresent("link=Delete"));
 		assertFalse(selenium.isElementPresent("link=Edit"));
 		assertFalse(selenium.isElementPresent("link=Permissions"));
-		selenium.clickAt("link=Categories", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
 	}
 }

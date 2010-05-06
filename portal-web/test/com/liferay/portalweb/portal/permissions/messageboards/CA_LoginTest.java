@@ -24,13 +24,15 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class CA_LoginTest extends BaseTestCase {
 	public void testCA_Login() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("_58_login")) {
+				if (selenium.isVisible("_58_login")) {
 					break;
 				}
 			}
@@ -42,6 +44,7 @@ public class CA_LoginTest extends BaseTestCase {
 
 		selenium.type("_58_login", RuntimeVariables.replace("ca@liferay.com"));
 		selenium.type("_58_password", RuntimeVariables.replace("test"));
+		selenium.clickAt("_58_rememberMeCheckbox", RuntimeVariables.replace(""));
 		selenium.clickAt("//input[@value='Sign In']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");

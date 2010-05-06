@@ -24,13 +24,15 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class Member_ReplyMessageTest extends BaseTestCase {
 	public void testMember_ReplyMessage() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Categories")) {
+				if (selenium.isVisible("link=Message Boards Permissions Page")) {
 					break;
 				}
 			}
@@ -40,58 +42,16 @@ public class Member_ReplyMessageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.clickAt("link=Message Boards Permissions Page",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("link=Permissions Test 1", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("link=Test Thread 1", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Reply"));
 		selenium.clickAt("link=Reply", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_19_subject")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_19_textArea")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//input[@value=\"Save\"]")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.type("_19_textArea",
 			RuntimeVariables.replace("Test Thread Message Reply 1"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
@@ -100,7 +60,5 @@ public class Member_ReplyMessageTest extends BaseTestCase {
 		assertTrue(selenium.isElementPresent("link=Permissions"));
 		assertTrue(selenium.isElementPresent("link=Delete"));
 		assertTrue(selenium.isTextPresent("Test Thread Message Reply 1"));
-		selenium.clickAt("link=Permissions Test 1", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
 	}
 }
