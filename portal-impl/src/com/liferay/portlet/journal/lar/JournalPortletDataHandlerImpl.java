@@ -624,8 +624,8 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 				continue;
 			}
 
-			int beginGroupPos =
-				content.indexOf(StringPool.SLASH, beginPos + hrefLength + 1);
+			int beginGroupPos = content.indexOf(
+				StringPool.SLASH, beginPos + hrefLength + 1);
 
 			if (beginGroupPos == -1) {
 				beginPos--;
@@ -633,8 +633,8 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 				continue;
 			}
 
-			int endGroupPos =
-				content.indexOf(StringPool.SLASH, beginGroupPos + 1);
+			int endGroupPos = content.indexOf(
+				StringPool.SLASH, beginGroupPos + 1);
 
 			if (endGroupPos == -1) {
 				beginPos--;
@@ -642,8 +642,8 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 				continue;
 			}
 
-			String groupFriendlyURL =
-				content.substring(beginGroupPos, endGroupPos);
+			String groupFriendlyURL = content.substring(
+				beginGroupPos, endGroupPos);
 
 			if (groupFriendlyURL.equals(group.getFriendlyURL())) {
 				sb.replace(
@@ -791,16 +791,14 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		String content = article.getContent();
 
-		content =
-			StringUtil.replace(
-				content, "@data_handler_group_id@", String.valueOf(groupId));
+		content = StringUtil.replace(
+			content, "@data_handler_group_id@", String.valueOf(groupId));
 
 		Group group = GroupLocalServiceUtil.getGroup(groupId);
 
-		content =
-			StringUtil.replace(
-				content, "@data_handler_group_friendly_url@",
-				group.getFriendlyURL());
+		content = StringUtil.replace(
+			content, "@data_handler_group_friendly_url@",
+			group.getFriendlyURL());
 
 		article.setContent(content);
 
