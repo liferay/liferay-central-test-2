@@ -632,7 +632,10 @@ public class PortletURLImpl
 			return;
 		}
 
-		String ppauth = ParamUtil.getString(_request, "p_p_auth");
+		HttpServletRequest request = PortalUtil.getOriginalServletRequest(
+			_request);
+
+		String ppauth = ParamUtil.getString(request, "p_p_auth");
 
 		if (Validator.isNotNull(ppauth)) {
 			sb.append("p_p_auth");
@@ -643,8 +646,7 @@ public class PortletURLImpl
 			return;
 		}
 
-		Portlet portlet = (Portlet)_request.getAttribute(
-			WebKeys.RENDER_PORTLET);
+		Portlet portlet = (Portlet)request.getAttribute(WebKeys.RENDER_PORTLET);
 
 		if (portlet == null) {
 			return;
@@ -661,7 +663,7 @@ public class PortletURLImpl
 		sb.append(StringPool.EQUAL);
 		sb.append(
 			processValue(
-				key, AuthTokenUtil.getToken(_request, _plid, _portletId)));
+				key, AuthTokenUtil.getToken(request, _plid, _portletId)));
 		sb.append(StringPool.AMPERSAND);
 	}
 
