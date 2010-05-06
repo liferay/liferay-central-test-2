@@ -38,7 +38,7 @@
 	background: url(<%= themeImagesPath %>/common/recent_changes.png) no-repeat 0 50%;
 	color: #999;
 	margin-right: 5px;
-	padding: 2px 0px 2px 20px;
+	padding: 2px 0 2px 20px;
 }
 
 .portlet-journal .journal-article-status .journal-article-status-approved {
@@ -87,7 +87,7 @@
 }
 
 .journal-template-error .scroll-pane pre {
-	margin: 0px;
+	margin: 0;
 	white-space: pre;
 }
 
@@ -186,7 +186,7 @@
 }
 
 .portlet-journal .structure-tree li {
-	border: 0px;
+	border-width: 0;
 	margin: 10px;
 	position: relative;
 }
