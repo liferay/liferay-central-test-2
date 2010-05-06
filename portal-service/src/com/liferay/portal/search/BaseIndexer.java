@@ -380,12 +380,14 @@ public abstract class BaseIndexer implements Indexer {
 		BooleanQuery portletIdsQuery = BooleanQueryFactoryUtil.create();
 
 		for (String portletId : portletIds) {
-			if (Validator.isNotNull(portletId)) {
-				TermQuery termQuery = TermQueryFactoryUtil.create(
+			if (Validator.isNull(portletId)) {
+				continue;
+			}
+
+			TermQuery termQuery = TermQueryFactoryUtil.create(
 				Field.PORTLET_ID, portletId);
 
-				portletIdsQuery.add(termQuery, BooleanClauseOccur.SHOULD);
-			}
+			portletIdsQuery.add(termQuery, BooleanClauseOccur.SHOULD);
 		}
 
 		if (!portletIdsQuery.clauses().isEmpty()) {

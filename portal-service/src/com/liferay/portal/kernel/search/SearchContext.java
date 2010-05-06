@@ -101,11 +101,11 @@ public class SearchContext implements Serializable {
 	}
 
 	public void setAssetCategoryIds(long[] assetCategoryIds) {
-		this._assetCategoryIds = assetCategoryIds;
+		_assetCategoryIds = assetCategoryIds;
 	}
 
 	public void setAssetTagNames(String[] assetTagNames) {
-		this._assetTagNames = assetTagNames;
+		_assetTagNames = assetTagNames;
 	}
 
 	public void setAttribute(String name, Serializable value) {
@@ -153,7 +153,7 @@ public class SearchContext implements Serializable {
 	}
 
 	public void setPortletIds(String[] portletIds) {
-		this._portletIds = portletIds;
+		_portletIds = portletIds;
 	}
 
 	public void setScopeStrict(boolean scopeStrict) {
