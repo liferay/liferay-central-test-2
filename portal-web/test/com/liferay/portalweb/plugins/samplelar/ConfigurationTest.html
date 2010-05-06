@@ -9,12 +9,17 @@
 <tr><td rowspan="1" colspan="3">ConfigurationTest</td></tr>
 </thead><tbody>
 <tr>
+	<td>open</td>
+	<td>/web/guest/home/</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
 	<td>link=Sample LAR Test Page</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
+	<td>clickAtAndWait</td>
 	<td>link=Sample LAR Test Page</td>
 	<td></td>
 </tr>
@@ -24,22 +29,22 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>//img[@alt='Configuration']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Return to Full Page</td>
+	<td>clickAtAndWait</td>
+	<td>link=Configuration</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//strong/span</td>
+	<td>close</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>clickAt</td>
+	<td>//strong/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
 	<td>link=Export / Import</td>
 	<td></td>
 </tr>
@@ -71,11 +76,6 @@
 <tr>
 	<td>assertElementPresent</td>
 	<td>//input[@value='Import']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Return to Full Page</td>
 	<td></td>
 </tr>
 

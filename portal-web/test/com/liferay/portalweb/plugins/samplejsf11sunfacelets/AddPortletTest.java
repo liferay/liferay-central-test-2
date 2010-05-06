@@ -75,7 +75,7 @@ public class AddPortletTest extends BaseTestCase {
 
 			try {
 				if (selenium.isVisible(
-							"//div[@title='Sample JSF11 Sun Facelets']/p/a")) {
+							"//div[@title='Sample JSF 1.1 Sun Facelets']/p/a")) {
 					break;
 				}
 			}
@@ -85,7 +85,7 @@ public class AddPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//div[@title='Sample JSF11 Sun Facelets']/p/a",
+		selenium.clickAt("//div[@title='Sample JSF 1.1 Sun Facelets']/p/a",
 			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {

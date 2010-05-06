@@ -75,7 +75,7 @@ public class AddPortletBookingsTest extends BaseTestCase {
 
 			try {
 				if (selenium.isVisible(
-							"//div[@title='Sample ICEfaces IPC Bookings']/p/a")) {
+							"//div[@title='Sample ICEfaces IPC - Bookings']/p/a")) {
 					break;
 				}
 			}
@@ -85,7 +85,7 @@ public class AddPortletBookingsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//div[@title='Sample ICEfaces IPC Bookings']/p/a",
+		selenium.clickAt("//div[@title='Sample ICEfaces IPC - Bookings']/p/a",
 			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {

@@ -24,6 +24,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AssertDisableInputTest extends BaseTestCase {
 	public void testAssertDisableInput() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -40,7 +42,8 @@ public class AssertDisableInputTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Google Maps Test Page"));
+		selenium.clickAt("link=Google Maps Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isElementPresent("//input[1]"));
 		assertFalse(selenium.isElementPresent("//input[3]"));

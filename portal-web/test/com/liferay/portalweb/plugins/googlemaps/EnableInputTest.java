@@ -29,6 +29,7 @@ public class EnableInputTest extends BaseTestCase {
 		while (label >= 1) {
 			switch (label) {
 			case 1:
+				selenium.open("/web/guest/home/");
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -47,10 +48,11 @@ public class EnableInputTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(RuntimeVariables.replace(
-						"link=Google Maps Test Page"));
+				selenium.clickAt("link=Google Maps Test Page",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				selenium.click(RuntimeVariables.replace("link=Configuration"));
+				selenium.clickAt("link=Configuration",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 
 				boolean MapChecked = selenium.isChecked(
@@ -78,11 +80,11 @@ public class EnableInputTest extends BaseTestCase {
 				selenium.click("_86_directionsInputEnabledCheckbox");
 
 			case 3:
-				selenium.click(RuntimeVariables.replace(
-						"//input[@value='Save']"));
+				selenium.clickAt("//form/input[2]", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				assertTrue(selenium.isTextPresent(
-						"You have successfully updated the setup."));
+				assertEquals(RuntimeVariables.replace(
+						"You have successfully updated the setup."),
+					selenium.getText("//div[@id='p_p_id_86_']/div/div"));
 
 			case 100:
 				label = -1;

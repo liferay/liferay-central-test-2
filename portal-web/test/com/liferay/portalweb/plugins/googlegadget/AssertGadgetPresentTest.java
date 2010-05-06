@@ -24,6 +24,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AssertGadgetPresentTest extends BaseTestCase {
 	public void testAssertGadgetPresent() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -42,9 +44,13 @@ public class AssertGadgetPresentTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Google Gadget Test Page"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("a"));
-		assertTrue(selenium.isElementPresent("f"));
-		assertTrue(selenium.isElementPresent("t"));
-		assertTrue(selenium.isElementPresent("submit"));
+		assertEquals(RuntimeVariables.replace(
+				"Euro US Dollar Pound Sterling Argentine Peso Australian Dollar Bahrain Dinar Bangladeshi Taka Botswana Pula Brazilian Real British Pound Brunei Dollar Bulgarian Lev Canadian Dollar Chilean Peso Chinese Yuan Renminbi Colombian Peso Croatian Kuna Cyprus Pound Czech Koruna Danish Krone East Caribbean Dollar Egyptian Pound Estonian Kroon Euro Hong Kong Dollar Hungarian Forint Icelandic Krona Indian Rupee Indonesian Rupiah Iranian Rial Israeli Sheqel Jamaican Dollar Japanese Yen South Korean Won Kuwaiti Dinar Latvian Lats Libyan Dinar Lithuanian Litas Malaysian Ringgit Maldives Rufiyaa Maltese Lira Mauritian Rupee Mexican Peso Nepalese Rupee New Romanian Leu New Taiwan Dollar New Turkish Lira New Zealand Dollar Norwegian Krone Omani Rial Pakistan Rupee Peruvian Nuevo Sol Philippine Peso Polish Zloty Qatar Riyal Romanian Leu (new) Russian Rouble Saudi Arabian Riyal Singapore Dollar Slovak Koruna Slovenian Tolar South African Rand Sri Lanka Rupee Swedish Krona Swiss Franc Taiwan Dollar Taiwan Dollar (new) Thai Baht Trinidad And Tobago Dollar Turkish Lira (New) UAE Dirham Ukrainian Hrivna US Dollar Venezuelan Bolivar Gold (ounce) Platinum (ounce) Silver (ounce) Aluminium (ounce)"),
+			selenium.getText("from"));
+		assertEquals(RuntimeVariables.replace(
+				"Euro US Dollar Pound Sterling Argentine Peso Australian Dollar Bahrain Dinar Bangladeshi Taka Botswana Pula Brazilian Real British Pound Brunei Dollar Bulgarian Lev Canadian Dollar Chilean Peso Chinese Yuan Renminbi Colombian Peso Croatian Kuna Cyprus Pound Czech Koruna Danish Krone East Caribbean Dollar Egyptian Pound Estonian Kroon Euro Hong Kong Dollar Hungarian Forint Icelandic Krona Indian Rupee Indonesian Rupiah Iranian Rial Israeli Sheqel Jamaican Dollar Japanese Yen South Korean Won Kuwaiti Dinar Latvian Lats Libyan Dinar Lithuanian Litas Malaysian Ringgit Maldives Rufiyaa Maltese Lira Mauritian Rupee Mexican Peso Nepalese Rupee New Romanian Leu New Taiwan Dollar New Turkish Lira New Zealand Dollar Norwegian Krone Omani Rial Pakistan Rupee Peruvian Nuevo Sol Philippine Peso Polish Zloty Qatar Riyal Romanian Leu (new) Russian Rouble Saudi Arabian Riyal Singapore Dollar Slovak Koruna Slovenian Tolar South African Rand Sri Lanka Rupee Swedish Krona Swiss Franc Taiwan Dollar Taiwan Dollar (new) Thai Baht Trinidad And Tobago Dollar Turkish Lira (New) UAE Dirham Ukrainian Hrivna US Dollar Venezuelan Bolivar Gold (ounce) Platinum (ounce) Silver (ounce) Aluminium (ounce)"),
+			selenium.getText("to"));
+		assertTrue(selenium.isElementPresent("value"));
+		assertTrue(selenium.isElementPresent("result"));
 	}
 }

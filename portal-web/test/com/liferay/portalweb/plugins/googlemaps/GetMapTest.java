@@ -24,6 +24,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class GetMapTest extends BaseTestCase {
 	public void testGetMap() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -40,12 +42,14 @@ public class GetMapTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Google Maps Test Page"));
+		selenium.clickAt("link=Google Maps Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("//input[1]",
 			RuntimeVariables.replace("17730 Antonio Ave, Cerritos, CA, 90703"));
 		selenium.type("//input[3]", RuntimeVariables.replace(""));
-		selenium.click("//input[@value='Get Map']");
+		selenium.clickAt("//input[@value='Get Map']",
+			RuntimeVariables.replace(""));
 		Thread.sleep(5000);
 		assertEquals(RuntimeVariables.replace(
 				"17730 Antonio Ave, Cerritos, CA, 90703"),

@@ -24,6 +24,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddAdSenseTest extends BaseTestCase {
 	public void testAddAdSense() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -40,31 +42,25 @@ public class AddAdSenseTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Google Adsense Test Page"));
+		selenium.clickAt("link=Google Adsense Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Configuration"));
+		selenium.clickAt("link=Configuration", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_86_adClient",
-			RuntimeVariables.replace("pub-0000000000"));
 		selenium.type("_86_adClient", RuntimeVariables.replace("pub-0000000000"));
-		selenium.typeKeys("_86_adChannel", RuntimeVariables.replace("12345678"));
 		selenium.type("_86_adChannel", RuntimeVariables.replace("12345678"));
 		selenium.select("_86_adType", RuntimeVariables.replace("label=Text"));
 		selenium.select("_86_adFormat",
 			RuntimeVariables.replace("label=(728 x 90) - Leaderboard"));
-		selenium.typeKeys("_86_colorBorder", RuntimeVariables.replace("FFFFFF"));
 		selenium.type("_86_colorBorder", RuntimeVariables.replace("FFFFFF"));
-		selenium.typeKeys("_86_colorBg", RuntimeVariables.replace("0000FF"));
 		selenium.type("_86_colorBg", RuntimeVariables.replace("0000FF"));
-		selenium.typeKeys("_86_colorLink", RuntimeVariables.replace("FFFFFF"));
 		selenium.type("_86_colorLink", RuntimeVariables.replace("FFFFFF"));
-		selenium.typeKeys("_86_colorText", RuntimeVariables.replace("000000"));
 		selenium.type("_86_colorText", RuntimeVariables.replace("000000"));
-		selenium.typeKeys("_86_colorUrl", RuntimeVariables.replace("008000"));
 		selenium.type("_86_colorUrl", RuntimeVariables.replace("008000"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//form/input[2]", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"You have successfully updated the setup."));
+		assertEquals(RuntimeVariables.replace(
+				"You have successfully updated the setup."),
+			selenium.getText("//div[@id='p_p_id_86_']/div/div"));
 	}
 }

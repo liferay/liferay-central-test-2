@@ -46,9 +46,10 @@ public class RemoveCustomersPortletTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"link=Sample Icefaces IPC Ajax Push Test Page"));
 		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent("Sample ICEfaces IPC - Customers"));
 		selenium.click("//img[@alt='Remove']");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to remove this component[\\s\\S]$"));
-		assertFalse(selenium.isTextPresent(" Sample ICEfaces IPC - Customers"));
+		assertFalse(selenium.isTextPresent("Sample ICEfaces IPC - Customers"));
 	}
 }
