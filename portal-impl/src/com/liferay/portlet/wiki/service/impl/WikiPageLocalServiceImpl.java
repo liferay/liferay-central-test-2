@@ -362,7 +362,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		List<WikiPage> pages = wikiPagePersistence.findByN_T_H(
 			nodeId, title, true, 0, 1);
 
-		if (pages.size() > 0) {
+		if (!pages.isEmpty()) {
 			WikiPage page = pages.iterator().next();
 
 			deletePage(page);
@@ -502,14 +502,14 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		List<WikiPage> pages = wikiPagePersistence.findByN_T_S(
 			nodeId, title, WorkflowConstants.STATUS_DRAFT, 0, 1);
 
-		if (pages.size() > 0) {
+		if (!pages.isEmpty()) {
 			return pages.get(0);
 		}
 		else {
 			pages = wikiPagePersistence.findByN_T_S(
 				nodeId, title, WorkflowConstants.STATUS_PENDING, 0, 1);
 
-			if (pages.size() > 0) {
+			if (!pages.isEmpty()) {
 				return pages.get(0);
 			}
 			else {
@@ -664,7 +664,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		List<WikiPage> pages = wikiPagePersistence.findByN_T_H(
 			nodeId, title, true, 0, 1);
 
-		if (pages.size() > 0) {
+		if (!pages.isEmpty()) {
 			return pages.get(0);
 		}
 		else {
@@ -678,7 +678,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		List<WikiPage> pages = wikiPagePersistence.findByN_T_H(
 			nodeId, title, head, 0, 1);
 
-		if (pages.size() > 0) {
+		if (!pages.isEmpty()) {
 			return pages.get(0);
 		}
 		else {
@@ -1114,7 +1114,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		WikiPage page = null;
 
-		if (pages.size() > 0) {
+		if (!pages.isEmpty()) {
 			page = pages.get(0);
 		}
 		else {
@@ -1146,7 +1146,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			List<WikiPage> pages = wikiPagePersistence.findByN_T_H(
 				page.getNodeId(), page.getTitle(), true, 0, 1);
 
-			if (pages.size() > 0) {
+			if (!pages.isEmpty()) {
 				WikiPage lastApprovedPage = pages.get(0);
 
 				lastApprovedPage.setHead(false);
@@ -1207,7 +1207,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			List<WikiPage> pages = wikiPagePersistence.findByN_T_H(
 				page.getNodeId(), page.getTitle(), false, 0, 1);
 
-			if (pages.size() > 0) {
+			if (!pages.isEmpty()) {
 				WikiPage previousVersionPage = pages.get(0);
 
 				previousVersionPage.setHead(true);
