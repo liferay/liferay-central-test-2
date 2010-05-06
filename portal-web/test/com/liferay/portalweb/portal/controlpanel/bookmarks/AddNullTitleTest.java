@@ -24,13 +24,15 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddNullTitleTest extends BaseTestCase {
 	public void testAddNullTitle() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Bookmarks")) {
+				if (selenium.isElementPresent("link=Control Panel")) {
 					break;
 				}
 			}
@@ -40,44 +42,24 @@ public class AddNullTitleTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Bookmarks", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//b", RuntimeVariables.replace(""));
+		assertTrue(selenium.isPartialText("//a/strong", "Test Folder"));
+		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//b", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//input[@value='Add Entry']",
+		assertEquals(RuntimeVariables.replace("Add Bookmark"),
+			selenium.getText("//div[2]/div/div[2]/ul/li[4]/a"));
+		selenium.clickAt("//div[2]/div/div[2]/ul/li[4]/a",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_28_url")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.typeKeys("_28_url",
-			RuntimeVariables.replace("http://www.movies.com"));
 		selenium.type("_28_url",
 			RuntimeVariables.replace("http://www.movies.com"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
-				"You have entered invalid data. Please try again."));
-		assertTrue(selenium.isTextPresent("Please enter a valid URL."));
-		selenium.clickAt("//input[@value='Cancel']",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		assertFalse(selenium.isElementPresent("link=http://www.movies.com"));
+				"Your request processed successfully. "));
+		assertTrue(selenium.isElementPresent("link=http://www.movies.com"));
 	}
 }

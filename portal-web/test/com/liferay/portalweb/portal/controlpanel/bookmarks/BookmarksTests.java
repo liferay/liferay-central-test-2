@@ -29,7 +29,6 @@ public class BookmarksTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTestSuite(ControlPanelTest.class);
 		testSuite.addTestSuite(AddFolderTest.class);
 		testSuite.addTestSuite(AddSubfolderTest.class);
 		testSuite.addTestSuite(AddEntryTest.class);
@@ -47,13 +46,12 @@ public class BookmarksTests extends BaseTests {
 		testSuite.addTestSuite(AddNullSubfolderTest.class);
 		testSuite.addTestSuite(AddNullEntryTest.class);
 		testSuite.addTestSuite(AddNullURLTest.class);
-		//testSuite.addTestSuite(AddNullTitleTest.class);
+		testSuite.addTestSuite(AddNullTitleTest.class);
 		testSuite.addTestSuite(AddIncorrectURLTest.class);
-		testSuite.addTestSuite(DeleteAllTest.class);
+		testSuite.addTestSuite(TearDownBookmarkFolderCPTest.class);
 		testSuite.addTestSuite(ImportLARTest.class);
 		testSuite.addTestSuite(AssertImportLARTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
-		testSuite.addTestSuite(EndControlPanelTest.class);
+		testSuite.addTestSuite(TearDownBookmarkFolderCPTest.class);
 
 		return testSuite;
 	}
