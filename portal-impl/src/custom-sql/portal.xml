@@ -218,6 +218,23 @@
 				(Roles_Permissions.roleId = ?)
 		]]>
 	</sql>
+	<sql id="com.liferay.portal.service.persistence.GroupFinder.joinByRoleResourcePermissions">
+		<![CDATA[
+			INNER JOIN
+				ResourcePermission ON
+					(ResourcePermission.primKey = Group_.groupId)
+			INNER JOIN
+				ResourceAction ON
+					(ResourceAction.name = ResourcePermission.name)
+			WHERE
+				(Group_.liveGroupId = 0) AND
+				(ResourcePermission.name = ?) AND
+				(ResourcePermission.scope = ?) AND
+				(ResourceAction.actionId = ?) AND
+				(((ResourcePermission.actionIds / ResourceAction.bitwiseValue) % 2) = 1) AND
+				(ResourcePermission.roleId = ?)
+		]]>
+	</sql>
 	<sql id="com.liferay.portal.service.persistence.GroupFinder.joinByType">
 		<![CDATA[
 			WHERE

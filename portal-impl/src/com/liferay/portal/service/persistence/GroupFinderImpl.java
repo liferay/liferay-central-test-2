@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
 import java.util.ArrayList;
@@ -91,6 +92,9 @@ public class GroupFinderImpl
 
 	public static String JOIN_BY_ROLE_PERMISSIONS =
 		GroupFinder.class.getName() + ".joinByRolePermissions";
+
+	public static String JOIN_BY_ROLE_RESOURCE_PERMISSIONS =
+		GroupFinder.class.getName() + ".joinByRoleResourcePermissions";
 
 	public static String JOIN_BY_TYPE =
 		GroupFinder.class.getName() + ".joinByType";
@@ -566,7 +570,12 @@ public class GroupFinderImpl
 			join = CustomSQLUtil.get(JOIN_BY_PAGE_COUNT);
 		}
 		else if (key.equals("rolePermissions")) {
-			join = CustomSQLUtil.get(JOIN_BY_ROLE_PERMISSIONS);
+			if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
+				join = CustomSQLUtil.get(JOIN_BY_ROLE_RESOURCE_PERMISSIONS);
+			}
+			else {
+				join = CustomSQLUtil.get(JOIN_BY_ROLE_PERMISSIONS);
+			}
 		}
 		else if (key.equals("userGroupRole")) {
 			join = CustomSQLUtil.get(JOIN_BY_USER_GROUP_ROLE);
@@ -634,7 +643,12 @@ public class GroupFinderImpl
 			join = CustomSQLUtil.get(JOIN_BY_PAGE_COUNT);
 		}
 		else if (key.equals("rolePermissions")) {
-			join = CustomSQLUtil.get(JOIN_BY_ROLE_PERMISSIONS);
+			if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
+				join = CustomSQLUtil.get(JOIN_BY_ROLE_RESOURCE_PERMISSIONS);
+			}
+			else {
+				join = CustomSQLUtil.get(JOIN_BY_ROLE_PERMISSIONS);
+			}
 		}
 		else if (key.equals("type")) {
 			join = CustomSQLUtil.get(JOIN_BY_TYPE);
