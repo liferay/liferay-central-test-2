@@ -625,7 +625,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>73</portlet-name>
-		<icon>/html/icons/default.png</icon>
+		<icon>/html/icons/breadcrumb.png</icon>
 		<struts-path>breadcrumb</struts-path>
 		<configuration-action-class>com.liferay.portlet.breadcrumb.action.ConfigurationActionImpl</configuration-action-class>
 		<use-default-template>false</use-default-template>
@@ -907,7 +907,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>110</portlet-name>
-		<icon>/html/icons/default.png</icon>
+		<icon>/html/icons/document_library_display.png</icon>
 		<struts-path>document_library_display</struts-path>
 		<configuration-action-class>com.liferay.portlet.documentlibrary.action.ConfigurationActionImpl</configuration-action-class>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
