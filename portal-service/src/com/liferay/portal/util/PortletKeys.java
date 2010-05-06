@@ -97,6 +97,9 @@ public class PortletKeys {
 
 	public static final String JOURNAL_CONTENT_SEARCH = "77";
 
+	public static final String KNOWLEDGE_BASE_ADMIN =
+		"1_WAR_knowledgebaseportlet";
+
 	public static final String LANGUAGE = "82";
 
 	public static final String LAYOUT_CONFIGURATION = "87";
