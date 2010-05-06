@@ -1025,9 +1025,9 @@ public class PropsValues {
 	public static final int LUCENE_OPTIMIZE_INTERVAL = GetterUtil.getInteger(
 		PropsUtil.get(PropsKeys.LUCENE_OPTIMIZE_INTERVAL));
 
-	public static final boolean LUCENE_STORE_JDBC_AUTO_CLEAN_UP =
+	public static final boolean LUCENE_STORE_JDBC_AUTO_CLEAN_UP_ENABLED =
 		GetterUtil.getBoolean(
-			PropsUtil.get(PropsKeys.LUCENE_STORE_JDBC_AUTO_CLEAN_UP));
+			PropsUtil.get(PropsKeys.LUCENE_STORE_JDBC_AUTO_CLEAN_UP_ENABLED));
 
 	public static final String LUCENE_STORE_JDBC_AUTO_CLEAN_UP_INTERVAL =
 		PropsUtil.get(PropsKeys.LUCENE_STORE_JDBC_AUTO_CLEAN_UP_INTERVAL);

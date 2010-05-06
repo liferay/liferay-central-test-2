@@ -262,6 +262,10 @@ public class VerifyProperties extends VerifyProcess {
 			"default.user.public.layouts.lar"
 		},
 		new String[] {
+			"lucene.store.jdbc.auto.clean.up",
+			"lucene.store.jdbc.auto.clean.up.enabled"
+		},
+		new String[] {
 			"referer.url.domains.allowed",
 			"redirect.url.domains.allowed"
 		},

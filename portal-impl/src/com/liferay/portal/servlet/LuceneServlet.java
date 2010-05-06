@@ -83,7 +83,7 @@ public class LuceneServlet extends HttpServlet {
 						indexer, indexerThread));
 			}
 
-			if (PropsValues.LUCENE_STORE_JDBC_AUTO_CLEAN_UP) {
+			if (PropsValues.LUCENE_STORE_JDBC_AUTO_CLEAN_UP_ENABLED) {
 				SchedulerEntry schedulerEntry = new SchedulerEntryImpl();
 
 				schedulerEntry.setEventListenerClass(
