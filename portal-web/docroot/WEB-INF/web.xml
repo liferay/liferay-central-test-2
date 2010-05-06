@@ -631,6 +631,10 @@
 	</filter-mapping>
 	<filter-mapping>
 		<filter-name>Language Filter</filter-name>
+		<url-pattern>/combo/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>Language Filter</filter-name>
 		<url-pattern>*.js</url-pattern>
 	</filter-mapping>
 	<filter-mapping>
