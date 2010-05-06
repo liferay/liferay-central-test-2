@@ -50,9 +50,6 @@ import com.liferay.portlet.softwarecatalog.model.SCProductVersion;
 import com.liferay.portlet.softwarecatalog.service.base.SCProductEntryLocalServiceBaseImpl;
 import com.liferay.util.xml.DocUtil;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -663,13 +660,8 @@ public class SCProductEntryLocalServiceImpl
 		if (Validator.isNull(pageURL)) {
 			throw new ProductEntryPageURLException();
 		}
-		else {
-			try {
-				new URL(pageURL);
-			}
-			catch (MalformedURLException murle) {
+		else if (!Validator.isUrl(pageURL)) {
 				throw new ProductEntryPageURLException();
-			}
 		}
 
 		if (Validator.isNull(author)) {

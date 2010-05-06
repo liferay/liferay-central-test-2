@@ -24,9 +24,6 @@ import com.liferay.portal.model.Website;
 import com.liferay.portal.service.base.WebsiteLocalServiceBaseImpl;
 import com.liferay.portal.util.PortalUtil;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -127,16 +124,8 @@ public class WebsiteLocalServiceImpl extends WebsiteLocalServiceBaseImpl {
 			String url, int typeId, boolean primary)
 		throws PortalException, SystemException {
 
-		if (Validator.isNull(url)) {
+		if (!Validator.isUrl(url)) {
 			throw new WebsiteURLException();
-		}
-		else {
-			try {
-				new URL(url);
-			}
-			catch (MalformedURLException murle) {
-				throw new WebsiteURLException();
-			}
 		}
 
 		if (websiteId > 0) {

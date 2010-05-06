@@ -31,9 +31,6 @@ import com.liferay.portlet.bookmarks.model.BookmarksFolderConstants;
 import com.liferay.portlet.bookmarks.service.base.BookmarksEntryLocalServiceBaseImpl;
 import com.liferay.portlet.bookmarks.util.comparator.EntryModifiedDateComparator;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -63,7 +60,9 @@ public class BookmarksEntryLocalServiceImpl
 
 		Date now = new Date();
 
-		validate(url);
+		if (!Validator.isUrl(url)) {
+			throw new EntryURLException();
+		}
 
 		long entryId = counterLocalService.increment();
 
@@ -331,7 +330,9 @@ public class BookmarksEntryLocalServiceImpl
 			name = url;
 		}
 
-		validate(url);
+		if (!Validator.isUrl(url)) {
+			throw new EntryURLException();
+		}
 
 		entry.setModifiedDate(serviceContext.getModifiedDate(null));
 		entry.setFolderId(folderId);
@@ -375,20 +376,6 @@ public class BookmarksEntryLocalServiceImpl
 		}
 
 		return folderId;
-	}
-
-	protected void validate(String url) throws PortalException {
-		if (Validator.isNull(url)) {
-			throw new EntryURLException();
-		}
-		else {
-			try {
-				new URL(url);
-			}
-			catch (MalformedURLException murle) {
-				throw new EntryURLException();
-			}
-		}
 	}
 
 }

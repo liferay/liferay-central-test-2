@@ -14,8 +14,7 @@
 
 package com.liferay.portlet.rss;
 
-import java.net.MalformedURLException;
-import java.net.URL;
+import com.liferay.portal.kernel.util.Validator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,10 +38,7 @@ public class RSSPreferencesValidator implements PreferencesValidator {
 		String[] urls = preferences.getValues("urls", new String[0]);
 
 		for (String url : urls) {
-			try {
-				new URL(url);
-			}
-			catch (MalformedURLException murle) {
+			if (!Validator.isUrl(url)) {
 				badURLs.add(url);
 			}
 		}
