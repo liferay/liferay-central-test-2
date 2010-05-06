@@ -278,7 +278,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 							<aui:field-wrapper label="">
 								<span class="journal-article-id"><liferay-ui:message key="id" />: <%= HtmlUtil.escape(articleId) %></span>
 
-								<span class="journal-article-version"><liferay-ui:message key="version" />: <strong><%= article.getVersion() %>" /></strong></span>
+								<span class="journal-article-version"><liferay-ui:message key="version" />: <strong><%= article.getVersion() %></strong></span>
 
 								<%
 								String status = null;

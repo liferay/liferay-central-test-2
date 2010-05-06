@@ -38,12 +38,11 @@
 	background: url(<%= themeImagesPath %>/common/recent_changes.png) no-repeat 0 50%;
 	color: #999;
 	margin-right: 5px;
-	padding: 2px 20px;
+	padding: 2px 0px 2px 20px;
 }
 
 .portlet-journal .journal-article-status .journal-article-status-approved {
 	color: green;
-	padding-left: 0px;
 }
 
 .portlet-journal .journal-article-status .journal-article-status-draft {
