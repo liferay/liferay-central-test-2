@@ -9,47 +9,42 @@
 <tr><td rowspan="1" colspan="3">AddPageTest</td></tr>
 </thead><tbody>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>//div[@id='_145_myPlacesContainer']/ul/li[2]/a/span[1]</td>
+	<td>open</td>
+	<td>/user/joebloggs/home/</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>//div[@id='_145_myPlacesContainer']/ul/li[2]/a/span[1]</td>
+	<td>waitForVisible</td>
+	<td>addPage</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>link=Manage Pages</td>
+	<td>clickAt</td>
+	<td>addPage</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>//div[@id='_88_layoutsTreeOutput']/ul/li/a/span</td>
+	<td>waitForVisible</td>
+	<td>//input</td>
 	<td></td>
-</tr>
-<tr>
-	<td>typeKeys</td>
-	<td>_88_name_en_US</td>
-	<td>Méssagé Boards Tést Pagé</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>_88_name_en_US</td>
+	<td>//input</td>
 	<td>Méssagé Boards Tést Pagé</td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>//input[@value='Add Page']</td>
+	<td>clickAt</td>
+	<td>save</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>Your request processed successfully.</td>
+	<td>waitForVisible</td>
+	<td>link=Méssagé Boards Tést Pagé</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
+	<td>clickAtAndWait</td>
 	<td>link=Méssagé Boards Tést Pagé</td>
 	<td></td>
 </tr>

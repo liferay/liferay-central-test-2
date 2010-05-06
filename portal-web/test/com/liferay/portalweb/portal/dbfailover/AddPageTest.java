@@ -24,14 +24,15 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddPageTest extends BaseTestCase {
 	public void testAddPage() throws Exception {
+		selenium.open("/user/joebloggs/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"//div[@id='_145_myPlacesContainer']/ul/li[2]/a/span[1]")) {
+				if (selenium.isVisible("addPage")) {
 					break;
 				}
 			}
@@ -41,26 +42,48 @@ public class AddPageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"//div[@id='_145_myPlacesContainer']/ul/li[2]/a/span[1]"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Manage Pages"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"//div[@id='_88_layoutsTreeOutput']/ul/li/a/span"));
-		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_88_name_en_US",
+		selenium.clickAt("addPage", RuntimeVariables.replace(""));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("//input")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.type("//input",
 			RuntimeVariables.replace(
 				"M\u00e9ssag\u00e9 Boards T\u00e9st Pag\u00e9"));
-		selenium.type("_88_name_en_US",
-			RuntimeVariables.replace(
-				"M\u00e9ssag\u00e9 Boards T\u00e9st Pag\u00e9"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Add Page']"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
-		selenium.click(RuntimeVariables.replace(
-				"link=M\u00e9ssag\u00e9 Boards T\u00e9st Pag\u00e9"));
+		selenium.clickAt("save", RuntimeVariables.replace(""));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible(
+							"link=M\u00e9ssag\u00e9 Boards T\u00e9st Pag\u00e9")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("link=M\u00e9ssag\u00e9 Boards T\u00e9st Pag\u00e9",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 	}
 }

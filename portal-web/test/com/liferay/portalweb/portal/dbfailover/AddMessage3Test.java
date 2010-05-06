@@ -24,6 +24,25 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddMessage3Test extends BaseTestCase {
 	public void testAddMessage3() throws Exception {
+		selenium.open("/user/joebloggs/home/");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible(
+							"link=M\u00e9ssag\u00e9 Boards T\u00e9st Pag\u00e9")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(RuntimeVariables.replace(
 				"link=M\u00e9ssag\u00e9 Boards T\u00e9st Pag\u00e9"));
 		selenium.waitForPageToLoad("30000");
