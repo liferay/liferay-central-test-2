@@ -62,11 +62,11 @@ public class Header implements Serializable {
 	}
 
 	public String toString() {
-		if (_type == INTEGER_TYPE) {
-			return String.valueOf(_intValue);
-		}
-		else if (_type == DATE_TYPE) {
+		if (_type == DATE_TYPE) {
 			return String.valueOf(_dateValue);
+		}
+		else if (_type == INTEGER_TYPE) {
+			return String.valueOf(_intValue);
 		}
 		else {
 			return _stringValue;
