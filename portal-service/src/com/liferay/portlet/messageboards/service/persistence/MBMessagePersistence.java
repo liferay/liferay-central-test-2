@@ -228,6 +228,36 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageException;
 
+	public java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByUserId(
+		long userId) throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByUserId(
+		long userId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByUserId(
+		long userId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.portlet.messageboards.model.MBMessage findByUserId_First(
+		long userId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.messageboards.NoSuchMessageException;
+
+	public com.liferay.portlet.messageboards.model.MBMessage findByUserId_Last(
+		long userId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.messageboards.NoSuchMessageException;
+
+	public com.liferay.portlet.messageboards.model.MBMessage[] findByUserId_PrevAndNext(
+		long messageId, long userId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.messageboards.NoSuchMessageException;
+
 	public java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByG_U(
 		long groupId, long userId)
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -664,6 +694,9 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	public void removeByThreadReplies(long threadId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	public void removeByUserId(long userId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public void removeByG_U(long groupId, long userId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
@@ -722,6 +755,9 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countByThreadReplies(long threadId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public int countByUserId(long userId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countByG_U(long groupId, long userId)

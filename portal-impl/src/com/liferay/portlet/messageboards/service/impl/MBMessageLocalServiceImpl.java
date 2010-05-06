@@ -1484,6 +1484,20 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		return message;
 	}
 
+	public void updateUserName(long userId, String userName)
+		throws SystemException {
+
+		List<MBMessage> messages = mbMessagePersistence.findByUserId(userId);
+
+		if ((messages != null) && (messages.size() > 0)) {
+			for (MBMessage message : messages) {
+				message.setUserName(userName);
+
+				mbMessagePersistence.update(message, false);
+			}
+		}
+	}
+
 	public MBMessage updateStatus(
 			long userId, MBMessage message, ServiceContext serviceContext,
 			boolean reindex)

@@ -496,6 +496,11 @@ public class MBMessageLocalServiceUtil {
 		return getService().updateMessage(messageId, body);
 	}
 
+	public static void updateUserName(long userId, java.lang.String userName)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().updateUserName(userId, userName);
+	}
+
 	public static com.liferay.portlet.messageboards.model.MBMessage updateStatus(
 		long userId, com.liferay.portlet.messageboards.model.MBMessage message,
 		com.liferay.portal.service.ServiceContext serviceContext,

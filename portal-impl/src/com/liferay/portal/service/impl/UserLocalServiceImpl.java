@@ -2647,6 +2647,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		User user = userPersistence.findByPrimaryKey(userId);
 		Company company = companyPersistence.findByPrimaryKey(
 			user.getCompanyId());
+		String fullName = user.getFullName();
 		String password = oldPassword;
 		screenName = getScreenName(screenName);
 		emailAddress = emailAddress.trim().toLowerCase();
@@ -2822,6 +2823,12 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		Indexer indexer = IndexerRegistryUtil.getIndexer(User.class);
 
 		indexer.reindex(user);
+
+		// MBMessage
+
+		if (!fullName.equals(user.getFullName())) {
+			mbMessageLocalService.updateUserName(userId, user.getFullName());
+		}
 
 		// Permission cache
 

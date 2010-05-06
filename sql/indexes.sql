@@ -333,6 +333,7 @@ create index IX_377858D2 on MBMessage (groupId, userId, status);
 create index IX_75B95071 on MBMessage (threadId);
 create index IX_A7038CD7 on MBMessage (threadId, parentMessageId);
 create index IX_9DC8E57 on MBMessage (threadId, status);
+create index IX_7A040C32 on MBMessage (userId);
 create index IX_C57B16BC on MBMessage (uuid_);
 create unique index IX_8D12316E on MBMessage (uuid_, groupId);
 
