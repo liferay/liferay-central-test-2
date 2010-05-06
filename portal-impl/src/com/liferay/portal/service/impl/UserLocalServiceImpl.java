@@ -2820,7 +2820,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		// Message boards
 
-		if (!oldFullName.equals(user.getFullName())) {
+		if (PropsValues.MESSAGE_BOARDS_UPDATE_USER_NAME_ENABLED &&
+			(!oldFullName.equals(user.getFullName()))) {
 			mbMessageLocalService.updateUserName(userId, user.getFullName());
 		}
 
