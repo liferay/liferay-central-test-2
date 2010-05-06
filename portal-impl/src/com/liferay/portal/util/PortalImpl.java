@@ -2040,8 +2040,8 @@ public class PortalImpl implements Portal {
 				LayoutTypePortlet layoutTypePortlet =
 					(LayoutTypePortlet)layout.getLayoutType();
 
-				if (layoutTypePortlet.hasPortletId(portletId) &&
-					(getScopeGroupId(layout, portletId) == groupId)) {
+				if (layoutTypePortlet.hasDefaultScopePortletId(
+						groupId, portletId)) {
 
 					validPlid = true;
 				}

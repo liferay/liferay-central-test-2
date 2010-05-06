@@ -499,6 +499,21 @@ public class LayoutTypePortletImpl
 			LayoutTypePortletConstants.STATE_MIN);
 	}
 
+	public boolean hasDefaultScopePortletId(long groupId, String portletId)
+		throws PortalException, SystemException {
+
+		if (hasPortletId(portletId)) {
+			long scopeGroupId = PortalUtil.getScopeGroupId(
+				getLayout(), portletId);
+
+			if (groupId == scopeGroupId) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
 	public boolean hasModeAboutPortletId(String portletId) {
 		return StringUtil.contains(getModeAbout(), portletId);
 	}
