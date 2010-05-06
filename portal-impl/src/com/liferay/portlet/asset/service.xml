@@ -60,10 +60,6 @@
 			<finder-column name="name" />
 			<finder-column name="vocabularyId" />
 		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.portal" entity="User" />
 	</entity>
 	<entity name="AssetCategoryProperty" local-service="true" remote-service="true">
 
@@ -107,10 +103,6 @@
 			<finder-column name="categoryId" />
 			<finder-column name="key" />
 		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.portal" entity="User" />
 	</entity>
 	<entity name="AssetEntry" local-service="true" remote-service="true">
 
@@ -169,7 +161,6 @@
 
 		<reference package-path="com.liferay.portal" entity="Company" />
 		<reference package-path="com.liferay.portal" entity="Group" />
-		<reference package-path="com.liferay.portal" entity="User" />
 		<reference package-path="com.liferay.portlet.blogs" entity="BlogsEntry" />
 		<reference package-path="com.liferay.portlet.bookmarks" entity="BookmarksEntry" />
 		<reference package-path="com.liferay.portlet.documentlibrary" entity="DLFolder" />
@@ -271,10 +262,6 @@
 		<finder name="GroupId" return-type="Collection">
 			<finder-column name="groupId" />
 		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.portal" entity="User" />
 	</entity>
 	<entity name="AssetTagProperty" local-service="true" remote-service="true">
 
@@ -318,10 +305,6 @@
 			<finder-column name="tagId" />
 			<finder-column name="key" />
 		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.portal" entity="User" />
 	</entity>
 	<entity name="AssetTagPropertyKey" local-service="false" remote-service="false" />
 	<entity name="AssetTagStats" local-service="true" remote-service="false">
@@ -402,7 +385,6 @@
 		<!-- References -->
 
 		<reference package-path="com.liferay.portal" entity="Group" />
-		<reference package-path="com.liferay.portal" entity="User" />
 	</entity>
 	<exceptions>
 		<exception>AssetCategory</exception>

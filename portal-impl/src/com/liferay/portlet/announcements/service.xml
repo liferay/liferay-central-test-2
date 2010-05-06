@@ -30,10 +30,6 @@
 			<finder-column name="userId" />
 			<finder-column name="type" />
 		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.portal" entity="User" />
 	</entity>
 	<entity name="AnnouncementsEntry" uuid="true" local-service="true" remote-service="true">
 
@@ -91,7 +87,6 @@
 		<reference package-path="com.liferay.portal" entity="Group" />
 		<reference package-path="com.liferay.portal" entity="Organization" />
 		<reference package-path="com.liferay.portal" entity="Role" />
-		<reference package-path="com.liferay.portal" entity="User" />
 		<reference package-path="com.liferay.portal" entity="UserGroup" />
 	</entity>
 	<entity name="AnnouncementsFlag" local-service="true" remote-service="true">

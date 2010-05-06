@@ -40,10 +40,6 @@
 			<finder-column name="groupId" />
 			<finder-column name="banUserId" />
 		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.portal" entity="User" />
 	</entity>
 	<entity name="MBCategory" uuid="true" local-service="true" remote-service="true">
 
@@ -96,7 +92,6 @@
 
 		<reference package-path="com.liferay.portal" entity="Group" />
 		<reference package-path="com.liferay.portal" entity="Subscription" />
-		<reference package-path="com.liferay.portal" entity="User" />
 		<reference package-path="com.liferay.portlet.asset" entity="AssetTag" />
 		<reference package-path="com.liferay.portlet.expando" entity="ExpandoValue" />
 	</entity>
@@ -172,10 +167,6 @@
 			<finder-column name="groupId" />
 			<finder-column name="categoryId" />
 		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.portal" entity="User" />
 	</entity>
 	<entity name="MBMessage" uuid="true" local-service="true" remote-service="true">
 
@@ -306,7 +297,6 @@
 		<reference package-path="com.liferay.portal" entity="Lock" />
 		<reference package-path="com.liferay.portal" entity="PortletPreferences" />
 		<reference package-path="com.liferay.portal" entity="Subscription" />
-		<reference package-path="com.liferay.portal" entity="User" />
 		<reference package-path="com.liferay.portlet.asset" entity="AssetEntry" />
 		<reference package-path="com.liferay.portlet.blogs" entity="BlogsEntry" />
 		<reference package-path="com.liferay.portlet.ratings" entity="RatingsStats" />
@@ -360,10 +350,6 @@
 			<finder-column name="messageId" />
 			<finder-column name="flag" />
 		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.portal" entity="User" />
 	</entity>
 	<entity name="MBStatsUser" local-service="true" remote-service="false">
 
@@ -470,7 +456,6 @@
 
 		<reference package-path="com.liferay.documentlibrary" entity="DL" />
 		<reference package-path="com.liferay.portal" entity="Lock" />
-		<reference package-path="com.liferay.portal" entity="User" />
 		<reference package-path="com.liferay.portlet.asset" entity="AssetEntry" />
 		<reference package-path="com.liferay.portlet.ratings" entity="RatingsStats" />
 		<reference package-path="com.liferay.portlet.social" entity="SocialActivity" />

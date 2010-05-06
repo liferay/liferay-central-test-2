@@ -12,7 +12,6 @@
 		<reference package-path="com.liferay.portal" entity="Group" />
 		<reference package-path="com.liferay.portal" entity="Layout" />
 		<reference package-path="com.liferay.portal" entity="Role" />
-		<reference package-path="com.liferay.portal" entity="User" />
 		<reference package-path="com.liferay.portal" entity="UserGroup" />
 		<reference package-path="com.liferay.portal" entity="UserGroupRole" />
 		<reference package-path="com.liferay.portlet.asset" entity="AssetEntry" />
