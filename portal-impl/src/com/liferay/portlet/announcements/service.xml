@@ -128,5 +128,6 @@
 		<exception>EntryDisplayDate</exception>
 		<exception>EntryExpirationDate</exception>
 		<exception>EntryTitle</exception>
+		<exception>EntryURL</exception>
 	</exceptions>
 </service-builder>

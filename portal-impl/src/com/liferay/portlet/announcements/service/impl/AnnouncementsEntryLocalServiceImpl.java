@@ -39,6 +39,7 @@ import com.liferay.portlet.announcements.EntryContentException;
 import com.liferay.portlet.announcements.EntryDisplayDateException;
 import com.liferay.portlet.announcements.EntryExpirationDateException;
 import com.liferay.portlet.announcements.EntryTitleException;
+import com.liferay.portlet.announcements.EntryURLException;
 import com.liferay.portlet.announcements.model.AnnouncementsDelivery;
 import com.liferay.portlet.announcements.model.AnnouncementsEntry;
 import com.liferay.portlet.announcements.service.base.AnnouncementsEntryLocalServiceBaseImpl;
@@ -88,7 +89,7 @@ public class AnnouncementsEntryLocalServiceImpl
 
 		Date now = new Date();
 
-		validate(title, content);
+		validate(title, content, url);
 
 		long entryId = counterLocalService.increment();
 
@@ -320,7 +321,7 @@ public class AnnouncementsEntryLocalServiceImpl
 			expirationDateHour, expirationDateMinute, user.getTimeZone(),
 			new EntryExpirationDateException());
 
-		validate(title, content);
+		validate(title, content, url);
 
 		AnnouncementsEntry entry =
 			announcementsEntryPersistence.findByPrimaryKey(entryId);
@@ -529,11 +530,15 @@ public class AnnouncementsEntryLocalServiceImpl
 		mailService.sendEmail(message);
 	}
 
-	protected void validate(String title, String content)
+	protected void validate(String title, String content, String url)
 		throws PortalException {
 
 		if (Validator.isNull(title)) {
 			throw new EntryTitleException();
+		}
+
+		if (!Validator.isUrl(url)) {
+			throw new EntryURLException();
 		}
 
 		if (Validator.isNull(content)) {

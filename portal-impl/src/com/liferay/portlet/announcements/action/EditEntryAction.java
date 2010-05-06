@@ -27,6 +27,7 @@ import com.liferay.portlet.announcements.EntryContentException;
 import com.liferay.portlet.announcements.EntryDisplayDateException;
 import com.liferay.portlet.announcements.EntryExpirationDateException;
 import com.liferay.portlet.announcements.EntryTitleException;
+import com.liferay.portlet.announcements.EntryURLException;
 import com.liferay.portlet.announcements.NoSuchEntryException;
 import com.liferay.portlet.announcements.service.AnnouncementsEntryServiceUtil;
 
@@ -73,6 +74,7 @@ public class EditEntryAction extends PortletAction {
 				e instanceof EntryDisplayDateException ||
 				e instanceof EntryExpirationDateException ||
 				e instanceof EntryTitleException ||
+				e instanceof EntryURLException ||
 				e instanceof NoSuchEntryException ||
 				e instanceof PrincipalException) {
 

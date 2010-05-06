@@ -24,6 +24,7 @@
 <%@ page import="com.liferay.portlet.announcements.EntryDisplayDateException" %>
 <%@ page import="com.liferay.portlet.announcements.EntryExpirationDateException" %>
 <%@ page import="com.liferay.portlet.announcements.EntryTitleException" %>
+<%@ page import="com.liferay.portlet.announcements.EntryURLException" %>
 <%@ page import="com.liferay.portlet.announcements.NoSuchEntryException" %>
 <%@ page import="com.liferay.portlet.announcements.NoSuchFlagException" %>
 <%@ page import="com.liferay.portlet.announcements.model.AnnouncementsEntry" %>

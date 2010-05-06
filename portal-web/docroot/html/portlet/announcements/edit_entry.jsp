@@ -61,6 +61,7 @@ int priority = BeanParamUtil.getInteger(entry, request, "priority");
 	<liferay-ui:error exception="<%= EntryDisplayDateException.class %>" message="please-enter-a-valid-display-date" />
 	<liferay-ui:error exception="<%= EntryExpirationDateException.class %>" message="please-enter-a-valid-expiration-date" />
 	<liferay-ui:error exception="<%= EntryTitleException.class %>" message="please-enter-a-valid-title" />
+	<liferay-ui:error exception="<%= EntryURLException.class %>" message="please-enter-a-valid-url" />
 
 	<aui:model-context bean="<%= entry %>" model="<%= AnnouncementsEntry.class %>" />
 
