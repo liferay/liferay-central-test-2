@@ -160,6 +160,10 @@
 			<finder-column name="actionId" />
 			<finder-column name="active" />
 		</finder>
+
+		<!-- References -->
+
+		<reference package-path="com.liferay.portlet.asset" entity="AssetEntry" />
 	</entity>
 	<entity name="SocialEquitySetting" local-service="true" remote-service="false">
 

@@ -93,8 +93,6 @@ public interface DestinationNames {
 
 	public static final String SEARCH_WRITER = "liferay/search_writer";
 
-	public static final String SOCIAL_EQUITY = "liferay/social_equity";
-
 	public static final String WIKI = "liferay/wiki";
 
 	public static final String WORKFLOW_DEFINITION =
