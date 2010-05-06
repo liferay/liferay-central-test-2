@@ -19,10 +19,12 @@ import com.liferay.portal.kernel.nio.charset.CharsetEncoderUtil;
 import com.liferay.portal.kernel.servlet.ServletContextUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.util.MinifierUtil;
 import com.liferay.util.SystemProperties;
 import com.liferay.util.servlet.ServletResponseUtil;
 
@@ -83,6 +85,16 @@ public class ComboServlet extends HttpServlet {
 			String content = sb.toString();
 
 			if (Validator.isNotNull(content)) {
+				String minifierType = ParamUtil.getString(
+					request, "minifierType");
+
+				if (minifierType.equals("css")) {
+					content = MinifierUtil.minifyCss(content);
+				}
+				else if (minifierType.equals("js")) {
+					content = MinifierUtil.minifyJavaScript(content);
+				}
+
 				ByteBuffer contentByteBuffer = CharsetEncoderUtil.encode(
 					StringPool.UTF8, content);
 
