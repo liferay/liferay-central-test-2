@@ -131,6 +131,20 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl<LayoutSet>
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	public void clearCache(LayoutSet layoutSet) {
+		EntityCacheUtil.removeResult(LayoutSetModelImpl.ENTITY_CACHE_ENABLED,
+			LayoutSetImpl.class, layoutSet.getPrimaryKey());
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_VIRTUALHOST,
+			new Object[] { layoutSet.getVirtualHost() });
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_P,
+			new Object[] {
+				new Long(layoutSet.getGroupId()),
+				Boolean.valueOf(layoutSet.getPrivateLayout())
+			});
+	}
+
 	public LayoutSet create(long layoutSetId) {
 		LayoutSet layoutSet = new LayoutSetImpl();
 

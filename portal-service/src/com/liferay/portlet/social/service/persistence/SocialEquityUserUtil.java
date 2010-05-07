@@ -44,6 +44,13 @@ public class SocialEquityUserUtil {
 	}
 
 	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(SocialEquityUser)
+	 */
+	public static void clearCache(SocialEquityUser socialEquityUser) {
+		getPersistence().clearCache(socialEquityUser);
+	}
+
+	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#countWithDynamicQuery(DynamicQuery)
 	 */
 	public long countWithDynamicQuery(DynamicQuery dynamicQuery)

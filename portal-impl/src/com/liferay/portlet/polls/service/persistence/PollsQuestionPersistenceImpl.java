@@ -147,6 +147,16 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	public void clearCache(PollsQuestion pollsQuestion) {
+		EntityCacheUtil.removeResult(PollsQuestionModelImpl.ENTITY_CACHE_ENABLED,
+			PollsQuestionImpl.class, pollsQuestion.getPrimaryKey());
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
+			new Object[] {
+				pollsQuestion.getUuid(), new Long(pollsQuestion.getGroupId())
+			});
+	}
+
 	public PollsQuestion create(long questionId) {
 		PollsQuestion pollsQuestion = new PollsQuestionImpl();
 

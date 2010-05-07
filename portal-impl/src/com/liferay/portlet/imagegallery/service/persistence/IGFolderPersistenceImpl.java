@@ -198,6 +198,22 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	public void clearCache(IGFolder igFolder) {
+		EntityCacheUtil.removeResult(IGFolderModelImpl.ENTITY_CACHE_ENABLED,
+			IGFolderImpl.class, igFolder.getPrimaryKey());
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
+			new Object[] { igFolder.getUuid(), new Long(igFolder.getGroupId()) });
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_P_N,
+			new Object[] {
+				new Long(igFolder.getGroupId()),
+				new Long(igFolder.getParentFolderId()),
+				
+			igFolder.getName()
+			});
+	}
+
 	public IGFolder create(long folderId) {
 		IGFolder igFolder = new IGFolderImpl();
 

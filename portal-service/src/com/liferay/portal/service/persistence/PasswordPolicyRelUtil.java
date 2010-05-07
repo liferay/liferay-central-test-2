@@ -43,6 +43,13 @@ public class PasswordPolicyRelUtil {
 	}
 
 	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(PasswordPolicyRel)
+	 */
+	public static void clearCache(PasswordPolicyRel passwordPolicyRel) {
+		getPersistence().clearCache(passwordPolicyRel);
+	}
+
+	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#countWithDynamicQuery(DynamicQuery)
 	 */
 	public long countWithDynamicQuery(DynamicQuery dynamicQuery)

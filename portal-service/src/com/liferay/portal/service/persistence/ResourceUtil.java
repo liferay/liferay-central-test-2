@@ -43,6 +43,13 @@ public class ResourceUtil {
 	}
 
 	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(Resource)
+	 */
+	public static void clearCache(Resource resource) {
+		getPersistence().clearCache(resource);
+	}
+
+	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#countWithDynamicQuery(DynamicQuery)
 	 */
 	public long countWithDynamicQuery(DynamicQuery dynamicQuery)

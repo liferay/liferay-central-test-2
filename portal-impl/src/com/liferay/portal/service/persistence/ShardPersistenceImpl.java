@@ -114,6 +114,19 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	public void clearCache(Shard shard) {
+		EntityCacheUtil.removeResult(ShardModelImpl.ENTITY_CACHE_ENABLED,
+			ShardImpl.class, shard.getPrimaryKey());
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_NAME,
+			new Object[] { shard.getName() });
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_C,
+			new Object[] {
+				new Long(shard.getClassNameId()), new Long(shard.getClassPK())
+			});
+	}
+
 	public Shard create(long shardId) {
 		Shard shard = new ShardImpl();
 

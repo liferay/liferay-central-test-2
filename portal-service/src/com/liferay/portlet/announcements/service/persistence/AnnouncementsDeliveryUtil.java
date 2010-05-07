@@ -44,6 +44,13 @@ public class AnnouncementsDeliveryUtil {
 	}
 
 	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(AnnouncementsDelivery)
+	 */
+	public static void clearCache(AnnouncementsDelivery announcementsDelivery) {
+		getPersistence().clearCache(announcementsDelivery);
+	}
+
+	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#countWithDynamicQuery(DynamicQuery)
 	 */
 	public long countWithDynamicQuery(DynamicQuery dynamicQuery)

@@ -43,6 +43,13 @@ public class ReleaseUtil {
 	}
 
 	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(Release)
+	 */
+	public static void clearCache(Release release) {
+		getPersistence().clearCache(release);
+	}
+
+	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#countWithDynamicQuery(DynamicQuery)
 	 */
 	public long countWithDynamicQuery(DynamicQuery dynamicQuery)

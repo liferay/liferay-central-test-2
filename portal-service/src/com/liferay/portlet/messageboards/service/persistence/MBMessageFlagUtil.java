@@ -44,6 +44,13 @@ public class MBMessageFlagUtil {
 	}
 
 	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(MBMessageFlag)
+	 */
+	public static void clearCache(MBMessageFlag mbMessageFlag) {
+		getPersistence().clearCache(mbMessageFlag);
+	}
+
+	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#countWithDynamicQuery(DynamicQuery)
 	 */
 	public long countWithDynamicQuery(DynamicQuery dynamicQuery)

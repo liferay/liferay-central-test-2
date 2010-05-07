@@ -115,6 +115,11 @@ public class SocialEquitySettingPersistenceImpl extends BasePersistenceImpl<Soci
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	public void clearCache(SocialEquitySetting socialEquitySetting) {
+		EntityCacheUtil.removeResult(SocialEquitySettingModelImpl.ENTITY_CACHE_ENABLED,
+			SocialEquitySettingImpl.class, socialEquitySetting.getPrimaryKey());
+	}
+
 	public SocialEquitySetting create(long equitySettingId) {
 		SocialEquitySetting socialEquitySetting = new SocialEquitySettingImpl();
 

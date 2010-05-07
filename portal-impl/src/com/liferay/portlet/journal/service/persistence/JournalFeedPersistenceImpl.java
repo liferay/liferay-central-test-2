@@ -157,6 +157,23 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	public void clearCache(JournalFeed journalFeed) {
+		EntityCacheUtil.removeResult(JournalFeedModelImpl.ENTITY_CACHE_ENABLED,
+			JournalFeedImpl.class, journalFeed.getPrimaryKey());
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
+			new Object[] {
+				journalFeed.getUuid(), new Long(journalFeed.getGroupId())
+			});
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_F,
+			new Object[] {
+				new Long(journalFeed.getGroupId()),
+				
+			journalFeed.getFeedId()
+			});
+	}
+
 	public JournalFeed create(long id) {
 		JournalFeed journalFeed = new JournalFeedImpl();
 

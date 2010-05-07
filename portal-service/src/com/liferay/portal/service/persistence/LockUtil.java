@@ -43,6 +43,13 @@ public class LockUtil {
 	}
 
 	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(Lock)
+	 */
+	public static void clearCache(Lock lock) {
+		getPersistence().clearCache(lock);
+	}
+
+	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#countWithDynamicQuery(DynamicQuery)
 	 */
 	public long countWithDynamicQuery(DynamicQuery dynamicQuery)

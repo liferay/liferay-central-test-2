@@ -44,6 +44,13 @@ public class ShoppingCategoryUtil {
 	}
 
 	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(ShoppingCategory)
+	 */
+	public static void clearCache(ShoppingCategory shoppingCategory) {
+		getPersistence().clearCache(shoppingCategory);
+	}
+
+	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#countWithDynamicQuery(DynamicQuery)
 	 */
 	public long countWithDynamicQuery(DynamicQuery dynamicQuery)

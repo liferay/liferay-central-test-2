@@ -185,6 +185,11 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	public void clearCache(EmailAddress emailAddress) {
+		EntityCacheUtil.removeResult(EmailAddressModelImpl.ENTITY_CACHE_ENABLED,
+			EmailAddressImpl.class, emailAddress.getPrimaryKey());
+	}
+
 	public EmailAddress create(long emailAddressId) {
 		EmailAddress emailAddress = new EmailAddressImpl();
 

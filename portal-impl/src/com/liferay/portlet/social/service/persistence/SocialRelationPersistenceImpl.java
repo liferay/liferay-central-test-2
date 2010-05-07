@@ -257,6 +257,18 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	public void clearCache(SocialRelation socialRelation) {
+		EntityCacheUtil.removeResult(SocialRelationModelImpl.ENTITY_CACHE_ENABLED,
+			SocialRelationImpl.class, socialRelation.getPrimaryKey());
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_U1_U2_T,
+			new Object[] {
+				new Long(socialRelation.getUserId1()),
+				new Long(socialRelation.getUserId2()),
+				new Integer(socialRelation.getType())
+			});
+	}
+
 	public SocialRelation create(long relationId) {
 		SocialRelation socialRelation = new SocialRelationImpl();
 

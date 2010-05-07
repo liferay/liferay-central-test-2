@@ -44,6 +44,13 @@ public class AssetTagUtil {
 	}
 
 	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(AssetTag)
+	 */
+	public static void clearCache(AssetTag assetTag) {
+		getPersistence().clearCache(assetTag);
+	}
+
+	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#countWithDynamicQuery(DynamicQuery)
 	 */
 	public long countWithDynamicQuery(DynamicQuery dynamicQuery)

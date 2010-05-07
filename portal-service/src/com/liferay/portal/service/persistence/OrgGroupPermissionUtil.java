@@ -43,6 +43,13 @@ public class OrgGroupPermissionUtil {
 	}
 
 	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(OrgGroupPermission)
+	 */
+	public static void clearCache(OrgGroupPermission orgGroupPermission) {
+		getPersistence().clearCache(orgGroupPermission);
+	}
+
+	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#countWithDynamicQuery(DynamicQuery)
 	 */
 	public long countWithDynamicQuery(DynamicQuery dynamicQuery)

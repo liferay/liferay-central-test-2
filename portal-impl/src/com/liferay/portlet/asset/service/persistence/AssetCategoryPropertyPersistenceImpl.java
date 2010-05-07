@@ -165,6 +165,19 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	public void clearCache(AssetCategoryProperty assetCategoryProperty) {
+		EntityCacheUtil.removeResult(AssetCategoryPropertyModelImpl.ENTITY_CACHE_ENABLED,
+			AssetCategoryPropertyImpl.class,
+			assetCategoryProperty.getPrimaryKey());
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_CA_K,
+			new Object[] {
+				new Long(assetCategoryProperty.getCategoryId()),
+				
+			assetCategoryProperty.getKey()
+			});
+	}
+
 	public AssetCategoryProperty create(long categoryPropertyId) {
 		AssetCategoryProperty assetCategoryProperty = new AssetCategoryPropertyImpl();
 

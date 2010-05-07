@@ -252,6 +252,41 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	public void clearCache(Group group) {
+		EntityCacheUtil.removeResult(GroupModelImpl.ENTITY_CACHE_ENABLED,
+			GroupImpl.class, group.getPrimaryKey());
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_LIVEGROUPID,
+			new Object[] { new Long(group.getLiveGroupId()) });
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_N,
+			new Object[] { new Long(group.getCompanyId()), group.getName() });
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_F,
+			new Object[] { new Long(group.getCompanyId()), group.getFriendlyURL() });
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_C_C,
+			new Object[] {
+				new Long(group.getCompanyId()), new Long(group.getClassNameId()),
+				new Long(group.getClassPK())
+			});
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_L_N,
+			new Object[] {
+				new Long(group.getCompanyId()), new Long(group.getLiveGroupId()),
+				
+			group.getName()
+			});
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_C_L_N,
+			new Object[] {
+				new Long(group.getCompanyId()), new Long(group.getClassNameId()),
+				new Long(group.getLiveGroupId()),
+				
+			group.getName()
+			});
+	}
+
 	public Group create(long groupId) {
 		Group group = new GroupImpl();
 

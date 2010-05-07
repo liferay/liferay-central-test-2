@@ -43,6 +43,13 @@ public class UserIdMapperUtil {
 	}
 
 	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(UserIdMapper)
+	 */
+	public static void clearCache(UserIdMapper userIdMapper) {
+		getPersistence().clearCache(userIdMapper);
+	}
+
+	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#countWithDynamicQuery(DynamicQuery)
 	 */
 	public long countWithDynamicQuery(DynamicQuery dynamicQuery)

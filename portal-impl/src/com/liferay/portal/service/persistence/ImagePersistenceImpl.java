@@ -106,6 +106,11 @@ public class ImagePersistenceImpl extends BasePersistenceImpl<Image>
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	public void clearCache(Image image) {
+		EntityCacheUtil.removeResult(ImageModelImpl.ENTITY_CACHE_ENABLED,
+			ImageImpl.class, image.getPrimaryKey());
+	}
+
 	public Image create(long imageId) {
 		Image image = new ImageImpl();
 

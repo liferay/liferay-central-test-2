@@ -44,6 +44,13 @@ public class DLFileRankUtil {
 	}
 
 	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(DLFileRank)
+	 */
+	public static void clearCache(DLFileRank dlFileRank) {
+		getPersistence().clearCache(dlFileRank);
+	}
+
+	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#countWithDynamicQuery(DynamicQuery)
 	 */
 	public long countWithDynamicQuery(DynamicQuery dynamicQuery)

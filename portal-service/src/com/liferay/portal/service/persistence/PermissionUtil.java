@@ -43,6 +43,13 @@ public class PermissionUtil {
 	}
 
 	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(Permission)
+	 */
+	public static void clearCache(Permission permission) {
+		getPersistence().clearCache(permission);
+	}
+
+	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#countWithDynamicQuery(DynamicQuery)
 	 */
 	public long countWithDynamicQuery(DynamicQuery dynamicQuery)

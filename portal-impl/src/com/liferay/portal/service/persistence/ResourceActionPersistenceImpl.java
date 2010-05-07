@@ -124,6 +124,14 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	public void clearCache(ResourceAction resourceAction) {
+		EntityCacheUtil.removeResult(ResourceActionModelImpl.ENTITY_CACHE_ENABLED,
+			ResourceActionImpl.class, resourceAction.getPrimaryKey());
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_N_A,
+			new Object[] { resourceAction.getName(), resourceAction.getActionId() });
+	}
+
 	public ResourceAction create(long resourceActionId) {
 		ResourceAction resourceAction = new ResourceActionImpl();
 

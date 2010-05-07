@@ -43,6 +43,13 @@ public class SubscriptionUtil {
 	}
 
 	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(Subscription)
+	 */
+	public static void clearCache(Subscription subscription) {
+		getPersistence().clearCache(subscription);
+	}
+
+	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#countWithDynamicQuery(DynamicQuery)
 	 */
 	public long countWithDynamicQuery(DynamicQuery dynamicQuery)

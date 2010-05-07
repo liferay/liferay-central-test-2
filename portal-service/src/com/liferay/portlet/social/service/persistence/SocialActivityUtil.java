@@ -44,6 +44,13 @@ public class SocialActivityUtil {
 	}
 
 	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(SocialActivity)
+	 */
+	public static void clearCache(SocialActivity socialActivity) {
+		getPersistence().clearCache(socialActivity);
+	}
+
+	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#countWithDynamicQuery(DynamicQuery)
 	 */
 	public long countWithDynamicQuery(DynamicQuery dynamicQuery)

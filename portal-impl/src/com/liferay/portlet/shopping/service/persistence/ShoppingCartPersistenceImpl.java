@@ -141,6 +141,17 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	public void clearCache(ShoppingCart shoppingCart) {
+		EntityCacheUtil.removeResult(ShoppingCartModelImpl.ENTITY_CACHE_ENABLED,
+			ShoppingCartImpl.class, shoppingCart.getPrimaryKey());
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_U,
+			new Object[] {
+				new Long(shoppingCart.getGroupId()),
+				new Long(shoppingCart.getUserId())
+			});
+	}
+
 	public ShoppingCart create(long cartId) {
 		ShoppingCart shoppingCart = new ShoppingCartImpl();
 

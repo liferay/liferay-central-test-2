@@ -170,6 +170,20 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	public void clearCache(DLFileRank dlFileRank) {
+		EntityCacheUtil.removeResult(DLFileRankModelImpl.ENTITY_CACHE_ENABLED,
+			DLFileRankImpl.class, dlFileRank.getPrimaryKey());
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_U_F_N,
+			new Object[] {
+				new Long(dlFileRank.getCompanyId()),
+				new Long(dlFileRank.getUserId()),
+				new Long(dlFileRank.getFolderId()),
+				
+			dlFileRank.getName()
+			});
+	}
+
 	public DLFileRank create(long fileRankId) {
 		DLFileRank dlFileRank = new DLFileRankImpl();
 

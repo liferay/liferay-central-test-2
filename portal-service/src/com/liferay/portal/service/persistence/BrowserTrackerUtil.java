@@ -43,6 +43,13 @@ public class BrowserTrackerUtil {
 	}
 
 	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(BrowserTracker)
+	 */
+	public static void clearCache(BrowserTracker browserTracker) {
+		getPersistence().clearCache(browserTracker);
+	}
+
+	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#countWithDynamicQuery(DynamicQuery)
 	 */
 	public long countWithDynamicQuery(DynamicQuery dynamicQuery)

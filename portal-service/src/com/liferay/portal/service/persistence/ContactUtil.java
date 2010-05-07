@@ -43,6 +43,13 @@ public class ContactUtil {
 	}
 
 	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(Contact)
+	 */
+	public static void clearCache(Contact contact) {
+		getPersistence().clearCache(contact);
+	}
+
+	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#countWithDynamicQuery(DynamicQuery)
 	 */
 	public long countWithDynamicQuery(DynamicQuery dynamicQuery)

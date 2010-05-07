@@ -184,6 +184,16 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	public void clearCache(BookmarksEntry bookmarksEntry) {
+		EntityCacheUtil.removeResult(BookmarksEntryModelImpl.ENTITY_CACHE_ENABLED,
+			BookmarksEntryImpl.class, bookmarksEntry.getPrimaryKey());
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
+			new Object[] {
+				bookmarksEntry.getUuid(), new Long(bookmarksEntry.getGroupId())
+			});
+	}
+
 	public BookmarksEntry create(long entryId) {
 		BookmarksEntry bookmarksEntry = new BookmarksEntryImpl();
 

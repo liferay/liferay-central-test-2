@@ -43,6 +43,13 @@ public class ClassNameUtil {
 	}
 
 	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(ClassName)
+	 */
+	public static void clearCache(ClassName className) {
+		getPersistence().clearCache(className);
+	}
+
+	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#countWithDynamicQuery(DynamicQuery)
 	 */
 	public long countWithDynamicQuery(DynamicQuery dynamicQuery)

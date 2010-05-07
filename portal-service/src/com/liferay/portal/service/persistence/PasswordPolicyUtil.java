@@ -43,6 +43,13 @@ public class PasswordPolicyUtil {
 	}
 
 	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(PasswordPolicy)
+	 */
+	public static void clearCache(PasswordPolicy passwordPolicy) {
+		getPersistence().clearCache(passwordPolicy);
+	}
+
+	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#countWithDynamicQuery(DynamicQuery)
 	 */
 	public long countWithDynamicQuery(DynamicQuery dynamicQuery)

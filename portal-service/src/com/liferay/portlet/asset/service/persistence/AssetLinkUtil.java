@@ -44,6 +44,13 @@ public class AssetLinkUtil {
 	}
 
 	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(AssetLink)
+	 */
+	public static void clearCache(AssetLink assetLink) {
+		getPersistence().clearCache(assetLink);
+	}
+
+	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#countWithDynamicQuery(DynamicQuery)
 	 */
 	public long countWithDynamicQuery(DynamicQuery dynamicQuery)

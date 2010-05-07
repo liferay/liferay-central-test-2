@@ -43,6 +43,13 @@ public class UserGroupUtil {
 	}
 
 	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(UserGroup)
+	 */
+	public static void clearCache(UserGroup userGroup) {
+		getPersistence().clearCache(userGroup);
+	}
+
+	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#countWithDynamicQuery(DynamicQuery)
 	 */
 	public long countWithDynamicQuery(DynamicQuery dynamicQuery)

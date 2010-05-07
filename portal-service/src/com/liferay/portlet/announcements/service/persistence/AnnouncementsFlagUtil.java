@@ -44,6 +44,13 @@ public class AnnouncementsFlagUtil {
 	}
 
 	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(AnnouncementsFlag)
+	 */
+	public static void clearCache(AnnouncementsFlag announcementsFlag) {
+		getPersistence().clearCache(announcementsFlag);
+	}
+
+	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#countWithDynamicQuery(DynamicQuery)
 	 */
 	public long countWithDynamicQuery(DynamicQuery dynamicQuery)

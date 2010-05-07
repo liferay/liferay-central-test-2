@@ -132,6 +132,11 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl<Shoppin
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	public void clearCache(ShoppingCategory shoppingCategory) {
+		EntityCacheUtil.removeResult(ShoppingCategoryModelImpl.ENTITY_CACHE_ENABLED,
+			ShoppingCategoryImpl.class, shoppingCategory.getPrimaryKey());
+	}
+
 	public ShoppingCategory create(long categoryId) {
 		ShoppingCategory shoppingCategory = new ShoppingCategoryImpl();
 

@@ -43,6 +43,13 @@ public class PortletUtil {
 	}
 
 	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(Portlet)
+	 */
+	public static void clearCache(Portlet portlet) {
+		getPersistence().clearCache(portlet);
+	}
+
+	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#countWithDynamicQuery(DynamicQuery)
 	 */
 	public long countWithDynamicQuery(DynamicQuery dynamicQuery)

@@ -44,6 +44,13 @@ public class AssetCategoryUtil {
 	}
 
 	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(AssetCategory)
+	 */
+	public static void clearCache(AssetCategory assetCategory) {
+		getPersistence().clearCache(assetCategory);
+	}
+
+	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#countWithDynamicQuery(DynamicQuery)
 	 */
 	public long countWithDynamicQuery(DynamicQuery dynamicQuery)

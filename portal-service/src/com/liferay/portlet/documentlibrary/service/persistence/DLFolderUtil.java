@@ -44,6 +44,13 @@ public class DLFolderUtil {
 	}
 
 	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(DLFolder)
+	 */
+	public static void clearCache(DLFolder dlFolder) {
+		getPersistence().clearCache(dlFolder);
+	}
+
+	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#countWithDynamicQuery(DynamicQuery)
 	 */
 	public long countWithDynamicQuery(DynamicQuery dynamicQuery)

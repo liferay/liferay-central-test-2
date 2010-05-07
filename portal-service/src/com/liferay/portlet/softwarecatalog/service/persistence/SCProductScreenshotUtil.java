@@ -44,6 +44,13 @@ public class SCProductScreenshotUtil {
 	}
 
 	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(SCProductScreenshot)
+	 */
+	public static void clearCache(SCProductScreenshot scProductScreenshot) {
+		getPersistence().clearCache(scProductScreenshot);
+	}
+
+	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#countWithDynamicQuery(DynamicQuery)
 	 */
 	public long countWithDynamicQuery(DynamicQuery dynamicQuery)

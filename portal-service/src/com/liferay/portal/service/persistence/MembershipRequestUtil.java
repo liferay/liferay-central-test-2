@@ -43,6 +43,13 @@ public class MembershipRequestUtil {
 	}
 
 	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(MembershipRequest)
+	 */
+	public static void clearCache(MembershipRequest membershipRequest) {
+		getPersistence().clearCache(membershipRequest);
+	}
+
+	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#countWithDynamicQuery(DynamicQuery)
 	 */
 	public long countWithDynamicQuery(DynamicQuery dynamicQuery)

@@ -44,6 +44,13 @@ public class PollsChoiceUtil {
 	}
 
 	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(PollsChoice)
+	 */
+	public static void clearCache(PollsChoice pollsChoice) {
+		getPersistence().clearCache(pollsChoice);
+	}
+
+	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#countWithDynamicQuery(DynamicQuery)
 	 */
 	public long countWithDynamicQuery(DynamicQuery dynamicQuery)

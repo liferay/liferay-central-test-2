@@ -181,6 +181,24 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	public void clearCache(AssetVocabulary assetVocabulary) {
+		EntityCacheUtil.removeResult(AssetVocabularyModelImpl.ENTITY_CACHE_ENABLED,
+			AssetVocabularyImpl.class, assetVocabulary.getPrimaryKey());
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
+			new Object[] {
+				assetVocabulary.getUuid(),
+				new Long(assetVocabulary.getGroupId())
+			});
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_N,
+			new Object[] {
+				new Long(assetVocabulary.getGroupId()),
+				
+			assetVocabulary.getName()
+			});
+	}
+
 	public AssetVocabulary create(long vocabularyId) {
 		AssetVocabulary assetVocabulary = new AssetVocabularyImpl();
 

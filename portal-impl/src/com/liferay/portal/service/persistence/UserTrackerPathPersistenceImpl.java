@@ -111,6 +111,11 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	public void clearCache(UserTrackerPath userTrackerPath) {
+		EntityCacheUtil.removeResult(UserTrackerPathModelImpl.ENTITY_CACHE_ENABLED,
+			UserTrackerPathImpl.class, userTrackerPath.getPrimaryKey());
+	}
+
 	public UserTrackerPath create(long userTrackerPathId) {
 		UserTrackerPath userTrackerPath = new UserTrackerPathImpl();
 

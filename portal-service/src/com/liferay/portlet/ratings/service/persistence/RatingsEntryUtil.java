@@ -44,6 +44,13 @@ public class RatingsEntryUtil {
 	}
 
 	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(RatingsEntry)
+	 */
+	public static void clearCache(RatingsEntry ratingsEntry) {
+		getPersistence().clearCache(ratingsEntry);
+	}
+
+	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#countWithDynamicQuery(DynamicQuery)
 	 */
 	public long countWithDynamicQuery(DynamicQuery dynamicQuery)

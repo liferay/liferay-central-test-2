@@ -145,6 +145,11 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	public void clearCache(MembershipRequest membershipRequest) {
+		EntityCacheUtil.removeResult(MembershipRequestModelImpl.ENTITY_CACHE_ENABLED,
+			MembershipRequestImpl.class, membershipRequest.getPrimaryKey());
+	}
+
 	public MembershipRequest create(long membershipRequestId) {
 		MembershipRequest membershipRequest = new MembershipRequestImpl();
 

@@ -44,6 +44,13 @@ public class AssetVocabularyUtil {
 	}
 
 	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(AssetVocabulary)
+	 */
+	public static void clearCache(AssetVocabulary assetVocabulary) {
+		getPersistence().clearCache(assetVocabulary);
+	}
+
+	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#countWithDynamicQuery(DynamicQuery)
 	 */
 	public long countWithDynamicQuery(DynamicQuery dynamicQuery)

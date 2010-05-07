@@ -43,6 +43,13 @@ public class PhoneUtil {
 	}
 
 	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(Phone)
+	 */
+	public static void clearCache(Phone phone) {
+		getPersistence().clearCache(phone);
+	}
+
+	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#countWithDynamicQuery(DynamicQuery)
 	 */
 	public long countWithDynamicQuery(DynamicQuery dynamicQuery)

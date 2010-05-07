@@ -44,6 +44,13 @@ public class MBStatsUserUtil {
 	}
 
 	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(MBStatsUser)
+	 */
+	public static void clearCache(MBStatsUser mbStatsUser) {
+		getPersistence().clearCache(mbStatsUser);
+	}
+
+	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#countWithDynamicQuery(DynamicQuery)
 	 */
 	public long countWithDynamicQuery(DynamicQuery dynamicQuery)

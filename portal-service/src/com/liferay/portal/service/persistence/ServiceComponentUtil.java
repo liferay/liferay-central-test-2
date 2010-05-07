@@ -43,6 +43,13 @@ public class ServiceComponentUtil {
 	}
 
 	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(ServiceComponent)
+	 */
+	public static void clearCache(ServiceComponent serviceComponent) {
+		getPersistence().clearCache(serviceComponent);
+	}
+
+	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#countWithDynamicQuery(DynamicQuery)
 	 */
 	public long countWithDynamicQuery(DynamicQuery dynamicQuery)

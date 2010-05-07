@@ -171,6 +171,27 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	public void clearCache(ShoppingItem shoppingItem) {
+		EntityCacheUtil.removeResult(ShoppingItemModelImpl.ENTITY_CACHE_ENABLED,
+			ShoppingItemImpl.class, shoppingItem.getPrimaryKey());
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_SMALLIMAGEID,
+			new Object[] { new Long(shoppingItem.getSmallImageId()) });
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_MEDIUMIMAGEID,
+			new Object[] { new Long(shoppingItem.getMediumImageId()) });
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_LARGEIMAGEID,
+			new Object[] { new Long(shoppingItem.getLargeImageId()) });
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_S,
+			new Object[] {
+				new Long(shoppingItem.getCompanyId()),
+				
+			shoppingItem.getSku()
+			});
+	}
+
 	public ShoppingItem create(long itemId) {
 		ShoppingItem shoppingItem = new ShoppingItemImpl();
 

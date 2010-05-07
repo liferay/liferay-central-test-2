@@ -176,6 +176,15 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	public void clearCache(MBCategory mbCategory) {
+		EntityCacheUtil.removeResult(MBCategoryModelImpl.ENTITY_CACHE_ENABLED,
+			MBCategoryImpl.class, mbCategory.getPrimaryKey());
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
+			new Object[] { mbCategory.getUuid(), new Long(
+					mbCategory.getGroupId()) });
+	}
+
 	public MBCategory create(long categoryId) {
 		MBCategory mbCategory = new MBCategoryImpl();
 

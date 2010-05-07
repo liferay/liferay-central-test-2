@@ -252,6 +252,22 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	public void clearCache(JournalContentSearch journalContentSearch) {
+		EntityCacheUtil.removeResult(JournalContentSearchModelImpl.ENTITY_CACHE_ENABLED,
+			JournalContentSearchImpl.class, journalContentSearch.getPrimaryKey());
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_P_L_P_A,
+			new Object[] {
+				new Long(journalContentSearch.getGroupId()),
+				Boolean.valueOf(journalContentSearch.getPrivateLayout()),
+				new Long(journalContentSearch.getLayoutId()),
+				
+			journalContentSearch.getPortletId(),
+				
+			journalContentSearch.getArticleId()
+			});
+	}
+
 	public JournalContentSearch create(long contentSearchId) {
 		JournalContentSearch journalContentSearch = new JournalContentSearchImpl();
 

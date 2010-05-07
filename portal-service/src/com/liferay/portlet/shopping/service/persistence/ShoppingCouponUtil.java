@@ -44,6 +44,13 @@ public class ShoppingCouponUtil {
 	}
 
 	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(ShoppingCoupon)
+	 */
+	public static void clearCache(ShoppingCoupon shoppingCoupon) {
+		getPersistence().clearCache(shoppingCoupon);
+	}
+
+	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#countWithDynamicQuery(DynamicQuery)
 	 */
 	public long countWithDynamicQuery(DynamicQuery dynamicQuery)

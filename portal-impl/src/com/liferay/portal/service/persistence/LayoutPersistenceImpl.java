@@ -256,6 +256,32 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	public void clearCache(Layout layout) {
+		EntityCacheUtil.removeResult(LayoutModelImpl.ENTITY_CACHE_ENABLED,
+			LayoutImpl.class, layout.getPrimaryKey());
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_DLFOLDERID,
+			new Object[] { new Long(layout.getDlFolderId()) });
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_ICONIMAGEID,
+			new Object[] { new Long(layout.getIconImageId()) });
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_P_L,
+			new Object[] {
+				new Long(layout.getGroupId()),
+				Boolean.valueOf(layout.getPrivateLayout()),
+				new Long(layout.getLayoutId())
+			});
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_P_F,
+			new Object[] {
+				new Long(layout.getGroupId()),
+				Boolean.valueOf(layout.getPrivateLayout()),
+				
+			layout.getFriendlyURL()
+			});
+	}
+
 	public Layout create(long plid) {
 		Layout layout = new LayoutImpl();
 

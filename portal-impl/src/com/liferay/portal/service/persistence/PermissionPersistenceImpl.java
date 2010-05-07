@@ -132,6 +132,16 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	public void clearCache(Permission permission) {
+		EntityCacheUtil.removeResult(PermissionModelImpl.ENTITY_CACHE_ENABLED,
+			PermissionImpl.class, permission.getPrimaryKey());
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_A_R,
+			new Object[] {
+				permission.getActionId(), new Long(permission.getResourceId())
+			});
+	}
+
 	public Permission create(long permissionId) {
 		Permission permission = new PermissionImpl();
 

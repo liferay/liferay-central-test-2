@@ -43,6 +43,13 @@ public class ShardUtil {
 	}
 
 	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(Shard)
+	 */
+	public static void clearCache(Shard shard) {
+		getPersistence().clearCache(shard);
+	}
+
+	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#countWithDynamicQuery(DynamicQuery)
 	 */
 	public long countWithDynamicQuery(DynamicQuery dynamicQuery)

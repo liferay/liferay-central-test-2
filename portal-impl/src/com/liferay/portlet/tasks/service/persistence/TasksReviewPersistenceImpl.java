@@ -206,6 +206,17 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	public void clearCache(TasksReview tasksReview) {
+		EntityCacheUtil.removeResult(TasksReviewModelImpl.ENTITY_CACHE_ENABLED,
+			TasksReviewImpl.class, tasksReview.getPrimaryKey());
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_U_P,
+			new Object[] {
+				new Long(tasksReview.getUserId()),
+				new Long(tasksReview.getProposalId())
+			});
+	}
+
 	public TasksReview create(long reviewId) {
 		TasksReview tasksReview = new TasksReviewImpl();
 

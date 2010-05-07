@@ -44,6 +44,13 @@ public class IGFolderUtil {
 	}
 
 	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(IGFolder)
+	 */
+	public static void clearCache(IGFolder igFolder) {
+		getPersistence().clearCache(igFolder);
+	}
+
+	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#countWithDynamicQuery(DynamicQuery)
 	 */
 	public long countWithDynamicQuery(DynamicQuery dynamicQuery)

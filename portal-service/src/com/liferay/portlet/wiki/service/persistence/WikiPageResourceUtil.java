@@ -44,6 +44,13 @@ public class WikiPageResourceUtil {
 	}
 
 	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(WikiPageResource)
+	 */
+	public static void clearCache(WikiPageResource wikiPageResource) {
+		getPersistence().clearCache(wikiPageResource);
+	}
+
+	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#countWithDynamicQuery(DynamicQuery)
 	 */
 	public long countWithDynamicQuery(DynamicQuery dynamicQuery)

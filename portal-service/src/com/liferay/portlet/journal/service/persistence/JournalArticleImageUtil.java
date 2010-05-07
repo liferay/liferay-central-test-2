@@ -44,6 +44,13 @@ public class JournalArticleImageUtil {
 	}
 
 	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(JournalArticleImage)
+	 */
+	public static void clearCache(JournalArticleImage journalArticleImage) {
+		getPersistence().clearCache(journalArticleImage);
+	}
+
+	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#countWithDynamicQuery(DynamicQuery)
 	 */
 	public long countWithDynamicQuery(DynamicQuery dynamicQuery)

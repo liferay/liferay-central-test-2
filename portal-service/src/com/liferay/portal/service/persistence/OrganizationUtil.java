@@ -43,6 +43,13 @@ public class OrganizationUtil {
 	}
 
 	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(Organization)
+	 */
+	public static void clearCache(Organization organization) {
+		getPersistence().clearCache(organization);
+	}
+
+	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#countWithDynamicQuery(DynamicQuery)
 	 */
 	public long countWithDynamicQuery(DynamicQuery dynamicQuery)

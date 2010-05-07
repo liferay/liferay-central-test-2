@@ -123,6 +123,18 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	public void clearCache(Portlet portlet) {
+		EntityCacheUtil.removeResult(PortletModelImpl.ENTITY_CACHE_ENABLED,
+			PortletImpl.class, portlet.getPrimaryKey());
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_P,
+			new Object[] {
+				new Long(portlet.getCompanyId()),
+				
+			portlet.getPortletId()
+			});
+	}
+
 	public Portlet create(long id) {
 		Portlet portlet = new PortletImpl();
 

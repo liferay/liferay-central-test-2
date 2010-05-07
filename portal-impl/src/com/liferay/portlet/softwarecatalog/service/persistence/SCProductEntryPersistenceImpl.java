@@ -180,6 +180,18 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	public void clearCache(SCProductEntry scProductEntry) {
+		EntityCacheUtil.removeResult(SCProductEntryModelImpl.ENTITY_CACHE_ENABLED,
+			SCProductEntryImpl.class, scProductEntry.getPrimaryKey());
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_RG_RA,
+			new Object[] {
+				scProductEntry.getRepoGroupId(),
+				
+			scProductEntry.getRepoArtifactId()
+			});
+	}
+
 	public SCProductEntry create(long productEntryId) {
 		SCProductEntry scProductEntry = new SCProductEntryImpl();
 

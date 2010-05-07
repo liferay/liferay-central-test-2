@@ -170,6 +170,18 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	public void clearCache(Organization organization) {
+		EntityCacheUtil.removeResult(OrganizationModelImpl.ENTITY_CACHE_ENABLED,
+			OrganizationImpl.class, organization.getPrimaryKey());
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_N,
+			new Object[] {
+				new Long(organization.getCompanyId()),
+				
+			organization.getName()
+			});
+	}
+
 	public Organization create(long organizationId) {
 		Organization organization = new OrganizationImpl();
 

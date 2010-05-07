@@ -157,6 +157,17 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl<MBStatsUser>
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	public void clearCache(MBStatsUser mbStatsUser) {
+		EntityCacheUtil.removeResult(MBStatsUserModelImpl.ENTITY_CACHE_ENABLED,
+			MBStatsUserImpl.class, mbStatsUser.getPrimaryKey());
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_U,
+			new Object[] {
+				new Long(mbStatsUser.getGroupId()),
+				new Long(mbStatsUser.getUserId())
+			});
+	}
+
 	public MBStatsUser create(long statsUserId) {
 		MBStatsUser mbStatsUser = new MBStatsUserImpl();
 

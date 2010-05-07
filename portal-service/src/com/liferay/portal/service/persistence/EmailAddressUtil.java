@@ -43,6 +43,13 @@ public class EmailAddressUtil {
 	}
 
 	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(EmailAddress)
+	 */
+	public static void clearCache(EmailAddress emailAddress) {
+		getPersistence().clearCache(emailAddress);
+	}
+
+	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#countWithDynamicQuery(DynamicQuery)
 	 */
 	public long countWithDynamicQuery(DynamicQuery dynamicQuery)

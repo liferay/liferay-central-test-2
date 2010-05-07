@@ -44,6 +44,13 @@ public class SCFrameworkVersionUtil {
 	}
 
 	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(SCFrameworkVersion)
+	 */
+	public static void clearCache(SCFrameworkVersion scFrameworkVersion) {
+		getPersistence().clearCache(scFrameworkVersion);
+	}
+
+	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#countWithDynamicQuery(DynamicQuery)
 	 */
 	public long countWithDynamicQuery(DynamicQuery dynamicQuery)

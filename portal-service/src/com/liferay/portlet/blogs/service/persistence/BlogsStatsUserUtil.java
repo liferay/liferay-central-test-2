@@ -44,6 +44,13 @@ public class BlogsStatsUserUtil {
 	}
 
 	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(BlogsStatsUser)
+	 */
+	public static void clearCache(BlogsStatsUser blogsStatsUser) {
+		getPersistence().clearCache(blogsStatsUser);
+	}
+
+	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#countWithDynamicQuery(DynamicQuery)
 	 */
 	public long countWithDynamicQuery(DynamicQuery dynamicQuery)

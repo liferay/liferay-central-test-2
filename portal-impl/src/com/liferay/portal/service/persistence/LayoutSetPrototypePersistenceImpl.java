@@ -128,6 +128,11 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl<Layou
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	public void clearCache(LayoutSetPrototype layoutSetPrototype) {
+		EntityCacheUtil.removeResult(LayoutSetPrototypeModelImpl.ENTITY_CACHE_ENABLED,
+			LayoutSetPrototypeImpl.class, layoutSetPrototype.getPrimaryKey());
+	}
+
 	public LayoutSetPrototype create(long layoutSetPrototypeId) {
 		LayoutSetPrototype layoutSetPrototype = new LayoutSetPrototypeImpl();
 

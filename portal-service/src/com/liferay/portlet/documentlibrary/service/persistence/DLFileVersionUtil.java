@@ -44,6 +44,13 @@ public class DLFileVersionUtil {
 	}
 
 	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(DLFileVersion)
+	 */
+	public static void clearCache(DLFileVersion dlFileVersion) {
+		getPersistence().clearCache(dlFileVersion);
+	}
+
+	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#countWithDynamicQuery(DynamicQuery)
 	 */
 	public long countWithDynamicQuery(DynamicQuery dynamicQuery)

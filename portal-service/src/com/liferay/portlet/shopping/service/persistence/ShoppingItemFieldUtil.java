@@ -44,6 +44,13 @@ public class ShoppingItemFieldUtil {
 	}
 
 	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(ShoppingItemField)
+	 */
+	public static void clearCache(ShoppingItemField shoppingItemField) {
+		getPersistence().clearCache(shoppingItemField);
+	}
+
+	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#countWithDynamicQuery(DynamicQuery)
 	 */
 	public long countWithDynamicQuery(DynamicQuery dynamicQuery)

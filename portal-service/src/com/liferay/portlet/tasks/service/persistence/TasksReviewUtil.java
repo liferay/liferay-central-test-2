@@ -44,6 +44,13 @@ public class TasksReviewUtil {
 	}
 
 	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(TasksReview)
+	 */
+	public static void clearCache(TasksReview tasksReview) {
+		getPersistence().clearCache(tasksReview);
+	}
+
+	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#countWithDynamicQuery(DynamicQuery)
 	 */
 	public long countWithDynamicQuery(DynamicQuery dynamicQuery)

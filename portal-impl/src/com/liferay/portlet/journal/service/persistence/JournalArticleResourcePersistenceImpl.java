@@ -132,6 +132,19 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	public void clearCache(JournalArticleResource journalArticleResource) {
+		EntityCacheUtil.removeResult(JournalArticleResourceModelImpl.ENTITY_CACHE_ENABLED,
+			JournalArticleResourceImpl.class,
+			journalArticleResource.getPrimaryKey());
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_A,
+			new Object[] {
+				new Long(journalArticleResource.getGroupId()),
+				
+			journalArticleResource.getArticleId()
+			});
+	}
+
 	public JournalArticleResource create(long resourcePrimKey) {
 		JournalArticleResource journalArticleResource = new JournalArticleResourceImpl();
 

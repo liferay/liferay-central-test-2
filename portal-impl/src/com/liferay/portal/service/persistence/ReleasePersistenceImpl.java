@@ -102,6 +102,14 @@ public class ReleasePersistenceImpl extends BasePersistenceImpl<Release>
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	public void clearCache(Release release) {
+		EntityCacheUtil.removeResult(ReleaseModelImpl.ENTITY_CACHE_ENABLED,
+			ReleaseImpl.class, release.getPrimaryKey());
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_SERVLETCONTEXTNAME,
+			new Object[] { release.getServletContextName() });
+	}
+
 	public Release create(long releaseId) {
 		Release release = new ReleaseImpl();
 

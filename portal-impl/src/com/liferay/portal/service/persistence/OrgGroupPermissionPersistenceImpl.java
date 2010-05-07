@@ -128,6 +128,11 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	public void clearCache(OrgGroupPermission orgGroupPermission) {
+		EntityCacheUtil.removeResult(OrgGroupPermissionModelImpl.ENTITY_CACHE_ENABLED,
+			OrgGroupPermissionImpl.class, orgGroupPermission.getPrimaryKey());
+	}
+
 	public OrgGroupPermission create(OrgGroupPermissionPK orgGroupPermissionPK) {
 		OrgGroupPermission orgGroupPermission = new OrgGroupPermissionImpl();
 

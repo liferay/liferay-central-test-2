@@ -44,6 +44,13 @@ public class SCProductVersionUtil {
 	}
 
 	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(SCProductVersion)
+	 */
+	public static void clearCache(SCProductVersion scProductVersion) {
+		getPersistence().clearCache(scProductVersion);
+	}
+
+	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#countWithDynamicQuery(DynamicQuery)
 	 */
 	public long countWithDynamicQuery(DynamicQuery dynamicQuery)

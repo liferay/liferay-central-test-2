@@ -140,6 +140,11 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	public void clearCache(SocialEquityLog socialEquityLog) {
+		EntityCacheUtil.removeResult(SocialEquityLogModelImpl.ENTITY_CACHE_ENABLED,
+			SocialEquityLogImpl.class, socialEquityLog.getPrimaryKey());
+	}
+
 	public SocialEquityLog create(long equityLogId) {
 		SocialEquityLog socialEquityLog = new SocialEquityLogImpl();
 

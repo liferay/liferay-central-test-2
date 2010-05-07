@@ -43,6 +43,13 @@ public class WorkflowInstanceLinkUtil {
 	}
 
 	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(WorkflowInstanceLink)
+	 */
+	public static void clearCache(WorkflowInstanceLink workflowInstanceLink) {
+		getPersistence().clearCache(workflowInstanceLink);
+	}
+
+	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#countWithDynamicQuery(DynamicQuery)
 	 */
 	public long countWithDynamicQuery(DynamicQuery dynamicQuery)

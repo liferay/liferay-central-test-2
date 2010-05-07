@@ -114,4 +114,8 @@ public interface SocialEquityLogLocalService {
 
 	public void checkEquityLogs()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public void deactivateEquityLogs(long assetEntryId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 }

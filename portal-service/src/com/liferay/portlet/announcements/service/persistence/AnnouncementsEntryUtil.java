@@ -44,6 +44,13 @@ public class AnnouncementsEntryUtil {
 	}
 
 	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(AnnouncementsEntry)
+	 */
+	public static void clearCache(AnnouncementsEntry announcementsEntry) {
+		getPersistence().clearCache(announcementsEntry);
+	}
+
+	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#countWithDynamicQuery(DynamicQuery)
 	 */
 	public long countWithDynamicQuery(DynamicQuery dynamicQuery)

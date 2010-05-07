@@ -183,6 +183,11 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	public void clearCache(Phone phone) {
+		EntityCacheUtil.removeResult(PhoneModelImpl.ENTITY_CACHE_ENABLED,
+			PhoneImpl.class, phone.getPrimaryKey());
+	}
+
 	public Phone create(long phoneId) {
 		Phone phone = new PhoneImpl();
 

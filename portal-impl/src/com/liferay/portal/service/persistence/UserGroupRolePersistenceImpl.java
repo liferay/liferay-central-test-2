@@ -179,6 +179,11 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	public void clearCache(UserGroupRole userGroupRole) {
+		EntityCacheUtil.removeResult(UserGroupRoleModelImpl.ENTITY_CACHE_ENABLED,
+			UserGroupRoleImpl.class, userGroupRole.getPrimaryKey());
+	}
+
 	public UserGroupRole create(UserGroupRolePK userGroupRolePK) {
 		UserGroupRole userGroupRole = new UserGroupRoleImpl();
 

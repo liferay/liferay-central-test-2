@@ -213,6 +213,11 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	public void clearCache(MBThread mbThread) {
+		EntityCacheUtil.removeResult(MBThreadModelImpl.ENTITY_CACHE_ENABLED,
+			MBThreadImpl.class, mbThread.getPrimaryKey());
+	}
+
 	public MBThread create(long threadId) {
 		MBThread mbThread = new MBThreadImpl();
 

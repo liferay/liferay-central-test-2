@@ -160,6 +160,11 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	public void clearCache(SCFrameworkVersion scFrameworkVersion) {
+		EntityCacheUtil.removeResult(SCFrameworkVersionModelImpl.ENTITY_CACHE_ENABLED,
+			SCFrameworkVersionImpl.class, scFrameworkVersion.getPrimaryKey());
+	}
+
 	public SCFrameworkVersion create(long frameworkVersionId) {
 		SCFrameworkVersion scFrameworkVersion = new SCFrameworkVersionImpl();
 

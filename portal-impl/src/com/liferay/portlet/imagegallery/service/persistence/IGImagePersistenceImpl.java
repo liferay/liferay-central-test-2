@@ -240,6 +240,26 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	public void clearCache(IGImage igImage) {
+		EntityCacheUtil.removeResult(IGImageModelImpl.ENTITY_CACHE_ENABLED,
+			IGImageImpl.class, igImage.getPrimaryKey());
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
+			new Object[] { igImage.getUuid(), new Long(igImage.getGroupId()) });
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_SMALLIMAGEID,
+			new Object[] { new Long(igImage.getSmallImageId()) });
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_LARGEIMAGEID,
+			new Object[] { new Long(igImage.getLargeImageId()) });
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_CUSTOM1IMAGEID,
+			new Object[] { new Long(igImage.getCustom1ImageId()) });
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_CUSTOM2IMAGEID,
+			new Object[] { new Long(igImage.getCustom2ImageId()) });
+	}
+
 	public IGImage create(long imageId) {
 		IGImage igImage = new IGImageImpl();
 

@@ -135,6 +135,18 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl<RatingsEntr
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	public void clearCache(RatingsEntry ratingsEntry) {
+		EntityCacheUtil.removeResult(RatingsEntryModelImpl.ENTITY_CACHE_ENABLED,
+			RatingsEntryImpl.class, ratingsEntry.getPrimaryKey());
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_U_C_C,
+			new Object[] {
+				new Long(ratingsEntry.getUserId()),
+				new Long(ratingsEntry.getClassNameId()),
+				new Long(ratingsEntry.getClassPK())
+			});
+	}
+
 	public RatingsEntry create(long entryId) {
 		RatingsEntry ratingsEntry = new RatingsEntryImpl();
 

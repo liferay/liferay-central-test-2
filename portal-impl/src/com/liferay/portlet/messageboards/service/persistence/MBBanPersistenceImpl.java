@@ -153,6 +153,16 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	public void clearCache(MBBan mbBan) {
+		EntityCacheUtil.removeResult(MBBanModelImpl.ENTITY_CACHE_ENABLED,
+			MBBanImpl.class, mbBan.getPrimaryKey());
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_B,
+			new Object[] {
+				new Long(mbBan.getGroupId()), new Long(mbBan.getBanUserId())
+			});
+	}
+
 	public MBBan create(long banId) {
 		MBBan mbBan = new MBBanImpl();
 

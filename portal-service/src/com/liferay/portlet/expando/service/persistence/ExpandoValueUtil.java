@@ -44,6 +44,13 @@ public class ExpandoValueUtil {
 	}
 
 	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(ExpandoValue)
+	 */
+	public static void clearCache(ExpandoValue expandoValue) {
+		getPersistence().clearCache(expandoValue);
+	}
+
+	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#countWithDynamicQuery(DynamicQuery)
 	 */
 	public long countWithDynamicQuery(DynamicQuery dynamicQuery)

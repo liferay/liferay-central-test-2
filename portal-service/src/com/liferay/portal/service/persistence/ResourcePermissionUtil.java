@@ -43,6 +43,13 @@ public class ResourcePermissionUtil {
 	}
 
 	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(ResourcePermission)
+	 */
+	public static void clearCache(ResourcePermission resourcePermission) {
+		getPersistence().clearCache(resourcePermission);
+	}
+
+	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#countWithDynamicQuery(DynamicQuery)
 	 */
 	public long countWithDynamicQuery(DynamicQuery dynamicQuery)

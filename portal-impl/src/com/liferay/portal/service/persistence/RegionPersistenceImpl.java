@@ -139,6 +139,11 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	public void clearCache(Region region) {
+		EntityCacheUtil.removeResult(RegionModelImpl.ENTITY_CACHE_ENABLED,
+			RegionImpl.class, region.getPrimaryKey());
+	}
+
 	public Region create(long regionId) {
 		Region region = new RegionImpl();
 

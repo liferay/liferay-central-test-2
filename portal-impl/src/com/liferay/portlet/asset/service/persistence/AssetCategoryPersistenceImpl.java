@@ -226,6 +226,16 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	public void clearCache(AssetCategory assetCategory) {
+		EntityCacheUtil.removeResult(AssetCategoryModelImpl.ENTITY_CACHE_ENABLED,
+			AssetCategoryImpl.class, assetCategory.getPrimaryKey());
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
+			new Object[] {
+				assetCategory.getUuid(), new Long(assetCategory.getGroupId())
+			});
+	}
+
 	public AssetCategory create(long categoryId) {
 		AssetCategory assetCategory = new AssetCategoryImpl();
 

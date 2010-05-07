@@ -221,6 +221,16 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	public void clearCache(DLFileShortcut dlFileShortcut) {
+		EntityCacheUtil.removeResult(DLFileShortcutModelImpl.ENTITY_CACHE_ENABLED,
+			DLFileShortcutImpl.class, dlFileShortcut.getPrimaryKey());
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
+			new Object[] {
+				dlFileShortcut.getUuid(), new Long(dlFileShortcut.getGroupId())
+			});
+	}
+
 	public DLFileShortcut create(long fileShortcutId) {
 		DLFileShortcut dlFileShortcut = new DLFileShortcutImpl();
 

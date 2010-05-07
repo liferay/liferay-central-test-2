@@ -44,6 +44,13 @@ public class MBBanUtil {
 	}
 
 	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(MBBan)
+	 */
+	public static void clearCache(MBBan mbBan) {
+		getPersistence().clearCache(mbBan);
+	}
+
+	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#countWithDynamicQuery(DynamicQuery)
 	 */
 	public long countWithDynamicQuery(DynamicQuery dynamicQuery)

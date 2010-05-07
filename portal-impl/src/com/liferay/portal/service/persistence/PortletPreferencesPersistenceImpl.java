@@ -176,6 +176,20 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	public void clearCache(PortletPreferences portletPreferences) {
+		EntityCacheUtil.removeResult(PortletPreferencesModelImpl.ENTITY_CACHE_ENABLED,
+			PortletPreferencesImpl.class, portletPreferences.getPrimaryKey());
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_O_O_P_P,
+			new Object[] {
+				new Long(portletPreferences.getOwnerId()),
+				new Integer(portletPreferences.getOwnerType()),
+				new Long(portletPreferences.getPlid()),
+				
+			portletPreferences.getPortletId()
+			});
+	}
+
 	public PortletPreferences create(long portletPreferencesId) {
 		PortletPreferences portletPreferences = new PortletPreferencesImpl();
 

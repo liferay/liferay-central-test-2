@@ -150,6 +150,18 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	public void clearCache(TasksProposal tasksProposal) {
+		EntityCacheUtil.removeResult(TasksProposalModelImpl.ENTITY_CACHE_ENABLED,
+			TasksProposalImpl.class, tasksProposal.getPrimaryKey());
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_C,
+			new Object[] {
+				new Long(tasksProposal.getClassNameId()),
+				
+			tasksProposal.getClassPK()
+			});
+	}
+
 	public TasksProposal create(long proposalId) {
 		TasksProposal tasksProposal = new TasksProposalImpl();
 

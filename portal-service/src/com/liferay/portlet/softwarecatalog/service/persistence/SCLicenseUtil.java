@@ -44,6 +44,13 @@ public class SCLicenseUtil {
 	}
 
 	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(SCLicense)
+	 */
+	public static void clearCache(SCLicense scLicense) {
+		getPersistence().clearCache(scLicense);
+	}
+
+	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#countWithDynamicQuery(DynamicQuery)
 	 */
 	public long countWithDynamicQuery(DynamicQuery dynamicQuery)

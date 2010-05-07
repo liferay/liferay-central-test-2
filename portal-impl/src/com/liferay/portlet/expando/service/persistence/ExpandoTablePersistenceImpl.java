@@ -137,6 +137,19 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl<ExpandoTabl
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	public void clearCache(ExpandoTable expandoTable) {
+		EntityCacheUtil.removeResult(ExpandoTableModelImpl.ENTITY_CACHE_ENABLED,
+			ExpandoTableImpl.class, expandoTable.getPrimaryKey());
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_C_N,
+			new Object[] {
+				new Long(expandoTable.getCompanyId()),
+				new Long(expandoTable.getClassNameId()),
+				
+			expandoTable.getName()
+			});
+	}
+
 	public ExpandoTable create(long tableId) {
 		ExpandoTable expandoTable = new ExpandoTableImpl();
 

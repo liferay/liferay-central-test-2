@@ -44,6 +44,13 @@ public class MBCategoryUtil {
 	}
 
 	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(MBCategory)
+	 */
+	public static void clearCache(MBCategory mbCategory) {
+		getPersistence().clearCache(mbCategory);
+	}
+
+	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#countWithDynamicQuery(DynamicQuery)
 	 */
 	public long countWithDynamicQuery(DynamicQuery dynamicQuery)

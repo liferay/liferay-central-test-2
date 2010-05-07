@@ -43,6 +43,13 @@ public class LayoutSetUtil {
 	}
 
 	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(LayoutSet)
+	 */
+	public static void clearCache(LayoutSet layoutSet) {
+		getPersistence().clearCache(layoutSet);
+	}
+
+	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#countWithDynamicQuery(DynamicQuery)
 	 */
 	public long countWithDynamicQuery(DynamicQuery dynamicQuery)

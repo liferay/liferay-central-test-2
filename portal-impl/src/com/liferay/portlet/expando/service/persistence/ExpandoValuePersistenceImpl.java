@@ -267,6 +267,24 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	public void clearCache(ExpandoValue expandoValue) {
+		EntityCacheUtil.removeResult(ExpandoValueModelImpl.ENTITY_CACHE_ENABLED,
+			ExpandoValueImpl.class, expandoValue.getPrimaryKey());
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_R,
+			new Object[] {
+				new Long(expandoValue.getColumnId()),
+				new Long(expandoValue.getRowId())
+			});
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_T_C_C,
+			new Object[] {
+				new Long(expandoValue.getTableId()),
+				new Long(expandoValue.getColumnId()),
+				new Long(expandoValue.getClassPK())
+			});
+	}
+
 	public ExpandoValue create(long valueId) {
 		ExpandoValue expandoValue = new ExpandoValueImpl();
 

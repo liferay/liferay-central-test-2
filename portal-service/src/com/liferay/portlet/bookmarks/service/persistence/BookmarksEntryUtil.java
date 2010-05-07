@@ -44,6 +44,13 @@ public class BookmarksEntryUtil {
 	}
 
 	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(BookmarksEntry)
+	 */
+	public static void clearCache(BookmarksEntry bookmarksEntry) {
+		getPersistence().clearCache(bookmarksEntry);
+	}
+
+	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#countWithDynamicQuery(DynamicQuery)
 	 */
 	public long countWithDynamicQuery(DynamicQuery dynamicQuery)

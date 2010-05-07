@@ -111,6 +111,11 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<Password
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	public void clearCache(PasswordTracker passwordTracker) {
+		EntityCacheUtil.removeResult(PasswordTrackerModelImpl.ENTITY_CACHE_ENABLED,
+			PasswordTrackerImpl.class, passwordTracker.getPrimaryKey());
+	}
+
 	public PasswordTracker create(long passwordTrackerId) {
 		PasswordTracker passwordTracker = new PasswordTrackerImpl();
 

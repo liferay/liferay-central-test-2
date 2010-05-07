@@ -211,6 +211,14 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	public void clearCache(CalEvent calEvent) {
+		EntityCacheUtil.removeResult(CalEventModelImpl.ENTITY_CACHE_ENABLED,
+			CalEventImpl.class, calEvent.getPrimaryKey());
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
+			new Object[] { calEvent.getUuid(), new Long(calEvent.getGroupId()) });
+	}
+
 	public CalEvent create(long eventId) {
 		CalEvent calEvent = new CalEventImpl();
 

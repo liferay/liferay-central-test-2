@@ -44,6 +44,13 @@ public class ShoppingCartUtil {
 	}
 
 	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(ShoppingCart)
+	 */
+	public static void clearCache(ShoppingCart shoppingCart) {
+		getPersistence().clearCache(shoppingCart);
+	}
+
+	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#countWithDynamicQuery(DynamicQuery)
 	 */
 	public long countWithDynamicQuery(DynamicQuery dynamicQuery)

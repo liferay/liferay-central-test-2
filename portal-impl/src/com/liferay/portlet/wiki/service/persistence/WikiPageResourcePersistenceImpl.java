@@ -114,6 +114,18 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl<WikiPag
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	public void clearCache(WikiPageResource wikiPageResource) {
+		EntityCacheUtil.removeResult(WikiPageResourceModelImpl.ENTITY_CACHE_ENABLED,
+			WikiPageResourceImpl.class, wikiPageResource.getPrimaryKey());
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_N_T,
+			new Object[] {
+				new Long(wikiPageResource.getNodeId()),
+				
+			wikiPageResource.getTitle()
+			});
+	}
+
 	public WikiPageResource create(long resourcePrimKey) {
 		WikiPageResource wikiPageResource = new WikiPageResourceImpl();
 

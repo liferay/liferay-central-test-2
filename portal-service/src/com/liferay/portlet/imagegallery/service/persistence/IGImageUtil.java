@@ -44,6 +44,13 @@ public class IGImageUtil {
 	}
 
 	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(IGImage)
+	 */
+	public static void clearCache(IGImage igImage) {
+		getPersistence().clearCache(igImage);
+	}
+
+	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#countWithDynamicQuery(DynamicQuery)
 	 */
 	public long countWithDynamicQuery(DynamicQuery dynamicQuery)

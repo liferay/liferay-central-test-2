@@ -188,6 +188,25 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	public void clearCache(JournalArticleImage journalArticleImage) {
+		EntityCacheUtil.removeResult(JournalArticleImageModelImpl.ENTITY_CACHE_ENABLED,
+			JournalArticleImageImpl.class, journalArticleImage.getPrimaryKey());
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_A_V_E_E_L,
+			new Object[] {
+				new Long(journalArticleImage.getGroupId()),
+				
+			journalArticleImage.getArticleId(),
+				new Double(journalArticleImage.getVersion()),
+				
+			journalArticleImage.getElInstanceId(),
+				
+			journalArticleImage.getElName(),
+				
+			journalArticleImage.getLanguageId()
+			});
+	}
+
 	public JournalArticleImage create(long articleImageId) {
 		JournalArticleImage journalArticleImage = new JournalArticleImageImpl();
 

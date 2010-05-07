@@ -43,6 +43,13 @@ public class UserTrackerUtil {
 	}
 
 	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(UserTracker)
+	 */
+	public static void clearCache(UserTracker userTracker) {
+		getPersistence().clearCache(userTracker);
+	}
+
+	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#countWithDynamicQuery(DynamicQuery)
 	 */
 	public long countWithDynamicQuery(DynamicQuery dynamicQuery)

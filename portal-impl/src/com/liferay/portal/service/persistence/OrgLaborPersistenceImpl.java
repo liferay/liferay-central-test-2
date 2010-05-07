@@ -107,6 +107,11 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	public void clearCache(OrgLabor orgLabor) {
+		EntityCacheUtil.removeResult(OrgLaborModelImpl.ENTITY_CACHE_ENABLED,
+			OrgLaborImpl.class, orgLabor.getPrimaryKey());
+	}
+
 	public OrgLabor create(long orgLaborId) {
 		OrgLabor orgLabor = new OrgLaborImpl();
 

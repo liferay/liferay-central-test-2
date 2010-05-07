@@ -136,6 +136,20 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	public void clearCache(MBDiscussion mbDiscussion) {
+		EntityCacheUtil.removeResult(MBDiscussionModelImpl.ENTITY_CACHE_ENABLED,
+			MBDiscussionImpl.class, mbDiscussion.getPrimaryKey());
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_THREADID,
+			new Object[] { new Long(mbDiscussion.getThreadId()) });
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_C,
+			new Object[] {
+				new Long(mbDiscussion.getClassNameId()),
+				new Long(mbDiscussion.getClassPK())
+			});
+	}
+
 	public MBDiscussion create(long discussionId) {
 		MBDiscussion mbDiscussion = new MBDiscussionImpl();
 

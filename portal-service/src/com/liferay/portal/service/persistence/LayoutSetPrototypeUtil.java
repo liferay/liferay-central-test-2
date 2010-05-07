@@ -43,6 +43,13 @@ public class LayoutSetPrototypeUtil {
 	}
 
 	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(LayoutSetPrototype)
+	 */
+	public static void clearCache(LayoutSetPrototype layoutSetPrototype) {
+		getPersistence().clearCache(layoutSetPrototype);
+	}
+
+	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#countWithDynamicQuery(DynamicQuery)
 	 */
 	public long countWithDynamicQuery(DynamicQuery dynamicQuery)

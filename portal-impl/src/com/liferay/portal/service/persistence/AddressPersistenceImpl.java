@@ -208,6 +208,11 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	public void clearCache(Address address) {
+		EntityCacheUtil.removeResult(AddressModelImpl.ENTITY_CACHE_ENABLED,
+			AddressImpl.class, address.getPrimaryKey());
+	}
+
 	public Address create(long addressId) {
 		Address address = new AddressImpl();
 

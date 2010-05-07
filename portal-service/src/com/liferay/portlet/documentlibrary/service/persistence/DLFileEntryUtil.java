@@ -44,6 +44,13 @@ public class DLFileEntryUtil {
 	}
 
 	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(DLFileEntry)
+	 */
+	public static void clearCache(DLFileEntry dlFileEntry) {
+		getPersistence().clearCache(dlFileEntry);
+	}
+
+	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#countWithDynamicQuery(DynamicQuery)
 	 */
 	public long countWithDynamicQuery(DynamicQuery dynamicQuery)

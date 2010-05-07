@@ -44,6 +44,13 @@ public class MBMailingListUtil {
 	}
 
 	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(MBMailingList)
+	 */
+	public static void clearCache(MBMailingList mbMailingList) {
+		getPersistence().clearCache(mbMailingList);
+	}
+
+	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#countWithDynamicQuery(DynamicQuery)
 	 */
 	public long countWithDynamicQuery(DynamicQuery dynamicQuery)

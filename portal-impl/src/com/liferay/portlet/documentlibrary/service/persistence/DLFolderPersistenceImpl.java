@@ -216,6 +216,22 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	public void clearCache(DLFolder dlFolder) {
+		EntityCacheUtil.removeResult(DLFolderModelImpl.ENTITY_CACHE_ENABLED,
+			DLFolderImpl.class, dlFolder.getPrimaryKey());
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
+			new Object[] { dlFolder.getUuid(), new Long(dlFolder.getGroupId()) });
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_P_N,
+			new Object[] {
+				new Long(dlFolder.getGroupId()),
+				new Long(dlFolder.getParentFolderId()),
+				
+			dlFolder.getName()
+			});
+	}
+
 	public DLFolder create(long folderId) {
 		DLFolder dlFolder = new DLFolderImpl();
 

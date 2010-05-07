@@ -127,6 +127,14 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	public void clearCache(ShoppingCoupon shoppingCoupon) {
+		EntityCacheUtil.removeResult(ShoppingCouponModelImpl.ENTITY_CACHE_ENABLED,
+			ShoppingCouponImpl.class, shoppingCoupon.getPrimaryKey());
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_CODE,
+			new Object[] { shoppingCoupon.getCode() });
+	}
+
 	public ShoppingCoupon create(long couponId) {
 		ShoppingCoupon shoppingCoupon = new ShoppingCouponImpl();
 

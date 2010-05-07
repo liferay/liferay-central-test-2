@@ -102,6 +102,14 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	public void clearCache(ClassName className) {
+		EntityCacheUtil.removeResult(ClassNameModelImpl.ENTITY_CACHE_ENABLED,
+			ClassNameImpl.class, className.getPrimaryKey());
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_VALUE,
+			new Object[] { className.getValue() });
+	}
+
 	public ClassName create(long classNameId) {
 		ClassName className = new ClassNameImpl();
 

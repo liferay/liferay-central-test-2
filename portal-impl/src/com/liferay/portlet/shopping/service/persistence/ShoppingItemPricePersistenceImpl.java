@@ -115,6 +115,11 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistenceImpl<Shoppi
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	public void clearCache(ShoppingItemPrice shoppingItemPrice) {
+		EntityCacheUtil.removeResult(ShoppingItemPriceModelImpl.ENTITY_CACHE_ENABLED,
+			ShoppingItemPriceImpl.class, shoppingItemPrice.getPrimaryKey());
+	}
+
 	public ShoppingItemPrice create(long itemPriceId) {
 		ShoppingItemPrice shoppingItemPrice = new ShoppingItemPriceImpl();
 

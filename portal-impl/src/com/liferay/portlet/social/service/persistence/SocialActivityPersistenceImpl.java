@@ -262,6 +262,25 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	public void clearCache(SocialActivity socialActivity) {
+		EntityCacheUtil.removeResult(SocialActivityModelImpl.ENTITY_CACHE_ENABLED,
+			SocialActivityImpl.class, socialActivity.getPrimaryKey());
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_MIRRORACTIVITYID,
+			new Object[] { new Long(socialActivity.getMirrorActivityId()) });
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_U_CD_C_C_T_R,
+			new Object[] {
+				new Long(socialActivity.getGroupId()),
+				new Long(socialActivity.getUserId()),
+				new Long(socialActivity.getCreateDate()),
+				new Long(socialActivity.getClassNameId()),
+				new Long(socialActivity.getClassPK()),
+				new Integer(socialActivity.getType()),
+				new Long(socialActivity.getReceiverUserId())
+			});
+	}
+
 	public SocialActivity create(long activityId) {
 		SocialActivity socialActivity = new SocialActivityImpl();
 

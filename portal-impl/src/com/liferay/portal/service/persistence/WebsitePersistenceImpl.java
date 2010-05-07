@@ -184,6 +184,11 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	public void clearCache(Website website) {
+		EntityCacheUtil.removeResult(WebsiteModelImpl.ENTITY_CACHE_ENABLED,
+			WebsiteImpl.class, website.getPrimaryKey());
+	}
+
 	public Website create(long websiteId) {
 		Website website = new WebsiteImpl();
 

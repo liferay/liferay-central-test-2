@@ -56,6 +56,7 @@ import com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPersist
 import com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence;
 import com.liferay.portlet.messageboards.service.persistence.MBBanPersistence;
 import com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPersistence;
+import com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence;
 import com.liferay.portlet.messageboards.service.persistence.MBStatsUserPersistence;
 import com.liferay.portlet.shopping.service.persistence.ShoppingCartPersistence;
 import com.liferay.portlet.social.service.persistence.SocialActivityPersistence;
@@ -254,6 +255,37 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 		EntityCacheUtil.clearCache(UserImpl.class.getName());
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+	}
+
+	public void clearCache(User user) {
+		EntityCacheUtil.removeResult(UserModelImpl.ENTITY_CACHE_ENABLED,
+			UserImpl.class, user.getPrimaryKey());
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_CONTACTID,
+			new Object[] { new Long(user.getContactId()) });
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_OPENID,
+			new Object[] { user.getOpenId() });
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_PORTRAITID,
+			new Object[] { new Long(user.getPortraitId()) });
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_U,
+			new Object[] {
+				new Long(user.getCompanyId()), new Long(user.getUserId())
+			});
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_DU,
+			new Object[] {
+				new Long(user.getCompanyId()),
+				Boolean.valueOf(user.getDefaultUser())
+			});
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_SN,
+			new Object[] { new Long(user.getCompanyId()), user.getScreenName() });
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_EA,
+			new Object[] { new Long(user.getCompanyId()), user.getEmailAddress() });
 	}
 
 	public User create(long userId) {
@@ -5781,6 +5813,8 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 	protected ExpandoValuePersistence expandoValuePersistence;
 	@BeanReference(type = MBBanPersistence.class)
 	protected MBBanPersistence mbBanPersistence;
+	@BeanReference(type = MBMessagePersistence.class)
+	protected MBMessagePersistence mbMessagePersistence;
 	@BeanReference(type = MBMessageFlagPersistence.class)
 	protected MBMessageFlagPersistence mbMessageFlagPersistence;
 	@BeanReference(type = MBStatsUserPersistence.class)

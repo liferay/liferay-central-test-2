@@ -123,6 +123,11 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl<OrgGroupRol
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	public void clearCache(OrgGroupRole orgGroupRole) {
+		EntityCacheUtil.removeResult(OrgGroupRoleModelImpl.ENTITY_CACHE_ENABLED,
+			OrgGroupRoleImpl.class, orgGroupRole.getPrimaryKey());
+	}
+
 	public OrgGroupRole create(OrgGroupRolePK orgGroupRolePK) {
 		OrgGroupRole orgGroupRole = new OrgGroupRoleImpl();
 

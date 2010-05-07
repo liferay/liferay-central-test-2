@@ -43,6 +43,13 @@ public class PortletPreferencesUtil {
 	}
 
 	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(PortletPreferences)
+	 */
+	public static void clearCache(PortletPreferences portletPreferences) {
+		getPersistence().clearCache(portletPreferences);
+	}
+
+	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#countWithDynamicQuery(DynamicQuery)
 	 */
 	public long countWithDynamicQuery(DynamicQuery dynamicQuery)

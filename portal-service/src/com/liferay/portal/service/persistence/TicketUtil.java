@@ -43,6 +43,13 @@ public class TicketUtil {
 	}
 
 	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(Ticket)
+	 */
+	public static void clearCache(Ticket ticket) {
+		getPersistence().clearCache(ticket);
+	}
+
+	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#countWithDynamicQuery(DynamicQuery)
 	 */
 	public long countWithDynamicQuery(DynamicQuery dynamicQuery)

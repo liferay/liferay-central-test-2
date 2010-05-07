@@ -96,6 +96,11 @@ public class SocialEquityHistoryPersistenceImpl extends BasePersistenceImpl<Soci
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	public void clearCache(SocialEquityHistory socialEquityHistory) {
+		EntityCacheUtil.removeResult(SocialEquityHistoryModelImpl.ENTITY_CACHE_ENABLED,
+			SocialEquityHistoryImpl.class, socialEquityHistory.getPrimaryKey());
+	}
+
 	public SocialEquityHistory create(long equityHistoryId) {
 		SocialEquityHistory socialEquityHistory = new SocialEquityHistoryImpl();
 

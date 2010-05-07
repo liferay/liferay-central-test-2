@@ -44,6 +44,13 @@ public class WikiNodeUtil {
 	}
 
 	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(WikiNode)
+	 */
+	public static void clearCache(WikiNode wikiNode) {
+		getPersistence().clearCache(wikiNode);
+	}
+
+	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#countWithDynamicQuery(DynamicQuery)
 	 */
 	public long countWithDynamicQuery(DynamicQuery dynamicQuery)

@@ -129,6 +129,14 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	public void clearCache(Team team) {
+		EntityCacheUtil.removeResult(TeamModelImpl.ENTITY_CACHE_ENABLED,
+			TeamImpl.class, team.getPrimaryKey());
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_N,
+			new Object[] { new Long(team.getGroupId()), team.getName() });
+	}
+
 	public Team create(long teamId) {
 		Team team = new TeamImpl();
 

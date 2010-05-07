@@ -43,6 +43,13 @@ public class UserGroupGroupRoleUtil {
 	}
 
 	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(UserGroupGroupRole)
+	 */
+	public static void clearCache(UserGroupGroupRole userGroupGroupRole) {
+		getPersistence().clearCache(userGroupGroupRole);
+	}
+
+	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#countWithDynamicQuery(DynamicQuery)
 	 */
 	public long countWithDynamicQuery(DynamicQuery dynamicQuery)

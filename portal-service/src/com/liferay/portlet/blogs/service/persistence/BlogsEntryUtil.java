@@ -44,6 +44,13 @@ public class BlogsEntryUtil {
 	}
 
 	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(BlogsEntry)
+	 */
+	public static void clearCache(BlogsEntry blogsEntry) {
+		getPersistence().clearCache(blogsEntry);
+	}
+
+	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#countWithDynamicQuery(DynamicQuery)
 	 */
 	public long countWithDynamicQuery(DynamicQuery dynamicQuery)

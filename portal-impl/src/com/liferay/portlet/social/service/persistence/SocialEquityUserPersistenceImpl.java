@@ -110,6 +110,14 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	public void clearCache(SocialEquityUser socialEquityUser) {
+		EntityCacheUtil.removeResult(SocialEquityUserModelImpl.ENTITY_CACHE_ENABLED,
+			SocialEquityUserImpl.class, socialEquityUser.getPrimaryKey());
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_USERID,
+			new Object[] { new Long(socialEquityUser.getUserId()) });
+	}
+
 	public SocialEquityUser create(long equityUserId) {
 		SocialEquityUser socialEquityUser = new SocialEquityUserImpl();
 

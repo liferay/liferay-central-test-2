@@ -43,6 +43,13 @@ public class OrgLaborUtil {
 	}
 
 	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(OrgLabor)
+	 */
+	public static void clearCache(OrgLabor orgLabor) {
+		getPersistence().clearCache(orgLabor);
+	}
+
+	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#countWithDynamicQuery(DynamicQuery)
 	 */
 	public long countWithDynamicQuery(DynamicQuery dynamicQuery)

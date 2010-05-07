@@ -131,6 +131,18 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl<ExpandoCol
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	public void clearCache(ExpandoColumn expandoColumn) {
+		EntityCacheUtil.removeResult(ExpandoColumnModelImpl.ENTITY_CACHE_ENABLED,
+			ExpandoColumnImpl.class, expandoColumn.getPrimaryKey());
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_T_N,
+			new Object[] {
+				new Long(expandoColumn.getTableId()),
+				
+			expandoColumn.getName()
+			});
+	}
+
 	public ExpandoColumn create(long columnId) {
 		ExpandoColumn expandoColumn = new ExpandoColumnImpl();
 

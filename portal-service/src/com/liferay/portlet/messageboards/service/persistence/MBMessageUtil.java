@@ -44,6 +44,13 @@ public class MBMessageUtil {
 	}
 
 	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(MBMessage)
+	 */
+	public static void clearCache(MBMessage mbMessage) {
+		getPersistence().clearCache(mbMessage);
+	}
+
+	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#countWithDynamicQuery(DynamicQuery)
 	 */
 	public long countWithDynamicQuery(DynamicQuery dynamicQuery)

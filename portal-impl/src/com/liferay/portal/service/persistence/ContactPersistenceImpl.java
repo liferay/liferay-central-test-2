@@ -107,6 +107,11 @@ public class ContactPersistenceImpl extends BasePersistenceImpl<Contact>
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	public void clearCache(Contact contact) {
+		EntityCacheUtil.removeResult(ContactModelImpl.ENTITY_CACHE_ENABLED,
+			ContactImpl.class, contact.getPrimaryKey());
+	}
+
 	public Contact create(long contactId) {
 		Contact contact = new ContactImpl();
 

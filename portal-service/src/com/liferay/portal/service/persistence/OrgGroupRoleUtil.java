@@ -43,6 +43,13 @@ public class OrgGroupRoleUtil {
 	}
 
 	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(OrgGroupRole)
+	 */
+	public static void clearCache(OrgGroupRole orgGroupRole) {
+		getPersistence().clearCache(orgGroupRole);
+	}
+
+	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#countWithDynamicQuery(DynamicQuery)
 	 */
 	public long countWithDynamicQuery(DynamicQuery dynamicQuery)

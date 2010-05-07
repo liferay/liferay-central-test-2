@@ -43,6 +43,13 @@ public class WebDAVPropsUtil {
 	}
 
 	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(WebDAVProps)
+	 */
+	public static void clearCache(WebDAVProps webDAVProps) {
+		getPersistence().clearCache(webDAVProps);
+	}
+
+	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#countWithDynamicQuery(DynamicQuery)
 	 */
 	public long countWithDynamicQuery(DynamicQuery dynamicQuery)

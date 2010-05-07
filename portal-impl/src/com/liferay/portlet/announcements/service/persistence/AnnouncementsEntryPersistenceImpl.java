@@ -180,6 +180,11 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	public void clearCache(AnnouncementsEntry announcementsEntry) {
+		EntityCacheUtil.removeResult(AnnouncementsEntryModelImpl.ENTITY_CACHE_ENABLED,
+			AnnouncementsEntryImpl.class, announcementsEntry.getPrimaryKey());
+	}
+
 	public AnnouncementsEntry create(long entryId) {
 		AnnouncementsEntry announcementsEntry = new AnnouncementsEntryImpl();
 

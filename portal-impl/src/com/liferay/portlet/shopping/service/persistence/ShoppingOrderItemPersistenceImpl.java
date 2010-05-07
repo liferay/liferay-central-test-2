@@ -115,6 +115,11 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistenceImpl<Shoppi
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	public void clearCache(ShoppingOrderItem shoppingOrderItem) {
+		EntityCacheUtil.removeResult(ShoppingOrderItemModelImpl.ENTITY_CACHE_ENABLED,
+			ShoppingOrderItemImpl.class, shoppingOrderItem.getPrimaryKey());
+	}
+
 	public ShoppingOrderItem create(long orderItemId) {
 		ShoppingOrderItem shoppingOrderItem = new ShoppingOrderItemImpl();
 

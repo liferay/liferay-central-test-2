@@ -118,6 +118,11 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	public void clearCache(WorkflowInstanceLink workflowInstanceLink) {
+		EntityCacheUtil.removeResult(WorkflowInstanceLinkModelImpl.ENTITY_CACHE_ENABLED,
+			WorkflowInstanceLinkImpl.class, workflowInstanceLink.getPrimaryKey());
+	}
+
 	public WorkflowInstanceLink create(long workflowInstanceLinkId) {
 		WorkflowInstanceLink workflowInstanceLink = new WorkflowInstanceLinkImpl();
 

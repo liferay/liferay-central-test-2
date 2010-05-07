@@ -44,6 +44,13 @@ public class MBThreadUtil {
 	}
 
 	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(MBThread)
+	 */
+	public static void clearCache(MBThread mbThread) {
+		getPersistence().clearCache(mbThread);
+	}
+
+	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#countWithDynamicQuery(DynamicQuery)
 	 */
 	public long countWithDynamicQuery(DynamicQuery dynamicQuery)

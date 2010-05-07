@@ -135,6 +135,20 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl<PluginSett
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	public void clearCache(PluginSetting pluginSetting) {
+		EntityCacheUtil.removeResult(PluginSettingModelImpl.ENTITY_CACHE_ENABLED,
+			PluginSettingImpl.class, pluginSetting.getPrimaryKey());
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_I_T,
+			new Object[] {
+				new Long(pluginSetting.getCompanyId()),
+				
+			pluginSetting.getPluginId(),
+				
+			pluginSetting.getPluginType()
+			});
+	}
+
 	public PluginSetting create(long pluginSettingId) {
 		PluginSetting pluginSetting = new PluginSettingImpl();
 

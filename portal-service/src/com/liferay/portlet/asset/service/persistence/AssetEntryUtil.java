@@ -44,6 +44,13 @@ public class AssetEntryUtil {
 	}
 
 	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(AssetEntry)
+	 */
+	public static void clearCache(AssetEntry assetEntry) {
+		getPersistence().clearCache(assetEntry);
+	}
+
+	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#countWithDynamicQuery(DynamicQuery)
 	 */
 	public long countWithDynamicQuery(DynamicQuery dynamicQuery)

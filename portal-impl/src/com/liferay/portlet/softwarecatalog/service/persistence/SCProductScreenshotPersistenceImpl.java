@@ -154,6 +154,23 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	public void clearCache(SCProductScreenshot scProductScreenshot) {
+		EntityCacheUtil.removeResult(SCProductScreenshotModelImpl.ENTITY_CACHE_ENABLED,
+			SCProductScreenshotImpl.class, scProductScreenshot.getPrimaryKey());
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_THUMBNAILID,
+			new Object[] { new Long(scProductScreenshot.getThumbnailId()) });
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_FULLIMAGEID,
+			new Object[] { new Long(scProductScreenshot.getFullImageId()) });
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_P_P,
+			new Object[] {
+				new Long(scProductScreenshot.getProductEntryId()),
+				new Integer(scProductScreenshot.getPriority())
+			});
+	}
+
 	public SCProductScreenshot create(long productScreenshotId) {
 		SCProductScreenshot scProductScreenshot = new SCProductScreenshotImpl();
 

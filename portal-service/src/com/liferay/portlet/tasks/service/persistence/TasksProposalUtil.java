@@ -44,6 +44,13 @@ public class TasksProposalUtil {
 	}
 
 	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(TasksProposal)
+	 */
+	public static void clearCache(TasksProposal tasksProposal) {
+		getPersistence().clearCache(tasksProposal);
+	}
+
+	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#countWithDynamicQuery(DynamicQuery)
 	 */
 	public long countWithDynamicQuery(DynamicQuery dynamicQuery)

@@ -131,6 +131,19 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	public void clearCache(AnnouncementsDelivery announcementsDelivery) {
+		EntityCacheUtil.removeResult(AnnouncementsDeliveryModelImpl.ENTITY_CACHE_ENABLED,
+			AnnouncementsDeliveryImpl.class,
+			announcementsDelivery.getPrimaryKey());
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_U_T,
+			new Object[] {
+				new Long(announcementsDelivery.getUserId()),
+				
+			announcementsDelivery.getType()
+			});
+	}
+
 	public AnnouncementsDelivery create(long deliveryId) {
 		AnnouncementsDelivery announcementsDelivery = new AnnouncementsDeliveryImpl();
 

@@ -44,6 +44,13 @@ public class DLFileShortcutUtil {
 	}
 
 	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(DLFileShortcut)
+	 */
+	public static void clearCache(DLFileShortcut dlFileShortcut) {
+		getPersistence().clearCache(dlFileShortcut);
+	}
+
+	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#countWithDynamicQuery(DynamicQuery)
 	 */
 	public long countWithDynamicQuery(DynamicQuery dynamicQuery)

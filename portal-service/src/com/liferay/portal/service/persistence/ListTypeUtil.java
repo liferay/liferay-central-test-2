@@ -43,6 +43,13 @@ public class ListTypeUtil {
 	}
 
 	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(ListType)
+	 */
+	public static void clearCache(ListType listType) {
+		getPersistence().clearCache(listType);
+	}
+
+	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#countWithDynamicQuery(DynamicQuery)
 	 */
 	public long countWithDynamicQuery(DynamicQuery dynamicQuery)

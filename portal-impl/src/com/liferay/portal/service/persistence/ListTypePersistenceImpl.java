@@ -107,6 +107,11 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl<ListType>
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	public void clearCache(ListType listType) {
+		EntityCacheUtil.removeResult(ListTypeModelImpl.ENTITY_CACHE_ENABLED,
+			ListTypeImpl.class, listType.getPrimaryKey());
+	}
+
 	public ListType create(int listTypeId) {
 		ListType listType = new ListTypeImpl();
 

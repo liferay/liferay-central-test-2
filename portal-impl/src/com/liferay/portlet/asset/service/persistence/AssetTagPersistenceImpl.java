@@ -122,6 +122,11 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	public void clearCache(AssetTag assetTag) {
+		EntityCacheUtil.removeResult(AssetTagModelImpl.ENTITY_CACHE_ENABLED,
+			AssetTagImpl.class, assetTag.getPrimaryKey());
+	}
+
 	public AssetTag create(long tagId) {
 		AssetTag assetTag = new AssetTagImpl();
 

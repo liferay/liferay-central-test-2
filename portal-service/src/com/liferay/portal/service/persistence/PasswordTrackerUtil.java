@@ -43,6 +43,13 @@ public class PasswordTrackerUtil {
 	}
 
 	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(PasswordTracker)
+	 */
+	public static void clearCache(PasswordTracker passwordTracker) {
+		getPersistence().clearCache(passwordTracker);
+	}
+
+	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#countWithDynamicQuery(DynamicQuery)
 	 */
 	public long countWithDynamicQuery(DynamicQuery dynamicQuery)

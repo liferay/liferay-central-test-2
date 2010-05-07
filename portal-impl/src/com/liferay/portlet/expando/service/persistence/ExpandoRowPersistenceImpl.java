@@ -125,6 +125,17 @@ public class ExpandoRowPersistenceImpl extends BasePersistenceImpl<ExpandoRow>
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	public void clearCache(ExpandoRow expandoRow) {
+		EntityCacheUtil.removeResult(ExpandoRowModelImpl.ENTITY_CACHE_ENABLED,
+			ExpandoRowImpl.class, expandoRow.getPrimaryKey());
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_T_C,
+			new Object[] {
+				new Long(expandoRow.getTableId()),
+				new Long(expandoRow.getClassPK())
+			});
+	}
+
 	public ExpandoRow create(long rowId) {
 		ExpandoRow expandoRow = new ExpandoRowImpl();
 

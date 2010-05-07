@@ -111,6 +111,15 @@ public class SocialEquityAssetEntryPersistenceImpl extends BasePersistenceImpl<S
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	public void clearCache(SocialEquityAssetEntry socialEquityAssetEntry) {
+		EntityCacheUtil.removeResult(SocialEquityAssetEntryModelImpl.ENTITY_CACHE_ENABLED,
+			SocialEquityAssetEntryImpl.class,
+			socialEquityAssetEntry.getPrimaryKey());
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_ASSETENTRYID,
+			new Object[] { new Long(socialEquityAssetEntry.getAssetEntryId()) });
+	}
+
 	public SocialEquityAssetEntry create(long equityAssetEntryId) {
 		SocialEquityAssetEntry socialEquityAssetEntry = new SocialEquityAssetEntryImpl();
 

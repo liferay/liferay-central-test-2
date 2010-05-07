@@ -179,6 +179,20 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	public void clearCache(Role role) {
+		EntityCacheUtil.removeResult(RoleModelImpl.ENTITY_CACHE_ENABLED,
+			RoleImpl.class, role.getPrimaryKey());
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_N,
+			new Object[] { new Long(role.getCompanyId()), role.getName() });
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_C_C,
+			new Object[] {
+				new Long(role.getCompanyId()), new Long(role.getClassNameId()),
+				new Long(role.getClassPK())
+			});
+	}
+
 	public Role create(long roleId) {
 		Role role = new RoleImpl();
 

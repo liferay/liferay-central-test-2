@@ -464,6 +464,14 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	public void clearCache(MBMessage mbMessage) {
+		EntityCacheUtil.removeResult(MBMessageModelImpl.ENTITY_CACHE_ENABLED,
+			MBMessageImpl.class, mbMessage.getPrimaryKey());
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
+			new Object[] { mbMessage.getUuid(), new Long(mbMessage.getGroupId()) });
+	}
+
 	public MBMessage create(long messageId) {
 		MBMessage mbMessage = new MBMessageImpl();
 

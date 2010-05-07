@@ -140,6 +140,17 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	public void clearCache(PollsVote pollsVote) {
+		EntityCacheUtil.removeResult(PollsVoteModelImpl.ENTITY_CACHE_ENABLED,
+			PollsVoteImpl.class, pollsVote.getPrimaryKey());
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_Q_U,
+			new Object[] {
+				new Long(pollsVote.getQuestionId()),
+				new Long(pollsVote.getUserId())
+			});
+	}
+
 	public PollsVote create(long voteId) {
 		PollsVote pollsVote = new PollsVoteImpl();
 

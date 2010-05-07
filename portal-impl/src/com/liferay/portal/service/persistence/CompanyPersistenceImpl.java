@@ -144,6 +144,23 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	public void clearCache(Company company) {
+		EntityCacheUtil.removeResult(CompanyModelImpl.ENTITY_CACHE_ENABLED,
+			CompanyImpl.class, company.getPrimaryKey());
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_WEBID,
+			new Object[] { company.getWebId() });
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_VIRTUALHOST,
+			new Object[] { company.getVirtualHost() });
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_MX,
+			new Object[] { company.getMx() });
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_LOGOID,
+			new Object[] { new Long(company.getLogoId()) });
+	}
+
 	public Company create(long companyId) {
 		Company company = new CompanyImpl();
 

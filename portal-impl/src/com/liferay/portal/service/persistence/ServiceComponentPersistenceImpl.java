@@ -126,6 +126,17 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	public void clearCache(ServiceComponent serviceComponent) {
+		EntityCacheUtil.removeResult(ServiceComponentModelImpl.ENTITY_CACHE_ENABLED,
+			ServiceComponentImpl.class, serviceComponent.getPrimaryKey());
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_BNS_BNU,
+			new Object[] {
+				serviceComponent.getBuildNamespace(),
+				new Long(serviceComponent.getBuildNumber())
+			});
+	}
+
 	public ServiceComponent create(long serviceComponentId) {
 		ServiceComponent serviceComponent = new ServiceComponentImpl();
 

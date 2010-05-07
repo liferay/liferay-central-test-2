@@ -146,6 +146,17 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	public void clearCache(AssetTagStats assetTagStats) {
+		EntityCacheUtil.removeResult(AssetTagStatsModelImpl.ENTITY_CACHE_ENABLED,
+			AssetTagStatsImpl.class, assetTagStats.getPrimaryKey());
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_T_C,
+			new Object[] {
+				new Long(assetTagStats.getTagId()),
+				new Long(assetTagStats.getClassNameId())
+			});
+	}
+
 	public AssetTagStats create(long tagStatsId) {
 		AssetTagStats assetTagStats = new AssetTagStatsImpl();
 

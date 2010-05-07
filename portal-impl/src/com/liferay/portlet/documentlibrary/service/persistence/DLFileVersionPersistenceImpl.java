@@ -172,6 +172,21 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	public void clearCache(DLFileVersion dlFileVersion) {
+		EntityCacheUtil.removeResult(DLFileVersionModelImpl.ENTITY_CACHE_ENABLED,
+			DLFileVersionImpl.class, dlFileVersion.getPrimaryKey());
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_F_N_V,
+			new Object[] {
+				new Long(dlFileVersion.getGroupId()),
+				new Long(dlFileVersion.getFolderId()),
+				
+			dlFileVersion.getName(),
+				
+			dlFileVersion.getVersion()
+			});
+	}
+
 	public DLFileVersion create(long fileVersionId) {
 		DLFileVersion dlFileVersion = new DLFileVersionImpl();
 

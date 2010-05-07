@@ -43,6 +43,13 @@ public class PluginSettingUtil {
 	}
 
 	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(PluginSetting)
+	 */
+	public static void clearCache(PluginSetting pluginSetting) {
+		getPersistence().clearCache(pluginSetting);
+	}
+
+	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#countWithDynamicQuery(DynamicQuery)
 	 */
 	public long countWithDynamicQuery(DynamicQuery dynamicQuery)
