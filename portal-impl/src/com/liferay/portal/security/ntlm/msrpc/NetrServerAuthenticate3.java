@@ -68,15 +68,13 @@ public class NetrServerAuthenticate3 extends DcerpcMessage {
 
 		ndrBuffer.advance(8);
 
-		ndrBuffer = ndrBuffer.derive(index);
+		NdrBuffer derivedBuffer = ndrBuffer.derive(index);
 
 		for (int i = 0; i < 8; i++) {
-			ndrBuffer.enc_ndr_small(_clientCredential[i]);
+			derivedBuffer.enc_ndr_small(_clientCredential[i]);
 		}
 
 		ndrBuffer.enc_ndr_long(_negotiateFlags);
-
-		ndrBuffer.setIndex(ndrBuffer.index);
 	}
 
 	public int getAccountRid() {
