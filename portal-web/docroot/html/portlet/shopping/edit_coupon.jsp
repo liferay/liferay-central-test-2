@@ -189,17 +189,16 @@ String discountType = BeanParamUtil.getString(coupon, request, "discountType");
 		function(date, checked) {
 			var A = AUI();
 
-			document.<portlet:namespace />fm["<portlet:namespace />" + date + "Month"].disabled = checked;
-			document.<portlet:namespace />fm["<portlet:namespace />" + date + "Day"].disabled = checked;
-			document.<portlet:namespace />fm["<portlet:namespace />" + date + "Year"].disabled = checked;
 			document.<portlet:namespace />fm["<portlet:namespace />" + date + "Hour"].disabled = checked;
 			document.<portlet:namespace />fm["<portlet:namespace />" + date + "Minute"].disabled = checked;
 			document.<portlet:namespace />fm["<portlet:namespace />" + date + "AmPm"].disabled = checked;
 
-			var imageInputId = A.one(document.<portlet:namespace />fm["<portlet:namespace />" + date + "ImageInputIdInput"]);
+			var calendarWidgetId = document.<portlet:namespace />fm["<portlet:namespace />" + date + "Month"].getAttribute('data-auiComponentID');
 
-			if (imageInputId) {
-				imageInputId.toggleClass('disabled');
+			var calendarWidget = A.Component.getById(calendarWidgetId);
+
+			if (calendarWidget) {
+				calendarWidget.set('disabled', checked);
 			}
 		},
 		['aui-base']

@@ -110,6 +110,7 @@ if (yearValue > 0) {
 			dateFormat: '%m/%e/%Y',
 			dayField: '#<%= dayParam %>',
 			dayFieldName: '<%= dayParam %>',
+			disabled: <%= disabled %>,
 			displayBoundingBox: '#<%= randomNamespace %>displayDate',
 			firstDayOfWeek: <%= firstDayOfWeek %>,
 			monthField: '#<%= monthParam %>',

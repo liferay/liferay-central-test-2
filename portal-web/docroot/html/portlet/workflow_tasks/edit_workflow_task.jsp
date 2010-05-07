@@ -285,19 +285,16 @@ long classPK = GetterUtil.getLong((String)workflowContext.get(WorkflowConstants.
 		function(date, checked) {
 			var A = AUI();
 
-			document.<portlet:namespace />fm["<portlet:namespace />" + date + "Month"].disabled = checked;
-			document.<portlet:namespace />fm["<portlet:namespace />" + date + "Day"].disabled = checked;
-			document.<portlet:namespace />fm["<portlet:namespace />" + date + "Year"].disabled = checked;
 			document.<portlet:namespace />fm["<portlet:namespace />" + date + "Hour"].disabled = checked;
 			document.<portlet:namespace />fm["<portlet:namespace />" + date + "Minute"].disabled = checked;
 			document.<portlet:namespace />fm["<portlet:namespace />" + date + "AmPm"].disabled = checked;
 
-			document.<portlet:namespace />fm["<portlet:namespace />updateButton"].disabled = checked;
+			var calendarWidgetId = document.<portlet:namespace />fm["<portlet:namespace />" + date + "Month"].getAttribute('data-auiComponentID');
 
-			var imageInputId = A.one(document.<portlet:namespace />fm["<portlet:namespace />" + date + "ImageInputIdInput"]);
+			var calendarWidget = A.Component.getById(calendarWidgetId);
 
-			if (imageInputId) {
-				imageInputId.toggleClass('disabled');
+			if (calendarWidget) {
+				calendarWidget.set('disabled', checked);
 			}
 		},
 		['aui-base']
