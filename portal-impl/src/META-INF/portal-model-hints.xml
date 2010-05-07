@@ -1805,6 +1805,7 @@
 	</model>
 	<model name="com.liferay.portlet.social.model.SocialEquityUser">
 		<field name="equityUserId" type="long" />
+		<field name="groupId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="contributionEquity" type="double" />

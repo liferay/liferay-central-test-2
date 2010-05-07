@@ -61,6 +61,14 @@ public class SocialEquityUserWrapper implements SocialEquityUser {
 		_socialEquityUser.setEquityUserUuid(equityUserUuid);
 	}
 
+	public long getGroupId() {
+		return _socialEquityUser.getGroupId();
+	}
+
+	public void setGroupId(long groupId) {
+		_socialEquityUser.setGroupId(groupId);
+	}
+
 	public long getCompanyId() {
 		return _socialEquityUser.getCompanyId();
 	}

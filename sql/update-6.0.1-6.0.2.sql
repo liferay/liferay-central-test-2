@@ -48,6 +48,7 @@ create table SocialEquitySetting (
 
 create table SocialEquityUser (
 	equityUserId LONG not null primary key,
+	groupId LONG,
 	companyId LONG,
 	userId LONG,
 	contributionEquity DOUBLE,

@@ -59,6 +59,7 @@ public class SocialEquityUserModelImpl extends BaseModelImpl<SocialEquityUser> {
 	public static final String TABLE_NAME = "SocialEquityUser";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "equityUserId", new Integer(Types.BIGINT) },
+			{ "groupId", new Integer(Types.BIGINT) },
 			{ "companyId", new Integer(Types.BIGINT) },
 			{ "userId", new Integer(Types.BIGINT) },
 			{ "contributionEquity", new Integer(Types.DOUBLE) },
@@ -67,7 +68,7 @@ public class SocialEquityUserModelImpl extends BaseModelImpl<SocialEquityUser> {
 			{ "participationEquity", new Integer(Types.DOUBLE) },
 			{ "personalEquity", new Integer(Types.DOUBLE) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table SocialEquityUser (equityUserId LONG not null primary key,companyId LONG,userId LONG,contributionEquity DOUBLE,participationK DOUBLE,participationB DOUBLE,participationEquity DOUBLE,personalEquity DOUBLE)";
+	public static final String TABLE_SQL_CREATE = "create table SocialEquityUser (equityUserId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,contributionEquity DOUBLE,participationK DOUBLE,participationB DOUBLE,participationEquity DOUBLE,personalEquity DOUBLE)";
 	public static final String TABLE_SQL_DROP = "drop table SocialEquityUser";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -83,6 +84,7 @@ public class SocialEquityUserModelImpl extends BaseModelImpl<SocialEquityUser> {
 		SocialEquityUser model = new SocialEquityUserImpl();
 
 		model.setEquityUserId(soapModel.getEquityUserId());
+		model.setGroupId(soapModel.getGroupId());
 		model.setCompanyId(soapModel.getCompanyId());
 		model.setUserId(soapModel.getUserId());
 		model.setContributionEquity(soapModel.getContributionEquity());
@@ -138,6 +140,14 @@ public class SocialEquityUserModelImpl extends BaseModelImpl<SocialEquityUser> {
 
 	public void setEquityUserUuid(String equityUserUuid) {
 		_equityUserUuid = equityUserUuid;
+	}
+
+	public long getGroupId() {
+		return _groupId;
+	}
+
+	public void setGroupId(long groupId) {
+		_groupId = groupId;
 	}
 
 	public long getCompanyId() {
@@ -242,6 +252,7 @@ public class SocialEquityUserModelImpl extends BaseModelImpl<SocialEquityUser> {
 		SocialEquityUserImpl clone = new SocialEquityUserImpl();
 
 		clone.setEquityUserId(getEquityUserId());
+		clone.setGroupId(getGroupId());
 		clone.setCompanyId(getCompanyId());
 		clone.setUserId(getUserId());
 		clone.setContributionEquity(getContributionEquity());
@@ -296,10 +307,12 @@ public class SocialEquityUserModelImpl extends BaseModelImpl<SocialEquityUser> {
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(17);
+		StringBundler sb = new StringBundler(19);
 
 		sb.append("{equityUserId=");
 		sb.append(getEquityUserId());
+		sb.append(", groupId=");
+		sb.append(getGroupId());
 		sb.append(", companyId=");
 		sb.append(getCompanyId());
 		sb.append(", userId=");
@@ -320,7 +333,7 @@ public class SocialEquityUserModelImpl extends BaseModelImpl<SocialEquityUser> {
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(28);
+		StringBundler sb = new StringBundler(31);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portlet.social.model.SocialEquityUser");
@@ -329,6 +342,10 @@ public class SocialEquityUserModelImpl extends BaseModelImpl<SocialEquityUser> {
 		sb.append(
 			"<column><column-name>equityUserId</column-name><column-value><![CDATA[");
 		sb.append(getEquityUserId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>groupId</column-name><column-value><![CDATA[");
+		sb.append(getGroupId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>companyId</column-name><column-value><![CDATA[");
@@ -366,6 +383,7 @@ public class SocialEquityUserModelImpl extends BaseModelImpl<SocialEquityUser> {
 
 	private long _equityUserId;
 	private String _equityUserUuid;
+	private long _groupId;
 	private long _companyId;
 	private long _userId;
 	private String _userUuid;

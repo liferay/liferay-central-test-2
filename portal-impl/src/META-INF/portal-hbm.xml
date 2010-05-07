@@ -1922,6 +1922,7 @@
 		<id name="equityUserId" type="long">
 			<generator class="assigned" />
 		</id>
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="contributionEquity" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />

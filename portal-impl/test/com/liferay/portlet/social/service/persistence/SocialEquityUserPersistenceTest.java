@@ -67,6 +67,7 @@ public class SocialEquityUserPersistenceTest extends BasePersistenceTestCase {
 
 		SocialEquityUser newSocialEquityUser = _persistence.create(pk);
 
+		newSocialEquityUser.setGroupId(nextLong());
 		newSocialEquityUser.setCompanyId(nextLong());
 		newSocialEquityUser.setUserId(nextLong());
 		newSocialEquityUser.setContributionEquity(nextDouble());
@@ -81,6 +82,8 @@ public class SocialEquityUserPersistenceTest extends BasePersistenceTestCase {
 
 		assertEquals(existingSocialEquityUser.getEquityUserId(),
 			newSocialEquityUser.getEquityUserId());
+		assertEquals(existingSocialEquityUser.getGroupId(),
+			newSocialEquityUser.getGroupId());
 		assertEquals(existingSocialEquityUser.getCompanyId(),
 			newSocialEquityUser.getCompanyId());
 		assertEquals(existingSocialEquityUser.getUserId(),
@@ -168,6 +171,7 @@ public class SocialEquityUserPersistenceTest extends BasePersistenceTestCase {
 
 		SocialEquityUser socialEquityUser = _persistence.create(pk);
 
+		socialEquityUser.setGroupId(nextLong());
 		socialEquityUser.setCompanyId(nextLong());
 		socialEquityUser.setUserId(nextLong());
 		socialEquityUser.setContributionEquity(nextDouble());

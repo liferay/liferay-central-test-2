@@ -41,6 +41,7 @@ public class SocialEquityUserSoap implements Serializable {
 		SocialEquityUserSoap soapModel = new SocialEquityUserSoap();
 
 		soapModel.setEquityUserId(model.getEquityUserId());
+		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
 		soapModel.setContributionEquity(model.getContributionEquity());
@@ -110,6 +111,14 @@ public class SocialEquityUserSoap implements Serializable {
 		_equityUserId = equityUserId;
 	}
 
+	public long getGroupId() {
+		return _groupId;
+	}
+
+	public void setGroupId(long groupId) {
+		_groupId = groupId;
+	}
+
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -167,6 +176,7 @@ public class SocialEquityUserSoap implements Serializable {
 	}
 
 	private long _equityUserId;
+	private long _groupId;
 	private long _companyId;
 	private long _userId;
 	private double _contributionEquity;
