@@ -60,9 +60,7 @@ public class BookmarksEntryLocalServiceImpl
 
 		Date now = new Date();
 
-		if (!Validator.isUrl(url)) {
-			throw new EntryURLException();
-		}
+		validate(url);
 
 		long entryId = counterLocalService.increment();
 
@@ -330,9 +328,7 @@ public class BookmarksEntryLocalServiceImpl
 			name = url;
 		}
 
-		if (!Validator.isUrl(url)) {
-			throw new EntryURLException();
-		}
+		validate(url);
 
 		entry.setModifiedDate(serviceContext.getModifiedDate(null));
 		entry.setFolderId(folderId);
@@ -376,6 +372,12 @@ public class BookmarksEntryLocalServiceImpl
 		}
 
 		return folderId;
+	}
+
+	protected void validate(String url) throws PortalException {
+		if (!Validator.isUrl(url)) {
+			throw new EntryURLException();
+		}
 	}
 
 }
