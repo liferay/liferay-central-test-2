@@ -888,7 +888,7 @@ public class MainServlet extends ActionServlet {
 					assetRendererFactories) {
 
 				String assetRendererEnabledKey =
-					"asset.renderer.enabled." +
+					PropsKeys.ASSET_RENDERER_ENABLED +
 						assetRendererFactory.getClass().getName();
 
 				boolean assetRendererEnabledValue = GetterUtil.getBoolean(
