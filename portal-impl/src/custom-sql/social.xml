@@ -1,6 +1,390 @@
 <?xml version="1.0"?>
 
 <custom-sql>
+	<sql id="com.liferay.portlet.social.service.impl.SocialEquityLogLocalServiceImpl.addSocialEquityAssetEntry">
+		<![CDATA[
+			INSERT INTO
+				SocialEquityAssetEntry
+					(equityAssetEntryId, groupId, companyId, userId, assetEntryId, informationK, informationB, informationEquity)
+			VALUES
+				([$EQUITY_ASSET_ENTRY_ID$], [$GROUP_ID$], [$COMPANY_ID$], [$USER_ID$], [$ASSET_ENTRY_ID$], 0, 0, 0)
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.social.service.impl.SocialEquityLogLocalServiceImpl.addSocialEquityUser">
+		<![CDATA[
+			INSERT INTO
+				SocialEquityUser
+					(equityUserId, groupId, companyId, userId, contributionEquity, participationK, participationB, participationEquity, personalEquity)
+			VALUES
+				([$EQUITY_USER_ID$], [$GROUP_ID$], [$COMPANY_ID$], [$USER_ID$], 0, 0, 0, 0, 0)
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.social.service.impl.SocialEquityLogLocalServiceImpl.updateAssetEntry">
+		<![CDATA[
+			UPDATE
+				AssetEntry
+			SET
+				socialInformationEquity =
+					(
+						SELECT
+							informationEquity
+						FROM 
+							SocialEquityAssetEntry
+						WHERE
+							(entryId = [$ASSET_ENTRY_ID$])
+					)
+			WHERE
+				(entryId = [$ASSET_ENTRY_ID$])
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.social.service.impl.SocialEquityLogLocalServiceImpl.updateSocialEquityAssetEntry_IQ">
+		<![CDATA[
+			UPDATE
+				SocialEquityAssetEntry
+			SET
+				informationK = informationK + [$INFORMATION_K$],
+				informationB = informationB + [$INFORMATION_B$],
+				informationEquity = (informationK + [$INFORMATION_K$]) * [$ACTIVITY_DATE$] + informationB + [$INFORMATION_B$]
+			WHERE
+				assetEntryId = [$ASSET_ENTRY_ID$]
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.social.service.impl.SocialEquityLogLocalServiceImpl.updateSocialEquityUser_CQ">
+		<![CDATA[
+			UPDATE
+				SocialEquityUser
+			SET
+				contributionEquity =
+					(
+						SELECT
+							SUM(informationEquity)
+						FROM
+							SocialEquityAssetEntry
+						WHERE
+							(groupId = [$GROUP_ID$]) AND
+							(userId = [$USER_ID$])
+					),
+				personalEquity = contributionEquity + participationEquity
+			WHERE
+				(groupId = [$GROUP_ID$]) AND
+				(userId = [$USER_ID$])
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.social.service.impl.SocialEquityLogLocalServiceImpl.updateSocialEquityUser_PQ">
+		<![CDATA[
+			UPDATE
+				SocialEquityUser
+			SET
+				contributionEquity =
+					(
+						SELECT
+							SUM(informationEquity)
+						FROM
+							SocialEquityAssetEntry
+						WHERE
+							(groupId = [$GROUP_ID$]) AND
+							(userId = [$USER_ID$])
+					),
+				participationK = participationK + [$PARTICIPATION_K$],
+				participationB = participationB + [$PARTICIPATION_B$],
+				participationEquity = (participationK + [$PARTICIPATION_K$]) * [$ACTIVITY_DATE$] + participationB + [$PARTICIPATION_B$]
+				personalEquity = contributionEquity + participationEquity
+			WHERE
+				(groupId = [$GROUP_ID$]) AND
+				(userId = [$USER_ID$])
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.social.service.impl.SocialEquityLogLocalServiceImpl.updateUser">
+		<![CDATA[
+			UPDATE
+				User_
+			SET
+				socialContributionEquity =
+					(
+						SELECT
+							SUM(contributionEquity)
+						FROM
+							SocialEquityUser
+						WHERE
+							(userId = [$USER_ID$])
+					),
+				socialParticipationEquity =
+					(
+						SELECT
+							SUM(participationEquity)
+						FROM
+							SocialEquityUser
+						WHERE
+							(userId = [$USER_ID$])
+					),
+				socialPersonalEquity = socialContributionEquity + socialParticipationEquity
+			WHERE
+				(User_.userId = [$USER_ID$])
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.social.service.impl.SocialEquityLogLocalServiceImpl.checkAssetEntry">
+		<![CDATA[
+			UPDATE
+				AssetEntry
+			SET
+				socialInformationEquity =
+					(
+						SELECT
+							informationEquity
+						FROM 
+							SocialEquityAssetEntry
+						WHERE
+							(SocialEquityAssetEntry.assetEntryId = AssetEntry.entryId)
+					)
+			WHERE
+				entryId IN
+					(
+						SELECT
+							assetEntryId
+						FROM
+							SocialEquityLog
+						WHERE
+							(validity <= [$VALIDITY$]) AND
+							(active_ = [$TRUE$]) AND
+							(type_ = [$TYPE_INFORMATION$])
+					)
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.social.service.impl.SocialEquityLogLocalServiceImpl.checkSocialEquityAssetEntry_IQ_1">
+		<![CDATA[
+			UPDATE
+				SocialEquityAssetEntry
+			SET
+				informationK =
+					informationK -
+						(
+							SELECT
+								SUM(-value / (validity - actionDate))
+							FROM
+								SocialEquityLog
+							WHERE
+								(SocialEquityLog.assetEntryId = SocialEquityAssetEntry.assetEntryId) AND
+								(validity <= [$VALIDITY$]) AND
+								(active_ = [$TRUE$])
+						),
+				informationB =
+					informationB -
+						(
+							SELECT
+								SUM(-(-value / (validity - actionDate)) * validity)
+							FROM
+								SocialEquityLog
+							WHERE
+								(SocialEquityLog.assetEntryId = SocialEquityAssetEntry.assetEntryId) AND
+								(validity <= [$VALIDITY$]) AND
+								(active_ = [$TRUE$])
+						),
+				informationEquity =
+					informationK -
+						(
+							SELECT
+								SUM(-value / (validity - actionDate))
+							FROM
+								SocialEquityLog
+							WHERE
+								(SocialEquityLog.assetEntryId = SocialEquityAssetEntry.assetEntryId) AND
+								(validity <= [$VALIDITY$]) AND
+								(active_ = [$TRUE$])
+
+						) * [$VALIDITY$] + informationB +
+						(
+							SELECT
+								SUM(-(-value / (validity - actionDate)) * validity)
+							FROM
+								SocialEquityLog
+							WHERE
+								(SocialEquityLog.assetEntryId = SocialEquityAssetEntry.assetEntryId) AND
+								(validity <= [$VALIDITY$]) AND
+								(active_ = [$TRUE$])
+						)
+			WHERE
+				assetEntryId IN
+					(
+						SELECT
+							assetEntryId
+						FROM
+							SocialEquityLog
+						WHERE
+							(validity <= [$VALIDITY$]) AND
+							(active_ = [$TRUE$]) AND
+							(type_ = [$TYPE_INFORMATION$])
+					)
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.social.service.impl.SocialEquityLogLocalServiceImpl.checkSocialEquityAssetEntry_IQ_2">
+		<![CDATA[
+			UPDATE
+				SocialEquityAssetEntry
+			SET
+				informationEquity = informationK * [$VALIDITY$] + informationB
+			WHERE
+				assetEntryId IN
+					(
+						SELECT
+							assetEntryId
+						FROM
+							SocialEquityLog
+						WHERE
+							(type_ = [$TYPE_INFORMATION$]) AND
+							(validity <= [$VALIDITY$]) AND
+							(active_ = [$TRUE$])
+					)
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.social.service.impl.SocialEquityLogLocalServiceImpl.checkSocialEquityUser_CQ">
+		<![CDATA[
+			UPDATE
+				SocialEquityUser
+			SET
+				contributionEquity =
+					(
+						SELECT
+							SUM(informationEquity)
+						FROM
+							SocialEquityAssetEntry
+						WHERE
+							SocialEquityAssetEntry.userId = SocialEquityUser.userId
+					)
+			WHERE
+				userId IN
+					(
+						SELECT
+							userId
+						FROM
+							SocialEquityLog
+						WHERE
+							(type_ = [$TYPE_INFORMATION$]) AND
+							(validity <= [$VALIDITY$]) AND
+							(active_ = [$TRUE$])
+					)
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.social.service.impl.SocialEquityLogLocalServiceImpl.checkSocialEquityUser_PQ_1">
+		<![CDATA[
+			UPDATE
+				SocialEquityUser
+			SET
+				participationK =
+					participationK -
+						(
+							SELECT
+								SUM(-value / (validity - actionDate))
+							FROM
+								SocialEquityLog
+							WHERE
+								(SocialEquityLog.userId = SocialEquityUser.userId) AND
+								(type_ = [$TYPE_PARTICIPATION$]) AND
+								(validity <= [$VALIDITY$]) AND
+								(active_ = [$TRUE$])
+						),
+				participationB =
+					participationB -
+						(
+							SELECT
+								SUM(-(-value / (validity - actionDate)) * validity)
+							FROM
+								SocialEquityLog
+							WHERE
+								(SocialEquityLog.userId = SocialEquityUser.userId) AND
+								(type_ = [$TYPE_PARTICIPATION$]) AND
+								(validity <= [$VALIDITY$]) AND
+								(active_ = [$TRUE$])
+						)
+			WHERE
+				userId IN
+					(
+						SELECT
+							userId
+						FROM
+							SocialEquityLog
+						WHERE
+							(type_ = [$TYPE_PARTICIPATION$]) AND
+							(validity <= [$VALIDITY$]) AND
+							(active_ = [$TRUE$])
+					)
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.social.service.impl.SocialEquityLogLocalServiceImpl.checkSocialEquityUser_PQ_2">
+		<![CDATA[
+			UPDATE
+				SocialEquityUser
+			SET
+				participationEquity = participationK * [$VALIDITY$] + participationB
+			WHERE
+				userId IN
+					(
+						SELECT
+							userId
+						FROM
+							SocialEquityLog
+						WHERE
+							(type_ = [$TYPE_PARTICIPATION$]) AND
+							(validity <= [$VALIDITY$]) AND
+							(active_ = [$TRUE$])
+					)
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.social.service.impl.SocialEquityLogLocalServiceImpl.checkSocialEquityUser_PEQ">
+		<![CDATA[
+			UPDATE
+				SocialEquityUser
+			SET
+				personalEquity = contributionEquity + participationEquity
+			WHERE
+				userId IN
+					(
+						SELECT
+							userId
+						FROM
+							SocialEquityLog
+						WHERE
+							(validity <= [$VALIDITY$]) AND
+							(active_ = [$TRUE$])
+					)
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.social.service.impl.SocialEquityLogLocalServiceImpl.checkUser">
+		<![CDATA[
+			UPDATE
+				User_
+			SET
+				socialContributionEquity =
+					(
+						SELECT
+							SUM(contributionEquity)
+						FROM
+							SocialEquityUser
+						WHERE
+							(SocialEquityUser.userId = User_.userId)
+					),
+				socialParticipationEquity =
+					(
+						SELECT
+							SUM(participationEquity)
+						FROM
+							SocialEquityUser
+						WHERE
+							(SocialEquityUser.userId = User_.userId)
+					),
+				socialPersonalEquity = socialContributionEquity + socialParticipationEquity
+			WHERE
+				userId IN
+					(
+						SELECT
+							userId
+						FROM
+							SocialEquityLog
+						WHERE
+							(validity <= [$VALIDITY$]) AND
+							(active_ = [$TRUE$])
+					)
+		]]>
+	</sql>
 	<sql id="com.liferay.portlet.social.service.persistence.SocialActivityFinder.countByGroupId">
 		<![CDATA[
 			SELECT
