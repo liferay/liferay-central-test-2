@@ -23,26 +23,27 @@ import com.liferay.portal.util.PropsValues;
  */
 public class NetlogonUtil {
 
-	static {
-		String domainController = PropsValues.NTLM_DOMAIN_CONTROLLER;
-		String domainControllerName = PropsValues.NTLM_DOMAIN_CONTROLLER_NAME;
-		String account = PropsValues.NTLM_SERVICE_ACCOUNT;
-		String password = PropsValues.NTLM_SERVICE_PASSWORD;
-
-		_netlogon = new Netlogon(
-			domainController, domainControllerName, new NtlmServiceAccount(
-			account, password));
-	}
-
 	public static NtlmUserAccount logon(
 		String domain, String userName, String workstation,
 		byte[] serverChallenge,	byte[] ntResponse, byte[] lmResponse) {
 
-		return _netlogon.logon(
+		return _instance._netlogon.logon(
 			domain, userName, workstation, serverChallenge, ntResponse,
 			lmResponse);
 	}
 
-	private static Netlogon _netlogon;
+	private NetlogonUtil() {
+		NtlmServiceAccount ntlmServiceAccount = new NtlmServiceAccount(
+			PropsValues.NTLM_SERVICE_ACCOUNT,
+			PropsValues.NTLM_SERVICE_PASSWORD);
+
+		_netlogon = new Netlogon(
+			PropsValues.NTLM_DOMAIN_CONTROLLER,
+			PropsValues.NTLM_DOMAIN_CONTROLLER_NAME, ntlmServiceAccount);
+	}
+
+	private static NetlogonUtil _instance = new NetlogonUtil();
+
+	private Netlogon _netlogon;
 
 }

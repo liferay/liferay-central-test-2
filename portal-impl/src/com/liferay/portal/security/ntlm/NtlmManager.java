@@ -17,6 +17,7 @@ package com.liferay.portal.security.ntlm;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.PropsValues;
 
 import java.io.UnsupportedEncodingException;
@@ -40,66 +41,72 @@ public class NtlmManager {
 
 	public NtlmManager() {
 		_domain = PropsValues.NTLM_DOMAIN;
-		_serviceAccount = new NtlmServiceAccount(
+		_ntlmServiceAccount = new NtlmServiceAccount(
 			PropsValues.NTLM_SERVICE_ACCOUNT, null);
 	}
 
 	public NtlmUserAccount authenticate(byte[] material) {
 		try {
-			Type3Message msg3 = new Type3Message(material);
+			Type3Message type3Message = new Type3Message(material);
 
-			if (msg3.getFlag(NTLMSSP_NEGOTIATE_EXTENDED_SESSIONSECURITY) &&
-				msg3.getNTResponse().length == 24) {
+			if (type3Message.getFlag(
+					_NTLMSSP_NEGOTIATE_EXTENDED_SESSION_SECURITY) &&
+				(type3Message.getNTResponse().length == 24)) {
 
-				MessageDigest md5 = MessageDigest.getInstance("MD5");
+				MessageDigest messageDigest = MessageDigest.getInstance("MD5");
 
-				byte[] tmp = new byte[16];
-				System.arraycopy(_serverChallenge, 0, tmp, 0, 8);
-				System.arraycopy(msg3.getLMResponse(), 0, tmp, 8, 8);
+				byte[] bytes = new byte[16];
 
-				md5.update(tmp);
+				System.arraycopy(_serverChallenge, 0, bytes, 0, 8);
+				System.arraycopy(type3Message.getLMResponse(), 0, bytes, 8, 8);
 
-				_serverChallenge = md5.digest();
+				messageDigest.update(bytes);
+
+				_serverChallenge = messageDigest.digest();
 			}
 
 			 return NetlogonUtil.logon(
-				 msg3.getDomain(), msg3.getUser(), msg3.getWorkstation(),
-				 _serverChallenge, msg3.getNTResponse(), msg3.getLMResponse());
+				 type3Message.getDomain(), type3Message.getUser(),
+				 type3Message.getWorkstation(),
+				 _serverChallenge, type3Message.getNTResponse(),
+				 type3Message.getLMResponse());
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error(e, e);
+
+			return null;
 		}
-
-		return null;
-	}
-
-	public byte[] negotiate(byte[] material) {
-		try {
-			Type1Message msg1 = new Type1Message(material);
-
-			_secureRandom.nextBytes(_serverChallenge);
-
-			Type2Message msg2 = new Type2Message(
-				msg1.getFlags(), _serverChallenge, _domain);
-
-			if (msg2.getFlag(NTLMSSP_NEGOTIATE_EXTENDED_SESSIONSECURITY)) {
-				msg2.setFlag(NtlmFlags.NTLMSSP_NEGOTIATE_LM_KEY, false);
-				msg2.setFlag(NtlmFlags.NTLMSSP_NEGOTIATE_TARGET_INFO, true);
-
-				msg2.setTargetInformation(getTargetInformation());
-			}
-
-			return msg2.toByteArray();
-		}
-		catch (Exception e) {
-			_log.error(e);
-		}
-
-		return null;
 	}
 
 	public byte[] getServerChallenge() {
 		return _serverChallenge;
+	}
+
+	public byte[] negotiate(byte[] material) {
+		try {
+			Type1Message type1Message = new Type1Message(material);
+
+			_secureRandom.nextBytes(_serverChallenge);
+
+			Type2Message type2Message = new Type2Message(
+				type1Message.getFlags(), _serverChallenge, _domain);
+
+			if (type2Message.getFlag(
+					_NTLMSSP_NEGOTIATE_EXTENDED_SESSION_SECURITY)) {
+
+				type2Message.setFlag(NtlmFlags.NTLMSSP_NEGOTIATE_LM_KEY, false);
+				type2Message.setFlag(
+					NtlmFlags.NTLMSSP_NEGOTIATE_TARGET_INFO, true);
+				type2Message.setTargetInformation(getTargetInformation());
+			}
+
+			return type2Message.toByteArray();
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			return null;
+		}
 	}
 
 	public void setServerChallenge(byte[] serverChallenge) {
@@ -110,37 +117,38 @@ public class NtlmManager {
 		throws UnsupportedEncodingException{
 
 		byte[] valueBytes = value.getBytes("UTF-16LE");
-		byte[] result = new byte[4 + valueBytes.length];
+		byte[] avPairBytes = new byte[4 + valueBytes.length];
 
-		Encdec.enc_uint16le((short)avId, result, 0);
-		Encdec.enc_uint16le((short)valueBytes.length, result, 2);
+		Encdec.enc_uint16le((short)avId, avPairBytes, 0);
+		Encdec.enc_uint16le((short)valueBytes.length, avPairBytes, 2);
 
-		System.arraycopy(valueBytes, 0, result, 4, valueBytes.length);
+		System.arraycopy(valueBytes, 0, avPairBytes, 4, valueBytes.length);
 
-		return result;
+		return avPairBytes;
 	}
 
 	protected byte[] getTargetInformation() throws UnsupportedEncodingException{
 		byte[] computerName = getAVPairBytes(
-			1, _serviceAccount.getComputerName());
+			1, _ntlmServiceAccount.getComputerName());
 		byte[] domainName =  getAVPairBytes(2, _domain);
-		byte[] eol = getAVPairBytes(0, "");
 
 		byte[] targetInformation = ArrayUtil.append(computerName, domainName);
+
+		byte[] eol = getAVPairBytes(0, StringPool.BLANK);
 
 		targetInformation = ArrayUtil.append(targetInformation, eol);
 
 		return targetInformation;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(NtlmManager.class);
-
-	public static final int NTLMSSP_NEGOTIATE_EXTENDED_SESSIONSECURITY =
+	private static final int _NTLMSSP_NEGOTIATE_EXTENDED_SESSION_SECURITY =
 		0x00080000;
 
+	private static Log _log = LogFactoryUtil.getLog(NtlmManager.class);
+
 	private String _domain;
+	private NtlmServiceAccount _ntlmServiceAccount;
 	private SecureRandom _secureRandom = new SecureRandom();
 	private byte[] _serverChallenge = new byte[8];
-	private NtlmServiceAccount _serviceAccount;
 
 }

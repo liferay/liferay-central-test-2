@@ -15,7 +15,6 @@
 package com.liferay.portal.security.ntlm.msrpc;
 
 import jcifs.dcerpc.ndr.NdrBuffer;
-import jcifs.dcerpc.ndr.NdrException;
 import jcifs.dcerpc.ndr.NdrObject;
 
 /**
@@ -29,39 +28,39 @@ public class NetlogonAuthenticator extends NdrObject {
 		_credential = new byte[8];
 	}
 
-	public NetlogonAuthenticator(
-		byte[] credential, int timestamp) {
-
+	public NetlogonAuthenticator(byte[] credential, int timestamp) {
 		_credential = credential;
 		_timestamp = timestamp;
 	}
 
-	public void decode(NdrBuffer buffer) throws NdrException {
-		buffer.align(4);
+	public void decode(NdrBuffer ndrBuffer) {
+		ndrBuffer.align(4);
 
-		int index = buffer.index;
-		buffer.advance(8);
+		int index = ndrBuffer.index;
 
-		_timestamp = buffer.dec_ndr_long();
+		ndrBuffer.advance(8);
 
-		buffer = buffer.derive(index);
+		_timestamp = ndrBuffer.dec_ndr_long();
+
+		ndrBuffer = ndrBuffer.derive(index);
 
 		for (int i = 0; i < 8; i++) {
-			_credential[i] = (byte) buffer.dec_ndr_small();
+			_credential[i] = (byte) ndrBuffer.dec_ndr_small();
 		}
 	}
+	public void encode(NdrBuffer ndrBuffer) {
+		ndrBuffer.align(4);
 
-	public void encode(NdrBuffer buffer) throws NdrException {
-		buffer.align(4);
+		int index = ndrBuffer.index;
 
-		int index = buffer.index;
+		ndrBuffer.advance(8);
 
-		buffer.advance(8);
-		buffer.enc_ndr_long(_timestamp);
-		buffer = buffer.derive(index);
+		ndrBuffer.enc_ndr_long(_timestamp);
+
+		ndrBuffer = ndrBuffer.derive(index);
 
 		for (int i = 0; i < 8; i++) {
-			buffer.enc_ndr_small(_credential[i]);
+			ndrBuffer.enc_ndr_small(_credential[i]);
 		}
 	}
 

@@ -53,14 +53,14 @@ public class Netlogon {
 
 	public Netlogon(
 		String domainController, String domainControllerName,
-		NtlmServiceAccount serviceAccount) {
+		NtlmServiceAccount ntlmServiceAccount) {
 
 		DcerpcBinding.addInterface(
 			"netlogon", "12345678-1234-abcd-ef00-01234567cffb:1.0");
 
 		_domainController = domainController;
 		_domainControllerName = domainControllerName;
-		_serviceAccount = serviceAccount;
+		_ntlmServiceAccount = ntlmServiceAccount;
 	}
 
 	public NtlmUserAccount logon(
@@ -70,35 +70,37 @@ public class Netlogon {
 		try {
 			connect();
 
-			NetlogonAuthenticator authenticator =
+			NetlogonAuthenticator netlogonAuthenticator =
 				computeNetlogonAuthenticator();
 
-			NetlogonIdentityInfo identity = new NetlogonIdentityInfo(
-				domain, 0x00000820, 0, 0, userName,	workstation);
+			NetlogonIdentityInfo netlogonIdentityInfo =
+				new NetlogonIdentityInfo(
+					domain, 0x00000820, 0, 0, userName, workstation);
 
-			NetlogonNetworkInfo logonInformation = new NetlogonNetworkInfo(
-				identity, serverChallenge,	ntResponse, lmResponse);
+			NetlogonNetworkInfo netlogonNetworkInfo = new NetlogonNetworkInfo(
+				netlogonIdentityInfo, serverChallenge,	ntResponse, lmResponse);
 
-			NetrLogonSamLogon msg = new NetrLogonSamLogon(
-				_domainControllerName, _serviceAccount.getComputerName(),
-				authenticator, new NetlogonAuthenticator(), 2,
-				logonInformation, 2, new NetlogonValidationSamInfo(), 0);
+			NetrLogonSamLogon netrLogonSamLogon = new NetrLogonSamLogon(
+				_domainControllerName, _ntlmServiceAccount.getComputerName(),
+				netlogonAuthenticator, new NetlogonAuthenticator(), 2,
+				netlogonNetworkInfo, 2, new NetlogonValidationSamInfo(), 0);
 
-			_handle.sendrecv(msg);
+			_handle.sendrecv(netrLogonSamLogon);
 
-			if (msg.getStatus() == 0) {
-				NetlogonValidationSamInfo samInfo =
-					msg.getNetlogonValidationSamInfo();
+			if (netrLogonSamLogon.getStatus() == 0) {
+				NetlogonValidationSamInfo netlogonValidationSamInfo =
+					netrLogonSamLogon.getNetlogonValidationSamInfo();
 
 				UnicodeString name = new UnicodeString(
-					samInfo.getEffectiveName(), false);
+					netlogonValidationSamInfo.getEffectiveName(), false);
 
 				return new NtlmUserAccount(name.toString());
 			}
 			else {
-				SmbException se = new SmbException(msg.getStatus(), false);
+				SmbException smbe = new SmbException(
+					netrLogonSamLogon.getStatus(), false);
 
-				_log.warn(se);
+				_log.warn(smbe);
 			}
 		}
 		catch (Exception e) {
@@ -117,7 +119,7 @@ public class Netlogon {
 	}
 
 	protected NetlogonAuthenticator computeNetlogonAuthenticator() {
-		int timestamp = (int) System.currentTimeMillis();
+		int timestamp = (int)System.currentTimeMillis();
 		int input = Encdec.dec_uint32le(_clientCredential, 0) + timestamp;
 
 		Encdec.enc_uint32le(input, _clientCredential, 0);
@@ -153,19 +155,19 @@ public class Netlogon {
 		byte[] sharedSecret, byte[] clientChallenge, byte[] serverChallenge) {
 
 		try {
-			MessageDigest md5 = MessageDigest.getInstance("MD5");
+			MessageDigest messageDigest = MessageDigest.getInstance("MD5");
 
 			byte[] zeroes = {0, 0, 0, 0};
 
-			md5.update(zeroes, 0, 4);
-			md5.update(clientChallenge, 0, 8);
-			md5.update(serverChallenge, 0, 8);
+			messageDigest.update(zeroes, 0, 4);
+			messageDigest.update(clientChallenge, 0, 8);
+			messageDigest.update(serverChallenge, 0, 8);
 
-			HMACT64 hmac = new HMACT64(sharedSecret);
+			HMACT64 hmact64 = new HMACT64(sharedSecret);
 
-			hmac.update(md5.digest());
+			hmact64.update(messageDigest.digest());
 
-			return hmac.digest();
+			return hmact64.digest();
 		}
 		catch (NoSuchAlgorithmException nsae) {
 			_log.error(nsae);
@@ -175,47 +177,56 @@ public class Netlogon {
 	}
 
 	protected void connect() throws IOException {
-		NtlmPasswordAuthentication auth = new NtlmPasswordAuthentication(
-			null, _serviceAccount.getAccount(),	_serviceAccount.getPassword());
+		NtlmPasswordAuthentication ntlmPasswordAuthentication =
+			new NtlmPasswordAuthentication(
+				null, _ntlmServiceAccount.getAccount(),
+				_ntlmServiceAccount.getPassword());
 
 		 String endpoint =
 			 "ncacn_np:" + _domainController + "[\\PIPE\\NETLOGON]";
 
-		_handle = DcerpcHandle.getHandle(endpoint, auth);
+		_handle = DcerpcHandle.getHandle(endpoint, ntlmPasswordAuthentication);
+
 		_handle.bind();
 
 		byte[] clientChallenge = new byte[8];
 
 		_secureRandom.nextBytes(clientChallenge);
 
-		NetrServerReqChallenge msg = new NetrServerReqChallenge(
-			_domainControllerName, _serviceAccount.getComputerName(),
-			clientChallenge, new byte[8]);
+		NetrServerReqChallenge netrServerReqChallenge =
+			new NetrServerReqChallenge(
+				_domainControllerName, _ntlmServiceAccount.getComputerName(),
+				clientChallenge, new byte[8]);
 
-		_handle.sendrecv(msg);
+		_handle.sendrecv(netrServerReqChallenge);
 
 		MD4 md4 = new MD4();
 
-		md4.update(_serviceAccount.getPassword().getBytes("UTF-16LE"));
+		md4.update(_ntlmServiceAccount.getPassword().getBytes("UTF-16LE"));
 
 		byte[] sessionKey = computeSessionKey(
-			md4.digest(), clientChallenge, msg.getServerChallenge());
+			md4.digest(), clientChallenge,
+			netrServerReqChallenge.getServerChallenge());
 
 		byte[] clientCredential = computeNetlogonCredential(
 			clientChallenge, sessionKey);
 
-		NetrServerAuthenticate3 msg2 = new NetrServerAuthenticate3(
-			_domainControllerName, _serviceAccount.getAccountName(), 2,
-			_serviceAccount.getComputerName(), clientCredential, new byte[8],
-			0xFFFFFFFF);
+		NetrServerAuthenticate3 netrServerAuthenticate3 =
+			new NetrServerAuthenticate3(
+				_domainControllerName, _ntlmServiceAccount.getAccountName(), 2,
+				_ntlmServiceAccount.getComputerName(), clientCredential,
+				new byte[8], 0xFFFFFFFF);
 
-		_handle.sendrecv(msg2);
+		_handle.sendrecv(netrServerAuthenticate3);
 
 		byte[] serverCredential = computeNetlogonCredential(
-			msg.getServerChallenge(), sessionKey);
+			netrServerReqChallenge.getServerChallenge(), sessionKey);
 
-		if (!Arrays.equals(serverCredential, msg2.getServerCredential())) {
-			_log.error("Session Key negotiation failed.");
+		if (!Arrays.equals(
+				serverCredential,
+				netrServerAuthenticate3.getServerCredential())) {
+
+			_log.error("Session key negotiation failed");
 
 			return;
 		}
@@ -232,18 +243,14 @@ public class Netlogon {
 		}
 	}
 
-	private NtlmServiceAccount _serviceAccount;
+	private static Log _log = LogFactoryUtil.getLog(Netlogon.class);
 
+	private byte[] _clientCredential;
 	private String _domainController;
 	private String _domainControllerName;
-
-	private byte[] _sessionKey;
-	private byte[] _clientCredential;
-
-	private SecureRandom _secureRandom = new SecureRandom();
-
 	private DcerpcHandle _handle;
-
-	private static Log _log = LogFactoryUtil.getLog(Netlogon.class);
+	private NtlmServiceAccount _ntlmServiceAccount;
+	private SecureRandom _secureRandom = new SecureRandom();
+	private byte[] _sessionKey;
 
 }

@@ -16,7 +16,6 @@ package com.liferay.portal.security.ntlm.msrpc;
 
 import jcifs.dcerpc.DcerpcMessage;
 import jcifs.dcerpc.ndr.NdrBuffer;
-import jcifs.dcerpc.ndr.NdrException;
 
 /**
  * <a href="NetrServerReqChallenge.java.html"><b><i>View Source</i></b></a>
@@ -38,30 +37,33 @@ public class NetrServerReqChallenge extends DcerpcMessage {
 		 flags = DCERPC_FIRST_FRAG | DCERPC_LAST_FRAG;
 	}
 
-	public void decode_out(NdrBuffer buffer) throws NdrException {
-		int index = buffer.index;
-		buffer.advance(8);
-		buffer = buffer.derive(index);
+	public void decode_out(NdrBuffer ndrBuffer) {
+		int index = ndrBuffer.index;
+
+		ndrBuffer.advance(8);
+
+		ndrBuffer = ndrBuffer.derive(index);
 
 		for (int i = 0; i < 8; i++) {
-			_serverChallenge[i] = (byte) buffer.dec_ndr_small();
+			_serverChallenge[i] = (byte) ndrBuffer.dec_ndr_small();
 		}
 
-		_status = buffer.dec_ndr_long();
+		_status = ndrBuffer.dec_ndr_long();
 	}
 
-	public void encode_in(NdrBuffer buffer) throws NdrException {
-		buffer.enc_ndr_referent(_primaryName, 1);
-		buffer.enc_ndr_string(_primaryName);
-		buffer.enc_ndr_string(_computerName);
+	public void encode_in(NdrBuffer ndrBuffer) {
+		ndrBuffer.enc_ndr_referent(_primaryName, 1);
+		ndrBuffer.enc_ndr_string(_primaryName);
+		ndrBuffer.enc_ndr_string(_computerName);
 
-		int index = buffer.index;
+		int index = ndrBuffer.index;
 
-		buffer.advance(8);
-		buffer = buffer.derive(index);
+		ndrBuffer.advance(8);
+
+		ndrBuffer = ndrBuffer.derive(index);
 
 		for (int i = 0; i < 8; i++) {
-			buffer.enc_ndr_small(_clientChallenge[i]);
+			ndrBuffer.enc_ndr_small(_clientChallenge[i]);
 		}
 	}
 
@@ -77,10 +79,10 @@ public class NetrServerReqChallenge extends DcerpcMessage {
 		return _status;
 	}
 
-	private int _status;
-	private String _primaryName;
-	private String _computerName;
 	private byte[] _clientChallenge;
+	private String _computerName;
+	private String _primaryName;
 	private byte[] _serverChallenge;
+	private int _status;
 
 }

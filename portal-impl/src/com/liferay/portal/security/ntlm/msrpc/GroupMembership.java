@@ -15,7 +15,6 @@
 package com.liferay.portal.security.ntlm.msrpc;
 
 import jcifs.dcerpc.ndr.NdrBuffer;
-import jcifs.dcerpc.ndr.NdrException;
 import jcifs.dcerpc.ndr.NdrObject;
 
 /**
@@ -26,7 +25,6 @@ import jcifs.dcerpc.ndr.NdrObject;
 public class GroupMembership extends NdrObject {
 
 	public GroupMembership() {
-
 	}
 
 	public GroupMembership(int relativeId, int attributes) {
@@ -34,29 +32,29 @@ public class GroupMembership extends NdrObject {
 		_attributes = attributes;
 	}
 
-	public void decode(NdrBuffer buffer) throws NdrException {
-		buffer.align(4);
+	public void decode(NdrBuffer ndrBuffer) {
+		ndrBuffer.align(4);
 
-		_relativeId = buffer.dec_ndr_long();
-		_attributes = buffer.dec_ndr_long();
+		_relativeId = ndrBuffer.dec_ndr_long();
+		_attributes = ndrBuffer.dec_ndr_long();
 	}
 
-	public void encode(NdrBuffer buffer) throws NdrException {
-		buffer.align(4);
+	public void encode(NdrBuffer ndrBuffer) {
+		ndrBuffer.align(4);
 
-		buffer.enc_ndr_long(_relativeId);
-		buffer.enc_ndr_long(_attributes);
-	}
-
-	public int getRelativeId() {
-		return _relativeId;
+		ndrBuffer.enc_ndr_long(_relativeId);
+		ndrBuffer.enc_ndr_long(_attributes);
 	}
 
 	public int getAttributes() {
 		return _attributes;
 	}
 
-	private int _relativeId;
+	public int getRelativeId() {
+		return _relativeId;
+	}
+
 	private int _attributes;
+	private int _relativeId;
 
 }

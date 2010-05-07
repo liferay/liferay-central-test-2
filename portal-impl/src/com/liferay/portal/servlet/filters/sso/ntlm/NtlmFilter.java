@@ -26,10 +26,10 @@ import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
 
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Properties;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -91,6 +91,7 @@ public class NtlmFilter extends BasePortalFilter {
 		long companyId = PortalInstances.getCompanyId(request);
 
 		if (LDAPSettingsUtil.isNtlmEnabled(companyId)) {
+
 			// Type 1 NTLM requests from browser can (and should) always
 			// immediately be replied to with an Type 2 NTLM response, no
 			// matter whether we're yet logging in or whether it is much
@@ -116,10 +117,9 @@ public class NtlmFilter extends BasePortalFilter {
 
 					response.flushBuffer();
 
-					String remoteAddr = request.getRemoteAddr();
-
-					_serverChallengesMap.put(
-						remoteAddr, _ntlmManager.getServerChallenge());
+					_serverChallenges.put(
+						request.getRemoteAddr(),
+						_ntlmManager.getServerChallenge());
 
 					// Interrupt filter chain, send response. Browser will
 					// immediately post a new request.
@@ -127,28 +127,33 @@ public class NtlmFilter extends BasePortalFilter {
 					return;
 				}
 				else {
-					byte[] serverChallenge = _serverChallengesMap.get(
+					byte[] serverChallenge = _serverChallenges.get(
 						request.getRemoteAddr());
 
 					_ntlmManager.setServerChallenge(serverChallenge);
 
-					NtlmUserAccount account = _ntlmManager.authenticate(src);
+					NtlmUserAccount ntlmUserAccount = _ntlmManager.authenticate(
+						src);
 
-					if (account == null) {
+					if (ntlmUserAccount == null) {
 						return;
 					}
 
 					if (_log.isDebugEnabled()) {
-						_log.debug("NTLM remote user " + account.getUserName());
+						_log.debug(
+							"NTLM remote user " +
+								ntlmUserAccount.getUserName());
 					}
 
-					_serverChallengesMap.remove(request.getRemoteAddr());
+					_serverChallenges.remove(request.getRemoteAddr());
 
 					request.setAttribute(
-						WebKeys.NTLM_REMOTE_USER, account.getUserName());
+						WebKeys.NTLM_REMOTE_USER,
+						ntlmUserAccount.getUserName());
 
 					if (session != null) {
-						session.setAttribute("NtlmUserAccount", account);
+						session.setAttribute(
+							WebKeys.NTLM_USER_ACCOUNT, ntlmUserAccount);
 					}
 				}
 			}
@@ -156,14 +161,14 @@ public class NtlmFilter extends BasePortalFilter {
 			String path = request.getPathInfo();
 
 			if ((path != null) && path.endsWith("/login")) {
-				NtlmUserAccount account = null;
+				NtlmUserAccount ntlmUserAccount = null;
 
 				if (session != null) {
-					account = (NtlmUserAccount)session.getAttribute(
-						"NtlmUserAccount");
+					ntlmUserAccount = (NtlmUserAccount)session.getAttribute(
+						WebKeys.NTLM_USER_ACCOUNT);
 				}
 
-				if (account == null) {
+				if (ntlmUserAccount == null) {
 					response.setHeader(HttpHeaders.WWW_AUTHENTICATE, "NTLM");
 					response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 					response.setContentLength(0);
@@ -181,8 +186,7 @@ public class NtlmFilter extends BasePortalFilter {
 	private static Log _log = LogFactoryUtil.getLog(NtlmFilter.class);
 
 	private NtlmManager _ntlmManager = new NtlmManager();
-
-	private Map<String, byte[]> _serverChallengesMap =
-		new HashMap<String, byte[]>();
+	private Map<String, byte[]> _serverChallenges =
+		new ConcurrentHashMap<String, byte[]>();
 
 }

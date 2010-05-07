@@ -39,132 +39,141 @@ public class NetlogonValidationSamInfo extends NdrObject {
 		_logonDomain = new rpc.sid_t();
 	}
 
-	public void decode(NdrBuffer buffer) throws NdrException {
-		_logonTime = buffer.dec_ndr_hyper();
-		_logoffTime = buffer.dec_ndr_hyper();
-		_kickoffTime = buffer.dec_ndr_hyper();
-		_passwordLastSet = buffer.dec_ndr_hyper();
-		_passwordCanChange = buffer.dec_ndr_hyper();
-		_passwordMustChange = buffer.dec_ndr_hyper();
+	public void decode(NdrBuffer ndrBuffer) throws NdrException {
+		_logonTime = ndrBuffer.dec_ndr_hyper();
+		_logoffTime = ndrBuffer.dec_ndr_hyper();
+		_kickoffTime = ndrBuffer.dec_ndr_hyper();
+		_passwordLastSet = ndrBuffer.dec_ndr_hyper();
+		_passwordCanChange = ndrBuffer.dec_ndr_hyper();
+		_passwordMustChange = ndrBuffer.dec_ndr_hyper();
 
-		_effectiveName.length = (short) buffer.dec_ndr_short();
-		_effectiveName.maximum_length = (short) buffer.dec_ndr_short();
-		int effectiveNamePtr = buffer.dec_ndr_long();
+		_effectiveName.length = (short)ndrBuffer.dec_ndr_short();
+		_effectiveName.maximum_length = (short)ndrBuffer.dec_ndr_short();
 
-		_fullName.length = (short) buffer.dec_ndr_short();
-		_fullName.maximum_length = (short) buffer.dec_ndr_short();
-		int fullNamePtr = buffer.dec_ndr_long();
+		int effectiveNamePtr = ndrBuffer.dec_ndr_long();
 
-		_logonScript.length = (short) buffer.dec_ndr_short();
-		_logonScript.maximum_length = (short) buffer.dec_ndr_short();
-		int logonScriptPtr = buffer.dec_ndr_long();
+		_fullName.length = (short)ndrBuffer.dec_ndr_short();
+		_fullName.maximum_length = (short)ndrBuffer.dec_ndr_short();
 
-		_profilePath.length = (short) buffer.dec_ndr_short();
-		_profilePath.maximum_length = (short) buffer.dec_ndr_short();
-		int profilePathPtr = buffer.dec_ndr_long();
+		int fullNamePtr = ndrBuffer.dec_ndr_long();
 
-		_homeDirectory.length = (short) buffer.dec_ndr_short();
-		_homeDirectory.maximum_length = (short) buffer.dec_ndr_short();
-		int homeDirectoryPtr = buffer.dec_ndr_long();
+		_logonScript.length = (short)ndrBuffer.dec_ndr_short();
+		_logonScript.maximum_length = (short)ndrBuffer.dec_ndr_short();
 
-		_homeDirectoryDrive.length = (short) buffer.dec_ndr_short();
-		_homeDirectoryDrive.maximum_length = (short) buffer.dec_ndr_short();
-		int homeDirectoryDrivePtr = buffer.dec_ndr_long();
+		int logonScriptPtr = ndrBuffer.dec_ndr_long();
 
-		_logonCount = (short) buffer.dec_ndr_short();
-		_badPasswordCount = (short) buffer.dec_ndr_short();
+		_profilePath.length = (short)ndrBuffer.dec_ndr_short();
+		_profilePath.maximum_length = (short)ndrBuffer.dec_ndr_short();
 
-		_userId = buffer.dec_ndr_long();
-		_primaryGroupId = buffer.dec_ndr_long();
+		int profilePathPtr = ndrBuffer.dec_ndr_long();
 
-		_groupCount = buffer.dec_ndr_long();
+		_homeDirectory.length = (short)ndrBuffer.dec_ndr_short();
+		_homeDirectory.maximum_length = (short)ndrBuffer.dec_ndr_short();
 
-		int groupIdsPtr = buffer.dec_ndr_long();
+		int homeDirectoryPtr = ndrBuffer.dec_ndr_long();
 
-		_userFlags = buffer.dec_ndr_long();
+		_homeDirectoryDrive.length = (short)ndrBuffer.dec_ndr_short();
+		_homeDirectoryDrive.maximum_length = (short)ndrBuffer.dec_ndr_short();
 
-		int userSessionKeyI = buffer.index;
-		buffer.advance(16);
+		int homeDirectoryDrivePtr = ndrBuffer.dec_ndr_long();
 
-		_logonServer.length = (short) buffer.dec_ndr_short();
-		_logonServer.maximum_length = (short) buffer.dec_ndr_short();
-		int logonServerPtr = buffer.dec_ndr_long();
+		_logonCount = (short)ndrBuffer.dec_ndr_short();
+		_badPasswordCount = (short)ndrBuffer.dec_ndr_short();
 
-		_logonDomainName.length = (short) buffer.dec_ndr_short();
-		_logonDomainName.maximum_length = (short) buffer.dec_ndr_short();
-		int logonDomainNamePtr = buffer.dec_ndr_long();
+		_userId = ndrBuffer.dec_ndr_long();
+		_primaryGroupId = ndrBuffer.dec_ndr_long();
 
-		int logonDomainPtr = buffer.dec_ndr_long();
+		_groupCount = ndrBuffer.dec_ndr_long();
 
-		buffer.advance(40); // expansion room
+		int groupIdsPtr = ndrBuffer.dec_ndr_long();
+
+		_userFlags = ndrBuffer.dec_ndr_long();
+
+		int userSessionKeyI = ndrBuffer.index;
+
+		ndrBuffer.advance(16);
+
+		_logonServer.length = (short)ndrBuffer.dec_ndr_short();
+		_logonServer.maximum_length = (short)ndrBuffer.dec_ndr_short();
+
+		int logonServerPtr = ndrBuffer.dec_ndr_long();
+
+		_logonDomainName.length = (short)ndrBuffer.dec_ndr_short();
+		_logonDomainName.maximum_length = (short)ndrBuffer.dec_ndr_short();
+
+		int logonDomainNamePtr = ndrBuffer.dec_ndr_long();
+
+		int logonDomainPtr = ndrBuffer.dec_ndr_long();
+
+		ndrBuffer.advance(40);
 
 		if (effectiveNamePtr > 0) {
-			decodeUnicodeString(buffer, _effectiveName);
+			decodeUnicodeString(ndrBuffer, _effectiveName);
 		}
 
 		if (fullNamePtr > 0) {
-			decodeUnicodeString(buffer, _fullName);
+			decodeUnicodeString(ndrBuffer, _fullName);
 		}
 
 		if (logonScriptPtr > 0) {
-			decodeUnicodeString(buffer, _logonScript);
+			decodeUnicodeString(ndrBuffer, _logonScript);
 		}
 
 		if (profilePathPtr > 0) {
-			decodeUnicodeString(buffer, _profilePath);
+			decodeUnicodeString(ndrBuffer, _profilePath);
 		}
 
 		if (homeDirectoryPtr > 0) {
-			decodeUnicodeString(buffer, _homeDirectory);
+			decodeUnicodeString(ndrBuffer, _homeDirectory);
 		}
 
 		if (homeDirectoryDrivePtr > 0) {
-			decodeUnicodeString(buffer, _homeDirectoryDrive);
+			decodeUnicodeString(ndrBuffer, _homeDirectoryDrive);
 		}
 
 		if (groupIdsPtr > 0) {
 			_groupIds = new GroupMembership[_groupCount];
 
-			buffer = buffer.deferred;
+			ndrBuffer = ndrBuffer.deferred;
 
-			int groupIdsS = buffer.dec_ndr_long();
-			int groupIdsI = buffer.index;
+			int groupIdsS = ndrBuffer.dec_ndr_long();
+			int groupIdsI = ndrBuffer.index;
 
-			buffer.advance(8 * groupIdsS);
+			ndrBuffer.advance(8 * groupIdsS);
 
-			buffer = buffer.derive(groupIdsI);
+			ndrBuffer = ndrBuffer.derive(groupIdsI);
 
 			for (int i = 0; i < groupIdsS; i++) {
 				if (_groupIds[i] == null) {
 					_groupIds[i] = new GroupMembership();
 				}
 
-				_groupIds[i].decode(buffer);
+				_groupIds[i].decode(ndrBuffer);
 			}
 		}
 
-		buffer = buffer.derive(userSessionKeyI);
+		ndrBuffer = ndrBuffer.derive(userSessionKeyI);
 
 		for (int i = 0; i < 16; i++) {
-			_userSessionKey[i] = (byte) buffer.dec_ndr_small();
+			_userSessionKey[i] = (byte) ndrBuffer.dec_ndr_small();
 		}
 
 		if (logonServerPtr > 0) {
-			decodeUnicodeString(buffer, _logonServer);
+			decodeUnicodeString(ndrBuffer, _logonServer);
 		}
 
 		if (logonDomainNamePtr > 0) {
-			decodeUnicodeString(buffer, _logonDomainName);
+			decodeUnicodeString(ndrBuffer, _logonDomainName);
 		}
 
 		if (logonDomainPtr > 0) {
-			buffer = buffer.deferred;
+			ndrBuffer = ndrBuffer.deferred;
 
-			_logonDomain.decode(buffer);
+			_logonDomain.decode(ndrBuffer);
 		}
 	}
 
-	public void encode(NdrBuffer buffer) throws NdrException {
+	public void encode(NdrBuffer ndrBuffer) {
 	}
 
 	public rpc.unicode_string getEffectiveName() {
@@ -172,50 +181,77 @@ public class NetlogonValidationSamInfo extends NdrObject {
 	}
 
 	protected void decodeUnicodeString(
-		NdrBuffer buffer, rpc.unicode_string string) {
+		NdrBuffer ndrBuffer, rpc.unicode_string string) {
 
-		buffer = buffer.deferred;
+		ndrBuffer = ndrBuffer.deferred;
 
-		int bufferS = buffer.dec_ndr_long();
-		buffer.dec_ndr_long();
-		int bufferL = buffer.dec_ndr_long();
-		int bufferI = buffer.index;
+		int bufferS = ndrBuffer.dec_ndr_long();
 
-		buffer.advance(2 * bufferL);
+		ndrBuffer.dec_ndr_long();
+
+		int bufferL = ndrBuffer.dec_ndr_long();
+		int bufferI = ndrBuffer.index;
+
+		ndrBuffer.advance(2 * bufferL);
 
 		if (string.buffer == null) {
 			string.buffer = new short[bufferS];
 		}
 
-		buffer = buffer.derive(bufferI);
+		ndrBuffer = ndrBuffer.derive(bufferI);
 
 		for (int i = 0; i < bufferL; i++) {
-			string.buffer[i] = (short) buffer.dec_ndr_short();
+			string.buffer[i] = (short)ndrBuffer.dec_ndr_short();
 		}
 	}
 
-	private long _logonTime;
-	private long _logoffTime;
-	private long _kickoffTime;
-	private long _passwordLastSet;
-	private long _passwordCanChange;
-	private long _passwordMustChange;
+	@SuppressWarnings("unused")
+	private short _badPasswordCount;
+
 	private rpc.unicode_string _effectiveName;
 	private rpc.unicode_string _fullName;
-	private rpc.unicode_string _logonScript;
-	private rpc.unicode_string _profilePath;
-	private rpc.unicode_string _homeDirectory;
-	private rpc.unicode_string _homeDirectoryDrive;
-	private short _logonCount;
-	private short _badPasswordCount;
-	private int _userId;
-	private int _primaryGroupId;
 	private int _groupCount;
 	private GroupMembership[] _groupIds;
-	private int _userFlags;
-	private byte[] _userSessionKey;
-	private rpc.unicode_string _logonServer;
-	private rpc.unicode_string _logonDomainName;
+	private rpc.unicode_string _homeDirectory;
+	private rpc.unicode_string _homeDirectoryDrive;
+
+	@SuppressWarnings("unused")
+	private long _kickoffTime;
+
+	@SuppressWarnings("unused")
+	private long _logoffTime;
+
+	@SuppressWarnings("unused")
+	private short _logonCount;
+
 	private rpc.sid_t _logonDomain;
+	private rpc.unicode_string _logonDomainName;
+	private rpc.unicode_string _logonScript;
+	private rpc.unicode_string _logonServer;
+
+	@SuppressWarnings("unused")
+	private long _logonTime;
+
+	@SuppressWarnings("unused")
+	private long _passwordCanChange;
+
+	@SuppressWarnings("unused")
+	private long _passwordLastSet;
+
+	@SuppressWarnings("unused")
+	private long _passwordMustChange;
+
+	@SuppressWarnings("unused")
+	private int _primaryGroupId;
+
+	private rpc.unicode_string _profilePath;
+
+	@SuppressWarnings("unused")
+	private int _userFlags;
+
+	@SuppressWarnings("unused")
+	private int _userId;
+
+	private byte[] _userSessionKey;
 
 }

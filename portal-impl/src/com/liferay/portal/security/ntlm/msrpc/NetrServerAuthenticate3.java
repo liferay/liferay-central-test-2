@@ -16,7 +16,6 @@ package com.liferay.portal.security.ntlm.msrpc;
 
 import jcifs.dcerpc.DcerpcMessage;
 import jcifs.dcerpc.ndr.NdrBuffer;
-import jcifs.dcerpc.ndr.NdrException;
 
 /**
  * <a href="NetrServerAuthenticate3.java.html"><b><i>View Source</i></b></a>
@@ -42,46 +41,42 @@ public class NetrServerAuthenticate3 extends DcerpcMessage {
 		flags = DCERPC_FIRST_FRAG | DCERPC_LAST_FRAG;
 	}
 
-	public void decode_out(NdrBuffer buffer) throws NdrException {
-		int index = buffer.index;
+	public void decode_out(NdrBuffer ndrBuffer) {
+		int index = ndrBuffer.index;
 
-		buffer.advance(8);
-		buffer = buffer.derive(index);
+		ndrBuffer.advance(8);
 
-		for (int i = 0; i < 8; i++) {
-			_serverCredential[i] = (byte) buffer.dec_ndr_small();
-		}
-
-		_negotiateFlags = buffer.dec_ndr_long();
-		_accountRid = buffer.dec_ndr_long();
-		_status = buffer.dec_ndr_long();
-	}
-
-	public void encode_in(NdrBuffer buffer) throws NdrException {
-		NdrBuffer ref = buffer;
-
-		buffer.enc_ndr_referent(_primaryName, 1);
-		buffer.enc_ndr_string(_primaryName);
-		buffer.enc_ndr_string(_accountName);
-		buffer.enc_ndr_short(_secureChannelType);
-		buffer.enc_ndr_string(_computerName);
-
-		int index = buffer.index;
-
-		buffer.advance(8);
-		buffer = buffer.derive(index);
+		ndrBuffer = ndrBuffer.derive(index);
 
 		for (int i = 0; i < 8; i++) {
-			buffer.enc_ndr_small(_clientCredential[i]);
+			_serverCredential[i] = (byte) ndrBuffer.dec_ndr_small();
 		}
 
-		buffer.enc_ndr_long(_negotiateFlags);
-
-		ref.setIndex(buffer.index);
+		_negotiateFlags = ndrBuffer.dec_ndr_long();
+		_accountRid = ndrBuffer.dec_ndr_long();
+		_status = ndrBuffer.dec_ndr_long();
 	}
 
-	public int getOpnum() {
-		return 26;
+	public void encode_in(NdrBuffer ndrBuffer) {
+		ndrBuffer.enc_ndr_referent(_primaryName, 1);
+		ndrBuffer.enc_ndr_string(_primaryName);
+		ndrBuffer.enc_ndr_string(_accountName);
+		ndrBuffer.enc_ndr_short(_secureChannelType);
+		ndrBuffer.enc_ndr_string(_computerName);
+
+		int index = ndrBuffer.index;
+
+		ndrBuffer.advance(8);
+
+		ndrBuffer = ndrBuffer.derive(index);
+
+		for (int i = 0; i < 8; i++) {
+			ndrBuffer.enc_ndr_small(_clientCredential[i]);
+		}
+
+		ndrBuffer.enc_ndr_long(_negotiateFlags);
+
+		ndrBuffer.setIndex(ndrBuffer.index);
 	}
 
 	public int getAccountRid() {
@@ -92,6 +87,10 @@ public class NetrServerAuthenticate3 extends DcerpcMessage {
 		return _negotiateFlags;
 	}
 
+	public int getOpnum() {
+		return 26;
+	}
+
 	public byte[] getServerCredential() {
 		return _serverCredential;
 	}
@@ -100,14 +99,14 @@ public class NetrServerAuthenticate3 extends DcerpcMessage {
 		return _status;
 	}
 
-	private int _status;
-	private String _primaryName;
 	private String _accountName;
-	private short _secureChannelType;
-	private String _computerName;
-	private byte[] _clientCredential;
-	private byte[] _serverCredential;
-	private int _negotiateFlags;
 	private int _accountRid;
+	private byte[] _clientCredential;
+	private String _computerName;
+	private int _negotiateFlags;
+	private String _primaryName;
+	private short _secureChannelType;
+	private byte[] _serverCredential;
+	private int _status;
 
 }

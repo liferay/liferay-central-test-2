@@ -15,7 +15,6 @@
 package com.liferay.portal.security.ntlm.msrpc;
 
 import jcifs.dcerpc.ndr.NdrBuffer;
-import jcifs.dcerpc.ndr.NdrException;
 import jcifs.dcerpc.ndr.NdrObject;
 
 /**
@@ -26,69 +25,72 @@ import jcifs.dcerpc.ndr.NdrObject;
 public class NetlogonNetworkInfo extends NdrObject {
 
 	public NetlogonNetworkInfo(
-		NetlogonIdentityInfo identity, byte[] lmChallenge,
+		NetlogonIdentityInfo netlogonIdentityInfo, byte[] lmChallenge,
 		byte[] ntChallengeResponse, byte[] lmChallengeResponse) {
 
-		_identity = identity;
+		_netlogonIdentityInfo = netlogonIdentityInfo;
 		_lmChallenge = lmChallenge;
 		_ntChallengeResponse = ntChallengeResponse;
 		_lmChallengeResponse = lmChallengeResponse;
 	}
 
-	public void decode(NdrBuffer buffer) throws NdrException {
+	public void decode(NdrBuffer ndrBuffer) {
 	}
 
-	public void encode(NdrBuffer buffer) throws NdrException {
-		buffer.align(4);
+	public void encode(NdrBuffer ndrBuffer) {
+		ndrBuffer.align(4);
 
-		_identity.encode(buffer);
+		_netlogonIdentityInfo.encode(ndrBuffer);
 
-		int lmChallengeIndex = buffer.index;
-		buffer.advance(8);
+		int lmChallengeIndex = ndrBuffer.index;
 
-		buffer.enc_ndr_short((short)_ntChallengeResponse.length);
-		buffer.enc_ndr_short((short)_ntChallengeResponse.length);
-		buffer.enc_ndr_referent(_ntChallengeResponse, 1);
+		ndrBuffer.advance(8);
 
-		buffer.enc_ndr_short((short)_lmChallengeResponse.length);
-		buffer.enc_ndr_short((short)_lmChallengeResponse.length);
-		buffer.enc_ndr_referent(_lmChallengeResponse, 1);
+		ndrBuffer.enc_ndr_short((short)_ntChallengeResponse.length);
+		ndrBuffer.enc_ndr_short((short)_ntChallengeResponse.length);
+		ndrBuffer.enc_ndr_referent(_ntChallengeResponse, 1);
 
-		_identity.encodeLogonDomainName(buffer);
-		_identity.encodeUserName(buffer);
-		_identity.encodeWorkStationName(buffer);
+		ndrBuffer.enc_ndr_short((short)_lmChallengeResponse.length);
+		ndrBuffer.enc_ndr_short((short)_lmChallengeResponse.length);
+		ndrBuffer.enc_ndr_referent(_lmChallengeResponse, 1);
 
-		buffer = buffer.derive(lmChallengeIndex);
+		_netlogonIdentityInfo.encodeLogonDomainName(ndrBuffer);
+		_netlogonIdentityInfo.encodeUserName(ndrBuffer);
+		_netlogonIdentityInfo.encodeWorkStationName(ndrBuffer);
+
+		ndrBuffer = ndrBuffer.derive(lmChallengeIndex);
 
 		for (int i = 0; i < 8; i++) {
-			buffer.enc_ndr_small(_lmChallenge[i]);
+			ndrBuffer.enc_ndr_small(_lmChallenge[i]);
 		}
 
-		encodeChallengeResponse(buffer, _ntChallengeResponse);
-		encodeChallengeResponse(buffer, _lmChallengeResponse);
+		encodeChallengeResponse(ndrBuffer, _ntChallengeResponse);
+		encodeChallengeResponse(ndrBuffer, _lmChallengeResponse);
 	}
 
-	protected void encodeChallengeResponse(NdrBuffer buffer, byte[] challenge) {
-		buffer = buffer.deferred;
+	protected void encodeChallengeResponse(
+		NdrBuffer ndrBuffer, byte[] challenge) {
 
-		buffer.enc_ndr_long(challenge.length);
-		buffer.enc_ndr_long(0);
-		buffer.enc_ndr_long(challenge.length);
+		ndrBuffer = ndrBuffer.deferred;
 
-		int challengeIndex = buffer.index;
+		ndrBuffer.enc_ndr_long(challenge.length);
+		ndrBuffer.enc_ndr_long(0);
+		ndrBuffer.enc_ndr_long(challenge.length);
 
-		buffer.advance(challenge.length);
+		int index = ndrBuffer.index;
 
-		buffer = buffer.derive(challengeIndex);
+		ndrBuffer.advance(challenge.length);
+
+		ndrBuffer = ndrBuffer.derive(index);
 
 		for (int i = 0; i < challenge.length; i++) {
-			buffer.enc_ndr_small(challenge[i]);
+			ndrBuffer.enc_ndr_small(challenge[i]);
 		}
 	}
 
-	private NetlogonIdentityInfo _identity;
 	private byte[] _lmChallenge;
-	private byte[] _ntChallengeResponse;
 	private byte[] _lmChallengeResponse;
+	private NetlogonIdentityInfo _netlogonIdentityInfo;
+	private byte[] _ntChallengeResponse;
 
 }

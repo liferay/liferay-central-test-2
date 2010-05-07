@@ -14,6 +14,8 @@
 
 package com.liferay.portal.security.ntlm;
 
+import jodd.util.StringPool;
+
 /**
  * <a href="NtlmServiceAccount.java.html"><b><i>View Source</i></b></a>
  *
@@ -25,11 +27,13 @@ public class NtlmServiceAccount {
 		_account = account;
 		_password = password;
 
-		int i1 = _account.indexOf("@");
-		_accountName = _account.substring(0, i1);
+		_accountName = _account.substring(0, _account.indexOf(StringPool.AT));
+		_computerName = _account.substring(
+			0, _account.indexOf(StringPool.DOLLAR));
+	}
 
-		int i2 = _account.indexOf("$");
-		_computerName = _account.substring(0, i2);
+	public String getAccount() {
+		return _account;
 	}
 
 	public String getAccountName() {
@@ -42,10 +46,6 @@ public class NtlmServiceAccount {
 
 	public String getPassword() {
 		return _password;
-	}
-
-	public String getAccount() {
-		return _account;
 	}
 
 	private String _account;
