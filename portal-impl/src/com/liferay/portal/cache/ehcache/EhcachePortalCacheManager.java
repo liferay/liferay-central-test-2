@@ -65,7 +65,7 @@ public class EhcachePortalCacheManager implements PortalCacheManager {
 		}
 		finally {
 			if (_managementService != null) {
-				_managementService.dispose();				
+				_managementService.dispose();
 			}
 		}
 	}
@@ -146,11 +146,11 @@ public class EhcachePortalCacheManager implements PortalCacheManager {
 
 	private String _configPropertyKey;
 	private CacheManager _cacheManager;
+	private ManagementService _managementService;
 	private MBeanServer _mBeanServer;
 	private boolean _registerCacheManager = true;
 	private boolean _registerCaches = true;
 	private boolean _registerCacheConfigurations = true;
 	private boolean _registerCacheStatistics = true;
 
-	private ManagementService _managementService;
 }
