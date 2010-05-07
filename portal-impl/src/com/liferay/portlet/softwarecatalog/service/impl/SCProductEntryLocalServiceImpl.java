@@ -661,7 +661,7 @@ public class SCProductEntryLocalServiceImpl
 			throw new ProductEntryPageURLException();
 		}
 		else if (!Validator.isUrl(pageURL)) {
-				throw new ProductEntryPageURLException();
+			throw new ProductEntryPageURLException();
 		}
 
 		if (Validator.isNull(author)) {
