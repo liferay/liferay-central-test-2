@@ -1173,6 +1173,11 @@
 			<forward name="portlet.journal.view_article_content" path="/portlet/journal/view_article_content.jsp" />
 		</action>
 
+		<action path="/journal/view_article_history" type="com.liferay.portlet.journal.action.EditArticleAction">
+			<forward name="portlet.journal.error" path="portlet.journal.error" />
+			<forward name="portlet.journal.edit_article" path="portlet.journal.view_article_history" />
+		</action>
+
 		<!-- Journal Articles -->
 
 		<action path="/journal_articles/view" type="com.liferay.portlet.journalarticles.action.ViewAction">

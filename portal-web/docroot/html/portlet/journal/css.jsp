@@ -64,6 +64,13 @@
 	padding: 2px 20px;
 }
 
+.portlet-journal h1.article-title {
+	border-bottom: 1px solid #aaa;
+	clear: both;
+	margin: 0 0 10px;
+	padding-bottom: 5px;
+}
+
 .portlet-journal .subscribe-link {
 	float: right;
 	margin-bottom: 1em;

@@ -50,6 +50,10 @@ public class ArticleSearchTerms extends ArticleDisplayTerms {
 		status = ParamUtil.getString(portletRequest, STATUS);
 	}
 
+	public void setArticleId(String articleId) {
+		this.articleId = articleId;
+	}
+
 	public void setGroupId(long groupId) {
 		this.groupId = groupId;
 	}
