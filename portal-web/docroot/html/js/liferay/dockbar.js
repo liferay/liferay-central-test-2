@@ -109,7 +109,7 @@ AUI().add(
 						}
 					);
 
-					var userOptionsContainer = A.get('#' + instance._namespace + 'userOptionsContainer');
+					var userOptionsContainer = A.one('#' + instance._namespace + 'userOptionsContainer');
 
 					if (userOptionsContainer) {
 						instance.addMenu(
@@ -271,7 +271,7 @@ AUI().add(
 			addMenu: function(options) {
 				var instance = this;
 
-				if (options.name && A.get(options.trigger)) {
+				if (options.name && A.one(options.trigger)) {
 					var name = options.name;
 
 					delete options.name;

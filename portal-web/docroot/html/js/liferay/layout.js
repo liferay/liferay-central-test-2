@@ -325,7 +325,7 @@ AUI().add(
 			refresh: function(portlet) {
 				var layoutHandler = Layout.layoutHandler;
 
-				portlet = A.get(portlet);
+				portlet = A.one(portlet);
 
 				if (portlet) {
 					layoutHandler.addDragTarget(portlet);

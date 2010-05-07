@@ -89,7 +89,7 @@ AUI().add(
 				setter: function(value) {
 					var instance = this;
 
-					return A.get(value + instance.get('guid'));
+					return A.one(value + instance.get('guid'));
 				}
 			},
 			matchKey: {

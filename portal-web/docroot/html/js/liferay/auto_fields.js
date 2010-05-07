@@ -173,7 +173,7 @@ AUI().add(
 					var contentBox = instance.get('contentBox');
 
 					if (sortableHandle) {
-						contentBox.queryAll(sortableHandle).addClass('handle-sort-vertical');
+						contentBox.all(sortableHandle).addClass('handle-sort-vertical');
 					}
 
 					instance._sortable = new A.Sortable(
@@ -231,7 +231,7 @@ AUI().add(
 					var fieldIndexes = instance.get('fieldIndexes');
 
 					if (fieldIndexes) {
-						instance._fieldIndexes = A.get('[name=' + fieldIndexes + ']');
+						instance._fieldIndexes = A.one('[name=' + fieldIndexes + ']');
 
 						if (!instance._fieldIndexes) {
 							var fieldIndexHTML = A.substitute(
@@ -459,7 +459,7 @@ AUI().add(
 
 					var contentBox = instance.get('contentBox');
 
-					contentBox.queryAll('input, select, textarea').each(
+					contentBox.all('input, select, textarea').each(
 						function(item, index, collection) {
 							var type = item.getAttribute('type');
 							var tag = item.get('nodeName').toLowerCase();
@@ -515,7 +515,7 @@ AUI().add(
 
 					var guid = instance.get('guid') + 1;
 
-					clone.queryAll('input, select, textarea, span').each(
+					clone.all('input, select, textarea, span').each(
 						function(item, index, collection) {
 							var oldName = item.getAttribute('name') || item.getAttribute('id');
 
@@ -551,7 +551,7 @@ AUI().add(
 						}
 					);
 
-					clone.queryAll('input[type=hidden]').set('value', '');
+					clone.all('input[type=hidden]').set('value', '');
 
 					clone.resetId();
 

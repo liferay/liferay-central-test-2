@@ -119,12 +119,12 @@ if (yearValue > 0) {
 				select: function(event) {
 					var formatted = event.date.formatted[0];
 
-					A.get('#<%= imageInputId %>Input').val(formatted);
+					A.one('#<%= imageInputId %>Input').val(formatted);
 				},
 				render: function() {
-					A.get('#<%= monthParam %>').removeClass('aui-helper-hidden');
-					A.get('#<%= dayParam %>').removeClass('aui-helper-hidden');
-					A.get('#<%= yearParam %>').removeClass('aui-helper-hidden');
+					A.one('#<%= monthParam %>').removeClass('aui-helper-hidden');
+					A.one('#<%= dayParam %>').removeClass('aui-helper-hidden');
+					A.one('#<%= yearParam %>').removeClass('aui-helper-hidden');
 				}
 			},
 			populateMonth: false,

@@ -296,7 +296,7 @@ AUI().add(
 
 					var buffer = [];
 
-					var childrenList = A.get(instance._categoryContainerSelector);
+					var childrenList = A.one(instance._categoryContainerSelector);
 					var boundingBox = A.Node.create('<div class="vocabulary-treeview-container" id="vocabularyTreeContainer"></div>');
 
 					childrenList.empty();
@@ -336,7 +336,7 @@ AUI().add(
 
 					instance._reloadSearch();
 
-					var vocabularyContainer = A.get(instance._vocabularyContainerSelector);
+					var vocabularyContainer = A.one(instance._vocabularyContainerSelector);
 					var listLinks = vocabularyContainer.all('li');
 
 					listLinks.plug(

@@ -47,7 +47,7 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 			var treeInstance = event.target;
 
 			var rootNode = treeInstance.item(0);
-			var loadingEl = A.get('#<portlet:namespace />treeLoading');
+			var loadingEl = A.one('#<portlet:namespace />treeLoading');
 
 			loadingEl.hide();
 

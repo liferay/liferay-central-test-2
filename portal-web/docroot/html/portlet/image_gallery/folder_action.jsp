@@ -198,7 +198,7 @@ if (row == null) {
 		function(event) {
 			var popup = new A.Dialog(
 				{
-					bodyContent: A.get('#<%= randomNamespace %>webDav').html(),
+					bodyContent: A.one('#<%= randomNamespace %>webDav').html(),
 					centered: true,
 					destroyOnClose: true,
 					modal: true,

@@ -172,7 +172,7 @@ AUI().add(
 			_trackChanges: function(el) {
 				var instance = this;
 
-				var currentSection = A.get(el).ancestor('.form-section').attr('id');
+				var currentSection = A.one(el).ancestor('.form-section').attr('id');
 
 				var currentSectionLink = A.one('#' + currentSection + 'Link');
 

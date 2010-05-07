@@ -58,7 +58,7 @@ AUI().add(
 				setter: function(value) {
 					var instance = this;
 
-					value = A.get(value);
+					value = A.one(value);
 
 					if (!value) {
 						value = A.Attribute.INVALID_VALUE;
@@ -82,7 +82,7 @@ AUI().add(
 					if (navBlock) {
 						instance._updateURL = themeDisplay.getPathMain() + '/layout_management/update_page';
 
-						var items = navBlock.queryAll('> ul > li');
+						var items = navBlock.all('> ul > li');
 						var layoutIds = instance.get('layoutIds');
 
 						items.each(
@@ -320,14 +320,14 @@ AUI().add(
 
 						var themeImages = themeDisplay.getPathThemeImages();
 
-						var prototypeMenuNode = A.get('#layoutPrototypeTemplate');
+						var prototypeMenuNode = A.one('#layoutPrototypeTemplate');
 
 						if (prototypeMenuNode) {
 							instance._prototypeMenuTemplate = prototypeMenuNode.html();
 						}
 
 						if (instance.get('hasPermission')) {
-							var addPageButton = A.get('#addPage');
+							var addPageButton = A.one('#addPage');
 
 							if (addPageButton) {
 								addPageButton.on('click', instance._addPage, instance);
@@ -342,7 +342,7 @@ AUI().add(
 					if (instance.get('isModifiable')) {
 						var navBlock = instance.get('navBlock');
 
-						var navItems = navBlock.queryAll('> ul > li').filter(':not(.selected)');
+						var navItems = navBlock.all('> ul > li').filter(':not(.selected)');
 
 						navBlock.delegate(
 							'click',
@@ -436,8 +436,8 @@ AUI().add(
 					var navList = navBlock.one('ul');
 
 					if (instance.get('isSortable')) {
-						var items = navList.queryAll('li');
-						var anchors = navList.queryAll('a');
+						var items = navList.all('li');
+						var anchors = navList.all('a');
 
 						anchors.setStyle('cursor', 'move');
 
@@ -654,7 +654,7 @@ AUI().add(
 				_saveSortables: function(node) {
 					var instance = this;
 
-					var priority = instance.get('navBlock').queryAll('li').indexOf(node);
+					var priority = instance.get('navBlock').all('li').indexOf(node);
 
 					var data = {
 						cmd: 'priority',

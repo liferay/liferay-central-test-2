@@ -5,8 +5,8 @@ AUI().use(
 	'aui-io-request',
 	'aui-overlay-context-panel',
 	function(A) {
-		var portletInformationEl = A.get('#cpContextPanelTemplate');
-		var portletInformationIcon = A.get('#cpPortletTitleHelpIcon');
+		var portletInformationEl = A.one('#cpContextPanelTemplate');
+		var portletInformationIcon = A.one('#cpPortletTitleHelpIcon');
 
 		if (portletInformationEl && portletInformationIcon) {
 			var portletId = portletInformationEl.attr('data-portlet-id');

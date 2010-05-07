@@ -77,7 +77,7 @@ scheduledPublishEventsURL.setParameter("destinationName", localPublishing ? Dest
 				addButton.set('disabled', true);
 			}
 
-			var form = A.get(document.<portlet:namespace />exportPagesFm);
+			var form = A.one(document.<portlet:namespace />exportPagesFm);
 
 			var uri = form.getAttribute('action');
 
@@ -113,7 +113,7 @@ scheduledPublishEventsURL.setParameter("destinationName", localPublishing ? Dest
 				document.<portlet:namespace />exportPagesFm.<portlet:namespace /><%= Constants.CMD %>.value = '<%= unscheduleCMD %>';
 				document.<portlet:namespace />exportPagesFm.<portlet:namespace />jobName.value = jobName;
 
-				var form = A.get(document.<portlet:namespace />exportPagesFm);
+				var form = A.one(document.<portlet:namespace />exportPagesFm);
 
 				var uri = form.getAttribute('action');
 
@@ -144,7 +144,7 @@ scheduledPublishEventsURL.setParameter("destinationName", localPublishing ? Dest
 		function() {
 			var A = AUI();
 
-			var form = A.get(document.<portlet:namespace />exportPagesFm);
+			var form = A.one(document.<portlet:namespace />exportPagesFm);
 
 			var uri = form.getAttribute('action');
 

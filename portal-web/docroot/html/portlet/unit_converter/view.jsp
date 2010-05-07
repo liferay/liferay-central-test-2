@@ -280,7 +280,7 @@ Conversion conversion = ConverterUtil.getConversion(type, fromId, toId, fromValu
 </aui:script>
 
 <aui:script use="aui-io-request,aui-parse-content">
-	var form = A.get('#<portlet:namespace />fm');
+	var form = A.one('#<portlet:namespace />fm');
 
 	form.on(
 		'submit',

@@ -470,7 +470,7 @@ AUI().add(
 			clearMessage: function(selector) {
 				var instance = this;
 
-				var journalMessage = A.get(selector);
+				var journalMessage = A.one(selector);
 
 				var timer = instance.timers[selector];
 
@@ -815,7 +815,7 @@ AUI().add(
 
 				var inputName = withoutNamespace ? name : instance.portletNamespace + name;
 
-				return A.get(currentForm).one('[name=' + inputName + ']');
+				return A.one(currentForm).one('[name=' + inputName + ']');
 			},
 
 			getCloseButtons: function() {
@@ -2024,7 +2024,7 @@ AUI().add(
 					);
 				};
 
-				var container = A.get(journalArticleContainerId);
+				var container = A.one(journalArticleContainerId);
 
 				container.delegate(
 					'click',

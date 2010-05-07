@@ -86,7 +86,7 @@ long reportedUserId = GetterUtil.getLong((String)request.getAttribute("liferay-u
 				function(event) {
 					var popup = new A.Dialog(
 						{
-							bodyContent: A.get('#<portlet:namespace />signIn').html(),
+							bodyContent: A.one('#<portlet:namespace />signIn').html(),
 							centered: true,
 							destroyOnClose: true,
 							title: '<liferay-ui:message key="report-inappropriate-content" />',
