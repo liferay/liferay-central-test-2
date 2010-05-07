@@ -4640,7 +4640,7 @@ years=Jaren
 yes=Ja
 yesterday=Gisteren
 ym=YM
-you-are-about-to-report-a-violation-of-our-x-terms-of-use.-all-reports-are-strictly-confidential=U gaat misbruik van onze <a href="{0}">Gebruiksvoorwaarden</a> melden.All meldingen zijn strict vertrouwelijk.
+you-are-about-to-report-a-violation-of-our-x-terms-of-use.-all-reports-are-strictly-confidential=U gaat misbruik van onze <a href="{0}" target="_blank">Gebruiksvoorwaarden</a> melden.All meldingen zijn strict vertrouwelijk.
 you-are-impersonating-the-guest-user=U doet zich voor als gastgebruiker.
 you-are-impersonating-x=U doet zich voor als {0}.
 you-are-not-subscribed-to-any-categories=U bent op geen enkele categorie ingeschreven.

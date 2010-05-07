@@ -4640,7 +4640,7 @@ years=Évek
 yes=Igen
 yesterday=Tegnap
 ym=YM
-you-are-about-to-report-a-violation-of-our-x-terms-of-use.-all-reports-are-strictly-confidential=Bejelentést készülsz tenni, mivel a portálon visszaélést tapasztaltál a <a href="{0}">Felhasználási feltételek</a> megsértésével kapcsolatban. Minden bejelentést szigorúan bizalmasan kezelünk.
+you-are-about-to-report-a-violation-of-our-x-terms-of-use.-all-reports-are-strictly-confidential=Bejelentést készülsz tenni, mivel a portálon visszaélést tapasztaltál a <a href="{0}" target="_blank">Felhasználási feltételek</a> megsértésével kapcsolatban. Minden bejelentést szigorúan bizalmasan kezelünk.
 you-are-impersonating-the-guest-user=A Vendég felhasználót megszemélyesítése.
 you-are-impersonating-x={0} megszemélyesítése.
 you-are-not-subscribed-to-any-categories=Nem vagy feliratkozva semmilyen kategóriára.

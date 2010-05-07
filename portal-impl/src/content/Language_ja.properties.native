@@ -4640,7 +4640,7 @@ years=年
 yes=はい
 yesterday=昨日
 ym=YM
-you-are-about-to-report-a-violation-of-our-x-terms-of-use.-all-reports-are-strictly-confidential=<a href="{0}">利用規約</a>に違反している投稿を報告します。報告は全て厳重に取り扱います。
+you-are-about-to-report-a-violation-of-our-x-terms-of-use.-all-reports-are-strictly-confidential=<a href="{0}" target="_blank">利用規約</a>に違反している投稿を報告します。報告は全て厳重に取り扱います。
 you-are-impersonating-the-guest-user=ゲストユーザーを装っています。
 you-are-impersonating-x={0} を装っています。
 you-are-not-subscribed-to-any-categories=メール通知を設定しているカテゴリはありません。

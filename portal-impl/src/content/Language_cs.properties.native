@@ -4640,7 +4640,7 @@ years=Roky
 yes=Ano
 yesterday=Včera
 ym=YM
-you-are-about-to-report-a-violation-of-our-x-terms-of-use.-all-reports-are-strictly-confidential=Chytáte se nahlásit, že někdo porušil naše <a href="{0}">Podmínky užívání</a>. Veškerá takováto oznámení jsou striktně důvěrná.
+you-are-about-to-report-a-violation-of-our-x-terms-of-use.-all-reports-are-strictly-confidential=Chytáte se nahlásit, že někdo porušil naše <a href="{0}" target="_blank">Podmínky užívání</a>. Veškerá takováto oznámení jsou striktně důvěrná.
 you-are-impersonating-the-guest-user=Vydáváte se za Hosta.
 you-are-impersonating-x=Vydáváte se uživatele {0}.
 you-are-not-subscribed-to-any-categories=Nejste registrován(a) u žádné kategorie.

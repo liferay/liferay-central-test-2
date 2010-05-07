@@ -4640,7 +4640,7 @@ years=Urteak
 yes=Bai
 yesterday=Atzo
 ym=YM
-you-are-about-to-report-a-violation-of-our-x-terms-of-use.-all-reports-are-strictly-confidential=Zure <a href="{0}">erabiltze baldintzen</a> bortxaketaren berri eman behar duzu. Berri emate guztiak erabat isilpekoak dira.
+you-are-about-to-report-a-violation-of-our-x-terms-of-use.-all-reports-are-strictly-confidential=Zure <a href="{0}" target="_blank">erabiltze baldintzen</a> bortxaketaren berri eman behar duzu. Berri emate guztiak erabat isilpekoak dira.
 you-are-impersonating-the-guest-user=Erabiltzaile anonimoa pertsonifikatzen ari zara.
 you-are-impersonating-x={0} pertsonifikatzen ari zara.
 you-are-not-subscribed-to-any-categories=Ez zaude inongo kategoriatan harpidetuta

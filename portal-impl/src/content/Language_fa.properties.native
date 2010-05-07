@@ -4640,7 +4640,7 @@ years=ستل
 yes=بله
 yesterday=ديروز
 ym=YM
-you-are-about-to-report-a-violation-of-our-x-terms-of-use.-all-reports-are-strictly-confidential=You are about to report a violation of our <a href="{0}">Terms of Use</a>. All reports are strictly confidential.
+you-are-about-to-report-a-violation-of-our-x-terms-of-use.-all-reports-are-strictly-confidential=You are about to report a violation of our <a href="{0}" target="_blank">Terms of Use</a>. All reports are strictly confidential. (Automatic Copy)
 you-are-impersonating-the-guest-user=You are impersonating the guest user. (Automatic Copy)
 you-are-impersonating-x=You are impersonating {0}. (Automatic Copy)
 you-are-not-subscribed-to-any-categories=You are not subscribed to any categories. (Automatic Copy)

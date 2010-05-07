@@ -4639,7 +4639,7 @@ years=Años
 yes=Sí
 yesterday=Ayer
 ym=YM
-you-are-about-to-report-a-violation-of-our-x-terms-of-use.-all-reports-are-strictly-confidential=Va a notificar una violación de nuestras <a href="{0}">Condiciones de uso</a>. Todas las notificaciones son gestionadas con absoluta confidencialidad.
+you-are-about-to-report-a-violation-of-our-x-terms-of-use.-all-reports-are-strictly-confidential=Va a notificar una violación de nuestras <a href="{0}" target="_blank">condiciones de uso</a>. Todas las notificaciones son gestionadas con absoluta confidencialidad.
 you-are-impersonating-the-guest-user=Usted está suplantando a un usuario anónimo.
 you-are-impersonating-x=Usted está suplantando a {0}.
 you-are-not-subscribed-to-any-categories=No está suscrito a ninguna categoría.

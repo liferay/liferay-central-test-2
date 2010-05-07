@@ -4640,7 +4640,7 @@ years=År
 yes=Ja
 yesterday=Igår
 ym=ÅM
-you-are-about-to-report-a-violation-of-our-x-terms-of-use.-all-reports-are-strictly-confidential=Du kommer nu rapporera ett brott mot våra <a href="{0}">användarregler</a>. Alla rapporter behandlas kofidentiellt.
+you-are-about-to-report-a-violation-of-our-x-terms-of-use.-all-reports-are-strictly-confidential=Du kommer nu rapporera ett brott mot våra <a href="{0}" target="_blank">användarregler</a>. Alla rapporter behandlas kofidentiellt.
 you-are-impersonating-the-guest-user=Du utger dig för att vara gäst-användaren.
 you-are-impersonating-x=Du utger dig för att vara {0}.
 you-are-not-subscribed-to-any-categories=Du prenumererar inte på några kategorier.

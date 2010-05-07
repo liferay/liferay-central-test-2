@@ -4640,7 +4640,7 @@ years=Jahre
 yes=Ja
 yesterday=Gestern
 ym=YM
-you-are-about-to-report-a-violation-of-our-x-terms-of-use.-all-reports-are-strictly-confidential=Sie wollen einen Verstoß gegen unsere <a href="{0}">Benutzungsbestimmungen</a> melden. Alle Berichte werden vertraulich behandelt.
+you-are-about-to-report-a-violation-of-our-x-terms-of-use.-all-reports-are-strictly-confidential=Sie wollen einen Verstoß gegen unsere <a href="{0}" target="_blank">Benutzungsbestimmungen</a> melden. Alle Berichte werden vertraulich behandelt.
 you-are-impersonating-the-guest-user=Sie imitieren den Gastbenutzer.
 you-are-impersonating-x=Sie imitieren {0}.
 you-are-not-subscribed-to-any-categories=Sie haben keine Kategorien abonniert.
