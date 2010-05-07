@@ -73,8 +73,7 @@ String panelTreeKey = "panelSelectedPortletsPanelTree";
 		{
 			boundingBox: '#<portlet:namespace />panelSelectPortletsOutput'
 		}
-	)
-	.render();
+	).render();
 
 	<%
 	PortletLister portletLister = new PortletLister();

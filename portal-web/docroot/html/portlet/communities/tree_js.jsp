@@ -287,6 +287,5 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 			},
 			type: 'pages'
 		}
-	)
-	.render();
+	).render();
 </aui:script>

@@ -18,8 +18,7 @@ Liferay.provide(
 				title: Liferay.Language.get('add-to-netvibes'),
 				width: 550
 			}
-		)
-		.render();
+		).render();
 
 		dialog.plug(
 			A.Plugin.IO,
@@ -49,8 +48,7 @@ Liferay.provide(
 				title: Liferay.Language.get('add-to-any-website'),
 				width: 550
 			}
-		)
-		.render();
+		).render();
 
 		dialog.plug(
 			A.Plugin.IO,

@@ -53,8 +53,7 @@ AUI().add(
 							bodyContent: addCategoryLayer,
 							trigger: '.add-category-button'
 						}
-					)
-					.render();
+					).render();
 
 					instance._vocabularyCategoryPanel = new A.OverlayContextPanel(
 						{
@@ -64,8 +63,7 @@ AUI().add(
 							bodyContent: addVocabularyLayer,
 							trigger: '.add-vocabulary-button'
 						}
-					)
-					.render();
+					).render();
 
 					toolbar.all('.add-vocabulary-button').on(
 						'click',
@@ -332,8 +330,7 @@ AUI().add(
 							},
 							type: 'normal'
 						}
-					)
-					.render();
+					).render();
 
 					instance._buildCategoryTreeview(categories, 0);
 

@@ -299,8 +299,7 @@ AUI().add(
 					bodyContent: editContainerWrapper,
 					trigger: 'input.edit-button'
 				}
-			)
-			.render();
+			).render();
 
 			A.OverlayContextManager.remove(instance.editContainerContextPanel);
 
@@ -970,8 +969,7 @@ AUI().add(
 							title: title,
 							width: 550
 						}
-					)
-					.render();
+					).render();
 
 					instance._saveDialog.fields = {
 						autoGenerateIdMessage: Liferay.Language.get('autogenerate-id'),

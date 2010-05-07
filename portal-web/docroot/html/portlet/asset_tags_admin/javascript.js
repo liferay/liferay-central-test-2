@@ -56,8 +56,7 @@ AUI().add(
 							bodyContent: addTagLayer,
 							trigger: '.add-tag-button'
 						}
-					)
-					.render();
+					).render();
 
 					A.one('.tag-permissions-button').on(
 						'click',
