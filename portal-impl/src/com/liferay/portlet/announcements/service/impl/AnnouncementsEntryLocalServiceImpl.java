@@ -537,12 +537,12 @@ public class AnnouncementsEntryLocalServiceImpl
 			throw new EntryTitleException();
 		}
 
-		if (!Validator.isUrl(url)) {
-			throw new EntryURLException();
-		}
-
 		if (Validator.isNull(content)) {
 			throw new EntryContentException();
+		}
+
+		if (!Validator.isUrl(url)) {
+			throw new EntryURLException();
 		}
 	}
 
