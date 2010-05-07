@@ -17,8 +17,8 @@ package com.liferay.portlet.shopping.service.base;
 import com.liferay.counter.service.CounterLocalService;
 
 import com.liferay.portal.kernel.annotation.BeanReference;
-import com.liferay.portal.kernel.dao.db.DB;
-import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
+import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
+import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -58,6 +58,8 @@ import com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemPersist
 import com.liferay.portlet.shopping.service.persistence.ShoppingOrderPersistence;
 
 import java.util.List;
+
+import javax.sql.DataSource;
 
 /**
  * <a href="ShoppingCategoryLocalServiceBaseImpl.java.html"><b><i>View Source
@@ -421,9 +423,12 @@ public abstract class ShoppingCategoryLocalServiceBaseImpl
 
 	protected void runSQL(String sql) throws SystemException {
 		try {
-			DB db = DBFactoryUtil.getDB();
+			DataSource dataSource = shoppingCategoryPersistence.getDataSource();
 
-			db.runSQL(sql);
+			SqlUpdate sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(dataSource,
+					sql, new int[0]);
+
+			sqlUpdate.update();
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

@@ -17,8 +17,8 @@ package com.liferay.portlet.softwarecatalog.service.base;
 import com.liferay.counter.service.CounterLocalService;
 
 import com.liferay.portal.kernel.annotation.BeanReference;
-import com.liferay.portal.kernel.dao.db.DB;
-import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
+import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
+import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceService;
@@ -44,6 +44,8 @@ import com.liferay.portlet.softwarecatalog.service.persistence.SCLicensePersiste
 import com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryPersistence;
 import com.liferay.portlet.softwarecatalog.service.persistence.SCProductScreenshotPersistence;
 import com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionPersistence;
+
+import javax.sql.DataSource;
 
 /**
  * <a href="SCFrameworkVersionServiceBaseImpl.java.html"><b><i>View Source</i>
@@ -253,9 +255,12 @@ public abstract class SCFrameworkVersionServiceBaseImpl extends PrincipalBean
 
 	protected void runSQL(String sql) throws SystemException {
 		try {
-			DB db = DBFactoryUtil.getDB();
+			DataSource dataSource = scFrameworkVersionPersistence.getDataSource();
 
-			db.runSQL(sql);
+			SqlUpdate sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(dataSource,
+					sql, new int[0]);
+
+			sqlUpdate.update();
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

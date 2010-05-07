@@ -17,8 +17,8 @@ package com.liferay.portlet.tasks.service.base;
 import com.liferay.counter.service.CounterLocalService;
 
 import com.liferay.portal.kernel.annotation.BeanReference;
-import com.liferay.portal.kernel.dao.db.DB;
-import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
+import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
+import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceService;
@@ -40,6 +40,8 @@ import com.liferay.portlet.tasks.service.TasksReviewService;
 import com.liferay.portlet.tasks.service.persistence.TasksProposalFinder;
 import com.liferay.portlet.tasks.service.persistence.TasksProposalPersistence;
 import com.liferay.portlet.tasks.service.persistence.TasksReviewPersistence;
+
+import javax.sql.DataSource;
 
 /**
  * <a href="TasksReviewServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
@@ -211,9 +213,12 @@ public abstract class TasksReviewServiceBaseImpl extends PrincipalBean
 
 	protected void runSQL(String sql) throws SystemException {
 		try {
-			DB db = DBFactoryUtil.getDB();
+			DataSource dataSource = tasksReviewPersistence.getDataSource();
 
-			db.runSQL(sql);
+			SqlUpdate sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(dataSource,
+					sql, new int[0]);
+
+			sqlUpdate.update();
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

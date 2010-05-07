@@ -19,8 +19,8 @@ import com.liferay.counter.service.CounterLocalService;
 import com.liferay.mail.service.MailService;
 
 import com.liferay.portal.kernel.annotation.BeanReference;
-import com.liferay.portal.kernel.dao.db.DB;
-import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
+import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
+import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.CompanyLocalService;
 import com.liferay.portal.service.CompanyService;
@@ -61,6 +61,8 @@ import com.liferay.portlet.announcements.service.persistence.AnnouncementsDelive
 import com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryFinder;
 import com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryPersistence;
 import com.liferay.portlet.announcements.service.persistence.AnnouncementsFlagPersistence;
+
+import javax.sql.DataSource;
 
 /**
  * <a href="AnnouncementsEntryServiceBaseImpl.java.html"><b><i>View Source</i>
@@ -399,9 +401,12 @@ public abstract class AnnouncementsEntryServiceBaseImpl extends PrincipalBean
 
 	protected void runSQL(String sql) throws SystemException {
 		try {
-			DB db = DBFactoryUtil.getDB();
+			DataSource dataSource = announcementsEntryPersistence.getDataSource();
 
-			db.runSQL(sql);
+			SqlUpdate sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(dataSource,
+					sql, new int[0]);
+
+			sqlUpdate.update();
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
