@@ -18,7 +18,9 @@ import com.liferay.portal.kernel.io.unsync.UnsyncBufferedReader;
 import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.ClassUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
+import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.util.ContentUtil;
@@ -407,8 +409,33 @@ public class SourceFormatter {
 			files = _getPluginJavaFiles();
 		}
 
+		Properties properties = new Properties();
+
+		File propertiesFile = _getPropertiesFile(basedir, ".java.temp");
+
+		String propertiesContent = StringPool.BLANK;
+
+		if (propertiesFile.exists()) {
+			propertiesContent = _fileUtil.read(propertiesFile);
+
+			PropertiesUtil.load(properties, propertiesContent);
+		}
+
 		for (int i = 0; i < files.length; i++) {
 			File file = new File(basedir + files[i]);
+
+			String key = StringUtil.replace(
+				file.getPath(), StringPool.BACK_SLASH, StringPool.SLASH);
+
+			long lastModified = GetterUtil.getLong(properties.getProperty(key));
+
+			if (file.lastModified() == lastModified) {
+				continue;
+			}
+			else {
+				properties.setProperty(
+					key, String.valueOf(file.lastModified()));
+			}
 
 			String content = _fileUtil.read(file);
 
@@ -562,6 +589,12 @@ public class SourceFormatter {
 				System.out.println(file);
 			}
 		}
+
+		String newPropertiesContent = PropertiesUtil.toString(properties);
+
+		if (!propertiesContent.equals(newPropertiesContent)) {
+			_fileUtil.write(propertiesFile, newPropertiesContent);
+		}
 	}
 
 	private static String _formatJavaContent(
@@ -671,6 +704,9 @@ public class SourceFormatter {
 	private static void _formatJSP() throws IOException {
 		String basedir = "./";
 
+		String copyright = _getCopyright();
+		String oldCopyright = _getOldCopyright();
+
 		List<String> list = new ArrayList<String>();
 
 		DirectoryScanner ds = new DirectoryScanner();
@@ -687,13 +723,35 @@ public class SourceFormatter {
 
 		list.addAll(ListUtil.fromArray(ds.getIncludedFiles()));
 
-		String copyright = _getCopyright();
-		String oldCopyright = _getOldCopyright();
-
 		String[] files = list.toArray(new String[list.size()]);
+
+		Properties properties = new Properties();
+
+		File propertiesFile = _getPropertiesFile(basedir, ".jsp.temp");
+
+		String propertiesContent = StringPool.BLANK;
+
+		if (propertiesFile.exists()) {
+			propertiesContent = _fileUtil.read(propertiesFile);
+
+			PropertiesUtil.load(properties, propertiesContent);
+		}
 
 		for (int i = 0; i < files.length; i++) {
 			File file = new File(basedir + files[i]);
+
+			String key = StringUtil.replace(
+				file.getPath(), StringPool.BACK_SLASH, StringPool.SLASH);
+
+			long lastModified = GetterUtil.getLong(properties.getProperty(key));
+
+			if (file.lastModified() == lastModified) {
+				continue;
+			}
+			else {
+				properties.setProperty(
+					key, String.valueOf(file.lastModified()));
+			}
 
 			String content = _fileUtil.read(file);
 			String newContent = _formatJSPContent(files[i], content);
@@ -770,6 +828,12 @@ public class SourceFormatter {
 
 				System.out.println(file);
 			}
+		}
+
+		String newPropertiesContent = PropertiesUtil.toString(properties);
+
+		if (!propertiesContent.equals(newPropertiesContent)) {
+			_fileUtil.write(propertiesFile, newPropertiesContent);
 		}
 	}
 
@@ -1012,6 +1076,21 @@ public class SourceFormatter {
 		list.addAll(ListUtil.fromArray(ds.getIncludedFiles()));
 
 		return list.toArray(new String[list.size()]);
+	}
+
+	private static File _getPropertiesFile(String basedir, String ext) {
+		File basedirFile = new File(basedir);
+
+		String basedirAbsolutePath = StringUtil.replace(
+			basedirFile.getAbsolutePath(),
+			new String[] {".", ":", "/", "\\"},
+			new String[] {"_", "_", "_", "_"});
+
+		String propertiesFileName =
+			System.getProperty("java.io.tmpdir") + "/SourceFormatter." +
+				basedirAbsolutePath + ext;
+
+		return new File(propertiesFileName);
 	}
 
 	private static String _getTaglibRegex(String quoteType) {
