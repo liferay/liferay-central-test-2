@@ -14,6 +14,9 @@
 
 package com.liferay.portal.kernel.jmx;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,6 +34,24 @@ import javax.management.ObjectName;
  * @author Michael C. Han
  */
 public class MBeanRegistry {
+
+	public void destroy() throws Exception {
+		for (ObjectName objectName : _objectNameCache.values()) {
+			try {
+				_mBeanServer.unregisterMBean(objectName);
+			}
+			catch (Exception e) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						"Unable to unregister mbean: " +
+						objectName.getCanonicalName(),
+						e);
+				}
+			}
+		}
+		_objectNameCache.clear();
+	}
+
 
 	public ObjectName getObjectName(String objectNameCacheKey) {
 		return _objectNameCache.get(objectNameCacheKey);
@@ -83,6 +104,8 @@ public class MBeanRegistry {
 			_mBeanServer.unregisterMBean(objectName);
 		}
 	}
+
+	private static final Log _log = LogFactoryUtil.getLog(MBeanRegistry.class);
 
 	private MBeanServer _mBeanServer;
 	private Map<String, ObjectName> _objectNameCache =
