@@ -56,10 +56,9 @@ searchContainer.setResults(results);
 
 		PortletURL rowURL = renderResponse.createRenderURL();
 
-		rowURL.setParameter("struts_action", "/wiki/view");
-		//rowURL.setParameter("redirect", currentURL);
-		rowURL.setParameter("nodeName", String.valueOf(node.getName()));
-		rowURL.setParameter("title", WikiPageConstants.FRONT_PAGE);
+		rowURL.setParameter("struts_action", "/wiki/edit_node");
+		rowURL.setParameter("redirect", currentURL);
+		rowURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
 
 		// Name
 
