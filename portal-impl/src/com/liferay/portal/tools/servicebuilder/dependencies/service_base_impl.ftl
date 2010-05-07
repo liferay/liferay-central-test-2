@@ -3,9 +3,12 @@ package ${packagePath}.service.base;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import ${beanLocatorUtil};
-import com.liferay.portal.kernel.dao.db.DB;
-import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
+import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
+import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.InfrastructureUtil;
+
+import javax.sql.DataSource;
 
 <#if sessionTypeName == "">
 	import com.liferay.portal.service.base.PrincipalBean;
@@ -165,9 +168,15 @@ import com.liferay.portal.kernel.exception.SystemException;
 
 protected void runSQL(String sql) throws SystemException {
 	try {
-		DB db = DBFactoryUtil.getDB();
+		<#if entity.hasColumns()>
+			DataSource dataSource = ${entity.varName}Persistence.getDataSource();
+		<#else>
+			DataSource dataSource = InfrastructureUtil.getDataSource();
+		</#if>
 
-		db.runSQL(sql);
+		SqlUpdate sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(dataSource, sql, new int[0]);
+
+		sqlUpdate.update();
 	}
 	catch (Exception e) {
 		throw new SystemException(e);
