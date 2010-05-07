@@ -52,7 +52,7 @@ public interface PasswordPolicyService {
 		boolean checkSyntax, boolean allowDictionaryWords, int minLength,
 		boolean history, int historyCount, boolean expireable, long maxAge,
 		long warningTime, int graceLimit, boolean lockout, int maxFailure,
-		long lockoutDuration, long resetFailureCount)
+		long lockoutDuration, long resetFailureCount, long resetTicketMaxAge)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -67,7 +67,7 @@ public interface PasswordPolicyService {
 		boolean allowDictionaryWords, int minLength, boolean history,
 		int historyCount, boolean expireable, long maxAge, long warningTime,
 		int graceLimit, boolean lockout, int maxFailure, long lockoutDuration,
-		long resetFailureCount)
+		long resetFailureCount, long resetTicketMaxAge)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 }

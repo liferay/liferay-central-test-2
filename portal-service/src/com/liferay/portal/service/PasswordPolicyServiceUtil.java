@@ -43,14 +43,15 @@ public class PasswordPolicyServiceUtil {
 		boolean checkSyntax, boolean allowDictionaryWords, int minLength,
 		boolean history, int historyCount, boolean expireable, long maxAge,
 		long warningTime, int graceLimit, boolean lockout, int maxFailure,
-		long lockoutDuration, long resetFailureCount)
+		long lockoutDuration, long resetFailureCount, long resetTicketMaxAge)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .addPasswordPolicy(name, description, changeable,
 			changeRequired, minAge, checkSyntax, allowDictionaryWords,
 			minLength, history, historyCount, expireable, maxAge, warningTime,
-			graceLimit, lockout, maxFailure, lockoutDuration, resetFailureCount);
+			graceLimit, lockout, maxFailure, lockoutDuration,
+			resetFailureCount, resetTicketMaxAge);
 	}
 
 	public static void deletePasswordPolicy(long passwordPolicyId)
@@ -66,7 +67,7 @@ public class PasswordPolicyServiceUtil {
 		boolean allowDictionaryWords, int minLength, boolean history,
 		int historyCount, boolean expireable, long maxAge, long warningTime,
 		int graceLimit, boolean lockout, int maxFailure, long lockoutDuration,
-		long resetFailureCount)
+		long resetFailureCount, long resetTicketMaxAge)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
@@ -74,7 +75,7 @@ public class PasswordPolicyServiceUtil {
 			changeable, changeRequired, minAge, checkSyntax,
 			allowDictionaryWords, minLength, history, historyCount, expireable,
 			maxAge, warningTime, graceLimit, lockout, maxFailure,
-			lockoutDuration, resetFailureCount);
+			lockoutDuration, resetFailureCount, resetTicketMaxAge);
 	}
 
 	public static PasswordPolicyService getService() {

@@ -87,6 +87,7 @@ public class PasswordPolicyJSONSerializer {
 		jsonObj.put("lockoutDuration", model.getLockoutDuration());
 		jsonObj.put("requireUnlock", model.getRequireUnlock());
 		jsonObj.put("resetFailureCount", model.getResetFailureCount());
+		jsonObj.put("resetTicketMaxAge", model.getResetTicketMaxAge());
 
 		return jsonObj;
 	}

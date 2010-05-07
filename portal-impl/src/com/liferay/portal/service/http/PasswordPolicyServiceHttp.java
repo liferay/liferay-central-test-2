@@ -69,7 +69,7 @@ public class PasswordPolicyServiceHttp {
 		boolean allowDictionaryWords, int minLength, boolean history,
 		int historyCount, boolean expireable, long maxAge, long warningTime,
 		int graceLimit, boolean lockout, int maxFailure, long lockoutDuration,
-		long resetFailureCount)
+		long resetFailureCount, long resetTicketMaxAge)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
@@ -117,13 +117,16 @@ public class PasswordPolicyServiceHttp {
 
 			Object paramObj17 = new LongWrapper(resetFailureCount);
 
+			Object paramObj18 = new LongWrapper(resetTicketMaxAge);
+
 			MethodWrapper methodWrapper = new MethodWrapper(PasswordPolicyServiceUtil.class.getName(),
 					"addPasswordPolicy",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
 						paramObj10, paramObj11, paramObj12, paramObj13,
-						paramObj14, paramObj15, paramObj16, paramObj17
+						paramObj14, paramObj15, paramObj16, paramObj17,
+						paramObj18
 					});
 
 			Object returnObj = null;
@@ -191,7 +194,7 @@ public class PasswordPolicyServiceHttp {
 		boolean checkSyntax, boolean allowDictionaryWords, int minLength,
 		boolean history, int historyCount, boolean expireable, long maxAge,
 		long warningTime, int graceLimit, boolean lockout, int maxFailure,
-		long lockoutDuration, long resetFailureCount)
+		long lockoutDuration, long resetFailureCount, long resetTicketMaxAge)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
@@ -241,6 +244,8 @@ public class PasswordPolicyServiceHttp {
 
 			Object paramObj18 = new LongWrapper(resetFailureCount);
 
+			Object paramObj19 = new LongWrapper(resetTicketMaxAge);
+
 			MethodWrapper methodWrapper = new MethodWrapper(PasswordPolicyServiceUtil.class.getName(),
 					"updatePasswordPolicy",
 					new Object[] {
@@ -248,7 +253,7 @@ public class PasswordPolicyServiceHttp {
 						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
 						paramObj10, paramObj11, paramObj12, paramObj13,
 						paramObj14, paramObj15, paramObj16, paramObj17,
-						paramObj18
+						paramObj18, paramObj19
 					});
 
 			Object returnObj = null;

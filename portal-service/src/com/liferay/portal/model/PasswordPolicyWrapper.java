@@ -297,6 +297,14 @@ public class PasswordPolicyWrapper implements PasswordPolicy {
 		_passwordPolicy.setResetFailureCount(resetFailureCount);
 	}
 
+	public long getResetTicketMaxAge() {
+		return _passwordPolicy.getResetTicketMaxAge();
+	}
+
+	public void setResetTicketMaxAge(long resetTicketMaxAge) {
+		_passwordPolicy.setResetTicketMaxAge(resetTicketMaxAge);
+	}
+
 	public com.liferay.portal.model.PasswordPolicy toEscapedModel() {
 		return _passwordPolicy.toEscapedModel();
 	}

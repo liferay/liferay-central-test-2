@@ -497,6 +497,7 @@
 		<property name="lockoutDuration" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="requireUnlock" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 		<property name="resetFailureCount" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="resetTicketMaxAge" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 	</class>
 	<class name="com.liferay.portal.model.impl.PasswordPolicyRelImpl" table="PasswordPolicyRel">
 		<cache usage="read-write" />

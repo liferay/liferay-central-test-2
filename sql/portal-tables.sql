@@ -996,7 +996,8 @@ create table PasswordPolicy (
 	maxFailure INTEGER,
 	lockoutDuration LONG,
 	requireUnlock BOOLEAN,
-	resetFailureCount LONG
+	resetFailureCount LONG,
+	resetTicketMaxAge LONG
 );
 
 create table PasswordPolicyRel (

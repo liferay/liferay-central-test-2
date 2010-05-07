@@ -92,6 +92,7 @@ public class PasswordPolicyPersistenceTest extends BasePersistenceTestCase {
 		newPasswordPolicy.setLockoutDuration(nextLong());
 		newPasswordPolicy.setRequireUnlock(randomBoolean());
 		newPasswordPolicy.setResetFailureCount(nextLong());
+		newPasswordPolicy.setResetTicketMaxAge(nextLong());
 
 		_persistence.update(newPasswordPolicy, false);
 
@@ -151,6 +152,8 @@ public class PasswordPolicyPersistenceTest extends BasePersistenceTestCase {
 			newPasswordPolicy.getRequireUnlock());
 		assertEquals(existingPasswordPolicy.getResetFailureCount(),
 			newPasswordPolicy.getResetFailureCount());
+		assertEquals(existingPasswordPolicy.getResetTicketMaxAge(),
+			newPasswordPolicy.getResetTicketMaxAge());
 	}
 
 	public void testFindByPrimaryKeyExisting() throws Exception {
@@ -250,6 +253,7 @@ public class PasswordPolicyPersistenceTest extends BasePersistenceTestCase {
 		passwordPolicy.setLockoutDuration(nextLong());
 		passwordPolicy.setRequireUnlock(randomBoolean());
 		passwordPolicy.setResetFailureCount(nextLong());
+		passwordPolicy.setResetTicketMaxAge(nextLong());
 
 		_persistence.update(passwordPolicy, false);
 

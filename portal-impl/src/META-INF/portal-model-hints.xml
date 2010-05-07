@@ -399,6 +399,7 @@
 		<field name="lockoutDuration" type="long" />
 		<field name="requireUnlock" type="boolean" />
 		<field name="resetFailureCount" type="long" />
+		<field name="resetTicketMaxAge" type="long" />
 	</model>
 	<model name="com.liferay.portal.model.PasswordPolicyRel">
 		<field name="passwordPolicyRelId" type="long" />

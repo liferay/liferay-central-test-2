@@ -458,6 +458,7 @@
 			<basic name="lockoutDuration" />
 			<basic name="requireUnlock" />
 			<basic name="resetFailureCount" />
+			<basic name="resetTicketMaxAge" />
 			<transient name="primaryKey" />
 			<transient name="userUuid" />
 		</attributes>

@@ -97,6 +97,9 @@ public interface Company extends CompanyModel {
 	public boolean isSendPassword()
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	public boolean isSendPasswordResetLinkOnly()
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public boolean isStrangers()
 		throws com.liferay.portal.kernel.exception.SystemException;
 

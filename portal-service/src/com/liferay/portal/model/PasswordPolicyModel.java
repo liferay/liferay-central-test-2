@@ -177,6 +177,10 @@ public interface PasswordPolicyModel extends BaseModel<PasswordPolicy> {
 
 	public void setResetFailureCount(long resetFailureCount);
 
+	public long getResetTicketMaxAge();
+
+	public void setResetTicketMaxAge(long resetTicketMaxAge);
+
 	public PasswordPolicy toEscapedModel();
 
 	public boolean isNew();

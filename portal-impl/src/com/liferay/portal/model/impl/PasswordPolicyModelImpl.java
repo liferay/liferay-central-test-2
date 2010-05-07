@@ -84,9 +84,10 @@ public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy> {
 			{ "maxFailure", new Integer(Types.INTEGER) },
 			{ "lockoutDuration", new Integer(Types.BIGINT) },
 			{ "requireUnlock", new Integer(Types.BOOLEAN) },
-			{ "resetFailureCount", new Integer(Types.BIGINT) }
+			{ "resetFailureCount", new Integer(Types.BIGINT) },
+			{ "resetTicketMaxAge", new Integer(Types.BIGINT) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table PasswordPolicy (passwordPolicyId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,defaultPolicy BOOLEAN,name VARCHAR(75) null,description STRING null,changeable BOOLEAN,changeRequired BOOLEAN,minAge LONG,checkSyntax BOOLEAN,allowDictionaryWords BOOLEAN,minLength INTEGER,history BOOLEAN,historyCount INTEGER,expireable BOOLEAN,maxAge LONG,warningTime LONG,graceLimit INTEGER,lockout BOOLEAN,maxFailure INTEGER,lockoutDuration LONG,requireUnlock BOOLEAN,resetFailureCount LONG)";
+	public static final String TABLE_SQL_CREATE = "create table PasswordPolicy (passwordPolicyId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,defaultPolicy BOOLEAN,name VARCHAR(75) null,description STRING null,changeable BOOLEAN,changeRequired BOOLEAN,minAge LONG,checkSyntax BOOLEAN,allowDictionaryWords BOOLEAN,minLength INTEGER,history BOOLEAN,historyCount INTEGER,expireable BOOLEAN,maxAge LONG,warningTime LONG,graceLimit INTEGER,lockout BOOLEAN,maxFailure INTEGER,lockoutDuration LONG,requireUnlock BOOLEAN,resetFailureCount LONG,resetTicketMaxAge LONG)";
 	public static final String TABLE_SQL_DROP = "drop table PasswordPolicy";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -127,6 +128,7 @@ public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy> {
 		model.setLockoutDuration(soapModel.getLockoutDuration());
 		model.setRequireUnlock(soapModel.getRequireUnlock());
 		model.setResetFailureCount(soapModel.getResetFailureCount());
+		model.setResetTicketMaxAge(soapModel.getResetTicketMaxAge());
 
 		return model;
 	}
@@ -454,6 +456,14 @@ public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy> {
 		_resetFailureCount = resetFailureCount;
 	}
 
+	public long getResetTicketMaxAge() {
+		return _resetTicketMaxAge;
+	}
+
+	public void setResetTicketMaxAge(long resetTicketMaxAge) {
+		_resetTicketMaxAge = resetTicketMaxAge;
+	}
+
 	public PasswordPolicy toEscapedModel() {
 		if (isEscapedModel()) {
 			return (PasswordPolicy)this;
@@ -507,6 +517,7 @@ public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy> {
 		clone.setLockoutDuration(getLockoutDuration());
 		clone.setRequireUnlock(getRequireUnlock());
 		clone.setResetFailureCount(getResetFailureCount());
+		clone.setResetTicketMaxAge(getResetTicketMaxAge());
 
 		return clone;
 	}
@@ -554,7 +565,7 @@ public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy> {
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(53);
+		StringBundler sb = new StringBundler(55);
 
 		sb.append("{passwordPolicyId=");
 		sb.append(getPasswordPolicyId());
@@ -608,13 +619,15 @@ public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy> {
 		sb.append(getRequireUnlock());
 		sb.append(", resetFailureCount=");
 		sb.append(getResetFailureCount());
+		sb.append(", resetTicketMaxAge=");
+		sb.append(getResetTicketMaxAge());
 		sb.append("}");
 
 		return sb.toString();
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(82);
+		StringBundler sb = new StringBundler(85);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portal.model.PasswordPolicy");
@@ -724,6 +737,10 @@ public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy> {
 			"<column><column-name>resetFailureCount</column-name><column-value><![CDATA[");
 		sb.append(getResetFailureCount());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>resetTicketMaxAge</column-name><column-value><![CDATA[");
+		sb.append(getResetTicketMaxAge());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -762,5 +779,6 @@ public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy> {
 	private long _lockoutDuration;
 	private boolean _requireUnlock;
 	private long _resetFailureCount;
+	private long _resetTicketMaxAge;
 	private transient ExpandoBridge _expandoBridge;
 }
