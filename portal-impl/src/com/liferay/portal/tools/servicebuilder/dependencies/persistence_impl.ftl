@@ -219,6 +219,38 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	public void clearCache(${entity.name} ${entity.varName}) {
+		EntityCacheUtil.removeResult(${entity.name}ModelImpl.ENTITY_CACHE_ENABLED, ${entity.name}Impl.class, ${entity.varName}.getPrimaryKey());
+
+		<#list entity.getUniqueFinderList() as finder>
+			<#assign finderColsList = finder.getColumns()>
+
+			FinderCacheUtil.removeResult(
+				FINDER_PATH_FETCH_BY_${finder.name?upper_case},
+				new Object[] {
+					<#list finderColsList as finderCol>
+						<#if finderCol.isPrimitiveType()>
+							<#if finderCol.type == "boolean">
+								Boolean.valueOf(
+							<#else>
+								new ${serviceBuilder.getPrimitiveObj("${finderCol.type}")}(
+							</#if>
+						</#if>
+
+						${entity.varName}.get${finderCol.methodName}()
+
+						<#if finderCol.isPrimitiveType()>
+							)
+						</#if>
+
+						<#if finderCol_has_next>
+							,
+						</#if>
+					</#list>
+				});
+		</#list>
+	}
+
 	public ${entity.name} create(${entity.PKClassName} ${entity.PKVarName}) {
 		${entity.name} ${entity.varName} = new ${entity.name}Impl();
 

@@ -34,6 +34,8 @@ public interface BasePersistence<T extends BaseModel<T>> {
 
 	public void clearCache();
 
+	public void clearCache(T model);
+
 	public long countWithDynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException;
 

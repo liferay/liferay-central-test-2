@@ -33,6 +33,13 @@ public class ${entity.name}Util {
 	}
 
 	/**
+	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(${entity.name})
+	 */
+	public static void clearCache(${entity.name} ${entity.varName}) {
+		getPersistence().clearCache(${entity.varName});
+	}
+
+	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#countWithDynamicQuery(DynamicQuery)
 	 */
 	public long countWithDynamicQuery(DynamicQuery dynamicQuery) throws SystemException {

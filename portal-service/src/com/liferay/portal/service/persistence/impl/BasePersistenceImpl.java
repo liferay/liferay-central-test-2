@@ -54,6 +54,9 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 	public void clearCache() {
 	}
 
+	public void clearCache(T model) {
+	}
+
 	public void closeSession(Session session) {
 		_sessionFactory.closeSession(session);
 	}
