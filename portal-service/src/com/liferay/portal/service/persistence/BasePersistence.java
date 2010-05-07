@@ -25,6 +25,8 @@ import java.io.Serializable;
 
 import java.util.List;
 
+import javax.sql.DataSource;
+
 /**
  * <a href="BasePersistence.java.html"><b><i>View Source</i></b></a>
  *
@@ -59,6 +61,8 @@ public interface BasePersistence<T extends BaseModel<T>> {
 			OrderByComparator orderByComparator)
 		throws SystemException;
 
+	public DataSource getDataSource();
+
 	public ModelListener<T>[] getListeners();
 
 	public void registerListener(ModelListener<T> listener);
@@ -67,6 +71,8 @@ public interface BasePersistence<T extends BaseModel<T>> {
 		throws NoSuchModelException, SystemException;
 
 	public T remove(T model) throws SystemException;
+
+	public void setDataSource(DataSource dataSource);
 
 	public void unregisterListener(ModelListener<T> listener);
 
