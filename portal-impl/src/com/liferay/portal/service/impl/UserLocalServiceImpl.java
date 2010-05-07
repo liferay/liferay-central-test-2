@@ -2621,8 +2621,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		MailMessage message = new MailMessage(from, to, subject, body, true);
 
-		System.out.println(subject);
-		System.out.println(body);
 		mailService.sendEmail(message);
 	}
 
