@@ -83,7 +83,7 @@ public class AddMapPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//div[@title='Map']/p/a");
+		selenium.clickAt("//div[@title='Map']/p/a", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

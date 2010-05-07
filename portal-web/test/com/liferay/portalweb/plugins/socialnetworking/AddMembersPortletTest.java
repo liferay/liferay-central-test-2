@@ -83,7 +83,8 @@ public class AddMembersPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//div[@title='Members']/p/a");
+		selenium.clickAt("//div[@title='Members']/p/a",
+			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

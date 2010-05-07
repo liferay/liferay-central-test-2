@@ -72,7 +72,7 @@ public class AddPortletTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("//div[@title='Sample PHP']")) {
+				if (selenium.isVisible("//div[@title='Sample PHP']/p/a")) {
 					break;
 				}
 			}
@@ -82,7 +82,7 @@ public class AddPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//div[@title='Sample PHP']",
+		selenium.clickAt("//div[@title='Sample PHP']/p/a",
 			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {

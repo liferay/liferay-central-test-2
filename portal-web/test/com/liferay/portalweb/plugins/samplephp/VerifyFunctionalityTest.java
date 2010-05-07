@@ -42,61 +42,13 @@ public class VerifyFunctionalityTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Quercus"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent(
-							"link=exact:http://quercus.caucho.com")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		assertTrue(selenium.isElementPresent(
+				"link=exact:http://quercus.caucho.com"));
 		selenium.click(RuntimeVariables.replace("link=PHP Info"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isTextPresent("PHP Variables")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace(
-				"//div[@id=\"portlet-wrapper-SamplePHP_WAR_samplephpportlet\"]//div[2]/div/div/div[2]/a[1]"));
+		assertTrue(selenium.isTextPresent("PHP Variables"));
+		selenium.clickAt("link=Home", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//img[@alt='Configuration']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
+		assertTrue(selenium.isElementPresent("link=Configuration"));
 	}
 }

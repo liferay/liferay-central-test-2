@@ -72,7 +72,7 @@ public class AddJIRAPortletTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//div[@title='JIRA']/p/a")) {
+				if (selenium.isVisible("//div[@title='JIRA']/p/a")) {
 					break;
 				}
 			}
@@ -82,7 +82,8 @@ public class AddJIRAPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//div[@title='JIRA']/p/a");
+		selenium.clickAt("//div[@title='JIRA']/p/a",
+			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

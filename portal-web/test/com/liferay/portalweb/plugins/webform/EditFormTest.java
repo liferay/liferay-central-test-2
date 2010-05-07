@@ -24,7 +24,27 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class EditFormTest extends BaseTestCase {
 	public void testEditForm() throws Exception {
-		selenium.click(RuntimeVariables.replace("//img[@alt='Configuration']"));
+		selenium.open("/web/guest/home/");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("link=Web Form Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("link=Web Form Test Page", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("link=Configuration", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_86_title", RuntimeVariables.replace("Feed Back"));
 		selenium.type("_86_description",
@@ -33,9 +53,11 @@ public class EditFormTest extends BaseTestCase {
 		selenium.type("_86_fieldLabel2", RuntimeVariables.replace("Rate Us!"));
 		selenium.type("_86_fieldLabel3",
 			RuntimeVariables.replace("Additional Comments"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//div[2]/span[1]/span/input",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
-		selenium.waitForPageToLoad("30000");
+		assertEquals(RuntimeVariables.replace(
+				"You have successfully updated the setup."),
+			selenium.getText("//div[@id='p_p_id_86_']/div/div"));
 	}
 }

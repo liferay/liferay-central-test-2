@@ -24,13 +24,15 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class EditPreferencesTest extends BaseTestCase {
 	public void testEditPreferences() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("//strong/span")) {
+				if (selenium.isVisible("link=Weather Test Page")) {
 					break;
 				}
 			}
@@ -40,9 +42,9 @@ public class EditPreferencesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//strong/span");
-		selenium.click(RuntimeVariables.replace("//img[@alt='Preferences']"));
+		selenium.click(RuntimeVariables.replace("link=Weather Test Page"));
 		selenium.waitForPageToLoad("30000");
+		selenium.click("//strong/a");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -50,7 +52,8 @@ public class EditPreferencesTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_1_WAR_weatherportlet_zips")) {
+				if (selenium.isVisible(
+							"//div[@class='lfr-component lfr-menu-list']/ul/li[3]/a")) {
 					break;
 				}
 			}
@@ -60,12 +63,15 @@ public class EditPreferencesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.click(RuntimeVariables.replace(
+				"//div[@class='lfr-component lfr-menu-list']/ul/li[3]/a"));
+		selenium.waitForPageToLoad("30000");
+		Thread.sleep(5000);
 		selenium.type("_1_WAR_weatherportlet_zips",
 			RuntimeVariables.replace("Diamond Bar, CA"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
-		selenium.waitForPageToLoad("30000");
+		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -73,7 +79,7 @@ public class EditPreferencesTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Diamond Bar, CA")) {
+				if (selenium.isVisible("link=Weather Test Page")) {
 					break;
 				}
 			}
@@ -82,5 +88,9 @@ public class EditPreferencesTest extends BaseTestCase {
 
 			Thread.sleep(1000);
 		}
+
+		selenium.click(RuntimeVariables.replace("link=Weather Test Page"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isElementPresent("link=Diamond Bar, CA"));
 	}
 }

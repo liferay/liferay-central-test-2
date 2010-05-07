@@ -72,7 +72,7 @@ public class AddPortletBlogsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("//div[@title='Blogs']/p/a")) {
+				if (selenium.isVisible("//div[@id='_87_portletItem33']/p/a")) {
 					break;
 				}
 			}
@@ -82,7 +82,7 @@ public class AddPortletBlogsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//div[@title='Blogs']/p/a",
+		selenium.clickAt("//div[@id='_87_portletItem33']/p/a",
 			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {

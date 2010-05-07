@@ -24,13 +24,15 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class VerifyLinksTest extends BaseTestCase {
 	public void testVerifyLinks() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("//div[2]/div/div/a")) {
+				if (selenium.isVisible("link=Sample Sign In Test Page")) {
 					break;
 				}
 			}
@@ -40,11 +42,30 @@ public class VerifyLinksTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		verifyTrue(selenium.isTextPresent("You are signed in as Joe Bloggs."));
-		selenium.click(RuntimeVariables.replace("//div[2]/div/div/a"));
+		selenium.click(RuntimeVariables.replace("link=Sample Sign In Test Page"));
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("//section/div/div/div")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		assertEquals(RuntimeVariables.replace(
+				"You are signed in as Joe Bloggs."),
+			selenium.getText("//section/div/div/div"));
+		selenium.clickAt("//section/div/div/div/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals("test@liferay.com", selenium.getValue("_2_emailAddress"));
-		selenium.click(RuntimeVariables.replace("link=Back to My Community"));
-		selenium.waitForPageToLoad("30000");
 	}
 }

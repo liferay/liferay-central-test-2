@@ -75,7 +75,7 @@ public class AddMembersActivitiesPortletTest extends BaseTestCase {
 
 			try {
 				if (selenium.isElementPresent(
-							"//div[@title='Members Activities']/p/a")) {
+							"//div[@title=\"Members' Activities\"]/p/a")) {
 					break;
 				}
 			}
@@ -85,7 +85,8 @@ public class AddMembersActivitiesPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//div[@title='Members Activities']/p/a");
+		selenium.clickAt("//div[@title=\"Members' Activities\"]/p/a",
+			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

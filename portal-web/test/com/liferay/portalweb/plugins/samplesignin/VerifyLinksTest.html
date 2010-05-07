@@ -9,29 +9,39 @@
 <tr><td rowspan="1" colspan="3">VerifyLinksTest</td></tr>
 </thead><tbody>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>//div[2]/div/div/a</td>
+	<td>open</td>
+	<td>/web/guest/home/</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyTextPresent</td>
-	<td>You are signed in as Joe Bloggs.</td>
+	<td>waitForVisible</td>
+	<td>link=Sample Sign In Test Page</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[2]/div/div/a</td>
+	<td>link=Sample Sign In Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>//section/div/div/div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//section/div/div/div</td>
+	<td>You are signed in as Joe Bloggs.</td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>//section/div/div/div/a</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertValue</td>
 	<td>_2_emailAddress</td>
 	<td>test@liferay.com</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Back to My Community</td>
-	<td></td>
 </tr>
 
 </tbody></table>

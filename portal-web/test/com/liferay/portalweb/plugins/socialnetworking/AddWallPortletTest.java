@@ -83,7 +83,8 @@ public class AddWallPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//div[@title='Wall']/p/a");
+		selenium.clickAt("//div[@title='Wall']/p/a",
+			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

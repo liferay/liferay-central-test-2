@@ -24,13 +24,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class ArchiveTest extends BaseTestCase {
 	public void testArchive() throws Exception {
-		selenium.click(RuntimeVariables.replace("//img[@alt='Configuration']"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Archived"));
-		selenium.waitForPageToLoad("30000");
-		selenium.type("_86_name", RuntimeVariables.replace("test archive"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
-		selenium.waitForPageToLoad("30000");
+		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -38,7 +32,7 @@ public class ArchiveTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isTextPresent("test archive")) {
+				if (selenium.isVisible("link=Web Form Test Page")) {
 					break;
 				}
 			}
@@ -48,7 +42,41 @@ public class ArchiveTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
+		selenium.clickAt("link=Web Form Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("link=Configuration", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("link=Archived", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		selenium.type("_86_name", RuntimeVariables.replace("test archive"));
+		selenium.clickAt("//span[2]/span/input", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		assertEquals(RuntimeVariables.replace(
+				"Your request processed successfully."),
+			selenium.getText("//div[@id='p_p_id_86_']/div/div"));
+		selenium.selectWindow(
+			"name=p_p_id_1_WAR_webformportlet_INSTANCE_B7qT_configurationIframe");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (RuntimeVariables.replace("test archive")
+										.equals(selenium.getText(
+								"//form[@id='_86_fm']/div[1]/div[1]/table/tbody/tr[3]/td[1]"))) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		assertEquals(RuntimeVariables.replace("test archive"),
+			selenium.getText(
+				"//form[@id='_86_fm']/div[1]/div[1]/table/tbody/tr[3]/td[1]"));
 	}
 }

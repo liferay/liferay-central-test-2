@@ -61,7 +61,7 @@ public class AddPageTest extends BaseTestCase {
 		}
 
 		selenium.type("//input",
-			RuntimeVariables.replace("Sample UI Tag Libs Test Page"));
+			RuntimeVariables.replace("Sample UI Taglibs Test Page"));
 		selenium.clickAt("save", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -70,7 +70,7 @@ public class AddPageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("link=Sample UI Tag Libs Test Page")) {
+				if (selenium.isVisible("link=Sample UI Taglibs Test Page")) {
 					break;
 				}
 			}
@@ -80,8 +80,8 @@ public class AddPageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("link=Sample UI Tag Libs Test Page",
-			RuntimeVariables.replace(""));
+		selenium.click(RuntimeVariables.replace(
+				"link=Sample UI Taglibs Test Page"));
 		selenium.waitForPageToLoad("30000");
 	}
 }

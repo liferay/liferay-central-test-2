@@ -9,12 +9,27 @@
 <tr><td rowspan="1" colspan="3">ArchiveTest</td></tr>
 </thead><tbody>
 <tr>
-	<td>clickAndWait</td>
-	<td>//img[@alt='Configuration']</td>
+	<td>open</td>
+	<td>/web/guest/home/</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
+	<td>waitForVisible</td>
+	<td>link=Web Form Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>link=Web Form Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>link=Configuration</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
 	<td>link=Archived</td>
 	<td></td>
 </tr>
@@ -24,19 +39,29 @@
 	<td>test archive</td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>//input[@value='Save']</td>
+	<td>clickAtAndWait</td>
+	<td>//span[2]/span/input</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>assertText</td>
+	<td>//div[@id='p_p_id_86_']/div/div</td>
+	<td>Your request processed successfully.</td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>name=p_p_id_1_WAR_webformportlet_INSTANCE_B7qT_configurationIframe</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//form[@id='_86_fm']/div[1]/div[1]/table/tbody/tr[3]/td[1]</td>
 	<td>test archive</td>
-	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>link=Return to Full Page</td>
-	<td></td>
+	<td>assertText</td>
+	<td>//form[@id='_86_fm']/div[1]/div[1]/table/tbody/tr[3]/td[1]</td>
+	<td>test archive</td>
 </tr>
 
 </tbody></table>

@@ -83,7 +83,8 @@ public class AddFriendsPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//div[@title='Friends']/p/a");
+		selenium.clickAt("//div[@title='Friends']/p/a",
+			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

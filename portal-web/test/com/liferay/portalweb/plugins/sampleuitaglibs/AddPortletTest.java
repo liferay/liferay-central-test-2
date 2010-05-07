@@ -32,7 +32,7 @@ public class AddPortletTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("link=Sample UI Tag Libs Test Page")) {
+				if (selenium.isVisible("link=Sample UI Taglibs Test Page")) {
 					break;
 				}
 			}
@@ -43,7 +43,7 @@ public class AddPortletTest extends BaseTestCase {
 		}
 
 		selenium.click(RuntimeVariables.replace(
-				"link=Sample UI Tag Libs Test Page"));
+				"link=Sample UI Taglibs Test Page"));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("_145_addApplication", RuntimeVariables.replace(""));
 		Thread.sleep(5000);

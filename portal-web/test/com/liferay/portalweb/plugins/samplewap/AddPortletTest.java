@@ -122,6 +122,8 @@ public class AddPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.type("layout_configuration_content",
+			RuntimeVariables.replace(""));
 		selenium.typeKeys("layout_configuration_content",
 			RuntimeVariables.replace("s"));
 
@@ -161,5 +163,23 @@ public class AddPortletTest extends BaseTestCase {
 		}
 
 		assertTrue(selenium.isVisible("//section"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("//div[2]/section")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		assertTrue(selenium.isVisible("//div[2]/section"));
 	}
 }

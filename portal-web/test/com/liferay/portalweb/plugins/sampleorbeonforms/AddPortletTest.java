@@ -74,7 +74,7 @@ public class AddPortletTest extends BaseTestCase {
 
 			try {
 				if (selenium.isVisible(
-							"//div[@title='Sample Localized Portlet']/p/a")) {
+							"//div[@title='Sample Orbeon Form Portlet']/p/a")) {
 					break;
 				}
 			}
@@ -84,7 +84,7 @@ public class AddPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//div[@title='Sample Localized Portlet']/p/a",
+		selenium.clickAt("//div[@title='Sample Orbeon Form Portlet']/p/a",
 			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {

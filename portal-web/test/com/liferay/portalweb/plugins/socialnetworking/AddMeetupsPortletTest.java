@@ -83,7 +83,8 @@ public class AddMeetupsPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//div[@title='Meetups']/p/a");
+		selenium.clickAt("//div[@title='Meetups']/p/a",
+			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

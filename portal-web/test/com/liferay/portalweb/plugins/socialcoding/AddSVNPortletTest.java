@@ -72,7 +72,7 @@ public class AddSVNPortletTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//div[@title='SVN']/p/a")) {
+				if (selenium.isVisible("//div[@title='SVN']/p/a")) {
 					break;
 				}
 			}
@@ -82,7 +82,7 @@ public class AddSVNPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//div[@title='SVN']/p/a");
+		selenium.clickAt("//div[@title='SVN']/p/a", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
