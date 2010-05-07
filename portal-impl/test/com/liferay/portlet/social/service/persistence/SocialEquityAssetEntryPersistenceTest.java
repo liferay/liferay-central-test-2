@@ -68,6 +68,7 @@ public class SocialEquityAssetEntryPersistenceTest
 
 		SocialEquityAssetEntry newSocialEquityAssetEntry = _persistence.create(pk);
 
+		newSocialEquityAssetEntry.setGroupId(nextLong());
 		newSocialEquityAssetEntry.setCompanyId(nextLong());
 		newSocialEquityAssetEntry.setUserId(nextLong());
 		newSocialEquityAssetEntry.setAssetEntryId(nextLong());
@@ -81,6 +82,8 @@ public class SocialEquityAssetEntryPersistenceTest
 
 		assertEquals(existingSocialEquityAssetEntry.getEquityAssetEntryId(),
 			newSocialEquityAssetEntry.getEquityAssetEntryId());
+		assertEquals(existingSocialEquityAssetEntry.getGroupId(),
+			newSocialEquityAssetEntry.getGroupId());
 		assertEquals(existingSocialEquityAssetEntry.getCompanyId(),
 			newSocialEquityAssetEntry.getCompanyId());
 		assertEquals(existingSocialEquityAssetEntry.getUserId(),
@@ -168,6 +171,7 @@ public class SocialEquityAssetEntryPersistenceTest
 
 		SocialEquityAssetEntry socialEquityAssetEntry = _persistence.create(pk);
 
+		socialEquityAssetEntry.setGroupId(nextLong());
 		socialEquityAssetEntry.setCompanyId(nextLong());
 		socialEquityAssetEntry.setUserId(nextLong());
 		socialEquityAssetEntry.setAssetEntryId(nextLong());

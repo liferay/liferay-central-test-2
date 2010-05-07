@@ -291,6 +291,7 @@ public class SocialEquityAssetEntryPersistenceImpl extends BasePersistenceImpl<S
 		socialEquityAssetEntryImpl.setPrimaryKey(socialEquityAssetEntry.getPrimaryKey());
 
 		socialEquityAssetEntryImpl.setEquityAssetEntryId(socialEquityAssetEntry.getEquityAssetEntryId());
+		socialEquityAssetEntryImpl.setGroupId(socialEquityAssetEntry.getGroupId());
 		socialEquityAssetEntryImpl.setCompanyId(socialEquityAssetEntry.getCompanyId());
 		socialEquityAssetEntryImpl.setUserId(socialEquityAssetEntry.getUserId());
 		socialEquityAssetEntryImpl.setAssetEntryId(socialEquityAssetEntry.getAssetEntryId());

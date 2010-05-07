@@ -2290,6 +2290,7 @@
 	<mapped-superclass class="com.liferay.portlet.social.model.impl.SocialEquityAssetEntryModelImpl">
 		<attributes>
 			<id name="equityAssetEntryId" />
+			<basic name="groupId" />
 			<basic name="companyId" />
 			<basic name="userId" />
 			<basic name="assetEntryId" />

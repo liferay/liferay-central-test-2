@@ -53,6 +53,14 @@ public class SocialEquityAssetEntryWrapper implements SocialEquityAssetEntry {
 		_socialEquityAssetEntry.setEquityAssetEntryId(equityAssetEntryId);
 	}
 
+	public long getGroupId() {
+		return _socialEquityAssetEntry.getGroupId();
+	}
+
+	public void setGroupId(long groupId) {
+		_socialEquityAssetEntry.setGroupId(groupId);
+	}
+
 	public long getCompanyId() {
 		return _socialEquityAssetEntry.getCompanyId();
 	}
