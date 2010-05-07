@@ -905,7 +905,7 @@ public class SourceFormatter {
 	private static String[] _getPluginJavaFiles() {
 		String basedir = "./";
 
-		List<String> list = new ArrayList<String>();
+		Set<String> list = new TreeSet<String>();
 
 		DirectoryScanner ds = new DirectoryScanner();
 
@@ -947,7 +947,7 @@ public class SourceFormatter {
 	private static String[] _getPortalJavaFiles() {
 		String basedir = "./";
 
-		List<String> list = new ArrayList<String>();
+		Set<String> list = new TreeSet<String>();
 
 		DirectoryScanner ds = new DirectoryScanner();
 
