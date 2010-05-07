@@ -496,7 +496,8 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			}
 
 			return SearchEngineUtil.search(
-				companyId, new long[] {groupId}, userId, null, fullQuery, start, end);
+				companyId, new long[] {groupId}, userId, null, fullQuery, start,
+				end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

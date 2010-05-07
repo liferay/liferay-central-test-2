@@ -283,7 +283,8 @@ public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 						userId, groupId));
 				userGroupRoles.addAll(
 					UserGroupRoleLocalServiceUtil.
-						getUserGroupRolesByUserUserGroupAndGroup(userId, groupId));
+						getUserGroupRolesByUserUserGroupAndGroup(
+							userId, groupId));
 			}
 		}
 
@@ -400,7 +401,8 @@ public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 						userId, groupId));
 				userGroupRoles.addAll(
 					UserGroupRoleLocalServiceUtil.
-						getUserGroupRolesByUserUserGroupAndGroup(userId, groupId));
+						getUserGroupRolesByUserUserGroupAndGroup(
+						userId, groupId));
 			}
 		}
 
