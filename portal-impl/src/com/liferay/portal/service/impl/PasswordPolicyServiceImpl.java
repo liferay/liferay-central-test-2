@@ -35,7 +35,8 @@ public class PasswordPolicyServiceImpl extends PasswordPolicyServiceBaseImpl {
 			boolean allowDictionaryWords, int minLength, boolean history,
 			int historyCount, boolean expireable, long maxAge, long warningTime,
 			int graceLimit, boolean lockout, int maxFailure,
-			long lockoutDuration, long resetFailureCount)
+			long lockoutDuration, long resetFailureCount,
+			long resetTicketMaxAge)
 		throws PortalException, SystemException {
 
 		PortalPermissionUtil.check(
@@ -45,7 +46,7 @@ public class PasswordPolicyServiceImpl extends PasswordPolicyServiceBaseImpl {
 			getUserId(), false, name, description, changeable, changeRequired,
 			minAge, checkSyntax, allowDictionaryWords, minLength, history,
 			historyCount, expireable, maxAge, warningTime, graceLimit, lockout,
-			maxFailure, lockoutDuration, resetFailureCount);
+			maxFailure, lockoutDuration, resetFailureCount, resetTicketMaxAge);
 	}
 
 	public void deletePasswordPolicy(long passwordPolicyId)
@@ -63,7 +64,8 @@ public class PasswordPolicyServiceImpl extends PasswordPolicyServiceBaseImpl {
 			boolean checkSyntax, boolean allowDictionaryWords, int minLength,
 			boolean history, int historyCount, boolean expireable, long maxAge,
 			long warningTime, int graceLimit, boolean lockout, int maxFailure,
-			long lockoutDuration, long resetFailureCount)
+			long lockoutDuration, long resetFailureCount,
+			long resetTicketMaxAge)
 		throws PortalException, SystemException {
 
 		PasswordPolicyPermissionUtil.check(
@@ -73,7 +75,7 @@ public class PasswordPolicyServiceImpl extends PasswordPolicyServiceBaseImpl {
 			passwordPolicyId, name, description, changeable, changeRequired,
 			minAge, checkSyntax, allowDictionaryWords, minLength, history,
 			historyCount, expireable, maxAge, warningTime, graceLimit, lockout,
-			maxFailure, lockoutDuration, resetFailureCount);
+			maxFailure, lockoutDuration, resetFailureCount, resetTicketMaxAge);
 	}
 
 }

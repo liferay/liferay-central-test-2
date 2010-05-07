@@ -28,6 +28,8 @@ import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.AuthException;
 import com.liferay.portal.security.auth.Authenticator;
+import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.CookieKeys;
@@ -368,6 +370,37 @@ public class LoginUtil {
 		UserLocalServiceUtil.sendPassword(
 			company.getCompanyId(), toAddress, remoteAddr, remoteHost,
 			userAgent, fromName, fromAddress, subject, body);
+
+		SessionMessages.add(actionRequest, "request_processed", toAddress);
+	}
+
+	public static void sendPasswordResetLink(
+			ActionRequest actionRequest, String fromName, String fromAddress,
+			String toAddress, String subject, String body)
+		throws Exception {
+
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			actionRequest);
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		Company company = themeDisplay.getCompany();
+
+		if (!company.isSendPasswordResetLinkOnly()) {
+			return;
+		}
+
+		String remoteAddr = request.getRemoteAddr();
+		String remoteHost = request.getRemoteHost();
+		String userAgent = request.getHeader(HttpHeaders.USER_AGENT);
+
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			User.class.getName(), actionRequest);
+
+		UserLocalServiceUtil.sendPasswordResetLink(
+			company.getCompanyId(), toAddress, remoteAddr, remoteHost,
+			userAgent, fromName, fromAddress, subject, body, serviceContext);
 
 		SessionMessages.add(actionRequest, "request_processed", toAddress);
 	}

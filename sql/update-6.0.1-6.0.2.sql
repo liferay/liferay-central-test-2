@@ -2,6 +2,9 @@ alter table AssetEntry add socialInformationEquity DOUBLE;
 
 alter table LayoutSet add settings_ TEXT null;
 
+alter table PasswordPolicy add resetTicketMaxAge LONG;
+update PasswordPolicy set resetTicketMaxAge = 86400;
+
 create table SocialEquityAssetEntry (
 	equityAssetEntryId LONG not null primary key,
 	groupId LONG,

@@ -121,6 +121,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		_publicPaths.add(_PATH_PORTAL_LOGIN);
 		_publicPaths.add(_PATH_PORTAL_RENDER_PORTLET);
 		_publicPaths.add(_PATH_PORTAL_TCK);
+		_publicPaths.add(_PATH_PORTAL_UPDATE_PASSWORD);
 
 		addPaths(_publicPaths, PropsKeys.AUTH_PUBLIC_PATHS);
 

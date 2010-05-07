@@ -32,6 +32,7 @@ long warningTime = BeanParamUtil.getLong(passwordPolicy, request, "warningTime")
 long resetFailureCount = BeanParamUtil.getLong(passwordPolicy, request, "resetFailureCount");
 boolean requireUnlock = BeanParamUtil.getBoolean(passwordPolicy, request, "requireUnlock");
 long lockoutDuration = BeanParamUtil.getLong(passwordPolicy, request, "lockoutDuration");
+long resetTicketMaxAge = BeanParamUtil.getLong(passwordPolicy, request, "resetTicketMaxAge");
 %>
 
 <liferay-util:include page="/html/portlet/enterprise_admin/password_policy/toolbar.jsp">
@@ -80,6 +81,21 @@ long lockoutDuration = BeanParamUtil.getLong(passwordPolicy, request, "lockoutDu
 
 					</aui:select>
 				</div>
+
+				<aui:select helpMessage="reset-ticket-max-age-help" label="reset-ticket-max-age" name="resetTicketMaxAge">
+					<aui:option label="eternal" selected="<%= (resetTicketMaxAge == 0) %>" value="0" />
+
+					<%
+					for (int i = 0; i < 15; i++) {
+					%>
+
+						<aui:option label="<%= LanguageUtil.getTimeDescription(pageContext, _DURATIONS[i] * 1000) %>" selected="<%= (resetTicketMaxAge == _DURATIONS[i]) %>" value="<%= _DURATIONS[i] %>" />
+
+					<%
+					}
+					%>
+
+				</aui:select>
 			</aui:fieldset>
 		</liferay-ui:panel>
 

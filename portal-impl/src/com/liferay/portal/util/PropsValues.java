@@ -386,6 +386,11 @@ public class PropsValues {
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.COMPANY_SECURITY_SEND_PASSWORD));
 
+	public static final boolean COMPANY_SECURITY_SEND_PASSWORD_RESET_LINK_ONLY =
+		GetterUtil.getBoolean(
+			PropsUtil.get(
+				PropsKeys.COMPANY_SECURITY_SEND_PASSWORD_RESET_LINK_ONLY));
+
 	public static final boolean COMPANY_SECURITY_STRANGERS =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.COMPANY_SECURITY_STRANGERS));

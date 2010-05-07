@@ -882,6 +882,7 @@
 		<column name="lockoutDuration" type="long" />
 		<column name="requireUnlock" type="boolean" />
 		<column name="resetFailureCount" type="long" />
+		<column name="resetTicketMaxAge" type="long" />
 
 		<!-- Finder methods -->
 

@@ -50,7 +50,8 @@ public class PasswordPolicyLocalServiceImpl
 			boolean checkSyntax, boolean allowDictionaryWords, int minLength,
 			boolean history, int historyCount, boolean expireable, long maxAge,
 			long warningTime, int graceLimit, boolean lockout, int maxFailure,
-			long lockoutDuration, long resetFailureCount)
+			long lockoutDuration, long resetFailureCount,
+			long resetTicketMaxAge)
 		throws PortalException, SystemException {
 
 		// Password policy
@@ -90,6 +91,7 @@ public class PasswordPolicyLocalServiceImpl
 		passwordPolicy.setLockoutDuration(lockoutDuration);
 		passwordPolicy.setRequireUnlock(lockoutDuration == 0);
 		passwordPolicy.setResetFailureCount(resetFailureCount);
+		passwordPolicy.setResetTicketMaxAge(resetTicketMaxAge);
 
 		passwordPolicyPersistence.update(passwordPolicy, false);
 
@@ -120,7 +122,7 @@ public class PasswordPolicyLocalServiceImpl
 			addPasswordPolicy(
 				defaultUserId, true, defaultPasswordPolicyName,
 				defaultPasswordPolicyName, true, false, 0, false, true, 6,
-				false, 6, false, 8640000, 86400, 0, false, 3, 0, 600);
+				false, 6, false, 8640000, 86400, 0, false, 3, 0, 600, 86400);
 		}
 	}
 
@@ -259,7 +261,8 @@ public class PasswordPolicyLocalServiceImpl
 			boolean checkSyntax, boolean allowDictionaryWords, int minLength,
 			boolean history, int historyCount, boolean expireable, long maxAge,
 			long warningTime, int graceLimit, boolean lockout, int maxFailure,
-			long lockoutDuration, long resetFailureCount)
+			long lockoutDuration, long resetFailureCount,
+			long resetTicketMaxAge)
 		throws PortalException, SystemException {
 
 		Date now = new Date();
@@ -293,6 +296,7 @@ public class PasswordPolicyLocalServiceImpl
 		passwordPolicy.setLockoutDuration(lockoutDuration);
 		passwordPolicy.setRequireUnlock(lockoutDuration == 0);
 		passwordPolicy.setResetFailureCount(resetFailureCount);
+		passwordPolicy.setResetTicketMaxAge(resetTicketMaxAge);
 
 		passwordPolicyPersistence.update(passwordPolicy, false);
 

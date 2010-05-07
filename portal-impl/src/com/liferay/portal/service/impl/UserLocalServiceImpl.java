@@ -76,6 +76,7 @@ import com.liferay.portal.model.PasswordPolicy;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.RoleConstants;
+import com.liferay.portal.model.Ticket;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.model.UserGroupRole;
@@ -1400,6 +1401,23 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		}
 	}
 
+	public void sendPasswordResetLink(
+			long companyId, String emailAddress, String remoteAddr,
+			String remoteHost, String userAgent, String fromName,
+			String fromAddress, String subject, String body,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		try {
+			doSendPasswordResetLink(
+				companyId, emailAddress, remoteAddr, remoteHost, userAgent,
+				fromName, fromAddress, subject, body, serviceContext);
+		}
+		catch (IOException ioe) {
+			throw new SystemException(ioe);
+		}
+	}
+
 	public void setRoleUsers(long roleId, long[] userIds)
 		throws PortalException, SystemException {
 
@@ -2474,6 +2492,138 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		indexer.reindex(user);
 
 		return user;
+	}
+
+	protected void doSendPasswordResetLink(
+			long companyId, String emailAddress, String remoteAddr,
+			String remoteHost, String userAgent, String fromName,
+			String fromAddress, String subject, String body,
+			ServiceContext serviceContext)
+		throws IOException, PortalException, SystemException {
+
+		if (!PrefsPropsUtil.getBoolean(
+				companyId,
+				PropsKeys.COMPANY_SECURITY_SEND_PASSWORD_RESET_LINK_ONLY) ||
+			!PrefsPropsUtil.getBoolean(
+				companyId, PropsKeys.ADMIN_EMAIL_PASSWORD_RESET_ENABLED)) {
+
+			return;
+		}
+
+		emailAddress = emailAddress.trim().toLowerCase();
+
+		if (!Validator.isEmailAddress(emailAddress)) {
+			throw new UserEmailAddressException();
+		}
+
+		Company company = companyPersistence.findByPrimaryKey(companyId);
+
+		User user = userPersistence.findByC_EA(companyId, emailAddress);
+
+		PasswordPolicy passwordPolicy = user.getPasswordPolicy();
+
+		Date expirationDate = new Date(
+			System.currentTimeMillis() +
+			passwordPolicy.getResetTicketMaxAge() * 1000);
+
+		Ticket ticket = ticketLocalService.addTicket(
+			companyId,User.class.getName(), user.getUserId(), expirationDate,
+			serviceContext);
+
+		String resetPasswordUrl = 
+			serviceContext.getPortalURL() + serviceContext.getPathMain() +
+			"/portal/update_password?ticket=" + ticket.getKey();
+
+		if (Validator.isNull(fromName)) {
+			fromName = PrefsPropsUtil.getString(
+				companyId, PropsKeys.ADMIN_EMAIL_FROM_NAME);
+		}
+
+		if (Validator.isNull(fromAddress)) {
+			fromAddress = PrefsPropsUtil.getString(
+				companyId, PropsKeys.ADMIN_EMAIL_FROM_ADDRESS);
+		}
+
+		String toName = user.getFullName();
+		String toAddress = user.getEmailAddress();
+
+		if (Validator.isNull(subject)) {
+			subject = PrefsPropsUtil.getContent(
+				companyId, PropsKeys.ADMIN_EMAIL_PASSWORD_RESET_SUBJECT);
+		}
+
+		if (Validator.isNull(body)) {
+			body = PrefsPropsUtil.getContent(
+				companyId, PropsKeys.ADMIN_EMAIL_PASSWORD_RESET_BODY);
+		}
+
+		subject = StringUtil.replace(
+			subject,
+			new String[] {
+				"[$FROM_ADDRESS$]",
+				"[$FROM_NAME$]",
+				"[$PASSWORD_RESET_URL$]",
+				"[$PORTAL_URL$]",
+				"[$REMOTE_ADDRESS$]",
+				"[$REMOTE_HOST$]",
+				"[$TO_ADDRESS$]",
+				"[$TO_NAME$]",
+				"[$USER_AGENT$]",
+				"[$USER_ID$]",
+				"[$USER_SCREENNAME$]"
+			},
+			new String[] {
+				fromAddress,
+				fromName,
+				resetPasswordUrl,
+				company.getVirtualHost(),
+				remoteAddr,
+				remoteHost,
+				toAddress,
+				toName,
+				HtmlUtil.escape(userAgent),
+				String.valueOf(user.getUserId()),
+				user.getScreenName()
+			});
+
+		body = StringUtil.replace(
+			body,
+			new String[] {
+				"[$FROM_ADDRESS$]",
+				"[$FROM_NAME$]",
+				"[$PASSWORD_RESET_URL$]",
+				"[$PORTAL_URL$]",
+				"[$REMOTE_ADDRESS$]",
+				"[$REMOTE_HOST$]",
+				"[$TO_ADDRESS$]",
+				"[$TO_NAME$]",
+				"[$USER_AGENT$]",
+				"[$USER_ID$]",
+				"[$USER_SCREENNAME$]"
+			},
+			new String[] {
+				fromAddress,
+				fromName,
+				resetPasswordUrl,
+				company.getVirtualHost(),
+				remoteAddr,
+				remoteHost,
+				toAddress,
+				toName,
+				HtmlUtil.escape(userAgent),
+				String.valueOf(user.getUserId()),
+				user.getScreenName()
+			});
+
+		InternetAddress from = new InternetAddress(fromAddress, fromName);
+
+		InternetAddress to = new InternetAddress(toAddress, toName);
+
+		MailMessage message = new MailMessage(from, to, subject, body, true);
+
+		System.out.println(subject);
+		System.out.println(body);
+		mailService.sendEmail(message);
 	}
 
 	protected void doSendPassword(

@@ -20,12 +20,19 @@ import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.Company;
+import com.liferay.portal.model.CompanyConstants;
+import com.liferay.portal.model.Ticket;
+import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.AuthTokenUtil;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.service.UserServiceUtil;
+import com.liferay.portal.service.CompanyLocalServiceUtil;
+import com.liferay.portal.service.TicketLocalServiceUtil;
+import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.login.util.LoginUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -40,6 +47,7 @@ import org.apache.struts.action.ActionMapping;
  * <a href="UpdatePasswordAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Mika Koivisto
  */
 public class UpdatePasswordAction extends Action {
 
@@ -50,8 +58,15 @@ public class UpdatePasswordAction extends Action {
 
 		String cmd = ParamUtil.getString(request, Constants.CMD);
 
-		if (Validator.isNull(cmd)) {
+		User user = PortalUtil.getUser(request);
+
+		boolean isValidTicket = (getValidTicket(request) != null);
+
+		if (Validator.isNull(cmd) && ((user != null) || isValidTicket)) {
 			return mapping.findForward("portal.update_password");
+		}
+		else if ((user == null) && !isValidTicket) {
+			return mapping.findForward(ActionConstants.COMMON_REFERER);
 		}
 
 		try {
@@ -63,7 +78,7 @@ public class UpdatePasswordAction extends Action {
 			if (e instanceof UserPasswordException) {
 				SessionErrors.add(request, e.getClass().getName(), e);
 
-				return mapping.findForward(ActionConstants.COMMON_REFERER);
+				return mapping.findForward("portal.update_password");
 			}
 			else if (e instanceof NoSuchUserException ||
 					 e instanceof PrincipalException) {
@@ -80,6 +95,29 @@ public class UpdatePasswordAction extends Action {
 		}
 	}
 
+	protected Ticket getValidTicket(HttpServletRequest request) {
+		String token = ParamUtil.getString(request, "ticket");
+
+		if (Validator.isNull(token)) {
+			return null;
+		}
+
+		try {
+			Ticket ticket = TicketLocalServiceUtil.getTicket(token);
+
+			if (!ticket.isExpired()) {
+				return ticket;
+			}
+			else {
+				TicketLocalServiceUtil.deleteTicket(ticket);
+			}
+		}
+		catch (Exception e) {
+		}
+
+		return null;
+	}
+
 	protected void updatePassword(
 			HttpServletRequest request, HttpServletResponse response)
 		throws Exception {
@@ -88,15 +126,49 @@ public class UpdatePasswordAction extends Action {
 
 		HttpSession session = request.getSession();
 
-		long userId = PortalUtil.getUserId(request);
+		Ticket ticket = getValidTicket(request);
+
+		long userId = 0;
+
+		if (ticket == null) {
+			userId = PortalUtil.getUserId(request);
+		}
+		else {
+			userId = ticket.getClassPK();
+		}
+
 		String password1 = ParamUtil.getString(request, "password1");
 		String password2 = ParamUtil.getString(request, "password2");
 		boolean passwordReset = false;
 
-		UserServiceUtil.updatePassword(
+		UserLocalServiceUtil.updatePassword(
 			userId, password1, password2, passwordReset);
 
-		session.setAttribute(WebKeys.USER_PASSWORD, password1);
+		if (ticket != null) {
+			TicketLocalServiceUtil.deleteTicket(ticket);
+
+			User user = UserLocalServiceUtil.getUser(userId);
+
+			Company company = CompanyLocalServiceUtil.getCompanyById(
+				user.getCompanyId());
+
+			String login = null;
+
+			if (company.getAuthType().equals(CompanyConstants.AUTH_TYPE_ID)) {
+				login = String.valueOf(user.getUserId());
+			}
+			else if (company.getAuthType().equals(CompanyConstants.AUTH_TYPE_SN)) {
+				login = user.getScreenName();
+			}
+			else {
+				login = user.getEmailAddress();
+			}
+
+			LoginUtil.login(request, response, login, password1, false, null);
+		}
+		else {
+			session.setAttribute(WebKeys.USER_PASSWORD, password1);
+		}
 	}
 
 }

@@ -146,6 +146,8 @@ public class EditPasswordPolicyAction extends PortletAction {
 			actionRequest, "lockoutDuration");
 		long resetFailureCount = ParamUtil.getLong(
 			actionRequest, "resetFailureCount");
+		long resetTicketMaxAge = ParamUtil.getLong(
+			actionRequest, "resetTicketMaxAge");
 
 		if (passwordPolicyId <= 0) {
 
@@ -155,7 +157,8 @@ public class EditPasswordPolicyAction extends PortletAction {
 				name, description, changeable, changeRequired, minAge,
 				checkSyntax, allowDictionaryWords, minLength, history,
 				historyCount, expireable, maxAge, warningTime, graceLimit,
-				lockout, maxFailure, lockoutDuration, resetFailureCount);
+				lockout, maxFailure, lockoutDuration, resetFailureCount,
+				resetTicketMaxAge);
 		}
 		else {
 
@@ -165,7 +168,8 @@ public class EditPasswordPolicyAction extends PortletAction {
 				passwordPolicyId, name, description, changeable, changeRequired,
 				minAge, checkSyntax, allowDictionaryWords, minLength, history,
 				historyCount, expireable, maxAge, warningTime, graceLimit,
-				lockout, maxFailure, lockoutDuration, resetFailureCount);
+				lockout, maxFailure, lockoutDuration, resetFailureCount,
+				resetTicketMaxAge);
 		}
 	}
 

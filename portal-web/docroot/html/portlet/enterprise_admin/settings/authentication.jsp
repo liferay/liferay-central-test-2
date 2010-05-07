@@ -20,6 +20,7 @@
 String companySecurityAuthType = ParamUtil.getString(request, "settings(" + PropsKeys.COMPANY_SECURITY_AUTH_TYPE + ")", company.getAuthType());
 boolean companySecurityAutoLogin = ParamUtil.getBoolean(request, "settings(" + PropsKeys.COMPANY_SECURITY_AUTO_LOGIN + ")", company.isAutoLogin());
 boolean companySecuritySendPassword = ParamUtil.getBoolean(request, "settings(" + PropsKeys.COMPANY_SECURITY_SEND_PASSWORD + ")", company.isSendPassword());
+boolean companySecuritySendPasswordResetLinkOnly = ParamUtil.getBoolean(request, "settings(" + PropsKeys.COMPANY_SECURITY_SEND_PASSWORD_RESET_LINK_ONLY + ")", company.isSendPasswordResetLinkOnly());
 boolean companySecurityStrangers = ParamUtil.getBoolean(request, "settings(" + PropsKeys.COMPANY_SECURITY_STRANGERS + ")", company.isStrangers());
 boolean companySecurityStrangersWithMx = ParamUtil.getBoolean(request, "settings(" + PropsKeys.COMPANY_SECURITY_STRANGERS_WITH_MX + ")", company.isStrangersWithMx());
 boolean companySecurityStrangersVerify = ParamUtil.getBoolean(request, "settings(" + PropsKeys.COMPANY_SECURITY_STRANGERS_VERIFY + ")", company.isStrangersVerify());
@@ -69,6 +70,8 @@ String siteminderUserHeader = ParamUtil.getString(request, "settings(" + PropsKe
 			<aui:input inlineLabel="left" label="allow-users-to-automatically-login" name='<%= "settings(" + PropsKeys.COMPANY_SECURITY_AUTO_LOGIN + ")" %>' type="checkbox" value="<%= companySecurityAutoLogin %>" />
 
 			<aui:input inlineLabel="left" label="allow-users-to-request-forgotten-passwords" name='<%= "settings(" + PropsKeys.COMPANY_SECURITY_SEND_PASSWORD + ")" %>' type="checkbox" value="<%= companySecuritySendPassword %>" />
+
+			<aui:input inlineLabel="left" label="send-password-reset-link-only" name='<%= "settings(" + PropsKeys.COMPANY_SECURITY_SEND_PASSWORD_RESET_LINK_ONLY + ")" %>' type="checkbox" value="<%= companySecuritySendPasswordResetLinkOnly %>" />
 
 			<aui:input inlineLabel="left" label="allow-strangers-to-create-accounts" name='<%= "settings(" + PropsKeys.COMPANY_SECURITY_STRANGERS + ")" %>' type="checkbox" value="<%= companySecurityStrangers %>" />
 
