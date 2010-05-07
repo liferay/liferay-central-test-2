@@ -140,6 +140,10 @@ public class Validator_IW {
 		return Validator.isPhoneNumber(phoneNumber);
 	}
 
+	public boolean isUrl(java.lang.String url) {
+		return Validator.isUrl(url);
+	}
+
 	public boolean isVariableTerm(java.lang.String s) {
 		return Validator.isVariableTerm(s);
 	}

@@ -486,18 +486,17 @@ public class Validator {
 	}
 
 	public static boolean isUrl(String url) {
-		if (Validator.isNull(url)) {
-			return false;
-		}
-		else {
+		if (Validator.isNotNull(url)) {
 			try {
 				new URL(url);
+
 				return true;
 			}
 			catch (MalformedURLException murle) {
-				return false;
 			}
 		}
+
+		return false;
 	}
 
 	public static boolean isVariableTerm(String s) {
