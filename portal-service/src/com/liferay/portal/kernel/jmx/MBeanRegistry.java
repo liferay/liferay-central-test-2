@@ -43,15 +43,15 @@ public class MBeanRegistry {
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {
 					_log.warn(
-						"Unable to unregister mbean: " +
-						objectName.getCanonicalName(),
+						"Unable to unregister MBean" +
+							objectName.getCanonicalName(),
 						e);
 				}
 			}
 		}
+
 		_objectNameCache.clear();
 	}
-
 
 	public ObjectName getObjectName(String objectNameCacheKey) {
 		return _objectNameCache.get(objectNameCacheKey);
