@@ -231,8 +231,8 @@
 				(ResourcePermission.name = ?) AND
 				(ResourcePermission.scope = ?) AND
 				(ResourceAction.actionId = ?) AND
-				(((ResourcePermission.actionIds / ResourceAction.bitwiseValue) % 2) = 1) AND
-				(ResourcePermission.roleId = ?)
+				(ResourcePermission.roleId = ?) AND
+				(((ResourcePermission.actionIds / ResourceAction.bitwiseValue) % 2) = 1)
 		]]>
 	</sql>
 	<sql id="com.liferay.portal.service.persistence.GroupFinder.joinByType">
