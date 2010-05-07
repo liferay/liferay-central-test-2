@@ -147,7 +147,7 @@ public class DLFileEntryServiceTest extends BaseServiceTestCase {
 
 		searchContext.setCompanyId(_fileEntry.getCompanyId());
 		searchContext.setFolderIds(new long[] {_fileEntry.getFolderId()});
-		searchContext.setGroupIds(new long[]{_fileEntry.getGroupId()});
+		searchContext.setGroupIds(new long[] {_fileEntry.getGroupId()});
 		searchContext.setKeywords(keywords);
 
 		Indexer indexer = IndexerRegistryUtil.getIndexer(DLFileEntry.class);

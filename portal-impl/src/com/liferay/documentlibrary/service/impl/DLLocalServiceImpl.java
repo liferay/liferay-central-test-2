@@ -180,7 +180,7 @@ public class DLLocalServiceImpl implements DLLocalService {
 			}
 
 			return SearchEngineUtil.search(
-				companyId, new long[]{groupId}, userId, DLFileEntry.class.getName(),
+				companyId, new long[] {groupId}, userId, DLFileEntry.class.getName(),
 				fullQuery, start, end);
 		}
 		catch (Exception e) {
