@@ -68,10 +68,10 @@ public class NetrServerAuthenticate3 extends DcerpcMessage {
 
 		ndrBuffer.advance(8);
 
-		NdrBuffer derivedBuffer = ndrBuffer.derive(index);
+		NdrBuffer derivedNrdBuffer = ndrBuffer.derive(index);
 
 		for (int i = 0; i < 8; i++) {
-			derivedBuffer.enc_ndr_small(_clientCredential[i]);
+			derivedNrdBuffer.enc_ndr_small(_clientCredential[i]);
 		}
 
 		ndrBuffer.enc_ndr_long(_negotiateFlags);
