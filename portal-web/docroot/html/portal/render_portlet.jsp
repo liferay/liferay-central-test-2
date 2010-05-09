@@ -134,20 +134,6 @@ catch (NoSuchResourceException nsre) {
 				addDefaultResource = true;
 			}
 		}
-
-		// LPS-9489
-		//
-		// Is the following check really required? It seems to result in a bug
-		// which allows any portlet to be added to a page as long as this
-		// permission check passes, even it was not really the intention of the
-		// user to add the portlet. It is still possible to add portlets using
-		// the add application dialog with this code commented.
-
-		//else {
-		//	if (portlet.hasAddPortletPermission(user.getUserId())) {
-		//		addDefaultResource = true;
-		//	}
-		//}
 	}
 
 	if (addDefaultResource) {
