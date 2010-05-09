@@ -637,12 +637,12 @@ public class PortletURLImpl
 
 		String ppauth = ParamUtil.getString(request, "p_p_auth");
 
-		// You cannot propagate tokens originating from other portlets.
-
-		String currentToken =  AuthTokenUtil.getToken(
+		String actualPortletAuthenticationToken = AuthTokenUtil.getToken(
 			request, _plid, _portletId);
 
-		if (Validator.isNotNull(ppauth) && currentToken.equals(ppauth)) {
+		if (Validator.isNotNull(ppauth) &&
+			ppauth.equals(actualPortletAuthenticationToken)) {
+
 			sb.append("p_p_auth");
 			sb.append(StringPool.EQUAL);
 			sb.append(processValue(key, ppauth));
@@ -666,7 +666,7 @@ public class PortletURLImpl
 
 		sb.append("p_p_auth");
 		sb.append(StringPool.EQUAL);
-		sb.append(processValue(key, currentToken));
+		sb.append(processValue(key, actualPortletAuthenticationToken));
 		sb.append(StringPool.AMPERSAND);
 	}
 
