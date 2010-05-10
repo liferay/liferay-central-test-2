@@ -101,7 +101,7 @@ String adminEmailPasswordResetBody = ParamUtil.getString(request, "emailPassword
 			<aui:field-wrapper label="body">
 				<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" initMethod='<%= renderResponse.getNamespace() + "initEmailPasswordResetBodyEditor" %>' name="emailPasswordResetBody" toolbarSet="email" width="470" />
 
-				<aui:input name='<%= "settings(" + PropsKeys.ADMIN_EMAIL_PASSWORD_SENT_BODY + ")" %>' type="hidden" value="<%= adminEmailPasswordResetBody %>" />
+				<aui:input name='<%= "settings(" + PropsKeys.ADMIN_EMAIL_PASSWORD_RESET_BODY + ")" %>' type="hidden" value="<%= adminEmailPasswordResetBody %>" />
 			</aui:field-wrapper>
 
 			<div class="terms email-password-sent definition-of-terms">

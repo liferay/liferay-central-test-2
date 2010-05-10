@@ -157,13 +157,13 @@ public class UpdatePasswordAction extends Action {
 			String authType = company.getAuthType();
 
 			if (authType.equals(CompanyConstants.AUTH_TYPE_EA)) {
-				login = String.valueOf(userId);
+				login = user.getEmailAddress();
 			}
 			else if (authType.equals(CompanyConstants.AUTH_TYPE_SN)) {
 				login = user.getScreenName();
 			}
 			else if (authType.equals(CompanyConstants.AUTH_TYPE_ID)) {
-				login = user.getEmailAddress();
+				login = String.valueOf(userId);
 			}
 
 			LoginUtil.login(request, response, login, password1, false, null);
