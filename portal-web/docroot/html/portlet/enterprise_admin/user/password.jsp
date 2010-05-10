@@ -67,6 +67,10 @@ boolean passwordReset = BeanParamUtil.getBoolean(selUser, request, "passwordRese
 	<c:if test="<%= upe.getType() == UserPasswordException.PASSWORDS_DO_NOT_MATCH %>">
 		<liferay-ui:message key="the-passwords-you-entered-do-not-match-each-other-please-re-enter-your-password" />
 	</c:if>
+
+	<c:if test="<%= upe.getType() == UserPasswordException.PASSWORD_TOO_TRIVIAL %>">
+		<liferay-ui:message key="that-password-is-too-trivial" />
+	</c:if>
 </liferay-ui:error>
 
 <aui:fieldset>

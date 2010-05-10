@@ -381,7 +381,22 @@
 		<field name="minAge" type="long" />
 		<field name="checkSyntax" type="boolean" />
 		<field name="allowDictionaryWords" type="boolean" />
+		<field name="minAlphaNumeric" type="int">
+			<hint name="display-width">20</hint>
+		</field>
 		<field name="minLength" type="int">
+			<hint name="display-width">20</hint>
+		</field>
+		<field name="minLowerCase" type="int">
+			<hint name="display-width">20</hint>
+		</field>
+		<field name="minNumbers" type="int">
+			<hint name="display-width">20</hint>
+		</field>
+		<field name="minSymbols" type="int">
+			<hint name="display-width">20</hint>
+		</field>
+		<field name="minUpperCase" type="int">
 			<hint name="display-width">20</hint>
 		</field>
 		<field name="history" type="boolean" />

@@ -107,7 +107,17 @@ long resetTicketMaxAge = BeanParamUtil.getLong(passwordPolicy, request, "resetTi
 				<div id="<portlet:namespace />syntaxSettings">
 					<aui:input helpMessage="allow-dictionary-words-help" inlineLabel="left" name="allowDictionaryWords" />
 
+					<aui:input helpMessage="minimum-alpha-numeric-help" label="minimum-alpha-numeric" name="minAlphaNumeric" />
+
 					<aui:input helpMessage="minimum-length-help" label="minimum-length" name="minLength" />
+
+					<aui:input helpMessage="minimum-lower-case-help" label="minimum-lower-case" name="minLowerCase" />
+
+					<aui:input helpMessage="minimum-numbers-help" label="minimum-numbers" name="minNumbers" />
+
+					<aui:input helpMessage="minimum-symbols-help" label="minimum-symbols" name="minSymbols" />
+
+					<aui:input helpMessage="minimum-upper-case-help" label="minimum-upper-case" name="minUpperCase" />
 				</div>
 			</aui:fieldset>
 		</liferay-ui:panel>

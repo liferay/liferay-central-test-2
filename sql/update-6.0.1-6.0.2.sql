@@ -2,10 +2,20 @@ alter table AssetEntry add socialInformationEquity DOUBLE;
 
 alter table LayoutSet add settings_ TEXT null;
 
+alter table PasswordPolicy add minAlphaNumeric INTEGER;
+alter table PasswordPolicy add minLowerCase INTEGER;
+alter table PasswordPolicy add minNumbers INTEGER;
+alter table PasswordPolicy add minSpecial INTEGER;
+alter table PasswordPolicy add minUpperCase INTEGER;
 alter table PasswordPolicy add resetTicketMaxAge LONG;
 
 COMMIT_TRANSACTION;
 
+update PasswordPolicy set minAlphaNumeric = 0;
+update PasswordPolicy set minLowerCase = 0;
+update PasswordPolicy set minNumbers = 0;
+update PasswordPolicy set minSymbols = 0;
+update PasswordPolicy set minUpperCase = 0;
 update PasswordPolicy set resetTicketMaxAge = 86400;
 
 create table SocialEquityAssetEntry (

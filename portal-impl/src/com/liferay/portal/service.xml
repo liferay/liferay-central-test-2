@@ -870,7 +870,12 @@
 		<column name="minAge" type="long" />
 		<column name="checkSyntax" type="boolean" />
 		<column name="allowDictionaryWords" type="boolean" />
+		<column name="minAlphaNumeric" type="int" />
 		<column name="minLength" type="int" />
+		<column name="minLowerCase" type="int" />
+		<column name="minNumbers" type="int" />
+		<column name="minSymbols" type="int" />
+		<column name="minUpperCase" type="int" />
 		<column name="history" type="boolean" />
 		<column name="historyCount" type="int" />
 		<column name="expireable" type="boolean" />

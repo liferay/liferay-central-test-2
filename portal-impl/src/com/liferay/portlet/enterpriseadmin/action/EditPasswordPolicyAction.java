@@ -133,7 +133,13 @@ public class EditPasswordPolicyAction extends PortletAction {
 			actionRequest, "checkSyntax");
 		boolean allowDictionaryWords = ParamUtil.getBoolean(
 			actionRequest, "allowDictionaryWords");
+		int minAlphaNumeric = ParamUtil.getInteger(
+			actionRequest, "minAlphaNumeric");
 		int minLength = ParamUtil.getInteger(actionRequest, "minLength");
+		int minLowerCase = ParamUtil.getInteger(actionRequest, "minLowerCase");
+		int minNumbers = ParamUtil.getInteger(actionRequest, "minNumbers");
+		int minSymbols = ParamUtil.getInteger(actionRequest, "minSymbols");
+		int minUpperCase = ParamUtil.getInteger(actionRequest, "minUpperCase");
 		boolean history = ParamUtil.getBoolean(actionRequest, "history");
 		int historyCount = ParamUtil.getInteger(actionRequest, "historyCount");
 		boolean expireable = ParamUtil.getBoolean(actionRequest, "expireable");
@@ -155,7 +161,8 @@ public class EditPasswordPolicyAction extends PortletAction {
 
 			PasswordPolicyServiceUtil.addPasswordPolicy(
 				name, description, changeable, changeRequired, minAge,
-				checkSyntax, allowDictionaryWords, minLength, history,
+				checkSyntax, allowDictionaryWords, minAlphaNumeric, minLength,
+				minLowerCase, minNumbers, minSymbols, minUpperCase, history,
 				historyCount, expireable, maxAge, warningTime, graceLimit,
 				lockout, maxFailure, lockoutDuration, resetFailureCount,
 				resetTicketMaxAge);
@@ -166,10 +173,11 @@ public class EditPasswordPolicyAction extends PortletAction {
 
 			PasswordPolicyServiceUtil.updatePasswordPolicy(
 				passwordPolicyId, name, description, changeable, changeRequired,
-				minAge, checkSyntax, allowDictionaryWords, minLength, history,
-				historyCount, expireable, maxAge, warningTime, graceLimit,
-				lockout, maxFailure, lockoutDuration, resetFailureCount,
-				resetTicketMaxAge);
+				minAge, checkSyntax, allowDictionaryWords, minAlphaNumeric,
+				minLength, minLowerCase, minNumbers, minSymbols, minUpperCase,
+				history, historyCount, expireable, maxAge, warningTime,
+				graceLimit, lockout, maxFailure, lockoutDuration,
+				resetFailureCount, resetTicketMaxAge);
 		}
 	}
 

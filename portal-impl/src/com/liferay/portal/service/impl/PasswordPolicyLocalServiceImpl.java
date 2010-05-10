@@ -47,9 +47,11 @@ public class PasswordPolicyLocalServiceImpl
 	public PasswordPolicy addPasswordPolicy(
 			long userId, boolean defaultPolicy, String name, String description,
 			boolean changeable, boolean changeRequired, long minAge,
-			boolean checkSyntax, boolean allowDictionaryWords, int minLength,
-			boolean history, int historyCount, boolean expireable, long maxAge,
-			long warningTime, int graceLimit, boolean lockout, int maxFailure,
+			boolean checkSyntax, boolean allowDictionaryWords,
+			int minAlphaNumeric, int minLength, int minLowerCase,
+			int minNumbers, int minSymbols, int minUpperCase, boolean history,
+			int historyCount, boolean expireable, long maxAge, long warningTime,
+			int graceLimit, boolean lockout, int maxFailure,
 			long lockoutDuration, long resetFailureCount,
 			long resetTicketMaxAge)
 		throws PortalException, SystemException {
@@ -79,7 +81,12 @@ public class PasswordPolicyLocalServiceImpl
 		passwordPolicy.setMinAge(minAge);
 		passwordPolicy.setCheckSyntax(checkSyntax);
 		passwordPolicy.setAllowDictionaryWords(allowDictionaryWords);
+		passwordPolicy.setMinAlphaNumeric(minAlphaNumeric);
 		passwordPolicy.setMinLength(minLength);
+		passwordPolicy.setMinLowerCase(minLowerCase);
+		passwordPolicy.setMinNumbers(minNumbers);
+		passwordPolicy.setMinSymbols(minSymbols);
+		passwordPolicy.setMinUpperCase(minUpperCase);
 		passwordPolicy.setHistory(history);
 		passwordPolicy.setHistoryCount(historyCount);
 		passwordPolicy.setExpireable(expireable);
@@ -121,8 +128,9 @@ public class PasswordPolicyLocalServiceImpl
 
 			addPasswordPolicy(
 				defaultUserId, true, defaultPasswordPolicyName,
-				defaultPasswordPolicyName, true, false, 0, false, true, 6,
-				false, 6, false, 8640000, 86400, 0, false, 3, 0, 600, 86400);
+				defaultPasswordPolicyName, true, false, 0, false, true, 0, 6,
+				0, 1, 0, 1, false, 6, false, 8640000, 86400, 0, false, 3, 0,
+				600, 86400);
 		}
 	}
 
@@ -258,8 +266,10 @@ public class PasswordPolicyLocalServiceImpl
 	public PasswordPolicy updatePasswordPolicy(
 			long passwordPolicyId, String name, String description,
 			boolean changeable, boolean changeRequired, long minAge,
-			boolean checkSyntax, boolean allowDictionaryWords, int minLength,
-			boolean history, int historyCount, boolean expireable, long maxAge,
+			boolean checkSyntax, boolean allowDictionaryWords,
+			int minAlphaNumeric, int minLength, int minLowerCase,
+			int minNumbers, int minSymbols, int minUpperCase, boolean history,
+			int historyCount, boolean expireable, long maxAge,
 			long warningTime, int graceLimit, boolean lockout, int maxFailure,
 			long lockoutDuration, long resetFailureCount,
 			long resetTicketMaxAge)
@@ -284,7 +294,12 @@ public class PasswordPolicyLocalServiceImpl
 		passwordPolicy.setMinAge(minAge);
 		passwordPolicy.setCheckSyntax(checkSyntax);
 		passwordPolicy.setAllowDictionaryWords(allowDictionaryWords);
+		passwordPolicy.setMinAlphaNumeric(minAlphaNumeric);
 		passwordPolicy.setMinLength(minLength);
+		passwordPolicy.setMinLowerCase(minLowerCase);
+		passwordPolicy.setMinNumbers(minNumbers);
+		passwordPolicy.setMinSymbols(minSymbols);
+		passwordPolicy.setMinUpperCase(minUpperCase);
 		passwordPolicy.setHistory(history);
 		passwordPolicy.setHistoryCount(historyCount);
 		passwordPolicy.setExpireable(expireable);
