@@ -1726,7 +1726,10 @@ public class JournalArticleLocalServiceImpl
 		article.setTemplateId(templateId);
 		article.setDisplayDate(displayDate);
 
-		if ((expirationDate == null) || expirationDate.after(now)) {
+		if (oldArticle.isPending()) {
+			article.setStatus(oldArticle.getStatus());
+		}
+		else if ((expirationDate == null) || expirationDate.after(now)) {
 			article.setStatus(WorkflowConstants.STATUS_DRAFT);
 		}
 		else {
