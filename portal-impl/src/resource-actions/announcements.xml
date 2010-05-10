@@ -3,67 +3,73 @@
 <resource-action-mapping>
 	<portlet-resource>
 		<portlet-name>83</portlet-name>
-		<supports>
-			<action-key>ADD_ENTRY</action-key>
-			<action-key>ADD_TO_PAGE</action-key>
-			<action-key>CONFIGURATION</action-key>
-			<action-key>VIEW</action-key>
-		</supports>
-		<community-defaults>
-			<action-key>VIEW</action-key>
-		</community-defaults>
-		<guest-defaults>
-			<action-key>VIEW</action-key>
-		</guest-defaults>
-		<guest-unsupported>
-			<action-key>ADD_ENTRY</action-key>
-			<action-key>CONFIGURATION</action-key>
-		</guest-unsupported>
-		<layout-manager>
-			<action-key>VIEW</action-key>
-		</layout-manager>
+		<permissions>
+			<supports>
+				<action-key>ADD_ENTRY</action-key>
+				<action-key>ADD_TO_PAGE</action-key>
+				<action-key>CONFIGURATION</action-key>
+				<action-key>VIEW</action-key>
+			</supports>
+			<community-defaults>
+				<action-key>VIEW</action-key>
+			</community-defaults>
+			<guest-defaults>
+				<action-key>VIEW</action-key>
+			</guest-defaults>
+			<guest-unsupported>
+				<action-key>ADD_ENTRY</action-key>
+				<action-key>CONFIGURATION</action-key>
+			</guest-unsupported>
+			<layout-manager>
+				<action-key>VIEW</action-key>
+			</layout-manager>
+		</permissions>
 	</portlet-resource>
 	<portlet-resource>
 		<portlet-name>84</portlet-name>
-		<supports>
-			<action-key>ADD_ENTRY</action-key>
-			<action-key>ADD_TO_PAGE</action-key>
-			<action-key>CONFIGURATION</action-key>
-			<action-key>VIEW</action-key>
-		</supports>
-		<community-defaults>
-			<action-key>VIEW</action-key>
-		</community-defaults>
-		<guest-defaults>
-			<action-key>VIEW</action-key>
-		</guest-defaults>
-		<guest-unsupported>
-			<action-key>ADD_ENTRY</action-key>
-			<action-key>CONFIGURATION</action-key>
-		</guest-unsupported>
-		<layout-manager>
-			<action-key>VIEW</action-key>
-		</layout-manager>
+		<permissions>
+			<supports>
+				<action-key>ADD_ENTRY</action-key>
+				<action-key>ADD_TO_PAGE</action-key>
+				<action-key>CONFIGURATION</action-key>
+				<action-key>VIEW</action-key>
+			</supports>
+			<community-defaults>
+				<action-key>VIEW</action-key>
+			</community-defaults>
+			<guest-defaults>
+				<action-key>VIEW</action-key>
+			</guest-defaults>
+			<guest-unsupported>
+				<action-key>ADD_ENTRY</action-key>
+				<action-key>CONFIGURATION</action-key>
+			</guest-unsupported>
+			<layout-manager>
+				<action-key>VIEW</action-key>
+			</layout-manager>
+		</permissions>
 	</portlet-resource>
 	<model-resource>
 		<model-name>com.liferay.portlet.announcements.model.AnnouncementsEntry</model-name>
 		<portlet-ref>
 			<portlet-name>84</portlet-name>
 		</portlet-ref>
-		<supports>
-			<action-key>DELETE</action-key>
-			<action-key>UPDATE</action-key>
-			<action-key>VIEW</action-key>
-		</supports>
-		<community-defaults>
-			<action-key>VIEW</action-key>
-		</community-defaults>
-		<guest-defaults>
-			<action-key>VIEW</action-key>
-		</guest-defaults>
-		<guest-unsupported>
-			<action-key>DELETE</action-key>
-			<action-key>UPDATE</action-key>
-		</guest-unsupported>
+		<permissions>
+			<supports>
+				<action-key>DELETE</action-key>
+				<action-key>UPDATE</action-key>
+				<action-key>VIEW</action-key>
+			</supports>
+			<community-defaults>
+				<action-key>VIEW</action-key>
+			</community-defaults>
+			<guest-defaults>
+				<action-key>VIEW</action-key>
+			</guest-defaults>
+			<guest-unsupported>
+				<action-key>DELETE</action-key>
+				<action-key>UPDATE</action-key>
+			</guest-unsupported>
+		</permissions>
 	</model-resource>
 </resource-action-mapping>
