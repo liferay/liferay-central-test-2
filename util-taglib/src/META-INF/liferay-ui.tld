@@ -159,6 +159,11 @@
 		<tag-class>com.liferay.taglib.ui.AssetTagsSummaryTag</tag-class>
 		<body-content>JSP</body-content>
 		<attribute>
+			<name>assetTagNames</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
 			<name>className</name>
 			<required>true</required>
 			<rtexprvalue>true</rtexprvalue>

@@ -27,6 +27,10 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class AssetTagsSummaryTag extends IncludeTag {
 
+	public String getAssetTagNames() {
+		return _assetTagNames;
+	}
+
 	public PortletURL getPortletURL() {
 		return _portletURL;
 	}
@@ -43,11 +47,16 @@ public class AssetTagsSummaryTag extends IncludeTag {
 		_message = message;
 	}
 
+	public void setAssetTagNames(String assetTagNames) {
+		_assetTagNames = assetTagNames;
+	}
+
 	public void setPortletURL(PortletURL portletURL) {
 		_portletURL = portletURL;
 	}
 
 	protected void cleanUp() {
+		_assetTagNames = null;
 		_className = null;
 		_classPK = 0;
 		_message = null;
@@ -60,6 +69,8 @@ public class AssetTagsSummaryTag extends IncludeTag {
 
 	protected void setAttributes(HttpServletRequest request) {
 		request.setAttribute(
+				"liferay-ui:asset-tags-summary:assetTagNames", _assetTagNames);
+		request.setAttribute(
 			"liferay-ui:asset-tags-summary:className", _className);
 		request.setAttribute(
 			"liferay-ui:asset-tags-summary:classPK", String.valueOf(_classPK));
@@ -71,6 +82,7 @@ public class AssetTagsSummaryTag extends IncludeTag {
 	private static final String _PAGE =
 		"/html/taglib/ui/asset_tags_summary/page.jsp";
 
+	private String _assetTagNames;
 	private String _className;
 	private long _classPK;
 	private String _message;
