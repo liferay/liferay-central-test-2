@@ -323,3 +323,33 @@
 	border: none;
 	padding: 0.1em 10px 0.1em 0;
 }
+
+.portlet-wiki .wiki-page-status {
+	background: url(<%= themeImagesPath %>/common/recent_changes.png) no-repeat 0 50%;
+	color: #999;
+	margin-right: 5px;
+	padding: 2px 0 2px 20px;
+}
+
+.portlet-wiki .wiki-page-status .wiki-page-status-approved {
+	color: green;
+}
+
+.portlet-wiki .wiki-page-status .wiki-page-status-draft {
+	color: blue;
+}
+
+.portlet-wiki .wiki-page-status .wiki-page-status-expired {
+	color: red;
+}
+
+.portlet-wiki .wiki-page-status .wiki-page-status-pending {
+	color: orange;
+}
+
+.portlet-wiki .wiki-page-version {
+	background: url(<%= themeImagesPath %>/common/pages.png) no-repeat 0 50%;
+	color: #999;
+	margin-right: 5px;
+	padding: 2px 20px;
+}
