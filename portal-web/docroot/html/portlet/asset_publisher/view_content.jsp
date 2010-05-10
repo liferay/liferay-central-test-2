@@ -22,6 +22,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 long assetEntryId = ParamUtil.getLong(request, "assetEntryId");
 String type = ParamUtil.getString(request, "type");
 String urlTitle = ParamUtil.getString(request, "urlTitle");
+long groupId = ParamUtil.getLong(request, "groupId", scopeGroupId);
 
 boolean show = true;
 boolean print = ParamUtil.getString(request, "viewMode").equals(Constants.PRINT);
@@ -40,7 +41,7 @@ try {
 	AssetRenderer assetRenderer = null;
 
 	if (Validator.isNotNull(urlTitle)) {
-		assetRenderer = assetRendererFactory.getAssetRenderer(scopeGroupId, urlTitle);
+		assetRenderer = assetRendererFactory.getAssetRenderer(groupId, urlTitle);
 
 		className = assetRendererFactory.getClassName();
 		classPK = assetRenderer.getClassPK();

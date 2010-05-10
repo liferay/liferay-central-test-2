@@ -21,7 +21,10 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.Group;
 import com.liferay.portal.model.PortletConstants;
+import com.liferay.portal.security.auth.CompanyThreadLocal;
+import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.util.PortletKeys;
 
 import java.util.Map;
@@ -55,6 +58,8 @@ public class AssetPublisherFriendlyURLMapper extends BaseFriendlyURLMapper {
 			String type = GetterUtil.getString(
 				portletURL.getParameter("type"), "content");
 			String urlTitle = portletURL.getParameter("urlTitle");
+			long groupId = GetterUtil.getLong(
+					portletURL.getParameter("groupId"));
 
 			if (Validator.isNotNull(portletId) &&
 				Validator.isNotNull(assetEntryId)) {
@@ -83,6 +88,12 @@ public class AssetPublisherFriendlyURLMapper extends BaseFriendlyURLMapper {
 					friendlyURLPath += urlTitle;
 
 					portletURL.addParameterIncludedInPath("urlTitle");
+
+					if (groupId > 0) {
+						friendlyURLPath += StringPool.SLASH + groupId;
+
+						portletURL.addParameterIncludedInPath("groupId");
+					}
 				}
 				else {
 					friendlyURLPath += "id/" + assetEntryId;
@@ -126,9 +137,15 @@ public class AssetPublisherFriendlyURLMapper extends BaseFriendlyURLMapper {
 			String type = urlFragments[1];
 			String assetEntryId = null;
 			String urlTitle = null;
+			long groupId = 0;
 
 			if ((urlFragments.length > 3) && urlFragments[2].equals("id")) {
 				assetEntryId = urlFragments[3];
+			}
+			else if (urlFragments.length > 3) {
+				urlTitle = urlFragments[2];
+
+				groupId = GetterUtil.getLong(urlFragments[3]);
 			}
 			else {
 				urlTitle = urlFragments[2];
@@ -160,6 +177,11 @@ public class AssetPublisherFriendlyURLMapper extends BaseFriendlyURLMapper {
 			}
 			else {
 				params.put(namespace + "urlTitle", new String[] {urlTitle});
+				if (groupId > 0) {
+					params.put(namespace + "groupId",
+						new String[] {String.valueOf(groupId)});
+				}
+
 			}
 		}
 	}
