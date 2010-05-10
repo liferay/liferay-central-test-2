@@ -18,6 +18,7 @@
 
 <%
 String tabs1 = ParamUtil.getString(request, "tabs1", "web-content");
+
 String orderByCol = ParamUtil.getString(request, "orderByCol");
 
 JournalArticle article = (JournalArticle)request.getAttribute(WebKeys.JOURNAL_ARTICLE);
@@ -25,9 +26,9 @@ JournalArticle article = (JournalArticle)request.getAttribute(WebKeys.JOURNAL_AR
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("struts_action", "/journal/view_article_history");
-portletURL.setParameter("articleId", article.getArticleId());
-portletURL.setParameter("groupId", String.valueOf(article.getGroupId()));
 portletURL.setParameter("tabs1", tabs1);
+portletURL.setParameter("groupId", String.valueOf(article.getGroupId()));
+portletURL.setParameter("articleId", article.getArticleId());
 %>
 
 <liferay-util:include page="/html/portlet/journal/article_tabs.jsp">
@@ -52,12 +53,13 @@ portletURL.setParameter("tabs1", tabs1);
 	if (Validator.isNull(orderByCol)) {
 		searchContainer.setOrderByCol("version");
 	}
+
 	searchContainer.setRowChecker(new RowChecker(renderResponse));
 
 	ArticleSearchTerms searchTerms = (ArticleSearchTerms)searchContainer.getSearchTerms();
 
-	searchTerms.setArticleId(article.getArticleId());
 	searchTerms.setAdvancedSearch(true);
+	searchTerms.setArticleId(article.getArticleId());
 	%>
 
 	<%@ include file="/html/portlet/journal/article_search_results.jspf" %>

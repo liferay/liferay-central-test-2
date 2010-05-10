@@ -32,17 +32,17 @@ JournalArticle article = (JournalArticle)request.getAttribute(WebKeys.JOURNAL_AR
 
 PortletURL editArticleURL = renderResponse.createRenderURL();
 
-editArticleURL.setParameter("groupId", String.valueOf(article.getGroupId()));
-editArticleURL.setParameter("redirect", redirect);
-editArticleURL.setParameter("articleId", article.getArticleId());
 editArticleURL.setParameter("struts_action", "/journal/edit_article");
+editArticleURL.setParameter("redirect", redirect);
+editArticleURL.setParameter("groupId", String.valueOf(article.getGroupId()));
+editArticleURL.setParameter("articleId", article.getArticleId());
 
 PortletURL viewArticleHistoryURL = renderResponse.createRenderURL();
 
-viewArticleHistoryURL.setParameter("groupId", String.valueOf(article.getGroupId()));
-viewArticleHistoryURL.setParameter("redirect", redirect);
-viewArticleHistoryURL.setParameter("articleId", article.getArticleId());
 viewArticleHistoryURL.setParameter("struts_action", "/journal/view_article_history");
+viewArticleHistoryURL.setParameter("redirect", redirect);
+viewArticleHistoryURL.setParameter("groupId", String.valueOf(article.getGroupId()));
+viewArticleHistoryURL.setParameter("articleId", article.getArticleId());
 %>
 
 <h1 class="article-title">
