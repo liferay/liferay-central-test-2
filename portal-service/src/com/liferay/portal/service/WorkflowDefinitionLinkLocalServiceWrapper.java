@@ -159,6 +159,14 @@ public class WorkflowDefinitionLinkLocalServiceWrapper
 			groupId, className);
 	}
 
+	public com.liferay.portal.model.WorkflowDefinitionLink getWorkflowDefinitionLink(
+		long companyId, long groupId, java.lang.String className, boolean strict)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _workflowDefinitionLinkLocalService.getWorkflowDefinitionLink(companyId,
+			groupId, className, strict);
+	}
+
 	public int getWorkflowDefinitionLinksCount(long companyId,
 		java.lang.String workflowDefinitionName, int workflowDefinitionVersion)
 		throws com.liferay.portal.kernel.exception.SystemException {
