@@ -110,8 +110,13 @@
 				<div class="subject">
 					<a href="#<portlet:namespace />message_<%= message.getMessageId() %>" title="<liferay-ui:message key="permanent-link-to-this-item" />"><strong><%= HtmlUtil.escape(message.getSubject()) %></strong></a><br />
 
+					<%
+					String assetTagNames = (String)request.getAttribute("edit_message.jsp-assetTagNames");
+					%>
+
 					<div class="tags">
 						<liferay-ui:asset-tags-summary
+							assetTagNames="<%= assetTagNames %>"
 							className="<%= MBMessage.class.getName() %>"
 							classPK="<%= message.getMessageId() %>"
 						/>
