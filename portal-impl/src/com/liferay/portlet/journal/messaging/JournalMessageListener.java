@@ -117,8 +117,7 @@ public class JournalMessageListener implements MessageListener {
 			User user = null;
 
 			try {
-				user = UserLocalServiceUtil.getUserById(
-					subscription.getUserId());
+				user = UserLocalServiceUtil.getUserById(subscribedUserId);
 			}
 			catch (NoSuchUserException nsue) {
 				if (_log.isInfoEnabled()) {
