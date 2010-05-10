@@ -331,19 +331,19 @@
 	padding: 2px 0 2px 20px;
 }
 
-.portlet-wiki .wiki-page-status .wiki-page-status-approved {
+.portlet-wiki .wiki-page-status-approved {
 	color: green;
 }
 
-.portlet-wiki .wiki-page-status .wiki-page-status-draft {
+.portlet-wiki .wiki-page-status-draft {
 	color: blue;
 }
 
-.portlet-wiki .wiki-page-status .wiki-page-status-expired {
+.portlet-wiki .wiki-page-status-expired {
 	color: red;
 }
 
-.portlet-wiki .wiki-page-status .wiki-page-status-pending {
+.portlet-wiki .wiki-page-status-pending {
 	color: orange;
 }
 
