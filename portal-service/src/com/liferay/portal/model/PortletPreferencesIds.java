@@ -57,6 +57,26 @@ public class PortletPreferencesIds implements Serializable {
 		return _portletId;
 	}
 
+	public void setCompanyId(long companyId) {
+		_companyId = companyId;
+	}
+
+	public void setOwnerId(long ownerId) {
+		_ownerId = ownerId;
+	}
+
+	public void setOwnerType(int ownerType) {
+		_ownerType = ownerType;
+	}
+
+	public void setPlid(long plid) {
+		_plid = plid;
+	}
+
+	public void setPortletId(String portletId) {
+		_portletId = portletId;
+	}
+
 	private long _companyId;
 	private long _ownerId;
 	private int _ownerType;
