@@ -1923,20 +1923,23 @@ public class JournalArticleLocalServiceImpl
 			((status == WorkflowConstants.STATUS_APPROVED) ||
 			 (status == WorkflowConstants.STATUS_DENIED))) {
 
-			PortletPreferences preferences =
-				ServiceContextUtil.getPortletPreferences(serviceContext);
+			String msg = "granted";
+
+			if (status == WorkflowConstants.STATUS_DENIED) {
+				msg = "denied";
+			}
 
 			try {
-				String msg = "granted";
-
-				if (status == WorkflowConstants.STATUS_DENIED) {
-					msg = "denied";
-				}
+				PortletPreferences preferences =
+					ServiceContextUtil.getPortletPreferences(serviceContext);
 
 				sendEmail(article, articleURL, preferences, msg);
 			}
-			catch (IOException ioe) {
-				throw new SystemException(ioe);
+			catch (Exception e) {
+				_log.error(
+					"Error sending the email to notify the change of status " +
+						"of " + article.getArticleId() + " to " + msg + ": " +
+							e);
 			}
 		}
 
