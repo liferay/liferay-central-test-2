@@ -43,10 +43,10 @@ public interface ${entity.name}${sessionTypeName}Service {
 			<#if serviceBuilder.isServiceReadOnlyMethod(method, entity.txRequiredList)>
 				@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 			</#if>
-			public ${serviceBuilder.getTypeGenericsName(method.returns)} ${method.name}(
+			public ${method.returns.value}${method.returnsGenericsName}${serviceBuilder.getDimensions(method.returns.dimensions)} ${method.name}(
 
 			<#list method.parameters as parameter>
-				${serviceBuilder.getTypeGenericsName(parameter.type)} ${parameter.name}
+				${parameter.type.value}${parameter.genericsName}${serviceBuilder.getDimensions(parameter.type.dimensions)} ${parameter.name}
 
 				<#if parameter_has_next>
 					,

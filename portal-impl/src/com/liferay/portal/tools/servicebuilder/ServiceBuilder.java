@@ -26,20 +26,19 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.SetUtil;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.StringUtil_IW;
-import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.kernel.xml.Document;
-import com.liferay.portal.kernel.xml.Element;
-import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.model.ModelHintsUtil;
 import com.liferay.portal.tools.SourceFormatter;
 import com.liferay.portal.util.InitUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.util.TextFormatter;
+import com.liferay.portal.kernel.util.Time;
+import com.liferay.portal.kernel.xml.Document;
+import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.util.xml.XMLFormatter;
 
 import com.thoughtworks.qdox.JavaDocBuilder;
@@ -53,6 +52,7 @@ import de.hunsicker.jalopy.Jalopy;
 import de.hunsicker.jalopy.storage.Convention;
 import de.hunsicker.jalopy.storage.ConventionKeys;
 import de.hunsicker.jalopy.storage.Environment;
+
 import freemarker.ext.beans.BeansWrapper;
 import freemarker.log.Logger;
 import freemarker.template.TemplateHashModel;
@@ -69,17 +69,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
+import java.util.HashSet;
 import java.util.TreeMap;
 import java.util.TreeSet;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
 import org.dom4j.DocumentException;
 
@@ -734,7 +734,7 @@ public class ServiceBuilder {
 
 						if ((ejbNameWeight > collectionEntityWeight) ||
 							((ejbNameWeight == collectionEntityWeight) &&
-							(ejbName.compareTo(collectionEntity) > 0))) {
+							 (ejbName.compareTo(collectionEntity) > 0))) {
 
 							_entityMappings.put(mappingTable, entityMapping);
 						}
@@ -1321,8 +1321,8 @@ public class ServiceBuilder {
 		String noSuchEntityException = entity.getName();
 
 		if (Validator.isNull(entity.getPortletShortName()) ||
-			(noSuchEntityException.startsWith(entity.getPortletShortName()) &&
-			!noSuchEntityException.equals(entity.getPortletShortName()))) {
+			noSuchEntityException.startsWith(entity.getPortletShortName()) &&
+			!noSuchEntityException.equals(entity.getPortletShortName())) {
 
 			noSuchEntityException = noSuchEntityException.substring(
 				entity.getPortletShortName().length());
@@ -1334,9 +1334,15 @@ public class ServiceBuilder {
 	}
 
 	public String getParameterType(JavaParameter parameter) {
+		StringBuilder sb = new StringBuilder();
+
 		Type returnType = parameter.getType();
 
-		return getTypeGenericsName(returnType);
+		sb.append(returnType.getValue());
+		sb.append(parameter.getGenericsName());
+		sb.append(getDimensions(returnType.getDimensions()));
+
+		return sb.toString();
 	}
 
 	public String getPrimitiveObj(String type) {
@@ -1387,33 +1393,13 @@ public class ServiceBuilder {
 	}
 
 	public String getReturnType(JavaMethod method) {
+		StringBuilder sb = new StringBuilder();
+
 		Type returnType = method.getReturns();
 
-		return getTypeGenericsName(returnType);
-	}
-
-	public String getTypeGenericsName(Type type) {
-		StringBundler sb = new StringBundler();
-
-		sb.append(type.getValue());
-
-		Type[] actualTypeArguments = type.getActualTypeArguments();
-
-		if (actualTypeArguments != null) {
-			sb.append(StringPool.LESS_THAN);
-
-			for (int i = 0; i < actualTypeArguments.length; i++) {
-				if (i > 0) {
-					sb.append(", ");
-				}
-
-				sb.append(getTypeGenericsName(actualTypeArguments[i]));
-			}
-
-			sb.append(StringPool.GREATER_THAN);
-		}
-
-		sb.append(getDimensions(type.getDimensions()));
+		sb.append(returnType.getValue());
+		sb.append(method.getReturnsGenericsName());
+		sb.append(getDimensions(returnType.getDimensions()));
 
 		return sb.toString();
 	}
@@ -1592,8 +1578,8 @@ public class ServiceBuilder {
 			return true;
 		}
 		else if (methodName.equals("findByPrimaryKey") ||
-				methodName.equals("fetchByPrimaryKey") ||
-				methodName.equals("remove")) {
+				 methodName.equals("fetchByPrimaryKey") ||
+				 methodName.equals("remove")) {
 
 			JavaParameter[] parameters = method.getParameters();
 
@@ -1639,30 +1625,30 @@ public class ServiceBuilder {
 			return false;
 		}
 		else if ((methodName.equals("getUser")) &&
-				(method.getParameters().length == 0)) {
+				 (method.getParameters().length == 0)) {
 
 			return false;
 		}
 		else if (methodName.equals("getUserId") &&
-				(method.getParameters().length == 0)) {
+				 method.getParameters().length == 0) {
 
 			return false;
 		}
 		else if ((methodName.endsWith("Finder")) &&
-				(methodName.startsWith("get") ||
-				methodName.startsWith("set"))) {
+				 (methodName.startsWith("get") ||
+				  methodName.startsWith("set"))) {
 
 			return false;
 		}
 		else if ((methodName.endsWith("Persistence")) &&
-				(methodName.startsWith("get") ||
-				methodName.startsWith("set"))) {
+				 (methodName.startsWith("get") ||
+				  methodName.startsWith("set"))) {
 
 			return false;
 		}
 		else if ((methodName.endsWith("Service")) &&
-				(methodName.startsWith("get") ||
-				methodName.startsWith("set"))) {
+				 (methodName.startsWith("get") ||
+				  methodName.startsWith("set"))) {
 
 			return false;
 		}
@@ -1677,7 +1663,9 @@ public class ServiceBuilder {
 		StringBuilder sb = new StringBuilder();
 
 		sb.append("isDuplicateMethod ");
-		sb.append(getTypeGenericsName(method.getReturns()));
+		sb.append(method.getReturns().getValue());
+		sb.append(method.getReturnsGenericsName());
+		sb.append(getDimensions(method.getReturns().getDimensions()));
 		sb.append(StringPool.SPACE);
 		sb.append(method.getName());
 		sb.append(StringPool.OPEN_PARENTHESIS);
@@ -1687,7 +1675,9 @@ public class ServiceBuilder {
 		for (int i = 0; i < parameters.length; i++) {
 			JavaParameter javaParameter = parameters[i];
 
-			sb.append(getTypeGenericsName(javaParameter.getType()));
+			sb.append(javaParameter.getType().getValue());
+			sb.append(javaParameter.getGenericsName());
+			sb.append(getDimensions(javaParameter.getType().getDimensions()));
 
 			if ((i + 1) != parameters.length) {
 				sb.append(StringPool.COMMA);
@@ -1750,7 +1740,9 @@ public class ServiceBuilder {
 
 		JavaParameter[] parameters = method.getParameters();
 
-		for (JavaParameter javaParameter : parameters) {
+		for (int i = 0; i < parameters.length; i++) {
+			JavaParameter javaParameter = parameters[i];
+
 			String parameterTypeName =
 				javaParameter.getType().getValue() +
 					_getDimensions(javaParameter.getType());
@@ -3864,7 +3856,9 @@ public class ServiceBuilder {
 			}
 		}
 
-		for (Entity entity : entities) {
+		for (int i = 0; i < entities.length; i++) {
+			Entity entity = entities[i];
+
 			List<EntityColumn> pkList = entity.getPKList();
 
 			for (int j = 0; j < pkList.size(); j++) {
@@ -3928,13 +3922,13 @@ public class ServiceBuilder {
 					sb.append("BOOLEAN");
 				}
 				else if (colType.equalsIgnoreCase("double") ||
-						colType.equalsIgnoreCase("float")) {
+						 colType.equalsIgnoreCase("float")) {
 
 					sb.append("DOUBLE");
 				}
 				else if (colType.equals("int") ||
-						colType.equals("Integer") ||
-						colType.equalsIgnoreCase("short")) {
+						 colType.equals("Integer") ||
+						 colType.equalsIgnoreCase("short")) {
 
 					sb.append("INTEGER");
 				}
@@ -4033,13 +4027,13 @@ public class ServiceBuilder {
 				sb.append("BOOLEAN");
 			}
 			else if (colType.equalsIgnoreCase("double") ||
-					colType.equalsIgnoreCase("float")) {
+					 colType.equalsIgnoreCase("float")) {
 
 				sb.append("DOUBLE");
 			}
 			else if (colType.equals("int") ||
-					colType.equals("Integer") ||
-					colType.equalsIgnoreCase("short")) {
+					 colType.equals("Integer") ||
+					 colType.equalsIgnoreCase("short")) {
 
 				sb.append("INTEGER");
 			}
@@ -4272,8 +4266,8 @@ public class ServiceBuilder {
 	private boolean _hasHttpMethods(JavaClass javaClass) {
 		JavaMethod[] methods = _getMethods(javaClass);
 
-		for (JavaMethod _method : methods) {
-			JavaMethod javaMethod = _method;
+		for (int i = 0; i < methods.length; i++) {
+			JavaMethod javaMethod = methods[i];
 
 			if (!javaMethod.isConstructor() && javaMethod.isPublic() &&
 				isCustomMethod(javaMethod)) {

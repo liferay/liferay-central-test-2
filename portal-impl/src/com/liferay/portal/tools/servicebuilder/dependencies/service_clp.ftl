@@ -18,17 +18,17 @@ public class ${entity.name}${sessionTypeName}ServiceClp implements ${entity.name
 
 	<#list methods as method>
 		<#if !method.isConstructor() && method.isPublic() && serviceBuilder.isCustomMethod(method)>
-			<#assign returnTypeName = serviceBuilder.getTypeGenericsName(method.returns)>
+			<#assign returnTypeName = method.returns.value + method.returnsGenericsName + serviceBuilder.getDimensions(method.returns.dimensions)>
 			<#assign parameters = method.parameters>
 
 			<#if method.name = "dynamicQuery">
 				@SuppressWarnings("unchecked")
 			</#if>
 
-			public ${returnTypeName} ${method.name}(
+			public ${method.returns.value}${method.returnsGenericsName}${serviceBuilder.getDimensions(method.returns.dimensions)} ${method.name}(
 
 			<#list parameters as parameter>
-				${serviceBuilder.getTypeGenericsName(parameter.type)} ${parameter.name}
+				${parameter.type.value}${parameter.genericsName}${serviceBuilder.getDimensions(parameter.type.dimensions)} ${parameter.name}
 
 				<#if parameter_has_next>
 					,

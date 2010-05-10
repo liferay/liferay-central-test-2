@@ -211,16 +211,12 @@ public class ${entity.name}Clp extends BaseModelImpl<${entity.name}> implements 
 
 	<#list methods as method>
 		<#if !method.isConstructor() && !method.isStatic() && method.isPublic()>
-			public ${serviceBuilder.getTypeGenericsName(method.returns)} ${method.name} (
+			public ${method.returns.value}${method.returnsGenericsName}${serviceBuilder.getDimensions("${method.returns.dimensions}")} ${method.name} (
 
 			<#assign parameters = method.parameters>
 
 			<#list parameters as parameter>
-				${serviceBuilder.getTypeGenericsName(parameter.type)} ${parameter.name}
-
-				<#if parameter_has_next>
-					,
-				</#if>
+				${parameter.type.value}${parameter.genericsName}${serviceBuilder.getDimensions("${parameter.type.dimensions}")} ${parameter.name}<#if parameter_has_next>,</#if>
 			</#list>
 
 			)
@@ -253,7 +249,7 @@ public class ${entity.name}Clp extends BaseModelImpl<${entity.name}> implements 
 	}
 
 	public Object clone() {
-		${entity.name}Clp clone = new ${entity.name}Clp();
+		 ${entity.name}Clp clone = new ${entity.name}Clp();
 
 		<#list entity.regularColList as column>
 			clone.set${column.methodName}(

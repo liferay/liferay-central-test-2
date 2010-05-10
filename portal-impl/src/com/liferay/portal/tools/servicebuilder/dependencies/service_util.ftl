@@ -32,10 +32,10 @@ public class ${entity.name}${sessionTypeName}ServiceUtil {
 				@SuppressWarnings("unchecked")
 			</#if>
 
-			public static ${serviceBuilder.getTypeGenericsName(method.returns)} ${method.name}(
+			public static ${method.returns.value}${method.returnsGenericsName}${serviceBuilder.getDimensions(method.returns.dimensions)} ${method.name}(
 
 			<#list method.parameters as parameter>
-				${serviceBuilder.getTypeGenericsName(parameter.type)} ${parameter.name}
+				${parameter.type.value}${parameter.genericsName}${serviceBuilder.getDimensions(parameter.type.dimensions)} ${parameter.name}
 
 				<#if parameter_has_next>
 					,

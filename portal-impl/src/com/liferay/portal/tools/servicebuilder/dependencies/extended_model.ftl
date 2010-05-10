@@ -24,20 +24,16 @@ package ${packagePath}.model;
  * @see       ${packagePath}.model.impl.${entity.name}ModelImpl
  * @generated
  */
-public interface ${entity.name} extends ${entity.name}Model {
+ public interface ${entity.name} extends ${entity.name}Model {
 
 	<#list methods as method>
 		<#if !method.isConstructor() && !method.isStatic() && method.isPublic()>
-			public ${serviceBuilder.getTypeGenericsName(method.returns)} ${method.name} (
+			public ${method.returns.value}${method.returnsGenericsName}${serviceBuilder.getDimensions("${method.returns.dimensions}")} ${method.name} (
 
 			<#assign parameters = method.parameters>
 
 			<#list parameters as parameter>
-				${serviceBuilder.getTypeGenericsName(parameter.type)} ${parameter.name}
-
-				<#if parameter_has_next>
-					,
-				</#if>
+				${parameter.type.value}${parameter.genericsName}${serviceBuilder.getDimensions("${parameter.type.dimensions}")} ${parameter.name}<#if parameter_has_next>,</#if>
 			</#list>
 
 			)
