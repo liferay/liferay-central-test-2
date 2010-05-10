@@ -30,16 +30,16 @@ String emailEntryAddedBody = ParamUtil.getString(request, "emailEntryAddedBody",
 String emailEntryUpdatedSubject = ParamUtil.getString(request, "emailEntryUpdatedSubject", BlogsUtil.getEmailEntryUpdatedSubject(preferences));
 String emailEntryUpdatedBody = ParamUtil.getString(request, "emailEntryUpdatedBody", BlogsUtil.getEmailEntryUpdatedBody(preferences));
 
-String bodyEditorParam = StringPool.BLANK;
+String editorParam = StringPool.BLANK;
 String bodyEditorBody = StringPool.BLANK;
 
 if (tabs2.equals("entry-added-email")) {
-	bodyEditorParam = "emailEntryAddedBody";
-	bodyEditorBody = emailEntryAddedBody;
+	editorParam = "emailEntryAddedBody";
+	editorBody = emailEntryAddedBody;
 }
 else if (tabs2.equals("entry-updated-email")) {
-	bodyEditorParam = "emailEntryUpdatedBody";
-	bodyEditorBody = emailEntryUpdatedBody;
+	editorParam = "emailEntryUpdatedBody";
+	editorBody = emailEntryUpdatedBody;
 }
 %>
 
@@ -147,7 +147,7 @@ else if (tabs2.equals("entry-updated-email")) {
 					</c:when>
 				</c:choose>
 
-				<aui:input cssClass="lfr-textarea-container" label="body" name="<%= bodyEditorParam %>" type="textarea" value="<%= bodyEditorBody %>" />
+				<aui:input cssClass="lfr-textarea-container" label="body" name="<%= editorParam %>" type="textarea" value="<%= editorBody %>" />
 			</aui:fieldset>
 
 			<div class="definition-of-terms">
