@@ -16,7 +16,9 @@ package com.liferay.portlet.messageboards.service.impl;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.messageboards.model.MBBan;
 import com.liferay.portlet.messageboards.service.base.MBBanServiceBaseImpl;
@@ -32,9 +34,15 @@ public class MBBanServiceImpl extends MBBanServiceBaseImpl {
 	public MBBan addBan(long banUserId, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
+		PermissionChecker permissionChecker = getPermissionChecker();
+
 		MBPermission.check(
-			getPermissionChecker(), serviceContext.getScopeGroupId(),
+			permissionChecker, serviceContext.getScopeGroupId(),
 			ActionKeys.BAN_USER);
+
+		if (permissionChecker.isCommunityAdmin(banUserId)) {
+			throw new PrincipalException();
+		}
 
 		return mbBanLocalService.addBan(getUserId(), banUserId, serviceContext);
 	}
