@@ -35,7 +35,8 @@ public class DeleteFrontPageAttachmentTests extends BaseTests {
 		testSuite.addTestSuite(AddFrontPageTest.class);
 		testSuite.addTestSuite(AddFrontPageAttachmentTest.class);
 		testSuite.addTestSuite(DeleteFrontPageAttachmentTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownWikiNodeTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

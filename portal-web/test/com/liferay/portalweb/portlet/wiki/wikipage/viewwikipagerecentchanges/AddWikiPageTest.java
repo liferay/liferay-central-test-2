@@ -52,28 +52,14 @@ public class AddWikiPageTest extends BaseTestCase {
 		selenium.type("_36_title", RuntimeVariables.replace("Wiki Page Test"));
 		selenium.type("_36_content",
 			RuntimeVariables.replace("This is a wiki page test."));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible(
-							"//span[@class='aui-icon-search aui-icon']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Publish']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
+		assertTrue(selenium.isElementPresent("link=Wiki Page Test"));
+		selenium.clickAt("link=Wiki Page Test", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isPartialText("//h1[@class='page-title']",
 				"Wiki Page Test"));
 		assertEquals(RuntimeVariables.replace("This is a wiki page test."),

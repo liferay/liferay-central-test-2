@@ -37,7 +37,8 @@ public class ChangeParentFrontPageChildPageToWikiPageTests extends BaseTests {
 		testSuite.addTestSuite(AddWikiPageTest.class);
 		testSuite.addTestSuite(
 			ChangeParentFrontPageChildPageToWikiPageTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownWikiNodeTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

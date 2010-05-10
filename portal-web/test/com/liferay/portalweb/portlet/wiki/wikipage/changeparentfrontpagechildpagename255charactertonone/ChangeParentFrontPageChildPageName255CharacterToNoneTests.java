@@ -38,7 +38,8 @@ public class ChangeParentFrontPageChildPageName255CharacterToNoneTests
 		testSuite.addTestSuite(AddFrontPageChildPageName255CharacterTest.class);
 		testSuite.addTestSuite(
 			ChangeParentFrontPageChildPageName255CharacterToNoneTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownWikiNodeTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

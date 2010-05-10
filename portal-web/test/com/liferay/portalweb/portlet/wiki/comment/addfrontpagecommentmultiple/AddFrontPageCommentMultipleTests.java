@@ -36,7 +36,8 @@ public class AddFrontPageCommentMultipleTests extends BaseTests {
 		testSuite.addTestSuite(AddFrontPageComment1Test.class);
 		testSuite.addTestSuite(AddFrontPageComment2Test.class);
 		testSuite.addTestSuite(AddFrontPageComment3Test.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownWikiNodeTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

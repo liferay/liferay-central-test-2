@@ -34,7 +34,8 @@ public class RemoveRedirectWikiPageTests extends BaseTests {
 		testSuite.addTestSuite(AddWikiPageTest.class);
 		testSuite.addTestSuite(RenameWikiPageTitleTest.class);
 		testSuite.addTestSuite(RemoveRedirectWikiPageTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownWikiNodeTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

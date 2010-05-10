@@ -34,7 +34,8 @@ public class AddWikiPageName255CharacterChildPageTests extends BaseTests {
 		testSuite.addTestSuite(AddPortletWikiTest.class);
 		testSuite.addTestSuite(AddWikiPageName255CharacterTest.class);
 		testSuite.addTestSuite(AddWikiPageName255CharacterChildPageTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownWikiNodeTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

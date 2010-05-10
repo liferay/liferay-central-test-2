@@ -72,7 +72,7 @@ public class AddPortletWikiDuplicateTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("//div[@titl='Wiki']/p/a")) {
+				if (selenium.isVisible("//div[@title='Wiki']")) {
 					break;
 				}
 			}
@@ -82,24 +82,6 @@ public class AddPortletWikiDuplicateTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//div[@titl='Wiki']/p/a", RuntimeVariables.replace(""));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible("//section")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		assertTrue(selenium.isVisible("//section"));
+		assertFalse(selenium.isVisible("//div[@title='Wiki']/p/a"));
 	}
 }

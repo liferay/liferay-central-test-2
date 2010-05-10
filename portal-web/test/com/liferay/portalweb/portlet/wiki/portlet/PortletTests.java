@@ -17,13 +17,7 @@ package com.liferay.portalweb.portlet.wiki.portlet;
 import com.liferay.portalweb.portal.BaseTests;
 import com.liferay.portalweb.portlet.wiki.portlet.addportlet.AddPortletTests;
 import com.liferay.portalweb.portlet.wiki.portlet.addportletduplicate.AddPortletDuplicateTests;
-import com.liferay.portalweb.portlet.wiki.portlet.configureportletenablecomments.ConfigurePortletEnableCommentsTests;
-import com.liferay.portalweb.portlet.wiki.portlet.configureportletenablecommentsratings.ConfigurePortletEnableCommentsRatingsTests;
-import com.liferay.portalweb.portlet.wiki.portlet.configureportletvisiblewikis.ConfigurePortletVisibleWikisTests;
-import com.liferay.portalweb.portlet.wiki.portlet.configureportletvisiblewikismultiple.ConfigurePortletVisibleWikisMultipleTests;
-import com.liferay.portalweb.portlet.wiki.portlet.configureportletvisiblewikisnull.ConfigurePortletVisibleWikisNullTests;
 import com.liferay.portalweb.portlet.wiki.portlet.removeportlet.RemovePortletTests;
-import com.liferay.portalweb.portlet.wiki.portlet.restoreconfigureportletvisiblewikis.RestoreConfigurePortletVisibleWikisTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -40,13 +34,7 @@ public class PortletTests extends BaseTests {
 
 		testSuite.addTest(AddPortletTests.suite());
 		testSuite.addTest(AddPortletDuplicateTests.suite());
-		testSuite.addTest(ConfigurePortletEnableCommentsTests.suite());
-		testSuite.addTest(ConfigurePortletEnableCommentsRatingsTests.suite());
-		testSuite.addTest(ConfigurePortletVisibleWikisTests.suite());
-		testSuite.addTest(ConfigurePortletVisibleWikisMultipleTests.suite());
-		testSuite.addTest(ConfigurePortletVisibleWikisNullTests.suite());
 		testSuite.addTest(RemovePortletTests.suite());
-		testSuite.addTest(RestoreConfigurePortletVisibleWikisTests.suite());
 
 		return testSuite;
 	}

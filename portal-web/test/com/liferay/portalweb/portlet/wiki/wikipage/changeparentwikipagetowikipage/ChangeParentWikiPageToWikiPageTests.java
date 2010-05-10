@@ -35,7 +35,8 @@ public class ChangeParentWikiPageToWikiPageTests extends BaseTests {
 		testSuite.addTestSuite(AddWikiPage1Test.class);
 		testSuite.addTestSuite(AddWikiPage2Test.class);
 		testSuite.addTestSuite(ChangeParentWikiPageToWikiPageTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownWikiNodeTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

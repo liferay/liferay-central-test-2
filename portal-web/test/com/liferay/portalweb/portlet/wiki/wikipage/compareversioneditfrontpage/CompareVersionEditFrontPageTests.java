@@ -35,7 +35,8 @@ public class CompareVersionEditFrontPageTests extends BaseTests {
 		testSuite.addTestSuite(AddFrontPageTest.class);
 		testSuite.addTestSuite(EditFrontPageTest.class);
 		testSuite.addTestSuite(CompareVersionEditFrontPageTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownWikiNodeTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

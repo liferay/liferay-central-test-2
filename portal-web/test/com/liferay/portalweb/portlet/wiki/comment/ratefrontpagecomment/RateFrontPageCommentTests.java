@@ -34,7 +34,8 @@ public class RateFrontPageCommentTests extends BaseTests {
 		testSuite.addTestSuite(AddFrontPageTest.class);
 		testSuite.addTestSuite(AddFrontPageCommentTest.class);
 		testSuite.addTestSuite(RateFrontPageCommentTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownWikiNodeTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

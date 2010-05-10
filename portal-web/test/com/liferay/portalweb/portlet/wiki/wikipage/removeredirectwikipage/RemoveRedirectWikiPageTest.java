@@ -59,6 +59,9 @@ public class RemoveRedirectWikiPageTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_36_content",
 			RuntimeVariables.replace("This is a remove redirect test."));
+		selenium.clickAt("//input[@value='Publish']",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -66,8 +69,8 @@ public class RemoveRedirectWikiPageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible(
-							"//span[@class='aui-icon-search aui-icon']")) {
+				if (selenium.isTextPresent(
+							"Your request processed successfully. ")) {
 					break;
 				}
 			}
@@ -77,8 +80,47 @@ public class RemoveRedirectWikiPageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully. "));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isPartialText("//div/h1", "Wiki Page Test")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		assertTrue(selenium.isPartialText("//div/h1", "Wiki Page Test"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (RuntimeVariables.replace("This is a remove redirect test.")
+										.equals(selenium.getText(
+								"//section/div/div/div/div[4]/div"))) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		assertEquals(RuntimeVariables.replace("This is a remove redirect test."),
+			selenium.getText("//section/div/div/div/div[4]/div"));
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {

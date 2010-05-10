@@ -80,25 +80,7 @@ public class EditFrontPageMinorChangeTest extends BaseTestCase {
 					RuntimeVariables.replace(""));
 
 			case 2:
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isVisible(
-									"//span[@class='aui-icon-search aui-icon']")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
-				selenium.clickAt("//input[@value='Save']",
+				selenium.clickAt("//input[@value='Publish']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				assertEquals(RuntimeVariables.replace("Test Wiki Article"),

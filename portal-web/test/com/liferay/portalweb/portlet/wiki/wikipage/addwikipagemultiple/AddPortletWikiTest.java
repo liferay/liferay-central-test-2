@@ -72,7 +72,7 @@ public class AddPortletWikiTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("//div[@titl='Wiki']/p/a")) {
+				if (selenium.isVisible("//div[@title='Wiki']/p/a")) {
 					break;
 				}
 			}
@@ -82,7 +82,8 @@ public class AddPortletWikiTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//div[@titl='Wiki']/p/a", RuntimeVariables.replace(""));
+		selenium.clickAt("//div[@title='Wiki']/p/a",
+			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

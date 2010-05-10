@@ -65,8 +65,7 @@ public class RevertChangeParentFrontPageChildPageToWikiPageTest
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace(
 				"Changed parent from \"FrontPage.\""),
-			selenium.getText(
-				"//tr[@class='portlet-section-body results-row']/td[7]"));
+			selenium.getText("//tr[3]/td[7]"));
 		selenium.clickAt("link=Revert", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Reverted to 1.0"),

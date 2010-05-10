@@ -63,11 +63,10 @@ public class AddFrontPageCommentBodyNullTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_36_postReplyBody0", RuntimeVariables.replace("T"));
 		selenium.type("_36_postReplyBody0", RuntimeVariables.replace(""));
 		selenium.keyPress("_36_postReplyBody0", RuntimeVariables.replace("\\48"));
 		selenium.keyPress("_36_postReplyBody0", RuntimeVariables.replace("\\8"));
-		selenium.clickAt("_36_postReplyButton0", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Reply']", RuntimeVariables.replace(""));
 		Thread.sleep(5000);
 		assertTrue(selenium.isElementPresent("link=Be the first."));
 		assertTrue(selenium.isElementPresent("_36_postReplyBody0"));

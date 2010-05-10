@@ -35,7 +35,8 @@ public class DeleteWikiPageChildPageTests extends BaseTests {
 		testSuite.addTestSuite(AddWikiPageTest.class);
 		testSuite.addTestSuite(AddWikiPageChildPageTest.class);
 		testSuite.addTestSuite(DeleteWikiPageChildPageTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownWikiNodeTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

@@ -16,7 +16,6 @@ package com.liferay.portalweb.portlet.wiki.wikinode;
 
 import com.liferay.portalweb.portal.BaseTests;
 import com.liferay.portalweb.portlet.wiki.wikinode.addwikinode.AddWikiNodeTests;
-import com.liferay.portalweb.portlet.wiki.wikinode.addwikinodeinterupteditfrontpage.AddWikiNodeInteruptEditFrontPageTests;
 import com.liferay.portalweb.portlet.wiki.wikinode.addwikinodemultiple.AddWikiNodeMultipleTests;
 import com.liferay.portalweb.portlet.wiki.wikinode.addwikinodenameduplicate.AddWikiNodeNameDuplicateTests;
 import com.liferay.portalweb.portlet.wiki.wikinode.addwikinodenamenull.AddWikiNodeNameNullTests;
@@ -39,7 +38,6 @@ public class WikiNodeTests extends BaseTests {
 		TestSuite testSuite = new TestSuite();
 
 		testSuite.addTest(AddWikiNodeTests.suite());
-		testSuite.addTest(AddWikiNodeInteruptEditFrontPageTests.suite());
 		testSuite.addTest(AddWikiNodeMultipleTests.suite());
 		testSuite.addTest(AddWikiNodeNameDuplicateTests.suite());
 		testSuite.addTest(AddWikiNodeNameNullTests.suite());

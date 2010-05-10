@@ -36,7 +36,8 @@ public class AddFrontPageChildPageMultipleTests extends BaseTests {
 		testSuite.addTestSuite(AddFrontPageChildPage1Test.class);
 		testSuite.addTestSuite(AddFrontPageChildPage2Test.class);
 		testSuite.addTestSuite(AddFrontPageChildPage3Test.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownWikiNodeTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

@@ -37,7 +37,8 @@ public class ViewWikiPageIncomingLinksTests extends BaseTests {
 		testSuite.addTestSuite(ViewWikiPageIncomingLinksNullTest.class);
 		testSuite.addTestSuite(LinkWikiPageToWikiPageTest.class);
 		testSuite.addTestSuite(ViewWikiPageIncomingLinksTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownWikiNodeTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

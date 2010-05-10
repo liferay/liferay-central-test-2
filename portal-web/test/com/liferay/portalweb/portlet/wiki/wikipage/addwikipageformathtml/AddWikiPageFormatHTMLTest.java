@@ -89,13 +89,13 @@ public class AddWikiPageFormatHTMLTest extends BaseTestCase {
 
 		selenium.selectFrame("_36_editor");
 		Thread.sleep(5000);
-		selenium.clickAt("//td[@id='xToolbar']/table[8]/tbody/tr/td[2]/div/table/tbody/tr/td[2]",
-			RuntimeVariables.replace(""));
-		selenium.type("//td[@id='xEditingArea']/textarea",
+		selenium.click("//span[9]/span[2]/span/a/span[2]");
+		selenium.type("//td[@id='cke_contents_CKEditor1']/textarea",
 			RuntimeVariables.replace(
 				"<a herf=http://www.liferay.com>Welcome to LIFERAY</a>"));
 		selenium.selectFrame("relative=top");
-		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Publish']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

@@ -37,7 +37,8 @@ public class AddWikiPageName255CharacterChildPageMultipleTests
 		testSuite.addTestSuite(AddWikiPageName255CharacterChildPage1Test.class);
 		testSuite.addTestSuite(AddWikiPageName255CharacterChildPage2Test.class);
 		testSuite.addTestSuite(AddWikiPageName255CharacterChildPage3Test.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownWikiNodeTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

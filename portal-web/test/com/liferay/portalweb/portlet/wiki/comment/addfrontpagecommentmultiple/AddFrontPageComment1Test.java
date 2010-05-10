@@ -62,12 +62,11 @@ public class AddFrontPageComment1Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_36_postReplyBody0", RuntimeVariables.replace("T"));
 		selenium.type("_36_postReplyBody0",
 			RuntimeVariables.replace("This is a wiki page test1 comment1."));
 		selenium.keyPress("_36_postReplyBody0", RuntimeVariables.replace("\\48"));
 		selenium.keyPress("_36_postReplyBody0", RuntimeVariables.replace("\\8"));
-		selenium.clickAt("_36_postReplyButton0", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Reply']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

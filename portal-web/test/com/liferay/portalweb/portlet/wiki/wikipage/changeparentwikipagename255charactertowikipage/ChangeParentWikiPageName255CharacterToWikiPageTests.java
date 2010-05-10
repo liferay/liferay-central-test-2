@@ -37,7 +37,8 @@ public class ChangeParentWikiPageName255CharacterToWikiPageTests
 		testSuite.addTestSuite(AddWikiPageName255CharacterTest.class);
 		testSuite.addTestSuite(
 			ChangeParentWikiPageName255CharacterToWikiPageTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownWikiNodeTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

@@ -37,7 +37,8 @@ public class RevertChangeParentFrontPageChildPageToNoneTests extends BaseTests {
 		testSuite.addTestSuite(ChangeParentFrontPageChildPageToNoneTest.class);
 		testSuite.addTestSuite(
 			RevertChangeParentFrontPageChildPageToNoneTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownWikiNodeTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

@@ -34,7 +34,8 @@ public class LinkWikiPageToWikiPageTests extends BaseTests {
 		testSuite.addTestSuite(AddWikiPage1Test.class);
 		testSuite.addTestSuite(AddWikiPage2Test.class);
 		testSuite.addTestSuite(LinkWikiPageToWikiPageTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownWikiNodeTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

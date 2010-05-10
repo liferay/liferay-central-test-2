@@ -36,7 +36,8 @@ public class RevertChangeParentWikiPageToWikiPageTests extends BaseTests {
 		testSuite.addTestSuite(AddWikiPage2Test.class);
 		testSuite.addTestSuite(ChangeParentWikiPageToWikiPageTest.class);
 		testSuite.addTestSuite(RevertChangeParentWikiPageToWikiPageTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownWikiNodeTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

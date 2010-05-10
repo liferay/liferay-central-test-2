@@ -34,7 +34,8 @@ public class DeleteWikiPageName255CharacterTests extends BaseTests {
 		testSuite.addTestSuite(AddPortletWikiTest.class);
 		testSuite.addTestSuite(AddWikiPageName255CharacterTest.class);
 		testSuite.addTestSuite(DeleteWikiPageName255CharacterTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownWikiNodeTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

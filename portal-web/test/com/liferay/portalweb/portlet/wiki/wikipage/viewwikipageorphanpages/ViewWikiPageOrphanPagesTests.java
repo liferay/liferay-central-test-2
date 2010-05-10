@@ -37,7 +37,8 @@ public class ViewWikiPageOrphanPagesTests extends BaseTests {
 		testSuite.addTestSuite(ViewWikiPageOrphanOrphanPagesTest.class);
 		testSuite.addTestSuite(LinkWikiPageToWikiPageTest.class);
 		testSuite.addTestSuite(ViewWikiPageLinkOrphanPagesTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownWikiNodeTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

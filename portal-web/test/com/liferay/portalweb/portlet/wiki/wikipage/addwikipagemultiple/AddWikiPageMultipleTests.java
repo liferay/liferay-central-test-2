@@ -34,7 +34,8 @@ public class AddWikiPageMultipleTests extends BaseTests {
 		testSuite.addTestSuite(AddWikiPage1Test.class);
 		testSuite.addTestSuite(AddWikiPage2Test.class);
 		testSuite.addTestSuite(AddWikiPage3Test.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownWikiNodeTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

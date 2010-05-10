@@ -59,14 +59,39 @@
 	<td>This is a remove redirect test.</td>
 </tr>
 <tr>
-	<td>waitForVisible</td>
-	<td>//span[@class='aui-icon-search aui-icon']</td>
+	<td>clickAtAndWait</td>
+	<td>//input[@value='Publish']</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAtAndWait</td>
-	<td>//input[@value='Save']</td>
+	<td>waitForTextPresent</td>
+	<td>Your request processed successfully. </td>
 	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Your request processed successfully. </td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPartialText</td>
+	<td>//div/h1</td>
+	<td>Wiki Page Test</td>
+</tr>
+<tr>
+	<td>assertPartialText</td>
+	<td>//div/h1</td>
+	<td>Wiki Page Test</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//section/div/div/div/div[4]/div</td>
+	<td>This is a remove redirect test.</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//section/div/div/div/div[4]/div</td>
+	<td>This is a remove redirect test.</td>
 </tr>
 <tr>
 	<td>open</td>
