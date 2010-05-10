@@ -66,7 +66,6 @@ String newTitle = ParamUtil.get(request, "newTitle", StringPool.BLANK);
 				</aui:button-row>
 			</aui:fieldset>
 		</liferay-ui:section>
-
 		<liferay-ui:section>
 			<div class="portlet-msg-info">
 				<liferay-ui:message key="use-the-form-below-to-move-a-page-and-all-of-its-history-to-be-the-child-of-a-new-parent-page" />

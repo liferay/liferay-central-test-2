@@ -283,7 +283,6 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 					<aui:button name="publishBtn" value="<%= actionKey %>" onClick="<%= taglibOnClick %>" />
 				</c:otherwise>
 			</c:choose>
-
 		</liferay-ui:section>
 		<liferay-ui:section>
 			<%@ include file="/html/portlet/communities/export_pages_options.jspf" %>
