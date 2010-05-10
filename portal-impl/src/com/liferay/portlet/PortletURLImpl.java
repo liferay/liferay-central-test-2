@@ -638,7 +638,7 @@ public class PortletURLImpl
 		String ppauth = ParamUtil.getString(request, "p_p_auth");
 
 		String actualPortletAuthenticationToken = AuthTokenUtil.getToken(
-			request, _plid, _portletId);
+			_request, _plid, _portletId);
 
 		if (Validator.isNotNull(ppauth) &&
 			ppauth.equals(actualPortletAuthenticationToken)) {
@@ -651,7 +651,8 @@ public class PortletURLImpl
 			return;
 		}
 
-		Portlet portlet = (Portlet)request.getAttribute(WebKeys.RENDER_PORTLET);
+		Portlet portlet = (Portlet)_request.getAttribute(
+			WebKeys.RENDER_PORTLET);
 
 		if (portlet == null) {
 			return;
