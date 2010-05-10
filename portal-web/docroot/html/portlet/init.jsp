@@ -34,11 +34,11 @@ else if (resourceRequest != null) {
 	windowState = resourceRequest.getWindowState();
 	portletMode = resourceRequest.getPortletMode();
 
-	//currentURLObj = PortletURLUtil.getCurrent(resourceRequest, resourceResponse);
+	currentURLObj = PortletURLUtil.getCurrent(resourceRequest, resourceResponse);
 }
 
-//String currentURL = currentURLObj.toString();
-String currentURL = PortalUtil.getCurrentURL(request);
+String currentURL = currentURLObj.toString();
+//String currentURL = PortalUtil.getCurrentURL(request);
 %>
 
 <%@ include file="/html/portlet/init-ext.jsp" %>
