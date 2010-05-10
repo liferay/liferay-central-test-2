@@ -28,13 +28,13 @@ import javax.portlet.PortletRequest;
  */
 public class StructureDisplayTerms extends DisplayTerms {
 
-	public static final String GROUP_ID = "groupId";
+	public static final String DESCRIPTION = "description";
 
-	public static final String STRUCTURE_ID = "searchStructureId";
+	public static final String GROUP_ID = "groupId";
 
 	public static final String NAME = "name";
 
-	public static final String DESCRIPTION = "description";
+	public static final String STRUCTURE_ID = "searchStructureId";
 
 	public StructureDisplayTerms(PortletRequest portletRequest) {
 		super(portletRequest);
@@ -49,25 +49,25 @@ public class StructureDisplayTerms extends DisplayTerms {
 		description = ParamUtil.getString(portletRequest, DESCRIPTION);
 	}
 
-	public long getGroupId() {
-		return groupId;
+	public String getDescription() {
+		return description;
 	}
 
-	public String getStructureId() {
-		return structureId;
+	public long getGroupId() {
+		return groupId;
 	}
 
 	public String getName() {
 		return name;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getStructureId() {
+		return structureId;
 	}
 
-	protected long groupId;
-	protected String structureId;
-	protected String name;
 	protected String description;
+	protected long groupId;
+	protected String name;
+	protected String structureId;
 
 }

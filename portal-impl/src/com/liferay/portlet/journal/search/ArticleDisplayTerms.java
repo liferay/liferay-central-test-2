@@ -31,29 +31,29 @@ import javax.portlet.PortletRequest;
  */
 public class ArticleDisplayTerms extends DisplayTerms {
 
-	public static final String GROUP_ID = "groupId";
-
 	public static final String ARTICLE_ID = "searchArticleId";
-
-	public static final String VERSION = "version";
-
-	public static final String TITLE = "title";
-
-	public static final String DESCRIPTION = "description";
 
 	public static final String CONTENT = "content";
 
-	public static final String TYPE = "type";
-
-	public static final String STRUCTURE_ID = "structureId";
-
-	public static final String TEMPLATE_ID = "templateId";
+	public static final String DESCRIPTION = "description";
 
 	public static final String DISPLAY_DATE_GT = "displayDateGT";
 
 	public static final String DISPLAY_DATE_LT = "displayDateLT";
 
+	public static final String GROUP_ID = "groupId";
+
 	public static final String STATUS = "status";
+
+	public static final String STRUCTURE_ID = "structureId";
+
+	public static final String TEMPLATE_ID = "templateId";
+
+	public static final String TITLE = "title";
+
+	public static final String TYPE = "type";
+
+	public static final String VERSION = "version";
 
 	public ArticleDisplayTerms(PortletRequest portletRequest) {
 		super(portletRequest);
@@ -74,12 +74,48 @@ public class ArticleDisplayTerms extends DisplayTerms {
 		status = ParamUtil.getString(portletRequest, STATUS);
 	}
 
+	public String getArticleId() {
+		return articleId;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public Date getDisplayDateGT() {
+		return displayDateGT;
+	}
+
+	public Date getDisplayDateLT() {
+		return displayDateLT;
+	}
+
 	public long getGroupId() {
 		return groupId;
 	}
 
-	public String getArticleId() {
-		return articleId;
+	public String getStatus() {
+		return status;
+	}
+
+	public String getStructureId() {
+		return structureId;
+	}
+
+	public String getTemplateId() {
+		return templateId;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public String getType() {
+		return type;
 	}
 
 	public double getVersion() {
@@ -95,65 +131,29 @@ public class ArticleDisplayTerms extends DisplayTerms {
 		}
 	}
 
-	public String getTitle() {
-		return title;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public String getContent() {
-		return content;
-	}
-
-	public String getType() {
-		return type;
-	}
-
-	public String getStructureId() {
-		return structureId;
-	}
-
-	public String getTemplateId() {
-		return templateId;
-	}
-
-	public Date getDisplayDateGT() {
-		return displayDateGT;
-	}
-
 	public void setDisplayDateGT(Date displayDateGT) {
 		this.displayDateGT = displayDateGT;
-	}
-
-	public Date getDisplayDateLT() {
-		return displayDateLT;
 	}
 
 	public void setDisplayDateLT(Date displayDateLT) {
 		this.displayDateLT = displayDateLT;
 	}
 
-	public String getStatus() {
-		return status;
-	}
-
 	public void setStatus(String status) {
 		this.status = status;
 	}
 
-	protected long groupId;
 	protected String articleId;
-	protected double version;
-	protected String title;
-	protected String description;
 	protected String content;
-	protected String type;
-	protected String structureId;
-	protected String templateId;
+	protected String description;
 	protected Date displayDateGT;
 	protected Date displayDateLT;
+	protected long groupId;
 	protected String status;
+	protected String structureId;
+	protected String templateId;
+	protected String title;
+	protected String type;
+	protected double version;
 
 }

@@ -50,37 +50,13 @@ public class ArticleSearchTerms extends ArticleDisplayTerms {
 		status = ParamUtil.getString(portletRequest, STATUS);
 	}
 
-	public void setArticleId(String articleId) {
-		this.articleId = articleId;
-	}
-
-	public void setGroupId(long groupId) {
-		this.groupId = groupId;
-	}
-
-	public Double getVersionObj() {
-		if (version == 0) {
-			return null;
+	public Date getReviewDate() {
+		if (status.equals("review")) {
+			return new Date();
 		}
 		else {
-			return new Double(version);
+			return null;
 		}
-	}
-
-	public void setVersion(double version) {
-		this.version = version;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
-	public void setStructureId(String structureId) {
-		this.structureId = structureId;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
 	}
 
 	public int getStatusCode() {
@@ -101,13 +77,37 @@ public class ArticleSearchTerms extends ArticleDisplayTerms {
 		}
 	}
 
-	public Date getReviewDate() {
-		if (status.equals("review")) {
-			return new Date();
-		}
-		else {
+	public Double getVersionObj() {
+		if (version == 0) {
 			return null;
 		}
+		else {
+			return new Double(version);
+		}
+	}
+
+	public void setArticleId(String articleId) {
+		this.articleId = articleId;
+	}
+
+	public void setGroupId(long groupId) {
+		this.groupId = groupId;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public void setStructureId(String structureId) {
+		this.structureId = structureId;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public void setVersion(double version) {
+		this.version = version;
 	}
 
 }

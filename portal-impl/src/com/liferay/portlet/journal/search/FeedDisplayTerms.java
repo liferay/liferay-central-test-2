@@ -28,13 +28,13 @@ import javax.portlet.PortletRequest;
  */
 public class FeedDisplayTerms extends DisplayTerms {
 
-	public static final String GROUP_ID = "groupId";
+	public static final String DESCRIPTION = "description";
 
 	public static final String FEED_ID = "searchFeedId";
 
-	public static final String NAME = "name";
+	public static final String GROUP_ID = "groupId";
 
-	public static final String DESCRIPTION = "description";
+	public static final String NAME = "name";
 
 	public FeedDisplayTerms(PortletRequest portletRequest) {
 		super(portletRequest);
@@ -49,25 +49,25 @@ public class FeedDisplayTerms extends DisplayTerms {
 		description = ParamUtil.getString(portletRequest, DESCRIPTION);
 	}
 
-	public long getGroupId() {
-		return groupId;
+	public String getDescription() {
+		return description;
 	}
 
 	public String getFeedId() {
 		return feedId;
 	}
 
+	public long getGroupId() {
+		return groupId;
+	}
+
 	public String getName() {
 		return name;
 	}
 
-	public String getDescription() {
-		return description;
-	}
-
-	protected long groupId;
-	protected String feedId;
-	protected String name;
 	protected String description;
+	protected String feedId;
+	protected long groupId;
+	protected String name;
 
 }

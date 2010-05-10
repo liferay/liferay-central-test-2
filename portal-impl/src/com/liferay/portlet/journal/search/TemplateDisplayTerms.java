@@ -28,15 +28,15 @@ import javax.portlet.PortletRequest;
  */
 public class TemplateDisplayTerms extends DisplayTerms {
 
+	public static final String DESCRIPTION = "description";
+
 	public static final String GROUP_ID = "groupId";
-
-	public static final String TEMPLATE_ID = "searchTemplateId";
-
-	public static final String STRUCTURE_ID = "structureId";
 
 	public static final String NAME = "name";
 
-	public static final String DESCRIPTION = "description";
+	public static final String STRUCTURE_ID = "structureId";
+
+	public static final String TEMPLATE_ID = "searchTemplateId";
 
 	public TemplateDisplayTerms(PortletRequest portletRequest) {
 		super(portletRequest);
@@ -52,30 +52,30 @@ public class TemplateDisplayTerms extends DisplayTerms {
 		description = ParamUtil.getString(portletRequest, DESCRIPTION);
 	}
 
+	public String getDescription() {
+		return description;
+	}
+
 	public long getGroupId() {
 		return groupId;
-	}
-
-	public String getTemplateId() {
-		return templateId;
-	}
-
-	public String getStructureId() {
-		return structureId;
 	}
 
 	public String getName() {
 		return name;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getStructureId() {
+		return structureId;
 	}
 
-	protected long groupId;
-	protected String templateId;
-	protected String structureId;
-	protected String name;
+	public String getTemplateId() {
+		return templateId;
+	}
+
 	protected String description;
+	protected long groupId;
+	protected String name;
+	protected String structureId;
+	protected String templateId;
 
 }

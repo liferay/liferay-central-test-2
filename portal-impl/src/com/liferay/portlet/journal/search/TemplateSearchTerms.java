@@ -42,16 +42,16 @@ public class TemplateSearchTerms extends TemplateDisplayTerms {
 		description = DAOParamUtil.getLike(portletRequest, DESCRIPTION);
 	}
 
+	public String getStructureIdComparator() {
+		return structureIdComparator;
+	}
+
 	public void setGroupId(long groupId) {
 		this.groupId = groupId;
 	}
 
 	public void setStructureId(String structureId) {
 		this.structureId = structureId;
-	}
-
-	public String getStructureIdComparator() {
-		return structureIdComparator;
 	}
 
 	public void setStructureIdComparator(String structureIdComparator) {
