@@ -117,7 +117,7 @@ boolean quote = false;
 	</aui:fieldset>
 
 	<aui:button-row>
-		<aui:button type="submit" value="OK" />
+		<aui:button type="submit" value="ok" />
 
 		<aui:button onClick="<%= redirect %>" type="cancel" />
 	</aui:button-row>
