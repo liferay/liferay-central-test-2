@@ -356,6 +356,7 @@ public class LangBuilder {
 			translationId.equals("en_cs") ||
 			translationId.equals("en_fi") ||
 			translationId.equals("en_gl") ||
+			translationId.equals("en_iw") ||
 			translationId.equals("en_hi") ||
 			translationId.equals("en_hu") ||
 			translationId.equals("en_nb") ||
@@ -369,7 +370,7 @@ public class LangBuilder {
 			translationId.equals("en_et")) {
 
 			// Automatic translator does not support Arabic, Basque, Bulgarian,
-			// Catalan, Czech, Finnish, Galician, Hindi, Hungarian,
+			// Catalan, Czech, Finnish, Galician, Hebrew, Hindi, Hungarian,
 			// Norwegian Bokmål,Persian, Polish, Russian, Slovak, Swedish,
 			// Turkish, or Vietnamese
 
