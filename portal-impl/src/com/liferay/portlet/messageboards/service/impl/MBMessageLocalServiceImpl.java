@@ -2029,16 +2029,12 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			layoutFullURL + Portal.FRIENDLY_URL_SEPARATOR + "blogs/" +
 				entry.getUrlTitle();
 
-		User blogsUser = userPersistence.findByPrimaryKey(entry.getUserId());
-		User commentsUser = userPersistence.findByPrimaryKey(userId);
+		User user = userPersistence.findByPrimaryKey(userId);
 
 		String fromName = PrefsPropsUtil.getString(
 			companyId, PropsKeys.ADMIN_EMAIL_FROM_NAME);
 		String fromAddress = PrefsPropsUtil.getString(
 			companyId, PropsKeys.ADMIN_EMAIL_FROM_ADDRESS);
-
-		String toName = blogsUser.getFullName();
-		String toAddress = blogsUser.getEmailAddress();
 
 		String subject = PrefsPropsUtil.getContent(
 			companyId, PropsKeys.BLOGS_EMAIL_COMMENTS_ADDED_SUBJECT);
@@ -2053,19 +2049,15 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				"[$BLOGS_COMMENTS_USER_NAME$]",
 				"[$BLOGS_ENTRY_URL$]",
 				"[$FROM_ADDRESS$]",
-				"[$FROM_NAME$]",
-				"[$TO_ADDRESS$]",
-				"[$TO_NAME$]"
+				"[$FROM_NAME$]"
 			},
 			new String[] {
 				message.getBody(),
-				commentsUser.getEmailAddress(),
-				commentsUser.getFullName(),
+				user.getEmailAddress(),
+				user.getFullName(),
 				blogsEntryURL,
 				fromAddress,
-				fromName,
-				toAddress,
-				toName
+				fromName
 			});
 
 		body = StringUtil.replace(
@@ -2076,29 +2068,93 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				"[$BLOGS_COMMENTS_USER_NAME$]",
 				"[$BLOGS_ENTRY_URL$]",
 				"[$FROM_ADDRESS$]",
-				"[$FROM_NAME$]",
-				"[$TO_ADDRESS$]",
-				"[$TO_NAME$]"
+				"[$FROM_NAME$]"
 			},
 			new String[] {
 				message.getBody(),
-				commentsUser.getEmailAddress(),
-				commentsUser.getFullName(),
+				user.getEmailAddress(),
+				user.getFullName(),
 				blogsEntryURL,
 				fromAddress,
-				fromName,
-				toAddress,
-				toName
+				fromName
 			});
 
-		InternetAddress from = new InternetAddress(fromAddress, fromName);
+		Set<Long> sent = new HashSet<Long>();
 
-		InternetAddress to = new InternetAddress(toAddress, toName);
+		List<MBMessage> messages = mbMessagePersistence.findByThreadId(
+			message.getThreadId());
 
-		MailMessage mailMessage = new MailMessage(
-			from, to, subject, body, true);
+		for (MBMessage curMessage : messages) {
+			long curMessageUserId = curMessage.getUserId();
 
-		mailService.sendEmail(mailMessage);
+			if (curMessageUserId == userId) {
+				continue;
+			}
+
+			if (sent.contains(curMessageUserId)) {
+				if (_log.isDebugEnabled()) {
+					_log.debug(
+						"Do not send a duplicate email to user " +
+							curMessageUserId);
+				}
+
+				continue;
+			}
+			else {
+				if (_log.isDebugEnabled()) {
+					_log.debug(
+						"Add user " + curMessageUserId +
+							" to the list of users who have received an email");
+				}
+
+				sent.add(curMessageUserId);
+			}
+
+			User curMessageUser = null;
+
+			try {
+				curMessageUser = userLocalService.getUserById(curMessageUserId);
+			}
+			catch (NoSuchUserException nsue) {
+				continue;
+			}
+
+			if (!curMessageUser.isActive()) {
+				continue;
+			}
+
+			InternetAddress from = new InternetAddress(fromAddress, fromName);
+
+			InternetAddress to = new InternetAddress(
+				curMessageUser.getEmailAddress(), curMessageUser.getFullName());
+
+			String curSubject = StringUtil.replace(
+				subject,
+				new String[] {
+					"[$TO_ADDRESS$]",
+					"[$TO_NAME$]"
+				},
+				new String[] {
+					curMessageUser.getFullName(),
+					curMessageUser.getEmailAddress()
+				});
+
+			String curBody = StringUtil.replace(
+				body,
+				new String[] {
+					"[$TO_ADDRESS$]",
+					"[$TO_NAME$]"
+				},
+				new String[] {
+					curMessageUser.getFullName(),
+					curMessageUser.getEmailAddress()
+				});
+
+			MailMessage mailMessage = new MailMessage(
+				from, to, curSubject, curBody, true);
+
+			mailService.sendEmail(mailMessage);
+		}
 	}
 
 	protected void updatePriorities(long threadId, double priority)
