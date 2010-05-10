@@ -58,5 +58,11 @@ public interface WikiPage extends WikiPageModel {
 
 	public boolean isApproved();
 
+	public boolean isDraft();
+
+	public boolean isExpired();
+
+	public boolean isPending();
+
 	public void setAttachmentsDir(java.lang.String attachmentsDir);
 }

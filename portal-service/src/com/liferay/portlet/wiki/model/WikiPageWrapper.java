@@ -349,6 +349,18 @@ public class WikiPageWrapper implements WikiPage {
 		return _wikiPage.isApproved();
 	}
 
+	public boolean isDraft() {
+		return _wikiPage.isDraft();
+	}
+
+	public boolean isExpired() {
+		return _wikiPage.isExpired();
+	}
+
+	public boolean isPending() {
+		return _wikiPage.isPending();
+	}
+
 	public void setAttachmentsDir(java.lang.String attachmentsDir) {
 		_wikiPage.setAttachmentsDir(attachmentsDir);
 	}
