@@ -485,7 +485,12 @@
 		<property name="minAge" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="checkSyntax" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 		<property name="allowDictionaryWords" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="minAlphaNumeric" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="minLength" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="minLowerCase" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="minNumbers" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="minSymbols" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="minUpperCase" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="history" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 		<property name="historyCount" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="expireable" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />

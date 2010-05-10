@@ -121,9 +121,29 @@ public interface PasswordPolicyModel extends BaseModel<PasswordPolicy> {
 
 	public void setAllowDictionaryWords(boolean allowDictionaryWords);
 
+	public int getMinAlphaNumeric();
+
+	public void setMinAlphaNumeric(int minAlphaNumeric);
+
 	public int getMinLength();
 
 	public void setMinLength(int minLength);
+
+	public int getMinLowerCase();
+
+	public void setMinLowerCase(int minLowerCase);
+
+	public int getMinNumbers();
+
+	public void setMinNumbers(int minNumbers);
+
+	public int getMinSymbols();
+
+	public void setMinSymbols(int minSymbols);
+
+	public int getMinUpperCase();
+
+	public void setMinUpperCase(int minUpperCase);
 
 	public boolean getHistory();
 

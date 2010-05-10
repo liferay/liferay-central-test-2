@@ -126,17 +126,20 @@ public class PasswordPolicyLocalServiceWrapper
 		long userId, boolean defaultPolicy, java.lang.String name,
 		java.lang.String description, boolean changeable,
 		boolean changeRequired, long minAge, boolean checkSyntax,
-		boolean allowDictionaryWords, int minLength, boolean history,
-		int historyCount, boolean expireable, long maxAge, long warningTime,
-		int graceLimit, boolean lockout, int maxFailure, long lockoutDuration,
-		long resetFailureCount, long resetTicketMaxAge)
+		boolean allowDictionaryWords, int minAlphaNumeric, int minLength,
+		int minLowerCase, int minNumbers, int minSymbols, int minUpperCase,
+		boolean history, int historyCount, boolean expireable, long maxAge,
+		long warningTime, int graceLimit, boolean lockout, int maxFailure,
+		long lockoutDuration, long resetFailureCount, long resetTicketMaxAge)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _passwordPolicyLocalService.addPasswordPolicy(userId,
 			defaultPolicy, name, description, changeable, changeRequired,
-			minAge, checkSyntax, allowDictionaryWords, minLength, history,
-			historyCount, expireable, maxAge, warningTime, graceLimit, lockout,
-			maxFailure, lockoutDuration, resetFailureCount, resetTicketMaxAge);
+			minAge, checkSyntax, allowDictionaryWords, minAlphaNumeric,
+			minLength, minLowerCase, minNumbers, minSymbols, minUpperCase,
+			history, historyCount, expireable, maxAge, warningTime, graceLimit,
+			lockout, maxFailure, lockoutDuration, resetFailureCount,
+			resetTicketMaxAge);
 	}
 
 	public void checkDefaultPasswordPolicy(long companyId)
@@ -192,16 +195,18 @@ public class PasswordPolicyLocalServiceWrapper
 		long passwordPolicyId, java.lang.String name,
 		java.lang.String description, boolean changeable,
 		boolean changeRequired, long minAge, boolean checkSyntax,
-		boolean allowDictionaryWords, int minLength, boolean history,
-		int historyCount, boolean expireable, long maxAge, long warningTime,
-		int graceLimit, boolean lockout, int maxFailure, long lockoutDuration,
-		long resetFailureCount, long resetTicketMaxAge)
+		boolean allowDictionaryWords, int minAlphaNumeric, int minLength,
+		int minLowerCase, int minNumbers, int minSymbols, int minUpperCase,
+		boolean history, int historyCount, boolean expireable, long maxAge,
+		long warningTime, int graceLimit, boolean lockout, int maxFailure,
+		long lockoutDuration, long resetFailureCount, long resetTicketMaxAge)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _passwordPolicyLocalService.updatePasswordPolicy(passwordPolicyId,
 			name, description, changeable, changeRequired, minAge, checkSyntax,
-			allowDictionaryWords, minLength, history, historyCount, expireable,
-			maxAge, warningTime, graceLimit, lockout, maxFailure,
+			allowDictionaryWords, minAlphaNumeric, minLength, minLowerCase,
+			minNumbers, minSymbols, minUpperCase, history, historyCount,
+			expireable, maxAge, warningTime, graceLimit, lockout, maxFailure,
 			lockoutDuration, resetFailureCount, resetTicketMaxAge);
 	}
 

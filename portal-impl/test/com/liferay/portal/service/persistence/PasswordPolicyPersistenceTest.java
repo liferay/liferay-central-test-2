@@ -80,7 +80,12 @@ public class PasswordPolicyPersistenceTest extends BasePersistenceTestCase {
 		newPasswordPolicy.setMinAge(nextLong());
 		newPasswordPolicy.setCheckSyntax(randomBoolean());
 		newPasswordPolicy.setAllowDictionaryWords(randomBoolean());
+		newPasswordPolicy.setMinAlphaNumeric(nextInt());
 		newPasswordPolicy.setMinLength(nextInt());
+		newPasswordPolicy.setMinLowerCase(nextInt());
+		newPasswordPolicy.setMinNumbers(nextInt());
+		newPasswordPolicy.setMinSymbols(nextInt());
+		newPasswordPolicy.setMinUpperCase(nextInt());
 		newPasswordPolicy.setHistory(randomBoolean());
 		newPasswordPolicy.setHistoryCount(nextInt());
 		newPasswordPolicy.setExpireable(randomBoolean());
@@ -128,8 +133,18 @@ public class PasswordPolicyPersistenceTest extends BasePersistenceTestCase {
 			newPasswordPolicy.getCheckSyntax());
 		assertEquals(existingPasswordPolicy.getAllowDictionaryWords(),
 			newPasswordPolicy.getAllowDictionaryWords());
+		assertEquals(existingPasswordPolicy.getMinAlphaNumeric(),
+			newPasswordPolicy.getMinAlphaNumeric());
 		assertEquals(existingPasswordPolicy.getMinLength(),
 			newPasswordPolicy.getMinLength());
+		assertEquals(existingPasswordPolicy.getMinLowerCase(),
+			newPasswordPolicy.getMinLowerCase());
+		assertEquals(existingPasswordPolicy.getMinNumbers(),
+			newPasswordPolicy.getMinNumbers());
+		assertEquals(existingPasswordPolicy.getMinSymbols(),
+			newPasswordPolicy.getMinSymbols());
+		assertEquals(existingPasswordPolicy.getMinUpperCase(),
+			newPasswordPolicy.getMinUpperCase());
 		assertEquals(existingPasswordPolicy.getHistory(),
 			newPasswordPolicy.getHistory());
 		assertEquals(existingPasswordPolicy.getHistoryCount(),
@@ -241,7 +256,12 @@ public class PasswordPolicyPersistenceTest extends BasePersistenceTestCase {
 		passwordPolicy.setMinAge(nextLong());
 		passwordPolicy.setCheckSyntax(randomBoolean());
 		passwordPolicy.setAllowDictionaryWords(randomBoolean());
+		passwordPolicy.setMinAlphaNumeric(nextInt());
 		passwordPolicy.setMinLength(nextInt());
+		passwordPolicy.setMinLowerCase(nextInt());
+		passwordPolicy.setMinNumbers(nextInt());
+		passwordPolicy.setMinSymbols(nextInt());
+		passwordPolicy.setMinUpperCase(nextInt());
 		passwordPolicy.setHistory(randomBoolean());
 		passwordPolicy.setHistoryCount(nextInt());
 		passwordPolicy.setExpireable(randomBoolean());

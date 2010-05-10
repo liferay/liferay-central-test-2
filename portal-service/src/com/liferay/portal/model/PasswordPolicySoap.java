@@ -55,7 +55,12 @@ public class PasswordPolicySoap implements Serializable {
 		soapModel.setMinAge(model.getMinAge());
 		soapModel.setCheckSyntax(model.getCheckSyntax());
 		soapModel.setAllowDictionaryWords(model.getAllowDictionaryWords());
+		soapModel.setMinAlphaNumeric(model.getMinAlphaNumeric());
 		soapModel.setMinLength(model.getMinLength());
+		soapModel.setMinLowerCase(model.getMinLowerCase());
+		soapModel.setMinNumbers(model.getMinNumbers());
+		soapModel.setMinSymbols(model.getMinSymbols());
+		soapModel.setMinUpperCase(model.getMinUpperCase());
 		soapModel.setHistory(model.getHistory());
 		soapModel.setHistoryCount(model.getHistoryCount());
 		soapModel.setExpireable(model.getExpireable());
@@ -252,12 +257,52 @@ public class PasswordPolicySoap implements Serializable {
 		_allowDictionaryWords = allowDictionaryWords;
 	}
 
+	public int getMinAlphaNumeric() {
+		return _minAlphaNumeric;
+	}
+
+	public void setMinAlphaNumeric(int minAlphaNumeric) {
+		_minAlphaNumeric = minAlphaNumeric;
+	}
+
 	public int getMinLength() {
 		return _minLength;
 	}
 
 	public void setMinLength(int minLength) {
 		_minLength = minLength;
+	}
+
+	public int getMinLowerCase() {
+		return _minLowerCase;
+	}
+
+	public void setMinLowerCase(int minLowerCase) {
+		_minLowerCase = minLowerCase;
+	}
+
+	public int getMinNumbers() {
+		return _minNumbers;
+	}
+
+	public void setMinNumbers(int minNumbers) {
+		_minNumbers = minNumbers;
+	}
+
+	public int getMinSymbols() {
+		return _minSymbols;
+	}
+
+	public void setMinSymbols(int minSymbols) {
+		_minSymbols = minSymbols;
+	}
+
+	public int getMinUpperCase() {
+		return _minUpperCase;
+	}
+
+	public void setMinUpperCase(int minUpperCase) {
+		_minUpperCase = minUpperCase;
 	}
 
 	public boolean getHistory() {
@@ -386,7 +431,12 @@ public class PasswordPolicySoap implements Serializable {
 	private long _minAge;
 	private boolean _checkSyntax;
 	private boolean _allowDictionaryWords;
+	private int _minAlphaNumeric;
 	private int _minLength;
+	private int _minLowerCase;
+	private int _minNumbers;
+	private int _minSymbols;
+	private int _minUpperCase;
 	private boolean _history;
 	private int _historyCount;
 	private boolean _expireable;

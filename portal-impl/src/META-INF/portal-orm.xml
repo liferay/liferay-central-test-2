@@ -446,7 +446,12 @@
 			<basic name="minAge" />
 			<basic name="checkSyntax" />
 			<basic name="allowDictionaryWords" />
+			<basic name="minAlphaNumeric" />
 			<basic name="minLength" />
+			<basic name="minLowerCase" />
+			<basic name="minNumbers" />
+			<basic name="minSymbols" />
+			<basic name="minUpperCase" />
 			<basic name="history" />
 			<basic name="historyCount" />
 			<basic name="expireable" />

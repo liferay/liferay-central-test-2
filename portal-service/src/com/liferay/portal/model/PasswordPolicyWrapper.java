@@ -185,12 +185,52 @@ public class PasswordPolicyWrapper implements PasswordPolicy {
 		_passwordPolicy.setAllowDictionaryWords(allowDictionaryWords);
 	}
 
+	public int getMinAlphaNumeric() {
+		return _passwordPolicy.getMinAlphaNumeric();
+	}
+
+	public void setMinAlphaNumeric(int minAlphaNumeric) {
+		_passwordPolicy.setMinAlphaNumeric(minAlphaNumeric);
+	}
+
 	public int getMinLength() {
 		return _passwordPolicy.getMinLength();
 	}
 
 	public void setMinLength(int minLength) {
 		_passwordPolicy.setMinLength(minLength);
+	}
+
+	public int getMinLowerCase() {
+		return _passwordPolicy.getMinLowerCase();
+	}
+
+	public void setMinLowerCase(int minLowerCase) {
+		_passwordPolicy.setMinLowerCase(minLowerCase);
+	}
+
+	public int getMinNumbers() {
+		return _passwordPolicy.getMinNumbers();
+	}
+
+	public void setMinNumbers(int minNumbers) {
+		_passwordPolicy.setMinNumbers(minNumbers);
+	}
+
+	public int getMinSymbols() {
+		return _passwordPolicy.getMinSymbols();
+	}
+
+	public void setMinSymbols(int minSymbols) {
+		_passwordPolicy.setMinSymbols(minSymbols);
+	}
+
+	public int getMinUpperCase() {
+		return _passwordPolicy.getMinUpperCase();
+	}
+
+	public void setMinUpperCase(int minUpperCase) {
+		_passwordPolicy.setMinUpperCase(minUpperCase);
 	}
 
 	public boolean getHistory() {

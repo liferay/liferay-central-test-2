@@ -73,7 +73,12 @@ public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy> {
 			{ "minAge", new Integer(Types.BIGINT) },
 			{ "checkSyntax", new Integer(Types.BOOLEAN) },
 			{ "allowDictionaryWords", new Integer(Types.BOOLEAN) },
+			{ "minAlphaNumeric", new Integer(Types.INTEGER) },
 			{ "minLength", new Integer(Types.INTEGER) },
+			{ "minLowerCase", new Integer(Types.INTEGER) },
+			{ "minNumbers", new Integer(Types.INTEGER) },
+			{ "minSymbols", new Integer(Types.INTEGER) },
+			{ "minUpperCase", new Integer(Types.INTEGER) },
 			{ "history", new Integer(Types.BOOLEAN) },
 			{ "historyCount", new Integer(Types.INTEGER) },
 			{ "expireable", new Integer(Types.BOOLEAN) },
@@ -87,7 +92,7 @@ public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy> {
 			{ "resetFailureCount", new Integer(Types.BIGINT) },
 			{ "resetTicketMaxAge", new Integer(Types.BIGINT) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table PasswordPolicy (passwordPolicyId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,defaultPolicy BOOLEAN,name VARCHAR(75) null,description STRING null,changeable BOOLEAN,changeRequired BOOLEAN,minAge LONG,checkSyntax BOOLEAN,allowDictionaryWords BOOLEAN,minLength INTEGER,history BOOLEAN,historyCount INTEGER,expireable BOOLEAN,maxAge LONG,warningTime LONG,graceLimit INTEGER,lockout BOOLEAN,maxFailure INTEGER,lockoutDuration LONG,requireUnlock BOOLEAN,resetFailureCount LONG,resetTicketMaxAge LONG)";
+	public static final String TABLE_SQL_CREATE = "create table PasswordPolicy (passwordPolicyId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,defaultPolicy BOOLEAN,name VARCHAR(75) null,description STRING null,changeable BOOLEAN,changeRequired BOOLEAN,minAge LONG,checkSyntax BOOLEAN,allowDictionaryWords BOOLEAN,minAlphaNumeric INTEGER,minLength INTEGER,minLowerCase INTEGER,minNumbers INTEGER,minSymbols INTEGER,minUpperCase INTEGER,history BOOLEAN,historyCount INTEGER,expireable BOOLEAN,maxAge LONG,warningTime LONG,graceLimit INTEGER,lockout BOOLEAN,maxFailure INTEGER,lockoutDuration LONG,requireUnlock BOOLEAN,resetFailureCount LONG,resetTicketMaxAge LONG)";
 	public static final String TABLE_SQL_DROP = "drop table PasswordPolicy";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -116,7 +121,12 @@ public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy> {
 		model.setMinAge(soapModel.getMinAge());
 		model.setCheckSyntax(soapModel.getCheckSyntax());
 		model.setAllowDictionaryWords(soapModel.getAllowDictionaryWords());
+		model.setMinAlphaNumeric(soapModel.getMinAlphaNumeric());
 		model.setMinLength(soapModel.getMinLength());
+		model.setMinLowerCase(soapModel.getMinLowerCase());
+		model.setMinNumbers(soapModel.getMinNumbers());
+		model.setMinSymbols(soapModel.getMinSymbols());
+		model.setMinUpperCase(soapModel.getMinUpperCase());
 		model.setHistory(soapModel.getHistory());
 		model.setHistoryCount(soapModel.getHistoryCount());
 		model.setExpireable(soapModel.getExpireable());
@@ -344,12 +354,52 @@ public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy> {
 		_allowDictionaryWords = allowDictionaryWords;
 	}
 
+	public int getMinAlphaNumeric() {
+		return _minAlphaNumeric;
+	}
+
+	public void setMinAlphaNumeric(int minAlphaNumeric) {
+		_minAlphaNumeric = minAlphaNumeric;
+	}
+
 	public int getMinLength() {
 		return _minLength;
 	}
 
 	public void setMinLength(int minLength) {
 		_minLength = minLength;
+	}
+
+	public int getMinLowerCase() {
+		return _minLowerCase;
+	}
+
+	public void setMinLowerCase(int minLowerCase) {
+		_minLowerCase = minLowerCase;
+	}
+
+	public int getMinNumbers() {
+		return _minNumbers;
+	}
+
+	public void setMinNumbers(int minNumbers) {
+		_minNumbers = minNumbers;
+	}
+
+	public int getMinSymbols() {
+		return _minSymbols;
+	}
+
+	public void setMinSymbols(int minSymbols) {
+		_minSymbols = minSymbols;
+	}
+
+	public int getMinUpperCase() {
+		return _minUpperCase;
+	}
+
+	public void setMinUpperCase(int minUpperCase) {
+		_minUpperCase = minUpperCase;
 	}
 
 	public boolean getHistory() {
@@ -505,7 +555,12 @@ public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy> {
 		clone.setMinAge(getMinAge());
 		clone.setCheckSyntax(getCheckSyntax());
 		clone.setAllowDictionaryWords(getAllowDictionaryWords());
+		clone.setMinAlphaNumeric(getMinAlphaNumeric());
 		clone.setMinLength(getMinLength());
+		clone.setMinLowerCase(getMinLowerCase());
+		clone.setMinNumbers(getMinNumbers());
+		clone.setMinSymbols(getMinSymbols());
+		clone.setMinUpperCase(getMinUpperCase());
 		clone.setHistory(getHistory());
 		clone.setHistoryCount(getHistoryCount());
 		clone.setExpireable(getExpireable());
@@ -565,7 +620,7 @@ public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy> {
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(55);
+		StringBundler sb = new StringBundler(65);
 
 		sb.append("{passwordPolicyId=");
 		sb.append(getPasswordPolicyId());
@@ -595,8 +650,18 @@ public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy> {
 		sb.append(getCheckSyntax());
 		sb.append(", allowDictionaryWords=");
 		sb.append(getAllowDictionaryWords());
+		sb.append(", minAlphaNumeric=");
+		sb.append(getMinAlphaNumeric());
 		sb.append(", minLength=");
 		sb.append(getMinLength());
+		sb.append(", minLowerCase=");
+		sb.append(getMinLowerCase());
+		sb.append(", minNumbers=");
+		sb.append(getMinNumbers());
+		sb.append(", minSymbols=");
+		sb.append(getMinSymbols());
+		sb.append(", minUpperCase=");
+		sb.append(getMinUpperCase());
 		sb.append(", history=");
 		sb.append(getHistory());
 		sb.append(", historyCount=");
@@ -627,7 +692,7 @@ public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy> {
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(85);
+		StringBundler sb = new StringBundler(100);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portal.model.PasswordPolicy");
@@ -690,8 +755,28 @@ public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy> {
 		sb.append(getAllowDictionaryWords());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>minAlphaNumeric</column-name><column-value><![CDATA[");
+		sb.append(getMinAlphaNumeric());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>minLength</column-name><column-value><![CDATA[");
 		sb.append(getMinLength());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>minLowerCase</column-name><column-value><![CDATA[");
+		sb.append(getMinLowerCase());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>minNumbers</column-name><column-value><![CDATA[");
+		sb.append(getMinNumbers());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>minSymbols</column-name><column-value><![CDATA[");
+		sb.append(getMinSymbols());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>minUpperCase</column-name><column-value><![CDATA[");
+		sb.append(getMinUpperCase());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>history</column-name><column-value><![CDATA[");
@@ -767,7 +852,12 @@ public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy> {
 	private long _minAge;
 	private boolean _checkSyntax;
 	private boolean _allowDictionaryWords;
+	private int _minAlphaNumeric;
 	private int _minLength;
+	private int _minLowerCase;
+	private int _minNumbers;
+	private int _minSymbols;
+	private int _minUpperCase;
 	private boolean _history;
 	private int _historyCount;
 	private boolean _expireable;

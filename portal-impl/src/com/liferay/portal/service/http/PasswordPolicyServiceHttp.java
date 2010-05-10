@@ -66,10 +66,11 @@ public class PasswordPolicyServiceHttp {
 		HttpPrincipal httpPrincipal, java.lang.String name,
 		java.lang.String description, boolean changeable,
 		boolean changeRequired, long minAge, boolean checkSyntax,
-		boolean allowDictionaryWords, int minLength, boolean history,
-		int historyCount, boolean expireable, long maxAge, long warningTime,
-		int graceLimit, boolean lockout, int maxFailure, long lockoutDuration,
-		long resetFailureCount, long resetTicketMaxAge)
+		boolean allowDictionaryWords, int minAlphaNumeric, int minLength,
+		int minLowerCase, int minNumbers, int minSymbols, int minUpperCase,
+		boolean history, int historyCount, boolean expireable, long maxAge,
+		long warningTime, int graceLimit, boolean lockout, int maxFailure,
+		long lockoutDuration, long resetFailureCount, long resetTicketMaxAge)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
@@ -95,29 +96,39 @@ public class PasswordPolicyServiceHttp {
 
 			Object paramObj6 = new BooleanWrapper(allowDictionaryWords);
 
-			Object paramObj7 = new IntegerWrapper(minLength);
+			Object paramObj7 = new IntegerWrapper(minAlphaNumeric);
 
-			Object paramObj8 = new BooleanWrapper(history);
+			Object paramObj8 = new IntegerWrapper(minLength);
 
-			Object paramObj9 = new IntegerWrapper(historyCount);
+			Object paramObj9 = new IntegerWrapper(minLowerCase);
 
-			Object paramObj10 = new BooleanWrapper(expireable);
+			Object paramObj10 = new IntegerWrapper(minNumbers);
 
-			Object paramObj11 = new LongWrapper(maxAge);
+			Object paramObj11 = new IntegerWrapper(minSymbols);
 
-			Object paramObj12 = new LongWrapper(warningTime);
+			Object paramObj12 = new IntegerWrapper(minUpperCase);
 
-			Object paramObj13 = new IntegerWrapper(graceLimit);
+			Object paramObj13 = new BooleanWrapper(history);
 
-			Object paramObj14 = new BooleanWrapper(lockout);
+			Object paramObj14 = new IntegerWrapper(historyCount);
 
-			Object paramObj15 = new IntegerWrapper(maxFailure);
+			Object paramObj15 = new BooleanWrapper(expireable);
 
-			Object paramObj16 = new LongWrapper(lockoutDuration);
+			Object paramObj16 = new LongWrapper(maxAge);
 
-			Object paramObj17 = new LongWrapper(resetFailureCount);
+			Object paramObj17 = new LongWrapper(warningTime);
 
-			Object paramObj18 = new LongWrapper(resetTicketMaxAge);
+			Object paramObj18 = new IntegerWrapper(graceLimit);
+
+			Object paramObj19 = new BooleanWrapper(lockout);
+
+			Object paramObj20 = new IntegerWrapper(maxFailure);
+
+			Object paramObj21 = new LongWrapper(lockoutDuration);
+
+			Object paramObj22 = new LongWrapper(resetFailureCount);
+
+			Object paramObj23 = new LongWrapper(resetTicketMaxAge);
 
 			MethodWrapper methodWrapper = new MethodWrapper(PasswordPolicyServiceUtil.class.getName(),
 					"addPasswordPolicy",
@@ -126,7 +137,8 @@ public class PasswordPolicyServiceHttp {
 						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
 						paramObj10, paramObj11, paramObj12, paramObj13,
 						paramObj14, paramObj15, paramObj16, paramObj17,
-						paramObj18
+						paramObj18, paramObj19, paramObj20, paramObj21,
+						paramObj22, paramObj23
 					});
 
 			Object returnObj = null;
@@ -191,10 +203,12 @@ public class PasswordPolicyServiceHttp {
 		HttpPrincipal httpPrincipal, long passwordPolicyId,
 		java.lang.String name, java.lang.String description,
 		boolean changeable, boolean changeRequired, long minAge,
-		boolean checkSyntax, boolean allowDictionaryWords, int minLength,
-		boolean history, int historyCount, boolean expireable, long maxAge,
-		long warningTime, int graceLimit, boolean lockout, int maxFailure,
-		long lockoutDuration, long resetFailureCount, long resetTicketMaxAge)
+		boolean checkSyntax, boolean allowDictionaryWords, int minAlphaNumeric,
+		int minLength, int minLowerCase, int minNumbers, int minSymbols,
+		int minUpperCase, boolean history, int historyCount,
+		boolean expireable, long maxAge, long warningTime, int graceLimit,
+		boolean lockout, int maxFailure, long lockoutDuration,
+		long resetFailureCount, long resetTicketMaxAge)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
@@ -222,29 +236,39 @@ public class PasswordPolicyServiceHttp {
 
 			Object paramObj7 = new BooleanWrapper(allowDictionaryWords);
 
-			Object paramObj8 = new IntegerWrapper(minLength);
+			Object paramObj8 = new IntegerWrapper(minAlphaNumeric);
 
-			Object paramObj9 = new BooleanWrapper(history);
+			Object paramObj9 = new IntegerWrapper(minLength);
 
-			Object paramObj10 = new IntegerWrapper(historyCount);
+			Object paramObj10 = new IntegerWrapper(minLowerCase);
 
-			Object paramObj11 = new BooleanWrapper(expireable);
+			Object paramObj11 = new IntegerWrapper(minNumbers);
 
-			Object paramObj12 = new LongWrapper(maxAge);
+			Object paramObj12 = new IntegerWrapper(minSymbols);
 
-			Object paramObj13 = new LongWrapper(warningTime);
+			Object paramObj13 = new IntegerWrapper(minUpperCase);
 
-			Object paramObj14 = new IntegerWrapper(graceLimit);
+			Object paramObj14 = new BooleanWrapper(history);
 
-			Object paramObj15 = new BooleanWrapper(lockout);
+			Object paramObj15 = new IntegerWrapper(historyCount);
 
-			Object paramObj16 = new IntegerWrapper(maxFailure);
+			Object paramObj16 = new BooleanWrapper(expireable);
 
-			Object paramObj17 = new LongWrapper(lockoutDuration);
+			Object paramObj17 = new LongWrapper(maxAge);
 
-			Object paramObj18 = new LongWrapper(resetFailureCount);
+			Object paramObj18 = new LongWrapper(warningTime);
 
-			Object paramObj19 = new LongWrapper(resetTicketMaxAge);
+			Object paramObj19 = new IntegerWrapper(graceLimit);
+
+			Object paramObj20 = new BooleanWrapper(lockout);
+
+			Object paramObj21 = new IntegerWrapper(maxFailure);
+
+			Object paramObj22 = new LongWrapper(lockoutDuration);
+
+			Object paramObj23 = new LongWrapper(resetFailureCount);
+
+			Object paramObj24 = new LongWrapper(resetTicketMaxAge);
 
 			MethodWrapper methodWrapper = new MethodWrapper(PasswordPolicyServiceUtil.class.getName(),
 					"updatePasswordPolicy",
@@ -253,7 +277,8 @@ public class PasswordPolicyServiceHttp {
 						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
 						paramObj10, paramObj11, paramObj12, paramObj13,
 						paramObj14, paramObj15, paramObj16, paramObj17,
-						paramObj18, paramObj19
+						paramObj18, paramObj19, paramObj20, paramObj21,
+						paramObj22, paramObj23, paramObj24
 					});
 
 			Object returnObj = null;

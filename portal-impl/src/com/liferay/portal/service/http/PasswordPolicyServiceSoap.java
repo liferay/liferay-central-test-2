@@ -74,18 +74,21 @@ public class PasswordPolicyServiceSoap {
 	public static com.liferay.portal.model.PasswordPolicySoap addPasswordPolicy(
 		java.lang.String name, java.lang.String description,
 		boolean changeable, boolean changeRequired, long minAge,
-		boolean checkSyntax, boolean allowDictionaryWords, int minLength,
-		boolean history, int historyCount, boolean expireable, long maxAge,
-		long warningTime, int graceLimit, boolean lockout, int maxFailure,
-		long lockoutDuration, long resetFailureCount, long resetTicketMaxAge)
+		boolean checkSyntax, boolean allowDictionaryWords, int minAlphaNumeric,
+		int minLength, int minLowerCase, int minNumbers, int minSymbols,
+		int minUpperCase, boolean history, int historyCount,
+		boolean expireable, long maxAge, long warningTime, int graceLimit,
+		boolean lockout, int maxFailure, long lockoutDuration,
+		long resetFailureCount, long resetTicketMaxAge)
 		throws RemoteException {
 		try {
 			com.liferay.portal.model.PasswordPolicy returnValue = PasswordPolicyServiceUtil.addPasswordPolicy(name,
 					description, changeable, changeRequired, minAge,
-					checkSyntax, allowDictionaryWords, minLength, history,
-					historyCount, expireable, maxAge, warningTime, graceLimit,
-					lockout, maxFailure, lockoutDuration, resetFailureCount,
-					resetTicketMaxAge);
+					checkSyntax, allowDictionaryWords, minAlphaNumeric,
+					minLength, minLowerCase, minNumbers, minSymbols,
+					minUpperCase, history, historyCount, expireable, maxAge,
+					warningTime, graceLimit, lockout, maxFailure,
+					lockoutDuration, resetFailureCount, resetTicketMaxAge);
 
 			return com.liferay.portal.model.PasswordPolicySoap.toSoapModel(returnValue);
 		}
@@ -112,18 +115,20 @@ public class PasswordPolicyServiceSoap {
 		long passwordPolicyId, java.lang.String name,
 		java.lang.String description, boolean changeable,
 		boolean changeRequired, long minAge, boolean checkSyntax,
-		boolean allowDictionaryWords, int minLength, boolean history,
-		int historyCount, boolean expireable, long maxAge, long warningTime,
-		int graceLimit, boolean lockout, int maxFailure, long lockoutDuration,
-		long resetFailureCount, long resetTicketMaxAge)
+		boolean allowDictionaryWords, int minAlphaNumeric, int minLength,
+		int minLowerCase, int minNumbers, int minSymbols, int minUpperCase,
+		boolean history, int historyCount, boolean expireable, long maxAge,
+		long warningTime, int graceLimit, boolean lockout, int maxFailure,
+		long lockoutDuration, long resetFailureCount, long resetTicketMaxAge)
 		throws RemoteException {
 		try {
 			com.liferay.portal.model.PasswordPolicy returnValue = PasswordPolicyServiceUtil.updatePasswordPolicy(passwordPolicyId,
 					name, description, changeable, changeRequired, minAge,
-					checkSyntax, allowDictionaryWords, minLength, history,
-					historyCount, expireable, maxAge, warningTime, graceLimit,
-					lockout, maxFailure, lockoutDuration, resetFailureCount,
-					resetTicketMaxAge);
+					checkSyntax, allowDictionaryWords, minAlphaNumeric,
+					minLength, minLowerCase, minNumbers, minSymbols,
+					minUpperCase, history, historyCount, expireable, maxAge,
+					warningTime, graceLimit, lockout, maxFailure,
+					lockoutDuration, resetFailureCount, resetTicketMaxAge);
 
 			return com.liferay.portal.model.PasswordPolicySoap.toSoapModel(returnValue);
 		}
