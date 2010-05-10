@@ -216,7 +216,7 @@ public class IGImageLocalServiceWrapper implements IGImageLocalService {
 	}
 
 	public int getFoldersImagesCount(long groupId,
-		java.util.List<Long> folderIds)
+		java.util.List<java.lang.Long> folderIds)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _igImageLocalService.getFoldersImagesCount(groupId, folderIds);
 	}

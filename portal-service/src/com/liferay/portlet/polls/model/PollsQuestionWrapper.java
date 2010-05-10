@@ -138,7 +138,7 @@ public class PollsQuestionWrapper implements PollsQuestion {
 		return _pollsQuestion.getTitle(languageId, useDefault);
 	}
 
-	public java.util.Map<java.util.Locale, String> getTitleMap() {
+	public java.util.Map<java.util.Locale, java.lang.String> getTitleMap() {
 		return _pollsQuestion.getTitleMap();
 	}
 
@@ -150,7 +150,8 @@ public class PollsQuestionWrapper implements PollsQuestion {
 		_pollsQuestion.setTitle(locale, title);
 	}
 
-	public void setTitleMap(java.util.Map<java.util.Locale, String> titleMap) {
+	public void setTitleMap(
+		java.util.Map<java.util.Locale, java.lang.String> titleMap) {
 		_pollsQuestion.setTitleMap(titleMap);
 	}
 
@@ -176,7 +177,7 @@ public class PollsQuestionWrapper implements PollsQuestion {
 		return _pollsQuestion.getDescription(languageId, useDefault);
 	}
 
-	public java.util.Map<java.util.Locale, String> getDescriptionMap() {
+	public java.util.Map<java.util.Locale, java.lang.String> getDescriptionMap() {
 		return _pollsQuestion.getDescriptionMap();
 	}
 
@@ -190,7 +191,7 @@ public class PollsQuestionWrapper implements PollsQuestion {
 	}
 
 	public void setDescriptionMap(
-		java.util.Map<java.util.Locale, String> descriptionMap) {
+		java.util.Map<java.util.Locale, java.lang.String> descriptionMap) {
 		_pollsQuestion.setDescriptionMap(descriptionMap);
 	}
 

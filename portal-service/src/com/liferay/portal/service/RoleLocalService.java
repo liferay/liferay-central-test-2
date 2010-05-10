@@ -104,14 +104,14 @@ public interface RoleLocalService {
 
 	public com.liferay.portal.model.Role addRole(long userId, long companyId,
 		java.lang.String name,
-		java.util.Map<java.util.Locale, String> titleMap,
+		java.util.Map<java.util.Locale, java.lang.String> titleMap,
 		java.lang.String description, int type)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.Role addRole(long userId, long companyId,
 		java.lang.String name,
-		java.util.Map<java.util.Locale, String> titleMap,
+		java.util.Map<java.util.Locale, java.lang.String> titleMap,
 		java.lang.String description, int type, java.lang.String className,
 		long classPK)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -136,7 +136,7 @@ public interface RoleLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.Map<String, java.util.List<String>> getResourceRoles(
+	public java.util.Map<java.lang.String, java.util.List<java.lang.String>> getResourceRoles(
 		long companyId, java.lang.String name, int scope,
 		java.lang.String primKey)
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -233,8 +233,8 @@ public interface RoleLocalService {
 	public java.util.List<com.liferay.portal.model.Role> search(
 		long companyId, java.lang.String name, java.lang.String description,
 		java.lang.Integer[] types,
-		java.util.LinkedHashMap<String, Object> params, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params,
+		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -245,7 +245,7 @@ public interface RoleLocalService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int searchCount(long companyId, java.lang.String name,
 		java.lang.String description, java.lang.Integer[] types,
-		java.util.LinkedHashMap<String, Object> params)
+		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void setUserRoles(long userId, long[] roleIds)
@@ -258,7 +258,7 @@ public interface RoleLocalService {
 
 	public com.liferay.portal.model.Role updateRole(long roleId,
 		java.lang.String name,
-		java.util.Map<java.util.Locale, String> titleMap,
+		java.util.Map<java.util.Locale, java.lang.String> titleMap,
 		java.lang.String description, java.lang.String subtype)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;

@@ -217,7 +217,7 @@ public class ShoppingCartWrapper implements ShoppingCart {
 		return _shoppingCart.getCoupon();
 	}
 
-	public java.util.Map<com.liferay.portlet.shopping.model.ShoppingCartItem, Integer> getItems()
+	public java.util.Map<com.liferay.portlet.shopping.model.ShoppingCartItem, java.lang.Integer> getItems()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _shoppingCart.getItems();
 	}

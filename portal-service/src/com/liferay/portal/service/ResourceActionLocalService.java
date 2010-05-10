@@ -110,7 +110,7 @@ public interface ResourceActionLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void checkResourceActions(java.lang.String name,
-		java.util.List<String> actionIds)
+		java.util.List<java.lang.String> actionIds)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)

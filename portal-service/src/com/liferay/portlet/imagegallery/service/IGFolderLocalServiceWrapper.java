@@ -241,8 +241,8 @@ public class IGFolderLocalServiceWrapper implements IGFolderLocalService {
 		return _igFolderLocalService.getFoldersCount(groupId, parentFolderId);
 	}
 
-	public void getSubfolderIds(java.util.List<Long> folderIds, long groupId,
-		long folderId)
+	public void getSubfolderIds(java.util.List<java.lang.Long> folderIds,
+		long groupId, long folderId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_igFolderLocalService.getSubfolderIds(folderIds, groupId, folderId);
 	}

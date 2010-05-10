@@ -133,9 +133,10 @@ public class ResourcePermissionLocalServiceWrapper
 			scope, primKey, roleId, actionId);
 	}
 
-	public java.util.List<String> getAvailableResourcePermissionActionIds(
+	public java.util.List<java.lang.String> getAvailableResourcePermissionActionIds(
 		long companyId, java.lang.String name, int scope,
-		java.lang.String primKey, long roleId, java.util.List<String> actionIds)
+		java.lang.String primKey, long roleId,
+		java.util.List<java.lang.String> actionIds)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _resourcePermissionLocalService.getAvailableResourcePermissionActionIds(companyId,

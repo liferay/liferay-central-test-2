@@ -120,7 +120,7 @@ public interface ShoppingCartLocalService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.Map<com.liferay.portlet.shopping.model.ShoppingCartItem, Integer> getItems(
+	public java.util.Map<com.liferay.portlet.shopping.model.ShoppingCartItem, java.lang.Integer> getItems(
 		long groupId, java.lang.String itemIds)
 		throws com.liferay.portal.kernel.exception.SystemException;
 

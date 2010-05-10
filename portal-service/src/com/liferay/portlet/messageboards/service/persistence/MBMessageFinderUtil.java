@@ -43,14 +43,14 @@ public class MBMessageFinderUtil {
 		return getFinder().findByNoAssets();
 	}
 
-	public static java.util.List<Long> findByG_U_S(long groupId, long userId,
-		int status, int start, int end)
+	public static java.util.List<java.lang.Long> findByG_U_S(long groupId,
+		long userId, int status, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder().findByG_U_S(groupId, userId, status, start, end);
 	}
 
-	public static java.util.List<Long> findByG_U_A_S(long groupId, long userId,
-		boolean anonymous, int status, int start, int end)
+	public static java.util.List<java.lang.Long> findByG_U_A_S(long groupId,
+		long userId, boolean anonymous, int status, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder()
 				   .findByG_U_A_S(groupId, userId, anonymous, status, start, end);

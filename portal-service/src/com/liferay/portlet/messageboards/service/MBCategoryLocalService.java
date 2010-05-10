@@ -217,7 +217,7 @@ public interface MBCategoryLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public void getSubcategoryIds(java.util.List<Long> categoryIds,
+	public void getSubcategoryIds(java.util.List<java.lang.Long> categoryIds,
 		long groupId, long categoryId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 

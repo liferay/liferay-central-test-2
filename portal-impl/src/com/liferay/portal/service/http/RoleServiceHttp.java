@@ -64,7 +64,7 @@ import com.liferay.portal.service.RoleServiceUtil;
 public class RoleServiceHttp {
 	public static com.liferay.portal.model.Role addRole(
 		HttpPrincipal httpPrincipal, java.lang.String name,
-		java.util.Map<java.util.Locale, String> titleMap,
+		java.util.Map<java.util.Locale, java.lang.String> titleMap,
 		java.lang.String description, int type)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -567,7 +567,7 @@ public class RoleServiceHttp {
 
 	public static com.liferay.portal.model.Role updateRole(
 		HttpPrincipal httpPrincipal, long roleId, java.lang.String name,
-		java.util.Map<java.util.Locale, String> titleMap,
+		java.util.Map<java.util.Locale, java.lang.String> titleMap,
 		java.lang.String description, java.lang.String subtype)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {

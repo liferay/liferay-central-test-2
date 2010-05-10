@@ -224,7 +224,7 @@ public class BookmarksEntryLocalServiceWrapper
 	}
 
 	public int getFoldersEntriesCount(long groupId,
-		java.util.List<Long> folderIds)
+		java.util.List<java.lang.Long> folderIds)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _bookmarksEntryLocalService.getFoldersEntriesCount(groupId,
 			folderIds);

@@ -66,7 +66,7 @@ public class ThemeLocalServiceUtil {
 		return getService().getWARThemes();
 	}
 
-	public static java.util.List<String> init(
+	public static java.util.List<java.lang.String> init(
 		javax.servlet.ServletContext servletContext,
 		java.lang.String themesPath, boolean loadFromServletContext,
 		java.lang.String[] xmls,
@@ -76,7 +76,7 @@ public class ThemeLocalServiceUtil {
 			xmls, pluginPackage);
 	}
 
-	public static java.util.List<String> init(
+	public static java.util.List<java.lang.String> init(
 		java.lang.String servletContextName,
 		javax.servlet.ServletContext servletContext,
 		java.lang.String themesPath, boolean loadFromServletContext,
@@ -87,7 +87,8 @@ public class ThemeLocalServiceUtil {
 			loadFromServletContext, xmls, pluginPackage);
 	}
 
-	public static void uninstallThemes(java.util.List<String> themeIds) {
+	public static void uninstallThemes(
+		java.util.List<java.lang.String> themeIds) {
 		getService().uninstallThemes(themeIds);
 	}
 

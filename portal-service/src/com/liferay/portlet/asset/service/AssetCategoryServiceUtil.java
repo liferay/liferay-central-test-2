@@ -39,8 +39,8 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 public class AssetCategoryServiceUtil {
 	public static com.liferay.portlet.asset.model.AssetCategory addCategory(
 		long parentCategoryId,
-		java.util.Map<java.util.Locale, String> titleMap, long vocabularyId,
-		java.lang.String[] categoryProperties,
+		java.util.Map<java.util.Locale, java.lang.String> titleMap,
+		long vocabularyId, java.lang.String[] categoryProperties,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -104,8 +104,8 @@ public class AssetCategoryServiceUtil {
 
 	public static com.liferay.portlet.asset.model.AssetCategory updateCategory(
 		long categoryId, long parentCategoryId,
-		java.util.Map<java.util.Locale, String> titleMap, long vocabularyId,
-		java.lang.String[] categoryProperties,
+		java.util.Map<java.util.Locale, java.lang.String> titleMap,
+		long vocabularyId, java.lang.String[] categoryProperties,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {

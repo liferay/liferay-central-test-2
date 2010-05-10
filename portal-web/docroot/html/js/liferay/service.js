@@ -90,6 +90,8 @@ Liferay.Service.registerClass(
 		deleteLayout: true,
 		getLayoutName: true,
 		getLayoutReferences: true,
+		schedulePublishToLive: true,
+		schedulePublishToRemote: true,
 		setLayouts: true,
 		unschedulePublishToLive: true,
 		unschedulePublishToRemote: true,

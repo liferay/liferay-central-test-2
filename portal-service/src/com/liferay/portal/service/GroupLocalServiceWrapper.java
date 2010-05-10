@@ -328,7 +328,8 @@ public class GroupLocalServiceWrapper implements GroupLocalService {
 
 	public java.util.List<com.liferay.portal.model.Group> search(
 		long companyId, java.lang.String name, java.lang.String description,
-		java.util.LinkedHashMap<String, Object> params, int start, int end)
+		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params,
+		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _groupLocalService.search(companyId, name, description, params,
 			start, end);
@@ -336,8 +337,8 @@ public class GroupLocalServiceWrapper implements GroupLocalService {
 
 	public java.util.List<com.liferay.portal.model.Group> search(
 		long companyId, java.lang.String name, java.lang.String description,
-		java.util.LinkedHashMap<String, Object> params, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params,
+		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _groupLocalService.search(companyId, name, description, params,
 			start, end, obc);
@@ -345,7 +346,7 @@ public class GroupLocalServiceWrapper implements GroupLocalService {
 
 	public int searchCount(long companyId, java.lang.String name,
 		java.lang.String description,
-		java.util.LinkedHashMap<String, Object> params)
+		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _groupLocalService.searchCount(companyId, name, description,
 			params);

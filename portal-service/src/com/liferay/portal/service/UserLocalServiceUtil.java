@@ -194,8 +194,8 @@ public class UserLocalServiceUtil {
 
 	public static int authenticateByEmailAddress(long companyId,
 		java.lang.String emailAddress, java.lang.String password,
-		java.util.Map<String, String[]> headerMap,
-		java.util.Map<String, String[]> parameterMap)
+		java.util.Map<java.lang.String, java.lang.String[]> headerMap,
+		java.util.Map<java.lang.String, java.lang.String[]> parameterMap)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
@@ -205,8 +205,8 @@ public class UserLocalServiceUtil {
 
 	public static int authenticateByScreenName(long companyId,
 		java.lang.String screenName, java.lang.String password,
-		java.util.Map<String, String[]> headerMap,
-		java.util.Map<String, String[]> parameterMap)
+		java.util.Map<java.lang.String, java.lang.String[]> headerMap,
+		java.util.Map<java.lang.String, java.lang.String[]> parameterMap)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
@@ -215,8 +215,9 @@ public class UserLocalServiceUtil {
 	}
 
 	public static int authenticateByUserId(long companyId, long userId,
-		java.lang.String password, java.util.Map<String, String[]> headerMap,
-		java.util.Map<String, String[]> parameterMap)
+		java.lang.String password,
+		java.util.Map<java.lang.String, java.lang.String[]> headerMap,
+		java.util.Map<java.lang.String, java.lang.String[]> parameterMap)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
@@ -606,8 +607,8 @@ public class UserLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portal.model.User> search(
 		long companyId, java.lang.String keywords, java.lang.Boolean active,
-		java.util.LinkedHashMap<String, Object> params, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params,
+		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .search(companyId, keywords, active, params, start, end, obc);
@@ -615,8 +616,8 @@ public class UserLocalServiceUtil {
 
 	public static com.liferay.portal.kernel.search.Hits search(long companyId,
 		java.lang.String keywords, java.lang.Boolean active,
-		java.util.LinkedHashMap<String, Object> params, int start, int end,
-		com.liferay.portal.kernel.search.Sort sort)
+		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params,
+		int start, int end, com.liferay.portal.kernel.search.Sort sort)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .search(companyId, keywords, active, params, start, end, sort);
@@ -627,8 +628,9 @@ public class UserLocalServiceUtil {
 		java.lang.String middleName, java.lang.String lastName,
 		java.lang.String screenName, java.lang.String emailAddress,
 		java.lang.Boolean active,
-		java.util.LinkedHashMap<String, Object> params, boolean andSearch,
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params,
+		boolean andSearch, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .search(companyId, firstName, middleName, lastName,
@@ -639,8 +641,9 @@ public class UserLocalServiceUtil {
 		java.lang.String firstName, java.lang.String middleName,
 		java.lang.String lastName, java.lang.String screenName,
 		java.lang.String emailAddress, java.lang.Boolean active,
-		java.util.LinkedHashMap<String, Object> params, boolean andSearch,
-		int start, int end, com.liferay.portal.kernel.search.Sort sort)
+		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params,
+		boolean andSearch, int start, int end,
+		com.liferay.portal.kernel.search.Sort sort)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .search(companyId, firstName, middleName, lastName,
@@ -649,7 +652,8 @@ public class UserLocalServiceUtil {
 	}
 
 	public static int searchCount(long companyId, java.lang.String keywords,
-		java.lang.Boolean active, java.util.LinkedHashMap<String, Object> params)
+		java.lang.Boolean active,
+		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().searchCount(companyId, keywords, active, params);
 	}
@@ -658,7 +662,8 @@ public class UserLocalServiceUtil {
 		java.lang.String middleName, java.lang.String lastName,
 		java.lang.String screenName, java.lang.String emailAddress,
 		java.lang.Boolean active,
-		java.util.LinkedHashMap<String, Object> params, boolean andSearch)
+		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params,
+		boolean andSearch)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .searchCount(companyId, firstName, middleName, lastName,

@@ -238,7 +238,7 @@ public class WikiNodeLocalServiceWrapper implements WikiNodeLocalService {
 
 	public void importPages(long userId, long nodeId,
 		java.lang.String importer, java.io.File[] files,
-		java.util.Map<String, String[]> options)
+		java.util.Map<java.lang.String, java.lang.String[]> options)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_wikiNodeLocalService.importPages(userId, nodeId, importer, files,

@@ -138,7 +138,7 @@ public class ShoppingCartLocalServiceWrapper implements ShoppingCartLocalService
 		return _shoppingCartLocalService.getCart(userId, groupId);
 	}
 
-	public java.util.Map<com.liferay.portlet.shopping.model.ShoppingCartItem, Integer> getItems(
+	public java.util.Map<com.liferay.portlet.shopping.model.ShoppingCartItem, java.lang.Integer> getItems(
 		long groupId, java.lang.String itemIds)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _shoppingCartLocalService.getItems(groupId, itemIds);

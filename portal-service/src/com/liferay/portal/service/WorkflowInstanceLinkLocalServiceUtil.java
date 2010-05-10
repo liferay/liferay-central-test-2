@@ -190,7 +190,7 @@ public class WorkflowInstanceLinkLocalServiceUtil {
 
 	public static void startWorkflowInstance(long companyId, long groupId,
 		long userId, java.lang.String className, long classPK,
-		java.util.Map<String, java.io.Serializable> workflowContext)
+		java.util.Map<java.lang.String, java.io.Serializable> workflowContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService()

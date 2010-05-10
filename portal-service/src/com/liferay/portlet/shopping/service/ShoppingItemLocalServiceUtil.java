@@ -208,7 +208,7 @@ public class ShoppingItemLocalServiceUtil {
 	}
 
 	public static int getCategoriesItemsCount(long groupId,
-		java.util.List<Long> categoryIds)
+		java.util.List<java.lang.Long> categoryIds)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getCategoriesItemsCount(groupId, categoryIds);
 	}

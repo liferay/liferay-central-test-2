@@ -23,7 +23,7 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
  */
 public class DLFileEntryFinderUtil {
 	public static int countByG_F_S(long groupId,
-		java.util.List<Long> folderIds, int status)
+		java.util.List<java.lang.Long> folderIds, int status)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder().countByG_F_S(groupId, folderIds, status);
 	}

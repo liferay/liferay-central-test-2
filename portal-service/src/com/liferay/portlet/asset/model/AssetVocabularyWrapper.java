@@ -146,7 +146,7 @@ public class AssetVocabularyWrapper implements AssetVocabulary {
 		return _assetVocabulary.getTitle(languageId, useDefault);
 	}
 
-	public java.util.Map<java.util.Locale, String> getTitleMap() {
+	public java.util.Map<java.util.Locale, java.lang.String> getTitleMap() {
 		return _assetVocabulary.getTitleMap();
 	}
 
@@ -158,7 +158,8 @@ public class AssetVocabularyWrapper implements AssetVocabulary {
 		_assetVocabulary.setTitle(locale, title);
 	}
 
-	public void setTitleMap(java.util.Map<java.util.Locale, String> titleMap) {
+	public void setTitleMap(
+		java.util.Map<java.util.Locale, java.lang.String> titleMap) {
 		_assetVocabulary.setTitleMap(titleMap);
 	}
 
@@ -184,7 +185,7 @@ public class AssetVocabularyWrapper implements AssetVocabulary {
 		return _assetVocabulary.getDescription(languageId, useDefault);
 	}
 
-	public java.util.Map<java.util.Locale, String> getDescriptionMap() {
+	public java.util.Map<java.util.Locale, java.lang.String> getDescriptionMap() {
 		return _assetVocabulary.getDescriptionMap();
 	}
 
@@ -198,7 +199,7 @@ public class AssetVocabularyWrapper implements AssetVocabulary {
 	}
 
 	public void setDescriptionMap(
-		java.util.Map<java.util.Locale, String> descriptionMap) {
+		java.util.Map<java.util.Locale, java.lang.String> descriptionMap) {
 		_assetVocabulary.setDescriptionMap(descriptionMap);
 	}
 

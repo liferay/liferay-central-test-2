@@ -204,22 +204,23 @@ public class DLFolderLocalServiceWrapper implements DLFolderLocalService {
 		return _dlFolderLocalService.getCompanyFoldersCount(companyId);
 	}
 
-	public java.util.List<Object> getFileEntriesAndFileShortcuts(long groupId,
-		java.util.List<Long> folderIds, int status, int start, int end)
+	public java.util.List<java.lang.Object> getFileEntriesAndFileShortcuts(
+		long groupId, java.util.List<java.lang.Long> folderIds, int status,
+		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _dlFolderLocalService.getFileEntriesAndFileShortcuts(groupId,
 			folderIds, status, start, end);
 	}
 
-	public java.util.List<Object> getFileEntriesAndFileShortcuts(long groupId,
-		long folderId, int status, int start, int end)
+	public java.util.List<java.lang.Object> getFileEntriesAndFileShortcuts(
+		long groupId, long folderId, int status, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _dlFolderLocalService.getFileEntriesAndFileShortcuts(groupId,
 			folderId, status, start, end);
 	}
 
 	public int getFileEntriesAndFileShortcutsCount(long groupId,
-		java.util.List<Long> folderIds, int status)
+		java.util.List<java.lang.Long> folderIds, int status)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _dlFolderLocalService.getFileEntriesAndFileShortcutsCount(groupId,
 			folderIds, status);
@@ -264,14 +265,15 @@ public class DLFolderLocalServiceWrapper implements DLFolderLocalService {
 			end);
 	}
 
-	public java.util.List<Object> getFoldersAndFileEntriesAndFileShortcuts(
-		long groupId, java.util.List<Long> folderIds, int status, int start,
-		int end) throws com.liferay.portal.kernel.exception.SystemException {
+	public java.util.List<java.lang.Object> getFoldersAndFileEntriesAndFileShortcuts(
+		long groupId, java.util.List<java.lang.Long> folderIds, int status,
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _dlFolderLocalService.getFoldersAndFileEntriesAndFileShortcuts(groupId,
 			folderIds, status, start, end);
 	}
 
-	public java.util.List<Object> getFoldersAndFileEntriesAndFileShortcuts(
+	public java.util.List<java.lang.Object> getFoldersAndFileEntriesAndFileShortcuts(
 		long groupId, long folderId, int status, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _dlFolderLocalService.getFoldersAndFileEntriesAndFileShortcuts(groupId,
@@ -279,7 +281,7 @@ public class DLFolderLocalServiceWrapper implements DLFolderLocalService {
 	}
 
 	public int getFoldersAndFileEntriesAndFileShortcutsCount(long groupId,
-		java.util.List<Long> folderIds, int status)
+		java.util.List<java.lang.Long> folderIds, int status)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _dlFolderLocalService.getFoldersAndFileEntriesAndFileShortcutsCount(groupId,
 			folderIds, status);
@@ -297,8 +299,8 @@ public class DLFolderLocalServiceWrapper implements DLFolderLocalService {
 		return _dlFolderLocalService.getFoldersCount(groupId, parentFolderId);
 	}
 
-	public void getSubfolderIds(java.util.List<Long> folderIds, long groupId,
-		long folderId)
+	public void getSubfolderIds(java.util.List<java.lang.Long> folderIds,
+		long groupId, long folderId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_dlFolderLocalService.getSubfolderIds(folderIds, groupId, folderId);
 	}

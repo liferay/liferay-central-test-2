@@ -170,7 +170,7 @@ public class AssetCategoryWrapper implements AssetCategory {
 		return _assetCategory.getTitle(languageId, useDefault);
 	}
 
-	public java.util.Map<java.util.Locale, String> getTitleMap() {
+	public java.util.Map<java.util.Locale, java.lang.String> getTitleMap() {
 		return _assetCategory.getTitleMap();
 	}
 
@@ -182,7 +182,8 @@ public class AssetCategoryWrapper implements AssetCategory {
 		_assetCategory.setTitle(locale, title);
 	}
 
-	public void setTitleMap(java.util.Map<java.util.Locale, String> titleMap) {
+	public void setTitleMap(
+		java.util.Map<java.util.Locale, java.lang.String> titleMap) {
 		_assetCategory.setTitleMap(titleMap);
 	}
 

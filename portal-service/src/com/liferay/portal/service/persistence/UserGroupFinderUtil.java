@@ -24,7 +24,7 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 public class UserGroupFinderUtil {
 	public static int countByC_N_D(long companyId, java.lang.String name,
 		java.lang.String description,
-		java.util.LinkedHashMap<String, Object> params)
+		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder().countByC_N_D(companyId, name, description, params);
 	}
@@ -38,8 +38,8 @@ public class UserGroupFinderUtil {
 
 	public static java.util.List<com.liferay.portal.model.UserGroup> findByC_N_D(
 		long companyId, java.lang.String name, java.lang.String description,
-		java.util.LinkedHashMap<String, Object> params, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params,
+		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder()
 				   .findByC_N_D(companyId, name, description, params, start,

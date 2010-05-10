@@ -466,12 +466,12 @@ public class PortletWrapper implements Portlet {
 		return _portlet.getControlPanelEntryInstance();
 	}
 
-	public java.util.List<String> getAssetRendererFactoryClasses() {
+	public java.util.List<java.lang.String> getAssetRendererFactoryClasses() {
 		return _portlet.getAssetRendererFactoryClasses();
 	}
 
 	public void setAssetRendererFactoryClasses(
-		java.util.List<String> assetRendererFactoryClasses) {
+		java.util.List<java.lang.String> assetRendererFactoryClasses) {
 		_portlet.setAssetRendererFactoryClasses(assetRendererFactoryClasses);
 	}
 
@@ -479,12 +479,12 @@ public class PortletWrapper implements Portlet {
 		return _portlet.getAssetRendererFactoryInstances();
 	}
 
-	public java.util.List<String> getCustomAttributesDisplayClasses() {
+	public java.util.List<java.lang.String> getCustomAttributesDisplayClasses() {
 		return _portlet.getCustomAttributesDisplayClasses();
 	}
 
 	public void setCustomAttributesDisplayClasses(
-		java.util.List<String> customAttributesDisplayClasses) {
+		java.util.List<java.lang.String> customAttributesDisplayClasses) {
 		_portlet.setCustomAttributesDisplayClasses(customAttributesDisplayClasses);
 	}
 
@@ -492,12 +492,12 @@ public class PortletWrapper implements Portlet {
 		return _portlet.getCustomAttributesDisplayInstances();
 	}
 
-	public java.util.List<String> getWorkflowHandlerClasses() {
+	public java.util.List<java.lang.String> getWorkflowHandlerClasses() {
 		return _portlet.getWorkflowHandlerClasses();
 	}
 
 	public void setWorkflowHandlerClasses(
-		java.util.List<String> workflowHandlerClasses) {
+		java.util.List<java.lang.String> workflowHandlerClasses) {
 		_portlet.setWorkflowHandlerClasses(workflowHandlerClasses);
 	}
 
@@ -742,71 +742,75 @@ public class PortletWrapper implements Portlet {
 		_portlet.setAjaxable(ajaxable);
 	}
 
-	public java.util.List<String> getHeaderPortalCss() {
+	public java.util.List<java.lang.String> getHeaderPortalCss() {
 		return _portlet.getHeaderPortalCss();
 	}
 
-	public void setHeaderPortalCss(java.util.List<String> headerPortalCss) {
+	public void setHeaderPortalCss(
+		java.util.List<java.lang.String> headerPortalCss) {
 		_portlet.setHeaderPortalCss(headerPortalCss);
 	}
 
-	public java.util.List<String> getHeaderPortletCss() {
+	public java.util.List<java.lang.String> getHeaderPortletCss() {
 		return _portlet.getHeaderPortletCss();
 	}
 
-	public void setHeaderPortletCss(java.util.List<String> headerPortletCss) {
+	public void setHeaderPortletCss(
+		java.util.List<java.lang.String> headerPortletCss) {
 		_portlet.setHeaderPortletCss(headerPortletCss);
 	}
 
-	public java.util.List<String> getHeaderPortalJavaScript() {
+	public java.util.List<java.lang.String> getHeaderPortalJavaScript() {
 		return _portlet.getHeaderPortalJavaScript();
 	}
 
 	public void setHeaderPortalJavaScript(
-		java.util.List<String> headerPortalJavaScript) {
+		java.util.List<java.lang.String> headerPortalJavaScript) {
 		_portlet.setHeaderPortalJavaScript(headerPortalJavaScript);
 	}
 
-	public java.util.List<String> getHeaderPortletJavaScript() {
+	public java.util.List<java.lang.String> getHeaderPortletJavaScript() {
 		return _portlet.getHeaderPortletJavaScript();
 	}
 
 	public void setHeaderPortletJavaScript(
-		java.util.List<String> headerPortletJavaScript) {
+		java.util.List<java.lang.String> headerPortletJavaScript) {
 		_portlet.setHeaderPortletJavaScript(headerPortletJavaScript);
 	}
 
-	public java.util.List<String> getFooterPortalCss() {
+	public java.util.List<java.lang.String> getFooterPortalCss() {
 		return _portlet.getFooterPortalCss();
 	}
 
-	public void setFooterPortalCss(java.util.List<String> footerPortalCss) {
+	public void setFooterPortalCss(
+		java.util.List<java.lang.String> footerPortalCss) {
 		_portlet.setFooterPortalCss(footerPortalCss);
 	}
 
-	public java.util.List<String> getFooterPortletCss() {
+	public java.util.List<java.lang.String> getFooterPortletCss() {
 		return _portlet.getFooterPortletCss();
 	}
 
-	public void setFooterPortletCss(java.util.List<String> footerPortletCss) {
+	public void setFooterPortletCss(
+		java.util.List<java.lang.String> footerPortletCss) {
 		_portlet.setFooterPortletCss(footerPortletCss);
 	}
 
-	public java.util.List<String> getFooterPortalJavaScript() {
+	public java.util.List<java.lang.String> getFooterPortalJavaScript() {
 		return _portlet.getFooterPortalJavaScript();
 	}
 
 	public void setFooterPortalJavaScript(
-		java.util.List<String> footerPortalJavaScript) {
+		java.util.List<java.lang.String> footerPortalJavaScript) {
 		_portlet.setFooterPortalJavaScript(footerPortalJavaScript);
 	}
 
-	public java.util.List<String> getFooterPortletJavaScript() {
+	public java.util.List<java.lang.String> getFooterPortletJavaScript() {
 		return _portlet.getFooterPortletJavaScript();
 	}
 
 	public void setFooterPortletJavaScript(
-		java.util.List<String> footerPortletJavaScript) {
+		java.util.List<java.lang.String> footerPortletJavaScript) {
 		_portlet.setFooterPortletJavaScript(footerPortletJavaScript);
 	}
 
@@ -846,19 +850,20 @@ public class PortletWrapper implements Portlet {
 		_portlet.setRolesArray(rolesArray);
 	}
 
-	public java.util.Set<String> getUnlinkedRoles() {
+	public java.util.Set<java.lang.String> getUnlinkedRoles() {
 		return _portlet.getUnlinkedRoles();
 	}
 
-	public void setUnlinkedRoles(java.util.Set<String> unlinkedRoles) {
+	public void setUnlinkedRoles(java.util.Set<java.lang.String> unlinkedRoles) {
 		_portlet.setUnlinkedRoles(unlinkedRoles);
 	}
 
-	public java.util.Map<String, String> getRoleMappers() {
+	public java.util.Map<java.lang.String, java.lang.String> getRoleMappers() {
 		return _portlet.getRoleMappers();
 	}
 
-	public void setRoleMappers(java.util.Map<String, String> roleMappers) {
+	public void setRoleMappers(
+		java.util.Map<java.lang.String, java.lang.String> roleMappers) {
 		_portlet.setRoleMappers(roleMappers);
 	}
 
@@ -898,11 +903,12 @@ public class PortletWrapper implements Portlet {
 		_portlet.setInclude(include);
 	}
 
-	public java.util.Map<String, String> getInitParams() {
+	public java.util.Map<java.lang.String, java.lang.String> getInitParams() {
 		return _portlet.getInitParams();
 	}
 
-	public void setInitParams(java.util.Map<String, String> initParams) {
+	public void setInitParams(
+		java.util.Map<java.lang.String, java.lang.String> initParams) {
 		_portlet.setInitParams(initParams);
 	}
 
@@ -914,12 +920,12 @@ public class PortletWrapper implements Portlet {
 		_portlet.setExpCache(expCache);
 	}
 
-	public java.util.Map<String, java.util.Set<String>> getPortletModes() {
+	public java.util.Map<java.lang.String, java.util.Set<java.lang.String>> getPortletModes() {
 		return _portlet.getPortletModes();
 	}
 
 	public void setPortletModes(
-		java.util.Map<String, java.util.Set<String>> portletModes) {
+		java.util.Map<java.lang.String, java.util.Set<java.lang.String>> portletModes) {
 		_portlet.setPortletModes(portletModes);
 	}
 
@@ -928,7 +934,7 @@ public class PortletWrapper implements Portlet {
 		return _portlet.hasPortletMode(mimeType, portletMode);
 	}
 
-	public java.util.Set<String> getAllPortletModes() {
+	public java.util.Set<java.lang.String> getAllPortletModes() {
 		return _portlet.getAllPortletModes();
 	}
 
@@ -936,12 +942,12 @@ public class PortletWrapper implements Portlet {
 		return _portlet.hasMultipleMimeTypes();
 	}
 
-	public java.util.Map<String, java.util.Set<String>> getWindowStates() {
+	public java.util.Map<java.lang.String, java.util.Set<java.lang.String>> getWindowStates() {
 		return _portlet.getWindowStates();
 	}
 
 	public void setWindowStates(
-		java.util.Map<String, java.util.Set<String>> windowStates) {
+		java.util.Map<java.lang.String, java.util.Set<java.lang.String>> windowStates) {
 		_portlet.setWindowStates(windowStates);
 	}
 
@@ -950,15 +956,16 @@ public class PortletWrapper implements Portlet {
 		return _portlet.hasWindowState(mimeType, windowState);
 	}
 
-	public java.util.Set<String> getAllWindowStates() {
+	public java.util.Set<java.lang.String> getAllWindowStates() {
 		return _portlet.getAllWindowStates();
 	}
 
-	public java.util.Set<String> getSupportedLocales() {
+	public java.util.Set<java.lang.String> getSupportedLocales() {
 		return _portlet.getSupportedLocales();
 	}
 
-	public void setSupportedLocales(java.util.Set<String> supportedLocales) {
+	public void setSupportedLocales(
+		java.util.Set<java.lang.String> supportedLocales) {
 		_portlet.setSupportedLocales(supportedLocales);
 	}
 
@@ -978,12 +985,12 @@ public class PortletWrapper implements Portlet {
 		_portlet.setPortletInfo(portletInfo);
 	}
 
-	public java.util.Map<String, com.liferay.portal.model.PortletFilter> getPortletFilters() {
+	public java.util.Map<java.lang.String, com.liferay.portal.model.PortletFilter> getPortletFilters() {
 		return _portlet.getPortletFilters();
 	}
 
 	public void setPortletFilters(
-		java.util.Map<String, com.liferay.portal.model.PortletFilter> portletFilters) {
+		java.util.Map<java.lang.String, com.liferay.portal.model.PortletFilter> portletFilters) {
 		_portlet.setPortletFilters(portletFilters);
 	}
 

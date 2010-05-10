@@ -23,7 +23,8 @@ public interface BlogsStatsUserFinder {
 	public int countByOrganizationId(long organizationId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public int countByOrganizationIds(java.util.List<Long> organizationIds)
+	public int countByOrganizationIds(
+		java.util.List<java.lang.Long> organizationIds)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portlet.blogs.model.BlogsStatsUser> findByGroupIds(
@@ -36,7 +37,7 @@ public interface BlogsStatsUserFinder {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portlet.blogs.model.BlogsStatsUser> findByOrganizationIds(
-		java.util.List<Long> organizationIds, int start, int end,
+		java.util.List<java.lang.Long> organizationIds, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.kernel.exception.SystemException;
 }

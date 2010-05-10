@@ -166,7 +166,7 @@ public interface ShoppingItemLocalService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCategoriesItemsCount(long groupId,
-		java.util.List<Long> categoryIds)
+		java.util.List<java.lang.Long> categoryIds)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)

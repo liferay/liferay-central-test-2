@@ -22,7 +22,8 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
  * @author Brian Wing Shun Chan
  */
 public class ShoppingItemFinderUtil {
-	public static int countByG_C(long groupId, java.util.List<Long> categoryIds)
+	public static int countByG_C(long groupId,
+		java.util.List<java.lang.Long> categoryIds)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder().countByG_C(groupId, categoryIds);
 	}

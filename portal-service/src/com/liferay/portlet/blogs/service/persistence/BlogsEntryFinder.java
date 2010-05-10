@@ -24,7 +24,8 @@ public interface BlogsEntryFinder {
 		java.util.Date displayDate, int status)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public int countByOrganizationIds(java.util.List<Long> organizationIds,
+	public int countByOrganizationIds(
+		java.util.List<java.lang.Long> organizationIds,
 		java.util.Date displayDate, int status)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
@@ -37,8 +38,8 @@ public interface BlogsEntryFinder {
 		int end) throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findByOrganizationIds(
-		java.util.List<Long> organizationIds, java.util.Date displayDate,
-		int status, int start, int end)
+		java.util.List<java.lang.Long> organizationIds,
+		java.util.Date displayDate, int status, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findByNoAssets()

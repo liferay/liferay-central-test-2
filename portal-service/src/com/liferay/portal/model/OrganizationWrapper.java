@@ -256,13 +256,13 @@ public class OrganizationWrapper implements Organization {
 		return _organization.getPublicLayoutsPageCount();
 	}
 
-	public java.util.Set<String> getReminderQueryQuestions(
+	public java.util.Set<java.lang.String> getReminderQueryQuestions(
 		java.util.Locale locale)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _organization.getReminderQueryQuestions(locale);
 	}
 
-	public java.util.Set<String> getReminderQueryQuestions(
+	public java.util.Set<java.lang.String> getReminderQueryQuestions(
 		java.lang.String languageId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _organization.getReminderQueryQuestions(languageId);

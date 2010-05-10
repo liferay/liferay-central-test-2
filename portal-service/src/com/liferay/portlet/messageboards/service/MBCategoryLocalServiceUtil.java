@@ -275,8 +275,9 @@ public class MBCategoryLocalServiceUtil {
 		return getService().getCompanyCategoriesCount(companyId);
 	}
 
-	public static void getSubcategoryIds(java.util.List<Long> categoryIds,
-		long groupId, long categoryId)
+	public static void getSubcategoryIds(
+		java.util.List<java.lang.Long> categoryIds, long groupId,
+		long categoryId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getService().getSubcategoryIds(categoryIds, groupId, categoryId);
 	}

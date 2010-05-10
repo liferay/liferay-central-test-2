@@ -114,7 +114,8 @@ public interface PermissionLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Permission> addPermissions(
-		long companyId, java.util.List<String> actionIds, long resourceId)
+		long companyId, java.util.List<java.lang.String> actionIds,
+		long resourceId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void addUserPermissions(long userId, java.lang.String[] actionIds,
@@ -123,7 +124,7 @@ public interface PermissionLocalService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<String> getActions(
+	public java.util.List<java.lang.String> getActions(
 		java.util.List<com.liferay.portal.model.Permission> permissions);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)

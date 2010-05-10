@@ -222,7 +222,7 @@ public class IGImageLocalServiceUtil {
 	}
 
 	public static int getFoldersImagesCount(long groupId,
-		java.util.List<Long> folderIds)
+		java.util.List<java.lang.Long> folderIds)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getFoldersImagesCount(groupId, folderIds);
 	}

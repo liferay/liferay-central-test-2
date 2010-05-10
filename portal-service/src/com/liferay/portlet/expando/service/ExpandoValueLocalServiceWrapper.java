@@ -438,7 +438,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 
 	public void addValues(long classNameId, long tableId,
 		java.util.List<com.liferay.portlet.expando.model.ExpandoColumn> columns,
-		long classPK, java.util.Map<String, String> data)
+		long classPK, java.util.Map<java.lang.String, java.lang.String> data)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_expandoValueLocalService.addValues(classNameId, tableId, columns,

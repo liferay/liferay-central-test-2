@@ -135,7 +135,8 @@ public class PermissionLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.Permission> addPermissions(
-		long companyId, java.util.List<String> actionIds, long resourceId)
+		long companyId, java.util.List<java.lang.String> actionIds,
+		long resourceId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().addPermissions(companyId, actionIds, resourceId);
 	}
@@ -147,7 +148,7 @@ public class PermissionLocalServiceUtil {
 		getService().addUserPermissions(userId, actionIds, resourceId);
 	}
 
-	public static java.util.List<String> getActions(
+	public static java.util.List<java.lang.String> getActions(
 		java.util.List<com.liferay.portal.model.Permission> permissions) {
 		return getService().getActions(permissions);
 	}

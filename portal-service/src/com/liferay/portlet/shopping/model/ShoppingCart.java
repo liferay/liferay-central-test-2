@@ -46,7 +46,7 @@ public interface ShoppingCart extends ShoppingCartModel {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public java.util.Map<com.liferay.portlet.shopping.model.ShoppingCartItem, Integer> getItems()
+	public java.util.Map<com.liferay.portlet.shopping.model.ShoppingCartItem, java.lang.Integer> getItems()
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int getItemsSize();

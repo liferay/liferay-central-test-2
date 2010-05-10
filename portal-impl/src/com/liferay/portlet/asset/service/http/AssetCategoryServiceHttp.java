@@ -65,8 +65,8 @@ import com.liferay.portlet.asset.service.AssetCategoryServiceUtil;
 public class AssetCategoryServiceHttp {
 	public static com.liferay.portlet.asset.model.AssetCategory addCategory(
 		HttpPrincipal httpPrincipal, long parentCategoryId,
-		java.util.Map<java.util.Locale, String> titleMap, long vocabularyId,
-		java.lang.String[] categoryProperties,
+		java.util.Map<java.util.Locale, java.lang.String> titleMap,
+		long vocabularyId, java.lang.String[] categoryProperties,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -436,8 +436,8 @@ public class AssetCategoryServiceHttp {
 
 	public static com.liferay.portlet.asset.model.AssetCategory updateCategory(
 		HttpPrincipal httpPrincipal, long categoryId, long parentCategoryId,
-		java.util.Map<java.util.Locale, String> titleMap, long vocabularyId,
-		java.lang.String[] categoryProperties,
+		java.util.Map<java.util.Locale, java.lang.String> titleMap,
+		long vocabularyId, java.lang.String[] categoryProperties,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {

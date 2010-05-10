@@ -65,7 +65,7 @@ public class ThemeLocalServiceWrapper implements ThemeLocalService {
 		return _themeLocalService.getWARThemes();
 	}
 
-	public java.util.List<String> init(
+	public java.util.List<java.lang.String> init(
 		javax.servlet.ServletContext servletContext,
 		java.lang.String themesPath, boolean loadFromServletContext,
 		java.lang.String[] xmls,
@@ -74,7 +74,8 @@ public class ThemeLocalServiceWrapper implements ThemeLocalService {
 			loadFromServletContext, xmls, pluginPackage);
 	}
 
-	public java.util.List<String> init(java.lang.String servletContextName,
+	public java.util.List<java.lang.String> init(
+		java.lang.String servletContextName,
 		javax.servlet.ServletContext servletContext,
 		java.lang.String themesPath, boolean loadFromServletContext,
 		java.lang.String[] xmls,
@@ -83,7 +84,7 @@ public class ThemeLocalServiceWrapper implements ThemeLocalService {
 			themesPath, loadFromServletContext, xmls, pluginPackage);
 	}
 
-	public void uninstallThemes(java.util.List<String> themeIds) {
+	public void uninstallThemes(java.util.List<java.lang.String> themeIds) {
 		_themeLocalService.uninstallThemes(themeIds);
 	}
 

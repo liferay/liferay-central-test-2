@@ -81,7 +81,7 @@ public class LayoutPrototypeWrapper implements LayoutPrototype {
 		return _layoutPrototype.getName(languageId, useDefault);
 	}
 
-	public java.util.Map<java.util.Locale, String> getNameMap() {
+	public java.util.Map<java.util.Locale, java.lang.String> getNameMap() {
 		return _layoutPrototype.getNameMap();
 	}
 
@@ -93,7 +93,8 @@ public class LayoutPrototypeWrapper implements LayoutPrototype {
 		_layoutPrototype.setName(locale, name);
 	}
 
-	public void setNameMap(java.util.Map<java.util.Locale, String> nameMap) {
+	public void setNameMap(
+		java.util.Map<java.util.Locale, java.lang.String> nameMap) {
 		_layoutPrototype.setNameMap(nameMap);
 	}
 

@@ -38,7 +38,7 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
  */
 public class RoleServiceUtil {
 	public static com.liferay.portal.model.Role addRole(java.lang.String name,
-		java.util.Map<java.util.Locale, String> titleMap,
+		java.util.Map<java.util.Locale, java.lang.String> titleMap,
 		java.lang.String description, int type)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -121,7 +121,7 @@ public class RoleServiceUtil {
 
 	public static com.liferay.portal.model.Role updateRole(long roleId,
 		java.lang.String name,
-		java.util.Map<java.util.Locale, String> titleMap,
+		java.util.Map<java.util.Locale, java.lang.String> titleMap,
 		java.lang.String description, java.lang.String subtype)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {

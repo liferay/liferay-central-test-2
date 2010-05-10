@@ -40,7 +40,7 @@ package com.liferay.portlet.messageboards.model;
  * @generated
  */
 public interface MBCategory extends MBCategoryModel {
-	public java.util.List<Long> getAncestorCategoryIds()
+	public java.util.List<java.lang.Long> getAncestorCategoryIds()
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 

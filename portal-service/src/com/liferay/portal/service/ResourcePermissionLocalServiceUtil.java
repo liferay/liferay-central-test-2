@@ -131,9 +131,10 @@ public class ResourcePermissionLocalServiceUtil {
 			actionId);
 	}
 
-	public static java.util.List<String> getAvailableResourcePermissionActionIds(
+	public static java.util.List<java.lang.String> getAvailableResourcePermissionActionIds(
 		long companyId, java.lang.String name, int scope,
-		java.lang.String primKey, long roleId, java.util.List<String> actionIds)
+		java.lang.String primKey, long roleId,
+		java.util.List<java.lang.String> actionIds)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()

@@ -185,8 +185,8 @@ public class UserGroupLocalServiceWrapper implements UserGroupLocalService {
 
 	public java.util.List<com.liferay.portal.model.UserGroup> search(
 		long companyId, java.lang.String name, java.lang.String description,
-		java.util.LinkedHashMap<String, Object> params, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params,
+		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _userGroupLocalService.search(companyId, name, description,
 			params, start, end, obc);
@@ -194,7 +194,7 @@ public class UserGroupLocalServiceWrapper implements UserGroupLocalService {
 
 	public int searchCount(long companyId, java.lang.String name,
 		java.lang.String description,
-		java.util.LinkedHashMap<String, Object> params)
+		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _userGroupLocalService.searchCount(companyId, name, description,
 			params);

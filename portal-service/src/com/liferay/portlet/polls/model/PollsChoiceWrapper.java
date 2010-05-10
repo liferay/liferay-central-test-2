@@ -98,7 +98,7 @@ public class PollsChoiceWrapper implements PollsChoice {
 		return _pollsChoice.getDescription(languageId, useDefault);
 	}
 
-	public java.util.Map<java.util.Locale, String> getDescriptionMap() {
+	public java.util.Map<java.util.Locale, java.lang.String> getDescriptionMap() {
 		return _pollsChoice.getDescriptionMap();
 	}
 
@@ -112,7 +112,7 @@ public class PollsChoiceWrapper implements PollsChoice {
 	}
 
 	public void setDescriptionMap(
-		java.util.Map<java.util.Locale, String> descriptionMap) {
+		java.util.Map<java.util.Locale, java.lang.String> descriptionMap) {
 		_pollsChoice.setDescriptionMap(descriptionMap);
 	}
 

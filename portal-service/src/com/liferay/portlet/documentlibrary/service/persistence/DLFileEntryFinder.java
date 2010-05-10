@@ -20,8 +20,9 @@ package com.liferay.portlet.documentlibrary.service.persistence;
  * @author Brian Wing Shun Chan
  */
 public interface DLFileEntryFinder {
-	public int countByG_F_S(long groupId, java.util.List<Long> folderIds,
-		int status) throws com.liferay.portal.kernel.exception.SystemException;
+	public int countByG_F_S(long groupId,
+		java.util.List<java.lang.Long> folderIds, int status)
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> findByNoAssets()
 		throws com.liferay.portal.kernel.exception.SystemException;

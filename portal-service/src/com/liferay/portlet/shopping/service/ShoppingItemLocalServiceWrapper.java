@@ -207,7 +207,7 @@ public class ShoppingItemLocalServiceWrapper implements ShoppingItemLocalService
 	}
 
 	public int getCategoriesItemsCount(long groupId,
-		java.util.List<Long> categoryIds)
+		java.util.List<java.lang.Long> categoryIds)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _shoppingItemLocalService.getCategoriesItemsCount(groupId,
 			categoryIds);

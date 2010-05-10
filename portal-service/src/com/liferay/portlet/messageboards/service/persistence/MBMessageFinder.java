@@ -32,11 +32,11 @@ public interface MBMessageFinder {
 	public java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByNoAssets()
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public java.util.List<Long> findByG_U_S(long groupId, long userId,
-		int status, int start, int end)
+	public java.util.List<java.lang.Long> findByG_U_S(long groupId,
+		long userId, int status, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public java.util.List<Long> findByG_U_A_S(long groupId, long userId,
-		boolean anonymous, int status, int start, int end)
+	public java.util.List<java.lang.Long> findByG_U_A_S(long groupId,
+		long userId, boolean anonymous, int status, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 }

@@ -205,24 +205,24 @@ public interface Portlet extends PortletModel {
 
 	public com.liferay.portlet.ControlPanelEntry getControlPanelEntryInstance();
 
-	public java.util.List<String> getAssetRendererFactoryClasses();
+	public java.util.List<java.lang.String> getAssetRendererFactoryClasses();
 
 	public void setAssetRendererFactoryClasses(
-		java.util.List<String> assetRendererFactoryClasses);
+		java.util.List<java.lang.String> assetRendererFactoryClasses);
 
 	public java.util.List<com.liferay.portlet.asset.model.AssetRendererFactory> getAssetRendererFactoryInstances();
 
-	public java.util.List<String> getCustomAttributesDisplayClasses();
+	public java.util.List<java.lang.String> getCustomAttributesDisplayClasses();
 
 	public void setCustomAttributesDisplayClasses(
-		java.util.List<String> customAttributesDisplayClasses);
+		java.util.List<java.lang.String> customAttributesDisplayClasses);
 
 	public java.util.List<com.liferay.portlet.expando.model.CustomAttributesDisplay> getCustomAttributesDisplayInstances();
 
-	public java.util.List<String> getWorkflowHandlerClasses();
+	public java.util.List<java.lang.String> getWorkflowHandlerClasses();
 
 	public void setWorkflowHandlerClasses(
-		java.util.List<String> workflowHandlerClasses);
+		java.util.List<java.lang.String> workflowHandlerClasses);
 
 	public java.util.List<com.liferay.portal.kernel.workflow.WorkflowHandler> getWorkflowHandlerInstances();
 
@@ -345,41 +345,45 @@ public interface Portlet extends PortletModel {
 
 	public void setAjaxable(boolean ajaxable);
 
-	public java.util.List<String> getHeaderPortalCss();
+	public java.util.List<java.lang.String> getHeaderPortalCss();
 
-	public void setHeaderPortalCss(java.util.List<String> headerPortalCss);
+	public void setHeaderPortalCss(
+		java.util.List<java.lang.String> headerPortalCss);
 
-	public java.util.List<String> getHeaderPortletCss();
+	public java.util.List<java.lang.String> getHeaderPortletCss();
 
-	public void setHeaderPortletCss(java.util.List<String> headerPortletCss);
+	public void setHeaderPortletCss(
+		java.util.List<java.lang.String> headerPortletCss);
 
-	public java.util.List<String> getHeaderPortalJavaScript();
+	public java.util.List<java.lang.String> getHeaderPortalJavaScript();
 
 	public void setHeaderPortalJavaScript(
-		java.util.List<String> headerPortalJavaScript);
+		java.util.List<java.lang.String> headerPortalJavaScript);
 
-	public java.util.List<String> getHeaderPortletJavaScript();
+	public java.util.List<java.lang.String> getHeaderPortletJavaScript();
 
 	public void setHeaderPortletJavaScript(
-		java.util.List<String> headerPortletJavaScript);
+		java.util.List<java.lang.String> headerPortletJavaScript);
 
-	public java.util.List<String> getFooterPortalCss();
+	public java.util.List<java.lang.String> getFooterPortalCss();
 
-	public void setFooterPortalCss(java.util.List<String> footerPortalCss);
+	public void setFooterPortalCss(
+		java.util.List<java.lang.String> footerPortalCss);
 
-	public java.util.List<String> getFooterPortletCss();
+	public java.util.List<java.lang.String> getFooterPortletCss();
 
-	public void setFooterPortletCss(java.util.List<String> footerPortletCss);
+	public void setFooterPortletCss(
+		java.util.List<java.lang.String> footerPortletCss);
 
-	public java.util.List<String> getFooterPortalJavaScript();
+	public java.util.List<java.lang.String> getFooterPortalJavaScript();
 
 	public void setFooterPortalJavaScript(
-		java.util.List<String> footerPortalJavaScript);
+		java.util.List<java.lang.String> footerPortalJavaScript);
 
-	public java.util.List<String> getFooterPortletJavaScript();
+	public java.util.List<java.lang.String> getFooterPortletJavaScript();
 
 	public void setFooterPortletJavaScript(
-		java.util.List<String> footerPortletJavaScript);
+		java.util.List<java.lang.String> footerPortletJavaScript);
 
 	public java.lang.String getCssClassWrapper();
 
@@ -401,13 +405,14 @@ public interface Portlet extends PortletModel {
 
 	public void setRolesArray(java.lang.String[] rolesArray);
 
-	public java.util.Set<String> getUnlinkedRoles();
+	public java.util.Set<java.lang.String> getUnlinkedRoles();
 
-	public void setUnlinkedRoles(java.util.Set<String> unlinkedRoles);
+	public void setUnlinkedRoles(java.util.Set<java.lang.String> unlinkedRoles);
 
-	public java.util.Map<String, String> getRoleMappers();
+	public java.util.Map<java.lang.String, java.lang.String> getRoleMappers();
 
-	public void setRoleMappers(java.util.Map<String, String> roleMappers);
+	public void setRoleMappers(
+		java.util.Map<java.lang.String, java.lang.String> roleMappers);
 
 	public void linkRoles();
 
@@ -427,39 +432,41 @@ public interface Portlet extends PortletModel {
 
 	public void setInclude(boolean include);
 
-	public java.util.Map<String, String> getInitParams();
+	public java.util.Map<java.lang.String, java.lang.String> getInitParams();
 
-	public void setInitParams(java.util.Map<String, String> initParams);
+	public void setInitParams(
+		java.util.Map<java.lang.String, java.lang.String> initParams);
 
 	public java.lang.Integer getExpCache();
 
 	public void setExpCache(java.lang.Integer expCache);
 
-	public java.util.Map<String, java.util.Set<String>> getPortletModes();
+	public java.util.Map<java.lang.String, java.util.Set<java.lang.String>> getPortletModes();
 
 	public void setPortletModes(
-		java.util.Map<String, java.util.Set<String>> portletModes);
+		java.util.Map<java.lang.String, java.util.Set<java.lang.String>> portletModes);
 
 	public boolean hasPortletMode(java.lang.String mimeType,
 		javax.portlet.PortletMode portletMode);
 
-	public java.util.Set<String> getAllPortletModes();
+	public java.util.Set<java.lang.String> getAllPortletModes();
 
 	public boolean hasMultipleMimeTypes();
 
-	public java.util.Map<String, java.util.Set<String>> getWindowStates();
+	public java.util.Map<java.lang.String, java.util.Set<java.lang.String>> getWindowStates();
 
 	public void setWindowStates(
-		java.util.Map<String, java.util.Set<String>> windowStates);
+		java.util.Map<java.lang.String, java.util.Set<java.lang.String>> windowStates);
 
 	public boolean hasWindowState(java.lang.String mimeType,
 		javax.portlet.WindowState windowState);
 
-	public java.util.Set<String> getAllWindowStates();
+	public java.util.Set<java.lang.String> getAllWindowStates();
 
-	public java.util.Set<String> getSupportedLocales();
+	public java.util.Set<java.lang.String> getSupportedLocales();
 
-	public void setSupportedLocales(java.util.Set<String> supportedLocales);
+	public void setSupportedLocales(
+		java.util.Set<java.lang.String> supportedLocales);
 
 	public java.lang.String getResourceBundle();
 
@@ -469,10 +476,10 @@ public interface Portlet extends PortletModel {
 
 	public void setPortletInfo(com.liferay.portal.model.PortletInfo portletInfo);
 
-	public java.util.Map<String, com.liferay.portal.model.PortletFilter> getPortletFilters();
+	public java.util.Map<java.lang.String, com.liferay.portal.model.PortletFilter> getPortletFilters();
 
 	public void setPortletFilters(
-		java.util.Map<String, com.liferay.portal.model.PortletFilter> portletFilters);
+		java.util.Map<java.lang.String, com.liferay.portal.model.PortletFilter> portletFilters);
 
 	public void addProcessingEvent(
 		com.liferay.portal.kernel.xml.QName processingEvent);

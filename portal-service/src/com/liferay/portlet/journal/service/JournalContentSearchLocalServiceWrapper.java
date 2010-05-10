@@ -177,7 +177,7 @@ public class JournalContentSearchLocalServiceWrapper
 		return _journalContentSearchLocalService.getArticleContentSearches(articleId);
 	}
 
-	public java.util.List<Long> getLayoutIds(long groupId,
+	public java.util.List<java.lang.Long> getLayoutIds(long groupId,
 		boolean privateLayout, java.lang.String articleId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _journalContentSearchLocalService.getLayoutIds(groupId,

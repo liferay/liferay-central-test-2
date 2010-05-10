@@ -142,7 +142,7 @@ public interface JournalContentSearchLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<Long> getLayoutIds(long groupId,
+	public java.util.List<java.lang.Long> getLayoutIds(long groupId,
 		boolean privateLayout, java.lang.String articleId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 

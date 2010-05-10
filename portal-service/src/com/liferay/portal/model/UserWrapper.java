@@ -580,7 +580,7 @@ public class UserWrapper implements User {
 		return _user.getPublicLayoutsPageCount();
 	}
 
-	public java.util.Set<String> getReminderQueryQuestions()
+	public java.util.Set<java.lang.String> getReminderQueryQuestions()
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _user.getReminderQueryQuestions();

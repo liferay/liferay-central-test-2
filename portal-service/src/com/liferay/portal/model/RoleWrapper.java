@@ -109,7 +109,7 @@ public class RoleWrapper implements Role {
 		return _role.getTitle(languageId, useDefault);
 	}
 
-	public java.util.Map<java.util.Locale, String> getTitleMap() {
+	public java.util.Map<java.util.Locale, java.lang.String> getTitleMap() {
 		return _role.getTitleMap();
 	}
 
@@ -121,7 +121,8 @@ public class RoleWrapper implements Role {
 		_role.setTitle(locale, title);
 	}
 
-	public void setTitleMap(java.util.Map<java.util.Locale, String> titleMap) {
+	public void setTitleMap(
+		java.util.Map<java.util.Locale, java.lang.String> titleMap) {
 		_role.setTitleMap(titleMap);
 	}
 
