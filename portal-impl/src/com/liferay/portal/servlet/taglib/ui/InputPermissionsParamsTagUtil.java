@@ -16,6 +16,7 @@ package com.liferay.portal.servlet.taglib.ui;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -134,7 +135,7 @@ public class InputPermissionsParamsTagUtil {
 						sb.append(StringPool.AMPERSAND);
 						sb.append(renderResponse.getNamespace());
 						sb.append("communityPermissions=");
-						sb.append(action);
+						sb.append(HttpUtil.encodeURL(action));
 					}
 				}
 
@@ -142,7 +143,7 @@ public class InputPermissionsParamsTagUtil {
 					sb.append(StringPool.AMPERSAND);
 					sb.append(renderResponse.getNamespace());
 					sb.append("guestPermissions=");
-					sb.append(action);
+					sb.append(HttpUtil.encodeURL(action));
 				}
 			}
 
@@ -152,7 +153,7 @@ public class InputPermissionsParamsTagUtil {
 			sb.append(StringPool.AMPERSAND);
 			sb.append(renderResponse.getNamespace());
 			sb.append("inputPermissionsViewRole=");
-			sb.append(inputPermissionsViewRole);
+			sb.append(HttpUtil.encodeURL(inputPermissionsViewRole));
 
 			pageContext.getOut().print(sb.toString());
 		}
