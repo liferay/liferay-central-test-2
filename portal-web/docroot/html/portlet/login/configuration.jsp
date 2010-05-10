@@ -71,25 +71,31 @@ String redirect = ParamUtil.getString(request, "redirect");
 			</div>
 
 			<c:choose>
-				<c:when test='<%= tabs2.equals("password-changed-notification") %>'>
+				<c:when test='<%= tabs2.equals("password-changed-notification") || tabs2.equals("password-reset-notification") %>'>
+
 					<%
-					String emailPasswordSentSubject = PrefsParamUtil.getString(preferences, request, "emailPasswordSentSubject_" + currentLanguageId, StringPool.BLANK);
-					String emailPasswordSentBody = PrefsParamUtil.getString(preferences, request, "emailPasswordSentBody_" + currentLanguageId, StringPool.BLANK);
+					String emailParam = "emailPasswordSent";
 
-					editorParam = "emailPasswordSentBody_" + currentLanguageId;
-					editorContent = emailPasswordSentBody;
+					if (tabs2.equals("password-reset-notification")) {
+						emailParam = "emailPasswordReset";
+					}
+
+					String emailSubject = PrefsParamUtil.getString(preferences, request, emailParam + "Subject_" + currentLanguageId, StringPool.BLANK);
+					String emailBody = PrefsParamUtil.getString(preferences, request, emailParam + "Body_" + currentLanguageId, StringPool.BLANK);
+
+					editorParam = emailParam + "Body_" + currentLanguageId;
+					editorContent = emailBody;
 					%>
-					<aui:fieldset>
-						<aui:input inlineLabel="left" label="enabled" name="emailPasswordSentEnabled" type="checkbox" value='<%= PrefsParamUtil.getBoolean(preferences, request, "emailPasswordSentEnabled", true) %>' />
 
+					<aui:fieldset>
 						<aui:select label="language" name="languageId" onChange='<%= renderResponse.getNamespace() + "updateLanguage(this);" %>'>
 
 							<%
 							for (int i = 0; i < locales.length; i++) {
 								String optionStyle = StringPool.BLANK;
 
-								if (Validator.isNotNull(preferences.getValue("emailPasswordSentSubject_" + LocaleUtil.toLanguageId(locales[i]), StringPool.BLANK)) ||
-									Validator.isNotNull(preferences.getValue("emailPasswordSentBody_" + LocaleUtil.toLanguageId(locales[i]), StringPool.BLANK))) {
+								if (Validator.isNotNull(preferences.getValue(emailParam + "Subject_" + LocaleUtil.toLanguageId(locales[i]), StringPool.BLANK)) ||
+									Validator.isNotNull(preferences.getValue(emailParam + "Body_" + LocaleUtil.toLanguageId(locales[i]), StringPool.BLANK))) {
 
 									optionStyle = "style=\"font-weight: bold;\"";
 								}
@@ -103,7 +109,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 						</aui:select>
 
-						<aui:input cssClass="lfr-input-text-container" label="subject" name='<%= "emailPasswordSentSubject" + StringPool.UNDERLINE + currentLanguageId %>' value="<%= emailPasswordSentSubject %>" />
+						<aui:input cssClass="lfr-input-text-container" label="subject" name='<%= emailParam + "Subject" + StringPool.UNDERLINE + currentLanguageId %>' value="<%= emailSubject %>" />
 
 						<aui:field-wrapper label="body">
 							<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" />
@@ -128,6 +134,16 @@ String redirect = ParamUtil.getString(request, "redirect");
 							<dd>
 								<%= preferences.getValue("emailFromName", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.ADMIN_EMAIL_FROM_NAME)) %>
 							</dd>
+
+							<c:if test='<%= tabs2.equals("password-reset-notification") %>'>
+								<dt>
+									[$PASSWORD_RESET_URL$]
+								</dt>
+								<dd>
+									<liferay-ui:message key="the-password-reset-url" />
+								</dd>
+							</c:if>
+
 							<dt>
 								[$PORTAL_URL$]
 							</dt>
@@ -173,134 +189,16 @@ String redirect = ParamUtil.getString(request, "redirect");
 							<dd>
 								<liferay-ui:message key="the-user-id" />
 							</dd>
-							<dt>
-								[$USER_PASSWORD$]
-							</dt>
-							<dd>
-								<liferay-ui:message key="the-user-password" />
-							</dd>
-							<dt>
-								[$USER_SCREENNAME$]
-							</dt>
-							<dd>
-								<liferay-ui:message key="the-user-screen-name" />
-							</dd>
-						</dl>
-					</div>
-				</c:when>
-				<c:when test='<%= tabs2.equals("password-reset-notification") %>'>
-					<%
-					String emailPasswordResetSubject = PrefsParamUtil.getString(preferences, request, "emailPasswordResetSubject_" + currentLanguageId, StringPool.BLANK);
-					String emailPasswordResetBody = PrefsParamUtil.getString(preferences, request, "emailPasswordResetBody_" + currentLanguageId, StringPool.BLANK);
 
-					editorParam = "emailPasswordResetBody_" + currentLanguageId;
-					editorContent = emailPasswordResetBody;
-					%>
+							<c:if test='<%= tabs2.equals("password-changed-notification") %>'>
+								<dt>
+									[$USER_PASSWORD$]
+								</dt>
+								<dd>
+									<liferay-ui:message key="the-user-password" />
+								</dd>
+							</c:if>
 
-					<aui:fieldset>
-						<aui:select label="language" name="languageId" onChange='<%= renderResponse.getNamespace() + "updateLanguage(this);" %>'>
-
-							<%
-							for (int i = 0; i < locales.length; i++) {
-								String optionStyle = StringPool.BLANK;
-
-								if (Validator.isNotNull(preferences.getValue("emailPasswordResetSubject_" + LocaleUtil.toLanguageId(locales[i]), StringPool.BLANK)) ||
-									Validator.isNotNull(preferences.getValue("emailPasswordResetBody_" + LocaleUtil.toLanguageId(locales[i]), StringPool.BLANK))) {
-
-									optionStyle = "style=\"font-weight: bold;\"";
-								}
-							%>
-
-								<aui:option label="<%= locales[i].getDisplayName(locale) %>" selected="<%= currentLanguageId.equals(LocaleUtil.toLanguageId(locales[i])) %>" value="<%= LocaleUtil.toLanguageId(locales[i]) %>" />
-
-							<%
-							}
-							%>
-
-						</aui:select>
-
-						<aui:input cssClass="lfr-input-text-container" label="subject" name='<%= "emailPasswordResetSubject" + StringPool.UNDERLINE + currentLanguageId %>' value="<%= emailPasswordResetSubject %>" />
-
-						<aui:field-wrapper label="body">
-							<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" />
-
-							<aui:input name="<%= editorParam %>" type="hidden" />
-						</aui:field-wrapper>
-					</aui:fieldset>
-
-					<div class="definition-of-terms">
-						<h4><liferay-ui:message key="definition-of-terms" /></h4>
-
-						<dl>
-							<dt>
-								[$FROM_ADDRESS$]
-							</dt>
-							<dd>
-								<%= preferences.getValue("emailFromAddress", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.ADMIN_EMAIL_FROM_ADDRESS)) %>
-							</dd>
-							<dt>
-								[$FROM_NAME$]
-							</dt>
-							<dd>
-								<%= preferences.getValue("emailFromName", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.ADMIN_EMAIL_FROM_NAME)) %>
-							</dd>
-							<dt>
-								[$PASSWORD_RESET_URL$]
-							</dt>
-							<dd>
-								<liferay-ui:message key="the-password-reset-url" />
-							</dd>
-							<dt>
-								[$PORTAL_URL$]
-							</dt>
-							<dd>
-								<%= company.getVirtualHost() %>
-							</dd>
-							<dt>
-								[$REMOTE_ADDRESS$]
-							</dt>
-							<dd>
-								<liferay-ui:message key="the-browser's-remote-address" />
-							</dd>
-							<dt>
-								[$REMOTE_HOST$]
-							</dt>
-							<dd>
-								<liferay-ui:message key="the-browser's-remote-host" />
-							</dd>
-
-							<dt>
-								[$TO_ADDRESS$]
-							</dt>
-							<dd>
-								<liferay-ui:message key="the-address-of-the-email-recipient" />
-							</dd>
-							<dt>
-								[$TO_NAME$]
-							</dt>
-							<dd>
-								<liferay-ui:message key="the-name-of-the-email-recipient" />
-							</dd>
-
-							<dt>
-								[$USER_AGENT$]
-							</dt>
-							<dd>
-								<liferay-ui:message key="the-browser's-user-agent" />
-							</dd>
-
-							<dt>
-								[$USER_ID$]
-							</dt>
-							<dd>
-								<liferay-ui:message key="the-user-id" />
-							</dd>
-							<dt>
-								[$USER_PASSWORD$]
-							</dt>
-							<dd>
-								<liferay-ui:message key="the-user-password" />
-							</dd>
 							<dt>
 								[$USER_SCREENNAME$]
 							</dt>

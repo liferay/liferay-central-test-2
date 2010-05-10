@@ -29,6 +29,16 @@
 	<dd>
 		<%= adminEmailFromName %>
 	</dd>
+
+	<c:if test='<%= sectionName.equals("password-reset-notification") %>'>
+		<dt>
+			[$PASSWORD_RESET_URL$]
+		</dt>
+		<dd>
+			<liferay-ui:message key="the-password-reset-url" />
+		</dd>
+	</c:if>
+
 	<dt>
 		[$PORTAL_URL$]
 	</dt>
@@ -71,12 +81,16 @@
 	<dd>
 		<liferay-ui:message key="the-user-id" />
 	</dd>
-	<dt>
-		[$USER_PASSWORD$]
-	</dt>
-	<dd>
-		<liferay-ui:message key="the-user-password" />
-	</dd>
+
+	<c:if test='<%= sectionName.equals("password-changed-notification") %>'>
+		<dt>
+			[$USER_PASSWORD$]
+		</dt>
+		<dd>
+			<liferay-ui:message key="the-user-password" />
+		</dd>
+	</c:if>
+
 	<dt>
 		[$USER_SCREENNAME$]
 	</dt>

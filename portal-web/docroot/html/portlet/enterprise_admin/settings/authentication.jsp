@@ -20,7 +20,7 @@
 String companySecurityAuthType = ParamUtil.getString(request, "settings(" + PropsKeys.COMPANY_SECURITY_AUTH_TYPE + ")", company.getAuthType());
 boolean companySecurityAutoLogin = ParamUtil.getBoolean(request, "settings(" + PropsKeys.COMPANY_SECURITY_AUTO_LOGIN + ")", company.isAutoLogin());
 boolean companySecuritySendPassword = ParamUtil.getBoolean(request, "settings(" + PropsKeys.COMPANY_SECURITY_SEND_PASSWORD + ")", company.isSendPassword());
-boolean companySecuritySendPasswordResetLinkOnly = ParamUtil.getBoolean(request, "settings(" + PropsKeys.COMPANY_SECURITY_SEND_PASSWORD_RESET_LINK_ONLY + ")", company.isSendPasswordResetLinkOnly());
+boolean companySecuritySendPasswordResetLink = ParamUtil.getBoolean(request, "settings(" + PropsKeys.COMPANY_SECURITY_SEND_PASSWORD_RESET_LINK + ")", company.isSendPasswordResetLink());
 boolean companySecurityStrangers = ParamUtil.getBoolean(request, "settings(" + PropsKeys.COMPANY_SECURITY_STRANGERS + ")", company.isStrangers());
 boolean companySecurityStrangersWithMx = ParamUtil.getBoolean(request, "settings(" + PropsKeys.COMPANY_SECURITY_STRANGERS_WITH_MX + ")", company.isStrangersWithMx());
 boolean companySecurityStrangersVerify = ParamUtil.getBoolean(request, "settings(" + PropsKeys.COMPANY_SECURITY_STRANGERS_VERIFY + ")", company.isStrangersVerify());
@@ -69,9 +69,9 @@ String siteminderUserHeader = ParamUtil.getString(request, "settings(" + PropsKe
 
 			<aui:input inlineLabel="left" label="allow-users-to-automatically-login" name='<%= "settings(" + PropsKeys.COMPANY_SECURITY_AUTO_LOGIN + ")" %>' type="checkbox" value="<%= companySecurityAutoLogin %>" />
 
-			<aui:input inlineLabel="left" label="allow-users-to-request-forgotten-passwords" name='<%= "settings(" + PropsKeys.COMPANY_SECURITY_SEND_PASSWORD + ")" %>' type="checkbox" value="<%= companySecuritySendPassword %>" />
+			<aui:input inlineLabel="left" helpMessage="allow-users-to-request-forgotten-passwords-help" label="allow-users-to-request-forgotten-passwords" name='<%= "settings(" + PropsKeys.COMPANY_SECURITY_SEND_PASSWORD + ")" %>' type="checkbox" value="<%= companySecuritySendPassword %>" />
 
-			<aui:input inlineLabel="left" label="send-password-reset-link-only" name='<%= "settings(" + PropsKeys.COMPANY_SECURITY_SEND_PASSWORD_RESET_LINK_ONLY + ")" %>' type="checkbox" value="<%= companySecuritySendPasswordResetLinkOnly %>" />
+			<aui:input inlineLabel="left" helpMessage="allow-users-to-request-password-reset-links-help" label="allow-users-to-request-password-reset-links" name='<%= "settings(" + PropsKeys.COMPANY_SECURITY_SEND_PASSWORD_RESET_LINK + ")" %>' type="checkbox" value="<%= companySecuritySendPasswordResetLink %>" />
 
 			<aui:input inlineLabel="left" label="allow-strangers-to-create-accounts" name='<%= "settings(" + PropsKeys.COMPANY_SECURITY_STRANGERS + ")" %>' type="checkbox" value="<%= companySecurityStrangers %>" />
 
@@ -80,11 +80,9 @@ String siteminderUserHeader = ParamUtil.getString(request, "settings(" + PropsKe
 			<aui:input inlineLabel="left" label="require-strangers-to-verify-their-email-address" name='<%= "settings(" + PropsKeys.COMPANY_SECURITY_STRANGERS_VERIFY + ")" %>' type="checkbox" value="<%= companySecurityStrangersVerify %>" />
 		</aui:fieldset>
 	</liferay-ui:section>
-
 	<liferay-ui:section>
 		<%@ include file="/html/portlet/enterprise_admin/settings/authentication_ldap.jspf" %>
 	</liferay-ui:section>
-
 	<liferay-ui:section>
 		<aui:fieldset>
 			<aui:input inlineLabel="left" label="enabled" name='<%= "settings(" + PropsKeys.CAS_AUTH_ENABLED + ")" %>' type="checkbox" value="<%= casAuthEnabled %>" />
@@ -102,7 +100,6 @@ String siteminderUserHeader = ParamUtil.getString(request, "settings(" + PropsKe
 			<aui:input cssClass="lfr-input-text-container" label="service-url" name='<%= "settings(" + PropsKeys.CAS_SERVICE_URL + ")" %>' type="text" value="<%= casServiceUrl %>" />
 		</aui:fieldset>
 	</liferay-ui:section>
-
 	<liferay-ui:section>
 		<aui:fieldset>
 			<aui:input inlineLabel="left" label="enabled" name='<%= "settings(" + PropsKeys.NTLM_AUTH_ENABLED + ")" %>' type="checkbox" value="<%= ntlmAuthEnabled %>" />
@@ -112,13 +109,11 @@ String siteminderUserHeader = ParamUtil.getString(request, "settings(" + PropsKe
 			<aui:input cssClass="lfr-input-text-container" label="domain" name='<%= "settings(" + PropsKeys.NTLM_DOMAIN + ")" %>' type="text" value="<%= ntlmDomain %>" />
 		</aui:fieldset>
 	</liferay-ui:section>
-
 	<liferay-ui:section>
 		<aui:fieldset>
 			<aui:input inlineLabel="left" label="enabled" name='<%= "settings(" + PropsKeys.OPEN_ID_AUTH_ENABLED + ")" %>' type="checkbox" value="<%= openIdAuthEnabled %>" />
 		</aui:fieldset>
 	</liferay-ui:section>
-
 	<liferay-ui:section>
 		<aui:fieldset>
 			<aui:input inlineLabel="left" label="enabled" name='<%= "settings(" + PropsKeys.OPEN_SSO_AUTH_ENABLED + ")" %>' type="checkbox" value="<%= openSsoAuthEnabled %>" />
@@ -138,7 +133,6 @@ String siteminderUserHeader = ParamUtil.getString(request, "settings(" + PropsKe
 			<aui:input cssClass="lfr-input-text-container" label="last-name-attribute" name='<%= "settings(" + PropsKeys.OPEN_SSO_LAST_NAME_ATTR + ")" %>' type="text" value="<%= openSsoLastNameAttr %>" />
 		</aui:fieldset>
 	</liferay-ui:section>
-
 	<liferay-ui:section>
 		<aui:fieldset>
 			<aui:input inlineLabel="left" label="enabled" name='<%= "settings(" + PropsKeys.SITEMINDER_AUTH_ENABLED + ")" %>' type="checkbox" value="<%= siteminderAuthEnabled %>" />

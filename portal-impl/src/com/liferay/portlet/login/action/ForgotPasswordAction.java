@@ -24,14 +24,13 @@ import com.liferay.portal.kernel.captcha.CaptchaUtil;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.Company;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.login.util.LoginUtil;
@@ -116,7 +115,9 @@ public class ForgotPasswordAction extends PortletAction {
 		return mapping.findForward("portlet.login.forgot_password");
 	}
 
-	protected User getUser(ActionRequest actionRequest) throws Exception {
+	protected User getUser(ActionRequest actionRequest)
+		throws Exception {
+
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
@@ -153,6 +154,11 @@ public class ForgotPasswordAction extends PortletAction {
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		Company company = themeDisplay.getCompany();
+
 		User user = getUser(actionRequest);
 
 		if (PropsValues.USERS_REMINDER_QUERIES_ENABLED) {
@@ -175,38 +181,25 @@ public class ForgotPasswordAction extends PortletAction {
 
 		String languageId = LanguageUtil.getLanguageId(actionRequest);
 
-		long companyId = PortalUtil.getCompanyId(actionRequest);
+		String emailFromName = preferences.getValue("emailFromName", null);
+		String emailFromAddress = preferences.getValue(
+			"emailFromAddress", null);
+		String emailToAddress = user.getEmailAddress();
 
-		if (PrefsPropsUtil.getBoolean(
-			companyId,
-			PropsKeys.COMPANY_SECURITY_SEND_PASSWORD_RESET_LINK_ONLY)) {
-			String emailFromName = preferences.getValue("emailFromName", null);
-			String emailFromAddress = preferences.getValue(
-				"emailFromAddress", null);
-			String emailToAddress = user.getEmailAddress();
-			String subject = preferences.getValue(
-				"emailPasswordResetSubject_" + languageId, null);
-			String body = preferences.getValue(
-				"emailPasswordResetBody_" + languageId, null);
+		String emailParam = "emailPasswordSent";
 
-			LoginUtil.sendPasswordResetLink(
-				actionRequest, emailFromName, emailFromAddress, emailToAddress,
-				subject, body);
+		if (company.isSendPasswordResetLink()) {
+			emailParam = "emailPasswordReset";
 		}
-		else {
-			String emailFromName = preferences.getValue("emailFromName", null);
-			String emailFromAddress = preferences.getValue(
-				"emailFromAddress", null);
-			String emailToAddress = user.getEmailAddress();
-			String subject = preferences.getValue(
-				"emailPasswordSentSubject_" + languageId, null);
-			String body = preferences.getValue(
-				"emailPasswordSentBody_" + languageId, null);
 
-			LoginUtil.sendPassword(
-				actionRequest, emailFromName, emailFromAddress, emailToAddress,
-				subject, body);
-		}
+		String subject = preferences.getValue(
+			emailParam + "Subject_" + languageId, null);
+		String body = preferences.getValue(
+			emailParam + "Body_" + languageId, null);
+
+		LoginUtil.sendPassword(
+			actionRequest, emailFromName, emailFromAddress, emailToAddress,
+			subject, body);
 
 		sendRedirect(actionRequest, actionResponse);
 	}

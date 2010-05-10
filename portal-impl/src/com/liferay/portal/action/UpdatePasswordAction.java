@@ -30,6 +30,7 @@ import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.TicketLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.struts.ActionConstants;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.login.util.LoginUtil;
@@ -56,21 +57,23 @@ public class UpdatePasswordAction extends Action {
 			HttpServletResponse response)
 		throws Exception {
 
-		String cmd = ParamUtil.getString(request, Constants.CMD);
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
-		User user = PortalUtil.getUser(request);
+		Ticket ticket = getTicket(request);
 
-		boolean isValidTicket = (getValidTicket(request) != null);
-
-		if (Validator.isNull(cmd) && ((user != null) || isValidTicket)) {
-			return mapping.findForward("portal.update_password");
-		}
-		else if ((user == null) && !isValidTicket) {
+		if (!themeDisplay.isSignedIn() && (ticket == null)) {
 			return mapping.findForward(ActionConstants.COMMON_REFERER);
 		}
 
+		String cmd = ParamUtil.getString(request, Constants.CMD);
+
+		if (Validator.isNull(cmd)) {
+			return mapping.findForward("portal.update_password");
+		}
+
 		try {
-			updatePassword(request, response);
+			updatePassword(request, response, themeDisplay, ticket);
 
 			return mapping.findForward(ActionConstants.COMMON_REFERER);
 		}
@@ -95,7 +98,7 @@ public class UpdatePasswordAction extends Action {
 		}
 	}
 
-	protected Ticket getValidTicket(HttpServletRequest request) {
+	protected Ticket getTicket(HttpServletRequest request) {
 		String token = ParamUtil.getString(request, "ticket");
 
 		if (Validator.isNull(token)) {
@@ -119,22 +122,19 @@ public class UpdatePasswordAction extends Action {
 	}
 
 	protected void updatePassword(
-			HttpServletRequest request, HttpServletResponse response)
+			HttpServletRequest request, HttpServletResponse response,
+			ThemeDisplay themeDisplay, Ticket ticket)
 		throws Exception {
 
 		AuthTokenUtil.check(request);
 
-		HttpSession session = request.getSession();
-
-		Ticket ticket = getValidTicket(request);
-
 		long userId = 0;
 
-		if (ticket == null) {
-			userId = PortalUtil.getUserId(request);
+		if (ticket != null) {
+			userId = ticket.getClassPK();
 		}
 		else {
-			userId = ticket.getClassPK();
+			userId = themeDisplay.getUserId();
 		}
 
 		String password1 = ParamUtil.getString(request, "password1");
@@ -154,19 +154,23 @@ public class UpdatePasswordAction extends Action {
 
 			String login = null;
 
-			if (company.getAuthType().equals(CompanyConstants.AUTH_TYPE_ID)) {
-				login = String.valueOf(user.getUserId());
+			String authType = company.getAuthType();
+
+			if (authType.equals(CompanyConstants.AUTH_TYPE_EA)) {
+				login = String.valueOf(userId);
 			}
-			else if (company.getAuthType().equals(CompanyConstants.AUTH_TYPE_SN)) {
+			else if (authType.equals(CompanyConstants.AUTH_TYPE_SN)) {
 				login = user.getScreenName();
 			}
-			else {
+			else if (authType.equals(CompanyConstants.AUTH_TYPE_ID)) {
 				login = user.getEmailAddress();
 			}
 
 			LoginUtil.login(request, response, login, password1, false, null);
 		}
 		else {
+			HttpSession session = request.getSession();
+
 			session.setAttribute(WebKeys.USER_PASSWORD, password1);
 		}
 	}

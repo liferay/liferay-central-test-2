@@ -26,14 +26,11 @@ boolean adminEmailUserAddedEnable = ParamUtil.getBoolean(request, "emailUserAdde
 String adminEmailUserAddedSubject = ParamUtil.getString(request, "emailUserAddedSubject", PrefsPropsUtil.getContent(company.getCompanyId(), PropsKeys.ADMIN_EMAIL_USER_ADDED_SUBJECT));
 String adminEmailUserAddedBody = ParamUtil.getString(request, "emailUserAddedBody", PrefsPropsUtil.getContent(company.getCompanyId(), PropsKeys.ADMIN_EMAIL_USER_ADDED_BODY));
 
-boolean adminEmailPasswordSentEnable = ParamUtil.getBoolean(request, "emailPasswordSentEnable", PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.ADMIN_EMAIL_PASSWORD_SENT_ENABLED));
 String adminEmailPasswordSentSubject = ParamUtil.getString(request, "emailPasswordSentSubject", PrefsPropsUtil.getContent(company.getCompanyId(), PropsKeys.ADMIN_EMAIL_PASSWORD_SENT_SUBJECT));
 String adminEmailPasswordSentBody = ParamUtil.getString(request, "emailPasswordSentBody", PrefsPropsUtil.getContent(company.getCompanyId(), PropsKeys.ADMIN_EMAIL_PASSWORD_SENT_BODY));
 
-boolean adminEmailPasswordResetEnable = ParamUtil.getBoolean(request, "emailPasswordResetEnable", PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.ADMIN_EMAIL_PASSWORD_RESET_ENABLED));
 String adminEmailPasswordResetSubject = ParamUtil.getString(request, "emailPasswordResetSubject", PrefsPropsUtil.getContent(company.getCompanyId(), PropsKeys.ADMIN_EMAIL_PASSWORD_RESET_SUBJECT));
 String adminEmailPasswordResetBody = ParamUtil.getString(request, "emailPasswordResetBody", PrefsPropsUtil.getContent(company.getCompanyId(), PropsKeys.ADMIN_EMAIL_PASSWORD_RESET_BODY));
-
 %>
 
 <liferay-ui:error-marker key="errorSection" value="email_notifications" />
@@ -53,7 +50,6 @@ String adminEmailPasswordResetBody = ParamUtil.getString(request, "emailPassword
 			<aui:input cssClass="lfr-input-text-container" label="address" name='<%= "settings(" + PropsKeys.ADMIN_EMAIL_FROM_ADDRESS + ")" %>' type="text" value="<%= adminEmailFromAddress %>" />
 		</aui:fieldset>
 	</liferay-ui:section>
-
 	<liferay-ui:section>
 		<aui:fieldset>
 			<aui:input inlineLabel="left" label="enabled" name='<%= "settings(" + PropsKeys.ADMIN_EMAIL_USER_ADDED_ENABLED + ")" %>' type="checkbox" value="<%= adminEmailUserAddedEnable %>" />
@@ -75,11 +71,8 @@ String adminEmailPasswordResetBody = ParamUtil.getString(request, "emailPassword
 			</div>
 		</aui:fieldset>
 	</liferay-ui:section>
-
 	<liferay-ui:section>
 		<aui:fieldset>
-			<aui:input inlineLabel="left" label="enabled" name='<%= "settings(" + PropsKeys.ADMIN_EMAIL_PASSWORD_SENT_ENABLED + ")" %>' type="checkbox" value="<%= adminEmailPasswordSentEnable %>" />
-
 			<liferay-ui:error key="emailPasswordSentSubject" message="please-enter-a-valid-subject" />
 
 			<aui:input cssClass="lfr-input-text-container" label="subject" name='<%= "settings(" + PropsKeys.ADMIN_EMAIL_PASSWORD_SENT_SUBJECT + ")" %>' type="text" value="<%= adminEmailPasswordSentSubject %>" />
@@ -97,11 +90,8 @@ String adminEmailPasswordResetBody = ParamUtil.getString(request, "emailPassword
 			</div>
 		</aui:fieldset>
 	</liferay-ui:section>
-
 	<liferay-ui:section>
 		<aui:fieldset>
-			<aui:input inlineLabel="left" label="enabled" name='<%= "settings(" + PropsKeys.ADMIN_EMAIL_PASSWORD_RESET_ENABLED + ")" %>' type="checkbox" value="<%= adminEmailPasswordResetEnable %>" />
-
 			<liferay-ui:error key="emailPasswordResetSubject" message="please-enter-a-valid-subject" />
 
 			<aui:input cssClass="lfr-input-text-container" label="subject" name='<%= "settings(" + PropsKeys.ADMIN_EMAIL_PASSWORD_RESET_SUBJECT + ")" %>' type="text" value="<%= adminEmailPasswordResetSubject %>" />

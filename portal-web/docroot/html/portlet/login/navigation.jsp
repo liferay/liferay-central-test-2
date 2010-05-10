@@ -27,11 +27,7 @@ if (!strutsAction.equals("/login/create_account") && company.isStrangers()) {
 
 boolean showForgotPasswordIcon = false;
 
-if (!strutsAction.equals("/login/forgot_password") &&
-	company.isSendPassword() &&
-	PrefsPropsUtil.getBoolean(themeDisplay.getCompanyId(), PropsKeys.ADMIN_EMAIL_PASSWORD_SENT_ENABLED) &&
-	GetterUtil.getBoolean(preferences.getValue("emailPasswordSentEnabled", null), true)) {
-
+if (!strutsAction.equals("/login/forgot_password") && (company.isSendPassword() || company.isSendPasswordResetLink())) {
 	showForgotPasswordIcon = true;
 }
 

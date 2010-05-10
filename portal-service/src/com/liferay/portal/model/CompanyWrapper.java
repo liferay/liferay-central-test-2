@@ -270,9 +270,9 @@ public class CompanyWrapper implements Company {
 		return _company.isSendPassword();
 	}
 
-	public boolean isSendPasswordResetLinkOnly()
+	public boolean isSendPasswordResetLink()
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _company.isSendPasswordResetLinkOnly();
+		return _company.isSendPasswordResetLink();
 	}
 
 	public boolean isStrangers()

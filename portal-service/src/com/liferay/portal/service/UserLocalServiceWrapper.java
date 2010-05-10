@@ -656,24 +656,13 @@ public class UserLocalServiceWrapper implements UserLocalService {
 		java.lang.String remoteAddr, java.lang.String remoteHost,
 		java.lang.String userAgent, java.lang.String fromName,
 		java.lang.String fromAddress, java.lang.String subject,
-		java.lang.String body)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		_userLocalService.sendPassword(companyId, emailAddress, remoteAddr,
-			remoteHost, userAgent, fromName, fromAddress, subject, body);
-	}
-
-	public void sendPasswordResetLink(long companyId,
-		java.lang.String emailAddress, java.lang.String remoteAddr,
-		java.lang.String remoteHost, java.lang.String userAgent,
-		java.lang.String fromName, java.lang.String fromAddress,
-		java.lang.String subject, java.lang.String body,
+		java.lang.String body,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		_userLocalService.sendPasswordResetLink(companyId, emailAddress,
-			remoteAddr, remoteHost, userAgent, fromName, fromAddress, subject,
-			body, serviceContext);
+		_userLocalService.sendPassword(companyId, emailAddress, remoteAddr,
+			remoteHost, userAgent, fromName, fromAddress, subject, body,
+			serviceContext);
 	}
 
 	public void setRoleUsers(long roleId, long[] userIds)

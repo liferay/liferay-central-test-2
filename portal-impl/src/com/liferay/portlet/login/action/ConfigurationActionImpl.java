@@ -83,23 +83,25 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 
 		String tabs2 = ParamUtil.getString(actionRequest, "tabs2");
 
-		if (tabs2.equals("password-changed-notification")) {
+		if (tabs2.equals("password-changed-notification") ||
+			tabs2.equals("password-reset-notification")) {
+
 			String languageId = LanguageUtil.getLanguageId(actionRequest);
 
-			String emailPasswordSentEnabled = ParamUtil.getString(
-				actionRequest, "emailPasswordSentEnabled");
-			String emailPasswordSentSubject = ParamUtil.getString(
-				actionRequest, "emailPasswordSentSubject_" + languageId);
-			String emailPasswordSentBody = ParamUtil.getString(
-				actionRequest, "emailPasswordSentBody_" + languageId);
+			String emailParam = "emailPasswordSent";
+
+			if (tabs2.equals("password-reset-notification")) {
+				emailParam = "emailPasswordReset";
+			}
+
+			String emailSubject = ParamUtil.getString(
+				actionRequest, emailParam + "Subject_" + languageId);
+			String emailBody = ParamUtil.getString(
+				actionRequest, emailParam + "Body_" + languageId);
 
 			preferences.setValue(
-				"emailPasswordSentEnabled", emailPasswordSentEnabled);
-			preferences.setValue(
-				"emailPasswordSentSubject_" + languageId,
-				emailPasswordSentSubject);
-			preferences.setValue(
-				"emailPasswordSentBody_" + languageId, emailPasswordSentBody);
+				emailParam + "Subject_" + languageId, emailSubject);
+			preferences.setValue(emailParam + "Body_" + languageId, emailBody);
 
 			preferences.store();
 		}

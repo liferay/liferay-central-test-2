@@ -111,7 +111,7 @@ if (Validator.isNull(authType)) {
 						</c:if>
 
 						<aui:button-row>
-							<aui:button type="submit" value="send-new-password" />
+							<aui:button type="submit" value='<%= company.isSendPasswordResetLink() ? "send-password-reset-link" : "send-new-password" %>' />
 						</aui:button-row>
 					</c:otherwise>
 				</c:choose>

@@ -33,13 +33,9 @@ public interface PropsKeys {
 
 	public static final String ADMIN_EMAIL_PASSWORD_RESET_BODY = "admin.email.password.reset.body";
 
-	public static final String ADMIN_EMAIL_PASSWORD_RESET_ENABLED = "admin.email.password.reset.enabled";
-
 	public static final String ADMIN_EMAIL_PASSWORD_RESET_SUBJECT = "admin.email.password.reset.subject";
 
 	public static final String ADMIN_EMAIL_PASSWORD_SENT_BODY = "admin.email.password.sent.body";
-
-	public static final String ADMIN_EMAIL_PASSWORD_SENT_ENABLED = "admin.email.password.sent.enabled";
 
 	public static final String ADMIN_EMAIL_PASSWORD_SENT_SUBJECT = "admin.email.password.sent.subject";
 
@@ -335,7 +331,7 @@ public interface PropsKeys {
 
 	public static final String COMPANY_SECURITY_SEND_PASSWORD = "company.security.send.password";
 
-	public static final String COMPANY_SECURITY_SEND_PASSWORD_RESET_LINK_ONLY = "company.security.send.password.reset.link.only";
+	public static final String COMPANY_SECURITY_SEND_PASSWORD_RESET_LINK = "company.security.send.password.reset.link";
 
 	public static final String COMPANY_SECURITY_STRANGERS = "company.security.strangers";
 

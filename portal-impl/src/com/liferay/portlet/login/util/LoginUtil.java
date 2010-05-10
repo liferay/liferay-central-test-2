@@ -367,38 +367,10 @@ public class LoginUtil {
 		String remoteHost = request.getRemoteHost();
 		String userAgent = request.getHeader(HttpHeaders.USER_AGENT);
 
-		UserLocalServiceUtil.sendPassword(
-			company.getCompanyId(), toAddress, remoteAddr, remoteHost,
-			userAgent, fromName, fromAddress, subject, body);
-
-		SessionMessages.add(actionRequest, "request_processed", toAddress);
-	}
-
-	public static void sendPasswordResetLink(
-			ActionRequest actionRequest, String fromName, String fromAddress,
-			String toAddress, String subject, String body)
-		throws Exception {
-
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			actionRequest);
-
-		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		Company company = themeDisplay.getCompany();
-
-		if (!company.isSendPasswordResetLinkOnly()) {
-			return;
-		}
-
-		String remoteAddr = request.getRemoteAddr();
-		String remoteHost = request.getRemoteHost();
-		String userAgent = request.getHeader(HttpHeaders.USER_AGENT);
-
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			User.class.getName(), actionRequest);
 
-		UserLocalServiceUtil.sendPasswordResetLink(
+		UserLocalServiceUtil.sendPassword(
 			company.getCompanyId(), toAddress, remoteAddr, remoteHost,
 			userAgent, fromName, fromAddress, subject, body, serviceContext);
 

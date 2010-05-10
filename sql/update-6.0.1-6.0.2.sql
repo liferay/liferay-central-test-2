@@ -3,6 +3,9 @@ alter table AssetEntry add socialInformationEquity DOUBLE;
 alter table LayoutSet add settings_ TEXT null;
 
 alter table PasswordPolicy add resetTicketMaxAge LONG;
+
+COMMIT_TRANSACTION;
+
 update PasswordPolicy set resetTicketMaxAge = 86400;
 
 create table SocialEquityAssetEntry (

@@ -184,11 +184,10 @@ public class CompanyImpl extends CompanyModelImpl implements Company {
 			PropsValues.COMPANY_SECURITY_SEND_PASSWORD);
 	}
 
-	public boolean isSendPasswordResetLinkOnly() throws SystemException {
+	public boolean isSendPasswordResetLink() throws SystemException {
 		return PrefsPropsUtil.getBoolean(
-			getCompanyId(),
-			PropsKeys.COMPANY_SECURITY_SEND_PASSWORD_RESET_LINK_ONLY,
-			PropsValues.COMPANY_SECURITY_SEND_PASSWORD_RESET_LINK_ONLY);
+			getCompanyId(), PropsKeys.COMPANY_SECURITY_SEND_PASSWORD_RESET_LINK,
+			PropsValues.COMPANY_SECURITY_SEND_PASSWORD_RESET_LINK);
 	}
 
 	public boolean isStrangers() throws SystemException {
