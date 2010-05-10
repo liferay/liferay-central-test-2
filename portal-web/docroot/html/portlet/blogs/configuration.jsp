@@ -31,7 +31,7 @@ String emailEntryUpdatedSubject = ParamUtil.getString(request, "emailEntryUpdate
 String emailEntryUpdatedBody = ParamUtil.getString(request, "emailEntryUpdatedBody", BlogsUtil.getEmailEntryUpdatedBody(preferences));
 
 String editorParam = StringPool.BLANK;
-String bodyEditorBody = StringPool.BLANK;
+String editorBody = StringPool.BLANK;
 
 if (tabs2.equals("entry-added-email")) {
 	editorParam = "emailEntryAddedBody";
