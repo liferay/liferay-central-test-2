@@ -66,17 +66,36 @@ List<WorkflowHandler> workflowHandlers = WorkflowHandlerRegistryUtil.getWorkflow
 				name="workflow"
 			>
 				<aui:select label="" name='<%= "workflowDefinitionName@" + workflowHandler.getClassName() %>'>
-					<aui:option></aui:option>
 
 					<%
 					WorkflowDefinitionLink workflowDefinitionLink = null;
 
 					try {
-						workflowDefinitionLink = WorkflowDefinitionLinkLocalServiceUtil.getWorkflowDefinitionLink(company.getCompanyId(), themeDisplay.getScopeGroupId(), workflowHandler.getClassName());
+						workflowDefinitionLink = WorkflowDefinitionLinkLocalServiceUtil.getWorkflowDefinitionLink(company.getCompanyId(), themeDisplay.getScopeGroupId(), workflowHandler.getClassName(), true);
 					}
-					catch (NoSuchWorkflowDefinitionLinkException nswle) {
+					catch (NoSuchWorkflowDefinitionLinkException nswdle1) {
 					}
 
+					String defaultOptionMessage = null;
+
+					if (themeDisplay.getScopeGroupId() != themeDisplay.getCompanyGroupId()) {
+						try {
+							WorkflowDefinitionLink defaultWorkflowDefinitionLink = WorkflowDefinitionLinkLocalServiceUtil.getDefaultWorkflowDefinitionLink(company.getCompanyId(), workflowHandler.getClassName());
+
+							defaultOptionMessage = LanguageUtil.get(pageContext, "default") + StringPool.COLON + StringPool.SPACE + defaultWorkflowDefinitionLink.getWorkflowDefinitionName();
+						}
+						catch (NoSuchWorkflowDefinitionLinkException nswdle2) {
+							defaultOptionMessage = LanguageUtil.get(pageContext, "default") + StringPool.COLON + StringPool.SPACE  + LanguageUtil.get(pageContext, "no-workflow");
+						}
+					}
+					else {
+						defaultOptionMessage = LanguageUtil.get(pageContext, "no-workflow");
+					}
+					%>
+
+					<aui:option><%= defaultMessage %></aui:option>
+
+					<%
 					for (WorkflowDefinition workflowDefinition : workflowDefinitions) {
 						boolean selected = false;
 

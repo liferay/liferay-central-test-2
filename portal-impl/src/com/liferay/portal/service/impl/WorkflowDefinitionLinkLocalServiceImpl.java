@@ -102,6 +102,13 @@ public class WorkflowDefinitionLinkLocalServiceImpl
 			long companyId, long groupId, String className)
 		throws PortalException, SystemException {
 
+		return getWorkflowDefinitionLink(companyId, groupId, className, false);
+	}
+
+	public WorkflowDefinitionLink getWorkflowDefinitionLink(
+			long companyId, long groupId, String className, boolean strict)
+		throws PortalException, SystemException {
+
 		if (!WorkflowEngineManagerUtil.isDeployed()) {
 			throw new NoSuchWorkflowDefinitionLinkException();
 		}
@@ -116,7 +123,7 @@ public class WorkflowDefinitionLinkLocalServiceImpl
 					groupId, companyId, classNameId);
 		}
 
-		if (workflowDefinitionLink == null) {
+		if (!strict && (workflowDefinitionLink == null)) {
 			Group group = groupLocalService.getCompanyGroup(companyId);
 
 			workflowDefinitionLink =

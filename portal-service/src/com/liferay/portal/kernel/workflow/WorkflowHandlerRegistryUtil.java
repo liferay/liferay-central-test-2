@@ -14,6 +14,7 @@
 
 package com.liferay.portal.kernel.workflow;
 
+import com.liferay.portal.NoSuchWorkflowDefinitionLinkException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.ServiceContext;
@@ -95,8 +96,15 @@ public class WorkflowHandlerRegistryUtil {
 		if (WorkflowThreadLocal.isEnabled() &&
 			WorkflowEngineManagerUtil.isDeployed()) {
 
-			workflowHandler.startWorkflowInstance(
-				companyId, groupId, userId, classPK, model, workflowContext);
+			try {
+				workflowHandler.startWorkflowInstance(
+					companyId, groupId, userId, classPK, model,
+					workflowContext);
+			}
+			catch(NoSuchWorkflowDefinitionLinkException nswdle) {
+				workflowHandler.updateStatus(
+					WorkflowConstants.STATUS_APPROVED, workflowContext);
+			}
 		}
 	}
 

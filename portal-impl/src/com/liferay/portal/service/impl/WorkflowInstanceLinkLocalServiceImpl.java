@@ -14,7 +14,6 @@
 
 package com.liferay.portal.service.impl;
 
-import com.liferay.portal.NoSuchWorkflowDefinitionLinkException;
 import com.liferay.portal.NoSuchWorkflowInstanceLinkException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -195,54 +194,49 @@ public class WorkflowInstanceLinkLocalServiceImpl
 			return;
 		}
 
-		try {
-			WorkflowDefinitionLink workflowDefinitionLink =
-				workflowDefinitionLinkLocalService.getWorkflowDefinitionLink(
-					companyId, groupId, className);
+		WorkflowDefinitionLink workflowDefinitionLink =
+			workflowDefinitionLinkLocalService.getWorkflowDefinitionLink(
+				companyId, groupId, className);
 
-			String workflowDefinitionName =
-				workflowDefinitionLink.getWorkflowDefinitionName();
-			int workflowDefinitionVersion =
-				workflowDefinitionLink.getWorkflowDefinitionVersion();
+		String workflowDefinitionName =
+			workflowDefinitionLink.getWorkflowDefinitionName();
+		int workflowDefinitionVersion =
+			workflowDefinitionLink.getWorkflowDefinitionVersion();
 
-			if (workflowContext != null) {
-				workflowContext = new HashMap<String, Serializable>(
-					workflowContext);
-			}
-			else {
-				workflowContext = new HashMap<String, Serializable>();
-			}
-
-			workflowContext.put(
-				WorkflowConstants.CONTEXT_COMPANY_ID,
-				String.valueOf(companyId));
-			workflowContext.put(
-				WorkflowConstants.CONTEXT_GROUP_ID, String.valueOf(groupId));
-			workflowContext.put(
-				WorkflowConstants.CONTEXT_ENTRY_CLASS_NAME, className);
-			workflowContext.put(
-				WorkflowConstants.CONTEXT_ENTRY_CLASS_PK,
-				String.valueOf(classPK));
-
-			WorkflowHandler workflowHandler =
-				WorkflowHandlerRegistryUtil.getWorkflowHandler(className);
-
-			workflowContext.put(
-				WorkflowConstants.CONTEXT_ENTRY_TYPE,
-				workflowHandler.getType());
-
-			WorkflowInstance workflowInstance =
-				WorkflowInstanceManagerUtil.startWorkflowInstance(
-					companyId, userId, workflowDefinitionName,
-					workflowDefinitionVersion, null, workflowContext);
-
-			addWorkflowInstanceLink(
-				userId, companyId, groupId, className, classPK,
-				workflowInstance.getWorkflowInstanceId());
+		if (workflowContext != null) {
+			workflowContext = new HashMap<String, Serializable>(
+				workflowContext);
 		}
-		catch (NoSuchWorkflowDefinitionLinkException nswdle) {
-			return;
+		else {
+			workflowContext = new HashMap<String, Serializable>();
 		}
+
+		workflowContext.put(
+			WorkflowConstants.CONTEXT_COMPANY_ID,
+			String.valueOf(companyId));
+		workflowContext.put(
+			WorkflowConstants.CONTEXT_GROUP_ID, String.valueOf(groupId));
+		workflowContext.put(
+			WorkflowConstants.CONTEXT_ENTRY_CLASS_NAME, className);
+		workflowContext.put(
+			WorkflowConstants.CONTEXT_ENTRY_CLASS_PK,
+			String.valueOf(classPK));
+
+		WorkflowHandler workflowHandler =
+			WorkflowHandlerRegistryUtil.getWorkflowHandler(className);
+
+		workflowContext.put(
+			WorkflowConstants.CONTEXT_ENTRY_TYPE,
+			workflowHandler.getType());
+
+		WorkflowInstance workflowInstance =
+			WorkflowInstanceManagerUtil.startWorkflowInstance(
+				companyId, userId, workflowDefinitionName,
+				workflowDefinitionVersion, null, workflowContext);
+
+		addWorkflowInstanceLink(
+			userId, companyId, groupId, className, classPK,
+			workflowInstance.getWorkflowInstanceId());
 	}
 
 	public void updateClassPK(
