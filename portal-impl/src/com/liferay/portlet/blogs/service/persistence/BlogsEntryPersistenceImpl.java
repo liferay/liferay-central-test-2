@@ -414,6 +414,22 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	public void clearCache(BlogsEntry blogsEntry) {
+		EntityCacheUtil.removeResult(BlogsEntryModelImpl.ENTITY_CACHE_ENABLED,
+			BlogsEntryImpl.class, blogsEntry.getPrimaryKey());
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
+			new Object[] { blogsEntry.getUuid(), new Long(
+					blogsEntry.getGroupId()) });
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_UT,
+			new Object[] {
+				new Long(blogsEntry.getGroupId()),
+				
+			blogsEntry.getUrlTitle()
+			});
+	}
+
 	public BlogsEntry create(long entryId) {
 		BlogsEntry blogsEntry = new BlogsEntryImpl();
 
