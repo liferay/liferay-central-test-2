@@ -109,8 +109,8 @@ public class InstanceWrapperBuilder {
 		sb.append("return _instance;");
 		sb.append("}\n");
 
-		for (int i = 0; i < methods.length; i++) {
-			JavaMethod javaMethod = methods[i];
+		for (JavaMethod _method : methods) {
+			JavaMethod javaMethod = _method;
 
 			String methodName = javaMethod.getName();
 
@@ -137,7 +137,7 @@ public class InstanceWrapperBuilder {
 			for (int j = 0; j < parameters.length; j++) {
 				JavaParameter javaParameter = parameters[j];
 
-				sb.append(javaParameter.getType().getValue() + javaParameter.getGenericsName() + _getDimensions(javaParameter.getType()) + " " + javaParameter.getName());
+				sb.append(_getTypeGenericsName(javaParameter.getType()) + " " + javaParameter.getName());
 
 				if ((j + 1) != parameters.length) {
 					sb.append(", ");
@@ -150,9 +150,7 @@ public class InstanceWrapperBuilder {
 
 			Set<String> newExceptions = new LinkedHashSet<String>();
 
-			for (int j = 0; j < thrownExceptions.length; j++) {
-				Type thrownException = thrownExceptions[j];
-
+			for (Type thrownException : thrownExceptions) {
 				newExceptions.add(thrownException.getValue());
 			}
 
@@ -233,6 +231,32 @@ public class InstanceWrapperBuilder {
 		builder.addSource(new File(parentDir + "/" + srcFile));
 
 		return builder.getClassByName(className);
+	}
+
+	private String _getTypeGenericsName(Type returns) {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append(returns.getValue());
+
+		Type[] actualTypeArguments = returns.getActualTypeArguments();
+
+		if (actualTypeArguments != null) {
+			sb.append("<");
+
+			for (int i = 0; i < actualTypeArguments.length; i++) {
+				if (i > 0) {
+					sb.append(", ");
+				}
+
+				sb.append(_getTypeGenericsName(actualTypeArguments[i]));
+			}
+
+			sb.append(">");
+		}
+
+		sb.append(_getDimensions(returns));
+
+		return sb.toString();
 	}
 
 }

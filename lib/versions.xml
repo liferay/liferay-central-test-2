@@ -659,7 +659,7 @@
 	</library>
 	<library>
 		<file-name>development/qdox.jar</file-name>
-		<version>1.10.0 (trunk 630)</version>
+		<version>1.11</version>
 		<project-name>QDox</project-name>
 		<project-url>http://qdox.codehaus.org</project-url>
 		<licenses>
@@ -668,9 +668,6 @@
 				<copyright-notice>Copyright (c) 2002-2006 Joe Walnes and QDox Project Team</copyright-notice>
 			</license>
 		</licenses>
-		<comments>
-			See LEP-4989.
-		</comments>
 	</library>
 	<library>
 		<file-name>development/quercus.jar</file-name>

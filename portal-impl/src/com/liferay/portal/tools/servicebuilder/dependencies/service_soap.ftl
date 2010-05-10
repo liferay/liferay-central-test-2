@@ -67,7 +67,7 @@ public class ${entity.name}ServiceSoap {
 			<#assign hasMethods = true>
 
 			<#assign returnValueName = method.returns.value>
-			<#assign returnValueGenericsName = method.returnsGenericsName>
+			<#assign returnTypeGenericsName = serviceBuilder.getTypeGenericsName(method.returns)>
 			<#assign returnValueDimension = serviceBuilder.getDimensions(method.returns.dimensions)>
 			<#assign extendedModelName = packagePath + ".model." + entity.name>
 			<#assign soapModelName = packagePath + ".model." + entity.name + "Soap">
@@ -77,42 +77,40 @@ public class ${entity.name}ServiceSoap {
 			<#if returnValueName == extendedModelName>
 				${soapModelName}${returnValueDimension}
 			<#elseif returnValueName == "java.util.List">
-				<#if entity.hasColumns()>
-					<#if returnValueGenericsName == "<java.lang.Boolean>">
-						java.lang.Boolean[]
-					<#elseif returnValueGenericsName == "<java.lang.Double>">
-						java.lang.Double[]
-					<#elseif returnValueGenericsName == "<java.lang.Float>">
-						java.lang.Float[]
-					<#elseif returnValueGenericsName == "<java.lang.Integer>">
-						java.lang.Integer[]
-					<#elseif returnValueGenericsName == "<java.lang.Long>">
-						java.lang.Long[]
-					<#elseif returnValueGenericsName == "<java.lang.Short>">
-						java.lang.Short[]
-					<#elseif returnValueGenericsName == "<java.lang.String>">
-						java.lang.String[]
-					<#else>
-						${soapModelName}[]
-					</#if>
+				<#if returnTypeGenericsName == "java.util.List<java.lang.Boolean>">
+					java.lang.Boolean[]
+				<#elseif returnTypeGenericsName == "java.util.List<java.lang.Double>">
+					java.lang.Double[]
+				<#elseif returnTypeGenericsName == "java.util.List<java.lang.Float>">
+					java.lang.Float[]
+				<#elseif returnTypeGenericsName == "java.util.List<java.lang.Integer>">
+					java.lang.Integer[]
+				<#elseif returnTypeGenericsName == "java.util.List<java.lang.Long>">
+					java.lang.Long[]
+				<#elseif returnTypeGenericsName == "java.util.List<java.lang.Short>">
+					java.lang.Short[]
+				<#elseif returnTypeGenericsName == "java.util.List<java.lang.String>">
+					java.lang.String[]
+				<#elseif entity.hasColumns()>
+					${soapModelName}[]
 				<#else>
 					java.util.List
 				</#if>
 			<#else>
-				${returnValueName}${returnValueDimension}
+				${returnTypeGenericsName}
 			</#if>
 
 			${method.name}(
 
 			<#list method.parameters as parameter>
-				<#assign parameterTypeName = parameter.type.value + parameter.genericsName + serviceBuilder.getDimensions(parameter.type.dimensions)>
+				<#assign parameterTypeName = serviceBuilder.getTypeGenericsName(parameter.type)>
 
 				<#if parameterTypeName == "java.util.Locale">
 					<#assign parameterTypeName = "String">
-				<#elseif parameterTypeName == "java.util.List<Long>">
+				<#elseif parameterTypeName == "java.util.List<java.lang.Long>">
 					<#assign parameterTypeName = "Long[]">
-				<#elseif (parameter.type.value == "java.util.List") && serviceBuilder.hasEntityByGenericsName(parameter.genericsName)>
-					<#assign parameterEntity = serviceBuilder.getEntityByGenericsName(parameter.genericsName)>
+				<#elseif (parameter.type.value == "java.util.List") && serviceBuilder.hasEntityByGenericsName(serviceBuilder.getTypeGenericsName(parameter.type))>
+					<#assign parameterEntity = serviceBuilder.getEntityByGenericsName(serviceBuilder.getTypeGenericsName(parameter.type))>
 
 					<#assign parameterTypeName = parameterEntity.packagePath + ".model." + parameterEntity.name + "Soap[]">
 				<#elseif serviceBuilder.hasEntityByParameterTypeValue(parameter.type.value)>
@@ -131,24 +129,24 @@ public class ${entity.name}ServiceSoap {
 			) throws RemoteException {
 				try {
 					<#if returnValueName != "void">
-						${returnValueName}${returnValueGenericsName}${returnValueDimension} returnValue =
+						${returnTypeGenericsName} returnValue =
 					</#if>
 
 					${entity.name}ServiceUtil.${method.name}(
 
 					<#list method.parameters as parameter>
-						<#assign parameterTypeName = parameter.type.value + parameter.genericsName + serviceBuilder.getDimensions(parameter.type.dimensions)>
+						<#assign parameterTypeName = serviceBuilder.getTypeGenericsName(parameter.type)>
 
 						<#if parameterTypeName == "java.util.Locale">
 							new java.util.Locale(
-						<#elseif parameterTypeName == "java.util.List<Long>">
+						<#elseif parameterTypeName == "java.util.List<java.lang.Long>">
 							ListUtil.toList(
-						<#elseif (parameter.type.value == "java.util.List") && serviceBuilder.hasEntityByGenericsName(parameter.genericsName)>
-							<#assign parameterEntity = serviceBuilder.getEntityByGenericsName(parameter.genericsName)>
+						<#elseif (parameter.type.value == "java.util.List") && serviceBuilder.hasEntityByGenericsName(serviceBuilder.getTypeGenericsName(parameter.type))>
+							<#assign parameterEntity = serviceBuilder.getEntityByGenericsName(serviceBuilder.getTypeGenericsName(parameter.type))>
 
 							${parameterEntity.packagePath}.model.impl.${parameterEntity.name}ModelImpl.toModels(
 						<#elseif serviceBuilder.hasEntityByParameterTypeValue(parameter.type.value)>
-							<#assign parameterEntity = serviceBuilder.getEntityByGenericsName(parameter.genericsName)>
+							<#assign parameterEntity = serviceBuilder.getEntityByGenericsName(serviceBuilder.getTypeGenericsName(parameter.type))>
 
 							${parameterEntity.packagePath}.model.impl.${parameterEntity.name}ModelImpl.toModel(
 						</#if>
@@ -157,9 +155,9 @@ public class ${entity.name}ServiceSoap {
 
 						<#if parameterTypeName == "java.util.Locale">
 							)
-						<#elseif parameterTypeName == "java.util.List<Long>">
+						<#elseif parameterTypeName == "java.util.List<java.lang.Long>">
 							)
-						<#elseif (parameter.type.value == "java.util.List") && serviceBuilder.hasEntityByGenericsName(parameter.genericsName)>
+						<#elseif (parameter.type.value == "java.util.List") && serviceBuilder.hasEntityByGenericsName(serviceBuilder.getTypeGenericsName(parameter.type))>
 							)
 						<#elseif serviceBuilder.hasEntityByParameterTypeValue(parameter.type.value)>
 							)
@@ -177,20 +175,20 @@ public class ${entity.name}ServiceSoap {
 							return ${soapModelName}.toSoapModel(returnValue);
 						<#elseif (returnValueName == extendedModelName) && (returnValueDimension != "")>
 							return ${soapModelName}.toSoapModels(returnValue);
-						<#elseif entity.hasColumns() && returnValueName == "java.util.List">
-							<#if returnValueGenericsName == "<java.lang.Boolean>">
+						<#elseif returnValueName == "java.util.List">
+							<#if returnTypeGenericsName == "java.util.List<java.lang.Boolean>">
 								return returnValue.toArray(new java.lang.Boolean[returnValue.size()]);
-							<#elseif returnValueGenericsName == "<java.lang.Double>">
+							<#elseif returnTypeGenericsName == "java.util.List<java.lang.Double>">
 								return returnValue.toArray(new java.lang.Double[returnValue.size()]);
-							<#elseif returnValueGenericsName == "<java.lang.Integer>">
+							<#elseif returnTypeGenericsName == "java.util.List<java.lang.Integer>">
 								return returnValue.toArray(new java.lang.Integer[returnValue.size()]);
-							<#elseif returnValueGenericsName == "<java.lang.Float>">
+							<#elseif returnTypeGenericsName == "java.util.List<java.lang.Float>">
 								return returnValue.toArray(new java.lang.Float[returnValue.size()]);
-							<#elseif returnValueGenericsName == "<java.lang.Long>">
+							<#elseif returnTypeGenericsName == "java.util.List<java.lang.Long>">
 								return returnValue.toArray(new java.lang.Long[returnValue.size()]);
-							<#elseif returnValueGenericsName == "<java.lang.Short>">
+							<#elseif returnTypeGenericsName == "java.util.List<java.lang.Short>">
 								return returnValue.toArray(new java.lang.Short[returnValue.size()]);
-							<#elseif returnValueGenericsName == "<java.lang.String>">
+							<#elseif returnTypeGenericsName == "java.util.List<java.lang.String>">
 								return returnValue.toArray(new java.lang.String[returnValue.size()]);
 							<#else>
 								return ${soapModelName}.toSoapModels(returnValue);
