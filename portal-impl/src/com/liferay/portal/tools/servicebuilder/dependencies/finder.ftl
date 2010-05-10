@@ -4,10 +4,10 @@ public interface ${entity.name}Finder {
 
 	<#list methods as method>
 		<#if !method.isConstructor() && method.isPublic()>
-			public ${method.returns.value}${method.returnsGenericsName}${serviceBuilder.getDimensions(method.returns.dimensions)} ${method.name}(
+			public ${serviceBuilder.getTypeGenericsName(method.returns)} ${method.name}(
 
 			<#list method.parameters as parameter>
-				${parameter.type.value}${parameter.genericsName}${serviceBuilder.getDimensions(parameter.type.dimensions)} ${parameter.name}
+				${serviceBuilder.getTypeGenericsName(parameter.type)} ${parameter.name}
 
 				<#if parameter_has_next>
 					,

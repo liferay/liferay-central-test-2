@@ -137,7 +137,7 @@ public class InstanceWrapperBuilder {
 			for (int j = 0; j < parameters.length; j++) {
 				JavaParameter javaParameter = parameters[j];
 
-				sb.append(javaParameter.getType().getValue() + javaParameter.getGenericsName() + _getDimensions(javaParameter.getType()) + " " + javaParameter.getName());
+				sb.append(_getTypeGenericsName(javaParameter.getType()) + " " + javaParameter.getName());
 
 				if ((j + 1) != parameters.length) {
 					sb.append(", ");
@@ -233,6 +233,32 @@ public class InstanceWrapperBuilder {
 		builder.addSource(new File(parentDir + "/" + srcFile));
 
 		return builder.getClassByName(className);
+	}
+
+	private String _getTypeGenericsName(Type type) {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append(type.getValue());
+
+		Type[] actualTypeArguments = type.getActualTypeArguments();
+
+		if (actualTypeArguments != null) {
+			sb.append("<");
+
+			for (int i = 0; i < actualTypeArguments.length; i++) {
+				if (i > 0) {
+					sb.append(", ");
+				}
+
+				sb.append(_getTypeGenericsName(actualTypeArguments[i]));
+			}
+
+			sb.append(">");
+		}
+
+		sb.append(_getDimensions(type));
+
+		return sb.toString();
 	}
 
 }

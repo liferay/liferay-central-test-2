@@ -27,12 +27,12 @@ public interface ${entity.name}Persistence extends BasePersistence<${entity.name
 
 	<#list methods as method>
 		<#if !method.isConstructor() && method.isPublic() && serviceBuilder.isCustomMethod(method) && !serviceBuilder.isBasePersistenceMethod(method)>
-			public ${method.returns.value}${method.returnsGenericsName}${serviceBuilder.getDimensions("${method.returns.dimensions}")} ${method.name} (
+			public ${serviceBuilder.getTypeGenericsName(method.returns)} ${method.name} (
 
 			<#assign parameters = method.parameters>
 
 			<#list parameters as parameter>
-				${parameter.type.value}${parameter.genericsName}${serviceBuilder.getDimensions("${parameter.type.dimensions}")} ${parameter.name}
+				${serviceBuilder.getTypeGenericsName(parameter.type)} ${parameter.name}
 
 				<#if parameter_has_next>
 					,

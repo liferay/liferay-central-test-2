@@ -29,16 +29,16 @@ import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.StringUtil_IW;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.xml.Document;
+import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.model.ModelHintsUtil;
 import com.liferay.portal.tools.SourceFormatter;
 import com.liferay.portal.util.InitUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.util.TextFormatter;
-import com.liferay.portal.kernel.util.Time;
-import com.liferay.portal.kernel.xml.Document;
-import com.liferay.portal.kernel.xml.Element;
-import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.util.xml.XMLFormatter;
 
 import com.thoughtworks.qdox.JavaDocBuilder;
@@ -69,17 +69,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
-import java.util.HashSet;
 import java.util.TreeMap;
 import java.util.TreeSet;
-import java.util.regex.Pattern;
 import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.dom4j.DocumentException;
 
@@ -1260,7 +1260,11 @@ public class ServiceBuilder {
 
 	public Entity getEntityByGenericsName(String genericsName) {
 		try {
-			String name = genericsName.substring(1, genericsName.length() - 1);
+			String name = genericsName;
+
+			if (name.startsWith("<")) {
+				name = name.substring(1, name.length() - 1);
+			}
 
 			name = StringUtil.replace(name, ".model.", ".");
 
@@ -1294,6 +1298,18 @@ public class ServiceBuilder {
 		}
 
 		return idType;
+	}
+
+	public String getListActualTypeArguments(Type type) {
+		if (type.getValue().equals("java.util.List")) {
+			Type[] types = type.getActualTypeArguments();
+
+			if (types != null) {
+				return getTypeGenericsName(types[0]);
+			}
+		}
+
+		return getTypeGenericsName(type);
 	}
 
 	public List<EntityColumn> getMappingEntities(String mappingTable)
@@ -1334,15 +1350,9 @@ public class ServiceBuilder {
 	}
 
 	public String getParameterType(JavaParameter parameter) {
-		StringBuilder sb = new StringBuilder();
-
 		Type returnType = parameter.getType();
 
-		sb.append(returnType.getValue());
-		sb.append(parameter.getGenericsName());
-		sb.append(getDimensions(returnType.getDimensions()));
-
-		return sb.toString();
+		return getTypeGenericsName(returnType);
 	}
 
 	public String getPrimitiveObj(String type) {
@@ -1393,13 +1403,33 @@ public class ServiceBuilder {
 	}
 
 	public String getReturnType(JavaMethod method) {
-		StringBuilder sb = new StringBuilder();
-
 		Type returnType = method.getReturns();
 
-		sb.append(returnType.getValue());
-		sb.append(method.getReturnsGenericsName());
-		sb.append(getDimensions(returnType.getDimensions()));
+		return getTypeGenericsName(returnType);
+	}
+
+	public String getTypeGenericsName(Type type) {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append(type.getValue());
+
+		Type[] actualTypeArguments = type.getActualTypeArguments();
+
+		if (actualTypeArguments != null) {
+			sb.append(StringPool.LESS_THAN);
+
+			for (int i = 0; i < actualTypeArguments.length; i++) {
+				if (i > 0) {
+					sb.append(", ");
+				}
+
+				sb.append(getTypeGenericsName(actualTypeArguments[i]));
+			}
+
+			sb.append(StringPool.GREATER_THAN);
+		}
+
+		sb.append(getDimensions(type.getDimensions()));
 
 		return sb.toString();
 	}
@@ -1663,9 +1693,7 @@ public class ServiceBuilder {
 		StringBuilder sb = new StringBuilder();
 
 		sb.append("isDuplicateMethod ");
-		sb.append(method.getReturns().getValue());
-		sb.append(method.getReturnsGenericsName());
-		sb.append(getDimensions(method.getReturns().getDimensions()));
+		sb.append(getTypeGenericsName(method.getReturns()));
 		sb.append(StringPool.SPACE);
 		sb.append(method.getName());
 		sb.append(StringPool.OPEN_PARENTHESIS);
@@ -1675,9 +1703,7 @@ public class ServiceBuilder {
 		for (int i = 0; i < parameters.length; i++) {
 			JavaParameter javaParameter = parameters[i];
 
-			sb.append(javaParameter.getType().getValue());
-			sb.append(javaParameter.getGenericsName());
-			sb.append(getDimensions(javaParameter.getType().getDimensions()));
+			sb.append(getTypeGenericsName(javaParameter.getType()));
 
 			if ((i + 1) != parameters.length) {
 				sb.append(StringPool.COMMA);
