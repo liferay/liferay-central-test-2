@@ -82,10 +82,10 @@ List<WorkflowHandler> workflowHandlers = WorkflowHandlerRegistryUtil.getWorkflow
 						try {
 							WorkflowDefinitionLink defaultWorkflowDefinitionLink = WorkflowDefinitionLinkLocalServiceUtil.getDefaultWorkflowDefinitionLink(company.getCompanyId(), workflowHandler.getClassName());
 
-							defaultOptionMessage = defaultWorkflowDefinitionLink.getWorkflowDefinitionName();
+							defaultOptionMessage = LanguageUtil.get(pageContext, "default") + StringPool.COLON + StringPool.SPACE + defaultWorkflowDefinitionLink.getWorkflowDefinitionName();
 						}
 						catch (NoSuchWorkflowDefinitionLinkException nswdle) {
-							defaultOptionMessage = LanguageUtil.get(pageContext, "no-workflow");
+							defaultOptionMessage = LanguageUtil.get(pageContext, "default") + StringPool.COLON + StringPool.SPACE  + LanguageUtil.get(pageContext, "no-workflow");
 						}
 					}
 					else {
