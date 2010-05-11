@@ -17,6 +17,7 @@
 <%@ include file="/html/taglib/init.jsp" %>
 
 <%
+String id = (String)request.getAttribute("liferay-ui:icon-menu:id");
 String message = (String)request.getAttribute("liferay-ui:icon-menu:message");
 String align = (String)request.getAttribute("liferay-ui:icon-menu:align");
 String cssClass = GetterUtil.getString((String)request.getAttribute("liferay-ui:icon-menu:cssClass"));
