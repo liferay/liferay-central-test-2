@@ -16,14 +16,12 @@ package com.liferay.portlet.messageboards.service.impl;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.service.base.MBCategoryServiceBaseImpl;
 import com.liferay.portlet.messageboards.service.permission.MBCategoryPermission;
 
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -75,28 +73,26 @@ public class MBCategoryServiceImpl extends MBCategoryServiceBaseImpl {
 		return category;
 	}
 
+	public List<MBCategory> getCategories(long groupId) throws SystemException {
+		return mbCategoryLocalService.getCategories(groupId);
+	}
+
+	public List<MBCategory> getCategories(long groupId, int start, int end)
+		throws SystemException {
+
+		return mbCategoryLocalService.getCategories(groupId, start, end);
+	}
+
 	public List<MBCategory> getCategories(
 			long groupId, long parentCategoryId, int start, int end)
 		throws PortalException, SystemException {
 
-		List<MBCategory> categories = mbCategoryLocalService.getCategories(
+		return mbCategoryLocalService.getCategories(
 			groupId, parentCategoryId, start, end);
+	}
 
-		categories = ListUtil.copy(categories);
-
-		Iterator<MBCategory> itr = categories.iterator();
-
-		while (itr.hasNext()) {
-			MBCategory category = itr.next();
-
-			if (!MBCategoryPermission.contains(
-					getPermissionChecker(), category, ActionKeys.VIEW)) {
-
-				itr.remove();
-			}
-		}
-
-		return categories;
+	public int getCategoriesCount(long groupId) throws SystemException {
+		return mbCategoryLocalService.getCategoriesCount(groupId);
 	}
 
 	public int getCategoriesCount(long groupId, long parentCategoryId)
@@ -104,6 +100,29 @@ public class MBCategoryServiceImpl extends MBCategoryServiceBaseImpl {
 
 		return mbCategoryLocalService.getCategoriesCount(
 			groupId, parentCategoryId);
+	}
+
+	public List<Long> getSubcategoryIds(
+			List<Long> categoryIds, long groupId, long categoryId)
+		throws SystemException {
+
+		return mbCategoryLocalService.getSubcategoryIds(
+			categoryIds, groupId, categoryId);
+	}
+
+	public List<MBCategory> getSubscribedCategories(
+			long groupId, long userId, int start, int end)
+		throws SystemException {
+
+		return mbCategoryLocalService.getSubscribedCategories(
+			groupId, userId, start, end);
+	}
+
+	public int getSubscribedCategoriesCount(long groupId, long userId)
+		throws SystemException {
+
+		return mbCategoryLocalService.getSubscribedCategoriesCount(
+			groupId, userId);
 	}
 
 	public void subscribeCategory(long groupId, long categoryId)

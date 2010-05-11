@@ -185,6 +185,11 @@ public interface MBCategoryLocalService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.messageboards.model.MBCategory> getCategories(
+		long groupId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portlet.messageboards.model.MBCategory> getCategories(
 		long groupId, long parentCategoryId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
@@ -217,8 +222,9 @@ public interface MBCategoryLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public void getSubcategoryIds(java.util.List<java.lang.Long> categoryIds,
-		long groupId, long categoryId)
+	public java.util.List<java.lang.Long> getSubcategoryIds(
+		java.util.List<java.lang.Long> categoryIds, long groupId,
+		long categoryId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)

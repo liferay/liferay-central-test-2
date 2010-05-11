@@ -22,9 +22,43 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
  * @author Brian Wing Shun Chan
  */
 public class MBCategoryFinderUtil {
+	public static int countByG_P(long groupId, long parentCategoryId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getFinder().countByG_P(groupId, parentCategoryId);
+	}
+
+	public static int countByGroupId(long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getFinder().countByGroupId(groupId);
+	}
+
 	public static int countByS_G_U(long groupId, long userId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder().countByS_G_U(groupId, userId);
+	}
+
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBCategory> findByG_P(
+		long groupId, long parentCategoryId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getFinder().findByG_P(groupId, parentCategoryId);
+	}
+
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBCategory> findByG_P(
+		long groupId, long parentCategoryId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getFinder().findByG_P(groupId, parentCategoryId, start, end);
+	}
+
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBCategory> findByGroupId(
+		long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getFinder().findByGroupId(groupId);
+	}
+
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBCategory> findByGroupId(
+		long groupId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getFinder().findByGroupId(groupId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBCategory> findByS_G_U(
