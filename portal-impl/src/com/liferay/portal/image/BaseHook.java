@@ -14,6 +14,8 @@
 
 package com.liferay.portal.image;
 
+import com.liferay.portal.kernel.image.Hook;
+
 /**
  * <a href="BaseHook.java.html"><b><i>View Source</i></b></a>
  *

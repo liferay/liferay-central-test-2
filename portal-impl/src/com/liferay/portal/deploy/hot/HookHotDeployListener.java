@@ -1166,9 +1166,10 @@ public class HookHotDeployListener
 			String imageHookClassName = portalProperties.getProperty(
 				PropsKeys.IMAGE_HOOK_IMPL);
 
-			com.liferay.portal.image.Hook imageHook =
-				(com.liferay.portal.image.Hook)newInstance(
-					portletClassLoader, com.liferay.portal.image.Hook.class,
+			com.liferay.portal.kernel.image.Hook imageHook =
+				(com.liferay.portal.kernel.image.Hook)newInstance(
+					portletClassLoader,
+					com.liferay.portal.kernel.image.Hook.class,
 					imageHookClassName);
 
 			com.liferay.portal.image.HookFactory.setInstance(imageHook);
