@@ -155,7 +155,7 @@ if (Validator.isNull(yearlyDay0Param) && (event != null)) {
 			yearlyDay0 = recurrence.getDtStart().get(Calendar.DATE);
 		}
 		else {
-			yearlyDay0 = recurrence.getByMonthDay()[0];			
+			yearlyDay0 = recurrence.getByMonthDay()[0];
 		}
 	}
 }
