@@ -100,6 +100,16 @@ public interface ${entity.name}Model extends BaseModel<${entity.name}> {
 		</#if>
 	</#list>
 
+	<#if entity.isWorkflowEnabled()>
+		public boolean isApproved();
+
+		public boolean isDraft();
+
+		public boolean isExpired();
+
+		public boolean isPending();
+	</#if>
+
 	public ${entity.name} toEscapedModel();
 
 	<#--

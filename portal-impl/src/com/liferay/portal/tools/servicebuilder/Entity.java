@@ -449,6 +449,17 @@ public class Entity {
 		return _portalReference;
 	}
 
+	public boolean isWorkflowEnabled() {
+		if (hasColumn("status") && hasColumn("statusByUserId") &&
+			hasColumn("statusByUserId") && hasColumn("statusDate")) {
+
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	public void setParentTransients(List<String> transients) {
 		_parentTransients = transients;
 	}
