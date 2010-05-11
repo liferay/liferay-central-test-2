@@ -20,88 +20,51 @@
 <%@ page import="com.liferay.portlet.asset.service.AssetTagServiceUtil" %>
 
 <%
+String[] assetTagNames = StringUtil.split((String)request.getAttribute("liferay-ui:asset-tags-summary:assetTagNames"));
 String className = (String)request.getAttribute("liferay-ui:asset-tags-summary:className");
 long classPK = GetterUtil.getLong((String)request.getAttribute("liferay-ui:asset-tags-summary:classPK"));
 String message = GetterUtil.getString((String)request.getAttribute("liferay-ui:asset-tags-summary:message"), StringPool.BLANK);
 PortletURL portletURL = (PortletURL)request.getAttribute("liferay-ui:asset-tags-summary:portletURL");
-String[] assetTagNames = StringUtil.split((String)request.getAttribute("liferay-ui:asset-tags-summary:assetTagNames"));
 
-List<AssetTag> tags = null;
+if (assetTagNames.length == 0) {
+	List<AssetTag> tags = AssetTagServiceUtil.getTags(className, classPK);
 
-if (Validator.isNull(assetTagNames)) {
-	tags = AssetTagServiceUtil.getTags(className, classPK);
+	assetTagNames = StringUtil.split(ListUtil.toString(tags, "name"));
 }
 %>
 
-<c:choose>
-	<c:when test="<%= Validator.isNotNull(assetTagNames) %>">
-		<span class="taglib-asset-tags-summary">
-			<%= Validator.isNotNull(message) ? (LanguageUtil.get(pageContext, message) + ": ") : "" %>
+<c:if test="<%= assetTagNames.length > 0 %>">
+	<span class="taglib-asset-tags-summary">
+		<%= Validator.isNotNull(message) ? (LanguageUtil.get(pageContext, message) + ": ") : "" %>
 
-			<c:choose>
-				<c:when test="<%= portletURL != null %>">
+		<c:choose>
+			<c:when test="<%= portletURL != null %>">
 
-					<%
-					for (int i = 0; i < assetTagNames.length; i++) {
-						portletURL.setParameter("tag", assetTagNames[i]);
-					%>
+				<%
+				for (int i = 0; i < assetTagNames.length; i++) {
+					portletURL.setParameter("tag", assetTagNames[i]);
+				%>
 
-						<a class="tag" href="<%= portletURL.toString() %>"><%= assetTagNames[i] %></a>
+					<a class="tag" href="<%= portletURL.toString() %>"><%= assetTagNames[i] %></a>
 
-					<%
-					}
-					%>
+				<%
+				}
+				%>
 
-				</c:when>
-				<c:otherwise>
+			</c:when>
+			<c:otherwise>
 
-					<%
-					for (int i = 0; i < assetTagNames.length; i++) {
-					%>
+				<%
+				for (int i = 0; i < assetTagNames.length; i++) {
+				%>
 
-						<span class="tag"><%= assetTagNames[i] %></span>
+					<span class="tag"><%= assetTagNames[i] %></span>
 
-					<%
-					}
-					%>
+				<%
+				}
+				%>
 
-				</c:otherwise>
-			</c:choose>
-		</span>
-	</c:when>
-	<c:when test="<%= tags != null && !tags.isEmpty() %>">
-		<span class="taglib-asset-tags-summary">
-			<%= Validator.isNotNull(message) ? (LanguageUtil.get(pageContext, message) + ": ") : "" %>
-
-			<c:choose>
-				<c:when test="<%= portletURL != null %>">
-
-					<%
-					for (AssetTag tag : tags) {
-						portletURL.setParameter("tag", tag.getName());
-					%>
-
-						<a class="tag" href="<%= portletURL.toString() %>"><%= tag.getName() %></a>
-
-					<%
-					}
-					%>
-
-				</c:when>
-				<c:otherwise>
-
-					<%
-					for (AssetTag tag : tags) {
-					%>
-
-						<span class="tag"><%= tag.getName() %></span>
-
-					<%
-					}
-					%>
-
-				</c:otherwise>
-			</c:choose>
-		</span>
-	</c:when>
-</c:choose>
+			</c:otherwise>
+		</c:choose>
+	</span>
+</c:if>

@@ -69,7 +69,7 @@ public class AssetTagsSummaryTag extends IncludeTag {
 
 	protected void setAttributes(HttpServletRequest request) {
 		request.setAttribute(
-				"liferay-ui:asset-tags-summary:assetTagNames", _assetTagNames);
+			"liferay-ui:asset-tags-summary:assetTagNames", _assetTagNames);
 		request.setAttribute(
 			"liferay-ui:asset-tags-summary:className", _className);
 		request.setAttribute(
