@@ -26,6 +26,10 @@ boolean showExpanded = GetterUtil.getBoolean((String)request.getAttribute("lifer
 <c:choose>
 	<c:when test="<%= showExpanded %>">
 		</div>
+
+		<aui:script use="liferay-menu">
+			Liferay.Menu.handleFocus('#<%= id %>menu');
+		</aui:script>
 	</c:when>
 	<c:otherwise >
 			</li>

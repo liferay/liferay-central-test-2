@@ -26,7 +26,7 @@ boolean showExpanded = GetterUtil.getBoolean((String)request.getAttribute("lifer
 
 <c:choose>
 	<c:when test="<%= showExpanded %>">
-		<div class="lfr-component lfr-menu-list lfr-menu-expanded <%= align %> <%= cssClass %>">
+		<div class="lfr-component lfr-menu-list lfr-menu-expanded <%= align %> <%= cssClass %>" id="<%= id %>menu">
 	</c:when>
 	<c:otherwise >
 		<ul class="lfr-component lfr-actions <%= align %> <%= cssClass %>">

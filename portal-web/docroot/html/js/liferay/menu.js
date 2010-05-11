@@ -83,22 +83,6 @@ AUI().add(
 					'.lfr-actions'
 				);
 
-				instance._body.delegate(
-					'mouseenter',
-					function(event) {
-						event.currentTarget.one('a').focus();
-					},
-					'.lfr-menu-expanded li'
-				);
-
-				instance._body.delegate(
-					'mouseleave',
-					function(event) {
-						event.currentTarget.one('a').blur();
-					},
-					'.lfr-menu-expanded li'
-				);
-
 				instance._document.on('click', instance._closeActiveMenu, instance);
 			}
 		};
@@ -251,6 +235,19 @@ AUI().add(
 					menu.all('a').set('role', 'menuitem');
 				}
 			}
+		};
+
+		Menu.handleFocus = function(id) {
+			var node = A.one(id);
+
+			if (node) {
+				node.delegate('mouseenter', A.rbind(Menu._targetLink, node, 'focus'), 'li');
+				node.delegate('mouseleave', A.rbind(Menu._targetLink, node, 'blur'), 'li');
+			}
+		};
+
+		Menu._targetLink = function(event, action) {
+			event.currentTarget.one('a')[action]();
 		};
 
 		Liferay.Menu = Menu;
