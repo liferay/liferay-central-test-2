@@ -108,15 +108,11 @@ boolean allowPingbacks = PropsValues.MESSAGE_BOARDS_PINGBACK_ENABLED && BeanPara
 
 	String className = "portlet-section-body results-row";
 	String classHoverName = "portlet-section-body-hover results-row hover";
-
-	request.setAttribute("edit_message.jsp-assetTagNames", ParamUtil.getString(request, "assetTagNames"));
 	%>
 
 	<%@ include file="/html/portlet/message_boards/view_thread_message.jspf" %>
 
 	<%
-	request.removeAttribute("edit_message.jsp-assetTagNames");
-
 	message = temp;
 	%>
 
