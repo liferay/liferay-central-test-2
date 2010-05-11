@@ -67,8 +67,8 @@ public class ${entity.name}ServiceSoap {
 			<#assign hasMethods = true>
 
 			<#assign returnValueName = method.returns.value>
-			<#assign returnTypeGenericsName = serviceBuilder.getTypeGenericsName(method.returns)>
 			<#assign returnValueDimension = serviceBuilder.getDimensions(method.returns.dimensions)>
+			<#assign returnTypeGenericsName = serviceBuilder.getTypeGenericsName(method.returns)>
 			<#assign extendedModelName = packagePath + ".model." + entity.name>
 			<#assign soapModelName = packagePath + ".model." + entity.name + "Soap">
 
