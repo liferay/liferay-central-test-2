@@ -452,26 +452,6 @@ public class ArrayUtil {
 		return newArray;
 	}
 
-	public static Object[] append(Object[]... arrays) {
-		int length = 0;
-
-		for (Object[] array : arrays) {
-			length += array.length;
-		}
-
-		Object[] newArray = new Object[length];
-
-		int previousLength = 0;
-
-		for (Object[] array : arrays) {
-			System.arraycopy(array, 0, newArray, previousLength, array.length);
-
-			previousLength += array.length;
-		}
-
-		return newArray;
-	}
-
 	public static Object[] append(Object[] array, Object value) {
 		Object[] newArray = new Object[array.length + 1];
 
@@ -482,22 +462,11 @@ public class ArrayUtil {
 		return newArray;
 	}
 
-	public static Object[][] append(Object[][]... arrays) {
-		int length = 0;
+	public static Object[] append(Object[] array1, Object[] array2) {
+		Object[] newArray = new Object[array1.length + array2.length];
 
-		for (Object[][] array : arrays) {
-			length += array.length;
-		}
-
-		Object[][] newArray = new Object[length][];
-
-		int previousLength = 0;
-
-		for (Object[][] array : arrays) {
-			System.arraycopy(array, 0, newArray, previousLength, array.length);
-
-			previousLength += array.length;
-		}
+		System.arraycopy(array1, 0, newArray, 0, array1.length);
+		System.arraycopy(array2, 0, newArray, array1.length, array2.length);
 
 		return newArray;
 	}
@@ -508,6 +477,15 @@ public class ArrayUtil {
 		System.arraycopy(array, 0, newArray, 0, array.length);
 
 		newArray[newArray.length - 1] = value;
+
+		return newArray;
+	}
+
+	public static Object[][] append(Object[][] array1, Object[][] array2) {
+		Object[][] newArray = new Object[array1.length + array2.length][];
+
+		System.arraycopy(array1, 0, newArray, 0, array1.length);
+		System.arraycopy(array2, 0, newArray, array1.length, array2.length);
 
 		return newArray;
 	}
@@ -572,26 +550,6 @@ public class ArrayUtil {
 		return newArray;
 	}
 
-	public static String[] append(String[]... arrays) {
-		int length = 0;
-
-		for (String[] array : arrays) {
-			length += array.length;
-		}
-
-		String[] newArray = new String[length];
-
-		int previousLength = 0;
-
-		for (String[] array : arrays) {
-			System.arraycopy(array, 0, newArray, previousLength, array.length);
-
-			previousLength += array.length;
-		}
-
-		return newArray;
-	}
-
 	public static String[] append(String[] array, String value) {
 		String[] newArray = new String[array.length + 1];
 
@@ -602,22 +560,11 @@ public class ArrayUtil {
 		return newArray;
 	}
 
-	public static String[][] append(String[][]... arrays) {
-		int length = 0;
+	public static String[] append(String[] array1, String[] array2) {
+		String[] newArray = new String[array1.length + array2.length];
 
-		for (String[][] array : arrays) {
-			length += array.length;
-		}
-
-		String[][] newArray = new String[length][];
-
-		int previousLength = 0;
-
-		for (String[][] array : arrays) {
-			System.arraycopy(array, 0, newArray, previousLength, array.length);
-
-			previousLength += array.length;
-		}
+		System.arraycopy(array1, 0, newArray, 0, array1.length);
+		System.arraycopy(array2, 0, newArray, array1.length, array2.length);
 
 		return newArray;
 	}
@@ -628,6 +575,15 @@ public class ArrayUtil {
 		System.arraycopy(array, 0, newArray, 0, array.length);
 
 		newArray[newArray.length - 1] = value;
+
+		return newArray;
+	}
+
+	public static String[][] append(String[][] array1, String[][] array2) {
+		String[][] newArray = new String[array1.length + array2.length][];
+
+		System.arraycopy(array1, 0, newArray, 0, array1.length);
+		System.arraycopy(array2, 0, newArray, array1.length, array2.length);
 
 		return newArray;
 	}
