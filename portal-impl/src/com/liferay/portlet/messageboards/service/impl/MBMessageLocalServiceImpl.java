@@ -647,6 +647,11 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			mbMessageFlagLocalService.deleteQuestionAndAnswerFlags(
 				message.getThreadId());
 		}
+		else if (mbMessageFlagLocalService.hasAnswerFlag(
+			message.getMessageId())) {
+
+			mbMessageFlagService.deleteAnswerFlag(message.getMessageId());
+		}
 
 		if (count == 1) {
 
