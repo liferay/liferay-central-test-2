@@ -135,7 +135,7 @@ public interface Portlet extends PortletModel {
 	public void setPortletDataHandlerClass(
 		java.lang.String portletDataHandlerClass);
 
-	public com.liferay.portal.lar.PortletDataHandler getPortletDataHandlerInstance();
+	public com.liferay.portal.kernel.lar.PortletDataHandler getPortletDataHandlerInstance();
 
 	public com.liferay.portal.kernel.portlet.PortletLayoutListener getPortletLayoutListener();
 

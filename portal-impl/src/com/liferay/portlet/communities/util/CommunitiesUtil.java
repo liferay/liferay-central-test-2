@@ -15,10 +15,10 @@
 package com.liferay.portlet.communities.util;
 
 import com.liferay.portal.events.EventsProcessorUtil;
+import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
+import com.liferay.portal.kernel.lar.UserIdStrategy;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
-import com.liferay.portal.lar.PortletDataHandlerKeys;
-import com.liferay.portal.lar.UserIdStrategy;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutSet;

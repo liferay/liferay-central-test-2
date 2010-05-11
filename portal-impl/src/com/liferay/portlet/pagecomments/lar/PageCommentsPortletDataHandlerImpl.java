@@ -14,12 +14,12 @@
 
 package com.liferay.portlet.pagecomments.lar;
 
+import com.liferay.portal.kernel.lar.BasePortletDataHandler;
+import com.liferay.portal.kernel.lar.PortletDataContext;
+import com.liferay.portal.kernel.lar.PortletDataException;
+import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
+import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.lar.BasePortletDataHandler;
-import com.liferay.portal.lar.PortletDataContext;
-import com.liferay.portal.lar.PortletDataException;
-import com.liferay.portal.lar.PortletDataHandlerBoolean;
-import com.liferay.portal.lar.PortletDataHandlerControl;
 import com.liferay.portal.model.Layout;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 

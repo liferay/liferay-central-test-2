@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.lar;
+package com.liferay.portal.kernel.lar;
 
 import javax.portlet.PortletPreferences;
 

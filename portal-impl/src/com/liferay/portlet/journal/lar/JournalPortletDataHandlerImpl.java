@@ -18,6 +18,12 @@ import com.liferay.portal.NoSuchImageException;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.lar.BasePortletDataHandler;
+import com.liferay.portal.kernel.lar.PortletDataContext;
+import com.liferay.portal.kernel.lar.PortletDataException;
+import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
+import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
+import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
@@ -33,12 +39,6 @@ import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
-import com.liferay.portal.lar.BasePortletDataHandler;
-import com.liferay.portal.lar.PortletDataContext;
-import com.liferay.portal.lar.PortletDataException;
-import com.liferay.portal.lar.PortletDataHandlerBoolean;
-import com.liferay.portal.lar.PortletDataHandlerControl;
-import com.liferay.portal.lar.PortletDataHandlerKeys;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.model.User;
@@ -112,7 +112,7 @@ import javax.portlet.PortletPreferences;
  * @author Bruno Farache
  * @author Karthik Sudarshan
  * @author Wesley Gong
- * @see	   com.liferay.portal.lar.PortletDataHandler
+ * @see	   com.liferay.portal.kernel.lar.PortletDataHandler
  * @see	   com.liferay.portlet.journal.lar.JournalContentPortletDataHandlerImpl
  * @see	   com.liferay.portlet.journal.lar.JournalCreationStrategy
  */

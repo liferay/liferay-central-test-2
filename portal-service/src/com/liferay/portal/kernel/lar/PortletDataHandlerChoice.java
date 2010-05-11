@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.lar;
+package com.liferay.portal.kernel.lar;
 
 /**
  * <a href="PortletDataHandlerChoice.java.html"><b><i>View Source</i></b></a>

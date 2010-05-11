@@ -332,7 +332,7 @@ public class PortletWrapper implements Portlet {
 		_portlet.setPortletDataHandlerClass(portletDataHandlerClass);
 	}
 
-	public com.liferay.portal.lar.PortletDataHandler getPortletDataHandlerInstance() {
+	public com.liferay.portal.kernel.lar.PortletDataHandler getPortletDataHandlerInstance() {
 		return _portlet.getPortletDataHandlerInstance();
 	}
 

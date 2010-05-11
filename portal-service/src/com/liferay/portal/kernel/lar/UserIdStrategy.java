@@ -12,25 +12,22 @@
  * details.
  */
 
-package com.liferay.portal.lar;
+package com.liferay.portal.kernel.lar;
+
+import com.liferay.portal.kernel.exception.SystemException;
 
 /**
- * <a href="BasePortletDataHandler.java.html"><b><i>View Source</i></b></a>
+ * <a href="UserIdStrategy.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * @author Bruno Farache
  */
-public abstract class BasePortletDataHandler implements PortletDataHandler {
+public interface UserIdStrategy {
 
-	public boolean isAlwaysExportable() {
-		return _ALWAYS_EXPORTABLE;
-	}
+	public static final String ALWAYS_CURRENT_USER_ID =
+		"ALWAYS_CURRENT_USER_ID";
 
-	public boolean isPublishToLiveByDefault() {
-		return _PUBLISH_TO_LIVE_BY_DEFAULT;
-	}
+	public static final String CURRENT_USER_ID = "CURRENT_USER_ID";
 
-	private static final boolean _ALWAYS_EXPORTABLE = false;
-
-	private static final boolean _PUBLISH_TO_LIVE_BY_DEFAULT = false;
+	public long getUserId(String userUuid) throws SystemException;
 
 }
