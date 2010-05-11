@@ -14,7 +14,7 @@
 
 package com.liferay.portlet.messageboards.util;
 
-import com.liferay.portal.search.HitsOpenSearchImpl;
+import com.liferay.portal.kernel.search.HitsOpenSearchImpl;
 
 /**
  * <a href="MBOpenSearchImpl.java.html"><b><i>View Source</i></b></a>

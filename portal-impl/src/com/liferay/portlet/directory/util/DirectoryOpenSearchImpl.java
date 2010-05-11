@@ -15,9 +15,9 @@
 package com.liferay.portlet.directory.util;
 
 import com.liferay.portal.kernel.search.Document;
+import com.liferay.portal.kernel.search.HitsOpenSearchImpl;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.Summary;
-import com.liferay.portal.search.HitsOpenSearchImpl;
 import com.liferay.portlet.enterpriseadmin.util.UserIndexer;
 
 import javax.portlet.PortletURL;

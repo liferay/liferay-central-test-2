@@ -14,7 +14,7 @@
 
 package com.liferay.portlet.bookmarks.util;
 
-import com.liferay.portal.search.HitsOpenSearchImpl;
+import com.liferay.portal.kernel.search.HitsOpenSearchImpl;
 
 /**
  * <a href="BookmarksOpenSearchImpl.java.html"><b><i>View Source</i></b></a>

@@ -12,11 +12,9 @@
  * details.
  */
 
-package com.liferay.portal.search;
+package com.liferay.portal.kernel.search;
 
 import com.liferay.portal.kernel.dao.search.SearchContainer;
-import com.liferay.portal.kernel.search.OpenSearch;
-import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.PropsUtil;

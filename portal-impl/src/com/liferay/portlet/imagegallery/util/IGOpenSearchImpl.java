@@ -14,7 +14,7 @@
 
 package com.liferay.portlet.imagegallery.util;
 
-import com.liferay.portal.search.HitsOpenSearchImpl;
+import com.liferay.portal.kernel.search.HitsOpenSearchImpl;
 
 /**
  * <a href="IGOpenSearchImpl.java.html"><b><i>View Source</i></b></a>

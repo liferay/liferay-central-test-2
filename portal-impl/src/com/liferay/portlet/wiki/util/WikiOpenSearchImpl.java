@@ -14,7 +14,7 @@
 
 package com.liferay.portlet.wiki.util;
 
-import com.liferay.portal.search.HitsOpenSearchImpl;
+import com.liferay.portal.kernel.search.HitsOpenSearchImpl;
 
 /**
  * <a href="WikiOpenSearchImpl.java.html"><b><i>View Source</i></b></a>

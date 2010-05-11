@@ -12,9 +12,8 @@
  * details.
  */
 
-package com.liferay.portal.search;
+package com.liferay.portal.kernel.search;
 
-import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.WebKeys;

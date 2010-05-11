@@ -14,7 +14,7 @@
 
 package com.liferay.portlet.blogs.util;
 
-import com.liferay.portal.search.HitsOpenSearchImpl;
+import com.liferay.portal.kernel.search.HitsOpenSearchImpl;
 
 /**
  * <a href="BlogsOpenSearchImpl.java.html"><b><i>View Source</i></b></a>

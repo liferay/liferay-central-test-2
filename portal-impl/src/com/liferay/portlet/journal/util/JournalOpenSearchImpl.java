@@ -16,9 +16,9 @@ package com.liferay.portlet.journal.util;
 
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Field;
+import com.liferay.portal.kernel.search.HitsOpenSearchImpl;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.model.Layout;
-import com.liferay.portal.search.HitsOpenSearchImpl;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.GroupLocalServiceUtil;
