@@ -137,7 +137,13 @@ public class InstanceWrapperBuilder {
 			for (int j = 0; j < parameters.length; j++) {
 				JavaParameter javaParameter = parameters[j];
 
-				sb.append(_getTypeGenericsName(javaParameter.getType()) + " " + javaParameter.getName());
+				sb.append(_getTypeGenericsName(javaParameter.getType()));
+
+				if (javaParameter.isVarArgs()) {
+					sb.append("...");
+				}
+
+				sb.append(" " + javaParameter.getName());
 
 				if ((j + 1) != parameters.length) {
 					sb.append(", ");
