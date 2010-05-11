@@ -154,8 +154,9 @@
 
 		<!-- Finder methods -->
 
-		<finder name="AEI_A" return-type="Collection">
+		<finder name="AEI_T_A" return-type="Collection">
 			<finder-column name="assetEntryId" />
+			<finder-column name="type" />
 			<finder-column name="active" />
 		</finder>
 		<finder name="U_AEI_A_A" return-type="Collection">

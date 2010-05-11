@@ -27,4 +27,13 @@ public class SocialEquitySettingImpl
 	public SocialEquitySettingImpl() {
 	}
 
+	public SocialEquitySettingImpl(String actionId, int type, int value,
+		int lifespan) {
+
+		setActionId(actionId);
+		setType(type);
+		setValue(value);
+		setValidity(lifespan);
+	}
+
 }

@@ -529,6 +529,7 @@ create index IX_3504B8BC on SocialActivity (userId);
 create unique index IX_22F6B5CB on SocialEquityAssetEntry (assetEntryId);
 
 create index IX_CA8ECBE0 on SocialEquityLog (assetEntryId, active_);
+create index IX_E8DA181D on SocialEquityLog (assetEntryId, type_, active_);
 create index IX_60CD2F21 on SocialEquityLog (userId, assetEntryId, actionId, active_);
 
 create index IX_5E81DA6F on SocialEquitySetting (classNameId, actionId);

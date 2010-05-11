@@ -68,23 +68,30 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 	public static final String FINDER_CLASS_NAME_ENTITY = SocialEquityLogImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
-	public static final FinderPath FINDER_PATH_FIND_BY_AEI_A = new FinderPath(SocialEquityLogModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_FIND_BY_AEI_T_A = new FinderPath(SocialEquityLogModelImpl.ENTITY_CACHE_ENABLED,
 			SocialEquityLogModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "findByAEI_A",
-			new String[] { Long.class.getName(), Boolean.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_AEI_A = new FinderPath(SocialEquityLogModelImpl.ENTITY_CACHE_ENABLED,
-			SocialEquityLogModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "findByAEI_A",
+			FINDER_CLASS_NAME_LIST, "findByAEI_T_A",
 			new String[] {
-				Long.class.getName(), Boolean.class.getName(),
+				Long.class.getName(), Integer.class.getName(),
+				Boolean.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_AEI_T_A = new FinderPath(SocialEquityLogModelImpl.ENTITY_CACHE_ENABLED,
+			SocialEquityLogModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByAEI_T_A",
+			new String[] {
+				Long.class.getName(), Integer.class.getName(),
+				Boolean.class.getName(),
 				
 			"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			});
-	public static final FinderPath FINDER_PATH_COUNT_BY_AEI_A = new FinderPath(SocialEquityLogModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_COUNT_BY_AEI_T_A = new FinderPath(SocialEquityLogModelImpl.ENTITY_CACHE_ENABLED,
 			SocialEquityLogModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "countByAEI_A",
-			new String[] { Long.class.getName(), Boolean.class.getName() });
+			FINDER_CLASS_NAME_LIST, "countByAEI_T_A",
+			new String[] {
+				Long.class.getName(), Integer.class.getName(),
+				Boolean.class.getName()
+			});
 	public static final FinderPath FINDER_PATH_FIND_BY_U_AEI_A_A = new FinderPath(SocialEquityLogModelImpl.ENTITY_CACHE_ENABLED,
 			SocialEquityLogModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "findByU_AEI_A_A",
@@ -354,13 +361,14 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 		return socialEquityLog;
 	}
 
-	public List<SocialEquityLog> findByAEI_A(long assetEntryId, boolean active)
-		throws SystemException {
+	public List<SocialEquityLog> findByAEI_T_A(long assetEntryId, int type,
+		boolean active) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(assetEntryId), Boolean.valueOf(active)
+				new Long(assetEntryId), new Integer(type),
+				Boolean.valueOf(active)
 			};
 
-		List<SocialEquityLog> list = (List<SocialEquityLog>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_AEI_A,
+		List<SocialEquityLog> list = (List<SocialEquityLog>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_AEI_T_A,
 				finderArgs, this);
 
 		if (list == null) {
@@ -369,13 +377,15 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(3);
+				StringBundler query = new StringBundler(4);
 
 				query.append(_SQL_SELECT_SOCIALEQUITYLOG_WHERE);
 
-				query.append(_FINDER_COLUMN_AEI_A_ASSETENTRYID_2);
+				query.append(_FINDER_COLUMN_AEI_T_A_ASSETENTRYID_2);
 
-				query.append(_FINDER_COLUMN_AEI_A_ACTIVE_2);
+				query.append(_FINDER_COLUMN_AEI_T_A_TYPE_2);
+
+				query.append(_FINDER_COLUMN_AEI_T_A_ACTIVE_2);
 
 				String sql = query.toString();
 
@@ -384,6 +394,8 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 				QueryPos qPos = QueryPos.getInstance(q);
 
 				qPos.add(assetEntryId);
+
+				qPos.add(type);
 
 				qPos.add(active);
 
@@ -399,7 +411,7 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_AEI_A,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_AEI_T_A,
 					finderArgs, list);
 
 				closeSession(session);
@@ -409,22 +421,23 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 		return list;
 	}
 
-	public List<SocialEquityLog> findByAEI_A(long assetEntryId, boolean active,
-		int start, int end) throws SystemException {
-		return findByAEI_A(assetEntryId, active, start, end, null);
+	public List<SocialEquityLog> findByAEI_T_A(long assetEntryId, int type,
+		boolean active, int start, int end) throws SystemException {
+		return findByAEI_T_A(assetEntryId, type, active, start, end, null);
 	}
 
-	public List<SocialEquityLog> findByAEI_A(long assetEntryId, boolean active,
-		int start, int end, OrderByComparator orderByComparator)
+	public List<SocialEquityLog> findByAEI_T_A(long assetEntryId, int type,
+		boolean active, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(assetEntryId), Boolean.valueOf(active),
+				new Long(assetEntryId), new Integer(type),
+				Boolean.valueOf(active),
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
 			};
 
-		List<SocialEquityLog> list = (List<SocialEquityLog>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_AEI_A,
+		List<SocialEquityLog> list = (List<SocialEquityLog>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_AEI_T_A,
 				finderArgs, this);
 
 		if (list == null) {
@@ -436,18 +449,20 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 				StringBundler query = null;
 
 				if (orderByComparator != null) {
-					query = new StringBundler(4 +
+					query = new StringBundler(5 +
 							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
-					query = new StringBundler(3);
+					query = new StringBundler(4);
 				}
 
 				query.append(_SQL_SELECT_SOCIALEQUITYLOG_WHERE);
 
-				query.append(_FINDER_COLUMN_AEI_A_ASSETENTRYID_2);
+				query.append(_FINDER_COLUMN_AEI_T_A_ASSETENTRYID_2);
 
-				query.append(_FINDER_COLUMN_AEI_A_ACTIVE_2);
+				query.append(_FINDER_COLUMN_AEI_T_A_TYPE_2);
+
+				query.append(_FINDER_COLUMN_AEI_T_A_ACTIVE_2);
 
 				if (orderByComparator != null) {
 					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
@@ -461,6 +476,8 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 				QueryPos qPos = QueryPos.getInstance(q);
 
 				qPos.add(assetEntryId);
+
+				qPos.add(type);
 
 				qPos.add(active);
 
@@ -477,7 +494,7 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_AEI_A,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_AEI_T_A,
 					finderArgs, list);
 
 				closeSession(session);
@@ -487,19 +504,22 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 		return list;
 	}
 
-	public SocialEquityLog findByAEI_A_First(long assetEntryId, boolean active,
-		OrderByComparator orderByComparator)
+	public SocialEquityLog findByAEI_T_A_First(long assetEntryId, int type,
+		boolean active, OrderByComparator orderByComparator)
 		throws NoSuchEquityLogException, SystemException {
-		List<SocialEquityLog> list = findByAEI_A(assetEntryId, active, 0, 1,
-				orderByComparator);
+		List<SocialEquityLog> list = findByAEI_T_A(assetEntryId, type, active,
+				0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(6);
+			StringBundler msg = new StringBundler(8);
 
 			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
 			msg.append("assetEntryId=");
 			msg.append(assetEntryId);
+
+			msg.append(", type=");
+			msg.append(type);
 
 			msg.append(", active=");
 			msg.append(active);
@@ -513,21 +533,24 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 		}
 	}
 
-	public SocialEquityLog findByAEI_A_Last(long assetEntryId, boolean active,
-		OrderByComparator orderByComparator)
+	public SocialEquityLog findByAEI_T_A_Last(long assetEntryId, int type,
+		boolean active, OrderByComparator orderByComparator)
 		throws NoSuchEquityLogException, SystemException {
-		int count = countByAEI_A(assetEntryId, active);
+		int count = countByAEI_T_A(assetEntryId, type, active);
 
-		List<SocialEquityLog> list = findByAEI_A(assetEntryId, active,
+		List<SocialEquityLog> list = findByAEI_T_A(assetEntryId, type, active,
 				count - 1, count, orderByComparator);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(6);
+			StringBundler msg = new StringBundler(8);
 
 			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
 			msg.append("assetEntryId=");
 			msg.append(assetEntryId);
+
+			msg.append(", type=");
+			msg.append(type);
 
 			msg.append(", active=");
 			msg.append(active);
@@ -541,8 +564,9 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 		}
 	}
 
-	public SocialEquityLog[] findByAEI_A_PrevAndNext(long equityLogId,
-		long assetEntryId, boolean active, OrderByComparator orderByComparator)
+	public SocialEquityLog[] findByAEI_T_A_PrevAndNext(long equityLogId,
+		long assetEntryId, int type, boolean active,
+		OrderByComparator orderByComparator)
 		throws NoSuchEquityLogException, SystemException {
 		SocialEquityLog socialEquityLog = findByPrimaryKey(equityLogId);
 
@@ -553,13 +577,13 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 
 			SocialEquityLog[] array = new SocialEquityLogImpl[3];
 
-			array[0] = getByAEI_A_PrevAndNext(session, socialEquityLog,
-					assetEntryId, active, orderByComparator, true);
+			array[0] = getByAEI_T_A_PrevAndNext(session, socialEquityLog,
+					assetEntryId, type, active, orderByComparator, true);
 
 			array[1] = socialEquityLog;
 
-			array[2] = getByAEI_A_PrevAndNext(session, socialEquityLog,
-					assetEntryId, active, orderByComparator, false);
+			array[2] = getByAEI_T_A_PrevAndNext(session, socialEquityLog,
+					assetEntryId, type, active, orderByComparator, false);
 
 			return array;
 		}
@@ -571,9 +595,9 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 		}
 	}
 
-	protected SocialEquityLog getByAEI_A_PrevAndNext(Session session,
-		SocialEquityLog socialEquityLog, long assetEntryId, boolean active,
-		OrderByComparator orderByComparator, boolean previous) {
+	protected SocialEquityLog getByAEI_T_A_PrevAndNext(Session session,
+		SocialEquityLog socialEquityLog, long assetEntryId, int type,
+		boolean active, OrderByComparator orderByComparator, boolean previous) {
 		StringBundler query = null;
 
 		if (orderByComparator != null) {
@@ -586,9 +610,11 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 
 		query.append(_SQL_SELECT_SOCIALEQUITYLOG_WHERE);
 
-		query.append(_FINDER_COLUMN_AEI_A_ASSETENTRYID_2);
+		query.append(_FINDER_COLUMN_AEI_T_A_ASSETENTRYID_2);
 
-		query.append(_FINDER_COLUMN_AEI_A_ACTIVE_2);
+		query.append(_FINDER_COLUMN_AEI_T_A_TYPE_2);
+
+		query.append(_FINDER_COLUMN_AEI_T_A_ACTIVE_2);
 
 		if (orderByComparator != null) {
 			String[] orderByFields = orderByComparator.getOrderByFields();
@@ -653,6 +679,8 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 		QueryPos qPos = QueryPos.getInstance(q);
 
 		qPos.add(assetEntryId);
+
+		qPos.add(type);
 
 		qPos.add(active);
 
@@ -1152,9 +1180,10 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 		return list;
 	}
 
-	public void removeByAEI_A(long assetEntryId, boolean active)
+	public void removeByAEI_T_A(long assetEntryId, int type, boolean active)
 		throws SystemException {
-		for (SocialEquityLog socialEquityLog : findByAEI_A(assetEntryId, active)) {
+		for (SocialEquityLog socialEquityLog : findByAEI_T_A(assetEntryId,
+				type, active)) {
 			remove(socialEquityLog);
 		}
 	}
@@ -1173,13 +1202,14 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 		}
 	}
 
-	public int countByAEI_A(long assetEntryId, boolean active)
+	public int countByAEI_T_A(long assetEntryId, int type, boolean active)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(assetEntryId), Boolean.valueOf(active)
+				new Long(assetEntryId), new Integer(type),
+				Boolean.valueOf(active)
 			};
 
-		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_AEI_A,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_AEI_T_A,
 				finderArgs, this);
 
 		if (count == null) {
@@ -1188,13 +1218,15 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(3);
+				StringBundler query = new StringBundler(4);
 
 				query.append(_SQL_COUNT_SOCIALEQUITYLOG_WHERE);
 
-				query.append(_FINDER_COLUMN_AEI_A_ASSETENTRYID_2);
+				query.append(_FINDER_COLUMN_AEI_T_A_ASSETENTRYID_2);
 
-				query.append(_FINDER_COLUMN_AEI_A_ACTIVE_2);
+				query.append(_FINDER_COLUMN_AEI_T_A_TYPE_2);
+
+				query.append(_FINDER_COLUMN_AEI_T_A_ACTIVE_2);
 
 				String sql = query.toString();
 
@@ -1203,6 +1235,8 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 				QueryPos qPos = QueryPos.getInstance(q);
 
 				qPos.add(assetEntryId);
+
+				qPos.add(type);
 
 				qPos.add(active);
 
@@ -1216,7 +1250,7 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 					count = Long.valueOf(0);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_AEI_A,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_AEI_T_A,
 					finderArgs, count);
 
 				closeSession(session);
@@ -1383,8 +1417,9 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 	private static final String _SQL_SELECT_SOCIALEQUITYLOG_WHERE = "SELECT socialEquityLog FROM SocialEquityLog socialEquityLog WHERE ";
 	private static final String _SQL_COUNT_SOCIALEQUITYLOG = "SELECT COUNT(socialEquityLog) FROM SocialEquityLog socialEquityLog";
 	private static final String _SQL_COUNT_SOCIALEQUITYLOG_WHERE = "SELECT COUNT(socialEquityLog) FROM SocialEquityLog socialEquityLog WHERE ";
-	private static final String _FINDER_COLUMN_AEI_A_ASSETENTRYID_2 = "socialEquityLog.assetEntryId = ? AND ";
-	private static final String _FINDER_COLUMN_AEI_A_ACTIVE_2 = "socialEquityLog.active = ?";
+	private static final String _FINDER_COLUMN_AEI_T_A_ASSETENTRYID_2 = "socialEquityLog.assetEntryId = ? AND ";
+	private static final String _FINDER_COLUMN_AEI_T_A_TYPE_2 = "socialEquityLog.type = ? AND ";
+	private static final String _FINDER_COLUMN_AEI_T_A_ACTIVE_2 = "socialEquityLog.active = ?";
 	private static final String _FINDER_COLUMN_U_AEI_A_A_USERID_2 = "socialEquityLog.userId = ? AND ";
 	private static final String _FINDER_COLUMN_U_AEI_A_A_ASSETENTRYID_2 = "socialEquityLog.assetEntryId = ? AND ";
 	private static final String _FINDER_COLUMN_U_AEI_A_A_ACTIONID_1 = "socialEquityLog.actionId IS NULL AND ";
