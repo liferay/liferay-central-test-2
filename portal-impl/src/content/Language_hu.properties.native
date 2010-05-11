@@ -1539,7 +1539,7 @@ edit-web-content=Webes tartalom szerkesztése
 edit-wikis-for-group=Wikik szerkesztése a csoporthoz:
 edit-wikis=Wikik szerkesztése
 edit-x-x=<span class="{0}">{1}</span> szerkesztés
-edit-x=Edit {0} (Automatic Copy)
+edit-x={0} szerkesztés
 edit-xsd=XML séma definíció szerkesztése
 edit-xsl-template=XSL sablon szerkesztése
 edit=Szerkesztés

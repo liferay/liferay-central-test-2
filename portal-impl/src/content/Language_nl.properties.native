@@ -1539,7 +1539,7 @@ edit-web-content=Webcontent bewerken
 edit-wikis-for-group=Bewerk wiki's voor groep:
 edit-wikis=Wiki's bewerken
 edit-x-x=Bewerk <span class="{0}">{1}</span>
-edit-x=Edit {0} (Automatic Copy)
+edit-x=Bewerk {0}
 edit-xsd=XML Schemadefinitie bewerken
 edit-xsl-template=XSL sjabloon bewerken
 edit=Bewerk

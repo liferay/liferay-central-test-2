@@ -1538,7 +1538,7 @@ edit-web-content=Editar contenido web
 edit-wikis-for-group=Editar wikis del grupo:
 edit-wikis=Editar wikis
 edit-x-x=Editar <span class="{0}">{1}</span>
-edit-x=Edit {0} (Automatic Copy)
+edit-x=Editar {0}
 edit-xsd=Editar la definición del esquema de XML
 edit-xsl-template=Editar la plantilla XSL
 edit=Editar

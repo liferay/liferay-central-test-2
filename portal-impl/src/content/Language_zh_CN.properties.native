@@ -1539,7 +1539,7 @@ edit-web-content=编辑网页内容
 edit-wikis-for-group=编辑组 Wiki：
 edit-wikis=编辑 Wiki
 edit-x-x=编辑 <span class="{0}">{1}</span>
-edit-x=Edit {0} (Automatic Copy)
+edit-x=编辑 {0}
 edit-xsd=编辑 XML 模式定义
 edit-xsl-template=编辑 XSL 模板
 edit=编辑

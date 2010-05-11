@@ -1539,7 +1539,7 @@ edit-web-content=Editatu web edukia
 edit-wikis-for-group=Editatu wikiak hurrengo taldearentzat:
 edit-wikis=Editatu wikiak
 edit-x-x=Editatu <span class="{0}">{1}</span>
-edit-x=Edit {0} (Automatic Copy)
+edit-x=Editatu {0}
 edit-xsd=Editatu XML eskemaren definizioa
 edit-xsl-template=Editatu XSL txantiloia
 edit=Editatu

@@ -1539,7 +1539,7 @@ edit-web-content=Webコンテンツの編集
 edit-wikis-for-group=次のグループのWikiの編集:
 edit-wikis=Wikiの編集
 edit-x-x=編集 <span class="{0}">{1}</span>
-edit-x=Edit {0} (Automatic Copy)
+edit-x=編集 {0}
 edit-xsd=XML スキーマ定義の編集
 edit-xsl-template=XSLテンプレートの編集
 edit=編集
