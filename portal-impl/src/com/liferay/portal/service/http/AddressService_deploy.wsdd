@@ -27,9 +27,6 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="mailing" type="tns:boolean"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="primary" type="tns:boolean"></parameter>
 		</operation>
-		<operation xmlns:operNS="urn:http.service.portal.liferay.com" name="deleteAddress" qname="operNS:deleteAddress" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="addressId" type="tns:long"></parameter>
-		</operation>
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://model.portal.liferay.com" name="updateAddress" qname="operNS:updateAddress" returnQName="updateAddressReturn" returnType="rtns:AddressSoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="addressId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="street1" type="tns:string"></parameter>
@@ -42,6 +39,9 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="typeId" type="tns:int"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="mailing" type="tns:boolean"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="primary" type="tns:boolean"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" name="deleteAddress" qname="operNS:deleteAddress" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="addressId" type="tns:long"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://model.portal.liferay.com" name="getAddress" qname="operNS:getAddress" returnQName="getAddressReturn" returnType="rtns:AddressSoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="addressId" type="tns:long"></parameter>
