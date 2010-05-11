@@ -1189,10 +1189,6 @@ public interface PropsKeys {
 
 	public static final String PASSWORDS_ENCRYPTION_ALGORITHM = "passwords.encryption.algorithm";
 
-	public static final String PASSWORDS_PASSWORDPOLICYTOOLKIT_GENERATOR = "passwords.passwordpolicytoolkit.generator";
-
-	public static final String PASSWORDS_PASSWORDPOLICYTOOLKIT_STATIC = "passwords.passwordpolicytoolkit.static";
-
 	public static final String PASSWORDS_PASSWORDPOLICYTOOLKIT_CHARSET_LOWERCASE = "passwords.passwordpolicytoolkit.charset.lowercase";
 
 	public static final String PASSWORDS_PASSWORDPOLICYTOOLKIT_CHARSET_NUMBERS = "passwords.passwordpolicytoolkit.charset.numbers";
@@ -1200,6 +1196,10 @@ public interface PropsKeys {
 	public static final String PASSWORDS_PASSWORDPOLICYTOOLKIT_CHARSET_SYMBOLS = "passwords.passwordpolicytoolkit.charset.symbols";
 
 	public static final String PASSWORDS_PASSWORDPOLICYTOOLKIT_CHARSET_UPPERCASE = "passwords.passwordpolicytoolkit.charset.uppercase";
+
+	public static final String PASSWORDS_PASSWORDPOLICYTOOLKIT_GENERATOR = "passwords.passwordpolicytoolkit.generator";
+
+	public static final String PASSWORDS_PASSWORDPOLICYTOOLKIT_STATIC = "passwords.passwordpolicytoolkit.static";
 
 	public static final String PASSWORDS_REGEXPTOOLKIT_CHARSET = "passwords.regexptoolkit.charset";
 
@@ -1299,6 +1299,8 @@ public interface PropsKeys {
 
 	public static final String ROLES_REGULAR_SUBTYPES = "roles.regular.subtypes";
 
+	public static final String SANITIZER_IMPL = "sanitizer.impl";
+
 	public static final String SC_IMAGE_MAX_SIZE = "sc.image.max.size";
 
 	public static final String SC_IMAGE_THUMBNAIL_MAX_HEIGHT = "sc.image.thumbnail.max.height";
@@ -1306,8 +1308,6 @@ public interface PropsKeys {
 	public static final String SC_IMAGE_THUMBNAIL_MAX_WIDTH = "sc.image.thumbnail.max.width";
 
 	public static final String SC_PRODUCT_COMMENTS_ENABLED = "sc.product.comments.enabled";
-
-	public static final String SANITIZER_IMPL = "sanitizer.impl";
 
 	public static final String SCHEDULER_CLASSES = "scheduler.classes";
 

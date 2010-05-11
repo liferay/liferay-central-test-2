@@ -35,11 +35,13 @@ public class UserPasswordException extends PortalException {
 
 	public static final int PASSWORD_SAME_AS_CURRENT = 6;
 
-	public static final int PASSWORD_TOO_YOUNG = 7;
+	public static final int PASSWORD_TOO_TRIVIAL = 8;
 
-	public static final int PASSWORDS_DO_NOT_MATCH = 8;
+	public static final int PASSWORD_TOO_YOUNG = 9;
 
-	public static final int PASSWORD_TOO_TRIVIAL = 9;
+	public static final int PASSWORDS_DO_NOT_MATCH = 10;
+
+	private int _type;
 
 	public UserPasswordException(int type) {
 		_type = type;
@@ -48,7 +50,5 @@ public class UserPasswordException extends PortalException {
 	public int getType() {
 		return _type;
 	}
-
-	private int _type;
 
 }

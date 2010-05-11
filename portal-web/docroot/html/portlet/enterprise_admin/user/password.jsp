@@ -60,16 +60,16 @@ boolean passwordReset = BeanParamUtil.getBoolean(selUser, request, "passwordRese
 		<liferay-ui:message key="your-new-password-cannot-be-the-same-as-your-old-password-please-enter-in-a-different-password" />
 	</c:if>
 
+	<c:if test="<%= upe.getType() == UserPasswordException.PASSWORD_TOO_TRIVIAL %>">
+		<liferay-ui:message key="that-password-is-too-trivial" />
+	</c:if>
+
 	<c:if test="<%= upe.getType() == UserPasswordException.PASSWORD_TOO_YOUNG %>">
 		<%= LanguageUtil.format(pageContext, "you-cannot-change-your-password-yet-please-wait-at-least-x-before-changing-your-password-again", LanguageUtil.getTimeDescription(pageContext, passwordPolicy.getMinAge() * 1000), false) %>
 	</c:if>
 
 	<c:if test="<%= upe.getType() == UserPasswordException.PASSWORDS_DO_NOT_MATCH %>">
 		<liferay-ui:message key="the-passwords-you-entered-do-not-match-each-other-please-re-enter-your-password" />
-	</c:if>
-
-	<c:if test="<%= upe.getType() == UserPasswordException.PASSWORD_TOO_TRIVIAL %>">
-		<liferay-ui:message key="that-password-is-too-trivial" />
 	</c:if>
 </liferay-ui:error>
 

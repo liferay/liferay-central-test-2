@@ -17,6 +17,8 @@ package com.liferay.portal.security.pwd;
 import com.liferay.portal.UserPasswordException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.ArrayUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.model.PasswordPolicy;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.PasswordTrackerLocalServiceUtil;
@@ -32,33 +34,36 @@ import java.util.Date;
  * <a href="PasswordPolicyToolkit.java.html"><b><i>View Source</i></b></a>
  *
  * @author Scott Lee
+ * @author Mika Koivisto
  */
 public class PasswordPolicyToolkit extends BasicToolkit {
 
 	public PasswordPolicyToolkit() {
-		_charsLowerCase =
-			PropsValues.PASSWORDS_PASSWORDPOLICYTOOLKIT_CHARSET_LOWERCASE
-				.toCharArray();
-		_charsNumbers =
-			PropsValues.PASSWORDS_PASSWORDPOLICYTOOLKIT_CHARSET_NUMBERS
-				.toCharArray();
-		_charsSymbols =
-			PropsValues.PASSWORDS_PASSWORDPOLICYTOOLKIT_CHARSET_SYMBOLS
-				.toCharArray();
-		_charsUpperCase =
-			PropsValues.PASSWORDS_PASSWORDPOLICYTOOLKIT_CHARSET_UPPERCASE
-				.toCharArray();
-		_charsAlphaNumeric = (
-			PropsValues.PASSWORDS_PASSWORDPOLICYTOOLKIT_CHARSET_LOWERCASE +
-			PropsValues.PASSWORDS_PASSWORDPOLICYTOOLKIT_CHARSET_UPPERCASE +
-			PropsValues.PASSWORDS_PASSWORDPOLICYTOOLKIT_CHARSET_NUMBERS)
-				.toCharArray();
+		_lowerCaseCharsetArray = getSortedCharArray(
+			PropsValues.PASSWORDS_PASSWORDPOLICYTOOLKIT_CHARSET_LOWERCASE);
+		_numbersCharsetArray = getSortedCharArray(
+			PropsValues.PASSWORDS_PASSWORDPOLICYTOOLKIT_CHARSET_NUMBERS);
+		_symbolsCharsetArray = getSortedCharArray(
+			PropsValues.PASSWORDS_PASSWORDPOLICYTOOLKIT_CHARSET_SYMBOLS);
+		_upperCaseCharsetArray = getSortedCharArray(
+			PropsValues.PASSWORDS_PASSWORDPOLICYTOOLKIT_CHARSET_UPPERCASE);
 
-		Arrays.sort(_charsLowerCase);
-		Arrays.sort(_charsNumbers);
-		Arrays.sort(_charsSymbols);
-		Arrays.sort(_charsUpperCase);
-		Arrays.sort(_charsAlphaNumeric);
+		_alphaNumericCharsetArray = ArrayUtil.append(
+			_lowerCaseCharsetArray, _upperCaseCharsetArray,
+			_numbersCharsetArray);
+
+		Arrays.sort(_alphaNumericCharsetArray);
+
+		StringBundler sb = new StringBundler(4);
+
+		sb.append(
+			PropsValues.PASSWORDS_PASSWORDPOLICYTOOLKIT_CHARSET_LOWERCASE);
+		sb.append(PropsValues.PASSWORDS_PASSWORDPOLICYTOOLKIT_CHARSET_NUMBERS);
+		sb.append(PropsValues.PASSWORDS_PASSWORDPOLICYTOOLKIT_CHARSET_SYMBOLS);
+		sb.append(
+			PropsValues.PASSWORDS_PASSWORDPOLICYTOOLKIT_CHARSET_UPPERCASE);
+
+		_completeCharset = sb.toString();
 	}
 
 	public String generate() {
@@ -68,12 +73,7 @@ public class PasswordPolicyToolkit extends BasicToolkit {
 			return PropsValues.PASSWORDS_PASSWORDPOLICYTOOLKIT_STATIC;
 		}
 		else {
-			return PwdGenerator.getPassword(
-				PropsValues.PASSWORDS_PASSWORDPOLICYTOOLKIT_CHARSET_LOWERCASE +
-				PropsValues.PASSWORDS_PASSWORDPOLICYTOOLKIT_CHARSET_NUMBERS +
-				PropsValues.PASSWORDS_PASSWORDPOLICYTOOLKIT_CHARSET_SYMBOLS +
-				PropsValues.PASSWORDS_PASSWORDPOLICYTOOLKIT_CHARSET_UPPERCASE,
-				8);
+			return PwdGenerator.getPassword(_completeCharset, 8);
 		}
 	}
 
@@ -95,63 +95,16 @@ public class PasswordPolicyToolkit extends BasicToolkit {
 					UserPasswordException.PASSWORD_LENGTH);
 			}
 
-			int minAlphaNumeric = passwordPolicy.getMinAlphaNumeric();
-			int minLowerCase = passwordPolicy.getMinLowerCase();
-			int minNumbers = passwordPolicy.getMinNumbers();
-			int minSymbols = passwordPolicy.getMinSymbols();
-			int minUpperCase = passwordPolicy.getMinUpperCase();
-
-			int alphaCount = 0;
-			int lowerCaseCount = 0;
-			int numbersCount = 0;
-			int symbolCount = 0;
-			int upperCaseCount = 0;
-
-			for (int i = 0; i < password1.length(); i++) {
-				if (Arrays.binarySearch(
-						_charsAlphaNumeric, password1.charAt(i)) >= 0) {
-
-					alphaCount++;
-				}
-			}
-
-			for (int i = 0; i < password1.length(); i++) {
-				if (Arrays.binarySearch(
-						_charsLowerCase, password1.charAt(i)) >= 0) {
-
-					lowerCaseCount++;
-				}
-			}
-
-			for (int i = 0; i < password1.length(); i++) {
-				if (Arrays.binarySearch(
-						_charsNumbers, password1.charAt(i)) >= 0) {
-
-					numbersCount++;
-				}
-			}
-
-			for (int i = 0; i < password1.length(); i++) {
-				if (Arrays.binarySearch(
-						_charsSymbols, password1.charAt(i)) >= 0) {
-
-					symbolCount++;
-				}
-			}
-
-			for (int i = 0; i < password1.length(); i++) {
-				if (Arrays.binarySearch(
-						_charsUpperCase, password1.charAt(i)) >= 0) {
-
-					upperCaseCount++;
-				}
-			}
-
-			if ((alphaCount < minAlphaNumeric) ||
-				(lowerCaseCount < minLowerCase) ||
-				(numbersCount < minNumbers) ||
-				(symbolCount < minSymbols) ||
-				(upperCaseCount < minUpperCase)) {
+			if ((getUsageCount(password1, _alphaNumericCharsetArray) <
+					passwordPolicy.getMinAlphaNumeric()) ||
+				(getUsageCount(password1, _lowerCaseCharsetArray) <
+					passwordPolicy.getMinLowerCase()) ||
+				(getUsageCount(password1, _numbersCharsetArray) <
+					passwordPolicy.getMinNumbers()) ||
+				(getUsageCount(password1, _symbolsCharsetArray) <
+					passwordPolicy.getMinSymbols()) ||
+				(getUsageCount(password1, _upperCaseCharsetArray) <
+					passwordPolicy.getMinUpperCase())) {
 
 				throw new UserPasswordException(
 					UserPasswordException.PASSWORD_TOO_TRIVIAL);
@@ -205,10 +158,31 @@ public class PasswordPolicyToolkit extends BasicToolkit {
 		}
 	}
 
-	private char[] _charsAlphaNumeric;
-	private char[] _charsLowerCase;
-	private char[] _charsNumbers;
-	private char[] _charsSymbols;
-	private char[] _charsUpperCase;
+	protected char[] getSortedCharArray(String s) {
+		char[] charArray = s.toCharArray();
+
+		Arrays.sort(charArray);
+
+		return charArray;
+	}
+
+	protected int getUsageCount(String s, char[] charArray) {
+		int count = 0;
+
+		for (int i = 0; i < s.length(); i++) {
+			if (Arrays.binarySearch(charArray, s.charAt(i)) >= 0) {
+				count++;
+			}
+		}
+
+		return count;
+	}
+
+	private char[] _alphaNumericCharsetArray;
+	private String _completeCharset;
+	private char[] _lowerCaseCharsetArray;
+	private char[] _numbersCharsetArray;
+	private char[] _symbolsCharsetArray;
+	private char[] _upperCaseCharsetArray;
 
 }
