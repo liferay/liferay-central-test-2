@@ -93,7 +93,7 @@ List<WorkflowHandler> workflowHandlers = WorkflowHandlerRegistryUtil.getWorkflow
 					}
 					%>
 
-					<aui:option><%= defaultMessage %></aui:option>
+					<aui:option><%= defaultOptionMessage %></aui:option>
 
 					<%
 					for (WorkflowDefinition workflowDefinition : workflowDefinitions) {
