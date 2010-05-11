@@ -289,7 +289,7 @@ public class ArrayUtil_IW {
 	}
 
 	public java.lang.String[] distinct(java.lang.String[] array,
-		java.util.Comparator<String> comparator) {
+		java.util.Comparator<java.lang.String> comparator) {
 		return ArrayUtil.distinct(array, comparator);
 	}
 
