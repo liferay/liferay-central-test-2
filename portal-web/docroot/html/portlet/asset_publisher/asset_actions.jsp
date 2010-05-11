@@ -42,7 +42,7 @@ if (themeDisplay.getScopeGroup().isLayout()) {
 		<liferay-ui:icon
 			image="edit"
 			label="<%= showIconLabel %>"
-			message='<%= LanguageUtil.format(pageContext, "edit-x-x", new Object[] {"aui-helper-hidden-accessible", assetRenderer.getTitle()}) %>'
+			message='<%= showIconLabel ? LanguageUtil.format(pageContext, "edit-x-x", new Object[] {"aui-helper-hidden-accessible", assetRenderer.getTitle()}) : LanguageUtil.format(pageContext, "edit-x", assetRenderer.getTitle()) %>'
 			url="<%= editPortletURL.toString() %>"
 		/>
 	</div>
