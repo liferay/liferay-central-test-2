@@ -50,6 +50,33 @@ public class ArrayUtil_IW {
 		return ArrayUtil.append(array1, array2);
 	}
 
+	public java.lang.Byte[] append(java.lang.Byte[] array, java.lang.Byte value) {
+		return ArrayUtil.append(array, value);
+	}
+
+	public java.lang.Byte[] append(java.lang.Byte[] array1,
+		java.lang.Byte[] array2) {
+		return ArrayUtil.append(array1, array2);
+	}
+
+	public char[] append(char[] array, char value) {
+		return ArrayUtil.append(array, value);
+	}
+
+	public char[] append(char[] array1, char[] array2) {
+		return ArrayUtil.append(array1, array2);
+	}
+
+	public java.lang.Character[] append(java.lang.Character[] array,
+		java.lang.Character value) {
+		return ArrayUtil.append(array, value);
+	}
+
+	public java.lang.Character[] append(java.lang.Character[] array1,
+		java.lang.Character[] array2) {
+		return ArrayUtil.append(array1, array2);
+	}
+
 	public double[] append(double[] array, double value) {
 		return ArrayUtil.append(array, value);
 	}
@@ -188,6 +215,18 @@ public class ArrayUtil_IW {
 	}
 
 	public byte[] clone(byte[] array) {
+		return ArrayUtil.clone(array);
+	}
+
+	public java.lang.Byte[] clone(java.lang.Byte[] array) {
+		return ArrayUtil.clone(array);
+	}
+
+	public char[] clone(char[] array) {
+		return ArrayUtil.clone(array);
+	}
+
+	public java.lang.Character[] clone(java.lang.Character[] array) {
 		return ArrayUtil.clone(array);
 	}
 

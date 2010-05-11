@@ -89,6 +89,63 @@ public class ArrayUtil {
 		return newArray;
 	}
 
+	public static Byte[] append(Byte[] array, Byte value) {
+		Byte[] newArray = new Byte[array.length + 1];
+
+		System.arraycopy(array, 0, newArray, 0, array.length);
+
+		newArray[newArray.length - 1] = value;
+
+		return newArray;
+	}
+
+	public static Byte[] append(Byte[] array1, Byte[] array2) {
+		Byte[] newArray = new Byte[array1.length + array2.length];
+
+		System.arraycopy(array1, 0, newArray, 0, array1.length);
+		System.arraycopy(array2, 0, newArray, array1.length, array2.length);
+
+		return newArray;
+	}
+
+	public static char[] append(char[] array, char value) {
+		char[] newArray = new char[array.length + 1];
+
+		System.arraycopy(array, 0, newArray, 0, array.length);
+
+		newArray[newArray.length - 1] = value;
+
+		return newArray;
+	}
+
+	public static char[] append(char[] array1, char[] array2) {
+		char[] newArray = new char[array1.length + array2.length];
+
+		System.arraycopy(array1, 0, newArray, 0, array1.length);
+		System.arraycopy(array2, 0, newArray, array1.length, array2.length);
+
+		return newArray;
+	}
+
+	public static Character[] append(Character[] array, Character value) {
+		Character[] newArray = new Character[array.length + 1];
+
+		System.arraycopy(array, 0, newArray, 0, array.length);
+
+		newArray[newArray.length - 1] = value;
+
+		return newArray;
+	}
+
+	public static Character[] append(Character[] array1, Character[] array2) {
+		Character[] newArray = new Character[array1.length + array2.length];
+
+		System.arraycopy(array1, 0, newArray, 0, array1.length);
+		System.arraycopy(array2, 0, newArray, array1.length, array2.length);
+
+		return newArray;
+	}
+
 	public static double[] append(double[] array, double value) {
 		double[] newArray = new double[array.length + 1];
 
@@ -373,6 +430,30 @@ public class ArrayUtil {
 
 	public static byte[] clone(byte[] array) {
 		byte[] newArray = new byte[array.length];
+
+		System.arraycopy(array, 0, newArray, 0, array.length);
+
+		return newArray;
+	}
+
+	public static Byte[] clone(Byte[] array) {
+		Byte[] newArray = new Byte[array.length];
+
+		System.arraycopy(array, 0, newArray, 0, array.length);
+
+		return newArray;
+	}
+
+	public static char[] clone(char[] array) {
+		char[] newArray = new char[array.length];
+
+		System.arraycopy(array, 0, newArray, 0, array.length);
+
+		return newArray;
+	}
+
+	public static Character[] clone(Character[] array) {
+		Character[] newArray = new Character[array.length];
 
 		System.arraycopy(array, 0, newArray, 0, array.length);
 
