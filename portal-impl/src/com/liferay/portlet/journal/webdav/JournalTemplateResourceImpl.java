@@ -17,8 +17,8 @@ package com.liferay.portlet.journal.webdav;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.webdav.BaseResourceImpl;
-import com.liferay.portal.webdav.WebDAVException;
+import com.liferay.portal.kernel.webdav.BaseResourceImpl;
+import com.liferay.portal.kernel.webdav.WebDAVException;
 import com.liferay.portlet.journal.model.JournalTemplate;
 
 import java.io.InputStream;

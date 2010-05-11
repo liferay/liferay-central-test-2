@@ -12,31 +12,33 @@
  * details.
  */
 
-package com.liferay.portal.webdav;
-
-import com.liferay.portal.kernel.exception.PortalException;
+package com.liferay.portal.kernel.webdav;
 
 /**
- * <a href="WebDAVException.java.html"><b><i>View Source</i></b></a>
+ * <a href="Status.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class WebDAVException extends PortalException {
+public class Status {
 
-	public WebDAVException() {
-		super();
+	public Status(int code) {
+		this(null, code);
 	}
 
-	public WebDAVException(String msg) {
-		super(msg);
+	public Status(Object object, int code) {
+		_object = object;
+		_code = code;
 	}
 
-	public WebDAVException(String msg, Throwable cause) {
-		super(msg, cause);
+	public Object getObject() {
+		return _object;
 	}
 
-	public WebDAVException(Throwable cause) {
-		super(cause);
+	public int getCode() {
+		return _code;
 	}
+
+	private Object _object;
+	private int _code;
 
 }

@@ -14,9 +14,9 @@
 
 package com.liferay.portal.webdav.methods;
 
-import com.liferay.portal.webdav.WebDAVException;
-import com.liferay.portal.webdav.WebDAVRequest;
-import com.liferay.portal.webdav.WebDAVStorage;
+import com.liferay.portal.kernel.webdav.WebDAVException;
+import com.liferay.portal.kernel.webdav.WebDAVRequest;
+import com.liferay.portal.kernel.webdav.WebDAVStorage;
 
 /**
  * <a href="PutMethodImpl.java.html"><b><i>View Source</i></b></a>

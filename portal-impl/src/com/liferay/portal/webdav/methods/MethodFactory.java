@@ -16,8 +16,8 @@ package com.liferay.portal.webdav.methods;
 
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstancePool;
+import com.liferay.portal.kernel.webdav.WebDAVException;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.portal.webdav.WebDAVException;
 
 import java.util.HashMap;
 import java.util.Map;

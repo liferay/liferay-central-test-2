@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.webdav;
+package com.liferay.portal.kernel.webdav;
 
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.FastDateFormatFactoryUtil;

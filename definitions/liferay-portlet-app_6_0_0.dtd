@@ -295,8 +295,8 @@ http://docs.liferay.com/portal/6.0/javadocs/portal-impl/com/liferay/portlet/docu
 
 <!--
 The webdav-storage-class value must be a class that implements
-com.liferay.portal.webdav.WebDAVStorage and allows data to be exposed via the
-WebDAV protocol.
+com.liferay.portal.kernel.webdav.WebDAVStorage and allows data to be exposed via
+the WebDAV protocol.
 
 See:
 

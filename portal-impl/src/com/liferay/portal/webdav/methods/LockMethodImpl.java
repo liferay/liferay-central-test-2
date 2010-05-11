@@ -24,12 +24,12 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.webdav.Status;
+import com.liferay.portal.kernel.webdav.WebDAVException;
+import com.liferay.portal.kernel.webdav.WebDAVRequest;
+import com.liferay.portal.kernel.webdav.WebDAVStorage;
+import com.liferay.portal.kernel.webdav.WebDAVUtil;
 import com.liferay.portal.model.Lock;
-import com.liferay.portal.webdav.Status;
-import com.liferay.portal.webdav.WebDAVException;
-import com.liferay.portal.webdav.WebDAVRequest;
-import com.liferay.portal.webdav.WebDAVStorage;
-import com.liferay.portal.webdav.WebDAVUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
 import com.liferay.util.xml.XMLFormatter;
 

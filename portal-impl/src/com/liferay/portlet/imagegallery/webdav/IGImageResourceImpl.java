@@ -17,10 +17,10 @@ package com.liferay.portlet.imagegallery.webdav;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 import com.liferay.portal.kernel.util.MimeTypesUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.webdav.BaseResourceImpl;
+import com.liferay.portal.kernel.webdav.WebDAVException;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.service.ImageLocalServiceUtil;
-import com.liferay.portal.webdav.BaseResourceImpl;
-import com.liferay.portal.webdav.WebDAVException;
 import com.liferay.portlet.imagegallery.model.IGImage;
 
 import java.io.InputStream;

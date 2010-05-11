@@ -181,7 +181,7 @@ public interface Portlet extends PortletModel {
 
 	public void setWebDAVStorageClass(java.lang.String webDAVStorageClass);
 
-	public com.liferay.portal.webdav.WebDAVStorage getWebDAVStorageInstance();
+	public com.liferay.portal.kernel.webdav.WebDAVStorage getWebDAVStorageInstance();
 
 	public java.lang.String getXmlRpcMethodClass();
 

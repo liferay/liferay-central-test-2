@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.webdav;
+package com.liferay.portal.kernel.webdav;
 
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.Group;

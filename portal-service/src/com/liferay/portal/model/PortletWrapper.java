@@ -420,7 +420,7 @@ public class PortletWrapper implements Portlet {
 		_portlet.setWebDAVStorageClass(webDAVStorageClass);
 	}
 
-	public com.liferay.portal.webdav.WebDAVStorage getWebDAVStorageInstance() {
+	public com.liferay.portal.kernel.webdav.WebDAVStorage getWebDAVStorageInstance() {
 		return _portlet.getWebDAVStorageInstance();
 	}
 

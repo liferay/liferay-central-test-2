@@ -16,10 +16,10 @@ package com.liferay.portal.webdav.methods;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.webdav.Resource;
-import com.liferay.portal.webdav.WebDAVException;
-import com.liferay.portal.webdav.WebDAVRequest;
-import com.liferay.portal.webdav.WebDAVStorage;
+import com.liferay.portal.kernel.webdav.Resource;
+import com.liferay.portal.kernel.webdav.WebDAVException;
+import com.liferay.portal.kernel.webdav.WebDAVRequest;
+import com.liferay.portal.kernel.webdav.WebDAVStorage;
 import com.liferay.util.servlet.ServletResponseUtil;
 
 import java.io.InputStream;
