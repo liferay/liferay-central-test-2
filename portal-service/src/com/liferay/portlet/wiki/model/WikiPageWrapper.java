@@ -254,6 +254,22 @@ public class WikiPageWrapper implements WikiPage {
 		_wikiPage.setStatusDate(statusDate);
 	}
 
+	public boolean isApproved() {
+		return _wikiPage.isApproved();
+	}
+
+	public boolean isDraft() {
+		return _wikiPage.isDraft();
+	}
+
+	public boolean isExpired() {
+		return _wikiPage.isExpired();
+	}
+
+	public boolean isPending() {
+		return _wikiPage.isPending();
+	}
+
 	public com.liferay.portlet.wiki.model.WikiPage toEscapedModel() {
 		return _wikiPage.toEscapedModel();
 	}
@@ -343,22 +359,6 @@ public class WikiPageWrapper implements WikiPage {
 
 	public com.liferay.portlet.wiki.model.WikiPage getRedirectPage() {
 		return _wikiPage.getRedirectPage();
-	}
-
-	public boolean isApproved() {
-		return _wikiPage.isApproved();
-	}
-
-	public boolean isDraft() {
-		return _wikiPage.isDraft();
-	}
-
-	public boolean isExpired() {
-		return _wikiPage.isExpired();
-	}
-
-	public boolean isPending() {
-		return _wikiPage.isPending();
 	}
 
 	public void setAttachmentsDir(java.lang.String attachmentsDir) {

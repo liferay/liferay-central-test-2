@@ -110,6 +110,14 @@ public interface MBThreadModel extends BaseModel<MBThread> {
 
 	public void setStatusDate(Date statusDate);
 
+	public boolean isApproved();
+
+	public boolean isDraft();
+
+	public boolean isExpired();
+
+	public boolean isPending();
+
 	public MBThread toEscapedModel();
 
 	public boolean isNew();

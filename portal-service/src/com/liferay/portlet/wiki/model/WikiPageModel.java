@@ -162,6 +162,14 @@ public interface WikiPageModel extends BaseModel<WikiPage> {
 
 	public void setStatusDate(Date statusDate);
 
+	public boolean isApproved();
+
+	public boolean isDraft();
+
+	public boolean isExpired();
+
+	public boolean isPending();
+
 	public WikiPage toEscapedModel();
 
 	public boolean isNew();

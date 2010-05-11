@@ -162,6 +162,14 @@ public interface MBMessageModel extends BaseModel<MBMessage> {
 
 	public void setStatusDate(Date statusDate);
 
+	public boolean isApproved();
+
+	public boolean isDraft();
+
+	public boolean isExpired();
+
+	public boolean isPending();
+
 	public MBMessage toEscapedModel();
 
 	public boolean isNew();

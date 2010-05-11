@@ -144,6 +144,14 @@ public interface BlogsEntryModel extends BaseModel<BlogsEntry> {
 
 	public void setStatusDate(Date statusDate);
 
+	public boolean isApproved();
+
+	public boolean isDraft();
+
+	public boolean isExpired();
+
+	public boolean isPending();
+
 	public BlogsEntry toEscapedModel();
 
 	public boolean isNew();

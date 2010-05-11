@@ -182,6 +182,22 @@ public class DLFileShortcutWrapper implements DLFileShortcut {
 		_dlFileShortcut.setStatusDate(statusDate);
 	}
 
+	public boolean isApproved() {
+		return _dlFileShortcut.isApproved();
+	}
+
+	public boolean isDraft() {
+		return _dlFileShortcut.isDraft();
+	}
+
+	public boolean isExpired() {
+		return _dlFileShortcut.isExpired();
+	}
+
+	public boolean isPending() {
+		return _dlFileShortcut.isPending();
+	}
+
 	public com.liferay.portlet.documentlibrary.model.DLFileShortcut toEscapedModel() {
 		return _dlFileShortcut.toEscapedModel();
 	}

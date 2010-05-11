@@ -182,6 +182,22 @@ public class DLFileVersionWrapper implements DLFileVersion {
 		_dlFileVersion.setStatusDate(statusDate);
 	}
 
+	public boolean isApproved() {
+		return _dlFileVersion.isApproved();
+	}
+
+	public boolean isDraft() {
+		return _dlFileVersion.isDraft();
+	}
+
+	public boolean isExpired() {
+		return _dlFileVersion.isExpired();
+	}
+
+	public boolean isPending() {
+		return _dlFileVersion.isPending();
+	}
+
 	public com.liferay.portlet.documentlibrary.model.DLFileVersion toEscapedModel() {
 		return _dlFileVersion.toEscapedModel();
 	}
@@ -242,10 +258,6 @@ public class DLFileVersionWrapper implements DLFileVersion {
 
 	public java.lang.String toXmlString() {
 		return _dlFileVersion.toXmlString();
-	}
-
-	public boolean isApproved() {
-		return _dlFileVersion.isApproved();
 	}
 
 	public DLFileVersion getWrappedDLFileVersion() {

@@ -222,6 +222,22 @@ public class BlogsEntryWrapper implements BlogsEntry {
 		_blogsEntry.setStatusDate(statusDate);
 	}
 
+	public boolean isApproved() {
+		return _blogsEntry.isApproved();
+	}
+
+	public boolean isDraft() {
+		return _blogsEntry.isDraft();
+	}
+
+	public boolean isExpired() {
+		return _blogsEntry.isExpired();
+	}
+
+	public boolean isPending() {
+		return _blogsEntry.isPending();
+	}
+
 	public com.liferay.portlet.blogs.model.BlogsEntry toEscapedModel() {
 		return _blogsEntry.toEscapedModel();
 	}
@@ -281,10 +297,6 @@ public class BlogsEntryWrapper implements BlogsEntry {
 
 	public java.lang.String toXmlString() {
 		return _blogsEntry.toXmlString();
-	}
-
-	public boolean isApproved() {
-		return _blogsEntry.isApproved();
 	}
 
 	public BlogsEntry getWrappedBlogsEntry() {

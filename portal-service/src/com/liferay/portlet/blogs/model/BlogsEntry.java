@@ -40,5 +40,4 @@ package com.liferay.portlet.blogs.model;
  * @generated
  */
 public interface BlogsEntry extends BlogsEntryModel {
-	public boolean isApproved();
 }

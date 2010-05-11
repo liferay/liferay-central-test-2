@@ -262,6 +262,22 @@ public class MBMessageWrapper implements MBMessage {
 		_mbMessage.setStatusDate(statusDate);
 	}
 
+	public boolean isApproved() {
+		return _mbMessage.isApproved();
+	}
+
+	public boolean isDraft() {
+		return _mbMessage.isDraft();
+	}
+
+	public boolean isExpired() {
+		return _mbMessage.isExpired();
+	}
+
+	public boolean isPending() {
+		return _mbMessage.isPending();
+	}
+
 	public com.liferay.portlet.messageboards.model.MBMessage toEscapedModel() {
 		return _mbMessage.toEscapedModel();
 	}

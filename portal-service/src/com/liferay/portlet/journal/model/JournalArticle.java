@@ -50,14 +50,6 @@ public interface JournalArticle extends JournalArticleModel {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public boolean isApproved();
-
-	public boolean isDraft();
-
-	public boolean isExpired();
-
-	public boolean isPending();
-
 	public boolean isTemplateDriven();
 
 	public void setSmallImageType(java.lang.String smallImageType);

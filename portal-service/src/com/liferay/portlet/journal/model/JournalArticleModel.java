@@ -186,6 +186,14 @@ public interface JournalArticleModel extends BaseModel<JournalArticle> {
 
 	public void setStatusDate(Date statusDate);
 
+	public boolean isApproved();
+
+	public boolean isDraft();
+
+	public boolean isExpired();
+
+	public boolean isPending();
+
 	public JournalArticle toEscapedModel();
 
 	public boolean isNew();

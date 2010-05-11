@@ -56,13 +56,5 @@ public interface WikiPage extends WikiPageModel {
 
 	public com.liferay.portlet.wiki.model.WikiPage getRedirectPage();
 
-	public boolean isApproved();
-
-	public boolean isDraft();
-
-	public boolean isExpired();
-
-	public boolean isPending();
-
 	public void setAttachmentsDir(java.lang.String attachmentsDir);
 }

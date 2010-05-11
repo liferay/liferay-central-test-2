@@ -166,6 +166,22 @@ public class MBThreadWrapper implements MBThread {
 		_mbThread.setStatusDate(statusDate);
 	}
 
+	public boolean isApproved() {
+		return _mbThread.isApproved();
+	}
+
+	public boolean isDraft() {
+		return _mbThread.isDraft();
+	}
+
+	public boolean isExpired() {
+		return _mbThread.isExpired();
+	}
+
+	public boolean isPending() {
+		return _mbThread.isPending();
+	}
+
 	public com.liferay.portlet.messageboards.model.MBThread toEscapedModel() {
 		return _mbThread.toEscapedModel();
 	}

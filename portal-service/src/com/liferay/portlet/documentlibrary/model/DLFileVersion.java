@@ -40,5 +40,4 @@ package com.liferay.portlet.documentlibrary.model;
  * @generated
  */
 public interface DLFileVersion extends DLFileVersionModel {
-	public boolean isApproved();
 }

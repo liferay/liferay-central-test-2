@@ -122,6 +122,14 @@ public interface DLFileVersionModel extends BaseModel<DLFileVersion> {
 
 	public void setStatusDate(Date statusDate);
 
+	public boolean isApproved();
+
+	public boolean isDraft();
+
+	public boolean isExpired();
+
+	public boolean isPending();
+
 	public DLFileVersion toEscapedModel();
 
 	public boolean isNew();

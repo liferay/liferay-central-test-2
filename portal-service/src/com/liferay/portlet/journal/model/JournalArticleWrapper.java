@@ -302,6 +302,22 @@ public class JournalArticleWrapper implements JournalArticle {
 		_journalArticle.setStatusDate(statusDate);
 	}
 
+	public boolean isApproved() {
+		return _journalArticle.isApproved();
+	}
+
+	public boolean isDraft() {
+		return _journalArticle.isDraft();
+	}
+
+	public boolean isExpired() {
+		return _journalArticle.isExpired();
+	}
+
+	public boolean isPending() {
+		return _journalArticle.isPending();
+	}
+
 	public com.liferay.portlet.journal.model.JournalArticle toEscapedModel() {
 		return _journalArticle.toEscapedModel();
 	}
@@ -380,22 +396,6 @@ public class JournalArticleWrapper implements JournalArticle {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _journalArticle.getSmallImageType();
-	}
-
-	public boolean isApproved() {
-		return _journalArticle.isApproved();
-	}
-
-	public boolean isDraft() {
-		return _journalArticle.isDraft();
-	}
-
-	public boolean isExpired() {
-		return _journalArticle.isExpired();
-	}
-
-	public boolean isPending() {
-		return _journalArticle.isPending();
 	}
 
 	public boolean isTemplateDriven() {

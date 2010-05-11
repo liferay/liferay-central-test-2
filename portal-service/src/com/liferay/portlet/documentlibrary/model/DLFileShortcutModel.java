@@ -121,6 +121,14 @@ public interface DLFileShortcutModel extends BaseModel<DLFileShortcut> {
 
 	public void setStatusDate(Date statusDate);
 
+	public boolean isApproved();
+
+	public boolean isDraft();
+
+	public boolean isExpired();
+
+	public boolean isPending();
+
 	public DLFileShortcut toEscapedModel();
 
 	public boolean isNew();
