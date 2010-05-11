@@ -21,8 +21,8 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 long assetEntryId = ParamUtil.getLong(request, "assetEntryId");
 String type = ParamUtil.getString(request, "type");
-String urlTitle = ParamUtil.getString(request, "urlTitle");
 long groupId = ParamUtil.getLong(request, "groupId", scopeGroupId);
+String urlTitle = ParamUtil.getString(request, "urlTitle");
 
 boolean show = true;
 boolean print = ParamUtil.getString(request, "viewMode").equals(Constants.PRINT);

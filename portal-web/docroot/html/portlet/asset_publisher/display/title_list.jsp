@@ -42,11 +42,11 @@ viewFullContentURL.setParameter("assetEntryId", String.valueOf(assetEntry.getEnt
 viewFullContentURL.setParameter("type", assetRendererFactory.getType());
 
 if (Validator.isNotNull(assetRenderer.getUrlTitle())) {
-	viewFullContentURL.setParameter("urlTitle", assetRenderer.getUrlTitle());
-
 	if (assetRenderer.getGroupId() != scopeGroupId) {
 		viewFullContentURL.setParameter("groupId", String.valueOf(assetRenderer.getGroupId()));
 	}
+
+	viewFullContentURL.setParameter("urlTitle", assetRenderer.getUrlTitle());
 }
 
 String viewURL = viewInContext ? assetRenderer.getURLViewInContext((LiferayPortletRequest)renderRequest, (LiferayPortletResponse)renderResponse, viewFullContentURL.toString()) : viewFullContentURL.toString();

@@ -94,11 +94,11 @@ request.setAttribute("view.jsp-showIconLabel", true);
 	viewFullContentURL.setParameter("type", assetRendererFactory.getType());
 
 	if (Validator.isNotNull(assetRenderer.getUrlTitle())) {
-		viewFullContentURL.setParameter("urlTitle", assetRenderer.getUrlTitle());
-
 		if (assetRenderer.getGroupId() != scopeGroupId) {
 			viewFullContentURL.setParameter("groupId", String.valueOf(assetRenderer.getGroupId()));
 		}
+
+		viewFullContentURL.setParameter("urlTitle", assetRenderer.getUrlTitle());
 	}
 
 	String viewFullContent = viewFullContentURL.toString();
