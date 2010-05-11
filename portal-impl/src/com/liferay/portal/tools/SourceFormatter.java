@@ -1019,10 +1019,11 @@ public class SourceFormatter {
 		ds.setExcludes(
 			new String[] {
 				"**\\bin\\**", "**\\classes\\*", "**\\jsp\\*", "**\\tmp\\**",
-				"**\\PropsKeys.java", "**\\InstanceWrapperBuilder.java",
-				"**\\ServiceBuilder.java", "**\\SourceFormatter.java",
-				"**\\UserAttributes.java", "**\\WebKeys.java",
-				"**\\*_IW.java", "**\\portal-service\\**\\model\\*Model.java",
+				"**\\PropsKeys.java", "**\\PropsValues.java",
+				"**\\InstanceWrapperBuilder.java", "**\\ServiceBuilder.java",
+				"**\\SourceFormatter.java", "**\\UserAttributes.java",
+				"**\\WebKeys.java", "**\\*_IW.java",
+				"**\\portal-service\\**\\model\\*Model.java",
 				"**\\portal-service\\**\\model\\*Soap.java",
 				"**\\portal-service\\**\\model\\*Wrapper.java",
 				"**\\model\\impl\\*ModelImpl.java",
