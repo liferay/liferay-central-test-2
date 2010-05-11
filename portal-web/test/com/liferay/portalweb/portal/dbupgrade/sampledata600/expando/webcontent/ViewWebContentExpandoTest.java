@@ -61,23 +61,23 @@ public class ViewWebContentExpandoTest extends BaseTestCase {
 			selenium.getText("//div[@class='journal-content-article']/h1"));
 		assertTrue(selenium.isElementPresent("//input[@value='Create Account']"));
 		assertEquals(RuntimeVariables.replace("Michael"),
-			selenium.getText("//table[@class='lfr-table']/tbody/tr[2]/td[2]"));
+			selenium.getText("//td[2]"));
 		assertEquals(RuntimeVariables.replace("Hashimoto"),
-			selenium.getText("//table[@class='lfr-table']/tbody/tr[2]/td[3]"));
+			selenium.getText("//td[3]"));
 		assertEquals(RuntimeVariables.replace("$100.00"),
-			selenium.getText("//table[@class='lfr-table']/tbody/tr[2]/td[4]"));
+			selenium.getText("//td[4]"));
 		assertEquals(RuntimeVariables.replace("JR"),
-			selenium.getText("//table[@class='lfr-table']/tbody/tr[3]/td[2]"));
+			selenium.getText("//tr[3]/td[2]"));
 		assertEquals(RuntimeVariables.replace("Houn"),
-			selenium.getText("//table[@class='lfr-table']/tbody/tr[3]/td[3]"));
+			selenium.getText("//tr[3]/td[3]"));
 		assertEquals(RuntimeVariables.replace("$1,000,000.00"),
-			selenium.getText("//table[@class='lfr-table']/tbody/tr[3]/td[4]"));
+			selenium.getText("//tr[3]/td[4]"));
 		assertEquals(RuntimeVariables.replace("Michael"),
-			selenium.getText("//table[@class='lfr-table']/tbody/tr[4]/td[2]"));
+			selenium.getText("//tr[4]/td[2]"));
 		assertEquals(RuntimeVariables.replace("Saechang"),
-			selenium.getText("//table[@class='lfr-table']/tbody/tr[4]/td[3]"));
+			selenium.getText("//tr[4]/td[3]"));
 		assertEquals(RuntimeVariables.replace("$1,000,000.00"),
-			selenium.getText("//table[@class='lfr-table']/tbody/tr[4]/td[4]"));
+			selenium.getText("//tr[4]/td[4]"));
 		assertTrue(selenium.isTextPresent("# of Accounts: 3"));
 	}
 }

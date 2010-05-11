@@ -91,6 +91,7 @@ public class AddStructureImageAssociationTest extends BaseTestCase {
 			RuntimeVariables.replace("label=Text"));
 		selenium.type("_15_structure_el0_name",
 			RuntimeVariables.replace("text-test"));
+		Thread.sleep(5000);
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(

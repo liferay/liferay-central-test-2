@@ -16,7 +16,6 @@ package com.liferay.portalweb.portal.dbupgrade.sampledata600.expando;
 
 import com.liferay.portalweb.portal.BaseTests;
 import com.liferay.portalweb.portal.dbupgrade.sampledata600.expando.webcontent.WebContentTests;
-import com.liferay.portalweb.portal.dbupgrade.sampledata600.expando.webform.WebFormTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -32,7 +31,6 @@ public class ExpandoTests extends BaseTests {
 		TestSuite testSuite = new TestSuite();
 
 		testSuite.addTest(WebContentTests.suite());
-		testSuite.addTest(WebFormTests.suite());
 
 		return testSuite;
 	}

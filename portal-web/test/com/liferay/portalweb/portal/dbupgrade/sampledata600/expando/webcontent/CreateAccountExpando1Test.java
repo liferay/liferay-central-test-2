@@ -69,10 +69,10 @@ public class CreateAccountExpando1Test extends BaseTestCase {
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Michael"),
-			selenium.getText("//table[@class='lfr-table']/tbody/tr[2]/td[2]"));
+			selenium.getText("//td[2]"));
 		assertEquals(RuntimeVariables.replace("Hashimoto"),
-			selenium.getText("//table[@class='lfr-table']/tbody/tr[2]/td[3]"));
+			selenium.getText("//td[3]"));
 		assertEquals(RuntimeVariables.replace("$100.00"),
-			selenium.getText("//table[@class='lfr-table']/tbody/tr[2]/td[4]"));
+			selenium.getText("//td[4]"));
 	}
 }

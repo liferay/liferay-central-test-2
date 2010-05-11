@@ -24,59 +24,48 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class LoginTest extends BaseTestCase {
 	public void testLogin() throws Exception {
-		int label = 1;
+		selenium.open("/web/guest/home");
+		Thread.sleep(30000);
 
-		while (label >= 1) {
-			switch (label) {
-			case 1:
-				selenium.open("/web/guest/home");
-				Thread.sleep(30000);
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isElementPresent("link=Sign In")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
-				selenium.click(RuntimeVariables.replace("link=Sign In"));
-				selenium.waitForPageToLoad("30000");
-				selenium.type("_58_login",
-					RuntimeVariables.replace("test@liferay.com"));
-				selenium.type("_58_password", RuntimeVariables.replace("test"));
-				selenium.click("_58_rememberMeCheckbox");
-				selenium.click(RuntimeVariables.replace(
-						"//input[@value='Sign In']"));
-				selenium.waitForPageToLoad("30000");
-
-				boolean reminderQueryPresent = selenium.isElementPresent(
-						"reminderQueryAnswer");
-
-				if (!reminderQueryPresent) {
-					label = 2;
-
-					continue;
-				}
-
-				selenium.type("reminderQueryAnswer",
-					RuntimeVariables.replace("Test"));
-				selenium.click(RuntimeVariables.replace(
-						"//input[@value='Save']"));
-				selenium.waitForPageToLoad("30000");
-
-			case 2:
-			case 100:
-				label = -1;
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
 			}
+
+			try {
+				if (selenium.isVisible("link=Sign In")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
 		}
+
+		selenium.click(RuntimeVariables.replace("link=Sign In"));
+		selenium.waitForPageToLoad("30000");
+		selenium.type("_58_login", RuntimeVariables.replace("test@liferay.com"));
+		selenium.type("_58_password", RuntimeVariables.replace("test"));
+		selenium.click("_58_rememberMeCheckbox");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("//input[@value='Sign In']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("//input[@value='Sign In']"));
+		selenium.waitForPageToLoad("30000");
 	}
 }
