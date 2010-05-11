@@ -1937,9 +1937,9 @@ public class JournalArticleLocalServiceImpl
 			}
 			catch (Exception e) {
 				_log.error(
-					"Error sending the email to notify the change of status " +
-						"of " + article.getArticleId() + " to " + msg + ": " +
-							e);
+					"Unable to send email to notify the change of status " +
+						" to " + msg + " for article " + article.getId() +
+							": " + e.getMessage());
 			}
 		}
 
