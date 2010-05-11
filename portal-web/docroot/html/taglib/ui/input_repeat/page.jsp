@@ -140,15 +140,22 @@ if (Validator.isNull(yearlyMonth0Param) && (event != null)) {
 		if (recurrence.getByMonth() == null) {
 			yearlyMonth0 = recurrence.getDtStart().get(Calendar.MONTH);
 		}
+		else {
+			yearlyMonth0 = recurrence.getByMonth()[0];
+		}
 	}
 }
+
 
 int yearlyDay0 = ParamUtil.getInteger(request, "yearlyDay0", 15);
 String yearlyDay0Param = ParamUtil.getString(request, "yearlyDay0");
 if (Validator.isNull(yearlyDay0Param) && (event != null)) {
 	if ((event.getRepeating()) && (recurrence != null)) {
-		if (recurrence.getByMonth() == null) {
+		if (recurrence.getByMonthDay() == null) {
 			yearlyDay0 = recurrence.getDtStart().get(Calendar.DATE);
+		}
+		else {
+			yearlyDay0 = recurrence.getByMonthDay()[0];			
 		}
 	}
 }
