@@ -836,6 +836,7 @@
 		<icon>/html/icons/asset_publisher.png</icon>
 		<struts-path>asset_publisher</struts-path>
 		<configuration-action-class>com.liferay.portlet.assetpublisher.action.ConfigurationActionImpl</configuration-action-class>
+		<indexer-class>com.liferay.portlet.assetpublisher.util.AssetIndexer</indexer-class>
 		<friendly-url-mapper-class>com.liferay.portlet.assetpublisher.AssetPublisherFriendlyURLMapper</friendly-url-mapper-class>
 		<use-default-template>false</use-default-template>
 		<layout-cacheable>true</layout-cacheable>

@@ -17,10 +17,6 @@
 <%
 String modelResourceName = ResourceActionsUtil.getModelResource(locale, typeSelection);
 
-String tabs1 = ParamUtil.getString(request, "tabs1", modelResourceName);
-String tabNames = modelResourceName + StringPool.COMMA + "shared-entries";
-
-long groupId = tabs1.equals(modelResourceName) ? scopeGroupId : themeDisplay.getCompanyGroupId();
 long userId = 0;
 
 int assetEntryOrder = ParamUtil.getInteger(request, "assetEntryOrder", -1);
@@ -38,7 +34,7 @@ portletURL.setParameter("typeSelection", typeSelection);
 
 <liferay-ui:tabs
 	backURL="<%= configurationRenderURL.toString() %>"
-	names="<%= tabNames %>"
+	names='<%= LanguageUtil.get(pageContext, "select") + StringPool.COLON + StringPool.SPACE + ResourceActionsUtil.getModelResource(locale, typeSelection) %>'
 	url="<%= portletURL.toString() %>"
 />
 
@@ -53,132 +49,43 @@ portletURL.setParameter("typeSelection", typeSelection);
 		<aui:input name="portletResource" type="hidden" value="<%= portletResource %>" />
 		<aui:input name="typeSelection" type="hidden" value="<%= typeSelection %>" />
 
-		<span class="aui-search-bar">
-			<aui:input inlineField="<%= true %>" id="keywords" label="" name="keywords" size="30" title="search-assets" type="text" />
-
-			<aui:button type="submit" value="search" />
-		</span>
-	</aui:form>
-</div>
-
-<c:choose>
-	<c:when test="<%= Validator.isNotNull(keywords) %>">
-
 		<%
-		List<String> headerNames = new ArrayList<String>();
-
-		headerNames.add("title");
-		headerNames.add("description");
-		headerNames.add("user-name");
-		headerNames.add("modified-date");
-		headerNames.add("score");
-
-		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.format(pageContext, "no-results-were-found-that-matched-the-keywords-x", "<strong>" + HtmlUtil.escape(keywords) + "</strong>"));
-
-		try {
-			AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(typeSelection);
-
-			Hits results = AssetEntryLocalServiceUtil.search(company.getCompanyId(), assetRendererFactory.getPortletId(), keywords, searchContainer.getStart(), searchContainer.getEnd());
-
-			int total = results.getLength();
-
-			searchContainer.setTotal(total);
-
-			List resultRows = searchContainer.getResultRows();
-
-			for (int i = 0; i < results.getDocs().length; i++) {
-				com.liferay.portal.kernel.search.Document doc = results.doc(i);
-
-				ResultRow row = new ResultRow(doc, i, i);
-
-				long entryId = GetterUtil.getLong(doc.get(Field.ENTRY_CLASS_PK));
-
-				AssetEntry entry = AssetEntryLocalServiceUtil.getEntry(typeSelection, entryId);
-
-				entry = entry.toEscapedModel();
-
-				StringBundler sb = new StringBundler(11);
-
-				sb.append("javascript:");
-				sb.append(renderResponse.getNamespace());
-				sb.append("selectAsset('");
-				sb.append(entry.getEntryId());
-				sb.append("', '");
-				sb.append(entry.getEntryId());
-				sb.append("', '");
-				sb.append(UnicodeFormatter.toString(entry.getTitle()));
-				sb.append("', '");
-				sb.append(assetEntryOrder);
-				sb.append("');");
-
-				String rowHREF = sb.toString();
-
-				// Title
-
-				row.addText(entry.getTitle(), rowHREF);
-
-				// Description
-
-				row.addText(entry.getDescription(), rowHREF);
-
-				// User name
-
-				row.addText(HtmlUtil.escape(entry.getUserName()), rowHREF);
-
-				// Modified date
-
-				row.addText(dateFormatDate.format(entry.getModifiedDate()), rowHREF);
-
-				// Score
-
-				row.addScore(results.score(i));
-
-				// Add result row
-
-				resultRows.add(row);
-			}
-		}
-		catch (Exception e) {
-		}
+		AssetSearch searchContainer = new AssetSearch(renderRequest, portletURL);
 		%>
 
-		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-	</c:when>
-	<c:otherwise>
+		<liferay-ui:search-form
+			page="/html/portlet/asset_publisher/asset_search.jsp"
+			searchContainer="<%= searchContainer %>"
+		/>
 
 		<%
-		List<String> headerNames = new ArrayList<String>();
+		AssetSearchTerms searchTerms = (AssetSearchTerms)searchContainer.getSearchTerms();
+		%>
 
-		headerNames.add("title");
-		headerNames.add("description");
-		headerNames.add("user-name");
-		headerNames.add("modified-date");
+		<%@ include file="/html/portlet/asset_publisher/asset_search_results.jspf" %>
 
-		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, "there-are-no-results");
+		<div class="separator"><!-- --></div>
 
-		AssetEntryQuery assetEntryQuery = new AssetEntryQuery();
-
-		assetEntryQuery.setClassName(typeSelection);
-		assetEntryQuery.setGroupIds(new long[] {groupId});
-		assetEntryQuery.setEnd(searchContainer.getEnd());
-		assetEntryQuery.setStart(searchContainer.getStart());
-
-		int total = AssetEntryLocalServiceUtil.getEntriesCount(assetEntryQuery);
-
-		searchContainer.setTotal(total);
-
-		List results = AssetEntryLocalServiceUtil.getEntries(assetEntryQuery);
-
-		searchContainer.setResults(results);
-
+		<%
 		List resultRows = searchContainer.getResultRows();
 
-		for (int i = 0; i < results.size(); i++) {
-			AssetEntry entry = (AssetEntry)results.get(i);
+		for (int i = 0; i < results.getDocs().length; i++) {
+			com.liferay.portal.kernel.search.Document doc = results.doc(i);
+
+			ResultRow row = new ResultRow(doc, i, i);
+
+			long entryId = 0;
+
+			if (typeSelection.equals(JournalArticle.class.getName())) {
+				entryId = GetterUtil.getLong(doc.get(Field.ROOT_ENTRY_CLASS_PK));
+			}
+			else {
+				entryId = GetterUtil.getLong(doc.get(Field.ENTRY_CLASS_PK));
+			}
+
+			AssetEntry entry = AssetEntryLocalServiceUtil.getEntry(typeSelection, entryId);
 
 			entry = entry.toEscapedModel();
-
-			ResultRow row = new ResultRow(entry, entry.getEntryId(), i);
 
 			StringBundler sb = new StringBundler(11);
 
@@ -219,10 +126,8 @@ portletURL.setParameter("typeSelection", typeSelection);
 		%>
 
 		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-	</c:otherwise>
-</c:choose>
-
-<br />
+	</aui:form>
+</div>
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 	<aui:script>

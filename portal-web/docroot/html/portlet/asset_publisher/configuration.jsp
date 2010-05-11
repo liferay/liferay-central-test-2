@@ -551,8 +551,6 @@ AssetRendererFactory rendererFactory = AssetRendererFactoryRegistryUtil.getAsset
 </aui:form>
 
 <c:if test="<%= Validator.isNotNull(typeSelection) %>">
-	<liferay-ui:message key="select" />: <liferay-ui:message key='<%= "model.resource." + typeSelection %>' />
-
 	<%@ include file="/html/portlet/asset_publisher/select_asset.jspf" %>
 </c:if>
 

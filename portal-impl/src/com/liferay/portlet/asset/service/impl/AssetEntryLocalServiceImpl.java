@@ -20,15 +20,12 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.search.BooleanClauseOccur;
-import com.liferay.portal.kernel.search.BooleanQuery;
-import com.liferay.portal.kernel.search.BooleanQueryFactoryUtil;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
-import com.liferay.portal.kernel.search.SearchEngineUtil;
-import com.liferay.portal.kernel.search.TermQuery;
-import com.liferay.portal.kernel.search.TermQueryFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.ListUtil;
@@ -63,9 +60,13 @@ import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.wiki.model.WikiPage;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <a href="AssetEntryLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -319,47 +320,50 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 		throws SystemException {
 
 		try {
-			BooleanQuery contextQuery = BooleanQueryFactoryUtil.create();
+			SearchContext searchContext = new SearchContext();
 
-			if (Validator.isNotNull(portletId)) {
-				contextQuery.addRequiredTerm(Field.PORTLET_ID, portletId);
-			}
-			else {
-				BooleanQuery portletIdsQuery = BooleanQueryFactoryUtil.create();
+			searchContext.setKeywords(keywords);
+			searchContext.setCompanyId(companyId);
+			searchContext.setEnd(end);
+			searchContext.setPortletIds(getPortletIds(portletId));
+			searchContext.setStart(start);
 
-				List<AssetRendererFactory> rendererFactories =
-					AssetRendererFactoryRegistryUtil.
-						getAssetRendererFactories();
+			Indexer indexer = IndexerRegistryUtil.getIndexer(AssetEntry.class);
 
-				for (AssetRendererFactory rendererFactory : rendererFactories) {
-					TermQuery termQuery = TermQueryFactoryUtil.create(
-						Field.PORTLET_ID, rendererFactory.getPortletId());
+			return indexer.search(searchContext);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+	}
 
-					portletIdsQuery.add(termQuery, BooleanClauseOccur.SHOULD);
-				}
+	public Hits search(
+			long companyId, long[] groupIds, String portletId, String title,
+			String description, String userName, String assetCategoryIds,
+			String assetTagNames, boolean andSearch, int start, int end)
+		throws SystemException {
 
-				contextQuery.add(portletIdsQuery, BooleanClauseOccur.MUST);
-			}
+		try {
+			Map<String, Serializable> attributes =
+				new HashMap<String, Serializable>();
 
-			BooleanQuery searchQuery = BooleanQueryFactoryUtil.create();
+			attributes.put("andSearch", andSearch);
+			attributes.put(Field.TITLE, title);
+			attributes.put(Field.DESCRIPTION, description);
+			attributes.put(Field.USER_NAME, userName);
 
-			if (Validator.isNotNull(keywords)) {
-				searchQuery.addTerm(Field.TITLE, keywords);
-				searchQuery.addTerm(Field.CONTENT, keywords);
-				searchQuery.addTerm(Field.DESCRIPTION, keywords);
-				searchQuery.addTerm(Field.PROPERTIES, keywords);
-				searchQuery.addTerm(Field.ASSET_TAG_NAMES, keywords, true);
-			}
+			SearchContext searchContext = new SearchContext();
 
-			BooleanQuery fullQuery = BooleanQueryFactoryUtil.create();
+			searchContext.setAttributes(attributes);
+			searchContext.setCompanyId(companyId);
+			searchContext.setEnd(end);
+			searchContext.setGroupIds(groupIds);
+			searchContext.setPortletIds(getPortletIds(portletId));
+			searchContext.setStart(start);
 
-			fullQuery.add(contextQuery, BooleanClauseOccur.MUST);
+			Indexer indexer = IndexerRegistryUtil.getIndexer(AssetEntry.class);
 
-			if (searchQuery.clauses().size() > 0) {
-				fullQuery.add(searchQuery, BooleanClauseOccur.MUST);
-			}
-
-			return SearchEngineUtil.search(companyId, fullQuery, start, end);
+			return indexer.search(searchContext);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -802,6 +806,26 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 		}
 
 		return entryDisplays;
+	}
+
+	private String[] getPortletIds (String portletId) {
+		if (Validator.isNotNull(portletId)) {
+			return new String[]{portletId};
+		}
+		else {
+			List<AssetRendererFactory> rendererFactories =
+				AssetRendererFactoryRegistryUtil.
+					getAssetRendererFactories();
+
+			String[] portletIds = new String[rendererFactories.size()];
+
+			for (int i = 0; i < rendererFactories.size(); i++) {
+				AssetRendererFactory rendererFactory = rendererFactories.get(i);
+				portletIds[i] = rendererFactory.getPortletId();
+			}
+
+			return portletIds;
+		}
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
