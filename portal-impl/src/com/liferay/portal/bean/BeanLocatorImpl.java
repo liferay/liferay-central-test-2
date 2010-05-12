@@ -54,6 +54,15 @@ public class BeanLocatorImpl implements BeanLocator {
 	}
 
 	public Object locate(String name) throws BeanLocatorException {
+		try {
+			return doLocate(name);
+		}
+		catch (Exception e) {
+			throw new BeanLocatorException(e);
+		}
+	}
+
+	protected Object doLocate(String name) throws Exception {
 		if (_log.isDebugEnabled()) {
 			_log.debug("Locating " + name);
 		}

@@ -15,6 +15,7 @@
 package com.liferay.portal.bean;
 
 import com.liferay.portal.kernel.bean.BeanLocator;
+import com.liferay.portal.kernel.bean.BeanLocatorException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
 import com.liferay.portal.kernel.bean.Renderer;
@@ -44,8 +45,6 @@ import javax.portlet.PortletResponse;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 
 /**
  * <a href="RendererImpl.java.html"><b><i>View Source</i></b></a>
@@ -262,7 +261,7 @@ public class RendererImpl implements Renderer {
 					beanNameParts[0] + _SERVICE + beanNameParts[1] +
 						_LOCAL_SERVICE_UTIL);
 			}
-			catch (NoSuchBeanDefinitionException nsbde) {
+			catch (BeanLocatorException ble) {
 			}
 		}
 		else {
@@ -271,7 +270,7 @@ public class RendererImpl implements Renderer {
 					beanNameParts[0] + _SERVICE + beanNameParts[1] +
 						_LOCAL_SERVICE_UTIL);
 			}
-			catch (NoSuchBeanDefinitionException nsbde) {
+			catch (BeanLocatorException ble) {
 			}
 		}
 
