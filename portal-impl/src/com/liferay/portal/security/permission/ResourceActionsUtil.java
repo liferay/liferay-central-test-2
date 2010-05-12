@@ -15,7 +15,6 @@
 package com.liferay.portal.security.permission;
 
 import com.liferay.portal.NoSuchResourceActionException;
-import com.liferay.portal.kernel.bean.BeanLocatorException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
@@ -46,8 +45,8 @@ import com.liferay.portal.service.ResourceActionLocalServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
-import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.PortletResourceBundles;
 import com.liferay.portlet.expando.model.ExpandoColumn;
 import com.liferay.portlet.social.model.SocialEquityActionMapping;
