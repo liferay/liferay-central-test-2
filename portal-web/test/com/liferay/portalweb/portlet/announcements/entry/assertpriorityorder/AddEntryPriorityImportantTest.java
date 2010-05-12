@@ -57,6 +57,8 @@ public class AddEntryPriorityImportantTest extends BaseTestCase {
 		selenium.type("_84_title",
 			RuntimeVariables.replace(
 				"Announcements Entry Title Priority Important"));
+		selenium.type("_84_url",
+			RuntimeVariables.replace("http://www.liferay.com"));
 		selenium.type("_84_content",
 			RuntimeVariables.replace(
 				"Announcements Entry Content Priority Important"));

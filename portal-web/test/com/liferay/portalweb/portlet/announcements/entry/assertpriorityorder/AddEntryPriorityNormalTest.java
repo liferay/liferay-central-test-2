@@ -56,6 +56,8 @@ public class AddEntryPriorityNormalTest extends BaseTestCase {
 		selenium.type("_84_title",
 			RuntimeVariables.replace(
 				"Announcements Entry Title Priority Normal"));
+		selenium.type("_84_url",
+			RuntimeVariables.replace("http://www.liferay.com"));
 		selenium.type("_84_content",
 			RuntimeVariables.replace(
 				"Announcements Entry Content Priority Normal"));

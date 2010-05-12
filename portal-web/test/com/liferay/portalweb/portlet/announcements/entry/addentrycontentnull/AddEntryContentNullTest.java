@@ -55,6 +55,8 @@ public class AddEntryContentNullTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_84_title",
 			RuntimeVariables.replace("Announcements Entry Title Null"));
+		selenium.type("_84_url",
+			RuntimeVariables.replace("http://www.liferay.com"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace(

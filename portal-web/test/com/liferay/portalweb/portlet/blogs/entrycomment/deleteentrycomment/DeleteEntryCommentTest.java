@@ -74,7 +74,6 @@ public class DeleteEntryCommentTest extends BaseTestCase {
 
 		selenium.clickAt("link=Blogs Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertNotEquals(RuntimeVariables.replace("Comment."),
-			selenium.getText("//td[2]/div[1]"));
+		assertFalse(selenium.isTextPresent("Comment."));
 	}
 }

@@ -58,6 +58,8 @@ public class EditEntryGeneralTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_84_title",
 			RuntimeVariables.replace("Edited Announcements Entry Title"));
+		selenium.type("_84_url",
+			RuntimeVariables.replace("http://www.alloyui.com"));
 		selenium.type("_84_content",
 			RuntimeVariables.replace("Edited Announcements Entry Content"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
