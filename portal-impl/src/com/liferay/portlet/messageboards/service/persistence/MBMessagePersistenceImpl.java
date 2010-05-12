@@ -35,6 +35,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.model.ModelListener;
+import com.liferay.portal.security.permission.InlineSQLHelperUtil;
 import com.liferay.portal.service.persistence.BatchSessionUtil;
 import com.liferay.portal.service.persistence.CompanyPersistence;
 import com.liferay.portal.service.persistence.GroupPersistence;
@@ -1321,6 +1322,67 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		}
 		else {
 			return null;
+		}
+	}
+
+	public List<MBMessage> filterFindByGroupId(long groupId)
+		throws SystemException {
+		return filterFindByGroupId(groupId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	public List<MBMessage> filterFindByGroupId(long groupId, int start, int end)
+		throws SystemException {
+		return filterFindByGroupId(groupId, start, end, null);
+	}
+
+	public List<MBMessage> filterFindByGroupId(long groupId, int start,
+		int end, OrderByComparator orderByComparator) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(3 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(3);
+			}
+
+			query.append(_SQL_SELECT_MBMESSAGE_WHERE);
+
+			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			else {
+				query.append(MBMessageModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+					MBMessage.class.getName(), _FILTER_COLUMN_MESSAGEID,
+					_FILTER_COLUMN_USERID, groupId);
+
+			Query q = session.createQuery(sql);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			return (List<MBMessage>)QueryUtil.list(q, getDialect(), start, end);
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
 		}
 	}
 
@@ -2654,6 +2716,72 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		}
 	}
 
+	public List<MBMessage> filterFindByG_U(long groupId, long userId)
+		throws SystemException {
+		return filterFindByG_U(groupId, userId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	public List<MBMessage> filterFindByG_U(long groupId, long userId,
+		int start, int end) throws SystemException {
+		return filterFindByG_U(groupId, userId, start, end, null);
+	}
+
+	public List<MBMessage> filterFindByG_U(long groupId, long userId,
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(4 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(4);
+			}
+
+			query.append(_SQL_SELECT_MBMESSAGE_WHERE);
+
+			query.append(_FINDER_COLUMN_G_U_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_G_U_USERID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			else {
+				query.append(MBMessageModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+					MBMessage.class.getName(), _FILTER_COLUMN_MESSAGEID,
+					_FILTER_COLUMN_USERID, groupId);
+
+			Query q = session.createQuery(sql);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			qPos.add(userId);
+
+			return (List<MBMessage>)QueryUtil.list(q, getDialect(), start, end);
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public List<MBMessage> findByG_C(long groupId, long categoryId)
 		throws SystemException {
 		return findByG_C(groupId, categoryId, QueryUtil.ALL_POS,
@@ -2932,6 +3060,72 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		}
 	}
 
+	public List<MBMessage> filterFindByG_C(long groupId, long categoryId)
+		throws SystemException {
+		return filterFindByG_C(groupId, categoryId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	public List<MBMessage> filterFindByG_C(long groupId, long categoryId,
+		int start, int end) throws SystemException {
+		return filterFindByG_C(groupId, categoryId, start, end, null);
+	}
+
+	public List<MBMessage> filterFindByG_C(long groupId, long categoryId,
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(4 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(4);
+			}
+
+			query.append(_SQL_SELECT_MBMESSAGE_WHERE);
+
+			query.append(_FINDER_COLUMN_G_C_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_G_C_CATEGORYID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			else {
+				query.append(MBMessageModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+					MBMessage.class.getName(), _FILTER_COLUMN_MESSAGEID,
+					_FILTER_COLUMN_USERID, groupId);
+
+			Query q = session.createQuery(sql);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			qPos.add(categoryId);
+
+			return (List<MBMessage>)QueryUtil.list(q, getDialect(), start, end);
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public List<MBMessage> findByG_S(long groupId, int status)
 		throws SystemException {
 		return findByG_S(groupId, status, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
@@ -3207,6 +3401,71 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		}
 		else {
 			return null;
+		}
+	}
+
+	public List<MBMessage> filterFindByG_S(long groupId, int status)
+		throws SystemException {
+		return filterFindByG_S(groupId, status, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	public List<MBMessage> filterFindByG_S(long groupId, int status, int start,
+		int end) throws SystemException {
+		return filterFindByG_S(groupId, status, start, end, null);
+	}
+
+	public List<MBMessage> filterFindByG_S(long groupId, int status, int start,
+		int end, OrderByComparator orderByComparator) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(4 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(4);
+			}
+
+			query.append(_SQL_SELECT_MBMESSAGE_WHERE);
+
+			query.append(_FINDER_COLUMN_G_S_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_G_S_STATUS_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			else {
+				query.append(MBMessageModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+					MBMessage.class.getName(), _FILTER_COLUMN_MESSAGEID,
+					_FILTER_COLUMN_USERID, groupId);
+
+			Query q = session.createQuery(sql);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			qPos.add(status);
+
+			return (List<MBMessage>)QueryUtil.list(q, getDialect(), start, end);
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
 		}
 	}
 
@@ -4894,6 +5153,76 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		}
 	}
 
+	public List<MBMessage> filterFindByG_U_S(long groupId, long userId,
+		int status) throws SystemException {
+		return filterFindByG_U_S(groupId, userId, status, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	public List<MBMessage> filterFindByG_U_S(long groupId, long userId,
+		int status, int start, int end) throws SystemException {
+		return filterFindByG_U_S(groupId, userId, status, start, end, null);
+	}
+
+	public List<MBMessage> filterFindByG_U_S(long groupId, long userId,
+		int status, int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(5 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(5);
+			}
+
+			query.append(_SQL_SELECT_MBMESSAGE_WHERE);
+
+			query.append(_FINDER_COLUMN_G_U_S_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_G_U_S_USERID_2);
+
+			query.append(_FINDER_COLUMN_G_U_S_STATUS_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			else {
+				query.append(MBMessageModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+					MBMessage.class.getName(), _FILTER_COLUMN_MESSAGEID,
+					_FILTER_COLUMN_USERID, groupId);
+
+			Query q = session.createQuery(sql);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			qPos.add(userId);
+
+			qPos.add(status);
+
+			return (List<MBMessage>)QueryUtil.list(q, getDialect(), start, end);
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public List<MBMessage> findByG_C_T(long groupId, long categoryId,
 		long threadId) throws SystemException {
 		return findByG_C_T(groupId, categoryId, threadId, QueryUtil.ALL_POS,
@@ -5187,6 +5516,76 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		}
 	}
 
+	public List<MBMessage> filterFindByG_C_T(long groupId, long categoryId,
+		long threadId) throws SystemException {
+		return filterFindByG_C_T(groupId, categoryId, threadId,
+			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	}
+
+	public List<MBMessage> filterFindByG_C_T(long groupId, long categoryId,
+		long threadId, int start, int end) throws SystemException {
+		return filterFindByG_C_T(groupId, categoryId, threadId, start, end, null);
+	}
+
+	public List<MBMessage> filterFindByG_C_T(long groupId, long categoryId,
+		long threadId, int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(5 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(5);
+			}
+
+			query.append(_SQL_SELECT_MBMESSAGE_WHERE);
+
+			query.append(_FINDER_COLUMN_G_C_T_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_G_C_T_CATEGORYID_2);
+
+			query.append(_FINDER_COLUMN_G_C_T_THREADID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			else {
+				query.append(MBMessageModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+					MBMessage.class.getName(), _FILTER_COLUMN_MESSAGEID,
+					_FILTER_COLUMN_USERID, groupId);
+
+			Query q = session.createQuery(sql);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			qPos.add(categoryId);
+
+			qPos.add(threadId);
+
+			return (List<MBMessage>)QueryUtil.list(q, getDialect(), start, end);
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public List<MBMessage> findByG_C_S(long groupId, long categoryId, int status)
 		throws SystemException {
 		return findByG_C_S(groupId, categoryId, status, QueryUtil.ALL_POS,
@@ -5477,6 +5876,76 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		}
 		else {
 			return null;
+		}
+	}
+
+	public List<MBMessage> filterFindByG_C_S(long groupId, long categoryId,
+		int status) throws SystemException {
+		return filterFindByG_C_S(groupId, categoryId, status,
+			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	}
+
+	public List<MBMessage> filterFindByG_C_S(long groupId, long categoryId,
+		int status, int start, int end) throws SystemException {
+		return filterFindByG_C_S(groupId, categoryId, status, start, end, null);
+	}
+
+	public List<MBMessage> filterFindByG_C_S(long groupId, long categoryId,
+		int status, int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(5 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(5);
+			}
+
+			query.append(_SQL_SELECT_MBMESSAGE_WHERE);
+
+			query.append(_FINDER_COLUMN_G_C_S_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_G_C_S_CATEGORYID_2);
+
+			query.append(_FINDER_COLUMN_G_C_S_STATUS_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			else {
+				query.append(MBMessageModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+					MBMessage.class.getName(), _FILTER_COLUMN_MESSAGEID,
+					_FILTER_COLUMN_USERID, groupId);
+
+			Query q = session.createQuery(sql);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			qPos.add(categoryId);
+
+			qPos.add(status);
+
+			return (List<MBMessage>)QueryUtil.list(q, getDialect(), start, end);
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
 		}
 	}
 
@@ -6085,6 +6554,82 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		}
 	}
 
+	public List<MBMessage> filterFindByG_C_T_S(long groupId, long categoryId,
+		long threadId, int status) throws SystemException {
+		return filterFindByG_C_T_S(groupId, categoryId, threadId, status,
+			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	}
+
+	public List<MBMessage> filterFindByG_C_T_S(long groupId, long categoryId,
+		long threadId, int status, int start, int end)
+		throws SystemException {
+		return filterFindByG_C_T_S(groupId, categoryId, threadId, status,
+			start, end, null);
+	}
+
+	public List<MBMessage> filterFindByG_C_T_S(long groupId, long categoryId,
+		long threadId, int status, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(6 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(6);
+			}
+
+			query.append(_SQL_SELECT_MBMESSAGE_WHERE);
+
+			query.append(_FINDER_COLUMN_G_C_T_S_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_G_C_T_S_CATEGORYID_2);
+
+			query.append(_FINDER_COLUMN_G_C_T_S_THREADID_2);
+
+			query.append(_FINDER_COLUMN_G_C_T_S_STATUS_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			else {
+				query.append(MBMessageModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+					MBMessage.class.getName(), _FILTER_COLUMN_MESSAGEID,
+					_FILTER_COLUMN_USERID, groupId);
+
+			Query q = session.createQuery(sql);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			qPos.add(categoryId);
+
+			qPos.add(threadId);
+
+			qPos.add(status);
+
+			return (List<MBMessage>)QueryUtil.list(q, getDialect(), start, end);
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public List<MBMessage> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -6422,6 +6967,57 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		return count.intValue();
 	}
 
+	public int filterCountByUUID_G(String uuid, long groupId)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_MBMESSAGE_WHERE);
+
+			if (uuid == null) {
+				query.append(_FINDER_COLUMN_UUID_G_UUID_1);
+			}
+			else {
+				if (uuid.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_UUID_G_UUID_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_UUID_G_UUID_2);
+				}
+			}
+
+			query.append(_FINDER_COLUMN_UUID_G_GROUPID_2);
+
+			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+					MBMessage.class.getName(), _FILTER_COLUMN_MESSAGEID,
+					_FILTER_COLUMN_USERID, groupId);
+
+			Query q = session.createQuery(sql);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			if (uuid != null) {
+				qPos.add(uuid);
+			}
+
+			qPos.add(groupId);
+
+			Long count = (Long)q.uniqueResult();
+
+			return count.intValue();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public int countByGroupId(long groupId) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(groupId) };
 
@@ -6466,6 +7062,40 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		}
 
 		return count.intValue();
+	}
+
+	public int filterCountByGroupId(long groupId) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_MBMESSAGE_WHERE);
+
+			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+
+			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+					MBMessage.class.getName(), _FILTER_COLUMN_MESSAGEID,
+					_FILTER_COLUMN_USERID, groupId);
+
+			Query q = session.createQuery(sql);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			Long count = (Long)q.uniqueResult();
+
+			return count.intValue();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
 	}
 
 	public int countByCompanyId(long companyId) throws SystemException {
@@ -6702,6 +7332,45 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		return count.intValue();
 	}
 
+	public int filterCountByG_U(long groupId, long userId)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_MBMESSAGE_WHERE);
+
+			query.append(_FINDER_COLUMN_G_U_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_G_U_USERID_2);
+
+			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+					MBMessage.class.getName(), _FILTER_COLUMN_MESSAGEID,
+					_FILTER_COLUMN_USERID, groupId);
+
+			Query q = session.createQuery(sql);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			qPos.add(userId);
+
+			Long count = (Long)q.uniqueResult();
+
+			return count.intValue();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public int countByG_C(long groupId, long categoryId)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -6755,6 +7424,45 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		return count.intValue();
 	}
 
+	public int filterCountByG_C(long groupId, long categoryId)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_MBMESSAGE_WHERE);
+
+			query.append(_FINDER_COLUMN_G_C_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_G_C_CATEGORYID_2);
+
+			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+					MBMessage.class.getName(), _FILTER_COLUMN_MESSAGEID,
+					_FILTER_COLUMN_USERID, groupId);
+
+			Query q = session.createQuery(sql);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			qPos.add(categoryId);
+
+			Long count = (Long)q.uniqueResult();
+
+			return count.intValue();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public int countByG_S(long groupId, int status) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Integer(status)
@@ -6805,6 +7513,45 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		}
 
 		return count.intValue();
+	}
+
+	public int filterCountByG_S(long groupId, int status)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_MBMESSAGE_WHERE);
+
+			query.append(_FINDER_COLUMN_G_S_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_G_S_STATUS_2);
+
+			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+					MBMessage.class.getName(), _FILTER_COLUMN_MESSAGEID,
+					_FILTER_COLUMN_USERID, groupId);
+
+			Query q = session.createQuery(sql);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			qPos.add(status);
+
+			Long count = (Long)q.uniqueResult();
+
+			return count.intValue();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
 	}
 
 	public int countByC_S(long companyId, int status) throws SystemException {
@@ -7126,6 +7873,49 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		return count.intValue();
 	}
 
+	public int filterCountByG_U_S(long groupId, long userId, int status)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBundler query = new StringBundler(4);
+
+			query.append(_SQL_COUNT_MBMESSAGE_WHERE);
+
+			query.append(_FINDER_COLUMN_G_U_S_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_G_U_S_USERID_2);
+
+			query.append(_FINDER_COLUMN_G_U_S_STATUS_2);
+
+			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+					MBMessage.class.getName(), _FILTER_COLUMN_MESSAGEID,
+					_FILTER_COLUMN_USERID, groupId);
+
+			Query q = session.createQuery(sql);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			qPos.add(userId);
+
+			qPos.add(status);
+
+			Long count = (Long)q.uniqueResult();
+
+			return count.intValue();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public int countByG_C_T(long groupId, long categoryId, long threadId)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -7183,6 +7973,49 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		return count.intValue();
 	}
 
+	public int filterCountByG_C_T(long groupId, long categoryId, long threadId)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBundler query = new StringBundler(4);
+
+			query.append(_SQL_COUNT_MBMESSAGE_WHERE);
+
+			query.append(_FINDER_COLUMN_G_C_T_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_G_C_T_CATEGORYID_2);
+
+			query.append(_FINDER_COLUMN_G_C_T_THREADID_2);
+
+			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+					MBMessage.class.getName(), _FILTER_COLUMN_MESSAGEID,
+					_FILTER_COLUMN_USERID, groupId);
+
+			Query q = session.createQuery(sql);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			qPos.add(categoryId);
+
+			qPos.add(threadId);
+
+			Long count = (Long)q.uniqueResult();
+
+			return count.intValue();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public int countByG_C_S(long groupId, long categoryId, int status)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -7238,6 +8071,49 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		}
 
 		return count.intValue();
+	}
+
+	public int filterCountByG_C_S(long groupId, long categoryId, int status)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBundler query = new StringBundler(4);
+
+			query.append(_SQL_COUNT_MBMESSAGE_WHERE);
+
+			query.append(_FINDER_COLUMN_G_C_S_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_G_C_S_CATEGORYID_2);
+
+			query.append(_FINDER_COLUMN_G_C_S_STATUS_2);
+
+			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+					MBMessage.class.getName(), _FILTER_COLUMN_MESSAGEID,
+					_FILTER_COLUMN_USERID, groupId);
+
+			Query q = session.createQuery(sql);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			qPos.add(categoryId);
+
+			qPos.add(status);
+
+			Long count = (Long)q.uniqueResult();
+
+			return count.intValue();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
 	}
 
 	public int countByC_C_S(long classNameId, long classPK, int status)
@@ -7357,6 +8233,53 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		}
 
 		return count.intValue();
+	}
+
+	public int filterCountByG_C_T_S(long groupId, long categoryId,
+		long threadId, int status) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBundler query = new StringBundler(5);
+
+			query.append(_SQL_COUNT_MBMESSAGE_WHERE);
+
+			query.append(_FINDER_COLUMN_G_C_T_S_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_G_C_T_S_CATEGORYID_2);
+
+			query.append(_FINDER_COLUMN_G_C_T_S_THREADID_2);
+
+			query.append(_FINDER_COLUMN_G_C_T_S_STATUS_2);
+
+			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+					MBMessage.class.getName(), _FILTER_COLUMN_MESSAGEID,
+					_FILTER_COLUMN_USERID, groupId);
+
+			Query q = session.createQuery(sql);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			qPos.add(categoryId);
+
+			qPos.add(threadId);
+
+			qPos.add(status);
+
+			Long count = (Long)q.uniqueResult();
+
+			return count.intValue();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
 	}
 
 	public int countAll() throws SystemException {
@@ -7505,6 +8428,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	private static final String _FINDER_COLUMN_G_C_T_S_CATEGORYID_2 = "mbMessage.categoryId = ? AND ";
 	private static final String _FINDER_COLUMN_G_C_T_S_THREADID_2 = "mbMessage.threadId = ? AND ";
 	private static final String _FINDER_COLUMN_G_C_T_S_STATUS_2 = "mbMessage.status = ?";
+	private static final String _FILTER_COLUMN_MESSAGEID = "mbMessage.messageId";
+	private static final String _FILTER_COLUMN_USERID = "mbMessage.userId";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "mbMessage.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No MBMessage exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No MBMessage exists with the key {";
