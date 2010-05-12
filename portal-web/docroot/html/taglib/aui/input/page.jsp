@@ -225,9 +225,15 @@ String labelTag = _buildLabel(inlineLabel, showForLabel, forLabel);
 		<%
 		String valueString = StringPool.BLANK;
 
-		if (value != null) {
-			valueString = value.toString();
+		if (type.equals("hidden") || type.equals("text") || type.equals("textarea")) {
+			valueString = ParamUtil.get(request, name, StringPool.BLANK);
+		}
 
+		if (Validator.isNull(valueString) && value != null) {
+			valueString = value.toString();
+		}
+
+		if (Validator.isNotNull(valueString)) {
 			if (type.equals("hidden") || type.equals("text")) {
 				valueString = HtmlUtil.escapeAttribute(valueString);
 			}
