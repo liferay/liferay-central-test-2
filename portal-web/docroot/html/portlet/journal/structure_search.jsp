@@ -48,6 +48,7 @@ StructureDisplayTerms displayTerms = (StructureDisplayTerms)searchContainer.getD
 					<c:if test="<%= themeDisplay.getCompanyGroupId() != scopeGroupId %>">
 						<aui:option label="global" selected="<%= displayTerms.getGroupId() == themeDisplay.getCompanyGroupId() %>" value="<%= themeDisplay.getCompanyGroupId() %>" />
 					</c:if>
+
 					<aui:option label="<%= themeDisplay.getScopeGroupName() %>" selected="<%= displayTerms.getGroupId() == scopeGroupId %>" value="<%= scopeGroupId %>" />
 				</aui:select>
 			</aui:column>
