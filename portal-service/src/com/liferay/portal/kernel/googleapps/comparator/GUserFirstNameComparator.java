@@ -12,32 +12,32 @@
  * details.
  */
 
-package com.liferay.portal.googleapps.comparator;
+package com.liferay.portal.kernel.googleapps.comparator;
 
-import com.liferay.portal.googleapps.GUser;
+import com.liferay.portal.kernel.googleapps.GUser;
 
 import java.util.Comparator;
 
 /**
- * <a href="GUserLastNameComparator.java.html"><b><i>View Source</i></b></a>
+ * <a href="GUserFirstNameComparator.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class GUserLastNameComparator implements Comparator<GUser> {
+public class GUserFirstNameComparator implements Comparator<GUser> {
 
-	public GUserLastNameComparator() {
+	public GUserFirstNameComparator() {
 		this(true);
 	}
 
-	public GUserLastNameComparator(boolean ascending) {
+	public GUserFirstNameComparator(boolean ascending) {
 		_ascending = ascending;
 	}
 
 	public int compare(GUser user1, GUser user2) {
-		String lastName1 = user1.getLastName();
-		String lastName2 = user2.getLastName();
+		String firstName1 = user1.getFirstName();
+		String firstName2 = user2.getFirstName();
 
-		int value = lastName1.compareTo(lastName2);
+		int value = firstName1.compareTo(firstName2);
 
 		if (_ascending) {
 			return value;

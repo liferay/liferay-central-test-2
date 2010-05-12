@@ -14,6 +14,11 @@
 
 package com.liferay.portal.googleapps;
 
+import com.liferay.portal.kernel.googleapps.GEmailSettingsManager;
+import com.liferay.portal.kernel.googleapps.GGroupManager;
+import com.liferay.portal.kernel.googleapps.GNicknameManager;
+import com.liferay.portal.kernel.googleapps.GUserManager;
+
 /**
  * <a href="GoogleApps.java.html"><b><i>View Source</i></b></a>
  *

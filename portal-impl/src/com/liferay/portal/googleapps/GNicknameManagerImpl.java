@@ -14,6 +14,9 @@
 
 package com.liferay.portal.googleapps;
 
+import com.liferay.portal.kernel.googleapps.GNickname;
+import com.liferay.portal.kernel.googleapps.GNicknameManager;
+import com.liferay.portal.kernel.googleapps.GoogleAppsException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;

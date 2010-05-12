@@ -12,24 +12,31 @@
  * details.
  */
 
-package com.liferay.portal.googleapps;
+package com.liferay.portal.kernel.googleapps;
 
-import java.util.List;
+import com.liferay.portal.kernel.exception.PortalException;
 
 /**
- * <a href="GNicknameManager.java.html"><b><i>View Source</i></b></a>
+ * <a href="GoogleAppsException.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public interface GNicknameManager {
+public class GoogleAppsException extends PortalException {
 
-	public void addGNickname(long userId, String nickname)
-		throws GoogleAppsException;
+	public GoogleAppsException() {
+		super();
+	}
 
-	public void deleteGNickname(String nickname) throws GoogleAppsException;
+	public GoogleAppsException(String msg) {
+		super(msg);
+	}
 
-	public GNickname getGNickname(String nickname) throws GoogleAppsException;
+	public GoogleAppsException(String msg, Throwable cause) {
+		super(msg, cause);
+	}
 
-	public List<GNickname> getGNicknames() throws GoogleAppsException;
+	public GoogleAppsException(Throwable cause) {
+		super(cause);
+	}
 
 }

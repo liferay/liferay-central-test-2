@@ -12,31 +12,21 @@
  * details.
  */
 
-package com.liferay.portal.googleapps;
-
-import com.liferay.portal.kernel.exception.PortalException;
+package com.liferay.portal.kernel.googleapps;
 
 /**
- * <a href="GoogleAppsException.java.html"><b><i>View Source</i></b></a>
+ * <a href="GoogleAppsFactory.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class GoogleAppsException extends PortalException {
+public interface GoogleAppsFactory {
 
-	public GoogleAppsException() {
-		super();
-	}
+	public GEmailSettingsManager getGEmailSettingsManager(long companyId);
 
-	public GoogleAppsException(String msg) {
-		super(msg);
-	}
+	public GGroupManager getGGroupManager(long companyId);
 
-	public GoogleAppsException(String msg, Throwable cause) {
-		super(msg, cause);
-	}
+	public GNicknameManager getGNicknameManager(long companyId);
 
-	public GoogleAppsException(Throwable cause) {
-		super(cause);
-	}
+	public GUserManager getGUserManager(long companyId);
 
 }

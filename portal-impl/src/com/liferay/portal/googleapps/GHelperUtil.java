@@ -14,6 +14,7 @@
 
 package com.liferay.portal.googleapps;
 
+import com.liferay.portal.kernel.googleapps.GoogleAppsException;
 import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.util.ContentTypes;

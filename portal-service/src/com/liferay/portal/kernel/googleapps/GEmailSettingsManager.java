@@ -12,21 +12,16 @@
  * details.
  */
 
-package com.liferay.portal.googleapps;
+package com.liferay.portal.kernel.googleapps;
 
 /**
- * <a href="GoogleAppsFactory.java.html"><b><i>View Source</i></b></a>
+ * <a href="GEmailSettingsManager.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public interface GoogleAppsFactory {
+public interface GEmailSettingsManager {
 
-	public GEmailSettingsManager getGEmailSettingsManager(long companyId);
-
-	public GGroupManager getGGroupManager(long companyId);
-
-	public GNicknameManager getGNicknameManager(long companyId);
-
-	public GUserManager getGUserManager(long companyId);
+	public void addSendAs(long userId, String fullName, String emailAddress)
+		throws GoogleAppsException;
 
 }

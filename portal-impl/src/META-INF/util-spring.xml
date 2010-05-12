@@ -13,11 +13,6 @@
 			<bean class="com.liferay.portal.events.StartupHelper" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.googleapps.GoogleAppsFactoryUtil" class="com.liferay.portal.googleapps.GoogleAppsFactoryUtil">
-		<property name="googleAppsFactory">
-			<bean class="com.liferay.portal.googleapps.GoogleAppsFactoryImpl" />
-		</property>
-	</bean>
 	<bean id="com.liferay.portal.kernel.bean.BeanPropertiesUtil" class="com.liferay.portal.kernel.bean.BeanPropertiesUtil">
 		<property name="beanProperties">
 			<bean class="com.liferay.portal.bean.BeanPropertiesImpl" />
@@ -106,6 +101,11 @@
 	<bean id="com.liferay.portal.kernel.freemarker.FreeMarkerEngine" class="com.liferay.portal.freemarker.FreeMarkerEngineImpl" />
 	<bean id="com.liferay.portal.kernel.freemarker.FreeMarkerEngineUtil" class="com.liferay.portal.kernel.freemarker.FreeMarkerEngineUtil">
 		<property name="freeMarkerEngine" ref="com.liferay.portal.kernel.freemarker.FreeMarkerEngine" />
+	</bean>
+	<bean id="com.liferay.portal.kernel.googleapps.GoogleAppsFactoryUtil" class="com.liferay.portal.kernel.googleapps.GoogleAppsFactoryUtil">
+		<property name="googleAppsFactory">
+			<bean class="com.liferay.portal.googleapps.GoogleAppsFactoryImpl" />
+		</property>
 	</bean>
 	<bean id="com.liferay.portal.kernel.image.ImageProcessorUtil" class="com.liferay.portal.kernel.image.ImageProcessorUtil">
 		<property name="imageProcessor">

@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.googleapps;
+package com.liferay.portal.kernel.googleapps;
 
 /**
  * <a href="GoogleAppsFactoryUtil.java.html"><b><i>View Source</i></b></a>

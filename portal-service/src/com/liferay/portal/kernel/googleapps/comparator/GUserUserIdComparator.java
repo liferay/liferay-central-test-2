@@ -12,9 +12,9 @@
  * details.
  */
 
-package com.liferay.portal.googleapps.comparator;
+package com.liferay.portal.kernel.googleapps.comparator;
 
-import com.liferay.portal.googleapps.GUser;
+import com.liferay.portal.kernel.googleapps.GUser;
 
 import java.util.Comparator;
 

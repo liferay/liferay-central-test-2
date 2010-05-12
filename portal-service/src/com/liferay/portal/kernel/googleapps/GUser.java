@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.googleapps;
+package com.liferay.portal.kernel.googleapps;
 
 import com.liferay.portal.kernel.util.StringPool;
 

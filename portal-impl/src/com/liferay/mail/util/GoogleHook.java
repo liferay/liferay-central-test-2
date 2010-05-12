@@ -15,10 +15,10 @@
 package com.liferay.mail.util;
 
 import com.liferay.mail.model.Filter;
-import com.liferay.portal.googleapps.GEmailSettingsManager;
-import com.liferay.portal.googleapps.GNicknameManager;
-import com.liferay.portal.googleapps.GUserManager;
-import com.liferay.portal.googleapps.GoogleAppsFactoryUtil;
+import com.liferay.portal.kernel.googleapps.GEmailSettingsManager;
+import com.liferay.portal.kernel.googleapps.GNicknameManager;
+import com.liferay.portal.kernel.googleapps.GUserManager;
+import com.liferay.portal.kernel.googleapps.GoogleAppsFactoryUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;

@@ -12,32 +12,33 @@
  * details.
  */
 
-package com.liferay.portal.googleapps.comparator;
+package com.liferay.portal.kernel.googleapps.comparator;
 
-import com.liferay.portal.googleapps.GGroup;
+import com.liferay.portal.kernel.googleapps.GGroup;
 
 import java.util.Comparator;
 
 /**
- * <a href="GGroupNameComparator.java.html"><b><i>View Source</i></b></a>
+ * <a href="GGroupEmailAddressComparator.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author Brian Wing Shun Chan
  */
-public class GGroupNameComparator implements Comparator<GGroup> {
+public class GGroupEmailAddressComparator implements Comparator<GGroup> {
 
-	public GGroupNameComparator() {
+	public GGroupEmailAddressComparator() {
 		this(true);
 	}
 
-	public GGroupNameComparator(boolean ascending) {
+	public GGroupEmailAddressComparator(boolean ascending) {
 		_ascending = ascending;
 	}
 
 	public int compare(GGroup user1, GGroup user2) {
-		String name1 = user1.getName();
-		String name2 = user2.getName();
+		String emailAddress1 = user1.getEmailAddress();
+		String emailAddress2 = user2.getEmailAddress();
 
-		int value = name1.compareTo(name2);
+		int value = emailAddress1.compareTo(emailAddress2);
 
 		if (_ascending) {
 			return value;

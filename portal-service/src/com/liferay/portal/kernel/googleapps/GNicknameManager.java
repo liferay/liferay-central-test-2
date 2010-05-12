@@ -12,16 +12,24 @@
  * details.
  */
 
-package com.liferay.portal.googleapps;
+package com.liferay.portal.kernel.googleapps;
+
+import java.util.List;
 
 /**
- * <a href="GEmailSettingsManager.java.html"><b><i>View Source</i></b></a>
+ * <a href="GNicknameManager.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public interface GEmailSettingsManager {
+public interface GNicknameManager {
 
-	public void addSendAs(long userId, String fullName, String emailAddress)
+	public void addGNickname(long userId, String nickname)
 		throws GoogleAppsException;
+
+	public void deleteGNickname(String nickname) throws GoogleAppsException;
+
+	public GNickname getGNickname(String nickname) throws GoogleAppsException;
+
+	public List<GNickname> getGNicknames() throws GoogleAppsException;
 
 }

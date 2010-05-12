@@ -12,16 +12,16 @@
  * details.
  */
 
-package com.liferay.portal.googleapps;
+package com.liferay.portal.kernel.googleapps;
 
 import com.liferay.portal.kernel.util.StringPool;
 
 /**
- * <a href="GGroupMember.java.html"><b><i>View Source</i></b></a>
+ * <a href="GGroupOwner.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class GGroupMember {
+public class GGroupOwner {
 
 	public String getEmailAddress() {
 		return _emailAddress;
@@ -39,10 +39,6 @@ public class GGroupMember {
 		return _type;
 	}
 
-	public boolean isDirect() {
-		return _direct;
-	}
-
 	public boolean isEveryone() {
 		if (_emailAddress.equals(StringPool.STAR)) {
 			return true;
@@ -50,10 +46,6 @@ public class GGroupMember {
 		else {
 			return false;
 		}
-	}
-
-	public void setDirect(boolean direct) {
-		_direct = direct;
 	}
 
 	public void setEmailAddress(String emailAddress) {
@@ -72,7 +64,6 @@ public class GGroupMember {
 		_type = type;
 	}
 
-	private boolean _direct;
 	private String _emailAddress = StringPool.BLANK;
 	private GGroup _gGroup;
 	private GUser _gUser;
