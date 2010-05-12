@@ -73,10 +73,6 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 	public static final FinderPath FINDER_PATH_FIND_BY_UUID = new FinderPath(AssetVocabularyModelImpl.ENTITY_CACHE_ENABLED,
 			AssetVocabularyModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "findByUuid",
-			new String[] { String.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_UUID = new FinderPath(AssetVocabularyModelImpl.ENTITY_CACHE_ENABLED,
-			AssetVocabularyModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "findByUuid",
 			new String[] {
 				String.class.getName(),
 				
@@ -98,10 +94,6 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 	public static final FinderPath FINDER_PATH_FIND_BY_GROUPID = new FinderPath(AssetVocabularyModelImpl.ENTITY_CACHE_ENABLED,
 			AssetVocabularyModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "findByGroupId",
-			new String[] { Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_GROUPID = new FinderPath(AssetVocabularyModelImpl.ENTITY_CACHE_ENABLED,
-			AssetVocabularyModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "findByGroupId",
 			new String[] {
 				Long.class.getName(),
 				
@@ -113,10 +105,6 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 			FINDER_CLASS_NAME_LIST, "countByGroupId",
 			new String[] { Long.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_BY_COMPANYID = new FinderPath(AssetVocabularyModelImpl.ENTITY_CACHE_ENABLED,
-			AssetVocabularyModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "findByCompanyId",
-			new String[] { Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_COMPANYID = new FinderPath(AssetVocabularyModelImpl.ENTITY_CACHE_ENABLED,
 			AssetVocabularyModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "findByCompanyId",
 			new String[] {
@@ -486,65 +474,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 
 	public List<AssetVocabulary> findByUuid(String uuid)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { uuid };
-
-		List<AssetVocabulary> list = (List<AssetVocabulary>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_UUID,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_SELECT_ASSETVOCABULARY_WHERE);
-
-				if (uuid == null) {
-					query.append(_FINDER_COLUMN_UUID_UUID_1);
-				}
-				else {
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_UUID_UUID_3);
-					}
-					else {
-						query.append(_FINDER_COLUMN_UUID_UUID_2);
-					}
-				}
-
-				query.append(AssetVocabularyModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				if (uuid != null) {
-					qPos.add(uuid);
-				}
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<AssetVocabulary>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_UUID, finderArgs,
-					list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByUuid(uuid, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	public List<AssetVocabulary> findByUuid(String uuid, int start, int end)
@@ -561,7 +491,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 				String.valueOf(orderByComparator)
 			};
 
-		List<AssetVocabulary> list = (List<AssetVocabulary>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_UUID,
+		List<AssetVocabulary> list = (List<AssetVocabulary>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_UUID,
 				finderArgs, this);
 
 		if (list == null) {
@@ -626,8 +556,8 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_UUID,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_UUID, finderArgs,
+					list);
 
 				closeSession(session);
 			}
@@ -958,53 +888,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 
 	public List<AssetVocabulary> findByGroupId(long groupId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(groupId) };
-
-		List<AssetVocabulary> list = (List<AssetVocabulary>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_GROUPID,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_SELECT_ASSETVOCABULARY_WHERE);
-
-				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
-
-				query.append(AssetVocabularyModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(groupId);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<AssetVocabulary>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_GROUPID,
-					finderArgs, list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByGroupId(groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	public List<AssetVocabulary> findByGroupId(long groupId, int start, int end)
@@ -1021,7 +905,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 				String.valueOf(orderByComparator)
 			};
 
-		List<AssetVocabulary> list = (List<AssetVocabulary>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
+		List<AssetVocabulary> list = (List<AssetVocabulary>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_GROUPID,
 				finderArgs, this);
 
 		if (list == null) {
@@ -1074,7 +958,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_GROUPID,
 					finderArgs, list);
 
 				closeSession(session);
@@ -1267,53 +1151,8 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 
 	public List<AssetVocabulary> findByCompanyId(long companyId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(companyId) };
-
-		List<AssetVocabulary> list = (List<AssetVocabulary>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_COMPANYID,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_SELECT_ASSETVOCABULARY_WHERE);
-
-				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
-
-				query.append(AssetVocabularyModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(companyId);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<AssetVocabulary>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_COMPANYID,
-					finderArgs, list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByCompanyId(companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+			null);
 	}
 
 	public List<AssetVocabulary> findByCompanyId(long companyId, int start,
@@ -1330,7 +1169,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 				String.valueOf(orderByComparator)
 			};
 
-		List<AssetVocabulary> list = (List<AssetVocabulary>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
+		List<AssetVocabulary> list = (List<AssetVocabulary>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_COMPANYID,
 				finderArgs, this);
 
 		if (list == null) {
@@ -1383,7 +1222,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_COMPANYID,
 					finderArgs, list);
 
 				closeSession(session);

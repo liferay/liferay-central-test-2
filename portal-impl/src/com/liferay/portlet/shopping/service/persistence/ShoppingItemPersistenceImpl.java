@@ -100,10 +100,6 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 	public static final FinderPath FINDER_PATH_FIND_BY_G_C = new FinderPath(ShoppingItemModelImpl.ENTITY_CACHE_ENABLED,
 			ShoppingItemModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByG_C",
-			new String[] { Long.class.getName(), Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_G_C = new FinderPath(ShoppingItemModelImpl.ENTITY_CACHE_ENABLED,
-			ShoppingItemModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByG_C",
 			new String[] {
 				Long.class.getName(), Long.class.getName(),
 				
@@ -842,59 +838,8 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 
 	public List<ShoppingItem> findByG_C(long groupId, long categoryId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Long(categoryId)
-			};
-
-		List<ShoppingItem> list = (List<ShoppingItem>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_C,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(4);
-
-				query.append(_SQL_SELECT_SHOPPINGITEM_WHERE);
-
-				query.append(_FINDER_COLUMN_G_C_GROUPID_2);
-
-				query.append(_FINDER_COLUMN_G_C_CATEGORYID_2);
-
-				query.append(ShoppingItemModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(groupId);
-
-				qPos.add(categoryId);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<ShoppingItem>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_C, finderArgs,
-					list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByG_C(groupId, categoryId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
 	}
 
 	public List<ShoppingItem> findByG_C(long groupId, long categoryId,
@@ -912,7 +857,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 				String.valueOf(orderByComparator)
 			};
 
-		List<ShoppingItem> list = (List<ShoppingItem>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_G_C,
+		List<ShoppingItem> list = (List<ShoppingItem>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_C,
 				finderArgs, this);
 
 		if (list == null) {
@@ -969,8 +914,8 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_G_C,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_C, finderArgs,
+					list);
 
 				closeSession(session);
 			}

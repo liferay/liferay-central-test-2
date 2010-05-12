@@ -66,10 +66,6 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<Password
 	public static final FinderPath FINDER_PATH_FIND_BY_USERID = new FinderPath(PasswordTrackerModelImpl.ENTITY_CACHE_ENABLED,
 			PasswordTrackerModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "findByUserId",
-			new String[] { Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_USERID = new FinderPath(PasswordTrackerModelImpl.ENTITY_CACHE_ENABLED,
-			PasswordTrackerModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "findByUserId",
 			new String[] {
 				Long.class.getName(),
 				
@@ -321,53 +317,7 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<Password
 
 	public List<PasswordTracker> findByUserId(long userId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(userId) };
-
-		List<PasswordTracker> list = (List<PasswordTracker>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_USERID,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_SELECT_PASSWORDTRACKER_WHERE);
-
-				query.append(_FINDER_COLUMN_USERID_USERID_2);
-
-				query.append(PasswordTrackerModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(userId);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<PasswordTracker>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_USERID,
-					finderArgs, list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByUserId(userId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	public List<PasswordTracker> findByUserId(long userId, int start, int end)
@@ -384,7 +334,7 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<Password
 				String.valueOf(orderByComparator)
 			};
 
-		List<PasswordTracker> list = (List<PasswordTracker>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_USERID,
+		List<PasswordTracker> list = (List<PasswordTracker>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_USERID,
 				finderArgs, this);
 
 		if (list == null) {
@@ -437,7 +387,7 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<Password
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_USERID,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_USERID,
 					finderArgs, list);
 
 				closeSession(session);

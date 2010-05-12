@@ -66,10 +66,6 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 	public static final FinderPath FINDER_PATH_FIND_BY_USERTRACKERID = new FinderPath(UserTrackerPathModelImpl.ENTITY_CACHE_ENABLED,
 			UserTrackerPathModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "findByUserTrackerId",
-			new String[] { Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_USERTRACKERID = new FinderPath(UserTrackerPathModelImpl.ENTITY_CACHE_ENABLED,
-			UserTrackerPathModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "findByUserTrackerId",
 			new String[] {
 				Long.class.getName(),
 				
@@ -321,51 +317,8 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 
 	public List<UserTrackerPath> findByUserTrackerId(long userTrackerId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(userTrackerId) };
-
-		List<UserTrackerPath> list = (List<UserTrackerPath>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_USERTRACKERID,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(2);
-
-				query.append(_SQL_SELECT_USERTRACKERPATH_WHERE);
-
-				query.append(_FINDER_COLUMN_USERTRACKERID_USERTRACKERID_2);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(userTrackerId);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<UserTrackerPath>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_USERTRACKERID,
-					finderArgs, list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByUserTrackerId(userTrackerId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
 	}
 
 	public List<UserTrackerPath> findByUserTrackerId(long userTrackerId,
@@ -383,7 +336,7 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 				String.valueOf(orderByComparator)
 			};
 
-		List<UserTrackerPath> list = (List<UserTrackerPath>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_USERTRACKERID,
+		List<UserTrackerPath> list = (List<UserTrackerPath>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_USERTRACKERID,
 				finderArgs, this);
 
 		if (list == null) {
@@ -432,7 +385,7 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_USERTRACKERID,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_USERTRACKERID,
 					finderArgs, list);
 
 				closeSession(session);

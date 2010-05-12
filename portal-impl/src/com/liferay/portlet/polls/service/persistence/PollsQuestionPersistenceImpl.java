@@ -72,10 +72,6 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 	public static final FinderPath FINDER_PATH_FIND_BY_UUID = new FinderPath(PollsQuestionModelImpl.ENTITY_CACHE_ENABLED,
 			PollsQuestionModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "findByUuid",
-			new String[] { String.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_UUID = new FinderPath(PollsQuestionModelImpl.ENTITY_CACHE_ENABLED,
-			PollsQuestionModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "findByUuid",
 			new String[] {
 				String.class.getName(),
 				
@@ -95,10 +91,6 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 			FINDER_CLASS_NAME_LIST, "countByUUID_G",
 			new String[] { String.class.getName(), Long.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_BY_GROUPID = new FinderPath(PollsQuestionModelImpl.ENTITY_CACHE_ENABLED,
-			PollsQuestionModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "findByGroupId",
-			new String[] { Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_GROUPID = new FinderPath(PollsQuestionModelImpl.ENTITY_CACHE_ENABLED,
 			PollsQuestionModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "findByGroupId",
 			new String[] {
@@ -412,65 +404,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 
 	public List<PollsQuestion> findByUuid(String uuid)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { uuid };
-
-		List<PollsQuestion> list = (List<PollsQuestion>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_UUID,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_SELECT_POLLSQUESTION_WHERE);
-
-				if (uuid == null) {
-					query.append(_FINDER_COLUMN_UUID_UUID_1);
-				}
-				else {
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_UUID_UUID_3);
-					}
-					else {
-						query.append(_FINDER_COLUMN_UUID_UUID_2);
-					}
-				}
-
-				query.append(PollsQuestionModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				if (uuid != null) {
-					qPos.add(uuid);
-				}
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<PollsQuestion>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_UUID, finderArgs,
-					list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByUuid(uuid, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	public List<PollsQuestion> findByUuid(String uuid, int start, int end)
@@ -487,7 +421,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 				String.valueOf(orderByComparator)
 			};
 
-		List<PollsQuestion> list = (List<PollsQuestion>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_UUID,
+		List<PollsQuestion> list = (List<PollsQuestion>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_UUID,
 				finderArgs, this);
 
 		if (list == null) {
@@ -552,8 +486,8 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_UUID,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_UUID, finderArgs,
+					list);
 
 				closeSession(session);
 			}
@@ -884,53 +818,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 
 	public List<PollsQuestion> findByGroupId(long groupId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(groupId) };
-
-		List<PollsQuestion> list = (List<PollsQuestion>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_GROUPID,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_SELECT_POLLSQUESTION_WHERE);
-
-				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
-
-				query.append(PollsQuestionModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(groupId);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<PollsQuestion>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_GROUPID,
-					finderArgs, list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByGroupId(groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	public List<PollsQuestion> findByGroupId(long groupId, int start, int end)
@@ -947,7 +835,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 				String.valueOf(orderByComparator)
 			};
 
-		List<PollsQuestion> list = (List<PollsQuestion>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
+		List<PollsQuestion> list = (List<PollsQuestion>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_GROUPID,
 				finderArgs, this);
 
 		if (list == null) {
@@ -1000,7 +888,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_GROUPID,
 					finderArgs, list);
 
 				closeSession(session);

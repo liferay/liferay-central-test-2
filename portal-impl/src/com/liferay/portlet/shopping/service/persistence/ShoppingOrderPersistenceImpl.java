@@ -73,10 +73,6 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 	public static final FinderPath FINDER_PATH_FIND_BY_GROUPID = new FinderPath(ShoppingOrderModelImpl.ENTITY_CACHE_ENABLED,
 			ShoppingOrderModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "findByGroupId",
-			new String[] { Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_GROUPID = new FinderPath(ShoppingOrderModelImpl.ENTITY_CACHE_ENABLED,
-			ShoppingOrderModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "findByGroupId",
 			new String[] {
 				Long.class.getName(),
 				
@@ -104,13 +100,6 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 			FINDER_CLASS_NAME_LIST, "countByPPTxnId",
 			new String[] { String.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_BY_G_U_PPPS = new FinderPath(ShoppingOrderModelImpl.ENTITY_CACHE_ENABLED,
-			ShoppingOrderModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "findByG_U_PPPS",
-			new String[] {
-				Long.class.getName(), Long.class.getName(),
-				String.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_G_U_PPPS = new FinderPath(ShoppingOrderModelImpl.ENTITY_CACHE_ENABLED,
 			ShoppingOrderModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "findByG_U_PPPS",
 			new String[] {
@@ -465,53 +454,7 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 
 	public List<ShoppingOrder> findByGroupId(long groupId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(groupId) };
-
-		List<ShoppingOrder> list = (List<ShoppingOrder>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_GROUPID,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_SELECT_SHOPPINGORDER_WHERE);
-
-				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
-
-				query.append(ShoppingOrderModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(groupId);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<ShoppingOrder>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_GROUPID,
-					finderArgs, list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByGroupId(groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	public List<ShoppingOrder> findByGroupId(long groupId, int start, int end)
@@ -528,7 +471,7 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 				String.valueOf(orderByComparator)
 			};
 
-		List<ShoppingOrder> list = (List<ShoppingOrder>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
+		List<ShoppingOrder> list = (List<ShoppingOrder>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_GROUPID,
 				finderArgs, this);
 
 		if (list == null) {
@@ -581,7 +524,7 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_GROUPID,
 					finderArgs, list);
 
 				closeSession(session);
@@ -1013,77 +956,8 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 
 	public List<ShoppingOrder> findByG_U_PPPS(long groupId, long userId,
 		String ppPaymentStatus) throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Long(userId),
-				
-				ppPaymentStatus
-			};
-
-		List<ShoppingOrder> list = (List<ShoppingOrder>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_U_PPPS,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(5);
-
-				query.append(_SQL_SELECT_SHOPPINGORDER_WHERE);
-
-				query.append(_FINDER_COLUMN_G_U_PPPS_GROUPID_2);
-
-				query.append(_FINDER_COLUMN_G_U_PPPS_USERID_2);
-
-				if (ppPaymentStatus == null) {
-					query.append(_FINDER_COLUMN_G_U_PPPS_PPPAYMENTSTATUS_1);
-				}
-				else {
-					if (ppPaymentStatus.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_G_U_PPPS_PPPAYMENTSTATUS_3);
-					}
-					else {
-						query.append(_FINDER_COLUMN_G_U_PPPS_PPPAYMENTSTATUS_2);
-					}
-				}
-
-				query.append(ShoppingOrderModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(groupId);
-
-				qPos.add(userId);
-
-				if (ppPaymentStatus != null) {
-					qPos.add(ppPaymentStatus);
-				}
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<ShoppingOrder>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_U_PPPS,
-					finderArgs, list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByG_U_PPPS(groupId, userId, ppPaymentStatus,
+			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	public List<ShoppingOrder> findByG_U_PPPS(long groupId, long userId,
@@ -1103,7 +977,7 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 				String.valueOf(orderByComparator)
 			};
 
-		List<ShoppingOrder> list = (List<ShoppingOrder>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_G_U_PPPS,
+		List<ShoppingOrder> list = (List<ShoppingOrder>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_U_PPPS,
 				finderArgs, this);
 
 		if (list == null) {
@@ -1176,7 +1050,7 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_G_U_PPPS,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_U_PPPS,
 					finderArgs, list);
 
 				closeSession(session);

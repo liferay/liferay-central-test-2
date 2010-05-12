@@ -71,10 +71,6 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl<ExpandoCol
 	public static final FinderPath FINDER_PATH_FIND_BY_TABLEID = new FinderPath(ExpandoColumnModelImpl.ENTITY_CACHE_ENABLED,
 			ExpandoColumnModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "findByTableId",
-			new String[] { Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_TABLEID = new FinderPath(ExpandoColumnModelImpl.ENTITY_CACHE_ENABLED,
-			ExpandoColumnModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "findByTableId",
 			new String[] {
 				Long.class.getName(),
 				
@@ -386,53 +382,7 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl<ExpandoCol
 
 	public List<ExpandoColumn> findByTableId(long tableId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(tableId) };
-
-		List<ExpandoColumn> list = (List<ExpandoColumn>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_TABLEID,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_SELECT_EXPANDOCOLUMN_WHERE);
-
-				query.append(_FINDER_COLUMN_TABLEID_TABLEID_2);
-
-				query.append(ExpandoColumnModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(tableId);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<ExpandoColumn>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_TABLEID,
-					finderArgs, list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByTableId(tableId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	public List<ExpandoColumn> findByTableId(long tableId, int start, int end)
@@ -449,7 +399,7 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl<ExpandoCol
 				String.valueOf(orderByComparator)
 			};
 
-		List<ExpandoColumn> list = (List<ExpandoColumn>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_TABLEID,
+		List<ExpandoColumn> list = (List<ExpandoColumn>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_TABLEID,
 				finderArgs, this);
 
 		if (list == null) {
@@ -502,7 +452,7 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl<ExpandoCol
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_TABLEID,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_TABLEID,
 					finderArgs, list);
 
 				closeSession(session);

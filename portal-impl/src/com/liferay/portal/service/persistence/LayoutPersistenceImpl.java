@@ -73,9 +73,6 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		".List";
 	public static final FinderPath FINDER_PATH_FIND_BY_GROUPID = new FinderPath(LayoutModelImpl.ENTITY_CACHE_ENABLED,
 			LayoutModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByGroupId", new String[] { Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_GROUPID = new FinderPath(LayoutModelImpl.ENTITY_CACHE_ENABLED,
-			LayoutModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByGroupId",
 			new String[] {
 				Long.class.getName(),
@@ -87,9 +84,6 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 			LayoutModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countByGroupId", new String[] { Long.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_BY_COMPANYID = new FinderPath(LayoutModelImpl.ENTITY_CACHE_ENABLED,
-			LayoutModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByCompanyId", new String[] { Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_COMPANYID = new FinderPath(LayoutModelImpl.ENTITY_CACHE_ENABLED,
 			LayoutModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByCompanyId",
 			new String[] {
@@ -114,10 +108,6 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 			LayoutModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countByIconImageId", new String[] { Long.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_BY_G_P = new FinderPath(LayoutModelImpl.ENTITY_CACHE_ENABLED,
-			LayoutModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByG_P",
-			new String[] { Long.class.getName(), Boolean.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_G_P = new FinderPath(LayoutModelImpl.ENTITY_CACHE_ENABLED,
 			LayoutModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByG_P",
 			new String[] {
@@ -149,13 +139,6 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 			"findByG_P_P",
 			new String[] {
 				Long.class.getName(), Boolean.class.getName(),
-				Long.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_G_P_P = new FinderPath(LayoutModelImpl.ENTITY_CACHE_ENABLED,
-			LayoutModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByG_P_P",
-			new String[] {
-				Long.class.getName(), Boolean.class.getName(),
 				Long.class.getName(),
 				
 			"java.lang.Integer", "java.lang.Integer",
@@ -183,13 +166,6 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 				String.class.getName()
 			});
 	public static final FinderPath FINDER_PATH_FIND_BY_G_P_T = new FinderPath(LayoutModelImpl.ENTITY_CACHE_ENABLED,
-			LayoutModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByG_P_T",
-			new String[] {
-				Long.class.getName(), Boolean.class.getName(),
-				String.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_G_P_T = new FinderPath(LayoutModelImpl.ENTITY_CACHE_ENABLED,
 			LayoutModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByG_P_T",
 			new String[] {
@@ -599,53 +575,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 	}
 
 	public List<Layout> findByGroupId(long groupId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(groupId) };
-
-		List<Layout> list = (List<Layout>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_GROUPID,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_SELECT_LAYOUT_WHERE);
-
-				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
-
-				query.append(LayoutModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(groupId);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<Layout>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_GROUPID,
-					finderArgs, list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByGroupId(groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	public List<Layout> findByGroupId(long groupId, int start, int end)
@@ -662,7 +592,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 				String.valueOf(orderByComparator)
 			};
 
-		List<Layout> list = (List<Layout>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
+		List<Layout> list = (List<Layout>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_GROUPID,
 				finderArgs, this);
 
 		if (list == null) {
@@ -714,7 +644,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_GROUPID,
 					finderArgs, list);
 
 				closeSession(session);
@@ -905,53 +835,8 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 
 	public List<Layout> findByCompanyId(long companyId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(companyId) };
-
-		List<Layout> list = (List<Layout>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_COMPANYID,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_SELECT_LAYOUT_WHERE);
-
-				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
-
-				query.append(LayoutModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(companyId);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<Layout>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_COMPANYID,
-					finderArgs, list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByCompanyId(companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+			null);
 	}
 
 	public List<Layout> findByCompanyId(long companyId, int start, int end)
@@ -968,7 +853,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 				String.valueOf(orderByComparator)
 			};
 
-		List<Layout> list = (List<Layout>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
+		List<Layout> list = (List<Layout>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_COMPANYID,
 				finderArgs, this);
 
 		if (list == null) {
@@ -1020,7 +905,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_COMPANYID,
 					finderArgs, list);
 
 				closeSession(session);
@@ -1424,59 +1309,8 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 
 	public List<Layout> findByG_P(long groupId, boolean privateLayout)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(groupId), Boolean.valueOf(privateLayout)
-			};
-
-		List<Layout> list = (List<Layout>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_P,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(4);
-
-				query.append(_SQL_SELECT_LAYOUT_WHERE);
-
-				query.append(_FINDER_COLUMN_G_P_GROUPID_2);
-
-				query.append(_FINDER_COLUMN_G_P_PRIVATELAYOUT_2);
-
-				query.append(LayoutModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(groupId);
-
-				qPos.add(privateLayout);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<Layout>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_P, finderArgs,
-					list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByG_P(groupId, privateLayout, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
 	}
 
 	public List<Layout> findByG_P(long groupId, boolean privateLayout,
@@ -1494,7 +1328,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 				String.valueOf(orderByComparator)
 			};
 
-		List<Layout> list = (List<Layout>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_G_P,
+		List<Layout> list = (List<Layout>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_P,
 				finderArgs, this);
 
 		if (list == null) {
@@ -1550,8 +1384,8 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_G_P,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_P, finderArgs,
+					list);
 
 				closeSession(session);
 			}
@@ -1879,64 +1713,8 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 
 	public List<Layout> findByG_P_P(long groupId, boolean privateLayout,
 		long parentLayoutId) throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(groupId), Boolean.valueOf(privateLayout),
-				new Long(parentLayoutId)
-			};
-
-		List<Layout> list = (List<Layout>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_P_P,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(5);
-
-				query.append(_SQL_SELECT_LAYOUT_WHERE);
-
-				query.append(_FINDER_COLUMN_G_P_P_GROUPID_2);
-
-				query.append(_FINDER_COLUMN_G_P_P_PRIVATELAYOUT_2);
-
-				query.append(_FINDER_COLUMN_G_P_P_PARENTLAYOUTID_2);
-
-				query.append(LayoutModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(groupId);
-
-				qPos.add(privateLayout);
-
-				qPos.add(parentLayoutId);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<Layout>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_P_P,
-					finderArgs, list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByG_P_P(groupId, privateLayout, parentLayoutId,
+			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	public List<Layout> findByG_P_P(long groupId, boolean privateLayout,
@@ -1956,7 +1734,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 				String.valueOf(orderByComparator)
 			};
 
-		List<Layout> list = (List<Layout>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_G_P_P,
+		List<Layout> list = (List<Layout>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_P_P,
 				finderArgs, this);
 
 		if (list == null) {
@@ -2016,7 +1794,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_G_P_P,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_P_P,
 					finderArgs, list);
 
 				closeSession(session);
@@ -2371,77 +2149,8 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 
 	public List<Layout> findByG_P_T(long groupId, boolean privateLayout,
 		String type) throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(groupId), Boolean.valueOf(privateLayout),
-				
-				type
-			};
-
-		List<Layout> list = (List<Layout>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_P_T,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(5);
-
-				query.append(_SQL_SELECT_LAYOUT_WHERE);
-
-				query.append(_FINDER_COLUMN_G_P_T_GROUPID_2);
-
-				query.append(_FINDER_COLUMN_G_P_T_PRIVATELAYOUT_2);
-
-				if (type == null) {
-					query.append(_FINDER_COLUMN_G_P_T_TYPE_1);
-				}
-				else {
-					if (type.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_G_P_T_TYPE_3);
-					}
-					else {
-						query.append(_FINDER_COLUMN_G_P_T_TYPE_2);
-					}
-				}
-
-				query.append(LayoutModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(groupId);
-
-				qPos.add(privateLayout);
-
-				if (type != null) {
-					qPos.add(type);
-				}
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<Layout>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_P_T,
-					finderArgs, list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByG_P_T(groupId, privateLayout, type, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
 	}
 
 	public List<Layout> findByG_P_T(long groupId, boolean privateLayout,
@@ -2461,7 +2170,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 				String.valueOf(orderByComparator)
 			};
 
-		List<Layout> list = (List<Layout>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_G_P_T,
+		List<Layout> list = (List<Layout>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_P_T,
 				finderArgs, this);
 
 		if (list == null) {
@@ -2533,7 +2242,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_G_P_T,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_P_T,
 					finderArgs, list);
 
 				closeSession(session);

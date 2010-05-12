@@ -80,9 +80,6 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		".List";
 	public static final FinderPath FINDER_PATH_FIND_BY_COMPANYID = new FinderPath(OrganizationModelImpl.ENTITY_CACHE_ENABLED,
 			OrganizationModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByCompanyId", new String[] { Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_COMPANYID = new FinderPath(OrganizationModelImpl.ENTITY_CACHE_ENABLED,
-			OrganizationModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByCompanyId",
 			new String[] {
 				Long.class.getName(),
@@ -95,9 +92,6 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 			"countByCompanyId", new String[] { Long.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_BY_LOCATIONS = new FinderPath(OrganizationModelImpl.ENTITY_CACHE_ENABLED,
 			OrganizationModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByLocations", new String[] { Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_LOCATIONS = new FinderPath(OrganizationModelImpl.ENTITY_CACHE_ENABLED,
-			OrganizationModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByLocations",
 			new String[] {
 				Long.class.getName(),
@@ -109,10 +103,6 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 			OrganizationModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countByLocations", new String[] { Long.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_BY_C_P = new FinderPath(OrganizationModelImpl.ENTITY_CACHE_ENABLED,
-			OrganizationModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByC_P",
-			new String[] { Long.class.getName(), Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_C_P = new FinderPath(OrganizationModelImpl.ENTITY_CACHE_ENABLED,
 			OrganizationModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByC_P",
 			new String[] {
@@ -462,53 +452,8 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 
 	public List<Organization> findByCompanyId(long companyId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(companyId) };
-
-		List<Organization> list = (List<Organization>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_COMPANYID,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_SELECT_ORGANIZATION_WHERE);
-
-				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
-
-				query.append(OrganizationModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(companyId);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<Organization>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_COMPANYID,
-					finderArgs, list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByCompanyId(companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+			null);
 	}
 
 	public List<Organization> findByCompanyId(long companyId, int start, int end)
@@ -525,7 +470,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 				String.valueOf(orderByComparator)
 			};
 
-		List<Organization> list = (List<Organization>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
+		List<Organization> list = (List<Organization>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_COMPANYID,
 				finderArgs, this);
 
 		if (list == null) {
@@ -578,7 +523,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_COMPANYID,
 					finderArgs, list);
 
 				closeSession(session);
@@ -771,53 +716,8 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 
 	public List<Organization> findByLocations(long companyId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(companyId) };
-
-		List<Organization> list = (List<Organization>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_LOCATIONS,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_SELECT_ORGANIZATION_WHERE);
-
-				query.append(_FINDER_COLUMN_LOCATIONS_COMPANYID_2);
-
-				query.append(OrganizationModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(companyId);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<Organization>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_LOCATIONS,
-					finderArgs, list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByLocations(companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+			null);
 	}
 
 	public List<Organization> findByLocations(long companyId, int start, int end)
@@ -834,7 +734,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 				String.valueOf(orderByComparator)
 			};
 
-		List<Organization> list = (List<Organization>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_LOCATIONS,
+		List<Organization> list = (List<Organization>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_LOCATIONS,
 				finderArgs, this);
 
 		if (list == null) {
@@ -887,7 +787,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_LOCATIONS,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_LOCATIONS,
 					finderArgs, list);
 
 				closeSession(session);
@@ -1080,59 +980,8 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 
 	public List<Organization> findByC_P(long companyId,
 		long parentOrganizationId) throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(companyId), new Long(parentOrganizationId)
-			};
-
-		List<Organization> list = (List<Organization>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_C_P,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(4);
-
-				query.append(_SQL_SELECT_ORGANIZATION_WHERE);
-
-				query.append(_FINDER_COLUMN_C_P_COMPANYID_2);
-
-				query.append(_FINDER_COLUMN_C_P_PARENTORGANIZATIONID_2);
-
-				query.append(OrganizationModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(companyId);
-
-				qPos.add(parentOrganizationId);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<Organization>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_P, finderArgs,
-					list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByC_P(companyId, parentOrganizationId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
 	}
 
 	public List<Organization> findByC_P(long companyId,
@@ -1151,7 +1000,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 				String.valueOf(orderByComparator)
 			};
 
-		List<Organization> list = (List<Organization>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_C_P,
+		List<Organization> list = (List<Organization>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_C_P,
 				finderArgs, this);
 
 		if (list == null) {
@@ -1208,8 +1057,8 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_C_P,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_P, finderArgs,
+					list);
 
 				closeSession(session);
 			}

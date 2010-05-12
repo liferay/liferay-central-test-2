@@ -77,9 +77,6 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 		".List";
 	public static final FinderPath FINDER_PATH_FIND_BY_COMPANYID = new FinderPath(UserGroupModelImpl.ENTITY_CACHE_ENABLED,
 			UserGroupModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByCompanyId", new String[] { Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_COMPANYID = new FinderPath(UserGroupModelImpl.ENTITY_CACHE_ENABLED,
-			UserGroupModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByCompanyId",
 			new String[] {
 				Long.class.getName(),
@@ -91,10 +88,6 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 			UserGroupModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countByCompanyId", new String[] { Long.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_BY_C_P = new FinderPath(UserGroupModelImpl.ENTITY_CACHE_ENABLED,
-			UserGroupModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByC_P",
-			new String[] { Long.class.getName(), Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_C_P = new FinderPath(UserGroupModelImpl.ENTITY_CACHE_ENABLED,
 			UserGroupModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByC_P",
 			new String[] {
@@ -404,53 +397,8 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 
 	public List<UserGroup> findByCompanyId(long companyId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(companyId) };
-
-		List<UserGroup> list = (List<UserGroup>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_COMPANYID,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_SELECT_USERGROUP_WHERE);
-
-				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
-
-				query.append(UserGroupModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(companyId);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<UserGroup>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_COMPANYID,
-					finderArgs, list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByCompanyId(companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+			null);
 	}
 
 	public List<UserGroup> findByCompanyId(long companyId, int start, int end)
@@ -467,7 +415,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 				String.valueOf(orderByComparator)
 			};
 
-		List<UserGroup> list = (List<UserGroup>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
+		List<UserGroup> list = (List<UserGroup>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_COMPANYID,
 				finderArgs, this);
 
 		if (list == null) {
@@ -520,7 +468,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_COMPANYID,
 					finderArgs, list);
 
 				closeSession(session);
@@ -713,59 +661,8 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 
 	public List<UserGroup> findByC_P(long companyId, long parentUserGroupId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(companyId), new Long(parentUserGroupId)
-			};
-
-		List<UserGroup> list = (List<UserGroup>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_C_P,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(4);
-
-				query.append(_SQL_SELECT_USERGROUP_WHERE);
-
-				query.append(_FINDER_COLUMN_C_P_COMPANYID_2);
-
-				query.append(_FINDER_COLUMN_C_P_PARENTUSERGROUPID_2);
-
-				query.append(UserGroupModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(companyId);
-
-				qPos.add(parentUserGroupId);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<UserGroup>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_P, finderArgs,
-					list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByC_P(companyId, parentUserGroupId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
 	}
 
 	public List<UserGroup> findByC_P(long companyId, long parentUserGroupId,
@@ -783,7 +680,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 				String.valueOf(orderByComparator)
 			};
 
-		List<UserGroup> list = (List<UserGroup>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_C_P,
+		List<UserGroup> list = (List<UserGroup>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_C_P,
 				finderArgs, this);
 
 		if (list == null) {
@@ -840,8 +737,8 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_C_P,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_P, finderArgs,
+					list);
 
 				closeSession(session);
 			}

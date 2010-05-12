@@ -65,9 +65,6 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 		".List";
 	public static final FinderPath FINDER_PATH_FIND_BY_ORGANIZATIONID = new FinderPath(OrgLaborModelImpl.ENTITY_CACHE_ENABLED,
 			OrgLaborModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByOrganizationId", new String[] { Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_ORGANIZATIONID = new FinderPath(OrgLaborModelImpl.ENTITY_CACHE_ENABLED,
-			OrgLaborModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByOrganizationId",
 			new String[] {
 				Long.class.getName(),
@@ -324,53 +321,8 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 
 	public List<OrgLabor> findByOrganizationId(long organizationId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(organizationId) };
-
-		List<OrgLabor> list = (List<OrgLabor>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_ORGANIZATIONID,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_SELECT_ORGLABOR_WHERE);
-
-				query.append(_FINDER_COLUMN_ORGANIZATIONID_ORGANIZATIONID_2);
-
-				query.append(OrgLaborModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(organizationId);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<OrgLabor>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_ORGANIZATIONID,
-					finderArgs, list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByOrganizationId(organizationId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
 	}
 
 	public List<OrgLabor> findByOrganizationId(long organizationId, int start,
@@ -387,7 +339,7 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 				String.valueOf(orderByComparator)
 			};
 
-		List<OrgLabor> list = (List<OrgLabor>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_ORGANIZATIONID,
+		List<OrgLabor> list = (List<OrgLabor>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_ORGANIZATIONID,
 				finderArgs, this);
 
 		if (list == null) {
@@ -440,7 +392,7 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_ORGANIZATIONID,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_ORGANIZATIONID,
 					finderArgs, list);
 
 				closeSession(session);

@@ -90,9 +90,6 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 			"countByLogoId", new String[] { Long.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_BY_SYSTEM = new FinderPath(CompanyModelImpl.ENTITY_CACHE_ENABLED,
 			CompanyModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findBySystem", new String[] { Boolean.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_SYSTEM = new FinderPath(CompanyModelImpl.ENTITY_CACHE_ENABLED,
-			CompanyModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findBySystem",
 			new String[] {
 				Boolean.class.getName(),
@@ -891,51 +888,7 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 	}
 
 	public List<Company> findBySystem(boolean system) throws SystemException {
-		Object[] finderArgs = new Object[] { Boolean.valueOf(system) };
-
-		List<Company> list = (List<Company>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_SYSTEM,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(2);
-
-				query.append(_SQL_SELECT_COMPANY_WHERE);
-
-				query.append(_FINDER_COLUMN_SYSTEM_SYSTEM_2);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(system);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<Company>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_SYSTEM,
-					finderArgs, list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findBySystem(system, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	public List<Company> findBySystem(boolean system, int start, int end)
@@ -952,7 +905,7 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 				String.valueOf(orderByComparator)
 			};
 
-		List<Company> list = (List<Company>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_SYSTEM,
+		List<Company> list = (List<Company>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_SYSTEM,
 				finderArgs, this);
 
 		if (list == null) {
@@ -1000,7 +953,7 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_SYSTEM,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_SYSTEM,
 					finderArgs, list);
 
 				closeSession(session);

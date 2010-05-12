@@ -69,9 +69,6 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 		".List";
 	public static final FinderPath FINDER_PATH_FIND_BY_CLASSNAMEID = new FinderPath(MBDiscussionModelImpl.ENTITY_CACHE_ENABLED,
 			MBDiscussionModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByClassNameId", new String[] { Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_CLASSNAMEID = new FinderPath(MBDiscussionModelImpl.ENTITY_CACHE_ENABLED,
-			MBDiscussionModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByClassNameId",
 			new String[] {
 				Long.class.getName(),
@@ -402,51 +399,8 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 
 	public List<MBDiscussion> findByClassNameId(long classNameId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(classNameId) };
-
-		List<MBDiscussion> list = (List<MBDiscussion>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_CLASSNAMEID,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(2);
-
-				query.append(_SQL_SELECT_MBDISCUSSION_WHERE);
-
-				query.append(_FINDER_COLUMN_CLASSNAMEID_CLASSNAMEID_2);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(classNameId);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<MBDiscussion>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_CLASSNAMEID,
-					finderArgs, list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByClassNameId(classNameId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
 	}
 
 	public List<MBDiscussion> findByClassNameId(long classNameId, int start,
@@ -463,7 +417,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 				String.valueOf(orderByComparator)
 			};
 
-		List<MBDiscussion> list = (List<MBDiscussion>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_CLASSNAMEID,
+		List<MBDiscussion> list = (List<MBDiscussion>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_CLASSNAMEID,
 				finderArgs, this);
 
 		if (list == null) {
@@ -512,7 +466,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_CLASSNAMEID,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_CLASSNAMEID,
 					finderArgs, list);
 
 				closeSession(session);

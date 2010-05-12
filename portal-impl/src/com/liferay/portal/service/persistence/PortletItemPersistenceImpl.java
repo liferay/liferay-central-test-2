@@ -67,10 +67,6 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 	public static final FinderPath FINDER_PATH_FIND_BY_G_C = new FinderPath(PortletItemModelImpl.ENTITY_CACHE_ENABLED,
 			PortletItemModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByG_C",
-			new String[] { Long.class.getName(), Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_G_C = new FinderPath(PortletItemModelImpl.ENTITY_CACHE_ENABLED,
-			PortletItemModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByG_C",
 			new String[] {
 				Long.class.getName(), Long.class.getName(),
 				
@@ -82,13 +78,6 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 			"countByG_C",
 			new String[] { Long.class.getName(), Long.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_BY_G_P_C = new FinderPath(PortletItemModelImpl.ENTITY_CACHE_ENABLED,
-			PortletItemModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByG_P_C",
-			new String[] {
-				Long.class.getName(), String.class.getName(),
-				Long.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_G_P_C = new FinderPath(PortletItemModelImpl.ENTITY_CACHE_ENABLED,
 			PortletItemModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByG_P_C",
 			new String[] {
@@ -431,57 +420,8 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 
 	public List<PortletItem> findByG_C(long groupId, long classNameId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Long(classNameId)
-			};
-
-		List<PortletItem> list = (List<PortletItem>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_C,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_SELECT_PORTLETITEM_WHERE);
-
-				query.append(_FINDER_COLUMN_G_C_GROUPID_2);
-
-				query.append(_FINDER_COLUMN_G_C_CLASSNAMEID_2);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(groupId);
-
-				qPos.add(classNameId);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<PortletItem>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_C, finderArgs,
-					list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByG_C(groupId, classNameId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
 	}
 
 	public List<PortletItem> findByG_C(long groupId, long classNameId,
@@ -499,7 +439,7 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 				String.valueOf(orderByComparator)
 			};
 
-		List<PortletItem> list = (List<PortletItem>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_G_C,
+		List<PortletItem> list = (List<PortletItem>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_C,
 				finderArgs, this);
 
 		if (list == null) {
@@ -552,8 +492,8 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_G_C,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_C, finderArgs,
+					list);
 
 				closeSession(session);
 			}
@@ -751,75 +691,8 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 
 	public List<PortletItem> findByG_P_C(long groupId, String portletId,
 		long classNameId) throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(groupId),
-				
-				portletId, new Long(classNameId)
-			};
-
-		List<PortletItem> list = (List<PortletItem>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_P_C,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(4);
-
-				query.append(_SQL_SELECT_PORTLETITEM_WHERE);
-
-				query.append(_FINDER_COLUMN_G_P_C_GROUPID_2);
-
-				if (portletId == null) {
-					query.append(_FINDER_COLUMN_G_P_C_PORTLETID_1);
-				}
-				else {
-					if (portletId.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_G_P_C_PORTLETID_3);
-					}
-					else {
-						query.append(_FINDER_COLUMN_G_P_C_PORTLETID_2);
-					}
-				}
-
-				query.append(_FINDER_COLUMN_G_P_C_CLASSNAMEID_2);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(groupId);
-
-				if (portletId != null) {
-					qPos.add(portletId);
-				}
-
-				qPos.add(classNameId);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<PortletItem>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_P_C,
-					finderArgs, list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByG_P_C(groupId, portletId, classNameId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
 	}
 
 	public List<PortletItem> findByG_P_C(long groupId, String portletId,
@@ -839,7 +712,7 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 				String.valueOf(orderByComparator)
 			};
 
-		List<PortletItem> list = (List<PortletItem>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_G_P_C,
+		List<PortletItem> list = (List<PortletItem>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_P_C,
 				finderArgs, this);
 
 		if (list == null) {
@@ -908,7 +781,7 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_G_P_C,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_P_C,
 					finderArgs, list);
 
 				closeSession(session);

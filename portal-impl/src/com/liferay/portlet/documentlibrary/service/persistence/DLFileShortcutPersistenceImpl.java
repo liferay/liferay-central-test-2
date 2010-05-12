@@ -74,10 +74,6 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	public static final FinderPath FINDER_PATH_FIND_BY_UUID = new FinderPath(DLFileShortcutModelImpl.ENTITY_CACHE_ENABLED,
 			DLFileShortcutModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "findByUuid",
-			new String[] { String.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_UUID = new FinderPath(DLFileShortcutModelImpl.ENTITY_CACHE_ENABLED,
-			DLFileShortcutModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "findByUuid",
 			new String[] {
 				String.class.getName(),
 				
@@ -99,10 +95,6 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	public static final FinderPath FINDER_PATH_FIND_BY_G_F = new FinderPath(DLFileShortcutModelImpl.ENTITY_CACHE_ENABLED,
 			DLFileShortcutModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "findByG_F",
-			new String[] { Long.class.getName(), Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_G_F = new FinderPath(DLFileShortcutModelImpl.ENTITY_CACHE_ENABLED,
-			DLFileShortcutModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "findByG_F",
 			new String[] {
 				Long.class.getName(), Long.class.getName(),
 				
@@ -114,13 +106,6 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 			FINDER_CLASS_NAME_LIST, "countByG_F",
 			new String[] { Long.class.getName(), Long.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_BY_G_F_S = new FinderPath(DLFileShortcutModelImpl.ENTITY_CACHE_ENABLED,
-			DLFileShortcutModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "findByG_F_S",
-			new String[] {
-				Long.class.getName(), Long.class.getName(),
-				Integer.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_G_F_S = new FinderPath(DLFileShortcutModelImpl.ENTITY_CACHE_ENABLED,
 			DLFileShortcutModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "findByG_F_S",
 			new String[] {
@@ -142,13 +127,6 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 			FINDER_CLASS_NAME_LIST, "findByG_TF_TN",
 			new String[] {
 				Long.class.getName(), Long.class.getName(),
-				String.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_G_TF_TN = new FinderPath(DLFileShortcutModelImpl.ENTITY_CACHE_ENABLED,
-			DLFileShortcutModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "findByG_TF_TN",
-			new String[] {
-				Long.class.getName(), Long.class.getName(),
 				String.class.getName(),
 				
 			"java.lang.Integer", "java.lang.Integer",
@@ -162,13 +140,6 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 				String.class.getName()
 			});
 	public static final FinderPath FINDER_PATH_FIND_BY_G_TF_TN_S = new FinderPath(DLFileShortcutModelImpl.ENTITY_CACHE_ENABLED,
-			DLFileShortcutModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "findByG_TF_TN_S",
-			new String[] {
-				Long.class.getName(), Long.class.getName(),
-				String.class.getName(), Integer.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_G_TF_TN_S = new FinderPath(DLFileShortcutModelImpl.ENTITY_CACHE_ENABLED,
 			DLFileShortcutModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "findByG_TF_TN_S",
 			new String[] {
@@ -490,63 +461,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 
 	public List<DLFileShortcut> findByUuid(String uuid)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { uuid };
-
-		List<DLFileShortcut> list = (List<DLFileShortcut>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_UUID,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(2);
-
-				query.append(_SQL_SELECT_DLFILESHORTCUT_WHERE);
-
-				if (uuid == null) {
-					query.append(_FINDER_COLUMN_UUID_UUID_1);
-				}
-				else {
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_UUID_UUID_3);
-					}
-					else {
-						query.append(_FINDER_COLUMN_UUID_UUID_2);
-					}
-				}
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				if (uuid != null) {
-					qPos.add(uuid);
-				}
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<DLFileShortcut>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_UUID, finderArgs,
-					list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByUuid(uuid, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	public List<DLFileShortcut> findByUuid(String uuid, int start, int end)
@@ -563,7 +478,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 				String.valueOf(orderByComparator)
 			};
 
-		List<DLFileShortcut> list = (List<DLFileShortcut>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_UUID,
+		List<DLFileShortcut> list = (List<DLFileShortcut>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_UUID,
 				finderArgs, this);
 
 		if (list == null) {
@@ -624,8 +539,8 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_UUID,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_UUID, finderArgs,
+					list);
 
 				closeSession(session);
 			}
@@ -950,55 +865,8 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 
 	public List<DLFileShortcut> findByG_F(long groupId, long folderId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(groupId), new Long(folderId) };
-
-		List<DLFileShortcut> list = (List<DLFileShortcut>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_F,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_SELECT_DLFILESHORTCUT_WHERE);
-
-				query.append(_FINDER_COLUMN_G_F_GROUPID_2);
-
-				query.append(_FINDER_COLUMN_G_F_FOLDERID_2);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(groupId);
-
-				qPos.add(folderId);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<DLFileShortcut>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_F, finderArgs,
-					list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByG_F(groupId, folderId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
 	}
 
 	public List<DLFileShortcut> findByG_F(long groupId, long folderId,
@@ -1016,7 +884,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 				String.valueOf(orderByComparator)
 			};
 
-		List<DLFileShortcut> list = (List<DLFileShortcut>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_G_F,
+		List<DLFileShortcut> list = (List<DLFileShortcut>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_F,
 				finderArgs, this);
 
 		if (list == null) {
@@ -1069,8 +937,8 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_G_F,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_F, finderArgs,
+					list);
 
 				closeSession(session);
 			}
@@ -1268,61 +1136,8 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 
 	public List<DLFileShortcut> findByG_F_S(long groupId, long folderId,
 		int status) throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Long(folderId), new Integer(status)
-			};
-
-		List<DLFileShortcut> list = (List<DLFileShortcut>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_F_S,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(4);
-
-				query.append(_SQL_SELECT_DLFILESHORTCUT_WHERE);
-
-				query.append(_FINDER_COLUMN_G_F_S_GROUPID_2);
-
-				query.append(_FINDER_COLUMN_G_F_S_FOLDERID_2);
-
-				query.append(_FINDER_COLUMN_G_F_S_STATUS_2);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(groupId);
-
-				qPos.add(folderId);
-
-				qPos.add(status);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<DLFileShortcut>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_F_S,
-					finderArgs, list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByG_F_S(groupId, folderId, status, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
 	}
 
 	public List<DLFileShortcut> findByG_F_S(long groupId, long folderId,
@@ -1340,7 +1155,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 				String.valueOf(orderByComparator)
 			};
 
-		List<DLFileShortcut> list = (List<DLFileShortcut>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_G_F_S,
+		List<DLFileShortcut> list = (List<DLFileShortcut>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_F_S,
 				finderArgs, this);
 
 		if (list == null) {
@@ -1397,7 +1212,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_G_F_S,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_F_S,
 					finderArgs, list);
 
 				closeSession(session);
@@ -1607,75 +1422,8 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 
 	public List<DLFileShortcut> findByG_TF_TN(long groupId, long toFolderId,
 		String toName) throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Long(toFolderId),
-				
-				toName
-			};
-
-		List<DLFileShortcut> list = (List<DLFileShortcut>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_TF_TN,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(4);
-
-				query.append(_SQL_SELECT_DLFILESHORTCUT_WHERE);
-
-				query.append(_FINDER_COLUMN_G_TF_TN_GROUPID_2);
-
-				query.append(_FINDER_COLUMN_G_TF_TN_TOFOLDERID_2);
-
-				if (toName == null) {
-					query.append(_FINDER_COLUMN_G_TF_TN_TONAME_1);
-				}
-				else {
-					if (toName.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_G_TF_TN_TONAME_3);
-					}
-					else {
-						query.append(_FINDER_COLUMN_G_TF_TN_TONAME_2);
-					}
-				}
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(groupId);
-
-				qPos.add(toFolderId);
-
-				if (toName != null) {
-					qPos.add(toName);
-				}
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<DLFileShortcut>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_TF_TN,
-					finderArgs, list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByG_TF_TN(groupId, toFolderId, toName, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
 	}
 
 	public List<DLFileShortcut> findByG_TF_TN(long groupId, long toFolderId,
@@ -1695,7 +1443,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 				String.valueOf(orderByComparator)
 			};
 
-		List<DLFileShortcut> list = (List<DLFileShortcut>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_G_TF_TN,
+		List<DLFileShortcut> list = (List<DLFileShortcut>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_TF_TN,
 				finderArgs, this);
 
 		if (list == null) {
@@ -1764,7 +1512,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_G_TF_TN,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_TF_TN,
 					finderArgs, list);
 
 				closeSession(session);
@@ -1986,79 +1734,8 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 
 	public List<DLFileShortcut> findByG_TF_TN_S(long groupId, long toFolderId,
 		String toName, int status) throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Long(toFolderId),
-				
-				toName, new Integer(status)
-			};
-
-		List<DLFileShortcut> list = (List<DLFileShortcut>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_TF_TN_S,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(5);
-
-				query.append(_SQL_SELECT_DLFILESHORTCUT_WHERE);
-
-				query.append(_FINDER_COLUMN_G_TF_TN_S_GROUPID_2);
-
-				query.append(_FINDER_COLUMN_G_TF_TN_S_TOFOLDERID_2);
-
-				if (toName == null) {
-					query.append(_FINDER_COLUMN_G_TF_TN_S_TONAME_1);
-				}
-				else {
-					if (toName.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_G_TF_TN_S_TONAME_3);
-					}
-					else {
-						query.append(_FINDER_COLUMN_G_TF_TN_S_TONAME_2);
-					}
-				}
-
-				query.append(_FINDER_COLUMN_G_TF_TN_S_STATUS_2);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(groupId);
-
-				qPos.add(toFolderId);
-
-				if (toName != null) {
-					qPos.add(toName);
-				}
-
-				qPos.add(status);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<DLFileShortcut>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_TF_TN_S,
-					finderArgs, list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByG_TF_TN_S(groupId, toFolderId, toName, status,
+			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	public List<DLFileShortcut> findByG_TF_TN_S(long groupId, long toFolderId,
@@ -2080,7 +1757,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 				String.valueOf(orderByComparator)
 			};
 
-		List<DLFileShortcut> list = (List<DLFileShortcut>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_G_TF_TN_S,
+		List<DLFileShortcut> list = (List<DLFileShortcut>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_TF_TN_S,
 				finderArgs, this);
 
 		if (list == null) {
@@ -2153,7 +1830,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_G_TF_TN_S,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_TF_TN_S,
 					finderArgs, list);
 
 				closeSession(session);

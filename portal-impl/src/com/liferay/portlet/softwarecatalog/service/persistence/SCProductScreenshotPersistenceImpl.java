@@ -71,10 +71,6 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 	public static final FinderPath FINDER_PATH_FIND_BY_PRODUCTENTRYID = new FinderPath(SCProductScreenshotModelImpl.ENTITY_CACHE_ENABLED,
 			SCProductScreenshotModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "findByProductEntryId",
-			new String[] { Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_PRODUCTENTRYID = new FinderPath(SCProductScreenshotModelImpl.ENTITY_CACHE_ENABLED,
-			SCProductScreenshotModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "findByProductEntryId",
 			new String[] {
 				Long.class.getName(),
 				
@@ -453,53 +449,8 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 
 	public List<SCProductScreenshot> findByProductEntryId(long productEntryId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(productEntryId) };
-
-		List<SCProductScreenshot> list = (List<SCProductScreenshot>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_PRODUCTENTRYID,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_SELECT_SCPRODUCTSCREENSHOT_WHERE);
-
-				query.append(_FINDER_COLUMN_PRODUCTENTRYID_PRODUCTENTRYID_2);
-
-				query.append(SCProductScreenshotModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(productEntryId);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<SCProductScreenshot>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_PRODUCTENTRYID,
-					finderArgs, list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByProductEntryId(productEntryId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
 	}
 
 	public List<SCProductScreenshot> findByProductEntryId(long productEntryId,
@@ -517,7 +468,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 				String.valueOf(orderByComparator)
 			};
 
-		List<SCProductScreenshot> list = (List<SCProductScreenshot>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_PRODUCTENTRYID,
+		List<SCProductScreenshot> list = (List<SCProductScreenshot>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_PRODUCTENTRYID,
 				finderArgs, this);
 
 		if (list == null) {
@@ -570,7 +521,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_PRODUCTENTRYID,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_PRODUCTENTRYID,
 					finderArgs, list);
 
 				closeSession(session);

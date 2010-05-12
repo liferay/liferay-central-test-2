@@ -70,10 +70,6 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 	public static final FinderPath FINDER_PATH_FIND_BY_ENTRYID = new FinderPath(AnnouncementsFlagModelImpl.ENTITY_CACHE_ENABLED,
 			AnnouncementsFlagModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "findByEntryId",
-			new String[] { Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_ENTRYID = new FinderPath(AnnouncementsFlagModelImpl.ENTITY_CACHE_ENABLED,
-			AnnouncementsFlagModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "findByEntryId",
 			new String[] {
 				Long.class.getName(),
 				
@@ -391,53 +387,7 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 
 	public List<AnnouncementsFlag> findByEntryId(long entryId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(entryId) };
-
-		List<AnnouncementsFlag> list = (List<AnnouncementsFlag>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_ENTRYID,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_SELECT_ANNOUNCEMENTSFLAG_WHERE);
-
-				query.append(_FINDER_COLUMN_ENTRYID_ENTRYID_2);
-
-				query.append(AnnouncementsFlagModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(entryId);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<AnnouncementsFlag>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_ENTRYID,
-					finderArgs, list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByEntryId(entryId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	public List<AnnouncementsFlag> findByEntryId(long entryId, int start,
@@ -454,7 +404,7 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 				String.valueOf(orderByComparator)
 			};
 
-		List<AnnouncementsFlag> list = (List<AnnouncementsFlag>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_ENTRYID,
+		List<AnnouncementsFlag> list = (List<AnnouncementsFlag>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_ENTRYID,
 				finderArgs, this);
 
 		if (list == null) {
@@ -507,7 +457,7 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_ENTRYID,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_ENTRYID,
 					finderArgs, list);
 
 				closeSession(session);

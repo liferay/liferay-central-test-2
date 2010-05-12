@@ -66,9 +66,6 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 		".List";
 	public static final FinderPath FINDER_PATH_FIND_BY_COMPANYID = new FinderPath(ResourceCodeModelImpl.ENTITY_CACHE_ENABLED,
 			ResourceCodeModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByCompanyId", new String[] { Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_COMPANYID = new FinderPath(ResourceCodeModelImpl.ENTITY_CACHE_ENABLED,
-			ResourceCodeModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByCompanyId",
 			new String[] {
 				Long.class.getName(),
@@ -80,9 +77,6 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 			ResourceCodeModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countByCompanyId", new String[] { Long.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_BY_NAME = new FinderPath(ResourceCodeModelImpl.ENTITY_CACHE_ENABLED,
-			ResourceCodeModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByName", new String[] { String.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_NAME = new FinderPath(ResourceCodeModelImpl.ENTITY_CACHE_ENABLED,
 			ResourceCodeModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByName",
 			new String[] {
@@ -400,51 +394,8 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 
 	public List<ResourceCode> findByCompanyId(long companyId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(companyId) };
-
-		List<ResourceCode> list = (List<ResourceCode>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_COMPANYID,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(2);
-
-				query.append(_SQL_SELECT_RESOURCECODE_WHERE);
-
-				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(companyId);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<ResourceCode>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_COMPANYID,
-					finderArgs, list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByCompanyId(companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+			null);
 	}
 
 	public List<ResourceCode> findByCompanyId(long companyId, int start, int end)
@@ -461,7 +412,7 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 				String.valueOf(orderByComparator)
 			};
 
-		List<ResourceCode> list = (List<ResourceCode>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
+		List<ResourceCode> list = (List<ResourceCode>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_COMPANYID,
 				finderArgs, this);
 
 		if (list == null) {
@@ -510,7 +461,7 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_COMPANYID,
 					finderArgs, list);
 
 				closeSession(session);
@@ -698,63 +649,7 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 	}
 
 	public List<ResourceCode> findByName(String name) throws SystemException {
-		Object[] finderArgs = new Object[] { name };
-
-		List<ResourceCode> list = (List<ResourceCode>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_NAME,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(2);
-
-				query.append(_SQL_SELECT_RESOURCECODE_WHERE);
-
-				if (name == null) {
-					query.append(_FINDER_COLUMN_NAME_NAME_1);
-				}
-				else {
-					if (name.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_NAME_NAME_3);
-					}
-					else {
-						query.append(_FINDER_COLUMN_NAME_NAME_2);
-					}
-				}
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				if (name != null) {
-					qPos.add(name);
-				}
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<ResourceCode>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_NAME, finderArgs,
-					list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByName(name, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	public List<ResourceCode> findByName(String name, int start, int end)
@@ -771,7 +666,7 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 				String.valueOf(orderByComparator)
 			};
 
-		List<ResourceCode> list = (List<ResourceCode>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_NAME,
+		List<ResourceCode> list = (List<ResourceCode>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_NAME,
 				finderArgs, this);
 
 		if (list == null) {
@@ -832,8 +727,8 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_NAME,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_NAME, finderArgs,
+					list);
 
 				closeSession(session);
 			}

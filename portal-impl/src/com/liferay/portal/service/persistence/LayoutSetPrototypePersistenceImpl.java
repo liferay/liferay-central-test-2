@@ -66,10 +66,6 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl<Layou
 	public static final FinderPath FINDER_PATH_FIND_BY_COMPANYID = new FinderPath(LayoutSetPrototypeModelImpl.ENTITY_CACHE_ENABLED,
 			LayoutSetPrototypeModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "findByCompanyId",
-			new String[] { Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_COMPANYID = new FinderPath(LayoutSetPrototypeModelImpl.ENTITY_CACHE_ENABLED,
-			LayoutSetPrototypeModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "findByCompanyId",
 			new String[] {
 				Long.class.getName(),
 				
@@ -81,10 +77,6 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl<Layou
 			FINDER_CLASS_NAME_LIST, "countByCompanyId",
 			new String[] { Long.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_BY_C_A = new FinderPath(LayoutSetPrototypeModelImpl.ENTITY_CACHE_ENABLED,
-			LayoutSetPrototypeModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "findByC_A",
-			new String[] { Long.class.getName(), Boolean.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_C_A = new FinderPath(LayoutSetPrototypeModelImpl.ENTITY_CACHE_ENABLED,
 			LayoutSetPrototypeModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "findByC_A",
 			new String[] {
@@ -342,51 +334,8 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl<Layou
 
 	public List<LayoutSetPrototype> findByCompanyId(long companyId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(companyId) };
-
-		List<LayoutSetPrototype> list = (List<LayoutSetPrototype>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_COMPANYID,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(2);
-
-				query.append(_SQL_SELECT_LAYOUTSETPROTOTYPE_WHERE);
-
-				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(companyId);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<LayoutSetPrototype>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_COMPANYID,
-					finderArgs, list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByCompanyId(companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+			null);
 	}
 
 	public List<LayoutSetPrototype> findByCompanyId(long companyId, int start,
@@ -403,7 +352,7 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl<Layou
 				String.valueOf(orderByComparator)
 			};
 
-		List<LayoutSetPrototype> list = (List<LayoutSetPrototype>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
+		List<LayoutSetPrototype> list = (List<LayoutSetPrototype>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_COMPANYID,
 				finderArgs, this);
 
 		if (list == null) {
@@ -452,7 +401,7 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl<Layou
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_COMPANYID,
 					finderArgs, list);
 
 				closeSession(session);
@@ -642,57 +591,8 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl<Layou
 
 	public List<LayoutSetPrototype> findByC_A(long companyId, boolean active)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(companyId), Boolean.valueOf(active)
-			};
-
-		List<LayoutSetPrototype> list = (List<LayoutSetPrototype>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_C_A,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_SELECT_LAYOUTSETPROTOTYPE_WHERE);
-
-				query.append(_FINDER_COLUMN_C_A_COMPANYID_2);
-
-				query.append(_FINDER_COLUMN_C_A_ACTIVE_2);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(companyId);
-
-				qPos.add(active);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<LayoutSetPrototype>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_A, finderArgs,
-					list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByC_A(companyId, active, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
 	}
 
 	public List<LayoutSetPrototype> findByC_A(long companyId, boolean active,
@@ -710,7 +610,7 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl<Layou
 				String.valueOf(orderByComparator)
 			};
 
-		List<LayoutSetPrototype> list = (List<LayoutSetPrototype>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_C_A,
+		List<LayoutSetPrototype> list = (List<LayoutSetPrototype>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_C_A,
 				finderArgs, this);
 
 		if (list == null) {
@@ -763,8 +663,8 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl<Layou
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_C_A,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_A, finderArgs,
+					list);
 
 				closeSession(session);
 			}

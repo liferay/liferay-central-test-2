@@ -67,10 +67,6 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	public static final FinderPath FINDER_PATH_FIND_BY_ROLEID = new FinderPath(ResourcePermissionModelImpl.ENTITY_CACHE_ENABLED,
 			ResourcePermissionModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "findByRoleId",
-			new String[] { Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_ROLEID = new FinderPath(ResourcePermissionModelImpl.ENTITY_CACHE_ENABLED,
-			ResourcePermissionModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "findByRoleId",
 			new String[] {
 				Long.class.getName(),
 				
@@ -82,10 +78,6 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 			FINDER_CLASS_NAME_LIST, "countByRoleId",
 			new String[] { Long.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_BY_R_S = new FinderPath(ResourcePermissionModelImpl.ENTITY_CACHE_ENABLED,
-			ResourcePermissionModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "findByR_S",
-			new String[] { Long.class.getName(), Integer.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_R_S = new FinderPath(ResourcePermissionModelImpl.ENTITY_CACHE_ENABLED,
 			ResourcePermissionModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "findByR_S",
 			new String[] {
@@ -103,13 +95,6 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 			FINDER_CLASS_NAME_LIST, "findByC_N_S",
 			new String[] {
 				Long.class.getName(), String.class.getName(),
-				Integer.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_C_N_S = new FinderPath(ResourcePermissionModelImpl.ENTITY_CACHE_ENABLED,
-			ResourcePermissionModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "findByC_N_S",
-			new String[] {
-				Long.class.getName(), String.class.getName(),
 				Integer.class.getName(),
 				
 			"java.lang.Integer", "java.lang.Integer",
@@ -123,13 +108,6 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 				Integer.class.getName()
 			});
 	public static final FinderPath FINDER_PATH_FIND_BY_C_N_S_P = new FinderPath(ResourcePermissionModelImpl.ENTITY_CACHE_ENABLED,
-			ResourcePermissionModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "findByC_N_S_P",
-			new String[] {
-				Long.class.getName(), String.class.getName(),
-				Integer.class.getName(), String.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_C_N_S_P = new FinderPath(ResourcePermissionModelImpl.ENTITY_CACHE_ENABLED,
 			ResourcePermissionModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "findByC_N_S_P",
 			new String[] {
@@ -487,51 +465,7 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 
 	public List<ResourcePermission> findByRoleId(long roleId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(roleId) };
-
-		List<ResourcePermission> list = (List<ResourcePermission>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_ROLEID,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(2);
-
-				query.append(_SQL_SELECT_RESOURCEPERMISSION_WHERE);
-
-				query.append(_FINDER_COLUMN_ROLEID_ROLEID_2);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(roleId);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<ResourcePermission>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_ROLEID,
-					finderArgs, list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByRoleId(roleId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	public List<ResourcePermission> findByRoleId(long roleId, int start, int end)
@@ -548,7 +482,7 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 				String.valueOf(orderByComparator)
 			};
 
-		List<ResourcePermission> list = (List<ResourcePermission>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_ROLEID,
+		List<ResourcePermission> list = (List<ResourcePermission>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_ROLEID,
 				finderArgs, this);
 
 		if (list == null) {
@@ -597,7 +531,7 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_ROLEID,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_ROLEID,
 					finderArgs, list);
 
 				closeSession(session);
@@ -787,55 +721,8 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 
 	public List<ResourcePermission> findByR_S(long roleId, int scope)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(roleId), new Integer(scope) };
-
-		List<ResourcePermission> list = (List<ResourcePermission>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_R_S,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_SELECT_RESOURCEPERMISSION_WHERE);
-
-				query.append(_FINDER_COLUMN_R_S_ROLEID_2);
-
-				query.append(_FINDER_COLUMN_R_S_SCOPE_2);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(roleId);
-
-				qPos.add(scope);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<ResourcePermission>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_R_S, finderArgs,
-					list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByR_S(roleId, scope, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+			null);
 	}
 
 	public List<ResourcePermission> findByR_S(long roleId, int scope,
@@ -853,7 +740,7 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 				String.valueOf(orderByComparator)
 			};
 
-		List<ResourcePermission> list = (List<ResourcePermission>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_R_S,
+		List<ResourcePermission> list = (List<ResourcePermission>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_R_S,
 				finderArgs, this);
 
 		if (list == null) {
@@ -906,8 +793,8 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_R_S,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_R_S, finderArgs,
+					list);
 
 				closeSession(session);
 			}
@@ -1106,75 +993,8 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 
 	public List<ResourcePermission> findByC_N_S(long companyId, String name,
 		int scope) throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(companyId),
-				
-				name, new Integer(scope)
-			};
-
-		List<ResourcePermission> list = (List<ResourcePermission>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_C_N_S,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(4);
-
-				query.append(_SQL_SELECT_RESOURCEPERMISSION_WHERE);
-
-				query.append(_FINDER_COLUMN_C_N_S_COMPANYID_2);
-
-				if (name == null) {
-					query.append(_FINDER_COLUMN_C_N_S_NAME_1);
-				}
-				else {
-					if (name.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_C_N_S_NAME_3);
-					}
-					else {
-						query.append(_FINDER_COLUMN_C_N_S_NAME_2);
-					}
-				}
-
-				query.append(_FINDER_COLUMN_C_N_S_SCOPE_2);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(companyId);
-
-				if (name != null) {
-					qPos.add(name);
-				}
-
-				qPos.add(scope);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<ResourcePermission>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_N_S,
-					finderArgs, list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByC_N_S(companyId, name, scope, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
 	}
 
 	public List<ResourcePermission> findByC_N_S(long companyId, String name,
@@ -1194,7 +1014,7 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 				String.valueOf(orderByComparator)
 			};
 
-		List<ResourcePermission> list = (List<ResourcePermission>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_C_N_S,
+		List<ResourcePermission> list = (List<ResourcePermission>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_C_N_S,
 				finderArgs, this);
 
 		if (list == null) {
@@ -1263,7 +1083,7 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_C_N_S,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_N_S,
 					finderArgs, list);
 
 				closeSession(session);
@@ -1485,93 +1305,8 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 
 	public List<ResourcePermission> findByC_N_S_P(long companyId, String name,
 		int scope, String primKey) throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(companyId),
-				
-				name, new Integer(scope),
-				
-				primKey
-			};
-
-		List<ResourcePermission> list = (List<ResourcePermission>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_C_N_S_P,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(5);
-
-				query.append(_SQL_SELECT_RESOURCEPERMISSION_WHERE);
-
-				query.append(_FINDER_COLUMN_C_N_S_P_COMPANYID_2);
-
-				if (name == null) {
-					query.append(_FINDER_COLUMN_C_N_S_P_NAME_1);
-				}
-				else {
-					if (name.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_C_N_S_P_NAME_3);
-					}
-					else {
-						query.append(_FINDER_COLUMN_C_N_S_P_NAME_2);
-					}
-				}
-
-				query.append(_FINDER_COLUMN_C_N_S_P_SCOPE_2);
-
-				if (primKey == null) {
-					query.append(_FINDER_COLUMN_C_N_S_P_PRIMKEY_1);
-				}
-				else {
-					if (primKey.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_C_N_S_P_PRIMKEY_3);
-					}
-					else {
-						query.append(_FINDER_COLUMN_C_N_S_P_PRIMKEY_2);
-					}
-				}
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(companyId);
-
-				if (name != null) {
-					qPos.add(name);
-				}
-
-				qPos.add(scope);
-
-				if (primKey != null) {
-					qPos.add(primKey);
-				}
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<ResourcePermission>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_N_S_P,
-					finderArgs, list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByC_N_S_P(companyId, name, scope, primKey,
+			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	public List<ResourcePermission> findByC_N_S_P(long companyId, String name,
@@ -1594,7 +1329,7 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 				String.valueOf(orderByComparator)
 			};
 
-		List<ResourcePermission> list = (List<ResourcePermission>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_C_N_S_P,
+		List<ResourcePermission> list = (List<ResourcePermission>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_C_N_S_P,
 				finderArgs, this);
 
 		if (list == null) {
@@ -1679,7 +1414,7 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_C_N_S_P,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_N_S_P,
 					finderArgs, list);
 
 				closeSession(session);

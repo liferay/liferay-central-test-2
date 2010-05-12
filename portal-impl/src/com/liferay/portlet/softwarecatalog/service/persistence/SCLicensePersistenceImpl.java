@@ -80,9 +80,6 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 		".List";
 	public static final FinderPath FINDER_PATH_FIND_BY_ACTIVE = new FinderPath(SCLicenseModelImpl.ENTITY_CACHE_ENABLED,
 			SCLicenseModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByActive", new String[] { Boolean.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_ACTIVE = new FinderPath(SCLicenseModelImpl.ENTITY_CACHE_ENABLED,
-			SCLicenseModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByActive",
 			new String[] {
 				Boolean.class.getName(),
@@ -94,10 +91,6 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 			SCLicenseModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countByActive", new String[] { Boolean.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_BY_A_R = new FinderPath(SCLicenseModelImpl.ENTITY_CACHE_ENABLED,
-			SCLicenseModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByA_R",
-			new String[] { Boolean.class.getName(), Boolean.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_A_R = new FinderPath(SCLicenseModelImpl.ENTITY_CACHE_ENABLED,
 			SCLicenseModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByA_R",
 			new String[] {
@@ -357,53 +350,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 
 	public List<SCLicense> findByActive(boolean active)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { Boolean.valueOf(active) };
-
-		List<SCLicense> list = (List<SCLicense>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_ACTIVE,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_SELECT_SCLICENSE_WHERE);
-
-				query.append(_FINDER_COLUMN_ACTIVE_ACTIVE_2);
-
-				query.append(SCLicenseModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(active);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<SCLicense>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_ACTIVE,
-					finderArgs, list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByActive(active, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	public List<SCLicense> findByActive(boolean active, int start, int end)
@@ -420,7 +367,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 				String.valueOf(orderByComparator)
 			};
 
-		List<SCLicense> list = (List<SCLicense>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_ACTIVE,
+		List<SCLicense> list = (List<SCLicense>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_ACTIVE,
 				finderArgs, this);
 
 		if (list == null) {
@@ -473,7 +420,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_ACTIVE,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_ACTIVE,
 					finderArgs, list);
 
 				closeSession(session);
@@ -665,59 +612,8 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 
 	public List<SCLicense> findByA_R(boolean active, boolean recommended)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				Boolean.valueOf(active), Boolean.valueOf(recommended)
-			};
-
-		List<SCLicense> list = (List<SCLicense>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_A_R,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(4);
-
-				query.append(_SQL_SELECT_SCLICENSE_WHERE);
-
-				query.append(_FINDER_COLUMN_A_R_ACTIVE_2);
-
-				query.append(_FINDER_COLUMN_A_R_RECOMMENDED_2);
-
-				query.append(SCLicenseModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(active);
-
-				qPos.add(recommended);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<SCLicense>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_A_R, finderArgs,
-					list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByA_R(active, recommended, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
 	}
 
 	public List<SCLicense> findByA_R(boolean active, boolean recommended,
@@ -735,7 +631,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 				String.valueOf(orderByComparator)
 			};
 
-		List<SCLicense> list = (List<SCLicense>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_A_R,
+		List<SCLicense> list = (List<SCLicense>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_A_R,
 				finderArgs, this);
 
 		if (list == null) {
@@ -792,8 +688,8 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_A_R,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_A_R, finderArgs,
+					list);
 
 				closeSession(session);
 			}

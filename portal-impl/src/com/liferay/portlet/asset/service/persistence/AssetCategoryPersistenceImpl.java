@@ -83,10 +83,6 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 	public static final FinderPath FINDER_PATH_FIND_BY_UUID = new FinderPath(AssetCategoryModelImpl.ENTITY_CACHE_ENABLED,
 			AssetCategoryModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "findByUuid",
-			new String[] { String.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_UUID = new FinderPath(AssetCategoryModelImpl.ENTITY_CACHE_ENABLED,
-			AssetCategoryModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "findByUuid",
 			new String[] {
 				String.class.getName(),
 				
@@ -108,10 +104,6 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 	public static final FinderPath FINDER_PATH_FIND_BY_PARENTCATEGORYID = new FinderPath(AssetCategoryModelImpl.ENTITY_CACHE_ENABLED,
 			AssetCategoryModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "findByParentCategoryId",
-			new String[] { Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_PARENTCATEGORYID = new FinderPath(AssetCategoryModelImpl.ENTITY_CACHE_ENABLED,
-			AssetCategoryModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "findByParentCategoryId",
 			new String[] {
 				Long.class.getName(),
 				
@@ -123,10 +115,6 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 			FINDER_CLASS_NAME_LIST, "countByParentCategoryId",
 			new String[] { Long.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_BY_VOCABULARYID = new FinderPath(AssetCategoryModelImpl.ENTITY_CACHE_ENABLED,
-			AssetCategoryModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "findByVocabularyId",
-			new String[] { Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_VOCABULARYID = new FinderPath(AssetCategoryModelImpl.ENTITY_CACHE_ENABLED,
 			AssetCategoryModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "findByVocabularyId",
 			new String[] {
@@ -142,10 +130,6 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 	public static final FinderPath FINDER_PATH_FIND_BY_P_N = new FinderPath(AssetCategoryModelImpl.ENTITY_CACHE_ENABLED,
 			AssetCategoryModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "findByP_N",
-			new String[] { Long.class.getName(), String.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_P_N = new FinderPath(AssetCategoryModelImpl.ENTITY_CACHE_ENABLED,
-			AssetCategoryModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "findByP_N",
 			new String[] {
 				Long.class.getName(), String.class.getName(),
 				
@@ -159,10 +143,6 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 	public static final FinderPath FINDER_PATH_FIND_BY_P_V = new FinderPath(AssetCategoryModelImpl.ENTITY_CACHE_ENABLED,
 			AssetCategoryModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "findByP_V",
-			new String[] { Long.class.getName(), Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_P_V = new FinderPath(AssetCategoryModelImpl.ENTITY_CACHE_ENABLED,
-			AssetCategoryModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "findByP_V",
 			new String[] {
 				Long.class.getName(), Long.class.getName(),
 				
@@ -174,10 +154,6 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 			FINDER_CLASS_NAME_LIST, "countByP_V",
 			new String[] { Long.class.getName(), Long.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_BY_N_V = new FinderPath(AssetCategoryModelImpl.ENTITY_CACHE_ENABLED,
-			AssetCategoryModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "findByN_V",
-			new String[] { String.class.getName(), Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_N_V = new FinderPath(AssetCategoryModelImpl.ENTITY_CACHE_ENABLED,
 			AssetCategoryModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "findByN_V",
 			new String[] {
@@ -515,65 +491,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 
 	public List<AssetCategory> findByUuid(String uuid)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { uuid };
-
-		List<AssetCategory> list = (List<AssetCategory>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_UUID,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_SELECT_ASSETCATEGORY_WHERE);
-
-				if (uuid == null) {
-					query.append(_FINDER_COLUMN_UUID_UUID_1);
-				}
-				else {
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_UUID_UUID_3);
-					}
-					else {
-						query.append(_FINDER_COLUMN_UUID_UUID_2);
-					}
-				}
-
-				query.append(AssetCategoryModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				if (uuid != null) {
-					qPos.add(uuid);
-				}
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<AssetCategory>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_UUID, finderArgs,
-					list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByUuid(uuid, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	public List<AssetCategory> findByUuid(String uuid, int start, int end)
@@ -590,7 +508,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 				String.valueOf(orderByComparator)
 			};
 
-		List<AssetCategory> list = (List<AssetCategory>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_UUID,
+		List<AssetCategory> list = (List<AssetCategory>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_UUID,
 				finderArgs, this);
 
 		if (list == null) {
@@ -655,8 +573,8 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_UUID,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_UUID, finderArgs,
+					list);
 
 				closeSession(session);
 			}
@@ -987,53 +905,8 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 
 	public List<AssetCategory> findByParentCategoryId(long parentCategoryId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(parentCategoryId) };
-
-		List<AssetCategory> list = (List<AssetCategory>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_PARENTCATEGORYID,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_SELECT_ASSETCATEGORY_WHERE);
-
-				query.append(_FINDER_COLUMN_PARENTCATEGORYID_PARENTCATEGORYID_2);
-
-				query.append(AssetCategoryModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(parentCategoryId);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<AssetCategory>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_PARENTCATEGORYID,
-					finderArgs, list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByParentCategoryId(parentCategoryId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
 	}
 
 	public List<AssetCategory> findByParentCategoryId(long parentCategoryId,
@@ -1051,7 +924,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 				String.valueOf(orderByComparator)
 			};
 
-		List<AssetCategory> list = (List<AssetCategory>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_PARENTCATEGORYID,
+		List<AssetCategory> list = (List<AssetCategory>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_PARENTCATEGORYID,
 				finderArgs, this);
 
 		if (list == null) {
@@ -1104,7 +977,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_PARENTCATEGORYID,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_PARENTCATEGORYID,
 					finderArgs, list);
 
 				closeSession(session);
@@ -1297,53 +1170,8 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 
 	public List<AssetCategory> findByVocabularyId(long vocabularyId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(vocabularyId) };
-
-		List<AssetCategory> list = (List<AssetCategory>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_VOCABULARYID,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_SELECT_ASSETCATEGORY_WHERE);
-
-				query.append(_FINDER_COLUMN_VOCABULARYID_VOCABULARYID_2);
-
-				query.append(AssetCategoryModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(vocabularyId);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<AssetCategory>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_VOCABULARYID,
-					finderArgs, list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByVocabularyId(vocabularyId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
 	}
 
 	public List<AssetCategory> findByVocabularyId(long vocabularyId, int start,
@@ -1360,7 +1188,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 				String.valueOf(orderByComparator)
 			};
 
-		List<AssetCategory> list = (List<AssetCategory>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_VOCABULARYID,
+		List<AssetCategory> list = (List<AssetCategory>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_VOCABULARYID,
 				finderArgs, this);
 
 		if (list == null) {
@@ -1413,7 +1241,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_VOCABULARYID,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_VOCABULARYID,
 					finderArgs, list);
 
 				closeSession(session);
@@ -1606,69 +1434,8 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 
 	public List<AssetCategory> findByP_N(long parentCategoryId, String name)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(parentCategoryId), name };
-
-		List<AssetCategory> list = (List<AssetCategory>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_P_N,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(4);
-
-				query.append(_SQL_SELECT_ASSETCATEGORY_WHERE);
-
-				query.append(_FINDER_COLUMN_P_N_PARENTCATEGORYID_2);
-
-				if (name == null) {
-					query.append(_FINDER_COLUMN_P_N_NAME_1);
-				}
-				else {
-					if (name.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_P_N_NAME_3);
-					}
-					else {
-						query.append(_FINDER_COLUMN_P_N_NAME_2);
-					}
-				}
-
-				query.append(AssetCategoryModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(parentCategoryId);
-
-				if (name != null) {
-					qPos.add(name);
-				}
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<AssetCategory>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_P_N, finderArgs,
-					list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByP_N(parentCategoryId, name, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
 	}
 
 	public List<AssetCategory> findByP_N(long parentCategoryId, String name,
@@ -1688,7 +1455,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 				String.valueOf(orderByComparator)
 			};
 
-		List<AssetCategory> list = (List<AssetCategory>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_P_N,
+		List<AssetCategory> list = (List<AssetCategory>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_P_N,
 				finderArgs, this);
 
 		if (list == null) {
@@ -1757,8 +1524,8 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_P_N,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_P_N, finderArgs,
+					list);
 
 				closeSession(session);
 			}
@@ -1972,59 +1739,8 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 
 	public List<AssetCategory> findByP_V(long parentCategoryId,
 		long vocabularyId) throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(parentCategoryId), new Long(vocabularyId)
-			};
-
-		List<AssetCategory> list = (List<AssetCategory>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_P_V,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(4);
-
-				query.append(_SQL_SELECT_ASSETCATEGORY_WHERE);
-
-				query.append(_FINDER_COLUMN_P_V_PARENTCATEGORYID_2);
-
-				query.append(_FINDER_COLUMN_P_V_VOCABULARYID_2);
-
-				query.append(AssetCategoryModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(parentCategoryId);
-
-				qPos.add(vocabularyId);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<AssetCategory>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_P_V, finderArgs,
-					list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByP_V(parentCategoryId, vocabularyId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
 	}
 
 	public List<AssetCategory> findByP_V(long parentCategoryId,
@@ -2042,7 +1758,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 				String.valueOf(orderByComparator)
 			};
 
-		List<AssetCategory> list = (List<AssetCategory>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_P_V,
+		List<AssetCategory> list = (List<AssetCategory>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_P_V,
 				finderArgs, this);
 
 		if (list == null) {
@@ -2099,8 +1815,8 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_P_V,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_P_V, finderArgs,
+					list);
 
 				closeSession(session);
 			}
@@ -2303,69 +2019,8 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 
 	public List<AssetCategory> findByN_V(String name, long vocabularyId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { name, new Long(vocabularyId) };
-
-		List<AssetCategory> list = (List<AssetCategory>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_N_V,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(4);
-
-				query.append(_SQL_SELECT_ASSETCATEGORY_WHERE);
-
-				if (name == null) {
-					query.append(_FINDER_COLUMN_N_V_NAME_1);
-				}
-				else {
-					if (name.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_N_V_NAME_3);
-					}
-					else {
-						query.append(_FINDER_COLUMN_N_V_NAME_2);
-					}
-				}
-
-				query.append(_FINDER_COLUMN_N_V_VOCABULARYID_2);
-
-				query.append(AssetCategoryModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				if (name != null) {
-					qPos.add(name);
-				}
-
-				qPos.add(vocabularyId);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<AssetCategory>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_N_V, finderArgs,
-					list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByN_V(name, vocabularyId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
 	}
 
 	public List<AssetCategory> findByN_V(String name, long vocabularyId,
@@ -2383,7 +2038,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 				String.valueOf(orderByComparator)
 			};
 
-		List<AssetCategory> list = (List<AssetCategory>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_N_V,
+		List<AssetCategory> list = (List<AssetCategory>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_N_V,
 				finderArgs, this);
 
 		if (list == null) {
@@ -2452,8 +2107,8 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_N_V,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_N_V, finderArgs,
+					list);
 
 				closeSession(session);
 			}

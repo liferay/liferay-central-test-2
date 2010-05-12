@@ -67,10 +67,6 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 	public static final FinderPath FINDER_PATH_FIND_BY_NAME = new FinderPath(ResourceActionModelImpl.ENTITY_CACHE_ENABLED,
 			ResourceActionModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "findByName",
-			new String[] { String.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_NAME = new FinderPath(ResourceActionModelImpl.ENTITY_CACHE_ENABLED,
-			ResourceActionModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "findByName",
 			new String[] {
 				String.class.getName(),
 				
@@ -375,65 +371,7 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 
 	public List<ResourceAction> findByName(String name)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { name };
-
-		List<ResourceAction> list = (List<ResourceAction>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_NAME,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_SELECT_RESOURCEACTION_WHERE);
-
-				if (name == null) {
-					query.append(_FINDER_COLUMN_NAME_NAME_1);
-				}
-				else {
-					if (name.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_NAME_NAME_3);
-					}
-					else {
-						query.append(_FINDER_COLUMN_NAME_NAME_2);
-					}
-				}
-
-				query.append(ResourceActionModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				if (name != null) {
-					qPos.add(name);
-				}
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<ResourceAction>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_NAME, finderArgs,
-					list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByName(name, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	public List<ResourceAction> findByName(String name, int start, int end)
@@ -450,7 +388,7 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 				String.valueOf(orderByComparator)
 			};
 
-		List<ResourceAction> list = (List<ResourceAction>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_NAME,
+		List<ResourceAction> list = (List<ResourceAction>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_NAME,
 				finderArgs, this);
 
 		if (list == null) {
@@ -515,8 +453,8 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_NAME,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_NAME, finderArgs,
+					list);
 
 				closeSession(session);
 			}

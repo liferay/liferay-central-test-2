@@ -70,9 +70,6 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 		".List";
 	public static final FinderPath FINDER_PATH_FIND_BY_USERID = new FinderPath(TasksReviewModelImpl.ENTITY_CACHE_ENABLED,
 			TasksReviewModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByUserId", new String[] { Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_USERID = new FinderPath(TasksReviewModelImpl.ENTITY_CACHE_ENABLED,
-			TasksReviewModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByUserId",
 			new String[] {
 				Long.class.getName(),
@@ -84,9 +81,6 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 			TasksReviewModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countByUserId", new String[] { Long.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_BY_PROPOSALID = new FinderPath(TasksReviewModelImpl.ENTITY_CACHE_ENABLED,
-			TasksReviewModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByProposalId", new String[] { Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_PROPOSALID = new FinderPath(TasksReviewModelImpl.ENTITY_CACHE_ENABLED,
 			TasksReviewModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByProposalId",
 			new String[] {
@@ -109,10 +103,6 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 	public static final FinderPath FINDER_PATH_FIND_BY_P_S = new FinderPath(TasksReviewModelImpl.ENTITY_CACHE_ENABLED,
 			TasksReviewModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByP_S",
-			new String[] { Long.class.getName(), Integer.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_P_S = new FinderPath(TasksReviewModelImpl.ENTITY_CACHE_ENABLED,
-			TasksReviewModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByP_S",
 			new String[] {
 				Long.class.getName(), Integer.class.getName(),
 				
@@ -124,13 +114,6 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 			"countByP_S",
 			new String[] { Long.class.getName(), Integer.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_BY_P_S_C = new FinderPath(TasksReviewModelImpl.ENTITY_CACHE_ENABLED,
-			TasksReviewModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByP_S_C",
-			new String[] {
-				Long.class.getName(), Integer.class.getName(),
-				Boolean.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_P_S_C = new FinderPath(TasksReviewModelImpl.ENTITY_CACHE_ENABLED,
 			TasksReviewModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByP_S_C",
 			new String[] {
@@ -148,13 +131,6 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 				Boolean.class.getName()
 			});
 	public static final FinderPath FINDER_PATH_FIND_BY_P_S_C_R = new FinderPath(TasksReviewModelImpl.ENTITY_CACHE_ENABLED,
-			TasksReviewModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByP_S_C_R",
-			new String[] {
-				Long.class.getName(), Integer.class.getName(),
-				Boolean.class.getName(), Boolean.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_P_S_C_R = new FinderPath(TasksReviewModelImpl.ENTITY_CACHE_ENABLED,
 			TasksReviewModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByP_S_C_R",
 			new String[] {
@@ -460,53 +436,7 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 
 	public List<TasksReview> findByUserId(long userId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(userId) };
-
-		List<TasksReview> list = (List<TasksReview>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_USERID,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_SELECT_TASKSREVIEW_WHERE);
-
-				query.append(_FINDER_COLUMN_USERID_USERID_2);
-
-				query.append(TasksReviewModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(userId);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<TasksReview>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_USERID,
-					finderArgs, list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByUserId(userId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	public List<TasksReview> findByUserId(long userId, int start, int end)
@@ -523,7 +453,7 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 				String.valueOf(orderByComparator)
 			};
 
-		List<TasksReview> list = (List<TasksReview>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_USERID,
+		List<TasksReview> list = (List<TasksReview>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_USERID,
 				finderArgs, this);
 
 		if (list == null) {
@@ -576,7 +506,7 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_USERID,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_USERID,
 					finderArgs, list);
 
 				closeSession(session);
@@ -768,53 +698,8 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 
 	public List<TasksReview> findByProposalId(long proposalId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(proposalId) };
-
-		List<TasksReview> list = (List<TasksReview>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_PROPOSALID,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_SELECT_TASKSREVIEW_WHERE);
-
-				query.append(_FINDER_COLUMN_PROPOSALID_PROPOSALID_2);
-
-				query.append(TasksReviewModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(proposalId);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<TasksReview>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_PROPOSALID,
-					finderArgs, list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByProposalId(proposalId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
 	}
 
 	public List<TasksReview> findByProposalId(long proposalId, int start,
@@ -831,7 +716,7 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 				String.valueOf(orderByComparator)
 			};
 
-		List<TasksReview> list = (List<TasksReview>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_PROPOSALID,
+		List<TasksReview> list = (List<TasksReview>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_PROPOSALID,
 				finderArgs, this);
 
 		if (list == null) {
@@ -884,7 +769,7 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_PROPOSALID,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_PROPOSALID,
 					finderArgs, list);
 
 				closeSession(session);
@@ -1194,59 +1079,8 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 
 	public List<TasksReview> findByP_S(long proposalId, int stage)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(proposalId), new Integer(stage)
-			};
-
-		List<TasksReview> list = (List<TasksReview>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_P_S,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(4);
-
-				query.append(_SQL_SELECT_TASKSREVIEW_WHERE);
-
-				query.append(_FINDER_COLUMN_P_S_PROPOSALID_2);
-
-				query.append(_FINDER_COLUMN_P_S_STAGE_2);
-
-				query.append(TasksReviewModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(proposalId);
-
-				qPos.add(stage);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<TasksReview>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_P_S, finderArgs,
-					list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByP_S(proposalId, stage, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
 	}
 
 	public List<TasksReview> findByP_S(long proposalId, int stage, int start,
@@ -1263,7 +1097,7 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 				String.valueOf(orderByComparator)
 			};
 
-		List<TasksReview> list = (List<TasksReview>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_P_S,
+		List<TasksReview> list = (List<TasksReview>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_P_S,
 				finderArgs, this);
 
 		if (list == null) {
@@ -1320,8 +1154,8 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_P_S,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_P_S, finderArgs,
+					list);
 
 				closeSession(session);
 			}
@@ -1523,64 +1357,8 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 
 	public List<TasksReview> findByP_S_C(long proposalId, int stage,
 		boolean completed) throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(proposalId), new Integer(stage),
-				Boolean.valueOf(completed)
-			};
-
-		List<TasksReview> list = (List<TasksReview>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_P_S_C,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(5);
-
-				query.append(_SQL_SELECT_TASKSREVIEW_WHERE);
-
-				query.append(_FINDER_COLUMN_P_S_C_PROPOSALID_2);
-
-				query.append(_FINDER_COLUMN_P_S_C_STAGE_2);
-
-				query.append(_FINDER_COLUMN_P_S_C_COMPLETED_2);
-
-				query.append(TasksReviewModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(proposalId);
-
-				qPos.add(stage);
-
-				qPos.add(completed);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<TasksReview>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_P_S_C,
-					finderArgs, list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByP_S_C(proposalId, stage, completed, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
 	}
 
 	public List<TasksReview> findByP_S_C(long proposalId, int stage,
@@ -1599,7 +1377,7 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 				String.valueOf(orderByComparator)
 			};
 
-		List<TasksReview> list = (List<TasksReview>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_P_S_C,
+		List<TasksReview> list = (List<TasksReview>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_P_S_C,
 				finderArgs, this);
 
 		if (list == null) {
@@ -1660,7 +1438,7 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_P_S_C,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_P_S_C,
 					finderArgs, list);
 
 				closeSession(session);
@@ -1874,68 +1652,8 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 
 	public List<TasksReview> findByP_S_C_R(long proposalId, int stage,
 		boolean completed, boolean rejected) throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(proposalId), new Integer(stage),
-				Boolean.valueOf(completed), Boolean.valueOf(rejected)
-			};
-
-		List<TasksReview> list = (List<TasksReview>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_P_S_C_R,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(6);
-
-				query.append(_SQL_SELECT_TASKSREVIEW_WHERE);
-
-				query.append(_FINDER_COLUMN_P_S_C_R_PROPOSALID_2);
-
-				query.append(_FINDER_COLUMN_P_S_C_R_STAGE_2);
-
-				query.append(_FINDER_COLUMN_P_S_C_R_COMPLETED_2);
-
-				query.append(_FINDER_COLUMN_P_S_C_R_REJECTED_2);
-
-				query.append(TasksReviewModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(proposalId);
-
-				qPos.add(stage);
-
-				qPos.add(completed);
-
-				qPos.add(rejected);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<TasksReview>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_P_S_C_R,
-					finderArgs, list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByP_S_C_R(proposalId, stage, completed, rejected,
+			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	public List<TasksReview> findByP_S_C_R(long proposalId, int stage,
@@ -1956,7 +1674,7 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 				String.valueOf(orderByComparator)
 			};
 
-		List<TasksReview> list = (List<TasksReview>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_P_S_C_R,
+		List<TasksReview> list = (List<TasksReview>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_P_S_C_R,
 				finderArgs, this);
 
 		if (list == null) {
@@ -2021,7 +1739,7 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_P_S_C_R,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_P_S_C_R,
 					finderArgs, list);
 
 				closeSession(session);

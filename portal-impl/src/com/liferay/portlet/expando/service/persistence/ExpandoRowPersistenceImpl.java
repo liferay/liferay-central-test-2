@@ -69,9 +69,6 @@ public class ExpandoRowPersistenceImpl extends BasePersistenceImpl<ExpandoRow>
 		".List";
 	public static final FinderPath FINDER_PATH_FIND_BY_TABLEID = new FinderPath(ExpandoRowModelImpl.ENTITY_CACHE_ENABLED,
 			ExpandoRowModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByTableId", new String[] { Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_TABLEID = new FinderPath(ExpandoRowModelImpl.ENTITY_CACHE_ENABLED,
-			ExpandoRowModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByTableId",
 			new String[] {
 				Long.class.getName(),
@@ -368,51 +365,7 @@ public class ExpandoRowPersistenceImpl extends BasePersistenceImpl<ExpandoRow>
 
 	public List<ExpandoRow> findByTableId(long tableId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(tableId) };
-
-		List<ExpandoRow> list = (List<ExpandoRow>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_TABLEID,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(2);
-
-				query.append(_SQL_SELECT_EXPANDOROW_WHERE);
-
-				query.append(_FINDER_COLUMN_TABLEID_TABLEID_2);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(tableId);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<ExpandoRow>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_TABLEID,
-					finderArgs, list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByTableId(tableId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	public List<ExpandoRow> findByTableId(long tableId, int start, int end)
@@ -429,7 +382,7 @@ public class ExpandoRowPersistenceImpl extends BasePersistenceImpl<ExpandoRow>
 				String.valueOf(orderByComparator)
 			};
 
-		List<ExpandoRow> list = (List<ExpandoRow>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_TABLEID,
+		List<ExpandoRow> list = (List<ExpandoRow>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_TABLEID,
 				finderArgs, this);
 
 		if (list == null) {
@@ -478,7 +431,7 @@ public class ExpandoRowPersistenceImpl extends BasePersistenceImpl<ExpandoRow>
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_TABLEID,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_TABLEID,
 					finderArgs, list);
 
 				closeSession(session);

@@ -68,13 +68,6 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 			FINDER_CLASS_NAME_LIST, "findByG_C_C_C",
 			new String[] {
 				Long.class.getName(), Long.class.getName(), Long.class.getName(),
-				Long.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_G_C_C_C = new FinderPath(WorkflowInstanceLinkModelImpl.ENTITY_CACHE_ENABLED,
-			WorkflowInstanceLinkModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "findByG_C_C_C",
-			new String[] {
-				Long.class.getName(), Long.class.getName(), Long.class.getName(),
 				Long.class.getName(),
 				
 			"java.lang.Integer", "java.lang.Integer",
@@ -337,68 +330,8 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 	public List<WorkflowInstanceLink> findByG_C_C_C(long groupId,
 		long companyId, long classNameId, long classPK)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Long(companyId), new Long(classNameId),
-				new Long(classPK)
-			};
-
-		List<WorkflowInstanceLink> list = (List<WorkflowInstanceLink>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_C_C_C,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(6);
-
-				query.append(_SQL_SELECT_WORKFLOWINSTANCELINK_WHERE);
-
-				query.append(_FINDER_COLUMN_G_C_C_C_GROUPID_2);
-
-				query.append(_FINDER_COLUMN_G_C_C_C_COMPANYID_2);
-
-				query.append(_FINDER_COLUMN_G_C_C_C_CLASSNAMEID_2);
-
-				query.append(_FINDER_COLUMN_G_C_C_C_CLASSPK_2);
-
-				query.append(WorkflowInstanceLinkModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(groupId);
-
-				qPos.add(companyId);
-
-				qPos.add(classNameId);
-
-				qPos.add(classPK);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<WorkflowInstanceLink>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_C_C_C,
-					finderArgs, list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByG_C_C_C(groupId, companyId, classNameId, classPK,
+			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	public List<WorkflowInstanceLink> findByG_C_C_C(long groupId,
@@ -419,7 +352,7 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 				String.valueOf(orderByComparator)
 			};
 
-		List<WorkflowInstanceLink> list = (List<WorkflowInstanceLink>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_G_C_C_C,
+		List<WorkflowInstanceLink> list = (List<WorkflowInstanceLink>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_C_C_C,
 				finderArgs, this);
 
 		if (list == null) {
@@ -484,7 +417,7 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_G_C_C_C,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_C_C_C,
 					finderArgs, list);
 
 				closeSession(session);

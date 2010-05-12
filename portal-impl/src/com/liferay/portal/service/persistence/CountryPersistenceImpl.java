@@ -84,9 +84,6 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 			"countByA3", new String[] { String.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_BY_ACTIVE = new FinderPath(CountryModelImpl.ENTITY_CACHE_ENABLED,
 			CountryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByActive", new String[] { Boolean.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_ACTIVE = new FinderPath(CountryModelImpl.ENTITY_CACHE_ENABLED,
-			CountryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByActive",
 			new String[] {
 				Boolean.class.getName(),
@@ -763,53 +760,7 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 	}
 
 	public List<Country> findByActive(boolean active) throws SystemException {
-		Object[] finderArgs = new Object[] { Boolean.valueOf(active) };
-
-		List<Country> list = (List<Country>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_ACTIVE,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_SELECT_COUNTRY_WHERE);
-
-				query.append(_FINDER_COLUMN_ACTIVE_ACTIVE_2);
-
-				query.append(CountryModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(active);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<Country>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_ACTIVE,
-					finderArgs, list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByActive(active, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	public List<Country> findByActive(boolean active, int start, int end)
@@ -826,7 +777,7 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 				String.valueOf(orderByComparator)
 			};
 
-		List<Country> list = (List<Country>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_ACTIVE,
+		List<Country> list = (List<Country>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_ACTIVE,
 				finderArgs, this);
 
 		if (list == null) {
@@ -878,7 +829,7 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_ACTIVE,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_ACTIVE,
 					finderArgs, list);
 
 				closeSession(session);

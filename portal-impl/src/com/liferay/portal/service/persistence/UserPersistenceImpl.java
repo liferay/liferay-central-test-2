@@ -91,9 +91,6 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 		".List";
 	public static final FinderPath FINDER_PATH_FIND_BY_UUID = new FinderPath(UserModelImpl.ENTITY_CACHE_ENABLED,
 			UserModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByUuid", new String[] { String.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_UUID = new FinderPath(UserModelImpl.ENTITY_CACHE_ENABLED,
-			UserModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByUuid",
 			new String[] {
 				String.class.getName(),
@@ -105,9 +102,6 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			UserModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countByUuid", new String[] { String.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_BY_COMPANYID = new FinderPath(UserModelImpl.ENTITY_CACHE_ENABLED,
-			UserModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByCompanyId", new String[] { Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_COMPANYID = new FinderPath(UserModelImpl.ENTITY_CACHE_ENABLED,
 			UserModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByCompanyId",
 			new String[] {
@@ -126,9 +120,6 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			UserModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countByContactId", new String[] { Long.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_BY_EMAILADDRESS = new FinderPath(UserModelImpl.ENTITY_CACHE_ENABLED,
-			UserModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByEmailAddress", new String[] { String.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_EMAILADDRESS = new FinderPath(UserModelImpl.ENTITY_CACHE_ENABLED,
 			UserModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByEmailAddress",
 			new String[] {
@@ -185,10 +176,6 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			"countByC_EA",
 			new String[] { Long.class.getName(), String.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_BY_C_A = new FinderPath(UserModelImpl.ENTITY_CACHE_ENABLED,
-			UserModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByC_A",
-			new String[] { Long.class.getName(), Boolean.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_C_A = new FinderPath(UserModelImpl.ENTITY_CACHE_ENABLED,
 			UserModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByC_A",
 			new String[] {
@@ -750,63 +737,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 	}
 
 	public List<User> findByUuid(String uuid) throws SystemException {
-		Object[] finderArgs = new Object[] { uuid };
-
-		List<User> list = (List<User>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_UUID,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(2);
-
-				query.append(_SQL_SELECT_USER_WHERE);
-
-				if (uuid == null) {
-					query.append(_FINDER_COLUMN_UUID_UUID_1);
-				}
-				else {
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_UUID_UUID_3);
-					}
-					else {
-						query.append(_FINDER_COLUMN_UUID_UUID_2);
-					}
-				}
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				if (uuid != null) {
-					qPos.add(uuid);
-				}
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<User>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_UUID, finderArgs,
-					list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByUuid(uuid, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	public List<User> findByUuid(String uuid, int start, int end)
@@ -823,7 +754,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 				String.valueOf(orderByComparator)
 			};
 
-		List<User> list = (List<User>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_UUID,
+		List<User> list = (List<User>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_UUID,
 				finderArgs, this);
 
 		if (list == null) {
@@ -883,8 +814,8 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_UUID,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_UUID, finderArgs,
+					list);
 
 				closeSession(session);
 			}
@@ -1079,51 +1010,8 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 	}
 
 	public List<User> findByCompanyId(long companyId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(companyId) };
-
-		List<User> list = (List<User>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_COMPANYID,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(2);
-
-				query.append(_SQL_SELECT_USER_WHERE);
-
-				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(companyId);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<User>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_COMPANYID,
-					finderArgs, list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByCompanyId(companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+			null);
 	}
 
 	public List<User> findByCompanyId(long companyId, int start, int end)
@@ -1140,7 +1028,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 				String.valueOf(orderByComparator)
 			};
 
-		List<User> list = (List<User>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
+		List<User> list = (List<User>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_COMPANYID,
 				finderArgs, this);
 
 		if (list == null) {
@@ -1188,7 +1076,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_COMPANYID,
 					finderArgs, list);
 
 				closeSession(session);
@@ -1479,63 +1367,8 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 
 	public List<User> findByEmailAddress(String emailAddress)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { emailAddress };
-
-		List<User> list = (List<User>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_EMAILADDRESS,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(2);
-
-				query.append(_SQL_SELECT_USER_WHERE);
-
-				if (emailAddress == null) {
-					query.append(_FINDER_COLUMN_EMAILADDRESS_EMAILADDRESS_1);
-				}
-				else {
-					if (emailAddress.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_EMAILADDRESS_EMAILADDRESS_3);
-					}
-					else {
-						query.append(_FINDER_COLUMN_EMAILADDRESS_EMAILADDRESS_2);
-					}
-				}
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				if (emailAddress != null) {
-					qPos.add(emailAddress);
-				}
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<User>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_EMAILADDRESS,
-					finderArgs, list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByEmailAddress(emailAddress, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
 	}
 
 	public List<User> findByEmailAddress(String emailAddress, int start, int end)
@@ -1552,7 +1385,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 				String.valueOf(orderByComparator)
 			};
 
-		List<User> list = (List<User>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_EMAILADDRESS,
+		List<User> list = (List<User>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_EMAILADDRESS,
 				finderArgs, this);
 
 		if (list == null) {
@@ -1612,7 +1445,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_EMAILADDRESS,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_EMAILADDRESS,
 					finderArgs, list);
 
 				closeSession(session);
@@ -2514,57 +2347,8 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 
 	public List<User> findByC_A(long companyId, boolean active)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(companyId), Boolean.valueOf(active)
-			};
-
-		List<User> list = (List<User>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_C_A,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_SELECT_USER_WHERE);
-
-				query.append(_FINDER_COLUMN_C_A_COMPANYID_2);
-
-				query.append(_FINDER_COLUMN_C_A_ACTIVE_2);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(companyId);
-
-				qPos.add(active);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<User>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_A, finderArgs,
-					list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByC_A(companyId, active, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
 	}
 
 	public List<User> findByC_A(long companyId, boolean active, int start,
@@ -2581,7 +2365,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 				String.valueOf(orderByComparator)
 			};
 
-		List<User> list = (List<User>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_C_A,
+		List<User> list = (List<User>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_C_A,
 				finderArgs, this);
 
 		if (list == null) {
@@ -2633,8 +2417,8 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_C_A,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_A, finderArgs,
+					list);
 
 				closeSession(session);
 			}

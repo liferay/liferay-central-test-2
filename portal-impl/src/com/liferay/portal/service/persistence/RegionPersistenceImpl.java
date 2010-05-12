@@ -65,9 +65,6 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 		".List";
 	public static final FinderPath FINDER_PATH_FIND_BY_COUNTRYID = new FinderPath(RegionModelImpl.ENTITY_CACHE_ENABLED,
 			RegionModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByCountryId", new String[] { Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_COUNTRYID = new FinderPath(RegionModelImpl.ENTITY_CACHE_ENABLED,
-			RegionModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByCountryId",
 			new String[] {
 				Long.class.getName(),
@@ -80,9 +77,6 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 			"countByCountryId", new String[] { Long.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_BY_ACTIVE = new FinderPath(RegionModelImpl.ENTITY_CACHE_ENABLED,
 			RegionModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByActive", new String[] { Boolean.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_ACTIVE = new FinderPath(RegionModelImpl.ENTITY_CACHE_ENABLED,
-			RegionModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByActive",
 			new String[] {
 				Boolean.class.getName(),
@@ -94,10 +88,6 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 			RegionModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countByActive", new String[] { Boolean.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_BY_C_A = new FinderPath(RegionModelImpl.ENTITY_CACHE_ENABLED,
-			RegionModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByC_A",
-			new String[] { Long.class.getName(), Boolean.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_C_A = new FinderPath(RegionModelImpl.ENTITY_CACHE_ENABLED,
 			RegionModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByC_A",
 			new String[] {
@@ -343,53 +333,8 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 
 	public List<Region> findByCountryId(long countryId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(countryId) };
-
-		List<Region> list = (List<Region>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_COUNTRYID,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_SELECT_REGION_WHERE);
-
-				query.append(_FINDER_COLUMN_COUNTRYID_COUNTRYID_2);
-
-				query.append(RegionModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(countryId);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<Region>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_COUNTRYID,
-					finderArgs, list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByCountryId(countryId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+			null);
 	}
 
 	public List<Region> findByCountryId(long countryId, int start, int end)
@@ -406,7 +351,7 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 				String.valueOf(orderByComparator)
 			};
 
-		List<Region> list = (List<Region>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_COUNTRYID,
+		List<Region> list = (List<Region>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_COUNTRYID,
 				finderArgs, this);
 
 		if (list == null) {
@@ -458,7 +403,7 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_COUNTRYID,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_COUNTRYID,
 					finderArgs, list);
 
 				closeSession(session);
@@ -648,53 +593,7 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 	}
 
 	public List<Region> findByActive(boolean active) throws SystemException {
-		Object[] finderArgs = new Object[] { Boolean.valueOf(active) };
-
-		List<Region> list = (List<Region>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_ACTIVE,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_SELECT_REGION_WHERE);
-
-				query.append(_FINDER_COLUMN_ACTIVE_ACTIVE_2);
-
-				query.append(RegionModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(active);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<Region>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_ACTIVE,
-					finderArgs, list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByActive(active, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	public List<Region> findByActive(boolean active, int start, int end)
@@ -711,7 +610,7 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 				String.valueOf(orderByComparator)
 			};
 
-		List<Region> list = (List<Region>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_ACTIVE,
+		List<Region> list = (List<Region>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_ACTIVE,
 				finderArgs, this);
 
 		if (list == null) {
@@ -763,7 +662,7 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_ACTIVE,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_ACTIVE,
 					finderArgs, list);
 
 				closeSession(session);
@@ -954,59 +853,8 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 
 	public List<Region> findByC_A(long countryId, boolean active)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(countryId), Boolean.valueOf(active)
-			};
-
-		List<Region> list = (List<Region>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_C_A,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(4);
-
-				query.append(_SQL_SELECT_REGION_WHERE);
-
-				query.append(_FINDER_COLUMN_C_A_COUNTRYID_2);
-
-				query.append(_FINDER_COLUMN_C_A_ACTIVE_2);
-
-				query.append(RegionModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(countryId);
-
-				qPos.add(active);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<Region>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_A, finderArgs,
-					list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByC_A(countryId, active, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
 	}
 
 	public List<Region> findByC_A(long countryId, boolean active, int start,
@@ -1023,7 +871,7 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 				String.valueOf(orderByComparator)
 			};
 
-		List<Region> list = (List<Region>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_C_A,
+		List<Region> list = (List<Region>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_C_A,
 				finderArgs, this);
 
 		if (list == null) {
@@ -1079,8 +927,8 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_C_A,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_A, finderArgs,
+					list);
 
 				closeSession(session);
 			}

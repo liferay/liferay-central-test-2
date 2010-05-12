@@ -75,9 +75,6 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 		".List";
 	public static final FinderPath FINDER_PATH_FIND_BY_UUID = new FinderPath(IGFolderModelImpl.ENTITY_CACHE_ENABLED,
 			IGFolderModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByUuid", new String[] { String.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_UUID = new FinderPath(IGFolderModelImpl.ENTITY_CACHE_ENABLED,
-			IGFolderModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByUuid",
 			new String[] {
 				String.class.getName(),
@@ -98,9 +95,6 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 			new String[] { String.class.getName(), Long.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_BY_GROUPID = new FinderPath(IGFolderModelImpl.ENTITY_CACHE_ENABLED,
 			IGFolderModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByGroupId", new String[] { Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_GROUPID = new FinderPath(IGFolderModelImpl.ENTITY_CACHE_ENABLED,
-			IGFolderModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByGroupId",
 			new String[] {
 				Long.class.getName(),
@@ -113,9 +107,6 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 			"countByGroupId", new String[] { Long.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_BY_COMPANYID = new FinderPath(IGFolderModelImpl.ENTITY_CACHE_ENABLED,
 			IGFolderModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByCompanyId", new String[] { Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_COMPANYID = new FinderPath(IGFolderModelImpl.ENTITY_CACHE_ENABLED,
-			IGFolderModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByCompanyId",
 			new String[] {
 				Long.class.getName(),
@@ -127,10 +118,6 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 			IGFolderModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countByCompanyId", new String[] { Long.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_BY_G_P = new FinderPath(IGFolderModelImpl.ENTITY_CACHE_ENABLED,
-			IGFolderModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByG_P",
-			new String[] { Long.class.getName(), Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_G_P = new FinderPath(IGFolderModelImpl.ENTITY_CACHE_ENABLED,
 			IGFolderModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByG_P",
 			new String[] {
@@ -496,65 +483,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	}
 
 	public List<IGFolder> findByUuid(String uuid) throws SystemException {
-		Object[] finderArgs = new Object[] { uuid };
-
-		List<IGFolder> list = (List<IGFolder>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_UUID,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_SELECT_IGFOLDER_WHERE);
-
-				if (uuid == null) {
-					query.append(_FINDER_COLUMN_UUID_UUID_1);
-				}
-				else {
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_UUID_UUID_3);
-					}
-					else {
-						query.append(_FINDER_COLUMN_UUID_UUID_2);
-					}
-				}
-
-				query.append(IGFolderModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				if (uuid != null) {
-					qPos.add(uuid);
-				}
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<IGFolder>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_UUID, finderArgs,
-					list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByUuid(uuid, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	public List<IGFolder> findByUuid(String uuid, int start, int end)
@@ -571,7 +500,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 				String.valueOf(orderByComparator)
 			};
 
-		List<IGFolder> list = (List<IGFolder>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_UUID,
+		List<IGFolder> list = (List<IGFolder>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_UUID,
 				finderArgs, this);
 
 		if (list == null) {
@@ -636,8 +565,8 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_UUID,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_UUID, finderArgs,
+					list);
 
 				closeSession(session);
 			}
@@ -967,53 +896,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	}
 
 	public List<IGFolder> findByGroupId(long groupId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(groupId) };
-
-		List<IGFolder> list = (List<IGFolder>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_GROUPID,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_SELECT_IGFOLDER_WHERE);
-
-				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
-
-				query.append(IGFolderModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(groupId);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<IGFolder>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_GROUPID,
-					finderArgs, list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByGroupId(groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	public List<IGFolder> findByGroupId(long groupId, int start, int end)
@@ -1030,7 +913,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 				String.valueOf(orderByComparator)
 			};
 
-		List<IGFolder> list = (List<IGFolder>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
+		List<IGFolder> list = (List<IGFolder>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_GROUPID,
 				finderArgs, this);
 
 		if (list == null) {
@@ -1083,7 +966,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_GROUPID,
 					finderArgs, list);
 
 				closeSession(session);
@@ -1275,53 +1158,8 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 
 	public List<IGFolder> findByCompanyId(long companyId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(companyId) };
-
-		List<IGFolder> list = (List<IGFolder>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_COMPANYID,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_SELECT_IGFOLDER_WHERE);
-
-				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
-
-				query.append(IGFolderModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(companyId);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<IGFolder>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_COMPANYID,
-					finderArgs, list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByCompanyId(companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+			null);
 	}
 
 	public List<IGFolder> findByCompanyId(long companyId, int start, int end)
@@ -1338,7 +1176,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 				String.valueOf(orderByComparator)
 			};
 
-		List<IGFolder> list = (List<IGFolder>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
+		List<IGFolder> list = (List<IGFolder>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_COMPANYID,
 				finderArgs, this);
 
 		if (list == null) {
@@ -1391,7 +1229,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_COMPANYID,
 					finderArgs, list);
 
 				closeSession(session);
@@ -1583,59 +1421,8 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 
 	public List<IGFolder> findByG_P(long groupId, long parentFolderId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Long(parentFolderId)
-			};
-
-		List<IGFolder> list = (List<IGFolder>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_P,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(4);
-
-				query.append(_SQL_SELECT_IGFOLDER_WHERE);
-
-				query.append(_FINDER_COLUMN_G_P_GROUPID_2);
-
-				query.append(_FINDER_COLUMN_G_P_PARENTFOLDERID_2);
-
-				query.append(IGFolderModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(groupId);
-
-				qPos.add(parentFolderId);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<IGFolder>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_P, finderArgs,
-					list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByG_P(groupId, parentFolderId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
 	}
 
 	public List<IGFolder> findByG_P(long groupId, long parentFolderId,
@@ -1653,7 +1440,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 				String.valueOf(orderByComparator)
 			};
 
-		List<IGFolder> list = (List<IGFolder>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_G_P,
+		List<IGFolder> list = (List<IGFolder>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_P,
 				finderArgs, this);
 
 		if (list == null) {
@@ -1710,8 +1497,8 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_G_P,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_P, finderArgs,
+					list);
 
 				closeSession(session);
 			}

@@ -65,9 +65,6 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl<ListType>
 		".List";
 	public static final FinderPath FINDER_PATH_FIND_BY_TYPE = new FinderPath(ListTypeModelImpl.ENTITY_CACHE_ENABLED,
 			ListTypeModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByType", new String[] { String.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_TYPE = new FinderPath(ListTypeModelImpl.ENTITY_CACHE_ENABLED,
-			ListTypeModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByType",
 			new String[] {
 				String.class.getName(),
@@ -308,65 +305,7 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl<ListType>
 	}
 
 	public List<ListType> findByType(String type) throws SystemException {
-		Object[] finderArgs = new Object[] { type };
-
-		List<ListType> list = (List<ListType>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_TYPE,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_SELECT_LISTTYPE_WHERE);
-
-				if (type == null) {
-					query.append(_FINDER_COLUMN_TYPE_TYPE_1);
-				}
-				else {
-					if (type.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_TYPE_TYPE_3);
-					}
-					else {
-						query.append(_FINDER_COLUMN_TYPE_TYPE_2);
-					}
-				}
-
-				query.append(ListTypeModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				if (type != null) {
-					qPos.add(type);
-				}
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<ListType>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_TYPE, finderArgs,
-					list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByType(type, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	public List<ListType> findByType(String type, int start, int end)
@@ -383,7 +322,7 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl<ListType>
 				String.valueOf(orderByComparator)
 			};
 
-		List<ListType> list = (List<ListType>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_TYPE,
+		List<ListType> list = (List<ListType>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_TYPE,
 				finderArgs, this);
 
 		if (list == null) {
@@ -448,8 +387,8 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl<ListType>
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_TYPE,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_TYPE, finderArgs,
+					list);
 
 				closeSession(session);
 			}

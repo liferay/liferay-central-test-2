@@ -100,9 +100,6 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		".List";
 	public static final FinderPath FINDER_PATH_FIND_BY_COMPANYID = new FinderPath(GroupModelImpl.ENTITY_CACHE_ENABLED,
 			GroupModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByCompanyId", new String[] { Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_COMPANYID = new FinderPath(GroupModelImpl.ENTITY_CACHE_ENABLED,
-			GroupModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByCompanyId",
 			new String[] {
 				Long.class.getName(),
@@ -136,10 +133,6 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			"countByC_F",
 			new String[] { Long.class.getName(), String.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_BY_T_A = new FinderPath(GroupModelImpl.ENTITY_CACHE_ENABLED,
-			GroupModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByT_A",
-			new String[] { Integer.class.getName(), Boolean.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_T_A = new FinderPath(GroupModelImpl.ENTITY_CACHE_ENABLED,
 			GroupModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByT_A",
 			new String[] {
@@ -730,53 +723,8 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 
 	public List<Group> findByCompanyId(long companyId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(companyId) };
-
-		List<Group> list = (List<Group>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_COMPANYID,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_SELECT_GROUP__WHERE);
-
-				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
-
-				query.append(GroupModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(companyId);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<Group>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_COMPANYID,
-					finderArgs, list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByCompanyId(companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+			null);
 	}
 
 	public List<Group> findByCompanyId(long companyId, int start, int end)
@@ -793,7 +741,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 				String.valueOf(orderByComparator)
 			};
 
-		List<Group> list = (List<Group>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
+		List<Group> list = (List<Group>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_COMPANYID,
 				finderArgs, this);
 
 		if (list == null) {
@@ -845,7 +793,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_COMPANYID,
 					finderArgs, list);
 
 				closeSession(session);
@@ -1398,59 +1346,8 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 
 	public List<Group> findByT_A(int type, boolean active)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Integer(type), Boolean.valueOf(active)
-			};
-
-		List<Group> list = (List<Group>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_T_A,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(4);
-
-				query.append(_SQL_SELECT_GROUP__WHERE);
-
-				query.append(_FINDER_COLUMN_T_A_TYPE_2);
-
-				query.append(_FINDER_COLUMN_T_A_ACTIVE_2);
-
-				query.append(GroupModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(type);
-
-				qPos.add(active);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<Group>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_T_A, finderArgs,
-					list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByT_A(type, active, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+			null);
 	}
 
 	public List<Group> findByT_A(int type, boolean active, int start, int end)
@@ -1467,7 +1364,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 				String.valueOf(orderByComparator)
 			};
 
-		List<Group> list = (List<Group>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_T_A,
+		List<Group> list = (List<Group>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_T_A,
 				finderArgs, this);
 
 		if (list == null) {
@@ -1523,8 +1420,8 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_T_A,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_T_A, finderArgs,
+					list);
 
 				closeSession(session);
 			}

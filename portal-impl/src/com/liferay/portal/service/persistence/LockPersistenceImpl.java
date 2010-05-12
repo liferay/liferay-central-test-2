@@ -69,9 +69,6 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 		".List";
 	public static final FinderPath FINDER_PATH_FIND_BY_UUID = new FinderPath(LockModelImpl.ENTITY_CACHE_ENABLED,
 			LockModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByUuid", new String[] { String.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_UUID = new FinderPath(LockModelImpl.ENTITY_CACHE_ENABLED,
-			LockModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByUuid",
 			new String[] {
 				String.class.getName(),
@@ -83,9 +80,6 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 			LockModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countByUuid", new String[] { String.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_BY_EXPIRATIONDATE = new FinderPath(LockModelImpl.ENTITY_CACHE_ENABLED,
-			LockModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByExpirationDate", new String[] { Date.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_EXPIRATIONDATE = new FinderPath(LockModelImpl.ENTITY_CACHE_ENABLED,
 			LockModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByExpirationDate",
 			new String[] {
@@ -388,63 +382,7 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 	}
 
 	public List<Lock> findByUuid(String uuid) throws SystemException {
-		Object[] finderArgs = new Object[] { uuid };
-
-		List<Lock> list = (List<Lock>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_UUID,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(2);
-
-				query.append(_SQL_SELECT_LOCK_WHERE);
-
-				if (uuid == null) {
-					query.append(_FINDER_COLUMN_UUID_UUID_1);
-				}
-				else {
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_UUID_UUID_3);
-					}
-					else {
-						query.append(_FINDER_COLUMN_UUID_UUID_2);
-					}
-				}
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				if (uuid != null) {
-					qPos.add(uuid);
-				}
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<Lock>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_UUID, finderArgs,
-					list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByUuid(uuid, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	public List<Lock> findByUuid(String uuid, int start, int end)
@@ -461,7 +399,7 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 				String.valueOf(orderByComparator)
 			};
 
-		List<Lock> list = (List<Lock>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_UUID,
+		List<Lock> list = (List<Lock>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_UUID,
 				finderArgs, this);
 
 		if (list == null) {
@@ -521,8 +459,8 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_UUID,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_UUID, finderArgs,
+					list);
 
 				closeSession(session);
 			}
@@ -718,58 +656,8 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 
 	public List<Lock> findByExpirationDate(Date expirationDate)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { expirationDate };
-
-		List<Lock> list = (List<Lock>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_EXPIRATIONDATE,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(2);
-
-				query.append(_SQL_SELECT_LOCK_WHERE);
-
-				if (expirationDate == null) {
-					query.append(_FINDER_COLUMN_EXPIRATIONDATE_EXPIRATIONDATE_1);
-				}
-				else {
-					query.append(_FINDER_COLUMN_EXPIRATIONDATE_EXPIRATIONDATE_2);
-				}
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				if (expirationDate != null) {
-					qPos.add(CalendarUtil.getTimestamp(expirationDate));
-				}
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<Lock>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_EXPIRATIONDATE,
-					finderArgs, list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByExpirationDate(expirationDate, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
 	}
 
 	public List<Lock> findByExpirationDate(Date expirationDate, int start,
@@ -786,7 +674,7 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 				String.valueOf(orderByComparator)
 			};
 
-		List<Lock> list = (List<Lock>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_EXPIRATIONDATE,
+		List<Lock> list = (List<Lock>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_EXPIRATIONDATE,
 				finderArgs, this);
 
 		if (list == null) {
@@ -841,7 +729,7 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_EXPIRATIONDATE,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_EXPIRATIONDATE,
 					finderArgs, list);
 
 				closeSession(session);

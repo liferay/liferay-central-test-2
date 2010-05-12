@@ -67,10 +67,6 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 	public static final FinderPath FINDER_PATH_FIND_BY_PLID = new FinderPath(PortletPreferencesModelImpl.ENTITY_CACHE_ENABLED,
 			PortletPreferencesModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "findByPlid",
-			new String[] { Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_PLID = new FinderPath(PortletPreferencesModelImpl.ENTITY_CACHE_ENABLED,
-			PortletPreferencesModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "findByPlid",
 			new String[] {
 				Long.class.getName(),
 				
@@ -84,10 +80,6 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 	public static final FinderPath FINDER_PATH_FIND_BY_P_P = new FinderPath(PortletPreferencesModelImpl.ENTITY_CACHE_ENABLED,
 			PortletPreferencesModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "findByP_P",
-			new String[] { Long.class.getName(), String.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_P_P = new FinderPath(PortletPreferencesModelImpl.ENTITY_CACHE_ENABLED,
-			PortletPreferencesModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "findByP_P",
 			new String[] {
 				Long.class.getName(), String.class.getName(),
 				
@@ -99,13 +91,6 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 			FINDER_CLASS_NAME_LIST, "countByP_P",
 			new String[] { Long.class.getName(), String.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_BY_O_O_P = new FinderPath(PortletPreferencesModelImpl.ENTITY_CACHE_ENABLED,
-			PortletPreferencesModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "findByO_O_P",
-			new String[] {
-				Long.class.getName(), Integer.class.getName(),
-				Long.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_O_O_P = new FinderPath(PortletPreferencesModelImpl.ENTITY_CACHE_ENABLED,
 			PortletPreferencesModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "findByO_O_P",
 			new String[] {
@@ -446,51 +431,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 
 	public List<PortletPreferences> findByPlid(long plid)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(plid) };
-
-		List<PortletPreferences> list = (List<PortletPreferences>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_PLID,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(2);
-
-				query.append(_SQL_SELECT_PORTLETPREFERENCES_WHERE);
-
-				query.append(_FINDER_COLUMN_PLID_PLID_2);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(plid);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<PortletPreferences>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_PLID, finderArgs,
-					list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByPlid(plid, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	public List<PortletPreferences> findByPlid(long plid, int start, int end)
@@ -507,7 +448,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 				String.valueOf(orderByComparator)
 			};
 
-		List<PortletPreferences> list = (List<PortletPreferences>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_PLID,
+		List<PortletPreferences> list = (List<PortletPreferences>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_PLID,
 				finderArgs, this);
 
 		if (list == null) {
@@ -556,8 +497,8 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_PLID,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_PLID, finderArgs,
+					list);
 
 				closeSession(session);
 			}
@@ -745,67 +686,8 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 
 	public List<PortletPreferences> findByP_P(long plid, String portletId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(plid), portletId };
-
-		List<PortletPreferences> list = (List<PortletPreferences>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_P_P,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_SELECT_PORTLETPREFERENCES_WHERE);
-
-				query.append(_FINDER_COLUMN_P_P_PLID_2);
-
-				if (portletId == null) {
-					query.append(_FINDER_COLUMN_P_P_PORTLETID_1);
-				}
-				else {
-					if (portletId.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_P_P_PORTLETID_3);
-					}
-					else {
-						query.append(_FINDER_COLUMN_P_P_PORTLETID_2);
-					}
-				}
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(plid);
-
-				if (portletId != null) {
-					qPos.add(portletId);
-				}
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<PortletPreferences>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_P_P, finderArgs,
-					list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByP_P(plid, portletId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+			null);
 	}
 
 	public List<PortletPreferences> findByP_P(long plid, String portletId,
@@ -825,7 +707,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 				String.valueOf(orderByComparator)
 			};
 
-		List<PortletPreferences> list = (List<PortletPreferences>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_P_P,
+		List<PortletPreferences> list = (List<PortletPreferences>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_P_P,
 				finderArgs, this);
 
 		if (list == null) {
@@ -890,8 +772,8 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_P_P,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_P_P, finderArgs,
+					list);
 
 				closeSession(session);
 			}
@@ -1102,61 +984,8 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 
 	public List<PortletPreferences> findByO_O_P(long ownerId, int ownerType,
 		long plid) throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(ownerId), new Integer(ownerType), new Long(plid)
-			};
-
-		List<PortletPreferences> list = (List<PortletPreferences>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_O_O_P,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(4);
-
-				query.append(_SQL_SELECT_PORTLETPREFERENCES_WHERE);
-
-				query.append(_FINDER_COLUMN_O_O_P_OWNERID_2);
-
-				query.append(_FINDER_COLUMN_O_O_P_OWNERTYPE_2);
-
-				query.append(_FINDER_COLUMN_O_O_P_PLID_2);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(ownerId);
-
-				qPos.add(ownerType);
-
-				qPos.add(plid);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<PortletPreferences>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_O_O_P,
-					finderArgs, list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByO_O_P(ownerId, ownerType, plid, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
 	}
 
 	public List<PortletPreferences> findByO_O_P(long ownerId, int ownerType,
@@ -1174,7 +1003,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 				String.valueOf(orderByComparator)
 			};
 
-		List<PortletPreferences> list = (List<PortletPreferences>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_O_O_P,
+		List<PortletPreferences> list = (List<PortletPreferences>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_O_O_P,
 				finderArgs, this);
 
 		if (list == null) {
@@ -1231,7 +1060,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_O_O_P,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_O_O_P,
 					finderArgs, list);
 
 				closeSession(session);

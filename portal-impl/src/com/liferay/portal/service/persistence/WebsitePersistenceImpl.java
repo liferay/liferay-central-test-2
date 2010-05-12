@@ -65,9 +65,6 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 		".List";
 	public static final FinderPath FINDER_PATH_FIND_BY_COMPANYID = new FinderPath(WebsiteModelImpl.ENTITY_CACHE_ENABLED,
 			WebsiteModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByCompanyId", new String[] { Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_COMPANYID = new FinderPath(WebsiteModelImpl.ENTITY_CACHE_ENABLED,
-			WebsiteModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByCompanyId",
 			new String[] {
 				Long.class.getName(),
@@ -80,9 +77,6 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 			"countByCompanyId", new String[] { Long.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_BY_USERID = new FinderPath(WebsiteModelImpl.ENTITY_CACHE_ENABLED,
 			WebsiteModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByUserId", new String[] { Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_USERID = new FinderPath(WebsiteModelImpl.ENTITY_CACHE_ENABLED,
-			WebsiteModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByUserId",
 			new String[] {
 				Long.class.getName(),
@@ -94,10 +88,6 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 			WebsiteModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countByUserId", new String[] { Long.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_BY_C_C = new FinderPath(WebsiteModelImpl.ENTITY_CACHE_ENABLED,
-			WebsiteModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByC_C",
-			new String[] { Long.class.getName(), Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_C_C = new FinderPath(WebsiteModelImpl.ENTITY_CACHE_ENABLED,
 			WebsiteModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByC_C",
 			new String[] {
@@ -114,12 +104,6 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 			WebsiteModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByC_C_C",
 			new String[] {
-				Long.class.getName(), Long.class.getName(), Long.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_C_C_C = new FinderPath(WebsiteModelImpl.ENTITY_CACHE_ENABLED,
-			WebsiteModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByC_C_C",
-			new String[] {
 				Long.class.getName(), Long.class.getName(), Long.class.getName(),
 				
 			"java.lang.Integer", "java.lang.Integer",
@@ -132,13 +116,6 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 				Long.class.getName(), Long.class.getName(), Long.class.getName()
 			});
 	public static final FinderPath FINDER_PATH_FIND_BY_C_C_C_P = new FinderPath(WebsiteModelImpl.ENTITY_CACHE_ENABLED,
-			WebsiteModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByC_C_C_P",
-			new String[] {
-				Long.class.getName(), Long.class.getName(), Long.class.getName(),
-				Boolean.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_C_C_C_P = new FinderPath(WebsiteModelImpl.ENTITY_CACHE_ENABLED,
 			WebsiteModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByC_C_C_P",
 			new String[] {
@@ -394,53 +371,8 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 
 	public List<Website> findByCompanyId(long companyId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(companyId) };
-
-		List<Website> list = (List<Website>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_COMPANYID,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_SELECT_WEBSITE_WHERE);
-
-				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
-
-				query.append(WebsiteModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(companyId);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<Website>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_COMPANYID,
-					finderArgs, list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByCompanyId(companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+			null);
 	}
 
 	public List<Website> findByCompanyId(long companyId, int start, int end)
@@ -457,7 +389,7 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 				String.valueOf(orderByComparator)
 			};
 
-		List<Website> list = (List<Website>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
+		List<Website> list = (List<Website>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_COMPANYID,
 				finderArgs, this);
 
 		if (list == null) {
@@ -509,7 +441,7 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_COMPANYID,
 					finderArgs, list);
 
 				closeSession(session);
@@ -700,53 +632,7 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 	}
 
 	public List<Website> findByUserId(long userId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(userId) };
-
-		List<Website> list = (List<Website>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_USERID,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_SELECT_WEBSITE_WHERE);
-
-				query.append(_FINDER_COLUMN_USERID_USERID_2);
-
-				query.append(WebsiteModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(userId);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<Website>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_USERID,
-					finderArgs, list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByUserId(userId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	public List<Website> findByUserId(long userId, int start, int end)
@@ -763,7 +649,7 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 				String.valueOf(orderByComparator)
 			};
 
-		List<Website> list = (List<Website>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_USERID,
+		List<Website> list = (List<Website>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_USERID,
 				finderArgs, this);
 
 		if (list == null) {
@@ -815,7 +701,7 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_USERID,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_USERID,
 					finderArgs, list);
 
 				closeSession(session);
@@ -1006,59 +892,8 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 
 	public List<Website> findByC_C(long companyId, long classNameId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(companyId), new Long(classNameId)
-			};
-
-		List<Website> list = (List<Website>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_C_C,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(4);
-
-				query.append(_SQL_SELECT_WEBSITE_WHERE);
-
-				query.append(_FINDER_COLUMN_C_C_COMPANYID_2);
-
-				query.append(_FINDER_COLUMN_C_C_CLASSNAMEID_2);
-
-				query.append(WebsiteModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(companyId);
-
-				qPos.add(classNameId);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<Website>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_C, finderArgs,
-					list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByC_C(companyId, classNameId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
 	}
 
 	public List<Website> findByC_C(long companyId, long classNameId, int start,
@@ -1075,7 +910,7 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 				String.valueOf(orderByComparator)
 			};
 
-		List<Website> list = (List<Website>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_C_C,
+		List<Website> list = (List<Website>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_C_C,
 				finderArgs, this);
 
 		if (list == null) {
@@ -1131,8 +966,8 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_C_C,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_C, finderArgs,
+					list);
 
 				closeSession(session);
 			}
@@ -1334,63 +1169,8 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 
 	public List<Website> findByC_C_C(long companyId, long classNameId,
 		long classPK) throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(companyId), new Long(classNameId), new Long(classPK)
-			};
-
-		List<Website> list = (List<Website>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_C_C_C,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(5);
-
-				query.append(_SQL_SELECT_WEBSITE_WHERE);
-
-				query.append(_FINDER_COLUMN_C_C_C_COMPANYID_2);
-
-				query.append(_FINDER_COLUMN_C_C_C_CLASSNAMEID_2);
-
-				query.append(_FINDER_COLUMN_C_C_C_CLASSPK_2);
-
-				query.append(WebsiteModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(companyId);
-
-				qPos.add(classNameId);
-
-				qPos.add(classPK);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<Website>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_C_C,
-					finderArgs, list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByC_C_C(companyId, classNameId, classPK, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
 	}
 
 	public List<Website> findByC_C_C(long companyId, long classNameId,
@@ -1408,7 +1188,7 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 				String.valueOf(orderByComparator)
 			};
 
-		List<Website> list = (List<Website>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_C_C_C,
+		List<Website> list = (List<Website>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_C_C_C,
 				finderArgs, this);
 
 		if (list == null) {
@@ -1468,7 +1248,7 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_C_C_C,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_C_C,
 					finderArgs, list);
 
 				closeSession(session);
@@ -1681,68 +1461,8 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 
 	public List<Website> findByC_C_C_P(long companyId, long classNameId,
 		long classPK, boolean primary) throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(companyId), new Long(classNameId), new Long(classPK),
-				Boolean.valueOf(primary)
-			};
-
-		List<Website> list = (List<Website>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_C_C_C_P,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(6);
-
-				query.append(_SQL_SELECT_WEBSITE_WHERE);
-
-				query.append(_FINDER_COLUMN_C_C_C_P_COMPANYID_2);
-
-				query.append(_FINDER_COLUMN_C_C_C_P_CLASSNAMEID_2);
-
-				query.append(_FINDER_COLUMN_C_C_C_P_CLASSPK_2);
-
-				query.append(_FINDER_COLUMN_C_C_C_P_PRIMARY_2);
-
-				query.append(WebsiteModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(companyId);
-
-				qPos.add(classNameId);
-
-				qPos.add(classPK);
-
-				qPos.add(primary);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<Website>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_C_C_P,
-					finderArgs, list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByC_C_C_P(companyId, classNameId, classPK, primary,
+			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	public List<Website> findByC_C_C_P(long companyId, long classNameId,
@@ -1763,7 +1483,7 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 				String.valueOf(orderByComparator)
 			};
 
-		List<Website> list = (List<Website>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_C_C_C_P,
+		List<Website> list = (List<Website>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_C_C_C_P,
 				finderArgs, this);
 
 		if (list == null) {
@@ -1827,7 +1547,7 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_C_C_C_P,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_C_C_P,
 					finderArgs, list);
 
 				closeSession(session);

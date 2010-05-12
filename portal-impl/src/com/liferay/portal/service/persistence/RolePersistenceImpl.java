@@ -77,9 +77,6 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		".List";
 	public static final FinderPath FINDER_PATH_FIND_BY_COMPANYID = new FinderPath(RoleModelImpl.ENTITY_CACHE_ENABLED,
 			RoleModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByCompanyId", new String[] { Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_COMPANYID = new FinderPath(RoleModelImpl.ENTITY_CACHE_ENABLED,
-			RoleModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByCompanyId",
 			new String[] {
 				Long.class.getName(),
@@ -91,9 +88,6 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			RoleModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countByCompanyId", new String[] { Long.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_BY_SUBTYPE = new FinderPath(RoleModelImpl.ENTITY_CACHE_ENABLED,
-			RoleModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findBySubtype", new String[] { String.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_SUBTYPE = new FinderPath(RoleModelImpl.ENTITY_CACHE_ENABLED,
 			RoleModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findBySubtype",
 			new String[] {
@@ -114,10 +108,6 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			"countByC_N",
 			new String[] { Long.class.getName(), String.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_BY_T_S = new FinderPath(RoleModelImpl.ENTITY_CACHE_ENABLED,
-			RoleModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByT_S",
-			new String[] { Integer.class.getName(), String.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_T_S = new FinderPath(RoleModelImpl.ENTITY_CACHE_ENABLED,
 			RoleModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByT_S",
 			new String[] {
@@ -486,53 +476,8 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	public List<Role> findByCompanyId(long companyId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(companyId) };
-
-		List<Role> list = (List<Role>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_COMPANYID,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_SELECT_ROLE_WHERE);
-
-				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
-
-				query.append(RoleModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(companyId);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<Role>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_COMPANYID,
-					finderArgs, list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByCompanyId(companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+			null);
 	}
 
 	public List<Role> findByCompanyId(long companyId, int start, int end)
@@ -549,7 +494,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 				String.valueOf(orderByComparator)
 			};
 
-		List<Role> list = (List<Role>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
+		List<Role> list = (List<Role>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_COMPANYID,
 				finderArgs, this);
 
 		if (list == null) {
@@ -601,7 +546,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_COMPANYID,
 					finderArgs, list);
 
 				closeSession(session);
@@ -791,65 +736,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	public List<Role> findBySubtype(String subtype) throws SystemException {
-		Object[] finderArgs = new Object[] { subtype };
-
-		List<Role> list = (List<Role>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_SUBTYPE,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_SELECT_ROLE_WHERE);
-
-				if (subtype == null) {
-					query.append(_FINDER_COLUMN_SUBTYPE_SUBTYPE_1);
-				}
-				else {
-					if (subtype.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_SUBTYPE_SUBTYPE_3);
-					}
-					else {
-						query.append(_FINDER_COLUMN_SUBTYPE_SUBTYPE_2);
-					}
-				}
-
-				query.append(RoleModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				if (subtype != null) {
-					qPos.add(subtype);
-				}
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<Role>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_SUBTYPE,
-					finderArgs, list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findBySubtype(subtype, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	public List<Role> findBySubtype(String subtype, int start, int end)
@@ -866,7 +753,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 				String.valueOf(orderByComparator)
 			};
 
-		List<Role> list = (List<Role>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_SUBTYPE,
+		List<Role> list = (List<Role>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_SUBTYPE,
 				finderArgs, this);
 
 		if (list == null) {
@@ -930,7 +817,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_SUBTYPE,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_SUBTYPE,
 					finderArgs, list);
 
 				closeSession(session);
@@ -1261,69 +1148,8 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 
 	public List<Role> findByT_S(int type, String subtype)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Integer(type), subtype };
-
-		List<Role> list = (List<Role>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_T_S,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(4);
-
-				query.append(_SQL_SELECT_ROLE_WHERE);
-
-				query.append(_FINDER_COLUMN_T_S_TYPE_2);
-
-				if (subtype == null) {
-					query.append(_FINDER_COLUMN_T_S_SUBTYPE_1);
-				}
-				else {
-					if (subtype.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_T_S_SUBTYPE_3);
-					}
-					else {
-						query.append(_FINDER_COLUMN_T_S_SUBTYPE_2);
-					}
-				}
-
-				query.append(RoleModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(type);
-
-				if (subtype != null) {
-					qPos.add(subtype);
-				}
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<Role>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_T_S, finderArgs,
-					list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByT_S(type, subtype, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+			null);
 	}
 
 	public List<Role> findByT_S(int type, String subtype, int start, int end)
@@ -1342,7 +1168,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 				String.valueOf(orderByComparator)
 			};
 
-		List<Role> list = (List<Role>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_T_S,
+		List<Role> list = (List<Role>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_T_S,
 				finderArgs, this);
 
 		if (list == null) {
@@ -1410,8 +1236,8 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_T_S,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_T_S, finderArgs,
+					list);
 
 				closeSession(session);
 			}

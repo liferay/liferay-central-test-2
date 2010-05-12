@@ -70,10 +70,6 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 	public static final FinderPath FINDER_PATH_FIND_BY_TAGID = new FinderPath(AssetTagStatsModelImpl.ENTITY_CACHE_ENABLED,
 			AssetTagStatsModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "findByTagId",
-			new String[] { Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_TAGID = new FinderPath(AssetTagStatsModelImpl.ENTITY_CACHE_ENABLED,
-			AssetTagStatsModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "findByTagId",
 			new String[] {
 				Long.class.getName(),
 				
@@ -85,10 +81,6 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 			FINDER_CLASS_NAME_LIST, "countByTagId",
 			new String[] { Long.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_BY_CLASSNAMEID = new FinderPath(AssetTagStatsModelImpl.ENTITY_CACHE_ENABLED,
-			AssetTagStatsModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "findByClassNameId",
-			new String[] { Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_CLASSNAMEID = new FinderPath(AssetTagStatsModelImpl.ENTITY_CACHE_ENABLED,
 			AssetTagStatsModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "findByClassNameId",
 			new String[] {
@@ -392,53 +384,7 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 
 	public List<AssetTagStats> findByTagId(long tagId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(tagId) };
-
-		List<AssetTagStats> list = (List<AssetTagStats>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_TAGID,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_SELECT_ASSETTAGSTATS_WHERE);
-
-				query.append(_FINDER_COLUMN_TAGID_TAGID_2);
-
-				query.append(AssetTagStatsModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(tagId);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<AssetTagStats>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_TAGID,
-					finderArgs, list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByTagId(tagId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	public List<AssetTagStats> findByTagId(long tagId, int start, int end)
@@ -455,7 +401,7 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 				String.valueOf(orderByComparator)
 			};
 
-		List<AssetTagStats> list = (List<AssetTagStats>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_TAGID,
+		List<AssetTagStats> list = (List<AssetTagStats>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_TAGID,
 				finderArgs, this);
 
 		if (list == null) {
@@ -508,7 +454,7 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_TAGID,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_TAGID,
 					finderArgs, list);
 
 				closeSession(session);
@@ -700,53 +646,8 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 
 	public List<AssetTagStats> findByClassNameId(long classNameId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(classNameId) };
-
-		List<AssetTagStats> list = (List<AssetTagStats>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_CLASSNAMEID,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_SELECT_ASSETTAGSTATS_WHERE);
-
-				query.append(_FINDER_COLUMN_CLASSNAMEID_CLASSNAMEID_2);
-
-				query.append(AssetTagStatsModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(classNameId);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<AssetTagStats>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_CLASSNAMEID,
-					finderArgs, list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByClassNameId(classNameId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
 	}
 
 	public List<AssetTagStats> findByClassNameId(long classNameId, int start,
@@ -763,7 +664,7 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 				String.valueOf(orderByComparator)
 			};
 
-		List<AssetTagStats> list = (List<AssetTagStats>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_CLASSNAMEID,
+		List<AssetTagStats> list = (List<AssetTagStats>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_CLASSNAMEID,
 				finderArgs, this);
 
 		if (list == null) {
@@ -816,7 +717,7 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_CLASSNAMEID,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_CLASSNAMEID,
 					finderArgs, list);
 
 				closeSession(session);

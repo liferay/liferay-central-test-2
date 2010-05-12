@@ -65,9 +65,6 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 		".List";
 	public static final FinderPath FINDER_PATH_FIND_BY_USERID = new FinderPath(SubscriptionModelImpl.ENTITY_CACHE_ENABLED,
 			SubscriptionModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByUserId", new String[] { Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_USERID = new FinderPath(SubscriptionModelImpl.ENTITY_CACHE_ENABLED,
-			SubscriptionModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByUserId",
 			new String[] {
 				Long.class.getName(),
@@ -81,10 +78,6 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	public static final FinderPath FINDER_PATH_FIND_BY_U_C = new FinderPath(SubscriptionModelImpl.ENTITY_CACHE_ENABLED,
 			SubscriptionModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByU_C",
-			new String[] { Long.class.getName(), Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_U_C = new FinderPath(SubscriptionModelImpl.ENTITY_CACHE_ENABLED,
-			SubscriptionModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByU_C",
 			new String[] {
 				Long.class.getName(), Long.class.getName(),
 				
@@ -96,12 +89,6 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 			"countByU_C",
 			new String[] { Long.class.getName(), Long.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_BY_C_C_C = new FinderPath(SubscriptionModelImpl.ENTITY_CACHE_ENABLED,
-			SubscriptionModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByC_C_C",
-			new String[] {
-				Long.class.getName(), Long.class.getName(), Long.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_C_C_C = new FinderPath(SubscriptionModelImpl.ENTITY_CACHE_ENABLED,
 			SubscriptionModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByC_C_C",
 			new String[] {
@@ -431,51 +418,7 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 
 	public List<Subscription> findByUserId(long userId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(userId) };
-
-		List<Subscription> list = (List<Subscription>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_USERID,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(2);
-
-				query.append(_SQL_SELECT_SUBSCRIPTION_WHERE);
-
-				query.append(_FINDER_COLUMN_USERID_USERID_2);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(userId);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<Subscription>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_USERID,
-					finderArgs, list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByUserId(userId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	public List<Subscription> findByUserId(long userId, int start, int end)
@@ -492,7 +435,7 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 				String.valueOf(orderByComparator)
 			};
 
-		List<Subscription> list = (List<Subscription>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_USERID,
+		List<Subscription> list = (List<Subscription>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_USERID,
 				finderArgs, this);
 
 		if (list == null) {
@@ -541,7 +484,7 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_USERID,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_USERID,
 					finderArgs, list);
 
 				closeSession(session);
@@ -729,57 +672,8 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 
 	public List<Subscription> findByU_C(long userId, long classNameId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(userId), new Long(classNameId)
-			};
-
-		List<Subscription> list = (List<Subscription>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_U_C,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_SELECT_SUBSCRIPTION_WHERE);
-
-				query.append(_FINDER_COLUMN_U_C_USERID_2);
-
-				query.append(_FINDER_COLUMN_U_C_CLASSNAMEID_2);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(userId);
-
-				qPos.add(classNameId);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<Subscription>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_U_C, finderArgs,
-					list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByU_C(userId, classNameId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
 	}
 
 	public List<Subscription> findByU_C(long userId, long classNameId,
@@ -797,7 +691,7 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 				String.valueOf(orderByComparator)
 			};
 
-		List<Subscription> list = (List<Subscription>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_U_C,
+		List<Subscription> list = (List<Subscription>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_U_C,
 				finderArgs, this);
 
 		if (list == null) {
@@ -850,8 +744,8 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_U_C,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_U_C, finderArgs,
+					list);
 
 				closeSession(session);
 			}
@@ -1049,61 +943,8 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 
 	public List<Subscription> findByC_C_C(long companyId, long classNameId,
 		long classPK) throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(companyId), new Long(classNameId), new Long(classPK)
-			};
-
-		List<Subscription> list = (List<Subscription>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_C_C_C,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(4);
-
-				query.append(_SQL_SELECT_SUBSCRIPTION_WHERE);
-
-				query.append(_FINDER_COLUMN_C_C_C_COMPANYID_2);
-
-				query.append(_FINDER_COLUMN_C_C_C_CLASSNAMEID_2);
-
-				query.append(_FINDER_COLUMN_C_C_C_CLASSPK_2);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(companyId);
-
-				qPos.add(classNameId);
-
-				qPos.add(classPK);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<Subscription>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_C_C,
-					finderArgs, list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByC_C_C(companyId, classNameId, classPK, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
 	}
 
 	public List<Subscription> findByC_C_C(long companyId, long classNameId,
@@ -1121,7 +962,7 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 				String.valueOf(orderByComparator)
 			};
 
-		List<Subscription> list = (List<Subscription>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_C_C_C,
+		List<Subscription> list = (List<Subscription>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_C_C_C,
 				finderArgs, this);
 
 		if (list == null) {
@@ -1178,7 +1019,7 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_C_C_C,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_C_C,
 					finderArgs, list);
 
 				closeSession(session);

@@ -73,10 +73,6 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 	public static final FinderPath FINDER_PATH_FIND_BY_GROUPID = new FinderPath(TasksProposalModelImpl.ENTITY_CACHE_ENABLED,
 			TasksProposalModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "findByGroupId",
-			new String[] { Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_GROUPID = new FinderPath(TasksProposalModelImpl.ENTITY_CACHE_ENABLED,
-			TasksProposalModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "findByGroupId",
 			new String[] {
 				Long.class.getName(),
 				
@@ -88,10 +84,6 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 			FINDER_CLASS_NAME_LIST, "countByGroupId",
 			new String[] { Long.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_BY_G_U = new FinderPath(TasksProposalModelImpl.ENTITY_CACHE_ENABLED,
-			TasksProposalModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "findByG_U",
-			new String[] { Long.class.getName(), Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_G_U = new FinderPath(TasksProposalModelImpl.ENTITY_CACHE_ENABLED,
 			TasksProposalModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "findByG_U",
 			new String[] {
@@ -411,53 +403,7 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 
 	public List<TasksProposal> findByGroupId(long groupId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(groupId) };
-
-		List<TasksProposal> list = (List<TasksProposal>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_GROUPID,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_SELECT_TASKSPROPOSAL_WHERE);
-
-				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
-
-				query.append(TasksProposalModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(groupId);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<TasksProposal>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_GROUPID,
-					finderArgs, list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByGroupId(groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	public List<TasksProposal> findByGroupId(long groupId, int start, int end)
@@ -474,7 +420,7 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 				String.valueOf(orderByComparator)
 			};
 
-		List<TasksProposal> list = (List<TasksProposal>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
+		List<TasksProposal> list = (List<TasksProposal>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_GROUPID,
 				finderArgs, this);
 
 		if (list == null) {
@@ -527,7 +473,7 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_GROUPID,
 					finderArgs, list);
 
 				closeSession(session);
@@ -720,57 +666,8 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 
 	public List<TasksProposal> findByG_U(long groupId, long userId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(groupId), new Long(userId) };
-
-		List<TasksProposal> list = (List<TasksProposal>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_U,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(4);
-
-				query.append(_SQL_SELECT_TASKSPROPOSAL_WHERE);
-
-				query.append(_FINDER_COLUMN_G_U_GROUPID_2);
-
-				query.append(_FINDER_COLUMN_G_U_USERID_2);
-
-				query.append(TasksProposalModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(groupId);
-
-				qPos.add(userId);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<TasksProposal>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_U, finderArgs,
-					list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByG_U(groupId, userId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+			null);
 	}
 
 	public List<TasksProposal> findByG_U(long groupId, long userId, int start,
@@ -787,7 +684,7 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 				String.valueOf(orderByComparator)
 			};
 
-		List<TasksProposal> list = (List<TasksProposal>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_G_U,
+		List<TasksProposal> list = (List<TasksProposal>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_U,
 				finderArgs, this);
 
 		if (list == null) {
@@ -844,8 +741,8 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_G_U,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_U, finderArgs,
+					list);
 
 				closeSession(session);
 			}

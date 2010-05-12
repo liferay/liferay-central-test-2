@@ -66,10 +66,6 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 	public static final FinderPath FINDER_PATH_FIND_BY_GROUPID = new FinderPath(OrgGroupPermissionModelImpl.ENTITY_CACHE_ENABLED,
 			OrgGroupPermissionModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "findByGroupId",
-			new String[] { Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_GROUPID = new FinderPath(OrgGroupPermissionModelImpl.ENTITY_CACHE_ENABLED,
-			OrgGroupPermissionModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "findByGroupId",
 			new String[] {
 				Long.class.getName(),
 				
@@ -81,10 +77,6 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 			FINDER_CLASS_NAME_LIST, "countByGroupId",
 			new String[] { Long.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_BY_PERMISSIONID = new FinderPath(OrgGroupPermissionModelImpl.ENTITY_CACHE_ENABLED,
-			OrgGroupPermissionModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "findByPermissionId",
-			new String[] { Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_PERMISSIONID = new FinderPath(OrgGroupPermissionModelImpl.ENTITY_CACHE_ENABLED,
 			OrgGroupPermissionModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "findByPermissionId",
 			new String[] {
@@ -340,51 +332,7 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 
 	public List<OrgGroupPermission> findByGroupId(long groupId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(groupId) };
-
-		List<OrgGroupPermission> list = (List<OrgGroupPermission>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_GROUPID,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(2);
-
-				query.append(_SQL_SELECT_ORGGROUPPERMISSION_WHERE);
-
-				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(groupId);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<OrgGroupPermission>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_GROUPID,
-					finderArgs, list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByGroupId(groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	public List<OrgGroupPermission> findByGroupId(long groupId, int start,
@@ -401,7 +349,7 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 				String.valueOf(orderByComparator)
 			};
 
-		List<OrgGroupPermission> list = (List<OrgGroupPermission>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
+		List<OrgGroupPermission> list = (List<OrgGroupPermission>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_GROUPID,
 				finderArgs, this);
 
 		if (list == null) {
@@ -450,7 +398,7 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_GROUPID,
 					finderArgs, list);
 
 				closeSession(session);
@@ -640,51 +588,8 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 
 	public List<OrgGroupPermission> findByPermissionId(long permissionId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(permissionId) };
-
-		List<OrgGroupPermission> list = (List<OrgGroupPermission>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_PERMISSIONID,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(2);
-
-				query.append(_SQL_SELECT_ORGGROUPPERMISSION_WHERE);
-
-				query.append(_FINDER_COLUMN_PERMISSIONID_PERMISSIONID_2);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(permissionId);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<OrgGroupPermission>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_PERMISSIONID,
-					finderArgs, list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByPermissionId(permissionId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
 	}
 
 	public List<OrgGroupPermission> findByPermissionId(long permissionId,
@@ -702,7 +607,7 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 				String.valueOf(orderByComparator)
 			};
 
-		List<OrgGroupPermission> list = (List<OrgGroupPermission>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_PERMISSIONID,
+		List<OrgGroupPermission> list = (List<OrgGroupPermission>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_PERMISSIONID,
 				finderArgs, this);
 
 		if (list == null) {
@@ -751,7 +656,7 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_PERMISSIONID,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_PERMISSIONID,
 					finderArgs, list);
 
 				closeSession(session);

@@ -77,9 +77,6 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 		".List";
 	public static final FinderPath FINDER_PATH_FIND_BY_RESOURCEID = new FinderPath(PermissionModelImpl.ENTITY_CACHE_ENABLED,
 			PermissionModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByResourceId", new String[] { Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_RESOURCEID = new FinderPath(PermissionModelImpl.ENTITY_CACHE_ENABLED,
-			PermissionModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByResourceId",
 			new String[] {
 				Long.class.getName(),
@@ -407,51 +404,8 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 
 	public List<Permission> findByResourceId(long resourceId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(resourceId) };
-
-		List<Permission> list = (List<Permission>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_RESOURCEID,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(2);
-
-				query.append(_SQL_SELECT_PERMISSION_WHERE);
-
-				query.append(_FINDER_COLUMN_RESOURCEID_RESOURCEID_2);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(resourceId);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<Permission>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_RESOURCEID,
-					finderArgs, list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByResourceId(resourceId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
 	}
 
 	public List<Permission> findByResourceId(long resourceId, int start, int end)
@@ -468,7 +422,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 				String.valueOf(orderByComparator)
 			};
 
-		List<Permission> list = (List<Permission>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_RESOURCEID,
+		List<Permission> list = (List<Permission>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_RESOURCEID,
 				finderArgs, this);
 
 		if (list == null) {
@@ -517,7 +471,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_RESOURCEID,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_RESOURCEID,
 					finderArgs, list);
 
 				closeSession(session);

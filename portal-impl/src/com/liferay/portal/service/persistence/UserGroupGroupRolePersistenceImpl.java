@@ -66,10 +66,6 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 	public static final FinderPath FINDER_PATH_FIND_BY_USERGROUPID = new FinderPath(UserGroupGroupRoleModelImpl.ENTITY_CACHE_ENABLED,
 			UserGroupGroupRoleModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "findByUserGroupId",
-			new String[] { Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_USERGROUPID = new FinderPath(UserGroupGroupRoleModelImpl.ENTITY_CACHE_ENABLED,
-			UserGroupGroupRoleModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "findByUserGroupId",
 			new String[] {
 				Long.class.getName(),
 				
@@ -81,10 +77,6 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 			FINDER_CLASS_NAME_LIST, "countByUserGroupId",
 			new String[] { Long.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_BY_GROUPID = new FinderPath(UserGroupGroupRoleModelImpl.ENTITY_CACHE_ENABLED,
-			UserGroupGroupRoleModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "findByGroupId",
-			new String[] { Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_GROUPID = new FinderPath(UserGroupGroupRoleModelImpl.ENTITY_CACHE_ENABLED,
 			UserGroupGroupRoleModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "findByGroupId",
 			new String[] {
@@ -100,10 +92,6 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 	public static final FinderPath FINDER_PATH_FIND_BY_ROLEID = new FinderPath(UserGroupGroupRoleModelImpl.ENTITY_CACHE_ENABLED,
 			UserGroupGroupRoleModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "findByRoleId",
-			new String[] { Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_ROLEID = new FinderPath(UserGroupGroupRoleModelImpl.ENTITY_CACHE_ENABLED,
-			UserGroupGroupRoleModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "findByRoleId",
 			new String[] {
 				Long.class.getName(),
 				
@@ -117,10 +105,6 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 	public static final FinderPath FINDER_PATH_FIND_BY_U_G = new FinderPath(UserGroupGroupRoleModelImpl.ENTITY_CACHE_ENABLED,
 			UserGroupGroupRoleModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "findByU_G",
-			new String[] { Long.class.getName(), Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_U_G = new FinderPath(UserGroupGroupRoleModelImpl.ENTITY_CACHE_ENABLED,
-			UserGroupGroupRoleModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "findByU_G",
 			new String[] {
 				Long.class.getName(), Long.class.getName(),
 				
@@ -132,10 +116,6 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 			FINDER_CLASS_NAME_LIST, "countByU_G",
 			new String[] { Long.class.getName(), Long.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_BY_G_R = new FinderPath(UserGroupGroupRoleModelImpl.ENTITY_CACHE_ENABLED,
-			UserGroupGroupRoleModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "findByG_R",
-			new String[] { Long.class.getName(), Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_G_R = new FinderPath(UserGroupGroupRoleModelImpl.ENTITY_CACHE_ENABLED,
 			UserGroupGroupRoleModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "findByG_R",
 			new String[] {
@@ -391,51 +371,8 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 
 	public List<UserGroupGroupRole> findByUserGroupId(long userGroupId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(userGroupId) };
-
-		List<UserGroupGroupRole> list = (List<UserGroupGroupRole>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_USERGROUPID,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(2);
-
-				query.append(_SQL_SELECT_USERGROUPGROUPROLE_WHERE);
-
-				query.append(_FINDER_COLUMN_USERGROUPID_USERGROUPID_2);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(userGroupId);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<UserGroupGroupRole>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_USERGROUPID,
-					finderArgs, list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByUserGroupId(userGroupId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
 	}
 
 	public List<UserGroupGroupRole> findByUserGroupId(long userGroupId,
@@ -453,7 +390,7 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 				String.valueOf(orderByComparator)
 			};
 
-		List<UserGroupGroupRole> list = (List<UserGroupGroupRole>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_USERGROUPID,
+		List<UserGroupGroupRole> list = (List<UserGroupGroupRole>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_USERGROUPID,
 				finderArgs, this);
 
 		if (list == null) {
@@ -502,7 +439,7 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_USERGROUPID,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_USERGROUPID,
 					finderArgs, list);
 
 				closeSession(session);
@@ -692,51 +629,7 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 
 	public List<UserGroupGroupRole> findByGroupId(long groupId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(groupId) };
-
-		List<UserGroupGroupRole> list = (List<UserGroupGroupRole>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_GROUPID,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(2);
-
-				query.append(_SQL_SELECT_USERGROUPGROUPROLE_WHERE);
-
-				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(groupId);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<UserGroupGroupRole>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_GROUPID,
-					finderArgs, list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByGroupId(groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	public List<UserGroupGroupRole> findByGroupId(long groupId, int start,
@@ -753,7 +646,7 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 				String.valueOf(orderByComparator)
 			};
 
-		List<UserGroupGroupRole> list = (List<UserGroupGroupRole>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
+		List<UserGroupGroupRole> list = (List<UserGroupGroupRole>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_GROUPID,
 				finderArgs, this);
 
 		if (list == null) {
@@ -802,7 +695,7 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_GROUPID,
 					finderArgs, list);
 
 				closeSession(session);
@@ -992,51 +885,7 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 
 	public List<UserGroupGroupRole> findByRoleId(long roleId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(roleId) };
-
-		List<UserGroupGroupRole> list = (List<UserGroupGroupRole>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_ROLEID,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(2);
-
-				query.append(_SQL_SELECT_USERGROUPGROUPROLE_WHERE);
-
-				query.append(_FINDER_COLUMN_ROLEID_ROLEID_2);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(roleId);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<UserGroupGroupRole>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_ROLEID,
-					finderArgs, list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByRoleId(roleId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	public List<UserGroupGroupRole> findByRoleId(long roleId, int start, int end)
@@ -1053,7 +902,7 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 				String.valueOf(orderByComparator)
 			};
 
-		List<UserGroupGroupRole> list = (List<UserGroupGroupRole>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_ROLEID,
+		List<UserGroupGroupRole> list = (List<UserGroupGroupRole>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_ROLEID,
 				finderArgs, this);
 
 		if (list == null) {
@@ -1102,7 +951,7 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_ROLEID,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_ROLEID,
 					finderArgs, list);
 
 				closeSession(session);
@@ -1292,57 +1141,8 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 
 	public List<UserGroupGroupRole> findByU_G(long userGroupId, long groupId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(userGroupId), new Long(groupId)
-			};
-
-		List<UserGroupGroupRole> list = (List<UserGroupGroupRole>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_U_G,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_SELECT_USERGROUPGROUPROLE_WHERE);
-
-				query.append(_FINDER_COLUMN_U_G_USERGROUPID_2);
-
-				query.append(_FINDER_COLUMN_U_G_GROUPID_2);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(userGroupId);
-
-				qPos.add(groupId);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<UserGroupGroupRole>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_U_G, finderArgs,
-					list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByU_G(userGroupId, groupId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
 	}
 
 	public List<UserGroupGroupRole> findByU_G(long userGroupId, long groupId,
@@ -1360,7 +1160,7 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 				String.valueOf(orderByComparator)
 			};
 
-		List<UserGroupGroupRole> list = (List<UserGroupGroupRole>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_U_G,
+		List<UserGroupGroupRole> list = (List<UserGroupGroupRole>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_U_G,
 				finderArgs, this);
 
 		if (list == null) {
@@ -1413,8 +1213,8 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_U_G,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_U_G, finderArgs,
+					list);
 
 				closeSession(session);
 			}
@@ -1613,55 +1413,8 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 
 	public List<UserGroupGroupRole> findByG_R(long groupId, long roleId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(groupId), new Long(roleId) };
-
-		List<UserGroupGroupRole> list = (List<UserGroupGroupRole>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_R,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_SELECT_USERGROUPGROUPROLE_WHERE);
-
-				query.append(_FINDER_COLUMN_G_R_GROUPID_2);
-
-				query.append(_FINDER_COLUMN_G_R_ROLEID_2);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(groupId);
-
-				qPos.add(roleId);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<UserGroupGroupRole>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_R, finderArgs,
-					list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByG_R(groupId, roleId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+			null);
 	}
 
 	public List<UserGroupGroupRole> findByG_R(long groupId, long roleId,
@@ -1679,7 +1432,7 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 				String.valueOf(orderByComparator)
 			};
 
-		List<UserGroupGroupRole> list = (List<UserGroupGroupRole>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_G_R,
+		List<UserGroupGroupRole> list = (List<UserGroupGroupRole>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_R,
 				finderArgs, this);
 
 		if (list == null) {
@@ -1732,8 +1485,8 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_G_R,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_R, finderArgs,
+					list);
 
 				closeSession(session);
 			}

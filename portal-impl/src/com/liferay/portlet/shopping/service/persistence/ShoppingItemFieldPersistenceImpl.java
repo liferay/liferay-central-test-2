@@ -70,10 +70,6 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistenceImpl<Shoppi
 	public static final FinderPath FINDER_PATH_FIND_BY_ITEMID = new FinderPath(ShoppingItemFieldModelImpl.ENTITY_CACHE_ENABLED,
 			ShoppingItemFieldModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "findByItemId",
-			new String[] { Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_ITEMID = new FinderPath(ShoppingItemFieldModelImpl.ENTITY_CACHE_ENABLED,
-			ShoppingItemFieldModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "findByItemId",
 			new String[] {
 				Long.class.getName(),
 				
@@ -326,53 +322,7 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistenceImpl<Shoppi
 
 	public List<ShoppingItemField> findByItemId(long itemId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(itemId) };
-
-		List<ShoppingItemField> list = (List<ShoppingItemField>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_ITEMID,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_SELECT_SHOPPINGITEMFIELD_WHERE);
-
-				query.append(_FINDER_COLUMN_ITEMID_ITEMID_2);
-
-				query.append(ShoppingItemFieldModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(itemId);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<ShoppingItemField>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_ITEMID,
-					finderArgs, list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByItemId(itemId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	public List<ShoppingItemField> findByItemId(long itemId, int start, int end)
@@ -389,7 +339,7 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistenceImpl<Shoppi
 				String.valueOf(orderByComparator)
 			};
 
-		List<ShoppingItemField> list = (List<ShoppingItemField>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_ITEMID,
+		List<ShoppingItemField> list = (List<ShoppingItemField>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_ITEMID,
 				finderArgs, this);
 
 		if (list == null) {
@@ -442,7 +392,7 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistenceImpl<Shoppi
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_ITEMID,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_ITEMID,
 					finderArgs, list);
 
 				closeSession(session);

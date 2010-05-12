@@ -67,10 +67,6 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 	public static final FinderPath FINDER_PATH_FIND_BY_BUILDNAMESPACE = new FinderPath(ServiceComponentModelImpl.ENTITY_CACHE_ENABLED,
 			ServiceComponentModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "findByBuildNamespace",
-			new String[] { String.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_BUILDNAMESPACE = new FinderPath(ServiceComponentModelImpl.ENTITY_CACHE_ENABLED,
-			ServiceComponentModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "findByBuildNamespace",
 			new String[] {
 				String.class.getName(),
 				
@@ -379,65 +375,8 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 
 	public List<ServiceComponent> findByBuildNamespace(String buildNamespace)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { buildNamespace };
-
-		List<ServiceComponent> list = (List<ServiceComponent>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_BUILDNAMESPACE,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_SELECT_SERVICECOMPONENT_WHERE);
-
-				if (buildNamespace == null) {
-					query.append(_FINDER_COLUMN_BUILDNAMESPACE_BUILDNAMESPACE_1);
-				}
-				else {
-					if (buildNamespace.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_BUILDNAMESPACE_BUILDNAMESPACE_3);
-					}
-					else {
-						query.append(_FINDER_COLUMN_BUILDNAMESPACE_BUILDNAMESPACE_2);
-					}
-				}
-
-				query.append(ServiceComponentModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				if (buildNamespace != null) {
-					qPos.add(buildNamespace);
-				}
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<ServiceComponent>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_BUILDNAMESPACE,
-					finderArgs, list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByBuildNamespace(buildNamespace, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
 	}
 
 	public List<ServiceComponent> findByBuildNamespace(String buildNamespace,
@@ -455,7 +394,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 				String.valueOf(orderByComparator)
 			};
 
-		List<ServiceComponent> list = (List<ServiceComponent>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_BUILDNAMESPACE,
+		List<ServiceComponent> list = (List<ServiceComponent>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_BUILDNAMESPACE,
 				finderArgs, this);
 
 		if (list == null) {
@@ -520,7 +459,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_BUILDNAMESPACE,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_BUILDNAMESPACE,
 					finderArgs, list);
 
 				closeSession(session);

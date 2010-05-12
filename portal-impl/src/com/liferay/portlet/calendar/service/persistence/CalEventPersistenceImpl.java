@@ -78,9 +78,6 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 		".List";
 	public static final FinderPath FINDER_PATH_FIND_BY_UUID = new FinderPath(CalEventModelImpl.ENTITY_CACHE_ENABLED,
 			CalEventModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByUuid", new String[] { String.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_UUID = new FinderPath(CalEventModelImpl.ENTITY_CACHE_ENABLED,
-			CalEventModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByUuid",
 			new String[] {
 				String.class.getName(),
@@ -101,9 +98,6 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 			new String[] { String.class.getName(), Long.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_BY_COMPANYID = new FinderPath(CalEventModelImpl.ENTITY_CACHE_ENABLED,
 			CalEventModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByCompanyId", new String[] { Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_COMPANYID = new FinderPath(CalEventModelImpl.ENTITY_CACHE_ENABLED,
-			CalEventModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByCompanyId",
 			new String[] {
 				Long.class.getName(),
@@ -116,9 +110,6 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 			"countByCompanyId", new String[] { Long.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_BY_GROUPID = new FinderPath(CalEventModelImpl.ENTITY_CACHE_ENABLED,
 			CalEventModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByGroupId", new String[] { Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_GROUPID = new FinderPath(CalEventModelImpl.ENTITY_CACHE_ENABLED,
-			CalEventModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByGroupId",
 			new String[] {
 				Long.class.getName(),
@@ -130,9 +121,6 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 			CalEventModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countByGroupId", new String[] { Long.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_BY_REMINDBY = new FinderPath(CalEventModelImpl.ENTITY_CACHE_ENABLED,
-			CalEventModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByRemindBy", new String[] { Integer.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_REMINDBY = new FinderPath(CalEventModelImpl.ENTITY_CACHE_ENABLED,
 			CalEventModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByRemindBy",
 			new String[] {
@@ -147,10 +135,6 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	public static final FinderPath FINDER_PATH_FIND_BY_G_T = new FinderPath(CalEventModelImpl.ENTITY_CACHE_ENABLED,
 			CalEventModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByG_T",
-			new String[] { Long.class.getName(), String.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_G_T = new FinderPath(CalEventModelImpl.ENTITY_CACHE_ENABLED,
-			CalEventModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByG_T",
 			new String[] {
 				Long.class.getName(), String.class.getName(),
 				
@@ -162,10 +146,6 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 			"countByG_T",
 			new String[] { Long.class.getName(), String.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_BY_G_R = new FinderPath(CalEventModelImpl.ENTITY_CACHE_ENABLED,
-			CalEventModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByG_R",
-			new String[] { Long.class.getName(), Boolean.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_G_R = new FinderPath(CalEventModelImpl.ENTITY_CACHE_ENABLED,
 			CalEventModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByG_R",
 			new String[] {
@@ -477,65 +457,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	}
 
 	public List<CalEvent> findByUuid(String uuid) throws SystemException {
-		Object[] finderArgs = new Object[] { uuid };
-
-		List<CalEvent> list = (List<CalEvent>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_UUID,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_SELECT_CALEVENT_WHERE);
-
-				if (uuid == null) {
-					query.append(_FINDER_COLUMN_UUID_UUID_1);
-				}
-				else {
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_UUID_UUID_3);
-					}
-					else {
-						query.append(_FINDER_COLUMN_UUID_UUID_2);
-					}
-				}
-
-				query.append(CalEventModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				if (uuid != null) {
-					qPos.add(uuid);
-				}
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<CalEvent>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_UUID, finderArgs,
-					list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByUuid(uuid, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	public List<CalEvent> findByUuid(String uuid, int start, int end)
@@ -552,7 +474,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 				String.valueOf(orderByComparator)
 			};
 
-		List<CalEvent> list = (List<CalEvent>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_UUID,
+		List<CalEvent> list = (List<CalEvent>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_UUID,
 				finderArgs, this);
 
 		if (list == null) {
@@ -617,8 +539,8 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_UUID,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_UUID, finderArgs,
+					list);
 
 				closeSession(session);
 			}
@@ -949,53 +871,8 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 	public List<CalEvent> findByCompanyId(long companyId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(companyId) };
-
-		List<CalEvent> list = (List<CalEvent>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_COMPANYID,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_SELECT_CALEVENT_WHERE);
-
-				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
-
-				query.append(CalEventModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(companyId);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<CalEvent>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_COMPANYID,
-					finderArgs, list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByCompanyId(companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+			null);
 	}
 
 	public List<CalEvent> findByCompanyId(long companyId, int start, int end)
@@ -1012,7 +889,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 				String.valueOf(orderByComparator)
 			};
 
-		List<CalEvent> list = (List<CalEvent>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
+		List<CalEvent> list = (List<CalEvent>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_COMPANYID,
 				finderArgs, this);
 
 		if (list == null) {
@@ -1065,7 +942,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_COMPANYID,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_COMPANYID,
 					finderArgs, list);
 
 				closeSession(session);
@@ -1256,53 +1133,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	}
 
 	public List<CalEvent> findByGroupId(long groupId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(groupId) };
-
-		List<CalEvent> list = (List<CalEvent>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_GROUPID,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_SELECT_CALEVENT_WHERE);
-
-				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
-
-				query.append(CalEventModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(groupId);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<CalEvent>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_GROUPID,
-					finderArgs, list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByGroupId(groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	public List<CalEvent> findByGroupId(long groupId, int start, int end)
@@ -1319,7 +1150,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 				String.valueOf(orderByComparator)
 			};
 
-		List<CalEvent> list = (List<CalEvent>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
+		List<CalEvent> list = (List<CalEvent>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_GROUPID,
 				finderArgs, this);
 
 		if (list == null) {
@@ -1372,7 +1203,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_GROUPID,
 					finderArgs, list);
 
 				closeSession(session);
@@ -1564,53 +1395,8 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 	public List<CalEvent> findByRemindBy(int remindBy)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Integer(remindBy) };
-
-		List<CalEvent> list = (List<CalEvent>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_REMINDBY,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_SELECT_CALEVENT_WHERE);
-
-				query.append(_FINDER_COLUMN_REMINDBY_REMINDBY_2);
-
-				query.append(CalEventModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(remindBy);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<CalEvent>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_REMINDBY,
-					finderArgs, list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByRemindBy(remindBy, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+			null);
 	}
 
 	public List<CalEvent> findByRemindBy(int remindBy, int start, int end)
@@ -1627,7 +1413,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 				String.valueOf(orderByComparator)
 			};
 
-		List<CalEvent> list = (List<CalEvent>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_REMINDBY,
+		List<CalEvent> list = (List<CalEvent>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_REMINDBY,
 				finderArgs, this);
 
 		if (list == null) {
@@ -1680,7 +1466,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_REMINDBY,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_REMINDBY,
 					finderArgs, list);
 
 				closeSession(session);
@@ -1872,69 +1658,8 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 	public List<CalEvent> findByG_T(long groupId, String type)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(groupId), type };
-
-		List<CalEvent> list = (List<CalEvent>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_T,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(4);
-
-				query.append(_SQL_SELECT_CALEVENT_WHERE);
-
-				query.append(_FINDER_COLUMN_G_T_GROUPID_2);
-
-				if (type == null) {
-					query.append(_FINDER_COLUMN_G_T_TYPE_1);
-				}
-				else {
-					if (type.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_G_T_TYPE_3);
-					}
-					else {
-						query.append(_FINDER_COLUMN_G_T_TYPE_2);
-					}
-				}
-
-				query.append(CalEventModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(groupId);
-
-				if (type != null) {
-					qPos.add(type);
-				}
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<CalEvent>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_T, finderArgs,
-					list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByG_T(groupId, type, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+			null);
 	}
 
 	public List<CalEvent> findByG_T(long groupId, String type, int start,
@@ -1953,7 +1678,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 				String.valueOf(orderByComparator)
 			};
 
-		List<CalEvent> list = (List<CalEvent>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_G_T,
+		List<CalEvent> list = (List<CalEvent>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_T,
 				finderArgs, this);
 
 		if (list == null) {
@@ -2022,8 +1747,8 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_G_T,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_T, finderArgs,
+					list);
 
 				closeSession(session);
 			}
@@ -2236,59 +1961,8 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 	public List<CalEvent> findByG_R(long groupId, boolean repeating)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(groupId), Boolean.valueOf(repeating)
-			};
-
-		List<CalEvent> list = (List<CalEvent>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_R,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(4);
-
-				query.append(_SQL_SELECT_CALEVENT_WHERE);
-
-				query.append(_FINDER_COLUMN_G_R_GROUPID_2);
-
-				query.append(_FINDER_COLUMN_G_R_REPEATING_2);
-
-				query.append(CalEventModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(groupId);
-
-				qPos.add(repeating);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<CalEvent>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_R, finderArgs,
-					list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByG_R(groupId, repeating, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
 	}
 
 	public List<CalEvent> findByG_R(long groupId, boolean repeating, int start,
@@ -2305,7 +1979,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 				String.valueOf(orderByComparator)
 			};
 
-		List<CalEvent> list = (List<CalEvent>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_G_R,
+		List<CalEvent> list = (List<CalEvent>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_R,
 				finderArgs, this);
 
 		if (list == null) {
@@ -2362,8 +2036,8 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_G_R,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_R, finderArgs,
+					list);
 
 				closeSession(session);
 			}

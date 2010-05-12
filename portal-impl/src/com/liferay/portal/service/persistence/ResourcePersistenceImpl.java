@@ -66,9 +66,6 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 		".List";
 	public static final FinderPath FINDER_PATH_FIND_BY_CODEID = new FinderPath(ResourceModelImpl.ENTITY_CACHE_ENABLED,
 			ResourceModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByCodeId", new String[] { Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_CODEID = new FinderPath(ResourceModelImpl.ENTITY_CACHE_ENABLED,
-			ResourceModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByCodeId",
 			new String[] {
 				Long.class.getName(),
@@ -362,51 +359,7 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 	}
 
 	public List<Resource> findByCodeId(long codeId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(codeId) };
-
-		List<Resource> list = (List<Resource>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_CODEID,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(2);
-
-				query.append(_SQL_SELECT_RESOURCE_WHERE);
-
-				query.append(_FINDER_COLUMN_CODEID_CODEID_2);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(codeId);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<Resource>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_CODEID,
-					finderArgs, list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByCodeId(codeId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	public List<Resource> findByCodeId(long codeId, int start, int end)
@@ -423,7 +376,7 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 				String.valueOf(orderByComparator)
 			};
 
-		List<Resource> list = (List<Resource>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_CODEID,
+		List<Resource> list = (List<Resource>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_CODEID,
 				finderArgs, this);
 
 		if (list == null) {
@@ -472,7 +425,7 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_CODEID,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_CODEID,
 					finderArgs, list);
 
 				closeSession(session);

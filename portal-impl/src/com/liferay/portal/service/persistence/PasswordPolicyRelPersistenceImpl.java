@@ -66,10 +66,6 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 	public static final FinderPath FINDER_PATH_FIND_BY_PASSWORDPOLICYID = new FinderPath(PasswordPolicyRelModelImpl.ENTITY_CACHE_ENABLED,
 			PasswordPolicyRelModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "findByPasswordPolicyId",
-			new String[] { Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_PASSWORDPOLICYID = new FinderPath(PasswordPolicyRelModelImpl.ENTITY_CACHE_ENABLED,
-			PasswordPolicyRelModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "findByPasswordPolicyId",
 			new String[] {
 				Long.class.getName(),
 				
@@ -432,51 +428,8 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 
 	public List<PasswordPolicyRel> findByPasswordPolicyId(long passwordPolicyId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(passwordPolicyId) };
-
-		List<PasswordPolicyRel> list = (List<PasswordPolicyRel>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_PASSWORDPOLICYID,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(2);
-
-				query.append(_SQL_SELECT_PASSWORDPOLICYREL_WHERE);
-
-				query.append(_FINDER_COLUMN_PASSWORDPOLICYID_PASSWORDPOLICYID_2);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(passwordPolicyId);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<PasswordPolicyRel>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_PASSWORDPOLICYID,
-					finderArgs, list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByPasswordPolicyId(passwordPolicyId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
 	}
 
 	public List<PasswordPolicyRel> findByPasswordPolicyId(
@@ -494,7 +447,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 				String.valueOf(orderByComparator)
 			};
 
-		List<PasswordPolicyRel> list = (List<PasswordPolicyRel>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_PASSWORDPOLICYID,
+		List<PasswordPolicyRel> list = (List<PasswordPolicyRel>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_PASSWORDPOLICYID,
 				finderArgs, this);
 
 		if (list == null) {
@@ -543,7 +496,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_PASSWORDPOLICYID,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_PASSWORDPOLICYID,
 					finderArgs, list);
 
 				closeSession(session);

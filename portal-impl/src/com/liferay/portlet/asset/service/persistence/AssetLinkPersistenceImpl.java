@@ -69,9 +69,6 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 		".List";
 	public static final FinderPath FINDER_PATH_FIND_BY_E1 = new FinderPath(AssetLinkModelImpl.ENTITY_CACHE_ENABLED,
 			AssetLinkModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByE1", new String[] { Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_E1 = new FinderPath(AssetLinkModelImpl.ENTITY_CACHE_ENABLED,
-			AssetLinkModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByE1",
 			new String[] {
 				Long.class.getName(),
@@ -84,9 +81,6 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 			"countByE1", new String[] { Long.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_BY_E2 = new FinderPath(AssetLinkModelImpl.ENTITY_CACHE_ENABLED,
 			AssetLinkModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByE2", new String[] { Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_E2 = new FinderPath(AssetLinkModelImpl.ENTITY_CACHE_ENABLED,
-			AssetLinkModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByE2",
 			new String[] {
 				Long.class.getName(),
@@ -98,10 +92,6 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 			AssetLinkModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countByE2", new String[] { Long.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_BY_E_E = new FinderPath(AssetLinkModelImpl.ENTITY_CACHE_ENABLED,
-			AssetLinkModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByE_E",
-			new String[] { Long.class.getName(), Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_E_E = new FinderPath(AssetLinkModelImpl.ENTITY_CACHE_ENABLED,
 			AssetLinkModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByE_E",
 			new String[] {
@@ -117,10 +107,6 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	public static final FinderPath FINDER_PATH_FIND_BY_E1_T = new FinderPath(AssetLinkModelImpl.ENTITY_CACHE_ENABLED,
 			AssetLinkModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByE1_T",
-			new String[] { Long.class.getName(), Integer.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_E1_T = new FinderPath(AssetLinkModelImpl.ENTITY_CACHE_ENABLED,
-			AssetLinkModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByE1_T",
 			new String[] {
 				Long.class.getName(), Integer.class.getName(),
 				
@@ -134,10 +120,6 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	public static final FinderPath FINDER_PATH_FIND_BY_E2_T = new FinderPath(AssetLinkModelImpl.ENTITY_CACHE_ENABLED,
 			AssetLinkModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByE2_T",
-			new String[] { Long.class.getName(), Integer.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_E2_T = new FinderPath(AssetLinkModelImpl.ENTITY_CACHE_ENABLED,
-			AssetLinkModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByE2_T",
 			new String[] {
 				Long.class.getName(), Integer.class.getName(),
 				
@@ -149,13 +131,6 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 			"countByE2_T",
 			new String[] { Long.class.getName(), Integer.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_BY_E_E_T = new FinderPath(AssetLinkModelImpl.ENTITY_CACHE_ENABLED,
-			AssetLinkModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByE_E_T",
-			new String[] {
-				Long.class.getName(), Long.class.getName(),
-				Integer.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_E_E_T = new FinderPath(AssetLinkModelImpl.ENTITY_CACHE_ENABLED,
 			AssetLinkModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByE_E_T",
 			new String[] {
@@ -410,53 +385,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	}
 
 	public List<AssetLink> findByE1(long entryId1) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(entryId1) };
-
-		List<AssetLink> list = (List<AssetLink>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_E1,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_SELECT_ASSETLINK_WHERE);
-
-				query.append(_FINDER_COLUMN_E1_ENTRYID1_2);
-
-				query.append(AssetLinkModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(entryId1);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<AssetLink>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_E1, finderArgs,
-					list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByE1(entryId1, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	public List<AssetLink> findByE1(long entryId1, int start, int end)
@@ -473,7 +402,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 				String.valueOf(orderByComparator)
 			};
 
-		List<AssetLink> list = (List<AssetLink>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_E1,
+		List<AssetLink> list = (List<AssetLink>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_E1,
 				finderArgs, this);
 
 		if (list == null) {
@@ -526,8 +455,8 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_E1,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_E1, finderArgs,
+					list);
 
 				closeSession(session);
 			}
@@ -717,53 +646,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	}
 
 	public List<AssetLink> findByE2(long entryId2) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(entryId2) };
-
-		List<AssetLink> list = (List<AssetLink>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_E2,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_SELECT_ASSETLINK_WHERE);
-
-				query.append(_FINDER_COLUMN_E2_ENTRYID2_2);
-
-				query.append(AssetLinkModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(entryId2);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<AssetLink>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_E2, finderArgs,
-					list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByE2(entryId2, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	public List<AssetLink> findByE2(long entryId2, int start, int end)
@@ -780,7 +663,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 				String.valueOf(orderByComparator)
 			};
 
-		List<AssetLink> list = (List<AssetLink>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_E2,
+		List<AssetLink> list = (List<AssetLink>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_E2,
 				finderArgs, this);
 
 		if (list == null) {
@@ -833,8 +716,8 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_E2,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_E2, finderArgs,
+					list);
 
 				closeSession(session);
 			}
@@ -1025,59 +908,8 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 
 	public List<AssetLink> findByE_E(long entryId1, long entryId2)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(entryId1), new Long(entryId2)
-			};
-
-		List<AssetLink> list = (List<AssetLink>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_E_E,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(4);
-
-				query.append(_SQL_SELECT_ASSETLINK_WHERE);
-
-				query.append(_FINDER_COLUMN_E_E_ENTRYID1_2);
-
-				query.append(_FINDER_COLUMN_E_E_ENTRYID2_2);
-
-				query.append(AssetLinkModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(entryId1);
-
-				qPos.add(entryId2);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<AssetLink>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_E_E, finderArgs,
-					list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByE_E(entryId1, entryId2, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
 	}
 
 	public List<AssetLink> findByE_E(long entryId1, long entryId2, int start,
@@ -1094,7 +926,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 				String.valueOf(orderByComparator)
 			};
 
-		List<AssetLink> list = (List<AssetLink>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_E_E,
+		List<AssetLink> list = (List<AssetLink>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_E_E,
 				finderArgs, this);
 
 		if (list == null) {
@@ -1151,8 +983,8 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_E_E,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_E_E, finderArgs,
+					list);
 
 				closeSession(session);
 			}
@@ -1354,57 +1186,8 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 
 	public List<AssetLink> findByE1_T(long entryId1, int type)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(entryId1), new Integer(type) };
-
-		List<AssetLink> list = (List<AssetLink>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_E1_T,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(4);
-
-				query.append(_SQL_SELECT_ASSETLINK_WHERE);
-
-				query.append(_FINDER_COLUMN_E1_T_ENTRYID1_2);
-
-				query.append(_FINDER_COLUMN_E1_T_TYPE_2);
-
-				query.append(AssetLinkModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(entryId1);
-
-				qPos.add(type);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<AssetLink>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_E1_T, finderArgs,
-					list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByE1_T(entryId1, type, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+			null);
 	}
 
 	public List<AssetLink> findByE1_T(long entryId1, int type, int start,
@@ -1421,7 +1204,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 				String.valueOf(orderByComparator)
 			};
 
-		List<AssetLink> list = (List<AssetLink>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_E1_T,
+		List<AssetLink> list = (List<AssetLink>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_E1_T,
 				finderArgs, this);
 
 		if (list == null) {
@@ -1478,8 +1261,8 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_E1_T,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_E1_T, finderArgs,
+					list);
 
 				closeSession(session);
 			}
@@ -1681,57 +1464,8 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 
 	public List<AssetLink> findByE2_T(long entryId2, int type)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(entryId2), new Integer(type) };
-
-		List<AssetLink> list = (List<AssetLink>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_E2_T,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(4);
-
-				query.append(_SQL_SELECT_ASSETLINK_WHERE);
-
-				query.append(_FINDER_COLUMN_E2_T_ENTRYID2_2);
-
-				query.append(_FINDER_COLUMN_E2_T_TYPE_2);
-
-				query.append(AssetLinkModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(entryId2);
-
-				qPos.add(type);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<AssetLink>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_E2_T, finderArgs,
-					list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByE2_T(entryId2, type, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+			null);
 	}
 
 	public List<AssetLink> findByE2_T(long entryId2, int type, int start,
@@ -1748,7 +1482,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 				String.valueOf(orderByComparator)
 			};
 
-		List<AssetLink> list = (List<AssetLink>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_E2_T,
+		List<AssetLink> list = (List<AssetLink>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_E2_T,
 				finderArgs, this);
 
 		if (list == null) {
@@ -1805,8 +1539,8 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_E2_T,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_E2_T, finderArgs,
+					list);
 
 				closeSession(session);
 			}
@@ -2008,63 +1742,8 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 
 	public List<AssetLink> findByE_E_T(long entryId1, long entryId2, int type)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(entryId1), new Long(entryId2), new Integer(type)
-			};
-
-		List<AssetLink> list = (List<AssetLink>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_E_E_T,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(5);
-
-				query.append(_SQL_SELECT_ASSETLINK_WHERE);
-
-				query.append(_FINDER_COLUMN_E_E_T_ENTRYID1_2);
-
-				query.append(_FINDER_COLUMN_E_E_T_ENTRYID2_2);
-
-				query.append(_FINDER_COLUMN_E_E_T_TYPE_2);
-
-				query.append(AssetLinkModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(entryId1);
-
-				qPos.add(entryId2);
-
-				qPos.add(type);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<AssetLink>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_E_E_T,
-					finderArgs, list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByE_E_T(entryId1, entryId2, type, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
 	}
 
 	public List<AssetLink> findByE_E_T(long entryId1, long entryId2, int type,
@@ -2082,7 +1761,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 				String.valueOf(orderByComparator)
 			};
 
-		List<AssetLink> list = (List<AssetLink>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_E_E_T,
+		List<AssetLink> list = (List<AssetLink>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_E_E_T,
 				finderArgs, this);
 
 		if (list == null) {
@@ -2143,7 +1822,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_E_E_T,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_E_E_T,
 					finderArgs, list);
 
 				closeSession(session);

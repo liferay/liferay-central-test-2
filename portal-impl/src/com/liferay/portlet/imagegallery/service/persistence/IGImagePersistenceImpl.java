@@ -77,9 +77,6 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		".List";
 	public static final FinderPath FINDER_PATH_FIND_BY_UUID = new FinderPath(IGImageModelImpl.ENTITY_CACHE_ENABLED,
 			IGImageModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByUuid", new String[] { String.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_UUID = new FinderPath(IGImageModelImpl.ENTITY_CACHE_ENABLED,
-			IGImageModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByUuid",
 			new String[] {
 				String.class.getName(),
@@ -99,9 +96,6 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 			"countByUUID_G",
 			new String[] { String.class.getName(), Long.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_BY_GROUPID = new FinderPath(IGImageModelImpl.ENTITY_CACHE_ENABLED,
-			IGImageModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByGroupId", new String[] { Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_GROUPID = new FinderPath(IGImageModelImpl.ENTITY_CACHE_ENABLED,
 			IGImageModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByGroupId",
 			new String[] {
@@ -140,10 +134,6 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 	public static final FinderPath FINDER_PATH_FIND_BY_G_U = new FinderPath(IGImageModelImpl.ENTITY_CACHE_ENABLED,
 			IGImageModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByG_U",
-			new String[] { Long.class.getName(), Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_G_U = new FinderPath(IGImageModelImpl.ENTITY_CACHE_ENABLED,
-			IGImageModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByG_U",
 			new String[] {
 				Long.class.getName(), Long.class.getName(),
 				
@@ -157,10 +147,6 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 	public static final FinderPath FINDER_PATH_FIND_BY_G_F = new FinderPath(IGImageModelImpl.ENTITY_CACHE_ENABLED,
 			IGImageModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByG_F",
-			new String[] { Long.class.getName(), Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_G_F = new FinderPath(IGImageModelImpl.ENTITY_CACHE_ENABLED,
-			IGImageModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByG_F",
 			new String[] {
 				Long.class.getName(), Long.class.getName(),
 				
@@ -172,13 +158,6 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 			"countByG_F",
 			new String[] { Long.class.getName(), Long.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_BY_G_F_N = new FinderPath(IGImageModelImpl.ENTITY_CACHE_ENABLED,
-			IGImageModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByG_F_N",
-			new String[] {
-				Long.class.getName(), Long.class.getName(),
-				String.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_G_F_N = new FinderPath(IGImageModelImpl.ENTITY_CACHE_ENABLED,
 			IGImageModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByG_F_N",
 			new String[] {
@@ -578,65 +557,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 	}
 
 	public List<IGImage> findByUuid(String uuid) throws SystemException {
-		Object[] finderArgs = new Object[] { uuid };
-
-		List<IGImage> list = (List<IGImage>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_UUID,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_SELECT_IGIMAGE_WHERE);
-
-				if (uuid == null) {
-					query.append(_FINDER_COLUMN_UUID_UUID_1);
-				}
-				else {
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_UUID_UUID_3);
-					}
-					else {
-						query.append(_FINDER_COLUMN_UUID_UUID_2);
-					}
-				}
-
-				query.append(IGImageModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				if (uuid != null) {
-					qPos.add(uuid);
-				}
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<IGImage>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_UUID, finderArgs,
-					list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByUuid(uuid, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	public List<IGImage> findByUuid(String uuid, int start, int end)
@@ -653,7 +574,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 				String.valueOf(orderByComparator)
 			};
 
-		List<IGImage> list = (List<IGImage>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_UUID,
+		List<IGImage> list = (List<IGImage>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_UUID,
 				finderArgs, this);
 
 		if (list == null) {
@@ -717,8 +638,8 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_UUID,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_UUID, finderArgs,
+					list);
 
 				closeSession(session);
 			}
@@ -1047,53 +968,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 	}
 
 	public List<IGImage> findByGroupId(long groupId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(groupId) };
-
-		List<IGImage> list = (List<IGImage>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_GROUPID,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_SELECT_IGIMAGE_WHERE);
-
-				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
-
-				query.append(IGImageModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(groupId);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<IGImage>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_GROUPID,
-					finderArgs, list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByGroupId(groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	public List<IGImage> findByGroupId(long groupId, int start, int end)
@@ -1110,7 +985,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 				String.valueOf(orderByComparator)
 			};
 
-		List<IGImage> list = (List<IGImage>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
+		List<IGImage> list = (List<IGImage>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_GROUPID,
 				finderArgs, this);
 
 		if (list == null) {
@@ -1162,7 +1037,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_GROUPID,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_GROUPID,
 					finderArgs, list);
 
 				closeSession(session);
@@ -1782,57 +1657,8 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 	public List<IGImage> findByG_U(long groupId, long userId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(groupId), new Long(userId) };
-
-		List<IGImage> list = (List<IGImage>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_U,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(4);
-
-				query.append(_SQL_SELECT_IGIMAGE_WHERE);
-
-				query.append(_FINDER_COLUMN_G_U_GROUPID_2);
-
-				query.append(_FINDER_COLUMN_G_U_USERID_2);
-
-				query.append(IGImageModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(groupId);
-
-				qPos.add(userId);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<IGImage>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_U, finderArgs,
-					list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByG_U(groupId, userId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+			null);
 	}
 
 	public List<IGImage> findByG_U(long groupId, long userId, int start, int end)
@@ -1849,7 +1675,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 				String.valueOf(orderByComparator)
 			};
 
-		List<IGImage> list = (List<IGImage>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_G_U,
+		List<IGImage> list = (List<IGImage>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_U,
 				finderArgs, this);
 
 		if (list == null) {
@@ -1905,8 +1731,8 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_G_U,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_U, finderArgs,
+					list);
 
 				closeSession(session);
 			}
@@ -2107,57 +1933,8 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 	public List<IGImage> findByG_F(long groupId, long folderId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(groupId), new Long(folderId) };
-
-		List<IGImage> list = (List<IGImage>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_F,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(4);
-
-				query.append(_SQL_SELECT_IGIMAGE_WHERE);
-
-				query.append(_FINDER_COLUMN_G_F_GROUPID_2);
-
-				query.append(_FINDER_COLUMN_G_F_FOLDERID_2);
-
-				query.append(IGImageModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(groupId);
-
-				qPos.add(folderId);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<IGImage>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_F, finderArgs,
-					list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByG_F(groupId, folderId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
 	}
 
 	public List<IGImage> findByG_F(long groupId, long folderId, int start,
@@ -2174,7 +1951,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 				String.valueOf(orderByComparator)
 			};
 
-		List<IGImage> list = (List<IGImage>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_G_F,
+		List<IGImage> list = (List<IGImage>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_F,
 				finderArgs, this);
 
 		if (list == null) {
@@ -2230,8 +2007,8 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_G_F,
-					finderArgs, list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_F, finderArgs,
+					list);
 
 				closeSession(session);
 			}
@@ -2433,77 +2210,8 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 	public List<IGImage> findByG_F_N(long groupId, long folderId, String name)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Long(folderId),
-				
-				name
-			};
-
-		List<IGImage> list = (List<IGImage>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_F_N,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(5);
-
-				query.append(_SQL_SELECT_IGIMAGE_WHERE);
-
-				query.append(_FINDER_COLUMN_G_F_N_GROUPID_2);
-
-				query.append(_FINDER_COLUMN_G_F_N_FOLDERID_2);
-
-				if (name == null) {
-					query.append(_FINDER_COLUMN_G_F_N_NAME_1);
-				}
-				else {
-					if (name.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_G_F_N_NAME_3);
-					}
-					else {
-						query.append(_FINDER_COLUMN_G_F_N_NAME_2);
-					}
-				}
-
-				query.append(IGImageModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(groupId);
-
-				qPos.add(folderId);
-
-				if (name != null) {
-					qPos.add(name);
-				}
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<IGImage>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_F_N,
-					finderArgs, list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByG_F_N(groupId, folderId, name, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
 	}
 
 	public List<IGImage> findByG_F_N(long groupId, long folderId, String name,
@@ -2523,7 +2231,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 				String.valueOf(orderByComparator)
 			};
 
-		List<IGImage> list = (List<IGImage>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_G_F_N,
+		List<IGImage> list = (List<IGImage>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_F_N,
 				finderArgs, this);
 
 		if (list == null) {
@@ -2595,7 +2303,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_G_F_N,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_F_N,
 					finderArgs, list);
 
 				closeSession(session);

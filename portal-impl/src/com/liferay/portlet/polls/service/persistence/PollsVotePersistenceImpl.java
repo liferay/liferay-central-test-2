@@ -69,9 +69,6 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 		".List";
 	public static final FinderPath FINDER_PATH_FIND_BY_QUESTIONID = new FinderPath(PollsVoteModelImpl.ENTITY_CACHE_ENABLED,
 			PollsVoteModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByQuestionId", new String[] { Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_QUESTIONID = new FinderPath(PollsVoteModelImpl.ENTITY_CACHE_ENABLED,
-			PollsVoteModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByQuestionId",
 			new String[] {
 				Long.class.getName(),
@@ -83,9 +80,6 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 			PollsVoteModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countByQuestionId", new String[] { Long.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_BY_CHOICEID = new FinderPath(PollsVoteModelImpl.ENTITY_CACHE_ENABLED,
-			PollsVoteModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByChoiceId", new String[] { Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_CHOICEID = new FinderPath(PollsVoteModelImpl.ENTITY_CACHE_ENABLED,
 			PollsVoteModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByChoiceId",
 			new String[] {
@@ -384,51 +378,8 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 
 	public List<PollsVote> findByQuestionId(long questionId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(questionId) };
-
-		List<PollsVote> list = (List<PollsVote>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_QUESTIONID,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(2);
-
-				query.append(_SQL_SELECT_POLLSVOTE_WHERE);
-
-				query.append(_FINDER_COLUMN_QUESTIONID_QUESTIONID_2);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(questionId);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<PollsVote>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_QUESTIONID,
-					finderArgs, list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByQuestionId(questionId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
 	}
 
 	public List<PollsVote> findByQuestionId(long questionId, int start, int end)
@@ -445,7 +396,7 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 				String.valueOf(orderByComparator)
 			};
 
-		List<PollsVote> list = (List<PollsVote>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_QUESTIONID,
+		List<PollsVote> list = (List<PollsVote>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_QUESTIONID,
 				finderArgs, this);
 
 		if (list == null) {
@@ -494,7 +445,7 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_QUESTIONID,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_QUESTIONID,
 					finderArgs, list);
 
 				closeSession(session);
@@ -683,51 +634,8 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 
 	public List<PollsVote> findByChoiceId(long choiceId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(choiceId) };
-
-		List<PollsVote> list = (List<PollsVote>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_CHOICEID,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(2);
-
-				query.append(_SQL_SELECT_POLLSVOTE_WHERE);
-
-				query.append(_FINDER_COLUMN_CHOICEID_CHOICEID_2);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(choiceId);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<PollsVote>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_CHOICEID,
-					finderArgs, list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
+		return findByChoiceId(choiceId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+			null);
 	}
 
 	public List<PollsVote> findByChoiceId(long choiceId, int start, int end)
@@ -744,7 +652,7 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 				String.valueOf(orderByComparator)
 			};
 
-		List<PollsVote> list = (List<PollsVote>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_CHOICEID,
+		List<PollsVote> list = (List<PollsVote>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_CHOICEID,
 				finderArgs, this);
 
 		if (list == null) {
@@ -793,7 +701,7 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_CHOICEID,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_CHOICEID,
 					finderArgs, list);
 
 				closeSession(session);
