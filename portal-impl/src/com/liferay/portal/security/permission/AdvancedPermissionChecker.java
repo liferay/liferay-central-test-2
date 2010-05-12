@@ -82,8 +82,9 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 					PermissionCheckerBag guestBag = getGuestUserBag();
 
 					if (guestBag != null) {
-						roleIds.addAll(
-							SetUtil.fromArray(guestBag.getRoleIds()));
+						for (long roleId : guestBag.getRoleIds()) {
+							roleIds.add(roleId);
+						}
 					}
 				}
 				catch (Exception e) {
@@ -100,9 +101,7 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 		return PermissionChecker.DEFAULT_ROLE_IDS;
 	}
 
-	public PermissionCheckerBag getGuestUserBag()
-		throws Exception {
-
+	public PermissionCheckerBag getGuestUserBag() throws Exception {
 		Group guestGroup = GroupLocalServiceUtil.getGroup(
 			getCompanyId(), GroupConstants.GUEST);
 
@@ -222,7 +221,7 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 
 				if ((group != null) &&
 					((group.isCommunity() && userGroups.contains(group)) ||
-					(group.isOrganization() &&
+					 (group.isOrganization() &&
 						userOrgGroups.contains(group)))) {
 
 					addRequiredMemberRole(group, roles);
