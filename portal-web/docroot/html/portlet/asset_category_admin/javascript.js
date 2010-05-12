@@ -889,7 +889,7 @@ AUI().add(
 
 						var buffer = [];
 						var permissionsActions = A.one('.' + vocabularyType + '-permissions-actions');
-						var permissions = permissionsActions.all('[name$='+type+'Permissions]');
+						var permissions = permissionsActions.all('[name$=' + type + 'Permissions]');
 
 						permissions.each(
 							function(item, index, collection) {

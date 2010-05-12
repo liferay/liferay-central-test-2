@@ -574,7 +574,7 @@ AUI().add(
 
 						var buffer = [];
 						var permissionsActions = A.one('.tag-permissions-actions');
-						var permissions = permissionsActions.all('[name$=tagPermissions]');
+						var permissions = permissionsActions.all('[name$=' + type + 'Permissions]');
 
 						permissions.each(
 							function(item, index, collection) {
