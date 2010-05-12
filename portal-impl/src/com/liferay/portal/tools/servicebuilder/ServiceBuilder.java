@@ -3831,7 +3831,8 @@ public class ServiceBuilder {
 		context.put("springFileName", _springFileName);
 		context.put("springBaseFileName", _springBaseFileName);
 		context.put("springHibernateFileName", _springHibernateFileName);
-		context.put("springInfrastructureFileName", _springInfrastructureFileName);
+		context.put(
+			"springInfrastructureFileName", _springInfrastructureFileName);
 		context.put("apiDir", _apiDir);
 		context.put("implDir", _implDir);
 		context.put("jsonFileName", _jsonFileName);
