@@ -44,495 +44,493 @@ AUI().add(
 		 * contentCallback {function}: Called to get suggested tags.
 		 */
 
-		var AssetTagsSelector = function() {
-			AssetTagsSelector.superclass.constructor.apply(this, arguments);
-		};
-
-		AssetTagsSelector.NAME = NAME;
-
-		AssetTagsSelector.ATTRS = {
-			allowAnyEntry: {
-				value: true
-			},
-			allowSuggestions: {
-				value: false
-			},
-			contentCallback: {
-				value: null
-			},
-			curEntries: {
-				setter: function(value) {
-					var instance = this;
-
-					if (Lang.isString(value)) {
-						value = value.split(',');
-					}
-
-					return value;
-				},
-				value: ''
-			},
-			dataSource: {
-				valueFn: function() {
-					var instance = this;
-
-					return instance._searchEntries;
-				}
-			},
-			guid: {
-				value: ''
-			},
-			instanceVar: {
-				value: ''
-			},
-			hiddenInput: {
-				setter: function(value) {
-					var instance = this;
-
-					return A.one(value + instance.get('guid'));
-				}
-			},
-			matchKey: {
-				value: 'value'
-			},
-			schema: {
-				value: {
-					resultFields: ['text', 'value']
-				}
-			}
-		};
-
-		A.extend(
-			AssetTagsSelector,
-			A.TextboxList,
+		var AssetTagsSelector = A.Component.create(
 			{
-				renderUI: function() {
-					var instance = this;
+				ATTRS: {
+					allowAnyEntry: {
+						value: true
+					},
+					allowSuggestions: {
+						value: false
+					},
+					contentCallback: {
+						value: null
+					},
+					curEntries: {
+						setter: function(value) {
+							var instance = this;
 
-					AssetTagsSelector.superclass.renderUI.apply(instance, arguments);
-
-					instance._renderIcons();
-
-					instance.inputNode.addClass(CSS_INPUT_NODE);
-
-					instance._overlayAlign.node = instance.entryHolder;
-				},
-
-				bindUI: function() {
-					var instance = this;
-
-					AssetTagsSelector.superclass.bindUI.apply(instance, arguments);
-
-					instance._bindTagsSelector();
-
-					instance.entries.after('add', instance._updateHiddenInput, instance);
-					instance.entries.after('remove', instance._updateHiddenInput, instance);
-				},
-
-				_bindTagsSelector: function() {
-					var instance = this;
-
-					instance.entries.on('add', instance._onAddMultipleEntries, instance);
-
-					instance._submitFormListener = A.Do.before(instance._onAddEntryClick, window, 'submitForm', instance);
-				},
-
-				syncUI: function() {
-					var instance = this;
-
-					AssetTagsSelector.superclass.syncUI.apply(instance, arguments);
-
-					var curEntries = instance.get('curEntries');
-
-					A.each(curEntries, instance.add, instance);
-				},
-
-				_formatEntry: function(item) {
-					var instance = this;
-
-					var input = A.substitute(TPL_INPUT, item);
-
-					instance._buffer.push(input);
-				},
-
-				_getPopup: function() {
-					var instance = this;
-
-					if (!instance._popup) {
-						var popup = new A.Dialog(
-							{
-								bodyContent: TPL_LOADING,
-								constrain: true,
-								draggable: true,
-								hideClass: 'aui-helper-hidden-accessible',
-								preventOverlap: true,
-								stack: true,
-								title: '',
-								width: 320,
-								zIndex: 1000
+							if (Lang.isString(value)) {
+								value = value.split(',');
 							}
-						).render();
 
-						popup.get('boundingBox').addClass(CSS_POPUP);
-
-						var bodyNode = popup.bodyNode;
-
-						bodyNode.html('');
-
-						var searchField = new A.Textfield(
-							{
-								defaultValue: Liferay.Language.get('search'),
-								labelText: false
-							}
-						).render(bodyNode);
-
-						var entriesNode = A.Node.create(TPL_TAGS_CONTAINER);
-
-						bodyNode.appendChild(entriesNode);
-
-						popup.searchField = searchField;
-						popup.entriesNode = entriesNode;
-
-						instance._popup = popup;
-
-						instance._initSearch();
-
-						var onCheckboxClick = A.bind(instance._onCheckboxClick, instance);
-
-						entriesNode.delegate('click', onCheckboxClick, 'input[type=checkbox]');
-					}
-
-					return instance._popup;
-				},
-
-				_getProxyData: function() {
-					var instance = this;
-
-					var context = '';
-
-					var contentCallback = instance.get('contentCallback');
-
-					if (contentCallback) {
-						context = contentCallback();
-					}
-
-					var suggestionsURL = A.substitute(
-						TPL_URL_SUGGESTIONS,
-						{
-							context: escape(context)
-						}
-					);
-
-					var proxyData = {
-						url: suggestionsURL
-					};
-
-					return proxyData;
-				},
-
-				_getEntries: function(callback) {
-					var instance = this;
-
-					Liferay.Service.Asset.AssetTag.getGroupTags(
-						{
-							groupId: themeDisplay.getParentGroupId()
+							return value;
 						},
-						callback
-					);
-				},
+						value: ''
+					},
+					dataSource: {
+						valueFn: function() {
+							var instance = this;
 
-				_initSearch: function() {
-					var instance = this;
-
-					var popup = instance._popup;
-
-					popup.liveSearch = new A.LiveSearch(
-						{
-							after: {
-								search: function() {
-									var fieldsets = popup.entriesNode.all('fieldset');
-
-									fieldsets.each(
-										function(item, index, collection) {
-											var visibleEntries = item.one('label:not(.aui-helper-hidden)');
-
-											var action = 'addClass';
-
-											if (visibleEntries) {
-												action = 'removeClass';
-											}
-
-											item[action](CSS_NO_MATCHES);
-										}
-									);
-								}
-							},
-							data: function(node) {
-								var value = node.attr('title');
-
-								return value.toLowerCase();
-							},
-							input: popup.searchField.get('node'),
-							nodes: '.' + CSS_TAGS_LIST + ' label'
+							return instance._searchEntries;
 						}
-					);
+					},
+					guid: {
+						value: ''
+					},
+					instanceVar: {
+						value: ''
+					},
+					hiddenInput: {
+						setter: function(value) {
+							var instance = this;
+
+							return A.one(value + instance.get('guid'));
+						}
+					},
+					matchKey: {
+						value: 'value'
+					},
+					schema: {
+						value: {
+							resultFields: ['text', 'value']
+						}
+					}
 				},
 
-				_namespace: function(name) {
-					var instance = this;
+				EXTENDS: A.TextboxList,
 
-					return instance.get('instanceVar') + name + instance.get('guid');
-				},
+				NAME: NAME,
 
-				_onAddEntryClick: function(event) {
-					var instance = this;
+				prototype: {
+					renderUI: function() {
+						var instance = this;
 
-					instance.entries.add(instance.inputNode.val(), {});
+						AssetTagsSelector.superclass.renderUI.apply(instance, arguments);
 
-					Liferay.Util.focusFormField(instance.inputNode);
-				},
+						instance._renderIcons();
 
-				_onAddMultipleEntries: function(event) {
-					var instance = this;
+						instance.inputNode.addClass(CSS_INPUT_NODE);
 
-					var obj = event.item;
-					var matchKey = instance.get('matchKey');
+						instance._overlayAlign.node = instance.entryHolder;
+					},
 
-					var text = obj[matchKey] || event.attrName;
+					bindUI: function() {
+						var instance = this;
 
-					if (text && text.indexOf(',') > -1) {
-						var items = text.split(',');
+						AssetTagsSelector.superclass.bindUI.apply(instance, arguments);
 
-						setTimeout(
-							function() {
-								A.each(
-									items,
-									function(item, index, collection) {
-										instance.entries.add(item, {});
-									}
-								);
-							},
-							0
+						instance._bindTagsSelector();
+
+						instance.entries.after('add', instance._updateHiddenInput, instance);
+						instance.entries.after('remove', instance._updateHiddenInput, instance);
+					},
+
+					_bindTagsSelector: function() {
+						var instance = this;
+
+						instance.entries.on('add', instance._onAddMultipleEntries, instance);
+
+						instance._submitFormListener = A.Do.before(instance._onAddEntryClick, window, 'submitForm', instance);
+					},
+
+					syncUI: function() {
+						var instance = this;
+
+						AssetTagsSelector.superclass.syncUI.apply(instance, arguments);
+
+						var curEntries = instance.get('curEntries');
+
+						A.each(curEntries, instance.add, instance);
+					},
+
+					_formatEntry: function(item) {
+						var instance = this;
+
+						var input = A.substitute(TPL_INPUT, item);
+
+						instance._buffer.push(input);
+					},
+
+					_getPopup: function() {
+						var instance = this;
+
+						if (!instance._popup) {
+							var popup = new A.Dialog(
+								{
+									bodyContent: TPL_LOADING,
+									constrain: true,
+									draggable: true,
+									hideClass: 'aui-helper-hidden-accessible',
+									preventOverlap: true,
+									stack: true,
+									title: '',
+									width: 320,
+									zIndex: 1000
+								}
+							).render();
+
+							popup.get('boundingBox').addClass(CSS_POPUP);
+
+							var bodyNode = popup.bodyNode;
+
+							bodyNode.html('');
+
+							var searchField = new A.Textfield(
+								{
+									defaultValue: Liferay.Language.get('search'),
+									labelText: false
+								}
+							).render(bodyNode);
+
+							var entriesNode = A.Node.create(TPL_TAGS_CONTAINER);
+
+							bodyNode.appendChild(entriesNode);
+
+							popup.searchField = searchField;
+							popup.entriesNode = entriesNode;
+
+							instance._popup = popup;
+
+							instance._initSearch();
+
+							var onCheckboxClick = A.bind(instance._onCheckboxClick, instance);
+
+							entriesNode.delegate('click', onCheckboxClick, 'input[type=checkbox]');
+						}
+
+						return instance._popup;
+					},
+
+					_getProxyData: function() {
+						var instance = this;
+
+						var context = '';
+
+						var contentCallback = instance.get('contentCallback');
+
+						if (contentCallback) {
+							context = contentCallback();
+						}
+
+						var suggestionsURL = A.substitute(
+							TPL_URL_SUGGESTIONS,
+							{
+								context: escape(context)
+							}
 						);
 
-						instance.inputNode.val('');
+						var proxyData = {
+							url: suggestionsURL
+						};
 
-						event.preventDefault();
-					}
-				},
+						return proxyData;
+					},
 
-				_onCheckboxClick: function(event) {
-					var instance = this;
+					_getEntries: function(callback) {
+						var instance = this;
 
-					var checkbox = event.currentTarget;
-					var checked = checkbox.get('checked');
-					var value = checkbox.val();
-
-					var action = 'remove';
-
-					if (checked) {
-						action = 'add';
-					}
-
-					instance[action](value);
-				},
-
-				_renderIcons: function() {
-					var instance = this;
-
-					var contentBox = instance.get('contentBox');
-
-					var toolbar = [
-						{
-							handler: {
-								context: instance,
-								fn: instance._onAddEntryClick
+						Liferay.Service.Asset.AssetTag.getGroupTags(
+							{
+								groupId: themeDisplay.getParentGroupId()
 							},
-							icon: 'plus',
-							id: 'add',
-							label: Liferay.Language.get('add')
-						},
-						{
-							handler: {
-								context: instance,
-								fn: instance._showSelectPopup
-							},
-							icon: 'search',
-							id: 'select',
-							label: Liferay.Language.get('select')
+							callback
+						);
+					},
+
+					_initSearch: function() {
+						var instance = this;
+
+						var popup = instance._popup;
+
+						popup.liveSearch = new A.LiveSearch(
+							{
+								after: {
+									search: function() {
+										var fieldsets = popup.entriesNode.all('fieldset');
+
+										fieldsets.each(
+											function(item, index, collection) {
+												var visibleEntries = item.one('label:not(.aui-helper-hidden)');
+
+												var action = 'addClass';
+
+												if (visibleEntries) {
+													action = 'removeClass';
+												}
+
+												item[action](CSS_NO_MATCHES);
+											}
+										);
+									}
+								},
+								data: function(node) {
+									var value = node.attr('title');
+
+									return value.toLowerCase();
+								},
+								input: popup.searchField.get('node'),
+								nodes: '.' + CSS_TAGS_LIST + ' label'
+							}
+						);
+					},
+
+					_namespace: function(name) {
+						var instance = this;
+
+						return instance.get('instanceVar') + name + instance.get('guid');
+					},
+
+					_onAddEntryClick: function(event) {
+						var instance = this;
+
+						instance.entries.add(instance.inputNode.val(), {});
+
+						Liferay.Util.focusFormField(instance.inputNode);
+					},
+
+					_onAddMultipleEntries: function(event) {
+						var instance = this;
+
+						var obj = event.item;
+						var matchKey = instance.get('matchKey');
+
+						var text = obj[matchKey] || event.attrName;
+
+						if (text && text.indexOf(',') > -1) {
+							var items = text.split(',');
+
+							setTimeout(
+								function() {
+									A.each(
+										items,
+										function(item, index, collection) {
+											instance.entries.add(item, {});
+										}
+									);
+								},
+								0
+							);
+
+							instance.inputNode.val('');
+
+							event.preventDefault();
 						}
-					];
+					},
 
-					if (instance.get('contentCallback')) {
-						toolbar.push(
+					_onCheckboxClick: function(event) {
+						var instance = this;
+
+						var checkbox = event.currentTarget;
+						var checked = checkbox.get('checked');
+						var value = checkbox.val();
+
+						var action = 'remove';
+
+						if (checked) {
+							action = 'add';
+						}
+
+						instance[action](value);
+					},
+
+					_renderIcons: function() {
+						var instance = this;
+
+						var contentBox = instance.get('contentBox');
+
+						var toolbar = [
 							{
 								handler: {
 									context: instance,
-									fn: instance._showSuggestionsPopup
+									fn: instance._onAddEntryClick
 								},
-								icon: 'comment',
-								id: 'suggest',
-								label: Liferay.Language.get('suggestions')
+								icon: 'plus',
+								id: 'add',
+								label: Liferay.Language.get('add')
+							},
+							{
+								handler: {
+									context: instance,
+									fn: instance._showSelectPopup
+								},
+								icon: 'search',
+								id: 'select',
+								label: Liferay.Language.get('select')
+							}
+						];
+
+						if (instance.get('contentCallback')) {
+							toolbar.push(
+								{
+									handler: {
+										context: instance,
+										fn: instance._showSuggestionsPopup
+									},
+									icon: 'comment',
+									id: 'suggest',
+									label: Liferay.Language.get('suggestions')
+								}
+							);
+						}
+
+						instance.icons = new A.Toolbar(
+							{
+								children: toolbar
+							}
+						).render(contentBox);
+
+						var iconsBoundingBox = instance.icons.get('boundingBox');
+
+						instance.entryHolder.placeAfter(iconsBoundingBox);
+					},
+
+					_searchEntries: function(term) {
+						var instance = this;
+
+						var beginning = 0;
+						var end = 20;
+
+						if (term == '*') {
+							term = '';
+						}
+
+						return Liferay.Service.Asset.AssetTag.search(
+							{
+								groupId: themeDisplay.getParentGroupId(),
+								name: '%' + term + '%',
+								properties: '',
+								begin: beginning,
+								end: end
 							}
 						);
-					}
+					},
 
-					instance.icons = new A.Toolbar(
-						{
-							children: toolbar
+					_showPopup: function(event) {
+						var instance = this;
+
+						var popup = instance._getPopup();
+
+						if (event && event.currentTarget) {
+							var toolItem = event.currentTarget.get('boundingBox');
+
+							popup.align(toolItem, ['bl', 'tl']);
 						}
-					).render(contentBox);
 
-					var iconsBoundingBox = instance.icons.get('boundingBox');
+						popup.entriesNode.html(TPL_LOADING);
 
-					instance.entryHolder.placeAfter(iconsBoundingBox);
-				},
+						popup.show();
+					},
 
-				_searchEntries: function(term) {
-					var instance = this;
+					_showSelectPopup: function(event) {
+						var instance = this;
 
-					var beginning = 0;
-					var end = 20;
+						instance._showPopup(event);
 
-					if (term == '*') {
-						term = '';
-					}
+						instance._popup.set('title', Liferay.Language.get('tags'));
 
-					return Liferay.Service.Asset.AssetTag.search(
-						{
-							groupId: themeDisplay.getParentGroupId(),
-							name: '%' + term + '%',
-							properties: '',
-							begin: beginning,
-							end: end
-						}
-					);
-				},
+						instance._getEntries(
+							function(entries) {
+								instance._updateSelectList(entries, instance._entriesIterator);
+							}
+						);
+					},
 
-				_showPopup: function(event) {
-					var instance = this;
+					_showSuggestionsPopup: function(event) {
+						var instance = this;
 
-					var popup = instance._getPopup();
+						instance._showPopup(event);
 
-					if (event && event.currentTarget) {
-						var toolItem = event.currentTarget.get('boundingBox');
+						instance._popup.set('title', Liferay.Language.get('suggestions'));
 
-						popup.align(toolItem, ['bl', 'tl']);
-					}
+						A.io.request(
+							themeDisplay.getPathMain() + '/portal/rest_proxy',
+							{
+								data: instance._getProxyData(),
+								dataType: 'json',
+								method: 'POST',
+								on: {
+									success: function(event, id, obj) {
+										var results = this.get('responseData');
 
-					popup.entriesNode.html(TPL_LOADING);
-
-					popup.show();
-				},
-
-				_showSelectPopup: function(event) {
-					var instance = this;
-
-					instance._showPopup(event);
-
-					instance._popup.set('title', Liferay.Language.get('tags'));
-
-					instance._getEntries(
-						function(entries) {
-							instance._updateSelectList(entries, instance._entriesIterator);
-						}
-					);
-				},
-
-				_showSuggestionsPopup: function(event) {
-					var instance = this;
-
-					instance._showPopup(event);
-
-					instance._popup.set('title', Liferay.Language.get('suggestions'));
-
-					A.io.request(
-						themeDisplay.getPathMain() + '/portal/rest_proxy',
-						{
-							data: instance._getProxyData(),
-							dataType: 'json',
-							method: 'POST',
-							on: {
-								success: function(event, id, obj) {
-									var results = this.get('responseData');
-
-									instance._updateSelectList(results.ResultSet.Result, instance._suggestionsIterator);
+										instance._updateSelectList(results.ResultSet.Result, instance._suggestionsIterator);
+									}
 								}
 							}
-						}
-					);
-				},
+						);
+					},
 
-				_suggestionsIterator: function(item, index, collection) {
-					var instance = this;
+					_suggestionsIterator: function(item, index, collection) {
+						var instance = this;
 
-					var checked = instance.entries.indexOfKey(item) > -1 ? TPL_CHECKED : '';
+						var checked = instance.entries.indexOfKey(item) > -1 ? TPL_CHECKED : '';
 
-					var tag = {
-						checked: checked,
-						name: item
-					};
+						var tag = {
+							checked: checked,
+							name: item
+						};
 
-					instance._formatEntry(tag);
-				},
+						instance._formatEntry(tag);
+					},
 
-				_entriesIterator: function(item, index, collection) {
-					var instance = this;
+					_entriesIterator: function(item, index, collection) {
+						var instance = this;
 
-					item.checked = instance.entries.indexOfKey(item.name) > -1 ? TPL_CHECKED : '';
+						item.checked = instance.entries.indexOfKey(item.name) > -1 ? TPL_CHECKED : '';
 
-					instance._formatEntry(item);
-				},
+						instance._formatEntry(item);
+					},
 
-				_updateHiddenInput: function(event) {
-					var instance = this;
+					_updateHiddenInput: function(event) {
+						var instance = this;
 
-					var hiddenInput = instance.get('hiddenInput');
+						var hiddenInput = instance.get('hiddenInput');
 
-					hiddenInput.val(instance.entries.keys.join());
+						hiddenInput.val(instance.entries.keys.join());
 
-					var popup = instance._popup;
+						var popup = instance._popup;
 
-					if (popup && popup.get('visible')) {
-						var checkbox = popup.bodyNode.one('input[value=' + event.attrName + ']');
+						if (popup && popup.get('visible')) {
+							var checkbox = popup.bodyNode.one('input[value=' + event.attrName + ']');
 
-						if (checkbox) {
-							var checked = false;
+							if (checkbox) {
+								var checked = false;
 
-							if (event.type == 'dataset:add') {
-								checked = true;
+								if (event.type == 'dataset:add') {
+									checked = true;
+								}
+
+								checkbox.set('checked', checked);
 							}
-
-							checkbox.set('checked', checked);
 						}
-					}
-				},
+					},
 
-				_updateSelectList: function(data, iterator) {
-					var instance = this;
+					_updateSelectList: function(data, iterator) {
+						var instance = this;
 
-					var popup = instance._popup;
+						var popup = instance._popup;
 
-					popup.searchField.resetValue();
+						popup.searchField.resetValue();
 
-					instance._buffer = ['<fieldset class="' + (!data || !data.length ? CSS_NO_MATCHES : '') + '">'];
+						instance._buffer = ['<fieldset class="' + (!data || !data.length ? CSS_NO_MATCHES : '') + '">'];
 
-					A.each(data, iterator, instance);
+						A.each(data, iterator, instance);
 
-					var buffer = instance._buffer;
+						var buffer = instance._buffer;
 
-					var message = A.substitute(TPL_MESSAGE, [Liferay.Language.get('no-tags-found')]);
+						var message = A.substitute(TPL_MESSAGE, [Liferay.Language.get('no-tags-found')]);
 
-					buffer.push(message);
-					buffer.push('</fieldset>');
+						buffer.push(message);
+						buffer.push('</fieldset>');
 
-					popup.entriesNode.html(buffer.join(''));
+						popup.entriesNode.html(buffer.join(''));
 
-					popup.liveSearch.get('nodes').refresh();
-					popup.liveSearch.refreshIndex();
-				},
+						popup.liveSearch.get('nodes').refresh();
+						popup.liveSearch.refreshIndex();
+					},
 
-				_buffer: []
+					_buffer: []
+				}
 			}
 		);
 

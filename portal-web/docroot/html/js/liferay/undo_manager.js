@@ -37,168 +37,164 @@ AUI().add(
 		 *
 		 */
 
-		var UndoManager = function(config) {
-			UndoManager.superclass.constructor.apply(this, arguments);
-		};
-
-		UndoManager.NAME = 'undomanager';
-
-		UndoManager.ATTRS = {
-			location: {
-				value: 'top'
-			}
-		};
-
-		A.extend(
-			UndoManager,
-			A.Widget,
+		var UndoManager = A.Component.create(
 			{
-				initializer: function(config) {
-					var instance = this;
-
-					instance._undoCache = new A.DataSet();
-				},
-
-				renderUI: function() {
-					var instance = this;
-
-					var clearText = Liferay.Language.get('clear-history');
-					var undoText = Liferay.Language.get('undo-x');
-
-					undoText = A.substitute(undoText, [TPL_UNDO_TEXT]);
-
-					var contentBox = instance.get('contentBox');
-
-					var actionClear = A.Node.create(TPL_ACTION_CLEAR);
-					var actionUndo = A.Node.create(TPL_ACTION_UNDO);
-
-					actionClear.append(clearText);
-					actionUndo.append(undoText);
-
-					contentBox.appendChild(actionUndo);
-					contentBox.appendChild(actionClear);
-
-					contentBox.addClass(CSS_HELPER_CLEARFIX);
-					contentBox.addClass(CSS_MESSAGE_INFO);
-					contentBox.addClass(CSS_QUEUE);
-					contentBox.addClass(CSS_QUEUE_EMPTY);
-
-					instance.after('update', instance._updateList);
-
-					instance._undoItemsLeft = contentBox.one('.' + CSS_ITEMS_LEFT);
-
-					instance._actionClear = actionClear;
-					instance._actionUndo = actionUndo;
-				},
-
-				bindUI: function() {
-					var instance = this;
-
-					instance._actionClear.on('click', instance._onActionClear, instance);
-					instance._actionUndo.on('click', instance._onActionUndo, instance);
-
-					instance.after('render', instance._afterUndoManagerRender);
-				},
-
-				add: function(handler, stateData) {
-					var instance = this;
-
-					if (Lang.isFunction(handler)) {
-						var undo = {
-							handler: handler,
-							stateData: stateData
-						};
-
-						instance._undoCache.insert(0, undo);
-
-						var eventData = {
-							undo: undo
-						};
-
-						instance.fire('update', eventData);
-						instance.fire('add', eventData);
+				ATTRS: {
+					location: {
+						value: 'top'
 					}
 				},
 
-				undo: function(limit) {
-					var instance = this;
+				NAME: 'undomanager',
 
-					limit = limit || 1;
+				prototype: {
+					initializer: function(config) {
+						var instance = this;
 
-					var undoCache = instance._undoCache;
+						instance._undoCache = new A.DataSet();
+					},
 
-					undoCache.each(
-						function(item, index, collection) {
-							if (index < limit) {
-								item.handler.call(instance, item.stateData);
+					renderUI: function() {
+						var instance = this;
 
-								undoCache.removeAt(0);
+						var clearText = Liferay.Language.get('clear-history');
+						var undoText = Liferay.Language.get('undo-x');
+
+						undoText = A.substitute(undoText, [TPL_UNDO_TEXT]);
+
+						var contentBox = instance.get('contentBox');
+
+						var actionClear = A.Node.create(TPL_ACTION_CLEAR);
+						var actionUndo = A.Node.create(TPL_ACTION_UNDO);
+
+						actionClear.append(clearText);
+						actionUndo.append(undoText);
+
+						contentBox.appendChild(actionUndo);
+						contentBox.appendChild(actionClear);
+
+						contentBox.addClass(CSS_HELPER_CLEARFIX);
+						contentBox.addClass(CSS_MESSAGE_INFO);
+						contentBox.addClass(CSS_QUEUE);
+						contentBox.addClass(CSS_QUEUE_EMPTY);
+
+						instance.after('update', instance._updateList);
+
+						instance._undoItemsLeft = contentBox.one('.' + CSS_ITEMS_LEFT);
+
+						instance._actionClear = actionClear;
+						instance._actionUndo = actionUndo;
+					},
+
+					bindUI: function() {
+						var instance = this;
+
+						instance._actionClear.on('click', instance._onActionClear, instance);
+						instance._actionUndo.on('click', instance._onActionUndo, instance);
+
+						instance.after('render', instance._afterUndoManagerRender);
+					},
+
+					add: function(handler, stateData) {
+						var instance = this;
+
+						if (Lang.isFunction(handler)) {
+							var undo = {
+								handler: handler,
+								stateData: stateData
+							};
+
+							instance._undoCache.insert(0, undo);
+
+							var eventData = {
+								undo: undo
+							};
+
+							instance.fire('update', eventData);
+							instance.fire('add', eventData);
+						}
+					},
+
+					undo: function(limit) {
+						var instance = this;
+
+						limit = limit || 1;
+
+						var undoCache = instance._undoCache;
+
+						undoCache.each(
+							function(item, index, collection) {
+								if (index < limit) {
+									item.handler.call(instance, item.stateData);
+
+									undoCache.removeAt(0);
+								}
+								else {
+									return false;
+								}
 							}
-							else {
-								return false;
+						);
+
+						instance.fire('update');
+						instance.fire('undo');
+					},
+
+					_afterUndoManagerRender: function(event) {
+						var instance = this;
+
+						var location = instance.get('location');
+
+						if (location !== false) {
+							var boundingBox = instance.get('boundingBox');
+							var boundingBoxParent = boundingBox.get('parentNode');
+
+							var action = 'append';
+
+							if (location == 'top') {
+								action = 'prepend';
 							}
+
+							boundingBoxParent[action](boundingBox);
 						}
-					);
+					},
 
-					instance.fire('update');
-					instance.fire('undo');
-				},
+					_onActionClear: function(event) {
+						var instance = this;
 
-				_afterUndoManagerRender: function(event) {
-					var instance = this;
+						instance._undoCache.clear();
 
-					var location = instance.get('location');
+						instance.fire('update');
+						instance.fire('clearList');
+					},
 
-					if (location !== false) {
-						var boundingBox = instance.get('boundingBox');
-						var boundingBoxParent = boundingBox.get('parentNode');
+					_onActionUndo: function(event) {
+						var instance = this;
 
-						var action = 'append';
+						instance.undo(1);
+					},
 
-						if (location == 'top') {
-							action = 'prepend';
+					_updateList: function() {
+						var instance = this;
+
+						var itemsLeft = instance._undoCache.size();
+						var contentBox = instance.get('contentBox');
+
+						var actionSingle = 'removeClass';
+						var actionEmpty = 'addClass';
+
+						if (itemsLeft > 0) {
+							if (itemsLeft == 1) {
+								actionSingle = 'addClass';
+							}
+
+							actionEmpty = 'removeClass';
 						}
 
-						boundingBoxParent[action](boundingBox);
+						contentBox[actionSingle](CSS_QUEUE_SINGLE);
+						contentBox[actionEmpty](CSS_QUEUE_EMPTY);
+
+						instance._undoItemsLeft.text('(' + itemsLeft + ')');
 					}
-				},
-
-				_onActionClear: function(event) {
-					var instance = this;
-
-					instance._undoCache.clear();
-
-					instance.fire('update');
-					instance.fire('clearList');
-				},
-
-				_onActionUndo: function(event) {
-					var instance = this;
-
-					instance.undo(1);
-				},
-
-				_updateList: function() {
-					var instance = this;
-
-					var itemsLeft = instance._undoCache.size();
-					var contentBox = instance.get('contentBox');
-
-					var actionSingle = 'removeClass';
-					var actionEmpty = 'addClass';
-
-					if (itemsLeft > 0) {
-						if (itemsLeft == 1) {
-							actionSingle = 'addClass';
-						}
-
-						actionEmpty = 'removeClass';
-					}
-
-					contentBox[actionSingle](CSS_QUEUE_SINGLE);
-					contentBox[actionEmpty](CSS_QUEUE_EMPTY);
-
-					instance._undoItemsLeft.text('(' + itemsLeft + ')');
 				}
 			}
 		);

@@ -482,59 +482,57 @@ AUI().add(
 			}
 		};
 
-		var Underlay = function() {
-			Underlay.superclass.constructor.apply(this, arguments);
-		};
-
-		Underlay.NAME = 'underlay';
-
-		Underlay.ATTRS = {
-			bodyContent: {
-				value: A.Node.create('<div style="height: 100px"></div>')
-			},
-			className: {
-				lazyAdd: false,
-				setter: function(value) {
-					var instance = this;
-
-					instance.get('boundingBox').addClass(value);
-				},
-				value: null
-			}
-		};
-
-		A.extend(
-			Underlay,
-			A.OverlayBase,
+		var Underlay = A.Component.create(
 			{
-				initializer: function() {
-					var instance = this;
+				ATTRS: {
+					bodyContent: {
+						value: A.Node.create('<div style="height: 100px"></div>')
+					},
+					className: {
+						lazyAdd: false,
+						setter: function(value) {
+							var instance = this;
 
-					Liferay.Dockbar.UnderlayManager.register(instance);
+							instance.get('boundingBox').addClass(value);
+						},
+						value: null
+					}
 				},
 
-				renderUI: function() {
-					var instance = this;
+				EXTENDS: A.OverlayBase,
 
-					Underlay.superclass.renderUI.apply(instance, arguments);
+				NAME: 'underlay',
 
-					var closeTool = new A.ButtonItem('close');
+				prototype: {
+					initializer: function() {
+						var instance = this;
 
-					closeTool.render(instance.get('boundingBox'));
+						Liferay.Dockbar.UnderlayManager.register(instance);
+					},
 
-					closeTool.get('contentBox').addClass('aui-underlay-close');
+					renderUI: function() {
+						var instance = this;
 
-					instance.set('headerContent', closeTool.get('boundingBox'));
+						Underlay.superclass.renderUI.apply(instance, arguments);
 
-					instance.closeTool = closeTool;
-				},
+						var closeTool = new A.ButtonItem('close');
 
-				bindUI: function() {
-					var instance = this;
+						closeTool.render(instance.get('boundingBox'));
 
-					Underlay.superclass.bindUI.apply(instance, arguments);
+						closeTool.get('contentBox').addClass('aui-underlay-close');
 
-					instance.closeTool.on('click', instance.hide, instance);
+						instance.set('headerContent', closeTool.get('boundingBox'));
+
+						instance.closeTool = closeTool;
+					},
+
+					bindUI: function() {
+						var instance = this;
+
+						Underlay.superclass.bindUI.apply(instance, arguments);
+
+						instance.closeTool.on('click', instance.hide, instance);
+					}
 				}
 			}
 		);

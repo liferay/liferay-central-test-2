@@ -7,111 +7,110 @@ AUI().add(
 
 			NAME = 'hudcrumbs';
 
-		var Hudcrumbs = function(config) {
-			Hudcrumbs.superclass.constructor.apply(this, arguments);
-		};
-
-		Hudcrumbs.ATTRS = {
-			clone: {
-				value: null
-			},
-			hostMidpoint: {
-				value: 0
-			},
-			top: {
-				value: 0
-			},
-			width: {
-				value: 0
-			}
-		};
-
-		Hudcrumbs.NAME = NAME;
-		Hudcrumbs.NS = NAME;
-
-		A.extend(
-			Hudcrumbs,
-			A.Plugin.Base,
+		var Hudcrumbs = A.Component.create(
 			{
-				initializer: function() {
-					var instance = this;
-
-					var breadcrumbs = instance.get('host');
-					var hudcrumbs = breadcrumbs.cloneNode(true);
-					var region = breadcrumbs.get('region');
-
-					hudcrumbs.resetId();
-
-					var dockbar = A.one('#dockbar');
-
-					var win = A.getWin();
-					var body = A.getBody();
-
-					instance._win = win;
-					instance._body = body;
-					instance._dockbar = dockbar;
-
-					hudcrumbs.hide();
-
-					hudcrumbs.addClass('lfr-hudcrumbs');
-
-					instance.set('clone', hudcrumbs);
-
-					instance._calculateDimensions();
-
-					win.on('scroll', instance._onScroll, instance);
-					win.on('resize', instance._calculateDimensions, instance);
-
-					body.append(hudcrumbs);
-
-					Liferay.on('dockbar:pinned', instance._calculateDimensions, instance);
+				ATTRS: {
+					clone: {
+						value: null
+					},
+					hostMidpoint: {
+						value: 0
+					},
+					top: {
+						value: 0
+					},
+					width: {
+						value: 0
+					}
 				},
 
-				_calculateDimensions: function(event) {
-					var instance = this;
+				EXTENDS: A.Plugin.Base,
 
-					var region = instance.get('host').get('region');
-					var midpoint = region.top + (region.height / 2);
-					var top = 0;
+				NAME: NAME,
 
-					var dockbar = instance._dockbar;
-					var body = instance._body;
+				NS: NAME,
 
-					if (dockbar && body.hasClass('lfr-dockbar-pinned')) {
-						var dockbarHeight = dockbar.get('offsetHeight');
+				prototype: {
+					initializer: function() {
+						var instance = this;
 
-						top = dockbarHeight;
-						midpoint -= dockbarHeight;
-					}
+						var breadcrumbs = instance.get('host');
+						var hudcrumbs = breadcrumbs.cloneNode(true);
+						var region = breadcrumbs.get('region');
 
-					instance.get('clone').setStyles(
-						{
-							left: region.left + 'px',
-							top: top + 'px',
-							width: region.width + 'px'
+						hudcrumbs.resetId();
+
+						var dockbar = A.one('#dockbar');
+
+						var win = A.getWin();
+						var body = A.getBody();
+
+						instance._win = win;
+						instance._body = body;
+						instance._dockbar = dockbar;
+
+						hudcrumbs.hide();
+
+						hudcrumbs.addClass('lfr-hudcrumbs');
+
+						instance.set('clone', hudcrumbs);
+
+						instance._calculateDimensions();
+
+						win.on('scroll', instance._onScroll, instance);
+						win.on('resize', instance._calculateDimensions, instance);
+
+						body.append(hudcrumbs);
+
+						Liferay.on('dockbar:pinned', instance._calculateDimensions, instance);
+					},
+
+					_calculateDimensions: function(event) {
+						var instance = this;
+
+						var region = instance.get('host').get('region');
+						var midpoint = region.top + (region.height / 2);
+						var top = 0;
+
+						var dockbar = instance._dockbar;
+						var body = instance._body;
+
+						if (dockbar && body.hasClass('lfr-dockbar-pinned')) {
+							var dockbarHeight = dockbar.get('offsetHeight');
+
+							top = dockbarHeight;
+							midpoint -= dockbarHeight;
 						}
-					);
 
-					instance.set('hostMidpoint', midpoint);
-				},
+						instance.get('clone').setStyles(
+							{
+								left: region.left + 'px',
+								top: top + 'px',
+								width: region.width + 'px'
+							}
+						);
 
-				_onScroll: function(event) {
-					var instance = this;
+						instance.set('hostMidpoint', midpoint);
+					},
 
-					var scrollTop = event.currentTarget.get('scrollTop');
-					var hudcrumbs = instance.get('clone');
+					_onScroll: function(event) {
+						var instance = this;
 
-					var action = 'hide';
+						var scrollTop = event.currentTarget.get('scrollTop');
+						var hudcrumbs = instance.get('clone');
 
-					if (scrollTop >= instance.get('hostMidpoint')) {
-						action = 'show';
+						var action = 'hide';
+
+						if (scrollTop >= instance.get('hostMidpoint')) {
+							action = 'show';
+						}
+
+						if (instance.lastAction != action) {
+							hudcrumbs[action]();
+						}
+
+						instance.lastAction = action;
 					}
-
-					if (instance.lastAction != action) {
-						hudcrumbs[action]();
-					}
-
-					instance.lastAction = action;
 				}
 			}
 		);

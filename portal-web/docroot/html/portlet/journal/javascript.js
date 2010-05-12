@@ -227,7 +227,7 @@ AUI().add(
 
 						var randomInstanceId = instance.generateInstanceId();
 
-						fieldInstance.set('instanceId', randomInstanceId)
+						fieldInstance.set('instanceId', randomInstanceId);
 
 						instance.createNestedList(
 							newComponent,
@@ -2673,23 +2673,8 @@ AUI().add(
 			}
 		};
 
-		var	STRUCTURE_FIELD = 'structurefield';
-
-		function StructureField(config, portletNamespace) {
-			var instance = this;
-
-			instance._lazyAddAttrs = false;
-
-			instance.portletNamespace = portletNamespace;
-
-			StructureField.superclass.constructor.apply(this, arguments);
-		}
-
-		A.mix(
-			StructureField,
+		var StructureField = A.Component.create(
 			{
-				NAME: STRUCTURE_FIELD,
-
 				ATTRS: {
 					content: {
 						validator: Lang.isString,
@@ -2860,429 +2845,439 @@ AUI().add(
 							return instance.getAttribute('name');
 						}
 					}
-				}
-			}
-		);
+				},
 
-		A.extend(
-			StructureField,
-			A.Base,
-			{
-				cloneableAttrs: [
-					'displayAsTooltip',
-					'fieldLabel',
-					'fieldType',
-					'innerHTML',
-					'instructions',
-					'localized',
-					'localizedValue',
-					'predefinedValue',
-					'repeatable',
-					'required',
-					'variableName'
-				],
+				EXTENDS: A.Base,
 
-				initializer: function() {
+				NAME: 'structurefield',
+
+				constructor: function(config, portletNamespace) {
 					var instance = this;
 
-					var propagateAttr = instance.propagateAttr;
+					instance._lazyAddAttrs = false;
 
-					A.each(
-						instance.cloneableAttrs,
-						function(item, index, collection) {
-							instance.after(item + 'Change', propagateAttr);
-						}
-					);
+					instance.portletNamespace = portletNamespace;
+
+					StructureField.superclass.constructor.apply(this, arguments);
 				},
 
-				canDrop: function() {
-					var instance = this;
+				prototype: {
+					cloneableAttrs: [
+						'displayAsTooltip',
+						'fieldLabel',
+						'fieldType',
+						'innerHTML',
+						'instructions',
+						'localized',
+						'localizedValue',
+						'predefinedValue',
+						'repeatable',
+						'required',
+						'variableName'
+					],
 
-					return Journal.prototype.canDrop.apply(instance, arguments);
-				},
+					initializer: function() {
+						var instance = this;
 
-				clone: function() {
-					var instance = this;
+						var propagateAttr = instance.propagateAttr;
 
-					var options = {};
-					var portletNamespace = instance.portletNamespace;
-
-					A.each(
-						instance.cloneableAttrs,
-						function(item, index, collection) {
-							options[item] = instance.get(item);
-						}
-					);
-
-					options.source = null;
-
-					return new StructureField(options, portletNamespace);
-				},
-
-				createInstructionsContainer: function(value) {
-					return A.Node.create(TPL_INSTRUCTIONS_CONTAINER).html(value);
-				},
-
-				createTooltipImage: function() {
-					return A.Node.create(TPL_TOOLTIP_IMAGE);
-				},
-
-				generateInstanceId: function() {
-					var instance = this;
-
-					return Journal.prototype.generateInstanceId.apply(instance, arguments);
-				},
-
-				getAttribute: function(key, defaultValue) {
-					var instance = this;
-
-					var value = undefined;
-					var source = instance.get('source');
-
-					if (source) {
-						value = source.attr('data' + key);
-					}
-
-					if (Lang.isUndefined(value) && !Lang.isUndefined(defaultValue)) {
-						value = defaultValue;
-					}
-
-					return value;
-				},
-
-				getByName: function() {
-					var instance = this;
-
-					return Journal.prototype.getByName.apply(instance, arguments);
-				},
-
-				getComponentType: function() {
-					var instance = this;
-
-					return Journal.prototype.getComponentType.apply(instance, arguments);
-				},
-
-				getContent: function(source) {
-					var instance = this;
-
-					var content;
-					var type = instance.get('fieldType');
-					var componentContainer = source.one('div.journal-article-component-container');
-
-					var principalElement = componentContainer.one('.aui-field-input');
-
-					if (type == 'boolean') {
-						content = principalElement.attr('checked');
-					}
-					else if (type == 'text_area') {
-						var editorName = source.one('iframe').attr('name');
-						var editorReference = window[editorName];
-
-						if (editorReference && Lang.isFunction(editorReference.getHTML)) {
-							content = editorReference.getHTML();
-						}
-					}
-					else if (type == 'multi-list') {
-						var output = [];
-						var options = principalElement.all('option');
-
-						options.each(
+						A.each(
+							instance.cloneableAttrs,
 							function(item, index, collection) {
-								if (item.get('selected')) {
-									var value = item.val();
-
-									output.push(value);
-								}
+								instance.after(item + 'Change', propagateAttr);
 							}
 						);
+					},
 
-						content = output.join(',');
-					}
-					else if (type == 'image') {
-						var imageContent = componentContainer.one('.journal-image-content');
-						var imageDelete = instance.getByName(componentContainer, 'journalImageDelete');
+					canDrop: function() {
+						var instance = this;
 
-						if (imageDelete && imageDelete.val() == 'delete') {
-							content = 'delete';
-						}
-						else {
-							if (imageContent) {
-								content = imageContent.val() || principalElement.val();
-							}
-						}
-					}
-					else {
-						content = principalElement.val();
-					}
+						return Journal.prototype.canDrop.apply(instance, arguments);
+					},
 
-					instance.set('content', content);
+					clone: function() {
+						var instance = this;
 
-					return content;
-				},
+						var options = {};
+						var portletNamespace = instance.portletNamespace;
 
-				getFieldContainer: function() {
-					var instance = this;
-
-					if (!instance.fieldContainer) {
-						var htmlTemplate = [];
-						var fieldLabel = Liferay.Language.get('field');
-						var editOptionsLanguage = Liferay.Language.get('edit-options');
-						var requiredFieldLanguage = Liferay.Language.get('this-field-is-required');
-
-						var repeatableBtnTemplate = instance.getById('repeatableBtnTemplate');
-						var repeatableBtnTemplateHTML = '';
-
-						if (repeatableBtnTemplate) {
-							repeatableBtnTemplateHTML = repeatableBtnTemplate.html();
-						}
-
-						htmlTemplate = A.substitute(
-							TPL_FIELD_CONTAINER,
-							{
-								requiredFieldLanguage: requiredFieldLanguage,
-								editOptionsLanguage: editOptionsLanguage,
-								fieldLabel: fieldLabel,
-								repeatableBtnTemplateHTML: repeatableBtnTemplateHTML
-							}
-						);
-
-						instance.fieldContainer = A.Node.create(htmlTemplate);
-
-						var source = instance.fieldContainer.one('li');
-						var fieldType = instance.get('fieldType');
-						var required = instance.get('required');
-						var variableName = instance.get('variableName');
-
-						source.setAttribute('dataName', variableName);
-						source.setAttribute('dataRequired', required);
-						source.setAttribute('dataType', fieldType);
-
-						if (!instance.canDrop(source)) {
-							instance.fieldContainer.one('.folder-droppable').remove();
-						}
-					}
-
-					return instance.fieldContainer;
-				},
-
-				getFieldElementContainer: function() {
-					var instance = this;
-
-					if (!instance.fieldElementContainer) {
-						instance.fieldElementContainer = instance.getFieldContainer().one('div.journal-article-component-container');
-					}
-
-					return instance.fieldElementContainer;
-				},
-
-				getFieldLabelElement: function() {
-					var instance = this;
-
-					var source = instance.get('source');
-
-					if (!source) {
-						source = instance.getFieldContainer().one('li');
-					}
-
-					return source.one('> .folder > .field-container .journal-article-field-label');
-				},
-
-				getLocalizedValue: function() {
-					var instance = this;
-
-					var source = instance.get('source');
-
-					if (source) {
-						var input = source.one('.journal-article-localized');
-					}
-
-					return input ? input.val() : 'false';
-				},
-
-				getRepeatedSiblings: function() {
-					var instance = this;
-
-					return Journal.prototype.getRepeatedSiblings.apply(instance, [instance]);
-				},
-
-				propagateAttr: function(event) {
-					var instance = this;
-
-					var siblings = instance.getRepeatedSiblings();
-
-					if (siblings) {
-						siblings.each(
+						A.each(
+							instance.cloneableAttrs,
 							function(item, index, collection) {
-								var id = item.get('id');
-								var fieldInstance = fieldsDataSet.item(id);
-
-								if (fieldInstance) {
-									fieldInstance.set(event.attrName, event.newVal);
-								}
+								options[item] = instance.get(item);
 							}
 						);
-					}
-				},
 
-				setFieldLabel: function(value) {
-					var instance = this;
+						options.source = null;
 
-					var fieldLabel = instance.getFieldLabelElement();
+						return new StructureField(options, portletNamespace);
+					},
 
-					if (!value) {
-						value = instance.get('variableName');
-					}
+					createInstructionsContainer: function(value) {
+						return A.Node.create(TPL_INSTRUCTIONS_CONTAINER).html(value);
+					},
 
-					fieldLabel.one('span').html(value);
+					createTooltipImage: function() {
+						return A.Node.create(TPL_TOOLTIP_IMAGE);
+					},
 
-					instance.setAttribute('fieldLabel', value);
+					generateInstanceId: function() {
+						var instance = this;
 
-					return value;
-				},
+						return Journal.prototype.generateInstanceId.apply(instance, arguments);
+					},
 
-				setInstanceId: function(value) {
-					var instance = this;
+					getAttribute: function(key, defaultValue) {
+						var instance = this;
 
-					instance.setAttribute('instanceId', value);
+						var value = undefined;
+						var source = instance.get('source');
 
-					var type = instance.get('fieldType');
-					var source = instance.get('source');
-
-					if ((type == 'image') && source) {
-						var isLocalized = instance.get('localized');
-						var inputFileName = 'structure_image_' + value + '_' + instance.get('variableName');
-						var inputFile = source.one('.journal-article-component-container [type=file]');
-
-						if (isLocalized) {
-							inputFileName += '_' + instance.get('localizedValue');
+						if (source) {
+							value = source.attr('data' + key);
 						}
 
-						inputFile.attr('name', inputFileName);
-					}
+						if (Lang.isUndefined(value) && !Lang.isUndefined(defaultValue)) {
+							value = defaultValue;
+						}
 
-					return value;
-				},
+						return value;
+					},
 
-				setInstructions: function(value) {
-					var instance = this;
+					getByName: function() {
+						var instance = this;
 
-					var source = instance.get('source');
+						return Journal.prototype.getByName.apply(instance, arguments);
+					},
 
-					if (source) {
-						var id = source.get('id');
-						var fieldInstance = fieldsDataSet.item(id);
+					getComponentType: function() {
+						var instance = this;
 
-						instance.setAttribute('instructions', value);
+						return Journal.prototype.getComponentType.apply(instance, arguments);
+					},
 
-						if (fieldInstance) {
-							var fieldContainer = source.one('> .folder > .field-container');
-							var label = fieldInstance.getFieldLabelElement();
-							var tooltipIcon = label.one('.journal-article-instructions-container');
-							var journalInstructionsMessage = fieldContainer.one('.journal-article-instructions-message');
-							var displayAsTooltip = fieldInstance.get('displayAsTooltip');
+					getContent: function(source) {
+						var instance = this;
 
-							if (tooltipIcon) {
-								tooltipIcon.remove();
+						var content;
+						var type = instance.get('fieldType');
+						var componentContainer = source.one('div.journal-article-component-container');
+
+						var principalElement = componentContainer.one('.aui-field-input');
+
+						if (type == 'boolean') {
+							content = principalElement.attr('checked');
+						}
+						else if (type == 'text_area') {
+							var editorName = source.one('iframe').attr('name');
+							var editorReference = window[editorName];
+
+							if (editorReference && Lang.isFunction(editorReference.getHTML)) {
+								content = editorReference.getHTML();
 							}
+						}
+						else if (type == 'multi-list') {
+							var output = [];
+							var options = principalElement.all('option');
 
-							if (journalInstructionsMessage) {
-								journalInstructionsMessage.remove();
-							}
+							options.each(
+								function(item, index, collection) {
+									if (item.get('selected')) {
+										var value = item.val();
 
-							if (value) {
-								if (!displayAsTooltip) {
-									var instructionsMessage = fieldInstance.createInstructionsContainer(value);
-									var requiredMessage = fieldContainer.one('.journal-article-required-message');
-
-									requiredMessage.placeAfter(instructionsMessage);
+										output.push(value);
+									}
 								}
-								else {
-									label.append(fieldInstance.createTooltipImage());
-								}
-							}
-						}
-					}
-
-					return value;
-				},
-
-				setRepeatable: function(value) {
-					var instance = this;
-
-					var source = instance.get('source');
-
-					instance.setAttribute('repeatable', value);
-
-					if (source) {
-						var id = source.get('id');
-						var fieldInstance = fieldsDataSet.item(id);
-						var fieldContainer = source.one('> .folder > .field-container');
-						var repeatableFieldImage = fieldContainer.one('.repeatable-field-image');
-						var repeatableAddIcon = source.one('.journal-article-buttons .repeatable-button');
-
-						if (repeatableFieldImage) {
-							repeatableFieldImage.remove();
-						}
-
-						var parentStructureId = instance.get('parentStructureId');
-
-						if (value && !parentStructureId) {
-							var repeatableFieldImageModel = A.Node.create(
-								A.one('#repeatable-field-image-model').html()
 							);
 
-							fieldContainer.append(repeatableFieldImageModel);
+							content = output.join(',');
+						}
+						else if (type == 'image') {
+							var imageContent = componentContainer.one('.journal-image-content');
+							var imageDelete = instance.getByName(componentContainer, 'journalImageDelete');
 
-							if (repeatableAddIcon) {
-								repeatableAddIcon.setStyle('display', 'inline-block').show();
+							if (imageDelete && imageDelete.val() == 'delete') {
+								content = 'delete';
+							}
+							else {
+								if (imageContent) {
+									content = imageContent.val() || principalElement.val();
+								}
 							}
 						}
 						else {
-							if (repeatableAddIcon) {
-								repeatableAddIcon.hide();
+							content = principalElement.val();
+						}
+
+						instance.set('content', content);
+
+						return content;
+					},
+
+					getFieldContainer: function() {
+						var instance = this;
+
+						if (!instance.fieldContainer) {
+							var htmlTemplate = [];
+							var fieldLabel = Liferay.Language.get('field');
+							var editOptionsLanguage = Liferay.Language.get('edit-options');
+							var requiredFieldLanguage = Liferay.Language.get('this-field-is-required');
+
+							var repeatableBtnTemplate = instance.getById('repeatableBtnTemplate');
+							var repeatableBtnTemplateHTML = '';
+
+							if (repeatableBtnTemplate) {
+								repeatableBtnTemplateHTML = repeatableBtnTemplate.html();
+							}
+
+							htmlTemplate = A.substitute(
+								TPL_FIELD_CONTAINER,
+								{
+									requiredFieldLanguage: requiredFieldLanguage,
+									editOptionsLanguage: editOptionsLanguage,
+									fieldLabel: fieldLabel,
+									repeatableBtnTemplateHTML: repeatableBtnTemplateHTML
+								}
+							);
+
+							instance.fieldContainer = A.Node.create(htmlTemplate);
+
+							var source = instance.fieldContainer.one('li');
+							var fieldType = instance.get('fieldType');
+							var required = instance.get('required');
+							var variableName = instance.get('variableName');
+
+							source.setAttribute('dataName', variableName);
+							source.setAttribute('dataRequired', required);
+							source.setAttribute('dataType', fieldType);
+
+							if (!instance.canDrop(source)) {
+								instance.fieldContainer.one('.folder-droppable').remove();
 							}
 						}
-					}
 
-					return value;
-				},
+						return instance.fieldContainer;
+					},
 
-				setVariableName: function(value) {
-					var instance = this;
+					getFieldElementContainer: function() {
+						var instance = this;
 
-					var fieldLabel = instance.getFieldLabelElement();
-					var input = fieldLabel.get('parentNode').one('.aui-field-input');
+						if (!instance.fieldElementContainer) {
+							instance.fieldElementContainer = instance.getFieldContainer().one('div.journal-article-component-container');
+						}
 
-					if (input) {
-						input.attr('id', value);
+						return instance.fieldElementContainer;
+					},
 
-						fieldLabel.setAttribute('for', value);
-					}
+					getFieldLabelElement: function() {
+						var instance = this;
 
-					instance.setAttribute('name', value);
+						var source = instance.get('source');
 
-					return value;
-				},
+						if (!source) {
+							source = instance.getFieldContainer().one('li');
+						}
 
-				setAttribute: function(key, value) {
-					var instance = this;
+						return source.one('> .folder > .field-container .journal-article-field-label');
+					},
 
-					var source = instance.get('source');
+					getLocalizedValue: function() {
+						var instance = this;
 
-					if (Lang.isArray(value)) {
-						value = value[0];
-					}
+						var source = instance.get('source');
 
-					if (source) {
-						source.setAttribute('data' + key, value);
-					}
+						if (source) {
+							var input = source.one('.journal-article-localized');
+						}
 
-					return value;
-				},
+						return input ? input.val() : 'false';
+					},
 
-				_guid: Journal.prototype._guid,
+					getRepeatedSiblings: function() {
+						var instance = this;
 
-				getById: Journal.prototype.getById
+						return Journal.prototype.getRepeatedSiblings.apply(instance, [instance]);
+					},
+
+					propagateAttr: function(event) {
+						var instance = this;
+
+						var siblings = instance.getRepeatedSiblings();
+
+						if (siblings) {
+							siblings.each(
+								function(item, index, collection) {
+									var id = item.get('id');
+									var fieldInstance = fieldsDataSet.item(id);
+
+									if (fieldInstance) {
+										fieldInstance.set(event.attrName, event.newVal);
+									}
+								}
+							);
+						}
+					},
+
+					setFieldLabel: function(value) {
+						var instance = this;
+
+						var fieldLabel = instance.getFieldLabelElement();
+
+						if (!value) {
+							value = instance.get('variableName');
+						}
+
+						fieldLabel.one('span').html(value);
+
+						instance.setAttribute('fieldLabel', value);
+
+						return value;
+					},
+
+					setInstanceId: function(value) {
+						var instance = this;
+
+						instance.setAttribute('instanceId', value);
+
+						var type = instance.get('fieldType');
+						var source = instance.get('source');
+
+						if ((type == 'image') && source) {
+							var isLocalized = instance.get('localized');
+							var inputFileName = 'structure_image_' + value + '_' + instance.get('variableName');
+							var inputFile = source.one('.journal-article-component-container [type=file]');
+
+							if (isLocalized) {
+								inputFileName += '_' + instance.get('localizedValue');
+							}
+
+							inputFile.attr('name', inputFileName);
+						}
+
+						return value;
+					},
+
+					setInstructions: function(value) {
+						var instance = this;
+
+						var source = instance.get('source');
+
+						if (source) {
+							var id = source.get('id');
+							var fieldInstance = fieldsDataSet.item(id);
+
+							instance.setAttribute('instructions', value);
+
+							if (fieldInstance) {
+								var fieldContainer = source.one('> .folder > .field-container');
+								var label = fieldInstance.getFieldLabelElement();
+								var tooltipIcon = label.one('.journal-article-instructions-container');
+								var journalInstructionsMessage = fieldContainer.one('.journal-article-instructions-message');
+								var displayAsTooltip = fieldInstance.get('displayAsTooltip');
+
+								if (tooltipIcon) {
+									tooltipIcon.remove();
+								}
+
+								if (journalInstructionsMessage) {
+									journalInstructionsMessage.remove();
+								}
+
+								if (value) {
+									if (!displayAsTooltip) {
+										var instructionsMessage = fieldInstance.createInstructionsContainer(value);
+										var requiredMessage = fieldContainer.one('.journal-article-required-message');
+
+										requiredMessage.placeAfter(instructionsMessage);
+									}
+									else {
+										label.append(fieldInstance.createTooltipImage());
+									}
+								}
+							}
+						}
+
+						return value;
+					},
+
+					setRepeatable: function(value) {
+						var instance = this;
+
+						var source = instance.get('source');
+
+						instance.setAttribute('repeatable', value);
+
+						if (source) {
+							var id = source.get('id');
+							var fieldInstance = fieldsDataSet.item(id);
+							var fieldContainer = source.one('> .folder > .field-container');
+							var repeatableFieldImage = fieldContainer.one('.repeatable-field-image');
+							var repeatableAddIcon = source.one('.journal-article-buttons .repeatable-button');
+
+							if (repeatableFieldImage) {
+								repeatableFieldImage.remove();
+							}
+
+							var parentStructureId = instance.get('parentStructureId');
+
+							if (value && !parentStructureId) {
+								var repeatableFieldImageModel = A.Node.create(
+									A.one('#repeatable-field-image-model').html()
+								);
+
+								fieldContainer.append(repeatableFieldImageModel);
+
+								if (repeatableAddIcon) {
+									repeatableAddIcon.setStyle('display', 'inline-block').show();
+								}
+							}
+							else {
+								if (repeatableAddIcon) {
+									repeatableAddIcon.hide();
+								}
+							}
+						}
+
+						return value;
+					},
+
+					setVariableName: function(value) {
+						var instance = this;
+
+						var fieldLabel = instance.getFieldLabelElement();
+						var input = fieldLabel.get('parentNode').one('.aui-field-input');
+
+						if (input) {
+							input.attr('id', value);
+
+							fieldLabel.setAttribute('for', value);
+						}
+
+						instance.setAttribute('name', value);
+
+						return value;
+					},
+
+					setAttribute: function(key, value) {
+						var instance = this;
+
+						var source = instance.get('source');
+
+						if (Lang.isArray(value)) {
+							value = value[0];
+						}
+
+						if (source) {
+							source.setAttribute('data' + key, value);
+						}
+
+						return value;
+					},
+
+					_guid: Journal.prototype._guid,
+
+					getById: Journal.prototype.getById
+				}
 			}
 		);
 
