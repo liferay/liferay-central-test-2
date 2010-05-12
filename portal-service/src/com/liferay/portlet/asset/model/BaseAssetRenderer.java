@@ -18,8 +18,11 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
+import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
+import com.liferay.portal.theme.ThemeDisplay;
 
+import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
 
 /**
@@ -35,6 +38,13 @@ public abstract class BaseAssetRenderer implements AssetRenderer {
 
 	public String getDiscussionPath() {
 		return null;
+	}
+
+	public String getIconPath(PortletRequest portletRequest) {
+		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		return getIconPath(themeDisplay);
 	}
 
 	public PortletURL getURLEdit(
@@ -94,6 +104,10 @@ public abstract class BaseAssetRenderer implements AssetRenderer {
 
 	public boolean isPrintable() {
 		return false;
+	}
+
+	protected String getIconPath(ThemeDisplay themeDisplay) {
+		return themeDisplay.getPathThemeImages() + "/common/page.png";
 	}
 
 	private static final String[] _EMPTY_ARRAY = new String[0];

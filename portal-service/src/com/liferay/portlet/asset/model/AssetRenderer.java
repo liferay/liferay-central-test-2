@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.security.permission.PermissionChecker;
 
+import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
@@ -28,6 +29,7 @@ import javax.portlet.RenderResponse;
  * <a href="AssetRenderer.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
+ * @author Juan Fernández
  */
 public interface AssetRenderer {
 
@@ -42,6 +44,8 @@ public interface AssetRenderer {
 	public String getDiscussionPath();
 
 	public long getGroupId();
+
+	public String getIconPath(PortletRequest portletRequest);
 
 	public String getSummary();
 
