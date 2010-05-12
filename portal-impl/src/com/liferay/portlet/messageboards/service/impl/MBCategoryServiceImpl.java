@@ -16,14 +16,12 @@ package com.liferay.portlet.messageboards.service.impl;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.service.base.MBCategoryServiceBaseImpl;
 import com.liferay.portlet.messageboards.service.permission.MBCategoryPermission;
 
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -79,30 +77,14 @@ public class MBCategoryServiceImpl extends MBCategoryServiceBaseImpl {
 			long groupId, long parentCategoryId, int start, int end)
 		throws PortalException, SystemException {
 
-		List<MBCategory> categories = mbCategoryLocalService.getCategories(
+		return mbCategoryPersistence.filterFindByG_P(
 			groupId, parentCategoryId, start, end);
-
-		categories = ListUtil.copy(categories);
-
-		Iterator<MBCategory> itr = categories.iterator();
-
-		while (itr.hasNext()) {
-			MBCategory category = itr.next();
-
-			if (!MBCategoryPermission.contains(
-					getPermissionChecker(), category, ActionKeys.VIEW)) {
-
-				itr.remove();
-			}
-		}
-
-		return categories;
 	}
 
 	public int getCategoriesCount(long groupId, long parentCategoryId)
 		throws SystemException {
 
-		return mbCategoryLocalService.getCategoriesCount(
+		return mbCategoryPersistence.filterCountByG_P(
 			groupId, parentCategoryId);
 	}
 
