@@ -18,7 +18,28 @@
 
 <c:choose>
 	<c:when test="<%= WorkflowEngineManagerUtil.isDeployed() %>">
-		<%@ include file="/html/portlet/workflow_definitions/view_definitions.jspf" %>
+
+		<%
+		String tabs1 = ParamUtil.getString(request, "tabs1", "definitions");
+
+		PortletURL portletURL = renderResponse.createRenderURL();
+
+		portletURL.setParameter("tabs1", tabs1);
+		%>
+
+		<liferay-ui:tabs
+			names="definitions,default-configuration"
+			portletURL="<%= portletURL %>"
+		/>
+
+		<c:choose>
+			<c:when test='<%= tabs1.equals("default-configuration") %>'>
+				  <liferay-util:include page="/html/portlet/workflow_definition_links/view.jsp" />
+			</c:when>
+			<c:otherwise>
+				<%@ include file="/html/portlet/workflow_definitions/view_definitions.jspf" %>
+			</c:otherwise>
+		</c:choose>
 	</c:when>
 	<c:otherwise>
 		<div class="portlet-msg-info">

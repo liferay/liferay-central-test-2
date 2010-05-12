@@ -17,8 +17,8 @@ package com.liferay.portal.service.impl;
 import com.liferay.portal.NoSuchWorkflowDefinitionLinkException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.kernel.workflow.WorkflowEngineManagerUtil;
-import com.liferay.portal.model.Group;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.WorkflowDefinitionLink;
 import com.liferay.portal.service.base.WorkflowDefinitionLinkLocalServiceBaseImpl;
@@ -75,7 +75,7 @@ public class WorkflowDefinitionLinkLocalServiceImpl
 
 		try {
 			WorkflowDefinitionLink workflowDefinitionLink =
-				getWorkflowDefinitionLink(companyId, groupId, className);
+				getWorkflowDefinitionLink(companyId, groupId, className, true);
 
 			deleteWorkflowDefinitionLink(workflowDefinitionLink);
 		}
@@ -91,11 +91,10 @@ public class WorkflowDefinitionLinkLocalServiceImpl
 			throw new NoSuchWorkflowDefinitionLinkException();
 		}
 
-		Group group = groupLocalService.getCompanyGroup(companyId);
 		long classNameId = PortalUtil.getClassNameId(className);
 
 		return workflowDefinitionLinkPersistence.findByG_C_C(
-			group.getGroupId(), companyId, classNameId);
+			WorkflowConstants.DEFAULT_GROUP_ID, companyId, classNameId);
 	}
 
 	public WorkflowDefinitionLink getWorkflowDefinitionLink(
@@ -124,11 +123,9 @@ public class WorkflowDefinitionLinkLocalServiceImpl
 		}
 
 		if (!strict && (workflowDefinitionLink == null)) {
-			Group group = groupLocalService.getCompanyGroup(companyId);
-
 			workflowDefinitionLink =
-				workflowDefinitionLinkPersistence.fetchByG_C_C(
-					group.getGroupId(), companyId, classNameId);
+				workflowDefinitionLinkPersistence.findByG_C_C(
+					WorkflowConstants.DEFAULT_GROUP_ID, companyId, classNameId);
 		}
 
 		if (workflowDefinitionLink == null) {

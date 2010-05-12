@@ -21,6 +21,12 @@ portletURL.setParameter("struts_action", "/workflow_definition_links/view");
 
 List<WorkflowDefinition> workflowDefinitions = WorkflowDefinitionManagerUtil.getActiveWorkflowDefinitions(company.getCompanyId(), 0, 100, null);
 List<WorkflowHandler> workflowHandlers = WorkflowHandlerRegistryUtil.getWorkflowHandlers();
+
+long groupId = themeDisplay.getScopeGroupId();
+
+if (portletDisplay.getPortletName().equals(PortletKeys.WORKFLOW_DEFINITIONS)) {
+	groupId = WorkflowConstants.DEFAULT_GROUP_ID;
+}
 %>
 
 <portlet:actionURL var="editWorkflowDefinitionLinkURL">
@@ -29,6 +35,7 @@ List<WorkflowHandler> workflowHandlers = WorkflowHandlerRegistryUtil.getWorkflow
 
 <aui:form action="<%= editWorkflowDefinitionLinkURL %>" method="post">
 	<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
+	<aui:input name="groupId" type="hidden" value="<%= groupId %>" />
 
 	<liferay-ui:search-container
 		iteratorURL="<%= portletURL %>"
@@ -71,14 +78,19 @@ List<WorkflowHandler> workflowHandlers = WorkflowHandlerRegistryUtil.getWorkflow
 					WorkflowDefinitionLink workflowDefinitionLink = null;
 
 					try {
-						workflowDefinitionLink = WorkflowDefinitionLinkLocalServiceUtil.getWorkflowDefinitionLink(company.getCompanyId(), themeDisplay.getScopeGroupId(), workflowHandler.getClassName(), true);
+						if (portletDisplay.getPortletName().equals(PortletKeys.WORKFLOW_DEFINITIONS)) {
+							workflowDefinitionLink = WorkflowDefinitionLinkLocalServiceUtil.getDefaultWorkflowDefinitionLink(company.getCompanyId(), workflowHandler.getClassName());
+						}
+						else {
+							workflowDefinitionLink = WorkflowDefinitionLinkLocalServiceUtil.getWorkflowDefinitionLink(company.getCompanyId(), themeDisplay.getScopeGroupId(), workflowHandler.getClassName(), true);
+						}
 					}
 					catch (NoSuchWorkflowDefinitionLinkException nswdle) {
 					}
 
 					String defaultOptionMessage = null;
 
-					if (themeDisplay.getScopeGroupId() != themeDisplay.getCompanyGroupId()) {
+					if (!portletDisplay.getPortletName().equals(PortletKeys.WORKFLOW_DEFINITIONS)) {
 						try {
 							WorkflowDefinitionLink defaultWorkflowDefinitionLink = WorkflowDefinitionLinkLocalServiceUtil.getDefaultWorkflowDefinitionLink(company.getCompanyId(), workflowHandler.getClassName());
 

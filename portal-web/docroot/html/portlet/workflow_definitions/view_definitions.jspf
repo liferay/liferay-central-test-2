@@ -15,8 +15,6 @@
 %>
 
 <%
-PortletURL portletURL = renderResponse.createRenderURL();
-
 portletURL.setParameter("struts_action", "/workflow_definitions/view");
 
 List<WorkflowDefinition> workflowDefinitions = WorkflowDefinitionManagerUtil.getWorkflowDefinitions(company.getCompanyId(), 0, 100, null);

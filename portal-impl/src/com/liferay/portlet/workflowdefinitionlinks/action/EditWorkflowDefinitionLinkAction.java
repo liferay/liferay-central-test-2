@@ -81,13 +81,17 @@ public class EditWorkflowDefinitionLinkAction extends PortletAction {
 	}
 
 	protected void updateWorkflowDefinitionLink(
-			ThemeDisplay themeDisplay, String className, String value)
+			ActionRequest actionRequest, String className, String value)
 		throws Exception {
+
+		long groupId = ParamUtil.getLong(actionRequest, "groupId");
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		if (Validator.isNull(value)) {
 			WorkflowDefinitionLinkLocalServiceUtil.deleteWorkflowDefinitionLink(
-				themeDisplay.getCompanyId(), themeDisplay.getScopeGroupId(),
-				className);
+				themeDisplay.getCompanyId(), groupId, className);
 		}
 		else {
 			String[] values = StringUtil.split(value, StringPool.AT);
@@ -98,16 +102,13 @@ public class EditWorkflowDefinitionLinkAction extends PortletAction {
 
 			WorkflowDefinitionLinkLocalServiceUtil.updateWorkflowDefinitionLink(
 				themeDisplay.getUserId(), themeDisplay.getCompanyId(),
-				themeDisplay.getScopeGroupId(), className,
-				workflowDefinitionName, workflowDefinitionVersion);
+				groupId, className, workflowDefinitionName,
+				workflowDefinitionVersion);
 		}
 	}
 
 	protected void updateWorkflowDefinitionLinks(ActionRequest actionRequest)
 		throws Exception {
-
-		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
 
 		Enumeration<String> enu = actionRequest.getParameterNames();
 
@@ -121,7 +122,7 @@ public class EditWorkflowDefinitionLinkAction extends PortletAction {
 			String className = name.substring(_PREFIX.length(), name.length());
 			String value = ParamUtil.getString(actionRequest, name);
 
-			updateWorkflowDefinitionLink(themeDisplay, className, value);
+			updateWorkflowDefinitionLink(actionRequest, className, value);
 		}
 	}
 
