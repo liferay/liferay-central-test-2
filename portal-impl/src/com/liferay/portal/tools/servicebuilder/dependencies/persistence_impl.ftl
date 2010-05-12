@@ -2762,9 +2762,9 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 		private static final String _FILTER_COLUMN_${entity.PKVarName?upper_case} = "${entity.alias}.${entity.PKVarName}";
 
 		private static final String _FILTER_COLUMN_USERID = "${entity.alias}.userId";
-	</#if>
 
-	private static final String _ENTITY_ALIAS = "${entity.alias}";
+		private static final String _ENTITY_ALIAS = "${entity.alias}";
+	</#if>
 
 	private static final String _ORDER_BY_ENTITY_ALIAS = "${entity.alias}.";
 
