@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.asset.model.BaseAssetRenderer;
@@ -36,6 +37,7 @@ import javax.portlet.WindowState;
  * <a href="IGImageAssetRenderer.java.html"><b><i>View Source</i></b></a>
  *
  * @author Julio Camarero
+ * @author Juan Fernández
  */
 public class IGImageAssetRenderer extends BaseAssetRenderer {
 
@@ -136,6 +138,10 @@ public class IGImageAssetRenderer extends BaseAssetRenderer {
 		else {
 			return null;
 		}
+	}
+
+	protected String getIconPath(ThemeDisplay themeDisplay) {
+		return themeDisplay.getPathThemeImages() + "/file_system/small/bmp.png";
 	}
 
 	private IGImage _image;

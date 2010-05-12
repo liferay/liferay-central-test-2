@@ -129,6 +129,10 @@ public class CalEventAssetRenderer extends BaseAssetRenderer {
 		}
 	}
 
+	protected String getIconPath(ThemeDisplay themeDisplay) {
+		return themeDisplay.getPathThemeImages() + "/document_library/date.png";
+	}
+
 	private CalEvent _event;
 
 }

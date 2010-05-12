@@ -36,6 +36,7 @@ import javax.portlet.RenderResponse;
  * <a href="MBMessageAssetRenderer.java.html"><b><i>View Source</i></b></a>
  *
  * @author Julio Camarero
+ * @author Juan Fernández
  */
 public class MBMessageAssetRenderer extends BaseAssetRenderer {
 
@@ -124,6 +125,10 @@ public class MBMessageAssetRenderer extends BaseAssetRenderer {
 		else {
 			return null;
 		}
+	}
+
+	protected String getIconPath(ThemeDisplay themeDisplay) {
+		return themeDisplay.getPathThemeImages() + "/common/conversation.png";
 	}
 
 	private MBMessage _message;

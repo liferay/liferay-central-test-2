@@ -34,6 +34,7 @@ import javax.portlet.RenderResponse;
  * <a href="BookmarksEntryAssetRenderer.java.html"><b><i>View Source</i></b></a>
  *
  * @author Julio Camarero
+ * @author Juan Fernández
  */
 public class BookmarksEntryAssetRenderer extends BaseAssetRenderer {
 
@@ -129,6 +130,10 @@ public class BookmarksEntryAssetRenderer extends BaseAssetRenderer {
 		else {
 			return null;
 		}
+	}
+
+	protected String getIconPath(ThemeDisplay themeDisplay) {
+		return themeDisplay.getPathThemeImages() + "/ratings/star_hover.png";
 	}
 
 	private BookmarksEntry _entry;

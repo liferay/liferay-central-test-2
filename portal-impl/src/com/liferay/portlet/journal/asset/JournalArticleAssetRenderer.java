@@ -39,6 +39,7 @@ import javax.portlet.RenderResponse;
  * <a href="JournalArticleAssetRenderer.java.html"><b><i>View Source</i></b></a>
  *
  * @author Julio Camarero
+ * @author Juan Fernández
  */
 public class JournalArticleAssetRenderer extends BaseAssetRenderer {
 
@@ -194,6 +195,10 @@ public class JournalArticleAssetRenderer extends BaseAssetRenderer {
 		else {
 			return null;
 		}
+	}
+
+	protected String getIconPath(ThemeDisplay themeDisplay) {
+		return themeDisplay.getPathThemeImages() + "/common/history.png";
 	}
 
 	private JournalArticle _article;
