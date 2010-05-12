@@ -39,28 +39,29 @@ public class ResourceActionsUtil_IW {
 		return ResourceActionsUtil.getAction(pageContext, action);
 	}
 
-	public java.util.List getActions(
+	public java.util.List<java.lang.String> getActions(
 		java.util.List<com.liferay.portal.model.Permission> permissions) {
 		return ResourceActionsUtil.getActions(permissions);
 	}
 
-	public java.util.List getActionsNames(
+	public java.util.List<java.lang.String> getActionsNames(
 		javax.servlet.jsp.PageContext pageContext,
 		java.util.List<java.lang.String> actions) {
 		return ResourceActionsUtil.getActionsNames(pageContext, actions);
 	}
 
-	public java.util.List getActionsNames(
+	public java.util.List<java.lang.String> getActionsNames(
 		javax.servlet.jsp.PageContext pageContext, java.lang.String name,
 		long actionIds) {
 		return ResourceActionsUtil.getActionsNames(pageContext, name, actionIds);
 	}
 
-	public java.util.List getModelNames() {
+	public java.util.List<java.lang.String> getModelNames() {
 		return ResourceActionsUtil.getModelNames();
 	}
 
-	public java.util.List getModelPortletResources(java.lang.String name) {
+	public java.util.List<java.lang.String> getModelPortletResources(
+		java.lang.String name) {
 		return ResourceActionsUtil.getModelPortletResources(name);
 	}
 
@@ -74,85 +75,90 @@ public class ResourceActionsUtil_IW {
 		return ResourceActionsUtil.getModelResource(pageContext, name);
 	}
 
-	public java.util.List getModelResourceActions(java.lang.String name) {
+	public java.util.List<java.lang.String> getModelResourceActions(
+		java.lang.String name) {
 		return ResourceActionsUtil.getModelResourceActions(name);
 	}
 
-	public java.util.List getModelResourceCommunityDefaultActions(
+	public java.util.List<java.lang.String> getModelResourceCommunityDefaultActions(
 		java.lang.String name) {
 		return ResourceActionsUtil.getModelResourceCommunityDefaultActions(name);
 	}
 
-	public java.util.List getModelResourceGuestDefaultActions(
+	public java.util.List<java.lang.String> getModelResourceGuestDefaultActions(
 		java.lang.String name) {
 		return ResourceActionsUtil.getModelResourceGuestDefaultActions(name);
 	}
 
-	public java.util.List getModelResourceGuestUnsupportedActions(
+	public java.util.List<java.lang.String> getModelResourceGuestUnsupportedActions(
 		java.lang.String name) {
 		return ResourceActionsUtil.getModelResourceGuestUnsupportedActions(name);
 	}
 
-	public java.util.List getModelResourceOwnerDefaultActions(
+	public java.util.List<java.lang.String> getModelResourceOwnerDefaultActions(
 		java.lang.String name) {
 		return ResourceActionsUtil.getModelResourceOwnerDefaultActions(name);
 	}
 
-	public java.util.List getPortletModelResources(java.lang.String portletName) {
+	public java.util.List<java.lang.String> getPortletModelResources(
+		java.lang.String portletName) {
 		return ResourceActionsUtil.getPortletModelResources(portletName);
 	}
 
-	public java.util.List getPortletNames() {
+	public java.util.List<java.lang.String> getPortletNames() {
 		return ResourceActionsUtil.getPortletNames();
 	}
 
-	public java.util.List getPortletResourceActions(java.lang.String name) {
+	public java.util.List<java.lang.String> getPortletResourceActions(
+		java.lang.String name) {
 		return ResourceActionsUtil.getPortletResourceActions(name);
 	}
 
-	public java.util.List getPortletResourceCommunityDefaultActions(
+	public java.util.List<java.lang.String> getPortletResourceCommunityDefaultActions(
 		java.lang.String name) {
 		return ResourceActionsUtil.getPortletResourceCommunityDefaultActions(name);
 	}
 
-	public java.util.List getPortletResourceGuestDefaultActions(
+	public java.util.List<java.lang.String> getPortletResourceGuestDefaultActions(
 		java.lang.String name) {
 		return ResourceActionsUtil.getPortletResourceGuestDefaultActions(name);
 	}
 
-	public java.util.List getPortletResourceGuestUnsupportedActions(
+	public java.util.List<java.lang.String> getPortletResourceGuestUnsupportedActions(
 		java.lang.String name) {
 		return ResourceActionsUtil.getPortletResourceGuestUnsupportedActions(name);
 	}
 
-	public java.util.List getPortletResourceLayoutManagerActions(
+	public java.util.List<java.lang.String> getPortletResourceLayoutManagerActions(
 		java.lang.String name) {
 		return ResourceActionsUtil.getPortletResourceLayoutManagerActions(name);
 	}
 
-	public java.util.List getResourceActions(java.lang.String name) {
+	public java.util.List<java.lang.String> getResourceActions(
+		java.lang.String name) {
 		return ResourceActionsUtil.getResourceActions(name);
 	}
 
-	public java.util.List getResourceActions(java.lang.String portletResource,
-		java.lang.String modelResource) {
+	public java.util.List<java.lang.String> getResourceActions(
+		java.lang.String portletResource, java.lang.String modelResource) {
 		return ResourceActionsUtil.getResourceActions(portletResource,
 			modelResource);
 	}
 
-	public java.util.List getResourceCommunityDefaultActions(
+	public java.util.List<java.lang.String> getResourceCommunityDefaultActions(
 		java.lang.String name) {
 		return ResourceActionsUtil.getResourceCommunityDefaultActions(name);
 	}
 
-	public java.util.List getResourceGuestUnsupportedActions(
+	public java.util.List<java.lang.String> getResourceGuestUnsupportedActions(
 		java.lang.String portletResource, java.lang.String modelResource) {
 		return ResourceActionsUtil.getResourceGuestUnsupportedActions(portletResource,
 			modelResource);
 	}
 
-	public java.util.List getRoles(long companyId,
-		com.liferay.portal.model.Group group, java.lang.String modelResource)
+	public java.util.List<com.liferay.portal.model.Role> getRoles(
+		long companyId, com.liferay.portal.model.Group group,
+		java.lang.String modelResource)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return ResourceActionsUtil.getRoles(companyId, group, modelResource);
 	}
@@ -162,7 +168,8 @@ public class ResourceActionsUtil_IW {
 		return ResourceActionsUtil.getSocialEquityActionMapping(name, actionId);
 	}
 
-	public java.util.List getSocialEquityActionMappings(java.lang.String name) {
+	public java.util.List<com.liferay.portlet.social.model.SocialEquityActionMapping> getSocialEquityActionMappings(
+		java.lang.String name) {
 		return ResourceActionsUtil.getSocialEquityActionMappings(name);
 	}
 

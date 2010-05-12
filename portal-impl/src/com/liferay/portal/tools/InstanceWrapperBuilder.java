@@ -130,7 +130,7 @@ public class InstanceWrapperBuilder {
 				sb.append("\t */\n");
 			}
 
-			sb.append("public " + javaMethod.getReturns().getValue() + _getDimensions(javaMethod.getReturns()) + " " + methodName + "(");
+			sb.append("public " + _getTypeGenericsName(javaMethod.getReturns()) + " " + methodName + "(");
 
 			JavaParameter[] parameters = javaMethod.getParameters();
 
