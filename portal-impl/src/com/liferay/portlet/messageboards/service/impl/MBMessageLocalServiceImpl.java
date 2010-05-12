@@ -648,7 +648,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				message.getThreadId());
 		}
 		else if (mbMessageFlagLocalService.hasAnswerFlag(
-			message.getMessageId())) {
+					message.getMessageId())) {
 
 			mbMessageFlagService.deleteAnswerFlag(message.getMessageId());
 		}
