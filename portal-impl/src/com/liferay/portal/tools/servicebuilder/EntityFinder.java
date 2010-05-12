@@ -51,6 +51,10 @@ public class EntityFinder {
 		return _where;
 	}
 
+	public boolean hasColumn(String name) {
+		return Entity.hasColumn(name, _columns);
+	}
+
 	public boolean isCollection() {
 		if ((_returnType != null) && _returnType.equals("Collection")) {
 			return true;
