@@ -168,7 +168,7 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 					<liferay-ui:search-container
 						curParam="cur1"
 						deltaConfigurable="<%= false %>"
-						headerNames="<%= "category,categories,threads,posts" %>"
+						headerNames='<%= "category,categories,threads,posts" %>'
 						iteratorURL="<%= portletURL %>"
 					>
 						<liferay-ui:search-container-results

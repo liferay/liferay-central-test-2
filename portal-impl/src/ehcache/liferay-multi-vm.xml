@@ -61,4 +61,11 @@
 		timeToLiveSeconds="3600"
 		overflowToDisk="false"
 	/>
+	<cache
+		name="com.liferay.portlet.social.service.impl.SocialEquitySettingLocalServiceImpl"
+		maxElementsInMemory="10000"
+		eternal="false"
+		timeToIdleSeconds="600"
+		overflowToDisk="false"
+	/>
 </ehcache>

@@ -153,4 +153,18 @@
 		/>
 		<bootstrapCacheLoaderFactory class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory" />
 	</cache>
+	<cache
+		name="com.liferay.portlet.social.service.impl.SocialEquitySettingLocalServiceImpl"
+		maxElementsInMemory="10000"
+		eternal="false"
+		timeToIdleSeconds="600"
+		overflowToDisk="false"
+	>
+		<cacheEventListenerFactory
+			class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
+			properties="replicatePuts=false,replicateUpdatesViaCopy=false"
+			propertySeparator=","
+		/>
+		<bootstrapCacheLoaderFactory class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory" />
+	</cache>
 </ehcache>

@@ -93,7 +93,7 @@
 				(userId = [$USER_ID$])
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.social.service.impl.SocialEquityLogLocalServiceImpl.updateUser_CQPQ">
+	<sql id="com.liferay.portlet.social.service.impl.SocialEquityLogLocalServiceImpl.updateUser_CQ_PQ">
 		<![CDATA[
 			UPDATE
 				User_
@@ -242,9 +242,11 @@
 						SELECT
 							SocialEquityAssetEntry.userId
 						FROM
-							SocialEquityLog, SocialEquityAssetEntry
+							SocialEquityAssetEntry
+						INNER JOIN
+							SocialEquityLog ON
+								(SocialEquityLog.assetEntryId = SocialEquityAssetEntry.assetEntryId)
 						WHERE
-							(SocialEquityAssetEntry.assetEntryId = SocialEquityLog.assetEntryId) AND
 							(type_ = [$TYPE_INFORMATION$]) AND
 							(validity <= [$VALIDITY$]) AND
 							(active_ = [$TRUE$])
@@ -337,7 +339,7 @@
 					)
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.social.service.impl.SocialEquityLogLocalServiceImpl.checkUser_CQPQ">
+	<sql id="com.liferay.portlet.social.service.impl.SocialEquityLogLocalServiceImpl.checkUser_CQ_PQ">
 		<![CDATA[
 			UPDATE
 				User_
@@ -347,7 +349,7 @@
 						SELECT
 							SUM(contributionEquity)
 						FROM
-							SUM(SocialEquityUser)
+							SocialEquityUser
 						WHERE
 							(SocialEquityUser.userId = User_.userId)
 					),

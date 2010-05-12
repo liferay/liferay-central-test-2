@@ -125,6 +125,13 @@ public class SocialEquitySettingLocalServiceWrapper
 			merge);
 	}
 
+	public java.util.List<com.liferay.portlet.social.model.SocialEquitySetting> getEquitySettings(
+		long classNameId, java.lang.String actionId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _socialEquitySettingLocalService.getEquitySettings(classNameId,
+			actionId);
+	}
+
 	public SocialEquitySettingLocalService getWrappedSocialEquitySettingLocalService() {
 		return _socialEquitySettingLocalService;
 	}
