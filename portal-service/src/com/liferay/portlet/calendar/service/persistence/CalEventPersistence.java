@@ -163,6 +163,19 @@ public interface CalEventPersistence extends BasePersistence<CalEvent> {
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.calendar.NoSuchEventException;
 
+	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> filterFindByGroupId(
+		long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> filterFindByGroupId(
+		long groupId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> filterFindByGroupId(
+		long groupId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByRemindBy(
 		int remindBy)
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -225,6 +238,19 @@ public interface CalEventPersistence extends BasePersistence<CalEvent> {
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.calendar.NoSuchEventException;
 
+	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> filterFindByG_T(
+		long groupId, java.lang.String type)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> filterFindByG_T(
+		long groupId, java.lang.String type, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> filterFindByG_T(
+		long groupId, java.lang.String type, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByG_R(
 		long groupId, boolean repeating)
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -255,6 +281,19 @@ public interface CalEventPersistence extends BasePersistence<CalEvent> {
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.calendar.NoSuchEventException;
+
+	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> filterFindByG_R(
+		long groupId, boolean repeating)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> filterFindByG_R(
+		long groupId, boolean repeating, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> filterFindByG_R(
+		long groupId, boolean repeating, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> findAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -299,10 +338,16 @@ public interface CalEventPersistence extends BasePersistence<CalEvent> {
 	public int countByUUID_G(java.lang.String uuid, long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	public int filterCountByUUID_G(java.lang.String uuid, long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public int countByCompanyId(long companyId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countByGroupId(long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public int filterCountByGroupId(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countByRemindBy(int remindBy)
@@ -311,7 +356,13 @@ public interface CalEventPersistence extends BasePersistence<CalEvent> {
 	public int countByG_T(long groupId, java.lang.String type)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	public int filterCountByG_T(long groupId, java.lang.String type)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public int countByG_R(long groupId, boolean repeating)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public int filterCountByG_R(long groupId, boolean repeating)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countAll()

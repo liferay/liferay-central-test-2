@@ -41,6 +41,7 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
+import com.liferay.portal.security.permission.InlineSQLHelperUtil;
 import com.liferay.portal.service.persistence.BatchSessionUtil;
 import com.liferay.portal.service.persistence.ResourcePersistence;
 import com.liferay.portal.service.persistence.UserPersistence;
@@ -597,6 +598,69 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 		}
 	}
 
+	public List<AssetTag> filterFindByGroupId(long groupId)
+		throws SystemException {
+		return filterFindByGroupId(groupId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	public List<AssetTag> filterFindByGroupId(long groupId, int start, int end)
+		throws SystemException {
+		return filterFindByGroupId(groupId, start, end, null);
+	}
+
+	public List<AssetTag> filterFindByGroupId(long groupId, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(3 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(3);
+			}
+
+			query.append(_FILTER_SELECT_ASSETTAG_WHERE);
+
+			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			else {
+				query.append(AssetTagModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+					AssetTag.class.getName(), _FILTER_COLUMN_TAGID,
+					_FILTER_COLUMN_USERID, groupId);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity(_ENTITY_ALIAS, AssetTagImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			return (List<AssetTag>)QueryUtil.list(q, getDialect(), start, end);
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public List<AssetTag> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -728,6 +792,42 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 		}
 
 		return count.intValue();
+	}
+
+	public int filterCountByGroupId(long groupId) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBundler query = new StringBundler(2);
+
+			query.append(_FILTER_COUNT_ASSETTAG_WHERE);
+
+			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+
+			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+					AssetTag.class.getName(), _FILTER_COLUMN_TAGID,
+					_FILTER_COLUMN_USERID, groupId);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			Long count = (Long)q.uniqueResult();
+
+			return count.intValue();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
 	}
 
 	public int countAll() throws SystemException {
@@ -1338,6 +1438,11 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 	private static final String _SQL_GETASSETENTRIESSIZE = "SELECT COUNT(*) AS COUNT_VALUE FROM AssetEntries_AssetTags WHERE tagId = ?";
 	private static final String _SQL_CONTAINSASSETENTRY = "SELECT COUNT(*) AS COUNT_VALUE FROM AssetEntries_AssetTags WHERE tagId = ? AND entryId = ?";
 	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "assetTag.groupId = ?";
+	private static final String _FILTER_SELECT_ASSETTAG_WHERE = "SELECT {assetTag.*} FROM AssetTag assetTag WHERE ";
+	private static final String _FILTER_COUNT_ASSETTAG_WHERE = "SELECT COUNT(DISTINCT assetTag.tagId) AS COUNT_VALUE FROM AssetTag assetTag WHERE ";
+	private static final String _FILTER_COLUMN_TAGID = "assetTag.tagId";
+	private static final String _FILTER_COLUMN_USERID = "assetTag.userId";
+	private static final String _ENTITY_ALIAS = "assetTag";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "assetTag.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No AssetTag exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No AssetTag exists with the key {";

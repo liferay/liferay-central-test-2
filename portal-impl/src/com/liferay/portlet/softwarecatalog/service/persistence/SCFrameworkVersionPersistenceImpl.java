@@ -41,6 +41,7 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
+import com.liferay.portal.security.permission.InlineSQLHelperUtil;
 import com.liferay.portal.service.persistence.BatchSessionUtil;
 import com.liferay.portal.service.persistence.ResourcePersistence;
 import com.liferay.portal.service.persistence.UserPersistence;
@@ -639,6 +640,72 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 		}
 	}
 
+	public List<SCFrameworkVersion> filterFindByGroupId(long groupId)
+		throws SystemException {
+		return filterFindByGroupId(groupId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	public List<SCFrameworkVersion> filterFindByGroupId(long groupId,
+		int start, int end) throws SystemException {
+		return filterFindByGroupId(groupId, start, end, null);
+	}
+
+	public List<SCFrameworkVersion> filterFindByGroupId(long groupId,
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(3 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(3);
+			}
+
+			query.append(_FILTER_SELECT_SCFRAMEWORKVERSION_WHERE);
+
+			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			else {
+				query.append(SCFrameworkVersionModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+					SCFrameworkVersion.class.getName(),
+					_FILTER_COLUMN_FRAMEWORKVERSIONID, _FILTER_COLUMN_USERID,
+					groupId);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity(_ENTITY_ALIAS, SCFrameworkVersionImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			return (List<SCFrameworkVersion>)QueryUtil.list(q, getDialect(),
+				start, end);
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public List<SCFrameworkVersion> findByCompanyId(long companyId)
 		throws SystemException {
 		return findByCompanyId(companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
@@ -1183,6 +1250,76 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 		}
 	}
 
+	public List<SCFrameworkVersion> filterFindByG_A(long groupId, boolean active)
+		throws SystemException {
+		return filterFindByG_A(groupId, active, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	public List<SCFrameworkVersion> filterFindByG_A(long groupId,
+		boolean active, int start, int end) throws SystemException {
+		return filterFindByG_A(groupId, active, start, end, null);
+	}
+
+	public List<SCFrameworkVersion> filterFindByG_A(long groupId,
+		boolean active, int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(4 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(4);
+			}
+
+			query.append(_FILTER_SELECT_SCFRAMEWORKVERSION_WHERE);
+
+			query.append(_FINDER_COLUMN_G_A_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_G_A_ACTIVE_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			else {
+				query.append(SCFrameworkVersionModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+					SCFrameworkVersion.class.getName(),
+					_FILTER_COLUMN_FRAMEWORKVERSIONID, _FILTER_COLUMN_USERID,
+					groupId);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity(_ENTITY_ALIAS, SCFrameworkVersionImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			qPos.add(active);
+
+			return (List<SCFrameworkVersion>)QueryUtil.list(q, getDialect(),
+				start, end);
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public List<SCFrameworkVersion> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -1330,6 +1467,43 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 		return count.intValue();
 	}
 
+	public int filterCountByGroupId(long groupId) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBundler query = new StringBundler(2);
+
+			query.append(_FILTER_COUNT_SCFRAMEWORKVERSION_WHERE);
+
+			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+
+			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+					SCFrameworkVersion.class.getName(),
+					_FILTER_COLUMN_FRAMEWORKVERSIONID, _FILTER_COLUMN_USERID,
+					groupId);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			Long count = (Long)q.uniqueResult();
+
+			return count.intValue();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public int countByCompanyId(long companyId) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(companyId) };
 
@@ -1427,6 +1601,48 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 		}
 
 		return count.intValue();
+	}
+
+	public int filterCountByG_A(long groupId, boolean active)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBundler query = new StringBundler(3);
+
+			query.append(_FILTER_COUNT_SCFRAMEWORKVERSION_WHERE);
+
+			query.append(_FINDER_COLUMN_G_A_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_G_A_ACTIVE_2);
+
+			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+					SCFrameworkVersion.class.getName(),
+					_FILTER_COLUMN_FRAMEWORKVERSIONID, _FILTER_COLUMN_USERID,
+					groupId);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			qPos.add(active);
+
+			Long count = (Long)q.uniqueResult();
+
+			return count.intValue();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
 	}
 
 	public int countAll() throws SystemException {
@@ -2058,6 +2274,11 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 	private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "scFrameworkVersion.companyId = ?";
 	private static final String _FINDER_COLUMN_G_A_GROUPID_2 = "scFrameworkVersion.groupId = ? AND ";
 	private static final String _FINDER_COLUMN_G_A_ACTIVE_2 = "scFrameworkVersion.active = ?";
+	private static final String _FILTER_SELECT_SCFRAMEWORKVERSION_WHERE = "SELECT {scFrameworkVersion.*} FROM SCFrameworkVersion scFrameworkVersion WHERE ";
+	private static final String _FILTER_COUNT_SCFRAMEWORKVERSION_WHERE = "SELECT COUNT(DISTINCT scFrameworkVersion.frameworkVersionId) AS COUNT_VALUE FROM SCFrameworkVersion scFrameworkVersion WHERE ";
+	private static final String _FILTER_COLUMN_FRAMEWORKVERSIONID = "scFrameworkVersion.frameworkVersionId";
+	private static final String _FILTER_COLUMN_USERID = "scFrameworkVersion.userId";
+	private static final String _ENTITY_ALIAS = "scFrameworkVersion";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "scFrameworkVersion.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No SCFrameworkVersion exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No SCFrameworkVersion exists with the key {";

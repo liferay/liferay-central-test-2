@@ -131,6 +131,19 @@ public interface JournalFeedPersistence extends BasePersistence<JournalFeed> {
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.journal.NoSuchFeedException;
 
+	public java.util.List<com.liferay.portlet.journal.model.JournalFeed> filterFindByGroupId(
+		long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.journal.model.JournalFeed> filterFindByGroupId(
+		long groupId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.journal.model.JournalFeed> filterFindByGroupId(
+		long groupId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public com.liferay.portlet.journal.model.JournalFeed findByG_F(
 		long groupId, java.lang.String feedId)
 		throws com.liferay.portal.kernel.exception.SystemException,
@@ -179,10 +192,19 @@ public interface JournalFeedPersistence extends BasePersistence<JournalFeed> {
 	public int countByUUID_G(java.lang.String uuid, long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	public int filterCountByUUID_G(java.lang.String uuid, long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public int countByGroupId(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	public int filterCountByGroupId(long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public int countByG_F(long groupId, java.lang.String feedId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public int filterCountByG_F(long groupId, java.lang.String feedId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countAll()

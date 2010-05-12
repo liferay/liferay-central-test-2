@@ -845,6 +845,11 @@ public class WikiPageUtil {
 		return getPersistence().countByUUID_G(uuid, groupId);
 	}
 
+	public static int filterCountByUUID_G(java.lang.String uuid, long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterCountByUUID_G(uuid, groupId);
+	}
+
 	public static int countByNodeId(long nodeId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByNodeId(nodeId);

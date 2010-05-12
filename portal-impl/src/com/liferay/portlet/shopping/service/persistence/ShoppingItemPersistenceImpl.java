@@ -39,6 +39,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelListener;
+import com.liferay.portal.security.permission.InlineSQLHelperUtil;
 import com.liferay.portal.service.persistence.BatchSessionUtil;
 import com.liferay.portal.service.persistence.ImagePersistence;
 import com.liferay.portal.service.persistence.ResourcePersistence;
@@ -1115,6 +1116,75 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 		}
 	}
 
+	public List<ShoppingItem> filterFindByG_C(long groupId, long categoryId)
+		throws SystemException {
+		return filterFindByG_C(groupId, categoryId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	public List<ShoppingItem> filterFindByG_C(long groupId, long categoryId,
+		int start, int end) throws SystemException {
+		return filterFindByG_C(groupId, categoryId, start, end, null);
+	}
+
+	public List<ShoppingItem> filterFindByG_C(long groupId, long categoryId,
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(4 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(4);
+			}
+
+			query.append(_FILTER_SELECT_SHOPPINGITEM_WHERE);
+
+			query.append(_FINDER_COLUMN_G_C_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_G_C_CATEGORYID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			else {
+				query.append(ShoppingItemModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+					ShoppingItem.class.getName(), _FILTER_COLUMN_ITEMID,
+					_FILTER_COLUMN_USERID, groupId);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity(_ENTITY_ALIAS, ShoppingItemImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			qPos.add(categoryId);
+
+			return (List<ShoppingItem>)QueryUtil.list(q, getDialect(), start,
+				end);
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public ShoppingItem findByC_S(long companyId, String sku)
 		throws NoSuchItemException, SystemException {
 		ShoppingItem shoppingItem = fetchByC_S(companyId, sku);
@@ -1552,6 +1622,47 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 		return count.intValue();
 	}
 
+	public int filterCountByG_C(long groupId, long categoryId)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBundler query = new StringBundler(3);
+
+			query.append(_FILTER_COUNT_SHOPPINGITEM_WHERE);
+
+			query.append(_FINDER_COLUMN_G_C_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_G_C_CATEGORYID_2);
+
+			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+					ShoppingItem.class.getName(), _FILTER_COLUMN_ITEMID,
+					_FILTER_COLUMN_USERID, groupId);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			qPos.add(categoryId);
+
+			Long count = (Long)q.uniqueResult();
+
+			return count.intValue();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public int countByC_S(long companyId, String sku) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(companyId), sku };
 
@@ -1913,6 +2024,11 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 	private static final String _FINDER_COLUMN_C_S_SKU_1 = "shoppingItem.sku IS NULL";
 	private static final String _FINDER_COLUMN_C_S_SKU_2 = "shoppingItem.sku = ?";
 	private static final String _FINDER_COLUMN_C_S_SKU_3 = "(shoppingItem.sku IS NULL OR shoppingItem.sku = ?)";
+	private static final String _FILTER_SELECT_SHOPPINGITEM_WHERE = "SELECT {shoppingItem.*} FROM ShoppingItem shoppingItem WHERE ";
+	private static final String _FILTER_COUNT_SHOPPINGITEM_WHERE = "SELECT COUNT(DISTINCT shoppingItem.itemId) AS COUNT_VALUE FROM ShoppingItem shoppingItem WHERE ";
+	private static final String _FILTER_COLUMN_ITEMID = "shoppingItem.itemId";
+	private static final String _FILTER_COLUMN_USERID = "shoppingItem.userId";
+	private static final String _ENTITY_ALIAS = "shoppingItem";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "shoppingItem.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No ShoppingItem exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No ShoppingItem exists with the key {";

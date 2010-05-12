@@ -135,6 +135,19 @@ public interface BookmarksFolderPersistence extends BasePersistence<BookmarksFol
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.bookmarks.NoSuchFolderException;
 
+	public java.util.List<com.liferay.portlet.bookmarks.model.BookmarksFolder> filterFindByGroupId(
+		long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.bookmarks.model.BookmarksFolder> filterFindByGroupId(
+		long groupId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.bookmarks.model.BookmarksFolder> filterFindByGroupId(
+		long groupId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public java.util.List<com.liferay.portlet.bookmarks.model.BookmarksFolder> findByCompanyId(
 		long companyId)
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -197,6 +210,19 @@ public interface BookmarksFolderPersistence extends BasePersistence<BookmarksFol
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.bookmarks.NoSuchFolderException;
 
+	public java.util.List<com.liferay.portlet.bookmarks.model.BookmarksFolder> filterFindByG_P(
+		long groupId, long parentFolderId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.bookmarks.model.BookmarksFolder> filterFindByG_P(
+		long groupId, long parentFolderId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.bookmarks.model.BookmarksFolder> filterFindByG_P(
+		long groupId, long parentFolderId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public java.util.List<com.liferay.portlet.bookmarks.model.BookmarksFolder> findAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
 
@@ -234,13 +260,22 @@ public interface BookmarksFolderPersistence extends BasePersistence<BookmarksFol
 	public int countByUUID_G(java.lang.String uuid, long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	public int filterCountByUUID_G(java.lang.String uuid, long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public int countByGroupId(long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public int filterCountByGroupId(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countByCompanyId(long companyId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countByG_P(long groupId, long parentFolderId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public int filterCountByG_P(long groupId, long parentFolderId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countAll()

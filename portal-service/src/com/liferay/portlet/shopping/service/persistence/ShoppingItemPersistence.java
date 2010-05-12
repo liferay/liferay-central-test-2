@@ -127,6 +127,19 @@ public interface ShoppingItemPersistence extends BasePersistence<ShoppingItem> {
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.shopping.NoSuchItemException;
 
+	public java.util.List<com.liferay.portlet.shopping.model.ShoppingItem> filterFindByG_C(
+		long groupId, long categoryId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.shopping.model.ShoppingItem> filterFindByG_C(
+		long groupId, long categoryId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.shopping.model.ShoppingItem> filterFindByG_C(
+		long groupId, long categoryId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public com.liferay.portlet.shopping.model.ShoppingItem findByC_S(
 		long companyId, java.lang.String sku)
 		throws com.liferay.portal.kernel.exception.SystemException,
@@ -184,6 +197,9 @@ public interface ShoppingItemPersistence extends BasePersistence<ShoppingItem> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countByG_C(long groupId, long categoryId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public int filterCountByG_C(long groupId, long categoryId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countByC_S(long companyId, java.lang.String sku)

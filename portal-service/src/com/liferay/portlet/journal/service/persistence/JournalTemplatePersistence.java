@@ -132,6 +132,19 @@ public interface JournalTemplatePersistence extends BasePersistence<JournalTempl
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.journal.NoSuchTemplateException;
 
+	public java.util.List<com.liferay.portlet.journal.model.JournalTemplate> filterFindByGroupId(
+		long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.journal.model.JournalTemplate> filterFindByGroupId(
+		long groupId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.journal.model.JournalTemplate> filterFindByGroupId(
+		long groupId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public java.util.List<com.liferay.portlet.journal.model.JournalTemplate> findByTemplateId(
 		java.lang.String templateId)
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -220,6 +233,19 @@ public interface JournalTemplatePersistence extends BasePersistence<JournalTempl
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.journal.NoSuchTemplateException;
 
+	public java.util.List<com.liferay.portlet.journal.model.JournalTemplate> filterFindByG_S(
+		long groupId, java.lang.String structureId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.journal.model.JournalTemplate> filterFindByG_S(
+		long groupId, java.lang.String structureId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.journal.model.JournalTemplate> filterFindByG_S(
+		long groupId, java.lang.String structureId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public java.util.List<com.liferay.portlet.journal.model.JournalTemplate> findAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
 
@@ -265,7 +291,13 @@ public interface JournalTemplatePersistence extends BasePersistence<JournalTempl
 	public int countByUUID_G(java.lang.String uuid, long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	public int filterCountByUUID_G(java.lang.String uuid, long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public int countByGroupId(long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public int filterCountByGroupId(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countByTemplateId(java.lang.String templateId)
@@ -277,7 +309,13 @@ public interface JournalTemplatePersistence extends BasePersistence<JournalTempl
 	public int countByG_T(long groupId, java.lang.String templateId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	public int filterCountByG_T(long groupId, java.lang.String templateId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public int countByG_S(long groupId, java.lang.String structureId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public int filterCountByG_S(long groupId, java.lang.String structureId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countAll()

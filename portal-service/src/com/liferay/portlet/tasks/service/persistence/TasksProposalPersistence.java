@@ -89,6 +89,19 @@ public interface TasksProposalPersistence extends BasePersistence<TasksProposal>
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.tasks.NoSuchProposalException;
 
+	public java.util.List<com.liferay.portlet.tasks.model.TasksProposal> filterFindByGroupId(
+		long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.tasks.model.TasksProposal> filterFindByGroupId(
+		long groupId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.tasks.model.TasksProposal> filterFindByGroupId(
+		long groupId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public java.util.List<com.liferay.portlet.tasks.model.TasksProposal> findByG_U(
 		long groupId, long userId)
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -119,6 +132,19 @@ public interface TasksProposalPersistence extends BasePersistence<TasksProposal>
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.tasks.NoSuchProposalException;
+
+	public java.util.List<com.liferay.portlet.tasks.model.TasksProposal> filterFindByG_U(
+		long groupId, long userId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.tasks.model.TasksProposal> filterFindByG_U(
+		long groupId, long userId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.tasks.model.TasksProposal> filterFindByG_U(
+		long groupId, long userId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portlet.tasks.model.TasksProposal findByC_C(
 		long classNameId, java.lang.String classPK)
@@ -161,7 +187,13 @@ public interface TasksProposalPersistence extends BasePersistence<TasksProposal>
 	public int countByGroupId(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	public int filterCountByGroupId(long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public int countByG_U(long groupId, long userId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public int filterCountByG_U(long groupId, long userId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countByC_C(long classNameId, java.lang.String classPK)

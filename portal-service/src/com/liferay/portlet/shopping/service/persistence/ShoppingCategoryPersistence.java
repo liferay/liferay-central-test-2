@@ -91,6 +91,19 @@ public interface ShoppingCategoryPersistence extends BasePersistence<ShoppingCat
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.shopping.NoSuchCategoryException;
 
+	public java.util.List<com.liferay.portlet.shopping.model.ShoppingCategory> filterFindByGroupId(
+		long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.shopping.model.ShoppingCategory> filterFindByGroupId(
+		long groupId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.shopping.model.ShoppingCategory> filterFindByGroupId(
+		long groupId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public java.util.List<com.liferay.portlet.shopping.model.ShoppingCategory> findByG_P(
 		long groupId, long parentCategoryId)
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -122,6 +135,19 @@ public interface ShoppingCategoryPersistence extends BasePersistence<ShoppingCat
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.shopping.NoSuchCategoryException;
 
+	public java.util.List<com.liferay.portlet.shopping.model.ShoppingCategory> filterFindByG_P(
+		long groupId, long parentCategoryId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.shopping.model.ShoppingCategory> filterFindByG_P(
+		long groupId, long parentCategoryId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.shopping.model.ShoppingCategory> filterFindByG_P(
+		long groupId, long parentCategoryId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public java.util.List<com.liferay.portlet.shopping.model.ShoppingCategory> findAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
 
@@ -146,7 +172,13 @@ public interface ShoppingCategoryPersistence extends BasePersistence<ShoppingCat
 	public int countByGroupId(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	public int filterCountByGroupId(long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public int countByG_P(long groupId, long parentCategoryId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public int filterCountByG_P(long groupId, long parentCategoryId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countAll()

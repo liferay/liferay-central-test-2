@@ -46,6 +46,7 @@ import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.model.Team;
 import com.liferay.portal.model.impl.TeamImpl;
 import com.liferay.portal.model.impl.TeamModelImpl;
+import com.liferay.portal.security.permission.InlineSQLHelperUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 import java.io.Serializable;
@@ -635,6 +636,69 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 		}
 	}
 
+	public List<Team> filterFindByGroupId(long groupId)
+		throws SystemException {
+		return filterFindByGroupId(groupId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	public List<Team> filterFindByGroupId(long groupId, int start, int end)
+		throws SystemException {
+		return filterFindByGroupId(groupId, start, end, null);
+	}
+
+	public List<Team> filterFindByGroupId(long groupId, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(3 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(3);
+			}
+
+			query.append(_FILTER_SELECT_TEAM_WHERE);
+
+			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			else {
+				query.append(TeamModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+					Team.class.getName(), _FILTER_COLUMN_TEAMID,
+					_FILTER_COLUMN_USERID, groupId);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity(_ENTITY_ALIAS, TeamImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			return (List<Team>)QueryUtil.list(q, getDialect(), start, end);
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public Team findByG_N(long groupId, String name)
 		throws NoSuchTeamException, SystemException {
 		Team team = fetchByG_N(groupId, name);
@@ -902,6 +966,42 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 		return count.intValue();
 	}
 
+	public int filterCountByGroupId(long groupId) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBundler query = new StringBundler(2);
+
+			query.append(_FILTER_COUNT_TEAM_WHERE);
+
+			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+
+			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+					Team.class.getName(), _FILTER_COLUMN_TEAMID,
+					_FILTER_COLUMN_USERID, groupId);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			Long count = (Long)q.uniqueResult();
+
+			return count.intValue();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public int countByG_N(long groupId, String name) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(groupId), name };
 
@@ -962,6 +1062,59 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 		}
 
 		return count.intValue();
+	}
+
+	public int filterCountByG_N(long groupId, String name)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBundler query = new StringBundler(3);
+
+			query.append(_FILTER_COUNT_TEAM_WHERE);
+
+			query.append(_FINDER_COLUMN_G_N_GROUPID_2);
+
+			if (name == null) {
+				query.append(_FINDER_COLUMN_G_N_NAME_1);
+			}
+			else {
+				if (name.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_G_N_NAME_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_G_N_NAME_2);
+				}
+			}
+
+			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+					Team.class.getName(), _FILTER_COLUMN_TEAMID,
+					_FILTER_COLUMN_USERID, groupId);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			if (name != null) {
+				qPos.add(name);
+			}
+
+			Long count = (Long)q.uniqueResult();
+
+			return count.intValue();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
 	}
 
 	public int countAll() throws SystemException {
@@ -1640,6 +1793,11 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	private static final String _FINDER_COLUMN_G_N_NAME_1 = "team.name IS NULL";
 	private static final String _FINDER_COLUMN_G_N_NAME_2 = "team.name = ?";
 	private static final String _FINDER_COLUMN_G_N_NAME_3 = "(team.name IS NULL OR team.name = ?)";
+	private static final String _FILTER_SELECT_TEAM_WHERE = "SELECT {team.*} FROM Team team WHERE ";
+	private static final String _FILTER_COUNT_TEAM_WHERE = "SELECT COUNT(DISTINCT team.teamId) AS COUNT_VALUE FROM Team team WHERE ";
+	private static final String _FILTER_COLUMN_TEAMID = "team.teamId";
+	private static final String _FILTER_COLUMN_USERID = "team.userId";
+	private static final String _ENTITY_ALIAS = "team";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "team.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No Team exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No Team exists with the key {";

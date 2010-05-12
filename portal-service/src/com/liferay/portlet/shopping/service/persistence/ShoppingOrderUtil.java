@@ -179,6 +179,26 @@ public class ShoppingOrderUtil {
 			orderByComparator);
 	}
 
+	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingOrder> filterFindByGroupId(
+		long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterFindByGroupId(groupId);
+	}
+
+	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingOrder> filterFindByGroupId(
+		long groupId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterFindByGroupId(groupId, start, end);
+	}
+
+	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingOrder> filterFindByGroupId(
+		long groupId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .filterFindByGroupId(groupId, start, end, orderByComparator);
+	}
+
 	public static com.liferay.portlet.shopping.model.ShoppingOrder findByNumber(
 		java.lang.String number)
 		throws com.liferay.portal.kernel.exception.SystemException,
@@ -271,6 +291,31 @@ public class ShoppingOrderUtil {
 			ppPaymentStatus, orderByComparator);
 	}
 
+	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingOrder> filterFindByG_U_PPPS(
+		long groupId, long userId, java.lang.String ppPaymentStatus)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .filterFindByG_U_PPPS(groupId, userId, ppPaymentStatus);
+	}
+
+	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingOrder> filterFindByG_U_PPPS(
+		long groupId, long userId, java.lang.String ppPaymentStatus, int start,
+		int end) throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .filterFindByG_U_PPPS(groupId, userId, ppPaymentStatus,
+			start, end);
+	}
+
+	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingOrder> filterFindByG_U_PPPS(
+		long groupId, long userId, java.lang.String ppPaymentStatus, int start,
+		int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .filterFindByG_U_PPPS(groupId, userId, ppPaymentStatus,
+			start, end, orderByComparator);
+	}
+
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingOrder> findAll()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll();
@@ -322,6 +367,11 @@ public class ShoppingOrderUtil {
 		return getPersistence().countByGroupId(groupId);
 	}
 
+	public static int filterCountByGroupId(long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterCountByGroupId(groupId);
+	}
+
 	public static int countByNumber(java.lang.String number)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByNumber(number);
@@ -336,6 +386,13 @@ public class ShoppingOrderUtil {
 		java.lang.String ppPaymentStatus)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByG_U_PPPS(groupId, userId, ppPaymentStatus);
+	}
+
+	public static int filterCountByG_U_PPPS(long groupId, long userId,
+		java.lang.String ppPaymentStatus)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .filterCountByG_U_PPPS(groupId, userId, ppPaymentStatus);
 	}
 
 	public static int countAll()

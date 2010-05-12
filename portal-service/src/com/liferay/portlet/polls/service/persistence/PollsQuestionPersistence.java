@@ -133,6 +133,19 @@ public interface PollsQuestionPersistence extends BasePersistence<PollsQuestion>
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.polls.NoSuchQuestionException;
 
+	public java.util.List<com.liferay.portlet.polls.model.PollsQuestion> filterFindByGroupId(
+		long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.polls.model.PollsQuestion> filterFindByGroupId(
+		long groupId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.polls.model.PollsQuestion> filterFindByGroupId(
+		long groupId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public java.util.List<com.liferay.portlet.polls.model.PollsQuestion> findAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
 
@@ -164,7 +177,13 @@ public interface PollsQuestionPersistence extends BasePersistence<PollsQuestion>
 	public int countByUUID_G(java.lang.String uuid, long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	public int filterCountByUUID_G(java.lang.String uuid, long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public int countByGroupId(long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public int filterCountByGroupId(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countAll()

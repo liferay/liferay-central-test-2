@@ -129,6 +129,19 @@ public interface WikiNodePersistence extends BasePersistence<WikiNode> {
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.wiki.NoSuchNodeException;
 
+	public java.util.List<com.liferay.portlet.wiki.model.WikiNode> filterFindByGroupId(
+		long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.wiki.model.WikiNode> filterFindByGroupId(
+		long groupId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.wiki.model.WikiNode> filterFindByGroupId(
+		long groupId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public java.util.List<com.liferay.portlet.wiki.model.WikiNode> findByCompanyId(
 		long companyId)
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -211,13 +224,22 @@ public interface WikiNodePersistence extends BasePersistence<WikiNode> {
 	public int countByUUID_G(java.lang.String uuid, long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	public int filterCountByUUID_G(java.lang.String uuid, long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public int countByGroupId(long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public int filterCountByGroupId(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countByCompanyId(long companyId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countByG_N(long groupId, java.lang.String name)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public int filterCountByG_N(long groupId, java.lang.String name)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countAll()

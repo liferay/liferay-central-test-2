@@ -135,6 +135,19 @@ public interface AssetVocabularyPersistence extends BasePersistence<AssetVocabul
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.asset.NoSuchVocabularyException;
 
+	public java.util.List<com.liferay.portlet.asset.model.AssetVocabulary> filterFindByGroupId(
+		long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.asset.model.AssetVocabulary> filterFindByGroupId(
+		long groupId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.asset.model.AssetVocabulary> filterFindByGroupId(
+		long groupId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public java.util.List<com.liferay.portlet.asset.model.AssetVocabulary> findByCompanyId(
 		long companyId)
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -217,13 +230,22 @@ public interface AssetVocabularyPersistence extends BasePersistence<AssetVocabul
 	public int countByUUID_G(java.lang.String uuid, long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	public int filterCountByUUID_G(java.lang.String uuid, long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public int countByGroupId(long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public int filterCountByGroupId(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countByCompanyId(long companyId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countByG_N(long groupId, java.lang.String name)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public int filterCountByG_N(long groupId, java.lang.String name)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countAll()

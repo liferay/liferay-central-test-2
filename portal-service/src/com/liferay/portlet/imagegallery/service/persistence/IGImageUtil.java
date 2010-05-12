@@ -240,6 +240,26 @@ public class IGImageUtil {
 			orderByComparator);
 	}
 
+	public static java.util.List<com.liferay.portlet.imagegallery.model.IGImage> filterFindByGroupId(
+		long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterFindByGroupId(groupId);
+	}
+
+	public static java.util.List<com.liferay.portlet.imagegallery.model.IGImage> filterFindByGroupId(
+		long groupId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterFindByGroupId(groupId, start, end);
+	}
+
+	public static java.util.List<com.liferay.portlet.imagegallery.model.IGImage> filterFindByGroupId(
+		long groupId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .filterFindByGroupId(groupId, start, end, orderByComparator);
+	}
+
 	public static com.liferay.portlet.imagegallery.model.IGImage findBySmallImageId(
 		long smallImageId)
 		throws com.liferay.portal.kernel.exception.SystemException,
@@ -368,6 +388,27 @@ public class IGImageUtil {
 			orderByComparator);
 	}
 
+	public static java.util.List<com.liferay.portlet.imagegallery.model.IGImage> filterFindByG_U(
+		long groupId, long userId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterFindByG_U(groupId, userId);
+	}
+
+	public static java.util.List<com.liferay.portlet.imagegallery.model.IGImage> filterFindByG_U(
+		long groupId, long userId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterFindByG_U(groupId, userId, start, end);
+	}
+
+	public static java.util.List<com.liferay.portlet.imagegallery.model.IGImage> filterFindByG_U(
+		long groupId, long userId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .filterFindByG_U(groupId, userId, start, end,
+			orderByComparator);
+	}
+
 	public static java.util.List<com.liferay.portlet.imagegallery.model.IGImage> findByG_F(
 		long groupId, long folderId)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -413,6 +454,27 @@ public class IGImageUtil {
 			com.liferay.portlet.imagegallery.NoSuchImageException {
 		return getPersistence()
 				   .findByG_F_PrevAndNext(imageId, groupId, folderId,
+			orderByComparator);
+	}
+
+	public static java.util.List<com.liferay.portlet.imagegallery.model.IGImage> filterFindByG_F(
+		long groupId, long folderId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterFindByG_F(groupId, folderId);
+	}
+
+	public static java.util.List<com.liferay.portlet.imagegallery.model.IGImage> filterFindByG_F(
+		long groupId, long folderId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterFindByG_F(groupId, folderId, start, end);
+	}
+
+	public static java.util.List<com.liferay.portlet.imagegallery.model.IGImage> filterFindByG_F(
+		long groupId, long folderId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .filterFindByG_F(groupId, folderId, start, end,
 			orderByComparator);
 	}
 
@@ -462,6 +524,28 @@ public class IGImageUtil {
 			com.liferay.portlet.imagegallery.NoSuchImageException {
 		return getPersistence()
 				   .findByG_F_N_PrevAndNext(imageId, groupId, folderId, name,
+			orderByComparator);
+	}
+
+	public static java.util.List<com.liferay.portlet.imagegallery.model.IGImage> filterFindByG_F_N(
+		long groupId, long folderId, java.lang.String name)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterFindByG_F_N(groupId, folderId, name);
+	}
+
+	public static java.util.List<com.liferay.portlet.imagegallery.model.IGImage> filterFindByG_F_N(
+		long groupId, long folderId, java.lang.String name, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .filterFindByG_F_N(groupId, folderId, name, start, end);
+	}
+
+	public static java.util.List<com.liferay.portlet.imagegallery.model.IGImage> filterFindByG_F_N(
+		long groupId, long folderId, java.lang.String name, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .filterFindByG_F_N(groupId, folderId, name, start, end,
 			orderByComparator);
 	}
 
@@ -554,9 +638,19 @@ public class IGImageUtil {
 		return getPersistence().countByUUID_G(uuid, groupId);
 	}
 
+	public static int filterCountByUUID_G(java.lang.String uuid, long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterCountByUUID_G(uuid, groupId);
+	}
+
 	public static int countByGroupId(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByGroupId(groupId);
+	}
+
+	public static int filterCountByGroupId(long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterCountByGroupId(groupId);
 	}
 
 	public static int countBySmallImageId(long smallImageId)
@@ -584,15 +678,31 @@ public class IGImageUtil {
 		return getPersistence().countByG_U(groupId, userId);
 	}
 
+	public static int filterCountByG_U(long groupId, long userId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterCountByG_U(groupId, userId);
+	}
+
 	public static int countByG_F(long groupId, long folderId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByG_F(groupId, folderId);
+	}
+
+	public static int filterCountByG_F(long groupId, long folderId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterCountByG_F(groupId, folderId);
 	}
 
 	public static int countByG_F_N(long groupId, long folderId,
 		java.lang.String name)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByG_F_N(groupId, folderId, name);
+	}
+
+	public static int filterCountByG_F_N(long groupId, long folderId,
+		java.lang.String name)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterCountByG_F_N(groupId, folderId, name);
 	}
 
 	public static int countAll()

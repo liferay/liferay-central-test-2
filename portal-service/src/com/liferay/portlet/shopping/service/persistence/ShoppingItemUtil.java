@@ -240,6 +240,27 @@ public class ShoppingItemUtil {
 			orderByComparator);
 	}
 
+	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingItem> filterFindByG_C(
+		long groupId, long categoryId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterFindByG_C(groupId, categoryId);
+	}
+
+	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingItem> filterFindByG_C(
+		long groupId, long categoryId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterFindByG_C(groupId, categoryId, start, end);
+	}
+
+	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingItem> filterFindByG_C(
+		long groupId, long categoryId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .filterFindByG_C(groupId, categoryId, start, end,
+			orderByComparator);
+	}
+
 	public static com.liferay.portlet.shopping.model.ShoppingItem findByC_S(
 		long companyId, java.lang.String sku)
 		throws com.liferay.portal.kernel.exception.SystemException,
@@ -329,6 +350,11 @@ public class ShoppingItemUtil {
 	public static int countByG_C(long groupId, long categoryId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByG_C(groupId, categoryId);
+	}
+
+	public static int filterCountByG_C(long groupId, long categoryId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterCountByG_C(groupId, categoryId);
 	}
 
 	public static int countByC_S(long companyId, java.lang.String sku)

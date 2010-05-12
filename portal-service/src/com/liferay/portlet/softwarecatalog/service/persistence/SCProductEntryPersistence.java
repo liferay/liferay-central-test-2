@@ -91,6 +91,19 @@ public interface SCProductEntryPersistence extends BasePersistence<SCProductEntr
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException;
 
+	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> filterFindByGroupId(
+		long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> filterFindByGroupId(
+		long groupId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> filterFindByGroupId(
+		long groupId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> findByCompanyId(
 		long companyId)
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -153,6 +166,19 @@ public interface SCProductEntryPersistence extends BasePersistence<SCProductEntr
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException;
 
+	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> filterFindByG_U(
+		long groupId, long userId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> filterFindByG_U(
+		long groupId, long userId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> filterFindByG_U(
+		long groupId, long userId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public com.liferay.portlet.softwarecatalog.model.SCProductEntry findByRG_RA(
 		java.lang.String repoGroupId, java.lang.String repoArtifactId)
 		throws com.liferay.portal.kernel.exception.SystemException,
@@ -199,10 +225,16 @@ public interface SCProductEntryPersistence extends BasePersistence<SCProductEntr
 	public int countByGroupId(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	public int filterCountByGroupId(long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public int countByCompanyId(long companyId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countByG_U(long groupId, long userId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public int filterCountByG_U(long groupId, long userId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countByRG_RA(java.lang.String repoGroupId,

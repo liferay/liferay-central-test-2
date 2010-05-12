@@ -135,6 +135,19 @@ public interface DLFileEntryPersistence extends BasePersistence<DLFileEntry> {
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> filterFindByGroupId(
+		long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> filterFindByGroupId(
+		long groupId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> filterFindByGroupId(
+		long groupId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> findByCompanyId(
 		long companyId)
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -197,6 +210,19 @@ public interface DLFileEntryPersistence extends BasePersistence<DLFileEntry> {
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> filterFindByG_U(
+		long groupId, long userId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> filterFindByG_U(
+		long groupId, long userId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> filterFindByG_U(
+		long groupId, long userId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> findByG_F(
 		long groupId, long folderId)
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -227,6 +253,19 @@ public interface DLFileEntryPersistence extends BasePersistence<DLFileEntry> {
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
+
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> filterFindByG_F(
+		long groupId, long folderId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> filterFindByG_F(
+		long groupId, long folderId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> filterFindByG_F(
+		long groupId, long folderId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry findByG_F_N(
 		long groupId, long folderId, java.lang.String name)
@@ -305,7 +344,13 @@ public interface DLFileEntryPersistence extends BasePersistence<DLFileEntry> {
 	public int countByUUID_G(java.lang.String uuid, long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	public int filterCountByUUID_G(java.lang.String uuid, long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public int countByGroupId(long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public int filterCountByGroupId(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countByCompanyId(long companyId)
@@ -314,13 +359,27 @@ public interface DLFileEntryPersistence extends BasePersistence<DLFileEntry> {
 	public int countByG_U(long groupId, long userId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	public int filterCountByG_U(long groupId, long userId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public int countByG_F(long groupId, long folderId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public int filterCountByG_F(long groupId, long folderId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countByG_F_N(long groupId, long folderId, java.lang.String name)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	public int filterCountByG_F_N(long groupId, long folderId,
+		java.lang.String name)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public int countByG_F_T(long groupId, long folderId, java.lang.String title)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public int filterCountByG_F_T(long groupId, long folderId,
+		java.lang.String title)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countAll()

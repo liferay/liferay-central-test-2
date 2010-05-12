@@ -80,6 +80,19 @@ public interface TeamPersistence extends BasePersistence<Team> {
 		throws com.liferay.portal.NoSuchTeamException,
 			com.liferay.portal.kernel.exception.SystemException;
 
+	public java.util.List<com.liferay.portal.model.Team> filterFindByGroupId(
+		long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portal.model.Team> filterFindByGroupId(
+		long groupId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portal.model.Team> filterFindByGroupId(
+		long groupId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public com.liferay.portal.model.Team findByG_N(long groupId,
 		java.lang.String name)
 		throws com.liferay.portal.NoSuchTeamException,
@@ -117,7 +130,13 @@ public interface TeamPersistence extends BasePersistence<Team> {
 	public int countByGroupId(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	public int filterCountByGroupId(long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public int countByG_N(long groupId, java.lang.String name)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public int filterCountByG_N(long groupId, java.lang.String name)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countAll()

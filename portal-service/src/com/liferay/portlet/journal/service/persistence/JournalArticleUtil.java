@@ -240,6 +240,26 @@ public class JournalArticleUtil {
 				   .findByGroupId_PrevAndNext(id, groupId, orderByComparator);
 	}
 
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> filterFindByGroupId(
+		long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterFindByGroupId(groupId);
+	}
+
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> filterFindByGroupId(
+		long groupId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterFindByGroupId(groupId, start, end);
+	}
+
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> filterFindByGroupId(
+		long groupId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .filterFindByGroupId(groupId, start, end, orderByComparator);
+	}
+
 	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByCompanyId(
 		long companyId)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -433,6 +453,27 @@ public class JournalArticleUtil {
 			orderByComparator);
 	}
 
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> filterFindByG_A(
+		long groupId, java.lang.String articleId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterFindByG_A(groupId, articleId);
+	}
+
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> filterFindByG_A(
+		long groupId, java.lang.String articleId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterFindByG_A(groupId, articleId, start, end);
+	}
+
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> filterFindByG_A(
+		long groupId, java.lang.String articleId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .filterFindByG_A(groupId, articleId, start, end,
+			orderByComparator);
+	}
+
 	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByG_S(
 		long groupId, java.lang.String structureId)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -479,6 +520,27 @@ public class JournalArticleUtil {
 			com.liferay.portlet.journal.NoSuchArticleException {
 		return getPersistence()
 				   .findByG_S_PrevAndNext(id, groupId, structureId,
+			orderByComparator);
+	}
+
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> filterFindByG_S(
+		long groupId, java.lang.String structureId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterFindByG_S(groupId, structureId);
+	}
+
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> filterFindByG_S(
+		long groupId, java.lang.String structureId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterFindByG_S(groupId, structureId, start, end);
+	}
+
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> filterFindByG_S(
+		long groupId, java.lang.String structureId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .filterFindByG_S(groupId, structureId, start, end,
 			orderByComparator);
 	}
 
@@ -530,6 +592,27 @@ public class JournalArticleUtil {
 			orderByComparator);
 	}
 
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> filterFindByG_T(
+		long groupId, java.lang.String templateId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterFindByG_T(groupId, templateId);
+	}
+
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> filterFindByG_T(
+		long groupId, java.lang.String templateId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterFindByG_T(groupId, templateId, start, end);
+	}
+
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> filterFindByG_T(
+		long groupId, java.lang.String templateId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .filterFindByG_T(groupId, templateId, start, end,
+			orderByComparator);
+	}
+
 	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByG_UT(
 		long groupId, java.lang.String urlTitle)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -575,6 +658,27 @@ public class JournalArticleUtil {
 			com.liferay.portlet.journal.NoSuchArticleException {
 		return getPersistence()
 				   .findByG_UT_PrevAndNext(id, groupId, urlTitle,
+			orderByComparator);
+	}
+
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> filterFindByG_UT(
+		long groupId, java.lang.String urlTitle)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterFindByG_UT(groupId, urlTitle);
+	}
+
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> filterFindByG_UT(
+		long groupId, java.lang.String urlTitle, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterFindByG_UT(groupId, urlTitle, start, end);
+	}
+
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> filterFindByG_UT(
+		long groupId, java.lang.String urlTitle, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .filterFindByG_UT(groupId, urlTitle, start, end,
 			orderByComparator);
 	}
 
@@ -700,6 +804,29 @@ public class JournalArticleUtil {
 			orderByComparator);
 	}
 
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> filterFindByG_A_S(
+		long groupId, java.lang.String articleId, int status)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterFindByG_A_S(groupId, articleId, status);
+	}
+
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> filterFindByG_A_S(
+		long groupId, java.lang.String articleId, int status, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .filterFindByG_A_S(groupId, articleId, status, start, end);
+	}
+
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> filterFindByG_A_S(
+		long groupId, java.lang.String articleId, int status, int start,
+		int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .filterFindByG_A_S(groupId, articleId, status, start, end,
+			orderByComparator);
+	}
+
 	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByG_UT_S(
 		long groupId, java.lang.String urlTitle, int status)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -750,6 +877,29 @@ public class JournalArticleUtil {
 			com.liferay.portlet.journal.NoSuchArticleException {
 		return getPersistence()
 				   .findByG_UT_S_PrevAndNext(id, groupId, urlTitle, status,
+			orderByComparator);
+	}
+
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> filterFindByG_UT_S(
+		long groupId, java.lang.String urlTitle, int status)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterFindByG_UT_S(groupId, urlTitle, status);
+	}
+
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> filterFindByG_UT_S(
+		long groupId, java.lang.String urlTitle, int status, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .filterFindByG_UT_S(groupId, urlTitle, status, start, end);
+	}
+
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> filterFindByG_UT_S(
+		long groupId, java.lang.String urlTitle, int status, int start,
+		int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .filterFindByG_UT_S(groupId, urlTitle, status, start, end,
 			orderByComparator);
 	}
 
@@ -859,9 +1009,19 @@ public class JournalArticleUtil {
 		return getPersistence().countByUUID_G(uuid, groupId);
 	}
 
+	public static int filterCountByUUID_G(java.lang.String uuid, long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterCountByUUID_G(uuid, groupId);
+	}
+
 	public static int countByGroupId(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByGroupId(groupId);
+	}
+
+	public static int filterCountByGroupId(long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterCountByGroupId(groupId);
 	}
 
 	public static int countByCompanyId(long companyId)
@@ -884,9 +1044,20 @@ public class JournalArticleUtil {
 		return getPersistence().countByG_A(groupId, articleId);
 	}
 
+	public static int filterCountByG_A(long groupId, java.lang.String articleId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterCountByG_A(groupId, articleId);
+	}
+
 	public static int countByG_S(long groupId, java.lang.String structureId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByG_S(groupId, structureId);
+	}
+
+	public static int filterCountByG_S(long groupId,
+		java.lang.String structureId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterCountByG_S(groupId, structureId);
 	}
 
 	public static int countByG_T(long groupId, java.lang.String templateId)
@@ -894,9 +1065,19 @@ public class JournalArticleUtil {
 		return getPersistence().countByG_T(groupId, templateId);
 	}
 
+	public static int filterCountByG_T(long groupId, java.lang.String templateId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterCountByG_T(groupId, templateId);
+	}
+
 	public static int countByG_UT(long groupId, java.lang.String urlTitle)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByG_UT(groupId, urlTitle);
+	}
+
+	public static int filterCountByG_UT(long groupId, java.lang.String urlTitle)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterCountByG_UT(groupId, urlTitle);
 	}
 
 	public static int countByC_S(long companyId, int status)
@@ -910,14 +1091,32 @@ public class JournalArticleUtil {
 		return getPersistence().countByG_A_V(groupId, articleId, version);
 	}
 
+	public static int filterCountByG_A_V(long groupId,
+		java.lang.String articleId, double version)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterCountByG_A_V(groupId, articleId, version);
+	}
+
 	public static int countByG_A_S(long groupId, java.lang.String articleId,
 		int status) throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByG_A_S(groupId, articleId, status);
 	}
 
+	public static int filterCountByG_A_S(long groupId,
+		java.lang.String articleId, int status)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterCountByG_A_S(groupId, articleId, status);
+	}
+
 	public static int countByG_UT_S(long groupId, java.lang.String urlTitle,
 		int status) throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByG_UT_S(groupId, urlTitle, status);
+	}
+
+	public static int filterCountByG_UT_S(long groupId,
+		java.lang.String urlTitle, int status)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterCountByG_UT_S(groupId, urlTitle, status);
 	}
 
 	public static int countAll()

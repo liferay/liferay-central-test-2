@@ -23,7 +23,9 @@ import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.Query;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
+import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
+import com.liferay.portal.kernel.dao.orm.Type;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -35,6 +37,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.model.ModelListener;
+import com.liferay.portal.security.permission.InlineSQLHelperUtil;
 import com.liferay.portal.service.persistence.BatchSessionUtil;
 import com.liferay.portal.service.persistence.GroupPersistence;
 import com.liferay.portal.service.persistence.ImagePersistence;
@@ -1156,6 +1159,69 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 		}
 	}
 
+	public List<IGFolder> filterFindByGroupId(long groupId)
+		throws SystemException {
+		return filterFindByGroupId(groupId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	public List<IGFolder> filterFindByGroupId(long groupId, int start, int end)
+		throws SystemException {
+		return filterFindByGroupId(groupId, start, end, null);
+	}
+
+	public List<IGFolder> filterFindByGroupId(long groupId, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(3 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(3);
+			}
+
+			query.append(_FILTER_SELECT_IGFOLDER_WHERE);
+
+			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			else {
+				query.append(IGFolderModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+					IGFolder.class.getName(), _FILTER_COLUMN_FOLDERID,
+					_FILTER_COLUMN_USERID, groupId);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity(_ENTITY_ALIAS, IGFolderImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			return (List<IGFolder>)QueryUtil.list(q, getDialect(), start, end);
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public List<IGFolder> findByCompanyId(long companyId)
 		throws SystemException {
 		return findByCompanyId(companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
@@ -1698,6 +1764,74 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 		}
 	}
 
+	public List<IGFolder> filterFindByG_P(long groupId, long parentFolderId)
+		throws SystemException {
+		return filterFindByG_P(groupId, parentFolderId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	public List<IGFolder> filterFindByG_P(long groupId, long parentFolderId,
+		int start, int end) throws SystemException {
+		return filterFindByG_P(groupId, parentFolderId, start, end, null);
+	}
+
+	public List<IGFolder> filterFindByG_P(long groupId, long parentFolderId,
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(4 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(4);
+			}
+
+			query.append(_FILTER_SELECT_IGFOLDER_WHERE);
+
+			query.append(_FINDER_COLUMN_G_P_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_G_P_PARENTFOLDERID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			else {
+				query.append(IGFolderModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+					IGFolder.class.getName(), _FILTER_COLUMN_FOLDERID,
+					_FILTER_COLUMN_USERID, groupId);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity(_ENTITY_ALIAS, IGFolderImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			qPos.add(parentFolderId);
+
+			return (List<IGFolder>)QueryUtil.list(q, getDialect(), start, end);
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public IGFolder findByG_P_N(long groupId, long parentFolderId, String name)
 		throws NoSuchFolderException, SystemException {
 		IGFolder igFolder = fetchByG_P_N(groupId, parentFolderId, name);
@@ -2079,6 +2213,59 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 		return count.intValue();
 	}
 
+	public int filterCountByUUID_G(String uuid, long groupId)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBundler query = new StringBundler(3);
+
+			query.append(_FILTER_COUNT_IGFOLDER_WHERE);
+
+			if (uuid == null) {
+				query.append(_FINDER_COLUMN_UUID_G_UUID_1);
+			}
+			else {
+				if (uuid.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_UUID_G_UUID_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_UUID_G_UUID_2);
+				}
+			}
+
+			query.append(_FINDER_COLUMN_UUID_G_GROUPID_2);
+
+			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+					IGFolder.class.getName(), _FILTER_COLUMN_FOLDERID,
+					_FILTER_COLUMN_USERID, groupId);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			if (uuid != null) {
+				qPos.add(uuid);
+			}
+
+			qPos.add(groupId);
+
+			Long count = (Long)q.uniqueResult();
+
+			return count.intValue();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public int countByGroupId(long groupId) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(groupId) };
 
@@ -2123,6 +2310,42 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 		}
 
 		return count.intValue();
+	}
+
+	public int filterCountByGroupId(long groupId) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBundler query = new StringBundler(2);
+
+			query.append(_FILTER_COUNT_IGFOLDER_WHERE);
+
+			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+
+			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+					IGFolder.class.getName(), _FILTER_COLUMN_FOLDERID,
+					_FILTER_COLUMN_USERID, groupId);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			Long count = (Long)q.uniqueResult();
+
+			return count.intValue();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
 	}
 
 	public int countByCompanyId(long companyId) throws SystemException {
@@ -2224,6 +2447,47 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 		return count.intValue();
 	}
 
+	public int filterCountByG_P(long groupId, long parentFolderId)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBundler query = new StringBundler(3);
+
+			query.append(_FILTER_COUNT_IGFOLDER_WHERE);
+
+			query.append(_FINDER_COLUMN_G_P_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_G_P_PARENTFOLDERID_2);
+
+			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+					IGFolder.class.getName(), _FILTER_COLUMN_FOLDERID,
+					_FILTER_COLUMN_USERID, groupId);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			qPos.add(parentFolderId);
+
+			Long count = (Long)q.uniqueResult();
+
+			return count.intValue();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public int countByG_P_N(long groupId, long parentFolderId, String name)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -2293,6 +2557,63 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 		}
 
 		return count.intValue();
+	}
+
+	public int filterCountByG_P_N(long groupId, long parentFolderId, String name)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBundler query = new StringBundler(4);
+
+			query.append(_FILTER_COUNT_IGFOLDER_WHERE);
+
+			query.append(_FINDER_COLUMN_G_P_N_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_G_P_N_PARENTFOLDERID_2);
+
+			if (name == null) {
+				query.append(_FINDER_COLUMN_G_P_N_NAME_1);
+			}
+			else {
+				if (name.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_G_P_N_NAME_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_G_P_N_NAME_2);
+				}
+			}
+
+			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+					IGFolder.class.getName(), _FILTER_COLUMN_FOLDERID,
+					_FILTER_COLUMN_USERID, groupId);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			qPos.add(parentFolderId);
+
+			if (name != null) {
+				qPos.add(name);
+			}
+
+			Long count = (Long)q.uniqueResult();
+
+			return count.intValue();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
 	}
 
 	public int countAll() throws SystemException {
@@ -2387,6 +2708,11 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	private static final String _FINDER_COLUMN_G_P_N_NAME_1 = "igFolder.name IS NULL";
 	private static final String _FINDER_COLUMN_G_P_N_NAME_2 = "igFolder.name = ?";
 	private static final String _FINDER_COLUMN_G_P_N_NAME_3 = "(igFolder.name IS NULL OR igFolder.name = ?)";
+	private static final String _FILTER_SELECT_IGFOLDER_WHERE = "SELECT {igFolder.*} FROM IGFolder igFolder WHERE ";
+	private static final String _FILTER_COUNT_IGFOLDER_WHERE = "SELECT COUNT(DISTINCT igFolder.folderId) AS COUNT_VALUE FROM IGFolder igFolder WHERE ";
+	private static final String _FILTER_COLUMN_FOLDERID = "igFolder.folderId";
+	private static final String _FILTER_COLUMN_USERID = "igFolder.userId";
+	private static final String _ENTITY_ALIAS = "igFolder";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "igFolder.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No IGFolder exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No IGFolder exists with the key {";

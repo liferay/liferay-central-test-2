@@ -23,7 +23,9 @@ import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.Query;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
+import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
+import com.liferay.portal.kernel.dao.orm.Type;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -1128,7 +1130,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 				query = new StringBundler(3);
 			}
 
-			query.append(_SQL_SELECT_MBCATEGORY_WHERE);
+			query.append(_FILTER_SELECT_MBCATEGORY_WHERE);
 
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
@@ -1145,7 +1147,9 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 					MBCategory.class.getName(), _FILTER_COLUMN_CATEGORYID,
 					_FILTER_COLUMN_USERID, groupId);
 
-			Query q = session.createQuery(sql);
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity(_ENTITY_ALIAS, MBCategoryImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1733,7 +1737,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 				query = new StringBundler(4);
 			}
 
-			query.append(_SQL_SELECT_MBCATEGORY_WHERE);
+			query.append(_FILTER_SELECT_MBCATEGORY_WHERE);
 
 			query.append(_FINDER_COLUMN_G_P_GROUPID_2);
 
@@ -1752,7 +1756,9 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 					MBCategory.class.getName(), _FILTER_COLUMN_CATEGORYID,
 					_FILTER_COLUMN_USERID, groupId);
 
-			Query q = session.createQuery(sql);
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity(_ENTITY_ALIAS, MBCategoryImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2014,7 +2020,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 
 			StringBundler query = new StringBundler(3);
 
-			query.append(_SQL_COUNT_MBCATEGORY_WHERE);
+			query.append(_FILTER_COUNT_MBCATEGORY_WHERE);
 
 			if (uuid == null) {
 				query.append(_FINDER_COLUMN_UUID_G_UUID_1);
@@ -2034,7 +2040,9 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 					MBCategory.class.getName(), _FILTER_COLUMN_CATEGORYID,
 					_FILTER_COLUMN_USERID, groupId);
 
-			Query q = session.createQuery(sql);
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2110,7 +2118,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 
 			StringBundler query = new StringBundler(2);
 
-			query.append(_SQL_COUNT_MBCATEGORY_WHERE);
+			query.append(_FILTER_COUNT_MBCATEGORY_WHERE);
 
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
@@ -2118,7 +2126,9 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 					MBCategory.class.getName(), _FILTER_COLUMN_CATEGORYID,
 					_FILTER_COLUMN_USERID, groupId);
 
-			Query q = session.createQuery(sql);
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2244,7 +2254,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 
 			StringBundler query = new StringBundler(3);
 
-			query.append(_SQL_COUNT_MBCATEGORY_WHERE);
+			query.append(_FILTER_COUNT_MBCATEGORY_WHERE);
 
 			query.append(_FINDER_COLUMN_G_P_GROUPID_2);
 
@@ -2254,7 +2264,9 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 					MBCategory.class.getName(), _FILTER_COLUMN_CATEGORYID,
 					_FILTER_COLUMN_USERID, groupId);
 
-			Query q = session.createQuery(sql);
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2373,8 +2385,11 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 	private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "mbCategory.companyId = ?";
 	private static final String _FINDER_COLUMN_G_P_GROUPID_2 = "mbCategory.groupId = ? AND ";
 	private static final String _FINDER_COLUMN_G_P_PARENTCATEGORYID_2 = "mbCategory.parentCategoryId = ?";
+	private static final String _FILTER_SELECT_MBCATEGORY_WHERE = "SELECT {mbCategory.*} FROM MBCategory mbCategory WHERE ";
+	private static final String _FILTER_COUNT_MBCATEGORY_WHERE = "SELECT COUNT(DISTINCT mbCategory.categoryId) AS COUNT_VALUE FROM MBCategory mbCategory WHERE ";
 	private static final String _FILTER_COLUMN_CATEGORYID = "mbCategory.categoryId";
 	private static final String _FILTER_COLUMN_USERID = "mbCategory.userId";
+	private static final String _ENTITY_ALIAS = "mbCategory";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "mbCategory.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No MBCategory exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No MBCategory exists with the key {";

@@ -179,6 +179,26 @@ public class ShoppingCategoryUtil {
 			orderByComparator);
 	}
 
+	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingCategory> filterFindByGroupId(
+		long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterFindByGroupId(groupId);
+	}
+
+	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingCategory> filterFindByGroupId(
+		long groupId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterFindByGroupId(groupId, start, end);
+	}
+
+	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingCategory> filterFindByGroupId(
+		long groupId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .filterFindByGroupId(groupId, start, end, orderByComparator);
+	}
+
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingCategory> findByG_P(
 		long groupId, long parentCategoryId)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -228,6 +248,28 @@ public class ShoppingCategoryUtil {
 			parentCategoryId, orderByComparator);
 	}
 
+	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingCategory> filterFindByG_P(
+		long groupId, long parentCategoryId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterFindByG_P(groupId, parentCategoryId);
+	}
+
+	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingCategory> filterFindByG_P(
+		long groupId, long parentCategoryId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .filterFindByG_P(groupId, parentCategoryId, start, end);
+	}
+
+	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingCategory> filterFindByG_P(
+		long groupId, long parentCategoryId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .filterFindByG_P(groupId, parentCategoryId, start, end,
+			orderByComparator);
+	}
+
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingCategory> findAll()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll();
@@ -266,9 +308,19 @@ public class ShoppingCategoryUtil {
 		return getPersistence().countByGroupId(groupId);
 	}
 
+	public static int filterCountByGroupId(long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterCountByGroupId(groupId);
+	}
+
 	public static int countByG_P(long groupId, long parentCategoryId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByG_P(groupId, parentCategoryId);
+	}
+
+	public static int filterCountByG_P(long groupId, long parentCategoryId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterCountByG_P(groupId, parentCategoryId);
 	}
 
 	public static int countAll()

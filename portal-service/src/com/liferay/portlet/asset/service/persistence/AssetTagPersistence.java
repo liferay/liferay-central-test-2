@@ -85,6 +85,19 @@ public interface AssetTagPersistence extends BasePersistence<AssetTag> {
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.asset.NoSuchTagException;
 
+	public java.util.List<com.liferay.portlet.asset.model.AssetTag> filterFindByGroupId(
+		long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.asset.model.AssetTag> filterFindByGroupId(
+		long groupId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.asset.model.AssetTag> filterFindByGroupId(
+		long groupId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public java.util.List<com.liferay.portlet.asset.model.AssetTag> findAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
 
@@ -104,6 +117,9 @@ public interface AssetTagPersistence extends BasePersistence<AssetTag> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countByGroupId(long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public int filterCountByGroupId(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countAll()

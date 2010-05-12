@@ -89,6 +89,19 @@ public interface ShoppingOrderPersistence extends BasePersistence<ShoppingOrder>
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.shopping.NoSuchOrderException;
 
+	public java.util.List<com.liferay.portlet.shopping.model.ShoppingOrder> filterFindByGroupId(
+		long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.shopping.model.ShoppingOrder> filterFindByGroupId(
+		long groupId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.shopping.model.ShoppingOrder> filterFindByGroupId(
+		long groupId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public com.liferay.portlet.shopping.model.ShoppingOrder findByNumber(
 		java.lang.String number)
 		throws com.liferay.portal.kernel.exception.SystemException,
@@ -148,6 +161,20 @@ public interface ShoppingOrderPersistence extends BasePersistence<ShoppingOrder>
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.shopping.NoSuchOrderException;
 
+	public java.util.List<com.liferay.portlet.shopping.model.ShoppingOrder> filterFindByG_U_PPPS(
+		long groupId, long userId, java.lang.String ppPaymentStatus)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.shopping.model.ShoppingOrder> filterFindByG_U_PPPS(
+		long groupId, long userId, java.lang.String ppPaymentStatus, int start,
+		int end) throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.shopping.model.ShoppingOrder> filterFindByG_U_PPPS(
+		long groupId, long userId, java.lang.String ppPaymentStatus, int start,
+		int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public java.util.List<com.liferay.portlet.shopping.model.ShoppingOrder> findAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
 
@@ -181,6 +208,9 @@ public interface ShoppingOrderPersistence extends BasePersistence<ShoppingOrder>
 	public int countByGroupId(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	public int filterCountByGroupId(long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public int countByNumber(java.lang.String number)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
@@ -188,6 +218,10 @@ public interface ShoppingOrderPersistence extends BasePersistence<ShoppingOrder>
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countByG_U_PPPS(long groupId, long userId,
+		java.lang.String ppPaymentStatus)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public int filterCountByG_U_PPPS(long groupId, long userId,
 		java.lang.String ppPaymentStatus)
 		throws com.liferay.portal.kernel.exception.SystemException;
 

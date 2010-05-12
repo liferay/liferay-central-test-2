@@ -23,7 +23,9 @@ import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.Query;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
+import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
+import com.liferay.portal.kernel.dao.orm.Type;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -41,6 +43,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
+import com.liferay.portal.security.permission.InlineSQLHelperUtil;
 import com.liferay.portal.service.persistence.BatchSessionUtil;
 import com.liferay.portal.service.persistence.CompanyPersistence;
 import com.liferay.portal.service.persistence.GroupPersistence;
@@ -1350,6 +1353,69 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 		}
 		else {
 			return null;
+		}
+	}
+
+	public List<BlogsEntry> filterFindByGroupId(long groupId)
+		throws SystemException {
+		return filterFindByGroupId(groupId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	public List<BlogsEntry> filterFindByGroupId(long groupId, int start, int end)
+		throws SystemException {
+		return filterFindByGroupId(groupId, start, end, null);
+	}
+
+	public List<BlogsEntry> filterFindByGroupId(long groupId, int start,
+		int end, OrderByComparator orderByComparator) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(3 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(3);
+			}
+
+			query.append(_FILTER_SELECT_BLOGSENTRY_WHERE);
+
+			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			else {
+				query.append(BlogsEntryModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+					BlogsEntry.class.getName(), _FILTER_COLUMN_ENTRYID,
+					_FILTER_COLUMN_USERID, groupId);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity(_ENTITY_ALIAS, BlogsEntryImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			return (List<BlogsEntry>)QueryUtil.list(q, getDialect(), start, end);
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
 		}
 	}
 
@@ -2891,6 +2957,81 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 		}
 	}
 
+	public List<BlogsEntry> filterFindByG_D(long groupId, Date displayDate)
+		throws SystemException {
+		return filterFindByG_D(groupId, displayDate, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	public List<BlogsEntry> filterFindByG_D(long groupId, Date displayDate,
+		int start, int end) throws SystemException {
+		return filterFindByG_D(groupId, displayDate, start, end, null);
+	}
+
+	public List<BlogsEntry> filterFindByG_D(long groupId, Date displayDate,
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(4 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(4);
+			}
+
+			query.append(_FILTER_SELECT_BLOGSENTRY_WHERE);
+
+			query.append(_FINDER_COLUMN_G_D_GROUPID_2);
+
+			if (displayDate == null) {
+				query.append(_FINDER_COLUMN_G_D_DISPLAYDATE_1);
+			}
+			else {
+				query.append(_FINDER_COLUMN_G_D_DISPLAYDATE_2);
+			}
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			else {
+				query.append(BlogsEntryModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+					BlogsEntry.class.getName(), _FILTER_COLUMN_ENTRYID,
+					_FILTER_COLUMN_USERID, groupId);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity(_ENTITY_ALIAS, BlogsEntryImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			if (displayDate != null) {
+				qPos.add(CalendarUtil.getTimestamp(displayDate));
+			}
+
+			return (List<BlogsEntry>)QueryUtil.list(q, getDialect(), start, end);
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public List<BlogsEntry> findByG_S(long groupId, int status)
 		throws SystemException {
 		return findByG_S(groupId, status, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
@@ -3166,6 +3307,74 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 		}
 		else {
 			return null;
+		}
+	}
+
+	public List<BlogsEntry> filterFindByG_S(long groupId, int status)
+		throws SystemException {
+		return filterFindByG_S(groupId, status, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	public List<BlogsEntry> filterFindByG_S(long groupId, int status,
+		int start, int end) throws SystemException {
+		return filterFindByG_S(groupId, status, start, end, null);
+	}
+
+	public List<BlogsEntry> filterFindByG_S(long groupId, int status,
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(4 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(4);
+			}
+
+			query.append(_FILTER_SELECT_BLOGSENTRY_WHERE);
+
+			query.append(_FINDER_COLUMN_G_S_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_G_S_STATUS_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			else {
+				query.append(BlogsEntryModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+					BlogsEntry.class.getName(), _FILTER_COLUMN_ENTRYID,
+					_FILTER_COLUMN_USERID, groupId);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity(_ENTITY_ALIAS, BlogsEntryImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			qPos.add(status);
+
+			return (List<BlogsEntry>)QueryUtil.list(q, getDialect(), start, end);
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
 		}
 	}
 
@@ -4080,6 +4289,85 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 		}
 	}
 
+	public List<BlogsEntry> filterFindByG_U_D(long groupId, long userId,
+		Date displayDate) throws SystemException {
+		return filterFindByG_U_D(groupId, userId, displayDate,
+			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	}
+
+	public List<BlogsEntry> filterFindByG_U_D(long groupId, long userId,
+		Date displayDate, int start, int end) throws SystemException {
+		return filterFindByG_U_D(groupId, userId, displayDate, start, end, null);
+	}
+
+	public List<BlogsEntry> filterFindByG_U_D(long groupId, long userId,
+		Date displayDate, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(5 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(5);
+			}
+
+			query.append(_FILTER_SELECT_BLOGSENTRY_WHERE);
+
+			query.append(_FINDER_COLUMN_G_U_D_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_G_U_D_USERID_2);
+
+			if (displayDate == null) {
+				query.append(_FINDER_COLUMN_G_U_D_DISPLAYDATE_1);
+			}
+			else {
+				query.append(_FINDER_COLUMN_G_U_D_DISPLAYDATE_2);
+			}
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			else {
+				query.append(BlogsEntryModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+					BlogsEntry.class.getName(), _FILTER_COLUMN_ENTRYID,
+					_FILTER_COLUMN_USERID, groupId);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity(_ENTITY_ALIAS, BlogsEntryImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			qPos.add(userId);
+
+			if (displayDate != null) {
+				qPos.add(CalendarUtil.getTimestamp(displayDate));
+			}
+
+			return (List<BlogsEntry>)QueryUtil.list(q, getDialect(), start, end);
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public List<BlogsEntry> findByG_U_S(long groupId, long userId, int status)
 		throws SystemException {
 		return findByG_U_S(groupId, userId, status, QueryUtil.ALL_POS,
@@ -4370,6 +4658,78 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 		}
 		else {
 			return null;
+		}
+	}
+
+	public List<BlogsEntry> filterFindByG_U_S(long groupId, long userId,
+		int status) throws SystemException {
+		return filterFindByG_U_S(groupId, userId, status, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	public List<BlogsEntry> filterFindByG_U_S(long groupId, long userId,
+		int status, int start, int end) throws SystemException {
+		return filterFindByG_U_S(groupId, userId, status, start, end, null);
+	}
+
+	public List<BlogsEntry> filterFindByG_U_S(long groupId, long userId,
+		int status, int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(5 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(5);
+			}
+
+			query.append(_FILTER_SELECT_BLOGSENTRY_WHERE);
+
+			query.append(_FINDER_COLUMN_G_U_S_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_G_U_S_USERID_2);
+
+			query.append(_FINDER_COLUMN_G_U_S_STATUS_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			else {
+				query.append(BlogsEntryModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+					BlogsEntry.class.getName(), _FILTER_COLUMN_ENTRYID,
+					_FILTER_COLUMN_USERID, groupId);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity(_ENTITY_ALIAS, BlogsEntryImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			qPos.add(userId);
+
+			qPos.add(status);
+
+			return (List<BlogsEntry>)QueryUtil.list(q, getDialect(), start, end);
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
 		}
 	}
 
@@ -4679,6 +5039,85 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 		}
 		else {
 			return null;
+		}
+	}
+
+	public List<BlogsEntry> filterFindByG_D_S(long groupId, Date displayDate,
+		int status) throws SystemException {
+		return filterFindByG_D_S(groupId, displayDate, status,
+			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	}
+
+	public List<BlogsEntry> filterFindByG_D_S(long groupId, Date displayDate,
+		int status, int start, int end) throws SystemException {
+		return filterFindByG_D_S(groupId, displayDate, status, start, end, null);
+	}
+
+	public List<BlogsEntry> filterFindByG_D_S(long groupId, Date displayDate,
+		int status, int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(5 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(5);
+			}
+
+			query.append(_FILTER_SELECT_BLOGSENTRY_WHERE);
+
+			query.append(_FINDER_COLUMN_G_D_S_GROUPID_2);
+
+			if (displayDate == null) {
+				query.append(_FINDER_COLUMN_G_D_S_DISPLAYDATE_1);
+			}
+			else {
+				query.append(_FINDER_COLUMN_G_D_S_DISPLAYDATE_2);
+			}
+
+			query.append(_FINDER_COLUMN_G_D_S_STATUS_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			else {
+				query.append(BlogsEntryModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+					BlogsEntry.class.getName(), _FILTER_COLUMN_ENTRYID,
+					_FILTER_COLUMN_USERID, groupId);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity(_ENTITY_ALIAS, BlogsEntryImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			if (displayDate != null) {
+				qPos.add(CalendarUtil.getTimestamp(displayDate));
+			}
+
+			qPos.add(status);
+
+			return (List<BlogsEntry>)QueryUtil.list(q, getDialect(), start, end);
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
 		}
 	}
 
@@ -5008,6 +5447,91 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 		}
 	}
 
+	public List<BlogsEntry> filterFindByG_U_D_S(long groupId, long userId,
+		Date displayDate, int status) throws SystemException {
+		return filterFindByG_U_D_S(groupId, userId, displayDate, status,
+			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	}
+
+	public List<BlogsEntry> filterFindByG_U_D_S(long groupId, long userId,
+		Date displayDate, int status, int start, int end)
+		throws SystemException {
+		return filterFindByG_U_D_S(groupId, userId, displayDate, status, start,
+			end, null);
+	}
+
+	public List<BlogsEntry> filterFindByG_U_D_S(long groupId, long userId,
+		Date displayDate, int status, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(6 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(6);
+			}
+
+			query.append(_FILTER_SELECT_BLOGSENTRY_WHERE);
+
+			query.append(_FINDER_COLUMN_G_U_D_S_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_G_U_D_S_USERID_2);
+
+			if (displayDate == null) {
+				query.append(_FINDER_COLUMN_G_U_D_S_DISPLAYDATE_1);
+			}
+			else {
+				query.append(_FINDER_COLUMN_G_U_D_S_DISPLAYDATE_2);
+			}
+
+			query.append(_FINDER_COLUMN_G_U_D_S_STATUS_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			else {
+				query.append(BlogsEntryModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+					BlogsEntry.class.getName(), _FILTER_COLUMN_ENTRYID,
+					_FILTER_COLUMN_USERID, groupId);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity(_ENTITY_ALIAS, BlogsEntryImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			qPos.add(userId);
+
+			if (displayDate != null) {
+				qPos.add(CalendarUtil.getTimestamp(displayDate));
+			}
+
+			qPos.add(status);
+
+			return (List<BlogsEntry>)QueryUtil.list(q, getDialect(), start, end);
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public List<BlogsEntry> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -5320,6 +5844,59 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 		return count.intValue();
 	}
 
+	public int filterCountByUUID_G(String uuid, long groupId)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBundler query = new StringBundler(3);
+
+			query.append(_FILTER_COUNT_BLOGSENTRY_WHERE);
+
+			if (uuid == null) {
+				query.append(_FINDER_COLUMN_UUID_G_UUID_1);
+			}
+			else {
+				if (uuid.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_UUID_G_UUID_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_UUID_G_UUID_2);
+				}
+			}
+
+			query.append(_FINDER_COLUMN_UUID_G_GROUPID_2);
+
+			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+					BlogsEntry.class.getName(), _FILTER_COLUMN_ENTRYID,
+					_FILTER_COLUMN_USERID, groupId);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			if (uuid != null) {
+				qPos.add(uuid);
+			}
+
+			qPos.add(groupId);
+
+			Long count = (Long)q.uniqueResult();
+
+			return count.intValue();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public int countByGroupId(long groupId) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(groupId) };
 
@@ -5364,6 +5941,42 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 		}
 
 		return count.intValue();
+	}
+
+	public int filterCountByGroupId(long groupId) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBundler query = new StringBundler(2);
+
+			query.append(_FILTER_COUNT_BLOGSENTRY_WHERE);
+
+			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+
+			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+					BlogsEntry.class.getName(), _FILTER_COLUMN_ENTRYID,
+					_FILTER_COLUMN_USERID, groupId);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			Long count = (Long)q.uniqueResult();
+
+			return count.intValue();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
 	}
 
 	public int countByCompanyId(long companyId) throws SystemException {
@@ -5636,6 +6249,59 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 		return count.intValue();
 	}
 
+	public int filterCountByG_UT(long groupId, String urlTitle)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBundler query = new StringBundler(3);
+
+			query.append(_FILTER_COUNT_BLOGSENTRY_WHERE);
+
+			query.append(_FINDER_COLUMN_G_UT_GROUPID_2);
+
+			if (urlTitle == null) {
+				query.append(_FINDER_COLUMN_G_UT_URLTITLE_1);
+			}
+			else {
+				if (urlTitle.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_G_UT_URLTITLE_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_G_UT_URLTITLE_2);
+				}
+			}
+
+			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+					BlogsEntry.class.getName(), _FILTER_COLUMN_ENTRYID,
+					_FILTER_COLUMN_USERID, groupId);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			if (urlTitle != null) {
+				qPos.add(urlTitle);
+			}
+
+			Long count = (Long)q.uniqueResult();
+
+			return count.intValue();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public int countByG_D(long groupId, Date displayDate)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(groupId), displayDate };
@@ -5694,6 +6360,54 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 		return count.intValue();
 	}
 
+	public int filterCountByG_D(long groupId, Date displayDate)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBundler query = new StringBundler(3);
+
+			query.append(_FILTER_COUNT_BLOGSENTRY_WHERE);
+
+			query.append(_FINDER_COLUMN_G_D_GROUPID_2);
+
+			if (displayDate == null) {
+				query.append(_FINDER_COLUMN_G_D_DISPLAYDATE_1);
+			}
+			else {
+				query.append(_FINDER_COLUMN_G_D_DISPLAYDATE_2);
+			}
+
+			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+					BlogsEntry.class.getName(), _FILTER_COLUMN_ENTRYID,
+					_FILTER_COLUMN_USERID, groupId);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			if (displayDate != null) {
+				qPos.add(CalendarUtil.getTimestamp(displayDate));
+			}
+
+			Long count = (Long)q.uniqueResult();
+
+			return count.intValue();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public int countByG_S(long groupId, int status) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Integer(status)
@@ -5744,6 +6458,47 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 		}
 
 		return count.intValue();
+	}
+
+	public int filterCountByG_S(long groupId, int status)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBundler query = new StringBundler(3);
+
+			query.append(_FILTER_COUNT_BLOGSENTRY_WHERE);
+
+			query.append(_FINDER_COLUMN_G_S_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_G_S_STATUS_2);
+
+			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+					BlogsEntry.class.getName(), _FILTER_COLUMN_ENTRYID,
+					_FILTER_COLUMN_USERID, groupId);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			qPos.add(status);
+
+			Long count = (Long)q.uniqueResult();
+
+			return count.intValue();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
 	}
 
 	public int countByC_U_S(long companyId, long userId, int status)
@@ -5935,6 +6690,58 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 		return count.intValue();
 	}
 
+	public int filterCountByG_U_D(long groupId, long userId, Date displayDate)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBundler query = new StringBundler(4);
+
+			query.append(_FILTER_COUNT_BLOGSENTRY_WHERE);
+
+			query.append(_FINDER_COLUMN_G_U_D_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_G_U_D_USERID_2);
+
+			if (displayDate == null) {
+				query.append(_FINDER_COLUMN_G_U_D_DISPLAYDATE_1);
+			}
+			else {
+				query.append(_FINDER_COLUMN_G_U_D_DISPLAYDATE_2);
+			}
+
+			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+					BlogsEntry.class.getName(), _FILTER_COLUMN_ENTRYID,
+					_FILTER_COLUMN_USERID, groupId);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			qPos.add(userId);
+
+			if (displayDate != null) {
+				qPos.add(CalendarUtil.getTimestamp(displayDate));
+			}
+
+			Long count = (Long)q.uniqueResult();
+
+			return count.intValue();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public int countByG_U_S(long groupId, long userId, int status)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -5990,6 +6797,51 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 		}
 
 		return count.intValue();
+	}
+
+	public int filterCountByG_U_S(long groupId, long userId, int status)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBundler query = new StringBundler(4);
+
+			query.append(_FILTER_COUNT_BLOGSENTRY_WHERE);
+
+			query.append(_FINDER_COLUMN_G_U_S_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_G_U_S_USERID_2);
+
+			query.append(_FINDER_COLUMN_G_U_S_STATUS_2);
+
+			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+					BlogsEntry.class.getName(), _FILTER_COLUMN_ENTRYID,
+					_FILTER_COLUMN_USERID, groupId);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			qPos.add(userId);
+
+			qPos.add(status);
+
+			Long count = (Long)q.uniqueResult();
+
+			return count.intValue();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
 	}
 
 	public int countByG_D_S(long groupId, Date displayDate, int status)
@@ -6056,6 +6908,58 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 		}
 
 		return count.intValue();
+	}
+
+	public int filterCountByG_D_S(long groupId, Date displayDate, int status)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBundler query = new StringBundler(4);
+
+			query.append(_FILTER_COUNT_BLOGSENTRY_WHERE);
+
+			query.append(_FINDER_COLUMN_G_D_S_GROUPID_2);
+
+			if (displayDate == null) {
+				query.append(_FINDER_COLUMN_G_D_S_DISPLAYDATE_1);
+			}
+			else {
+				query.append(_FINDER_COLUMN_G_D_S_DISPLAYDATE_2);
+			}
+
+			query.append(_FINDER_COLUMN_G_D_S_STATUS_2);
+
+			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+					BlogsEntry.class.getName(), _FILTER_COLUMN_ENTRYID,
+					_FILTER_COLUMN_USERID, groupId);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			if (displayDate != null) {
+				qPos.add(CalendarUtil.getTimestamp(displayDate));
+			}
+
+			qPos.add(status);
+
+			Long count = (Long)q.uniqueResult();
+
+			return count.intValue();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
 	}
 
 	public int countByG_U_D_S(long groupId, long userId, Date displayDate,
@@ -6126,6 +7030,62 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 		}
 
 		return count.intValue();
+	}
+
+	public int filterCountByG_U_D_S(long groupId, long userId,
+		Date displayDate, int status) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBundler query = new StringBundler(5);
+
+			query.append(_FILTER_COUNT_BLOGSENTRY_WHERE);
+
+			query.append(_FINDER_COLUMN_G_U_D_S_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_G_U_D_S_USERID_2);
+
+			if (displayDate == null) {
+				query.append(_FINDER_COLUMN_G_U_D_S_DISPLAYDATE_1);
+			}
+			else {
+				query.append(_FINDER_COLUMN_G_U_D_S_DISPLAYDATE_2);
+			}
+
+			query.append(_FINDER_COLUMN_G_U_D_S_STATUS_2);
+
+			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+					BlogsEntry.class.getName(), _FILTER_COLUMN_ENTRYID,
+					_FILTER_COLUMN_USERID, groupId);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			qPos.add(userId);
+
+			if (displayDate != null) {
+				qPos.add(CalendarUtil.getTimestamp(displayDate));
+			}
+
+			qPos.add(status);
+
+			Long count = (Long)q.uniqueResult();
+
+			return count.intValue();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
 	}
 
 	public int countAll() throws SystemException {
@@ -6266,6 +7226,11 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	private static final String _FINDER_COLUMN_G_U_D_S_DISPLAYDATE_1 = "blogsEntry.displayDate < NULL AND ";
 	private static final String _FINDER_COLUMN_G_U_D_S_DISPLAYDATE_2 = "blogsEntry.displayDate < ? AND ";
 	private static final String _FINDER_COLUMN_G_U_D_S_STATUS_2 = "blogsEntry.status = ?";
+	private static final String _FILTER_SELECT_BLOGSENTRY_WHERE = "SELECT {blogsEntry.*} FROM BlogsEntry blogsEntry WHERE ";
+	private static final String _FILTER_COUNT_BLOGSENTRY_WHERE = "SELECT COUNT(DISTINCT blogsEntry.entryId) AS COUNT_VALUE FROM BlogsEntry blogsEntry WHERE ";
+	private static final String _FILTER_COLUMN_ENTRYID = "blogsEntry.entryId";
+	private static final String _FILTER_COLUMN_USERID = "blogsEntry.userId";
+	private static final String _ENTITY_ALIAS = "blogsEntry";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "blogsEntry.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No BlogsEntry exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No BlogsEntry exists with the key {";

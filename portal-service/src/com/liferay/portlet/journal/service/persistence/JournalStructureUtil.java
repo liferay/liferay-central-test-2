@@ -240,6 +240,26 @@ public class JournalStructureUtil {
 				   .findByGroupId_PrevAndNext(id, groupId, orderByComparator);
 	}
 
+	public static java.util.List<com.liferay.portlet.journal.model.JournalStructure> filterFindByGroupId(
+		long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterFindByGroupId(groupId);
+	}
+
+	public static java.util.List<com.liferay.portlet.journal.model.JournalStructure> filterFindByGroupId(
+		long groupId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterFindByGroupId(groupId, start, end);
+	}
+
+	public static java.util.List<com.liferay.portlet.journal.model.JournalStructure> filterFindByGroupId(
+		long groupId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .filterFindByGroupId(groupId, start, end, orderByComparator);
+	}
+
 	public static java.util.List<com.liferay.portlet.journal.model.JournalStructure> findByStructureId(
 		java.lang.String structureId)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -358,6 +378,28 @@ public class JournalStructureUtil {
 			orderByComparator);
 	}
 
+	public static java.util.List<com.liferay.portlet.journal.model.JournalStructure> filterFindByG_P(
+		long groupId, java.lang.String parentStructureId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterFindByG_P(groupId, parentStructureId);
+	}
+
+	public static java.util.List<com.liferay.portlet.journal.model.JournalStructure> filterFindByG_P(
+		long groupId, java.lang.String parentStructureId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .filterFindByG_P(groupId, parentStructureId, start, end);
+	}
+
+	public static java.util.List<com.liferay.portlet.journal.model.JournalStructure> filterFindByG_P(
+		long groupId, java.lang.String parentStructureId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .filterFindByG_P(groupId, parentStructureId, start, end,
+			orderByComparator);
+	}
+
 	public static java.util.List<com.liferay.portlet.journal.model.JournalStructure> findAll()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll();
@@ -424,9 +466,19 @@ public class JournalStructureUtil {
 		return getPersistence().countByUUID_G(uuid, groupId);
 	}
 
+	public static int filterCountByUUID_G(java.lang.String uuid, long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterCountByUUID_G(uuid, groupId);
+	}
+
 	public static int countByGroupId(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByGroupId(groupId);
+	}
+
+	public static int filterCountByGroupId(long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterCountByGroupId(groupId);
 	}
 
 	public static int countByStructureId(java.lang.String structureId)
@@ -439,10 +491,22 @@ public class JournalStructureUtil {
 		return getPersistence().countByG_S(groupId, structureId);
 	}
 
+	public static int filterCountByG_S(long groupId,
+		java.lang.String structureId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterCountByG_S(groupId, structureId);
+	}
+
 	public static int countByG_P(long groupId,
 		java.lang.String parentStructureId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByG_P(groupId, parentStructureId);
+	}
+
+	public static int filterCountByG_P(long groupId,
+		java.lang.String parentStructureId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterCountByG_P(groupId, parentStructureId);
 	}
 
 	public static int countAll()

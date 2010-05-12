@@ -240,6 +240,26 @@ public class IGFolderUtil {
 			orderByComparator);
 	}
 
+	public static java.util.List<com.liferay.portlet.imagegallery.model.IGFolder> filterFindByGroupId(
+		long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterFindByGroupId(groupId);
+	}
+
+	public static java.util.List<com.liferay.portlet.imagegallery.model.IGFolder> filterFindByGroupId(
+		long groupId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterFindByGroupId(groupId, start, end);
+	}
+
+	public static java.util.List<com.liferay.portlet.imagegallery.model.IGFolder> filterFindByGroupId(
+		long groupId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .filterFindByGroupId(groupId, start, end, orderByComparator);
+	}
+
 	public static java.util.List<com.liferay.portlet.imagegallery.model.IGFolder> findByCompanyId(
 		long companyId)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -337,6 +357,28 @@ public class IGFolderUtil {
 			orderByComparator);
 	}
 
+	public static java.util.List<com.liferay.portlet.imagegallery.model.IGFolder> filterFindByG_P(
+		long groupId, long parentFolderId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterFindByG_P(groupId, parentFolderId);
+	}
+
+	public static java.util.List<com.liferay.portlet.imagegallery.model.IGFolder> filterFindByG_P(
+		long groupId, long parentFolderId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .filterFindByG_P(groupId, parentFolderId, start, end);
+	}
+
+	public static java.util.List<com.liferay.portlet.imagegallery.model.IGFolder> filterFindByG_P(
+		long groupId, long parentFolderId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .filterFindByG_P(groupId, parentFolderId, start, end,
+			orderByComparator);
+	}
+
 	public static com.liferay.portlet.imagegallery.model.IGFolder findByG_P_N(
 		long groupId, long parentFolderId, java.lang.String name)
 		throws com.liferay.portal.kernel.exception.SystemException,
@@ -425,9 +467,19 @@ public class IGFolderUtil {
 		return getPersistence().countByUUID_G(uuid, groupId);
 	}
 
+	public static int filterCountByUUID_G(java.lang.String uuid, long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterCountByUUID_G(uuid, groupId);
+	}
+
 	public static int countByGroupId(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByGroupId(groupId);
+	}
+
+	public static int filterCountByGroupId(long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterCountByGroupId(groupId);
 	}
 
 	public static int countByCompanyId(long companyId)
@@ -440,10 +492,21 @@ public class IGFolderUtil {
 		return getPersistence().countByG_P(groupId, parentFolderId);
 	}
 
+	public static int filterCountByG_P(long groupId, long parentFolderId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterCountByG_P(groupId, parentFolderId);
+	}
+
 	public static int countByG_P_N(long groupId, long parentFolderId,
 		java.lang.String name)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByG_P_N(groupId, parentFolderId, name);
+	}
+
+	public static int filterCountByG_P_N(long groupId, long parentFolderId,
+		java.lang.String name)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterCountByG_P_N(groupId, parentFolderId, name);
 	}
 
 	public static int countAll()

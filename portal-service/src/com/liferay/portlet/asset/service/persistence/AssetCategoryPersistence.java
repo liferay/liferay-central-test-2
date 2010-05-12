@@ -300,6 +300,9 @@ public interface AssetCategoryPersistence extends BasePersistence<AssetCategory>
 	public int countByUUID_G(java.lang.String uuid, long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	public int filterCountByUUID_G(java.lang.String uuid, long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public int countByParentCategoryId(long parentCategoryId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 

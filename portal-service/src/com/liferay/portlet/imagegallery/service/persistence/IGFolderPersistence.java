@@ -132,6 +132,19 @@ public interface IGFolderPersistence extends BasePersistence<IGFolder> {
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchFolderException;
 
+	public java.util.List<com.liferay.portlet.imagegallery.model.IGFolder> filterFindByGroupId(
+		long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.imagegallery.model.IGFolder> filterFindByGroupId(
+		long groupId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.imagegallery.model.IGFolder> filterFindByGroupId(
+		long groupId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public java.util.List<com.liferay.portlet.imagegallery.model.IGFolder> findByCompanyId(
 		long companyId)
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -194,6 +207,19 @@ public interface IGFolderPersistence extends BasePersistence<IGFolder> {
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchFolderException;
 
+	public java.util.List<com.liferay.portlet.imagegallery.model.IGFolder> filterFindByG_P(
+		long groupId, long parentFolderId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.imagegallery.model.IGFolder> filterFindByG_P(
+		long groupId, long parentFolderId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.imagegallery.model.IGFolder> filterFindByG_P(
+		long groupId, long parentFolderId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public com.liferay.portlet.imagegallery.model.IGFolder findByG_P_N(
 		long groupId, long parentFolderId, java.lang.String name)
 		throws com.liferay.portal.kernel.exception.SystemException,
@@ -250,7 +276,13 @@ public interface IGFolderPersistence extends BasePersistence<IGFolder> {
 	public int countByUUID_G(java.lang.String uuid, long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	public int filterCountByUUID_G(java.lang.String uuid, long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public int countByGroupId(long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public int filterCountByGroupId(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countByCompanyId(long companyId)
@@ -259,7 +291,14 @@ public interface IGFolderPersistence extends BasePersistence<IGFolder> {
 	public int countByG_P(long groupId, long parentFolderId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	public int filterCountByG_P(long groupId, long parentFolderId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public int countByG_P_N(long groupId, long parentFolderId,
+		java.lang.String name)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public int filterCountByG_P_N(long groupId, long parentFolderId,
 		java.lang.String name)
 		throws com.liferay.portal.kernel.exception.SystemException;
 

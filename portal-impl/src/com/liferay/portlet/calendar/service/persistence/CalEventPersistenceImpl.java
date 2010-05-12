@@ -23,7 +23,9 @@ import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.Query;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
+import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
+import com.liferay.portal.kernel.dao.orm.Type;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -35,6 +37,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.model.ModelListener;
+import com.liferay.portal.security.permission.InlineSQLHelperUtil;
 import com.liferay.portal.service.persistence.BatchSessionUtil;
 import com.liferay.portal.service.persistence.CompanyPersistence;
 import com.liferay.portal.service.persistence.GroupPersistence;
@@ -1393,6 +1396,69 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 		}
 	}
 
+	public List<CalEvent> filterFindByGroupId(long groupId)
+		throws SystemException {
+		return filterFindByGroupId(groupId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	public List<CalEvent> filterFindByGroupId(long groupId, int start, int end)
+		throws SystemException {
+		return filterFindByGroupId(groupId, start, end, null);
+	}
+
+	public List<CalEvent> filterFindByGroupId(long groupId, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(3 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(3);
+			}
+
+			query.append(_FILTER_SELECT_CALEVENT_WHERE);
+
+			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			else {
+				query.append(CalEventModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+					CalEvent.class.getName(), _FILTER_COLUMN_EVENTID,
+					_FILTER_COLUMN_USERID, groupId);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity(_ENTITY_ALIAS, CalEventImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			return (List<CalEvent>)QueryUtil.list(q, getDialect(), start, end);
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public List<CalEvent> findByRemindBy(int remindBy)
 		throws SystemException {
 		return findByRemindBy(remindBy, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
@@ -1959,6 +2025,85 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 		}
 	}
 
+	public List<CalEvent> filterFindByG_T(long groupId, String type)
+		throws SystemException {
+		return filterFindByG_T(groupId, type, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	public List<CalEvent> filterFindByG_T(long groupId, String type, int start,
+		int end) throws SystemException {
+		return filterFindByG_T(groupId, type, start, end, null);
+	}
+
+	public List<CalEvent> filterFindByG_T(long groupId, String type, int start,
+		int end, OrderByComparator orderByComparator) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(4 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(4);
+			}
+
+			query.append(_FILTER_SELECT_CALEVENT_WHERE);
+
+			query.append(_FINDER_COLUMN_G_T_GROUPID_2);
+
+			if (type == null) {
+				query.append(_FINDER_COLUMN_G_T_TYPE_1);
+			}
+			else {
+				if (type.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_G_T_TYPE_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_G_T_TYPE_2);
+				}
+			}
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			else {
+				query.append(CalEventModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+					CalEvent.class.getName(), _FILTER_COLUMN_EVENTID,
+					_FILTER_COLUMN_USERID, groupId);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity(_ENTITY_ALIAS, CalEventImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			if (type != null) {
+				qPos.add(type);
+			}
+
+			return (List<CalEvent>)QueryUtil.list(q, getDialect(), start, end);
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public List<CalEvent> findByG_R(long groupId, boolean repeating)
 		throws SystemException {
 		return findByG_R(groupId, repeating, QueryUtil.ALL_POS,
@@ -2237,6 +2382,74 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 		}
 	}
 
+	public List<CalEvent> filterFindByG_R(long groupId, boolean repeating)
+		throws SystemException {
+		return filterFindByG_R(groupId, repeating, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	public List<CalEvent> filterFindByG_R(long groupId, boolean repeating,
+		int start, int end) throws SystemException {
+		return filterFindByG_R(groupId, repeating, start, end, null);
+	}
+
+	public List<CalEvent> filterFindByG_R(long groupId, boolean repeating,
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(4 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(4);
+			}
+
+			query.append(_FILTER_SELECT_CALEVENT_WHERE);
+
+			query.append(_FINDER_COLUMN_G_R_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_G_R_REPEATING_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			else {
+				query.append(CalEventModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+					CalEvent.class.getName(), _FILTER_COLUMN_EVENTID,
+					_FILTER_COLUMN_USERID, groupId);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity(_ENTITY_ALIAS, CalEventImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			qPos.add(repeating);
+
+			return (List<CalEvent>)QueryUtil.list(q, getDialect(), start, end);
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public List<CalEvent> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -2484,6 +2697,59 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 		return count.intValue();
 	}
 
+	public int filterCountByUUID_G(String uuid, long groupId)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBundler query = new StringBundler(3);
+
+			query.append(_FILTER_COUNT_CALEVENT_WHERE);
+
+			if (uuid == null) {
+				query.append(_FINDER_COLUMN_UUID_G_UUID_1);
+			}
+			else {
+				if (uuid.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_UUID_G_UUID_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_UUID_G_UUID_2);
+				}
+			}
+
+			query.append(_FINDER_COLUMN_UUID_G_GROUPID_2);
+
+			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+					CalEvent.class.getName(), _FILTER_COLUMN_EVENTID,
+					_FILTER_COLUMN_USERID, groupId);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			if (uuid != null) {
+				qPos.add(uuid);
+			}
+
+			qPos.add(groupId);
+
+			Long count = (Long)q.uniqueResult();
+
+			return count.intValue();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public int countByCompanyId(long companyId) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(companyId) };
 
@@ -2574,6 +2840,42 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 		}
 
 		return count.intValue();
+	}
+
+	public int filterCountByGroupId(long groupId) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBundler query = new StringBundler(2);
+
+			query.append(_FILTER_COUNT_CALEVENT_WHERE);
+
+			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+
+			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+					CalEvent.class.getName(), _FILTER_COLUMN_EVENTID,
+					_FILTER_COLUMN_USERID, groupId);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			Long count = (Long)q.uniqueResult();
+
+			return count.intValue();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
 	}
 
 	public int countByRemindBy(int remindBy) throws SystemException {
@@ -2684,6 +2986,59 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 		return count.intValue();
 	}
 
+	public int filterCountByG_T(long groupId, String type)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBundler query = new StringBundler(3);
+
+			query.append(_FILTER_COUNT_CALEVENT_WHERE);
+
+			query.append(_FINDER_COLUMN_G_T_GROUPID_2);
+
+			if (type == null) {
+				query.append(_FINDER_COLUMN_G_T_TYPE_1);
+			}
+			else {
+				if (type.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_G_T_TYPE_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_G_T_TYPE_2);
+				}
+			}
+
+			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+					CalEvent.class.getName(), _FILTER_COLUMN_EVENTID,
+					_FILTER_COLUMN_USERID, groupId);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			if (type != null) {
+				qPos.add(type);
+			}
+
+			Long count = (Long)q.uniqueResult();
+
+			return count.intValue();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public int countByG_R(long groupId, boolean repeating)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -2735,6 +3090,47 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 		}
 
 		return count.intValue();
+	}
+
+	public int filterCountByG_R(long groupId, boolean repeating)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBundler query = new StringBundler(3);
+
+			query.append(_FILTER_COUNT_CALEVENT_WHERE);
+
+			query.append(_FINDER_COLUMN_G_R_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_G_R_REPEATING_2);
+
+			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+					CalEvent.class.getName(), _FILTER_COLUMN_EVENTID,
+					_FILTER_COLUMN_USERID, groupId);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			qPos.add(repeating);
+
+			Long count = (Long)q.uniqueResult();
+
+			return count.intValue();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
 	}
 
 	public int countAll() throws SystemException {
@@ -2833,6 +3229,11 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	private static final String _FINDER_COLUMN_G_T_TYPE_3 = "(calEvent.type IS NULL OR calEvent.type = ?)";
 	private static final String _FINDER_COLUMN_G_R_GROUPID_2 = "calEvent.groupId = ? AND ";
 	private static final String _FINDER_COLUMN_G_R_REPEATING_2 = "calEvent.repeating = ?";
+	private static final String _FILTER_SELECT_CALEVENT_WHERE = "SELECT {calEvent.*} FROM CalEvent calEvent WHERE ";
+	private static final String _FILTER_COUNT_CALEVENT_WHERE = "SELECT COUNT(DISTINCT calEvent.eventId) AS COUNT_VALUE FROM CalEvent calEvent WHERE ";
+	private static final String _FILTER_COLUMN_EVENTID = "calEvent.eventId";
+	private static final String _FILTER_COLUMN_USERID = "calEvent.userId";
+	private static final String _ENTITY_ALIAS = "calEvent";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "calEvent.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No CalEvent exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No CalEvent exists with the key {";

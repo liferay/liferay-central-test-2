@@ -91,6 +91,19 @@ public interface SCFrameworkVersionPersistence extends BasePersistence<SCFramewo
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.softwarecatalog.NoSuchFrameworkVersionException;
 
+	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> filterFindByGroupId(
+		long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> filterFindByGroupId(
+		long groupId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> filterFindByGroupId(
+		long groupId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> findByCompanyId(
 		long companyId)
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -153,6 +166,19 @@ public interface SCFrameworkVersionPersistence extends BasePersistence<SCFramewo
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.softwarecatalog.NoSuchFrameworkVersionException;
 
+	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> filterFindByG_A(
+		long groupId, boolean active)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> filterFindByG_A(
+		long groupId, boolean active, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> filterFindByG_A(
+		long groupId, boolean active, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> findAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
 
@@ -180,10 +206,16 @@ public interface SCFrameworkVersionPersistence extends BasePersistence<SCFramewo
 	public int countByGroupId(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	public int filterCountByGroupId(long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public int countByCompanyId(long companyId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countByG_A(long groupId, boolean active)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public int filterCountByG_A(long groupId, boolean active)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countAll()

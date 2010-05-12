@@ -23,7 +23,9 @@ import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.Query;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
+import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
+import com.liferay.portal.kernel.dao.orm.Type;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -35,6 +37,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.model.ModelListener;
+import com.liferay.portal.security.permission.InlineSQLHelperUtil;
 import com.liferay.portal.service.persistence.BatchSessionUtil;
 import com.liferay.portal.service.persistence.ResourcePersistence;
 import com.liferay.portal.service.persistence.UserPersistence;
@@ -1134,6 +1137,72 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 		}
 	}
 
+	public List<DLFileShortcut> filterFindByG_F(long groupId, long folderId)
+		throws SystemException {
+		return filterFindByG_F(groupId, folderId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	public List<DLFileShortcut> filterFindByG_F(long groupId, long folderId,
+		int start, int end) throws SystemException {
+		return filterFindByG_F(groupId, folderId, start, end, null);
+	}
+
+	public List<DLFileShortcut> filterFindByG_F(long groupId, long folderId,
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(4 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(3);
+			}
+
+			query.append(_FILTER_SELECT_DLFILESHORTCUT_WHERE);
+
+			query.append(_FINDER_COLUMN_G_F_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_G_F_FOLDERID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+					DLFileShortcut.class.getName(),
+					_FILTER_COLUMN_FILESHORTCUTID, _FILTER_COLUMN_USERID,
+					groupId);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity(_ENTITY_ALIAS, DLFileShortcutImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			qPos.add(folderId);
+
+			return (List<DLFileShortcut>)QueryUtil.list(q, getDialect(), start,
+				end);
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public List<DLFileShortcut> findByG_F_S(long groupId, long folderId,
 		int status) throws SystemException {
 		return findByG_F_S(groupId, folderId, status, QueryUtil.ALL_POS,
@@ -1417,6 +1486,76 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 		}
 		else {
 			return null;
+		}
+	}
+
+	public List<DLFileShortcut> filterFindByG_F_S(long groupId, long folderId,
+		int status) throws SystemException {
+		return filterFindByG_F_S(groupId, folderId, status, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	public List<DLFileShortcut> filterFindByG_F_S(long groupId, long folderId,
+		int status, int start, int end) throws SystemException {
+		return filterFindByG_F_S(groupId, folderId, status, start, end, null);
+	}
+
+	public List<DLFileShortcut> filterFindByG_F_S(long groupId, long folderId,
+		int status, int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(5 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(4);
+			}
+
+			query.append(_FILTER_SELECT_DLFILESHORTCUT_WHERE);
+
+			query.append(_FINDER_COLUMN_G_F_S_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_G_F_S_FOLDERID_2);
+
+			query.append(_FINDER_COLUMN_G_F_S_STATUS_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+					DLFileShortcut.class.getName(),
+					_FILTER_COLUMN_FILESHORTCUTID, _FILTER_COLUMN_USERID,
+					groupId);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity(_ENTITY_ALIAS, DLFileShortcutImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			qPos.add(folderId);
+
+			qPos.add(status);
+
+			return (List<DLFileShortcut>)QueryUtil.list(q, getDialect(), start,
+				end);
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
 		}
 	}
 
@@ -1729,6 +1868,89 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 		}
 		else {
 			return null;
+		}
+	}
+
+	public List<DLFileShortcut> filterFindByG_TF_TN(long groupId,
+		long toFolderId, String toName) throws SystemException {
+		return filterFindByG_TF_TN(groupId, toFolderId, toName,
+			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	}
+
+	public List<DLFileShortcut> filterFindByG_TF_TN(long groupId,
+		long toFolderId, String toName, int start, int end)
+		throws SystemException {
+		return filterFindByG_TF_TN(groupId, toFolderId, toName, start, end, null);
+	}
+
+	public List<DLFileShortcut> filterFindByG_TF_TN(long groupId,
+		long toFolderId, String toName, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(5 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(4);
+			}
+
+			query.append(_FILTER_SELECT_DLFILESHORTCUT_WHERE);
+
+			query.append(_FINDER_COLUMN_G_TF_TN_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_G_TF_TN_TOFOLDERID_2);
+
+			if (toName == null) {
+				query.append(_FINDER_COLUMN_G_TF_TN_TONAME_1);
+			}
+			else {
+				if (toName.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_G_TF_TN_TONAME_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_G_TF_TN_TONAME_2);
+				}
+			}
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+					DLFileShortcut.class.getName(),
+					_FILTER_COLUMN_FILESHORTCUTID, _FILTER_COLUMN_USERID,
+					groupId);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity(_ENTITY_ALIAS, DLFileShortcutImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			qPos.add(toFolderId);
+
+			if (toName != null) {
+				qPos.add(toName);
+			}
+
+			return (List<DLFileShortcut>)QueryUtil.list(q, getDialect(), start,
+				end);
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
 		}
 	}
 
@@ -2062,6 +2284,94 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 		}
 	}
 
+	public List<DLFileShortcut> filterFindByG_TF_TN_S(long groupId,
+		long toFolderId, String toName, int status) throws SystemException {
+		return filterFindByG_TF_TN_S(groupId, toFolderId, toName, status,
+			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	}
+
+	public List<DLFileShortcut> filterFindByG_TF_TN_S(long groupId,
+		long toFolderId, String toName, int status, int start, int end)
+		throws SystemException {
+		return filterFindByG_TF_TN_S(groupId, toFolderId, toName, status,
+			start, end, null);
+	}
+
+	public List<DLFileShortcut> filterFindByG_TF_TN_S(long groupId,
+		long toFolderId, String toName, int status, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(6 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(5);
+			}
+
+			query.append(_FILTER_SELECT_DLFILESHORTCUT_WHERE);
+
+			query.append(_FINDER_COLUMN_G_TF_TN_S_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_G_TF_TN_S_TOFOLDERID_2);
+
+			if (toName == null) {
+				query.append(_FINDER_COLUMN_G_TF_TN_S_TONAME_1);
+			}
+			else {
+				if (toName.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_G_TF_TN_S_TONAME_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_G_TF_TN_S_TONAME_2);
+				}
+			}
+
+			query.append(_FINDER_COLUMN_G_TF_TN_S_STATUS_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+					DLFileShortcut.class.getName(),
+					_FILTER_COLUMN_FILESHORTCUTID, _FILTER_COLUMN_USERID,
+					groupId);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity(_ENTITY_ALIAS, DLFileShortcutImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			qPos.add(toFolderId);
+
+			if (toName != null) {
+				qPos.add(toName);
+			}
+
+			qPos.add(status);
+
+			return (List<DLFileShortcut>)QueryUtil.list(q, getDialect(), start,
+				end);
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public List<DLFileShortcut> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -2307,6 +2617,60 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 		return count.intValue();
 	}
 
+	public int filterCountByUUID_G(String uuid, long groupId)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBundler query = new StringBundler(3);
+
+			query.append(_FILTER_COUNT_DLFILESHORTCUT_WHERE);
+
+			if (uuid == null) {
+				query.append(_FINDER_COLUMN_UUID_G_UUID_1);
+			}
+			else {
+				if (uuid.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_UUID_G_UUID_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_UUID_G_UUID_2);
+				}
+			}
+
+			query.append(_FINDER_COLUMN_UUID_G_GROUPID_2);
+
+			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+					DLFileShortcut.class.getName(),
+					_FILTER_COLUMN_FILESHORTCUTID, _FILTER_COLUMN_USERID,
+					groupId);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			if (uuid != null) {
+				qPos.add(uuid);
+			}
+
+			qPos.add(groupId);
+
+			Long count = (Long)q.uniqueResult();
+
+			return count.intValue();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public int countByG_F(long groupId, long folderId)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(groupId), new Long(folderId) };
@@ -2356,6 +2720,48 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 		}
 
 		return count.intValue();
+	}
+
+	public int filterCountByG_F(long groupId, long folderId)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBundler query = new StringBundler(3);
+
+			query.append(_FILTER_COUNT_DLFILESHORTCUT_WHERE);
+
+			query.append(_FINDER_COLUMN_G_F_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_G_F_FOLDERID_2);
+
+			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+					DLFileShortcut.class.getName(),
+					_FILTER_COLUMN_FILESHORTCUTID, _FILTER_COLUMN_USERID,
+					groupId);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			qPos.add(folderId);
+
+			Long count = (Long)q.uniqueResult();
+
+			return count.intValue();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
 	}
 
 	public int countByG_F_S(long groupId, long folderId, int status)
@@ -2413,6 +2819,52 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 		}
 
 		return count.intValue();
+	}
+
+	public int filterCountByG_F_S(long groupId, long folderId, int status)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBundler query = new StringBundler(4);
+
+			query.append(_FILTER_COUNT_DLFILESHORTCUT_WHERE);
+
+			query.append(_FINDER_COLUMN_G_F_S_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_G_F_S_FOLDERID_2);
+
+			query.append(_FINDER_COLUMN_G_F_S_STATUS_2);
+
+			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+					DLFileShortcut.class.getName(),
+					_FILTER_COLUMN_FILESHORTCUTID, _FILTER_COLUMN_USERID,
+					groupId);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			qPos.add(folderId);
+
+			qPos.add(status);
+
+			Long count = (Long)q.uniqueResult();
+
+			return count.intValue();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
 	}
 
 	public int countByG_TF_TN(long groupId, long toFolderId, String toName)
@@ -2484,6 +2936,64 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 		}
 
 		return count.intValue();
+	}
+
+	public int filterCountByG_TF_TN(long groupId, long toFolderId, String toName)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBundler query = new StringBundler(4);
+
+			query.append(_FILTER_COUNT_DLFILESHORTCUT_WHERE);
+
+			query.append(_FINDER_COLUMN_G_TF_TN_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_G_TF_TN_TOFOLDERID_2);
+
+			if (toName == null) {
+				query.append(_FINDER_COLUMN_G_TF_TN_TONAME_1);
+			}
+			else {
+				if (toName.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_G_TF_TN_TONAME_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_G_TF_TN_TONAME_2);
+				}
+			}
+
+			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+					DLFileShortcut.class.getName(),
+					_FILTER_COLUMN_FILESHORTCUTID, _FILTER_COLUMN_USERID,
+					groupId);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			qPos.add(toFolderId);
+
+			if (toName != null) {
+				qPos.add(toName);
+			}
+
+			Long count = (Long)q.uniqueResult();
+
+			return count.intValue();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
 	}
 
 	public int countByG_TF_TN_S(long groupId, long toFolderId, String toName,
@@ -2559,6 +3069,68 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 		}
 
 		return count.intValue();
+	}
+
+	public int filterCountByG_TF_TN_S(long groupId, long toFolderId,
+		String toName, int status) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBundler query = new StringBundler(5);
+
+			query.append(_FILTER_COUNT_DLFILESHORTCUT_WHERE);
+
+			query.append(_FINDER_COLUMN_G_TF_TN_S_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_G_TF_TN_S_TOFOLDERID_2);
+
+			if (toName == null) {
+				query.append(_FINDER_COLUMN_G_TF_TN_S_TONAME_1);
+			}
+			else {
+				if (toName.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_G_TF_TN_S_TONAME_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_G_TF_TN_S_TONAME_2);
+				}
+			}
+
+			query.append(_FINDER_COLUMN_G_TF_TN_S_STATUS_2);
+
+			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+					DLFileShortcut.class.getName(),
+					_FILTER_COLUMN_FILESHORTCUTID, _FILTER_COLUMN_USERID,
+					groupId);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			qPos.add(toFolderId);
+
+			if (toName != null) {
+				qPos.add(toName);
+			}
+
+			qPos.add(status);
+
+			Long count = (Long)q.uniqueResult();
+
+			return count.intValue();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
 	}
 
 	public int countAll() throws SystemException {
@@ -2662,6 +3234,11 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	private static final String _FINDER_COLUMN_G_TF_TN_S_TONAME_2 = "dlFileShortcut.toName = ? AND ";
 	private static final String _FINDER_COLUMN_G_TF_TN_S_TONAME_3 = "(dlFileShortcut.toName IS NULL OR dlFileShortcut.toName = ?) AND ";
 	private static final String _FINDER_COLUMN_G_TF_TN_S_STATUS_2 = "dlFileShortcut.status = ?";
+	private static final String _FILTER_SELECT_DLFILESHORTCUT_WHERE = "SELECT {dlFileShortcut.*} FROM DLFileShortcut dlFileShortcut WHERE ";
+	private static final String _FILTER_COUNT_DLFILESHORTCUT_WHERE = "SELECT COUNT(DISTINCT dlFileShortcut.fileShortcutId) AS COUNT_VALUE FROM DLFileShortcut dlFileShortcut WHERE ";
+	private static final String _FILTER_COLUMN_FILESHORTCUTID = "dlFileShortcut.fileShortcutId";
+	private static final String _FILTER_COLUMN_USERID = "dlFileShortcut.userId";
+	private static final String _ENTITY_ALIAS = "dlFileShortcut";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "dlFileShortcut.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No DLFileShortcut exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No DLFileShortcut exists with the key {";

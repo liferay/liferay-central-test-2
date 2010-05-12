@@ -169,6 +169,26 @@ public class TeamUtil {
 				   .findByGroupId_PrevAndNext(teamId, groupId, orderByComparator);
 	}
 
+	public static java.util.List<com.liferay.portal.model.Team> filterFindByGroupId(
+		long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterFindByGroupId(groupId);
+	}
+
+	public static java.util.List<com.liferay.portal.model.Team> filterFindByGroupId(
+		long groupId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterFindByGroupId(groupId, start, end);
+	}
+
+	public static java.util.List<com.liferay.portal.model.Team> filterFindByGroupId(
+		long groupId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .filterFindByGroupId(groupId, start, end, orderByComparator);
+	}
+
 	public static com.liferay.portal.model.Team findByG_N(long groupId,
 		java.lang.String name)
 		throws com.liferay.portal.NoSuchTeamException,
@@ -227,9 +247,19 @@ public class TeamUtil {
 		return getPersistence().countByGroupId(groupId);
 	}
 
+	public static int filterCountByGroupId(long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterCountByGroupId(groupId);
+	}
+
 	public static int countByG_N(long groupId, java.lang.String name)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByG_N(groupId, name);
+	}
+
+	public static int filterCountByG_N(long groupId, java.lang.String name)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterCountByG_N(groupId, name);
 	}
 
 	public static int countAll()
