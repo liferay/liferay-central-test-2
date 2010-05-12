@@ -25,7 +25,6 @@ import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.UnmodifiableList;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.Group;
-import com.liferay.portal.security.permission.InlineSQLHelperUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.SubscriptionLocalServiceUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
@@ -48,111 +47,11 @@ import java.util.List;
 public class MBCategoryFinderImpl
 	extends BasePersistenceImpl<MBCategory> implements MBCategoryFinder {
 
-	public static String COUNT_BY_G_P =
-		MBCategoryFinder.class.getName() + ".countByG_P";
-
-	public static String COUNT_BY_GROUPID =
-		MBCategoryFinder.class.getName() + ".countByGroupId";
-
 	public static String COUNT_BY_S_G_U =
 		MBCategoryFinder.class.getName() + ".countByS_G_U";
 
-	public static String FIND_BY_G_P =
-		MBCategoryFinder.class.getName() + ".findByG_P";
-
-	public static String FIND_BY_GROUPID =
-		MBCategoryFinder.class.getName() + ".findByGroupId";
-
 	public static String FIND_BY_S_G_U =
 		MBCategoryFinder.class.getName() + ".findByS_G_U";
-
-	public int countByG_P(long groupId, long parentCategoryId)
-		throws SystemException {
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			String sql = CustomSQLUtil.get(COUNT_BY_G_P);
-
-			sql = InlineSQLHelperUtil.replacePermissionCheck(
-				sql, MBCategory.class.getName(), "MBCategory.categoryId",
-				"MBCategory.userId", groupId);
-
-			SQLQuery q = session.createSQLQuery(sql);
-
-			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(groupId);
-			qPos.add(parentCategoryId);
-
-			int count = 0;
-
-			Iterator<Long> itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long l = itr.next();
-
-				if (l != null) {
-					count = l.intValue();
-				}
-			}
-
-			return count;
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public int countByGroupId(long groupId) throws SystemException {
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			String sql = CustomSQLUtil.get(COUNT_BY_GROUPID);
-
-			sql = InlineSQLHelperUtil.replacePermissionCheck(
-				sql, MBCategory.class.getName(), "MBCategory.categoryId",
-				"MBCategory.userId", groupId);
-
-			SQLQuery q = session.createSQLQuery(sql);
-
-			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(groupId);
-
-			int count = 0;
-
-			Iterator<Long> itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long l = itr.next();
-
-				if (l != null) {
-					count = l.intValue();
-				}
-			}
-
-			return count;
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
 
 	public int countByS_G_U(long groupId, long userId) throws SystemException {
 		Session session = null;
@@ -161,10 +60,6 @@ public class MBCategoryFinderImpl
 			session = openSession();
 
 			String sql = CustomSQLUtil.get(COUNT_BY_S_G_U);
-
-			sql = InlineSQLHelperUtil.replacePermissionCheck(
-				sql, MBCategory.class.getName(), "MBCategory.categoryId",
-				"MBCategory.userId", groupId);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -210,91 +105,6 @@ public class MBCategoryFinderImpl
 		}
 	}
 
-	public List<MBCategory> findByG_P(long groupId, long parentCategoryId)
-		throws SystemException {
-
-		return findByG_P(
-			groupId, parentCategoryId, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
-	}
-
-	public List<MBCategory> findByG_P(
-			long groupId, long parentCategoryId, int start, int end)
-		throws SystemException {
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			String sql = CustomSQLUtil.get(FIND_BY_G_P);
-
-			sql = InlineSQLHelperUtil.replacePermissionCheck(
-				sql, MBCategory.class.getName(), "MBCategory.categoryId",
-				"MBCategory.userId", groupId);
-
-			SQLQuery q = session.createSQLQuery(sql);
-
-			q.addEntity("MBCategory", MBCategoryImpl.class);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(groupId);
-			qPos.add(parentCategoryId);
-
-			List<MBCategory> list = (List<MBCategory>)QueryUtil.list(
-				q, getDialect(), start, end, false);
-
-			return new UnmodifiableList<MBCategory>(list);
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List<MBCategory> findByGroupId(long groupId)
-		throws SystemException {
-
-		return findByGroupId(groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
-	}
-
-	public List<MBCategory> findByGroupId(long groupId, int start, int end)
-		throws SystemException {
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			String sql = CustomSQLUtil.get(FIND_BY_GROUPID);
-
-			sql = InlineSQLHelperUtil.replacePermissionCheck(
-				sql, MBCategory.class.getName(), "MBCategory.categoryId",
-				"MBCategory.userId", groupId);
-
-			SQLQuery q = session.createSQLQuery(sql);
-
-			q.addEntity("MBCategory", MBCategoryImpl.class);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(groupId);
-
-			List<MBCategory> list = (List<MBCategory>)QueryUtil.list(
-				q, getDialect(), start, end, false);
-
-			return new UnmodifiableList<MBCategory>(list);
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
 	public List<MBCategory> findByS_G_U(
 			long groupId, long userId, int start, int end)
 		throws SystemException {
@@ -305,10 +115,6 @@ public class MBCategoryFinderImpl
 			session = openSession();
 
 			String sql = CustomSQLUtil.get(FIND_BY_S_G_U);
-
-			sql = InlineSQLHelperUtil.replacePermissionCheck(
-				sql, MBCategory.class.getName(), "MBCategory.categoryId",
-				"MBCategory.userId", groupId);
 
 			SQLQuery q = session.createSQLQuery(sql);
 

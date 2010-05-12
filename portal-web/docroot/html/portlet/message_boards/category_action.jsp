@@ -19,8 +19,10 @@
 <%
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
-MBCategory category = (MBCategory)row.getObject();
-Set<Long> categorySubscriptionClassPKs = (Set<Long>)row.getParameter("categorySubscriptionClassPKs");
+Object[] objArray = (Object[])row.getObject();
+
+MBCategory category = (MBCategory)objArray[0];
+Set<Long> categorySubscriptionClassPKs = (Set<Long>)objArray[1];
 %>
 
 <liferay-ui:icon-menu>

@@ -1,29 +1,6 @@
 <?xml version="1.0"?>
 
 <custom-sql>
-	<sql id="com.liferay.portlet.messageboards.service.persistence.MBCategoryFinder.countByG_P">
-		<![CDATA[
-			SELECT
-				COUNT(DISTINCT MBCategory.categoryId) AS COUNT_VALUE
-			FROM
-				MBCategory
-			[$PERMISSION_JOIN$]
-			WHERE
-				(MBCategory.groupId = ?) AND
-				(MBCategory.parentCategoryId = ?)
-		]]>
-	</sql>
-	<sql id="com.liferay.portlet.messageboards.service.persistence.MBCategoryFinder.countByGroupId">
-		<![CDATA[
-			SELECT
-				COUNT(DISTINCT MBCategory.categoryId) AS COUNT_VALUE
-			FROM
-				MBCategory
-			[$PERMISSION_JOIN$]
-			WHERE
-				(MBCategory.groupId = ?)
-		]]>
-	</sql>
 	<sql id="com.liferay.portlet.messageboards.service.persistence.MBCategoryFinder.countByS_G_U">
 		<![CDATA[
 			SELECT
@@ -34,37 +11,9 @@
 				Subscription ON
 					(Subscription.classNameId = ?) AND
 					(Subscription.classPK = MBCategory.categoryId)
-			[$PERMISSION_JOIN$]
 			WHERE
 				(MBCategory.groupId = ?) AND
 				(Subscription.userId = ?)
-		]]>
-	</sql>
-	<sql id="com.liferay.portlet.messageboards.service.persistence.MBCategoryFinder.findByG_P">
-		<![CDATA[
-			SELECT
-				DISTINCT {MBCategory.*}
-			FROM
-				MBCategory
-			[$PERMISSION_JOIN$]
-			WHERE
-				(MBCategory.groupId = ?) AND
-				(MBCategory.parentCategoryId = ?)
-			ORDER BY
-				MBCategory.lastPostDate DESC
-		]]>
-	</sql>
-	<sql id="com.liferay.portlet.messageboards.service.persistence.MBCategoryFinder.findByGroupId">
-		<![CDATA[
-			SELECT
-				DISTINCT {MBCategory.*}
-			FROM
-				MBCategory
-			[$PERMISSION_JOIN$]
-			WHERE
-				(MBCategory.groupId = ?)
-			ORDER BY
-				MBCategory.lastPostDate DESC
 		]]>
 	</sql>
 	<sql id="com.liferay.portlet.messageboards.service.persistence.MBCategoryFinder.findByS_G_U">
@@ -77,7 +26,6 @@
 				Subscription ON
 					(Subscription.classNameId = ?) AND
 					(Subscription.classPK = MBCategory.categoryId)
-			[$PERMISSION_JOIN$]
 			WHERE
 				(MBCategory.groupId = ?) AND
 				(Subscription.userId = ?)
@@ -117,7 +65,7 @@
 			WHERE
 				(groupId = ?) AND
 				(userId = ?) AND
-				(anonymous = ?)
+				(anonymous = ?) 
 				[$STATUS$]
 		]]>
 	</sql>

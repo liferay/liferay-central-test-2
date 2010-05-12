@@ -35,7 +35,7 @@ else {
 
 	categoryIds.add(new Long(searchCategoryIds));
 
-	categoryIds = MBCategoryServiceUtil.getSubcategoryIds(categoryIds, scopeGroupId, searchCategoryIds);
+	MBCategoryLocalServiceUtil.getSubcategoryIds(categoryIds, scopeGroupId, searchCategoryIds);
 
 	categoryIdsArray = StringUtil.split(StringUtil.merge(categoryIds), 0L);
 }

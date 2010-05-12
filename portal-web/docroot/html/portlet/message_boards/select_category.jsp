@@ -49,11 +49,11 @@ if (category != null) {
 
 	SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
 
-	int total = MBCategoryServiceUtil.getCategoriesCount(scopeGroupId, categoryId);
+	int total = MBCategoryLocalServiceUtil.getCategoriesCount(scopeGroupId, categoryId);
 
 	searchContainer.setTotal(total);
 
-	List results = MBCategoryServiceUtil.getCategories(scopeGroupId, categoryId, searchContainer.getStart(), searchContainer.getEnd());
+	List results = MBCategoryLocalServiceUtil.getCategories(scopeGroupId, categoryId, searchContainer.getStart(), searchContainer.getEnd());
 
 	searchContainer.setResults(results);
 

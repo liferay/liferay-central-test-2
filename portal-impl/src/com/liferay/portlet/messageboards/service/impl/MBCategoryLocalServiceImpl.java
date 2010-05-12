@@ -254,37 +254,31 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 	}
 
 	public List<MBCategory> getCategories(long groupId) throws SystemException {
-		return mbCategoryFinder.findByGroupId(groupId);
-	}
-
-	public List<MBCategory> getCategories(long groupId, int start, int end)
-		throws SystemException {
-
-		return mbCategoryFinder.findByGroupId(groupId, start, end);
+		return mbCategoryPersistence.findByGroupId(groupId);
 	}
 
 	public List<MBCategory> getCategories(long groupId, long parentCategoryId)
 		throws SystemException {
 
-		return mbCategoryFinder.findByG_P(groupId, parentCategoryId);
+		return mbCategoryPersistence.findByG_P(groupId, parentCategoryId);
 	}
 
 	public List<MBCategory> getCategories(
 			long groupId, long parentCategoryId, int start, int end)
 		throws SystemException {
 
-		return mbCategoryFinder.findByG_P(
+		return mbCategoryPersistence.findByG_P(
 			groupId, parentCategoryId, start, end);
 	}
 
 	public int getCategoriesCount(long groupId) throws SystemException {
-		return mbCategoryFinder.countByGroupId(groupId);
+		return mbCategoryPersistence.countByGroupId(groupId);
 	}
 
 	public int getCategoriesCount(long groupId, long parentCategoryId)
 		throws SystemException {
 
-		return mbCategoryFinder.countByG_P(groupId, parentCategoryId);
+		return mbCategoryPersistence.countByG_P(groupId, parentCategoryId);
 	}
 
 	public MBCategory getCategory(long categoryId)
@@ -306,17 +300,19 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 		return mbCategoryPersistence.countByCompanyId(companyId);
 	}
 
-	public List<Long> getSubcategoryIds(
+	public void getSubcategoryIds(
 			List<Long> categoryIds, long groupId, long categoryId)
 		throws SystemException {
 
-		List<Long> subCategoryIds = new ArrayList<Long>();
+		List<MBCategory> categories = mbCategoryPersistence.findByG_P(
+			groupId, categoryId);
 
-		subCategoryIds.addAll(categoryIds);
+		for (MBCategory category : categories) {
+			categoryIds.add(category.getCategoryId());
 
-		_getSubcategoryIds(subCategoryIds, groupId, categoryId);
-
-		return subCategoryIds;
+			getSubcategoryIds(
+				categoryIds, category.getGroupId(), category.getCategoryId());
+		}
 	}
 
 	public List<MBCategory> getSubscribedCategories(
@@ -497,21 +493,6 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 			}
 
 			return parentCategoryId;
-		}
-	}
-
-	protected void _getSubcategoryIds(
-			List<Long> categoryIds, long groupId, long categoryId)
-		throws SystemException {
-
-		List<MBCategory> categories = mbCategoryFinder.findByG_P(
-			groupId, categoryId);
-
-		for (MBCategory category : categories) {
-			categoryIds.add(category.getCategoryId());
-
-			getSubcategoryIds(
-				categoryIds, category.getGroupId(), category.getCategoryId());
 		}
 	}
 
