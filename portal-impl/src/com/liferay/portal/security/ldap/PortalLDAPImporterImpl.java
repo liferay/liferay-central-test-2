@@ -93,6 +93,10 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 		long[] ldapServerIds = StringUtil.split(
 			PrefsPropsUtil.getString(companyId, "ldap.server.ids"), 0L);
 
+		if (ldapServerIds.length <= 0) {
+			ldapServerIds = new long[] {0};
+		}
+
 		for (long ldapServerId : ldapServerIds) {
 			importFromLDAP(ldapServerId, companyId);
 		}
