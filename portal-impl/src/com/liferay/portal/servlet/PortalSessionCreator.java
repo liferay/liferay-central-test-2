@@ -14,9 +14,6 @@
 
 package com.liferay.portal.servlet;
 
-import javax.servlet.http.HttpSession;
-import javax.servlet.http.HttpSessionEvent;
-
 import com.liferay.portal.events.EventsProcessorUtil;
 import com.liferay.portal.kernel.events.ActionException;
 import com.liferay.portal.kernel.log.Log;
@@ -24,6 +21,9 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.PortalInitable;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.util.PropsValues;
+
+import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpSessionEvent;
 
 /**
  * <a href="PortalSessionCreator.java.html"><b><i>View Source</i></b></a>
@@ -35,15 +35,20 @@ public class PortalSessionCreator implements PortalInitable {
 	public PortalSessionCreator(HttpSessionEvent event) {
 		_event = event;
 	}
-	
+
 	public void portalInit() {
 		if (PropsValues.SESSION_DISABLED) {
 			return;
 		}
 
-		HttpSession session = _event.getSession();
+		try {
+			HttpSession session = _event.getSession();
 
-		PortalSessionContext.put(session.getId(), session);
+			PortalSessionContext.put(session.getId(), session);
+		}
+		catch (IllegalStateException ise) {
+			_log.warn(ise, ise);
+		}
 
 		// Process session created events
 
@@ -54,7 +59,7 @@ public class PortalSessionCreator implements PortalInitable {
 		}
 		catch (ActionException ae) {
 			_log.error(ae, ae);
-		}	
+		}
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(

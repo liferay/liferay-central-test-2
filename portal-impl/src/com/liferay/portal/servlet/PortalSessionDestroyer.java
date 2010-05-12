@@ -95,7 +95,12 @@ public class PortalSessionDestroyer implements PortalInitable {
 			_log.error(e, e);
 		}
 
-		session.removeAttribute(WebKeys.PORTLET_SESSION_TRACKER);
+		try {
+			session.removeAttribute(WebKeys.PORTLET_SESSION_TRACKER);
+		}
+		catch (IllegalStateException ise) {
+			_log.warn(ise, ise);
+		}
 
 		// Process session destroyed events
 
