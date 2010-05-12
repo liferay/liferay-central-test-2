@@ -20,7 +20,7 @@ Hits results = null;
 AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(typeSelection);
 
 if (searchTerms.isAdvancedSearch()) {
-	results = AssetEntryLocalServiceUtil.search(company.getCompanyId(), new long[] {searchTerms.getGroupId()}, assetRendererFactory.getPortletId(), searchTerms.getTitle(), searchTerms.getDescription(), searchTerms.getUserName(), null, null, searchTerms.isAndOperator(),searchContainer.getStart(), searchContainer.getEnd());
+	results = AssetEntryLocalServiceUtil.search(company.getCompanyId(), new long[] {searchTerms.getGroupId()}, assetRendererFactory.getPortletId(), searchTerms.getUserName(), searchTerms.getTitle(), searchTerms.getDescription(), null, null, searchTerms.isAndOperator(),searchContainer.getStart(), searchContainer.getEnd());
 
 }
 else {

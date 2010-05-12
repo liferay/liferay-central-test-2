@@ -200,6 +200,14 @@ public interface AssetEntryLocalService {
 		int end) throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portal.kernel.search.Hits search(long companyId,
+		long[] groupIds, java.lang.String portletId, java.lang.String userName,
+		java.lang.String title, java.lang.String description,
+		java.lang.String assetCategoryIds, java.lang.String assetTagNames,
+		boolean andSearch, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.asset.model.AssetEntryDisplay[] searchEntryDisplays(
 		long companyId, java.lang.String portletId, java.lang.String keywords,
 		java.lang.String languageId, int start, int end)

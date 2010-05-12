@@ -240,6 +240,17 @@ public class AssetEntryLocalServiceUtil {
 		return getService().search(companyId, portletId, keywords, start, end);
 	}
 
+	public static com.liferay.portal.kernel.search.Hits search(long companyId,
+		long[] groupIds, java.lang.String portletId, java.lang.String userName,
+		java.lang.String title, java.lang.String description,
+		java.lang.String assetCategoryIds, java.lang.String assetTagNames,
+		boolean andSearch, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .search(companyId, groupIds, portletId, userName, title,
+			description, assetCategoryIds, assetTagNames, andSearch, start, end);
+	}
+
 	public static com.liferay.portlet.asset.model.AssetEntryDisplay[] searchEntryDisplays(
 		long companyId, java.lang.String portletId, java.lang.String keywords,
 		java.lang.String languageId, int start, int end)
