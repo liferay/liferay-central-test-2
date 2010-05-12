@@ -70,7 +70,7 @@ import java.util.List;
 import java.util.Set;
 
 <#list referenceList as tempEntity>
-	<#if tempEntity.hasColumns()>
+	<#if tempEntity.hasColumns() && (entity.name == "Counter" || tempEntity.name != "Counter")>
 		import ${tempEntity.packagePath}.service.persistence.${tempEntity.name}Persistence;
 	</#if>
 </#list>
@@ -2412,7 +2412,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 	}
 
 	<#list referenceList as tempEntity>
-		<#if tempEntity.hasColumns()>
+		<#if tempEntity.hasColumns() && (entity.name == "Counter" || tempEntity.name != "Counter")>
 			@BeanReference(type = ${tempEntity.name}Persistence.class)
 			protected ${tempEntity.name}Persistence ${tempEntity.varName}Persistence;
 		</#if>
