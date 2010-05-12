@@ -24,10 +24,15 @@ package com.liferay.counter.service.persistence;
 import com.liferay.counter.model.Counter;
 import com.liferay.counter.model.CounterHolder;
 import com.liferay.counter.model.CounterRegister;
+import com.liferay.counter.model.impl.CounterImpl;
 import com.liferay.portal.kernel.concurrent.CompeteLatch;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
+import com.liferay.portal.kernel.dao.orm.LockMode;
 import com.liferay.portal.kernel.dao.orm.ObjectNotFoundException;
+import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
@@ -53,7 +58,6 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class CounterFinderImpl
 	extends BasePersistenceImpl<Dummy> implements CounterFinder {
-
 	public List<String> getNames() throws SystemException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -143,18 +147,17 @@ public class CounterFinderImpl
 		CounterRegister counterRegister = getCounterRegister(name);
 
 		synchronized (counterRegister) {
-			Connection connection = null;
-			PreparedStatement preparedStatement = null;
+			Session session = null;
 
 			try {
-				connection = getConnection();
+				session = openSession();
 
-				preparedStatement = connection.prepareStatement(
-					_SQL_DELETE_BY_NAME);
+                Counter counter = (Counter) session.get(
+                    CounterImpl.class, name);
 
-				preparedStatement.setString(1, name);
+                session.delete(counter);
 
-				preparedStatement.executeUpdate();
+                session.flush();
 			}
 			catch (ObjectNotFoundException onfe) {
 			}
@@ -162,7 +165,7 @@ public class CounterFinderImpl
 				throw processException(e);
 			}
 			finally {
-				DataAccess.cleanUp(connection, preparedStatement);
+				closeSession(session);
 			}
 
 			_counterRegisterMap.remove(name);
@@ -185,7 +188,6 @@ public class CounterFinderImpl
 		throws SystemException {
 
 		long rangeMin = -1;
-		long rangeMax = -1;
 		int rangeSize = getRangeSize(name);
 
 		Connection connection = null;
@@ -202,32 +204,12 @@ public class CounterFinderImpl
 
 			resultSet = preparedStatement.executeQuery();
 
-			if (resultSet.next()) {
-				rangeMin = resultSet.getLong(1);
-
-				if (size > rangeMin) {
-					rangeMin = size;
-				}
-
-				rangeMax = rangeMin + rangeSize;
-
-				resultSet.close();
-				preparedStatement.close();
-
-				preparedStatement = connection.prepareStatement(
-					_SQL_UPDATE_ID_BY_NAME);
-
-				preparedStatement.setLong(1, rangeMax);
-				preparedStatement.setString(2, name);
-			}
-			else {
+			if (!resultSet.next()) {
 				rangeMin = _DEFAULT_CURRENT_ID;
 
 				if (size > rangeMin) {
 					rangeMin = size;
 				}
-
-				rangeMax = rangeMin + rangeSize;
 
 				resultSet.close();
 				preparedStatement.close();
@@ -235,10 +217,10 @@ public class CounterFinderImpl
 				preparedStatement = connection.prepareStatement(_SQL_INSERT);
 
 				preparedStatement.setString(1, name);
-				preparedStatement.setLong(2, rangeMax);
-			}
+				preparedStatement.setLong(2, rangeMin);
 
-			preparedStatement.executeUpdate();
+			    preparedStatement.executeUpdate();
+			}
 		}
 		catch (Exception e) {
 			throw processException(e);
@@ -247,7 +229,9 @@ public class CounterFinderImpl
 			DataAccess.cleanUp(connection, preparedStatement, resultSet);
 		}
 
-		return new CounterRegister(name, rangeMin, rangeMax, rangeSize);
+        CounterHolder holder = _obtainIncrement(name, rangeSize, size);
+
+        return new CounterRegister(name, holder, rangeSize);
 	}
 
 	protected Connection getConnection() throws SQLException {
@@ -342,10 +326,6 @@ public class CounterFinderImpl
 
 		// Winner thread
 
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
-		ResultSet resultSet = null;
-
 		try {
 
 			// Double check
@@ -354,43 +334,21 @@ public class CounterFinderImpl
 			newValue = counterHolder.addAndGet(size);
 
 			if (newValue > counterHolder.getRangeMax()) {
-				connection = getConnection();
 
-				preparedStatement = connection.prepareStatement(
-					_SQL_SELECT_ID_BY_NAME);
+                CounterHolder holder =
+                    _obtainIncrement(
+                        counterRegister.getName(),
+                        counterRegister.getRangeSize(), 0);
 
-				preparedStatement.setString(1, counterRegister.getName());
+			    newValue = holder.addAndGet(size);
 
-				resultSet = preparedStatement.executeQuery();
-
-				resultSet.next();
-
-				long currentId = resultSet.getLong(1);
-
-				newValue = currentId + 1;
-				long rangeMax = currentId + counterRegister.getRangeSize();
-
-				resultSet.close();
-				preparedStatement.close();
-
-				preparedStatement = connection.prepareStatement(
-					_SQL_UPDATE_ID_BY_NAME);
-
-				preparedStatement.setLong(1, rangeMax);
-				preparedStatement.setString(2, counterRegister.getName());
-
-				preparedStatement.executeUpdate();
-
-				counterRegister.setCounterHolder(
-					new CounterHolder(newValue, rangeMax));
+				counterRegister.setCounterHolder(holder);
 			}
 		}
 		catch (Exception e) {
 			throw processException(e);
 		}
 		finally {
-			DataAccess.cleanUp(connection, preparedStatement, resultSet);
-
 			// Winner thread opens the latch so that loser threads can continue
 
 			completeLatch.done();
@@ -398,6 +356,44 @@ public class CounterFinderImpl
 
 		return newValue;
 	}
+
+    private CounterHolder _obtainIncrement(
+        String counterName, long range, long minimum)
+        throws SystemException {
+
+        Session session = null;
+
+        try {
+            session = openSession();
+
+            Counter counter = (Counter) session.get(
+                CounterImpl.class, counterName, LockMode.UPGRADE);
+
+            long newValue = counter.getCurrentId();
+
+            if (minimum > newValue) {
+                newValue = minimum;
+            }
+
+            long rangeMax = newValue + range;
+
+            counter.setCurrentId(rangeMax);
+
+            CounterHolder counterHolder = new CounterHolder(newValue, rangeMax);
+
+            session.saveOrUpdate(counter);
+
+            session.flush();
+
+            return counterHolder;
+        }
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+            closeSession(session);
+		}
+    }
 
 	private static final int _DEFAULT_CURRENT_ID = 0;
 
@@ -428,4 +424,5 @@ public class CounterFinderImpl
 	private Map<String, Integer> _rangeSizeMap =
 		new ConcurrentHashMap<String, Integer>();
 
+    private static Log _log = LogFactoryUtil.getLog(CounterFinderImpl.class);
 }
