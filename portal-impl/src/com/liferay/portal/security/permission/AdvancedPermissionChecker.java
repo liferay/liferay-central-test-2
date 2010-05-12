@@ -17,6 +17,8 @@ package com.liferay.portal.security.permission;
 import com.liferay.portal.NoSuchResourceException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.ArrayUtil;
+import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
@@ -50,6 +52,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.commons.lang.time.StopWatch;
 
@@ -72,10 +75,69 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 		}
 
 		if (bag != null) {
-			return bag.getRoleIds();
+			if (checkGuest) {
+				Set<Long> roleIds = SetUtil.fromArray(bag.getRoleIds());
+
+				try {
+					PermissionCheckerBag guestBag = getGuestUserBag();
+
+					if (guestBag != null) {
+						roleIds.addAll(
+							SetUtil.fromArray(guestBag.getRoleIds()));
+					}
+				}
+				catch (Exception e) {
+				}
+
+				return ArrayUtil.toArray(
+					roleIds.toArray(new Long[roleIds.size()]));
+			}
+			else {
+				return bag.getRoleIds();
+			}
 		}
 
 		return PermissionChecker.DEFAULT_ROLE_IDS;
+	}
+
+	public PermissionCheckerBag getGuestUserBag()
+		throws Exception {
+
+		Group guestGroup = GroupLocalServiceUtil.getGroup(
+			getCompanyId(), GroupConstants.GUEST);
+
+		PermissionCheckerBag bag = PermissionCacheUtil.getBag(
+			defaultUserId, guestGroup.getGroupId());
+
+		if (bag == null) {
+			try {
+				List<Group> groups = new ArrayList<Group>();
+
+				groups.add(guestGroup);
+
+				List<Role> roles = RoleLocalServiceUtil.getUserRelatedRoles(
+					defaultUserId, groups);
+
+				bag = new PermissionCheckerBagImpl(
+					defaultUserId, new ArrayList<Group>(),
+					new ArrayList<Organization>(), new ArrayList<Group>(),
+					new ArrayList<Group>(), new ArrayList<Group>(), roles);
+			}
+			finally {
+				if (bag == null) {
+					bag = new PermissionCheckerBagImpl(
+						defaultUserId, new ArrayList<Group>(),
+						new ArrayList<Organization>(), new ArrayList<Group>(),
+						new ArrayList<Group>(), new ArrayList<Group>(),
+						new ArrayList<Role>());
+				}
+
+				PermissionCacheUtil.putBag(
+					defaultUserId, guestGroup.getGroupId(), bag);
+			}
+		}
+
+		return bag;
 	}
 
 	public PermissionCheckerBag getUserBag(long userId, long groupId)
@@ -160,7 +222,7 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 
 				if ((group != null) &&
 					((group.isCommunity() && userGroups.contains(group)) ||
-					 (group.isOrganization() &&
+					(group.isOrganization() &&
 						userOrgGroups.contains(group)))) {
 
 					addRequiredMemberRole(group, roles);
@@ -549,39 +611,7 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 		List<Resource> resources = getResources(
 			companyId, groupId, name, primKey, actionId);
 
-		Group guestGroup = GroupLocalServiceUtil.getGroup(
-			companyId, GroupConstants.GUEST);
-
-		PermissionCheckerBag bag = PermissionCacheUtil.getBag(
-			defaultUserId, guestGroup.getGroupId());
-
-		if (bag == null) {
-			try {
-				List<Group> groups = new ArrayList<Group>();
-
-				groups.add(guestGroup);
-
-				List<Role> roles = RoleLocalServiceUtil.getUserRelatedRoles(
-					defaultUserId, groups);
-
-				bag = new PermissionCheckerBagImpl(
-					defaultUserId, new ArrayList<Group>(),
-					new ArrayList<Organization>(), new ArrayList<Group>(),
-					new ArrayList<Group>(), new ArrayList<Group>(), roles);
-			}
-			finally {
-				if (bag == null) {
-					bag = new PermissionCheckerBagImpl(
-						defaultUserId, new ArrayList<Group>(),
-						new ArrayList<Organization>(), new ArrayList<Group>(),
-						new ArrayList<Group>(), new ArrayList<Group>(),
-						new ArrayList<Role>());
-				}
-
-				PermissionCacheUtil.putBag(
-					defaultUserId, guestGroup.getGroupId(), bag);
-			}
-		}
+		PermissionCheckerBag bag = getGuestUserBag();
 
 		try {
 			return PermissionLocalServiceUtil.hasUserPermissions(
