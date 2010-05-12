@@ -159,49 +159,143 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 		<liferay-ui:panel-container cssClass="message-boards-panels" extended="<%= false %>" id="messageBoardsPanelContainer" persistState="<%= true %>">
 
 			<%
-			int totalCategories = MBCategoryServiceUtil.getCategoriesCount(scopeGroupId, categoryId);
+			List<String> headerNames = new ArrayList<String>();
+
+			headerNames.add("category");
+			headerNames.add("categories");
+			headerNames.add("threads");
+			headerNames.add("posts");
+			headerNames.add(StringPool.BLANK);
+
+			SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, "cur1", SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
+
+			List results = categoryDisplay.getCategories();
+
+			int total = results.size();
+
+			searchContainer.setTotal(total);
+
+			results = ListUtil.subList(results, searchContainer.getStart(), searchContainer.getEnd());
+
+			searchContainer.setResults(results);
+
+			List resultRows = searchContainer.getResultRows();
+
+			for (int i = 0; i < results.size(); i++) {
+				MBCategory curCategory = (MBCategory)results.get(i);
+
+				curCategory = curCategory.toEscapedModel();
+
+				ResultRow row = new ResultRow(new Object[] {curCategory, categorySubscriptionClassPKs}, curCategory.getCategoryId(), i);
+
+				boolean restricted = !MBCategoryPermission.contains(permissionChecker, curCategory, ActionKeys.VIEW);
+
+				row.setRestricted(restricted);
+
+				PortletURL rowURL = renderResponse.createRenderURL();
+
+				rowURL.setParameter("struts_action", "/message_boards/view");
+				rowURL.setParameter("mbCategoryId", String.valueOf(curCategory.getCategoryId()));
+
+				// Name and description
+
+				StringBundler sb = new StringBundler();
+
+				if (!restricted) {
+					sb.append("<a href=\"");
+					sb.append(rowURL);
+					sb.append("\">");
+				}
+
+				sb.append("<strong>");
+				sb.append(curCategory.getName());
+				sb.append("</strong>");
+
+				if (Validator.isNotNull(curCategory.getDescription())) {
+					sb.append("<br />");
+					sb.append(curCategory.getDescription());
+				}
+
+				if (!restricted) {
+					sb.append("</a>");
+
+					List subcategories = categoryDisplay.getCategories(curCategory);
+
+					int subcategoriesCount = subcategories.size();
+
+					subcategories = ListUtil.subList(subcategories, 0, 5);
+
+					if (subcategoriesCount > 0) {
+						sb.append("<br /><span class=\"subcategories\">");
+						sb.append(LanguageUtil.get(pageContext, "subcategories"));
+						sb.append("</span>: ");
+
+						for (int j = 0; j < subcategories.size(); j++) {
+							MBCategory subcategory = (MBCategory)subcategories.get(j);
+
+							rowURL.setParameter("mbCategoryId", String.valueOf(subcategory.getCategoryId()));
+
+							sb.append("<a href=\"");
+							sb.append(rowURL);
+							sb.append("\">");
+							sb.append(subcategory.getName());
+							sb.append("</a>");
+
+							if ((j + 1) < subcategories.size()) {
+								sb.append(", ");
+							}
+						}
+
+						if (subcategoriesCount > subcategories.size()) {
+							rowURL.setParameter("mbCategoryId", String.valueOf(curCategory.getCategoryId()));
+
+							sb.append(", <a href=\"");
+							sb.append(rowURL);
+							sb.append("\">");
+							sb.append(LanguageUtil.get(pageContext, "more"));
+							sb.append(" &raquo;");
+							sb.append("</a>");
+						}
+
+						rowURL.setParameter("mbCategoryId", String.valueOf(curCategory.getCategoryId()));
+					}
+				}
+
+				row.addText(sb.toString());
+
+				// Statistics
+
+				int categoriesCount = categoryDisplay.getSubcategoriesCount(curCategory);
+				int threadsCount = categoryDisplay.getSubcategoriesThreadsCount(curCategory);
+				int messagesCount = categoryDisplay.getSubcategoriesMessagesCount(curCategory);
+
+				row.addText(String.valueOf(categoriesCount), rowURL);
+				row.addText(String.valueOf(threadsCount), rowURL);
+				row.addText(String.valueOf(messagesCount), rowURL);
+
+				// Action
+
+				if (restricted) {
+					row.addText(StringPool.BLANK);
+				}
+				else {
+					row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/message_boards/category_action.jsp");
+				}
+
+				// Add result row
+
+				resultRows.add(row);
+			}
 			%>
 
-			<c:if test="<%= totalCategories > 0 %>">
+			<c:if test="<%= total > 0 %>">
 				<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="messageBoardsCategoriesPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, category != null ? "subcategories" : "categories") %>'>
-
-					<liferay-ui:search-container
-						curParam="cur1"
-						deltaConfigurable="<%= false %>"
-						headerNames='<%= "category,categories,threads,posts" %>'
-						iteratorURL="<%= portletURL %>"
-					>
-						<liferay-ui:search-container-results
-							results="<%= MBCategoryServiceUtil.getCategories(scopeGroupId, categoryId, searchContainer.getStart(), searchContainer.getEnd()) %>"
-							total="<%= totalCategories %>"
-						/>
-
-						<liferay-ui:search-container-row
-							className="com.liferay.portlet.messageboards.model.MBCategory"
-							escapedModel="<%= true %>"
-							keyProperty="categoryId"
-							modelVar="curCategory"
-						>
-
-							<liferay-ui:search-container-row-parameter name="categorySubscriptionClassPKs" value="<%= categorySubscriptionClassPKs %>" />
-
-							<liferay-portlet:renderURL varImpl="rowURL">
-								<portlet:param name="struts_action" value="/message_boards/view" />
-								<portlet:param name="mbCategoryId" value="<%= String.valueOf(curCategory.getCategoryId()) %>" />
-							</liferay-portlet:renderURL>
-
-							<%@ include file="/html/portlet/message_boards/category_columns.jspf" %>
-
-						</liferay-ui:search-container-row>
-
-						<liferay-ui:search-iterator />
-					</liferay-ui:search-container>
-
+					<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 				</liferay-ui:panel>
 			</c:if>
 
 			<%
-			List<String> headerNames = new ArrayList<String>();
+			headerNames = new ArrayList<String>();
 
 			headerNames.add("thread");
 			headerNames.add("status");
@@ -211,17 +305,17 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 			headerNames.add("last-post");
 			headerNames.add(StringPool.BLANK);
 
-			SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, "cur2", SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
+			searchContainer = new SearchContainer(renderRequest, null, null, "cur2", SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
 
-			int total = MBThreadLocalServiceUtil.getThreadsCount(scopeGroupId, categoryId, WorkflowConstants.STATUS_APPROVED);
+			total = MBThreadLocalServiceUtil.getThreadsCount(scopeGroupId, categoryId, WorkflowConstants.STATUS_APPROVED);
 
 			searchContainer.setTotal(total);
 
-			List results = MBThreadLocalServiceUtil.getThreads(scopeGroupId, categoryId, WorkflowConstants.STATUS_APPROVED, searchContainer.getStart(), searchContainer.getEnd());
+			results = MBThreadLocalServiceUtil.getThreads(scopeGroupId, categoryId, WorkflowConstants.STATUS_APPROVED, searchContainer.getStart(), searchContainer.getEnd());
 
 			searchContainer.setResults(results);
 
-			List resultRows = searchContainer.getResultRows();
+			resultRows = searchContainer.getResultRows();
 
 			for (int i = 0; i < results.size(); i++) {
 				MBThread thread = (MBThread)results.get(i);
@@ -370,6 +464,10 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 			</div>
 		</c:if>
 
+		<%
+		int totalCategories = 0;
+		%>
+
 		<c:if test='<%= topLink.equals("my-subscriptions") %>'>
 
 			<%
@@ -383,11 +481,13 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 
 			SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, "cur1", SearchContainer.DEFAULT_DELTA, portletURL, headerNames, "you-are-not-subscribed-to-any-categories");
 
-			int total = MBCategoryServiceUtil.getSubscribedCategoriesCount(scopeGroupId, user.getUserId());
+			int total = MBCategoryLocalServiceUtil.getSubscribedCategoriesCount(scopeGroupId, user.getUserId());
 
 			searchContainer.setTotal(total);
 
-			List results = MBCategoryServiceUtil.getSubscribedCategories(scopeGroupId, user.getUserId(), searchContainer.getStart(), searchContainer.getEnd());
+			totalCategories = total;
+
+			List results = MBCategoryLocalServiceUtil.getSubscribedCategories(scopeGroupId, user.getUserId(), searchContainer.getStart(), searchContainer.getEnd());
 
 			searchContainer.setResults(results);
 
@@ -398,9 +498,7 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 
 				curCategory = curCategory.toEscapedModel();
 
-				ResultRow row = new ResultRow(curCategory, curCategory.getCategoryId(), i);
-
-				row.setParameter("categorySubscriptionClassPKs", categorySubscriptionClassPKs);
+				ResultRow row = new ResultRow(new Object[] {curCategory, categorySubscriptionClassPKs}, curCategory.getCategoryId(), i);
 
 				boolean restricted = !MBCategoryPermission.contains(permissionChecker, curCategory, ActionKeys.VIEW);
 
