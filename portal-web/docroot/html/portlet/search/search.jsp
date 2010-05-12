@@ -204,6 +204,17 @@ if (Validator.isNotNull(primarySearch)) {
 				StringBundler rowSB = new StringBundler();
 
 				if (portlet.getPortletId().equals(PortletKeys.JOURNAL)) {
+					// LPS-3206
+
+					long articleGroupId = GetterUtil.getLong(HttpUtil.getParameter(entryHref, "groupId", false));
+					String articleId = GetterUtil.getString(HttpUtil.getParameter(entryHref, "articleId", false));
+
+					JournalArticle article = JournalArticleLocalServiceUtil.getArticle(articleGroupId, articleId);
+
+					if (Validator.isNotNull(article) && DateUtil.compareTo(article.getDisplayDate(), new Date()) > 0) {
+						continue;
+					}
+
 					rowSB.append("<a class=\"entry-title\" href=\"");
 					rowSB.append(entryHref);
 					rowSB.append("\" target=\"_blank\">");
