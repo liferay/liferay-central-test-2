@@ -31,10 +31,12 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.StringUtil_IW;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.util.Validator_IW;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.model.ModelHintsUtil;
+import com.liferay.portal.security.permission.ResourceActionsUtil_IW;
 import com.liferay.portal.tools.SourceFormatter;
 import com.liferay.portal.util.InitUtil;
 import com.liferay.portal.util.PropsValues;
@@ -3855,15 +3857,15 @@ public class ServiceBuilder {
 		context.put(
 			"modelHintsUtil",
 			staticModels.get("com.liferay.portal.model.ModelHintsUtil"));
+		context.put(
+			"resourceActionsUtil", ResourceActionsUtil_IW.getInstance());
 		context.put("stringUtil", StringUtil_IW.getInstance());
 		context.put("system", staticModels.get("java.lang.System"));
 		context.put("tempMap", wrapper.wrap(new HashMap<String, Object>()));
 		context.put(
 			"textFormatter",
 			staticModels.get("com.liferay.util.TextFormatter"));
-		context.put(
-			"validator",
-			staticModels.get("com.liferay.portal.kernel.util.Validator"));
+		context.put("validator", Validator_IW.getInstance());
 
 		return context;
 	}

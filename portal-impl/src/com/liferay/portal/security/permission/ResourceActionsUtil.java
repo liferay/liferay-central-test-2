@@ -15,6 +15,7 @@
 package com.liferay.portal.security.permission;
 
 import com.liferay.portal.NoSuchResourceActionException;
+import com.liferay.portal.kernel.bean.BeanLocatorException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
@@ -45,6 +46,7 @@ import com.liferay.portal.service.ResourceActionLocalServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.PortletResourceBundles;
 import com.liferay.portlet.expando.model.ExpandoColumn;
@@ -397,6 +399,10 @@ public class ResourceActionsUtil {
 		String name) {
 
 		return _instance._getSocialEquityActionMappings(name);
+	}
+
+	public static boolean hasModelResourceActions(String name) {
+		return _instance._hasModelResourceActions(name);
 	}
 
 	public static void init() {
@@ -785,6 +791,17 @@ public class ResourceActionsUtil {
 		return socialEquityActionMappingList;
 	}
 
+	private boolean _hasModelResourceActions(String name) {
+		List<String> actions = _modelResourceActions.get(name);
+
+		if ((actions != null) && !actions.isEmpty()) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	private void _init() {
 	}
 
@@ -838,10 +855,13 @@ public class ResourceActionsUtil {
 			_read(servletContextName, classLoader, extFile);
 		}
 
-		for (Element portletResourceElement :
-				rootElement.elements("portlet-resource")) {
+		if (PropsValues.RESOURCE_ACTIONS_READ_PORTLET_RESOURCES) {
+			for (Element portletResourceElement :
+					rootElement.elements("portlet-resource")) {
 
-			_readPortletResource(servletContextName, portletResourceElement);
+				_readPortletResource(
+					servletContextName, portletResourceElement);
+			}
 		}
 
 		for (Element modelResourceElement :

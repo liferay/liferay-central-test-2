@@ -1291,6 +1291,8 @@ public interface PropsKeys {
 
 	public static final String RESOURCE_ACTIONS_CONFIGS = "resource.actions.configs";
 
+	public static final String RESOURCE_ACTIONS_READ_PORTLET_RESOURCES = "resource.actions.read.portlet.resources";
+
 	public static final String RESOURCE_REPOSITORIES_ROOT = "resource.repositories.root";
 
 	public static final String ROLES_COMMUNITY_SUBTYPES = "roles.community.subtypes";
