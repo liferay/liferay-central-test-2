@@ -27,6 +27,7 @@ public class PortletDataHandlerChoice extends PortletDataHandlerControl {
 
 	public PortletDataHandlerChoice(
 		String namespace, String controlName, int defaultChoice) {
+
 		this(namespace, controlName, defaultChoice, _DEFAULT_CHOICES);
 	}
 
