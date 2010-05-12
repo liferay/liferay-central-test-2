@@ -16,19 +16,18 @@
 
 <%
 Hits results = null;
-int total = 0;
 
 AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(typeSelection);
 
 if (searchTerms.isAdvancedSearch()) {
-	results = AssetEntryLocalServiceUtil.search(company.getCompanyId(), new long[]{searchTerms.getGroupId()}, assetRendererFactory.getPortletId(), searchTerms.getTitle(), searchTerms.getDescription(), searchTerms.getUserName(), null, null, searchTerms.isAndOperator(),searchContainer.getStart(), searchContainer.getEnd());
+	results = AssetEntryLocalServiceUtil.search(company.getCompanyId(), new long[] {searchTerms.getGroupId()}, assetRendererFactory.getPortletId(), searchTerms.getTitle(), searchTerms.getDescription(), searchTerms.getUserName(), null, null, searchTerms.isAndOperator(),searchContainer.getStart(), searchContainer.getEnd());
 
 }
 else {
 	results = AssetEntryLocalServiceUtil.search(company.getCompanyId(), assetRendererFactory.getPortletId(), searchTerms.getKeywords(), searchContainer.getStart(), searchContainer.getEnd());
 }
 
-total = results.getLength();
+int total = results.getLength();
 
 searchContainer.setTotal(total);
 %>

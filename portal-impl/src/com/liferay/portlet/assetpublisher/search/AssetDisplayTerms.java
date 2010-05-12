@@ -16,8 +16,6 @@ package com.liferay.portlet.assetpublisher.search;
 
 import com.liferay.portal.kernel.dao.search.DisplayTerms;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.WebKeys;
 
 import javax.portlet.PortletRequest;
 
@@ -29,24 +27,25 @@ import javax.portlet.PortletRequest;
  */
 public class AssetDisplayTerms extends DisplayTerms {
 
+	public static final String DESCRIPTION = "description";
+
 	public static final String GROUP_ID = "groupId";
 
 	public static final String TITLE = "title";
-
-	public static final String DESCRIPTION = "description";
 
 	public static final String USER_NAME = "user-name";
 
 	public AssetDisplayTerms(PortletRequest portletRequest) {
 		super(portletRequest);
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
+		description = ParamUtil.getString(portletRequest, DESCRIPTION);
 		groupId = ParamUtil.getLong(portletRequest, GROUP_ID);
 		title = ParamUtil.getString(portletRequest, TITLE);
-		description = ParamUtil.getString(portletRequest, DESCRIPTION);
 		userName = ParamUtil.getString(portletRequest, USER_NAME);
+	}
+
+	public String getDescription() {
+		return description;
 	}
 
 	public long getGroupId() {
@@ -57,17 +56,13 @@ public class AssetDisplayTerms extends DisplayTerms {
 		return title;
 	}
 
-	public String getDescription() {
-		return description;
-	}
-
 	public String getUserName() {
 		return userName;
 	}
 
+	protected String description;
 	protected long groupId;
 	protected String title;
-	protected String description;
 	protected String userName;
 
 }

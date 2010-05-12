@@ -16,8 +16,6 @@ package com.liferay.portlet.assetpublisher.search;
 
 import com.liferay.portal.kernel.dao.search.DAOParamUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.WebKeys;
 
 import javax.portlet.PortletRequest;
 
@@ -32,12 +30,9 @@ public class AssetSearchTerms extends AssetDisplayTerms {
 	public AssetSearchTerms(PortletRequest portletRequest) {
 		super(portletRequest);
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
+		description = DAOParamUtil.getLike(portletRequest, DESCRIPTION);
 		groupId = ParamUtil.getLong(portletRequest, GROUP_ID);
 		title = DAOParamUtil.getLike(portletRequest, TITLE);
-		description = DAOParamUtil.getLike(portletRequest, DESCRIPTION);
 		userName = DAOParamUtil.getLike(portletRequest, USER_NAME);
 	}
 

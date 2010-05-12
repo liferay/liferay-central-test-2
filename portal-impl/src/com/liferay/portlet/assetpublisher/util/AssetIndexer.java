@@ -48,25 +48,20 @@ public class AssetIndexer extends BaseIndexer {
 		return null;
 	}
 
-	protected void doDelete(Object obj) throws Exception {
-
+	protected void doDelete(Object obj) {
 	}
 
-	protected Document doGetDocument(Object obj) throws Exception {
-
+	protected Document doGetDocument(Object obj) {
 		return null;
 	}
 
-	protected void doReindex(Object obj) throws Exception {
-
+	protected void doReindex(Object obj) {
 	}
 
-	protected void doReindex(String className, long classPK) throws Exception {
-
+	protected void doReindex(String className, long classPK) {
 	}
 
-	protected void doReindex(String[] ids) throws Exception {
-
+	protected void doReindex(String[] ids) {
 	}
 
 	protected String getPortletId(SearchContext searchContext) {
@@ -87,17 +82,6 @@ public class AssetIndexer extends BaseIndexer {
 			andSearch = Boolean.TRUE;
 		}
 
-		String title = (String)searchContext.getAttribute(Field.TITLE);
-
-		if (Validator.isNotNull(title)) {
-			if (andSearch) {
-				searchQuery.addRequiredTerm(Field.TITLE, title, true);
-			}
-			else {
-				searchQuery.addTerm(Field.TITLE, title, true);
-			}
-		}
-
 		String description = (String)searchContext.getAttribute(
 			Field.DESCRIPTION);
 
@@ -108,6 +92,17 @@ public class AssetIndexer extends BaseIndexer {
 			}
 			else {
 				searchQuery.addTerm(Field.DESCRIPTION, description, true);
+			}
+		}
+
+		String title = (String)searchContext.getAttribute(Field.TITLE);
+
+		if (Validator.isNotNull(title)) {
+			if (andSearch) {
+				searchQuery.addRequiredTerm(Field.TITLE, title, true);
+			}
+			else {
+				searchQuery.addTerm(Field.TITLE, title, true);
 			}
 		}
 

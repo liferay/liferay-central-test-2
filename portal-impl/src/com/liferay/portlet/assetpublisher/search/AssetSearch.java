@@ -15,6 +15,7 @@
 package com.liferay.portlet.assetpublisher.search;
 
 import com.liferay.portal.kernel.dao.search.SearchContainer;
+import com.liferay.portlet.asset.model.AssetEntry;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +29,7 @@ import javax.portlet.PortletURL;
  * @author Brian Wing Shun Chan
  * @author Julio Camarero
  */
-public class AssetSearch extends SearchContainer {
+public class AssetSearch extends SearchContainer<AssetEntry> {
 
 	static List<String> headerNames = new ArrayList<String>();
 
@@ -54,13 +55,12 @@ public class AssetSearch extends SearchContainer {
 			(AssetDisplayTerms)getDisplayTerms();
 
 		iteratorURL.setParameter(
+			AssetDisplayTerms.DESCRIPTION, displayTerms.getDescription());
+		iteratorURL.setParameter(
 			AssetDisplayTerms.GROUP_ID,
 			String.valueOf(displayTerms.getGroupId()));
-
 		iteratorURL.setParameter(
 			AssetDisplayTerms.TITLE, displayTerms.getTitle());
-		iteratorURL.setParameter(
-			AssetDisplayTerms.DESCRIPTION, displayTerms.getDescription());
 		iteratorURL.setParameter(
 			AssetDisplayTerms.USER_NAME, displayTerms.getUserName());
 	}

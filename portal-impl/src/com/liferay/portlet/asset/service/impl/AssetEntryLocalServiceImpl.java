@@ -322,9 +322,9 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 		try {
 			SearchContext searchContext = new SearchContext();
 
-			searchContext.setKeywords(keywords);
 			searchContext.setCompanyId(companyId);
 			searchContext.setEnd(end);
+			searchContext.setKeywords(keywords);
 			searchContext.setPortletIds(getPortletIds(portletId));
 			searchContext.setStart(start);
 
@@ -348,8 +348,8 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 				new HashMap<String, Serializable>();
 
 			attributes.put("andSearch", andSearch);
-			attributes.put(Field.TITLE, title);
 			attributes.put(Field.DESCRIPTION, description);
+			attributes.put(Field.TITLE, title);
 			attributes.put(Field.USER_NAME, userName);
 
 			SearchContext searchContext = new SearchContext();
@@ -808,19 +808,19 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 		return entryDisplays;
 	}
 
-	private String[] getPortletIds (String portletId) {
+	private String[] getPortletIds(String portletId) {
 		if (Validator.isNotNull(portletId)) {
-			return new String[]{portletId};
+			return new String[] {portletId};
 		}
 		else {
 			List<AssetRendererFactory> rendererFactories =
-				AssetRendererFactoryRegistryUtil.
-					getAssetRendererFactories();
+				AssetRendererFactoryRegistryUtil.getAssetRendererFactories();
 
 			String[] portletIds = new String[rendererFactories.size()];
 
 			for (int i = 0; i < rendererFactories.size(); i++) {
 				AssetRendererFactory rendererFactory = rendererFactories.get(i);
+
 				portletIds[i] = rendererFactory.getPortletId();
 			}
 
