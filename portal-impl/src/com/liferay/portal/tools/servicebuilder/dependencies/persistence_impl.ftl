@@ -104,21 +104,6 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 				"findBy${finder.name}",
 				new String[] {
 					<#list finderColsList as finderCol>
-						${serviceBuilder.getPrimitiveObj("${finderCol.type}")}.class.getName()
-
-						<#if finderCol_has_next>
-							,
-						</#if>
-					</#list>
-				});
-
-			public static final FinderPath FINDER_PATH_FIND_BY_OBC_${finder.name?upper_case} = new FinderPath(
-				${entity.name}ModelImpl.ENTITY_CACHE_ENABLED,
-				${entity.name}ModelImpl.FINDER_CACHE_ENABLED,
-				FINDER_CLASS_NAME_LIST,
-				"findBy${finder.name}",
-				new String[] {
-					<#list finderColsList as finderCol>
 						${serviceBuilder.getPrimitiveObj("${finderCol.type}")}.class.getName(),
 					</#list>
 
@@ -723,95 +708,13 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 			</#list>
 
 			) throws SystemException {
-				Object[] finderArgs = new Object[] {
-					<#list finderColsList as finderCol>
-						<#if finderCol.isPrimitiveType()>
-							<#if finderCol.type == "boolean">
-								Boolean.valueOf(
-							<#else>
-								new ${serviceBuilder.getPrimitiveObj("${finderCol.type}")}(
-							</#if>
-						</#if>
+				return findBy${finder.name}(
 
-						${finderCol.name}
+				<#list finderColsList as finderCol>
+					${finderCol.name},
+				</#list>
 
-						<#if finderCol.isPrimitiveType()>
-							)
-						</#if>
-
-						<#if finderCol_has_next>
-							,
-						</#if>
-					</#list>
-				};
-
-				List<${entity.name}> list = (List<${entity.name}>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_${finder.name?upper_case}, finderArgs, this);
-
-				if (list == null) {
-					Session session = null;
-
-					try {
-						session = openSession();
-
-						StringBundler query = new StringBundler(<#if entity.getOrder()??>${finderColsList?size + 2}<#else>${finderColsList?size + 1}</#if>);
-
-						query.append(_SQL_SELECT_${entity.alias?upper_case}_WHERE);
-
-						<#include "persistence_impl_finder_col.ftl">
-
-						<#if entity.getOrder()??>
-							query.append(${entity.name}ModelImpl.ORDER_BY_JPQL);
-						</#if>
-
-						String sql = query.toString();
-
-						Query q = session.createQuery(sql);
-
-						QueryPos qPos = QueryPos.getInstance(q);
-
-						<#list finderColsList as finderCol>
-							<#if !finderCol.isPrimitiveType()>
-								if (${finderCol.name} != null) {
-							</#if>
-
-							qPos.add(
-
-							<#if finderCol.type == "Date">
-								CalendarUtil.getTimestamp(
-							</#if>
-
-							${finderCol.name}${serviceBuilder.getPrimitiveObjValue("${finderCol.type}")}
-
-							<#if finderCol.type == "Date">
-								)
-							</#if>
-
-							);
-
-							<#if !finderCol.isPrimitiveType()>
-								}
-							</#if>
-						</#list>
-
-						list = q.list();
-					}
-					catch (Exception e) {
-						throw processException(e);
-					}
-					finally {
-						if (list == null) {
-							list = new ArrayList<${entity.name}>();
-						}
-
-						cacheResult(list);
-
-						FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_${finder.name?upper_case}, finderArgs, list);
-
-						closeSession(session);
-					}
-				}
-
-				return list;
+				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 			}
 
 			public List<${entity.name}> findBy${finder.name}(
@@ -859,7 +762,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 					String.valueOf(start), String.valueOf(end), String.valueOf(orderByComparator)
 				};
 
-				List<${entity.name}> list = (List<${entity.name}>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_${finder.name?upper_case}, finderArgs, this);
+				List<${entity.name}> list = (List<${entity.name}>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_${finder.name?upper_case}, finderArgs, this);
 
 				if (list == null) {
 					Session session = null;
@@ -932,7 +835,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 						cacheResult(list);
 
-						FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_${finder.name?upper_case}, finderArgs, list);
+						FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_${finder.name?upper_case}, finderArgs, list);
 
 						closeSession(session);
 					}
