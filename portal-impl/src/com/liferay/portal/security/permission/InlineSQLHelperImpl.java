@@ -63,8 +63,7 @@ public class InlineSQLHelperImpl implements InlineSQLHelper {
 		}
 
 		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM != 6) {
-			return StringUtil.replace(
-				sql, "[$PERMISSION_JOIN$]", StringPool.BLANK);
+			return sql;
 		}
 
 		PermissionChecker permissionChecker =
@@ -73,8 +72,7 @@ public class InlineSQLHelperImpl implements InlineSQLHelper {
 		if (permissionChecker.isCommunityAdmin(groupId) ||
 			permissionChecker.isCommunityOwner(groupId)) {
 
-			return StringUtil.replace(
-				sql, "[$PERMISSION_JOIN$]", StringPool.BLANK);
+			return sql;
 		}
 
 		String permissionJoin = StringPool.BLANK;
@@ -110,7 +108,21 @@ public class InlineSQLHelperImpl implements InlineSQLHelper {
 				StringUtil.merge(getRoleIds(groupId))
 			});
 
-		return StringUtil.replace(sql, "[$PERMISSION_JOIN$]", permissionJoin);
+		int pos = sql.indexOf(_WHERE_CLAUSE);
+
+		if (pos != -1) {
+			return sql.substring(0, pos + 1).concat(permissionJoin).concat(
+				sql.substring(pos + 6));
+		}
+
+		pos = sql.indexOf(_ORDER_BY_CLAUSE);
+
+		if (pos != -1) {
+			return sql.substring(0, pos + 1).concat(permissionJoin).concat(
+				sql.substring(pos + 9));
+		}
+
+		return sql.concat(StringPool.SPACE).concat(permissionJoin);
 	}
 
 	public String replacePermissionCheck(
@@ -147,5 +159,9 @@ public class InlineSQLHelperImpl implements InlineSQLHelper {
 
 		return userId;
 	}
+
+	private static final String _ORDER_BY_CLAUSE = " ORDER BY ";
+
+	private static final String _WHERE_CLAUSE = " WHERE ";
 
 }

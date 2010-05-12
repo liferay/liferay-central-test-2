@@ -52,6 +52,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
+import com.liferay.portal.security.permission.InlineSQLHelperUtil;
 import com.liferay.portal.service.persistence.BatchSessionUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
@@ -1108,6 +1109,119 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 					return null;
 				}
 			}
+
+			<#if entity.isPermissionCheckEnabled(finder)>
+				public List<${entity.name}> filterFindBy${finder.name}(
+
+				<#list finderColsList as finderCol>
+					${finderCol.type} ${finderCol.name}
+
+					<#if finderCol_has_next>
+						,
+					</#if>
+				</#list>
+
+				) throws SystemException {
+					return filterFindBy${finder.name}(
+
+					<#list finderColsList as finderCol>
+						${finderCol.name},
+					</#list>
+
+					QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+				}
+
+				public List<${entity.name}> filterFindBy${finder.name}(
+
+				<#list finderColsList as finderCol>
+					${finderCol.type} ${finderCol.name},
+				</#list>
+
+				int start, int end) throws SystemException {
+					return filterFindBy${finder.name}(
+
+					<#list finderColsList as finderCol>
+						${finderCol.name},
+					</#list>
+
+					start, end, null);
+				}
+
+				public List<${entity.name}> filterFindBy${finder.name}(
+
+				<#list finderColsList as finderCol>
+					${finderCol.type} ${finderCol.name},
+				</#list>
+
+				int start, int end, OrderByComparator orderByComparator) throws SystemException {
+					Session session = null;
+
+					try {
+						session = openSession();
+
+						StringBundler query = null;
+
+						if (orderByComparator != null) {
+							query = new StringBundler(${finderColsList?size + 2} + (orderByComparator.getOrderByFields().length * 3));
+						}
+						else {
+							query = new StringBundler(<#if entity.getOrder()??>${finderColsList?size + 2}<#else>${finderColsList?size + 1}</#if>);
+						}
+
+						query.append(_SQL_SELECT_${entity.alias?upper_case}_WHERE);
+
+						<#include "persistence_impl_finder_col.ftl">
+
+						if (orderByComparator != null) {
+							appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
+						}
+
+						<#if entity.getOrder()??>
+							else {
+								query.append(${entity.name}ModelImpl.ORDER_BY_JPQL);
+							}
+						</#if>
+
+						String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(), ${entity.name}.class.getName(), _FILTER_COLUMN_${entity.PKVarName?upper_case}, _FILTER_COLUMN_USERID, groupId);
+
+						Query q = session.createQuery(sql);
+
+						QueryPos qPos = QueryPos.getInstance(q);
+
+						<#list finderColsList as finderCol>
+							<#if !finderCol.isPrimitiveType()>
+								if (${finderCol.name} != null) {
+							</#if>
+
+							qPos.add(
+
+							<#if finderCol.type == "Date">
+								CalendarUtil.getTimestamp(
+							</#if>
+
+							${finderCol.name}${serviceBuilder.getPrimitiveObjValue("${finderCol.type}")}
+
+							<#if finderCol.type == "Date">
+								)
+							</#if>
+
+							);
+
+							<#if !finderCol.isPrimitiveType()>
+								}
+							</#if>
+						</#list>
+
+						return (List<${entity.name}>)QueryUtil.list(q, getDialect(), start, end);
+					}
+					catch (Exception e) {
+						throw processException(e);
+					}
+					finally {
+						closeSession(session);
+					}
+				}
+			</#if>
 		<#else>
 			public ${entity.name} findBy${finder.name}(
 
@@ -1546,6 +1660,72 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 			return count.intValue();
 		}
+
+		<#if entity.isPermissionCheckEnabled(finder)>
+			public int filterCountBy${finder.name}(
+
+			<#list finderColsList as finderCol>
+				${finderCol.type} ${finderCol.name}
+
+				<#if finderCol_has_next>
+					,
+				</#if>
+			</#list>
+
+			) throws SystemException {
+				Session session = null;
+
+				try {
+					session = openSession();
+
+					StringBundler query = new StringBundler(${finderColsList?size + 1});
+
+					query.append(_SQL_COUNT_${entity.alias?upper_case}_WHERE);
+
+					<#include "persistence_impl_finder_col.ftl">
+
+					String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(), ${entity.name}.class.getName(), _FILTER_COLUMN_${entity.PKVarName?upper_case}, _FILTER_COLUMN_USERID, groupId);
+
+					Query q = session.createQuery(sql);
+
+					QueryPos qPos = QueryPos.getInstance(q);
+
+					<#list finderColsList as finderCol>
+						<#if !finderCol.isPrimitiveType()>
+							if (${finderCol.name} != null) {
+						</#if>
+
+						qPos.add(
+
+						<#if finderCol.type == "Date">
+							CalendarUtil.getTimestamp(
+						</#if>
+
+						${finderCol.name}${serviceBuilder.getPrimitiveObjValue("${finderCol.type}")}
+
+						<#if finderCol.type == "Date">
+							)
+						</#if>
+
+						);
+
+						<#if !finderCol.isPrimitiveType()>
+							}
+						</#if>
+					</#list>
+
+					Long count = (Long)q.uniqueResult();
+
+					return count.intValue();
+				}
+				catch (Exception e) {
+					throw processException(e);
+				}
+				finally {
+					closeSession(session);
+				}
+			}
+		</#if>
 	</#list>
 
 	public int countAll() throws SystemException {
@@ -2569,6 +2749,12 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 			</#if>
 		</#list>
 	</#list>
+
+	<#if entity.isPermissionCheckEnabled()>
+		private static final String _FILTER_COLUMN_${entity.PKVarName?upper_case} = "${entity.alias}.${entity.PKVarName}";
+
+		private static final String _FILTER_COLUMN_USERID = "${entity.alias}.userId";
+	</#if>
 
 	private static final String _ORDER_BY_ENTITY_ALIAS = "${entity.alias}.";
 

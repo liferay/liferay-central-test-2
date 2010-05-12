@@ -17,6 +17,7 @@ package com.liferay.portal.tools.servicebuilder;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.util.TextFormatter;
 
 import java.util.Iterator;
@@ -438,6 +439,29 @@ public class Entity {
 
 	public boolean isOrdered() {
 		if (_order != null) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public boolean isPermissionCheckEnabled() {
+		for (EntityFinder finder : _finderList) {
+			if (isPermissionCheckEnabled(finder)) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	public boolean isPermissionCheckEnabled(EntityFinder finder) {
+		if (hasPrimitivePK() && hasColumn("userId") &&
+			finder.hasColumn("groupId") &&
+			ResourceActionsUtil.hasModelResourceActions(
+				_packagePath + ".model." + _name)) {
+
 			return true;
 		}
 		else {
