@@ -15,6 +15,7 @@
 package com.liferay.portalweb.portal.dbupgrade.viewsampledatalatest;
 
 import com.liferay.portalweb.portal.BaseTests;
+import com.liferay.portalweb.portal.dbupgrade.viewsampledatalatest.address.Address600LatestTests;
 import com.liferay.portalweb.portal.dbupgrade.viewsampledatalatest.expando.Expando600LatestTests;
 import com.liferay.portalweb.portal.dbupgrade.viewsampledatalatest.groups.Groups600LatestTests;
 import com.liferay.portalweb.portal.dbupgrade.viewsampledatalatest.login.LoginTests;
@@ -39,6 +40,7 @@ public class ViewSampleData600LatestTests extends BaseTests {
 		TestSuite testSuite = new TestSuite();
 
 		testSuite.addTest(LoginTests.suite());
+		testSuite.addTest(Address600LatestTests.suite());
 		testSuite.addTest(Expando600LatestTests.suite());
 		testSuite.addTest(Groups600LatestTests.suite());
 		testSuite.addTest(Organizations600LatestTests.suite());
