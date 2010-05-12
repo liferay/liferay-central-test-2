@@ -112,14 +112,14 @@ public class InlineSQLHelperImpl implements InlineSQLHelper {
 
 		if (pos != -1) {
 			return sql.substring(0, pos + 1).concat(permissionJoin).concat(
-				sql.substring(pos + 1));
+				sql.substring(pos + 6));
 		}
 
 		pos = sql.indexOf(_ORDER_BY_CLAUSE);
 
 		if (pos != -1) {
 			return sql.substring(0, pos + 1).concat(permissionJoin).concat(
-				sql.substring(pos + 1));
+				sql.substring(pos + 9));
 		}
 
 		return sql.concat(StringPool.SPACE).concat(permissionJoin);
