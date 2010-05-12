@@ -367,11 +367,11 @@ public class ConfigurationImpl
 		for (int i = sources.size() - 1; i >= 0; i--) {
 			String source = sources.get(i);
 
-			if (_loadedSources.contains(source)) {
+			if (_printedSources.contains(source)) {
 				continue;
 			}
 
-			_loadedSources.add(source);
+			_printedSources.add(source);
 
 			String info = "Loading " + source;
 
@@ -390,6 +390,6 @@ public class ConfigurationImpl
 
 	private ComponentConfiguration _componentConfiguration;
 	private Set<String> _keys = new HashSet<String>();
-	private Set<String> _loadedSources = new HashSet<String>();
+	private Set<String> _printedSources = new HashSet<String>();
 
 }
