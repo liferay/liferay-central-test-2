@@ -14,40 +14,52 @@
 
 package com.liferay.portal.servlet;
 
+import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpSessionEvent;
+
 import com.liferay.portal.events.EventsProcessorUtil;
 import com.liferay.portal.kernel.events.ActionException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.PortalInitableUtil;
+import com.liferay.portal.kernel.util.PortalInitable;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.util.PropsValues;
 
-import javax.servlet.http.HttpSession;
-import javax.servlet.http.HttpSessionEvent;
-import javax.servlet.http.HttpSessionListener;
-
 /**
- * <a href="PortalSessionListener.java.html"><b><i>View Source</i></b></a>
+ * <a href="PortalSessionCreator.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * @author Michael Young
  */
-public class PortalSessionListener implements HttpSessionListener {
+public class PortalSessionCreator implements PortalInitable {
 
-	public void sessionCreated(HttpSessionEvent event) {
-		PortalSessionCreator portalSessionCreator =
-			new PortalSessionCreator(event);
-
-		PortalInitableUtil.init(portalSessionCreator);
+	public PortalSessionCreator(HttpSessionEvent event) {
+		_event = event;
 	}
+	
+	public void portalInit() {
+		if (PropsValues.SESSION_DISABLED) {
+			return;
+		}
 
-	public void sessionDestroyed(HttpSessionEvent event) {
-		PortalSessionDestroyer portalSessionDestroyer =
-			new PortalSessionDestroyer(event);
+		HttpSession session = _event.getSession();
 
-		PortalInitableUtil.init(portalSessionDestroyer);
+		PortalSessionContext.put(session.getId(), session);
+
+		// Process session created events
+
+		try {
+			EventsProcessorUtil.process(
+				PropsKeys.SERVLET_SESSION_CREATE_EVENTS,
+				PropsValues.SERVLET_SESSION_CREATE_EVENTS, session);
+		}
+		catch (ActionException ae) {
+			_log.error(ae, ae);
+		}	
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
-		PortalSessionListener.class);
+		PortalSessionCreator.class);
+
+	private HttpSessionEvent _event;
 
 }
