@@ -64,9 +64,9 @@ public class GroupSearch extends SearchContainer<Group> {
 		GroupDisplayTerms displayTerms = (GroupDisplayTerms)getDisplayTerms();
 
 		iteratorURL.setParameter(
-			GroupDisplayTerms.NAME, displayTerms.getName());
-		iteratorURL.setParameter(
 			GroupDisplayTerms.DESCRIPTION, displayTerms.getDescription());
+		iteratorURL.setParameter(
+			GroupDisplayTerms.NAME, displayTerms.getName());
 
 		try {
 			PortalPreferences preferences =

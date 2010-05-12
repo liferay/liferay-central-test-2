@@ -29,11 +29,11 @@ public class OrderSearchTerms extends OrderDisplayTerms {
 	public OrderSearchTerms(PortletRequest portletRequest) {
 		super(portletRequest);
 
-		number = DAOParamUtil.getLike(portletRequest, NUMBER);
-		status = DAOParamUtil.getString(portletRequest, STATUS);
+		emailAddress = DAOParamUtil.getLike(portletRequest, EMAIL_ADDRESS);
 		firstName = DAOParamUtil.getLike(portletRequest, FIRST_NAME);
 		lastName = DAOParamUtil.getLike(portletRequest, LAST_NAME);
-		emailAddress = DAOParamUtil.getLike(portletRequest, EMAIL_ADDRESS);
+		number = DAOParamUtil.getLike(portletRequest, NUMBER);
+		status = DAOParamUtil.getString(portletRequest, STATUS);
 	}
 
 	public String getStatus() {

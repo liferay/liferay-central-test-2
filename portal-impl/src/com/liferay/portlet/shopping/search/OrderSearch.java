@@ -52,15 +52,15 @@ public class OrderSearch extends SearchContainer<ShoppingOrder> {
 			(OrderDisplayTerms)getDisplayTerms();
 
 		iteratorURL.setParameter(
-			OrderDisplayTerms.NUMBER, displayTerms.getNumber());
-		iteratorURL.setParameter(
-			OrderDisplayTerms.STATUS, displayTerms.getStatus());
+			OrderDisplayTerms.EMAIL_ADDRESS, displayTerms.getEmailAddress());
 		iteratorURL.setParameter(
 			OrderDisplayTerms.FIRST_NAME, displayTerms.getFirstName());
 		iteratorURL.setParameter(
 			OrderDisplayTerms.LAST_NAME, displayTerms.getLastName());
 		iteratorURL.setParameter(
-			OrderDisplayTerms.EMAIL_ADDRESS, displayTerms.getEmailAddress());
+			OrderDisplayTerms.NUMBER, displayTerms.getNumber());
+		iteratorURL.setParameter(
+			OrderDisplayTerms.STATUS, displayTerms.getStatus());
 	}
 
 }

@@ -61,17 +61,17 @@ public class ArticleDisplayTerms extends DisplayTerms {
 		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
+		articleId = ParamUtil.getString(portletRequest, ARTICLE_ID);
+		content = ParamUtil.getString(portletRequest, CONTENT);
+		description = ParamUtil.getString(portletRequest, DESCRIPTION);
 		groupId = ParamUtil.getLong(
 			portletRequest, GROUP_ID, themeDisplay.getScopeGroupId());
-		articleId = ParamUtil.getString(portletRequest, ARTICLE_ID);
-		version = ParamUtil.getDouble(portletRequest, VERSION);
-		title = ParamUtil.getString(portletRequest, TITLE);
-		description = ParamUtil.getString(portletRequest, DESCRIPTION);
-		content = ParamUtil.getString(portletRequest, CONTENT);
-		type = ParamUtil.getString(portletRequest, TYPE);
+		status = ParamUtil.getString(portletRequest, STATUS);
 		structureId = ParamUtil.getString(portletRequest, STRUCTURE_ID);
 		templateId = ParamUtil.getString(portletRequest, TEMPLATE_ID);
-		status = ParamUtil.getString(portletRequest, STATUS);
+		title = ParamUtil.getString(portletRequest, TITLE);
+		type = ParamUtil.getString(portletRequest, TYPE);
+		version = ParamUtil.getDouble(portletRequest, VERSION);
 	}
 
 	public String getArticleId() {

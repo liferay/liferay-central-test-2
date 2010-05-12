@@ -86,17 +86,6 @@ public class UserSearch extends SearchContainer<User> {
 			searchTerms.setActive(true);
 		}
 
-		iteratorURL.setParameter(
-			UserDisplayTerms.FIRST_NAME, displayTerms.getFirstName());
-		iteratorURL.setParameter(
-			UserDisplayTerms.MIDDLE_NAME, displayTerms.getMiddleName());
-		iteratorURL.setParameter(
-			UserDisplayTerms.LAST_NAME, displayTerms.getLastName());
-		iteratorURL.setParameter(
-			UserDisplayTerms.SCREEN_NAME, displayTerms.getScreenName());
-		iteratorURL.setParameter(
-			UserDisplayTerms.EMAIL_ADDRESS, displayTerms.getEmailAddress());
-
 		if (displayTerms.hasActive()) {
 			iteratorURL.setParameter(
 				UserDisplayTerms.ACTIVE,
@@ -104,10 +93,20 @@ public class UserSearch extends SearchContainer<User> {
 		}
 
 		iteratorURL.setParameter(
+			UserDisplayTerms.EMAIL_ADDRESS, displayTerms.getEmailAddress());
+		iteratorURL.setParameter(
+			UserDisplayTerms.FIRST_NAME, displayTerms.getFirstName());
+		iteratorURL.setParameter(
+			UserDisplayTerms.LAST_NAME, displayTerms.getLastName());
+		iteratorURL.setParameter(
+			UserDisplayTerms.MIDDLE_NAME, displayTerms.getMiddleName());
+		iteratorURL.setParameter(
 			UserDisplayTerms.ORGANIZATION_ID,
 			String.valueOf(displayTerms.getOrganizationId()));
 		iteratorURL.setParameter(
 			UserDisplayTerms.ROLE_ID, String.valueOf(displayTerms.getRoleId()));
+		iteratorURL.setParameter(
+			UserDisplayTerms.SCREEN_NAME, displayTerms.getScreenName());
 		iteratorURL.setParameter(
 			UserDisplayTerms.USER_GROUP_ID,
 			String.valueOf(displayTerms.getUserGroupId()));

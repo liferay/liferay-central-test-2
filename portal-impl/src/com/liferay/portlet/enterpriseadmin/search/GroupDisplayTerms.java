@@ -26,26 +26,26 @@ import javax.portlet.PortletRequest;
  */
 public class GroupDisplayTerms extends DisplayTerms {
 
-	public static final String NAME = "name";
-
 	public static final String DESCRIPTION = "description";
+
+	public static final String NAME = "name";
 
 	public GroupDisplayTerms(PortletRequest portletRequest) {
 		super(portletRequest);
 
-		name = ParamUtil.getString(portletRequest, NAME);
 		description = ParamUtil.getString(portletRequest, DESCRIPTION);
-	}
-
-	public String getName() {
-		return name;
+		name = ParamUtil.getString(portletRequest, NAME);
 	}
 
 	public String getDescription() {
 		return description;
 	}
 
-	protected String name;
+	public String getName() {
+		return name;
+	}
+
 	protected String description;
+	protected String name;
 
 }

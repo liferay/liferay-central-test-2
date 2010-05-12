@@ -29,24 +29,15 @@ public class OrganizationSearchTerms extends OrganizationDisplayTerms {
 	public OrganizationSearchTerms(PortletRequest portletRequest) {
 		super(portletRequest);
 
-		type = DAOParamUtil.getString(portletRequest, TYPE);
-		name = DAOParamUtil.getLike(portletRequest, NAME);
-		street = DAOParamUtil.getLike(portletRequest, STREET);
 		city = DAOParamUtil.getLike(portletRequest, CITY);
-		zip = DAOParamUtil.getLike(portletRequest, ZIP);
-		regionId = ParamUtil.getLong(portletRequest, REGION_ID);
 		countryId = ParamUtil.getLong(portletRequest, COUNTRY_ID);
+		name = DAOParamUtil.getLike(portletRequest, NAME);
 		parentOrganizationId = ParamUtil.getLong(
 			portletRequest, PARENT_ORGANIZATION_ID);
-	}
-
-	public Long getRegionIdObj() {
-		if (regionId == 0) {
-			return null;
-		}
-		else {
-			return new Long(regionId);
-		}
+		regionId = ParamUtil.getLong(portletRequest, REGION_ID);
+		street = DAOParamUtil.getLike(portletRequest, STREET);
+		type = DAOParamUtil.getString(portletRequest, TYPE);
+		zip = DAOParamUtil.getLike(portletRequest, ZIP);
 	}
 
 	public Long getCountryIdObj() {
@@ -55,6 +46,15 @@ public class OrganizationSearchTerms extends OrganizationDisplayTerms {
 		}
 		else {
 			return new Long(countryId);
+		}
+	}
+
+	public Long getRegionIdObj() {
+		if (regionId == 0) {
+			return null;
+		}
+		else {
+			return new Long(regionId);
 		}
 	}
 

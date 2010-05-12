@@ -27,22 +27,22 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class DisplayTerms {
 
-	public static final String KEYWORDS = "keywords";
-
 	public static final String ADVANCED_SEARCH = "advancedSearch";
 
 	public static final String AND_OPERATOR = "andOperator";
 
+	public static final String KEYWORDS = "keywords";
+
 	public DisplayTerms(HttpServletRequest request) {
-		keywords = ParamUtil.getString(request, KEYWORDS);
 		advancedSearch = ParamUtil.getBoolean(request, ADVANCED_SEARCH);
 		andOperator = ParamUtil.getBoolean(request, AND_OPERATOR, true);
+		keywords = ParamUtil.getString(request, KEYWORDS);
 	}
 
 	public DisplayTerms(PortletRequest portletRequest) {
-		keywords = ParamUtil.getString(portletRequest, KEYWORDS);
 		advancedSearch = ParamUtil.getBoolean(portletRequest, ADVANCED_SEARCH);
 		andOperator = ParamUtil.getBoolean(portletRequest, AND_OPERATOR, true);
+		keywords = ParamUtil.getString(portletRequest, KEYWORDS);
 	}
 
 	public String getKeywords() {
@@ -53,16 +53,16 @@ public class DisplayTerms {
 		return advancedSearch;
 	}
 
-	public void setAdvancedSearch(boolean advancedSearch) {
-		this.advancedSearch = advancedSearch;
-	}
-
 	public boolean isAndOperator() {
 		return andOperator;
 	}
 
-	protected String keywords;
+	public void setAdvancedSearch(boolean advancedSearch) {
+		this.advancedSearch = advancedSearch;
+	}
+
 	protected boolean advancedSearch;
 	protected boolean andOperator;
+	protected String keywords;
 
 }

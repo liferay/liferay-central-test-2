@@ -26,32 +26,28 @@ import javax.portlet.PortletRequest;
  */
 public class OrderDisplayTerms extends DisplayTerms {
 
-	public static final String NUMBER = "number";
-
-	public static final String STATUS = "status";
+	public static final String EMAIL_ADDRESS = "emailAddress";
 
 	public static final String FIRST_NAME = "firstName";
 
 	public static final String LAST_NAME = "lastName";
 
-	public static final String EMAIL_ADDRESS = "emailAddress";
+	public static final String NUMBER = "number";
+
+	public static final String STATUS = "status";
 
 	public OrderDisplayTerms(PortletRequest portletRequest) {
 		super(portletRequest);
 
-		number = ParamUtil.getString(portletRequest, NUMBER);
-		status = ParamUtil.getString(portletRequest, STATUS);
+		emailAddress = ParamUtil.getString(portletRequest, EMAIL_ADDRESS);
 		firstName = ParamUtil.getString(portletRequest, FIRST_NAME);
 		lastName = ParamUtil.getString(portletRequest, LAST_NAME);
-		emailAddress = ParamUtil.getString(portletRequest, EMAIL_ADDRESS);
+		number = ParamUtil.getString(portletRequest, NUMBER);
+		status = ParamUtil.getString(portletRequest, STATUS);
 	}
 
-	public String getNumber() {
-		return number;
-	}
-
-	public String getStatus() {
-		return status;
+	public String getEmailAddress() {
+		return emailAddress;
 	}
 
 	public String getFirstName() {
@@ -62,14 +58,18 @@ public class OrderDisplayTerms extends DisplayTerms {
 		return lastName;
 	}
 
-	public String getEmailAddress() {
-		return emailAddress;
+	public String getNumber() {
+		return number;
 	}
 
-	protected String number;
-	protected String status;
+	public String getStatus() {
+		return status;
+	}
+
+	protected String emailAddress;
 	protected String firstName;
 	protected String lastName;
-	protected String emailAddress;
+	protected String number;
+	protected String status;
 
 }

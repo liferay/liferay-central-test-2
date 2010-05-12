@@ -71,22 +71,22 @@ public class OrganizationSearch extends SearchContainer<Organization> {
 			(OrganizationDisplayTerms)getDisplayTerms();
 
 		iteratorURL.setParameter(
-			OrganizationDisplayTerms.NAME, displayTerms.getName());
-		iteratorURL.setParameter(
-			OrganizationDisplayTerms.STREET, displayTerms.getStreet());
-		iteratorURL.setParameter(
 			OrganizationDisplayTerms.CITY, displayTerms.getCity());
-		iteratorURL.setParameter(
-			OrganizationDisplayTerms.ZIP, displayTerms.getZip());
 		iteratorURL.setParameter(
 			OrganizationDisplayTerms.COUNTRY_ID,
 			String.valueOf(displayTerms.getCountryId()));
 		iteratorURL.setParameter(
-			OrganizationDisplayTerms.REGION_ID,
-			String.valueOf(displayTerms.getRegionId()));
+			OrganizationDisplayTerms.NAME, displayTerms.getName());
 		iteratorURL.setParameter(
 			OrganizationDisplayTerms.PARENT_ORGANIZATION_ID,
 			String.valueOf(displayTerms.getParentOrganizationId()));
+		iteratorURL.setParameter(
+			OrganizationDisplayTerms.REGION_ID,
+			String.valueOf(displayTerms.getRegionId()));
+		iteratorURL.setParameter(
+			OrganizationDisplayTerms.STREET, displayTerms.getStreet());
+		iteratorURL.setParameter(
+			OrganizationDisplayTerms.ZIP, displayTerms.getZip());
 
 		try {
 			PortalPreferences preferences =

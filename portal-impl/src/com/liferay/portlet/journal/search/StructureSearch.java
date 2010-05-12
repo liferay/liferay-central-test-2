@@ -52,14 +52,14 @@ public class StructureSearch extends SearchContainer<JournalStructure> {
 			(StructureDisplayTerms)getDisplayTerms();
 
 		iteratorURL.setParameter(
+			StructureDisplayTerms.DESCRIPTION, displayTerms.getDescription());
+		iteratorURL.setParameter(
 			StructureDisplayTerms.GROUP_ID,
 			String.valueOf(displayTerms.getGroupId()));
 		iteratorURL.setParameter(
-			StructureDisplayTerms.STRUCTURE_ID, displayTerms.getStructureId());
-		iteratorURL.setParameter(
 			StructureDisplayTerms.NAME, displayTerms.getName());
 		iteratorURL.setParameter(
-			StructureDisplayTerms.DESCRIPTION, displayTerms.getDescription());
+			StructureDisplayTerms.STRUCTURE_ID, displayTerms.getStructureId());
 	}
 
 	public StructureSearch(

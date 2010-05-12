@@ -384,6 +384,19 @@ public class UserIndexer extends BaseIndexer {
 			andSearch = Boolean.TRUE;
 		}
 
+		String emailAddress = (String)searchContext.getAttribute(
+			"emailAddress");
+
+		if (Validator.isNotNull(emailAddress)) {
+			if (andSearch) {
+				searchQuery.addRequiredTerm(
+					"emailAddress", emailAddress, true);
+			}
+			else {
+				searchQuery.addTerm("emailAddress", emailAddress, true);
+			}
+		}
+
 		String firstName = (String)searchContext.getAttribute("firstName");
 
 		if (Validator.isNotNull(firstName)) {
@@ -392,17 +405,6 @@ public class UserIndexer extends BaseIndexer {
 			}
 			else {
 				searchQuery.addTerm("firstName", firstName, true);
-			}
-		}
-
-		String middleName = (String)searchContext.getAttribute("middleName");
-
-		if (Validator.isNotNull(middleName)) {
-			if (andSearch) {
-				searchQuery.addRequiredTerm("middleName", middleName, true);
-			}
-			else {
-				searchQuery.addTerm("middleName", middleName, true);
 			}
 		}
 
@@ -417,6 +419,17 @@ public class UserIndexer extends BaseIndexer {
 			}
 		}
 
+		String middleName = (String)searchContext.getAttribute("middleName");
+
+		if (Validator.isNotNull(middleName)) {
+			if (andSearch) {
+				searchQuery.addRequiredTerm("middleName", middleName, true);
+			}
+			else {
+				searchQuery.addTerm("middleName", middleName, true);
+			}
+		}
+
 		String screenName = (String)searchContext.getAttribute("screenName");
 
 		if (Validator.isNotNull(screenName)) {
@@ -425,19 +438,6 @@ public class UserIndexer extends BaseIndexer {
 			}
 			else {
 				searchQuery.addTerm("screenName", screenName, true);
-			}
-		}
-
-		String emailAddress = (String)searchContext.getAttribute(
-			"emailAddress");
-
-		if (Validator.isNotNull(emailAddress)) {
-			if (andSearch) {
-				searchQuery.addRequiredTerm(
-					"emailAddress", emailAddress, true);
-			}
-			else {
-				searchQuery.addTerm("emailAddress", emailAddress, true);
 			}
 		}
 

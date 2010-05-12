@@ -44,12 +44,12 @@ public class TemplateDisplayTerms extends DisplayTerms {
 		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
+		description = ParamUtil.getString(portletRequest, DESCRIPTION);
 		groupId = ParamUtil.getLong(
 			portletRequest, GROUP_ID, themeDisplay.getScopeGroupId());
-		templateId = ParamUtil.getString(portletRequest, TEMPLATE_ID);
-		structureId = ParamUtil.getString(portletRequest, STRUCTURE_ID);
 		name = ParamUtil.getString(portletRequest, NAME);
-		description = ParamUtil.getString(portletRequest, DESCRIPTION);
+		structureId = ParamUtil.getString(portletRequest, STRUCTURE_ID);
+		templateId = ParamUtil.getString(portletRequest, TEMPLATE_ID);
 	}
 
 	public String getDescription() {

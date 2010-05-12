@@ -26,18 +26,18 @@ import javax.portlet.PortletRequest;
  */
 public class CouponDisplayTerms extends DisplayTerms {
 
+	public static final String ACTIVE = "active";
+
 	public static final String CODE = "code";
 
 	public static final String DISCOUNT_TYPE = "discountType";
 
-	public static final String ACTIVE = "active";
-
 	public CouponDisplayTerms(PortletRequest portletRequest) {
 		super(portletRequest);
 
+		active = ParamUtil.getBoolean(portletRequest, ACTIVE, true);
 		code = ParamUtil.getString(portletRequest, CODE);
 		discountType = ParamUtil.getString(portletRequest, DISCOUNT_TYPE);
-		active = ParamUtil.getBoolean(portletRequest, ACTIVE, true);
 	}
 
 	public String getCode() {
@@ -52,8 +52,8 @@ public class CouponDisplayTerms extends DisplayTerms {
 		return active;
 	}
 
+	protected boolean active;
 	protected String code;
 	protected String discountType;
-	protected boolean active;
 
 }

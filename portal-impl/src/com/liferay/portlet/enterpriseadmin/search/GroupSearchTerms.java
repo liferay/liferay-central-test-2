@@ -28,8 +28,8 @@ public class GroupSearchTerms extends GroupDisplayTerms {
 	public GroupSearchTerms(PortletRequest portletRequest) {
 		super(portletRequest);
 
-		name = DAOParamUtil.getLike(portletRequest, NAME);
 		description = DAOParamUtil.getLike(portletRequest, DESCRIPTION);
+		name = DAOParamUtil.getLike(portletRequest, NAME);
 	}
 
 }

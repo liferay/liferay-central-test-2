@@ -47,9 +47,9 @@ public class TeamSearch extends SearchContainer<Role> {
 
 		TeamDisplayTerms displayTerms = (TeamDisplayTerms)getDisplayTerms();
 
-		iteratorURL.setParameter(TeamDisplayTerms.NAME, displayTerms.getName());
 		iteratorURL.setParameter(
 			TeamDisplayTerms.DESCRIPTION, displayTerms.getDescription());
+		iteratorURL.setParameter(TeamDisplayTerms.NAME, displayTerms.getName());
 	}
 
 }

@@ -34,12 +34,12 @@ public class TemplateSearchTerms extends TemplateDisplayTerms {
 		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
+		description = DAOParamUtil.getLike(portletRequest, DESCRIPTION);
 		groupId = ParamUtil.getLong(
 			portletRequest, GROUP_ID, themeDisplay.getScopeGroupId());
-		templateId = DAOParamUtil.getLike(portletRequest, TEMPLATE_ID);
-		structureId = DAOParamUtil.getString(portletRequest, STRUCTURE_ID);
 		name = DAOParamUtil.getLike(portletRequest, NAME);
-		description = DAOParamUtil.getLike(portletRequest, DESCRIPTION);
+		structureId = DAOParamUtil.getString(portletRequest, STRUCTURE_ID);
+		templateId = DAOParamUtil.getLike(portletRequest, TEMPLATE_ID);
 	}
 
 	public String getStructureIdComparator() {

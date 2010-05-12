@@ -42,11 +42,11 @@ public class FeedDisplayTerms extends DisplayTerms {
 		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
+		description = ParamUtil.getString(portletRequest, DESCRIPTION);
+		feedId = ParamUtil.getString(portletRequest, FEED_ID);
 		groupId = ParamUtil.getLong(
 			portletRequest, GROUP_ID, themeDisplay.getScopeGroupId());
-		feedId = ParamUtil.getString(portletRequest, FEED_ID);
 		name = ParamUtil.getString(portletRequest, NAME);
-		description = ParamUtil.getString(portletRequest, DESCRIPTION);
 	}
 
 	public String getDescription() {

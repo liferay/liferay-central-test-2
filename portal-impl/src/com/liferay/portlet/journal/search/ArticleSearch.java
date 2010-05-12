@@ -86,27 +86,27 @@ public class ArticleSearch extends SearchContainer<JournalArticle> {
 		}
 
 		iteratorURL.setParameter(
-			ArticleDisplayTerms.GROUP_ID,
-			String.valueOf(displayTerms.getGroupId()));
-		iteratorURL.setParameter(
 			ArticleDisplayTerms.ARTICLE_ID, displayTerms.getArticleId());
-		iteratorURL.setParameter(
-			ArticleDisplayTerms.VERSION,
-			String.valueOf(displayTerms.getVersion()));
-		iteratorURL.setParameter(
-			ArticleDisplayTerms.TITLE, displayTerms.getTitle());
-		iteratorURL.setParameter(
-			ArticleDisplayTerms.DESCRIPTION, displayTerms.getDescription());
 		iteratorURL.setParameter(
 			ArticleDisplayTerms.CONTENT, displayTerms.getContent());
 		iteratorURL.setParameter(
-			ArticleDisplayTerms.TYPE, displayTerms.getType());
+			ArticleDisplayTerms.DESCRIPTION, displayTerms.getDescription());
+		iteratorURL.setParameter(
+			ArticleDisplayTerms.GROUP_ID,
+			String.valueOf(displayTerms.getGroupId()));
+		iteratorURL.setParameter(
+			ArticleDisplayTerms.STATUS, displayTerms.getStatus());
 		iteratorURL.setParameter(
 			ArticleDisplayTerms.STRUCTURE_ID, displayTerms.getStructureId());
 		iteratorURL.setParameter(
 			ArticleDisplayTerms.TEMPLATE_ID, displayTerms.getTemplateId());
 		iteratorURL.setParameter(
-			ArticleDisplayTerms.STATUS, displayTerms.getStatus());
+			ArticleDisplayTerms.TITLE, displayTerms.getTitle());
+		iteratorURL.setParameter(
+			ArticleDisplayTerms.TYPE, displayTerms.getType());
+		iteratorURL.setParameter(
+			ArticleDisplayTerms.VERSION,
+			String.valueOf(displayTerms.getVersion()));
 
 		try {
 			PortalPreferences preferences =

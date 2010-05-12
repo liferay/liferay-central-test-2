@@ -34,11 +34,11 @@ public class StructureSearchTerms extends StructureDisplayTerms {
 		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
+		description = DAOParamUtil.getLike(portletRequest, DESCRIPTION);
 		groupId = ParamUtil.getLong(
 			portletRequest, GROUP_ID, themeDisplay.getScopeGroupId());
-		structureId = DAOParamUtil.getLike(portletRequest, STRUCTURE_ID);
 		name = DAOParamUtil.getLike(portletRequest, NAME);
-		description = DAOParamUtil.getLike(portletRequest, DESCRIPTION);
+		structureId = DAOParamUtil.getLike(portletRequest, STRUCTURE_ID);
 	}
 
 	public void setGroupId(long groupId) {

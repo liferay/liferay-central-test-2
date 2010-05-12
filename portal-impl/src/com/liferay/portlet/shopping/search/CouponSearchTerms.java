@@ -29,9 +29,9 @@ public class CouponSearchTerms extends CouponDisplayTerms {
 	public CouponSearchTerms(PortletRequest portletRequest) {
 		super(portletRequest);
 
+		active = ParamUtil.getBoolean(portletRequest, ACTIVE, true);
 		code = DAOParamUtil.getLike(portletRequest, CODE);
 		discountType = DAOParamUtil.getString(portletRequest, DISCOUNT_TYPE);
-		active = ParamUtil.getBoolean(portletRequest, ACTIVE, true);
 	}
 
 }

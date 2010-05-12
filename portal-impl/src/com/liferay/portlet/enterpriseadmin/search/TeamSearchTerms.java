@@ -28,8 +28,8 @@ public class TeamSearchTerms extends TeamDisplayTerms {
 	public TeamSearchTerms(PortletRequest portletRequest) {
 		super(portletRequest);
 
-		name = DAOParamUtil.getLike(portletRequest, NAME);
 		description = DAOParamUtil.getLike(portletRequest, DESCRIPTION);
+		name = DAOParamUtil.getLike(portletRequest, NAME);
 	}
 
 }

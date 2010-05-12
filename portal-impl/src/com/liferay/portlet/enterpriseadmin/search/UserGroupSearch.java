@@ -67,9 +67,9 @@ public class UserGroupSearch extends SearchContainer<UserGroup> {
 			(UserGroupDisplayTerms)getDisplayTerms();
 
 		iteratorURL.setParameter(
-			UserGroupDisplayTerms.NAME, displayTerms.getName());
-		iteratorURL.setParameter(
 			UserGroupDisplayTerms.DESCRIPTION, displayTerms.getDescription());
+		iteratorURL.setParameter(
+			UserGroupDisplayTerms.NAME, displayTerms.getName());
 
 		try {
 			PortalPreferences preferences =

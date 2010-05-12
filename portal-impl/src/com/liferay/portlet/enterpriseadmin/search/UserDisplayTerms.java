@@ -28,32 +28,26 @@ import javax.portlet.PortletRequest;
  */
 public class UserDisplayTerms extends DisplayTerms {
 
-	public static final String FIRST_NAME = "firstName";
-
-	public static final String MIDDLE_NAME = "middleName";
-
-	public static final String LAST_NAME = "lastName";
-
-	public static final String SCREEN_NAME = "screenName";
+	public static final String ACTIVE = "active";
 
 	public static final String EMAIL_ADDRESS = "emailAddress";
 
-	public static final String ACTIVE = "active";
+	public static final String FIRST_NAME = "firstName";
+
+	public static final String LAST_NAME = "lastName";
+
+	public static final String MIDDLE_NAME = "middleName";
 
 	public static final String ORGANIZATION_ID = "organizationId";
 
 	public static final String ROLE_ID = "roleId";
 
+	public static final String SCREEN_NAME = "screenName";
+
 	public static final String USER_GROUP_ID = "userGroupId";
 
 	public UserDisplayTerms(PortletRequest portletRequest) {
 		super(portletRequest);
-
-		firstName = ParamUtil.getString(portletRequest, FIRST_NAME);
-		middleName = ParamUtil.getString(portletRequest, MIDDLE_NAME);
-		lastName = ParamUtil.getString(portletRequest, LAST_NAME);
-		screenName = ParamUtil.getString(portletRequest, SCREEN_NAME);
-		emailAddress = ParamUtil.getString(portletRequest, EMAIL_ADDRESS);
 
 		String activeString = ParamUtil.getString(portletRequest, ACTIVE);
 
@@ -61,33 +55,50 @@ public class UserDisplayTerms extends DisplayTerms {
 			active = GetterUtil.getBoolean(activeString);
 		}
 
+		emailAddress = ParamUtil.getString(portletRequest, EMAIL_ADDRESS);
+		firstName = ParamUtil.getString(portletRequest, FIRST_NAME);
+		lastName = ParamUtil.getString(portletRequest, LAST_NAME);
+		middleName = ParamUtil.getString(portletRequest, MIDDLE_NAME);
 		organizationId = ParamUtil.getLong(portletRequest, ORGANIZATION_ID);
 		roleId = ParamUtil.getLong(portletRequest, ROLE_ID);
+		screenName = ParamUtil.getString(portletRequest, SCREEN_NAME);
 		userGroupId = ParamUtil.getLong(portletRequest, USER_GROUP_ID);
 	}
 
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public String getMiddleName() {
-		return middleName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public String getScreenName() {
-		return screenName;
+	public Boolean getActive() {
+		return active;
 	}
 
 	public String getEmailAddress() {
 		return emailAddress;
 	}
 
-	public Boolean getActive() {
-		return active;
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public String getMiddleName() {
+		return middleName;
+	}
+
+	public long getOrganizationId() {
+		return organizationId;
+	}
+
+	public long getRoleId() {
+		return roleId;
+	}
+
+	public String getScreenName() {
+		return screenName;
+	}
+
+	public long getUserGroupId() {
+		return userGroupId;
 	}
 
 	public boolean hasActive() {
@@ -111,26 +122,14 @@ public class UserDisplayTerms extends DisplayTerms {
 		this.active = active;
 	}
 
-	public long getOrganizationId() {
-		return organizationId;
-	}
-
-	public long getRoleId() {
-		return roleId;
-	}
-
-	public long getUserGroupId() {
-		return userGroupId;
-	}
-
-	protected String firstName;
-	protected String middleName;
-	protected String lastName;
-	protected String screenName;
-	protected String emailAddress;
 	protected Boolean active;
+	protected String emailAddress;
+	protected String firstName;
+	protected String lastName;
+	protected String middleName;
 	protected long organizationId;
 	protected long roleId;
+	protected String screenName;
 	protected long userGroupId;
 
 }

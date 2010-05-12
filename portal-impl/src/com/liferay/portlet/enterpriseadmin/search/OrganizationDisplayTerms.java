@@ -27,79 +27,79 @@ import javax.portlet.PortletRequest;
  */
 public class OrganizationDisplayTerms extends DisplayTerms {
 
-	public static final String TYPE = "type";
-
-	public static final String NAME = "name";
-
-	public static final String STREET = "street";
-
 	public static final String CITY = "city";
-
-	public static final String ZIP = "zip";
 
 	public static final String COUNTRY_ID = "countryId";
 
-	public static final String REGION_ID = "regionId";
+	public static final String NAME = "name";
 
 	public static final String PARENT_ORGANIZATION_ID = "parentOrganizationId";
+
+	public static final String REGION_ID = "regionId";
+
+	public static final String STREET = "street";
+
+	public static final String TYPE = "type";
+
+	public static final String ZIP = "zip";
 
 	public OrganizationDisplayTerms(PortletRequest portletRequest) {
 		super(portletRequest);
 
-		type = ParamUtil.getString(portletRequest, TYPE);
-		name = ParamUtil.getString(portletRequest, NAME);
-		street = ParamUtil.getString(portletRequest, STREET);
 		city = ParamUtil.getString(portletRequest, CITY);
-		zip = ParamUtil.getString(portletRequest, ZIP);
-		regionId = ParamUtil.getLong(portletRequest, REGION_ID);
 		countryId = ParamUtil.getLong(portletRequest, COUNTRY_ID);
+		name = ParamUtil.getString(portletRequest, NAME);
 		parentOrganizationId = ParamUtil.getLong(
 			portletRequest, PARENT_ORGANIZATION_ID);
-	}
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public String getStreet() {
-		return street;
+		regionId = ParamUtil.getLong(portletRequest, REGION_ID);
+		street = ParamUtil.getString(portletRequest, STREET);
+		type = ParamUtil.getString(portletRequest, TYPE);
+		zip = ParamUtil.getString(portletRequest, ZIP);
 	}
 
 	public String getCity() {
 		return city;
 	}
 
-	public String getZip() {
-		return zip;
-	}
-
-	public long getRegionId() {
-		return regionId;
-	}
-
 	public long getCountryId() {
 		return countryId;
+	}
+
+	public String getName() {
+		return name;
 	}
 
 	public long getParentOrganizationId() {
 		return parentOrganizationId;
 	}
 
-	protected String type;
-	protected String name;
-	protected String street;
+	public long getRegionId() {
+		return regionId;
+	}
+
+	public String getStreet() {
+		return street;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public String getZip() {
+		return zip;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
 	protected String city;
-	protected String zip;
-	protected long regionId;
 	protected long countryId;
+	protected String name;
 	protected long parentOrganizationId;
+	protected long regionId;
+	protected String street;
+	protected String type;
+	protected String zip;
 
 }

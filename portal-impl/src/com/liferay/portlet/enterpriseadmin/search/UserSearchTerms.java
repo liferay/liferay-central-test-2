@@ -30,18 +30,17 @@ public class UserSearchTerms extends UserDisplayTerms {
 	public UserSearchTerms(PortletRequest portletRequest) {
 		super(portletRequest);
 
-		firstName = DAOParamUtil.getLike(portletRequest, FIRST_NAME);
-		middleName = DAOParamUtil.getLike(portletRequest, MIDDLE_NAME);
-		lastName = DAOParamUtil.getLike(portletRequest, LAST_NAME);
-		screenName = DAOParamUtil.getLike(portletRequest, SCREEN_NAME);
-		emailAddress = DAOParamUtil.getLike(portletRequest, EMAIL_ADDRESS);
-
 		if (Validator.isNotNull(ParamUtil.getString(portletRequest, ACTIVE))) {
 			active = ParamUtil.getBoolean(portletRequest, ACTIVE, true);
 		}
 
+		emailAddress = DAOParamUtil.getLike(portletRequest, EMAIL_ADDRESS);
+		firstName = DAOParamUtil.getLike(portletRequest, FIRST_NAME);
+		lastName = DAOParamUtil.getLike(portletRequest, LAST_NAME);
+		middleName = DAOParamUtil.getLike(portletRequest, MIDDLE_NAME);
 		organizationId = ParamUtil.getLong(portletRequest, ORGANIZATION_ID);
 		roleId = ParamUtil.getLong(portletRequest, ROLE_ID);
+		screenName = DAOParamUtil.getLike(portletRequest, SCREEN_NAME);
 		userGroupId = ParamUtil.getLong(portletRequest, USER_GROUP_ID);
 	}
 

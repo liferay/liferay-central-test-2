@@ -52,16 +52,16 @@ public class TemplateSearch extends SearchContainer<JournalTemplate> {
 			(TemplateDisplayTerms)getDisplayTerms();
 
 		iteratorURL.setParameter(
+			TemplateDisplayTerms.DESCRIPTION, displayTerms.getDescription());
+		iteratorURL.setParameter(
 			TemplateDisplayTerms.GROUP_ID,
 			String.valueOf(displayTerms.getGroupId()));
 		iteratorURL.setParameter(
-			TemplateDisplayTerms.TEMPLATE_ID, displayTerms.getTemplateId());
+			TemplateDisplayTerms.NAME, displayTerms.getName());
 		iteratorURL.setParameter(
 			TemplateDisplayTerms.STRUCTURE_ID, displayTerms.getStructureId());
 		iteratorURL.setParameter(
-			TemplateDisplayTerms.NAME, displayTerms.getName());
-		iteratorURL.setParameter(
-			TemplateDisplayTerms.DESCRIPTION, displayTerms.getDescription());
+			TemplateDisplayTerms.TEMPLATE_ID, displayTerms.getTemplateId());
 	}
 
 	public TemplateSearch(

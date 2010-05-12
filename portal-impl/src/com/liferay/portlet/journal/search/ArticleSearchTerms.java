@@ -37,17 +37,17 @@ public class ArticleSearchTerms extends ArticleDisplayTerms {
 		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
+		articleId = DAOParamUtil.getLike(portletRequest, ARTICLE_ID, false);
+		content = DAOParamUtil.getLike(portletRequest, CONTENT);
+		description = DAOParamUtil.getLike(portletRequest, DESCRIPTION);
 		groupId = ParamUtil.getLong(
 			portletRequest, GROUP_ID, themeDisplay.getScopeGroupId());
-		articleId = DAOParamUtil.getLike(portletRequest, ARTICLE_ID, false);
-		version = ParamUtil.getDouble(portletRequest, VERSION);
-		title = DAOParamUtil.getLike(portletRequest, TITLE);
-		description = DAOParamUtil.getLike(portletRequest, DESCRIPTION);
-		content = DAOParamUtil.getLike(portletRequest, CONTENT);
-		type = DAOParamUtil.getString(portletRequest, TYPE);
+		status = ParamUtil.getString(portletRequest, STATUS);
 		structureId = DAOParamUtil.getString(portletRequest, STRUCTURE_ID);
 		templateId = DAOParamUtil.getString(portletRequest, TEMPLATE_ID);
-		status = ParamUtil.getString(portletRequest, STATUS);
+		title = DAOParamUtil.getLike(portletRequest, TITLE);
+		type = DAOParamUtil.getString(portletRequest, TYPE);
+		version = ParamUtil.getDouble(portletRequest, VERSION);
 	}
 
 	public Date getReviewDate() {

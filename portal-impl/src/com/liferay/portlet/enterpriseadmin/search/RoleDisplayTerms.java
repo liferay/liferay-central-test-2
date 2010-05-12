@@ -28,26 +28,26 @@ import javax.portlet.PortletRequest;
  */
 public class RoleDisplayTerms extends DisplayTerms {
 
-	public static final String NAME = "name";
-
 	public static final String DESCRIPTION = "description";
+
+	public static final String NAME = "name";
 
 	public static final String TYPE = "type";
 
 	public RoleDisplayTerms(PortletRequest portletRequest) {
 		super(portletRequest);
 
-		name = ParamUtil.getString(portletRequest, NAME);
 		description = ParamUtil.getString(portletRequest, DESCRIPTION);
+		name = ParamUtil.getString(portletRequest, NAME);
 		type = ParamUtil.getInteger(portletRequest, TYPE);
-	}
-
-	public String getName() {
-		return name;
 	}
 
 	public String getDescription() {
 		return description;
+	}
+
+	public String getName() {
+		return name;
 	}
 
 	public int getType() {
@@ -74,8 +74,8 @@ public class RoleDisplayTerms extends DisplayTerms {
 		}
 	}
 
-	protected String name;
 	protected String description;
+	protected String name;
 	protected int type;
 
 }
