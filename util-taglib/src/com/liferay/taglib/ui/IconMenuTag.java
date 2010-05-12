@@ -125,9 +125,10 @@ public class IconMenuTag extends BodyTagSupport {
 		String id = _id;
 
 		if (Validator.isNull(id)) {
-			id = PortalUtil.generateRandomKey(
-					request, "taglib_ui_icon_menu_page") + StringPool.UNDERLINE
-					+ "icon-menu";
+			String randomKey = PortalUtil.generateRandomKey(
+				request, IconMenuTag.class.getName());
+
+			id = randomKey + StringPool.UNDERLINE;
 		}
 
 		request.setAttribute("liferay-ui:icon-menu:align", _align);
