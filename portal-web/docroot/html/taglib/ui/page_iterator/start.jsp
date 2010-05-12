@@ -161,6 +161,7 @@ NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 						<%= cur %>
 					</c:when>
 					<c:otherwise>
+
 						<%
 						String suffix = LanguageUtil.get(pageContext, "of") + StringPool.SPACE + numberFormat.format(pages);
 
@@ -267,7 +268,6 @@ NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 						<liferay-ui:message key="next" />
 					</c:otherwise>
 				</c:choose>
-
 			</c:if>
 
 			<c:choose>
