@@ -37,7 +37,8 @@ public class AddWDFrontPageChildPageNameNullTests extends BaseTests {
 		testSuite.addTestSuite(AddWikiFrontPageTest.class);
 		testSuite.addTestSuite(SelectMainNodeTest.class);
 		testSuite.addTestSuite(AddWDFrontPageChildPageNameNullTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownWikiNodeTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

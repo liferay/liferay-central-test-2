@@ -71,31 +71,16 @@ public class AddWDFrontPageChildPageFormatHTMLTest extends BaseTestCase {
 
 		selenium.type("//span/input",
 			RuntimeVariables.replace("WD Wiki Page Format HTML Test"));
-		selenium.clickAt("//td[@id='xToolbar']/table[8]/tbody/tr/td[2]/div/table/tbody/tr/td[1]/img",
-			RuntimeVariables.replace(""));
-		selenium.type("//td[@id='xEditingArea']/textarea",
+		selenium.clickAt("cke_38_label", RuntimeVariables.replace(""));
+		selenium.type("//td[@id='cke_contents_CKEditor1']/textarea",
 			RuntimeVariables.replace(
 				"<a href=http://www.liferay.com>Welcome to LIFERAY</a>"));
 		selenium.selectFrame("relative=top");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible(
-							"//span[@class='aui-icon-search aui-icon']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
+		Thread.sleep(5000);
+		selenium.clickAt("cke_38_label", RuntimeVariables.replace(""));
+		Thread.sleep(5000);
+		selenium.clickAt("//input[@value='Publish']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

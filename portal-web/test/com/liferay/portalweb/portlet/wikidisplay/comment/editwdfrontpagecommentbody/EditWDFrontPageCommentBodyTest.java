@@ -67,8 +67,6 @@ public class EditWDFrontPageCommentBodyTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("//tr[2]/td/div/textarea",
-			RuntimeVariables.replace("T"));
 		selenium.type("//tr[2]/td/div/textarea",
 			RuntimeVariables.replace(
 				"This is a wiki page test comment. Edited."));

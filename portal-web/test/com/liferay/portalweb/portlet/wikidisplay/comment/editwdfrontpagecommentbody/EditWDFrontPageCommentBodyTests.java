@@ -38,7 +38,8 @@ public class EditWDFrontPageCommentBodyTests extends BaseTests {
 		testSuite.addTestSuite(SelectMainNodeTest.class);
 		testSuite.addTestSuite(AddWDFrontPageCommentTest.class);
 		testSuite.addTestSuite(EditWDFrontPageCommentBodyTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownWikiNodeTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

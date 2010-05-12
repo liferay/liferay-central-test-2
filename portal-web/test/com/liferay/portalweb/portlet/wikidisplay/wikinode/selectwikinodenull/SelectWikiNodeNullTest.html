@@ -29,24 +29,14 @@
 	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>_86_nodeId</td>
-	<td>label=</td>
+	<td>assertText</td>
+	<td>//fieldset/div/div</td>
+	<td>There are no available nodes for selection.</td>
 </tr>
 <tr>
-	<td>clickAtAndWait</td>
-	<td>//input[@value='Save']</td>
+	<td>assertElementPresent</td>
+	<td>//input[@value='Save' and @disabled='']</td>
 	<td></td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//div[@id='p_p_id_86_']/div/div</td>
-	<td>You have entered invalid data. Please try again.</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//form[@id='_86_fm']/div[1]</td>
-	<td>The node could not be found.</td>
 </tr>
 
 </tbody></table>

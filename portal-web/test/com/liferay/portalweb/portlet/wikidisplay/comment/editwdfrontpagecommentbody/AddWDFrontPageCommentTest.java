@@ -46,7 +46,6 @@ public class AddWDFrontPageCommentTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Be the first.", RuntimeVariables.replace(""));
-		selenium.typeKeys("//textarea", RuntimeVariables.replace("T"));
 		selenium.type("//textarea",
 			RuntimeVariables.replace("This is a wiki page test comment."));
 		selenium.keyPress("//textarea", RuntimeVariables.replace("\\48"));

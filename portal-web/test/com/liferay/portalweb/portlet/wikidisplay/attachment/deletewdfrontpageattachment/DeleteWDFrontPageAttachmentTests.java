@@ -38,7 +38,8 @@ public class DeleteWDFrontPageAttachmentTests extends BaseTests {
 		testSuite.addTestSuite(SelectMainNodeTest.class);
 		testSuite.addTestSuite(AddWDFrontPageAttachmentTest.class);
 		testSuite.addTestSuite(DeleteWDFrontPageAttachmentTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownWikiNodeTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

@@ -51,34 +51,19 @@ public class LinkWDFrontPageChildPageToWDFrontPageChildPageTest
 		selenium.clickAt("link=Front2 Page2 Child2 Page2 Test2",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertFalse(selenium.isElementPresent("link=Front Page Child Page Test"));
+		assertFalse(selenium.isElementPresent(
+				"link=Front1 Page1 Child1 Page1 Test1"));
 		selenium.clickAt("link=Edit", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("//textarea",
 			RuntimeVariables.replace(
-				"This is a front2 page2 child2 page2 test2.\n\n[[Front Page Child Page Test]]"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible(
-							"//span[@class='aui-icon-search aui-icon']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
+				"This is a front2 page2 child2 page2 test2.\n\n[[Front1 Page1 Child1 Page1 Test1]]"));
+		selenium.clickAt("//input[@value='Publish']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		assertTrue(selenium.isElementPresent("link=Front Page Child Page Test"));
+		assertTrue(selenium.isElementPresent(
+				"link=Front1 Page1 Child1 Page1 Test1"));
 	}
 }

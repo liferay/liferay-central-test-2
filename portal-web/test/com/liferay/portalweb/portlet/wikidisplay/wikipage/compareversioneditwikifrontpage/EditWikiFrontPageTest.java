@@ -58,25 +58,8 @@ public class EditWikiFrontPageTest extends BaseTestCase {
 		selenium.type("//textarea",
 			RuntimeVariables.replace(
 				"==Test Wiki Article Edited==\n\n//this is italics. edited.//\n\n**bold edited**\n\n[[http://www.liferay.com|Link to website. Edited.]]\n\n*this is a list item. edited.\n**this is a sub list item. edited."));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible(
-							"//span[@class='aui-icon-search aui-icon']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Publish']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Test Wiki Article Edited"),
 			selenium.getText("//div[@class='wiki-body']/h2"));

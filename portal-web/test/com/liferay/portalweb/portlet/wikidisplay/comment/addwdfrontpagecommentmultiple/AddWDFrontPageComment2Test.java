@@ -46,7 +46,6 @@ public class AddWDFrontPageComment2Test extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Add Comment", RuntimeVariables.replace(""));
-		selenium.typeKeys("//textarea", RuntimeVariables.replace("T"));
 		selenium.type("//textarea",
 			RuntimeVariables.replace("This is a wiki page test2 comment2."));
 		selenium.keyPress("//textarea", RuntimeVariables.replace("\\48"));

@@ -39,7 +39,8 @@ public class ChangeParentWDFrontPageChildPageToNoneTests extends BaseTests {
 		testSuite.addTestSuite(AddWDFrontPageChildPageTest.class);
 		testSuite.addTestSuite(
 			ChangeParentWDFrontPageChildPageToNoneTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownWikiNodeTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

@@ -47,7 +47,7 @@ public class ViewWDFrontPageChildPageIncomingLinksTest extends BaseTestCase {
 		selenium.clickAt("link=Wiki Display Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=Front Page Child Page Test",
+		selenium.clickAt("link=Front1 Page1 Child1 Page1 Test1",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Details", RuntimeVariables.replace(""));

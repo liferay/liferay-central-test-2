@@ -42,7 +42,8 @@ public class SelectWikiNodeMultipleTests extends BaseTests {
 		testSuite.addTestSuite(SelectWikiNode1Test.class);
 		testSuite.addTestSuite(SelectWikiNode2Test.class);
 		testSuite.addTestSuite(SelectWikiNode3Test.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownWikiNodeTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

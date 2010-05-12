@@ -45,8 +45,8 @@ public class DeleteWDFrontPageAttachmentTest extends BaseTestCase {
 
 		selenium.clickAt("link=Wiki Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("link=1 Attachments"));
-		selenium.clickAt("link=1 Attachments", RuntimeVariables.replace(""));
+		assertTrue(selenium.isElementPresent("link=1 Attachment"));
+		selenium.clickAt("link=1 Attachment", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Wiki_Attachment.jpg"));
 		selenium.click(RuntimeVariables.replace("link=Delete"));
@@ -77,6 +77,6 @@ public class DeleteWDFrontPageAttachmentTest extends BaseTestCase {
 		selenium.clickAt("link=Wiki Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=0 Attachments"));
-		assertFalse(selenium.isElementPresent("link=1 Attachments"));
+		assertFalse(selenium.isElementPresent("link=1 Attachment"));
 	}
 }

@@ -54,6 +54,7 @@ public class ViewWDFrontPageChildPageOutgoingLinksNullTest extends BaseTestCase 
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Outgoing Links", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertFalse(selenium.isElementPresent("link=Front Page Child Page Test"));
+		assertFalse(selenium.isElementPresent(
+				"link=Front1 Page1 Child1 Page1 Test1"));
 	}
 }

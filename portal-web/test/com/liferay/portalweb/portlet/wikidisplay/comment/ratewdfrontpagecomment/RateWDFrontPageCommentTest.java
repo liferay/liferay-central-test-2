@@ -52,9 +52,9 @@ public class RateWDFrontPageCommentTest extends BaseTestCase {
 			}
 
 			try {
-				if (RuntimeVariables.replace("0 (0 Votes)")
-										.equals(selenium.getText(
-								"//div[@class='taglib-ratings thumbs']/div/div/div"))) {
+				if (selenium.isPartialText(
+							"//div[@class='taglib-ratings thumbs']/div/div/div",
+							"0 \\(0 Votes\\)")) {
 					break;
 				}
 			}
@@ -64,9 +64,9 @@ public class RateWDFrontPageCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertEquals(RuntimeVariables.replace("0 (0 Votes)"),
-			selenium.getText(
-				"//div[@class='taglib-ratings thumbs']/div/div/div"));
+		assertTrue(selenium.isPartialText(
+				"//div[@class='taglib-ratings thumbs']/div/div/div",
+				"0 \\(0 Votes\\)"));
 		selenium.clickAt("//div[@class='taglib-ratings thumbs']/div/div/a",
 			RuntimeVariables.replace(""));
 
@@ -76,9 +76,9 @@ public class RateWDFrontPageCommentTest extends BaseTestCase {
 			}
 
 			try {
-				if (RuntimeVariables.replace("+1 (1 Vote)")
-										.equals(selenium.getText(
-								"//div[@class='taglib-ratings thumbs']/div/div/div"))) {
+				if (selenium.isPartialText(
+							"//div[@class='taglib-ratings thumbs']/div/div/div",
+							"\\+1 \\(1 Vote\\)")) {
 					break;
 				}
 			}
@@ -88,9 +88,9 @@ public class RateWDFrontPageCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertEquals(RuntimeVariables.replace("+1 (1 Vote)"),
-			selenium.getText(
-				"//div[@class='taglib-ratings thumbs']/div/div/div"));
+		assertTrue(selenium.isPartialText(
+				"//div[@class='taglib-ratings thumbs']/div/div/div",
+				"\\+1 \\(1 Vote\\)"));
 		selenium.clickAt("//div[@class='taglib-ratings thumbs']/div/div/a",
 			RuntimeVariables.replace(""));
 
@@ -100,9 +100,9 @@ public class RateWDFrontPageCommentTest extends BaseTestCase {
 			}
 
 			try {
-				if (RuntimeVariables.replace("0 (0 Votes)")
-										.equals(selenium.getText(
-								"//div[@class='taglib-ratings thumbs']/div/div/div"))) {
+				if (selenium.isPartialText(
+							"//div[@class='taglib-ratings thumbs']/div/div/div",
+							"0 \\(0 Votes\\)")) {
 					break;
 				}
 			}
@@ -112,9 +112,9 @@ public class RateWDFrontPageCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertEquals(RuntimeVariables.replace("0 (0 Votes)"),
-			selenium.getText(
-				"//div[@class='taglib-ratings thumbs']/div/div/div"));
+		assertTrue(selenium.isPartialText(
+				"//div[@class='taglib-ratings thumbs']/div/div/div",
+				"0 \\(0 Votes\\)"));
 		selenium.clickAt("//div[@class='taglib-ratings thumbs']/div/div/a[2]",
 			RuntimeVariables.replace(""));
 
@@ -124,9 +124,9 @@ public class RateWDFrontPageCommentTest extends BaseTestCase {
 			}
 
 			try {
-				if (RuntimeVariables.replace("-1 (1 Vote)")
-										.equals(selenium.getText(
-								"//div[@class='taglib-ratings thumbs']/div/div/div"))) {
+				if (selenium.isPartialText(
+							"//div[@class='taglib-ratings thumbs']/div/div/div",
+							"-1 \\(1 Vote\\)")) {
 					break;
 				}
 			}
@@ -136,9 +136,9 @@ public class RateWDFrontPageCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertEquals(RuntimeVariables.replace("-1 (1 Vote)"),
-			selenium.getText(
-				"//div[@class='taglib-ratings thumbs']/div/div/div"));
+		assertTrue(selenium.isPartialText(
+				"//div[@class='taglib-ratings thumbs']/div/div/div",
+				"-1 \\(1 Vote\\)"));
 		selenium.clickAt("//div[@class='taglib-ratings thumbs']/div/div/a[2]",
 			RuntimeVariables.replace(""));
 
@@ -148,9 +148,9 @@ public class RateWDFrontPageCommentTest extends BaseTestCase {
 			}
 
 			try {
-				if (RuntimeVariables.replace("0 (0 Votes)")
-										.equals(selenium.getText(
-								"//div[@class='taglib-ratings thumbs']/div/div/div"))) {
+				if (selenium.isPartialText(
+							"//div[@class='taglib-ratings thumbs']/div/div/div",
+							"0 \\(0 Votes\\)")) {
 					break;
 				}
 			}
@@ -160,8 +160,8 @@ public class RateWDFrontPageCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertEquals(RuntimeVariables.replace("0 (0 Votes)"),
-			selenium.getText(
-				"//div[@class='taglib-ratings thumbs']/div/div/div"));
+		assertTrue(selenium.isPartialText(
+				"//div[@class='taglib-ratings thumbs']/div/div/div",
+				"0 \\(0 Votes\\)"));
 	}
 }

@@ -32,7 +32,7 @@ public class RemovePortletTests extends BaseTests {
 		testSuite.addTestSuite(AddPageWDTest.class);
 		testSuite.addTestSuite(AddPortletWDTest.class);
 		testSuite.addTestSuite(RemovePortletWDTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

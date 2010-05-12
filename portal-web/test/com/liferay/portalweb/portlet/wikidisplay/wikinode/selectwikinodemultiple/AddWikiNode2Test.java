@@ -32,7 +32,7 @@ public class AddWikiNode2Test extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Wiki Test Page")) {
+				if (selenium.isElementPresent("link=Control Panel")) {
 					break;
 				}
 			}
@@ -42,16 +42,15 @@ public class AddWikiNode2Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("link=Wiki Test Page", RuntimeVariables.replace(""));
+		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//img[@alt='Manage Wikis']",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("link=Wiki", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("//input[@value='Add Wiki']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.type("_36_name", RuntimeVariables.replace("WikiB NodeB TestB"));
-		selenium.type("_36_description",
+		selenium.type("_154_name", RuntimeVariables.replace("WikiB NodeB TestB"));
+		selenium.type("_154_description",
 			RuntimeVariables.replace("This is a wikiB nodeB testB."));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");

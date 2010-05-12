@@ -36,10 +36,11 @@ public class AddWDFrontPageChildPageMultipleTests extends BaseTests {
 		testSuite.addTestSuite(AddPortletWDTest.class);
 		testSuite.addTestSuite(AddWikiFrontPageTest.class);
 		testSuite.addTestSuite(SelectMainNodeTest.class);
-		testSuite.addTestSuite(AddWDFrontPageChildPageTest.class);
+		testSuite.addTestSuite(AddWDFrontPageChildPage1Test.class);
 		testSuite.addTestSuite(AddWDFrontPageChildPage2Test.class);
 		testSuite.addTestSuite(AddWDFrontPageChildPage3Test.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownWikiNodeTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

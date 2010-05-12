@@ -47,13 +47,10 @@ public class SelectWikiNodeNullTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Configuration", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.select("_86_nodeId", RuntimeVariables.replace("label="));
-		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace(
-				"You have entered invalid data. Please try again."),
-			selenium.getText("//div[@id='p_p_id_86_']/div/div"));
-		assertEquals(RuntimeVariables.replace("The node could not be found."),
-			selenium.getText("//form[@id='_86_fm']/div[1]"));
+				"There are no available nodes for selection."),
+			selenium.getText("//fieldset/div/div"));
+		assertTrue(selenium.isElementPresent(
+				"//input[@value='Save' and @disabled='']"));
 	}
 }

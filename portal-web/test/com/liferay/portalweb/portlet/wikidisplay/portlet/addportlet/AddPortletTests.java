@@ -31,7 +31,7 @@ public class AddPortletTests extends BaseTests {
 
 		testSuite.addTestSuite(AddPageWDTest.class);
 		testSuite.addTestSuite(AddPortletWDTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

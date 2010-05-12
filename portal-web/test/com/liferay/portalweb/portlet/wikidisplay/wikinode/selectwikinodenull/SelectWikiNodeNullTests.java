@@ -31,10 +31,8 @@ public class SelectWikiNodeNullTests extends BaseTests {
 
 		testSuite.addTestSuite(AddPageWDTest.class);
 		testSuite.addTestSuite(AddPortletWDTest.class);
-		testSuite.addTestSuite(AddPageWikiTest.class);
-		testSuite.addTestSuite(AddPortletWikiTest.class);
 		testSuite.addTestSuite(SelectWikiNodeNullTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

@@ -51,28 +51,11 @@ public class AddWDFrontPageChildPageNameNullTest extends BaseTestCase {
 		selenium.type("//span/input", RuntimeVariables.replace(""));
 		selenium.type("//textarea",
 			RuntimeVariables.replace("This is a front page child page test."));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible(
-							"//span[@class='aui-icon-search aui-icon']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Publish']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"You have entered invalid data. Please try again."));
-		assertTrue(selenium.isTextPresent("Please enter a valid title."));
+		assertTrue(selenium.isTextPresent("Please enter a valid title. "));
 	}
 }

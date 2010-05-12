@@ -36,10 +36,11 @@ public class AddWDFrontPageCommentMultipleTests extends BaseTests {
 		testSuite.addTestSuite(AddPortletWDTest.class);
 		testSuite.addTestSuite(AddWikiFrontPageTest.class);
 		testSuite.addTestSuite(SelectMainNodeTest.class);
-		testSuite.addTestSuite(AddWDFrontPageCommentTest.class);
+		testSuite.addTestSuite(AddWDFrontPageComment1Test.class);
 		testSuite.addTestSuite(AddWDFrontPageComment2Test.class);
 		testSuite.addTestSuite(AddWDFrontPageComment3Test.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownWikiNodeTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

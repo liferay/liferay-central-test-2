@@ -40,7 +40,8 @@ public class CompareVersionEditWikiFrontPageMinorChangeTests
 		testSuite.addTestSuite(EditWikiFrontPageMinorChangeTest.class);
 		testSuite.addTestSuite(
 			CompareVersionEditWikiFrontPageMinorChangeTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownWikiNodeTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}
