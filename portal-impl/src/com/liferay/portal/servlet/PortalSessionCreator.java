@@ -41,8 +41,9 @@ public class PortalSessionCreator implements PortalInitable {
 			return;
 		}
 
+		HttpSession session = _event.getSession();
+
 		try {
-			HttpSession session = _event.getSession();
 
 			PortalSessionContext.put(session.getId(), session);
 		}
