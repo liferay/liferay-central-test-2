@@ -57,7 +57,7 @@ String deltaURL = HttpUtil.removeParameter(url, namespace + deltaParam);
 NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 %>
 
-<c:if test='<%= type.equals("regular") || (type.equals("article") && (total > resultRowsSize)) %>'>
+<c:if test='<%= type.equals("more") || type.equals("regular") || (type.equals("article") && (total > resultRowsSize)) %>'>
 	<div class="taglib-page-iterator">
 </c:if>
 
@@ -122,7 +122,7 @@ NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 
 <c:if test="<%= total > delta %>">
 	<div class="search-pages">
-		<c:if test='<%= type.equals("regular") %>'>
+		<c:if test='<%= type.equals("more") || type.equals("regular") %>'>
 			<c:if test="<%= PropsValues.SEARCH_CONTAINER_PAGE_DELTA_VALUES.length > 0 %>">
 				<div class="delta-selector">
 					<c:choose>
@@ -161,7 +161,15 @@ NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 						<%= cur %>
 					</c:when>
 					<c:otherwise>
-						<aui:select changesContext="<%= true %>" inlineLabel="left" name="page" onchange='<%= namespace + curParam + "updateCur(this);" %>' suffix='<%= LanguageUtil.get(pageContext, "of") + StringPool.SPACE + numberFormat.format(pages) %>'>
+						<%
+						String suffix = LanguageUtil.get(pageContext, "of") + StringPool.SPACE + numberFormat.format(pages);
+
+						if (type.equals("more")) {
+							suffix = StringPool.BLANK;
+						}
+						%>
+
+						<aui:select changesContext="<%= true %>" inlineLabel="left" name="page" onchange='<%= namespace + curParam + "updateCur(this);" %>' suffix='<%= suffix %>'>
 
 							<%
 							int pagesIteratorMax = maxPages;
@@ -197,7 +205,7 @@ NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 		</c:if>
 
 		<div class="page-links">
-			<c:if test='<%= type.equals("regular") %>'>
+			<c:if test='<%= type.equals("more") || type.equals("regular") %>'>
 				<c:choose>
 					<c:when test="<%= cur != 1 %>">
 						<a class="first" href="<%= _getHREF(formName, curParam, 1, jsCall, url, urlAnchor) %>" target="<%= target %>">
@@ -223,12 +231,12 @@ NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 				<c:when test="<%= cur != 1 %>">
 					<a class="previous" href="<%= _getHREF(formName, curParam, cur - 1, jsCall, url, urlAnchor) %>" target="<%= target %>">
 				</c:when>
-				<c:when test='<%= type.equals("regular") %>'>
+				<c:when test='<%= type.equals("more") || type.equals("regular") %>'>
 					<span class="previous">
 				</c:when>
 			</c:choose>
 
-			<c:if test='<%= (type.equals("regular") || cur != 1) %>'>
+			<c:if test='<%= (type.equals("more") || type.equals("regular") || cur != 1) %>'>
 				<liferay-ui:message key="previous" />
 			</c:if>
 
@@ -236,7 +244,7 @@ NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 				<c:when test="<%= cur != 1 %>">
 					</a>
 				</c:when>
-				<c:when test='<%= type.equals("regular") %>'>
+				<c:when test='<%= type.equals("more") || type.equals("regular") %>'>
 					</span>
 				</c:when>
 			</c:choose>
@@ -245,20 +253,28 @@ NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 				<c:when test="<%= cur != pages %>">
 					<a class="next" href="<%= _getHREF(formName, curParam, cur + 1, jsCall, url, urlAnchor) %>" target="<%= target %>">
 				</c:when>
-				<c:when test='<%= type.equals("regular") %>'>
+				<c:when test='<%= type.equals("more") || type.equals("regular") %>'>
 					<span class="next">
 				</c:when>
 			</c:choose>
 
-			<c:if test='<%= (type.equals("regular") || cur != pages) %>'>
-				<liferay-ui:message key="next" />
+			<c:if test='<%= (type.equals("more") || type.equals("regular") || cur != pages) %>'>
+				<c:choose>
+					<c:when test='<%= type.equals("more") %>'>
+						<liferay-ui:message key="more" />
+					</c:when>
+					<c:otherwise>
+						<liferay-ui:message key="next" />
+					</c:otherwise>
+				</c:choose>
+
 			</c:if>
 
 			<c:choose>
 				<c:when test="<%= cur != pages %>">
 					</a>
 				</c:when>
-				<c:when test='<%= type.equals("regular") %>'>
+				<c:when test='<%= type.equals("more") || type.equals("regular") %>'>
 					</span>
 				</c:when>
 			</c:choose>
@@ -288,11 +304,11 @@ NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 	</div>
 </c:if>
 
-<c:if test='<%= type.equals("regular") || (type.equals("article") && (total > resultRowsSize)) %>'>
+<c:if test='<%= type.equals("more") || type.equals("regular") || (type.equals("article") && (total > resultRowsSize)) %>'>
 	</div>
 </c:if>
 
-<c:if test='<%= type.equals("regular") && !themeDisplay.isFacebook() %>'>
+<c:if test='<%= type.equals("more") || type.equals("regular") && !themeDisplay.isFacebook() %>'>
 	<aui:script>
 		Liferay.provide(
 			window,

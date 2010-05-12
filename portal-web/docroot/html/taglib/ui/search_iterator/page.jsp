@@ -22,6 +22,7 @@ String randomId = PwdGenerator.getPassword(PwdGenerator.KEY3, 4);
 SearchContainer searchContainer = (SearchContainer)request.getAttribute("liferay-ui:search:searchContainer");
 
 boolean paginate = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:search-iterator:paginate"));
+String type = (String)request.getAttribute("liferay-ui:search:type");
 
 String id = searchContainer.getId();
 int start = searchContainer.getStart();
@@ -65,7 +66,7 @@ List<String> primaryKeys = new ArrayList<String>();
 <div class="lfr-search-container <%= resultRows.isEmpty() ? "aui-helper-hidden" : StringPool.BLANK %>">
 	<c:if test="<%= PropsValues.SEARCH_CONTAINER_SHOW_PAGINATION_TOP && (resultRows.size() > 10) && paginate %>">
 		<div class="taglib-search-iterator-page-iterator-top">
-			<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
+			<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" type="<%= type %>" />
 		</div>
 	</c:if>
 
@@ -283,7 +284,7 @@ List<String> primaryKeys = new ArrayList<String>();
 
 	<c:if test="<%= PropsValues.SEARCH_CONTAINER_SHOW_PAGINATION_BOTTOM && paginate %>">
 		<div class="taglib-search-iterator-page-iterator-bottom">
-			<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
+			<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" type="<%= type %>" />
 		</div>
 	</c:if>
 </div>

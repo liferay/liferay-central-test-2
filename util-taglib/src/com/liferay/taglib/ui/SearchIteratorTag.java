@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletRequest;
  *
  * @author Brian Wing Shun Chan
  */
-public class SearchIteratorTag extends SearchFormTag {
+public class SearchIteratorTag extends SearchPaginatorTag {
 
 	public void setPaginate(boolean paginate) {
 		_paginate = paginate;
