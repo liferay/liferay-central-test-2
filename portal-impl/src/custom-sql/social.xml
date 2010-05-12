@@ -221,6 +221,33 @@
 					)
 		]]>
 	</sql>
+	<sql id="com.liferay.portlet.social.service.impl.SocialEquityLogLocalServiceImpl.checkSocialEquityLogs">
+		<![CDATA[
+			UPDATE
+				SocialEquityLog
+			SET
+				active_ = false
+			WHERE
+				(validity <= [$VALIDITY$]) AND
+				(active_ = [$TRUE$])
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.social.service.impl.SocialEquityLogLocalServiceImpl.checkSocialEquityUser">
+		<![CDATA[
+			DELETE
+				SocialEquityUser
+			WHERE
+				NOT EXISTS
+					(
+						SELECT
+							1
+						FROM
+							User_
+						WHERE
+							User_.userId = SocialEquityUser.userId
+					)
+		]]>
+	</sql>
 	<sql id="com.liferay.portlet.social.service.impl.SocialEquityLogLocalServiceImpl.checkSocialEquityUser_CQ">
 		<![CDATA[
 			UPDATE

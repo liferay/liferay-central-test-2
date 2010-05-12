@@ -66,7 +66,6 @@ public class SocialEquityLogLocalServiceImpl
 				assetEntry.getUserId());
 		}
 		catch (NoSuchUserException nsue) {
-			assetEntryUser = user;
 		}
 
 		List<SocialEquitySetting> equitySettings =
@@ -87,6 +86,7 @@ public class SocialEquityLogLocalServiceImpl
 
 		assetEntryPersistence.clearCache();
 
+		runCheckSQL(_CHECK_SOCIAL_EQUITY_USER, validity);
 		runCheckSQL(_CHECK_SOCIAL_EQUITY_USER_CQ, validity);
 		runCheckSQL(_CHECK_SOCIAL_EQUITY_USER_PQ_1, validity);
 		runCheckSQL(_CHECK_SOCIAL_EQUITY_USER_PQ_2, validity);
@@ -95,6 +95,10 @@ public class SocialEquityLogLocalServiceImpl
 		runCheckSQL(_CHECK_USER_PEQ, validity);
 
 		userPersistence.clearCache();
+
+		runCheckSQL(_CHECK_SOCIAL_EQUITY_LOGS, validity);
+
+		socialEquityLogPersistence.clearCache();
 	}
 
 	public void deactivateEquityLogs(long assetEntryId)
@@ -166,7 +170,7 @@ public class SocialEquityLogLocalServiceImpl
 
 			assetEntryPersistence.clearCache(assetEntry);
 
-			if (!assetEntryUser.isDefaultUser()) {
+			if (assetEntryUser != null && !assetEntryUser.isDefaultUser()) {
 				updateSocialEquityUser_CQ(
 					assetEntry.getGroupId(), assetEntryUser.getUserId());
 				updateSocialEquityUser_PEQ(
@@ -429,6 +433,14 @@ public class SocialEquityLogLocalServiceImpl
 	private static final String _CHECK_SOCIAL_EQUITY_ASSET_ENTRY_IQ_2 =
 		SocialEquityLogLocalServiceImpl.class.getName() +
 			".checkSocialEquityAssetEntry_IQ_2";
+
+	private static final String _CHECK_SOCIAL_EQUITY_LOGS =
+		SocialEquityLogLocalServiceImpl.class.getName() +
+			".checkSocialEquityLogs";
+
+	private static final String _CHECK_SOCIAL_EQUITY_USER =
+		SocialEquityLogLocalServiceImpl.class.getName() +
+			".checkSocialEquityUser";
 
 	private static final String _CHECK_SOCIAL_EQUITY_USER_CQ =
 		SocialEquityLogLocalServiceImpl.class.getName() +
