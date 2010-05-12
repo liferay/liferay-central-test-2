@@ -39,7 +39,6 @@ import java.sql.DatabaseMetaData;
 import java.sql.SQLException;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.atomic.AtomicReference;
@@ -400,13 +399,13 @@ public class CustomSQL {
 		AtomicReference<String> sqlAtomicReference =
 			new AtomicReference<String>(sql);
 
-		int pos = sqlAtomicReference.get().indexOf(" ORDER BY ");
+		int pos = sqlAtomicReference.get().indexOf(_ORDER_BY_CLAUSE);
 
 		if (pos != -1) {
 			sql = sqlAtomicReference.get().substring(0, pos);
 		}
 
-		/*int pos = sql.indexOf(" ORDER BY ");
+		/*int pos = sql.indexOf(_ORDER_BY_CLAUSE);
 
 		if (pos != -1) {
 			sql = sql.substring(0, pos);
@@ -420,7 +419,8 @@ public class CustomSQL {
 			return sql;
 		}
 
-		return removeOrderBy(sql).concat(" ORDER BY ").concat(obc.getOrderBy());
+		return removeOrderBy(sql).concat(_ORDER_BY_CLAUSE).concat(
+			obc.getOrderBy());
 	}
 
 	protected String[] getConfigs() {
@@ -450,23 +450,19 @@ public class CustomSQL {
 			_log.debug("Loading " + source);
 		}
 
-		Document doc = SAXReaderUtil.read(is);
+		Document document = SAXReaderUtil.read(is);
 
-		Element root = doc.getRootElement();
+		Element rootElement = document.getRootElement();
 
-		Iterator<Element> itr = root.elements("sql").iterator();
-
-		while (itr.hasNext()) {
-			Element sql = itr.next();
-
-			String file = sql.attributeValue("file");
+		for (Element sqlElement : rootElement.elements("sql")) {
+			String file = sqlElement.attributeValue("file");
 
 			if (Validator.isNotNull(file)) {
 				read(classLoader, file);
 			}
 			else {
-				String id = sql.attributeValue("id");
-				String content = transform(sql.getText());
+				String id = sqlElement.attributeValue("id");
+				String content = transform(sqlElement.getText());
 
 				content = replaceIsNull(content);
 
@@ -499,6 +495,8 @@ public class CustomSQL {
 
 		return sb.toString();
 	}
+
+	private static final String _ORDER_BY_CLAUSE = " ORDER BY ";
 
 	private static Log _log = LogFactoryUtil.getLog(CustomSQL.class);
 
