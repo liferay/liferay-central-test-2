@@ -14,6 +14,7 @@
 
 package com.liferay.portal.kernel.portlet;
 
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -61,25 +62,37 @@ public class LiferayPortlet extends GenericPortlet {
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws IOException, PortletException {
 
-		if (!isProcessActionRequest(actionRequest)) {
-			return;
-		}
+		try {
+			if (!isProcessActionRequest(actionRequest)) {
+				return;
+			}
 
-		if (!callActionMethod(actionRequest, actionResponse)) {
-			return;
-		}
+			if (!callActionMethod(actionRequest, actionResponse)) {
+				return;
+			}
 
-		if (SessionErrors.isEmpty(actionRequest)) {
+			if (!SessionErrors.isEmpty(actionRequest)) {
+				return;
+			}
+
+			if (!SessionMessages.isEmpty(actionRequest)) {
+				return;
+			}
+
 			addSuccessMessage(actionRequest, actionResponse);
-		}
-		else {
-			return;
-		}
 
-		String redirect = ParamUtil.getString(actionRequest, "redirect");
+			sendRedirect(actionRequest, actionResponse);
+		}
+		catch (PortletException pe) {
+			Throwable cause = pe.getCause();
 
-		if (Validator.isNotNull(redirect)) {
-			actionResponse.sendRedirect(redirect);
+			if (isSessionErrorException(cause)) {
+				SessionErrors.add(
+					actionRequest, cause.getClass().getName(), cause);
+			}
+			else {
+				throw pe;
+			}
 		}
 	}
 
@@ -152,6 +165,22 @@ public class LiferayPortlet extends GenericPortlet {
 		}
 	}
 
+	@SuppressWarnings("unused")
+	protected void doAbout(
+			RenderRequest renderRequest, RenderResponse renderResponse)
+		throws IOException, PortletException {
+
+		throw new PortletException("doAbout method not implemented");
+	}
+
+	@SuppressWarnings("unused")
+	protected void doConfig(
+			RenderRequest renderRequest, RenderResponse renderResponse)
+		throws IOException, PortletException {
+
+		throw new PortletException("doConfig method not implemented");
+	}
+
 	protected void doDispatch(
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
@@ -203,22 +232,6 @@ public class LiferayPortlet extends GenericPortlet {
 	}
 
 	@SuppressWarnings("unused")
-	protected void doAbout(
-			RenderRequest renderRequest, RenderResponse renderResponse)
-		throws IOException, PortletException {
-
-		throw new PortletException("doAbout method not implemented");
-	}
-
-	@SuppressWarnings("unused")
-	protected void doConfig(
-			RenderRequest renderRequest, RenderResponse renderResponse)
-		throws IOException, PortletException {
-
-		throw new PortletException("doConfig method not implemented");
-	}
-
-	@SuppressWarnings("unused")
 	protected void doEditDefaults(
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
@@ -250,6 +263,14 @@ public class LiferayPortlet extends GenericPortlet {
 		throw new PortletException("doPrint method not implemented");
 	}
 
+	protected String getRedirect(
+		ActionRequest actionRequest, ActionResponse actionResponse) {
+
+		String redirect = ParamUtil.getString(actionRequest, "redirect");
+
+		return redirect;
+	}
+
 	protected boolean isProcessActionRequest(ActionRequest actionRequest) {
 		return isProcessPortletRequest(actionRequest);
 	}
@@ -266,6 +287,26 @@ public class LiferayPortlet extends GenericPortlet {
 		ResourceRequest resourceRequest) {
 
 		return isProcessPortletRequest(resourceRequest);
+	}
+
+	protected boolean isSessionErrorException(Throwable cause) {
+		if (cause instanceof PortalException) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	protected void sendRedirect(
+			ActionRequest actionRequest, ActionResponse actionResponse)
+		throws IOException {
+
+		String redirect = getRedirect(actionRequest, actionResponse);
+
+		if (Validator.isNotNull(redirect)) {
+			actionResponse.sendRedirect(redirect);
+		}
 	}
 
 	protected boolean addProcessActionSuccessMessage;
