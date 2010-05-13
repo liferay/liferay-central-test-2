@@ -21,6 +21,8 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 MBMessage message = (MBMessage)request.getAttribute(WebKeys.MESSAGE_BOARDS_MESSAGE);
 
+MBThread thread = MBThreadLocalServiceUtil.getThread(message.getThreadId());
+
 long messageId = message.getMessageId();
 
 long categoryId = BeanParamUtil.getLong(message, request, "mbCategoryId");
@@ -82,7 +84,7 @@ boolean quote = false;
 			<aui:button onClick="<%= taglibOpenCategoryWindow %>" value="select" />
 		</aui:field-wrapper>
 
-		<aui:input inlineLabel="left" label="add-explanation-post" name="addExplanationPost" onClick='<%= renderResponse.getNamespace() + "toggleExplanationPost();" %>' type="checkbox" />
+		<aui:input disabled="<%= thread.isLocked() %>" helpMessage='<%= thread.isLocked() ? LanguageUtil.get(pageContext, "unlock-thread-to-add-an-explanation-post") : StringPool.BLANK %>'  inlineLabel="left" label="add-explanation-post" name="addExplanationPost" onClick='<%= renderResponse.getNamespace() + "toggleExplanationPost();" %>' type="checkbox" />
 
 		<div id="<portlet:namespace/>explanationPost" style="display: none;">
 			<aui:input model="<%= MBMessage.class %>" name="subject" value="" />
