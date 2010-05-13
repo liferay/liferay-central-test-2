@@ -746,7 +746,7 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 				query = new StringBundler(3);
 			}
 
-			query.append(_FILTER_SELECT_SHOPPINGORDER_WHERE);
+			query.append(_FILTER_SQL_SELECT_SHOPPINGORDER_WHERE);
 
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
@@ -765,7 +765,7 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity(_ENTITY_ALIAS, ShoppingOrderImpl.class);
+			q.addEntity(_FILTER_ENTITY_ALIAS, ShoppingOrderImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1372,7 +1372,7 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 				query = new StringBundler(5);
 			}
 
-			query.append(_FILTER_SELECT_SHOPPINGORDER_WHERE);
+			query.append(_FILTER_SQL_SELECT_SHOPPINGORDER_WHERE);
 
 			query.append(_FINDER_COLUMN_G_U_PPPS_GROUPID_2);
 
@@ -1405,7 +1405,7 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity(_ENTITY_ALIAS, ShoppingOrderImpl.class);
+			q.addEntity(_FILTER_ENTITY_ALIAS, ShoppingOrderImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1592,7 +1592,7 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 
 			StringBundler query = new StringBundler(2);
 
-			query.append(_FILTER_COUNT_SHOPPINGORDER_WHERE);
+			query.append(_FILTER_SQL_COUNT_SHOPPINGORDER_WHERE);
 
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
@@ -1816,7 +1816,7 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 
 			StringBundler query = new StringBundler(4);
 
-			query.append(_FILTER_COUNT_SHOPPINGORDER_WHERE);
+			query.append(_FILTER_SQL_COUNT_SHOPPINGORDER_WHERE);
 
 			query.append(_FINDER_COLUMN_G_U_PPPS_GROUPID_2);
 
@@ -1960,11 +1960,11 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 	private static final String _FINDER_COLUMN_G_U_PPPS_PPPAYMENTSTATUS_1 = "shoppingOrder.ppPaymentStatus IS NULL";
 	private static final String _FINDER_COLUMN_G_U_PPPS_PPPAYMENTSTATUS_2 = "shoppingOrder.ppPaymentStatus = ?";
 	private static final String _FINDER_COLUMN_G_U_PPPS_PPPAYMENTSTATUS_3 = "(shoppingOrder.ppPaymentStatus IS NULL OR shoppingOrder.ppPaymentStatus = ?)";
-	private static final String _FILTER_SELECT_SHOPPINGORDER_WHERE = "SELECT {shoppingOrder.*} FROM ShoppingOrder shoppingOrder WHERE ";
-	private static final String _FILTER_COUNT_SHOPPINGORDER_WHERE = "SELECT COUNT(DISTINCT shoppingOrder.orderId) AS COUNT_VALUE FROM ShoppingOrder shoppingOrder WHERE ";
+	private static final String _FILTER_SQL_SELECT_SHOPPINGORDER_WHERE = "SELECT {shoppingOrder.*} FROM ShoppingOrder shoppingOrder WHERE ";
+	private static final String _FILTER_SQL_COUNT_SHOPPINGORDER_WHERE = "SELECT COUNT(shoppingOrder.orderId) AS COUNT_VALUE FROM ShoppingOrder shoppingOrder WHERE ";
 	private static final String _FILTER_COLUMN_ORDERID = "shoppingOrder.orderId";
 	private static final String _FILTER_COLUMN_USERID = "shoppingOrder.userId";
-	private static final String _ENTITY_ALIAS = "shoppingOrder";
+	private static final String _FILTER_ENTITY_ALIAS = "shoppingOrder";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "shoppingOrder.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No ShoppingOrder exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No ShoppingOrder exists with the key {";

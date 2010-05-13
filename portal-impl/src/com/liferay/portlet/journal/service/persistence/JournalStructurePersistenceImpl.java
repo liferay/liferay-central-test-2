@@ -1196,7 +1196,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 				query = new StringBundler(3);
 			}
 
-			query.append(_FILTER_SELECT_JOURNALSTRUCTURE_WHERE);
+			query.append(_FILTER_SQL_SELECT_JOURNALSTRUCTURE_WHERE);
 
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
@@ -1215,7 +1215,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity(_ENTITY_ALIAS, JournalStructureImpl.class);
+			q.addEntity(_FILTER_ENTITY_ALIAS, JournalStructureImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1985,7 +1985,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 				query = new StringBundler(4);
 			}
 
-			query.append(_FILTER_SELECT_JOURNALSTRUCTURE_WHERE);
+			query.append(_FILTER_SQL_SELECT_JOURNALSTRUCTURE_WHERE);
 
 			query.append(_FINDER_COLUMN_G_P_GROUPID_2);
 
@@ -2016,7 +2016,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity(_ENTITY_ALIAS, JournalStructureImpl.class);
+			q.addEntity(_FILTER_ENTITY_ALIAS, JournalStructureImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2290,7 +2290,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 
 			StringBundler query = new StringBundler(3);
 
-			query.append(_FILTER_COUNT_JOURNALSTRUCTURE_WHERE);
+			query.append(_FILTER_SQL_COUNT_JOURNALSTRUCTURE_WHERE);
 
 			if (uuid == null) {
 				query.append(_FINDER_COLUMN_UUID_G_UUID_1);
@@ -2388,7 +2388,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 
 			StringBundler query = new StringBundler(2);
 
-			query.append(_FILTER_COUNT_JOURNALSTRUCTURE_WHERE);
+			query.append(_FILTER_SQL_COUNT_JOURNALSTRUCTURE_WHERE);
 
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
@@ -2546,7 +2546,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 
 			StringBundler query = new StringBundler(3);
 
-			query.append(_FILTER_COUNT_JOURNALSTRUCTURE_WHERE);
+			query.append(_FILTER_SQL_COUNT_JOURNALSTRUCTURE_WHERE);
 
 			query.append(_FINDER_COLUMN_G_S_GROUPID_2);
 
@@ -2662,7 +2662,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 
 			StringBundler query = new StringBundler(3);
 
-			query.append(_FILTER_COUNT_JOURNALSTRUCTURE_WHERE);
+			query.append(_FILTER_SQL_COUNT_JOURNALSTRUCTURE_WHERE);
 
 			query.append(_FINDER_COLUMN_G_P_GROUPID_2);
 
@@ -2807,11 +2807,11 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	private static final String _FINDER_COLUMN_G_P_PARENTSTRUCTUREID_1 = "journalStructure.parentStructureId IS NULL";
 	private static final String _FINDER_COLUMN_G_P_PARENTSTRUCTUREID_2 = "journalStructure.parentStructureId = ?";
 	private static final String _FINDER_COLUMN_G_P_PARENTSTRUCTUREID_3 = "(journalStructure.parentStructureId IS NULL OR journalStructure.parentStructureId = ?)";
-	private static final String _FILTER_SELECT_JOURNALSTRUCTURE_WHERE = "SELECT {journalStructure.*} FROM JournalStructure journalStructure WHERE ";
-	private static final String _FILTER_COUNT_JOURNALSTRUCTURE_WHERE = "SELECT COUNT(DISTINCT journalStructure.id) AS COUNT_VALUE FROM JournalStructure journalStructure WHERE ";
+	private static final String _FILTER_SQL_SELECT_JOURNALSTRUCTURE_WHERE = "SELECT {journalStructure.*} FROM JournalStructure journalStructure WHERE ";
+	private static final String _FILTER_SQL_COUNT_JOURNALSTRUCTURE_WHERE = "SELECT COUNT(journalStructure.id) AS COUNT_VALUE FROM JournalStructure journalStructure WHERE ";
 	private static final String _FILTER_COLUMN_ID = "journalStructure.id";
 	private static final String _FILTER_COLUMN_USERID = "journalStructure.userId";
-	private static final String _ENTITY_ALIAS = "journalStructure";
+	private static final String _FILTER_ENTITY_ALIAS = "journalStructure";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "journalStructure.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No JournalStructure exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No JournalStructure exists with the key {";

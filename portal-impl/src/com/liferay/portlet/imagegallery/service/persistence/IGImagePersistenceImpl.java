@@ -1258,7 +1258,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 				query = new StringBundler(3);
 			}
 
-			query.append(_FILTER_SELECT_IGIMAGE_WHERE);
+			query.append(_FILTER_SQL_SELECT_IGIMAGE_WHERE);
 
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
@@ -1277,7 +1277,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity(_ENTITY_ALIAS, IGImageImpl.class);
+			q.addEntity(_FILTER_ENTITY_ALIAS, IGImageImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2025,7 +2025,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 				query = new StringBundler(4);
 			}
 
-			query.append(_FILTER_SELECT_IGIMAGE_WHERE);
+			query.append(_FILTER_SQL_SELECT_IGIMAGE_WHERE);
 
 			query.append(_FINDER_COLUMN_G_U_GROUPID_2);
 
@@ -2046,7 +2046,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity(_ENTITY_ALIAS, IGImageImpl.class);
+			q.addEntity(_FILTER_ENTITY_ALIAS, IGImageImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2370,7 +2370,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 				query = new StringBundler(4);
 			}
 
-			query.append(_FILTER_SELECT_IGIMAGE_WHERE);
+			query.append(_FILTER_SQL_SELECT_IGIMAGE_WHERE);
 
 			query.append(_FINDER_COLUMN_G_F_GROUPID_2);
 
@@ -2391,7 +2391,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity(_ENTITY_ALIAS, IGImageImpl.class);
+			q.addEntity(_FILTER_ENTITY_ALIAS, IGImageImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2756,7 +2756,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 				query = new StringBundler(5);
 			}
 
-			query.append(_FILTER_SELECT_IGIMAGE_WHERE);
+			query.append(_FILTER_SQL_SELECT_IGIMAGE_WHERE);
 
 			query.append(_FINDER_COLUMN_G_F_N_GROUPID_2);
 
@@ -2789,7 +2789,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity(_ENTITY_ALIAS, IGImageImpl.class);
+			q.addEntity(_FILTER_ENTITY_ALIAS, IGImageImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -3090,7 +3090,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 			StringBundler query = new StringBundler(3);
 
-			query.append(_FILTER_COUNT_IGIMAGE_WHERE);
+			query.append(_FILTER_SQL_COUNT_IGIMAGE_WHERE);
 
 			if (uuid == null) {
 				query.append(_FINDER_COLUMN_UUID_G_UUID_1);
@@ -3188,7 +3188,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 			StringBundler query = new StringBundler(2);
 
-			query.append(_FILTER_COUNT_IGIMAGE_WHERE);
+			query.append(_FILTER_SQL_COUNT_IGIMAGE_WHERE);
 
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
@@ -3461,7 +3461,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 			StringBundler query = new StringBundler(3);
 
-			query.append(_FILTER_COUNT_IGIMAGE_WHERE);
+			query.append(_FILTER_SQL_COUNT_IGIMAGE_WHERE);
 
 			query.append(_FINDER_COLUMN_G_U_GROUPID_2);
 
@@ -3553,7 +3553,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 			StringBundler query = new StringBundler(3);
 
-			query.append(_FILTER_COUNT_IGIMAGE_WHERE);
+			query.append(_FILTER_SQL_COUNT_IGIMAGE_WHERE);
 
 			query.append(_FINDER_COLUMN_G_F_GROUPID_2);
 
@@ -3665,7 +3665,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 			StringBundler query = new StringBundler(4);
 
-			query.append(_FILTER_COUNT_IGIMAGE_WHERE);
+			query.append(_FILTER_SQL_COUNT_IGIMAGE_WHERE);
 
 			query.append(_FINDER_COLUMN_G_F_N_GROUPID_2);
 
@@ -3814,11 +3814,11 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 	private static final String _FINDER_COLUMN_G_F_N_NAME_1 = "igImage.name IS NULL";
 	private static final String _FINDER_COLUMN_G_F_N_NAME_2 = "igImage.name = ?";
 	private static final String _FINDER_COLUMN_G_F_N_NAME_3 = "(igImage.name IS NULL OR igImage.name = ?)";
-	private static final String _FILTER_SELECT_IGIMAGE_WHERE = "SELECT {igImage.*} FROM IGImage igImage WHERE ";
-	private static final String _FILTER_COUNT_IGIMAGE_WHERE = "SELECT COUNT(DISTINCT igImage.imageId) AS COUNT_VALUE FROM IGImage igImage WHERE ";
+	private static final String _FILTER_SQL_SELECT_IGIMAGE_WHERE = "SELECT {igImage.*} FROM IGImage igImage WHERE ";
+	private static final String _FILTER_SQL_COUNT_IGIMAGE_WHERE = "SELECT COUNT(igImage.imageId) AS COUNT_VALUE FROM IGImage igImage WHERE ";
 	private static final String _FILTER_COLUMN_IMAGEID = "igImage.imageId";
 	private static final String _FILTER_COLUMN_USERID = "igImage.userId";
-	private static final String _ENTITY_ALIAS = "igImage";
+	private static final String _FILTER_ENTITY_ALIAS = "igImage";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "igImage.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No IGImage exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No IGImage exists with the key {";

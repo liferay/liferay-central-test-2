@@ -626,7 +626,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 				query = new StringBundler(3);
 			}
 
-			query.append(_FILTER_SELECT_ASSETTAG_WHERE);
+			query.append(_FILTER_SQL_SELECT_ASSETTAG_WHERE);
 
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
@@ -645,7 +645,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity(_ENTITY_ALIAS, AssetTagImpl.class);
+			q.addEntity(_FILTER_ENTITY_ALIAS, AssetTagImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -802,7 +802,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 
 			StringBundler query = new StringBundler(2);
 
-			query.append(_FILTER_COUNT_ASSETTAG_WHERE);
+			query.append(_FILTER_SQL_COUNT_ASSETTAG_WHERE);
 
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
@@ -1438,11 +1438,11 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 	private static final String _SQL_GETASSETENTRIESSIZE = "SELECT COUNT(*) AS COUNT_VALUE FROM AssetEntries_AssetTags WHERE tagId = ?";
 	private static final String _SQL_CONTAINSASSETENTRY = "SELECT COUNT(*) AS COUNT_VALUE FROM AssetEntries_AssetTags WHERE tagId = ? AND entryId = ?";
 	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "assetTag.groupId = ?";
-	private static final String _FILTER_SELECT_ASSETTAG_WHERE = "SELECT {assetTag.*} FROM AssetTag assetTag WHERE ";
-	private static final String _FILTER_COUNT_ASSETTAG_WHERE = "SELECT COUNT(DISTINCT assetTag.tagId) AS COUNT_VALUE FROM AssetTag assetTag WHERE ";
+	private static final String _FILTER_SQL_SELECT_ASSETTAG_WHERE = "SELECT {assetTag.*} FROM AssetTag assetTag WHERE ";
+	private static final String _FILTER_SQL_COUNT_ASSETTAG_WHERE = "SELECT COUNT(assetTag.tagId) AS COUNT_VALUE FROM AssetTag assetTag WHERE ";
 	private static final String _FILTER_COLUMN_TAGID = "assetTag.tagId";
 	private static final String _FILTER_COLUMN_USERID = "assetTag.userId";
-	private static final String _ENTITY_ALIAS = "assetTag";
+	private static final String _FILTER_ENTITY_ALIAS = "assetTag";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "assetTag.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No AssetTag exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No AssetTag exists with the key {";

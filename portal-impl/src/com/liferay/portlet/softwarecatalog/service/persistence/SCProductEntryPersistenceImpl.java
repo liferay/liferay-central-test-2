@@ -735,7 +735,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 				query = new StringBundler(3);
 			}
 
-			query.append(_FILTER_SELECT_SCPRODUCTENTRY_WHERE);
+			query.append(_FILTER_SQL_SELECT_SCPRODUCTENTRY_WHERE);
 
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
@@ -755,7 +755,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity(_ENTITY_ALIAS, SCProductEntryImpl.class);
+			q.addEntity(_FILTER_ENTITY_ALIAS, SCProductEntryImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1343,7 +1343,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 				query = new StringBundler(4);
 			}
 
-			query.append(_FILTER_SELECT_SCPRODUCTENTRY_WHERE);
+			query.append(_FILTER_SQL_SELECT_SCPRODUCTENTRY_WHERE);
 
 			query.append(_FINDER_COLUMN_G_U_GROUPID_2);
 
@@ -1365,7 +1365,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity(_ENTITY_ALIAS, SCProductEntryImpl.class);
+			q.addEntity(_FILTER_ENTITY_ALIAS, SCProductEntryImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1689,7 +1689,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 
 			StringBundler query = new StringBundler(2);
 
-			query.append(_FILTER_COUNT_SCPRODUCTENTRY_WHERE);
+			query.append(_FILTER_SQL_COUNT_SCPRODUCTENTRY_WHERE);
 
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
@@ -1823,7 +1823,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 
 			StringBundler query = new StringBundler(3);
 
-			query.append(_FILTER_COUNT_SCPRODUCTENTRY_WHERE);
+			query.append(_FILTER_SQL_COUNT_SCPRODUCTENTRY_WHERE);
 
 			query.append(_FINDER_COLUMN_G_U_GROUPID_2);
 
@@ -2558,11 +2558,11 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 	private static final String _FINDER_COLUMN_RG_RA_REPOARTIFACTID_1 = "scProductEntry.repoArtifactId IS NULL";
 	private static final String _FINDER_COLUMN_RG_RA_REPOARTIFACTID_2 = "lower(scProductEntry.repoArtifactId) = ?";
 	private static final String _FINDER_COLUMN_RG_RA_REPOARTIFACTID_3 = "(scProductEntry.repoArtifactId IS NULL OR lower(scProductEntry.repoArtifactId) = ?)";
-	private static final String _FILTER_SELECT_SCPRODUCTENTRY_WHERE = "SELECT {scProductEntry.*} FROM SCProductEntry scProductEntry WHERE ";
-	private static final String _FILTER_COUNT_SCPRODUCTENTRY_WHERE = "SELECT COUNT(DISTINCT scProductEntry.productEntryId) AS COUNT_VALUE FROM SCProductEntry scProductEntry WHERE ";
+	private static final String _FILTER_SQL_SELECT_SCPRODUCTENTRY_WHERE = "SELECT {scProductEntry.*} FROM SCProductEntry scProductEntry WHERE ";
+	private static final String _FILTER_SQL_COUNT_SCPRODUCTENTRY_WHERE = "SELECT COUNT(scProductEntry.productEntryId) AS COUNT_VALUE FROM SCProductEntry scProductEntry WHERE ";
 	private static final String _FILTER_COLUMN_PRODUCTENTRYID = "scProductEntry.productEntryId";
 	private static final String _FILTER_COLUMN_USERID = "scProductEntry.userId";
-	private static final String _ENTITY_ALIAS = "scProductEntry";
+	private static final String _FILTER_ENTITY_ALIAS = "scProductEntry";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "scProductEntry.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No SCProductEntry exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No SCProductEntry exists with the key {";

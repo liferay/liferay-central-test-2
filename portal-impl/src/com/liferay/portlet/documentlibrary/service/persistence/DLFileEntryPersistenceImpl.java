@@ -1290,7 +1290,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 				query = new StringBundler(3);
 			}
 
-			query.append(_FILTER_SELECT_DLFILEENTRY_WHERE);
+			query.append(_FILTER_SQL_SELECT_DLFILEENTRY_WHERE);
 
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
@@ -1309,7 +1309,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity(_ENTITY_ALIAS, DLFileEntryImpl.class);
+			q.addEntity(_FILTER_ENTITY_ALIAS, DLFileEntryImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1896,7 +1896,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 				query = new StringBundler(4);
 			}
 
-			query.append(_FILTER_SELECT_DLFILEENTRY_WHERE);
+			query.append(_FILTER_SQL_SELECT_DLFILEENTRY_WHERE);
 
 			query.append(_FINDER_COLUMN_G_U_GROUPID_2);
 
@@ -1917,7 +1917,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity(_ENTITY_ALIAS, DLFileEntryImpl.class);
+			q.addEntity(_FILTER_ENTITY_ALIAS, DLFileEntryImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2242,7 +2242,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 				query = new StringBundler(4);
 			}
 
-			query.append(_FILTER_SELECT_DLFILEENTRY_WHERE);
+			query.append(_FILTER_SQL_SELECT_DLFILEENTRY_WHERE);
 
 			query.append(_FINDER_COLUMN_G_F_GROUPID_2);
 
@@ -2263,7 +2263,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity(_ENTITY_ALIAS, DLFileEntryImpl.class);
+			q.addEntity(_FILTER_ENTITY_ALIAS, DLFileEntryImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2826,7 +2826,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 
 			StringBundler query = new StringBundler(3);
 
-			query.append(_FILTER_COUNT_DLFILEENTRY_WHERE);
+			query.append(_FILTER_SQL_COUNT_DLFILEENTRY_WHERE);
 
 			if (uuid == null) {
 				query.append(_FINDER_COLUMN_UUID_G_UUID_1);
@@ -2924,7 +2924,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 
 			StringBundler query = new StringBundler(2);
 
-			query.append(_FILTER_COUNT_DLFILEENTRY_WHERE);
+			query.append(_FILTER_SQL_COUNT_DLFILEENTRY_WHERE);
 
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
@@ -3057,7 +3057,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 
 			StringBundler query = new StringBundler(3);
 
-			query.append(_FILTER_COUNT_DLFILEENTRY_WHERE);
+			query.append(_FILTER_SQL_COUNT_DLFILEENTRY_WHERE);
 
 			query.append(_FINDER_COLUMN_G_U_GROUPID_2);
 
@@ -3149,7 +3149,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 
 			StringBundler query = new StringBundler(3);
 
-			query.append(_FILTER_COUNT_DLFILEENTRY_WHERE);
+			query.append(_FILTER_SQL_COUNT_DLFILEENTRY_WHERE);
 
 			query.append(_FINDER_COLUMN_G_F_GROUPID_2);
 
@@ -3261,7 +3261,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 
 			StringBundler query = new StringBundler(4);
 
-			query.append(_FILTER_COUNT_DLFILEENTRY_WHERE);
+			query.append(_FILTER_SQL_COUNT_DLFILEENTRY_WHERE);
 
 			query.append(_FINDER_COLUMN_G_F_N_GROUPID_2);
 
@@ -3389,7 +3389,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 
 			StringBundler query = new StringBundler(4);
 
-			query.append(_FILTER_COUNT_DLFILEENTRY_WHERE);
+			query.append(_FILTER_SQL_COUNT_DLFILEENTRY_WHERE);
 
 			query.append(_FINDER_COLUMN_G_F_T_GROUPID_2);
 
@@ -3558,11 +3558,11 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	private static final String _FINDER_COLUMN_G_F_T_TITLE_1 = "dlFileEntry.title IS NULL";
 	private static final String _FINDER_COLUMN_G_F_T_TITLE_2 = "dlFileEntry.title = ?";
 	private static final String _FINDER_COLUMN_G_F_T_TITLE_3 = "(dlFileEntry.title IS NULL OR dlFileEntry.title = ?)";
-	private static final String _FILTER_SELECT_DLFILEENTRY_WHERE = "SELECT {dlFileEntry.*} FROM DLFileEntry dlFileEntry WHERE ";
-	private static final String _FILTER_COUNT_DLFILEENTRY_WHERE = "SELECT COUNT(DISTINCT dlFileEntry.fileEntryId) AS COUNT_VALUE FROM DLFileEntry dlFileEntry WHERE ";
+	private static final String _FILTER_SQL_SELECT_DLFILEENTRY_WHERE = "SELECT {dlFileEntry.*} FROM DLFileEntry dlFileEntry WHERE ";
+	private static final String _FILTER_SQL_COUNT_DLFILEENTRY_WHERE = "SELECT COUNT(dlFileEntry.fileEntryId) AS COUNT_VALUE FROM DLFileEntry dlFileEntry WHERE ";
 	private static final String _FILTER_COLUMN_FILEENTRYID = "dlFileEntry.fileEntryId";
 	private static final String _FILTER_COLUMN_USERID = "dlFileEntry.userId";
-	private static final String _ENTITY_ALIAS = "dlFileEntry";
+	private static final String _FILTER_ENTITY_ALIAS = "dlFileEntry";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "dlFileEntry.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No DLFileEntry exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No DLFileEntry exists with the key {";

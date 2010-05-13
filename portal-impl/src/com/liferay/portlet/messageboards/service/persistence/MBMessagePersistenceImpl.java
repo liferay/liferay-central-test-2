@@ -1355,7 +1355,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 				query = new StringBundler(3);
 			}
 
-			query.append(_FILTER_SELECT_MBMESSAGE_WHERE);
+			query.append(_FILTER_SQL_SELECT_MBMESSAGE_WHERE);
 
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
@@ -1374,7 +1374,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity(_ENTITY_ALIAS, MBMessageImpl.class);
+			q.addEntity(_FILTER_ENTITY_ALIAS, MBMessageImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2749,7 +2749,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 				query = new StringBundler(4);
 			}
 
-			query.append(_FILTER_SELECT_MBMESSAGE_WHERE);
+			query.append(_FILTER_SQL_SELECT_MBMESSAGE_WHERE);
 
 			query.append(_FINDER_COLUMN_G_U_GROUPID_2);
 
@@ -2770,7 +2770,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity(_ENTITY_ALIAS, MBMessageImpl.class);
+			q.addEntity(_FILTER_ENTITY_ALIAS, MBMessageImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -3095,7 +3095,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 				query = new StringBundler(4);
 			}
 
-			query.append(_FILTER_SELECT_MBMESSAGE_WHERE);
+			query.append(_FILTER_SQL_SELECT_MBMESSAGE_WHERE);
 
 			query.append(_FINDER_COLUMN_G_C_GROUPID_2);
 
@@ -3116,7 +3116,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity(_ENTITY_ALIAS, MBMessageImpl.class);
+			q.addEntity(_FILTER_ENTITY_ALIAS, MBMessageImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -3440,7 +3440,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 				query = new StringBundler(4);
 			}
 
-			query.append(_FILTER_SELECT_MBMESSAGE_WHERE);
+			query.append(_FILTER_SQL_SELECT_MBMESSAGE_WHERE);
 
 			query.append(_FINDER_COLUMN_G_S_GROUPID_2);
 
@@ -3461,7 +3461,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity(_ENTITY_ALIAS, MBMessageImpl.class);
+			q.addEntity(_FILTER_ENTITY_ALIAS, MBMessageImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -5192,7 +5192,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 				query = new StringBundler(5);
 			}
 
-			query.append(_FILTER_SELECT_MBMESSAGE_WHERE);
+			query.append(_FILTER_SQL_SELECT_MBMESSAGE_WHERE);
 
 			query.append(_FINDER_COLUMN_G_U_S_GROUPID_2);
 
@@ -5215,7 +5215,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity(_ENTITY_ALIAS, MBMessageImpl.class);
+			q.addEntity(_FILTER_ENTITY_ALIAS, MBMessageImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -5557,7 +5557,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 				query = new StringBundler(5);
 			}
 
-			query.append(_FILTER_SELECT_MBMESSAGE_WHERE);
+			query.append(_FILTER_SQL_SELECT_MBMESSAGE_WHERE);
 
 			query.append(_FINDER_COLUMN_G_C_T_GROUPID_2);
 
@@ -5580,7 +5580,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity(_ENTITY_ALIAS, MBMessageImpl.class);
+			q.addEntity(_FILTER_ENTITY_ALIAS, MBMessageImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -5922,7 +5922,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 				query = new StringBundler(5);
 			}
 
-			query.append(_FILTER_SELECT_MBMESSAGE_WHERE);
+			query.append(_FILTER_SQL_SELECT_MBMESSAGE_WHERE);
 
 			query.append(_FINDER_COLUMN_G_C_S_GROUPID_2);
 
@@ -5945,7 +5945,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity(_ENTITY_ALIAS, MBMessageImpl.class);
+			q.addEntity(_FILTER_ENTITY_ALIAS, MBMessageImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -6601,7 +6601,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 				query = new StringBundler(6);
 			}
 
-			query.append(_FILTER_SELECT_MBMESSAGE_WHERE);
+			query.append(_FILTER_SQL_SELECT_MBMESSAGE_WHERE);
 
 			query.append(_FINDER_COLUMN_G_C_T_S_GROUPID_2);
 
@@ -6626,7 +6626,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity(_ENTITY_ALIAS, MBMessageImpl.class);
+			q.addEntity(_FILTER_ENTITY_ALIAS, MBMessageImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -6994,7 +6994,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			StringBundler query = new StringBundler(3);
 
-			query.append(_FILTER_COUNT_MBMESSAGE_WHERE);
+			query.append(_FILTER_SQL_COUNT_MBMESSAGE_WHERE);
 
 			if (uuid == null) {
 				query.append(_FINDER_COLUMN_UUID_G_UUID_1);
@@ -7092,7 +7092,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			StringBundler query = new StringBundler(2);
 
-			query.append(_FILTER_COUNT_MBMESSAGE_WHERE);
+			query.append(_FILTER_SQL_COUNT_MBMESSAGE_WHERE);
 
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
@@ -7363,7 +7363,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			StringBundler query = new StringBundler(3);
 
-			query.append(_FILTER_COUNT_MBMESSAGE_WHERE);
+			query.append(_FILTER_SQL_COUNT_MBMESSAGE_WHERE);
 
 			query.append(_FINDER_COLUMN_G_U_GROUPID_2);
 
@@ -7457,7 +7457,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			StringBundler query = new StringBundler(3);
 
-			query.append(_FILTER_COUNT_MBMESSAGE_WHERE);
+			query.append(_FILTER_SQL_COUNT_MBMESSAGE_WHERE);
 
 			query.append(_FINDER_COLUMN_G_C_GROUPID_2);
 
@@ -7550,7 +7550,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			StringBundler query = new StringBundler(3);
 
-			query.append(_FILTER_COUNT_MBMESSAGE_WHERE);
+			query.append(_FILTER_SQL_COUNT_MBMESSAGE_WHERE);
 
 			query.append(_FINDER_COLUMN_G_S_GROUPID_2);
 
@@ -7910,7 +7910,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			StringBundler query = new StringBundler(4);
 
-			query.append(_FILTER_COUNT_MBMESSAGE_WHERE);
+			query.append(_FILTER_SQL_COUNT_MBMESSAGE_WHERE);
 
 			query.append(_FINDER_COLUMN_G_U_S_GROUPID_2);
 
@@ -8012,7 +8012,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			StringBundler query = new StringBundler(4);
 
-			query.append(_FILTER_COUNT_MBMESSAGE_WHERE);
+			query.append(_FILTER_SQL_COUNT_MBMESSAGE_WHERE);
 
 			query.append(_FINDER_COLUMN_G_C_T_GROUPID_2);
 
@@ -8114,7 +8114,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			StringBundler query = new StringBundler(4);
 
-			query.append(_FILTER_COUNT_MBMESSAGE_WHERE);
+			query.append(_FILTER_SQL_COUNT_MBMESSAGE_WHERE);
 
 			query.append(_FINDER_COLUMN_G_C_S_GROUPID_2);
 
@@ -8278,7 +8278,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			StringBundler query = new StringBundler(5);
 
-			query.append(_FILTER_COUNT_MBMESSAGE_WHERE);
+			query.append(_FILTER_SQL_COUNT_MBMESSAGE_WHERE);
 
 			query.append(_FINDER_COLUMN_G_C_T_S_GROUPID_2);
 
@@ -8464,11 +8464,11 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	private static final String _FINDER_COLUMN_G_C_T_S_CATEGORYID_2 = "mbMessage.categoryId = ? AND ";
 	private static final String _FINDER_COLUMN_G_C_T_S_THREADID_2 = "mbMessage.threadId = ? AND ";
 	private static final String _FINDER_COLUMN_G_C_T_S_STATUS_2 = "mbMessage.status = ?";
-	private static final String _FILTER_SELECT_MBMESSAGE_WHERE = "SELECT {mbMessage.*} FROM MBMessage mbMessage WHERE ";
-	private static final String _FILTER_COUNT_MBMESSAGE_WHERE = "SELECT COUNT(DISTINCT mbMessage.messageId) AS COUNT_VALUE FROM MBMessage mbMessage WHERE ";
+	private static final String _FILTER_SQL_SELECT_MBMESSAGE_WHERE = "SELECT {mbMessage.*} FROM MBMessage mbMessage WHERE ";
+	private static final String _FILTER_SQL_COUNT_MBMESSAGE_WHERE = "SELECT COUNT(mbMessage.messageId) AS COUNT_VALUE FROM MBMessage mbMessage WHERE ";
 	private static final String _FILTER_COLUMN_MESSAGEID = "mbMessage.messageId";
 	private static final String _FILTER_COLUMN_USERID = "mbMessage.userId";
-	private static final String _ENTITY_ALIAS = "mbMessage";
+	private static final String _FILTER_ENTITY_ALIAS = "mbMessage";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "mbMessage.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No MBMessage exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No MBMessage exists with the key {";

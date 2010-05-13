@@ -1166,7 +1166,7 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 				query = new StringBundler(3);
 			}
 
-			query.append(_FILTER_SELECT_JOURNALFEED_WHERE);
+			query.append(_FILTER_SQL_SELECT_JOURNALFEED_WHERE);
 
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
@@ -1185,7 +1185,7 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity(_ENTITY_ALIAS, JournalFeedImpl.class);
+			q.addEntity(_FILTER_ENTITY_ALIAS, JournalFeedImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1567,7 +1567,7 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 
 			StringBundler query = new StringBundler(3);
 
-			query.append(_FILTER_COUNT_JOURNALFEED_WHERE);
+			query.append(_FILTER_SQL_COUNT_JOURNALFEED_WHERE);
 
 			if (uuid == null) {
 				query.append(_FINDER_COLUMN_UUID_G_UUID_1);
@@ -1665,7 +1665,7 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 
 			StringBundler query = new StringBundler(2);
 
-			query.append(_FILTER_COUNT_JOURNALFEED_WHERE);
+			query.append(_FILTER_SQL_COUNT_JOURNALFEED_WHERE);
 
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
@@ -1765,7 +1765,7 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 
 			StringBundler query = new StringBundler(3);
 
-			query.append(_FILTER_COUNT_JOURNALFEED_WHERE);
+			query.append(_FILTER_SQL_COUNT_JOURNALFEED_WHERE);
 
 			query.append(_FINDER_COLUMN_G_F_GROUPID_2);
 
@@ -1901,11 +1901,11 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 	private static final String _FINDER_COLUMN_G_F_FEEDID_1 = "journalFeed.feedId IS NULL";
 	private static final String _FINDER_COLUMN_G_F_FEEDID_2 = "journalFeed.feedId = ?";
 	private static final String _FINDER_COLUMN_G_F_FEEDID_3 = "(journalFeed.feedId IS NULL OR journalFeed.feedId = ?)";
-	private static final String _FILTER_SELECT_JOURNALFEED_WHERE = "SELECT {journalFeed.*} FROM JournalFeed journalFeed WHERE ";
-	private static final String _FILTER_COUNT_JOURNALFEED_WHERE = "SELECT COUNT(DISTINCT journalFeed.id) AS COUNT_VALUE FROM JournalFeed journalFeed WHERE ";
+	private static final String _FILTER_SQL_SELECT_JOURNALFEED_WHERE = "SELECT {journalFeed.*} FROM JournalFeed journalFeed WHERE ";
+	private static final String _FILTER_SQL_COUNT_JOURNALFEED_WHERE = "SELECT COUNT(journalFeed.id) AS COUNT_VALUE FROM JournalFeed journalFeed WHERE ";
 	private static final String _FILTER_COLUMN_ID = "journalFeed.id";
 	private static final String _FILTER_COLUMN_USERID = "journalFeed.userId";
-	private static final String _ENTITY_ALIAS = "journalFeed";
+	private static final String _FILTER_ENTITY_ALIAS = "journalFeed";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "journalFeed.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No JournalFeed exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No JournalFeed exists with the key {";

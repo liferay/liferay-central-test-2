@@ -695,7 +695,7 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 				query = new StringBundler(3);
 			}
 
-			query.append(_FILTER_SELECT_TASKSPROPOSAL_WHERE);
+			query.append(_FILTER_SQL_SELECT_TASKSPROPOSAL_WHERE);
 
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
@@ -714,7 +714,7 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity(_ENTITY_ALIAS, TasksProposalImpl.class);
+			q.addEntity(_FILTER_ENTITY_ALIAS, TasksProposalImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1038,7 +1038,7 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 				query = new StringBundler(4);
 			}
 
-			query.append(_FILTER_SELECT_TASKSPROPOSAL_WHERE);
+			query.append(_FILTER_SQL_SELECT_TASKSPROPOSAL_WHERE);
 
 			query.append(_FINDER_COLUMN_G_U_GROUPID_2);
 
@@ -1059,7 +1059,7 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity(_ENTITY_ALIAS, TasksProposalImpl.class);
+			q.addEntity(_FILTER_ENTITY_ALIAS, TasksProposalImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1362,7 +1362,7 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 
 			StringBundler query = new StringBundler(2);
 
-			query.append(_FILTER_COUNT_TASKSPROPOSAL_WHERE);
+			query.append(_FILTER_SQL_COUNT_TASKSPROPOSAL_WHERE);
 
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
@@ -1449,7 +1449,7 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 
 			StringBundler query = new StringBundler(3);
 
-			query.append(_FILTER_COUNT_TASKSPROPOSAL_WHERE);
+			query.append(_FILTER_SQL_COUNT_TASKSPROPOSAL_WHERE);
 
 			query.append(_FINDER_COLUMN_G_U_GROUPID_2);
 
@@ -1623,11 +1623,11 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 	private static final String _FINDER_COLUMN_C_C_CLASSPK_1 = "tasksProposal.classPK IS NULL";
 	private static final String _FINDER_COLUMN_C_C_CLASSPK_2 = "tasksProposal.classPK = ?";
 	private static final String _FINDER_COLUMN_C_C_CLASSPK_3 = "(tasksProposal.classPK IS NULL OR tasksProposal.classPK = ?)";
-	private static final String _FILTER_SELECT_TASKSPROPOSAL_WHERE = "SELECT {tasksProposal.*} FROM TasksProposal tasksProposal WHERE ";
-	private static final String _FILTER_COUNT_TASKSPROPOSAL_WHERE = "SELECT COUNT(DISTINCT tasksProposal.proposalId) AS COUNT_VALUE FROM TasksProposal tasksProposal WHERE ";
+	private static final String _FILTER_SQL_SELECT_TASKSPROPOSAL_WHERE = "SELECT {tasksProposal.*} FROM TasksProposal tasksProposal WHERE ";
+	private static final String _FILTER_SQL_COUNT_TASKSPROPOSAL_WHERE = "SELECT COUNT(tasksProposal.proposalId) AS COUNT_VALUE FROM TasksProposal tasksProposal WHERE ";
 	private static final String _FILTER_COLUMN_PROPOSALID = "tasksProposal.proposalId";
 	private static final String _FILTER_COLUMN_USERID = "tasksProposal.userId";
-	private static final String _ENTITY_ALIAS = "tasksProposal";
+	private static final String _FILTER_ENTITY_ALIAS = "tasksProposal";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "tasksProposal.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No TasksProposal exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No TasksProposal exists with the key {";

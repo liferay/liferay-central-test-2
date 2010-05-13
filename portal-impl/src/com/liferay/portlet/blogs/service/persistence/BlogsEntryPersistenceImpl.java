@@ -1384,7 +1384,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 				query = new StringBundler(3);
 			}
 
-			query.append(_FILTER_SELECT_BLOGSENTRY_WHERE);
+			query.append(_FILTER_SQL_SELECT_BLOGSENTRY_WHERE);
 
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
@@ -1403,7 +1403,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity(_ENTITY_ALIAS, BlogsEntryImpl.class);
+			q.addEntity(_FILTER_ENTITY_ALIAS, BlogsEntryImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2986,7 +2986,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 				query = new StringBundler(4);
 			}
 
-			query.append(_FILTER_SELECT_BLOGSENTRY_WHERE);
+			query.append(_FILTER_SQL_SELECT_BLOGSENTRY_WHERE);
 
 			query.append(_FINDER_COLUMN_G_D_GROUPID_2);
 
@@ -3012,7 +3012,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity(_ENTITY_ALIAS, BlogsEntryImpl.class);
+			q.addEntity(_FILTER_ENTITY_ALIAS, BlogsEntryImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -3339,7 +3339,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 				query = new StringBundler(4);
 			}
 
-			query.append(_FILTER_SELECT_BLOGSENTRY_WHERE);
+			query.append(_FILTER_SQL_SELECT_BLOGSENTRY_WHERE);
 
 			query.append(_FINDER_COLUMN_G_S_GROUPID_2);
 
@@ -3360,7 +3360,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity(_ENTITY_ALIAS, BlogsEntryImpl.class);
+			q.addEntity(_FILTER_ENTITY_ALIAS, BlogsEntryImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -4318,7 +4318,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 				query = new StringBundler(5);
 			}
 
-			query.append(_FILTER_SELECT_BLOGSENTRY_WHERE);
+			query.append(_FILTER_SQL_SELECT_BLOGSENTRY_WHERE);
 
 			query.append(_FINDER_COLUMN_G_U_D_GROUPID_2);
 
@@ -4346,7 +4346,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity(_ENTITY_ALIAS, BlogsEntryImpl.class);
+			q.addEntity(_FILTER_ENTITY_ALIAS, BlogsEntryImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -4690,7 +4690,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 				query = new StringBundler(5);
 			}
 
-			query.append(_FILTER_SELECT_BLOGSENTRY_WHERE);
+			query.append(_FILTER_SQL_SELECT_BLOGSENTRY_WHERE);
 
 			query.append(_FINDER_COLUMN_G_U_S_GROUPID_2);
 
@@ -4713,7 +4713,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity(_ENTITY_ALIAS, BlogsEntryImpl.class);
+			q.addEntity(_FILTER_ENTITY_ALIAS, BlogsEntryImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -5071,7 +5071,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 				query = new StringBundler(5);
 			}
 
-			query.append(_FILTER_SELECT_BLOGSENTRY_WHERE);
+			query.append(_FILTER_SQL_SELECT_BLOGSENTRY_WHERE);
 
 			query.append(_FINDER_COLUMN_G_D_S_GROUPID_2);
 
@@ -5099,7 +5099,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity(_ENTITY_ALIAS, BlogsEntryImpl.class);
+			q.addEntity(_FILTER_ENTITY_ALIAS, BlogsEntryImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -5478,7 +5478,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 				query = new StringBundler(6);
 			}
 
-			query.append(_FILTER_SELECT_BLOGSENTRY_WHERE);
+			query.append(_FILTER_SQL_SELECT_BLOGSENTRY_WHERE);
 
 			query.append(_FINDER_COLUMN_G_U_D_S_GROUPID_2);
 
@@ -5508,7 +5508,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity(_ENTITY_ALIAS, BlogsEntryImpl.class);
+			q.addEntity(_FILTER_ENTITY_ALIAS, BlogsEntryImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -5853,7 +5853,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 
 			StringBundler query = new StringBundler(3);
 
-			query.append(_FILTER_COUNT_BLOGSENTRY_WHERE);
+			query.append(_FILTER_SQL_COUNT_BLOGSENTRY_WHERE);
 
 			if (uuid == null) {
 				query.append(_FINDER_COLUMN_UUID_G_UUID_1);
@@ -5951,7 +5951,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 
 			StringBundler query = new StringBundler(2);
 
-			query.append(_FILTER_COUNT_BLOGSENTRY_WHERE);
+			query.append(_FILTER_SQL_COUNT_BLOGSENTRY_WHERE);
 
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
@@ -6258,7 +6258,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 
 			StringBundler query = new StringBundler(3);
 
-			query.append(_FILTER_COUNT_BLOGSENTRY_WHERE);
+			query.append(_FILTER_SQL_COUNT_BLOGSENTRY_WHERE);
 
 			query.append(_FINDER_COLUMN_G_UT_GROUPID_2);
 
@@ -6369,7 +6369,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 
 			StringBundler query = new StringBundler(3);
 
-			query.append(_FILTER_COUNT_BLOGSENTRY_WHERE);
+			query.append(_FILTER_SQL_COUNT_BLOGSENTRY_WHERE);
 
 			query.append(_FINDER_COLUMN_G_D_GROUPID_2);
 
@@ -6469,7 +6469,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 
 			StringBundler query = new StringBundler(3);
 
-			query.append(_FILTER_COUNT_BLOGSENTRY_WHERE);
+			query.append(_FILTER_SQL_COUNT_BLOGSENTRY_WHERE);
 
 			query.append(_FINDER_COLUMN_G_S_GROUPID_2);
 
@@ -6699,7 +6699,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 
 			StringBundler query = new StringBundler(4);
 
-			query.append(_FILTER_COUNT_BLOGSENTRY_WHERE);
+			query.append(_FILTER_SQL_COUNT_BLOGSENTRY_WHERE);
 
 			query.append(_FINDER_COLUMN_G_U_D_GROUPID_2);
 
@@ -6808,7 +6808,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 
 			StringBundler query = new StringBundler(4);
 
-			query.append(_FILTER_COUNT_BLOGSENTRY_WHERE);
+			query.append(_FILTER_SQL_COUNT_BLOGSENTRY_WHERE);
 
 			query.append(_FINDER_COLUMN_G_U_S_GROUPID_2);
 
@@ -6919,7 +6919,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 
 			StringBundler query = new StringBundler(4);
 
-			query.append(_FILTER_COUNT_BLOGSENTRY_WHERE);
+			query.append(_FILTER_SQL_COUNT_BLOGSENTRY_WHERE);
 
 			query.append(_FINDER_COLUMN_G_D_S_GROUPID_2);
 
@@ -7041,7 +7041,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 
 			StringBundler query = new StringBundler(5);
 
-			query.append(_FILTER_COUNT_BLOGSENTRY_WHERE);
+			query.append(_FILTER_SQL_COUNT_BLOGSENTRY_WHERE);
 
 			query.append(_FINDER_COLUMN_G_U_D_S_GROUPID_2);
 
@@ -7226,11 +7226,11 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	private static final String _FINDER_COLUMN_G_U_D_S_DISPLAYDATE_1 = "blogsEntry.displayDate < NULL AND ";
 	private static final String _FINDER_COLUMN_G_U_D_S_DISPLAYDATE_2 = "blogsEntry.displayDate < ? AND ";
 	private static final String _FINDER_COLUMN_G_U_D_S_STATUS_2 = "blogsEntry.status = ?";
-	private static final String _FILTER_SELECT_BLOGSENTRY_WHERE = "SELECT {blogsEntry.*} FROM BlogsEntry blogsEntry WHERE ";
-	private static final String _FILTER_COUNT_BLOGSENTRY_WHERE = "SELECT COUNT(DISTINCT blogsEntry.entryId) AS COUNT_VALUE FROM BlogsEntry blogsEntry WHERE ";
+	private static final String _FILTER_SQL_SELECT_BLOGSENTRY_WHERE = "SELECT {blogsEntry.*} FROM BlogsEntry blogsEntry WHERE ";
+	private static final String _FILTER_SQL_COUNT_BLOGSENTRY_WHERE = "SELECT COUNT(blogsEntry.entryId) AS COUNT_VALUE FROM BlogsEntry blogsEntry WHERE ";
 	private static final String _FILTER_COLUMN_ENTRYID = "blogsEntry.entryId";
 	private static final String _FILTER_COLUMN_USERID = "blogsEntry.userId";
-	private static final String _ENTITY_ALIAS = "blogsEntry";
+	private static final String _FILTER_ENTITY_ALIAS = "blogsEntry";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "blogsEntry.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No BlogsEntry exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No BlogsEntry exists with the key {";

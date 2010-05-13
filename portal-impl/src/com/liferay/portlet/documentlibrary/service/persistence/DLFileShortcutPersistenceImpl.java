@@ -1166,7 +1166,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 				query = new StringBundler(3);
 			}
 
-			query.append(_FILTER_SELECT_DLFILESHORTCUT_WHERE);
+			query.append(_FILTER_SQL_SELECT_DLFILESHORTCUT_WHERE);
 
 			query.append(_FINDER_COLUMN_G_F_GROUPID_2);
 
@@ -1184,7 +1184,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity(_ENTITY_ALIAS, DLFileShortcutImpl.class);
+			q.addEntity(_FILTER_ENTITY_ALIAS, DLFileShortcutImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1518,7 +1518,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 				query = new StringBundler(4);
 			}
 
-			query.append(_FILTER_SELECT_DLFILESHORTCUT_WHERE);
+			query.append(_FILTER_SQL_SELECT_DLFILESHORTCUT_WHERE);
 
 			query.append(_FINDER_COLUMN_G_F_S_GROUPID_2);
 
@@ -1538,7 +1538,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity(_ENTITY_ALIAS, DLFileShortcutImpl.class);
+			q.addEntity(_FILTER_ENTITY_ALIAS, DLFileShortcutImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1901,7 +1901,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 				query = new StringBundler(4);
 			}
 
-			query.append(_FILTER_SELECT_DLFILESHORTCUT_WHERE);
+			query.append(_FILTER_SQL_SELECT_DLFILESHORTCUT_WHERE);
 
 			query.append(_FINDER_COLUMN_G_TF_TN_GROUPID_2);
 
@@ -1931,7 +1931,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity(_ENTITY_ALIAS, DLFileShortcutImpl.class);
+			q.addEntity(_FILTER_ENTITY_ALIAS, DLFileShortcutImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2315,7 +2315,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 				query = new StringBundler(5);
 			}
 
-			query.append(_FILTER_SELECT_DLFILESHORTCUT_WHERE);
+			query.append(_FILTER_SQL_SELECT_DLFILESHORTCUT_WHERE);
 
 			query.append(_FINDER_COLUMN_G_TF_TN_S_GROUPID_2);
 
@@ -2347,7 +2347,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity(_ENTITY_ALIAS, DLFileShortcutImpl.class);
+			q.addEntity(_FILTER_ENTITY_ALIAS, DLFileShortcutImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2626,7 +2626,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 
 			StringBundler query = new StringBundler(3);
 
-			query.append(_FILTER_COUNT_DLFILESHORTCUT_WHERE);
+			query.append(_FILTER_SQL_COUNT_DLFILESHORTCUT_WHERE);
 
 			if (uuid == null) {
 				query.append(_FINDER_COLUMN_UUID_G_UUID_1);
@@ -2731,7 +2731,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 
 			StringBundler query = new StringBundler(3);
 
-			query.append(_FILTER_COUNT_DLFILESHORTCUT_WHERE);
+			query.append(_FILTER_SQL_COUNT_DLFILESHORTCUT_WHERE);
 
 			query.append(_FINDER_COLUMN_G_F_GROUPID_2);
 
@@ -2830,7 +2830,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 
 			StringBundler query = new StringBundler(4);
 
-			query.append(_FILTER_COUNT_DLFILESHORTCUT_WHERE);
+			query.append(_FILTER_SQL_COUNT_DLFILESHORTCUT_WHERE);
 
 			query.append(_FINDER_COLUMN_G_F_S_GROUPID_2);
 
@@ -2947,7 +2947,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 
 			StringBundler query = new StringBundler(4);
 
-			query.append(_FILTER_COUNT_DLFILESHORTCUT_WHERE);
+			query.append(_FILTER_SQL_COUNT_DLFILESHORTCUT_WHERE);
 
 			query.append(_FINDER_COLUMN_G_TF_TN_GROUPID_2);
 
@@ -3080,7 +3080,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 
 			StringBundler query = new StringBundler(5);
 
-			query.append(_FILTER_COUNT_DLFILESHORTCUT_WHERE);
+			query.append(_FILTER_SQL_COUNT_DLFILESHORTCUT_WHERE);
 
 			query.append(_FINDER_COLUMN_G_TF_TN_S_GROUPID_2);
 
@@ -3234,11 +3234,11 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	private static final String _FINDER_COLUMN_G_TF_TN_S_TONAME_2 = "dlFileShortcut.toName = ? AND ";
 	private static final String _FINDER_COLUMN_G_TF_TN_S_TONAME_3 = "(dlFileShortcut.toName IS NULL OR dlFileShortcut.toName = ?) AND ";
 	private static final String _FINDER_COLUMN_G_TF_TN_S_STATUS_2 = "dlFileShortcut.status = ?";
-	private static final String _FILTER_SELECT_DLFILESHORTCUT_WHERE = "SELECT {dlFileShortcut.*} FROM DLFileShortcut dlFileShortcut WHERE ";
-	private static final String _FILTER_COUNT_DLFILESHORTCUT_WHERE = "SELECT COUNT(DISTINCT dlFileShortcut.fileShortcutId) AS COUNT_VALUE FROM DLFileShortcut dlFileShortcut WHERE ";
+	private static final String _FILTER_SQL_SELECT_DLFILESHORTCUT_WHERE = "SELECT {dlFileShortcut.*} FROM DLFileShortcut dlFileShortcut WHERE ";
+	private static final String _FILTER_SQL_COUNT_DLFILESHORTCUT_WHERE = "SELECT COUNT(dlFileShortcut.fileShortcutId) AS COUNT_VALUE FROM DLFileShortcut dlFileShortcut WHERE ";
 	private static final String _FILTER_COLUMN_FILESHORTCUTID = "dlFileShortcut.fileShortcutId";
 	private static final String _FILTER_COLUMN_USERID = "dlFileShortcut.userId";
-	private static final String _ENTITY_ALIAS = "dlFileShortcut";
+	private static final String _FILTER_ENTITY_ALIAS = "dlFileShortcut";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "dlFileShortcut.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No DLFileShortcut exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No DLFileShortcut exists with the key {";

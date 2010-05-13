@@ -1235,7 +1235,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 				query = new StringBundler(3);
 			}
 
-			query.append(_FILTER_SELECT_JOURNALTEMPLATE_WHERE);
+			query.append(_FILTER_SQL_SELECT_JOURNALTEMPLATE_WHERE);
 
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
@@ -1254,7 +1254,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity(_ENTITY_ALIAS, JournalTemplateImpl.class);
+			q.addEntity(_FILTER_ENTITY_ALIAS, JournalTemplateImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2128,7 +2128,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 				query = new StringBundler(4);
 			}
 
-			query.append(_FILTER_SELECT_JOURNALTEMPLATE_WHERE);
+			query.append(_FILTER_SQL_SELECT_JOURNALTEMPLATE_WHERE);
 
 			query.append(_FINDER_COLUMN_G_S_GROUPID_2);
 
@@ -2159,7 +2159,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity(_ENTITY_ALIAS, JournalTemplateImpl.class);
+			q.addEntity(_FILTER_ENTITY_ALIAS, JournalTemplateImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2438,7 +2438,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 
 			StringBundler query = new StringBundler(3);
 
-			query.append(_FILTER_COUNT_JOURNALTEMPLATE_WHERE);
+			query.append(_FILTER_SQL_COUNT_JOURNALTEMPLATE_WHERE);
 
 			if (uuid == null) {
 				query.append(_FINDER_COLUMN_UUID_G_UUID_1);
@@ -2536,7 +2536,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 
 			StringBundler query = new StringBundler(2);
 
-			query.append(_FILTER_COUNT_JOURNALTEMPLATE_WHERE);
+			query.append(_FILTER_SQL_COUNT_JOURNALTEMPLATE_WHERE);
 
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
@@ -2740,7 +2740,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 
 			StringBundler query = new StringBundler(3);
 
-			query.append(_FILTER_COUNT_JOURNALTEMPLATE_WHERE);
+			query.append(_FILTER_SQL_COUNT_JOURNALTEMPLATE_WHERE);
 
 			query.append(_FINDER_COLUMN_G_T_GROUPID_2);
 
@@ -2856,7 +2856,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 
 			StringBundler query = new StringBundler(3);
 
-			query.append(_FILTER_COUNT_JOURNALTEMPLATE_WHERE);
+			query.append(_FILTER_SQL_COUNT_JOURNALTEMPLATE_WHERE);
 
 			query.append(_FINDER_COLUMN_G_S_GROUPID_2);
 
@@ -3004,11 +3004,11 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 	private static final String _FINDER_COLUMN_G_S_STRUCTUREID_1 = "journalTemplate.structureId IS NULL";
 	private static final String _FINDER_COLUMN_G_S_STRUCTUREID_2 = "journalTemplate.structureId = ?";
 	private static final String _FINDER_COLUMN_G_S_STRUCTUREID_3 = "(journalTemplate.structureId IS NULL OR journalTemplate.structureId = ?)";
-	private static final String _FILTER_SELECT_JOURNALTEMPLATE_WHERE = "SELECT {journalTemplate.*} FROM JournalTemplate journalTemplate WHERE ";
-	private static final String _FILTER_COUNT_JOURNALTEMPLATE_WHERE = "SELECT COUNT(DISTINCT journalTemplate.id) AS COUNT_VALUE FROM JournalTemplate journalTemplate WHERE ";
+	private static final String _FILTER_SQL_SELECT_JOURNALTEMPLATE_WHERE = "SELECT {journalTemplate.*} FROM JournalTemplate journalTemplate WHERE ";
+	private static final String _FILTER_SQL_COUNT_JOURNALTEMPLATE_WHERE = "SELECT COUNT(journalTemplate.id) AS COUNT_VALUE FROM JournalTemplate journalTemplate WHERE ";
 	private static final String _FILTER_COLUMN_ID = "journalTemplate.id";
 	private static final String _FILTER_COLUMN_USERID = "journalTemplate.userId";
-	private static final String _ENTITY_ALIAS = "journalTemplate";
+	private static final String _FILTER_ENTITY_ALIAS = "journalTemplate";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "journalTemplate.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No JournalTemplate exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No JournalTemplate exists with the key {";

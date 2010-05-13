@@ -1145,7 +1145,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 				query = new StringBundler(4);
 			}
 
-			query.append(_FILTER_SELECT_SHOPPINGITEM_WHERE);
+			query.append(_FILTER_SQL_SELECT_SHOPPINGITEM_WHERE);
 
 			query.append(_FINDER_COLUMN_G_C_GROUPID_2);
 
@@ -1166,7 +1166,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity(_ENTITY_ALIAS, ShoppingItemImpl.class);
+			q.addEntity(_FILTER_ENTITY_ALIAS, ShoppingItemImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1631,7 +1631,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 
 			StringBundler query = new StringBundler(3);
 
-			query.append(_FILTER_COUNT_SHOPPINGITEM_WHERE);
+			query.append(_FILTER_SQL_COUNT_SHOPPINGITEM_WHERE);
 
 			query.append(_FINDER_COLUMN_G_C_GROUPID_2);
 
@@ -2024,11 +2024,11 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 	private static final String _FINDER_COLUMN_C_S_SKU_1 = "shoppingItem.sku IS NULL";
 	private static final String _FINDER_COLUMN_C_S_SKU_2 = "shoppingItem.sku = ?";
 	private static final String _FINDER_COLUMN_C_S_SKU_3 = "(shoppingItem.sku IS NULL OR shoppingItem.sku = ?)";
-	private static final String _FILTER_SELECT_SHOPPINGITEM_WHERE = "SELECT {shoppingItem.*} FROM ShoppingItem shoppingItem WHERE ";
-	private static final String _FILTER_COUNT_SHOPPINGITEM_WHERE = "SELECT COUNT(DISTINCT shoppingItem.itemId) AS COUNT_VALUE FROM ShoppingItem shoppingItem WHERE ";
+	private static final String _FILTER_SQL_SELECT_SHOPPINGITEM_WHERE = "SELECT {shoppingItem.*} FROM ShoppingItem shoppingItem WHERE ";
+	private static final String _FILTER_SQL_COUNT_SHOPPINGITEM_WHERE = "SELECT COUNT(shoppingItem.itemId) AS COUNT_VALUE FROM ShoppingItem shoppingItem WHERE ";
 	private static final String _FILTER_COLUMN_ITEMID = "shoppingItem.itemId";
 	private static final String _FILTER_COLUMN_USERID = "shoppingItem.userId";
-	private static final String _ENTITY_ALIAS = "shoppingItem";
+	private static final String _FILTER_ENTITY_ALIAS = "shoppingItem";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "shoppingItem.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No ShoppingItem exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No ShoppingItem exists with the key {";

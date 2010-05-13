@@ -632,7 +632,7 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl<Shoppin
 				query = new StringBundler(3);
 			}
 
-			query.append(_FILTER_SELECT_SHOPPINGCATEGORY_WHERE);
+			query.append(_FILTER_SQL_SELECT_SHOPPINGCATEGORY_WHERE);
 
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
@@ -651,7 +651,7 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl<Shoppin
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity(_ENTITY_ALIAS, ShoppingCategoryImpl.class);
+			q.addEntity(_FILTER_ENTITY_ALIAS, ShoppingCategoryImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -976,7 +976,7 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl<Shoppin
 				query = new StringBundler(4);
 			}
 
-			query.append(_FILTER_SELECT_SHOPPINGCATEGORY_WHERE);
+			query.append(_FILTER_SQL_SELECT_SHOPPINGCATEGORY_WHERE);
 
 			query.append(_FINDER_COLUMN_G_P_GROUPID_2);
 
@@ -997,7 +997,7 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl<Shoppin
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity(_ENTITY_ALIAS, ShoppingCategoryImpl.class);
+			q.addEntity(_FILTER_ENTITY_ALIAS, ShoppingCategoryImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1166,7 +1166,7 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl<Shoppin
 
 			StringBundler query = new StringBundler(2);
 
-			query.append(_FILTER_COUNT_SHOPPINGCATEGORY_WHERE);
+			query.append(_FILTER_SQL_COUNT_SHOPPINGCATEGORY_WHERE);
 
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
@@ -1256,7 +1256,7 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl<Shoppin
 
 			StringBundler query = new StringBundler(3);
 
-			query.append(_FILTER_COUNT_SHOPPINGCATEGORY_WHERE);
+			query.append(_FILTER_SQL_COUNT_SHOPPINGCATEGORY_WHERE);
 
 			query.append(_FINDER_COLUMN_G_P_GROUPID_2);
 
@@ -1371,11 +1371,11 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl<Shoppin
 	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "shoppingCategory.groupId = ?";
 	private static final String _FINDER_COLUMN_G_P_GROUPID_2 = "shoppingCategory.groupId = ? AND ";
 	private static final String _FINDER_COLUMN_G_P_PARENTCATEGORYID_2 = "shoppingCategory.parentCategoryId = ?";
-	private static final String _FILTER_SELECT_SHOPPINGCATEGORY_WHERE = "SELECT {shoppingCategory.*} FROM ShoppingCategory shoppingCategory WHERE ";
-	private static final String _FILTER_COUNT_SHOPPINGCATEGORY_WHERE = "SELECT COUNT(DISTINCT shoppingCategory.categoryId) AS COUNT_VALUE FROM ShoppingCategory shoppingCategory WHERE ";
+	private static final String _FILTER_SQL_SELECT_SHOPPINGCATEGORY_WHERE = "SELECT {shoppingCategory.*} FROM ShoppingCategory shoppingCategory WHERE ";
+	private static final String _FILTER_SQL_COUNT_SHOPPINGCATEGORY_WHERE = "SELECT COUNT(shoppingCategory.categoryId) AS COUNT_VALUE FROM ShoppingCategory shoppingCategory WHERE ";
 	private static final String _FILTER_COLUMN_CATEGORYID = "shoppingCategory.categoryId";
 	private static final String _FILTER_COLUMN_USERID = "shoppingCategory.userId";
-	private static final String _ENTITY_ALIAS = "shoppingCategory";
+	private static final String _FILTER_ENTITY_ALIAS = "shoppingCategory";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "shoppingCategory.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No ShoppingCategory exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No ShoppingCategory exists with the key {";

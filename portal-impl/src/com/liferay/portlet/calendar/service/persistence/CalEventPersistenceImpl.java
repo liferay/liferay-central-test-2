@@ -1424,7 +1424,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 				query = new StringBundler(3);
 			}
 
-			query.append(_FILTER_SELECT_CALEVENT_WHERE);
+			query.append(_FILTER_SQL_SELECT_CALEVENT_WHERE);
 
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
@@ -1443,7 +1443,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity(_ENTITY_ALIAS, CalEventImpl.class);
+			q.addEntity(_FILTER_ENTITY_ALIAS, CalEventImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2053,7 +2053,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 				query = new StringBundler(4);
 			}
 
-			query.append(_FILTER_SELECT_CALEVENT_WHERE);
+			query.append(_FILTER_SQL_SELECT_CALEVENT_WHERE);
 
 			query.append(_FINDER_COLUMN_G_T_GROUPID_2);
 
@@ -2084,7 +2084,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity(_ENTITY_ALIAS, CalEventImpl.class);
+			q.addEntity(_FILTER_ENTITY_ALIAS, CalEventImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2411,7 +2411,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 				query = new StringBundler(4);
 			}
 
-			query.append(_FILTER_SELECT_CALEVENT_WHERE);
+			query.append(_FILTER_SQL_SELECT_CALEVENT_WHERE);
 
 			query.append(_FINDER_COLUMN_G_R_GROUPID_2);
 
@@ -2432,7 +2432,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity(_ENTITY_ALIAS, CalEventImpl.class);
+			q.addEntity(_FILTER_ENTITY_ALIAS, CalEventImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2706,7 +2706,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 			StringBundler query = new StringBundler(3);
 
-			query.append(_FILTER_COUNT_CALEVENT_WHERE);
+			query.append(_FILTER_SQL_COUNT_CALEVENT_WHERE);
 
 			if (uuid == null) {
 				query.append(_FINDER_COLUMN_UUID_G_UUID_1);
@@ -2850,7 +2850,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 			StringBundler query = new StringBundler(2);
 
-			query.append(_FILTER_COUNT_CALEVENT_WHERE);
+			query.append(_FILTER_SQL_COUNT_CALEVENT_WHERE);
 
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
@@ -2995,7 +2995,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 			StringBundler query = new StringBundler(3);
 
-			query.append(_FILTER_COUNT_CALEVENT_WHERE);
+			query.append(_FILTER_SQL_COUNT_CALEVENT_WHERE);
 
 			query.append(_FINDER_COLUMN_G_T_GROUPID_2);
 
@@ -3101,7 +3101,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 			StringBundler query = new StringBundler(3);
 
-			query.append(_FILTER_COUNT_CALEVENT_WHERE);
+			query.append(_FILTER_SQL_COUNT_CALEVENT_WHERE);
 
 			query.append(_FINDER_COLUMN_G_R_GROUPID_2);
 
@@ -3229,11 +3229,11 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	private static final String _FINDER_COLUMN_G_T_TYPE_3 = "(calEvent.type IS NULL OR calEvent.type = ?)";
 	private static final String _FINDER_COLUMN_G_R_GROUPID_2 = "calEvent.groupId = ? AND ";
 	private static final String _FINDER_COLUMN_G_R_REPEATING_2 = "calEvent.repeating = ?";
-	private static final String _FILTER_SELECT_CALEVENT_WHERE = "SELECT {calEvent.*} FROM CalEvent calEvent WHERE ";
-	private static final String _FILTER_COUNT_CALEVENT_WHERE = "SELECT COUNT(DISTINCT calEvent.eventId) AS COUNT_VALUE FROM CalEvent calEvent WHERE ";
+	private static final String _FILTER_SQL_SELECT_CALEVENT_WHERE = "SELECT {calEvent.*} FROM CalEvent calEvent WHERE ";
+	private static final String _FILTER_SQL_COUNT_CALEVENT_WHERE = "SELECT COUNT(calEvent.eventId) AS COUNT_VALUE FROM CalEvent calEvent WHERE ";
 	private static final String _FILTER_COLUMN_EVENTID = "calEvent.eventId";
 	private static final String _FILTER_COLUMN_USERID = "calEvent.userId";
-	private static final String _ENTITY_ALIAS = "calEvent";
+	private static final String _FILTER_ENTITY_ALIAS = "calEvent";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "calEvent.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No CalEvent exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No CalEvent exists with the key {";

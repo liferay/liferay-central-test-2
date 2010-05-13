@@ -1110,7 +1110,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 				query = new StringBundler(3);
 			}
 
-			query.append(_FILTER_SELECT_POLLSQUESTION_WHERE);
+			query.append(_FILTER_SQL_SELECT_POLLSQUESTION_WHERE);
 
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
@@ -1129,7 +1129,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity(_ENTITY_ALIAS, PollsQuestionImpl.class);
+			q.addEntity(_FILTER_ENTITY_ALIAS, PollsQuestionImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1377,7 +1377,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 
 			StringBundler query = new StringBundler(3);
 
-			query.append(_FILTER_COUNT_POLLSQUESTION_WHERE);
+			query.append(_FILTER_SQL_COUNT_POLLSQUESTION_WHERE);
 
 			if (uuid == null) {
 				query.append(_FINDER_COLUMN_UUID_G_UUID_1);
@@ -1475,7 +1475,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 
 			StringBundler query = new StringBundler(2);
 
-			query.append(_FILTER_COUNT_POLLSQUESTION_WHERE);
+			query.append(_FILTER_SQL_COUNT_POLLSQUESTION_WHERE);
 
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
@@ -1581,11 +1581,11 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 	private static final String _FINDER_COLUMN_UUID_G_UUID_3 = "(pollsQuestion.uuid IS NULL OR pollsQuestion.uuid = ?) AND ";
 	private static final String _FINDER_COLUMN_UUID_G_GROUPID_2 = "pollsQuestion.groupId = ?";
 	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "pollsQuestion.groupId = ?";
-	private static final String _FILTER_SELECT_POLLSQUESTION_WHERE = "SELECT {pollsQuestion.*} FROM PollsQuestion pollsQuestion WHERE ";
-	private static final String _FILTER_COUNT_POLLSQUESTION_WHERE = "SELECT COUNT(DISTINCT pollsQuestion.questionId) AS COUNT_VALUE FROM PollsQuestion pollsQuestion WHERE ";
+	private static final String _FILTER_SQL_SELECT_POLLSQUESTION_WHERE = "SELECT {pollsQuestion.*} FROM PollsQuestion pollsQuestion WHERE ";
+	private static final String _FILTER_SQL_COUNT_POLLSQUESTION_WHERE = "SELECT COUNT(pollsQuestion.questionId) AS COUNT_VALUE FROM PollsQuestion pollsQuestion WHERE ";
 	private static final String _FILTER_COLUMN_QUESTIONID = "pollsQuestion.questionId";
 	private static final String _FILTER_COLUMN_USERID = "pollsQuestion.userId";
-	private static final String _ENTITY_ALIAS = "pollsQuestion";
+	private static final String _FILTER_ENTITY_ALIAS = "pollsQuestion";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "pollsQuestion.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No PollsQuestion exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No PollsQuestion exists with the key {";

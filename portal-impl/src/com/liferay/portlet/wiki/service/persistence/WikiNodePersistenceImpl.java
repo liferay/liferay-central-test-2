@@ -1150,7 +1150,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 				query = new StringBundler(3);
 			}
 
-			query.append(_FILTER_SELECT_WIKINODE_WHERE);
+			query.append(_FILTER_SQL_SELECT_WIKINODE_WHERE);
 
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
@@ -1169,7 +1169,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity(_ENTITY_ALIAS, WikiNodeImpl.class);
+			q.addEntity(_FILTER_ENTITY_ALIAS, WikiNodeImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1819,7 +1819,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 
 			StringBundler query = new StringBundler(3);
 
-			query.append(_FILTER_COUNT_WIKINODE_WHERE);
+			query.append(_FILTER_SQL_COUNT_WIKINODE_WHERE);
 
 			if (uuid == null) {
 				query.append(_FINDER_COLUMN_UUID_G_UUID_1);
@@ -1917,7 +1917,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 
 			StringBundler query = new StringBundler(2);
 
-			query.append(_FILTER_COUNT_WIKINODE_WHERE);
+			query.append(_FILTER_SQL_COUNT_WIKINODE_WHERE);
 
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
@@ -2062,7 +2062,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 
 			StringBundler query = new StringBundler(3);
 
-			query.append(_FILTER_COUNT_WIKINODE_WHERE);
+			query.append(_FILTER_SQL_COUNT_WIKINODE_WHERE);
 
 			query.append(_FINDER_COLUMN_G_N_GROUPID_2);
 
@@ -2193,11 +2193,11 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	private static final String _FINDER_COLUMN_G_N_NAME_1 = "wikiNode.name IS NULL";
 	private static final String _FINDER_COLUMN_G_N_NAME_2 = "wikiNode.name = ?";
 	private static final String _FINDER_COLUMN_G_N_NAME_3 = "(wikiNode.name IS NULL OR wikiNode.name = ?)";
-	private static final String _FILTER_SELECT_WIKINODE_WHERE = "SELECT {wikiNode.*} FROM WikiNode wikiNode WHERE ";
-	private static final String _FILTER_COUNT_WIKINODE_WHERE = "SELECT COUNT(DISTINCT wikiNode.nodeId) AS COUNT_VALUE FROM WikiNode wikiNode WHERE ";
+	private static final String _FILTER_SQL_SELECT_WIKINODE_WHERE = "SELECT {wikiNode.*} FROM WikiNode wikiNode WHERE ";
+	private static final String _FILTER_SQL_COUNT_WIKINODE_WHERE = "SELECT COUNT(wikiNode.nodeId) AS COUNT_VALUE FROM WikiNode wikiNode WHERE ";
 	private static final String _FILTER_COLUMN_NODEID = "wikiNode.nodeId";
 	private static final String _FILTER_COLUMN_USERID = "wikiNode.userId";
-	private static final String _ENTITY_ALIAS = "wikiNode";
+	private static final String _FILTER_ENTITY_ALIAS = "wikiNode";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "wikiNode.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No WikiNode exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No WikiNode exists with the key {";

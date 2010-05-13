@@ -1140,7 +1140,7 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 				query = new StringBundler(3);
 			}
 
-			query.append(_FILTER_SELECT_BOOKMARKSENTRY_WHERE);
+			query.append(_FILTER_SQL_SELECT_BOOKMARKSENTRY_WHERE);
 
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
@@ -1159,7 +1159,7 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity(_ENTITY_ALIAS, BookmarksEntryImpl.class);
+			q.addEntity(_FILTER_ENTITY_ALIAS, BookmarksEntryImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1483,7 +1483,7 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 				query = new StringBundler(4);
 			}
 
-			query.append(_FILTER_SELECT_BOOKMARKSENTRY_WHERE);
+			query.append(_FILTER_SQL_SELECT_BOOKMARKSENTRY_WHERE);
 
 			query.append(_FINDER_COLUMN_G_U_GROUPID_2);
 
@@ -1504,7 +1504,7 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity(_ENTITY_ALIAS, BookmarksEntryImpl.class);
+			q.addEntity(_FILTER_ENTITY_ALIAS, BookmarksEntryImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1831,7 +1831,7 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 				query = new StringBundler(4);
 			}
 
-			query.append(_FILTER_SELECT_BOOKMARKSENTRY_WHERE);
+			query.append(_FILTER_SQL_SELECT_BOOKMARKSENTRY_WHERE);
 
 			query.append(_FINDER_COLUMN_G_F_GROUPID_2);
 
@@ -1852,7 +1852,7 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity(_ENTITY_ALIAS, BookmarksEntryImpl.class);
+			q.addEntity(_FILTER_ENTITY_ALIAS, BookmarksEntryImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2116,7 +2116,7 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 
 			StringBundler query = new StringBundler(3);
 
-			query.append(_FILTER_COUNT_BOOKMARKSENTRY_WHERE);
+			query.append(_FILTER_SQL_COUNT_BOOKMARKSENTRY_WHERE);
 
 			if (uuid == null) {
 				query.append(_FINDER_COLUMN_UUID_G_UUID_1);
@@ -2214,7 +2214,7 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 
 			StringBundler query = new StringBundler(2);
 
-			query.append(_FILTER_COUNT_BOOKMARKSENTRY_WHERE);
+			query.append(_FILTER_SQL_COUNT_BOOKMARKSENTRY_WHERE);
 
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
@@ -2301,7 +2301,7 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 
 			StringBundler query = new StringBundler(3);
 
-			query.append(_FILTER_COUNT_BOOKMARKSENTRY_WHERE);
+			query.append(_FILTER_SQL_COUNT_BOOKMARKSENTRY_WHERE);
 
 			query.append(_FINDER_COLUMN_G_U_GROUPID_2);
 
@@ -2393,7 +2393,7 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 
 			StringBundler query = new StringBundler(3);
 
-			query.append(_FILTER_COUNT_BOOKMARKSENTRY_WHERE);
+			query.append(_FILTER_SQL_COUNT_BOOKMARKSENTRY_WHERE);
 
 			query.append(_FINDER_COLUMN_G_F_GROUPID_2);
 
@@ -2511,11 +2511,11 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 	private static final String _FINDER_COLUMN_G_U_USERID_2 = "bookmarksEntry.userId = ?";
 	private static final String _FINDER_COLUMN_G_F_GROUPID_2 = "bookmarksEntry.groupId = ? AND ";
 	private static final String _FINDER_COLUMN_G_F_FOLDERID_2 = "bookmarksEntry.folderId = ?";
-	private static final String _FILTER_SELECT_BOOKMARKSENTRY_WHERE = "SELECT {bookmarksEntry.*} FROM BookmarksEntry bookmarksEntry WHERE ";
-	private static final String _FILTER_COUNT_BOOKMARKSENTRY_WHERE = "SELECT COUNT(DISTINCT bookmarksEntry.entryId) AS COUNT_VALUE FROM BookmarksEntry bookmarksEntry WHERE ";
+	private static final String _FILTER_SQL_SELECT_BOOKMARKSENTRY_WHERE = "SELECT {bookmarksEntry.*} FROM BookmarksEntry bookmarksEntry WHERE ";
+	private static final String _FILTER_SQL_COUNT_BOOKMARKSENTRY_WHERE = "SELECT COUNT(bookmarksEntry.entryId) AS COUNT_VALUE FROM BookmarksEntry bookmarksEntry WHERE ";
 	private static final String _FILTER_COLUMN_ENTRYID = "bookmarksEntry.entryId";
 	private static final String _FILTER_COLUMN_USERID = "bookmarksEntry.userId";
-	private static final String _ENTITY_ALIAS = "bookmarksEntry";
+	private static final String _FILTER_ENTITY_ALIAS = "bookmarksEntry";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "bookmarksEntry.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No BookmarksEntry exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No BookmarksEntry exists with the key {";

@@ -4742,7 +4742,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 
 			StringBundler query = new StringBundler(3);
 
-			query.append(_FILTER_COUNT_WIKIPAGE_WHERE);
+			query.append(_FILTER_SQL_COUNT_WIKIPAGE_WHERE);
 
 			if (uuid == null) {
 				query.append(_FINDER_COLUMN_UUID_G_UUID_1);
@@ -5663,11 +5663,11 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	private static final String _FINDER_COLUMN_N_H_P_PARENTTITLE_1 = "wikiPage.parentTitle IS NULL";
 	private static final String _FINDER_COLUMN_N_H_P_PARENTTITLE_2 = "wikiPage.parentTitle = ?";
 	private static final String _FINDER_COLUMN_N_H_P_PARENTTITLE_3 = "(wikiPage.parentTitle IS NULL OR wikiPage.parentTitle = ?)";
-	private static final String _FILTER_SELECT_WIKIPAGE_WHERE = "SELECT {wikiPage.*} FROM WikiPage wikiPage WHERE ";
-	private static final String _FILTER_COUNT_WIKIPAGE_WHERE = "SELECT COUNT(DISTINCT wikiPage.pageId) AS COUNT_VALUE FROM WikiPage wikiPage WHERE ";
+	private static final String _FILTER_SQL_SELECT_WIKIPAGE_WHERE = "SELECT {wikiPage.*} FROM WikiPage wikiPage WHERE ";
+	private static final String _FILTER_SQL_COUNT_WIKIPAGE_WHERE = "SELECT COUNT(wikiPage.pageId) AS COUNT_VALUE FROM WikiPage wikiPage WHERE ";
 	private static final String _FILTER_COLUMN_PAGEID = "wikiPage.pageId";
 	private static final String _FILTER_COLUMN_USERID = "wikiPage.userId";
-	private static final String _ENTITY_ALIAS = "wikiPage";
+	private static final String _FILTER_ENTITY_ALIAS = "wikiPage";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "wikiPage.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No WikiPage exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No WikiPage exists with the key {";
