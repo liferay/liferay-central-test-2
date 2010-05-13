@@ -38,6 +38,7 @@ import javax.portlet.PortletURL;
  * </b></a>
  *
  * @author Julio Camarero
+ * @author Juan Fernández
  */
 public class JournalArticleAssetRendererFactory
 	extends BaseAssetRendererFactory {
@@ -99,6 +100,10 @@ public class JournalArticleAssetRendererFactory
 		}
 
 		return addAssetURL;
+	}
+
+	protected String getIconPath(ThemeDisplay themeDisplay) {
+		return themeDisplay.getPathThemeImages() + "/common/history.png";
 	}
 
 }

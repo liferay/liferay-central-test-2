@@ -36,6 +36,7 @@ import javax.portlet.PortletURL;
  * </b></a>
  *
  * @author Julio Camarero
+ * @author Juan Fernández
  */
 public class BookmarksEntryAssetRendererFactory
 	extends BaseAssetRendererFactory {
@@ -89,6 +90,10 @@ public class BookmarksEntryAssetRendererFactory
 		}
 
 		return addAssetURL;
+	}
+
+	protected String getIconPath(ThemeDisplay themeDisplay) {
+		return themeDisplay.getPathThemeImages() + "/ratings/star_hover.png";
 	}
 
 }

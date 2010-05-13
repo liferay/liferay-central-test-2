@@ -36,6 +36,7 @@ import javax.portlet.PortletURL;
  * </a>
  *
  * @author Jorge Ferrer
+ * @author Juan Fernández
  */
 public class BlogsEntryAssetRendererFactory extends BaseAssetRendererFactory {
 
@@ -88,6 +89,10 @@ public class BlogsEntryAssetRendererFactory extends BaseAssetRendererFactory {
 		}
 
 		return addAssetURL;
+	}
+
+	protected String getIconPath(ThemeDisplay themeDisplay) {
+		return themeDisplay.getPathThemeImages() + "/html/icons/blogs.png";
 	}
 
 }

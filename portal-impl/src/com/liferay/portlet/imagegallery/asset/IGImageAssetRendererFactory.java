@@ -35,6 +35,7 @@ import javax.portlet.PortletURL;
  * <a href="IGImageAssetRendererFactory.java.html"><b><i>View Source</i></b></a>
  *
  * @author Julio Camarero
+ * @author Juan Fernández
  */
 public class IGImageAssetRendererFactory extends BaseAssetRendererFactory {
 
@@ -88,6 +89,10 @@ public class IGImageAssetRendererFactory extends BaseAssetRendererFactory {
 		}
 
 		return addAssetURL;
+	}
+
+	protected String getIconPath(ThemeDisplay themeDisplay) {
+		return themeDisplay.getPathThemeImages() + "/file_system/small/bmp.png";
 	}
 
 }

@@ -153,6 +153,10 @@ public class WikiPageAssetRenderer extends BaseAssetRenderer {
 		}
 	}
 
+	protected String getIconPath(ThemeDisplay themeDisplay) {
+		return themeDisplay.getPathThemeImages() + "/common/pages.png";
+	}
+
 	private WikiPage _page;
 
 }

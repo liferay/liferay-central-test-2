@@ -18,13 +18,17 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
+import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portal.theme.ThemeDisplay;
 
+import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
 
 /**
  * <a href="BaseAssetRendererFactory.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
+ * @author Juan Fernández
  */
 public abstract class BaseAssetRendererFactory implements AssetRendererFactory {
 
@@ -37,6 +41,13 @@ public abstract class BaseAssetRendererFactory implements AssetRendererFactory {
 
 	public long getClassNameId() {
 		return _classNameId;
+	}
+
+	public String getIconPath(PortletRequest portletRequest) {
+		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		return getIconPath(themeDisplay);
 	}
 
 	public String getPortletId() {
@@ -60,6 +71,10 @@ public abstract class BaseAssetRendererFactory implements AssetRendererFactory {
 
 	public void setPortletId(String portletId) {
 		_portletId = portletId;
+	}
+
+	protected String getIconPath(ThemeDisplay themeDisplay) {
+		return themeDisplay.getPathThemeImages() + "/common/page.png";
 	}
 
 	private long _classNameId;

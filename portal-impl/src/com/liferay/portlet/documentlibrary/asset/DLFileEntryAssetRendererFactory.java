@@ -36,6 +36,7 @@ import javax.portlet.PortletURL;
  * </a>
  *
  * @author Julio Camarero
+ * @author Juan Fernández
  */
 public class DLFileEntryAssetRendererFactory extends BaseAssetRendererFactory {
 
@@ -89,6 +90,10 @@ public class DLFileEntryAssetRendererFactory extends BaseAssetRendererFactory {
 		}
 
 		return addAssetURL;
+	}
+
+	protected String getIconPath(ThemeDisplay themeDisplay) {
+		return themeDisplay.getPathThemeImages() + "/document_library/page.png";
 	}
 
 }

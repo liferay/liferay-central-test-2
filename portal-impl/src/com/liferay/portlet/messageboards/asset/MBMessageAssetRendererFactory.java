@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.asset.model.AssetRenderer;
 import com.liferay.portlet.asset.model.BaseAssetRendererFactory;
 import com.liferay.portlet.messageboards.model.MBMessage;
@@ -30,6 +31,7 @@ import javax.portlet.PortletURL;
  * </a>
  *
  * @author Julio Camarero
+ * @author Juan Fernández
  */
 public class MBMessageAssetRendererFactory extends BaseAssetRendererFactory {
 
@@ -58,6 +60,10 @@ public class MBMessageAssetRendererFactory extends BaseAssetRendererFactory {
 		LiferayPortletResponse liferayPortletResponse) {
 
 		return null;
+	}
+
+	protected String getIconPath(ThemeDisplay themeDisplay) {
+		return themeDisplay.getPathThemeImages() + "/common/conversation.png";
 	}
 
 }

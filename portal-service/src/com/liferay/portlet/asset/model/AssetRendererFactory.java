@@ -19,12 +19,14 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 
+import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
 
 /**
  * <a href="AssetRendererFactory.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
+ * @author Juan Fernández
  */
 public interface AssetRendererFactory {
 
@@ -37,6 +39,8 @@ public interface AssetRendererFactory {
 	public String getClassName();
 
 	public long getClassNameId();
+
+	public String getIconPath(PortletRequest portletRequest);
 
 	public String getPortletId();
 

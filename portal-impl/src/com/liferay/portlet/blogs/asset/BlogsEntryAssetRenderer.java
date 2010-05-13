@@ -36,6 +36,7 @@ import javax.portlet.RenderResponse;
  * <a href="BlogsEntryAssetRenderer.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
+ * @author Juan Fernández
  */
 public class BlogsEntryAssetRenderer extends BaseAssetRenderer {
 
@@ -132,6 +133,10 @@ public class BlogsEntryAssetRenderer extends BaseAssetRenderer {
 		else {
 			return null;
 		}
+	}
+
+	protected String getIconPath(ThemeDisplay themeDisplay) {
+		return themeDisplay.getPathThemeImages() + "/html/icons/blogs.png";
 	}
 
 	private BlogsEntry _entry;
