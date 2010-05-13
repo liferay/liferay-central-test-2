@@ -64,6 +64,7 @@
 <%@ page import="com.liferay.portlet.messageboards.model.impl.MBMessageImpl" %>
 <%@ page import="com.liferay.portlet.messageboards.service.MBBanLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.messageboards.service.MBCategoryServiceUtil" %>
 <%@ page import="com.liferay.portlet.messageboards.service.MBMailingListLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.messageboards.service.MBMessageFlagLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil" %>

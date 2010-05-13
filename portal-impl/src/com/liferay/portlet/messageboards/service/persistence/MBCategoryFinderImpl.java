@@ -25,6 +25,7 @@ import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.UnmodifiableList;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.security.permission.InlineSQLHelperUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.SubscriptionLocalServiceUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
@@ -60,6 +61,10 @@ public class MBCategoryFinderImpl
 			session = openSession();
 
 			String sql = CustomSQLUtil.get(COUNT_BY_S_G_U);
+
+			sql = InlineSQLHelperUtil.replacePermissionCheck(
+				sql, MBCategory.class.getName(), _ENTITY_CLASSPK,
+				_ENTITY_USERID, groupId);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -116,6 +121,10 @@ public class MBCategoryFinderImpl
 
 			String sql = CustomSQLUtil.get(FIND_BY_S_G_U);
 
+			sql = InlineSQLHelperUtil.replacePermissionCheck(
+				sql, MBCategory.class.getName(), _ENTITY_CLASSPK,
+				_ENTITY_USERID, groupId);
+
 			SQLQuery q = session.createSQLQuery(sql);
 
 			q.addEntity("MBCategory", MBCategoryImpl.class);
@@ -168,5 +177,8 @@ public class MBCategoryFinderImpl
 			closeSession(session);
 		}
 	}
+
+	private static final String _ENTITY_CLASSPK = "MBCategory.categoryId";
+	private static final String _ENTITY_USERID = "MBCategory.userId";
 
 }

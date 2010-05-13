@@ -300,19 +300,17 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 		return mbCategoryPersistence.countByCompanyId(companyId);
 	}
 
-	public void getSubcategoryIds(
+	public List<Long> getSubcategoryIds(
 			List<Long> categoryIds, long groupId, long categoryId)
 		throws SystemException {
 
-		List<MBCategory> categories = mbCategoryPersistence.findByG_P(
-			groupId, categoryId);
+		List<Long> subCategoryIds = new ArrayList<Long>();
 
-		for (MBCategory category : categories) {
-			categoryIds.add(category.getCategoryId());
+		subCategoryIds.addAll(categoryIds);
 
-			getSubcategoryIds(
-				categoryIds, category.getGroupId(), category.getCategoryId());
-		}
+		_getSubcategoryIds(subCategoryIds, groupId, categoryId);
+
+		return subCategoryIds;
 	}
 
 	public List<MBCategory> getSubscribedCategories(
@@ -494,6 +492,23 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 
 			return parentCategoryId;
 		}
+	}
+
+	protected List<Long> _getSubcategoryIds(
+			List<Long> categoryIds, long groupId, long categoryId)
+		throws SystemException {
+
+		List<MBCategory> categories = mbCategoryPersistence.filterFindByG_P(
+			groupId, categoryId);
+
+		for (MBCategory category : categories) {
+			categoryIds.add(category.getCategoryId());
+
+			getSubcategoryIds(
+				categoryIds, category.getGroupId(), category.getCategoryId());
+		}
+
+		return categoryIds;
 	}
 
 	protected void mergeCategories(MBCategory fromCategory, long toCategoryId)

@@ -88,6 +88,29 @@ public class MBCategoryServiceImpl extends MBCategoryServiceBaseImpl {
 			groupId, parentCategoryId);
 	}
 
+	public List<Long> getSubcategoryIds(
+			List<Long> categoryIds, long groupId, long categoryId)
+		throws SystemException {
+
+		return mbCategoryLocalService.getSubcategoryIds(
+			categoryIds, groupId, categoryId);
+	}
+
+	public List<MBCategory> getSubscribedCategories(
+			long groupId, long userId, int start, int end)
+		throws SystemException {
+
+		return mbCategoryLocalService.getSubscribedCategories(
+			groupId, userId, start, end);
+	}
+
+	public int getSubscribedCategoriesCount(long groupId, long userId)
+		throws SystemException {
+
+		return mbCategoryLocalService.getSubscribedCategoriesCount(
+			groupId, userId);
+	}
+
 	public void subscribeCategory(long groupId, long categoryId)
 		throws PortalException, SystemException {
 

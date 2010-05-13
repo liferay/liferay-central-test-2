@@ -16,6 +16,7 @@ package com.liferay.portlet.messageboards.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.ListUtil;
 
 import com.liferay.portlet.messageboards.service.MBCategoryServiceUtil;
 
@@ -149,6 +150,53 @@ public class MBCategoryServiceSoap {
 		try {
 			int returnValue = MBCategoryServiceUtil.getCategoriesCount(groupId,
 					parentCategoryId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static java.lang.Long[] getSubcategoryIds(Long[] categoryIds,
+		long groupId, long categoryId) throws RemoteException {
+		try {
+			java.util.List<java.lang.Long> returnValue = MBCategoryServiceUtil.getSubcategoryIds(ListUtil.toList(
+						categoryIds), groupId, categoryId);
+
+			return returnValue.toArray(new java.lang.Long[returnValue.size()]);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBCategorySoap[] getSubscribedCategories(
+		long groupId, long userId, int start, int end)
+		throws RemoteException {
+		try {
+			java.util.List<com.liferay.portlet.messageboards.model.MBCategory> returnValue =
+				MBCategoryServiceUtil.getSubscribedCategories(groupId, userId,
+					start, end);
+
+			return com.liferay.portlet.messageboards.model.MBCategorySoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int getSubscribedCategoriesCount(long groupId, long userId)
+		throws RemoteException {
+		try {
+			int returnValue = MBCategoryServiceUtil.getSubscribedCategoriesCount(groupId,
+					userId);
 
 			return returnValue;
 		}
