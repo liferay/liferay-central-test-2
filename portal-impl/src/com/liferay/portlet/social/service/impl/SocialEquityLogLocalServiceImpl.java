@@ -170,7 +170,7 @@ public class SocialEquityLogLocalServiceImpl
 
 			assetEntryPersistence.clearCache(assetEntry);
 
-			if (assetEntryUser != null && !assetEntryUser.isDefaultUser()) {
+			if ((assetEntryUser != null) && !assetEntryUser.isDefaultUser()) {
 				updateSocialEquityUser_CQ(
 					assetEntry.getGroupId(), assetEntryUser.getUserId());
 				updateSocialEquityUser_PEQ(
