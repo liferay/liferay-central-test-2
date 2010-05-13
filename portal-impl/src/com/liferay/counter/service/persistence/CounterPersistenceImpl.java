@@ -16,8 +16,8 @@ package com.liferay.counter.service.persistence;
 
 import com.liferay.counter.NoSuchCounterException;
 import com.liferay.counter.model.Counter;
+import com.liferay.counter.model.impl.CounterImpl;
 import com.liferay.counter.model.impl.CounterModelImpl;
-
 import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
@@ -61,7 +61,7 @@ import java.util.List;
  */
 public class CounterPersistenceImpl extends BasePersistenceImpl<Counter>
 	implements CounterPersistence {
-	public static final String FINDER_CLASS_NAME_ENTITY = CounterModelImpl.class.getName();
+	public static final String FINDER_CLASS_NAME_ENTITY = CounterImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
 	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(CounterModelImpl.ENTITY_CACHE_ENABLED,
@@ -73,33 +73,33 @@ public class CounterPersistenceImpl extends BasePersistenceImpl<Counter>
 
 	public void cacheResult(Counter counter) {
 		EntityCacheUtil.putResult(CounterModelImpl.ENTITY_CACHE_ENABLED,
-			CounterModelImpl.class, counter.getPrimaryKey(), counter);
+			CounterImpl.class, counter.getPrimaryKey(), counter);
 	}
 
 	public void cacheResult(List<Counter> counters) {
 		for (Counter counter : counters) {
 			if (EntityCacheUtil.getResult(
 						CounterModelImpl.ENTITY_CACHE_ENABLED,
-						CounterModelImpl.class, counter.getPrimaryKey(), this) == null) {
+						CounterImpl.class, counter.getPrimaryKey(), this) == null) {
 				cacheResult(counter);
 			}
 		}
 	}
 
 	public void clearCache() {
-		CacheRegistry.clear(CounterModelImpl.class.getName());
-		EntityCacheUtil.clearCache(CounterModelImpl.class.getName());
+		CacheRegistry.clear(CounterImpl.class.getName());
+		EntityCacheUtil.clearCache(CounterImpl.class.getName());
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
 	public void clearCache(Counter counter) {
 		EntityCacheUtil.removeResult(CounterModelImpl.ENTITY_CACHE_ENABLED,
-			CounterModelImpl.class, counter.getPrimaryKey());
+			CounterImpl.class, counter.getPrimaryKey());
 	}
 
 	public Counter create(String name) {
-		Counter counter = new CounterModelImpl();
+		Counter counter = new CounterImpl();
 
 		counter.setNew(true);
 		counter.setPrimaryKey(name);
@@ -119,7 +119,7 @@ public class CounterPersistenceImpl extends BasePersistenceImpl<Counter>
 		try {
 			session = openSession();
 
-			Counter counter = (Counter)session.get(CounterModelImpl.class, name);
+			Counter counter = (Counter)session.get(CounterImpl.class, name);
 
 			if (counter == null) {
 				if (_log.isWarnEnabled()) {
@@ -166,7 +166,7 @@ public class CounterPersistenceImpl extends BasePersistenceImpl<Counter>
 			session = openSession();
 
 			if (counter.isCachedModel() || BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(CounterModelImpl.class,
+				Object staleObject = session.get(CounterImpl.class,
 						counter.getPrimaryKeyObj());
 
 				if (staleObject != null) {
@@ -188,7 +188,7 @@ public class CounterPersistenceImpl extends BasePersistenceImpl<Counter>
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
 		EntityCacheUtil.removeResult(CounterModelImpl.ENTITY_CACHE_ENABLED,
-			CounterModelImpl.class, counter.getPrimaryKey());
+			CounterImpl.class, counter.getPrimaryKey());
 
 		return counter;
 	}
@@ -216,17 +216,17 @@ public class CounterPersistenceImpl extends BasePersistenceImpl<Counter>
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
 		EntityCacheUtil.putResult(CounterModelImpl.ENTITY_CACHE_ENABLED,
-			CounterModelImpl.class, counter.getPrimaryKey(), counter);
+			CounterImpl.class, counter.getPrimaryKey(), counter);
 
 		return counter;
 	}
 
 	protected Counter toUnwrappedModel(Counter counter) {
-		if (counter instanceof CounterModelImpl) {
+		if (counter instanceof CounterImpl) {
 			return counter;
 		}
 
-		CounterModelImpl counterImpl = new CounterModelImpl();
+		CounterImpl counterImpl = new CounterImpl();
 
 		counterImpl.setNew(counter.isNew());
 		counterImpl.setPrimaryKey(counter.getPrimaryKey());
@@ -265,7 +265,7 @@ public class CounterPersistenceImpl extends BasePersistenceImpl<Counter>
 
 	public Counter fetchByPrimaryKey(String name) throws SystemException {
 		Counter counter = (Counter)EntityCacheUtil.getResult(CounterModelImpl.ENTITY_CACHE_ENABLED,
-				CounterModelImpl.class, name, this);
+				CounterImpl.class, name, this);
 
 		if (counter == null) {
 			Session session = null;
@@ -273,7 +273,7 @@ public class CounterPersistenceImpl extends BasePersistenceImpl<Counter>
 			try {
 				session = openSession();
 
-				counter = (Counter)session.get(CounterModelImpl.class, name);
+				counter = (Counter)session.get(CounterImpl.class, name);
 			}
 			catch (Exception e) {
 				throw processException(e);
