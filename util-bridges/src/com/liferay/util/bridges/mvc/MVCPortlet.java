@@ -18,7 +18,9 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.LiferayPortlet;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.NullWrapper;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.PortalClassInvoker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -169,6 +171,21 @@ public class MVCPortlet extends LiferayPortlet {
 		if (Validator.isNotNull(packagePrefix)) {
 			_actionCommandCache = new ActionCommandCache(packagePrefix);
 		}
+	}
+
+	public void invokeTaglibDiscussion(
+			ActionRequest actionRequest, ActionResponse actionResponse)
+		throws Exception {
+
+		Object[] arguments = new Object[] {
+			new NullWrapper("org.apache.struts.action.ActionMapping"),
+			new NullWrapper("org.apache.struts.action.ActionForm"),
+			getPortletConfig(), actionRequest, actionResponse
+		};
+
+		PortalClassInvoker.invoke(
+			"com.liferay.portlet.messageboards.action.EditDiscussionAction",
+			"processAction", arguments);
 	}
 
 	public void processAction(
