@@ -593,7 +593,7 @@ public class SourceFormatter {
 		String newPropertiesContent = PropertiesUtil.toString(properties);
 
 		if (!propertiesContent.equals(newPropertiesContent)) {
-			_fileUtil.write(propertiesFile, newPropertiesContent);
+			//_fileUtil.write(propertiesFile, newPropertiesContent);
 		}
 	}
 
@@ -833,7 +833,7 @@ public class SourceFormatter {
 		String newPropertiesContent = PropertiesUtil.toString(properties);
 
 		if (!propertiesContent.equals(newPropertiesContent)) {
-			_fileUtil.write(propertiesFile, newPropertiesContent);
+			//_fileUtil.write(propertiesFile, newPropertiesContent);
 		}
 	}
 
