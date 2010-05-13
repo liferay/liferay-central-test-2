@@ -82,7 +82,7 @@ public class SelectTagThroughAutoSuggestionTest extends BaseTestCase {
 			try {
 				if (RuntimeVariables.replace("selenium3 liferay3")
 										.equals(selenium.getText(
-								"//li[2]/span/span[1]"))) {
+								"//span/div/div/ul/li[2]/span/span[1]"))) {
 					break;
 				}
 			}
@@ -93,7 +93,7 @@ public class SelectTagThroughAutoSuggestionTest extends BaseTestCase {
 		}
 
 		assertEquals(RuntimeVariables.replace("selenium3 liferay3"),
-			selenium.getText("//li[2]/span/span[1]"));
+			selenium.getText("//span/div/div/ul/li[2]/span/span[1]"));
 		selenium.clickAt("_33_saveButton", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(

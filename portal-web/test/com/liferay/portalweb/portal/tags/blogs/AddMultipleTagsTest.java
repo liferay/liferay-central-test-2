@@ -118,7 +118,7 @@ public class AddMultipleTagsTest extends BaseTestCase {
 			try {
 				if (RuntimeVariables.replace("selenium4 liferay4")
 										.equals(selenium.getText(
-								"//li[2]/span/span[1]"))) {
+								"//span/div/div/ul/li[2]/span/span[1]"))) {
 					break;
 				}
 			}
@@ -129,7 +129,7 @@ public class AddMultipleTagsTest extends BaseTestCase {
 		}
 
 		assertEquals(RuntimeVariables.replace("selenium4 liferay4"),
-			selenium.getText("//li[2]/span/span[1]"));
+			selenium.getText("//span/div/div/ul/li[2]/span/span[1]"));
 		Thread.sleep(5000);
 		selenium.clickAt("_33_saveButton", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
