@@ -1027,6 +1027,7 @@ public class SourceFormatter {
 				"**\\portal-service\\**\\model\\*Soap.java",
 				"**\\portal-service\\**\\model\\*Wrapper.java",
 				"**\\model\\impl\\*ModelImpl.java",
+				"**\\counter\\service\\**",
 				"**\\portal\\service\\**", "**\\portal-client\\**",
 				"**\\portal-web\\classes\\**\\*.java",
 				"**\\portal-web\\test\\**\\*Test.java",
