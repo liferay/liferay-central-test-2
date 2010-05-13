@@ -53,6 +53,7 @@
 				<action-key>ADD_STRUCTURE</action-key>
 				<action-key>ADD_TEMPLATE</action-key>
 				<action-key>APPROVE_ARTICLE</action-key>
+				<action-key>SUBSCRIBE</action-key>
 			</supports>
 			<community-defaults />
 			<guest-defaults />
@@ -62,6 +63,7 @@
 				<action-key>ADD_STRUCTURE</action-key>
 				<action-key>ADD_TEMPLATE</action-key>
 				<action-key>APPROVE_ARTICLE</action-key>
+				<action-key>SUBSCRIBE</action-key>
 			</guest-unsupported>
 		</permissions>
 	</model-resource>
