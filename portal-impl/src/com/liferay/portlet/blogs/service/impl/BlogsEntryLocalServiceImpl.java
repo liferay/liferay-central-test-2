@@ -160,7 +160,12 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		if (serviceContext.getWorkflowAction() ==
 				WorkflowConstants.ACTION_PUBLISH) {
 
-			serviceContext.setAttribute("trackbacks", trackbacks);
+			if (Validator.isNotNull(trackbacks)) {
+				serviceContext.setAttribute("trackbacks", trackbacks);
+			}
+			else {
+				serviceContext.setAttribute("trackbacks", null);
+			}
 
 			WorkflowHandlerRegistryUtil.startWorkflowInstance(
 				user.getCompanyId(), groupId, userId,
@@ -543,7 +548,13 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 			serviceContext.setAttribute(
 				"pingOldTrackbacks", String.valueOf(pingOldTrackbacks));
-			serviceContext.setAttribute("trackbacks", trackbacks);
+
+			if (Validator.isNotNull(trackbacks)) {
+				serviceContext.setAttribute("trackbacks", trackbacks);
+			}
+			else {
+				serviceContext.setAttribute("trackbacks", null);
+			}
 
 			WorkflowHandlerRegistryUtil.startWorkflowInstance(
 				user.getCompanyId(), entry.getGroupId(), userId,
