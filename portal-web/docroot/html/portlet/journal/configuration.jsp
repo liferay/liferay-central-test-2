@@ -221,7 +221,7 @@ else if (tabs2.equals("web-content-updated-email")) {
 						[$PORTLET_NAME$]
 					</dt>
 					<dd>
-						<%= ((RenderResponseImpl)renderResponse).getTitle() %>
+						<%= (RenderResponseImpl.getRenderResponseImpl(renderResponse)).getTitle() %>
 					</dd>
 					<dt>
 						[$TO_ADDRESS$]

@@ -19,7 +19,7 @@
 <portlet:defineObjects />
 
 <%
-RenderResponseImpl renderResponseImpl = (RenderResponseImpl)renderResponse;
+RenderResponseImpl renderResponseImpl = RenderResponseImpl.getRenderResponseImpl(renderResponse);
 
 String portletTitle = renderResponseImpl.getTitle();
 

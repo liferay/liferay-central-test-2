@@ -16,6 +16,7 @@ package com.liferay.portlet;
 
 import javax.portlet.PortletRequest;
 import javax.portlet.RenderRequest;
+import javax.portlet.filter.RenderRequestWrapper;
 
 /**
  * <a href="RenderRequestImpl.java.html"><b><i>View Source</i></b></a>
@@ -24,6 +25,22 @@ import javax.portlet.RenderRequest;
  */
 public class RenderRequestImpl
 	extends PortletRequestImpl implements RenderRequest {
+
+	public static RenderRequestImpl getRenderRequestImpl(
+		RenderRequest renderRequest) {
+
+		RenderRequestImpl renderRequestImpl = null;
+
+		if (renderRequest instanceof RenderRequestImpl) {
+			renderRequestImpl = (RenderRequestImpl)renderRequest;
+		}
+		else {
+			renderRequestImpl = (RenderRequestImpl)
+				(((RenderRequestWrapper)renderRequest).getRequest());
+		}
+
+		return renderRequestImpl;
+	}
 
 	public String getETag() {
 		return null;
