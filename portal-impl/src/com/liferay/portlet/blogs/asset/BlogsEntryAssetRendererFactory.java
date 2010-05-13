@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.asset.model.AssetRenderer;
@@ -92,7 +93,7 @@ public class BlogsEntryAssetRendererFactory extends BaseAssetRendererFactory {
 	}
 
 	protected String getIconPath(ThemeDisplay themeDisplay) {
-		return themeDisplay.getPathThemeImages() + "/html/icons/blogs.png";
+		return PortalUtil.getPathContext() + "/html/icons/blogs.png";
 	}
 
 }

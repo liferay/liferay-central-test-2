@@ -82,7 +82,7 @@ public class CalEventAssetRendererFactory extends BaseAssetRendererFactory {
 	}
 
 	protected String getIconPath(ThemeDisplay themeDisplay) {
-		return themeDisplay.getPathThemeImages() + "/document_library/date.png";
+		return themeDisplay.getPathThemeImages() + "/common/date.png";
 	}
 
 }

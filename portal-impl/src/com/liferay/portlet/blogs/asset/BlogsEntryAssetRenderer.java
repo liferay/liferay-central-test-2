@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
@@ -136,7 +137,7 @@ public class BlogsEntryAssetRenderer extends BaseAssetRenderer {
 	}
 
 	protected String getIconPath(ThemeDisplay themeDisplay) {
-		return themeDisplay.getPathThemeImages() + "/html/icons/blogs.png";
+		return PortalUtil.getPathContext() + "/html/icons/blogs.png";
 	}
 
 	private BlogsEntry _entry;
