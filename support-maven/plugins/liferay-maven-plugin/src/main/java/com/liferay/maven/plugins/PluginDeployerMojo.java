@@ -42,13 +42,12 @@ public class PluginDeployerMojo extends AbstractMojo {
 		if (warFile.exists()) {
 			getLog().info(
 				"Deploying " + warFileName + " to " +
-				autoDeployDir.getAbsolutePath());
+					autoDeployDir.getAbsolutePath());
 
 			FileUtils.copyFile(warFile, new File(autoDeployDir, warFileName));
 		}
 		else {
-			getLog().warn(
-				warFileName + " does not exist and won't be deployed.");
+			getLog().warn(warFileName + " does not exist");
 		}
 	}
 
