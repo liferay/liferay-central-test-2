@@ -47,7 +47,7 @@ catch (Exception e) {
 	_log.error("Cannot render Nested Portlets portlet", e);
 }
 finally {
-	RenderRequestImpl renderRequestImpl = RenderRequestImpl.getRenderRequest(renderRequest);
+	RenderRequestImpl renderRequestImpl = RenderRequestImpl.getRenderRequestImpl(renderRequest);
 
 	renderRequestImpl.defineObjects(portletConfig, renderResponse);
 }
