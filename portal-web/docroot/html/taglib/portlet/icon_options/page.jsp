@@ -19,7 +19,9 @@
 <liferay-ui:icon-menu
 	align="auto"
 	cssClass="portlet-options"
+	icon=""
 	message="options"
+	showArrow="<%= false %>"
 	showWhenSingleIcon="<%= true %>"
 >
 	<liferay-portlet:icon-refresh />
