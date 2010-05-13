@@ -39,11 +39,17 @@ public class PluginDeployerMojo extends AbstractMojo {
 	}
 
 	protected void doExecute() throws Exception {
-		getLog().info(
-			"Deploying " + warFileName + " to " +
+		if (warFile.exists()) {
+			getLog().info(
+				"Deploying " + warFileName + " to " +
 				autoDeployDir.getAbsolutePath());
 
-		FileUtils.copyFile(warFile, new File(autoDeployDir, warFileName));
+			FileUtils.copyFile(warFile, new File(autoDeployDir, warFileName));
+		}
+		else {
+			getLog().warn(
+				warFileName + " does not exist and won't be deployed.");
+		}
 	}
 
 	/**
