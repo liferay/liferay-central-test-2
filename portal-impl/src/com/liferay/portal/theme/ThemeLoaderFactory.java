@@ -14,7 +14,7 @@
 
 package com.liferay.portal.theme;
 
-import com.liferay.portal.velocity.VelocityContextPool;
+import com.liferay.portal.kernel.servlet.ServletContextPool;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -32,7 +32,7 @@ public class ThemeLoaderFactory {
 		String servletContextName, ServletContext servletContext,
 		String[] xmls) {
 
-		VelocityContextPool.put(servletContextName, servletContext);
+		ServletContextPool.put(servletContextName, servletContext);
 
 		ThemeLoader themeLoader = new ThemeLoader(
 			servletContextName, servletContext, xmls);
@@ -47,7 +47,7 @@ public class ThemeLoaderFactory {
 			return false;
 		}
 		else {
-			VelocityContextPool.remove(servletContextName);
+			ServletContextPool.remove(servletContextName);
 
 			themeLoader.destroy();
 

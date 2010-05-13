@@ -244,6 +244,10 @@
 		<priority value="INFO" />
 	</category>
 
+	<category name="com.liferay.portal.kernel.servlet.ServletContextPool">
+		<priority value="ERROR" />
+	</category>
+
 	<category name="com.liferay.portal.kernel.servlet.ServletContextUtil">
 		<priority value="INFO" />
 	</category>
@@ -617,10 +621,6 @@
 	</category>
 
 	<category name="com.liferay.portal.velocity.ServletVelocityResourceListener">
-		<priority value="ERROR" />
-	</category>
-
-	<category name="com.liferay.portal.velocity.VelocityContextPool">
 		<priority value="ERROR" />
 	</category>
 

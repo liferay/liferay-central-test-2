@@ -18,9 +18,9 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.PortletBag;
 import com.liferay.portal.kernel.portlet.PortletBagPool;
+import com.liferay.portal.kernel.servlet.ServletContextPool;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletApp;
-import com.liferay.portal.velocity.VelocityContextPool;
 
 import java.util.Iterator;
 import java.util.Map;
@@ -91,7 +91,7 @@ public class PortletContextFactory {
 
 			portletContext = new PortletContextImpl(portlet, servletContext);
 
-			VelocityContextPool.put(
+			ServletContextPool.put(
 				portletContext.getPortletContextName(), servletContext);
 
 			portletContexts.put(portlet.getPortletId(), portletContext);
@@ -116,7 +116,7 @@ public class PortletContextFactory {
 
 			PortletContext portletContext = entry.getValue();
 
-			VelocityContextPool.remove(portletContext.getPortletContextName());
+			ServletContextPool.remove(portletContext.getPortletContextName());
 		}
 	}
 

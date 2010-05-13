@@ -19,9 +19,9 @@ import com.liferay.portal.kernel.deploy.hot.HotDeployEvent;
 import com.liferay.portal.kernel.deploy.hot.HotDeployException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.servlet.ServletContextPool;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.theme.ThemeLoaderFactory;
-import com.liferay.portal.velocity.VelocityContextPool;
 
 import javax.servlet.ServletContext;
 
@@ -97,7 +97,7 @@ public class ThemeLoaderHotDeployListener extends BaseHotDeployListener {
 			_log.info("Unregistering theme loader for " + servletContextName);
 		}
 
-		VelocityContextPool.remove(servletContextName);
+		ServletContextPool.remove(servletContextName);
 
 		if (_log.isInfoEnabled()) {
 			_log.info(

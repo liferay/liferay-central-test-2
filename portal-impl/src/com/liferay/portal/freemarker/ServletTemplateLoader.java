@@ -16,9 +16,9 @@ package com.liferay.portal.freemarker;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.servlet.ServletContextPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.velocity.VelocityContextPool;
 
 import java.io.IOException;
 
@@ -45,7 +45,7 @@ public class ServletTemplateLoader extends URLTemplateLoader {
 				servletContextName = PortalUtil.getPathContext();
 			}
 
-			ServletContext servletContext = VelocityContextPool.get(
+			ServletContext servletContext = ServletContextPool.get(
 				servletContextName);
 
 			if (servletContext != null) {
@@ -68,12 +68,13 @@ public class ServletTemplateLoader extends URLTemplateLoader {
 							"The template " + name + " should be created");
 					}
 
-					String portalContextName = PortalUtil.getPathContext();
+					String portalServletContextName =
+						PortalUtil.getPathContext();
 
-					ServletContext portalContext =
-						VelocityContextPool.get(portalContextName);
+					ServletContext portalServletContext =
+						ServletContextPool.get(portalServletContextName);
 
-					url = portalContext.getResource(
+					url = portalServletContext.getResource(
 						"/html/themes/_unstyled/template/init_custom.ftl");
 				}
 			}

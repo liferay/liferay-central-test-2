@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.io.unsync.UnsyncStringWriter;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.PipingServletResponse;
+import com.liferay.portal.kernel.servlet.ServletContextPool;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -29,7 +30,6 @@ import com.liferay.portal.kernel.velocity.VelocityContext;
 import com.liferay.portal.kernel.velocity.VelocityEngineUtil;
 import com.liferay.portal.model.Theme;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.velocity.VelocityContextPool;
 import com.liferay.portal.velocity.VelocityVariables;
 
 import freemarker.ext.jsp.TaglibFactory;
@@ -92,21 +92,22 @@ public class ThemeUtil {
 		// com.liferay.portlet.PortletContextImpl for other cases where a null
 		// servlet context name is also converted to an empty string.
 
-		String ctxName = GetterUtil.getString(theme.getServletContextName());
+		String servletContextName = GetterUtil.getString(
+			theme.getServletContextName());
 
-		if (VelocityContextPool.get(ctxName) == null) {
+		if (ServletContextPool.get(servletContextName) == null) {
 
 			// This should only happen if the FreeMarker template is the first
 			// page to be accessed in the system
 
-			VelocityContextPool.put(ctxName, servletContext);
+			ServletContextPool.put(servletContextName, servletContext);
 		}
 
 		int pos = page.lastIndexOf(StringPool.PERIOD);
 
 		StringBundler sb = new StringBundler(7);
 
-		sb.append(ctxName);
+		sb.append(servletContextName);
 		sb.append(theme.getFreeMarkerTemplateLoader());
 		sb.append(theme.getTemplatesPath());
 		sb.append(StringPool.SLASH);
@@ -131,7 +132,8 @@ public class ThemeUtil {
 
 		// Theme servlet context
 
-		ServletContext themeServletContext = VelocityContextPool.get(ctxName);
+		ServletContext themeServletContext = ServletContextPool.get(
+			servletContextName);
 
 		freeMarkerContext.put("themeServletContext", themeServletContext);
 
@@ -242,21 +244,22 @@ public class ThemeUtil {
 		// com.liferay.portlet.PortletContextImpl for other cases where a null
 		// servlet context name is also converted to an empty string.
 
-		String ctxName = GetterUtil.getString(theme.getServletContextName());
+		String servletContextName = GetterUtil.getString(
+			theme.getServletContextName());
 
-		if (VelocityContextPool.get(ctxName) == null) {
+		if (ServletContextPool.get(servletContextName) == null) {
 
 			// This should only happen if the Velocity template is the first
 			// page to be accessed in the system
 
-			VelocityContextPool.put(ctxName, servletContext);
+			ServletContextPool.put(servletContextName, servletContext);
 		}
 
 		int pos = page.lastIndexOf(StringPool.PERIOD);
 
 		StringBundler sb = new StringBundler(7);
 
-		sb.append(ctxName);
+		sb.append(servletContextName);
 		sb.append(theme.getVelocityResourceListener());
 		sb.append(theme.getTemplatesPath());
 		sb.append(StringPool.SLASH);
@@ -281,7 +284,8 @@ public class ThemeUtil {
 
 		// Theme servlet context
 
-		ServletContext themeServletContext = VelocityContextPool.get(ctxName);
+		ServletContext themeServletContext = ServletContextPool.get(
+			servletContextName);
 
 		velocityContext.put("themeServletContext", themeServletContext);
 

@@ -38,6 +38,7 @@ import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.search.OpenSearch;
 import com.liferay.portal.kernel.servlet.PortletServlet;
+import com.liferay.portal.kernel.servlet.ServletContextPool;
 import com.liferay.portal.kernel.servlet.ServletContextProvider;
 import com.liferay.portal.kernel.servlet.URLEncoder;
 import com.liferay.portal.kernel.util.ClassUtil;
@@ -72,7 +73,6 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebAppPool;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portal.velocity.VelocityContextPool;
 import com.liferay.portal.xmlrpc.XmlRpcServlet;
 import com.liferay.portlet.ControlPanelEntry;
 import com.liferay.portlet.CustomUserAttributes;
@@ -464,7 +464,7 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 		if (!portletApp.isWARFile()) {
 			String contextPath = PortalUtil.getPathContext();
 
-			servletContext = VelocityContextPool.get(contextPath);
+			servletContext = ServletContextPool.get(contextPath);
 
 			portletClassLoader = PortalClassLoaderUtil.getClassLoader();
 		}

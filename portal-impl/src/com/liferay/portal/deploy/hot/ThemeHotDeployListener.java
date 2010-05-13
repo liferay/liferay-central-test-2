@@ -20,11 +20,11 @@ import com.liferay.portal.kernel.deploy.hot.HotDeployException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.PortletServlet;
+import com.liferay.portal.kernel.servlet.ServletContextPool;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.service.ThemeLocalServiceUtil;
 import com.liferay.portal.velocity.LiferayResourceCacheUtil;
-import com.liferay.portal.velocity.VelocityContextPool;
 
 import java.util.HashMap;
 import java.util.List;
@@ -95,7 +95,7 @@ public class ThemeHotDeployListener extends BaseHotDeployListener {
 
 		// Velocity
 
-		VelocityContextPool.put(servletContextName, servletContext);
+		ServletContextPool.put(servletContextName, servletContext);
 
 		// Variables
 
@@ -152,7 +152,7 @@ public class ThemeHotDeployListener extends BaseHotDeployListener {
 			currentThread.setContextClassLoader(
 				PortalClassLoaderUtil.getClassLoader());
 
-			VelocityContextPool.remove(servletContextName);
+			ServletContextPool.remove(servletContextName);
 
 			LiferayResourceCacheUtil.clear();
 		}

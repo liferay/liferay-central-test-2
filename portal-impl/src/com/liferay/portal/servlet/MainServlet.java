@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.servlet.PortletSessionTracker;
 import com.liferay.portal.kernel.servlet.ProtectedServletRequest;
+import com.liferay.portal.kernel.servlet.ServletContextPool;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
@@ -92,7 +93,6 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.ShutdownUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portal.velocity.VelocityContextPool;
 import com.liferay.portal.xmlrpc.XmlRpcServlet;
 import com.liferay.portlet.PortletConfigFactory;
 import com.liferay.portlet.PortletFilterFactory;
@@ -221,11 +221,11 @@ public class MainServlet extends ActionServlet {
 		}
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Initialize Velocity");
+			_log.debug("Initialize servlet context pool");
 		}
 
 		try {
-			initVelocity();
+			initSevletContextPool();
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -1179,6 +1179,14 @@ public class MainServlet extends ActionServlet {
 		}
 	}
 
+	protected void initSevletContextPool() throws Exception {
+		ServletContext servletContext = getServletContext();
+
+		String contextPath = PortalUtil.getPathContext();
+
+		ServletContextPool.put(contextPath, servletContext);
+	}
+
 	protected void initSocialActivityInterpreters(List<Portlet> portlets)
 		throws Exception {
 
@@ -1244,14 +1252,6 @@ public class MainServlet extends ActionServlet {
 
 		ThemeLocalServiceUtil.init(
 			servletContext, null, true, xmls, pluginPackage);
-	}
-
-	protected void initVelocity() throws Exception {
-		ServletContext servletContext = getServletContext();
-
-		String contextPath = PortalUtil.getPathContext();
-
-		VelocityContextPool.put(contextPath, servletContext);
 	}
 
 	protected void initWebDAVStorages(List<Portlet> portlets) throws Exception {

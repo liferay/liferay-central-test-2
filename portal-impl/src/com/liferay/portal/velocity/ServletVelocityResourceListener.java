@@ -17,6 +17,7 @@ package com.liferay.portal.velocity;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.servlet.ServletContextPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortalUtil;
 
@@ -48,7 +49,7 @@ public class ServletVelocityResourceListener extends VelocityResourceListener {
 				servletContextName = PortalUtil.getPathContext();
 			}
 
-			ServletContext servletContext = VelocityContextPool.get(
+			ServletContext servletContext = ServletContextPool.get(
 				servletContextName);
 
 			if (servletContext != null) {
