@@ -194,4 +194,16 @@
 			<arg value="-Dversion=${maven.version}" />
 		</exec>
 	</target>-->
+
+	<target name="install-release-artifacts">
+		<antcall target="install-artifacts">
+			<param name="maven.version" value="${lp.version}" />
+		</antcall>
+	</target>
+
+	<target name="install-snapshot-artifacts">
+		<antcall target="install-artifacts">
+			<param name="maven.version" value="${lp.version}-SNAPSHOT" />
+		</antcall>
+	</target>
 </project>
