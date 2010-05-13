@@ -127,7 +127,19 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 				<aui:button name="saveDraftButton" onClick='<%= renderResponse.getNamespace() + "saveEntry(true);" %>' type="button" value="save-draft" />
 			</c:if>
 
-			<aui:button name="saveButton" type="submit" value='<%= ((entry == null) || (entry.getStatus() == WorkflowConstants.STATUS_DRAFT)) ? "publish" : "save" %>' />
+			<%
+			boolean isPending = false;
+
+			if (entry != null) {
+				isPending = entry.isPending();
+			}
+			%>
+
+			<aui:button name="saveButton" type="submit" value="publish" disabled="<%= isPending %>" />
+
+			<c:if test="<%= isPending %>">
+				<liferay-ui:icon-help message="there-is-a-publication-workflow-in-process" />
+			</c:if>
 
 			<aui:button name="cancelButton" onClick="<%= redirect %>" type="cancel" />
 		</aui:button-row>
