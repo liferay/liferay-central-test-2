@@ -59,7 +59,9 @@ public class PortalSessionDestroyer implements PortalInitable {
 			Long userIdObj = (Long)session.getAttribute(WebKeys.USER_ID);
 
 			if (userIdObj == null) {
-				_log.warn("User id is not in the session");
+				if (_log.isWarnEnabled()) {
+					_log.warn("User id is not in the session");
+				}
 			}
 
 			if (userIdObj == null) {
@@ -89,7 +91,10 @@ public class PortalSessionDestroyer implements PortalInitable {
 			}
 		}
 		catch (IllegalStateException ise) {
-			_log.warn("Please upgrade to a servlet 2.4 compliant container");
+			if (_log.isWarnEnabled()) {
+				_log.warn(
+					"Please upgrade to a Servlet 2.4 compliant container");
+			}
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -99,7 +104,9 @@ public class PortalSessionDestroyer implements PortalInitable {
 			session.removeAttribute(WebKeys.PORTLET_SESSION_TRACKER);
 		}
 		catch (IllegalStateException ise) {
-			_log.warn(ise, ise);
+			if (_log.isWarnEnabled()) {
+				_log.warn(ise, ise);
+			}
 		}
 
 		// Process session destroyed events

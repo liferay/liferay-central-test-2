@@ -44,11 +44,12 @@ public class PortalSessionCreator implements PortalInitable {
 		HttpSession session = _event.getSession();
 
 		try {
-
 			PortalSessionContext.put(session.getId(), session);
 		}
 		catch (IllegalStateException ise) {
-			_log.warn(ise, ise);
+			if (_log.isWarnEnabled()) {
+				_log.warn(ise, ise);
+			}
 		}
 
 		// Process session created events
