@@ -18,7 +18,6 @@ import org.jruby.Ruby;
 import org.jruby.javasupport.Java;
 import org.jruby.javasupport.JavaObject;
 import org.jruby.javasupport.JavaUtil;
-import org.jruby.runtime.Block;
 import org.jruby.runtime.IAccessor;
 import org.jruby.runtime.builtin.IRubyObject;
 
@@ -31,32 +30,26 @@ class BeanGlobalVariable implements IAccessor {
 
 	public BeanGlobalVariable(Ruby ruby, Object bean, Class<?> type) {
 		_ruby = ruby;
-		_bean = bean;
 		_type = type;
+
+		_bean = JavaUtil.convertJavaToRuby(_ruby, bean, _type);
+
+		if (_bean instanceof JavaObject) {
+			_bean = Java.wrap(_ruby, _bean);
+		}
 	}
 
 	public IRubyObject getValue() {
-		IRubyObject value = JavaUtil.convertJavaToRuby(
-			_ruby, _bean, _type);
-
-		if (value instanceof JavaObject) {
-			return Java.wrap(_ruby, value);
-		}
-		else {
-			return value;
-		}
+		return _bean;
 	}
 
-	public IRubyObject setValue(IRubyObject value) {
-		Object bean = Java.ruby_to_java(
-			_ruby.getObject(), value, Block.NULL_BLOCK);
+	public IRubyObject setValue(IRubyObject bean) {
+		_bean = bean;
 
-		_bean = JavaUtil.convertArgument(_ruby, bean, _type);
-
-		return value;
+		return bean;
 	}
 
-	private Object _bean;
+	private IRubyObject _bean;
 	private Ruby _ruby;
 	private Class<?> _type;
 
