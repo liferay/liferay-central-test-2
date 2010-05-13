@@ -68,6 +68,7 @@
 <%@ include file="/html/portal/css/taglib/tags_summary.jspf" %>
 <%@ include file="/html/portal/css/taglib/user_display.jspf" %>
 <%@ include file="/html/portal/css/taglib/webdav.jspf" %>
+<%@ include file="/html/portal/css/taglib/workflow_status.jspf" %>
 
 <%@ include file="/html/portal/css/portal/openid.jspf" %>
 <%@ include file="/html/portal/css/portal/accessibility.jspf" %>
