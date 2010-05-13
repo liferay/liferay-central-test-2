@@ -229,7 +229,7 @@ String labelTag = _buildLabel(inlineLabel, showForLabel, forLabel);
 			valueString = ParamUtil.get(request, name, StringPool.BLANK);
 		}
 
-		if (Validator.isNull(valueString) && value != null) {
+		if (Validator.isNull(valueString) && (value != null)) {
 			valueString = value.toString();
 		}
 
