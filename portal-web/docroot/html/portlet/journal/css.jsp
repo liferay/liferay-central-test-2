@@ -28,42 +28,6 @@
 	clear: both;
 }
 
-.portlet-journal .journal-article-id {
-	background: url(<%= themeImagesPath %>/common/history.png) no-repeat 0 50%;
-	color: #999;
-	padding: 2px 20px;
-}
-
-.portlet-journal .journal-article-status {
-	background: url(<%= themeImagesPath %>/common/recent_changes.png) no-repeat 0 50%;
-	color: #999;
-	margin-right: 5px;
-	padding: 2px 0 2px 20px;
-}
-
-.portlet-journal .journal-article-status .journal-article-status-approved {
-	color: green;
-}
-
-.portlet-journal .journal-article-status .journal-article-status-draft {
-	color: blue;
-}
-
-.portlet-journal .journal-article-status .journal-article-status-expired {
-	color: red;
-}
-
-.portlet-journal .journal-article-status .journal-article-status-pending {
-	color: orange;
-}
-
-.portlet-journal .journal-article-version {
-	background: url(<%= themeImagesPath %>/common/pages.png) no-repeat 0 50%;
-	color: #999;
-	margin-right: 5px;
-	padding: 2px 20px;
-}
-
 .portlet-journal h1.article-title {
 	border-bottom: 1px solid #aaa;
 	clear: both;

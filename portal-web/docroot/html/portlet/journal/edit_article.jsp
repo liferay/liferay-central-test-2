@@ -282,49 +282,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 							</c:choose>
 						</c:when>
 						<c:otherwise>
-							<aui:field-wrapper label="">
-								<span class="journal-article-id"><liferay-ui:message key="id" />: <%= HtmlUtil.escape(articleId) %></span>
-
-								<span class="journal-article-version"><liferay-ui:message key="version" />: <strong><%= article.getVersion() %></strong></span>
-
-								<%
-								String status = null;
-
-								if (article.isApproved()) {
-									status = "approved";
-								}
-								else if (article.isDraft()) {
-									status = "draft";
-								}
-								else if (article.isExpired()) {
-									status = "expired";
-								}
-								else if (article.isPending()) {
-									StringBundler sb = new StringBundler(5);
-
-									sb.append("pending");
-
-									try {
-										String workflowStatus = WorkflowInstanceLinkLocalServiceUtil.getState(article.getCompanyId(), article.getGroupId(), JournalArticle.class.getName(), article.getId());
-
-										sb.append(StringPool.SPACE);
-										sb.append(StringPool.OPEN_PARENTHESIS);
-										sb.append(workflowStatus);
-										sb.append(StringPool.CLOSE_PARENTHESIS);
-									}
-									catch (NoSuchWorkflowInstanceLinkException nswile) {
-									}
-
-									status = sb.toString();
-								}
-								%>
-
-								<span class="journal-article-status"><liferay-ui:message key="status" />: <strong class="journal-article-status-<%= status %>"><liferay-ui:message key="<%= status %>" /></strong></span>
-
-								<c:if test="<%= article.isApproved() %>">
-									<liferay-ui:icon-help message="a-new-version-will-be-created-automatically-if-this-article-is-modified" />
-								</c:if>
-							</aui:field-wrapper>
+							<aui:worflow-status id="<%= article.getArticleId() %>" status="<%= article.getStatus() %>" version="<%= article.getVersion() %>" />
 						</c:otherwise>
 					</c:choose>
 				</td>

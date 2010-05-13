@@ -170,47 +170,7 @@ if (Validator.isNull(redirect)) {
 	<aui:input name="nodeId" type="hidden" value="<%= nodeId %>" />
 
 	<c:if test="<%= wikiPage != null %>">
-		<aui:field-wrapper label="">
-			<span class="wiki-page-version"><liferay-ui:message key="version" />: <strong><%= wikiPage.getVersion() %></strong></span>
-
-			<%
-			String status = null;
-
-			if (wikiPage.isApproved()) {
-				status = "approved";
-			}
-			else if (wikiPage.isDraft()) {
-				status = "draft";
-			}
-			else if (wikiPage.isExpired()) {
-				status = "expired";
-			}
-			else if (wikiPage.isPending()) {
-				StringBundler sb = new StringBundler(5);
-
-				sb.append("pending");
-
-				try {
-					String workflowStatus = WorkflowInstanceLinkLocalServiceUtil.getState(wikiPage.getCompanyId(), wikiPage.getGroupId(), WikiPage.class.getName(), wikiPage.getResourcePrimKey());
-
-					sb.append(StringPool.SPACE);
-					sb.append(StringPool.OPEN_PARENTHESIS);
-					sb.append(workflowStatus);
-					sb.append(StringPool.CLOSE_PARENTHESIS);
-				}
-				catch (NoSuchWorkflowInstanceLinkException nswile) {
-				}
-
-				status = sb.toString();
-			}
-			%>
-
-			<span class="wiki-page-status"><liferay-ui:message key="status" />: <strong class="wiki-page-status-<%= status %>"><liferay-ui:message key="<%= status %>" /></strong></span>
-
-			<c:if test="<%= wikiPage.isApproved() %>">
-				<liferay-ui:icon-help message="a-new-version-will-be-created-automatically-if-this-page-is-modified" />
-			</c:if>
-		</aui:field-wrapper>
+		<aui:worflow-status status="<%= wikiPage.getStatus() %>" version="<%= wikiPage.getVersion() %>" />
 	</c:if>
 
 	<c:if test="<%= !editTitle %>">
