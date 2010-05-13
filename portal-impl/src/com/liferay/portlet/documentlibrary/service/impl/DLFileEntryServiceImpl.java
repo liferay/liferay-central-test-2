@@ -225,7 +225,7 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 
 		return lockLocalService.lock(
 			getUser().getUserId(), DLFileEntry.class.getName(), lockId, owner,
-			false, System.currentTimeMillis() + expirationTime);
+			false, expirationTime);
 	}
 
 	public Lock refreshFileEntryLock(String lockUuid, long expirationTime)
