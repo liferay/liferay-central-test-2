@@ -3288,7 +3288,7 @@
 		<table name="WikiPageResource" />
 		<attributes />
 	</entity>
-	<entity class="com.liferay.counter.model.impl.CounterModelImpl" name="Counter">
+	<entity class="com.liferay.counter.model.impl.CounterImpl" name="Counter">
 		<table name="Counter" />
 		<attributes />
 	</entity>

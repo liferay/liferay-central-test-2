@@ -37,6 +37,88 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
  * @generated
  */
 public class CounterLocalServiceUtil {
+	public static com.liferay.counter.model.Counter addCounter(
+		com.liferay.counter.model.Counter counter)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().addCounter(counter);
+	}
+
+	public static com.liferay.counter.model.Counter createCounter(
+		java.lang.String name) {
+		return getService().createCounter(name);
+	}
+
+	public static void deleteCounter(java.lang.String name)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().deleteCounter(name);
+	}
+
+	public static void deleteCounter(com.liferay.counter.model.Counter counter)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().deleteCounter(counter);
+	}
+
+	@SuppressWarnings("unchecked")
+	public static java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().dynamicQuery(dynamicQuery);
+	}
+
+	@SuppressWarnings("unchecked")
+	public static java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
+		int end) throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().dynamicQuery(dynamicQuery, start, end);
+	}
+
+	@SuppressWarnings("unchecked")
+	public static java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
+		int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .dynamicQuery(dynamicQuery, start, end, orderByComparator);
+	}
+
+	public static long dynamicQueryCount(
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().dynamicQueryCount(dynamicQuery);
+	}
+
+	public static com.liferay.counter.model.Counter getCounter(
+		java.lang.String name)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getCounter(name);
+	}
+
+	public static java.util.List<com.liferay.counter.model.Counter> getCounters(
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getCounters(start, end);
+	}
+
+	public static int getCountersCount()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getCountersCount();
+	}
+
+	public static com.liferay.counter.model.Counter updateCounter(
+		com.liferay.counter.model.Counter counter)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().updateCounter(counter);
+	}
+
+	public static com.liferay.counter.model.Counter updateCounter(
+		com.liferay.counter.model.Counter counter, boolean merge)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().updateCounter(counter, merge);
+	}
+
 	public static java.util.List<java.lang.String> getNames()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getNames();

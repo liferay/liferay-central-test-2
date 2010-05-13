@@ -47,6 +47,63 @@ import com.liferay.portal.kernel.exception.SystemException;
 @Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
 	PortalException.class, SystemException.class})
 public interface CounterLocalService {
+	public com.liferay.counter.model.Counter addCounter(
+		com.liferay.counter.model.Counter counter)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.counter.model.Counter createCounter(
+		java.lang.String name);
+
+	public void deleteCounter(java.lang.String name)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public void deleteCounter(com.liferay.counter.model.Counter counter)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	@SuppressWarnings("unchecked")
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	@SuppressWarnings("unchecked")
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
+		int end) throws com.liferay.portal.kernel.exception.SystemException;
+
+	@SuppressWarnings("unchecked")
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
+		int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public long dynamicQueryCount(
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.counter.model.Counter getCounter(java.lang.String name)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.counter.model.Counter> getCounters(
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCountersCount()
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.counter.model.Counter updateCounter(
+		com.liferay.counter.model.Counter counter)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.counter.model.Counter updateCounter(
+		com.liferay.counter.model.Counter counter, boolean merge)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<java.lang.String> getNames()
 		throws com.liferay.portal.kernel.exception.SystemException;

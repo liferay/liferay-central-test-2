@@ -37,7 +37,7 @@ import java.io.Serializable;
  *
  * @author    Brian Wing Shun Chan
  * @see       Counter
- * @see	   com.liferay.counter.model.impl.CounterModelImpl
+ * @see       com.liferay.counter.model.impl.CounterImpl
  * @see       com.liferay.counter.model.impl.CounterModelImpl
  * @generated
  */
