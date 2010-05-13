@@ -33,84 +33,84 @@ boolean print = ((Boolean)request.getAttribute("view.jsp-print")).booleanValue()
 request.setAttribute("view.jsp-showIconLabel", true);
 %>
 
-<div class="asset-full-content <%= showAssetTitle ? "show-asset-title" : "no-title" %>">
-	<c:if test="<%= !print %>">
-		<liferay-util:include page="/html/portlet/asset_publisher/asset_actions.jsp" />
-	</c:if>
+<c:if test="<%= assetRenderer.hasViewPermission(permissionChecker) %>">
+	<div class="asset-full-content <%= showAssetTitle ? "show-asset-title" : "no-title" %>">
+		<c:if test="<%= !print %>">
+			<liferay-util:include page="/html/portlet/asset_publisher/asset_actions.jsp" />
+		</c:if>
 
-	<c:if test="<%= (enableConversions && assetRenderer.isConvertible()) || (enablePrint && assetRenderer.isPrintable()) || (showAvailableLocales && assetRenderer.isLocalizable()) %>">
-		<div class="asset-user-actions">
-			<c:if test="<%= enablePrint %>">
-				<div class="print-action">
-					<%@ include file="/html/portlet/asset_publisher/asset_print.jspf" %>
-				</div>
-			</c:if>
-
-			<c:if test="<%= (enableConversions && assetRenderer.isConvertible()) && !print %>">
-
-				<%
-				String languageId = LanguageUtil.getLanguageId(request);
-
-				PortletURL exportAssetURL = assetRenderer.getURLExport((LiferayPortletRequest)renderRequest, (LiferayPortletResponse)renderResponse);
-				%>
-
-				<div class="export-actions">
-					<%@ include file="/html/portlet/asset_publisher/asset_export.jspf" %>
-				</div>
-			</c:if>
-			<c:if test="<%= (showAvailableLocales && assetRenderer.isLocalizable()) && !print %>">
-
-				<%
-				String languageId = LanguageUtil.getLanguageId(request);
-
-				String[] availableLocales = assetRenderer.getAvailableLocales();
-				%>
-
-				<c:if test="<%= availableLocales.length > 1 %>">
-					<c:if test="<%= enableConversions || enablePrint %>">
-						<div class="locale-separator"> </div>
-					</c:if>
-
-					<div class="locale-actions">
-						<liferay-ui:language languageIds="<%= availableLocales %>" displayStyle="<%= 0 %>" />
+		<c:if test="<%= (enableConversions && assetRenderer.isConvertible()) || (enablePrint && assetRenderer.isPrintable()) || (showAvailableLocales && assetRenderer.isLocalizable()) %>">
+			<div class="asset-user-actions">
+				<c:if test="<%= enablePrint %>">
+					<div class="print-action">
+						<%@ include file="/html/portlet/asset_publisher/asset_print.jspf" %>
 					</div>
 				</c:if>
-			</c:if>
-		</div>
-	</c:if>
 
-	<%
-	AssetEntryLocalServiceUtil.incrementViewCounter(assetEntry.getClassName(), assetEntry.getClassPK());
+				<c:if test="<%= (enableConversions && assetRenderer.isConvertible()) && !print %>">
 
-	if (showContextLink) {
-		if (PortalUtil.getPlidFromPortletId(assetRenderer.getGroupId(), assetRendererFactory.getPortletId()) == 0) {
-			showContextLink = false;
+					<%
+					String languageId = LanguageUtil.getLanguageId(request);
+
+					PortletURL exportAssetURL = assetRenderer.getURLExport((LiferayPortletRequest)renderRequest, (LiferayPortletResponse)renderResponse);
+					%>
+
+					<div class="export-actions">
+						<%@ include file="/html/portlet/asset_publisher/asset_export.jspf" %>
+					</div>
+				</c:if>
+				<c:if test="<%= (showAvailableLocales && assetRenderer.isLocalizable()) && !print %>">
+
+					<%
+					String languageId = LanguageUtil.getLanguageId(request);
+
+					String[] availableLocales = assetRenderer.getAvailableLocales();
+					%>
+
+					<c:if test="<%= availableLocales.length > 1 %>">
+						<c:if test="<%= enableConversions || enablePrint %>">
+							<div class="locale-separator"> </div>
+						</c:if>
+
+						<div class="locale-actions">
+							<liferay-ui:language languageIds="<%= availableLocales %>" displayStyle="<%= 0 %>" />
+						</div>
+					</c:if>
+				</c:if>
+			</div>
+		</c:if>
+
+		<%
+		AssetEntryLocalServiceUtil.incrementViewCounter(assetEntry.getClassName(), assetEntry.getClassPK());
+
+		if (showContextLink) {
+			if (PortalUtil.getPlidFromPortletId(assetRenderer.getGroupId(), assetRendererFactory.getPortletId()) == 0) {
+				showContextLink = false;
+			}
 		}
-	}
 
-	PortletURL viewFullContentURL = renderResponse.createRenderURL();
+		PortletURL viewFullContentURL = renderResponse.createRenderURL();
 
-	viewFullContentURL.setParameter("struts_action", "/asset_publisher/view_content");
-	viewFullContentURL.setParameter("type", assetRendererFactory.getType());
+		viewFullContentURL.setParameter("struts_action", "/asset_publisher/view_content");
+		viewFullContentURL.setParameter("type", assetRendererFactory.getType());
 
-	if (Validator.isNotNull(assetRenderer.getUrlTitle())) {
-		if (assetRenderer.getGroupId() != scopeGroupId) {
-			viewFullContentURL.setParameter("groupId", String.valueOf(assetRenderer.getGroupId()));
+		if (Validator.isNotNull(assetRenderer.getUrlTitle())) {
+			if (assetRenderer.getGroupId() != scopeGroupId) {
+				viewFullContentURL.setParameter("groupId", String.valueOf(assetRenderer.getGroupId()));
+			}
+
+			viewFullContentURL.setParameter("urlTitle", assetRenderer.getUrlTitle());
 		}
 
-		viewFullContentURL.setParameter("urlTitle", assetRenderer.getUrlTitle());
-	}
+		String viewFullContent = viewFullContentURL.toString();
 
-	String viewFullContent = viewFullContentURL.toString();
+		viewFullContent = HttpUtil.setParameter(viewFullContent, "redirect", currentURL);
+		%>
 
-	viewFullContent = HttpUtil.setParameter(viewFullContent, "redirect", currentURL);
-	%>
+		<c:if test="<%= showAssetTitle %>">
+			<h3 class="asset-title"><img src="<%= assetRendererFactory.getIconPath(renderRequest) %>" alt="" /> <%= title %></h3>
+		</c:if>
 
-	<c:if test="<%= showAssetTitle %>">
-		<h3 class="asset-title"><img src="<%= assetRendererFactory.getIconPath(renderRequest) %>" alt="" /> <%= title %></h3>
-	</c:if>
-
-	<c:if test="<%= assetRenderer.hasViewPermission(permissionChecker) %>">
 		<div class="asset-content">
 
 			<%
@@ -172,17 +172,17 @@ request.setAttribute("view.jsp-showIconLabel", true);
 				<%@ include file="/html/portlet/asset_publisher/asset_metadata.jspf" %>
 			</div>
 		</c:if>
-	</c:if>
-</div>
+	</div>
 
-<c:choose>
-	<c:when test="<%= !showAssetTitle && ((assetEntryIndex + 1) < results.size()) %>">
-		<div class="separator"><!-- --></div>
-	</c:when>
-	<c:when test="<%= (assetEntryIndex + 1) == results.size() %>">
-		<div class="final-separator"><!-- --></div>
-	</c:when>
-</c:choose>
+	<c:choose>
+		<c:when test="<%= !showAssetTitle && ((assetEntryIndex + 1) < results.size()) %>">
+			<div class="separator"><!-- --></div>
+		</c:when>
+		<c:when test="<%= (assetEntryIndex + 1) == results.size() %>">
+			<div class="final-separator"><!-- --></div>
+		</c:when>
+	</c:choose>
+</c:if>	
 
 <%!
 private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portlet.asset_publisher.display_full_content.jsp");

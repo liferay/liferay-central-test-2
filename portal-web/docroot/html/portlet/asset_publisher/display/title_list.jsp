@@ -58,24 +58,15 @@ viewURL = _checkViewURL(viewURL, currentURL, themeDisplay);
 		<ul class="title-list">
 	</c:if>
 
-	<c:if test="<%= show %>">
+	<c:if test="<%= show && assetRenderer.hasViewPermission(permissionChecker) %>">
 		<li class="title-list <%= assetRendererFactory.getType() %>">
-			<c:choose>
-				<c:when test="<%= assetRenderer.hasViewPermission(permissionChecker) && Validator.isNotNull(viewURL) %>">
-					<liferay-ui:icon label="<%= true %>" message="<%= title %>" src="<%= assetRendererFactory.getIconPath(renderRequest) %>" url="<%= viewURL.toString() %>"/>
-				</c:when>
-				<c:otherwise>
-					<%= title %>
-				</c:otherwise>
-			</c:choose>
+			<liferay-ui:icon label="<%= true %>" message="<%= title %>" src="<%= assetRendererFactory.getIconPath(renderRequest) %>" url="<%= viewURL.toString() %>"/>
 
 			<liferay-util:include page="/html/portlet/asset_publisher/asset_actions.jsp" />
 
-			<c:if test="<%= assetRenderer.hasViewPermission(permissionChecker) %>">
-				<div class="asset-metadata">
-					<%@ include file="/html/portlet/asset_publisher/asset_metadata.jspf" %>
-				</div>
-			</c:if>
+			<div class="asset-metadata">
+				<%@ include file="/html/portlet/asset_publisher/asset_metadata.jspf" %>
+			</div>
 		</li>
 	</c:if>
 

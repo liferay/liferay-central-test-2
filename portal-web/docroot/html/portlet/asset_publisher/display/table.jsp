@@ -73,7 +73,7 @@ viewURL = _checkViewURL(viewURL, currentURL, themeDisplay);
 	</tr>
 </c:if>
 
-<c:if test="<%= show %>">
+<c:if test="<%= show && assetRenderer.hasViewPermission(permissionChecker) %>">
 
 	<%
 	String style = "class=\"portlet-section-body results-row\" onmouseover=\"this.className = 'portlet-section-body-hover results-row hover';\" onmouseout=\"this.className = 'portlet-section-body results-row';\"";
@@ -86,7 +86,7 @@ viewURL = _checkViewURL(viewURL, currentURL, themeDisplay);
 	<tr <%= style %>>
 		<td>
 			<c:choose>
-				<c:when test="<%= assetRenderer.hasViewPermission(permissionChecker) && Validator.isNotNull(viewURL) %>">
+				<c:when test="<%= Validator.isNotNull(viewURL) %>">
 					<a href="<%= viewURL %>"><%= title %></a>
 				</c:when>
 				<c:otherwise>
