@@ -31,7 +31,7 @@ public class LockImpl extends LockModelImpl implements Lock {
 			return Long.MAX_VALUE;
 		}
 
-		return getExpirationDate().getTime() - getCreateDate().getTime();
+		return getExpirationDate().getTime();
 	}
 
 	public boolean isExpired() {
