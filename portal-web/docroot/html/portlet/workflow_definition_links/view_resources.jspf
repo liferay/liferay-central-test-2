@@ -15,18 +15,18 @@
 %>
 
 <%
-PortletURL portletURL = renderResponse.createRenderURL();
+long groupId = themeDisplay.getScopeGroupId();
 
-portletURL.setParameter("struts_action", "/workflow_definition_links/view");
+if (portletName.equals(PortletKeys.WORKFLOW_DEFINITIONS)) {
+	groupId = WorkflowConstants.DEFAULT_GROUP_ID;
+}
 
 List<WorkflowDefinition> workflowDefinitions = WorkflowDefinitionManagerUtil.getActiveWorkflowDefinitions(company.getCompanyId(), 0, 100, null);
 List<WorkflowHandler> workflowHandlers = WorkflowHandlerRegistryUtil.getWorkflowHandlers();
 
-long groupId = themeDisplay.getScopeGroupId();
+PortletURL portletURL = renderResponse.createRenderURL();
 
-if (portletDisplay.getPortletName().equals(PortletKeys.WORKFLOW_DEFINITIONS)) {
-	groupId = WorkflowConstants.DEFAULT_GROUP_ID;
-}
+portletURL.setParameter("struts_action", "/workflow_definition_links/view");
 %>
 
 <portlet:actionURL var="editWorkflowDefinitionLinkURL">
@@ -78,7 +78,7 @@ if (portletDisplay.getPortletName().equals(PortletKeys.WORKFLOW_DEFINITIONS)) {
 					WorkflowDefinitionLink workflowDefinitionLink = null;
 
 					try {
-						if (portletDisplay.getPortletName().equals(PortletKeys.WORKFLOW_DEFINITIONS)) {
+						if (portletName.equals(PortletKeys.WORKFLOW_DEFINITIONS)) {
 							workflowDefinitionLink = WorkflowDefinitionLinkLocalServiceUtil.getDefaultWorkflowDefinitionLink(company.getCompanyId(), workflowHandler.getClassName());
 						}
 						else {
@@ -90,7 +90,7 @@ if (portletDisplay.getPortletName().equals(PortletKeys.WORKFLOW_DEFINITIONS)) {
 
 					String defaultOptionMessage = null;
 
-					if (!portletDisplay.getPortletName().equals(PortletKeys.WORKFLOW_DEFINITIONS)) {
+					if (!portletName.equals(PortletKeys.WORKFLOW_DEFINITIONS)) {
 						try {
 							WorkflowDefinitionLink defaultWorkflowDefinitionLink = WorkflowDefinitionLinkLocalServiceUtil.getDefaultWorkflowDefinitionLink(company.getCompanyId(), workflowHandler.getClassName());
 
