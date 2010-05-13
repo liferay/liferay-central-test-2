@@ -180,7 +180,7 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> {
 		<#if column.mappingTable??>
 			<#assign entityShortName = stringUtil.shorten(entity.name, 9, "")>
 
-			<#if stringUtil.startsWith(column.mappingTable, entityShortName)>
+			<#if stringUtil.startsWith(column.mappingTable, entityShortName) || stringUtil.startsWith(column.mappingTable, portletShortName + "_" + entityShortName)>
 				public static final String MAPPING_TABLE_${stringUtil.upperCase(column.mappingTable)}_NAME = "${column.mappingTable}";
 
 				<#compress>
