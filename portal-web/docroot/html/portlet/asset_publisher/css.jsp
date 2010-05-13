@@ -16,6 +16,10 @@
 
 <%@ include file="/html/portlet/css_init.jsp" %>
 
+.portlet-asset-publisher .add-asset-selector {
+	padding-bottom: 1em;
+}
+
 .portlet-asset-publisher .asset-abstract .asset-content p {
 	margin-bottom: 0;
 }

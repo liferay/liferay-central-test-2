@@ -78,6 +78,10 @@ AssetRendererFactory rendererFactory = AssetRendererFactoryRegistryUtil.getAsset
 	.asset-search {
 		margin-bottom: 1em;
 	}
+
+	.lfr-actions.select-existing-selector {
+		margin: 0 0  1em 1em;
+	}
 </style>
 
 <liferay-portlet:actionURL portletConfiguration="true" var="configurationActionURL" />
@@ -165,22 +169,22 @@ AssetRendererFactory rendererFactory = AssetRendererFactoryRegistryUtil.getAsset
 
 							<%@ include file="/html/portlet/asset_publisher/add_asset.jspf" %>
 
-							<aui:select label="" name="assetEntryType" onChange='<%= renderResponse.getNamespace() + "selectionForType(this.options[this.selectedIndex].value);" %>'>
-								<aui:option label="select-existing" value="" />
+							<liferay-ui:icon-menu align="left" cssClass="select-existing-selector" icon='<%= themeDisplay.getPathThemeImages() + "/common/search.png" %>' message="select-existing">
 
 								<%
 								for (AssetRendererFactory curRendererFactory : AssetRendererFactoryRegistryUtil.getAssetRendererFactories()) {
 									if (curRendererFactory.isSelectable()) {
+										String taglibURL = "javascript:" + renderResponse.getNamespace() + "selectionForType('" + curRendererFactory.getClassName() + "')";
 									%>
 
-										<aui:option label='<%= "model.resource." + curRendererFactory.getClassName() %>' value="<%= curRendererFactory.getClassName() %>" />
+										<liferay-ui:icon message='<%= "model.resource." + curRendererFactory.getClassName() %>' src="<%= curRendererFactory.getIconPath(renderRequest) %>" url="<%= taglibURL %>" />
 
 									<%
 									}
 								}
 								%>
 
-							</aui:select>
+							</liferay-ui:icon-menu>
 
 							<%
 							List<Long> deletedAssets = new ArrayList<Long>();

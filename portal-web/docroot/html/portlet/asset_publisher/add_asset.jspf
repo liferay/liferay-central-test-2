@@ -20,33 +20,24 @@ Map<String, PortletURL> addPortletURLs = getAddPortletURLs(renderRequest, render
 
 <c:if test="<%= !addPortletURLs.isEmpty() %>">
 	<div class="lfr-meta-actions edit-controls">
-		<aui:select changesContext="<%= true %>" label="" name="assetURL" onChange='<%= renderResponse.getNamespace() + "addNewAsset();" %>' title="add-asset">
-			<aui:option label='<%= LanguageUtil.get(pageContext, "add-new") + "..." %>' value="" />
+		<liferay-ui:icon-menu align="left" icon='<%= themeDisplay.getPathThemeImages() + "/common/add.png" %>' message="add-new">
 
 			<%
 			for (Map.Entry<String, PortletURL> entry : addPortletURLs.entrySet()) {
 				String className = entry.getKey();
 				PortletURL addPortletURL = entry.getValue();
+				AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(className);
+
 			%>
 
-				<aui:option label='<%= "model.resource." + className %>' value='<%= HttpUtil.addParameter(addPortletURL.toString(), "maintainDialog", Boolean.TRUE.toString()) %>' />
+				<liferay-ui:icon message='<%= "model.resource." + className %>' src="<%= assetRendererFactory.getIconPath(renderRequest) %>" url='<%= HttpUtil.addParameter(addPortletURL.toString(), "maintainDialog", Boolean.TRUE.toString()) %>' />
 
 			<%
 			}
 			%>
 
-		</aui:select>
+		</liferay-ui:icon-menu>
 	</div>
-
-	<aui:script>
-		function <portlet:namespace/>addNewAsset() {
-			var url = document.<portlet:namespace />fm.<portlet:namespace />assetURL.value;
-
-			if (url != '') {
-				location.href = url;
-			}
-		}
-	</aui:script>
 </c:if>
 
 <%!
