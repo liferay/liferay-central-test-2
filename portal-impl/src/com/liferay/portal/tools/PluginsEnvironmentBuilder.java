@@ -86,13 +86,13 @@ public class PluginsEnvironmentBuilder {
 
 				properties.load(new FileInputStream(propertiesFile));
 
-				List<String> dependencyJars = ListUtil.toList(StringUtil.split(
+				String[] dependencyJars = StringUtil.split(
 					properties.getProperty(
 						"portal-dependency-jars",
-						properties.getProperty("portal.dependency.jars"))));
+						properties.getProperty("portal.dependency.jars")));
 
 				if (svn) {
-					List<String> jars = new ArrayList<String>(dependencyJars);
+					List<String> jars = ListUtil.toList(dependencyJars);
 
 					jars.add("commons-logging.jar");
 					jars.add("log4j.jar");
@@ -117,7 +117,7 @@ public class PluginsEnvironmentBuilder {
 	}
 
 	public void updateEclipseFiles(
-			File libDir, File projectDir, List<String> dependencyJars)
+			File libDir, File projectDir, String[] dependencyJars)
 		throws Exception {
 
 		String libDirPath = libDir.getPath();
@@ -159,7 +159,7 @@ public class PluginsEnvironmentBuilder {
 
 		// .classpath
 
-		List<String> portalJars = new ArrayList<String>(dependencyJars);
+		List<String> portalJars = ListUtil.toList(dependencyJars);
 
 		portalJars.add("commons-logging.jar");
 		portalJars.add("log4j.jar");

@@ -15,6 +15,7 @@
 package com.liferay.portal.tools;
 
 import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.DocumentException;
 import com.liferay.portal.kernel.xml.Element;
@@ -99,7 +100,11 @@ public class WSDDMerger {
 			root.add(service);
 		}
 
-		FileUtil.write(destination, doc.formattedString(), true);
+		String content = doc.formattedString();
+
+		content = StringUtil.replace(content, "\"/>", "\" />");
+
+		FileUtil.write(destination, content, true);
 	}
 
 	public WSDDMerger(String source, String destination) {

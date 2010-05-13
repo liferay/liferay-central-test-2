@@ -137,6 +137,8 @@ public class Java2WsddTask {
 			de.printStackTrace();
 		}
 
+		content = StringUtil.replace(content, "\"/>", "\" />");
+
 		return content;
 	}
 
