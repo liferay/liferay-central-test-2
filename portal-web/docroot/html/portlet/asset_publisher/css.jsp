@@ -119,15 +119,11 @@
 }
 
 .portlet-asset-publisher .asset-title {
-	background-image: url(<%= themeImagesPath %>/common/page.png);
-	background-position: 0 50%;
-	background-repeat: no-repeat;
 	border-bottom: 1px solid #DDD;
 	margin-bottom: 0.7em;
 	margin-right: 8px;
 	margin-top: 2em;
 	padding-bottom: 1px;
-	padding-left: 25px;
 }
 
 .portlet-asset-publisher .asset-user-actions .export-actions, .portlet-asset-publisher .asset-user-actions .print-action, .portlet-asset-publisher .asset-user-actions .locale-actions {
@@ -145,42 +141,15 @@
 	margin: 0 1em;
 }
 
-.portlet-asset-publisher .blog {
-	background-image: url(<%= PortalUtil.getPathContext() %>/html/icons/blogs.png);
-}
 
-.portlet-asset-publisher .bookmark {
-	background-image: url(<%= themeImagesPath %>/ratings/star_hover.png);
-}
-
-.portlet-asset-publisher .content {
-	background-image: url(<%= themeImagesPath %>/common/history.png);
-}
-
-.portlet-asset-publisher .dl-file-icon {
-	margin: 0 5px 0 0;
-	padding-bottom: 0.5em;
-}
-
-.portlet-asset-publisher .document {
-	background-image: url(<%= themeImagesPath %>/common/clip.png);
-}
 
 .portlet-asset-publisher .edit-controls {
 	margin-bottom: 20px;
 }
 
-.portlet-asset-publisher .event {
-	background-image: url(<%= PortalUtil.getPathContext() %>/html/icons/calendar.png);
-}
-
 .portlet-asset-publisher .final-separator {
 	border: 0;
 	margin-bottom: 30px;
-}
-
-.portlet-asset-publisher .image {
-	background-image: url(<%= PortalUtil.getPathContext() %>/html/icons/image_gallery.png);
 }
 
 .portlet-asset-publisher .lfr-meta-actions {
@@ -231,10 +200,6 @@
 	float: left;
 }
 
-.portlet-asset-publisher .message {
-	background-image: url(<%= PortalUtil.getPathContext() %>/html/icons/message_boards.png);
-}
-
 .portlet-asset-publisher .title-list .asset-actions {
 	left: 10px;
 	position: relative;
@@ -255,21 +220,14 @@
 	padding: 7px 0;
 }
 
-.portlet-asset-publisher .wiki {
-	background-image: url(<%= themeImagesPath %>/common/pages.png);
-}
-
 .portlet-asset-publisher li.title-list {
-	background-position: 0 0;
-	background-repeat: no-repeat;
 	clear: both;
 	list-style: none;
 	margin-bottom: 0.15em;
 	margin-right: 8px;
 	padding-bottom: 1px;
-	padding-left: 25px;
 }
 
 .portlet-asset-publisher ul.title-list {
-	margin-left: 1em;
+	margin-left: 0;
 }

@@ -60,10 +60,10 @@ viewURL = _checkViewURL(viewURL, currentURL, themeDisplay);
 	<div class="asset-abstract">
 		<liferay-util:include page="/html/portlet/asset_publisher/asset_actions.jsp" />
 
-		<h3 class="asset-title <%= assetRendererFactory.getType() %>">
+		<h3 class="asset-title">
 			<c:choose>
 				<c:when test="<%= assetRenderer.hasViewPermission(permissionChecker) && Validator.isNotNull(viewURL) %>">
-					<a href="<%= viewURL %>"><%= title %></a>
+					<a href="<%= viewURL %>"><img src="<%= assetRendererFactory.getIconPath(renderRequest) %>" alt="" /> <%= title %></a>
 				</c:when>
 				<c:otherwise>
 					<%= title %>

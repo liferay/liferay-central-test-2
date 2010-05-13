@@ -107,7 +107,7 @@ request.setAttribute("view.jsp-showIconLabel", true);
 	%>
 
 	<c:if test="<%= showAssetTitle %>">
-		<h3 class="asset-title <%= assetRendererFactory.getType() %>"><%= title %></h3>
+		<h3 class="asset-title"><img src="<%= assetRendererFactory.getIconPath(renderRequest) %>" alt="" /> <%= title %></h3>
 	</c:if>
 
 	<c:if test="<%= assetRenderer.hasViewPermission(permissionChecker) %>">

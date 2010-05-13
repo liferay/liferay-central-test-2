@@ -62,7 +62,7 @@ viewURL = _checkViewURL(viewURL, currentURL, themeDisplay);
 		<li class="title-list <%= assetRendererFactory.getType() %>">
 			<c:choose>
 				<c:when test="<%= assetRenderer.hasViewPermission(permissionChecker) && Validator.isNotNull(viewURL) %>">
-					<a href="<%= viewURL %>"><%= title %></a>
+					<liferay-ui:icon label="<%= true %>" message="<%= title %>" src="<%= assetRendererFactory.getIconPath(renderRequest) %>" url="<%= viewURL.toString() %>"/>
 				</c:when>
 				<c:otherwise>
 					<%= title %>
