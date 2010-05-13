@@ -491,14 +491,6 @@ body.portlet {
 	background: none;
 }
 
-.lfr-actions .lfr-trigger strong a {
-	background: url(../images/common/action.png) no-repeat 5px 50%;
-}
-
-.lfr-actions.left .lfr-trigger strong a {
-	background: url(../images/common/action_right.png) no-repeat 98% 50%;
-}
-
 .lfr-actions .lfr-trigger li {
 	background: transparent;
 	border-bottom: 1px solid #DEDEDE;

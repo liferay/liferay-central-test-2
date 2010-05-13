@@ -17,10 +17,12 @@
 <%@ include file="/html/taglib/init.jsp" %>
 
 <%
+String icon = (String)request.getAttribute("liferay-ui:icon-menu:icon");
 String id = (String)request.getAttribute("liferay-ui:icon-menu:id");
 String message = (String)request.getAttribute("liferay-ui:icon-menu:message");
 String align = (String)request.getAttribute("liferay-ui:icon-menu:align");
 String cssClass = GetterUtil.getString((String)request.getAttribute("liferay-ui:icon-menu:cssClass"));
+boolean showArrow = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:icon-menu:showArrow"));
 boolean showExpanded = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:icon-menu:showExpanded"));
 %>
 
@@ -29,10 +31,18 @@ boolean showExpanded = GetterUtil.getBoolean((String)request.getAttribute("lifer
 		<div class="lfr-component lfr-menu-list lfr-menu-expanded <%= align %> <%= cssClass %>" id="<%= id %>menu">
 	</c:when>
 	<c:otherwise >
-		<ul class="lfr-component lfr-actions <%= align %> <%= cssClass %>">
+		<ul class='lfr-component lfr-actions <%= align %> <%= cssClass %> <%= showArrow ? "show-arrow" : StringPool.BLANK %>'>
 
 			<li class="lfr-trigger">
-				<strong><a href="javascript:;"><liferay-ui:message key="<%= message %>" /></a></strong>
+				<strong>
+					<a class="nobr" href="javascript:;">
+						<liferay-ui:message key="<%= message %>" />
+
+						<c:if test="<%= Validator.isNotNull(icon) %>">
+							<img alt="" src="<%= icon %>" />
+						</c:if>
+					</a>
+				</strong>
 	</c:otherwise>
 </c:choose>
 

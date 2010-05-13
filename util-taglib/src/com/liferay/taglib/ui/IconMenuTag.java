@@ -19,6 +19,8 @@ import com.liferay.portal.kernel.util.IntegerWrapper;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 
 import javax.servlet.http.HttpServletRequest;
@@ -93,8 +95,10 @@ public class IconMenuTag extends BodyTagSupport {
 
 			request.removeAttribute("liferay-ui:icon-menu:align");
 			request.removeAttribute("liferay-ui:icon-menu:cssClass");
+			request.removeAttribute("liferay-ui:icon-menu:icon");
 			request.removeAttribute("liferay-ui:icon-menu:id");
 			request.removeAttribute("liferay-ui:icon-menu:message");
+			request.removeAttribute("liferay-ui:icon-menu:showArrow");
 			request.removeAttribute("liferay-ui:icon-menu:showExpanded");
 			request.removeAttribute("liferay-ui:icon-menu:showWhenSingleIcon");
 
@@ -109,8 +113,10 @@ public class IconMenuTag extends BodyTagSupport {
 				_bodyContentString = StringPool.BLANK;
 				_cssClass = null;
 				_endPage = null;
+				_icon = null;
 				_id = null;
 				_message = "actions";
+				_showArrow = true;
 				_showExpanded = false;
 				_showWhenSingleIcon = false;
 				_startPage = null;
@@ -121,6 +127,15 @@ public class IconMenuTag extends BodyTagSupport {
 	public int doStartTag() {
 		HttpServletRequest request =
 			(HttpServletRequest)pageContext.getRequest();
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+					WebKeys.THEME_DISPLAY);
+
+		String icon = _icon;
+
+		if (icon == null) {
+			icon =  themeDisplay.getPathThemeImages() + "/common/tool.png";
+		}
 
 		String id = _id;
 
@@ -135,8 +150,11 @@ public class IconMenuTag extends BodyTagSupport {
 		request.setAttribute("liferay-ui:icon-menu:cssClass", _cssClass);
 		request.setAttribute(
 			"liferay-ui:icon-menu:icon-count", new IntegerWrapper());
+		request.setAttribute("liferay-ui:icon-menu:icon", icon);
 		request.setAttribute("liferay-ui:icon-menu:id", id);
 		request.setAttribute("liferay-ui:icon-menu:message", _message);
+		request.setAttribute(
+			"liferay-ui:icon-menu:showArrow",String.valueOf(_showArrow));
 		request.setAttribute(
 			"liferay-ui:icon-menu:showExpanded",String.valueOf(_showExpanded));
 		request.setAttribute(
@@ -176,12 +194,20 @@ public class IconMenuTag extends BodyTagSupport {
 		_endPage = endPage;
 	}
 
+	public void setIcon(String icon) {
+		_icon = icon;
+	}
+
 	public void setId(String id) {
 		_id = id;
 	}
 
 	public void setMessage(String message) {
 		_message = message;
+	}
+
+	public void setShowArrow(boolean showArrow) {
+		_showArrow = showArrow;
 	}
 
 	public void setShowExpanded(boolean showExpanded) {
@@ -205,8 +231,10 @@ public class IconMenuTag extends BodyTagSupport {
 	private String _bodyContentString = StringPool.BLANK;
 	private String _cssClass;
 	private String _endPage;
+	private String _icon;
 	private String _id;
 	private String _message = "actions";
+	private boolean _showArrow = true;
 	private boolean _showExpanded;
 	private boolean _showWhenSingleIcon;
 	private String _startPage;
