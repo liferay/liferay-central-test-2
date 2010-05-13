@@ -702,6 +702,8 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 					query.append(_FINDER_COLUMN_EXPIRATIONDATE_EXPIRATIONDATE_2);
 				}
 
+				query.append(_FINDER_COLUMN_EXPIRATIONDATE_MAXEXPIRATIONDATE);
+
 				if (orderByComparator != null) {
 					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
 						orderByComparator);
@@ -716,6 +718,8 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 				if (expirationDate != null) {
 					qPos.add(CalendarUtil.getTimestamp(expirationDate));
 				}
+
+				qPos.add(CalendarUtil.getTimestamp(new Date(0)));
 
 				list = (List<Lock>)QueryUtil.list(q, getDialect(), start, end);
 			}
@@ -839,6 +843,8 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 			query.append(_FINDER_COLUMN_EXPIRATIONDATE_EXPIRATIONDATE_2);
 		}
 
+		query.append(_FINDER_COLUMN_EXPIRATIONDATE_MAXEXPIRATIONDATE);
+
 		if (orderByComparator != null) {
 			String[] orderByFields = orderByComparator.getOrderByFields();
 
@@ -904,6 +910,8 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 		if (expirationDate != null) {
 			qPos.add(CalendarUtil.getTimestamp(expirationDate));
 		}
+
+		qPos.add(CalendarUtil.getTimestamp(new Date(0)));
 
 		if (orderByComparator != null) {
 			Object[] values = orderByComparator.getOrderByValues(lock);
@@ -1243,6 +1251,8 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 					query.append(_FINDER_COLUMN_EXPIRATIONDATE_EXPIRATIONDATE_2);
 				}
 
+				query.append(_FINDER_COLUMN_EXPIRATIONDATE_MAXEXPIRATIONDATE);
+
 				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
@@ -1252,6 +1262,8 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 				if (expirationDate != null) {
 					qPos.add(CalendarUtil.getTimestamp(expirationDate));
 				}
+
+				qPos.add(CalendarUtil.getTimestamp(new Date(0)));
 
 				count = (Long)q.uniqueResult();
 			}
@@ -1517,8 +1529,9 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 	private static final String _FINDER_COLUMN_UUID_UUID_1 = "lock.uuid IS NULL";
 	private static final String _FINDER_COLUMN_UUID_UUID_2 = "lock.uuid = ?";
 	private static final String _FINDER_COLUMN_UUID_UUID_3 = "(lock.uuid IS NULL OR lock.uuid = ?)";
-	private static final String _FINDER_COLUMN_EXPIRATIONDATE_EXPIRATIONDATE_1 = "lock.expirationDate < NULL";
-	private static final String _FINDER_COLUMN_EXPIRATIONDATE_EXPIRATIONDATE_2 = "lock.expirationDate < ?";
+	private static final String _FINDER_COLUMN_EXPIRATIONDATE_EXPIRATIONDATE_1 = "(lock.expirationDate < NULL) AND ";
+	private static final String _FINDER_COLUMN_EXPIRATIONDATE_EXPIRATIONDATE_2 = "(lock.expirationDate < ?) AND ";
+	private static final String _FINDER_COLUMN_EXPIRATIONDATE_MAXEXPIRATIONDATE = "(lock.expirationDate <> ?)";
 	private static final String _FINDER_COLUMN_C_K_CLASSNAME_1 = "lock.className IS NULL AND ";
 	private static final String _FINDER_COLUMN_C_K_CLASSNAME_2 = "lock.className = ? AND ";
 	private static final String _FINDER_COLUMN_C_K_CLASSNAME_3 = "(lock.className IS NULL OR lock.className = ?) AND ";
