@@ -12,77 +12,62 @@
  * details.
  */
 
-package com.liferay.counter.service;
+package com.liferay.counter.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
- * <a href="CounterLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="CounterFinderUtil.java.html"><b><i>View Source</i></b></a>
  *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This class provides static methods for the
- * {@link CounterLocalService} bean. The static methods of
- * this class calls the same methods of the bean instance. It's convenient to be
- * able to just write one line to call a method on a bean instead of writing a
- * lookup call and a method call.
- * </p>
- *
- * @author    Brian Wing Shun Chan
- * @see       CounterLocalService
- * @generated
+ * @author Brian Wing Shun Chan
  */
-public class CounterLocalServiceUtil {
+public class CounterFinderUtil {
 	public static java.util.List<java.lang.String> getNames()
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getNames();
+		return getFinder().getNames();
 	}
 
 	public static long increment()
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().increment();
+		return getFinder().increment();
 	}
 
 	public static long increment(java.lang.String name)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().increment(name);
+		return getFinder().increment(name);
 	}
 
 	public static long increment(java.lang.String name, int size)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().increment(name, size);
+		return getFinder().increment(name, size);
 	}
 
 	public static void rename(java.lang.String oldName, java.lang.String newName)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		getService().rename(oldName, newName);
+		getFinder().rename(oldName, newName);
 	}
 
 	public static void reset(java.lang.String name)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		getService().reset(name);
+		getFinder().reset(name);
 	}
 
 	public static void reset(java.lang.String name, long size)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		getService().reset(name, size);
+		getFinder().reset(name, size);
 	}
 
-	public static CounterLocalService getService() {
-		if (_service == null) {
-			_service = (CounterLocalService)PortalBeanLocatorUtil.locate(CounterLocalService.class.getName());
+	public static CounterFinder getFinder() {
+		if (_finder == null) {
+			_finder = (CounterFinder)PortalBeanLocatorUtil.locate(CounterFinder.class.getName());
 		}
 
-		return _service;
+		return _finder;
 	}
 
-	public void setService(CounterLocalService service) {
-		_service = service;
+	public void setFinder(CounterFinder finder) {
+		_finder = finder;
 	}
 
-	private static CounterLocalService _service;
+	private static CounterFinder _finder;
 }

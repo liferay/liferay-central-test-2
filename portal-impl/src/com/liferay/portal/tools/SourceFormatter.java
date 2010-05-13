@@ -1065,7 +1065,6 @@ public class SourceFormatter {
 				"**\\service\\persistence\\*Query.java",
 				"**\\service\\persistence\\impl\\BasePersistenceImpl.java",
 				"**\\portal-impl\\test\\**\\*.java",
-				"**\\portal-service\\**\\liferay\\counter\\**.java",
 				"**\\portal-service\\**\\liferay\\documentlibrary\\**.java",
 				"**\\portal-service\\**\\liferay\\lock\\**.java",
 				"**\\portal-service\\**\\liferay\\mail\\**.java",

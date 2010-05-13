@@ -14,7 +14,7 @@
 
 package com.liferay.portal.tools.samplesqlbuilder;
 
-import com.liferay.counter.model.Counter;
+import com.liferay.counter.model.impl.CounterModelImpl;
 import com.liferay.portal.kernel.util.IntegerWrapper;
 import com.liferay.portal.kernel.util.KeyValuePair;
 import com.liferay.portal.kernel.util.ListUtil;
@@ -490,7 +490,7 @@ public class DataFactory {
 		return _company;
 	}
 
-	public List<Counter> getCounters() {
+	public List<CounterModelImpl> getCounters() {
 		return _counters;
 	}
 
@@ -605,20 +605,20 @@ public class DataFactory {
 			return;
 		}
 
-		_counters = new ArrayList<Counter>();
+		_counters = new ArrayList<CounterModelImpl>();
 
 		// Counter
 
-		Counter counter = new Counter();
+		CounterModelImpl counter = new CounterModelImpl();
 
-		counter.setName(Counter.class.getName());
+		counter.setName(CounterModelImpl.class.getName());
 		counter.setCurrentId(_counter.get());
 
 		_counters.add(counter);
 
 		// Permission
 
-		counter = new Counter();
+		counter = new CounterModelImpl();
 
 		counter.setName(Permission.class.getName());
 		counter.setCurrentId(_permissionCounter.get());
@@ -627,7 +627,7 @@ public class DataFactory {
 
 		// Resource
 
-		counter = new Counter();
+		counter = new CounterModelImpl();
 
 		counter.setName(Resource.class.getName());
 		counter.setCurrentId(_resourceCounter.get());
@@ -636,7 +636,7 @@ public class DataFactory {
 
 		// ResourceCode
 
-		counter = new Counter();
+		counter = new CounterModelImpl();
 
 		counter.setName(ResourceCode.class.getName());
 		counter.setCurrentId(_resourceCodeCounter.get());
@@ -926,7 +926,7 @@ public class DataFactory {
 	private Role _communityOwnerRole;
 	private Company _company;
 	private SimpleCounter _counter;
-	private List<Counter> _counters;
+	private List<CounterModelImpl> _counters;
 	private User _defaultUser;
 	private ClassName _groupClassName;
 	private List<Group> _groups;

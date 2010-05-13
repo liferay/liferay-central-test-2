@@ -19,6 +19,17 @@
 			</bean>
 		</property>
 	</bean>
+    <bean id="com.liferay.counter.service.persistence.CounterFinder" class="com.liferay.counter.service.persistence.CounterFinderImpl" parent="basePersistence">
+		<property name="dataSource">
+			<bean class="org.springframework.jdbc.datasource.LazyConnectionDataSourceProxy">
+				<property name="targetDataSource">
+					<bean class="com.liferay.portal.dao.jdbc.util.DataSourceFactoryBean">
+						<property name="propertyPrefixLookup" value="counter.jdbc.prefix" />
+					</bean>
+				</property>
+			</bean>
+		</property>
+    </bean>
 	<bean id="com.liferay.counter.service.persistence.CounterUtil" class="com.liferay.counter.service.persistence.CounterUtil">
 		<property name="persistence" ref="com.liferay.counter.service.persistence.CounterPersistence" />
 	</bean>

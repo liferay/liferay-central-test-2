@@ -14,7 +14,7 @@
 
 package com.liferay.counter.service.persistence;
 
-import com.liferay.counter.model.Counter;
+import com.liferay.counter.model.impl.CounterModelImpl;
 import com.liferay.counter.model.CounterHolder;
 import com.liferay.counter.model.CounterRegister;
 import com.liferay.portal.kernel.concurrent.CompeteLatch;
@@ -47,8 +47,8 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author Michael Young
  * @author Shuyang Zhou
  */
-public class CounterPersistenceImpl
-	extends BasePersistenceImpl<Dummy> implements CounterPersistence {
+public class CounterFinderImpl
+	extends BasePersistenceImpl<Dummy> implements CounterFinder {
 
 	public List<String> getNames() throws SystemException {
 		Connection connection = null;
@@ -399,7 +399,7 @@ public class CounterPersistenceImpl
 
 	private static final int _MINIMUM_INCREMENT_SIZE = 1;
 
-	private static final String _NAME = Counter.class.getName();
+	private static final String _NAME = CounterModelImpl.class.getName();
 
 	private static final String _SQL_DELETE_BY_NAME =
 		"delete from Counter where name = ?";
