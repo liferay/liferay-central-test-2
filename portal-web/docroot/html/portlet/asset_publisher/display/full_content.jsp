@@ -182,7 +182,7 @@ request.setAttribute("view.jsp-showIconLabel", true);
 			<div class="final-separator"><!-- --></div>
 		</c:when>
 	</c:choose>
-</c:if>	
+</c:if>
 
 <%!
 private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portlet.asset_publisher.display_full_content.jsp");

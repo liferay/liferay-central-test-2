@@ -60,7 +60,7 @@ viewURL = _checkViewURL(viewURL, currentURL, themeDisplay);
 
 	<c:if test="<%= show && assetRenderer.hasViewPermission(permissionChecker) %>">
 		<li class="title-list <%= assetRendererFactory.getType() %>">
-			<liferay-ui:icon label="<%= true %>" message="<%= title %>" src="<%= assetRendererFactory.getIconPath(renderRequest) %>" url="<%= viewURL.toString() %>"/>
+			<liferay-ui:icon label="<%= true %>" message="<%= title %>" src="<%= assetRendererFactory.getIconPath(renderRequest) %>" url="<%= viewURL.toString() %>" />
 
 			<liferay-util:include page="/html/portlet/asset_publisher/asset_actions.jsp" />
 
