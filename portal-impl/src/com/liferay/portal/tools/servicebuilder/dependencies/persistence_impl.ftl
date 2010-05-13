@@ -1168,7 +1168,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 							query = new StringBundler(<#if entity.getOrder()??>${finderColsList?size + 2}<#else>${finderColsList?size + 1}</#if>);
 						}
 
-						query.append(_FILTER_SELECT_${entity.alias?upper_case}_WHERE);
+						query.append(_FILTER_SQL_SELECT_${entity.alias?upper_case}_WHERE);
 
 						<#include "persistence_impl_finder_col.ftl">
 
@@ -1186,7 +1186,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 						SQLQuery q = session.createSQLQuery(sql);
 
-						q.addEntity(_ENTITY_ALIAS, ${entity.name}Impl.class);
+						q.addEntity(_FILTER_ENTITY_ALIAS, ${entity.name}Impl.class);
 
 						QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1682,7 +1682,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 					StringBundler query = new StringBundler(${finderColsList?size + 1});
 
-					query.append(_FILTER_COUNT_${entity.alias?upper_case}_WHERE);
+					query.append(_FILTER_SQL_COUNT_${entity.alias?upper_case}_WHERE);
 
 					<#include "persistence_impl_finder_col.ftl">
 
@@ -2755,15 +2755,15 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 	</#list>
 
 	<#if entity.isPermissionCheckEnabled()>
-		private static final String _FILTER_SELECT_${entity.alias?upper_case}_WHERE = "SELECT {${entity.alias}.*} FROM ${entity.name} ${entity.alias} WHERE ";
+		private static final String _FILTER_SQL_SELECT_${entity.alias?upper_case}_WHERE = "SELECT {${entity.alias}.*} FROM ${entity.name} ${entity.alias} WHERE ";
 
-		private static final String _FILTER_COUNT_${entity.alias?upper_case}_WHERE = "SELECT COUNT(DISTINCT ${entity.alias}.${entity.PKVarName}) AS COUNT_VALUE FROM ${entity.name} ${entity.alias} WHERE ";
+		private static final String _FILTER_SQL_COUNT_${entity.alias?upper_case}_WHERE = "SELECT COUNT(${entity.alias}.${entity.PKVarName}) AS COUNT_VALUE FROM ${entity.name} ${entity.alias} WHERE ";
 
 		private static final String _FILTER_COLUMN_${entity.PKVarName?upper_case} = "${entity.alias}.${entity.PKVarName}";
 
 		private static final String _FILTER_COLUMN_USERID = "${entity.alias}.userId";
 
-		private static final String _ENTITY_ALIAS = "${entity.alias}";
+		private static final String _FILTER_ENTITY_ALIAS = "${entity.alias}";
 	</#if>
 
 	private static final String _ORDER_BY_ENTITY_ALIAS = "${entity.alias}.";
