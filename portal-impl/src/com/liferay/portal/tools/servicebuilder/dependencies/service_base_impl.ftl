@@ -38,12 +38,12 @@ import javax.sql.DataSource;
 		import ${tempEntity.packagePath}.service.${tempEntity.name}Service;
 	</#if>
 
-	<#if tempEntity.hasColumns() && (entity.name == "Counter" || tempEntity.name != "Counter")>
+	<#if tempEntity.hasColumns()>
 		import ${tempEntity.packagePath}.service.persistence.${tempEntity.name}Persistence;
 		import ${tempEntity.packagePath}.service.persistence.${tempEntity.name}Util;
 	</#if>
 
-	<#if tempEntity.hasFinderClass() && (entity.name == "Counter" || tempEntity.name != "Counter")>
+	<#if tempEntity.hasFinderClass()>
 		import ${tempEntity.packagePath}.service.persistence.${tempEntity.name}Finder;
 		import ${tempEntity.packagePath}.service.persistence.${tempEntity.name}FinderUtil;
 	</#if>
@@ -145,7 +145,7 @@ import javax.sql.DataSource;
 		}
 	</#if>
 
-	<#if tempEntity.hasColumns() && (entity.name == "Counter" || tempEntity.name != "Counter")>
+	<#if tempEntity.hasColumns()>
 		public ${tempEntity.name}Persistence get${tempEntity.name}Persistence() {
 			return ${tempEntity.varName}Persistence;
 		}
@@ -155,7 +155,7 @@ import javax.sql.DataSource;
 		}
 	</#if>
 
-	<#if tempEntity.hasFinderClass() && (entity.name == "Counter" || tempEntity.name != "Counter")>
+	<#if tempEntity.hasFinderClass()>
 		public ${tempEntity.name}Finder get${tempEntity.name}Finder() {
 			return ${tempEntity.varName}Finder;
 		}
@@ -194,12 +194,12 @@ protected void runSQL(String sql) throws SystemException {
 		protected ${tempEntity.name}Service ${tempEntity.varName}Service;
 	</#if>
 
-	<#if tempEntity.hasColumns() && (entity.name == "Counter" || tempEntity.name != "Counter")>
+	<#if tempEntity.hasColumns()>
 		@BeanReference(type = ${tempEntity.name}Persistence.class)
 		protected ${tempEntity.name}Persistence ${tempEntity.varName}Persistence;
 	</#if>
 
-	<#if tempEntity.hasFinderClass() && (entity.name == "Counter" || tempEntity.name != "Counter")>
+	<#if tempEntity.hasFinderClass()>
 		@BeanReference(type = ${tempEntity.name}Finder.class)
 		protected ${tempEntity.name}Finder ${tempEntity.varName}Finder;
 	</#if>

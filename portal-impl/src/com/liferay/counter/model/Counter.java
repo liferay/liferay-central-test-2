@@ -14,52 +14,48 @@
 
 package com.liferay.counter.model;
 
-import com.liferay.portal.kernel.concurrent.CompeteLatch;
+import java.io.Serializable;
+
+import java.sql.Types;
 
 /**
- * <a href="CounterRegister.java.html"><b><i>View Source</i></b></a>
+ * <a href="Counter.java.html"><b><i>View Source</i></b></a>
  *
- * @author Harry Mark
- * @author Shuyang Zhou
+ * @author Brian Wing Shun Chan
  */
-public class CounterRegister {
+public class Counter implements Serializable {
 
-	public CounterRegister(
-		String name, long rangeMin, long rangeMax, int rangeSize) {
+	public static final Object[][] TABLE_COLUMNS = {
+		{"name", new Integer(Types.VARCHAR)},
+		{"currentId", new Integer(Types.BIGINT)},
+	};
 
-		_name = name;
-		_rangeSize = rangeSize;
-		_holder = new CounterHolder(rangeMin, rangeMax);
-		_latch = new CompeteLatch();
+	public static final String TABLE_NAME = "Counter";
+
+	public static final String TABLE_SQL_CREATE =
+		"create table Counter (name VARCHAR(75) not null primary key, " +
+			"currentId LONG)";
+
+	public Counter() {
 	}
 
-	public CompeteLatch getCompeteLatch() {
-		return _latch;
-	}
-
-	public CounterHolder getCounterHolder() {
-		return _holder;
+	public long getCurrentId() {
+		return _currentId;
 	}
 
 	public String getName() {
 		return _name;
 	}
 
-	public int getRangeSize() {
-		return _rangeSize;
-	}
-
-	public void setCounterHolder(CounterHolder holder) {
-		_holder = holder;
+	public void setCurrentId(long currentId) {
+		_currentId = currentId;
 	}
 
 	public void setName(String name) {
 		_name = name;
 	}
 
-	private volatile CounterHolder _holder;
-	private final CompeteLatch _latch;
+	private long _currentId;
 	private String _name;
-	private final int _rangeSize;
 
 }
