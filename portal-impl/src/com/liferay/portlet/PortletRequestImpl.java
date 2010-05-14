@@ -102,8 +102,7 @@ public abstract class PortletRequestImpl implements LiferayPortletRequest {
 
 				Object obj = method.invoke(portletRequest, (Object[])null);
 
-				portletRequestImpl = getPortletRequestImpl(
-					(PortletRequest)obj);
+				portletRequestImpl = getPortletRequestImpl((PortletRequest)obj);
 			}
 			catch (Exception e) {
 				throw new RuntimeException(
