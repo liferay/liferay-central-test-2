@@ -317,18 +317,18 @@ public class MBMessageLocalServiceUtil {
 			status, threadView);
 	}
 
-	public static int getDiscussionMessagesCount(java.lang.String className,
-		long classPK, int status)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService()
-				   .getDiscussionMessagesCount(className, classPK, status);
-	}
-
 	public static int getDiscussionMessagesCount(long classNameId,
 		long classPK, int status)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .getDiscussionMessagesCount(classNameId, classPK, status);
+	}
+
+	public static int getDiscussionMessagesCount(java.lang.String className,
+		long classPK, int status)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .getDiscussionMessagesCount(className, classPK, status);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBDiscussion> getDiscussions(

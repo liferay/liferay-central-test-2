@@ -242,13 +242,13 @@ public interface MBMessageLocalService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getDiscussionMessagesCount(long classNameId, long classPK,
+		int status) throws com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getDiscussionMessagesCount(java.lang.String className,
 		long classPK, int status)
 		throws com.liferay.portal.kernel.exception.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getDiscussionMessagesCount(long classNameId, long classPK,
-		int status) throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.messageboards.model.MBDiscussion> getDiscussions(
