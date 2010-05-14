@@ -181,6 +181,16 @@ public class JournalIndexer extends BaseIndexer {
 		reindexArticles(companyId);
 	}
 
+	protected String encodeFieldName(String name) {
+		StringBundler sb = new StringBundler(3);
+
+		sb.append(_FIELD_NAMESPACE);
+		sb.append(StringPool.FORWARD_SLASH);
+		sb.append(name);
+
+		return sb.toString();
+	}
+
 	protected String getIndexableContent(Document document, Element rootElement)
 		throws Exception {
 
@@ -252,7 +262,9 @@ public class JournalIndexer extends BaseIndexer {
 
 		Element dynamicContentElement = element.element("dynamic-content");
 
-		String name = element.attributeValue("name", StringPool.BLANK);
+		String fieldName = encodeFieldName(
+			element.attributeValue("name", StringPool.BLANK));
+
 		String[] value = new String[] {dynamicContentElement.getText()};
 
 		if (elType.equals("multi-list")) {
@@ -266,10 +278,10 @@ public class JournalIndexer extends BaseIndexer {
 		}
 
 		if (elIndexType.equals("keyword")) {
-			document.addKeyword(name, value);
+			document.addKeyword(fieldName, value);
 		}
 		else if (elIndexType.equals("text")) {
-			document.addText(name, StringUtil.merge(value, StringPool.SPACE));
+			document.addText(fieldName, StringUtil.merge(value, StringPool.SPACE));
 		}
 	}
 
@@ -329,6 +341,8 @@ public class JournalIndexer extends BaseIndexer {
 
 		SearchEngineUtil.updateDocuments(companyId, documents);
 	}
+
+	protected static final String _FIELD_NAMESPACE = "web_content";
 
 	private static Log _log = LogFactoryUtil.getLog(JournalIndexer.class);
 

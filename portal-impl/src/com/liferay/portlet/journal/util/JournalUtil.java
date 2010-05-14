@@ -1245,6 +1245,11 @@ public class JournalUtil {
 
 		String newLanguageId = newContentElement.attributeValue("language-id");
 		String newValue = newContentElement.getText();
+		String indexType = newElement.attributeValue("index-type");
+
+		if (Validator.isNotNull(indexType)) {
+			curElement.addAttribute("index-type", indexType);
+		}
 
 		List<Element> curContentElements = curElement.elements(
 			"dynamic-content");
