@@ -73,8 +73,7 @@ public class MBCategoryServiceUtil {
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBCategory> getCategories(
 		long groupId, long parentCategoryId, int start, int end)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getCategories(groupId, parentCategoryId, start, end);
 	}
 

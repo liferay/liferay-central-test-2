@@ -75,7 +75,7 @@ public class MBCategoryServiceImpl extends MBCategoryServiceBaseImpl {
 
 	public List<MBCategory> getCategories(
 			long groupId, long parentCategoryId, int start, int end)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return mbCategoryPersistence.filterFindByG_P(
 			groupId, parentCategoryId, start, end);
