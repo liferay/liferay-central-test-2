@@ -440,11 +440,6 @@ public class MBCategoryUtil {
 		return getPersistence().countByUUID_G(uuid, groupId);
 	}
 
-	public static int filterCountByUUID_G(java.lang.String uuid, long groupId)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().filterCountByUUID_G(uuid, groupId);
-	}
-
 	public static int countByGroupId(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByGroupId(groupId);

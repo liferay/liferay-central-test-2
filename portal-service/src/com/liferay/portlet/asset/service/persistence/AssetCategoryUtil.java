@@ -515,11 +515,6 @@ public class AssetCategoryUtil {
 		return getPersistence().countByUUID_G(uuid, groupId);
 	}
 
-	public static int filterCountByUUID_G(java.lang.String uuid, long groupId)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().filterCountByUUID_G(uuid, groupId);
-	}
-
 	public static int countByParentCategoryId(long parentCategoryId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByParentCategoryId(parentCategoryId);

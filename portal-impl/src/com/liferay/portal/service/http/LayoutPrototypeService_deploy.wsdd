@@ -2,13 +2,13 @@
 
 <deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
 	<service name="Portal_LayoutPrototypeService" provider="java:RPC" style="rpc" use="encoded">
-		<parameter name="wsdlTargetNamespace" value="urn:http.service.portal.liferay.com"/>
-		<parameter name="wsdlServiceElement" value="LayoutPrototypeServiceSoapService"/>
-		<parameter name="schemaUnqualified" value="http://util.kernel.portal.liferay.com,urn:http.service.portal.liferay.com,http://model.portal.liferay.com"/>
-		<parameter name="wsdlServicePort" value="Portal_LayoutPrototypeService"/>
-		<parameter name="className" value="com.liferay.portal.service.http.LayoutPrototypeServiceSoap"/>
-		<parameter name="wsdlPortType" value="LayoutPrototypeServiceSoap"/>
-		<parameter name="typeMappingVersion" value="1.2"/>
+		<parameter name="wsdlTargetNamespace" value="urn:http.service.portal.liferay.com" />
+		<parameter name="wsdlServiceElement" value="LayoutPrototypeServiceSoapService" />
+		<parameter name="schemaUnqualified" value="http://util.kernel.portal.liferay.com,urn:http.service.portal.liferay.com,http://model.portal.liferay.com" />
+		<parameter name="wsdlServicePort" value="Portal_LayoutPrototypeService" />
+		<parameter name="className" value="com.liferay.portal.service.http.LayoutPrototypeServiceSoap" />
+		<parameter name="wsdlPortType" value="LayoutPrototypeServiceSoap" />
+		<parameter name="typeMappingVersion" value="1.2" />
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" name="deleteLayoutPrototype" qname="operNS:deleteLayoutPrototype" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="layoutPrototypeId" type="tns:long"></parameter>
 		</operation>
@@ -20,7 +20,7 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="active" type="tns:boolean"></parameter>
 			<parameter xmlns:tns="http://util.kernel.portal.liferay.com" qname="obc" type="tns:OrderByComparator"></parameter>
 		</operation>
-		<parameter name="allowedMethods" value="search getLayoutPrototype deleteLayoutPrototype"/>
+		<parameter name="allowedMethods" value="search getLayoutPrototype deleteLayoutPrototype" />
 		<arrayMapping xmlns:ns="urn:http.service.portal.liferay.com" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema" qname="ns:ArrayOf_xsd_string" type="java:java.lang.String[]" innerType="cmp-ns:string" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
 		<typeMapping xmlns:ns="http://util.kernel.portal.liferay.com" qname="ns:OrderByComparator" type="java:com.liferay.portal.kernel.util.OrderByComparator" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
 		<typeMapping xmlns:ns="http://model.portal.liferay.com" qname="ns:LayoutPrototypeSoap" type="java:com.liferay.portal.model.LayoutPrototypeSoap" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>

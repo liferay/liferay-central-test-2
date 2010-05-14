@@ -2,13 +2,13 @@
 
 <deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
 	<service name="Portlet_Blogs_BlogsEntryService" provider="java:RPC" style="rpc" use="encoded">
-		<parameter name="wsdlTargetNamespace" value="urn:http.service.blogs.portlet.liferay.com"/>
-		<parameter name="wsdlServiceElement" value="BlogsEntryServiceSoapService"/>
-		<parameter name="schemaUnqualified" value="http://service.portal.liferay.com,http://model.portal.liferay.com,http://model.blogs.portlet.liferay.com,http://xml.apache.org/xml-soap,urn:http.service.blogs.portlet.liferay.com"/>
-		<parameter name="wsdlServicePort" value="Portlet_Blogs_BlogsEntryService"/>
-		<parameter name="className" value="com.liferay.portlet.blogs.service.http.BlogsEntryServiceSoap"/>
-		<parameter name="wsdlPortType" value="BlogsEntryServiceSoap"/>
-		<parameter name="typeMappingVersion" value="1.2"/>
+		<parameter name="wsdlTargetNamespace" value="urn:http.service.blogs.portlet.liferay.com" />
+		<parameter name="wsdlServiceElement" value="BlogsEntryServiceSoapService" />
+		<parameter name="schemaUnqualified" value="http://service.portal.liferay.com,http://model.portal.liferay.com,http://model.blogs.portlet.liferay.com,http://xml.apache.org/xml-soap,urn:http.service.blogs.portlet.liferay.com" />
+		<parameter name="wsdlServicePort" value="Portlet_Blogs_BlogsEntryService" />
+		<parameter name="className" value="com.liferay.portlet.blogs.service.http.BlogsEntryServiceSoap" />
+		<parameter name="wsdlPortType" value="BlogsEntryServiceSoap" />
+		<parameter name="typeMappingVersion" value="1.2" />
 		<operation xmlns:operNS="urn:http.service.blogs.portlet.liferay.com" xmlns:rtns="http://model.blogs.portlet.liferay.com" name="updateEntry" qname="operNS:updateEntry" returnQName="updateEntryReturn" returnType="rtns:BlogsEntrySoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="entryId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="title" type="tns:string"></parameter>
@@ -67,7 +67,7 @@
 		<operation xmlns:operNS="urn:http.service.blogs.portlet.liferay.com" name="deleteEntry" qname="operNS:deleteEntry" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="entryId" type="tns:long"></parameter>
 		</operation>
-		<parameter name="allowedMethods" value="getEntry getOrganizationEntries updateEntry getGroupsEntries addEntry deleteEntry getGroupEntries getCompanyEntries"/>
+		<parameter name="allowedMethods" value="getEntry getOrganizationEntries updateEntry getGroupsEntries addEntry deleteEntry getGroupEntries getCompanyEntries" />
 		<typeMapping xmlns:ns="http://model.portal.liferay.com" qname="ns:PortletPreferencesIds" type="java:com.liferay.portal.model.PortletPreferencesIds" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
 		<arrayMapping xmlns:ns="urn:http.service.blogs.portlet.liferay.com" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema" qname="ns:ArrayOf_xsd_long" type="java:long[]" innerType="cmp-ns:long" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
 		<arrayMapping xmlns:ns="urn:http.service.blogs.portlet.liferay.com" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema" qname="ns:ArrayOf_xsd_string" type="java:java.lang.String[]" innerType="cmp-ns:string" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>

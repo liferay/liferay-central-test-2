@@ -566,11 +566,6 @@ public class DLFileShortcutUtil {
 		return getPersistence().countByUUID_G(uuid, groupId);
 	}
 
-	public static int filterCountByUUID_G(java.lang.String uuid, long groupId)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().filterCountByUUID_G(uuid, groupId);
-	}
-
 	public static int countByG_F(long groupId, long folderId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByG_F(groupId, folderId);

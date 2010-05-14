@@ -330,9 +330,6 @@ public interface DLFileShortcutPersistence extends BasePersistence<DLFileShortcu
 	public int countByUUID_G(java.lang.String uuid, long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public int filterCountByUUID_G(java.lang.String uuid, long groupId)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
 	public int countByG_F(long groupId, long folderId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 

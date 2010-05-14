@@ -519,9 +519,6 @@ public interface WikiPagePersistence extends BasePersistence<WikiPage> {
 	public int countByUUID_G(java.lang.String uuid, long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public int filterCountByUUID_G(java.lang.String uuid, long groupId)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
 	public int countByNodeId(long nodeId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 

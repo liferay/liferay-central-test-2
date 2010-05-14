@@ -2,13 +2,13 @@
 
 <deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
 	<service name="Portal_GroupService" provider="java:RPC" style="rpc" use="encoded">
-		<parameter name="wsdlTargetNamespace" value="urn:http.service.portal.liferay.com"/>
-		<parameter name="wsdlServiceElement" value="GroupServiceSoapService"/>
-		<parameter name="schemaUnqualified" value="urn:http.service.portal.liferay.com,http://service.portal.liferay.com,http://model.portal.liferay.com,http://xml.apache.org/xml-soap"/>
-		<parameter name="wsdlServicePort" value="Portal_GroupService"/>
-		<parameter name="className" value="com.liferay.portal.service.http.GroupServiceSoap"/>
-		<parameter name="wsdlPortType" value="GroupServiceSoap"/>
-		<parameter name="typeMappingVersion" value="1.2"/>
+		<parameter name="wsdlTargetNamespace" value="urn:http.service.portal.liferay.com" />
+		<parameter name="wsdlServiceElement" value="GroupServiceSoapService" />
+		<parameter name="schemaUnqualified" value="urn:http.service.portal.liferay.com,http://service.portal.liferay.com,http://model.portal.liferay.com,http://xml.apache.org/xml-soap" />
+		<parameter name="wsdlServicePort" value="Portal_GroupService" />
+		<parameter name="className" value="com.liferay.portal.service.http.GroupServiceSoap" />
+		<parameter name="wsdlPortType" value="GroupServiceSoap" />
+		<parameter name="typeMappingVersion" value="1.2" />
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://model.portal.liferay.com" name="addGroup" qname="operNS:addGroup" returnQName="addGroupReturn" returnType="rtns:GroupSoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="liveGroupId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="name" type="tns:string"></parameter>
@@ -108,7 +108,7 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="companyId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="name" type="tns:string"></parameter>
 		</operation>
-		<parameter name="allowedMethods" value="search getUserGroup getUserGroupsGroups updateWorkflow hasUserGroup deleteGroup getManageableGroups updateFriendlyURL addGroup setRoleGroups updateGroup getUserOrganizationsGroups searchCount getGroup addRoleGroups getOrganizationsGroups unsetRoleGroups"/>
+		<parameter name="allowedMethods" value="search getUserGroup getUserGroupsGroups updateWorkflow hasUserGroup deleteGroup getManageableGroups updateFriendlyURL addGroup setRoleGroups updateGroup getUserOrganizationsGroups searchCount getGroup addRoleGroups getOrganizationsGroups unsetRoleGroups" />
 		<typeMapping xmlns:ns="http://model.portal.liferay.com" qname="ns:PortletPreferencesIds" type="java:com.liferay.portal.model.PortletPreferencesIds" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
 		<arrayMapping xmlns:ns="urn:http.service.portal.liferay.com" xmlns:cmp-ns="http://model.portal.liferay.com" qname="ns:ArrayOf_tns3_UserGroupSoap" type="java:com.liferay.portal.model.UserGroupSoap[]" innerType="cmp-ns:UserGroupSoap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
 		<typeMapping xmlns:ns="http://model.portal.liferay.com" qname="ns:UserGroupSoap" type="java:com.liferay.portal.model.UserGroupSoap" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>

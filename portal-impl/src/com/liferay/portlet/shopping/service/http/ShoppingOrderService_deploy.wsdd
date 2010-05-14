@@ -2,13 +2,13 @@
 
 <deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
 	<service name="Portlet_Shopping_ShoppingOrderService" provider="java:RPC" style="rpc" use="encoded">
-		<parameter name="wsdlTargetNamespace" value="urn:http.service.shopping.portlet.liferay.com"/>
-		<parameter name="wsdlServiceElement" value="ShoppingOrderServiceSoapService"/>
-		<parameter name="schemaUnqualified" value="http://model.shopping.portlet.liferay.com"/>
-		<parameter name="wsdlServicePort" value="Portlet_Shopping_ShoppingOrderService"/>
-		<parameter name="className" value="com.liferay.portlet.shopping.service.http.ShoppingOrderServiceSoap"/>
-		<parameter name="wsdlPortType" value="ShoppingOrderServiceSoap"/>
-		<parameter name="typeMappingVersion" value="1.2"/>
+		<parameter name="wsdlTargetNamespace" value="urn:http.service.shopping.portlet.liferay.com" />
+		<parameter name="wsdlServiceElement" value="ShoppingOrderServiceSoapService" />
+		<parameter name="schemaUnqualified" value="http://model.shopping.portlet.liferay.com" />
+		<parameter name="wsdlServicePort" value="Portlet_Shopping_ShoppingOrderService" />
+		<parameter name="className" value="com.liferay.portlet.shopping.service.http.ShoppingOrderServiceSoap" />
+		<parameter name="wsdlPortType" value="ShoppingOrderServiceSoap" />
+		<parameter name="typeMappingVersion" value="1.2" />
 		<operation xmlns:operNS="urn:http.service.shopping.portlet.liferay.com" xmlns:rtns="http://model.shopping.portlet.liferay.com" name="getOrder" qname="operNS:getOrder" returnQName="getOrderReturn" returnType="rtns:ShoppingOrderSoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="groupId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="orderId" type="tns:long"></parameter>
@@ -72,7 +72,7 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="ccVerNumber" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="comments" type="tns:string"></parameter>
 		</operation>
-		<parameter name="allowedMethods" value="completeOrder updateOrder deleteOrder getOrder sendEmail"/>
+		<parameter name="allowedMethods" value="completeOrder updateOrder deleteOrder getOrder sendEmail" />
 		<typeMapping xmlns:ns="http://model.shopping.portlet.liferay.com" qname="ns:ShoppingOrderSoap" type="java:com.liferay.portlet.shopping.model.ShoppingOrderSoap" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
 	</service>
 </deployment>

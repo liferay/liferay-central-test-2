@@ -2,13 +2,13 @@
 
 <deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
 	<service name="Portal_OrganizationService" provider="java:RPC" style="rpc" use="encoded">
-		<parameter name="wsdlTargetNamespace" value="urn:http.service.portal.liferay.com"/>
-		<parameter name="wsdlServiceElement" value="OrganizationServiceSoapService"/>
-		<parameter name="schemaUnqualified" value="urn:http.service.portal.liferay.com,http://service.portal.liferay.com,http://model.portal.liferay.com,http://xml.apache.org/xml-soap"/>
-		<parameter name="wsdlServicePort" value="Portal_OrganizationService"/>
-		<parameter name="className" value="com.liferay.portal.service.http.OrganizationServiceSoap"/>
-		<parameter name="wsdlPortType" value="OrganizationServiceSoap"/>
-		<parameter name="typeMappingVersion" value="1.2"/>
+		<parameter name="wsdlTargetNamespace" value="urn:http.service.portal.liferay.com" />
+		<parameter name="wsdlServiceElement" value="OrganizationServiceSoapService" />
+		<parameter name="schemaUnqualified" value="urn:http.service.portal.liferay.com,http://service.portal.liferay.com,http://model.portal.liferay.com,http://xml.apache.org/xml-soap" />
+		<parameter name="wsdlServicePort" value="Portal_OrganizationService" />
+		<parameter name="className" value="com.liferay.portal.service.http.OrganizationServiceSoap" />
+		<parameter name="wsdlPortType" value="OrganizationServiceSoap" />
+		<parameter name="typeMappingVersion" value="1.2" />
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getOrganizationId" qname="operNS:getOrganizationId" returnQName="getOrganizationIdReturn" returnType="rtns:long" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="companyId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="name" type="tns:string"></parameter>
@@ -109,7 +109,7 @@
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://model.portal.liferay.com" name="getOrganization" qname="operNS:getOrganization" returnQName="getOrganizationReturn" returnType="rtns:OrganizationSoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="organizationId" type="tns:long"></parameter>
 		</operation>
-		<parameter name="allowedMethods" value="getManageableOrganizations getOrganizationId getUserOrganizations addOrganization addGroupOrganizations updateOrganization deleteLogo setGroupOrganizations unsetGroupOrganizations addPasswordPolicyOrganizations deleteOrganization unsetPasswordPolicyOrganizations getOrganization"/>
+		<parameter name="allowedMethods" value="getManageableOrganizations getOrganizationId getUserOrganizations addOrganization addGroupOrganizations updateOrganization deleteLogo setGroupOrganizations unsetGroupOrganizations addPasswordPolicyOrganizations deleteOrganization unsetPasswordPolicyOrganizations getOrganization" />
 		<typeMapping xmlns:ns="http://model.portal.liferay.com" qname="ns:PortletPreferencesIds" type="java:com.liferay.portal.model.PortletPreferencesIds" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
 		<arrayMapping xmlns:ns="urn:http.service.portal.liferay.com" xmlns:cmp-ns="http://model.portal.liferay.com" qname="ns:ArrayOf_tns2_AddressSoap" type="java:com.liferay.portal.model.AddressSoap[]" innerType="cmp-ns:AddressSoap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
 		<arrayMapping xmlns:ns="urn:http.service.portal.liferay.com" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema" qname="ns:ArrayOf_xsd_long" type="java:long[]" innerType="cmp-ns:long" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>

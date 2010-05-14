@@ -2,13 +2,13 @@
 
 <deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
 	<service name="Portlet_Bookmarks_BookmarksEntryService" provider="java:RPC" style="rpc" use="encoded">
-		<parameter name="wsdlTargetNamespace" value="urn:http.service.bookmarks.portlet.liferay.com"/>
-		<parameter name="wsdlServiceElement" value="BookmarksEntryServiceSoapService"/>
-		<parameter name="schemaUnqualified" value="http://model.bookmarks.portlet.liferay.com,http://service.portal.liferay.com,http://model.portal.liferay.com,http://xml.apache.org/xml-soap,urn:http.service.bookmarks.portlet.liferay.com"/>
-		<parameter name="wsdlServicePort" value="Portlet_Bookmarks_BookmarksEntryService"/>
-		<parameter name="className" value="com.liferay.portlet.bookmarks.service.http.BookmarksEntryServiceSoap"/>
-		<parameter name="wsdlPortType" value="BookmarksEntryServiceSoap"/>
-		<parameter name="typeMappingVersion" value="1.2"/>
+		<parameter name="wsdlTargetNamespace" value="urn:http.service.bookmarks.portlet.liferay.com" />
+		<parameter name="wsdlServiceElement" value="BookmarksEntryServiceSoapService" />
+		<parameter name="schemaUnqualified" value="http://model.bookmarks.portlet.liferay.com,http://service.portal.liferay.com,http://model.portal.liferay.com,http://xml.apache.org/xml-soap,urn:http.service.bookmarks.portlet.liferay.com" />
+		<parameter name="wsdlServicePort" value="Portlet_Bookmarks_BookmarksEntryService" />
+		<parameter name="className" value="com.liferay.portlet.bookmarks.service.http.BookmarksEntryServiceSoap" />
+		<parameter name="wsdlPortType" value="BookmarksEntryServiceSoap" />
+		<parameter name="typeMappingVersion" value="1.2" />
 		<operation xmlns:operNS="urn:http.service.bookmarks.portlet.liferay.com" xmlns:rtns="http://model.bookmarks.portlet.liferay.com" name="updateEntry" qname="operNS:updateEntry" returnQName="updateEntryReturn" returnType="rtns:BookmarksEntrySoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="entryId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="groupId" type="tns:long"></parameter>
@@ -35,7 +35,7 @@
 		<operation xmlns:operNS="urn:http.service.bookmarks.portlet.liferay.com" name="deleteEntry" qname="operNS:deleteEntry" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="entryId" type="tns:long"></parameter>
 		</operation>
-		<parameter name="allowedMethods" value="getEntry updateEntry addEntry openEntry deleteEntry"/>
+		<parameter name="allowedMethods" value="getEntry updateEntry addEntry openEntry deleteEntry" />
 		<typeMapping xmlns:ns="http://model.portal.liferay.com" qname="ns:PortletPreferencesIds" type="java:com.liferay.portal.model.PortletPreferencesIds" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
 		<typeMapping xmlns:ns="http://model.bookmarks.portlet.liferay.com" qname="ns:BookmarksEntrySoap" type="java:com.liferay.portlet.bookmarks.model.BookmarksEntrySoap" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
 		<arrayMapping xmlns:ns="urn:http.service.bookmarks.portlet.liferay.com" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema" qname="ns:ArrayOf_xsd_long" type="java:long[]" innerType="cmp-ns:long" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>

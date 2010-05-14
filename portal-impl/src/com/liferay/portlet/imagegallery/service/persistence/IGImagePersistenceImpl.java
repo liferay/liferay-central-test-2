@@ -3081,59 +3081,6 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		return count.intValue();
 	}
 
-	public int filterCountByUUID_G(String uuid, long groupId)
-		throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringBundler query = new StringBundler(3);
-
-			query.append(_FILTER_SQL_COUNT_IGIMAGE_WHERE);
-
-			if (uuid == null) {
-				query.append(_FINDER_COLUMN_UUID_G_UUID_1);
-			}
-			else {
-				if (uuid.equals(StringPool.BLANK)) {
-					query.append(_FINDER_COLUMN_UUID_G_UUID_3);
-				}
-				else {
-					query.append(_FINDER_COLUMN_UUID_G_UUID_2);
-				}
-			}
-
-			query.append(_FINDER_COLUMN_UUID_G_GROUPID_2);
-
-			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-					IGImage.class.getName(), _FILTER_COLUMN_IMAGEID,
-					_FILTER_COLUMN_USERID, groupId);
-
-			SQLQuery q = session.createSQLQuery(sql);
-
-			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			if (uuid != null) {
-				qPos.add(uuid);
-			}
-
-			qPos.add(groupId);
-
-			Long count = (Long)q.uniqueResult();
-
-			return count.intValue();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
 	public int countByGroupId(long groupId) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(groupId) };
 

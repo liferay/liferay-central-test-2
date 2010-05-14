@@ -291,9 +291,6 @@ public interface JournalTemplatePersistence extends BasePersistence<JournalTempl
 	public int countByUUID_G(java.lang.String uuid, long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public int filterCountByUUID_G(java.lang.String uuid, long groupId)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
 	public int countByGroupId(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 

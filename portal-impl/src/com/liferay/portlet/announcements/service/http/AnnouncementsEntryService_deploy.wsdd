@@ -2,13 +2,13 @@
 
 <deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
 	<service name="Portlet_Announcements_AnnouncementsEntryService" provider="java:RPC" style="rpc" use="encoded">
-		<parameter name="wsdlTargetNamespace" value="urn:http.service.announcements.portlet.liferay.com"/>
-		<parameter name="wsdlServiceElement" value="AnnouncementsEntryServiceSoapService"/>
-		<parameter name="schemaUnqualified" value="http://model.announcements.portlet.liferay.com"/>
-		<parameter name="wsdlServicePort" value="Portlet_Announcements_AnnouncementsEntryService"/>
-		<parameter name="className" value="com.liferay.portlet.announcements.service.http.AnnouncementsEntryServiceSoap"/>
-		<parameter name="wsdlPortType" value="AnnouncementsEntryServiceSoap"/>
-		<parameter name="typeMappingVersion" value="1.2"/>
+		<parameter name="wsdlTargetNamespace" value="urn:http.service.announcements.portlet.liferay.com" />
+		<parameter name="wsdlServiceElement" value="AnnouncementsEntryServiceSoapService" />
+		<parameter name="schemaUnqualified" value="http://model.announcements.portlet.liferay.com" />
+		<parameter name="wsdlServicePort" value="Portlet_Announcements_AnnouncementsEntryService" />
+		<parameter name="className" value="com.liferay.portlet.announcements.service.http.AnnouncementsEntryServiceSoap" />
+		<parameter name="wsdlPortType" value="AnnouncementsEntryServiceSoap" />
+		<parameter name="typeMappingVersion" value="1.2" />
 		<operation xmlns:operNS="urn:http.service.announcements.portlet.liferay.com" xmlns:rtns="http://model.announcements.portlet.liferay.com" name="updateEntry" qname="operNS:updateEntry" returnQName="updateEntryReturn" returnType="rtns:AnnouncementsEntrySoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="entryId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="title" type="tns:string"></parameter>
@@ -51,7 +51,7 @@
 		<operation xmlns:operNS="urn:http.service.announcements.portlet.liferay.com" name="deleteEntry" qname="operNS:deleteEntry" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="entryId" type="tns:long"></parameter>
 		</operation>
-		<parameter name="allowedMethods" value="updateEntry addEntry deleteEntry"/>
+		<parameter name="allowedMethods" value="updateEntry addEntry deleteEntry" />
 		<typeMapping xmlns:ns="http://model.announcements.portlet.liferay.com" qname="ns:AnnouncementsEntrySoap" type="java:com.liferay.portlet.announcements.model.AnnouncementsEntrySoap" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
 	</service>
 </deployment>

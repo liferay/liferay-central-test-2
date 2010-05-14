@@ -2,13 +2,13 @@
 
 <deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
 	<service name="Portlet_Cal_CalEventService" provider="java:RPC" style="rpc" use="encoded">
-		<parameter name="wsdlTargetNamespace" value="urn:http.service.calendar.portlet.liferay.com"/>
-		<parameter name="wsdlServiceElement" value="CalEventServiceSoapService"/>
-		<parameter name="schemaUnqualified" value="http://service.portal.liferay.com,http://model.portal.liferay.com,urn:http.service.calendar.portlet.liferay.com,http://xml.apache.org/xml-soap,http://cal.kernel.portal.liferay.com,http://model.calendar.portlet.liferay.com"/>
-		<parameter name="wsdlServicePort" value="Portlet_Cal_CalEventService"/>
-		<parameter name="className" value="com.liferay.portlet.calendar.service.http.CalEventServiceSoap"/>
-		<parameter name="wsdlPortType" value="CalEventServiceSoap"/>
-		<parameter name="typeMappingVersion" value="1.2"/>
+		<parameter name="wsdlTargetNamespace" value="urn:http.service.calendar.portlet.liferay.com" />
+		<parameter name="wsdlServiceElement" value="CalEventServiceSoapService" />
+		<parameter name="schemaUnqualified" value="http://service.portal.liferay.com,http://model.portal.liferay.com,urn:http.service.calendar.portlet.liferay.com,http://xml.apache.org/xml-soap,http://cal.kernel.portal.liferay.com,http://model.calendar.portlet.liferay.com" />
+		<parameter name="wsdlServicePort" value="Portlet_Cal_CalEventService" />
+		<parameter name="className" value="com.liferay.portlet.calendar.service.http.CalEventServiceSoap" />
+		<parameter name="wsdlPortType" value="CalEventServiceSoap" />
+		<parameter name="typeMappingVersion" value="1.2" />
 		<operation xmlns:operNS="urn:http.service.calendar.portlet.liferay.com" name="deleteEvent" qname="operNS:deleteEvent" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="eventId" type="tns:long"></parameter>
 		</operation>
@@ -62,7 +62,7 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="secondReminder" type="tns:int"></parameter>
 			<parameter xmlns:tns="http://service.portal.liferay.com" qname="serviceContext" type="tns:ServiceContext"></parameter>
 		</operation>
-		<parameter name="allowedMethods" value="deleteEvent updateEvent addEvent getEvent"/>
+		<parameter name="allowedMethods" value="deleteEvent updateEvent addEvent getEvent" />
 		<typeMapping xmlns:ns="http://model.portal.liferay.com" qname="ns:PortletPreferencesIds" type="java:com.liferay.portal.model.PortletPreferencesIds" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
 		<typeMapping xmlns:ns="http://xml.apache.org/xml-soap" qname="ns:mapItem" type="java:org.apache.xml.xml_soap.MapItem" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
 		<arrayMapping xmlns:ns="urn:http.service.calendar.portlet.liferay.com" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema" qname="ns:ArrayOf_xsd_long" type="java:long[]" innerType="cmp-ns:long" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>

@@ -2,13 +2,13 @@
 
 <deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
 	<service name="Portal_ResourcePermissionService" provider="java:RPC" style="rpc" use="encoded">
-		<parameter name="wsdlTargetNamespace" value="urn:http.service.portal.liferay.com"/>
-		<parameter name="wsdlServiceElement" value="ResourcePermissionServiceSoapService"/>
-		<parameter name="schemaUnqualified" value="urn:http.service.portal.liferay.com"/>
-		<parameter name="wsdlServicePort" value="Portal_ResourcePermissionService"/>
-		<parameter name="className" value="com.liferay.portal.service.http.ResourcePermissionServiceSoap"/>
-		<parameter name="wsdlPortType" value="ResourcePermissionServiceSoap"/>
-		<parameter name="typeMappingVersion" value="1.2"/>
+		<parameter name="wsdlTargetNamespace" value="urn:http.service.portal.liferay.com" />
+		<parameter name="wsdlServiceElement" value="ResourcePermissionServiceSoapService" />
+		<parameter name="schemaUnqualified" value="urn:http.service.portal.liferay.com" />
+		<parameter name="wsdlServicePort" value="Portal_ResourcePermissionService" />
+		<parameter name="className" value="com.liferay.portal.service.http.ResourcePermissionServiceSoap" />
+		<parameter name="wsdlPortType" value="ResourcePermissionServiceSoap" />
+		<parameter name="typeMappingVersion" value="1.2" />
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" name="addResourcePermission" qname="operNS:addResourcePermission" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="groupId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="companyId" type="tns:long"></parameter>
@@ -43,7 +43,7 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="roleId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="actionId" type="tns:string"></parameter>
 		</operation>
-		<parameter name="allowedMethods" value="removeResourcePermissions removeResourcePermission addResourcePermission setIndividualResourcePermissions"/>
+		<parameter name="allowedMethods" value="removeResourcePermissions removeResourcePermission addResourcePermission setIndividualResourcePermissions" />
 		<arrayMapping xmlns:ns="urn:http.service.portal.liferay.com" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema" qname="ns:ArrayOf_xsd_string" type="java:java.lang.String[]" innerType="cmp-ns:string" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
 	</service>
 </deployment>
