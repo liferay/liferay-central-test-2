@@ -1075,7 +1075,7 @@ public class BaseDeployer {
 
 		if (speedFiltersEnabled) {
 			String speedFiltersContent = FileUtil.read(
-				DeployUtil.getResourcePath("speed_filters.xml"));
+				DeployUtil.getResourcePath("speed-filters-web.xml"));
 
 			return speedFiltersContent;
 		}
