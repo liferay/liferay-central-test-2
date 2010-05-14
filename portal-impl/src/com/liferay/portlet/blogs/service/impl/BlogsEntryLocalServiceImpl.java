@@ -160,11 +160,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		if (serviceContext.getWorkflowAction() ==
 				WorkflowConstants.ACTION_PUBLISH) {
 
-			if (Validator.isNotNull(trackbacks)) {
+			if (trackbacks != null) {
 				serviceContext.setAttribute("trackbacks", trackbacks);
-			}
-			else {
-				serviceContext.setAttribute("trackbacks", null);
 			}
 
 			WorkflowHandlerRegistryUtil.startWorkflowInstance(
