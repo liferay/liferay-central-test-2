@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.CompanyConstants;
@@ -39,6 +40,7 @@ import com.liferay.portal.security.auth.ScreenNameGenerator;
 import com.liferay.portal.security.auth.ScreenNameGeneratorFactory;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.service.LockLocalServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.UserGroupLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
@@ -90,15 +92,42 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 			return;
 		}
 
-		long[] ldapServerIds = StringUtil.split(
-			PrefsPropsUtil.getString(companyId, "ldap.server.ids"), 0L);
+		Company company = CompanyLocalServiceUtil.getCompany(companyId);
+		long defaultUserId = company.getDefaultUser().getUserId();
 
-		if (ldapServerIds.length <= 0) {
-			ldapServerIds = new long[] {0};
+		if (LockLocalServiceUtil.hasLock(
+				defaultUserId, PortalLDAPImporterUtil.class.getName(),
+				companyId)) {
+
+			if (_log.isDebugEnabled()) {
+				_log.debug(
+					"Skipping LDAP import for instance " + company.getWebId() +
+						"because another LDAP import is in  process.");
+			}
+
+			return;
 		}
 
-		for (long ldapServerId : ldapServerIds) {
-			importFromLDAP(ldapServerId, companyId);
+		LockLocalServiceUtil.lock(
+			defaultUserId, PortalLDAPImporterUtil.class.getName(), companyId,
+			PortalLDAPImporterImpl.class.getName(), false,
+			System.currentTimeMillis() + Time.DAY);
+
+		try {
+			long[] ldapServerIds = StringUtil.split(
+				PrefsPropsUtil.getString(companyId, "ldap.server.ids"), 0L);
+
+			if (ldapServerIds.length <= 0) {
+				ldapServerIds = new long[] {0};
+			}
+
+			for (long ldapServerId : ldapServerIds) {
+				importFromLDAP(ldapServerId, companyId);
+			}
+		}
+		finally {
+			LockLocalServiceUtil.unlock(
+				PortalLDAPImporterUtil.class.getName(), companyId);
 		}
 	}
 
