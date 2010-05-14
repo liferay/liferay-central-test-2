@@ -457,8 +457,8 @@ public class Entity {
 	}
 
 	public boolean isPermissionCheckEnabled(EntityFinder finder) {
-		if (hasPrimitivePK() && hasColumn("userId") &&
-			finder.hasColumn("groupId") &&
+		if (!finder.getName().equals("UUID_G") && hasPrimitivePK() &&
+			hasColumn("userId") && finder.hasColumn("groupId") &&
 			ResourceActionsUtil.hasModelResourceActions(
 				_packagePath + ".model." + _name)) {
 
