@@ -92,7 +92,7 @@
 					PortletURL installPluginsURL = null;
 
 					if (PrefsPropsUtil.getBoolean(PropsKeys.AUTO_DEPLOY_ENABLED, PropsValues.AUTO_DEPLOY_ENABLED)) {
-						installPluginsURL = (RenderResponseImpl.getRenderResponseImpl(renderResponse)).createRenderURL(PortletKeys.PLUGIN_INSTALLER);
+						installPluginsURL = ((RenderResponseImpl)renderResponse).createRenderURL(PortletKeys.PLUGIN_INSTALLER);
 
 						installPluginsURL.setParameter("struts_action", "/plugin_installer/view");
 						installPluginsURL.setParameter("backURL", currentURL);

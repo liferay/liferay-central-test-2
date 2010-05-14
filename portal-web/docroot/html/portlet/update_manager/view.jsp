@@ -26,7 +26,7 @@ List updatablePackageIds = new ArrayList();
 			<c:when test="<%= !PrefsPropsUtil.getBoolean(PropsKeys.AUTO_DEPLOY_ENABLED, PropsValues.AUTO_DEPLOY_ENABLED) %>">
 
 				<%
-				PortletURL configurationURL = (RenderResponseImpl.getRenderResponseImpl(renderResponse)).createRenderURL(PortletKeys.PLUGIN_INSTALLER);
+				PortletURL configurationURL = ((RenderResponseImpl)renderResponse).createRenderURL(PortletKeys.PLUGIN_INSTALLER);
 
 				configurationURL.setParameter("struts_action", "/plugin_installer/view");
 				configurationURL.setParameter("backURL", currentURL);
@@ -40,7 +40,7 @@ List updatablePackageIds = new ArrayList();
 				<%
 				String uploadProgressId = PortalUtil.generateRandomKey(request, "portlet_update_manager_view");
 
-				PortletURL pluginInstallerURL = (RenderResponseImpl.getRenderResponseImpl(renderResponse)).createRenderURL(PortletKeys.PLUGIN_INSTALLER);
+				PortletURL pluginInstallerURL = ((RenderResponseImpl)renderResponse).createRenderURL(PortletKeys.PLUGIN_INSTALLER);
 
 				pluginInstallerURL.setParameter("struts_action", "/plugin_installer/view");
 				pluginInstallerURL.setParameter("tabs1", "browse-repository");
@@ -155,7 +155,7 @@ List updatablePackageIds = new ArrayList();
 							// Available version
 
 							if (availablePluginPackage != null) {
-								PortletURL rowURL = (RenderResponseImpl.getRenderResponseImpl(renderResponse)).createRenderURL(PortletKeys.PLUGIN_INSTALLER);
+								PortletURL rowURL = ((RenderResponseImpl)renderResponse).createRenderURL(PortletKeys.PLUGIN_INSTALLER);
 
 								rowURL.setParameter("struts_action", "/plugin_installer/view");
 								rowURL.setParameter("redirect", currentURL);

@@ -330,7 +330,7 @@ else if (tabs3.equals("shipping-email")) {
 									[$PORTLET_NAME$]
 								</dt>
 								<dd>
-									<%= (RenderResponseImpl.getRenderResponseImpl(renderResponse)).getTitle() %>
+									<%= ((RenderResponseImpl)renderResponse).getTitle() %>
 								</dd>
 								<dt>
 									[$TO_ADDRESS$]

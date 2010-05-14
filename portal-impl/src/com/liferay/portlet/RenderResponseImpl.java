@@ -23,9 +23,7 @@ import java.util.Collection;
 
 import javax.portlet.PortletMode;
 import javax.portlet.PortletRequest;
-import javax.portlet.RenderResponse;
 
-import javax.portlet.filter.RenderResponseWrapper;
 import javax.servlet.http.HttpServletResponse;
 
 /**
@@ -36,22 +34,6 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class RenderResponseImpl
 	extends MimeResponseImpl implements LiferayRenderResponse {
-
-	public static RenderResponseImpl getRenderResponseImpl(
-		RenderResponse renderResponse) {
-
-		RenderResponseImpl renderResponseImpl = null;
-
-		if (renderResponse instanceof RenderResponseImpl) {
-			renderResponseImpl = (RenderResponseImpl)renderResponse;
-		}
-		else {
-			renderResponseImpl = (RenderResponseImpl)
-				(((RenderResponseWrapper)renderResponse).getResponse());
-		}
-
-		return renderResponseImpl;
-	}
 
 	public String getLifecycle() {
 		return PortletRequest.RENDER_PHASE;

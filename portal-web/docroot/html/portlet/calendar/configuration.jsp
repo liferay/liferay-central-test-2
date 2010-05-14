@@ -113,7 +113,7 @@ String editorContent = emailEventReminderBody;
 						[$PORTLET_NAME$]
 					</dt>
 					<dd>
-						<%= (RenderResponseImpl.getRenderResponseImpl(renderResponse)).getTitle() %>
+						<%= ((RenderResponseImpl)renderResponse).getTitle() %>
 					</dd>
 					<dt>
 						[$TO_ADDRESS$]

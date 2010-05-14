@@ -27,7 +27,7 @@ Portlet portlet = (Portlet)request.getAttribute(WebKeys.RENDER_PORTLET);
 
 PortletPreferences portletSetup = PortletPreferencesFactoryUtil.getLayoutPortletSetup(layout, portletDisplay.getId());
 
-RenderResponseImpl renderResponseImpl = RenderResponseImpl.getRenderResponseImpl(renderResponse);
+RenderResponseImpl renderResponseImpl = (RenderResponseImpl)renderResponse;
 
 // Portlet decorate
 
