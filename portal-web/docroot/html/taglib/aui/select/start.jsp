@@ -36,10 +36,6 @@ String name = GetterUtil.getString((String)request.getAttribute("aui:select:name
 String prefix = GetterUtil.getString((String)request.getAttribute("aui:select:prefix"));
 boolean showEmptyOption = GetterUtil.getBoolean((String)request.getAttribute("aui:select:showEmptyOption"));
 String title = GetterUtil.getString((String)request.getAttribute("aui:select:title"));
-String validation = GetterUtil.getString((String)request.getAttribute("aui:select:validation"));
-
-Set<String> validationSet = new HashSet<String>();
-validationSet.addAll(ListUtil.fromString(validation));
 
 if (Validator.isNull(label) && changesContext) {
 	StringBundler sb = new StringBundler(5);
@@ -56,8 +52,8 @@ else if (Validator.isNotNull(title)) {
 	title = LanguageUtil.get(pageContext, title);
 }
 
-String fieldCss = _buildCss(FIELD_PREFIX, "select", inlineField, disabled, false, first, last, cssClass, null);
-String inputCss = _buildCss(INPUT_PREFIX, "select", false, false, false, false, false, null, validationSet);
+String fieldCss = _buildCss(FIELD_PREFIX, "select", inlineField, disabled, false, first, last, cssClass);
+String inputCss = _buildCss(INPUT_PREFIX, "select", false, false, false, false, false, null);
 %>
 
 <span class="<%= fieldCss %>">
@@ -65,10 +61,6 @@ String inputCss = _buildCss(INPUT_PREFIX, "select", false, false, false, false, 
 		<c:if test='<%= Validator.isNotNull(label) && !inlineLabel.equals("right") %>'>
 			<label <%= _buildLabel(inlineLabel, true, id) %>>
 				<liferay-ui:message key="<%= label %>" />
-
-				<c:if test='<%= validationSet.contains("required") %>'>
-					<span class="aui-label-required">(<liferay-ui:message key="required" />)</span>
-				</c:if>
 
 				<c:if test="<%= Validator.isNotNull(helpMessage) %>">
 					<liferay-ui:icon-help message="<%= helpMessage %>" />

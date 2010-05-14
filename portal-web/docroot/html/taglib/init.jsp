@@ -45,7 +45,7 @@ public static final String INPUT_PREFIX = "aui-field-input";
 
 public static final String LABEL_PREFIX = "aui-field-label";
 
-private static String _buildCss(String prefix, String baseTypeCss, boolean inlineField, boolean disabled, boolean choiceField, boolean first, boolean last, String cssClass, Set<String> validation) {
+private static String _buildCss(String prefix, String baseTypeCss, boolean inlineField, boolean disabled, boolean choiceField, boolean first, boolean last, String cssClass) {
 	StringBundler sb = new StringBundler();
 
 	sb.append(prefix);
@@ -103,14 +103,6 @@ private static String _buildCss(String prefix, String baseTypeCss, boolean inlin
 	if (Validator.isNotNull(cssClass)) {
 		sb.append(StringPool.SPACE);
 		sb.append(cssClass);
-	}
-
-	if (validation != null) {
-		for (String validationHint : validation) {
-			sb.append(StringPool.SPACE);
-			sb.append(FIELD_PREFIX);
-			sb.append(validationHint);
-		}
 	}
 
 	return sb.toString();

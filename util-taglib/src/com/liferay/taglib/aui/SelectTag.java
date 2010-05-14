@@ -105,10 +105,6 @@ public class SelectTag extends IncludeTag {
 		_suffix = suffix;
 	}
 
-	public void setValidation(String validation) {
-		_validation = validation;
-	}
-
 	protected void cleanUp() {
 		_bean = null;
 		_changesContext = false;
@@ -128,7 +124,6 @@ public class SelectTag extends IncludeTag {
 		_showEmptyOption = false;
 		_suffix = null;
 		_title = null;
-		_validation = null;
 	}
 
 	protected String getEndPage() {
@@ -194,7 +189,6 @@ public class SelectTag extends IncludeTag {
 			"aui:select:showEmptyOption", String.valueOf(_showEmptyOption));
 		request.setAttribute("aui:select:suffix", _suffix);
 		request.setAttribute("aui:select:title", _title);
-		request.setAttribute("aui:select:validation", _validation);
 	}
 
 	private static final boolean _CLEAN_UP_SET_ATTRIBUTES = true;
@@ -223,6 +217,5 @@ public class SelectTag extends IncludeTag {
 	private boolean _showEmptyOption;
 	private String _suffix;
 	private String _title;
-	private String _validation;
 
 }
