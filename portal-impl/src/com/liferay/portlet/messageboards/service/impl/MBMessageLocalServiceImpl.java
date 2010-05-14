@@ -949,6 +949,15 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 	}
 
 	public int getDiscussionMessagesCount(
+			String className, long classPK, int status)
+		throws SystemException {
+
+		long classNameId = PortalUtil.getClassNameId(className);
+
+		return getDiscussionMessagesCount(classNameId, classPK, status);
+	}
+
+	public int getDiscussionMessagesCount(
 			long classNameId, long classPK, int status)
 		throws SystemException {
 

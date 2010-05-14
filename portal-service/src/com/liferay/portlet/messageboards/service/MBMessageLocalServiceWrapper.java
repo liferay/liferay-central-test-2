@@ -310,6 +310,13 @@ public class MBMessageLocalServiceWrapper implements MBMessageLocalService {
 			className, classPK, status, threadView);
 	}
 
+	public int getDiscussionMessagesCount(java.lang.String className,
+		long classPK, int status)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _mbMessageLocalService.getDiscussionMessagesCount(className,
+			classPK, status);
+	}
+
 	public int getDiscussionMessagesCount(long classNameId, long classPK,
 		int status) throws com.liferay.portal.kernel.exception.SystemException {
 		return _mbMessageLocalService.getDiscussionMessagesCount(classNameId,
