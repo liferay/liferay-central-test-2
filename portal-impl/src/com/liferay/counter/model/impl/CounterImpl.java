@@ -22,6 +22,8 @@ import com.liferay.counter.model.Counter;
  * @author Brian Wing Shun Chan
  */
 public class CounterImpl extends CounterModelImpl implements Counter {
+
 	public CounterImpl() {
 	}
+
 }

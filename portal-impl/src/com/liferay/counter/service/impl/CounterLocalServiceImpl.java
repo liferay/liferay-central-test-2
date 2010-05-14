@@ -27,39 +27,53 @@ import java.util.List;
  * <a href="CounterLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Edward Han
  */
-public class CounterLocalServiceImpl extends CounterLocalServiceBaseImpl implements CounterLocalService {
+public class CounterLocalServiceImpl
+	extends CounterLocalServiceBaseImpl implements CounterLocalService {
 
 	public List<String> getNames() throws SystemException {
 		return counterFinder.getNames();
 	}
 
-    @Transactional(propagation = Propagation.REQUIRES_NEW, isolation = Isolation.SERIALIZABLE)
+	@Transactional(
+		isolation = Isolation.SERIALIZABLE,
+		propagation = Propagation.REQUIRES_NEW)
 	public long increment() throws SystemException {
 		return counterFinder.increment();
 	}
 
-    @Transactional(propagation = Propagation.REQUIRES_NEW, isolation = Isolation.SERIALIZABLE)
+	@Transactional(
+		isolation = Isolation.SERIALIZABLE,
+		propagation = Propagation.REQUIRES_NEW)
 	public long increment(String name) throws SystemException {
 		return counterFinder.increment(name);
 	}
 
-    @Transactional(propagation = Propagation.REQUIRES_NEW, isolation = Isolation.SERIALIZABLE)
+	@Transactional(
+		isolation = Isolation.SERIALIZABLE,
+		propagation = Propagation.REQUIRES_NEW)
 	public long increment(String name, int size) throws SystemException {
 		return counterFinder.increment(name, size);
 	}
 
-    @Transactional(propagation = Propagation.REQUIRES_NEW, isolation = Isolation.SERIALIZABLE)
+	@Transactional(
+		isolation = Isolation.SERIALIZABLE,
+		propagation = Propagation.REQUIRES_NEW)
 	public void rename(String oldName, String newName) throws SystemException {
 		counterFinder.rename(oldName, newName);
 	}
 
-    @Transactional(propagation = Propagation.REQUIRES_NEW, isolation = Isolation.SERIALIZABLE)
+	@Transactional(
+		isolation = Isolation.SERIALIZABLE,
+		propagation = Propagation.REQUIRES_NEW)
 	public void reset(String name) throws SystemException {
 		counterFinder.reset(name);
 	}
 
-    @Transactional(propagation = Propagation.REQUIRES_NEW, isolation = Isolation.SERIALIZABLE)
+	@Transactional(
+		isolation = Isolation.SERIALIZABLE,
+		propagation = Propagation.REQUIRES_NEW)
 	public void reset(String name, long size) throws SystemException {
 		counterFinder.reset(name, size);
 	}

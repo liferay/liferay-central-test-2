@@ -4,9 +4,13 @@
 <service-builder package-path="com.liferay.counter">
 	<namespace>Counter</namespace>
     <entity name="Counter" local-service="true" remote-service="false" cache-enabled="false">
-        <!-- PK fields -->
-        <column name="name" type="String" primary="true" />
-        <!-- Other fields -->
-        <column name="currentId" type="long" />
+
+		<!-- PK fields -->
+
+		<column name="name" type="String" primary="true" />
+
+		<!-- Other fields -->
+
+		<column name="currentId" type="long" />
     </entity>
 </service-builder>

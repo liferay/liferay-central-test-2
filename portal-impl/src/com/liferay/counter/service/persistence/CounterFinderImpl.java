@@ -1,24 +1,17 @@
 /**
  * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
+ * This library is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU Lesser General Public License as published by the Free
+ * Software Foundation; either version 2.1 of the License, or (at your option)
+ * any later version.
  *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * This library is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+ * details.
  */
+
 package com.liferay.counter.service.persistence;
 
 import com.liferay.counter.model.Counter;
@@ -31,8 +24,6 @@ import com.liferay.portal.kernel.dao.orm.LockMode;
 import com.liferay.portal.kernel.dao.orm.ObjectNotFoundException;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
@@ -54,10 +45,15 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * <a href="CounterFinderImpl.java.html"><b><i>View Source</i></b></a>
  *
+ * @author Brian Wing Shun Chan
+ * @author Harry Mark
+ * @author Michael Young
+ * @author Shuyang Zhou
  * @author Edward Han
  */
 public class CounterFinderImpl
 	extends BasePersistenceImpl<Dummy> implements CounterFinder {
+
 	public List<String> getNames() throws SystemException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -152,12 +148,11 @@ public class CounterFinderImpl
 			try {
 				session = openSession();
 
-                Counter counter = (Counter) session.get(
-                    CounterImpl.class, name);
+				Counter counter = (Counter)session.get(CounterImpl.class, name);
 
-                session.delete(counter);
+				session.delete(counter);
 
-                session.flush();
+				session.flush();
 			}
 			catch (ObjectNotFoundException onfe) {
 			}
@@ -219,7 +214,7 @@ public class CounterFinderImpl
 				preparedStatement.setString(1, name);
 				preparedStatement.setLong(2, rangeMin);
 
-			    preparedStatement.executeUpdate();
+				preparedStatement.executeUpdate();
 			}
 		}
 		catch (Exception e) {
@@ -229,9 +224,9 @@ public class CounterFinderImpl
 			DataAccess.cleanUp(connection, preparedStatement, resultSet);
 		}
 
-        CounterHolder holder = _obtainIncrement(name, rangeSize, size);
+		CounterHolder counterHolder = _obtainIncrement(name, rangeSize, size);
 
-        return new CounterRegister(name, holder, rangeSize);
+		return new CounterRegister(name, counterHolder, rangeSize);
 	}
 
 	protected Connection getConnection() throws SQLException {
@@ -334,21 +329,20 @@ public class CounterFinderImpl
 			newValue = counterHolder.addAndGet(size);
 
 			if (newValue > counterHolder.getRangeMax()) {
+				CounterHolder newCounterHolder = _obtainIncrement(
+					counterRegister.getName(), counterRegister.getRangeSize(),
+					0);
 
-                CounterHolder holder =
-                    _obtainIncrement(
-                        counterRegister.getName(),
-                        counterRegister.getRangeSize(), 0);
+				newValue = newCounterHolder.addAndGet(size);
 
-			    newValue = holder.addAndGet(size);
-
-				counterRegister.setCounterHolder(holder);
+				counterRegister.setCounterHolder(newCounterHolder);
 			}
 		}
 		catch (Exception e) {
 			throw processException(e);
 		}
 		finally {
+
 			// Winner thread opens the latch so that loser threads can continue
 
 			completeLatch.done();
@@ -357,52 +351,49 @@ public class CounterFinderImpl
 		return newValue;
 	}
 
-    private CounterHolder _obtainIncrement(
-        String counterName, long range, long minimum)
-        throws SystemException {
+	private CounterHolder _obtainIncrement(
+			String counterName, long range, long size)
+		throws SystemException {
 
-        Session session = null;
+		Session session = null;
 
-        try {
-            session = openSession();
+		try {
+			session = openSession();
 
-            Counter counter = (Counter) session.get(
-                CounterImpl.class, counterName, LockMode.UPGRADE);
+			Counter counter = (Counter)session.get(
+				CounterImpl.class, counterName, LockMode.UPGRADE);
 
-            long newValue = counter.getCurrentId();
+			long newValue = counter.getCurrentId();
 
-            if (minimum > newValue) {
-                newValue = minimum;
-            }
+			if (size > newValue) {
+				newValue = size;
+			}
 
-            long rangeMax = newValue + range;
+			long rangeMax = newValue + range;
 
-            counter.setCurrentId(rangeMax);
+			counter.setCurrentId(rangeMax);
 
-            CounterHolder counterHolder = new CounterHolder(newValue, rangeMax);
+			CounterHolder counterHolder = new CounterHolder(newValue, rangeMax);
 
-            session.saveOrUpdate(counter);
+			session.saveOrUpdate(counter);
 
-            session.flush();
+			session.flush();
 
-            return counterHolder;
-        }
+			return counterHolder;
+		}
 		catch (Exception e) {
 			throw processException(e);
 		}
 		finally {
-            closeSession(session);
+			closeSession(session);
 		}
-    }
+	}
 
 	private static final int _DEFAULT_CURRENT_ID = 0;
 
 	private static final int _MINIMUM_INCREMENT_SIZE = 1;
 
 	private static final String _NAME = Counter.class.getName();
-
-	private static final String _SQL_DELETE_BY_NAME =
-		"delete from Counter where name = ?";
 
 	private static final String _SQL_INSERT =
 		"insert into Counter(name, currentId) values (?, ?)";
@@ -413,9 +404,6 @@ public class CounterFinderImpl
 	private static final String _SQL_SELECT_NAMES =
 		"select name from Counter order by name asc";
 
-	private static final String _SQL_UPDATE_ID_BY_NAME =
-		"update Counter set currentId = ? where name = ?";
-
 	private static final String _SQL_UPDATE_NAME_BY_NAME =
 		"update Counter set name = ? where name = ?";
 
@@ -424,5 +412,4 @@ public class CounterFinderImpl
 	private Map<String, Integer> _rangeSizeMap =
 		new ConcurrentHashMap<String, Integer>();
 
-    private static Log _log = LogFactoryUtil.getLog(CounterFinderImpl.class);
 }

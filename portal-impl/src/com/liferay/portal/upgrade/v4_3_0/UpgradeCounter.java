@@ -14,7 +14,7 @@
 
 package com.liferay.portal.upgrade.v4_3_0;
 
-import com.liferay.counter.model.impl.CounterModelImpl;
+import com.liferay.counter.model.Counter;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.upgrade.util.UpgradeTable;
@@ -43,7 +43,7 @@ public class UpgradeCounter extends UpgradeProcess {
 
 		for (String name : names) {
 			if (name.startsWith("com.liferay.") &&
-				!name.equals(CounterModelImpl.class.getName()) &&
+				!name.equals(Counter.class.getName()) &&
 				!name.equals(Permission.class.getName()) &&
 				!name.equals(Resource.class.getName()) &&
 				!name.equals(ResourceCode.class.getName()) &&

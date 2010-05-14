@@ -2,6 +2,7 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping default-lazy="false" auto-import="false">
+	<import class="com.liferay.counter.model.Counter" />
 	<import class="com.liferay.portal.model.Account" />
 	<import class="com.liferay.portal.model.Address" />
 	<import class="com.liferay.portal.model.BrowserTracker" />
@@ -137,7 +138,6 @@
 	<import class="com.liferay.portlet.wiki.model.WikiNode" />
 	<import class="com.liferay.portlet.wiki.model.WikiPage" />
 	<import class="com.liferay.portlet.wiki.model.WikiPageResource" />
-	<import class="com.liferay.counter.model.Counter" />
 	<class name="com.liferay.portal.model.impl.AccountImpl" table="Account_">
 		<cache usage="read-write" />
 		<id name="accountId" type="long">
