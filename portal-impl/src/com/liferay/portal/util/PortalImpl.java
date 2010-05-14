@@ -2457,9 +2457,9 @@ public class PortalImpl implements Portal {
 		return getPortletTitle(portlet.getPortletId(), user);
 	}
 
-	public String getPortletTitle(RenderResponse response) {
+	public String getPortletTitle(RenderResponse renderResponse) {
 		PortletResponseImpl portletResponseImpl =
-				PortletResponseImpl.getPortletResponseImpl(response);
+			PortletResponseImpl.getPortletResponseImpl(renderResponse);
 
 		return ((RenderResponseImpl)portletResponseImpl).getTitle();
 	}

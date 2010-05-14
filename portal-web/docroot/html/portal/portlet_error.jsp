@@ -19,8 +19,6 @@
 <portlet:defineObjects />
 
 <%
-//RenderResponseImpl renderResponseImpl = (RenderResponseImpl)renderResponse;
-
 String portletTitle = PortalUtil.getPortletTitle(renderResponse);
 
 if (portletTitle == null) {

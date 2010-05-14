@@ -739,8 +739,8 @@ public class PortalUtil {
 		return getPortal().getPortletTitle(portlet, user);
 	}
 
-	public static String getPortletTitle(RenderResponse response) {
-		return getPortal().getPortletTitle(response);
+	public static String getPortletTitle(RenderResponse renderResponse) {
+		return getPortal().getPortletTitle(renderResponse);
 	}
 
 	public static String getPortletTitle(String portletId, Locale locale) {
