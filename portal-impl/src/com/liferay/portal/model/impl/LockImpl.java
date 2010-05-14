@@ -16,8 +16,6 @@ package com.liferay.portal.model.impl;
 
 import com.liferay.portal.model.Lock;
 
-import java.util.Date;
-
 /**
  * <a href="LockImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -29,27 +27,33 @@ public class LockImpl extends LockModelImpl implements Lock {
 	}
 
 	public long getExpirationTime() {
-		Date expirationDate = getExpirationDate();
-
-		if (expirationDate.getTime() == 0) {
+		if (isNeverExpires()) {
 			return 0;
 		}
-
-		return expirationDate.getTime() - getCreateDate().getTime();
+		else {
+			return getExpirationDate().getTime() - getCreateDate().getTime();
+		}
 	}
 
 	public boolean isExpired() {
-		Date expirationDate = getExpirationDate();
-
-		if (expirationDate.getTime() == 0) {
+		if (isNeverExpires()) {
 			return false;
 		}
-
-		if (System.currentTimeMillis() > expirationDate.getTime()) {
+		else if (System.currentTimeMillis() > getExpirationDate().getTime()) {
 			return true;
 		}
+		else {
+			return false;
+		}
+	}
 
-		return false;
+	public boolean isNeverExpires() {
+		if (getExpirationDate().getTime() == 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 }

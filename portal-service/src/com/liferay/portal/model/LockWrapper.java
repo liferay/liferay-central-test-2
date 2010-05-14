@@ -214,6 +214,10 @@ public class LockWrapper implements Lock {
 		return _lock.isExpired();
 	}
 
+	public boolean isNeverExpires() {
+		return _lock.isNeverExpires();
+	}
+
 	public Lock getWrappedLock() {
 		return _lock;
 	}

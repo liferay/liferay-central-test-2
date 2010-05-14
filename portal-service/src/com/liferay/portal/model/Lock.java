@@ -43,4 +43,6 @@ public interface Lock extends LockModel {
 	public long getExpirationTime();
 
 	public boolean isExpired();
+
+	public boolean isNeverExpires();
 }

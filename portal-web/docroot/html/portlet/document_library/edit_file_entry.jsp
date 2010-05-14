@@ -97,7 +97,7 @@ portletURL.setParameter("name", name);
 		<c:when test="<%= hasLock.booleanValue() %>">
 			<div class="portlet-msg-success">
 				<c:choose>
-					<c:when test="<%= lock.getExpirationTime() == 0 %>">
+					<c:when test="<%= lock.isNeverExpires() %>">
 						<liferay-ui:message key="you-now-have-an-indefinite-lock-on-this-document" />
 					</c:when>
 					<c:otherwise>

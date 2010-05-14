@@ -103,7 +103,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 	<c:choose>
 		<c:when test="<%= hasLock.booleanValue() %>">
 			<c:choose>
-				<c:when test="<%= lock.getExpirationTime() == 0 %>">
+				<c:when test="<%= lock.isNeverExpires() %>">
 					<liferay-ui:message key="you-now-have-an-indefinite-lock-on-this-document" />
 				</c:when>
 				<c:otherwise>
