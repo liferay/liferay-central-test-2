@@ -1018,21 +1018,20 @@ public class SourceFormatter {
 		ds.setBasedir(basedir);
 		ds.setExcludes(
 			new String[] {
-				"**\\bin\\**", "**\\classes\\*", "**\\jsp\\*", "**\\tmp\\**",
+				"**\\InstanceWrapperBuilder.java", "**\\*_IW.java",
 				"**\\PropsKeys.java", "**\\PropsValues.java",
-				"**\\InstanceWrapperBuilder.java", "**\\ServiceBuilder.java",
-				"**\\SourceFormatter.java", "**\\UserAttributes.java",
-				"**\\WebKeys.java", "**\\*_IW.java",
+				"**\\ServiceBuilder.java", "**\\SourceFormatter.java",
+				"**\\UserAttributes.java", "**\\WebKeys.java",
+				"**\\bin\\**", "**\\classes\\*", "**\\counter\\service\\**",
+				"**\\jsp\\*", "**\\model\\impl\\*ModelImpl.java",
+				"**\\portal\\service\\**", "**\\portal-client\\**",
 				"**\\portal-service\\**\\model\\*Model.java",
 				"**\\portal-service\\**\\model\\*Soap.java",
 				"**\\portal-service\\**\\model\\*Wrapper.java",
-				"**\\model\\impl\\*ModelImpl.java",
-				"**\\counter\\service\\**",
-				"**\\portal\\service\\**", "**\\portal-client\\**",
 				"**\\portal-web\\classes\\**\\*.java",
 				"**\\portal-web\\test\\**\\*Test.java",
-				"**\\portlet\\**\\service\\**", "**\\tools\\ext_tmpl\\**",
-				"**\\tools\\tck\\**"
+				"**\\portlet\\**\\service\\**", "**\\tmp\\**",
+				"**\\tools\\ext_tmpl\\**",  "**\\tools\\tck\\**"
 			});
 		ds.setIncludes(new String[] {"**\\*.java"});
 
