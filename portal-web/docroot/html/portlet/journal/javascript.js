@@ -1205,6 +1205,7 @@ AUI().add(
 					var displayAsTooltip = instance.getById('displayAsTooltip');
 					var repeatable = instance.getById('repeatable');
 					var fieldType = instance.getById('fieldType');
+					var indexType = instance.getById('indexType');
 					var localizedCheckbox = instance.getById('localized');
 					var instructions = instance.getById('instructions');
 					var predefinedValue = instance.getById('predefinedValue');
@@ -1212,11 +1213,8 @@ AUI().add(
 					var variableName = instance.getById('variableName');
 					var fieldLabel = instance.getById('fieldLabel');
 
-					var fieldTypeEl = fieldType.one('[value="' + fieldInstance.get('fieldType') + '"]');
-
-					if (fieldTypeEl) {
-						fieldTypeEl.attr('selected', 'selected');
-					}
+					fieldType.val(fieldInstance.get('fieldType'));
+					indexType.val(fieldInstance.get('indexType'));
 
 					check(displayAsTooltip, fieldInstance.get('displayAsTooltip'));
 					check(localizedCheckbox, fieldInstance.get('localized'));
@@ -1228,7 +1226,7 @@ AUI().add(
 					predefinedValue.val(fieldInstance.get('predefinedValue'));
 					variableName.val(fieldInstance.get('variableName'));
 
-					var elements = editContainerWrapper.all('input[type=text], textarea, input[type=checkbox]');
+					var elements = editContainerWrapper.all('input[type=text], select, textarea, input[type=checkbox]');
 
 					if (fieldInstance.get('repeated') || fieldInstance.get('parentStructureId')) {
 						elements.attr('disabled', 'disabled');
@@ -1492,6 +1490,7 @@ AUI().add(
 					var repeatable = instance.getById('repeatable');
 					var repeatableCheckbox = instance.getById('repeatableCheckbox');
 					var fieldType = instance.getById('fieldType');
+					var indexType = instance.getById('indexType');
 					var instructions = instance.getById('instructions');
 					var predefinedValue = instance.getById('predefinedValue');
 					var required = instance.getById('required');
@@ -1535,6 +1534,7 @@ AUI().add(
 							{
 								displayAsTooltip: displayAsTooltipCheckbox.attr('checked'),
 								fieldType: fieldType.val(),
+								indexType: indexType.val(),
 								instructions: instructions.val(),
 								localized: localizedCheckbox ? localizedCheckbox.attr('checked') : false,
 								localizedValue: localizedValue,
@@ -2160,7 +2160,7 @@ AUI().add(
 
 				var editContainerWrapper = instance.getById('#journalArticleEditFieldWrapper');
 				var editContainerCheckboxes = editContainerWrapper.all('input[type=checkbox]');
-				var editContainerInputs = editContainerWrapper.all('input[type=text]');
+				var editContainerInputs = editContainerWrapper.all('input[type=text],select');
 				var editContainerTextareas = editContainerWrapper.all('textarea');
 				var editFieldCancelButton = editContainerWrapper.one('.cancel-button .aui-button-input');
 				var editFieldCloseButton = editContainerWrapper.one('.close-button .aui-button-input');
@@ -2735,6 +2735,19 @@ AUI().add(
 						}
 					},
 
+					indexType: {
+						setter: function(v) {
+							var instance = this;
+
+							return instance.setAttribute('IndexType', v);
+						},
+						valueFn: function() {
+							var instance = this;
+
+							return instance.getAttribute('IndexType', '');
+						}
+					},
+
 					innerHTML: {
 						validator: Lang.isString,
 						value: TPL_STRUCTURE_FIELD_INPUT
@@ -2866,6 +2879,7 @@ AUI().add(
 						'displayAsTooltip',
 						'fieldLabel',
 						'fieldType',
+						'indexType',
 						'innerHTML',
 						'instructions',
 						'localized',

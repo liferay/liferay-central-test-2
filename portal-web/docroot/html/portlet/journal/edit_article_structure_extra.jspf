@@ -63,6 +63,14 @@
 
 			<aui:input name="fieldLabel" type="text" />
 
+			<aui:input name="variableName" type="text" />
+
+			<aui:select label="index-type" name='indexType'>
+				<aui:option label="not-searchable" />
+				<aui:option label="searchable-keyword" value="keyword" />
+				<aui:option label="searchable-text" value="text" />
+			</aui:select>
+
 			<aui:input name="predefinedValue" type="text" />
 
 			<fieldset class="user-instructions">
@@ -70,8 +78,6 @@
 
 				<aui:input name="displayAsTooltip" type="checkbox" value="<%= true %>" />
 			</fieldset>
-
-			<aui:input name="variableName" type="text" />
 
 			<aui:input name="repeatable" type="checkbox" value="<%= true %>" />
 
