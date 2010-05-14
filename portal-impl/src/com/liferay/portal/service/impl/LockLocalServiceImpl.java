@@ -153,7 +153,7 @@ public class LockLocalServiceImpl extends LockLocalServiceBaseImpl {
 		lock.setCreateDate(now);
 
 		if (expirationTime == 0) {
-			lock.setExpirationDate(new Date(expirationTime));
+			lock.setExpirationDate(new Date(0));
 		}
 		else {
 			lock.setExpirationDate(new Date(now.getTime() + expirationTime));
@@ -183,7 +183,7 @@ public class LockLocalServiceImpl extends LockLocalServiceBaseImpl {
 		lock.setCreateDate(now);
 
 		if (expirationTime == 0) {
-			lock.setExpirationDate(new Date(Long.MAX_VALUE));
+			lock.setExpirationDate(new Date(0));
 		}
 		else {
 			lock.setExpirationDate(new Date(now.getTime() + expirationTime));
