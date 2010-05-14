@@ -41,6 +41,8 @@ public interface ModelHints {
 
 	public String getType(String model, String field);
 
+	public String getValidation(String model, String field);
+
 	public boolean isLocalized(String model, String field);
 
 	public void read(ClassLoader classLoader, String source) throws Exception;

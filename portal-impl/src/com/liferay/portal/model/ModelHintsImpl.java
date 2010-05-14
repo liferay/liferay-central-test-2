@@ -154,6 +154,18 @@ public class ModelHintsImpl implements ModelHints {
 		}
 	}
 
+	public String getValidation(String model, String field) {
+		Map<String, Object> fields =
+			(Map<String, Object>)_modelFields.get(model);
+
+		if (fields == null) {
+			return null;
+		}
+		else {
+			return (String)fields.get(field + _VALIDATION_SUFFIX);
+		}
+	}
+
 	public boolean isLocalized(String model, String field) {
 		Map<String, Object> fields = (Map<String, Object>)_modelFields.get(
 			model);
@@ -261,6 +273,7 @@ public class ModelHintsImpl implements ModelHints {
 
 				String fieldName = field.attributeValue("name");
 				String fieldType = field.attributeValue("type");
+				String fieldValidation = field.attributeValue("validation");
 				boolean fieldLocalized = GetterUtil.getBoolean(
 					field.attributeValue("localized"));
 
@@ -305,6 +318,7 @@ public class ModelHintsImpl implements ModelHints {
 
 				fields.put(fieldName + _ELEMENTS_SUFFIX, field);
 				fields.put(fieldName + _TYPE_SUFFIX, fieldType);
+				fields.put(fieldName + _VALIDATION_SUFFIX, fieldValidation);
 				fields.put(fieldName + _LOCALIZATION_SUFFIX, fieldLocalized);
 				fields.put(fieldName + _HINTS_SUFFIX, fieldHints);
 
@@ -352,6 +366,8 @@ public class ModelHintsImpl implements ModelHints {
 	private static final String _SANITIZE_SUFFIX = "_SANITIZE_SUFFIX";
 
 	private static final String _TYPE_SUFFIX = "_TYPE";
+
+	private static final String _VALIDATION_SUFFIX = "_VALIDATION";
 
 	private static Log _log = LogFactoryUtil.getLog(ModelHintsImpl.class);
 

@@ -65,6 +65,11 @@ String forLabel = id;
 
 if ((model != null) && Validator.isNull(type)) {
 	baseType = ModelHintsUtil.getType(model.getName(), field);
+	String validationHints = ModelHintsUtil.getValidation(model.getName(), field);
+
+	List<String> validationHintsList = ListUtil.fromArray(StringUtil.split(validationHints, StringPool.COMMA));
+
+	validationSet.addAll(validationHintsList);
 
 	String fieldParam = (String)dynamicAttributes.get("fieldParam");
 

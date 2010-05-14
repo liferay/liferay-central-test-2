@@ -59,6 +59,10 @@ public class ModelHintsUtil {
 		return getModelHints().getType(model, field);
 	}
 
+	public static String getValidation(String model, String field) {
+		return getModelHints().getValidation(model, field);
+	}
+
 	public static boolean isLocalized(String model, String field) {
 		return getModelHints().isLocalized(model, field);
 	}
