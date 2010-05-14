@@ -51,6 +51,20 @@ public class WSDDBuilder {
 		try {
 			_serverConfigFileName = serverConfigFileName;
 
+			if (!FileUtil.exists(_serverConfigFileName)) {
+				ClassLoader classLoader = getClass().getClassLoader();
+
+				String serverConfigContent = StringUtil.read(
+					classLoader,
+					"com/liferay/portal/tools/dependencies/server-config.wsdd");
+
+				FileUtil.write(_serverConfigFileName, serverConfigContent);
+			}
+
+			if (FileUtil.exists("docroot/WEB-INF/src/")) {
+				_portalWsdd = false;
+			}
+
 			Document doc = SAXReaderUtil.read(new File(fileName), true);
 
 			Element root = doc.getRootElement();
@@ -67,9 +81,15 @@ public class WSDDBuilder {
 				_portletShortName = namespace.getText();
 			}
 
-			_outputPath =
-				"src/" + StringUtil.replace(packagePath, ".", "/") +
-					"/service/http";
+			if (_portalWsdd) {
+				_outputPath = "src/";
+			}
+			else {
+				_outputPath = "docroot/WEB-INF/src/";
+			}
+
+			_outputPath +=
+				StringUtil.replace(packagePath, ".", "/") + "/service/http";
 
 			_packagePath = packagePath;
 
@@ -105,7 +125,7 @@ public class WSDDBuilder {
 
 		String serviceName = StringUtil.replace(_portletShortName, " ", "_");
 
-		if (!_portletShortName.equals("Portal")) {
+		if (_portalWsdd && !_portletShortName.equals("Portal")) {
 			serviceName = "Portlet_" + serviceName;
 		}
 
@@ -123,6 +143,7 @@ public class WSDDBuilder {
 	}
 
 	private String _serverConfigFileName;
+	private boolean _portalWsdd = true;
 	private String _portletShortName;
 	private String _outputPath;
 	private String _packagePath;

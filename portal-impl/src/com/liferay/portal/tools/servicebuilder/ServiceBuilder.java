@@ -1053,6 +1053,8 @@ public class ServiceBuilder {
 							_createServiceClp(entity, _SESSION_TYPE_REMOTE);
 							_createServiceWrapper(entity, _SESSION_TYPE_REMOTE);
 
+							_createServiceSoap(entity);
+
 							if (Validator.isNotNull(_jsonFileName)) {
 								_createServiceHttp(entity);
 								_createServiceJson(entity);
@@ -1060,8 +1062,6 @@ public class ServiceBuilder {
 								if (entity.hasColumns()) {
 									_createServiceJsonSerializer(entity);
 								}
-
-								_createServiceSoap(entity);
 							}
 						}
 					}

@@ -16,6 +16,7 @@ package com.liferay.portal.kernel.servlet;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.PortalInitable;
 import com.liferay.portal.kernel.util.PortalInitableUtil;
@@ -23,6 +24,7 @@ import com.liferay.portal.kernel.util.PortalInitableUtil;
 import java.io.IOException;
 
 import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -55,6 +57,10 @@ public class PortalClassLoaderServlet
 	public void init(ServletConfig servletConfig) {
 		_servletConfig = servletConfig;
 
+		Thread currentThread = Thread.currentThread();
+
+		_portletClassLoader = currentThread.getContextClassLoader();
+
 		PortalInitableUtil.init(this);
 	}
 
@@ -73,6 +79,17 @@ public class PortalClassLoaderServlet
 
 			_servlet = (HttpServlet)portalClassLoader.loadClass(
 				servletClass).newInstance();
+
+			boolean usePortletClassLoader = GetterUtil.getBoolean(
+				_servletConfig.getInitParameter("use-portlet-class-loader"));
+
+			if (usePortletClassLoader) {
+				ServletContext servletContext =
+					_servletConfig.getServletContext();
+
+				servletContext.setAttribute(
+					PortletServlet.PORTLET_CLASS_LOADER, _portletClassLoader);
+			}
 
 			_servlet.init(_servletConfig);
 		}
@@ -106,6 +123,7 @@ public class PortalClassLoaderServlet
 	private static Log _log = LogFactoryUtil.getLog(
 		PortalClassLoaderServlet.class);
 
+	private ClassLoader _portletClassLoader;
 	private HttpServlet _servlet;
 	private ServletConfig _servletConfig;
 

@@ -16,6 +16,7 @@ package com.liferay.portal.servlet;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.servlet.PortletServlet;
 import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.portal.kernel.servlet.UncommittedServletResponse;
 import com.liferay.portal.kernel.util.ContentTypes;
@@ -32,6 +33,9 @@ import com.liferay.portal.util.PortalInstances;
 import com.liferay.util.servlet.ServletResponseUtil;
 import com.liferay.util.xml.XMLFormatter;
 
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -41,6 +45,32 @@ import javax.servlet.http.HttpServletResponse;
  * @author Brian Wing Shun Chan
  */
 public class AxisServlet extends org.apache.axis.transport.http.AxisServlet {
+
+	public void init(ServletConfig servletConfig) throws ServletException {
+		ServletContext servletContext = servletConfig.getServletContext();
+
+		_portletClassLoader = (ClassLoader)servletContext.getAttribute(
+			PortletServlet.PORTLET_CLASS_LOADER);
+
+		if (_portletClassLoader == null) {
+			super.init(servletConfig);
+		}
+		else {
+			Thread currentThread = Thread.currentThread();
+
+			ClassLoader contextClassLoader =
+				currentThread.getContextClassLoader();
+
+			try {
+				currentThread.setContextClassLoader(_portletClassLoader);
+
+				super.init(servletConfig);
+			}
+			finally {
+				currentThread.setContextClassLoader(contextClassLoader);
+			}
+		}
+	}
 
 	public void service(
 		HttpServletRequest request, HttpServletResponse response) {
@@ -70,7 +100,24 @@ public class AxisServlet extends org.apache.axis.transport.http.AxisServlet {
 			StringServletResponse stringResponse = new StringServletResponse(
 				response);
 
-			super.service(request, stringResponse);
+			if (_portletClassLoader == null) {
+				super.service(request, stringResponse);
+			}
+			else {
+				Thread currentThread = Thread.currentThread();
+
+				ClassLoader contextClassLoader =
+					currentThread.getContextClassLoader();
+
+				try {
+					currentThread.setContextClassLoader(_portletClassLoader);
+
+					super.service(request, stringResponse);
+				}
+				finally {
+					currentThread.setContextClassLoader(contextClassLoader);
+				}
+			}
 
 			String contentType = stringResponse.getContentType();
 
@@ -141,5 +188,7 @@ public class AxisServlet extends org.apache.axis.transport.http.AxisServlet {
 					"</restriction></complexContent></complexType>";
 
 	private static Log _log = LogFactoryUtil.getLog(AxisServlet.class);
+
+	private ClassLoader _portletClassLoader;
 
 }
