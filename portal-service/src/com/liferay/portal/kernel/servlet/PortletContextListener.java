@@ -95,14 +95,14 @@ public class PortletContextListener
 
 		Thread currentThread = Thread.currentThread();
 
-		_classLoader = currentThread.getContextClassLoader();
+		_portletClassLoader = currentThread.getContextClassLoader();
 
 		PortalInitableUtil.init(this);
 	}
 
 	public void portalInit() {
 		HotDeployUtil.fireDeployEvent(
-			new HotDeployEvent(_servletContext, _classLoader));
+			new HotDeployEvent(_servletContext, _portletClassLoader));
 
 		try {
 			if (ServerDetector.isGlassfish()) {
@@ -169,8 +169,8 @@ public class PortletContextListener
 	private static Log _log = LogFactoryUtil.getLog(
 		PortletContextListener.class);
 
-	private ServletContext _servletContext;
-	private ClassLoader _classLoader;
 	private boolean _bindLiferayPool;
+	private ClassLoader _portletClassLoader;
+	private ServletContext _servletContext;
 
 }
