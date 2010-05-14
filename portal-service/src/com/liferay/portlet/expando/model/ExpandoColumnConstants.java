@@ -25,49 +25,51 @@ public class ExpandoColumnConstants {
 
 	public static final int BOOLEAN_ARRAY = 2;
 
-	public static final String BOOLEAN_ARRAY_LABEL = "boolean[]";
+	public static final String BOOLEAN_ARRAY_LABEL =
+		"custom.field.boolean.array";
 
-	public static final String BOOLEAN_LABEL = "boolean";
+	public static final String BOOLEAN_LABEL = "custom.field.boolean";
 
 	public static final int DATE = 3;
 
 	public static final int DATE_ARRAY = 4;
 
-	public static final String DATE_ARRAY_LABEL = "java.util.Date[]";
+	public static final String DATE_ARRAY_LABEL =
+		"custom.field.java.util.Date.array";
 
-	public static final String DATE_LABEL = "java.util.Date";
+	public static final String DATE_LABEL = "custom.field.java.util.Date";
 
 	public static final int DOUBLE = 5;
 
 	public static final int DOUBLE_ARRAY = 6;
 
-	public static final String DOUBLE_ARRAY_LABEL = "double[]";
+	public static final String DOUBLE_ARRAY_LABEL = "custom.field.double.array";
 
-	public static final String DOUBLE_LABEL = "double";
+	public static final String DOUBLE_LABEL = "custom.field.double";
 
 	public static final int FLOAT = 7;
 
 	public static final int FLOAT_ARRAY = 8;
 
-	public static final String FLOAT_ARRAY_LABEL = "float[]";
+	public static final String FLOAT_ARRAY_LABEL = "custom.field.float.array";
 
-	public static final String FLOAT_LABEL = "float";
+	public static final String FLOAT_LABEL = "custom.field.float";
 
 	public static final int INTEGER = 9;
 
 	public static final int INTEGER_ARRAY = 10;
 
-	public static final String INTEGER_ARRAY_LABEL = "int[]";
+	public static final String INTEGER_ARRAY_LABEL = "custom.field.int.array";
 
-	public static final String INTEGER_LABEL = "int";
+	public static final String INTEGER_LABEL = "custom.field.int";
 
 	public static final int LONG = 11;
 
 	public static final int LONG_ARRAY = 12;
 
-	public static final String LONG_ARRAY_LABEL = "long[]";
+	public static final String LONG_ARRAY_LABEL = "custom.field.long.array";
 
-	public static final String LONG_LABEL = "long";
+	public static final String LONG_LABEL = "custom.field.long";
 
 	public static final String PROPERTY_HEIGHT = "height";
 
@@ -83,17 +85,18 @@ public class ExpandoColumnConstants {
 
 	public static final int SHORT_ARRAY = 14;
 
-	public static final String SHORT_ARRAY_LABEL = "short[]";
+	public static final String SHORT_ARRAY_LABEL = "custom.field.short.array";
 
-	public static final String SHORT_LABEL = "short";
+	public static final String SHORT_LABEL = "custom.field.short";
 
 	public static final int STRING = 15;
 
 	public static final int STRING_ARRAY = 16;
 
-	public static final String STRING_ARRAY_LABEL = "java.lang.String[]";
+	public static final String STRING_ARRAY_LABEL =
+		"custom.field.java.lang.String.array";
 
-	public static final String STRING_LABEL = "java.lang.String";
+	public static final String STRING_LABEL = "custom.field.java.lang.String";
 
 	public static final int[] TYPES = new int[] {
 		BOOLEAN, BOOLEAN_ARRAY, DATE, DATE_ARRAY, DOUBLE, DOUBLE_ARRAY, FLOAT,
