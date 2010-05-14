@@ -92,7 +92,7 @@ public class BlogsEntryAssetRendererFactory extends BaseAssetRendererFactory {
 	}
 
 	protected String getIconPath(ThemeDisplay themeDisplay) {
-		return themeDisplay.getPathThemeImages() + "/html/icons/blogs.png";
+		return themeDisplay.getPathThemeImages() + "/blogs/blogs.png";
 	}
 
 }
