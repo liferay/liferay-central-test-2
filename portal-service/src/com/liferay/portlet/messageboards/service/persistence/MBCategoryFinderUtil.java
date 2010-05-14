@@ -27,6 +27,17 @@ public class MBCategoryFinderUtil {
 		return getFinder().countByS_G_U(groupId, userId);
 	}
 
+	public static int filterCountByS_G_U(long groupId, long userId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getFinder().filterCountByS_G_U(groupId, userId);
+	}
+
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBCategory> filterFindByS_G_U(
+		long groupId, long userId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getFinder().filterFindByS_G_U(groupId, userId, start, end);
+	}
+
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBCategory> findByS_G_U(
 		long groupId, long userId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {

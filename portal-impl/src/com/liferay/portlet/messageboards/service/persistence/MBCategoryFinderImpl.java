@@ -55,6 +55,33 @@ public class MBCategoryFinderImpl
 		MBCategoryFinder.class.getName() + ".findByS_G_U";
 
 	public int countByS_G_U(long groupId, long userId) throws SystemException {
+		return doCountByS_G_U(groupId, userId, false);
+	}
+
+	public int filterCountByS_G_U(long groupId, long userId)
+		throws SystemException {
+
+		return doCountByS_G_U(groupId, userId, true);
+	}
+
+	public List<MBCategory> filterFindByS_G_U(
+			long groupId, long userId, int start, int end)
+		throws SystemException {
+
+		return doFindByS_G_U(groupId, userId, start, end, true);
+	}
+
+	public List<MBCategory> findByS_G_U(
+			long groupId, long userId, int start, int end)
+		throws SystemException {
+
+		return doFindByS_G_U(groupId, userId, start, end, false);
+	}
+
+	protected int doCountByS_G_U(
+			long groupId, long userId, boolean inlineSQLHelper)
+		throws SystemException {
+
 		Session session = null;
 
 		try {
@@ -62,9 +89,11 @@ public class MBCategoryFinderImpl
 
 			String sql = CustomSQLUtil.get(COUNT_BY_S_G_U);
 
-			sql = InlineSQLHelperUtil.replacePermissionCheck(
-				sql, MBCategory.class.getName(), _ENTITY_CLASSPK,
-				_ENTITY_USERID, groupId);
+			if (inlineSQLHelper) {
+				sql = InlineSQLHelperUtil.replacePermissionCheck(
+					sql, MBCategory.class.getName(), "MBCategory.categoryId",
+					"MBCategory.userId", groupId);
+			}
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -110,8 +139,9 @@ public class MBCategoryFinderImpl
 		}
 	}
 
-	public List<MBCategory> findByS_G_U(
-			long groupId, long userId, int start, int end)
+	protected List<MBCategory> doFindByS_G_U(
+			long groupId, long userId, int start, int end,
+			boolean inlineSQLHelper)
 		throws SystemException {
 
 		Session session = null;
@@ -121,9 +151,11 @@ public class MBCategoryFinderImpl
 
 			String sql = CustomSQLUtil.get(FIND_BY_S_G_U);
 
-			sql = InlineSQLHelperUtil.replacePermissionCheck(
-				sql, MBCategory.class.getName(), _ENTITY_CLASSPK,
-				_ENTITY_USERID, groupId);
+			if (inlineSQLHelper) {
+				sql = InlineSQLHelperUtil.replacePermissionCheck(
+					sql, MBCategory.class.getName(), "MBCategory.categoryId",
+					"MBCategory.userId", groupId);
+			}
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -177,8 +209,5 @@ public class MBCategoryFinderImpl
 			closeSession(session);
 		}
 	}
-
-	private static final String _ENTITY_CLASSPK = "MBCategory.categoryId";
-	private static final String _ENTITY_USERID = "MBCategory.userId";
 
 }

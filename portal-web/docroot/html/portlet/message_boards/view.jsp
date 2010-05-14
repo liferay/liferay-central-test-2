@@ -159,21 +159,20 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 		<liferay-ui:panel-container cssClass="message-boards-panels" extended="<%= false %>" id="messageBoardsPanelContainer" persistState="<%= true %>">
 
 			<%
-			int totalCategories = MBCategoryServiceUtil.getCategoriesCount(scopeGroupId, categoryId);
+			int categoriesCount = MBCategoryServiceUtil.getCategoriesCount(scopeGroupId, categoryId);
 			%>
 
-			<c:if test="<%= totalCategories > 0 %>">
+			<c:if test="<%= categoriesCount > 0 %>">
 				<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="messageBoardsCategoriesPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, category != null ? "subcategories" : "categories") %>'>
 					<liferay-ui:search-container
 						curParam="cur1"
 						deltaConfigurable="<%= false %>"
-						headerNames="<%= "category,categories,threads,posts" %>"
+						headerNames="category,categories,threads,posts"
 						iteratorURL="<%= portletURL %>"
 					>
-
 						<liferay-ui:search-container-results
 							results="<%= MBCategoryServiceUtil.getCategories(scopeGroupId, categoryId, searchContainer.getStart(), searchContainer.getEnd()) %>"
-							total="<%= totalCategories %>"
+							total="<%= categoriesCount %>"
 						/>
 
 						<liferay-ui:search-container-row
@@ -182,7 +181,6 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 							keyProperty="categoryId"
 							modelVar="curCategory"
 						>
-
 							<liferay-ui:search-container-row-parameter name="categorySubscriptionClassPKs" value="<%= categorySubscriptionClassPKs %>" />
 
 							<liferay-portlet:renderURL varImpl="rowURL">
@@ -191,7 +189,6 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 							</liferay-portlet:renderURL>
 
 							<%@ include file="/html/portlet/message_boards/category_columns.jspf" %>
-
 						</liferay-ui:search-container-row>
 
 						<liferay-ui:search-iterator />
@@ -375,70 +372,12 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 				curParam="cur1"
 				deltaConfigurable="<%= false %>"
 				emptyResultsMessage="you-are-not-subscribed-to-any-categories"
-				headerNames="<%= "category,categories,threads,posts" %>"
+				headerNames="category,categories,threads,posts"
 				iteratorURL="<%= portletURL %>"
 			>
-
-				<%
-				// The following algorithm allows for a set of results to be
-				// returned, and to provide proper pagination when the total
-				// number of results cannot be determined ahead of time, while
-				// checking all possible permissions.
-
-				List<MBCategory> prunedResults = new ArrayList<MBCategory>();
-				List<MBCategory> prePrunedResults = new ArrayList<MBCategory>();
-
-				int prunedTotal = 0;
-				int start = 0;
-				int delta = searchContainer.getDelta();
-
-				int realStart = (searchContainer.getCur() - 1) * delta;
-				int resultsProcessed = -1;
-				int attemps = 0;
-
-				int end = searchContainer.getEnd() + delta;
-
-				while (prunedResults.size() < delta) {
-					prePrunedResults = MBCategoryServiceUtil.getSubscribedCategories(scopeGroupId, user.getUserId(), start, end);
-
-					for (MBCategory curCategory : prePrunedResults) {
-						if (MBCategoryPermission.contains(permissionChecker, curCategory, ActionKeys.VIEW)) {
-							resultsProcessed++;
-
-							if (resultsProcessed < realStart) {
-								continue;
-							}
-							else if (prunedResults.size() == delta) {
-								prunedTotal = -1;
-
-								break;
-							}
-							else {
-								prunedResults.add(curCategory);
-							}
-						}
-					}
-
-					if (prePrunedResults.size() < (2 * delta)) {
-						break;
-					}
-
-					start = end;
-					end = end + (2 * delta);
-					attemps++;
-				}
-
-				if (prunedTotal == -1) {
-					prunedTotal = (searchContainer.getCur() * delta) + 1;
-				}
-				else {
-					prunedTotal = ((searchContainer.getCur() - 1) * delta) + prunedResults.size();
-				}
-				%>
-
 				<liferay-ui:search-container-results
-					results="<%= prunedResults %>"
-					total="<%= prunedTotal %>"
+					results="<%= MBCategoryServiceUtil.getSubscribedCategories(scopeGroupId, user.getUserId(), start, end) %>"
+					total="<%= MBCategoryServiceUtil.getSubscribedCategoriesCount(scopeGroupId, user.getUserId(), start, end) %>"
 				/>
 
 				<liferay-ui:search-container-row
@@ -447,7 +386,6 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 					keyProperty="categoryId"
 					modelVar="curCategory"
 				>
-
 					<liferay-ui:search-container-row-parameter name="categorySubscriptionClassPKs" value="<%= categorySubscriptionClassPKs %>" />
 
 					<liferay-portlet:renderURL varImpl="rowURL">
@@ -456,7 +394,6 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 					</liferay-portlet:renderURL>
 
 					<%@ include file="/html/portlet/message_boards/subscribed_category_columns.jspf" %>
-
 				</liferay-ui:search-container-row>
 
 				<liferay-ui:search-iterator type="more" />
