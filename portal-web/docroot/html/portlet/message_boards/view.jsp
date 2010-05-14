@@ -376,8 +376,8 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 				iteratorURL="<%= portletURL %>"
 			>
 				<liferay-ui:search-container-results
-					results="<%= MBCategoryServiceUtil.getSubscribedCategories(scopeGroupId, user.getUserId(), start, end) %>"
-					total="<%= MBCategoryServiceUtil.getSubscribedCategoriesCount(scopeGroupId, user.getUserId(), start, end) %>"
+					results="<%= MBCategoryServiceUtil.getSubscribedCategories(scopeGroupId, user.getUserId(), searchContainer.getStart(), searchContainer.getEnd()) %>"
+					total="<%= MBCategoryServiceUtil.getSubscribedCategoriesCount(scopeGroupId, user.getUserId()) %>"
 				/>
 
 				<liferay-ui:search-container-row
