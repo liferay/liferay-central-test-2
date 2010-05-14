@@ -213,7 +213,7 @@
 				return <%= themeDisplay.isThemeJsFastLoad() %>;
 			},
 			getComboPath: function() {
-				return '/combo/?';
+				return '<%= themeDisplay.getPathContext() %>/combo/?';
 			},
 			getFilePath: function(file) {
 				return '<%= alloyURL %>'.replace('{file}', file);
