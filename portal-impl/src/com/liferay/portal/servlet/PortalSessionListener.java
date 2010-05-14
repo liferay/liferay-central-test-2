@@ -14,8 +14,6 @@
 
 package com.liferay.portal.servlet;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.PortalInitableUtil;
 
 import javax.servlet.http.HttpSessionEvent;
@@ -41,8 +39,5 @@ public class PortalSessionListener implements HttpSessionListener {
 
 		PortalInitableUtil.init(portalSessionDestroyer);
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(
-		PortalSessionListener.class);
 
 }

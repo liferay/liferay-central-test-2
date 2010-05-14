@@ -428,7 +428,11 @@
 		<priority value="ERROR" />
 	</category>
 
-	<category name="com.liferay.portal.servlet.PortalSessionListener">
+	<category name="com.liferay.portal.servlet.PortalSessionCreator">
+		<priority value="ERROR" />
+	</category>
+
+	<category name="com.liferay.portal.servlet.PortalSessionDestroyer">
 		<priority value="ERROR" />
 	</category>
 
