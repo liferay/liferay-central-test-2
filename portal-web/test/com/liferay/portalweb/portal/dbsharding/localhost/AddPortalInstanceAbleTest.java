@@ -12,18 +12,18 @@
  * details.
  */
 
-package com.liferay.portalweb.portal.dbsharding.able;
+package com.liferay.portalweb.portal.dbsharding.localhost;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AddCategoryTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddPortalInstanceAbleTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class AddCategoryTest extends BaseTestCase {
-	public void testAddCategory() throws Exception {
+public class AddPortalInstanceAbleTest extends BaseTestCase {
+	public void testAddPortalInstanceAble() throws Exception {
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
@@ -32,8 +32,7 @@ public class AddCategoryTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"link=M\u00e9ssag\u00e9 Boards T\u00e9st Pag\u00e9")) {
+				if (selenium.isElementPresent("link=Control Panel")) {
 					break;
 				}
 			}
@@ -43,20 +42,38 @@ public class AddCategoryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("link=M\u00e9ssag\u00e9 Boards T\u00e9st Pag\u00e9",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//input[@value='Add Category']",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("link=Portal Instances", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.type("_19_name",
-			RuntimeVariables.replace("T\u00e9st Cat\u00e9gory"));
-		selenium.type("_19_description",
-			RuntimeVariables.replace("This is a t\u00e9st cat\u00e9gory!"));
+		selenium.clickAt("//input[@value='Add']", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("_135_webId")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.type("_135_webId", RuntimeVariables.replace("www.able.com"));
+		selenium.type("_135_virtualHost",
+			RuntimeVariables.replace("www.able.com"));
+		selenium.type("_135_mx", RuntimeVariables.replace("able.com"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("T\u00e9st Cat\u00e9gory"));
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
+		assertTrue(selenium.isElementPresent("link=www.able.com"));
+		assertTrue(selenium.isElementPresent("link=able.com"));
 	}
 }

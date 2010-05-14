@@ -49,7 +49,6 @@ public class AddCategoryTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Add Category']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		Thread.sleep(5000);
 		selenium.type("_19_name",
 			RuntimeVariables.replace("T\u00e9st Cat\u00e9gory"));
 		selenium.type("_19_description",

@@ -35,7 +35,8 @@ public class DBShardingLocalhostTests extends BaseTests {
 		testSuite.addTestSuite(AddCategoryTest.class);
 		testSuite.addTestSuite(AddSubcategoryTest.class);
 		testSuite.addTestSuite(AddMessageTest.class);
-		testSuite.addTestSuite(AddPortalInstancesTest.class);
+		testSuite.addTestSuite(AddPortalInstanceAbleTest.class);
+		testSuite.addTestSuite(AddPortalInstanceBakerTest.class);
 
 		testSuite.addTestSuite(StopSeleniumTest.class);
 

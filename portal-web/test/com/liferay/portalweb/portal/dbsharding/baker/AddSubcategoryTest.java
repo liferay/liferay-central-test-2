@@ -51,7 +51,6 @@ public class AddSubcategoryTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Add Subcategory']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		Thread.sleep(5000);
 		selenium.type("_19_name",
 			RuntimeVariables.replace("T\u00e9st Subcat\u00e9gory"));
 		selenium.type("_19_description",

@@ -18,12 +18,12 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AddPortalInstancesTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddPortalInstanceBakerTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class AddPortalInstancesTest extends BaseTestCase {
-	public void testAddPortalInstances() throws Exception {
+public class AddPortalInstanceBakerTest extends BaseTestCase {
+	public void testAddPortalInstanceBaker() throws Exception {
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
@@ -65,35 +65,6 @@ public class AddPortalInstancesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("_135_webId", RuntimeVariables.replace("www.able.com"));
-		selenium.type("_135_virtualHost",
-			RuntimeVariables.replace("www.able.com"));
-		selenium.type("_135_mx", RuntimeVariables.replace("able.com"));
-		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully. "));
-		assertTrue(selenium.isElementPresent("link=www.able.com"));
-		assertTrue(selenium.isElementPresent("link=able.com"));
-		selenium.clickAt("//input[@value='Add']", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible("_135_webId")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.type("_135_webId", RuntimeVariables.replace("www.baker.com"));
 		selenium.type("_135_virtualHost",
 			RuntimeVariables.replace("www.baker.com"));
@@ -101,7 +72,7 @@ public class AddPortalInstancesTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully. "));
+				"Your request processed successfully."));
 		assertTrue(selenium.isElementPresent("link=www.baker.com"));
 		assertTrue(selenium.isElementPresent("link=baker.com"));
 	}
