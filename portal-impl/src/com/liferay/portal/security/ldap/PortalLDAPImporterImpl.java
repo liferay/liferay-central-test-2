@@ -92,8 +92,7 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 			return;
 		}
 
-		Company company = CompanyLocalServiceUtil.getCompany(companyId);
-		long defaultUserId = company.getDefaultUser().getUserId();
+		long defaultUserId = UserLocalServiceUtil.getDefaultUserId(companyId);
 
 		if (LockLocalServiceUtil.hasLock(
 				defaultUserId, PortalLDAPImporterUtil.class.getName(),
@@ -101,8 +100,8 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 
 			if (_log.isDebugEnabled()) {
 				_log.debug(
-					"Skipping LDAP import for instance " + company.getWebId() +
-						"because another LDAP import is in  process.");
+					"Skipping LDAP import for company " + companyId +
+						"because another LDAP import is in process");
 			}
 
 			return;
@@ -110,8 +109,7 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 
 		LockLocalServiceUtil.lock(
 			defaultUserId, PortalLDAPImporterUtil.class.getName(), companyId,
-			PortalLDAPImporterImpl.class.getName(), false,
-			System.currentTimeMillis() + Time.DAY);
+			PortalLDAPImporterImpl.class.getName(), false, Time.DAY);
 
 		try {
 			long[] ldapServerIds = StringUtil.split(
