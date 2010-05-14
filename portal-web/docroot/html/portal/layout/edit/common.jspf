@@ -70,7 +70,7 @@
 				String selLayoutProperty = "typeSettingsProperties(meta-description_" + defaultLanguageId + ")";
 				%>
 
-				<textarea class="lfr-textarea" name="TypeSettingsProperties(meta-description_<%= defaultLanguageId %>)" wrap="soft" style="width: 300px;"><bean:write name="SEL_LAYOUT" property="<%= selLayoutProperty %>" /></textarea>
+				<textarea class="lfr-textarea" name="TypeSettingsProperties--meta-description_<%= defaultLanguageId %>--" wrap="soft" style="width: 300px;"><bean:write name="SEL_LAYOUT" property="<%= selLayoutProperty %>" /></textarea>
 			</td>
 			<td>
 
@@ -81,13 +81,13 @@
 					}
 				%>
 
-					<input class="lfr-textarea" id="<portlet:namespace />meta-description_<%= LocaleUtil.toLanguageId(locales[i]) %>" name="TypeSettingsProperties(meta-description_<%= LocaleUtil.toLanguageId(locales[i]) %>)" type="hidden" value='<%= GetterUtil.getString(selLayout.getTypeSettingsProperties().getProperty("meta-description_" + LocaleUtil.toLanguageId(locales[i]))) %>'>
+					<input class="lfr-textarea" id="<portlet:namespace />meta-description_<%= LocaleUtil.toLanguageId(locales[i]) %>" name="TypeSettingsProperties--meta-description_<%= LocaleUtil.toLanguageId(locales[i]) %>--" type="hidden" value='<%= GetterUtil.getString(selLayout.getTypeSettingsProperties().getProperty("meta-description_" + LocaleUtil.toLanguageId(locales[i]))) %>'>
 
 				<%
 				}
 				%>
 
-				<textarea class="<%= currentLocale.equals(defaultLocale) ? "aui-helper-hidden" : "" %> lfr-textarea" id="<portlet:namespace />meta-description_temp" name="TypeSettingsProperties(meta-description_temp)" onChange="<portlet:namespace />onDescriptionChanged();" style="width: 300px;" wrap="soft"></textarea>
+				<textarea class="<%= currentLocale.equals(defaultLocale) ? "aui-helper-hidden" : "" %> lfr-textarea" id="<portlet:namespace />meta-description_temp" name="TypeSettingsProperties--meta-description_temp--" onChange="<portlet:namespace />onDescriptionChanged();" style="width: 300px;" wrap="soft"></textarea>
 			</td>
 		</tr>
 		<tr>
@@ -105,7 +105,7 @@
 				selLayoutProperty = "typeSettingsProperties(meta-keywords_" + defaultLanguageId + ")";
 				%>
 
-				<textarea class="lfr-textarea" name="TypeSettingsProperties(meta-keywords_<%= defaultLanguageId %>)" wrap="soft" style="width: 300px;"><bean:write name="SEL_LAYOUT" property="<%= selLayoutProperty %>" /></textarea>
+				<textarea class="lfr-textarea" name="TypeSettingsProperties--meta-keywords_<%= defaultLanguageId %>--" wrap="soft" style="width: 300px;"><bean:write name="SEL_LAYOUT" property="<%= selLayoutProperty %>" /></textarea>
 			</td>
 			<td>
 
@@ -116,13 +116,13 @@
 					}
 				%>
 
-					<input class="lfr-textarea" id="<portlet:namespace />meta-keywords_<%= LocaleUtil.toLanguageId(locales[i]) %>" name="TypeSettingsProperties(meta-keywords_<%= LocaleUtil.toLanguageId(locales[i]) %>)" type="hidden" value='<%= GetterUtil.getString(selLayout.getTypeSettingsProperties().getProperty("meta-keywords_" + LocaleUtil.toLanguageId(locales[i]))) %>'>
+					<input class="lfr-textarea" id="<portlet:namespace />meta-keywords_<%= LocaleUtil.toLanguageId(locales[i]) %>" name="TypeSettingsProperties--meta-keywords_<%= LocaleUtil.toLanguageId(locales[i]) %>--" type="hidden" value='<%= GetterUtil.getString(selLayout.getTypeSettingsProperties().getProperty("meta-keywords_" + LocaleUtil.toLanguageId(locales[i]))) %>'>
 
 				<%
 				}
 				%>
 
-				<textarea class="<%= currentLocale.equals(defaultLocale) ? "aui-helper-hidden" : "" %> lfr-textarea" id="<portlet:namespace />meta-keywords_temp" name="TypeSettingsProperties(meta-keywords_temp)" onChange="<portlet:namespace />onKeywordsChanged();" style="width: 300px;" wrap="soft"></textarea>
+				<textarea class="<%= currentLocale.equals(defaultLocale) ? "aui-helper-hidden" : "" %> lfr-textarea" id="<portlet:namespace />meta-keywords_temp" name="TypeSettingsProperties--meta-keywords_temp--" onChange="<portlet:namespace />onKeywordsChanged();" style="width: 300px;" wrap="soft"></textarea>
 			</td>
 		</tr>
 		<tr>
@@ -140,7 +140,7 @@
 				selLayoutProperty = "typeSettingsProperties(meta-robots_" + defaultLanguageId + ")";
 				%>
 
-				<textarea class="lfr-textarea" name="TypeSettingsProperties(meta-robots_<%= defaultLanguageId %>)" wrap="soft" style="width: 300px;"><bean:write name="SEL_LAYOUT" property="<%= selLayoutProperty %>" /></textarea>
+				<textarea class="lfr-textarea" name="TypeSettingsProperties--meta-robots_<%= defaultLanguageId %>--" wrap="soft" style="width: 300px;"><bean:write name="SEL_LAYOUT" property="<%= selLayoutProperty %>" /></textarea>
 			</td>
 			<td>
 
@@ -151,13 +151,13 @@
 					}
 				%>
 
-					<input class="lfr-textarea" id="<portlet:namespace />meta-robots_<%= LocaleUtil.toLanguageId(locales[i]) %>" name="TypeSettingsProperties(meta-robots_<%= LocaleUtil.toLanguageId(locales[i]) %>)" type="hidden" value='<%= GetterUtil.getString(selLayout.getTypeSettingsProperties().getProperty("meta-robots_" + LocaleUtil.toLanguageId(locales[i]))) %>'>
+					<input class="lfr-textarea" id="<portlet:namespace />meta-robots_<%= LocaleUtil.toLanguageId(locales[i]) %>" name="TypeSettingsProperties--meta-robots_<%= LocaleUtil.toLanguageId(locales[i]) %>--" type="hidden" value='<%= GetterUtil.getString(selLayout.getTypeSettingsProperties().getProperty("meta-robots_" + LocaleUtil.toLanguageId(locales[i]))) %>'>
 
 				<%
 				}
 				%>
 
-				<textarea class="<%= currentLocale.equals(defaultLocale) ? "aui-helper-hidden" : "" %> lfr-textarea" id="<portlet:namespace />meta-robots_temp" name="TypeSettingsProperties(meta-robots_temp)" onChange="<portlet:namespace />onRobotsChanged();" style="width: 300px;" wrap="soft"></textarea>
+				<textarea class="<%= currentLocale.equals(defaultLocale) ? "aui-helper-hidden" : "" %> lfr-textarea" id="<portlet:namespace />meta-robots_temp" name="TypeSettingsProperties--meta-robots_temp--" onChange="<portlet:namespace />onRobotsChanged();" style="width: 300px;" wrap="soft"></textarea>
 			</td>
 		</tr>
 		</table>
@@ -170,7 +170,7 @@
 				<liferay-ui:message key="javascript-1" />
 			</td>
 			<td>
-				<textarea class="lfr-textarea" name="TypeSettingsProperties(javascript-1)" wrap="soft" style="width: 300px;"><bean:write name="SEL_LAYOUT" property="typeSettingsProperties(javascript-1)" /></textarea>
+				<textarea class="lfr-textarea" name="TypeSettingsProperties--javascript-1--" wrap="soft" style="width: 300px;"><bean:write name="SEL_LAYOUT" property="typeSettingsProperties(javascript-1)" /></textarea>
 			</td>
 		</tr>
 		<tr>
@@ -183,7 +183,7 @@
 				<liferay-ui:message key="javascript-2" />
 			</td>
 			<td>
-				<textarea class="lfr-textarea" name="TypeSettingsProperties(javascript-2)" wrap="soft" style="width: 300px;"><bean:write name="SEL_LAYOUT" property="typeSettingsProperties(javascript-2)" /></textarea>
+				<textarea class="lfr-textarea" name="TypeSettingsProperties--javascript-2--" wrap="soft" style="width: 300px;"><bean:write name="SEL_LAYOUT" property="typeSettingsProperties(javascript-2)" /></textarea>
 			</td>
 		</tr>
 		<tr>
@@ -196,7 +196,7 @@
 				<liferay-ui:message key="javascript-3" />
 			</td>
 			<td>
-				<textarea class="lfr-textarea" name="TypeSettingsProperties(javascript-3)" wrap="soft" style="width: 300px;"><bean:write name="SEL_LAYOUT" property="typeSettingsProperties(javascript-3)" /></textarea>
+				<textarea class="lfr-textarea" name="TypeSettingsProperties--javascript-3--" wrap="soft" style="width: 300px;"><bean:write name="SEL_LAYOUT" property="typeSettingsProperties(javascript-3)" /></textarea>
 			</td>
 		</tr>
 		</table>
@@ -216,7 +216,7 @@
 					<liferay-ui:message key="include" />
 				</td>
 				<td>
-					<select name="TypeSettingsProperties(sitemap-include)">
+					<select name="TypeSettingsProperties--sitemap-include--">
 						<option <%= (include) ? "selected" : "" %> value="1"><liferay-ui:message key="yes" /></option>
 						<option <%= (!include) ? "selected" : "" %> value="0"><liferay-ui:message key="no" /></option>
 					</select>
@@ -227,7 +227,7 @@
 					<liferay-ui:message key="page-priority" /> (0.0 - 1.0)
 				</td>
 				<td>
-					<input name="TypeSettingsProperties(sitemap-priority)" size="3" type="text" value="<bean:write name="SEL_LAYOUT" property="typeSettingsProperties(sitemap-priority)" />" />
+					<input name="TypeSettingsProperties--sitemap-priority--" size="3" type="text" value="<bean:write name="SEL_LAYOUT" property="typeSettingsProperties(sitemap-priority)" />" />
 				</td>
 			</tr>
 			<tr>
@@ -235,7 +235,7 @@
 					<liferay-ui:message key="change-frequency" />
 				</td>
 				<td>
-					<select name="TypeSettingsProperties(sitemap-changefreq)">
+					<select name="TypeSettingsProperties--sitemap-changefreq--">
 						<option <%= (changeFrequency.equals("always")) ? "selected" : "" %> value="always"><liferay-ui:message key="always" /></option>
 						<option <%= (changeFrequency.equals("hourly")) ? "selected" : "" %> value="hourly"><liferay-ui:message key="hourly" /></option>
 						<option <%= (changeFrequency.equals("daily")) ? "selected" : "" %> value="daily"><liferay-ui:message key="daily" /></option>

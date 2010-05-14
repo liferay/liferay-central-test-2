@@ -1175,7 +1175,7 @@ public class PortalImpl implements Portal {
 		while (enu.hasMoreElements()) {
 			String param = enu.nextElement();
 
-			if (param.indexOf("ExpandoAttributeName(") != -1) {
+			if (param.indexOf("ExpandoAttributeName--") != -1) {
 				String name = ParamUtil.getString(portletRequest, param);
 
 				names.add(name);
@@ -1186,7 +1186,7 @@ public class PortalImpl implements Portal {
 			int type = expandoBridge.getAttributeType(name);
 
 			Serializable value = EditExpandoAction.getValue(
-				portletRequest, "ExpandoAttribute(" + name + ")", type);
+				portletRequest, "ExpandoAttribute--" + name + "--", type);
 
 			attributes.put(name, value);
 		}
@@ -1197,9 +1197,7 @@ public class PortalImpl implements Portal {
 	public String getFirstPageLayoutTypes(PageContext pageContext) {
 		StringBundler sb = new StringBundler();
 
-		for (int i = 0; i < PropsValues.LAYOUT_TYPES.length; i++) {
-			String type = PropsValues.LAYOUT_TYPES[i];
-
+		for (String type : PropsValues.LAYOUT_TYPES) {
 			if (isLayoutFirstPageable(type)) {
 				sb.append(
 					LanguageUtil.get(pageContext, "layout.types." + type));

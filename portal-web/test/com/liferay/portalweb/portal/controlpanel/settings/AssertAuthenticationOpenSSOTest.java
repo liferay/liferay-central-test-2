@@ -91,7 +91,7 @@ public class AssertAuthenticationOpenSSOTest extends BaseTestCase {
 
 			try {
 				if (selenium.isVisible(
-							"_130_settings(open.sso.auth.enabled)Checkbox")) {
+							"_130_settings--open.sso.auth.enabled--Checkbox")) {
 					break;
 				}
 			}
@@ -102,7 +102,7 @@ public class AssertAuthenticationOpenSSOTest extends BaseTestCase {
 		}
 
 		assertTrue(selenium.isElementPresent(
-				"_130_settings(open.sso.auth.enabled)Checkbox"));
+				"_130_settings--open.sso.auth.enabled--Checkbox"));
 		assertTrue(selenium.isTextPresent("Login URL"));
 		assertTrue(selenium.isTextPresent("Logout URL"));
 		assertTrue(selenium.isTextPresent("Service URL"));

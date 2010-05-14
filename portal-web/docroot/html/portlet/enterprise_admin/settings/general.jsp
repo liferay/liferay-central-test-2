@@ -17,8 +17,8 @@
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
 <%
-String defaultLandingPagePath = ParamUtil.getString(request, "settings(" + PropsKeys.DEFAULT_LANDING_PAGE_PATH + ")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.DEFAULT_LANDING_PAGE_PATH, PropsValues.DEFAULT_LANDING_PAGE_PATH));
-String defaultLogoutPagePath = ParamUtil.getString(request, "settings(" + PropsKeys.DEFAULT_LOGOUT_PAGE_PATH + ")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.DEFAULT_LOGOUT_PAGE_PATH, PropsValues.DEFAULT_LOGOUT_PAGE_PATH));
+String defaultLandingPagePath = ParamUtil.getString(request, "settings--" + PropsKeys.DEFAULT_LANDING_PAGE_PATH + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.DEFAULT_LANDING_PAGE_PATH, PropsValues.DEFAULT_LANDING_PAGE_PATH));
+String defaultLogoutPagePath = ParamUtil.getString(request, "settings--" + PropsKeys.DEFAULT_LOGOUT_PAGE_PATH + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.DEFAULT_LOGOUT_PAGE_PATH, PropsValues.DEFAULT_LOGOUT_PAGE_PATH));
 %>
 
 <liferay-ui:error-marker key="errorSection" value="general" />
@@ -50,9 +50,9 @@ String defaultLogoutPagePath = ParamUtil.getString(request, "settings(" + PropsK
 </aui:fieldset>
 
 <aui:fieldset column="<%= true %>" cssClass="aui-w50">
-	<aui:input helpMessage="default-landing-page-help" label="default-landing-page" name='<%= "settings(" + PropsKeys.DEFAULT_LANDING_PAGE_PATH + ")" %>' type="text" value="<%= defaultLandingPagePath %>" />
+	<aui:input helpMessage="default-landing-page-help" label="default-landing-page" name='<%= "settings--" + PropsKeys.DEFAULT_LANDING_PAGE_PATH + "--" %>' type="text" value="<%= defaultLandingPagePath %>" />
 
-	<aui:input helpMessage="default-logout-page-help" label="default-logout-page" name='<%= "settings(" + PropsKeys.DEFAULT_LOGOUT_PAGE_PATH + ")" %>' type="text" value="<%= defaultLogoutPagePath %>" />
+	<aui:input helpMessage="default-logout-page-help" label="default-logout-page" name='<%= "settings--" + PropsKeys.DEFAULT_LOGOUT_PAGE_PATH + "--" %>' type="text" value="<%= defaultLogoutPagePath %>" />
 </aui:fieldset>
 
 <h3><liferay-ui:message key="additional-information" /></h3>

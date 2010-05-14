@@ -91,7 +91,7 @@ public class AssertAuthenticationLDAPTest extends BaseTestCase {
 
 			try {
 				if (selenium.isVisible(
-							"_130_settings(ldap.auth.enabled)Checkbox")) {
+							"_130_settings--ldap.auth.enabled--Checkbox")) {
 					break;
 				}
 			}
@@ -102,22 +102,22 @@ public class AssertAuthenticationLDAPTest extends BaseTestCase {
 		}
 
 		assertTrue(selenium.isElementPresent(
-				"_130_settings(ldap.auth.enabled)Checkbox"));
+				"_130_settings--ldap.auth.enabled--Checkbox"));
 		assertTrue(selenium.isElementPresent(
-				"_130_settings(ldap.auth.required)Checkbox"));
+				"_130_settings--ldap.auth.required--Checkbox"));
 		selenium.clickAt("_130_addButton", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("_130_defaultLdap", RuntimeVariables.replace(""));
 		selenium.clickAt("//input[@value='Reset Values']",
 			RuntimeVariables.replace(""));
 		assertEquals("ldap://localhost:10389",
-			selenium.getValue("_130_settings(ldap.base.provider.url)"));
+			selenium.getValue("_130_settings--ldap.base.provider.url--"));
 		selenium.clickAt("//input[@name='_130_defaultLdap' and @value='microsoft']",
 			RuntimeVariables.replace(""));
 		selenium.clickAt("//input[@value='Reset Values']",
 			RuntimeVariables.replace(""));
 		assertEquals("ldap://localhost:389",
-			selenium.getValue("_130_settings(ldap.base.provider.url)"));
+			selenium.getValue("_130_settings--ldap.base.provider.url--"));
 		assertTrue(selenium.isElementPresent(
 				"//input[@value='Test LDAP Connection']"));
 		assertTrue(selenium.isElementPresent(
@@ -147,6 +147,6 @@ public class AssertAuthenticationLDAPTest extends BaseTestCase {
 		assertTrue(selenium.isElementPresent("_130_ldapImportEnabledCheckbox"));
 		assertTrue(selenium.isElementPresent("_130_ldapExportEnabledCheckbox"));
 		assertTrue(selenium.isElementPresent(
-				"_130_settings(ldap.password.policy.enabled)Checkbox"));
+				"_130_settings--ldap.password.policy.enabled--Checkbox"));
 	}
 }

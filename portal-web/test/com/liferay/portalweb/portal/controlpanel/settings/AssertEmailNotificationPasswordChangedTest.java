@@ -93,7 +93,7 @@ public class AssertEmailNotificationPasswordChangedTest extends BaseTestCase {
 
 			try {
 				if (selenium.isVisible(
-							"_130_settings(admin.email.password.sent.enabled)Checkbox")) {
+							"_130_settings--admin.email.password.sent.enabled--Checkbox")) {
 					break;
 				}
 			}
@@ -103,7 +103,7 @@ public class AssertEmailNotificationPasswordChangedTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("_130_settings(admin.email.password.sent.enabled)Checkbox",
+		selenium.clickAt("_130_settings--admin.email.password.sent.enabled--Checkbox",
 			RuntimeVariables.replace(""));
 		assertTrue(selenium.isTextPresent("Subject"));
 		assertTrue(selenium.isTextPresent("Body"));

@@ -93,7 +93,7 @@ public class AssertEmailNotificationAccountCreationTest extends BaseTestCase {
 
 			try {
 				if (selenium.isVisible(
-							"_130_settings(admin.email.user.added.enabled)Checkbox")) {
+							"_130_settings--admin.email.user.added.enabled--Checkbox")) {
 					break;
 				}
 			}
@@ -104,7 +104,7 @@ public class AssertEmailNotificationAccountCreationTest extends BaseTestCase {
 		}
 
 		assertTrue(selenium.isElementPresent(
-				"_130_settings(admin.email.user.added.enabled)Checkbox"));
+				"_130_settings--admin.email.user.added.enabled--Checkbox"));
 		assertTrue(selenium.isTextPresent("Subject"));
 		assertTrue(selenium.isTextPresent("Body"));
 	}

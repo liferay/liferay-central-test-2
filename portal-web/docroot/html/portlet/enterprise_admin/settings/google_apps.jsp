@@ -17,14 +17,14 @@
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
 <%
-String googleAppsUsername = ParamUtil.getString(request, "settings(" + PropsKeys.GOOGLE_APPS_USERNAME + ")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.GOOGLE_APPS_USERNAME));
-String googleAppsPassword = ParamUtil.getString(request, "settings(" + PropsKeys.GOOGLE_APPS_PASSWORD + ")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.GOOGLE_APPS_PASSWORD));
+String googleAppsUsername = ParamUtil.getString(request, "settings--" + PropsKeys.GOOGLE_APPS_USERNAME + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.GOOGLE_APPS_USERNAME));
+String googleAppsPassword = ParamUtil.getString(request, "settings--" + PropsKeys.GOOGLE_APPS_PASSWORD + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.GOOGLE_APPS_PASSWORD));
 %>
 
 <h3><liferay-ui:message key="google-apps" /></h3>
 
 <aui:fieldset>
-	<aui:input cssClass="lfr-input-text-container" label="user-name" name='<%= "settings(" + PropsKeys.GOOGLE_APPS_USERNAME + ")" %>' type="text" value="<%= googleAppsUsername %>" />
+	<aui:input cssClass="lfr-input-text-container" label="user-name" name='<%= "settings--" + PropsKeys.GOOGLE_APPS_USERNAME + "--" %>' type="text" value="<%= googleAppsUsername %>" />
 
-	<aui:input cssClass="lfr-input-text-container" label="password" name='<%= "settings(" + PropsKeys.GOOGLE_APPS_PASSWORD + ")" %>' type="password" value="<%= googleAppsPassword %>" />
+	<aui:input cssClass="lfr-input-text-container" label="password" name='<%= "settings--" + PropsKeys.GOOGLE_APPS_PASSWORD + "--" %>' type="password" value="<%= googleAppsPassword %>" />
 </aui:fieldset>

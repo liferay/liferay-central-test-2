@@ -91,7 +91,7 @@ public class EnterReservedUserEmailTest extends BaseTestCase {
 
 			try {
 				if (selenium.isVisible(
-							"_130_settings(admin.reserved.email.addresses)")) {
+							"_130_settings--admin.reserved.email.addresses--")) {
 					break;
 				}
 			}
@@ -101,7 +101,7 @@ public class EnterReservedUserEmailTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("_130_settings(admin.reserved.email.addresses)",
+		selenium.type("_130_settings--admin.reserved.email.addresses--",
 			RuntimeVariables.replace("Liferay@liferay.com"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");

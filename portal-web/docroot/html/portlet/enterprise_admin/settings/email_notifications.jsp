@@ -19,8 +19,8 @@
 <h3><liferay-ui:message key="email-notifications" /></h3>
 
 <%
-String adminEmailFromName = ParamUtil.getString(request, "settings(" + PropsKeys.ADMIN_EMAIL_FROM_NAME + ")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.ADMIN_EMAIL_FROM_NAME));
-String adminEmailFromAddress = ParamUtil.getString(request, "settings(" + PropsKeys.ADMIN_EMAIL_FROM_ADDRESS + ")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.ADMIN_EMAIL_FROM_ADDRESS));
+String adminEmailFromName = ParamUtil.getString(request, "settings--" + PropsKeys.ADMIN_EMAIL_FROM_NAME + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.ADMIN_EMAIL_FROM_NAME));
+String adminEmailFromAddress = ParamUtil.getString(request, "settings--" + PropsKeys.ADMIN_EMAIL_FROM_ADDRESS + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.ADMIN_EMAIL_FROM_ADDRESS));
 
 boolean adminEmailUserAddedEnable = ParamUtil.getBoolean(request, "emailUserAddedEnable", PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.ADMIN_EMAIL_USER_ADDED_ENABLED));
 String adminEmailUserAddedSubject = ParamUtil.getString(request, "emailUserAddedSubject", PrefsPropsUtil.getContent(company.getCompanyId(), PropsKeys.ADMIN_EMAIL_USER_ADDED_SUBJECT));
@@ -43,27 +43,27 @@ String adminEmailPasswordResetBody = ParamUtil.getString(request, "emailPassword
 		<aui:fieldset>
 			<liferay-ui:error key="emailFromName" message="please-enter-a-valid-name" />
 
-			<aui:input cssClass="lfr-input-text-container" label="name" name='<%= "settings(" + PropsKeys.ADMIN_EMAIL_FROM_NAME + ")" %>' type="text" value="<%= adminEmailFromName %>" />
+			<aui:input cssClass="lfr-input-text-container" label="name" name='<%= "settings--" + PropsKeys.ADMIN_EMAIL_FROM_NAME + "--" %>' type="text" value="<%= adminEmailFromName %>" />
 
 			<liferay-ui:error key="emailFromAddress" message="please-enter-a-valid-email-address" />
 
-			<aui:input cssClass="lfr-input-text-container" label="address" name='<%= "settings(" + PropsKeys.ADMIN_EMAIL_FROM_ADDRESS + ")" %>' type="text" value="<%= adminEmailFromAddress %>" />
+			<aui:input cssClass="lfr-input-text-container" label="address" name='<%= "settings--" + PropsKeys.ADMIN_EMAIL_FROM_ADDRESS + "--" %>' type="text" value="<%= adminEmailFromAddress %>" />
 		</aui:fieldset>
 	</liferay-ui:section>
 	<liferay-ui:section>
 		<aui:fieldset>
-			<aui:input inlineLabel="left" label="enabled" name='<%= "settings(" + PropsKeys.ADMIN_EMAIL_USER_ADDED_ENABLED + ")" %>' type="checkbox" value="<%= adminEmailUserAddedEnable %>" />
+			<aui:input inlineLabel="left" label="enabled" name='<%= "settings--" + PropsKeys.ADMIN_EMAIL_USER_ADDED_ENABLED + "--" %>' type="checkbox" value="<%= adminEmailUserAddedEnable %>" />
 
 			<liferay-ui:error key="emailUserAddedSubject" message="please-enter-a-valid-subject" />
 
-			<aui:input cssClass="lfr-input-text-container" label="subject" name='<%= "settings(" + PropsKeys.ADMIN_EMAIL_USER_ADDED_SUBJECT + ")" %>' type="text" value="<%= adminEmailUserAddedSubject %>" />
+			<aui:input cssClass="lfr-input-text-container" label="subject" name='<%= "settings--" + PropsKeys.ADMIN_EMAIL_USER_ADDED_SUBJECT + "--" %>' type="text" value="<%= adminEmailUserAddedSubject %>" />
 
 			<liferay-ui:error key="emailUserAddedBody" message="please-enter-a-valid-body" />
 
 			<aui:field-wrapper label="body">
 				<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" initMethod='<%= renderResponse.getNamespace() + "initEmailUserAddedBodyEditor" %>' name="emailUserAddedBody" toolbarSet="email" width="470" />
 
-				<aui:input name='<%= "settings(" + PropsKeys.ADMIN_EMAIL_USER_ADDED_BODY + ")" %>' type="hidden" value="<%= adminEmailUserAddedBody %>" />
+				<aui:input name='<%= "settings--" + PropsKeys.ADMIN_EMAIL_USER_ADDED_BODY + "--" %>' type="hidden" value="<%= adminEmailUserAddedBody %>" />
 			</aui:field-wrapper>
 
 			<div class="terms email-user-add definition-of-terms">
@@ -75,14 +75,14 @@ String adminEmailPasswordResetBody = ParamUtil.getString(request, "emailPassword
 		<aui:fieldset>
 			<liferay-ui:error key="emailPasswordSentSubject" message="please-enter-a-valid-subject" />
 
-			<aui:input cssClass="lfr-input-text-container" label="subject" name='<%= "settings(" + PropsKeys.ADMIN_EMAIL_PASSWORD_SENT_SUBJECT + ")" %>' type="text" value="<%= adminEmailPasswordSentSubject %>" />
+			<aui:input cssClass="lfr-input-text-container" label="subject" name='<%= "settings--" + PropsKeys.ADMIN_EMAIL_PASSWORD_SENT_SUBJECT + "--" %>' type="text" value="<%= adminEmailPasswordSentSubject %>" />
 
 			<liferay-ui:error key="emailPasswordSentBody" message="please-enter-a-valid-body" />
 
 			<aui:field-wrapper label="body">
 				<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" initMethod='<%= renderResponse.getNamespace() + "initEmailPasswordSentBodyEditor" %>' name="emailPasswordSentBody" toolbarSet="email" width="470" />
 
-				<aui:input name='<%= "settings(" + PropsKeys.ADMIN_EMAIL_PASSWORD_SENT_BODY + ")" %>' type="hidden" value="<%= adminEmailPasswordSentBody %>" />
+				<aui:input name='<%= "settings--" + PropsKeys.ADMIN_EMAIL_PASSWORD_SENT_BODY + "--" %>' type="hidden" value="<%= adminEmailPasswordSentBody %>" />
 			</aui:field-wrapper>
 
 			<div class="terms email-password-sent definition-of-terms">
@@ -94,14 +94,14 @@ String adminEmailPasswordResetBody = ParamUtil.getString(request, "emailPassword
 		<aui:fieldset>
 			<liferay-ui:error key="emailPasswordResetSubject" message="please-enter-a-valid-subject" />
 
-			<aui:input cssClass="lfr-input-text-container" label="subject" name='<%= "settings(" + PropsKeys.ADMIN_EMAIL_PASSWORD_RESET_SUBJECT + ")" %>' type="text" value="<%= adminEmailPasswordResetSubject %>" />
+			<aui:input cssClass="lfr-input-text-container" label="subject" name='<%= "settings--" + PropsKeys.ADMIN_EMAIL_PASSWORD_RESET_SUBJECT + "--" %>' type="text" value="<%= adminEmailPasswordResetSubject %>" />
 
 			<liferay-ui:error key="emailPasswordResetBody" message="please-enter-a-valid-body" />
 
 			<aui:field-wrapper label="body">
 				<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" initMethod='<%= renderResponse.getNamespace() + "initEmailPasswordResetBodyEditor" %>' name="emailPasswordResetBody" toolbarSet="email" width="470" />
 
-				<aui:input name='<%= "settings(" + PropsKeys.ADMIN_EMAIL_PASSWORD_RESET_BODY + ")" %>' type="hidden" value="<%= adminEmailPasswordResetBody %>" />
+				<aui:input name='<%= "settings--" + PropsKeys.ADMIN_EMAIL_PASSWORD_RESET_BODY + "--" %>' type="hidden" value="<%= adminEmailPasswordResetBody %>" />
 			</aui:field-wrapper>
 
 			<div class="terms email-password-sent definition-of-terms">
@@ -126,9 +126,9 @@ String adminEmailPasswordResetBody = ParamUtil.getString(request, "emailPassword
 
 	function <portlet:namespace />saveEmails() {
 		try {
-			document.<portlet:namespace />fm['<portlet:namespace />settings(<%= PropsKeys.ADMIN_EMAIL_USER_ADDED_BODY %>)'].value = window.emailUserAddedBody.getHTML();
-			document.<portlet:namespace />fm['<portlet:namespace />settings(<%= PropsKeys.ADMIN_EMAIL_PASSWORD_SENT_BODY %>)'].value = window.emailPasswordSentBody.getHTML();
-			document.<portlet:namespace />fm['<portlet:namespace />settings(<%= PropsKeys.ADMIN_EMAIL_PASSWORD_RESET_BODY %>)'].value = window.emailPasswordResetBody.getHTML();
+			document.<portlet:namespace />fm['<portlet:namespace />settings--<%= PropsKeys.ADMIN_EMAIL_USER_ADDED_BODY %>--'].value = window.emailUserAddedBody.getHTML();
+			document.<portlet:namespace />fm['<portlet:namespace />settings--<%= PropsKeys.ADMIN_EMAIL_PASSWORD_SENT_BODY %>--'].value = window.emailPasswordSentBody.getHTML();
+			document.<portlet:namespace />fm['<portlet:namespace />settings--<%= PropsKeys.ADMIN_EMAIL_PASSWORD_RESET_BODY %>--'].value = window.emailPasswordResetBody.getHTML();
 		}
 		catch(error) {
 		}

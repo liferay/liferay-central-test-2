@@ -55,7 +55,7 @@ public class AssertLDAPConnectionTest extends BaseTestCase {
 
 			try {
 				if (selenium.isVisible(
-							"_130_settings(ldap.auth.enabled)Checkbox")) {
+							"_130_settings--ldap.auth.enabled--Checkbox")) {
 					break;
 				}
 			}

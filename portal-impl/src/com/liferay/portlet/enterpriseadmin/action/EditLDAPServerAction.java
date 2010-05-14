@@ -169,7 +169,7 @@ public class EditLDAPServerAction extends PortletAction {
 		long ldapServerId = ParamUtil.getLong(actionRequest, "ldapServerId");
 
 		UnicodeProperties properties = PropertiesParamUtil.getProperties(
-			actionRequest, "settings(");
+			actionRequest, "settings--");
 
 		if (ldapServerId <= 0) {
 			properties = addLDAPServer(

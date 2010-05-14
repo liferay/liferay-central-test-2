@@ -105,7 +105,7 @@ public class TearDownTest extends BaseTestCase {
 
 			try {
 				if (selenium.isElementPresent(
-							"_130_settings(admin.reserved.screen.names)")) {
+							"_130_settings--admin.reserved.screen.names--")) {
 					break;
 				}
 			}
@@ -115,9 +115,9 @@ public class TearDownTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("_130_settings(admin.reserved.screen.names)",
+		selenium.type("_130_settings--admin.reserved.screen.names--",
 			RuntimeVariables.replace(""));
-		selenium.type("_130_settings(admin.reserved.email.addresses)",
+		selenium.type("_130_settings--admin.reserved.email.addresses--",
 			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -145,7 +145,7 @@ public class TearDownTest extends BaseTestCase {
 
 			try {
 				if (selenium.isElementPresent(
-							"_130_settings(admin.mail.host.names)")) {
+							"_130_settings--admin.mail.host.names--")) {
 					break;
 				}
 			}
@@ -155,7 +155,7 @@ public class TearDownTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("_130_settings(admin.mail.host.names)",
+		selenium.type("_130_settings--admin.mail.host.names--",
 			RuntimeVariables.replace(""));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");

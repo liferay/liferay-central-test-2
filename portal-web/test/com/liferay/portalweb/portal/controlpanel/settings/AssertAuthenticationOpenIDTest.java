@@ -91,7 +91,7 @@ public class AssertAuthenticationOpenIDTest extends BaseTestCase {
 
 			try {
 				if (selenium.isVisible(
-							"_130_settings(open.id.auth.enabled)Checkbox")) {
+							"_130_settings--open.id.auth.enabled--Checkbox")) {
 					break;
 				}
 			}
@@ -102,6 +102,6 @@ public class AssertAuthenticationOpenIDTest extends BaseTestCase {
 		}
 
 		assertTrue(selenium.isElementPresent(
-				"_130_settings(open.id.auth.enabled)Checkbox"));
+				"_130_settings--open.id.auth.enabled--Checkbox"));
 	}
 }

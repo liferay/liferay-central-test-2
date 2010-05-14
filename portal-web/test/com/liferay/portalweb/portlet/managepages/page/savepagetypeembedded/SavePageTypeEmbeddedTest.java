@@ -136,7 +136,7 @@ public class SavePageTypeEmbeddedTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isVisible("TypeSettingsProperties(url)")) {
+						if (selenium.isVisible("TypeSettingsProperties--url--")) {
 							break;
 						}
 					}
@@ -146,7 +146,7 @@ public class SavePageTypeEmbeddedTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.type("TypeSettingsProperties(url)",
+				selenium.type("TypeSettingsProperties--url--",
 					RuntimeVariables.replace("http://www.liferay.com "));
 				selenium.clickAt("//input[@value='Save']",
 					RuntimeVariables.replace(""));

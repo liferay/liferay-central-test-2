@@ -290,7 +290,7 @@ public class EditFileEntryAction extends PortletAction {
 
 		UnicodeProperties extraSettingsProperties =
 			PropertiesParamUtil.getProperties(
-				actionRequest, "extraSettingsProperties(");
+				actionRequest, "extraSettingsProperties--");
 
 		String extraSettings = extraSettingsProperties.toString();
 

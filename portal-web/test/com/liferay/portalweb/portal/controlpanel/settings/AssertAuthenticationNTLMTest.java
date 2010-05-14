@@ -91,7 +91,7 @@ public class AssertAuthenticationNTLMTest extends BaseTestCase {
 
 			try {
 				if (selenium.isVisible(
-							"_130_settings(ntlm.auth.enabled)Checkbox")) {
+							"_130_settings--ntlm.auth.enabled--Checkbox")) {
 					break;
 				}
 			}
@@ -102,7 +102,7 @@ public class AssertAuthenticationNTLMTest extends BaseTestCase {
 		}
 
 		assertTrue(selenium.isElementPresent(
-				"_130_settings(ntlm.auth.enabled)Checkbox"));
+				"_130_settings--ntlm.auth.enabled--Checkbox"));
 		assertTrue(selenium.isTextPresent("Domain Controller"));
 		assertTrue(selenium.isTextPresent("Domain"));
 	}

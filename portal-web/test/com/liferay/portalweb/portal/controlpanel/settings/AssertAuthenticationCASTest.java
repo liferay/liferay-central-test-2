@@ -90,7 +90,7 @@ public class AssertAuthenticationCASTest extends BaseTestCase {
 
 			try {
 				if (selenium.isVisible(
-							"_130_settings(cas.auth.enabled)Checkbox")) {
+							"_130_settings--cas.auth.enabled--Checkbox")) {
 					break;
 				}
 			}
@@ -101,9 +101,9 @@ public class AssertAuthenticationCASTest extends BaseTestCase {
 		}
 
 		assertTrue(selenium.isElementPresent(
-				"_130_settings(cas.auth.enabled)Checkbox"));
+				"_130_settings--cas.auth.enabled--Checkbox"));
 		assertTrue(selenium.isElementPresent(
-				"_130_settings(cas.import.from.ldap)Checkbox"));
+				"_130_settings--cas.import.from.ldap--Checkbox"));
 		assertTrue(selenium.isTextPresent("Login URL"));
 		assertTrue(selenium.isTextPresent("Logout URL"));
 		assertTrue(selenium.isTextPresent("Server Name"));

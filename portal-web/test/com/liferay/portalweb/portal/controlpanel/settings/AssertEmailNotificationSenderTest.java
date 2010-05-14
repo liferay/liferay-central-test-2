@@ -90,7 +90,7 @@ public class AssertEmailNotificationSenderTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("_130_settings(admin.email.from.name)")) {
+				if (selenium.isVisible("_130_settings--admin.email.from.name--")) {
 					break;
 				}
 			}
@@ -101,8 +101,8 @@ public class AssertEmailNotificationSenderTest extends BaseTestCase {
 		}
 
 		assertEquals("Joe Bloggs",
-			selenium.getValue("_130_settings(admin.email.from.name)"));
+			selenium.getValue("_130_settings--admin.email.from.name--"));
 		assertEquals("test@liferay.com",
-			selenium.getValue("_130_settings(admin.email.from.address)"));
+			selenium.getValue("_130_settings--admin.email.from.address--"));
 	}
 }

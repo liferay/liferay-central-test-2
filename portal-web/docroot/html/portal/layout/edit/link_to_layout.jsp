@@ -22,14 +22,14 @@
 		<liferay-ui:message key="link-to-layout" />
 	</td>
 	<td>
-		<input name="TypeSettingsProperties(groupId)" type="hidden" value="<%= selLayout.getGroupId() %>" />
-		<input name="TypeSettingsProperties(privateLayout)" type="hidden" value="<%= selLayout.isPrivateLayout() %>" />
+		<input name="TypeSettingsProperties--groupId--" type="hidden" value="<%= selLayout.getGroupId() %>" />
+		<input name="TypeSettingsProperties--privateLayout--" type="hidden" value="<%= selLayout.isPrivateLayout() %>" />
 
 		<%
 		long linkToLayoutId = GetterUtil.getLong(selLayout.getTypeSettingsProperties().getProperty("linkToLayoutId", StringPool.BLANK));
 		%>
 
-		<select name="TypeSettingsProperties(linkToLayoutId)">
+		<select name="TypeSettingsProperties--linkToLayoutId--">
 			<option value=""></option>
 
 			<%

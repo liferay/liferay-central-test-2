@@ -91,7 +91,7 @@ public class AssertAuthenticationSiteMinderTest extends BaseTestCase {
 
 			try {
 				if (selenium.isVisible(
-							"_130_settings(siteminder.auth.enabled)Checkbox")) {
+							"_130_settings--siteminder.auth.enabled--Checkbox")) {
 					break;
 				}
 			}
@@ -102,9 +102,9 @@ public class AssertAuthenticationSiteMinderTest extends BaseTestCase {
 		}
 
 		assertTrue(selenium.isElementPresent(
-				"_130_settings(siteminder.auth.enabled)Checkbox"));
+				"_130_settings--siteminder.auth.enabled--Checkbox"));
 		assertTrue(selenium.isElementPresent(
-				"_130_settings(siteminder.import.from.ldap)Checkbox"));
+				"_130_settings--siteminder.import.from.ldap--Checkbox"));
 		assertTrue(selenium.isTextPresent("User Header"));
 	}
 }

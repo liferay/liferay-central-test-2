@@ -33,7 +33,7 @@ if (fileEntry != null) {
 		<liferay-ui:message key="author" />
 	</td>
 	<td>
-		<input name="extraSettingsProperties(author)" style="width: <%= ModelHintsConstants.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= GetterUtil.getString(extraSettingsProperties.getProperty("author")) %>" />
+		<input name="extraSettingsProperties--author--" style="width: <%= ModelHintsConstants.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= GetterUtil.getString(extraSettingsProperties.getProperty("author")) %>" />
 	</td>
 </tr>
 <tr>
@@ -41,6 +41,6 @@ if (fileEntry != null) {
 		<liferay-ui:message key="type" />
 	</td>
 	<td>
-		<input name="extraSettingsProperties(type)" style="width: <%= ModelHintsConstants.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= GetterUtil.getString(extraSettingsProperties.getProperty("type")) %>" />
+		<input name="extraSettingsProperties--type--" style="width: <%= ModelHintsConstants.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= GetterUtil.getString(extraSettingsProperties.getProperty("type")) %>" />
 	</td>
 </tr>--%>

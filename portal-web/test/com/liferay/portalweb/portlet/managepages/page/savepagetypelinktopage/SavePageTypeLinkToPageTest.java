@@ -137,7 +137,7 @@ public class SavePageTypeLinkToPageTest extends BaseTestCase {
 
 					try {
 						if (selenium.isVisible(
-									"TypeSettingsProperties(linkToLayoutId)")) {
+									"TypeSettingsProperties--linkToLayoutId--")) {
 							break;
 						}
 					}
@@ -149,8 +149,8 @@ public class SavePageTypeLinkToPageTest extends BaseTestCase {
 
 				assertEquals(RuntimeVariables.replace(
 						"- Welcome - Manage Pages Test Page"),
-					selenium.getText("TypeSettingsProperties(linkToLayoutId)"));
-				selenium.select("TypeSettingsProperties(linkToLayoutId)",
+					selenium.getText("TypeSettingsProperties--linkToLayoutId--"));
+				selenium.select("TypeSettingsProperties--linkToLayoutId--",
 					RuntimeVariables.replace("label=regexp:-\\sWelcome"));
 				selenium.click(RuntimeVariables.replace(
 						"//input[@value='Save']"));

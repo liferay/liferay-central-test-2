@@ -164,7 +164,7 @@ public class SavePageTypeWebContentTest extends BaseTestCase {
 
 					try {
 						if (selenium.isVisible(
-									"TypeSettingsProperties(article-id)")) {
+									"TypeSettingsProperties--article-id--")) {
 							break;
 						}
 					}
@@ -174,7 +174,7 @@ public class SavePageTypeWebContentTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.type("TypeSettingsProperties(article-id)",
+				selenium.type("TypeSettingsProperties--article-id--",
 					RuntimeVariables.replace(RuntimeVariables.getValue(
 							"articleID")));
 				selenium.clickAt("//input[@value='Save']",

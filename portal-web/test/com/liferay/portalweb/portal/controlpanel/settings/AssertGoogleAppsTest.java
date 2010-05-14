@@ -71,7 +71,7 @@ public class AssertGoogleAppsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("_130_settings(google.apps.username)")) {
+				if (selenium.isVisible("_130_settings--google.apps.username--")) {
 					break;
 				}
 			}

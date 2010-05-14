@@ -91,7 +91,7 @@ public class EnterReservedUserSNTest extends BaseTestCase {
 
 			try {
 				if (selenium.isVisible(
-							"_130_settings(admin.reserved.screen.names)")) {
+							"_130_settings--admin.reserved.screen.names--")) {
 					break;
 				}
 			}
@@ -101,7 +101,7 @@ public class EnterReservedUserSNTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("_130_settings(admin.reserved.screen.names)",
+		selenium.type("_130_settings--admin.reserved.screen.names--",
 			RuntimeVariables.replace("Liferay"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");

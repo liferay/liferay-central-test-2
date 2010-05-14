@@ -22,7 +22,7 @@
 		<liferay-ui:message key="web-content-id" />
 	</td>
 	<td>
-		<input class="lfr-input-text" name="TypeSettingsProperties(article-id)" type="text" value="<bean:write name="SEL_LAYOUT" property="typeSettingsProperties(article-id)" />" />
+		<input class="lfr-input-text" name="TypeSettingsProperties--article-id--" type="text" value="<bean:write name="SEL_LAYOUT" property="typeSettingsProperties(article-id)" />" />
 	</td>
 </tr>
 </table>

@@ -24,14 +24,14 @@ String[] languageIds = LocaleUtil.toLanguageIds(locales);
 
 String timeZoneId = ParamUtil.getString(request, "timeZoneId", user2.getTimeZoneId());
 String languageId = ParamUtil.getString(request, "languageId", user2.getLanguageId());
-String availableLocales = ParamUtil.getString(request, "settings(" + PropsKeys.LOCALES + ")", StringUtil.merge(languageIds));
+String availableLocales = ParamUtil.getString(request, "settings--" + PropsKeys.LOCALES + "--", StringUtil.merge(languageIds));
 
-boolean companySecurityCommunityLogo = ParamUtil.getBoolean(request, "settings(" + PropsKeys.COMPANY_SECURITY_COMMUNITY_LOGO + ")", company.isCommunityLogo());
+boolean companySecurityCommunityLogo = ParamUtil.getBoolean(request, "settings--" + PropsKeys.COMPANY_SECURITY_COMMUNITY_LOGO + "--", company.isCommunityLogo());
 boolean deleteLogo = ParamUtil.getBoolean(request, "deleteLogo");
 
-String defaultRegularThemeId = ParamUtil.getString(request, "settings(" + PropsKeys.DEFAULT_REGULAR_THEME_ID + ")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.DEFAULT_REGULAR_THEME_ID, PropsValues.DEFAULT_REGULAR_THEME_ID));
-String defaultWapThemeId = ParamUtil.getString(request, "settings(" + PropsKeys.DEFAULT_WAP_THEME_ID + ")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.DEFAULT_WAP_THEME_ID, PropsValues.DEFAULT_WAP_THEME_ID));
-String defaultControlPanelThemeId = ParamUtil.getString(request, "settings(" + PropsKeys.CONTROL_PANEL_LAYOUT_REGULAR_THEME_ID + ")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.CONTROL_PANEL_LAYOUT_REGULAR_THEME_ID, PropsValues.CONTROL_PANEL_LAYOUT_REGULAR_THEME_ID));
+String defaultRegularThemeId = ParamUtil.getString(request, "settings--" + PropsKeys.DEFAULT_REGULAR_THEME_ID + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.DEFAULT_REGULAR_THEME_ID, PropsValues.DEFAULT_REGULAR_THEME_ID));
+String defaultWapThemeId = ParamUtil.getString(request, "settings--" + PropsKeys.DEFAULT_WAP_THEME_ID + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.DEFAULT_WAP_THEME_ID, PropsValues.DEFAULT_WAP_THEME_ID));
+String defaultControlPanelThemeId = ParamUtil.getString(request, "settings--" + PropsKeys.CONTROL_PANEL_LAYOUT_REGULAR_THEME_ID + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.CONTROL_PANEL_LAYOUT_REGULAR_THEME_ID, PropsValues.CONTROL_PANEL_LAYOUT_REGULAR_THEME_ID));
 %>
 
 <h3><liferay-ui:message key="language-and-time-zone" /></h3>
@@ -53,7 +53,7 @@ String defaultControlPanelThemeId = ParamUtil.getString(request, "settings(" + P
 
 	</aui:select>
 
-	<aui:input cssClass="lfr-input-text-container" label="available-languages" name='<%= "settings(" + PropsKeys.LOCALES + ")" %>' type="text" value="<%= availableLocales %>" />
+	<aui:input cssClass="lfr-input-text-container" label="available-languages" name='<%= "settings--" + PropsKeys.LOCALES + "--" %>' type="text" value="<%= availableLocales %>" />
 
 	<aui:input label="time-zone" name="timeZoneId" type="timeZone" value="<%= timeZoneId %>" />
 </aui:fieldset>
@@ -61,7 +61,7 @@ String defaultControlPanelThemeId = ParamUtil.getString(request, "settings(" + P
 <h3><liferay-ui:message key="logo" /></h3>
 
 <aui:fieldset>
-	<aui:input inlineLabel="left" label="allow-community-administrators-to-use-their-own-logo" name='<%= "settings(" + PropsKeys.COMPANY_SECURITY_COMMUNITY_LOGO + ")" %>' type="checkbox" value="<%= companySecurityCommunityLogo %>" />
+	<aui:input inlineLabel="left" label="allow-community-administrators-to-use-their-own-logo" name='<%= "settings--" + PropsKeys.COMPANY_SECURITY_COMMUNITY_LOGO + "--" %>' type="checkbox" value="<%= companySecurityCommunityLogo %>" />
 
 	<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" var="editCompanyLogoURL">
 		<portlet:param name="struts_action" value="/enterprise_admin/edit_company_logo" />
@@ -100,7 +100,7 @@ boolean deployed = false;
 %>
 
 <aui:fieldset>
-	<aui:select label="default-regular-theme" name='<%= "settings(" + PropsKeys.DEFAULT_REGULAR_THEME_ID + ")" %>'>
+	<aui:select label="default-regular-theme" name='<%= "settings--" + PropsKeys.DEFAULT_REGULAR_THEME_ID + "--" %>'>
 
 		<%
 		themes = ThemeLocalServiceUtil.getThemes(company.getCompanyId(), 0, user.getUserId(), false);
@@ -123,7 +123,7 @@ boolean deployed = false;
 		</c:if>
 	</aui:select>
 
-	<aui:select label="default-mobile-theme" name='<%= "settings(" + PropsKeys.DEFAULT_REGULAR_THEME_ID + ")" %>'>
+	<aui:select label="default-mobile-theme" name='<%= "settings--" + PropsKeys.DEFAULT_REGULAR_THEME_ID + "--" %>'>
 
 		<%
 		themes = ThemeLocalServiceUtil.getThemes(company.getCompanyId(), 0, user.getUserId(), true);
@@ -146,7 +146,7 @@ boolean deployed = false;
 		</c:if>
 	</aui:select>
 
-	<aui:select label="default-control-panel-theme" name='<%= "settings(" + PropsKeys.CONTROL_PANEL_LAYOUT_REGULAR_THEME_ID + ")" %>'>
+	<aui:select label="default-control-panel-theme" name='<%= "settings--" + PropsKeys.CONTROL_PANEL_LAYOUT_REGULAR_THEME_ID + "--" %>'>
 
 		<%
 		themes = ThemeLocalServiceUtil.getThemes(company.getCompanyId(), 0, user.getUserId(), false);

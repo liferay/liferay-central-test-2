@@ -22,7 +22,7 @@
 		<liferay-ui:message key="url" />
 	</td>
 	<td>
-		<input class="lfr-input-text" name="TypeSettingsProperties(url)" type="text" value="<bean:write name="SEL_LAYOUT" property="typeSettingsProperties(url)" />" />
+		<input class="lfr-input-text" name="TypeSettingsProperties--url--" type="text" value="<bean:write name="SEL_LAYOUT" property="typeSettingsProperties(url)" />" />
 	</td>
 </tr>
 <tr>
@@ -30,7 +30,7 @@
 		<liferay-ui:message key="description" />
 	</td>
 	<td>
-		<textarea class="lfr-textarea" name="TypeSettingsProperties(description)" wrap="soft"><bean:write name="SEL_LAYOUT" property="typeSettingsProperties(description)" /></textarea>
+		<textarea class="lfr-textarea" name="TypeSettingsProperties--description--" wrap="soft"><bean:write name="SEL_LAYOUT" property="typeSettingsProperties(description)" /></textarea>
 	</td>
 </tr>
 </table>

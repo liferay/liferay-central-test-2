@@ -402,7 +402,7 @@ public class EditPagesAction extends PortletAction {
 		ActionRequest actionRequest) {
 
 		return PropertiesParamUtil.getProperties(
-			actionRequest, "TypeSettingsProperties(");
+			actionRequest, "TypeSettingsProperties--");
 	}
 
 	protected void updateDisplayOrder(ActionRequest actionRequest)

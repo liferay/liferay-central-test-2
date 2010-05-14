@@ -55,7 +55,7 @@ public class EnableLDAPTest extends BaseTestCase {
 
 			try {
 				if (selenium.isVisible(
-							"_130_settings(ldap.auth.enabled)Checkbox")) {
+							"_130_settings--ldap.auth.enabled--Checkbox")) {
 					break;
 				}
 			}
@@ -65,7 +65,7 @@ public class EnableLDAPTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("_130_settings(ldap.auth.enabled)Checkbox");
+		selenium.click("_130_settings--ldap.auth.enabled--Checkbox");
 		selenium.click("//input[@name='_130_defaultLdap' and @value='apache']");
 		selenium.click("//input[@value='Reset Values']");
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));

@@ -341,9 +341,9 @@ public class PropertiesParamUtil {
 		UnicodeProperties properties = new UnicodeProperties(true);
 
 		for (String param : portletRequest.getParameterMap().keySet()) {
-			if (param.startsWith(prefix) && !param.endsWith(")Checkbox")) {
+			if (param.startsWith(prefix) && !param.endsWith("--Checkbox")) {
 				String key = param.substring(
-					prefix.length(), param.length() - 1);
+					prefix.length(), param.length() - 2);
 				String value = portletRequest.getParameter(param);
 
 				properties.setProperty(key, value);

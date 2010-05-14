@@ -91,7 +91,7 @@ public class AssertAuthenticationGeneralTest extends BaseTestCase {
 
 			try {
 				if (selenium.isVisible(
-							"_130_settings(company.security.auth.type)")) {
+							"_130_settings--company.security.auth.type--")) {
 					break;
 				}
 			}

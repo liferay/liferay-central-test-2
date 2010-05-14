@@ -23,7 +23,7 @@
 		<liferay-ui:message key="description" />
 	</td>
 	<td>
-		<textarea class="lfr-textarea" name="TypeSettingsProperties(description)" wrap="soft"><bean:write name="SEL_LAYOUT" property="typeSettingsProperties(description)" /></textarea>
+		<textarea class="lfr-textarea" name="TypeSettingsProperties--description--" wrap="soft"><bean:write name="SEL_LAYOUT" property="typeSettingsProperties(description)" /></textarea>
 	</td>
 </tr>
 </table>
@@ -34,7 +34,7 @@
 	<liferay-ui:message key="select-the-applications-that-will-be-available-in-the-panel" />
 </div>
 
-<input id="<portlet:namespace />panelSelectedPortlets" name="TypeSettingsProperties(panelSelectedPortlets)" type="hidden" value="<bean:write name="SEL_LAYOUT" property="typeSettingsProperties(panelSelectedPortlets)" />" />
+<input id="<portlet:namespace />panelSelectedPortlets" name="TypeSettingsProperties--panelSelectedPortlets--" type="hidden" value="<bean:write name="SEL_LAYOUT" property="typeSettingsProperties(panelSelectedPortlets)" />" />
 
 <%
 String panelTreeKey = "panelSelectedPortletsPanelTree";

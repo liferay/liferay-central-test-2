@@ -92,7 +92,7 @@ public class AssertUsersDefaultAssociationsTest extends BaseTestCase {
 
 			try {
 				if (selenium.isVisible(
-							"_130_settings(admin.default.group.names)")) {
+							"_130_settings--admin.default.group.names--")) {
 					break;
 				}
 			}
@@ -104,12 +104,12 @@ public class AssertUsersDefaultAssociationsTest extends BaseTestCase {
 
 		assertTrue(selenium.isTextPresent("Communities"));
 		assertTrue(selenium.isElementPresent(
-				"_130_settings(admin.default.group.names)"));
+				"_130_settings--admin.default.group.names--"));
 		assertTrue(selenium.isTextPresent("Roles"));
 		assertTrue(selenium.isElementPresent(
-				"_130_settings(admin.default.role.names)"));
+				"_130_settings--admin.default.role.names--"));
 		assertTrue(selenium.isTextPresent("User Groups"));
 		assertTrue(selenium.isElementPresent(
-				"_130_settings(admin.default.user.group.names)"));
+				"_130_settings--admin.default.user.group.names--"));
 	}
 }

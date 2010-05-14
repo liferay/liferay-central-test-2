@@ -84,12 +84,12 @@ public class AssertUsersFieldsSettingsTest extends BaseTestCase {
 
 		selenium.clickAt("link=Fields", RuntimeVariables.replace(""));
 		assertTrue(selenium.isElementPresent(
-				"_130_settings(terms.of.use.required)Checkbox"));
+				"_130_settings--terms.of.use.required--Checkbox"));
 		assertTrue(selenium.isElementPresent(
-				"_130_settings(users.screen.name.always.autogenerate)Checkbox"));
+				"_130_settings--users.screen.name.always.autogenerate--Checkbox"));
 		assertTrue(selenium.isElementPresent(
-				"_130_settings(field.enable.com.liferay.portal.model.Contact.birthday)Checkbox"));
+				"_130_settings--field.enable.com.liferay.portal.model.Contact.birthday--Checkbox"));
 		assertTrue(selenium.isElementPresent(
-				"_130_settings(field.enable.com.liferay.portal.model.Contact.male)Checkbox"));
+				"_130_settings--field.enable.com.liferay.portal.model.Contact.male--Checkbox"));
 	}
 }

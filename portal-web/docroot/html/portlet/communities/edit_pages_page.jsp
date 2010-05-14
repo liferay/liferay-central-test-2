@@ -265,7 +265,7 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 						}
 						%>
 
-						<input name="TypeSettingsProperties(query-string)" size="30" type="text" value="<%= HtmlUtil.escape(queryString) %>" />
+						<input name="TypeSettingsProperties--query-string--" size="30" type="text" value="<%= HtmlUtil.escape(queryString) %>" />
 
 						<liferay-ui:icon-help message="query-string-help" />
 					</td>
@@ -311,7 +311,7 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 					curTarget = StringPool.BLANK;
 				}
 				%>
-				<input name="TypeSettingsProperties(target)" size="15" type="text" value="<%= curTarget %>" />
+				<input name="TypeSettingsProperties--target--" size="15" type="text" value="<%= curTarget %>" />
 			</td>
 		</tr>
 

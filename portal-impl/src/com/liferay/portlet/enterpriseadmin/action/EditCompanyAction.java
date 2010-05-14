@@ -140,7 +140,7 @@ public class EditCompanyAction extends PortletAction {
 		List<Phone> phones = EnterpriseAdminUtil.getPhones(actionRequest);
 		List<Website> websites = EnterpriseAdminUtil.getWebsites(actionRequest);
 		UnicodeProperties properties = PropertiesParamUtil.getProperties(
-			actionRequest, "settings(");
+			actionRequest, "settings--");
 
 		CompanyServiceUtil.updateCompany(
 			companyId, virtualHost, mx, homeURL, name, legalName, legalId,
@@ -160,7 +160,7 @@ public class EditCompanyAction extends PortletAction {
 
 		boolean communityLogo = ParamUtil.getBoolean(
 			actionRequest,
-			"settings(" + PropsKeys.COMPANY_SECURITY_COMMUNITY_LOGO + ")");
+			"settings--" + PropsKeys.COMPANY_SECURITY_COMMUNITY_LOGO + "--");
 
 		CompanyServiceUtil.updateSecurity(
 			company.getCompanyId(), company.getAuthType(),

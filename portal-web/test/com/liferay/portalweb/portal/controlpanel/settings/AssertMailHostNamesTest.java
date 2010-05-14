@@ -71,7 +71,7 @@ public class AssertMailHostNamesTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("_130_settings(admin.mail.host.names)")) {
+				if (selenium.isVisible("_130_settings--admin.mail.host.names--")) {
 					break;
 				}
 			}
@@ -85,6 +85,6 @@ public class AssertMailHostNamesTest extends BaseTestCase {
 		assertTrue(selenium.isTextPresent(
 				"Enter one mail host name per line for all additional mail host names besides liferay.com."));
 		assertTrue(selenium.isElementPresent(
-				"_130_settings(admin.mail.host.names)"));
+				"_130_settings--admin.mail.host.names--"));
 	}
 }
