@@ -158,9 +158,6 @@ if (Validator.isNotNull(primarySearch)) {
 			List<Element> entries = root.elements("entry");
 
 			int total = GetterUtil.getInteger(root.elementText(OpenSearchUtil.getQName("totalResults", OpenSearchUtil.OS_NAMESPACE)));
-			int hiddenArticlesTotal = 0;
-
-			searchContainer.setTotal(total);
 
 			resultRows = searchContainer.getResultRows();
 
@@ -205,15 +202,14 @@ if (Validator.isNotNull(primarySearch)) {
 				StringBundler rowSB = new StringBundler();
 
 				if (portlet.getPortletId().equals(PortletKeys.JOURNAL)) {
-					// LPS-3206
-
 					long articleGroupId = GetterUtil.getLong(HttpUtil.getParameter(entryHref, "groupId", false));
 					String articleId = GetterUtil.getString(HttpUtil.getParameter(entryHref, "articleId", false));
 
 					JournalArticle article = JournalArticleLocalServiceUtil.getArticle(articleGroupId, articleId);
 
-					if (Validator.isNotNull(article) && DateUtil.compareTo(article.getDisplayDate(), new Date()) > 0) {
-						hiddenArticlesTotal++;
+					if (DateUtil.compareTo(article.getDisplayDate(), new Date()) > 0) {
+						total--;
+
 						continue;
 					}
 
@@ -291,7 +287,7 @@ if (Validator.isNotNull(primarySearch)) {
 				resultRows.add(row);
 			}
 
-			searchContainer.setTotal(total - hiddenArticlesTotal);
+			searchContainer.setTotal(total);
 		}
 		catch (Exception e) {
 			_log.error(portlet.getOpenSearchClass() + " " + e.getMessage());
