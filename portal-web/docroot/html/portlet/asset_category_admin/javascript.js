@@ -937,7 +937,10 @@ AUI().add(
 
 						Liferay.Service.Asset.AssetCategory.getVocabularyCategories(
 							{
-								vocabularyId: vocabularyId
+								vocabularyId: vocabularyId,
+								start: -1,
+								end: -1,
+								obc: null
 							},
 							callback
 						);
