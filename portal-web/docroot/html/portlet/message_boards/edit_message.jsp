@@ -313,7 +313,7 @@ boolean allowPingbacks = PropsValues.MESSAGE_BOARDS_PINGBACK_ENABLED && BeanPara
 		</c:if>
 
 		<%
-		String taglibOnClick = "javascript:if (" + attachments + ") { if (confirm('" + UnicodeLanguageUtil.get(pageContext, "previewing-this-entry-will-lose-attachments-are-you-sure-you-want-to-preview-this") + "')) { document." + renderResponse.getNamespace() + "fm." + renderResponse.getNamespace() + "body.value = " + renderResponse.getNamespace() + "getHTML(); document." + renderResponse.getNamespace() + "fm." + renderResponse.getNamespace() + "preview.value = 'true'; submitForm(document." + renderResponse.getNamespace() + "fm); } else { self.focus(); }} else {document." + renderResponse.getNamespace() + "fm." + renderResponse.getNamespace() + "body.value = " + renderResponse.getNamespace() + "getHTML(); document." + renderResponse.getNamespace() + "fm." + renderResponse.getNamespace() + "preview.value = 'true'; submitForm(document." + renderResponse.getNamespace() + "fm);}";
+		String taglibOnClick = "document." + renderResponse.getNamespace() + "fm." + renderResponse.getNamespace() + "body.value = " + renderResponse.getNamespace() + "getHTML(); document." + renderResponse.getNamespace() + "fm." + renderResponse.getNamespace() + "preview.value = 'true'; submitForm(document." + renderResponse.getNamespace() + "fm);";
 		%>
 
 		<aui:button onClick="<%= taglibOnClick %>" value="preview" />
