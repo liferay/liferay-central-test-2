@@ -129,7 +129,7 @@ public class IconMenuTag extends BodyTagSupport {
 			(HttpServletRequest)pageContext.getRequest();
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
-					WebKeys.THEME_DISPLAY);
+			WebKeys.THEME_DISPLAY);
 
 		String icon = _icon;
 
