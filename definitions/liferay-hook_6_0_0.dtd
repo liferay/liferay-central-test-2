@@ -35,6 +35,7 @@ image.hook.impl
 javascript.fast.load
 layout.static.portlets.all
 layout.template.cache.enabled
+layout.types
 layout.user.private.layouts.auto.create
 layout.user.private.layouts.enabled
 layout.user.private.layouts.modifiable

@@ -151,6 +151,7 @@ public class HookHotDeployListener
 		"javascript.fast.load",
 		"layout.static.portlets.all",
 		"layout.template.cache.enabled",
+		"layout.types",
 		"layout.user.private.layouts.auto.create",
 		"layout.user.private.layouts.enabled",
 		"layout.user.private.layouts.modifiable",
@@ -1591,6 +1592,7 @@ public class HookHotDeployListener
 
 	private static final String[] _PROPS_VALUES_STRING_ARRAY = new String[] {
 		"layout.static.portlets.all",
+		"layout.types",
 		"session.phishing.protected.attributes"
 	};
 
