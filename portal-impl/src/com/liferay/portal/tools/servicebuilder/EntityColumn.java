@@ -28,14 +28,15 @@ public class EntityColumn implements Cloneable {
 	public EntityColumn(String name) {
 		this(
 			name, null, null, false, null, null, null, true, true, null, null,
-			null, true, false);
+			null, true, false, null);
 	}
 
 	public EntityColumn(
 		String name, String dbName, String type, boolean primary,
 		String ejbName, String mappingKey, String mappingTable,
 		boolean caseSensitive, boolean orderByAscending, String comparator,
-		String idType, String idParam, boolean convertNull, boolean localized) {
+		String idType, String idParam, boolean convertNull, boolean localized,
+		String validation) {
 
 		_name = name;
 		_dbName = dbName;
@@ -52,16 +53,19 @@ public class EntityColumn implements Cloneable {
 		_idParam = idParam;
 		_convertNull = convertNull;
 		_localized = localized;
+		_validation = validation;
 	}
 
 	public EntityColumn(
 		String name, String dbName, String type, boolean primary,
 		String ejbName, String mappingKey, String mappingTable, String idType,
-		String idParam, boolean convertNull, boolean localized) {
+		String idParam, boolean convertNull, boolean localized,
+		String validation) {
 
 		this(
 			name, dbName, type, primary, ejbName, mappingKey, mappingTable,
-			true, true, null, idType, idParam, convertNull, localized);
+			true, true, null, idType, idParam, convertNull, localized,
+			validation);
 	}
 
 	public Object clone() {
@@ -69,7 +73,7 @@ public class EntityColumn implements Cloneable {
 			getName(), getDBName(), getType(), isPrimary(), getEJBName(),
 			getMappingKey(), getMappingTable(), isCaseSensitive(),
 			isOrderByAscending(), getComparator(), getIdType(), getIdParam(),
-			isConvertNull(), isLocalized());
+			isConvertNull(), isLocalized(), getValidation());
 	}
 
 	public boolean equals(Object obj) {
@@ -141,8 +145,16 @@ public class EntityColumn implements Cloneable {
 		return _name.substring(0, _name.length() - 2) + "Uuid";
 	}
 
+	public String getValidation() {
+		return _validation;
+	}
+
 	public int hashCode() {
 		return _name.hashCode();
+	}
+
+	public boolean hasValidation() {
+		return Validator.isNotNull(_validation);
 	}
 
 	public boolean isCaseSensitive() {
@@ -240,6 +252,10 @@ public class EntityColumn implements Cloneable {
 		_orderByAscending = orderByAscending;
 	}
 
+	public void setValidation(String validation) {
+		_validation = validation;
+	}
+
 	private boolean _caseSensitive;
 	private String _comparator;
 	private boolean _convertNull;
@@ -256,5 +272,6 @@ public class EntityColumn implements Cloneable {
 	private boolean _orderByAscending;
 	private boolean _primary;
 	private String _type;
+	private String _validation;
 
 }

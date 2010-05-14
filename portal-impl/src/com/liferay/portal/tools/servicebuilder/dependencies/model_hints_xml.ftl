@@ -23,6 +23,10 @@
 						localized="true"
 					</#if>
 
+					<#if column.hasValidation()>
+						validation="${column.validation}"
+					</#if>
+						
 					<#assign closeField = false>
 
 					<#if modelHintsUtil.getFieldsEl(modelName, column.name)??>

@@ -703,11 +703,13 @@ public class ServiceBuilder {
 						column.attributeValue("convert-null"), true);
 					boolean localized = GetterUtil.getBoolean(
 						column.attributeValue("localized"));
+					String validation = GetterUtil.getString(
+							column.attributeValue("validation"));
 
 					EntityColumn col = new EntityColumn(
 						columnName, columnDBName, columnType, primary,
 						collectionEntity, mappingKey, mappingTable, idType,
-						idParam, convertNull, localized);
+						idParam, convertNull, localized, validation);
 
 					if (primary) {
 						pkList.add(col);
