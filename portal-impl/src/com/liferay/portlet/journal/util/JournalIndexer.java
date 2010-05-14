@@ -182,13 +182,7 @@ public class JournalIndexer extends BaseIndexer {
 	}
 
 	protected String encodeFieldName(String name) {
-		StringBundler sb = new StringBundler(3);
-
-		sb.append(_FIELD_NAMESPACE);
-		sb.append(StringPool.FORWARD_SLASH);
-		sb.append(name);
-
-		return sb.toString();
+		return _FIELD_NAMESPACE.concat(StringPool.FORWARD_SLASH).concat(name);
 	}
 
 	protected String getIndexableContent(Document document, Element rootElement)
@@ -264,7 +258,6 @@ public class JournalIndexer extends BaseIndexer {
 
 		String fieldName = encodeFieldName(
 			element.attributeValue("name", StringPool.BLANK));
-
 		String[] value = new String[] {dynamicContentElement.getText()};
 
 		if (elType.equals("multi-list")) {
