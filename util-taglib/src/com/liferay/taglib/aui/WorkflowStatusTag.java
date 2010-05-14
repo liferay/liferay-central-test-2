@@ -51,8 +51,8 @@ public class WorkflowStatusTag extends IncludeTag {
 		_bean = null;
 		_id = null;
 		_model = null;
-		_version = 0;
 		_status = 0;
+		_version = 0;
 	}
 
 	protected String getPage() {
@@ -94,7 +94,7 @@ public class WorkflowStatusTag extends IncludeTag {
 	private Object _bean;
 	private String _id;
 	private Class<?> _model;
-	private double _version;
 	int _status;
+	private double _version;
 
 }
