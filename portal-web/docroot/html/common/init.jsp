@@ -174,6 +174,7 @@
 <%@ page import="com.liferay.portlet.PortletConfigImpl" %>
 <%@ page import="com.liferay.portlet.PortletInstanceFactoryUtil" %>
 <%@ page import="com.liferay.portlet.PortletPreferencesFactoryUtil" %>
+<%@ page import="com.liferay.portlet.PortletResponseImpl" %>
 <%@ page import="com.liferay.portlet.PortletSetupUtil" %>
 <%@ page import="com.liferay.portlet.PortletURLImpl" %>
 <%@ page import="com.liferay.portlet.PortletURLUtil" %>

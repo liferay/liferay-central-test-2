@@ -183,6 +183,7 @@ import javax.portlet.PortletResponse;
 import javax.portlet.PortletURL;
 import javax.portlet.PreferencesValidator;
 import javax.portlet.RenderRequest;
+import javax.portlet.RenderResponse;
 import javax.portlet.ValidatorException;
 import javax.portlet.WindowState;
 import javax.portlet.filter.PortletRequestWrapper;
@@ -2454,6 +2455,13 @@ public class PortalImpl implements Portal {
 
 	public String getPortletTitle(Portlet portlet, User user) {
 		return getPortletTitle(portlet.getPortletId(), user);
+	}
+
+	public String getPortletTitle(RenderResponse response) {
+		PortletResponseImpl portletResponseImpl =
+				PortletResponseImpl.getPortletResponseImpl(response);
+
+		return ((RenderResponseImpl)portletResponseImpl).getTitle();
 	}
 
 	public String getPortletTitle(String portletId, Locale locale) {

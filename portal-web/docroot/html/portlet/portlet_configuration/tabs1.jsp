@@ -121,7 +121,7 @@ if (tabs1Names.startsWith(",")) {
 
 String tabs1 = ParamUtil.getString(request, "tabs1");
 
-PortalUtil.addPortletBreadcrumbEntry(request, ((RenderResponseImpl)renderResponse).getTitle(), null);
+PortalUtil.addPortletBreadcrumbEntry(request, PortalUtil.getPortletTitle(renderResponse), null);
 PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "configuration"), null);
 PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, tabs1), currentURL);
 %>

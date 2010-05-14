@@ -19,9 +19,9 @@
 <portlet:defineObjects />
 
 <%
-RenderResponseImpl renderResponseImpl = (RenderResponseImpl)renderResponse;
+//RenderResponseImpl renderResponseImpl = (RenderResponseImpl)renderResponse;
 
-String portletTitle = renderResponseImpl.getTitle();
+String portletTitle = PortalUtil.getPortletTitle(renderResponse);
 
 if (portletTitle == null) {
 	portletTitle = LanguageUtil.get(pageContext, "portlet");

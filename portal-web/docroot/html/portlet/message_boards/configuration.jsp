@@ -147,7 +147,7 @@ else if (tabs2.equals("message-updated-email")) {
 						[$PORTLET_NAME$]
 					</dt>
 					<dd>
-						<%= ((RenderResponseImpl)renderResponse).getTitle() %>
+						<%= PortalUtil.getPortletTitle(renderResponse) %>
 					</dd>
 				</dl>
 			</div>
@@ -269,7 +269,7 @@ else if (tabs2.equals("message-updated-email")) {
 						[$PORTLET_NAME$]
 					</dt>
 					<dd>
-						<%= ((RenderResponseImpl)renderResponse).getTitle() %>
+						<%= PortalUtil.getPortletTitle(renderResponse) %>
 					</dd>
 					<dt>
 						[$TO_ADDRESS$]

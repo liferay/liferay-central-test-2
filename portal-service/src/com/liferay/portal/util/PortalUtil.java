@@ -54,6 +54,7 @@ import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
 import javax.portlet.PreferencesValidator;
 import javax.portlet.RenderRequest;
+import javax.portlet.RenderResponse;
 import javax.portlet.ValidatorException;
 import javax.portlet.WindowState;
 
@@ -736,6 +737,10 @@ public class PortalUtil {
 
 	public static String getPortletTitle(Portlet portlet, User user) {
 		return getPortal().getPortletTitle(portlet, user);
+	}
+
+	public static String getPortletTitle(RenderResponse response) {
+		return getPortal().getPortletTitle(response);
 	}
 
 	public static String getPortletTitle(String portletId, Locale locale) {
