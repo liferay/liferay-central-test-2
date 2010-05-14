@@ -21,12 +21,11 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 MBMessage message = (MBMessage)request.getAttribute(WebKeys.MESSAGE_BOARDS_MESSAGE);
 
-MBThread thread = MBThreadLocalServiceUtil.getThread(message.getThreadId());
-
 long messageId = message.getMessageId();
 
 long categoryId = BeanParamUtil.getLong(message, request, "mbCategoryId");
-long threadId = message.getThreadId();
+
+MBThread thread = message.getThread();
 
 MBMessage curParentMessage = null;
 String parentAuthor = null;
@@ -40,7 +39,7 @@ boolean quote = false;
 </portlet:actionURL>
 
 <aui:form action="<%= moveThreadURL %>" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "moveThread();" %>'>
-	<aui:input name="threadId" type="hidden" value="<%= threadId %>" />
+	<aui:input name="threadId" type="hidden" value="<%= thread.getThreadId() %>" />
 	<aui:input name="mbCategoryId" type="hidden" value="<%= categoryId %>" />
 
 	<liferay-ui:tabs
