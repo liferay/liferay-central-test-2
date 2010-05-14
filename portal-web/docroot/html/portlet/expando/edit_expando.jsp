@@ -237,6 +237,13 @@ portletURL.setParameter("modelResource", modelResource);
 				<aui:option label="false" selected="<%= !propertyHidden %>" value="0" />
 			</aui:select>
 
+			<aui:input type="hidden" name="PropertyName(indexable)" value="indexable" />
+
+			<aui:select helpMessage="custom-field-indexable-help" label="searchable" name="Property(indexable)">
+				<aui:option label="true" selected="<%= propertyIndexable %>" value="1" />
+				<aui:option label="false" selected="<%= !propertyIndexable %>" value="0" />
+			</aui:select>
+
 			<c:if test="<%= (type == ExpandoColumnConstants.DOUBLE_ARRAY) || (type == ExpandoColumnConstants.FLOAT_ARRAY) || (type == ExpandoColumnConstants.INTEGER_ARRAY) || (type == ExpandoColumnConstants.LONG_ARRAY) || (type == ExpandoColumnConstants.SHORT_ARRAY) || (type == ExpandoColumnConstants.STRING_ARRAY) %>">
 				<aui:input type="hidden" name="PropertyName(selection)" value="selection" />
 
@@ -247,13 +254,6 @@ portletURL.setParameter("modelResource", modelResource);
 			</c:if>
 
 			<c:if test="<%= type == ExpandoColumnConstants.STRING %>">
-				<aui:input type="hidden" name="PropertyName(indexable)" value="indexable" />
-
-				<aui:select helpMessage="custom-field-indexable-help" label="searchable" name="Property(indexable)">
-					<aui:option label="true" selected="<%= propertyIndexable %>" value="1" />
-					<aui:option label="false" selected="<%= !propertyIndexable %>" value="0" />
-				</aui:select>
-
 				<aui:input type="hidden" name="PropertyName(secret)" value="secret" />
 
 				<aui:select helpMessage="custom-field-secret-help" label="secret" name="Property(secret)">

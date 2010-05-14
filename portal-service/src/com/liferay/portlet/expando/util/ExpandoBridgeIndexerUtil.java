@@ -30,6 +30,10 @@ public class ExpandoBridgeIndexerUtil {
 		getExpandoBridgeIndexer().addAttributes(doc, expandoBridge);
 	}
 
+	public static String encodeFieldName(String columnName) {
+		return getExpandoBridgeIndexer().encodeFieldName(columnName);
+	}
+
 	public static ExpandoBridgeIndexer getExpandoBridgeIndexer() {
 		return _expandoBridgeIndexer;
 	}

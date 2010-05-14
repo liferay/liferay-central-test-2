@@ -20,11 +20,16 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.model.ExpandoColumn;
+import com.liferay.portlet.expando.model.ExpandoColumnConstants;
 import com.liferay.portlet.expando.model.ExpandoTableConstants;
 import com.liferay.portlet.expando.model.ExpandoValue;
+import com.liferay.portlet.expando.model.impl.ExpandoValueImpl;
 import com.liferay.portlet.expando.service.ExpandoColumnLocalServiceUtil;
 import com.liferay.portlet.expando.service.ExpandoValueLocalServiceUtil;
 
@@ -49,6 +54,18 @@ public class ExpandoBridgeIndexerImpl implements ExpandoBridgeIndexer {
 		catch (SystemException se) {
 			_log.error(se, se);
 		}
+	}
+
+	public String encodeFieldName(String columnName) {
+		StringBundler sb = new StringBundler(3);
+
+		sb.append(_FIELD_NAMESPACE);
+		sb.append(StringPool.FORWARD_SLASH);
+		sb.append(ExpandoTableConstants.DEFAULT_TABLE_NAME.toLowerCase());
+		sb.append(StringPool.FORWARD_SLASH);
+		sb.append(columnName);
+
+		return sb.toString();
 	}
 
 	protected void doAddAttributes(Document doc, ExpandoBridge expandoBridge)
@@ -89,25 +106,130 @@ public class ExpandoBridgeIndexerImpl implements ExpandoBridgeIndexer {
 
 		for (ExpandoColumn expandoColumn : indexedColumns) {
 			try {
-				String value = expandoColumn.getDefaultData();
+				String fieldName = encodeFieldName(expandoColumn.getName());
+
+				boolean defaultValue = true;
+				ExpandoValue curValue = new ExpandoValueImpl();
+
+				curValue.setData(expandoColumn.getDefaultData());
+				curValue.setColumnId(expandoColumn.getColumnId());
 
 				for (ExpandoValue expandoValue : expandoValues) {
 					if (expandoValue.getColumnId() ==
 							expandoColumn.getColumnId()) {
 
-						value = expandoValue.getData();
+						curValue = expandoValue;
+						defaultValue = false;
 
 						break;
 					}
 				}
 
-				doc.addText(expandoColumn.getName(), value);
+				if (expandoColumn.getType() ==
+							ExpandoColumnConstants.BOOLEAN) {
+
+					doc.addKeyword(fieldName, curValue.getBoolean());
+				}
+				else if (expandoColumn.getType() ==
+							ExpandoColumnConstants.BOOLEAN_ARRAY) {
+
+					doc.addKeyword(
+						fieldName,
+						(!defaultValue ? curValue.getBooleanArray() :
+							new boolean[0]));
+				}
+				else if (expandoColumn.getType() ==
+							ExpandoColumnConstants.DATE) {
+
+					doc.addDate(fieldName, curValue.getDate());
+				}
+				else if (expandoColumn.getType() ==
+							ExpandoColumnConstants.DOUBLE) {
+
+					doc.addKeyword(fieldName, curValue.getDouble());
+				}
+				else if (expandoColumn.getType() ==
+							ExpandoColumnConstants.DOUBLE_ARRAY) {
+
+					doc.addKeyword(
+						fieldName,
+						(!defaultValue ? curValue.getDoubleArray() :
+							new double[0]));
+				}
+				else if (expandoColumn.getType() ==
+							ExpandoColumnConstants.FLOAT) {
+
+					doc.addKeyword(fieldName, curValue.getFloat());
+				}
+				else if (expandoColumn.getType() ==
+							ExpandoColumnConstants.FLOAT_ARRAY) {
+
+					doc.addKeyword(
+						fieldName,
+						(!defaultValue ?
+							StringUtil.merge(curValue.getFloatArray()) :
+							StringPool.BLANK));
+				}
+				else if (expandoColumn.getType() ==
+							ExpandoColumnConstants.INTEGER) {
+
+					doc.addKeyword(fieldName, curValue.getInteger());
+				}
+				else if (expandoColumn.getType() ==
+							ExpandoColumnConstants.INTEGER_ARRAY) {
+
+					doc.addKeyword(
+						fieldName,
+						(!defaultValue ? curValue.getIntegerArray() :
+							new int[0]));
+				}
+				else if (expandoColumn.getType() ==
+							ExpandoColumnConstants.LONG) {
+
+					doc.addKeyword(fieldName, curValue.getLong());
+				}
+				else if (expandoColumn.getType() ==
+							ExpandoColumnConstants.LONG_ARRAY) {
+
+					doc.addKeyword(
+						fieldName,
+						(!defaultValue ? curValue.getLongArray() :
+							new long[0]));
+				}
+				else if (expandoColumn.getType() ==
+							ExpandoColumnConstants.SHORT) {
+
+					doc.addKeyword(fieldName, curValue.getShort());
+				}
+				else if (expandoColumn.getType() ==
+							ExpandoColumnConstants.SHORT_ARRAY) {
+
+					doc.addKeyword(
+						fieldName,
+						(!defaultValue ? curValue.getShortArray() :
+							new short[0]));
+				}
+				else if (expandoColumn.getType() ==
+							ExpandoColumnConstants.STRING) {
+
+					doc.addText(fieldName, curValue.getString());
+				}
+				else if (expandoColumn.getType() ==
+							ExpandoColumnConstants.STRING_ARRAY) {
+
+					doc.addKeyword(
+						fieldName,
+						(!defaultValue ? curValue.getStringArray() :
+							new String[0]));
+				}
 			}
 			catch (Exception e) {
 				_log.error("Indexing " + expandoColumn.getName(), e);
 			}
 		}
 	}
+
+	protected static final String _FIELD_NAMESPACE = "expando";
 
 	private static Log _log = LogFactoryUtil.getLog(
 		ExpandoBridgeIndexerImpl.class);

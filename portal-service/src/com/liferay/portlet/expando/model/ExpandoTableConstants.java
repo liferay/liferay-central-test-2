@@ -21,6 +21,6 @@ package com.liferay.portlet.expando.model;
  */
 public class ExpandoTableConstants {
 
-	public static final String DEFAULT_TABLE_NAME = "DEFAULT_TABLE";
+	public static final String DEFAULT_TABLE_NAME = "CUSTOM_FIELDS";
 
 }

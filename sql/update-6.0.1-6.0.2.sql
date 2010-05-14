@@ -1,5 +1,9 @@
 alter table AssetEntry add socialInformationEquity DOUBLE;
 
+update ExpandoTable set name = 'CUSTOM_FIELDS' where name = 'DEFAULT_TABLE'
+
+COMMIT_TRANSACTION;
+
 alter table LayoutSet add settings_ TEXT null;
 
 alter table PasswordPolicy add minAlphaNumeric INTEGER;

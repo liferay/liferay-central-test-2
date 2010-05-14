@@ -28,4 +28,6 @@ public interface ExpandoBridgeIndexer {
 
 	public void addAttributes(Document doc, ExpandoBridge expandoBridge);
 
+	public String encodeFieldName(String columnName);
+
 }

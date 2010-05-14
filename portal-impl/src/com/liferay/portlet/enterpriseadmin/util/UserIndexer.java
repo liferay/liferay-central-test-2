@@ -38,7 +38,6 @@ import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
 import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
-import com.liferay.portlet.expando.model.ExpandoColumnConstants;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 import com.liferay.portlet.expando.util.ExpandoBridgeIndexer;
 import com.liferay.portlet.expando.util.ExpandoBridgeIndexerUtil;
@@ -141,16 +140,16 @@ public class UserIndexer extends BaseIndexer {
 			if (GetterUtil.getBoolean(
 					properties.getProperty(ExpandoBridgeIndexer.INDEXABLE))) {
 
-				int type = expandoBridge.getAttributeType(key);
+				String fieldName = ExpandoBridgeIndexerUtil.encodeFieldName(
+					key);
 
-				if ((type == ExpandoColumnConstants.STRING) &&
-					(Validator.isNotNull((String)value))) {
-
+				if (Validator.isNotNull((String)value)) {
 					if (andSearch) {
-						searchQuery.addRequiredTerm(key, (String)value, true);
+						searchQuery.addRequiredTerm(
+							fieldName, (String)value, true);
 					}
 					else {
-						searchQuery.addTerm(key, (String)value, true);
+						searchQuery.addTerm(fieldName, (String)value, true);
 					}
 				}
 			}
