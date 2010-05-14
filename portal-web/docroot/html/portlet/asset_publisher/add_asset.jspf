@@ -26,8 +26,8 @@ Map<String, PortletURL> addPortletURLs = getAddPortletURLs(renderRequest, render
 			for (Map.Entry<String, PortletURL> entry : addPortletURLs.entrySet()) {
 				String className = entry.getKey();
 				PortletURL addPortletURL = entry.getValue();
-				AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(className);
 
+				AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(className);
 			%>
 
 				<liferay-ui:icon message='<%= "model.resource." + className %>' src="<%= assetRendererFactory.getIconPath(renderRequest) %>" url='<%= HttpUtil.addParameter(addPortletURL.toString(), "maintainDialog", Boolean.TRUE.toString()) %>' />
