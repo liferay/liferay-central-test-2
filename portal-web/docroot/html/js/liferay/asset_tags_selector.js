@@ -453,7 +453,9 @@ AUI().add(
 									success: function(event, id, obj) {
 										var results = this.get('responseData');
 
-										instance._updateSelectList(results.ResultSet.Result, instance._suggestionsIterator);
+										if (results && results.ResultSet) {
+											instance._updateSelectList(results.ResultSet.Result, instance._suggestionsIterator);
+										}
 									}
 								}
 							}
