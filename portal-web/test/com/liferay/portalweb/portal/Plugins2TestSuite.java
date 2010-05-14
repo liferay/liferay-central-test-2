@@ -50,7 +50,7 @@ import com.liferay.portalweb.plugins.westminstercatechism.WestminsterCatechismTe
 import com.liferay.portalweb.plugins.wikinavigation.WikiNavigationTests;
 import com.liferay.portalweb.plugins.wsrp.WSRPTests;
 import com.liferay.portalweb.plugins.wysiwyg.WysiwygTests;
-import com.liferay.portalweb.portal.login.LoginTests;
+import com.liferay.portalweb.portal.login.LoginPlugins2Tests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -65,7 +65,7 @@ public class Plugins2TestSuite extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(LoginTests.suite());
+		testSuite.addTest(LoginPlugins2Tests.suite());
 		testSuite.addTest(SampleOrbeonFormsTests.suite());
 		testSuite.addTest(SamplePermissionsTests.suite());
 		testSuite.addTest(SamplePHPTests.suite());

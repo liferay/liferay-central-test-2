@@ -1,12 +1,15 @@
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>LoginLegacyTest</title>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>LoginPlugins2Test</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">LoginLegacyTest</td></tr>
+<tr><td rowspan="1" colspan="3">LoginPlugins2Test</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
@@ -20,18 +23,23 @@
 </tr>
 <tr>
 	<td>waitForVisible</td>
-	<td>liferaySignInLink</td>
+	<td>link=Sign In</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>liferaySignInLink</td>
+	<td>link=Sign In</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>_58_login</td>
 	<td>test@liferay.com</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_58_login</td>
+	<td>hashi@liferay.com</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -54,13 +62,33 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForVisible</td>
+	<td>store</td>
+	<td>eval(selenium.isElementPresent('//span/input'))</td>
+	<td>iAgreePresent</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${iAgreePresent}</td>
+	<td>IAgreeNotPresent</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
 	<td>//input[@value='I Agree']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>//input[@value='I Agree']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>IAgreeNotPresent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>reminderQueryAnswer</td>
 	<td></td>
 </tr>
 <tr>
