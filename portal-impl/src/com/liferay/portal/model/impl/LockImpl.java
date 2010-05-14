@@ -48,7 +48,7 @@ public class LockImpl extends LockModelImpl implements Lock {
 	}
 
 	public boolean isNeverExpires() {
-		if (getExpirationDate().getTime() == 0) {
+		if (getExpirationDate() == null) {
 			return true;
 		}
 		else {

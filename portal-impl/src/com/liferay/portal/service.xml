@@ -666,7 +666,7 @@
 
 		<!-- Finder methods -->
 
-		<finder name="ExpirationDate" return-type="Collection" where="expirationDate != 0">
+		<finder name="ExpirationDate" return-type="Collection">
 			<finder-column name="expirationDate" comparator="&lt;" />
 		</finder>
 		<finder name="C_K" return-type="Lock">
