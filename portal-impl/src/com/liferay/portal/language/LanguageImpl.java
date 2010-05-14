@@ -32,11 +32,13 @@ import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portal.service.PortletLocalServiceUtil;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.CookieKeys;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletConfigFactory;
 
 import java.text.MessageFormat;
@@ -469,7 +471,10 @@ public class LanguageImpl implements Language {
 			HttpServletRequest request =
 				(HttpServletRequest)pageContext.getRequest();
 
-			locale = request.getLocale();
+			ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+				WebKeys.THEME_DISPLAY);
+
+			locale = themeDisplay.getLocale();
 
 			PortletConfig portletConfig = (PortletConfig)request.getAttribute(
 				JavaConstants.JAVAX_PORTLET_CONFIG);
