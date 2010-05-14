@@ -816,26 +816,6 @@ public class BaseDeployer {
 		return FileUtil.getAbsolutePath(file);
 	}
 
-	protected String getAxisContent(File srcFile, String content)
-		throws Exception {
-
-		if (content.contains("axis.servicesPath")) {
-			return StringPool.BLANK;
-		}
-
-		File serverConfigWsdd = new File(
-			srcFile + "/WEB-INF/server-config.wsdd");
-
-		if (!serverConfigWsdd.exists()) {
-			return StringPool.BLANK;
-		}
-
-		String axisContent = FileUtil.read(
-			DeployUtil.getResourcePath("axis-web.xml"));
-
-		return axisContent;
-	}
-
 	protected String getDisplayName(File srcFile) {
 		String displayName = srcFile.getName();
 
@@ -892,6 +872,22 @@ public class BaseDeployer {
 			sb.append("PortletContextLoaderListener");
 			sb.append("</listener-class>");
 			sb.append("</listener>");
+		}
+
+		File serverConfigWsdd = new File(
+			srcFile + "/WEB-INF/server-config.wsdd");
+
+		if (serverConfigWsdd.exists()) {
+			File webXml = new File(srcFile + "/WEB-INF/web.xml");
+
+			String content = FileUtil.read(webXml);
+
+			if (!content.contains("axis.servicesPath")) {
+				String axisContent = FileUtil.read(
+					DeployUtil.getResourcePath("axis-web.xml"));
+
+				sb.append(axisContent);
+			}
 		}
 
 		boolean hasTaglib = false;
@@ -1392,12 +1388,6 @@ public class BaseDeployer {
 						extraContent.substring(y + 13);
 			}
 		}
-
-		// Merge Axis content
-
-		String axisContent = getAxisContent(srcFile, content);
-
-		extraContent += axisContent;
 
 		int pos = content.indexOf("</web-app>");
 
