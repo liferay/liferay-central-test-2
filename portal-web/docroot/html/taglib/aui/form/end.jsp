@@ -23,17 +23,19 @@ String onSubmit = GetterUtil.getString((String)request.getAttribute("aui:form:on
 
 </form>
 
-<aui:script use="aui-base">
+<aui:script use="aui-base,aui-form-validator">
 	var form = A.one('#<%= namespace + name %>');
 
-	if (form) {
-		form.on(
+	var validator = new A.FormValidator({
+		boundingBox: '#<%= namespace + name %>'
+	});
+
+	if (validator) {
+		validator.on(
 			'submit',
 			function(event) {
 				<c:choose>
 					<c:when test="<%= Validator.isNull(onSubmit) %>">
-						event.preventDefault();
-
 						submitForm(document.<%= namespace + name %>);
 					</c:when>
 					<c:otherwise>
