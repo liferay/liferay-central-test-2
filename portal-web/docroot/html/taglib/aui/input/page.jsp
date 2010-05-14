@@ -39,7 +39,11 @@ String prefix = GetterUtil.getString((String)request.getAttribute("aui:input:pre
 String suffix = GetterUtil.getString((String)request.getAttribute("aui:input:suffix"));
 String title = GetterUtil.getString((String)request.getAttribute("aui:input:title"));
 String type = GetterUtil.getString((String)request.getAttribute("aui:input:type"));
+String validation = GetterUtil.getString((String)request.getAttribute("aui:input:validation"));
 Object value = request.getAttribute("aui:input:value");
+
+Set<String> validationSet = new HashSet<String>();
+validationSet.addAll(ListUtil.fromString(validation));
 
 if (Validator.isNull(label) && changesContext) {
 	StringBundler sb = new StringBundler(5);
@@ -99,8 +103,8 @@ if (choiceField) {
 
 String baseTypeCss = TextFormatter.format(baseType.toLowerCase(), TextFormatter.K);
 
-String fieldCss = _buildCss(FIELD_PREFIX, baseTypeCss, inlineField, disabled, choiceField, first, last, cssClass);
-String inputCss = _buildCss(INPUT_PREFIX, baseTypeCss, false, false, choiceField, false, false, null);
+String fieldCss = _buildCss(FIELD_PREFIX, baseTypeCss, inlineField, disabled, choiceField, first, last, cssClass, null);
+String inputCss = _buildCss(INPUT_PREFIX, baseTypeCss, false, false, choiceField, false, false, null, validationSet);
 String labelTag = _buildLabel(inlineLabel, showForLabel, forLabel);
 %>
 
@@ -110,6 +114,10 @@ String labelTag = _buildLabel(inlineLabel, showForLabel, forLabel);
 			<c:if test='<%= Validator.isNotNull(label) && !inlineLabel.equals("right") %>'>
 				<label <%= labelTag %>>
 					<liferay-ui:message key="<%= label %>" />
+
+					<c:if test='<%= validationSet.contains("required") %>'>
+						<span class="aui-label-required">(<liferay-ui:message key="required" />)</span>
+					</c:if>
 
 					<c:if test="<%= Validator.isNotNull(helpMessage) %>">
 						<liferay-ui:icon-help message="<%= helpMessage %>" />
@@ -264,6 +272,10 @@ String labelTag = _buildLabel(inlineLabel, showForLabel, forLabel);
 			<c:if test='<%= Validator.isNotNull(label) && inlineLabel.equals("right") %>'>
 				<label <%= labelTag %>>
 					<liferay-ui:message key="<%= label %>" />
+
+					<c:if test='<%= validationSet.contains("required") %>'>
+						<span class="aui-label-required">(<liferay-ui:message key="required" />)</span>
+					</c:if>
 
 					<c:if test="<%= Validator.isNotNull(helpMessage) %>">
 						<liferay-ui:icon-help message="<%= helpMessage %>" />

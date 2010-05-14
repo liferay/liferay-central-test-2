@@ -106,6 +106,10 @@ public class InputTag extends IncludeTag {
 		_type = type;
 	}
 
+	public void setValidation(String validation) {
+		_validation = validation;
+	}
+
 	public void setValue(Object value) {
 		_value = value;
 	}
@@ -130,6 +134,7 @@ public class InputTag extends IncludeTag {
 		_suffix = null;
 		_title = null;
 		_type = null;
+		_validation = null;
 		_value = null;
 	}
 
@@ -201,6 +206,7 @@ public class InputTag extends IncludeTag {
 		request.setAttribute("aui:input:suffix", _suffix);
 		request.setAttribute("aui:input:title", _title);
 		request.setAttribute("aui:input:type", _type);
+		request.setAttribute("aui:input:validation", _validation);
 		request.setAttribute("aui:input:value", _value);
 	}
 
@@ -227,6 +233,7 @@ public class InputTag extends IncludeTag {
 	private String _suffix;
 	private String _title;
 	private String _type;
+	private String _validation;
 	private Object _value;
 
 }

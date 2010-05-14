@@ -23,6 +23,10 @@ String id = namespace + GetterUtil.getString((String)request.getAttribute("aui:s
 String inlineLabel = GetterUtil.getString((String)request.getAttribute("aui:select:inlineLabel"));
 String label = GetterUtil.getString((String)request.getAttribute("aui:select:label"));
 String suffix = GetterUtil.getString((String)request.getAttribute("aui:select:suffix"));
+String validation = GetterUtil.getString((String)request.getAttribute("aui:select:validation"));
+
+Set<String> validationSet = new HashSet<String>();
+validationSet.addAll(ListUtil.fromString(validation));
 %>
 
 			</select>
@@ -37,6 +41,10 @@ String suffix = GetterUtil.getString((String)request.getAttribute("aui:select:su
 		<c:if test='<%= inlineLabel.equals("right") %>'>
 			<label <%= _buildLabel(inlineLabel, true, id) %>>
 				<liferay-ui:message key="<%= label %>" />
+
+				<c:if test='<%= validationSet.contains("required") %>'>
+					<span class="aui-label-required">(<liferay-ui:message key="required" />)</span>
+				</c:if>
 
 				<c:if test="<%= Validator.isNotNull(helpMessage) %>">
 					<liferay-ui:icon-help message="<%= helpMessage %>" />

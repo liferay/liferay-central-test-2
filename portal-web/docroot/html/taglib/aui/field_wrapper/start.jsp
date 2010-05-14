@@ -34,7 +34,7 @@ if (Validator.isNotNull(name)) {
 	name = namespace + name;
 }
 
-String fieldCss = _buildCss(FIELD_PREFIX, "wrapper", inlineField, false, false, first, last, cssClass);
+String fieldCss = _buildCss(FIELD_PREFIX, "wrapper", inlineField, false, false, first, last, cssClass, null);
 %>
 
 <div class="<%= fieldCss %>">
