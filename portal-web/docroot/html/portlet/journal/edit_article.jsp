@@ -552,16 +552,16 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 					<aui:button name="saveArticleBtn" value="save" />
 
 					<%
-					boolean isPending = false;
+					boolean pending = false;
 
 					if (article != null) {
-						isPending = article.isPending();
+						pending = article.isPending();
 					}
 					%>
 
-					<aui:button name="publishBtn" value="publish" disabled="<%= isPending %>" />
+					<aui:button disabled="<%= pending %>" name="publishBtn" value="publish" />
 
-					<c:if test="<%= isPending %>">
+					<c:if test="<%= pending %>">
 						<liferay-ui:icon-help message="there-is-a-publication-workflow-in-process" />
 					</c:if>
 				</c:if>

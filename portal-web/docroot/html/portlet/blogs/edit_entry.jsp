@@ -128,16 +128,16 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 			</c:if>
 
 			<%
-			boolean isPending = false;
+			boolean pending = false;
 
 			if (entry != null) {
-				isPending = entry.isPending();
+				pending = entry.isPending();
 			}
 			%>
 
-			<aui:button name="saveButton" type="submit" value="publish" disabled="<%= isPending %>" />
+			<aui:button disabled="<%= pending %>" name="saveButton" type="submit" value="publish" />
 
-			<c:if test="<%= isPending %>">
+			<c:if test="<%= pending %>">
 				<liferay-ui:icon-help message="there-is-a-publication-workflow-in-process" />
 			</c:if>
 
