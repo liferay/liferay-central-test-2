@@ -15,6 +15,7 @@
 package com.liferay.portlet.expando.util;
 
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -22,7 +23,6 @@ import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.model.ExpandoColumn;
@@ -43,13 +43,13 @@ import java.util.List;
  */
 public class ExpandoBridgeIndexerImpl implements ExpandoBridgeIndexer {
 
-	public void addAttributes(Document doc, ExpandoBridge expandoBridge) {
+	public void addAttributes(Document document, ExpandoBridge expandoBridge) {
 		if (expandoBridge == null) {
 			return;
 		}
 
 		try {
-			doAddAttributes(doc, expandoBridge);
+			doAddAttributes(document, expandoBridge);
 		}
 		catch (SystemException se) {
 			_log.error(se, se);
@@ -68,7 +68,8 @@ public class ExpandoBridgeIndexerImpl implements ExpandoBridgeIndexer {
 		return sb.toString();
 	}
 
-	protected void doAddAttributes(Document doc, ExpandoBridge expandoBridge)
+	protected void doAddAttributes(
+			Document document, ExpandoBridge expandoBridge)
 		throws SystemException {
 
 		List<ExpandoColumn> expandoColumns =
@@ -106,125 +107,118 @@ public class ExpandoBridgeIndexerImpl implements ExpandoBridgeIndexer {
 
 		for (ExpandoColumn expandoColumn : indexedColumns) {
 			try {
-				String fieldName = encodeFieldName(expandoColumn.getName());
-
-				boolean defaultValue = true;
-				ExpandoValue curValue = new ExpandoValueImpl();
-
-				curValue.setData(expandoColumn.getDefaultData());
-				curValue.setColumnId(expandoColumn.getColumnId());
-
-				for (ExpandoValue expandoValue : expandoValues) {
-					if (expandoValue.getColumnId() ==
-							expandoColumn.getColumnId()) {
-
-						curValue = expandoValue;
-						defaultValue = false;
-
-						break;
-					}
-				}
-
-				if (expandoColumn.getType() ==
-							ExpandoColumnConstants.BOOLEAN) {
-
-					doc.addKeyword(fieldName, curValue.getBoolean());
-				}
-				else if (expandoColumn.getType() ==
-							ExpandoColumnConstants.BOOLEAN_ARRAY) {
-
-					doc.addKeyword(
-						fieldName,
-						(!defaultValue ? curValue.getBooleanArray() :
-							new boolean[0]));
-				}
-				else if (expandoColumn.getType() ==
-							ExpandoColumnConstants.DATE) {
-
-					doc.addDate(fieldName, curValue.getDate());
-				}
-				else if (expandoColumn.getType() ==
-							ExpandoColumnConstants.DOUBLE) {
-
-					doc.addKeyword(fieldName, curValue.getDouble());
-				}
-				else if (expandoColumn.getType() ==
-							ExpandoColumnConstants.DOUBLE_ARRAY) {
-
-					doc.addKeyword(
-						fieldName,
-						(!defaultValue ? curValue.getDoubleArray() :
-							new double[0]));
-				}
-				else if (expandoColumn.getType() ==
-							ExpandoColumnConstants.FLOAT) {
-
-					doc.addKeyword(fieldName, curValue.getFloat());
-				}
-				else if (expandoColumn.getType() ==
-							ExpandoColumnConstants.FLOAT_ARRAY) {
-
-					doc.addKeyword(
-						fieldName,
-						(!defaultValue ?
-							StringUtil.merge(curValue.getFloatArray()) :
-							StringPool.BLANK));
-				}
-				else if (expandoColumn.getType() ==
-							ExpandoColumnConstants.INTEGER) {
-
-					doc.addKeyword(fieldName, curValue.getInteger());
-				}
-				else if (expandoColumn.getType() ==
-							ExpandoColumnConstants.INTEGER_ARRAY) {
-
-					doc.addKeyword(
-						fieldName,
-						(!defaultValue ? curValue.getIntegerArray() :
-							new int[0]));
-				}
-				else if (expandoColumn.getType() ==
-							ExpandoColumnConstants.LONG) {
-
-					doc.addKeyword(fieldName, curValue.getLong());
-				}
-				else if (expandoColumn.getType() ==
-							ExpandoColumnConstants.LONG_ARRAY) {
-
-					doc.addKeyword(
-						fieldName,
-						(!defaultValue ? curValue.getLongArray() :
-							new long[0]));
-				}
-				else if (expandoColumn.getType() ==
-							ExpandoColumnConstants.SHORT) {
-
-					doc.addKeyword(fieldName, curValue.getShort());
-				}
-				else if (expandoColumn.getType() ==
-							ExpandoColumnConstants.SHORT_ARRAY) {
-
-					doc.addKeyword(
-						fieldName,
-						(!defaultValue ? curValue.getShortArray() :
-							new short[0]));
-				}
-				else if (expandoColumn.getType() ==
-							ExpandoColumnConstants.STRING) {
-
-					doc.addText(fieldName, curValue.getString());
-				}
-				else if (expandoColumn.getType() ==
-							ExpandoColumnConstants.STRING_ARRAY) {
-
-					doc.addKeyword(
-						fieldName,
-						(!defaultValue ? curValue.getStringArray() :
-							new String[0]));
-				}
+				addAttribute(document, expandoColumn, expandoValues);
 			}
 			catch (Exception e) {
 				_log.error("Indexing " + expandoColumn.getName(), e);
+			}
+		}
+	}
+
+	protected void addAttribute(
+			Document document, ExpandoColumn expandoColumn,
+			List<ExpandoValue> expandoValues)
+		throws PortalException, SystemException {
+
+		String fieldName = encodeFieldName(expandoColumn.getName());
+
+		ExpandoValue expandoValue = new ExpandoValueImpl();
+
+		expandoValue.setColumnId(expandoColumn.getColumnId());
+		expandoValue.setData(expandoColumn.getDefaultData());
+
+		boolean defaultValue = true;
+
+		for (ExpandoValue curExpandoValue : expandoValues) {
+			if (curExpandoValue.getColumnId() == expandoColumn.getColumnId()) {
+				expandoValue = curExpandoValue;
+
+				defaultValue = false;
+
+				break;
+			}
+		}
+
+		int type = expandoColumn.getType();
+
+		if (type == ExpandoColumnConstants.BOOLEAN) {
+			document.addKeyword(fieldName, expandoValue.getBoolean());
+		}
+		else if (type == ExpandoColumnConstants.BOOLEAN_ARRAY) {
+			if (!defaultValue) {
+				document.addKeyword(fieldName, expandoValue.getBooleanArray());
+			}
+			else {
+				document.addKeyword(fieldName, new boolean[0]);
+			}
+		}
+		else if (type == ExpandoColumnConstants.DATE) {
+			document.addDate(fieldName, expandoValue.getDate());
+		}
+		else if (type == ExpandoColumnConstants.DOUBLE) {
+			document.addKeyword(fieldName, expandoValue.getDouble());
+		}
+		else if (type == ExpandoColumnConstants.DOUBLE_ARRAY) {
+			if (!defaultValue) {
+				document.addKeyword(fieldName, expandoValue.getDoubleArray());
+			}
+			else {
+				document.addKeyword(fieldName, new double[0]);
+			}
+		}
+		else if (type == ExpandoColumnConstants.FLOAT) {
+			document.addKeyword(fieldName, expandoValue.getFloat());
+		}
+		else if (type == ExpandoColumnConstants.FLOAT_ARRAY) {
+			if (!defaultValue) {
+				document.addKeyword(fieldName, expandoValue.getFloatArray());
+			}
+			else {
+				document.addKeyword(fieldName, new float[0]);
+			}
+		}
+		else if (type == ExpandoColumnConstants.INTEGER) {
+			document.addKeyword(fieldName, expandoValue.getInteger());
+		}
+		else if (type == ExpandoColumnConstants.INTEGER_ARRAY) {
+			if (!defaultValue) {
+				document.addKeyword(fieldName, expandoValue.getIntegerArray());
+			}
+			else {
+				document.addKeyword(fieldName, new int[0]);
+			}
+		}
+		else if (type == ExpandoColumnConstants.LONG) {
+			document.addKeyword(fieldName, expandoValue.getLong());
+		}
+		else if (type == ExpandoColumnConstants.LONG_ARRAY) {
+			if (!defaultValue) {
+				document.addKeyword(fieldName, expandoValue.getLongArray());
+			}
+			else {
+				document.addKeyword(fieldName, new long[0]);
+			}
+		}
+		else if (type == ExpandoColumnConstants.SHORT) {
+			document.addKeyword(fieldName, expandoValue.getShort());
+		}
+		else if (type == ExpandoColumnConstants.SHORT_ARRAY) {
+			if (!defaultValue) {
+				document.addKeyword(fieldName, expandoValue.getShortArray());
+			}
+			else {
+				document.addKeyword(fieldName, new short[0]);
+			}
+		}
+		else if (type == ExpandoColumnConstants.STRING) {
+			document.addText(fieldName, expandoValue.getString());
+		}
+		else if (type == ExpandoColumnConstants.STRING_ARRAY) {
+			if (!defaultValue) {
+				document.addKeyword(fieldName, expandoValue.getStringArray());
+			}
+			else {
+				document.addKeyword(fieldName, new String[0]);
 			}
 		}
 	}

@@ -26,7 +26,7 @@ public interface ExpandoBridgeIndexer {
 
 	public static final String INDEXABLE = "indexable";
 
-	public void addAttributes(Document doc, ExpandoBridge expandoBridge);
+	public void addAttributes(Document document, ExpandoBridge expandoBridge);
 
 	public String encodeFieldName(String columnName);
 
