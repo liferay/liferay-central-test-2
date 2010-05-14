@@ -31,15 +31,6 @@
 	cursor: auto;
 }
 
-.aui-form-validator-error-container {
-	background:url(<%= themeImagesPath %>/messages/error.png) no-repeat scroll 6px 50% #FFDDDD;
-	border:1px solid #FF0000;
-	display: block;
-	font-weight: normal;
-	margin: 3px 0;
-	padding:6px 6px 6px 30px;
-}
-
 .lfr-input-text, .aui-form .aui-fieldset .aui-field.lfr-input-text-container input {
 	width: <%= ModelHintsConstants.TEXT_DISPLAY_WIDTH %>px;
 }
