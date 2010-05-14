@@ -18,12 +18,15 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.PermissionChecker;
+import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.messageboards.model.MBDiscussion;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.service.MBBanLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBDiscussionLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
+
+import java.util.List;
 
 /**
  * <a href="MBDiscussionPermission.java.html"><b><i>View Source</i></b></a>
@@ -94,6 +97,13 @@ public class MBDiscussionPermission {
 			PermissionChecker permissionChecker, long companyId, long groupId,
 			String className, long classPK, long ownerId, String actionId)
 		throws SystemException {
+
+		List<String> resourceActions = ResourceActionsUtil.getResourceActions(
+			actionId);
+
+		if (!resourceActions.contains(actionId)) {
+			return true;
+		}
 
 		if (MBBanLocalServiceUtil.hasBan(
 				groupId, permissionChecker.getUserId())) {
