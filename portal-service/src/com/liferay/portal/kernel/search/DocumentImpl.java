@@ -123,6 +123,30 @@ public class DocumentImpl implements Document {
 		addKeyword(name, ArrayUtil.toStringArray(values));
 	}
 
+	public void addKeyword(String name, float value) {
+		addKeyword(name, String.valueOf(value));
+	}
+
+	public void addKeyword(String name, Float value) {
+		addKeyword(name, String.valueOf(value));
+	}
+
+	public void addKeyword(String name, float[] values) {
+		if (values == null) {
+			return;
+		}
+
+		addKeyword(name, ArrayUtil.toStringArray(values));
+	}
+
+	public void addKeyword(String name, Float[] values) {
+		if (values == null) {
+			return;
+		}
+
+		addKeyword(name, ArrayUtil.toStringArray(values));
+	}
+
 	public void addKeyword(String name, int value) {
 		addKeyword(name, String.valueOf(value));
 	}
@@ -365,6 +389,7 @@ public class DocumentImpl implements Document {
 
 	private Format _dateFormat = FastDateFormatFactoryUtil.getSimpleDateFormat(
 		_DATE_FORMAT_PATTERN);
+
 	private Map<String, Field> _fields = new HashMap<String, Field>();
 
 }

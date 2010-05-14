@@ -61,6 +61,14 @@ public interface Document extends Serializable {
 
 	public void addKeyword(String name, Double[] values);
 
+	public void addKeyword(String name, float value);
+
+	public void addKeyword(String name, Float value);
+
+	public void addKeyword(String name, float[] values);
+
+	public void addKeyword(String name, Float[] values);
+
 	public void addKeyword(String name, int value);
 
 	public void addKeyword(String name, int[] values);
@@ -118,11 +126,11 @@ public interface Document extends Serializable {
 
 	public String get(String name);
 
-	public String getUID();
-
 	public Date getDate(String name) throws ParseException;
 
 	public Map<String, Field> getFields();
+
+	public String getUID();
 
 	public String[] getValues(String name);
 
