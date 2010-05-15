@@ -87,7 +87,6 @@ scheduledPublishEventsURL.setParameter("destinationName", localPublishing ? Dest
 					form: {
 						id: form
 					},
-					method: 'POST',
 					on: {
 						success: function(event, id, obj) {
 							<portlet:namespace />updateScheduledPublishEventsDiv();
@@ -123,7 +122,6 @@ scheduledPublishEventsURL.setParameter("destinationName", localPublishing ? Dest
 						form: {
 							id: form
 						},
-						method: 'POST',
 						on: {
 							success: function(event, id, obj) {
 								<portlet:namespace />updateScheduledPublishEventsDiv();
@@ -154,7 +152,6 @@ scheduledPublishEventsURL.setParameter("destinationName", localPublishing ? Dest
 					form: {
 						id: form
 					},
-					method: 'POST',
 					on: {
 						success: function(event, id, obj) {
 							var responseData = this.get('responseData');

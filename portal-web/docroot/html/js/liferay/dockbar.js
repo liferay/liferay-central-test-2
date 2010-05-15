@@ -22,8 +22,7 @@ AUI().add(
 								{
 									data: {
 										'liferay_dockbar_pinned': pinned
-									},
-									method: 'POST'
+									}
 								}
 							);
 

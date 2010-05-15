@@ -1195,8 +1195,7 @@ Liferay.provide(
 					p_l_id: params.plid,
 					portletId: params.portletId,
 					title: params.title
-				},
-				method: 'POST'
+				}
 			}
 		);
 	},
@@ -1351,8 +1350,7 @@ Liferay.provide(
 						{
 							data: {
 								'liferay_toggle_controls': Liferay._editControlsState
-							},
-							method: 'POST'
+							}
 						}
 					);
 				}

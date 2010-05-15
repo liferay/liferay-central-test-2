@@ -149,8 +149,7 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 			A.io.request(
 				updateURL,
 				{
-					data: data,
-					method: 'POST'
+					data: data
 				}
 			);
 		},
@@ -187,8 +186,7 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 			A.io.request(
 				sessionClickURL,
 				{
-					data: data,
-					method: 'POST'
+					data: data
 				}
 			);
 		}
@@ -249,7 +247,7 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 							parentLayoutId: parentLayoutId
 						};
 					},
-					method: 'POST'
+					method: AUI.defaults.io.method
 				},
 				formatter: TreeUtil.formatJSONResults,
 				url: getLayoutsURL

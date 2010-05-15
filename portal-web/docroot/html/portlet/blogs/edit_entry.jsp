@@ -201,7 +201,7 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 
 				var url = '<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/blogs/edit_entry" /></portlet:actionURL>';
 
-				A.io(
+				A.io.request(
 					url,
 					{
 						data: {
@@ -220,7 +220,7 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 							<portlet:namespace />title: title,
 							<portlet:namespace />workflowAction: <%= WorkflowConstants.ACTION_SAVE_DRAFT %>
 						},
-						method: 'POST',
+						dataType: 'json',
 						on: {
 							failure: function() {
 								if (saveStatus) {
@@ -238,10 +238,10 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 									saveStatus.html('<%= UnicodeLanguageUtil.get(pageContext, "saving-draft") %>');
 								}
 							},
-							success: function(id, obj) {
+							success: function(event, id, obj) {
 								var instance = this;
 
-								var message = A.JSON.parse(obj.responseText);
+								var message = instance.get('responseData');
 
 								document.<portlet:namespace />fm.<portlet:namespace />entryId.value = message.entryId;
 								document.<portlet:namespace />fm.<portlet:namespace />redirect.value = message.redirect;

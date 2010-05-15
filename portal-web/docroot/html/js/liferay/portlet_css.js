@@ -1011,7 +1011,6 @@ AUI().add(
 										p_l_id: themeDisplay.getPlid(),
 										portletId: instance._portletId
 									},
-									method: 'POST',
 									on: {
 										complete: saveHandler
 									}
@@ -1055,7 +1054,6 @@ AUI().add(
 							portletId: instance._portletId
 						},
 						dataType: 'json',
-						method: 'POST',
 						on: {
 							success: function(event, id, obj) {
 								var objectData = this.get('responseData');

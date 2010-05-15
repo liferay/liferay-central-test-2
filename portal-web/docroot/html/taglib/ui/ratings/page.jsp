@@ -134,7 +134,6 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 			A.io.request(
 				url,
 				{
-					method: 'POST',
 					data: params,
 					dataType: 'json',
 					on: {

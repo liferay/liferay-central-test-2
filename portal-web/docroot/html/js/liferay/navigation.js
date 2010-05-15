@@ -638,7 +638,6 @@ AUI().add(
 									{
 										data: data,
 										dataType: 'json',
-										method: 'POST',
 										on: {
 											success: onSuccess
 										}
@@ -665,7 +664,6 @@ AUI().add(
 						A.io.request(
 							instance._updateURL,
 							{
-								method: 'POST',
 								data: data
 							}
 						);

@@ -448,7 +448,6 @@ AUI().add(
 							{
 								data: instance._getProxyData(),
 								dataType: 'json',
-								method: 'POST',
 								on: {
 									success: function(event, id, obj) {
 										var results = this.get('responseData');

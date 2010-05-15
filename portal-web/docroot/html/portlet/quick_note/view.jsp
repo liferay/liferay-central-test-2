@@ -62,8 +62,7 @@
 								color: bgColor,
 								p_l_id: '<%= plid %>',
 								portletId: '<%= portletDisplay.getId() %>'
-							},
-							method: 'POST'
+							}
 						}
 					);
 				}
@@ -90,8 +89,7 @@
 										data: newValue,
 										p_l_id: '<%= plid %>',
 										portletId: '<%= portletDisplay.getId() %>'
-									},
-									method: 'POST'
+									}
 								}
 							);
 						}

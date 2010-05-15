@@ -158,7 +158,6 @@ Liferay.Portlet = {
 					{
 						data: data,
 						dataType: dataType,
-						method: 'POST',
 						on: {
 							success: function(event, id, obj) {
 								var instance = this;
@@ -219,8 +218,7 @@ Liferay.Portlet = {
 									doAsUserId: doAsUserId,
 									p_l_id: plid,
 									p_p_id: portletId
-								},
-								method: 'POST'
+								}
 							}
 						);
 					}
@@ -644,8 +642,7 @@ Liferay.provide(
 							p_l_id: plid,
 							p_p_id: portlet.portletId,
 							p_p_restore: restore
-						},
-						method: 'POST'
+						}
 					}
 				);
 			}

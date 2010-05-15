@@ -383,7 +383,6 @@ AUI().add(
 									data: {
 										index: guid
 									},
-									method: 'POST',
 									on: {
 										success: function(event, id, obj) {
 											var responseData = this.get('responseData');

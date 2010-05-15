@@ -359,11 +359,10 @@ AUI().add(
 
 				A.mix(data, options);
 
-				A.io(
+				A.io.request(
 					themeDisplay.getPathMain() + '/portal/update_layout',
 					{
-						data: data,
-						method: 'POST'
+						data: data
 					}
 				);
 			},

@@ -255,7 +255,6 @@ request.setAttribute("view.jsp-portletURLString", portletURLString);
 						className: className,
 						ids: ids
 					},
-					method: 'POST',
 					on: {
 						success: callback
 					}
