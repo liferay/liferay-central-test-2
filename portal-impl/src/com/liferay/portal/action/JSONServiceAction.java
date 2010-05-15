@@ -65,52 +65,6 @@ import org.apache.struts.action.ActionMapping;
  */
 public class JSONServiceAction extends JSONAction {
 
-	public static JSONObject toJSONObject(AssetEntryDisplay assetEntryDisplay) {
-		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
-
-		jsonObject.put("entryId", assetEntryDisplay.getEntryId());
-		jsonObject.put("companyId", assetEntryDisplay.getCompanyId());
-		jsonObject.put("userId", assetEntryDisplay.getUserId());
-		jsonObject.put("userName", assetEntryDisplay.getUserName());
-		jsonObject.put("createDate", assetEntryDisplay.getCreateDate());
-		jsonObject.put("modifiedDate", assetEntryDisplay.getModifiedDate());
-		jsonObject.put("classNameId", assetEntryDisplay.getClassNameId());
-		jsonObject.put("className", assetEntryDisplay.getClassName());
-		jsonObject.put("classPK", assetEntryDisplay.getClassPK());
-		jsonObject.put("portletId", assetEntryDisplay.getPortletId());
-		jsonObject.put("portletTitle", assetEntryDisplay.getPortletTitle());
-		jsonObject.put("startDate", assetEntryDisplay.getStartDate());
-		jsonObject.put("endDate", assetEntryDisplay.getEndDate());
-		jsonObject.put("publishDate", assetEntryDisplay.getPublishDate());
-		jsonObject.put("expirationDate", assetEntryDisplay.getExpirationDate());
-		jsonObject.put("mimeType", assetEntryDisplay.getMimeType());
-		jsonObject.put("title", assetEntryDisplay.getTitle());
-		jsonObject.put("description", assetEntryDisplay.getDescription());
-		jsonObject.put("summary", assetEntryDisplay.getSummary());
-		jsonObject.put("url", assetEntryDisplay.getUrl());
-		jsonObject.put("height", assetEntryDisplay.getHeight());
-		jsonObject.put("width", assetEntryDisplay.getWidth());
-		jsonObject.put("priority", assetEntryDisplay.getPriority());
-		jsonObject.put("viewCount", assetEntryDisplay.getViewCount());
-		jsonObject.put(
-			"assetCategoryIds",
-			StringUtil.merge(assetEntryDisplay.getCategoryIds()));
-		jsonObject.put("assetTagNames", assetEntryDisplay.getTagNames());
-
-		return jsonObject;
-	}
-
-	public static JSONObject toJSONObject(AssetEntryType assetEntryType) {
-		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
-
-		jsonObject.put("classNameId", assetEntryType.getClassNameId());
-		jsonObject.put("className", assetEntryType.getClassName());
-		jsonObject.put("portletId", assetEntryType.getPortletId());
-		jsonObject.put("portletTitle", assetEntryType.getPortletTitle());
-
-		return jsonObject;
-	}
-
 	public JSONServiceAction() {
 		_invalidClassNames.add(DLLocalServiceUtil.class.getName());
 		_invalidClassNames.add(DLServiceUtil.class.getName());
@@ -133,7 +87,11 @@ public class JSONServiceAction extends JSONAction {
 			return null;
 		}
 
-		Class<?> classObj = Class.forName(className);
+		Thread currentThread = Thread.currentThread();
+
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
+
+		Class<?> classObj = contextClassLoader.loadClass(className);
 
 		Object[] methodAndParameterTypes = getMethodAndParameterTypes(
 			classObj, methodName, serviceParameters, serviceParameterTypes);
@@ -152,7 +110,7 @@ public class JSONServiceAction extends JSONAction {
 			try {
 				if (_log.isDebugEnabled()) {
 					_log.debug(
-						"Invoking class " + classObj + " on method " +
+						"Invoking " + classObj + " on method " +
 							method.getName() + " with args " +
 								Arrays.toString(args));
 				}
@@ -171,7 +129,7 @@ public class JSONServiceAction extends JSONAction {
 			catch (Exception e) {
 				if (_log.isDebugEnabled()) {
 					_log.debug(
-						"Invoked class " + classObj + " on method " +
+						"Invoked " + classObj + " on method " +
 							method.getName() + " with args " +
 								Arrays.toString(args),
 						e);
@@ -744,6 +702,52 @@ public class JSONServiceAction extends JSONAction {
 		else {
 			return false;
 		}
+	}
+
+	protected JSONObject toJSONObject(AssetEntryDisplay assetEntryDisplay) {
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
+
+		jsonObject.put("entryId", assetEntryDisplay.getEntryId());
+		jsonObject.put("companyId", assetEntryDisplay.getCompanyId());
+		jsonObject.put("userId", assetEntryDisplay.getUserId());
+		jsonObject.put("userName", assetEntryDisplay.getUserName());
+		jsonObject.put("createDate", assetEntryDisplay.getCreateDate());
+		jsonObject.put("modifiedDate", assetEntryDisplay.getModifiedDate());
+		jsonObject.put("classNameId", assetEntryDisplay.getClassNameId());
+		jsonObject.put("className", assetEntryDisplay.getClassName());
+		jsonObject.put("classPK", assetEntryDisplay.getClassPK());
+		jsonObject.put("portletId", assetEntryDisplay.getPortletId());
+		jsonObject.put("portletTitle", assetEntryDisplay.getPortletTitle());
+		jsonObject.put("startDate", assetEntryDisplay.getStartDate());
+		jsonObject.put("endDate", assetEntryDisplay.getEndDate());
+		jsonObject.put("publishDate", assetEntryDisplay.getPublishDate());
+		jsonObject.put("expirationDate", assetEntryDisplay.getExpirationDate());
+		jsonObject.put("mimeType", assetEntryDisplay.getMimeType());
+		jsonObject.put("title", assetEntryDisplay.getTitle());
+		jsonObject.put("description", assetEntryDisplay.getDescription());
+		jsonObject.put("summary", assetEntryDisplay.getSummary());
+		jsonObject.put("url", assetEntryDisplay.getUrl());
+		jsonObject.put("height", assetEntryDisplay.getHeight());
+		jsonObject.put("width", assetEntryDisplay.getWidth());
+		jsonObject.put("priority", assetEntryDisplay.getPriority());
+		jsonObject.put("viewCount", assetEntryDisplay.getViewCount());
+		jsonObject.put(
+			"assetCategoryIds",
+			StringUtil.merge(assetEntryDisplay.getCategoryIds()));
+		jsonObject.put("assetTagNames", assetEntryDisplay.getTagNames());
+
+		return jsonObject;
+	}
+
+	protected JSONObject toJSONObject(AssetEntryType assetEntryType) {
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
+
+		jsonObject.put("classNameId", assetEntryType.getClassNameId());
+		jsonObject.put("className", assetEntryType.getClassName());
+		jsonObject.put("portletId", assetEntryType.getPortletId());
+		jsonObject.put("portletTitle", assetEntryType.getPortletTitle());
+
+		return jsonObject;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(JSONServiceAction.class);

@@ -1051,16 +1051,17 @@ public class ServiceBuilder {
 							_createServiceClp(entity, _SESSION_TYPE_REMOTE);
 							_createServiceWrapper(entity, _SESSION_TYPE_REMOTE);
 
-							_createServiceSoap(entity);
-
-							if (Validator.isNotNull(_jsonFileName)) {
+							if (Validator.isNotNull(_remotingFileName)) {
 								_createServiceHttp(entity);
-								_createServiceJson(entity);
-
-								if (entity.hasColumns()) {
-									_createServiceJsonSerializer(entity);
-								}
 							}
+
+							_createServiceJson(entity);
+
+							if (entity.hasColumns()) {
+								_createServiceJsonSerializer(entity);
+							}
+
+							_createServiceSoap(entity);
 						}
 					}
 				}
@@ -1073,9 +1074,7 @@ public class ServiceBuilder {
 				_createServiceClpMessageListener();
 				_createServiceClpSerializer();
 
-				if (Validator.isNotNull(_jsonFileName)) {
-					_createJsonJs();
-				}
+				_createJsonJs();
 
 				if (Validator.isNotNull(_remotingFileName)) {
 					_createRemotingXml();
@@ -2153,10 +2152,10 @@ public class ServiceBuilder {
 			return;
 		}
 
-		StringBuilder content = new StringBuilder();
+		StringBuilder sb = new StringBuilder();
 
 		if (_ejbList.size() > 0) {
-			content.append(_processTemplate(_tplJsonJs));
+			sb.append(_processTemplate(_tplJsonJs));
 		}
 
 		for (int i = 0; i < _ejbList.size(); i++) {
@@ -2198,8 +2197,8 @@ public class ServiceBuilder {
 					context.put("entity", entity);
 					context.put("methods", jsonMethods);
 
-					content.append("\n\n");
-					content.append(_processTemplate(_tplJsonJsMethod, context));
+					sb.append("\n\n");
+					sb.append(_processTemplate(_tplJsonJsMethod, context));
 				}
 			}
 		}
@@ -2230,11 +2229,11 @@ public class ServiceBuilder {
 		newEnd = newContent.indexOf(");", newEnd);
 
 		if (newBegin == -1) {
-			newContent = oldContent + "\n\n" + content.toString().trim();
+			newContent = oldContent + "\n\n" + sb.toString().trim();
 		}
 		else {
 			newContent =
-				newContent.substring(0, oldBegin) + content.toString().trim() +
+				newContent.substring(0, oldBegin) + sb.toString().trim() +
 					newContent.substring(oldEnd + 2, newContent.length());
 		}
 
@@ -4325,7 +4324,8 @@ public class ServiceBuilder {
 	private String _processTemplate(String name, Map<String, Object> context)
 		throws Exception {
 
-		return FreeMarkerUtil.process(name, context);
+		return StringUtil.replace(
+			FreeMarkerUtil.process(name, context), '\r', "");
 	}
 
 	private static final int _SESSION_TYPE_REMOTE = 0;
