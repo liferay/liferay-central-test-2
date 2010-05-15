@@ -867,6 +867,10 @@ AUI().add(
 						var nodeId = node.get('id') || '';
 						var categoryId = nodeId.replace('categoryNode', '');
 
+						if (A.Lang.isGuid(categoryId)) {
+							categoryId = '';
+						}
+
 						return categoryId;
 					},
 
