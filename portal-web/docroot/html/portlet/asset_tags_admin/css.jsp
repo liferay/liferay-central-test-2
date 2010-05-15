@@ -103,21 +103,18 @@
 }
 
 .portlet-asset-tags-admin .tags-admin-search-bar {
-	background: #F0F2F4;
-	border: 1px solid #D3D7DB;
-	border-left: 0;
-	border-right: 0;
-	padding: 10px;
+	float: left;
 }
 
 .portlet-asset-tags-admin .tags-admin-toolbar {
 	background: #F6F8FB;
 	border-bottom: 1px solid #dedede;
+	overflow: hidden;
+	padding: 5px 0;
 }
 
 .portlet-asset-tags-admin .tags-admin-actions {
-	padding: 5px;
-	text-align: right;
+	float: right;
 }
 
 .portlet-asset-tags-admin .tag-buttons .button {
@@ -203,5 +200,9 @@
 }
 
 .portlet-asset-tags-admin #tags-admin-search-input {
+	background-image: url(<%= themeImagesPath %>/common/search.png);
+	background-repeat: no-repeat;
+	background-position: 5px 50%;
+	padding-left: 25px;
 	width: 250px;
 }

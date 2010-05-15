@@ -22,10 +22,8 @@
 <tr>
 	<td colspan="3">
 		<div class="tags-admin-toolbar">
-			<span id="tags-admin-search-bar">
+			<span class="tags-admin-search-bar">
 				<input id="tags-admin-search-input" type="text" value="" />
-
-				<input id="tags-admin-search-button" type="button" value="<liferay-ui:message key="search" />" />
 			</span>
 
 			<span class="tags-admin-actions">

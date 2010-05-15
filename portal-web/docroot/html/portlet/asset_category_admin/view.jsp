@@ -29,8 +29,6 @@
 					<option value="categories" selected><liferay-ui:message key="categories" /></option>
 					<option value="vocabularies"><liferay-ui:message key="vocabularies" /></option>
 				</select>
-
-				<input id="vocabulary-search-button" type="button" value="<liferay-ui:message key="search" />" />
 			</span>
 
 			<span class="vocabulary-actions">
