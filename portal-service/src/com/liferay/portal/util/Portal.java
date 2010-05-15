@@ -523,6 +523,12 @@ public interface Portal {
 	public String getWidgetURL(Portlet portlet, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException;
 
+	public boolean isCommunityAdmin(User user, long groupId) throws Exception;
+
+	public boolean isCommunityOwner(User user, long groupId) throws Exception;
+
+	public boolean isCompanyAdmin(User user) throws Exception;
+
 	public boolean isLayoutFirstPageable(Layout layout);
 
 	public boolean isLayoutFirstPageable(String type);
@@ -540,6 +546,8 @@ public interface Portal {
 	public boolean isMethodGet(PortletRequest portletRequest);
 
 	public boolean isMethodPost(PortletRequest portletRequest);
+
+	public boolean isOmniadmin(User user) throws Exception;
 
 	public boolean isReservedParameter(String name);
 

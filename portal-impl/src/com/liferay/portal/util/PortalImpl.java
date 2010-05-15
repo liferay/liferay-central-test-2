@@ -3222,6 +3222,27 @@ public class PortalImpl implements Portal {
 			portlet, PropsValues.WIDGET_SERVLET_MAPPING, themeDisplay);
 	}
 
+	public boolean isCommunityAdmin(User user, long groupId) throws Exception {
+		PermissionChecker permissionChecker =
+			PermissionCheckerFactoryUtil.create(user, true);
+
+		return permissionChecker.isCommunityAdmin(groupId);
+	}
+
+	public boolean isCommunityOwner(User user, long groupId) throws Exception {
+		PermissionChecker permissionChecker =
+			PermissionCheckerFactoryUtil.create(user, true);
+
+		return permissionChecker.isCommunityOwner(groupId);
+	}
+
+	public boolean isCompanyAdmin(User user) throws Exception {
+		PermissionChecker permissionChecker =
+			PermissionCheckerFactoryUtil.create(user, true);
+
+		return permissionChecker.isCompanyAdmin();
+	}
+
 	public boolean isLayoutFirstPageable(Layout layout) {
 		LayoutSettings layoutSettings = LayoutSettings.getInstance(layout);
 
@@ -3290,6 +3311,13 @@ public class PortalImpl implements Portal {
 		else {
 			return false;
 		}
+	}
+
+	public boolean isOmniadmin(User user) throws Exception {
+		PermissionChecker permissionChecker =
+			PermissionCheckerFactoryUtil.create(user, true);
+
+		return permissionChecker.isOmniadmin();
 	}
 
 	public boolean isReservedParameter(String name) {

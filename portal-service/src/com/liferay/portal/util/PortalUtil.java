@@ -988,6 +988,22 @@ public class PortalUtil {
 		return getPortal().getWidgetURL(portlet, themeDisplay);
 	}
 
+	public static boolean isCommunityAdmin(User user, long groupId)
+		throws Exception {
+
+		return getPortal().isCommunityAdmin(user, groupId);
+	}
+
+	public static boolean isCommunityOwner(User user, long groupId)
+		throws Exception {
+
+		return getPortal().isCommunityOwner(user, groupId);
+	}
+
+	public static boolean isCompanyAdmin(User user) throws Exception {
+		return getPortal().isCompanyAdmin(user);
+	}
+
 	public static boolean isLayoutFirstPageable(Layout layout) {
 		return getPortal().isLayoutFirstPageable(layout);
 	}
@@ -1022,6 +1038,10 @@ public class PortalUtil {
 
 	public static boolean isMethodPost(PortletRequest portletRequest) {
 		return getPortal().isMethodPost(portletRequest);
+	}
+
+	public static boolean isOmniadmin(User user) throws Exception {
+		return getPortal().isOmniadmin(user);
 	}
 
 	public static boolean isReservedParameter(String name) {
