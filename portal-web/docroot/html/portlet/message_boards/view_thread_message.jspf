@@ -65,7 +65,7 @@
 							url="<%= recentPostsURL.toString() %>"
 						/>
 
-						<c:if test="<%= (userDisplay != null) && (user.getUserId() != userDisplay.getUserId()) && !permissionChecker.isCommunityAdmin(userDisplay.getUserId()) && MBPermission.contains(permissionChecker, scopeGroupId, ActionKeys.BAN_USER) %>">
+						<c:if test="<%= (userDisplay != null) && (user.getUserId() != userDisplay.getUserId()) && !_isCommunityAdmin(userDisplay, scopeGroupId) && MBPermission.contains(permissionChecker, scopeGroupId, ActionKeys.BAN_USER) %>">
 							<br />
 
 							<c:choose>
@@ -529,3 +529,12 @@
 
 	</table>
 </div>
+
+<%!
+private boolean _isCommunityAdmin(User user, long groupId) throws Exception {
+	PermissionChecker permissionChecker =
+		PermissionCheckerFactoryUtil.create(user, true);
+
+	return permissionChecker.isCommunityAdmin(groupId);
+}
+%>
