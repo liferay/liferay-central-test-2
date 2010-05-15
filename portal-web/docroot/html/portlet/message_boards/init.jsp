@@ -156,12 +156,3 @@ NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 %>
 
 <%@ include file="/html/portlet/message_boards/init-ext.jsp" %>
-
-<%!
-private boolean _isCommunityAdmin(User user, Long groupId) throws Exception {
-	PermissionChecker permissionChecker =
-		PermissionCheckerFactoryUtil.create(user, true);
-
-	return permissionChecker.isCommunityAdmin(groupId);
-}
-%>
