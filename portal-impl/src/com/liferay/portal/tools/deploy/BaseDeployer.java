@@ -883,10 +883,10 @@ public class BaseDeployer {
 			String content = FileUtil.read(webXml);
 
 			if (!content.contains("axis.servicesPath")) {
-				String axisContent = FileUtil.read(
-					DeployUtil.getResourcePath("axis-web.xml"));
+				String remotingContent = FileUtil.read(
+					DeployUtil.getResourcePath("remoting-web.xml"));
 
-				sb.append(axisContent);
+				sb.append(remotingContent);
 			}
 		}
 
