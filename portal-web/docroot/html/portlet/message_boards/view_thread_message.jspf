@@ -529,12 +529,3 @@
 
 	</table>
 </div>
-
-<%!
-private boolean _isCommunityAdmin(User user, long groupId) throws Exception {
-	PermissionChecker permissionChecker =
-		PermissionCheckerFactoryUtil.create(user, true);
-
-	return permissionChecker.isCommunityAdmin(groupId);
-}
-%>
