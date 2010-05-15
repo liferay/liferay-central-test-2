@@ -274,7 +274,8 @@ public class JournalIndexer extends BaseIndexer {
 			document.addKeyword(fieldName, value);
 		}
 		else if (elIndexType.equals("text")) {
-			document.addText(fieldName, StringUtil.merge(value, StringPool.SPACE));
+			document.addText(
+				fieldName, StringUtil.merge(value, StringPool.SPACE));
 		}
 	}
 
