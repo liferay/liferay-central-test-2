@@ -127,6 +127,7 @@ import com.liferay.portlet.PortletURLImpl;
 import com.liferay.portlet.RenderRequestImpl;
 import com.liferay.portlet.RenderResponseImpl;
 import com.liferay.portlet.UserAttributes;
+import com.liferay.portlet.admin.util.OmniadminUtil;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.calendar.model.CalEvent;
@@ -3313,11 +3314,8 @@ public class PortalImpl implements Portal {
 		}
 	}
 
-	public boolean isOmniadmin(User user) throws Exception {
-		PermissionChecker permissionChecker =
-			PermissionCheckerFactoryUtil.create(user, true);
-
-		return permissionChecker.isOmniadmin();
+	public boolean isOmniadmin(long userId) {
+		return OmniadminUtil.isOmniadmin(userId);
 	}
 
 	public boolean isReservedParameter(String name) {

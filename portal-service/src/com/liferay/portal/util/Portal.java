@@ -547,7 +547,7 @@ public interface Portal {
 
 	public boolean isMethodPost(PortletRequest portletRequest);
 
-	public boolean isOmniadmin(User user) throws Exception;
+	public boolean isOmniadmin(long userId);
 
 	public boolean isReservedParameter(String name);
 

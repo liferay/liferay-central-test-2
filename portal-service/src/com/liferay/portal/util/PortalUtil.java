@@ -1040,8 +1040,8 @@ public class PortalUtil {
 		return getPortal().isMethodPost(portletRequest);
 	}
 
-	public static boolean isOmniadmin(User user) throws Exception {
-		return getPortal().isOmniadmin(user);
+	public static boolean isOmniadmin(long userId) {
+		return getPortal().isOmniadmin(userId);
 	}
 
 	public static boolean isReservedParameter(String name) {
