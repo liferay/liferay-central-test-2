@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 import com.liferay.portal.kernel.servlet.URLEncoder;
 import com.liferay.portal.kernel.util.ArrayUtil;
+import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Portlet;
@@ -166,6 +167,11 @@ public class PortletRequestDispatcherImpl implements PortletRequestDispatcher {
 			portletRequest);
 		HttpServletResponse response = PortalUtil.getHttpServletResponse(
 			portletResponse);
+
+		request.setAttribute(
+				JavaConstants.JAVAX_PORTLET_REQUEST, portletRequest);
+		request.setAttribute(
+				JavaConstants.JAVAX_PORTLET_RESPONSE, portletResponse);
 
 		String pathInfo = null;
 		String queryString = null;
