@@ -298,6 +298,8 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 			long userId, String className, long classPK)
 		throws PortalException, SystemException {
 
+		// Entry
+
 		if (classPK <= 0) {
 			return null;
 		}
@@ -312,6 +314,8 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 
 			assetEntryPersistence.update(entry, false);
 		}
+
+		// Social
 
 		if (entry.getUserId() != userId) {
 			socialEquityLogLocalService.addEquityLogs(
