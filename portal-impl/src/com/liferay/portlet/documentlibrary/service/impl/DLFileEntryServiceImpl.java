@@ -24,7 +24,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Lock;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceContext;
-import com.liferay.portlet.documentlibrary.FileLockedException;
+import com.liferay.portlet.documentlibrary.LockedFileException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl;
@@ -111,7 +111,7 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 		boolean hasLock = hasFileEntryLock(groupId, folderId, name);
 
 		if (hasLock) {
-			throw new FileLockedException();
+			throw new LockedFileException();
 		}
 
 		lockFileEntry(groupId, folderId, name);

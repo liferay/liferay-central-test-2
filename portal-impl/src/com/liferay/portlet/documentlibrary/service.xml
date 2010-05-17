@@ -321,8 +321,8 @@
 	</entity>
 	<exceptions>
 		<exception>DuplicateFolderName</exception>
-		<exception>FileLocked</exception>
 		<exception>FileShortcutPermission</exception>
 		<exception>FolderName</exception>
+		<exception>LockedFile</exception>
 	</exceptions>
 </service-builder>

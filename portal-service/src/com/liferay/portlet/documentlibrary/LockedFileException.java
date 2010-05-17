@@ -17,25 +17,25 @@ package com.liferay.portlet.documentlibrary;
 import com.liferay.portal.kernel.exception.PortalException;
 
 /**
- * <a href="FileLockedException.java.html"><b><i>View Source</i></b></a>
+ * <a href="LockedFileException.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class FileLockedException extends PortalException {
+public class LockedFileException extends PortalException {
 
-	public FileLockedException() {
+	public LockedFileException() {
 		super();
 	}
 
-	public FileLockedException(String msg) {
+	public LockedFileException(String msg) {
 		super(msg);
 	}
 
-	public FileLockedException(String msg, Throwable cause) {
+	public LockedFileException(String msg, Throwable cause) {
 		super(msg, cause);
 	}
 
-	public FileLockedException(Throwable cause) {
+	public LockedFileException(Throwable cause) {
 		super(cause);
 	}
 
