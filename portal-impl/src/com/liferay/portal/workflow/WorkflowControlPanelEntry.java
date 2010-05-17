@@ -32,7 +32,7 @@ public class WorkflowControlPanelEntry extends BaseControlPanelEntry {
 		throws Exception {
 
 		if (WorkflowEngineManagerUtil.isDeployed()) {
-			return true;
+			return super.isVisible(portlet, category, themeDisplay);
 		}
 		else {
 			return false;
@@ -43,12 +43,7 @@ public class WorkflowControlPanelEntry extends BaseControlPanelEntry {
 			PermissionChecker permissionChecker, Portlet portlet)
 		throws Exception {
 
-		if (WorkflowEngineManagerUtil.isDeployed()) {
-			return true;
-		}
-		else {
-			return false;
-		}
+		return false;
 	}
 
 }
