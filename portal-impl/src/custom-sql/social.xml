@@ -234,7 +234,7 @@
 	</sql>
 	<sql id="com.liferay.portlet.social.service.impl.SocialEquityLogLocalServiceImpl.checkSocialEquityUser">
 		<![CDATA[
-			DELETE
+			DELETE FROM
 				SocialEquityUser
 			WHERE
 				NOT EXISTS

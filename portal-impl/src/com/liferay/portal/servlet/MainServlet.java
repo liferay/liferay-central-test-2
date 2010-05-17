@@ -27,7 +27,10 @@ import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.poller.PollerProcessor;
 import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
 import com.liferay.portal.kernel.scheduler.SchedulerEntry;
+import com.liferay.portal.kernel.scheduler.SchedulerEntryImpl;
 import com.liferay.portal.kernel.scheduler.SchedulerException;
+import com.liferay.portal.kernel.scheduler.TimeUnit;
+import com.liferay.portal.kernel.scheduler.TriggerType;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.servlet.PortletSessionTracker;
@@ -100,6 +103,7 @@ import com.liferay.portlet.PortletInstanceFactoryUtil;
 import com.liferay.portlet.PortletURLListenerFactory;
 import com.liferay.portlet.asset.AssetRendererFactoryRegistryUtil;
 import com.liferay.portlet.asset.model.AssetRendererFactory;
+import com.liferay.portlet.social.messaging.SocialEquityMessageListener;
 import com.liferay.portlet.social.model.SocialActivityInterpreter;
 import com.liferay.portlet.social.model.SocialRequestInterpreter;
 import com.liferay.portlet.social.model.impl.SocialActivityInterpreterImpl;
@@ -1177,6 +1181,27 @@ public class MainServlet extends ActionServlet {
 					schedulerEntry, PortalClassLoaderUtil.getClassLoader());
 			}
 		}
+
+		SchedulerEntry schedulerEntry = new SchedulerEntryImpl();
+
+		schedulerEntry.setEventListenerClass(
+			SocialEquityMessageListener.class.getName());
+		schedulerEntry.setTimeUnit(TimeUnit.DAY);
+		schedulerEntry.setTriggerType(TriggerType.SIMPLE);
+		schedulerEntry.setTriggerValue("1");
+
+		try {
+			SchedulerEngineUtil.schedule(
+				schedulerEntry, PortalClassLoaderUtil.getClassLoader());
+
+			if (_log.isInfoEnabled()) {
+				_log.info("Initialized scheduler for social equity checks.");
+			}
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+
 	}
 
 	protected void initSevletContextPool() throws Exception {
