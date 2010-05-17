@@ -43,6 +43,7 @@
 <%@ page import="com.liferay.portlet.asset.service.persistence.AssetEntryQuery" %>
 <%@ page import="com.liferay.portlet.asset.util.AssetUtil" %>
 <%@ page import="com.liferay.portlet.documentlibrary.DuplicateFolderNameException" %>
+<%@ page import="com.liferay.portlet.documentlibrary.FileLockedException" %>
 <%@ page import="com.liferay.portlet.documentlibrary.FileShortcutPermissionException" %>
 <%@ page import="com.liferay.portlet.documentlibrary.FolderNameException" %>
 <%@ page import="com.liferay.portlet.documentlibrary.NoSuchFileEntryException" %>

@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Lock;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portlet.documentlibrary.FileLockedException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl;
@@ -109,24 +110,18 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 
 		boolean hasLock = hasFileEntryLock(groupId, folderId, name);
 
-		if (!hasLock) {
-
-			// Lock
-
-			lockFileEntry(groupId, folderId, name);
+		if (hasLock) {
+			throw new FileLockedException();
 		}
+
+		lockFileEntry(groupId, folderId, name);
 
 		try {
 			dlFileEntryLocalService.deleteFileEntry(
 				groupId, folderId, name, version);
 		}
 		finally {
-			if (!hasLock) {
-
-				// Unlock
-
 				unlockFileEntry(groupId, folderId, name);
-			}
 		}
 	}
 

@@ -39,6 +39,7 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.asset.AssetTagException;
 import com.liferay.portlet.assetpublisher.util.AssetPublisherUtil;
 import com.liferay.portlet.documentlibrary.DuplicateFolderNameException;
+import com.liferay.portlet.documentlibrary.FileLockedException;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
@@ -100,6 +101,7 @@ public class EditFileEntryAction extends PortletAction {
 		}
 		catch (Exception e) {
 			if (e instanceof DuplicateLockException ||
+				e instanceof FileLockedException ||
 				e instanceof NoSuchFileEntryException ||
 				e instanceof PrincipalException) {
 
