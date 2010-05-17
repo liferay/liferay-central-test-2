@@ -125,7 +125,10 @@ public class WSDDBuilder {
 
 		String serviceName = StringUtil.replace(_portletShortName, " ", "_");
 
-		if (_portalWsdd && !_portletShortName.equals("Portal")) {
+		if (!_portalWsdd) {
+			serviceName = "Plugin_" + serviceName;
+		}
+		else if (!_portletShortName.equals("Portal")) {
 			serviceName = "Portlet_" + serviceName;
 		}
 

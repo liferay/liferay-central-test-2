@@ -57,7 +57,9 @@ public class PortalClientBuilder {
 
 				String name = service.attributeValue("name");
 
-				if (name.startsWith("Portal_") || name.startsWith("Portlet_")) {
+				if (name.startsWith("Plugin_") || name.startsWith("Portal_") ||
+					name.startsWith("Portlet_")) {
+
 					Wsdl2JavaTask.generateJava(
 						url + "/" +  name + "?wsdl", outputDir, mappingFile);
 				}

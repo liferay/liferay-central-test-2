@@ -89,6 +89,7 @@ public class PluginsEnvironmentBuilder {
 						properties.getProperty("portal.dependency.jars")));
 
 				if (svn) {
+					updateClientIgnores(propertiesFile);
 					updateLibIgnores(propertiesFile, dependencyJars);
 				}
 
@@ -99,6 +100,31 @@ public class PluginsEnvironmentBuilder {
 		}
 		catch (Exception e) {
 			e.printStackTrace();
+		}
+	}
+
+	public void updateClientIgnores(File propertiesFile) throws Exception {
+		File clientDir = new File(propertiesFile.getParent() + "/client");
+
+		if (!clientDir.exists()) {
+			return;
+		}
+
+		if (!_isSVNDir(clientDir)) {
+			_exec(_SVN_ADD + "--non-recursive " + "\"" + clientDir + "\"");
+		}
+
+		File tempFile = File.createTempFile("svn-ignores-", null, null);
+
+		try {
+			FileUtil.write(tempFile, "classes\nsrc");
+
+			_exec(
+				_SVN_SET_IGNORES + "-F \"" + tempFile.getCanonicalPath() +
+					"\" \"" + clientDir + "\"");
+		}
+		finally {
+			FileUtil.delete(tempFile);
 		}
 	}
 
