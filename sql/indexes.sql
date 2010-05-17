@@ -651,6 +651,8 @@ create index IX_A2001730 on WikiPage (format);
 create index IX_C8A9C476 on WikiPage (nodeId);
 create index IX_E7F635CA on WikiPage (nodeId, head);
 create index IX_65E84AF4 on WikiPage (nodeId, head, parentTitle);
+create index IX_9F7655DA on WikiPage (nodeId, head, parentTitle, status);
+create index IX_432F0AB0 on WikiPage (nodeId, head, status);
 create index IX_46EEF3C8 on WikiPage (nodeId, parentTitle);
 create index IX_1ECC7656 on WikiPage (nodeId, redirectTitle);
 create index IX_546F2D5C on WikiPage (nodeId, status);
