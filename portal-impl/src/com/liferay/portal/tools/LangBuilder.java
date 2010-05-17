@@ -89,6 +89,7 @@ public class LangBuilder {
 				_createProps(content, "gl"); // Galician
 				_createProps(content, "de"); // German
 				_createProps(content, "el"); // Greek
+				_createProps(content, "iw"); // Hebrew
 				_createProps(content, "hi_IN"); // Hindi (India)
 				_createProps(content, "hu"); // Hungarian
 				_createProps(content, "it"); // Italian
