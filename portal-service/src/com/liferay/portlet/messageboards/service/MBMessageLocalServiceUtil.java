@@ -490,13 +490,6 @@ public class MBMessageLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage updateMessage(
-		long messageId, java.util.Date createDate, java.util.Date modifiedDate)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getService().updateMessage(messageId, createDate, modifiedDate);
-	}
-
-	public static com.liferay.portlet.messageboards.model.MBMessage updateMessage(
 		long messageId, java.lang.String body)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -509,21 +502,12 @@ public class MBMessageLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage updateStatus(
-		long userId, com.liferay.portlet.messageboards.model.MBMessage message,
-		com.liferay.portal.service.ServiceContext serviceContext,
-		boolean reindex)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getService()
-				   .updateStatus(userId, message, serviceContext, reindex);
-	}
-
-	public static com.liferay.portlet.messageboards.model.MBMessage updateStatus(
-		long userId, long messageId,
+		long userId, long messageId, int status,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getService().updateStatus(userId, messageId, serviceContext);
+		return getService()
+				   .updateStatus(userId, messageId, status, serviceContext);
 	}
 
 	public static MBMessageLocalService getService() {
