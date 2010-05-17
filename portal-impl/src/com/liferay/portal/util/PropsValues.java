@@ -262,7 +262,7 @@ public class PropsValues {
 
 	public static final int CONTROL_PANEL_NAVIGATION_MAX_ORGANIZATIONS = GetterUtil.getInteger(PropsUtil.get(PropsKeys.CONTROL_PANEL_NAVIGATION_MAX_ORGANIZATIONS));
 
-	public static String[] CONVERT_PROCESSES = PropsUtil.getArray(PropsKeys.CONVERT_PROCESSES);
+	public static final String[] CONVERT_PROCESSES = PropsUtil.getArray(PropsKeys.CONVERT_PROCESSES);
 
 	public static final int COUNTER_INCREMENT = GetterUtil.getInteger(PropsUtil.get(PropsKeys.COUNTER_INCREMENT));
 
@@ -420,11 +420,11 @@ public class PropsValues {
 
 	public static final String GOOGLE_GADGET_SERVLET_MAPPING = PropsUtil.get(PropsKeys.GOOGLE_GADGET_SERVLET_MAPPING);
 
-	public static String HIBERNATE_DIALECT = PropsUtil.get(PropsKeys.HIBERNATE_DIALECT);
+	public static final String HIBERNATE_DIALECT = PropsUtil.get(PropsKeys.HIBERNATE_DIALECT);
 
 	public static final boolean HIBERNATE_GENERATE_STATISTICS = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.HIBERNATE_GENERATE_STATISTICS));
 
-	public static int HIBERNATE_JDBC_BATCH_SIZE = GetterUtil.getInteger(PropsUtil.get(PropsKeys.HIBERNATE_JDBC_BATCH_SIZE));
+	public static final int HIBERNATE_JDBC_BATCH_SIZE = GetterUtil.getInteger(PropsUtil.get(PropsKeys.HIBERNATE_JDBC_BATCH_SIZE));
 
 	public static final boolean HOT_UNDEPLOY_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.HOT_UNDEPLOY_ENABLED));
 
@@ -816,7 +816,7 @@ public class PropsValues {
 
 	public static boolean PERMISSIONS_VIEW_DYNAMIC_INHERITANCE = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.PERMISSIONS_VIEW_DYNAMIC_INHERITANCE));
 
-	public static String PERSISTENCE_PROVIDER= GetterUtil.getString(PropsUtil.get(PropsKeys.PERSISTENCE_PROVIDER));
+	public static final String PERSISTENCE_PROVIDER= GetterUtil.getString(PropsUtil.get(PropsKeys.PERSISTENCE_PROVIDER));
 
 	public static final boolean PLUGIN_NOTIFICATIONS_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.PLUGIN_NOTIFICATIONS_ENABLED));
 
@@ -846,9 +846,9 @@ public class PropsValues {
 
 	public static final boolean PORTAL_SECURITY_MANAGER_ENABLE = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.PORTAL_SECURITY_MANAGER_ENABLE));
 
-	public static boolean PORTLET_ADD_DEFAULT_RESOURCE_CHECK_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.PORTLET_ADD_DEFAULT_RESOURCE_CHECK_ENABLED));
+	public static final boolean PORTLET_ADD_DEFAULT_RESOURCE_CHECK_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.PORTLET_ADD_DEFAULT_RESOURCE_CHECK_ENABLED));
 
-	public static String[] PORTLET_ADD_DEFAULT_RESOURCE_CHECK_WHITELIST = PropsUtil.getArray(PropsKeys.PORTLET_ADD_DEFAULT_RESOURCE_CHECK_WHITELIST);
+	public static final String[] PORTLET_ADD_DEFAULT_RESOURCE_CHECK_WHITELIST = PropsUtil.getArray(PropsKeys.PORTLET_ADD_DEFAULT_RESOURCE_CHECK_WHITELIST);
 
 	public static final boolean PORTLET_CSS_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.PORTLET_CSS_ENABLED));
 
@@ -886,7 +886,7 @@ public class PropsValues {
 
 	public static final String[] REQUEST_SHARED_ATTRIBUTES = PropsUtil.getArray(PropsKeys.REQUEST_SHARED_ATTRIBUTES);
 
-	public static boolean RESOURCE_ACTIONS_READ_PORTLET_RESOURCES = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.RESOURCE_ACTIONS_READ_PORTLET_RESOURCES));
+	public static final boolean RESOURCE_ACTIONS_READ_PORTLET_RESOURCES = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.RESOURCE_ACTIONS_READ_PORTLET_RESOURCES));
 
 	public static final String RESOURCE_REPOSITORIES_ROOT = PropsUtil.get(PropsKeys.RESOURCE_REPOSITORIES_ROOT);
 
@@ -972,7 +972,7 @@ public class PropsValues {
 
 	public static final int SOCIAL_EQUITY_EQUITY_LOG_CHECK_INTERVAL = GetterUtil.getInteger(PropsUtil.get(PropsKeys.SOCIAL_EQUITY_EQUITY_LOG_CHECK_INTERVAL));
 
-	public static String[] SPRING_CONFIGS = PropsUtil.getArray(PropsKeys.SPRING_CONFIGS);
+	public static final String[] SPRING_CONFIGS = PropsUtil.getArray(PropsKeys.SPRING_CONFIGS);
 
 	public static boolean SPRING_HIBERNATE_SESSION_DELEGATED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.SPRING_HIBERNATE_SESSION_DELEGATED));
 
@@ -1000,19 +1000,19 @@ public class PropsValues {
 
 	public static boolean THEME_IMAGES_FAST_LOAD = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.THEME_IMAGES_FAST_LOAD));
 
-	public static boolean THEME_LOADER_NEW_THEME_ID_ON_IMPORT = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.THEME_LOADER_NEW_THEME_ID_ON_IMPORT));
+	public static final boolean THEME_LOADER_NEW_THEME_ID_ON_IMPORT = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.THEME_LOADER_NEW_THEME_ID_ON_IMPORT));
 
-	public static String THEME_LOADER_STORAGE_PATH = PropsUtil.get(PropsKeys.THEME_LOADER_STORAGE_PATH);
+	public static final String THEME_LOADER_STORAGE_PATH = PropsUtil.get(PropsKeys.THEME_LOADER_STORAGE_PATH);
 
-	public static boolean THEME_PORTLET_DECORATE_DEFAULT = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.THEME_PORTLET_DECORATE_DEFAULT));
+	public static final boolean THEME_PORTLET_DECORATE_DEFAULT = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.THEME_PORTLET_DECORATE_DEFAULT));
 
-	public static boolean THEME_PORTLET_SHARING_DEFAULT = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.THEME_PORTLET_SHARING_DEFAULT));
+	public static final boolean THEME_PORTLET_SHARING_DEFAULT = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.THEME_PORTLET_SHARING_DEFAULT));
 
-	public static String THEME_SHORTCUT_ICON = PropsUtil.get(PropsKeys.THEME_SHORTCUT_ICON);
+	public static final String THEME_SHORTCUT_ICON = PropsUtil.get(PropsKeys.THEME_SHORTCUT_ICON);
 
 	public static final boolean THEME_SYNC_ON_GROUP = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.THEME_SYNC_ON_GROUP));
 
-	public static String THEME_VIRTUAL_PATH = PropsUtil.get(PropsKeys.THEME_VIRTUAL_PATH);
+	public static final String THEME_VIRTUAL_PATH = PropsUtil.get(PropsKeys.THEME_VIRTUAL_PATH);
 
 	public static int TRANSACTION_ISOLATION_PORTAL = GetterUtil.getInteger(PropsUtil.get(PropsKeys.TRANSACTION_ISOLATION_PORTAL));
 
