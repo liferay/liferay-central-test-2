@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portlet.wiki.NoSuchPageException;
 import com.liferay.portlet.wiki.model.WikiPage;
@@ -91,6 +92,7 @@ public class WikiPageFinderImpl
 			qPos.add(nodeId);
 			qPos.add(createDate);
 			qPos.add(true);
+			qPos.add(WorkflowConstants.STATUS_APPROVED);
 
 			Iterator<Long> itr = q.list().iterator();
 
@@ -194,6 +196,7 @@ public class WikiPageFinderImpl
 			qPos.add(nodeId);
 			qPos.add(createDate);
 			qPos.add(true);
+			qPos.add(WorkflowConstants.STATUS_APPROVED);
 
 			return (List<WikiPage>)QueryUtil.list(q, getDialect(), start, end);
 		}

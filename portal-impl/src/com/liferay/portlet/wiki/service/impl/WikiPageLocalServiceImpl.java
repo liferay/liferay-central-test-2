@@ -493,7 +493,8 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			long nodeId, boolean head, String parentTitle)
 		throws SystemException {
 
-		return wikiPagePersistence.findByN_H_P(nodeId, head, parentTitle);
+		return wikiPagePersistence.findByN_H_P_S(
+			nodeId, head, parentTitle, WorkflowConstants.STATUS_APPROVED);
 	}
 
 	public WikiPage getDraftPage(long nodeId, String title)
@@ -584,7 +585,8 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		List<Map<String, Boolean>> pageTitles =
 			new ArrayList<Map<String, Boolean>>();
 
-		List<WikiPage> pages = wikiPagePersistence.findByN_H(nodeId, true);
+		List<WikiPage> pages = wikiPagePersistence.findByN_H_S(
+			nodeId, true, WorkflowConstants.STATUS_APPROVED);
 
 		for (WikiPage page : pages) {
 			pageTitles.add(WikiCacheUtil.getOutgoingLinks(page));
@@ -748,8 +750,9 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			long nodeId, boolean head, int start, int end)
 		throws SystemException {
 
-		return wikiPagePersistence.findByN_H(
-			nodeId, head, start, end, new PageCreateDateComparator(false));
+		return wikiPagePersistence.findByN_H_S(
+			nodeId, head, WorkflowConstants.STATUS_APPROVED, start, end,
+			new PageCreateDateComparator(false));
 	}
 
 	public List<WikiPage> getPages(
@@ -774,7 +777,8 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 	public int getPagesCount(long nodeId, boolean head)
 		throws SystemException {
 
-		return wikiPagePersistence.countByN_H(nodeId, head);
+		return wikiPagePersistence.countByN_H_S(
+			nodeId, head, WorkflowConstants.STATUS_APPROVED);
 	}
 
 	public int getPagesCount(long nodeId, String title, boolean head)

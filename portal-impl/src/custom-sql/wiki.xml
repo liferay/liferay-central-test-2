@@ -10,7 +10,8 @@
 			WHERE
 				(nodeId = ?) AND
 				(createDate [$CREATE_DATE_COMPARATOR$] ?) AND
-				(head = ?)
+				(head = ?) AND
+				(status = ?)
 		]]>
 	</sql>
 	<sql id="com.liferay.portlet.wiki.service.persistence.WikiPageFinder.findByResourcePrimKey">
@@ -33,7 +34,8 @@
 			WHERE
 				(nodeId = ?) AND
 				(createDate [$CREATE_DATE_COMPARATOR$] ?) AND
-				(head = ?)
+				(head = ?) AND
+				(status = ?)
 			ORDER BY
 				createDate DESC
 		]]>
