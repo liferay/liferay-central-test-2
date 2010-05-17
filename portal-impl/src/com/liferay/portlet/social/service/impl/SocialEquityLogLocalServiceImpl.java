@@ -77,6 +77,16 @@ public class SocialEquityLogLocalServiceImpl
 		}
 	}
 
+	public void addEquityLogs(
+			long userId, String className, long classPK, String actionId)
+		throws PortalException, SystemException {
+
+		AssetEntry assetEntry = assetEntryLocalService.getEntry(
+			className, classPK);
+
+		addEquityLogs(userId, assetEntry.getEntryId(), actionId);
+	}
+
 	public void checkEquityLogs() throws SystemException {
 		int validity = getEquityDate();
 
@@ -139,6 +149,15 @@ public class SocialEquityLogLocalServiceImpl
 
 			socialEquityLogPersistence.update(equityLog, false);
 		}
+	}
+
+	public void deactivateEquityLogs(String className, long classPK)
+		throws PortalException, SystemException {
+
+		AssetEntry assetEntry = assetEntryLocalService.getEntry(
+			className, classPK);
+
+		deactivateEquityLogs(assetEntry.getEntryId());
 	}
 
 	protected void addEquityLog(

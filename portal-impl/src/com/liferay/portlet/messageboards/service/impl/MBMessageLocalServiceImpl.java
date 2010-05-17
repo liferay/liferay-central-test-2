@@ -59,7 +59,6 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsValues;
-import com.liferay.portlet.asset.model.AssetEntry;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.social.BlogsActivityKeys;
 import com.liferay.portlet.blogs.util.LinkbackProducerUtil;
@@ -171,12 +170,9 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		// Social
 
-		AssetEntry assetEntry = assetEntryPersistence.findByC_C(
-			classNameId, classPK);
-
-		if (assetEntry.getUserId() != userId) {
+		if (!message.isRoot()) {
 			socialEquityLogLocalService.addEquityLogs(
-				userId, assetEntry.getEntryId(), ActionKeys.ADD_DISCUSSION);
+				userId, className, classPK, ActionKeys.ADD_DISCUSSION);
 		}
 
 		if (className.equals(BlogsEntry.class.getName()) &&

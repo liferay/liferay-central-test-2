@@ -132,6 +132,14 @@ public class SocialEquityLogLocalServiceWrapper
 			actionId);
 	}
 
+	public void addEquityLogs(long userId, java.lang.String className,
+		long classPK, java.lang.String actionId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_socialEquityLogLocalService.addEquityLogs(userId, className, classPK,
+			actionId);
+	}
+
 	public void checkEquityLogs()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_socialEquityLogLocalService.checkEquityLogs();
@@ -141,6 +149,12 @@ public class SocialEquityLogLocalServiceWrapper
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_socialEquityLogLocalService.deactivateEquityLogs(assetEntryId);
+	}
+
+	public void deactivateEquityLogs(java.lang.String className, long classPK)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_socialEquityLogLocalService.deactivateEquityLogs(className, classPK);
 	}
 
 	public SocialEquityLogLocalService getWrappedSocialEquityLogLocalService() {

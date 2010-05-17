@@ -53,7 +53,6 @@ import com.liferay.portal.util.Portal;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
-import com.liferay.portlet.asset.model.AssetEntry;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.wiki.DuplicatePageException;
 import com.liferay.portlet.wiki.NoSuchPageException;
@@ -415,11 +414,8 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		socialActivityLocalService.deleteActivities(
 			WikiPage.class.getName(), page.getResourcePrimKey());
 
-		AssetEntry assetEntry = assetEntryLocalService.getEntry(
-			WikiPage.class.getName(), page.getResourcePrimKey());
-
 		socialEquityLogLocalService.deactivateEquityLogs(
-			assetEntry.getEntryId());
+			WikiPage.class.getName(), page.getResourcePrimKey());
 
 		// Message boards
 
@@ -1176,7 +1172,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 			// Asset
 
-			AssetEntry assetEntry = assetEntryLocalService.updateVisible(
+			assetEntryLocalService.updateVisible(
 				WikiPage.class.getName(), page.getResourcePrimKey(), true);
 
 			// Social
@@ -1187,11 +1183,13 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 				activity = WikiActivityKeys.UPDATE_PAGE;
 
 				socialEquityLogLocalService.addEquityLogs(
-						userId, assetEntry.getEntryId(), ActionKeys.UPDATE);
+					userId, WikiPage.class.getName(), page.getResourcePrimKey(),
+					ActionKeys.UPDATE);
 			}
 			else {
 				socialEquityLogLocalService.addEquityLogs(
-						userId, assetEntry.getEntryId(), ActionKeys.ADD_PAGE);
+					userId, WikiPage.class.getName(), page.getResourcePrimKey(),
+					ActionKeys.ADD_PAGE);
 			}
 
 			socialActivityLocalService.addActivity(
