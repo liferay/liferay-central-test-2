@@ -169,9 +169,9 @@ public class PortletRequestDispatcherImpl implements PortletRequestDispatcher {
 			portletResponse);
 
 		request.setAttribute(
-				JavaConstants.JAVAX_PORTLET_REQUEST, portletRequest);
+			JavaConstants.JAVAX_PORTLET_REQUEST, portletRequest);
 		request.setAttribute(
-				JavaConstants.JAVAX_PORTLET_RESPONSE, portletResponse);
+			JavaConstants.JAVAX_PORTLET_RESPONSE, portletResponse);
 
 		String pathInfo = null;
 		String queryString = null;
