@@ -1024,6 +1024,8 @@ public class PropsValues {
 
 	public static boolean USERS_EMAIL_ADDRESS_REQUIRED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.USERS_EMAIL_ADDRESS_REQUIRED));
 
+	public static final String[] USERS_EXPORT_CVS_FIELDS = PropsUtil.getArray(PropsKeys.USERS_EXPORT_CVS_FIELDS);
+
 	public static final String[] USERS_FORM_ADD_IDENTIFICATION = PropsUtil.getArray(PropsKeys.USERS_FORM_ADD_IDENTIFICATION);
 
 	public static final String[] USERS_FORM_ADD_MAIN = PropsUtil.getArray(PropsKeys.USERS_FORM_ADD_MAIN);

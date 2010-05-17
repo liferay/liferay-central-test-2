@@ -223,6 +223,11 @@ request.setAttribute("view.jsp-portletURLString", portletURLString);
 		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL><portlet:param name="struts_action" value="/enterprise_admin/edit_user_group" /></portlet:actionURL>");
 	}
 
+	function <portlet:namespace />exportUsers() {
+		document.<portlet:namespace />fm.method = "post";
+		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL><portlet:param name="struts_action" value="/enterprise_admin/export_users" /></portlet:actionURL>&etag=0&strip=0&compress=0");
+	}
+
 	function <portlet:namespace />saveCompany() {
 		document.<portlet:namespace />fm.method = "post";
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.UPDATE %>";

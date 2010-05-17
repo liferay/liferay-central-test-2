@@ -144,6 +144,8 @@ public class ActionKeys {
 
 	public static final String EXPORT_ALL_EVENTS = "EXPORT_ALL_EVENTS";
 
+	public static final String EXPORT_USER = "EXPORT_USER";
+
 	public static final String GUEST_PREFERENCES = "GUEST_PREFERENCES";
 
 	public static final String HELP = "HELP";

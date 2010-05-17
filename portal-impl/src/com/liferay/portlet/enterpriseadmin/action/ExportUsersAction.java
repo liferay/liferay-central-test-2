@@ -15,28 +15,47 @@
 package com.liferay.portlet.enterpriseadmin.action;
 
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.ProgressTracker;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.User;
-import com.liferay.portal.service.RoleLocalServiceUtil;
+import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.service.http.UserJSONSerializer;
+import com.liferay.portal.service.permission.PortalPermissionUtil;
+import com.liferay.portal.struts.ActionConstants;
+import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PortletKeys;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.PortletURLFactory;
+import com.liferay.portlet.PortletURLFactoryUtil;
+import com.liferay.portlet.enterpriseadmin.search.UserSearch;
+import com.liferay.portlet.enterpriseadmin.search.UserSearchTerms;
 import com.liferay.util.servlet.ServletResponseUtil;
 
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 
+import javax.portlet.ActionRequest;
+import javax.portlet.ActionResponse;
+import javax.portlet.PortletConfig;
+import javax.portlet.PortletRequest;
+import javax.portlet.PortletURL;
+import javax.portlet.RenderRequest;
+import javax.portlet.RenderResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -45,54 +64,122 @@ import org.apache.struts.action.ActionMapping;
  * <a href="ExportUsersAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Mika Koivisto
  */
-public class ExportUsersAction extends Action {
+public class ExportUsersAction extends PortletAction {
 
-	public ActionForward execute(
-			ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response)
+	public void processAction(
+			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
 		try {
-			String csv = getUsersCSV(request);
+			String csv = getUsersCSV(actionRequest);
 
 			String fileName = "users.csv";
 			byte[] bytes = csv.getBytes();
 
+			HttpServletRequest request = PortalUtil.getHttpServletRequest(
+				actionRequest);
+			HttpServletResponse response = PortalUtil.getHttpServletResponse(
+				actionResponse);
+
 			ServletResponseUtil.sendFile(
 				request, response, fileName, bytes, ContentTypes.TEXT_CSV_UTF8);
 
-			return null;
+			response.flushBuffer();
+			setForward(actionRequest, ActionConstants.COMMON_NULL);
 		}
 		catch (Exception e) {
-			PortalUtil.sendError(e, request, response);
+			SessionErrors.add(actionRequest, e.getClass().getName());
 
-			return null;
+			setForward(actionRequest, "portlet.enterprise_admin.error");
 		}
 	}
 
-	protected String getUsersCSV(HttpServletRequest request) throws Exception {
-		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+	public ActionForward render(
+		ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
+		RenderRequest renderRequest, RenderResponse renderResponse)
+		throws Exception {
+
+		return null;
+	}
+
+	protected String getUsersCSV(ActionRequest actionRequest) throws Exception {
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		if (!RoleLocalServiceUtil.hasUserRole(
-				themeDisplay.getUserId(), themeDisplay.getCompanyId(),
-				RoleConstants.ADMINISTRATOR, true)) {
+		PermissionChecker permissionChecker =
+			themeDisplay.getPermissionChecker();
+
+		if (!PortalPermissionUtil.contains(
+			permissionChecker, ActionKeys.EXPORT_USER)) {
 
 			return StringPool.BLANK;
 		}
 
+		long companyId = themeDisplay.getCompanyId();
+
 		String exportProgressId = ParamUtil.getString(
-			request, "exportProgressId");
+			actionRequest, "exportProgressId");
 
 		ProgressTracker progressTracker = new ProgressTracker(
-			request, exportProgressId);
+			actionRequest, exportProgressId);
 
 		progressTracker.start();
 
-		List<User> users = UserLocalServiceUtil.search(
-			themeDisplay.getCompanyId(), null, Boolean.TRUE, null,
-			QueryUtil.ALL_POS, QueryUtil.ALL_POS, (OrderByComparator)null);
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			actionRequest);
+		PortletURLFactory portletURLFactory = 
+			PortletURLFactoryUtil.getPortletURLFactory();
+		PortletURL portletURL = portletURLFactory.create(
+			request, PortletKeys.ENTERPRISE_ADMIN_USERS, themeDisplay.getPlid(),
+			PortletRequest.RENDER_PHASE);
+
+		UserSearch userSearch = new UserSearch(actionRequest, portletURL);
+		UserSearchTerms searchTerms =
+			(UserSearchTerms)userSearch.getSearchTerms();
+
+		if (!searchTerms.isAdvancedSearch() && !searchTerms.hasActive()) {
+			searchTerms.setActive(Boolean.TRUE);
+		}
+
+		long organizationId = searchTerms.getOrganizationId();
+		long roleId = searchTerms.getRoleId();
+		long userGroupId = searchTerms.getUserGroupId();
+
+		LinkedHashMap<String, Object> userParams =
+			new LinkedHashMap<String, Object>();
+
+		if (organizationId > 0) {
+			userParams.put("usersOrgs", new Long(organizationId));
+		}
+
+		if (roleId > 0) {
+			userParams.put("usersRoles", new Long(roleId));
+		}
+
+		if (userGroupId > 0) {
+			userParams.put("usersUserGroups", new Long(userGroupId));
+		}
+
+		List<User> users = null;
+
+		if (searchTerms.isAdvancedSearch()) {
+			users = UserLocalServiceUtil.search(
+				companyId, searchTerms.getFirstName(),
+				searchTerms.getMiddleName(), searchTerms.getLastName(),
+				searchTerms.getScreenName(), searchTerms.getEmailAddress(),
+				searchTerms.getActive(), userParams,
+				searchTerms.isAndOperator(), QueryUtil.ALL_POS,
+				QueryUtil.ALL_POS, (OrderByComparator)null);
+		}
+		else {
+			users = UserLocalServiceUtil.search(
+				companyId, searchTerms.getKeywords(), searchTerms.getActive(),
+				userParams, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+				(OrderByComparator)null);
+		}
 
 		int percentage = 10;
 		int total = users.size();
@@ -110,10 +197,7 @@ public class ExportUsersAction extends Action {
 		for (int i = 0; itr.hasNext(); i++) {
 			User user = itr.next();
 
-			sb.append(user.getFullName());
-			sb.append(StringPool.COMMA);
-			sb.append(user.getEmailAddress());
-			sb.append(StringPool.NEW_LINE);
+			exportUser(user, sb);
 
 			percentage = Math.min(10 + (i * 90) / total, 99);
 
@@ -123,6 +207,30 @@ public class ExportUsersAction extends Action {
 		progressTracker.finish();
 
 		return sb.toString();
+	}
+
+	protected void exportUser(User user, StringBundler sb) {
+		JSONObject jsonObj = UserJSONSerializer.toJSONObject(user);
+
+		for (int i = 0; i < PropsValues.USERS_EXPORT_CVS_FIELDS.length; i++) {
+			String field = PropsValues.USERS_EXPORT_CVS_FIELDS[i];
+
+			if (field.equals("fullName")) {
+				sb.append(user.getFullName());
+			}
+			else if (field.startsWith("expando:")) {
+				String attributeName = field.substring(7);
+				sb.append(user.getExpandoBridge().getAttribute(attributeName));
+			}
+			else {
+				sb.append(jsonObj.getString(field));
+			}
+
+			if (i+1 < PropsValues.USERS_EXPORT_CVS_FIELDS.length) {
+				sb.append(StringPool.COMMA);
+			}
+		}
+		sb.append(StringPool.NEW_LINE);
 	}
 
 }
