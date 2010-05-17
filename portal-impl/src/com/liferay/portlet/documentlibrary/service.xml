@@ -323,6 +323,5 @@
 		<exception>DuplicateFolderName</exception>
 		<exception>FileShortcutPermission</exception>
 		<exception>FolderName</exception>
-		<exception>LockedFile</exception>
 	</exceptions>
 </service-builder>
