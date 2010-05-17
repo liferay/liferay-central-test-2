@@ -67,7 +67,8 @@ public class BookmarksEntryServiceImpl extends BookmarksEntryServiceBaseImpl {
 		BookmarksEntryPermission.check(
 			getPermissionChecker(), entryId, ActionKeys.VIEW);
 
-		return bookmarksEntryLocalService.openEntry(entryId);
+		return bookmarksEntryLocalService.openEntry(
+			getGuestOrUserId(), entryId);
 	}
 
 	public BookmarksEntry updateEntry(

@@ -22,7 +22,7 @@ JournalArticleDisplay articleDisplay = (JournalArticleDisplay)request.getAttribu
 boolean print = ParamUtil.getString(request, "viewMode").equals(Constants.PRINT);
 
 if (articleDisplay != null) {
-	AssetEntryLocalServiceUtil.incrementViewCounter(JournalArticle.class.getName(), articleDisplay.getResourcePrimKey());
+	AssetEntryServiceUtil.incrementViewCounter(JournalArticle.class.getName(), articleDisplay.getResourcePrimKey());
 }
 %>
 

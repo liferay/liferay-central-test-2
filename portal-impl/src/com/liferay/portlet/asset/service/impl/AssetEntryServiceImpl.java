@@ -144,9 +144,10 @@ public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 	}
 
 	public AssetEntry incrementViewCounter(String className, long classPK)
-		throws SystemException {
+		throws PortalException, SystemException {
 
-		return assetEntryLocalService.incrementViewCounter(className, classPK);
+		return assetEntryLocalService.incrementViewCounter(
+			getGuestOrUserId(), className, classPK);
 	}
 
 	public AssetEntryDisplay[] searchEntryDisplays(

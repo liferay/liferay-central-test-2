@@ -286,7 +286,7 @@ public class BookmarksEntryLocalServiceImpl
 		return bookmarksEntryFinder.findByNoAssets();
 	}
 
-	public BookmarksEntry openEntry(long entryId)
+	public BookmarksEntry openEntry(long userId, long entryId)
 		throws PortalException, SystemException {
 
 		BookmarksEntry entry =
@@ -297,7 +297,7 @@ public class BookmarksEntryLocalServiceImpl
 		bookmarksEntryPersistence.update(entry, false);
 
 		assetEntryLocalService.incrementViewCounter(
-			BookmarksEntry.class.getName(), entryId);
+			userId, BookmarksEntry.class.getName(), entryId);
 
 		return entry;
 	}

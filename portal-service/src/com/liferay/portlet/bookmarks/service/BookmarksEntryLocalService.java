@@ -206,7 +206,7 @@ public interface BookmarksEntryLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portlet.bookmarks.model.BookmarksEntry openEntry(
-		long entryId)
+		long userId, long entryId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 

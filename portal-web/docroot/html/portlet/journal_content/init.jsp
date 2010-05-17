@@ -16,7 +16,7 @@
 
 <%@ include file="/html/portlet/init.jsp" %>
 
-<%@ page import="com.liferay.portlet.asset.service.AssetEntryLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.asset.service.AssetEntryServiceUtil" %>
 <%@ page import="com.liferay.portlet.documentlibrary.util.DocumentConversionUtil" %>
 <%@ page import="com.liferay.portlet.journal.NoSuchArticleException" %>
 <%@ page import="com.liferay.portlet.journal.action.EditArticleAction" %>

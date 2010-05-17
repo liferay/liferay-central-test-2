@@ -88,7 +88,7 @@ PortletURL viewAttachmentsURL = PortletURLUtil.clone(viewPageURL, renderResponse
 
 viewAttachmentsURL.setParameter("struts_action", "/wiki/view_page_attachments");
 
-AssetEntryLocalServiceUtil.incrementViewCounter(WikiPage.class.getName(), wikiPage.getResourcePrimKey());
+AssetEntryServiceUtil.incrementViewCounter(WikiPage.class.getName(), wikiPage.getResourcePrimKey());
 
 AssetUtil.addLayoutTags(request, AssetTagLocalServiceUtil.getTags(WikiPage.class.getName(), wikiPage.getResourcePrimKey()));
 %>

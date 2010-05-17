@@ -101,7 +101,8 @@ public class AssetEntryServiceWrapper implements AssetEntryService {
 
 	public com.liferay.portlet.asset.model.AssetEntry incrementViewCounter(
 		java.lang.String className, long classPK)
-		throws com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _assetEntryService.incrementViewCounter(className, classPK);
 	}
 

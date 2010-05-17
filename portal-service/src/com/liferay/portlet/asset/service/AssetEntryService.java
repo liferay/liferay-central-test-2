@@ -99,7 +99,8 @@ public interface AssetEntryService {
 
 	public com.liferay.portlet.asset.model.AssetEntry incrementViewCounter(
 		java.lang.String className, long classPK)
-		throws com.liferay.portal.kernel.exception.SystemException;
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.asset.model.AssetEntryDisplay[] searchEntryDisplays(

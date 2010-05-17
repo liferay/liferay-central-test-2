@@ -504,7 +504,8 @@ public class DLFileEntryLocalServiceImpl
 			dlFileEntryPersistence.update(fileEntry, false);
 
 			assetEntryLocalService.incrementViewCounter(
-				DLFileEntry.class.getName(), fileEntry.getFileEntryId());
+				userId, DLFileEntry.class.getName(),
+				fileEntry.getFileEntryId());
 
 			List<DLFileShortcut> fileShortcuts =
 				dlFileShortcutPersistence.findByG_TF_TN(
@@ -512,7 +513,7 @@ public class DLFileEntryLocalServiceImpl
 
 			for (DLFileShortcut fileShortcut : fileShortcuts) {
 				assetEntryLocalService.incrementViewCounter(
-					DLFileShortcut.class.getName(),
+					userId, DLFileShortcut.class.getName(),
 					fileShortcut.getFileShortcutId());
 			}
 		}

@@ -259,10 +259,10 @@ public class BookmarksEntryLocalServiceWrapper
 	}
 
 	public com.liferay.portlet.bookmarks.model.BookmarksEntry openEntry(
-		long entryId)
+		long userId, long entryId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _bookmarksEntryLocalService.openEntry(entryId);
+		return _bookmarksEntryLocalService.openEntry(userId, entryId);
 	}
 
 	public void updateAsset(long userId,

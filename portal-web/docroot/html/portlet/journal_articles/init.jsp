@@ -17,7 +17,7 @@
 <%@ include file="/html/portlet/init.jsp" %>
 
 <%@ page import="com.liferay.portal.NoSuchGroupException" %>
-<%@ page import="com.liferay.portlet.asset.service.AssetEntryLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.asset.service.AssetEntryServiceUtil" %>
 <%@ page import="com.liferay.portlet.journal.NoSuchStructureException" %>
 <%@ page import="com.liferay.portlet.journal.action.EditArticleAction" %>
 <%@ page import="com.liferay.portlet.journal.model.JournalArticle" %>

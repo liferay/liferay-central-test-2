@@ -35,7 +35,6 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceContext;
-import com.liferay.portal.service.base.PrincipalBean;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
@@ -295,8 +294,9 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 		return assetEntryFinder.findEntries(entryQuery);
 	}
 
-	public AssetEntry incrementViewCounter(String className, long classPK)
-		throws SystemException {
+	public AssetEntry incrementViewCounter(
+			long userId, String className, long classPK)
+		throws PortalException, SystemException {
 
 		if (classPK <= 0) {
 			return null;
@@ -313,17 +313,9 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 			assetEntryPersistence.update(entry, false);
 		}
 
-		try {
-			long userId = new PrincipalBean().getGuestOrUserId();
-
-			if (entry.getUserId() != userId) {
-
-				socialEquityLogLocalService.addEquityLogs(
-						userId, entry.getEntryId(), ActionKeys.VIEW);
-			}
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
+		if (entry.getUserId() != userId) {
+			socialEquityLogLocalService.addEquityLogs(
+				userId, entry.getEntryId(), ActionKeys.VIEW);
 		}
 
 		return entry;
