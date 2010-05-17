@@ -375,7 +375,7 @@ public class LangBuilder {
 			// Automatic translator does not support Arabic, Basque, Bulgarian,
 			// Catalan, Czech, Finnish, Galician, Hebrew, Hindi, Hungarian,
 			// Norwegian Bokmål,Persian, Polish, Russian, Slovak, Swedish,
-			// Turkish, Ukrainian or Vietnamese
+			// Turkish, Ukrainian, or Vietnamese
 
 			return null;
 		}
