@@ -178,10 +178,6 @@ public class PluginsEnvironmentBuilder {
 		developmentJars.add("mail.jar");
 		developmentJars.add("servlet-api.jar");
 
-		if (FileUtil.exists(projectDirName + "/docroot/WEB-INF/test")) {
-			developmentJars.add("junit.jar");
-		}
-
 		developmentJars = ListUtil.sort(developmentJars);
 
 		List<String> portalJars = ListUtil.toList(dependencyJars);
