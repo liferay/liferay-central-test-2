@@ -131,11 +131,6 @@
 			<finder-column name="nodeId" />
 			<finder-column name="status" />
 		</finder>
-		<finder name="N_H_S" return-type="Collection">
-			<finder-column name="nodeId" />
-			<finder-column name="head" />
-			<finder-column name="status" />
-		</finder>
 		<finder name="N_T_V" return-type="WikiPage" unique="true">
 			<finder-column name="nodeId" />
 			<finder-column name="title" />
@@ -155,6 +150,11 @@
 			<finder-column name="nodeId" />
 			<finder-column name="head" />
 			<finder-column name="parentTitle" />
+		</finder>
+		<finder name="N_H_S" return-type="Collection">
+			<finder-column name="nodeId" />
+			<finder-column name="head" />
+			<finder-column name="status" />
 		</finder>
 		<finder name="N_H_P_S" return-type="Collection">
 			<finder-column name="nodeId" />
