@@ -51,6 +51,10 @@ public interface SchedulerEntry {
 
 	public void setTriggerType(TriggerType triggerType);
 
+	public void setTriggerValue(int triggerValue);
+
+	public void setTriggerValue(long triggerValue);
+
 	public void setTriggerValue(String triggerValue);
 
 }

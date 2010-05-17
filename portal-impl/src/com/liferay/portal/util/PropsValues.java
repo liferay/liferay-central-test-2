@@ -618,7 +618,7 @@ public class PropsValues {
 
 	public static final boolean LUCENE_STORE_JDBC_AUTO_CLEAN_UP_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.LUCENE_STORE_JDBC_AUTO_CLEAN_UP_ENABLED));
 
-	public static final String LUCENE_STORE_JDBC_AUTO_CLEAN_UP_INTERVAL = PropsUtil.get(PropsKeys.LUCENE_STORE_JDBC_AUTO_CLEAN_UP_INTERVAL);
+	public static final int LUCENE_STORE_JDBC_AUTO_CLEAN_UP_INTERVAL = GetterUtil.getInteger(PropsUtil.get(PropsKeys.LUCENE_STORE_JDBC_AUTO_CLEAN_UP_INTERVAL));
 
 	public static final String LUCENE_STORE_TYPE = PropsUtil.get(PropsKeys.LUCENE_STORE_TYPE);
 
@@ -969,6 +969,8 @@ public class PropsValues {
 	public static final boolean SITEMINDER_IMPORT_FROM_LDAP = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.SITEMINDER_IMPORT_FROM_LDAP));
 
 	public static final String SITEMINDER_USER_HEADER = PropsUtil.get(PropsKeys.SITEMINDER_USER_HEADER);
+
+	public static final int SOCIAL_EQUITY_EQUITY_LOG_CHECK_INTERVAL = GetterUtil.getInteger(PropsUtil.get(PropsKeys.SOCIAL_EQUITY_EQUITY_LOG_CHECK_INTERVAL));
 
 	public static final String[] SPRING_CONFIGS = PropsUtil.getArray(PropsKeys.SPRING_CONFIGS);
 

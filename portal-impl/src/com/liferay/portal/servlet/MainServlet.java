@@ -103,7 +103,7 @@ import com.liferay.portlet.PortletInstanceFactoryUtil;
 import com.liferay.portlet.PortletURLListenerFactory;
 import com.liferay.portlet.asset.AssetRendererFactoryRegistryUtil;
 import com.liferay.portlet.asset.model.AssetRendererFactory;
-import com.liferay.portlet.social.messaging.SocialEquityMessageListener;
+import com.liferay.portlet.social.messaging.CheckEquityLogMessageListener;
 import com.liferay.portlet.social.model.SocialActivityInterpreter;
 import com.liferay.portlet.social.model.SocialRequestInterpreter;
 import com.liferay.portlet.social.model.impl.SocialActivityInterpreterImpl;
@@ -340,6 +340,13 @@ public class MainServlet extends ActionServlet {
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Initialize social request interpreters");
+		}
+
+		try {
+			initSocialEquityLogScheduler();
+		}
+		catch (Exception e) {
+			_log.error(e, e);
 		}
 
 		try {
@@ -1181,27 +1188,6 @@ public class MainServlet extends ActionServlet {
 					schedulerEntry, PortalClassLoaderUtil.getClassLoader());
 			}
 		}
-
-		SchedulerEntry schedulerEntry = new SchedulerEntryImpl();
-
-		schedulerEntry.setEventListenerClass(
-			SocialEquityMessageListener.class.getName());
-		schedulerEntry.setTimeUnit(TimeUnit.DAY);
-		schedulerEntry.setTriggerType(TriggerType.SIMPLE);
-		schedulerEntry.setTriggerValue("1");
-
-		try {
-			SchedulerEngineUtil.schedule(
-				schedulerEntry, PortalClassLoaderUtil.getClassLoader());
-
-			if (_log.isInfoEnabled()) {
-				_log.info("Initialized scheduler for social equity checks.");
-			}
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
-
 	}
 
 	protected void initSevletContextPool() throws Exception {
@@ -1235,6 +1221,20 @@ public class MainServlet extends ActionServlet {
 			SocialActivityInterpreterLocalServiceUtil.addActivityInterpreter(
 				socialActivityInterpreter);
 		}
+	}
+
+	protected void initSocialEquityLogScheduler() throws Exception {
+		SchedulerEntry schedulerEntry = new SchedulerEntryImpl();
+
+		schedulerEntry.setEventListenerClass(
+			CheckEquityLogMessageListener.class.getName());
+		schedulerEntry.setTimeUnit(TimeUnit.MINUTE);
+		schedulerEntry.setTriggerType(TriggerType.SIMPLE);
+		schedulerEntry.setTriggerValue(
+			PropsValues.SOCIAL_EQUITY_EQUITY_LOG_CHECK_INTERVAL);
+
+		SchedulerEngineUtil.schedule(
+			schedulerEntry, PortalClassLoaderUtil.getClassLoader());
 	}
 
 	protected void initSocialRequestInterpreters(List<Portlet> portlets)

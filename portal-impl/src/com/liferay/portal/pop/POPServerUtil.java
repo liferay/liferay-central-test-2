@@ -147,7 +147,7 @@ public class POPServerUtil {
 			_schedulerEntry.setTimeUnit(TimeUnit.MINUTE);
 			_schedulerEntry.setTriggerType(TriggerType.SIMPLE);
 			_schedulerEntry.setTriggerValue(
-				String.valueOf(PropsValues.POP_SERVER_NOTIFICATIONS_INTERVAL));
+				PropsValues.POP_SERVER_NOTIFICATIONS_INTERVAL);
 
 			SchedulerEngineUtil.schedule(
 				_schedulerEntry, PortalClassLoaderUtil.getClassLoader());

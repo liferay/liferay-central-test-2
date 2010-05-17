@@ -21,28 +21,28 @@ import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portlet.social.service.SocialEquityLogLocalServiceUtil;
 
 /**
- * <a href="SocialEquityMessageListener.java.html"><b><i>View Source</i></b></a>
+ * <a href="CheckEquityLogMessageListener.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author Zsolt Berentey
+ * @author Brian Wing Shun Chan
  */
-public class SocialEquityMessageListener implements MessageListener {
+public class CheckEquityLogMessageListener implements MessageListener {
 
 	public void receive(Message message) {
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Social Equity: checking expiring actions...");
-		}
-
 		try {
-			SocialEquityLogLocalServiceUtil.checkEquityLogs();
+			doReceive(message);
 		}
 		catch (Exception e) {
 			_log.error("Unable to process message " + message, e);
 		}
+	}
 
+	protected void doReceive(Message message) throws Exception {
+		SocialEquityLogLocalServiceUtil.checkEquityLogs();
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
-		SocialEquityMessageListener.class);
+		CheckEquityLogMessageListener.class);
 
 }

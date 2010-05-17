@@ -116,6 +116,14 @@ public class SchedulerEntryImpl implements SchedulerEntry {
 		_triggerType = triggerType;
 	}
 
+	public void setTriggerValue(int triggerValue) {
+		_triggerValue = String.valueOf(triggerValue);
+	}
+
+	public void setTriggerValue(long triggerValue) {
+		_triggerValue = String.valueOf(triggerValue);
+	}
+
 	public void setTriggerValue(String triggerValue) {
 		_triggerValue = triggerValue;
 	}
