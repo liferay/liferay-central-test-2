@@ -225,7 +225,7 @@ String labelTag = _buildLabel(inlineLabel, showForLabel, forLabel);
 		<%
 		String valueString = StringPool.BLANK;
 
-		if (type.equals("hidden") || type.equals("text") || type.equals("textarea")) {
+		if (type.equals("text") || type.equals("textarea")) {
 			valueString = ParamUtil.get(request, name, StringPool.BLANK);
 		}
 
