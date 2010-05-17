@@ -1193,7 +1193,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		context.importPermissions(
 			JournalFeed.class, feed.getId(), existingFeed.getId());
 
-		if (!feedId.equals(existingFeed.getStructureId())) {
+		if (!feedId.equals(existingFeed.getFeedId())) {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
 					"A feed with the ID " + feedId + " already " +
