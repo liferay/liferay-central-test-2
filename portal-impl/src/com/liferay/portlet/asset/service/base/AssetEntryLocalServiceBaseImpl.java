@@ -94,6 +94,8 @@ import com.liferay.portlet.messageboards.service.MBMessageLocalService;
 import com.liferay.portlet.messageboards.service.MBMessageService;
 import com.liferay.portlet.messageboards.service.persistence.MBMessageFinder;
 import com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence;
+import com.liferay.portlet.social.service.SocialEquityLogLocalService;
+import com.liferay.portlet.social.service.persistence.SocialEquityLogPersistence;
 import com.liferay.portlet.wiki.service.WikiPageLocalService;
 import com.liferay.portlet.wiki.service.WikiPageResourceLocalService;
 import com.liferay.portlet.wiki.service.WikiPageService;
@@ -787,6 +789,24 @@ public abstract class AssetEntryLocalServiceBaseImpl
 		this.mbMessageFinder = mbMessageFinder;
 	}
 
+	public SocialEquityLogLocalService getSocialEquityLogLocalService() {
+		return socialEquityLogLocalService;
+	}
+
+	public void setSocialEquityLogLocalService(
+		SocialEquityLogLocalService socialEquityLogLocalService) {
+		this.socialEquityLogLocalService = socialEquityLogLocalService;
+	}
+
+	public SocialEquityLogPersistence getSocialEquityLogPersistence() {
+		return socialEquityLogPersistence;
+	}
+
+	public void setSocialEquityLogPersistence(
+		SocialEquityLogPersistence socialEquityLogPersistence) {
+		this.socialEquityLogPersistence = socialEquityLogPersistence;
+	}
+
 	public WikiPageLocalService getWikiPageLocalService() {
 		return wikiPageLocalService;
 	}
@@ -992,6 +1012,10 @@ public abstract class AssetEntryLocalServiceBaseImpl
 	protected MBMessagePersistence mbMessagePersistence;
 	@BeanReference(type = MBMessageFinder.class)
 	protected MBMessageFinder mbMessageFinder;
+	@BeanReference(type = SocialEquityLogLocalService.class)
+	protected SocialEquityLogLocalService socialEquityLogLocalService;
+	@BeanReference(type = SocialEquityLogPersistence.class)
+	protected SocialEquityLogPersistence socialEquityLogPersistence;
 	@BeanReference(type = WikiPageLocalService.class)
 	protected WikiPageLocalService wikiPageLocalService;
 	@BeanReference(type = WikiPageService.class)
