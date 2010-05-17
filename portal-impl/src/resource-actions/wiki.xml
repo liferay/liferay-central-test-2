@@ -108,9 +108,23 @@
 		<social-equity>
 			<social-equity-mapping>
 				<action-key>ADD_DISCUSSION</action-key>
+				<information-value>2</information-value>
+				<information-lifespan>365</information-lifespan>
+				<participation-value>2</participation-value>
+				<participation-lifespan>365</participation-lifespan>
+			</social-equity-mapping>
+			<social-equity-mapping>
+				<action-key>ADD_PAGE</action-key>
 				<information-value>10</information-value>
 				<information-lifespan>365</information-lifespan>
-				<participation-value>10</participation-value>
+				<participation-value>5</participation-value>
+				<participation-lifespan>365</participation-lifespan>
+			</social-equity-mapping>
+			<social-equity-mapping>
+				<action-key>VIEW</action-key>
+				<information-value>1</information-value>
+				<information-lifespan>365</information-lifespan>
+				<participation-value>1</participation-value>
 				<participation-lifespan>365</participation-lifespan>
 			</social-equity-mapping>
 		</social-equity>

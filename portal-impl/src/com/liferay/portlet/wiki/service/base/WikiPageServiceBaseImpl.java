@@ -15,6 +15,8 @@
 package com.liferay.portlet.wiki.service.base;
 
 import com.liferay.counter.service.CounterLocalService;
+import com.liferay.counter.service.persistence.CounterFinder;
+import com.liferay.counter.service.persistence.CounterPersistence;
 
 import com.liferay.documentlibrary.service.DLLocalService;
 import com.liferay.documentlibrary.service.DLService;
@@ -68,8 +70,10 @@ import com.liferay.portlet.messageboards.service.MBMessageService;
 import com.liferay.portlet.messageboards.service.persistence.MBMessageFinder;
 import com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence;
 import com.liferay.portlet.social.service.SocialActivityLocalService;
+import com.liferay.portlet.social.service.SocialEquityLogLocalService;
 import com.liferay.portlet.social.service.persistence.SocialActivityFinder;
 import com.liferay.portlet.social.service.persistence.SocialActivityPersistence;
+import com.liferay.portlet.social.service.persistence.SocialEquityLogPersistence;
 import com.liferay.portlet.wiki.service.WikiNodeLocalService;
 import com.liferay.portlet.wiki.service.WikiNodeService;
 import com.liferay.portlet.wiki.service.WikiPageLocalService;
@@ -171,6 +175,22 @@ public abstract class WikiPageServiceBaseImpl extends PrincipalBean
 
 	public void setCounterLocalService(CounterLocalService counterLocalService) {
 		this.counterLocalService = counterLocalService;
+	}
+
+	public CounterPersistence getCounterPersistence() {
+		return counterPersistence;
+	}
+
+	public void setCounterPersistence(CounterPersistence counterPersistence) {
+		this.counterPersistence = counterPersistence;
+	}
+
+	public CounterFinder getCounterFinder() {
+		return counterFinder;
+	}
+
+	public void setCounterFinder(CounterFinder counterFinder) {
+		this.counterFinder = counterFinder;
 	}
 
 	public DLLocalService getDLLocalService() {
@@ -571,6 +591,24 @@ public abstract class WikiPageServiceBaseImpl extends PrincipalBean
 		this.socialActivityFinder = socialActivityFinder;
 	}
 
+	public SocialEquityLogLocalService getSocialEquityLogLocalService() {
+		return socialEquityLogLocalService;
+	}
+
+	public void setSocialEquityLogLocalService(
+		SocialEquityLogLocalService socialEquityLogLocalService) {
+		this.socialEquityLogLocalService = socialEquityLogLocalService;
+	}
+
+	public SocialEquityLogPersistence getSocialEquityLogPersistence() {
+		return socialEquityLogPersistence;
+	}
+
+	public void setSocialEquityLogPersistence(
+		SocialEquityLogPersistence socialEquityLogPersistence) {
+		this.socialEquityLogPersistence = socialEquityLogPersistence;
+	}
+
 	protected void runSQL(String sql) throws SystemException {
 		try {
 			DataSource dataSource = wikiPagePersistence.getDataSource();
@@ -605,6 +643,10 @@ public abstract class WikiPageServiceBaseImpl extends PrincipalBean
 	protected WikiPageResourcePersistence wikiPageResourcePersistence;
 	@BeanReference(type = CounterLocalService.class)
 	protected CounterLocalService counterLocalService;
+	@BeanReference(type = CounterPersistence.class)
+	protected CounterPersistence counterPersistence;
+	@BeanReference(type = CounterFinder.class)
+	protected CounterFinder counterFinder;
 	@BeanReference(type = DLLocalService.class)
 	protected DLLocalService dlLocalService;
 	@BeanReference(type = DLService.class)
@@ -699,4 +741,8 @@ public abstract class WikiPageServiceBaseImpl extends PrincipalBean
 	protected SocialActivityPersistence socialActivityPersistence;
 	@BeanReference(type = SocialActivityFinder.class)
 	protected SocialActivityFinder socialActivityFinder;
+	@BeanReference(type = SocialEquityLogLocalService.class)
+	protected SocialEquityLogLocalService socialEquityLogLocalService;
+	@BeanReference(type = SocialEquityLogPersistence.class)
+	protected SocialEquityLogPersistence socialEquityLogPersistence;
 }

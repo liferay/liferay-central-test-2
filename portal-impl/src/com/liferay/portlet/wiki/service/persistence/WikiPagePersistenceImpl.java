@@ -14,6 +14,8 @@
 
 package com.liferay.portlet.wiki.service.persistence;
 
+import com.liferay.counter.service.persistence.CounterPersistence;
+
 import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistry;
@@ -23,7 +25,9 @@ import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.Query;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
+import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
+import com.liferay.portal.kernel.dao.orm.Type;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -35,6 +39,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.model.ModelListener;
+import com.liferay.portal.security.permission.InlineSQLHelperUtil;
 import com.liferay.portal.service.persistence.BatchSessionUtil;
 import com.liferay.portal.service.persistence.CompanyPersistence;
 import com.liferay.portal.service.persistence.GroupPersistence;
@@ -51,6 +56,7 @@ import com.liferay.portlet.asset.service.persistence.AssetTagPersistence;
 import com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence;
 import com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence;
 import com.liferay.portlet.social.service.persistence.SocialActivityPersistence;
+import com.liferay.portlet.social.service.persistence.SocialEquityLogPersistence;
 import com.liferay.portlet.wiki.NoSuchPageException;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.model.impl.WikiPageImpl;
@@ -5406,6 +5412,59 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		return count.intValue();
 	}
 
+	public int filterCountByUUID_G(String uuid, long groupId)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBundler query = new StringBundler(3);
+
+			query.append(_FILTER_SQL_COUNT_WIKIPAGE_WHERE);
+
+			if (uuid == null) {
+				query.append(_FINDER_COLUMN_UUID_G_UUID_1);
+			}
+			else {
+				if (uuid.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_UUID_G_UUID_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_UUID_G_UUID_2);
+				}
+			}
+
+			query.append(_FINDER_COLUMN_UUID_G_GROUPID_2);
+
+			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+					WikiPage.class.getName(), _FILTER_COLUMN_PAGEID,
+					_FILTER_COLUMN_USERID, groupId);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			if (uuid != null) {
+				qPos.add(uuid);
+			}
+
+			qPos.add(groupId);
+
+			Long count = (Long)q.uniqueResult();
+
+			return count.intValue();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public int countByNodeId(long nodeId) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(nodeId) };
 
@@ -6335,6 +6394,8 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	protected WikiPagePersistence wikiPagePersistence;
 	@BeanReference(type = WikiPageResourcePersistence.class)
 	protected WikiPageResourcePersistence wikiPageResourcePersistence;
+	@BeanReference(type = CounterPersistence.class)
+	protected CounterPersistence counterPersistence;
 	@BeanReference(type = CompanyPersistence.class)
 	protected CompanyPersistence companyPersistence;
 	@BeanReference(type = GroupPersistence.class)
@@ -6361,6 +6422,8 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	protected MBMessagePersistence mbMessagePersistence;
 	@BeanReference(type = SocialActivityPersistence.class)
 	protected SocialActivityPersistence socialActivityPersistence;
+	@BeanReference(type = SocialEquityLogPersistence.class)
+	protected SocialEquityLogPersistence socialEquityLogPersistence;
 	private static final String _SQL_SELECT_WIKIPAGE = "SELECT wikiPage FROM WikiPage wikiPage";
 	private static final String _SQL_SELECT_WIKIPAGE_WHERE = "SELECT wikiPage FROM WikiPage wikiPage WHERE ";
 	private static final String _SQL_COUNT_WIKIPAGE = "SELECT COUNT(wikiPage) FROM WikiPage wikiPage";
@@ -6424,6 +6487,11 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	private static final String _FINDER_COLUMN_N_H_P_S_PARENTTITLE_2 = "wikiPage.parentTitle = ? AND ";
 	private static final String _FINDER_COLUMN_N_H_P_S_PARENTTITLE_3 = "(wikiPage.parentTitle IS NULL OR wikiPage.parentTitle = ?) AND ";
 	private static final String _FINDER_COLUMN_N_H_P_S_STATUS_2 = "wikiPage.status = ?";
+	private static final String _FILTER_SQL_SELECT_WIKIPAGE_WHERE = "SELECT {wikiPage.*} FROM WikiPage wikiPage WHERE ";
+	private static final String _FILTER_SQL_COUNT_WIKIPAGE_WHERE = "SELECT COUNT(wikiPage.pageId) AS COUNT_VALUE FROM WikiPage wikiPage WHERE ";
+	private static final String _FILTER_COLUMN_PAGEID = "wikiPage.pageId";
+	private static final String _FILTER_COLUMN_USERID = "wikiPage.userId";
+	private static final String _FILTER_ENTITY_ALIAS = "wikiPage";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "wikiPage.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No WikiPage exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No WikiPage exists with the key {";

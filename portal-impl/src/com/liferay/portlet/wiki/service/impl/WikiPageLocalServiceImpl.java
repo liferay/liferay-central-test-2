@@ -46,12 +46,14 @@ import com.liferay.portal.model.Group;
 import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
+import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextUtil;
 import com.liferay.portal.util.Portal;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.portlet.asset.model.AssetEntry;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.wiki.DuplicatePageException;
 import com.liferay.portlet.wiki.NoSuchPageException;
@@ -102,6 +104,7 @@ import javax.portlet.WindowState;
  * @author Wesley Gong
  * @author Marcellus Tavares
  * @author Zsigmond Rab
+ * @author Zsolt Berentey
  */
 public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
@@ -411,6 +414,12 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		socialActivityLocalService.deleteActivities(
 			WikiPage.class.getName(), page.getResourcePrimKey());
+
+		AssetEntry assetEntry = assetEntryLocalService.getEntry(
+			WikiPage.class.getName(), page.getResourcePrimKey());
+
+		socialEquityLogLocalService.deactivateEquityLogs(
+			assetEntry.getEntryId());
 
 		// Message boards
 
@@ -1167,7 +1176,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 			// Asset
 
-			assetEntryLocalService.updateVisible(
+			AssetEntry assetEntry = assetEntryLocalService.updateVisible(
 				WikiPage.class.getName(), page.getResourcePrimKey(), true);
 
 			// Social
@@ -1176,6 +1185,13 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 			if (page.getVersion() > 1.1) {
 				activity = WikiActivityKeys.UPDATE_PAGE;
+
+				socialEquityLogLocalService.addEquityLogs(
+						userId, assetEntry.getEntryId(), ActionKeys.UPDATE);
+			}
+			else {
+				socialEquityLogLocalService.addEquityLogs(
+						userId, assetEntry.getEntryId(), ActionKeys.ADD_PAGE);
 			}
 
 			socialActivityLocalService.addActivity(
