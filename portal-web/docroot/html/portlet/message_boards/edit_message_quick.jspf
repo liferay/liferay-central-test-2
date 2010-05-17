@@ -66,10 +66,10 @@ boolean quote = ParamUtil.getBoolean(request, "quote");
 	<aui:input name="mbCategoryId" type="hidden" value="<%= categoryId %>" />
 	<aui:input name="threadId" type="hidden" value="<%= threadId %>" />
 	<aui:input name="parentMessageId" type="hidden" value="<%= parentMessageId %>" />
+	<aui:input name="subject" type="hidden" value="<%= subject %>" />
 	<aui:input name="workflowAction" type="hidden" value="<%= String.valueOf(WorkflowConstants.ACTION_PUBLISH) %>" />
 	<aui:input name="addGuestPermissions" type="hidden" value="true" />
 	<aui:input name="addCommunityPermissions" type="hidden" value="true" />
-	<aui:input name="subject" type="hidden" value="<%= subject %>" />
 
 	<aui:model-context bean="<%= message %>" model="<%= MBMessage.class %>" />
 

@@ -23,15 +23,6 @@ MBMessage message = (MBMessage)request.getAttribute(WebKeys.MESSAGE_BOARDS_MESSA
 
 long messageId = BeanParamUtil.getLong(message, request, "messageId");
 
-if (Validator.isNull(redirect)) {
-	PortletURL redirectURL = renderResponse.createRenderURL();
-
-	redirectURL.setParameter("struts_action", "/message_boards/view_message");
-	redirectURL.setParameter("messageId", String.valueOf(messageId));
-
-	redirect = redirectURL.toString();
-}
-
 long categoryId = BeanParamUtil.getLong(message, request, "mbCategoryId");
 long threadId = BeanParamUtil.getLong(message, request, "threadId");
 long parentMessageId = BeanParamUtil.getLong(message, request, "parentMessageId", MBMessageConstants.DEFAULT_PARENT_MESSAGE_ID);
@@ -74,6 +65,15 @@ if ((message != null) && message.isAttachments()) {
 }
 
 boolean allowPingbacks = PropsValues.MESSAGE_BOARDS_PINGBACK_ENABLED && BeanParamUtil.getBoolean(message, request, "allowPingbacks", true);
+
+if (Validator.isNull(redirect)) {
+	PortletURL viewMessageURL = renderResponse.createRenderURL();
+
+	viewMessageURL.setParameter("struts_action", "/message_boards/view_message");
+	viewMessageURL.setParameter("messageId", String.valueOf(messageId));
+
+	redirect = viewMessageURL.toString();
+}
 %>
 
 <c:if test="<%= preview %>">
@@ -320,16 +320,16 @@ boolean allowPingbacks = PropsValues.MESSAGE_BOARDS_PINGBACK_ENABLED && BeanPara
 		</c:if>
 
 		<%
-		boolean isPending = false;
+		boolean pending = false;
 
 		if (message != null) {
-			isPending = message.isPending();
+			pending = message.isPending();
 		}
 		%>
 
-		<aui:button name="saveButton" type="submit" value="publish" disabled="<%= isPending %>" />
+		<aui:button disabled="<%= pending %>" name="saveButton" type="submit" value="publish" />
 
-		<c:if test="<%= isPending %>">
+		<c:if test="<%= pending %>">
 			<liferay-ui:icon-help message="there-is-a-publication-workflow-in-process" />
 		</c:if>
 

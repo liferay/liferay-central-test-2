@@ -1493,7 +1493,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			pingPingback(message, serviceContext);
 		}
 		else if ((oldStatus == WorkflowConstants.STATUS_APPROVED) &&
-			(status != WorkflowConstants.STATUS_APPROVED)) {
+				 (status != WorkflowConstants.STATUS_APPROVED)) {
 
 			// Thread
 
@@ -1595,9 +1595,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			MBMessage message, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		boolean update = GetterUtil.getBoolean(
-			(String)serviceContext.getAttribute("update"));
-
 		if (message.getStatus() != WorkflowConstants.STATUS_APPROVED) {
 			return;
 		}
@@ -1622,6 +1619,9 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				message.getCompanyId(), ownerId, ownerType, plid, portletId,
 				defaultPreferences);
 		}
+
+		boolean update = GetterUtil.getBoolean(
+			(String)serviceContext.getAttribute("update"));
 
 		if (!update && MBUtil.getEmailMessageAddedEnabled(preferences)) {
 		}

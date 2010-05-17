@@ -63,7 +63,7 @@ int depth = 0;
 for (int i = 0; i < messages.size(); i++) {
 	message = messages.get(i);
 
-	if (!message.isApproved() && (message.getUserId() != user.getUserId()) && !permissionChecker.isCompanyAdmin(scopeGroupId)) {
+	if (!message.isApproved() && (message.getUserId() != user.getUserId()) && !permissionChecker.isCommunityAdmin(scopeGroupId)) {
 		continue;
 	}
 
