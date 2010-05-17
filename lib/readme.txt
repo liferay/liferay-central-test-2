@@ -1,6 +1,6 @@
 JARs in the development directory are only visible during compile time. Most
 of these JARs are already included by the application server or are only useful
-for a specific databases (i.e. JDBC drivers).
+for a specific database (i.e. JDBC drivers).
 
 JARs in the global directory are automatically copied to the application
 server's global classpath and are visible by all applications loaded by the
