@@ -51,6 +51,7 @@ import com.liferay.portal.model.ModelHintsUtil;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextUtil;
 import com.liferay.portal.util.Portal;
@@ -58,6 +59,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.portlet.asset.model.AssetEntry;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.social.BlogsActivityKeys;
 import com.liferay.portlet.blogs.util.LinkbackProducerUtil;
@@ -164,6 +166,16 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		message.setClassPK(classPK);
 
 		mbMessagePersistence.update(message, false);
+
+		// social equity
+
+		AssetEntry assetEntry = assetEntryPersistence.findByC_C(
+			classNameId, classPK);
+
+		if (userId != assetEntry.getUserId()) {
+			socialEquityLogLocalService.addEquityLogs(
+				userId, assetEntry.getEntryId(), ActionKeys.ADD_DISCUSSION);
+		}
 
 		if (className.equals(BlogsEntry.class.getName()) &&
 			parentMessageId != MBMessageConstants.DEFAULT_PARENT_MESSAGE_ID) {

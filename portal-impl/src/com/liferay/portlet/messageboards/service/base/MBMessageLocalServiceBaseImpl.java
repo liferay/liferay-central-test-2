@@ -15,6 +15,8 @@
 package com.liferay.portlet.messageboards.service.base;
 
 import com.liferay.counter.service.CounterLocalService;
+import com.liferay.counter.service.persistence.CounterFinder;
+import com.liferay.counter.service.persistence.CounterPersistence;
 
 import com.liferay.documentlibrary.service.DLLocalService;
 import com.liferay.documentlibrary.service.DLService;
@@ -97,8 +99,10 @@ import com.liferay.portlet.messageboards.service.persistence.MBThreadPersistence
 import com.liferay.portlet.ratings.service.RatingsStatsLocalService;
 import com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence;
 import com.liferay.portlet.social.service.SocialActivityLocalService;
+import com.liferay.portlet.social.service.SocialEquityLogLocalService;
 import com.liferay.portlet.social.service.persistence.SocialActivityFinder;
 import com.liferay.portlet.social.service.persistence.SocialActivityPersistence;
+import com.liferay.portlet.social.service.persistence.SocialEquityLogPersistence;
 
 import java.util.List;
 
@@ -402,6 +406,22 @@ public abstract class MBMessageLocalServiceBaseImpl
 
 	public void setCounterLocalService(CounterLocalService counterLocalService) {
 		this.counterLocalService = counterLocalService;
+	}
+
+	public CounterPersistence getCounterPersistence() {
+		return counterPersistence;
+	}
+
+	public void setCounterPersistence(CounterPersistence counterPersistence) {
+		this.counterPersistence = counterPersistence;
+	}
+
+	public CounterFinder getCounterFinder() {
+		return counterFinder;
+	}
+
+	public void setCounterFinder(CounterFinder counterFinder) {
+		this.counterFinder = counterFinder;
 	}
 
 	public DLLocalService getDLLocalService() {
@@ -809,6 +829,24 @@ public abstract class MBMessageLocalServiceBaseImpl
 		this.socialActivityFinder = socialActivityFinder;
 	}
 
+	public SocialEquityLogLocalService getSocialEquityLogLocalService() {
+		return socialEquityLogLocalService;
+	}
+
+	public void setSocialEquityLogLocalService(
+		SocialEquityLogLocalService socialEquityLogLocalService) {
+		this.socialEquityLogLocalService = socialEquityLogLocalService;
+	}
+
+	public SocialEquityLogPersistence getSocialEquityLogPersistence() {
+		return socialEquityLogPersistence;
+	}
+
+	public void setSocialEquityLogPersistence(
+		SocialEquityLogPersistence socialEquityLogPersistence) {
+		this.socialEquityLogPersistence = socialEquityLogPersistence;
+	}
+
 	protected void runSQL(String sql) throws SystemException {
 		try {
 			DataSource dataSource = mbMessagePersistence.getDataSource();
@@ -873,6 +911,10 @@ public abstract class MBMessageLocalServiceBaseImpl
 	protected MBThreadFinder mbThreadFinder;
 	@BeanReference(type = CounterLocalService.class)
 	protected CounterLocalService counterLocalService;
+	@BeanReference(type = CounterPersistence.class)
+	protected CounterPersistence counterPersistence;
+	@BeanReference(type = CounterFinder.class)
+	protected CounterFinder counterFinder;
 	@BeanReference(type = DLLocalService.class)
 	protected DLLocalService dlLocalService;
 	@BeanReference(type = DLService.class)
@@ -969,4 +1011,8 @@ public abstract class MBMessageLocalServiceBaseImpl
 	protected SocialActivityPersistence socialActivityPersistence;
 	@BeanReference(type = SocialActivityFinder.class)
 	protected SocialActivityFinder socialActivityFinder;
+	@BeanReference(type = SocialEquityLogLocalService.class)
+	protected SocialEquityLogLocalService socialEquityLogLocalService;
+	@BeanReference(type = SocialEquityLogPersistence.class)
+	protected SocialEquityLogPersistence socialEquityLogPersistence;
 }
