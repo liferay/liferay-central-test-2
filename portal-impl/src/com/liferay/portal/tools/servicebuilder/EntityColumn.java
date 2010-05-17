@@ -190,6 +190,24 @@ public class EntityColumn implements Cloneable {
 		if (Character.isLowerCase(_type.charAt(0))) {
 			return true;
 		}
+		else if (_type.equals("Boolean")) {
+			return true;
+		}
+		else if (_type.equals("Double")) {
+			return true;
+		}
+		else if (_type.equals("Float")) {
+			return true;
+		}
+		else if (_type.equals("Integer")) {
+			return true;
+		}
+		else if (_type.equals("Long")) {
+			return true;
+		}
+		else if (_type.equals("Short")) {
+			return true;
+		}
 		else {
 			return false;
 		}

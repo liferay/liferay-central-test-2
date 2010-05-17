@@ -157,10 +157,6 @@ public class ClpSerializer {
 
 								newModel.set${column.methodName}(value${column_index}
 
-								<#if column.isPrimitiveType()>
-									.${column.type}Value()
-								</#if>
-
 								);
 							</#list>
 
