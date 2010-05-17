@@ -24,12 +24,8 @@ import jodd.util.StringPool;
 public class NtlmServiceAccount {
 
 	public NtlmServiceAccount(String account, String password) {
-		_account = account;
-		_password = password;
-
-		_accountName = _account.substring(0, _account.indexOf(StringPool.AT));
-		_computerName = _account.substring(
-			0, _account.indexOf(StringPool.DOLLAR));
+		setAccount(account);
+		setPassword(password);
 	}
 
 	public String getAccount() {
@@ -46,6 +42,18 @@ public class NtlmServiceAccount {
 
 	public String getPassword() {
 		return _password;
+	}
+
+	public void setAccount(String account) {
+		_account = account;
+
+		_accountName = _account.substring(0, _account.indexOf(StringPool.AT));
+		_computerName = _account.substring(
+			0, _account.indexOf(StringPool.DOLLAR));
+	}
+
+	public void setPassword(String password) {
+		_password = password;
 	}
 
 	private String _account;

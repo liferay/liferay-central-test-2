@@ -14,8 +14,6 @@
 
 package com.liferay.portal.security.ntlm;
 
-import com.liferay.portal.util.PropsValues;
-
 /**
  * <a href="NetlogonUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -32,18 +30,19 @@ public class NetlogonUtil {
 			lmResponse);
 	}
 
-	private NetlogonUtil() {
-		NtlmServiceAccount ntlmServiceAccount = new NtlmServiceAccount(
-			PropsValues.NTLM_SERVICE_ACCOUNT,
-			PropsValues.NTLM_SERVICE_PASSWORD);
+	public static void setConfiguration(
+		String domainController, String domainControllerName,
+		NtlmServiceAccount ntlmServiceAccount) {
 
-		_netlogon = new Netlogon(
-			PropsValues.NTLM_DOMAIN_CONTROLLER,
-			PropsValues.NTLM_DOMAIN_CONTROLLER_NAME, ntlmServiceAccount);
+		_instance._netlogon.setConfiguration(
+			domainController, domainControllerName, ntlmServiceAccount);
+	}
+
+	private NetlogonUtil() {
 	}
 
 	private static NetlogonUtil _instance = new NetlogonUtil();
 
-	private Netlogon _netlogon;
+	private Netlogon _netlogon = new Netlogon();
 
 }
