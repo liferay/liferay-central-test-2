@@ -236,16 +236,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	// Status
 
-	String status = null;
-
-	if (curWikiPage.getStatus() == WorkflowConstants.STATUS_APPROVED) {
-		status = "approved";
-	}
-	else {
-		status = "not-approved";
-	}
-
-	row.addText(LanguageUtil.get(pageContext, status), rowURL);
+	row.addText(LanguageUtil.get(pageContext, WorkflowConstants.toLabel(curWikiPage.getStatus())), rowURL);
 
 	// Revision
 

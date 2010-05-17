@@ -107,22 +107,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 				// Status
 
-				String status = null;
-
-				if (article.isApproved()) {
-					status = "approved";
-				}
-				else if (article.isDraft()) {
-					status = "draft";
-				}
-				else if (article.isExpired()) {
-					status = "expired";
-				}
-				else if (article.isPending()) {
-					status = "pending";
-				}
-
-				row.addText(LanguageUtil.get(pageContext, status), rowURL);
+				row.addText(LanguageUtil.get(pageContext, WorkflowConstants.toLabel(article.getStatus())), rowURL);
 
 				// Modified date
 
