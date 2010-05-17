@@ -67,7 +67,7 @@ try {
 		ResourceLocalServiceUtil.getResource(company.getCompanyId(), rootPortletId, ResourceConstants.SCOPE_INDIVIDUAL, portletPrimaryKey);
 	}
 
-	if (!portlet.isAddDefaultResource() && !layout.isTypeControlPanel() && !layoutTypePortlet.hasPortletId(portletId)) {
+	if (!portlet.isAddDefaultResource() && layout.isTypePortlet() && !layoutTypePortlet.hasPortletId(portletId)) {
 		denyAccess = true;
 	}
 	else if (portlet.isAddDefaultResource() && !allowAddDefaultResource && !layoutTypePortlet.hasPortletId(portletId)) {
