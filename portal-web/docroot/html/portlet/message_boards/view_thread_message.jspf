@@ -137,7 +137,7 @@
 					<c:if test="<%= (message != null) && !message.isApproved() %>">
 						<aui:model-context bean="<%= message %>" model="<%= MBMessage.class %>" />
 
-						<aui:worflow-status status="<%= message.getStatus() %>" />
+						<aui:workflow-status status="<%= message.getStatus() %>" />
 					</c:if>
 
 					<%

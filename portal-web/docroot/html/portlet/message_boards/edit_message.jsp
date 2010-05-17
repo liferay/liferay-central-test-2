@@ -164,7 +164,7 @@ boolean allowPingbacks = PropsValues.MESSAGE_BOARDS_PINGBACK_ENABLED && BeanPara
 
 	<aui:fieldset>
 		<c:if test="<%= message != null %>">
-			<aui:worflow-status status="<%= message.getStatus() %>" />
+			<aui:workflow-status status="<%= message.getStatus() %>" />
 		</c:if>
 
 		<aui:input name="subject" value="<%= subject %>" />
