@@ -15,8 +15,6 @@
 package com.liferay.portlet.messageboards.service.base;
 
 import com.liferay.counter.service.CounterLocalService;
-import com.liferay.counter.service.persistence.CounterFinder;
-import com.liferay.counter.service.persistence.CounterPersistence;
 
 import com.liferay.documentlibrary.service.DLLocalService;
 import com.liferay.documentlibrary.service.DLService;
@@ -322,22 +320,6 @@ public abstract class MBMessageServiceBaseImpl extends PrincipalBean
 
 	public void setCounterLocalService(CounterLocalService counterLocalService) {
 		this.counterLocalService = counterLocalService;
-	}
-
-	public CounterPersistence getCounterPersistence() {
-		return counterPersistence;
-	}
-
-	public void setCounterPersistence(CounterPersistence counterPersistence) {
-		this.counterPersistence = counterPersistence;
-	}
-
-	public CounterFinder getCounterFinder() {
-		return counterFinder;
-	}
-
-	public void setCounterFinder(CounterFinder counterFinder) {
-		this.counterFinder = counterFinder;
 	}
 
 	public DLLocalService getDLLocalService() {
@@ -827,10 +809,6 @@ public abstract class MBMessageServiceBaseImpl extends PrincipalBean
 	protected MBThreadFinder mbThreadFinder;
 	@BeanReference(type = CounterLocalService.class)
 	protected CounterLocalService counterLocalService;
-	@BeanReference(type = CounterPersistence.class)
-	protected CounterPersistence counterPersistence;
-	@BeanReference(type = CounterFinder.class)
-	protected CounterFinder counterFinder;
 	@BeanReference(type = DLLocalService.class)
 	protected DLLocalService dlLocalService;
 	@BeanReference(type = DLService.class)

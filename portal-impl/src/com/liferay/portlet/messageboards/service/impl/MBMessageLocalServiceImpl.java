@@ -137,6 +137,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
+		// Message
+
 		long classNameId = PortalUtil.getClassNameId(className);
 
 		if (Validator.isNull(subject)) {
@@ -167,12 +169,12 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		mbMessagePersistence.update(message, false);
 
-		// social equity
+		// Social
 
 		AssetEntry assetEntry = assetEntryPersistence.findByC_C(
 			classNameId, classPK);
 
-		if (userId != assetEntry.getUserId()) {
+		if (assetEntry.getUserId() != userId) {
 			socialEquityLogLocalService.addEquityLogs(
 				userId, assetEntry.getEntryId(), ActionKeys.ADD_DISCUSSION);
 		}
@@ -202,6 +204,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				_log.error(e, e);
 			}
 		}
+
+		// Discussion
 
 		if (parentMessageId == MBMessageConstants.DEFAULT_PARENT_MESSAGE_ID) {
 			MBDiscussion discussion = mbDiscussionPersistence.fetchByC_C(
