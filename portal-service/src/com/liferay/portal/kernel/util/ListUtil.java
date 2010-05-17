@@ -27,10 +27,10 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Enumeration;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-import java.util.TreeSet;
 
 /**
  * <a href="ListUtil.java.html"><b><i>View Source</i></b></a>
@@ -66,14 +66,7 @@ public class ListUtil {
 			return;
 		}
 
-		Set<E> set = null;
-
-		if (comparator == null) {
-			set = new TreeSet<E>();
-		}
-		else {
-			set = new TreeSet<E>(comparator);
-		}
+		Set<E> set = new HashSet<E>();
 
 		Iterator<E> itr = list.iterator();
 
@@ -86,6 +79,10 @@ public class ListUtil {
 			else {
 				set.add(obj);
 			}
+		}
+
+		if (comparator != null) {
+			Collections.sort(list, comparator);
 		}
 	}
 
