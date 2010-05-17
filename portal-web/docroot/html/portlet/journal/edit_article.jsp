@@ -282,7 +282,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 							</c:choose>
 						</c:when>
 						<c:otherwise>
-							<aui:worflow-status id="<%= article.getArticleId() %>" status="<%= article.getStatus() %>" version="<%= article.getVersion() %>" />
+							<aui:workflow-status id="<%= article.getArticleId() %>" status="<%= article.getStatus() %>" version="<%= article.getVersion() %>" />
 						</c:otherwise>
 					</c:choose>
 				</td>

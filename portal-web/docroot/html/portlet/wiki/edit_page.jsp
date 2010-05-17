@@ -170,7 +170,7 @@ if (Validator.isNull(redirect)) {
 	<aui:input name="nodeId" type="hidden" value="<%= nodeId %>" />
 
 	<c:if test="<%= wikiPage != null %>">
-		<aui:worflow-status status="<%= wikiPage.getStatus() %>" version="<%= wikiPage.getVersion() %>" />
+		<aui:workflow-status status="<%= wikiPage.getStatus() %>" version="<%= wikiPage.getVersion() %>" />
 	</c:if>
 
 	<c:if test="<%= !editTitle %>">
