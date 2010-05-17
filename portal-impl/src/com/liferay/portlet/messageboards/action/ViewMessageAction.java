@@ -81,7 +81,7 @@ public class ViewMessageAction extends PortletAction {
 
 			MBMessageDisplay messageDisplay =
 				MBMessageServiceUtil.getMessageDisplay(
-					messageId, WorkflowConstants.STATUS_APPROVED, threadView);
+					messageId, WorkflowConstants.STATUS_ANY, threadView);
 
 			renderRequest.setAttribute(
 				WebKeys.MESSAGE_BOARDS_MESSAGE, messageDisplay);

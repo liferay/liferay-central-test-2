@@ -23,6 +23,15 @@ MBMessage message = (MBMessage)request.getAttribute(WebKeys.MESSAGE_BOARDS_MESSA
 
 long messageId = BeanParamUtil.getLong(message, request, "messageId");
 
+if (Validator.isNull(redirect)) {
+	PortletURL redirectURL = renderResponse.createRenderURL();
+
+	redirectURL.setParameter("struts_action", "/message_boards/view_message");
+	redirectURL.setParameter("messageId", String.valueOf(messageId));
+
+	redirect = redirectURL.toString();
+}
+
 long categoryId = BeanParamUtil.getLong(message, request, "mbCategoryId");
 long threadId = BeanParamUtil.getLong(message, request, "threadId");
 long parentMessageId = BeanParamUtil.getLong(message, request, "parentMessageId", MBMessageConstants.DEFAULT_PARENT_MESSAGE_ID);
@@ -127,7 +136,7 @@ boolean allowPingbacks = PropsValues.MESSAGE_BOARDS_PINGBACK_ENABLED && BeanPara
 	<portlet:param name="struts_action" value="/message_boards/edit_message" />
 </portlet:actionURL>
 
-<aui:form action="<%= editMessageURL %>" enctype="multipart/form-data" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveMessage();" %>'>
+<aui:form action="<%= editMessageURL %>" enctype="multipart/form-data" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveMessage(false);" %>'>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 	<aui:input name="messageId" type="hidden" value="<%= messageId %>" />
@@ -136,6 +145,7 @@ boolean allowPingbacks = PropsValues.MESSAGE_BOARDS_PINGBACK_ENABLED && BeanPara
 	<aui:input name="parentMessageId" type="hidden" value="<%= parentMessageId %>" />
 	<aui:input name="attachments" type="hidden" value="<%= attachments %>" />
 	<aui:input name="preview" type="hidden" />
+	<aui:input name="workflowAction" type="hidden" value="<%= String.valueOf(WorkflowConstants.ACTION_SAVE_DRAFT) %>" />
 
 	<liferay-ui:error exception="<%= CaptchaTextException.class %>" message="text-verification-failed" />
 	<liferay-ui:error exception="<%= LockedThreadException.class %>" message="thread-is-locked" />
@@ -153,6 +163,10 @@ boolean allowPingbacks = PropsValues.MESSAGE_BOARDS_PINGBACK_ENABLED && BeanPara
 	<aui:model-context bean="<%= message %>" model="<%= MBMessage.class %>" />
 
 	<aui:fieldset>
+		<c:if test="<%= message != null %>">
+			<aui:worflow-status status="<%= message.getStatus() %>" />
+		</c:if>
+
 		<aui:input name="subject" value="<%= subject %>" />
 
 		<aui:field-wrapper label="body">
@@ -301,7 +315,23 @@ boolean allowPingbacks = PropsValues.MESSAGE_BOARDS_PINGBACK_ENABLED && BeanPara
 	</c:if>
 
 	<aui:button-row>
-		<aui:button type="submit" />
+		<c:if test="<%= (message == null) || (message.getStatus() != WorkflowConstants.STATUS_APPROVED) %>">
+			<aui:button name="saveDraftButton" onClick='<%= renderResponse.getNamespace() + "saveMessage(true);" %>' type="button" value="save-draft" />
+		</c:if>
+
+		<%
+		boolean isPending = false;
+
+		if (message != null) {
+			isPending = message.isPending();
+		}
+		%>
+
+		<aui:button name="saveButton" type="submit" value="publish" disabled="<%= isPending %>" />
+
+		<c:if test="<%= isPending %>">
+			<liferay-ui:icon-help message="there-is-a-publication-workflow-in-process" />
+		</c:if>
 
 		<c:if test="<%= MBCategoryPermission.contains(permissionChecker, scopeGroupId, categoryId, ActionKeys.ADD_FILE) %>">
 
@@ -352,9 +382,14 @@ boolean allowPingbacks = PropsValues.MESSAGE_BOARDS_PINGBACK_ENABLED && BeanPara
 		return content;
 	}
 
-	function <portlet:namespace />saveMessage() {
+	function <portlet:namespace />saveMessage(draft) {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= message == null ? Constants.ADD : Constants.UPDATE %>";
 		document.<portlet:namespace />fm.<portlet:namespace />body.value = <portlet:namespace />getHTML();
+
+		if (!draft) {
+			document.<portlet:namespace />fm.<portlet:namespace />workflowAction.value = <%= WorkflowConstants.ACTION_PUBLISH %>;
+		}
+
 		submitForm(document.<portlet:namespace />fm);
 	}
 

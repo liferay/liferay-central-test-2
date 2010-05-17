@@ -25,6 +25,7 @@ import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
@@ -76,8 +77,10 @@ public class EditMessageAction extends PortletAction {
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		try {
+			MBMessage message = null;
+
 			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
-				updateMessage(actionRequest, actionResponse);
+				message = updateMessage(actionRequest, actionResponse);
 			}
 			else if (cmd.equals(Constants.DELETE)) {
 				deleteMessage(actionRequest);
@@ -95,13 +98,22 @@ public class EditMessageAction extends PortletAction {
 				unsubscribeMessage(actionRequest);
 			}
 
-			if (cmd.equals(Constants.DELETE) ||
-				cmd.equals(Constants.LOCK) ||
-				cmd.equals(Constants.SUBSCRIBE) ||
-				cmd.equals(Constants.UNSUBSCRIBE) ||
-				cmd.equals(Constants.UNLOCK)) {
+			if (Validator.isNotNull(cmd)) {
+				String redirect = ParamUtil.getString(
+					actionRequest, "redirect");
 
-				sendRedirect(actionRequest, actionResponse);
+				int workflowAction = ParamUtil.getInteger(
+					actionRequest, "workflowAction",
+					WorkflowConstants.ACTION_PUBLISH);
+
+				if ((message != null) &&
+					(workflowAction == WorkflowConstants.ACTION_SAVE_DRAFT)) {
+
+					redirect = getSaveAndContinueRedirect(
+						actionResponse, message);
+				}
+
+				sendRedirect(actionRequest, actionResponse, redirect);
 			}
 		}
 		catch (Exception e) {
@@ -162,6 +174,20 @@ public class EditMessageAction extends PortletAction {
 		MBMessageServiceUtil.deleteMessage(messageId);
 	}
 
+	protected String getSaveAndContinueRedirect(
+		ActionResponse actionResponse, MBMessage message) {
+
+		PortletURL portletURL =
+			((ActionResponseImpl)actionResponse).createRenderURL();
+
+		portletURL.setParameter(
+			"struts_action", "/message_boards/edit_message");
+		portletURL.setParameter(
+			"messageId", String.valueOf(message.getMessageId()));
+
+		return portletURL.toString();
+	}
+
 	protected void lockThread(ActionRequest actionRequest) throws Exception {
 		long threadId = ParamUtil.getLong(actionRequest, "threadId");
 
@@ -190,7 +216,7 @@ public class EditMessageAction extends PortletAction {
 		MBMessageServiceUtil.unsubscribeMessage(messageId);
 	}
 
-	protected void updateMessage(
+	protected MBMessage updateMessage(
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
@@ -298,15 +324,7 @@ public class EditMessageAction extends PortletAction {
 			}
 		}
 
-		PortletURL portletURL =
-			((ActionResponseImpl)actionResponse).createRenderURL();
-
-		portletURL.setParameter(
-			"struts_action", "/message_boards/view_message");
-		portletURL.setParameter(
-			"messageId", String.valueOf(message.getMessageId()));
-
-		actionResponse.sendRedirect(portletURL.toString());
+		return message;
 	}
 
 }

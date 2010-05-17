@@ -124,6 +124,10 @@ depth++;
 for (int i = range[0]; i < range[1]; i++) {
 	MBMessage curMessage = (MBMessage)messages.get(i);
 
+	if (!curMessage.isApproved() && (curMessage.getUserId() != user.getUserId()) && !permissionChecker.isCompanyAdmin(scopeGroupId)) {
+		continue;
+	}
+
 	boolean lastChildNode = false;
 
 	if ((i + 1) == range[1]) {

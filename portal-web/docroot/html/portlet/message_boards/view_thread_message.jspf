@@ -134,6 +134,12 @@
 
 					<%= dateFormatDateTime.format(message.getModifiedDate()) %>
 
+					<c:if test="<%= (message != null) && !message.isApproved() %>">
+						<aui:model-context bean="<%= message %>" model="<%= MBMessage.class %>" />
+
+						<aui:worflow-status status="<%= message.getStatus() %>" />
+					</c:if>
+
 					<%
 					MBMessage parentMessage = null;
 

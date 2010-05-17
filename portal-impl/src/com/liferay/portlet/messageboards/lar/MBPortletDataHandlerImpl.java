@@ -302,6 +302,10 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 			return;
 		}
 
+		if (message.getStatus() != WorkflowConstants.STATUS_APPROVED) {
+			return;
+		}
+
 		exportParentCategory(context, categoriesEl, message.getCategoryId());
 
 		String path = getMessagePath(context, message);

@@ -66,7 +66,7 @@ boolean quote = ParamUtil.getBoolean(request, "quote");
 	<aui:input name="mbCategoryId" type="hidden" value="<%= categoryId %>" />
 	<aui:input name="threadId" type="hidden" value="<%= threadId %>" />
 	<aui:input name="parentMessageId" type="hidden" value="<%= parentMessageId %>" />
-
+	<aui:input name="workflowAction" type="hidden" value="<%= String.valueOf(WorkflowConstants.ACTION_PUBLISH) %>" />
 	<aui:input name="addGuestPermissions" type="hidden" value="true" />
 	<aui:input name="addCommunityPermissions" type="hidden" value="true" />
 	<aui:input name="subject" type="hidden" value="<%= subject %>" />
@@ -91,7 +91,7 @@ boolean quote = ParamUtil.getBoolean(request, "quote");
 	</aui:fieldset>
 
 	<aui:button-row>
-		<aui:button type="submit" />
+		<aui:button name="saveButton" type="submit" value="publish" />
 
 		<%
 		String taglibCancelReply = renderResponse.getNamespace() + "addQuickReply('cancel', '');";

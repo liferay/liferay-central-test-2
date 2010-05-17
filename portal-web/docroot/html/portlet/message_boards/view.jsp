@@ -201,7 +201,7 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 			List<String> headerNames = new ArrayList<String>();
 
 			headerNames.add("thread");
-			headerNames.add("status");
+			headerNames.add("flag");
 			headerNames.add("started-by");
 			headerNames.add("posts");
 			headerNames.add("views");
@@ -268,7 +268,7 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 
 				row.addText(sb.toString(), rowURL);
 
-				// Status
+				// Flag
 
 				sb.setIndex(0);
 
@@ -408,6 +408,11 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 		headerNames.add("posts");
 		headerNames.add("views");
 		headerNames.add("last-post");
+
+		if (topLink.equals("my-posts")) {
+			headerNames.add("status");
+		}
+
 		headerNames.add(StringPool.BLANK);
 
 		String emptyResultsMessage = null;
@@ -427,11 +432,11 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 		List results = null;
 
 		if (topLink.equals("my-posts")) {
-			int total = MBThreadLocalServiceUtil.getGroupThreadsCount(scopeGroupId, groupThreadsUserId, WorkflowConstants.STATUS_APPROVED);
+			int total = MBThreadLocalServiceUtil.getGroupThreadsCount(scopeGroupId, groupThreadsUserId, WorkflowConstants.STATUS_ANY);
 
 			searchContainer.setTotal(total);
 
-			results = MBThreadLocalServiceUtil.getGroupThreads(scopeGroupId, groupThreadsUserId, WorkflowConstants.STATUS_APPROVED, searchContainer.getStart(), searchContainer.getEnd());
+			results = MBThreadLocalServiceUtil.getGroupThreads(scopeGroupId, groupThreadsUserId, WorkflowConstants.STATUS_ANY, searchContainer.getStart(), searchContainer.getEnd());
 
 			searchContainer.setResults(results);
 		}
@@ -533,6 +538,12 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 				}
 
 				row.addText(sb.toString(), rowURL);
+			}
+
+			// Status
+
+			if (topLink.equals("my-posts")) {
+				row.addText(LanguageUtil.get(pageContext, WorkflowConstants.toLabel(message.getStatus())), rowURL);
 			}
 
 			// Action
