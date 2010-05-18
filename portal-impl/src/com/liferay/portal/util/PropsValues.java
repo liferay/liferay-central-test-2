@@ -262,7 +262,7 @@ public class PropsValues {
 
 	public static final int CONTROL_PANEL_NAVIGATION_MAX_ORGANIZATIONS = GetterUtil.getInteger(PropsUtil.get(PropsKeys.CONTROL_PANEL_NAVIGATION_MAX_ORGANIZATIONS));
 
-	public static final String[] CONVERT_PROCESSES = PropsUtil.getArray(PropsKeys.CONVERT_PROCESSES);
+	public static String[] CONVERT_PROCESSES = PropsUtil.getArray(PropsKeys.CONVERT_PROCESSES);
 
 	public static final int COUNTER_INCREMENT = GetterUtil.getInteger(PropsUtil.get(PropsKeys.COUNTER_INCREMENT));
 

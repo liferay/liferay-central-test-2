@@ -23,6 +23,7 @@ auth.pipeline.pre
 auto.login.hooks
 captcha.check.portal.create_account
 control.panel.entry.class.default
+convert.processes
 default.landing.page.path
 dl.hook.impl
 dl.webdav.auto.unlock

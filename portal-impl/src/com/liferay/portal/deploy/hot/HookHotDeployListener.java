@@ -139,6 +139,7 @@ public class HookHotDeployListener
 		"auto.login.hooks",
 		"captcha.check.portal.create_account",
 		"control.panel.entry.class.default",
+		"convert.processes",
 		"default.landing.page.path",
 		"dl.hook.impl",
 		"dl.webdav.hold.lock",
@@ -1591,6 +1592,7 @@ public class HookHotDeployListener
 	};
 
 	private static final String[] _PROPS_VALUES_STRING_ARRAY = new String[] {
+		"convert.processes",
 		"layout.static.portlets.all",
 		"layout.types",
 		"session.phishing.protected.attributes"
