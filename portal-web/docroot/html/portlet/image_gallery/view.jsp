@@ -121,11 +121,12 @@ request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntry
 			<c:if test="<%= folder != null %>">
 
 				<%
-				IGFolder parentFolder = folder.getParentFolder();
 				long parentFolderId = defaultFolderId;
 				String parentFolderName = LanguageUtil.get(pageContext, "image-home");
 
-				if (parentFolder != null) {
+				if (!folder.isRoot()) {
+					IGFolder parentFolder = folder.getParentFolder();
+
 					parentFolderId = parentFolder.getFolderId();
 					parentFolderName = parentFolder.getName();
 				}

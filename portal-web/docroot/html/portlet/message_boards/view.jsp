@@ -161,9 +161,10 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 			<%
 			long parentCategoryId = category.getParentCategoryId();
 			String parentCategoryName = LanguageUtil.get(pageContext, "message-boards-home");
-			MBCategory parentCategory = MBCategoryServiceUtil.getCategory(parentCategoryId);
 
-			if (parentCategoryId != MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) {
+			if (!category.isRoot()) {
+				MBCategory parentCategory = MBCategoryLocalServiceUtil.getCategory(parentCategoryId);
+
 				parentCategoryId = parentCategory.getCategoryId();
 				parentCategoryName = parentCategory.getName();
 			}
@@ -176,7 +177,7 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 
 			<liferay-ui:tabs
 				names="<%= category.getName() %>"
-				backLabel='<%= "&laquo; " + LanguageUtil.format(pageContext, "back-to-x", HtmlUtil.escape(parentCategoryName)) %>' 
+				backLabel='<%= "&laquo; " + LanguageUtil.format(pageContext, "back-to-x", HtmlUtil.escape(parentCategoryName)) %>'
 				backURL="<%= backURL.toString() %>"
 			/>
 		</c:if>

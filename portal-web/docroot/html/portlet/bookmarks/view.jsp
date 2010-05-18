@@ -101,11 +101,12 @@ request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntry
 			<c:if test="<%= folder != null %>">
 
 				<%
-				BookmarksFolder parentFolder = folder.getParentFolder();
 				long parentFolderId = defaultFolderId;
 				String parentFolderName = LanguageUtil.get(pageContext, "bookmarks-home");
 
-				if (parentFolder != null) {
+				if (!folder.isRoot()) {
+					BookmarksFolder parentFolder = folder.getParentFolder();
+
 					parentFolderId = parentFolder.getFolderId();
 					parentFolderName = parentFolder.getName();
 				}

@@ -107,11 +107,12 @@ request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntry
 			<c:if test="<%= folder != null %>">
 
 				<%
-				DLFolder parentFolder = folder.getParentFolder();
 				long parentFolderId = defaultFolderId;
 				String parentFolderName = LanguageUtil.get(pageContext, "document-home");
 
-				if (parentFolder != null) {
+				if (!folder.isRoot()) {
+					DLFolder parentFolder = folder.getParentFolder();
+
 					parentFolderId = parentFolder.getFolderId();
 					parentFolderName = parentFolder.getName();
 				}
