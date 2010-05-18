@@ -55,9 +55,9 @@
 			expandoValue.setColumnId(expandoColumn.getColumnId());
 			expandoValue.setData(expandoColumn.getDefaultData());
 
-			for (String curValue : expandoValue.getStringArray()) {
-				buffer.append("<br/>");
-				buffer.append(curValue);
+			for (String stringValue : expandoValue.getStringArray()) {
+				buffer.append("<br />");
+				buffer.append(stringValue);
 			}
 		}
 		else {
