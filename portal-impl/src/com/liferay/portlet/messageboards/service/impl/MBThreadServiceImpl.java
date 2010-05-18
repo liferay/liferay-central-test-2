@@ -16,6 +16,7 @@ package com.liferay.portlet.messageboards.service.impl;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.Lock;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceContext;
@@ -57,6 +58,32 @@ public class MBThreadServiceImpl extends MBThreadServiceBaseImpl {
 		}
 
 		mbThreadLocalService.deleteThread(threadId);
+	}
+
+	public List<MBThread> getThreads(
+			long groupId, long categoryId, int status, int start, int end)
+		throws SystemException {
+
+		if (status == WorkflowConstants.STATUS_ANY) {
+			return mbThreadFinder.filterFindByG_C(
+				groupId, categoryId, start, end);
+		}
+		else {
+			return mbThreadFinder.filterFindByG_C_S(
+				groupId, categoryId, status, start, end);
+		}
+	}
+
+	public int getThreadsCount(long groupId, long categoryId, int status)
+		throws SystemException {
+
+		if (status == WorkflowConstants.STATUS_ANY) {
+			return mbThreadFinder.filterCountByG_C(groupId, categoryId);
+		}
+		else {
+			return mbThreadFinder.filterCountByG_C_S(
+				groupId, categoryId, status);
+		}
 	}
 
 	public Lock lockThread(long threadId)

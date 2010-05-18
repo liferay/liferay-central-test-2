@@ -207,6 +207,38 @@ public class MBMessageServiceSoap {
 		}
 	}
 
+	public static com.liferay.portlet.messageboards.model.MBMessageSoap[] getThreadMessages(
+		long categoryId, long groupId, long threadId, int status, int start,
+		int end) throws RemoteException {
+		try {
+			java.util.List<com.liferay.portlet.messageboards.model.MBMessage> returnValue =
+				MBMessageServiceUtil.getThreadMessages(categoryId, groupId,
+					threadId, status, start, end);
+
+			return com.liferay.portlet.messageboards.model.MBMessageSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int getThreadMessagesCount(long categoryId, long groupId,
+		long threadId, int status) throws RemoteException {
+		try {
+			int returnValue = MBMessageServiceUtil.getThreadMessagesCount(categoryId,
+					groupId, threadId, status);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static void subscribeMessage(long messageId)
 		throws RemoteException {
 		try {

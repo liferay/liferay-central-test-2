@@ -761,6 +761,8 @@ Liferay.Service.registerClass(
 		getCategoryMessagesCount: true,
 		getMessage: true,
 		getMessageDisplay: true,
+		getThreadMessages: true,
+		getThreadMessagesCount: true,
 		subscribeMessage: true,
 		unsubscribeMessage: true,
 		updateDiscussionMessage: true,
@@ -780,6 +782,8 @@ Liferay.Service.registerClass(
 	Liferay.Service.MB, "MBThread",
 	{
 		deleteThread: true,
+		getThreads: true,
+		getThreadsCount: true,
 		lockThread: true,
 		moveThread: true,
 		splitThread: true,

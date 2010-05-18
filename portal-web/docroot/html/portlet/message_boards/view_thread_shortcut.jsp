@@ -124,7 +124,7 @@ depth++;
 for (int i = range[0]; i < range[1]; i++) {
 	MBMessage curMessage = (MBMessage)messages.get(i);
 
-	if (!curMessage.isApproved() && (curMessage.getUserId() != user.getUserId()) && !permissionChecker.isCommunityAdmin(scopeGroupId)) {
+	if ((!curMessage.isApproved() && (curMessage.getUserId() != user.getUserId()) && !permissionChecker.isCommunityAdmin(scopeGroupId)) || !permissionChecker.hasPermission(scopeGroupId, MBMessage.class.getName(), message.getMessageId(), ActionKeys.VIEW)) {
 		continue;
 	}
 

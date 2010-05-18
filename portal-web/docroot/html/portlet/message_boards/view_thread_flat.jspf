@@ -39,11 +39,11 @@ if (threadView.equals(MBThreadConstants.THREAD_VIEW_FLAT)) {
 
 	searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, cur, delta, portletURL, null, null);
 
-	int total = MBMessageLocalServiceUtil.getThreadMessagesCount(message.getThreadId(), WorkflowConstants.STATUS_ANY);
+	int total = MBMessageServiceUtil.getThreadMessagesCount(scopeGroupId, category.getCategoryId(), message.getThreadId(), WorkflowConstants.STATUS_ANY);
 
 	searchContainer.setTotal(total);
 
-	messages = MBMessageLocalServiceUtil.getThreadMessages(message.getThreadId(), WorkflowConstants.STATUS_ANY, searchContainer.getStart(), searchContainer.getEnd());
+	messages = MBMessageServiceUtil.getThreadMessages(scopeGroupId, category.getCategoryId(), message.getThreadId(), WorkflowConstants.STATUS_ANY, searchContainer.getStart(), searchContainer.getEnd());
 
 	searchContainer.setResults(messages);
 }
@@ -63,7 +63,7 @@ int depth = 0;
 for (int i = 0; i < messages.size(); i++) {
 	message = messages.get(i);
 
-	if (!message.isApproved() && (message.getUserId() != user.getUserId()) && !permissionChecker.isCommunityAdmin(scopeGroupId)) {
+	if ((!message.isApproved() && (message.getUserId() != user.getUserId()) && !permissionChecker.isCommunityAdmin(scopeGroupId)) || !permissionChecker.hasPermission(scopeGroupId, MBMessage.class.getName(), message.getMessageId(), ActionKeys.VIEW)) {
 		continue;
 	}
 

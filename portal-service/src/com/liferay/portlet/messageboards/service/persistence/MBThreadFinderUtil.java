@@ -22,15 +22,72 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
  * @author Brian Wing Shun Chan
  */
 public class MBThreadFinderUtil {
+	public static int countByG_C(long groupId, long categoryId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getFinder().countByG_C(groupId, categoryId);
+	}
+
+	public static int countByG_C_S(long groupId, long categoryId, int status)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getFinder().countByG_C_S(groupId, categoryId, status);
+	}
+
 	public static int countByS_G_U_S(long groupId, long userId, int status)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder().countByS_G_U_S(groupId, userId, status);
+	}
+
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByG_C(
+		long groupId, long categoryId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getFinder().findByG_C(groupId, categoryId, start, end);
+	}
+
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByG_C_S(
+		long groupId, long categoryId, int status, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getFinder().findByG_C_S(groupId, categoryId, status, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByS_G_U_S(
 		long groupId, long userId, int status, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder().findByS_G_U_S(groupId, userId, status, start, end);
+	}
+
+	public static int filterCountByG_C(long groupId, long categoryId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getFinder().filterCountByG_C(groupId, categoryId);
+	}
+
+	public static int filterCountByG_C_S(long groupId, long categoryId,
+		int status) throws com.liferay.portal.kernel.exception.SystemException {
+		return getFinder().filterCountByG_C_S(groupId, categoryId, status);
+	}
+
+	public static int filterCountByS_G_U_S(long groupId, long userId, int status)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getFinder().filterCountByS_G_U_S(groupId, userId, status);
+	}
+
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBThread> filterFindByG_C(
+		long groupId, long categoryId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getFinder().filterFindByG_C(groupId, categoryId, start, end);
+	}
+
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBThread> filterFindByG_C_S(
+		long groupId, long categoryId, int status, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getFinder()
+				   .filterFindByG_C_S(groupId, categoryId, status, start, end);
+	}
+
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBThread> filterFindByS_G_U_S(
+		long groupId, long userId, int status, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getFinder()
+				   .filterFindByS_G_U_S(groupId, userId, status, start, end);
 	}
 
 	public static MBThreadFinder getFinder() {

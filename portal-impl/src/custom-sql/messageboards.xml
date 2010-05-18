@@ -65,7 +65,7 @@
 			WHERE
 				(groupId = ?) AND
 				(userId = ?) AND
-				(anonymous = ?) 
+				(anonymous = ?)
 				[$STATUS$]
 		]]>
 	</sql>
@@ -137,6 +137,35 @@
 				(Subscription.userId = ?)
 		]]>
 	</sql>
+	<sql id="com.liferay.portlet.messageboards.service.persistence.MBThreadFinder.filterCountByG_C">
+		<![CDATA[
+			SELECT
+				COUNT(DISTINCT MBThread.threadId) AS COUNT_VALUE
+			FROM
+				MBThread
+			INNER JOIN
+				MBMessage ON
+					(MBMessage.messageId = MBThread.rootMessageId)
+			WHERE
+				(MBThread.groupId = ?) AND
+				(MBThread.categoryId = ?)
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.messageboards.service.persistence.MBThreadFinder.filterCountByG_C_S">
+		<![CDATA[
+			SELECT
+				COUNT(DISTINCT MBThread.threadId) AS COUNT_VALUE
+			FROM
+				MBThread
+			INNER JOIN
+				MBMessage ON
+					(MBMessage.messageId = MBThread.rootMessageId)
+			WHERE
+				(MBThread.groupId = ?) AND
+				(MBThread.categoryId = ?)
+				[$STATUS$]
+		]]>
+	</sql>
 	<sql id="com.liferay.portlet.messageboards.service.persistence.MBThreadFinder.findByS_G_U_S">
 		<![CDATA[
 			SELECT
@@ -151,6 +180,41 @@
 				(MBThread.groupId = ?)
 				[$STATUS$] AND
 				(Subscription.userId = ?)
+			ORDER BY
+				MBThread.priority DESC,
+				MBThread.lastPostDate DESC
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.messageboards.service.persistence.MBThreadFinder.filterFindByG_C">
+		<![CDATA[
+			SELECT
+				DISTINCT {MBThread.*}
+			FROM
+				MBThread
+			INNER JOIN
+				MBMessage ON
+					(MBMessage.messageId = MBThread.rootMessageId)
+			WHERE
+				(MBThread.groupId = ?) AND
+				(MBThread.categoryId = ?)
+			ORDER BY
+				MBThread.priority DESC,
+				MBThread.lastPostDate DESC
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.messageboards.service.persistence.MBThreadFinder.filterFindByG_C_S">
+		<![CDATA[
+			SELECT
+				DISTINCT {MBThread.*}
+			FROM
+				MBThread
+			INNER JOIN
+				MBMessage ON
+					(MBMessage.messageId = MBThread.rootMessageId)
+			WHERE
+				(MBThread.groupId = ?) AND
+				(MBThread.categoryId = ?)
+				[$STATUS$]
 			ORDER BY
 				MBThread.priority DESC,
 				MBThread.lastPostDate DESC

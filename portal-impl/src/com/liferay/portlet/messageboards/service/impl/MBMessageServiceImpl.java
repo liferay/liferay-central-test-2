@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.User;
@@ -428,6 +429,35 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 
 		return mbMessageLocalService.getMessageDisplay(
 			messageId, status, threadView);
+	}
+
+	public List<MBMessage> getThreadMessages(
+			long groupId, long categoryId, long threadId, int status, int start,
+			int end)
+		throws PortalException, SystemException {
+
+		if (status == WorkflowConstants.STATUS_ANY) {
+			return mbMessagePersistence.filterFindByG_C_T(
+				groupId, categoryId, threadId, start, end);
+		}
+		else {
+			return mbMessagePersistence.filterFindByG_C_T_S(
+				groupId, categoryId, threadId, status, start, end);
+		}
+	}
+
+	public int getThreadMessagesCount(
+		long groupId, long categoryId, long threadId, int status)
+		throws PortalException, SystemException {
+
+		if (status == WorkflowConstants.STATUS_ANY) {
+			return mbMessagePersistence.filterCountByG_C_T(
+				groupId, categoryId, threadId);
+		}
+		else {
+			return mbMessagePersistence.filterCountByG_C_T_S(
+				groupId, categoryId, threadId, status);
+		}
 	}
 
 	public String getThreadMessagesRSS(
