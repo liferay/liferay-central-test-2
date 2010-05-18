@@ -122,8 +122,6 @@ public class RoleFinderImpl
 
 			SQLQuery q = session.createSQLQuery(sb.toString());
 
-			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
-
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			for (int i = 0; i < 6; i++) {
@@ -131,19 +129,7 @@ public class RoleFinderImpl
 				qPos.add(userId);
 			}
 
-			int count = 0;
-
-			Iterator<Long> itr = q.list().iterator();
-
-			while (itr.hasNext()) {
-				Long l = itr.next();
-
-				if (l != null) {
-					count += l.intValue();
-				}
-			}
-
-			return count;
+			return q.list().size();
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

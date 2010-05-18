@@ -846,29 +846,23 @@
 	<sql id="com.liferay.portal.service.persistence.RoleFinder.countByCommunity">
 		<![CDATA[
 			SELECT
-				COUNT(Role_.roleId) AS COUNT_VALUE
+				DISTINCT Groups_Roles.roleId AS ROLE_ID
 			FROM
-				Role_
-			INNER JOIN
-				Groups_Roles ON
-					(Groups_Roles.roleId = Role_.roleId)
+				Groups_Roles
 			INNER JOIN
 				Users_Groups ON
 					(Users_Groups.groupId = Groups_Roles.groupId)
 			WHERE
-				(Role_.roleId = ?) AND
+				(Groups_Roles.roleId = ?) AND
 				(Users_Groups.userId = ?)
 		]]>
 	</sql>
 	<sql id="com.liferay.portal.service.persistence.RoleFinder.countByOrganization">
 		<![CDATA[
 			SELECT
-				COUNT(Role_.roleId) AS COUNT_VALUE
+				DISTINCT Groups_Roles.roleId AS ROLE_ID
 			FROM
-				Role_
-			INNER JOIN
-				Groups_Roles ON
-					(Groups_Roles.roleId = Role_.roleId)
+				Groups_Roles
 			INNER JOIN
 				Group_ ON
 					(Group_.groupId = Groups_Roles.groupId)
@@ -876,19 +870,16 @@
 				Users_Orgs ON
 					(Users_Orgs.organizationId = Group_.classPK)
 			WHERE
-				(Role_.roleId = ?) AND
+				(Groups_Roles.roleId = ?) AND
 				(Users_Orgs.userId = ?)
 		]]>
 	</sql>
 	<sql id="com.liferay.portal.service.persistence.RoleFinder.countByOrganizationCommunity">
 		<![CDATA[
 			SELECT
-				COUNT(Role_.roleId) AS COUNT_VALUE
+				DISTINCT Groups_Roles.roleId AS ROLE_ID
 			FROM
-				Role_
-			INNER JOIN
-				Groups_Roles ON
-					(Groups_Roles.roleId = Role_.roleId)
+				Groups_Roles
 			INNER JOIN
 				Groups_Orgs ON
 					(Groups_Orgs.groupId = Groups_Roles.groupId)
@@ -896,33 +887,27 @@
 				Users_Orgs ON
 					(Users_Orgs.organizationId = Groups_Orgs.organizationId)
 			WHERE
-				(Role_.roleId = ?) AND
+				(Groups_Roles.roleId = ?) AND
 				(Users_Orgs.userId = ?)
 		]]>
 	</sql>
 	<sql id="com.liferay.portal.service.persistence.RoleFinder.countByUser">
 		<![CDATA[
 			SELECT
-				COUNT(Role_.roleId) AS COUNT_VALUE
+				DISTINCT Users_Roles.roleId AS ROLE_ID
 			FROM
-				Role_
-			INNER JOIN
-				Users_Roles ON
-					(Users_Roles.roleId = Role_.roleId)
+				Users_Roles
 			WHERE
-				(Role_.roleId = ?) AND
+				(Users_Roles.roleId = ?) AND
 				(Users_Roles.userId = ?)
 		]]>
 	</sql>
 	<sql id="com.liferay.portal.service.persistence.RoleFinder.countByUserGroup">
 		<![CDATA[
 			SELECT
-				COUNT(Role_.roleId) AS COUNT_VALUE
+				DISTINCT Groups_Roles.roleId AS ROLE_ID
 			FROM
-				Role_
-			INNER JOIN
-				Groups_Roles ON
-					(Groups_Roles.roleId = Role_.roleId)
+				Groups_Roles
 			INNER JOIN
 				Group_ ON
 					(Group_.groupId = Groups_Roles.groupId)
@@ -930,19 +915,16 @@
 				Users_UserGroups ON
 					(Users_UserGroups.userGroupId = Group_.classPK)
 			WHERE
-				(Role_.roleId = ?) AND
+				(Groups_Roles.roleId = ?) AND
 				(Users_UserGroups.userId = ?)
 		]]>
 	</sql>
 	<sql id="com.liferay.portal.service.persistence.RoleFinder.countByUserGroupCommunity">
 		<![CDATA[
 			SELECT
-				COUNT(Role_.roleId) AS COUNT_VALUE
+				DISTINCT Groups_Roles.roleId AS ROLE_ID
 			FROM
-				Role_
-			INNER JOIN
-				Groups_Roles ON
-					(Groups_Roles.roleId = Role_.roleId)
+				Groups_Roles
 			INNER JOIN
 				Groups_UserGroups ON
 					(Groups_UserGroups.groupId = Groups_Roles.groupId)
@@ -950,7 +932,7 @@
 				Users_UserGroups ON
 					(Users_UserGroups.userGroupId = Groups_UserGroups.userGroupId)
 			WHERE
-				(Role_.roleId = ?) AND
+				(Groups_Roles.roleId = ?) AND
 				(Users_UserGroups.userId = ?)
 		]]>
 	</sql>
