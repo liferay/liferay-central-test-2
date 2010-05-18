@@ -287,7 +287,7 @@ request.setAttribute("view_file_shortcut.jsp-fileShortcut", fileShortcut);
 				// Status
 
 				if (showNonApprovedDocuments) {
-					row.addText(LanguageUtil.get(pageContext, WorkflowConstants.toLabel(fileVersion.getStatus()));
+					row.addText(LanguageUtil.get(pageContext, WorkflowConstants.toLabel(fileVersion.getStatus())));
 				}
 
 				// Action
