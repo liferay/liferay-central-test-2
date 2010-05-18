@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.enterpriseadmin.action;
 
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.ContentTypes;
@@ -170,14 +171,13 @@ public class ExportUsersAction extends PortletAction {
 				searchTerms.getMiddleName(), searchTerms.getLastName(),
 				searchTerms.getScreenName(), searchTerms.getEmailAddress(),
 				searchTerms.getActive(), params, searchTerms.isAndOperator(),
-				userSearch.getStart(), userSearch.getEnd(),
-				(OrderByComparator)null);
+				QueryUtil.ALL_POS, QueryUtil.ALL_POS, (OrderByComparator)null);
 		}
 		else {
 			return UserLocalServiceUtil.search(
 				themeDisplay.getCompanyId(), searchTerms.getKeywords(),
-				searchTerms.getActive(), params, userSearch.getStart(),
-				userSearch.getEnd(), (OrderByComparator)null);
+				searchTerms.getActive(), params, QueryUtil.ALL_POS,
+				QueryUtil.ALL_POS, (OrderByComparator)null);
 		}
 	}
 
