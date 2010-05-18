@@ -38,7 +38,7 @@ if (column != null) {
 }
 
 boolean propertyHidden = GetterUtil.getBoolean(properties.get(ExpandoColumnConstants.PROPERTY_HIDDEN));
-boolean propertyVisibleWithUpdate = GetterUtil.getBoolean(properties.get(ExpandoColumnConstants.PROPERTY_VISIBLE_WITH_UPDATE));
+boolean propertyVisibleWithUpdatePermission = GetterUtil.getBoolean(properties.get(ExpandoColumnConstants.PROPERTY_VISIBLE_WITH_UPDATE_PERMISSION));
 boolean propertySelection = GetterUtil.getBoolean(properties.get(ExpandoColumnConstants.PROPERTY_SELECTION));
 boolean propertyIndexable = GetterUtil.getBoolean(properties.get(ExpandoBridgeIndexer.INDEXABLE));
 boolean propertySecret = GetterUtil.getBoolean(properties.get(ExpandoColumnConstants.PROPERTY_SECRET));
@@ -231,21 +231,21 @@ portletURL.setParameter("modelResource", modelResource);
 
 	<c:if test="<%= column != null %>">
 		<aui:fieldset label="properties">
-			<aui:input type="hidden" name="PropertyName--hidden--" value="hidden" />
+			<aui:input name="PropertyName--hidden--" type="hidden" value="hidden" />
 
 			<aui:select helpMessage="custom-field-hidden-help" label="hidden" name="Property--hidden--">
 				<aui:option label="true" selected="<%= propertyHidden %>" value="1" />
 				<aui:option label="false" selected="<%= !propertyHidden %>" value="0" />
 			</aui:select>
 
-			<aui:input type="hidden" name="PropertyName--visible-with-update--" value="visible-with-update" />
+			<aui:input name="PropertyName--visible-with-update-permission--" type="hidden" value="visible-with-update-permission" />
 
-			<aui:select helpMessage="custom-field-visible-with-update-help" label="visible-with-update" name="Property--visible-with-update--">
-				<aui:option label="true" selected="<%= propertyVisibleWithUpdate %>" value="1" />
-				<aui:option label="false" selected="<%= !propertyVisibleWithUpdate %>" value="0" />
+			<aui:select helpMessage="custom-field-visible-with-update-permission-help" label="visible-with-update-permission" name="Property--visible-with-update-permission--">
+				<aui:option label="true" selected="<%= propertyVisibleWithUpdatePermission %>" value="1" />
+				<aui:option label="false" selected="<%= !propertyVisibleWithUpdatePermission %>" value="0" />
 			</aui:select>
 
-			<aui:input type="hidden" name="PropertyName--indexable--" value="indexable" />
+			<aui:input name="PropertyName--indexable--" type="hidden" value="indexable" />
 
 			<aui:select helpMessage="custom-field-indexable-help" label="searchable" name="Property--indexable--">
 				<aui:option label="true" selected="<%= propertyIndexable %>" value="1" />
@@ -253,7 +253,7 @@ portletURL.setParameter("modelResource", modelResource);
 			</aui:select>
 
 			<c:if test="<%= (type == ExpandoColumnConstants.DOUBLE_ARRAY) || (type == ExpandoColumnConstants.FLOAT_ARRAY) || (type == ExpandoColumnConstants.INTEGER_ARRAY) || (type == ExpandoColumnConstants.LONG_ARRAY) || (type == ExpandoColumnConstants.SHORT_ARRAY) || (type == ExpandoColumnConstants.STRING_ARRAY) %>">
-				<aui:input type="hidden" name="PropertyName--selection--" value="selection" />
+				<aui:input name="PropertyName--selection--" type="hidden" value="selection" />
 
 				<aui:select helpMessage="custom-field-selection-help" label="selection" name="Property--selection--">
 					<aui:option label="true" selected="<%= propertySelection %>" value="1" />
@@ -262,18 +262,18 @@ portletURL.setParameter("modelResource", modelResource);
 			</c:if>
 
 			<c:if test="<%= type == ExpandoColumnConstants.STRING %>">
-				<aui:input type="hidden" name="PropertyName--secret--" value="secret" />
+				<aui:input name="PropertyName--secret--" type="hidden" value="secret" />
 
 				<aui:select helpMessage="custom-field-secret-help" label="secret" name="Property--secret--">
 					<aui:option label="true" selected="<%= propertySecret %>" value="1" />
 					<aui:option label="false" selected="<%= !propertySecret %>" value="0" />
 				</aui:select>
 
-				<aui:input type="hidden" name="PropertyName--height--" value="height" />
+				<aui:input name="PropertyName--height--" type="hidden" value="height" />
 
 				<aui:input cssClass="lfr-input-text short-input-text" helpMessage="custom-field-height-help" label="height" name="Property--height--" type="text" value="<%= propertyHeight %>" />
 
-				<aui:input type="hidden" name="PropertyName--width--" value="width" />
+				<aui:input name="PropertyName--width--" type="hidden" value="width" />
 
 				<aui:input cssClass="lfr-input-text short-input-text" helpMessage="custom-field-height-help" label="width" name="Property--width--" type="text" value="<%= propertyWidth %>" />
 			</c:if>
