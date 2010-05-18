@@ -139,7 +139,6 @@ public class HookHotDeployListener
 		"auto.login.hooks",
 		"captcha.check.portal.create_account",
 		"control.panel.entry.class.default",
-		"convert.processes",
 		"default.landing.page.path",
 		"dl.hook.impl",
 		"dl.webdav.hold.lock",
@@ -174,9 +173,6 @@ public class HookHotDeployListener
 		"my.places.show.user.public.sites.with.no.layouts",
 		"passwords.passwordpolicytoolkit.generator",
 		"passwords.passwordpolicytoolkit.static",
-		"portlet.add.default.resource.check.enabled",
-		"portlet.add.default.resource.check.whitelist",
-		"resource.actions.read.portlet.resources",
 		"sanitizer.impl",
 		"servlet.session.create.events",
 		"servlet.session.destroy.events",
@@ -186,12 +182,6 @@ public class HookHotDeployListener
 		"terms.of.use.required",
 		"theme.css.fast.load",
 		"theme.images.fast.load",
-		"theme.loader.new.theme.id.on.import",
-		"theme.loader.storage.path",
-		"theme.portlet.decorate.default",
-		"theme.portlet.sharing.default",
-		"theme.shortcut.icon",
-		"theme.virtual.path",
 		"upgrade.processes",
 		"users.email.address.generator",
 		"users.email.address.required",
@@ -1581,14 +1571,9 @@ public class HookHotDeployListener
 		"my.places.show.organization.public.sites.with.no.layouts",
 		"my.places.show.user.private.sites.with.no.layouts",
 		"my.places.show.user.public.sites.with.no.layouts",
-		"portlet.add.default.resource.check.enabled",
-		"resource.actions.read.portlet.resources",
 		"terms.of.use.required",
 		"theme.css.fast.load",
 		"theme.images.fast.load",
-		"theme.loader.new.theme.id.on.import",
-		"theme.portlet.decorate.default",
-		"theme.portlet.sharing.default",
 		"users.email.address.required",
 		"users.screen.name.always.autogenerate"
 	};
@@ -1602,17 +1587,12 @@ public class HookHotDeployListener
 	private static final String[] _PROPS_VALUES_STRING = new String[] {
 		"default.landing.page.path",
 		"passwords.passwordpolicytoolkit.generator",
-		"passwords.passwordpolicytoolkit.static",
-		"theme.loader.storage.path",
-		"theme.shortcut.icon",
-		"theme.virtual.path"
+		"passwords.passwordpolicytoolkit.static"
 	};
 
 	private static final String[] _PROPS_VALUES_STRING_ARRAY = new String[] {
-		"convert.processes",
 		"layout.static.portlets.all",
 		"layout.types",
-		"portlet.add.default.resource.check.whitelist",
 		"session.phishing.protected.attributes"
 	};
 
