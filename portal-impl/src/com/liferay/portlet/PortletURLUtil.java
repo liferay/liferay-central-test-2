@@ -27,8 +27,6 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 
 import java.util.Enumeration;
-import java.util.Iterator;
-import java.util.Map;
 
 import javax.portlet.MimeResponse;
 import javax.portlet.PortletException;
@@ -217,7 +215,9 @@ public class PortletURLUtil {
 			while (enu.hasMoreElements()) {
 				String name = enu.nextElement();
 
-				if (!PortalUtil.isReservedParameter(name)) {
+				if (!PortalUtil.isReservedParameter(name) &&
+					!name.equals("currentURL")) {
+
 					String[] values = request.getParameterValues(name);
 
 					for (int i = 0; i < values.length; i++) {
