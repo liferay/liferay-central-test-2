@@ -226,7 +226,7 @@
 			UPDATE
 				SocialEquityLog
 			SET
-				active_ = false
+				active_ = 0
 			WHERE
 				(validity <= [$VALIDITY$]) AND
 				(active_ = [$TRUE$])
