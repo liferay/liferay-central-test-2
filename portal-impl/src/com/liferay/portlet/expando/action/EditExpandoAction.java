@@ -355,7 +355,7 @@ public class EditExpandoAction extends PortletAction {
 		while (enu.hasMoreElements()) {
 			String param = enu.nextElement();
 
-			if (param.indexOf("PropertyName(") != -1) {
+			if (param.indexOf("PropertyName--") != -1) {
 				String propertyName = ParamUtil.getString(actionRequest, param);
 
 				propertyNames.add(propertyName);
@@ -364,7 +364,7 @@ public class EditExpandoAction extends PortletAction {
 
 		for (String propertyName : propertyNames) {
 			String value = ParamUtil.getString(
-				actionRequest, "Property(" + propertyName + ")");
+				actionRequest, "Property--" + propertyName + "--");
 
 			properties.setProperty(propertyName, value);
 		}
