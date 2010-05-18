@@ -14,21 +14,16 @@
 
 package com.liferay.portal.servlet.filters.sso.ntlm;
 
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.PropsKeys;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.ldap.LDAPSettingsUtil;
 import com.liferay.portal.security.ntlm.NtlmManager;
 import com.liferay.portal.security.ntlm.NtlmUserAccount;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
 import com.liferay.portal.util.PortalInstances;
-import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 
 import java.util.Iterator;
@@ -106,8 +101,6 @@ public class NtlmFilter extends BasePortalFilter {
 
 			String authorization = GetterUtil.getString(
 				request.getHeader(HttpHeaders.AUTHORIZATION));
-
-			configureNtlmManager(companyId);
 
 			if (authorization.startsWith("NTLM")) {
 				byte[] src = Base64.decode(authorization.substring(5));
@@ -190,51 +183,9 @@ public class NtlmFilter extends BasePortalFilter {
 		processFilter(NtlmPostFilter.class, request, response, filterChain);
 	}
 
-	public void configureNtlmManager(long companyId) throws SystemException {
-		String domain =  PrefsPropsUtil.getString(
-			companyId, PropsKeys.NTLM_DOMAIN, PropsValues.NTLM_DOMAIN);
-
-		String domainController =  PrefsPropsUtil.getString(
-			companyId, PropsKeys.NTLM_DOMAIN_CONTROLLER,
-			PropsValues.NTLM_DOMAIN_CONTROLLER);
-
-		String domainControllerName =  PrefsPropsUtil.getString(
-			companyId, PropsKeys.NTLM_DOMAIN_CONTROLLER_NAME,
-			PropsValues.NTLM_DOMAIN_CONTROLLER_NAME);
-
-		String serviceAccount =  PrefsPropsUtil.getString(
-			companyId, PropsKeys.NTLM_SERVICE_ACCOUNT,
-			PropsValues.NTLM_SERVICE_ACCOUNT);
-
-		String servicePassword =  PrefsPropsUtil.getString(
-			companyId, PropsKeys.NTLM_SERVICE_PASSWORD,
-			PropsValues.NTLM_SERVICE_PASSWORD);
-
-		if (_ntlmManager == null) {
-			_ntlmManager = new NtlmManager(
-				domain, domainController, domainControllerName, serviceAccount,
-				servicePassword);
-		}
-		else if (!Validator.equals(_ntlmManager.getDomain(), domain) ||
-				 !Validator.equals(
-					 _ntlmManager.getDomainController(), domainController) ||
-				 !Validator.equals(
-					 _ntlmManager.getDomainControllerName(),
-					 domainControllerName) ||
-				 !Validator.equals(
-					 _ntlmManager.getServiceAccount(), serviceAccount) ||
-				 !Validator.equals(
-					 _ntlmManager.getServicePassword(), servicePassword)) {
-
-				_ntlmManager.setConfiguration(
-					domain, domainController, domainControllerName,
-					serviceAccount, servicePassword);
-		}
-	}
-
 	private static Log _log = LogFactoryUtil.getLog(NtlmFilter.class);
 
-	private NtlmManager _ntlmManager;
+	private NtlmManager _ntlmManager = new NtlmManager();
 	private Map<String, byte[]> _serverChallenges =
 		new ConcurrentHashMap<String, byte[]>();
 

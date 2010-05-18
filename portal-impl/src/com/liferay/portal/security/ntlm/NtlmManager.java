@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.util.PropsValues;
 
 import java.io.UnsupportedEncodingException;
 
@@ -38,13 +39,10 @@ import jcifs.util.Encdec;
  */
 public class NtlmManager {
 
-	public NtlmManager(
-		String domain, String domainController, String domainControllerName,
-		String serviceAccount, String servicePassword) {
-
-		setConfiguration(
-			domain, domainController, domainControllerName, serviceAccount,
-			servicePassword);
+	public NtlmManager() {
+		_domain = PropsValues.NTLM_DOMAIN;
+		_ntlmServiceAccount = new NtlmServiceAccount(
+			PropsValues.NTLM_SERVICE_ACCOUNT, null);
 	}
 
 	public NtlmUserAccount authenticate(byte[] material) {
@@ -80,28 +78,8 @@ public class NtlmManager {
 		}
 	}
 
-	public String getDomain() {
-		return _domain;
-	}
-
-	public String getDomainController() {
-		return _domainController;
-	}
-
-	public String getDomainControllerName() {
-		return _domainControllerName;
-	}
-
 	public byte[] getServerChallenge() {
 		return _serverChallenge;
-	}
-
-	public String getServiceAccount() {
-		return _ntlmServiceAccount.getAccount();
-	}
-
-	public String getServicePassword() {
-		return _ntlmServiceAccount.getPassword();
 	}
 
 	public byte[] negotiate(byte[] material) {
@@ -129,20 +107,6 @@ public class NtlmManager {
 
 			return null;
 		}
-	}
-
-	public void setConfiguration(
-		String domain, String domainController, String domainControllerName,
-		String serviceAccount, String servicePassword) {
-
-		_domain = domain;
-		_domainController = domainController;
-		_domainControllerName = domainControllerName;
-		_ntlmServiceAccount = new NtlmServiceAccount(
-			serviceAccount, servicePassword);
-
-		NetlogonUtil.setConfiguration(
-			domainController, domainControllerName, _ntlmServiceAccount);
 	}
 
 	public void setServerChallenge(byte[] serverChallenge) {
@@ -183,8 +147,6 @@ public class NtlmManager {
 	private static Log _log = LogFactoryUtil.getLog(NtlmManager.class);
 
 	private String _domain;
-	private String _domainController;
-	private String _domainControllerName;
 	private NtlmServiceAccount _ntlmServiceAccount;
 	private SecureRandom _secureRandom = new SecureRandom();
 	private byte[] _serverChallenge = new byte[8];
