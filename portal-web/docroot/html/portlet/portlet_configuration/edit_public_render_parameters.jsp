@@ -45,7 +45,7 @@ editPublicRenderParameterURL.setParameter("portletResource", portletResource);
 </portlet:actionURL>
 
 <div class="portlet-msg-info">
-	<liferay-ui:message key="set-up-the-communication-among-the-portlets-that-use-public-render-parameters" arguments='<%= new String[]{"http://www.liferay.com/community/wiki/-/wiki/Main/Portlet+Communication+Configuration"} %>' />
+	<liferay-ui:message argument="http://www.liferay.com/community/wiki/-/wiki/Main/Portlet+Communication+Configuration" key="set-up-the-communication-among-the-portlets-that-use-public-render-parameters" />
 </div>
 
 <aui:form action="<%= editPRPURL %>" method="post" name="fm">
