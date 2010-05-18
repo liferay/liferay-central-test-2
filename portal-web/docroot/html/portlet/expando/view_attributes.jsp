@@ -66,7 +66,7 @@ List<String> attributeNames = Collections.list(expandoBridge.getAttributeNames()
 
 		ExpandoColumn expandoColumn = ExpandoColumnLocalServiceUtil.getDefaultTableColumn(company.getCompanyId(), modelResource, name);
 
-		UnicodeProperties columnProperties = expandoColumn.getTypeSettingsProperties();
+		UnicodeProperties typeSettings = expandoColumn.getTypeSettingsProperties();
 		%>
 
 		<portlet:renderURL var="rowURL">
@@ -87,7 +87,6 @@ List<String> attributeNames = Collections.list(expandoBridge.getAttributeNames()
 		/>
 
 		<%@ include file="/html/portlet/expando/attribute_columns.jspf" %>
-
 	</liferay-ui:search-container-row>
 
 	<c:if test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_EXPANDO) %>">

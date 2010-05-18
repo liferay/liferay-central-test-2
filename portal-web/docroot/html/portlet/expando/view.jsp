@@ -95,7 +95,6 @@ List<CustomAttributesDisplay> customAttributesDisplays = PortletLocalServiceUtil
 
 				buffer.append(HtmlUtil.escape(localizedName));
 			}
-
 			%>
 
 		</liferay-ui:search-container-column-text>

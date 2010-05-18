@@ -14,8 +14,7 @@
  */
 %>
 
-
-<%@page import="com.liferay.portlet.expando.model.ExpandoColumnConstants"%><liferay-ui:search-container-column-text
+<liferay-ui:search-container-column-text
 	buffer="buffer"
 	name="name"
 >
@@ -82,7 +81,7 @@
 >
 
 	<%
-	boolean hidden = GetterUtil.getBoolean(columnProperties.getProperty(ExpandoColumnConstants.PROPERTY_HIDDEN));
+	boolean hidden = GetterUtil.getBoolean(typeSettings.getProperty(ExpandoColumnConstants.PROPERTY_HIDDEN));
 
 	buffer.append(LanguageUtil.get(pageContext, String.valueOf(hidden)));
 	%>
@@ -96,7 +95,7 @@
 >
 
 	<%
-	boolean searchable = GetterUtil.getBoolean(columnProperties.getProperty(ExpandoBridgeIndexer.INDEXABLE));
+	boolean searchable = GetterUtil.getBoolean(typeSettings.getProperty(ExpandoBridgeIndexer.INDEXABLE));
 
 	buffer.append(LanguageUtil.get(pageContext, String.valueOf(searchable)));
 	%>
