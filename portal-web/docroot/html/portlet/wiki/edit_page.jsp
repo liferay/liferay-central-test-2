@@ -63,15 +63,6 @@ if (wikiPage != null) {
 		editable = true;
 	}
 }
-else if (Validator.isNotNull(title)) {
-	try {
-		WikiPageLocalServiceUtil.validateTitle(title);
-
-		editable = true;
-	}
-	catch (PortalException pe) {
-	}
-}
 else if ((wikiPage == null) && editTitle) {
 	editable = true;
 
@@ -81,6 +72,16 @@ else if ((wikiPage == null) && editTitle) {
 	wikiPage.setNodeId(node.getNodeId());
 	wikiPage.setFormat(format);
 	wikiPage.setParentTitle(parentTitle);
+}
+
+if (Validator.isNotNull(title)) {
+	try {
+		WikiPageLocalServiceUtil.validateTitle(title);
+
+		editable = true;
+	}
+	catch (PortalException pe) {
+	}
 }
 
 long templateNodeId = ParamUtil.getLong(request, "templateNodeId");
@@ -169,7 +170,7 @@ if (Validator.isNull(redirect)) {
 	<aui:input name="originalRedirect" type="hidden" value="<%= originalRedirect %>" />
 	<aui:input name="nodeId" type="hidden" value="<%= nodeId %>" />
 
-	<c:if test="<%= wikiPage != null %>">
+	<c:if test="<%= (wikiPage != null) && (!wikiPage.isNew()) %>">
 		<aui:workflow-status status="<%= wikiPage.getStatus() %>" version="<%= wikiPage.getVersion() %>" />
 	</c:if>
 
