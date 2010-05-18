@@ -44,6 +44,10 @@ editPublicRenderParameterURL.setParameter("portletResource", portletResource);
 	<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.SAVE %>" />
 </portlet:actionURL>
 
+<div class="portlet-msg-info">
+	<liferay-ui:message key="set-up-the-communication-among-the-portlets-that-use-public-render-parameters" arguments='<%= new String[]{"http://www.liferay.com/community/wiki/-/wiki/Main/Portlet+Communication+Configuration"} %>' />
+</div>
+
 <aui:form action="<%= editPRPURL %>" method="post" name="fm">
 	<aui:input name="redirect" type="hidden" value="<%= editPublicRenderParameterURL.toString() %>" />
 	<aui:input name="returnToFullPageURL" type="hidden" value="<%= returnToFullPageURL %>" />
@@ -71,10 +75,10 @@ editPublicRenderParameterURL.setParameter("portletResource", portletResource);
 			</liferay-ui:search-container-column-text>
 
 			<liferay-ui:search-container-column-text
-				name="mapping"
+				name="read-value-from-parameter"
 			>
 				<aui:select label="" name="<%= publicRenderParameterConfiguration.getMappingKey() %>">
-					<aui:option label="no-mapping" value="" />
+					<aui:option label="<%= publicRenderParameterConfiguration.getPublicRenderParameter().getIdentifier() %>" value="" />
 
 					<%
 					for (PublicRenderParameter publicRenderParameter : publicRenderParameters) {
