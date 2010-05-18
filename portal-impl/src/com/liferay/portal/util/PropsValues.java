@@ -1008,7 +1008,7 @@ public class PropsValues {
 
 	public static boolean THEME_PORTLET_SHARING_DEFAULT = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.THEME_PORTLET_SHARING_DEFAULT));
 
-	public static final String THEME_SHORTCUT_ICON = PropsUtil.get(PropsKeys.THEME_SHORTCUT_ICON);
+	public static String THEME_SHORTCUT_ICON = PropsUtil.get(PropsKeys.THEME_SHORTCUT_ICON);
 
 	public static final boolean THEME_SYNC_ON_GROUP = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.THEME_SYNC_ON_GROUP));
 

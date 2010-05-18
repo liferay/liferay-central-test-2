@@ -189,6 +189,7 @@ public class HookHotDeployListener
 		"theme.loader.storage.path",
 		"theme.portlet.decorate.default",
 		"theme.portlet.sharing.default",
+		"theme.shortcut.icon",
 		"upgrade.processes",
 		"users.email.address.generator",
 		"users.email.address.required",
@@ -1600,7 +1601,8 @@ public class HookHotDeployListener
 		"default.landing.page.path",
 		"passwords.passwordpolicytoolkit.generator",
 		"passwords.passwordpolicytoolkit.static",
-		"theme.loader.storage.path"
+		"theme.loader.storage.path",
+		"theme.shortcut.icon"
 	};
 
 	private static final String[] _PROPS_VALUES_STRING_ARRAY = new String[] {

@@ -73,6 +73,7 @@ theme.loader.new.theme.id.on.import
 theme.loader.storage.path
 theme.portlet.decorate.default
 theme.portlet.sharing.default
+theme.shortcut.icon
 upgrade.processes
 users.email.address.generator
 users.email.address.required
