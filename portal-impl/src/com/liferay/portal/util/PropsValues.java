@@ -30,7 +30,7 @@ public class PropsValues {
 
 	public static String[] ADMIN_DEFAULT_ROLE_NAMES = StringUtil.split(PropsUtil.get(PropsKeys.ADMIN_DEFAULT_ROLE_NAMES), StringPool.NEW_LINE);
 
-	public static final String[] ADMIN_DEFAULT_USER_GROUP_NAMES = StringUtil.split(PropsUtil.get(PropsKeys.ADMIN_DEFAULT_USER_GROUP_NAMES), StringPool.NEW_LINE);
+	public static String[] ADMIN_DEFAULT_USER_GROUP_NAMES = StringUtil.split(PropsUtil.get(PropsKeys.ADMIN_DEFAULT_USER_GROUP_NAMES), StringPool.NEW_LINE);
 
 	public static final String[] ADMIN_MAIL_HOST_NAMES = StringUtil.split(PropsUtil.get(PropsKeys.ADMIN_MAIL_HOST_NAMES), StringPool.NEW_LINE);
 

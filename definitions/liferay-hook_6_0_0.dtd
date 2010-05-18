@@ -15,6 +15,7 @@ are:
 
 admin.default.group.names
 admin.default.role.names
+admin.default.user.group.names
 auth.forward.by.last.path
 auto.deploy.listeners
 application.startup.events
