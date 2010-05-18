@@ -155,9 +155,7 @@ public class ClpSerializer {
 
 								method${column_index}.invoke(oldModel, (Object[])null);
 
-								newModel.set${column.methodName}(value${column_index}
-
-								);
+								newModel.set${column.methodName}(value${column_index});
 							</#list>
 
 							return newModel;
