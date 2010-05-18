@@ -13,6 +13,7 @@ service*)>
 Not all portal properties can be overridden via a hook. The supported properties
 are:
 
+admin.default.group.names
 auth.forward.by.last.path
 auto.deploy.listeners
 application.startup.events

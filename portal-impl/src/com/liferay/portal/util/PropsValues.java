@@ -26,7 +26,7 @@ import com.liferay.portal.kernel.util.StringUtil;
  */
 public class PropsValues {
 
-	public static final String[] ADMIN_DEFAULT_GROUP_NAMES = StringUtil.split(PropsUtil.get(PropsKeys.ADMIN_DEFAULT_GROUP_NAMES), StringPool.NEW_LINE);
+	public static String[] ADMIN_DEFAULT_GROUP_NAMES = StringUtil.split(PropsUtil.get(PropsKeys.ADMIN_DEFAULT_GROUP_NAMES), StringPool.NEW_LINE);
 
 	public static final String[] ADMIN_DEFAULT_ROLE_NAMES = StringUtil.split(PropsUtil.get(PropsKeys.ADMIN_DEFAULT_ROLE_NAMES), StringPool.NEW_LINE);
 
