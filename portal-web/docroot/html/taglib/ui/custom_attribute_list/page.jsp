@@ -35,17 +35,13 @@ List<String> attributeNames = Collections.list(expandoBridge.getAttributeNames()
 for (String attributeName : attributeNames) {
 %>
 
-	<span class="aui-field">
-		<span class="aui-field-content">
-			<liferay-ui:custom-attribute
-				className="<%= className %>"
-				classPK="<%= classPK %>"
-				editable="<%= editable %>"
-				label="<%= label %>"
-				name="<%= attributeName %>"
-			/>
-		</span>
-	</span>
+	<liferay-ui:custom-attribute
+		className="<%= className %>"
+		classPK="<%= classPK %>"
+		editable="<%= editable %>"
+		label="<%= label %>"
+		name="<%= attributeName %>"
+	/>
 
 <%
 }
