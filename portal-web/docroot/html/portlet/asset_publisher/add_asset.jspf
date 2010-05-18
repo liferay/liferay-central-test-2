@@ -20,7 +20,7 @@ Map<String, PortletURL> addPortletURLs = getAddPortletURLs(renderRequest, render
 
 <c:if test="<%= !addPortletURLs.isEmpty() %>">
 	<div class="lfr-meta-actions edit-controls">
-		<liferay-ui:icon-menu align="left" icon='<%= themeDisplay.getPathThemeImages() + "/common/add.png" %>' message="add-new">
+		<liferay-ui:icon-menu align="left" icon='<%= themeDisplay.getPathThemeImages() + "/common/add.png" %>' message="add-new" showWhenSingleIcon="<%= true %>">
 
 			<%
 			for (Map.Entry<String, PortletURL> entry : addPortletURLs.entrySet()) {
