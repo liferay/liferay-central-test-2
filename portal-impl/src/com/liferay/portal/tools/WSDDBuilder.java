@@ -128,8 +128,10 @@ public class WSDDBuilder {
 		if (!_portalWsdd) {
 			serviceName = "Plugin_" + serviceName;
 		}
-		else if (!_portletShortName.equals("Portal")) {
-			serviceName = "Portlet_" + serviceName;
+		else {
+			if (!_portletShortName.equals("Portal")) {
+				serviceName = "Portlet_" + serviceName;
+			}
 		}
 
 		serviceName += ("_" + entityName + "Service");
