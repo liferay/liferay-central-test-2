@@ -38,6 +38,7 @@ if (column != null) {
 }
 
 boolean propertyHidden = GetterUtil.getBoolean(properties.get(ExpandoColumnConstants.PROPERTY_HIDDEN));
+boolean propertyVisibleWithUpdate = GetterUtil.getBoolean(properties.get(ExpandoColumnConstants.PROPERTY_VISIBLE_WITH_UPDATE));
 boolean propertySelection = GetterUtil.getBoolean(properties.get(ExpandoColumnConstants.PROPERTY_SELECTION));
 boolean propertyIndexable = GetterUtil.getBoolean(properties.get(ExpandoBridgeIndexer.INDEXABLE));
 boolean propertySecret = GetterUtil.getBoolean(properties.get(ExpandoColumnConstants.PROPERTY_SECRET));
@@ -235,6 +236,13 @@ portletURL.setParameter("modelResource", modelResource);
 			<aui:select helpMessage="custom-field-hidden-help" label="hidden" name="Property--hidden--">
 				<aui:option label="true" selected="<%= propertyHidden %>" value="1" />
 				<aui:option label="false" selected="<%= !propertyHidden %>" value="0" />
+			</aui:select>
+
+			<aui:input type="hidden" name="PropertyName--visible-with-update--" value="visible-with-update" />
+
+			<aui:select helpMessage="custom-field-visible-with-update-help" label="visible-with-update" name="Property--visible-with-update--">
+				<aui:option label="true" selected="<%= propertyVisibleWithUpdate %>" value="1" />
+				<aui:option label="false" selected="<%= !propertyVisibleWithUpdate %>" value="0" />
 			</aui:select>
 
 			<aui:input type="hidden" name="PropertyName--indexable--" value="indexable" />

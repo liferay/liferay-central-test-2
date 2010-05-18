@@ -79,6 +79,9 @@ public class ExpandoColumnConstants {
 
 	public static final String PROPERTY_SELECTION = "selection";
 
+	public static final String PROPERTY_VISIBLE_WITH_UPDATE =
+		"visible-with-update";
+
 	public static final String PROPERTY_WIDTH = "width";
 
 	public static final int SHORT = 13;
