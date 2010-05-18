@@ -186,6 +186,7 @@ public class HookHotDeployListener
 		"theme.css.fast.load",
 		"theme.images.fast.load",
 		"theme.loader.new.theme.id.on.import",
+		"theme.loader.storage.path",
 		"upgrade.processes",
 		"users.email.address.generator",
 		"users.email.address.required",
@@ -1601,7 +1602,8 @@ public class HookHotDeployListener
 		"convert.processes",
 		"layout.static.portlets.all",
 		"layout.types",
-		"session.phishing.protected.attributes"
+		"session.phishing.protected.attributes",
+		"theme.loader.storage.path"
 	};
 
 	private static Log _log = LogFactoryUtil.getLog(
