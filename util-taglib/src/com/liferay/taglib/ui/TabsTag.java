@@ -165,8 +165,8 @@ public class TabsTag extends IncludeTag {
 			request.removeAttribute("liferay-ui:tabs:url7");
 			request.removeAttribute("liferay-ui:tabs:url8");
 			request.removeAttribute("liferay-ui:tabs:url9");
-			request.removeAttribute("liferay-ui:tabs:backURL");
 			request.removeAttribute("liferay-ui:tabs:backLabel");
+			request.removeAttribute("liferay-ui:tabs:backURL");
 			request.removeAttribute("liferay-ui:tabs:refresh");
 			request.removeAttribute("liferay-ui:tabs:onClick");
 
