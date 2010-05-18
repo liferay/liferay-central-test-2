@@ -121,12 +121,10 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 				groupId, folderId, name, version);
 		}
 		finally {
-			if (!hasLock) {
 
-				// Unlock
+			// Unlock
 
-				unlockFileEntry(groupId, folderId, name);
-			}
+			unlockFileEntry(groupId, folderId, name);
 		}
 	}
 
