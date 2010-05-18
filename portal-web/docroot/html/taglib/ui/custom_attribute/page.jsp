@@ -380,9 +380,7 @@ ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(company.
 						sb.append((Boolean)value);
 					}
 					else if (type == ExpandoColumnConstants.BOOLEAN_ARRAY) {
-						if (!Arrays.equals(
-							(boolean[])value, (boolean[])defaultValue)) {
-
+						if (!Arrays.equals((boolean[])value, (boolean[])defaultValue)) {
 							sb.append(StringUtil.merge((boolean[])value));
 						}
 					}
@@ -390,9 +388,7 @@ ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(company.
 						sb.append(dateFormatDateTime.format((Date)value));
 					}
 					else if (type == ExpandoColumnConstants.DATE_ARRAY) {
-						if (!Arrays.deepEquals(
-							(Date[])value, (Date[])defaultValue)) {
-
+						if (!Arrays.deepEquals((Date[])value, (Date[])defaultValue)) {
 							Date[] dates = (Date[])value;
 
 							for (int i = 0; i < dates.length; i++) {
@@ -408,9 +404,7 @@ ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(company.
 						sb.append((Double)value);
 					}
 					else if (type == ExpandoColumnConstants.DOUBLE_ARRAY) {
-						if (!Arrays.equals(
-							(double[])value, (double[])defaultValue)) {
-
+						if (!Arrays.equals((double[])value, (double[])defaultValue)) {
 							sb.append(StringUtil.merge((double[])value));
 						}
 					}
@@ -418,9 +412,7 @@ ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(company.
 						sb.append((Float)value);
 					}
 					else if (type == ExpandoColumnConstants.FLOAT_ARRAY) {
-						if (!Arrays.equals(
-							(float[])value, (float[])defaultValue)) {
-
+						if (!Arrays.equals((float[])value, (float[])defaultValue)) {
 							sb.append(StringUtil.merge((float[])value));
 						}
 					}
