@@ -156,6 +156,31 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 			</div>
 		</c:if>
 
+		<c:if test="<%= category != null %>">
+
+			<%
+			long parentCategoryId = category.getParentCategoryId();
+			String parentCategoryName = LanguageUtil.get(pageContext, "message-boards-home");
+			MBCategory parentCategory = MBCategoryServiceUtil.getCategory(parentCategoryId);
+
+			if (parentCategoryId != MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) {
+				parentCategoryId = parentCategory.getCategoryId();
+				parentCategoryName = parentCategory.getName();
+			}
+			%>
+
+			<portlet:renderURL var="backURL">
+				<portlet:param name="struts_action" value="/message_boards/view" />
+				<portlet:param name="mbCategoryId" value="<%= String.valueOf(parentCategoryId) %>" />
+			</portlet:renderURL>
+
+			<liferay-ui:tabs
+				names="<%= category.getName() %>"
+				backLabel='<%= "&laquo; " + LanguageUtil.format(pageContext, "back-to-x", HtmlUtil.escape(parentCategoryName)) %>' 
+				backURL="<%= backURL.toString() %>"
+			/>
+		</c:if>
+
 		<liferay-ui:panel-container cssClass="message-boards-panels" extended="<%= false %>" id="messageBoardsPanelContainer" persistState="<%= true %>">
 
 			<%
