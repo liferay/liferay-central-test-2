@@ -1599,15 +1599,15 @@ public class HookHotDeployListener
 	private static final String[] _PROPS_VALUES_STRING = new String[] {
 		"default.landing.page.path",
 		"passwords.passwordpolicytoolkit.generator",
-		"passwords.passwordpolicytoolkit.static"
+		"passwords.passwordpolicytoolkit.static",
+		"theme.loader.storage.path"
 	};
 
 	private static final String[] _PROPS_VALUES_STRING_ARRAY = new String[] {
 		"convert.processes",
 		"layout.static.portlets.all",
 		"layout.types",
-		"session.phishing.protected.attributes",
-		"theme.loader.storage.path"
+		"session.phishing.protected.attributes"
 	};
 
 	private static Log _log = LogFactoryUtil.getLog(
