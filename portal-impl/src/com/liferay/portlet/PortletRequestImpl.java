@@ -748,7 +748,8 @@ public abstract class PortletRequestImpl implements LiferayPortletRequest {
 
 					continue;
 				}
-				else if (dynamicRequest.getParameter(name) == null) {
+
+				if (dynamicRequest.getParameter(name) == null) {
 					dynamicRequest.setParameterValues(name, values);
 				}
 			}
