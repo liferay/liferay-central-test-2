@@ -125,6 +125,7 @@ public class TabsTag extends IncludeTag {
 				request.setAttribute("liferay-ui:tabs:url9", _url9);
 			}
 
+			request.setAttribute("liferay-ui:tabs:backLabel", _backLabel);
 			request.setAttribute("liferay-ui:tabs:backURL", _backURL);
 			request.setAttribute(
 				"liferay-ui:tabs:refresh", String.valueOf(_refresh));
@@ -165,6 +166,7 @@ public class TabsTag extends IncludeTag {
 			request.removeAttribute("liferay-ui:tabs:url8");
 			request.removeAttribute("liferay-ui:tabs:url9");
 			request.removeAttribute("liferay-ui:tabs:backURL");
+			request.removeAttribute("liferay-ui:tabs:backLabel");
 			request.removeAttribute("liferay-ui:tabs:refresh");
 			request.removeAttribute("liferay-ui:tabs:onClick");
 
@@ -195,6 +197,7 @@ public class TabsTag extends IncludeTag {
 				_url7 = null;
 				_url8 = null;
 				_url9 = null;
+				_backLabel = null;
 				_backURL = null;
 				_refresh = true;
 				_onClick = null;
@@ -300,6 +303,10 @@ public class TabsTag extends IncludeTag {
 		_url9 = url9;
 	}
 
+	public void setBackLabel(String backLabel) {
+		_backLabel = backLabel;
+	}
+
 	public void setBackURL(String backURL) {
 		_backURL = backURL;
 	}
@@ -369,6 +376,7 @@ public class TabsTag extends IncludeTag {
 	private String _url7;
 	private String _url8;
 	private String _url9;
+	private String _backLabel;
 	private String _backURL;
 	private boolean _refresh = true;
 	private String _onClick;

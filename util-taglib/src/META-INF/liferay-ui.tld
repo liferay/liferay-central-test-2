@@ -2395,6 +2395,11 @@
 		values is a reserved property, so we have to use tabsValues intead
 		-->
 		<attribute>
+			<name>backLabel</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
 			<name>backURL</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>

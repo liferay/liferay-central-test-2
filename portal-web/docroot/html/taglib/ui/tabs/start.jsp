@@ -70,6 +70,7 @@ if (url != null) {
 
 // Back url
 
+String backLabel = (String)request.getAttribute("liferay-ui:tabs:backLabel");
 String backURL = (String)request.getAttribute("liferay-ui:tabs:backURL");
 
 // Refresh
@@ -223,14 +224,14 @@ String onClick = GetterUtil.getString((String)request.getAttribute("liferay-ui:t
 					align="left"
 					href="<%= backURL %>"
 					selected="<%= false %>"
-					title="&laquo; <%= LanguageUtil.get(pageContext, "back") %>"
+					title='<%= Validator.isNotNull(backLabel) ? backLabel : "&laquo;" + LanguageUtil.get(pageContext, "back") %>'
 				/>
 			</c:when>
 			<c:otherwise>
 				<li class="aui-tab toggle last">
 					<span class="aui-tab-content">
 						<span class="aui-tab-label">
-							<a href="<%= backURL %>" id="<%= namespace %><%= param %>TabsBack">&laquo; <liferay-ui:message key="back" /></a>
+							<a href="<%= backURL %>" id="<%= namespace %><%= param %>TabsBack"><%= Validator.isNotNull(backLabel) ? backLabel : "&laquo;" + LanguageUtil.get(pageContext, "back") %></a>
 						</span>
 					</span>
 				</li>
