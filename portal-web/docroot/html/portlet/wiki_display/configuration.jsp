@@ -21,7 +21,11 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 nodeId = ParamUtil.getLong(request, "nodeId", nodeId);
 
-List<WikiNode> nodes = WikiNodeLocalServiceUtil.getNodes(scopeGroupId);
+long wikiScopeGroupId = PortalUtil.getScopeGroupId(request, portletResource);
+
+boolean isNodeSelected = false;
+
+List<WikiNode> nodes = WikiNodeLocalServiceUtil.getNodes(wikiScopeGroupId);
 %>
 
 <liferay-portlet:actionURL portletConfiguration="true" var="configurationURL" />
@@ -41,6 +45,9 @@ List<WikiNode> nodes = WikiNodeLocalServiceUtil.getNodes(scopeGroupId);
 					<%
 					for (WikiNode node : nodes) {
 						node = node.toEscapedModel();
+						if (nodeId == node.getNodeId()) {
+							isNodeSelected = true;
+						}
 					%>
 
 						<aui:option label="<%= node.getName() %>" selected="<%= nodeId == node.getNodeId() %>" value="<%= node.getNodeId() %>" />
@@ -59,7 +66,7 @@ List<WikiNode> nodes = WikiNodeLocalServiceUtil.getNodes(scopeGroupId);
 		</c:choose>
 
 		<c:choose>
-			<c:when test="<%= nodeId > 0 %>">
+			<c:when test="<%= isNodeSelected %>">
 				<aui:select label="page" name="title">
 
 					<%
