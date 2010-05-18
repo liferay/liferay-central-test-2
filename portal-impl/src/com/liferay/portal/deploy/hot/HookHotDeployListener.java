@@ -185,6 +185,7 @@ public class HookHotDeployListener
 		"terms.of.use.required",
 		"theme.css.fast.load",
 		"theme.images.fast.load",
+		"theme.loader.new.theme.id.on.import",
 		"upgrade.processes",
 		"users.email.address.generator",
 		"users.email.address.required",
@@ -1579,6 +1580,7 @@ public class HookHotDeployListener
 		"terms.of.use.required",
 		"theme.css.fast.load",
 		"theme.images.fast.load",
+		"theme.loader.new.theme.id.on.import",
 		"users.email.address.required",
 		"users.screen.name.always.autogenerate"
 	};
