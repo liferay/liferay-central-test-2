@@ -78,8 +78,6 @@ public class PluginsEnvironmentBuilder {
 
 			for (String fileName : fileNames) {
 				File propertiesFile = new File(dirName + "/" + fileName);
-				File clientDir = new File(
-					propertiesFile.getParent() + "/client");
 				File libDir = new File(propertiesFile.getParent() + "/lib");
 				File projectDir = new File(
 					propertiesFile.getParent() + "/../..");
@@ -94,8 +92,6 @@ public class PluginsEnvironmentBuilder {
 						properties.getProperty("portal.dependency.jars")));
 
 				if (svn) {
-					updateClientIgnores(clientDir);
-
 					List<String> jars = ListUtil.toList(dependencyJars);
 
 					jars.add("commons-logging.jar");
@@ -117,29 +113,6 @@ public class PluginsEnvironmentBuilder {
 		}
 		catch (Exception e) {
 			e.printStackTrace();
-		}
-	}
-
-	public void updateClientIgnores(File clientDir) throws Exception {
-		if (!clientDir.exists()) {
-			return;
-		}
-
-		if (!_isSVNDir(clientDir)) {
-			_exec(_SVN_ADD + "--non-recursive " + "\"" + clientDir + "\"");
-		}
-
-		File tempFile = File.createTempFile("svn-ignores-", null, null);
-
-		try {
-			FileUtil.write(tempFile, "classes\nsrc");
-
-			_exec(
-				_SVN_SET_IGNORES + "-F \"" + tempFile.getCanonicalPath() +
-					"\" \"" + clientDir + "\"");
-		}
-		finally {
-			FileUtil.delete(tempFile);
 		}
 	}
 
