@@ -80,7 +80,22 @@ List<CustomAttributesDisplay> customAttributesDisplays = PortletLocalServiceUtil
 
 			List<String> attributeNames = Collections.list(expandoBridge.getAttributeNames());
 
-			buffer.append(StringUtil.merge(attributeNames, ", "));
+			for (int i = 0; i < attributeNames.size(); i++) {
+				if (i > 0) {
+					buffer.append(", ");
+				}
+
+				String name = attributeNames.get(i);
+
+				String localizedName = LanguageUtil.get(pageContext, name);
+
+				if (name.equals(localizedName)) {
+					localizedName = TextFormatter.format(name, TextFormatter.J);
+				}
+
+				buffer.append(HtmlUtil.escape(localizedName));
+			}
+
 			%>
 
 		</liferay-ui:search-container-column-text>

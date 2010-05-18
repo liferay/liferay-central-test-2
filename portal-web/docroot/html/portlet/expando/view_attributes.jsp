@@ -65,6 +65,8 @@ List<String> attributeNames = Collections.list(expandoBridge.getAttributeNames()
 		int type = expandoBridge.getAttributeType(name);
 
 		ExpandoColumn expandoColumn = ExpandoColumnLocalServiceUtil.getDefaultTableColumn(company.getCompanyId(), modelResource, name);
+
+		UnicodeProperties columnProperties = expandoColumn.getTypeSettingsProperties();
 		%>
 
 		<portlet:renderURL var="rowURL">
@@ -84,107 +86,8 @@ List<String> attributeNames = Collections.list(expandoBridge.getAttributeNames()
 			value="<%= modelResource %>"
 		/>
 
-		<liferay-ui:search-container-column-text
-			href="<%= rowURL %>"
-			buffer="buffer"
-			name="name"
-		>
+		<%@ include file="/html/portlet/expando/attribute_columns.jspf" %>
 
-			<%
-			String localizedName = LanguageUtil.get(pageContext, name);
-
-			if (name.equals(localizedName)) {
-				localizedName = TextFormatter.format(name, TextFormatter.J);
-			}
-
-			buffer.append(HtmlUtil.escape(localizedName));
-			%>
-
-		</liferay-ui:search-container-column-text>
-
-		<liferay-ui:search-container-column-text
-			href="<%= rowURL %>"
-			name="key"
-			value="<%= HtmlUtil.escape(name) %>"
-		/>
-
-		<liferay-ui:search-container-column-text
-			href="<%= rowURL %>"
-			name="type"
-			value="<%= LanguageUtil.get(pageContext, ExpandoColumnConstants.getTypeLabel(type)) %>"
-		/>
-
-		<liferay-ui:search-container-column-text
-			buffer="buffer"
-			href="<%= rowURL %>"
-			name="default-value"
-		>
-
-			<%
-			if (type == ExpandoColumnConstants.BOOLEAN) {
-				buffer.append((Boolean)expandoBridge.getAttributeDefault(name));
-			}
-			else if (type == ExpandoColumnConstants.BOOLEAN_ARRAY) {
-				buffer.append(StringUtil.merge((boolean[])expandoBridge.getAttributeDefault(name), StringPool.COMMA_AND_SPACE));
-			}
-			else if (type == ExpandoColumnConstants.DATE) {
-				buffer.append(dateFormatDateTime.format((Date)expandoBridge.getAttributeDefault(name)));
-			}
-			else if (type == ExpandoColumnConstants.DATE_ARRAY) {
-				Date[] dates = (Date[])expandoBridge.getAttributeDefault(name);
-
-				for (int i = 0; i < dates.length; i++) {
-					if (i != 0) {
-						buffer.append(StringPool.COMMA_AND_SPACE);
-					}
-
-					buffer.append(dateFormatDateTime.format(dates[i]));
-				}
-			}
-			else if (type == ExpandoColumnConstants.DOUBLE) {
-				buffer.append((Double)expandoBridge.getAttributeDefault(name));
-			}
-			else if (type == ExpandoColumnConstants.DOUBLE_ARRAY) {
-				buffer.append(StringUtil.merge((double[])expandoBridge.getAttributeDefault(name), StringPool.COMMA_AND_SPACE));
-			}
-			else if (type == ExpandoColumnConstants.FLOAT) {
-				buffer.append((Float)expandoBridge.getAttributeDefault(name));
-			}
-			else if (type == ExpandoColumnConstants.FLOAT_ARRAY) {
-				buffer.append(StringUtil.merge((float[])expandoBridge.getAttributeDefault(name), StringPool.COMMA_AND_SPACE));
-			}
-			else if (type == ExpandoColumnConstants.INTEGER) {
-				buffer.append((Integer)expandoBridge.getAttributeDefault(name));
-			}
-			else if (type == ExpandoColumnConstants.INTEGER_ARRAY) {
-				buffer.append(StringUtil.merge((int[])expandoBridge.getAttributeDefault(name), StringPool.COMMA_AND_SPACE));
-			}
-			else if (type == ExpandoColumnConstants.LONG) {
-				buffer.append((Long)expandoBridge.getAttributeDefault(name));
-			}
-			else if (type == ExpandoColumnConstants.LONG_ARRAY) {
-				buffer.append(StringUtil.merge((long[])expandoBridge.getAttributeDefault(name), StringPool.COMMA_AND_SPACE));
-			}
-			else if (type == ExpandoColumnConstants.SHORT) {
-				buffer.append((Short)expandoBridge.getAttributeDefault(name));
-			}
-			else if (type == ExpandoColumnConstants.SHORT_ARRAY) {
-				buffer.append(StringUtil.merge((short[])expandoBridge.getAttributeDefault(name), StringPool.COMMA_AND_SPACE));
-			}
-			else if (type == ExpandoColumnConstants.STRING_ARRAY) {
-				buffer.append(HtmlUtil.escape(StringUtil.merge((String[])expandoBridge.getAttributeDefault(name), StringPool.COMMA_AND_SPACE)));
-			}
-			else {
-				buffer.append(HtmlUtil.escape((String)expandoBridge.getAttributeDefault(name)));
-			}
-			%>
-
-		</liferay-ui:search-container-column-text>
-
-		<liferay-ui:search-container-column-jsp
-			align="right"
-			path="/html/portlet/expando/expando_action.jsp"
-		/>
 	</liferay-ui:search-container-row>
 
 	<c:if test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_EXPANDO) %>">
