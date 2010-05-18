@@ -188,6 +188,7 @@ public class HookHotDeployListener
 		"theme.loader.new.theme.id.on.import",
 		"theme.loader.storage.path",
 		"theme.portlet.decorate.default",
+		"theme.portlet.sharing.default",
 		"upgrade.processes",
 		"users.email.address.generator",
 		"users.email.address.required",
@@ -1584,6 +1585,7 @@ public class HookHotDeployListener
 		"theme.images.fast.load",
 		"theme.loader.new.theme.id.on.import",
 		"theme.portlet.decorate.default",
+		"theme.portlet.sharing.default",
 		"users.email.address.required",
 		"users.screen.name.always.autogenerate"
 	};
