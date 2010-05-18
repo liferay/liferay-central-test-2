@@ -228,24 +228,6 @@ public class PortletURLUtil {
 					}
 				}
 			}
-
-			Map<String, String[]> renderParameters = RenderParametersPool.get(
-				request, plid, ppid);
-
-			Iterator<String> itr = renderParameters.keySet().iterator();
-
-			while (itr.hasNext()) {
-				String name = itr.next();
-
-				String[] values = renderParameters.get(name);
-
-				for (int i = 0; i < values.length; i++) {
-					sb.append(StringPool.AMPERSAND);
-					sb.append(name);
-					sb.append(StringPool.EQUAL);
-					sb.append(HttpUtil.encodeURL(values[i]));
-				}
-			}
 		}
 
 		return sb.toString();
