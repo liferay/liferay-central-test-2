@@ -189,7 +189,6 @@ public class HookHotDeployListener
 		"theme.css.fast.load",
 		"theme.images.fast.load",
 		"theme.loader.new.theme.id.on.import",
-		"theme.loader.storage.path",
 		"theme.portlet.decorate.default",
 		"theme.portlet.sharing.default",
 		"theme.shortcut.icon",
@@ -1604,7 +1603,6 @@ public class HookHotDeployListener
 		"default.landing.page.path",
 		"passwords.passwordpolicytoolkit.generator",
 		"passwords.passwordpolicytoolkit.static",
-		"theme.loader.storage.path",
 		"theme.shortcut.icon"
 	};
 
