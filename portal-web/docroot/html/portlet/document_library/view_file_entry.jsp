@@ -177,7 +177,10 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 
 		<c:if test="<%= PropsValues.DL_FILE_ENTRY_READ_COUNT_ENABLED %>">
 			<div class="file-entry-downloads">
-				<%= fileEntry.getReadCount() %> <liferay-ui:message key="downloads" />
+			<%
+			int readCount = fileEntry.getReadCount();
+			%>
+			<%= readCount %> <liferay-ui:message key='<%= (readCount == 1) ? "download" : "downloads" %>' />
 			</div>
 		</c:if>
 
