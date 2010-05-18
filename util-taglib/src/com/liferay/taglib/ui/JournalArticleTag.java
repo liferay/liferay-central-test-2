@@ -96,7 +96,7 @@ public class JournalArticleTag extends IncludeTag {
 		request.setAttribute(
 			"liferay-ui:journal-article:showTitle", String.valueOf(_showTitle));
 		request.setAttribute(
-			"liferay-ui:journal-template:templateId", _templateId);
+			"liferay-ui:journal-article:templateId", _templateId);
 		request.setAttribute(
 			"liferay-ui:journal-article:xmlRequest", _xmlRequest);
 	}
