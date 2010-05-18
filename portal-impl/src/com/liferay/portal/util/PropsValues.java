@@ -1004,7 +1004,7 @@ public class PropsValues {
 
 	public static String THEME_LOADER_STORAGE_PATH = PropsUtil.get(PropsKeys.THEME_LOADER_STORAGE_PATH);
 
-	public static final boolean THEME_PORTLET_DECORATE_DEFAULT = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.THEME_PORTLET_DECORATE_DEFAULT));
+	public static boolean THEME_PORTLET_DECORATE_DEFAULT = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.THEME_PORTLET_DECORATE_DEFAULT));
 
 	public static final boolean THEME_PORTLET_SHARING_DEFAULT = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.THEME_PORTLET_SHARING_DEFAULT));
 
