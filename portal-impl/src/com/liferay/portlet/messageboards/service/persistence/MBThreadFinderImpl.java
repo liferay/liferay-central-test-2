@@ -78,27 +78,6 @@ public class MBThreadFinderImpl
 		return doCountByS_G_U_S(groupId, userId, status, false);
 	}
 
-	public List<MBThread> findByG_C(
-			long groupId, long categoryId, int start, int end)
-		throws SystemException {
-
-		return doFindByG_C(groupId, categoryId, start, end, false);
-	}
-
-	public List<MBThread> findByG_C_S(
-			long groupId, long categoryId, int status, int start, int end)
-		throws SystemException {
-
-		return doFindByG_C_S(groupId, categoryId, status, start, end, false);
-	}
-
-	public List<MBThread> findByS_G_U_S(
-			long groupId, long userId, int status, int start, int end)
-		throws SystemException {
-
-		return doFindByS_G_U_S(groupId, userId, status, start, end, false);
-	}
-
 	public int filterCountByG_C(long groupId, long categoryId)
 		throws SystemException {
 
@@ -136,6 +115,27 @@ public class MBThreadFinderImpl
 		throws SystemException {
 
 		return doFindByS_G_U_S(groupId, userId, status, start, end, true);
+	}
+
+	public List<MBThread> findByG_C(
+			long groupId, long categoryId, int start, int end)
+		throws SystemException {
+
+		return doFindByG_C(groupId, categoryId, start, end, false);
+	}
+
+	public List<MBThread> findByG_C_S(
+			long groupId, long categoryId, int status, int start, int end)
+		throws SystemException {
+
+		return doFindByG_C_S(groupId, categoryId, status, start, end, false);
+	}
+
+	public List<MBThread> findByS_G_U_S(
+			long groupId, long userId, int status, int start, int end)
+		throws SystemException {
+
+		return doFindByS_G_U_S(groupId, userId, status, start, end, false);
 	}
 
 	protected int doCountByG_C(

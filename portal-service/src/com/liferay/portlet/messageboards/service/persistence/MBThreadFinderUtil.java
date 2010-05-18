@@ -37,24 +37,6 @@ public class MBThreadFinderUtil {
 		return getFinder().countByS_G_U_S(groupId, userId, status);
 	}
 
-	public static java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByG_C(
-		long groupId, long categoryId, int start, int end)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getFinder().findByG_C(groupId, categoryId, start, end);
-	}
-
-	public static java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByG_C_S(
-		long groupId, long categoryId, int status, int start, int end)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getFinder().findByG_C_S(groupId, categoryId, status, start, end);
-	}
-
-	public static java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByS_G_U_S(
-		long groupId, long userId, int status, int start, int end)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getFinder().findByS_G_U_S(groupId, userId, status, start, end);
-	}
-
 	public static int filterCountByG_C(long groupId, long categoryId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder().filterCountByG_C(groupId, categoryId);
@@ -88,6 +70,24 @@ public class MBThreadFinderUtil {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder()
 				   .filterFindByS_G_U_S(groupId, userId, status, start, end);
+	}
+
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByG_C(
+		long groupId, long categoryId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getFinder().findByG_C(groupId, categoryId, start, end);
+	}
+
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByG_C_S(
+		long groupId, long categoryId, int status, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getFinder().findByG_C_S(groupId, categoryId, status, start, end);
+	}
+
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByS_G_U_S(
+		long groupId, long userId, int status, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getFinder().findByS_G_U_S(groupId, userId, status, start, end);
 	}
 
 	public static MBThreadFinder getFinder() {

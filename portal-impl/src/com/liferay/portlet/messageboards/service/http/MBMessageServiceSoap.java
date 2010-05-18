@@ -208,11 +208,11 @@ public class MBMessageServiceSoap {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessageSoap[] getThreadMessages(
-		long categoryId, long groupId, long threadId, int status, int start,
+		long groupId, long categoryId, long threadId, int status, int start,
 		int end) throws RemoteException {
 		try {
 			java.util.List<com.liferay.portlet.messageboards.model.MBMessage> returnValue =
-				MBMessageServiceUtil.getThreadMessages(categoryId, groupId,
+				MBMessageServiceUtil.getThreadMessages(groupId, categoryId,
 					threadId, status, start, end);
 
 			return com.liferay.portlet.messageboards.model.MBMessageSoap.toSoapModels(returnValue);
@@ -224,11 +224,11 @@ public class MBMessageServiceSoap {
 		}
 	}
 
-	public static int getThreadMessagesCount(long categoryId, long groupId,
+	public static int getThreadMessagesCount(long groupId, long categoryId,
 		long threadId, int status) throws RemoteException {
 		try {
-			int returnValue = MBMessageServiceUtil.getThreadMessagesCount(categoryId,
-					groupId, threadId, status);
+			int returnValue = MBMessageServiceUtil.getThreadMessagesCount(groupId,
+					categoryId, threadId, status);
 
 			return returnValue;
 		}

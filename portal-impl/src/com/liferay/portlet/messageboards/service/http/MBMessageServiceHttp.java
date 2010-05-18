@@ -886,14 +886,14 @@ public class MBMessageServiceHttp {
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> getThreadMessages(
-		HttpPrincipal httpPrincipal, long categoryId, long groupId,
+		HttpPrincipal httpPrincipal, long groupId, long categoryId,
 		long threadId, int status, int start, int end)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(categoryId);
+			Object paramObj0 = new LongWrapper(groupId);
 
-			Object paramObj1 = new LongWrapper(groupId);
+			Object paramObj1 = new LongWrapper(categoryId);
 
 			Object paramObj2 = new LongWrapper(threadId);
 
@@ -937,13 +937,13 @@ public class MBMessageServiceHttp {
 	}
 
 	public static int getThreadMessagesCount(HttpPrincipal httpPrincipal,
-		long categoryId, long groupId, long threadId, int status)
+		long groupId, long categoryId, long threadId, int status)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(categoryId);
+			Object paramObj0 = new LongWrapper(groupId);
 
-			Object paramObj1 = new LongWrapper(groupId);
+			Object paramObj1 = new LongWrapper(categoryId);
 
 			Object paramObj2 = new LongWrapper(threadId);
 

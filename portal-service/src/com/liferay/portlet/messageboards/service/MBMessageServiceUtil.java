@@ -171,21 +171,21 @@ public class MBMessageServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> getThreadMessages(
-		long categoryId, long groupId, long threadId, int status, int start,
+		long groupId, long categoryId, long threadId, int status, int start,
 		int end)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .getThreadMessages(categoryId, groupId, threadId, status,
+				   .getThreadMessages(groupId, categoryId, threadId, status,
 			start, end);
 	}
 
-	public static int getThreadMessagesCount(long categoryId, long groupId,
+	public static int getThreadMessagesCount(long groupId, long categoryId,
 		long threadId, int status)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .getThreadMessagesCount(categoryId, groupId, threadId, status);
+				   .getThreadMessagesCount(groupId, categoryId, threadId, status);
 	}
 
 	public static java.lang.String getThreadMessagesRSS(long threadId,
