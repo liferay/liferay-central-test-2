@@ -130,6 +130,7 @@ public class HookHotDeployListener
 
 	public static String[] SUPPORTED_PROPERTIES = {
 		"admin.default.group.names",
+		"admin.default.role.names",
 		"auth.forward.by.last.path",
 		"auto.deploy.listeners",
 		"application.startup.events",
@@ -1610,6 +1611,7 @@ public class HookHotDeployListener
 
 	private static final String[] _PROPS_VALUES_STRING_ARRAY = new String[] {
 		"admin.default.group.names",
+		"admin.default.role.names",
 		"convert.processes",
 		"layout.static.portlets.all",
 		"layout.types",
