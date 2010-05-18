@@ -91,12 +91,10 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 			dlFileEntryLocalService.deleteFileEntry(groupId, folderId, name);
 		}
 		finally {
-			if (!hasLock) {
 
-				// Unlock
+			// Unlock
 
-				unlockFileEntry(groupId, folderId, name);
-			}
+			unlockFileEntry(groupId, folderId, name);
 		}
 	}
 
