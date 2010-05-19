@@ -305,8 +305,6 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 
 	protected static final String WHERE_LESSER_THAN_HAS_NEXT = " <= ? AND ";
 
-	protected static final String WHERE_LIMIT_2 = " LIMIT 2";
-
 	protected static final String WHERE_GREATER_THAN = " >= ? ";
 
 	protected static final String WHERE_GREATER_THAN_HAS_NEXT = " >= ? AND ";
