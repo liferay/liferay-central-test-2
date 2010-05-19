@@ -433,10 +433,11 @@ public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 				return query;
 			}
 
-			for (long groupId : groupIds) {
+			for (Group group : groups) {
 				if (ResourcePermissionLocalServiceUtil.hasResourcePermission(
-					companyId, className, ResourceConstants.SCOPE_GROUP,
-					String.valueOf(groupId), roleId, ActionKeys.VIEW)) {
+						companyId, className, ResourceConstants.SCOPE_GROUP,
+						String.valueOf(group.getGroupId()), roleId,
+						ActionKeys.VIEW)) {
 
 					return query;
 				}
