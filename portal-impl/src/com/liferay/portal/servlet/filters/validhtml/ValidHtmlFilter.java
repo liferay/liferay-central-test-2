@@ -32,6 +32,8 @@ import javax.servlet.http.HttpServletResponse;
  * <a href="ValidHtmlFilter.java.html"><b><i>View Source</i></b></a>
  *
  * @author Julio Camarero
+ * @author Brian Wing Shun Chan
+ * @author Shuyang Zhou
  */
 public class ValidHtmlFilter extends BasePortalFilter {
 
