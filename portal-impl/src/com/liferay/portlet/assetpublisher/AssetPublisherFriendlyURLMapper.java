@@ -16,7 +16,6 @@ package com.liferay.portlet.assetpublisher;
 
 import com.liferay.portal.kernel.portlet.BaseFriendlyURLMapper;
 import com.liferay.portal.kernel.portlet.LiferayPortletURL;
-import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -45,11 +44,7 @@ public class AssetPublisherFriendlyURLMapper extends BaseFriendlyURLMapper {
 
 		WindowState windowState = portletURL.getWindowState();
 
-		if ((strutsAction.equals("/asset_publisher/view_content"))  &&
-			((windowState == null) ||
-			 (!windowState.equals(LiferayWindowState.EXCLUSIVE) &&
-			  !windowState.equals(LiferayWindowState.POP_UP)))) {
-
+		if (strutsAction.equals("/asset_publisher/view_content")) {
 			String portletId = portletURL.getPortletId();
 			String assetEntryId = portletURL.getParameter("assetEntryId");
 			String type = GetterUtil.getString(
@@ -100,11 +95,36 @@ public class AssetPublisherFriendlyURLMapper extends BaseFriendlyURLMapper {
 				portletURL.addParameterIncludedInPath("assetEntryId");
 			}
 		}
-		else if (windowState.equals(WindowState.MAXIMIZED)) {
-			friendlyURLPath += StringPool.SLASH + windowState;
+		else if (strutsAction.equals("/asset_publisher/rss")) {
+			String portletId = portletURL.getPortletId();
+
+			if (Validator.isNotNull(portletId)) {
+				if (portletId.equals(_PORTLET_DEFAULT_INSTANCE)) {
+					portletId = _PORTLET_ID;
+				}
+
+				int pos = portletId.indexOf(
+					PortletConstants.INSTANCE_SEPARATOR);
+
+				String instanceId = null;
+
+				if (pos > 0) {
+					instanceId = portletId.substring(pos + 10);
+				}
+				else {
+					instanceId = portletId;
+				}
+
+				friendlyURLPath =
+					"/asset_publisher/" + instanceId + "/rss";
+			}
 		}
 
 		if (Validator.isNotNull(friendlyURLPath)) {
+			if (windowState.equals(WindowState.MAXIMIZED)) {
+				friendlyURLPath += StringPool.SLASH + windowState;
+			}
+
 			portletURL.addParameterIncludedInPath("p_p_id");
 
 			portletURL.addParameterIncludedInPath("struts_action");
@@ -129,30 +149,17 @@ public class AssetPublisherFriendlyURLMapper extends BaseFriendlyURLMapper {
 		String[] urlFragments = StringUtil.split(
 			friendlyURLPath.substring(x + 1), StringPool.SLASH);
 
-		if (urlFragments.length > 2) {
+		if (urlFragments.length >= 2) {
 			String instanceId = urlFragments[0];
 			String type = urlFragments[1];
 			String assetEntryId = null;
 			long groupId = 0;
 			String urlTitle = null;
 
-			if ((urlFragments.length > 3) && urlFragments[2].equals("id")) {
-				assetEntryId = urlFragments[3];
-			}
-			else if (urlFragments.length > 3) {
-				urlTitle = urlFragments[2];
-
-				groupId = GetterUtil.getLong(urlFragments[3]);
-			}
-			else {
-				urlTitle = urlFragments[2];
-			}
-
 			String portletId =
 				_PORTLET_ID + PortletConstants.INSTANCE_SEPARATOR + instanceId;
 
 			params.put("p_p_id", new String[] {portletId});
-			params.put("p_p_lifecycle", new String[] {"0"});
 
 			if (friendlyURLPath.indexOf("maximized", x) != -1) {
 				addParam(params, "p_p_state", WindowState.MAXIMIZED);
@@ -163,23 +170,48 @@ public class AssetPublisherFriendlyURLMapper extends BaseFriendlyURLMapper {
 			String namespace =
 				StringPool.UNDERLINE + portletId + StringPool.UNDERLINE;
 
-			params.put(
-				namespace + "struts_action",
-				new String[] {"/asset_publisher/view_content"});
-			params.put(namespace + "type", new String[] {type});
-
-			if (Validator.isNotNull(assetEntryId)) {
+			if (type.equals("rss")) {
 				params.put(
-					namespace + "assetEntryId", new String[] {assetEntryId});
+					namespace + "struts_action",
+					new String[] {"/asset_publisher/rss"});
+
+				params.put("p_p_lifecycle", new String[] {"2"});
 			}
 			else {
-				if (groupId > 0) {
-					params.put(
-						namespace + "groupId",
-						new String[] {String.valueOf(groupId)});
+				if ((urlFragments.length > 3) && urlFragments[2].equals("id")) {
+					assetEntryId = urlFragments[3];
+				}
+				else if (urlFragments.length > 3) {
+					urlTitle = urlFragments[2];
+
+					groupId = GetterUtil.getLong(urlFragments[3]);
+				}
+				else {
+					urlTitle = urlFragments[2];
 				}
 
-				params.put(namespace + "urlTitle", new String[] {urlTitle});
+				params.put("p_p_lifecycle", new String[] {"0"});
+
+				params.put(
+					namespace + "struts_action",
+					new String[] {"/asset_publisher/view_content"});
+
+				params.put(namespace + "type", new String[] {type});
+
+				if (Validator.isNotNull(assetEntryId)) {
+					params.put(
+						namespace + "assetEntryId",
+						new String[] {assetEntryId});
+				}
+				else {
+					if (groupId > 0) {
+						params.put(
+							namespace + "groupId",
+							new String[] {String.valueOf(groupId)});
+					}
+
+					params.put(namespace + "urlTitle", new String[] {urlTitle});
+				}
 			}
 		}
 	}

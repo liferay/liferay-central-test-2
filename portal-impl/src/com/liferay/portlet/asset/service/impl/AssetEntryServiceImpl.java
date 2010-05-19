@@ -19,13 +19,18 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Company;
-import com.liferay.portal.model.Group;
 import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.asset.AssetRendererFactoryRegistryUtil;
 import com.liferay.portlet.asset.model.AssetEntry;
 import com.liferay.portlet.asset.model.AssetEntryDisplay;
+import com.liferay.portlet.asset.model.AssetRenderer;
+import com.liferay.portlet.asset.model.AssetRendererFactory;
 import com.liferay.portlet.asset.service.base.AssetEntryServiceBaseImpl;
 import com.liferay.portlet.asset.service.permission.AssetCategoryPermission;
 import com.liferay.portlet.asset.service.permission.AssetTagPermission;
@@ -110,25 +115,11 @@ public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 	}
 
 	public String getEntriesRSS(
-			AssetEntryQuery entryQuery, String type, double version,
-			String displayStyle, String feedURL, String tagURL)
+			String name, AssetEntryQuery entryQuery, String type,
+			double version, String displayStyle, String feedURL, String tagURL)
 		throws PortalException, SystemException {
 
 		filterQuery(entryQuery);
-
-		String name = StringPool.BLANK;
-
-		long[] groupIds = entryQuery.getGroupIds();
-
-		for (long groupId : groupIds) {
-			Group group = groupPersistence.findByPrimaryKey(groupId);
-
-			if ((groupIds.length == 1) || !group.isCompany()) {
-				name = HtmlUtil.escape(group.getDescriptiveName());
-
-				break;
-			}
-		}
 
 		List<AssetEntry> entries = assetEntryLocalService.getEntries(
 			entryQuery);
@@ -200,11 +191,21 @@ public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 		syndFeed.setEntries(entries);
 
 		for (AssetEntry entry : assetEntries) {
+			AssetRendererFactory assetRendererFactory =
+				AssetRendererFactoryRegistryUtil.
+					getAssetRendererFactoryByClassName(entry.getClassName());
+
 			String author = HtmlUtil.escape(
 				PortalUtil.getUserName(entry.getUserId(), entry.getUserName()));
 
-			String link = tagURL.concat("entryId=").concat(
-				String.valueOf(entry.getEntryId()));
+			StringBundler sb = new StringBundler(4);
+
+			sb.append(tagURL);
+			sb.append(assetRendererFactory.getType());
+			sb.append("/id/");
+			sb.append(entry.getEntryId());
+
+			String link = sb.toString();
 
 			String value = entry.getSummary();
 
