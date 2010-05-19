@@ -1,15 +1,20 @@
+
 ##
 ## Language settings
 ##
 
-lang.dir=ltr
-lang.line.begin=left
-lang.line.end=right
 
 ##
 ## Portlet descriptions and titles
 ##
+lang.dir=ltr
+lang.line.begin=left
+lang.line.end=right
 
+
+##
+## Category titles
+##
 javax.portlet.description.122=Categories describe a set of vocabulary terms to tag content items. Administrators can create vocabularies and populate them with categories that users can choose from when authoring content. (Automatic Copy)
 javax.portlet.description.126=Organizations represent a hierarchy of users, such as a department or subsidiary. Administrators can manage user membership, define roles, and set up the attributes of an organization. (Automatic Copy)
 javax.portlet.description.127=User groups are a shortcut to a loose group of users, regardless of community or organization membership. Administrators can define a user group and assign the user group as members of a community if desired. (Automatic Copy)
@@ -136,10 +141,10 @@ javax.portlet.title.98=Programvarekatalog
 javax.portlet.title.99=Tags (Automatic Copy)
 javax.portlet.title.9=Administrasjon
 
-##
-## Category titles
-##
 
+##
+## Model resources
+##
 category.admin=Administrasjon
 category.alfresco=Alfresco
 category.christianity=Kristendom
@@ -174,10 +179,10 @@ category.wol=World of Liferay (Automatic Copy)
 category.workflow=Arbeidsflyt
 category.wsrp=WSRP
 
-##
-## Model resources
-##
 
+##
+## Action names
+##
 model.resource.com.liferay.knowledgebase.model.KBArticle=Knowledge Base Article (Automatic Copy)
 model.resource.com.liferay.portal.model.Group=Gruppe
 model.resource.com.liferay.portal.model.Layout=Side
@@ -239,10 +244,10 @@ model.resource.com.liferay.portlet.workflow.model.WorkflowDefinition=Arbeidsflyt
 model.resource.com.liferay.portlet.workflow.model.WorkflowInstance=Arbeidsflyt
 model.resource.com.liferay.portlet.workflow.model.WorkflowTask=Arbeidsflytoppgave
 
-##
-## Action names
-##
 
+##
+## Messages
+##
 action.ACCESS=Access (Automatic Copy)
 action.ACCESS_IN_CONTROL_PANEL=Access in Control Panel (Automatic Copy)
 action.ADD_ARTICLE=Add Content (Automatic Copy)
@@ -304,6 +309,7 @@ action.DELETE_USER=Ta bort brukeren
 action.EDIT=Redigere
 action.EXPIRE=Opphør
 action.EXPORT_ALL_EVENTS=Eksporter alle hendelser
+action.EXPORT_USER=Export User (Automatic Copy)
 action.GUEST_PREFERENCES=Innstillinger for gjester
 action.HELP=Hjelp
 action.IMPERSONATE=Opptre som
@@ -338,10 +344,10 @@ action.VIEW=Granske
 action.VIEW_ALL_TASKS=View All Tasks (Automatic Copy)
 action.VIEW_USER=Granske brukere
 
-##
-## Messages
-##
 
+##
+## Currency
+##
 1-day=1 dag
 1-minute=1 Minute (Automatic Copy)
 1-month=1 måned
@@ -364,7 +370,7 @@ action.VIEW_USER=Granske brukere
 INBOX=Innkurv
 a-map-could-not-be-found-for-the-address=Ingen treff for adressen:
 a-new-password-will-be-sent-to-x-if-you-can-correctly-answer-the-following-question=A new password will be sent to {0} if you can correctly answer the following question.
-a-new-version-will-be-created-automatically-if-this-article-is-modified=A new version will be created automatically if this article is modified. (Automatic Copy)
+a-new-version-will-be-created-automatically-if-this-content-is-modified=A new version will be created automatically if this content is modified. (Automatic Copy)
 a-page-cannot-become-a-child-of-a-page-that-is-not-parentable=Siden kan ikke bli en underside til en side som mangler hovedside muligheter.
 a-page-cannot-become-a-child-of-itself=Siden kan ikke være en underside til seg selv.
 a-page-may-not-contain-more-than-x-portlets=En side kan ikke inneholde mer en {0} portlets.
@@ -1266,6 +1272,7 @@ custom-field-key-help=The custom field key is used to access the field programat
 custom-field-secret-help=Setting a custom field to secret means that typing will be hidden on the screen. Use this for passwords. (Automatic Copy)
 custom-field-selection-help=Setting this property to true means the control used to set this field will be a select box. (Automatic Copy)
 custom-field-type-help=Choose the field type carefully as once it is defined it cannot be changed. (Automatic Copy)
+custom-field-visible-with-update-permission-help=Settings a custom field to visible with update permission means that a user with update permission can view this field. This setting overrides the value of hidden in this case. (Automatic Copy)
 custom-field-width-help=This will set the width of the input field in pixels. (Automatic Copy)
 custom-field=Custom Field (Automatic Copy)
 custom-fields-are-not-enabled-for-any-resource=Custom fields are not enabled for any resource. (Automatic Copy)
@@ -1273,6 +1280,22 @@ custom-fields=Custom Fields (Automatic Copy)
 custom-message=Egen melding
 custom-portlet-xml=Egen portlet.xml
 custom-question=Custom Question (Automatic Copy)
+custom.field.boolean.array=Group of True/False Values (Automatic Copy)
+custom.field.boolean=True/False (Automatic Copy)
+custom.field.double.array=Group of Decimal Numbers (64-bit) (Automatic Copy)
+custom.field.double=Decimal Number (64-bit) (Automatic Copy)
+custom.field.float.array=Group of Decimal Numbers (32-bit) (Automatic Copy)
+custom.field.float=Decimal Number (32-bit) (Automatic Copy)
+custom.field.int.array=Group of Integers (32-bit) (Automatic Copy)
+custom.field.int=Integer (32-bit) (Automatic Copy)
+custom.field.java.lang.String.array=Group of Text Values (Automatic Copy)
+custom.field.java.lang.String=Text (Automatic Copy)
+custom.field.java.util.Date.array=Group of Dates (Automatic Copy)
+custom.field.java.util.Date=Date (Automatic Copy)
+custom.field.long.array=Group of Integers (64-bit) (Automatic Copy)
+custom.field.long=Integer (64-bit) (Automatic Copy)
+custom.field.short.array=Group of Integers (16-bit) (Automatic Copy)
+custom.field.short=Integer (16-bit) (Automatic Copy)
 custom=Egen
 customer-service=Kundeservice
 customer=Kunde
@@ -1306,6 +1329,7 @@ decorated=Dekorert
 decoration=Dekorasjon
 default-associations=Startassociationer
 default-colors=Stardardfarge
+default-configuration=Default Configuration (Automatic Copy)
 default-control-panel-theme=Default Control Panel Theme (Automatic Copy)
 default-email-notification=Standard e-post bekreftelse
 default-landing-page-help=This is the page that users are automatically redirected to after logging in. For example, if you want the default landing page to be http://localhost:8080/web/guest/login, then set this to /web/guest/login. (Automatic Copy)
@@ -1425,6 +1449,8 @@ documents-with-tag-x=Documents with tag <em>{0}</em>. (Automatic Copy)
 documents-with-x-x=Documents with {0} <em>{1}</em>. (Automatic Copy)
 documents=Dokument
 does-not-contain=Does not Contain (Automatic Copy)
+domain-controller-name-help=Specify the domain controller NetBIOS name. (Automatic Copy)
+domain-controller-name=Domain Controller Name (Automatic Copy)
 domain-controller=Domenekontroller
 domain=Domene
 done=Done (Automatic Copy)
@@ -1727,6 +1753,7 @@ female-voice=Kvinnlig stemme
 female=Kvinne
 field-label=Field Label (Automatic Copy)
 field-name=Field Name (Automatic Copy)
+field-type=Field Type (Automatic Copy)
 field=Felt
 fields-are-added-if-you-need-to-distinguish-items-based-on-criteria-chosen-by-the-user=Felt legges til om du behøver å separere varene. Eksempelvis, om du selger T-shirts, vil du antageligvis legge til et felt med navnet <em>Størrelsen</em> som innholder <em>S, M, L, XL</em>. Separere alle verdiene i feltet med komma.
 fields=Felt
@@ -2023,6 +2050,7 @@ increment-version-on-save=Spare med høyere versjonsnummer
 increment-version=Høyere versjonsnummer
 indefinite=Indefinite (Automatic Copy)
 indent=Indentera
+index-type=Index type (Automatic Copy)
 indexed=Indexerad
 indexes=Index
 industry=Industri
@@ -2809,6 +2837,7 @@ please-contact-the-administrator-to-setup-this-portlet=Vennligst kontakt adminis
 please-email-all-questions-to=Vennligst e-post alle spørsmål til {0}
 please-ensure-the-administrator-has-configured-a-proper-google-license=Vennligst kontroller at administratoren har konfigurert Google lisensen korrekt
 please-enter-a-download-page-url-or-a-direct-download-url=Vennligst angi en direktelink eller en side for nedlastning
+please-enter-a-file-with-a-valid-extension-x=Please enter a value with a valid extension ({0}). (Automatic Copy)
 please-enter-a-file-with-a-valid-file-name=Please enter a file with a valid file name. (Automatic Copy)
 please-enter-a-file-with-a-valid-file-size=Vennligst legg ved en fil med gyldig størrelse
 please-enter-a-file-with-a-valid-file-type=Please enter a file with a valid file type. (Automatic Copy)
@@ -2934,17 +2963,28 @@ please-enter-a-valid-xsd=Vennligst skriv inn en gyldig XML definisjon
 please-enter-a-valid-xsl-template=Vennligst skriv inn en gyldig XSL-mal
 please-enter-a-valid-xsl-url=Vennligst skriv enn en gyldig XSL URL
 please-enter-a-valid-zip=Vennligst skriv inn et gyldig postnummer
+please-enter-a-value-between-x-and-x-characters-long=Please enter a value between {0} and {1} characters long. (Automatic Copy)
+please-enter-a-value-between-x-and-x=Please enter a value between {0} and {1}. (Automatic Copy)
+please-enter-a-value-greater-than-or-equal-to-x=Please enter a value greater than or equal to {0}. (Automatic Copy)
+please-enter-a-value-less-than-or-equal-to-x=Please enter a value less than or equal to {0}. (Automatic Copy)
 please-enter-a-value=Vennligst skriv inn en verdi
 please-enter-a-word-that-is-at-least-3-characters-long=Vennligst skriv inn ett ord som inneholder minst 3 tegn
 please-enter-an-email-address=Angi en e-postadresse
 please-enter-at-least-one-tag=Vennligst angi minst en "tag"
+please-enter-at-list-x-characters=Please enter at least {0} characters. (Automatic Copy)
 please-enter-both-the-validation-code-and-the-error-message=Please enter both the validation code and the error message. (Automatic Copy)
 please-enter-jdbc-information-for-new-database=Please enter JDBC information for new database. (Automatic Copy)
+please-enter-no-more-than-x-characters=Please enter no more than {0} characters. (Automatic Copy)
+please-enter-only-alpha-characters=Please enter only alpha characters. (Automatic Copy)
+please-enter-only-alphanumeric-characters=Please enter only alphanumeric characters. (Automatic Copy)
+please-enter-only-digits=Please enter only digits. (Automatic Copy)
 please-enter-the-full-name-exactly-as-it-is-appears-on-your-credit-card=Vennligst skriv inn det eksakte navnet som står på kredittkortet ditt
+please-enter-the-same-value-again=Please enter the same value again. (Automatic Copy)
 please-enter-valid-choices=Vennligst angi gyldige valg
 please-enter-valid-comments=Vennligst skriv inn gyldige kommentarer
 please-enter-valid-content=Vennligst skriv inn gyldig innhold
 please-fill-out-all-required-fields=Please fill out all required fields. (Automatic Copy)
+please-fix-this-field=Please fix this field. (Automatic Copy)
 please-import-a-lar-file-for-the-current-portlet=Please import a LAR file for the current portlet. (Automatic Copy)
 please-import-a-lar-file-of-the-correct-type=Please import a LAR file of the correct type. (Automatic Copy)
 please-import-a-lar-file=Please import a LAR file. (Automatic Copy)
@@ -3166,6 +3206,7 @@ read-interval-minutes=Read Interval (Minutes) (Automatic Copy)
 read-more-x-about-x=Read More <span class="{0}">About {1}</span> (Automatic Copy)
 read-more=Les mer
 read-roles=Les roller
+read-value-from-parameter=Read Value from Parameter (Automatic Copy)
 read=Read (Automatic Copy)
 reason-for-the-report=Reason for the Report (Automatic Copy)
 reassign-to-system-role=Reassign to System Role (Automatic Copy)
@@ -3521,6 +3562,8 @@ server-port=Server Port (Automatic Copy)
 server-url=Server URL (Automatic Copy)
 server=Server
 servers=Servers (Automatic Copy)
+service-account=Service Account (Automatic Copy)
+service-password=Service Password (Automatic Copy)
 service-url=Service-URL
 service=Tjeneste
 services=Tjenester
@@ -3536,6 +3579,7 @@ set-the-display-order-of-news-feeds=Angi hvordan nyhetene skal vises
 set-the-display-styles-used-to-display-blogs-when-viewed-via-as-a-regular-page-or-as-an-rss=Set the display styles used to display Blogs when viewed via as a regular page or as an RSS. (Automatic Copy)
 set-the-following-values-to-filter-emails-associated-with-an-email-address-to-a-folder=Angi følgende verdier for å filtrere e-post relatert til en e-post adresse eller til en mappe
 set-the-google-analytics-id-that-will-be-used-for-this-set-of-pages=Set the Google Analytics ID that will be used for this set of pages. (Automatic Copy)
+set-up-the-communication-among-the-portlets-that-use-public-render-parameters=Set up the communication among the portlets that use public render parameters. For each of the public parameters in this portlet, it is possible to ignore the values coming from other portlets or to read the value from another parameter. <a href="{0}" target="_blank">Read more.</a> (Automatic Copy)
 set-your-community-tags=Angi dine gruppe "tagger"
 set-your-global-tags=Angi dine globale "tagger"
 set-your-jira-login=Set your JIRA login. (Automatic Copy)
@@ -4129,6 +4173,7 @@ there-are-no-top-posters=There are no top posters. (Automatic Copy)
 there-are-no-topics=Det finnes ingen tema
 there-are-no-users-to-invite=There are no users to invite. (Automatic Copy)
 there-are-no-workflow-definitions=There are no workflow definitions. (Automatic Copy)
+there-is-a-publication-workflow-in-process=There is a publication workflow in process. (Automatic Copy)
 there-is-already-a-page-with-the-specified-title=There is already a page with the specified title. (Automatic Copy)
 there-is-another-category-with-the-same-name-and-the-same-parent=There is another category with the same name and the same parent. (Automatic Copy)
 there-is-existing-form-data-please-export-and-delete-it-before-making-changes-to-the-fields=There is existing form data. Please export and delete it before making changes to the fields. (Automatic Copy)
@@ -4284,6 +4329,7 @@ uninstall=Uninstall (Automatic Copy)
 united-states-phone-format=Amerikansk telefonnummerformat
 unknown=Ukjent
 unlimited=Ubegrenset
+unlock-thread-to-add-an-explanation-post=Unlock thread to add an explanation post. (Automatic Copy)
 unlock-thread=Unlock Thread (Automatic Copy)
 unlock=Lås opp
 unmark=Unmark (Automatic Copy)
@@ -4496,6 +4542,7 @@ violent-or-repulsive-content=Violent or Repulsive Content (Automatic Copy)
 virtual-host=Virtuell vert
 virtual-hosts-must-be-valid-domain-names=Virtuell vert må være en gyldig domeneadresse
 visible-wikis=Visible Wikis (Automatic Copy)
+visible-with-update-permission=Visible with Update (Automatic Copy)
 visible=Visible (Automatic Copy)
 visited-link=Besøkte link
 visits=Besøk
@@ -4756,7 +4803,7 @@ you-must-first-add-a-vocabulary=You must first add a vocabulary. (Automatic Copy
 you-must-have-at-least-one-page=Du må minst ha en side
 you-must-specify-a-group-id-and-artifact-id-before-you-can-add-a-product-version=You must specify a group ID and artifact ID before you can add a product version. (Automatic Copy)
 you-now-have-a-lock-on-this-document=Du har låst dokumentet. Ingen kan redigere dette dokumentet før du låser det opp. Låsingen kommer automatisk til å avsluttes etter {0}.
-you-now-have-a-lock-on-this-page=Du har låst siden. Ingen kan redigere denne siden før du låser opp ved å velge avbryt. Låsingen kommer automatisk til å avsluttes etter {0}.
+you-now-have-an-indefinite-lock-on-this-document=You now have an indefinite lock on this document. No one else can edit this document until you unlock it. This lock will never expire. (Automatic Copy)
 you-save=Lagre
 you-should-save-the-structure-first=You should save the structure first. (Automatic Copy)
 you-will-be-sent-an-email-notification-when-each-of-the-recipients-of-this-email-have-opened-to-read-this-email=Du kommer til å få en e-post bekreftelse når hver e-post mottaker har åpnet denne e-posten
@@ -4800,10 +4847,6 @@ zh_en=Kinesisk (Kina) til Engelsk
 zip-postal=Postnummer
 zip=Postnummer
 zt_en=Kinesisk (Taiwan) til Engelsk
-
-##
-## Currency
-##
 
 currency.AED=Arabiske Dirham
 currency.ALL=Albanian Lek

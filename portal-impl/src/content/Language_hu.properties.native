@@ -1,15 +1,20 @@
+
 ##
 ## Language settings
 ##
 
-lang.dir=ltr
-lang.line.begin=left
-lang.line.end=right
 
 ##
 ## Portlet descriptions and titles
 ##
+lang.dir=ltr
+lang.line.begin=left
+lang.line.end=right
 
+
+##
+## Category titles
+##
 javax.portlet.description.122=Categories describe a set of vocabulary terms to tag content items. Administrators can create vocabularies and populate them with categories that users can choose from when authoring content. (Automatic Copy)
 javax.portlet.description.126=Organizations represent a hierarchy of users, such as a department or subsidiary. Administrators can manage user membership, define roles, and set up the attributes of an organization. (Automatic Copy)
 javax.portlet.description.127=User groups are a shortcut to a loose group of users, regardless of community or organization membership. Administrators can define a user group and assign the user group as members of a community if desired. (Automatic Copy)
@@ -136,10 +141,10 @@ javax.portlet.title.98=Szoftverkatalógus
 javax.portlet.title.99=Címkék és kategóriák
 javax.portlet.title.9=Adminisztráció
 
-##
-## Category titles
-##
 
+##
+## Model resources
+##
 category.admin=Adminisztráció
 category.alfresco=Alfresco
 category.christianity=Kereszténység
@@ -174,10 +179,10 @@ category.wol=A Portál
 category.workflow=Munkafolyamat
 category.wsrp=WSRP
 
-##
-## Model resources
-##
 
+##
+## Action names
+##
 model.resource.com.liferay.knowledgebase.model.KBArticle=Tudásbázis cikk
 model.resource.com.liferay.portal.model.Group=Közösség
 model.resource.com.liferay.portal.model.Layout=Oldal
@@ -239,10 +244,10 @@ model.resource.com.liferay.portlet.workflow.model.WorkflowDefinition=Folyamat me
 model.resource.com.liferay.portlet.workflow.model.WorkflowInstance=Folyamat példány
 model.resource.com.liferay.portlet.workflow.model.WorkflowTask=Folyamat feladat
 
-##
-## Action names
-##
 
+##
+## Messages
+##
 action.ACCESS=Hozzáférés
 action.ACCESS_IN_CONTROL_PANEL=Hozzáférés vezérlőpulton
 action.ADD_ARTICLE=Új tartalom
@@ -304,6 +309,7 @@ action.DELETE_USER=Felhasználó törlése
 action.EDIT=Szerkesztés
 action.EXPIRE=Lejár
 action.EXPORT_ALL_EVENTS=Összes esemény exportálása
+action.EXPORT_USER=Export User (Automatic Copy)
 action.GUEST_PREFERENCES=Vendég beállítások
 action.HELP=Súgó
 action.IMPERSONATE=Megszemélyesítés
@@ -338,10 +344,10 @@ action.VIEW=Megtekintés
 action.VIEW_ALL_TASKS=Feladatok megtekintése
 action.VIEW_USER=Felhasználó megtekintése
 
-##
-## Messages
-##
 
+##
+## Currency
+##
 1-day=1 nap
 1-minute=1 perc
 1-month=1 hónap
@@ -364,7 +370,7 @@ action.VIEW_USER=Felhasználó megtekintése
 INBOX=Bejövő
 a-map-could-not-be-found-for-the-address=A megadott címhez nem található térkép:
 a-new-password-will-be-sent-to-x-if-you-can-correctly-answer-the-following-question=Új jelszót kapsz({0}), ha helyesen válaszolsz a következő kérdésre.
-a-new-version-will-be-created-automatically-if-this-article-is-modified=A new version will be created automatically if this article is modified. (Automatic Copy)
+a-new-version-will-be-created-automatically-if-this-content-is-modified=A new version will be created automatically if this content is modified. (Automatic Copy)
 a-page-cannot-become-a-child-of-a-page-that-is-not-parentable=Az oldal nem lehet aloldala olyannak, amelyik nem szülőoldal.
 a-page-cannot-become-a-child-of-itself=Az oldal nem lehet a saját aloldala.
 a-page-may-not-contain-more-than-x-portlets=Az oldal nem tartalmazhat több portletet, mint {0}.
@@ -1266,6 +1272,7 @@ custom-field-key-help=Egyedi mező kulccsal a mező programból elérhető a &lt
 custom-field-secret-help=Egyedi mező titkosra állítása azt jelenti, hogy a képernyőn nem látszik bevitelkor adat. Jelszókhoz használatos.
 custom-field-selection-help=Az érték bekapcsolása azt jelenti, hogy a mező választéklista lesz.
 custom-field-type-help=Elővigyázatosan kezeld ezt a mezőt mert annak definiálása után nem változtatható.
+custom-field-visible-with-update-permission-help=Settings a custom field to visible with update permission means that a user with update permission can view this field. This setting overrides the value of hidden in this case. (Automatic Copy)
 custom-field-width-help=Pixelben mért szélessge az input mezőnek.
 custom-field=Egyedi mező
 custom-fields-are-not-enabled-for-any-resource=Egyedi mezők nem engedélyezettek bármely erőforráshoz.
@@ -1273,6 +1280,22 @@ custom-fields=Egyedi mezők
 custom-message=Egyedi üzenet
 custom-portlet-xml=Egyedi portlet.xml
 custom-question=Egyedi kérdés
+custom.field.boolean.array=Group of True/False Values (Automatic Copy)
+custom.field.boolean=True/False (Automatic Copy)
+custom.field.double.array=Group of Decimal Numbers (64-bit) (Automatic Copy)
+custom.field.double=Decimal Number (64-bit) (Automatic Copy)
+custom.field.float.array=Group of Decimal Numbers (32-bit) (Automatic Copy)
+custom.field.float=Decimal Number (32-bit) (Automatic Copy)
+custom.field.int.array=Group of Integers (32-bit) (Automatic Copy)
+custom.field.int=Integer (32-bit) (Automatic Copy)
+custom.field.java.lang.String.array=Group of Text Values (Automatic Copy)
+custom.field.java.lang.String=Text (Automatic Copy)
+custom.field.java.util.Date.array=Group of Dates (Automatic Copy)
+custom.field.java.util.Date=Date (Automatic Copy)
+custom.field.long.array=Group of Integers (64-bit) (Automatic Copy)
+custom.field.long=Integer (64-bit) (Automatic Copy)
+custom.field.short.array=Group of Integers (16-bit) (Automatic Copy)
+custom.field.short=Integer (16-bit) (Automatic Copy)
 custom=Egyedi
 customer-service=Ügyfélszolgálat
 customer=Ügyfél
@@ -1306,6 +1329,7 @@ decorated=Díszített
 decoration=Díszítés
 default-associations=Alapértelmezett társítások
 default-colors=Alapértelmezett színek
+default-configuration=Default Configuration (Automatic Copy)
 default-control-panel-theme=Vezérlőpult alap témája
 default-email-notification=Alapértelmezett e-mail értesítések
 default-landing-page-help=Ez az oldal ahova a felhasználók érkeznek miután belépnek.Pl. ha az alap érkezési oldalnak a http://localhost:8080/web/guest/login -t szeretnéd, állítsd /web/guest/login -ra.
@@ -1425,6 +1449,8 @@ documents-with-tag-x=Documents with tag <em>{0}</em>. (Automatic Copy)
 documents-with-x-x=Documents with {0} <em>{1}</em>. (Automatic Copy)
 documents=Dokumentumok
 does-not-contain=Nem tartalmazza
+domain-controller-name-help=Specify the domain controller NetBIOS name. (Automatic Copy)
+domain-controller-name=Domain Controller Name (Automatic Copy)
 domain-controller=Domain vezérlő
 domain=Tartomány
 done=Kész
@@ -1727,6 +1753,7 @@ female-voice=Női hang
 female=Nő
 field-label=Mező cimke
 field-name=Mező név
+field-type=Field Type (Automatic Copy)
 field=Mező
 fields-are-added-if-you-need-to-distinguish-items-based-on-criteria-chosen-by-the-user=További mezők használhatók, ha a felhasználó által megadott kritériumok alapján kell megkülönböztetni a tételeket. Például pólók árusítása esetén hozzáadható egy <em>Méret</em> mező, <em>S, M, L, XL</em> értékekkel. Az értékeket vesszővel elválasztva kell megadni.
 fields=Mezők
@@ -2023,6 +2050,7 @@ increment-version-on-save=Verziószám növelése mentéskor
 increment-version=Verziószám növelése
 indefinite=Határozatlan
 indent=Behúzás
+index-type=Index type (Automatic Copy)
 indexed=Indexelt
 indexes=Indexek
 industry=Ipar
@@ -2809,6 +2837,7 @@ please-contact-the-administrator-to-setup-this-portlet=Vedd fel a kapcsolatot a 
 please-email-all-questions-to=Az esetleges kérdéseket a(z) {0} címre küldheted.
 please-ensure-the-administrator-has-configured-a-proper-google-license=A rendszergazdának be kell állítania egy megfelelő Google licencet.
 please-enter-a-download-page-url-or-a-direct-download-url=Adj meg egy letöltési oldal URL-t vagy közvetlen letöltési URL-t.
+please-enter-a-file-with-a-valid-extension-x=Please enter a value with a valid extension ({0}). (Automatic Copy)
 please-enter-a-file-with-a-valid-file-name=Please enter a file with a valid file name. (Automatic Copy)
 please-enter-a-file-with-a-valid-file-size=Adj meg egy érvényes méretű fájlt.
 please-enter-a-file-with-a-valid-file-type=Adj meg egy fájlt egy érvényes fájl típussal.
@@ -2934,17 +2963,28 @@ please-enter-a-valid-xsd=Adj meg egy érvényes XML sémadefiníciót.
 please-enter-a-valid-xsl-template=Adj meg egy érvényes XSL sablont.
 please-enter-a-valid-xsl-url=Adj meg egy érvényes XSL URL-t.
 please-enter-a-valid-zip=Adj meg egy érvényes irányítószámot.
+please-enter-a-value-between-x-and-x-characters-long=Please enter a value between {0} and {1} characters long. (Automatic Copy)
+please-enter-a-value-between-x-and-x=Please enter a value between {0} and {1}. (Automatic Copy)
+please-enter-a-value-greater-than-or-equal-to-x=Please enter a value greater than or equal to {0}. (Automatic Copy)
+please-enter-a-value-less-than-or-equal-to-x=Please enter a value less than or equal to {0}. (Automatic Copy)
 please-enter-a-value=Adj meg egy értéket.
 please-enter-a-word-that-is-at-least-3-characters-long=Adj meg egy legalább 3 karakteres szót.
 please-enter-an-email-address=Adj meg egy e-mail címet.
 please-enter-at-least-one-tag=Adj meg legalább egy címkét.
+please-enter-at-list-x-characters=Please enter at least {0} characters. (Automatic Copy)
 please-enter-both-the-validation-code-and-the-error-message=Adja meg az érvényesítési kódot és a hibaüzenetet.
 please-enter-jdbc-information-for-new-database=Az új adatbázishoz add meg a JDBC információkat.
+please-enter-no-more-than-x-characters=Please enter no more than {0} characters. (Automatic Copy)
+please-enter-only-alpha-characters=Please enter only alpha characters. (Automatic Copy)
+please-enter-only-alphanumeric-characters=Please enter only alphanumeric characters. (Automatic Copy)
+please-enter-only-digits=Please enter only digits. (Automatic Copy)
 please-enter-the-full-name-exactly-as-it-is-appears-on-your-credit-card=Adja meg a teljes nevet ugyanúgy, ahogy a hitelkártyán szerepel.
+please-enter-the-same-value-again=Please enter the same value again. (Automatic Copy)
 please-enter-valid-choices=Adj meg érvényes lehetőségeket.
 please-enter-valid-comments=Adj meg érvényes megjegyzéseket.
 please-enter-valid-content=Adj meg érvényes tartalmat.
 please-fill-out-all-required-fields=Töltsd ki az összes kötelező mezőt.
+please-fix-this-field=Please fix this field. (Automatic Copy)
 please-import-a-lar-file-for-the-current-portlet=Importálj egy LAR fájlt az aktuális portlethez.
 please-import-a-lar-file-of-the-correct-type=Importálj egy megfelelő típusú LAR fájlt.
 please-import-a-lar-file=Importálj egy LAR fájlt.
@@ -3166,6 +3206,7 @@ read-interval-minutes=Olvasási időköz (perc)
 read-more-x-about-x=Továbbolvasás <span class="{0}">{1}-ből</span>
 read-more=Tovább
 read-roles=Olvasási szerepkör
+read-value-from-parameter=Read Value from Parameter (Automatic Copy)
 read=Olvasás
 reason-for-the-report=A Bejelentés oka
 reassign-to-system-role=Rendszer szerepkör újbóli kijelölése
@@ -3521,6 +3562,8 @@ server-port=Kiszolgáló port
 server-url=Kiszolgáló URL
 server=Kiszolgáló
 servers=Kiszolgálók
+service-account=Service Account (Automatic Copy)
+service-password=Service Password (Automatic Copy)
 service-url=Szolgáltatás URL-je
 service=Szolgáltatás
 services=Szolgáltatások
@@ -3536,6 +3579,7 @@ set-the-display-order-of-news-feeds=Hírcsatornák megjelenési sorrendjének be
 set-the-display-styles-used-to-display-blogs-when-viewed-via-as-a-regular-page-or-as-an-rss=Megjelenítési stílus megadása blogokhoz, normál oldalon vagy RSS-en.
 set-the-following-values-to-filter-emails-associated-with-an-email-address-to-a-folder=Állítsd be a következő értékeket az e-mailek mappákba szűréséhez.
 set-the-google-analytics-id-that-will-be-used-for-this-set-of-pages=Az oldalakhoz használt Google Analytics ID beállítása.
+set-up-the-communication-among-the-portlets-that-use-public-render-parameters=Set up the communication among the portlets that use public render parameters. For each of the public parameters in this portlet, it is possible to ignore the values coming from other portlets or to read the value from another parameter. <a href="{0}" target="_blank">Read more.</a> (Automatic Copy)
 set-your-community-tags=Közösségi címkék beállítása.
 set-your-global-tags=Globális címkék beállítása.
 set-your-jira-login=JIRA hozzáférésed beállítása.
@@ -4129,6 +4173,7 @@ there-are-no-top-posters=Nincsenek leggyakoribb hozzászólók.
 there-are-no-topics=Nincsenek témák.
 there-are-no-users-to-invite=Nincsenek meghívható felhasználók.
 there-are-no-workflow-definitions=Nincsenek munkafolyamat definiciók.
+there-is-a-publication-workflow-in-process=There is a publication workflow in process. (Automatic Copy)
 there-is-already-a-page-with-the-specified-title=A megadott címmel már létezik oldal.
 there-is-another-category-with-the-same-name-and-the-same-parent=Van más kategória ugyanazon néven és szülővel.
 there-is-existing-form-data-please-export-and-delete-it-before-making-changes-to-the-fields=Az űrlap már tartalmaz adatokat. Exportálja és törölje a mezők megváltoztatása előtt.
@@ -4284,6 +4329,7 @@ uninstall=Eltávolítás
 united-states-phone-format=Amerikai telefonszám-formátum
 unknown=Ismeretlen
 unlimited=Korlátlan
+unlock-thread-to-add-an-explanation-post=Unlock thread to add an explanation post. (Automatic Copy)
 unlock-thread=Szál feloldva
 unlock=Feloldás
 unmark=Jelölés megszüntetése
@@ -4496,6 +4542,7 @@ violent-or-repulsive-content=Erőszakot közvetítő tartalom
 virtual-host=Virtuális host
 virtual-hosts-must-be-valid-domain-names=A virtuális hostok érvényes domainnevek kell legyenek.
 visible-wikis=Látható wikik
+visible-with-update-permission=Visible with Update (Automatic Copy)
 visible=Látható
 visited-link=Meglátogatott hivatkozás
 visits=Látogatások
@@ -4756,7 +4803,7 @@ you-must-first-add-a-vocabulary=Először fel kell venned egy szótárat.
 you-must-have-at-least-one-page=Legalább egy oldaladnak kell lennie.
 you-must-specify-a-group-id-and-artifact-id-before-you-can-add-a-product-version=Termékverzió beviteléhez csoportazonosítót és tárgyazonosítót is meg kell adni.
 you-now-have-a-lock-on-this-document=Most zároltad a dokumentumot. A zárolás feloldásáig más nem szerkesztheti. A zárolás lejárati ideje {0}.
-you-now-have-a-lock-on-this-page=Most zároltad az oldalt. Más nem szerkesztheti, amíg a Mégsem gombbal fel nem oldod. A zárolás lejárati ideje {0}.
+you-now-have-an-indefinite-lock-on-this-document=You now have an indefinite lock on this document. No one else can edit this document until you unlock it. This lock will never expire. (Automatic Copy)
 you-save=Mentés
 you-should-save-the-structure-first=A struktúrát kell először elmentened.
 you-will-be-sent-an-email-notification-when-each-of-the-recipients-of-this-email-have-opened-to-read-this-email=E-mail értesítést kapsz, amikor minden a leveled minden címzettje megnyitotta a levelet.
@@ -4800,10 +4847,6 @@ zh_en=Kínairól angolra
 zip-postal=Irányítószám
 zip=Irányítószám
 zt_en=Tajvani kínairól angolra
-
-##
-## Currency
-##
 
 currency.AED=UAE dirham
 currency.ALL=Albán lek

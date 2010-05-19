@@ -1,15 +1,20 @@
+
 ##
 ## Language settings
 ##
 
-lang.dir=ltr
-lang.line.begin=left
-lang.line.end=right
 
 ##
 ## Portlet descriptions and titles
 ##
+lang.dir=ltr
+lang.line.begin=left
+lang.line.end=right
 
+
+##
+## Category titles
+##
 javax.portlet.description.122=Categories describe a set of vocabulary terms to tag content items. Administrators can create vocabularies and populate them with categories that users can choose from when authoring content. (Automatic Copy)
 javax.portlet.description.126=Organizations represent a hierarchy of users, such as a department or subsidiary. Administrators can manage user membership, define roles, and set up the attributes of an organization. (Automatic Copy)
 javax.portlet.description.127=User groups are a shortcut to a loose group of users, regardless of community or organization membership. Administrators can define a user group and assign the user group as members of a community if desired. (Automatic Copy)
@@ -136,10 +141,10 @@ javax.portlet.title.98=Katalog softwaru
 javax.portlet.title.99=Štítky a kategorie
 javax.portlet.title.9=Administrace serveru
 
-##
-## Category titles
-##
 
+##
+## Model resources
+##
 category.admin=Administrace
 category.alfresco=Alfresco
 category.christianity=Křesťanství
@@ -174,10 +179,10 @@ category.wol=Svět Liferay
 category.workflow=Workflow
 category.wsrp=WSRP
 
-##
-## Model resources
-##
 
+##
+## Action names
+##
 model.resource.com.liferay.knowledgebase.model.KBArticle=Článek databáze znalostí
 model.resource.com.liferay.portal.model.Group=Skupina dat
 model.resource.com.liferay.portal.model.Layout=Rozvržení stránky
@@ -239,10 +244,10 @@ model.resource.com.liferay.portlet.workflow.model.WorkflowDefinition=Definice wo
 model.resource.com.liferay.portlet.workflow.model.WorkflowInstance=Instance workflow
 model.resource.com.liferay.portlet.workflow.model.WorkflowTask=Úkol workflow
 
-##
-## Action names
-##
 
+##
+## Messages
+##
 action.ACCESS=Přístup
 action.ACCESS_IN_CONTROL_PANEL=Přístup do Ovládacího panelu
 action.ADD_ARTICLE=Přidat článek
@@ -304,6 +309,7 @@ action.DELETE_USER=Vymazat uživatele
 action.EDIT=Změnit
 action.EXPIRE=Ukončit platnost
 action.EXPORT_ALL_EVENTS=Exportovat všechny události
+action.EXPORT_USER=Export User (Automatic Copy)
 action.GUEST_PREFERENCES=Nastavení pro nepřihlášeného uživatele
 action.HELP=Nápověda
 action.IMPERSONATE=Vydávat se za uživatele
@@ -338,10 +344,10 @@ action.VIEW=Zobrazit
 action.VIEW_ALL_TASKS=Zobrazit všechny úkoly
 action.VIEW_USER=Zobrazit uživatele
 
-##
-## Messages
-##
 
+##
+## Currency
+##
 1-day=1 den
 1-minute=1 minuta
 1-month=1 měsíc
@@ -364,7 +370,7 @@ action.VIEW_USER=Zobrazit uživatele
 INBOX=Doručená pošta
 a-map-could-not-be-found-for-the-address=Mapa nebyla nalezena pro adresu:
 a-new-password-will-be-sent-to-x-if-you-can-correctly-answer-the-following-question=Pokud správně zodpovíte následující otázku, na adresu {0} bude zasláno nové heslo.
-a-new-version-will-be-created-automatically-if-this-article-is-modified=A new version will be created automatically if this article is modified. (Automatic Copy)
+a-new-version-will-be-created-automatically-if-this-content-is-modified=A new version will be created automatically if this content is modified. (Automatic Copy)
 a-page-cannot-become-a-child-of-a-page-that-is-not-parentable=Stánku nelze podřídit stránce, která neumožňuje mít podřízené stránky.
 a-page-cannot-become-a-child-of-itself=Stránku nelze podřídit samu sobě.
 a-page-may-not-contain-more-than-x-portlets=Stránka nemůže obsahovat více než {0} aplikací.
@@ -1266,6 +1272,7 @@ custom-field-key-help=Vlastní pole typu klíč se používá pro přístup z ap
 custom-field-secret-help=Používejte pro zadávání hesel.
 custom-field-selection-help=Nastavení této vlastnosti na true způsobí, že jako ovládací prvek pro toto pole bude roletka (select-box).
 custom-field-type-help=Vybírejte typ vlastního pole obezřetně - jakmile jej jednou nastavíte, již jej není možné změnit.
+custom-field-visible-with-update-permission-help=Settings a custom field to visible with update permission means that a user with update permission can view this field. This setting overrides the value of hidden in this case. (Automatic Copy)
 custom-field-width-help=Nastaví ku vlastního pole (v pixelech).
 custom-field=Vlastní pole
 custom-fields-are-not-enabled-for-any-resource=Vlastní pole nejsou pro všechny zdroje povoleny.
@@ -1273,6 +1280,22 @@ custom-fields=Vlastní pole
 custom-message=Uživatelská zpráva
 custom-portlet-xml=Uživatelsky definovaný soubor portlet.xml
 custom-question=Vlastní otázka
+custom.field.boolean.array=Group of True/False Values (Automatic Copy)
+custom.field.boolean=True/False (Automatic Copy)
+custom.field.double.array=Group of Decimal Numbers (64-bit) (Automatic Copy)
+custom.field.double=Decimal Number (64-bit) (Automatic Copy)
+custom.field.float.array=Group of Decimal Numbers (32-bit) (Automatic Copy)
+custom.field.float=Decimal Number (32-bit) (Automatic Copy)
+custom.field.int.array=Group of Integers (32-bit) (Automatic Copy)
+custom.field.int=Integer (32-bit) (Automatic Copy)
+custom.field.java.lang.String.array=Group of Text Values (Automatic Copy)
+custom.field.java.lang.String=Text (Automatic Copy)
+custom.field.java.util.Date.array=Group of Dates (Automatic Copy)
+custom.field.java.util.Date=Date (Automatic Copy)
+custom.field.long.array=Group of Integers (64-bit) (Automatic Copy)
+custom.field.long=Integer (64-bit) (Automatic Copy)
+custom.field.short.array=Group of Integers (16-bit) (Automatic Copy)
+custom.field.short=Integer (16-bit) (Automatic Copy)
 custom=Volitelé
 customer-service=Uživatelské služby
 customer=Zákazník
@@ -1306,6 +1329,7 @@ decorated=Dekorováno
 decoration=Dekorování
 default-associations=Předvolené spojení
 default-colors=Předvolené barvy
+default-configuration=Default Configuration (Automatic Copy)
 default-control-panel-theme=Předvolené téma Ovládacího panelu
 default-email-notification=Předvolené notifikace prostřednictvím emailu
 default-landing-page-help=Toto je stránka, na kterou jsou uživatelé automaticky přesměrováni po přihlášení. Například, pokud chcete, aby uživatelé po přihlášení skončili na stránce http://localhost:8080/web/guest/login, vyplňte /web/guest/login.
@@ -1425,6 +1449,8 @@ documents-with-tag-x=Documents with tag <em>{0}</em>. (Automatic Copy)
 documents-with-x-x=Documents with {0} <em>{1}</em>. (Automatic Copy)
 documents=Dokumenty
 does-not-contain=Neobsahuje
+domain-controller-name-help=Specify the domain controller NetBIOS name. (Automatic Copy)
+domain-controller-name=Domain Controller Name (Automatic Copy)
 domain-controller=Řadič domény
 domain=Doména
 done=Hotovo
@@ -1727,6 +1753,7 @@ female-voice=Ženský hlas
 female=Žena
 field-label=Popis položky
 field-name=Jméno položky
+field-type=Field Type (Automatic Copy)
 field=Pole
 fields-are-added-if-you-need-to-distinguish-items-based-on-criteria-chosen-by-the-user=Pole jsou přidána pro rozlišení položek podle kritérií vybraných uživatelem. Například, pokud prodáváte trička, přidejte pole s názvem <em>Velikost</em> a hodnotami <em>S, M, L, XL</em>. Vložte hodnoty lako seznam oddělený čárkami.
 fields=Pole
@@ -2023,6 +2050,7 @@ increment-version-on-save=Při uložení zvýšit číslo verze (vytvořit novou
 increment-version=Zvýšit číslo verze
 indefinite=Neurčitý
 indent=Vzor
+index-type=Index type (Automatic Copy)
 indexed=Indexovaný
 indexes=Indexy
 industry=Průmysl
@@ -2809,6 +2837,7 @@ please-contact-the-administrator-to-setup-this-portlet=Prosím kontaktujte admin
 please-email-all-questions-to=Prosím pošlete všechny otázky e-mailem na {0}.
 please-ensure-the-administrator-has-configured-a-proper-google-license=Prosím požádejte administrátora o konfiguraci Google (licence).
 please-enter-a-download-page-url-or-a-direct-download-url=zadejte, prosím, URL stránky s možností stažení, nebo přímo URL na stažitelný soubor.
+please-enter-a-file-with-a-valid-extension-x=Please enter a value with a valid extension ({0}). (Automatic Copy)
 please-enter-a-file-with-a-valid-file-name=Please enter a file with a valid file name. (Automatic Copy)
 please-enter-a-file-with-a-valid-file-size=Zvolte, prosím, soubor se správnou délkou.
 please-enter-a-file-with-a-valid-file-type=Zvolte, prosím, soubor správného typu - s příponou, která je v systému povolena.
@@ -2934,17 +2963,28 @@ please-enter-a-valid-xsd=Zadejte, prosím, platnou XML definici.
 please-enter-a-valid-xsl-template=Zadejte, prosím, platnou XSL šablonu.
 please-enter-a-valid-xsl-url=Zadejte, prosím, platné URL pro XSL zdroj.
 please-enter-a-valid-zip=Zadejte, prosím, platné PSČ.
+please-enter-a-value-between-x-and-x-characters-long=Please enter a value between {0} and {1} characters long. (Automatic Copy)
+please-enter-a-value-between-x-and-x=Please enter a value between {0} and {1}. (Automatic Copy)
+please-enter-a-value-greater-than-or-equal-to-x=Please enter a value greater than or equal to {0}. (Automatic Copy)
+please-enter-a-value-less-than-or-equal-to-x=Please enter a value less than or equal to {0}. (Automatic Copy)
 please-enter-a-value=Zadejte, prosím, hodnotu.
 please-enter-a-word-that-is-at-least-3-characters-long=Zadejte, prosím, platné slovo delší než 3 znaky.
 please-enter-an-email-address=Zadejte, prosím, e-mailovou adresu
 please-enter-at-least-one-tag=Zadejte, prosím, alespoň jednen štítek.
+please-enter-at-list-x-characters=Please enter at least {0} characters. (Automatic Copy)
 please-enter-both-the-validation-code-and-the-error-message=Zadejte, prosím, validační kód a chybové hlášení.
 please-enter-jdbc-information-for-new-database=Zadejte, prosím, informace o JDBC pro novou databázi.
+please-enter-no-more-than-x-characters=Please enter no more than {0} characters. (Automatic Copy)
+please-enter-only-alpha-characters=Please enter only alpha characters. (Automatic Copy)
+please-enter-only-alphanumeric-characters=Please enter only alphanumeric characters. (Automatic Copy)
+please-enter-only-digits=Please enter only digits. (Automatic Copy)
 please-enter-the-full-name-exactly-as-it-is-appears-on-your-credit-card=Zadejte, prosím, Vaše jméno stejné jako jméno na platební kartě.
+please-enter-the-same-value-again=Please enter the same value again. (Automatic Copy)
 please-enter-valid-choices=Zadejte, prosím, platný seznam.
 please-enter-valid-comments=Zadejte, prosím, platný komentář.
 please-enter-valid-content=Zadejte, prosím, platný obsah.
 please-fill-out-all-required-fields=Vyplňte, prosím, všechny povinné položky.
+please-fix-this-field=Please fix this field. (Automatic Copy)
 please-import-a-lar-file-for-the-current-portlet=Importujte, prosím, LAR soubor pro aktuální portlet.
 please-import-a-lar-file-of-the-correct-type=Importujte, prosím, LAR soubor správného typu.
 please-import-a-lar-file=Importujte, prosím, LAR soubor.
@@ -3166,6 +3206,7 @@ read-interval-minutes=Interval čtení (v minutách)
 read-more-x-about-x=Zjistit více <span class="{0}">o {1}</span>
 read-more=Zobrazit více...
 read-roles=Role pro čtení
+read-value-from-parameter=Read Value from Parameter (Automatic Copy)
 read=Číst
 reason-for-the-report=Důvod zprávy.
 reassign-to-system-role=Přiřadit znovu mezi systémové role
@@ -3521,6 +3562,8 @@ server-port=Port serveru
 server-url=URL serveru
 server=Server
 servers=Servery
+service-account=Service Account (Automatic Copy)
+service-password=Service Password (Automatic Copy)
 service-url=URL služby
 service=Služba
 services=Služby
@@ -3536,6 +3579,7 @@ set-the-display-order-of-news-feeds=Nastavit pořadí novinkových vláken.
 set-the-display-styles-used-to-display-blogs-when-viewed-via-as-a-regular-page-or-as-an-rss=Nastavit styly zobrazení, které budou použity pro zobrazení blogů při normálním zobrazení nebo při zobrazení přes RSS vlákna.
 set-the-following-values-to-filter-emails-associated-with-an-email-address-to-a-folder=Nastavte následující hodnoty pro filtrování e-mailů s přiřazením adresy ke složce.
 set-the-google-analytics-id-that-will-be-used-for-this-set-of-pages=Nastavit ID Google Analytics, které bude použito pro tento soubor stránek.
+set-up-the-communication-among-the-portlets-that-use-public-render-parameters=Set up the communication among the portlets that use public render parameters. For each of the public parameters in this portlet, it is possible to ignore the values coming from other portlets or to read the value from another parameter. <a href="{0}" target="_blank">Read more.</a> (Automatic Copy)
 set-your-community-tags=Nastavit štítky vlastní komunity.
 set-your-global-tags=Nastavit vlastní globální štítky.
 set-your-jira-login=Nastavte přihlašovací údaje do systému JIRA.
@@ -4129,6 +4173,7 @@ there-are-no-top-posters=Nebyli nalezeni žádní vyhodnotitelní přispěvatel�
 there-are-no-topics=Nebyla nalezena žádná témata.
 there-are-no-users-to-invite=Nebili nalezeni žádní uživatelé, které by bylo možné pozvat.
 there-are-no-workflow-definitions=Nebyly nalezeny žádné definice workflow.
+there-is-a-publication-workflow-in-process=There is a publication workflow in process. (Automatic Copy)
 there-is-already-a-page-with-the-specified-title=Stránka se stejným názvem již existuje.
 there-is-another-category-with-the-same-name-and-the-same-parent=Kategorie se shodným názvem a "rodičem" již existuje.
 there-is-existing-form-data-please-export-and-delete-it-before-making-changes-to-the-fields=Formulář obsahuje data, která je nutné před dalšími úpravami vymazat. Doporučujeme provést export.
@@ -4284,6 +4329,7 @@ uninstall=Odinstalovat
 united-states-phone-format=Formát telefonního čísla v USA
 unknown=Neznámé
 unlimited=Neomezené
+unlock-thread-to-add-an-explanation-post=Unlock thread to add an explanation post. (Automatic Copy)
 unlock-thread=Odemknout vlákno
 unlock=Odemknout
 unmark=Odoznačit
@@ -4496,6 +4542,7 @@ violent-or-repulsive-content=Násilný nebo jiný zakázaný obsah
 virtual-host=Virtuální hostitel/server
 virtual-hosts-must-be-valid-domain-names=Vitrtuální hostitelé/servery musí mít platná DNS jména
 visible-wikis=Viditelné Wiki
+visible-with-update-permission=Visible with Update (Automatic Copy)
 visible=Viditelné
 visited-link=Viditelné odkazy
 visits=Návštěvy
@@ -4756,7 +4803,7 @@ you-must-first-add-a-vocabulary=Nejprve je nutné přidat slovník.
 you-must-have-at-least-one-page=Stránky musí obsahovat alespoň jednu stránku.
 you-must-specify-a-group-id-and-artifact-id-before-you-can-add-a-product-version=Před zadáním verze výrobku je nutné nejprve specifikovat ID skupiny a ID artefaktu.
 you-now-have-a-lock-on-this-document=Nyní jste uzamkli dokument. Nikdo další ho teď nemůže měnit. Tento zámek automaticky vyprší v {0}.
-you-now-have-a-lock-on-this-page=Nyní jste uzamkli tuto stránku. Nikdo další ji teď nemůže měnit, pokud nekliknete na tlačítko Zrušit. Tento zámek automaticky vyprší v {0}.
+you-now-have-an-indefinite-lock-on-this-document=You now have an indefinite lock on this document. No one else can edit this document until you unlock it. This lock will never expire. (Automatic Copy)
 you-save=Uloženo
 you-should-save-the-structure-first=Nejprve je záhodno uložžit strukturu.
 you-will-be-sent-an-email-notification-when-each-of-the-recipients-of-this-email-have-opened-to-read-this-email=Dostanete upozornění, až kterýkoliv z příjemců otevře tento e-mail.
@@ -4800,10 +4847,6 @@ zh_en=Čínsky -> Anglicky
 zip-postal=Poštovní směrovací číslo
 zip=PSČ
 zt_en=Čínsky (Taiwan) -> Anglicky
-
-##
-## Currency
-##
 
 currency.AED=UAE Dirham
 currency.ALL=Albánský Lek

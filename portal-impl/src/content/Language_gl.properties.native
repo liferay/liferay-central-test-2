@@ -1,15 +1,20 @@
+
 ##
 ## Language settings
 ##
 
-lang.dir=ltr
-lang.line.begin=left
-lang.line.end=right
 
 ##
 ## Portlet descriptions and titles
 ##
+lang.dir=ltr
+lang.line.begin=left
+lang.line.end=right
 
+
+##
+## Category titles
+##
 javax.portlet.description.122=As categorías describen un conxunto de términos agrupados en vocabularios para categorizar contidos. Desde esta ferramenta pódense crear categorías e reenchelas cos términos de vocabulario que os usuarios poderán elexir cando etiqueten o contido.
 javax.portlet.description.126=As organizacións representan unha xerarquía de usuarios, tales como un departamento ou unha filial. Desde esta ferramenta pódense administrar os usuarios, definir roles e fixar os atributos dunha organización.
 javax.portlet.description.127=Os grupos de usuarios representan un conxunto de usuarios relacionados pero independente da pertenencia de cada un deles a unha organización ou comunidade. Unha vez definido un grupo de usuarios é posible asociar o grupo completo como membro a unha comunidade.
@@ -136,10 +141,10 @@ javax.portlet.title.98=Catálogo de software
 javax.portlet.title.99=Administración de etiquetas
 javax.portlet.title.9=Administración
 
-##
-## Category titles
-##
 
+##
+## Model resources
+##
 category.admin=Administración
 category.alfresco=Alfresco
 category.christianity=Cristianismo
@@ -174,10 +179,10 @@ category.wol=Mundo de Liferay
 category.workflow=Workflow
 category.wsrp=WSRP
 
-##
-## Model resources
-##
 
+##
+## Action names
+##
 model.resource.com.liferay.knowledgebase.model.KBArticle=Artigo da base de coñecemento
 model.resource.com.liferay.portal.model.Group=Comunidade
 model.resource.com.liferay.portal.model.Layout=Páxina
@@ -239,10 +244,10 @@ model.resource.com.liferay.portlet.workflow.model.WorkflowDefinition=Definición
 model.resource.com.liferay.portlet.workflow.model.WorkflowInstance=Exemplar do Workflow
 model.resource.com.liferay.portlet.workflow.model.WorkflowTask=Tarefa do Workflow
 
-##
-## Action names
-##
 
+##
+## Messages
+##
 action.ACCESS=Acceso
 action.ACCESS_IN_CONTROL_PANEL=Acceso no panel de control
 action.ADD_ARTICLE=Engadir un artigo
@@ -304,6 +309,7 @@ action.DELETE_USER=Borrar usuario
 action.EDIT=Editar
 action.EXPIRE=Expirar
 action.EXPORT_ALL_EVENTS=Exportar todos os eventos
+action.EXPORT_USER=Export User (Automatic Copy)
 action.GUEST_PREFERENCES=Editar preferencias para usuarios anónimos
 action.HELP=Axuda
 action.IMPERSONATE=Suplantar
@@ -338,10 +344,10 @@ action.VIEW=Ver
 action.VIEW_ALL_TASKS=Ver todas as tarefas
 action.VIEW_USER=Ver usuario
 
-##
-## Messages
-##
 
+##
+## Currency
+##
 1-day=1 día
 1-minute=1 minuto
 1-month=1 mes
@@ -364,7 +370,7 @@ action.VIEW_USER=Ver usuario
 INBOX=Entrantes
 a-map-could-not-be-found-for-the-address=Non se puido atopar un mapa para o enderezo:
 a-new-password-will-be-sent-to-x-if-you-can-correctly-answer-the-following-question=Unha nova contraseña vai ser enviada a {0} si podes responder correctamente á seguinte pregunta.
-a-new-version-will-be-created-automatically-if-this-article-is-modified=A new version will be created automatically if this article is modified. (Automatic Copy)
+a-new-version-will-be-created-automatically-if-this-content-is-modified=A new version will be created automatically if this content is modified. (Automatic Copy)
 a-page-cannot-become-a-child-of-a-page-that-is-not-parentable=Unha páxina non pode convertirse nunha páxina filla de unha páxina que non sexa parentable.
 a-page-cannot-become-a-child-of-itself=Unha páxina non pode convertirse nunha páxina filla de si mesma.
 a-page-may-not-contain-more-than-x-portlets=Unha páxina non pode conter mais de {0} portlets.
@@ -1266,6 +1272,7 @@ custom-field-key-help=Este campo personalizado usase para acceder ao campo a tra
 custom-field-secret-help=Establecer un campo personalizado como segredo significa que ao escribir non se vai ver. Usase para as contraseñas.
 custom-field-selection-help=Esta propiedade activa significa que o control deste campo será un lista de selección.
 custom-field-type-help=Elixe o tipo de campo con coidado porque unha vez definido non pode ser cambiado.
+custom-field-visible-with-update-permission-help=Settings a custom field to visible with update permission means that a user with update permission can view this field. This setting overrides the value of hidden in this case. (Automatic Copy)
 custom-field-width-help=Establece o ancho do campo de entrada en pixeles.
 custom-field=Campor personalizado
 custom-fields-are-not-enabled-for-any-resource=Os campos personalizados non están dispoñibles para ningún recurso.
@@ -1273,6 +1280,22 @@ custom-fields=Campos personalizados
 custom-message=Mensaxe personalizada
 custom-portlet-xml=Portlet XML personalizado
 custom-question=Cuestión personalizada
+custom.field.boolean.array=Group of True/False Values (Automatic Copy)
+custom.field.boolean=True/False (Automatic Copy)
+custom.field.double.array=Group of Decimal Numbers (64-bit) (Automatic Copy)
+custom.field.double=Decimal Number (64-bit) (Automatic Copy)
+custom.field.float.array=Group of Decimal Numbers (32-bit) (Automatic Copy)
+custom.field.float=Decimal Number (32-bit) (Automatic Copy)
+custom.field.int.array=Group of Integers (32-bit) (Automatic Copy)
+custom.field.int=Integer (32-bit) (Automatic Copy)
+custom.field.java.lang.String.array=Group of Text Values (Automatic Copy)
+custom.field.java.lang.String=Text (Automatic Copy)
+custom.field.java.util.Date.array=Group of Dates (Automatic Copy)
+custom.field.java.util.Date=Date (Automatic Copy)
+custom.field.long.array=Group of Integers (64-bit) (Automatic Copy)
+custom.field.long=Integer (64-bit) (Automatic Copy)
+custom.field.short.array=Group of Integers (16-bit) (Automatic Copy)
+custom.field.short=Integer (16-bit) (Automatic Copy)
 custom=Personalizado
 customer-service=Servizo ao cliente
 customer=Cliente
@@ -1306,6 +1329,7 @@ decorated=Decorado
 decoration=Decoración
 default-associations=Asociacións por defecto
 default-colors=Cores por defecto
+default-configuration=Default Configuration (Automatic Copy)
 default-control-panel-theme=Tema por defecto do panel de control
 default-email-notification=Notificación por defecto
 default-landing-page-help=Esta é a páxina na que os usuarios son enviados despois de identificarse. Por exemplo, se queres a páxina de entrada por defecto en http://localhost:8080/web/guest/login, entonces configura esta a /web/guest/login.
@@ -1425,6 +1449,8 @@ documents-with-tag-x=Documentos coa etiqueta <em>{0}</em>.
 documents-with-x-x=Documentos con {0} <em>{1}</em>.
 documents=Documentos
 does-not-contain=Non contén
+domain-controller-name-help=Specify the domain controller NetBIOS name. (Automatic Copy)
+domain-controller-name=Domain Controller Name (Automatic Copy)
 domain-controller=Regulardor do dominio
 domain=Dominio
 done=Finalizado
@@ -1727,6 +1753,7 @@ female-voice=Voz feminina
 female=Muller
 field-label=Etiqueta do campo
 field-name=Nome do campo
+field-type=Field Type (Automatic Copy)
 field=Campo
 fields-are-added-if-you-need-to-distinguish-items-based-on-criteria-chosen-by-the-user=Engade campos concretos polos que o usuario poderá buscar. Por exemplo, se vendes camisetas, podes engadir un campo co nome <i>Talla</i> e valores <i>S, M, L, XL</i>. Introduce os valores nunha lista de opcións separadas por comas.
 fields=Campos
@@ -2023,6 +2050,7 @@ increment-version-on-save=Incrementar o número de versión ao gardar
 increment-version=Incrementar número de versión
 indefinite=Indefinido
 indent=Sangrar
+index-type=Index type (Automatic Copy)
 indexed=Indexado
 indexes=Índices
 industry=Industria
@@ -2809,6 +2837,7 @@ please-contact-the-administrator-to-setup-this-portlet=Por favor, ponte en conta
 please-email-all-questions-to=Por favor, manda todas as túas preguntas por email a {0}.
 please-ensure-the-administrator-has-configured-a-proper-google-license=Por favor, comproba que o administrador configurou unha licenza de Google válida.
 please-enter-a-download-page-url-or-a-direct-download-url=Por favor, introduce unha URL de páxina de descarga ou de descarga directa.
+please-enter-a-file-with-a-valid-extension-x=Please enter a value with a valid extension ({0}). (Automatic Copy)
 please-enter-a-file-with-a-valid-file-name=Por favor, introduce un arquivo con un nome de arquivo válido.
 please-enter-a-file-with-a-valid-file-size=Por favor, introduce un arquivo cun tamaño válido
 please-enter-a-file-with-a-valid-file-type=Por favor, introduce un arquivo con un tipo de arquivo válido.
@@ -2934,17 +2963,28 @@ please-enter-a-valid-xsd=Por favor, introduce unha definición de modelo XML vá
 please-enter-a-valid-xsl-template=Por favor, introduce un modelo XSL válido.
 please-enter-a-valid-xsl-url=Por favor, introduce unha URL do XSL válida.
 please-enter-a-valid-zip=Por favor, introduce un código postal válido.
+please-enter-a-value-between-x-and-x-characters-long=Please enter a value between {0} and {1} characters long. (Automatic Copy)
+please-enter-a-value-between-x-and-x=Please enter a value between {0} and {1}. (Automatic Copy)
+please-enter-a-value-greater-than-or-equal-to-x=Please enter a value greater than or equal to {0}. (Automatic Copy)
+please-enter-a-value-less-than-or-equal-to-x=Please enter a value less than or equal to {0}. (Automatic Copy)
 please-enter-a-value=Por favor, introduce un valor.
 please-enter-a-word-that-is-at-least-3-characters-long=Por favor, introduce unha palabra de polo menos 3 carácteres.
 please-enter-an-email-address=Por favor, introduce un enderezo de correo electrónico.
 please-enter-at-least-one-tag=Por favor, introduce polo menos unha etiqueta.
+please-enter-at-list-x-characters=Please enter at least {0} characters. (Automatic Copy)
 please-enter-both-the-validation-code-and-the-error-message=Por favor, incorpora o código da validación e a mensaxe de erro.
 please-enter-jdbc-information-for-new-database=Por favor, introduce a información de JDBC para a nova base de datos.
+please-enter-no-more-than-x-characters=Please enter no more than {0} characters. (Automatic Copy)
+please-enter-only-alpha-characters=Please enter only alpha characters. (Automatic Copy)
+please-enter-only-alphanumeric-characters=Please enter only alphanumeric characters. (Automatic Copy)
+please-enter-only-digits=Please enter only digits. (Automatic Copy)
 please-enter-the-full-name-exactly-as-it-is-appears-on-your-credit-card=Por favor, introduce o nome completo exactamente como aparece na túa tarxeta de crédito.
+please-enter-the-same-value-again=Please enter the same value again. (Automatic Copy)
 please-enter-valid-choices=Por favor, elixa opcións válidas.
 please-enter-valid-comments=Por favor, introduce comentarios válidos.
 please-enter-valid-content=Por favor, introduce un contido válido.
 please-fill-out-all-required-fields=Por favor, introduce todos os campos requiridos.
+please-fix-this-field=Please fix this field. (Automatic Copy)
 please-import-a-lar-file-for-the-current-portlet=Por favor, importe arquivo LAR que se corresponda co portlet actual.
 please-import-a-lar-file-of-the-correct-type=Por favor, importe un arquivo LAR do tipo correcto.
 please-import-a-lar-file=Por favor, importe un arquivo LAR.
@@ -3166,6 +3206,7 @@ read-interval-minutes=Ler intervalo (minutos)
 read-more-x-about-x=Ler máis <span class="{0}">sobre {1}</span>
 read-more=Ler máis
 read-roles=Roles de lectura
+read-value-from-parameter=Read Value from Parameter (Automatic Copy)
 read=Lido
 reason-for-the-report=Razón da denuncia
 reassign-to-system-role=Reasignar a rol do sistema
@@ -3521,6 +3562,8 @@ server-port=Porto de servidor
 server-url=URL do servidor
 server=Servidor
 servers=Servidores
+service-account=Service Account (Automatic Copy)
+service-password=Service Password (Automatic Copy)
 service-url=URL do servizo
 service=Servizo
 services=Servizos
@@ -3536,6 +3579,7 @@ set-the-display-order-of-news-feeds=Ordenar os feeds de novas
 set-the-display-styles-used-to-display-blogs-when-viewed-via-as-a-regular-page-or-as-an-rss=Configura o estilo de presentación que se utilizará para mostrar as entradas do blog na web ou no feed RSS.
 set-the-following-values-to-filter-emails-associated-with-an-email-address-to-a-folder=Establece os valores seguintes para gardar os correos electrónicos asociados ao enderezo especificado á esquerda na carpeta indicada na dereita.
 set-the-google-analytics-id-that-will-be-used-for-this-set-of-pages=Establece o ID de Google Analytics que será utilizada para este conxunto de páxinas.
+set-up-the-communication-among-the-portlets-that-use-public-render-parameters=Set up the communication among the portlets that use public render parameters. For each of the public parameters in this portlet, it is possible to ignore the values coming from other portlets or to read the value from another parameter. <a href="{0}" target="_blank">Read more.</a> (Automatic Copy)
 set-your-community-tags=Establece as túas etiquetas da comunidade.
 set-your-global-tags=Establece as túas etiquetas globais.
 set-your-jira-login=Establece a túa identificación no JIRA
@@ -4129,6 +4173,7 @@ there-are-no-top-posters=Non hai ningún usuario activo.
 there-are-no-topics=Non hai temas.
 there-are-no-users-to-invite=Non hai usuarios para invitar.
 there-are-no-workflow-definitions=Non hai definicións de procesos de traballo.
+there-is-a-publication-workflow-in-process=There is a publication workflow in process. (Automatic Copy)
 there-is-already-a-page-with-the-specified-title=Xa existe unha páxina co título especificado.
 there-is-another-category-with-the-same-name-and-the-same-parent=Hai outra categoría co mesmo nome e o mesmo pai.
 there-is-existing-form-data-please-export-and-delete-it-before-making-changes-to-the-fields=Hai datos existentes da forma. Expórteo e suprima antes de realizar cambios aos campos.
@@ -4284,6 +4329,7 @@ uninstall=Desinstalar
 united-states-phone-format=Formato de número de teléfono en U.S.A.
 unknown=Descoñecido
 unlimited=Ilimitado
+unlock-thread-to-add-an-explanation-post=Unlock thread to add an explanation post. (Automatic Copy)
 unlock-thread=Desbloquear fío
 unlock=Desbloquear
 unmark=Unmark
@@ -4496,6 +4542,7 @@ violent-or-repulsive-content=Contido violento ou repulsivo
 virtual-host=Servidor virtual
 virtual-hosts-must-be-valid-domain-names=Os nomes de dominio virtuales deben ter nomes de dominio válidos.
 visible-wikis=Wikis visibles
+visible-with-update-permission=Visible with Update (Automatic Copy)
 visible=Visible
 visited-link=Enlace visitado
 visits=Visitas
@@ -4756,7 +4803,7 @@ you-must-first-add-a-vocabulary=Debes primeiro agregar un vocabulario.
 you-must-have-at-least-one-page=Debes ter polo menos unha páxina.
 you-must-specify-a-group-id-and-artifact-id-before-you-can-add-a-product-version=Debe especificar un identificador de grupo e un identificador do plugin para poder engadir unha versión do produto.
 you-now-have-a-lock-on-this-document=Este documento quedou bloqueado. Ninguén poderá editalo ata que o desbloquee. Este bloqueo caducará automáticamente o {0}.
-you-now-have-a-lock-on-this-page=Este documento quedou bloqueado. Ninguén poderá editar esta páxina ata que o desbloquee pulsando cancelar. Este bloqueo caducará automáticamente o {0}.
+you-now-have-an-indefinite-lock-on-this-document=You now have an indefinite lock on this document. No one else can edit this document until you unlock it. This lock will never expire. (Automatic Copy)
 you-save=Gardas
 you-should-save-the-structure-first=Debes grabar a estructura primeiro.
 you-will-be-sent-an-email-notification-when-each-of-the-recipients-of-this-email-have-opened-to-read-this-email=Enviaranche unha notificación cando cada un dos destinatarios lea o correo.
@@ -4800,10 +4847,6 @@ zh_en=De chinés a inglés
 zip-postal=Zip/Postal
 zip=Código postal
 zt_en=De chinés (Taiwán) a inglés
-
-##
-## Currency
-##
 
 currency.AED=Dirham dos EAU
 currency.ALL=Lek Albanés

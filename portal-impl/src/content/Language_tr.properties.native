@@ -1,15 +1,20 @@
+
 ##
 ## Language settings
 ##
 
-lang.dir=ltr
-lang.line.begin=left
-lang.line.end=right
 
 ##
 ## Portlet descriptions and titles
 ##
+lang.dir=ltr
+lang.line.begin=left
+lang.line.end=right
 
+
+##
+## Category titles
+##
 javax.portlet.description.122=Categories describe a set of vocabulary terms to tag content items. Administrators can create vocabularies and populate them with categories that users can choose from when authoring content. (Automatic Copy)
 javax.portlet.description.126=Organizations represent a hierarchy of users, such as a department or subsidiary. Administrators can manage user membership, define roles, and set up the attributes of an organization. (Automatic Copy)
 javax.portlet.description.127=User groups are a shortcut to a loose group of users, regardless of community or organization membership. Administrators can define a user group and assign the user group as members of a community if desired. (Automatic Copy)
@@ -136,10 +141,10 @@ javax.portlet.title.98=Yazılım Kataloğu
 javax.portlet.title.99=Tags (Automatic Copy)
 javax.portlet.title.9=Yönetici
 
-##
-## Category titles
-##
 
+##
+## Model resources
+##
 category.admin=Yönetici
 category.alfresco=Alfresco
 category.christianity=Hristiyanlık
@@ -174,10 +179,10 @@ category.wol=Liferay Dünyası
 category.workflow=İş Akışı
 category.wsrp=WSRP
 
-##
-## Model resources
-##
 
+##
+## Action names
+##
 model.resource.com.liferay.knowledgebase.model.KBArticle=Bilgi Tabanlı Makale
 model.resource.com.liferay.portal.model.Group=Topluluk
 model.resource.com.liferay.portal.model.Layout=Sayfa
@@ -239,10 +244,10 @@ model.resource.com.liferay.portlet.workflow.model.WorkflowDefinition=İş Akış
 model.resource.com.liferay.portlet.workflow.model.WorkflowInstance=İş Akışı Örneği
 model.resource.com.liferay.portlet.workflow.model.WorkflowTask=İş Akışı Görevi
 
-##
-## Action names
-##
 
+##
+## Messages
+##
 action.ACCESS=Access (Automatic Copy)
 action.ACCESS_IN_CONTROL_PANEL=Access in Control Panel (Automatic Copy)
 action.ADD_ARTICLE=Makale Ekle
@@ -304,6 +309,7 @@ action.DELETE_USER=Kullanıcı Sil
 action.EDIT=Düzenle
 action.EXPIRE=Sonlandır
 action.EXPORT_ALL_EVENTS=Tüm Olayları Dışa Aktar
+action.EXPORT_USER=Export User (Automatic Copy)
 action.GUEST_PREFERENCES=Ziyaretçi Tercihleri
 action.HELP=Yardım
 action.IMPERSONATE=Temsil Et/Tanı/Canlandır
@@ -338,10 +344,10 @@ action.VIEW=Görüntüle
 action.VIEW_ALL_TASKS=View All Tasks (Automatic Copy)
 action.VIEW_USER=Kullanıcı Görüntüle
 
-##
-## Messages
-##
 
+##
+## Currency
+##
 1-day=1 Gün
 1-minute=1 Dakika
 1-month=1 Ay
@@ -364,7 +370,7 @@ action.VIEW_USER=Kullanıcı Görüntüle
 INBOX=Gelen
 a-map-could-not-be-found-for-the-address=Bu adres için harita bulunamadı:
 a-new-password-will-be-sent-to-x-if-you-can-correctly-answer-the-following-question=Soruya doğru cevap verirseniz yeni şifre {0}'a gönderilecek.
-a-new-version-will-be-created-automatically-if-this-article-is-modified=A new version will be created automatically if this article is modified. (Automatic Copy)
+a-new-version-will-be-created-automatically-if-this-content-is-modified=A new version will be created automatically if this content is modified. (Automatic Copy)
 a-page-cannot-become-a-child-of-a-page-that-is-not-parentable=Bir sayfa üst öğe olamayan bir sayfanın alt sayfası olamaz.
 a-page-cannot-become-a-child-of-itself=Bir sayfa kendinin alt sayfası olamaz.
 a-page-may-not-contain-more-than-x-portlets=Bir sayfa {0} portletden fazlasını barındıramaz.
@@ -1266,6 +1272,7 @@ custom-field-key-help=The custom field key is used to access the field programat
 custom-field-secret-help=Setting a custom field to secret means that typing will be hidden on the screen. Use this for passwords. (Automatic Copy)
 custom-field-selection-help=Setting this property to true means the control used to set this field will be a select box. (Automatic Copy)
 custom-field-type-help=Choose the field type carefully as once it is defined it cannot be changed. (Automatic Copy)
+custom-field-visible-with-update-permission-help=Settings a custom field to visible with update permission means that a user with update permission can view this field. This setting overrides the value of hidden in this case. (Automatic Copy)
 custom-field-width-help=This will set the width of the input field in pixels. (Automatic Copy)
 custom-field=Custom Field (Automatic Copy)
 custom-fields-are-not-enabled-for-any-resource=Custom fields are not enabled for any resource. (Automatic Copy)
@@ -1273,6 +1280,22 @@ custom-fields=Custom Fields (Automatic Copy)
 custom-message=Özel Mesaj
 custom-portlet-xml=Özel portlet.xml
 custom-question=Custom Question (Automatic Copy)
+custom.field.boolean.array=Group of True/False Values (Automatic Copy)
+custom.field.boolean=True/False (Automatic Copy)
+custom.field.double.array=Group of Decimal Numbers (64-bit) (Automatic Copy)
+custom.field.double=Decimal Number (64-bit) (Automatic Copy)
+custom.field.float.array=Group of Decimal Numbers (32-bit) (Automatic Copy)
+custom.field.float=Decimal Number (32-bit) (Automatic Copy)
+custom.field.int.array=Group of Integers (32-bit) (Automatic Copy)
+custom.field.int=Integer (32-bit) (Automatic Copy)
+custom.field.java.lang.String.array=Group of Text Values (Automatic Copy)
+custom.field.java.lang.String=Text (Automatic Copy)
+custom.field.java.util.Date.array=Group of Dates (Automatic Copy)
+custom.field.java.util.Date=Date (Automatic Copy)
+custom.field.long.array=Group of Integers (64-bit) (Automatic Copy)
+custom.field.long=Integer (64-bit) (Automatic Copy)
+custom.field.short.array=Group of Integers (16-bit) (Automatic Copy)
+custom.field.short=Integer (16-bit) (Automatic Copy)
 custom=Özel
 customer-service=Müşteri Servisi
 customer=Müşteri
@@ -1306,6 +1329,7 @@ decorated=Dekore Edilmiş
 decoration=Dekorasyon
 default-associations=Varsayılan İlişkiler
 default-colors=Varsayılan Renkler
+default-configuration=Default Configuration (Automatic Copy)
 default-control-panel-theme=Default Control Panel Theme (Automatic Copy)
 default-email-notification=Varsayılan E-posta Uyarısı
 default-landing-page-help=This is the page that users are automatically redirected to after logging in. For example, if you want the default landing page to be http://localhost:8080/web/guest/login, then set this to /web/guest/login. (Automatic Copy)
@@ -1425,6 +1449,8 @@ documents-with-tag-x=Documents with tag <em>{0}</em>. (Automatic Copy)
 documents-with-x-x=Documents with {0} <em>{1}</em>. (Automatic Copy)
 documents=Belgeler
 does-not-contain=Does not Contain (Automatic Copy)
+domain-controller-name-help=Specify the domain controller NetBIOS name. (Automatic Copy)
+domain-controller-name=Domain Controller Name (Automatic Copy)
 domain-controller=Alan Denetleyici
 domain=Alan
 done=Yapıldı
@@ -1727,6 +1753,7 @@ female-voice=Bayan Sesi
 female=Bayan
 field-label=Field Label (Automatic Copy)
 field-name=Field Name (Automatic Copy)
+field-type=Field Type (Automatic Copy)
 field=Alan
 fields-are-added-if-you-need-to-distinguish-items-based-on-criteria-chosen-by-the-user=Kullanıcı tarafından seçilmiş kriterlere göre ayırmak gerekiyorsa alanlar eklenecek. Örneğin t-shirt satıyorsanız <em>beden</em> diye bir alan ayırabilir, <em>S, M, L, XL</em> değerlerini girebilirsiniz.
 fields=Alanlar
@@ -2023,6 +2050,7 @@ increment-version-on-save=Kayıtta Versiyonu Yükselt
 increment-version=Versiyonu Yükselt
 indefinite=Tanımsız
 indent=Girinti
+index-type=Index type (Automatic Copy)
 indexed=İndekslenmiş
 indexes=İndeks
 industry=Endüstri
@@ -2809,6 +2837,7 @@ please-contact-the-administrator-to-setup-this-portlet=Bu portleti kullanabilmek
 please-email-all-questions-to=Lütfen tüm soruları {0}'a e-posta atın.
 please-ensure-the-administrator-has-configured-a-proper-google-license=Lütfen portal yöneticisinin uygun bir Google lisansı ayarladığından emin olun.
 please-enter-a-download-page-url-or-a-direct-download-url=Lütfen indirme sayfası URL'i girin veya direk indirme URL'i girin.
+please-enter-a-file-with-a-valid-extension-x=Please enter a value with a valid extension ({0}). (Automatic Copy)
 please-enter-a-file-with-a-valid-file-name=Please enter a file with a valid file name. (Automatic Copy)
 please-enter-a-file-with-a-valid-file-size=Lütfen uygun dosya boyutunda bir dosya girin.
 please-enter-a-file-with-a-valid-file-type=Please enter a file with a valid file type. (Automatic Copy)
@@ -2934,17 +2963,28 @@ please-enter-a-valid-xsd=Lütfen geçerli bir XML Schema tanımı giriniz.
 please-enter-a-valid-xsl-template=Lütfen geçerli bir XSL şablonu giriniz.
 please-enter-a-valid-xsl-url=Lütfen geçerli bir XSL url giriniz.
 please-enter-a-valid-zip=Lütfen geçerli bir posta kodu giriniz.
+please-enter-a-value-between-x-and-x-characters-long=Please enter a value between {0} and {1} characters long. (Automatic Copy)
+please-enter-a-value-between-x-and-x=Please enter a value between {0} and {1}. (Automatic Copy)
+please-enter-a-value-greater-than-or-equal-to-x=Please enter a value greater than or equal to {0}. (Automatic Copy)
+please-enter-a-value-less-than-or-equal-to-x=Please enter a value less than or equal to {0}. (Automatic Copy)
 please-enter-a-value=Lütfen bir değer giriniz.
 please-enter-a-word-that-is-at-least-3-characters-long=Lütfen en az 3 karakter uzunluğunda bir kelime giriniz.
 please-enter-an-email-address=Lütfen geçerli bir e-posta adresi giriniz.
 please-enter-at-least-one-tag=Lütfen en az bir etiket giriniz.
+please-enter-at-list-x-characters=Please enter at least {0} characters. (Automatic Copy)
 please-enter-both-the-validation-code-and-the-error-message=Lütfen doğrulama kodu ve hata mesajınının ikisini de giriniz.
 please-enter-jdbc-information-for-new-database=Please enter JDBC information for new database. (Automatic Copy)
+please-enter-no-more-than-x-characters=Please enter no more than {0} characters. (Automatic Copy)
+please-enter-only-alpha-characters=Please enter only alpha characters. (Automatic Copy)
+please-enter-only-alphanumeric-characters=Please enter only alphanumeric characters. (Automatic Copy)
+please-enter-only-digits=Please enter only digits. (Automatic Copy)
 please-enter-the-full-name-exactly-as-it-is-appears-on-your-credit-card=Lütfen kredi kartınızdaki şekliyle tam adınızı giriniz.
+please-enter-the-same-value-again=Please enter the same value again. (Automatic Copy)
 please-enter-valid-choices=Lütfen geçerli tercihleri giriniz.
 please-enter-valid-comments=Lütfen geçerli yorumları giriniz.
 please-enter-valid-content=Lütfen geçerli bir içerik giriniz.
 please-fill-out-all-required-fields=Please fill out all required fields. (Automatic Copy)
+please-fix-this-field=Please fix this field. (Automatic Copy)
 please-import-a-lar-file-for-the-current-portlet=Lütfen geçerli portlet için LAR dosyası yükleyiniz.
 please-import-a-lar-file-of-the-correct-type=Lütfen doğru türdeki bir LAR dosyası yükleyiniz.
 please-import-a-lar-file=Lütfen bir LAR dosyası yükleyiniz.
@@ -3166,6 +3206,7 @@ read-interval-minutes=Okuma Süresi (Dakikalar)
 read-more-x-about-x=Read More <span class="{0}">About {1}</span> (Automatic Copy)
 read-more=Devamını Oku
 read-roles=Rolleri Oku
+read-value-from-parameter=Read Value from Parameter (Automatic Copy)
 read=Oku
 reason-for-the-report=Rapor İçin Sebep
 reassign-to-system-role=Reassign to System Role (Automatic Copy)
@@ -3521,6 +3562,8 @@ server-port=Sunucu Portu
 server-url=Server URL (Automatic Copy)
 server=Sunucu
 servers=Servers (Automatic Copy)
+service-account=Service Account (Automatic Copy)
+service-password=Service Password (Automatic Copy)
 service-url=Servis URL
 service=Servis
 services=Servisler
@@ -3536,6 +3579,7 @@ set-the-display-order-of-news-feeds=Haber beslemelerinin görüntülenme sıras�
 set-the-display-styles-used-to-display-blogs-when-viewed-via-as-a-regular-page-or-as-an-rss=Blogları normal sayfada yada RSS yoluyla görüntülerken kullanılacak olan görüntü stillerini seçiniz.
 set-the-following-values-to-filter-emails-associated-with-an-email-address-to-a-folder=Bir e-posta adresiyle ilişkilendirilmiş e-postaları filtrelemek için takip eden değerleri giriniz.
 set-the-google-analytics-id-that-will-be-used-for-this-set-of-pages=Bu sayfalarda kullanılacak olan Google Analytics ID'sini ayarlayın.
+set-up-the-communication-among-the-portlets-that-use-public-render-parameters=Set up the communication among the portlets that use public render parameters. For each of the public parameters in this portlet, it is possible to ignore the values coming from other portlets or to read the value from another parameter. <a href="{0}" target="_blank">Read more.</a> (Automatic Copy)
 set-your-community-tags=Topluluk etiketlerinizi ayarlayın.
 set-your-global-tags=Global etiketlerinizi ayarlayın.
 set-your-jira-login=Set your JIRA login. (Automatic Copy)
@@ -4129,6 +4173,7 @@ there-are-no-top-posters=Poster bulunmamaktadır.
 there-are-no-topics=Başlık bulunmamaktadır.
 there-are-no-users-to-invite=Davet edilecek kullanıcı yok.
 there-are-no-workflow-definitions=There are no workflow definitions. (Automatic Copy)
+there-is-a-publication-workflow-in-process=There is a publication workflow in process. (Automatic Copy)
 there-is-already-a-page-with-the-specified-title=Belirtilen başlığa sahip bir sayfa zaten bulunmaktadır. 
 there-is-another-category-with-the-same-name-and-the-same-parent=There is another category with the same name and the same parent. (Automatic Copy)
 there-is-existing-form-data-please-export-and-delete-it-before-making-changes-to-the-fields=Zaten varolan bir form verisi bulunmaktadır. Lütfen kaydedin ve alanlarda değişiklik yapmadan önce silin.  
@@ -4284,6 +4329,7 @@ uninstall=Kaldır
 united-states-phone-format=ABD Telefon Numarası Formatı 
 unknown=Bilinmeyen
 unlimited=Sınırsız
+unlock-thread-to-add-an-explanation-post=Unlock thread to add an explanation post. (Automatic Copy)
 unlock-thread=Unlock Thread (Automatic Copy)
 unlock=Kilidi aç
 unmark=İşareti kaldır
@@ -4496,6 +4542,7 @@ violent-or-repulsive-content=Şiddetli ya da İtici İçerik
 virtual-host=Virtual Host
 virtual-hosts-must-be-valid-domain-names=Virtual hostlar geçerli alan adları olmalıdır. 
 visible-wikis=Görülebilir Wikiler
+visible-with-update-permission=Visible with Update (Automatic Copy)
 visible=Görülebilir
 visited-link=Ziyaret Edilmiş Bağlantılar
 visits=Ziyaretler
@@ -4756,7 +4803,7 @@ you-must-first-add-a-vocabulary=Öncelikle bir sözlük eklemesiniz.
 you-must-have-at-least-one-page=En az bir sayfanız olmalıdır.
 you-must-specify-a-group-id-and-artifact-id-before-you-can-add-a-product-version=Ürün versiyonu eklemeden önce bir grup numarası ve obje numarası belirlemelisiniz.
 you-now-have-a-lock-on-this-document=Bu dokümanı kilitlediniz. Siz kilidi kaldırana dek kimse bu dokümanı düzenleyemez. {0} içinde kilit kendiliğinden kalkacatır.
-you-now-have-a-lock-on-this-page=Bu sayfayı kilitlediniz. Siz iptal düğmesine basıp kilidi kaldırana dek kimse bu sayfayı düzenleyemez. {0} içinde kilit kendiliğinden kalkacatır.
+you-now-have-an-indefinite-lock-on-this-document=You now have an indefinite lock on this document. No one else can edit this document until you unlock it. This lock will never expire. (Automatic Copy)
 you-save=Kaydettiniz
 you-should-save-the-structure-first=You should save the structure first. (Automatic Copy)
 you-will-be-sent-an-email-notification-when-each-of-the-recipients-of-this-email-have-opened-to-read-this-email=Bu e-postanın alıcıları bu e-postayı okumak için açtıklarında e-posta ile bilgilendirileceksiniz.
@@ -4800,10 +4847,6 @@ zh_en=Çinceden (Çin) to İngilizceye
 zip-postal=Posta Kodu
 zip=Posta Kodu
 zt_en=Çinceden (Tayvan) İngilizceye
-
-##
-## Currency
-##
 
 currency.AED=UAE Dirham
 currency.ALL=Albanian Lek

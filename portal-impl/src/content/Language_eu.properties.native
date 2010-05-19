@@ -1,15 +1,20 @@
+
 ##
 ## Language settings
 ##
 
-lang.dir=ltr
-lang.line.begin=left
-lang.line.end=right
 
 ##
 ## Portlet descriptions and titles
 ##
+lang.dir=ltr
+lang.line.begin=left
+lang.line.end=right
 
+
+##
+## Category titles
+##
 javax.portlet.description.122=Kategoriek edukiak etiketatzeko balio duten hiztegietan multzokatutako hitzen multzoa deskribatzen dute. Administratzaileek hiztegiak sortu eta kategoriekin populatu ditzakete, hauek erabiltzaileek edukiak etiketatzerakoan aukeratu ahal izango dituztelarik.
 javax.portlet.description.126=Erakundeek erabiltzaileen hierarkia errepresentatzen dute, departamentu edo menpekoak esaterako. Administratzaileek erabiltzaileen bazkidetzak kudeatu, rolak definitu eta erakundearen atributuak ezarri ditzakete.
 javax.portlet.description.127=Erabiltzaile taldeak erabiltzaile talde solteen lasterbideak dira, komunitate edo erakunde bazkidetza kontutan eduki gabe. Administratzaileek erabiltzaile taldea definitu eta komunitateko partaide moduan esleitu ditzakete.
@@ -136,10 +141,10 @@ javax.portlet.title.98=Software katalogoa
 javax.portlet.title.99=Etiketak
 javax.portlet.title.9=Administrazioa
 
-##
-## Category titles
-##
 
+##
+## Model resources
+##
 category.admin=Administrazioa
 category.alfresco=Alfresco
 category.christianity=Kristautasuna
@@ -174,10 +179,10 @@ category.wol=Liferay mundua
 category.workflow=Workflow
 category.wsrp=WSRP
 
-##
-## Model resources
-##
 
+##
+## Action names
+##
 model.resource.com.liferay.knowledgebase.model.KBArticle=Jakintza-base artikulua
 model.resource.com.liferay.portal.model.Group=Komunitatea
 model.resource.com.liferay.portal.model.Layout=Orria
@@ -239,10 +244,10 @@ model.resource.com.liferay.portlet.workflow.model.WorkflowDefinition=Workflow de
 model.resource.com.liferay.portlet.workflow.model.WorkflowInstance=Workflow kasua
 model.resource.com.liferay.portlet.workflow.model.WorkflowTask=Workflow ataza
 
-##
-## Action names
-##
 
+##
+## Messages
+##
 action.ACCESS=Sarrera
 action.ACCESS_IN_CONTROL_PANEL=Sarbidea Kontrol Panelean
 action.ADD_ARTICLE=Gehitu edukia
@@ -304,6 +309,7 @@ action.DELETE_USER=Ezabatu erabiltzailea
 action.EDIT=Editatu
 action.EXPIRE=Iraungi
 action.EXPORT_ALL_EVENTS=Esportatu gertakari guztiak
+action.EXPORT_USER=Export User (Automatic Copy)
 action.GUEST_PREFERENCES=Gonbidatu hobetsitakoak
 action.HELP=Laguntza
 action.IMPERSONATE=Ordezkatu
@@ -338,10 +344,10 @@ action.VIEW=Ikusi
 action.VIEW_ALL_TASKS=Ikusi ataza guztiak
 action.VIEW_USER=Ikusi erabiltzailea
 
-##
-## Messages
-##
 
+##
+## Currency
+##
 1-day=Egun 1
 1-minute=Minutu 1
 1-month=Hilabete 1
@@ -364,7 +370,7 @@ action.VIEW_USER=Ikusi erabiltzailea
 INBOX=Sarrera
 a-map-could-not-be-found-for-the-address=Ezin izan da maparik aurkitu helbide honetarako:
 a-new-password-will-be-sent-to-x-if-you-can-correctly-answer-the-following-question=Hurrengo galdera zuzen erantzuteko gai baldin bazara pasahitz berri bat {0}-(r)i bidaliko zaio.
-a-new-version-will-be-created-automatically-if-this-article-is-modified=A new version will be created automatically if this article is modified. (Automatic Copy)
+a-new-version-will-be-created-automatically-if-this-content-is-modified=A new version will be created automatically if this content is modified. (Automatic Copy)
 a-page-cannot-become-a-child-of-a-page-that-is-not-parentable=Orri bat ezin da senidegaia ez den orri baten semea izan.
 a-page-cannot-become-a-child-of-itself=Orri bat ezin da bere buruaren semea izan.
 a-page-may-not-contain-more-than-x-portlets=Orri batek ezin du {0} portlet baino gehiago izan.
@@ -1266,6 +1272,7 @@ custom-field-key-help=Eremu pertsonalizatu gakoa programatikoki eremua eskuratze
 custom-field-secret-help=Eremu bat sekretua denean, erabiltzaileak sartzen dituen karaktereak ezkutatuta agretzen dira. Pasahitzentzat aholkatzen da.
 custom-field-selection-help=Propietate hau egiazkotzat jartzeak eremu hau ezartzeko erabiliko den kontrola aukeratu kontrola izango dela esan nahi du.
 custom-field-type-help=Aukeratu eremu mota kontu guztiarekin, behin definituta ezin delako aldatu.
+custom-field-visible-with-update-permission-help=Settings a custom field to visible with update permission means that a user with update permission can view this field. This setting overrides the value of hidden in this case. (Automatic Copy)
 custom-field-width-help=Eremu pertsonalizatuaren luzera pixeletan.
 custom-field=Eremu pertsonalizatua
 custom-fields-are-not-enabled-for-any-resource=Eremu pertsonalizatuak ez daude gaituta inolako baliabiderentzat.
@@ -1273,6 +1280,22 @@ custom-fields=Eremu pertsonalizatuak
 custom-message=Mezu pertsonalizatua
 custom-portlet-xml=Portlet xml pertsonalizatua
 custom-question=Galdera pertsonalizatua
+custom.field.boolean.array=Group of True/False Values (Automatic Copy)
+custom.field.boolean=True/False (Automatic Copy)
+custom.field.double.array=Group of Decimal Numbers (64-bit) (Automatic Copy)
+custom.field.double=Decimal Number (64-bit) (Automatic Copy)
+custom.field.float.array=Group of Decimal Numbers (32-bit) (Automatic Copy)
+custom.field.float=Decimal Number (32-bit) (Automatic Copy)
+custom.field.int.array=Group of Integers (32-bit) (Automatic Copy)
+custom.field.int=Integer (32-bit) (Automatic Copy)
+custom.field.java.lang.String.array=Group of Text Values (Automatic Copy)
+custom.field.java.lang.String=Text (Automatic Copy)
+custom.field.java.util.Date.array=Group of Dates (Automatic Copy)
+custom.field.java.util.Date=Date (Automatic Copy)
+custom.field.long.array=Group of Integers (64-bit) (Automatic Copy)
+custom.field.long=Integer (64-bit) (Automatic Copy)
+custom.field.short.array=Group of Integers (16-bit) (Automatic Copy)
+custom.field.short=Integer (16-bit) (Automatic Copy)
 custom=Pertsonalizatua
 customer-service=Bezeroarentzako zerbitzua
 customer=Bezeroa
@@ -1306,6 +1329,7 @@ decorated=Dekoratuta
 decoration=Dekorazioa
 default-associations=Elkartze lehenetsiak
 default-colors=Kolore lehenetsiak
+default-configuration=Default Configuration (Automatic Copy)
 default-control-panel-theme=Lehenetsitako Kontrol Panelaren Gaia
 default-email-notification=Posta elektroniko jakinarazpen lehenetsia
 default-landing-page-help=Erabiltzailea baliozkatzen denean orri honetara bideratzen da. Adibidez, nahi baduzu http://localhost:8080/web/guest/login orria lehenetsia izatea, emaiozu /web/guest/login balioa.
@@ -1425,6 +1449,8 @@ documents-with-tag-x=Documents with tag <em>{0}</em>. (Automatic Copy)
 documents-with-x-x=Documents with {0} <em>{1}</em>. (Automatic Copy)
 documents=Dokumentuak
 does-not-contain=Ez du
+domain-controller-name-help=Specify the domain controller NetBIOS name. (Automatic Copy)
+domain-controller-name=Domain Controller Name (Automatic Copy)
 domain-controller=Domeinu kontrolatzailea
 domain=Domeinua
 done=Eginda
@@ -1727,6 +1753,7 @@ female-voice=Emakume ahotsa
 female=Emakumea
 field-label=Eremu etiketa
 field-name=Eremu izena
+field-type=Field Type (Automatic Copy)
 field=Eremua
 fields-are-added-if-you-need-to-distinguish-items-based-on-criteria-chosen-by-the-user=Erabiltzaileak bilaketak egiteko eremu zehatzak sartu. Adibidez, kamisetak saltzen baditu, <em>S, M, L, XL</em> balioek dituen <em>Tamainua</em> izeneko eremua bat sartu dezake. Sartu balioak aukera zerrenda batetan komekin banatuta.
 fields=Eremuak
@@ -2023,6 +2050,7 @@ increment-version-on-save=Gehitu bertsioa gordetzean
 increment-version=Gehitu bertsioa
 indefinite=Zehaztu gabe
 indent=Koska
+index-type=Index type (Automatic Copy)
 indexed=Indexatua
 indexes=Indizeak
 industry=Industria
@@ -2809,6 +2837,7 @@ please-contact-the-administrator-to-setup-this-portlet=Mesedez, administratzaile
 please-email-all-questions-to=Mesedez, bidali galdera guztiak email-ez {0}(r)i.
 please-ensure-the-administrator-has-configured-a-proper-google-license=Mesedez, konprobatu administratzaileak Google lizentzia egokia konfiguratu duela.
 please-enter-a-download-page-url-or-a-direct-download-url=Mesedez, sar ezazu deskarga orri baten URLa edo deskarga zuzeneko URL bat.
+please-enter-a-file-with-a-valid-extension-x=Please enter a value with a valid extension ({0}). (Automatic Copy)
 please-enter-a-file-with-a-valid-file-name=Please enter a file with a valid file name. (Automatic Copy)
 please-enter-a-file-with-a-valid-file-size=Mesedez, sar ezazu neurri egokiko fitxategi bat.
 please-enter-a-file-with-a-valid-file-type=Mesedez, sar ezazu fitxategi mota egokia duen fitxategi bat.
@@ -2934,17 +2963,28 @@ please-enter-a-valid-xsd=Mesedez, sartu XMLaren baliozko eskema definizio bat.
 please-enter-a-valid-xsl-template=Mesedez, sartu baliozko XSL txantiloi bat.
 please-enter-a-valid-xsl-url=Mesedez, sartu XSLaren baliozko URL bat.
 please-enter-a-valid-zip=Mesedez, sartu baliozko posta kode bat.
+please-enter-a-value-between-x-and-x-characters-long=Please enter a value between {0} and {1} characters long. (Automatic Copy)
+please-enter-a-value-between-x-and-x=Please enter a value between {0} and {1}. (Automatic Copy)
+please-enter-a-value-greater-than-or-equal-to-x=Please enter a value greater than or equal to {0}. (Automatic Copy)
+please-enter-a-value-less-than-or-equal-to-x=Please enter a value less than or equal to {0}. (Automatic Copy)
 please-enter-a-value=Mesedez, sartu balio bat.
 please-enter-a-word-that-is-at-least-3-characters-long=Mesedez, sartu gutxienez 3 karaktereko hitz bat.
 please-enter-an-email-address=Mesedez, sartu posta elektronikoko helbide bat.
 please-enter-at-least-one-tag=Mesedez, sartu etiketa bat gutxienez.
+please-enter-at-list-x-characters=Please enter at least {0} characters. (Automatic Copy)
 please-enter-both-the-validation-code-and-the-error-message=Mesedez, sartu balidatze kodea eta errore mezua.
 please-enter-jdbc-information-for-new-database=Mesedez, sartu datu base berriarentzat JDBC informazioa.
+please-enter-no-more-than-x-characters=Please enter no more than {0} characters. (Automatic Copy)
+please-enter-only-alpha-characters=Please enter only alpha characters. (Automatic Copy)
+please-enter-only-alphanumeric-characters=Please enter only alphanumeric characters. (Automatic Copy)
+please-enter-only-digits=Please enter only digits. (Automatic Copy)
 please-enter-the-full-name-exactly-as-it-is-appears-on-your-credit-card=Mesedez, sartu izen osoa kreditu txartelean datorren bezala.
+please-enter-the-same-value-again=Please enter the same value again. (Automatic Copy)
 please-enter-valid-choices=Mesedez, sartu baliozko aukerak.
 please-enter-valid-comments=Mesedez, sartu baliozko iruzkinak.
 please-enter-valid-content=Mesedez, sartu baliozko edukia.
 please-fill-out-all-required-fields=Mesedez bete itzazu derrrigorrezko eremu guztiak.
+please-fix-this-field=Please fix this field. (Automatic Copy)
 please-import-a-lar-file-for-the-current-portlet=Mesedez, inportatu egungo portleterako LAR fitxategi bat.
 please-import-a-lar-file-of-the-correct-type=Mesedez, inportatu mota egokiko LAR fitxategi bat.
 please-import-a-lar-file=Mesedez, inportatu LAR fitxategi bat.
@@ -3166,6 +3206,7 @@ read-interval-minutes=Irakurri tartea (minutuak)
 read-more-x-about-x=Irakurri gehiago <span class="{0}">Honi buruz {1}</span>
 read-more=Irakurri gehiago
 read-roles=Irakurketa rolak
+read-value-from-parameter=Read Value from Parameter (Automatic Copy)
 read=Irakurrita
 reason-for-the-report=Txosterarentzat arrazoia
 reassign-to-system-role=Sistema rolari berresleitu
@@ -3521,6 +3562,8 @@ server-port=Zerbitzari portua
 server-url=Zerbitzariaren URLa
 server=Zerbitzaria
 servers=Zerbitzariak
+service-account=Service Account (Automatic Copy)
+service-password=Service Password (Automatic Copy)
 service-url=Zerbitzuaren URLa
 service=Zerbitzua
 services=Zerbitzuak
@@ -3536,6 +3579,7 @@ set-the-display-order-of-news-feeds=Ezarri albiste iturriak bistaratzeko eskaera
 set-the-display-styles-used-to-display-blogs-when-viewed-via-as-a-regular-page-or-as-an-rss=Ezarri blogak orri arruntean edo RSSan bistaratzeko erabilitako estiloak.
 set-the-following-values-to-filter-emails-associated-with-an-email-address-to-a-folder=Ezarri hurrengo balioak posta elektronikoko helbidea karpeta bati lotuta duten mezu elektronikoak iragazteko.
 set-the-google-analytics-id-that-will-be-used-for-this-set-of-pages=Ezarri Google Analytic-aren identifikatzailea orri multzo honekin erabiltzeko.
+set-up-the-communication-among-the-portlets-that-use-public-render-parameters=Set up the communication among the portlets that use public render parameters. For each of the public parameters in this portlet, it is possible to ignore the values coming from other portlets or to read the value from another parameter. <a href="{0}" target="_blank">Read more.</a> (Automatic Copy)
 set-your-community-tags=Ezarri zure komunitatearen etiketak.
 set-your-global-tags=Ezarri zure etiketa globalak.
 set-your-jira-login=Ezarri zure JIRA saio hasiera.
@@ -4129,6 +4173,7 @@ there-are-no-top-posters=Ez dago erabiltzaile aktiborik.
 there-are-no-topics=Ez dago gairik.
 there-are-no-users-to-invite=Ez daude erabiltzaileak gonbidatzeko.
 there-are-no-workflow-definitions=Ez dago workflow definiziorik.
+there-is-a-publication-workflow-in-process=There is a publication workflow in process. (Automatic Copy)
 there-is-already-a-page-with-the-specified-title=Zehaztutako izenburua daukan orri bat existitzen da dagoeneko.
 there-is-another-category-with-the-same-name-and-the-same-parent=Izen eta aita berdineko beste kategoria bat existitzen da.
 there-is-existing-form-data-please-export-and-delete-it-before-making-changes-to-the-fields=Existitzen da datu formulario bat. Mesedez, esportatu eta ezabatu eremuetan aldaketak egin baina lehenago.
@@ -4284,6 +4329,7 @@ uninstall=Desinstalatu
 united-states-phone-format=EEBBetako telefono zenbakiaren formatua
 unknown=Ezezaguna
 unlimited=Mugagabea
+unlock-thread-to-add-an-explanation-post=Unlock thread to add an explanation post. (Automatic Copy)
 unlock-thread=Desblokeatu haria
 unlock=Desblokeatu
 unmark=Kendu marka
@@ -4496,6 +4542,7 @@ violent-or-repulsive-content=Eduki gogor edo higuingarria.
 virtual-host=Zerbitzari birtuala
 virtual-hosts-must-be-valid-domain-names=Host birtualak domeinu izen baliodunak izan behar dira.
 visible-wikis=Wiki ikusgaiak
+visible-with-update-permission=Visible with Update (Automatic Copy)
 visible=Ikusgaia
 visited-link=Bisitatutako esteka
 visits=Bisitak
@@ -4756,7 +4803,7 @@ you-must-first-add-a-vocabulary=Lehenik eta behin hiztegia gehitu behar duzu.
 you-must-have-at-least-one-page=Gutxienez orrialde bat eduki behar duzu.
 you-must-specify-a-group-id-and-artifact-id-before-you-can-add-a-product-version=Produktuaren bertsio bat gehitzeko, taldearen eta pluginaren identifikatzaile bat zehaztu behar duzu.
 you-now-have-a-lock-on-this-document=Dokumentu hau blokeatuta geratu da. Desblokeatu arte inork ezingo du editatu. Blokeoa automatikoki amaituko da {0} ean.
-you-now-have-a-lock-on-this-page=Dokumentu hau blokeatuta geratu da. Utzi botoia sakatuz desblokeatu arte, inork ezingo du orrialde hau editatu. Blokeo hau automatikoki amaituko da {0}ean.
+you-now-have-an-indefinite-lock-on-this-document=You now have an indefinite lock on this document. No one else can edit this document until you unlock it. This lock will never expire. (Automatic Copy)
 you-save=Aurrezten duzu
 you-should-save-the-structure-first=Egitura gorde behar duzu lehenago.
 you-will-be-sent-an-email-notification-when-each-of-the-recipients-of-this-email-have-opened-to-read-this-email=Jakinarazpen bat jasoko duzu hartzaile bakoitzak posta irakurtzen duenean.
@@ -4800,10 +4847,6 @@ zh_en=Txineratik ingelesera
 zip-postal=Posta Kodea
 zip=Posta Kodea
 zt_en=Txineratik (Taiwan) ingelesera
-
-##
-## Currency
-##
 
 currency.AED=Arabiar Emirerri Batuetako dirhama
 currency.ALL=Albaniako leka
