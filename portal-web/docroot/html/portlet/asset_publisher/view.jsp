@@ -124,7 +124,6 @@ if (!paginationType.equals("none")) {
 	<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" type="<%= paginationType %>" />
 </c:if>
 
-
 <c:if test="<%= enableRSS %>">
 	<portlet:resourceURL var="rssURL">
 		<portlet:param name="struts_action" value="/asset_publisher/rss" />
