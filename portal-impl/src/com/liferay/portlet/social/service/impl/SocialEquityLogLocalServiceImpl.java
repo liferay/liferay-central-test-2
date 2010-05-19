@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portlet.asset.NoSuchEntryException;
 import com.liferay.portlet.asset.model.AssetEntry;
+import com.liferay.portlet.social.NoSuchEquityAssetEntryException;
 import com.liferay.portlet.social.model.SocialEquityAssetEntry;
 import com.liferay.portlet.social.model.SocialEquityLog;
 import com.liferay.portlet.social.model.SocialEquitySetting;
@@ -88,7 +89,7 @@ public class SocialEquityLogLocalServiceImpl
 
 			addEquityLogs(userId, assetEntry.getEntryId(), actionId);
 		}
-		catch (NoSuchEntryException nsue) {
+		catch (NoSuchEntryException nsee) {
 		}
 	}
 
@@ -116,53 +117,49 @@ public class SocialEquityLogLocalServiceImpl
 		socialEquityLogPersistence.clearCache();
 	}
 
-	public void deactivateEquityLogs(long assetEntryId)
-		throws PortalException, SystemException {
-
-		SocialEquityAssetEntry equityAssetEntry =
-			socialEquityAssetEntryPersistence.findByAssetEntryId(assetEntryId);
-
-		socialEquityAssetEntryPersistence.removeByAssetEntryId(assetEntryId);
-
-		User user = null;
+	public void deactivateEquityLogs(long assetEntryId)	throws SystemException {
 
 		try {
-			user = userPersistence.findByPrimaryKey(
-				equityAssetEntry.getUserId());
+			SocialEquityAssetEntry equityAssetEntry =
+				socialEquityAssetEntryPersistence.findByAssetEntryId(
+					assetEntryId);
 
-			if (!user.isDefaultUser()) {
-				updateSocialEquityUser_CQ(
-					equityAssetEntry.getGroupId(), user.getUserId());
-				updateSocialEquityUser_PEQ(
-					equityAssetEntry.getGroupId(), user.getUserId());
-				updateUser_CQ_PQ(user.getUserId());
-				updateUser_PEQ(user.getUserId());
+			socialEquityAssetEntryPersistence.removeByAssetEntryId(
+				assetEntryId);
 
-				userPersistence.clearCache(user);
+			User user = null;
+
+			try {
+				user = userPersistence.findByPrimaryKey(
+					equityAssetEntry.getUserId());
+
+				if (!user.isDefaultUser()) {
+					updateSocialEquityUser_CQ(
+						equityAssetEntry.getGroupId(), user.getUserId());
+					updateSocialEquityUser_PEQ(
+						equityAssetEntry.getGroupId(), user.getUserId());
+					updateUser_CQ_PQ(user.getUserId());
+					updateUser_PEQ(user.getUserId());
+
+					userPersistence.clearCache(user);
+				}
+			}
+			catch (NoSuchUserException nsue) {
+			}
+
+			List<SocialEquityLog> equityLogs =
+				socialEquityLogPersistence.findByAEI_T_A(
+					assetEntryId, SocialEquitySettingConstants.TYPE_INFORMATION,
+					true);
+
+			for (SocialEquityLog equityLog : equityLogs) {
+				equityLog.setActive(false);
+
+				socialEquityLogPersistence.update(equityLog, false);
 			}
 		}
-		catch (NoSuchUserException nsue) {
+		catch (NoSuchEquityAssetEntryException nseaee) {
 		}
-
-		List<SocialEquityLog> equityLogs =
-			socialEquityLogPersistence.findByAEI_T_A(
-				assetEntryId, SocialEquitySettingConstants.TYPE_INFORMATION,
-				true);
-
-		for (SocialEquityLog equityLog : equityLogs) {
-			equityLog.setActive(false);
-
-			socialEquityLogPersistence.update(equityLog, false);
-		}
-	}
-
-	public void deactivateEquityLogs(String className, long classPK)
-		throws PortalException, SystemException {
-
-		AssetEntry assetEntry = assetEntryLocalService.getEntry(
-			className, classPK);
-
-		deactivateEquityLogs(assetEntry.getEntryId());
 	}
 
 	protected void addEquityLog(

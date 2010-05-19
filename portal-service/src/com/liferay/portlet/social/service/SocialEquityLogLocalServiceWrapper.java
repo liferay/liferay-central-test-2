@@ -146,15 +146,8 @@ public class SocialEquityLogLocalServiceWrapper
 	}
 
 	public void deactivateEquityLogs(long assetEntryId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		_socialEquityLogLocalService.deactivateEquityLogs(assetEntryId);
-	}
-
-	public void deactivateEquityLogs(java.lang.String className, long classPK)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		_socialEquityLogLocalService.deactivateEquityLogs(className, classPK);
 	}
 
 	public SocialEquityLogLocalService getWrappedSocialEquityLogLocalService() {

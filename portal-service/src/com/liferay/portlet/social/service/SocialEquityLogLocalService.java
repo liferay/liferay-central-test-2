@@ -121,10 +121,5 @@ public interface SocialEquityLogLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void deactivateEquityLogs(long assetEntryId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	public void deactivateEquityLogs(java.lang.String className, long classPK)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 }
