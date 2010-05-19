@@ -35,24 +35,26 @@ public class AssetRendererFactoryRegistryImpl
 	public AssetRendererFactory getAssetRendererFactoryByClassName(
 		String className) {
 
-		return _factoriesMapByClassName.get(className);
+		return _assetRenderFactoriesMapByClassName.get(className);
 	}
 
 	public AssetRendererFactory getAssetRendererFactoryByType(String type) {
-		return _factoriesMapByClassType.get(type);
+		return _assetRenderFactoriesMapByClassType.get(type);
 	}
 
 	public List<AssetRendererFactory> getAssetRendererFactories() {
-		return ListUtil.fromCollection(_factoriesMapByClassName.values());
+		return ListUtil.fromCollection(
+		_assetRenderFactoriesMapByClassName.values());
 	}
 
 	public long[] getClassNameIds() {
-		long[] classNameIds = new long[_factoriesMapByClassName.size()];
+		long[] classNameIds = new long[
+			_assetRenderFactoriesMapByClassName.size()];
 
 		int i = 0;
 
 		for (AssetRendererFactory assetRendererFactory :
-			_factoriesMapByClassName.values()) {
+				_assetRenderFactoriesMapByClassName.values()) {
 
 			classNameIds[i] = assetRendererFactory.getClassNameId();
 
@@ -63,20 +65,24 @@ public class AssetRendererFactoryRegistryImpl
 	}
 
 	public void register(AssetRendererFactory assetRendererFactory) {
-		_factoriesMapByClassName.put(
+		_assetRenderFactoriesMapByClassName.put(
 			assetRendererFactory.getClassName(), assetRendererFactory);
-		_factoriesMapByClassType.put(
+		_assetRenderFactoriesMapByClassType.put(
 			assetRendererFactory.getType(), assetRendererFactory);
 	}
 
 	public void unregister(AssetRendererFactory assetRendererFactory) {
-		_factoriesMapByClassName.remove(assetRendererFactory.getClassName());
-		_factoriesMapByClassType.remove(assetRendererFactory.getType());
+		_assetRenderFactoriesMapByClassName.remove(
+			assetRendererFactory.getClassName());
+		_assetRenderFactoriesMapByClassType.remove(
+			assetRendererFactory.getType());
 	}
 
-	private Map<String, AssetRendererFactory> _factoriesMapByClassName =
-		new ConcurrentHashMap<String, AssetRendererFactory>();
-	private Map<String, AssetRendererFactory> _factoriesMapByClassType =
-		new ConcurrentHashMap<String, AssetRendererFactory>();
+	private Map<String, AssetRendererFactory>
+		_assetRenderFactoriesMapByClassName =
+			new ConcurrentHashMap<String, AssetRendererFactory>();
+	private Map<String, AssetRendererFactory>
+		_assetRenderFactoriesMapByClassType =
+			new ConcurrentHashMap<String, AssetRendererFactory>();
 
 }
