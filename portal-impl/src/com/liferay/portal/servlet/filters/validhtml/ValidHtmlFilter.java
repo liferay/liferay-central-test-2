@@ -56,36 +56,43 @@ public class ValidHtmlFilter extends BasePortalFilter {
 		}
 	}
 
-	protected void processFilter(
-			HttpServletRequest request, HttpServletResponse response,
-			FilterChain filterChain)
-		throws Exception {
-
-		if (isAlreadyFiltered(request)) {
-			processFilter(
-				ValidHtmlFilter.class, request, response, filterChain);
-
-			return;
-		}
-
-		request.setAttribute(SKIP_FILTER, Boolean.TRUE);
-
-		if (_log.isDebugEnabled()) {
-			String completeURL = HttpUtil.getCompleteURL(request);
-
-			_log.debug("Ensuring valid HTML " + completeURL);
-		}
-
-		StringServletResponse stringServerResponse = new StringServletResponse(
-			response);
-
-		processFilter(
-			ValidHtmlFilter.class, request, stringServerResponse, filterChain);
+	protected boolean isEnsureValidHtml(
+		HttpServletRequest request, HttpServletResponse response) {
 
 		String contentType = response.getContentType();
 
 		if ((contentType != null) &&
 			contentType.startsWith(ContentTypes.TEXT_HTML)) {
+
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	protected void processFilter(
+			HttpServletRequest request, HttpServletResponse response,
+			FilterChain filterChain)
+		throws Exception {
+
+		if (isEnsureValidHtml(request, response) &&
+			!isAlreadyFiltered(request)) {
+
+			request.setAttribute(SKIP_FILTER, Boolean.TRUE);
+
+			if (_log.isDebugEnabled()) {
+				String completeURL = HttpUtil.getCompleteURL(request);
+
+				_log.debug("Ensuring valid HTML " + completeURL);
+			}
+
+			StringServletResponse stringServerResponse =
+				new StringServletResponse(response);
+
+			processFilter(
+				ValidHtmlFilter.class, request, stringServerResponse,
+				filterChain);
 
 			String content = getContent(
 				request, stringServerResponse.getString());
@@ -93,7 +100,14 @@ public class ValidHtmlFilter extends BasePortalFilter {
 			ServletResponseUtil.write(response, content);
 		}
 		else {
-			ServletResponseUtil.write(response, stringServerResponse);
+			if (_log.isDebugEnabled()) {
+				String completeURL = HttpUtil.getCompleteURL(request);
+
+				_log.debug("Not ensuring valid HTML " + completeURL);
+			}
+
+			processFilter(
+				ValidHtmlFilter.class, request, response, filterChain);
 		}
 	}
 
