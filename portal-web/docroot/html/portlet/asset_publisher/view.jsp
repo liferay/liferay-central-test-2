@@ -124,6 +124,21 @@ if (!paginationType.equals("none")) {
 	<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" type="<%= paginationType %>" />
 </c:if>
 
+
+<c:if test="<%= enableRSS %>">
+	<portlet:resourceURL var="rssURL">
+		<portlet:param name="struts_action" value="/asset_publisher/rss" />
+	</portlet:resourceURL>
+
+	<div class="subscribe">
+		<liferay-ui:icon image="rss" label="<%= true %>" method="get" target="_blank" url="<%= rssURL %>" />
+	</div>
+
+	<liferay-util:html-top>
+		<link href="<%= rssURL %>" rel="alternate" title="RSS" type="application/rss+xml" />
+	</liferay-util:html-top>
+</c:if>
+
 <%!
 private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portlet.asset_publisher.view.jsp");
 %>
