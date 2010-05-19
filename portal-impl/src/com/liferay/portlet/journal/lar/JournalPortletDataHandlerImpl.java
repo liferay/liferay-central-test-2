@@ -886,6 +886,38 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 			}
 		}
 
+		if (Validator.isNotNull(article.getStructureId())) {
+			JournalStructure structure = JournalStructureUtil.fetchByG_S(
+				context.getGroupId(), article.getStructureId());
+
+			if (structure == null) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						"Structure " + article.getStructureId() + " is " +
+							"missing for article " + article.getArticleId() +
+								", skipping this article.");
+				}
+
+				return;
+			}
+		}
+
+		if (Validator.isNotNull(article.getTemplateId())) {
+			JournalTemplate template = JournalTemplateUtil.fetchByG_T(
+				context.getGroupId(), article.getTemplateId());
+
+			if (template == null) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						"Template " + article.getTemplateId() + " is missing " +
+							"for article " + article.getArticleId() +
+								", skipping this article.");
+				}
+
+				return;
+			}
+		}
+
 		File smallFile = null;
 
 		String smallImagePath = articleEl.attributeValue("small-image-path");
@@ -981,35 +1013,6 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		}
 
 		JournalArticle importedArticle = null;
-
-		if (Validator.isNotNull(article.getStructureId())) {
-			JournalStructure structure = JournalStructureUtil.fetchByG_S(
-				context.getGroupId(), article.getStructureId());
-
-			if (structure == null) {
-				String structurePath = getImportStructurePath(
-					context, article.getStructureId());
-
-				importStructure(context, structureIds, structurePath);
-			}
-		}
-
-		if (Validator.isNotNull(article.getTemplateId())) {
-			JournalTemplate template = JournalTemplateUtil.fetchByG_T(
-				context.getGroupId(), article.getTemplateId());
-
-			if (template == null) {
-				String templatePath = getImportTemplatePath(
-					context, article.getTemplateId());
-
-				String templateSmallImagePath = getImportTemplateSmallImagePath(
-					context, article.getTemplateId());
-
-				importTemplate(
-					context, structureIds, templateIds, templateSmallImagePath,
-					templatePath);
-			}
-		}
 
 		if (context.getDataStrategy().equals(
 				PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
@@ -1743,12 +1746,11 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		sb.append(context.getPortletPath(PortletKeys.JOURNAL));
 		sb.append("/articles/");
-		sb.append(article.getArticleId());
+		sb.append(article.getUuid());
 		sb.append(StringPool.SLASH);
 		sb.append(article.getVersion());
 		sb.append(StringPool.SLASH);
-		sb.append(article.getArticleId());
-		sb.append(".xml");
+		sb.append("article.xml");
 
 		return sb.toString();
 	}
@@ -1760,7 +1762,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		sb.append(context.getPortletPath(PortletKeys.JOURNAL));
 		sb.append("/articles/");
-		sb.append(article.getArticleId());
+		sb.append(article.getUuid());
 		sb.append(StringPool.SLASH);
 		sb.append(article.getVersion());
 		sb.append(StringPool.SLASH);
@@ -1776,7 +1778,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		sb.append(context.getPortletPath(PortletKeys.JOURNAL));
 		sb.append("/articles/");
-		sb.append(article.getArticleId());
+		sb.append(article.getUuid());
 		sb.append(StringPool.SLASH);
 		sb.append(article.getVersion());
 		sb.append(StringPool.SLASH);
@@ -1803,7 +1805,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		sb.append(context.getPortletPath(PortletKeys.JOURNAL));
 		sb.append("/articles/");
-		sb.append(article.getArticleId());
+		sb.append(article.getUuid());
 		sb.append("/thumbnail");
 		sb.append(StringPool.PERIOD);
 		sb.append(article.getSmallImageType());
@@ -1818,47 +1820,8 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		sb.append(context.getPortletPath(PortletKeys.JOURNAL));
 		sb.append("/feeds/");
-		sb.append(feed.getFeedId());
+		sb.append(feed.getUuid());
 		sb.append(".xml");
-
-		return sb.toString();
-	}
-
-	protected static String getImportStructurePath(
-		PortletDataContext context, String structureId) {
-
-		StringBundler sb = new StringBundler(4);
-
-		sb.append(context.getSourcePortletPath(PortletKeys.JOURNAL));
-		sb.append("/structures/");
-		sb.append(structureId);
-		sb.append(".xml");
-
-		return sb.toString();
-	}
-
-	protected static String getImportTemplatePath(
-		PortletDataContext context, String templateId) {
-
-		StringBundler sb = new StringBundler(4);
-
-		sb.append(context.getSourcePortletPath(PortletKeys.JOURNAL));
-		sb.append("/templates/");
-		sb.append(templateId);
-		sb.append(".xml");
-
-		return sb.toString();
-	}
-
-	protected static String getImportTemplateSmallImagePath(
-		PortletDataContext context, String templateId) {
-
-		StringBundler sb = new StringBundler(4);
-
-		sb.append(context.getSourcePortletPath(PortletKeys.JOURNAL));
-		sb.append("/templates/thumbnail-");
-		sb.append(templateId);
-		sb.append(StringPool.PERIOD);
 
 		return sb.toString();
 	}
@@ -1870,7 +1833,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		sb.append(context.getPortletPath(PortletKeys.JOURNAL));
 		sb.append("/templates/");
-		sb.append(template.getTemplateId());
+		sb.append(template.getUuid());
 		sb.append(".xml");
 
 		return sb.toString();
@@ -1884,7 +1847,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		sb.append(context.getPortletPath(PortletKeys.JOURNAL));
 		sb.append("/templates/thumbnail-");
-		sb.append(template.getTemplateId());
+		sb.append(template.getUuid());
 		sb.append(StringPool.PERIOD);
 		sb.append(template.getSmallImageType());
 
@@ -1898,7 +1861,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		sb.append(context.getPortletPath(PortletKeys.JOURNAL));
 		sb.append("/structures/");
-		sb.append(structure.getStructureId());
+		sb.append(structure.getUuid());
 		sb.append(".xml");
 
 		return sb.toString();
