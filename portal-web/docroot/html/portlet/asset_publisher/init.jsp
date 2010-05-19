@@ -136,7 +136,7 @@ boolean defaultScope = GetterUtil.getBoolean(preferences.getValue("default-scope
 
 long[] groupIds = AssetPublisherUtil.getGroupIdsFromPreferences(preferences, scopeGroupId, layout);
 
-long[] availableClassNameIds = AssetRendererFactoryRegistryUtil.getAssetClassNameIds();
+long[] availableClassNameIds = AssetRendererFactoryRegistryUtil.getClassNameIds();
 
 boolean anyAssetType = GetterUtil.getBoolean(preferences.getValue("any-asset-type", Boolean.TRUE.toString()));
 
