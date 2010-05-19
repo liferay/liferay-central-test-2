@@ -81,9 +81,16 @@ public class ValidHtmlFilter extends BasePortalFilter {
 		processFilter(
 			ValidHtmlFilter.class, request, stringServerResponse, filterChain);
 
-		String content = getContent(request, stringServerResponse.getString());
+		String contentType = response.getContentType();
+		if (contentType.startsWith("text/html")) {
+			String content =
+				getContent(request, stringServerResponse.getString());
 
-		ServletResponseUtil.write(response, content);
+			ServletResponseUtil.write(response, content);
+		}
+		else {
+			ServletResponseUtil.write(response, stringServerResponse);
+		}
 	}
 
 	private static final String _CLOSE_BODY = "</body>";
