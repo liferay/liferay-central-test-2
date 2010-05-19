@@ -87,6 +87,8 @@ if (Validator.isNull(redirect)) {
 
 		message = new MBMessageImpl();
 
+		message.setMessageId(temp.getMessageId());
+		message.setCompanyId(temp.getCompanyId());
 		message.setUserId(temp.getUserId());
 		message.setUserName(temp.getUserName());
 		message.setCreateDate(temp.getCreateDate());
@@ -94,14 +96,14 @@ if (Validator.isNull(redirect)) {
 		message.setThreadId(temp.getThreadId());
 		message.setSubject(subject);
 		message.setBody(body);
-		message.setAnonymous(temp.isAnonymous());
 		message.setAttachments(temp.isAttachments());
-		message.setMessageId(temp.getMessageId());
-		message.setCompanyId(temp.getCompanyId());
+		message.setAnonymous(temp.isAnonymous());
 	}
 	else {
 		message = new MBMessageImpl();
 
+		message.setMessageId(messageId);
+		message.setCompanyId(user.getCompanyId());
 		message.setUserId(user.getUserId());
 		message.setUserName(user.getFullName());
 		message.setCreateDate(new Date());
@@ -109,10 +111,8 @@ if (Validator.isNull(redirect)) {
 		message.setThreadId(threadId);
 		message.setSubject(subject);
 		message.setBody(body);
-		message.setAnonymous(BeanParamUtil.getBoolean(message, request, "anonymous"));
 		message.setAttachments(attachments);
-		message.setMessageId(messageId);
-		message.setCompanyId(user.getCompanyId());
+		message.setAnonymous(BeanParamUtil.getBoolean(message, request, "anonymous"));
 	}
 
 	boolean editable = false;
