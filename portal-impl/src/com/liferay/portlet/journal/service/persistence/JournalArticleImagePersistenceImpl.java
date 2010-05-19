@@ -697,13 +697,14 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 					}
 				}
 			}
-
-			query.append(WHERE_LIMIT_2);
 		}
 
 		String sql = query.toString();
 
 		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
 
 		QueryPos qPos = QueryPos.getInstance(q);
 
@@ -955,13 +956,14 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 					}
 				}
 			}
-
-			query.append(WHERE_LIMIT_2);
 		}
 
 		String sql = query.toString();
 
 		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
 
 		QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1263,13 +1265,14 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 					}
 				}
 			}
-
-			query.append(WHERE_LIMIT_2);
 		}
 
 		String sql = query.toString();
 
 		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
 
 		QueryPos qPos = QueryPos.getInstance(q);
 

@@ -765,8 +765,6 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 					}
 				}
 			}
-
-			query.append(WHERE_LIMIT_2);
 		}
 
 		else {
@@ -776,6 +774,9 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		String sql = query.toString();
 
 		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
 
 		QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1029,8 +1030,6 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 					}
 				}
 			}
-
-			query.append(WHERE_LIMIT_2);
 		}
 
 		else {
@@ -1040,6 +1039,9 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		String sql = query.toString();
 
 		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
 
 		QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1291,8 +1293,6 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 					}
 				}
 			}
-
-			query.append(WHERE_LIMIT_2);
 		}
 
 		else {
@@ -1302,6 +1302,9 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		String sql = query.toString();
 
 		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
 
 		QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1662,8 +1665,6 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 					}
 				}
 			}
-
-			query.append(WHERE_LIMIT_2);
 		}
 
 		else {
@@ -1673,6 +1674,9 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		String sql = query.toString();
 
 		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
 
 		QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1927,8 +1931,6 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 					}
 				}
 			}
-
-			query.append(WHERE_LIMIT_2);
 		}
 
 		else {
@@ -1938,6 +1940,9 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		String sql = query.toString();
 
 		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
 
 		QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2204,8 +2209,6 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 					}
 				}
 			}
-
-			query.append(WHERE_LIMIT_2);
 		}
 
 		else {
@@ -2215,6 +2218,9 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		String sql = query.toString();
 
 		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
 
 		QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2501,8 +2507,6 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 					}
 				}
 			}
-
-			query.append(WHERE_LIMIT_2);
 		}
 
 		else {
@@ -2512,6 +2516,9 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		String sql = query.toString();
 
 		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
 
 		QueryPos qPos = QueryPos.getInstance(q);
 

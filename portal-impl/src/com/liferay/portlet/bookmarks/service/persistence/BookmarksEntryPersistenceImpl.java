@@ -685,8 +685,6 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 					}
 				}
 			}
-
-			query.append(WHERE_LIMIT_2);
 		}
 
 		else {
@@ -696,6 +694,9 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 		String sql = query.toString();
 
 		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
 
 		QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1078,8 +1079,6 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 					}
 				}
 			}
-
-			query.append(WHERE_LIMIT_2);
 		}
 
 		else {
@@ -1089,6 +1088,9 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 		String sql = query.toString();
 
 		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
 
 		QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1418,8 +1420,6 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 					}
 				}
 			}
-
-			query.append(WHERE_LIMIT_2);
 		}
 
 		else {
@@ -1429,6 +1429,9 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 		String sql = query.toString();
 
 		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
 
 		QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1766,8 +1769,6 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 					}
 				}
 			}
-
-			query.append(WHERE_LIMIT_2);
 		}
 
 		else {
@@ -1777,6 +1778,9 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 		String sql = query.toString();
 
 		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
 
 		QueryPos qPos = QueryPos.getInstance(q);
 

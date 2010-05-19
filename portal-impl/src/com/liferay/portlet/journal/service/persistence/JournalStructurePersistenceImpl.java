@@ -741,8 +741,6 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 					}
 				}
 			}
-
-			query.append(WHERE_LIMIT_2);
 		}
 
 		else {
@@ -752,6 +750,9 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 		String sql = query.toString();
 
 		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
 
 		QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1134,8 +1135,6 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 					}
 				}
 			}
-
-			query.append(WHERE_LIMIT_2);
 		}
 
 		else {
@@ -1145,6 +1144,9 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 		String sql = query.toString();
 
 		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
 
 		QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1485,8 +1487,6 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 					}
 				}
 			}
-
-			query.append(WHERE_LIMIT_2);
 		}
 
 		else {
@@ -1496,6 +1496,9 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 		String sql = query.toString();
 
 		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
 
 		QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1918,8 +1921,6 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 					}
 				}
 			}
-
-			query.append(WHERE_LIMIT_2);
 		}
 
 		else {
@@ -1929,6 +1930,9 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 		String sql = query.toString();
 
 		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
 
 		QueryPos qPos = QueryPos.getInstance(q);
 

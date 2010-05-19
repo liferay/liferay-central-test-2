@@ -564,8 +564,6 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 					}
 				}
 			}
-
-			query.append(WHERE_LIMIT_2);
 		}
 
 		else {
@@ -575,6 +573,9 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 		String sql = query.toString();
 
 		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
 
 		QueryPos qPos = QueryPos.getInstance(q);
 
