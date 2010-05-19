@@ -222,13 +222,13 @@ String allMetadataFields = "create-date,modified-date,publish-date,expiration-da
 
 String[] metadataFields = StringUtil.split(preferences.getValue("metadata-fields", defaultMetadataFields));
 
-String[] assetEntryXmls = preferences.getValues("asset-entry-xml", new String[0]);
-
 boolean enableRSS = GetterUtil.getBoolean(preferences.getValue("enable-rss", null));
 int rssDelta = GetterUtil.getInteger(preferences.getValue("rss-delta", "20"));
 String rssDisplayStyle = preferences.getValue("rss-display-style", RSSUtil.DISPLAY_STYLE_ABSTRACT);
 String rssFormat = preferences.getValue("rss-format", "atom10");
 String rssName = preferences.getValue("rss-name", null);
+
+String[] assetEntryXmls = preferences.getValues("asset-entry-xml", new String[0]);
 
 boolean viewInContext = assetLinkBehaviour.equals("viewInPortlet");
 

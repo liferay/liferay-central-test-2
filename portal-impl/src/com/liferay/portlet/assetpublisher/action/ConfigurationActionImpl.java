@@ -270,8 +270,8 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 			ActionRequest actionRequest, PortletPreferences preferences)
 		throws Exception {
 
-		updateRssSettings(actionRequest, preferences);
 		updateDisplaySettings(actionRequest, preferences);
+		updateRssSettings(actionRequest, preferences);
 	}
 
 	protected void updateDisplaySettings(
@@ -336,25 +336,6 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 		preferences.setValue("metadata-fields", medatadaFields);
 	}
 
-	protected void updateRssSettings(
-			ActionRequest actionRequest, PortletPreferences preferences)
-		throws Exception {
-
-		boolean enableRSS = ParamUtil.getBoolean(
-			actionRequest, "enableRSS");
-		int rssDelta = ParamUtil.getInteger(actionRequest, "rssDelta");
-		String rssDisplayStyle = ParamUtil.getString(
-				actionRequest, "rssDisplayStyle");
-		String rssFormat = ParamUtil.getString(actionRequest, "rssFormat");
-		String rssName = ParamUtil.getString(actionRequest, "rssName");
-
-		preferences.setValue("enable-rss", String.valueOf(enableRSS));
-		preferences.setValue("rss-delta", String.valueOf(rssDelta));
-		preferences.setValue("rss-display-style", rssDisplayStyle);
-		preferences.setValue("rss-format", rssFormat);
-		preferences.setValue("rss-name", rssName);
-	}
-
 	protected void updateQueryLogic(
 			ActionRequest actionRequest, PortletPreferences preferences)
 		throws Exception {
@@ -415,6 +396,25 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 
 			values = preferences.getValues("queryValues" + i, new String[0]);
 		}
+	}
+
+	protected void updateRssSettings(
+			ActionRequest actionRequest, PortletPreferences preferences)
+		throws Exception {
+
+		boolean enableRSS = ParamUtil.getBoolean(
+			actionRequest, "enableRSS");
+		int rssDelta = ParamUtil.getInteger(actionRequest, "rssDelta");
+		String rssDisplayStyle = ParamUtil.getString(
+				actionRequest, "rssDisplayStyle");
+		String rssFormat = ParamUtil.getString(actionRequest, "rssFormat");
+		String rssName = ParamUtil.getString(actionRequest, "rssName");
+
+		preferences.setValue("enable-rss", String.valueOf(enableRSS));
+		preferences.setValue("rss-delta", String.valueOf(rssDelta));
+		preferences.setValue("rss-display-style", rssDisplayStyle);
+		preferences.setValue("rss-format", rssFormat);
+		preferences.setValue("rss-name", rssName);
 	}
 
 }
