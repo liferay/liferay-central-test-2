@@ -82,7 +82,7 @@ public class ValidHtmlFilter extends BasePortalFilter {
 			ValidHtmlFilter.class, request, stringServerResponse, filterChain);
 
 		String contentType = response.getContentType();
-		if (contentType.startsWith("text/html")) {
+		if (contentType != null && contentType.startsWith("text/html")) {
 			String content =
 				getContent(request, stringServerResponse.getString());
 
