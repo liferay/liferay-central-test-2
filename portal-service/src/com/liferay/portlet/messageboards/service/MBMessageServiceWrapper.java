@@ -165,17 +165,14 @@ public class MBMessageServiceWrapper implements MBMessageService {
 
 	public java.util.List<com.liferay.portlet.messageboards.model.MBMessage> getThreadMessages(
 		long groupId, long categoryId, long threadId, int status, int start,
-		int end)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		int end) throws com.liferay.portal.kernel.exception.SystemException {
 		return _mbMessageService.getThreadMessages(groupId, categoryId,
 			threadId, status, start, end);
 	}
 
 	public int getThreadMessagesCount(long groupId, long categoryId,
 		long threadId, int status)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _mbMessageService.getThreadMessagesCount(groupId, categoryId,
 			threadId, status);
 	}

@@ -146,15 +146,12 @@ public interface MBMessageService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.messageboards.model.MBMessage> getThreadMessages(
 		long groupId, long categoryId, long threadId, int status, int start,
-		int end)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
+		int end) throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getThreadMessagesCount(long groupId, long categoryId,
 		long threadId, int status)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.lang.String getThreadMessagesRSS(long threadId, int status,

@@ -434,7 +434,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 	public List<MBMessage> getThreadMessages(
 			long groupId, long categoryId, long threadId, int status, int start,
 			int end)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		if (status == WorkflowConstants.STATUS_ANY) {
 			return mbMessagePersistence.filterFindByG_C_T(
@@ -448,7 +448,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 
 	public int getThreadMessagesCount(
 		long groupId, long categoryId, long threadId, int status)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		if (status == WorkflowConstants.STATUS_ANY) {
 			return mbMessagePersistence.filterCountByG_C_T(
