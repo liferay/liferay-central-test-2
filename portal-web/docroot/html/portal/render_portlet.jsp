@@ -67,10 +67,7 @@ try {
 		ResourceLocalServiceUtil.getResource(company.getCompanyId(), rootPortletId, ResourceConstants.SCOPE_INDIVIDUAL, portletPrimaryKey);
 	}
 
-	if (!portlet.isAddDefaultResource() && layout.isTypePortlet() && !layoutTypePortlet.hasPortletId(portletId)) {
-		denyAccess = true;
-	}
-	else if (portlet.isAddDefaultResource() && !allowAddDefaultResource && !layoutTypePortlet.hasPortletId(portletId)) {
+	if (layout.isTypePortlet() && !layoutTypePortlet.hasPortletId(portletId) && (!portlet.isAddDefaultResource() || (portlet.isAddDefaultResource() && !allowAddDefaultResource))) {
 		denyAccess = true;
 	}
 }
@@ -86,7 +83,7 @@ catch (NoSuchResourceException nsre) {
 	else if (layout.isTypeControlPanel()) {
 		addDefaultResource = true;
 	}
-	else if (layoutTypePortlet.hasPortletId(portletId)) {
+	else if (layout.isTypePortlet() && layoutTypePortlet.hasPortletId(portletId)) {
 		addDefaultResource = true;
 	}
 	else if (portlet.isAddDefaultResource() && allowAddDefaultResource) {
