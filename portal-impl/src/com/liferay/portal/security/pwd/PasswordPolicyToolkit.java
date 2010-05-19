@@ -18,6 +18,7 @@ import com.liferay.portal.UserPasswordException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.ArrayUtil;
+import com.liferay.portal.kernel.util.Randomizer;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.model.PasswordPolicy;
 import com.liferay.portal.model.User;
@@ -66,14 +67,69 @@ public class PasswordPolicyToolkit extends BasicToolkit {
 		_completeCharset = sb.toString();
 	}
 
-	public String generate() {
+	public String generate(PasswordPolicy passwordPolicy) {
 		if (PropsValues.PASSWORDS_PASSWORDPOLICYTOOLKIT_GENERATOR.equals(
 				"static")) {
 
 			return PropsValues.PASSWORDS_PASSWORDPOLICYTOOLKIT_STATIC;
 		}
 		else {
-			return PwdGenerator.getPassword(_completeCharset, 8);
+			int alphaNumericMinLength = Math.max(
+				passwordPolicy.getMinAlphaNumeric() ,
+				passwordPolicy.getMinLowerCase() +
+				passwordPolicy.getMinNumbers() +
+				passwordPolicy.getMinUpperCase());
+			int passwordMinLength = Math.max(
+				passwordPolicy.getMinLength(),
+				alphaNumericMinLength + passwordPolicy.getMinSymbols());
+
+			StringBundler sb = new StringBundler(passwordMinLength);
+
+			if (passwordPolicy.getMinLowerCase() > 0) {
+				sb.append(
+					getRandomString(
+						passwordPolicy.getMinLowerCase(),
+						_lowerCaseCharsetArray));
+			}
+
+			if (passwordPolicy.getMinNumbers() > 0) {
+				sb.append(
+					getRandomString(
+						passwordPolicy.getMinNumbers(), _numbersCharsetArray));
+			}
+
+			if (passwordPolicy.getMinSymbols() > 0) {
+				sb.append(
+					getRandomString(
+						passwordPolicy.getMinSymbols(), _symbolsCharsetArray));
+			}
+
+			if (passwordPolicy.getMinUpperCase() > 0) {
+				sb.append(
+					getRandomString(
+						passwordPolicy.getMinUpperCase(),
+						_upperCaseCharsetArray));
+			}
+
+			if (alphaNumericMinLength > passwordPolicy.getMinAlphaNumeric()) {
+				int count = alphaNumericMinLength -
+					passwordPolicy.getMinAlphaNumeric();
+
+				sb.append(getRandomString(count, _alphaNumericCharsetArray));
+			}
+
+			if (passwordMinLength >
+				(alphaNumericMinLength + passwordPolicy.getMinSymbols())) {
+
+				int count = passwordMinLength -
+					(alphaNumericMinLength + passwordPolicy.getMinSymbols());
+
+				sb.append(PwdGenerator.getPassword(_completeCharset, count));
+			}
+
+			Randomizer randomizer = Randomizer.getInstance();
+
+			return randomizer.randomize(sb.toString());
 		}
 	}
 
@@ -156,6 +212,18 @@ public class PasswordPolicyToolkit extends BasicToolkit {
 					UserPasswordException.PASSWORD_ALREADY_USED);
 			}
 		}
+	}
+
+	protected String getRandomString(int count, char[] charArray) {
+		StringBundler sb = new StringBundler(count);
+		Randomizer randomizer = Randomizer.getInstance();
+
+		for (int i = 0; i < count; i++) {
+			int index = randomizer.nextInt(charArray.length);
+			sb.append(charArray[index]);
+		}
+
+		return sb.toString();
 	}
 
 	protected char[] getSortedCharArray(String s) {

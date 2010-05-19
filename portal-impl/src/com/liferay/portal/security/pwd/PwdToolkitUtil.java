@@ -30,8 +30,8 @@ import com.liferay.portal.util.PropsUtil;
  */
 public class PwdToolkitUtil {
 
-	public static String generate() {
-		return _instance._generate();
+	public static String generate(PasswordPolicy passwordPolicy) {
+		return _instance._generate(passwordPolicy);
 	}
 
 	public static void validate(
@@ -54,8 +54,8 @@ public class PwdToolkitUtil {
 			PropsUtil.get(PropsKeys.PASSWORDS_TOOLKIT));
 	}
 
-	private String _generate() {
-		return _toolkit.generate();
+	private String _generate(PasswordPolicy passwordPolicy) {
+		return _toolkit.generate(passwordPolicy);
 	}
 
 	private void _validate(

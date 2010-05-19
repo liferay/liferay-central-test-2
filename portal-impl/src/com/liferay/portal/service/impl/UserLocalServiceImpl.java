@@ -2291,7 +2291,10 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			lastName, organizationIds);
 
 		if (autoPassword) {
-			password1 = PwdToolkitUtil.generate();
+			PasswordPolicy passwordPolicy = 
+				passwordPolicyLocalService.getPasswordPolicy(companyId, organizationIds);
+
+			password1 = PwdToolkitUtil.generate(passwordPolicy);
 		}
 		else {
 			if (Validator.isNull(password1) || Validator.isNull(password2)) {
@@ -2521,7 +2524,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			if (!PwdEncryptor.PASSWORDS_ENCRYPTION_ALGORITHM.equals(
 					PwdEncryptor.TYPE_NONE)) {
 
-				newPassword = PwdToolkitUtil.generate();
+				newPassword = PwdToolkitUtil.generate(passwordPolicy);
 
 				boolean passwordReset = false;
 

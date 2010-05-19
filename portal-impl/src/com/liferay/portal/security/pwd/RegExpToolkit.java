@@ -38,7 +38,7 @@ public class RegExpToolkit extends BasicToolkit {
 			PropsUtil.get(PropsKeys.PASSWORDS_REGEXPTOOLKIT_LENGTH));
 	}
 
-	public String generate() {
+	public String generate(PasswordPolicy passwordPolicy) {
 		return PwdGenerator.getPassword(_charset, _length);
 	}
 

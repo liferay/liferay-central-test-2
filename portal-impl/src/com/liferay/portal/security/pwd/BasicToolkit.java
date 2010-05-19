@@ -25,7 +25,7 @@ import com.liferay.portal.model.PasswordPolicy;
  */
 public abstract class BasicToolkit {
 
-	public abstract String generate();
+	public abstract String generate(PasswordPolicy passwordPolicy);
 
 	public void validate(
 			String password1, String password2, PasswordPolicy passwordPolicy)
