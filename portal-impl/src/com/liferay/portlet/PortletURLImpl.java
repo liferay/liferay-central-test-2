@@ -660,8 +660,8 @@ public class PortletURLImpl
 		}
 
 		if (portlet.getPortletId().equals(_portletId) ||
-			 !_portlet.isAddDefaultResource() ||
-		     portlet.getPortletId().equals(PortletKeys.LAYOUT_CONFIGURATION)) {
+			!_portlet.isAddDefaultResource() ||
+			portlet.getPortletId().equals(PortletKeys.LAYOUT_CONFIGURATION)) {
 
 			return;
 		}
