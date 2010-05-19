@@ -1,15 +1,20 @@
+
 ##
 ## Language settings
 ##
 
-lang.dir=ltr
-lang.line.begin=left
-lang.line.end=right
 
 ##
 ## Portlet descriptions and titles
 ##
+lang.dir=ltr
+lang.line.begin=left
+lang.line.end=right
 
+
+##
+## Category titles
+##
 javax.portlet.description.122=类别是一种规范化的内容分类检索机制，支持用一组词汇对各种内容条目进行标注。管理员需要定义这些词汇，并将这些词汇组织成树状结构的类别定义。用户在创作内容时可以用类别为内容做分类标注。
 javax.portlet.description.126=机构组织描述的是一种层次化的用户组织结构，例如部门或分支机构。管理员能管理用户的成员资格，定义角色，设定机构组织的属性。
 javax.portlet.description.127=用户组可以看作是一种快捷方式，用于对松散结构的一组用户做某种一致的定义。所谓松散结构是指组成用户组的用户不必拥有某个社区或机构组织的成员资格。如果需要，管理员可以定义一个用户组。给这个用户组设定了某个社区的成员资格就让这个用户组中的每个成员都获得了该社区的成员资格。
@@ -136,10 +141,10 @@ javax.portlet.title.98=软件目录
 javax.portlet.title.99=标签
 javax.portlet.title.9=管理
 
-##
-## Category titles
-##
 
+##
+## Model resources
+##
 category.admin=管理
 category.alfresco=Alfresco
 category.christianity=基督教
@@ -174,10 +179,10 @@ category.wol=Liferay 世界
 category.workflow=工作流
 category.wsrp=WSRP
 
-##
-## Model resources
-##
 
+##
+## Action names
+##
 model.resource.com.liferay.knowledgebase.model.KBArticle=知识库文章
 model.resource.com.liferay.portal.model.Group=组织
 model.resource.com.liferay.portal.model.Layout=网页
@@ -239,10 +244,10 @@ model.resource.com.liferay.portlet.workflow.model.WorkflowDefinition=工作流�
 model.resource.com.liferay.portlet.workflow.model.WorkflowInstance=工作流实例
 model.resource.com.liferay.portlet.workflow.model.WorkflowTask=工作流任务
 
-##
-## Action names
-##
 
+##
+## Messages
+##
 action.ACCESS=访问
 action.ACCESS_IN_CONTROL_PANEL=从控制面板访问
 action.ADD_ARTICLE=添加网页内容
@@ -304,6 +309,7 @@ action.DELETE_USER=删除用户
 action.EDIT=编辑
 action.EXPIRE=过期
 action.EXPORT_ALL_EVENTS=导出所有事件
+action.EXPORT_USER=出口用户 (Automatic Translation)
 action.GUEST_PREFERENCES=访客首选项
 action.HELP=帮助
 action.IMPERSONATE=模仿
@@ -338,10 +344,10 @@ action.VIEW=查看
 action.VIEW_ALL_TASKS=查看所有任务
 action.VIEW_USER=查看用户
 
-##
-## Messages
-##
 
+##
+## Currency
+##
 1-day=1 天
 1-minute=1 分钟
 1-month=1 个月
@@ -364,7 +370,7 @@ action.VIEW_USER=查看用户
 INBOX=收件箱
 a-map-could-not-be-found-for-the-address=找不到以下地址的地图:
 a-new-password-will-be-sent-to-x-if-you-can-correctly-answer-the-following-question=如果您可以正确回答以下问题，则新密码将发送到 {0}。
-a-new-version-will-be-created-automatically-if-this-article-is-modified=如果修改，一个新版本将自动地创建这篇文章。 (Automatic Translation)
+a-new-version-will-be-created-automatically-if-this-content-is-modified=如果修改，一个新版本将自动地创建这个内容。 (Automatic Translation)
 a-page-cannot-become-a-child-of-a-page-that-is-not-parentable=目标页面设置为不能包含下级页面，不能将此页面设为它的下级页面。
 a-page-cannot-become-a-child-of-itself=页面不能是它自己的下级页面。
 a-page-may-not-contain-more-than-x-portlets=一个页面不能包含多于 {0} 个 Portlet。
@@ -1266,6 +1272,7 @@ custom-field-key-help=自定义字段key用于在JSP代码中，通过Liferay ta
 custom-field-secret-help=设置为保密字段，用于输入密码。保密字段在输入时，输入的字符不会回显到屏幕上。
 custom-field-selection-help=选中这个选项，在用户输入界面上将用一个下拉框选择控件来输入这个字段的内容。
 custom-field-type-help=设置字段类型。请注意，这个选项选择后不可改变。
+custom-field-visible-with-update-permission-help=设置对可看见的一个习惯领域对更新允许意味着有更新允许的一名用户能观看这个领域。 这个设置忽略价值的在这种情况下掩藏。 (Automatic Translation)
 custom-field-width-help=输入自定义字段输入控件的宽度（像素）。
 custom-field=自定义字段
 custom-fields-are-not-enabled-for-any-resource=禁用所有资源对象的自定义字段功能。
@@ -1273,6 +1280,22 @@ custom-fields=自定义字段
 custom-message=自定义消息
 custom-portlet-xml=自定义 portlet.xml
 custom-question=自定义问题
+custom.field.boolean.array=小组真实或错误价值 (Automatic Translation)
+custom.field.boolean=真实或错误 (Automatic Translation)
+custom.field.double.array=小组小数(64位) (Automatic Translation)
+custom.field.double=小数(64位) (Automatic Translation)
+custom.field.float.array=小组小数(32位) (Automatic Translation)
+custom.field.float=小数(32位) (Automatic Translation)
+custom.field.int.array=小组整数(32位) (Automatic Translation)
+custom.field.int=整数(32位) (Automatic Translation)
+custom.field.java.lang.String.array=小组文本价值 (Automatic Translation)
+custom.field.java.lang.String=文本 (Automatic Translation)
+custom.field.java.util.Date.array=小组日期 (Automatic Translation)
+custom.field.java.util.Date=日期 (Automatic Translation)
+custom.field.long.array=小组整数(64位) (Automatic Translation)
+custom.field.long=整数(64位) (Automatic Translation)
+custom.field.short.array=小组整数(16位) (Automatic Translation)
+custom.field.short=整数(16位) (Automatic Translation)
 custom=自定义
 customer-service=客户服务
 customer=客户
@@ -1306,6 +1329,7 @@ decorated=装饰
 decoration=装饰
 default-associations=默认关联
 default-colors=默认颜色
+default-configuration=默认配置 (Automatic Translation)
 default-control-panel-theme=默认控制面板主题模式
 default-email-notification=默认电子邮件通知
 default-landing-page-help=用户在登录成功后被自动重定向到的页面。如果您希望用户的默认登录首页是http://localhost:8080/web/guest/login，请将这个域设置为"/web/guest/login"。
@@ -1727,6 +1751,7 @@ female-voice=女性声音
 female=女性
 field-label=字段标签
 field-name=字段名
+field-type=字段类型 (Automatic Translation)
 field=领域
 fields-are-added-if-you-need-to-distinguish-items-based-on-criteria-chosen-by-the-user=如果您需要根据用户选定的准则区分项目，将会添加字段。 例如，假如您卖 T 恤，您可以新增一个名为<strong>尺码</strong>而值为 <strong>S、M、L、XL</strong> 的字段。将字段的值输入为一个逗号分隔的列表。
 fields=字段
@@ -2023,6 +2048,7 @@ increment-version-on-save=保存时递增版本
 increment-version=递增版本
 indefinite=不确定
 indent=缩进
+index-type=索引类型 (Automatic Translation)
 indexed=已索引
 indexes=索引
 industry=产业
@@ -2809,6 +2835,7 @@ please-contact-the-administrator-to-setup-this-portlet=请联系管理员设置�
 please-email-all-questions-to=请将所有的问题用电子邮件发送到 {0}。
 please-ensure-the-administrator-has-configured-a-proper-google-license=请确保管理员配置了一个合适的 Google 许可协议。
 please-enter-a-download-page-url-or-a-direct-download-url=请输入下载页面的 URL 或直接的下载 URL。
+please-enter-a-file-with-a-valid-extension-x=Please enter a value with a valid extension ({0}). (Automatic Copy)
 please-enter-a-file-with-a-valid-file-name=请进入与一个合法的文件名的一个文件。 (Automatic Translation)
 please-enter-a-file-with-a-valid-file-size=请输入一个大小有效的文件。
 please-enter-a-file-with-a-valid-file-type=请进入与一个合法的文件类型的一个文件。
@@ -2934,17 +2961,28 @@ please-enter-a-valid-xsd=请输入一个有效的 XML 结构定义
 please-enter-a-valid-xsl-template=请输入一个有效的 XSL 模板。
 please-enter-a-valid-xsl-url=请输入一个有效的 XSL URL。
 please-enter-a-valid-zip=请输入一个有效的邮政编码。
+please-enter-a-value-between-x-and-x-characters-long=Please enter a value between {0} and {1} characters long. (Automatic Copy)
+please-enter-a-value-between-x-and-x=Please enter a value between {0} and {1}. (Automatic Copy)
+please-enter-a-value-greater-than-or-equal-to-x=Please enter a value greater than or equal to {0}. (Automatic Copy)
+please-enter-a-value-less-than-or-equal-to-x=Please enter a value less than or equal to {0}. (Automatic Copy)
 please-enter-a-value=请输入一个值。
 please-enter-a-word-that-is-at-least-3-characters-long=请输入长度至少为 3 个字符的单词。
 please-enter-an-email-address=请输入电子邮件地址。
 please-enter-at-least-one-tag=请输入至少一个标签。
+please-enter-at-list-x-characters=Please enter at least {0} characters. (Automatic Copy)
 please-enter-both-the-validation-code-and-the-error-message=请同时输入验证代码和错误消息。
 please-enter-jdbc-information-for-new-database=请输入新的数据库的JDBC信息。
+please-enter-no-more-than-x-characters=Please enter no more than {0} characters. (Automatic Copy)
+please-enter-only-alpha-characters=请进入仅阿尔法字符。 (Automatic Translation)
+please-enter-only-alphanumeric-characters=请进入仅字母或数字字符。 (Automatic Translation)
+please-enter-only-digits=请进入仅数字。 (Automatic Translation)
 please-enter-the-full-name-exactly-as-it-is-appears-on-your-credit-card=请准确输入您的信用卡上的全名。
+please-enter-the-same-value-again=请再进入同一价值。 (Automatic Translation)
 please-enter-valid-choices=请输入有效的选择。
 please-enter-valid-comments=请输入有效的评论。
 please-enter-valid-content=请输入有效的内容。
 please-fill-out-all-required-fields=请填好所有必需的输入域。
+please-fix-this-field=请修理这个领域。 (Automatic Translation)
 please-import-a-lar-file-for-the-current-portlet=请为当前 portlet 导入 LAR 文件。
 please-import-a-lar-file-of-the-correct-type=请导入正确类型的 LAR 文件。
 please-import-a-lar-file=请导入 LAR 文件。
@@ -3166,6 +3204,7 @@ read-interval-minutes=读取间隔时间（分钟）
 read-more-x-about-x=读更多 <span class="{0}">关于 {1}</span>
 read-more=读取更多
 read-roles=读取角色
+read-value-from-parameter=读从参量的价值 (Automatic Translation)
 read=读取
 reason-for-the-report=报告的原因
 reassign-to-system-role=再分配对系统角色
@@ -3536,6 +3575,7 @@ set-the-display-order-of-news-feeds=设置新闻 Feed 显示顺序。
 set-the-display-styles-used-to-display-blogs-when-viewed-via-as-a-regular-page-or-as-an-rss=设置通过常规页面或 RSS 显示博客时的样式。
 set-the-following-values-to-filter-emails-associated-with-an-email-address-to-a-folder=设置以下值来过滤与文件夹中邮件地址关联的电子邮件。
 set-the-google-analytics-id-that-will-be-used-for-this-set-of-pages=设置将用于本组页面的 Google Analytics ID。
+set-up-the-communication-among-the-portlets-that-use-public-render-parameters=Set up the communication among the portlets that use public render parameters. For each of the public parameters in this portlet, it is possible to ignore the values coming from other portlets or to read the value from another parameter. <a href="{0}" target="_blank">Read more.</a> (Automatic Copy)
 set-your-community-tags=设置您的社区标签。
 set-your-global-tags=设置您的全局标签。
 set-your-jira-login=设置您的JIRA账户注册信息。
@@ -4129,6 +4169,7 @@ there-are-no-top-posters=没有发帖者。
 there-are-no-topics=没有主题。
 there-are-no-users-to-invite=没有可邀请的用户。
 there-are-no-workflow-definitions=没有工作流定义。
+there-is-a-publication-workflow-in-process=有出版物工作流在过程中。 (Automatic Translation)
 there-is-already-a-page-with-the-specified-title=已经存在使用指定标题的页面。
 there-is-another-category-with-the-same-name-and-the-same-parent=有与同一个名字和同一个父母的另一个类别。
 there-is-existing-form-data-please-export-and-delete-it-before-making-changes-to-the-fields=存在现有的表单数据。请在对字段进行更改之前将其导出并删除。
@@ -4284,6 +4325,7 @@ uninstall=卸载
 united-states-phone-format=美国电话号码格式
 unknown=未知的
 unlimited=无限的
+unlock-thread-to-add-an-explanation-post=打开螺纹增加解释岗位。 (Automatic Translation)
 unlock-thread=打开主题帖子
 unlock=解锁
 unmark=取消标注
@@ -4496,6 +4538,7 @@ violent-or-repulsive-content=暴力或令人反感的内容
 virtual-host=虚拟主机
 virtual-hosts-must-be-valid-domain-names=虚拟主机必须为有效的域名。
 visible-wikis=可见的Wiki
+visible-with-update-permission=可看见对更新 (Automatic Translation)
 visible=可见的
 visited-link=己访问的链接
 visits=访问
@@ -4756,7 +4799,7 @@ you-must-first-add-a-vocabulary=您必须首先添加词汇表。
 you-must-have-at-least-one-page=您必须有至少一个页面。
 you-must-specify-a-group-id-and-artifact-id-before-you-can-add-a-product-version=在您能添加产品版本之前您必须指定组 ID 和工件 ID。
 you-now-have-a-lock-on-this-document=您已经锁定此文档。在您解锁前，其他人不能编辑此文档。文档锁会自动在 {0} 后失效。
-you-now-have-a-lock-on-this-page=您已经锁定此页面。在您解锁前，其他人不能编辑此页面。页面锁会自动在 {0} 后失效。
+you-now-have-an-indefinite-lock-on-this-document=您现在有在本文的一把不确定的锁。 没人可能编辑本文，直到您打开它。 这把锁不会到期。 (Automatic Translation)
 you-save=您保存
 you-should-save-the-structure-first=您应该先保存结构。
 you-will-be-sent-an-email-notification-when-each-of-the-recipients-of-this-email-have-opened-to-read-this-email=当这封电子邮件的任一收件人打开邮件阅读时，都会向您发送电子邮件通知。
@@ -4800,10 +4843,6 @@ zh_en=中文（简体）英语
 zip-postal=邮政编码
 zip=邮政编码
 zt_en=中文（繁体）对英语
-
-##
-## Currency
-##
 
 currency.AED=阿拉伯联合酋长国迪拉姆
 currency.ALL=阿尔巴尼亚列克

@@ -1,15 +1,20 @@
+
 ##
 ## Language settings
 ##
 
-lang.dir=ltr
-lang.line.begin=left
-lang.line.end=right
 
 ##
 ## Portlet descriptions and titles
 ##
+lang.dir=ltr
+lang.line.begin=left
+lang.line.end=right
 
+
+##
+## Category titles
+##
 javax.portlet.description.122=Les catégories décrivent un ensemble de limites de vocabulaire pour étiqueter les articles contents. Les administrateurs peuvent créer des vocabulaires et les peupler avec les catégories des lesquelles les utilisateurs peuvent choisir en écrivant le contenu. (Automatic Translation)
 javax.portlet.description.126=Les organismes représentent une hiérarchie des utilisateurs, tels qu'un département ou une filiale. Les administrateurs peuvent contrôler l'adhésion d'utilisateur, définissent des rôles, et installent les attributs d'une organisation. (Automatic Translation)
 javax.portlet.description.127=Les Groupes d'utilisateurs sont un raccourci à un groupe lâche d'utilisateurs, indépendamment d'adhésion de la communauté ou d'organisation. Les administrateurs peuvent définir un Groupe d'utilisateurs et affecter le Groupe d'utilisateurs comme membres d'une communauté si désirés. (Automatic Translation)
@@ -136,10 +141,10 @@ javax.portlet.title.98=Catalogue de logiciels
 javax.portlet.title.99=Étiquettes
 javax.portlet.title.9=Administration du portail
 
-##
-## Category titles
-##
 
+##
+## Model resources
+##
 category.admin=Administration
 category.alfresco=Alfresco
 category.christianity=Christianisme
@@ -174,10 +179,10 @@ category.wol=Monde de Liferay
 category.workflow=Workflow
 category.wsrp=WSRP
 
-##
-## Model resources
-##
 
+##
+## Action names
+##
 model.resource.com.liferay.knowledgebase.model.KBArticle=Article de base de connaissance
 model.resource.com.liferay.portal.model.Group=Communauté
 model.resource.com.liferay.portal.model.Layout=Page
@@ -239,10 +244,10 @@ model.resource.com.liferay.portlet.workflow.model.WorkflowDefinition=Définition
 model.resource.com.liferay.portlet.workflow.model.WorkflowInstance=Instances
 model.resource.com.liferay.portlet.workflow.model.WorkflowTask=Tâches
 
-##
-## Action names
-##
 
+##
+## Messages
+##
 action.ACCESS=Accès (Automatic Translation)
 action.ACCESS_IN_CONTROL_PANEL=Accédez dans le panneau de commande
 action.ADD_ARTICLE=Ajouter un contenu
@@ -304,6 +309,7 @@ action.DELETE_USER=Supprimer un utilisateur
 action.EDIT=Éditer
 action.EXPIRE=Expire
 action.EXPORT_ALL_EVENTS=Exporter tous les événements
+action.EXPORT_USER=Utilisateur d'exportation (Automatic Translation)
 action.GUEST_PREFERENCES=Préférences des invités
 action.HELP=Aide
 action.IMPERSONATE=Usurper
@@ -338,10 +344,10 @@ action.VIEW=Vue
 action.VIEW_ALL_TASKS=Regardez toutes les tâches (Automatic Translation)
 action.VIEW_USER=Vue de l'utilisateur
 
-##
-## Messages
-##
 
+##
+## Currency
+##
 1-day=1 jour
 1-minute=1 minute
 1-month=1 mois
@@ -364,7 +370,7 @@ action.VIEW_USER=Vue de l'utilisateur
 INBOX=Messages reçus
 a-map-could-not-be-found-for-the-address=Aucune carte n'a pu être trouvée pour l'adresse :
 a-new-password-will-be-sent-to-x-if-you-can-correctly-answer-the-following-question=A new password will be sent to {0} if you can correctly answer the following question.
-a-new-version-will-be-created-automatically-if-this-article-is-modified=Une nouvelle version sera créée automatiquement si cet article est modifié. (Automatic Translation)
+a-new-version-will-be-created-automatically-if-this-content-is-modified=Une nouvelle version sera créée automatiquement si ce contenu est modifié. (Automatic Translation)
 a-page-cannot-become-a-child-of-a-page-that-is-not-parentable=Une page ne peut pas être fille d'une page qui n'a pas de page mère.
 a-page-cannot-become-a-child-of-itself=Une page ne peut pas être fille d'elle elle-même.
 a-page-may-not-contain-more-than-x-portlets=Une page ne peut contenir plus de {0} applications.
@@ -1266,6 +1272,7 @@ custom-field-key-help=La clef faite sur commande de champ est employée pour acc
 custom-field-secret-help=L'établissement d'un champ fait sur commande au secret signifie que la dactylographie sera cachée sur l'écran. Employez ceci pour des mots de passe. (Automatic Translation)
 custom-field-selection-help=Plaçant cette propriété aux moyens vrais la commande employée pour placer ce champ sera une boîte choisie. (Automatic Translation)
 custom-field-type-help=Choisissez le type de champ soigneusement comme une fois que ce lui est défini ne peut pas être changé. (Automatic Translation)
+custom-field-visible-with-update-permission-help=Les arrangements un champ fait sur commande à évident avec la permission de mise à jour signifie qu'un utilisateur avec la permission de mise à jour peut regarder ce champ. Cet arrangement dépasse la valeur de cacher dans ce cas-ci. (Automatic Translation)
 custom-field-width-help=Ceci placera la largeur du champ d'entrée en Pixel. (Automatic Translation)
 custom-field=Champ fait sur commande (Automatic Translation)
 custom-fields-are-not-enabled-for-any-resource=Des champs faits sur commande ne sont permis pour aucune ressource. (Automatic Translation)
@@ -1273,6 +1280,22 @@ custom-fields=Champs faits sur commande (Automatic Translation)
 custom-message=Message personnalisé
 custom-portlet-xml=Fichier portlet.xml personnalisé
 custom-question=Question faite sur commande (Automatic Translation)
+custom.field.boolean.array=Groupe de valeurs vraies/fausses (Automatic Translation)
+custom.field.boolean=Rectifiez/faux (Automatic Translation)
+custom.field.double.array=Groupe de nombres décimaux (64-bit) (Automatic Translation)
+custom.field.double=Nombre décimal (64-bit) (Automatic Translation)
+custom.field.float.array=Groupe de nombres décimaux (à 32 bits) (Automatic Translation)
+custom.field.float=Nombre décimal (à 32 bits) (Automatic Translation)
+custom.field.int.array=Groupe de nombres entiers (à 32 bits) (Automatic Translation)
+custom.field.int=Nombre entier (à 32 bits) (Automatic Translation)
+custom.field.java.lang.String.array=Groupe de valeurs des textes (Automatic Translation)
+custom.field.java.lang.String=Texte (Automatic Translation)
+custom.field.java.util.Date.array=Groupe de dates (Automatic Translation)
+custom.field.java.util.Date=Date (Automatic Translation)
+custom.field.long.array=Groupe de nombres entiers (64-bit) (Automatic Translation)
+custom.field.long=Nombre entier (64-bit) (Automatic Translation)
+custom.field.short.array=Groupe de nombres entiers (de 16 bits) (Automatic Translation)
+custom.field.short=Nombre entier (de 16 bits) (Automatic Translation)
 custom=Personnalisé
 customer-service=Service clientèle
 customer=Client
@@ -1306,6 +1329,7 @@ decorated=Décoré
 decoration=Décoration
 default-associations=Associations par défaut
 default-colors=Couleurs par défaut
+default-configuration=Configuration de défaut (Automatic Translation)
 default-control-panel-theme=Thème de panneau de commande de défaut
 default-email-notification=Notification de courriel par défaut
 default-landing-page-help=C'est la page que des utilisateurs sont automatiquement réorientés à après ouvrir une session. Par exemple, si vous voulez que la page d'atterrissage de défaut soit http://localhost:8080/web/guest/login, puis réglé ceci à /web/guest/login.
@@ -1727,6 +1751,7 @@ female-voice=Voix féminine
 female=Femme
 field-label=Étiquette de champ (Automatic Translation)
 field-name=Nom de champ
+field-type=Type de champ (Automatic Translation)
 field=Champ
 fields-are-added-if-you-need-to-distinguish-items-based-on-criteria-chosen-by-the-user=Ajout de nouveaux critères pour permettre à l'utilisateur d'affiner ses choix. Par exemple, si vous vendez des t-shirts, vous pouvez ajouter un critère <em>Taille</em> prenant pour valeurs <em>S, M, L, XL</em> (liste d'options séparées par des virgules).
 fields=Champs
@@ -2023,6 +2048,7 @@ increment-version-on-save=Incrémenter la version lors de la sauvegarde
 increment-version=Incrémenter la version
 indefinite=Indéfini
 indent=Creux
+index-type=Type d'index (Automatic Translation)
 indexed=Classé
 indexes=Index
 industry=Industrie
@@ -2809,6 +2835,7 @@ please-contact-the-administrator-to-setup-this-portlet=Veuillez contacter l'admi
 please-email-all-questions-to=Veuillez envoyer toutes vos questions par email à {0}.
 please-ensure-the-administrator-has-configured-a-proper-google-license=Veuillez vous assurer que l'administrateur a bien configuré la licence Google.
 please-enter-a-download-page-url-or-a-direct-download-url=Veuillez entrer un URL de page de téléchargement ou un URL direct de téléchargement.
+please-enter-a-file-with-a-valid-extension-x=Please enter a value with a valid extension ({0}). (Automatic Copy)
 please-enter-a-file-with-a-valid-file-name=Veuillez introduire un dossier avec un nom de fichier valide. (Automatic Translation)
 please-enter-a-file-with-a-valid-file-size=Veuillez entrer une taille de fichier valide.
 please-enter-a-file-with-a-valid-file-type=Veuillez introduire un dossier avec un type de dossier valide. (Automatic Translation)
@@ -2934,17 +2961,28 @@ please-enter-a-valid-xsd=Veuillez entrer une définition de schéma de XML valid
 please-enter-a-valid-xsl-template=Veuillez entrer un modèle de document XSL valide.
 please-enter-a-valid-xsl-url=Veuillez entrer un URL XSL valide.
 please-enter-a-valid-zip=Veuillez entrer un code postal valide.
+please-enter-a-value-between-x-and-x-characters-long=Please enter a value between {0} and {1} characters long. (Automatic Copy)
+please-enter-a-value-between-x-and-x=Please enter a value between {0} and {1}. (Automatic Copy)
+please-enter-a-value-greater-than-or-equal-to-x=Please enter a value greater than or equal to {0}. (Automatic Copy)
+please-enter-a-value-less-than-or-equal-to-x=Please enter a value less than or equal to {0}. (Automatic Copy)
 please-enter-a-value=Veuillez entrer une valeur.
 please-enter-a-word-that-is-at-least-3-characters-long=Veuillez entrer un mot d'au moins 3 caractères.
 please-enter-an-email-address=Veuillez entrer une adresse email.
 please-enter-at-least-one-tag=Veuillez entrer au moins une étiquette.
+please-enter-at-list-x-characters=Please enter at least {0} characters. (Automatic Copy)
 please-enter-both-the-validation-code-and-the-error-message=Veuillez entrer le code de validation et le message d'erreur.
 please-enter-jdbc-information-for-new-database=Veuillez écrire l'information de JDBC pour la nouvelle base de données. (Automatic Translation)
+please-enter-no-more-than-x-characters=Please enter no more than {0} characters. (Automatic Copy)
+please-enter-only-alpha-characters=Veuillez écrire seulement les alpha caractères. (Automatic Translation)
+please-enter-only-alphanumeric-characters=Veuillez écrire seulement les caractères alphanumériques. (Automatic Translation)
+please-enter-only-digits=Veuillez écrire seulement les chiffres. (Automatic Translation)
 please-enter-the-full-name-exactly-as-it-is-appears-on-your-credit-card=Veuillez entrer le nom et prénom exactement comme ils apparaîssent sur votre carte de crédit
+please-enter-the-same-value-again=Veuillez écrire la même valeur encore. (Automatic Translation)
 please-enter-valid-choices=Veuillez entrer des choix valides.
 please-enter-valid-comments=Veuillez entrer des commentaires valides.
 please-enter-valid-content=Veuillez entrer un contenu valide.
 please-fill-out-all-required-fields=Veuillez compléter tous les champs requis. (Automatic Translation)
+please-fix-this-field=Veuillez fixer ce champ. (Automatic Translation)
 please-import-a-lar-file-for-the-current-portlet=Veuillez importer un dossier de LAR pour le portlet courant.
 please-import-a-lar-file-of-the-correct-type=Veuillez importer un dossier de LAR du type correct.
 please-import-a-lar-file=Veuillez importer un dossier de LAR.
@@ -3166,6 +3204,7 @@ read-interval-minutes=Lisez l'intervalle (les minutes)
 read-more-x-about-x=Read More <span class="{0}">About {1}</span> (Automatic Copy)
 read-more=lire la suite
 read-roles=Afficher les rôles
+read-value-from-parameter=Lisez la valeur du paramètre (Automatic Translation)
 read=Lu
 reason-for-the-report=Raison du rapport
 reassign-to-system-role=Attribuez à nouveau au rôle de système
@@ -3536,6 +3575,7 @@ set-the-display-order-of-news-feeds=Définir l'ordre d'affichage des flux de nou
 set-the-display-styles-used-to-display-blogs-when-viewed-via-as-a-regular-page-or-as-an-rss=Définir les styles d'affichage utilisés pour afficher les blogs dans le cadre d'un affichage sur page régulière ou flux RSS.
 set-the-following-values-to-filter-emails-associated-with-an-email-address-to-a-folder=Définir les valeurs suivantes pour filtrer les adresses Email associées avec d'autres adresses Email dans un répertoire.
 set-the-google-analytics-id-that-will-be-used-for-this-set-of-pages=Définir l'identifiant de Google Analytics qui sera utilisé pour cet ensemble de pages.
+set-up-the-communication-among-the-portlets-that-use-public-render-parameters=Set up the communication among the portlets that use public render parameters. For each of the public parameters in this portlet, it is possible to ignore the values coming from other portlets or to read the value from another parameter. <a href="{0}" target="_blank">Read more.</a> (Automatic Copy)
 set-your-community-tags=Définissez vos étiquettes de communauté
 set-your-global-tags=Définissez vos étiquettes globales.
 set-your-jira-login=Placez votre ouverture de JIRA. (Automatic Translation)
@@ -4129,6 +4169,7 @@ there-are-no-top-posters=Il n'y a aucun publicateur vedette.
 there-are-no-topics=Il n'y a aucun sujet.
 there-are-no-users-to-invite=Il n'y a aucun utilisateur à inviter.
 there-are-no-workflow-definitions=Il n'y a aucune définition de déroulement des opérations. (Automatic Translation)
+there-is-a-publication-workflow-in-process=Il y a un déroulement des opérations de publication dans le processus. (Automatic Translation)
 there-is-already-a-page-with-the-specified-title=Il y a déjà une page avec le titre indiqué.
 there-is-another-category-with-the-same-name-and-the-same-parent=Il y a une autre catégorie avec le même nom et le même parent.
 there-is-existing-form-data-please-export-and-delete-it-before-making-changes-to-the-fields=Il y a des données existantes de forme. Exportez-et veuillez supprimez-le avant d'apporter des modifications aux champs.
@@ -4284,6 +4325,7 @@ uninstall=Uninstall
 united-states-phone-format=Format De Numéro De Téléphone des USA
 unknown=Inconnu
 unlimited=Illimité
+unlock-thread-to-add-an-explanation-post=Ouvrez le fil pour ajouter un poteau d'explication. (Automatic Translation)
 unlock-thread=Ouvrez le fil (Automatic Translation)
 unlock=Dévérouiller
 unmark=Unmark
@@ -4496,6 +4538,7 @@ violent-or-repulsive-content=Contenu violent ou répulsif
 virtual-host=Hôte virtuel
 virtual-hosts-must-be-valid-domain-names=Les hôtes virtuels doivent avoir des noms de domaine valides.
 visible-wikis=Wikis évident
+visible-with-update-permission=Évident avec la mise à jour (Automatic Translation)
 visible=Évident
 visited-link=Lien Visité
 visits=Visites
@@ -4756,7 +4799,7 @@ you-must-first-add-a-vocabulary=Vous devez d'abord ajouter un vocabulaire.
 you-must-have-at-least-one-page=Vous devez avoir au moins une page.
 you-must-specify-a-group-id-and-artifact-id-before-you-can-add-a-product-version=Vous devez spécifier un identifiant de group ainsi qu'un identifiant d'objet avant de pouvoir ajouter une version de produit.
 you-now-have-a-lock-on-this-document=Vous avez vérouillé ce document. Personne d'autre ne peut éditer ce document avant que vous ne le dévérouilliez. Ce verrou expirera automatiquement dans {0}.
-you-now-have-a-lock-on-this-page=Vous avez vérouillé cette pate. Personne d'autre ne peut éditer cette page avant que vous ne la dévérouilliez en cliquant sur annuler. Ce verrou expirera automatiquement dans {0}.
+you-now-have-an-indefinite-lock-on-this-document=Vous avez maintenant une serrure indéfinie sur ce document. Personne d'autre peuvent éditer ce document jusqu'à ce que vous l'ouvriez. Cette serrure n'expirera jamais. (Automatic Translation)
 you-save=Vous sauvegardez
 you-should-save-the-structure-first=Vous devriez sauver la structure d'abord. (Automatic Translation)
 you-will-be-sent-an-email-notification-when-each-of-the-recipients-of-this-email-have-opened-to-read-this-email=Vous recevrez un email de confirmation lorsque chacun des destinataires de cet email l'aura lu.
@@ -4800,10 +4843,6 @@ zh_en=Chinois en Anglais
 zip-postal=Zip/Postal
 zip=Code postal
 zt_en=Chinois (Taiwan) à l'anglais
-
-##
-## Currency
-##
 
 currency.AED=Dirham des EAU
 currency.ALL=Lek Albanais

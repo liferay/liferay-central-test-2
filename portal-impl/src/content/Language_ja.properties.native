@@ -1,15 +1,20 @@
+
 ##
 ## Language settings
 ##
 
-lang.dir=ltr
-lang.line.begin=left
-lang.line.end=right
 
 ##
 ## Portlet descriptions and titles
 ##
+lang.dir=ltr
+lang.line.begin=left
+lang.line.end=right
 
+
+##
+## Category titles
+##
 javax.portlet.description.122=カテゴリでは、コンテンツにタグ付けするための用語を記述します。管理者は用語を作成し、カテゴリをそこに追加していきます。ユーザはコンテント作成時にカテゴリを選ぶことができます。
 javax.portlet.description.126=組織は部門あるいは子会社のようなユーザ階層を表します。管理者はユーザのメンバシップを管理し、ロールを定義し、組織の属性を構成することができます。
 javax.portlet.description.127=ユーザグループは、コミュニティまたは組織と関係のない、自由なユーザ集団のショートカットです。管理者はユーザグループを定義し、コミュニティのメンバとして割り当てることができます。
@@ -136,10 +141,10 @@ javax.portlet.title.98=プラグインカタログ
 javax.portlet.title.99=タグ
 javax.portlet.title.9=システム管理
 
-##
-## Category titles
-##
 
+##
+## Model resources
+##
 category.admin=システム管理
 category.alfresco=Alfresco
 category.christianity=キリスト教
@@ -174,10 +179,10 @@ category.wol=Liferayの世界
 category.workflow=ワークフロー
 category.wsrp=WSRP
 
-##
-## Model resources
-##
 
+##
+## Action names
+##
 model.resource.com.liferay.knowledgebase.model.KBArticle=知識ベースの記事
 model.resource.com.liferay.portal.model.Group=コミュニティ
 model.resource.com.liferay.portal.model.Layout=ページ
@@ -239,10 +244,10 @@ model.resource.com.liferay.portlet.workflow.model.WorkflowDefinition=ワーク�
 model.resource.com.liferay.portlet.workflow.model.WorkflowInstance=ワークフローのインタンス
 model.resource.com.liferay.portlet.workflow.model.WorkflowTask=ワークフローのタスク
 
-##
-## Action names
-##
 
+##
+## Messages
+##
 action.ACCESS=アクセス
 action.ACCESS_IN_CONTROL_PANEL=コントロールパネルのアクセス
 action.ADD_ARTICLE=コンテンツの追加
@@ -304,6 +309,7 @@ action.DELETE_USER=ユーザの削除
 action.EDIT=編集
 action.EXPIRE=期限の設定
 action.EXPORT_ALL_EVENTS=すべてのイベントのエクスポート
+action.EXPORT_USER=輸出ユーザー (Automatic Translation)
 action.GUEST_PREFERENCES=ゲスト用の構成
 action.HELP=ヘルプ
 action.IMPERSONATE=代理
@@ -338,10 +344,10 @@ action.VIEW=参照
 action.VIEW_ALL_TASKS=すべてのタスクの表示
 action.VIEW_USER=ユーザの参照
 
-##
-## Messages
-##
 
+##
+## Currency
+##
 1-day=1日
 1-minute=1分
 1-month=1ヵ月
@@ -364,7 +370,7 @@ action.VIEW_USER=ユーザの参照
 INBOX=受信トレイ
 a-map-could-not-be-found-for-the-address=入力した住所に該当する地図は見つかりませんでした:
 a-new-password-will-be-sent-to-x-if-you-can-correctly-answer-the-following-question=以下の質問に正しく答えることができたら、新規パスワードが {0} に送信されます。
-a-new-version-will-be-created-automatically-if-this-article-is-modified=この記事が更新されると新しいバージョンが自動的に作成されます。
+a-new-version-will-be-created-automatically-if-this-content-is-modified=新版はこの内容が変更されれば自動的に作成される。 (Automatic Translation)
 a-page-cannot-become-a-child-of-a-page-that-is-not-parentable=親ページではないページの子ページには設定できません。
 a-page-cannot-become-a-child-of-itself=ページ自身の子ページには設定できません。
 a-page-may-not-contain-more-than-x-portlets=ページには{0}以上のポートレットを配置できません。
@@ -1266,6 +1272,7 @@ custom-field-key-help=フィールドキーはプログラムから&lt;liferay-u
 custom-field-secret-help=フィールドを秘密に設定すると値が画面に表示されません。パスワード入力などに使います。
 custom-field-selection-help=true（真）に設定された場合、フィールドはセレクトボックスになります。
 custom-field-type-help=一回設定すると変更できないフィールドです。
+custom-field-visible-with-update-permission-help=設定は更新の許可との目に見えるへの注文分野更新の許可のユーザーがこの分野を見ることができることを意味する。 この設定はこの場合隠されるの価値を打ち消す。 (Automatic Translation)
 custom-field-width-help=入力フィールドの幅をピクセルで設定します。
 custom-field=フィールド
 custom-fields-are-not-enabled-for-any-resource=フィールドはすべてのリソースに対して無効です
@@ -1273,6 +1280,22 @@ custom-fields=フィールド
 custom-message=任意のメッセージ
 custom-portlet-xml=カスタムportlet.xml
 custom-question=任意の質問
+custom.field.boolean.array=本当か偽の価値のグループ (Automatic Translation)
+custom.field.boolean=本当か偽 (Automatic Translation)
+custom.field.double.array=10進数のグループ(64ビット) (Automatic Translation)
+custom.field.double=10進数(64ビット) (Automatic Translation)
+custom.field.float.array=10進数のグループ(32ビット) (Automatic Translation)
+custom.field.float=10進数(32ビット) (Automatic Translation)
+custom.field.int.array=整数のグループ(32ビット) (Automatic Translation)
+custom.field.int=整数(32ビット) (Automatic Translation)
+custom.field.java.lang.String.array=テキストの価値のグループ (Automatic Translation)
+custom.field.java.lang.String=テキスト (Automatic Translation)
+custom.field.java.util.Date.array=日付のグループ (Automatic Translation)
+custom.field.java.util.Date=日付 (Automatic Translation)
+custom.field.long.array=整数のグループ(64ビット) (Automatic Translation)
+custom.field.long=整数(64ビット) (Automatic Translation)
+custom.field.short.array=整数のグループ(16ビット) (Automatic Translation)
+custom.field.short=整数(16ビット) (Automatic Translation)
 custom=カスタム
 customer-service=顧客サービス
 customer=顧客
@@ -1306,6 +1329,7 @@ decorated=装飾済み
 decoration=装飾
 default-associations=デフォルトの関連付け
 default-colors=デフォルトのカラー
+default-configuration=デフォルト設定 (Automatic Translation)
 default-control-panel-theme=コントロールパネルのデフォルトテーマ
 default-email-notification=デフォルトのメール通知
 default-landing-page-help=これはユーザがログオン後に自動的に遷移するページです。例えば、http://localhost:8080/web/guest/loginとしたい場合は/web/guest/loginと入力します。
@@ -1727,6 +1751,7 @@ female-voice=女性の声
 female=女性
 field-label=フィールドラベル
 field-name=フィールド名
+field-type=フィールドタイプ (Automatic Translation)
 field=フィールド
 fields-are-added-if-you-need-to-distinguish-items-based-on-criteria-chosen-by-the-user=ユーザに商品の選択肢を与える必要がある場合にフィールドを追加します。例えば、Tシャツを販売する場合に<i>Size</i>という名前のフィールドを追加し、値として<i>S、M、L、XL</i>を指定します。値に入力する選択肢はカンマ区切りで入力します。
 fields=フィールド
@@ -1844,7 +1869,6 @@ get-the-api-key-and-canvas-page-url-from-facebook=Facebook から API キーお�
 get=取得する
 gifts=贈り物
 give-x-permission-to-users-with-the-x-role=権限 {0} をロール {1} のユーザへ付与します。
-give-x-permission-to-users-with-role-x={0} 権限を {1} ロールへ付与
 global-tags-are-injected-to-all-pages-that-you-visit=グローバルタグはあなたがアクセスするすべてのページに挿入されます。それらを利用してデータにタグ付けすると、動的にデータ配信の一覧に表示されます。
 global=全体的
 go-to-category=カテゴリを参照する
@@ -2024,6 +2048,7 @@ increment-version-on-save=保存時にバージョンをインクリメントす
 increment-version=バージョンのインクリメント
 indefinite=不明確
 indent=インデント
+index-type=索引のタイプ (Automatic Translation)
 indexed=インデックス付き
 indexes=インデックス
 industry=業界
@@ -2810,6 +2835,7 @@ please-contact-the-administrator-to-setup-this-portlet=このポートレット�
 please-email-all-questions-to=すべての質問を{0}にメールしてください。
 please-ensure-the-administrator-has-configured-a-proper-google-license=適切なGoogleライセンスを設定するようにシステム管理者にご連絡ください。
 please-enter-a-download-page-url-or-a-direct-download-url=ダウンロードページのURLまたはダイレクトダウンロードのURLを入力してください。
+please-enter-a-file-with-a-valid-extension-x=Please enter a value with a valid extension ({0}). (Automatic Copy)
 please-enter-a-file-with-a-valid-file-name=有効なファイル名をもつファイルを入力してください。
 please-enter-a-file-with-a-valid-file-size=決められたファイルサイズ以内のファイルを選択してください。
 please-enter-a-file-with-a-valid-file-type=有効なファイル・タイプのファイルを入力してください。
@@ -2935,17 +2961,28 @@ please-enter-a-valid-xsd=XML スキーマを入力してください。
 please-enter-a-valid-xsl-template=XSLテンプレートを正しく入力してください。
 please-enter-a-valid-xsl-url=XSLのURLを正しく入力してください。
 please-enter-a-valid-zip=郵便番号を正しく入力してください。
+please-enter-a-value-between-x-and-x-characters-long=Please enter a value between {0} and {1} characters long. (Automatic Copy)
+please-enter-a-value-between-x-and-x=Please enter a value between {0} and {1}. (Automatic Copy)
+please-enter-a-value-greater-than-or-equal-to-x=Please enter a value greater than or equal to {0}. (Automatic Copy)
+please-enter-a-value-less-than-or-equal-to-x=Please enter a value less than or equal to {0}. (Automatic Copy)
 please-enter-a-value=値を入力してください。
 please-enter-a-word-that-is-at-least-3-characters-long=少なくとも3文字以上の単語を正しく入力してください。
 please-enter-an-email-address=メールアドレスを入力してください。
 please-enter-at-least-one-tag=タグを少なくとも1つ入力してください。
+please-enter-at-list-x-characters=Please enter at least {0} characters. (Automatic Copy)
 please-enter-both-the-validation-code-and-the-error-message=確認コードおよびエラーメッセージを両方入力してください。
 please-enter-jdbc-information-for-new-database=新しいデータベース用のJDBC情報を入力してください。
+please-enter-no-more-than-x-characters=Please enter no more than {0} characters. (Automatic Copy)
+please-enter-only-alpha-characters=アルファ特性だけ書き入れなさい。 (Automatic Translation)
+please-enter-only-alphanumeric-characters=英数字だけ書き入れなさい。 (Automatic Translation)
+please-enter-only-digits=ディジットだけ書き入れなさい。 (Automatic Translation)
 please-enter-the-full-name-exactly-as-it-is-appears-on-your-credit-card=クレジットカードに表示されているフルネームを正確に入力してください。
+please-enter-the-same-value-again=同じ価値を再度入れなさい。 (Automatic Translation)
 please-enter-valid-choices=選択項目をを正しく入力してください。
 please-enter-valid-comments=コメントを正しく入力してください。
 please-enter-valid-content=テキストを正しく入力してください。
 please-fill-out-all-required-fields=すべての必須項目を入力してください。
+please-fix-this-field=この分野を修理しなさい。 (Automatic Translation)
 please-import-a-lar-file-for-the-current-portlet=現在のポートレットのための LAR ファイルをインポートしてください。
 please-import-a-lar-file-of-the-correct-type=正しいタイプの LAR ファイルをインポートしてください。
 please-import-a-lar-file=LAR ファイルをインポートしてください。
@@ -3167,6 +3204,7 @@ read-interval-minutes=読み込み間隔(分)
 read-more-x-about-x={1}の<span class="{0}">詳細情報</span>
 read-more=続きを読む
 read-roles=ロールを読む
+read-value-from-parameter=変数からの価値を読みなさい (Automatic Translation)
 read=読む
 reason-for-the-report=レポートの理由
 reassign-to-system-role=システム役割に割当て直しなさい
@@ -3537,6 +3575,7 @@ set-the-display-order-of-news-feeds=ニュースを表示する順番を設定�
 set-the-display-styles-used-to-display-blogs-when-viewed-via-as-a-regular-page-or-as-an-rss=ブログ本体及びRSSの表示形式を設定して下さい。
 set-the-following-values-to-filter-emails-associated-with-an-email-address-to-a-folder=メールアドレスとフォルダを関連付けのフィルタを設定します。
 set-the-google-analytics-id-that-will-be-used-for-this-set-of-pages=モニタリングするためにGoogle AnalyticsのIDを入力してください。
+set-up-the-communication-among-the-portlets-that-use-public-render-parameters=Set up the communication among the portlets that use public render parameters. For each of the public parameters in this portlet, it is possible to ignore the values coming from other portlets or to read the value from another parameter. <a href="{0}" target="_blank">Read more.</a> (Automatic Copy)
 set-your-community-tags=コミュニティタグを設定します。
 set-your-global-tags=グローバルタグを設定します。
 set-your-jira-login=JIRAのログインを設定します。
@@ -4130,6 +4169,7 @@ there-are-no-top-posters=投稿されていません。
 there-are-no-topics=トピックはありません。
 there-are-no-users-to-invite=招待するユーザはいません。
 there-are-no-workflow-definitions=ワークフローの定義がありません。
+there-is-a-publication-workflow-in-process=プロセスに出版物のワークフローがある。 (Automatic Translation)
 there-is-already-a-page-with-the-specified-title=指定したタイトルのページは既にあります。
 there-is-another-category-with-the-same-name-and-the-same-parent=同じ名前および同じ親とのもう一つの部門がある。
 there-is-existing-form-data-please-export-and-delete-it-before-making-changes-to-the-fields=フォームデータが既にあります。フィールドを変更する前に、エクスポートし、削除してください。
@@ -4285,6 +4325,7 @@ uninstall=アンインストール
 united-states-phone-format=USの電話番号形式
 unknown=不明
 unlimited=無制限
+unlock-thread-to-add-an-explanation-post=説明のポストを加えるために糸の鍵を開けなさい。 (Automatic Translation)
 unlock-thread=スレッドの開放
 unlock=アンロック
 unmark=マークを取る
@@ -4497,6 +4538,7 @@ violent-or-repulsive-content=過激な内容が投稿されている
 virtual-host=バーチャルホスト
 virtual-hosts-must-be-valid-domain-names=バーチャルホストには正しいドメイン名が必要です。
 visible-wikis=Wiki
+visible-with-update-permission=更新と目に見える (Automatic Translation)
 visible=見ることができる
 visited-link=アクセス済みのリンク
 visits=訪問回数
@@ -4757,7 +4799,7 @@ you-must-first-add-a-vocabulary=最初に用語を追加してください。
 you-must-have-at-least-one-page=少なくとも1ページは必要です。
 you-must-specify-a-group-id-and-artifact-id-before-you-can-add-a-product-version=プラグインのバージョンを追加する前にグループIDとアーティファクトIDを指定する必要があります。
 you-now-have-a-lock-on-this-document=このファイルはロックされました。あなたがロックを解除するまで誰にもこのファイルを編集することはできません。このロックは{0}後に自動的に解除されます。
-you-now-have-a-lock-on-this-page=このページはロックされました。あなたがロック解除するまで誰にもこのページを編集することはできません。このロックは{0}に自動的に解除されます。
+you-now-have-an-indefinite-lock-on-this-document=今この文書の不明確なロックがある。 それの鍵を開けるまで誰もこの文書を編集できる。 このロックは決して切れない。 (Automatic Translation)
 you-save=保存したもの
 you-should-save-the-structure-first=構造を先ず保存してください。
 you-will-be-sent-an-email-notification-when-each-of-the-recipients-of-this-email-have-opened-to-read-this-email=送信したメールを受信者が開いた時に通知メールを送信します。
@@ -4801,10 +4843,6 @@ zh_en=中国語(簡体)から英語
 zip-postal=USの郵便番号
 zip=郵便番号
 zt_en=中国語(繁体)から英語
-
-##
-## Currency
-##
 
 currency.AED=UAE ディルハム
 currency.ALL=アルバニア レク

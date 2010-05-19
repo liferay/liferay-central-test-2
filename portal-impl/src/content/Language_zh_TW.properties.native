@@ -1,15 +1,20 @@
+
 ##
 ## Language settings
 ##
 
-lang.dir=ltr
-lang.line.begin=left
-lang.line.end=right
 
 ##
 ## Portlet descriptions and titles
 ##
+lang.dir=ltr
+lang.line.begin=left
+lang.line.end=right
 
+
+##
+## Category titles
+##
 javax.portlet.description.122=類別描述一套詞彙量期限標記美滿的項目。 管理員能創造詞彙量和居住於他們與用戶能選擇從，當創作內容时的類別。 (Automatic Translation)
 javax.portlet.description.126=组织代表用戶階層，例如部門或輔助者。 管理員能處理用戶會員資格，定义了角色，並且設定組織的屬性。 (Automatic Translation)
 javax.portlet.description.127=不管社區或組織會員資格，用户群是捷徑對一個寬鬆小組用戶。 如果需要管理員能定義用户群和分配用户群作為社區的成員。 (Automatic Translation)
@@ -136,10 +141,10 @@ javax.portlet.title.98=軟體編目
 javax.portlet.title.99=標記
 javax.portlet.title.9=管理者
 
-##
-## Category titles
-##
 
+##
+## Model resources
+##
 category.admin=Admin
 category.alfresco=在戶外
 category.christianity=基督教
@@ -174,10 +179,10 @@ category.wol=Liferay 世界
 category.workflow=工作流
 category.wsrp=WSRP
 
-##
-## Model resources
-##
 
+##
+## Action names
+##
 model.resource.com.liferay.knowledgebase.model.KBArticle=知识库文章
 model.resource.com.liferay.portal.model.Group=群組
 model.resource.com.liferay.portal.model.Layout=設計
@@ -239,10 +244,10 @@ model.resource.com.liferay.portlet.workflow.model.WorkflowDefinition=工作流�
 model.resource.com.liferay.portlet.workflow.model.WorkflowInstance=工作流事例
 model.resource.com.liferay.portlet.workflow.model.WorkflowTask=工作流任務
 
-##
-## Action names
-##
 
+##
+## Messages
+##
 action.ACCESS=通入 (Automatic Translation)
 action.ACCESS_IN_CONTROL_PANEL=訪問在控制板
 action.ADD_ARTICLE=增加內容
@@ -304,6 +309,7 @@ action.DELETE_USER=刪除用戶
 action.EDIT=編輯
 action.EXPIRE=到期
 action.EXPORT_ALL_EVENTS=出口所有事件
+action.EXPORT_USER=出口用戶 (Automatic Translation)
 action.GUEST_PREFERENCES=客人特選
 action.HELP=幫助
 action.IMPERSONATE=假充
@@ -338,10 +344,10 @@ action.VIEW=看法
 action.VIEW_ALL_TASKS=觀看所有任務 (Automatic Translation)
 action.VIEW_USER=看法用戶
 
-##
-## Messages
-##
 
+##
+## Currency
+##
 1-day=1 天
 1-minute=1分鐘
 1-month=1 個月
@@ -364,7 +370,7 @@ action.VIEW_USER=看法用戶
 INBOX=收信匣
 a-map-could-not-be-found-for-the-address=此地址找不到地圖:
 a-new-password-will-be-sent-to-x-if-you-can-correctly-answer-the-following-question=A new password will be sent to {0} if you can correctly answer the following question.
-a-new-version-will-be-created-automatically-if-this-article-is-modified=如果修改，一個新版本將自動地创建這篇文章。 (Automatic Translation)
+a-new-version-will-be-created-automatically-if-this-content-is-modified=如果修改，一個新版本將自動地创建這個內容。 (Automatic Translation)
 a-page-cannot-become-a-child-of-a-page-that-is-not-parentable=頁無法適合不是parentable 頁的孩子。
 a-page-cannot-become-a-child-of-itself=頁無法適合孩子本身。
 a-page-may-not-contain-more-than-x-portlets=一頁不可以超過多於 {0} portlets.
@@ -1266,6 +1272,7 @@ custom-field-key-help=習慣領域鑰匙被用于通过&amp訪問領域programat
 custom-field-secret-help=設置一個習慣領域對秘密意味着鍵入在屏幕將掩藏。 為密碼使用此。 (Automatic Translation)
 custom-field-selection-help=設置這物產對真实平均数控制被用于設置這個領域將是一個精選的箱子。 (Automatic Translation)
 custom-field-type-help=一旦它被定義它不可能被改變，小心地選擇字段类型。 (Automatic Translation)
+custom-field-visible-with-update-permission-help=設置對可看見的一個習慣領域對更新允許意味着有更新允許的一名用戶能觀看這個領域。 這個設置忽略價值的在這種情況下掩藏。 (Automatic Translation)
 custom-field-width-help=這將設置輸入領域的寬度在映像點的。 (Automatic Translation)
 custom-field=習慣領域 (Automatic Translation)
 custom-fields-are-not-enabled-for-any-resource=習慣領域沒有為任何資源使能。 (Automatic Translation)
@@ -1273,6 +1280,22 @@ custom-fields=習慣領域 (Automatic Translation)
 custom-message=自訂訊息
 custom-portlet-xml=訂製portlet.xml
 custom-question=習慣問題 (Automatic Translation)
+custom.field.boolean.array=小組真實或錯誤價值 (Automatic Translation)
+custom.field.boolean=真實或錯誤 (Automatic Translation)
+custom.field.double.array=小組小数(64位) (Automatic Translation)
+custom.field.double=小数(64位) (Automatic Translation)
+custom.field.float.array=小組小数(32位) (Automatic Translation)
+custom.field.float=小数(32位) (Automatic Translation)
+custom.field.int.array=小組整數(32位) (Automatic Translation)
+custom.field.int=整數(32位) (Automatic Translation)
+custom.field.java.lang.String.array=小組文本價值 (Automatic Translation)
+custom.field.java.lang.String=文本 (Automatic Translation)
+custom.field.java.util.Date.array=小組日期 (Automatic Translation)
+custom.field.java.util.Date=日期 (Automatic Translation)
+custom.field.long.array=小組整數(64位) (Automatic Translation)
+custom.field.long=整數(64位) (Automatic Translation)
+custom.field.short.array=小組整數(16位) (Automatic Translation)
+custom.field.short=整數(16位) (Automatic Translation)
 custom=訂製
 customer-service=顧客服務
 customer=顧客
@@ -1306,6 +1329,7 @@ decorated=裝飾
 decoration=裝飾
 default-associations=缺省協會
 default-colors=預設顏色
+default-configuration=默认配置 (Automatic Translation)
 default-control-panel-theme=缺省控制板題材
 default-email-notification=預設電子郵件通知
 default-landing-page-help=這是頁用戶自動地被改方向對在登錄以後。 例如，如果您要缺省著陸頁是http://localhost:8080/web/guest/login，然后設置這對/web/guest/login。
@@ -1727,6 +1751,7 @@ female-voice=女性聲音
 female=女性
 field-label=領域標籤 (Automatic Translation)
 field-name=字段名
+field-type=字段类型 (Automatic Translation)
 field=領域
 fields-are-added-if-you-need-to-distinguish-items-based-on-criteria-chosen-by-the-user=欄位新增以應付假如您需要分別以使用者選擇搜尋條件之物品. 例如, 假如您賣T恤, 您可以新增一個名為 <em>尺寸</em>和值 <em>S, M, L, XL</em>的欄位 . 輸入一列以逗號做分隔的選項.
 fields=欄位
@@ -2023,6 +2048,7 @@ increment-version-on-save=增加版本在之外
 increment-version=累增版本
 indefinite=不確定
 indent=凹進
+index-type=索引類型 (Automatic Translation)
 indexed=標註
 indexes=索引
 industry=產業
@@ -2809,6 +2835,7 @@ please-contact-the-administrator-to-setup-this-portlet=請與管理員聯繫設�
 please-email-all-questions-to=請email所有的問題到 {0}.
 please-ensure-the-administrator-has-configured-a-proper-google-license=請保證管理員配置了一個適當的Google 執照。
 please-enter-a-download-page-url-or-a-direct-download-url=請進入下載頁URL 或直接下載URL 。
+please-enter-a-file-with-a-valid-extension-x=Please enter a value with a valid extension ({0}). (Automatic Copy)
 please-enter-a-file-with-a-valid-file-name=請进入與一個合法的文件名的一個文件。 (Automatic Translation)
 please-enter-a-file-with-a-valid-file-size=請輸入一個文件以有效的文件大小。
 please-enter-a-file-with-a-valid-file-type=請进入與一個合法的文件类型的一個文件。 (Automatic Translation)
@@ -2934,17 +2961,28 @@ please-enter-a-valid-xsd=請輸入一個有效的XML 圖解定義。
 please-enter-a-valid-xsl-template=請輸入一塊有效的XSL 範本。
 please-enter-a-valid-xsl-url=XSL url
 please-enter-a-valid-zip=請輸入一個有效的郵遞區號。
+please-enter-a-value-between-x-and-x-characters-long=Please enter a value between {0} and {1} characters long. (Automatic Copy)
+please-enter-a-value-between-x-and-x=Please enter a value between {0} and {1}. (Automatic Copy)
+please-enter-a-value-greater-than-or-equal-to-x=Please enter a value greater than or equal to {0}. (Automatic Copy)
+please-enter-a-value-less-than-or-equal-to-x=Please enter a value less than or equal to {0}. (Automatic Copy)
 please-enter-a-value=請進入價值。
 please-enter-a-word-that-is-at-least-3-characters-long=請輸入長期是至少3 個字母的詞。
 please-enter-an-email-address=請輸入電子郵件。
 please-enter-at-least-one-tag=請進入至少一個標記。
+please-enter-at-list-x-characters=Please enter at least {0} characters. (Automatic Copy)
 please-enter-both-the-validation-code-and-the-error-message=請进入檢驗代碼和错误信息。
 please-enter-jdbc-information-for-new-database=請输入新的數據庫的JDBC信息。 (Automatic Translation)
+please-enter-no-more-than-x-characters=Please enter no more than {0} characters. (Automatic Copy)
+please-enter-only-alpha-characters=請进入僅阿爾法字符。 (Automatic Translation)
+please-enter-only-alphanumeric-characters=請进入僅字母或数字字符。 (Automatic Translation)
+please-enter-only-digits=請进入僅數字。 (Automatic Translation)
 please-enter-the-full-name-exactly-as-it-is-appears-on-your-credit-card=請輸入您的信用卡上註明的全名。
+please-enter-the-same-value-again=請再进入同一價值。 (Automatic Translation)
 please-enter-valid-choices=請輸入有效的選擇。
 please-enter-valid-comments=請輸入有效的評論。
 please-enter-valid-content=請輸入有效的內容。
 please-fill-out-all-required-fields=請填好所有必需的領域。 (Automatic Translation)
+please-fix-this-field=請修理這個領域。 (Automatic Translation)
 please-import-a-lar-file-for-the-current-portlet=請進口當前portlet的家神文件。
 please-import-a-lar-file-of-the-correct-type=請進口正確類型的家神文件。
 please-import-a-lar-file=請進口家神文件。
@@ -3166,6 +3204,7 @@ read-interval-minutes=讀間隔時間(分鐘)
 read-more-x-about-x=Read More <span class="{0}">About {1}</span> (Automatic Copy)
 read-more=讀取更多
 read-roles=讀取角色
+read-value-from-parameter=讀從參量的價值 (Automatic Translation)
 read=讀
 reason-for-the-report=報告的原因
 reassign-to-system-role=再分配對系統角色
@@ -3536,6 +3575,7 @@ set-the-display-order-of-news-feeds=設置新聞傳遞顯示定貨。
 set-the-display-styles-used-to-display-blogs-when-viewed-via-as-a-regular-page-or-as-an-rss=設置顯示樣式使用顯示Blogs 當觀看通過作為規則頁或作為RSS 。
 set-the-following-values-to-filter-emails-associated-with-an-email-address-to-a-folder=設置以下價值過濾電子郵件與相關電子郵件對文件夾。
 set-the-google-analytics-id-that-will-be-used-for-this-set-of-pages=_ 設置這Google Analytics 身份證將是used 為這設置頁。_
+set-up-the-communication-among-the-portlets-that-use-public-render-parameters=Set up the communication among the portlets that use public render parameters. For each of the public parameters in this portlet, it is possible to ignore the values coming from other portlets or to read the value from another parameter. <a href="{0}" target="_blank">Read more.</a> (Automatic Copy)
 set-your-community-tags=設置您的社區標記。
 set-your-global-tags=設置您的全球性標記。
 set-your-jira-login=設置您的JIRA註冊。 (Automatic Translation)
@@ -4129,6 +4169,7 @@ there-are-no-top-posters=沒有頂面海報。
 there-are-no-topics=沒有主題。
 there-are-no-users-to-invite=沒有邀請的用戶。
 there-are-no-workflow-definitions=沒有工作流定義。 (Automatic Translation)
+there-is-a-publication-workflow-in-process=有出版物工作流在過程中。 (Automatic Translation)
 there-is-already-a-page-with-the-specified-title=有已經頁以指定的標題。
 there-is-another-category-with-the-same-name-and-the-same-parent=有與同一個名字和同一個父母的另一個類別。
 there-is-existing-form-data-please-export-and-delete-it-before-making-changes-to-the-fields=有現有的形式數據。 請在做對領域的变动之前出口并且刪除它。
@@ -4284,6 +4325,7 @@ uninstall=Uninstall
 united-states-phone-format=美國電話號碼格式
 unknown=未知
 unlimited=無限
+unlock-thread-to-add-an-explanation-post=打開螺紋增加解釋崗位。 (Automatic Translation)
 unlock-thread=打開螺紋 (Automatic Translation)
 unlock=解鎖
 unmark=Unmark
@@ -4496,6 +4538,7 @@ violent-or-repulsive-content=猛烈或排斥的內容
 virtual-host=虛擬主機
 virtual-hosts-must-be-valid-domain-names=虛擬主機必須是合法的域名。
 visible-wikis=可看見的Wikis
+visible-with-update-permission=可看見對更新 (Automatic Translation)
 visible=可看見
 visited-link=己參觀的鏈接
 visits=參觀
@@ -4756,7 +4799,7 @@ you-must-first-add-a-vocabulary=您必须首先增加詞彙量。
 you-must-have-at-least-one-page=您必須有至少一頁。
 you-must-specify-a-group-id-and-artifact-id-before-you-can-add-a-product-version=您必須指定小組身份證和人工製品身份證在您能增加產品版本之前。
 you-now-have-a-lock-on-this-document=您已經鎖定此文件. 直到您按取消鍵取消鎖定前, 沒有人能編輯此文件. 鎖定會自動在 {0} 失效.
-you-now-have-a-lock-on-this-page=您已經鎖定此頁. 直到您按取消鍵取消鎖定前, 沒有人能編輯此頁. 鎖定會自動在 {0} 失效.
+you-now-have-an-indefinite-lock-on-this-document=您現在有在本文的一把不確定的鎖。 沒人可能編輯本文，直到您打開它。 這把鎖不會到期。 (Automatic Translation)
 you-save=您儲存
 you-should-save-the-structure-first=您應該首先保存結構。 (Automatic Translation)
 you-will-be-sent-an-email-notification-when-each-of-the-recipients-of-this-email-have-opened-to-read-this-email=您將寄發電子郵件通知當每個這電子郵件的接收者打開讀這電子郵件。
@@ -4800,10 +4843,6 @@ zh_en=中文(中國) 對英語
 zip-postal=Zip/Postal
 zip=郵遞區號
 zt_en=中文(臺灣) 對英語
-
-##
-## Currency
-##
 
 currency.AED=阿拉伯聯合酋長國迪拉姆
 currency.ALL=阿爾巴尼亞列克

@@ -1,15 +1,20 @@
+
 ##
 ## Language settings
 ##
 
-lang.dir=ltr
-lang.line.begin=left
-lang.line.end=right
 
 ##
 ## Portlet descriptions and titles
 ##
+lang.dir=ltr
+lang.line.begin=left
+lang.line.end=right
 
+
+##
+## Category titles
+##
 javax.portlet.description.122=종류는 어휘 기간의 만족한 품목을 표를 붙이기 위하여 세트를 기술한다. 행정관은 어휘를 창조하고 사용자가 선택할 수 있는 종류로 사람을 거주케 할 수 있다 내용을 저작할 때. (Automatic Translation)
 javax.portlet.description.126=조직은 부 자회사와 같은 사용자의 계층구조를 대표한다. 행정관은 사용자 회원을 처리할 수 있고, 역할을 정의하고, 조직의 속성을 설치한다. (Automatic Translation)
 javax.portlet.description.127=사용자 그룹은 지역 사회 또는 조직 회원에 관계 없이 사용자의 느슨한 그룹에게 편법, 이다. 행정관은 지역 사회의 일원으로 사용자 그룹을 정의하고 필요하다면 사용자 그룹을 지정할 수 있다. (Automatic Translation)
@@ -136,10 +141,10 @@ javax.portlet.title.98=소프트웨어 카탈로그
 javax.portlet.title.99=꼬리표
 javax.portlet.title.9=Admin
 
-##
-## Category titles
-##
 
+##
+## Model resources
+##
 category.admin=Admin
 category.alfresco=Alfresco
 category.christianity=기독교
@@ -174,10 +179,10 @@ category.wol=Liferay의 세계
 category.workflow=작업 흐름
 category.wsrp=WSRP
 
-##
-## Model resources
-##
 
+##
+## Action names
+##
 model.resource.com.liferay.knowledgebase.model.KBArticle=지식 기준 기사
 model.resource.com.liferay.portal.model.Group=지역 사회
 model.resource.com.liferay.portal.model.Layout=페이지
@@ -239,10 +244,10 @@ model.resource.com.liferay.portlet.workflow.model.WorkflowDefinition=작업 흐�
 model.resource.com.liferay.portlet.workflow.model.WorkflowInstance=작업 흐름 경우
 model.resource.com.liferay.portlet.workflow.model.WorkflowTask=작업 흐름 업무
 
-##
-## Action names
-##
 
+##
+## Messages
+##
 action.ACCESS=접근 (Automatic Translation)
 action.ACCESS_IN_CONTROL_PANEL=제어반에 있는 접근
 action.ADD_ARTICLE=내용을 추가하십시오
@@ -304,6 +309,7 @@ action.DELETE_USER=감소 사용자
 action.EDIT=편집하십시요
 action.EXPIRE=만료되십시요
 action.EXPORT_ALL_EVENTS=모든 사건을 수출하십시요
+action.EXPORT_USER=수출 사용자 (Automatic Translation)
 action.GUEST_PREFERENCES=손님 특혜
 action.HELP=도움
 action.IMPERSONATE=구체화되는
@@ -338,10 +344,10 @@ action.VIEW=전망
 action.VIEW_ALL_TASKS=모든 업무를 전망하십시오 (Automatic Translation)
 action.VIEW_USER=전망 사용자
 
-##
-## Messages
-##
 
+##
+## Currency
+##
 1-day=1 일
 1-minute=1 분
 1-month=1 달
@@ -364,7 +370,7 @@ action.VIEW_USER=전망 사용자
 INBOX=Inbox
 a-map-could-not-be-found-for-the-address=지도는 주소를 위해 발견될 수 없었다:
 a-new-password-will-be-sent-to-x-if-you-can-correctly-answer-the-following-question=A new password will be sent to {0} if you can correctly answer the following question.
-a-new-version-will-be-created-automatically-if-this-article-is-modified=새로운 자료는 이 기사가 변경되는 경우에 자동적으로 창조될 것이다. (Automatic Translation)
+a-new-version-will-be-created-automatically-if-this-content-is-modified=새로운 자료는 이 내용이 변경되는 경우에 자동적으로 창조될 것이다. (Automatic Translation)
 a-page-cannot-become-a-child-of-a-page-that-is-not-parentable=페이지는parentable이지 않는 페이지의 아이에 어울릴.
 a-page-cannot-become-a-child-of-itself=페이지는 자체적으로의 아이에 어울릴.
 a-page-may-not-contain-more-than-x-portlets=A page may not contain more than {0} portlets.
@@ -1266,6 +1272,7 @@ custom-field-key-help=주문 분야 열쇠는 &amp를 통해서 분야에 progra
 custom-field-secret-help=비밀에 주문 분야를 놓는 것은 타자를 치는 것이 스크린에 숨겨지을 것이라는 점을 의미한다. 암호를 위해 이것을 사용하십시오. (Automatic Translation)
 custom-field-selection-help=이 재산을 진실한 방법에 놓아서 통제는 이 분야를 놓기 위하여 이용되어 추려낸 상자일 것이다. (Automatic Translation)
 custom-field-type-help=일단 그것이라고 변화될 수 없으면 정의되면 필드 유형을 것과 같이 주의깊게 선택하십시오. (Automatic Translation)
+custom-field-visible-with-update-permission-help=조정은 갱신 허가에 눈에 보이는에 주문 분야 갱신 허가를 가진 사용자가 이 분야를 전망할 다는 것을 의미한다. 이 조정은 이 경우에는 숨기는의 가치를 무시한다. (Automatic Translation)
 custom-field-width-help=이것은 화소에 있는 입력 분야의 폭을 놓을 것이다. (Automatic Translation)
 custom-field=주문 분야 (Automatic Translation)
 custom-fields-are-not-enabled-for-any-resource=주문 분야는 어떤 자원도를 위해 가능하게 되지 않는다. (Automatic Translation)
@@ -1273,6 +1280,22 @@ custom-fields=주문 분야 (Automatic Translation)
 custom-message=주문 메시지
 custom-portlet-xml=관례portlet.xml
 custom-question=주문 질문 (Automatic Translation)
+custom.field.boolean.array=진실하거나 틀린 가치의 그룹 (Automatic Translation)
+custom.field.boolean=진실하거나 틀린 (Automatic Translation)
+custom.field.double.array=(64 비트) 십진수의 그룹 (Automatic Translation)
+custom.field.double=(64 비트) 십진수 (Automatic Translation)
+custom.field.float.array=(32 비트) 십진수의 그룹 (Automatic Translation)
+custom.field.float=(32 비트) 십진수 (Automatic Translation)
+custom.field.int.array=(32 비트) 정수의 그룹 (Automatic Translation)
+custom.field.int=(32 비트) 정수 (Automatic Translation)
+custom.field.java.lang.String.array=원본 가치의 그룹 (Automatic Translation)
+custom.field.java.lang.String=원본 (Automatic Translation)
+custom.field.java.util.Date.array=날짜의 그룹 (Automatic Translation)
+custom.field.java.util.Date=날짜 (Automatic Translation)
+custom.field.long.array=(64 비트) 정수의 그룹 (Automatic Translation)
+custom.field.long=(64 비트) 정수 (Automatic Translation)
+custom.field.short.array=(16-비트) 정수의 그룹 (Automatic Translation)
+custom.field.short=(16-비트) 정수 (Automatic Translation)
 custom=관례
 customer-service=소비자 봉사
 customer=고객
@@ -1306,6 +1329,7 @@ decorated=꾸미는
 decoration=훈장
 default-associations=과태 협회
 default-colors=과태 군기
+default-configuration=과태 윤곽 (Automatic Translation)
 default-control-panel-theme=과태 제어반 주제
 default-email-notification=과태 Email 통보
 default-landing-page-help=이것은 사용자가 로그인 후에에 자동적으로 방향이 바뀐다 페이지이다. 예를 들면 당신이 과태 상륙 페이지를 http://localhost:8080/web/guest/login인 원하는 경우에, 그 후에 이것이라고 /web/guest/login에 놓아.
@@ -1727,6 +1751,7 @@ female-voice=암컷 음향
 female=암컷
 field-label=분야 상표 (Automatic Translation)
 field-name=필드 이름
+field-type=필드 유형 (Automatic Translation)
 field=분야
 fields-are-added-if-you-need-to-distinguish-items-based-on-criteria-chosen-by-the-user=Fields are added if you need to distinguish items based on criteria chosen by the user. For example, if you are selling t-shirts, you may want to add a field with the name <em>Size</em> and the values <em>S, M, L, XL</em>. Enter the values as a list of comma delimited options.
 fields=분야
@@ -2023,6 +2048,7 @@ increment-version-on-save=증분 버전을 제외하고에
 increment-version=증분 버전
 indefinite=불명확한
 indent=톱니 모양의 자국
+index-type=색인 유형 (Automatic Translation)
 indexed=색인을 붙이는
 indexes=색인
 industry=공업
@@ -2809,6 +2835,7 @@ please-contact-the-administrator-to-setup-this-portlet=이portlet을 설치하�
 please-email-all-questions-to=Please email all questions to {0}.
 please-ensure-the-administrator-has-configured-a-proper-google-license=제발 행정관을 형성했다 Google 적당한 면허를 지키십시요.
 please-enter-a-download-page-url-or-a-direct-download-url=다운로드 페이지URL또는 직접적인 다운로드URL에 들어가십시요.
+please-enter-a-file-with-a-valid-extension-x=Please enter a value with a valid extension ({0}). (Automatic Copy)
 please-enter-a-file-with-a-valid-file-name=유효한 파일 이름을 가진 파일에 들어가십시오. (Automatic Translation)
 please-enter-a-file-with-a-valid-file-size=제발 유효한 파일 규모에 파일을 들어가십시요.
 please-enter-a-file-with-a-valid-file-type=유효한 파일 유형을 가진 파일에 들어가십시오. (Automatic Translation)
@@ -2934,17 +2961,28 @@ please-enter-a-valid-xsd=유효한XML개요 정의에 들어가십시요.
 please-enter-a-valid-xsl-template=유효한XSL템플렛에 들어가십시요.
 please-enter-a-valid-xsl-url=XSLurl        .
 please-enter-a-valid-zip=제발 유효한 지퍼를 들어가십시요.
+please-enter-a-value-between-x-and-x-characters-long=Please enter a value between {0} and {1} characters long. (Automatic Copy)
+please-enter-a-value-between-x-and-x=Please enter a value between {0} and {1}. (Automatic Copy)
+please-enter-a-value-greater-than-or-equal-to-x=Please enter a value greater than or equal to {0}. (Automatic Copy)
+please-enter-a-value-less-than-or-equal-to-x=Please enter a value less than or equal to {0}. (Automatic Copy)
 please-enter-a-value=가치에 들어가십시요.
 please-enter-a-word-that-is-at-least-3-characters-long=제발 가장 작은 3개의 특성에 오랫동안 있는 낱말을 들어가십시
 please-enter-an-email-address=전자 우편 주소에 들어가십시요.
 please-enter-at-least-one-tag=적어도 1개의 꼬리표에 들어가십시요.
+please-enter-at-list-x-characters=Please enter at least {0} characters. (Automatic Copy)
 please-enter-both-the-validation-code-and-the-error-message=확인 부호 및 착오 알림말에 둘 다 들어가십시오.
 please-enter-jdbc-information-for-new-database=새로운 데이타베이스를 위한 JDBC 정보에 들어가십시오. (Automatic Translation)
+please-enter-no-more-than-x-characters=Please enter no more than {0} characters. (Automatic Copy)
+please-enter-only-alpha-characters=알파 특성에만 들어가십시오. (Automatic Translation)
+please-enter-only-alphanumeric-characters=영숫자 문자에만 들어가십시오. (Automatic Translation)
+please-enter-only-digits=손가락에만 들어가십시오. (Automatic Translation)
 please-enter-the-full-name-exactly-as-it-is-appears-on-your-credit-card=너의 신용 카드에 나타난다 대로 성명에
+please-enter-the-same-value-again=동일한 가치에 다시 들어가십시오. (Automatic Translation)
 please-enter-valid-choices=제발 유효한 선택을 들어가십시요.
 please-enter-valid-comments=제발 유효한 비평을 들어가십시요.
 please-enter-valid-content=제발 유효한 내용을 들어가십시요.
 please-fill-out-all-required-fields=모든 필수 분야를 기입하십시오. (Automatic Translation)
+please-fix-this-field=이 분야를 고치십시오. (Automatic Translation)
 please-import-a-lar-file-for-the-current-portlet=현재 portlet를 위한 LAR 파일을 수입하십시오.
 please-import-a-lar-file-of-the-correct-type=정확한 유형의 LAR 파일을 수입하십시오.
 please-import-a-lar-file=LAR 파일을 수입하십시오.
@@ -3166,6 +3204,7 @@ read-interval-minutes=읽으십시오 간격 (분)를
 read-more-x-about-x=Read More <span class="{0}">About {1}</span> (Automatic Copy)
 read-more=더를 읽으십시요
 read-roles=역할을 읽으십시요
+read-value-from-parameter=매개변수에서 가치를 읽으십시오 (Automatic Translation)
 read=읽는
 reason-for-the-report=보고를 위한 이유
 reassign-to-system-role=체계 역할에 재할당하십시오
@@ -3536,6 +3575,7 @@ set-the-display-order-of-news-feeds=뉴스 이송의 전시 순서를 놓으십�
 set-the-display-styles-used-to-display-blogs-when-viewed-via-as-a-regular-page-or-as-an-rss=일정한 페이지경유 또는RSS으로 전망할 경우 전시 작풍을Blogs을 보이기 위하여 이용되는 놓으십시요.
 set-the-following-values-to-filter-emails-associated-with-an-email-address-to-a-folder=폴더에 전자 우편 주소에 회합되는 전자 우편을 거르기 위하여 뒤에 오는 가치를 놓으십시요.
 set-the-google-analytics-id-that-will-be-used-for-this-set-of-pages=페이지의 이 세트를 위해 사용될 것이다GoogleAnalytics식별을 놓으십시요.
+set-up-the-communication-among-the-portlets-that-use-public-render-parameters=Set up the communication among the portlets that use public render parameters. For each of the public parameters in this portlet, it is possible to ignore the values coming from other portlets or to read the value from another parameter. <a href="{0}" target="_blank">Read more.</a> (Automatic Copy)
 set-your-community-tags=너의 지역 사회 꼬리표를 놓으십시요.
 set-your-global-tags=너의 세계적인 꼬리표를 놓으십시요.
 set-your-jira-login=당신의 JIRA 로그인을 놓으십시오. (Automatic Translation)
@@ -4129,6 +4169,7 @@ there-are-no-top-posters=최고 포스터.
 there-are-no-topics=화제.
 there-are-no-users-to-invite=초대할 것이다 아무 사용자도 없다.
 there-are-no-workflow-definitions=작업 흐름 정의가 없다. (Automatic Translation)
+there-is-a-publication-workflow-in-process=과정에 있는 간행물 작업 흐름이 있다. (Automatic Translation)
 there-is-already-a-page-with-the-specified-title=이미 지정한 제목에 페이지 있는다.
 there-is-another-category-with-the-same-name-and-the-same-parent=동일한 이름 및 동일한 부모와 가진 또 다른 종류가 있다.
 there-is-existing-form-data-please-export-and-delete-it-before-making-changes-to-the-fields=기존하는 모양 자료가 있다. 분야에 수정하기 전에 그것을 수출하고 삭제하십시오.
@@ -4284,6 +4325,7 @@ uninstall=설치를 해제하십시요
 united-states-phone-format=미국 전화 번호 체재
 unknown=불명한
 unlimited=무제한
+unlock-thread-to-add-an-explanation-post=설명 포스트를 추가하기 위하여 실을 자물쇠로 여십시오. (Automatic Translation)
 unlock-thread=실을 자물쇠로 여십시오 (Automatic Translation)
 unlock=자물쇠로 열십시요
 unmark=Unmark
@@ -4496,6 +4538,7 @@ violent-or-repulsive-content=강력하거나 불쾌한 내용
 virtual-host=사실상 주인
 virtual-hosts-must-be-valid-domain-names=사실상 주인은 유효한 도메인 이름 이어야 한다.
 visible-wikis=눈에 보이는 Wikis
+visible-with-update-permission=갱신에 눈에 보이는 (Automatic Translation)
 visible=눈에 보이는
 visited-link=방문된 연결
 visits=방문
@@ -4756,7 +4799,7 @@ you-must-first-add-a-vocabulary=당신은 첫째로 어휘를 추가해야 한�
 you-must-have-at-least-one-page=너는 적어도 1개 페이지가 있어야 한다.
 you-must-specify-a-group-id-and-artifact-id-before-you-can-add-a-product-version=너가 제품 버전을 추가할 수 있을 전에 너는 그룹 식별 및 인공물 식별을 지정하야 한다.
 you-now-have-a-lock-on-this-document=You now have a lock on this document. No one else can edit this document until you unlock it. This lock will automatically expire in {0}.
-you-now-have-a-lock-on-this-page=You now have a lock on this page. No one else can edit this page until you unlock it by hitting cancel. This lock will automatically expire in {0}.
+you-now-have-an-indefinite-lock-on-this-document=당신은 지금 이 문서에 불명확한 자물쇠가 있다. 또 다른 사람은 당신이 그것을 자물쇠로 열 때까지 이 문서를 편집할 수 있다. 이 자물쇠는 결코 만료되지 않을 것이다. (Automatic Translation)
 you-save=너는 저장한다
 you-should-save-the-structure-first=당신은 구조를 첫째로 저장해야 한다. (Automatic Translation)
 you-will-be-sent-an-email-notification-when-each-of-the-recipients-of-this-email-have-opened-to-read-this-email=이 전자 우편을 읽기 위하여 이 전자 우편의 수령인의 각자가 열l 경우 너는 전자 우편 통보에게 보낼 것이다.
@@ -4800,10 +4843,6 @@ zh_en=영어에 중국인
 zip-postal=Zip/Postal
 zip=지퍼
 zt_en=영어에 중국어 (대만)
-
-##
-## Currency
-##
 
 currency.AED=아랍 에미리트 연방 Dirham
 currency.ALL=알바니아 Lek
