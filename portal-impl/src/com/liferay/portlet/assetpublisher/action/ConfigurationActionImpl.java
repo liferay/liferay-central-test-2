@@ -218,31 +218,17 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 			ActionRequest actionRequest, PortletPreferences preferences)
 		throws Exception {
 
+		updateDisplaySettings(actionRequest, preferences);
 		updateQueryLogic(actionRequest, preferences);
 
 		boolean mergeUrlTags = ParamUtil.getBoolean(
 			actionRequest, "mergeUrlTags");
-
 		boolean defaultScope = ParamUtil.getBoolean(
 			actionRequest, "defaultScope");
 		String[] scopeIds = StringUtil.split(
 			ParamUtil.getString(actionRequest, "scopeIds"));
-		boolean anyAssetType = ParamUtil.getBoolean(
-			actionRequest, "anyAssetType");
-		long[] classNameIds = StringUtil.split(
-			ParamUtil.getString(actionRequest, "classNameIds"), 0L);
 		long assetVocabularyId = ParamUtil.getLong(
 			actionRequest, "assetVocabularyId");
-		String displayStyle = ParamUtil.getString(
-			actionRequest, "displayStyle");
-		boolean showAssetTitle = ParamUtil.getBoolean(
-			actionRequest, "showAssetTitle");
-		boolean showContextLink = ParamUtil.getBoolean(
-			actionRequest, "showContextLink");
-		int abstractLength = ParamUtil.getInteger(
-			actionRequest, "abstractLength");
-		String assetLinkBehaviour = ParamUtil.getString(
-			actionRequest, "assetLinkBehaviour");
 		String orderByColumn1 = ParamUtil.getString(
 			actionRequest, "orderByColumn1");
 		String orderByColumn2 = ParamUtil.getString(
@@ -258,38 +244,14 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 		int delta = ParamUtil.getInteger(actionRequest, "delta");
 		String paginationType = ParamUtil.getString(
 			actionRequest, "paginationType");
-		boolean showAvailableLocales = ParamUtil.getBoolean(
-			actionRequest, "showAvailableLocales");
 		String[] extensions = actionRequest.getParameterValues("extensions");
-		boolean enablePrint = ParamUtil.getBoolean(
-			actionRequest, "enablePrint");
-		boolean enableFlags = ParamUtil.getBoolean(
-			actionRequest, "enableFlags");
-		boolean enableRatings = ParamUtil.getBoolean(
-			actionRequest, "enableRatings");
-		boolean enableComments = ParamUtil.getBoolean(
-			actionRequest, "enableComments");
-		boolean enableCommentRatings = ParamUtil.getBoolean(
-			actionRequest, "enableCommentRatings");
-		String medatadaFields = ParamUtil.getString(
-			actionRequest, "metadataFields");
 
 		preferences.setValue("selection-style", "dynamic");
 		preferences.setValue("merge-url-tags", String.valueOf(mergeUrlTags));
 		preferences.setValue("default-scope", String.valueOf(defaultScope));
 		preferences.setValues("scope-ids", ArrayUtil.toStringArray(scopeIds));
-		preferences.setValue("any-asset-type", String.valueOf(anyAssetType));
-		preferences.setValues(
-			"class-name-ids", ArrayUtil.toStringArray(classNameIds));
 		preferences.setValue(
 			"asset-vocabulary-id", String.valueOf(assetVocabularyId));
-		preferences.setValue("display-style", displayStyle);
-		preferences.setValue(
-			"show-asset-title", String.valueOf(showAssetTitle));
-		preferences.setValue(
-			"show-context-link", String.valueOf(showContextLink));
-		preferences.setValue("abstract-length", String.valueOf(abstractLength));
-		preferences.setValue("asset-link-behaviour", assetLinkBehaviour);
 		preferences.setValue("order-by-column-1", orderByColumn1);
 		preferences.setValue("order-by-column-2", orderByColumn2);
 		preferences.setValue("order-by-type-1", orderByType1);
@@ -300,19 +262,17 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 			"show-query-logic", String.valueOf(showQueryLogic));
 		preferences.setValue("delta", String.valueOf(delta));
 		preferences.setValue("pagination-type", paginationType);
-		preferences.setValue(
-			"show-available-locales", String.valueOf(showAvailableLocales));
 		preferences.setValues("extensions", extensions);
-		preferences.setValue("enable-print", String.valueOf(enablePrint));
-		preferences.setValue("enable-flags", String.valueOf(enableFlags));
-		preferences.setValue("enable-ratings", String.valueOf(enableRatings));
-		preferences.setValue("enable-comments", String.valueOf(enableComments));
-		preferences.setValue(
-			"enable-comment-ratings", String.valueOf(enableCommentRatings));
-		preferences.setValue("metadata-fields", medatadaFields);
 	}
 
 	protected void updateManualSettings(
+			ActionRequest actionRequest, PortletPreferences preferences)
+		throws Exception {
+
+		updateDisplaySettings(actionRequest, preferences);
+	}
+
+	protected void updateDisplaySettings(
 			ActionRequest actionRequest, PortletPreferences preferences)
 		throws Exception {
 
