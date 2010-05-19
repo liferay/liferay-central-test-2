@@ -33,7 +33,7 @@ import javax.servlet.http.HttpServletResponse;
  * <a href="StringServletResponse.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @auther Shuyang Zhou
+ * @author Shuyang Zhou
  */
 public class StringServletResponse extends HeaderCacheServletResponse {
 
