@@ -659,7 +659,7 @@
 	</library>
 	<library>
 		<file-name>development/qdox.jar</file-name>
-		<version>1.11</version>
+		<version>1.12 (Snapshot 20100502)</version>
 		<project-name>QDox</project-name>
 		<project-url>http://qdox.codehaus.org</project-url>
 		<licenses>
