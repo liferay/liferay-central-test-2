@@ -83,14 +83,17 @@ public class SocialEquityLogLocalServiceImpl
 			long userId, String className, long classPK, String actionId)
 		throws PortalException, SystemException {
 
-		try {
-			AssetEntry assetEntry = assetEntryLocalService.getEntry(
-				className, classPK);
+		AssetEntry assetEntry = null;
 
-			addEquityLogs(userId, assetEntry.getEntryId(), actionId);
+		try {
+			assetEntry = assetEntryLocalService.getEntry(
+				className, classPK);
 		}
 		catch (NoSuchEntryException nsee) {
+			return;
 		}
+
+		addEquityLogs(userId, assetEntry.getEntryId(), actionId);
 	}
 
 	public void checkEquityLogs() throws SystemException {
@@ -118,47 +121,49 @@ public class SocialEquityLogLocalServiceImpl
 	}
 
 	public void deactivateEquityLogs(long assetEntryId)	throws SystemException {
+		SocialEquityAssetEntry equityAssetEntry = null;
 
 		try {
-			SocialEquityAssetEntry equityAssetEntry =
+			equityAssetEntry =
 				socialEquityAssetEntryPersistence.findByAssetEntryId(
 					assetEntryId);
 
 			socialEquityAssetEntryPersistence.removeByAssetEntryId(
 				assetEntryId);
-
-			User user = null;
-
-			try {
-				user = userPersistence.findByPrimaryKey(
-					equityAssetEntry.getUserId());
-
-				if (!user.isDefaultUser()) {
-					updateSocialEquityUser_CQ(
-						equityAssetEntry.getGroupId(), user.getUserId());
-					updateSocialEquityUser_PEQ(
-						equityAssetEntry.getGroupId(), user.getUserId());
-					updateUser_CQ_PQ(user.getUserId());
-					updateUser_PEQ(user.getUserId());
-
-					userPersistence.clearCache(user);
-				}
-			}
-			catch (NoSuchUserException nsue) {
-			}
-
-			List<SocialEquityLog> equityLogs =
-				socialEquityLogPersistence.findByAEI_T_A(
-					assetEntryId, SocialEquitySettingConstants.TYPE_INFORMATION,
-					true);
-
-			for (SocialEquityLog equityLog : equityLogs) {
-				equityLog.setActive(false);
-
-				socialEquityLogPersistence.update(equityLog, false);
-			}
 		}
 		catch (NoSuchEquityAssetEntryException nseaee) {
+			return;
+		}
+
+		User user = null;
+
+		try {
+			user = userPersistence.findByPrimaryKey(
+				equityAssetEntry.getUserId());
+
+			if (!user.isDefaultUser()) {
+				updateSocialEquityUser_CQ(
+					equityAssetEntry.getGroupId(), user.getUserId());
+				updateSocialEquityUser_PEQ(
+					equityAssetEntry.getGroupId(), user.getUserId());
+				updateUser_CQ_PQ(user.getUserId());
+				updateUser_PEQ(user.getUserId());
+
+				userPersistence.clearCache(user);
+			}
+		}
+		catch (NoSuchUserException nsue) {
+		}
+
+		List<SocialEquityLog> equityLogs =
+			socialEquityLogPersistence.findByAEI_T_A(
+				assetEntryId, SocialEquitySettingConstants.TYPE_INFORMATION,
+				true);
+
+		for (SocialEquityLog equityLog : equityLogs) {
+			equityLog.setActive(false);
+
+			socialEquityLogPersistence.update(equityLog, false);
 		}
 	}
 
