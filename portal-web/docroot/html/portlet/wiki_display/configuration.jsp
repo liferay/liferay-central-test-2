@@ -22,6 +22,8 @@ String redirect = ParamUtil.getString(request, "redirect");
 nodeId = ParamUtil.getLong(request, "nodeId", nodeId);
 
 List<WikiNode> nodes = WikiNodeLocalServiceUtil.getNodes(scopeGroupId);
+
+boolean isNodeInGroup = false;
 %>
 
 <liferay-portlet:actionURL portletConfiguration="true" var="configurationURL" />
@@ -41,6 +43,9 @@ List<WikiNode> nodes = WikiNodeLocalServiceUtil.getNodes(scopeGroupId);
 					<%
 					for (WikiNode node : nodes) {
 						node = node.toEscapedModel();
+						if (nodeId == node.getNodeId()) {
+							isNodeInGroup = true;
+						}
 					%>
 
 						<aui:option label="<%= node.getName() %>" selected="<%= nodeId == node.getNodeId() %>" value="<%= node.getNodeId() %>" />
@@ -59,7 +64,7 @@ List<WikiNode> nodes = WikiNodeLocalServiceUtil.getNodes(scopeGroupId);
 		</c:choose>
 
 		<c:choose>
-			<c:when test="<%= nodeId > 0 %>">
+			<c:when test="<%= isNodeInGroup %>">
 				<aui:select label="page" name="title">
 
 					<%

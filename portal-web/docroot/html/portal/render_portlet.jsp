@@ -268,6 +268,10 @@ Portlet portletResourcePortlet = null;
 if (portletId.equals(PortletKeys.PORTLET_CONFIGURATION)) {
 	String portletResource = ParamUtil.getString(request, "portletResource");
 
+	if (Validator.isNull(portletResource)) {
+		portletResource = ParamUtil.getString(renderRequestImpl, "portletResource");
+	}
+
 	if (Validator.isNotNull(portletResource)) {
 		portletResourcePortlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), portletResource);
 	}
@@ -404,7 +408,12 @@ if (denyAccess) {
 
 long previousScopeGroupId = themeDisplay.getScopeGroupId();
 
-themeDisplay.setScopeGroupId(PortalUtil.getScopeGroupId(request, portletId));
+if (portletId.equals(PortletKeys.PORTLET_CONFIGURATION) && portletResourcePortlet != null) {
+	themeDisplay.setScopeGroupId(PortalUtil.getScopeGroupId(request, portletResourcePortlet.getPortletId()));
+}
+else {
+	themeDisplay.setScopeGroupId(PortalUtil.getScopeGroupId(request, portletId));
+}
 
 portletDisplay.recycle();
 
