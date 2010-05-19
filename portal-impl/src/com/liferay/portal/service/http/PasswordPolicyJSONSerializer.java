@@ -75,7 +75,7 @@ public class PasswordPolicyJSONSerializer {
 		jsonObj.put("minAge", model.getMinAge());
 		jsonObj.put("checkSyntax", model.getCheckSyntax());
 		jsonObj.put("allowDictionaryWords", model.getAllowDictionaryWords());
-		jsonObj.put("minAlphaNumeric", model.getMinAlphaNumeric());
+		jsonObj.put("minAlphanumeric", model.getMinAlphanumeric());
 		jsonObj.put("minLength", model.getMinLength());
 		jsonObj.put("minLowerCase", model.getMinLowerCase());
 		jsonObj.put("minNumbers", model.getMinNumbers());

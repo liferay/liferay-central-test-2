@@ -49,7 +49,7 @@ public interface PasswordPolicyService {
 	public com.liferay.portal.model.PasswordPolicy addPasswordPolicy(
 		java.lang.String name, java.lang.String description,
 		boolean changeable, boolean changeRequired, long minAge,
-		boolean checkSyntax, boolean allowDictionaryWords, int minAlphaNumeric,
+		boolean checkSyntax, boolean allowDictionaryWords, int minAlphanumeric,
 		int minLength, int minLowerCase, int minNumbers, int minSymbols,
 		int minUpperCase, boolean history, int historyCount,
 		boolean expireable, long maxAge, long warningTime, int graceLimit,
@@ -66,7 +66,7 @@ public interface PasswordPolicyService {
 		long passwordPolicyId, java.lang.String name,
 		java.lang.String description, boolean changeable,
 		boolean changeRequired, long minAge, boolean checkSyntax,
-		boolean allowDictionaryWords, int minAlphaNumeric, int minLength,
+		boolean allowDictionaryWords, int minAlphanumeric, int minLength,
 		int minLowerCase, int minNumbers, int minSymbols, int minUpperCase,
 		boolean history, int historyCount, boolean expireable, long maxAge,
 		long warningTime, int graceLimit, boolean lockout, int maxFailure,

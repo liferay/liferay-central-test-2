@@ -185,12 +185,12 @@ public class PasswordPolicyWrapper implements PasswordPolicy {
 		_passwordPolicy.setAllowDictionaryWords(allowDictionaryWords);
 	}
 
-	public int getMinAlphaNumeric() {
-		return _passwordPolicy.getMinAlphaNumeric();
+	public int getMinAlphanumeric() {
+		return _passwordPolicy.getMinAlphanumeric();
 	}
 
-	public void setMinAlphaNumeric(int minAlphaNumeric) {
-		_passwordPolicy.setMinAlphaNumeric(minAlphaNumeric);
+	public void setMinAlphanumeric(int minAlphanumeric) {
+		_passwordPolicy.setMinAlphanumeric(minAlphanumeric);
 	}
 
 	public int getMinLength() {

@@ -55,7 +55,7 @@ public class PasswordPolicySoap implements Serializable {
 		soapModel.setMinAge(model.getMinAge());
 		soapModel.setCheckSyntax(model.getCheckSyntax());
 		soapModel.setAllowDictionaryWords(model.getAllowDictionaryWords());
-		soapModel.setMinAlphaNumeric(model.getMinAlphaNumeric());
+		soapModel.setMinAlphanumeric(model.getMinAlphanumeric());
 		soapModel.setMinLength(model.getMinLength());
 		soapModel.setMinLowerCase(model.getMinLowerCase());
 		soapModel.setMinNumbers(model.getMinNumbers());
@@ -257,12 +257,12 @@ public class PasswordPolicySoap implements Serializable {
 		_allowDictionaryWords = allowDictionaryWords;
 	}
 
-	public int getMinAlphaNumeric() {
-		return _minAlphaNumeric;
+	public int getMinAlphanumeric() {
+		return _minAlphanumeric;
 	}
 
-	public void setMinAlphaNumeric(int minAlphaNumeric) {
-		_minAlphaNumeric = minAlphaNumeric;
+	public void setMinAlphanumeric(int minAlphanumeric) {
+		_minAlphanumeric = minAlphanumeric;
 	}
 
 	public int getMinLength() {
@@ -431,7 +431,7 @@ public class PasswordPolicySoap implements Serializable {
 	private long _minAge;
 	private boolean _checkSyntax;
 	private boolean _allowDictionaryWords;
-	private int _minAlphaNumeric;
+	private int _minAlphanumeric;
 	private int _minLength;
 	private int _minLowerCase;
 	private int _minNumbers;

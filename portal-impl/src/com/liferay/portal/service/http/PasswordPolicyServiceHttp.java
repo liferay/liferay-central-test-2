@@ -66,7 +66,7 @@ public class PasswordPolicyServiceHttp {
 		HttpPrincipal httpPrincipal, java.lang.String name,
 		java.lang.String description, boolean changeable,
 		boolean changeRequired, long minAge, boolean checkSyntax,
-		boolean allowDictionaryWords, int minAlphaNumeric, int minLength,
+		boolean allowDictionaryWords, int minAlphanumeric, int minLength,
 		int minLowerCase, int minNumbers, int minSymbols, int minUpperCase,
 		boolean history, int historyCount, boolean expireable, long maxAge,
 		long warningTime, int graceLimit, boolean lockout, int maxFailure,
@@ -96,7 +96,7 @@ public class PasswordPolicyServiceHttp {
 
 			Object paramObj6 = new BooleanWrapper(allowDictionaryWords);
 
-			Object paramObj7 = new IntegerWrapper(minAlphaNumeric);
+			Object paramObj7 = new IntegerWrapper(minAlphanumeric);
 
 			Object paramObj8 = new IntegerWrapper(minLength);
 
@@ -203,7 +203,7 @@ public class PasswordPolicyServiceHttp {
 		HttpPrincipal httpPrincipal, long passwordPolicyId,
 		java.lang.String name, java.lang.String description,
 		boolean changeable, boolean changeRequired, long minAge,
-		boolean checkSyntax, boolean allowDictionaryWords, int minAlphaNumeric,
+		boolean checkSyntax, boolean allowDictionaryWords, int minAlphanumeric,
 		int minLength, int minLowerCase, int minNumbers, int minSymbols,
 		int minUpperCase, boolean history, int historyCount,
 		boolean expireable, long maxAge, long warningTime, int graceLimit,
@@ -236,7 +236,7 @@ public class PasswordPolicyServiceHttp {
 
 			Object paramObj7 = new BooleanWrapper(allowDictionaryWords);
 
-			Object paramObj8 = new IntegerWrapper(minAlphaNumeric);
+			Object paramObj8 = new IntegerWrapper(minAlphanumeric);
 
 			Object paramObj9 = new IntegerWrapper(minLength);
 

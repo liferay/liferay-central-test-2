@@ -40,7 +40,7 @@ public class PasswordPolicyServiceUtil {
 	public static com.liferay.portal.model.PasswordPolicy addPasswordPolicy(
 		java.lang.String name, java.lang.String description,
 		boolean changeable, boolean changeRequired, long minAge,
-		boolean checkSyntax, boolean allowDictionaryWords, int minAlphaNumeric,
+		boolean checkSyntax, boolean allowDictionaryWords, int minAlphanumeric,
 		int minLength, int minLowerCase, int minNumbers, int minSymbols,
 		int minUpperCase, boolean history, int historyCount,
 		boolean expireable, long maxAge, long warningTime, int graceLimit,
@@ -51,7 +51,7 @@ public class PasswordPolicyServiceUtil {
 		return getService()
 				   .addPasswordPolicy(name, description, changeable,
 			changeRequired, minAge, checkSyntax, allowDictionaryWords,
-			minAlphaNumeric, minLength, minLowerCase, minNumbers, minSymbols,
+			minAlphanumeric, minLength, minLowerCase, minNumbers, minSymbols,
 			minUpperCase, history, historyCount, expireable, maxAge,
 			warningTime, graceLimit, lockout, maxFailure, lockoutDuration,
 			resetFailureCount, resetTicketMaxAge);
@@ -67,7 +67,7 @@ public class PasswordPolicyServiceUtil {
 		long passwordPolicyId, java.lang.String name,
 		java.lang.String description, boolean changeable,
 		boolean changeRequired, long minAge, boolean checkSyntax,
-		boolean allowDictionaryWords, int minAlphaNumeric, int minLength,
+		boolean allowDictionaryWords, int minAlphanumeric, int minLength,
 		int minLowerCase, int minNumbers, int minSymbols, int minUpperCase,
 		boolean history, int historyCount, boolean expireable, long maxAge,
 		long warningTime, int graceLimit, boolean lockout, int maxFailure,
@@ -77,7 +77,7 @@ public class PasswordPolicyServiceUtil {
 		return getService()
 				   .updatePasswordPolicy(passwordPolicyId, name, description,
 			changeable, changeRequired, minAge, checkSyntax,
-			allowDictionaryWords, minAlphaNumeric, minLength, minLowerCase,
+			allowDictionaryWords, minAlphanumeric, minLength, minLowerCase,
 			minNumbers, minSymbols, minUpperCase, history, historyCount,
 			expireable, maxAge, warningTime, graceLimit, lockout, maxFailure,
 			lockoutDuration, resetFailureCount, resetTicketMaxAge);

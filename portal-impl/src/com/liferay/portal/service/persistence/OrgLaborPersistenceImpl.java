@@ -549,8 +549,6 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 					}
 				}
 			}
-
-			query.append(WHERE_LIMIT_2);
 		}
 
 		else {
@@ -560,6 +558,9 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 		String sql = query.toString();
 
 		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
 
 		QueryPos qPos = QueryPos.getInstance(q);
 

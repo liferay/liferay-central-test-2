@@ -73,7 +73,7 @@ public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy> {
 			{ "minAge", new Integer(Types.BIGINT) },
 			{ "checkSyntax", new Integer(Types.BOOLEAN) },
 			{ "allowDictionaryWords", new Integer(Types.BOOLEAN) },
-			{ "minAlphaNumeric", new Integer(Types.INTEGER) },
+			{ "minAlphanumeric", new Integer(Types.INTEGER) },
 			{ "minLength", new Integer(Types.INTEGER) },
 			{ "minLowerCase", new Integer(Types.INTEGER) },
 			{ "minNumbers", new Integer(Types.INTEGER) },
@@ -92,7 +92,7 @@ public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy> {
 			{ "resetFailureCount", new Integer(Types.BIGINT) },
 			{ "resetTicketMaxAge", new Integer(Types.BIGINT) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table PasswordPolicy (passwordPolicyId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,defaultPolicy BOOLEAN,name VARCHAR(75) null,description STRING null,changeable BOOLEAN,changeRequired BOOLEAN,minAge LONG,checkSyntax BOOLEAN,allowDictionaryWords BOOLEAN,minAlphaNumeric INTEGER,minLength INTEGER,minLowerCase INTEGER,minNumbers INTEGER,minSymbols INTEGER,minUpperCase INTEGER,history BOOLEAN,historyCount INTEGER,expireable BOOLEAN,maxAge LONG,warningTime LONG,graceLimit INTEGER,lockout BOOLEAN,maxFailure INTEGER,lockoutDuration LONG,requireUnlock BOOLEAN,resetFailureCount LONG,resetTicketMaxAge LONG)";
+	public static final String TABLE_SQL_CREATE = "create table PasswordPolicy (passwordPolicyId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,defaultPolicy BOOLEAN,name VARCHAR(75) null,description STRING null,changeable BOOLEAN,changeRequired BOOLEAN,minAge LONG,checkSyntax BOOLEAN,allowDictionaryWords BOOLEAN,minAlphanumeric INTEGER,minLength INTEGER,minLowerCase INTEGER,minNumbers INTEGER,minSymbols INTEGER,minUpperCase INTEGER,history BOOLEAN,historyCount INTEGER,expireable BOOLEAN,maxAge LONG,warningTime LONG,graceLimit INTEGER,lockout BOOLEAN,maxFailure INTEGER,lockoutDuration LONG,requireUnlock BOOLEAN,resetFailureCount LONG,resetTicketMaxAge LONG)";
 	public static final String TABLE_SQL_DROP = "drop table PasswordPolicy";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -121,7 +121,7 @@ public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy> {
 		model.setMinAge(soapModel.getMinAge());
 		model.setCheckSyntax(soapModel.getCheckSyntax());
 		model.setAllowDictionaryWords(soapModel.getAllowDictionaryWords());
-		model.setMinAlphaNumeric(soapModel.getMinAlphaNumeric());
+		model.setMinAlphanumeric(soapModel.getMinAlphanumeric());
 		model.setMinLength(soapModel.getMinLength());
 		model.setMinLowerCase(soapModel.getMinLowerCase());
 		model.setMinNumbers(soapModel.getMinNumbers());
@@ -354,12 +354,12 @@ public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy> {
 		_allowDictionaryWords = allowDictionaryWords;
 	}
 
-	public int getMinAlphaNumeric() {
-		return _minAlphaNumeric;
+	public int getMinAlphanumeric() {
+		return _minAlphanumeric;
 	}
 
-	public void setMinAlphaNumeric(int minAlphaNumeric) {
-		_minAlphaNumeric = minAlphaNumeric;
+	public void setMinAlphanumeric(int minAlphanumeric) {
+		_minAlphanumeric = minAlphanumeric;
 	}
 
 	public int getMinLength() {
@@ -555,7 +555,7 @@ public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy> {
 		clone.setMinAge(getMinAge());
 		clone.setCheckSyntax(getCheckSyntax());
 		clone.setAllowDictionaryWords(getAllowDictionaryWords());
-		clone.setMinAlphaNumeric(getMinAlphaNumeric());
+		clone.setMinAlphanumeric(getMinAlphanumeric());
 		clone.setMinLength(getMinLength());
 		clone.setMinLowerCase(getMinLowerCase());
 		clone.setMinNumbers(getMinNumbers());
@@ -650,8 +650,8 @@ public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy> {
 		sb.append(getCheckSyntax());
 		sb.append(", allowDictionaryWords=");
 		sb.append(getAllowDictionaryWords());
-		sb.append(", minAlphaNumeric=");
-		sb.append(getMinAlphaNumeric());
+		sb.append(", minAlphanumeric=");
+		sb.append(getMinAlphanumeric());
 		sb.append(", minLength=");
 		sb.append(getMinLength());
 		sb.append(", minLowerCase=");
@@ -755,8 +755,8 @@ public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy> {
 		sb.append(getAllowDictionaryWords());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>minAlphaNumeric</column-name><column-value><![CDATA[");
-		sb.append(getMinAlphaNumeric());
+			"<column><column-name>minAlphanumeric</column-name><column-value><![CDATA[");
+		sb.append(getMinAlphanumeric());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>minLength</column-name><column-value><![CDATA[");
@@ -852,7 +852,7 @@ public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy> {
 	private long _minAge;
 	private boolean _checkSyntax;
 	private boolean _allowDictionaryWords;
-	private int _minAlphaNumeric;
+	private int _minAlphanumeric;
 	private int _minLength;
 	private int _minLowerCase;
 	private int _minNumbers;

@@ -74,7 +74,7 @@ public class PasswordPolicyServiceSoap {
 	public static com.liferay.portal.model.PasswordPolicySoap addPasswordPolicy(
 		java.lang.String name, java.lang.String description,
 		boolean changeable, boolean changeRequired, long minAge,
-		boolean checkSyntax, boolean allowDictionaryWords, int minAlphaNumeric,
+		boolean checkSyntax, boolean allowDictionaryWords, int minAlphanumeric,
 		int minLength, int minLowerCase, int minNumbers, int minSymbols,
 		int minUpperCase, boolean history, int historyCount,
 		boolean expireable, long maxAge, long warningTime, int graceLimit,
@@ -84,7 +84,7 @@ public class PasswordPolicyServiceSoap {
 		try {
 			com.liferay.portal.model.PasswordPolicy returnValue = PasswordPolicyServiceUtil.addPasswordPolicy(name,
 					description, changeable, changeRequired, minAge,
-					checkSyntax, allowDictionaryWords, minAlphaNumeric,
+					checkSyntax, allowDictionaryWords, minAlphanumeric,
 					minLength, minLowerCase, minNumbers, minSymbols,
 					minUpperCase, history, historyCount, expireable, maxAge,
 					warningTime, graceLimit, lockout, maxFailure,
@@ -115,7 +115,7 @@ public class PasswordPolicyServiceSoap {
 		long passwordPolicyId, java.lang.String name,
 		java.lang.String description, boolean changeable,
 		boolean changeRequired, long minAge, boolean checkSyntax,
-		boolean allowDictionaryWords, int minAlphaNumeric, int minLength,
+		boolean allowDictionaryWords, int minAlphanumeric, int minLength,
 		int minLowerCase, int minNumbers, int minSymbols, int minUpperCase,
 		boolean history, int historyCount, boolean expireable, long maxAge,
 		long warningTime, int graceLimit, boolean lockout, int maxFailure,
@@ -124,7 +124,7 @@ public class PasswordPolicyServiceSoap {
 		try {
 			com.liferay.portal.model.PasswordPolicy returnValue = PasswordPolicyServiceUtil.updatePasswordPolicy(passwordPolicyId,
 					name, description, changeable, changeRequired, minAge,
-					checkSyntax, allowDictionaryWords, minAlphaNumeric,
+					checkSyntax, allowDictionaryWords, minAlphanumeric,
 					minLength, minLowerCase, minNumbers, minSymbols,
 					minUpperCase, history, historyCount, expireable, maxAge,
 					warningTime, graceLimit, lockout, maxFailure,

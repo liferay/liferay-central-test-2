@@ -360,7 +360,7 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl<PasswordP
 		passwordPolicyImpl.setMinAge(passwordPolicy.getMinAge());
 		passwordPolicyImpl.setCheckSyntax(passwordPolicy.isCheckSyntax());
 		passwordPolicyImpl.setAllowDictionaryWords(passwordPolicy.isAllowDictionaryWords());
-		passwordPolicyImpl.setMinAlphaNumeric(passwordPolicy.getMinAlphaNumeric());
+		passwordPolicyImpl.setMinAlphanumeric(passwordPolicy.getMinAlphanumeric());
 		passwordPolicyImpl.setMinLength(passwordPolicy.getMinLength());
 		passwordPolicyImpl.setMinLowerCase(passwordPolicy.getMinLowerCase());
 		passwordPolicyImpl.setMinNumbers(passwordPolicy.getMinNumbers());

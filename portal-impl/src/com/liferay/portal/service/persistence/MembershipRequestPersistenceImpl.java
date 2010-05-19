@@ -579,8 +579,6 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 					}
 				}
 			}
-
-			query.append(WHERE_LIMIT_2);
 		}
 
 		else {
@@ -590,6 +588,9 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 		String sql = query.toString();
 
 		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
 
 		QueryPos qPos = QueryPos.getInstance(q);
 
@@ -843,8 +844,6 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 					}
 				}
 			}
-
-			query.append(WHERE_LIMIT_2);
 		}
 
 		else {
@@ -854,6 +853,9 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 		String sql = query.toString();
 
 		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
 
 		QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1120,8 +1122,6 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 					}
 				}
 			}
-
-			query.append(WHERE_LIMIT_2);
 		}
 
 		else {
@@ -1131,6 +1131,9 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 		String sql = query.toString();
 
 		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
 
 		QueryPos qPos = QueryPos.getInstance(q);
 

@@ -453,7 +453,7 @@
 			<basic name="minAge" />
 			<basic name="checkSyntax" />
 			<basic name="allowDictionaryWords" />
-			<basic name="minAlphaNumeric" />
+			<basic name="minAlphanumeric" />
 			<basic name="minLength" />
 			<basic name="minLowerCase" />
 			<basic name="minNumbers" />

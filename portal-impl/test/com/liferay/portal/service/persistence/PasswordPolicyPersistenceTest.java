@@ -80,7 +80,7 @@ public class PasswordPolicyPersistenceTest extends BasePersistenceTestCase {
 		newPasswordPolicy.setMinAge(nextLong());
 		newPasswordPolicy.setCheckSyntax(randomBoolean());
 		newPasswordPolicy.setAllowDictionaryWords(randomBoolean());
-		newPasswordPolicy.setMinAlphaNumeric(nextInt());
+		newPasswordPolicy.setMinAlphanumeric(nextInt());
 		newPasswordPolicy.setMinLength(nextInt());
 		newPasswordPolicy.setMinLowerCase(nextInt());
 		newPasswordPolicy.setMinNumbers(nextInt());
@@ -133,8 +133,8 @@ public class PasswordPolicyPersistenceTest extends BasePersistenceTestCase {
 			newPasswordPolicy.getCheckSyntax());
 		assertEquals(existingPasswordPolicy.getAllowDictionaryWords(),
 			newPasswordPolicy.getAllowDictionaryWords());
-		assertEquals(existingPasswordPolicy.getMinAlphaNumeric(),
-			newPasswordPolicy.getMinAlphaNumeric());
+		assertEquals(existingPasswordPolicy.getMinAlphanumeric(),
+			newPasswordPolicy.getMinAlphanumeric());
 		assertEquals(existingPasswordPolicy.getMinLength(),
 			newPasswordPolicy.getMinLength());
 		assertEquals(existingPasswordPolicy.getMinLowerCase(),
@@ -256,7 +256,7 @@ public class PasswordPolicyPersistenceTest extends BasePersistenceTestCase {
 		passwordPolicy.setMinAge(nextLong());
 		passwordPolicy.setCheckSyntax(randomBoolean());
 		passwordPolicy.setAllowDictionaryWords(randomBoolean());
-		passwordPolicy.setMinAlphaNumeric(nextInt());
+		passwordPolicy.setMinAlphanumeric(nextInt());
 		passwordPolicy.setMinLength(nextInt());
 		passwordPolicy.setMinLowerCase(nextInt());
 		passwordPolicy.setMinNumbers(nextInt());

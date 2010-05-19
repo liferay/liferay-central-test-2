@@ -985,7 +985,7 @@ create table PasswordPolicy (
 	minAge LONG,
 	checkSyntax BOOLEAN,
 	allowDictionaryWords BOOLEAN,
-	minAlphaNumeric INTEGER,
+	minAlphanumeric INTEGER,
 	minLength INTEGER,
 	minLowerCase INTEGER,
 	minNumbers INTEGER,

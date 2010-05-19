@@ -124,7 +124,7 @@ public class PasswordPolicyLocalServiceUtil {
 		long userId, boolean defaultPolicy, java.lang.String name,
 		java.lang.String description, boolean changeable,
 		boolean changeRequired, long minAge, boolean checkSyntax,
-		boolean allowDictionaryWords, int minAlphaNumeric, int minLength,
+		boolean allowDictionaryWords, int minAlphanumeric, int minLength,
 		int minLowerCase, int minNumbers, int minSymbols, int minUpperCase,
 		boolean history, int historyCount, boolean expireable, long maxAge,
 		long warningTime, int graceLimit, boolean lockout, int maxFailure,
@@ -134,7 +134,7 @@ public class PasswordPolicyLocalServiceUtil {
 		return getService()
 				   .addPasswordPolicy(userId, defaultPolicy, name, description,
 			changeable, changeRequired, minAge, checkSyntax,
-			allowDictionaryWords, minAlphaNumeric, minLength, minLowerCase,
+			allowDictionaryWords, minAlphanumeric, minLength, minLowerCase,
 			minNumbers, minSymbols, minUpperCase, history, historyCount,
 			expireable, maxAge, warningTime, graceLimit, lockout, maxFailure,
 			lockoutDuration, resetFailureCount, resetTicketMaxAge);
@@ -191,7 +191,7 @@ public class PasswordPolicyLocalServiceUtil {
 		long passwordPolicyId, java.lang.String name,
 		java.lang.String description, boolean changeable,
 		boolean changeRequired, long minAge, boolean checkSyntax,
-		boolean allowDictionaryWords, int minAlphaNumeric, int minLength,
+		boolean allowDictionaryWords, int minAlphanumeric, int minLength,
 		int minLowerCase, int minNumbers, int minSymbols, int minUpperCase,
 		boolean history, int historyCount, boolean expireable, long maxAge,
 		long warningTime, int graceLimit, boolean lockout, int maxFailure,
@@ -201,7 +201,7 @@ public class PasswordPolicyLocalServiceUtil {
 		return getService()
 				   .updatePasswordPolicy(passwordPolicyId, name, description,
 			changeable, changeRequired, minAge, checkSyntax,
-			allowDictionaryWords, minAlphaNumeric, minLength, minLowerCase,
+			allowDictionaryWords, minAlphanumeric, minLength, minLowerCase,
 			minNumbers, minSymbols, minUpperCase, history, historyCount,
 			expireable, maxAge, warningTime, graceLimit, lockout, maxFailure,
 			lockoutDuration, resetFailureCount, resetTicketMaxAge);
