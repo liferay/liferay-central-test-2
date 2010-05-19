@@ -17,6 +17,7 @@ package com.liferay.portal.servlet.filters.validhtml;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.StringServletResponse;
+import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -82,9 +83,12 @@ public class ValidHtmlFilter extends BasePortalFilter {
 			ValidHtmlFilter.class, request, stringServerResponse, filterChain);
 
 		String contentType = response.getContentType();
-		if (contentType != null && contentType.startsWith("text/html")) {
-			String content =
-				getContent(request, stringServerResponse.getString());
+
+		if ((contentType != null) &&
+			contentType.startsWith(ContentTypes.TEXT_HTML)) {
+
+			String content = getContent(
+				request, stringServerResponse.getString());
 
 			ServletResponseUtil.write(response, content);
 		}
