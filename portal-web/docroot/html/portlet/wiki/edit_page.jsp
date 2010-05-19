@@ -170,6 +170,8 @@ if (Validator.isNull(redirect)) {
 	<aui:input name="originalRedirect" type="hidden" value="<%= originalRedirect %>" />
 	<aui:input name="nodeId" type="hidden" value="<%= nodeId %>" />
 
+	<aui:model-context bean="<%= !newPage ? wikiPage : templatePage %>" model="<%= WikiPage.class %>" />
+
 	<c:if test="<%= (wikiPage != null) && (!wikiPage.isNew()) %>">
 		<aui:workflow-status status="<%= wikiPage.getStatus() %>" version="<%= wikiPage.getVersion() %>" />
 	</c:if>
@@ -213,8 +215,6 @@ if (Validator.isNull(redirect)) {
 
 	<c:choose>
 		<c:when test="<%= editable %>">
-			<aui:model-context bean="<%= !newPage ? wikiPage : templatePage %>" model="<%= WikiPage.class %>" />
-
 			<aui:fieldset>
 				<c:if test="<%= editTitle %>">
 					<aui:input name="title" size="30" value="<%= title %>" />
