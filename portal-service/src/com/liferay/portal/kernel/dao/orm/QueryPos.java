@@ -24,7 +24,7 @@ import java.util.Date;
  * <a href="QueryPos.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @auther Shuyang Zhou
+ * @author Shuyang Zhou
  */
 public class QueryPos {
 
