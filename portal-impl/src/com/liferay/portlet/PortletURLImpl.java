@@ -47,6 +47,7 @@ import com.liferay.portal.theme.PortletDisplay;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.CookieKeys;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.social.util.FacebookUtil;
@@ -658,9 +659,9 @@ public class PortletURLImpl
 			return;
 		}
 
-		if (portlet.getPortletId().equals(_portletId) &&
-			((_windowState == null) ||
-			 _windowState.equals(WindowState.NORMAL))) {
+		if (portlet.getPortletId().equals(_portletId) ||
+			 !_portlet.isAddDefaultResource() ||
+		     portlet.getPortletId().equals(PortletKeys.LAYOUT_CONFIGURATION)) {
 
 			return;
 		}
