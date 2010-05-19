@@ -31,8 +31,7 @@ import java.io.Serializable;
 import java.util.Map;
 
 /**
- * <a href="BlogsEntryWorkflowHandler.java.html"><b><i>View Source</i></b>
- * </a>
+ * <a href="BlogsEntryWorkflowHandler.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
  */

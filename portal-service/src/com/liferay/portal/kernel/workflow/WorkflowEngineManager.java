@@ -19,7 +19,6 @@ import com.liferay.portal.kernel.messaging.proxy.ProxyMode;
 
 import java.util.Map;
 
-@MessagingProxy(mode = ProxyMode.SYNC)
 /**
  * <a href="WorkflowEngineManager.java.html"><b><i>View Source</i></b></a>
  *
@@ -27,6 +26,7 @@ import java.util.Map;
  * @author Shuyang Zhou
  * @author Brian Wing Shun Chan
  */
+@MessagingProxy(mode = ProxyMode.SYNC)
 public interface WorkflowEngineManager {
 
 	public String getKey();

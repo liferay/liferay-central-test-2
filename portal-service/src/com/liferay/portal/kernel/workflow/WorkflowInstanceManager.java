@@ -23,7 +23,6 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
-@MessagingProxy(mode = ProxyMode.SYNC)
 /**
  * <a href="WorkflowInstanceManager.java.html"><b><i>View Source</i></b></a>
  *
@@ -31,6 +30,7 @@ import java.util.Map;
  * @author Shuyang Zhou
  * @author Brian Wing Shun Chan
  */
+@MessagingProxy(mode = ProxyMode.SYNC)
 public interface WorkflowInstanceManager {
 
 	public void deleteWorkflowInstance(long companyId, long workflowInstanceId)

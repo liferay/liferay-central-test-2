@@ -21,12 +21,12 @@ import java.io.Serializable;
 
 import java.util.Map;
 
-@MessagingProxy(mode = ProxyMode.ASYNC)
 /**
  * <a href="WorkflowStatusManager.java.html"><b><i>View Source</i></b></a>
  *
  * @author Bruno Farache
  */
+@MessagingProxy(mode = ProxyMode.ASYNC)
 public interface WorkflowStatusManager {
 
 	public void updateStatus(

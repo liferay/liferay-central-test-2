@@ -17,12 +17,12 @@ package com.liferay.portal.kernel.audit;
 import com.liferay.portal.kernel.messaging.proxy.MessagingProxy;
 import com.liferay.portal.kernel.messaging.proxy.ProxyMode;
 
-@MessagingProxy(mode = ProxyMode.ASYNC)
 /**
  * <a href="AuditRouter.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael C. Han
  */
+@MessagingProxy(mode = ProxyMode.ASYNC)
 public interface AuditRouter {
 
 	public void route(AuditMessage auditMessage) throws AuditException;

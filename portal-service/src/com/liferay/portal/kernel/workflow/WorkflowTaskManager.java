@@ -24,7 +24,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-@MessagingProxy(mode = ProxyMode.SYNC)
 /**
  * <a href="WorkflowTaskManager.java.html"><b><i>View Source</i></b></a>
  *
@@ -33,6 +32,7 @@ import java.util.Map;
  * @author Brian Wing Shun Chan
  * @author Marcellus Tavares
  */
+@MessagingProxy(mode = ProxyMode.SYNC)
 public interface WorkflowTaskManager {
 
 	public WorkflowTask assignWorkflowTaskToRole(

@@ -20,7 +20,7 @@ import java.util.Map;
  * <a href="LastPath.java.html"><b><i>View Source</i></b></a>
  *
  * @author	   Brian Wing Shun Chan
-  @deprecated {@link com.liferay.portal.kernel.struts.LastPath}
+ * @deprecated {@link com.liferay.portal.kernel.struts.LastPath}
  */
 public class LastPath extends com.liferay.portal.kernel.struts.LastPath {
 

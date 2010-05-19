@@ -22,8 +22,7 @@ import com.liferay.portlet.blogs.util.LinkbackConsumerUtil;
 import com.liferay.portlet.blogs.util.LinkbackProducerUtil;
 
 /**
- * <a href="LinkbackMessageListener.java.html"><b><i>View Source</i>
- * </b></a>
+ * <a href="LinkbackMessageListener.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alexander Chow
  * @author Tina Tian

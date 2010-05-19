@@ -19,12 +19,12 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.METHOD)
 /**
  * <a href="AutoEscape.java.html"><b><i>View Source</i></b></a>
  *
  * @author Shuyang Zhou
  */
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
 public @interface AutoEscape {
 }

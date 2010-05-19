@@ -22,7 +22,6 @@ import java.io.InputStream;
 
 import java.util.List;
 
-@MessagingProxy(mode = ProxyMode.SYNC)
 /**
  * <a href="WorkflowDefinitionManager.java.html"><b><i>View Source</i></b></a>
  *
@@ -31,6 +30,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  * @author Marcellus Tavares
  */
+@MessagingProxy(mode = ProxyMode.SYNC)
 public interface WorkflowDefinitionManager {
 
 	public WorkflowDefinition deployWorkflowDefinition(

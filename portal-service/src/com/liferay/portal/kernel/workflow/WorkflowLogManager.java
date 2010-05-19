@@ -20,7 +20,6 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 
 import java.util.List;
 
-@MessagingProxy(mode = ProxyMode.SYNC)
 /**
  * <a href="WorkflowLogManager.java.html"><b><i>View Source</i></b></a>
  *
@@ -28,6 +27,7 @@ import java.util.List;
  * @author Shuyang Zhou
  * @author Brian Wing Shun Chan
  */
+@MessagingProxy(mode = ProxyMode.SYNC)
 public interface WorkflowLogManager {
 
 	public List<WorkflowLog> getWorkflowLogs(

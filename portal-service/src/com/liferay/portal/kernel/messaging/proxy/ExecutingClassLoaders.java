@@ -21,14 +21,14 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Documented
-@Inherited
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.PARAMETER)
 /**
  * <a href="ExecutingClassLoaders.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael C. Han
  */
+@Documented
+@Inherited
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.PARAMETER)
 public @interface ExecutingClassLoaders {
 }

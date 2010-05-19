@@ -25,13 +25,13 @@ import javax.portlet.PortletContext;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
 
-@MessagingProxy(mode = ProxyMode.SYNC)
 /**
  * <a href="Scripting.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alberto Montero
  * @author Brian Wing Shun Chan
  */
+@MessagingProxy(mode = ProxyMode.SYNC)
 public interface Scripting {
 
 	public void addScriptionExecutor(

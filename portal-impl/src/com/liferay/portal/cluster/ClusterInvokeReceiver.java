@@ -36,8 +36,7 @@ import org.jgroups.ReceiverAdapter;
 import org.jgroups.View;
 
 /**
- * <a href="ClusterInvokeReceiver.java.html"><b><i>View Source</i>
- * </b></a>
+ * <a href="ClusterInvokeReceiver.java.html"><b><i>View Source</i></b></a>
  *
  * @author Shuyang Zhou
  * @author Tina Tian

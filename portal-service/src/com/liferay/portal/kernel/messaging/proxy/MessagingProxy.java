@@ -19,14 +19,14 @@ import java.lang.annotation.Inherited;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-@Documented
-@Inherited
-@Retention(RetentionPolicy.RUNTIME)
 /**
  * <a href="MessagingProxy.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael C. Han
  */
+@Documented
+@Inherited
+@Retention(RetentionPolicy.RUNTIME)
 public @interface MessagingProxy {
 
 	ProxyMode mode();

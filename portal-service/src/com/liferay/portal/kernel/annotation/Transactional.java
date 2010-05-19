@@ -21,15 +21,15 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Documented
-@Inherited
-@Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.METHOD, ElementType.TYPE})
 /**
  * <a href="Transactional.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
+@Documented
+@Inherited
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ElementType.METHOD, ElementType.TYPE})
 public @interface Transactional {
 
 	public Isolation isolation() default Isolation.DEFAULT;

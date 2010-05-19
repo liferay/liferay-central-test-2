@@ -22,14 +22,14 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Documented
-@Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.FIELD, ElementType.METHOD})
 /**
  * <a href="BeanReference.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
+@Documented
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ElementType.FIELD, ElementType.METHOD})
 public @interface BeanReference {
 
 	public String name() default StringPool.BLANK;

@@ -17,7 +17,7 @@ package com.liferay.util;
 /**
  * <a href="License.java.html"><b><i>View Source</i></b></a>
  *
- * @author Jorge Ferrer
+ * @author	   Jorge Ferrer
  * @deprecated {@link com.liferay.portal.kernel.plugin.License}
  */
 public class License extends com.liferay.portal.kernel.plugin.License {
