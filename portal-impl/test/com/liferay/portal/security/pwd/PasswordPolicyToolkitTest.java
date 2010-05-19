@@ -45,7 +45,8 @@ public class PasswordPolicyToolkitTest extends TestCase {
 		String password = _passwordPolicyToolkit.generate(_passwordPolicy);
 
 		try {
-			_passwordPolicyToolkit.validate(password, password, _passwordPolicy);
+			_passwordPolicyToolkit.validate(
+				password, password, _passwordPolicy);
 		}
 		catch (Exception e) {
 			fail("Generated password does not validate against policy");
@@ -82,7 +83,8 @@ public class PasswordPolicyToolkitTest extends TestCase {
 
 	protected boolean validate(String password) {
 		try {
-			_passwordPolicyToolkit.validate(password, password, _passwordPolicy);
+			_passwordPolicyToolkit.validate(
+				password, password, _passwordPolicy);
 		}
 		catch (Exception e) {
 			return false;
