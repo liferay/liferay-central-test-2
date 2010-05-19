@@ -83,14 +83,14 @@ public class AssetEntryServiceWrapper implements AssetEntryService {
 		return _assetEntryService.getEntriesCount(entryQuery);
 	}
 
-	public java.lang.String getEntriesRSS(
+	public java.lang.String getEntriesRSS(java.lang.String name,
 		com.liferay.portlet.asset.service.persistence.AssetEntryQuery entryQuery,
 		java.lang.String type, double version, java.lang.String displayStyle,
 		java.lang.String feedURL, java.lang.String tagURL)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _assetEntryService.getEntriesRSS(entryQuery, type, version,
-			displayStyle, feedURL, tagURL);
+		return _assetEntryService.getEntriesRSS(name, entryQuery, type,
+			version, displayStyle, feedURL, tagURL);
 	}
 
 	public com.liferay.portlet.asset.model.AssetEntry getEntry(long entryId)

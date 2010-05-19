@@ -360,50 +360,57 @@ public class AssetEntryServiceHttp {
 	}
 
 	public static java.lang.String getEntriesRSS(HttpPrincipal httpPrincipal,
+		java.lang.String name,
 		com.liferay.portlet.asset.service.persistence.AssetEntryQuery entryQuery,
 		java.lang.String type, double version, java.lang.String displayStyle,
 		java.lang.String feedURL, java.lang.String tagURL)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = entryQuery;
+			Object paramObj0 = name;
+
+			if (name == null) {
+				paramObj0 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj1 = entryQuery;
 
 			if (entryQuery == null) {
-				paramObj0 = new NullWrapper(
+				paramObj1 = new NullWrapper(
 						"com.liferay.portlet.asset.service.persistence.AssetEntryQuery");
 			}
 
-			Object paramObj1 = type;
+			Object paramObj2 = type;
 
 			if (type == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
+				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj2 = new DoubleWrapper(version);
+			Object paramObj3 = new DoubleWrapper(version);
 
-			Object paramObj3 = displayStyle;
+			Object paramObj4 = displayStyle;
 
 			if (displayStyle == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj4 = feedURL;
-
-			if (feedURL == null) {
 				paramObj4 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj5 = tagURL;
+			Object paramObj5 = feedURL;
+
+			if (feedURL == null) {
+				paramObj5 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj6 = tagURL;
 
 			if (tagURL == null) {
-				paramObj5 = new NullWrapper("java.lang.String");
+				paramObj6 = new NullWrapper("java.lang.String");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(AssetEntryServiceUtil.class.getName(),
 					"getEntriesRSS",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5
+						paramObj5, paramObj6
 					});
 
 			Object returnObj = null;

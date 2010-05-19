@@ -176,14 +176,14 @@ public class AssetEntryServiceSoap {
 		}
 	}
 
-	public static java.lang.String getEntriesRSS(
+	public static java.lang.String getEntriesRSS(java.lang.String name,
 		com.liferay.portlet.asset.service.persistence.AssetEntryQuery entryQuery,
 		java.lang.String type, double version, java.lang.String displayStyle,
 		java.lang.String feedURL, java.lang.String tagURL)
 		throws RemoteException {
 		try {
-			java.lang.String returnValue = AssetEntryServiceUtil.getEntriesRSS(entryQuery,
-					type, version, displayStyle, feedURL, tagURL);
+			java.lang.String returnValue = AssetEntryServiceUtil.getEntriesRSS(name,
+					entryQuery, type, version, displayStyle, feedURL, tagURL);
 
 			return returnValue;
 		}

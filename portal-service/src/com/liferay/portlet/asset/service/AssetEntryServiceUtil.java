@@ -86,15 +86,15 @@ public class AssetEntryServiceUtil {
 		return getService().getEntriesCount(entryQuery);
 	}
 
-	public static java.lang.String getEntriesRSS(
+	public static java.lang.String getEntriesRSS(java.lang.String name,
 		com.liferay.portlet.asset.service.persistence.AssetEntryQuery entryQuery,
 		java.lang.String type, double version, java.lang.String displayStyle,
 		java.lang.String feedURL, java.lang.String tagURL)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .getEntriesRSS(entryQuery, type, version, displayStyle,
-			feedURL, tagURL);
+				   .getEntriesRSS(name, entryQuery, type, version,
+			displayStyle, feedURL, tagURL);
 	}
 
 	public static com.liferay.portlet.asset.model.AssetEntry getEntry(
