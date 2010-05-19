@@ -48,7 +48,7 @@ public class PasswordPolicyLocalServiceImpl
 			long userId, boolean defaultPolicy, String name, String description,
 			boolean changeable, boolean changeRequired, long minAge,
 			boolean checkSyntax, boolean allowDictionaryWords,
-			int minAlphaNumeric, int minLength, int minLowerCase,
+			int minAlphanumeric, int minLength, int minLowerCase,
 			int minNumbers, int minSymbols, int minUpperCase, boolean history,
 			int historyCount, boolean expireable, long maxAge, long warningTime,
 			int graceLimit, boolean lockout, int maxFailure,
@@ -81,7 +81,7 @@ public class PasswordPolicyLocalServiceImpl
 		passwordPolicy.setMinAge(minAge);
 		passwordPolicy.setCheckSyntax(checkSyntax);
 		passwordPolicy.setAllowDictionaryWords(allowDictionaryWords);
-		passwordPolicy.setMinAlphaNumeric(minAlphaNumeric);
+		passwordPolicy.setMinAlphanumeric(minAlphanumeric);
 		passwordPolicy.setMinLength(minLength);
 		passwordPolicy.setMinLowerCase(minLowerCase);
 		passwordPolicy.setMinNumbers(minNumbers);
@@ -267,7 +267,7 @@ public class PasswordPolicyLocalServiceImpl
 			long passwordPolicyId, String name, String description,
 			boolean changeable, boolean changeRequired, long minAge,
 			boolean checkSyntax, boolean allowDictionaryWords,
-			int minAlphaNumeric, int minLength, int minLowerCase,
+			int minAlphanumeric, int minLength, int minLowerCase,
 			int minNumbers, int minSymbols, int minUpperCase, boolean history,
 			int historyCount, boolean expireable, long maxAge,
 			long warningTime, int graceLimit, boolean lockout, int maxFailure,
@@ -294,7 +294,7 @@ public class PasswordPolicyLocalServiceImpl
 		passwordPolicy.setMinAge(minAge);
 		passwordPolicy.setCheckSyntax(checkSyntax);
 		passwordPolicy.setAllowDictionaryWords(allowDictionaryWords);
-		passwordPolicy.setMinAlphaNumeric(minAlphaNumeric);
+		passwordPolicy.setMinAlphanumeric(minAlphanumeric);
 		passwordPolicy.setMinLength(minLength);
 		passwordPolicy.setMinLowerCase(minLowerCase);
 		passwordPolicy.setMinNumbers(minNumbers);

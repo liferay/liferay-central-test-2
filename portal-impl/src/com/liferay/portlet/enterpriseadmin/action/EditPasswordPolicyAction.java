@@ -133,8 +133,8 @@ public class EditPasswordPolicyAction extends PortletAction {
 			actionRequest, "checkSyntax");
 		boolean allowDictionaryWords = ParamUtil.getBoolean(
 			actionRequest, "allowDictionaryWords");
-		int minAlphaNumeric = ParamUtil.getInteger(
-			actionRequest, "minAlphaNumeric");
+		int minAlphanumeric = ParamUtil.getInteger(
+			actionRequest, "minAlphanumeric");
 		int minLength = ParamUtil.getInteger(actionRequest, "minLength");
 		int minLowerCase = ParamUtil.getInteger(actionRequest, "minLowerCase");
 		int minNumbers = ParamUtil.getInteger(actionRequest, "minNumbers");
@@ -161,7 +161,7 @@ public class EditPasswordPolicyAction extends PortletAction {
 
 			PasswordPolicyServiceUtil.addPasswordPolicy(
 				name, description, changeable, changeRequired, minAge,
-				checkSyntax, allowDictionaryWords, minAlphaNumeric, minLength,
+				checkSyntax, allowDictionaryWords, minAlphanumeric, minLength,
 				minLowerCase, minNumbers, minSymbols, minUpperCase, history,
 				historyCount, expireable, maxAge, warningTime, graceLimit,
 				lockout, maxFailure, lockoutDuration, resetFailureCount,
@@ -173,7 +173,7 @@ public class EditPasswordPolicyAction extends PortletAction {
 
 			PasswordPolicyServiceUtil.updatePasswordPolicy(
 				passwordPolicyId, name, description, changeable, changeRequired,
-				minAge, checkSyntax, allowDictionaryWords, minAlphaNumeric,
+				minAge, checkSyntax, allowDictionaryWords, minAlphanumeric,
 				minLength, minLowerCase, minNumbers, minSymbols, minUpperCase,
 				history, historyCount, expireable, maxAge, warningTime,
 				graceLimit, lockout, maxFailure, lockoutDuration,

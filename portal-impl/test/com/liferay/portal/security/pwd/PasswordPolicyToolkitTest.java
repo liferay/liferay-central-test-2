@@ -1,20 +1,39 @@
+/**
+ * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
+ *
+ * This library is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU Lesser General Public License as published by the Free
+ * Software Foundation; either version 2.1 of the License, or (at your option)
+ * any later version.
+ *
+ * This library is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+ * details.
+ */
+
 package com.liferay.portal.security.pwd;
 
 import com.liferay.portal.kernel.test.TestCase;
 import com.liferay.portal.model.PasswordPolicy;
 import com.liferay.portal.model.impl.PasswordPolicyImpl;
 
-
+/**
+ * <a href="PasswordPolicyToolkitTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Mika Koivisto
+ */
 public class PasswordPolicyToolkitTest extends TestCase {
 
-	public PasswordPolicyToolkitTest() {
-		_toolkit = new PasswordPolicyToolkit();
+	public void setUp() {
+		_passwordPolicyToolkit = new PasswordPolicyToolkit();
+
 		_passwordPolicy = new PasswordPolicyImpl();
 
 		_passwordPolicy.setAllowDictionaryWords(true);
 		_passwordPolicy.setChangeable(true);
 		_passwordPolicy.setCheckSyntax(true);
-		_passwordPolicy.setMinAlphaNumeric(5);
+		_passwordPolicy.setMinAlphanumeric(5);
 		_passwordPolicy.setMinLength(8);
 		_passwordPolicy.setMinLowerCase(2);
 		_passwordPolicy.setMinUpperCase(2);
@@ -23,62 +42,47 @@ public class PasswordPolicyToolkitTest extends TestCase {
 	}
 
 	public void testGeneratePassword() {
-
-		String password = _toolkit.generate(_passwordPolicy);
+		String password = _passwordPolicyToolkit.generate(_passwordPolicy);
 
 		try {
-			_toolkit.validate(password, password, _passwordPolicy);
+			_passwordPolicyToolkit.validate(password, password, _passwordPolicy);
 		}
 		catch (Exception e) {
-			fail("Generated password did not validate agains policy");
+			fail("Generated password does not validate against policy");
 		}
 	}
 
 	public void testValidateLength() {
-		String password = "xH9fxM@";
-
-		assertEquals(false, validate(password));
+		assertEquals(false, validate("xH9fxM@"));
 	}
 
-	public void testValidateMinAlphaNumeric() {
-		String password = "xH9f.,@-";
-
-		assertEquals(false, validate(password));
+	public void testValidateMinAlphanumeric() {
+		assertEquals(false, validate("xH9f.,@-"));
 	}
 
 	public void testValidateMinLowerChars() {
-		String password = "xHFXM@W";
-
-		assertEquals(false, validate(password));
+		assertEquals(false, validate("xHFXM@W"));
 	}
 
 	public void testValidateMinNumbers() {
-		String password = "xHafxMkw";
-
-		assertEquals(false, validate(password));
+		assertEquals(false, validate("xHafxMkw"));
 	}
 
 	public void testValidateMinSpecial() {
-		String password = "xH9fxMkw";
-
-		assertEquals(false, validate(password));
+		assertEquals(false, validate("xH9fxMkw"));
 	}
 
 	public void testValidateMinUpperChars() {
-		String password = "xh9fxM@w";
-
-		assertEquals(false, validate(password));
+		assertEquals(false, validate("xh9fxM@w"));
 	}
 
 	public void testValidateValid() {
-		String password = "xH9fxM@w";
-
-		assertEquals(true, validate(password));
+		assertEquals(true, validate("xH9fxM@w"));
 	}
 
 	protected boolean validate(String password) {
 		try {
-			_toolkit.validate(password, password, _passwordPolicy);
+			_passwordPolicyToolkit.validate(password, password, _passwordPolicy);
 		}
 		catch (Exception e) {
 			return false;
@@ -88,6 +92,6 @@ public class PasswordPolicyToolkitTest extends TestCase {
 	}
 
 	private PasswordPolicy _passwordPolicy;
-	private PasswordPolicyToolkit _toolkit;
+	private PasswordPolicyToolkit _passwordPolicyToolkit;
 
 }
