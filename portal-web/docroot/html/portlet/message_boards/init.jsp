@@ -107,21 +107,8 @@ boolean allowAnonymousPosting = MBUtil.isAllowAnonymousPosting(preferences);
 boolean enableFlags = GetterUtil.getBoolean(preferences.getValue("enable-flags", null), true);
 boolean enableRatings = GetterUtil.getBoolean(preferences.getValue("enable-message-ratings", null), true);
 
-String rssFormatType = RSSUtil.DEFAULT_TYPE;
-double rssFormatVersion = RSSUtil.DEFAULT_VERSION;
-
-if (rssFormat.equals("rss10")) {
-	rssFormatType = RSSUtil.RSS;
-	rssFormatVersion = 1.0;
-}
-else if (rssFormat.equals("rss20")) {
-	rssFormatType = RSSUtil.RSS;
-	rssFormatVersion = 2.0;
-}
-else if (rssFormat.equals("atom10")) {
-	rssFormatType = RSSUtil.ATOM;
-	rssFormatVersion = 1.0;
-}
+String rssFormatType = RSSUtil.getFormatType(rssFormat);
+double rssFormatVersion = RSSUtil.getFormatVersion(rssFormat);
 
 StringBundler rssURLParams = new StringBundler();
 

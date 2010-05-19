@@ -69,21 +69,8 @@ int rssDelta = GetterUtil.getInteger(preferences.getValue("rss-delta", StringPoo
 String rssDisplayStyle = preferences.getValue("rss-display-style", RSSUtil.DISPLAY_STYLE_FULL_CONTENT);
 String rssFormat = preferences.getValue("rss-format", "atom10");
 
-String rssFormatType = RSSUtil.DEFAULT_TYPE;
-double rssFormatVersion = RSSUtil.DEFAULT_VERSION;
-
-if (rssFormat.equals("rss10")) {
-	rssFormatType = RSSUtil.RSS;
-	rssFormatVersion = 1.0;
-}
-else if (rssFormat.equals("rss20")) {
-	rssFormatType = RSSUtil.RSS;
-	rssFormatVersion = 2.0;
-}
-else if (rssFormat.equals("atom10")) {
-	rssFormatType = RSSUtil.ATOM;
-	rssFormatVersion = 1.0;
-}
+String rssFormatType = RSSUtil.getFormatType(rssFormat);
+double rssFormatVersion = RSSUtil.getFormatVersion(rssFormat);
 
 StringBuilder rssURLParams = new StringBuilder();
 

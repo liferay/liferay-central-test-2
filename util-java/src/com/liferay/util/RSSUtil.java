@@ -16,6 +16,7 @@ package com.liferay.util;
 
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 
 import com.sun.syndication.feed.synd.SyndContent;
 import com.sun.syndication.feed.synd.SyndEntry;
@@ -79,6 +80,32 @@ public class RSSUtil {
 
 	public static String getFeedType(String type, double version) {
 		return type + StringPool.UNDERLINE + version;
+	}
+
+	public static String getFormatType(String format) {
+		String formatType = DEFAULT_TYPE;
+
+		if (StringUtil.contains(format, RSS)) {
+			formatType = RSSUtil.RSS;
+		}
+		else if (StringUtil.contains(format, ATOM)) {
+			formatType = RSSUtil.ATOM;
+		}
+
+		return formatType;
+	}
+
+	public static double getFormatVersion(String format) {
+		double formatVersion = DEFAULT_VERSION;
+
+		if (StringUtil.contains(format, "10")) {
+			formatVersion = 1.0;
+		}
+		else if (StringUtil.contains(format, "20")) {
+			formatVersion = 2.0;
+		}
+
+		return formatVersion;
 	}
 
 	private static void _regexpStrip(SyndFeed feed) {
