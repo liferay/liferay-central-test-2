@@ -51,6 +51,11 @@ public class AssetRendererFactoryRegistryUtil {
 		return _assetRendererFactoryRegistry;
 	}
 
+	public static long[] getClassNameIds() {
+		return getAssetRendererFactoryRegistry().
+			getClassNameIds();
+	}
+
 	public static void register(AssetRendererFactory assetRendererFactory) {
 		getAssetRendererFactoryRegistry().register(assetRendererFactory);
 	}

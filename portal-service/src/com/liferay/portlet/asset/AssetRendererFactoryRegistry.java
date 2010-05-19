@@ -34,6 +34,8 @@ public interface AssetRendererFactoryRegistry {
 
 	public AssetRendererFactory getAssetRendererFactoryByType(String type);
 
+	public long[] getClassNameIds();
+
 	public void register(AssetRendererFactory assetRendererFactory);
 
 	public void unregister(AssetRendererFactory assetRendererFactory);

@@ -46,6 +46,22 @@ public class AssetRendererFactoryRegistryImpl
 		return ListUtil.fromCollection(_factoriesMapByClassName.values());
 	}
 
+	public long[] getClassNameIds() {
+		long[] classNameIds = new long[_factoriesMapByClassName.size()];
+
+		int i = 0;
+
+		for (AssetRendererFactory assetRendererFactory :
+			_factoriesMapByClassName.values()) {
+
+			classNameIds[i] = assetRendererFactory.getClassNameId();
+
+			i++;
+		}
+
+		return classNameIds;
+	}
+
 	public void register(AssetRendererFactory assetRendererFactory) {
 		_factoriesMapByClassName.put(
 			assetRendererFactory.getClassName(), assetRendererFactory);
