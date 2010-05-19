@@ -124,7 +124,7 @@ if (image != null) {
 	</aui:field-wrapper>
 
 	<aui:fieldset>
-		<c:if test="<%= ((image != null) || (folderId <= 0)) %>">
+		<c:if test="<%= ((image != null) || (folderId <= 0) || Validator.isNotNull(referringPortletResource)) %>">
 			<aui:field-wrapper label="folder">
 					<%
 					String folderName = StringPool.BLANK;

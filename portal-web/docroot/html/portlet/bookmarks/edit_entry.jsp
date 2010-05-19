@@ -63,7 +63,7 @@ long folderId = BeanParamUtil.getLong(entry, request, "folderId");
 	<aui:model-context bean="<%= entry %>" model="<%= BookmarksEntry.class %>" />
 
 	<aui:fieldset>
-		<c:if test="<%= ((entry != null) || (folderId <= 0)) %>">
+		<c:if test="<%= ((entry != null) || (folderId <= 0) || Validator.isNotNull(referringPortletResource)) %>">
 			<aui:field-wrapper label="folder">
 
 					<%
