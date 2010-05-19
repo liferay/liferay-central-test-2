@@ -1064,7 +1064,6 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 				Query q = session.createQuery(sql);
 
 				q.setFirstResult(0);
-
 				q.setMaxResults(2);
 
 				QueryPos qPos = QueryPos.getInstance(q);
