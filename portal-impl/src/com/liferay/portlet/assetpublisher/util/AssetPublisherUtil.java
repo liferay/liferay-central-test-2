@@ -265,7 +265,7 @@ public class AssetPublisherUtil {
 		return assetEntryQuery;
 	}
 
-	public String[] getAssetTagNames(
+	public static String[] getAssetTagNames(
 			PortletPreferences preferences, long scopeGroupId)
 		throws Exception {
 

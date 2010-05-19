@@ -167,24 +167,26 @@ AssetRendererFactory rendererFactory = AssetRendererFactoryRegistryUtil.getAsset
 
 							<%= selectAssetTypeInput %>
 
-							<%@ include file="/html/portlet/asset_publisher/add_asset.jspf" %>
+							<div class="add-asset-selector">
+								<%@ include file="/html/portlet/asset_publisher/add_asset.jspf" %>
 
-							<liferay-ui:icon-menu align="left" cssClass="select-existing-selector" icon='<%= themeDisplay.getPathThemeImages() + "/common/search.png" %>' message="select-existing" showWhenSingleIcon="<%= true %>">
-
-								<%
-								for (AssetRendererFactory curRendererFactory : AssetRendererFactoryRegistryUtil.getAssetRendererFactories()) {
-									if (curRendererFactory.isSelectable()) {
-										String taglibURL = "javascript:" + renderResponse.getNamespace() + "selectionForType('" + curRendererFactory.getClassName() + "')";
-									%>
-
-										<liferay-ui:icon message='<%= "model.resource." + curRendererFactory.getClassName() %>' src="<%= curRendererFactory.getIconPath(renderRequest) %>" url="<%= taglibURL %>" />
+								<liferay-ui:icon-menu align="left" cssClass="select-existing-selector" icon='<%= themeDisplay.getPathThemeImages() + "/common/search.png" %>' message="select-existing" showWhenSingleIcon="<%= true %>">
 
 									<%
-									}
-								}
-								%>
+									for (AssetRendererFactory curRendererFactory : AssetRendererFactoryRegistryUtil.getAssetRendererFactories()) {
+										if (curRendererFactory.isSelectable()) {
+											String taglibURL = "javascript:" + renderResponse.getNamespace() + "selectionForType('" + curRendererFactory.getClassName() + "')";
+										%>
 
-							</liferay-ui:icon-menu>
+											<liferay-ui:icon message='<%= "model.resource." + curRendererFactory.getClassName() %>' src="<%= curRendererFactory.getIconPath(renderRequest) %>" url="<%= taglibURL %>" />
+
+										<%
+										}
+									}
+									%>
+
+								</liferay-ui:icon-menu>
+							</div>
 
 							<%
 							List<Long> deletedAssets = new ArrayList<Long>();
