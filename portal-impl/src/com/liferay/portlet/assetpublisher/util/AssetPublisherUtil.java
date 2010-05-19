@@ -21,16 +21,21 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
+import com.liferay.portal.model.Layout;
+import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.asset.model.AssetEntry;
 import com.liferay.portlet.asset.service.AssetEntryLocalServiceUtil;
+import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
+import com.liferay.portlet.asset.service.persistence.AssetEntryQuery;
 
 import java.io.IOException;
 
@@ -174,6 +179,190 @@ public class AssetPublisherUtil {
 		if (getRecentFolderId(portletRequest, className) == classPK) {
 			_getRecentFolderIds(portletRequest).remove(className);
 		}
+	}
+
+	public static AssetEntryQuery getAssetEntryQuery(
+			PortletPreferences preferences, long scopeGroupId)
+		throws Exception {
+
+		AssetEntryQuery assetEntryQuery = new AssetEntryQuery();
+
+		long[] allAssetCategoryIds = new long[0];
+		long[] anyAssetCategoryIds = new long[0];
+		long[] notAllAssetCategoryIds = new long[0];
+		long[] notAnyAssetCategoryIds = new long[0];
+
+		String[] allAssetTagNames = new String[0];
+		String[] anyAssetTagNames = new String[0];
+		String[] notAllAssetTagNames = new String[0];
+		String[] notAnyAssetTagNames = new String[0];
+
+		for (int i = 0; true; i++) {
+			String[] queryValues = preferences.getValues(
+				"queryValues" + i, null);
+
+			if ((queryValues == null) || (queryValues.length == 0)) {
+				break;
+			}
+
+			boolean queryContains = GetterUtil.getBoolean(
+				preferences.getValue("queryContains" + i, StringPool.BLANK));
+			boolean queryAndOperator = GetterUtil.getBoolean(
+				preferences.getValue("queryAndOperator" + i, StringPool.BLANK));
+			String queryName = preferences.getValue(
+				"queryName" + i, StringPool.BLANK);
+
+			if (Validator.equals(queryName, "assetCategories")) {
+				long[] assetCategoryIds = GetterUtil.getLongValues(queryValues);
+
+				if (queryContains && queryAndOperator) {
+					allAssetCategoryIds = assetCategoryIds;
+				}
+				else if (queryContains && !queryAndOperator) {
+					anyAssetCategoryIds = assetCategoryIds;
+				}
+				else if (!queryContains && queryAndOperator) {
+					notAllAssetCategoryIds = assetCategoryIds;
+				}
+				else {
+					notAnyAssetCategoryIds = assetCategoryIds;
+				}
+			}
+			else {
+				if (queryContains && queryAndOperator) {
+					allAssetTagNames = queryValues;
+				}
+				else if (queryContains && !queryAndOperator) {
+					anyAssetTagNames = queryValues;
+				}
+				else if (!queryContains && queryAndOperator) {
+					notAllAssetTagNames = queryValues;
+				}
+				else {
+					notAnyAssetTagNames = queryValues;
+				}
+			}
+		}
+
+		long[] allAssetTagIds = AssetTagLocalServiceUtil.getTagIds(
+			scopeGroupId, allAssetTagNames);
+		long[] anyAssetTagIds = AssetTagLocalServiceUtil.getTagIds(
+			scopeGroupId, anyAssetTagNames);
+		long[] notAllAssetTagIds = AssetTagLocalServiceUtil.getTagIds(
+			scopeGroupId, notAllAssetTagNames);
+		long[] notAnyAssetTagIds = AssetTagLocalServiceUtil.getTagIds(
+			scopeGroupId, notAnyAssetTagNames);
+
+		assetEntryQuery.setAllCategoryIds(allAssetCategoryIds);
+		assetEntryQuery.setAllTagIds(allAssetTagIds);
+		assetEntryQuery.setAnyCategoryIds(anyAssetCategoryIds);
+		assetEntryQuery.setAnyTagIds(anyAssetTagIds);
+		assetEntryQuery.setNotAllCategoryIds(notAllAssetCategoryIds);
+		assetEntryQuery.setNotAllTagIds(notAllAssetTagIds);
+		assetEntryQuery.setNotAnyCategoryIds(notAnyAssetCategoryIds);
+		assetEntryQuery.setNotAnyTagIds(notAnyAssetTagIds);
+
+		return assetEntryQuery;
+	}
+
+	public String[] getAssetTagNames(
+			PortletPreferences preferences, long scopeGroupId)
+		throws Exception {
+
+		String[] allAssetTagNames = new String[0];
+
+		for (int i = 0; true; i++) {
+			String[] queryValues = preferences.getValues(
+				"queryValues" + i, null);
+
+			if ((queryValues == null) || (queryValues.length == 0)) {
+				break;
+			}
+
+			boolean queryContains = GetterUtil.getBoolean(
+				preferences.getValue("queryContains" + i, StringPool.BLANK));
+			boolean queryAndOperator = GetterUtil.getBoolean(
+				preferences.getValue("queryAndOperator" + i, StringPool.BLANK));
+			String queryName = preferences.getValue(
+				"queryName" + i, StringPool.BLANK);
+
+			if (!Validator.equals(queryName, "assetCategories") &&
+				queryContains && queryAndOperator) {
+
+				allAssetTagNames = queryValues;
+			}
+		}
+
+		return allAssetTagNames;
+	}
+
+	public static long[] getClassNameIds(
+		PortletPreferences preferences, long[] availableClassNameIds) {
+
+		boolean anyAssetType = GetterUtil.getBoolean(
+			preferences.getValue("any-asset-type", Boolean.TRUE.toString()));
+
+		long[] classNameIds = null;
+
+		if (!anyAssetType &&
+			(preferences.getValues("class-name-ids", null) != null)) {
+
+			classNameIds = GetterUtil.getLongValues(
+				preferences.getValues("class-name-ids", null));
+		}
+		else {
+			classNameIds = availableClassNameIds;
+		}
+
+		return classNameIds;
+	}
+
+	public static long[] getGroupIdsFromPreferences(
+		PortletPreferences preferences, long scopeGroupId, Layout layout) {
+
+		long[] groupIds = new long[] {scopeGroupId};
+
+		boolean defaultScope = GetterUtil.getBoolean(
+			preferences.getValue("default-scope", null), true);
+
+		if (!defaultScope) {
+			String[] scopeIds = preferences.getValues(
+				"scope-ids", new String[]
+					{"group" + StringPool.UNDERLINE + scopeGroupId});
+
+			groupIds = new long[scopeIds.length];
+
+			for (int i = 0; i < scopeIds.length; i++) {
+				try {
+					String[] scopeIdFragments = StringUtil.split(
+						scopeIds[i], StringPool.UNDERLINE);
+
+					if (scopeIdFragments[0].equals("Layout")) {
+						long scopeIdLayoutId =
+							GetterUtil.getLong(scopeIdFragments[1]);
+
+						Layout scopeIdLayout =
+							LayoutLocalServiceUtil.getLayout(
+								scopeGroupId, layout.isPrivateLayout(),
+								scopeIdLayoutId);
+
+						groupIds[i] =
+							scopeIdLayout.getScopeGroup().getGroupId();
+					}
+					else {
+						long scopeIdGroupId = GetterUtil.getLong(
+							scopeIdFragments[1]);
+
+						groupIds[i] = scopeIdGroupId;
+					}
+				}
+				catch(Exception e) {
+					continue;
+				}
+			}
+		}
+
+		return groupIds;
 	}
 
 	private static String _getAssetEntryXml(

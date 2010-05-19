@@ -15,24 +15,9 @@
 %>
 
 <%
-long[] allAssetTagIds = AssetTagLocalServiceUtil.getTagIds(scopeGroupId, allAssetTagNames);
-long[] anyAssetTagIds = AssetTagLocalServiceUtil.getTagIds(scopeGroupId, anyAssetTagNames);
-long[] notAllAssetTagIds = AssetTagLocalServiceUtil.getTagIds(scopeGroupId, notAllAssetTagNames);
-long[] notAnyAssetTagIds = AssetTagLocalServiceUtil.getTagIds(scopeGroupId, notAnyAssetTagNames);
-
-AssetEntryQuery assetEntryQuery = new AssetEntryQuery();
-
-assetEntryQuery.setAllCategoryIds(allAssetCategoryIds);
-assetEntryQuery.setAllTagIds(allAssetTagIds);
-assetEntryQuery.setAnyCategoryIds(anyAssetCategoryIds);
-assetEntryQuery.setAnyTagIds(anyAssetTagIds);
 assetEntryQuery.setGroupIds(groupIds);
 assetEntryQuery.setEnd(searchContainer.getEnd());
 assetEntryQuery.setExcludeZeroViewCount(excludeZeroViewCount);
-assetEntryQuery.setNotAllCategoryIds(notAllAssetCategoryIds);
-assetEntryQuery.setNotAllTagIds(notAllAssetTagIds);
-assetEntryQuery.setNotAnyCategoryIds(notAnyAssetCategoryIds);
-assetEntryQuery.setNotAnyTagIds(notAnyAssetTagIds);
 assetEntryQuery.setOrderByCol1(orderByColumn1);
 assetEntryQuery.setOrderByCol2(orderByColumn2);
 assetEntryQuery.setOrderByType1(orderByType1);
@@ -47,7 +32,7 @@ if (assetVocabularyId > 0) {
 	List<AssetCategory> assetCategories = AssetCategoryLocalServiceUtil.getVocabularyRootCategories(assetVocabulary.getVocabularyId(), QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 
 	for (AssetCategory assetCategory : assetCategories) {
-		long[] newAllAssetCategoryIds = ArrayUtil.append(allAssetCategoryIds, assetCategory.getCategoryId());
+		long[] newAllAssetCategoryIds = ArrayUtil.append(assetEntryQuery.getAllCategoryIds(), assetCategory.getCategoryId());
 
 		assetEntryQuery.setAllCategoryIds(newAllAssetCategoryIds);
 

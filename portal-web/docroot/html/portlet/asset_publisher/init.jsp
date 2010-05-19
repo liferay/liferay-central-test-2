@@ -134,102 +134,22 @@ if (Validator.isNull(selectionStyle)) {
 
 boolean defaultScope = GetterUtil.getBoolean(preferences.getValue("default-scope", null), true);
 
-long[] groupIds = new long[] {scopeGroupId};
+long[] groupIds = AssetPublisherUtil.getGroupIdsFromPreferences(preferences, scopeGroupId, layout);
 
-if (!defaultScope) {
-	String[] scopeIds = preferences.getValues("scope-ids", new String[] {"group" + StringPool.UNDERLINE + scopeGroupId});
-
-	groupIds = new long[scopeIds.length];
-
-	for (int i = 0; i < scopeIds.length; i++) {
-		String[] scopeIdFragments = StringUtil.split(scopeIds[i], StringPool.UNDERLINE);
-
-		if (scopeIdFragments[0].equals("Layout")) {
-			long scopeIdLayoutId = GetterUtil.getLong(scopeIdFragments[1]);
-
-			Layout scopeIdLayout = LayoutLocalServiceUtil.getLayout(scopeGroupId, layout.isPrivateLayout(), scopeIdLayoutId);
-
-			groupIds[i] = scopeIdLayout.getScopeGroup().getGroupId();
-		}
-		else {
-			long scopeIdGroupId = GetterUtil.getLong(scopeIdFragments[1]);
-
-			groupIds[i] = scopeIdGroupId;
-		}
-	}
-}
-
-List<AssetRendererFactory> assetRendererFactories = AssetRendererFactoryRegistryUtil.getAssetRendererFactories();
-
-long[] availableClassNameIds = new long[assetRendererFactories.size()];
-
-for (int i = 0; i < assetRendererFactories.size(); i++) {
-	AssetRendererFactory assetRendererFactory = assetRendererFactories.get(i);
-
-	availableClassNameIds[i] = assetRendererFactory.getClassNameId();
-}
+long[] availableClassNameIds = AssetRendererFactoryRegistryUtil.getAssetClassNameIds();
 
 boolean anyAssetType = GetterUtil.getBoolean(preferences.getValue("any-asset-type", Boolean.TRUE.toString()));
 
-long[] classNameIds = availableClassNameIds;
+long[] classNameIds = AssetPublisherUtil.getClassNameIds(preferences, availableClassNameIds);
 
-if (!anyAssetType && (preferences.getValues("class-name-ids", null) != null)) {
-	classNameIds = GetterUtil.getLongValues(preferences.getValues("class-name-ids", null));
-}
-
-long[] allAssetCategoryIds = new long[0];
-long[] anyAssetCategoryIds = new long[0];
-long[] notAllAssetCategoryIds = new long[0];
-long[] notAnyAssetCategoryIds = new long[0];
+AssetEntryQuery	assetEntryQuery = new AssetEntryQuery();
 
 String[] allAssetTagNames = new String[0];
-String[] anyAssetTagNames = new String[0];
-String[] notAllAssetTagNames = new String[0];
-String[] notAnyAssetTagNames = new String[0];
 
 if (selectionStyle.equals("dynamic")) {
-	for (int i = 0; true; i++) {
-		String[] queryValues = preferences.getValues("queryValues" + i, null);
+	assetEntryQuery =  AssetPublisherUtil.getAssetEntryQuery(preferences, scopeGroupId);
 
-		if ((queryValues == null) || (queryValues.length == 0)) {
-			break;
-		}
-
-		boolean queryContains = GetterUtil.getBoolean(preferences.getValue("queryContains" + i, StringPool.BLANK));
-		boolean queryAndOperator = GetterUtil.getBoolean(preferences.getValue("queryAndOperator" + i, StringPool.BLANK));
-		String queryName = preferences.getValue("queryName" + i, StringPool.BLANK);
-
-		if (Validator.equals(queryName, "assetCategories")) {
-			long[] assetCategoryIds = GetterUtil.getLongValues(queryValues);
-
-			if (queryContains && queryAndOperator) {
-				allAssetCategoryIds = assetCategoryIds;
-			}
-			else if (queryContains && !queryAndOperator) {
-				anyAssetCategoryIds = assetCategoryIds;
-			}
-			else if (!queryContains && queryAndOperator) {
-				notAllAssetCategoryIds = assetCategoryIds;
-			}
-			else {
-				notAnyAssetCategoryIds = assetCategoryIds;
-			}
-		}
-		else {
-			if (queryContains && queryAndOperator) {
-				allAssetTagNames = queryValues;
-			}
-			else if (queryContains && !queryAndOperator) {
-				anyAssetTagNames = queryValues;
-			}
-			else if (!queryContains && queryAndOperator) {
-				notAllAssetTagNames = queryValues;
-			}
-			else {
-				notAnyAssetTagNames = queryValues;
-			}
-		}
-	}
+	allAssetTagNames = AssetPublisherUtil.getAssetTagNames(preferences, scopeGroupId);
 }
 
 long assetVocabularyId = GetterUtil.getLong(preferences.getValue("asset-vocabulary-id", StringPool.BLANK));
@@ -240,7 +160,7 @@ String assetCategoryName = null;
 String assetVocabularyName = null;
 
 if (assetCategoryId > 0) {
-	allAssetCategoryIds = new long[] {assetCategoryId};
+	assetEntryQuery.setAllCategoryIds(new long[] {assetCategoryId});
 
 	AssetCategory assetCategory = AssetCategoryLocalServiceUtil.getCategory(assetCategoryId);
 
@@ -257,6 +177,10 @@ String assetTagName = ParamUtil.getString(request, "tag");
 
 if (Validator.isNotNull(assetTagName)) {
 	allAssetTagNames = new String[] {assetTagName};
+
+	long[] assetTagIds = AssetTagLocalServiceUtil.getTagIds(scopeGroupId, allAssetTagNames);
+
+	assetEntryQuery.setAllTagIds(assetTagIds);
 
 	PortalUtil.setPageKeywords(assetTagName, request);
 }
