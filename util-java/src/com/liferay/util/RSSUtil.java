@@ -85,11 +85,11 @@ public class RSSUtil {
 	public static String getFormatType(String format) {
 		String formatType = DEFAULT_TYPE;
 
-		if (StringUtil.contains(format, RSS)) {
-			formatType = RSSUtil.RSS;
-		}
-		else if (StringUtil.contains(format, ATOM)) {
+		if (StringUtil.contains(format, ATOM)) {
 			formatType = RSSUtil.ATOM;
+		}
+		else if (StringUtil.contains(format, RSS)) {
+			formatType = RSSUtil.RSS;
 		}
 
 		return formatType;
