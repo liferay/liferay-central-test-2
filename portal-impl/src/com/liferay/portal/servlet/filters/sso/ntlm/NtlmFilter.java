@@ -14,17 +14,24 @@
 
 package com.liferay.portal.servlet.filters.sso.ntlm;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.ldap.LDAPSettingsUtil;
 import com.liferay.portal.security.ntlm.NtlmManager;
 import com.liferay.portal.security.ntlm.NtlmUserAccount;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
 import com.liferay.portal.util.PortalInstances;
+import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
+
+import java.security.SecureRandom;
 
 import java.util.Iterator;
 import java.util.Map;
@@ -83,6 +90,56 @@ public class NtlmFilter extends BasePortalFilter {
 		return _log;
 	}
 
+	protected NtlmManager getNtlmManager(
+		long companyId) throws SystemException {
+
+		String domain =  PrefsPropsUtil.getString(
+			companyId, PropsKeys.NTLM_DOMAIN, PropsValues.NTLM_DOMAIN);
+
+		String domainController =  PrefsPropsUtil.getString(
+			companyId, PropsKeys.NTLM_DOMAIN_CONTROLLER,
+			PropsValues.NTLM_DOMAIN_CONTROLLER);
+
+		String domainControllerName =  PrefsPropsUtil.getString(
+			companyId, PropsKeys.NTLM_DOMAIN_CONTROLLER_NAME,
+			PropsValues.NTLM_DOMAIN_CONTROLLER_NAME);
+
+		String serviceAccount =  PrefsPropsUtil.getString(
+			companyId, PropsKeys.NTLM_SERVICE_ACCOUNT,
+			PropsValues.NTLM_SERVICE_ACCOUNT);
+
+		String servicePassword =  PrefsPropsUtil.getString(
+			companyId, PropsKeys.NTLM_SERVICE_PASSWORD,
+			PropsValues.NTLM_SERVICE_PASSWORD);
+
+		NtlmManager ntlmManager = _ntlmManagers.get(companyId);
+
+		if (ntlmManager == null) {
+			ntlmManager = new NtlmManager(
+				domain, domainController, domainControllerName, serviceAccount,
+				servicePassword);
+
+			_ntlmManagers.put(companyId, ntlmManager);
+		}
+		else if (!Validator.equals(ntlmManager.getDomain(), domain) ||
+				 !Validator.equals(
+					 ntlmManager.getDomainController(), domainController) ||
+				 !Validator.equals(
+					 ntlmManager.getDomainControllerName(),
+					 domainControllerName) ||
+				 !Validator.equals(
+					 ntlmManager.getServiceAccount(), serviceAccount) ||
+				 !Validator.equals(
+					 ntlmManager.getServicePassword(), servicePassword)) {
+
+				ntlmManager.setConfiguration(
+					domain, domainController, domainControllerName,
+					serviceAccount, servicePassword);
+		}
+
+		return ntlmManager;
+	}
+
 	protected void processFilter(
 			HttpServletRequest request, HttpServletResponse response,
 			FilterChain filterChain)
@@ -102,11 +159,18 @@ public class NtlmFilter extends BasePortalFilter {
 			String authorization = GetterUtil.getString(
 				request.getHeader(HttpHeaders.AUTHORIZATION));
 
+			NtlmManager ntlmManager = getNtlmManager(companyId);
+
 			if (authorization.startsWith("NTLM")) {
 				byte[] src = Base64.decode(authorization.substring(5));
 
 				if (src[8] == 1) {
-					byte[] challengeMessage = _ntlmManager.negotiate(src);
+					byte[] serverChallenge = new byte[8];
+
+					_secureRandom.nextBytes(serverChallenge);
+
+					byte[] challengeMessage = ntlmManager.negotiate(
+						src, serverChallenge);
 
 					authorization = Base64.encode(challengeMessage);
 
@@ -118,8 +182,7 @@ public class NtlmFilter extends BasePortalFilter {
 					response.flushBuffer();
 
 					_serverChallenges.put(
-						request.getRemoteAddr(),
-						_ntlmManager.getServerChallenge());
+						request.getRemoteAddr(), serverChallenge);
 
 					// Interrupt filter chain, send response. Browser will
 					// immediately post a new request.
@@ -130,10 +193,8 @@ public class NtlmFilter extends BasePortalFilter {
 					byte[] serverChallenge = _serverChallenges.get(
 						request.getRemoteAddr());
 
-					_ntlmManager.setServerChallenge(serverChallenge);
-
-					NtlmUserAccount ntlmUserAccount = _ntlmManager.authenticate(
-						src);
+					NtlmUserAccount ntlmUserAccount = ntlmManager.authenticate(
+						src, serverChallenge);
 
 					if (ntlmUserAccount == null) {
 						return;
@@ -183,9 +244,12 @@ public class NtlmFilter extends BasePortalFilter {
 		processFilter(NtlmPostFilter.class, request, response, filterChain);
 	}
 
+
 	private static Log _log = LogFactoryUtil.getLog(NtlmFilter.class);
 
-	private NtlmManager _ntlmManager = new NtlmManager();
+	private Map<Long, NtlmManager> _ntlmManagers =
+		new ConcurrentHashMap<Long, NtlmManager>();
+	private SecureRandom _secureRandom = new SecureRandom();
 	private Map<String, byte[]> _serverChallenges =
 		new ConcurrentHashMap<String, byte[]>();
 

@@ -35,7 +35,10 @@ String casServiceUrl = ParamUtil.getString(request, "settings--" + PropsKeys.CAS
 
 boolean ntlmAuthEnabled = ParamUtil.getBoolean(request, "settings--" + PropsKeys.NTLM_AUTH_ENABLED + "--", PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.NTLM_AUTH_ENABLED, PropsValues.NTLM_AUTH_ENABLED));
 String ntlmDomainController = ParamUtil.getString(request, "settings--" + PropsKeys.NTLM_DOMAIN_CONTROLLER + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.NTLM_DOMAIN_CONTROLLER, PropsValues.NTLM_DOMAIN_CONTROLLER));
+String ntlmDomainControllerName = ParamUtil.getString(request, "settings--" + PropsKeys.NTLM_DOMAIN_CONTROLLER_NAME + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.NTLM_DOMAIN_CONTROLLER_NAME, PropsValues.NTLM_DOMAIN_CONTROLLER_NAME));
 String ntlmDomain = ParamUtil.getString(request, "settings--" + PropsKeys.NTLM_DOMAIN + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.NTLM_DOMAIN, PropsValues.NTLM_DOMAIN));
+String ntlmServiceAccount = ParamUtil.getString(request, "settings--" + PropsKeys.NTLM_SERVICE_ACCOUNT + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.NTLM_SERVICE_ACCOUNT, PropsValues.NTLM_SERVICE_ACCOUNT));
+String ntlmServicePassword = ParamUtil.getString(request, "settings--" + PropsKeys.NTLM_SERVICE_PASSWORD + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.NTLM_SERVICE_PASSWORD, PropsValues.NTLM_SERVICE_PASSWORD));
 
 boolean openIdAuthEnabled = ParamUtil.getBoolean(request, "settings--" + PropsKeys.OPEN_ID_AUTH_ENABLED + "--", PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.OPEN_ID_AUTH_ENABLED, PropsValues.OPEN_ID_AUTH_ENABLED));
 
@@ -106,7 +109,13 @@ String siteminderUserHeader = ParamUtil.getString(request, "settings--" + PropsK
 
 			<aui:input cssClass="lfr-input-text-container" label="domain-controller" name='<%= "settings--" + PropsKeys.NTLM_DOMAIN_CONTROLLER + "--" %>' type="text" value="<%= ntlmDomainController %>" />
 
+			<aui:input cssClass="lfr-input-text-container" helpMessage="domain-controller-name-help" label="domain-controller-name" name='<%= "settings--" + PropsKeys.NTLM_DOMAIN_CONTROLLER_NAME + "--" %>' type="text" value="<%= ntlmDomainControllerName %>" />
+
 			<aui:input cssClass="lfr-input-text-container" label="domain" name='<%= "settings--" + PropsKeys.NTLM_DOMAIN + "--" %>' type="text" value="<%= ntlmDomain %>" />
+
+			<aui:input cssClass="lfr-input-text-container" label="service-account" name='<%= "settings--" + PropsKeys.NTLM_SERVICE_ACCOUNT + "--" %>' type="text" value="<%= ntlmServiceAccount %>" />
+
+			<aui:input cssClass="lfr-input-text-container" label="service-password" name='<%= "settings--" + PropsKeys.NTLM_SERVICE_PASSWORD + "--" %>' type="text" value="<%= ntlmServicePassword %>" />
 		</aui:fieldset>
 	</liferay-ui:section>
 	<liferay-ui:section>

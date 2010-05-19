@@ -51,16 +51,9 @@ import jcifs.util.MD4;
  */
 public class Netlogon {
 
-	public Netlogon(
-		String domainController, String domainControllerName,
-		NtlmServiceAccount ntlmServiceAccount) {
-
+	public Netlogon() {
 		DcerpcBinding.addInterface(
 			"netlogon", "12345678-1234-abcd-ef00-01234567cffb:1.0");
-
-		_domainController = domainController;
-		_domainControllerName = domainControllerName;
-		_ntlmServiceAccount = ntlmServiceAccount;
 	}
 
 	public NtlmUserAccount logon(
@@ -116,6 +109,15 @@ public class Netlogon {
 		}
 
 		return null;
+	}
+
+	public void setConfiguration(
+		String domainController, String domainControllerName,
+		NtlmServiceAccount ntlmServiceAccount) {
+
+		_domainController = domainController;
+		_domainControllerName = domainControllerName;
+		_ntlmServiceAccount = ntlmServiceAccount;
 	}
 
 	protected NetlogonAuthenticator computeNetlogonAuthenticator() {

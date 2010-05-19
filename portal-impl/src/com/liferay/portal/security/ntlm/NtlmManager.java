@@ -18,12 +18,10 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.util.PropsValues;
 
 import java.io.UnsupportedEncodingException;
 
 import java.security.MessageDigest;
-import java.security.SecureRandom;
 
 import jcifs.ntlmssp.NtlmFlags;
 import jcifs.ntlmssp.Type1Message;
@@ -39,13 +37,18 @@ import jcifs.util.Encdec;
  */
 public class NtlmManager {
 
-	public NtlmManager() {
-		_domain = PropsValues.NTLM_DOMAIN;
-		_ntlmServiceAccount = new NtlmServiceAccount(
-			PropsValues.NTLM_SERVICE_ACCOUNT, null);
+	public NtlmManager(
+		String domain, String domainController, String domainControllerName,
+		String serviceAccount, String servicePassword) {
+
+		setConfiguration(
+			domain, domainController, domainControllerName, serviceAccount,
+			servicePassword);
 	}
 
-	public NtlmUserAccount authenticate(byte[] material) {
+	public NtlmUserAccount authenticate(
+		byte[] material, byte[] serverChallenge) {
+
 		try {
 			Type3Message type3Message = new Type3Message(material);
 
@@ -57,18 +60,18 @@ public class NtlmManager {
 
 				byte[] bytes = new byte[16];
 
-				System.arraycopy(_serverChallenge, 0, bytes, 0, 8);
+				System.arraycopy(serverChallenge, 0, bytes, 0, 8);
 				System.arraycopy(type3Message.getLMResponse(), 0, bytes, 8, 8);
 
 				messageDigest.update(bytes);
 
-				_serverChallenge = messageDigest.digest();
+				serverChallenge = messageDigest.digest();
 			}
 
-			 return NetlogonUtil.logon(
+			 return _netlogon.logon(
 				 type3Message.getDomain(), type3Message.getUser(),
 				 type3Message.getWorkstation(),
-				 _serverChallenge, type3Message.getNTResponse(),
+				 serverChallenge, type3Message.getNTResponse(),
 				 type3Message.getLMResponse());
 		}
 		catch (Exception e) {
@@ -78,18 +81,32 @@ public class NtlmManager {
 		}
 	}
 
-	public byte[] getServerChallenge() {
-		return _serverChallenge;
+	public String getDomain() {
+		return _domain;
 	}
 
-	public byte[] negotiate(byte[] material) {
+	public String getDomainController() {
+		return _domainController;
+	}
+
+	public String getDomainControllerName() {
+		return _domainControllerName;
+	}
+
+	public String getServiceAccount() {
+		return _ntlmServiceAccount.getAccount();
+	}
+
+	public String getServicePassword() {
+		return _ntlmServiceAccount.getPassword();
+	}
+
+	public byte[] negotiate(byte[] material, byte[] serverChallenge) {
 		try {
 			Type1Message type1Message = new Type1Message(material);
 
-			_secureRandom.nextBytes(_serverChallenge);
-
 			Type2Message type2Message = new Type2Message(
-				type1Message.getFlags(), _serverChallenge, _domain);
+				type1Message.getFlags(), serverChallenge, _domain);
 
 			if (type2Message.getFlag(
 					_NTLMSSP_NEGOTIATE_EXTENDED_SESSION_SECURITY)) {
@@ -109,8 +126,18 @@ public class NtlmManager {
 		}
 	}
 
-	public void setServerChallenge(byte[] serverChallenge) {
-		_serverChallenge = serverChallenge;
+	public void setConfiguration(
+		String domain, String domainController, String domainControllerName,
+		String serviceAccount, String servicePassword) {
+
+		_domain = domain;
+		_domainController = domainController;
+		_domainControllerName = domainControllerName;
+		_ntlmServiceAccount = new NtlmServiceAccount(
+			serviceAccount, servicePassword);
+
+		_netlogon.setConfiguration(
+			domainController, domainControllerName, _ntlmServiceAccount);
 	}
 
 	protected byte[] getAVPairBytes(int avId, String value)
@@ -147,8 +174,9 @@ public class NtlmManager {
 	private static Log _log = LogFactoryUtil.getLog(NtlmManager.class);
 
 	private String _domain;
+	private String _domainController;
+	private String _domainControllerName;
+	private Netlogon _netlogon = new Netlogon();
 	private NtlmServiceAccount _ntlmServiceAccount;
-	private SecureRandom _secureRandom = new SecureRandom();
-	private byte[] _serverChallenge = new byte[8];
 
 }
