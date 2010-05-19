@@ -23,7 +23,7 @@ nodeId = ParamUtil.getLong(request, "nodeId", nodeId);
 
 List<WikiNode> nodes = WikiNodeLocalServiceUtil.getNodes(scopeGroupId);
 
-boolean isNodeInGroup = false;
+boolean nodeInGroup = false;
 %>
 
 <liferay-portlet:actionURL portletConfiguration="true" var="configurationURL" />
@@ -43,8 +43,9 @@ boolean isNodeInGroup = false;
 					<%
 					for (WikiNode node : nodes) {
 						node = node.toEscapedModel();
+
 						if (nodeId == node.getNodeId()) {
-							isNodeInGroup = true;
+							nodeInGroup = true;
 						}
 					%>
 
@@ -64,7 +65,7 @@ boolean isNodeInGroup = false;
 		</c:choose>
 
 		<c:choose>
-			<c:when test="<%= isNodeInGroup %>">
+			<c:when test="<%= nodeInGroup %>">
 				<aui:select label="page" name="title">
 
 					<%

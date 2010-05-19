@@ -54,6 +54,9 @@ public class ViewAction extends PortletAction {
 		try {
 			PortletPreferences preferences = renderRequest.getPreferences();
 
+			ThemeDisplay themeDisplay =
+				(ThemeDisplay)renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
+
 			long nodeId = GetterUtil.getLong(
 				preferences.getValue("node-id", StringPool.BLANK));
 			String title = ParamUtil.getString(
@@ -61,9 +64,6 @@ public class ViewAction extends PortletAction {
 				preferences.getValue("title", WikiPageConstants.FRONT_PAGE));
 
 			WikiNode node = WikiNodeServiceUtil.getNode(nodeId);
-
-			ThemeDisplay themeDisplay =
-				(ThemeDisplay)renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
 
 			if (node.getGroupId() != themeDisplay.getScopeGroupId()) {
 				throw new NoSuchNodeException();
