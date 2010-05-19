@@ -666,7 +666,7 @@ set JAVA_OPTS=-Dfile.encoding=UTF8 -Djonas.felix.configuration.file="%JONAS_ROOT
 					<and>
 						<available file="${env.JAVA_HOME}/jre/bin/java.exe" />
 						<not>
-							<available file="${app.server.dir}/jre" />
+							<available file="${app.server.dir}/jre${java.version}/win" />
 						</not>
 					</and>
 					<then>
