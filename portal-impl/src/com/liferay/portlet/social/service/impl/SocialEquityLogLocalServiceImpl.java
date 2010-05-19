@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.User;
+import com.liferay.portlet.asset.NoSuchEntryException;
 import com.liferay.portlet.asset.model.AssetEntry;
 import com.liferay.portlet.social.model.SocialEquityAssetEntry;
 import com.liferay.portlet.social.model.SocialEquityLog;
@@ -81,10 +82,14 @@ public class SocialEquityLogLocalServiceImpl
 			long userId, String className, long classPK, String actionId)
 		throws PortalException, SystemException {
 
-		AssetEntry assetEntry = assetEntryLocalService.getEntry(
-			className, classPK);
+		try {
+			AssetEntry assetEntry = assetEntryLocalService.getEntry(
+				className, classPK);
 
-		addEquityLogs(userId, assetEntry.getEntryId(), actionId);
+			addEquityLogs(userId, assetEntry.getEntryId(), actionId);
+		}
+		catch (NoSuchEntryException nsue) {
+		}
 	}
 
 	public void checkEquityLogs() throws SystemException {
