@@ -220,6 +220,7 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 
 		updateDisplaySettings(actionRequest, preferences);
 		updateQueryLogic(actionRequest, preferences);
+		updateRssSettings(actionRequest, preferences);
 
 		boolean mergeUrlTags = ParamUtil.getBoolean(
 			actionRequest, "mergeUrlTags");
@@ -269,6 +270,7 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 			ActionRequest actionRequest, PortletPreferences preferences)
 		throws Exception {
 
+		updateRssSettings(actionRequest, preferences);
 		updateDisplaySettings(actionRequest, preferences);
 	}
 
@@ -332,6 +334,25 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 			"enable-tag-based-navigation",
 			String.valueOf(enableTagBasedNavigation));
 		preferences.setValue("metadata-fields", medatadaFields);
+	}
+
+	protected void updateRssSettings(
+			ActionRequest actionRequest, PortletPreferences preferences)
+		throws Exception {
+
+		boolean enableRSS = ParamUtil.getBoolean(
+			actionRequest, "enableRSS");
+		int rssDelta = ParamUtil.getInteger(actionRequest, "rssDelta");
+		String rssDisplayStyle = ParamUtil.getString(
+				actionRequest, "rssDisplayStyle");
+		String rssFormat = ParamUtil.getString(actionRequest, "rssFormat");
+		String rssName = ParamUtil.getString(actionRequest, "rssName");
+
+		preferences.setValue("enable-rss", String.valueOf(enableRSS));
+		preferences.setValue("rss-delta", String.valueOf(rssDelta));
+		preferences.setValue("rss-display-style", rssDisplayStyle);
+		preferences.setValue("rss-format", rssFormat);
+		preferences.setValue("rss-name", rssName);
 	}
 
 	protected void updateQueryLogic(

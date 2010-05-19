@@ -114,6 +114,7 @@
 <%@ page import="com.liferay.portlet.wiki.service.permission.WikiPagePermission" %>
 <%@ page import="com.liferay.portlet.wiki.util.WikiCacheUtil" %>
 <%@ page import="com.liferay.portlet.wiki.util.WikiUtil" %>
+<%@ page import="com.liferay.util.RSSUtil" %>
 <%@ page import="com.liferay.util.xml.DocUtil" %>
 
 <%
@@ -298,6 +299,12 @@ String allMetadataFields = "create-date,modified-date,publish-date,expiration-da
 String[] metadataFields = StringUtil.split(preferences.getValue("metadata-fields", defaultMetadataFields));
 
 String[] assetEntryXmls = preferences.getValues("asset-entry-xml", new String[0]);
+
+boolean enableRSS = GetterUtil.getBoolean(preferences.getValue("enable-rss", null));
+int rssDelta = GetterUtil.getInteger(preferences.getValue("rss-delta", "20"));
+String rssDisplayStyle = preferences.getValue("rss-display-style", RSSUtil.DISPLAY_STYLE_ABSTRACT);
+String rssFormat = preferences.getValue("rss-format", "atom10");
+String rssName = preferences.getValue("rss-name", null);
 
 boolean viewInContext = assetLinkBehaviour.equals("viewInPortlet");
 
