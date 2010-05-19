@@ -90,24 +90,20 @@ public class NtlmFilter extends BasePortalFilter {
 		return _log;
 	}
 
-	protected NtlmManager getNtlmManager(
-		long companyId) throws SystemException {
+	protected NtlmManager getNtlmManager(long companyId)
+		throws SystemException {
 
-		String domain =  PrefsPropsUtil.getString(
+		String domain = PrefsPropsUtil.getString(
 			companyId, PropsKeys.NTLM_DOMAIN, PropsValues.NTLM_DOMAIN);
-
 		String domainController =  PrefsPropsUtil.getString(
 			companyId, PropsKeys.NTLM_DOMAIN_CONTROLLER,
 			PropsValues.NTLM_DOMAIN_CONTROLLER);
-
 		String domainControllerName =  PrefsPropsUtil.getString(
 			companyId, PropsKeys.NTLM_DOMAIN_CONTROLLER_NAME,
 			PropsValues.NTLM_DOMAIN_CONTROLLER_NAME);
-
 		String serviceAccount =  PrefsPropsUtil.getString(
 			companyId, PropsKeys.NTLM_SERVICE_ACCOUNT,
 			PropsValues.NTLM_SERVICE_ACCOUNT);
-
 		String servicePassword =  PrefsPropsUtil.getString(
 			companyId, PropsKeys.NTLM_SERVICE_PASSWORD,
 			PropsValues.NTLM_SERVICE_PASSWORD);
@@ -121,20 +117,22 @@ public class NtlmFilter extends BasePortalFilter {
 
 			_ntlmManagers.put(companyId, ntlmManager);
 		}
-		else if (!Validator.equals(ntlmManager.getDomain(), domain) ||
-				 !Validator.equals(
-					 ntlmManager.getDomainController(), domainController) ||
-				 !Validator.equals(
-					 ntlmManager.getDomainControllerName(),
-					 domainControllerName) ||
-				 !Validator.equals(
-					 ntlmManager.getServiceAccount(), serviceAccount) ||
-				 !Validator.equals(
+		else {
+			if (!Validator.equals(ntlmManager.getDomain(), domain) ||
+				!Validator.equals(
+					ntlmManager.getDomainController(), domainController) ||
+				!Validator.equals(
+					ntlmManager.getDomainControllerName(),
+					domainControllerName) ||
+				!Validator.equals(
+					ntlmManager.getServiceAccount(), serviceAccount) ||
+				!Validator.equals(
 					 ntlmManager.getServicePassword(), servicePassword)) {
 
 				ntlmManager.setConfiguration(
 					domain, domainController, domainControllerName,
 					serviceAccount, servicePassword);
+			}
 		}
 
 		return ntlmManager;
@@ -159,9 +157,9 @@ public class NtlmFilter extends BasePortalFilter {
 			String authorization = GetterUtil.getString(
 				request.getHeader(HttpHeaders.AUTHORIZATION));
 
-			NtlmManager ntlmManager = getNtlmManager(companyId);
-
 			if (authorization.startsWith("NTLM")) {
+				NtlmManager ntlmManager = getNtlmManager(companyId);
+
 				byte[] src = Base64.decode(authorization.substring(5));
 
 				if (src[8] == 1) {
@@ -243,7 +241,6 @@ public class NtlmFilter extends BasePortalFilter {
 
 		processFilter(NtlmPostFilter.class, request, response, filterChain);
 	}
-
 
 	private static Log _log = LogFactoryUtil.getLog(NtlmFilter.class);
 
