@@ -110,7 +110,7 @@ public class EditMessageAction extends PortletAction {
 					(workflowAction == WorkflowConstants.ACTION_SAVE_DRAFT)) {
 
 					redirect = getSaveAndContinueRedirect(
-						actionResponse, message);
+						actionRequest, actionResponse, message);
 				}
 
 				sendRedirect(actionRequest, actionResponse, redirect);
@@ -175,7 +175,8 @@ public class EditMessageAction extends PortletAction {
 	}
 
 	protected String getSaveAndContinueRedirect(
-		ActionResponse actionResponse, MBMessage message) {
+		ActionRequest actionRequest, ActionResponse actionResponse,
+		MBMessage message) {
 
 		PortletURL portletURL =
 			((ActionResponseImpl)actionResponse).createRenderURL();
@@ -184,6 +185,8 @@ public class EditMessageAction extends PortletAction {
 			"struts_action", "/message_boards/edit_message");
 		portletURL.setParameter(
 			"messageId", String.valueOf(message.getMessageId()));
+		portletURL.setParameter(
+					"preview", ParamUtil.getString(actionRequest, "preview"));
 
 		return portletURL.toString();
 	}

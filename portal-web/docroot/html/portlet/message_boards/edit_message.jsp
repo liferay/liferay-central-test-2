@@ -95,6 +95,9 @@ if (Validator.isNull(redirect)) {
 		message.setSubject(subject);
 		message.setBody(body);
 		message.setAnonymous(temp.isAnonymous());
+		message.setAttachments(temp.isAttachments());
+		message.setMessageId(temp.getMessageId());
+		message.setCompanyId(temp.getCompanyId());
 	}
 	else {
 		message = new MBMessageImpl();
@@ -107,6 +110,9 @@ if (Validator.isNull(redirect)) {
 		message.setSubject(subject);
 		message.setBody(body);
 		message.setAnonymous(BeanParamUtil.getBoolean(message, request, "anonymous"));
+		message.setAttachments(attachments);
+		message.setMessageId(messageId);
+		message.setCompanyId(user.getCompanyId());
 	}
 
 	boolean editable = false;
@@ -343,7 +349,7 @@ if (Validator.isNull(redirect)) {
 		</c:if>
 
 		<%
-		String taglibOnClick = "document." + renderResponse.getNamespace() + "fm." + renderResponse.getNamespace() + "body.value = " + renderResponse.getNamespace() + "getHTML(); document." + renderResponse.getNamespace() + "fm." + renderResponse.getNamespace() + "preview.value = 'true'; submitForm(document." + renderResponse.getNamespace() + "fm);";
+		String taglibOnClick = "document." + renderResponse.getNamespace() + "fm." + renderResponse.getNamespace() + "body.value = " + renderResponse.getNamespace() + "getHTML(); document." + renderResponse.getNamespace() + "fm." + renderResponse.getNamespace() + "preview.value = 'true'; " + renderResponse.getNamespace() + "saveMessage(true);";
 		%>
 
 		<aui:button onClick="<%= taglibOnClick %>" value="preview" />
