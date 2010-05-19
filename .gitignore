@@ -6,6 +6,7 @@
 /*.iws
 /*.patch
 /.checkstyle
+/.idea
 /.settings
 /.xmlcatalog
 /ActiveMQ
@@ -15,6 +16,7 @@
 /bin
 /build.*.properties
 /dist
+/out
 /release.*.properties
 /test.*.properties
 /WEB-INF
