@@ -145,22 +145,23 @@ boolean enableCommentRatings = GetterUtil.getBoolean(preferences.getValue("enabl
 
 boolean mergedView = false;
 
+boolean showActions = false;
 boolean showAddFileEntryButton = false;
 boolean showAddFileShortcutButton = false;
 boolean showAddFolderButton = false;
-boolean showDeleteFileEntryButton = false;
 boolean showFolderMenu = false;
 boolean showTabs = false;
 
 if (portletName.equals(PortletKeys.DOCUMENT_LIBRARY)) {
+	showActions = true;
 	showAddFileEntryButton = true;
 	showAddFileShortcutButton = true;
 	showAddFolderButton = true;
-	showDeleteFileEntryButton = true;
 	showFolderMenu = true;
 	showTabs = true;
 }
 else if (portletName.equals(PortletKeys.DOCUMENT_LIBRARY_DISPLAY)) {
+	showActions = false;
 	showTabs = true;
 }
 

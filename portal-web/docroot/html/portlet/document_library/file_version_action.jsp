@@ -29,7 +29,7 @@ Boolean hasLock = (Boolean)objArray[4];
 %>
 
 <liferay-ui:icon-menu>
-	<c:if test="<%= showDeleteFileEntryButton && DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.DELETE) && (!isLocked.booleanValue() || hasLock.booleanValue()) %>">
+	<c:if test="<%= showActions && DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.DELETE) && (!isLocked.booleanValue() || hasLock.booleanValue()) %>">
 		<portlet:actionURL var="portletURL">
 			<portlet:param name="struts_action" value="/document_library/edit_file_entry" />
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />

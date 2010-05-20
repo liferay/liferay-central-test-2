@@ -83,7 +83,7 @@ viewFolderURL.setParameter("folderId", String.valueOf(folderId));
 
 			<%@ include file="/html/portlet/document_library/file_entry_action_open_document.jspf" %>
 
-			<c:if test="<%= !view && DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.UPDATE) %>">
+			<c:if test="<%= showActions && DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.UPDATE) %>">
 				<portlet:renderURL var="editURL">
 					<portlet:param name="struts_action" value="/document_library/edit_file_entry" />
 					<portlet:param name="redirect" value="<%= currentURL %>" />
@@ -94,11 +94,11 @@ viewFolderURL.setParameter("folderId", String.valueOf(folderId));
 				<liferay-ui:icon image="edit" url="<%= editURL %>" />
 			</c:if>
 
-			<c:if test="<%= !view %>">
+			<c:if test="<%= showActions %>">
 				<%@ include file="/html/portlet/document_library/file_entry_action_lock.jspf" %>
 			</c:if>
 
-			<c:if test="<%= !view && DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.PERMISSIONS) %>">
+			<c:if test="<%= showActions && DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.PERMISSIONS) %>">
 				<liferay-security:permissionsURL
 					modelResource="<%= DLFileEntry.class.getName() %>"
 					modelResourceDescription="<%= HtmlUtil.unescape(fileEntry.getTitle()) %>"
@@ -158,11 +158,11 @@ viewFolderURL.setParameter("folderId", String.valueOf(folderId));
 				<liferay-ui:icon image="view" message="view-original-file" url="<%= viewOriginalFileURL %>" />
 			</c:if>
 
-			<c:if test="<%= !view %>">
+			<c:if test="<%= showActions %>">
 				<%@ include file="/html/portlet/document_library/file_entry_action_lock.jspf" %>
 			</c:if>
 
-			<c:if test="<%= !view && DLFileShortcutPermission.contains(permissionChecker, fileShortcut, ActionKeys.UPDATE) %>">
+			<c:if test="<%= showActions && DLFileShortcutPermission.contains(permissionChecker, fileShortcut, ActionKeys.UPDATE) %>">
 				<portlet:renderURL var="editShortcutURL">
 					<portlet:param name="struts_action" value="/document_library/edit_file_shortcut" />
 					<portlet:param name="redirect" value="<%= currentURL %>" />
@@ -172,7 +172,7 @@ viewFolderURL.setParameter("folderId", String.valueOf(folderId));
 				<liferay-ui:icon image="edit" url="<%= editShortcutURL %>" />
 			</c:if>
 
-			<c:if test="<%= !view && DLFileShortcutPermission.contains(permissionChecker, fileShortcut, ActionKeys.PERMISSIONS) %>">
+			<c:if test="<%= showActions && DLFileShortcutPermission.contains(permissionChecker, fileShortcut, ActionKeys.PERMISSIONS) %>">
 				<liferay-security:permissionsURL
 					modelResource="<%= DLFileShortcut.class.getName() %>"
 					modelResourceDescription="<%= fileEntry.getTitle() %>"
@@ -183,7 +183,7 @@ viewFolderURL.setParameter("folderId", String.valueOf(folderId));
 				<liferay-ui:icon image="permissions" url="<%= shortcutPermissionsURL %>" />
 			</c:if>
 
-			<c:if test="<%= !view && DLFileShortcutPermission.contains(permissionChecker, fileShortcut, ActionKeys.DELETE) %>">
+			<c:if test="<%= showActions && DLFileShortcutPermission.contains(permissionChecker, fileShortcut, ActionKeys.DELETE) %>">
 				<portlet:actionURL var="deleteShortcutURL">
 					<portlet:param name="struts_action" value="/document_library/edit_file_shortcut" />
 					<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
