@@ -70,7 +70,6 @@
 		<![CDATA[
 			SELECT
 				id_ AS id,
-				articleId,
 				version
 			FROM
 				JournalArticle
