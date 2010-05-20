@@ -85,13 +85,13 @@ captcha.max.challenges=0
 
 browser.launcher.url=
 
+index.on.startup=true
+
 mail.session.jndi.name=
 
 axis.servlet.hosts.allowed=
 
-tunnel.servlet.hosts.allowed=
-
-index.on.startup=true</echo>
+tunnel.servlet.hosts.allowed=</echo>
 
 		<if>
 			<equals arg1="${db.type}" arg2="oracle" />
