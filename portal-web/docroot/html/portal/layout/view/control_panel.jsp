@@ -103,9 +103,6 @@ request.setAttribute("control_panel.jsp-ppid", ppid);
 		else if (category.equals(PortletCategoryKeys.SERVER)) {
 			panelCategory += " panel-manage-server";
 		}
-		else if (category.equals(PortletCategoryKeys.WORKFLOW)) {
-			panelCategory += " panel-manage-workflow";
-		}
 		else {
 			panelCategory += " panel-manage-frontpage";
 		}
