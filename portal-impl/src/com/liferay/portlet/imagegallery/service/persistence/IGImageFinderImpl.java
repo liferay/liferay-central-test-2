@@ -43,8 +43,8 @@ public class IGImageFinderImpl
 	public static String COUNT_BY_G_F =
 		IGImageFinder.class.getName() + ".countByG_F";
 
-	public static String FETCH_BY_ANY_IMAGE_ID =
-			IGImageFinder.class.getName() + ".fetchByAnyImageId";
+	public static String FIND_BY_ANY_IMAGE_ID =
+		IGImageFinder.class.getName() + ".findByAnyImageId";
 
 	public static String FIND_BY_NO_ASSETS =
 		IGImageFinder.class.getName() + ".findByNoAssets";
@@ -102,7 +102,7 @@ public class IGImageFinderImpl
 		try {
 			session = openSession();
 
-			String sql = CustomSQLUtil.get(FETCH_BY_ANY_IMAGE_ID);
+			String sql = CustomSQLUtil.get(FIND_BY_ANY_IMAGE_ID);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -117,11 +117,8 @@ public class IGImageFinderImpl
 
 			List<IGImage> list = q.list();
 
-			if (list.size() == 0) {
-				String message = "No IGImage exists with the imageId " +
-					imageId;
-
-				throw new NoSuchImageException(message);
+			if (list.isEmpty()) {
+				return null;
 			}
 			else {
 				return list.get(0);
@@ -132,6 +129,20 @@ public class IGImageFinderImpl
 		}
 		finally {
 			closeSession(session);
+		}
+	}
+
+	public IGImage findByAnyImageId(long imageId)
+		throws NoSuchImageException, SystemException {
+
+		IGImage image = fetchByAnyImageId(imageId);
+
+		if (image == null) {
+			throw new NoSuchImageException(
+				"No IGImage exists with the imageId " + imageId);
+		}
+		else {
+			return image;
 		}
 	}
 

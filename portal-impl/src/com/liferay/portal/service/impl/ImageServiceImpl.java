@@ -16,8 +16,6 @@ package com.liferay.portal.service.impl;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.base.ImageServiceBaseImpl;
@@ -37,12 +35,12 @@ public class ImageServiceImpl extends ImageServiceBaseImpl {
 
 		IGImage igImage = igImageFinder.fetchByAnyImageId(imageId);
 
-		IGImagePermission.check(
-			getPermissionChecker(), igImage, ActionKeys.VIEW);
+		if (igImage != null) {
+			IGImagePermission.check(
+				getPermissionChecker(), igImage, ActionKeys.VIEW);
+		}
 
 		return imageLocalService.getImage(imageId);
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(ImageServiceImpl.class);
 
 }

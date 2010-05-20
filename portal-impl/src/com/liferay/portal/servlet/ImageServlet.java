@@ -31,6 +31,7 @@ import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.model.ImageConstants;
 import com.liferay.portal.model.User;
+import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.security.permission.PermissionCheckerFactoryUtil;
@@ -335,11 +336,16 @@ public class ImageServlet extends HttpServlet {
 
 			return (modifiedDate.getTime() / 1000) * 1000;
 		}
+		catch (PrincipalException pe) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(pe, pe);
+			}
+		}
 		catch (Exception e) {
 			_log.error(e, e);
-
-			return -1;
 		}
+
+		return -1;
 	}
 
 	protected void writeImage(
