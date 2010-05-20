@@ -187,8 +187,6 @@ import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 import javax.portlet.ValidatorException;
 import javax.portlet.WindowState;
-import javax.portlet.filter.PortletRequestWrapper;
-import javax.portlet.filter.PortletResponseWrapper;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
