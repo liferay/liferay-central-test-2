@@ -27,6 +27,11 @@ public interface IGImageFinder {
 		long imageId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	public com.liferay.portlet.imagegallery.model.IGImage findByAnyImageId(
+		long imageId)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.imagegallery.NoSuchImageException;
+
 	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> findByNoAssets()
 		throws com.liferay.portal.kernel.exception.SystemException;
 }

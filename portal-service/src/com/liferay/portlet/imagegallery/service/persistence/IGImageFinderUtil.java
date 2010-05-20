@@ -34,6 +34,13 @@ public class IGImageFinderUtil {
 		return getFinder().fetchByAnyImageId(imageId);
 	}
 
+	public static com.liferay.portlet.imagegallery.model.IGImage findByAnyImageId(
+		long imageId)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.imagegallery.NoSuchImageException {
+		return getFinder().findByAnyImageId(imageId);
+	}
+
 	public static java.util.List<com.liferay.portlet.imagegallery.model.IGImage> findByNoAssets()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder().findByNoAssets();

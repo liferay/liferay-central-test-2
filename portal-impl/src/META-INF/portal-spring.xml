@@ -28,6 +28,7 @@
 	<bean id="com.liferay.portal.service.persistence.GroupPersistence" class="com.liferay.portal.service.persistence.GroupPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portal.service.persistence.GroupFinder" class="com.liferay.portal.service.persistence.GroupFinderImpl" parent="basePersistence" />
 	<bean id="com.liferay.portal.service.ImageLocalService" class="com.liferay.portal.service.impl.ImageLocalServiceImpl" />
+	<bean id="com.liferay.portal.service.ImageService" class="com.liferay.portal.service.impl.ImageServiceImpl" />
 	<bean id="com.liferay.portal.service.persistence.ImagePersistence" class="com.liferay.portal.service.persistence.ImagePersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portal.service.LayoutLocalService" class="com.liferay.portal.service.impl.LayoutLocalServiceImpl" />
 	<bean id="com.liferay.portal.service.LayoutService" class="com.liferay.portal.service.impl.LayoutServiceImpl" />
