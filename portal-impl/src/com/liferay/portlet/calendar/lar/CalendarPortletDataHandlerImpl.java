@@ -160,6 +160,8 @@ public class CalendarPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		eventEl.addAttribute("path", path);
 
+		event.setUserUuid(event.getUserUuid());
+
 		context.addPermissions(CalEvent.class, event.getEventId());
 
 		if (context.getBooleanParameter(_NAMESPACE, "categories")) {
@@ -173,8 +175,6 @@ public class CalendarPortletDataHandlerImpl extends BasePortletDataHandler {
 		if (context.getBooleanParameter(_NAMESPACE, "tags")) {
 			context.addAssetTags(CalEvent.class, event.getEventId());
 		}
-
-		event.setUserUuid(event.getUserUuid());
 
 		context.addZipEntry(path, event);
 	}
@@ -303,28 +303,28 @@ public class CalendarPortletDataHandlerImpl extends BasePortletDataHandler {
 				event.getSecondReminder(), serviceContext);
 		}
 
-		if (context.getBooleanParameter(_NAMESPACE, "comments")) {
-			context.importComments(
-				CalEvent.class, event.getEventId(),
-				importedEvent.getEventId(), context.getGroupId());
-		}
-
 		context.importPermissions(
 			CalEvent.class, event.getEventId(), importedEvent.getEventId());
+
+		if (context.getBooleanParameter(_NAMESPACE, "comments")) {
+			context.importComments(
+				CalEvent.class, event.getEventId(), importedEvent.getEventId(),
+				context.getGroupId());
+		}
 	}
 
 	private static final String _NAMESPACE = "calendar";
 
-	private static final PortletDataHandlerBoolean _categories =
+	private static PortletDataHandlerBoolean _categories =
 		new PortletDataHandlerBoolean(_NAMESPACE, "categories");
 
-	private static final PortletDataHandlerBoolean _comments =
+	private static PortletDataHandlerBoolean _comments =
 		new PortletDataHandlerBoolean(_NAMESPACE, "comments");
 
-	private static final PortletDataHandlerBoolean _events =
+	private static PortletDataHandlerBoolean _events =
 		new PortletDataHandlerBoolean(_NAMESPACE, "events", true, true);
 
-	private static final PortletDataHandlerBoolean _tags =
+	private static PortletDataHandlerBoolean _tags =
 		new PortletDataHandlerBoolean(_NAMESPACE, "tags");
 
 }
